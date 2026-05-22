@@ -1,419 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noetfield — Institutional Execution Layer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noetfield — Platform Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap');
 
-<!-- Premium Font Architecture -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<style>
-    :root {
-        --bg: #000000;
-        --panel: #0a0a0c;
-        --panel-inner: #111114;
-        --border: rgba(255, 255, 255, 0.05);
-        --border-focus: rgba(81, 78, 245, 0.4);
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        --text-main: #ffffff;
-        --text-sub: #71717a;
-        --text-muted: #3f3f46;
-        
-        --brand: #514ef5;
-        --emerald: #10b981;
-        --glow: rgba(81, 78, 245, 0.15);
-        
-        --font-sans: 'Inter', -apple-system, sans-serif;
-        --font-mono: 'JetBrains Mono', monospace;
-    }
+        :root {
+            --bg-main: #06080a;
+            --bg-surface: #0d1117;
+            --bg-input: #161b22;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --text-main: #e8eaed;
+            --text-muted: #8b949e;
+            --text-dim: #484f58;
+            --accent: #00d084;
+            --accent-glow: rgba(0, 208, 132, 0.12);
+            --status-ok: #00d084;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-        background-color: var(--bg);
-        color: var(--text-main);
-        font-family: var(--font-sans);
-        letter-spacing: -0.02em;
-        -webkit-font-smoothing: antialiased;
-        padding: 40px;
-    }
+        body {
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'IBM Plex Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-    .container {
-        max-width: 1340px;
-        margin: 0 auto;
-    }
+        /* --- NAVIGATION TERMINAL --- */
+        nav {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* NAVIGATION HEAD */
-    .nav-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 32px;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 40px;
-    }
+        .nav-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.02em;
+        }
 
-    .brand-group {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
 
-    .logo {
-        width: 36px;
-        height: 36px;
-        background: var(--brand);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 16px;
-        color: #fff;
-        box-shadow: 0 0 24px var(--glow);
-    }
+        .nav-meta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
 
-    .title { font-size: 20px; font-weight: 600; letter-spacing: -0.03em; }
-    
-    .badge-status {
-        font-family: var(--font-mono);
-        font-size: 10px;
-        font-weight: 500;
-        text-transform: uppercase;
-        background: rgba(16, 185, 129, 0.04);
-        border: 1px solid rgba(16, 185, 129, 0.15);
-        color: var(--emerald);
-        padding: 4px 12px;
-        border-radius: 100px;
-    }
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 208, 132, 0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 208, 132, 0.1);
+            color: var(--accent);
+        }
 
-    /* HIGH-VALUE NETWORK METRICS */
-    .network-ribbon {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 40px;
-    }
+        /* --- HUB CONTAINER ARCHITECTURE --- */
+        .hub-viewport {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            flex: 1;
+        }
 
-    .metric-node {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 20px;
-    }
+        .hub-welcome h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
 
-    .metric-label { font-size: 11px; text-transform: uppercase; color: var(--text-sub); font-family: var(--font-mono); letter-spacing: 0.03em; }
-    .metric-value { font-size: 15px; font-weight: 500; margin-top: 6px; }
+        .hub-welcome p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
 
-    /* CORE INTERFACE GRID */
-    .interface-grid {
-        display: grid;
-        grid-template-columns: 4.5fr 7.5fr;
-        gap: 40px;
-        align-items: start;
-    }
+        /* --- PRIMARY LAYOUT SPLIT --- */
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+        }
 
-    .panel-box {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 36px;
-    }
+        @media (max-width: 968px) {
+            .layout-grid { grid-template-columns: 1fr; }
+        }
 
-    .panel-head {
-        font-size: 17px;
-        font-weight: 600;
-        margin-bottom: 28px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+        .suite-section {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
 
-    /* ELITE FORM CONTROLS */
-    .input-wrapper {
-        margin-bottom: 24px;
-    }
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
 
-    .input-wrapper label {
-        display: block;
-        font-size: 11px;
-        text-transform: uppercase;
-        color: var(--text-sub);
-        margin-bottom: 8px;
-        font-weight: 600;
-        font-family: var(--font-mono);
-    }
+        /* --- PRODUCT CARDS --- */
+        .product-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .field-box {
-        width: 100%;
-        background: #000000;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 14px 18px;
-        color: #ffffff;
-        font-size: 15px;
-        transition: all 0.2s ease;
-    }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 3px; height: 100%;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
 
-    .field-box:focus {
-        outline: none;
-        border-color: var(--border-focus);
-        box-shadow: 0 0 20px var(--glow);
-    }
+        .product-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateX(4px);
+            background: #121820;
+        }
 
-    select.field-box {
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 6 8 10 12 6'></polyline></svg>");
-        background-repeat: no-repeat;
-        background-position: right 18px center;
-    }
+        .product-card:hover::before {
+            background: var(--accent);
+        }
 
-    .action-btn {
-        width: 100%;
-        background: #ffffff;
-        color: #000000;
-        border: none;
-        padding: 16px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 80%;
+        }
 
-    .action-btn:hover { background: #e4e4e7; transform: translateY(-1px); }
+        .product-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    /* CLEARING LEDGER TABLE */
-    .ledger-container { overflow-x: auto; }
-    .ledger-matrix {
-        width: 100%;
-        border-collapse: collapse;
-        text-align: left;
-        font-size: 13px;
-    }
+        .product-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
 
-    .ledger-matrix th {
-        color: var(--text-sub);
-        font-weight: 500;
-        padding: 16px;
-        border-bottom: 1px solid var(--border);
-        font-size: 11px;
-        text-transform: uppercase;
-        font-family: var(--font-mono);
-    }
+        .product-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
 
-    .ledger-matrix td {
-        padding: 18px 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.01);
-    }
+        .product-action-arrow {
+            font-size: 18px;
+            color: var(--text-dim);
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
 
-    .mono-data { font-family: var(--font-mono); }
+        .product-card:hover .product-action-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
 
-    /* STATUS MARKERS */
-    .state-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-family: var(--font-mono);
-        font-weight: 500;
-    }
-    .state-active { background: rgba(81, 78, 245, 0.08); color: #a5b4fc; }
-    .state-done { background: rgba(16, 185, 129, 0.06); color: var(--emerald); }
+        /* --- SIDEBAR SUBSYSTEMS --- */
+        .sidebar-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
 
-    .pulse { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+        .telemetry-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 24px;
+        }
 
-    /* MODERN SECURE FOOTER */
-    .footer-base {
-        margin-top: 80px;
-        border-top: 1px solid var(--border);
-        padding-top: 32px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 12px;
-        color: var(--text-muted);
-    }
+        .telemetry-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    @media (max-width: 1024px) {
-        .interface-grid { grid-template-columns: 1fr; }
-        .network-ribbon { grid-template-columns: repeat(2, 1fr); }
-    }
-</style>
+        .telemetry-title span {
+            font-size: 5px;
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        .telemetry-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .telemetry-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .telemetry-row:first-child { padding-top: 0; }
+
+        .telemetry-label { color: var(--text-muted); }
+        .telemetry-value { color: var(--text-main); font-weight: 500; }
+
+        /* --- INTERACTIVE DEVELOPER MODULE --- */
+        .api-sandbox-card {
+            background: #090d13;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .api-label-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+        }
+
+        .api-key-display {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: monospace;
+            word-break: break-all;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 12px;
+            font-size: 11px;
+            font-family: 'IBM Plex Mono', monospace;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-muted);
+            background: rgba(255,255,255,0.02);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    
-    <!-- UPPER NAVIGATION LAYER -->
-    <div class="nav-header">
-        <div class="brand-group">
-            <div class="logo">N</div>
-            <span class="title">Noetfield Terminal</span>
-            <span class="badge-status">Global Node Connected</span>
+    <!-- --- TERMINAL HEADER --- -->
+    <nav>
+        <div class="nav-brand">
+            <div class="nav-dot"></div>
+            Noetfield
         </div>
-        <div style="font-size: 13px; color: var(--text-sub); font-family: var(--font-mono);">
-            Environment: <span style="color: #fff;">Mainnet-v2.EX</span>
-        </div>
-    </div>
-
-    <!-- ENTERPRISE OPERATIONS STATUS -->
-    <div class="network-ribbon">
-        <div class="metric-node">
-            <div class="metric-label">Liquidity Routing</div>
-            <div class="metric-value" style="color: var(--emerald);">Optimal Density</div>
-        </div>
-        <div class="metric-node">
-            <div class="metric-label">Cross-Border SLA</div>
-            <div class="metric-value">Instant Settlement</div>
-        </div>
-        <div class="metric-node">
-            <div class="metric-label">System Architecture</div>
-            <div class="metric-value">Zero-Custody Layer</div>
-        </div>
-        <div class="metric-node">
-            <div class="metric-label">API Health</div>
-            <div class="metric-value">100% Operational</div>
-        </div>
-    </div>
-
-    <!-- INTERFACE LAYOUT -->
-    <div class="interface-grid">
-        
-        <!-- DISPATCH INTERFACE -->
-        <div class="panel-box">
-            <h2 class="panel-head">Instruction Dispatch</h2>
-            
-            <form onsubmit="executeRoute(event)">
-                <div class="input-wrapper">
-                    <label>Volume (USD)</label>
-                    <input type="number" id="tx-amount" class="field-box" value="50000" style="font-family: var(--font-mono); font-size: 16px;" required>
-                </div>
-
-                <div class="input-wrapper">
-                    <label>Target Settlement Corridor</label>
-                    <select id="tx-corridor" class="field-box">
-                        <option value="EUR" data-network="SEPA Premium Network">Eurozone (EUR) — Instant Clearing</option>
-                        <option value="GBP" data-network="UK Faster Payments">United Kingdom (GBP) — Sovereign Rail</option>
-                        <option value="AED" data-network="UAE Central Clearing">United Arab Emirates (AED) — Commercial Node</option>
-                        <option value="SGD" data-network="Singapore FAST Core">Singapore (SGD) — APAC Hub</option>
-                        <option value="HKD" data-network="HK CHATS Matrix">Hong Kong (HKD) — Settlement Node</option>
-                        <option value="CAD" data-network="Canada Real-Time Pool">Canada (CAD) — Institutional Rail</option>
-                    </select>
-                </div>
-
-                <div class="input-wrapper">
-                    <label>Client Reference ID</label>
-                    <input type="text" class="field-box" value="ext_corporate_ledger_ref" readonly style="color: var(--text-muted); background: #050507;">
-                </div>
-
-                <button type="submit" class="action-btn">Initiate Settlement Route</button>
-            </form>
-        </div>
-
-        <!-- TRANSACTION LEDGER -->
-        <div class="panel-box">
-            <div class="panel-head">
-                <span>Global Liquidity Log</span>
-                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-sub);">Persistent Streaming</span>
-            </div>
-            
-            <div class="ledger-container">
-                <table class="ledger-matrix">
-                    <thead>
-                        <tr>
-                            <th>Instruction ID</th>
-                            <th>Volume</th>
-                            <th>Corridor Mapped</th>
-                            <th>Execution Network</th>
-                            <th>State</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ledger-rows">
-                        <!-- Premium Seed Data -->
-                        <tr>
-                            <td class="mono-data" style="color: var(--text-sub);">tx_ntf_901A2</td>
-                            <td class="mono-data" style="font-weight: 500;">$250,000.00</td>
-                            <td class="mono-data">USD → EUR</td>
-                            <td>SEPA Premium Network</td>
-                            <td><span class="state-tag state-done"><span class="pulse"></span>Settled</span></td>
-                        </tr>
-                        <tr>
-                            <td class="mono-data" style="color: var(--text-sub);">tx_ntf_773B1</td>
-                            <td class="mono-data" style="font-weight: 500;">$115,000.00</td>
-                            <td class="mono-data">USD → AED</td>
-                            <td>UAE Central Clearing</td>
-                            <td><span class="state-tag state-done"><span class="pulse"></span>Settled</span></td>
-                        </tr>
-                        <tr>
-                            <td class="mono-data" style="color: var(--text-sub);">tx_ntf_440E8</td>
-                            <td class="mono-data" style="font-weight: 500;">$85,000.00</td>
-                            <td class="mono-data">USD → SGD</td>
-                            <td>Singapore FAST Core</td>
-                            <td><span class="state-tag state-done"><span class="pulse"></span>Settled</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="nav-meta">
+            <div>Network: <span style="color:var(--text-main);">Mainnet-Ready</span></div>
+            <div class="system-status">
+                <span style="display:inline-block; width:6px; height:6px; background:var(--accent); border-radius:50%;"></span>
+                All Systems Operational
             </div>
         </div>
+    </nav>
 
+    <!-- --- PLATFORM CORE --- -->
+    <div class="hub-viewport">
+        
+        <div class="hub-welcome">
+            <h1>Workspace Consolidation</h1>
+            <p>Select an architectural subsystem to manage workflows and settlement telemetry.</p>
+        </div>
+
+        <div class="layout-grid">
+            
+            <!-- Left Module Pipeline -->
+            <div class="suite-section">
+                <div class="section-label">Active Subsystems</div>
+
+                <!-- Card 1: Treasury -->
+                <a href="dashboard.html" class="product-card">
+                    <div class="product-info">
+                        <div class="product-title">
+                            Treasury & Settlement Routing
+                            <span class="product-tag">Core Engine</span>
+                        </div>
+                        <div class="product-desc">
+                            Execute international balance optimization, cross-border payments, and multi-currency capital distribution over isolated digital structures.
+                        </div>
+                    </div>
+                    <div class="product-action-arrow">→</div>
+                </a>
+
+                <!-- Card 2: Trust Systems -->
+                <a href="#trust" class="product-card" onclick="alert('System Core Notice:\n\nVerification layer protocols are currently processing environment logic simulations.')">
+                    <div class="product-info">
+                        <div class="product-title">
+                            Trust Layers & Telemetry
+                            <span class="product-tag">Compliance OS</span>
+                        </div>
+                        <div class="product-desc">
+                            Audit systemic integrity, run autonomous compliance mapping, and interface with institutional readiness checking models.
+                        </div>
+                    </div>
+                    <div class="product-action-arrow">→</div>
+                </a>
+
+                <!-- Card 3: Developer Engine -->
+                <a href="#dev" class="product-card" onclick="focusApiKey()">
+                    <div class="product-info">
+                        <div class="product-title">
+                            Infrastructure Integration
+                            <span class="product-tag">Developer API</span>
+                        </div>
+                        <div class="product-desc">
+                            Provision security credentials, consume webhook telemetry feeds, and embed low-latency settlement rules directly into codebase systems.
+                        </div>
+                    </div>
+                    <div class="product-action-arrow">→</div>
+                </a>
+            </div>
+
+            <!-- Right Subsystem Metadata Panel -->
+            <div class="sidebar-panel">
+                
+                <!-- Telemetry Metrics Block -->
+                <div class="telemetry-box">
+                    <div class="telemetry-title">
+                        Telemetry Pulse
+                        <span>●</span>
+                    </div>
+                    
+                    <div class="telemetry-row">
+                        <div class="telemetry-label">Active Workspace</div>
+                        <div class="telemetry-value">Noetfield Dev</div>
+                    </div>
+                    <div class="telemetry-row">
+                        <div class="telemetry-label">Data Redundancy</div>
+                        <div class="telemetry-value">Distributed (CA-West)</div>
+                    </div>
+                    <div class="telemetry-row">
+                        <div class="telemetry-label">API Latency Avg</div>
+                        <div class="telemetry-value" style="color: var(--accent);">14ms</div>
+                    </div>
+                    <div class="telemetry-row">
+                        <div class="telemetry-label">Cryptographic Stance</div>
+                        <div class="telemetry-value">TLS 1.3 / AES-256</div>
+                    </div>
+                </div>
+
+                <!-- API Fast Credential Generator -->
+                <div class="telemetry-box">
+                    <div class="telemetry-title">Developer Credentials</div>
+                    <div class="api-sandbox-card">
+                        <div class="api-label-wrapper">
+                            <span style="color:var(--text-muted); font-size:10px;">SANDBOX SECRET KEY</span>
+                        </div>
+                        <div class="api-key-display">
+                            <span id="key-string">sk_sandbox_777_noet_4f89ac...</span>
+                        </div>
+                        <div style="display:flex; gap:10px; margin-top:4px;">
+                            <button class="btn-secondary" style="flex:1;" onclick="rotateKey()">Rotate Key</button>
+                            <button class="btn-secondary" onclick="copyKey()">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
 
-    <!-- TERMINAL FOOTER -->
-    <div class="footer-base">
-        <span>© 2026 Noetfield Technologies Inc. Global Financial Technology Architecture.</span>
-        <span style="font-family: var(--font-mono); color: var(--text-muted);">Secure Instruction Layer via Sovereign Infrastructure.</span>
-    </div>
-</div>
+    <!-- --- CONTROL SCRIPTS --- -->
+    <script>
+        function rotateKey() {
+            const hex = Array.from({length: 8}, () => Math.floor(Math.random()*16).toString(16)).join('');
+            document.getElementById('key-string').innerText = `sk_sandbox_777_noet_${hex}...`;
+            console.log("Credentials rotated globally within isolation container.");
+        }
 
-<script>
-    function executeRoute(e) {
-        e.preventDefault();
-        
-        const amtInput = document.getElementById('tx-amount');
-        const corrSelect = document.getElementById('tx-corridor');
-        
-        const amount = amtInput.value;
-        const selected = corrSelect.options[corrSelect.selectedIndex];
-        
-        const currency = selected.value;
-        const network = selected.getAttribute('data-network');
-        
-        const txId = 'tx_ntf_' + Math.floor(10000 + Math.random() * 90000).toString(16).toUpperCase();
-        const formattedAmount = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
-        
-        const tbody = document.getElementById('ledger-rows');
-        const row = document.createElement('tr');
-        
-        row.style.background = 'rgba(81, 78, 245, 0.03)';
-        row.innerHTML = `
-            <td class="mono-data" style="color: #fff;">${txId}</td>
-            <td class="mono-data" style="font-weight: 600; color: #fff;">${formattedAmount}</td>
-            <td class="mono-data">USD → ${currency}</td>
-            <td>${network}</td>
-            <td><span class="state-tag state-active" id="status-${txId}"><span class="pulse"></span>Routing</span></td>
-        `;
-        
-        tbody.insertBefore(row, tbody.firstChild);
-        
-        // Immediate Transition to Confirmed State
-        setTimeout(() => {
-            const statusTag = document.getElementById(`status-${txId}`);
-            if(statusTag) {
-                statusTag.className = 'state-tag state-done';
-                statusTag.innerHTML = '<span class="pulse"></span>Settled';
-                row.style.background = 'transparent';
-            }
-        }, 2000);
-        
-        amtInput.value = '';
-    }
-</script>
+        function copyKey() {
+            alert("Sandbox API key string copied to clipboard infrastructure context.");
+        }
 
+        function focusApiKey() {
+            const target = document.getElementById('key-string');
+            target.style.borderColor = 'var(--accent)';
+            setTimeout(() => target.style.borderColor = 'var(--border-color)', 600);
+        }
+    </script>
 </body>
 </html>
