@@ -4,504 +4,413 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Noetfield — Cross-Border Execution Layer</title>
+<title>Noetfield — Trust Abstraction & Governance Layer</title>
 
+<!-- Premium Typography -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
+:root {
+    --bg: #030304;
+    --panel: #09090b;
+    --panel-inner: #0f0f13;
 
-:root{
-    --bg:#050506;
-    --panel:#0d0d10;
-    --panel-2:#121216;
+    --border: rgba(255, 255, 255, 0.05);
+    --border-active: rgba(91, 92, 240, 0.35);
+    --border-soft: rgba(255, 255, 255, 0.02);
 
-    --border:rgba(255,255,255,0.06);
-    --border-soft:rgba(255,255,255,0.03);
+    --text: #ffffff;
+    --text-soft: #8e8e96;
+    --text-muted: #4b4b52;
 
-    --text:#ffffff;
-    --text-soft:#8a8a93;
-    --text-muted:#5a5a63;
+    --brand: #5b5cf0;
+    --brand-glow: rgba(91, 92, 240, 0.15);
+    --green: #10b981;
 
-    --brand:#5b5cf0;
-    --brand-glow:rgba(91,92,240,0.18);
-
-    --green:#10b981;
-
-    --radius:18px;
-
-    --font-main:'Inter',sans-serif;
-    --font-mono:'JetBrains Mono',monospace;
+    --font-main: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-main);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.02em;
+    overflow-x: hidden;
+    padding-bottom: 60px;
 }
 
-body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--font-main);
-    -webkit-font-smoothing:antialiased;
-    letter-spacing:-0.02em;
-    overflow-x:hidden;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: 
+    radial-gradient(circle at 50% 0%, rgba(91, 92, 240, 0.07), transparent 45%),
+    radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.02), transparent 30%);
+    pointer-events: none;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at top left, rgba(91,92,240,0.12), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(91,92,240,0.08), transparent 25%);
-    pointer-events:none;
+.container {
+    width: min(1340px, calc(100% - 48px));
+    margin: auto;
 }
 
-.container{
-    width:min(1380px, calc(100% - 48px));
-    margin:auto;
+/* HIGH-END NAVIGATION */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
 }
 
-/* NAV */
-
-.nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:28px 0;
-    border-bottom:1px solid var(--border);
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
-.nav-left{
-    display:flex;
-    align-items:center;
-    gap:16px;
+.logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
 }
 
-.logo{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    background:linear-gradient(135deg,#5b5cf0,#7475ff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    font-size:16px;
-    box-shadow:0 0 32px var(--brand-glow);
+.brand h1 {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
-.brand{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
+.brand span {
+    font-size: 10px;
+    color: var(--text-soft);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
 }
 
-.brand h1{
-    font-size:17px;
-    font-weight:600;
+.status-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    background: rgba(16, 185, 129, 0.03);
+    color: var(--green);
+    font-size: 11px;
+    font-family: var(--font-mono);
 }
 
-.brand span{
-    font-size:11px;
-    color:var(--text-soft);
-    font-family:var(--font-mono);
-    text-transform:uppercase;
+.dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
 }
 
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:12px;
+/* METRICS GRID OVERVIEW */
+.metrics-ribbon {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 40px 0;
 }
 
-.status-pill{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 14px;
-    border-radius:999px;
-    border:1px solid rgba(16,185,129,0.16);
-    background:rgba(16,185,129,0.04);
-    color:var(--green);
-    font-size:11px;
-    font-family:var(--font-mono);
-    text-transform:uppercase;
+.metric-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
 }
 
-.dot{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--green);
+.metric-card label {
+    display: block;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    color: var(--text-soft);
+    text-transform: uppercase;
+    margin-bottom: 6px;
 }
 
-/* HERO */
-
-.hero{
-    padding:80px 0 64px;
+.metric-card div {
+    font-size: 14px;
+    font-weight: 500;
 }
 
-.hero-grid{
-    display:grid;
-    grid-template-columns:1.05fr 0.95fr;
-    gap:44px;
-    align-items:start;
+/* HERO SECTION WITH ARCHITECTURE SHIFT */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-top: 20px;
 }
 
-.hero-copy{
-    max-width:760px;
+.hero-text h2 {
+    font-size: 56px;
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    margin-bottom: 24px;
 }
 
-.kicker{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 14px;
-    border-radius:999px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,0.02);
-    font-size:11px;
-    text-transform:uppercase;
-    font-family:var(--font-mono);
-    color:var(--text-soft);
-    margin-bottom:28px;
+.hero-text p {
+    color: var(--text-soft);
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 32px;
 }
 
-.hero h2{
-    font-size:64px;
-    line-height:1.02;
-    font-weight:600;
-    letter-spacing:-0.06em;
-    margin-bottom:24px;
+.action-row {
+    display: flex;
+    gap: 12px;
 }
 
-.hero p{
-    color:var(--text-soft);
-    font-size:17px;
-    line-height:1.8;
-    max-width:640px;
+.btn-black {
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-.hero-actions{
-    margin-top:36px;
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
+.btn-black:hover { background: #e4e4e7; }
+
+.btn-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid var(--border);
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
-.btn-primary{
-    background:#fff;
-    color:#000;
-    border:none;
-    padding:16px 22px;
-    border-radius:12px;
-    font-size:14px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.2s ease;
+.btn-outline:hover { border-color: rgba(255,255,255,0.15); }
+
+/* API ENGINE TERMINAL */
+.api-terminal {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
 }
 
-.btn-primary:hover{
-    transform:translateY(-1px);
+.terminal-header {
+    background: rgba(255,255,255,0.01);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.btn-secondary{
-    background:transparent;
-    color:#fff;
-    border:1px solid var(--border);
-    padding:16px 22px;
-    border-radius:12px;
-    font-size:14px;
-    font-weight:500;
-    cursor:pointer;
-    transition:0.2s ease;
+.terminal-header span {
+    font-size: 12px;
+    font-weight: 500;
 }
 
-.btn-secondary:hover{
-    border-color:rgba(255,255,255,0.14);
+.terminal-header code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-soft);
 }
 
-/* METRICS */
-
-.metrics{
-    margin-top:34px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
+.terminal-content {
+    padding: 24px;
 }
 
-.metric{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:22px;
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
 }
 
-.metric-label{
-    font-size:11px;
-    color:var(--text-soft);
-    font-family:var(--font-mono);
-    text-transform:uppercase;
-    margin-bottom:12px;
+.field-group label {
+    display: block;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    color: var(--text-soft);
+    text-transform: uppercase;
+    margin-bottom: 8px;
 }
 
-.metric-value{
-    font-size:15px;
-    font-weight:600;
+.field-input {
+    width: 100%;
+    background: #000000;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: var(--font-mono);
+    transition: border 0.2s;
 }
 
-/* TERMINAL */
-
-.terminal{
-    background:linear-gradient(180deg,#0f1013,#09090b);
-    border:1px solid var(--border);
-    border-radius:24px;
-    overflow:hidden;
-    box-shadow:0 30px 80px rgba(0,0,0,0.35);
+.field-input:focus {
+    outline: none;
+    border-color: var(--border-active);
 }
 
-.terminal-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 22px;
-    border-bottom:1px solid var(--border);
-    background:rgba(255,255,255,0.02);
+select.field-input {
+    cursor: pointer;
 }
 
-.terminal-title{
-    font-size:13px;
-    font-weight:600;
+.json-preview {
+    background: var(--panel-inner);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #a5b4fc;
+    line-height: 1.5;
+    white-space: pre-wrap;
 }
 
-.terminal-env{
-    font-size:11px;
-    color:var(--text-soft);
-    font-family:var(--font-mono);
+.dispatch-btn {
+    width: 100%;
+    background: var(--brand);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s;
 }
 
-.terminal-body{
-    padding:26px;
+.dispatch-btn:hover { opacity: 0.9; }
+
+/* RE-ENGINEERED AUDIT LEDGER */
+.ledger-section {
+    margin-top: 80px;
 }
 
-.form-group{
-    margin-bottom:20px;
+.ledger-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
 }
 
-.form-group label{
-    display:block;
-    margin-bottom:10px;
-    font-size:11px;
-    color:var(--text-soft);
-    text-transform:uppercase;
-    font-family:var(--font-mono);
+.ledger-header h3 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
 }
 
-.input{
-    width:100%;
-    background:#050506;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:15px 16px;
-    color:#fff;
-    font-size:15px;
-    transition:0.2s ease;
+.ledger-header span {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-soft);
 }
 
-.input:focus{
-    outline:none;
-    border-color:rgba(91,92,240,0.4);
-    box-shadow:0 0 24px var(--brand-glow);
+.table-wrapper {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
 }
 
-select.input{
-    appearance:none;
-    cursor:pointer;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.execute-btn{
-    width:100%;
-    margin-top:8px;
-    background:linear-gradient(135deg,#ffffff,#d7d7df);
-    color:#000;
-    border:none;
-    border-radius:12px;
-    padding:16px;
-    font-size:14px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.2s ease;
+th {
+    background: rgba(255,255,255,0.01);
+    padding: 16px 24px;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    color: var(--text-soft);
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
 }
 
-.execute-btn:hover{
-    transform:translateY(-1px);
+td {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 13px;
 }
 
-/* LEDGER */
+.mono { font-family: var(--font-mono); }
 
-.ledger{
-    margin-top:90px;
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
 }
 
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:28px;
+.tag-audited { background: rgba(16, 185, 129, 0.06); color: var(--green); }
+.tag-routing { background: rgba(91, 92, 240, 0.08); color: #a5b4fc; }
+
+/* FOOTER ARCHITECTURE */
+.footer {
+    margin-top: 100px;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
 }
 
-.section-head h3{
-    font-size:28px;
-    font-weight:600;
-    letter-spacing:-0.04em;
+.footer span:last-child {
+    font-family: var(--font-mono);
 }
 
-.section-head p{
-    font-size:13px;
-    color:var(--text-soft);
-    font-family:var(--font-mono);
+/* RESPONSIVE REFINEMENTS */
+@media(max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .metrics-ribbon { grid-template-columns: repeat(2, 1fr); }
+    .hero-text h2 { font-size: 44px; }
 }
 
-.ledger-shell{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:24px;
-    overflow:hidden;
+@media(max-width: 700px) {
+    .metrics-ribbon { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .footer { flex-direction: column; gap: 12px; }
 }
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-thead{
-    background:rgba(255,255,255,0.015);
-}
-
-th{
-    text-align:left;
-    padding:20px 24px;
-    font-size:11px;
-    font-family:var(--font-mono);
-    color:var(--text-soft);
-    text-transform:uppercase;
-    font-weight:500;
-    border-bottom:1px solid var(--border);
-}
-
-td{
-    padding:22px 24px;
-    border-bottom:1px solid var(--border-soft);
-    font-size:14px;
-}
-
-.mono{
-    font-family:var(--font-mono);
-}
-
-.state{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:7px 12px;
-    border-radius:999px;
-    font-size:11px;
-    font-family:var(--font-mono);
-    text-transform:uppercase;
-}
-
-.state-live{
-    background:rgba(91,92,240,0.08);
-    color:#b5b6ff;
-}
-
-.state-settled{
-    background:rgba(16,185,129,0.08);
-    color:var(--green);
-}
-
-/* FOOTER */
-
-.footer{
-    padding:42px 0 60px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-top:1px solid var(--border);
-    margin-top:90px;
-    color:var(--text-muted);
-    font-size:12px;
-}
-
-.footer span:last-child{
-    font-family:var(--font-mono);
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1100px){
-
-    .hero-grid{
-        grid-template-columns:1fr;
-    }
-
-    .metrics{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .hero h2{
-        font-size:52px;
-    }
-}
-
-@media(max-width:700px){
-
-    body{
-        padding-bottom:40px;
-    }
-
-    .container{
-        width:min(100% - 28px);
-    }
-
-    .nav{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:18px;
-    }
-
-    .hero{
-        padding-top:56px;
-    }
-
-    .hero h2{
-        font-size:40px;
-    }
-
-    .metrics{
-        grid-template-columns:1fr;
-    }
-
-    .footer{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:14px;
-    }
-
-    th,td{
-        padding:18px;
-    }
-}
-
 </style>
 </head>
 
@@ -509,443 +418,226 @@ td{
 
 <div class="container">
 
-    <!-- NAV -->
-
+    <!-- NAVIGATION HEADER -->
     <nav class="nav">
-
         <div class="nav-left">
-
             <div class="logo">N</div>
-
             <div class="brand">
                 <h1>Noetfield</h1>
-                <span>Cross-Border Execution Layer</span>
+                <span>Trust Abstraction Layer</span>
             </div>
-
         </div>
-
-        <div class="nav-right">
-
-            <div class="status-pill">
-                <div class="dot"></div>
-                Active Infrastructure
-            </div>
-
+        <div class="status-pill">
+            <div class="dot"></div>
+            Governance Node — Active
         </div>
-
     </nav>
 
-    <!-- HERO -->
-
-    <section class="hero">
-
-        <div class="hero-grid">
-
-            <!-- LEFT -->
-
-            <div class="hero-copy">
-
-                <div class="kicker">
-                    Institutional Payment Coordination
-                </div>
-
-                <h2>
-                    Modern cross-border execution infrastructure for global operators.
-                </h2>
-
-                <p>
-                    Streamlined payment coordination across international settlement corridors with enterprise-grade execution visibility, routing efficiency, and operational simplicity.
-                </p>
-
-                <div class="hero-actions">
-
-                    <button class="btn-primary">
-                        Request Access
-                    </button>
-
-                    <button class="btn-secondary">
-                        View Infrastructure
-                    </button>
-
-                </div>
-
-                <!-- METRICS -->
-
-                <div class="metrics">
-
-                    <div class="metric">
-                        <div class="metric-label">
-                            Settlement Corridors
-                        </div>
-                        <div class="metric-value">
-                            Multi-Region Coverage
-                        </div>
-                    </div>
-
-                    <div class="metric">
-                        <div class="metric-label">
-                            Execution Layer
-                        </div>
-                        <div class="metric-value">
-                            Real-Time Routing
-                        </div>
-                    </div>
-
-                    <div class="metric">
-                        <div class="metric-label">
-                            Treasury Operations
-                        </div>
-                        <div class="metric-value">
-                            Unified Coordination
-                        </div>
-                    </div>
-
-                    <div class="metric">
-                        <div class="metric-label">
-                            Infrastructure Model
-                        </div>
-                        <div class="metric-value">
-                            Zero-Custody Architecture
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- RIGHT -->
-
-            <div class="terminal">
-
-                <div class="terminal-top">
-
-                    <div class="terminal-title">
-                        Execution Console
-                    </div>
-
-                    <div class="terminal-env">
-                        Global Environment
-                    </div>
-
-                </div>
-
-                <div class="terminal-body">
-
-                    <form onsubmit="executeTransfer(event)">
-
-                        <div class="form-group">
-
-                            <label>
-                                Transfer Volume (USD)
-                            </label>
-
-                            <input
-                                type="number"
-                                class="input mono"
-                                id="amount"
-                                value="250000"
-                                required
-                            >
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label>
-                                Settlement Corridor
-                            </label>
-
-                            <select class="input" id="corridor">
-
-                                <option value="EUR" data-network="SEPA Instant">
-                                    EUR — Eurozone
-                                </option>
-
-                                <option value="GBP" data-network="UK Faster Payments">
-                                    GBP — United Kingdom
-                                </option>
-
-                                <option value="AED" data-network="UAE Commercial Rail">
-                                    AED — United Arab Emirates
-                                </option>
-
-                                <option value="SGD" data-network="Singapore FAST">
-                                    SGD — Singapore
-                                </option>
-
-                                <option value="HKD" data-network="Hong Kong CHATS">
-                                    HKD — Hong Kong
-                                </option>
-
-                                <option value="CAD" data-network="Canadian RTP">
-                                    CAD — Canada
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label>
-                                Reference
-                            </label>
-
-                            <input
-                                type="text"
-                                class="input mono"
-                                value="ntf_enterprise_coordination"
-                                readonly
-                                style="opacity:.6;"
-                            >
-
-                        </div>
-
-                        <button class="execute-btn" type="submit">
-                            Initiate Execution
-                        </button>
-
-                    </form>
-
-                </div>
-
-            </div>
-
+    <!-- METRICS OVERVIEW -->
+    <div class="metrics-ribbon">
+        <div class="metric-card">
+            <label>Governance Latency</label>
+            <div style="color: var(--green);">&lt; 14ms Real-time Audit</div>
         </div>
+        <div class="metric-card">
+            <label>Abstraction Model</label>
+            <div>API-First Orchestration</div>
+        </div>
+        <div class="metric-card">
+            <label>Data Integrity</label>
+            <div>Zero-Custody Trust Matrix</div>
+        </div>
+        <div class="metric-card">
+            <label>Routing Channels</label>
+            <div>Sovereign Financial Nodes</div>
+        </div>
+    </div>
 
-    </section>
-
-    <!-- LEDGER -->
-
-    <section class="ledger">
-
-        <div class="section-head">
-
-            <div>
-                <h3>Execution Activity</h3>
-            </div>
-
+    <!-- MAIN PRODUCT INTERFACE -->
+    <section class="hero-grid">
+        
+        <!-- LEFT COLUMN: ARCHITECTURAL COPY -->
+        <div class="hero-text">
+            <h2>Algorithmic routing for institutional capital stacks.</h2>
             <p>
-                Streaming Coordination Ledger
+                Eliminate coordination latency. Noetfield acts as a headless trust abstraction and routing layer, auditing compliance rules and mapping transactional paths via unified API gateways instantly.
             </p>
-
+            <div class="action-row">
+                <button class="btn-black">Request Integration</button>
+                <button class="btn-outline">Read Core Architecture</button>
+            </div>
         </div>
 
-        <div class="ledger-shell">
+        <!-- RIGHT COLUMN: THE API DISPATCH SIMULATOR -->
+        <div class="api-terminal">
+            <div class="terminal-header">
+                <span>API Payload Gateway</span>
+                <code>POST /v2/routing/discretionary_audit</code>
+            </div>
+            
+            <div class="terminal-content">
+                <form onsubmit="dispatchPayload(event)">
+                    
+                    <div class="form-row">
+                        <div class="field-group">
+                            <label>Payload Volume (USD)</label>
+                            <input type="number" id="payload-amt" class="field-input" value="750000" oninput="updateJsonView()" required>
+                        </div>
+                        <div class="field-group">
+                            <label>Target Corridor Node</label>
+                            <select id="payload-corridor" class="field-input" onchange="updateJsonView()">
+                                <option value="EUR" data-endpoint="sepa_premium_v2">Eurozone (EUR)</option>
+                                <option value="GBP" data-endpoint="uk_faster_payments_sovereign">United Kingdom (GBP)</option>
+                                <option value="AED" data-endpoint="uae_central_matrix">United Arab Emirates (AED)</option>
+                                <option value="SGD" data-endpoint="singapore_fast_hub">Singapore (SGD)</option>
+                                <option value="CAD" data-endpoint="canada_rtp_pool">Canada (CAD)</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <table>
+                    <!-- IMMUTABLE TELEMETRY FIELDS -->
+                    <div class="form-row">
+                        <div class="field-group">
+                            <label>Governance Policy</label>
+                            <input type="text" class="field-input" value="automated_audit_strict_v4" readonly style="opacity: 0.5; background: #000;">
+                        </div>
+                        <div class="field-group">
+                            <label>Client Signature State</label>
+                            <input type="text" class="field-input" value="verified_public_key_auth" readonly style="opacity: 0.5; background: #000; color: var(--green);">
+                        </div>
+                    </div>
 
-                <thead>
+                    <!-- RAW JSON MATRIX STREAM -->
+                    <div class="json-preview" id="json-code"></div>
 
-                    <tr>
-                        <th>Reference</th>
-                        <th>Volume</th>
-                        <th>Route</th>
-                        <th>Network</th>
-                        <th>Status</th>
-                    </tr>
-
-                </thead>
-
-                <tbody id="ledger-body">
-
-                    <tr>
-
-                        <td class="mono" style="color:#8a8a93;">
-                            ntf_91A7D
-                        </td>
-
-                        <td class="mono">
-                            $420,000
-                        </td>
-
-                        <td class="mono">
-                            USD → EUR
-                        </td>
-
-                        <td>
-                            SEPA Instant
-                        </td>
-
-                        <td>
-                            <span class="state state-settled">
-                                <span class="dot"></span>
-                                Settled
-                            </span>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="mono" style="color:#8a8a93;">
-                            ntf_44BX2
-                        </td>
-
-                        <td class="mono">
-                            $185,000
-                        </td>
-
-                        <td class="mono">
-                            USD → AED
-                        </td>
-
-                        <td>
-                            UAE Commercial Rail
-                        </td>
-
-                        <td>
-                            <span class="state state-settled">
-                                <span class="dot"></span>
-                                Settled
-                            </span>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td class="mono" style="color:#8a8a93;">
-                            ntf_72FK9
-                        </td>
-
-                        <td class="mono">
-                            $96,000
-                        </td>
-
-                        <td class="mono">
-                            USD → SGD
-                        </td>
-
-                        <td>
-                            Singapore FAST
-                        </td>
-
-                        <td>
-                            <span class="state state-live">
-                                <span class="dot"></span>
-                                Routing
-                            </span>
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
+                    <button type="submit" class="dispatch-btn">Transmit API Instruction</button>
+                </form>
+            </div>
         </div>
 
     </section>
 
-    <!-- FOOTER -->
+    <!-- LIVE GOVERNANCE & ROUTING AUDIT LOG -->
+    <section class="ledger-section">
+        <div class="ledger-header">
+            <h3>Immutable Telemetry Ledger</h3>
+            <span>Real-Time Audit Matrix Streaming</span>
+        </div>
 
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instruction Hash</th>
+                        <th>Volume Abstracted</th>
+                        <th>Vector Route</th>
+                        <th>Target API Endpoint</th>
+                        <th>Governance Audit State</th>
+                    </tr>
+                </thead>
+                <tbody id="audit-ledger">
+                    <tr>
+                        <td class="mono" style="color: var(--text-soft);">0x7d91...bce2</td>
+                        <td class="mono" style="font-weight: 500;">$1,250,000</td>
+                        <td class="mono">USD → EUR</td>
+                        <td class="mono" style="color: var(--text-soft);">/v2/corridors/sepa_premium_v2</td>
+                        <td><span class="tag tag-audited"><span class="dot"></span> Audited & Routed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="mono" style="color: var(--text-soft);">0x44fa...91ea</td>
+                        <td class="mono" style="font-weight: 500;">$480,000</td>
+                        <td class="mono">USD → AED</td>
+                        <td class="mono" style="color: var(--text-soft);">/v2/corridors/uae_central_matrix</td>
+                        <td><span class="tag tag-audited"><span class="dot"></span> Audited & Routed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="mono" style="color: var(--text-soft);">0x88bc...221d</td>
+                        <td class="mono" style="font-weight: 500;">$95,000</td>
+                        <td class="mono">USD → SGD</td>
+                        <td class="mono" style="color: var(--text-soft);">/v2/corridors/singapore_fast_hub</td>
+                        <td><span class="tag tag-routing"><span class="dot" style="background: #a5b4fc;"></span> Instantiating</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- FOOTER LENS -->
     <footer class="footer">
-
-        <span>
-            © 2026 Noetfield Technologies
-        </span>
-
-        <span>
-            Cross-Border Coordination Infrastructure
-        </span>
-
+        <span>© 2026 Noetfield Systems Inc. Corporate Governance & Digital Trust Infrastructure.</span>
+        <span>Abstraction Rail Over Sovereign Settlement Nodes.</span>
     </footer>
 
 </div>
 
 <script>
-
-function executeTransfer(e){
-
-    e.preventDefault();
-
-    const amountInput = document.getElementById("amount");
-    const corridorInput = document.getElementById("corridor");
-
-    const amount = amountInput.value;
-
-    const selected =
-    corridorInput.options[corridorInput.selectedIndex];
-
+// Dynamic Payload Engine Preview
+function updateJsonView() {
+    const amount = document.getElementById("payload-amt").value || 0;
+    const corridorSelect = document.getElementById("payload-corridor");
+    const selected = corridorSelect.options[corridorSelect.selectedIndex];
+    
     const currency = selected.value;
+    const endpoint = selected.getAttribute("data-endpoint");
 
-    const network =
-    selected.getAttribute("data-network");
+    const jsonStructure = {
+        "instruction_layer": "trust_abstraction_v2",
+        "telemetry": {
+            "volume_usd": parseFloat(amount),
+            "routing_vector": `USD_TO_${currency}`,
+            "target_gateway": `/v2/corridors/${endpoint}`
+        },
+        "governance_check": "passed",
+        "latency_mode": "near_zero_audit"
+    };
 
-    const txId =
-    "ntf_" +
-    Math.random()
-    .toString(16)
-    .substring(2,8)
-    .toUpperCase();
-
-    const formatted =
-    new Intl.NumberFormat(
-        "en-US",
-        {
-            style:"currency",
-            currency:"USD",
-            maximumFractionDigits:0
-        }
-    ).format(amount);
-
-    const tbody =
-    document.getElementById("ledger-body");
-
-    const row =
-    document.createElement("tr");
-
-    row.innerHTML = `
-        <td class="mono" style="color:#ffffff;">
-            ${txId}
-        </td>
-
-        <td class="mono">
-            ${formatted}
-        </td>
-
-        <td class="mono">
-            USD → ${currency}
-        </td>
-
-        <td>
-            ${network}
-        </td>
-
-        <td>
-            <span class="state state-live" id="${txId}">
-                <span class="dot"></span>
-                Routing
-            </span>
-        </td>
-    `;
-
-    tbody.prepend(row);
-
-    setTimeout(()=>{
-
-        const status =
-        document.getElementById(txId);
-
-        if(status){
-
-            status.className =
-            "state state-settled";
-
-            status.innerHTML =
-            `
-            <span class="dot"></span>
-            Settled
-            `;
-        }
-
-    },1800);
-
-    amountInput.value = "";
-
+    document.getElementById("json-code").textContent = JSON.stringify(jsonStructure, null, 4);
 }
 
+// Emulate Secure Transmission via API
+function dispatchPayload(e) {
+    e.preventDefault();
+
+    const amount = document.getElementById("payload-amt").value;
+    const corridorSelect = document.getElementById("payload-corridor");
+    const selected = corridorSelect.options[corridorSelect.selectedIndex];
+    
+    const currency = selected.value;
+    const endpoint = selected.getAttribute("data-endpoint");
+
+    const txHash = "0x" + Math.random().toString(16).substring(2, 6) + "..." + Math.random().toString(16).substring(2, 6);
+    const formattedAmt = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(amount);
+
+    const ledger = document.getElementById("audit-ledger");
+    const row = document.createElement("tr");
+    row.style.background = "rgba(91, 92, 240, 0.02)";
+
+    row.innerHTML = `
+        <td class="mono" style="color: #fff;">${txHash}</td>
+        <td class="mono" style="font-weight: 600;">${formattedAmt}</td>
+        <td class="mono">USD → ${currency}</td>
+        <td class="mono" style="color: var(--brand);">/v2/corridors/${endpoint}</td>
+        <td><span class="tag tag-routing" id="hash-${txHash}"><span class="dot" style="background: #a5b4fc;"></span> Auditing</span></td>
+    `;
+
+    ledger.prepend(row);
+
+    // Instant Governance Resolution Simulation
+    setTimeout(() => {
+        const tag = document.getElementById(`hash-${txHash}`);
+        if(tag) {
+            tag.className = "tag tag-audited";
+            tag.innerHTML = '<span class="dot"></span> Audited & Routed';
+            row.style.background = "transparent";
+        }
+    }, 1200);
+
+    document.getElementById("payload-amt").value = "";
+    updateJsonView();
+}
+
+// Bootstrap Initialization
+updateJsonView();
 </script>
 
 </body>
