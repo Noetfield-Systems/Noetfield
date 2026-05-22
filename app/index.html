@@ -3,24 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Noetfield — Institutional Transfer & Settlement</title>
+<title>Noetfield</title>
 
-<!-- Premium Sovereign Typography -->
+<!-- Premium Clean Typography -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --bg: #030303;
-    --panel: #09090b;
-    --panel-inner: #121216;
-    --border: rgba(255, 255, 255, 0.05);
-    --border-active: rgba(255, 255, 255, 0.2);
+    --bg: #050505;
+    --panel: #0b0b0d;
+    --panel-inner: #121215;
+    --border: rgba(255, 255, 255, 0.04);
+    --border-active: rgba(255, 255, 255, 0.15);
     --text: #ffffff;
-    --text-soft: #8e8e93;
-    --text-muted: #48484a;
-    --brand: #ffffff;
+    --text-soft: #8a8a93;
     --green: #34c759;
     --font-main: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -37,74 +35,50 @@ body {
     color: var(--text);
     font-family: var(--font-main);
     -webkit-font-smoothing: antialiased;
-    letter-spacing: -0.02em;
-    overflow-x: hidden;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.03), transparent 60%);
-    pointer-events: none;
+    letter-spacing: -0.01em;
 }
 
 .container {
-    width: min(1200px, calc(100% - 48px));
+    width: min(1140px, calc(100% - 48px));
     margin: auto;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-bottom: 40px;
+    padding-bottom: 32px;
 }
 
-/* NAVIGATION */
-.nav {
+/* TOP HEADER */
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 40px 0;
 }
 
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo-icon {
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    background: #fff;
-}
-
-.logo-text {
-    font-size: 18px;
+.logo {
+    font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.03em;
 }
 
-.security-badge {
+.security-status {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 12px;
     color: var(--text-soft);
-    font-family: var(--font-mono);
 }
 
-.shield-icon {
+.status-dot {
     width: 6px;
     height: 6px;
     background: var(--green);
     border-radius: 50%;
-    box-shadow: 0 0 8px var(--green);
 }
 
-/* MAIN INTERFACE GRID */
-.main-grid {
+/* MAIN LAYOUT */
+.layout {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: 80px;
@@ -112,99 +86,89 @@ body::before {
     margin: auto 0;
 }
 
-/* LEFT: VALUE PROPOSITION (SECURITY & PRICE) */
-.hero-content h2 {
-    font-size: 48px;
-    line-height: 1.1;
+/* LEFT: CORE VALUE */
+.hero h2 {
+    font-size: 44px;
+    line-height: 1.15;
     font-weight: 600;
-    letter-spacing: -0.04em;
-    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
 }
 
-.hero-content p {
+.hero p {
     color: var(--text-soft);
     font-size: 16px;
     line-height: 1.6;
-    margin-bottom: 40px;
-    max-width: 480px;
+    margin-bottom: 32px;
+    max-width: 440px;
 }
 
-.pillars {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.pillar-item {
-    border-left: 1px solid var(--border);
-    padding-left: 20px;
-}
-
-.pillar-item h4 {
+.feat-item {
+    display: flex;
+    gap: 12px;
     font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 4px;
 }
 
-.pillar-item p {
-    font-size: 13px;
+.feat-item span {
+    color: var(--green);
+}
+
+.feat-item p {
     color: var(--text-soft);
-    line-height: 1.4;
-    margin-bottom: 0;
+    margin: 0;
 }
 
-/* RIGHT: THE PREMIUM CLIENT WIDGET */
-.transfer-widget {
+/* RIGHT: THE PREMIUM CONSOLE */
+.widget {
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 20px;
+    border-radius: 16px;
     padding: 32px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
 }
 
-.widget-title {
-    font-size: 15px;
+.widget-head {
+    font-size: 14px;
     font-weight: 500;
     margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
-.widget-title span {
-    font-size: 11px;
-    color: var(--green);
-    background: rgba(52, 199, 89, 0.06);
-    padding: 4px 8px;
-    border-radius: 4px;
+.widget-head span {
+    color: var(--text-soft);
+    font-size: 12px;
     font-family: var(--font-mono);
 }
 
-.input-box {
+.input-group {
     background: var(--panel-inner);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: border-color 0.2s;
 }
 
-.input-box:focus-within {
+.input-group:focus-within {
     border-color: var(--border-active);
 }
 
-.input-box label {
+.input-group label {
     display: block;
     font-size: 11px;
     color: var(--text-soft);
     margin-bottom: 4px;
     text-transform: uppercase;
-    font-family: var(--font-mono);
 }
 
-.input-box input {
+.input-group input {
     background: transparent;
     border: none;
     color: #fff;
@@ -215,7 +179,7 @@ body::before {
     font-family: var(--font-mono);
 }
 
-.currency-select {
+.select-box {
     background: transparent;
     border: none;
     color: #fff;
@@ -225,21 +189,19 @@ body::before {
     outline: none;
 }
 
-.currency-select option {
+.select-box option {
     background: var(--panel-inner);
-    color: #fff;
 }
 
-/* TRANSPARENT PRICING FLOW */
-.pricing-flow {
-    padding: 20px 16px;
+/* DETAILS FLOW */
+.details-flow {
+    padding: 16px 8px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    position: relative;
+    gap: 8px;
 }
 
-.flow-step {
+.flow-row {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
@@ -247,44 +209,42 @@ body::before {
     font-family: var(--font-mono);
 }
 
-.flow-step .highlight {
+.flow-row .white {
     color: #fff;
 }
 
-/* ACTION BUTTON */
-.submit-btn {
+.action-btn {
     width: 100%;
     background: #fff;
     color: #000;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 16px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: background 0.2s;
     margin-top: 8px;
 }
 
-.submit-btn:hover {
-    opacity: 0.9;
+.action-btn:hover {
+    background: #e4e4e7;
 }
 
-/* REFINED FOOTER */
+/* FOOTER */
 .footer {
     border-top: 1px solid var(--border);
-    padding-top: 32px;
+    padding-top: 24px;
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.2);
 }
 
-/* RESPONSIVE DESIGN */
-@media (max-width: 968px) {
-    .main-grid { grid-template-columns: 1fr; gap: 48px; }
-    .hero-content h2 { font-size: 38px; }
-    .nav { padding: 24px 0; }
+@media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; gap: 40px; }
+    .hero h2 { font-size: 34px; }
+    .header { padding: 24px 0; }
 }
 </style>
 </head>
@@ -292,87 +252,84 @@ body::before {
 
 <div class="container">
 
-    <!-- NAVIGATION HEADER -->
-    <nav class="nav">
-        <div class="logo-area">
-            <div class="logo-icon"></div>
-            <div class="logo-text">Noetfield</div>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">Noetfield</div>
+        <div class="security-status">
+            <span class="status-dot"></span>
+            End-to-end encrypted connection
         </div>
-        <div class="security-badge">
-            <span class="shield-icon"></span>
-            Institutional Grade Security Guaranteed
-        </div>
-    </nav>
+    </header>
 
-    <!-- MAIN CLIENT DASHBOARD -->
-    <main class="main-grid">
+    <!-- MAIN INTERFACE -->
+    <main class="layout">
         
-        <!-- LEFT AREA: BRAND STRENGTH & VALUE -->
-        <div class="hero-content">
-            <h2>Secure, institutional asset routing at optimal rates.</h2>
+        <!-- CONTENT -->
+        <div class="hero">
+            <h2>Move capital globally without the overhead.</h2>
             <p>
-                Move capital across borders instantly with direct liquidity access, transparent zero-spread pricing, and ironclad compliance architecture.
+                Direct cross-border settlements with automated routing, full custody protection, and zero hidden margins.
             </p>
             
-            <div class="pillars">
-                <div class="pillar-item">
-                    <h4>Guaranteed Institutional Pricing</h4>
-                    <p>Real-time optimal rates without hidden margins or intermediary banking fees.</p>
+            <div class="features">
+                <div class="feat-item">
+                    <span>✓</span>
+                    <p>Direct live market pricing updated in real time.</p>
                 </div>
-                <div class="pillar-item">
-                    <h4>Sovereign Cryptographic Protection</h4>
-                    <p>Fully non-custodial capital flow ensures your assets remain under your exclusive control.</p>
+                <div class="feat-item">
+                    <span>✓</span>
+                    <p>Non-custodial infrastructure ensuring absolute capital security.</p>
                 </div>
-                <div class="pillar-item">
-                    <h4>Instant Global Settlements</h4>
-                    <p>Automated corridors bypass legacy banking delays for immediate execution.</p>
+                <div class="feat-item">
+                    <span>✓</span>
+                    <p>Instant corridor settlement bypassing intermediary banks.</p>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT AREA: KAVODAX-INSPIRED TRANSFER CONSOLE -->
-        <div class="transfer-widget">
-            <div class="widget-title">
-                Institutional Settlement
-                <span>Live Mid-Market Rate</span>
+        <!-- CONSOLE CONVERTER -->
+        <div class="widget">
+            <div class="widget-head">
+                <span>Secure Transfer</span>
+                <span id="live-rate-badge">1 USD = 0.9200 EUR</span>
             </div>
 
-            <!-- SOURCE INPUT -->
-            <div class="input-box">
+            <!-- SEND -->
+            <div class="input-group">
                 <div>
-                    <label>You Allocate</label>
-                    <input type="number" id="source-amount" value="100000" oninput="calculateSettlement()">
+                    <label>You send</label>
+                    <input type="number" id="send-amount" value="100000" oninput="runConversion()">
                 </div>
-                <select class="currency-select" id="source-currency" onchange="calculateSettlement()">
+                <select class="select-box" id="send-curr" onchange="runConversion()">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                     <option value="CAD">CAD</option>
                 </select>
             </div>
 
-            <!-- PRICING DYNAMICS LINK -->
-            <div class="pricing-flow">
-                <div class="flow-step">
-                    <span>Guaranteed Exchange Rate</span>
-                    <span class="highlight" id="live-rate">1.0000</span>
+            <!-- MID FLOW INFOS -->
+            <div class="details-flow">
+                <div class="flow-row">
+                    <span>Exchange rate</span>
+                    <span class="white" id="rate-text">0.9200</span>
                 </div>
-                <div class="flow-step">
-                    <span>Network & Settlement Fee</span>
-                    <span class="highlight" style="color: var(--green);">0.00% (Included)</span>
+                <div class="flow-row">
+                    <span>Transfer fee</span>
+                    <span class="white" style="color: var(--green);">0.00%</span>
                 </div>
-                <div class="flow-step">
-                    <span>Execution Speed</span>
-                    <span class="highlight">Instant Corridor Routing</span>
+                <div class="flow-row">
+                    <span>Delivery speed</span>
+                    <span class="white">Instant</span>
                 </div>
             </div>
 
-            <!-- DESTINATION INPUT -->
-            <div class="input-box" style="margin-bottom: 24px;">
+            <!-- RECEIVE -->
+            <div class="input-group" style="margin-bottom: 24px;">
                 <div>
-                    <label>They Receive (Estimated)</label>
-                    <input type="text" id="target-amount" readonly>
+                    <label>They receive</label>
+                    <input type="text" id="receive-amount" readonly>
                 </div>
-                <select class="currency-select" id="target-currency" onchange="calculateSettlement()">
+                <select class="select-box" id="receive-curr" onchange="runConversion()">
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
                     <option value="AED">AED</option>
@@ -380,57 +337,46 @@ body::before {
                 </select>
             </div>
 
-            <button class="submit-btn">Initiate Secure Transfer</button>
+            <button class="action-btn">Continue</button>
         </div>
 
     </main>
 
-    <!-- MINIMALIST FOOTER -->
+    <!-- FOOTER -->
     <footer class="footer">
-        <span>© 2026 Noetfield Systems Inc. Global Digital Infrastructure.</span>
-        <span>Secure Vault Node Client v4.1</span>
+        <span>© 2026 Noetfield Systems Inc. All rights reserved.</span>
+        <span>Client Portal v4.1</span>
     </footer>
 
 </div>
 
 <script>
-// Mock Real-Time Matrix Rates for Client Conversion
-const rates = {
-    "USD_EUR": 0.92,
-    "USD_AED": 3.67,
-    "USD_SGD": 1.34,
-    "USD_USD": 1.00,
-    "EUR_USD": 1.09,
-    "EUR_AED": 3.99,
-    "EUR_SGD": 1.46,
-    "EUR_EUR": 1.00,
-    "CAD_USD": 0.73,
-    "CAD_EUR": 0.67,
-    "CAD_AED": 2.68,
-    "CAD_SGD": 0.98
+// Pure Market Conversion Rates
+const matrix = {
+    "USD_EUR": 0.92, "USD_AED": 3.67, "USD_SGD": 1.34, "USD_USD": 1.00,
+    "EUR_USD": 1.09, "EUR_AED": 3.99, "EUR_SGD": 1.46, "EUR_EUR": 1.00,
+    "CAD_USD": 0.73, "CAD_EUR": 0.67, "CAD_AED": 2.68, "CAD_SGD": 0.98
 };
 
-function calculateSettlement() {
-    const sourceAmt = parseFloat(document.getElementById("source-amount").value) || 0;
-    const sourceCurr = document.getElementById("source-currency").value;
-    const targetCurr = document.getElementById("target-currency").value;
+function runConversion() {
+    const amt = parseFloat(document.getElementById("send-amount").value) || 0;
+    const sCurr = document.getElementById("send-curr").value;
+    const rCurr = document.getElementById("receive-curr").value;
 
-    const rateKey = `${sourceCurr}_${targetCurr}`;
-    const currentRate = rates[rateKey] || 1.00;
+    const pair = `${sCurr}_${rCurr}`;
+    const rate = matrix[pair] || 1.00;
 
-    // Update Live Rate Visual Indicator
-    document.getElementById("live-rate").textContent = `1 ${sourceCurr} = ${currentRate.toFixed(4)} ${targetCurr}`;
+    document.getElementById("live-rate-badge").textContent = `1 ${sCurr} = ${rate.toFixed(4)} ${rCurr}`;
+    document.getElementById("rate-text").textContent = rate.toFixed(4);
 
-    // Update Target Total Allocation
-    const totalReceived = sourceAmt * currentRate;
-    document.getElementById("target-amount").value = totalReceived.toLocaleString("en-US", { 
+    const total = amt * rate;
+    document.getElementById("receive-amount").value = total.toLocaleString("en-US", { 
         minimumFractionDigits: 2, 
         maximumFractionDigits: 2 
     });
 }
 
-// Global Initialization
-calculateSettlement();
+runConversion();
 </script>
 
 </body>
