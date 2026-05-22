@@ -28,7 +28,7 @@
         }
 
         /* -----------------------------------------
-           1. BASE STYLES (Strictly for Mobile/Tablets)
+           1. BASE STYLES (Strictly Default / Mobile Portrait)
            ----------------------------------------- */
         body {
             background: var(--bg-main);
@@ -36,11 +36,11 @@
             font-family: 'IBM Plex Mono', monospace;
             min-height: 100vh;
             display: flex !important;
-            flex-direction: column !important; /* Force vertical stacking on mobile */
+            flex-direction: column !important; /* Forces vertical stacking everywhere by default */
             overflow-x: hidden;
         }
 
-        /* FORCE SIDEBAR TO BE COMPLETELY HIDDEN BY DEFAULT ON MOBILE */
+        /* SIDEBAR IS STRICTLY HIDDEN BY DEFAULT */
         .sidebar {
             display: none !important; 
             position: fixed !important;
@@ -57,7 +57,7 @@
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* When JavaScript opens the mobile menu */
+        /* When opened via hamburger menu button on mobile */
         .sidebar.open {
             display: flex !important;
             transform: translateX(280px) !important;
@@ -94,7 +94,7 @@
         }
         .sidebar-overlay.active { display: block; }
 
-        /* MAIN VIEWPORT TAKES 100% WIDTH ON MOBILE */
+        /* VIEWPORT TAKES 100% FULL WIDTH AT ALL TIMES ON PORTRAIT */
         .main-viewport {
             width: 100% !important;
             max-width: 100% !important;
@@ -116,13 +116,14 @@
         .header-top-row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
         .header-left-block { display: flex; align-items: center; gap: 12px; }
         
+        /* HAMBURGER TRIGGER IS ALWAYS VISIBLE ON PORTRAIT */
         .menu-trigger {
             background: none;
             border: none;
             color: var(--text-main);
             cursor: pointer;
             padding: 6px;
-            display: flex !important; /* Ensure hamburger is visible */
+            display: flex !important; 
             align-items: center;
             justify-content: center;
             border: 1px solid var(--border-color);
@@ -177,15 +178,16 @@
         .fee-row.total { border-top: 1px solid var(--border-color); padding-top: 8px; color: var(--accent); font-weight: 600; }
 
         /* -----------------------------------------
-           2. DESKTOP PREMIUM LAYOUT (Strictly > 1200px)
+           2. DESKTOP/LANDSCAPE DOUBLE-LOCK RULE
+           (Strictly fires ONLY if width > 1024px AND screen is Landscape)
            ----------------------------------------- */
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) and (orientation: landscape) {
             body {
-                flex-direction: row !important; /* Switch to side-by-side on desktop */
+                flex-direction: row !important; /* Side-by-side splits allowed ONLY in real landscape */
             }
 
             .sidebar {
-                display: flex !important; /* Bring back sidebar container safely */
+                display: flex !important; 
                 position: static !important;
                 width: 260px !important;
                 height: 100vh !important;
@@ -196,7 +198,7 @@
             .close-sidebar-btn, 
             .menu-trigger, 
             .sidebar-overlay {
-                display: none !important; /* Hide mobile mechanics completely */
+                display: none !important; /* Hide mobile toggles entirely */
             }
 
             .main-viewport {
