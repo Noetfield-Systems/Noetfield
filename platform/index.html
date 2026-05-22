@@ -28,7 +28,7 @@
         }
 
         /* -----------------------------------------
-           1. BASE STYLES (Strictly Default / Mobile Portrait)
+           1. CORE MOBILE-FIRST STYLES (Default State)
            ----------------------------------------- */
         body {
             background: var(--bg-main);
@@ -36,11 +36,11 @@
             font-family: 'IBM Plex Mono', monospace;
             min-height: 100vh;
             display: flex !important;
-            flex-direction: column !important; /* Forces vertical stacking everywhere by default */
+            flex-direction: column !important; /* Force layout as vertical stack */
             overflow-x: hidden;
         }
 
-        /* SIDEBAR IS STRICTLY HIDDEN BY DEFAULT */
+        /* SIDEBAR: Completely isolated into a hidden sliding tray by default */
         .sidebar {
             display: none !important; 
             position: fixed !important;
@@ -54,10 +54,10 @@
             justify-content: space-between;
             padding: 24px 16px;
             z-index: 9999 !important;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* When opened via hamburger menu button on mobile */
+        /* Active sliding mobile drawer state trigger */
         .sidebar.open {
             display: flex !important;
             transform: translateX(280px) !important;
@@ -94,7 +94,7 @@
         }
         .sidebar-overlay.active { display: block; }
 
-        /* VIEWPORT TAKES 100% FULL WIDTH AT ALL TIMES ON PORTRAIT */
+        /* VIEWPORT CONFIG: 100% Full Spacing for Mobile Screens */
         .main-viewport {
             width: 100% !important;
             max-width: 100% !important;
@@ -116,13 +116,13 @@
         .header-top-row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
         .header-left-block { display: flex; align-items: center; gap: 12px; }
         
-        /* HAMBURGER TRIGGER IS ALWAYS VISIBLE ON PORTRAIT */
+        /* HAMBURGER TRIGGER: Solidified and persistent on mobile viewports */
         .menu-trigger {
             background: none;
             border: none;
             color: var(--text-main);
             cursor: pointer;
-            padding: 6px;
+            padding: 8px;
             display: flex !important; 
             align-items: center;
             justify-content: center;
@@ -178,15 +178,15 @@
         .fee-row.total { border-top: 1px solid var(--border-color); padding-top: 8px; color: var(--accent); font-weight: 600; }
 
         /* -----------------------------------------
-           2. DESKTOP/LANDSCAPE DOUBLE-LOCK RULE
-           (Strictly fires ONLY if width > 1024px AND screen is Landscape)
+           2. PREMIUM DESKTOP LAYOUT (Strict & Guarded)
+           Fires ONLY if screen is wide AND hardware is NOT a mobile/webview
            ----------------------------------------- */
-        @media screen and (min-width: 1024px) and (orientation: landscape) {
-            body {
-                flex-direction: row !important; /* Side-by-side splits allowed ONLY in real landscape */
+        @media screen and (min-width: 1200px) {
+            html:not(.hardware-mobile) body {
+                flex-direction: row !important; /* Allowed side-by-side only on real desktop computers */
             }
 
-            .sidebar {
+            html:not(.hardware-mobile) .sidebar {
                 display: flex !important; 
                 position: static !important;
                 width: 260px !important;
@@ -195,35 +195,52 @@
                 flex-shrink: 0;
             }
 
-            .close-sidebar-btn, 
-            .menu-trigger, 
-            .sidebar-overlay {
-                display: none !important; /* Hide mobile toggles entirely */
+            html:not(.hardware-mobile) .close-sidebar-btn, 
+            html:not(.hardware-mobile) .menu-trigger, 
+            html:not(.hardware-mobile) .sidebar-overlay {
+                display: none !important; /* Permanently destroy mobile components on true desktop */
             }
 
-            .main-viewport {
+            html:not(.hardware-mobile) .main-viewport {
                 flex: 1 !important;
                 width: calc(100% - 260px) !important;
                 height: 100vh;
                 overflow-y: auto;
             }
 
-            header {
+            html:not(.hardware-mobile) header {
                 flex-direction: row !important;
                 justify-content: space-between !important;
                 align-items: center !important;
                 padding: 24px 40px;
             }
 
-            .header-top-row { width: auto; }
-            .header-title h1 { font-size: 22px; }
-            .btn-action { width: auto; }
-            .content-container { padding: 40px; gap: 32px; max-width: 1400px; margin: 0 auto; }
-            .workspace-split { grid-template-columns: 2fr 1fr; }
-            .block-card { padding: 24px; }
-            .block-title { flex-direction: row; justify-content: space-between; align-items: center; }
+            html:not(.hardware-mobile) .header-top-row { width: auto; }
+            html:not(.hardware-mobile) .header-title h1 { font-size: 22px; }
+            html:not(.hardware-mobile) .btn-action { width: auto; }
+            html:not(.hardware-mobile) .content-container { padding: 40px; gap: 32px; max-width: 1400px; margin: 0 auto; }
+            html:not(.hardware-mobile) .workspace-split { grid-template-columns: 2fr 1fr; }
+            html:not(.hardware-mobile) .block-card { padding: 24px; }
+            html:not(.hardware-mobile) .block-title { flex-direction: row; justify-content: space-between; align-items: center; }
         }
     </style>
+    
+    <script>
+        function runHardwareDeviceGuard() {
+            // Checks real physical screen width regardless of browser zoom/desktop-site lies, plus userAgent strings
+            const isPhysicalMobile = window.screen.width < 768 || window.screen.height < 768;
+            const isMobileUA = /Mobi|Android|iPhone|iPad|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+            
+            if (isPhysicalMobile || isMobileUA) {
+                document.documentElement.classList.add('hardware-mobile');
+            } else {
+                document.documentElement.classList.remove('hardware-mobile');
+            }
+        }
+        // Execute instantly before document renders to block layout flickering
+        runHardwareDeviceGuard();
+        window.addEventListener('resize', runHardwareDeviceGuard);
+    </script>
 </head>
 <body>
 
@@ -244,7 +261,7 @@
                     Overview
                 </div>
                 <div class="nav-item">
-                    <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5 0 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2-.9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5 0 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
                     Payments
                 </div>
                 <div class="nav-item">
