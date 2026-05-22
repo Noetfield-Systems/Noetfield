@@ -3,121 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platform | Noetfield</title>
+    <title>Noetfield — Platform Hub</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap');
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
-            --bg: #030303;
-            --panel: #0a0a0a;
-            --text-main: #ffffff;
-            --text-dim: #888888;
-            --accent: #00ff9d;
-            --border: #1a1a1a;
+            --bg-main: #06080a;
+            --bg-surface: #0d1117;
+            --bg-input: #161b22;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --text-main: #e8eaed;
+            --text-muted: #8b949e;
+            --text-dim: #484f58;
+            --accent: #00d084;
+            --accent-glow: rgba(0, 208, 132, 0.12);
+            --status-ok: #00d084;
         }
 
         body {
-            background: var(--bg);
+            background: var(--bg-main);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Sidebar */
-        nav {
-            width: 280px;
-            border-right: 1px solid var(--border);
-            padding: 40px;
+            font-family: 'IBM Plex Mono', monospace;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            overflow-x: hidden;
         }
 
-        .logo { font-family: 'Space Grotesk'; font-size: 20px; font-weight: 700; }
-        
-        .menu { display: flex; flex-direction: column; gap: 20px; }
-        .menu-item { color: var(--text-dim); cursor: pointer; transition: 0.3s; font-size: 14px; }
-        .menu-item:hover { color: var(--accent); }
-
-        /* Main Area */
-        main {
-            flex: 1;
-            padding: 60px;
-            overflow-y: auto;
-        }
-
-        header {
+        /* --- NAVIGATION TERMINAL --- */
+        nav {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 60px;
         }
 
-        h1 { font-family: 'Space Grotesk'; font-size: 32px; margin: 0; }
+        .nav-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.02em;
+        }
 
-        /* Grid System */
-        .dashboard-grid {
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .nav-meta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 208, 132, 0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 208, 132, 0.1);
+            color: var(--accent);
+        }
+
+        /* --- HUB CONTAINER ARCHITECTURE --- */
+        .hub-viewport {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            flex: 1;
+        }
+
+        .hub-welcome h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .hub-welcome p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* --- PRIMARY LAYOUT SPLIT --- */
+        .layout-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 968px) {
+            .layout-grid { grid-template-columns: 1fr; }
+        }
+
+        .suite-section {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        /* --- PRODUCT CARDS --- */
+        .product-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 3px; height: 100%;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .product-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateX(4px);
+            background: #121820;
+        }
+
+        .product-card:hover::before {
+            background: var(--accent);
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 80%;
+        }
+
+        .product-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        .product-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .product-action-arrow {
+            font-size: 18px;
+            color: var(--text-dim);
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .product-card:hover .product-action-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        /* --- SIDEBAR SUBSYSTEMS --- */
+        .sidebar-panel {
+            display: flex;
+            flex-direction: column;
             gap: 24px;
         }
 
-        .card {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 16px;
+        .telemetry-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 24px;
         }
 
-        .card-label { color: var(--text-dim); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .card-value { font-size: 28px; font-weight: 600; margin-top: 15px; }
-
-        .btn {
-            background: var(--accent);
-            color: #000;
-            padding: 12px 24px;
-            border-radius: 8px;
+        .telemetry-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
             font-weight: 600;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .telemetry-title span {
+            font-size: 5px;
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        .telemetry-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .telemetry-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .telemetry-row:first-child { padding-top: 0; }
+
+        .telemetry-label { color: var(--text-muted); }
+        .telemetry-value { color: var(--text-main); font-weight: 500; }
+
+        /* --- INTERACTIVE DEVELOPER MODULE --- */
+        .api-sandbox-card {
+            background: #090d13;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .api-label-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+        }
+
+        .api-key-display {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: monospace;
+            word-break: break-all;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 12px;
+            font-size: 11px;
+            font-family: 'IBM Plex Mono', monospace;
+            border-radius: 4px;
             cursor: pointer;
-            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-muted);
+            background: rgba(255,255,255,0.02);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
 
+    <!-- --- TERMINAL HEADER --- -->
     <nav>
-        <div class="logo">NOETFIELD</div>
-        <div class="menu">
-            <div class="menu-item" style="color: white;">Dashboard</div>
-            <div class="menu-item">Analytics</div>
-            <div class="menu-item">API Keys</div>
-            <div class="menu-item">Settings</div>
+        <div class="nav-brand">
+            <div class="nav-dot"></div>
+            Noetfield
+        </div>
+        <div class="nav-meta">
+            <div>Network: <span style="color:var(--text-main);">Mainnet-Ready</span></div>
+            <div class="system-status">
+                <span style="display:inline-block; width:6px; height:6px; background:var(--accent); border-radius:50%;"></span>
+                All Systems Operational
+            </div>
         </div>
     </nav>
 
-    <main>
-        <header>
-            <h1>Overview</h1>
-            <button class="btn">+ Create Deployment</button>
-        </header>
-
-        <div class="dashboard-grid">
-            <div class="card">
-                <div class="card-label">Active Nodes</div>
-                <div class="card-value">12 / 14</div>
-            </div>
-            <div class="card">
-                <div class="card-label">Latency</div>
-                <div class="card-value">24ms</div>
-            </div>
-            <div class="card">
-                <div class="card-label">Uptime</div>
-                <div class="card-value">99.98%</div>
-            </div>
+    <!-- --- PLATFORM CORE --- -->
+    <div class="hub-viewport">
+        
+        <div class="hub-welcome">
+            <h1>Workspace Consolidation</h1>
+            <p>Select an architectural subsystem to manage workflows and settlement telemetry.</p>
         </div>
-    </main>
 
+        <div class="layout-grid">
+            
+            <!-- Left Module Pipeline -->
+            <div class="suite-section">
+                <div class="section-label">Active Subsystems</div>
+
+                <!-- Card 1: Treasury -->
+                <a href="dashboard.html" class="product-card">
+                    <div class="product-info">
+                        <div class="product-title">
+                            Treasury & Settlement Routing
+                            <span class="product-tag">Core Engine</span>
+                        </div>
+                        <div class="product-desc">
+                            Execute international balance optimization, cross-border payments, and multi-currency capital distribution over isolated digital structures.
+                        </div>
+                    </div>
+                    <div class="product-action-arrow">→</div>
+                </a>
+
+                <!-- Card 2: Trust Systems -->
+                <a href="#trust" class="product-card" onclick="alert('System Core Notice:\n\nVerification layer protocols are currently processing environment logic simulations.')">
+                    <div class="product-info">
+                        <div class="product-title">
+                            Trust Layers & Telemetry
+                            <span class="product-tag">Compliance OS</span>
+                        </div>
+                        <div class="product-desc">
+                            Audit systemic integrity, run autonomous compliance mapping, and interface with institutional readiness checking models.
+                        </div>
+                    </div>
+                    <div class="product-action-arrow">→</div>
+                </a>
+
+                <!-- Card 3: Developer Engine -->
+                <a href="#dev" class="product-card" onclick="focusApiKey()">
+                    <div class="product-info">
+                        <div class="product-title">
+                            Infrastructure Integration
+                            <span class="product-tag">Developer API</span>
+                        </div>
+                        <div class="product-desc">
+                            Provision security credentials, consume webhook telemetry feeds, and embed low-latency settlement rules directly into codebase systems.
+                        </div>
+                    </div>
+                    <div class="product-action-arrow">→</div>
+                </a>
+            </div>
+
+            <!-- Right Subsystem Metadata Panel -->
+            <div class="sidebar-panel">
+                
+                <!-- Telemetry Metrics Block -->
+                <div class="telemetry-box">
+                    <div class="telemetry-title">
+                        Telemetry Pulse
+                        <span>●</span>
+                    </div>
+                    
+                    <div class="telemetry-row">
+                        <div class="telemetry-label">Active Workspace</div>
+                        <div class="telemetry-value">Noetfield Dev</div>
+                    </div>
+                    <div class="telemetry-row">
+                        <div class="telemetry-label">Data Redundancy</div>
+                        <div class="telemetry-value">Distributed (CA-West)</div>
+                    </div>
+                    <div class="telemetry-row">
+                        <div class="telemetry-label">API Latency Avg</div>
+                        <div class="telemetry-value" style="color: var(--accent);">14ms</div>
+                    </div>
+                    <div class="telemetry-row">
+                        <div class="telemetry-label">Cryptographic Stance</div>
+                        <div class="telemetry-value">TLS 1.3 / AES-256</div>
+                    </div>
+                </div>
+
+                <!-- API Fast Credential Generator -->
+                <div class="telemetry-box">
+                    <div class="telemetry-title">Developer Credentials</div>
+                    <div class="api-sandbox-card">
+                        <div class="api-label-wrapper">
+                            <span style="color:var(--text-muted); font-size:10px;">SANDBOX SECRET KEY</span>
+                        </div>
+                        <div class="api-key-display">
+                            <span id="key-string">sk_sandbox_777_noet_4f89ac...</span>
+                        </div>
+                        <div style="display:flex; gap:10px; margin-top:4px;">
+                            <button class="btn-secondary" style="flex:1;" onclick="rotateKey()">Rotate Key</button>
+                            <button class="btn-secondary" onclick="copyKey()">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- --- CONTROL SCRIPTS --- -->
+    <script>
+        function rotateKey() {
+            const hex = Array.from({length: 8}, () => Math.floor(Math.random()*16).toString(16)).join('');
+            document.getElementById('key-string').innerText = `sk_sandbox_777_noet_${hex}...`;
+            console.log("Credentials rotated globally within isolation container.");
+        }
+
+        function copyKey() {
+            alert("Sandbox API key string copied to clipboard infrastructure context.");
+        }
+
+        function focusApiKey() {
+            const target = document.getElementById('key-string');
+            target.style.borderColor = 'var(--accent)';
+            setTimeout(() => target.style.borderColor = 'var(--border-color)', 600);
+        }
+    </script>
 </body>
 </html>
