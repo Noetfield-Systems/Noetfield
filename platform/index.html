@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noetfield — Platform Hub</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noetfield — Control Center</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap');
 
@@ -13,247 +13,294 @@
             --bg-main: #06080a;
             --bg-surface: #0d1117;
             --bg-input: #161b22;
-            --border-color: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.06);
             --text-main: #e8eaed;
             --text-muted: #8b949e;
             --text-dim: #484f58;
             --accent: #00d084;
-            --accent-glow: rgba(0, 208, 132, 0.12);
-            --status-ok: #00d084;
+            --accent-glow: rgba(0, 208, 132, 0.15);
+            --status-success: #00d084;
+            --status-pending: #ffb703;
         }
 
         body {
             background: var(--bg-main);
             color: var(--text-main);
             font-family: 'IBM Plex Mono', monospace;
-            min-height: 100vh;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR ARCHITECTURE (DESKTOP) --- */
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
-        }
-
-        /* --- NAVIGATION TERMINAL --- */
-        nav {
-            background: var(--bg-surface);
-            border-bottom: 1px solid var(--border-color);
-            padding: 16px 40px;
-            display: flex;
             justify-content: space-between;
-            align-items: center;
+            padding: 24px 16px;
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .nav-brand {
+        .sidebar-top {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .nav-logo {
             font-family: 'Syne', sans-serif;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 10px;
             letter-spacing: -0.02em;
+            padding-left: 8px;
+        }
+
+        .nav-logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .close-sidebar-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
         }
 
         .nav-dot {
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             background: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent);
+            box-shadow: 0 0 12px var(--accent);
         }
 
-        .nav-meta {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .system-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 208, 132, 0.05);
-            padding: 4px 10px;
-            border-radius: 4px;
-            border: 1px solid rgba(0, 208, 132, 0.1);
-            color: var(--accent);
-        }
-
-        /* --- HUB CONTAINER ARCHITECTURE --- */
-        .hub-viewport {
-            max-width: 1300px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 50px 40px;
+        .nav-menu {
             display: flex;
             flex-direction: column;
-            gap: 40px;
-            flex: 1;
+            gap: 4px;
         }
 
-        .hub-welcome h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 6px;
-        }
-
-        .hub-welcome p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* --- PRIMARY LAYOUT SPLIT --- */
-        .layout-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 32px;
-        }
-
-        @media (max-width: 968px) {
-            .layout-grid { grid-template-columns: 1fr; }
-        }
-
-        .suite-section {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .section-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        /* --- PRODUCT CARDS --- */
-        .product-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 3px; height: 100%;
-            background: transparent;
-            transition: background 0.2s ease;
-        }
-
-        .product-card:hover {
-            border-color: rgba(255, 255, 255, 0.12);
-            transform: translateX(4px);
-            background: #121820;
-        }
-
-        .product-card:hover::before {
-            background: var(--accent);
-        }
-
-        .product-info {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-width: 80%;
-        }
-
-        .product-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
+        .nav-item {
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .product-tag {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 10px;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            padding: 2px 8px;
-            border-radius: 4px;
+            padding: 12px 14px;
             color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            cursor: pointer;
         }
 
-        .product-desc {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.6;
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        .product-action-arrow {
-            font-size: 18px;
-            color: var(--text-dim);
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-
-        .product-card:hover .product-action-arrow {
+        .nav-item.active {
+            border-left: 2px solid var(--accent);
+            background: rgba(0, 208, 132, 0.04);
             color: var(--accent);
-            transform: translateX(4px);
         }
 
-        /* --- SIDEBAR SUBSYSTEMS --- */
-        .sidebar-panel {
+        .nav-item svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* Environment Pill Toggle */
+        .sidebar-footer {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 16px;
         }
 
-        .telemetry-box {
-            background: var(--bg-surface);
+        .environment-selector {
+            background: var(--bg-main);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 24px;
+            border-radius: 6px;
+            padding: 4px;
+            display: flex;
+            gap: 4px;
         }
 
-        .telemetry-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 14px;
+        .env-btn {
+            flex: 1;
+            padding: 6px 0;
+            font-size: 11px;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease;
             font-weight: 600;
-            margin-bottom: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        .telemetry-title span {
-            font-size: 5px;
+        .env-btn.active {
+            background: rgba(0, 208, 132, 0.1);
             color: var(--accent);
-            animation: pulse 2s infinite;
+            border: 1px solid rgba(0, 208, 132, 0.2);
         }
 
-        .telemetry-row {
+        .env-btn.inactive {
+            color: var(--text-dim);
+        }
+
+        .workspace-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .workspace-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .workspace-name { font-size: 12px; font-weight: 500; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .workspace-tier { font-size: 10px; color: var(--text-muted); }
+
+        /* Responsive Sidebar Backdrop overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 90;
+        }
+
+        /* --- MAIN VIEWPORT ARCHITECTURE --- */
+        .main-viewport {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: var(--bg-main);
+            min-width: 0; /* Prevents layout distortion from un-wrapped content */
+        }
+
+        header {
+            padding: 24px 40px;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            background: var(--bg-main);
+            gap: 16px;
         }
 
-        .telemetry-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .telemetry-row:first-child { padding-top: 0; }
+        .header-left-block {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
-        .telemetry-label { color: var(--text-muted); }
-        .telemetry-value { color: var(--text-main); font-weight: 500; }
+        .menu-trigger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 4px;
+        }
 
-        /* --- INTERACTIVE DEVELOPER MODULE --- */
-        .api-sandbox-card {
-            background: #090d13;
+        .menu-trigger svg {
+            width: 22px;
+            height: 22px;
+            fill: stroke;
+        }
+
+        .header-title h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .header-title p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .btn-action {
+            background: var(--accent);
+            color: var(--bg-main);
+            border: none;
+            padding: 10px 18px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-action:hover {
+            background: #00e896;
+            box-shadow: 0 0 20px rgba(0, 208, 132, 0.2);
+        }
+
+        .content-container {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* --- TREASURY SNAPSHOT CARDS --- */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .metric-card {
+            background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 20px;
@@ -262,191 +309,639 @@
             gap: 12px;
         }
 
-        .api-label-wrapper {
+        .metric-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
+        .metric-value {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .metric-sub {
+            font-size: 11px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-live {
+            background: rgba(0, 208, 132, 0.06);
+            color: var(--accent);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 208, 132, 0.15);
+        }
+
+        /* --- DASHBOARD WORKSPACE SPLIT BLOCK --- */
+        .workspace-split {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .block-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .block-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 11px;
+            gap: 12px;
         }
 
-        .api-key-display {
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            padding: 10px 12px;
-            border-radius: 6px;
+        .block-title span {
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 11px;
             color: var(--text-muted);
-            font-family: monospace;
-            word-break: break-all;
+            font-weight: 400;
+            text-align: right;
+        }
+
+        /* --- DATA TABLES --- */
+        .ledger-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth mobile elastic scrolling */
+        }
+
+        .ledger-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 12px;
+            min-width: 600px; /* Ensures data maintains table geometry on smaller views */
+        }
+
+        .ledger-table th {
+            padding: 12px 16px;
+            color: var(--text-muted);
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.01);
+        }
+
+        .ledger-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .ledger-table tr:last-child td { border-bottom: none; }
+
+        .tx-hash { color: var(--text-dim); font-family: monospace; }
+        
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .status-pill.settled { background: rgba(0, 208, 132, 0.08); color: var(--status-success); }
+        .status-pill.pending { background: rgba(255, 183, 3, 0.08); color: var(--status-pending); }
+
+        /* --- CORRIDORS & SIDE STRUCTURES --- */
+        .corridor-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .corridor-item {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 6px 12px;
+        .corridor-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .corridor-title {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .corridor-meta {
             font-size: 11px;
-            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text-muted);
+        }
+
+        .rate-badge {
+            font-size: 11px;
+            color: var(--accent);
+            background: rgba(0, 208, 132, 0.05);
+            padding: 4px 8px;
             border-radius: 4px;
-            cursor: pointer;
+            border: 1px solid rgba(0, 208, 132, 0.1);
+            flex-shrink: 0;
+        }
+
+        /* --- DYNAMIC TRANSFER MODAL CONTROL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 500;
+            opacity: 0; pointer-events: none;
             transition: all 0.2s ease;
+            padding: 16px;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--text-muted);
-            background: rgba(255,255,255,0.02);
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 480px;
+            padding: 32px;
+            box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
+        .modal-overlay.active .modal-card { transform: translateY(0); }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none; border: none; color: var(--text-muted);
+            cursor: pointer; font-size: 16px;
+        }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 8px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%; background: var(--bg-input); border: 1px solid var(--border-color);
+            padding: 12px 14px; border-radius: 6px; color: var(--text-main);
+            font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent); outline: none;
+        }
+
+        .fee-preview-box {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .fee-row { display: flex; justify-content: space-between; gap: 8px; }
+        .fee-row.total { border-top: 1px solid var(--border-color); padding-top: 8px; color: var(--accent); font-weight: 600; }
+
+        /* --- ADVANCED RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 1024px) {
+            .workspace-split { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -280px;
+                bottom: 0;
+                width: 270px;
+                height: 100vh;
+                transform: translateX(0);
+                box-shadow: 20px 0 40px rgba(0,0,0,0.6);
+            }
+
+            .sidebar.open {
+                transform: translateX(280px);
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .close-sidebar-btn {
+                display: block;
+            }
+
+            .menu-trigger {
+                display: block;
+            }
+
+            header {
+                padding: 16px 20px;
+            }
+
+            .header-title h1 {
+                font-size: 18px;
+            }
+
+            .header-title p {
+                font-size: 11px;
+            }
+
+            .content-container {
+                padding: 20px;
+                gap: 24px;
+            }
+
+            .modal-card {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .btn-action {
+                width: 100%;
+                justify-content: center;
+                padding: 12px;
+            }
+
+            .block-card {
+                padding: 16px;
+            }
+
+            .block-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .block-title span {
+                text-align: left;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- --- TERMINAL HEADER --- -->
-    <nav>
-        <div class="nav-brand">
-            <div class="nav-dot"></div>
-            Noetfield
-        </div>
-        <div class="nav-meta">
-            <div>Network: <span style="color:var(--text-main);">Mainnet-Ready</span></div>
-            <div class="system-status">
-                <span style="display:inline-block; width:6px; height:6px; background:var(--accent); border-radius:50%;"></span>
-                All Systems Operational
-            </div>
-        </div>
-    </nav>
+    <!-- --- RESPONSIVE BACKDROP OVERLAY --- -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar(false)"></div>
 
-    <!-- --- PLATFORM CORE --- -->
-    <div class="hub-viewport">
-        
-        <div class="hub-welcome">
-            <h1>Workspace Consolidation</h1>
-            <p>Select an architectural subsystem to manage workflows and settlement telemetry.</p>
-        </div>
-
-        <div class="layout-grid">
-            
-            <!-- Left Module Pipeline -->
-            <div class="suite-section">
-                <div class="section-label">Active Subsystems</div>
-
-                <!-- Card 1: Treasury -->
-                <a href="dashboard.html" class="product-card">
-                    <div class="product-info">
-                        <div class="product-title">
-                            Treasury & Settlement Routing
-                            <span class="product-tag">Core Engine</span>
-                        </div>
-                        <div class="product-desc">
-                            Execute international balance optimization, cross-border payments, and multi-currency capital distribution over isolated digital structures.
-                        </div>
-                    </div>
-                    <div class="product-action-arrow">→</div>
-                </a>
-
-                <!-- Card 2: Trust Systems -->
-                <a href="#trust" class="product-card" onclick="alert('System Core Notice:\n\nVerification layer protocols are currently processing environment logic simulations.')">
-                    <div class="product-info">
-                        <div class="product-title">
-                            Trust Layers & Telemetry
-                            <span class="product-tag">Compliance OS</span>
-                        </div>
-                        <div class="product-desc">
-                            Audit systemic integrity, run autonomous compliance mapping, and interface with institutional readiness checking models.
-                        </div>
-                    </div>
-                    <div class="product-action-arrow">→</div>
-                </a>
-
-                <!-- Card 3: Developer Engine -->
-                <a href="#dev" class="product-card" onclick="focusApiKey()">
-                    <div class="product-info">
-                        <div class="product-title">
-                            Infrastructure Integration
-                            <span class="product-tag">Developer API</span>
-                        </div>
-                        <div class="product-desc">
-                            Provision security credentials, consume webhook telemetry feeds, and embed low-latency settlement rules directly into codebase systems.
-                        </div>
-                    </div>
-                    <div class="product-action-arrow">→</div>
-                </a>
-            </div>
-
-            <!-- Right Subsystem Metadata Panel -->
-            <div class="sidebar-panel">
-                
-                <!-- Telemetry Metrics Block -->
-                <div class="telemetry-box">
-                    <div class="telemetry-title">
-                        Telemetry Pulse
-                        <span>●</span>
-                    </div>
-                    
-                    <div class="telemetry-row">
-                        <div class="telemetry-label">Active Workspace</div>
-                        <div class="telemetry-value">Noetfield Dev</div>
-                    </div>
-                    <div class="telemetry-row">
-                        <div class="telemetry-label">Data Redundancy</div>
-                        <div class="telemetry-value">Distributed (CA-West)</div>
-                    </div>
-                    <div class="telemetry-row">
-                        <div class="telemetry-label">API Latency Avg</div>
-                        <div class="telemetry-value" style="color: var(--accent);">14ms</div>
-                    </div>
-                    <div class="telemetry-row">
-                        <div class="telemetry-label">Cryptographic Stance</div>
-                        <div class="telemetry-value">TLS 1.3 / AES-256</div>
-                    </div>
+    <!-- --- SIDEBAR NAVIGATION --- -->
+    <div class="sidebar" id="dashboard-sidebar">
+        <div class="sidebar-top">
+            <div class="nav-logo-wrapper">
+                <div class="nav-logo">
+                    <div class="nav-dot"></div>
+                    Noetfield
                 </div>
-
-                <!-- API Fast Credential Generator -->
-                <div class="telemetry-box">
-                    <div class="telemetry-title">Developer Credentials</div>
-                    <div class="api-sandbox-card">
-                        <div class="api-label-wrapper">
-                            <span style="color:var(--text-muted); font-size:10px;">SANDBOX SECRET KEY</span>
-                        </div>
-                        <div class="api-key-display">
-                            <span id="key-string">sk_sandbox_777_noet_4f89ac...</span>
-                        </div>
-                        <div style="display:flex; gap:10px; margin-top:4px;">
-                            <button class="btn-secondary" style="flex:1;" onclick="rotateKey()">Rotate Key</button>
-                            <button class="btn-secondary" onclick="copyKey()">Copy</button>
-                        </div>
-                    </div>
-                </div>
-
+                <button class="close-sidebar-btn" onclick="toggleSidebar(false)">✕</button>
             </div>
+            <div class="nav-menu">
+                <div class="nav-item active">
+                    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    Overview
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5 0 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                    Payments
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 1.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V20h14v-3.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.01 1.97 3.45V20h6v-3.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    Beneficiaries
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    Corridors
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm3.3 14.79L11 13.5V7h1.5v5.8l3.7 2.2-.7 1.29z"/></svg>
+                    Activity
+                </div>
+            </div>
+        </div>
 
+        <div class="sidebar-footer">
+            <div class="environment-selector">
+                <div class="env-btn active" id="env-sandbox" onclick="toggleEnv('sandbox')">Sandbox</div>
+                <div class="env-btn inactive" id="env-live" onclick="toggleEnv('live')">Live</div>
+            </div>
+            <div class="workspace-profile">
+                <div class="avatar">NW</div>
+                <div class="workspace-info">
+                    <div class="workspace-name">Noetfield Dev</div>
+                    <div class="workspace-tier">SME Workspace</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- --- CONTROL SCRIPTS --- -->
+    <!-- --- MAIN VIEWPORT CONTAINER --- -->
+    <div class="main-viewport">
+        <header>
+            <div class="header-left-block">
+                <button class="menu-trigger" onclick="toggleSidebar(true)">
+                    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <div class="header-title">
+                    <h1>Treasury Control Center</h1>
+                    <p id="environment-indicator">Currently operating in multi-currency isolated Sandbox mode</p>
+                </div>
+            </div>
+            <button class="btn-action" onclick="toggleModal(true)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                New Transfer
+            </button>
+        </header>
+
+        <div class="content-container">
+            <!-- Metrics Snapshot Block -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Total Volume (CAD Equiv.)</div>
+                    <div class="metric-value" id="balance-val">$142,450.00</div>
+                    <div class="metric-sub">Across active global routing options</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">In-Flight Settlements</div>
+                    <div class="metric-value" id="inflight-val">$12,800.00</div>
+                    <div class="metric-sub"><span class="badge-live">2 Transfers</span> queue execution</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">System Flat Fee Rate</div>
+                    <div class="metric-value">0.40%</div>
+                    <div class="metric-sub">Zero hidden margin spreads applied</div>
+                </div>
+            </div>
+
+            <!-- Operational Ledger Grid -->
+            <div class="workspace-split">
+                <!-- Left Block: Settlement Log -->
+                <div class="block-card">
+                    <div class="block-title">
+                        Active Settlement Ledger
+                        <span>Real-time state verification</span>
+                    </div>
+                    <div class="ledger-table-wrapper">
+                        <table class="ledger-table">
+                            <thead>
+                                <tr>
+                                    <th>Reference ID</th>
+                                    <th>Beneficiary Entity</th>
+                                    <th>Settlement Route</th>
+                                    <th>Gross Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ledger-body">
+                                <tr>
+                                    <td class="tx-hash">0x7f...892a</td>
+                                    <td>Al-Mansoori Logistics</td>
+                                    <td>CAD → AED (Dubai)</td>
+                                    <td>$45,000.00 CAD</td>
+                                    <td><span class="status-pill settled">Settled</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-hash">0x32...e411</td>
+                                    <td>TechIndia Solutions Ltd</td>
+                                    <td>CAD → INR (Mumbai)</td>
+                                    <td>$12,800.00 CAD</td>
+                                    <td><span class="status-pill pending">In Flight</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tx-hash">0x9a...711b</td>
+                                    <td>VouchBuild Operations</td>
+                                    <td>CAD → USD (Delaware)</td>
+                                    <td>$84,650.00 CAD</td>
+                                    <td><span class="status-pill settled">Settled</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Block: Active Telemetry Corridors -->
+                <div class="sidebar-blocks" style="display: flex; flex-direction: column; gap: 24px;">
+                    <div class="block-card">
+                        <div class="block-title">Active Corridors</div>
+                        <div class="corridor-list">
+                            <div class="corridor-item">
+                                <div class="corridor-info">
+                                    <div class="corridor-title">CAD → AED</div>
+                                    <div class="corridor-meta">Direct Treasury Route</div>
+                                </div>
+                                <div class="rate-badge">0.4% Fee</div>
+                            </div>
+                            <div class="corridor-item">
+                                <div class="corridor-info">
+                                    <div class="corridor-title">CAD → INR</div>
+                                    <div class="corridor-meta">Automated IMPS / NEFT</div>
+                                </div>
+                                <div class="rate-badge">0.4% Fee</div>
+                            </div>
+                            <div class="corridor-item">
+                                <div class="corridor-info">
+                                    <div class="corridor-title">CAD → USD</div>
+                                    <div class="corridor-meta">FedNow Settlement Layer</div>
+                                </div>
+                                <div class="rate-badge">0.4% Fee</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- INTERACTIVE MODAL OVERLAY --- -->
+    <div class="modal-overlay" id="transfer-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Initiate Treasury Routing</h2>
+                <button class="close-modal" onclick="toggleModal(false)">✕</button>
+            </div>
+            
+            <div class="form-group">
+                <label>Target Beneficiary Entity</label>
+                <input type="text" id="modal-beneficiary" placeholder="e.g. Acme International Holding" />
+            </div>
+
+            <div class="form-group">
+                <label>Operational Corridor</label>
+                <select id="modal-corridor">
+                    <option value="CAD → AED (Dubai)">🇦🇪 CAD → AED (United Arab Emirates)</option>
+                    <option value="CAD → INR (Mumbai)">🇮🇳 CAD → INR (India)</option>
+                    <option value="CAD → USD (Delaware)">🇺🇸 CAD → USD (United States)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Funding Amount (CAD)</label>
+                <input type="number" id="modal-amount" placeholder="0.00" oninput="calculatePlatformFees()" />
+            </div>
+
+            <div class="fee-preview-box">
+                <div class="fee-row">
+                    <span>Interbank FX Margin Spread</span>
+                    <span>0.00% (Guaranteed)</span>
+                </div>
+                <div class="fee-row">
+                    <span>Noetfield Processing Fee (0.4%)</span>
+                    <span id="calculated-fee">$0.00 CAD</span>
+                </div>
+                <div class="fee-row total">
+                    <span>Total Settlement Deduction</span>
+                    <span id="calculated-total">$0.00 CAD</span>
+                </div>
+            </div>
+
+            <button class="btn-action" style="width: 100%; justify-content: center; padding: 14px;" onclick="executeMockTransfer()">
+                Authorize Route Vector →
+            </button>
+        </div>
+    </div>
+
+    <!-- --- OPERATIONAL REALSIM CONTROLLER --- -->
     <script>
-        function rotateKey() {
-            const hex = Array.from({length: 8}, () => Math.floor(Math.random()*16).toString(16)).join('');
-            document.getElementById('key-string').innerText = `sk_sandbox_777_noet_${hex}...`;
-            console.log("Credentials rotated globally within isolation container.");
+        function toggleSidebar(open) {
+            const sidebar = document.getElementById('dashboard-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (open) {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+            } else {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
         }
 
-        function copyKey() {
-            alert("Sandbox API key string copied to clipboard infrastructure context.");
+        function toggleEnv(mode) {
+            const sandboxBtn = document.getElementById('env-sandbox');
+            const liveBtn = document.getElementById('env-live');
+            const indicator = document.getElementById('environment-indicator');
+
+            if (mode === 'live') {
+                alert("🔒 Regulatory Protocol Notice:\n\nProduction environment onboarding requires verified Canadian FINTRAC documentation matching corporate legal entity registry identifiers.");
+                sandboxBtn.classList.remove('active');
+                sandboxBtn.classList.add('inactive');
+                liveBtn.classList.add('active');
+                liveBtn.classList.remove('inactive');
+                indicator.innerText = "Production rail active — Restricted access pending compliance sign-off";
+                indicator.style.color = "#ffb703";
+            } else {
+                liveBtn.classList.remove('active');
+                liveBtn.classList.add('inactive');
+                sandboxBtn.classList.add('active');
+                sandboxBtn.classList.remove('inactive');
+                indicator.innerText = "Currently operating in multi-currency isolated Sandbox mode";
+                indicator.style.color = "var(--text-muted)";
+            }
         }
 
-        function focusApiKey() {
-            const target = document.getElementById('key-string');
-            target.style.borderColor = 'var(--accent)';
-            setTimeout(() => target.style.borderColor = 'var(--border-color)', 600);
+        function toggleModal(show) {
+            const modal = document.getElementById('transfer-modal');
+            if (show) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+                document.getElementById('modal-beneficiary').value = '';
+                document.getElementById('modal-amount').value = '';
+                document.getElementById('calculated-fee').innerText = '$0.00 CAD';
+                document.getElementById('calculated-total').innerText = '$0.00 CAD';
+            }
+        }
+
+        function calculatePlatformFees() {
+            const amtInput = document.getElementById('modal-amount').value;
+            const amount = parseFloat(amtInput) || 0;
+            const fee = amount * 0.004;
+            const total = amount;
+
+            document.getElementById('calculated-fee').innerText = `$${fee.toFixed(2)} CAD`;
+            document.getElementById('calculated-total').innerText = `$${total.toFixed(2)} CAD`;
+        }
+
+        function executeMockTransfer() {
+            const beneficiary = document.getElementById('modal-beneficiary').value;
+            const corridor = document.getElementById('modal-corridor').value;
+            const amtInput = document.getElementById('modal-amount').value;
+            const amount = parseFloat(amtInput) || 0;
+
+            if (!beneficiary || amount <= 0) {
+                alert("Complete core parameters before authorization.");
+                return;
+            }
+
+            const randomHash = "0x" + Math.random().toString(16).substr(2, 4) + "..." + Math.random().toString(16).substr(2, 4);
+            const tableBody = document.getElementById('ledger-body');
+            const newRow = document.createElement('tr');
+            
+            newRow.innerHTML = `
+                <td class="tx-hash">${randomHash}</td>
+                <td>${beneficiary}</td>
+                <td>${corridor}</td>
+                <td>$${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} CAD</td>
+                <td><span class="status-pill pending">In Flight</span></td>
+            `;
+
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+
+            const currentBalance = parseFloat(document.getElementById('balance-val').innerText.replace(/[^0-9.-]+/g,""));
+            const currentInflight = parseFloat(document.getElementById('inflight-val').innerText.replace(/[^0-9.-]+/g,""));
+
+            document.getElementById('balance-val').innerText = `$${(currentBalance + amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('inflight-val').innerText = `$${(currentInflight + amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+            toggleModal(false);
         }
     </script>
 </body>
