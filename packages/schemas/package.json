@@ -1,0 +1,6 @@
+{
+  "name": "@noetfield/schemas",
+  "private": true,
+  "version": "0.3.1",
+  "description": "Shared Noetfield JSON and YAML schemas."
+}

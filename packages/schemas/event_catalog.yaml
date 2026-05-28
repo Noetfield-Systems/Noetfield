@@ -1,0 +1,26 @@
+version: "0.3.1"
+events:
+  SIGNAL_INGESTED:
+    layer: raw_signal
+    description: Immutable raw signal captured.
+  ENTITY_CREATED:
+    layer: normalized_intelligence
+    description: Normalized entity created.
+  RELATIONSHIP_INFERRED:
+    layer: living_knowledge_graph
+    description: Relationship inferred with evidence and confidence.
+  POLICY_EVALUATED:
+    layer: governance_ledger
+    description: Governance policy evaluated.
+  HUMAN_OVERRIDE_TRIGGERED:
+    layer: governance_ledger
+    description: Human governance boundary interrupted automation.
+  WORKFLOW_APPROVED:
+    layer: governance_ledger
+    description: Workflow received a human approval.
+  GRAPH_UPDATED:
+    layer: living_knowledge_graph
+    description: Knowledge graph projection changed.
+  INSPECTOR_COMPLETED:
+    layer: operational_runtime
+    description: Ambient inspector run completed.

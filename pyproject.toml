@@ -1,0 +1,78 @@
+[project]
+name = "noetfield"
+version = "0.3.1"
+description = "Executable foundation for the Noetfield governed intelligence nervous system."
+requires-python = ">=3.11"
+dependencies = [
+  "anthropic",
+  "asyncpg",
+  "fastapi",
+  "langchain-core",
+  "langgraph",
+  "openai",
+  "opentelemetry-api",
+  "opentelemetry-sdk",
+  "pydantic",
+  "pydantic-settings",
+  "python-dotenv",
+  "redis",
+  "sqlalchemy",
+  "structlog",
+  "supabase",
+  "temporalio",
+  "uvicorn",
+]
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = [
+  "packages/types",
+  "packages/config",
+  "services/events",
+  "services/ledger",
+  "services/graph",
+  "services/governance",
+  "services/workflow",
+  "services/ai-runtime",
+  "services/inspectors",
+  "services/identity",
+]
+include = ["noetfield_*"]
+
+[project.optional-dependencies]
+dev = [
+  "mypy",
+  "pytest",
+  "ruff",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+warn_return_any = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [
+  "packages/types",
+  "packages/config",
+  "services/events",
+  "services/ledger",
+  "services/graph",
+  "services/governance",
+  "services/workflow",
+  "services/ai-runtime",
+  "services/inspectors",
+  "services/identity",
+]

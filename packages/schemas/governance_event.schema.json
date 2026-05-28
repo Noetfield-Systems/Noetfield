@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.noetfield.com/governance-event.schema.json",
+  "title": "Noetfield Governance Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "event_version",
+    "tenant_id",
+    "organization_id",
+    "actor",
+    "source_service",
+    "correlation_id",
+    "occurred_at",
+    "entity_type",
+    "entity_id",
+    "payload"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "format": "uuid" },
+    "event_type": { "type": "string" },
+    "event_version": { "type": "string" },
+    "tenant_id": { "type": "string", "format": "uuid" },
+    "organization_id": { "type": "string", "format": "uuid" },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_type", "actor_id", "display_name"],
+      "properties": {
+        "actor_type": {
+          "type": "string",
+          "enum": ["human", "service", "ai", "inspector"]
+        },
+        "actor_id": { "type": "string" },
+        "display_name": { "type": "string" }
+      }
+    },
+    "source_service": { "type": "string" },
+    "source_request_id": { "type": ["string", "null"] },
+    "correlation_id": { "type": "string", "format": "uuid" },
+    "causation_id": { "type": ["string", "null"], "format": "uuid" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "received_at": { "type": ["string", "null"], "format": "date-time" },
+    "entity_type": { "type": "string" },
+    "entity_id": { "type": "string" },
+    "policy_context": { "type": "object" },
+    "risk_context": { "type": "object" },
+    "payload": { "type": "object" },
+    "integrity_hash": { "type": ["string", "null"] }
+  }
+}
