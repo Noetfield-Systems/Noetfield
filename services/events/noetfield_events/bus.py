@@ -1,11 +1,4 @@
-"""Async event bus runtime for Noetfield Phase 3 activation.
-
-This module intentionally starts as an in-process runtime. It gives the
-platform live behavior, replayable append-only event memory, tracing metadata,
-and dead-letter handling without introducing premature infrastructure
-complexity. A Redis, Postgres, or cloud event adapter can later implement the
-same contracts.
-"""
+"""Async event bus runtime for Noetfield Phase 3 activation."""
 
 from __future__ import annotations
 
@@ -14,6 +7,7 @@ from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from time import perf_counter
+from typing import Any
 from uuid import UUID, uuid4
 
 from noetfield_types import GovernanceEvent
@@ -77,13 +71,26 @@ class EventBusSnapshot:
 
 
 class AsyncEventBus:
-    """Replayable append-only event bus with subscriber dispatch."""
+    """Replayable append-only event bus with optional durable persistence.
 
-    def __init__(self, max_retained_events: int = 10_000) -> None:
+    `event_store` and `dead_letter_store` are duck-typed adapters. The default
+    path remains in-memory so local development and tests do not require a
+    database. Production runtimes should provide PostgreSQL-backed adapters.
+    """
+
+    def __init__(
+        self,
+        *,
+        max_retained_events: int = 10_000,
+        event_store: Any | None = None,
+        dead_letter_store: Any | None = None,
+    ) -> None:
         self._max_retained_events = max_retained_events
         self._events: list[tuple[int, GovernanceEvent, EventTrace]] = []
         self._subscriptions: dict[str, Subscription] = {}
         self._dead_letters: list[DeadLetterRecord] = []
+        self._event_store = event_store
+        self._dead_letter_store = dead_letter_store
         self._sequence = 0
         self._delivered = 0
         self._lock = asyncio.Lock()
@@ -102,10 +109,14 @@ class AsyncEventBus:
 
         async with self._lock:
             self._sequence += 1
-            self._events.append((self._sequence, event, trace))
+            sequence = self._sequence
+            self._events.append((sequence, event, trace))
             if len(self._events) > self._max_retained_events:
                 self._events = self._events[-self._max_retained_events :]
             subscriptions = list(self._subscriptions.values())
+
+        if self._event_store is not None:
+            await self._event_store.append(event, trace)
 
         start = perf_counter()
         await asyncio.gather(
@@ -146,7 +157,13 @@ class AsyncEventBus:
             self._subscriptions.pop(name, None)
 
     async def replay(self, cursor: EventReplayCursor) -> list[GovernanceEvent]:
-        """Replay retained events after a sequence number."""
+        """Replay retained or durable events after a sequence number."""
+
+        if self._event_store is not None:
+            records = await self._event_store.replay(
+                after_sequence=cursor.after_sequence, event_types=cursor.event_types
+            )
+            return [record.event for record in records]
 
         async with self._lock:
             return [
@@ -157,6 +174,19 @@ class AsyncEventBus:
             ]
 
     async def snapshot(self, *, limit: int = 25) -> EventBusSnapshot:
+        if self._event_store is not None:
+            recent_records = await self._event_store.recent(limit=limit)
+            recent_events = [record.event for record in recent_records]
+        else:
+            async with self._lock:
+                recent_events = [event for _seq, event, _trace in self._events[-limit:]]
+
+        if self._dead_letter_store is not None:
+            dead_letters = await self._dead_letter_store.recent(limit=limit)
+        else:
+            async with self._lock:
+                dead_letters = self._dead_letters[-limit:]
+
         async with self._lock:
             metrics = EventBusMetrics(
                 published=self._sequence,
@@ -165,8 +195,6 @@ class AsyncEventBus:
                 subscribers=len(self._subscriptions),
                 retained_events=len(self._events),
             )
-            recent_events = [event for _seq, event, _trace in self._events[-limit:]]
-            dead_letters = self._dead_letters[-limit:]
         return EventBusSnapshot(metrics=metrics, recent_events=recent_events, dead_letters=dead_letters)
 
     async def _dispatch(
@@ -189,6 +217,8 @@ class AsyncEventBus:
             )
             async with self._lock:
                 self._dead_letters.append(dead_letter)
+            if self._dead_letter_store is not None:
+                await self._dead_letter_store.append(dead_letter)
         else:
             async with self._lock:
                 self._delivered += 1

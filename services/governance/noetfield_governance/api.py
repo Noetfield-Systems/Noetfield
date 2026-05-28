@@ -5,7 +5,14 @@ from uuid import UUID
 from fastapi import FastAPI
 from pydantic import BaseModel, ConfigDict
 
-from noetfield_events import AsyncEventBus, EventReplayCursor, event_catalog
+from noetfield_config import get_settings
+from noetfield_events import (
+    AsyncEventBus,
+    EventReplayCursor,
+    PostgresDeadLetterStore,
+    PostgresEventStore,
+    event_catalog,
+)
 from noetfield_governance.runtime import (
     ApprovalDecision,
     GovernanceActionCommand,
@@ -27,13 +34,21 @@ from noetfield_inspectors import (
 )
 from noetfield_signals import InMemorySignalStore, IngestSignalCommand, SignalIngestionPipeline
 
+settings = get_settings()
+
 app = FastAPI(
     title="Noetfield Platform API",
     version="0.3.1",
     description="Runtime activation for governed ambient intelligence.",
 )
 
-event_bus = AsyncEventBus()
+event_store = None
+dead_letter_store = None
+if settings.runtime_event_store == "postgres":
+    event_store = PostgresEventStore(settings.database_url)
+    dead_letter_store = PostgresDeadLetterStore(settings.database_url)
+
+event_bus = AsyncEventBus(event_store=event_store, dead_letter_store=dead_letter_store)
 signal_store = InMemorySignalStore()
 graph_store = InMemoryGraphStore()
 approval_queue = HumanApprovalQueue()
@@ -63,9 +78,22 @@ class ReflectionRequest(BaseModel):
     organization_id: UUID
 
 
+@app.on_event("shutdown")
+async def shutdown_runtime() -> None:
+    for store in (event_store, dead_letter_store):
+        close = getattr(store, "close", None)
+        if close is not None:
+            await close()
+
+
 @app.get("/health", tags=["system"])
 async def health() -> dict[str, str]:
-    return {"status": "ok", "service": "noetfield-platform", "runtime": "phase-3"}
+    return {
+        "status": "ok",
+        "service": "noetfield-platform",
+        "runtime": "phase-3.1",
+        "event_store": settings.runtime_event_store,
+    }
 
 
 @app.get("/events/catalog", tags=["events"])
@@ -133,6 +161,10 @@ async def runtime_console() -> dict[str, object]:
     pending_approvals = await approval_queue.list_pending()
     relationships = list(graph_store.relationships.values())
     return {
+        "runtime": {
+            "phase": "3.1",
+            "event_store": settings.runtime_event_store,
+        },
         "events": {
             "metrics": event_snapshot.metrics,
             "recent": [event.model_dump(mode="json") for event in event_snapshot.recent_events],
