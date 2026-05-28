@@ -113,6 +113,7 @@ copilot_demo_runtime = CopilotGovernanceDemoRuntime(
     graph_mutations=graph_mutations,
     graph_reflections=graph_reflections,
     workflow_state_machine=workflow_state_machine,
+    governance_runtime=governance_runtime,
     run_store=copilot_run_store,
 )
 

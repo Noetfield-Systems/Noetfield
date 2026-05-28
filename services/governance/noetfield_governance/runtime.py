@@ -237,7 +237,14 @@ class GovernanceRuntime:
                 action=command.action,
                 resource_type=command.resource_type,
                 resource_id=command.resource_id,
-                context=command.payload,
+                context={
+                    **command.payload,
+                    "actor_type": command.actor_type.value,
+                    "confidence": command.confidence,
+                    "blocked_actions": command.governance_boundary.blocked_actions,
+                    "allowed_actions": command.governance_boundary.allowed_actions,
+                    "policy_refs": command.governance_boundary.policy_refs,
+                },
             )
         )
         await self.event_bus.publish(

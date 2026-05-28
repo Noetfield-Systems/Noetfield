@@ -60,7 +60,7 @@ from noetfield_signals import (
     PostgresSignalStore,
     SignalIngestionPipeline,
 )
-from noetfield_types import WorkflowState
+from noetfield_types import ActorType, WorkflowState
 from noetfield_workflow import (
     InMemoryWorkflowStore,
     PostgresWorkflowStore,
@@ -212,6 +212,7 @@ async def run_smoke(*, use_postgres: bool, database_url: str | None) -> None:
             resource_type="graph_reflection",
             resource_id=str(reflection.reflection_id),
             actor_id="phase-3-2-smoke",
+            actor_type=ActorType.HUMAN,
             confidence=0.7,
         )
     )
@@ -235,6 +236,7 @@ async def run_smoke(*, use_postgres: bool, database_url: str | None) -> None:
         graph_mutations=graph_mutations,
         graph_reflections=graph_reflections,
         workflow_state_machine=workflow_state_machine,
+        governance_runtime=governance_runtime,
         run_store=copilot_store,
     )
     copilot = await copilot_runtime.run(
@@ -258,6 +260,7 @@ async def run_smoke(*, use_postgres: bool, database_url: str | None) -> None:
     assert pending
     assert inspector_run.status == "completed"
     assert copilot.workflow_state == WorkflowState.PENDING_REVIEW
+    assert copilot.approval_id is not None
     assert len(replayed) >= 10
     assert dead_letters == []
 

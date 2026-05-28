@@ -4,6 +4,13 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .policy_pack import (
+    GovernancePolicyPack,
+    PolicyDecisionCode,
+    context_float,
+    context_int,
+)
+
 
 class PolicyInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -22,23 +29,97 @@ class PolicyEvaluation(BaseModel):
     allowed: bool
     requires_human_review: bool
     reason: str
+    reason_code: PolicyDecisionCode
     policy_refs: list[str] = Field(default_factory=list)
     obligations: list[str] = Field(default_factory=list)
 
 
 class PolicyEvaluator:
-    """OPA-ready policy boundary.
+    """Deterministic governance policy evaluator.
 
-    This class defines the stable contract. A future adapter should delegate to
-    OPA for tenant-specific policy bundles while preserving this response model.
+    This class is OPA-ready but does not require OPA to enforce baseline
+    runtime rules. Every decision includes a reason code, policy refs, and
+    obligations so it can be audited and replayed.
     """
 
+    def __init__(self, policy_pack: GovernancePolicyPack | None = None) -> None:
+        self.policy_pack = policy_pack or GovernancePolicyPack()
+
     def evaluate(self, policy_input: PolicyInput) -> PolicyEvaluation:
-        high_impact_actions = {"approve_workflow", "execute_inspector_action", "publish_report"}
-        return PolicyEvaluation(
+        context = policy_input.context
+        actor_type = str(context.get("actor_type", "service"))
+        confidence = context_float(context, "confidence", 1.0)
+        blocked_actions = set(context.get("blocked_actions", []) or [])
+        inspector_count = context_int(context, "inspector_count", 0)
+        module = str(context.get("module", ""))
+
+        if policy_input.action in blocked_actions:
+            return self._decision(
+                allowed=False,
+                requires_human_review=False,
+                reason="Action is explicitly blocked by the governance boundary.",
+                reason_code=PolicyDecisionCode.VETO_BLOCKED_ACTION,
+            )
+
+        if (
+            actor_type in {"ai", "service", "inspector"}
+            and policy_input.action in self.policy_pack.blocked_autonomous_actions
+        ):
+            return self._decision(
+                allowed=False,
+                requires_human_review=False,
+                reason="Autonomous actors cannot silently publish, export, or approve governed artifacts.",
+                reason_code=PolicyDecisionCode.VETO_AUTONOMOUS_PUBLICATION,
+            )
+
+        if inspector_count > self.policy_pack.inspector_execution_limit:
+            return self._decision(
+                allowed=False,
+                requires_human_review=False,
+                reason="Inspector execution exceeds bounded collaboration limit.",
+                reason_code=PolicyDecisionCode.VETO_INSPECTOR_LIMIT,
+            )
+
+        if confidence < self.policy_pack.minimum_confidence:
+            return self._decision(
+                allowed=True,
+                requires_human_review=True,
+                reason="Confidence is below the governance threshold and requires human review.",
+                reason_code=PolicyDecisionCode.VETO_LOW_CONFIDENCE,
+            )
+
+        requires_review = policy_input.action in self.policy_pack.high_impact_actions
+        if module == "copilot_governance":
+            requires_review = True
+
+        if requires_review:
+            return self._decision(
+                allowed=True,
+                requires_human_review=True,
+                reason="High-impact governance action requires human review.",
+                reason_code=PolicyDecisionCode.REQUIRE_HUMAN_REVIEW,
+            )
+
+        return self._decision(
             allowed=True,
-            requires_human_review=policy_input.action in high_impact_actions,
-            reason="baseline policy contract",
-            policy_refs=["noetfield:governance-baseline:v1"],
-            obligations=["emit_governance_event", "retain_audit_trace"],
+            requires_human_review=False,
+            reason="Policy allowed action without additional review.",
+            reason_code=PolicyDecisionCode.ALLOW,
+        )
+
+    def _decision(
+        self,
+        *,
+        allowed: bool,
+        requires_human_review: bool,
+        reason: str,
+        reason_code: PolicyDecisionCode,
+    ) -> PolicyEvaluation:
+        return PolicyEvaluation(
+            allowed=allowed,
+            requires_human_review=requires_human_review,
+            reason=reason,
+            reason_code=reason_code,
+            policy_refs=self.policy_pack.policy_refs(),
+            obligations=self.policy_pack.obligations_for(requires_human_review=requires_human_review),
         )

@@ -10,6 +10,7 @@ from uuid import UUID, uuid4
 import asyncpg
 from pydantic import BaseModel, ConfigDict, Field
 
+from noetfield_governance import GovernanceActionCommand, GovernanceRuntime
 from noetfield_graph import GraphMutationCommand, LiveGraphMutationEngine, TemporalGraphReflectionCycle
 from noetfield_signals import IngestSignalCommand, SignalIngestionPipeline
 from noetfield_types import WorkflowState
@@ -38,6 +39,7 @@ class CopilotGovernanceDemoResult(BaseModel):
     reflection_id: UUID
     workflow_id: UUID
     workflow_state: WorkflowState
+    approval_id: UUID | None = None
     replay_hint: str
 
 
@@ -121,12 +123,14 @@ class CopilotGovernanceDemoRuntime:
         graph_mutations: LiveGraphMutationEngine,
         graph_reflections: TemporalGraphReflectionCycle,
         workflow_state_machine: WorkflowStateMachine,
+        governance_runtime: GovernanceRuntime | None = None,
         run_store: CopilotGovernanceRunStore | None = None,
     ) -> None:
         self._signal_pipeline = signal_pipeline
         self._graph_mutations = graph_mutations
         self._graph_reflections = graph_reflections
         self._workflow_state_machine = workflow_state_machine
+        self._governance_runtime = governance_runtime
         self._run_store = run_store
 
     async def run(self, command: CopilotGovernanceCommand) -> CopilotGovernanceDemoResult:
@@ -177,6 +181,26 @@ class CopilotGovernanceDemoRuntime:
                 reason="Copilot Governance requires human approval before publication.",
             )
         )
+        approval_id = None
+        if self._governance_runtime is not None:
+            governed = await self._governance_runtime.execute(
+                GovernanceActionCommand(
+                    tenant_id=command.tenant_id,
+                    organization_id=command.organization_id,
+                    action="run_copilot_governance_demo",
+                    resource_type="copilot_governance_run",
+                    resource_id=str(workflow.workflow_id),
+                    actor_id=command.submitted_by,
+                    confidence=0.8,
+                    payload={
+                        "module": "copilot_governance",
+                        "workflow_id": str(workflow.workflow_id),
+                        "reflection_id": str(reflection.reflection_id),
+                    },
+                )
+            )
+            approval_id = governed.approval_id
+
         result = CopilotGovernanceDemoResult(
             tenant_id=command.tenant_id,
             organization_id=command.organization_id,
@@ -185,6 +209,7 @@ class CopilotGovernanceDemoRuntime:
             reflection_id=reflection.reflection_id,
             workflow_id=workflow.workflow_id,
             workflow_state=workflow.state,
+            approval_id=approval_id,
             replay_hint="/events/replay?after_sequence=0&event_type=*",
         )
         if self._run_store is not None:

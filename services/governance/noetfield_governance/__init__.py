@@ -1,6 +1,7 @@
 """Governance service boundary."""
 
 from .policies import PolicyEvaluation, PolicyEvaluator, PolicyInput
+from .policy_pack import GovernancePolicyPack, GovernancePolicyRule, PolicyDecisionCode
 from .runtime import (
     ApprovalDecision,
     ApprovalRequest,
@@ -18,9 +19,12 @@ __all__ = [
     "GovernanceActionCommand",
     "GovernanceExecutionResult",
     "GovernanceExecutionState",
+    "GovernancePolicyPack",
+    "GovernancePolicyRule",
     "GovernanceRuntime",
     "HumanApprovalQueue",
     "PostgresApprovalQueueStore",
+    "PolicyDecisionCode",
     "PolicyEvaluation",
     "PolicyEvaluator",
     "PolicyInput",

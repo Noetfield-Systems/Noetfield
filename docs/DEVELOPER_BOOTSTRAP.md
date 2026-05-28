@@ -85,3 +85,5 @@ See [PHASE_3_3_POSTGRES_VERIFICATION.md](PHASE_3_3_POSTGRES_VERIFICATION.md).
 - Add tenant boundaries to new data models from the beginning.
 - Use confidence thresholds and human approval queues for consequential runtime
   actions.
+
+See also [PHASE_3_4_POLICY_PACK.md](PHASE_3_4_POLICY_PACK.md).
