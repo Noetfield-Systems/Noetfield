@@ -9,7 +9,7 @@ from typing import Protocol
 import asyncpg
 
 from .bus import DeadLetterRecord, EventTrace
-from noetfield_types import Actor, ActorType, GovernanceEvent
+from noetfield_types import Actor, ActorType, GovernanceEvent, coerce_jsonb_mapping
 
 
 @dataclass(frozen=True)
@@ -252,9 +252,9 @@ class PostgresEventStore:
             occurred_at=row["occurred_at"],
             entity_type=row["entity_type"],
             entity_id=row["entity_id"],
-            policy_context=dict(row["policy_context"] or {}),
-            risk_context=dict(row["risk_context"] or {}),
-            payload=dict(row["payload"] or {}),
+            policy_context=coerce_jsonb_mapping(row["policy_context"]),
+            risk_context=coerce_jsonb_mapping(row["risk_context"]),
+            payload=coerce_jsonb_mapping(row["payload"]),
             integrity_hash=row["integrity_hash"],
         )
         trace = EventTrace(
@@ -338,7 +338,7 @@ class PostgresDeadLetterStore:
             )
         records: list[DeadLetterRecord] = []
         for row in reversed(rows):
-            trace_payload = dict(row["trace"] or {})
+            trace_payload = coerce_jsonb_mapping(row["trace"])
             event = GovernanceEvent(
                 event_id=row["event_id"],
                 event_type=row["event_type"],
@@ -353,7 +353,7 @@ class PostgresDeadLetterStore:
                 entity_type="event",
                 entity_id=str(row["event_id"]),
                 occurred_at=row["failed_at"],
-                payload=dict(row["payload"] or {}),
+                payload=coerce_jsonb_mapping(row["payload"]),
             )
             trace = EventTrace(
                 trace_id=trace_payload.get("trace_id"),

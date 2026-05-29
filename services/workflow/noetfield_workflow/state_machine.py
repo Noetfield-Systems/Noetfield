@@ -12,7 +12,7 @@ import asyncpg
 from pydantic import BaseModel, ConfigDict, Field
 
 from noetfield_events import AsyncEventBus, EventType, build_event
-from noetfield_types import Actor, ActorType, WorkflowState
+from noetfield_types import Actor, ActorType, WorkflowState, coerce_jsonb_mapping
 
 
 ALLOWED_TRANSITIONS: dict[WorkflowState, set[WorkflowState]] = {
@@ -133,7 +133,7 @@ class PostgresWorkflowStore:
                 workflow.target_entity_type,
                 workflow.target_entity_id,
                 workflow.state.value,
-                json.dumps(workflow.payload, default=str),
+                workflow.payload,
                 workflow.created_by,
                 workflow.created_at,
                 workflow.updated_at,
@@ -164,7 +164,7 @@ class PostgresWorkflowStore:
             target_entity_type=row["target_entity_type"],
             target_entity_id=row["target_entity_id"],
             state=WorkflowState(row["state"]),
-            payload=dict(row["payload"] or {}),
+            payload=coerce_jsonb_mapping(row["payload"]),
             created_by=row["created_by"],
             created_at=row["created_at"],
             updated_at=row["updated_at"],
@@ -184,7 +184,7 @@ class PostgresWorkflowStore:
                     where id = $4 and tenant_id = $5
                     """,
                     workflow.state.value,
-                    json.dumps(workflow.payload, default=str),
+                    workflow.payload,
                     workflow.updated_at,
                     workflow.workflow_id,
                     workflow.tenant_id,
@@ -220,7 +220,7 @@ class PostgresWorkflowStore:
             reason,
             workflow.state.value,
             actor_id,
-            json.dumps(workflow.payload, default=str),
+            workflow.payload,
         )
 
 
