@@ -79,36 +79,6 @@ class InMemoryGraphStore:
         self.relationships[relationship.relationship_id] = relationship
         return relationship
 
-    async def _ensure_entity(
-        self,
-        connection: asyncpg.Connection,
-        tenant_id: UUID,
-        organization_id: UUID,
-        entity_id: UUID,
-        entity_type: str,
-        canonical_name: str,
-    ) -> None:
-        await connection.execute(
-            """
-            insert into noetfield.entities (
-              id,
-              tenant_id,
-              organization_id,
-              entity_type,
-              canonical_name,
-              confidence,
-              attributes
-            )
-            values ($1, $2, $3, $4, $5, 0.5000, '{}'::jsonb)
-            on conflict (id) do nothing
-            """,
-            entity_id,
-            tenant_id,
-            organization_id,
-            entity_type,
-            canonical_name,
-        )
-
     async def relationships_for_tenant(self, tenant_id: UUID) -> list[EntityRelationship]:
         return [
             relationship
@@ -150,6 +120,36 @@ class PostgresGraphStore:
         if self._pool is not None:
             await self._pool.close()
             self._pool = None
+
+    async def _ensure_entity(
+        self,
+        connection: asyncpg.Connection,
+        tenant_id: UUID,
+        organization_id: UUID,
+        entity_id: UUID,
+        entity_type: str,
+        canonical_name: str,
+    ) -> None:
+        await connection.execute(
+            """
+            insert into noetfield.entities (
+              id,
+              tenant_id,
+              organization_id,
+              entity_type,
+              canonical_name,
+              confidence,
+              attributes
+            )
+            values ($1, $2, $3, $4, $5, 0.5000, '{}'::jsonb)
+            on conflict (id) do nothing
+            """,
+            entity_id,
+            tenant_id,
+            organization_id,
+            entity_type,
+            canonical_name,
+        )
 
     async def upsert_relationship(self, relationship: EntityRelationship) -> EntityRelationship:
         await self.connect()
