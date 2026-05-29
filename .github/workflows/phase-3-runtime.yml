@@ -64,5 +64,10 @@ jobs:
       - name: Run PostgreSQL smoke
         run: python scripts/phase_3_2_backend_smoke.py --postgres
 
-      - name: Run pytest verification
-        run: pytest tests/unit tests/integration
+      - name: Run pytest verification (unit, in-memory runtime)
+        env:
+          RUNTIME_EVENT_STORE: memory
+        run: pytest tests/unit -q
+
+      - name: Run PostgreSQL integration verification
+        run: pytest tests/integration/test_phase_3_3_postgres_runtime.py -q

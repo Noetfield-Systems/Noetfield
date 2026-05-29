@@ -11,7 +11,7 @@ from uuid import UUID, uuid4
 import asyncpg
 from pydantic import BaseModel, ConfigDict, Field
 
-from noetfield_types import GovernanceEvent
+from noetfield_types import GovernanceEvent, coerce_jsonb_mapping
 
 
 class AuditRecord(BaseModel):
@@ -140,7 +140,7 @@ class PostgresAuditLedgerStore:
                 resource_id=row["resource_id"],
                 occurred_at=row["occurred_at"],
                 request_id=row["request_id"],
-                metadata=dict(row["metadata"] or {}),
+                metadata=coerce_jsonb_mapping(row["metadata"]),
                 integrity_hash=row["integrity_hash"],
             )
             for row in reversed(rows)
@@ -184,7 +184,7 @@ class PostgresAuditLedgerStore:
                 resource_id=row["resource_id"],
                 occurred_at=row["occurred_at"],
                 request_id=row["request_id"],
-                metadata=dict(row["metadata"] or {}),
+                metadata=coerce_jsonb_mapping(row["metadata"]),
                 integrity_hash=row["integrity_hash"],
             )
             for row in reversed(rows)
