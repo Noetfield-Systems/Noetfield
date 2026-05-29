@@ -1,7 +1,7 @@
 {
-  "batch_id": "2026-05-001",
+  "batch_id": "2026-05-combined",
   "created_at": "2026-05-29T00:00:00Z",
-  "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001",
+  "source_folder": "docs/SOURCE_OF_TRUTH/uploaded",
   "documents": [
     {
       "document_key": "wp03-npl-formal-grammar-2026-05-npl-1",
@@ -145,6 +145,96 @@
       "status": "duplicate",
       "supersedes": [],
       "superseded_by": "wp03-npl-formal-grammar-2026-05-npl-1"
+    },
+    {
+      "document_key": "perplexity-ai-native-development-guidelines",
+      "title": "AI-Native Development System Guidelines - Perplexity",
+      "domain": "ai_native_development_guidelines",
+      "work_package": "reference",
+      "version_label": "2026-guidelines-perplexity",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-002/perplexity-ai-native-development-guidelines.md",
+      "classification": "active_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-002"
+    },
+    {
+      "document_key": "grok-ai-native-dev-system-2026",
+      "title": "AI-Native Development System Guidelines 2026 - Grok",
+      "domain": "ai_native_development_guidelines",
+      "work_package": "reference",
+      "version_label": "2026-guidelines-grok",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-002/grok-ai-native-dev-system-2026.md",
+      "classification": "active_reference",
+      "status": "reference",
+      "supersedes": [
+        "grok-ai-native-dev-system-duplicate"
+      ],
+      "superseded_by": null,
+      "upload_batch": "2026-05-002"
+    },
+    {
+      "document_key": "grok-ai-native-dev-system-duplicate",
+      "title": "AI-Native Development System Guidelines 2026 - Grok Duplicate",
+      "domain": "ai_native_development_guidelines",
+      "work_package": "reference",
+      "version_label": "duplicate",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-002/grok-ai-native-dev-system-duplicate.md",
+      "classification": "duplicate",
+      "status": "duplicate",
+      "supersedes": [],
+      "superseded_by": "grok-ai-native-dev-system-2026",
+      "upload_batch": "2026-05-002"
+    },
+    {
+      "document_key": "copilot-orchestration-policy-layer-fa-normalized",
+      "title": "Orchestration and Policy Layer Notes - Copilot Persian Normalized",
+      "domain": "developer_os_strategy",
+      "work_package": "WP-04",
+      "version_label": "2026-copilot-fa-notes",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-002/copilot-orchestration-policy-layer-fa-normalized.md",
+      "classification": "supporting_strategy",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": "orchestration-policy-layer-source-of-truth-2026",
+      "upload_batch": "2026-05-002"
+    },
+    {
+      "document_key": "cursor-ide-shortcuts-m5-pro-2026",
+      "title": "Cursor IDE Keyboard Shortcuts Guidelines - MacBook M5 Pro 2026",
+      "domain": "operator_workflow",
+      "work_package": "reference",
+      "version_label": "2026-cursor-shortcuts",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-002/cursor-ide-shortcuts-m5-pro-2026.md",
+      "classification": "reference_only",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-002"
+    },
+    {
+      "document_key": "posa-saas-first-100-users-launch-strategy-v1",
+      "title": "POSA SaaS - First 100 Users Launch Strategy v1.0",
+      "domain": "posa_gtm",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-002/posa-saas-first-100-users-launch-strategy-v1.md",
+      "classification": "external_product_gtm_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-002"
+    }
+  ],
+  "batches": [
+    {
+      "batch_id": "2026-05-001",
+      "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001"
+    },
+    {
+      "batch_id": "2026-05-002",
+      "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-002"
     }
   ]
 }

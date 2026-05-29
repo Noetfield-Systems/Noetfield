@@ -40,6 +40,30 @@
       "decision": "active_reference_needs_formal_spec",
       "rationale": "This is the strongest uploaded Security Agent source, but it should be formalized into WP-05 Agent Behavior Monitoring and Security Agent specs before becoming executable.",
       "confidence": 0.8
+    },
+    {
+      "domain": "ai_native_development_guidelines",
+      "active_document_key": "perplexity-ai-native-development-guidelines",
+      "active_version": "2026-guidelines-perplexity",
+      "decision": "active_reference",
+      "rationale": "Perplexity guidelines provide the strongest architecture-level framing around unified state, trust infrastructure, persistent memory, and policy-driven orchestration. Grok is retained as practical tooling reference.",
+      "confidence": 0.84
+    },
+    {
+      "domain": "operator_workflow",
+      "active_document_key": "cursor-ide-shortcuts-m5-pro-2026",
+      "active_version": "2026-cursor-shortcuts",
+      "decision": "reference_only",
+      "rationale": "Useful operator enablement reference for Cursor workflows, but not a platform governance source-of-truth.",
+      "confidence": 0.7
+    },
+    {
+      "domain": "posa_gtm",
+      "active_document_key": "posa-saas-first-100-users-launch-strategy-v1",
+      "active_version": "v1.0",
+      "decision": "external_product_reference",
+      "rationale": "POSA launch plan is a GTM reference for a separate product concept and should not affect Noetfield runtime governance unless explicitly scoped later.",
+      "confidence": 0.72
     }
   ]
 }

@@ -54,6 +54,42 @@
       "rule_type": "agent_monitoring",
       "summary": "Security Agent monitors agent behavior and can block, throttle, or require approval.",
       "implementation_target": "agent_monitoring"
+    },
+    {
+      "rule_key": "agents-must-not-act-on-stale-state",
+      "domain": "ai_native_development_guidelines",
+      "source_document_key": "perplexity-ai-native-development-guidelines",
+      "activation_status": "active_design_rule",
+      "rule_type": "state_integrity",
+      "summary": "Agents must not act on stale or partial state; runtime actions should derive from synchronized state snapshots.",
+      "implementation_target": "context_graph_runtime"
+    },
+    {
+      "rule_key": "trust-infrastructure-required-for-autonomy",
+      "domain": "ai_native_development_guidelines",
+      "source_document_key": "perplexity-ai-native-development-guidelines",
+      "activation_status": "active_design_rule",
+      "rule_type": "trust_runtime",
+      "summary": "Every agent action must be explainable, traceable, reproducible, auditable, and scoped before autonomy scales.",
+      "implementation_target": "audit_ledger_runtime"
+    },
+    {
+      "rule_key": "multi-agent-coordination-protocol-required",
+      "domain": "ai_native_development_guidelines",
+      "source_document_key": "perplexity-ai-native-development-guidelines",
+      "activation_status": "candidate_requires_formalization",
+      "rule_type": "agent_coordination",
+      "summary": "Specialized agents require task ownership, intent declaration, conflict detection, and priority hierarchy.",
+      "implementation_target": "agent_coordination_protocol"
+    },
+    {
+      "rule_key": "hybrid-model-routing-policy-required",
+      "domain": "ai_native_development_guidelines",
+      "source_document_key": "grok-ai-native-dev-system-2026",
+      "activation_status": "candidate_requires_formalization",
+      "rule_type": "model_routing",
+      "summary": "Use local models for speed/privacy and cloud models for deep reasoning; routing should be governed by risk, cost, latency, and capability.",
+      "implementation_target": "model_routing_policy_pack"
     }
   ]
 }

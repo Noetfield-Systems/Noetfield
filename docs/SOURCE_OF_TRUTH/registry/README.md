@@ -19,6 +19,11 @@ inventory.
 - Work packages: `developer-os-addendum-work-packages-2026`
 - Security Agent: `security-agent-source-persian-normalized` as active
   reference pending formal WP-05 specification
+- AI-native development guidelines: `perplexity-ai-native-development-guidelines`
+  as architecture reference, with Grok retained as tooling reference
+- Operator workflow: `cursor-ide-shortcuts-m5-pro-2026` as reference only
+- POSA GTM: `posa-saas-first-100-users-launch-strategy-v1` as external product
+  reference only
 
 ## Database loading
 

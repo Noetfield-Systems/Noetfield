@@ -58,25 +58,36 @@ async def ingest_payload(database_url: str, payload: IngestionPayload) -> None:
     connection = await asyncpg.connect(normalize_database_url(database_url))
     try:
         async with connection.transaction():
-            batch_id = await connection.fetchval(
-                """
-                insert into noetfield.source_document_batches (
-                  batch_key,
-                  source_folder,
-                  metadata
+            batch_ids: dict[str, object] = {}
+            batches = payload.inventory.get("batches") or [
+                {
+                    "batch_id": payload.inventory["batch_id"],
+                    "source_folder": payload.inventory["source_folder"],
+                }
+            ]
+            for batch in batches:
+                batch_ids[batch["batch_id"]] = await connection.fetchval(
+                    """
+                    insert into noetfield.source_document_batches (
+                      batch_key,
+                      source_folder,
+                      metadata
+                    )
+                    values ($1, $2, $3::jsonb)
+                    on conflict (batch_key) do update
+                      set source_folder = excluded.source_folder,
+                          metadata = excluded.metadata
+                    returning id
+                    """,
+                    batch["batch_id"],
+                    batch["source_folder"],
+                    json.dumps({"created_at": payload.inventory.get("created_at")}),
                 )
-                values ($1, $2, $3::jsonb)
-                on conflict (batch_key) do update
-                  set source_folder = excluded.source_folder,
-                      metadata = excluded.metadata
-                returning id
-                """,
-                payload.inventory["batch_id"],
-                payload.inventory["source_folder"],
-                json.dumps({"created_at": payload.inventory.get("created_at")}),
-            )
+
+            default_batch_id = batch_ids.get(payload.inventory.get("batch_id")) or next(iter(batch_ids.values()))
 
             for document in payload.inventory["documents"]:
+                document_batch_id = batch_ids.get(document.get("upload_batch"), default_batch_id)
                 await connection.execute(
                     """
                     insert into noetfield.source_documents (
@@ -109,7 +120,7 @@ async def ingest_payload(database_url: str, payload: IngestionPayload) -> None:
                           superseded_by = excluded.superseded_by,
                           metadata = excluded.metadata
                     """,
-                    batch_id,
+                    document_batch_id,
                     document["document_key"],
                     document["title"],
                     document["domain"],
@@ -194,6 +205,7 @@ async def ingest_payload(database_url: str, payload: IngestionPayload) -> None:
 def summarize_payload(payload: IngestionPayload) -> dict[str, Any]:
     return {
         "batch_id": payload.inventory["batch_id"],
+        "batch_count": len(payload.inventory.get("batches", [])) or 1,
         "document_count": len(payload.inventory["documents"]),
         "sot_decision_count": len(payload.sot_registry["decisions"]),
         "active_rule_candidate_count": len(payload.rule_registry["active_rule_candidates"]),
