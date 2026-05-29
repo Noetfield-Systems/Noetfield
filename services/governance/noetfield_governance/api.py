@@ -9,10 +9,10 @@ from noetfield_config import CANONICAL_INTAKE_EMAIL, COMPLIANCE_REMEDIATION_TIP
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, SecretStr
 
-from noetfield_governance.gemini_client import GeminiAPIError, GeminiConfigurationError
-from noetfield_governance.public_chat import answer_public_question
+from noetfield_governance.chat_errors import ChatAPIError, ChatConfigurationError
+from noetfield_governance.public_chat import answer_public_question, resolve_chat_provider
 
 from noetfield_events import EventType, build_event
 from noetfield_types import Actor, ActorType
@@ -441,16 +441,35 @@ class PublicChatResponse(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     reply: str
+    provider: str
     intake_email: str = CANONICAL_INTAKE_EMAIL
+
+
+def _secret(value: SecretStr | None) -> str:
+    return value.get_secret_value().strip() if value else ""
 
 
 @app.get("/api/public/chat/health", tags=["public-chat"])
 async def public_chat_health() -> dict[str, object]:
-    configured = bool(settings.gemini_api_key and settings.gemini_api_key.get_secret_value().strip())
+    gemini_key = _secret(settings.gemini_api_key)
+    openrouter_key = _secret(settings.openrouter_api_key)
+    try:
+        active, _ = resolve_chat_provider(
+            preference=settings.public_chat_provider,
+            gemini_api_key=gemini_key or None,
+            openrouter_api_key=openrouter_key or None,
+        )
+        configured = True
+    except ChatConfigurationError:
+        active = None
+        configured = False
     return {
         "enabled": settings.public_chat_enabled,
         "configured": configured,
-        "model": settings.gemini_model,
+        "provider_preference": settings.public_chat_provider,
+        "active_provider": active,
+        "gemini": {"configured": bool(gemini_key), "model": settings.gemini_model},
+        "openrouter": {"configured": bool(openrouter_key), "model": settings.openrouter_model},
     }
 
 
@@ -460,28 +479,26 @@ async def public_chat(body: PublicChatRequest, request: Request) -> PublicChatRe
         raise HTTPException(status_code=503, detail="Public chat is disabled")
     client_host = request.client.host if request.client else "unknown"
     client_key = f"{client_host}:{body.session_id or 'anon'}"
-    api_key = (
-        settings.gemini_api_key.get_secret_value()
-        if settings.gemini_api_key
-        else ""
-    )
     try:
-        reply = await answer_public_question(
+        reply, provider = await answer_public_question(
             message=body.message,
-            api_key=api_key,
-            model=settings.gemini_model,
+            provider=settings.public_chat_provider,
+            gemini_api_key=_secret(settings.gemini_api_key) or None,
+            gemini_model=settings.gemini_model,
+            openrouter_api_key=_secret(settings.openrouter_api_key) or None,
+            openrouter_model=settings.openrouter_model,
             client_key=client_key,
         )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except PermissionError as exc:
         raise HTTPException(status_code=429, detail=str(exc)) from exc
-    except GeminiConfigurationError as exc:
+    except ChatConfigurationError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
-    except GeminiAPIError as exc:
-        logger.warning("public_chat_gemini_error %s", exc)
+    except ChatAPIError as exc:
+        logger.warning("public_chat_llm_error %s", exc)
         raise HTTPException(status_code=502, detail="Assistant temporarily unavailable") from exc
-    return PublicChatResponse(reply=reply)
+    return PublicChatResponse(reply=reply, provider=provider)
 
 
 @app.get("/runtime/console", tags=["runtime"])

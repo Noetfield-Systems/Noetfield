@@ -45,6 +45,12 @@ class Settings(BaseSettings):
         description="Google Gemini API key — server-side only; never expose to browsers.",
     )
     gemini_model: str = "gemini-2.0-flash"
+    openrouter_api_key: SecretStr | None = Field(
+        default=None,
+        description="OpenRouter API key — server-side only; routes to Gemini/other models via OpenRouter.",
+    )
+    openrouter_model: str = "google/gemini-2.0-flash-001"
+    public_chat_provider: Literal["auto", "gemini", "openrouter"] = "auto"
     public_chat_enabled: bool = True
     public_chat_cors_origins: str = (
         "https://www.noetfield.com,https://noetfield.com,http://localhost:8080,http://127.0.0.1:8080"

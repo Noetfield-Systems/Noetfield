@@ -9,6 +9,7 @@ from httpx import ASGITransport, AsyncClient
 
 from noetfield_governance.api import app
 from noetfield_governance.chatbot_knowledge import build_knowledge_context
+from noetfield_governance.public_chat import resolve_chat_provider
 
 
 def test_knowledge_context_includes_faq() -> None:
@@ -16,6 +17,26 @@ def test_knowledge_context_includes_faq() -> None:
     assert "Trust Brief" in ctx
     assert "operations@noetfield.com" in ctx
     assert "Bank Pilot" in ctx
+
+
+def test_resolve_auto_prefers_openrouter() -> None:
+    provider, _key = resolve_chat_provider(
+        preference="auto",
+        gemini_api_key="gemini-key",
+        openrouter_api_key="or-key",
+    )
+    assert provider == "openrouter"
+
+
+def test_no_api_keys_in_frontend_chat_script() -> None:
+    from pathlib import Path
+
+    text = (Path(__file__).resolve().parents[2] / "assets" / "noetfield-chat.js").read_text(
+        encoding="utf-8"
+    )
+    assert "sk-or-v1-" not in text
+    assert "GEMINI_API_KEY" not in text
+    assert "OPENROUTER_API_KEY" not in text
 
 
 def test_public_chat_health() -> None:
@@ -35,7 +56,7 @@ def test_public_chat_returns_reply_when_configured() -> None:
     async def run() -> None:
         with patch(
             "noetfield_governance.api.answer_public_question",
-            return_value="Trust Brief is $10,000 for six weeks.",
+            return_value=("Trust Brief is $10,000 for six weeks.", "openrouter"),
         ):
             transport = ASGITransport(app=app)
             async with AsyncClient(transport=transport, base_url="http://test") as client:

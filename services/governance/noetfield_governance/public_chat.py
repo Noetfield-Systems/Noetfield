@@ -1,22 +1,23 @@
-"""Public website chat — grounded answers via server-side Gemini."""
+"""Public website chat — grounded answers via server-side Gemini or OpenRouter."""
 
 from __future__ import annotations
 
 import asyncio
 import time
 from collections import defaultdict, deque
+from typing import Literal
 
 from noetfield_config import CANONICAL_INTAKE_EMAIL
+from noetfield_governance.chat_errors import ChatAPIError, ChatConfigurationError
 from noetfield_governance.chatbot_knowledge import select_relevant_excerpt
-from noetfield_governance.gemini_client import (
-    GeminiAPIError,
-    GeminiConfigurationError,
-    generate_reply,
-)
+from noetfield_governance.gemini_client import generate_reply as gemini_generate_reply
+from noetfield_governance.openrouter_client import generate_reply as openrouter_generate_reply
 
 _MAX_MESSAGE_LEN = 2000
 _RATE_LIMIT_WINDOW_SEC = 60
 _RATE_LIMIT_MAX_PER_WINDOW = 30
+
+ChatProvider = Literal["gemini", "openrouter", "auto"]
 
 _buckets: defaultdict[str, deque[float]] = defaultdict(deque)
 
@@ -47,13 +48,70 @@ Knowledge base:
 """
 
 
+def resolve_chat_provider(
+    *,
+    preference: ChatProvider,
+    gemini_api_key: str | None,
+    openrouter_api_key: str | None,
+) -> tuple[ChatProvider, str]:
+    g = (gemini_api_key or "").strip()
+    o = (openrouter_api_key or "").strip()
+
+    if preference == "openrouter":
+        if not o:
+            raise ChatConfigurationError("OPENROUTER_API_KEY is not configured.")
+        return "openrouter", o
+
+    if preference == "gemini":
+        if not g:
+            raise ChatConfigurationError("GEMINI_API_KEY is not configured.")
+        return "gemini", g
+
+    # auto: prefer OpenRouter when both exist (single env for ops), else Gemini
+    if o:
+        return "openrouter", o
+    if g:
+        return "gemini", g
+    raise ChatConfigurationError(
+        "Chat is not configured. Set OPENROUTER_API_KEY or GEMINI_API_KEY on the server. "
+        f"Email {CANONICAL_INTAKE_EMAIL} or use /trust-brief/intake/."
+    )
+
+
+def _generate_sync(
+    *,
+    provider: ChatProvider,
+    api_key: str,
+    gemini_model: str,
+    openrouter_model: str,
+    system_instruction: str,
+    user_message: str,
+) -> str:
+    if provider == "openrouter":
+        return openrouter_generate_reply(
+            api_key=api_key,
+            model=openrouter_model,
+            system_instruction=system_instruction,
+            user_message=user_message,
+        )
+    return gemini_generate_reply(
+        api_key=api_key,
+        model=gemini_model,
+        system_instruction=system_instruction,
+        user_message=user_message,
+    )
+
+
 async def answer_public_question(
     *,
     message: str,
-    api_key: str | None,
-    model: str,
+    provider: ChatProvider,
+    gemini_api_key: str | None,
+    gemini_model: str,
+    openrouter_api_key: str | None,
+    openrouter_model: str,
     client_key: str,
-) -> str:
+) -> tuple[str, ChatProvider]:
     text = (message or "").strip()
     if not text:
         raise ValueError("message is required")
@@ -65,17 +123,19 @@ async def answer_public_question(
     context = select_relevant_excerpt(text)
     system = _system_instruction(context)
 
-    if not api_key:
-        raise GeminiConfigurationError(
-            "Chat is not configured. Email "
-            + CANONICAL_INTAKE_EMAIL
-            + " or use /trust-brief/intake/."
-        )
+    resolved, api_key = resolve_chat_provider(
+        preference=provider,
+        gemini_api_key=gemini_api_key,
+        openrouter_api_key=openrouter_api_key,
+    )
 
-    return await asyncio.to_thread(
-        generate_reply,
+    reply = await asyncio.to_thread(
+        _generate_sync,
+        provider=resolved,
         api_key=api_key,
-        model=model,
+        gemini_model=gemini_model,
+        openrouter_model=openrouter_model,
         system_instruction=system,
         user_message=text,
     )
+    return reply, resolved
