@@ -60,6 +60,23 @@ def _session_key(chat_id: int) -> str:
     return f"telegram:{chat_id}"
 
 
+def extract_chat_id(update: dict[str, Any]) -> int | None:
+    """Best-effort chat id for fallback replies when an update cannot be handled normally."""
+    message = update.get("message") or update.get("edited_message")
+    if isinstance(message, dict):
+        chat = message.get("chat")
+        if isinstance(chat, dict) and chat.get("id") is not None:
+            return int(chat["id"])
+    cb = update.get("callback_query")
+    if isinstance(cb, dict):
+        msg = cb.get("message")
+        if isinstance(msg, dict):
+            chat = msg.get("chat")
+            if isinstance(chat, dict) and chat.get("id") is not None:
+                return int(chat["id"])
+    return None
+
+
 def extract_message(update: dict[str, Any]) -> tuple[int, str, str | None, int | None] | None:
     message = update.get("message") or update.get("edited_message")
     if not isinstance(message, dict):
@@ -134,6 +151,26 @@ async def _send_canned(
     keyboard: dict | None = None,
 ) -> None:
     await _send_html_chunks(token=token, chat_id=chat_id, text=html, reply_markup=keyboard)
+
+
+async def _send_fallback(
+    *,
+    token: str,
+    chat_id: int,
+    html: str,
+) -> None:
+    """Last-resort plain reply when rich HTML/keyboards fail."""
+    try:
+        await asyncio.to_thread(
+            send_message,
+            token=token,
+            chat_id=chat_id,
+            text=html.replace("<b>", "").replace("</b>", "").replace("<i>", "").replace("</i>", ""),
+            parse_mode=None,
+            reply_markup=None,
+        )
+    except TelegramAPIError as exc:
+        logger.error("telegram_fallback_failed chat_id=%s %s", chat_id, exc)
 
 
 async def _handle_command(
@@ -267,11 +304,16 @@ async def handle_telegram_update(
             return True
         except TelegramAPIError as exc:
             logger.warning("callback_failed %s", exc)
-            return False
+            await _send_fallback(
+                token=bot_token,
+                chat_id=chat_id,
+                html="Menu action failed. Try /start or type your question.",
+            )
+            return True
 
     parsed = extract_message(update)
     if parsed is None:
-        return False
+        return await handle_unrecognized_update(update, bot_token=bot_token)
     chat_id, text, first_name, _ = parsed
 
     if text.startswith("/"):
@@ -279,7 +321,12 @@ async def handle_telegram_update(
             return await _handle_command(text, token=bot_token, chat_id=chat_id, first_name=first_name)
         except TelegramAPIError as exc:
             logger.warning("command_failed chat_id=%s %s", chat_id, exc)
-            return False
+            await _send_fallback(
+                token=bot_token,
+                chat_id=chat_id,
+                html=f"Sorry — I could not send a reply. Try /start or email {CANONICAL_INTAKE_EMAIL}.",
+            )
+            return True
 
     try:
         await _answer_with_llm(
@@ -326,4 +373,31 @@ async def handle_telegram_update(
         return True
     except TelegramAPIError as exc:
         logger.warning("telegram_reply_failed chat_id=%s %s", chat_id, exc)
+        await _send_fallback(
+            token=bot_token,
+            chat_id=chat_id,
+            html=f"Sorry — delivery failed. Try /start or email {CANONICAL_INTAKE_EMAIL}.",
+        )
+        return True
+
+
+async def handle_unrecognized_update(
+    update: dict[str, Any],
+    *,
+    bot_token: str,
+) -> bool:
+    """Reply when Telegram sends a non-text message or unknown update shape."""
+    chat_id = extract_chat_id(update)
+    if chat_id is None:
+        logger.info("telegram_update_unhandled keys=%s", sorted(update.keys()))
         return False
+    await _send_canned(
+        token=bot_token,
+        chat_id=chat_id,
+        html=(
+            "I can read text messages and menu buttons.\n\n"
+            "Send /start for the menu, or type your question in plain language."
+        ),
+        keyboard=main_menu_keyboard(),
+    )
+    return True

@@ -114,3 +114,34 @@ def get_webhook_info(*, token: str) -> dict[str, Any]:
     request = urllib.request.Request(_api_url(token, "getWebhookInfo"), method="GET")
     with urllib.request.urlopen(request, timeout=15.0) as response:
         return json.loads(response.read().decode("utf-8"))
+
+
+def get_me(*, token: str) -> dict[str, Any]:
+    """Verify bot token and return bot identity (username, id)."""
+    request = urllib.request.Request(_api_url(token, "getMe"), method="GET")
+    try:
+        with urllib.request.urlopen(request, timeout=15.0) as response:
+            data = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:500]
+        logger.warning("telegram_getMe_error status=%s %s", exc.code, detail)
+        raise TelegramAPIError(f"Telegram getMe failed ({exc.code})") from exc
+    except urllib.error.URLError as exc:
+        raise TelegramAPIError("Unable to reach Telegram API") from exc
+    if not data.get("ok"):
+        raise TelegramAPIError(str(data.get("description", "Telegram getMe error")))
+    return data
+
+
+def summarize_webhook_info(info: dict[str, Any]) -> dict[str, object]:
+    """Public-safe subset of getWebhookInfo for health endpoints."""
+    result = info.get("result") if isinstance(info.get("result"), dict) else {}
+    return {
+        "url": result.get("url") or "",
+        "has_custom_certificate": bool(result.get("has_custom_certificate")),
+        "pending_update_count": int(result.get("pending_update_count") or 0),
+        "last_error_date": result.get("last_error_date"),
+        "last_error_message": result.get("last_error_message"),
+        "max_connections": result.get("max_connections"),
+        "ip_address": result.get("ip_address"),
+    }

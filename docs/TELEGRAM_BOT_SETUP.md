@@ -47,8 +47,35 @@ TELEGRAM_BOT_TOKEN=... TELEGRAM_WEBHOOK_BASE_URL=https://platform.noetfield.com 
 
 ## Health checks
 
-- `GET /api/telegram/health`
+- `GET /api/telegram/health` — includes live `getWebhookInfo`, `ready`, and a plain-English `hint`
 - `GET /api/ecosystem/health` — website chat + Telegram + providers
+
+On the platform server:
+
+```bash
+curl -sS https://platform.noetfield.com/api/telegram/health | python3 -m json.tool
+```
+
+Or locally:
+
+```bash
+PYTHONPATH=packages/types:packages/config:services/governance \
+  TELEGRAM_BOT_TOKEN=... TELEGRAM_WEBHOOK_BASE_URL=https://platform.noetfield.com \
+  python3 scripts/diagnose_telegram_bot.py
+```
+
+## Troubleshooting (bot not responding)
+
+| Symptom | Likely cause | Fix |
+|---------|----------------|-----|
+| No reply at all | Webhook not registered or wrong host | API must run on **platform** (`make api-v3`, port 8001), not static www |
+| No reply at all | `TELEGRAM_BOT_TOKEN` missing on server | Set env, restart API, `GET /api/telegram/health` → `configured: true` |
+| No reply at all | Webhook secret mismatch | If `TELEGRAM_WEBHOOK_SECRET` is set, re-run `register-webhook` with the same value; Telegram sends `X-Telegram-Bot-Api-Secret-Token` |
+| `/start` works, questions fail | No `OPENROUTER_API_KEY` / `GEMINI_API_KEY` | Add LLM key; health shows `llm_configured: false` |
+| Health shows `last_error_message` | TLS/firewall/DNS | Ensure `https://platform.noetfield.com/api/telegram/webhook` is reachable from the public internet |
+| Token was pasted in chat | Revoked token | `/revoke` in @BotFather, new token in env only, re-register webhook |
+
+The webhook returns HTTP 200 immediately and processes messages in the background so slow LLM replies do not cause Telegram delivery failures.
 
 ## Commands (registered in BotFather menu)
 

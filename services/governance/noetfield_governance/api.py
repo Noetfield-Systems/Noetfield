@@ -7,7 +7,7 @@ from uuid import UUID
 
 from noetfield_config import CANONICAL_INTAKE_EMAIL, COMPLIANCE_REMEDIATION_TIP
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field, SecretStr
@@ -17,9 +17,11 @@ from noetfield_governance.public_chat import answer_public_question, resolve_cha
 from noetfield_governance.telegram_client import (
     TelegramAPIError,
     TelegramConfigurationError,
+    get_me,
     get_webhook_info,
     set_my_commands,
     set_webhook,
+    summarize_webhook_info,
 )
 from noetfield_governance.telegram_commands import BOT_COMMANDS
 from noetfield_governance.telegram_webhook import handle_telegram_update
@@ -518,15 +520,70 @@ class TelegramWebhookBody(BaseModel):
 @app.get("/api/telegram/health", tags=["telegram"])
 async def telegram_health() -> dict[str, object]:
     token = _secret(settings.telegram_bot_token)
-    webhook_url = None
-    if token and settings.telegram_webhook_base_url:
-        webhook_url = settings.telegram_webhook_base_url.rstrip("/") + "/api/telegram/webhook"
-    return {
+    base = (settings.telegram_webhook_base_url or "").strip().rstrip("/")
+    expected_webhook_url = f"{base}/api/telegram/webhook" if base else None
+    payload: dict[str, object] = {
         "enabled": settings.telegram_bot_enabled,
         "configured": bool(token),
-        "webhook_url": webhook_url,
+        "webhook_base_url_set": bool(base),
+        "expected_webhook_url": expected_webhook_url,
         "webhook_secret_configured": bool(_secret(settings.telegram_webhook_secret)),
+        "llm_configured": bool(_secret(settings.openrouter_api_key) or _secret(settings.gemini_api_key)),
     }
+    if not token:
+        payload["ready"] = False
+        payload["hint"] = "Set TELEGRAM_BOT_TOKEN on the platform API host (not www)."
+        return payload
+
+    bot: dict[str, object] | None = None
+    webhook: dict[str, object] | None = None
+    try:
+        me = await asyncio.to_thread(get_me, token=token)
+        if isinstance(me.get("result"), dict):
+            result = me["result"]
+            bot = {
+                "id": result.get("id"),
+                "username": result.get("username"),
+                "can_read_all_group_messages": result.get("can_read_all_group_messages"),
+            }
+        info = await asyncio.to_thread(get_webhook_info, token=token)
+        webhook = summarize_webhook_info(info)
+    except TelegramAPIError as exc:
+        payload["telegram_api_error"] = str(exc)
+        payload["ready"] = False
+        return payload
+
+    payload["bot"] = bot
+    payload["webhook"] = webhook
+    registered_url = str((webhook or {}).get("url") or "")
+    url_ok = bool(expected_webhook_url and registered_url == expected_webhook_url)
+    pending = int((webhook or {}).get("pending_update_count") or 0)
+    last_err = (webhook or {}).get("last_error_message")
+    payload["webhook_url_matches"] = url_ok
+    payload["ready"] = (
+        settings.telegram_bot_enabled
+        and bool(bot)
+        and bool(registered_url)
+        and url_ok
+        and not last_err
+    )
+    if not settings.telegram_bot_enabled:
+        payload["hint"] = "TELEGRAM_BOT_ENABLED is false."
+    elif not base:
+        payload["hint"] = "Set TELEGRAM_WEBHOOK_BASE_URL and POST /api/telegram/register-webhook."
+    elif not registered_url:
+        payload["hint"] = "Webhook not registered — call POST /api/telegram/register-webhook."
+    elif not url_ok:
+        payload["hint"] = "Registered webhook URL does not match TELEGRAM_WEBHOOK_BASE_URL — re-register."
+    elif last_err:
+        payload["hint"] = f"Telegram reports webhook error: {last_err}"
+    elif pending > 0:
+        payload["hint"] = f"{pending} pending update(s) — delivery may be delayed; check API logs."
+    elif not payload["llm_configured"]:
+        payload["hint"] = "Commands work; free-text needs OPENROUTER_API_KEY or GEMINI_API_KEY."
+    else:
+        payload["hint"] = "Bot should respond. Send /start in Telegram to verify."
+    return payload
 
 
 @app.get("/api/ecosystem/health", tags=["ecosystem"])
@@ -535,7 +592,11 @@ async def ecosystem_health() -> dict[str, object]:
     chat = await public_chat_health()
     telegram = await telegram_health()
     chat_ok = bool(chat.get("configured")) and settings.public_chat_enabled
-    telegram_ok = bool(telegram.get("configured")) and settings.telegram_bot_enabled
+    telegram_ready = telegram.get("ready")
+    if telegram_ready is not None:
+        telegram_ok = bool(telegram_ready)
+    else:
+        telegram_ok = bool(telegram.get("configured")) and settings.telegram_bot_enabled
     return {
         "intake_email": CANONICAL_INTAKE_EMAIL,
         "website_chat": chat,
@@ -544,8 +605,32 @@ async def ecosystem_health() -> dict[str, object]:
     }
 
 
+async def _process_telegram_update(update: dict[str, object]) -> None:
+    """Background worker — Telegram requires a fast HTTP 200 from the webhook."""
+    token = _secret(settings.telegram_bot_token)
+    if not token:
+        return
+    try:
+        handled = await handle_telegram_update(
+            update,
+            bot_token=token,
+            chat_provider=settings.public_chat_provider,
+            gemini_api_key=_secret(settings.gemini_api_key) or None,
+            gemini_model=settings.gemini_model,
+            openrouter_api_key=_secret(settings.openrouter_api_key) or None,
+            openrouter_model=settings.openrouter_model,
+        )
+        if not handled:
+            logger.warning("telegram_update_not_handled keys=%s", sorted(update.keys()))
+    except Exception:
+        logger.exception("telegram_update_worker_failed")
+
+
 @app.post("/api/telegram/webhook", tags=["telegram"])
-async def telegram_webhook(request: Request) -> dict[str, object]:
+async def telegram_webhook(
+    request: Request,
+    background_tasks: BackgroundTasks,
+) -> dict[str, object]:
     if not settings.telegram_bot_enabled:
         raise HTTPException(status_code=503, detail="Telegram bot is disabled")
     token = _secret(settings.telegram_bot_token)
@@ -556,6 +641,7 @@ async def telegram_webhook(request: Request) -> dict[str, object]:
     if expected_secret:
         header_secret = request.headers.get("X-Telegram-Bot-Api-Secret-Token", "")
         if header_secret != expected_secret:
+            logger.warning("telegram_webhook_secret_mismatch")
             raise HTTPException(status_code=403, detail="Invalid webhook secret")
 
     try:
@@ -565,16 +651,8 @@ async def telegram_webhook(request: Request) -> dict[str, object]:
     if not isinstance(update, dict):
         raise HTTPException(status_code=400, detail="Invalid update payload")
 
-    handled = await handle_telegram_update(
-        update,
-        bot_token=token,
-        chat_provider=settings.public_chat_provider,
-        gemini_api_key=_secret(settings.gemini_api_key) or None,
-        gemini_model=settings.gemini_model,
-        openrouter_api_key=_secret(settings.openrouter_api_key) or None,
-        openrouter_model=settings.openrouter_model,
-    )
-    return {"ok": True, "handled": handled}
+    background_tasks.add_task(_process_telegram_update, update)
+    return {"ok": True}
 
 
 @app.post("/api/telegram/register-webhook", tags=["telegram"])
