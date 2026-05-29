@@ -46,10 +46,10 @@ def test_ingestion_payload_summary_counts() -> None:
     summary = summarize_payload(payload)
 
     assert summary["batch_id"] == "2026-05-combined"
-    assert summary["batch_count"] == 8
-    assert summary["document_count"] == 79
-    assert summary["sot_decision_count"] == 39
-    assert summary["active_rule_candidate_count"] == 55
+    assert summary["batch_count"] == 9
+    assert summary["document_count"] == 92
+    assert summary["sot_decision_count"] == 46
+    assert summary["active_rule_candidate_count"] == 61
     assert "wp03-npl-formal-grammar-2026-05-npl-1" in summary["active_documents"]
     assert "wp01-context-graph-runtime-edition-v2" in summary["active_documents"]
 
@@ -200,3 +200,22 @@ def test_eighth_batch_gie_and_governance_rule_candidates_are_present() -> None:
     assert "gie-min-confidence-threshold-055" in rule_keys
     assert "governed-execution-deterministic-pipeline" in rule_keys
     assert "noetfield-living-knowledge-graph-central" in rule_keys
+
+def test_ninth_batch_prompt_os_and_gtm_resources_are_classified() -> None:
+    payload = build_payload()
+    documents = {document["document_key"]: document for document in payload.inventory["documents"]}
+
+    assert documents["noetfield-prompt-system-constitution-v02-mvp"]["classification"] == "active_source_of_truth"
+    assert documents["master-strategic-context-engine-v37-efficient"]["classification"] == "active_source_of_truth"
+    assert documents["noetfield-strategic-structuring-reasoning-engine-stage2-v20"]["classification"] == "active_source_of_truth"
+    assert documents["linkedin-profile-hyper-commercial-v4"]["classification"] == "active_source_of_truth"
+    assert documents["trustfield-noetfield-strategic-architecture-locked-fa"]["classification"] == "active_source_of_truth"
+
+
+def test_ninth_batch_prompt_pipeline_rule_candidates_are_present() -> None:
+    payload = build_payload()
+    rule_keys = {rule["rule_key"] for rule in payload.rule_registry["active_rule_candidates"]}
+
+    assert "prompt-pipeline-strict-stage-sequencing" in rule_keys
+    assert "prompt-stage3-golden-execution-command" in rule_keys
+    assert "prompt-mvp-action-first-two-step" in rule_keys

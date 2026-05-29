@@ -58,6 +58,14 @@ inventory.
 - Graph Inference Engine: `noetfield-gie-specification-supplement-v31`
 - Governed execution wedge: `governed-execution-system-mvp-blueprint-v1`
 - Execution VM substrate: `noetfield-execution-consensus-vm-v40-blueprint`
+- Prompt OS (MVP): `noetfield-prompt-system-constitution-v02-mvp`
+- Prompt pipeline (enterprise): `noetfield-prompt-constitution-blueprint-directory-v10`
+- Stage-1 extraction: `master-strategic-context-engine-v37-efficient` (v3.5 elite for deep chats)
+- Stage-2 structuring: `noetfield-strategic-structuring-reasoning-engine-stage2-v20`
+- Stage-3 execution: `noetfield-execution-output-engine-v1-prompt`
+- LinkedIn GTM: `linkedin-profile-hyper-commercial-v4`
+- Trust/GTM strategy: `trustfield-noetfield-strategic-architecture-locked-fa`
+
 
 
 

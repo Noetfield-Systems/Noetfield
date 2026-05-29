@@ -1072,6 +1072,179 @@
       ],
       "superseded_by": null,
       "upload_batch": "2026-05-008"
+    },
+    {
+      "document_key": "strategic-structuring-reasoning-engine-stage2-v20-generic",
+      "title": "Strategic Structuring & Reasoning Engine v2.0 \u2014 Stage-2 (Generic)",
+      "domain": "prompt_stage2_structuring",
+      "work_package": null,
+      "version_label": "stage2-v2.0-generic",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/strategic-structuring-reasoning-engine-stage2-v20-generic.md",
+      "classification": "generic_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": "noetfield-strategic-structuring-reasoning-engine-stage2-v20",
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "noetfield-strategic-structuring-reasoning-engine-stage2-v20",
+      "title": "Noetfield Strategic Structuring & Reasoning Engine v2.0 \u2014 Stage-2",
+      "domain": "prompt_stage2_structuring",
+      "work_package": null,
+      "version_label": "stage2-v2.0-noetfield",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/noetfield-strategic-structuring-reasoning-engine-stage2-v20.md",
+      "classification": "active_source_of_truth",
+      "status": "reference",
+      "supersedes": [
+        "strategic-structuring-reasoning-engine-stage2-v20-generic"
+      ],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "master-strategic-context-engine-v35-elite",
+      "title": "Master Strategic Context Engine v3.5 \u2014 Elite Extraction",
+      "domain": "prompt_stage1_extraction",
+      "work_package": null,
+      "version_label": "v3.5-elite",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/master-strategic-context-engine-v35-elite.md",
+      "classification": "active_deep_extraction_reference",
+      "status": "reference",
+      "supersedes": [
+        "master-context-engine-v31-adaptive"
+      ],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "master-strategic-context-engine-v37-efficient",
+      "title": "Master Strategic Context Engine v3.7 \u2014 High-Efficiency Extraction",
+      "domain": "prompt_stage1_extraction",
+      "work_package": null,
+      "version_label": "v3.7-efficient",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/master-strategic-context-engine-v37-efficient.md",
+      "classification": "active_source_of_truth",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "master-context-engine-v31-adaptive",
+      "title": "Master Context Engine v3.1 \u2014 Adaptive Compression Kernel",
+      "domain": "prompt_stage1_extraction",
+      "work_package": null,
+      "version_label": "v3.1-adaptive",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/master-context-engine-v31-adaptive.md",
+      "classification": "superseded_extraction_reference",
+      "status": "superseded",
+      "supersedes": [],
+      "superseded_by": "master-strategic-context-engine-v37-efficient",
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "noetfield-execution-output-engine-v1-prompt",
+      "title": "Noetfield Execution Output Engine v1 \u2014 Stage-3 Prompt",
+      "domain": "prompt_stage3_execution",
+      "work_package": null,
+      "version_label": "execution-v1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/noetfield-execution-output-engine-v1-prompt.md",
+      "classification": "active_source_of_truth",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "noetfield-prompt-constitution-blueprint-directory-v10",
+      "title": "Noetfield Prompt Constitution & Blueprint Directory v1.0",
+      "domain": "noetfield_prompt_os",
+      "work_package": null,
+      "version_label": "constitution-v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/noetfield-prompt-constitution-blueprint-directory-v10.md",
+      "classification": "active_enterprise_pipeline_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "noetfield-prompt-system-constitution-v02-mvp",
+      "title": "Noetfield Prompt System Constitution v0.2 \u2014 MVP Optimized",
+      "domain": "noetfield_prompt_os",
+      "work_package": null,
+      "version_label": "constitution-v0.2-mvp",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/noetfield-prompt-system-constitution-v02-mvp.md",
+      "classification": "active_source_of_truth",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "prompt-engine-comparison-matrix-v02-mvp",
+      "title": "Prompt Engine Comparison Matrix \u2014 v0.2 MVP OS",
+      "domain": "noetfield_prompt_os",
+      "work_package": null,
+      "version_label": "comparison-matrix-v1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/prompt-engine-comparison-matrix-v02-mvp.md",
+      "classification": "active_operational_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "all-prompt-constitutions-comparison-fa",
+      "title": "All Prompt Constitutions Comparison (Persian)",
+      "domain": "noetfield_prompt_os",
+      "work_package": null,
+      "version_label": "comparison-fa-v1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/all-prompt-constitutions-comparison-fa.md",
+      "classification": "reference_methodology",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "linkedin-profile-hyper-commercial-v4",
+      "title": "LinkedIn Profile \u2014 Hyper-Commercial v4 (Enterprise GTM)",
+      "domain": "noetfield_commercial_positioning",
+      "work_package": null,
+      "version_label": "linkedin-v4",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/linkedin-profile-hyper-commercial-v4.md",
+      "classification": "active_source_of_truth",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "trustfield-noetfield-strategic-architecture-locked-fa",
+      "title": "TrustField / Noetfield Strategic Architecture \u2014 Locked SSOT (Persian)",
+      "domain": "noetfield_trust_gtm_strategy",
+      "work_package": null,
+      "version_label": "locked-ssot-v1-fa",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/trustfield-noetfield-strategic-architecture-locked-fa.md",
+      "classification": "active_source_of_truth",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-009"
+    },
+    {
+      "document_key": "prompt-memory-extraction-workflow-fa",
+      "title": "Prompt Memory Extraction Workflow (Persian label)",
+      "domain": "prompt_stage1_extraction",
+      "work_package": null,
+      "version_label": "workflow-label-v1-fa",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009/prompt-memory-extraction-workflow-fa.md",
+      "classification": "reference_only",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": "master-strategic-context-engine-v37-efficient",
+      "upload_batch": "2026-05-009"
     }
   ],
   "batches": [
@@ -1106,6 +1279,10 @@
     {
       "batch_id": "2026-05-008",
       "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-008"
+    },
+    {
+      "batch_id": "2026-05-009",
+      "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-009"
     }
   ]
 }

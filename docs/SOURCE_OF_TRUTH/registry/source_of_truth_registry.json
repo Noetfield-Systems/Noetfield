@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-05-29-sot-5",
+  "registry_version": "2026-05-29-sot-6",
   "decisions": [
     {
       "domain": "context_graph",
@@ -312,6 +312,62 @@
       "decision": "reference_only",
       "rationale": "Notion as control plane UI only; backend remains source of execution truth.",
       "confidence": 0.7
+    },
+    {
+      "domain": "noetfield_prompt_os",
+      "active_document_key": "noetfield-prompt-system-constitution-v02-mvp",
+      "active_version": "constitution-v0.2-mvp",
+      "decision": "active_source_of_truth",
+      "rationale": "v0.2 MVP constitution governs fast intelligence-to-action cycles with 2-step pipeline for founders and operators.",
+      "confidence": 0.9
+    },
+    {
+      "domain": "noetfield_prompt_os_enterprise",
+      "active_document_key": "noetfield-prompt-constitution-blueprint-directory-v10",
+      "active_version": "constitution-v1.0",
+      "decision": "active_enterprise_pipeline_reference",
+      "rationale": "v1.0 directory defines mandatory 3-stage extraction \u2192 structuring \u2192 execution for long-form multi-chat workflows.",
+      "confidence": 0.88
+    },
+    {
+      "domain": "prompt_stage1_extraction",
+      "active_document_key": "master-strategic-context-engine-v37-efficient",
+      "active_version": "v3.7-efficient",
+      "decision": "active_source_of_truth",
+      "rationale": "v3.7 is the default high-efficiency Stage-1 extractor; v3.5 retained for elite deep extraction on complex chats.",
+      "confidence": 0.91
+    },
+    {
+      "domain": "prompt_stage2_structuring",
+      "active_document_key": "noetfield-strategic-structuring-reasoning-engine-stage2-v20",
+      "active_version": "stage2-v2.0-noetfield",
+      "decision": "active_source_of_truth",
+      "rationale": "Noetfield-specific Stage-2 adds rail-level and intent-to-execution tables plus institutional reasoning format.",
+      "confidence": 0.9
+    },
+    {
+      "domain": "prompt_stage3_execution",
+      "active_document_key": "noetfield-execution-output-engine-v1-prompt",
+      "active_version": "execution-v1",
+      "decision": "active_source_of_truth",
+      "rationale": "Execution Output Engine v1 is the Stage-3 decision compiler with golden execution command.",
+      "confidence": 0.92
+    },
+    {
+      "domain": "noetfield_commercial_positioning",
+      "active_document_key": "linkedin-profile-hyper-commercial-v4",
+      "active_version": "linkedin-v4",
+      "decision": "active_source_of_truth",
+      "rationale": "v4 LinkedIn copy is search-optimized for enterprise buyers and product-oriented governance narrative.",
+      "confidence": 0.87
+    },
+    {
+      "domain": "noetfield_trust_gtm_strategy",
+      "active_document_key": "trustfield-noetfield-strategic-architecture-locked-fa",
+      "active_version": "locked-ssot-v1-fa",
+      "decision": "active_source_of_truth",
+      "rationale": "Locked strategic architecture defines Governance Latency thesis, Audit Evidence Layer wedge, and 14-day execution plan.",
+      "confidence": 0.89
     }
   ]
 }

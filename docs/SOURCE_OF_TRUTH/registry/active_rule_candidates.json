@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-05-29-rules-5",
+  "registry_version": "2026-05-29-rules-6",
   "active_rule_candidates": [
     {
       "rule_key": "npl-no-side-effects",
@@ -494,6 +494,60 @@
       "activation_status": "reference_only",
       "rule_type": "audit_governance",
       "summary": "State is derived from append-only event store; all execution must be replayable.",
+      "implementation_target": null
+    },
+    {
+      "rule_key": "prompt-pipeline-strict-stage-sequencing",
+      "domain": "noetfield_prompt_os",
+      "source_document_key": "noetfield-prompt-constitution-blueprint-directory-v10",
+      "activation_status": "active_design_rule",
+      "rule_type": "prompt_governance",
+      "summary": "Long-form workflows must run Stage-1 \u2192 Stage-2 \u2192 Stage-3 without cross-role leakage.",
+      "implementation_target": "developer_bootstrap"
+    },
+    {
+      "rule_key": "prompt-mvp-action-first-two-step",
+      "domain": "noetfield_prompt_os",
+      "source_document_key": "noetfield-prompt-system-constitution-v02-mvp",
+      "activation_status": "active_design_rule",
+      "rule_type": "prompt_governance",
+      "summary": "MVP prompt cycles end in decision + 1-3 actions; mark unclear items as GAP not guesses.",
+      "implementation_target": "developer_bootstrap"
+    },
+    {
+      "rule_key": "prompt-stage1-no-hallucination-lossless",
+      "domain": "prompt_stage1_extraction",
+      "source_document_key": "master-strategic-context-engine-v37-efficient",
+      "activation_status": "active_design_rule",
+      "rule_type": "extraction_governance",
+      "summary": "Stage-1 extraction preserves contradictions and evolutions; no external assumptions.",
+      "implementation_target": "source_of_truth_registry"
+    },
+    {
+      "rule_key": "prompt-stage3-golden-execution-command",
+      "domain": "prompt_stage3_execution",
+      "source_document_key": "noetfield-execution-output-engine-v1-prompt",
+      "activation_status": "active_design_rule",
+      "rule_type": "execution_governance",
+      "summary": "Stage-3 must output a single golden execution command with 1-3 concrete actions.",
+      "implementation_target": "workflow_runtime"
+    },
+    {
+      "rule_key": "commercial-pre-execution-governance-narrative",
+      "domain": "noetfield_commercial_positioning",
+      "source_document_key": "linkedin-profile-hyper-commercial-v4",
+      "activation_status": "reference_only",
+      "rule_type": "gtm",
+      "summary": "Commercial narrative emphasizes pre-execution governance, no custody, and governance latency reduction.",
+      "implementation_target": null
+    },
+    {
+      "rule_key": "trust-audit-evidence-layer-wedge",
+      "domain": "noetfield_trust_gtm_strategy",
+      "source_document_key": "trustfield-noetfield-strategic-architecture-locked-fa",
+      "activation_status": "reference_only",
+      "rule_type": "gtm",
+      "summary": "First sellable unit is Continuous Audit Evidence API / Evidence Pack in one real cycle.",
       "implementation_target": null
     }
   ]
