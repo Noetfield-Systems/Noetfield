@@ -17,6 +17,7 @@ Use this folder to capture **every** suggestion, launch blocker, and “do later
 
 | File | Scope |
 |------|--------|
+| **[NEXT_MOVES.md](./NEXT_MOVES.md)** | **Start here** — prioritized P0/P1/P2 checklist + roadmap |
 | [noetfield-platform.md](./noetfield-platform.md) | This repo — API, chat, Telegram, intake, deploy |
 | [noetfield-public-site.md](./noetfield-public-site.md) | www, GTM, legal pages, SEO |
 | [virlux-fintech.md](./virlux-fintech.md) | VIRLUX / payments product (separate codebase — founder backlog) |
