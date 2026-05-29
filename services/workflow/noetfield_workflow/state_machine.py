@@ -133,7 +133,7 @@ class PostgresWorkflowStore:
                 workflow.target_entity_type,
                 workflow.target_entity_id,
                 workflow.state.value,
-                workflow.payload,
+                json.dumps(workflow.payload, default=str),
                 workflow.created_by,
                 workflow.created_at,
                 workflow.updated_at,
@@ -220,7 +220,7 @@ class PostgresWorkflowStore:
             reason,
             workflow.state.value,
             actor_id,
-            workflow.payload,
+            json.dumps(workflow.payload, default=str),
         )
 
 
