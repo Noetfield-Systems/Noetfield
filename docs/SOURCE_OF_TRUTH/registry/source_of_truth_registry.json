@@ -1,0 +1,45 @@
+{
+  "registry_version": "2026-05-29-sot-1",
+  "decisions": [
+    {
+      "domain": "context_graph",
+      "active_document_key": "wp01-context-graph-runtime-edition-v2",
+      "active_version": "runtime-edition-v2-execution-hardened",
+      "decision": "active_source_of_truth",
+      "rationale": "This is the latest WP-01 document in the batch and explicitly hardens the Context Graph for execution determinism, snapshot semantics, policy-checked queries, and no-silent-mutation rules.",
+      "confidence": 0.92
+    },
+    {
+      "domain": "npl",
+      "active_document_key": "wp03-npl-formal-grammar-2026-05-npl-1",
+      "active_version": "2026-05-NPL-1",
+      "decision": "active_source_of_truth",
+      "rationale": "This document includes grammar, AST, type system, execution semantics, conflict resolution, policy packs, and security guarantees. It supersedes conceptual NPL guideline uploads.",
+      "confidence": 0.97
+    },
+    {
+      "domain": "developer_os_strategy",
+      "active_document_key": "orchestration-policy-layer-source-of-truth-2026",
+      "active_version": "2026-source-of-truth",
+      "decision": "active_source_of_truth",
+      "rationale": "This is the cleanest uploaded strategic blueprint for the Noetfield Developer OS orchestration and policy layer.",
+      "confidence": 0.88
+    },
+    {
+      "domain": "work_packages",
+      "active_document_key": "developer-os-addendum-work-packages-2026",
+      "active_version": "2026-addendum",
+      "decision": "active_planning_source",
+      "rationale": "This document is the clearest work-package dependency and roadmap registry for remaining Developer OS components.",
+      "confidence": 0.86
+    },
+    {
+      "domain": "security_agent",
+      "active_document_key": "security-agent-source-persian-normalized",
+      "active_version": "2026-security-agent-source",
+      "decision": "active_reference_needs_formal_spec",
+      "rationale": "This is the strongest uploaded Security Agent source, but it should be formalized into WP-05 Agent Behavior Monitoring and Security Agent specs before becoming executable.",
+      "confidence": 0.8
+    }
+  ]
+}

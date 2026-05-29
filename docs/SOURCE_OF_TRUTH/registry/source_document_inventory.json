@@ -1,0 +1,150 @@
+{
+  "batch_id": "2026-05-001",
+  "created_at": "2026-05-29T00:00:00Z",
+  "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001",
+  "documents": [
+    {
+      "document_key": "wp03-npl-formal-grammar-2026-05-npl-1",
+      "title": "WP-03 - NPL Formal Grammar and Execution Semantics",
+      "domain": "npl",
+      "work_package": "WP-03",
+      "version_label": "2026-05-NPL-1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/wp-03-npl-formal-grammar-2026-05-npl-1.md",
+      "classification": "active_source_of_truth",
+      "status": "production_hardened",
+      "supersedes": [
+        "npl-foundational-guidelines-2026-fa-normalized",
+        "npl-foundational-guidelines-duplicate"
+      ],
+      "superseded_by": null
+    },
+    {
+      "document_key": "wp01-context-graph-runtime-edition-v2",
+      "title": "WP-01 - Context Graph Specification, Runtime Edition v2",
+      "domain": "context_graph",
+      "work_package": "WP-01",
+      "version_label": "runtime-edition-v2-execution-hardened",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/wp-01-context-graph-runtime-edition-v2.md",
+      "classification": "active_source_of_truth",
+      "status": "implementation_ready",
+      "supersedes": [
+        "wp01-context-graph-hardened-2026-05-hardening-1",
+        "wp01-context-graph-draft-1"
+      ],
+      "superseded_by": null
+    },
+    {
+      "document_key": "wp01-context-graph-hardened-2026-05-hardening-1",
+      "title": "WP-01 - Context Graph Specification, Hardened Edition",
+      "domain": "context_graph",
+      "work_package": "WP-01",
+      "version_label": "2026-05-Hardening-1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/wp-01-context-graph-hardened-2026-05-hardening-1.md",
+      "classification": "superseded_supporting_source",
+      "status": "implementation_ready",
+      "supersedes": [
+        "wp01-context-graph-draft-1"
+      ],
+      "superseded_by": "wp01-context-graph-runtime-edition-v2"
+    },
+    {
+      "document_key": "wp01-context-graph-draft-1",
+      "title": "WP-01 - Context Graph Specification, Draft 1",
+      "domain": "context_graph",
+      "work_package": "WP-01",
+      "version_label": "2026-05-Draft-1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/wp-01-context-graph-draft-1.md",
+      "classification": "superseded_draft",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": "wp01-context-graph-runtime-edition-v2"
+    },
+    {
+      "document_key": "developer-os-current-state-2026",
+      "title": "Noetfield Developer OS - Current State Source-of-Truth 2026",
+      "domain": "developer_os_strategy",
+      "work_package": null,
+      "version_label": "2026-current-state",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/developer-os-current-state-2026.md",
+      "classification": "reference_strategy",
+      "status": "partially_stale",
+      "supersedes": [],
+      "superseded_by": "orchestration-policy-layer-source-of-truth-2026"
+    },
+    {
+      "document_key": "developer-os-addendum-work-packages-2026",
+      "title": "Noetfield Developer OS - Addendum Source-of-Truth",
+      "domain": "work_packages",
+      "work_package": "roadmap",
+      "version_label": "2026-addendum",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/developer-os-addendum-work-packages-2026.md",
+      "classification": "active_planning_source",
+      "status": "active",
+      "supersedes": [],
+      "superseded_by": null
+    },
+    {
+      "document_key": "orchestration-policy-layer-blueprint-2026",
+      "title": "Noetfield Developer OS - Orchestration and Policy Layer Blueprint",
+      "domain": "developer_os_strategy",
+      "work_package": null,
+      "version_label": "2026-blueprint",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/orchestration-policy-layer-blueprint-2026.md",
+      "classification": "supporting_strategy",
+      "status": "superseded",
+      "supersedes": [],
+      "superseded_by": "orchestration-policy-layer-source-of-truth-2026"
+    },
+    {
+      "document_key": "orchestration-policy-layer-source-of-truth-2026",
+      "title": "Noetfield Developer OS - Orchestration and Policy Layer Source-of-Truth 2026",
+      "domain": "developer_os_strategy",
+      "work_package": null,
+      "version_label": "2026-source-of-truth",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/orchestration-policy-layer-source-of-truth-2026.md",
+      "classification": "active_source_of_truth",
+      "status": "active",
+      "supersedes": [
+        "orchestration-policy-layer-blueprint-2026",
+        "developer-os-current-state-2026"
+      ],
+      "superseded_by": null
+    },
+    {
+      "document_key": "security-agent-source-persian-normalized",
+      "title": "Security Agent Source Notes - Normalized",
+      "domain": "security_agent",
+      "work_package": "WP-05",
+      "version_label": "2026-security-agent-source",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/security-agent-source-persian-normalized.md",
+      "classification": "active_reference",
+      "status": "needs_formal_spec",
+      "supersedes": [],
+      "superseded_by": null
+    },
+    {
+      "document_key": "npl-foundational-guidelines-2026-fa-normalized",
+      "title": "NPL Foundational Guidelines 2026 - Normalized",
+      "domain": "npl",
+      "work_package": "WP-03",
+      "version_label": "2026-guidelines",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/npl-foundational-guidelines-2026-fa-normalized.md",
+      "classification": "superseded_conceptual_guideline",
+      "status": "superseded",
+      "supersedes": [],
+      "superseded_by": "wp03-npl-formal-grammar-2026-05-npl-1"
+    },
+    {
+      "document_key": "npl-foundational-guidelines-duplicate",
+      "title": "NPL Foundational Guidelines 2026 - Duplicate Upload",
+      "domain": "npl",
+      "work_package": "WP-03",
+      "version_label": "duplicate",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-001/npl-foundational-guidelines-duplicate.md",
+      "classification": "duplicate",
+      "status": "duplicate",
+      "supersedes": [],
+      "superseded_by": "wp03-npl-formal-grammar-2026-05-npl-1"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "registry_version": "2026-05-29-rules-1",
+  "active_rule_candidates": [
+    {
+      "rule_key": "npl-no-side-effects",
+      "domain": "npl",
+      "source_document_key": "wp03-npl-formal-grammar-2026-05-npl-1",
+      "activation_status": "active_design_rule",
+      "rule_type": "language_safety",
+      "summary": "NPL evaluation is declarative and side-effect-free.",
+      "implementation_target": "policy_engine"
+    },
+    {
+      "rule_key": "npl-conflict-resolution-order",
+      "domain": "npl",
+      "source_document_key": "wp03-npl-formal-grammar-2026-05-npl-1",
+      "activation_status": "active_design_rule",
+      "rule_type": "policy_semantics",
+      "summary": "Decision conflict priority is deny, then require_approval, then allow, then route/mask/degrade refinements.",
+      "implementation_target": "policy_engine"
+    },
+    {
+      "rule_key": "graph-snapshot-only-agent-reasoning",
+      "domain": "context_graph",
+      "source_document_key": "wp01-context-graph-runtime-edition-v2",
+      "activation_status": "active_design_rule",
+      "rule_type": "graph_runtime",
+      "summary": "All agent reasoning must derive from a consistent graph snapshot.",
+      "implementation_target": "graph_runtime"
+    },
+    {
+      "rule_key": "graph-no-cross-snapshot-execution",
+      "domain": "context_graph",
+      "source_document_key": "wp01-context-graph-runtime-edition-v2",
+      "activation_status": "active_design_rule",
+      "rule_type": "graph_runtime",
+      "summary": "Cross-snapshot mixing is forbidden in execution paths.",
+      "implementation_target": "graph_runtime"
+    },
+    {
+      "rule_key": "graph-policy-check-before-query",
+      "domain": "context_graph",
+      "source_document_key": "wp01-context-graph-runtime-edition-v2",
+      "activation_status": "active_design_rule",
+      "rule_type": "context_access",
+      "summary": "All graph queries are policy-checked before execution.",
+      "implementation_target": "context_contracts"
+    },
+    {
+      "rule_key": "security-agent-trust-boundary",
+      "domain": "security_agent",
+      "source_document_key": "security-agent-source-persian-normalized",
+      "activation_status": "candidate_requires_formalization",
+      "rule_type": "agent_monitoring",
+      "summary": "Security Agent monitors agent behavior and can block, throttle, or require approval.",
+      "implementation_target": "agent_monitoring"
+    }
+  ]
+}

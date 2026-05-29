@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api apply-migrations phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo
+.PHONY: bootstrap validate api apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo
 
 PYTHONPATH_VALUE := packages/types:packages/config:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance
 
@@ -17,6 +17,12 @@ api:
 
 apply-migrations:
 	PYTHONPATH=$(PYTHONPATH_VALUE) python3 scripts/apply_postgres_migrations.py
+
+ingest-sot-dry-run:
+	PYTHONPATH=$(PYTHONPATH_VALUE) python3 scripts/ingest_source_inventory.py --dry-run
+
+ingest-sot:
+	PYTHONPATH=$(PYTHONPATH_VALUE) python3 scripts/ingest_source_inventory.py
 
 phase32-smoke:
 	PYTHONPATH=$(PYTHONPATH_VALUE) RUNTIME_EVENT_STORE=memory python3 scripts/phase_3_2_backend_smoke.py
