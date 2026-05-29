@@ -53,6 +53,14 @@ class PolicyEvaluator:
         inspector_count = context_int(context, "inspector_count", 0)
         module = str(context.get("module", ""))
 
+        if policy_input.action in self.policy_pack.forbidden_financial_actions:
+            return self._decision(
+                allowed=False,
+                requires_human_review=False,
+                reason="Financial execution actions are forbidden for Noetfield runtime (GCIP alignment).",
+                reason_code=PolicyDecisionCode.VETO_BLOCKED_ACTION,
+            )
+
         if policy_input.action in blocked_actions:
             return self._decision(
                 allowed=False,

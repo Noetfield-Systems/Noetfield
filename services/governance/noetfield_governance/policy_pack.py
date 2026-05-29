@@ -51,6 +51,20 @@ class GovernancePolicyPack:
             "approve_workflow",
         }
     )
+    forbidden_financial_actions: frozenset[str] = frozenset(
+        {
+            "submit_payment_intent",
+            "initiate_payment",
+            "execute_payment",
+            "route_settlement",
+            "settlement_orchestration",
+            "execute_transfer",
+            "custody_move",
+            "fx_execution",
+            "corridor_route",
+            "treasury_route",
+        }
+    )
     inspector_execution_limit: int = 3
     base_obligations: tuple[str, ...] = (
         "emit_governance_event",

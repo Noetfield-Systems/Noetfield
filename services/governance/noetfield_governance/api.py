@@ -19,6 +19,10 @@ from noetfield_events import (
     PostgresEventStore,
     event_catalog,
 )
+from noetfield_governance.golden_edge_v3 import (
+    GoldenEdgeEvaluateRequest,
+    GoldenEdgeV3Engine,
+)
 from noetfield_governance.runtime import (
     ApprovalDecision,
     GovernanceActionCommand,
@@ -117,6 +121,8 @@ copilot_demo_runtime = CopilotGovernanceDemoRuntime(
     run_store=copilot_run_store,
 )
 
+golden_edge_v3 = GoldenEdgeV3Engine(governance_runtime=governance_runtime)
+
 
 class ApprovalDecisionRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -183,9 +189,22 @@ async def health() -> dict[str, str]:
         "status": "ok",
         "service": "noetfield-platform",
         "runtime": "phase-3.1-backend-core",
+        "golden_edge": "v3",
         "system_of_record": "postgresql" if postgres_mode else "memory-test-mode",
         "supabase_authority": "optional-tooling-only",
     }
+
+
+@app.post("/v3/evaluate", tags=["golden-edge-v3"])
+async def golden_edge_evaluate(request: GoldenEdgeEvaluateRequest) -> dict[str, object]:
+    result = await golden_edge_v3.evaluate(request)
+    return result.model_dump(mode="json")
+
+
+@app.post("/v3/agent-loop", tags=["golden-edge-v3"])
+async def golden_edge_agent_loop(request: GoldenEdgeEvaluateRequest) -> dict[str, object]:
+    result = await golden_edge_v3.agent_loop(request)
+    return result.model_dump(mode="json")
 
 
 @app.get("/events/catalog", tags=["events"])

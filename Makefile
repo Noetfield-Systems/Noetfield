@@ -15,6 +15,9 @@ validate:
 api:
 	PYTHONPATH=$(PYTHONPATH_VALUE) uvicorn noetfield_governance.api:app --reload --app-dir services/governance
 
+api-v3:
+	PYTHONPATH=$(PYTHONPATH_VALUE) uvicorn noetfield_governance.api:app --reload --host 0.0.0.0 --port 8001 --app-dir services/governance
+
 apply-migrations:
 	PYTHONPATH=$(PYTHONPATH_VALUE) python3 scripts/apply_postgres_migrations.py
 
