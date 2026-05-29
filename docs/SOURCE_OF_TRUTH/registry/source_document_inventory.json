@@ -375,6 +375,89 @@
       "supersedes": [],
       "superseded_by": null,
       "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-v2-0-source-of-truth",
+      "title": "POSA v2.0 - Source of Truth",
+      "domain": "posa_system",
+      "work_package": "reference",
+      "version_label": "v2.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-004/posa-v2-0-source-of-truth.md",
+      "classification": "superseded_posa_root_sot",
+      "status": "superseded",
+      "supersedes": [
+        "paas-v1-personal-autonomous-agent-system",
+        "paes-v1-personal-ai-execution-system"
+      ],
+      "superseded_by": "posa-v3-0-source-of-truth",
+      "upload_batch": "2026-05-004"
+    },
+    {
+      "document_key": "paas-v1-personal-autonomous-agent-system",
+      "title": "PAAS v1.0 - Personal Autonomous Agent System Specification",
+      "domain": "personal_agent_system",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-004/paas-v1-personal-autonomous-agent-system.md",
+      "classification": "historical_predecessor",
+      "status": "superseded",
+      "supersedes": [],
+      "superseded_by": "posa-v2-0-source-of-truth",
+      "upload_batch": "2026-05-004"
+    },
+    {
+      "document_key": "paes-v1-personal-ai-execution-system",
+      "title": "PAES v1.0 - Personal AI Execution System",
+      "domain": "personal_agent_system",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-004/paes-v1-personal-ai-execution-system.md",
+      "classification": "historical_predecessor",
+      "status": "superseded",
+      "supersedes": [],
+      "superseded_by": "posa-v2-0-source-of-truth",
+      "upload_batch": "2026-05-004"
+    },
+    {
+      "document_key": "context-resonance-theory-paper",
+      "title": "Context Resonance and Co-Cognitive Alignment in Large Language Models",
+      "domain": "context_resonance_theory",
+      "work_package": "reference",
+      "version_label": "theory-paper",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-004/context-resonance-theory-paper.md",
+      "classification": "active_theory_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-004"
+    },
+    {
+      "document_key": "aie-protocol-smart-contract-cosmos-architecture",
+      "title": "AIE Protocol - Smart Contract and Cosmos Module Architecture",
+      "domain": "aie_protocol",
+      "work_package": "reference",
+      "version_label": "hybrid-evm-cosmos-architecture",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-004/aie-protocol-smart-contract-cosmos-architecture.md",
+      "classification": "active_protocol_reference",
+      "status": "reference",
+      "supersedes": [
+        "aie-protocol-smart-contract-cosmos-architecture-duplicate"
+      ],
+      "superseded_by": null,
+      "upload_batch": "2026-05-004"
+    },
+    {
+      "document_key": "aie-protocol-smart-contract-cosmos-architecture-duplicate",
+      "title": "AIE Protocol - Smart Contract and Cosmos Module Architecture Duplicate",
+      "domain": "aie_protocol",
+      "work_package": "reference",
+      "version_label": "duplicate",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-004/aie-protocol-smart-contract-cosmos-architecture-duplicate.md",
+      "classification": "duplicate",
+      "status": "duplicate",
+      "supersedes": [],
+      "superseded_by": "aie-protocol-smart-contract-cosmos-architecture",
+      "upload_batch": "2026-05-004"
     }
   ],
   "batches": [
@@ -389,6 +472,10 @@
     {
       "batch_id": "2026-05-003",
       "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003"
+    },
+    {
+      "batch_id": "2026-05-004",
+      "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-004"
     }
   ]
 }

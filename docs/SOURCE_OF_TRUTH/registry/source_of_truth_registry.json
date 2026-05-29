@@ -120,6 +120,30 @@
       "decision": "separate_product_reference",
       "rationale": "Separate Shopify product blueprint; does not govern POSA or Noetfield unless later adopted as a product module.",
       "confidence": 0.76
+    },
+    {
+      "domain": "context_resonance_theory",
+      "active_document_key": "context-resonance-theory-paper",
+      "active_version": "theory-paper",
+      "decision": "active_theory_reference",
+      "rationale": "Provides theoretical framing for constraint architecture, co-cognitive alignment, and latent interaction. Useful for future prompt/intent architecture but not executable runtime authority.",
+      "confidence": 0.78
+    },
+    {
+      "domain": "aie_protocol",
+      "active_document_key": "aie-protocol-smart-contract-cosmos-architecture",
+      "active_version": "hybrid-evm-cosmos-architecture",
+      "decision": "active_protocol_reference",
+      "rationale": "Defines a separate hybrid EVM/Cosmos protocol architecture for agentic intelligence economies. Keep separate from Noetfield runtime until explicitly scoped.",
+      "confidence": 0.82
+    },
+    {
+      "domain": "personal_agent_system_lineage",
+      "active_document_key": "posa-v3-0-source-of-truth",
+      "active_version": "v3.0",
+      "decision": "lineage_resolved_to_posa_v3",
+      "rationale": "PAAS v1, PAES v1, and POSA v2 are historical predecessors. POSA v3.0 remains the active POSA root SOT.",
+      "confidence": 0.93
     }
   ]
 }

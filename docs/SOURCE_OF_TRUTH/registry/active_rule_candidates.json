@@ -153,6 +153,60 @@
       "rule_type": "product_reliability",
       "summary": "Shopify price scraper should include retry, proxy rotation, selector fallback, semantic extraction, graceful degradation, and partial success logging.",
       "implementation_target": "shopify_price_intelligence_runtime"
+    },
+    {
+      "rule_key": "paas-telegram-primary-interface",
+      "domain": "personal_agent_system",
+      "source_document_key": "paas-v1-personal-autonomous-agent-system",
+      "activation_status": "reference_only",
+      "rule_type": "control_interface",
+      "summary": "Telegram is the single authorized human-machine interface in PAAS v1.0. Superseded by POSA control-layer rules but retained for lineage.",
+      "implementation_target": "posa_control_layer"
+    },
+    {
+      "rule_key": "posa-v2-identity-strategy-execution-loop",
+      "domain": "posa_system",
+      "source_document_key": "posa-v2-0-source-of-truth",
+      "activation_status": "reference_only",
+      "rule_type": "historical_invariant",
+      "summary": "POSA v2 used Identity -> Strategy -> Execution -> Feedback -> Memory Update as its fundamental loop. Superseded by POSA v3 continuous loop.",
+      "implementation_target": "posa_orchestration_runtime"
+    },
+    {
+      "rule_key": "crt-structured-constraints-reduce-entropy",
+      "domain": "context_resonance_theory",
+      "source_document_key": "context-resonance-theory-paper",
+      "activation_status": "candidate_requires_formalization",
+      "rule_type": "prompt_architecture",
+      "summary": "Structured constraints reduce output entropy and stabilize high-coherence inference trajectories.",
+      "implementation_target": "prompt_architecture_runtime"
+    },
+    {
+      "rule_key": "crt-intent-as-computational-primitive",
+      "domain": "context_resonance_theory",
+      "source_document_key": "context-resonance-theory-paper",
+      "activation_status": "candidate_requires_formalization",
+      "rule_type": "intent_modeling",
+      "summary": "Structured intent should be treated as a first-class computational primitive in future AI systems.",
+      "implementation_target": "intent_modeling"
+    },
+    {
+      "rule_key": "aie-dual-layer-execution-architecture",
+      "domain": "aie_protocol",
+      "source_document_key": "aie-protocol-smart-contract-cosmos-architecture",
+      "activation_status": "candidate_requires_formalization",
+      "rule_type": "protocol_architecture",
+      "summary": "AIE separates EVM economic truth from Cosmos cognitive execution and agent coordination.",
+      "implementation_target": "aie_protocol_design"
+    },
+    {
+      "rule_key": "aie-agent-stake-and-validation-required",
+      "domain": "aie_protocol",
+      "source_document_key": "aie-protocol-smart-contract-cosmos-architecture",
+      "activation_status": "candidate_requires_formalization",
+      "rule_type": "protocol_security",
+      "summary": "Agent participation requires stake, validation consensus, reputation tracking, and slashing for invalid work.",
+      "implementation_target": "aie_protocol_design"
     }
   ]
 }

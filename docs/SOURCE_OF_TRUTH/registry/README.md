@@ -31,6 +31,12 @@ inventory.
   as active memory subsystem SOT
 - Shopify Price Intelligence: `shopify-price-intelligence-system-v1` as a
   separate product reference only
+- Personal agent lineage: PAAS v1, PAES v1, and POSA v2 are historical
+  predecessors resolved to `posa-v3-0-source-of-truth`
+- Context Resonance Theory: `context-resonance-theory-paper` as active
+  theoretical reference
+- AIE Protocol: `aie-protocol-smart-contract-cosmos-architecture` as separate
+  protocol reference only
 
 ## Database loading
 

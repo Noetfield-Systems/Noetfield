@@ -46,10 +46,10 @@ def test_ingestion_payload_summary_counts() -> None:
     summary = summarize_payload(payload)
 
     assert summary["batch_id"] == "2026-05-combined"
-    assert summary["batch_count"] == 3
-    assert summary["document_count"] == 28
-    assert summary["sot_decision_count"] == 15
-    assert summary["active_rule_candidate_count"] == 17
+    assert summary["batch_count"] == 4
+    assert summary["document_count"] == 34
+    assert summary["sot_decision_count"] == 18
+    assert summary["active_rule_candidate_count"] == 23
     assert "wp03-npl-formal-grammar-2026-05-npl-1" in summary["active_documents"]
     assert "wp01-context-graph-runtime-edition-v2" in summary["active_documents"]
 
@@ -92,3 +92,25 @@ def test_posa_active_rule_candidates_are_present() -> None:
     assert "posa-memory-event-log-immutable" in rule_keys
     assert "posa-digital-twin-gates-economic-actions" in rule_keys
     assert "posa-high-impact-actions-require-approval" in rule_keys
+
+
+def test_fourth_batch_lineage_and_protocol_resources_are_classified() -> None:
+    payload = build_payload()
+    documents = {document["document_key"]: document for document in payload.inventory["documents"]}
+
+    assert documents["posa-v2-0-source-of-truth"]["classification"] == "superseded_posa_root_sot"
+    assert documents["paas-v1-personal-autonomous-agent-system"]["classification"] == "historical_predecessor"
+    assert documents["paes-v1-personal-ai-execution-system"]["classification"] == "historical_predecessor"
+    assert documents["context-resonance-theory-paper"]["classification"] == "active_theory_reference"
+    assert documents["aie-protocol-smart-contract-cosmos-architecture"]["classification"] == "active_protocol_reference"
+    assert documents["aie-protocol-smart-contract-cosmos-architecture-duplicate"]["classification"] == "duplicate"
+
+
+def test_fourth_batch_rule_candidates_are_present() -> None:
+    payload = build_payload()
+    rule_keys = {rule["rule_key"] for rule in payload.rule_registry["active_rule_candidates"]}
+
+    assert "crt-structured-constraints-reduce-entropy" in rule_keys
+    assert "crt-intent-as-computational-primitive" in rule_keys
+    assert "aie-dual-layer-execution-architecture" in rule_keys
+    assert "aie-agent-stake-and-validation-required" in rule_keys
