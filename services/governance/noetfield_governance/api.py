@@ -6,9 +6,13 @@ from uuid import UUID
 
 from noetfield_config import CANONICAL_INTAKE_EMAIL, COMPLIANCE_REMEDIATION_TIP
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
+
+from noetfield_governance.gemini_client import GeminiAPIError, GeminiConfigurationError
+from noetfield_governance.public_chat import answer_public_question
 
 from noetfield_events import EventType, build_event
 from noetfield_types import Actor, ActorType
@@ -80,6 +84,20 @@ app = FastAPI(
     version="0.3.1",
     description="Backend runtime core for governed ambient intelligence.",
 )
+
+_cors_origins = [
+    o.strip()
+    for o in settings.public_chat_cors_origins.split(",")
+    if o.strip()
+]
+if _cors_origins:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=_cors_origins,
+        allow_credentials=False,
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["Content-Type"],
+    )
 
 postgres_mode = settings.runtime_event_store == "postgres"
 
@@ -410,6 +428,60 @@ async def execute_inspectors(command: InspectorCollaborationCommand) -> dict[str
 async def run_copilot_governance_demo(command: CopilotGovernanceCommand) -> dict[str, object]:
     result = await copilot_demo_runtime.run(command)
     return result.model_dump(mode="json")
+
+
+class PublicChatRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    message: str = Field(..., min_length=1, max_length=2000)
+    session_id: str | None = Field(default=None, max_length=64)
+
+
+class PublicChatResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    reply: str
+    intake_email: str = CANONICAL_INTAKE_EMAIL
+
+
+@app.get("/api/public/chat/health", tags=["public-chat"])
+async def public_chat_health() -> dict[str, object]:
+    configured = bool(settings.gemini_api_key and settings.gemini_api_key.get_secret_value().strip())
+    return {
+        "enabled": settings.public_chat_enabled,
+        "configured": configured,
+        "model": settings.gemini_model,
+    }
+
+
+@app.post("/api/public/chat", tags=["public-chat"], response_model=PublicChatResponse)
+async def public_chat(body: PublicChatRequest, request: Request) -> PublicChatResponse:
+    if not settings.public_chat_enabled:
+        raise HTTPException(status_code=503, detail="Public chat is disabled")
+    client_host = request.client.host if request.client else "unknown"
+    client_key = f"{client_host}:{body.session_id or 'anon'}"
+    api_key = (
+        settings.gemini_api_key.get_secret_value()
+        if settings.gemini_api_key
+        else ""
+    )
+    try:
+        reply = await answer_public_question(
+            message=body.message,
+            api_key=api_key,
+            model=settings.gemini_model,
+            client_key=client_key,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except PermissionError as exc:
+        raise HTTPException(status_code=429, detail=str(exc)) from exc
+    except GeminiConfigurationError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except GeminiAPIError as exc:
+        logger.warning("public_chat_gemini_error %s", exc)
+        raise HTTPException(status_code=502, detail="Assistant temporarily unavailable") from exc
+    return PublicChatResponse(reply=reply)
 
 
 @app.get("/runtime/console", tags=["runtime"])

@@ -391,6 +391,15 @@
     }
   }
 
+  function loadPublicChat() {
+    if (document.querySelector('script[data-nf-chat]')) return;
+    var s = document.createElement("script");
+    s.src = "/assets/noetfield-chat.js";
+    s.defer = true;
+    s.setAttribute("data-nf-chat", "1");
+    document.body.appendChild(s);
+  }
+
   async function boot() {
     await injectShell();
 
@@ -402,6 +411,7 @@
     initBurger();
     normalizeFooterCTA();
     ensureFeedbackTab();
+    loadPublicChat();
 
     emitReady(rid);
   }

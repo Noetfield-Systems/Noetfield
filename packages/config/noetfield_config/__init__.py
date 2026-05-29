@@ -40,6 +40,16 @@ class Settings(BaseSettings):
     azure_openai_endpoint: str | None = None
     azure_openai_api_key: SecretStr | None = None
 
+    gemini_api_key: SecretStr | None = Field(
+        default=None,
+        description="Google Gemini API key — server-side only; never expose to browsers.",
+    )
+    gemini_model: str = "gemini-2.0-flash"
+    public_chat_enabled: bool = True
+    public_chat_cors_origins: str = (
+        "https://www.noetfield.com,https://noetfield.com,http://localhost:8080,http://127.0.0.1:8080"
+    )
+
     event_integrity_secret: SecretStr = Field(
         default=SecretStr("replace-with-kms-managed-secret"),
         description="Use KMS or a secrets manager outside local development.",

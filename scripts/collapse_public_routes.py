@@ -16,6 +16,7 @@ ALLOWLIST = {
     ROOT / "copilot" / "index.html",
     ROOT / "console" / "index.html",
     ROOT / "gate" / "intake" / "index.html",
+    ROOT / "faq" / "index.html",
     ROOT / "privacy" / "index.html",
     ROOT / "terms" / "index.html",
 }
