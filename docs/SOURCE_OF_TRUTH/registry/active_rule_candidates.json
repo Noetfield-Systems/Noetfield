@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-05-29-rules-16",
+  "registry_version": "2026-05-29-rules-17",
   "active_rule_candidates": [
     {
       "rule_key": "npl-no-side-effects",
@@ -1143,6 +1143,42 @@
       "rule_type": "bank_pilot",
       "summary": "Tier-1 bank committee pilots use v6.1 enterprise brief; SME wedge uses visibility read-only pilot.",
       "implementation_target": "bank_integration"
+    },
+    {
+      "rule_key": "cognitive-os-sot-master-internal-hierarchy",
+      "domain": "noetfield_cognitive_os_sot_master",
+      "source_document_key": "noetfield-sot-master-document-v1",
+      "activation_status": "active_design_rule",
+      "rule_type": "architecture_governance",
+      "summary": "Use SOT master v1 for L0\u2013L3 repo layout; GCIP v4 remains legal L0 for Noetfield Inc.",
+      "implementation_target": "documentation_governance"
+    },
+    {
+      "rule_key": "oas-owner-ratification-before-commit",
+      "domain": "noetfield_cognitive_os_unified",
+      "source_document_key": "noetfield-unified-cognitive-governance-system-v1",
+      "activation_status": "active_design_rule",
+      "rule_type": "epistemic_governance",
+      "summary": "Multi-agent claims require OAS pipeline and owner ratification before L1/L2 writes.",
+      "implementation_target": "governance_runtime"
+    },
+    {
+      "rule_key": "l2-never-executes-without-l0-l1",
+      "domain": "noetfield_cognitive_os_sot_master",
+      "source_document_key": "noetfield-sot-master-document-v1",
+      "activation_status": "active_design_rule",
+      "rule_type": "architecture_governance",
+      "summary": "L2 knowledge cannot override L1 runtime or L0 constitution; archive prohibited docs.",
+      "implementation_target": "documentation_governance"
+    },
+    {
+      "rule_key": "golden-edge-synthesis-not-majority-vote",
+      "domain": "noetfield_cognitive_os_unified",
+      "source_document_key": "noetfield-unified-cognitive-governance-system-v1",
+      "activation_status": "active_design_rule",
+      "rule_type": "epistemic_governance",
+      "summary": "Golden Edge synthesis maximizes coherence; not chatbot majority vote.",
+      "implementation_target": "governance_runtime"
     }
   ]
 }

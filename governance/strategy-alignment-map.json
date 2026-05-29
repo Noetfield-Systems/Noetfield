@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "document_keys": [
+    "noetfield-sot-master-document-v1",
+    "noetfield-unified-cognitive-governance-system-v1"
+  ],
+  "positioning": "Infrastructure for Trust & Stewardship in AI Age",
+  "public_positioning_note": "External GTM uses NORTH_STAR.md (pre-execution governance infrastructure). This map governs internal cognitive OS only.",
+  "principles": [
+    "linear execution first",
+    "postgres-first reality",
+    "deterministic runtime",
+    "minimal L0 law surface",
+    "strict separation of concerns",
+    "human ratified evolution"
+  ],
+  "anti_patterns": [
+    "control plane premature scaling",
+    "distributed cognition complexity explosion",
+    "shadow fintech narratives",
+    "agent autonomous overwrite",
+    "architecture duplication",
+    "multi-chatbot epistemic drift without OAS"
+  ],
+  "layer_hierarchy": {
+    "L0": "CONSTITUTION — GCIP v4 + NORTH_STAR.md",
+    "L1": "EXECUTION — services/, Golden Edge v3, FastAPI",
+    "L2": "KNOWLEDGE — L2-knowledge/strategy/noetfield/",
+    "L3": "EXTERNAL — L2-knowledge/strategy/reference-products/",
+    "ARCHIVE": "SOT prohibited + _archive/"
+  },
+  "oas_weights": {
+    "constitution_fit": 0.35,
+    "runtime_feasibility": 0.25,
+    "strategic_coherence": 0.2,
+    "simplicity_gain": 0.1,
+    "drift_risk": 0.1
+  }
+}

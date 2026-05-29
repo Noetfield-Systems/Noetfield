@@ -1,9 +1,9 @@
 # Noetfield — All Uploaded Documents (Manifest)
 
-Generated: 2026-05-29 05:44 UTC
+Generated: 2026-05-29 07:27 UTC
 
-- **Batches:** 19
-- **Documents:** 218
+- **Batches:** 20
+- **Documents:** 220
 
 ## Batch folders
 
@@ -26,6 +26,7 @@ Generated: 2026-05-29 05:44 UTC
 - `2026-05-017` → `uploaded/2026-05-batch-017/`
 - `2026-05-018` → `uploaded/2026-05-batch-018/`
 - `2026-05-019` → `uploaded/2026-05-batch-019/`
+- `2026-05-020` → `uploaded/2026-05-batch-020/`
 
 ## Documents by batch
 
@@ -289,6 +290,11 @@ Generated: 2026-05-29 05:44 UTC
 - [NRC-IRAP Technical Validation & R&D Prospectus v6.1](uploaded/2026-05-batch-019/noetfield-nrc-irap-technical-prospectus-v6-1.md)
 - [OCI Investment Narrative & Strategic Brief v6.1](uploaded/2026-05-batch-019/noetfield-oci-investment-narrative-v6-1.md)
 - [PSP / RPAA Lane Analysis — Execution-Adjacent (Persian)](uploaded/2026-05-batch-019/noetfield-psp-rpaa-lane-analysis-fa-v1.md)
+
+### 2026-05-020
+
+- [Source of Truth Master Document v1.0 (Layer Hierarchy + OAS)](uploaded/2026-05-batch-020/noetfield-sot-master-document-v1.md)
+- [Unified Cognitive Governance System v1.0 (Sina AI OS)](uploaded/2026-05-batch-020/noetfield-unified-cognitive-governance-system-v1.md)
 
 ### unknown
 

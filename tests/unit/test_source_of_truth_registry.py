@@ -46,10 +46,10 @@ def test_ingestion_payload_summary_counts() -> None:
     summary = summarize_payload(payload)
 
     assert summary["batch_id"] == "2026-05-combined"
-    assert summary["batch_count"] == 19
-    assert summary["document_count"] == 218
-    assert summary["sot_decision_count"] == 95
-    assert summary["active_rule_candidate_count"] == 127
+    assert summary["batch_count"] == 20
+    assert summary["document_count"] == 220
+    assert summary["sot_decision_count"] == 97
+    assert summary["active_rule_candidate_count"] == 131
     assert "wp03-npl-formal-grammar-2026-05-npl-1" in summary["active_documents"]
     assert "wp01-context-graph-runtime-edition-v2" in summary["active_documents"]
 
@@ -523,3 +523,27 @@ def test_nineteenth_batch_government_and_bank_sot_domains_are_registered() -> No
     assert domains["noetfield_government_funding_irap"]["active_document_key"] == "noetfield-nrc-irap-technical-prospectus-v6-1"
     assert domains["noetfield_bank_enterprise_pilot"]["active_document_key"] == "noetfield-enterprise-bank-pilot-brief-v6-1"
 
+def test_twentieth_batch_cognitive_os_documents_are_registered() -> None:
+    payload = build_payload()
+    documents = {document["document_key"]: document for document in payload.inventory["documents"]}
+
+    assert documents["noetfield-sot-master-document-v1"]["classification"] == "active_source_of_truth"
+    assert documents["noetfield-unified-cognitive-governance-system-v1"]["classification"] == "active_methodology_reference"
+
+
+def test_twentieth_batch_cognitive_os_rules_are_present() -> None:
+    payload = build_payload()
+    rule_keys = {rule["rule_key"] for rule in payload.rule_registry["active_rule_candidates"]}
+
+    assert "cognitive-os-sot-master-internal-hierarchy" in rule_keys
+    assert "oas-owner-ratification-before-commit" in rule_keys
+    assert "l2-never-executes-without-l0-l1" in rule_keys
+    assert "golden-edge-synthesis-not-majority-vote" in rule_keys
+
+
+def test_twentieth_batch_cognitive_os_sot_domains_are_registered() -> None:
+    payload = build_payload()
+    domains = {decision["domain"]: decision for decision in payload.sot_registry["decisions"]}
+
+    assert domains["noetfield_cognitive_os_sot_master"]["active_document_key"] == "noetfield-sot-master-document-v1"
+    assert domains["noetfield_cognitive_os_unified"]["active_document_key"] == "noetfield-unified-cognitive-governance-system-v1"

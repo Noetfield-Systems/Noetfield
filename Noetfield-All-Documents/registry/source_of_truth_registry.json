@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-05-29-sot-16",
+  "registry_version": "2026-05-29-sot-17",
   "decisions": [
     {
       "domain": "context_graph",
@@ -759,6 +759,22 @@
       "active_version": "bank-pilot-v6.1",
       "decision": "active_source_of_truth",
       "rationale": "12-week bank innovation/risk committee pilot brief; read-validate overlay model.",
+      "confidence": 0.92
+    },
+    {
+      "domain": "noetfield_cognitive_os_sot_master",
+      "active_document_key": "noetfield-sot-master-document-v1",
+      "active_version": "sot-master-v1",
+      "decision": "active_source_of_truth",
+      "rationale": "Canonical L0\u2013L3 + archive hierarchy and OAS loop for internal repo cognition; subordinate to GCIP v4 for legal identity.",
+      "confidence": 0.94
+    },
+    {
+      "domain": "noetfield_cognitive_os_unified",
+      "active_document_key": "noetfield-unified-cognitive-governance-system-v1",
+      "active_version": "ucgs-v1",
+      "decision": "active_methodology_reference",
+      "rationale": "Full OAS + Golden Edge synthesis spec; pairs with SOT master v1.",
       "confidence": 0.92
     }
   ]

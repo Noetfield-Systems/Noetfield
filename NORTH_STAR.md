@@ -69,6 +69,21 @@ Do not use on `noetfield.com`, Gate, or sales collateral:
 - MSB orchestration identity, meta-gateway PSP framing;
 - “selects how money moves” or routing engine for funds.
 
+## Cognitive OS hierarchy (internal — batch 020)
+
+Single executable truth system for **multi-agent epistemic drift**:
+
+| Layer | Repo path | Authority |
+|-------|-----------|-----------|
+| **L0** | `L0-law/`, GCIP v4, this file | Immutable — owner only |
+| **L1** | `L1-operational/`, `services/` | Execution — obeys L0 |
+| **L2** | `L2-knowledge/strategy/noetfield/` | Knowledge — never executes |
+| **L3** | `L3-external/`, `reference-products/` | Sandbox — promote via OAS |
+| **Archive** | `_archive/`, SOT prohibited | Cold storage |
+
+**OAS (Opinion Arbitration):** claim extraction → conflict graph → alignment scoring → Golden Edge synthesis → **owner ratification**.  
+Canonical specs: `noetfield-sot-master-document-v1`, `noetfield-unified-cognitive-governance-system-v1` · `governance/strategy-alignment-map.json`
+
 ## Engineering alignment
 
 - **Public site:** static HTML at repo root — governance narrative only  

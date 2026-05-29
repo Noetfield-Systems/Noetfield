@@ -7,9 +7,8 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "Noetfield-All-Documents" / "uploaded"
-if not SRC.is_dir():
-    SRC = ROOT / "docs" / "SOURCE_OF_TRUTH" / "uploaded"
+SOT_UPLOADED = ROOT / "docs" / "SOURCE_OF_TRUTH" / "uploaded"
+BUNDLE_UPLOADED = ROOT / "Noetfield-All-Documents" / "uploaded"
 
 L2 = ROOT / "L2-knowledge"
 FULL = L2 / "strategy" / "full"
@@ -54,9 +53,21 @@ def classify(name: str) -> str:
     return "noetfield" if "noetfield" in lower else "reference"
 
 
+def batch_sources() -> dict[str, Path]:
+    """Merge batch folders; SOT upload path wins on duplicate batch id."""
+    batches: dict[str, Path] = {}
+    for src_root in (BUNDLE_UPLOADED, SOT_UPLOADED):
+        if not src_root.is_dir():
+            continue
+        for batch_dir in src_root.glob("2026-05-batch-*"):
+            batches[batch_dir.name] = batch_dir
+    return batches
+
+
 def main() -> None:
-    if not SRC.is_dir():
-        raise SystemExit(f"Source not found: {SRC}")
+    batches = batch_sources()
+    if not batches:
+        raise SystemExit("No batch folders found under SOT or Noetfield-All-Documents uploaded/")
 
     for path in (FULL, NOETFIELD, REF):
         if path.exists():
@@ -64,8 +75,9 @@ def main() -> None:
         path.mkdir(parents=True, exist_ok=True)
 
     counts = {"full": 0, "noetfield": 0, "reference": 0}
-    for batch_dir in sorted(SRC.glob("2026-05-batch-*")):
-        dest_full = FULL / batch_dir.name
+    for batch_name in sorted(batches.keys()):
+        batch_dir = batches[batch_name]
+        dest_full = FULL / batch_name
         shutil.copytree(batch_dir, dest_full)
         counts["full"] += len(list(dest_full.rglob("*.md")))
 
@@ -74,12 +86,13 @@ def main() -> None:
                 continue
             bucket = classify(md.name)
             target_root = NOETFIELD if bucket == "noetfield" else REF
-            target_batch = target_root / batch_dir.name
+            target_batch = target_root / batch_name
             target_batch.mkdir(parents=True, exist_ok=True)
             shutil.copy2(md, target_batch / md.name)
             counts[bucket] += 1
 
-    perplexity_src = SRC / "2026-05-batch-002" / "perplexity-ai-native-development-guidelines.md"
+    perplexity_src = batches.get("2026-05-batch-002", SOT_UPLOADED / "2026-05-batch-002")
+    perplexity_src = Path(perplexity_src) / "perplexity-ai-native-development-guidelines.md"
     if perplexity_src.is_file():
         shutil.copy2(perplexity_src, L2 / "perplexity-ai-native-development-guidelines.md")
 

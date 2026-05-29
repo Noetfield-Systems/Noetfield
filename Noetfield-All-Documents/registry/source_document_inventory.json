@@ -2916,6 +2916,32 @@
       "supersedes": [],
       "superseded_by": null,
       "upload_batch": "2026-05-019"
+    },
+    {
+      "document_key": "noetfield-unified-cognitive-governance-system-v1",
+      "title": "Unified Cognitive Governance System v1.0 (Sina AI OS)",
+      "domain": "noetfield_cognitive_os_unified",
+      "work_package": null,
+      "version_label": "ucgs-v1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-020/noetfield-unified-cognitive-governance-system-v1.md",
+      "classification": "active_methodology_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-020"
+    },
+    {
+      "document_key": "noetfield-sot-master-document-v1",
+      "title": "Source of Truth Master Document v1.0 (Layer Hierarchy + OAS)",
+      "domain": "noetfield_cognitive_os_sot_master",
+      "work_package": null,
+      "version_label": "sot-master-v1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-020/noetfield-sot-master-document-v1.md",
+      "classification": "active_source_of_truth",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-020"
     }
   ],
   "batches": [
@@ -2994,6 +3020,10 @@
     {
       "batch_id": "2026-05-019",
       "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-019"
+    },
+    {
+      "batch_id": "2026-05-020",
+      "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-020"
     }
   ]
 }
