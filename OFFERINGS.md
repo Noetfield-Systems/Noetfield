@@ -1,69 +1,63 @@
-# Noetfield — Revenue-Ready Offerings
+# Noetfield — Revenue-Ready Offerings (FINAL LOCK)
 
-Aligned with [NORTH_STAR.md](NORTH_STAR.md) and GCIP v4. **Only these three** are active public contract paths.
+**Only these three** contractable offerings. All other monetization structures are retired.
+
+Aligned with [NORTH_STAR.md](NORTH_STAR.md) and GCIP v4.
 
 ---
 
 ## 1. Trust Brief (6-week engagement)
 
-**Outcome:** Governance audit + AI risk mapping with board-ready artefacts.
-
-| Element | Scope |
+| Element | Detail |
 |---------|--------|
-| Duration | 6 weeks |
-| Deliverables | Trust Ledger-style reporting, evidence plan, policy gaps, executive summary |
-| Intake | `/trust-brief/intake/` |
-| Boundary | Advisory + documentation; no system execution on client funds |
-
-**Not included:** payment processing, corridor setup, MSB operations.
+| **Outcome** | Governance audit · AI risk mapping · compliance readiness |
+| **Deliverables** | Board-ready evidence, policy gaps, executive summary |
+| **Intake** | `/trust-brief/intake/` |
+| **Boundary** | Advisory documentation only; no execution on client funds |
 
 ---
 
 ## 2. Copilot Readiness Pack
 
-**Outcome:** Enterprise Microsoft 365 Copilot compliance alignment.
-
-| Element | Scope |
+| Element | Detail |
 |---------|--------|
-| Focus | Ownership, baseline controls, evidence expectations, rollout gating |
-| Entry | `/copilot/readiness/` · QuickScan lead-in via `/copilot/quickscan/` |
-| Boundary | Readiness assessment and governance artefacts; not Copilot license resale |
-
-**Not included:** settlement, financial routing, or autonomous publication without human review.
+| **Outcome** | Enterprise AI governance alignment · policy validation layer · audit traceability |
+| **Entry** | `/copilot/readiness/` · QuickScan: `/copilot/quickscan/` |
+| **Boundary** | Readiness artefacts; not license resale; human review before publication |
 
 ---
 
-## 3. Bank Pilot v6.1 (institutional)
+## 3. Bank Pilot v6.1
 
-**Outcome:** Read-only visibility + pre-execution governance overlay.
-
-| Element | Scope |
+| Element | Detail |
 |---------|--------|
-| Duration | 12-week pilot (shadow run → evaluation) |
-| Mode | Read/validate-only middleware; legacy preservation |
-| KPIs | Manual pre-execution reduction, audit lineage, integration velocity |
-| Intake | `/gate/procurement/` with RID continuity |
-
-**Not included:** core banking replacement, fund routing, payment initiation, or execution authority for Noetfield.
+| **Outcome** | Read-only visibility system · non-custodial governance overlay |
+| **Rights** | **Zero execution rights** for Noetfield |
+| **Mode** | 12-week shadow run → evaluation |
+| **Intake** | `/gate/procurement/` (URL legacy) — label: **engagement intake** |
 
 ---
 
-## Procurement & commercial
+## Commercial checkout (Stripe)
 
-- **Gate:** structured non-confidential intake (`/gate/`)  
-- **Invoice/PO:** `/gate/procurement/`  
-- **Card checkout:** limited to defined SKUs (e.g. QuickScan) — commercial purchase of **services**, not money transmission  
+Stripe is used **only** for commercial software licensing and professional service subscriptions.
+
+> No financial custody, payment routing, or money transmission is performed by Noetfield Systems Inc.
 
 ---
 
-## Explicitly removed from GTM
+## Engagement intake (not procurement)
 
-The following are **not** offered under the Noetfield brand:
+- **Gate:** `/gate/` — structured non-confidential intake  
+- **Engagement artifact lane:** `/gate/procurement/` (path unchanged for bookmarks)  
+- **Commercial license (card):** defined SKUs via Stripe — services only  
 
-- Cross-border payment product / FX calculator / payment intent flows  
-- Corridor routing intelligence (NDAX vs Circle, etc.)  
-- Settlement orchestration layer positioning  
-- MSB partnership orchestration narrative  
-- Meta-gateway / PSP product framing  
+---
 
-Archived narratives remain in `docs/SOURCE_OF_TRUTH/` as **prohibited positioning** lineage only.
+## Explicitly removed
+
+- Cross-border payments · payment intent · corridor products  
+- Settlement orchestration · MSB orchestration identity  
+- Meta-gateway / PSP framing · implied fourth product lines  
+
+Prohibited narratives remain in SOT archive only.

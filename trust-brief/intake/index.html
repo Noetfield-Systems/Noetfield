@@ -2,843 +2,843 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Noetfield — Trust Brief Intake</title>
-  <meta name="description" content="Start Trust Brief intake. A 6-week governance-first diagnostic that produces board-ready outputs: starter Trust Ledger entries, control baseline, evidence expectations, and a decision memo. Public intake is non-confidential." />
-  <meta name="robots" content="index,follow" />
-  <meta name="author" content="Noetfield Systems Inc." />
-  <meta name="theme-color" content="#07070b" />
+ <title>Noetfield — Trust Brief Intake</title>
+ <meta name="description" content="Start Trust Brief intake. A 6-week governance-first diagnostic that produces board-ready outputs: starter Trust Ledger entries, control baseline, evidence expectations, and a decision memo. Public intake is non-confidential." />
+ <meta name="robots" content="index,follow" />
+ <meta name="author" content="Noetfield Systems Inc." />
+ <meta name="theme-color" content="#07070b" />
 
-  <link rel="canonical" href="https://www.noetfield.com/trust-brief/intake/" />
-  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
-  <link rel="apple-touch-icon" href="/noetfield-favicon-512.png" />
+ <link rel="canonical" href="https://www.noetfield.com/trust-brief/intake/" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="apple-touch-icon" href="/noetfield-favicon-512.png" />
 
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Noetfield" />
-  <meta property="og:title" content="Noetfield — Trust Brief Intake" />
-  <meta property="og:description" content="Confirm scope, teams, use-case band, and procurement path. Board-ready outputs in 6 weeks. Public intake is non-confidential." />
-  <meta property="og:url" content="https://www.noetfield.com/trust-brief/intake/" />
-  <meta property="og:image" content="https://www.noetfield.com/noetfield-og.png" />
+ <meta property="og:type" content="website" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:title" content="Noetfield — Trust Brief Intake" />
+ <meta property="og:description" content="Confirm scope, teams, use-case band, and engagement intake path. Board-ready outputs in 6 weeks. Public intake is non-confidential." />
+ <meta property="og:url" content="https://www.noetfield.com/trust-brief/intake/" />
+ <meta property="og:image" content="https://www.noetfield.com/noetfield-og.png" />
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Noetfield — Trust Brief Intake" />
-  <meta name="twitter:description" content="Start Trust Brief intake. Board-ready outputs in 6 weeks. Public intake is non-confidential." />
-  <meta name="twitter:image" content="https://www.noetfield.com/noetfield-og.png" />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Noetfield — Trust Brief Intake" />
+ <meta name="twitter:description" content="Start Trust Brief intake. Board-ready outputs in 6 weeks. Public intake is non-confidential." />
+ <meta name="twitter:image" content="https://www.noetfield.com/noetfield-og.png" />
 
-  <!-- LOCKED SHELL -->
-  <link rel="stylesheet" href="/assets/noetfield-shell.css" />
-  <script src="/assets/noetfield-shell.js" defer></script>
+ <!-- LOCKED SHELL -->
+ <link rel="stylesheet" href="/assets/noetfield-shell.css" />
+ <script src="/assets/noetfield-shell.js" defer></script>
 
-  <style>
-    /* Align with Trust Brief v7 visuals (heroShell / cards / blocks / rail / sticky) */
-    .hero{padding:18px 0 10px}
-    .grid{
-      display:grid;
-      grid-template-columns: 1.12fr .88fr;
-      gap:16px;
-      margin: 14px 0 72px;
-      align-items:start;
-    }
-    .card{
-      border-radius:var(--radius);
-      border:1px solid rgba(255,255,255,.11);
-      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.022));
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-      min-width:0;
-    }
-    .hd{ padding:18px 18px 0; }
-    .bd{ padding:18px; }
+ <style>
+ /* Align with Trust Brief v7 visuals (heroShell / cards / blocks / rail / sticky) */
+ .hero{padding:18px 0 10px}
+ .grid{
+ display:grid;
+ grid-template-columns: 1.12fr .88fr;
+ gap:16px;
+ margin: 14px 0 72px;
+ align-items:start;
+ }
+ .card{
+ border-radius:var(--radius);
+ border:1px solid rgba(255,255,255,.11);
+ background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.022));
+ box-shadow: var(--shadow2);
+ overflow:hidden;
+ min-width:0;
+ }
+ .hd{ padding:18px 18px 0; }
+ .bd{ padding:18px; }
 
-    .heroShell{
-      position:relative;
-      border-radius: calc(var(--radius) + 8px);
-      border: 1px solid rgba(255,255,255,.11);
-      background:
-        radial-gradient(1100px 420px at 16% 0%, rgba(200,163,73,.18), transparent 60%),
-        radial-gradient(1100px 420px at 92% 10%, rgba(122,167,255,.10), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.022));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .heroShell::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: linear-gradient(120deg, rgba(200,163,73,.26), transparent 30%, rgba(255,255,255,.08) 68%, transparent);
-      opacity:.44;
-      pointer-events:none;
-      mask-image: linear-gradient(180deg, black 0%, black 58%, transparent 96%);
-    }
-    .heroInner{padding: 22px 18px; position:relative; z-index:1}
+ .heroShell{
+ position:relative;
+ border-radius: calc(var(--radius) + 8px);
+ border: 1px solid rgba(255,255,255,.11);
+ background:
+ radial-gradient(1100px 420px at 16% 0%, rgba(200,163,73,.18), transparent 60%),
+ radial-gradient(1100px 420px at 92% 10%, rgba(122,167,255,.10), transparent 62%),
+ linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.022));
+ box-shadow: var(--shadow);
+ overflow:hidden;
+ }
+ .heroShell::before{
+ content:"";
+ position:absolute; inset:-1px;
+ background: linear-gradient(120deg, rgba(200,163,73,.26), transparent 30%, rgba(255,255,255,.08) 68%, transparent);
+ opacity:.44;
+ pointer-events:none;
+ mask-image: linear-gradient(180deg, black 0%, black 58%, transparent 96%);
+ }
+ .heroInner{padding: 22px 18px; position:relative; z-index:1}
 
-    .eyebrow{
-      display:inline-flex; gap:10px; align-items:center;
-      color:var(--muted);
-      font-size:13px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.13);
-      background: rgba(255,255,255,.035);
-    }
-    .dot{
-      width:8px; height:8px; border-radius:50%;
-      background: rgba(200,163,73,.97);
-      box-shadow: 0 0 0 3px rgba(200,163,73,.18);
-    }
-    h1{margin:12px 0 10px; font-size:34px; line-height:1.07; letter-spacing:-0.75px}
-    .lead{margin:0; color:var(--muted); font-size:16px; max-width: 1040px; line-height:1.75}
-    .lead strong{color:var(--text); font-weight:950}
+ .eyebrow{
+ display:inline-flex; gap:10px; align-items:center;
+ color:var(--muted);
+ font-size:13px;
+ padding:9px 12px;
+ border-radius:999px;
+ border:1px solid rgba(255,255,255,.13);
+ background: rgba(255,255,255,.035);
+ }
+ .dot{
+ width:8px; height:8px; border-radius:50%;
+ background: rgba(200,163,73,.97);
+ box-shadow: 0 0 0 3px rgba(200,163,73,.18);
+ }
+ h1{margin:12px 0 10px; font-size:34px; line-height:1.07; letter-spacing:-0.75px}
+ .lead{margin:0; color:var(--muted); font-size:16px; max-width: 1040px; line-height:1.75}
+ .lead strong{color:var(--text); font-weight:950}
 
-    .metaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color:var(--muted);
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .pill strong{color:var(--text); font-weight:900}
+ .metaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+ .pill{
+ display:inline-flex; align-items:center; gap:10px;
+ padding:9px 12px;
+ border-radius:999px;
+ border:1px solid rgba(255,255,255,.12);
+ background: rgba(255,255,255,.03);
+ color:var(--muted);
+ font-size:13px;
+ white-space:nowrap;
+ }
+ .pill strong{color:var(--text); font-weight:900}
 
-    .actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px}
-    .btn.small{ min-height:40px; padding:9px 12px; font-size:13px; }
+ .actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px}
+ .btn.small{ min-height:40px; padding:9px 12px; font-size:13px; }
 
-    .notice{
-      margin-top:12px;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      color:var(--muted2);
-      font-size:12.8px;
-      line-height:1.6;
-    }
-    .notice strong{ color:var(--text); font-weight:900; }
+ .notice{
+ margin-top:12px;
+ padding:12px 12px;
+ border-radius:14px;
+ border:1px solid rgba(255,255,255,.10);
+ background: rgba(255,255,255,.03);
+ color:var(--muted2);
+ font-size:12.8px;
+ line-height:1.6;
+ }
+ .notice strong{ color:var(--text); font-weight:900; }
 
-    .cardTitle{ margin:0 0 8px; font-size:18px; letter-spacing:-0.2px; }
-    .muted{ color:var(--muted); line-height:1.7; margin:0; }
+ .cardTitle{ margin:0 0 8px; font-size:18px; letter-spacing:-0.2px; }
+ .muted{ color:var(--muted); line-height:1.7; margin:0; }
 
-    .groupTitle{
-      margin:18px 0 8px;
-      font-size:14px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:var(--muted2);
-    }
+ .groupTitle{
+ margin:18px 0 8px;
+ font-size:14px;
+ letter-spacing:.22em;
+ text-transform:uppercase;
+ color:var(--muted2);
+ }
 
-    .blocks{ display:grid; gap:12px; margin-top:12px; }
-    .block{
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.11);
-      background: rgba(255,255,255,.03);
-      padding:14px;
-      overflow:hidden;
-      transition: border-color .15s ease, background .15s ease, transform .06s ease;
-    }
-    .block:hover{border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.05)}
-    .block:active{transform: translateY(1px)}
-    .blockTop{ display:flex; gap:10px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
-    .block h3{ margin:0; font-size:16px; letter-spacing:-.2px; font-weight:950; }
-    .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color:var(--muted2);
-      font-size:12.4px;
-      white-space:nowrap;
-    }
-    .block p{ margin:10px 0 0; color:var(--muted); line-height:1.7; }
-    .block ul{ margin:10px 0 0; padding-left:18px; color:var(--muted2); line-height:1.6; }
-    .block li{ margin:6px 0; }
+ .blocks{ display:grid; gap:12px; margin-top:12px; }
+ .block{
+ border-radius:16px;
+ border:1px solid rgba(255,255,255,.11);
+ background: rgba(255,255,255,.03);
+ padding:14px;
+ overflow:hidden;
+ transition: border-color .15s ease, background .15s ease, transform .06s ease;
+ }
+ .block:hover{border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.05)}
+ .block:active{transform: translateY(1px)}
+ .blockTop{ display:flex; gap:10px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+ .block h3{ margin:0; font-size:16px; letter-spacing:-.2px; font-weight:950; }
+ .tag{
+ display:inline-flex; align-items:center; gap:8px;
+ padding:7px 10px;
+ border-radius:999px;
+ border:1px solid rgba(255,255,255,.12);
+ background: rgba(255,255,255,.03);
+ color:var(--muted2);
+ font-size:12.4px;
+ white-space:nowrap;
+ }
+ .block p{ margin:10px 0 0; color:var(--muted); line-height:1.7; }
+ .block ul{ margin:10px 0 0; padding-left:18px; color:var(--muted2); line-height:1.6; }
+ .block li{ margin:6px 0; }
 
-    /* Form (aligned) */
-    .form{ display:grid; gap:12px; margin-top:12px; }
-    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    .field label{
-      display:block;
-      font-size:11px;
-      letter-spacing:.24em;
-      text-transform:uppercase;
-      color:var(--muted2);
-      margin:0 0 6px;
-    }
-    .field input, .field select, .field textarea{
-      width:100%;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
-      padding:12px;
-      outline:none;
-      min-height:44px;
-    }
-    .field textarea{ min-height:120px; resize:vertical; }
-    .help{ margin-top:6px; color:var(--muted2); font-size:12.6px; line-height:1.55; }
+ /* Form (aligned) */
+ .form{ display:grid; gap:12px; margin-top:12px; }
+ .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+ .field label{
+ display:block;
+ font-size:11px;
+ letter-spacing:.24em;
+ text-transform:uppercase;
+ color:var(--muted2);
+ margin:0 0 6px;
+ }
+ .field input, .field select, .field textarea{
+ width:100%;
+ border-radius:12px;
+ border:1px solid rgba(255,255,255,.12);
+ background: rgba(255,255,255,.03);
+ color: var(--text);
+ padding:12px;
+ outline:none;
+ min-height:44px;
+ }
+ .field textarea{ min-height:120px; resize:vertical; }
+ .help{ margin-top:6px; color:var(--muted2); font-size:12.6px; line-height:1.55; }
 
-    .ridBox{
-      margin-top:12px;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      color:var(--muted2);
-      font-size:12.8px;
-      line-height:1.6;
-    }
-    .ridBox strong{color:var(--text); font-weight:900}
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
+ .ridBox{
+ margin-top:12px;
+ padding:12px;
+ border-radius:14px;
+ border:1px solid rgba(255,255,255,.10);
+ background: rgba(255,255,255,.03);
+ color:var(--muted2);
+ font-size:12.8px;
+ line-height:1.6;
+ }
+ .ridBox strong{color:var(--text); font-weight:900}
+ .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
 
-    /* Rail */
-    .rail{ position: sticky; top: 14px; }
-    .panel{
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding:14px;
-    }
-    .panelTop{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:flex-start; }
-    .label{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted2); }
-    .value{ font-size:18px; font-weight:950; letter-spacing:-.2px; margin-top:6px; }
-    .price{ font-size:26px; font-weight:950; letter-spacing:-.3px; margin-top:6px; white-space:nowrap; }
-    .small{ margin-top:10px; color:var(--muted2); font-size:12.8px; line-height:1.6; }
+ /* Rail */
+ .rail{ position: sticky; top: 14px; }
+ .panel{
+ border-radius:16px;
+ border:1px solid rgba(255,255,255,.10);
+ background: rgba(255,255,255,.03);
+ padding:14px;
+ }
+ .panelTop{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:flex-start; }
+ .label{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted2); }
+ .value{ font-size:18px; font-weight:950; letter-spacing:-.2px; margin-top:6px; }
+ .price{ font-size:26px; font-weight:950; letter-spacing:-.3px; margin-top:6px; white-space:nowrap; }
+ .small{ margin-top:10px; color:var(--muted2); font-size:12.8px; line-height:1.6; }
 
-    /* Sticky bottom CTA */
-    .stickyCta{
-      position: sticky;
-      bottom: 0;
-      z-index: 20;
-      padding: 10px 0;
-      background: linear-gradient(180deg, rgba(7,7,11,0) 0%, rgba(7,7,11,.78) 22%, rgba(7,7,11,.92) 100%);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-    .stickyInner{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      justify-content:space-between;
-      padding: 0 16px;
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-    .stickyText{
-      min-width:0;
-      color:var(--muted);
-      font-size:12.6px;
-      line-height:1.4;
-    }
-    .stickyText strong{ color:var(--text); font-weight:950; }
+ /* Sticky bottom CTA */
+ .stickyCta{
+ position: sticky;
+ bottom: 0;
+ z-index: 20;
+ padding: 10px 0;
+ background: linear-gradient(180deg, rgba(7,7,11,0) 0%, rgba(7,7,11,.78) 22%, rgba(7,7,11,.92) 100%);
+ backdrop-filter: blur(10px);
+ border-top: 1px solid rgba(255,255,255,.08);
+ }
+ .stickyInner{
+ display:flex;
+ gap:12px;
+ align-items:center;
+ justify-content:space-between;
+ padding: 0 16px;
+ max-width: 1120px;
+ margin: 0 auto;
+ }
+ .stickyText{
+ min-width:0;
+ color:var(--muted);
+ font-size:12.6px;
+ line-height:1.4;
+ }
+ .stickyText strong{ color:var(--text); font-weight:950; }
 
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-      .rail{ position: relative; top: 0; }
-      .row2{ grid-template-columns: 1fr; }
-      h1{ font-size: 30px; }
-    }
-    @media (max-width: 760px){
-      .stickyText{display:none}
-    }
-  </style>
+ @media (max-width: 980px){
+ .grid{ grid-template-columns: 1fr; }
+ .rail{ position: relative; top: 0; }
+ .row2{ grid-template-columns: 1fr; }
+ h1{ font-size: 30px; }
+ }
+ @media (max-width: 760px){
+ .stickyText{display:none}
+ }
+ </style>
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Service",
-    "name":"Noetfield Trust Brief (Intake)",
-    "provider":{"@type":"Organization","name":"Noetfield Systems Inc."},
-    "areaServed":"CA",
-    "description":"Intake for Trust Brief: a 6-week governance-first diagnostic producing board-ready outputs (starter Trust Ledger entries, control baseline, evidence expectations, and a decision memo).",
-    "url":"https://www.noetfield.com/trust-brief/intake/"
-  }
-  </script>
+ <script type="application/ld+json">
+ {
+ "@context":"https://schema.org",
+ "@type":"Service",
+ "name":"Noetfield Trust Brief (Intake)",
+ "provider":{"@type":"Organization","name":"Noetfield Systems Inc."},
+ "areaServed":"CA",
+ "description":"Intake for Trust Brief: a 6-week governance-first diagnostic producing board-ready outputs (starter Trust Ledger entries, control baseline, evidence expectations, and a decision memo).",
+ "url":"https://www.noetfield.com/trust-brief/intake/"
+ }
+ </script>
 </head>
 
 <body>
-  <div class="bg" aria-hidden="true"></div>
-  <a class="skip" href="#main">Skip to content</a>
+ <div class="bg" aria-hidden="true"></div>
+ <a class="skip" href="#main">Skip to content</a>
 
-  <header id="nfHeader"></header>
+ <header id="nfHeader"></header>
 
-  <main id="main" class="wrap">
-    <!-- HERO -->
-    <section class="hero" aria-label="Trust Brief intake hero">
-      <div class="heroShell">
-        <div class="heroInner">
-          <div class="eyebrow"><span class="dot"></span> Trust Brief • Intake • public (non-confidential)</div>
+ <main id="main" class="wrap">
+ <!-- HERO -->
+ <section class="hero" aria-label="Trust Brief intake hero">
+ <div class="heroShell">
+ <div class="heroInner">
+ <div class="eyebrow"><span class="dot"></span> Trust Brief • Intake • public (non-confidential)</div>
 
-          <h1>Confirm scope. Get a board-ready baseline.</h1>
+ <h1>Confirm scope. Get a board-ready baseline.</h1>
 
-          <p class="lead">
-            This intake confirms scope signals (use-case band, teams, procurement path) so delivery can stay <strong>defensible</strong>:
-            starter Trust Ledger entries, control baseline, evidence expectations, and a decision memo.
-          </p>
+ <p class="lead">
+ This intake confirms scope signals (use-case band, teams, engagement intake path) so delivery can stay <strong>defensible</strong>:
+ starter Trust Ledger entries, control baseline, evidence expectations, and a decision memo.
+ </p>
 
-          <div class="metaRow" aria-label="Highlights">
-            <div class="pill"><strong>6 weeks</strong> structured delivery</div>
-            <div class="pill"><strong>Board memo</strong> + options</div>
-            <div class="pill"><strong>Starter entries</strong> in Trust Ledger format</div>
-            <div class="pill"><strong>Evidence rule</strong> proofs linked to claims</div>
-            <div class="pill"><strong>Procurement-ready</strong> invoice/PO supported</div>
-          </div>
+ <div class="metaRow" aria-label="Highlights">
+ <div class="pill"><strong>6 weeks</strong> structured delivery</div>
+ <div class="pill"><strong>Board memo</strong> + options</div>
+ <div class="pill"><strong>Starter entries</strong> in Trust Ledger format</div>
+ <div class="pill"><strong>Evidence rule</strong> proofs linked to claims</div>
+ <div class="pill"><strong>Engagement-intake-ready</strong> engagement artifact supported</div>
+ </div>
 
-          <div class="actions" aria-label="Hero actions">
-            <a class="btn primary" href="#intake">Start intake</a>
-            <a class="btn secondary" href="/trust-brief/#pricing" data-rid-link>View pricing</a>
-            <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Invoice / PO</a>
-            <a class="btn secondary" href="/gate/sales/" data-rid-link>Purchase hub</a>
-          </div>
+ <div class="actions" aria-label="Hero actions">
+ <a class="btn primary" href="#intake">Start intake</a>
+ <a class="btn secondary" href="/trust-brief/#pricing" data-rid-link>View pricing</a>
+ <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Engagement artifact</a>
+ <a class="btn secondary" href="/gate/sales/" data-rid-link>Purchase hub</a>
+ </div>
 
-          <div class="notice" role="note">
-            <strong>Public intake:</strong> non-confidential details only. Secure sharing protocol is confirmed after kickoff.
-            <br />
-            <strong>Avoid:</strong> credentials, private keys, sensitive personal data, internal case files.
-          </div>
-        </div>
-      </div>
-    </section>
+ <div class="notice" role="note">
+ <strong>Public intake:</strong> non-confidential details only. Secure sharing protocol is confirmed after kickoff.
+ <br />
+ <strong>Avoid:</strong> credentials, private keys, sensitive personal data, internal case files.
+ </div>
+ </div>
+ </div>
+ </section>
 
-    <!-- GRID -->
-    <section class="grid" aria-label="Trust Brief intake layout">
-      <!-- LEFT -->
-      <div>
-        <section class="card" id="intake" aria-label="Intake form">
-          <div class="hd">
-            <h2 class="cardTitle">Intake</h2>
-            <p class="muted">Two minutes to confirm scope signals. Final scope/quote confirmed after kickoff.</p>
-          </div>
+ <!-- GRID -->
+ <section class="grid" aria-label="Trust Brief intake layout">
+ <!-- LEFT -->
+ <div>
+ <section class="card" id="intake" aria-label="Intake form">
+ <div class="hd">
+ <h2 class="cardTitle">Intake</h2>
+ <p class="muted">Two minutes to confirm scope signals. Final scope/quote confirmed after kickoff.</p>
+ </div>
 
-          <div class="bd">
-            <form class="form" id="tbIntakeForm"
-                  action="https://formspree.io/xyzrdrpv"
-                  method="POST"
-                  accept-charset="UTF-8">
+ <div class="bd">
+ <form class="form" id="tbIntakeForm"
+ action="https://formspree.io/xyzrdrpv"
+ method="POST"
+ accept-charset="UTF-8">
 
-              <!-- routing -->
-              <input type="hidden" name="package" value="trust-brief" />
-              <input type="hidden" name="page" value="/trust-brief/intake/" />
-              <input type="hidden" name="rid" value="" data-rid-field />
-              <input type="hidden" name="prefill_tier" value="" data-prefill-tier />
+ <!-- governance flow -->
+ <input type="hidden" name="package" value="trust-brief" />
+ <input type="hidden" name="page" value="/trust-brief/intake/" />
+ <input type="hidden" name="rid" value="" data-rid-field />
+ <input type="hidden" name="prefill_tier" value="" data-prefill-tier />
 
-              <div class="groupTitle">Contact</div>
-              <div class="row2">
-                <div class="field">
-                  <label for="tb_name">Name</label>
-                  <input id="tb_name" name="name" autocomplete="name" required />
-                </div>
-                <div class="field">
-                  <label for="tb_email">Work email</label>
-                  <input id="tb_email" name="email" type="email" autocomplete="email" required />
-                </div>
-              </div>
+ <div class="groupTitle">Contact</div>
+ <div class="row2">
+ <div class="field">
+ <label for="tb_name">Name</label>
+ <input id="tb_name" name="name" autocomplete="name" required />
+ </div>
+ <div class="field">
+ <label for="tb_email">Work email</label>
+ <input id="tb_email" name="email" type="email" autocomplete="email" required />
+ </div>
+ </div>
 
-              <div class="row2">
-                <div class="field">
-                  <label for="tb_role">Role</label>
-                  <input id="tb_role" name="role" placeholder="IT, Security, Legal, COO, etc." />
-                </div>
-                <div class="field">
-                  <label for="tb_country">Country</label>
-                  <select id="tb_country" name="country">
-                    <option selected>Canada</option>
-                    <option>United States</option>
-                    <option>United Kingdom</option>
-                    <option>EU</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-              </div>
+ <div class="row2">
+ <div class="field">
+ <label for="tb_role">Role</label>
+ <input id="tb_role" name="role" placeholder="IT, Security, Legal, COO, etc." />
+ </div>
+ <div class="field">
+ <label for="tb_country">Country</label>
+ <select id="tb_country" name="country">
+ <option selected>Canada</option>
+ <option>United States</option>
+ <option>United Kingdom</option>
+ <option>EU</option>
+ <option>Other</option>
+ </select>
+ </div>
+ </div>
 
-              <div class="groupTitle">Organization</div>
-              <div class="row2">
-                <div class="field">
-                  <label for="tb_org">Organization</label>
-                  <input id="tb_org" name="organization" autocomplete="organization" required />
-                </div>
-                <div class="field">
-                  <label for="tb_site">Website</label>
-                  <input id="tb_site" name="website" placeholder="https://…" />
-                </div>
-              </div>
+ <div class="groupTitle">Organization</div>
+ <div class="row2">
+ <div class="field">
+ <label for="tb_org">Organization</label>
+ <input id="tb_org" name="organization" autocomplete="organization" required />
+ </div>
+ <div class="field">
+ <label for="tb_site">Website</label>
+ <input id="tb_site" name="website" placeholder="https://…" />
+ </div>
+ </div>
 
-              <div class="groupTitle">Scope signals</div>
-              <div class="row2">
-                <div class="field">
-                  <label for="tb_driver">Primary driver</label>
-                  <select id="tb_driver" name="driver" required>
-                    <option value="" selected disabled>Select…</option>
-                    <option>Microsoft 365 Copilot rollout</option>
-                    <option>AI inventory / governance baseline</option>
-                    <option>Audit / regulator readiness</option>
-                    <option>Client due diligence / vendor scrutiny</option>
-                    <option>Incident / exception pressure</option>
-                    <option>Board policy / reporting requirements</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="tb_start">Desired start window</label>
-                  <select id="tb_start" name="start_window" required>
-                    <option value="" selected disabled>Select…</option>
-                    <option>Next 2 weeks</option>
-                    <option>Next 30 days</option>
-                    <option>Next 60–90 days</option>
-                    <option>Not sure</option>
-                  </select>
-                </div>
-              </div>
+ <div class="groupTitle">Scope signals</div>
+ <div class="row2">
+ <div class="field">
+ <label for="tb_driver">Primary driver</label>
+ <select id="tb_driver" name="driver" required>
+ <option value="" selected disabled>Select…</option>
+ <option>Microsoft 365 Copilot rollout</option>
+ <option>AI inventory / governance baseline</option>
+ <option>Audit / regulator readiness</option>
+ <option>Client due diligence / vendor scrutiny</option>
+ <option>Incident / exception pressure</option>
+ <option>Board policy / reporting requirements</option>
+ <option>Other</option>
+ </select>
+ </div>
+ <div class="field">
+ <label for="tb_start">Desired start window</label>
+ <select id="tb_start" name="start_window" required>
+ <option value="" selected disabled>Select…</option>
+ <option>Next 2 weeks</option>
+ <option>Next 30 days</option>
+ <option>Next 60–90 days</option>
+ <option>Not sure</option>
+ </select>
+ </div>
+ </div>
 
-              <div class="row2">
-                <div class="field">
-                  <label for="tb_usecases">Use cases (band)</label>
-                  <select id="tb_usecases" name="usecases_band" required>
-                    <option value="" selected disabled>Select…</option>
-                    <option value="1-3">1–3</option>
-                    <option value="4-8">4–8</option>
-                    <option value="9-15">9–15</option>
-                    <option value="16+">16+</option>
-                  </select>
-                  <div class="help">Used to populate tier direction on the right (final scope confirmed after kickoff).</div>
-                </div>
-                <div class="field">
-                  <label for="tb_teams">Teams in scope</label>
-                  <select id="tb_teams" name="teams" required>
-                    <option value="" selected disabled>Select…</option>
-                    <option value="1">1 team</option>
-                    <option value="2-3">2–3 teams</option>
-                    <option value="4+">4+ teams</option>
-                  </select>
-                </div>
-              </div>
+ <div class="row2">
+ <div class="field">
+ <label for="tb_usecases">Use cases (band)</label>
+ <select id="tb_usecases" name="usecases_band" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="1-3">1–3</option>
+ <option value="4-8">4–8</option>
+ <option value="9-15">9–15</option>
+ <option value="16+">16+</option>
+ </select>
+ <div class="help">Used to populate tier direction on the right (final scope confirmed after kickoff).</div>
+ </div>
+ <div class="field">
+ <label for="tb_teams">Teams in scope</label>
+ <select id="tb_teams" name="teams" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="1">1 team</option>
+ <option value="2-3">2–3 teams</option>
+ <option value="4+">4+ teams</option>
+ </select>
+ </div>
+ </div>
 
-              <div class="row2">
-                <div class="field">
-                  <label for="tb_risk">Risk tier</label>
-                  <select id="tb_risk" name="risk" required>
-                    <option value="" selected disabled>Select…</option>
-                    <option value="standard">Standard</option>
-                    <option value="regulated">Regulated (×1.25)</option>
-                    <option value="high">Highly regulated (×1.5)</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="tb_proc">Procurement path</label>
-                  <select id="tb_proc" name="procurement" required>
-                    <option value="" selected disabled>Select…</option>
-                    <option>Card payment possible</option>
-                    <option>Invoice / PO required</option>
-                    <option>Not sure yet</option>
-                  </select>
-                </div>
-              </div>
+ <div class="row2">
+ <div class="field">
+ <label for="tb_risk">Risk tier</label>
+ <select id="tb_risk" name="risk" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="standard">Standard</option>
+ <option value="regulated">Regulated (×1.25)</option>
+ <option value="high">Highly regulated (×1.5)</option>
+ </select>
+ </div>
+ <div class="field">
+ <label for="tb_proc">Engagement intake path</label>
+ <select id="tb_proc" name="procurement" required>
+ <option value="" selected disabled>Select…</option>
+ <option>Commercial license (card) possible</option>
+ <option>Engagement artifact required</option>
+ <option>Not sure yet</option>
+ </select>
+ </div>
+ </div>
 
-              <div class="row2">
-                <div class="field">
-                  <label for="tb_tier">Preferred tier</label>
-                  <select id="tb_tier" name="preferred_tier">
-                    <option value="" selected>Auto (recommended)</option>
-                    <option value="base">TB — Base</option>
-                    <option value="pro">TB — Pro</option>
-                    <option value="enterprise">TB — Enterprise</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="tb_evidence">Evidence depth</label>
-                  <select id="tb_evidence" name="evidence_depth" required>
-                    <option value="" selected disabled>Select…</option>
-                    <option value="light">Light</option>
-                    <option value="standard">Standard</option>
-                    <option value="deep">Deep (+15%)</option>
-                  </select>
-                </div>
-              </div>
+ <div class="row2">
+ <div class="field">
+ <label for="tb_tier">Preferred tier</label>
+ <select id="tb_tier" name="preferred_tier">
+ <option value="" selected>Auto (recommended)</option>
+ <option value="base">TB — Base</option>
+ <option value="pro">TB — Pro</option>
+ <option value="enterprise">TB — Enterprise</option>
+ </select>
+ </div>
+ <div class="field">
+ <label for="tb_evidence">Evidence depth</label>
+ <select id="tb_evidence" name="evidence_depth" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="light">Light</option>
+ <option value="standard">Standard</option>
+ <option value="deep">Deep (+15%)</option>
+ </select>
+ </div>
+ </div>
 
-              <div class="field">
-                <label for="tb_notes">Notes for scope (high-level only)</label>
-                <textarea id="tb_notes" name="notes" placeholder="Bullets: key teams, tools (e.g., Copilot), decision questions, reporting needs, procurement constraints. Avoid confidential details."></textarea>
-                <div class="help">Public intake is non-confidential. Secure sharing protocol is confirmed after kickoff.</div>
-              </div>
+ <div class="field">
+ <label for="tb_notes">Notes for scope (high-level only)</label>
+ <textarea id="tb_notes" name="notes" placeholder="Bullets: key teams, tools (e.g., Copilot), decision questions, reporting needs, engagement intake constraints. Avoid confidential details."></textarea>
+ <div class="help">Public intake is non-confidential. Secure sharing protocol is confirmed after kickoff.</div>
+ </div>
 
-              <div class="field">
-                <label for="tb_ack">Non-confidential acknowledgement</label>
-                <select id="tb_ack" name="ack_nonconfidential" required>
-                  <option value="" selected disabled>Select…</option>
-                  <option value="yes">Yes — this intake contains non-confidential information only</option>
-                </select>
-              </div>
+ <div class="field">
+ <label for="tb_ack">Non-confidential acknowledgement</label>
+ <select id="tb_ack" name="ack_nonconfidential" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="yes">Yes — this intake contains non-confidential information only</option>
+ </select>
+ </div>
 
-              <div class="actions" aria-label="Form actions">
-                <button class="btn primary" type="submit">Send intake</button>
-                <a class="btn secondary" id="tbEmailInstead" href="mailto:sales@noetfield.com">Email instead</a>
-                <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Invoice / PO</a>
-                <a class="btn secondary" href="/status/" data-rid-link>Status</a>
-              </div>
+ <div class="actions" aria-label="Form actions">
+ <button class="btn primary" type="submit">Send intake</button>
+ <a class="btn secondary" id="tbEmailInstead" href="mailto:sales@noetfield.com">Email instead</a>
+ <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Engagement artifact</a>
+ <a class="btn secondary" href="/status/" data-rid-link>Status</a>
+ </div>
 
-              <div class="ridBox">
-                <strong>Request ID:</strong> <span class="mono" data-rid-text>—</span>
-                <span style="margin-left:10px;">
-                  <button class="btn secondary small" type="button" data-copy-rid>Copy</button>
-                </span>
-              </div>
+ <div class="ridBox">
+ <strong>Request ID:</strong> <span class="mono" data-rid-text>—</span>
+ <span style="margin-left:10px;">
+ <button class="btn secondary small" type="button" data-copy-rid>Copy</button>
+ </span>
+ </div>
 
-              <div class="notice">
-                <strong>Next step:</strong> scope confirmation → kickoff scheduling (using Request ID) → week-by-week delivery → board memo + starter ledger pack.
-                <br />
-                <strong>Contact:</strong> sales@noetfield.com • procurement@noetfield.com • billing@noetfield.com • trust@noetfield.com • legal@noetfield.com
-              </div>
+ <div class="notice">
+ <strong>Next step:</strong> scope confirmation → kickoff scheduling (using Request ID) → week-by-week delivery → board memo + starter ledger pack.
+ <br />
+ <strong>Contact:</strong> sales@noetfield.com • procurement@noetfield.com • billing@noetfield.com • trust@noetfield.com • legal@noetfield.com
+ </div>
 
-              <div id="tbOk" style="display:none;">
-                <div class="notice">
-                  <strong>Received.</strong> Next step is scope confirmation and kickoff scheduling.
-                </div>
-              </div>
-            </form>
-          </div>
-        </section>
+ <div id="tbOk" style="display:none;">
+ <div class="notice">
+ <strong>Received.</strong> Next step is scope confirmation and kickoff scheduling.
+ </div>
+ </div>
+ </form>
+ </div>
+ </section>
 
-        <section class="card" aria-label="What to prepare" style="margin-top:16px;">
-          <div class="hd">
-            <h2 class="cardTitle">What to prepare</h2>
-            <p class="muted">Non-confidential, high-level inputs that speed kickoff.</p>
-          </div>
-          <div class="bd">
-            <div class="blocks">
-              <article class="block">
-                <div class="blockTop"><h3>Material questions</h3><span class="tag">Input</span></div>
-                <p>What leadership must be able to answer about AI use in the organization.</p>
-                <ul>
-                  <li>Board reporting expectations</li>
-                  <li>Audit / client due diligence triggers</li>
-                  <li>Decisions required (allow / restrict / monitor)</li>
-                </ul>
-              </article>
-              <article class="block">
-                <div class="blockTop"><h3>Use-case shortlist</h3><span class="tag">Input</span></div>
-                <p>Names only: tools/systems and where they are used (no sensitive details).</p>
-                <ul>
-                  <li>Copilot / M365 apps</li>
-                  <li>Vendor AI tools</li>
-                  <li>Internal AI systems</li>
-                </ul>
-              </article>
-              <article class="block">
-                <div class="blockTop"><h3>Procurement constraints</h3><span class="tag">Input</span></div>
-                <p>Invoice/PO requirements, vendor onboarding rules, and timing constraints.</p>
-                <ul>
-                  <li>PO required vs card possible</li>
-                  <li>Security / privacy questionnaires</li>
-                  <li>Preferred start window</li>
-                </ul>
-              </article>
-            </div>
-          </div>
-        </section>
-      </div>
+ <section class="card" aria-label="What to prepare" style="margin-top:16px;">
+ <div class="hd">
+ <h2 class="cardTitle">What to prepare</h2>
+ <p class="muted">Non-confidential, high-level inputs that speed kickoff.</p>
+ </div>
+ <div class="bd">
+ <div class="blocks">
+ <article class="block">
+ <div class="blockTop"><h3>Material questions</h3><span class="tag">Input</span></div>
+ <p>What leadership must be able to answer about AI use in the organization.</p>
+ <ul>
+ <li>Board reporting expectations</li>
+ <li>Audit / client due diligence triggers</li>
+ <li>Decisions required (allow / restrict / monitor)</li>
+ </ul>
+ </article>
+ <article class="block">
+ <div class="blockTop"><h3>Use-case shortlist</h3><span class="tag">Input</span></div>
+ <p>Names only: tools/systems and where they are used (no sensitive details).</p>
+ <ul>
+ <li>Copilot / M365 apps</li>
+ <li>Vendor AI tools</li>
+ <li>Internal AI systems</li>
+ </ul>
+ </article>
+ <article class="block">
+ <div class="blockTop"><h3>Engagement intake constraints</h3><span class="tag">Input</span></div>
+ <p>Engagement artifact requirements, vendor onboarding rules, and timing constraints.</p>
+ <ul>
+ <li>PO required vs card possible</li>
+ <li>Security / privacy questionnaires</li>
+ <li>Preferred start window</li>
+ </ul>
+ </article>
+ </div>
+ </div>
+ </section>
+ </div>
 
-      <!-- RIGHT -->
-      <aside class="rail" aria-label="Tier guidance rail">
-        <section class="card" aria-label="Tier guidance">
-          <div class="hd">
-            <h2 class="cardTitle">Tier direction</h2>
-            <p class="muted">Auto-derived from your inputs (override available).</p>
-          </div>
-          <div class="bd">
-            <div class="panel" aria-label="Tier panel">
-              <div class="panelTop">
-                <div>
-                  <div class="label">Recommended tier</div>
-                  <div class="value" id="tbTierOut">—</div>
-                </div>
-                <div>
-                  <div class="label">Typical fee</div>
-                  <div class="price" id="tbPriceOut">—</div>
-                </div>
-              </div>
+ <!-- RIGHT -->
+ <aside class="rail" aria-label="Tier guidance rail">
+ <section class="card" aria-label="Tier guidance">
+ <div class="hd">
+ <h2 class="cardTitle">Tier direction</h2>
+ <p class="muted">Auto-derived from your inputs (override available).</p>
+ </div>
+ <div class="bd">
+ <div class="panel" aria-label="Tier panel">
+ <div class="panelTop">
+ <div>
+ <div class="label">Recommended tier</div>
+ <div class="value" id="tbTierOut">—</div>
+ </div>
+ <div>
+ <div class="label">Typical fee</div>
+ <div class="price" id="tbPriceOut">—</div>
+ </div>
+ </div>
 
-              <div class="small" id="tbLineOut" style="margin-top:10px;">Select form inputs to populate tier direction.</div>
+ <div class="small" id="tbLineOut" style="margin-top:10px;">Select form inputs to populate tier direction.</div>
 
-              <div class="actions" style="margin-top:12px;">
-                <button class="btn secondary" type="button" id="tbCopySummary">Copy summary</button>
-                <a class="btn secondary" id="tbEmailProc" href="mailto:procurement@noetfield.com">Email procurement</a>
-                <a class="btn secondary" href="/trust-brief/#pricing" data-rid-link>Back to pricing</a>
-              </div>
+ <div class="actions" style="margin-top:12px;">
+ <button class="btn secondary" type="button" id="tbCopySummary">Copy summary</button>
+ <a class="btn secondary" id="tbEmailProc" href="mailto:procurement@noetfield.com">Email procurement</a>
+ <a class="btn secondary" href="/trust-brief/#pricing" data-rid-link>Back to pricing</a>
+ </div>
 
-              <div class="notice" style="margin-top:12px;">
-                <strong>Disclosure:</strong> guidance only. Final quote confirmed after kickoff. Taxes may apply.
-                Public intake is non-confidential.
-              </div>
-            </div>
+ <div class="notice" style="margin-top:12px;">
+ <strong>Disclosure:</strong> guidance only. Final quote confirmed after kickoff. Taxes may apply.
+ Public intake is non-confidential.
+ </div>
+ </div>
 
-            <div class="panel" aria-label="Procurement routing" style="margin-top:12px;">
-              <div class="label">Routing</div>
-              <div class="small" style="margin-top:8px;">
-                Card purchase (where possible) or Invoice/PO via procurement. Use Request ID for internal tracking.
-              </div>
-              <div class="actions" style="margin-top:12px;">
-                <a class="btn primary" href="/gate/sales/" data-rid-link>Open purchase hub</a>
-                <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Invoice / PO</a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </aside>
-    </section>
+ <div class="panel" aria-label="Engagement intake routing" style="margin-top:12px;">
+ <div class="label">Routing</div>
+ <div class="small" style="margin-top:8px;">
+ Card purchase (where possible) or Engagement artifact via engagement intake. Use Request ID for internal tracking.
+ </div>
+ <div class="actions" style="margin-top:12px;">
+ <a class="btn primary" href="/gate/sales/" data-rid-link>Open purchase hub</a>
+ <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Engagement artifact</a>
+ </div>
+ </div>
+ </div>
+ </section>
+ </aside>
+ </section>
 
-    <section class="stickyCta" aria-label="Sticky CTA">
-      <div class="stickyInner">
-        <div class="stickyText"><strong>Trust Brief intake</strong> — non-confidential. Confirm scope signals and route via procurement if needed.</div>
-        <div class="actions" style="margin-top:0">
-          <a class="btn primary" href="#intake">Start intake</a>
-          <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Invoice / PO</a>
-        </div>
-      </div>
-    </section>
-  </main>
+ <section class="stickyCta" aria-label="Sticky CTA">
+ <div class="stickyInner">
+ <div class="stickyText"><strong>Trust Brief intake</strong> — non-confidential. Confirm scope signals and route via engagement intake if needed.</div>
+ <div class="actions" style="margin-top:0">
+ <a class="btn primary" href="#intake">Start intake</a>
+ <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Engagement artifact</a>
+ </div>
+ </div>
+ </section>
+ </main>
 
-  <footer id="nfFooter"></footer>
+ <footer id="nfFooter"></footer>
 
-  <script>
-    (function(){
-      function ridNew(){
-        var ts = Date.now().toString(36);
-        var rnd = Math.random().toString(36).slice(2, 8);
-        return ("NF-" + ts + "-" + rnd).toUpperCase();
-      }
-      function ridGet(){
-        try { return localStorage.getItem("nf_rid") || ""; } catch(e){ return ""; }
-      }
-      function ridSet(val){
-        try { localStorage.setItem("nf_rid", val); } catch(e){}
-        try{
-          document.querySelectorAll("[data-rid-text]").forEach(function(n){ n.textContent = val; });
-          document.querySelectorAll("[data-rid-field]").forEach(function(n){ n.value = val; });
-        }catch(e){}
-      }
-      function ridInit(){
-        var existing = ridGet();
-        var p = "";
-        try{
-          var sp = new URLSearchParams(location.search);
-          p = sp.get("rid") || "";
-        }catch(e){}
-        ridSet((p && p.length >= 6) ? p : (existing || ridNew()));
-      }
+ <script>
+ (function(){
+ function ridNew(){
+ var ts = Date.now().toString(36);
+ var rnd = Math.random().toString(36).slice(2, 8);
+ return ("NF-" + ts + "-" + rnd).toUpperCase();
+ }
+ function ridGet(){
+ try { return localStorage.getItem("nf_rid") || ""; } catch(e){ return ""; }
+ }
+ function ridSet(val){
+ try { localStorage.setItem("nf_rid", val); } catch(e){}
+ try{
+ document.querySelectorAll("[data-rid-text]").forEach(function(n){ n.textContent = val; });
+ document.querySelectorAll("[data-rid-field]").forEach(function(n){ n.value = val; });
+ }catch(e){}
+ }
+ function ridInit(){
+ var existing = ridGet();
+ var p = "";
+ try{
+ var sp = new URLSearchParams(location.search);
+ p = sp.get("rid") || "";
+ }catch(e){}
+ ridSet((p && p.length >= 6) ? p : (existing || ridNew()));
+ }
 
-      function fmtCAD(n){
-        try{
-          return new Intl.NumberFormat("en-CA", { style:"currency", currency:"CAD", maximumFractionDigits:0 }).format(n);
-        }catch(e){
-          return "$" + Math.round(n).toString() + " CAD";
-        }
-      }
+ function fmtCAD(n){
+ try{
+ return new Intl.NumberFormat("en-CA", { style:"currency", currency:"CAD", maximumFractionDigits:0 }).format(n);
+ }catch(e){
+ return "$" + Math.round(n).toString() + " CAD";
+ }
+ }
 
-      function mailto(to, subject, body){
-        function enc(s){ return encodeURIComponent(s || ""); }
-        return "mailto:" + enc(to) + "?subject=" + enc(subject) + "&body=" + enc(body);
-      }
+ function mailto(to, subject, body){
+ function enc(s){ return encodeURIComponent(s || ""); }
+ return "mailto:" + enc(to) + "?subject=" + enc(subject) + "&body=" + enc(body);
+ }
 
-      function baseFromBand(band){
-        if (band === "1-3") return { name:"TB — Base", price:12500, ucIncluded:3, teamsIncluded:1 };
-        if (band === "4-8") return { name:"TB — Pro", price:18500, ucIncluded:8, teamsIncluded:3 };
-        if (band === "9-15") return { name:"TB — Enterprise", price:27500, ucIncluded:15, teamsIncluded:4 };
-        return { name:"TB — Enterprise (custom)", price:27500, ucIncluded:15, teamsIncluded:4, custom:true };
-      }
-      function parseBandMax(band){
-        if (band === "1-3") return 3;
-        if (band === "4-8") return 8;
-        if (band === "9-15") return 15;
-        return 16;
-      }
-      function teamCountFromSel(v){
-        if (v === "1") return 1;
-        if (v === "2-3") return 3;
-        return 4;
-      }
-      function multRisk(v){
-        if (v === "regulated") return 1.25;
-        if (v === "high") return 1.5;
-        return 1.0;
-      }
-      function multEvidence(v){
-        if (v === "deep") return 1.15;
-        return 1.0;
-      }
+ function baseFromBand(band){
+ if (band === "1-3") return { name:"TB — Base", price:12500, ucIncluded:3, teamsIncluded:1 };
+ if (band === "4-8") return { name:"TB — Pro", price:18500, ucIncluded:8, teamsIncluded:3 };
+ if (band === "9-15") return { name:"TB — Enterprise", price:27500, ucIncluded:15, teamsIncluded:4 };
+ return { name:"TB — Enterprise (custom)", price:27500, ucIncluded:15, teamsIncluded:4, custom:true };
+ }
+ function parseBandMax(band){
+ if (band === "1-3") return 3;
+ if (band === "4-8") return 8;
+ if (band === "9-15") return 15;
+ return 16;
+ }
+ function teamCountFromSel(v){
+ if (v === "1") return 1;
+ if (v === "2-3") return 3;
+ return 4;
+ }
+ function multRisk(v){
+ if (v === "regulated") return 1.25;
+ if (v === "high") return 1.5;
+ return 1.0;
+ }
+ function multEvidence(v){
+ if (v === "deep") return 1.15;
+ return 1.0;
+ }
 
-      function prefill(){
-        try{
-          var sp = new URLSearchParams(location.search);
-          var tier = (sp.get("tier") || "").toLowerCase();
-          var pre = document.querySelector("[data-prefill-tier]");
-          if (pre) pre.value = tier || "";
-          var tierSel = document.getElementById("tb_tier");
-          if (tierSel && (tier === "base" || tier === "pro" || tier === "enterprise")) tierSel.value = tier;
-        }catch(e){}
-      }
+ function prefill(){
+ try{
+ var sp = new URLSearchParams(location.search);
+ var tier = (sp.get("tier") || "").toLowerCase();
+ var pre = document.querySelector("[data-prefill-tier]");
+ if (pre) pre.value = tier || "";
+ var tierSel = document.getElementById("tb_tier");
+ if (tierSel && (tier === "base" || tier === "pro" || tier === "enterprise")) tierSel.value = tier;
+ }catch(e){}
+ }
 
-      function buildSummary(){
-        var rid = ridGet() || "—";
-        var band = (document.getElementById("tb_usecases")||{}).value || "";
-        var teamsSel = (document.getElementById("tb_teams")||{}).value || "";
-        var risk = (document.getElementById("tb_risk")||{}).value || "";
-        var evidence = (document.getElementById("tb_evidence")||{}).value || "";
-        var prefTier = (document.getElementById("tb_tier")||{}).value || "";
-        var proc = (document.getElementById("tb_proc")||{}).value || "";
-        var driver = (document.getElementById("tb_driver")||{}).value || "";
-        var start = (document.getElementById("tb_start")||{}).value || "";
-        var org = (document.getElementById("tb_org")||{}).value || "";
-        var notes = (document.getElementById("tb_notes")||{}).value || "";
+ function buildSummary(){
+ var rid = ridGet() || "—";
+ var band = (document.getElementById("tb_usecases")||{}).value || "";
+ var teamsSel = (document.getElementById("tb_teams")||{}).value || "";
+ var risk = (document.getElementById("tb_risk")||{}).value || "";
+ var evidence = (document.getElementById("tb_evidence")||{}).value || "";
+ var prefTier = (document.getElementById("tb_tier")||{}).value || "";
+ var proc = (document.getElementById("tb_proc")||{}).value || "";
+ var driver = (document.getElementById("tb_driver")||{}).value || "";
+ var start = (document.getElementById("tb_start")||{}).value || "";
+ var org = (document.getElementById("tb_org")||{}).value || "";
+ var notes = (document.getElementById("tb_notes")||{}).value || "";
 
-        if (!band || !teamsSel || !risk || !evidence) return null;
+ if (!band || !teamsSel || !risk || !evidence) return null;
 
-        var base = baseFromBand(band);
-        if (prefTier === "base") base = { name:"TB — Base", price:12500, ucIncluded:3, teamsIncluded:1 };
-        if (prefTier === "pro") base = { name:"TB — Pro", price:18500, ucIncluded:8, teamsIncluded:3 };
-        if (prefTier === "enterprise") base = { name:"TB — Enterprise", price:27500, ucIncluded:15, teamsIncluded:4 };
+ var base = baseFromBand(band);
+ if (prefTier === "base") base = { name:"TB — Base", price:12500, ucIncluded:3, teamsIncluded:1 };
+ if (prefTier === "pro") base = { name:"TB — Pro", price:18500, ucIncluded:8, teamsIncluded:3 };
+ if (prefTier === "enterprise") base = { name:"TB — Enterprise", price:27500, ucIncluded:15, teamsIncluded:4 };
 
-        var estUseCases = parseBandMax(band);
-        var estTeams = teamCountFromSel(teamsSel);
+ var estUseCases = parseBandMax(band);
+ var estTeams = teamCountFromSel(teamsSel);
 
-        var extraUC = Math.max(0, estUseCases - base.ucIncluded);
-        var extraTeams = Math.max(0, estTeams - base.teamsIncluded);
+ var extraUC = Math.max(0, estUseCases - base.ucIncluded);
+ var extraTeams = Math.max(0, estTeams - base.teamsIncluded);
 
-        var subtotal = base.price + (extraUC * 900) + (extraTeams * 2500);
-        var total = Math.round(subtotal * multRisk(risk) * multEvidence(evidence));
+ var subtotal = base.price + (extraUC * 900) + (extraTeams * 2500);
+ var total = Math.round(subtotal * multRisk(risk) * multEvidence(evidence));
 
-        var line =
-          base.name +
-          " • Use cases: " + band +
-          " • Teams: " + teamsSel +
-          " • Risk: " + risk +
-          " • Evidence: " + evidence +
-          (extraUC ? (" • +"+extraUC+" extra use case(s)") : "") +
-          (extraTeams ? (" • +"+extraTeams+" extra team(s)") : "");
+ var line =
+ base.name +
+ " • Use cases: " + band +
+ " • Teams: " + teamsSel +
+ " • Risk: " + risk +
+ " • Evidence: " + evidence +
+ (extraUC ? (" • +"+extraUC+" extra use case(s)") : "") +
+ (extraTeams ? (" • +"+extraTeams+" extra team(s)") : "");
 
-        var body =
-          "Noetfield — Trust Brief (Intake Summary)\n" +
-          "Request ID: " + rid + "\n" +
-          (org ? ("Organization: " + org + "\n") : "") +
-          (driver ? ("Primary driver: " + driver + "\n") : "") +
-          (start ? ("Desired start window: " + start + "\n") : "") +
-          "Tier direction: " + base.name + "\n" +
-          "Inputs: Use cases " + band + ", Teams " + teamsSel + ", Risk " + risk + ", Evidence " + evidence + "\n" +
-          "Typical fee guidance: " + fmtCAD(total) + "\n" +
-          "Procurement path: " + (proc || "—") + "\n" +
-          "Notes (high-level): " + (notes || "—") + "\n" +
-          "Disclosure: Guidance only; final quote confirmed after kickoff. Public intake is non-confidential.\n";
+ var body =
+ "Noetfield — Trust Brief (Intake Summary)\n" +
+ "Request ID: " + rid + "\n" +
+ (org ? ("Organization: " + org + "\n") : "") +
+ (driver ? ("Primary driver: " + driver + "\n") : "") +
+ (start ? ("Desired start window: " + start + "\n") : "") +
+ "Tier direction: " + base.name + "\n" +
+ "Inputs: Use cases " + band + ", Teams " + teamsSel + ", Risk " + risk + ", Evidence " + evidence + "\n" +
+ "Typical fee guidance: " + fmtCAD(total) + "\n" +
+ "Engagement intake path: " + (proc || "—") + "\n" +
+ "Notes (high-level): " + (notes || "—") + "\n" +
+ "Disclosure: Guidance only; final quote confirmed after kickoff. Public intake is non-confidential.\n";
 
-        return { rid: rid, tierName: base.name, total: total, line: line, body: body };
-      }
+ return { rid: rid, tierName: base.name, total: total, line: line, body: body };
+ }
 
-      function applySummary(){
-        var tierOut = document.getElementById("tbTierOut");
-        var priceOut = document.getElementById("tbPriceOut");
-        var lineOut = document.getElementById("tbLineOut");
-        var emailProc = document.getElementById("tbEmailProc");
-        var emailInstead = document.getElementById("tbEmailInstead");
+ function applySummary(){
+ var tierOut = document.getElementById("tbTierOut");
+ var priceOut = document.getElementById("tbPriceOut");
+ var lineOut = document.getElementById("tbLineOut");
+ var emailProc = document.getElementById("tbEmailProc");
+ var emailInstead = document.getElementById("tbEmailInstead");
 
-        var s = buildSummary();
-        if (!s){
-          if (tierOut) tierOut.textContent = "—";
-          if (priceOut) priceOut.textContent = "—";
-          if (lineOut) lineOut.textContent = "Select form inputs to populate tier direction.";
-          if (emailProc) emailProc.href = "mailto:procurement@noetfield.com";
-          if (emailInstead) emailInstead.href = "mailto:sales@noetfield.com";
-          return;
-        }
+ var s = buildSummary();
+ if (!s){
+ if (tierOut) tierOut.textContent = "—";
+ if (priceOut) priceOut.textContent = "—";
+ if (lineOut) lineOut.textContent = "Select form inputs to populate tier direction.";
+ if (emailProc) emailProc.href = "mailto:procurement@noetfield.com";
+ if (emailInstead) emailInstead.href = "mailto:sales@noetfield.com";
+ return;
+ }
 
-        if (tierOut) tierOut.textContent = s.tierName;
-        if (priceOut) priceOut.textContent = fmtCAD(s.total);
-        if (lineOut) lineOut.textContent = s.line;
+ if (tierOut) tierOut.textContent = s.tierName;
+ if (priceOut) priceOut.textContent = fmtCAD(s.total);
+ if (lineOut) lineOut.textContent = s.line;
 
-        if (emailProc) emailProc.href = mailto("procurement@noetfield.com", "Noetfield — Trust Brief | Procurement / Invoice Request (" + s.rid + ")", s.body);
-        if (emailInstead) emailInstead.href = mailto("sales@noetfield.com", "Noetfield — Trust Brief Intake (" + s.rid + ")", s.body);
+ if (emailProc) emailProc.href = mailto("procurement@noetfield.com", "Noetfield — Trust Brief | Engagement intake / Invoice Request (" + s.rid + ")", s.body);
+ if (emailInstead) emailInstead.href = mailto("sales@noetfield.com", "Noetfield — Trust Brief Intake (" + s.rid + ")", s.body);
 
-        try { window.__tbSummary = s.body; } catch(e){}
-      }
+ try { window.__tbSummary = s.body; } catch(e){}
+ }
 
-      function copyRID(){
-        try{
-          var rid = ridGet() || "";
-          if (!rid) return;
-          if (navigator.clipboard && navigator.clipboard.writeText){
-            navigator.clipboard.writeText(rid);
-            return;
-          }
-          var ta = document.createElement("textarea");
-          ta.value = rid;
-          ta.style.position="fixed"; ta.style.left="-9999px";
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand("copy");
-          document.body.removeChild(ta);
-        }catch(e){}
-      }
+ function copyRID(){
+ try{
+ var rid = ridGet() || "";
+ if (!rid) return;
+ if (navigator.clipboard && navigator.clipboard.writeText){
+ navigator.clipboard.writeText(rid);
+ return;
+ }
+ var ta = document.createElement("textarea");
+ ta.value = rid;
+ ta.style.position="fixed"; ta.style.left="-9999px";
+ document.body.appendChild(ta);
+ ta.select();
+ document.execCommand("copy");
+ document.body.removeChild(ta);
+ }catch(e){}
+ }
 
-      function copySummary(){
-        try{
-          var t = window.__tbSummary || "";
-          if (!t){ applySummary(); t = window.__tbSummary || ""; }
-          if (!t) return;
+ function copySummary(){
+ try{
+ var t = window.__tbSummary || "";
+ if (!t){ applySummary(); t = window.__tbSummary || ""; }
+ if (!t) return;
 
-          if (navigator.clipboard && navigator.clipboard.writeText){
-            navigator.clipboard.writeText(t);
-            return;
-          }
-          var ta = document.createElement("textarea");
-          ta.value = t;
-          ta.style.position="fixed"; ta.style.left="-9999px";
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand("copy");
-          document.body.removeChild(ta);
-        }catch(e){}
-      }
+ if (navigator.clipboard && navigator.clipboard.writeText){
+ navigator.clipboard.writeText(t);
+ return;
+ }
+ var ta = document.createElement("textarea");
+ ta.value = t;
+ ta.style.position="fixed"; ta.style.left="-9999px";
+ document.body.appendChild(ta);
+ ta.select();
+ document.execCommand("copy");
+ document.body.removeChild(ta);
+ }catch(e){}
+ }
 
-      ridInit();
-      prefill();
-      applySummary();
+ ridInit();
+ prefill();
+ applySummary();
 
-      ["tb_usecases","tb_teams","tb_risk","tb_evidence","tb_tier","tb_proc","tb_driver","tb_start","tb_org","tb_notes"].forEach(function(id){
-        var el = document.getElementById(id);
-        if (!el) return;
-        el.addEventListener("change", applySummary);
-        if (id === "tb_notes") el.addEventListener("input", function(){ /* quiet */ });
-      });
+ ["tb_usecases","tb_teams","tb_risk","tb_evidence","tb_tier","tb_proc","tb_driver","tb_start","tb_org","tb_notes"].forEach(function(id){
+ var el = document.getElementById(id);
+ if (!el) return;
+ el.addEventListener("change", applySummary);
+ if (id === "tb_notes") el.addEventListener("input", function(){ /* quiet */ });
+ });
 
-      document.querySelectorAll("[data-copy-rid]").forEach(function(btn){
-        btn.addEventListener("click", copyRID);
-      });
-      var copyBtn = document.getElementById("tbCopySummary");
-      if (copyBtn) copyBtn.addEventListener("click", copySummary);
+ document.querySelectorAll("[data-copy-rid]").forEach(function(btn){
+ btn.addEventListener("click", copyRID);
+ });
+ var copyBtn = document.getElementById("tbCopySummary");
+ if (copyBtn) copyBtn.addEventListener("click", copySummary);
 
-      var form = document.getElementById("tbIntakeForm");
-      var okWrap = document.getElementById("tbOk");
-      if (form && okWrap){
-        form.addEventListener("submit", function(){
-          try { okWrap.style.display = "block"; } catch(e){}
-        });
-      }
-    })();
-  </script>
+ var form = document.getElementById("tbIntakeForm");
+ var okWrap = document.getElementById("tbOk");
+ if (form && okWrap){
+ form.addEventListener("submit", function(){
+ try { okWrap.style.display = "block"; } catch(e){}
+ });
+ }
+ })();
+ </script>
 
-  <!--
-    CONFIG
-    - Replace Formspree endpoint with Trust Brief-specific endpoint.
-    - Optional: create /trust-brief/thanks/ and configure redirect.
+ <!--
+ CONFIG
+ - Replace Formspree endpoint with Trust Brief-specific endpoint.
+ - Optional: create /trust-brief/thanks/ and configure redirect.
 
-    SMOKE TEST
-    - GET /trust-brief/intake/ returns 200
-    - /assets/noetfield-shell.css and /assets/noetfield-shell.js return 200
-    - header/footer injected into #nfHeader/#nfFooter
-    - RID persists (localStorage) and appears + hidden field
-    - Tier rail updates as inputs change
-    - Copy RID + Copy summary work
-    - Mailto links include RID + summary
-  -->
+ SMOKE TEST
+ - GET /trust-brief/intake/ returns 200
+ - /assets/noetfield-shell.css and /assets/noetfield-shell.js return 200
+ - header/footer injected into #nfHeader/#nfFooter
+ - RID persists (localStorage) and appears + hidden field
+ - Tier rail updates as inputs change
+ - Copy RID + Copy summary work
+ - Mailto links include RID + summary
+ -->
 </body>
 </html>

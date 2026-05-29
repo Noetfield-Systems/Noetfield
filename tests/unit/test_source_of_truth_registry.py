@@ -49,7 +49,7 @@ def test_ingestion_payload_summary_counts() -> None:
     assert summary["batch_count"] == 20
     assert summary["document_count"] == 220
     assert summary["sot_decision_count"] == 97
-    assert summary["active_rule_candidate_count"] == 131
+    assert summary["active_rule_candidate_count"] == 135
     assert "wp03-npl-formal-grammar-2026-05-npl-1" in summary["active_documents"]
     assert "wp01-context-graph-runtime-edition-v2" in summary["active_documents"]
 
@@ -547,3 +547,12 @@ def test_twentieth_batch_cognitive_os_sot_domains_are_registered() -> None:
 
     assert domains["noetfield_cognitive_os_sot_master"]["active_document_key"] == "noetfield-sot-master-document-v1"
     assert domains["noetfield_cognitive_os_unified"]["active_document_key"] == "noetfield-unified-cognitive-governance-system-v1"
+
+def test_final_lock_rule_candidates_are_present() -> None:
+    payload = build_payload()
+    rule_keys = {rule["rule_key"] for rule in payload.rule_registry["active_rule_candidates"]}
+
+    assert "final-lock-public-semantics-gtm" in rule_keys
+    assert "final-lock-domain-split-noetfield-com" in rule_keys
+    assert "final-lock-stripe-commercial-licensing-only" in rule_keys
+    assert "final-lock-three-offerings-only" in rule_keys

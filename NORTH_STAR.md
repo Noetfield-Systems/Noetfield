@@ -60,6 +60,20 @@ See [OFFERINGS.md](OFFERINGS.md) for scope boundaries.
 | **v3 MVP** | Separate product track — linear orchestration demo (not L0 identity) |
 | **AI OS target** | Control plane spec — roadmap only |
 
+## FINAL LOCK public semantics (GTM)
+
+| Do not use | Use instead |
+|------------|-------------|
+| routing (sales/intake) | governance flow · lane assignment |
+| procurement (visible copy) | engagement intake |
+| invoice / PO | engagement artifact |
+| payment intent | *(remove)* |
+| card payment (Stripe) | commercial license (card) |
+
+Stripe: **commercial software licensing / service subscription only**, with disclaimer that Noetfield performs no custody, payment routing, or money transmission.
+
+**Domain:** `noetfield.com` = institutional only · `platform.noetfield.com` = demos/runtime.
+
 ## Prohibited public language
 
 Do not use on `noetfield.com`, Gate, or sales collateral:

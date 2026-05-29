@@ -1,5 +1,5 @@
 {
-  "registry_version": "2026-05-29-rules-17",
+  "registry_version": "2026-05-29-rules-18",
   "active_rule_candidates": [
     {
       "rule_key": "npl-no-side-effects",
@@ -1179,6 +1179,42 @@
       "rule_type": "epistemic_governance",
       "summary": "Golden Edge synthesis maximizes coherence; not chatbot majority vote.",
       "implementation_target": "governance_runtime"
+    },
+    {
+      "rule_key": "final-lock-public-semantics-gtm",
+      "domain": "noetfield_corporate_api_definition",
+      "source_document_key": "noetfield-corporate-definition-governance-v2-1",
+      "activation_status": "active_design_rule",
+      "rule_type": "gtm",
+      "summary": "Public layer: engagement intake not procurement; governance flow not payment routing; no payment intent.",
+      "implementation_target": "gtm_policy"
+    },
+    {
+      "rule_key": "final-lock-domain-split-noetfield-com",
+      "domain": "noetfield_cognitive_os_sot_master",
+      "source_document_key": "noetfield-sot-master-document-v1",
+      "activation_status": "active_design_rule",
+      "rule_type": "deployment",
+      "summary": "noetfield.com institutional only; platform/console subdomain for demos and FastAPI runtime.",
+      "implementation_target": "deployment"
+    },
+    {
+      "rule_key": "final-lock-stripe-commercial-licensing-only",
+      "domain": "noetfield_corporate_api_definition",
+      "source_document_key": "noetfield-corporate-definition-governance-v2-1",
+      "activation_status": "active_design_rule",
+      "rule_type": "legal_positioning",
+      "summary": "Stripe only for software/service subscription; required no-custody disclaimer on checkout pages.",
+      "implementation_target": "gtm_policy"
+    },
+    {
+      "rule_key": "final-lock-three-offerings-only",
+      "domain": "noetfield_bank_enterprise_pilot",
+      "source_document_key": "noetfield-enterprise-bank-pilot-brief-v6-1",
+      "activation_status": "active_design_rule",
+      "rule_type": "gtm",
+      "summary": "Only Trust Brief, Copilot Readiness Pack, Bank Pilot v6.1 are contractable offerings.",
+      "implementation_target": "gtm_policy"
     }
   ]
 }
