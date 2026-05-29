@@ -24,6 +24,13 @@ inventory.
 - Operator workflow: `cursor-ide-shortcuts-m5-pro-2026` as reference only
 - POSA GTM: `posa-saas-first-100-users-launch-strategy-v1` as external product
   reference only
+- POSA system: `posa-v3-0-source-of-truth` as active POSA root SOT
+- POSA revenue subsystem: `posa-v3-1-autonomous-revenue-system` as active
+  revenue subsystem SOT
+- POSA memory subsystem: `posa-digital-twin-training-memory-implementation-v1`
+  as active memory subsystem SOT
+- Shopify Price Intelligence: `shopify-price-intelligence-system-v1` as a
+  separate product reference only
 
 ## Database loading
 

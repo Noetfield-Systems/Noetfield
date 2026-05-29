@@ -225,6 +225,156 @@
       "supersedes": [],
       "superseded_by": null,
       "upload_batch": "2026-05-002"
+    },
+    {
+      "document_key": "posa-saas-full-digital-twin-platform",
+      "title": "POSA SaaS - Full Digital Twin Platform",
+      "domain": "posa_saas",
+      "work_package": "reference",
+      "version_label": "saas-evolution",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-saas-full-digital-twin-platform.md",
+      "classification": "active_posa_saas_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-scale-strategy-10k-month-v1",
+      "title": "POSA Scale Strategy - 10K Month System v1.0",
+      "domain": "posa_gtm",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-scale-strategy-10k-month-v1.md",
+      "classification": "posa_gtm_scaling_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-first-revenue-playbook-v1",
+      "title": "POSA - First Revenue Playbook v1.0",
+      "domain": "posa_gtm",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-first-revenue-playbook-v1.md",
+      "classification": "superseded_posa_gtm_playbook",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": "posa-first-revenue-automation-system-v1",
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-plug-and-play-deployment-architecture",
+      "title": "POSA - Plug-and-Play Deployment Architecture",
+      "domain": "posa_infrastructure",
+      "work_package": "reference",
+      "version_label": "deployment-architecture",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-plug-and-play-deployment-architecture.md",
+      "classification": "active_posa_infrastructure_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "shopify-price-intelligence-system-v1",
+      "title": "Shopify Price Intelligence System - Full Documentation v1.0",
+      "domain": "shopify_price_intelligence",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/shopify-price-intelligence-system-v1.md",
+      "classification": "separate_product_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-first-working-mvp-blueprint",
+      "title": "POSA - First Working MVP Blueprint",
+      "domain": "posa_mvp",
+      "work_package": "reference",
+      "version_label": "7-10-day-mvp",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-first-working-mvp-blueprint.md",
+      "classification": "active_posa_mvp_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-v3-1-autonomous-revenue-system",
+      "title": "POSA v3.1 - Autonomous Revenue System Integrated with Digital Twin",
+      "domain": "posa_revenue_system",
+      "work_package": "reference",
+      "version_label": "v3.1",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-v3-1-autonomous-revenue-system.md",
+      "classification": "active_source_of_truth",
+      "status": "active",
+      "supersedes": [
+        "posa-first-revenue-automation-system-v1",
+        "posa-first-revenue-playbook-v1"
+      ],
+      "superseded_by": null,
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-digital-twin-training-pipeline-v1",
+      "title": "POSA - Digital Twin Training Pipeline v1.0",
+      "domain": "posa_digital_twin_training",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-digital-twin-training-pipeline-v1.md",
+      "classification": "active_training_reference",
+      "status": "reference",
+      "supersedes": [],
+      "superseded_by": "posa-digital-twin-training-memory-implementation-v1",
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-digital-twin-training-memory-implementation-v1",
+      "title": "POSA - Digital Twin Training and Memory System Implementation v1.0",
+      "domain": "posa_memory_system",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-digital-twin-training-memory-implementation-v1.md",
+      "classification": "active_source_of_truth",
+      "status": "active",
+      "supersedes": [
+        "posa-digital-twin-training-pipeline-v1"
+      ],
+      "superseded_by": null,
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-first-revenue-automation-system-v1",
+      "title": "POSA - First Revenue Automation System v1.0",
+      "domain": "posa_revenue_system",
+      "work_package": "reference",
+      "version_label": "v1.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-first-revenue-automation-system-v1.md",
+      "classification": "superseded_revenue_reference",
+      "status": "reference",
+      "supersedes": [
+        "posa-first-revenue-playbook-v1"
+      ],
+      "superseded_by": "posa-v3-1-autonomous-revenue-system",
+      "upload_batch": "2026-05-003"
+    },
+    {
+      "document_key": "posa-v3-0-source-of-truth",
+      "title": "POSA v3.0 - Source of Truth",
+      "domain": "posa_system",
+      "work_package": "reference",
+      "version_label": "v3.0",
+      "source_path": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003/posa-v3-0-source-of-truth.md",
+      "classification": "active_source_of_truth",
+      "status": "active",
+      "supersedes": [],
+      "superseded_by": null,
+      "upload_batch": "2026-05-003"
     }
   ],
   "batches": [
@@ -235,6 +385,10 @@
     {
       "batch_id": "2026-05-002",
       "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-002"
+    },
+    {
+      "batch_id": "2026-05-003",
+      "source_folder": "docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-003"
     }
   ]
 }

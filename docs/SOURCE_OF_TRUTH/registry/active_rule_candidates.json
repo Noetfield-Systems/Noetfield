@@ -90,6 +90,69 @@
       "rule_type": "model_routing",
       "summary": "Use local models for speed/privacy and cloud models for deep reasoning; routing should be governed by risk, cost, latency, and capability.",
       "implementation_target": "model_routing_policy_pack"
+    },
+    {
+      "rule_key": "posa-continuous-loop-required",
+      "domain": "posa_system",
+      "source_document_key": "posa-v3-0-source-of-truth",
+      "activation_status": "active_design_rule",
+      "rule_type": "posa_system_invariant",
+      "summary": "POSA behavior must follow Perception -> Interpretation -> Strategy -> Execution -> Outcome -> Learning -> Memory Update.",
+      "implementation_target": "posa_orchestration_runtime"
+    },
+    {
+      "rule_key": "posa-no-direct-execution-bypass",
+      "domain": "posa_system",
+      "source_document_key": "posa-v3-0-source-of-truth",
+      "activation_status": "active_design_rule",
+      "rule_type": "execution_governance",
+      "summary": "All POSA actions must pass through Plan -> Validate -> Execute -> Verify -> Log; no direct execution bypass is allowed.",
+      "implementation_target": "posa_execution_runtime"
+    },
+    {
+      "rule_key": "posa-memory-event-log-immutable",
+      "domain": "posa_memory_system",
+      "source_document_key": "posa-digital-twin-training-memory-implementation-v1",
+      "activation_status": "active_design_rule",
+      "rule_type": "memory_governance",
+      "summary": "POSA must never overwrite event logs or delete historical decisions; full traceability is required.",
+      "implementation_target": "posa_memory_runtime"
+    },
+    {
+      "rule_key": "posa-digital-twin-gates-economic-actions",
+      "domain": "posa_revenue_system",
+      "source_document_key": "posa-v3-1-autonomous-revenue-system",
+      "activation_status": "active_design_rule",
+      "rule_type": "revenue_governance",
+      "summary": "Every economic/revenue action must pass through the Digital Twin decision gate before execution.",
+      "implementation_target": "posa_revenue_runtime"
+    },
+    {
+      "rule_key": "posa-revenue-real-demand-only",
+      "domain": "posa_revenue_system",
+      "source_document_key": "posa-first-revenue-automation-system-v1",
+      "activation_status": "active_design_rule",
+      "rule_type": "revenue_strategy",
+      "summary": "POSA revenue system must operate on real market demand and convert intelligence into cashflow loops.",
+      "implementation_target": "posa_revenue_runtime"
+    },
+    {
+      "rule_key": "posa-high-impact-actions-require-approval",
+      "domain": "posa_system",
+      "source_document_key": "posa-v3-0-source-of-truth",
+      "activation_status": "active_design_rule",
+      "rule_type": "approval_governance",
+      "summary": "POSA must enforce approval thresholds for high-impact or irreversible actions.",
+      "implementation_target": "posa_governance_runtime"
+    },
+    {
+      "rule_key": "shopify-scraper-self-healing-required",
+      "domain": "shopify_price_intelligence",
+      "source_document_key": "shopify-price-intelligence-system-v1",
+      "activation_status": "candidate_requires_formalization",
+      "rule_type": "product_reliability",
+      "summary": "Shopify price scraper should include retry, proxy rotation, selector fallback, semantic extraction, graceful degradation, and partial success logging.",
+      "implementation_target": "shopify_price_intelligence_runtime"
     }
   ]
 }

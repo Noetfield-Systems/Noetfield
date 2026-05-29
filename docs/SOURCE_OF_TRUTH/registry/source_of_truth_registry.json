@@ -64,6 +64,62 @@
       "decision": "external_product_reference",
       "rationale": "POSA launch plan is a GTM reference for a separate product concept and should not affect Noetfield runtime governance unless explicitly scoped later.",
       "confidence": 0.72
+    },
+    {
+      "domain": "posa_system",
+      "active_document_key": "posa-v3-0-source-of-truth",
+      "active_version": "v3.0",
+      "decision": "active_source_of_truth",
+      "rationale": "POSA v3.0 is the highest-level source-of-truth for the personal operating system agent architecture. POSA v3.1 revenue documents are subsystem sources under this root specification.",
+      "confidence": 0.91
+    },
+    {
+      "domain": "posa_revenue_system",
+      "active_document_key": "posa-v3-1-autonomous-revenue-system",
+      "active_version": "v3.1",
+      "decision": "active_subsystem_source_of_truth",
+      "rationale": "POSA v3.1 is the newest and most complete autonomous revenue subsystem specification and supersedes earlier revenue automation/playbook documents for revenue architecture.",
+      "confidence": 0.9
+    },
+    {
+      "domain": "posa_memory_system",
+      "active_document_key": "posa-digital-twin-training-memory-implementation-v1",
+      "active_version": "v1.0",
+      "decision": "active_subsystem_source_of_truth",
+      "rationale": "This is the strongest uploaded source for POSA digital twin and memory semantics, including memory governance and event-log rules.",
+      "confidence": 0.88
+    },
+    {
+      "domain": "posa_saas",
+      "active_document_key": "posa-saas-full-digital-twin-platform",
+      "active_version": "saas-evolution",
+      "decision": "active_reference",
+      "rationale": "Defines POSA multi-tenant SaaS evolution, but should remain separate from single-user POSA v3.0 source-of-truth until product line is explicitly selected.",
+      "confidence": 0.82
+    },
+    {
+      "domain": "posa_infrastructure",
+      "active_document_key": "posa-plug-and-play-deployment-architecture",
+      "active_version": "deployment-architecture",
+      "decision": "active_reference",
+      "rationale": "Defines deployable POSA Docker/cloud architecture; useful if POSA becomes implemented product line.",
+      "confidence": 0.8
+    },
+    {
+      "domain": "posa_mvp",
+      "active_document_key": "posa-first-working-mvp-blueprint",
+      "active_version": "7-10-day-mvp",
+      "decision": "active_reference",
+      "rationale": "Most concrete POSA MVP execution plan for a first working Telegram-controlled revenue loop.",
+      "confidence": 0.83
+    },
+    {
+      "domain": "shopify_price_intelligence",
+      "active_document_key": "shopify-price-intelligence-system-v1",
+      "active_version": "v1.0",
+      "decision": "separate_product_reference",
+      "rationale": "Separate Shopify product blueprint; does not govern POSA or Noetfield unless later adopted as a product module.",
+      "confidence": 0.76
     }
   ]
 }

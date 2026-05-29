@@ -46,10 +46,10 @@ def test_ingestion_payload_summary_counts() -> None:
     summary = summarize_payload(payload)
 
     assert summary["batch_id"] == "2026-05-combined"
-    assert summary["batch_count"] == 2
-    assert summary["document_count"] == 17
-    assert summary["sot_decision_count"] == 8
-    assert summary["active_rule_candidate_count"] == 10
+    assert summary["batch_count"] == 3
+    assert summary["document_count"] == 28
+    assert summary["sot_decision_count"] == 15
+    assert summary["active_rule_candidate_count"] == 17
     assert "wp03-npl-formal-grammar-2026-05-npl-1" in summary["active_documents"]
     assert "wp01-context-graph-runtime-edition-v2" in summary["active_documents"]
 
@@ -71,3 +71,24 @@ def test_new_active_rule_candidates_are_present() -> None:
     assert "trust-infrastructure-required-for-autonomy" in rule_keys
     assert "multi-agent-coordination-protocol-required" in rule_keys
     assert "hybrid-model-routing-policy-required" in rule_keys
+
+
+def test_third_batch_posa_resources_are_classified() -> None:
+    payload = build_payload()
+    documents = {document["document_key"]: document for document in payload.inventory["documents"]}
+
+    assert documents["posa-v3-0-source-of-truth"]["classification"] == "active_source_of_truth"
+    assert documents["posa-v3-1-autonomous-revenue-system"]["classification"] == "active_source_of_truth"
+    assert documents["posa-digital-twin-training-memory-implementation-v1"]["classification"] == "active_source_of_truth"
+    assert documents["shopify-price-intelligence-system-v1"]["classification"] == "separate_product_reference"
+
+
+def test_posa_active_rule_candidates_are_present() -> None:
+    payload = build_payload()
+    rule_keys = {rule["rule_key"] for rule in payload.rule_registry["active_rule_candidates"]}
+
+    assert "posa-continuous-loop-required" in rule_keys
+    assert "posa-no-direct-execution-bypass" in rule_keys
+    assert "posa-memory-event-log-immutable" in rule_keys
+    assert "posa-digital-twin-gates-economic-actions" in rule_keys
+    assert "posa-high-impact-actions-require-approval" in rule_keys
