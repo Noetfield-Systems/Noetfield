@@ -10,7 +10,7 @@ This page is safe for a **public** repository. Detailed `NF-*` checklists and fo
 
 | When | Focus |
 |------|--------|
-| **Now** | Production www + platform, public chat, API intake, optional Telegram |
+| **Now** | **Go forward:** deploy platform + sell API/pilots ([strategy/GO_FORWARD_NOW.md](strategy/GO_FORWARD_NOW.md)) |
 | **Next** | Staging, CI validation, legal alignment, pilot-ready console |
 | **Later** | RAG, pilot auth hardening, multi-tenant scale |
 
