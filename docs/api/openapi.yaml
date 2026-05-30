@@ -150,6 +150,66 @@ paths:
                 type: object
                 title: Response Governance Vendor Evidence V1 Api V1 Governance Vendor
                   Evidence Get
+  /api/v1/governance/partner-signals:
+    post:
+      tags:
+      - governance-v1
+      summary: Governance Partner Signals V1
+      description: Ingest read-only partner exchange/VASP signals (no order execution
+        from Noetfield).
+      operationId: governance_partner_signals_v1_api_v1_governance_partner_signals_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartnerSignalIngestRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Governance Partner Signals V1 Api V1 Governance Partner
+                  Signals Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/governance/scenario-presets/{preset}:
+    get:
+      tags:
+      - governance-v1
+      summary: Governance Scenario Preset V1
+      description: 'Demo JSON presets for console: exchange, bank, copilot.'
+      operationId: governance_scenario_preset_v1_api_v1_governance_scenario_presets__preset__get
+      parameters:
+      - name: preset
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Preset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response Governance Scenario Preset V1 Api V1 Governance Scenario
+                  Presets  Preset  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /health:
     get:
       tags:
@@ -432,6 +492,49 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    PartnerSignalIngestRequest:
+      properties:
+        tenant_id:
+          type: string
+          format: uuid
+          title: Tenant Id
+        organization_id:
+          type: string
+          format: uuid
+          title: Organization Id
+        partner_id:
+          type: string
+          maxLength: 120
+          minLength: 1
+          title: Partner Id
+        signal_kind:
+          type: string
+          maxLength: 64
+          title: Signal Kind
+          description: e.g. balance_snapshot, order_status, risk_flag, market_data
+        request_id:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Request Id
+        payload:
+          additionalProperties: true
+          type: object
+          title: Payload
+        actor_id:
+          type: string
+          title: Actor Id
+          default: partner-signal-ingest
+      additionalProperties: false
+      type: object
+      required:
+      - tenant_id
+      - organization_id
+      - partner_id
+      - signal_kind
+      title: PartnerSignalIngestRequest
+      description: Read-only operational signal from a licensed partner (exchange/VASP/PSP).
     PublicChatRequest:
       properties:
         message:

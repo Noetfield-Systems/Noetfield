@@ -182,6 +182,7 @@ app.state.governance_v1_deps = GovernanceV1Deps(
     event_bus=event_bus,
     audit_store=audit_store,
     webhooks=governance_webhooks,
+    signal_pipeline=signal_pipeline,
 )
 
 

@@ -53,6 +53,8 @@ PRIORITY = {
     "/trust-brief/intake/": 0.9,
     "/gate/intake/": 0.85,
     "/bank-pilot/": 0.88,
+    "/partners/": 0.88,
+    "/trust-ledger/": 0.82,
     "/status/": 0.75,
     "/faq/": 0.8,
     "/for-whom/": 0.8,
@@ -64,6 +66,8 @@ PRIORITY = {
 MARKETING_TOP = {
     "about",
     "bank-pilot",
+    "partners",
+    "trust-ledger",
     "copilot",
     "enterprise",
     "status",

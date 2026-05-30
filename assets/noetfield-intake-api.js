@@ -15,6 +15,7 @@
     if (v.indexOf("copilot") >= 0) return "copilot";
     if (v.indexOf("bank") >= 0) return "bank_pilot";
     if (v.indexOf("trust") >= 0) return "trust_brief";
+    if (v.indexOf("partner") >= 0) return "general";
     return "general";
   }
 

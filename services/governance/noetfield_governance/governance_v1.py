@@ -17,7 +17,13 @@ from noetfield_governance.golden_edge_v3 import GoldenEdgeEvaluateRequest, Golde
 from noetfield_governance.governance_rid import generate_rid, normalize_rid
 from noetfield_governance.governance_webhooks import GovernanceWebhookDispatcher
 from noetfield_governance.pilot_auth import PilotAuthContext, assert_tenant_allowed, require_pilot_auth
+from noetfield_governance.partner_signal import (
+    PartnerSignalIngestRequest,
+    normalize_partner_signal,
+    partner_evaluate_scenario_preset,
+)
 from noetfield_ledger import AuditLedgerStore
+from noetfield_signals import SignalIngestionPipeline
 from noetfield_types import Actor, ActorType
 
 logger = logging.getLogger("noetfield.governance.v1")
@@ -31,6 +37,7 @@ class GovernanceV1Deps:
     event_bus: object
     audit_store: AuditLedgerStore
     webhooks: GovernanceWebhookDispatcher
+    signal_pipeline: SignalIngestionPipeline | None = None
 
 
 def get_governance_v1_deps(request: Request) -> GovernanceV1Deps:
@@ -323,3 +330,43 @@ async def governance_vendor_evidence_v1(
         ),
         "contact": CANONICAL_INTAKE_EMAIL,
     }
+
+
+@router.post("/partner-signals")
+async def governance_partner_signals_v1(
+    body: PartnerSignalIngestRequest,
+    auth: PilotAuthContext = Depends(require_pilot_auth),
+    deps: GovernanceV1Deps = Depends(get_governance_v1_deps),
+) -> dict[str, object]:
+    """Ingest read-only partner exchange/VASP signals (no order execution from Noetfield)."""
+    assert_tenant_allowed(auth, body.tenant_id)
+    if deps.signal_pipeline is None:
+        raise HTTPException(status_code=503, detail="Signal pipeline not available")
+    try:
+        command = normalize_partner_signal(body)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    signal, trace = await deps.signal_pipeline.ingest(command)
+    trace_payload: dict[str, object] | object = trace
+    if hasattr(trace, "model_dump"):
+        trace_payload = trace.model_dump(mode="json")
+    return {
+        "api_version": "v1",
+        "read_only": True,
+        "signal_id": str(signal.signal_id),
+        "signal_type": signal.signal_type,
+        "trace": trace_payload,
+    }
+
+
+@router.get("/scenario-presets/{preset}")
+async def governance_scenario_preset_v1(
+    preset: str,
+    auth: PilotAuthContext = Depends(require_pilot_auth),
+) -> dict[str, object]:
+    """Demo JSON presets for console: exchange, bank, copilot."""
+    _ = auth
+    try:
+        return partner_evaluate_scenario_preset(preset)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
