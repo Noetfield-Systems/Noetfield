@@ -35,14 +35,14 @@ Seed locally: `./scripts/bootstrap-private-ops.sh` · MSB pack: `./scripts/seed-
 
 **MSB partner channel:** [docs/strategy/msb-partner-playbook.md](../docs/strategy/msb-partner-playbook.md) · deploy [docs/MSB_DEPLOY_AND_PILOT.md](../docs/MSB_DEPLOY_AND_PILOT.md)
 
-## Layer sovereignty (v3)
+## Internal doctrine (agents with `ops/private/` only)
 
-In this repo, **DELIVERY** is sovereign: [PRODUCT_TRUTH.md](../PRODUCT_TRUTH.md), locks, CI.  
-Read Desktop SSOT mirror only for **boundaries** — not as a merge veto. Registry **records** execution; it does not block PRs.
+**Not in git.** Read only if present after founder bootstrap:
 
-Doctrine (locked, SourceA): `Desktop/SourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md` — read mirror at `ops/private/sourceA/` if present.  
-Public summary: [docs/strategy/auto-conflict-engine-v3.md](../docs/strategy/auto-conflict-engine-v3.md)  
-Cross-plane statements must use tags: `[DESIGN]` `[EXECUTION]` `[DELIVERY]` (rule R9).
+- `ops/private/sourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md` (mirror)
+- Desktop canonical: `~/Desktop/SourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md`
+
+Do not copy this doctrine into `docs/`, www, or commits. Cross-plane notes use `[DESIGN]` `[EXECUTION]` `[DELIVERY]` when relevant.
 
 ## Scope
 

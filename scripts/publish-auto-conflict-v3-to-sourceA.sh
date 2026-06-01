@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Founder Mac only: copy locked ACE v3 doctrine → Desktop SourceA (canonical).
-# Agents must NOT run this unless ASF directs.
+# INTERNAL — Founder Mac only. Copies gitignored doctrine → Desktop SourceA.
+# Not public; do not commit ops/private/sourceA/*.md to GitHub.
 set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$REPO_ROOT/ops/private/sourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md"
