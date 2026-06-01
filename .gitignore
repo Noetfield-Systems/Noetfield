@@ -1,6 +1,7 @@
 .DS_Store
 .env
 .env.*
+.dev-cognitive-dashboard.env
 !.env.example
 
 __pycache__/

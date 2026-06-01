@@ -79,11 +79,17 @@ npm run dev
 
 Open http://localhost:3000/cognitive-dashboard
 
-From repo root (API + web, no Docker):
+From repo root (API + web, no Docker — **keeps running in the terminal**):
 
 ```bash
-./scripts/dev-cognitive-dashboard.sh
+make cognitive-dashboard-dev
+# or
+bash scripts/dev-cognitive-dashboard.sh
 ```
+
+If port 3000 is busy, the script uses **3100** (see `.dev-cognitive-dashboard.env` for the actual URL).
+
+Open the URL printed in the terminal, e.g. http://localhost:3000/cognitive-dashboard
 
 ## API
 
