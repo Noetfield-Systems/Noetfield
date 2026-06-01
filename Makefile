@@ -13,10 +13,14 @@ validate:
 	git diff --check
 
 api:
-	PYTHONPATH=$(PYTHONPATH_VALUE) uvicorn noetfield_governance.api:app --reload --app-dir services/governance
+	PYTHONPATH=$(PYTHONPATH_VALUE) RUNTIME_EVENT_STORE=memory python3 -m uvicorn noetfield_governance.api:app --reload --host 0.0.0.0 --port 8000 --app-dir services/governance
 
 api-v3:
-	PYTHONPATH=$(PYTHONPATH_VALUE) uvicorn noetfield_governance.api:app --reload --host 0.0.0.0 --port 8001 --app-dir services/governance
+	PYTHONPATH=$(PYTHONPATH_VALUE) RUNTIME_EVENT_STORE=memory python3 -m uvicorn noetfield_governance.api:app --reload --host 0.0.0.0 --port 8001 --app-dir services/governance
+
+platform-console-dev:
+	@chmod +x scripts/dev-platform-console.sh
+	./scripts/dev-platform-console.sh
 
 apply-migrations:
 	PYTHONPATH=$(PYTHONPATH_VALUE) python3 scripts/apply_postgres_migrations.py
