@@ -6,6 +6,8 @@
 .platform-console.log
 .www-dev.pid
 .www-dev.log
+.dev-proxy.pid
+.dev-proxy.log
 !.env.example
 
 __pycache__/

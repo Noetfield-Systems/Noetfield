@@ -1,4 +1,6 @@
 # Noetfield local dev ports (high range — avoids 3000/8000/8001 conflicts)
+# Forward ONLY NF_DEV_PUBLIC_PORT (13080) in Cursor — unified proxy serves everything.
+export NF_DEV_PUBLIC_PORT="${NF_DEV_PUBLIC_PORT:-13080}"
 export NF_DEV_WWW_PORT="${NF_DEV_WWW_PORT:-13080}"
 export NF_DEV_WEB_PORT="${NF_DEV_WEB_PORT:-13000}"
 export NF_DEV_PLATFORM_PORT="${NF_DEV_PLATFORM_PORT:-18001}"

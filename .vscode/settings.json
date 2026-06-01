@@ -1,21 +1,14 @@
 {
   "remote.autoForwardPorts": true,
   "remote.autoForwardPortsSource": "hybrid",
+  "remote.otherPortsAttributes": {
+    "onAutoForward": "notify"
+  },
   "remote.portsAttributes": {
     "13080": {
-      "label": "Noetfield Website (www)",
+      "label": "Noetfield (website + console + dashboard)",
       "onAutoForward": "openBrowser",
       "uriFormat": "http://localhost:${port}/"
-    },
-    "13000": {
-      "label": "Cognitive Dashboard",
-      "onAutoForward": "openBrowser",
-      "uriFormat": "http://localhost:${port}/cognitive-dashboard"
-    },
-    "18001": {
-      "label": "Platform Console",
-      "onAutoForward": "openBrowser",
-      "uriFormat": "http://localhost:${port}/console"
     }
   }
 }

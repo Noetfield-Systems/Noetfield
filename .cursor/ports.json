@@ -1,17 +1,7 @@
 [
   {
-    "name": "Noetfield Website",
+    "name": "Noetfield — everything (forward this only)",
     "port": 13080,
     "path": "/"
-  },
-  {
-    "name": "Cognitive Dashboard",
-    "port": 13000,
-    "path": "/cognitive-dashboard"
-  },
-  {
-    "name": "Platform Governance Console",
-    "port": 18001,
-    "path": "/console"
   }
 ]

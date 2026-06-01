@@ -2,27 +2,20 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Cognitive Dashboard (port 3000)",
+      "label": "Start Noetfield localhost (port 13080)",
       "type": "shell",
-      "command": "bash scripts/dev-cognitive-dashboard.sh",
+      "command": "make dev-local",
       "options": { "cwd": "${workspaceFolder}" },
       "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
       "problemMatcher": {
         "pattern": { "regexp": "^$" },
         "background": {
           "activeOnStart": true,
-          "beginsPattern": "Starting",
-          "endsPattern": "Ready in|Local:"
+          "beginsPattern": "Noetfield local dev",
+          "endsPattern": "OK  website|forward port"
         }
       },
-      "presentation": { "reveal": "always", "panel": "dedicated" }
-    },
-    {
-      "label": "Platform Console (port 8001)",
-      "type": "shell",
-      "command": "make platform-console-up",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "dedicated" }
     }
   ]
