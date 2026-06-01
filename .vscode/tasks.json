@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Cognitive Dashboard (port 3000)",
+      "type": "shell",
+      "command": "bash scripts/dev-cognitive-dashboard.sh",
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": { "regexp": "^$" },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting",
+          "endsPattern": "Ready in|Local:"
+        }
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    }
+  ]
+}

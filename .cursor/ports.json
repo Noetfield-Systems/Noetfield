@@ -1,0 +1,7 @@
+[
+  {
+    "name": "Cognitive Dashboard",
+    "port": 3000,
+    "path": "/cognitive-dashboard"
+  }
+]
