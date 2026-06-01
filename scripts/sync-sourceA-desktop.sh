@@ -13,5 +13,8 @@ cp -f "$SRC/SINA_OS_SSOT_LOCKED.md" "$SRC/PHASE1_UNIFIED_BLUEPRINT_v2_3.md" "$DE
   echo "Copy failed — check filenames on Desktop" >&2
   exit 1
 }
+if [[ -f "$SRC/AUTO_CONFLICT_ENGINE_V3_LOCKED.md" ]]; then
+  cp -f "$SRC/AUTO_CONFLICT_ENGINE_V3_LOCKED.md" "$DEST/"
+fi
 echo "Synced to $DEST (gitignored)."
 ls -la "$DEST"

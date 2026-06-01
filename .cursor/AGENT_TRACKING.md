@@ -40,7 +40,8 @@ Seed locally: `./scripts/bootstrap-private-ops.sh` · MSB pack: `./scripts/seed-
 In this repo, **DELIVERY** is sovereign: [PRODUCT_TRUTH.md](../PRODUCT_TRUTH.md), locks, CI.  
 Read Desktop SSOT mirror only for **boundaries** — not as a merge veto. Registry **records** execution; it does not block PRs.
 
-Doctrine: [docs/strategy/auto-conflict-engine-v3.md](../docs/strategy/auto-conflict-engine-v3.md)  
+Doctrine (locked, SourceA): `Desktop/SourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md` — read mirror at `ops/private/sourceA/` if present.  
+Public summary: [docs/strategy/auto-conflict-engine-v3.md](../docs/strategy/auto-conflict-engine-v3.md)  
 Cross-plane statements must use tags: `[DESIGN]` `[EXECUTION]` `[DELIVERY]` (rule R9).
 
 ## Scope

@@ -1,6 +1,11 @@
-# Auto-Conflict Engine v3 — Layer sovereignty (baseline doctrine)
+# Auto-Conflict Engine v3 — Layer sovereignty (public summary)
 
-**Status:** Baseline architecture doctrine for Noetfield + Sina ecosystem work.  
+**Status:** Public summary — **subordinate** to locked SourceA master.  
+**Canonical (INTERNAL, ASF-only edits):**  
+`/Users/sinakazemnezhad/Desktop/SourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md`  
+Mirror: `ops/private/sourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md` (gitignored).  
+**Publish to Desktop (founder Mac):** `./scripts/publish-auto-conflict-v3-to-sourceA.sh`
+
 **Not:** A build plan, registry edit, or freeze on runtime evolution.
 
 ---
