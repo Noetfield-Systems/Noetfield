@@ -9,7 +9,7 @@
     "ingest": "Send completed answer to Sina Prompt OS (YAML + inbox). Required after ship. Does NOT block shipping.",
     "do_not": "Stop and idle until the next Prompt OS / M8 / dispatch order arrives.",
     "do_not_edit": "Sina Prompt OS codebase",
-    "ship_from": "os/plan.json next_tasks and docs/spec/SPRINT_BACKLOG_WEEKS_0-8.md immediately"
+    "ship_from": "os/plan.json, docs/ops/, os/sprint-trust-ledger-v1.2.md — ship immediately; do not idle for next order"
   },
   "locked_positioning": {
     "headline": "AI Governance & Evidence layer for Copilot adoption",
