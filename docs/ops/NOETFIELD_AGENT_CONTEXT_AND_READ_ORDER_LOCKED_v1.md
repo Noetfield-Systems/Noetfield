@@ -24,11 +24,11 @@
 3. [os/SHIP_NOW.md](../../os/SHIP_NOW.md) → [os/plan.json](../../os/plan.json)
 4. **Long-term plans (1000):** [plans/no-asf/QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) when user says **PLAN WITH NO ASF**
 5. [os/sprint-trust-ledger-v1.2.md](../../os/sprint-trust-ledger-v1.2.md) or [lane_a_sprint_map.md](./lane_a_sprint_map.md)
-5. [PRODUCT_TRUTH.md](../../PRODUCT_TRUTH.md) · [POSITIONING.md](../../POSITIONING.md) · [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md)
-6. [docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md](../spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md)
-7. [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md)
-8. [.cursor/AGENT_TRACKING.md](../../.cursor/AGENT_TRACKING.md)
-9. Active task (Issue / PR / Prompt OS task string)
+6. [PRODUCT_TRUTH.md](../../PRODUCT_TRUTH.md) · [POSITIONING.md](../../POSITIONING.md) · [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md)
+7. [docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md](../spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md)
+8. [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md)
+9. [.cursor/AGENT_TRACKING.md](../../.cursor/AGENT_TRACKING.md)
+10. Active task (Issue / PR / Prompt OS task string)
 
 ### B. After founder sync (`ops/private/`)
 
