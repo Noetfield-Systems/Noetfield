@@ -2,6 +2,8 @@
 
 **Read this first** for task priority. Do not create `todolist/` at the repository root.
 
+**Full link map (ecosystem + `noetfield_cloud` lane):** [AGENT_READ_LINKS_INDEX.md](../AGENT_READ_LINKS_INDEX.md) · locked read order: [docs/agent/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](../docs/agent/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md)
+
 ## Ship rule (ASF) — two different things
 
 | What it is | Blocks shipping? |

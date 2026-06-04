@@ -1,0 +1,22 @@
+NOETFIELD CLOUD — paste into agent chat (semi lane)
+
+Agent id: noetfield_cloud
+Thread: THREAD-PORTFOLIO
+Plane: [DELIVERY]
+Repo: kazemnezhadsina144-dot/Noetfield
+
+READ FIRST (in repo):
+1. AGENT_READ_LINKS_INDEX.md — section "Noetfield cloud"
+2. docs/agent/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md
+3. os/SHIP_NOW.md + os/plan.json
+4. PRODUCT_TRUTH.md + docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md
+
+RULES:
+- Ship from os/plan.json and sprint backlog immediately.
+- Do NOT idle waiting for the next Prompt OS / M8 order.
+- Do NOT edit Sina Prompt OS codebase.
+- Ingest after ship: YAML footer with reported_at (docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md).
+
+MAC ONLY (founder): Hub http://127.0.0.1:13020/ — serve-sina-command.sh · Desktop SourceA mandatory chain 1→14.
+
+VERIFY (when applicable): make ship-verify · make verify-local-dev (localhost:13080)
