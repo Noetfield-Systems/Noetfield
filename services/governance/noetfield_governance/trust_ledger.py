@@ -1,23 +1,35 @@
-"""Trust Ledger v1 pilot API — /api/v1/evidence/* and /api/v1/tle/*."""
+"""Trust Ledger v1 pilot API — evidence, connectors, TLE lifecycle."""
 
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from typing import Literal, Protocol
 from uuid import uuid4
 
 import asyncpg
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi.responses import Response
 from pydantic import BaseModel, ConfigDict, Field
 
 from noetfield_governance.governance_pilot_limits import check_governance_pilot_rate_limit
 from noetfield_governance.pilot_auth import PilotAuthContext, require_pilot_auth
+from noetfield_governance.trust_ledger_pdf import minimal_pdf
 
 router = APIRouter(prefix="/api/v1", tags=["trust-ledger-v1"])
 
 TerminalStatus = Literal["Approved", "Rejected", "Conditional"]
+ACTIVE_TLE_STATUSES = ("Draft", "PendingApproval")
+
+
+def required_approvals() -> int:
+    raw = os.environ.get("TLE_REQUIRED_APPROVALS", "2")
+    try:
+        return max(1, int(raw))
+    except ValueError:
+        return 2
 
 
 class EvidenceIngestRequest(BaseModel):
@@ -43,6 +55,27 @@ class EvidenceObject(BaseModel):
     link: str | None = None
     sensitivity: str | None = None
     ingest_mode: str = "metadata_only"
+
+
+class ConnectorRegisterRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    connector_id: str = Field(min_length=1, max_length=128)
+    type: str = Field(min_length=1, max_length=64)
+    required_scopes: list[str] = Field(default_factory=list)
+    ingest_mode: Literal["metadata_only", "full_capture"] = "metadata_only"
+
+
+class ConnectorObject(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    connector_id: str
+    type: str
+    required_scopes: list[str]
+    ingest_mode: str
+    status: str
+    registered_at: datetime
+    last_sync: datetime | None = None
 
 
 class TleDraftRequest(BaseModel):
@@ -78,6 +111,16 @@ class TrustLedgerEntry(BaseModel):
     signatures: list[dict[str, object]] = Field(default_factory=list)
 
 
+class TleListResponse(BaseModel):
+    items: list[TrustLedgerEntry]
+    count: int
+
+
+class EvidenceListResponse(BaseModel):
+    items: list[EvidenceObject]
+    count: int
+
+
 @dataclass
 class TleRecord:
     tle_id: str
@@ -85,6 +128,52 @@ class TleRecord:
     body: dict[str, object]
     immutable: bool = False
     approved_at: datetime | None = None
+    created_at: datetime | None = None
+
+
+def _initial_tle_status() -> str:
+    return "PendingApproval" if required_approvals() > 1 else "Draft"
+
+
+def _apply_approval(record: TleRecord, request: TleApproveRequest) -> TleRecord:
+    if record.immutable:
+        raise HTTPException(status_code=409, detail="TLE is immutable after approval")
+    if record.status not in ACTIVE_TLE_STATUSES:
+        raise HTTPException(status_code=409, detail="TLE is not awaiting approval")
+
+    body = dict(record.body)
+    chain = list(body.get("approval_chain") or [])
+    chain.append(
+        {
+            "approver": {"id": request.approver_id, "role": "Approver"},
+            "status": request.status,
+            "signed_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        }
+    )
+    body["approval_chain"] = chain
+    signatures = list(body.get("signatures") or [])
+    signatures.append(
+        {
+            "signer_id": request.approver_id,
+            "signature_hash": request.signature_hash,
+            "key_id": request.key_id,
+        }
+    )
+    body["signatures"] = signatures
+
+    needed = required_approvals()
+    if len(chain) < needed:
+        record.status = "PendingApproval"
+        body["status"] = "PendingApproval"
+        record.immutable = False
+    else:
+        record.status = request.status
+        body["status"] = request.status
+        record.immutable = True
+        record.approved_at = datetime.now(timezone.utc)
+
+    record.body = body
+    return record
 
 
 class TrustLedgerStore(Protocol):
@@ -94,10 +183,22 @@ class TrustLedgerStore(Protocol):
     async def get_evidence(self, evidence_id: str) -> EvidenceObject | None:
         ...
 
+    async def list_evidence(self, limit: int) -> list[EvidenceObject]:
+        ...
+
+    async def register_connector(self, payload: ConnectorRegisterRequest) -> ConnectorObject:
+        ...
+
+    async def get_connector(self, connector_id: str) -> ConnectorObject | None:
+        ...
+
     async def create_draft(self, request: TleDraftRequest) -> TleRecord:
         ...
 
     async def get_tle(self, tle_id: str) -> TleRecord | None:
+        ...
+
+    async def list_tles(self, status: str | None, limit: int) -> list[TleRecord]:
         ...
 
     async def approve_tle(self, tle_id: str, request: TleApproveRequest) -> TleRecord:
@@ -107,6 +208,7 @@ class TrustLedgerStore(Protocol):
 @dataclass
 class InMemoryTrustLedgerStore:
     evidence: dict[str, EvidenceObject] = field(default_factory=dict)
+    connectors: dict[str, ConnectorObject] = field(default_factory=dict)
     tles: dict[str, TleRecord] = field(default_factory=dict)
 
     async def ingest_evidence(self, payload: EvidenceIngestRequest) -> EvidenceObject:
@@ -127,6 +229,27 @@ class InMemoryTrustLedgerStore:
     async def get_evidence(self, evidence_id: str) -> EvidenceObject | None:
         return self.evidence.get(evidence_id)
 
+    async def list_evidence(self, limit: int) -> list[EvidenceObject]:
+        rows = sorted(self.evidence.values(), key=lambda e: e.ingested_at, reverse=True)
+        return rows[:limit]
+
+    async def register_connector(self, payload: ConnectorRegisterRequest) -> ConnectorObject:
+        now = datetime.now(timezone.utc)
+        obj = ConnectorObject(
+            connector_id=payload.connector_id,
+            type=payload.type,
+            required_scopes=list(payload.required_scopes),
+            ingest_mode=payload.ingest_mode,
+            status="registered",
+            registered_at=now,
+            last_sync=None,
+        )
+        self.connectors[payload.connector_id] = obj
+        return obj
+
+    async def get_connector(self, connector_id: str) -> ConnectorObject | None:
+        return self.connectors.get(connector_id)
+
     async def create_draft(self, request: TleDraftRequest) -> TleRecord:
         missing = [eid for eid in request.evidence_ids if eid not in self.evidence]
         if missing:
@@ -146,10 +269,11 @@ class InMemoryTrustLedgerStore:
                 }
             )
         tle_id = f"tle-{date.today().isoformat()}-{uuid4().hex[:8]}"
+        initial = _initial_tle_status()
         owner = {"id": request.owner_id or "owner-unset", "name": "Draft Owner", "role": "Owner"}
         body: dict[str, object] = {
             "tle_id": tle_id,
-            "status": "Draft",
+            "status": initial,
             "template_id": request.template_id,
             "decision": request.decision or "Draft decision pending",
             "date": request.date or date.today().isoformat(),
@@ -158,47 +282,28 @@ class InMemoryTrustLedgerStore:
             "approval_chain": [],
             "signatures": [],
         }
-        record = TleRecord(tle_id=tle_id, status="Draft", body=body)
+        now = datetime.now(timezone.utc)
+        record = TleRecord(tle_id=tle_id, status=initial, body=body, created_at=now)
         self.tles[tle_id] = record
         return record
 
     async def get_tle(self, tle_id: str) -> TleRecord | None:
         return self.tles.get(tle_id)
 
+    async def list_tles(self, status: str | None, limit: int) -> list[TleRecord]:
+        rows = list(self.tles.values())
+        if status:
+            rows = [r for r in rows if r.status == status]
+        rows.sort(key=lambda r: r.created_at or datetime.min.replace(tzinfo=timezone.utc), reverse=True)
+        return rows[:limit]
+
     async def approve_tle(self, tle_id: str, request: TleApproveRequest) -> TleRecord:
         record = self.tles.get(tle_id)
         if record is None:
             raise HTTPException(status_code=404, detail="TLE not found")
-        if record.immutable:
-            raise HTTPException(status_code=409, detail="TLE is immutable after approval")
-        if record.status != "Draft":
-            raise HTTPException(status_code=409, detail="TLE is not in Draft status")
-        body = dict(record.body)
-        body["status"] = request.status
-        chain = list(body.get("approval_chain") or [])
-        chain.append(
-            {
-                "approver": {"id": request.approver_id, "role": "Approver"},
-                "status": request.status,
-                "signed_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-            }
-        )
-        body["approval_chain"] = chain
-        signatures = list(body.get("signatures") or [])
-        signatures.append(
-            {
-                "signer_id": request.approver_id,
-                "signature_hash": request.signature_hash,
-                "key_id": request.key_id,
-            }
-        )
-        body["signatures"] = signatures
-        record.body = body
-        record.status = request.status
-        record.immutable = True
-        record.approved_at = datetime.now(timezone.utc)
-        self.tles[tle_id] = record
-        return record
+        updated = _apply_approval(record, request)
+        self.tles[tle_id] = updated
+        return updated
 
 
 class PostgresTrustLedgerStore:
@@ -263,6 +368,66 @@ class PostgresTrustLedgerStore:
             return None
         return EvidenceObject(**dict(row))
 
+    async def list_evidence(self, limit: int) -> list[EvidenceObject]:
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                select evidence_id, source, title, hash, link, sensitivity, ingest_mode, ingested_at
+                from noetfield.trust_ledger_evidence
+                order by ingested_at desc
+                limit $1
+                """,
+                limit,
+            )
+        return [EvidenceObject(**dict(r)) for r in rows]
+
+    async def register_connector(self, payload: ConnectorRegisterRequest) -> ConnectorObject:
+        await self.connect()
+        assert self._pool is not None
+        now = datetime.now(timezone.utc)
+        async with self._pool.acquire() as conn:
+            await conn.execute(
+                """
+                insert into noetfield.trust_ledger_connectors (
+                  connector_id, type, required_scopes, ingest_mode, status, registered_at
+                ) values ($1, $2, $3, $4, 'registered', $5)
+                on conflict (connector_id) do update set
+                  type = excluded.type,
+                  required_scopes = excluded.required_scopes,
+                  ingest_mode = excluded.ingest_mode
+                """,
+                payload.connector_id,
+                payload.type,
+                payload.required_scopes,
+                payload.ingest_mode,
+                now,
+            )
+        return ConnectorObject(
+            connector_id=payload.connector_id,
+            type=payload.type,
+            required_scopes=list(payload.required_scopes),
+            ingest_mode=payload.ingest_mode,
+            status="registered",
+            registered_at=now,
+        )
+
+    async def get_connector(self, connector_id: str) -> ConnectorObject | None:
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                select connector_id, type, required_scopes, ingest_mode, status, registered_at, last_sync
+                from noetfield.trust_ledger_connectors where connector_id = $1
+                """,
+                connector_id,
+            )
+        if row is None:
+            return None
+        return ConnectorObject(**dict(row))
+
     async def create_draft(self, request: TleDraftRequest) -> TleRecord:
         evidence_rows: list[dict[str, object]] = []
         for eid in request.evidence_ids:
@@ -278,10 +443,11 @@ class PostgresTrustLedgerStore:
                 }
             )
         tle_id = f"tle-{date.today().isoformat()}-{uuid4().hex[:8]}"
+        initial = _initial_tle_status()
         owner = {"id": request.owner_id or "owner-unset", "name": "Draft Owner", "role": "Owner"}
         body: dict[str, object] = {
             "tle_id": tle_id,
-            "status": "Draft",
+            "status": initial,
             "template_id": request.template_id,
             "decision": request.decision or "Draft decision pending",
             "date": request.date or date.today().isoformat(),
@@ -296,19 +462,23 @@ class PostgresTrustLedgerStore:
             await conn.execute(
                 """
                 insert into noetfield.tle_entries (tle_id, status, body)
-                values ($1, 'Draft', $2::jsonb)
+                values ($1, $2, $3::jsonb)
                 """,
                 tle_id,
+                initial,
                 json.dumps(body, default=str),
             )
-        return TleRecord(tle_id=tle_id, status="Draft", body=body)
+        return TleRecord(tle_id=tle_id, status=initial, body=body, created_at=datetime.now(timezone.utc))
 
     async def get_tle(self, tle_id: str) -> TleRecord | None:
         await self.connect()
         assert self._pool is not None
         async with self._pool.acquire() as conn:
             row = await conn.fetchrow(
-                "select tle_id, status, body, immutable, approved_at from noetfield.tle_entries where tle_id = $1",
+                """
+                select tle_id, status, body, immutable, approved_at, created_at
+                from noetfield.tle_entries where tle_id = $1
+                """,
                 tle_id,
             )
         if row is None:
@@ -322,58 +492,73 @@ class PostgresTrustLedgerStore:
             body=body,
             immutable=row["immutable"],
             approved_at=row["approved_at"],
+            created_at=row.get("created_at"),
         )
+
+    async def list_tles(self, status: str | None, limit: int) -> list[TleRecord]:
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as conn:
+            if status:
+                rows = await conn.fetch(
+                    """
+                    select tle_id, status, body, immutable, approved_at, created_at
+                    from noetfield.tle_entries
+                    where status = $1
+                    order by created_at desc
+                    limit $2
+                    """,
+                    status,
+                    limit,
+                )
+            else:
+                rows = await conn.fetch(
+                    """
+                    select tle_id, status, body, immutable, approved_at, created_at
+                    from noetfield.tle_entries
+                    order by created_at desc
+                    limit $1
+                    """,
+                    limit,
+                )
+        out: list[TleRecord] = []
+        for row in rows:
+            body = row["body"]
+            if isinstance(body, str):
+                body = json.loads(body)
+            out.append(
+                TleRecord(
+                    tle_id=row["tle_id"],
+                    status=row["status"],
+                    body=body,
+                    immutable=row["immutable"],
+                    approved_at=row["approved_at"],
+                    created_at=row.get("created_at"),
+                )
+            )
+        return out
 
     async def approve_tle(self, tle_id: str, request: TleApproveRequest) -> TleRecord:
         record = await self.get_tle(tle_id)
         if record is None:
             raise HTTPException(status_code=404, detail="TLE not found")
-        if record.immutable:
-            raise HTTPException(status_code=409, detail="TLE is immutable after approval")
-        if record.status != "Draft":
-            raise HTTPException(status_code=409, detail="TLE is not in Draft status")
-        body = dict(record.body)
-        body["status"] = request.status
-        chain = list(body.get("approval_chain") or [])
-        chain.append(
-            {
-                "approver": {"id": request.approver_id, "role": "Approver"},
-                "status": request.status,
-                "signed_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-            }
-        )
-        body["approval_chain"] = chain
-        signatures = list(body.get("signatures") or [])
-        signatures.append(
-            {
-                "signer_id": request.approver_id,
-                "signature_hash": request.signature_hash,
-                "key_id": request.key_id,
-            }
-        )
-        body["signatures"] = signatures
-        approved_at = datetime.now(timezone.utc)
+        updated = _apply_approval(record, request)
         await self.connect()
         assert self._pool is not None
         async with self._pool.acquire() as conn:
             await conn.execute(
                 """
                 update noetfield.tle_entries
-                set status = $2, body = $3::jsonb, immutable = true, approved_at = $4
-                where tle_id = $1 and immutable = false and status = 'Draft'
+                set status = $2, body = $3::jsonb, immutable = $4, approved_at = $5
+                where tle_id = $1 and immutable = false
                 """,
                 tle_id,
-                request.status,
-                json.dumps(body, default=str),
-                approved_at,
+                updated.status,
+                json.dumps(updated.body, default=str),
+                updated.immutable,
+                updated.approved_at,
             )
-        return TleRecord(
-            tle_id=tle_id,
-            status=request.status,
-            body=body,
-            immutable=True,
-            approved_at=approved_at,
-        )
+        return updated
 
 
 @dataclass
@@ -392,6 +577,51 @@ def _record_to_entry(record: TleRecord) -> TrustLedgerEntry:
     return TrustLedgerEntry.model_validate(record.body)
 
 
+def _export_lines(record: TleRecord) -> list[str]:
+    body = record.body
+    lines = [
+        f"TLE ID: {record.tle_id}",
+        f"Status: {record.status}",
+        f"Decision: {body.get('decision', '')}",
+    ]
+    evidence = body.get("evidence") or []
+    if isinstance(evidence, list):
+        for item in evidence:
+            if isinstance(item, dict):
+                lines.append(f"Evidence: {item.get('evidence_id', '')} — {item.get('title', '')}")
+    chain = body.get("approval_chain") or []
+    if isinstance(chain, list):
+        for step in chain:
+            if isinstance(step, dict):
+                approver = step.get("approver") or {}
+                if isinstance(approver, dict):
+                    lines.append(f"Approver: {approver.get('id', '')} — {step.get('status', '')}")
+    return lines
+
+
+@router.post("/connectors", status_code=201)
+async def register_connector(
+    payload: ConnectorRegisterRequest,
+    request: Request,
+    auth: PilotAuthContext = Depends(require_pilot_auth),
+    deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
+) -> ConnectorObject:
+    await check_governance_pilot_rate_limit(auth, request.url.path)
+    return await deps.store.register_connector(payload)
+
+
+@router.get("/connectors/{connector_id}")
+async def get_connector(
+    connector_id: str,
+    auth: PilotAuthContext = Depends(require_pilot_auth),
+    deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
+) -> ConnectorObject:
+    row = await deps.store.get_connector(connector_id)
+    if row is None:
+        raise HTTPException(status_code=404, detail="Connector not found")
+    return row
+
+
 @router.post("/evidence/ingest", status_code=201)
 async def ingest_evidence(
     payload: EvidenceIngestRequest,
@@ -401,6 +631,16 @@ async def ingest_evidence(
 ) -> EvidenceObject:
     await check_governance_pilot_rate_limit(auth, request.url.path)
     return await deps.store.ingest_evidence(payload)
+
+
+@router.get("/evidence")
+async def list_evidence(
+    limit: int = Query(default=50, ge=1, le=200),
+    auth: PilotAuthContext = Depends(require_pilot_auth),
+    deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
+) -> EvidenceListResponse:
+    items = await deps.store.list_evidence(limit)
+    return EvidenceListResponse(items=items, count=len(items))
 
 
 @router.get("/evidence/{evidence_id}")
@@ -415,6 +655,18 @@ async def get_evidence(
     return row
 
 
+@router.get("/tle")
+async def list_tles(
+    status: str | None = Query(default=None),
+    limit: int = Query(default=50, ge=1, le=200),
+    auth: PilotAuthContext = Depends(require_pilot_auth),
+    deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
+) -> TleListResponse:
+    records = await deps.store.list_tles(status, limit)
+    items = [_record_to_entry(r) for r in records]
+    return TleListResponse(items=items, count=len(items))
+
+
 @router.post("/tle/draft", status_code=201)
 async def create_tle_draft(
     payload: TleDraftRequest,
@@ -425,6 +677,21 @@ async def create_tle_draft(
     await check_governance_pilot_rate_limit(auth, request.url.path)
     record = await deps.store.create_draft(payload)
     return _record_to_entry(record)
+
+
+@router.get("/tle/{tle_id}/export")
+async def export_tle(
+    tle_id: str,
+    auth: PilotAuthContext = Depends(require_pilot_auth),
+    deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
+) -> Response:
+    record = await deps.store.get_tle(tle_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail="TLE not found")
+    if not record.immutable:
+        raise HTTPException(status_code=409, detail="TLE must be fully approved before export")
+    pdf = minimal_pdf(_export_lines(record), title=f"Trust Ledger — {tle_id}")
+    return Response(content=pdf, media_type="application/pdf")
 
 
 @router.get("/tle/{tle_id}")
@@ -440,7 +707,7 @@ async def get_tle(
 
 
 @router.post("/tle/{tle_id}/approve")
-async def approve_tle(
+async def approve_tle_route(
     tle_id: str,
     payload: TleApproveRequest,
     request: Request,

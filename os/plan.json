@@ -2,8 +2,8 @@
   "repo": "noetfield",
   "plane": "DELIVERY",
   "status": "ship_now",
-  "authority": "ASF — do not block progress or shipping; do not idle for next order; ingest = send answers to system",
-  "last_updated": "2026-06-03",
+  "authority": "Agent ship from os/plan.json — ingest after; no idle for Prompt OS order",
+  "last_updated": "2026-06-04",
   "primary_direction": "os/SHIP_NOW.md",
   "ship_rule": {
     "ingest": "Send completed answer to Sina Prompt OS (YAML + inbox). Required after ship. Does NOT block shipping.",
@@ -17,79 +17,63 @@
     "mandate": "Every engagement must produce at least one signed Trust Ledger Entry (TLE v1).",
     "blueprint": "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md"
   },
-  "active_sprint": "Week 0-2 P0",
+  "active_sprint": "Week 3-6 P1",
+  "deferred_asf": [
+    "W02-6 — production DNS/TLS + deploy_platform_smoke (docs/WAVE0_SHIP_CHECKLIST.md)",
+    "W78-3 — live pilot engagement",
+    "SourceA sync + hub :13020"
+  ],
+  "agent_next_tasks": [],
   "next_tasks": [
     {
       "id": "ship-p0-merge-001",
       "title": "Merge bank-grade branch to main and run ship-verify",
       "status": "done",
       "priority": "P0",
-      "done_criteria": [
-        "PR #15 merged or approved for merge",
-        "make ship-verify exits 0 on main",
-        "Founder runs production smoke per WAVE0_SHIP_CHECKLIST"
-      ],
-      "verify": "make ship-verify",
-      "evidence": [
-        "https://github.com/kazemnezhadsina144-dot/Noetfield/pull/15",
-        "main @ c6c945c",
-        "make ship-verify: OK (tle-smoke, verify-local-dev, bank-grade HTML)"
-      ]
+      "verify": "make ship-verify"
     },
     {
       "id": "ship-p0-gtm-002",
       "title": "Copilot positioning live on www + Trust Ledger + procurement contract",
       "status": "done",
-      "priority": "P0",
-      "done_criteria": [
-        "docs/SHIP_NOW.md is canonical ship authority",
-        "Homepage and /trust-ledger/ reflect Copilot audit-trail buyer line",
-        "docs/diligence/EVIDENCE_INTAKE_CONTRACT_v1.md published",
-        "docs/spec/SPRINT_BACKLOG_WEEKS_0-8.md active"
-      ],
-      "evidence": [
-        "docs/SHIP_NOW.md",
-        "index.html",
-        "trust-ledger/index.html",
-        "docs/diligence/EVIDENCE_INTAKE_CONTRACT_v1.md",
-        "docs/spec/SPRINT_BACKLOG_WEEKS_0-8.md"
-      ]
+      "priority": "P0"
     },
     {
       "id": "ship-p1-ledger-003",
-      "title": "Week 3-6: Trust Ledger Core + Evidence Index APIs",
-      "status": "in_progress",
+      "title": "Trust Ledger Core + Evidence Index APIs (agent-complete)",
+      "status": "done",
       "priority": "P1",
       "done_criteria": [
-        "Implement OpenAPI paths from docs/spec/openapi/trust-ledger-v0.yaml",
-        "TLE draft + approve + immutable ledger write",
-        "Evidence ingest metadata-only"
+        "Evidence ingest metadata-only",
+        "TLE draft + multi-approve + immutable write",
+        "Connectors register",
+        "List TLE/evidence",
+        "PDF export stub"
       ],
-      "completed_mvp": [
-        "POST /api/v1/evidence/ingest",
-        "POST /api/v1/tle/draft",
-        "GET /api/v1/tle/{id}",
-        "POST /api/v1/tle/{id}/approve",
+      "evidence": [
+        "services/governance/noetfield_governance/trust_ledger.py",
         "infrastructure/supabase/migrations/0006_trust_ledger_tle.sql",
+        "infrastructure/supabase/migrations/0007_trust_ledger_connectors.sql",
         "tests/unit/test_trust_ledger_v1.py",
+        ".github/workflows/trust-ledger-ci.yml",
         "scripts/tle-smoke.sh --api"
       ],
-      "deferred": [
-        "POST /connectors",
-        "GET /tle/{id}/export PDF",
-        "Workspace UI W56-*"
+      "deferred_ui": [
+        "Workspace UI W56-2/W56-3 full generator",
+        "Connector live sync to Purview/Entra"
       ]
     }
   ],
-  "ingest_note": "Finish tasks → send reply to Sina Prompt OS (ingest). reported_at required in YAML when ingesting; never stop shipping because ingest failed on one repo.",
+  "ingest_note": "Finish tasks → send reply to Sina Prompt OS (ingest). reported_at required in YAML when ingesting.",
   "deferred_separate_repos": [
-    "MonoRepo Desktop path sync (cloud cannot write /Users/...)",
-    "777 Foundation deploy (separate repo)"
+    "MonoRepo Desktop path sync",
+    "777 Foundation deploy"
   ],
   "completed_foundation": [
     "nf-mvp-req-extract-001",
     "nf-trust-ledger-blueprint-lock-002",
     "nf-agent-reply-reported-at-003",
-    "Local dev stack 13080 + proxy evaluate fix"
+    "Local dev stack 13080 + proxy evaluate fix",
+    "no-asf-p1-connectors-list-approve-export"
   ]
 }

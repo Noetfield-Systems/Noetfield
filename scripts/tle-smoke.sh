@@ -68,11 +68,23 @@ if [[ -n "$API_BASE" ]]; then
   [[ "$draft_code" == "201" ]] || fail "API draft failed ($draft_code)"
 
   tle_id="$(python3 -c "import json; print(json.load(open('/tmp/tle-smoke-draft.json'))['tle_id'])")"
-  appr_code="$(curl -sS -o /tmp/tle-smoke-approve.json -w "%{http_code}" \
-    -X POST "${API_BASE}/tle/${tle_id}/approve" \
+  for approver in usr-smoke-1 usr-smoke-2; do
+    appr_code="$(curl -sS -o /tmp/tle-smoke-approve.json -w "%{http_code}" \
+      -X POST "${API_BASE}/tle/${tle_id}/approve" \
+      -H "Content-Type: application/json" \
+      -d "{\"approver_id\":\"${approver}\",\"status\":\"Approved\",\"signature_hash\":\"sig:smoke0000000000000000000000000000000000000000000000000000000001\",\"key_id\":\"kms-smoke-01\"}" \
+      2>/dev/null || echo "000")"
+    [[ "$appr_code" == "200" ]] || fail "API approve failed ($appr_code) for ${approver}"
+  done
+  exp_code="$(curl -sS -o /tmp/tle-smoke-export.pdf -w "%{http_code}" \
+    "${API_BASE}/tle/${tle_id}/export" 2>/dev/null || echo "000")"
+  [[ "$exp_code" == "200" ]] || fail "API export failed ($exp_code)"
+  head -c 4 /tmp/tle-smoke-export.pdf | grep -q '%PDF' || fail "export is not PDF"
+  conn_code="$(curl -sS -o /tmp/tle-smoke-conn.json -w "%{http_code}" \
+    -X POST "${API_BASE}/connectors" \
     -H "Content-Type: application/json" \
-    -d '{"approver_id":"usr-smoke","status":"Approved","signature_hash":"sig:smoke0000000000000000000000000000000000000000000000000000000001","key_id":"kms-smoke-01"}' \
+    -d '{"connector_id":"smoke-purview","type":"Purview","required_scopes":["Audit.Read"],"ingest_mode":"metadata_only"}' \
     2>/dev/null || echo "000")"
-  [[ "$appr_code" == "200" ]] || fail "API approve failed ($appr_code)"
+  [[ "$conn_code" == "201" ]] || fail "API connector register failed ($conn_code)"
   echo "tle-smoke: API OK (${API_BASE}) tle_id=${tle_id}"
 fi

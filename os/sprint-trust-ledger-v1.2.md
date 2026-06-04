@@ -17,12 +17,18 @@
 2. `make ship-verify` exit 0
 3. Evidence: `scripts/verify-local-dev.sh`, `scripts/tle-smoke.sh`, `docs/ops/lane_a_sprint_map.md`
 
-## P1 MVP (shipped in repo)
+## P1 agent-complete (no ASF)
 
-- `POST /api/v1/evidence/ingest` · `POST /api/v1/tle/draft` · `GET /api/v1/tle/{id}` · `POST /api/v1/tle/{id}/approve`
-- Migration: [infrastructure/supabase/migrations/0006_trust_ledger_tle.sql](../infrastructure/supabase/migrations/0006_trust_ledger_tle.sql)
-- Verify: `./scripts/tle-smoke.sh --api` (platform :8001 with `make dev-local`)
+- Evidence + TLE lifecycle + **connectors** + **list** + **2-step approve** + **PDF export**
+- Migrations: `0006_trust_ledger_tle.sql`, `0007_trust_ledger_connectors.sql`
+- CI: `.github/workflows/trust-ledger-ci.yml`
+- Verify: `./scripts/tle-smoke.sh` · `./scripts/tle-smoke.sh --api` · `pytest tests/unit/test_trust_ledger_v1.py`
 
-## Next (P1 remainder)
+## ASF-only (not agent)
 
-Connectors, PDF export, workspace UI — [docs/spec/openapi/trust-ledger-v0.yaml](../docs/spec/openapi/trust-ledger-v0.yaml).
+- Production WAVE0 smoke — [docs/WAVE0_SHIP_CHECKLIST.md](../docs/WAVE0_SHIP_CHECKLIST.md)
+- Live pilot W78-3
+
+## Next (optional agent)
+
+Workspace UI polish, confidence score UI, connector live sync — [docs/spec/openapi/trust-ledger-v0.yaml](../docs/spec/openapi/trust-ledger-v0.yaml).

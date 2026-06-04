@@ -24,6 +24,29 @@ paths:
       responses:
         '201':
           description: Connector registered
+  /connectors/{connector_id}:
+    get:
+      summary: Get connector registration
+      operationId: getConnector
+      parameters:
+        - name: connector_id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Connector manifest
+  /evidence:
+    get:
+      summary: List evidence metadata (newest first)
+      operationId: listEvidence
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50 }
+      responses:
+        '200':
+          description: Evidence list
   /evidence/ingest:
     post:
       summary: Ingest evidence metadata
@@ -53,6 +76,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvidenceObject'
+  /tle:
+    get:
+      summary: List Trust Ledger entries
+      operationId: listTles
+      parameters:
+        - name: status
+          in: query
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50 }
+      responses:
+        '200':
+          description: TLE list
   /tle/draft:
     post:
       summary: Create TLE draft from template + evidence refs

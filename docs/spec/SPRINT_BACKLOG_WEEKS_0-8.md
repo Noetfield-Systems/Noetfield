@@ -19,20 +19,20 @@
 |----|-------|------------|--------|
 | W34-1 | `tle_entries` table + append API | POST draft → immutable write after approve | done (MVP) |
 | W34-2 | Evidence Index ingest API | POST metadata; hash stored | done (MVP) |
-| W34-3 | Connector manifest Purview/Entra | Register + last_sync status | todo |
+| W34-3 | Connector manifest Purview/Entra | Register + last_sync status | done (API) |
 
 ## Week 5–6 (P1 — workspace)
 
-| ID | Story | Acceptance |
-|----|-------|------------|
-| W56-1 | Trust Ledger Workspace list/search | Read-only TLE viewer |
-| W56-2 | TLE Generator v0 | Template + evidence refs → draft TLE |
-| W56-3 | Confidence Score v0 | Deterministic score + factors in UI |
+| ID | Story | Acceptance | Status |
+|----|-------|------------|--------|
+| W56-1 | Trust Ledger Workspace list/search | `GET /api/v1/tle` + evidence list | done (API) |
+| W56-2 | TLE Generator v0 | Template + evidence refs → draft TLE | done (draft API) |
+| W56-3 | Confidence Score v0 | Deterministic score + factors in UI | todo |
 
 ## Week 7–8 (P1 — pilot)
 
-| ID | Story | Acceptance |
-|----|-------|------------|
-| W78-1 | Approval chain + signer stub | 2+ approvers; signed TLE immutable |
-| W78-2 | PDF Board Pack export | GET export returns PDF |
-| W78-3 | Pilot engagement | 1–2 Copilot Go/No-Go + Procurement Pack delivered |
+| ID | Story | Acceptance | Status |
+|----|-------|------------|--------|
+| W78-1 | Approval chain + signer stub | 2+ approvers; signed TLE immutable | done |
+| W78-2 | PDF Board Pack export | GET export returns PDF | done (stub) |
+| W78-3 | Pilot engagement | 1–2 Copilot Go/No-Go + Procurement Pack delivered | **ASF only** |
