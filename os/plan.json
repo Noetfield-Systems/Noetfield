@@ -23,6 +23,8 @@
     "W78-3 — live pilot engagement",
     "SourceA sync + hub :13020"
   ],
+  "plan_library": "docs/ops/plans/README.md",
+  "plan_no_asf_quick_pick": "docs/ops/plans/no-asf/QUICK_PICK.md",
   "agent_next_tasks": [],
   "next_tasks": [
     {

@@ -46,6 +46,12 @@ tle-smoke:
 	@chmod +x scripts/tle-smoke.sh
 	./scripts/tle-smoke.sh
 
+plans-regen:
+	@python3 scripts/generate-plans-registry.py
+
+plans-done:
+	@echo "Usage: python3 scripts/update-plan-status.py NF-PLAN-0001 --status done"
+
 ship-verify:
 	@echo "=== ship-verify (Noetfield merge/deploy readiness) ==="
 	@test -f docs/SHIP_NOW.md
