@@ -32,6 +32,20 @@
       "mandate": "Every engagement produces at least one signed TLE v1"
     },
     {
+      "id": "gtm-60-day-v1",
+      "title": "GTM & CEO 60-day focus — one customer, demo, category",
+      "path": "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
+      "locked_at": "2026-06-04",
+      "mandate": "70% customers / 20% demo / 10% code; bottleneck is validation not features"
+    },
+    {
+      "id": "governance-sources-book-v1",
+      "title": "Governance Sources Book v1 — citable frameworks for pilots",
+      "path": "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
+      "locked_at": "2026-06-04",
+      "mandate": "Agents cite primary sources (NIST, OECD, ISO, EU, Microsoft, OWASP) in buyer materials"
+    },
+    {
       "id": "copilot-sme-system-design-v1",
       "title": "Noetfield Copilot for SMEs — full system design (5 domains + 90-day roadmap)",
       "path": "docs/strategy/NOETFIELD_COPILOT_SME_SYSTEM_DESIGN_LOCKED_v1.md",

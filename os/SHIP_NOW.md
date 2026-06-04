@@ -10,8 +10,15 @@ Empty — Wave 028–033 shipped. Pick next work from `os/plans/REGISTRY.json` (
 
 | Wave | IDs | Highlights |
 |------|-----|------------|
-| 023–027 | pilot, PDF, OAuth mock, RBAC, staging doc | Next Wave |
-| 028–033 | M365 E2E ingest, PDF v2, chain RBAC, KMS export, staging make, alembic | Latest |
+| 023–033 | pilot → alembic | Trust Ledger product waves |
+| **Locks** | GTM + sources book | `docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md`, `docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md` |
+
+## Agent references
+
+| Doc | Path |
+|-----|------|
+| Governance Sources Book | `docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md` |
+| GTM 60-day (CEO) | `docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md` |
 
 ## Verify
 
