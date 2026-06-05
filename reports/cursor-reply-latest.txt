@@ -1,42 +1,43 @@
-# Noetfield Wave 028–033 — shipped (NO ASF)
+Wave 028–033 verified and closeout complete (NO ASF).
 
-All six tasks in `os/plan.json` next_tasks implemented and moved to `done`.
+## Summary
+- Re-verified all six wave items (028–033) already in repo; fixed two runtime gaps found during verify:
+  1. PDF export 500 on M365 evidence titles with Unicode em dash — `_pdf_safe()` in `board_pack_pdf.py`
+  2. Stale SQLite dev DB missing `connectors.oauth_json` — `migrate_dev_schema_patches()` on startup
 
-## Shipped
+## Verify (all green)
+- pytest `test_tle_flow.py`: 7 passed
+- `make verify-local-dev`: passed
+- `make tle-smoke`: passed
+- `make copilot-pilot-e2e`: passed (OAuth → evidence → TLE → PDF)
+- `alembic -c alembic.ini history`: OK
 
-| ID | Outcome |
-|----|---------|
-| 028 | OAuth callback auto-ingests M365 evidence via `m365_connector_sync.py`; pilot E2E uses connector path |
-| 029 | Print-grade PDF with evidence/approval tables + signature footer |
-| 030 | Sequential approval chain — out-of-order → 403 |
-| 031 | `signature_block` on JSON/PDF export |
-| 032 | `make staging-smoke` + PR checklist in STAGING_DEMO.md |
-| 033 | `phase-1b-postgres-migrations.md` + alembic skeleton |
+## Wave deliverables (028–033)
+| ID | Status |
+|----|--------|
+| 028 M365 OAuth auto-ingest | `m365_connector_sync.py`, E2E, pytest |
+| 029 PDF v2 | tables, branding, signatures footer |
+| 030 RBAC chain | sequential approve → 403 |
+| 031 KMS export block | `signature_block` JSON + PDF |
+| 032 staging-smoke | Makefile target + STAGING_DEMO checklist |
+| 033 Postgres skeleton | `phase-1b-postgres-migrations.md` + alembic |
 
-## Verify
-
-- pytest `test_tle_flow.py` — 7 passed
-- `make verify-local-dev` — all OK
-- `make tle-smoke` + `make copilot-pilot-e2e` — passed
-- `alembic history` — `001_initial (head)`
+`os/plan.json` next_tasks empty; 028–033 in done.
 
 ```yaml
 schema_version: 1
 repo: noetfield
-task: "Wave 028–033 — M365 E2E ingest, PDF v2, RBAC chain, KMS export, staging make, alembic"
+task: "Wave 028-033 verify + PDF/oauth_json fixes"
 status: done
 verify_passed: true
-verify_command: "pytest governance-console/backend/tests/test_tle_flow.py -q && make verify-local-dev && make tle-smoke && make copilot-pilot-e2e"
-verify_output_summary: "7 pytest passed; verify-local-dev OK; tle-smoke and copilot-pilot-e2e passed"
+verify_command: "pytest test_tle_flow.py -q && make verify-local-dev && make tle-smoke && make copilot-pilot-e2e"
+verify_output_summary: "7 pytest passed; all make targets green"
 blocked_reason: ""
-next_action: ""
+next_action: "GTM: 1 design partner; Tier A staging URL when ready"
 evidence_paths:
-  - governance-console/backend/services/m365_connector_sync.py
   - governance-console/backend/services/board_pack_pdf.py
-  - governance-console/backend/services/tle_service.py
-  - governance-console/backend/alembic/
-  - docs/spec/phase-1b-postgres-migrations.md
-  - Makefile
-reported_at: "2026-06-04T18:45:00Z"
+  - governance-console/backend/db/bootstrap.py
+  - os/plan.json
+reported_at: "2026-06-04T12:30:00Z"
 reporter: cursor
 ```

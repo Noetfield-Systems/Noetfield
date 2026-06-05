@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from db.bootstrap import init_schema, migrate_audit_logs_to_events, seed_pilot_evidence
+from db.bootstrap import init_schema, migrate_audit_logs_to_events, migrate_dev_schema_patches, seed_pilot_evidence
 from db.session import SessionLocal, engine
 from routes import audit, connectors, evaluate, evidence, tle
 
@@ -19,6 +19,7 @@ load_dotenv()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_schema()
+    migrate_dev_schema_patches()
     db = SessionLocal()
     try:
         migrate_audit_logs_to_events(db)

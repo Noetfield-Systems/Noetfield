@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sqlalchemy import func, select
+from sqlalchemy import func, inspect, select, text
 from sqlalchemy.orm import Session
 
 from db.models import AuditEvent, AuditLog, Base, EvidenceIndex
@@ -56,6 +56,19 @@ def seed_pilot_evidence(db: Session) -> int:
 
 def init_schema() -> None:
     Base.metadata.create_all(bind=engine)
+
+
+def migrate_dev_schema_patches() -> None:
+    """Lightweight ALTERs for SQLite dev DBs created before model changes."""
+    insp = inspect(engine)
+    if not insp.has_table("connectors"):
+        return
+    cols = {c["name"] for c in insp.get_columns("connectors")}
+    if "oauth_json" not in cols:
+        with engine.begin() as conn:
+            conn.execute(
+                text("ALTER TABLE connectors ADD COLUMN oauth_json TEXT NOT NULL DEFAULT '{}'")
+            )
 
 
 def migrate_audit_logs_to_events(db: Session) -> int:
