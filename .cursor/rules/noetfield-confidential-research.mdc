@@ -1,0 +1,27 @@
+---
+description: Confidential fintech research — patterns only in public outputs
+globs:
+  - "**/*"
+---
+
+# Confidential research (Noetfield agents)
+
+## Scope
+
+- `docs/internal/` holds TrustField fintech research — **gitignored**, never committed.
+- This Noetfield repo implements **governance overlay only** ([PROJECT_BOUNDARIES_LOCKED.md](PROJECT_BOUNDARIES_LOCKED.md)).
+
+## Rules
+
+1. **Read** `docs/internal/AUTO_INTERNAL_PRIVACY_LOCK.md` before using research in any task.
+2. **Never** paste named competitor tables, tier matrices, or per-company lists into commits, PRs, Issues, www, or user-facing summaries.
+3. **Public implementation** uses generic patterns only:
+   - comparison-table UX (no bank/peer names)
+   - vendor/diligence PDF structure
+   - verify → audit → export flow labels
+4. **TrustField www work** (UPG-003/004/011, vendor pack, MSB pricing) belongs in the **TrustField Technologies** repo — not Noetfield.
+5. **Noetfield may import** Tier D patterns: audit export, evidence timelines, readiness UX on Lane A — not payment/MSB positioning.
+
+## Chat
+
+On fintech research topics, respond with **pattern-level** guidance unless the user explicitly needs internal vault work on disk.
