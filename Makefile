@@ -46,6 +46,14 @@ verify-ui-e2e:
 	@chmod +x scripts/verify-ui-e2e.sh
 	./scripts/verify-ui-e2e.sh
 
+demo-url:
+	@chmod +x scripts/print-demo-url.sh
+	./scripts/print-demo-url.sh
+
+procurement-pack-e2e:
+	@chmod +x scripts/procurement-pack-e2e.sh
+	./scripts/procurement-pack-e2e.sh
+
 tle-smoke:
 	@chmod +x scripts/tle-smoke.sh scripts/seed-m365-evidence-stub.sh
 	./scripts/tle-smoke.sh

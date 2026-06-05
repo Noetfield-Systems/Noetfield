@@ -32,7 +32,17 @@ make verify-local-dev   # health check only
 make verify-ui-e2e      # UI page content (catches stale Next builds)
 make dev-local-tunnel   # foreground public HTTPS URL
 make dev-local-tunnel-bg  # background tunnel → .dev-tunnel-url.txt
+make demo-url           # print shareable demo URL (tunnel or NF_STAGING_URL)
 ```
+
+### Share demo in 2 commands
+
+```bash
+make dev-local
+make dev-local-tunnel-bg && make demo-url
+```
+
+Paste the printed **5-min demo** URL (`/copilot/demo/`) for design partners. No secrets in repo.
 
 ## URLs (use after Cursor **Ports** forward)
 

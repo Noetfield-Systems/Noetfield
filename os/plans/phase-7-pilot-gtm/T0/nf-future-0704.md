@@ -3,7 +3,7 @@ id: nf-future-0704
 phase: phase-7-pilot-gtm
 tier: T0
 priority: P0
-status: backlog
+status: done
 lane: lane_a
 domain: copilot
 no_asf: true

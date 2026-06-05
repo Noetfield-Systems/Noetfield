@@ -231,3 +231,30 @@ def test_export_includes_signature_block():
     pdf = client.get(f"/tle/{tle_id}/export?format=pdf", headers=TENANT_HEADER)
     assert pdf.status_code == 200
     assert len(pdf.content) > 800
+
+
+def test_export_procurement_zip():
+    import io
+    import zipfile
+
+    r = client.post(
+        "/tle/draft",
+        headers=TENANT_HEADER,
+        json={"evidence_ids": ["EV-PURVIEW-001", "EV-ENTRA-001", "EV-AUDIT-001"]},
+    )
+    tle_id = r.json()["tle_id"]
+    for approver in ("cio-001", "legal-001", "sec-001"):
+        client.post(
+            f"/tle/{tle_id}/approve",
+            headers=TENANT_HEADER,
+            json={"approver_id": approver, "decision": "Approved"},
+        )
+    resp = client.get(f"/tle/{tle_id}/export?format=zip", headers=TENANT_HEADER)
+    assert resp.status_code == 200
+    assert resp.headers["content-type"].startswith("application/zip")
+    with zipfile.ZipFile(io.BytesIO(resp.content)) as zf:
+        names = set(zf.namelist())
+        assert "board_pack.json" in names
+        assert "board_pack.pdf" in names
+        assert "README-procurement.txt" in names
+        assert b"%PDF" in zf.read("board_pack.pdf")[:8]

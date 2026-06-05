@@ -1,33 +1,48 @@
-Full UI E2E audit and fixes.
+**Implemented** — Wave 034–036 (GTM Tier A, NO ASF batch)
 
-## Issues found & fixed
-1. **Stale Next build** — `/workspace/connectors` routed to `[tle_id]` (showed "Loading TLE…"). Rebuilt; added `verify-ui-e2e` + content check in `verify-local-dev`.
-2. **OAuth callback UX** — Browser mock OAuth returned JSON; now redirects to `/workspace/connectors?connected=…` when `Accept: text/html`.
-3. **Reserved slug guard** — `[tle_id]` page redirects `connectors` → `/workspace/connectors`.
-4. **Audit page curl** — `/audit` needs `Accept: text/html` (proxy serves API JSON otherwise); verify script updated.
+## Tasks completed
 
-## Verify (all green)
-- make verify-local-dev
-- make verify-ui-e2e (new)
-- make copilot-pilot-e2e
-- pytest test_tle_flow.py: 7 passed
-- Browser: evaluate form → result RID page OK
-- www spot-check: 12 paths OK
+| ID | Deliverable |
+|----|-------------|
+| `nf-procurement-pack-zip-034` | `procurement_pack.py`, `GET /tle/{id}/export?format=zip`, workspace ZIP button, `make procurement-pack-e2e`, pytest `test_export_procurement_zip` |
+| `nf-demo-page-confidence-035` | `copilot/demo/index.html`, prominent PDF confidence on cover, hero links, `verify-ui-e2e` demo checks |
+| `nf-public-demo-url-036` | `scripts/print-demo-url.sh`, `make demo-url`, `STAGING_DEMO.md` + `LOCAL_DEV.md` share-in-2-commands |
+
+Registry stubs marked `status: done`: `nf-future-0703`, `0704`, `0707`.
+
+## Verify
+
+```text
+pytest test_tle_flow.py — 8 passed
+make verify-local-dev — passed
+make verify-ui-e2e — passed (PDF + ZIP export links)
+make copilot-pilot-e2e — passed
+make procurement-pack-e2e — passed
+make demo-url — prints tunnel/staging instructions (no secrets)
+```
+
+GTM scorecard note: Tier A procurement zip + demo narrative + public URL path shipped; bottleneck remains 1 customer + live demo.
+
+---
 
 ```yaml
 schema_version: 1
 repo: noetfield
-task: "Full UI E2E audit and fixes"
+task: "Wave 034-036 GTM Tier A (procurement zip, demo page, demo URL)"
 status: done
 verify_passed: true
-verify_command: "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e"
-verify_output_summary: "All UI content checks green; connectors page + PDF export + evaluate flow"
-blocked_reason: ""
-next_action: ""
+verify_command: "pytest test_tle_flow.py -q && make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e && make procurement-pack-e2e"
+verify_output_summary: "8 pytest passed; verify-local-dev, verify-ui-e2e, copilot-pilot-e2e, procurement-pack-e2e all exit 0"
+blocked_reason: null
+next_action: "Pick next T0 from os/plans/REGISTRY.json or founder order; run make dev-local-tunnel-bg && make demo-url before external demo"
 evidence_paths:
-  - scripts/verify-ui-e2e.sh
-  - governance-console/frontend/app/workspace/connectors/page.tsx
-  - governance-console/backend/routes/connectors.py
-reported_at: "2026-06-05T12:45:00Z"
+  - governance-console/backend/services/procurement_pack.py
+  - governance-console/backend/routes/tle.py
+  - copilot/demo/index.html
+  - scripts/print-demo-url.sh
+  - scripts/procurement-pack-e2e.sh
+  - os/plan.json
+  - os/SHIP_NOW.md
 reporter: cursor
+reported_at: "2026-06-05T13:04:21Z"
 ```

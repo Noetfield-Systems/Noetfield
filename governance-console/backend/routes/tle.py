@@ -9,6 +9,7 @@ from db.models import TleEntry
 from db.session import get_db
 from schemas import TleApproveRequest, TleDetail, TleDraftRequest, TleSummary
 from services.board_pack_pdf import render_board_pack_pdf
+from services.procurement_pack import build_procurement_pack_zip
 from services.rbac import can_approve_tle, resolve_workspace_role
 from services.tenant_service import resolve_tenant_id
 from services.tle_service import approve_step, board_pack_export, draft_from_evaluate
@@ -153,6 +154,15 @@ def export_tle(
             content=pdf_bytes,
             media_type="application/pdf",
             headers={"Content-Disposition": f'attachment; filename="{row.tle_id}-board-pack.pdf"'},
+        )
+    if format == "zip":
+        zip_bytes = build_procurement_pack_zip(db, row, pack=pack)
+        return Response(
+            content=zip_bytes,
+            media_type="application/zip",
+            headers={
+                "Content-Disposition": f'attachment; filename="{row.tle_id}-procurement-pack.zip"'
+            },
         )
     if format == "html":
         doc = pack["document"]

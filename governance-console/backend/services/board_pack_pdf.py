@@ -43,7 +43,25 @@ def render_board_pack_pdf(row: TleEntry, pack: dict[str, Any] | None = None) -> 
     pdf.cell(0, 10, "Noetfield Trust Ledger", new_x="LMARGIN", new_y="NEXT")
     pdf.set_font("Helvetica", "B", 14)
     pdf.cell(0, 8, "Board Pack (Procurement Export)", new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(2)
+    pdf.ln(4)
+
+    pdf.set_font("Helvetica", "B", 24)
+    pdf.cell(
+        0,
+        14,
+        _pdf_safe(f"Confidence: {row.confidence_score:.0%}"),
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.set_font("Helvetica", "B", 12)
+    pdf.cell(
+        0,
+        8,
+        _pdf_safe(f"Decision: {doc.get('decision', 'Pending')}"),
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.ln(4)
 
     pdf.set_font("Helvetica", size=10)
     pdf.cell(0, 6, _pdf_safe(f"TLE ID: {row.tle_id}"), new_x="LMARGIN", new_y="NEXT")
@@ -51,13 +69,6 @@ def render_board_pack_pdf(row: TleEntry, pack: dict[str, Any] | None = None) -> 
         0,
         6,
         _pdf_safe(f"Date: {doc.get('date', '')}  |  Status: {row.status}"),
-        new_x="LMARGIN",
-        new_y="NEXT",
-    )
-    pdf.cell(
-        0,
-        6,
-        _pdf_safe(f"Decision: {doc.get('decision', '')}  |  Confidence: {row.confidence_score:.0%}"),
         new_x="LMARGIN",
         new_y="NEXT",
     )

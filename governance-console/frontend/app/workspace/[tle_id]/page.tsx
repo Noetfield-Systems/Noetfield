@@ -117,6 +117,13 @@ export default function TleViewerPage() {
                 >
                   Board pack (PDF)
                 </a>
+                <a
+                  className="nf-btn-secondary text-sm"
+                  href={`/tle/${encodeURIComponent(tleId)}/export?format=zip`}
+                  download
+                >
+                  Procurement pack (ZIP)
+                </a>
               </div>
             </div>
           </div>

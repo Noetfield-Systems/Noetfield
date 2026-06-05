@@ -19,6 +19,7 @@ make copilot-pilot-e2e
 | http://localhost:13080/workspace | Trust Ledger |
 | http://localhost:13080/workspace/connectors | M365 connector (dev OAuth) |
 | http://localhost:13080/copilot/pilot/ | Design-partner pilot checklist |
+| http://localhost:13080/copilot/demo/ | 5-minute GTM demo script |
 | http://localhost:13080/trust-ledger/sample-report/ | TLE YAML downloads |
 | http://localhost:13080/copilot/ | Copilot pack |
 
@@ -62,12 +63,23 @@ Before merging `cursor/bank-grade-fullstack-37f0` (or opening demo PR):
 - [ ] If staging URL available: `export NF_STAGING_URL=… && make staging-smoke`
 - [ ] No secrets in diff (`.env`, tokens, production `DATABASE_URL`)
 
+## Share demo in 2 commands (local tunnel)
+
+```bash
+make dev-local
+make dev-local-tunnel-bg && make demo-url
+```
+
+Prints a public HTTPS URL + `/copilot/demo/` path. For staging: `export NF_STAGING_URL=https://… && make demo-url`.
+
 ## Smoke before demo
 
 ```bash
 python3 scripts/validate-tle-samples.py
 pytest governance-console/backend/tests/test_tle_flow.py -q
 make verify-local-dev
+make verify-ui-e2e
+make procurement-pack-e2e
 ```
 
 ## Optional public staging smoke

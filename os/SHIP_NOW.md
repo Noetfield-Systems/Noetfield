@@ -4,12 +4,13 @@
 
 ## Active queue (`next_tasks`)
 
-Empty — Wave 028–033 shipped. Pick next work from `os/plans/REGISTRY.json` (T0→T1) or founder order.
+Empty — Wave 034–036 (GTM Tier A) shipped. Pick next work from `os/plans/REGISTRY.json` (T0→T1) or founder order.
 
 ## Shipped waves
 
 | Wave | IDs | Highlights |
 |------|-----|------------|
+| 034–036 | GTM Tier A | procurement zip, 5-min demo page, `make demo-url` |
 | 023–033 | pilot → alembic | Trust Ledger product waves |
 | **Locks** | GTM + sources book | `docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md`, `docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md` |
 

@@ -81,7 +81,7 @@
     "nf-rag-design-010",
     "nf-copilot-pilot-runbook-009"
   ],
-  "updated_at": "2026-06-04",
+  "updated_at": "2026-06-02",
   "done": [
     {
       "id": "nf-mvp-req-extract-001",
@@ -353,6 +353,33 @@
       "evidence": [
         "docs/spec/phase-1b-postgres-migrations.md",
         "governance-console/backend/alembic/"
+      ]
+    },
+    {
+      "id": "nf-procurement-pack-zip-034",
+      "title": "P0: One-click procurement zip export",
+      "status": "done",
+      "evidence": [
+        "governance-console/backend/services/procurement_pack.py",
+        "scripts/procurement-pack-e2e.sh"
+      ]
+    },
+    {
+      "id": "nf-demo-page-confidence-035",
+      "title": "P0: 5-min demo page + PDF confidence cover",
+      "status": "done",
+      "evidence": [
+        "copilot/demo/index.html",
+        "governance-console/backend/services/board_pack_pdf.py"
+      ]
+    },
+    {
+      "id": "nf-public-demo-url-036",
+      "title": "P1: Public demo URL path (tunnel/staging smoke)",
+      "status": "done",
+      "evidence": [
+        "scripts/print-demo-url.sh",
+        "docs/ops/STAGING_DEMO.md"
       ]
     }
   ]
