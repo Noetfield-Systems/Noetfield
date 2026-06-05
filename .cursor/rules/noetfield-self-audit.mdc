@@ -20,6 +20,10 @@ Follow [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](../../docs/ops/AGENT_SELF_A
 - [.cursor/skills/SKILL-002-pre-commit-audit.md](../skills/SKILL-002-pre-commit-audit.md)
 - `./scripts/verify-agent-scope.sh` must pass
 
+## Docs
+
+- Every agent-written doc: `NF-CLOUD-AGENT` header + `Updated: YYYY-MM-DD` + `Doc trace` per [AGENT_DOC_TAGGING_LOCKED_v1.md](../../docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md)
+
 ## Session end
 
 - [.cursor/skills/SKILL-003-session-end-report.md](../skills/SKILL-003-session-end-report.md)

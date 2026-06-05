@@ -1,8 +1,8 @@
 # Noetfield agent memory — LOCKED (versioned in git)
 # Read at EVERY session start. Bump version when adding lessons.
 
-version: 3
-updated: "2026-06-06T12:00:00Z"
+version: 4
+updated: "2026-06-06T18:00:00Z"
 updated_by: NF-CLOUD-AGENT
 
 company_scope:
@@ -17,11 +17,14 @@ company_scope:
     - TrustField repo / TF-* work
     - VIRLUX / VL-*
 
+founder_lock: "Your job is Noetfield only. Any other repo, site, or company is prohibited."
+
 hard_rules:
   - id: R-001
-    rule: NEVER plan, implement, deploy, or suggest TrustField work in this repo or chat.
+    rule: NOETFIELD ONLY. Any other repo, site, or company is prohibited — including TrustField, trustfield.ca, VIRLUX, and all non-Noetfield workspaces.
     incident: INCIDENT-2026-06-06-001
     since: "2026-06-06"
+    reaffirmed: "2026-06-06"
   - id: R-002
     rule: NEVER commit ops/private/ or docs/internal/.
     since: "2026-05-29"
@@ -34,6 +37,10 @@ hard_rules:
     since: "2026-06-06"
   - id: R-005
     rule: Run ./scripts/verify-agent-scope.sh before every commit.
+    since: "2026-06-06"
+  - id: R-006
+    rule: Every agent-written doc must use NF-CLOUD-AGENT header with Doc trace + Updated date (YYYY-MM-DD).
+    source: docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md
     since: "2026-06-06"
 
 recurring_mistakes:

@@ -4,7 +4,10 @@
 |-------|--------|
 | Plane | `[DELIVERY]` — Noetfield cloud + local agents |
 | Agent id | `noetfield_cloud` · `noetfield_local` |
-| Tag | `[NF-CLOUD-AGENT]` |
+| **Agent tag** | `NF-CLOUD-AGENT` |
+| **Agent id** | `noetfield_cloud` |
+| **Doc trace** | `NF-CLOUD-OPS-001` |
+| **Updated** | 2026-06-06 |
 | Status | LOCKED — update only via incident + memory bump |
 
 ---
@@ -44,6 +47,12 @@ flowchart TD
 4. Run scope gate skill: [.cursor/skills/SKILL-001-scope-gate-before-work.md](../../.cursor/skills/SKILL-001-scope-gate-before-work.md)
 
 **If task mentions TrustField, trustfield.ca, VIRLUX, UPG for TrustField, or MSB vendor pack on TrustField www → STOP.** Reply: *"That is not Noetfield scope. I only work on noetfield.com / this repo."*
+
+---
+
+## Doc tagging
+
+Every agent-written doc: [AGENT_DOC_TAGGING_LOCKED_v1.md](./AGENT_DOC_TAGGING_LOCKED_v1.md) + [SKILL-005](../../.cursor/skills/SKILL-005-doc-tagging.md).
 
 ---
 

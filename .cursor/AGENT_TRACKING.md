@@ -9,6 +9,7 @@
 3. [.cursor/incidents/REGISTRY.md](incidents/REGISTRY.md) — **incident reports**
 4. [.cursor/skills/](skills/) — scope gate, pre-commit, session report, incident filing
 5. `./scripts/verify-agent-scope.sh` — run before every commit
+6. [docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md](../docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md) — **tag + date on every agent doc**
 
 **Law:** Noetfield only. **Never** TrustField / trustfield.ca / VIRLUX. See [INCIDENT-2026-06-06-001](incidents/INCIDENT-2026-06-06-001-trustfield-scope-bleed.md).
 
