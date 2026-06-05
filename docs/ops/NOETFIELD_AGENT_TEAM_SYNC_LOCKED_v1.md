@@ -96,9 +96,12 @@ CLAIM → VERIFY ON DISK → CORRECT → UPDATE REGISTRY → LOG INTAKE
 **30-day ICP (locked):** healthcare **OR** legal/accounting Vancouver **Trust Brief**  
 **Lane B:** construction/PM = **private SOW P2** — not www hero  
 **Pending:** `/ai-automation/` governance-first reframe (local uncommitted)  
-**Verified sources:** `SOURCES_VERIFIED_OPERATING_PLAN_2026.md` (6 URLs)  
+**Source cites (locked):** `sources/SYSTEMS_OPERATING_PLAN_SOURCES_LOCKED_2026.md` + `EXTRACTS/`  
+**Confirmed:** StatCan **6.1% → 12.2% → 19.2%** · CMHC Vancouver **3.7%**  
+**Vancouver permits:** vancouver.ca PDF **403** — use **opendata** `issued-building-permits`  
+**Full plan:** `SOURCE.md` (1464 lines, local)  
 **Verdict:** Lane A owns hero + 30-day revenue; Lane B via operations@ after proof.
 
 ---
 
-| v1.3 | 2026-06-06 | NF-CLOUD-AGENT dual-agent Lane A/B merge |
+| v1.4 | 2026-06-06 | NF-CLOUD-AGENT SOURCE refs locked + Vancouver 403 fallback |
