@@ -4,12 +4,13 @@
 
 ## Active queue (`next_tasks`)
 
-Empty — Wave 037–039 shipped. Pick next from `os/plans/REGISTRY.json` or founder order.
+Empty — Wave 040–042 shipped. Pick next from `os/plans/REGISTRY.json` or founder order.
 
 ## Shipped waves
 
 | Wave | IDs | Highlights |
 |------|-----|------------|
+| 040–042 | Customer acquisition | design partner SOW, copilot hub, homepage CTA |
 | 037–039 | GTM demo polish | buyer pack, workspace confidence UX, `make verify-gtm` |
 | 034–036 | GTM Tier A | procurement zip, 5-min demo page, `make demo-url` |
 | 023–033 | pilot → alembic | Trust Ledger product waves |

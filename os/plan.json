@@ -408,6 +408,27 @@
         "scripts/verify-gtm.sh",
         "docs/ops/STAGING_DEMO.md"
       ]
+    },
+    {
+      "id": "nf-design-partner-sow-040",
+      "title": "P0: Design partner SOW outline + pilot program page",
+      "status": "done",
+      "evidence": [
+        "docs/copilot/DESIGN_PARTNER_SOW_OUTLINE.md",
+        "copilot/pilot/index.html"
+      ]
+    },
+    {
+      "id": "nf-copilot-hub-gtm-041",
+      "title": "P0: Copilot hub GTM messaging + demo-first links",
+      "status": "done",
+      "evidence": ["copilot/index.html"]
+    },
+    {
+      "id": "nf-homepage-design-partner-042",
+      "title": "P1: Homepage design-partner CTA + verify-ui-e2e",
+      "status": "done",
+      "evidence": ["index.html", "scripts/verify-ui-e2e.sh"]
     }
   ]
 }

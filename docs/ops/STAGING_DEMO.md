@@ -18,7 +18,8 @@ make copilot-pilot-e2e
 | http://localhost:13080/cognitive-dashboard | Evaluate intent |
 | http://localhost:13080/workspace | Trust Ledger |
 | http://localhost:13080/workspace/connectors | M365 connector (dev OAuth) |
-| http://localhost:13080/copilot/pilot/ | Design-partner pilot checklist |
+| http://localhost:13080/copilot/pilot/ | Design-partner pilot + program |
+| http://localhost:13080/copilot/ | Copilot hub (GTM one-liner) |
 | http://localhost:13080/copilot/demo/ | 5-minute GTM demo script |
 | http://localhost:13080/trust-ledger/sample-report/ | TLE YAML downloads |
 | http://localhost:13080/copilot/ | Copilot pack |
