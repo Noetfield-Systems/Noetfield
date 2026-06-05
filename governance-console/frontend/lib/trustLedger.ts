@@ -2,6 +2,12 @@
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
 
+function pilotAuthHeaders(): Record<string, string> {
+  const key = process.env.NEXT_PUBLIC_PILOT_API_KEY?.trim();
+  if (!key) return {};
+  return { Authorization: `Bearer ${key}` };
+}
+
 export type ConfidenceFactor = {
   factor: string;
   contribution: number;
@@ -50,6 +56,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     ...init,
     headers: {
       "Content-Type": "application/json",
+      ...pilotAuthHeaders(),
       ...(init?.headers ?? {}),
     },
   });

@@ -14,8 +14,13 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import Response
 from pydantic import BaseModel, ConfigDict, Field
 
-from noetfield_governance.governance_pilot_limits import check_governance_pilot_rate_limit
-from noetfield_governance.pilot_auth import PilotAuthContext, require_pilot_auth
+from noetfield_governance.governance_pilot_limits import check_workspace_ui_rate_limit
+from noetfield_governance.pilot_auth import (
+    PilotAuthContext,
+    require_pilot_auth,
+    require_workspace_read_scope,
+    require_workspace_write_scope,
+)
 from noetfield_governance.trust_ledger_pdf import minimal_pdf
 
 router = APIRouter(prefix="/api/v1", tags=["trust-ledger-v1"])
@@ -741,7 +746,8 @@ async def register_connector(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> ConnectorObject:
-    await check_governance_pilot_rate_limit(auth, request.url.path)
+    require_workspace_write_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "connectors:register")
     return await deps.store.register_connector(payload)
 
 
@@ -751,6 +757,8 @@ async def get_connector(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> ConnectorObject:
+    require_workspace_read_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "connectors:get")
     row = await deps.store.get_connector(connector_id)
     if row is None:
         raise HTTPException(status_code=404, detail="Connector not found")
@@ -765,7 +773,8 @@ async def sync_connector(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> ConnectorObject:
-    await check_governance_pilot_rate_limit(auth, request.url.path)
+    require_workspace_write_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "connectors:sync")
     return await deps.store.sync_connector(connector_id, payload)
 
 
@@ -776,7 +785,8 @@ async def ingest_evidence(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> EvidenceObject:
-    await check_governance_pilot_rate_limit(auth, request.url.path)
+    require_workspace_write_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "evidence:ingest")
     return await deps.store.ingest_evidence(payload)
 
 
@@ -786,6 +796,8 @@ async def list_evidence(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> EvidenceListResponse:
+    require_workspace_read_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "evidence:list")
     items = await deps.store.list_evidence(limit)
     return EvidenceListResponse(items=items, count=len(items))
 
@@ -796,6 +808,8 @@ async def get_evidence(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> EvidenceObject:
+    require_workspace_read_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "evidence:get")
     row = await deps.store.get_evidence(evidence_id)
     if row is None:
         raise HTTPException(status_code=404, detail="Evidence not found")
@@ -809,6 +823,8 @@ async def list_tles(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> TleListResponse:
+    require_workspace_read_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "tle:list")
     records = await deps.store.list_tles(status, limit)
     items = [_record_to_entry(r) for r in records]
     return TleListResponse(items=items, count=len(items))
@@ -821,7 +837,8 @@ async def create_tle_draft(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> TrustLedgerEntry:
-    await check_governance_pilot_rate_limit(auth, request.url.path)
+    require_workspace_write_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "tle:draft")
     record = await deps.store.create_draft(payload)
     return _record_to_entry(record)
 
@@ -832,6 +849,8 @@ async def export_tle(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> Response:
+    require_workspace_read_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "tle:export")
     record = await deps.store.get_tle(tle_id)
     if record is None:
         raise HTTPException(status_code=404, detail="TLE not found")
@@ -847,6 +866,8 @@ async def get_tle(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> TrustLedgerEntry:
+    require_workspace_read_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "tle:get")
     record = await deps.store.get_tle(tle_id)
     if record is None:
         raise HTTPException(status_code=404, detail="TLE not found")
@@ -861,6 +882,7 @@ async def approve_tle_route(
     auth: PilotAuthContext = Depends(require_pilot_auth),
     deps: TrustLedgerDeps = Depends(get_trust_ledger_deps),
 ) -> TrustLedgerEntry:
-    await check_governance_pilot_rate_limit(auth, request.url.path)
+    require_workspace_write_scope(auth)
+    await check_workspace_ui_rate_limit(auth, "tle:approve")
     record = await deps.store.approve_tle(tle_id, payload)
     return _record_to_entry(record)
