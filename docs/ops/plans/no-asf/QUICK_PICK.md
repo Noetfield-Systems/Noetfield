@@ -6,8 +6,6 @@ When the founder says **PLAN WITH NO ASF**, start here. Pick the next **agent** 
 
 ## Next 25 agent-ready plans
 
-1. **NF-PLAN-0102** · P1/T1 · Integration tests covering docs diligence happy path and 409 guards  
-   Verify: `pytest and/or make ship-verify; area=docs-diligence; pattern=integration-test`
 1. **NF-PLAN-0103** · P1/T1 · Align OpenAPI spec with implemented msb partner routes  
    Verify: `pytest and/or make ship-verify; area=msb-partner; pattern=openapi-sync`
 1. **NF-PLAN-0104** · P1/T1 · Supabase migration for observability tables and RLS  
@@ -59,4 +57,4 @@ When the founder says **PLAN WITH NO ASF**, start here. Pick the next **agent** 
 
 ## Recently completed (update via `scripts/update-plan-status.py`)
 
-- NF-PLAN-* marked `done` in registry — run update script after each ship session.
+- **NF-PLAN-0102** — docs diligence integration tests + 409 guards (`verify-docs-diligence.sh`)

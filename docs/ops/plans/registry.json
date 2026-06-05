@@ -1654,7 +1654,7 @@
       "verify": "pytest and/or make ship-verify; area=docs-diligence; pattern=integration-test",
       "no_asf": true,
       "asf_only": false,
-      "status": "backlog",
+      "status": "done",
       "blocks": []
     },
     {
