@@ -39,7 +39,17 @@ check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent"
 check_html "${BASE}/audit" "audit page" "Audit log"
 check_html "${BASE}/copilot/pilot/" "copilot pilot" "Design-partner Go/No-Go"
 check_html "${BASE}/copilot/demo/" "copilot demo" "5-minute demo" "Demo script (locked narrative)" "confidence score"
+check_html "${BASE}/copilot/procurement/" "procurement buyer" "buyer pack" "Procurement pack (ZIP)" "NIST AI RMF"
 check_html "${BASE}/trust-ledger/sample-report/" "tle samples" "Trust Ledger"
+
+ws_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/workspace" 2>/dev/null || true)"
+ws_chunk="$(echo "$ws_html" | grep -oE '/_next/static/chunks/app/workspace/page-[^"]+\.js' | head -1)"
+if [[ -n "$ws_chunk" ]] && curl -sS "${BASE}${ws_chunk}" 2>/dev/null | grep -qF "5-minute demo script"; then
+  echo "OK   workspace demo link"
+else
+  echo "FAIL workspace demo link — rebuild dashboard" >&2
+  fail=1
+fi
 
 # TLE detail must expose PDF export in client chunk (CSR page)
 tle_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/workspace/TLE-015DCFB8B953" 2>/dev/null || true)"
@@ -56,6 +66,12 @@ if [[ -n "$tle_chunk" ]]; then
     echo "OK   tle detail ZIP link"
   else
     echo "FAIL tle detail ZIP link — rebuild dashboard" >&2
+    fail=1
+  fi
+  if echo "$chunk_body" | grep -qF "Confidence score"; then
+    echo "OK   tle detail confidence badge"
+  else
+    echo "FAIL tle detail confidence badge — rebuild dashboard" >&2
     fail=1
   fi
 else

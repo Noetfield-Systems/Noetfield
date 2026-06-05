@@ -1,48 +1,42 @@
-**Implemented** — Wave 034–036 (GTM Tier A, NO ASF batch)
+**Implemented** — Wave 037–039 (GTM demo polish, NO ASF batch)
 
 ## Tasks completed
 
 | ID | Deliverable |
 |----|-------------|
-| `nf-procurement-pack-zip-034` | `procurement_pack.py`, `GET /tle/{id}/export?format=zip`, workspace ZIP button, `make procurement-pack-e2e`, pytest `test_export_procurement_zip` |
-| `nf-demo-page-confidence-035` | `copilot/demo/index.html`, prominent PDF confidence on cover, hero links, `verify-ui-e2e` demo checks |
-| `nf-public-demo-url-036` | `scripts/print-demo-url.sh`, `make demo-url`, `STAGING_DEMO.md` + `LOCAL_DEV.md` share-in-2-commands |
+| `nf-procurement-buyer-pack-037` | `copilot/procurement/` buyer pack (ZIP, NIST/Purview table, demo links); `PROCUREMENT_ONE_PAGER.md` updated |
+| `nf-workspace-diligence-038` | Prominent confidence badge on TLE detail; list badges; audit export + demo + procurement links on workspace |
+| `nf-gtm-pre-demo-verify-039` | `scripts/verify-gtm.sh` + `make verify-gtm` (pytest + full E2E chain before external demo) |
 
-Registry stubs marked `status: done`: `nf-future-0703`, `0704`, `0707`.
+Registry stubs marked `status: done`: `nf-future-0701`, `0702`, `0708`.
 
 ## Verify
 
 ```text
-pytest test_tle_flow.py — 8 passed
-make verify-local-dev — passed
-make verify-ui-e2e — passed (PDF + ZIP export links)
-make copilot-pilot-e2e — passed
-make procurement-pack-e2e — passed
-make demo-url — prints tunnel/staging instructions (no secrets)
+make verify-gtm — passed (8 pytest, verify-local-dev, verify-ui-e2e, copilot-pilot-e2e, procurement-pack-e2e)
 ```
 
-GTM scorecard note: Tier A procurement zip + demo narrative + public URL path shipped; bottleneck remains 1 customer + live demo.
+GTM note: Tier A product complete; this wave tightens buyer-facing diligence UX and pre-demo confidence for design partners.
 
 ---
 
 ```yaml
 schema_version: 1
 repo: noetfield
-task: "Wave 034-036 GTM Tier A (procurement zip, demo page, demo URL)"
+task: "Wave 037-039 GTM demo polish (buyer pack, workspace UX, verify-gtm)"
 status: done
 verify_passed: true
-verify_command: "pytest test_tle_flow.py -q && make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e && make procurement-pack-e2e"
-verify_output_summary: "8 pytest passed; verify-local-dev, verify-ui-e2e, copilot-pilot-e2e, procurement-pack-e2e all exit 0"
+verify_command: "make verify-gtm"
+verify_output_summary: "verify-gtm passed — pytest 8, verify-local-dev, verify-ui-e2e, copilot-pilot-e2e, procurement-pack-e2e all exit 0"
 blocked_reason: null
-next_action: "Pick next T0 from os/plans/REGISTRY.json or founder order; run make dev-local-tunnel-bg && make demo-url before external demo"
+next_action: "make dev-local-tunnel-bg && make demo-url before external CIO demo; pick next T0 from REGISTRY or founder outreach"
 evidence_paths:
-  - governance-console/backend/services/procurement_pack.py
-  - governance-console/backend/routes/tle.py
-  - copilot/demo/index.html
-  - scripts/print-demo-url.sh
-  - scripts/procurement-pack-e2e.sh
+  - copilot/procurement/index.html
+  - scripts/verify-gtm.sh
+  - governance-console/frontend/app/workspace/page.tsx
+  - governance-console/frontend/app/workspace/[tle_id]/page.tsx
   - os/plan.json
   - os/SHIP_NOW.md
 reporter: cursor
-reported_at: "2026-06-05T13:04:21Z"
+reported_at: "2026-06-05T13:07:39Z"
 ```

@@ -64,9 +64,18 @@ export default function WorkspacePage() {
         title="Trust Ledger Workspace"
         lead="Procurement-grade authorization records for Copilot adoption — evidence, confidence score, and approval chain."
       />
-      <p className="mb-6 text-sm">
+      <p className="mb-6 flex flex-wrap gap-x-4 gap-y-1 text-sm">
         <Link href="/workspace/connectors" className="text-accent hover:underline">
           M365 connectors (dev OAuth)
+        </Link>
+        <Link href="/copilot/demo/" className="text-accent hover:underline">
+          5-minute demo script
+        </Link>
+        <a href="/audit/export" className="text-accent hover:underline" download>
+          Audit export (JSON)
+        </a>
+        <Link href="/copilot/procurement/" className="text-accent hover:underline">
+          Procurement buyer pack
         </Link>
       </p>
 
@@ -147,11 +156,19 @@ export default function WorkspacePage() {
             <Link href={`/workspace/${encodeURIComponent(row.tle_id)}`} className="nf-card-hover block p-5">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <code className="font-mono text-sm text-accent">{row.tle_id}</code>
-                <span className={`text-sm font-medium ${statusClass(row.status)}`}>{row.status}</span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span
+                    className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent"
+                    aria-label={`Confidence ${(row.confidence_score * 100).toFixed(0)} percent`}
+                  >
+                    {(row.confidence_score * 100).toFixed(0)}% confidence
+                  </span>
+                  <span className={`text-sm font-medium ${statusClass(row.status)}`}>{row.status}</span>
+                </div>
               </div>
               <p className="mt-3 text-sm text-white/90">{row.decision}</p>
               <p className="mt-1 text-xs text-muted-2">
-                Confidence {(row.confidence_score * 100).toFixed(0)}% · {row.date}
+                {row.date}
                 {row.source_rid ? ` · RID ${row.source_rid}` : ""}
               </p>
             </Link>

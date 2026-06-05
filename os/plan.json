@@ -381,6 +381,33 @@
         "scripts/print-demo-url.sh",
         "docs/ops/STAGING_DEMO.md"
       ]
+    },
+    {
+      "id": "nf-procurement-buyer-pack-037",
+      "title": "P0: Procurement buyer page + one-pager",
+      "status": "done",
+      "evidence": [
+        "copilot/procurement/index.html",
+        "docs/copilot/PROCUREMENT_ONE_PAGER.md"
+      ]
+    },
+    {
+      "id": "nf-workspace-diligence-038",
+      "title": "P0: Workspace diligence UX",
+      "status": "done",
+      "evidence": [
+        "governance-console/frontend/app/workspace/page.tsx",
+        "governance-console/frontend/app/workspace/[tle_id]/page.tsx"
+      ]
+    },
+    {
+      "id": "nf-gtm-pre-demo-verify-039",
+      "title": "P1: make verify-gtm pre-demo bundle",
+      "status": "done",
+      "evidence": [
+        "scripts/verify-gtm.sh",
+        "docs/ops/STAGING_DEMO.md"
+      ]
     }
   ]
 }

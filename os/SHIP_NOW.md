@@ -4,12 +4,13 @@
 
 ## Active queue (`next_tasks`)
 
-Empty — Wave 034–036 (GTM Tier A) shipped. Pick next work from `os/plans/REGISTRY.json` (T0→T1) or founder order.
+Empty — Wave 037–039 shipped. Pick next from `os/plans/REGISTRY.json` or founder order.
 
 ## Shipped waves
 
 | Wave | IDs | Highlights |
 |------|-----|------------|
+| 037–039 | GTM demo polish | buyer pack, workspace confidence UX, `make verify-gtm` |
 | 034–036 | GTM Tier A | procurement zip, 5-min demo page, `make demo-url` |
 | 023–033 | pilot → alembic | Trust Ledger product waves |
 | **Locks** | GTM + sources book | `docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md`, `docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md` |
@@ -23,6 +24,12 @@ Empty — Wave 034–036 (GTM Tier A) shipped. Pick next work from `os/plans/REG
 | GTM 60-day (CEO) | `docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md` |
 
 ## Verify
+
+```bash
+make verify-gtm
+```
+
+Or step-by-step:
 
 ```bash
 make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e

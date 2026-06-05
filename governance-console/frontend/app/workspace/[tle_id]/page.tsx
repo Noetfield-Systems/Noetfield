@@ -77,8 +77,30 @@ export default function TleViewerPage() {
           <PageHero
             eyebrow={tle.tle_id}
             title={String(doc.decision ?? "Trust Ledger Entry")}
-            lead={`Status ${tle.status} · Confidence ${(tle.confidence_score * 100).toFixed(0)}% · ${String(doc.date ?? "")} · Role ${getWorkspaceRole()}`}
+            lead={`Status ${tle.status} · ${String(doc.date ?? "")} · Role ${getWorkspaceRole()}`}
           />
+
+          <div
+            className="nf-card mb-8 flex flex-wrap items-center justify-between gap-4 border border-accent/30 bg-accent/5 p-6"
+            role="status"
+            aria-label="TLE confidence score"
+          >
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted">Confidence score</p>
+              <p className="font-serif text-4xl font-semibold text-accent">
+                {(tle.confidence_score * 100).toFixed(0)}%
+              </p>
+              <p className="mt-1 text-sm text-muted-2">Board/legal visibility — shown on PDF cover</p>
+            </div>
+            <div className="flex flex-wrap gap-2 text-sm">
+              <Link href="/copilot/demo/" className="nf-btn-secondary">
+                Demo script
+              </Link>
+              <a href="/audit/export" className="nf-btn-secondary" download>
+                Audit export
+              </a>
+            </div>
+          </div>
 
           {error && (
             <p

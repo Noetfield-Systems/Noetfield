@@ -8,8 +8,13 @@
 
 - Pre-execution **governance evaluate** (allow / deny / review) with RID lineage
 - **Evidence Index** — metadata-only ingest (Purview, Entra ID, Audit, SharePoint)
-- **Trust Ledger Entry (TLE v1)** — signed go/no-go with confidence score and approval chain
-- **Board pack export** — JSON + HTML for diligence
+- **Trust Ledger Entry (TLE v1)** — signed go/no-go with **confidence score** and approval chain
+- **Board pack export** — JSON, HTML, PDF
+- **Procurement pack (ZIP)** — one-click diligence bundle (JSON + PDF + README + optional audit slice)
+
+## Framework orientation
+
+Primary citations: `docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md` (NIST AI RMF, ISO 42001, EU AI Act, Microsoft Purview). Orientation only — not legal advice.
 
 ## Out of scope
 
@@ -19,14 +24,19 @@ No payments, custody, settlement, or money transmission.
 
 ```bash
 make dev-local
-make verify-local-dev
-./scripts/tle-smoke.sh
+make verify-gtm
 ```
 
-Demo: http://localhost:13080/workspace
+Share external demo:
+
+```bash
+make dev-local-tunnel-bg && make demo-url
+```
 
 ## Artifacts
 
+- Buyer pack page: `/copilot/procurement/`
+- 5-minute demo: `/copilot/demo/`
 - TLE samples: `/trust-ledger/sample-report/`
 - Pilot runbook: `docs/spec/copilot-readiness-pilot-runbook.md`
 - Staging: `docs/ops/STAGING_DEMO.md`

@@ -75,11 +75,13 @@ Prints a public HTTPS URL + `/copilot/demo/` path. For staging: `export NF_STAGI
 ## Smoke before demo
 
 ```bash
+make verify-gtm
+```
+
+Runs pytest, `verify-local-dev`, `verify-ui-e2e`, `copilot-pilot-e2e`, and `procurement-pack-e2e`. Then `make demo-url` for the shareable link.
+
+```bash
 python3 scripts/validate-tle-samples.py
-pytest governance-console/backend/tests/test_tle_flow.py -q
-make verify-local-dev
-make verify-ui-e2e
-make procurement-pack-e2e
 ```
 
 ## Optional public staging smoke
