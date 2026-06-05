@@ -1670,7 +1670,7 @@
       "verify": "pytest and/or make ship-verify; area=msb-partner; pattern=openapi-sync",
       "no_asf": true,
       "asf_only": false,
-      "status": "backlog",
+      "status": "done",
       "blocks": []
     },
     {
