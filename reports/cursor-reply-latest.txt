@@ -1,42 +1,50 @@
-**Implemented** — Wave 040–042 (customer acquisition, NO ASF batch)
+**Verified** — Wave 034–036 (GTM Tier A, NO ASF) — re-confirmation closeout
 
-## Tasks completed
+## Tasks (already on disk; full verify PASS)
 
 | ID | Deliverable |
 |----|-------------|
-| `nf-design-partner-sow-040` | `docs/copilot/DESIGN_PARTNER_SOW_OUTLINE.md`; pilot page design partner program + success signals |
-| `nf-copilot-hub-gtm-041` | `copilot/index.html` GTM one-liner hero, demo-first CTAs, fixed HTML structure |
-| `nf-homepage-design-partner-042` | Homepage primary CTA "Become a design partner"; trust strip; verify-ui-e2e homepage + copilot hub |
+| `nf-procurement-pack-zip-034` | `procurement_pack.py`, `format=zip` export, workspace ZIP button, `procurement-pack-e2e.sh`, `test_export_procurement_zip` |
+| `nf-demo-page-confidence-035` | `copilot/demo/index.html`, PDF cover `Confidence: NN%`, verify-ui-e2e demo checks |
+| `nf-public-demo-url-036` | `print-demo-url.sh`, `make demo-url`, `STAGING_DEMO.md` + `LOCAL_DEV.md` |
 
-Registry stubs marked `status: done`: `nf-future-0705`, `0706`, `0709`.
+Registry stubs `status: done`: `nf-future-0703`, `0704`, `0707`.
 
 ## Verify
 
 ```text
-make verify-gtm — passed
+pytest test_export_procurement_zip — passed
+make verify-local-dev — passed
+make verify-ui-e2e — passed (copilot demo, procurement buyer, ZIP link)
+make procurement-pack-e2e — passed
+make copilot-pilot-e2e — passed
+make demo-url — prints tunnel/staging instructions (no secrets)
 ```
 
-GTM note: CEO priority #1 — materials for first contracted design partner; no Tier B connector work.
+GTM note: Tier A procurement zip + 5-min demo + shareable URL path — proof for design partners.
 
 ---
 
 ```yaml
 schema_version: 1
 repo: noetfield
-task: "Wave 040-042 customer acquisition (design partner SOW, copilot hub, homepage CTA)"
+task: "Wave 034-036 GTM Tier A (procurement zip, demo page, public demo URL)"
 status: done
 verify_passed: true
-verify_command: "make verify-gtm"
-verify_output_summary: "verify-gtm passed — full E2E chain green including new homepage and copilot hub UI checks"
+verify_command: "make verify-local-dev && make verify-ui-e2e && make procurement-pack-e2e && make copilot-pilot-e2e"
+verify_output_summary: "All acceptance checks PASS on branch cursor/bank-grade-fullstack-37f0"
 blocked_reason: null
-next_action: "Founder outreach with DESIGN_PARTNER_SOW_OUTLINE; make dev-local-tunnel-bg && make demo-url for live demo"
+next_action: "Founder: make dev-local-tunnel-bg && make demo-url for live partner URL; outreach with procurement ZIP on approved TLE"
 evidence_paths:
-  - docs/copilot/DESIGN_PARTNER_SOW_OUTLINE.md
-  - copilot/pilot/index.html
-  - copilot/index.html
-  - index.html
-  - scripts/verify-ui-e2e.sh
+  - governance-console/backend/services/procurement_pack.py
+  - governance-console/backend/routes/tle.py
+  - governance-console/frontend/app/workspace/[tle_id]/page.tsx
+  - copilot/demo/index.html
+  - governance-console/backend/services/board_pack_pdf.py
+  - scripts/print-demo-url.sh
+  - scripts/procurement-pack-e2e.sh
+  - docs/ops/STAGING_DEMO.md
   - os/plan.json
 reporter: cursor
-reported_at: "2026-06-05T13:09:17Z"
+reported_at: "2026-06-06T00:30:00Z"
 ```
