@@ -4,16 +4,18 @@ import "./globals.css";
 
 const ibmSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
   variable: "--font-sans",
   display: "swap",
+  preload: true,
 });
 
 const ibmSerif = IBM_Plex_Serif({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["600"],
   variable: "--font-serif",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

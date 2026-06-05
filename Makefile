@@ -34,6 +34,11 @@ dev-local:
 	@chmod +x scripts/dev-local-all.sh scripts/verify-local-dev.sh scripts/dev-local-down.sh
 	./scripts/dev-local-all.sh
 
+# Pro mode: production Next build + no API hot-reload (lower CPU/RAM than next dev)
+dev-local-pro:
+	@chmod +x scripts/dev-local-all.sh scripts/dev-local-down.sh scripts/dev-platform-console.sh
+	NF_DASHBOARD_MODE=production NF_DEV_HOT_RELOAD=0 ./scripts/dev-local-all.sh
+
 dev-local-down:
 	@chmod +x scripts/dev-local-down.sh
 	./scripts/dev-local-down.sh

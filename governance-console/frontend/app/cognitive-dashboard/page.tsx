@@ -1,22 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { Shell } from "@/components/Shell";
 import { EvaluateForm } from "@/components/EvaluateForm";
 import { DevPortBanner } from "@/components/DevPortBanner";
-import { ApiHealth, apiBaseLabel, fetchApiHealth } from "@/lib/health";
+import { apiBaseLabel } from "@/lib/health";
+import { useApiHealth } from "@/lib/useApiHealth";
 
 export default function CognitiveDashboardPage() {
-  const [health, setHealth] = useState<ApiHealth | null>(null);
-
-  useEffect(() => {
-    fetchApiHealth().then(setHealth);
-    const id = setInterval(() => {
-      fetchApiHealth().then(setHealth);
-    }, 15000);
-    return () => clearInterval(id);
-  }, []);
+  const health = useApiHealth();
 
   return (
     <Shell active="dashboard">
