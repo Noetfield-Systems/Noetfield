@@ -1,6 +1,8 @@
 # SKILL-005 — Doc tagging (mandatory)
 
-**When:** Creating or materially editing any agent-authored document in this repo.
+**When:** Creating a **new** document you write, or adding **your** new sections when the user explicitly asks you to edit a file.
+
+**Do not** add headers to existing docs you did not author. Do not retag founder or locked files.
 
 ## Header (required top block)
 

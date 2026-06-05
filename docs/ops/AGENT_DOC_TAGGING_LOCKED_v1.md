@@ -11,7 +11,9 @@
 
 ## Law
 
-**Every document an agent writes** (tracked `.md`, `.mdc`, `.yaml`, reports, incidents, skills, ops locks) **must** include the agent tag header below with **today's date** in `Updated`.
+**Only documents this agent creates or writes** must include the tag header below with **today's date** in `Updated`.
+
+**Do not touch other docs** — no retroactive headers on founder files, locked specs, or docs you did not author. Edit existing files only when the user explicitly asks; then add/update the header on **your** new sections only, not the whole file.
 
 Commits by agents use prefix: `[NF-CLOUD-AGENT]`
 
@@ -48,9 +50,10 @@ Commits by agents use prefix: `[NF-CLOUD-AGENT]`
 
 ## Forbidden
 
-- Untagged agent-authored docs in `docs/`, `.cursor/`, `scripts/` (when doc-heavy)
+- Adding headers to docs you did not write
+- Rewriting or retagging founder/locked docs without explicit user request
+- Untagged **new** agent-authored docs
 - Wrong tag (`NF-LOCAL-AGENT` in cloud workspace)
-- Missing or stale `Updated` date
 
 ---
 

@@ -22,7 +22,7 @@ Follow [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](../../docs/ops/AGENT_SELF_A
 
 ## Docs
 
-- Every agent-written doc: `NF-CLOUD-AGENT` header + `Updated: YYYY-MM-DD` + `Doc trace` per [AGENT_DOC_TAGGING_LOCKED_v1.md](../../docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md)
+- Tag + date **only on docs you write** — never retag or edit others' docs ([AGENT_DOC_TAGGING_LOCKED_v1.md](../../docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md))
 
 ## Session end
 
