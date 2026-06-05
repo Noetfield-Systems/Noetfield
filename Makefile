@@ -58,6 +58,9 @@ verify-gtm:
 	@chmod +x scripts/verify-gtm.sh
 	./scripts/verify-gtm.sh
 
+# Alias — cloud + local agents unified (same script)
+ship-verify: verify-gtm
+
 tle-smoke:
 	@chmod +x scripts/tle-smoke.sh scripts/seed-m365-evidence-stub.sh
 	./scripts/tle-smoke.sh

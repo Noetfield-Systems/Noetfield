@@ -1,13 +1,11 @@
-# Reference library — agents start here
+# Reference library — moved to `docs/references/`
 
-**Purpose:** Curated, citable governance sources for Noetfield sales, pilots, TLE evidence mapping, and procurement copy.
+**Canonical path (GitHub + Cursor Cloud):** [`../references/README.md`](../references/README.md)
 
-| Doc | Use |
-|-----|-----|
-| **[GOVERNANCE_SOURCES_BOOK_v1.md](./GOVERNANCE_SOURCES_BOOK_v1.md)** | Small book — frameworks, links, Noetfield mapping |
-| **[GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md](./GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md)** | Drift detection — monitoring, policy/config/model/agent drift, primary links |
-| [../strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md](../strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | CEO focus, demo script, 60-day fence |
+All new LOCKED drift blueprints and source books live under **`docs/references/`** (plural).
 
-**Read order:** `docs/ops/AGENT_READ_LINKS_LOCKED_v1.md` → GTM lock → this book (when writing controls, pilots, or buyer docs).
+Legacy links to `docs/reference/` should be updated to `docs/references/` on next touch.
 
-**Rule:** Prefer **primary** sources (`.gov`, `iso.org`, `eur-lex`, `learn.microsoft.com`, `nist.gov`, `oecd.org`, `owasp.org`). Do not cite random blogs as authority.
+| Former path | Canonical path |
+|-------------|----------------|
+| `docs/reference/GOVERNANCE_*` | `docs/references/GOVERNANCE_*` |

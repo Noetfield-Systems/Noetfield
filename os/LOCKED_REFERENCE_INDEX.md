@@ -4,10 +4,14 @@
 |----|----------|----------|
 | **`agent-read-links-v1`** | [docs/ops/AGENT_READ_LINKS_LOCKED_v1.md](../docs/ops/AGENT_READ_LINKS_LOCKED_v1.md) | **Full index** — hub :13020, mandatory chain 1–14, every repo separate, local vs cloud |
 | **`agent-context-v1`** | [docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) | Ship/ingest rules, cloud vs local, diagnostics |
+| **`agent-team-sync-v1`** | [docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) | **Cloud-readable** team sync, waves summary, private plans pointer |
 | **`trust-ledger-positioning-v1.2`** | [docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md](../docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md) | **Primary GTM + product direction** — TLE mandate, 60-day sprint |
 | **`gtm-60-day-v1`** | [docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md](../docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | **CEO focus** — 1 customer, 5-min demo, 60-day fence, time allocation |
-| **`governance-sources-book-v1`** | [docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md](../docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md) | **Citable frameworks** — NIST, OECD, ISO, EU AI Act, Microsoft, OWASP |
-| **`governance-drift-sources-v1`** | [docs/reference/GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md](../docs/reference/GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md) | **Drift detection** — control/policy/config/model/agent drift, monitoring sources |
+| **`governance-sources-book-v1`** | [docs/references/GOVERNANCE_SOURCES_BOOK_v1.md](../docs/references/GOVERNANCE_SOURCES_BOOK_v1.md) | **Citable frameworks** — NIST, OECD, ISO, EU AI Act, Microsoft, OWASP |
+| **`governance-drift-sources-v1`** | [docs/references/GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md](../docs/references/GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md) | **Drift taxonomy boss** — control/policy/config/model/agent drift |
+| **`trust-ledger-product-blueprint-v1.2`** | [docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md](../docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md) | **Product mandate** — evaluate → TLE → audit-export |
+| **`governance-drift-blueprints-v1`** | [docs/references/GOVERNANCE_DRIFT_BLUEPRINTS_INDEX_LOCKED_v1.md](../docs/references/GOVERNANCE_DRIFT_BLUEPRINTS_INDEX_LOCKED_v1.md) | **2026 architecture supplements** — router to four blueprints |
+| **`drift-blueprints-cloud-read-v1`** | [docs/ops/NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md) | **Cloud agent** read order (committed) |
 | `copilot-sme-system-design-v1` | [docs/strategy/NOETFIELD_COPILOT_SME_SYSTEM_DESIGN_LOCKED_v1.md](../docs/strategy/NOETFIELD_COPILOT_SME_SYSTEM_DESIGN_LOCKED_v1.md) | SME Copilot full architecture; Lane A vs B/C boundary analysis at top |
 | Sprint backlog | [os/sprint-trust-ledger-v1.2.md](./sprint-trust-ledger-v1.2.md) | P0–P1 stories and dependency order |
 | TLE schema + samples | [packages/schemas/tle-v1.schema.json](../packages/schemas/tle-v1.schema.json) · [docs/spec/samples/](../docs/spec/samples/) | Engineering handoff |
