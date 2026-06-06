@@ -32,7 +32,7 @@
 4. [NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](./NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) — local↔cloud bridge
 5. [NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](./NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md)
 6. [os/SHIP_NOW.md](../../os/SHIP_NOW.md) → [os/plan.json](../../os/plan.json) · [os/LOCKED_REFERENCE_INDEX.md](../../os/LOCKED_REFERENCE_INDEX.md)
-7. **PLAN WITH NO ASF:** [plans/no-asf/QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) · full bank [plans/README.md](./plans/README.md) (1000 plans)
+7. **PLAN WITH NO ASF:** [NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md](./NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md) → [plans/no-asf/QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) · [plans/PROMPT_PACK_LOCKED/](./plans/PROMPT_PACK_LOCKED/) (1000 prompt-ready)
 8. [os/sprint-trust-ledger-v1.2.md](../../os/sprint-trust-ledger-v1.2.md) or [lane_a_sprint_map.md](./lane_a_sprint_map.md)
 9. After founder sync: `ops/private/agent-reference/IN_CHARGE_NOW.md` · `ops/private/sourceA/founder/repo-agent-notices/SEMI_NOTICE_noetfield_cloud_v1.md`
 

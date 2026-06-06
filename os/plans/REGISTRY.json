@@ -73,7 +73,7 @@
       "domain": "evidence",
       "title": "Automate evidence for ship ops (T0, #0001)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0001.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0002",
@@ -123,7 +123,7 @@
       "domain": "policy",
       "title": "Ship policy for ship ops (T0, #0006)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0006.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0007",
@@ -133,7 +133,7 @@
       "domain": "staging",
       "title": "Automate staging for ship ops (T0, #0007)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0007.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0008",
@@ -143,7 +143,7 @@
       "domain": "ingest",
       "title": "Migrate ingest for ship ops (T0, #0008)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0008.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0009",
@@ -153,7 +153,7 @@
       "domain": "api",
       "title": "Ship api for ship ops (T0, #0009)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0009.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0010",
@@ -163,7 +163,7 @@
       "domain": "security",
       "title": "Automate security for ship ops (T0, #0010)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0010.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0011",
@@ -183,7 +183,7 @@
       "domain": "sample",
       "title": "Ship sample for ship ops (T0, #0012)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0012.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0013",
@@ -193,7 +193,7 @@
       "domain": "tle",
       "title": "Automate tle for ship ops (T0, #0013)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0013.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0014",
@@ -203,7 +203,7 @@
       "domain": "connectors",
       "title": "Migrate connectors for ship ops (T0, #0014)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0014.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0015",
@@ -213,7 +213,7 @@
       "domain": "rbac",
       "title": "Ship rbac for ship ops (T0, #0015)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0015.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0016",
@@ -233,7 +233,7 @@
       "domain": "workflow",
       "title": "Migrate workflow for ship ops (T0, #0017)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0017.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0018",
@@ -243,7 +243,7 @@
       "domain": "rag",
       "title": "Ship rag for ship ops (T0, #0018)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0018.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0019",
@@ -253,7 +253,7 @@
       "domain": "risk",
       "title": "Automate risk for ship ops (T0, #0019)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0019.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0020",
@@ -263,7 +263,7 @@
       "domain": "ops",
       "title": "Migrate ops for ship ops (T0, #0020)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0020.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0021",
@@ -273,7 +273,7 @@
       "domain": "docs",
       "title": "Ship docs for ship ops (T0, #0021)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0021.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0022",
@@ -283,7 +283,7 @@
       "domain": "ui",
       "title": "Automate ui for ship ops (T0, #0022)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0022.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0023",
@@ -293,7 +293,7 @@
       "domain": "tenant",
       "title": "Migrate tenant for ship ops (T0, #0023)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0023.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0024",
@@ -313,7 +313,7 @@
       "domain": "kms",
       "title": "Automate kms for ship ops (T0, #0025)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0025.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0026",
@@ -323,7 +323,7 @@
       "domain": "evidence",
       "title": "Integrate evidence for ship ops (T1, #0026)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0026.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0027",
@@ -433,7 +433,7 @@
       "domain": "sample",
       "title": "Document sample for ship ops (T1, #0037)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0037.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0038",
@@ -503,7 +503,7 @@
       "domain": "risk",
       "title": "Integrate risk for ship ops (T1, #0044)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0044.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0045",
@@ -513,7 +513,7 @@
       "domain": "ops",
       "title": "Test ops for ship ops (T1, #0045)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0045.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0046",
@@ -523,7 +523,7 @@
       "domain": "docs",
       "title": "Document docs for ship ops (T1, #0046)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0046.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0047",
@@ -633,7 +633,7 @@
       "domain": "staging",
       "title": "Instrument staging for ship ops (T2, #0057)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0057.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0058",
@@ -703,7 +703,7 @@
       "domain": "connectors",
       "title": "Extend connectors for ship ops (T2, #0064)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0064.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0065",
@@ -713,7 +713,7 @@
       "domain": "rbac",
       "title": "Expose rbac for ship ops (T2, #0065)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0065.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0066",
@@ -723,7 +723,7 @@
       "domain": "audit",
       "title": "Instrument audit for ship ops (T2, #0066)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0066.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0067",
@@ -833,7 +833,7 @@
       "domain": "workspace",
       "title": "Validate workspace for ship ops (T3, #0077)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0077.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0078",
@@ -913,7 +913,7 @@
       "domain": "security",
       "title": "Harden security for ship ops (T3, #0085)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0085.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0086",
@@ -923,7 +923,7 @@
       "domain": "pilot",
       "title": "Validate pilot for ship ops (T3, #0086)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0086.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0087",
@@ -1033,7 +1033,7 @@
       "domain": "ui",
       "title": "Harden ui for ship ops (T3, #0097)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0097.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0098",
@@ -1073,7 +1073,7 @@
       "domain": "evidence",
       "title": "Automate evidence for tle core (T0, #0101)",
       "path": "os/plans/phase-1-tle-core/T0/nf-future-0101.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0102",
@@ -1123,7 +1123,7 @@
       "domain": "policy",
       "title": "Ship policy for tle core (T0, #0106)",
       "path": "os/plans/phase-1-tle-core/T0/nf-future-0106.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0107",
@@ -1133,7 +1133,7 @@
       "domain": "staging",
       "title": "Automate staging for tle core (T0, #0107)",
       "path": "os/plans/phase-1-tle-core/T0/nf-future-0107.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0108",
@@ -1153,7 +1153,7 @@
       "domain": "api",
       "title": "Ship api for tle core (T0, #0109)",
       "path": "os/plans/phase-1-tle-core/T0/nf-future-0109.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0110",
@@ -1173,7 +1173,7 @@
       "domain": "pilot",
       "title": "Migrate pilot for tle core (T0, #0111)",
       "path": "os/plans/phase-1-tle-core/T0/nf-future-0111.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0112",
@@ -1223,7 +1223,7 @@
       "domain": "audit",
       "title": "Automate audit for tle core (T0, #0116)",
       "path": "os/plans/phase-1-tle-core/T0/nf-future-0116.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0117",
@@ -1273,7 +1273,7 @@
       "domain": "docs",
       "title": "Ship docs for tle core (T0, #0121)",
       "path": "os/plans/phase-1-tle-core/T0/nf-future-0121.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0122",
@@ -1423,7 +1423,7 @@
       "domain": "pilot",
       "title": "Test pilot for tle core (T1, #0136)",
       "path": "os/plans/phase-1-tle-core/T1/nf-future-0136.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0137",
@@ -2173,7 +2173,7 @@
       "domain": "pilot",
       "title": "Migrate pilot for evidence connectors (T0, #0211)",
       "path": "os/plans/phase-2-evidence-connectors/T0/nf-future-0211.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0212",
@@ -3073,7 +3073,7 @@
       "domain": "evidence",
       "title": "Automate evidence for workspace enterprise (T0, #0301)",
       "path": "os/plans/phase-3-workspace-enterprise/T0/nf-future-0301.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0302",
@@ -7073,7 +7073,7 @@
       "domain": "evidence",
       "title": "Automate evidence for pilot gtm (T0, #0701)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0701.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0702",
@@ -7083,7 +7083,7 @@
       "domain": "workspace",
       "title": "Migrate workspace for pilot gtm (T0, #0702)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0702.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0703",
@@ -7093,7 +7093,7 @@
       "domain": "export",
       "title": "Ship export for pilot gtm (T0, #0703)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0703.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0704",
@@ -7103,7 +7103,7 @@
       "domain": "copilot",
       "title": "Automate copilot for pilot gtm (T0, #0704)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0704.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0705",
@@ -7113,7 +7113,7 @@
       "domain": "agent",
       "title": "Migrate agent for pilot gtm (T0, #0705)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0705.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0706",
@@ -7123,7 +7123,7 @@
       "domain": "policy",
       "title": "Ship policy for pilot gtm (T0, #0706)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0706.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0707",
@@ -7133,7 +7133,7 @@
       "domain": "staging",
       "title": "Automate staging for pilot gtm (T0, #0707)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0707.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0708",
@@ -7143,7 +7143,7 @@
       "domain": "ingest",
       "title": "Migrate ingest for pilot gtm (T0, #0708)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0708.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0709",
@@ -7153,7 +7153,7 @@
       "domain": "api",
       "title": "Ship api for pilot gtm (T0, #0709)",
       "path": "os/plans/phase-7-pilot-gtm/T0/nf-future-0709.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0710",

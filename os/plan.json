@@ -68,25 +68,32 @@
         "finance_ledger_payments",
         "member_portal_execution"
       ]
+    },
+    {
+      "id": "1000-prompt-pack-v1",
+      "title": "1000 prompt-ready plan pack — GTM-weighted, locked index",
+      "path": "docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md",
+      "locked_at": "2026-06-03",
+      "mandate": "PLAN WITH NO ASF picks from QUICK_PICK / GTM_PRIORITY_100; verify with plan-with-no-asf-verify.sh"
     }
   ],
   "next_tasks": [
     {
-      "id": "ship-pilot-e2e-verify-007",
-      "title": "Wire copilot-pilot-e2e into plan-with-no-asf-verify",
-      "plan": "os/plans/phase-0-ship-ops/T0/nf-future-0011.md",
+      "id": "ship-1000-prompt-pack-lock-010",
+      "title": "Lock 1000 prompt-ready pack v2 + bridge + GTM QUICK_PICK",
+      "plan": "docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md",
       "status": "done"
     },
     {
-      "id": "ship-audit-export-api-e2e-008",
-      "title": "Verify /audit/export JSON bundle in verify bundle",
-      "plan": "os/plans/phase-0-ship-ops/T0/nf-future-0016.md",
+      "id": "ship-customer-outreach-011",
+      "title": "Design partner pipeline + follow-up template",
+      "plan": "docs/copilot/DESIGN_PARTNER_PIPELINE_v1.md",
       "status": "done"
     },
     {
-      "id": "ship-procurement-e2e-verify-009",
-      "title": "Wire procurement-pack-e2e into plan-with-no-asf-verify",
-      "plan": "os/plans/phase-0-ship-ops/T0/nf-future-0024.md",
+      "id": "ship-demo-rehearsal-012",
+      "title": "5-minute demo rehearsal checklist + buyer personas",
+      "plan": "docs/ops/DEMO_REHEARSAL_CHECKLIST_v1.md",
       "status": "done"
     }
   ],

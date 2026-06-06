@@ -1,16 +1,17 @@
 # Completed on `main` (sync to registry)
 
-When these ship, mark matching **NF-PLAN-*** IDs `done` via `scripts/update-plan-status.py`.
+Run after each ship session:
 
-| Shipped capability | Suggested registry match |
-|--------------------|---------------------------|
-| PR #15 + bank-grade + dev :13080 | P0 · devex/ci-cd patterns |
-| Trust Ledger MVP (4 routes) | P1 · trust-ledger · api-endpoint |
-| Connectors + list + multi-approve + PDF | P1 · trust-ledger · T2 patterns |
-| trust-ledger-ci.yml | P0/P1 · ci-job |
+```bash
+python3 scripts/sync-prompt-pack-status.py
+```
 
-| Trust Ledger workspace UI (`/trust-ledger`) | P1 · NF-PLAN-0106 |
-| Connectors Controls diligence + connector sync API | P1 · NF-PLAN-0109, NF-PLAN-0301 |
-| WWW trust-ledger cross-links | P1 · NF-PLAN-0107 |
+| Shipped capability | Registry / evidence |
+|--------------------|---------------------|
+| PR #15 + bank-grade + dev :13080 | P0 · devex/ci-cd |
+| Trust Ledger MVP (4 routes) | P1 · trust-ledger |
+| Waves 023–042 (pilot → GTM) | See PROMPT_PACK_LOCKED/ENGINEERING_DONE_MANIFEST.md |
+| PLAN WITH NO ASF iter 1–3 | ship-*-00x next_tasks; nf-future-0011/0016/0024 |
+| 1000 prompt pack v2 lock | docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md |
 
-**Last synced IDs:** NF-PLAN-0001, 0016, 0022, 0023, 0101, 0106, 0107, 0109, 0116, 0121, 0136, 0301
+**Last synced:** via `sync-prompt-pack-status.py` (NF-PLAN ↔ nf-future bridge)

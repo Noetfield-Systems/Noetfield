@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack
 
 PYTHONPATH_VALUE := packages/types:packages/config:packages/sdk:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance
 
@@ -58,6 +58,13 @@ verify-ui-e2e:
 plan-with-no-asf-verify:
 	@chmod +x scripts/plan-with-no-asf-verify.sh scripts/verify-copilot-demo-links.sh
 	./scripts/plan-with-no-asf-verify.sh
+
+sync-prompt-pack:
+	@python3 scripts/sync-prompt-pack-status.py
+
+generate-prompt-pack:
+	@python3 scripts/generate-prompt-pack-v2.py
+	@python3 scripts/sync-prompt-pack-status.py
 
 plans-regen:
 	@python3 scripts/generate-plans-registry.py

@@ -26,6 +26,7 @@
 | LLM drift | LLM architecture | [docs/references/LLM_DRIFT_DETECTION_ARCHITECTURE_LOCKED_v1.md](../docs/references/LLM_DRIFT_DETECTION_ARCHITECTURE_LOCKED_v1.md) |
 | Enterprise drift | Enterprise framework | [docs/references/ENTERPRISE_GOVERNANCE_DRIFT_FRAMEWORK_LOCKED_v1.md](../docs/references/ENTERPRISE_GOVERNANCE_DRIFT_FRAMEWORK_LOCKED_v1.md) |
 | Sources handbook | Handbook LOCKED v1 | [docs/references/GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md](../docs/references/GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md) |
+| 1000 Prompt Pack | LOCKED v1 | [docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md](../docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md) |
 | PLAN WITH NO ASF | QUICK_PICK | [docs/ops/plans/no-asf/QUICK_PICK.md](../docs/ops/plans/no-asf/QUICK_PICK.md) |
 
 **Verify:** `make ship-verify` (merge) · `make verify-gtm` (pre-demo)

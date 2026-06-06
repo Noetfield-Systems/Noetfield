@@ -2,55 +2,88 @@
 
 When the founder says **PLAN WITH NO ASF**, start here. Pick the next **agent** item (not `asf_only`).
 
-**Full registry:** [registry.json](./registry.json) (1000 plans) · **Update:** `python3 scripts/generate-plans-registry.py`
+**Full registry:** [registry.json](../registry.json) (1000 plans) · **Locked pack:** [PROMPT_PACK_LOCKED/](../PROMPT_PACK_LOCKED/)
 
-## Next 25 agent-ready plans
+**Update:** `python3 scripts/sync-prompt-pack-status.py` after each ship session
 
-1. **NF-PLAN-0111** · P1/T1 · Webhook emission on www gtm state transitions  
-   Verify: `pytest and/or make ship-verify; area=www-gtm; pattern=webhook-event`
-1. **NF-PLAN-0112** · P1/T1 · Audit-export field bundle for devex decisions  
-   Verify: `pytest and/or make ship-verify; area=devex; pattern=audit-export`
-1. **NF-PLAN-0113** · P1/T1 · Deterministic replay test for ci cd rule version  
-   Verify: `pytest and/or make ship-verify; area=ci-cd; pattern=replay-test`
-1. **NF-PLAN-0114** · P1/T1 · Cross-tenant negative tests for security  
-   Verify: `pytest and/or make ship-verify; area=security; pattern=tenant-isolation`
-1. **NF-PLAN-0115** · P1/T1 · Prometheus metrics and dashboards for data migrations  
-   Verify: `pytest and/or make ship-verify; area=data-migrations; pattern=metrics`
-1. **NF-PLAN-0117** · P1/T1 · Request validation against locked schema for docs diligence  
-   Verify: `pytest and/or make ship-verify; area=docs-diligence; pattern=schema-validate`
-1. **NF-PLAN-0118** · P1/T1 · YAML/JSON examples pack under docs/spec/examples  
-   Verify: `pytest and/or make ship-verify; area=msb-partner; pattern=examples-pack`
-1. **NF-PLAN-0119** · P1/T1 · Deprecation notice and version bump for legacy observability path  
-   Verify: `pytest and/or make ship-verify; area=observability; pattern=deprecation`
-1. **NF-PLAN-0120** · P1/T1 · Load test baseline and p95 budget for performance  
-   Verify: `pytest and/or make ship-verify; area=performance; pattern=performance`
-1. **NF-PLAN-0201** · P2/T1 · Add or extend API endpoint for www gtm  
-   Verify: `pytest and/or make ship-verify; area=www-gtm; pattern=api-endpoint`
-1. **NF-PLAN-0202** · P2/T1 · Integration tests covering devex happy path and 409 guards  
-   Verify: `pytest and/or make ship-verify; area=devex; pattern=integration-test`
-1. **NF-PLAN-0203** · P2/T1 · Align OpenAPI spec with implemented ci cd routes  
-   Verify: `pytest and/or make ship-verify; area=ci-cd; pattern=openapi-sync`
-1. **NF-PLAN-0204** · P2/T1 · Supabase migration for security tables and RLS  
-   Verify: `pytest and/or make ship-verify; area=security; pattern=migration-schema`
-1. **NF-PLAN-0205** · P2/T1 · Extend tle-smoke or ship-verify check for data migrations  
-   Verify: `pytest and/or make ship-verify; area=data-migrations; pattern=smoke-script`
-1. **NF-PLAN-0206** · P2/T1 · Governance console surface for testing read-only v0  
-   Verify: `pytest and/or make ship-verify; area=testing; pattern=console-ui`
-1. **NF-PLAN-0207** · P2/T1 · WWW / trust-ledger copy block for docs diligence buyer line  
-   Verify: `pytest and/or make ship-verify; area=docs-diligence; pattern=www-copy`
-1. **NF-PLAN-0209** · P2/T1 · Diligence one-pager evidence for observability controls  
-   Verify: `pytest and/or make ship-verify; area=observability; pattern=diligence-doc`
-1. **NF-PLAN-0210** · P2/T1 · Pilot rate limits and auth scopes for performance  
-   Verify: `pytest and/or make ship-verify; area=performance; pattern=rate-limit`
-1. **NF-PLAN-0211** · P2/T1 · Webhook emission on trust ledger state transitions  
-   Verify: `pytest and/or make ship-verify; area=trust-ledger; pattern=webhook-event`
-1. **NF-PLAN-0212** · P2/T1 · Audit-export field bundle for governance api decisions  
-   Verify: `pytest and/or make ship-verify; area=governance-api; pattern=audit-export`
+## Next 25 agent-ready plans (GTM-weighted)
 
-## Recently completed (update via `scripts/update-plan-status.py`)
+1. **NF-PLAN-0406** · P4/T1 · Buyer interview debrief and evidence capture for www gtm  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Buyer interview debrief and evidence capture for www gtm. Read locked GTM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0407** · P4/T1 · Tier A/B/C gate validation before customer acquisition work  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Tier A/B/C gate validation before customer acquisition work. Read locked …  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0408** · P4/T1 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0108** · P1/T1 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0206** · P2/T1 · Buyer interview debrief and evidence capture for www gtm  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Buyer interview debrief and evidence capture for www gtm. Read locked GTM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0207** · P2/T1 · Tier A/B/C gate validation before customer acquisition work  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Tier A/B/C gate validation before customer acquisition work. Read locked …  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0208** · P2/T1 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0306** · P3/T1 · Buyer interview debrief and evidence capture for www gtm  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Buyer interview debrief and evidence capture for www gtm. Read locked GTM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0307** · P3/T1 · Tier A/B/C gate validation before customer acquisition work  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Tier A/B/C gate validation before customer acquisition work. Read locked …  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0308** · P3/T1 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0506** · P5/T1 · Buyer interview debrief and evidence capture for www gtm  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Buyer interview debrief and evidence capture for www gtm. Read locked GTM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0507** · P5/T1 · Tier A/B/C gate validation before customer acquisition work  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Tier A/B/C gate validation before customer acquisition work. Read locked …  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0508** · P5/T1 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0606** · P6/T1 · Buyer interview debrief and evidence capture for www gtm  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Buyer interview debrief and evidence capture for www gtm. Read locked GTM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0607** · P6/T1 · Tier A/B/C gate validation before customer acquisition work  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Tier A/B/C gate validation before customer acquisition work. Read locked …  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0608** · P6/T1 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0806** · P8/T1 · Buyer interview debrief and evidence capture for www gtm  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Buyer interview debrief and evidence capture for www gtm. Read locked GTM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0807** · P8/T1 · Tier A/B/C gate validation before customer acquisition work  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Tier A/B/C gate validation before customer acquisition work. Read locked …  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0808** · P8/T1 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0906** · P9/T1 · Buyer interview debrief and evidence capture for www gtm  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Buyer interview debrief and evidence capture for www gtm. Read locked GTM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0907** · P9/T1 · Tier A/B/C gate validation before customer acquisition work  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Tier A/B/C gate validation before customer acquisition work. Read locked …  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0908** · P9/T1 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0726** · P7/T2 · Buyer interview debrief and evidence capture for www gtm  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Buyer interview debrief and evidence capture for www gtm. Read locked GTM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0727** · P7/T2 · Tier A/B/C gate validation before customer acquisition work  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Tier A/B/C gate validation before customer acquisition work. Read locked …  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
+1. **NF-PLAN-0728** · P7/T2 · Registry reconcile and plan.json sync for demo ops  
+   Prompt: As NF-CLOUD-AGENT (Noetfield only), implement: Registry reconcile and plan.json sync for demo ops. Read locked GTM + MEM…  
+   Verify: `./scripts/plan-with-no-asf-verify.sh`
 
-- **NF-PLAN-0102** — docs diligence integration tests + 409 guards (`verify-docs-diligence.sh`)
-- **NF-PLAN-0103** — msb partner OpenAPI sync + trust ledger routes (`verify-msb-partner-openapi.sh`)
-- **NF-PLAN-0104** — observability tables migration + RLS (`verify-observability-migration.sh`)
-- **NF-PLAN-0105** — TLE API perf smoke + budgets (`verify-tle-performance.sh`)
-- **NF-PLAN-0110** — workspace UI pilot scopes + rate limits (`verify-workspace-ui-auth.sh`)
+## Recently completed
+
+Synced 62 plans as done.
