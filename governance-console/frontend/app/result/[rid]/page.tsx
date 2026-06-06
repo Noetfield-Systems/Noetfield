@@ -41,8 +41,21 @@ export default function ResultPage() {
       {record && (
         <div className="space-y-6">
           <RidCopy rid={record.rid} />
-          <div className="flex flex-wrap items-center gap-4">
+          <div
+            className="nf-card flex flex-wrap items-center justify-between gap-4 border border-accent/30 bg-accent/5 p-6"
+            role="status"
+            aria-label="Governance confidence score"
+          >
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted">Confidence score</p>
+              <p className="font-serif text-4xl font-semibold text-accent">
+                {Math.max(0, Math.min(100, 100 - record.risk_score)).toFixed(0)}%
+              </p>
+              <p className="mt-1 text-sm text-muted-2">Derived from governance risk — shown in board demos</p>
+            </div>
             <DecisionBadge decision={record.decision} />
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
             <div className="min-w-[200px] flex-1">
               <RiskMeter score={record.risk_score} />
             </div>

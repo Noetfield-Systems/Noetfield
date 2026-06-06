@@ -31,6 +31,27 @@ export default function CognitiveDashboardPage() {
         </p>
       </section>
 
+      <section
+        className="mb-8 rounded-xl border border-accent/30 bg-accent/5 p-6"
+        aria-label="5-minute demo"
+      >
+        <p className="text-xs uppercase tracking-widest text-accent">5-minute demo</p>
+        <h3 className="mt-1 text-lg font-semibold text-white">Evaluate → confidence score → Trust Ledger</h3>
+        <p className="mt-2 max-w-2xl text-sm text-muted">
+          Submit intent below, open the result RID, and show the <strong className="text-white">confidence score</strong>{" "}
+          badge. Continue in{" "}
+          <Link href="/workspace" className="text-accent hover:underline">
+            Workspace
+          </Link>{" "}
+          for TLE PDF export.
+        </p>
+        <p className="mt-3 text-sm">
+          <Link href="/copilot/demo/" className="text-accent hover:underline">
+            Locked demo script →
+          </Link>
+        </p>
+      </section>
+
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border border-border bg-panel p-4">
           <p className="text-xs uppercase tracking-wide text-muted">Governance API</p>

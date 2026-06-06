@@ -70,7 +70,26 @@
       ]
     }
   ],
-  "next_tasks": [],
+  "next_tasks": [
+    {
+      "id": "ship-audit-export-ux-001",
+      "title": "Audit page export bundle CTA + event count",
+      "plan": "os/plans/phase-0-ship-ops/T0/nf-future-0003.md",
+      "status": "done"
+    },
+    {
+      "id": "ship-demo-confidence-002",
+      "title": "Surface confidence/risk score on dashboard + result",
+      "plan": "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
+      "status": "done"
+    },
+    {
+      "id": "ship-www-tle-copy-003",
+      "title": "trust-ledger/index.html buyer-line CTAs",
+      "plan": "docs/ops/plans/no-asf/QUICK_PICK.md",
+      "status": "done"
+    }
+  ],
   "lane_a_sprint_map": [
     "nf-trustfield-conflicts-003",
     "nf-phase1b-scaffold-004",
@@ -81,7 +100,7 @@
     "nf-rag-design-010",
     "nf-copilot-pilot-runbook-009"
   ],
-  "updated_at": "2026-06-02",
+  "updated_at": "2026-06-06",
   "done": [
     {
       "id": "nf-mvp-req-extract-001",

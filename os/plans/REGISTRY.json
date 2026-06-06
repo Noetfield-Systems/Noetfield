@@ -83,7 +83,7 @@
       "domain": "workspace",
       "title": "Migrate workspace for ship ops (T0, #0002)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0002.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0003",
@@ -93,7 +93,7 @@
       "domain": "export",
       "title": "Ship export for ship ops (T0, #0003)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0003.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0004",
@@ -113,7 +113,7 @@
       "domain": "agent",
       "title": "Migrate agent for ship ops (T0, #0005)",
       "path": "os/plans/phase-0-ship-ops/T0/nf-future-0005.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0006",

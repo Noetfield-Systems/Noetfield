@@ -4,7 +4,7 @@
 
 ## Active queue (`next_tasks`)
 
-Empty — Wave 040–042 shipped. Pick next from `os/plans/REGISTRY.json` or founder order.
+Shipped 2026-06-06 (no ASF): audit export UX, demo confidence score, trust-ledger www CTAs. Pick next from `os/plans/REGISTRY.json` or founder order.
 
 ## Shipped waves
 
