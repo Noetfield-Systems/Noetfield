@@ -79,6 +79,12 @@
   ],
   "next_tasks": [
     {
+      "id": "ship-bc-ai-for-all-outreach-016",
+      "title": "B.C. + federal AI for All Noetfield alignment one-pager + outreach copy",
+      "plan": "docs/strategy/channel-outreach/bc-ai-for-all-2026.md",
+      "status": "done"
+    },
+    {
       "id": "ship-1000-prompt-pack-lock-010",
       "title": "Lock 1000 prompt-ready pack v2 + bridge + GTM QUICK_PICK",
       "plan": "docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md",

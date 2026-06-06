@@ -1,39 +1,34 @@
-PLAN WITH NO ASF — 1000 prompt pack lock + iter 4 complete (Noetfield cloud)
+BC AI for All alignment — Noetfield outreach (session closeout)
 
-Merged PR #30 to main. Locked 1000 prompt-ready pack v2.
+Task: ship-bc-ai-for-all-outreach-016
+Scope: Noetfield only — federal AI for All + B.C. priorities → one-pager + email/LinkedIn copy
 
-Shipped next_tasks (all done):
-1. ship-1000-prompt-pack-lock-010 — generate-prompt-pack-v2, sync-prompt-pack, LOCKED master + slices
-2. ship-customer-outreach-011 — DESIGN_PARTNER_PIPELINE_v1.md
-3. ship-demo-rehearsal-012 — DEMO_REHEARSAL_CHECKLIST_v1.md
-
-Registry: 1000 plans, 62+ done synced, GTM-weighted QUICK_PICK (no webhooks/Prometheus at top).
+Shipped:
+- docs/strategy/channel-outreach/bc-ai-for-all-2026.md (one-pager, outreach blocks, honest limits)
+- docs/strategy/channel-outreach/README.md (index link)
+- docs/strategy/noetfield-future-path.md (market tailwind row)
+- os/plan.json (next_tasks done)
 
 Verify:
-- ./scripts/plan-with-no-asf-verify.sh — PASS
-- make sync-prompt-pack — OK
+- ./scripts/verify-agent-scope.sh — PASS
 
 scope_confirmed: noetfield_only
 
 ```yaml
 schema_version: 1
 repo: noetfield
-task: 1000 Prompt Pack lock + PLAN WITH NO ASF iter 4
+task: "B.C. + federal AI for All — Noetfield alignment one-pager + outreach copy"
 status: done
 verify_passed: true
-verify_command: "./scripts/plan-with-no-asf-verify.sh"
-verify_output_summary: "Full demo verify chain passed; registry v2 validated (1000 entries, prompt-ready fields)"
+verify_command: "./scripts/verify-agent-scope.sh"
+verify_output_summary: "scope gate passed; no TrustField/VIRLUX/private paths in diff"
 blocked_reason: ""
-next_action: "Pick next 3 from GTM_PRIORITY_100 / QUICK_PICK per founder"
+next_action: "Founder: use outreach blocks for B.C. public-sector / SME Copilot intros"
 evidence_paths:
-  - docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md
-  - docs/ops/plans/registry.json
-  - docs/ops/plans/BRIDGE_NF_PLAN_TO_NF_FUTURE.json
-  - docs/ops/plans/PROMPT_PACK_LOCKED/
-  - docs/copilot/DESIGN_PARTNER_PIPELINE_v1.md
-  - docs/ops/DEMO_REHEARSAL_CHECKLIST_v1.md
-  - scripts/generate-prompt-pack-v2.py
-  - scripts/sync-prompt-pack-status.py
-reported_at: "2026-06-03T16:00:00Z"
+  - docs/strategy/channel-outreach/bc-ai-for-all-2026.md
+  - docs/strategy/channel-outreach/README.md
+  - docs/strategy/noetfield-future-path.md
+  - os/plan.json
+reported_at: "2026-06-03T22:30:00Z"
 reporter: cursor
 ```
