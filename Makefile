@@ -58,6 +58,26 @@ verify-gtm:
 	@chmod +x scripts/verify-gtm.sh
 	./scripts/verify-gtm.sh
 
+generate-noetfield-1000:
+	@chmod +x scripts/generate-noetfield-1000-prompts.py
+	python3 scripts/generate-noetfield-1000-prompts.py
+
+agent-session-start:
+	@chmod +x scripts/agent-session-start.sh
+	./scripts/agent-session-start.sh
+
+pick-no-asf-plan:
+	@chmod +x scripts/pick-noetfield-no-asf-plan.py
+	python3 scripts/pick-noetfield-no-asf-plan.py --tier T0 --limit 1 --prompt
+
+validate-noetfield-1000:
+	@chmod +x scripts/validate-noetfield-1000-sources.py
+	python3 scripts/validate-noetfield-1000-sources.py
+
+sync-noetfield-plans-status:
+	@chmod +x scripts/sync-noetfield-plans-status.py
+	python3 scripts/sync-noetfield-plans-status.py
+
 # Merge/deploy readiness (cloud canonical)
 ship-verify:
 	@echo "=== ship-verify (Noetfield merge/deploy readiness) ==="

@@ -1,50 +1,50 @@
-**Verified** — Wave 034–036 (GTM Tier A, NO ASF) — re-confirmation closeout
+---
+agent_tag: nf-local-repo-agent
+agent_display: "[NF-LOCAL-REPO-AGENT]"
+authored_at: "2026-06-06"
+doc_id: cursor-reply-nf-0001
+---
 
-## Tasks (already on disk; full verify PASS)
+> **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-06-06
 
-| ID | Deliverable |
-|----|-------------|
-| `nf-procurement-pack-zip-034` | `procurement_pack.py`, `format=zip` export, workspace ZIP button, `procurement-pack-e2e.sh`, `test_export_procurement_zip` |
-| `nf-demo-page-confidence-035` | `copilot/demo/index.html`, PDF cover `Confidence: NN%`, verify-ui-e2e demo checks |
-| `nf-public-demo-url-036` | `print-demo-url.sh`, `make demo-url`, `STAGING_DEMO.md` + `LOCAL_DEV.md` |
+**Shipped** — nf-0001 session-start self-audit wiring (PLAN WITH NO ASF turn 1)
 
-Registry stubs `status: done`: `nf-future-0703`, `0704`, `0707`.
+## Deliverables
+
+| Item | Path |
+|------|------|
+| Session-start script | `scripts/agent-session-start.sh` |
+| Makefile target | `make agent-session-start` |
+| Agent tracking | `.cursor/AGENT_TRACKING.md` |
+| Cloud paste pack | `docs/ops/ready_to_paste_noetfield_cloud.txt` |
+| verify-gtm preflight | `scripts/verify-gtm.sh` → `validate-noetfield-1000-sources.py` |
+| Prompt done | `os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0001.md` |
 
 ## Verify
 
 ```text
-pytest test_export_procurement_zip — passed
-make verify-local-dev — passed
-make verify-ui-e2e — passed (copilot demo, procurement buyer, ZIP link)
-make procurement-pack-e2e — passed
-make copilot-pilot-e2e — passed
-make demo-url — prints tunnel/staging instructions (no secrets)
+make agent-session-start — PASS (noetfield_cloud closeout loaded)
+make verify-gtm — PASS (VALIDATE_PASS + pytest + e2e)
 ```
-
-GTM note: Tier A procurement zip + 5-min demo + shareable URL path — proof for design partners.
 
 ---
 
 ```yaml
 schema_version: 1
 repo: noetfield
-task: "Wave 034-036 GTM Tier A (procurement zip, demo page, public demo URL)"
+task: "PLAN WITH NO ASF — nf-0001: session-start self-audit before edits"
 status: done
 verify_passed: true
-verify_command: "make verify-local-dev && make verify-ui-e2e && make procurement-pack-e2e && make copilot-pilot-e2e"
-verify_output_summary: "All acceptance checks PASS on branch cursor/bank-grade-fullstack-37f0"
-blocked_reason: null
-next_action: "Founder: make dev-local-tunnel-bg && make demo-url for live partner URL; outreach with procurement ZIP on approved TLE"
+verify_command: "make verify-gtm"
+verify_output_summary: "VALIDATE_PASS noetfield-1000; verify-gtm passed — safe to run external demo"
+blocked_reason: ""
+next_action: "make pick-no-asf-plan → nf-0002"
 evidence_paths:
-  - governance-console/backend/services/procurement_pack.py
-  - governance-console/backend/routes/tle.py
-  - governance-console/frontend/app/workspace/[tle_id]/page.tsx
-  - copilot/demo/index.html
-  - governance-console/backend/services/board_pack_pdf.py
-  - scripts/print-demo-url.sh
-  - scripts/procurement-pack-e2e.sh
-  - docs/ops/STAGING_DEMO.md
-  - os/plan.json
+  - scripts/agent-session-start.sh
+  - scripts/verify-gtm.sh
+  - .cursor/AGENT_TRACKING.md
+  - docs/ops/ready_to_paste_noetfield_cloud.txt
+  - os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0001.md
+reported_at: "2026-06-06T03:12:21Z"
 reporter: cursor
-reported_at: "2026-06-06T00:30:00Z"
 ```

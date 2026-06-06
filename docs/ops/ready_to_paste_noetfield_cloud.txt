@@ -6,6 +6,10 @@ Agent id: noetfield_cloud
 Thread: THREAD-PORTFOLIO
 Plane: [DELIVERY]
 
+SESSION START (before any edit):
+  make agent-session-start
+  (or: python3 ~/Desktop/SourceA/scripts/cursor_agent_self_audit.py session-start --agent noetfield_cloud)
+
 READ FIRST (in repo):
 1. docs/ops/AGENT_READ_LINKS_LOCKED_v1.md — section "Cloud ship"
 2. docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md

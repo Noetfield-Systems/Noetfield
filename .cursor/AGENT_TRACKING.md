@@ -2,6 +2,8 @@
 
 **Read this first** for task priority. Do not create `todolist/` at the repository root.
 
+**Every session (before edits):** `make agent-session-start` — loads `SESSION_CLOSEOUT_LATEST.md` + mandatory read chain (`noetfield_cloud`).
+
 **Noetfield cloud (`noetfield_cloud`):** [docs/ops/AGENT_READ_LINKS_LOCKED_v1.md](../docs/ops/AGENT_READ_LINKS_LOCKED_v1.md) (§ Cloud ship) · [docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) · paste: [docs/ops/ready_to_paste_noetfield_cloud.txt](../docs/ops/ready_to_paste_noetfield_cloud.txt). Canonical index: Desktop `SourceA/founder/repo-agent-notices/AGENT_READ_LINKS_INDEX.md` — never repo → SourceA.
 
 ## Ship rule (ASF) — two different things
