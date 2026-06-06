@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify
 
 PYTHONPATH_VALUE := packages/types:packages/config:packages/sdk:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance
 
@@ -54,6 +54,10 @@ verify-agent-scope:
 verify-ui-e2e:
 	@chmod +x scripts/verify-ui-e2e.sh
 	./scripts/verify-ui-e2e.sh
+
+plan-with-no-asf-verify:
+	@chmod +x scripts/plan-with-no-asf-verify.sh scripts/verify-copilot-demo-links.sh
+	./scripts/plan-with-no-asf-verify.sh
 
 plans-regen:
 	@python3 scripts/generate-plans-registry.py

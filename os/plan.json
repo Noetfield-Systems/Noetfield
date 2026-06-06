@@ -72,20 +72,20 @@
   ],
   "next_tasks": [
     {
-      "id": "ship-audit-export-ux-001",
-      "title": "Audit page export bundle CTA + event count",
-      "plan": "os/plans/phase-0-ship-ops/T0/nf-future-0003.md",
-      "status": "done"
-    },
-    {
-      "id": "ship-demo-confidence-002",
-      "title": "Surface confidence/risk score on dashboard + result",
+      "id": "ship-result-confidence-e2e-004",
+      "title": "E2E: evaluate → result confidence score assertion",
       "plan": "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
       "status": "done"
     },
     {
-      "id": "ship-www-tle-copy-003",
-      "title": "trust-ledger/index.html buyer-line CTAs",
+      "id": "ship-copilot-demo-links-005",
+      "title": "Verify copilot/demo CTA hrefs return 200",
+      "plan": "os/plans/phase-0-ship-ops/T0/nf-future-0004.md",
+      "status": "done"
+    },
+    {
+      "id": "ship-plan-with-no-asf-script-006",
+      "title": "Add plan-with-no-asf-verify.sh + make target",
       "plan": "docs/ops/plans/no-asf/QUICK_PICK.md",
       "status": "done"
     }

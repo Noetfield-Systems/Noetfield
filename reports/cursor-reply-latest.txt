@@ -1,39 +1,37 @@
-No ASF ship complete — Noetfield cloud
+PLAN WITH NO ASF — repeatable script complete (Noetfield cloud)
 
-Merged to main: agent self-audit loop (PR #27) + E2E/pro-mode fixes (PR #26).
+Merged PR #28 to main (audit export UX, demo confidence, TLE www CTAs).
 
 Shipped next_tasks (all done):
-1. ship-audit-export-ux-001 — Audit page Export bundle (JSON) CTA + event count
-2. ship-demo-confidence-002 — Confidence score on result page; 5-minute demo strip on cognitive dashboard
-3. ship-www-tle-copy-003 — trust-ledger/index.html live demo path CTAs
+1. ship-result-confidence-e2e-004 — verify-ui-e2e: evaluate → /result/{rid} confidence badge
+2. ship-copilot-demo-links-005 — verify-copilot-demo-links.sh: demo CTA hrefs 200 on :13080
+3. ship-plan-with-no-asf-script-006 — scripts/plan-with-no-asf-verify.sh + make plan-with-no-asf-verify
 
-Plans marked done: nf-future-0002, nf-future-0003, nf-future-0005
+Plans marked done: nf-future-0004
 
 Verify:
-- ./scripts/verify-ui-endpoints.sh — PASS
-- ./scripts/verify-ui-e2e.sh — PASS
-- ./scripts/verify-agent-scope.sh — PASS
-- pytest governance-console/backend/tests/test_audit_events.py — 3 passed
-- python3 scripts/smoke_bank_grade_html.py — OK
+- ./scripts/plan-with-no-asf-verify.sh — PASS
+- make plan-with-no-asf-verify — PASS
 
 scope_confirmed: noetfield_only
 
 ```yaml
 schema_version: 1
 repo: noetfield
-task: PLAN WITH NO ASF — Noetfield cloud
+task: PLAN WITH NO ASF — repeatable script
 status: done
 verify_passed: true
-verify_command: "./scripts/verify-ui-endpoints.sh && ./scripts/verify-ui-e2e.sh && ./scripts/verify-agent-scope.sh"
-verify_output_summary: "All UI endpoint, e2e, and agent scope checks passed"
+verify_command: "./scripts/plan-with-no-asf-verify.sh"
+verify_output_summary: "Agent scope, UI endpoints, UI e2e (confidence), copilot demo links, audit events pytest, bank-grade smoke — all passed"
 blocked_reason: ""
 next_action: "Pick next T0/T1 from os/plans/REGISTRY.json per founder"
 evidence_paths:
-  - governance-console/frontend/app/audit/page.tsx
-  - governance-console/frontend/app/result/[rid]/page.tsx
-  - governance-console/frontend/app/cognitive-dashboard/page.tsx
-  - trust-ledger/index.html
+  - scripts/plan-with-no-asf-verify.sh
+  - scripts/verify-copilot-demo-links.sh
+  - scripts/verify-ui-e2e.sh
+  - Makefile
   - os/plan.json
-reported_at: "2026-06-06T21:00:00Z"
+  - os/plans/phase-0-ship-ops/T0/nf-future-0004.md
+reported_at: "2026-06-03T12:00:00Z"
 reporter: cursor
 ```

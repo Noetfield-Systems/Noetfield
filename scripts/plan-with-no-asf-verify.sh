@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# PLAN WITH NO ASF — single verify bundle (Noetfield only).
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+# shellcheck source=dev-ports.sh
+source "${ROOT}/scripts/dev-ports.sh"
+cd "$ROOT"
+
+echo "=== plan-with-no-asf-verify ==="
+
+chmod +x scripts/verify-agent-scope.sh
+./scripts/verify-agent-scope.sh
+
+health="$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 3 "http://127.0.0.1:${NF_DEV_PUBLIC_PORT}/health" 2>/dev/null || echo "000")"
+if [[ "$health" != "200" ]]; then
+  echo "Dev stack not up (health ${health}); starting NF_DASHBOARD_MODE=production make dev-local-pro …"
+  NF_DASHBOARD_MODE=production make dev-local-pro
+fi
+
+chmod +x scripts/verify-ui-endpoints.sh scripts/verify-ui-e2e.sh scripts/verify-copilot-demo-links.sh
+./scripts/verify-ui-endpoints.sh
+./scripts/verify-ui-e2e.sh
+./scripts/verify-copilot-demo-links.sh
+
+cd governance-console/backend
+PYTHONPATH=. python3 -m pytest tests/test_audit_events.py -q
+cd "$ROOT"
+
+python3 scripts/smoke_bank_grade_html.py
+
+echo ""
+echo "plan-with-no-asf-verify passed."

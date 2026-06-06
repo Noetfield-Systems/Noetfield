@@ -89,6 +89,33 @@ else
   echo "OK   connectors not captured by [tle_id]"
 fi
 
+# Evaluate → result flow: confidence score visible on result page (GTM demo step 2)
+eval_json="$(curl -sS --connect-timeout 5 -X POST "${BASE}/evaluate" \
+  -H "Content-Type: application/json" \
+  -d '{"actor":"ui-e2e","action":"smoke","context":"verify-ui-e2e confidence","metadata":{}}' 2>/dev/null || echo '{}')"
+rid="$(python3 -c "import json,sys; print(json.loads(sys.argv[1]).get('rid',''))" "$eval_json" 2>/dev/null || true)"
+if [[ -z "$rid" ]]; then
+  echo "FAIL evaluate flow (no rid)" >&2
+  fail=1
+else
+  result_url="${BASE}/result/${rid}"
+  check_html "$result_url" "result page shell" "Governance decision"
+  result_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "$result_url" 2>/dev/null || true)"
+  result_chunk="$(echo "$result_html" | grep -oE '/_next/static/chunks/app/result/%5Brid%5D/page-[^"]+\.js' | head -1)"
+  if [[ -n "$result_chunk" ]]; then
+    chunk_body="$(curl -sS "${BASE}${result_chunk}" 2>/dev/null || true)"
+    if echo "$chunk_body" | grep -qF "Confidence score"; then
+      echo "OK   result page confidence badge (rid=${rid})"
+    else
+      echo "FAIL result page confidence badge — rebuild dashboard" >&2
+      fail=1
+    fi
+  else
+    echo "FAIL result page chunk — rebuild dashboard (rid=${rid})" >&2
+    fail=1
+  fi
+fi
+
 if [[ "$fail" -eq 0 ]]; then
   echo ""
   echo "verify-ui-e2e passed."
