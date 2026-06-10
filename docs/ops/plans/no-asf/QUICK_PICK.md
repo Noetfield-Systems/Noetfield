@@ -12,9 +12,9 @@ _Registry backlog empty (1000-pack synced). Pick from [GTM_NEXT.md](./GTM_NEXT.m
 
 ### GTM_NEXT (top picks)
 
-1. **ship-trust-brief-demo-042** · Trust-brief intake CTA on `/copilot/demo/` + verify
-1. **ship-demo-rehearsal-pilot-043** · Demo rehearsal checklist link in pilot checklist section + verify
-1. **ship-open-prs-autocheck-044** · Coherence gate: OPEN_PRS pending row must match open `gh pr list` ship PRs
+1. **ship-trust-brief-parity-audit-045** · Verify all buyer pages (hub, pilot, demo, procurement) have trust-brief CTAs
+1. **ship-merged-pr-open-prs-gate-046** · OPEN_PRS recently merged must include last 3 ship PRs (#41–#43)
+1. **ship-demo-rehearsal-demo-047** · Demo rehearsal link in demo script steps ol (parity with pilot checklist)
 
 ## Recently completed
 
