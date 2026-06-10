@@ -4077,7 +4077,7 @@
       "slot": 4,
       "title": "Document 3 evidence types in copilot demo step copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0205.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4096,7 +4096,7 @@
       "slot": 5,
       "title": "Extend seed-m365-evidence-stub.sh idempotency",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0206.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",

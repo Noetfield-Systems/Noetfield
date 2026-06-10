@@ -2,19 +2,19 @@
 agent_tag: nf-local-repo-agent
 agent_display: "[NF-LOCAL-REPO-AGENT]"
 authored_at: "2026-06-02"
-doc_id: cursor-reply-nf-0205-demo-evidence-copy
+doc_id: cursor-reply-nf-0206-seed-idempotency
 ---
 
 > **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-06-02
 
-**Shipped** — nf-0205: named three M365 evidence types (Purview, Entra ID, SharePoint) in copilot 5-minute demo step copy; verify-ui-e2e asserts all three in served HTML.
+**Shipped** — nf-0206: hardened seed-m365-evidence-stub.sh (health preflight, created/already-present messaging, 3/3 summary); smoke double-run wired into verify-gtm; REGISTRY nf-0205 drift fixed.
 
 ## Verify
 
 ```text
 ./scripts/verify-agent-scope.sh — PASS
-make verify-gtm — PASS (18 pytest, verify-ui-e2e 20 checks, full E2E bundle)
-make smoke-pick-no-asf-plan — next pick after nf-0205 done
+make verify-gtm — PASS (smoke-seed-m365-evidence-stub double-run, 18 pytest, full E2E)
+make smoke-pick-no-asf-plan — next pick after nf-0206 done
 ```
 
 ---
@@ -23,7 +23,7 @@ make smoke-pick-no-asf-plan — next pick after nf-0205 done
 schema_version: 1
 repo: noetfield
 agent_tag: nf-local-repo-agent
-task: "nf-0205 — Document 3 evidence types in copilot demo step copy"
+task: "nf-0206 — Extend seed-m365-evidence-stub.sh idempotency"
 status: done
 verify_passed: true
 verify_command: "make verify-gtm"
@@ -31,8 +31,10 @@ verify_output_summary: "verify-gtm passed — safe to run external demo"
 blocked_reason: ""
 next_action: "make smoke-pick-no-asf-plan for next phase-2 T0 prompt"
 evidence_paths:
-  - copilot/demo/index.html
-  - scripts/verify-ui-e2e.sh
-reported_at: "2026-06-02T16:00:00Z"
+  - scripts/seed-m365-evidence-stub.sh
+  - scripts/smoke-seed-m365-evidence-stub.sh
+  - scripts/verify-gtm.sh
+  - os/plan-library/noetfield-1000/REGISTRY.json
+reported_at: "2026-06-02T17:00:00Z"
 reporter: cursor
 ```

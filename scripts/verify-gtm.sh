@@ -26,6 +26,11 @@ if [[ "$code" != "200" ]]; then
   exit 1
 fi
 
+if [[ -f scripts/smoke-seed-m365-evidence-stub.sh ]]; then
+  chmod +x scripts/smoke-seed-m365-evidence-stub.sh
+  ./scripts/smoke-seed-m365-evidence-stub.sh
+fi
+
 cd governance-console/backend
 PYTHONPATH=. python3 -m pytest tests/test_tle_flow.py tests/test_audit_events.py -q
 cd "$ROOT"
