@@ -4,6 +4,14 @@
 
 **Every session (before edits):** `make agent-session-start` — loads `SESSION_CLOSEOUT_LATEST.md` + mandatory read chain (`noetfield_cloud`).
 
+**After verify PASS:** `make ship-closeout` (or `make ingest-cursor-reply` then `make sync-sourceA`).
+
+**Session end:** `make agent-session-close` — writes disk closeout for `noetfield_cloud`.
+
+**Read order (cloud vs local):** [docs/ops/AGENT_READ_LINKS_LOCKED_v1.md](../docs/ops/AGENT_READ_LINKS_LOCKED_v1.md) § Cloud ship vs § Local documents — cloud uses this repo + `ready_to_paste_noetfield_cloud.txt`; local uses All-Documents lane.
+
+**Chat ≠ disk:** append [docs/ops/REPO_TRUTH_CORRECTIONS_LOCKED_v1.md](../docs/ops/REPO_TRUTH_CORRECTIONS_LOCKED_v1.md) when claims disagree with validators.
+
 **Noetfield cloud (`noetfield_cloud`):** [docs/ops/AGENT_READ_LINKS_LOCKED_v1.md](../docs/ops/AGENT_READ_LINKS_LOCKED_v1.md) (§ Cloud ship) · [docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) · paste: [docs/ops/ready_to_paste_noetfield_cloud.txt](../docs/ops/ready_to_paste_noetfield_cloud.txt). Canonical index: Desktop `SourceA/founder/repo-agent-notices/AGENT_READ_LINKS_INDEX.md` — never repo → SourceA.
 
 ## Ship rule (ASF) — two different things

@@ -66,6 +66,34 @@ agent-session-start:
 	@chmod +x scripts/agent-session-start.sh
 	./scripts/agent-session-start.sh
 
+ingest-cursor-reply:
+	@chmod +x scripts/ingest-cursor-reply.sh
+	./scripts/ingest-cursor-reply.sh
+
+sync-sourceA:
+	@chmod +x scripts/sync-sourceA-desktop.sh
+	./scripts/sync-sourceA-desktop.sh
+
+ship-closeout:
+	@chmod +x scripts/ship-closeout.sh
+	./scripts/ship-closeout.sh
+
+agent-session-close:
+	@chmod +x scripts/agent-session-close.sh
+	./scripts/agent-session-close.sh
+
+smoke-pick-no-asf-plan:
+	@chmod +x scripts/smoke-pick-no-asf-plan.sh
+	./scripts/smoke-pick-no-asf-plan.sh
+
+verify-lane-fences:
+	@chmod +x scripts/verify-lane-fences.sh
+	./scripts/verify-lane-fences.sh
+
+mirror-noetfield-os-readme:
+	@chmod +x scripts/mirror-noetfield-os-readme.py
+	python3 scripts/mirror-noetfield-os-readme.py
+
 pick-no-asf-plan:
 	@chmod +x scripts/pick-noetfield-no-asf-plan.py
 	python3 scripts/pick-noetfield-no-asf-plan.py --tier T0 --limit 1 --prompt

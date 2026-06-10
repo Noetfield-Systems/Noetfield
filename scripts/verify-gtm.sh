@@ -12,6 +12,14 @@ if [[ -f scripts/validate-noetfield-1000-sources.py ]]; then
   python3 scripts/validate-noetfield-1000-sources.py
 fi
 
+if [[ -f scripts/smoke-pick-no-asf-plan.sh ]]; then
+  ./scripts/smoke-pick-no-asf-plan.sh
+fi
+
+if [[ -f scripts/verify-lane-fences.sh ]]; then
+  ./scripts/verify-lane-fences.sh
+fi
+
 code="$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 3 "http://127.0.0.1:${NF_DEV_PUBLIC_PORT}/health" 2>/dev/null || echo "000")"
 if [[ "$code" != "200" ]]; then
   echo "FAIL: dev stack not up (health ${code}). Run: make dev-local" >&2

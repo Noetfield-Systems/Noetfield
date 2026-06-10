@@ -28,6 +28,8 @@ check "http://127.0.0.1:${PUBLIC}/console" "console (proxy)"
 check "http://127.0.0.1:${PUBLIC}/cognitive-dashboard" "dashboard (proxy)"
 check "http://127.0.0.1:${PLATFORM}/console" "console (direct)"
 check "http://127.0.0.1:${PUBLIC}/assets/noetfield-tokens.css" "www assets"
+check "http://127.0.0.1:${PUBLIC}/ai-automation/" "ai-automation operator page"
+check "http://127.0.0.1:${PUBLIC}/assets/noetfield-ops.css" "ops page stylesheet"
 
 LEGACY="${NF_DEV_LEGACY_NEXT_PORT:-3000}"
 legacy_code="$(curl -sS -o /dev/null -w "%{http_code}" --max-redirs 0 --connect-timeout 2 \

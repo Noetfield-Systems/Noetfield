@@ -38,6 +38,17 @@ def main() -> int:
     plans = data.get("plans", [])
     if len(plans) != 1000:
         errors.append(f"count {len(plans)} != 1000")
+
+    from collections import Counter
+
+    phase_counts = Counter(p.get("phase") for p in plans)
+    tier_counts = Counter(p.get("tier") for p in plans)
+    if len(phase_counts) != 10:
+        errors.append(f"phase count {len(phase_counts)} != 10")
+    if any(c != 100 for c in phase_counts.values()):
+        errors.append(f"phase grid not 100 each: {dict(phase_counts)}")
+    if tier_counts != Counter({"T0": 250, "T1": 250, "T2": 250, "T3": 250}):
+        errors.append(f"tier grid mismatch: {dict(tier_counts)}")
     if not data.get("locked"):
         errors.append("REGISTRY not locked")
 
