@@ -2,19 +2,18 @@
 agent_tag: nf-local-repo-agent
 agent_display: "[NF-LOCAL-REPO-AGENT]"
 authored_at: "2026-06-02"
-doc_id: cursor-reply-nf-0208-connector-persistence
+doc_id: cursor-reply-nf-0209-connector-env-errors
 ---
 
 > **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-06-02
 
-**Shipped** — nf-0208: pytest proves M365 connector connected state persists in DB and on GET /connectors list + /status after OAuth callback.
+**Shipped** — nf-0209: M365 connector returns actionable 503 when required env vars are missing (staging/non-local); local dev defaults unchanged; frontend parses FastAPI detail.
 
 ## Verify
 
 ```text
 ./scripts/verify-agent-scope.sh — PASS
-make verify-gtm — PASS (20 pytest, full E2E)
-make smoke-pick-no-asf-plan — next pick after nf-0208 done
+make verify-gtm — PASS (21 pytest, full E2E)
 ```
 
 ---
@@ -23,15 +22,19 @@ make smoke-pick-no-asf-plan — next pick after nf-0208 done
 schema_version: 1
 repo: noetfield
 agent_tag: nf-local-repo-agent
-task: "nf-0208 — Add pytest for connector connected state persistence"
+task: "nf-0209 — Improve connector error message for missing env"
 status: done
 verify_passed: true
 verify_command: "make verify-gtm"
 verify_output_summary: "verify-gtm passed — safe to run external demo"
 blocked_reason: ""
-next_action: "make smoke-pick-no-asf-plan for next phase-2 T0 prompt (nf-0209)"
+next_action: "make smoke-pick-no-asf-plan for next phase-2 T0 prompt (nf-0210)"
 evidence_paths:
+  - governance-console/backend/services/m365_oauth_stub.py
+  - governance-console/backend/routes/connectors.py
   - governance-console/backend/tests/test_tle_flow.py
-reported_at: "2026-06-02T19:00:00Z"
+  - governance-console/frontend/lib/api.ts
+  - governance-console/.env.example
+reported_at: "2026-06-02T20:30:00Z"
 reporter: cursor
 ```

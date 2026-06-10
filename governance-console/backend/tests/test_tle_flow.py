@@ -375,6 +375,45 @@ def test_connector_connected_state_persists_after_oauth():
         db.close()
 
 
+def test_connector_oauth_missing_env_clear_error(monkeypatch):
+    cid = f"m365-env-{uuid.uuid4().hex[:8]}"
+    reg = client.post(
+        "/connectors",
+        headers=TENANT_HEADER,
+        json={
+            "connector_id": cid,
+            "connector_type": "m365_purview",
+            "required_scopes": ["Purview.Read"],
+        },
+    )
+    assert reg.status_code == 201
+
+    monkeypatch.setenv("NF_PUBLIC_BASE_URL", "https://staging.example.com")
+    monkeypatch.delenv("NF_M365_MOCK_TOKEN", raising=False)
+
+    cb = client.get(
+        f"/connectors/{cid}/oauth/callback",
+        headers=TENANT_HEADER,
+        params={"code": "dev-mock", "state": "env"},
+    )
+    assert cb.status_code == 503
+    detail = cb.json()["detail"]
+    assert "NF_M365_MOCK_TOKEN" in detail
+    assert "LOCAL_DEV" in detail
+
+    monkeypatch.delenv("NF_PUBLIC_BASE_URL", raising=False)
+    monkeypatch.setenv("NF_M365_REQUIRE_ENV", "1")
+    cb2 = client.get(
+        f"/connectors/{cid}/oauth/callback",
+        headers=TENANT_HEADER,
+        params={"code": "dev-mock", "state": "env2"},
+    )
+    assert cb2.status_code == 503
+    detail2 = cb2.json()["detail"]
+    assert "NF_M365_MOCK_TOKEN" in detail2
+    assert "LOCAL_DEV" in detail2
+
+
 def test_oauth_callback_html_redirects_to_workspace():
     cid = f"m365-html-{uuid.uuid4().hex[:8]}"
     reg = client.post(
