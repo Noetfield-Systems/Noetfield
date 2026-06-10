@@ -11,18 +11,9 @@ When the NF-PLAN registry is fully synced (`1000/1000 done`), pick the next **�
 
 `python3 scripts/sync-prompt-pack-status.py` marks all NF-PLAN rows `done` via `expand_done_by_pattern()` — this is **dedup / pattern propagation**, not “all engineering complete.” Real queue lives here and in `os/plan.json` `next_tasks`.
 
-## Next GTM Tier A (NF-CLOUD disk) — iter 11 proposals
+## Next GTM Tier A (NF-CLOUD disk)
 
-Founder pick or bounded `implement` — from GTM 60-day demo + diligence chain:
-
-1. **ship-trust-brief-intake-wire-033** · Trust-brief intake CTA from copilot hub + verify  
-   Outcome: Cold traffic can request Governance Brief from hub without hunting.
-
-1. **ship-drift-sources-procurement-034** · Drift detection sources href on procurement buyer pack  
-   Outcome: Continuous governance citations for diligence reviewers.
-
-1. **ship-demo-rehearsal-hub-wire-035** · DEMO_REHEARSAL_CHECKLIST link from copilot hub (pilot already has it)  
-   Outcome: Founder demo prep one click from hub for cold traffic.
+_No open NF-CLOUD disk items — pick next Tier A from GTM 60-day lock or founder order._
 
 ## Agentic only — Hub (not NF-CLOUD implement)
 
@@ -32,7 +23,15 @@ Founder pick or bounded `implement` — from GTM 60-day demo + diligence chain:
 
 Evidence on disk: [DESIGN_PARTNER_PIPELINE_v1.md](../../../copilot/DESIGN_PARTNER_PIPELINE_v1.md) · [AGENTIC_COMMERCIAL_HANDOFF_v1.md](../../AGENTIC_COMMERCIAL_HANDOFF_v1.md)
 
-## Recently shipped (post-audit + 10-phase audit + iter 9)
+## Recently shipped (iter 11)
+
+| ID | Shipped |
+|----|---------|
+| ship-trust-brief-intake-wire-033 | Trust-brief intake CTA on copilot hub + verify |
+| ship-drift-sources-procurement-034 | Drift detection sources on procurement buyer pack |
+| ship-demo-rehearsal-hub-wire-035 | Demo rehearsal checklist link on copilot hub |
+
+## Prior shipped (post-audit + iter 9–10)
 
 | ID | Shipped |
 |----|---------|

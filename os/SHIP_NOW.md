@@ -4,7 +4,9 @@
 
 ## Active queue (`next_tasks`)
 
-**Shipped 10-phase audit (2026-06-10):** R-011 agentic law mirror, doc reconcile, manifest hygiene, www 030–032, coherence verify, OPEN_PRS policy.
+**Shipped iter 11 (2026-06-10):** trust-brief hub CTA verify, drift sources on procurement, demo rehearsal on hub.
+
+**Shipped post-audit + 10-phase audit:** R-011 agentic law, workflow reconcile, www 030–032, coherence verify.
 
 **Shipped iter 9 (2026-06-06):** procurement one-pager www wire, governance sources href, homepage demo CTA verify.
 

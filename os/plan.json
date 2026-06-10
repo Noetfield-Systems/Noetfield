@@ -79,6 +79,24 @@
   ],
   "next_tasks": [
     {
+      "id": "ship-trust-brief-intake-wire-033",
+      "title": "Trust-brief intake CTA on copilot hub + verify",
+      "plan": "copilot/index.html",
+      "status": "done"
+    },
+    {
+      "id": "ship-drift-sources-procurement-034",
+      "title": "Drift detection sources href on procurement buyer pack",
+      "plan": "docs/references/GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED_v1.md",
+      "status": "done"
+    },
+    {
+      "id": "ship-demo-rehearsal-hub-wire-035",
+      "title": "DEMO_REHEARSAL_CHECKLIST link from copilot hub + verify",
+      "plan": "docs/ops/DEMO_REHEARSAL_CHECKLIST_v1.md",
+      "status": "done"
+    },
+    {
       "id": "ship-tunnel-smoke-verify-030",
       "title": "Optional staging-smoke in plan-with-no-asf-verify when NF_STAGING_URL set",
       "plan": "scripts/staging-smoke.sh",
@@ -257,7 +275,7 @@
     "nf-rag-design-010",
     "nf-copilot-pilot-runbook-009"
   ],
-  "updated_at": "2026-06-10",
+  "updated_at": "2026-06-10T16:00:00Z",
   "agentic_queue": [
     {
       "id": "ship-design-partner-outreach-026",
