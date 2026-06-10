@@ -86,6 +86,14 @@ Shipped capabilities mapped to registry indices. Run `python3 scripts/sync-promp
 | ship-governance-sources-handbook-031 | Handbook link on procurement | `copilot/procurement/index.html` |
 | ship-copilot-hub-sources-032 | Sources Book on copilot hub | `copilot/index.html` |
 
+## PLAN WITH NO ASF iter 11 (033–035)
+
+| next_tasks id | Shipped | Evidence |
+|---------------|---------|----------|
+| ship-trust-brief-intake-wire-033 | Trust-brief intake on hub | `copilot/index.html`, `verify-gtm-ops-docs.sh` |
+| ship-drift-sources-procurement-034 | Drift sources on procurement | `copilot/procurement/index.html` |
+| ship-demo-rehearsal-hub-wire-035 | Demo rehearsal on hub | `copilot/index.html` |
+
 ## Post-audit fix (workflow + paths + verify hardening)
 
 | Area | Shipped | Evidence |

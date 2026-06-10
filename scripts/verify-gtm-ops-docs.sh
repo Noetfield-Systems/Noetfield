@@ -134,6 +134,27 @@ else
   echo "FAIL /copilot/ missing GOVERNANCE_SOURCES_BOOK link" >&2
   fail=1
 fi
+if echo "$hub_html" | grep -qF "/trust-brief/intake/"; then
+  echo "OK   /copilot/ trust-brief intake CTA"
+else
+  echo "FAIL /copilot/ missing trust-brief intake CTA" >&2
+  fail=1
+fi
+if echo "$hub_html" | grep -qF "DEMO_REHEARSAL_CHECKLIST_v1.md"; then
+  echo "OK   /copilot/ demo rehearsal checklist link"
+else
+  echo "FAIL /copilot/ missing DEMO_REHEARSAL_CHECKLIST link" >&2
+  fail=1
+fi
+
+check_url "${BASE}/docs/references/GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED_v1.md" "drift detection sources locked doc"
+
+if echo "$proc_html" | grep -qF "GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED_v1.md"; then
+  echo "OK   /copilot/procurement/ drift detection sources link"
+else
+  echo "FAIL /copilot/procurement/ missing drift detection sources link" >&2
+  fail=1
+fi
 
 debrief_body="$(curl -sS --connect-timeout 5 "${BASE}/docs/copilot/BUYER_DEBRIEF_TEMPLATE_v1.md" 2>/dev/null || true)"
 for needle in "Board PDF used in governance meeting" "Persona" "Next step"; do
