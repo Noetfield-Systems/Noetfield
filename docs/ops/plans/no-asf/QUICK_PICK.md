@@ -12,9 +12,9 @@ _Registry backlog empty (1000-pack synced). Pick from [GTM_NEXT.md](./GTM_NEXT.m
 
 ### GTM_NEXT (top picks)
 
-_No open NF-CLOUD disk items — see [GTM_NEXT.md](./GTM_NEXT.md)._
-
-**Agentic commercial P0:** ship-design-partner-outreach-026 (Hub only — not NF-CLOUD disk).
+1. **ship-trust-brief-pilot-039** · Trust-brief intake CTA on copilot pilot page + verify
+1. **ship-procurement-cta-homepage-040** · Procurement buyer pack link from homepage hero CTAs + verify
+1. **ship-cursor-reply-coherence-041** · Coherence gate: cursor-reply `main:` must match `git rev-parse --short HEAD` (FAIL not WARN)
 
 ## Recently completed
 

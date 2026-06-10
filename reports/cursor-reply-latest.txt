@@ -1,18 +1,24 @@
-PLAN WITH NO ASF — iteration 11 complete (Noetfield cloud)
+Fourth Audit 10-Phase Fix — complete (Noetfield cloud)
 
-Pre: merged PR #40 (post-audit fix) to main @ f1e422f.
+Pre: main @ 6226807 (iter 11 merged); third-audit bundle was stranded on cursor/third-audit-10-phase-fix-37f0.
 
-Shipped (branch cursor/no-asf-iter11-37f0 @ b5b1d70):
-1. ship-trust-brief-intake-wire-033 — trust-brief intake CTA verify on copilot hub
-2. ship-drift-sources-procurement-034 — GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED on procurement
-3. ship-demo-rehearsal-hub-wire-035 — DEMO_REHEARSAL_CHECKLIST link on copilot hub
-
-Queue: GTM_NEXT empty NF-CLOUD disk — agentic 026 in Hub only
+Shipped (branch cursor/fourth-audit-iter12-37f0 @ a7df7d9):
+Phase 1: Third-audit bundle included (canonical SHIP_NOW, registry agentic_only, coherence hardening)
+Phase 2: COMPLETED_ON_MAIN, OPEN_PRS pending row, merge-truth reconcile
+Phase 3: SPRINT_BACKLOG → os/SHIP_NOW.md; coherence sprint gate
+Phase 4: ID namespace note; plan.json 036–038 done; GTM_NEXT iter 13 seed
+Phase 5: ship-trust-brief-procurement-036 — procurement trust-brief CTA + verify
+Phase 6: ship-drift-blueprints-procurement-037 — drift blueprints index on procurement
+Phase 7: ship-demo-url-verify-038 — verify-demo-url.sh in plan-with-no-asf-verify
+Phase 8: GTM_PRIORITY outreach prompts → agentic (Hub only) + coherence gate
+Phase 9: Agent context authority bounded note; SourceA not synced on VM (founder action)
+Phase 10: sync-prompt-pack-status; verify PASS; iter 13 proposals 039–041 in GTM_NEXT
 
 Verify: ./scripts/plan-with-no-asf-verify.sh — PASS
-Sync: python3 scripts/sync-prompt-pack-status.py
+Sync: python3 scripts/sync-prompt-pack-status.py — 1000/1000
 
-task: No ASF iter 11 — trust-brief, drift sources, demo rehearsal hub wire
+task: Fourth Audit 10-Phase Fix — full bundle
 agent: NF-CLOUD-AGENT
-main: f1e422f (PR #40 merged)
-next: ASK founder — merge PR; agentic 026 in Hub; close stale #2/#7
+main: 6226807 (pre-merge; merge this PR to update)
+branch: a7df7d9
+next: ASK founder — merge PR; iter 13 from GTM_NEXT 039–041; agentic 026 Hub; close #2/#7; SourceA sync

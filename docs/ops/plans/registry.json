@@ -39,7 +39,7 @@
       "outcome": "Shippable increment for trust ledger in P0 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P0; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -57,7 +57,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0002",
@@ -687,7 +688,7 @@
       "outcome": "Shippable increment for trust ledger in P0 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P0; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -705,7 +706,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0022",
@@ -1335,7 +1337,7 @@
       "outcome": "Shippable increment for trust ledger in P0 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P0; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -1353,7 +1355,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0042",
@@ -1983,7 +1986,7 @@
       "outcome": "Shippable increment for trust ledger in P0 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P0; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -2001,7 +2004,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0062",
@@ -2631,7 +2635,7 @@
       "outcome": "Shippable increment for trust ledger in P0 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P0; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -2649,7 +2653,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0082",
@@ -3279,7 +3284,7 @@
       "outcome": "Shippable increment for trust ledger in P1 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P1; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -3297,7 +3302,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0102",
@@ -3927,7 +3933,7 @@
       "outcome": "Shippable increment for trust ledger in P1 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P1; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -3945,7 +3951,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0122",
@@ -4575,7 +4582,7 @@
       "outcome": "Shippable increment for trust ledger in P1 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P1; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -4593,7 +4600,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0142",
@@ -5223,7 +5231,7 @@
       "outcome": "Shippable increment for trust ledger in P1 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P1; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -5241,7 +5249,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0162",
@@ -5871,7 +5880,7 @@
       "outcome": "Shippable increment for trust ledger in P1 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P1; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -5889,7 +5898,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0182",
@@ -6519,7 +6529,7 @@
       "outcome": "Shippable increment for trust ledger in P2 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P2; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -6537,7 +6547,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0202",
@@ -7167,7 +7178,7 @@
       "outcome": "Shippable increment for trust ledger in P2 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P2; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -7185,7 +7196,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0222",
@@ -7815,7 +7827,7 @@
       "outcome": "Shippable increment for trust ledger in P2 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P2; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -7833,7 +7845,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0242",
@@ -8463,7 +8476,7 @@
       "outcome": "Shippable increment for trust ledger in P2 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P2; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -8481,7 +8494,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0262",
@@ -9111,7 +9125,7 @@
       "outcome": "Shippable increment for trust ledger in P2 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P2; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -9129,7 +9143,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0282",
@@ -9759,7 +9774,7 @@
       "outcome": "Shippable increment for trust ledger in P3 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P3; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -9777,7 +9792,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0302",
@@ -10407,7 +10423,7 @@
       "outcome": "Shippable increment for trust ledger in P3 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P3; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -10425,7 +10441,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0322",
@@ -11055,7 +11072,7 @@
       "outcome": "Shippable increment for trust ledger in P3 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P3; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -11073,7 +11090,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0342",
@@ -11703,7 +11721,7 @@
       "outcome": "Shippable increment for trust ledger in P3 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P3; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -11721,7 +11739,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0362",
@@ -12351,7 +12370,7 @@
       "outcome": "Shippable increment for trust ledger in P3 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P3; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -12369,7 +12388,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0382",
@@ -12999,7 +13019,7 @@
       "outcome": "Shippable increment for trust ledger in P4 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P4; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -13017,7 +13037,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0402",
@@ -13647,7 +13668,7 @@
       "outcome": "Shippable increment for trust ledger in P4 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P4; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -13665,7 +13686,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0422",
@@ -14295,7 +14317,7 @@
       "outcome": "Shippable increment for trust ledger in P4 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P4; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -14313,7 +14335,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0442",
@@ -14943,7 +14966,7 @@
       "outcome": "Shippable increment for trust ledger in P4 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P4; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -14961,7 +14984,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0462",
@@ -15591,7 +15615,7 @@
       "outcome": "Shippable increment for trust ledger in P4 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P4; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -15609,7 +15633,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0482",
@@ -16239,7 +16264,7 @@
       "outcome": "Shippable increment for trust ledger in P5 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P5; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -16257,7 +16282,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0502",
@@ -16887,7 +16913,7 @@
       "outcome": "Shippable increment for trust ledger in P5 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P5; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -16905,7 +16931,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0522",
@@ -17535,7 +17562,7 @@
       "outcome": "Shippable increment for trust ledger in P5 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P5; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -17553,7 +17580,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0542",
@@ -18183,7 +18211,7 @@
       "outcome": "Shippable increment for trust ledger in P5 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P5; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -18201,7 +18229,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0562",
@@ -18831,7 +18860,7 @@
       "outcome": "Shippable increment for trust ledger in P5 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P5; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -18849,7 +18878,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0582",
@@ -19479,7 +19509,7 @@
       "outcome": "Shippable increment for trust ledger in P6 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P6; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -19497,7 +19527,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0602",
@@ -20127,7 +20158,7 @@
       "outcome": "Shippable increment for trust ledger in P6 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P6; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -20145,7 +20176,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0622",
@@ -20775,7 +20807,7 @@
       "outcome": "Shippable increment for trust ledger in P6 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P6; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -20793,7 +20825,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0642",
@@ -21423,7 +21456,7 @@
       "outcome": "Shippable increment for trust ledger in P6 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P6; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -21441,7 +21474,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0662",
@@ -22071,7 +22105,7 @@
       "outcome": "Shippable increment for trust ledger in P6 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P6; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -22089,7 +22123,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0682",
@@ -22719,7 +22754,7 @@
       "outcome": "Shippable increment for trust ledger in P7 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P7; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -22737,7 +22772,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0702",
@@ -23367,7 +23403,7 @@
       "outcome": "Shippable increment for trust ledger in P7 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P7; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -23385,7 +23421,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0722",
@@ -24015,7 +24052,7 @@
       "outcome": "Shippable increment for trust ledger in P7 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P7; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -24033,7 +24070,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0742",
@@ -24663,7 +24701,7 @@
       "outcome": "Shippable increment for trust ledger in P7 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P7; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -24681,7 +24719,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0762",
@@ -25311,7 +25350,7 @@
       "outcome": "Shippable increment for trust ledger in P7 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P7; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -25329,7 +25368,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0782",
@@ -25959,7 +25999,7 @@
       "outcome": "Shippable increment for trust ledger in P8 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P8; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -25977,7 +26017,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0802",
@@ -26607,7 +26648,7 @@
       "outcome": "Shippable increment for trust ledger in P8 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P8; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -26625,7 +26666,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0822",
@@ -27255,7 +27297,7 @@
       "outcome": "Shippable increment for trust ledger in P8 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P8; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -27273,7 +27315,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0842",
@@ -27903,7 +27946,7 @@
       "outcome": "Shippable increment for trust ledger in P8 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P8; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -27921,7 +27964,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0862",
@@ -28551,7 +28595,7 @@
       "outcome": "Shippable increment for trust ledger in P8 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P8; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -28569,7 +28613,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0882",
@@ -29199,7 +29244,7 @@
       "outcome": "Shippable increment for trust ledger in P9 at T1 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P9; tier=T1. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -29217,7 +29262,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0902",
@@ -29847,7 +29893,7 @@
       "outcome": "Shippable increment for trust ledger in P9 at T2 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P9; tier=T2. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -29865,7 +29911,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0922",
@@ -30495,7 +30542,7 @@
       "outcome": "Shippable increment for trust ledger in P9 at T3 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P9; tier=T3. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -30513,7 +30560,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0942",
@@ -31143,7 +31191,7 @@
       "outcome": "Shippable increment for trust ledger in P9 at T4 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P9; tier=T4. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -31161,7 +31209,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0962",
@@ -31791,7 +31840,7 @@
       "outcome": "Shippable increment for trust ledger in P9 at T5 priority.",
       "verify": "./scripts/plan-with-no-asf-verify.sh; area=trust-ledger; pattern=customer-outreach",
       "verify_command": "./scripts/plan-with-no-asf-verify.sh",
-      "prompt": "As NF-CLOUD-AGENT (Noetfield only), implement: Design-partner outreach and pipeline for trust ledger. Read locked GTM + MEMORY_LOCKED first. Lane A only \u2014 no TrustField/VIRLUX. Area=trust ledger; pattern=customer-outreach; phase=P9; tier=T5. Verify with ./scripts/plan-with-no-asf-verify.sh; update plan status and cursor-reply-latest.txt.",
+      "prompt": "As NF-CLOUD-AGENT (Noetfield only), agentic layer only \u2014 maintain pipeline copy on disk (not send/call): Design-partner outreach and pipeline for trust ledger. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. Hub executes send; NF-CLOUD wires www/docs only.",
       "sources": [
         "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
         "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
@@ -31809,7 +31858,8 @@
       "no_asf": true,
       "asf_only": false,
       "status": "done",
-      "blocks": []
+      "blocks": [],
+      "agentic_only": true
     },
     {
       "id": "NF-PLAN-0982",

@@ -163,6 +163,13 @@ def plan_sources(area: str, pattern: str) -> list[str]:
 
 def build_prompt(area: str, pattern: str, title: str, phase: str, tier: str) -> str:
     area_label = area.replace("-", " ")
+    if pattern == "customer-outreach":
+        return (
+            f"As NF-CLOUD-AGENT (Noetfield only), agentic layer only — maintain pipeline copy on disk "
+            f"(not send/call): {title}. Read R-011 + AGENTIC_COMMERCIAL_HANDOFF. "
+            f"Area={area_label}; pattern={pattern}; phase={phase}; tier={tier}. "
+            f"NF-CLOUD may wire www/docs; Hub executes outreach."
+        )
     return (
         f"As NF-CLOUD-AGENT (Noetfield only), implement: {title}. "
         f"Read locked GTM + MEMORY_LOCKED first. Lane A only — no TrustField/VIRLUX. "
@@ -194,6 +201,7 @@ def build_plans() -> list[dict]:
                 title = pattern_tpl.format(area=area_label)
                 gate = tier_gate(area, phase_code)
                 gtm_pri = gtm_priority(phase_code, tier_code, area, pattern_key)
+                agentic_only = pattern_key == "customer-outreach"
                 plans.append(
                     {
                         "id": plan_id(n),
@@ -204,6 +212,7 @@ def build_plans() -> list[dict]:
                         "tier_name": tier_desc,
                         "area": area,
                         "pattern": pattern_key,
+                        "agentic_only": agentic_only,
                         "title": title,
                         "outcome": f"Shippable increment for {area_label} in {phase_code} at {tier_code} priority.",
                         "verify": f"{VERIFY_DEFAULT}; area={area}; pattern={pattern_key}",
@@ -369,8 +378,9 @@ def write_slice_docs(plans: list[dict]) -> None:
         if extra:
             lines.extend([extra, ""])
         for p in items:
+            prefix = "**AGENTIC ONLY — skip NF-CLOUD** · " if p.get("agentic_only") else ""
             lines.append(
-                f"- **{p['id']}** ({p['nf_future_id']}) · {p['phase']}/{p['tier']} · {p['title']}"
+                f"- {prefix}**{p['id']}** ({p['nf_future_id']}) · {p['phase']}/{p['tier']} · {p['title']}"
             )
             lines.append(f"  - Prompt: `{p['prompt'][:100]}…`")
             lines.append(f"  - Critic: {p['critic_note']}")

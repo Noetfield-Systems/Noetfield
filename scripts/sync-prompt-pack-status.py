@@ -53,6 +53,9 @@ SHIP_DONE_MAP: dict[str, list[int]] = {
     "ship-trust-brief-intake-wire-033": [9, 29, 49, 69, 89],
     "ship-drift-sources-procurement-034": [10, 30, 50, 70, 90],
     "ship-demo-rehearsal-hub-wire-035": [2, 22, 42, 62, 82],
+    "ship-trust-brief-procurement-036": [9, 29, 49, 69, 89],
+    "ship-drift-blueprints-procurement-037": [10, 30, 50, 70, 90],
+    "ship-demo-url-verify-038": [27, 47, 67, 87],
 }
 
 # NF-PLAN patterns that are agentic-only (R-011) — never pick for NF-CLOUD implement
@@ -173,6 +176,7 @@ def regenerate_quick_pick(plans: list[dict]) -> None:
         and p["status"] == "backlog"
         and p["tier_gate"] != "C"
         and p.get("pattern") not in AGENTIC_ONLY_PATTERNS
+        and not p.get("agentic_only")
     ]
     phase_pri = {"P7": 0, "P4": 1, "P0": 2, "P1": 3, "P2": 4, "P3": 5, "P5": 6, "P6": 7, "P8": 8, "P9": 9}
     tier_pri = {"T1": 0, "T2": 1, "T3": 2, "T4": 3, "T5": 4}
