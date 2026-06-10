@@ -144,6 +144,8 @@ def test_tle_draft_drift_contract_v0():
     follow = r2.json()
     assert follow["document"]["baseline_tle_id"] == baseline["tle_id"]
     assert follow["document"]["drift_class"] == "stable"
+    assert follow["document"]["delta_summary"]["drift_class"] == "stable"
+    assert follow["document"]["severity"] == "Low"
 
     bad = client.post(
         "/tle/draft",
@@ -189,6 +191,31 @@ def test_tle_diff_evaluate_vs_last():
     assert body1["drift_class"] == "stable"
     assert body1["evidence_added"] == []
     assert body1["evidence_removed"] == []
+
+
+def test_diff_evaluate_empty_baseline():
+    from services.tle_service import build_delta_summary, drift_severity
+
+    summary = build_delta_summary(
+        drift_class="initial",
+        baseline_tle_id=None,
+        baseline_score=None,
+        new_score=0.83,
+        evidence_added=[],
+        evidence_removed=[],
+    )
+    assert summary["drift_class"] == "initial"
+    assert summary["baseline_tle_id"] is None
+    assert drift_severity("initial") == "Low"
+
+    diff = client.post(
+        "/tle/diff/evaluate",
+        headers=TENANT_HEADER,
+        json={"evidence_ids": ["EV-PURVIEW-001"]},
+    )
+    assert diff.status_code == 200
+    assert "severity" in diff.json()
+    assert "delta_summary" in diff.json()
 
 
 def test_viewer_cannot_approve():
@@ -297,10 +324,15 @@ def test_export_includes_signature_block():
     export = client.get(f"/tle/{tle_id}/export", headers=TENANT_HEADER).json()
     assert "signature_block" in export
     assert export["signature_block"]["key_id"]
+    assert export["signature_block"]["digest_version"] == "v2"
     assert len(export["signature_block"]["signatures"]) == 3
+    assert export.get("audit_digest_link") is not None
+    assert export.get("confidence_score", 0) > 0
+    assert "drift_contract" in export
     pdf = client.get(f"/tle/{tle_id}/export?format=pdf", headers=TENANT_HEADER)
     assert pdf.status_code == 200
     assert len(pdf.content) > 800
+    assert pdf.content[:4] == b"%PDF"
 
 
 def test_export_procurement_zip():

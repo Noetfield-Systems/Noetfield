@@ -244,7 +244,7 @@ flowchart LR
 | Risk assessment | Evaluate + confidence factors | `POST /evaluate`, TLE draft |
 | Evidence of controls | Evidence Index | `POST /evidence/ingest`, M365 connector |
 | Management decision | TLE + approval chain | `POST /tle/draft`, `POST /tle/{id}/approve` |
-| Board / procurement | PDF + YAML | `GET /tle/{id}/export?format=pdf` |
+| Board / procurement | PDF + YAML + ZIP README | `GET /tle/{id}/export?format=pdf`, procurement pack `README-procurement.txt` |
 | Audit trail | audit_digest + signature_block | Export JSON, audit export |
 | Pilot repeatability | E2E script | `make copilot-pilot-e2e` |
 

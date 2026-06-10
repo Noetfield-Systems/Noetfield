@@ -2215,7 +2215,7 @@
       "slot": 6,
       "title": "Add delta_summary and severity to drift export JSON",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0107.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2234,7 +2234,7 @@
       "slot": 7,
       "title": "Document Drift Contract v0 in docs/spec phase note only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0108.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2253,7 +2253,7 @@
       "slot": 8,
       "title": "Wire workspace UI badge when drift_class present",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0109.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2272,7 +2272,7 @@
       "slot": 9,
       "title": "Validate TLE sample YAML still passes schema",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0110.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2291,7 +2291,7 @@
       "slot": 10,
       "title": "Run pytest test_tle_flow.py -q after TLE service edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0111.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2310,7 +2310,7 @@
       "slot": 11,
       "title": "Add audit_digest linkage in board pack JSON export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0112.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2329,7 +2329,7 @@
       "slot": 12,
       "title": "Ensure confidence score visible on PDF cover regression test",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0113.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2348,7 +2348,7 @@
       "slot": 13,
       "title": "Add copilot-pilot-e2e step asserting confidence in export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0114.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2367,7 +2367,7 @@
       "slot": 14,
       "title": "Cross-check GOVERNANCE_DRIFT_BLUEPRINTS_INDEX P0 gaps list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0115.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2386,7 +2386,7 @@
       "slot": 15,
       "title": "Compare TLE v1 fields to TRUST_LEDGER_PRODUCT_BLUEPRINT locked spec",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0116.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2405,7 +2405,7 @@
       "slot": 16,
       "title": "Add drift metrics placeholder in cognitive dashboard copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0117.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2424,7 +2424,7 @@
       "slot": 17,
       "title": "Validate /trust-ledger/sample-report/ still 200",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0118.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2443,7 +2443,7 @@
       "slot": 18,
       "title": "Extend tle-smoke.sh for optional drift fields when shipped",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0119.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2462,7 +2462,7 @@
       "slot": 19,
       "title": "Add README-procurement.txt citation to governance sources book",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0120.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2481,7 +2481,7 @@
       "slot": 20,
       "title": "Harden KMS digest v2 signature_block in export path",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0121.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2500,7 +2500,7 @@
       "slot": 21,
       "title": "Add unit test for evaluate vs baseline diff empty state",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0122.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2519,7 +2519,7 @@
       "slot": 22,
       "title": "Document evaluate-vs-TLE as partial in REPO_TRUTH if not full",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0123.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2538,7 +2538,7 @@
       "slot": 23,
       "title": "Reject Lane C payment fields in TLE schema edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0124.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2557,7 +2557,7 @@
       "slot": 24,
       "title": "Run make verify-gtm after any tle_service.py change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0125.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2576,7 +2576,7 @@
       "slot": 0,
       "title": "Implement Drift Contract v0 fields on TLE draft API (drift_class, baseline_tle_id)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0126.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2595,7 +2595,7 @@
       "slot": 1,
       "title": "Add evaluate-vs-last-TLE diff helper endpoint or service stub",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0127.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2614,7 +2614,7 @@
       "slot": 2,
       "title": "Add risk_summary to confidence factors in evaluate response",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0128.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2633,7 +2633,7 @@
       "slot": 3,
       "title": "Regression: make procurement-pack-e2e after TLE export change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0129.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2652,7 +2652,7 @@
       "slot": 4,
       "title": "Extend test_tle_flow.py for drift contract fields",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0130.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2671,7 +2671,7 @@
       "slot": 5,
       "title": "Harden board_pack_export signature_block chain",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0131.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2690,7 +2690,7 @@
       "slot": 6,
       "title": "Add delta_summary and severity to drift export JSON",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0132.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2709,7 +2709,7 @@
       "slot": 7,
       "title": "Document Drift Contract v0 in docs/spec phase note only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0133.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2728,7 +2728,7 @@
       "slot": 8,
       "title": "Wire workspace UI badge when drift_class present",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0134.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2747,7 +2747,7 @@
       "slot": 9,
       "title": "Validate TLE sample YAML still passes schema",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0135.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2766,7 +2766,7 @@
       "slot": 10,
       "title": "Run pytest test_tle_flow.py -q after TLE service edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0136.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2785,7 +2785,7 @@
       "slot": 11,
       "title": "Add audit_digest linkage in board pack JSON export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0137.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2804,7 +2804,7 @@
       "slot": 12,
       "title": "Ensure confidence score visible on PDF cover regression test",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0138.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2823,7 +2823,7 @@
       "slot": 13,
       "title": "Add copilot-pilot-e2e step asserting confidence in export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0139.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2842,7 +2842,7 @@
       "slot": 14,
       "title": "Cross-check GOVERNANCE_DRIFT_BLUEPRINTS_INDEX P0 gaps list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0140.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2861,7 +2861,7 @@
       "slot": 15,
       "title": "Compare TLE v1 fields to TRUST_LEDGER_PRODUCT_BLUEPRINT locked spec",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0141.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2880,7 +2880,7 @@
       "slot": 16,
       "title": "Add drift metrics placeholder in cognitive dashboard copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0142.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2899,7 +2899,7 @@
       "slot": 17,
       "title": "Validate /trust-ledger/sample-report/ still 200",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0143.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2918,7 +2918,7 @@
       "slot": 18,
       "title": "Extend tle-smoke.sh for optional drift fields when shipped",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0144.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2937,7 +2937,7 @@
       "slot": 19,
       "title": "Add README-procurement.txt citation to governance sources book",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0145.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2956,7 +2956,7 @@
       "slot": 20,
       "title": "Harden KMS digest v2 signature_block in export path",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0146.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2975,7 +2975,7 @@
       "slot": 21,
       "title": "Add unit test for evaluate vs baseline diff empty state",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0147.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2994,7 +2994,7 @@
       "slot": 22,
       "title": "Document evaluate-vs-TLE as partial in REPO_TRUTH if not full",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0148.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3013,7 +3013,7 @@
       "slot": 23,
       "title": "Reject Lane C payment fields in TLE schema edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0149.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3032,7 +3032,7 @@
       "slot": 24,
       "title": "Run make verify-gtm after any tle_service.py change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0150.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3051,7 +3051,7 @@
       "slot": 0,
       "title": "Implement Drift Contract v0 fields on TLE draft API (drift_class, baseline_tle_id)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0151.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3070,7 +3070,7 @@
       "slot": 1,
       "title": "Add evaluate-vs-last-TLE diff helper endpoint or service stub",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0152.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3089,7 +3089,7 @@
       "slot": 2,
       "title": "Add risk_summary to confidence factors in evaluate response",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0153.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3108,7 +3108,7 @@
       "slot": 3,
       "title": "Regression: make procurement-pack-e2e after TLE export change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0154.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3127,7 +3127,7 @@
       "slot": 4,
       "title": "Extend test_tle_flow.py for drift contract fields",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0155.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3146,7 +3146,7 @@
       "slot": 5,
       "title": "Harden board_pack_export signature_block chain",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0156.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3165,7 +3165,7 @@
       "slot": 6,
       "title": "Add delta_summary and severity to drift export JSON",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0157.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3184,7 +3184,7 @@
       "slot": 7,
       "title": "Document Drift Contract v0 in docs/spec phase note only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0158.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3203,7 +3203,7 @@
       "slot": 8,
       "title": "Wire workspace UI badge when drift_class present",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0159.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3222,7 +3222,7 @@
       "slot": 9,
       "title": "Validate TLE sample YAML still passes schema",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0160.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3241,7 +3241,7 @@
       "slot": 10,
       "title": "Run pytest test_tle_flow.py -q after TLE service edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0161.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3260,7 +3260,7 @@
       "slot": 11,
       "title": "Add audit_digest linkage in board pack JSON export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0162.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3279,7 +3279,7 @@
       "slot": 12,
       "title": "Ensure confidence score visible on PDF cover regression test",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0163.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3298,7 +3298,7 @@
       "slot": 13,
       "title": "Add copilot-pilot-e2e step asserting confidence in export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0164.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3317,7 +3317,7 @@
       "slot": 14,
       "title": "Cross-check GOVERNANCE_DRIFT_BLUEPRINTS_INDEX P0 gaps list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0165.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3336,7 +3336,7 @@
       "slot": 15,
       "title": "Compare TLE v1 fields to TRUST_LEDGER_PRODUCT_BLUEPRINT locked spec",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0166.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3355,7 +3355,7 @@
       "slot": 16,
       "title": "Add drift metrics placeholder in cognitive dashboard copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0167.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3374,7 +3374,7 @@
       "slot": 17,
       "title": "Validate /trust-ledger/sample-report/ still 200",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0168.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3393,7 +3393,7 @@
       "slot": 18,
       "title": "Extend tle-smoke.sh for optional drift fields when shipped",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0169.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3412,7 +3412,7 @@
       "slot": 19,
       "title": "Add README-procurement.txt citation to governance sources book",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0170.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3431,7 +3431,7 @@
       "slot": 20,
       "title": "Harden KMS digest v2 signature_block in export path",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0171.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3450,7 +3450,7 @@
       "slot": 21,
       "title": "Add unit test for evaluate vs baseline diff empty state",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0172.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3469,7 +3469,7 @@
       "slot": 22,
       "title": "Document evaluate-vs-TLE as partial in REPO_TRUTH if not full",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0173.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3488,7 +3488,7 @@
       "slot": 23,
       "title": "Reject Lane C payment fields in TLE schema edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0174.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3507,7 +3507,7 @@
       "slot": 24,
       "title": "Run make verify-gtm after any tle_service.py change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0175.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3526,7 +3526,7 @@
       "slot": 0,
       "title": "Implement Drift Contract v0 fields on TLE draft API (drift_class, baseline_tle_id)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0176.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3545,7 +3545,7 @@
       "slot": 1,
       "title": "Add evaluate-vs-last-TLE diff helper endpoint or service stub",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0177.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3564,7 +3564,7 @@
       "slot": 2,
       "title": "Add risk_summary to confidence factors in evaluate response",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0178.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3583,7 +3583,7 @@
       "slot": 3,
       "title": "Regression: make procurement-pack-e2e after TLE export change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0179.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3602,7 +3602,7 @@
       "slot": 4,
       "title": "Extend test_tle_flow.py for drift contract fields",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0180.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3621,7 +3621,7 @@
       "slot": 5,
       "title": "Harden board_pack_export signature_block chain",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0181.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3640,7 +3640,7 @@
       "slot": 6,
       "title": "Add delta_summary and severity to drift export JSON",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0182.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3659,7 +3659,7 @@
       "slot": 7,
       "title": "Document Drift Contract v0 in docs/spec phase note only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0183.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3678,7 +3678,7 @@
       "slot": 8,
       "title": "Wire workspace UI badge when drift_class present",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0184.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3697,7 +3697,7 @@
       "slot": 9,
       "title": "Validate TLE sample YAML still passes schema",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0185.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3716,7 +3716,7 @@
       "slot": 10,
       "title": "Run pytest test_tle_flow.py -q after TLE service edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0186.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3735,7 +3735,7 @@
       "slot": 11,
       "title": "Add audit_digest linkage in board pack JSON export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0187.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3754,7 +3754,7 @@
       "slot": 12,
       "title": "Ensure confidence score visible on PDF cover regression test",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0188.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3773,7 +3773,7 @@
       "slot": 13,
       "title": "Add copilot-pilot-e2e step asserting confidence in export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0189.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3792,7 +3792,7 @@
       "slot": 14,
       "title": "Cross-check GOVERNANCE_DRIFT_BLUEPRINTS_INDEX P0 gaps list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0190.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3811,7 +3811,7 @@
       "slot": 15,
       "title": "Compare TLE v1 fields to TRUST_LEDGER_PRODUCT_BLUEPRINT locked spec",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0191.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3830,7 +3830,7 @@
       "slot": 16,
       "title": "Add drift metrics placeholder in cognitive dashboard copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0192.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3849,7 +3849,7 @@
       "slot": 17,
       "title": "Validate /trust-ledger/sample-report/ still 200",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0193.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3868,7 +3868,7 @@
       "slot": 18,
       "title": "Extend tle-smoke.sh for optional drift fields when shipped",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0194.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3887,7 +3887,7 @@
       "slot": 19,
       "title": "Add README-procurement.txt citation to governance sources book",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0195.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3906,7 +3906,7 @@
       "slot": 20,
       "title": "Harden KMS digest v2 signature_block in export path",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0196.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3925,7 +3925,7 @@
       "slot": 21,
       "title": "Add unit test for evaluate vs baseline diff empty state",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0197.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3944,7 +3944,7 @@
       "slot": 22,
       "title": "Document evaluate-vs-TLE as partial in REPO_TRUTH if not full",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0198.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3963,7 +3963,7 @@
       "slot": 23,
       "title": "Reject Lane C payment fields in TLE schema edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0199.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3982,7 +3982,7 @@
       "slot": 24,
       "title": "Run make verify-gtm after any tle_service.py change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0200.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",

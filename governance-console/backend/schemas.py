@@ -104,6 +104,7 @@ class ConnectorStatusResponse(BaseModel):
 class TleDraftRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
+    # Lane C forbidden: payment_rail, custody_account, wire_transfer_id — not in schema by design.
     source_rid: str | None = None
     evidence_ids: list[str] = Field(min_length=1)
     owner: dict[str, str] | None = None
@@ -126,6 +127,8 @@ class TleDiffEvaluateResponse(BaseModel):
     baseline_confidence_score: float | None
     confidence_delta: float | None
     drift_class: str
+    severity: str
+    delta_summary: dict[str, Any]
     evidence_added: list[str]
     evidence_removed: list[str]
     source_rid: str | None

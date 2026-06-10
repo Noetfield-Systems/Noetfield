@@ -24,6 +24,13 @@ for name in Stripe Adyen Wise Revolut Monzo Chime; do
   fi
 done
 
+# Lane C — TLE/evaluate schemas must not ship payment/custody fields (PRODUCT_TRUTH)
+if grep -E 'payment_rail|custody_account|wire_transfer_id' governance-console/backend/schemas.py 2>/dev/null \
+  | grep -v -E '# lane-c-forbidden|Lane C'; then
+  echo "FAIL: Lane C payment fields in TLE/evaluate schemas" >&2
+  fail=1
+fi
+
 if [[ "$fail" -ne 0 ]]; then
   exit 1
 fi

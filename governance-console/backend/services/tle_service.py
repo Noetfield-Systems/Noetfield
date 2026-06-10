@@ -92,6 +92,34 @@ def compute_drift_class(
     return "material"
 
 
+def drift_severity(drift_class: str) -> str:
+    return {
+        "initial": "Low",
+        "stable": "Low",
+        "minor": "Medium",
+        "material": "High",
+    }.get(drift_class, "Medium")
+
+
+def build_delta_summary(
+    *,
+    drift_class: str,
+    baseline_tle_id: str | None,
+    baseline_score: float | None,
+    new_score: float,
+    evidence_added: list[str],
+    evidence_removed: list[str],
+) -> dict[str, Any]:
+    confidence_delta = round(new_score - baseline_score, 2) if baseline_score is not None else None
+    return {
+        "drift_class": drift_class,
+        "baseline_tle_id": baseline_tle_id,
+        "confidence_delta": confidence_delta,
+        "evidence_added": evidence_added,
+        "evidence_removed": evidence_removed,
+    }
+
+
 def get_last_tle(db: Session, *, tenant_id: uuid.UUID) -> TleEntry | None:
     return db.scalar(
         select(TleEntry)
@@ -142,6 +170,14 @@ def diff_evaluate_vs_last_tle(
 
     baseline_score = last.confidence_score if last else None
     confidence_delta = round(score - baseline_score, 2) if baseline_score is not None else None
+    delta_summary = build_delta_summary(
+        drift_class=drift_class,
+        baseline_tle_id=last.tle_id if last else None,
+        baseline_score=baseline_score,
+        new_score=score,
+        evidence_added=sorted(new_evidence_ids - baseline_evidence_ids),
+        evidence_removed=sorted(baseline_evidence_ids - new_evidence_ids),
+    )
 
     return {
         "helper": "evaluate_vs_last_tle_v0",
@@ -152,8 +188,10 @@ def diff_evaluate_vs_last_tle(
         "baseline_confidence_score": baseline_score,
         "confidence_delta": confidence_delta,
         "drift_class": drift_class,
-        "evidence_added": sorted(new_evidence_ids - baseline_evidence_ids),
-        "evidence_removed": sorted(baseline_evidence_ids - new_evidence_ids),
+        "severity": drift_severity(drift_class),
+        "delta_summary": delta_summary,
+        "evidence_added": delta_summary["evidence_added"],
+        "evidence_removed": delta_summary["evidence_removed"],
         "source_rid": source_rid,
         "has_baseline": last is not None,
     }
@@ -216,6 +254,19 @@ def draft_from_evaluate(
         }
     )
 
+    new_evidence_ids = set(evidence_ids)
+    evidence_added = sorted(new_evidence_ids - baseline_evidence_ids)
+    evidence_removed = sorted(baseline_evidence_ids - new_evidence_ids)
+    delta_summary = build_delta_summary(
+        drift_class=drift_class,
+        baseline_tle_id=baseline_tle_id or (baseline_row.tle_id if baseline_row else None),
+        baseline_score=baseline_row.confidence_score if baseline_row else None,
+        new_score=score,
+        evidence_added=evidence_added,
+        evidence_removed=evidence_removed,
+    )
+    severity = drift_severity(drift_class)
+
     audit_event: AuditEvent | None = None
     if source_rid:
         audit_event = db.scalar(
@@ -275,6 +326,8 @@ def draft_from_evaluate(
         "metadata": {"generator": "tle_service_v1", "target_status": status},
         "drift_class": drift_class,
         "baseline_tle_id": baseline_tle_id,
+        "delta_summary": delta_summary,
+        "severity": severity,
     }
 
     row = TleEntry(
@@ -370,6 +423,13 @@ def approve_step(
 
 def board_pack_export(row: TleEntry) -> dict[str, Any]:
     doc = row.document_json
+    drift_contract = {
+        "drift_class": doc.get("drift_class"),
+        "baseline_tle_id": doc.get("baseline_tle_id"),
+        "delta_summary": doc.get("delta_summary"),
+        "severity": doc.get("severity"),
+    }
+    sig_block = build_signature_block(doc)
     return {
         "export_type": "board_pack_v1",
         "exported_at": datetime.now(timezone.utc).isoformat(),
@@ -377,20 +437,24 @@ def board_pack_export(row: TleEntry) -> dict[str, Any]:
         "status": row.status,
         "confidence_score": row.confidence_score,
         "audit_digest": row.audit_digest,
+        "audit_digest_link": row.audit_digest,
         "decision": doc.get("decision"),
         "evidence_count": len(doc.get("evidence") or []),
         "approval_chain": doc.get("approval_chain"),
         "risk_summary": doc.get("risk_summary"),
         "controls": doc.get("controls"),
-        "signature_block": build_signature_block(doc),
+        "drift_contract": drift_contract,
+        "signature_block": sig_block,
         "document": doc,
     }
 
 
 def build_signature_block(doc: dict[str, Any]) -> dict[str, Any]:
     return {
+        "digest_version": "v2",
         "key_id": KMS_STUB_KEY_ID,
         "digest_algorithm": "sha256",
+        "document_audit_digest": doc.get("audit_digest"),
         "signatures": list(doc.get("signatures") or []),
         "verify_hint": (
             "Recompute sha256 over sorted JSON of {tle_id, approver_id, decision} per signature entry; "

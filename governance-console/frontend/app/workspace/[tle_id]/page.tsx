@@ -80,6 +80,22 @@ export default function TleViewerPage() {
             lead={`Status ${tle.status} · ${String(doc.date ?? "")} · Role ${getWorkspaceRole()}`}
           />
 
+          {typeof doc.drift_class === "string" && doc.drift_class !== "initial" && (
+            <div
+              className="nf-card mb-6 inline-flex items-center gap-2 border border-amber-500/40 bg-amber-950/30 px-4 py-2 text-sm"
+              role="status"
+              aria-label="Drift class badge"
+            >
+              <span className="font-medium text-amber-200">Drift</span>
+              <span className="rounded bg-amber-500/20 px-2 py-0.5 font-mono text-xs uppercase text-amber-100">
+                {String(doc.drift_class)}
+              </span>
+              {doc.severity != null && (
+                <span className="text-muted-2">· severity {String(doc.severity)}</span>
+              )}
+            </div>
+          )}
+
           <div
             className="nf-card mb-8 flex flex-wrap items-center justify-between gap-4 border border-accent/30 bg-accent/5 p-6"
             role="status"

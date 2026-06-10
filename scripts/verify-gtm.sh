@@ -27,8 +27,12 @@ if [[ "$code" != "200" ]]; then
 fi
 
 cd governance-console/backend
-PYTHONPATH=. python3 -m pytest tests/test_tle_flow.py -q
+PYTHONPATH=. python3 -m pytest tests/test_tle_flow.py tests/test_audit_events.py -q
 cd "$ROOT"
+
+if [[ -f scripts/tle-smoke.sh ]]; then
+  ./scripts/tle-smoke.sh
+fi
 
 make verify-local-dev
 make verify-ui-e2e

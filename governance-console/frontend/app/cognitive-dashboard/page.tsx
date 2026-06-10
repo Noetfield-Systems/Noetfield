@@ -55,6 +55,11 @@ export default function CognitiveDashboardPage() {
           )}
         </StatCard>
         <StatCard
+          label="Drift contract"
+          title="Governance drift v0"
+          description="Compare evaluate → diff → TLE draft against last signed baseline (metadata-only; not ML observability)."
+        />
+        <StatCard
           label="Compliance"
           title="Audit log"
           description="Search evaluations by RID"
