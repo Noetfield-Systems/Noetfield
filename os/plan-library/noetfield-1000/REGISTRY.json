@@ -4134,7 +4134,7 @@
       "slot": 7,
       "title": "Add pytest for connector connected state persistence",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0208.md",
-      "status": "backlog",
+      "status": "done",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",

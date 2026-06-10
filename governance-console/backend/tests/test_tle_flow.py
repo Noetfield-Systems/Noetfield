@@ -16,7 +16,7 @@ _test_db = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
 os.environ["DATABASE_URL"] = f"sqlite:///{_test_db.name}"
 
 from db.bootstrap import init_schema, migrate_audit_logs_to_events, seed_pilot_evidence  # noqa: E402
-from db.models import EvidenceIndex, PILOT_TENANT_ID  # noqa: E402
+from db.models import ConnectorRecord, EvidenceIndex, PILOT_TENANT_ID  # noqa: E402
 from db.session import get_db  # noqa: E402
 from main import app  # noqa: E402
 from services.evidence_hash import CONTENT_HASH_RE, content_hash_for_metadata  # noqa: E402
@@ -325,6 +325,54 @@ def test_m365_oauth_mock_flow():
     assert cb.json()["oauth_connected"] is True
     st = client.get(f"/connectors/{cid}/status", headers=TENANT_HEADER)
     assert st.json()["oauth_connected"] is True
+
+
+def test_connector_connected_state_persists_after_oauth():
+    cid = f"m365-persist-{uuid.uuid4().hex[:8]}"
+    reg = client.post(
+        "/connectors",
+        headers=TENANT_HEADER,
+        json={
+            "connector_id": cid,
+            "connector_type": "m365_purview",
+            "required_scopes": ["Purview.Read"],
+        },
+    )
+    assert reg.status_code == 201
+    reg_body = reg.json()
+    assert reg_body["oauth_connected"] is False
+    assert reg_body["status"] == "registered"
+
+    cb = client.get(
+        f"/connectors/{cid}/oauth/callback",
+        headers=TENANT_HEADER,
+        params={"code": "dev-mock", "state": "persist"},
+    )
+    assert cb.status_code == 200
+    cb_body = cb.json()
+    assert cb_body["oauth_connected"] is True
+    assert cb_body["status"] == "connected"
+
+    listed = client.get("/connectors", headers=TENANT_HEADER)
+    assert listed.status_code == 200
+    match = next(c for c in listed.json() if c["connector_id"] == cid)
+    assert match["oauth_connected"] is True
+    assert match["status"] == "connected"
+
+    st = client.get(f"/connectors/{cid}/status", headers=TENANT_HEADER)
+    assert st.status_code == 200
+    st_body = st.json()
+    assert st_body["oauth_connected"] is True
+    assert st_body["status"] == "connected"
+
+    db = TestingSessionLocal()
+    try:
+        row = db.get(ConnectorRecord, cid)
+        assert row is not None
+        assert row.status == "connected"
+        assert row.oauth_json.get("connected_at")
+    finally:
+        db.close()
 
 
 def test_oauth_callback_html_redirects_to_workspace():
