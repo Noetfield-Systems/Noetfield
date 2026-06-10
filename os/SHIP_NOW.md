@@ -4,9 +4,13 @@
 
 ## Active queue (`next_tasks`)
 
-**Next iter 18:** see [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) (checkpoint verify, OpenAPI bridge, merged window config).
+**Next iter 19:** see [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) (OpenAPI verify, README OpenAPI cite, audit manifest).
+
+**Shipped iter 18 (2026-06-10):** checkpoint verify hardening, OpenAPI bridge, MERGED_WINDOW config.
 
 **Shipped iter 17 (2026-06-10):** services/governance blueprint bridge, procurement checkpoint copy, rolling merged PR window 5.
+
+**Shipped ninth audit (PR #47 @ 46a36a3):** iter 17 on main.
 
 **Shipped eighth audit (PR #46 @ f2103d3):** iter 16 on main.
 
