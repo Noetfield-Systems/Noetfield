@@ -1,26 +1,34 @@
-Closed incidents 002–005 per founder order (Noetfield cloud)
+PLAN WITH NO ASF — iteration 6 complete (Noetfield cloud)
 
-All four incidents marked closed in registry + files. Controls remain on main (R-007–R-010, SKILL-006/007).
+Shipped next_tasks (all done):
+1. ship-registry-sync-iter6-017 — SHIP_DONE_MAP 014-019, sync-prompt-pack, verify-quick-pick-fresh.sh
+2. ship-bc-ai-www-wire-018 — pilot/demo links to bc-ai-for-all-2026.md + verify-gtm-ops-docs
+3. ship-dual-brand-boundary-019 — conflict matrix govern-first handoff + verify-boundary-matrix.sh
+
+Verify:
+- ./scripts/plan-with-no-asf-verify.sh — PASS
+- python3 scripts/sync-prompt-pack-status.py — 84 done in registry
 
 scope_confirmed: noetfield_only
 
 ```yaml
 schema_version: 1
 repo: noetfield
-task: "Close incidents INCIDENT-2026-06-06-002 through 005"
+task: PLAN WITH NO ASF — iteration 6 registry sync, BC AI www wire, dual-brand boundary
 status: done
 verify_passed: true
-verify_command: "./scripts/verify-agent-scope.sh"
-verify_output_summary: "registry shows 002-005 closed; 001 closed; no open incidents"
+verify_command: "./scripts/plan-with-no-asf-verify.sh"
+verify_output_summary: "UI, gtm-ops-docs, tier-gate, quick-pick-fresh, boundary-matrix, pilot e2e, audit export, procurement — all passed"
 blocked_reason: ""
-next_action: "ASK founder — next bounded task"
+next_action: "Pick next 3 from QUICK_PICK / GTM_PRIORITY_100"
 evidence_paths:
-  - .cursor/incidents/REGISTRY.md
-  - .cursor/incidents/INCIDENT-2026-06-06-002-unauthorized-disk-edits.md
-  - .cursor/incidents/INCIDENT-2026-06-06-003-mandatory-sourcea-not-read.md
-  - .cursor/incidents/INCIDENT-2026-06-06-004-open-recommendations-not-closed.md
-  - .cursor/incidents/INCIDENT-2026-06-06-005-always-ask-next-move.md
-  - .cursor/agent-memory/MEMORY_LOCKED.yaml
-reported_at: "2026-06-06T23:55:00Z"
+  - scripts/sync-prompt-pack-status.py
+  - scripts/verify-quick-pick-fresh.sh
+  - scripts/verify-boundary-matrix.sh
+  - copilot/pilot/index.html
+  - copilot/demo/index.html
+  - docs/spec/trustfield-noetfield-conflict-matrix.md
+  - os/plan.json
+reported_at: "2026-06-07T00:15:00Z"
 reporter: cursor
 ```

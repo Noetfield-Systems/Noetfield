@@ -86,4 +86,4 @@ When the founder says **PLAN WITH NO ASF**, start here. Pick the next **agent** 
 
 ## Recently completed
 
-Synced 64 plans as done.
+Synced 84 plans as done.
