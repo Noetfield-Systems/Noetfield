@@ -4,7 +4,7 @@
   "status": "active",
   "ship_mandate": "os/SHIP_NOW.md",
   "ship_rule": "Ship from os/plan.json without waiting for next Prompt OS order; ingest = send answer to system (required); do not edit SinaPromptOS",
-  "last_updated": "2026-06-04",
+  "last_updated": "2026-06-08",
   "positioning_lock": "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
   "agent_context_lock": "docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md",
   "sprint_backlog": "os/sprint-trust-ledger-v1.2.md",

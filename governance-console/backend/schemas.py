@@ -58,7 +58,7 @@ class EvidenceIngestRequest(BaseModel):
     evidence_id: str = Field(min_length=3, max_length=64)
     source: str
     title: str = ""
-    content_hash: str
+    content_hash: str = Field(pattern=r"^sha256:[a-f0-9]{64}$")
     sensitivity: str = "internal"
     retention_policy: str = "standard"
     storage_ref: str = ""

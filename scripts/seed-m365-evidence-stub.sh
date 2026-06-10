@@ -8,6 +8,10 @@ source "${ROOT}/scripts/dev-ports.sh"
 BASE="http://127.0.0.1:${NF_DEV_PUBLIC_PORT}"
 TENANT="X-Tenant-ID: copilot-pilot-01"
 
+hash_for() {
+  python3 -c "import sys; sys.path.insert(0, '${ROOT}/governance-console/backend'); from services.evidence_hash import content_hash_for_metadata; print(content_hash_for_metadata(evidence_id=sys.argv[1], source=sys.argv[2], title=sys.argv[3], storage_ref=sys.argv[4]))" "$@"
+}
+
 ingest() {
   local body="$1"
   local code
@@ -25,10 +29,14 @@ ingest() {
 
 echo "=== seed-m365-evidence-stub ==="
 
-ingest '{"evidence_id":"EV-PURVIEW-COPILOT-LABELS","source":"Purview","title":"Copilot sensitivity label coverage (M365 stub)","content_hash":"sha256:m365-purview-stub-001","sensitivity":"confidential","storage_ref":"m365-stub/purview/metadata","ingest_mode":"metadata_only"}'
+H1="$(hash_for EV-PURVIEW-COPILOT-LABELS Purview "Copilot sensitivity label coverage (M365 stub)" m365-stub/purview/metadata)"
+H2="$(hash_for EV-ENTRA-CA-COPILOT EntraID "Conditional Access — Copilot licensed users (M365 stub)" m365-stub/entra/metadata)"
+H3="$(hash_for EV-SPO-SITE-POLICY SharePoint "SharePoint site policy export — Copilot-eligible sites (M365 stub)" m365-stub/sharepoint/metadata)"
 
-ingest '{"evidence_id":"EV-ENTRA-CA-COPILOT","source":"EntraID","title":"Conditional Access — Copilot licensed users (M365 stub)","content_hash":"sha256:m365-entra-stub-002","sensitivity":"internal","storage_ref":"m365-stub/entra/metadata","ingest_mode":"metadata_only"}'
+ingest "{\"evidence_id\":\"EV-PURVIEW-COPILOT-LABELS\",\"source\":\"Purview\",\"title\":\"Copilot sensitivity label coverage (M365 stub)\",\"content_hash\":\"${H1}\",\"sensitivity\":\"confidential\",\"storage_ref\":\"m365-stub/purview/metadata\",\"ingest_mode\":\"metadata_only\"}"
 
-ingest '{"evidence_id":"EV-SPO-SITE-POLICY","source":"SharePoint","title":"SharePoint site policy export — Copilot-eligible sites (M365 stub)","content_hash":"sha256:m365-spo-stub-003","sensitivity":"internal","storage_ref":"m365-stub/sharepoint/metadata","ingest_mode":"metadata_only"}'
+ingest "{\"evidence_id\":\"EV-ENTRA-CA-COPILOT\",\"source\":\"EntraID\",\"title\":\"Conditional Access — Copilot licensed users (M365 stub)\",\"content_hash\":\"${H2}\",\"sensitivity\":\"internal\",\"storage_ref\":\"m365-stub/entra/metadata\",\"ingest_mode\":\"metadata_only\"}"
+
+ingest "{\"evidence_id\":\"EV-SPO-SITE-POLICY\",\"source\":\"SharePoint\",\"title\":\"SharePoint site policy export — Copilot-eligible sites (M365 stub)\",\"content_hash\":\"${H3}\",\"sensitivity\":\"internal\",\"storage_ref\":\"m365-stub/sharepoint/metadata\",\"ingest_mode\":\"metadata_only\"}"
 
 echo "Done. Use evidence_ids in POST /tle/draft."

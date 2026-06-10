@@ -1,19 +1,19 @@
 ---
 agent_tag: nf-local-repo-agent
 agent_display: "[NF-LOCAL-REPO-AGENT]"
-authored_at: "2026-06-10"
-doc_id: cursor-reply-phase-1-tle-core-complete
+authored_at: "2026-06-02"
+doc_id: cursor-reply-nf-0202-evidence-hash
 ---
 
-> **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-06-10
+> **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-06-02
 
-**Shipped** — Phase 1 `phase-1-tle-core` complete (nf-0101–nf-0200): Drift Contract v0, evaluate confidence, diff helper, export hardening, UI badge, docs, E2E gates.
+**Shipped** — nf-0202: evidence-intake contract hash validation on POST /evidence/ingest and M365 connector stub sync; deterministic sha256 for metadata-only stubs; aligned bootstrap + seed script; pytest coverage.
 
 ## Verify
 
 ```text
-make verify-gtm — PASS (15 pytest, tle-smoke, full E2E bundle)
-make smoke-pick-no-asf-plan — nf-0201+ (phase-2)
+make verify-gtm — PASS (17 pytest, tle-smoke, copilot-pilot-e2e, full E2E bundle)
+make smoke-pick-no-asf-plan — nf-0202 (now done; next nf-0203)
 ```
 
 ---
@@ -22,22 +22,21 @@ make smoke-pick-no-asf-plan — nf-0201+ (phase-2)
 schema_version: 1
 repo: noetfield
 agent_tag: nf-local-repo-agent
-task: "phase-1-tle-core complete (nf-0101–0200 T0–T3)"
+task: "nf-0202 — Harden evidence hash on ingest in connector service"
 status: done
 verify_passed: true
 verify_command: "make verify-gtm"
 verify_output_summary: "verify-gtm passed — safe to run external demo"
 blocked_reason: ""
-next_action: "nf-0201 phase-2-evidence-connectors"
+next_action: "nf-0203 — Fix workspace/connectors OAuth redirect to workspace list"
 evidence_paths:
-  - governance-console/backend/services/tle_service.py
-  - governance-console/backend/services/governance_engine.py
-  - governance-console/backend/routes/evaluate.py
-  - governance-console/frontend/app/workspace/[tle_id]/page.tsx
-  - docs/spec/PHASE_1_DRIFT_CONTRACT_v0_NOTE.md
-  - scripts/verify-gtm.sh
-  - scripts/tle-smoke.sh
-  - scripts/copilot-pilot-e2e.sh
-reported_at: "2026-06-10T14:00:00Z"
+  - governance-console/backend/services/evidence_hash.py
+  - governance-console/backend/schemas.py
+  - governance-console/backend/routes/evidence.py
+  - governance-console/backend/services/m365_connector_sync.py
+  - governance-console/backend/db/bootstrap.py
+  - scripts/seed-m365-evidence-stub.sh
+  - governance-console/backend/tests/test_tle_flow.py
+reported_at: "2026-06-02T12:00:00Z"
 reporter: cursor
 ```

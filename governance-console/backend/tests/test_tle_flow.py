@@ -16,9 +16,10 @@ _test_db = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
 os.environ["DATABASE_URL"] = f"sqlite:///{_test_db.name}"
 
 from db.bootstrap import init_schema, migrate_audit_logs_to_events, seed_pilot_evidence  # noqa: E402
-from db.models import PILOT_TENANT_ID  # noqa: E402
+from db.models import EvidenceIndex, PILOT_TENANT_ID  # noqa: E402
 from db.session import get_db  # noqa: E402
 from main import app  # noqa: E402
+from services.evidence_hash import CONTENT_HASH_RE, content_hash_for_metadata  # noqa: E402
 
 engine = create_engine(
     os.environ["DATABASE_URL"],
@@ -54,8 +55,51 @@ client = TestClient(app)
 TENANT_HEADER = {"X-Tenant-ID": str(PILOT_TENANT_ID)}
 
 
+def test_evidence_ingest_invalid_hash_rejected():
+    eid = f"EV-BAD-{uuid.uuid4().hex[:8].upper()}"
+    r = client.post(
+        "/evidence/ingest",
+        headers=TENANT_HEADER,
+        json={
+            "evidence_id": eid,
+            "source": "Manual",
+            "title": "Bad hash evidence",
+            "content_hash": "sha256:deadbeef",
+        },
+    )
+    assert r.status_code == 422
+
+
+def test_evidence_ingest_valid_hash():
+    eid = f"EV-GOOD-{uuid.uuid4().hex[:8].upper()}"
+    content_hash = content_hash_for_metadata(
+        evidence_id=eid,
+        source="Manual",
+        title="Valid hash evidence",
+        storage_ref="test/local",
+    )
+    r = client.post(
+        "/evidence/ingest",
+        headers=TENANT_HEADER,
+        json={
+            "evidence_id": eid,
+            "source": "Manual",
+            "title": "Valid hash evidence",
+            "content_hash": content_hash,
+            "storage_ref": "test/local",
+        },
+    )
+    assert r.status_code == 201
+    assert r.json()["evidence_id"] == eid
+
+
 def test_evidence_ingest_and_list_connectors():
     eid = f"EV-TEST-{uuid.uuid4().hex[:8].upper()}"
+    content_hash = content_hash_for_metadata(
+        evidence_id=eid,
+        source="Manual",
+        title="Test evidence",
+    )
     r = client.post(
         "/evidence/ingest",
         headers=TENANT_HEADER,
@@ -63,7 +107,7 @@ def test_evidence_ingest_and_list_connectors():
             "evidence_id": eid,
             "source": "Manual",
             "title": "Test evidence",
-            "content_hash": "sha256:deadbeef",
+            "content_hash": content_hash,
         },
     )
     assert r.status_code == 201
@@ -284,7 +328,23 @@ def test_oauth_callback_ingests_evidence():
         },
     )
     assert draft.status_code == 201
-    assert len(draft.json()["document"]["evidence"]) == 3
+    evidence = draft.json()["document"]["evidence"]
+    assert len(evidence) == 3
+    for item in evidence:
+        assert CONTENT_HASH_RE.match(item["metadata"]["hash"])
+
+    db = TestingSessionLocal()
+    try:
+        for eid in (
+            "EV-PURVIEW-COPILOT-LABELS",
+            "EV-ENTRA-CA-COPILOT",
+            "EV-SPO-SITE-POLICY",
+        ):
+            row = db.get(EvidenceIndex, eid)
+            assert row is not None
+            assert CONTENT_HASH_RE.match(row.content_hash)
+    finally:
+        db.close()
 
 
 def test_out_of_order_approval_denied():
