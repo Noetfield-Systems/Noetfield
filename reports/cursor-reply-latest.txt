@@ -1,18 +1,23 @@
-PLAN WITH NO ASF — iteration 11 complete (Noetfield cloud)
+Third Audit 10-Phase Fix — complete (Noetfield cloud)
 
-Pre: merged PR #40 (post-audit fix) to main @ f1e422f.
+Pre: merged PR #41 to main @ 6226807 (iter 11 on main).
 
-Shipped (branch cursor/no-asf-iter11-37f0 @ b5b1d70):
-1. ship-trust-brief-intake-wire-033 — trust-brief intake CTA verify on copilot hub
-2. ship-drift-sources-procurement-034 — GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED on procurement
-3. ship-demo-rehearsal-hub-wire-035 — DEMO_REHEARSAL_CHECKLIST link on copilot hub
-
-Queue: GTM_NEXT empty NF-CLOUD disk — agentic 026 in Hub only
+Shipped (branch cursor/third-audit-10-phase-fix-37f0 @ 055f982):
+Phase 1: PR #41 merged — iter 11 033–035 on main
+Phase 2: OPEN_PRS #40/#41 merged; stale #2/#7 documented; coherence PR inventory
+Phase 3: README + AGENT_READ_LINKS → os/SHIP_NOW canonical; docs/SHIP_NOW pointer-only
+Phase 4: 1000-pack cloud overlay banner, Tier A outreach fix, agent context supersede note, plan.json mandate
+Phase 5: agentic_only on 50 customer-outreach registry rows; GTM_PRIORITY markers; patch script
+Phase 6: AGENT_SELF_AUDIT_LOOP addendum; R-011 in rules; agentic_queue in ship_rule
+Phase 7: Manifest SHIP_DONE_MAP 023–035; sync-prompt-pack-status run
+Phase 8: docs/reference redirect stubs; GTM_NEXT iter 12 picks 036–038
+Phase 9: SOURCEA status + NF_REQUIRE_SOURCEA in AGENT_READ_LINKS (founder sync still required)
+Phase 10: Hardened verify-no-asf-coherence (README, SHIP_DONE_MAP, registry fence, OPEN_PRS)
 
 Verify: ./scripts/plan-with-no-asf-verify.sh — PASS
 Sync: python3 scripts/sync-prompt-pack-status.py
 
-task: No ASF iter 11 — trust-brief, drift sources, demo rehearsal hub wire
+task: Third Audit 10-Phase Fix — full bundle
 agent: NF-CLOUD-AGENT
-main: f1e422f (PR #40 merged)
-next: ASK founder — merge PR; agentic 026 in Hub; close stale #2/#7
+main: 6226807 (PR #41 merged)
+next: ASK founder — merge PR; iter 12 from GTM_NEXT 036–038; agentic 026 Hub; close #2/#7; SourceA sync

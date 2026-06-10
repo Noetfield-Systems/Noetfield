@@ -47,7 +47,7 @@
 | Agent context | [NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](./NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) |
 | Locked index | [os/LOCKED_REFERENCE_INDEX.md](../../os/LOCKED_REFERENCE_INDEX.md) |
 | Drift blueprints (cloud) | [NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md](./NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md) |
-| Ship now | [os/SHIP_NOW.md](../../os/SHIP_NOW.md) · [docs/SHIP_NOW.md](../SHIP_NOW.md) |
+| Ship now (canonical) | [os/SHIP_NOW.md](../../os/SHIP_NOW.md) |
 | Ship plan | [os/plan.json](../../os/plan.json) |
 | Trust Ledger | [docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md](../spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md) |
 | Product locks | [PRODUCT_TRUTH.md](../../PRODUCT_TRUTH.md) · [POSITIONING.md](../../POSITIONING.md) · [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md) |
@@ -70,6 +70,7 @@
 | Command | When |
 |---------|------|
 | `./scripts/verify-local-dev.sh` | Dev stack / unified proxy `:13080` |
+| `NF_REQUIRE_SOURCEA=1 ./scripts/verify-agent-scope.sh` | Optional — enforce SourceA mirror on founder Mac sync |
 | `./scripts/tle-smoke.sh` | TLE examples + schema sanity |
 | `make ship-verify` | Merge / deploy readiness |
 

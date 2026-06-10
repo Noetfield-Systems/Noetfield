@@ -11,6 +11,8 @@
 
 ## Trigger: PLAN WITH NO ASF
 
+> **CLOUD AGENTS:** Read the **Appendix — post-sync era** and **Step table overlay** below before the locked step table. Post-sync queue = GTM_NEXT, not GTM_PRIORITY outreach rows.
+
 When the founder says **PLAN WITH NO ASF**, run this fixed sequence — no ASF wait, no TrustField, no fluff.
 
 | Step | Action |
@@ -68,7 +70,7 @@ From GTM 60-day lock:
 
 | Tier | When | Build |
 |------|------|-------|
-| **A — Now** | Before customer #2 | Demo URL, procurement zip, confidence in demo, customer outreach |
+| **A — Now** | Before customer #2 | Demo URL, procurement zip, confidence on PDF cover (outreach = agentic Hub — R-011) |
 | **B — After first customer** | Paid pilot | Real M365 read-only, Google Workspace stub |
 | **C — After revenue** | 3+ customers | SSO, multi-tenant hardening |
 

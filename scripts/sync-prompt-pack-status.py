@@ -173,6 +173,7 @@ def regenerate_quick_pick(plans: list[dict]) -> None:
         and p["status"] == "backlog"
         and p["tier_gate"] != "C"
         and p.get("pattern") not in AGENTIC_ONLY_PATTERNS
+        and not p.get("agentic_only")
     ]
     phase_pri = {"P7": 0, "P4": 1, "P0": 2, "P1": 3, "P2": 4, "P3": 5, "P5": 6, "P6": 7, "P8": 8, "P9": 9}
     tier_pri = {"T1": 0, "T2": 1, "T3": 2, "T4": 3, "T5": 4}

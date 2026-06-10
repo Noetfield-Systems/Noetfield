@@ -1,6 +1,6 @@
 # SHIP NOW — Noetfield
 
-**Ship rule:** `os/plan.json` `next_tasks` — agent-owned (no ASF). Ingest required after VERIFY.
+**Ship rule:** Bounded founder `implement` + [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) queue — see `os/plan.json` `ship_rule`. Ingest required after VERIFY. No self-start (R-007/R-011).
 
 ## Active queue (`next_tasks`)
 

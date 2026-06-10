@@ -12,9 +12,9 @@ _Registry backlog empty (1000-pack synced). Pick from [GTM_NEXT.md](./GTM_NEXT.m
 
 ### GTM_NEXT (top picks)
 
-_No open NF-CLOUD disk items — see [GTM_NEXT.md](./GTM_NEXT.md)._
-
-**Agentic commercial P0:** ship-design-partner-outreach-026 (Hub only — not NF-CLOUD disk).
+1. **ship-trust-brief-procurement-036** · Trust-brief intake link on procurement buyer pack + verify
+1. **ship-drift-blueprints-procurement-037** · Drift blueprints index href on procurement + verify
+1. **ship-demo-url-verify-038** · `make demo-url` output guard in verify bundle (local dev)
 
 ## Recently completed
 

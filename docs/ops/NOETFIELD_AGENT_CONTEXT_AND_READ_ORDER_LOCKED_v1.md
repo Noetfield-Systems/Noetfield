@@ -45,6 +45,8 @@ Does **not** replace locked authority line above without founder unlock. Cloud a
 
 **Ship rule (bounded):** Founder explicit `implement` + ≤3 tasks from GTM_NEXT — not self-start from `plan.json` or GTM_PRIORITY outreach rows alone.
 
+**Locked header note:** The Authority line above ("ship from plan.json; do not idle") is **superseded for cloud agents** by bounded ship per post-audit addendum — founder unlock required to edit the locked header row.
+
 ### B. After founder sync (`ops/private/`)
 
 12. `ops/private/agent-reference/IN_CHARGE_NOW.md` → `AGENT_TEAM_STATE.yaml` → `plans/LOCKED_PLANS_INTERNAL.yaml`

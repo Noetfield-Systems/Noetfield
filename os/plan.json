@@ -3,7 +3,7 @@
   "plane": "DESIGN",
   "status": "active",
   "ship_mandate": "os/SHIP_NOW.md",
-  "ship_rule": "Bounded founder implement order + os/plan.json GTM_NEXT queue; ingest after VERIFY (required); do not edit SinaPromptOS; no self-start from plan.json alone (R-007/R-011)",
+  "ship_rule": "Bounded founder implement order + os/plan.json GTM_NEXT queue + agentic_queue (026 Hub only); ingest after VERIFY (required); do not edit SinaPromptOS; no self-start from plan.json alone (R-007/R-011)",
   "last_updated": "2026-06-10",
   "positioning_lock": "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
   "agent_context_lock": "docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md",
@@ -74,7 +74,7 @@
       "title": "1000 prompt-ready plan pack — GTM-weighted, locked index",
       "path": "docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md",
       "locked_at": "2026-06-03",
-      "mandate": "PLAN WITH NO ASF picks from QUICK_PICK / GTM_PRIORITY_100; verify with plan-with-no-asf-verify.sh"
+      "mandate": "PLAN WITH NO ASF picks from GTM_NEXT / QUICK_PICK when registry empty; GTM_PRIORITY outreach = agentic only; verify with plan-with-no-asf-verify.sh"
     }
   ],
   "next_tasks": [

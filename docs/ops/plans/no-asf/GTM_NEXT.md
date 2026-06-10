@@ -11,9 +11,18 @@ When the NF-PLAN registry is fully synced (`1000/1000 done`), pick the next **�
 
 `python3 scripts/sync-prompt-pack-status.py` marks all NF-PLAN rows `done` via `expand_done_by_pattern()` — this is **dedup / pattern propagation**, not “all engineering complete.” Real queue lives here and in `os/plan.json` `next_tasks`.
 
-## Next GTM Tier A (NF-CLOUD disk)
+## Next GTM Tier A (NF-CLOUD disk) — iter 12 proposals
 
-_No open NF-CLOUD disk items — pick next Tier A from GTM 60-day lock or founder order._
+Founder pick or bounded `implement`:
+
+1. **ship-trust-brief-procurement-036** · Trust-brief intake link on procurement buyer pack + verify  
+   Outcome: Diligence reviewers can request Governance Brief from procurement page.
+
+1. **ship-drift-blueprints-procurement-037** · Drift blueprints index href on procurement + verify  
+   Outcome: Continuous governance blueprint citations for reviewers.
+
+1. **ship-demo-url-verify-038** · `make demo-url` output guard in verify bundle (local dev)  
+   Outcome: Founder demo URL path regression-checked before share.
 
 ## Agentic only — Hub (not NF-CLOUD implement)
 
@@ -21,17 +30,17 @@ _No open NF-CLOUD disk items — pick next Tier A from GTM 60-day lock or founde
 |----|-------|---------|
 | **ship-design-partner-outreach-026** | Agentic layer | One named CIO contact + demo URL sent; tracker row updated |
 
-Evidence on disk: [DESIGN_PARTNER_PIPELINE_v1.md](../../../copilot/DESIGN_PARTNER_PIPELINE_v1.md) · [AGENTIC_COMMERCIAL_HANDOFF_v1.md](../../AGENTIC_COMMERCIAL_HANDOFF_v1.md)
+Evidence: [DESIGN_PARTNER_PIPELINE_v1.md](../../../copilot/DESIGN_PARTNER_PIPELINE_v1.md) · [AGENTIC_COMMERCIAL_HANDOFF_v1.md](../../AGENTIC_COMMERCIAL_HANDOFF_v1.md)
 
 ## Recently shipped (iter 11)
 
 | ID | Shipped |
 |----|---------|
 | ship-trust-brief-intake-wire-033 | Trust-brief intake CTA on copilot hub + verify |
-| ship-drift-sources-procurement-034 | Drift detection sources on procurement buyer pack |
-| ship-demo-rehearsal-hub-wire-035 | Demo rehearsal checklist link on copilot hub |
+| ship-drift-sources-procurement-034 | Drift detection sources on procurement |
+| ship-demo-rehearsal-hub-wire-035 | Demo rehearsal checklist on copilot hub |
 
-## Prior shipped (post-audit + iter 9–10)
+## Prior shipped (iter 9–10 + post-audit)
 
 | ID | Shipped |
 |----|---------|

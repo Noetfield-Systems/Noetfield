@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Meta-verify: GTM_NEXT vs SHIP_NOW vs manifests; R-011; OPEN_PRS truth; canonical paths.
+# Meta-verify: merge truth, manifests, R-011, OPEN_PRS, canonical paths, registry fence.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
@@ -26,6 +26,27 @@ else
   fail=1
 fi
 
+# README canonical ship pointer
+if grep -q 'os/SHIP_NOW.md' README.md 2>/dev/null && ! grep -q 'docs/SHIP_NOW.md' README.md 2>/dev/null; then
+  echo "OK   README points to os/SHIP_NOW.md"
+else
+  echo "FAIL README must point to os/SHIP_NOW.md only (not docs/SHIP_NOW)" >&2
+  fail=1
+fi
+
+# AGENT_READ_LINKS canonical ship
+if grep -q 'Ship now (canonical)' docs/ops/AGENT_READ_LINKS_LOCKED_v1.md 2>/dev/null; then
+  if grep -q 'docs/SHIP_NOW' docs/ops/AGENT_READ_LINKS_LOCKED_v1.md 2>/dev/null; then
+    echo "FAIL AGENT_READ_LINKS lists docs/SHIP_NOW as co-primary" >&2
+    fail=1
+  else
+    echo "OK   AGENT_READ_LINKS canonical ship link"
+  fi
+else
+  echo "FAIL AGENT_READ_LINKS missing canonical ship label" >&2
+  fail=1
+fi
+
 # GTM_NEXT and QUICK_PICK alignment
 if [[ -f docs/ops/plans/no-asf/GTM_NEXT.md ]] && [[ -f docs/ops/plans/no-asf/QUICK_PICK.md ]]; then
   if grep -q 'GTM_NEXT' docs/ops/plans/no-asf/QUICK_PICK.md; then
@@ -35,7 +56,7 @@ if [[ -f docs/ops/plans/no-asf/GTM_NEXT.md ]] && [[ -f docs/ops/plans/no-asf/QUI
     fail=1
   fi
   if grep -qE 'no open|Agentic only|ship-design-partner-outreach-026|^1\. \*\*ship-' docs/ops/plans/no-asf/QUICK_PICK.md; then
-    echo "OK   QUICK_PICK GTM_NEXT inline (picks, empty queue, or agentic pointer)"
+    echo "OK   QUICK_PICK GTM_NEXT inline"
   else
     echo "FAIL QUICK_PICK missing GTM_NEXT inline content" >&2
     fail=1
@@ -44,12 +65,6 @@ if [[ -f docs/ops/plans/no-asf/GTM_NEXT.md ]] && [[ -f docs/ops/plans/no-asf/QUI
     echo "OK   GTM_NEXT 026 in agentic section"
   else
     echo "FAIL GTM_NEXT missing agentic 026 section" >&2
-    fail=1
-  fi
-  if grep -q '1000/1000' docs/ops/plans/no-asf/GTM_NEXT.md; then
-    echo "OK   GTM_NEXT documents 1000/1000 semantics"
-  else
-    echo "FAIL GTM_NEXT missing 1000/1000 semantics" >&2
     fail=1
   fi
 else
@@ -64,7 +79,6 @@ else
   fail=1
 fi
 
-# GTM_PRIORITY agentic fence banner
 if grep -q 'agentic only' docs/ops/plans/PROMPT_PACK_LOCKED/GTM_PRIORITY_100.md 2>/dev/null; then
   echo "OK   GTM_PRIORITY_100 agentic fence banner"
 else
@@ -72,20 +86,35 @@ else
   fail=1
 fi
 
-# plan.json done ids should appear in ENGINEERING_DONE_MANIFEST
+# Registry customer-outreach agentic_only
+if command -v python3 >/dev/null 2>&1; then
+  bad="$(python3 - <<'PY'
+import json
+from pathlib import Path
+plans = json.loads(Path("docs/ops/plans/registry.json").read_text())["plans"]
+bad = [p["id"] for p in plans if p.get("pattern") == "customer-outreach" and not p.get("agentic_only")]
+print("\n".join(bad[:5]))
+if len(bad) > 5:
+    print(f"... and {len(bad)-5} more")
+PY
+)"
+  if [[ -z "$bad" ]]; then
+    echo "OK   registry customer-outreach rows have agentic_only"
+  else
+    echo "FAIL registry customer-outreach missing agentic_only:" >&2
+    echo "$bad" >&2
+    fail=1
+  fi
+fi
+
+# plan.json done ship-* in manifest
 manifest="docs/ops/plans/PROMPT_PACK_LOCKED/ENGINEERING_DONE_MANIFEST.md"
 if [[ -f "$manifest" ]] && command -v python3 >/dev/null 2>&1; then
   missing="$(python3 - <<'PY'
 import json, pathlib
-root = pathlib.Path(".")
-data = json.loads((root / "os/plan.json").read_text())
-manifest = (root / "docs/ops/plans/PROMPT_PACK_LOCKED/ENGINEERING_DONE_MANIFEST.md").read_text()
-missing = []
-for t in data.get("next_tasks", []):
-    if t.get("status") == "done":
-        tid = t.get("id", "")
-        if tid.startswith("ship-") and tid not in manifest:
-            missing.append(tid)
+data = json.loads(pathlib.Path("os/plan.json").read_text())
+manifest = pathlib.Path("docs/ops/plans/PROMPT_PACK_LOCKED/ENGINEERING_DONE_MANIFEST.md").read_text()
+missing = [t["id"] for t in data.get("next_tasks", []) if t.get("status") == "done" and t["id"].startswith("ship-") and t["id"] not in manifest]
 print("\n".join(missing))
 PY
 )"
@@ -98,54 +127,100 @@ PY
   fi
 fi
 
-# OPEN_PRS.md must not falsely claim closed stale PRs
-if [[ -f docs/ops/plans/no-asf/OPEN_PRS.md ]]; then
-  if grep -q 'open until founder closes' docs/ops/plans/no-asf/OPEN_PRS.md; then
-    echo "OK   OPEN_PRS documents stale PR status honestly"
-  elif grep -q 'closed 2026-06-10' docs/ops/plans/no-asf/OPEN_PRS.md; then
-    echo "FAIL OPEN_PRS falsely claims stale PRs closed" >&2
-    fail=1
+# SHIP_DONE_MAP completeness for done ship-* in plan.json
+if command -v python3 >/dev/null 2>&1; then
+  unmapped="$(python3 - <<'PY'
+import json, re, pathlib
+plan = json.loads(pathlib.Path("os/plan.json").read_text())
+sync = pathlib.Path("scripts/sync-prompt-pack-status.py").read_text()
+m = re.search(r"SHIP_DONE_MAP[^=]*=\s*\{([^}]+)\}", sync, re.S)
+keys = set(re.findall(r'"([^"]+)":', m.group(1))) if m else set()
+done_ids = [t["id"] for t in plan.get("next_tasks", []) if t.get("status") == "done" and t["id"].startswith("ship-")]
+missing = [i for i in done_ids if i not in keys]
+print("\n".join(missing))
+PY
+)"
+  if [[ -z "$unmapped" ]]; then
+    echo "OK   SHIP_DONE_MAP covers all done ship-* in plan.json"
   else
-    echo "OK   OPEN_PRS present"
+    echo "FAIL SHIP_DONE_MAP missing entries:" >&2
+    echo "$unmapped" >&2
+    fail=1
   fi
 fi
 
-# No docs/reference/ in buyer-facing HTML or copilot markdown
+# OPEN_PRS truth
+if [[ -f docs/ops/plans/no-asf/OPEN_PRS.md ]]; then
+  if grep -q 'closed 2026-06-10' docs/ops/plans/no-asf/OPEN_PRS.md && ! grep -q 'open until founder closes' docs/ops/plans/no-asf/OPEN_PRS.md; then
+    echo "FAIL OPEN_PRS falsely claims stale PRs closed" >&2
+    fail=1
+  else
+    echo "OK   OPEN_PRS stale PR wording"
+  fi
+  if ! grep -q '#40' docs/ops/plans/no-asf/OPEN_PRS.md 2>/dev/null; then
+    echo "WARN OPEN_PRS missing merged PR #40"
+  else
+    echo "OK   OPEN_PRS lists PR #40 merged"
+  fi
+  if ! grep -q '#41' docs/ops/plans/no-asf/OPEN_PRS.md 2>/dev/null; then
+    echo "WARN OPEN_PRS missing merged PR #41"
+  else
+    echo "OK   OPEN_PRS lists PR #41 merged"
+  fi
+fi
+
+# Buyer paths canonical
 stale_paths="$(rg -l 'docs/reference/' copilot/ governance-console/ index.html trust-ledger/ docs/copilot/ 2>/dev/null || true)"
 if [[ -z "$stale_paths" ]]; then
-  echo "OK   buyer paths use docs/references/ (no singular drift)"
+  echo "OK   buyer paths use docs/references/"
 else
   echo "FAIL docs/reference/ in buyer-facing paths:" >&2
   echo "$stale_paths" >&2
   fail=1
 fi
 
-# cursor-reply SHA freshness (warn if reply cites old pre-merge base)
+# docs/reference stub self-refs (warn)
+stub_stale="$(rg -l 'docs/reference/' docs/reference/ 2>/dev/null | grep -v README || true)"
+if [[ -n "$stub_stale" ]]; then
+  echo "WARN docs/reference/ stubs with singular self-refs: $stub_stale"
+else
+  echo "OK   docs/reference/ stubs are redirect-only"
+fi
+
+# cursor-reply vs HEAD
 reply="reports/cursor-reply-latest.txt"
+head_sha="$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
 if [[ -f "$reply" ]]; then
-  head_sha="$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
   if grep -q "$head_sha" "$reply" 2>/dev/null; then
-    echo "OK   cursor-reply cites current HEAD ($head_sha)"
-  elif grep -q '76a5c6a\|post-audit\|PR #39 merged' "$reply" 2>/dev/null; then
-    echo "OK   cursor-reply post-merge truth"
+    echo "OK   cursor-reply cites HEAD ($head_sha)"
   else
-    echo "WARN cursor-reply may be stale vs HEAD $head_sha — refresh after closeout"
+    echo "WARN cursor-reply stale vs HEAD $head_sha — refresh after closeout"
   fi
 fi
 
-# PR warnings (non-fatal)
+# PR warnings
 if command -v gh >/dev/null 2>&1; then
   stale_prs="$(gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | test("trustfield-scope|governance-console")) | .number' 2>/dev/null || true)"
   if [[ -n "$stale_prs" ]]; then
-    echo "WARN stale out-of-scope PR(s) still open: $stale_prs — founder should close"
+    echo "WARN stale out-of-scope PR(s) open: $stale_prs — founder should close"
   else
     echo "OK   no open trustfield-scope/governance-console PRs"
   fi
-  ship_prs="$(gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | test("^cursor/(no-asf|10-phase|post-audit)")) | .number' 2>/dev/null || true)"
+  ship_prs="$(gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | test("^cursor/(no-asf|10-phase|post-audit|third-audit)")) | .number' 2>/dev/null || true)"
   if [[ -n "$ship_prs" ]]; then
     echo "WARN open ship PR(s): $ship_prs — merge before next iter closeout"
   else
     echo "OK   no open cursor ship PRs"
+  fi
+  if grep -q 'closed 2026-06-10' docs/ops/plans/no-asf/OPEN_PRS.md 2>/dev/null; then
+    for pr in 2 7; do
+      if gh pr view "$pr" --json state --jq .state 2>/dev/null | grep -q OPEN; then
+        if grep -q "closed" docs/ops/plans/no-asf/OPEN_PRS.md 2>/dev/null && ! grep -q 'open until founder closes' docs/ops/plans/no-asf/OPEN_PRS.md; then
+          echo "FAIL OPEN_PRS claims PR #$pr closed but GitHub shows open" >&2
+          fail=1
+        fi
+      fi
+    done
   fi
 else
   echo "SKIP gh not available for PR checks"

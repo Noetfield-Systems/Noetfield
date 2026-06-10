@@ -2,7 +2,7 @@
 
 **Agent tag:** `NF-CLOUD-AGENT`  
 **Rule:** R-009 — do not pseudo-ACK missing mandatory files  
-**Updated:** 2026-06-10 (post-audit fix)
+**Updated:** 2026-06-10 (third audit fix)
 
 ---
 
@@ -35,4 +35,6 @@
 
 Then confirm paths in [AGENT_READ_LINKS_LOCKED_v1.md](./AGENT_READ_LINKS_LOCKED_v1.md) § Cloud ship.
 
-**Until sync:** NF-CLOUD blocks mandatory-SourceA claims; repo-locked paths suffice for GTM/verify work. Set `NF_REQUIRE_SOURCEA=1` locally to enforce mirror check via `verify-agent-scope.sh`.
+**Until sync:** NF-CLOUD blocks mandatory-SourceA claims; repo-locked paths suffice for GTM/verify work.
+
+**Optional enforce:** `NF_REQUIRE_SOURCEA=1 ./scripts/verify-agent-scope.sh` — fails if `ops/private/sourceA/.../SEMI_NOTICE_noetfield_cloud_v1.md` missing.

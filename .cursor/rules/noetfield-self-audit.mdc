@@ -11,7 +11,7 @@ Follow [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](../../docs/ops/AGENT_SELF_A
 
 ## Session start
 
-1. Read [.cursor/agent-memory/MEMORY_LOCKED.yaml](../agent-memory/MEMORY_LOCKED.yaml)
+1. Read [.cursor/agent-memory/MEMORY_LOCKED.yaml](../agent-memory/MEMORY_LOCKED.yaml) — includes **R-011**
 2. Read [.cursor/incidents/REGISTRY.md](../incidents/REGISTRY.md) open items
 3. Apply [.cursor/skills/SKILL-001-scope-gate-before-work.md](../skills/SKILL-001-scope-gate-before-work.md)
 4. Apply [.cursor/skills/SKILL-008-agentic-commercial-boundary.md](../skills/SKILL-008-agentic-commercial-boundary.md)

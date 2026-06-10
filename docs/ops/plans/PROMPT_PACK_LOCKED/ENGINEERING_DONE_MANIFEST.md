@@ -94,13 +94,21 @@ Shipped capabilities mapped to registry indices. Run `python3 scripts/sync-promp
 | ship-drift-sources-procurement-034 | Drift sources on procurement | `copilot/procurement/index.html` |
 | ship-demo-rehearsal-hub-wire-035 | Demo rehearsal on hub | `copilot/index.html` |
 
+## Third audit fix (canonical SHIP_NOW + registry fence)
+
+| Area | Shipped | Evidence |
+|------|---------|----------|
+| Canonical SHIP_NOW | README + AGENT_READ_LINKS → `os/SHIP_NOW.md` | `README.md`, `docs/SHIP_NOW.md` |
+| Registry R-011 fence | `agentic_only` on customer-outreach | `registry.json`, `patch-registry-agentic-only.py` |
+| Coherence hardening | SHIP_DONE_MAP + README gate | `scripts/verify-no-asf-coherence.sh` |
+
 ## Post-audit fix (workflow + paths + verify hardening)
 
 | Area | Shipped | Evidence |
 |------|---------|----------|
 | Workflow reconcile | 1000-pack overlay, read-order rules, plan.json ship_rule | `NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md` |
 | R-011 GTM_PRIORITY fence | Agentic-only banner + customer-outreach filter | `GTM_PRIORITY_100.md`, `sync-prompt-pack-status.py` |
-| SHIP_DONE_MAP 023–032 | Registry propagation for iter 8–9 + audit | `scripts/sync-prompt-pack-status.py` |
+| SHIP_DONE_MAP 023–035 | Registry propagation for iter 8–11 + audit | `scripts/sync-prompt-pack-status.py` |
 | Path canonicalization | `docs/references/` in buyer md + procurement ZIP | `copilot/`, `procurement_pack.py` |
 | Coherence hardening | Manifest + OPEN_PRS + path checks | `scripts/verify-no-asf-coherence.sh` |
 
