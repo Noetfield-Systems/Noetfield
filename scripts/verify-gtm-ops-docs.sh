@@ -26,6 +26,7 @@ check_url() {
 check_url "${BASE}/docs/copilot/DESIGN_PARTNER_PIPELINE_v1.md" "pipeline doc"
 check_url "${BASE}/docs/ops/DEMO_REHEARSAL_CHECKLIST_v1.md" "demo rehearsal doc"
 check_url "${BASE}/docs/copilot/BUYER_DEBRIEF_TEMPLATE_v1.md" "buyer debrief doc"
+check_url "${BASE}/docs/strategy/channel-outreach/bc-ai-for-all-2026.md" "bc-ai outreach doc"
 
 for path in "/copilot/pilot/" "/copilot/demo/"; do
   html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}${path}" 2>/dev/null || true)"
@@ -39,6 +40,12 @@ for path in "/copilot/pilot/" "/copilot/demo/"; do
     echo "OK   ${path} rehearsal link text"
   else
     echo "FAIL ${path} missing demo rehearsal" >&2
+    fail=1
+  fi
+  if echo "$html" | grep -qF "bc-ai-for-all-2026.md"; then
+    echo "OK   ${path} bc-ai outreach link"
+  else
+    echo "FAIL ${path} missing bc-ai-for-all-2026.md link" >&2
     fail=1
   fi
 done

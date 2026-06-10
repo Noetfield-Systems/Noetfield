@@ -31,9 +31,13 @@ SHIP_DONE_MAP: dict[str, list[int]] = {
     "ship-audit-export-ux-001": [16],
     "ship-demo-confidence-002": [4, 54],
     "ship-www-tle-copy-003": [6, 26],
-    "ship-gtm-ops-www-wire-013": [14, 406],
-    "ship-buyer-debrief-template-014": [406, 406],
-    "ship-tier-gate-verify-015": [407, 407],
+    "ship-gtm-ops-www-wire-013": [2, 21, 22, 42, 62],
+    "ship-buyer-debrief-template-014": [6, 26, 46, 66, 86],
+    "ship-tier-gate-verify-015": [7, 27, 47, 67, 87],
+    "ship-bc-ai-for-all-outreach-016": [21, 41, 61, 81],
+    "ship-registry-sync-iter6-017": [8, 28, 48, 68, 88],
+    "ship-bc-ai-www-wire-018": [14, 34, 54, 74, 94],
+    "ship-dual-brand-boundary-019": [3, 23, 43, 63, 83],
 }
 
 # Explicit COMPLETED_ON_MAIN NF-PLAN ids

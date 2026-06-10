@@ -4,7 +4,11 @@
 
 ## Active queue (`next_tasks`)
 
-Shipped 2026-06-06 (no ASF): audit export UX, demo confidence score, trust-ledger www CTAs. Pick next from `os/plans/REGISTRY.json` or founder order.
+**Shipped iter 6 (2026-06-06):** registry sync + QUICK_PICK refresh, BC AI www wire, dual-brand boundary matrix.
+
+**Prior:** iter 5 GTM ops wire, buyer debrief, tier-gate verify, BC AI outreach doc, incidents + SKILL-007.
+
+Pick next from [plans/no-asf/QUICK_PICK.md](docs/ops/plans/no-asf/QUICK_PICK.md) after `make sync-prompt-pack`.
 
 ## Shipped waves
 

@@ -333,7 +333,7 @@
       "domain": "workspace",
       "title": "Test workspace for ship ops (T1, #0027)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0027.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0028",
@@ -343,7 +343,7 @@
       "domain": "export",
       "title": "Document export for ship ops (T1, #0028)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0028.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0029",
@@ -403,7 +403,7 @@
       "domain": "api",
       "title": "Document api for ship ops (T1, #0034)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0034.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0035",
@@ -473,7 +473,7 @@
       "domain": "audit",
       "title": "Integrate audit for ship ops (T1, #0041)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0041.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0042",
@@ -483,7 +483,7 @@
       "domain": "workflow",
       "title": "Test workflow for ship ops (T1, #0042)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0042.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0043",
@@ -493,7 +493,7 @@
       "domain": "rag",
       "title": "Document rag for ship ops (T1, #0043)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0043.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0044",
@@ -533,7 +533,7 @@
       "domain": "ui",
       "title": "Integrate ui for ship ops (T1, #0047)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0047.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0048",
@@ -543,7 +543,7 @@
       "domain": "tenant",
       "title": "Test tenant for ship ops (T1, #0048)",
       "path": "os/plans/phase-0-ship-ops/T1/nf-future-0048.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0049",
@@ -603,7 +603,7 @@
       "domain": "copilot",
       "title": "Instrument copilot for ship ops (T2, #0054)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0054.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0055",
@@ -673,7 +673,7 @@
       "domain": "pilot",
       "title": "Extend pilot for ship ops (T2, #0061)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0061.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0062",
@@ -683,7 +683,7 @@
       "domain": "sample",
       "title": "Expose sample for ship ops (T2, #0062)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0062.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0063",
@@ -693,7 +693,7 @@
       "domain": "tle",
       "title": "Instrument tle for ship ops (T2, #0063)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0063.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0064",
@@ -733,7 +733,7 @@
       "domain": "workflow",
       "title": "Extend workflow for ship ops (T2, #0067)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0067.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0068",
@@ -743,7 +743,7 @@
       "domain": "rag",
       "title": "Expose rag for ship ops (T2, #0068)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0068.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0069",
@@ -803,7 +803,7 @@
       "domain": "procurement",
       "title": "Expose procurement for ship ops (T2, #0074)",
       "path": "os/plans/phase-0-ship-ops/T2/nf-future-0074.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0075",
@@ -873,7 +873,7 @@
       "domain": "policy",
       "title": "Optimize policy for ship ops (T3, #0081)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0081.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0082",
@@ -893,7 +893,7 @@
       "domain": "ingest",
       "title": "Validate ingest for ship ops (T3, #0083)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0083.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0084",
@@ -933,7 +933,7 @@
       "domain": "sample",
       "title": "Optimize sample for ship ops (T3, #0087)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0087.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0088",
@@ -943,7 +943,7 @@
       "domain": "tle",
       "title": "Harden tle for ship ops (T3, #0088)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0088.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0089",
@@ -1003,7 +1003,7 @@
       "domain": "risk",
       "title": "Harden risk for ship ops (T3, #0094)",
       "path": "os/plans/phase-0-ship-ops/T3/nf-future-0094.md",
-      "status": "backlog"
+      "status": "done"
     },
     {
       "id": "nf-future-0095",

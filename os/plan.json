@@ -79,6 +79,24 @@
   ],
   "next_tasks": [
     {
+      "id": "ship-registry-sync-iter6-017",
+      "title": "Registry sync + QUICK_PICK refresh for iter 5-6 ships",
+      "plan": "scripts/sync-prompt-pack-status.py",
+      "status": "done"
+    },
+    {
+      "id": "ship-bc-ai-www-wire-018",
+      "title": "Wire BC AI outreach doc into copilot pilot/demo + verify",
+      "plan": "docs/strategy/channel-outreach/bc-ai-for-all-2026.md",
+      "status": "done"
+    },
+    {
+      "id": "ship-dual-brand-boundary-019",
+      "title": "Dual-brand govern-first handoff in conflict matrix + verify",
+      "plan": "docs/spec/trustfield-noetfield-conflict-matrix.md",
+      "status": "done"
+    },
+    {
       "id": "ship-bc-ai-for-all-outreach-016",
       "title": "B.C. + federal AI for All Noetfield alignment one-pager + outreach copy",
       "plan": "docs/strategy/channel-outreach/bc-ai-for-all-2026.md",
