@@ -70,7 +70,7 @@ Cloud agent edited files on disk (gitignored `ops/private/` research, tracked Gi
 | 2 | Add **SKILL-006** ask-before-implement | Done (this filing) |
 | 3 | Add cursor rule `noetfield-ask-before-edit.mdc` | Done (this filing) |
 | 4 | File this incident + registry row | Done |
-| 5 | Reconcile `noetfield-ship-first.mdc` vs R-007 | **Pending founder** |
+| 5 | Reconcile `noetfield-ship-first.mdc` vs R-007 | **Done** — SKILL-007 + `noetfield-rule-conflict-resolution.mdc` |
 | 6 | Merge/reject PR #32, #33 only on founder order | **Pending founder** |
 
 ---

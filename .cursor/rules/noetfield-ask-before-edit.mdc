@@ -36,6 +36,6 @@ Understand → Propose options → ASK founder → Wait for order → Bounded ed
 
 INCIDENT-2026-06-06-002 through 005 — see [.cursor/incidents/REGISTRY.md](../incidents/REGISTRY.md)
 
-## Tension (founder resolves)
+## Rule conflicts
 
-`noetfield-ship-first.mdc` does **not** override this rule. Ship-first applies only **after** founder explicitly orders a ship task for the session.
+On any conflict with ship-first, no-ASF, or bare `IMPLEMENT` → [.cursor/skills/SKILL-007-auto-conflict-resolution.md](../skills/SKILL-007-auto-conflict-resolution.md) + [noetfield-rule-conflict-resolution.mdc](noetfield-rule-conflict-resolution.mdc). **This rule wins** until founder T0 order.

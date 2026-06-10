@@ -4,6 +4,8 @@
 
 **Authority:** INCIDENT-2026-06-06-005 · MEMORY_LOCKED R-007 · R-008
 
+**On rule conflict:** Run [SKILL-007-auto-conflict-resolution.md](./SKILL-007-auto-conflict-resolution.md) first.
+
 ---
 
 ## Before any disk edit

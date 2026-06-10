@@ -17,6 +17,7 @@
 | No edit before permission | R-007 · INCIDENT-002 |
 | Always ask next move | R-008 · INCIDENT-005 |
 | Block if mandatory SourceA missing | R-009 · INCIDENT-003 |
+| Auto conflict resolution | R-010 · SKILL-007 · `noetfield-rule-conflict-resolution.mdc` |
 | Noetfield only | R-001 · INCIDENT-001 (closed) |
 
 ---
@@ -53,7 +54,7 @@
 | SourceA relationship lock Option A | Founder Desktop |
 | RESEARCH enforcer saves | Founder Mac |
 | TrustField demos / CanadaBuys | TrustField chat |
-| Reconcile ship-first vs ask-first | Founder |
+| Reconcile ship-first vs ask-first | **Done** — R-010 / SKILL-007 |
 
 ---
 
