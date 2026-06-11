@@ -16,36 +16,18 @@ When the NF-PLAN registry is fully synced (`1000/1000 done`), pick the next **�
 
 `ship-*-NNN` = GTM Tier A queue (`next_tasks`). `nf-*-NNN` in engineering manifest = product waves — numeric suffix overlap is intentional (e.g. `ship-trust-brief-demo-042` ≠ `nf-homepage-design-partner-042`).
 
-## Next GTM Tier A (NF-CLOUD disk) — iter 19 proposals
+## Next GTM Tier A (NF-CLOUD disk) — iter 20 proposals
 
 Founder pick or bounded `implement`:
 
-1. **ship-procurement-openapi-verify-057** · Verify `/openapi.json` returns 200 in gtm-ops bundle  
-   Outcome: Production API schema reachable from buyer verify.
-
-1. **ship-services-governance-readme-openapi-058** · services/governance README cites `/openapi.json` path  
-   Outcome: Prod README matches procurement buyer link.
-
-1. **ship-tenth-audit-merge-rule-059** · Document tenth-audit branch in ENGINEERING_DONE_MANIFEST closeout template  
-   Outcome: Audit iteration naming stays traceable in manifest.
-
-_Pending ship: [PR #48](https://github.com/kazemnezhadsina144-dot/Noetfield/pull/48) (`cursor/tenth-audit-iter18-37f0`)._
-
-## Preview — iter 19 (eleventh audit, after PR #48 merge)
-
-_See [PLAN_ROADMAP.md](./PLAN_ROADMAP.md) § Eleventh audit. Do not flip QUICK_PICK until iter 18 lands on `main`._
-
-1. **ship-procurement-openapi-verify-057** · Verify `/openapi.json` returns 200 in gtm-ops bundle  
-1. **ship-services-governance-readme-openapi-058** · services/governance README cites `/openapi.json` path  
-1. **ship-tenth-audit-merge-rule-059** · Document tenth-audit branch in ENGINEERING_DONE_MANIFEST closeout template  
-
-## Forward seed — iter 20 (twelfth audit proposals)
-
-_Activate after iter 19 ships._
-
 1. **ship-governance-readme-www-060** · Verify `/services/governance/README.md` returns 200 on :13080  
+   Outcome: Procurement README link is reachable in dev verify.
+
 1. **ship-api-status-openapi-field-061** · Verify `GET /api/status` includes `"openapi": "/openapi.json"`  
+   Outcome: Status endpoint documents public schema path.
+
 1. **ship-eleventh-audit-merge-rule-062** · Document eleventh-audit branch in manifest closeout template  
+   Outcome: Audit iteration naming stays traceable after iter 19.
 
 ## Agentic only — Hub (not NF-CLOUD implement)
 
@@ -54,6 +36,14 @@ _Activate after iter 19 ships._
 | **ship-design-partner-outreach-026** | Agentic layer | One named CIO contact + demo URL sent; tracker row updated |
 
 Evidence: [DESIGN_PARTNER_PIPELINE_v1.md](../../../copilot/DESIGN_PARTNER_PIPELINE_v1.md) · [AGENTIC_COMMERCIAL_HANDOFF_v1.md](../../AGENTIC_COMMERCIAL_HANDOFF_v1.md)
+
+## Recently shipped (iter 19)
+
+| ID | Shipped |
+|----|---------|
+| ship-procurement-openapi-verify-057 | `/openapi.json` 200 + JSON body in gtm-ops verify |
+| ship-services-governance-readme-openapi-058 | README `/openapi.json` cite + procurement parity guards |
+| ship-tenth-audit-merge-rule-059 | Audit closeout template + tenth-audit manifest rows |
 
 ## Recently shipped (iter 18)
 

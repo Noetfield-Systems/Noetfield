@@ -19,6 +19,7 @@ Schema convergence between dev and prod stacks is a future engineering wave — 
 
 - OpenAPI schema: `/openapi.json` (filtered public surface for institutional buyers)
 - Status: `GET /api/status` includes `openapi` path
+- Buyer link: [/copilot/procurement/](/copilot/procurement/) cites this README and `/openapi.json`
 
 ## Key modules
 

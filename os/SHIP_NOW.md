@@ -2,19 +2,17 @@
 
 **Ship rule:** Bounded founder `implement` + [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) queue — see `os/plan.json` `ship_rule`. Ingest required after VERIFY. No self-start (R-007/R-011).
 
-**Upgraded plans:** [PLAN_ROADMAP.md](docs/ops/plans/no-asf/PLAN_ROADMAP.md) — eleventh audit 10-phase, iter 20–22 seed, PR #48/#49 order.
+**Upgraded plans:** [PLAN_ROADMAP.md](docs/ops/plans/no-asf/PLAN_ROADMAP.md) — audit cadence + forward queue.
 
 ## Active queue (`next_tasks`)
 
-**Next iter 19:** see [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) (OpenAPI verify, README OpenAPI cite, audit manifest).
+**Next iter 20:** see [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) (README www 200, api/status openapi field, eleventh-audit manifest).
 
-**Pending tenth audit (PR #48):** iter 18 — merge when ready.
+**Pending eleventh audit:** iter 18+19 bundle — supersedes PR #48; merge when ready.
+
+**Shipped iter 19 (2026-06-10):** OpenAPI 200 verify, README parity guards, audit manifest template.
 
 **Shipped iter 18 (2026-06-10):** checkpoint verify hardening, OpenAPI bridge, MERGED_WINDOW config.
-
-**Pending tenth audit (PR #48):** iter 18 bundle on `cursor/tenth-audit-iter18-37f0` — merge first.
-
-**Preview iter 19+:** [PLAN_ROADMAP.md](docs/ops/plans/no-asf/PLAN_ROADMAP.md) (eleventh audit 057–059, forward queue).
 
 **Shipped iter 17 (2026-06-10):** services/governance blueprint bridge, procurement checkpoint copy, rolling merged PR window 5.
 

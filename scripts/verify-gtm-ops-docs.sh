@@ -151,6 +151,29 @@ else
   fail=1
 fi
 
+check_url "${BASE}/openapi.json" "public openapi schema"
+openapi_body="$(curl -sS --connect-timeout 5 "${BASE}/openapi.json" 2>/dev/null || true)"
+if echo "$openapi_body" | grep -qF '"openapi"'; then
+  echo "OK   public openapi schema JSON body"
+else
+  echo "FAIL public openapi schema missing openapi key" >&2
+  fail=1
+fi
+
+gov_readme="${ROOT}/services/governance/README.md"
+if grep -qF '/openapi.json' "$gov_readme" 2>/dev/null; then
+  echo "OK   services/governance README cites /openapi.json"
+else
+  echo "FAIL services/governance README missing /openapi.json cite" >&2
+  fail=1
+fi
+if echo "$proc_html" | grep -qF '/openapi.json' && grep -qF '/openapi.json' "$gov_readme" 2>/dev/null; then
+  echo "OK   procurement + README openapi path parity"
+else
+  echo "FAIL procurement/README openapi path mismatch" >&2
+  fail=1
+fi
+
 hub_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/copilot/" 2>/dev/null || true)"
 if echo "$hub_html" | grep -qF "PROCUREMENT_ONE_PAGER"; then
   echo "OK   /copilot/ procurement one-pager link"

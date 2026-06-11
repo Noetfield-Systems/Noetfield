@@ -98,6 +98,31 @@ Shipped capabilities mapped to registry indices. Run `python3 scripts/sync-promp
 
 `ship-*-NNN` (GTM `next_tasks`) and `nf-*-NNN` (product waves above) may share numeric suffixes — different namespaces, not duplicate shipped work.
 
+## Audit iteration closeout template
+
+| Field | Example |
+|-------|---------|
+| PR # | #51 |
+| Branch | `cursor/eleventh-audit-iter19-37f0` |
+| Merge SHA | _(post-merge `main`)_ |
+| Ship IDs | 057–059 |
+| Evidence | `verify-gtm-ops-docs.sh`, `ENGINEERING_DONE_MANIFEST.md`, `OPEN_PRS.md` |
+
+## PLAN WITH NO ASF iter 19 (057–059)
+
+| next_tasks id | Shipped | Evidence |
+|---------------|---------|----------|
+| ship-procurement-openapi-verify-057 | OpenAPI 200 + JSON body verify | `scripts/verify-gtm-ops-docs.sh` |
+| ship-services-governance-readme-openapi-058 | README openapi cite + parity | `services/governance/README.md` |
+| ship-tenth-audit-merge-rule-059 | Audit closeout template + tenth-audit rows | `ENGINEERING_DONE_MANIFEST.md` |
+
+## Eleventh audit fix (post–PR #48 truth + iter 19)
+
+| Area | Shipped | Evidence |
+|------|---------|----------|
+| Post-merge truth | OPEN_PRS #48 superseded; eleventh bundle | `OPEN_PRS.md`, `COMPLETED_ON_MAIN.md` |
+| Iter 19 verify | OpenAPI 200, README guards, manifest template | `verify-gtm-ops-docs.sh`, `verify-no-asf-coherence.sh` |
+
 ## PLAN WITH NO ASF iter 18 (054–056)
 
 | next_tasks id | Shipped | Evidence |
@@ -112,6 +137,7 @@ Shipped capabilities mapped to registry indices. Run `python3 scripts/sync-promp
 |------|---------|----------|
 | Post-merge truth | OPEN_PRS #47 merged @ 46a36a3 | `OPEN_PRS.md`, `COMPLETED_ON_MAIN.md` |
 | Iter 18 verify + www | Checkpoint verify, OpenAPI bridge, window config | `verify-gtm-ops-docs.sh`, `verify-no-asf-coherence.sh` |
+| Branch | `cursor/tenth-audit-iter18-37f0` (PR #48) | Superseded by eleventh-audit bundle |
 
 ## PLAN WITH NO ASF iter 17 (051–053)
 

@@ -68,10 +68,10 @@ if [[ -f docs/ops/plans/no-asf/GTM_NEXT.md ]] && [[ -f docs/ops/plans/no-asf/QUI
     echo "FAIL QUICK_PICK missing GTM_NEXT inline content" >&2
     fail=1
   fi
-  if grep -q 'ship-procurement-openapi-verify-057' docs/ops/plans/no-asf/GTM_NEXT.md && grep -q 'ship-procurement-openapi-verify-057' docs/ops/plans/no-asf/QUICK_PICK.md; then
-    echo "OK   QUICK_PICK mirrors GTM_NEXT iter 19"
+  if grep -q 'ship-governance-readme-www-060' docs/ops/plans/no-asf/GTM_NEXT.md && grep -q 'ship-governance-readme-www-060' docs/ops/plans/no-asf/QUICK_PICK.md; then
+    echo "OK   QUICK_PICK mirrors GTM_NEXT iter 20"
   else
-    echo "FAIL QUICK_PICK out of sync with GTM_NEXT iter 19 picks" >&2
+    echo "FAIL QUICK_PICK out of sync with GTM_NEXT iter 20 picks" >&2
     fail=1
   fi
   if grep -q 'Agentic only' docs/ops/plans/no-asf/GTM_NEXT.md && grep -q 'ship-design-partner-outreach-026' docs/ops/plans/no-asf/GTM_NEXT.md; then
@@ -211,7 +211,7 @@ if [[ -f docs/ops/plans/no-asf/OPEN_PRS.md ]]; then
   if command -v gh >/dev/null 2>&1; then
     pending_section="$(awk '/^## Pending ship PR/,/^## Recently merged/' docs/ops/plans/no-asf/OPEN_PRS.md)"
     open_prs_doc="$(echo "$pending_section" | grep -E '^\| #[0-9]+ \|' | grep -oE '#[0-9]+' | tr -d '#' | sort -u | tr '\n' ' ' || true)"
-    ship_prs_gh="$(gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | test("^cursor/(no-asf|10-phase|post-audit|fourth-audit|fifth-audit|sixth-audit|seventh-audit|eighth-audit|ninth-audit|tenth-audit)")) | .number' 2>/dev/null | sort -u | tr '\n' ' ' || true)"
+    ship_prs_gh="$(gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | test("^cursor/(no-asf|10-phase|post-audit|fourth-audit|fifth-audit|sixth-audit|seventh-audit|eighth-audit|ninth-audit|tenth-audit|eleventh-audit)")) | .number' 2>/dev/null | sort -u | tr '\n' ' ' || true)"
     open_prs_doc_trim="$(echo "$open_prs_doc" | xargs)"
     ship_prs_gh_trim="$(echo "$ship_prs_gh" | xargs)"
     if [[ -z "$open_prs_doc_trim" && -z "$ship_prs_gh_trim" ]]; then

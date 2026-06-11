@@ -79,6 +79,24 @@
   ],
   "next_tasks": [
     {
+      "id": "ship-procurement-openapi-verify-057",
+      "title": "Verify /openapi.json returns 200 in gtm-ops bundle",
+      "plan": "scripts/verify-gtm-ops-docs.sh",
+      "status": "done"
+    },
+    {
+      "id": "ship-services-governance-readme-openapi-058",
+      "title": "services/governance README /openapi.json cite + verify guards",
+      "plan": "services/governance/README.md",
+      "status": "done"
+    },
+    {
+      "id": "ship-tenth-audit-merge-rule-059",
+      "title": "Audit closeout template + tenth-audit manifest rows",
+      "plan": "docs/ops/plans/PROMPT_PACK_LOCKED/ENGINEERING_DONE_MANIFEST.md",
+      "status": "done"
+    },
+    {
       "id": "ship-procurement-checkpoint-verify-054",
       "title": "Hardened procurement checkpoint verify guards (heading, verify script, audit loop)",
       "plan": "scripts/verify-gtm-ops-docs.sh",

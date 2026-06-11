@@ -13,10 +13,10 @@ When the founder says **PLAN WITH NO ASF** or **upgrade plans**, start here afte
 | Item | State |
 |------|-------|
 | `main` | @ `46a36a3` — ninth audit + iter 17 merged (PR #47) |
-| Pending GTM ship | [PR #48](https://github.com/kazemnezhadsina144-dot/Noetfield/pull/48) — tenth audit iter 18 (054–056) |
+| Pending GTM ship | `cursor/eleventh-audit-iter19-37f0` — iter 18+19 bundle (supersedes PR #48) |
 | Parallel product | [PR #49](https://github.com/kazemnezhadsina144-dot/Noetfield/pull/49) — design-token migration (not GTM merge rule) |
-| Active queue (main) | **iter 18** (054–056) — pending PR #48 |
-| Next after #48 | **iter 19** (057–059) — eleventh audit bundle |
+| Shipped on branch | **iter 18** (054–056) + **iter 19** (057–059) |
+| Active queue | **iter 20** (060–062) — twelfth audit seed |
 | Verify gate | `./scripts/plan-with-no-asf-verify.sh` |
 | Agentic P0 | `ship-design-partner-outreach-026` — Hub only (R-011) |
 
