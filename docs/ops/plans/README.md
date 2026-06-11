@@ -9,7 +9,9 @@
 |------|---------|
 | [../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md](../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md) | **LOCKED** — 1000 prompt pack master index |
 | [PROMPT_PACK_LOCKED/](./PROMPT_PACK_LOCKED/) | GTM 100, agent ops 50, drift 100, tier gates, sources |
+| [no-asf/PLAN_ROADMAP.md](./no-asf/PLAN_ROADMAP.md) | **PLAN WITH NO ASF** — upgraded roadmap (audits, iter 19–22) |
 | [no-asf/QUICK_PICK.md](./no-asf/QUICK_PICK.md) | **PLAN WITH NO ASF** — next 25 GTM-weighted plans |
+| [no-asf/GTM_NEXT.md](./no-asf/GTM_NEXT.md) | Active Tier A queue (≤3 tasks) |
 | [BRIDGE_NF_PLAN_TO_NF_FUTURE.json](./BRIDGE_NF_PLAN_TO_NF_FUTURE.json) | NF-PLAN ↔ nf-future crosswalk |
 | [INDEX.md](./INDEX.md) | Counts, phase/tier map |
 | [registry.json](./registry.json) | All 1000 plans (machine-readable, v2 prompt-ready) |

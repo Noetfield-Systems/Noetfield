@@ -149,7 +149,7 @@ When `sync-prompt-pack-status.py` reports **1000/1000 `done`**, the registry is 
 | Era | Queue source | Pick rule |
 |-----|--------------|-----------|
 | Pre-sync | `QUICK_PICK.md` top 25 from registry backlog | `gtm_priority` ascending |
-| Post-sync | [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) + `os/plan.json` `next_tasks` | ≤3 Tier A www/verify tasks |
+| Post-sync | [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) + [PLAN_ROADMAP.md](./plans/no-asf/PLAN_ROADMAP.md) + `os/plan.json` `next_tasks` | ≤3 Tier A www/verify tasks |
 | Agentic commercial | Hub / agentic layer only | e.g. `ship-design-partner-outreach-026` — **not** NF-CLOUD disk |
 
 **Verify:** `./scripts/plan-with-no-asf-verify.sh` includes `verify-no-asf-coherence.sh` for queue/doc alignment.
@@ -160,7 +160,7 @@ When `sync-prompt-pack-status.py` reports **1000/1000 `done`**, the registry is 
 |------|------------------|
 | 0 | MEMORY_LOCKED + SKILL-001 + SKILL-007 — stop after propose if no founder `implement` |
 | 1 | Merge open ship PR **only inside approved implement bundle** |
-| 2 | Read `os/SHIP_NOW.md` + [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) + QUICK_PICK |
+| 2 | Read `os/SHIP_NOW.md` + [PLAN_ROADMAP.md](./plans/no-asf/PLAN_ROADMAP.md) + GTM_NEXT + QUICK_PICK |
 | 3 | Pick **≤3** from **GTM_NEXT** Tier A — exclude agentic-only (026) |
 | 4 | Write `next_tasks` in `os/plan.json` **after** founder `implement` |
 | 5–8 | Unchanged (branch → verify → sync → cursor-reply → ASK) |
@@ -172,3 +172,4 @@ When `sync-prompt-pack-status.py` reports **1000/1000 `done`**, the registry is 
 - [docs/ops/plans/README.md](./plans/README.md)
 - [os/LOCKED_REFERENCE_INDEX.md](../../os/LOCKED_REFERENCE_INDEX.md)
 - [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md)
+- [PLAN_ROADMAP.md](./plans/no-asf/PLAN_ROADMAP.md)
