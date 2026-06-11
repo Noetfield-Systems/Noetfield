@@ -53,7 +53,7 @@ export default function CognitiveDashboardPage() {
       </section>
 
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-border bg-panel p-4">
+        <div className="rounded-xl border border-border/[0.11] bg-panel/[0.055] p-4">
           <p className="text-xs uppercase tracking-wide text-muted">Governance API</p>
           <p className="mt-2 font-mono text-xs text-white/90">{apiBaseLabel()}</p>
           <p className="mt-2 text-sm">
@@ -74,7 +74,7 @@ export default function CognitiveDashboardPage() {
         </div>
         <Link
           href="/audit"
-          className="rounded-xl border border-border bg-panel p-4 transition hover:border-accent/40"
+          className="rounded-xl border border-border/[0.11] bg-panel/[0.055] p-4 transition hover:border-accent/40"
         >
           <p className="text-xs uppercase tracking-wide text-muted">Compliance</p>
           <p className="mt-2 text-lg font-medium text-white">Audit log</p>
@@ -82,7 +82,7 @@ export default function CognitiveDashboardPage() {
         </Link>
         <Link
           href="/trust-ledger"
-          className="rounded-xl border border-border bg-panel p-4 transition hover:border-accent/40"
+          className="rounded-xl border border-border/[0.11] bg-panel/[0.055] p-4 transition hover:border-accent/40"
         >
           <p className="text-xs uppercase tracking-wide text-muted">Trust Ledger</p>
           <p className="mt-2 text-lg font-medium text-white">TLE workspace</p>
@@ -90,7 +90,7 @@ export default function CognitiveDashboardPage() {
         </Link>
         <a
           href={platformConsoleHref()}
-          className="rounded-xl border border-border bg-panel p-4 transition hover:border-accent/40"
+          className="rounded-xl border border-border/[0.11] bg-panel/[0.055] p-4 transition hover:border-accent/40"
         >
           <p className="text-xs uppercase tracking-wide text-muted">Platform console</p>
           <p className="mt-2 text-lg font-medium text-white">Governance console</p>

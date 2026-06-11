@@ -13,7 +13,7 @@ function navClass(active: boolean): string {
 export function Shell({ children, active }: ShellProps) {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-border bg-panel/80 backdrop-blur">
+      <header className="border-b border-border/[0.11] bg-panel/[0.044] backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
           <Link href="/cognitive-dashboard" className="flex items-center gap-3 hover:opacity-90">
             <img

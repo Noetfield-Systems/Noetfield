@@ -38,6 +38,15 @@
   --leading-body: 1.65;
   --tracking-caps: 0.12em;
 
+  /* RGB channels — Tailwind opacity modifiers (governance-console) */
+  --bg0-rgb: 7 7 11;
+  --bg1-rgb: 11 11 20;
+  --gold-rgb: 200 163 73;
+  --white-rgb: 255 255 255;
+  --muted-rgb: 185 187 207;
+  --muted2-rgb: 142 145 173;
+  --ok-rgb: 45 227 138;
+
   color-scheme: dark;
 }
 

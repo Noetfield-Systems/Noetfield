@@ -55,7 +55,7 @@ export default function TrustLedgerListPage() {
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="rounded-lg border border-border bg-panel px-3 py-2 text-sm"
+          className="rounded-lg border border-border/[0.11] bg-panel/[0.055] px-3 py-2 text-sm"
         >
           <option value="">All statuses</option>
           <option value="PendingApproval">Pending approval</option>
@@ -65,7 +65,7 @@ export default function TrustLedgerListPage() {
         </select>
         <button
           type="submit"
-          className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-white/5"
+          className="rounded-lg border border-border/[0.11] px-4 py-2 text-sm hover:bg-white/5"
         >
           Filter
         </button>
@@ -75,7 +75,7 @@ export default function TrustLedgerListPage() {
             setStatus("");
             load();
           }}
-          className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-white/5"
+          className="rounded-lg border border-border/[0.11] px-4 py-2 text-sm hover:bg-white/5"
         >
           Reset
         </button>
@@ -104,7 +104,7 @@ export default function TrustLedgerListPage() {
           {rows.map((row) => (
             <li
               key={row.tle_id}
-              className="rounded-lg border border-border bg-panel/60 px-4 py-3 hover:border-accent/40"
+              className="rounded-lg border border-border/[0.11] bg-panel/[0.055]/[0.033] px-4 py-3 hover:border-accent/40"
             >
               <Link href={`/trust-ledger/${encodeURIComponent(row.tle_id)}`} className="block">
                 <div className="flex flex-wrap items-center justify-between gap-2">

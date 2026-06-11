@@ -60,7 +60,7 @@ export default function ResultPage() {
               <RiskMeter score={record.risk_score} />
             </div>
           </div>
-          <section className="rounded-xl border border-border bg-panel p-5">
+          <section className="rounded-xl border border-border/[0.11] bg-panel/[0.055] p-5">
             <h3 className="mb-2 text-sm font-medium uppercase text-muted">Reason</h3>
             <ul className="list-disc space-y-1 pl-5 text-sm text-gray-200">
               {record.reason.map((r) => (
@@ -68,7 +68,7 @@ export default function ResultPage() {
               ))}
             </ul>
           </section>
-          <section className="rounded-xl border border-border bg-panel p-5">
+          <section className="rounded-xl border border-border/[0.11] bg-panel/[0.055] p-5">
             <h3 className="mb-2 text-sm font-medium uppercase text-muted">Conditions</h3>
             <ul className="list-disc space-y-1 pl-5 text-sm text-gray-200">
               {record.conditions.map((c) => (
@@ -76,7 +76,7 @@ export default function ResultPage() {
               ))}
             </ul>
           </section>
-          <section className="rounded-xl border border-border bg-panel p-5 text-sm">
+          <section className="rounded-xl border border-border/[0.11] bg-panel/[0.055] p-5 text-sm">
             <p>
               <span className="text-muted">Actor:</span> {record.actor}
             </p>

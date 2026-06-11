@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-border py-8">
+    <footer className="mt-16 border-t border-border/[0.11] py-8">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 text-xs text-muted-2 sm:px-6">
         <p>
           Noetfield — pre-execution governance · no custody or payments ·{" "}

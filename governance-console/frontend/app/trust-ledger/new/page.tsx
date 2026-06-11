@@ -83,7 +83,7 @@ export default function TrustLedgerNewPage() {
             id="template"
             value={templateId}
             onChange={(e) => setTemplateId(e.target.value)}
-            className="mt-2 w-full max-w-md rounded-lg border border-border bg-panel px-3 py-2 text-sm"
+            className="mt-2 w-full max-w-md rounded-lg border border-border/[0.11] bg-panel/[0.055] px-3 py-2 text-sm"
           >
             {TEMPLATES.map((t) => (
               <option key={t.id} value={t.id}>
@@ -103,7 +103,7 @@ export default function TrustLedgerNewPage() {
             value={decision}
             onChange={(e) => setDecision(e.target.value)}
             placeholder="e.g. Approve Copilot pilot for Finance"
-            className="mt-2 w-full max-w-xl rounded-lg border border-border bg-panel px-3 py-2 text-sm"
+            className="mt-2 w-full max-w-xl rounded-lg border border-border/[0.11] bg-panel/[0.055] px-3 py-2 text-sm"
           />
         </div>
 
@@ -119,7 +119,7 @@ export default function TrustLedgerNewPage() {
             <ul className="mt-3 space-y-2">
               {evidence.map((ev) => (
                 <li key={ev.evidence_id}>
-                  <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-panel/60 px-3 py-2 hover:border-accent/40">
+                  <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border/[0.11] bg-panel/[0.055]/[0.033] px-3 py-2 hover:border-accent/40">
                     <input
                       type="checkbox"
                       checked={selected.includes(ev.evidence_id)}
