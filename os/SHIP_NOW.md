@@ -8,7 +8,9 @@
 
 **Next iter 20:** see [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) (README www 200, api/status openapi field, eleventh-audit manifest).
 
-**Pending eleventh audit:** iter 18+19 bundle — supersedes PR #48; merge when ready.
+**Pending eleventh audit (PR #52):** iter 19 — merge when ready.
+
+**Shipped tenth audit (PR #48 @ b822423):** iter 18 on main.
 
 **Shipped iter 19 (2026-06-10):** OpenAPI 200 verify, README parity guards, audit manifest template.
 

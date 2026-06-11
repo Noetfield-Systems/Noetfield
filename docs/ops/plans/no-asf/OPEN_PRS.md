@@ -8,7 +8,7 @@ Only merge **Noetfield GTM / PLAN WITH NO ASF** ship PRs from branches matching:
 
 `cursor/no-asf-*-37f0`, `cursor/10-phase-audit-fix-37f0`, `cursor/post-audit-10-phase-fix-37f0`, `cursor/fourth-audit-iter12-37f0`, `cursor/fifth-audit-iter13-37f0`, `cursor/sixth-audit-iter14-37f0`, `cursor/seventh-audit-iter15-37f0`, `cursor/eighth-audit-iter16-37f0`, `cursor/ninth-audit-iter17-37f0`, `cursor/tenth-audit-iter18-37f0`, or `cursor/eleventh-audit-iter19-37f0`
 
-**Superseded (do not merge):** `cursor/third-audit-10-phase-fix-37f0` (PR #42), `cursor/fourth-audit-iter12-37f0` (PR #42), `cursor/fifth-audit-iter13-37f0` (PR #43), `cursor/sixth-audit-iter14-37f0` (PR #44), `cursor/seventh-audit-iter15-37f0` (PR #45), `cursor/eighth-audit-iter16-37f0` (PR #46), `cursor/ninth-audit-iter17-37f0` (PR #47), `cursor/tenth-audit-iter18-37f0` (PR #48).
+**Superseded (do not merge):** `cursor/third-audit-10-phase-fix-37f0` (PR #42), `cursor/fourth-audit-iter12-37f0` (PR #42), `cursor/fifth-audit-iter13-37f0` (PR #43), `cursor/sixth-audit-iter14-37f0` (PR #44), `cursor/seventh-audit-iter15-37f0` (PR #45), `cursor/eighth-audit-iter16-37f0` (PR #46), `cursor/ninth-audit-iter17-37f0` (PR #47), `cursor/tenth-audit-iter18-37f0` (PR #48 merged).
 
 **MERGED_WINDOW:** 5
 
@@ -26,12 +26,13 @@ Only merge **Noetfield GTM / PLAN WITH NO ASF** ship PRs from branches matching:
 
 | PR | Branch | Notes |
 |----|--------|-------|
-| #52 | cursor/eleventh-audit-iter19-37f0 | Eleventh audit — iter 18+19 (054–059); supersedes #48 |
+| #52 | cursor/eleventh-audit-iter19-37f0 | Eleventh audit — iter 19 (057–059) |
 
 ## Recently merged
 
 | PR | Branch | Notes |
 |----|--------|-------|
+| #48 | cursor/tenth-audit-iter18-37f0 | Tenth audit — iter 18 (054–056) @ b822423 |
 | #47 | cursor/ninth-audit-iter17-37f0 | Ninth audit — iter 17 (051–053) @ 46a36a3 |
 | #46 | cursor/eighth-audit-iter16-37f0 | Eighth audit — iter 16 (048–050) @ f2103d3 |
 | #45 | cursor/seventh-audit-iter15-37f0 | Seventh audit — iter 15 (045–047) @ 80ad8a7 |
