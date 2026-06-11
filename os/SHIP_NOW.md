@@ -2,9 +2,15 @@
 
 **Ship rule:** Bounded founder `implement` + [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) queue — see `os/plan.json` `ship_rule`. Ingest required after VERIFY. No self-start (R-007/R-011).
 
+**Upgraded plans:** [PLAN_ROADMAP.md](docs/ops/plans/no-asf/PLAN_ROADMAP.md) — eleventh audit 10-phase, iter 20–22 seed, PR #48/#49 order.
+
 ## Active queue (`next_tasks`)
 
 **Next iter 18:** see [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) (checkpoint verify, OpenAPI bridge, merged window config).
+
+**Pending tenth audit (PR #48):** iter 18 bundle on `cursor/tenth-audit-iter18-37f0` — merge first.
+
+**Preview iter 19+:** [PLAN_ROADMAP.md](docs/ops/plans/no-asf/PLAN_ROADMAP.md) (eleventh audit 057–059, forward queue).
 
 **Shipped iter 17 (2026-06-10):** services/governance blueprint bridge, procurement checkpoint copy, rolling merged PR window 5.
 

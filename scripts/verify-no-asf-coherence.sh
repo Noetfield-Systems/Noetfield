@@ -204,7 +204,7 @@ if [[ -f docs/ops/plans/no-asf/OPEN_PRS.md ]]; then
   if command -v gh >/dev/null 2>&1; then
     pending_section="$(awk '/^## Pending ship PR/,/^## Recently merged/' docs/ops/plans/no-asf/OPEN_PRS.md)"
     open_prs_doc="$(echo "$pending_section" | grep -E '^\| #[0-9]+ \|' | grep -oE '#[0-9]+' | tr -d '#' | sort -u | tr '\n' ' ' || true)"
-    ship_prs_gh="$(gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | test("^cursor/(no-asf|10-phase|post-audit|fourth-audit|fifth-audit|sixth-audit|seventh-audit|eighth-audit|ninth-audit)")) | .number' 2>/dev/null | sort -u | tr '\n' ' ' || true)"
+    ship_prs_gh="$(gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | test("^cursor/(no-asf|10-phase|post-audit|fourth-audit|fifth-audit|sixth-audit|seventh-audit|eighth-audit|ninth-audit|tenth-audit)")) | .number' 2>/dev/null | sort -u | tr '\n' ' ' || true)"
     open_prs_doc_trim="$(echo "$open_prs_doc" | xargs)"
     ship_prs_gh_trim="$(echo "$ship_prs_gh" | xargs)"
     if [[ -z "$open_prs_doc_trim" && -z "$ship_prs_gh_trim" ]]; then

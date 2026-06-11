@@ -3,6 +3,7 @@
 When the NF-PLAN registry is fully synced (`1000/1000 done`), pick the next **≤3** agent tasks from here or `os/plan.json` `next_tasks`.
 
 **Authority:** [NOETFIELD_GTM_60_DAY_LOCKED_v1.md](../../../strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md)  
+**Roadmap:** [PLAN_ROADMAP.md](./PLAN_ROADMAP.md) (upgraded audit cadence + forward queue)  
 **Verify:** `./scripts/plan-with-no-asf-verify.sh`
 
 **Commercial P0:** Outreach/calls = agentic layer (founder Hub). NF-CLOUD-AGENT = validators + www/GTM assets only.
@@ -27,6 +28,24 @@ Founder pick or bounded `implement`:
 
 1. **ship-merged-window-config-056** · Extract `MERGED_WINDOW` constant to OPEN_PRS header doc  
    Outcome: Single source of truth for rolling merge window size.
+
+_Pending ship: [PR #48](https://github.com/kazemnezhadsina144-dot/Noetfield/pull/48) (`cursor/tenth-audit-iter18-37f0`)._
+
+## Preview — iter 19 (eleventh audit, after PR #48 merge)
+
+_See [PLAN_ROADMAP.md](./PLAN_ROADMAP.md) § Eleventh audit. Do not flip QUICK_PICK until iter 18 lands on `main`._
+
+1. **ship-procurement-openapi-verify-057** · Verify `/openapi.json` returns 200 in gtm-ops bundle  
+1. **ship-services-governance-readme-openapi-058** · services/governance README cites `/openapi.json` path  
+1. **ship-tenth-audit-merge-rule-059** · Document tenth-audit branch in ENGINEERING_DONE_MANIFEST closeout template  
+
+## Forward seed — iter 20 (twelfth audit proposals)
+
+_Activate after iter 19 ships._
+
+1. **ship-governance-readme-www-060** · Verify `/services/governance/README.md` returns 200 on :13080  
+1. **ship-api-status-openapi-field-061** · Verify `GET /api/status` includes `"openapi": "/openapi.json"`  
+1. **ship-eleventh-audit-merge-rule-062** · Document eleventh-audit branch in manifest closeout template  
 
 ## Agentic only — Hub (not NF-CLOUD implement)
 
