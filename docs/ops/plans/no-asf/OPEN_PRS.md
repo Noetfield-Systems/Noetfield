@@ -24,7 +24,9 @@ Only merge **Noetfield GTM / PLAN WITH NO ASF** ship PRs from branches matching:
 
 ## Pending ship PR
 
-_None — eleventh-audit iter 19 PR opens after ship commit._
+| PR | Branch | Notes |
+|----|--------|-------|
+| #52 | cursor/eleventh-audit-iter19-37f0 | Eleventh audit — iter 18+19 (054–059); supersedes #48 |
 
 ## Recently merged
 
