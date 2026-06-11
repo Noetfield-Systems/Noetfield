@@ -3,7 +3,7 @@ agent_tag: nf-local-repo-agent
 agent_display: "[NF-LOCAL-REPO-AGENT]"
 agent_role: local-repo-chat-mac
 doc_id: agent-team-sync-locked-v1
-doc_revision: 2
+doc_revision: 4
 last_edited_at: "2026-06-06"
 provenance: local-only
 committed: true
@@ -78,6 +78,26 @@ Live state: `ops/private/agent-reference/AGENT_TEAM_STATE.yaml`
 
 ---
 
+## Systems Operating Plan ingest (LOCKED 2026-06-06)
+
+**Status:** Dual-agent concurrence — `[NF-LOCAL-REPO-AGENT]` + `[NF-CLOUD-AGENT]`  
+**NKUE:** kept 6 · merged 4 · split 2 · deferred 4 · rejected 3  
+**Verdict:** Two engines (Lane A product + Lane B Vancouver services), one discipline — every paid engagement → RID + metrics + exportable governance artifact.
+
+**Read order (private — no L0–L3 duplication):**
+
+1. `sources/SYSTEMS_OPERATING_PLAN_SOURCES_LOCKED_2026.md` + `sources/EXTRACTS/` (6 files)  
+2. `plans/LANE_A_B_OPERATING_MODEL_LOCKED_2026.md`  
+3. `plans/VANCOUVER_SMB_GOVERNANCE_GTM_LOCKED_2026.md`  
+4. `plans/SYSTEMS_OPERATING_PLAN_LOCKED_2026.md` (rev 2)  
+5. `intake/systems-operating-plan-desktop-2026-06-06/SOURCE.md` — full detail only (cloud rsync pending)
+
+**Verified facts:** StatCan 6.1%→12.2%→19.2%; CMHC Vancouver 3.7%. Vancouver city PDF **403** — use opendata for permit counts.
+
+**Cloud without SOURCE:** rsync `ops/private/` from Mac workspace — not git pull.
+
+---
+
 ## Cloud without `ops/private/`
 
 1. Use **this file** + `os/plan.json` + public LOCKED docs  
@@ -90,9 +110,12 @@ Live state: `ops/private/agent-reference/AGENT_TEAM_STATE.yaml`
 ## Sync manifest revision
 
 ```yaml
-revision: 2
+revision: 4
 updated_at: "2026-06-06"
-reconciliation_revision: 3
+reconciliation_revision: 5
+systems_operating_plan_ingest: complete
+sources_verified: "2026-06-06"
+sources_extracts: "sources/EXTRACTS/ (6 files)"
 last_wave_mac: "040-042"
 branch: cursor/bank-grade-fullstack-37f0
 mac_head: d399a1b

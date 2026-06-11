@@ -1,8 +1,8 @@
 # Noetfield agent memory — LOCKED (versioned in git)
 # Read at EVERY session start. Bump version when adding lessons.
 
-version: 7
-updated: "2026-06-06T23:30:00Z"
+version: 8
+updated: "2026-06-10T12:00:00Z"
 updated_by: NF-CLOUD-AGENT
 
 company_scope:
@@ -57,6 +57,9 @@ hard_rules:
   - id: R-010
     rule: On rule conflict, run SKILL-007 before edits. Precedence — founder order > R-001–R-009 > incidents > execution_authority false > workflow bundles > ship-first/plan.json.
     since: "2026-06-06"
+  - id: R-011
+    rule: Cursor AUTO-RUN is not a system priority (SourceA law 2026-06-10). All outreach email and sales/demo calls are agentic — founder never sends email or places calls. Ref FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md on SourceA desktop.
+    since: "2026-06-10"
 
 recurring_mistakes:
   - id: M-001
