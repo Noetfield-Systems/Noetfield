@@ -24,6 +24,19 @@
 - Not a payment service provider or custody layer
 - Not an agent registry or chatbot platform
 
+## Commercial ladder (www spine)
+
+| Step | Offering | Price | CTA |
+|------|----------|-------|-----|
+| 1 | Trust Brief | $10,000 · 6 weeks | Request Governance Brief |
+| 2 | Copilot Governance Pack | CAD $2K–10K · 90 days | 5-minute demo → design partner |
+| 3 | Procurement close | Included in pilot | Procurement pack (ZIP) |
+| Institutional | Bank Pilot | Enterprise | Discuss Bank Pilot |
+
+**Unified subhead (all lanes):** Governance execution infrastructure — evaluate operational intent before external systems act. Signed TLE v1 with confidence score, board PDF, and procurement ZIP. Metadata-only evidence. Shadow-first.
+
+**Differentiator strip:** Registry vs receipt — platform inventories agents; Noetfield records what was permitted before execution.
+
 ## Buyer moments (revenue-oriented)
 
 | Moment | Artifact | CTA |

@@ -23,16 +23,13 @@
  <header id="nfHeader"></header>
  <main id="main" class="wrap nf-page">
  <header class="nf-hero">
- <p class="nf-eyebrow">GTM · 5-minute demo</p>
+ <p class="nf-eyebrow">5-minute demo · Copilot Governance Pack</p>
  <h1>Board-ready Copilot governance in five minutes</h1>
  <p class="nf-lead">
  Evaluate operational intent, index workspace metadata evidence, and produce signed Trust Ledger Entries your board and procurement can defend — in under five minutes.
  </p>
- <div class="nf-highlight" id="live-demo-url-wrap">
- <p id="live-demo-url" class="nf-lead" style="margin:0;font-size:.95rem;">
- Shareable demo URL: run <code>make demo-url</code> after <code>make dev-local-tunnel-bg</code> (or set <code>NF_STAGING_URL</code>).
- See <a href="/docs/ops/STAGING_DEMO.md">staging &amp; buyer demo runbook</a>.
- </p>
+ <div class="nf-highlight" id="live-demo-url-wrap" hidden>
+ <p id="live-demo-url" class="nf-lead" style="margin:0;font-size:.95rem;"></p>
  </div>
  </header>
 
@@ -70,6 +67,7 @@
  Design partner pipeline: <a href="/docs/copilot/DESIGN_PARTNER_PIPELINE_v1.md">outreach guide</a>.
  Canada / public-sector angle: <a href="/docs/strategy/channel-outreach/bc-ai-for-all-2026.md">AI for All outreach copy</a>.
  Diligence reviewers: <a href="/docs/diligence/rpaa-positioning-onepager.md">RPAA-safe positioning one-pager</a>.
+ Staging URL setup: <a href="/docs/ops/STAGING_DEMO.md">staging &amp; buyer demo runbook</a>.
  </p>
  </section>
 
@@ -89,6 +87,8 @@
    var el = document.getElementById("live-demo-url");
    var injected = "%%NF_PUBLIC_DEMO_URL%%";
    if (el && injected && injected.indexOf("%%") === -1 && injected.indexOf("http") === 0) {
+     var wrap = document.getElementById("live-demo-url-wrap");
+     if (wrap) wrap.hidden = false;
      el.innerHTML = 'Live demo URL: <a href="' + injected + '/copilot/demo/">' + injected + '/copilot/demo/</a>';
    }
  })();

@@ -64,22 +64,23 @@
  </p>
  <h3 style="margin-top:1.25rem">Governance control checkpoints</h3>
  <p>
- Noetfield ships an eval→enforce loop (industry-parallel to ASSERT→ACS, repo-native):
- <strong>Evaluate</strong> pre-ship policy checks via
- <code>plan-with-no-asf-verify.sh</code>;
- <strong>Enforce</strong> fail-closed FAIL gates on buyer www and coherence docs.
- See
- <a href="/docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md">agent self-audit loop</a>
- and
- <a href="/docs/references/GOVERNANCE_SOURCES_BOOK_v1.md">Governance Sources Book</a>
- for framework authority — orientation only, not legal advice.
+ Noetfield operates a continuous verification model — policy checks before release, fail-closed gates on buyer surfaces, and tamper-evident export integrity. Orientation only; not legal advice.
+ See <a href="/trust-center/">Trust center</a> and
+ <a href="/docs/references/GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md">Governance Sources Handbook</a>.
  </p>
  <p style="margin-top:1rem">
- Production API surface:
+ Technical diligence:
  <a href="/openapi.json">Public OpenAPI schema</a>
  ·
- <a href="/services/governance/README.md">services/governance README</a>
- (intake, trust ledger, webhooks) — orientation only.
+ <a href="/services/governance/README.md">Governance API overview</a>
+ ·
+ <a href="/docs/api/">API reference</a>
+ </p>
+ <p style="margin-top:1rem;font-size:var(--text-sm);color:var(--muted2)">
+ Technical appendix:
+ <a href="/docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md">continuous verification program</a>
+ ·
+ ship verification via <code>plan-with-no-asf-verify.sh</code> (internal release gate)
  </p>
  </section>
 
