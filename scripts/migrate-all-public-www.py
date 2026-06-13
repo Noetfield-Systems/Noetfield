@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Force every public shell page onto www v7 stack (tokens + shell + www only)."""
+"""Force every public shell page onto www v14 stack (tokens + shell + www only)."""
 from __future__ import annotations
 
 import re
@@ -18,14 +18,29 @@ STRIP_CSS = (
     "noetfield-enterprise.css",
     "noetfield-institutional.css",
     "noetfield-sales.css",
+    "noetfield-ops.css",
 )
-WWW = '<link rel="stylesheet" href="/assets/noetfield-www.css?v=10" />'
-SHELL_JS = '<script src="/assets/noetfield-shell.js?v=10" defer></script>'
+WWW_VER = "16"
+FONT_LINKS = (
+    ' <link rel="preconnect" href="https://fonts.googleapis.com" />\n'
+    ' <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n'
+    ' <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700&amp;family=IBM+Plex+Serif:ital,wght@0,500;0,600;0,700&amp;display=swap" />'
+)
+WWW = f'<link rel="stylesheet" href="/assets/noetfield-www.css?v={WWW_VER}" />'
+SHELL_JS = f'<script src="/assets/noetfield-shell.js?v={WWW_VER}" defer></script>'
 
 
 def should_skip(path: Path) -> bool:
     s = str(path)
     return any(p in s for p in SKIP_PARTS)
+
+
+def body_class_for(path: Path) -> str:
+    rel = path.relative_to(ROOT).as_posix()
+    base = "nf-www nf-site-v14"
+    if rel == "trust/index.html":
+        return f"{base} nf-trust-diligence"
+    return base
 
 
 def migrate(path: Path) -> bool:
@@ -39,6 +54,11 @@ def migrate(path: Path) -> bool:
             "",
             text,
         )
+    if "fonts.googleapis.com" not in text:
+        text = text.replace(
+            '<link rel="stylesheet" href="/assets/noetfield-tokens.css" />',
+            FONT_LINKS + '\n <link rel="stylesheet" href="/assets/noetfield-tokens.css" />',
+        )
     if "noetfield-www.css" not in text:
         text = text.replace(
             '<link rel="stylesheet" href="/assets/noetfield-tokens.css" />',
@@ -48,7 +68,7 @@ def migrate(path: Path) -> bool:
     else:
         text = re.sub(
             r'href="/assets/noetfield-www\.css\?v=[^"]+"',
-            'href="/assets/noetfield-www.css?v=10"',
+            f'href="/assets/noetfield-www.css?v={WWW_VER}"',
             text,
         )
     text = re.sub(
@@ -56,9 +76,10 @@ def migrate(path: Path) -> bool:
         SHELL_JS,
         text,
     )
-    text = re.sub(r'<body class="[^"]*">', '<body class="nf-www nf-site-v5">', text, count=1)
+    body_class = body_class_for(path)
+    text = re.sub(r'<body class="[^"]*">', f'<body class="{body_class}">', text, count=1)
     if re.search(r"<body(?![^>]*class=)", text):
-        text = re.sub(r"<body>", '<body class="nf-www">', text, count=1)
+        text = re.sub(r"<body>", f'<body class="{body_class}">', text, count=1)
     if text != orig:
         path.write_text(text, encoding="utf-8")
         return True

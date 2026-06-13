@@ -7,12 +7,11 @@
 | **Parent** | [MSP_GOVERNANCE_PACK_v1.md](./MSP_GOVERNANCE_PACK_v1.md) |
 | **Updated** | 2026-06-02 |
 
-**Purpose:** Map Copilot **readiness assessment** outputs (Microsoft OSS tool, Inforcer, or manual) to **Phase 2** Noetfield Governance Pack scope and SKU triggers.
+**Purpose:** Map Copilot **readiness assessment** outputs (Microsoft OSS tool or manual) to **Phase 2** Noetfield Governance Pack scope and SKU triggers.
 
 **Sources:**
 
 - [Microsoft — m365-copilot-automated-readiness-assessment](https://github.com/microsoft/m365-copilot-automated-readiness-assessment) (CSV/Excel export columns)
-- [Inforcer — Copilot Readiness Assessments](https://www.inforcer.com/copilot-readiness-assessments)
 
 ---
 

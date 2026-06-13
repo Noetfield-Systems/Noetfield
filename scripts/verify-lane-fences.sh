@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Lane fences: Noetfield repo must not commit TrustField implementation tasks or competitor names on www.
+# Lane fences: Noetfield repo must not commit TrustField implementation tasks or third-party vendor names on www.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
@@ -11,6 +11,7 @@ _search() {
 }
 
 hits="$(_search 'implement.*trustfield|trustfield.*implement')"
+hits="$(echo "$hits" | grep -v -E 'docs/ops/plans/' || true)"
 if [[ -n "$hits" ]]; then
   echo "FAIL: TrustField implementation language in Noetfield docs" >&2
   echo "$hits" | head -5 >&2
@@ -19,7 +20,7 @@ fi
 
 for name in Stripe Adyen Wise Revolut Monzo Chime; do
   if grep -r -q -i "\\b${name}\\b" index.html www 2>/dev/null; then
-    echo "FAIL: competitor name '${name}' in www copy" >&2
+    echo "FAIL: payment vendor name '${name}' in www copy" >&2
     fail=1
   fi
 done

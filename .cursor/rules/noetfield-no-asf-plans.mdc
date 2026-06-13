@@ -16,7 +16,8 @@ alwaysApply: true
 When the user asks for a **plan with no ASF** (or "no ASF"):
 
 0. Run SKILL-007 — if user did not also say `implement`, stop after step 4 and **ASK** to approve task list.
-1. If `os/plan-library/noetfield-1000/` has backlog: `make pick-no-asf-plan` (or `python3 scripts/pick-noetfield-no-asf-plan.py --tier T0 --limit 1 --prompt`). Else read `docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md` → `docs/ops/plans/no-asf/QUICK_PICK.md` → [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md).
+1. **Primary (GTM):** `make pick-wise` or `python3 scripts/pick-wise.py --prompt`. Read [NOETFIELD_PROMPT_PACK_V14_WISE_LOCKED_v1.md](docs/ops/NOETFIELD_PROMPT_PACK_V14_WISE_LOCKED_v1.md) · [500 master](docs/ops/NOETFIELD_PROMPT_PACK_500_MASTER_LOCKED_v1.md).
+2. **Ops fallback:** `make pick-no-asf-plan` (nf-1000 library). Else [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md).
 2. Read [`.cursor/agent-memory/MEMORY_LOCKED.yaml`](../agent-memory/MEMORY_LOCKED.yaml) — **Noetfield only**.
 3. Present picked prompt(s) or **≤3** GTM tasks to founder — do not edit disk yet.
 4. *(After founder `implement`)* Merge open ship PR to `main` if one exists (only inside approved implement bundle).
@@ -27,15 +28,13 @@ When the user asks for a **plan with no ASF** (or "no ASF"):
 
 Do **not** delegate to ASF for commit, push, ingest, or SourceA edits.
 
-**Canonical library:** `os/plan-library/noetfield-1000/REGISTRY.json` (prompt-ready).  
-**GTM fallback:** `docs/ops/plans/no-asf/GTM_NEXT.md` when registry backlog empty.  
+**Canonical GTM library:** `docs/ops/plans/tier1-smart.json` (v14 WISE) · `python3 scripts/pick-wise.py`  
 **History stubs:** `os/plans/nf-future-*` — do not run `generate-future-plans.py` (wipes done).
 
-Regenerate locked library: `make generate-noetfield-1000`. Validate: `make validate-noetfield-1000`.  
-Regenerate pack: `python3 scripts/generate-prompt-pack-v2.py`.
+Regenerate: `make generate-tier1-smart` · Pick: `make pick-wise` · 500 catalog: `make generate-catalog-500`.
 
 Immediate queue: `os/plan.json` `next_tasks` + `os/SHIP_NOW.md`.
 
 **Tagging:** new docs `[NF-LOCAL-REPO-AGENT]` only — never edit `[NF-CLOUD-AGENT]` sections.
 
-**GTM / buyer citations:** `docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md`, `docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md`, governance + drift sources books.
+**GTM / buyer citations:** `docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md`, `docs/references/GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md`, `docs/references/GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED_v1.md`.

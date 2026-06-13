@@ -1,5 +1,7 @@
-# Governance Sources Book — canonical path moved
+# Moved — use canonical LOCKED handbook
 
-**Canonical:** [`docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md`](../reference/GOVERNANCE_SOURCES_BOOK_v1.md)
+**Canonical:** [GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md](./GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md)
 
-This stub avoids duplicate drift. All buyer citations and agent reads should use `docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md` (see [SHIP_NOW.md](../../os/SHIP_NOW.md)).
+Non-LOCKED book variants in this folder are redirect-only. Agents and buyer citations use `*_LOCKED_v1.md` files.
+
+**Hub:** [README.md](./README.md) · [../DOC_UNIFIED_INDEX_LOCKED_v1.md](../DOC_UNIFIED_INDEX_LOCKED_v1.md)

@@ -1,21 +1,51 @@
-# PLAN WITH NO ASF — quick pick
+# PLAN WITH NO ASF — quick pick (v14 WISE)
 
-When the founder says **PLAN WITH NO ASF**, start here. Pick the next **agent** item (not `asf_only`).
+When the founder says **PLAN WITH NO ASF**, start here.
 
-**Full registry:** [registry.json](../registry.json) (1000 plans) · **Locked pack:** [PROMPT_PACK_LOCKED/](../PROMPT_PACK_LOCKED/)
+## Primary picker (recommended)
 
-**Update:** `python3 scripts/sync-prompt-pack-status.py` after each ship session
+```bash
+make pick-wise                    # auto W3 maturity + 1 WISE prompt
+python3 scripts/pick-wise.py --maturity
+python3 scripts/pick-wise.py --bottleneck export --prompt
+python3 scripts/pick-wise.py --id E-05 --prompt
+```
 
-## Next 25 agent-ready plans (GTM-weighted)
+**SSOT:** [NOETFIELD_PROMPT_PACK_V14_WISE_LOCKED_v1.md](../../NOETFIELD_PROMPT_PACK_V14_WISE_LOCKED_v1.md) · [500 master](../../NOETFIELD_PROMPT_PACK_500_MASTER_LOCKED_v1.md) · [catalog-500.json](../catalog-500.json)
 
-_Registry backlog empty (1000-pack synced). Pick from [GTM_NEXT.md](./GTM_NEXT.md) or `os/plan.json` `next_tasks`._
+**Packaging SSOT:** [WWW_V16_PACKAGING_PLAN_LOCKED_v1.md](../../../WWW_V16_PACKAGING_PLAN_LOCKED_v1.md) · funnel starts **S-01 sandbox** on `/start/`
 
-### GTM_NEXT (top picks)
+**After ship:** `python3 scripts/sync-tier1-status.py --done S-01`
 
-1. **ship-procurement-checkpoint-verify-054** · Dedicated verify phrase guard hardening for 052 checkpoint copy
-1. **ship-services-governance-openapi-bridge-055** · Link procurement to `services/governance` public OpenAPI path
-1. **ship-merged-window-config-056** · Extract `MERGED_WINDOW` constant to OPEN_PRS header doc
+---
 
-## Recently completed
+## WISE frame
 
-Synced 1000 plans as done.
+| Step | Action |
+|------|--------|
+| **W**itness | `pick-wise --maturity` · read tier1-status deps |
+| **I**ntent | One buyer-visible outcome per session |
+| **S**cope | Max 5 files · forbidden list |
+| **E**vidence | Verify + self-check · sync status |
+
+**Default:** 1 task/session (not 3) · prerequisite chain shown when blocked
+
+---
+
+## Auto bottleneck by W3 stage (v16)
+
+| Stage | Pick |
+|-------|------|
+| 0 SANDBOX | `--bottleneck sandbox` · `/start/` |
+| 1 DEMO | `--bottleneck demo` |
+| 2 EXPORT | `--bottleneck export` |
+| 3+ PROVE | `--bottleneck ship` or `trust` |
+| 4 CONVERT | `--bottleneck pipeline` |
+
+Critical path: **E-01 → E-04 → E-05 → E-06 → L-03 → P-01**
+
+---
+
+## Ops fallback
+
+`make pick-no-asf-plan` (nf-1000 hygiene) · [GTM_NEXT.md](./GTM_NEXT.md) micro-queue

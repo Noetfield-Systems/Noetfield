@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-06T02:55:20.788613+00:00",
+  "generated_at": "2026-06-13T08:28:53.106799+00:00",
   "authorities": [
     {
       "doc_id": "gtm-60-day",
@@ -25,14 +25,14 @@
     },
     {
       "doc_id": "governance-sources",
-      "path": "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
+      "path": "docs/references/GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md",
       "optional": false,
       "exists_on_disk": true,
       "prompt_count": 200
     },
     {
       "doc_id": "drift-sources",
-      "path": "docs/reference/GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md",
+      "path": "docs/references/GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED_v1.md",
       "optional": false,
       "exists_on_disk": true,
       "prompt_count": 100

@@ -3,7 +3,7 @@
   "library": "noetfield-1000-locked",
   "locked": true,
   "count": 1000,
-  "generated_at": "2026-06-06T02:55:20Z",
+  "generated_at": "2026-06-13T08:28:52Z",
   "agent_tag": "nf-local-repo-agent",
   "agent_display": "[NF-LOCAL-REPO-AGENT]",
   "repo": "noetfield",
@@ -12,13 +12,13 @@
   "pick_script": "scripts/pick-noetfield-no-asf-plan.py",
   "validate_script": "scripts/validate-noetfield-1000-sources.py",
   "global_pack": "/Users/sinakazemnezhad/.cursor/plans/no-asf-library",
-  "canonical": "/Users/sinakazemnezhad/Desktop/Noetfield/os/plan-library/noetfield-1000",
+  "canonical": "/Users/sinakazemnezhad/Desktop/Noetfield-All-Documents/Noetfield/os/plan-library/noetfield-1000",
   "sources": [
     "docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
     "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
     "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
-    "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
-    "docs/reference/GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md",
+    "docs/references/GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md",
+    "docs/references/GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED_v1.md",
     "docs/references/GOVERNANCE_DRIFT_BLUEPRINTS_INDEX_LOCKED_v1.md",
     "docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md",
     "docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md",
@@ -101,7 +101,7 @@
       "slot": 0,
       "title": "Run python3 ~/Desktop/SourceA/scripts/cursor_agent_self_audit.py session-start before edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0001.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -121,7 +121,7 @@
       "slot": 1,
       "title": "Run make verify-gtm; fix first failing step only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0002.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -141,7 +141,7 @@
       "slot": 2,
       "title": "Add agent_tag to reports/cursor-reply-latest.txt front matter and YAML footer",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0003.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -161,7 +161,7 @@
       "slot": 3,
       "title": "Run ingest-cursor-reply.sh noetfield on latest cursor-reply after verify PASS",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0004.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -181,7 +181,7 @@
       "slot": 4,
       "title": "Run ./scripts/sync-sourceA-desktop.sh after ingest",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0005.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -201,7 +201,7 @@
       "slot": 5,
       "title": "Run python3 scripts/pick-noetfield-no-asf-plan.py --tier T0 --limit 1 smoke",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0006.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -221,7 +221,7 @@
       "slot": 6,
       "title": "Run python3 scripts/validate-noetfield-1000-sources.py; fix registry gaps",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0007.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -241,7 +241,7 @@
       "slot": 7,
       "title": "Extend scripts/verify_agent_reply_yaml.py check for agent_tag field",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0008.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -261,7 +261,7 @@
       "slot": 8,
       "title": "Document PLAN WITH NO ASF trigger in os/SHIP_NOW.md one line only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0009.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -281,7 +281,7 @@
       "slot": 9,
       "title": "Add make pick-no-asf-plan to verify-gtm preflight when library exists",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0010.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -301,7 +301,7 @@
       "slot": 10,
       "title": "Read docs/ops/AGENT_READ_LINKS_LOCKED_v1.md section for cloud vs local",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0011.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -321,7 +321,7 @@
       "slot": 11,
       "title": "Read docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md before closeout",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0012.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -341,7 +341,7 @@
       "slot": 12,
       "title": "Append REPO_TRUTH_CORRECTIONS row when chat disagrees with disk",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0013.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -361,7 +361,7 @@
       "slot": 13,
       "title": "Run make ship-verify alias equals verify-gtm smoke",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0014.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -381,7 +381,7 @@
       "slot": 14,
       "title": "Harden scripts/verify-ui-e2e.sh for new static routes only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0015.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -401,7 +401,7 @@
       "slot": 15,
       "title": "Add procurement-pack-e2e to verify-gtm if not already chained",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0016.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -421,7 +421,7 @@
       "slot": 16,
       "title": "Sync os/plan.json updated_at after wave closeout",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0017.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -441,7 +441,7 @@
       "slot": 17,
       "title": "Keep next_tasks empty unless founder says PLAN WITH NO ASF repopulate",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0018.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -461,7 +461,7 @@
       "slot": 18,
       "title": "Grep committed docs for TrustField implementation tasks \u2014 reject",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0019.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -479,9 +479,9 @@
       "priority": "P0",
       "lane": "noetfield",
       "slot": 19,
-      "title": "Grep www copy for competitor names \u2014 reject",
+      "title": "Grep www copy for third-party vendor names \u2014 reject",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0020.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -489,7 +489,7 @@
         "os/SHIP_NOW.md",
         "os/plan.json"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0020: Grep www copy for competitor names \u2014 reject",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0020: Grep www copy for third-party vendor names \u2014 reject",
       "future_stub_map": null
     },
     {
@@ -501,7 +501,7 @@
       "slot": 20,
       "title": "Run session-close via cursor_agent_self_audit for noetfield_cloud agent",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0021.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -521,7 +521,7 @@
       "slot": 21,
       "title": "Update LOCKED_MANIFEST.md generated_at after regen",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0022.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -541,7 +541,7 @@
       "slot": 22,
       "title": "Mirror noetfield-1000 index to ~/.cursor/plans/noetfield-os/README.md",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0023.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -561,7 +561,7 @@
       "slot": 23,
       "title": "Run sync-noetfield-plans-status.py after marking nf-* done",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0024.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -581,7 +581,7 @@
       "slot": 24,
       "title": "Validate 1000 count and 10\u00d74\u00d725 grid in REGISTRY.json",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T0/nf-0025.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -601,7 +601,7 @@
       "slot": 0,
       "title": "Run python3 ~/Desktop/SourceA/scripts/cursor_agent_self_audit.py session-start before edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0026.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -621,7 +621,7 @@
       "slot": 1,
       "title": "Run make verify-gtm; fix first failing step only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0027.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -641,7 +641,7 @@
       "slot": 2,
       "title": "Add agent_tag to reports/cursor-reply-latest.txt front matter and YAML footer",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0028.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -661,7 +661,7 @@
       "slot": 3,
       "title": "Run ingest-cursor-reply.sh noetfield on latest cursor-reply after verify PASS",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0029.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -681,7 +681,7 @@
       "slot": 4,
       "title": "Run ./scripts/sync-sourceA-desktop.sh after ingest",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0030.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -701,7 +701,7 @@
       "slot": 5,
       "title": "Run python3 scripts/pick-noetfield-no-asf-plan.py --tier T0 --limit 1 smoke",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0031.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -721,7 +721,7 @@
       "slot": 6,
       "title": "Run python3 scripts/validate-noetfield-1000-sources.py; fix registry gaps",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0032.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -741,7 +741,7 @@
       "slot": 7,
       "title": "Extend scripts/verify_agent_reply_yaml.py check for agent_tag field",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0033.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -761,7 +761,7 @@
       "slot": 8,
       "title": "Document PLAN WITH NO ASF trigger in os/SHIP_NOW.md one line only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0034.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -781,7 +781,7 @@
       "slot": 9,
       "title": "Add make pick-no-asf-plan to verify-gtm preflight when library exists",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0035.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -801,7 +801,7 @@
       "slot": 10,
       "title": "Read docs/ops/AGENT_READ_LINKS_LOCKED_v1.md section for cloud vs local",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0036.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -821,7 +821,7 @@
       "slot": 11,
       "title": "Read docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md before closeout",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0037.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -841,7 +841,7 @@
       "slot": 12,
       "title": "Append REPO_TRUTH_CORRECTIONS row when chat disagrees with disk",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0038.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -861,7 +861,7 @@
       "slot": 13,
       "title": "Run make ship-verify alias equals verify-gtm smoke",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0039.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -881,7 +881,7 @@
       "slot": 14,
       "title": "Harden scripts/verify-ui-e2e.sh for new static routes only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0040.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -901,7 +901,7 @@
       "slot": 15,
       "title": "Add procurement-pack-e2e to verify-gtm if not already chained",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0041.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -921,7 +921,7 @@
       "slot": 16,
       "title": "Sync os/plan.json updated_at after wave closeout",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0042.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -941,7 +941,7 @@
       "slot": 17,
       "title": "Keep next_tasks empty unless founder says PLAN WITH NO ASF repopulate",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0043.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -961,7 +961,7 @@
       "slot": 18,
       "title": "Grep committed docs for TrustField implementation tasks \u2014 reject",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0044.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -979,9 +979,9 @@
       "priority": "P1",
       "lane": "noetfield",
       "slot": 19,
-      "title": "Grep www copy for competitor names \u2014 reject",
+      "title": "Grep www copy for third-party vendor names \u2014 reject",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0045.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -989,7 +989,7 @@
         "os/SHIP_NOW.md",
         "os/plan.json"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0045: Grep www copy for competitor names \u2014 reject",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0045: Grep www copy for third-party vendor names \u2014 reject",
       "future_stub_map": null
     },
     {
@@ -1001,7 +1001,7 @@
       "slot": 20,
       "title": "Run session-close via cursor_agent_self_audit for noetfield_cloud agent",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0046.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1021,7 +1021,7 @@
       "slot": 21,
       "title": "Update LOCKED_MANIFEST.md generated_at after regen",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0047.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1041,7 +1041,7 @@
       "slot": 22,
       "title": "Mirror noetfield-1000 index to ~/.cursor/plans/noetfield-os/README.md",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0048.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1061,7 +1061,7 @@
       "slot": 23,
       "title": "Run sync-noetfield-plans-status.py after marking nf-* done",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0049.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1081,7 +1081,7 @@
       "slot": 24,
       "title": "Validate 1000 count and 10\u00d74\u00d725 grid in REGISTRY.json",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T1/nf-0050.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1101,7 +1101,7 @@
       "slot": 0,
       "title": "Run python3 ~/Desktop/SourceA/scripts/cursor_agent_self_audit.py session-start before edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0051.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1121,7 +1121,7 @@
       "slot": 1,
       "title": "Run make verify-gtm; fix first failing step only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0052.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1141,7 +1141,7 @@
       "slot": 2,
       "title": "Add agent_tag to reports/cursor-reply-latest.txt front matter and YAML footer",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0053.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1161,7 +1161,7 @@
       "slot": 3,
       "title": "Run ingest-cursor-reply.sh noetfield on latest cursor-reply after verify PASS",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0054.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1181,7 +1181,7 @@
       "slot": 4,
       "title": "Run ./scripts/sync-sourceA-desktop.sh after ingest",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0055.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1201,7 +1201,7 @@
       "slot": 5,
       "title": "Run python3 scripts/pick-noetfield-no-asf-plan.py --tier T0 --limit 1 smoke",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0056.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1221,7 +1221,7 @@
       "slot": 6,
       "title": "Run python3 scripts/validate-noetfield-1000-sources.py; fix registry gaps",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0057.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1241,7 +1241,7 @@
       "slot": 7,
       "title": "Extend scripts/verify_agent_reply_yaml.py check for agent_tag field",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0058.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1261,7 +1261,7 @@
       "slot": 8,
       "title": "Document PLAN WITH NO ASF trigger in os/SHIP_NOW.md one line only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0059.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1281,7 +1281,7 @@
       "slot": 9,
       "title": "Add make pick-no-asf-plan to verify-gtm preflight when library exists",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0060.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1301,7 +1301,7 @@
       "slot": 10,
       "title": "Read docs/ops/AGENT_READ_LINKS_LOCKED_v1.md section for cloud vs local",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0061.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1321,7 +1321,7 @@
       "slot": 11,
       "title": "Read docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md before closeout",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0062.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1341,7 +1341,7 @@
       "slot": 12,
       "title": "Append REPO_TRUTH_CORRECTIONS row when chat disagrees with disk",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0063.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1361,7 +1361,7 @@
       "slot": 13,
       "title": "Run make ship-verify alias equals verify-gtm smoke",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0064.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1381,7 +1381,7 @@
       "slot": 14,
       "title": "Harden scripts/verify-ui-e2e.sh for new static routes only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0065.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1401,7 +1401,7 @@
       "slot": 15,
       "title": "Add procurement-pack-e2e to verify-gtm if not already chained",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0066.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1421,7 +1421,7 @@
       "slot": 16,
       "title": "Sync os/plan.json updated_at after wave closeout",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0067.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1441,7 +1441,7 @@
       "slot": 17,
       "title": "Keep next_tasks empty unless founder says PLAN WITH NO ASF repopulate",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0068.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1461,7 +1461,7 @@
       "slot": 18,
       "title": "Grep committed docs for TrustField implementation tasks \u2014 reject",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0069.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1479,9 +1479,9 @@
       "priority": "P2",
       "lane": "noetfield",
       "slot": 19,
-      "title": "Grep www copy for competitor names \u2014 reject",
+      "title": "Grep www copy for third-party vendor names \u2014 reject",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0070.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1489,7 +1489,7 @@
         "os/SHIP_NOW.md",
         "os/plan.json"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0070: Grep www copy for competitor names \u2014 reject",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0070: Grep www copy for third-party vendor names \u2014 reject",
       "future_stub_map": null
     },
     {
@@ -1501,7 +1501,7 @@
       "slot": 20,
       "title": "Run session-close via cursor_agent_self_audit for noetfield_cloud agent",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0071.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1521,7 +1521,7 @@
       "slot": 21,
       "title": "Update LOCKED_MANIFEST.md generated_at after regen",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0072.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1541,7 +1541,7 @@
       "slot": 22,
       "title": "Mirror noetfield-1000 index to ~/.cursor/plans/noetfield-os/README.md",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0073.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1561,7 +1561,7 @@
       "slot": 23,
       "title": "Run sync-noetfield-plans-status.py after marking nf-* done",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0074.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1581,7 +1581,7 @@
       "slot": 24,
       "title": "Validate 1000 count and 10\u00d74\u00d725 grid in REGISTRY.json",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T2/nf-0075.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1601,7 +1601,7 @@
       "slot": 0,
       "title": "Run python3 ~/Desktop/SourceA/scripts/cursor_agent_self_audit.py session-start before edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0076.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1621,7 +1621,7 @@
       "slot": 1,
       "title": "Run make verify-gtm; fix first failing step only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0077.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1641,7 +1641,7 @@
       "slot": 2,
       "title": "Add agent_tag to reports/cursor-reply-latest.txt front matter and YAML footer",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0078.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1661,7 +1661,7 @@
       "slot": 3,
       "title": "Run ingest-cursor-reply.sh noetfield on latest cursor-reply after verify PASS",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0079.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1681,7 +1681,7 @@
       "slot": 4,
       "title": "Run ./scripts/sync-sourceA-desktop.sh after ingest",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0080.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1701,7 +1701,7 @@
       "slot": 5,
       "title": "Run python3 scripts/pick-noetfield-no-asf-plan.py --tier T0 --limit 1 smoke",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0081.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1721,7 +1721,7 @@
       "slot": 6,
       "title": "Run python3 scripts/validate-noetfield-1000-sources.py; fix registry gaps",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0082.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1741,7 +1741,7 @@
       "slot": 7,
       "title": "Extend scripts/verify_agent_reply_yaml.py check for agent_tag field",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0083.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1761,7 +1761,7 @@
       "slot": 8,
       "title": "Document PLAN WITH NO ASF trigger in os/SHIP_NOW.md one line only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0084.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1781,7 +1781,7 @@
       "slot": 9,
       "title": "Add make pick-no-asf-plan to verify-gtm preflight when library exists",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0085.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1801,7 +1801,7 @@
       "slot": 10,
       "title": "Read docs/ops/AGENT_READ_LINKS_LOCKED_v1.md section for cloud vs local",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0086.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1821,7 +1821,7 @@
       "slot": 11,
       "title": "Read docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md before closeout",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0087.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1841,7 +1841,7 @@
       "slot": 12,
       "title": "Append REPO_TRUTH_CORRECTIONS row when chat disagrees with disk",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0088.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1861,7 +1861,7 @@
       "slot": 13,
       "title": "Run make ship-verify alias equals verify-gtm smoke",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0089.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1881,7 +1881,7 @@
       "slot": 14,
       "title": "Harden scripts/verify-ui-e2e.sh for new static routes only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0090.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1901,7 +1901,7 @@
       "slot": 15,
       "title": "Add procurement-pack-e2e to verify-gtm if not already chained",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0091.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1921,7 +1921,7 @@
       "slot": 16,
       "title": "Sync os/plan.json updated_at after wave closeout",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0092.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1941,7 +1941,7 @@
       "slot": 17,
       "title": "Keep next_tasks empty unless founder says PLAN WITH NO ASF repopulate",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0093.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1961,7 +1961,7 @@
       "slot": 18,
       "title": "Grep committed docs for TrustField implementation tasks \u2014 reject",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0094.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1979,9 +1979,9 @@
       "priority": "P3",
       "lane": "noetfield",
       "slot": 19,
-      "title": "Grep www copy for competitor names \u2014 reject",
+      "title": "Grep www copy for third-party vendor names \u2014 reject",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0095.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -1989,7 +1989,7 @@
         "os/SHIP_NOW.md",
         "os/plan.json"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0095: Grep www copy for competitor names \u2014 reject",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0095: Grep www copy for third-party vendor names \u2014 reject",
       "future_stub_map": null
     },
     {
@@ -2001,7 +2001,7 @@
       "slot": 20,
       "title": "Run session-close via cursor_agent_self_audit for noetfield_cloud agent",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0096.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -2021,7 +2021,7 @@
       "slot": 21,
       "title": "Update LOCKED_MANIFEST.md generated_at after regen",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0097.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -2041,7 +2041,7 @@
       "slot": 22,
       "title": "Mirror noetfield-1000 index to ~/.cursor/plans/noetfield-os/README.md",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0098.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -2061,7 +2061,7 @@
       "slot": 23,
       "title": "Run sync-noetfield-plans-status.py after marking nf-* done",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0099.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -2081,7 +2081,7 @@
       "slot": 24,
       "title": "Validate 1000 count and 10\u00d74\u00d725 grid in REGISTRY.json",
       "path": "os/plan-library/noetfield-1000/prompts/phase-0-ship-ops/T3/nf-0100.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
@@ -2101,7 +2101,7 @@
       "slot": 0,
       "title": "Implement Drift Contract v0 fields on TLE draft API (drift_class, baseline_tle_id)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0101.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2120,7 +2120,7 @@
       "slot": 1,
       "title": "Add evaluate-vs-last-TLE diff helper endpoint or service stub",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0102.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2139,7 +2139,7 @@
       "slot": 2,
       "title": "Add risk_summary to confidence factors in evaluate response",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0103.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2158,7 +2158,7 @@
       "slot": 3,
       "title": "Regression: make procurement-pack-e2e after TLE export change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0104.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2177,7 +2177,7 @@
       "slot": 4,
       "title": "Extend test_tle_flow.py for drift contract fields",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0105.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2215,7 +2215,7 @@
       "slot": 6,
       "title": "Add delta_summary and severity to drift export JSON",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0107.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2234,7 +2234,7 @@
       "slot": 7,
       "title": "Document Drift Contract v0 in docs/spec phase note only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0108.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2253,7 +2253,7 @@
       "slot": 8,
       "title": "Wire workspace UI badge when drift_class present",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0109.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2272,7 +2272,7 @@
       "slot": 9,
       "title": "Validate TLE sample YAML still passes schema",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0110.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2291,7 +2291,7 @@
       "slot": 10,
       "title": "Run pytest test_tle_flow.py -q after TLE service edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0111.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2310,7 +2310,7 @@
       "slot": 11,
       "title": "Add audit_digest linkage in board pack JSON export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0112.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2329,7 +2329,7 @@
       "slot": 12,
       "title": "Ensure confidence score visible on PDF cover regression test",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0113.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2348,7 +2348,7 @@
       "slot": 13,
       "title": "Add copilot-pilot-e2e step asserting confidence in export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0114.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2367,7 +2367,7 @@
       "slot": 14,
       "title": "Cross-check GOVERNANCE_DRIFT_BLUEPRINTS_INDEX P0 gaps list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0115.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2386,7 +2386,7 @@
       "slot": 15,
       "title": "Compare TLE v1 fields to TRUST_LEDGER_PRODUCT_BLUEPRINT locked spec",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0116.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2405,7 +2405,7 @@
       "slot": 16,
       "title": "Add drift metrics placeholder in cognitive dashboard copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0117.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2424,7 +2424,7 @@
       "slot": 17,
       "title": "Validate /trust-ledger/sample-report/ still 200",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0118.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2443,7 +2443,7 @@
       "slot": 18,
       "title": "Extend tle-smoke.sh for optional drift fields when shipped",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0119.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2462,7 +2462,7 @@
       "slot": 19,
       "title": "Add README-procurement.txt citation to governance sources book",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0120.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2481,7 +2481,7 @@
       "slot": 20,
       "title": "Harden KMS digest v2 signature_block in export path",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0121.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2500,7 +2500,7 @@
       "slot": 21,
       "title": "Add unit test for evaluate vs baseline diff empty state",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0122.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2519,7 +2519,7 @@
       "slot": 22,
       "title": "Document evaluate-vs-TLE as partial in REPO_TRUTH if not full",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0123.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2538,7 +2538,7 @@
       "slot": 23,
       "title": "Reject Lane C payment fields in TLE schema edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0124.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2557,7 +2557,7 @@
       "slot": 24,
       "title": "Run make verify-gtm after any tle_service.py change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T0/nf-0125.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2576,7 +2576,7 @@
       "slot": 0,
       "title": "Implement Drift Contract v0 fields on TLE draft API (drift_class, baseline_tle_id)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0126.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2595,7 +2595,7 @@
       "slot": 1,
       "title": "Add evaluate-vs-last-TLE diff helper endpoint or service stub",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0127.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2614,7 +2614,7 @@
       "slot": 2,
       "title": "Add risk_summary to confidence factors in evaluate response",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0128.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2633,7 +2633,7 @@
       "slot": 3,
       "title": "Regression: make procurement-pack-e2e after TLE export change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0129.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2652,7 +2652,7 @@
       "slot": 4,
       "title": "Extend test_tle_flow.py for drift contract fields",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0130.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2671,7 +2671,7 @@
       "slot": 5,
       "title": "Harden board_pack_export signature_block chain",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0131.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2690,7 +2690,7 @@
       "slot": 6,
       "title": "Add delta_summary and severity to drift export JSON",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0132.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2709,7 +2709,7 @@
       "slot": 7,
       "title": "Document Drift Contract v0 in docs/spec phase note only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0133.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2728,7 +2728,7 @@
       "slot": 8,
       "title": "Wire workspace UI badge when drift_class present",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0134.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2747,7 +2747,7 @@
       "slot": 9,
       "title": "Validate TLE sample YAML still passes schema",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0135.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2766,7 +2766,7 @@
       "slot": 10,
       "title": "Run pytest test_tle_flow.py -q after TLE service edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0136.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2785,7 +2785,7 @@
       "slot": 11,
       "title": "Add audit_digest linkage in board pack JSON export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0137.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2804,7 +2804,7 @@
       "slot": 12,
       "title": "Ensure confidence score visible on PDF cover regression test",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0138.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2823,7 +2823,7 @@
       "slot": 13,
       "title": "Add copilot-pilot-e2e step asserting confidence in export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0139.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2842,7 +2842,7 @@
       "slot": 14,
       "title": "Cross-check GOVERNANCE_DRIFT_BLUEPRINTS_INDEX P0 gaps list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0140.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2861,7 +2861,7 @@
       "slot": 15,
       "title": "Compare TLE v1 fields to TRUST_LEDGER_PRODUCT_BLUEPRINT locked spec",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0141.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2880,7 +2880,7 @@
       "slot": 16,
       "title": "Add drift metrics placeholder in cognitive dashboard copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0142.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2899,7 +2899,7 @@
       "slot": 17,
       "title": "Validate /trust-ledger/sample-report/ still 200",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0143.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2918,7 +2918,7 @@
       "slot": 18,
       "title": "Extend tle-smoke.sh for optional drift fields when shipped",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0144.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2937,7 +2937,7 @@
       "slot": 19,
       "title": "Add README-procurement.txt citation to governance sources book",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0145.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2956,7 +2956,7 @@
       "slot": 20,
       "title": "Harden KMS digest v2 signature_block in export path",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0146.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2975,7 +2975,7 @@
       "slot": 21,
       "title": "Add unit test for evaluate vs baseline diff empty state",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0147.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -2994,7 +2994,7 @@
       "slot": 22,
       "title": "Document evaluate-vs-TLE as partial in REPO_TRUTH if not full",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0148.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3013,7 +3013,7 @@
       "slot": 23,
       "title": "Reject Lane C payment fields in TLE schema edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0149.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3032,7 +3032,7 @@
       "slot": 24,
       "title": "Run make verify-gtm after any tle_service.py change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T1/nf-0150.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3051,7 +3051,7 @@
       "slot": 0,
       "title": "Implement Drift Contract v0 fields on TLE draft API (drift_class, baseline_tle_id)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0151.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3070,7 +3070,7 @@
       "slot": 1,
       "title": "Add evaluate-vs-last-TLE diff helper endpoint or service stub",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0152.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3089,7 +3089,7 @@
       "slot": 2,
       "title": "Add risk_summary to confidence factors in evaluate response",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0153.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3108,7 +3108,7 @@
       "slot": 3,
       "title": "Regression: make procurement-pack-e2e after TLE export change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0154.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3127,7 +3127,7 @@
       "slot": 4,
       "title": "Extend test_tle_flow.py for drift contract fields",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0155.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3146,7 +3146,7 @@
       "slot": 5,
       "title": "Harden board_pack_export signature_block chain",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0156.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3165,7 +3165,7 @@
       "slot": 6,
       "title": "Add delta_summary and severity to drift export JSON",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0157.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3184,7 +3184,7 @@
       "slot": 7,
       "title": "Document Drift Contract v0 in docs/spec phase note only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0158.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3203,7 +3203,7 @@
       "slot": 8,
       "title": "Wire workspace UI badge when drift_class present",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0159.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3222,7 +3222,7 @@
       "slot": 9,
       "title": "Validate TLE sample YAML still passes schema",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0160.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3241,7 +3241,7 @@
       "slot": 10,
       "title": "Run pytest test_tle_flow.py -q after TLE service edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0161.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3260,7 +3260,7 @@
       "slot": 11,
       "title": "Add audit_digest linkage in board pack JSON export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0162.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3279,7 +3279,7 @@
       "slot": 12,
       "title": "Ensure confidence score visible on PDF cover regression test",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0163.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3298,7 +3298,7 @@
       "slot": 13,
       "title": "Add copilot-pilot-e2e step asserting confidence in export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0164.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3317,7 +3317,7 @@
       "slot": 14,
       "title": "Cross-check GOVERNANCE_DRIFT_BLUEPRINTS_INDEX P0 gaps list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0165.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3336,7 +3336,7 @@
       "slot": 15,
       "title": "Compare TLE v1 fields to TRUST_LEDGER_PRODUCT_BLUEPRINT locked spec",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0166.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3355,7 +3355,7 @@
       "slot": 16,
       "title": "Add drift metrics placeholder in cognitive dashboard copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0167.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3374,7 +3374,7 @@
       "slot": 17,
       "title": "Validate /trust-ledger/sample-report/ still 200",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0168.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3393,7 +3393,7 @@
       "slot": 18,
       "title": "Extend tle-smoke.sh for optional drift fields when shipped",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0169.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3412,7 +3412,7 @@
       "slot": 19,
       "title": "Add README-procurement.txt citation to governance sources book",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0170.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3431,7 +3431,7 @@
       "slot": 20,
       "title": "Harden KMS digest v2 signature_block in export path",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0171.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3450,7 +3450,7 @@
       "slot": 21,
       "title": "Add unit test for evaluate vs baseline diff empty state",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0172.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3469,7 +3469,7 @@
       "slot": 22,
       "title": "Document evaluate-vs-TLE as partial in REPO_TRUTH if not full",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0173.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3488,7 +3488,7 @@
       "slot": 23,
       "title": "Reject Lane C payment fields in TLE schema edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0174.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3507,7 +3507,7 @@
       "slot": 24,
       "title": "Run make verify-gtm after any tle_service.py change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T2/nf-0175.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3526,7 +3526,7 @@
       "slot": 0,
       "title": "Implement Drift Contract v0 fields on TLE draft API (drift_class, baseline_tle_id)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0176.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3545,7 +3545,7 @@
       "slot": 1,
       "title": "Add evaluate-vs-last-TLE diff helper endpoint or service stub",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0177.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3564,7 +3564,7 @@
       "slot": 2,
       "title": "Add risk_summary to confidence factors in evaluate response",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0178.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3583,7 +3583,7 @@
       "slot": 3,
       "title": "Regression: make procurement-pack-e2e after TLE export change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0179.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3602,7 +3602,7 @@
       "slot": 4,
       "title": "Extend test_tle_flow.py for drift contract fields",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0180.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3621,7 +3621,7 @@
       "slot": 5,
       "title": "Harden board_pack_export signature_block chain",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0181.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3640,7 +3640,7 @@
       "slot": 6,
       "title": "Add delta_summary and severity to drift export JSON",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0182.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3659,7 +3659,7 @@
       "slot": 7,
       "title": "Document Drift Contract v0 in docs/spec phase note only",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0183.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3678,7 +3678,7 @@
       "slot": 8,
       "title": "Wire workspace UI badge when drift_class present",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0184.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3697,7 +3697,7 @@
       "slot": 9,
       "title": "Validate TLE sample YAML still passes schema",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0185.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3716,7 +3716,7 @@
       "slot": 10,
       "title": "Run pytest test_tle_flow.py -q after TLE service edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0186.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3735,7 +3735,7 @@
       "slot": 11,
       "title": "Add audit_digest linkage in board pack JSON export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0187.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3754,7 +3754,7 @@
       "slot": 12,
       "title": "Ensure confidence score visible on PDF cover regression test",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0188.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3773,7 +3773,7 @@
       "slot": 13,
       "title": "Add copilot-pilot-e2e step asserting confidence in export",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0189.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3792,7 +3792,7 @@
       "slot": 14,
       "title": "Cross-check GOVERNANCE_DRIFT_BLUEPRINTS_INDEX P0 gaps list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0190.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3811,7 +3811,7 @@
       "slot": 15,
       "title": "Compare TLE v1 fields to TRUST_LEDGER_PRODUCT_BLUEPRINT locked spec",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0191.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3830,7 +3830,7 @@
       "slot": 16,
       "title": "Add drift metrics placeholder in cognitive dashboard copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0192.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3849,7 +3849,7 @@
       "slot": 17,
       "title": "Validate /trust-ledger/sample-report/ still 200",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0193.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3868,7 +3868,7 @@
       "slot": 18,
       "title": "Extend tle-smoke.sh for optional drift fields when shipped",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0194.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3887,7 +3887,7 @@
       "slot": 19,
       "title": "Add README-procurement.txt citation to governance sources book",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0195.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3906,7 +3906,7 @@
       "slot": 20,
       "title": "Harden KMS digest v2 signature_block in export path",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0196.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3925,7 +3925,7 @@
       "slot": 21,
       "title": "Add unit test for evaluate vs baseline diff empty state",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0197.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3944,7 +3944,7 @@
       "slot": 22,
       "title": "Document evaluate-vs-TLE as partial in REPO_TRUTH if not full",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0198.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3963,7 +3963,7 @@
       "slot": 23,
       "title": "Reject Lane C payment fields in TLE schema edits",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0199.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -3982,7 +3982,7 @@
       "slot": 24,
       "title": "Run make verify-gtm after any tle_service.py change",
       "path": "os/plan-library/noetfield-1000/prompts/phase-1-tle-core/T3/nf-0200.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
       "sources": [
         "docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
@@ -4020,7 +4020,7 @@
       "slot": 1,
       "title": "Harden evidence hash on ingest in connector service",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0202.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4039,7 +4039,7 @@
       "slot": 2,
       "title": "Fix workspace/connectors OAuth redirect to workspace list",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0203.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4058,7 +4058,7 @@
       "slot": 3,
       "title": "Add verify-ui-e2e check for connectors page content",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0204.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4077,7 +4077,7 @@
       "slot": 4,
       "title": "Document 3 evidence types in copilot demo step copy",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0205.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4096,7 +4096,7 @@
       "slot": 5,
       "title": "Extend seed-m365-evidence-stub.sh idempotency",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0206.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4115,7 +4115,7 @@
       "slot": 6,
       "title": "Validate evidence index API returns tenant_id",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0207.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4134,7 +4134,7 @@
       "slot": 7,
       "title": "Add pytest for connector connected state persistence",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0208.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4153,7 +4153,7 @@
       "slot": 8,
       "title": "Improve connector error message for missing env",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0209.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -4172,7 +4172,7 @@
       "slot": 9,
       "title": "Cross-check GOVERNANCE_SOURCES_BOOK M365 citation in buyer docs",
       "path": "os/plan-library/noetfield-1000/prompts/phase-2-evidence-connectors/T0/nf-0210.md",
-      "status": "done",
+      "status": "backlog",
       "verify": "make verify-gtm",
       "sources": [
         "docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md",
@@ -6295,7 +6295,7 @@
       "priority": "P0",
       "lane": "noetfield",
       "slot": 22,
-      "title": "Compare ServiceNow evidence workflow to 5-min TLE path (doc)",
+      "title": "Document enterprise ITSM evidence handoff pattern for 5-min TLE path (doc)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-3-workspace-enterprise/T0/nf-0323.md",
       "status": "backlog",
       "verify": "make verify-gtm",
@@ -6303,7 +6303,7 @@
         "governance-console/frontend/app/workspace/",
         "governance-console/backend/tests/test_tle_flow.py"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0323: Compare ServiceNow evidence workflow to 5-min TLE path (doc)",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0323: Document enterprise ITSM evidence handoff pattern for 5-min TLE path (doc)",
       "future_stub_map": null
     },
     {
@@ -6745,7 +6745,7 @@
       "priority": "P1",
       "lane": "noetfield",
       "slot": 22,
-      "title": "Compare ServiceNow evidence workflow to 5-min TLE path (doc)",
+      "title": "Document enterprise ITSM evidence handoff pattern for 5-min TLE path (doc)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-3-workspace-enterprise/T1/nf-0348.md",
       "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
@@ -6753,7 +6753,7 @@
         "governance-console/frontend/app/workspace/",
         "governance-console/backend/tests/test_tle_flow.py"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0348: Compare ServiceNow evidence workflow to 5-min TLE path (doc)",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0348: Document enterprise ITSM evidence handoff pattern for 5-min TLE path (doc)",
       "future_stub_map": null
     },
     {
@@ -7195,7 +7195,7 @@
       "priority": "P2",
       "lane": "noetfield",
       "slot": 22,
-      "title": "Compare ServiceNow evidence workflow to 5-min TLE path (doc)",
+      "title": "Document enterprise ITSM evidence handoff pattern for 5-min TLE path (doc)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-3-workspace-enterprise/T2/nf-0373.md",
       "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
@@ -7203,7 +7203,7 @@
         "governance-console/frontend/app/workspace/",
         "governance-console/backend/tests/test_tle_flow.py"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0373: Compare ServiceNow evidence workflow to 5-min TLE path (doc)",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0373: Document enterprise ITSM evidence handoff pattern for 5-min TLE path (doc)",
       "future_stub_map": null
     },
     {
@@ -7645,7 +7645,7 @@
       "priority": "P3",
       "lane": "noetfield",
       "slot": 22,
-      "title": "Compare ServiceNow evidence workflow to 5-min TLE path (doc)",
+      "title": "Document enterprise ITSM evidence handoff pattern for 5-min TLE path (doc)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-3-workspace-enterprise/T3/nf-0398.md",
       "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
@@ -7653,7 +7653,7 @@
         "governance-console/frontend/app/workspace/",
         "governance-console/backend/tests/test_tle_flow.py"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0398: Compare ServiceNow evidence workflow to 5-min TLE path (doc)",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0398: Document enterprise ITSM evidence handoff pattern for 5-min TLE path (doc)",
       "future_stub_map": null
     },
     {
@@ -8079,7 +8079,7 @@
       "priority": "P0",
       "lane": "noetfield",
       "slot": 20,
-      "title": "Compare MindBridge verifiable surface to /status-system pattern",
+      "title": "Document verifiable status surface pattern vs /status-system (doc)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-4-agents-automation/T0/nf-0421.md",
       "status": "backlog",
       "verify": "make verify-gtm",
@@ -8088,7 +8088,7 @@
         "copilot/index.html",
         "scripts/verify-gtm.sh"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0421: Compare MindBridge verifiable surface to /status-system pattern",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0421: Document verifiable status surface pattern vs /status-system (doc)",
       "future_stub_map": null
     },
     {
@@ -8554,7 +8554,7 @@
       "priority": "P1",
       "lane": "noetfield",
       "slot": 20,
-      "title": "Compare MindBridge verifiable surface to /status-system pattern",
+      "title": "Document verifiable status surface pattern vs /status-system (doc)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-4-agents-automation/T1/nf-0446.md",
       "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
@@ -8563,7 +8563,7 @@
         "copilot/index.html",
         "scripts/verify-gtm.sh"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0446: Compare MindBridge verifiable surface to /status-system pattern",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0446: Document verifiable status surface pattern vs /status-system (doc)",
       "future_stub_map": null
     },
     {
@@ -9029,7 +9029,7 @@
       "priority": "P2",
       "lane": "noetfield",
       "slot": 20,
-      "title": "Compare MindBridge verifiable surface to /status-system pattern",
+      "title": "Document verifiable status surface pattern vs /status-system (doc)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-4-agents-automation/T2/nf-0471.md",
       "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
@@ -9038,7 +9038,7 @@
         "copilot/index.html",
         "scripts/verify-gtm.sh"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0471: Compare MindBridge verifiable surface to /status-system pattern",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0471: Document verifiable status surface pattern vs /status-system (doc)",
       "future_stub_map": null
     },
     {
@@ -9504,7 +9504,7 @@
       "priority": "P3",
       "lane": "noetfield",
       "slot": 20,
-      "title": "Compare MindBridge verifiable surface to /status-system pattern",
+      "title": "Document verifiable status surface pattern vs /status-system (doc)",
       "path": "os/plan-library/noetfield-1000/prompts/phase-4-agents-automation/T3/nf-0496.md",
       "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
@@ -9513,7 +9513,7 @@
         "copilot/index.html",
         "scripts/verify-gtm.sh"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0496: Compare MindBridge verifiable surface to /status-system pattern",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0496: Document verifiable status surface pattern vs /status-system (doc)",
       "future_stub_map": null
     },
     {
@@ -13573,7 +13573,7 @@
       "priority": "P0",
       "lane": "noetfield",
       "slot": 18,
-      "title": "Compare Kwick-style table pattern without competitor names",
+      "title": "Compare buyer zone grid pattern without third-party vendor names",
       "path": "os/plan-library/noetfield-1000/prompts/phase-7-pilot-gtm/T0/nf-0719.md",
       "status": "backlog",
       "verify": "make verify-gtm",
@@ -13582,7 +13582,7 @@
         "docs/copilot/DESIGN_PARTNER_SOW_OUTLINE.md",
         "scripts/print-demo-url.sh"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0719: Compare Kwick-style table pattern without competitor names",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0719: Compare buyer zone grid pattern without third-party vendor names",
       "future_stub_map": null
     },
     {
@@ -14080,7 +14080,7 @@
       "priority": "P1",
       "lane": "noetfield",
       "slot": 18,
-      "title": "Compare Kwick-style table pattern without competitor names",
+      "title": "Compare buyer zone grid pattern without third-party vendor names",
       "path": "os/plan-library/noetfield-1000/prompts/phase-7-pilot-gtm/T1/nf-0744.md",
       "status": "backlog",
       "verify": "make verify-local-dev && make verify-ui-e2e && make copilot-pilot-e2e",
@@ -14089,7 +14089,7 @@
         "docs/copilot/DESIGN_PARTNER_SOW_OUTLINE.md",
         "scripts/print-demo-url.sh"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0744: Compare Kwick-style table pattern without competitor names",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0744: Compare buyer zone grid pattern without third-party vendor names",
       "future_stub_map": null
     },
     {
@@ -14587,7 +14587,7 @@
       "priority": "P2",
       "lane": "noetfield",
       "slot": 18,
-      "title": "Compare Kwick-style table pattern without competitor names",
+      "title": "Compare buyer zone grid pattern without third-party vendor names",
       "path": "os/plan-library/noetfield-1000/prompts/phase-7-pilot-gtm/T2/nf-0769.md",
       "status": "backlog",
       "verify": "make procurement-pack-e2e && make verify-ui-e2e",
@@ -14596,7 +14596,7 @@
         "docs/copilot/DESIGN_PARTNER_SOW_OUTLINE.md",
         "scripts/print-demo-url.sh"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0769: Compare Kwick-style table pattern without competitor names",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0769: Compare buyer zone grid pattern without third-party vendor names",
       "future_stub_map": null
     },
     {
@@ -15094,7 +15094,7 @@
       "priority": "P3",
       "lane": "noetfield",
       "slot": 18,
-      "title": "Compare Kwick-style table pattern without competitor names",
+      "title": "Compare buyer zone grid pattern without third-party vendor names",
       "path": "os/plan-library/noetfield-1000/prompts/phase-7-pilot-gtm/T3/nf-0794.md",
       "status": "backlog",
       "verify": "python3 scripts/validate-noetfield-1000-sources.py",
@@ -15103,7 +15103,7 @@
         "docs/copilot/DESIGN_PARTNER_SOW_OUTLINE.md",
         "scripts/print-demo-url.sh"
       ],
-      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0794: Compare Kwick-style table pattern without competitor names",
+      "agent_prompt": "PLAN WITH NO ASF \u2014 nf-0794: Compare buyer zone grid pattern without third-party vendor names",
       "future_stub_map": null
     },
     {

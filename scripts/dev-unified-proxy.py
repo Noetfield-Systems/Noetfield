@@ -46,12 +46,14 @@ NEXT_PREFIXES = (
 )
 
 def _is_next_trust_ledger(path: str) -> bool:
-    """Next UI: /trust-ledger, /trust-ledger/new, /trust-ledger/{id} — not www YAML/HTML."""
-    if path == "/trust-ledger" or path.startswith("/trust-ledger/new"):
+    """Next UI: dynamic TLE routes — not static www hub or sample-report HTML."""
+    if path.startswith("/trust-ledger/new"):
         return True
-    if path in ("/trust-ledger/", "/trust-ledger/index.html"):
+    if path in ("/trust-ledger/", "/trust-ledger/index.html", "/trust-ledger"):
         return False
     if path.startswith("/trust-ledger/sample-report"):
+        return False
+    if path.startswith("/trust-ledger/verify"):
         return False
     if path.startswith("/trust-ledger/") and not path.endswith((".html", ".yaml", ".yml", ".md")):
         return True
@@ -157,6 +159,12 @@ class UnifiedHandler(SimpleHTTPRequestHandler):
         return _proxy_target(path, self.command, hdrs)
 
     def do_GET(self) -> None:
+        path = self.path.split("?")[0]
+        if path == "/trust-ledger":
+            self.send_response(301)
+            self.send_header("Location", "/trust-ledger/")
+            self.end_headers()
+            return
         target = self._route()
         if target:
             return self._proxy(target)

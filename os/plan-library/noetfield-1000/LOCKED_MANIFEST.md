@@ -10,10 +10,10 @@ doc_id: noetfield-1000-locked-manifest
 # Noetfield 1000 LOCKED manifest
 
 **Library:** `noetfield-1000-locked`  
-**Generated:** 2026-06-08T14:00:00Z  
+**Generated:** 2026-06-13T08:28:52Z  
 **Grid:** 10 phases × 4 tiers × 25 prompts = 1000  
 **Trigger:** `PLAN WITH NO ASF`  
-**Pick:** `make pick-no-asf-plan`  
-**Pre-marked done:** phase-0-ship-ops T0–T3 (100) + shipped waves
+**Pick:** `python3 scripts/pick-noetfield-no-asf-plan.py --tier T0 --limit 1`  
+**Pre-marked done:** 12 prompts (shipped waves / regressions)
 
 Canonical: `~/Desktop/Noetfield/os/plan-library/noetfield-1000/REGISTRY.json`

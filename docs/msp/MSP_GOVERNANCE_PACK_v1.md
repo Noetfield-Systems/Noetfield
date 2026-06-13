@@ -15,7 +15,7 @@
 
 ## 0. MSP wedge (one sentence)
 
-> MSPs run Phase 1 (Purview readiness, labels, DLP, Copilot assessment); Noetfield is Phase 2 — **governance decision receipts** for Copilot and Studio changes — evaluate → receipt → export, metadata-only, multi-tenant friendly. **They configure; we receipt decisions.**
+> MSPs run Phase 1 (Purview readiness, labels, DLP, Copilot assessment); Noetfield is Phase 2 — **governance decision receipts** for Copilot and Studio changes — evaluate → receipt → export, metadata-only, multi-tenant friendly. **Phase 1 readiness → Phase 2 signed TLE receipts.**
 
 ---
 
@@ -24,7 +24,7 @@
 | In scope | Out of scope |
 |----------|--------------|
 | CSP / MSP multi-tenant Copilot attach | Direct federal GC (see `/federal/`) |
-| Phase 2 governance after readiness | Replacing Inforcer, Lighthouse, CIPP, Purview |
+| Phase 2 governance after readiness | Replacing MSP baseline tooling or Purview administration |
 | Partner LOI · wholesale · rev-share | Direct Vancouver SME wedge (MSP serves; Noetfield does not sell direct) |
 | Readiness → Record funnel | Bank Pilot / FRFI (shadow SKU — not MSP default) |
 | Per-tenant Governance Monitor MRR (orientation) | Payment, custody, MSB, engine SKU on www |
@@ -41,12 +41,11 @@
 | **Business Premium + Copilot SKUs** | Jul 1, 2026 | B-SKU bundle attach |
 | **Microsoft OSS readiness assessment** | Active | Import CSV → [READINESS_TO_RECORD_MAPPING_v1.md](./READINESS_TO_RECORD_MAPPING_v1.md) |
 | **MSP Purview multi-tenant tooling** | 2026 | Complement — Phase 1 stays in partner stack |
-| **Lighthouse + CIPP** dual stack | 2026 | Phase 1 tooling — Noetfield after baselines |
+| **MSP admin tooling** dual stack | 2026 | Phase 1 tooling — Noetfield after baselines |
 
 **External references:**
 
 - [Microsoft — Secure and govern M365 Copilot (partner assets)](https://partner.microsoft.com/en-us/marketing-center/assets/collection/secure-govern-m365-copilot)
-- [Inforcer — Copilot Readiness Assessments](https://www.inforcer.com/copilot-readiness-assessments)
 - [Microsoft OSS — m365-copilot-automated-readiness-assessment](https://github.com/microsoft/m365-copilot-automated-readiness-assessment)
 - [CSP sell-through — Defender & Purview](https://microsoftpartners.microsoft.com/Microsoft-Security-Partners/sell-through-csp/)
 
@@ -69,7 +68,7 @@ Detail: [PHASE1_PHASE2_RACI_v1.md](./PHASE1_PHASE2_RACI_v1.md)
 |-----|--------------|------------|-------------|
 | **Governance Pack (via MSP)** | MSP prime · Noetfield sub | $2k–10k pilot | TLE + export per tenant |
 | **Governance Monitor MRR** | MSP | Per-tenant/mo (TBD) | Monthly evaluate + QBR export |
-| **Partner enablement** | Noetfield | Free with LOI | Battlecard · demo · handoff runbook |
+| **Partner enablement** | Noetfield | Free with LOI | Partner one-pager · demo · handoff runbook |
 | **Trust Brief (anchor client)** | Direct or co-deliver | $10k | Optional enterprise proof for MSP practice |
 
 **Partner CTA:** `/trust-brief/intake/?interest=msp` · `operations@noetfield.com`
@@ -82,7 +81,7 @@ Detail: [PHASE1_PHASE2_RACI_v1.md](./PHASE1_PHASE2_RACI_v1.md)
 
 | Tier | Requirements | Benefits |
 |------|--------------|----------|
-| **Registered** | LOI · 1 SE trained | Battlecard · intake routing |
+| **Registered** | LOI · 1 SE trained | Partner one-pager · intake routing |
 | **Certified** | 3 tenants live | Co-marketing · office hours priority |
 | **Premier** | 10+ tenants · MRR | Wholesale pricing · feature input |
 
@@ -104,10 +103,10 @@ Detail: [PHASE1_PHASE2_RACI_v1.md](./PHASE1_PHASE2_RACI_v1.md)
 
 | Partner ask | Noetfield response |
 |-------------|-------------------|
-| “Replace Inforcer / Lighthouse?” | **No** — Phase 1 stays in your stack; we are Phase 2 receipts. |
+| “Replace our Phase 1 readiness stack?” | **No** — Phase 1 stays in your stack; we are Phase 2 receipts. |
 | “Multi-tenant Copilot search across clients?” | **No** — Copilot is single-tenant per Microsoft design. |
 | “White-label the whole product?” | Phase 2 exports can co-brand; API/workspace branding TBD by tier. |
-| “We need Purview deployed for us” | Phase 1 — your practice or Inforcer; not Noetfield. |
+| “We need Purview deployed for us” | Phase 1 — your MSP practice; not Noetfield. |
 | “Certified Microsoft partner badge?” | We complement Solutions Partner Security motion — not a certifier. |
 
 ---

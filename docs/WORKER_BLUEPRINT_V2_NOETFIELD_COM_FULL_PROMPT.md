@@ -12,8 +12,8 @@ trace_vault: governance_goal_specialist-20260608-001
 trace_registry: SinaaiMonoRepo/SinaaiDataBase/noetfield/docs/TRACE_REGISTRY_GOVERNANCE_GOAL_20260608.md
 ```
 
+**Status:** Superseded by `WORKER_BLUEPRINT_V3_NOETFIELD_COM_FULL_PROMPT.md` — archive reference only.  
 **Version:** 2.0 · **Date:** 2026-06-08  
-**Status:** Worker handoff — market-aligned GTM v2 for static site + spec  
 **Workspace root:** `/Users/sinakazemnezhad/Desktop/Noetfield-All-Documents`  
 **Canonical ship repo:** `Noetfield/` (NOT `~/Desktop/Noetfield` — cloud agent only)  
 **Domain:** https://www.noetfield.com  
@@ -79,11 +79,11 @@ Money flow (governance consideration):
   Customer pays TrustField Technologies → deliverable includes Noetfield TLE/evidence pack.
   Noetfield.com CTAs: "Request via TrustField" or contact that routes to hello@trustfield.ca for paid SKUs.
 
-Market proof (sell like these):
-• Insight Canada — Copilot Readiness CA$12,000 (Microsoft Marketplace)
-• Boxwood — C$5,000–8,000 diagnostic sprint
-• AI QuickScan — $750–1,500 micro-scan
-• Vanta pattern — evidence vault + export (long-term NF-S1)
+Market proof (buyer patterns only — never name vendors on www):
+• Fixed-fee Copilot Readiness Assessment (Microsoft Marketplace class)
+• Diagnostic sprint band C$5,000–8,000
+• Micro-scan entry offer $750–1,500
+• Trust center diligence pattern — evidence vault + export (long-term NF-S1)
 
 ══════════════════════════════════════════════════════════════════
 SKU CATALOG V2 — SHOW ON NOETFIELD.COM (priced; invoiced by TrustField)
@@ -164,7 +164,7 @@ ALLOWED:
 ✅ Link to TrustField bundle pages when live
 
 FORBIDDEN this sprint:
-❌ Customer payment forms on noetfield.com (Stripe etc.)
+❌ Customer payment forms on noetfield.com (card checkout etc.)
 ❌ api.noetfield.com production claims without scaffold gate
 ❌ Merging into SinaaiRuntime :8000
 ❌ RPAA registration services (TrustField lane)

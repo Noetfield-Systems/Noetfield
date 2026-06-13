@@ -1,5 +1,7 @@
 # Agent tracking (Noetfield)
 
+**Doc hub:** [docs/DOC_UNIFIED_INDEX_LOCKED_v1.md](../docs/DOC_UNIFIED_INDEX_LOCKED_v1.md) · [docs/README.md](../docs/README.md)
+
 **Read this first** for task priority. Do not create `todolist/` at the repository root.
 
 **Every session (before edits):** `make agent-session-start` — loads `SESSION_CLOSEOUT_LATEST.md` + mandatory read chain (`noetfield_cloud`).

@@ -75,14 +75,14 @@ NORTH STAR — REAL MARKET SEAT (June 2026)
 ══════════════════════════════════════════════════════════════════
 
 You sit BELOW:
-  • Securiti / OneTrust / Credo AI ($50K–500K enterprise AI GRC platforms)
+  • Full enterprise AI GRC platforms ($50K–500K estate inventory + enforce)
   • Copilot consulting firms ($15K–50K SMB readiness assessments)
 
 You sit ABOVE:
   • Free Microsoft Purview docs + ISED voluntary code PDFs
 
 Category name to use (market-aligned):
-  "Copilot Readiness Assessment" — same category as Securiti; smaller scope, fixed fee.
+  "Copilot Readiness Assessment" — fixed fee, reduced scope, execution receipts.
 
 Buyer line (locked):
   "We produce the audit trail your Copilot deployment will be asked for later."
@@ -93,15 +93,16 @@ Money flows:
 
 First proof = one org exports board PDF and uses it in a governance meeting + signed SOW/deposit.
 
-Success models to COPY:
-  • Securiti — named "Copilot Readiness Assessment" SKU
-  • Vanta/Drata — procurement ZIP + evidence pack for diligence
+Copy patterns (structure only — never name vendors on www):
+  • Fixed-fee Copilot Readiness Assessment SKU
+  • Procurement ZIP + evidence pack for diligence
   • Microsoft Learn — Purview + audit retention before Copilot rollout
 
-Success models to IGNORE:
-  • Full GRC platform scope (ServiceNow, OneTrust breadth)
+Do NOT copy:
+  • Full GRC platform scope (estate inventory + enforce)
   • Payment/RPAA/MSB as Noetfield lead (TrustField owns)
   • Trust Ledger SaaS subscription checkout (NF-04 gated)
+  • Vendor comparison pages on public www
 
 ══════════════════════════════════════════════════════════════════
 THREE OFFERINGS ONLY (OFFERINGS_LOCKED — do not add SKU #4)
@@ -126,7 +127,7 @@ OFFERING 2 — Copilot Governance Pack (NF-CGP) · primary GTM wedge
     CAD 5,000–10,000 · 4–6 weeks
     Full evidence index · signed TLE v1 · confidence score · board PDF · procurement ZIP
     Page: /copilot/pilot/
-    Inspired by: Securiti Copilot Readiness Assessment (scope reduced, fixed fee)
+    Fixed-fee Copilot Readiness Pilot — scope reduced, board PDF + procurement ZIP
 
   Hook copy (factual):
     M365 Copilot ≈ USD 30/user/mo (annual commit) — governance stall weeks 6–12 without evidence.
@@ -163,7 +164,7 @@ HOME (/)
 
 /trust-brief/
   NF-TB full sell page · $10,000 visible · W1–W6 table
-  Compare footnote: "SOC2 automation ~$10K/yr — different SKU (infrastructure not AI governance)"
+  Compare footnote: "Infrastructure compliance automation is a different SKU from AI governance receipts"
   CTA → intake
 
 /copilot/
@@ -194,7 +195,7 @@ platform.noetfield.com
 ══════════════════════════════════════════════════════════════════
 5-MINUTE DEMO SCRIPT (locked — show confidence score)
 ══════════════════════════════════════════════════════════════════
-1. "Copilot adoption needs a board-ready decision record, not another chatbot."
+1. "Copilot adoption needs a board-ready decision record — signed TLE export for audit."
 2. Evaluate intent → RID
 3. Connect M365 metadata → Evidence Index
 4. Draft TLE → highlight confidence score + decision
@@ -215,7 +216,7 @@ SAY:
 
 NEVER:
   custody, settlement, payment intent, money transmission, MSB, PSP operator,
-  we move funds, Stripe buy button in primary nav, guaranteed compliance certification,
+  we move funds, card buy button in primary nav, guaranteed compliance certification,
   Trust Ledger SaaS available now, SOC2 certified (unless live),
   Microsoft endorsement, fourth retail product SKU
 
@@ -266,7 +267,7 @@ P2 — ENTERPRISE + TRUST LEDGER + INTAKE (session 3)
   [ ] operations@ only on public surfaces · pytest intake email test PASS
 
 P3 — PROCUREMENT PACK + HANDOFF + VERIFY (session 4)
-  [ ] Procurement ZIP sample (Vanta pattern)
+  [ ] Procurement ZIP sample (trust center diligence pattern)
   [ ] TrustField handoff section
   [ ] Platform smoke OR documented blocker
   [ ] Closeout YAML to commercial vault

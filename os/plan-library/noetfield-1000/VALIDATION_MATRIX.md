@@ -21,8 +21,8 @@ doc_id: noetfield-1000-validation-matrix
 - [required] `docs/strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md` — OK
 - [required] `docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md` — OK
 - [required] `docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md` — OK
-- [required] `docs/reference/GOVERNANCE_SOURCES_BOOK_v1.md` — OK
-- [required] `docs/reference/GOVERNANCE_DRIFT_DETECTION_SOURCES_v1.md` — OK
+- [required] `docs/references/GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md` — OK
+- [required] `docs/references/GOVERNANCE_DRIFT_DETECTION_SOURCES_LOCKED_v1.md` — OK
 - [required] `docs/references/GOVERNANCE_DRIFT_BLUEPRINTS_INDEX_LOCKED_v1.md` — OK
 - [required] `docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md` — OK
 - [required] `docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md` — OK
@@ -40,13 +40,13 @@ doc_id: noetfield-1000-validation-matrix
 
 - GTM scorecard: proof > features (Tier A before B)
 - Repo truth: disk beats chat; ship-verify alias
-- Privacy: no competitor tables on www
+- Privacy: no vendor comparison tables on www
 - Boundary: no TrustField/VIRLUX implementation in repo
 - Self-audit: session-start/closeout before/after work
 
-## World-model comparison (T3 slots only)
+## World-model patterns (T3 slots only — no vendor names)
 
-- MindBridge verifiable audit surface
+- Verifiable audit status surface pattern
 - Microsoft Purview evidence connector narrative
 - NIST AI RMF Govern/Manage mapping
-- ServiceNow GRC workflow vs 5-min board PDF wedge
+- Enterprise ITSM workflow vs 5-min board PDF wedge (buyer zones only)

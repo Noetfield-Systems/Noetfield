@@ -69,7 +69,24 @@ See [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md).
 | **Copilot Governance Pack** | Design partner $2k–10k pilot | Block + record + export (TLE + board PDF) |
 | **Bank Pilot** | Custom | Read-only shadow simulation — no execution authority |
 
-**Primary CTA:** [Request Governance Brief](/trust-brief/intake/) · `operations@noetfield.com`
+**Primary CTA (contract):** [Request Governance Brief](/trust-brief/intake/) · `operations@noetfield.com`
+
+**Self-serve CTA (access):** [Start free sandbox](/start/) — no sales call · 14-day · 50 evaluates
+
+---
+
+## 3b. Packaging funnel (v16 — Sumsub-class)
+
+See [WWW_V16_PACKAGING_PLAN_LOCKED_v1.md](../WWW_V16_PACKAGING_PLAN_LOCKED_v1.md) · [COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md](../ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md).
+
+| Stage | Buyer action | Mode |
+|-------|--------------|------|
+| **Try** | Sign up on `/start/` | Sandbox · mock M365 |
+| **Prove** | Evaluate → TLE sample → export orientation | Sandbox |
+| **Apply** | Design partner program | Production path |
+| **Buy** | Trust Brief or Bank Pilot SOW | Contract SKU |
+
+**Published tiers:** `/pricing/` · **Agentic workflows:** investigate → triage → draft TLE → act on low-risk (human approvers on high-risk).
 
 ---
 

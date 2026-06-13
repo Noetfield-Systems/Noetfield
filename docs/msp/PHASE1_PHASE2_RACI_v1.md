@@ -38,7 +38,7 @@
 | DLP policies for Copilot | **R/A** | — | C |
 | Conditional Access baseline | **R/A** | — | C |
 | SharePoint/Teams oversharing remediation | **R/A** | — | C |
-| Lighthouse / CIPP / Inforcer baseline push | **R/A** | — | I |
+| MSP tenant baseline push | **R/A** | — | I |
 | Copilot license provision (CSP) | **R/A** | — | C |
 | User training & change management | **R/A** | — | **A** |
 | Readiness report delivery | **R/A** | C | I |
