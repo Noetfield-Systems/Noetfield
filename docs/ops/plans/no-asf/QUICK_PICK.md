@@ -1,52 +1,43 @@
 # PLAN WITH NO ASF — quick pick
 
-When the founder says **PLAN WITH NO ASF**, start here. Pick the next **≤3 agent** items (not `asf_only` / not S8 Hub).
+When the founder says **PLAN WITH NO ASF**, start here. Pick **≤3** agent items (not `asf_only` / not S8 Hub).
 
-**Executive synthesis:** [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](../PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)  
-**Unified 500 master:** [UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md)  
-**Tier taxonomy:** [SUCCESS_MODEL_TIERS_v1.md](../PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md)  
-**v3 intelligence:** [PICK_INTELLIGENCE_v1.md](../PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) · **All 500 ranked:** [ALL_500_TIER_INDEX_v1.md](../PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md)  
-**Redesigned prompts:** [unified_500_index.json](../PROMPT_PACK_LOCKED/unified_500_index.json) → `prompt_redesigned` per ID
+**Wise rules:** [WISDOM_PICK_RULES_v1.md](../PROMPT_PACK_LOCKED/WISDOM_PICK_RULES_v1.md) · **Synthesis:** [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](../PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)  
+**All 500 ranked:** [ALL_500_TIER_INDEX_v1.md](../PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md) · **Index JSON:** `prompt_wise` per ID
 
 **Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`
 
-## Wise pick order (v3 — benchmark + goals)
+## v4 wise pick (read `prompt_wise` first)
 
-1. Filter `ship_status: open` — skip `partial` unless extending live slice
-2. Sort `priority_rank` ascending · read `prompt_redesigned` before code
-3. **P0 goals:** `customer_1` + `tle_wedge` first (board PDF · tamper export)
-4. Max **2× S0** per iter · diversify tier · never 3× S7 · never mix F+M ICP
+1. Filter `ship_status: open`
+2. Sort **`wisdom_score`** descending
+3. Span **proof-demo** + **proof-export** clusters per iter
+4. Max 2× S0 · defer MSP/federal unless sprint declared
 
-| Phase | Goal | Pick when |
-|-------|------|-----------|
-| P1-proof | customer_1 | Demo · QuickScan · board PDF in meeting |
-| P2-wedge | tle_wedge | Procurement tamper · receipt portability |
-| P3-story | copilot_story | Agent 365 / Purview complement |
-| P4-diligence | trust_diligence | Framework grid · diligence inbound |
-| P5-channel | msp / federal | Lane-locked only |
+## Next 3 — proof chain (wisdom computed)
 
-## Next 3 recommended (v3 computed)
+| # | ID | Wisdom | Cluster | Plan |
+|---|-----|--------|---------|------|
+| 1 | ship-fwd-097 | 100 | proof-demo | Demo script “governance meeting” |
+| 2 | ship-fwd-109 | 100 | proof-export | Board pack PDF cover E-23 fields |
+| 3 | ship-fwd-081 | 95 | proof-export | Tamper FAIL export verify hardening |
 
-| # | ID | FQ | Tier | Goal align | Plan |
-|---|-----|-----|------|------------|------|
-| 1 | ship-fwd-097 | 038 | S0 | 100 | Demo script “governance meeting” (5-min board PDF) |
-| 2 | ship-fwd-301 | 242 | S0 | 100 | Partner demo URL + activation dashboard spec |
-| 3 | ship-fwd-081 | 022 | S6 | 92 | Tamper FAIL export verify hardening |
+**Also wisdom 100:** `ship-fwd-170` Playwright · `ship-fwd-091` QuickScan
 
-**Also rank ≤10:** `ship-fwd-170` Playwright · `ship-fwd-091` QuickScan · `ship-fwd-087` behavioral log
+## Sprint themes (pick one focus/week)
 
-## GTM_NEXT (disk verify — iter 19 carry)
+See [WISDOM_PICK_RULES_v1.md](../PROMPT_PACK_LOCKED/WISDOM_PICK_RULES_v1.md) — `customer-1-proof-week` · `copilot-story-week` · `msp-enablement-week`
 
-1. **ship-procurement-openapi-verify-057** · `/openapi.json` 200 in gtm-ops bundle
-2. **ship-services-governance-readme-openapi-058** · services/governance README OpenAPI path
-3. **ship-tenth-audit-merge-rule-059** · tenth-audit manifest closeout template
+## GTM_NEXT (disk verify — iter 19)
 
-## Agentic only — Hub (S8 — skip NF-CLOUD)
+1. **ship-procurement-openapi-verify-057**
+2. **ship-services-governance-readme-openapi-058**
+3. **ship-tenth-audit-merge-rule-059**
 
-| ID | Outcome |
-|----|---------|
-| **ship-design-partner-outreach-026** | One named CIO + demo URL sent |
+## Agentic only — Hub (S8)
 
-## Inventory (v3)
+**ship-design-partner-outreach-026** — one named CIO + demo URL (Hub only)
 
-440 open · 60 partial · 500 total — full table in ALL_500_TIER_INDEX_v1.md
+## Links
+
+[UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) · [SUCCESS_MODEL_TIERS_v1.md](../PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) · [PICK_INTELLIGENCE_v1.md](../PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md)

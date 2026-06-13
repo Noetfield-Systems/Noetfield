@@ -389,8 +389,8 @@ data = json.loads(p.read_text())
 errs = []
 if data.get("count") != 500:
     errs.append(f"count={data.get('count')} expected 500")
-if data.get("version") != "v3":
-    errs.append(f"version={data.get('version')} expected v3")
+if data.get("version") != "v4":
+    errs.append(f"version={data.get('version')} expected v4")
 next3 = data.get("next_3_recommended", [])
 if len(next3) != 3:
     errs.append(f"next_3_recommended len={len(next3)} expected 3")
@@ -407,7 +407,11 @@ p0 = plans[0] if plans else {}
 if "prompt_structured" not in p0 or "gtm_impact" not in p0:
     errs.append("plans missing v3 fields (prompt_structured, gtm_impact)")
 if "prompt_redesigned" not in p0 or "goal_alignment" not in p0:
-    errs.append("plans missing v3 fields (prompt_redesigned, goal_alignment)")
+    errs.append("plans missing v4 fields (prompt_redesigned, goal_alignment)")
+if "wisdom_score" not in p0 or "prompt_wise" not in p0:
+    errs.append("plans missing v4 fields (wisdom_score, prompt_wise)")
+if not data.get("sprint_themes"):
+    errs.append("missing sprint_themes array")
 fqs = [x.get("fq") for x in plans]
 if len(set(fqs)) != 500 or min(fqs) != 1 or max(fqs) != 500:
     errs.append(f"fq coverage: unique={len(set(fqs))} min={min(fqs) if fqs else 0} max={max(fqs) if fqs else 0}")
@@ -423,11 +427,12 @@ PY
   fi
 fi
 for f in docs/ops/plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md \
-         docs/ops/plans/PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md; do
+         docs/ops/plans/PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md \
+         docs/ops/plans/PROMPT_PACK_LOCKED/WISDOM_PICK_RULES_v1.md; do
   if [[ -f "$f" ]]; then
     echo "OK   exists $f"
   else
-    echo "FAIL missing v3 asset: $f" >&2
+    echo "FAIL missing v4 asset: $f" >&2
     fail=1
   fi
 done
@@ -435,6 +440,7 @@ if [[ -f docs/ops/plans/no-asf/QUICK_PICK.md ]]; then
   if grep -q 'UNIFIED_500_MASTER_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
      && grep -q 'PICK_INTELLIGENCE_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
      && grep -q 'SUCCESS_MODEL_TIERS_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
+     && grep -q 'WISDOM_PICK_RULES_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
      && grep -q 'generate_unified_prompt_pack_500' docs/ops/plans/no-asf/QUICK_PICK.md; then
     echo "OK   QUICK_PICK unified 500 references"
   else

@@ -85,7 +85,7 @@ S8-agentic — Hub only (R-011).
    - Wedge: 5-min board PDF moment — buyer sees confidence + export path
    - Moment: CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
 
-2. **ship-fwd-301** · S0-proof · goal align 100 · Partner demo URL + activation dashboard spec
+2. **ship-fwd-109** · S0-proof · goal align 96 · Board pack PDF cover E-23 fields
    - Wedge: 5-min board PDF moment — buyer sees confidence + export path
    - Moment: CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
 
@@ -107,21 +107,6 @@ S8-agentic — Hub only (R-011).
 **Stop if:** No TrustField bleed (R-001); No RPAA / BoC supervision claims on www; No Hub send/call from NF-CLOUD (R-011)
 **Anti-scope:** SSO / multi-tenant hardening (Tier C); Real M365 read-only before customer #2 (Tier B)
 **Verify:** `copilot-pilot-e2e` · ≤3 tasks this iter
-
----
-
-## ship-fwd-301 FQ-242
-**Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 100
-**Benchmark pattern (Vanta · Drata · Credo AI):** 5-min board PDF moment — buyer sees confidence + export path
-**Buyer moment:** CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
-**Task:** Partner demo URL + activation dashboard spec
-**Outcome:** Sponsor reads weekly KPIs
-**Primary artifact:** `docs/ or governance-console/`
-**Pre-read:** MEMORY_LOCKED.yaml, INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md, NOETFIELD_GTM_60_DAY_LOCKED_v1.md
-**Success when:** `docs+staging` passes; cursor-reply-latest.txt updated
-**Stop if:** No TrustField bleed (R-001); No RPAA / BoC supervision claims on www; No Hub send/call from NF-CLOUD (R-011)
-**Anti-scope:** SSO / multi-tenant hardening (Tier C); Real M365 read-only before customer #2 (Tier B)
-**Verify:** `docs+staging` · ≤3 tasks this iter
 
 ---
 
@@ -170,21 +155,6 @@ S8-agentic — Hub only (R-011).
 
 ---
 
-## ship-fwd-181 FQ-122
-**Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 96
-**Benchmark pattern (Vanta · Drata · Credo AI):** 5-min board PDF moment — buyer sees confidence + export path
-**Buyer moment:** CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
-**Task:** `MetricStrip` on cognitive-dashboard
-**Outcome:** KPI row: evaluates, blocks, exports
-**Primary artifact:** `docs/ or governance-console/`
-**Pre-read:** MEMORY_LOCKED.yaml, INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md, NOETFIELD_GTM_60_DAY_LOCKED_v1.md
-**Success when:** `verify-ui-e2e` passes; TLE export tamper gate holds; cursor-reply-latest.txt updated
-**Stop if:** No TrustField bleed (R-001); No RPAA / BoC supervision claims on www; No Hub send/call from NF-CLOUD (R-011)
-**Anti-scope:** SSO / multi-tenant hardening (Tier C); Real M365 read-only before customer #2 (Tier B)
-**Verify:** `verify-ui-e2e` · ≤3 tasks this iter
-
----
-
 ## ship-fwd-260 FQ-201
 **Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 96
 **Benchmark pattern (Vanta · Drata · Credo AI):** 5-min board PDF moment — buyer sees confidence + export path
@@ -197,21 +167,6 @@ S8-agentic — Hub only (R-011).
 **Stop if:** No TrustField bleed (R-001); No RPAA / BoC supervision claims on www; No Hub send/call from NF-CLOUD (R-011)
 **Anti-scope:** SSO / multi-tenant hardening (Tier C); Real M365 read-only before customer #2 (Tier B)
 **Verify:** `manual` · ≤3 tasks this iter
-
----
-
-## ship-fwd-262 FQ-203
-**Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 96
-**Benchmark pattern (Vanta · Drata · Credo AI):** 5-min board PDF moment — buyer sees confidence + export path
-**Buyer moment:** CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
-**Task:** `GET /api/v1/metrics/board` stub
-**Outcome:** evaluates, blocks, exports, open risks
-**Primary artifact:** `/api/v1/metrics/board`
-**Pre-read:** MEMORY_LOCKED.yaml, INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md, NOETFIELD_GTM_60_DAY_LOCKED_v1.md
-**Success when:** `pytest` passes; Buyer page loads in verify-ui-e2e; TLE export tamper gate holds
-**Stop if:** No TrustField bleed (R-001); No RPAA / BoC supervision claims on www; No Hub send/call from NF-CLOUD (R-011)
-**Anti-scope:** SSO / multi-tenant hardening (Tier C); Real M365 read-only before customer #2 (Tier B)
-**Verify:** `pytest` · ≤3 tasks this iter
 
 ---
 
@@ -230,12 +185,57 @@ S8-agentic — Hub only (R-011).
 
 ---
 
-## ship-fwd-155 FQ-096
-**Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 88
+## ship-fwd-181 FQ-122
+**Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 96
 **Benchmark pattern (Vanta · Drata · Credo AI):** 5-min board PDF moment — buyer sees confidence + export path
 **Buyer moment:** CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
-**Task:** W3 economic signal verify
-**Outcome:** Procurement cites CAD $2K
+**Task:** `MetricStrip` on cognitive-dashboard
+**Outcome:** KPI row: evaluates, blocks, exports
+**Primary artifact:** `docs/ or governance-console/`
+**Pre-read:** MEMORY_LOCKED.yaml, INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md, NOETFIELD_GTM_60_DAY_LOCKED_v1.md
+**Success when:** `verify-ui-e2e` passes; TLE export tamper gate holds; cursor-reply-latest.txt updated
+**Stop if:** No TrustField bleed (R-001); No RPAA / BoC supervision claims on www; No Hub send/call from NF-CLOUD (R-011)
+**Anti-scope:** SSO / multi-tenant hardening (Tier C); Real M365 read-only before customer #2 (Tier B)
+**Verify:** `verify-ui-e2e` · ≤3 tasks this iter
+
+---
+
+## ship-fwd-262 FQ-203
+**Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 96
+**Benchmark pattern (Vanta · Drata · Credo AI):** 5-min board PDF moment — buyer sees confidence + export path
+**Buyer moment:** CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
+**Task:** `GET /api/v1/metrics/board` stub
+**Outcome:** evaluates, blocks, exports, open risks
+**Primary artifact:** `/api/v1/metrics/board`
+**Pre-read:** MEMORY_LOCKED.yaml, INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md, NOETFIELD_GTM_60_DAY_LOCKED_v1.md
+**Success when:** `pytest` passes; Buyer page loads in verify-ui-e2e; TLE export tamper gate holds
+**Stop if:** No TrustField bleed (R-001); No RPAA / BoC supervision claims on www; No Hub send/call from NF-CLOUD (R-011)
+**Anti-scope:** SSO / multi-tenant hardening (Tier C); Real M365 read-only before customer #2 (Tier B)
+**Verify:** `pytest` · ≤3 tasks this iter
+
+---
+
+## ship-fwd-301 FQ-242
+**Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 100
+**Benchmark pattern (Vanta · Drata · Credo AI):** 5-min board PDF moment — buyer sees confidence + export path
+**Buyer moment:** CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
+**Task:** Partner demo URL + activation dashboard spec
+**Outcome:** Sponsor reads weekly KPIs
+**Primary artifact:** `docs/ or governance-console/`
+**Pre-read:** MEMORY_LOCKED.yaml, INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md, NOETFIELD_GTM_60_DAY_LOCKED_v1.md
+**Success when:** `docs+staging` passes; cursor-reply-latest.txt updated
+**Stop if:** No TrustField bleed (R-001); No RPAA / BoC supervision claims on www; No Hub send/call from NF-CLOUD (R-011)
+**Anti-scope:** SSO / multi-tenant hardening (Tier C); Real M365 read-only before customer #2 (Tier B)
+**Verify:** `docs+staging` · ≤3 tasks this iter
+
+---
+
+## ship-fwd-091 FQ-032
+**Tier:** S0-proof · **Phase:** P1-proof-moment · **Goal:** customer_1 · **GTM:** 100 · **Alignment:** 80
+**Benchmark pattern (Vanta · Drata · Credo AI):** 5-min board PDF moment — buyer sees confidence + export path
+**Buyer moment:** CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min
+**Task:** QuickScan scoring rubric v2
+**Outcome:** 5-dimension readiness score
 **Primary artifact:** `docs/ or governance-console/`
 **Pre-read:** MEMORY_LOCKED.yaml, INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md, NOETFIELD_GTM_60_DAY_LOCKED_v1.md
 **Success when:** `verify-gtm` passes; cursor-reply-latest.txt updated

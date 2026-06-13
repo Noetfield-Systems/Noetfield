@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Analyze + emit unified 500 forward-queue index — v3 benchmark synthesis engine."""
+"""Analyze + emit unified 500 forward-queue index — v4 wisdom engine."""
 
 from __future__ import annotations
 
@@ -265,6 +265,22 @@ GOAL_ALIGNMENT_KEYWORDS: dict[str, tuple[tuple[str, int], ...]] = {
     ),
 }
 
+# Proof-chain clusters — wise pick grouping
+PICK_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("proof-demo", ("demo", "playwright", "quickscan", "governance meeting", "5-min", "demo-url", "smoke suite")),
+    ("proof-export", ("tamper", "export", "board pack", "board pdf", "audit-export", "receipt", "tle")),
+    ("copilot-registry", ("agent 365", "purview", "registry", "copilot", "m365")),
+    ("trust-diligence", ("trust center", "trust-center", "framework", "diligence", "posture")),
+    ("msp-channel", ("msp", "partner", "sow", "gdap", "white-label", "90-day", "partner-verify")),
+    ("federal-lane", ("aia", "adm", "nist", "federal", "omb", "fedramp")),
+    ("ops-hardening", ("pytest", "coherence", "openapi", "manifest", "ssot", "load test")),
+)
+
+# Ideal proof-chain order (wise sequence for customer #1)
+PROOF_CHAIN_ORDER: tuple[str, ...] = (
+    "governance meeting", "playwright", "quickscan", "demo-url", "tamper", "board pack", "export",
+)
+
 
 def classify_success_tier(plan: str, outcome: str, lane: str, icp_lane: str) -> str:
     blob = f"{plan} {outcome}".lower()
@@ -398,6 +414,114 @@ def redesigned_prompt(row: dict) -> str:
     )
 
 
+def classify_pick_cluster(plan: str, outcome: str) -> str:
+    blob = f"{plan} {outcome}".lower()
+    best = ("general", 0)
+    for cluster, kws in PICK_CLUSTERS:
+        score = sum(1 for k in kws if k in blob)
+        if score > best[1]:
+            best = (cluster, score)
+    return best[0]
+
+
+def estimate_effort(row: dict) -> str:
+    lane = row["lane"]
+    verify = row.get("verify", "").lower()
+    if lane.endswith("+D") or lane == "D":
+        return "S"
+    if "manual" in verify or "spec review" in verify:
+        return "S"
+    if row["tier"] == "T3" or "load test" in row["plan"].lower():
+        return "L"
+    if "playwright" in row["plan"].lower() or "openapi" in row["plan"].lower():
+        return "M"
+    return "M" if lane.endswith("+A") or lane == "A" else "S"
+
+
+def infer_unlocks(row: dict) -> list[str]:
+    blob = f"{row['plan']} {row['outcome']}".lower()
+    unlocks: list[str] = []
+    if any(k in blob for k in ("demo", "governance meeting", "5-min", "quickscan")):
+        unlocks.append("design_partner_meeting")
+    if any(k in blob for k in ("tamper", "export", "board pack", "receipt")):
+        unlocks.append("procurement_close")
+    if any(k in blob for k in ("playwright", "verify-ui", "smoke")):
+        unlocks.append("ci_buyer_regression")
+    if any(k in blob for k in ("procurement", "diligence", "trust center")):
+        unlocks.append("security_questionnaire")
+    if any(k in blob for k in ("msp", "partner", "sow")):
+        unlocks.append("msp_pilot_contract")
+    if any(k in blob for k in ("agent 365", "purview", "registry")):
+        unlocks.append("copilot_design_partner")
+    return unlocks[:3]
+
+
+def proof_chain_rank(row: dict) -> int | None:
+    blob = f"{row['plan']} {row['outcome']}".lower()
+    if row["success_tier"] not in ("S0-proof", "S6-tle-wedge"):
+        return None
+    for i, token in enumerate(PROOF_CHAIN_ORDER):
+        if token in blob:
+            return i
+    return None
+
+
+def wisdom_score(row: dict) -> int:
+    if row["ship_status"] == "shipped":
+        return 0
+    gtm = row.get("gtm_impact", 0)
+    goal = row.get("goal_alignment", 0)
+    unlock_bonus = min(20, len(row.get("unlocks", [])) * 7)
+    effort_bonus = {"S": 10, "M": 5, "L": 0}.get(row.get("effort", "M"), 5)
+    chain = row.get("proof_chain_rank")
+    chain_bonus = max(0, 15 - chain) if chain is not None else 0
+    partial_penalty = 25 if row["ship_status"] == "partial" else 0
+    raw = gtm * 0.38 + goal * 0.38 + unlock_bonus + effort_bonus + chain_bonus - partial_penalty
+    return max(0, min(100, int(raw)))
+
+
+def why_now(row: dict) -> str:
+    if row["ship_status"] == "partial":
+        return "Live slice exists — extend only if founder wants depth on shipped path."
+    unlocks = row.get("unlocks", [])
+    if "design_partner_meeting" in unlocks:
+        return "Directly enables customer #1 — buyer sees proof in <5 minutes."
+    if "procurement_close" in unlocks:
+        return "Closes procurement on receipt portability — TLE wedge."
+    if "ci_buyer_regression" in unlocks:
+        return "Locks buyer paths in CI — prevents www regression before outreach."
+    if row.get("wisdom_score", 0) >= 85:
+        return "Top wisdom composite — high GTM + goal alignment."
+    return "Supports locked goal without scope creep."
+
+
+def defer_if(row: dict) -> str:
+    if row["success_tier"] == "S7-hardening":
+        return "Defer until S0–S4 proof slices ship this sprint."
+    if row["success_tier"] == "S8-agentic":
+        return "Always defer disk implement — Hub only (R-011)."
+    if row["icp_lane"] == "M" and row.get("pick_cluster") != "msp-channel":
+        return "Defer unless founder declared MSP sprint."
+    if row["icp_lane"] == "F" and row.get("pick_cluster") != "federal-lane":
+        return "Defer unless founder declared federal intake."
+    if row["ship_status"] == "partial":
+        return "Defer unless extending an already-live buyer path."
+    return "Do not pick if iter already has 2 S0 or 3× same cluster."
+
+
+def prompt_wise(row: dict) -> str:
+    ws = row.get("wisdom_score", 0)
+    return (
+        f"WISE PICK {row['id']} (wisdom {ws}/100) · {row.get('pick_cluster', 'general')} · "
+        f"{row['success_tier']} · effort {row.get('effort', 'M')}\n"
+        f"WHY NOW: {why_now(row)}\n"
+        f"DEFER IF: {defer_if(row)}\n"
+        f"TASK: {row['plan']} → {row['outcome']}\n"
+        f"UNLOCKS: {', '.join(row.get('unlocks', [])) or 'incremental proof'}\n"
+        f"VERIFY: {row.get('verify', 'plan-with-no-asf')}"
+    )
+
+
 def gtm_impact_score(row: dict) -> int:
     if row["ship_status"] == "shipped":
         return 0
@@ -425,14 +549,13 @@ def gtm_impact_score(row: dict) -> int:
 
 
 def priority_score(row: dict) -> int:
-    """Lower = higher priority. Blends tier, GTM, goal alignment, ship status."""
+    """Lower = higher priority. Wisdom-weighted within tier."""
     tier = TIER_PICK_ORDER.get(row["success_tier"], 9)
-    t1 = 0 if row["tier"] == "T1" else (1 if row["tier"] == "T2" else 2)
-    lane = 0 if row["lane"].endswith("+A") or row["lane"] == "A" else 1
-    shipped = 0 if row["ship_status"] == "open" else (5 if row["ship_status"] == "partial" else 50)
-    impact = 100 - row.get("gtm_impact", gtm_impact_score(row))
-    goal = 100 - row.get("goal_alignment", 0)
-    return tier * 1000 + shipped + impact + goal // 2 + t1 * 10 + lane
+    shipped = 0 if row["ship_status"] == "open" else (8 if row["ship_status"] == "partial" else 80)
+    wisdom = 100 - row.get("wisdom_score", wisdom_score(row))
+    t1 = 0 if row["tier"] == "T1" else (2 if row["tier"] == "T2" else 4)
+    lane = 0 if row["lane"].endswith("+A") or row["lane"] == "A" else 2
+    return tier * 1000 + shipped + wisdom + t1 + lane
 
 
 def pick_rationale(row: dict) -> str:
@@ -561,6 +684,8 @@ def suggest_iter_bundles(rows: list[dict], n: int = 5) -> list[dict]:
                 "theme": f"Proof-first pack {bundle_idx + 1}",
                 "ids": [p["id"] for p in picks],
                 "tiers": [p["success_tier"] for p in picks],
+                "clusters": [p.get("pick_cluster", "") for p in picks],
+                "wisdom_sum": sum(p.get("wisdom_score", 0) for p in picks),
                 "gtm_sum": sum(gtm_impact_score(p) for p in picks),
             })
     return bundles
@@ -601,11 +726,19 @@ def parse_queues() -> list[dict]:
             row.update(benchmark_meta(row))
             row["artifact_path"] = infer_artifact_path(row)
             row["buyer_moment"] = buyer_moment(row)
+            row["pick_cluster"] = classify_pick_cluster(plan, outcome)
+            row["effort"] = estimate_effort(row)
+            row["unlocks"] = infer_unlocks(row)
+            row["proof_chain_rank"] = proof_chain_rank(row)
+            row["wisdom_score"] = wisdom_score(row)
+            row["why_now"] = why_now(row)
+            row["defer_if"] = defer_if(row)
             row["priority_rank"] = 0
             row["pick_rationale"] = pick_rationale(row)
             row["prompt_structured"] = structured_prompt(row)
             row["prompt_enriched"] = enriched_prompt(row)
             row["prompt_redesigned"] = redesigned_prompt(row)
+            row["prompt_wise"] = prompt_wise(row)
             rows.append(row)
     ranked = sorted(rows, key=priority_score)
     for i, r in enumerate(ranked, 1):
@@ -619,13 +752,13 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
         by_success[r["success_tier"]].append(r)
 
     lines = [
-        "# Unified 500 prompt pack — v3 benchmark synthesis",
+        "# Unified 500 prompt pack — v4 wisdom engine",
         "",
-        "**Status:** Deep-tiered FQ-001–500 · benchmark-mapped · goal-aligned",
+        "**Status:** Wisdom-scored FQ-001–500 · proof-chain clusters · sprint themes",
         "**Generated by:** `scripts/generate_unified_prompt_pack_500.py`",
-        f"**Rows:** {len(rows)} · **Engine:** v3 (benchmark refs · goal alignment · redesigned prompts)",
+        f"**Rows:** {len(rows)} · **Engine:** v4 (wisdom_score · pick_cluster · why_now/defer_if)",
         "",
-        "**Deep analysis:** [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)",
+        "**Wise picks:** [WISDOM_PICK_RULES_v1.md](./WISDOM_PICK_RULES_v1.md)",
         "**Full 500 table:** [ALL_500_TIER_INDEX_v1.md](./ALL_500_TIER_INDEX_v1.md)",
         "",
         "## How agents should pick (wise order)",
@@ -633,21 +766,20 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
         "1. **Filter** `ship_status: open` first; `partial` only when extending a shipped slice",
         "2. **Sort** by `priority_rank` ascending (lower = pick sooner)",
         "3. **Cap** ≤3 per iter · max 2 S0 · never 3× S7 · never mix S8 Hub disk work",
-        "4. **Diversify** tier + lane per bundle — use suggested iter packs below",
-        "5. **Read** `prompt_redesigned` or `prompt_structured` before implement",
+        "4. **Read** `prompt_wise` first — then `prompt_redesigned` if implementing",
         "",
         "Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)",
         "",
         "## Next 3 recommended (computed)",
         "",
-        "| # | ID | FQ | Tier | Phase | GTM | Goal | Status | Plan |",
-        "|---|-----|-----|------|-------|-----|------|--------|------|",
+        "| # | ID | FQ | Wisdom | Cluster | Tier | Status | Plan |",
+        "|---|-----|-----|--------|---------|------|--------|------|",
     ]
     for i, r in enumerate(next_3, 1):
         lines.append(
-            f"| {i} | **{r['id']}** | {r['fq']:03d} | `{r['success_tier']}` | "
-            f"{r.get('gtm_phase', '')} | {r['gtm_impact']} | {r.get('goal_alignment', 0)} | "
-            f"{r['ship_status']} | {r['plan'][:45]} |"
+            f"| {i} | **{r['id']}** | {r['fq']:03d} | **{r.get('wisdom_score', 0)}** | "
+            f"{r.get('pick_cluster', '')} | `{r['success_tier']}` | "
+            f"{r['ship_status']} | {r['plan'][:42]} |"
         )
 
     lines.extend([
@@ -671,7 +803,9 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
     ])
     for b in bundles:
         ids = ", ".join(f"`{x}`" for x in b["ids"])
-        lines.append(f"- **{b['bundle']}** — {b['theme']} (GTM sum {b['gtm_sum']}): {ids}")
+        lines.append(
+            f"- **{b['bundle']}** — wisdom {b.get('wisdom_sum', 0)} · GTM {b['gtm_sum']}: {ids}"
+        )
 
     lines.extend([
         "",
@@ -1016,57 +1150,165 @@ def emit_executive_synthesis(rows: list[dict], next_3: list[dict], out: Path) ->
 def emit_all_500_index(rows: list[dict], out: Path) -> None:
     ranked = sorted(rows, key=priority_score)
     lines = [
-        "# All 500 prompts — tier index (v3 priority order)",
+        "# All 500 prompts — tier index (v4 wisdom order)",
         "",
         "**Generated:** `scripts/generate_unified_prompt_pack_500.py`",
-        f"**Sorted by:** `priority_rank` (1 = pick first)",
+        "**Sorted by:** `priority_rank` (wisdom-weighted)",
         "",
-        "| Rank | ID | FQ | Tier | Phase | GTM | Goal | Status | Benchmark | Plan |",
-        "|------|-----|-----|------|-------|-----|------|--------|-----------|------|",
+        "| Rank | ID | FQ | Wisdom | Cluster | Tier | Status | Plan |",
+        "|------|-----|-----|--------|---------|------|--------|------|",
     ]
     for r in ranked:
-        refs = r.get("benchmark_refs", ["—"])[0]
-        plan = r["plan"].replace("|", "/")[:40]
+        plan = r["plan"].replace("|", "/")[:38]
         lines.append(
-            f"| {r['priority_rank']} | {r['id']} | {r['fq']:03d} | {r['success_tier']} | "
-            f"{r.get('gtm_phase', '')} | {r['gtm_impact']} | {r.get('goal_alignment', 0)} | "
-            f"{r['ship_status']} | {refs} | {plan} |"
+            f"| {r['priority_rank']} | {r['id']} | {r['fq']:03d} | {r.get('wisdom_score', 0)} | "
+            f"{r.get('pick_cluster', '')} | {r['success_tier']} | "
+            f"{r['ship_status']} | {plan} |"
         )
     lines.extend(["", "## Related", "", "- [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)", ""])
     out.write_text("\n".join(lines), encoding="utf-8")
 
 
 def suggest_next_3(rows: list[dict]) -> list[dict]:
-    """Wise next 3: max 2 S0, diversify tier, open only, no Hub."""
+    """v4: proof-chain clusters + wisdom_score — max 2 S0, diversify clusters."""
     pickable = [
-        r for r in sorted(rows, key=priority_score)
+        r for r in rows
         if r["ship_status"] == "open" and r["success_tier"] != "S8-agentic"
         and not (r["lane"].endswith("+H") or r["lane"] == "H")
     ]
+    pickable.sort(key=lambda r: (-r.get("wisdom_score", 0), r.get("priority_rank", 999)))
+
     picks: list[dict] = []
-    s0_count = 0
-    tiers_seen: set[str] = set()
+    cluster_targets = ("proof-demo", "proof-export")
+
+    for cluster in cluster_targets:
+        if len(picks) >= 3:
+            break
+        for r in pickable:
+            if r in picks:
+                continue
+            if cluster and r.get("pick_cluster") != cluster:
+                continue
+            s0 = sum(1 for p in picks if p["success_tier"] == "S0-proof")
+            if r["success_tier"] == "S0-proof" and s0 >= 2:
+                continue
+            picks.append(r)
+            break
+
+    if len(picks) < 3:
+        for r in pickable:
+            if r in picks:
+                continue
+            if r["success_tier"] == "S6-tle-wedge" and r.get("pick_cluster") == "proof-export":
+                picks.append(r)
+                break
 
     for r in pickable:
         if len(picks) >= 3:
             break
-        tier = r["success_tier"]
-        if tier == "S0-proof" and s0_count >= 2:
-            continue
-        if tier in tiers_seen and tier not in ("S0-proof",):
-            continue
-        picks.append(r)
-        tiers_seen.add(tier)
-        if tier == "S0-proof":
-            s0_count += 1
-
-    for r in pickable:
-        if len(picks) >= 3:
-            break
-        if r in picks:
-            continue
-        picks.append(r)
+        if r not in picks:
+            s0 = sum(1 for p in picks if p["success_tier"] == "S0-proof")
+            if r["success_tier"] == "S0-proof" and s0 >= 2:
+                continue
+            # Final slot: stay on proof chain unless nothing left
+            if len(picks) == 2 and r.get("pick_cluster") not in (
+                "proof-demo", "proof-export"
+            ) and r["success_tier"] != "S6-tle-wedge":
+                continue
+            picks.append(r)
     return picks[:3]
+
+
+def suggest_sprint_themes(rows: list[dict]) -> list[dict]:
+    configs: tuple[tuple[str, callable], ...] = (
+        ("customer-1-proof-week", lambda r: r.get("pick_cluster") in ("proof-demo", "proof-export")),
+        ("copilot-story-week", lambda r: r.get("pick_cluster") == "copilot-registry"),
+        ("trust-diligence-week", lambda r: r.get("pick_cluster") == "trust-diligence"),
+        ("msp-enablement-week", lambda r: r.get("pick_cluster") == "msp-channel" and r["icp_lane"] == "M"),
+        ("federal-intake-week", lambda r: r.get("pick_cluster") == "federal-lane" and r["icp_lane"] == "F"),
+    )
+    themes: list[dict] = []
+    for theme_id, pred in configs:
+        cand = [r for r in rows if r["ship_status"] == "open" and pred(r)]
+        cand.sort(key=lambda r: -r.get("wisdom_score", 0))
+        top = cand[:5]
+        if top:
+            themes.append({
+                "theme": theme_id,
+                "ids": [r["id"] for r in top],
+                "wisdom_avg": sum(r.get("wisdom_score", 0) for r in top) // len(top),
+            })
+    return themes
+
+
+def emit_wisdom_pick_rules(rows: list[dict], sprint_themes: list[dict], next_3: list[dict], out: Path) -> None:
+    cluster_counts = Counter(r.get("pick_cluster", "general") for r in rows)
+    lines = [
+        "# Wisdom pick rules — unified 500 v4",
+        "",
+        "**Status:** LOCKED wise pick logic for cloud agents",
+        "**Use:** Read `prompt_wise` in index JSON before every implement",
+        "",
+        "## The one rule",
+        "",
+        "> Sort by **`wisdom_score`** descending among `open` rows.",
+        "> Pick ≤3 that span **proof-demo** + **proof-export** clusters when possible.",
+        "> Never outrun the 5-min board PDF moment.",
+        "",
+        "## Wisdom score formula",
+        "",
+        "| Component | Weight |",
+        "|-----------|--------|",
+        "| GTM impact | 38% |",
+        "| Goal alignment | 38% |",
+        "| Unlocks (buyer outcomes) | up to +20 |",
+        "| Effort S/M/L | +10 / +5 / 0 |",
+        "| Proof-chain position | up to +15 |",
+        "| Partial penalty | −25 |",
+        "",
+        "## Pick clusters",
+        "",
+        "| Cluster | Count | Wise use |",
+        "|---------|-------|----------|",
+    ]
+    cluster_use = {
+        "proof-demo": "Customer #1 iter — demo script, Playwright, QuickScan",
+        "proof-export": "Same iter or next — tamper, board pack, TLE export",
+        "copilot-registry": "Design partner briefing — Agent 365 complement",
+        "trust-diligence": "Security questionnaire inbound",
+        "msp-channel": "MSP sprint only (M lane)",
+        "federal-lane": "Federal intake only (F lane)",
+        "ops-hardening": "After proof ships",
+        "general": "Evaluate case-by-case",
+    }
+    for cl, cnt in cluster_counts.most_common():
+        lines.append(f"| {cl} | {cnt} | {cluster_use.get(cl, '—')} |")
+
+    lines.extend(["", "## Sprint themes (founder pick one/week)", ""])
+    for t in sprint_themes:
+        ids = " · ".join(t["ids"])
+        lines.append(f"- **{t['theme']}** (avg wisdom {t['wisdom_avg']}): {ids}")
+
+    lines.extend(["", "## Next 3 (proof-chain wise)", ""])
+    for i, r in enumerate(next_3, 1):
+        lines.append(f"{i}. **{r['id']}** wisdom {r.get('wisdom_score')} · {r.get('pick_cluster')}")
+        lines.append(f"   - WHY NOW: {r.get('why_now', '')}")
+        lines.append(f"   - DEFER IF: {r.get('defer_if', '')}")
+        lines.append("")
+
+    lines.extend([
+        "## prompt_wise template",
+        "",
+        "Every plan has `prompt_wise` — one screen with WHY NOW + DEFER IF + UNLOCKS.",
+        "",
+        "## Related",
+        "",
+        "- [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)",
+        "- [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)",
+        "- [QUICK_PICK.md](../no-asf/QUICK_PICK.md)",
+        "",
+    ])
+    out.write_text("\n".join(lines), encoding="utf-8")
 
 
 def main() -> int:
@@ -1077,28 +1319,34 @@ def main() -> int:
     ranked = sorted(rows, key=priority_score)
     next_3 = suggest_next_3(rows)
     bundles = suggest_iter_bundles(rows)
+    sprint_themes = suggest_sprint_themes(rows)
 
     out_dir = ROOT / "docs/ops/plans/PROMPT_PACK_LOCKED"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     payload = {
-        "version": "v3",
-        "engine": "benchmark-synthesis+goal-alignment+redesigned-prompts",
+        "version": "v4",
+        "engine": "wisdom-score+proof-chain-clusters+sprint-themes",
         "count": len(rows),
         "success_tier_counts": dict(Counter(r["success_tier"] for r in rows)),
         "ship_status_counts": dict(Counter(r["ship_status"] for r in rows)),
+        "pick_cluster_counts": dict(Counter(r.get("pick_cluster", "general") for r in rows)),
         "gtm_phase_counts": dict(Counter(r.get("gtm_phase", "") for r in rows)),
         "locked_goal_counts": dict(Counter(r.get("locked_goal", "") for r in rows)),
         "icp_counts": dict(Counter(r["icp_lane"] for r in rows)),
         "top_25_ids": [r["id"] for r in ranked[:25]],
         "next_3_recommended": [
-            {"id": r["id"], "fq": r["fq"], "success_tier": r["success_tier"],
-             "gtm_phase": r.get("gtm_phase"), "gtm_impact": r["gtm_impact"],
-             "goal_alignment": r.get("goal_alignment", 0),
-             "ship_status": r["ship_status"], "pick_rationale": r["pick_rationale"],
-             "benchmark_refs": r.get("benchmark_refs", []), "copy_wedge": r.get("copy_wedge", "")}
+            {
+                "id": r["id"], "fq": r["fq"], "success_tier": r["success_tier"],
+                "wisdom_score": r.get("wisdom_score", 0),
+                "pick_cluster": r.get("pick_cluster", ""),
+                "why_now": r.get("why_now", ""),
+                "unlocks": r.get("unlocks", []),
+                "ship_status": r["ship_status"],
+            }
             for r in next_3
         ],
+        "sprint_themes": sprint_themes,
         "iter_bundles": bundles,
         "plans": rows,
     }
@@ -1111,12 +1359,12 @@ def main() -> int:
     emit_pick_intelligence(rows, bundles, out_dir / "PICK_INTELLIGENCE_v1.md")
     emit_executive_synthesis(rows, next_3, out_dir / "PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md")
     emit_all_500_index(rows, out_dir / "ALL_500_TIER_INDEX_v1.md")
+    emit_wisdom_pick_rules(rows, sprint_themes, next_3, out_dir / "WISDOM_PICK_RULES_v1.md")
 
-    print(f"unified_500_index.json: {len(rows)} plans (v3)")
+    print(f"unified_500_index.json: {len(rows)} plans (v4)")
     print(f"ship status: {payload['ship_status_counts']}")
-    print(f"goals: {payload['locked_goal_counts']}")
-    print(f"next 3: {[r['id'] for r in next_3]}")
-    print("success tiers:", payload["success_tier_counts"])
+    print(f"clusters: {payload['pick_cluster_counts']}")
+    print(f"next 3: {[r['id'] for r in next_3]} (wisdom: {[r.get('wisdom_score') for r in next_3]})")
     return 0
 
 

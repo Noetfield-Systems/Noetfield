@@ -48,10 +48,10 @@ flowchart TD
 ## Suggested iter bundles
 
 - **iter-1** (GTM 300): ship-fwd-097 · ship-fwd-081 · ship-fwd-062
-- **iter-2** (GTM 300): ship-fwd-301 · ship-fwd-105 · ship-fwd-229
-- **iter-3** (GTM 300): ship-fwd-109 · ship-fwd-103 · ship-fwd-064
-- **iter-4** (GTM 300): ship-fwd-124 · ship-fwd-100 · ship-fwd-278
-- **iter-5** (GTM 300): ship-fwd-170 · ship-fwd-289 · ship-fwd-066
+- **iter-2** (GTM 294): ship-fwd-109 · ship-fwd-105 · ship-fwd-461
+- **iter-3** (GTM 300): ship-fwd-124 · ship-fwd-103 · ship-fwd-060
+- **iter-4** (GTM 300): ship-fwd-170 · ship-fwd-068 · ship-fwd-229
+- **iter-5** (GTM 300): ship-fwd-260 · ship-fwd-289 · ship-fwd-220
 
 ## Structured prompt fields
 

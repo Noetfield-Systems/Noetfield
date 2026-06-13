@@ -12,12 +12,12 @@
 | # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
 |---|-----|-----|-----|------|--------|-----------|------|
 | A1 | ship-fwd-097 | 038 | 100 | 100 | open | Vanta | Demo script “governance meeting” |
-| A2 | ship-fwd-301 | 242 | 100 | 100 | open | Vanta | Partner demo URL + activation dashb |
-| A3 | ship-fwd-109 | 050 | 100 | 96 | open | Vanta | Board pack PDF cover E-23 fields |
-| A4 | ship-fwd-124 | 065 | 100 | 96 | open | Vanta | Board pack template v2 |
-| A5 | ship-fwd-170 | 111 | 100 | 96 | open | Vanta | Playwright smoke suite v1 |
-| A6 | ship-fwd-181 | 122 | 100 | 96 | open | Vanta | `MetricStrip` on cognitive-dashboar |
-| A7 | ship-fwd-260 | 201 | 100 | 96 | open | Vanta | Board pack RAG summary block |
+| A2 | ship-fwd-109 | 050 | 100 | 96 | open | Vanta | Board pack PDF cover E-23 fields |
+| A3 | ship-fwd-124 | 065 | 100 | 96 | open | Vanta | Board pack template v2 |
+| A4 | ship-fwd-170 | 111 | 100 | 96 | open | Vanta | Playwright smoke suite v1 |
+| A5 | ship-fwd-260 | 201 | 100 | 96 | open | Vanta | Board pack RAG summary block |
+| A6 | ship-fwd-139 | 080 | 100 | 88 | open | Vanta | `make demo-url` CI artifact |
+| A7 | ship-fwd-181 | 122 | 100 | 96 | open | Vanta | `MetricStrip` on cognitive-dashboar |
 | A8 | ship-fwd-262 | 203 | 100 | 96 | open | Vanta | `GET /api/v1/metrics/board` stub |
 
 ## Wave B — S6 TLE wedge (procurement)
@@ -27,20 +27,20 @@
 | B1 | ship-fwd-081 | 022 | 100 | 92 | open | Veridra | Tamper FAIL export verify hardening |
 | B2 | ship-fwd-105 | 046 | 100 | 92 | open | Veridra | Export tamper regression test |
 | B3 | ship-fwd-103 | 044 | 100 | 84 | open | Veridra | RID continuity cross-service |
-| B4 | ship-fwd-100 | 041 | 100 | 72 | open | Veridra | BLOCK path audit receipt test |
+| B4 | ship-fwd-068 | 009 | 100 | 64 | open | Veridra | Competitive vs Fiddler positioning |
 | B5 | ship-fwd-289 | 230 | 100 | 72 | open | Veridra | TLE export drift annotation |
-| B6 | ship-fwd-321 | 262 | 100 | 72 | open | Veridra | Prompt injection BLOCK fixtures |
+| B6 | ship-fwd-329 | 270 | 100 | 72 | open | Veridra | Red team results export stub |
 
 ## Wave C — S2 Copilot complement
 
 | # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
 |---|-----|-----|-----|------|--------|-----------|------|
 | C1 | ship-fwd-062 | 003 | 100 | 96 | open | Microsoft Purview | Agent registry gap verify script |
-| C2 | ship-fwd-229 | 170 | 100 | 92 | open | Microsoft Purview | Copilot governance Agent 365 CTA |
-| C3 | ship-fwd-064 | 005 | 100 | 80 | open | Microsoft Purview | `/copilot/governance/` Agent 365 se |
-| C4 | ship-fwd-278 | 219 | 100 | 80 | open | Microsoft Purview | Purview GA five-step posture card |
-| C5 | ship-fwd-066 | 007 | 100 | 72 | open | Microsoft Purview | Connector manifest Agent 365 stub r |
-| C6 | ship-fwd-224 | 165 | 100 | 72 | open | Microsoft Purview | Purview sync status in console |
+| C2 | ship-fwd-461 | 402 | 94 | 72 | open | Microsoft Purview | Agent 365 MSP complement one-pager |
+| C3 | ship-fwd-060 | 001 | 100 | 72 | open | Microsoft Purview | Agent 365 complement one-pager |
+| C4 | ship-fwd-229 | 170 | 100 | 92 | open | Microsoft Purview | Copilot governance Agent 365 CTA |
+| C5 | ship-fwd-220 | 161 | 100 | 60 | open | Microsoft Purview | Agent 365 + Noetfield joint diagram |
+| C6 | ship-fwd-064 | 005 | 100 | 80 | open | Microsoft Purview | `/copilot/governance/` Agent 365 se |
 
 ## Wave D — S4 Trust UI
 
@@ -57,14 +57,14 @@
 
 | # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
 |---|-----|-----|-----|------|--------|-----------|------|
-| E1 | ship-fwd-309 | 250 | 100 | 76 | open | Inforcer | Partner procurement annex |
-| E2 | ship-fwd-477 | 418 | 100 | 76 | open | Inforcer | QuickScan partner-branded export |
-| E3 | ship-fwd-489 | 430 | 100 | 76 | open | Inforcer | Partner security FAQ in procurement |
-| E4 | ship-fwd-490 | 431 | 100 | 76 | open | Inforcer | White-label board PDF header v2 |
+| E1 | ship-fwd-477 | 418 | 100 | 76 | open | Inforcer | QuickScan partner-branded export |
+| E2 | ship-fwd-499 | 440 | 100 | 76 | open | Inforcer | Demo film MSP cut script |
+| E3 | ship-fwd-309 | 250 | 100 | 76 | open | Inforcer | Partner procurement annex |
+| E4 | ship-fwd-489 | 430 | 100 | 76 | open | Inforcer | Partner security FAQ in procurement |
 | E5 | ship-fwd-492 | 433 | 100 | 76 | open | Inforcer | Partner procurement ZIP annex v2 |
-| E6 | ship-fwd-499 | 440 | 100 | 76 | open | Inforcer | Demo film MSP cut script |
-| E7 | ship-fwd-469 | 410 | 98 | 76 | open | Inforcer | Partner CTA on copilot hub |
-| E8 | ship-fwd-548 | 489 | 100 | 64 | open | Inforcer | Partner metrics API stub |
+| E6 | ship-fwd-490 | 431 | 100 | 76 | open | Inforcer | White-label board PDF header v2 |
+| E7 | ship-fwd-548 | 489 | 100 | 64 | open | Inforcer | Partner metrics API stub |
+| E8 | ship-fwd-509 | 450 | 98 | 64 | open | Inforcer | Partner registry stub row |
 
 ## Wave F — S5 Federal (F lane)
 
@@ -72,8 +72,8 @@
 |---|-----|-----|-----|------|--------|-----------|------|
 | F1 | ship-fwd-203 | 144 | 100 | 68 | open | Canada AIA | Framework picker on procurement |
 | F2 | ship-fwd-114 | 055 | 100 | 64 | open | Canada AIA | README www 200 verify governance |
-| F3 | ship-fwd-450 | 391 | 96 | 56 | open | Canada AIA | Forward queue v4 coherence gate |
-| F4 | ship-fwd-360 | 301 | 84 | 40 | open | Canada AIA | OMB M-25-22 acquisition appendix |
+| F3 | ship-fwd-360 | 301 | 84 | 40 | open | Canada AIA | OMB M-25-22 acquisition appendix |
+| F4 | ship-fwd-450 | 391 | 96 | 56 | open | Canada AIA | Forward queue v4 coherence gate |
 | F5 | ship-fwd-383 | 324 | 88 | 32 | open | Canada AIA | FedRAMP vs receipt export narrative |
 | F6 | ship-fwd-070 | 011 | 84 | 32 | open | Canada AIA | OSFI E-23 mapping appendix |
 
