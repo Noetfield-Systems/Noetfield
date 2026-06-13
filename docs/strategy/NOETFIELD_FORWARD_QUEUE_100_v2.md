@@ -243,6 +243,7 @@ After v1 picks (`ship-fwd-060`, `ship-fwd-081`, `ship-fwd-090`) or in parallel w
 
 ## Related
 
+- [NOETFIELD_FORWARD_QUEUE_100_v3.md](./NOETFIELD_FORWARD_QUEUE_100_v3.md) — FQ-201–300 scale (board, CU channel, drift, incidents)  
 - [NOETFIELD_FORWARD_QUEUE_100_v1.md](./NOETFIELD_FORWARD_QUEUE_100_v1.md) — FQ-001–100  
 - [MARKET_ANALYSIS_2026_LOCKED_v1.md](./MARKET_ANALYSIS_2026_LOCKED_v1.md)  
 - [GTM_NEXT.md](../ops/plans/no-asf/GTM_NEXT.md)  

@@ -62,6 +62,7 @@
 | [MARKET_ANALYSIS_2026_LOCKED_v1.md](./strategy/MARKET_ANALYSIS_2026_LOCKED_v1.md) | Live research synthesis (June 2026) |
 | [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | Forward plans FQ-001–100 (`ship-fwd-060`–`159`) |
 | [NOETFIELD_FORWARD_QUEUE_100_v2.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v2.md) | Upgraded forward plans FQ-101–200 (`ship-fwd-160`–`259`) |
+| [NOETFIELD_FORWARD_QUEUE_100_v3.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v3.md) | Scale forward plans FQ-201–300 (`ship-fwd-260`–`359`) |
 | [NOETFIELD_GTM_60_DAY_LOCKED_v1.md](./strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | 60-day CEO fence |
 
 ---

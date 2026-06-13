@@ -212,7 +212,8 @@ After current iter 19 (057–059) ships:
 
 ## Related
 
-- [NOETFIELD_FORWARD_QUEUE_100_v2.md](./NOETFIELD_FORWARD_QUEUE_100_v2.md) — FQ-101–200 upgraded (trust center, Playwright, institutional UI)  
+- [NOETFIELD_FORWARD_QUEUE_100_v2.md](./NOETFIELD_FORWARD_QUEUE_100_v2.md) — FQ-101–200 upgraded  
+- [NOETFIELD_FORWARD_QUEUE_100_v3.md](./NOETFIELD_FORWARD_QUEUE_100_v3.md) — FQ-201–300 scale  
 - [MARKET_ANALYSIS_2026_LOCKED_v1.md](./MARKET_ANALYSIS_2026_LOCKED_v1.md)  
 - [GTM_NEXT.md](../ops/plans/no-asf/GTM_NEXT.md)  
 - [SSOT_INDEX.md](../SSOT_INDEX.md)
