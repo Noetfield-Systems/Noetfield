@@ -1,24 +1,19 @@
-Tenth Audit 10-Phase Fix — complete (Noetfield cloud)
+Comprehensive SSOT + SME blueprint — complete (Noetfield cloud)
 
-Pre: PR #48 merged to main @ b822423 (tenth audit + iter 18 on main).
+Shipped on cursor/comprehensive-ssot-blueprint-37f0:
+- docs/SSOT_INDEX.md — master index + two-layer model
+- docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md — engine in basement · Noetfield at door
+- docs/architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md — high-grade SME provider model
+- docs/site/ACTIVE_SITE_POLICY.md + PAGE_AUTHORITY_MAP.md — route authority
+- docs/copilot/SME_BUYER_JOURNEY.md — Copilot funnel
+- www: index + copilot — Block · Record · Export · CAD $2K design partner
+- STRATEGIC_LOCK · PLATFORM_BLUEPRINT · LOCKED_REFERENCE_INDEX · public-surface-map · AGENT_READ_LINKS updates
 
-Post-merge truth on main:
-Phase 1: PR #48 merged — iter 18 on main @ b822423
-Phase 2: OPEN_PRS pending cleared; #48 in recently merged window
-Phase 3: tenth-audit branch superseded in merge rule
-Phase 4: GTM_NEXT iter 19 seed live (057–059)
-Phase 5: ship-procurement-checkpoint-verify-054 — hardened checkpoint verify guards
-Phase 6: ship-services-governance-openapi-bridge-055 — procurement OpenAPI + README links
-Phase 7: ship-merged-window-config-056 — MERGED_WINDOW in OPEN_PRS header
-Phase 8: SHIP_DONE_MAP 054–056; ENGINEERING_DONE_MANIFEST iter 18
-Phase 9: SourceA status post–#48; founder 026/#2/#7 documented
-Phase 10: sync + verify PASS; iter 19 proposals 057–059 in GTM_NEXT
+Verify: ./scripts/plan-with-no-asf-verify.sh — PASS (branch)
+Promote: Q-NF-SPEC-PROMOTE — recommend Form PICK before public spec promotion
 
-Verify: ./scripts/plan-with-no-asf-verify.sh — PASS
-Sync: python3 scripts/sync-prompt-pack-status.py — 1000/1000
-
-task: Tenth Audit 10-Phase Fix — iter 18 bundle (post-merge closeout)
+task: Comprehensive SSOT + SME provider blueprint embed
 agent: NF-CLOUD-AGENT
-main: b822423
-head: 2331756
-next: ASK founder — iter 19 from GTM_NEXT 057–059; do NOT merge #49/#50/#51/#52 without bounded order; agentic 026 Hub; close #2/#7; SourceA sync
+main: bfc5578
+head: 8903efd
+next: ASK founder — merge SSOT PR; iter 19 (#52) separate bounded order; Form PICK for spec promote; no SourceA edit
