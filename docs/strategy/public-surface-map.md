@@ -14,6 +14,11 @@
 | **/enterprise/** | Institutional problem / risk / solution; three offerings; console pointer | Full API reference (link only) |
 | **/trust-brief/** | $10k diagnostic scope; board-ready outputs | API, partners |
 | **/copilot/** | M365 Copilot governance pack | API detail (optional single footer link) |
+| **/copilot/demo/** | 5-minute demo rehearsal | Full procurement pack |
+| **/copilot/pilot/** | Design partner CAD $2K–$10K | Trust Brief diagnostic scope |
+| **/copilot/procurement/** | Diligence ZIP + controls | Homepage hero |
+| **/copilot/quickscan/** | SME self-assessment funnel | API tables |
+| **/gate/intake/** | Unified intake router | Sales narrative |
 | **/console/** | Evaluation UI; RID + compliance log | OpenAPI |
 | **/trust-ledger/** | Audit lineage brand; how evidence is produced (concept) | Full route catalog |
 | **/partners/** | Programs, intakes, Canada timing; who to call | Endpoint catalog → **/docs/api/** |

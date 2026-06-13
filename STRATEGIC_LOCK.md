@@ -24,6 +24,12 @@
 
 ---
 
+## Two-layer model (internal)
+
+Commercial fronts (`noetfield.com`) sell governance packages; portfolio governance engine powers delivery under the hood — **never a buyer-facing SKU**. See [docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md) and [docs/SSOT_INDEX.md](docs/SSOT_INDEX.md).
+
+---
+
 ## Narrative lock
 
 - **One product line:** Governance Execution & AI Policy Enforcement Infrastructure  

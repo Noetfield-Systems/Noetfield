@@ -6,10 +6,16 @@
 | **Agent id** | `noetfield_cloud` |
 | **Doc trace** | `NF-CLOUD-BRIDGE-002` |
 | **Merged** | `f18925e` + local blueprints |
-| **Updated** | 2026-06-06 |
+| **Updated** | 2026-06-12 |
 
 | Layer | Document | Path |
 |-------|----------|------|
+| **SSOT index** | Master index | [docs/SSOT_INDEX.md](../docs/SSOT_INDEX.md) |
+| **Unified engine model** | Commercial front vs portfolio engine | [docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](../docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md) |
+| **SME provider blueprint** | High-grade SME product model | [docs/architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md](../docs/architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md) |
+| **Site policy** | Active routes | [docs/site/ACTIVE_SITE_POLICY.md](../docs/site/ACTIVE_SITE_POLICY.md) |
+| **Page authority** | URL → doc matrix | [docs/site/PAGE_AUTHORITY_MAP.md](../docs/site/PAGE_AUTHORITY_MAP.md) |
+| **SME buyer journey** | Copilot funnel | [docs/copilot/SME_BUYER_JOURNEY.md](../docs/copilot/SME_BUYER_JOURNEY.md) |
 | Agent team sync | Team sync LOCKED v1 | [docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) |
 | Drift cloud read order | Cloud drift read order | [docs/ops/NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md) |
 | Agent context | Read order LOCKED v1 | [docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) |

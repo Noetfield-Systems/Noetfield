@@ -7,7 +7,20 @@
 **Path:** `docs/strategy/NOETFIELD_COPILOT_SME_SYSTEM_DESIGN_LOCKED_v1.md`  
 **Supersedes:** Informal chat-only versions of this spec  
 
-**Related locks:** [PRODUCT_TRUTH.md](../../PRODUCT_TRUTH.md) · [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md) · [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md) · [tenant-append-only-audit-schema-outline.md](../spec/tenant-append-only-audit-schema-outline.md)
+**Related locks:** [PRODUCT_TRUTH.md](../../PRODUCT_TRUTH.md) · [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md) · [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md) · [tenant-append-only-audit-schema-outline.md](../spec/tenant-append-only-audit-schema-outline.md) · [NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md](../architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md) · [SME_BUYER_JOURNEY.md](../../copilot/SME_BUYER_JOURNEY.md)
+
+### Commercial surfaces (www)
+
+| Lane A module | Buyer URL | Artifact |
+|---------------|-----------|----------|
+| Copilot pack hero | `/copilot/` | Governance execution strip |
+| QuickScan | `/copilot/quickscan/*` | Readiness self-assessment |
+| Demo | `/copilot/demo/` | 5-minute rehearsal |
+| Design partner | `/copilot/pilot/` | CAD $2K–$10K SOW path |
+| Procurement | `/copilot/procurement/` | Diligence ZIP |
+| TLE / evidence | `/trust-ledger/` · `/workspace/` | Samples + workspace |
+
+Site policy: [ACTIVE_SITE_POLICY.md](../site/ACTIVE_SITE_POLICY.md) · URL matrix: [PAGE_AUTHORITY_MAP.md](../site/PAGE_AUTHORITY_MAP.md)
 
 ---
 

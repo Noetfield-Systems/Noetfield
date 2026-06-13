@@ -31,6 +31,8 @@ The repository currently contains:
 
 Implementation truth for shipped capabilities: [os/SHIP_NOW.md](os/SHIP_NOW.md) and [ENGINEERING_DONE_MANIFEST.md](docs/ops/plans/PROMPT_PACK_LOCKED/ENGINEERING_DONE_MANIFEST.md).
 
+**SSOT entry:** [docs/SSOT_INDEX.md](docs/SSOT_INDEX.md) · **Commercial model:** [docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md) · **SME blueprint:** [docs/architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md](docs/architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md) · **Site policy:** [docs/site/ACTIVE_SITE_POLICY.md](docs/site/ACTIVE_SITE_POLICY.md)
+
 The repository is currently best understood as:
 
 > AI governance platform with working pilot console and production API shell

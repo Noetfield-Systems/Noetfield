@@ -27,7 +27,8 @@
 ### Read order
 
 1. This file — § Cloud ship (below)
-2. [AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](./AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md) — memory, incidents, scope gate
+2. [SSOT_INDEX.md](./SSOT_INDEX.md) — master doc index + two-layer model
+3. [AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](./AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md) — memory, incidents, scope gate
 3. [.cursor/agent-memory/MEMORY_LOCKED.yaml](../../.cursor/agent-memory/MEMORY_LOCKED.yaml) — includes **R-011** agentic commercial law
 4. [FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md](./FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md) — no AUTO-RUN; outreach = agentic
 5. [AGENTIC_COMMERCIAL_HANDOFF_v1.md](./AGENTIC_COMMERCIAL_HANDOFF_v1.md) — NF-CLOUD vs Hub split
@@ -42,6 +43,9 @@
 
 | What | Path |
 |------|------|
+| SSOT index | [SSOT_INDEX.md](./SSOT_INDEX.md) |
+| Unified engine model | [architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](./architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md) |
+| SME provider blueprint | [architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md](./architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md) |
 | Paste pack | [ready_to_paste_noetfield_cloud.txt](./ready_to_paste_noetfield_cloud.txt) |
 | Team sync (cloud bridge) | [NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](./NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) |
 | Agent context | [NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](./NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) |
