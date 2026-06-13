@@ -7,6 +7,7 @@ import { Shell } from "@/components/Shell";
 import { DecisionBadge } from "@/components/DecisionBadge";
 import { RidCopy } from "@/components/RidCopy";
 import { RiskMeter } from "@/components/RiskMeter";
+import { MetricStrip } from "@/components/MetricStrip";
 import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { AuditRecord, getAudit } from "@/lib/api";
 
@@ -46,6 +47,19 @@ export default function ResultPage() {
 
       {record && (
         <div className="space-y-6">
+          <MetricStrip
+            metrics={[
+              {
+                label: "Confidence",
+                value: `${Math.max(0, Math.min(100, 100 - record.risk_score)).toFixed(0)}%`,
+                hint: "Board demo badge",
+                tone: "ok",
+              },
+              { label: "Decision", value: record.decision, hint: "Pre-execution" },
+              { label: "Risk score", value: String(record.risk_score), hint: "Governance meter" },
+              { label: "RID", value: "Immutable", hint: "Audit lineage" },
+            ]}
+          />
           <RidCopy rid={record.rid} />
           <div
             className="nf-card flex flex-wrap items-center justify-between gap-4 border border-accent/30 bg-accent/5 p-6"

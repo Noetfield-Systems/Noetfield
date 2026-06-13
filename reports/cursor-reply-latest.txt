@@ -1,17 +1,15 @@
-Full E2E high-grade institutional UI — complete (Noetfield cloud)
+Full E2E high-grade institutional UI — round 2 complete (Noetfield cloud)
 
 Shipped (this turn):
-- All console routes: WorkflowStepper + MetricStrip + PageHero institutional pattern
-- Audit + Trust Ledger + Connectors: data tables, breadcrumbs, empty states
-- Connectors API: last_sync on list response; connector status table
-- trust-center/index.html (Vanta-style posture — no SOC2 claim)
-- Footer institutional nav; homepage trust center CTA
-- verify-ui-e2e expanded: 18 routes + pipeline + trust center
+- trust-ledger/new + [tleId]: PageHero, WorkflowStepper, Breadcrumbs, export parity
+- result page: MetricStrip KPI row
+- copilot hub + partners www: metrics strips, partner CTAs
+- verify-ui-e2e: 22 routes (trust-ledger/new, partners, copilot metrics)
 
 Verify: NF_DEV_FORCE_DASHBOARD_BUILD=1 make dev-local && make verify-ui-e2e && ./scripts/plan-with-no-asf-verify.sh — PASS
 
 task: Upgrade UI to fully E2E high-grade company like references
 agent: NF-CLOUD-AGENT
 main: bfc5578
-head: 419d786
-next: ASK founder — merge PR #54; Playwright browser suite (FQ-111+)
+head: (post-commit)
+next: ASK founder — merge PR #54

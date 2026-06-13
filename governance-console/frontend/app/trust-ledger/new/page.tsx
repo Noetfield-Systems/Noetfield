@@ -4,6 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { Shell } from "@/components/Shell";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { LoadingBlock } from "@/components/LoadingBlock";
+import { PageHero } from "@/components/PageHero";
+import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { createTleDraft, EvidenceObject, listEvidence } from "@/lib/trustLedger";
 
 const TEMPLATES = [
@@ -55,35 +59,37 @@ export default function TrustLedgerNewPage() {
 
   return (
     <Shell active="trust-ledger">
-      <p className="mb-4 text-sm">
-        <Link href="/trust-ledger" className="text-accent hover:underline">
-          ← Trust Ledger
-        </Link>
-      </p>
+      <Breadcrumbs
+        items={[
+          { label: "Trust Ledger", href: "/trust-ledger" },
+          { label: "New TLE draft" },
+        ]}
+      />
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold text-white">TLE Generator</h2>
-        <p className="mt-2 text-sm text-muted">
-          Template + evidence refs → draft TLE with deterministic confidence score.
-        </p>
-      </section>
+      <PageHero
+        eyebrow="TLE Generator"
+        title="Create Trust Ledger draft"
+        lead="Template plus metadata-only evidence refs → draft TLE with deterministic confidence score for board and procurement review."
+      />
+
+      <WorkflowStepper active="record" hrefs={{ block: "/evaluate", export: "/workspace" }} />
 
       {error && (
-        <p className="mb-4 rounded-lg border border-red-900 bg-red-950/50 px-3 py-2 text-sm text-red-300">
+        <p className="mb-4 rounded-lg border border-red-900/80 bg-red-950/40 px-4 py-3 text-sm text-red-200" role="alert">
           {error}
         </p>
       )}
 
-      <form onSubmit={onSubmit} className="space-y-6">
+      <form onSubmit={onSubmit} className="nf-card space-y-6 p-6 sm:p-8">
         <div>
-          <label htmlFor="template" className="block text-sm font-medium text-white">
+          <label htmlFor="template" className="block text-sm font-medium text-muted">
             Template
           </label>
           <select
             id="template"
             value={templateId}
             onChange={(e) => setTemplateId(e.target.value)}
-            className="mt-2 w-full max-w-md rounded-lg border border-border bg-panel px-3 py-2 text-sm"
+            className="nf-input max-w-md"
           >
             {TEMPLATES.map((t) => (
               <option key={t.id} value={t.id}>
@@ -94,7 +100,7 @@ export default function TrustLedgerNewPage() {
         </div>
 
         <div>
-          <label htmlFor="decision" className="block text-sm font-medium text-white">
+          <label htmlFor="decision" className="block text-sm font-medium text-muted">
             Decision (optional)
           </label>
           <input
@@ -103,23 +109,28 @@ export default function TrustLedgerNewPage() {
             value={decision}
             onChange={(e) => setDecision(e.target.value)}
             placeholder="e.g. Approve Copilot pilot for Finance"
-            className="mt-2 w-full max-w-xl rounded-lg border border-border bg-panel px-3 py-2 text-sm"
+            className="nf-input max-w-xl"
           />
         </div>
 
         <div>
-          <p className="text-sm font-medium text-white">Evidence</p>
-          {loading && <p className="mt-2 text-sm text-muted">Loading evidence…</p>}
+          <p className="text-sm font-medium text-muted">Evidence index</p>
+          {loading && <LoadingBlock label="Loading evidence…" />}
           {!loading && evidence.length === 0 && (
-            <p className="mt-2 text-sm text-muted">
-              No evidence indexed. Run <code className="text-accent">./scripts/tle-smoke.sh --api</code> first.
+            <p className="mt-2 text-sm text-muted-2">
+              No evidence indexed. Run <code className="text-accent">./scripts/tle-smoke.sh --api</code> or connect
+              M365 in{" "}
+              <Link href="/workspace/connectors" className="text-accent hover:underline">
+                Connectors
+              </Link>
+              .
             </p>
           )}
           {!loading && evidence.length > 0 && (
             <ul className="mt-3 space-y-2">
               {evidence.map((ev) => (
                 <li key={ev.evidence_id}>
-                  <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-panel/60 px-3 py-2 hover:border-accent/40">
+                  <label className="nf-card-hover flex cursor-pointer items-start gap-3 p-4">
                     <input
                       type="checkbox"
                       checked={selected.includes(ev.evidence_id)}
@@ -129,7 +140,7 @@ export default function TrustLedgerNewPage() {
                     <span className="text-sm">
                       <span className="font-mono text-accent">{ev.evidence_id}</span>
                       <span className="text-muted"> — {ev.title}</span>
-                      <span className="block text-xs text-muted">{ev.source}</span>
+                      <span className="block text-xs text-muted-2">{ev.source}</span>
                     </span>
                   </label>
                 </li>
@@ -138,12 +149,8 @@ export default function TrustLedgerNewPage() {
           )}
         </div>
 
-        <button
-          type="submit"
-          disabled={submitting || selected.length === 0}
-          className="rounded-lg border border-accent px-4 py-2 text-sm text-accent hover:bg-accent/10 disabled:opacity-50"
-        >
-          {submitting ? "Creating…" : "Create draft TLE"}
+        <button type="submit" disabled={submitting || selected.length === 0} className="nf-btn-primary">
+          {submitting ? "Creating draft…" : "Create draft TLE"}
         </button>
       </form>
     </Shell>

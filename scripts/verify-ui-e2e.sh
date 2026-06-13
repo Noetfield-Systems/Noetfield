@@ -38,6 +38,8 @@ check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashbo
 check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent" "Institutional demo" "Governance execution pipeline"
 check_html "${BASE}/audit" "audit page" "Audit log" "Diligence export"
 check_html "${BASE}/trust-ledger" "trust ledger list" "Trust Ledger" "Trust Ledger v1"
+check_html "${BASE}/trust-ledger/new" "trust ledger new" "Create Trust Ledger draft" "TLE Generator" "Governance execution pipeline"
+check_html "${BASE}/partners/" "partners page" "Partner programs" "Trust Ledger" "90 days"
 check_html "${BASE}/" "homepage" "audit trail your Copilot deployment" "Become a design partner" "5-minute demo" "Procurement pack" "Trust center"
 home_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/" 2>/dev/null || true)"
 if echo "$home_html" | grep -qF 'href="/copilot/procurement/"'; then
@@ -46,7 +48,7 @@ else
   echo "FAIL homepage missing /copilot/procurement/ href" >&2
   fail=1
 fi
-check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment" "5-minute demo"
+check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment" "5-minute demo" "Copilot governance metrics"
 check_html "${BASE}/copilot/pilot/" "copilot pilot" "Design-partner Go/No-Go" "Design partner program"
 check_html "${BASE}/copilot/demo/" "copilot demo" "5-minute demo" "Demo script (locked narrative)" "confidence score"
 check_html "${BASE}/copilot/procurement/" "procurement buyer" "buyer pack" "Procurement pack (ZIP)" "NIST AI RMF"
