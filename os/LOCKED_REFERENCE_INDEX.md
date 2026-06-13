@@ -18,6 +18,8 @@
 | **SME buyer journey** | Copilot funnel | [docs/copilot/SME_BUYER_JOURNEY.md](../docs/copilot/SME_BUYER_JOURNEY.md) |
 | **Market analysis 2026** | Research synthesis | [docs/strategy/MARKET_ANALYSIS_2026_LOCKED_v1.md](../docs/strategy/MARKET_ANALYSIS_2026_LOCKED_v1.md) |
 | **Forward queue 100** | FQ-001–100 plans | [docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md](../docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) |
+| **Unified 500 pack** | FQ-001–500 success tiers | [docs/ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md](../docs/ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) |
+| **Success model tiers** | S0–S8 benchmark taxonomy | [docs/ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md](../docs/ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) |
 | Agent team sync | Team sync LOCKED v1 | [docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) |
 | Drift cloud read order | Cloud drift read order | [docs/ops/NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md) |
 | Agent context | Read order LOCKED v1 | [docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) |

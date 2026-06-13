@@ -367,6 +367,71 @@ else
   fail=1
 fi
 
+# Unified 500 prompt pack — index + master + QUICK_PICK alignment
+unified_json="docs/ops/plans/PROMPT_PACK_LOCKED/unified_500_index.json"
+unified_master="docs/ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md"
+unified_tiers="docs/ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md"
+unified_gen="scripts/generate_unified_prompt_pack_500.py"
+for f in "$unified_json" "$unified_master" "$unified_tiers" "$unified_gen"; do
+  if [[ -f "$f" ]]; then
+    echo "OK   exists $f"
+  else
+    echo "FAIL missing unified 500 asset: $f" >&2
+    fail=1
+  fi
+done
+if command -v python3 >/dev/null 2>&1 && [[ -f "$unified_json" ]]; then
+  unified_err="$(python3 - <<'PY'
+import json, pathlib, sys
+p = pathlib.Path("docs/ops/plans/PROMPT_PACK_LOCKED/unified_500_index.json")
+data = json.loads(p.read_text())
+errs = []
+if data.get("count") != 500:
+    errs.append(f"count={data.get('count')} expected 500")
+plans = data.get("plans", [])
+if len(plans) != 500:
+    errs.append(f"plans array len={len(plans)} expected 500")
+top = data.get("top_25_ids", [])
+if len(top) != 25:
+    errs.append(f"top_25_ids len={len(top)} expected 25")
+ids = [x["id"] for x in plans]
+if len(set(ids)) != 500:
+    errs.append("duplicate plan ids in unified index")
+fqs = [x.get("fq") for x in plans]
+if len(set(fqs)) != 500 or min(fqs) != 1 or max(fqs) != 500:
+    errs.append(f"fq coverage: unique={len(set(fqs))} min={min(fqs) if fqs else 0} max={max(fqs) if fqs else 0}")
+print("\n".join(errs))
+PY
+)"
+  if [[ -z "$unified_err" ]]; then
+    echo "OK   unified_500_index.json structure (500 plans, top 25)"
+  else
+    echo "FAIL unified_500_index.json:" >&2
+    echo "$unified_err" >&2
+    fail=1
+  fi
+fi
+if [[ -f docs/ops/plans/no-asf/QUICK_PICK.md ]]; then
+  if grep -q 'UNIFIED_500_MASTER_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
+     && grep -q 'SUCCESS_MODEL_TIERS_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
+     && grep -q 'generate_unified_prompt_pack_500' docs/ops/plans/no-asf/QUICK_PICK.md; then
+    echo "OK   QUICK_PICK unified 500 references"
+  else
+    echo "FAIL QUICK_PICK missing unified 500 references" >&2
+    fail=1
+  fi
+fi
+if [[ -f "$unified_master" ]] && [[ -f "$unified_json" ]] && command -v python3 >/dev/null 2>&1; then
+  master_top="$(grep -cE '^[0-9]+\. \*\*ship-fwd-' "$unified_master" 2>/dev/null || true)"
+  master_top="${master_top:-0}"
+  if [[ "$master_top" -ge 25 ]]; then
+    echo "OK   UNIFIED_500_MASTER top 25 section"
+  else
+    echo "FAIL UNIFIED_500_MASTER missing top 25 picks (found $master_top)" >&2
+    fail=1
+  fi
+fi
+
 if [[ "$fail" -eq 0 ]]; then
   echo ""
   echo "verify-no-asf-coherence passed."

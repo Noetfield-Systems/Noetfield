@@ -9,7 +9,10 @@
 |------|---------|
 | [../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md](../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md) | **LOCKED** — 1000 prompt pack master index |
 | [PROMPT_PACK_LOCKED/](./PROMPT_PACK_LOCKED/) | GTM 100, agent ops 50, drift 100, tier gates, sources |
-| [no-asf/QUICK_PICK.md](./no-asf/QUICK_PICK.md) | **PLAN WITH NO ASF** — next 25 GTM-weighted plans |
+| [PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md](./PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) | **Unified 500** — FQ-001–500 success-model tiers |
+| [PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md](./PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) | S0–S8 benchmark taxonomy |
+| [PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md](./PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md) | Next 50 enriched forward-queue picks |
+| [no-asf/QUICK_PICK.md](./no-asf/QUICK_PICK.md) | **PLAN WITH NO ASF** — unified 500 + GTM_NEXT picks |
 | [BRIDGE_NF_PLAN_TO_NF_FUTURE.json](./BRIDGE_NF_PLAN_TO_NF_FUTURE.json) | NF-PLAN ↔ nf-future crosswalk |
 | [INDEX.md](./INDEX.md) | Counts, phase/tier map |
 | [registry.json](./registry.json) | All 1000 plans (machine-readable, v2 prompt-ready) |
@@ -52,9 +55,13 @@
    python3 scripts/generate-prompt-pack-v2.py
    python3 scripts/sync-prompt-pack-status.py
    ```
-3. **Do not** delete the registry; append status changes only.
-4. **ASF-only** items have `"asf_only": true` in registry — skip for no-ASF plans.
-5. Align active execution with [os/plan.json](../../os/plan.json) and [lane_a_sprint_map.md](../lane_a_sprint_map.md); use this library for **long-term** backlog.
+3. **Regenerate unified 500** (after forward-queue edits):
+   ```bash
+   python3 scripts/generate_unified_prompt_pack_500.py
+   ```
+4. **Do not** delete the registry; append status changes only.
+5. **ASF-only** items have `"asf_only": true` in registry — skip for no-ASF plans.
+6. Align active execution with [os/plan.json](../../os/plan.json) and [lane_a_sprint_map.md](../lane_a_sprint_map.md); use this library for **long-term** backlog.
 
 ## Relation to SourceA
 
