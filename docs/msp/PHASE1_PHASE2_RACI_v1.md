@@ -2,7 +2,6 @@
 
 | Field | Value |
 |-------|--------|
-| **Agent tag** | `[NF-LOCAL-REPO-AGENT]` |
 | **Doc id** | `noetfield-msp-phase1-phase2-raci-v1` |
 | **Parent** | [MSP_GOVERNANCE_PACK_v1.md](./MSP_GOVERNANCE_PACK_v1.md) |
 | **Updated** | 2026-06-02 |
