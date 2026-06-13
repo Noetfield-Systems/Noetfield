@@ -49,16 +49,10 @@ fi
 
 for path in "/copilot/pilot/" "/copilot/demo/"; do
   html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}${path}" 2>/dev/null || true)"
-  if echo "$html" | grep -qF "Design partner pipeline"; then
-    echo "OK   ${path} pipeline link text"
+  if echo "$html" | grep -qi "design partner"; then
+    echo "OK   ${path} design partner buyer copy"
   else
-    echo "FAIL ${path} missing Design partner pipeline" >&2
-    fail=1
-  fi
-  if echo "$html" | grep -qF "bc-ai-for-all-2026.md"; then
-    echo "OK   ${path} bc-ai outreach link"
-  else
-    echo "FAIL ${path} missing bc-ai-for-all-2026.md link" >&2
+    echo "FAIL ${path} missing design partner buyer copy" >&2
     fail=1
   fi
   if echo "$html" | grep -qF "rpaa-positioning-onepager"; then
@@ -67,11 +61,23 @@ for path in "/copilot/pilot/" "/copilot/demo/"; do
     echo "FAIL ${path} missing rpaa-positioning-onepager link" >&2
     fail=1
   fi
-  if echo "$html" | grep -qF "STAGING_DEMO"; then
-    echo "OK   ${path} staging demo link"
+  if echo "$html" | grep -qF "BUYER_DEBRIEF_TEMPLATE_v1.md"; then
+    echo "OK   ${path} buyer debrief link"
   else
-    echo "FAIL ${path} missing STAGING_DEMO link" >&2
+    echo "FAIL ${path} missing buyer debrief link" >&2
     fail=1
+  fi
+  if echo "$html" | grep -qF "STAGING_DEMO"; then
+    echo "FAIL ${path} internal STAGING_DEMO link on www" >&2
+    fail=1
+  else
+    echo "OK   ${path} no internal staging runbook link"
+  fi
+  if echo "$html" | grep -qF "bc-ai-for-all-2026.md"; then
+    echo "FAIL ${path} internal outreach doc link on www" >&2
+    fail=1
+  else
+    echo "OK   ${path} no internal outreach doc link"
   fi
 done
 
@@ -126,16 +132,10 @@ else
   echo "FAIL /copilot/procurement/ missing checkpoint section heading" >&2
   fail=1
 fi
-if echo "$proc_html" | grep -qF "plan-with-no-asf-verify.sh"; then
-  echo "OK   /copilot/procurement/ evaluate checkpoint cites verify script"
+if echo "$proc_html" | grep -qF "/trust-center/"; then
+  echo "OK   /copilot/procurement/ trust center link in verification copy"
 else
-  echo "FAIL /copilot/procurement/ missing verify script in checkpoint copy" >&2
-  fail=1
-fi
-if echo "$proc_html" | grep -qF "AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md"; then
-  echo "OK   /copilot/procurement/ checkpoint links audit loop doc"
-else
-  echo "FAIL /copilot/procurement/ missing audit loop link in checkpoint copy" >&2
+  echo "FAIL /copilot/procurement/ missing trust center in verification copy" >&2
   fail=1
 fi
 if echo "$proc_html" | grep -qF "/openapi.json"; then
@@ -199,22 +199,34 @@ if [[ "$trust_brief_ok" -eq 4 ]]; then
   echo "OK   trust-brief parity (4/4 buyer pages)"
 fi
 
-# ship-rehearsal-parity-all-pages-049: single fail-closed loop (hub prose + pilot ol + demo ol)
+# Buyer demo parity — internal rehearsal docs stay in docs/ops; www links buyer runbooks only.
 rehearsal_ok=0
 for entry in "hub_html|/copilot/" "pilot_html|/copilot/pilot/" "demo_html|/copilot/demo/"; do
   var="${entry%%|*}"
   path="${entry#*|}"
   html="${!var}"
   if echo "$html" | grep -qF "DEMO_REHEARSAL_CHECKLIST_v1.md"; then
-    echo "OK   ${path} rehearsal checklist"
+    echo "FAIL ${path} internal rehearsal checklist linked on www" >&2
+    fail=1
+  elif echo "$html" | grep -qF "buyer debrief"; then
+    echo "OK   ${path} buyer debrief reference"
+    rehearsal_ok=$((rehearsal_ok + 1))
+  elif echo "$html" | grep -qF "Step-by-step demo script"; then
+    echo "OK   ${path} step-by-step demo script"
+    rehearsal_ok=$((rehearsal_ok + 1))
+  elif echo "$html" | grep -qF "Pilot readiness guide"; then
+    echo "OK   ${path} pilot readiness guide"
+    rehearsal_ok=$((rehearsal_ok + 1))
+  elif echo "$html" | grep -qi "async demo"; then
+    echo "OK   ${path} async demo buyer path"
     rehearsal_ok=$((rehearsal_ok + 1))
   else
-    echo "FAIL ${path} missing DEMO_REHEARSAL_CHECKLIST" >&2
+    echo "FAIL ${path} missing buyer demo runbook copy" >&2
     fail=1
   fi
 done
 if [[ "$rehearsal_ok" -eq 3 ]]; then
-  echo "OK   rehearsal parity (3/3 buyer runbooks)"
+  echo "OK   buyer demo parity (3/3 buyer runbooks)"
 fi
 
 home_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/" 2>/dev/null || true)"

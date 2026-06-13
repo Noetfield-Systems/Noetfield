@@ -44,6 +44,9 @@ python3 scripts/smoke_bank_grade_html.py
 chmod +x scripts/verify-market-success-roadmap.sh
 ./scripts/verify-market-success-roadmap.sh
 
+chmod +x scripts/verify-www-buyer-audience.sh
+./scripts/verify-www-buyer-audience.sh
+
 chmod +x scripts/verify-ui-frame-parity.sh
 ./scripts/verify-ui-frame-parity.sh
 

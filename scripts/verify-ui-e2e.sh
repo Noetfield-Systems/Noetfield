@@ -101,7 +101,7 @@ check_html "${BASE}/trust-ledger/new" "trust ledger new" "Create Trust Ledger dr
 check_html "${BASE}/partners/" "partners page" "Partner programs" "Trust Ledger" "90 days" "Governance execution pipeline" "MSP two-tier model"
 check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment" "Full async demo" "Published tiers" "Governance execution pipeline" "Registry vs receipt"
 check_html "${BASE}/copilot/pilot/" "copilot pilot" "Design-partner Go/No-Go" "Design partner program" "dev sandbox"
-check_html "${BASE}/copilot/demo/" "copilot demo" "Full async demo" "nf-demo-stepper" "Demo script (locked narrative)" "confidence score" "without a sales call"
+check_html "${BASE}/copilot/demo/" "copilot demo" "Full async demo" "nf-demo-stepper" "Step-by-step demo script" "confidence score" "without a sales call"
 check_html "${BASE}/copilot/trial/" "copilot trial" "14-day trial" "50 evaluate checks" "Starter" "Agentic autonomous"
 check_html "${BASE}/copilot/procurement/" "procurement buyer" "buyer pack" "Procurement pack (ZIP)" "SHA-256" "NIST AI RMF"
 check_html "${BASE}/trust-center/" "trust center" "governance posture" "Control checkpoints" "Not a SOC 2" "Framework orientation" "Last verified"
