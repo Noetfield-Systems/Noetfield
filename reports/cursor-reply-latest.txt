@@ -1,19 +1,15 @@
-Comprehensive SSOT + SME blueprint — complete (Noetfield cloud)
+Market research + forward queue 100 — complete (Noetfield cloud)
 
-Shipped on cursor/comprehensive-ssot-blueprint-37f0:
-- docs/SSOT_INDEX.md — master index + two-layer model
-- docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md — engine in basement · Noetfield at door
-- docs/architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md — high-grade SME provider model
-- docs/site/ACTIVE_SITE_POLICY.md + PAGE_AUTHORITY_MAP.md — route authority
-- docs/copilot/SME_BUYER_JOURNEY.md — Copilot funnel
-- www: index + copilot — Block · Record · Export · CAD $2K design partner
-- STRATEGIC_LOCK · PLATFORM_BLUEPRINT · LOCKED_REFERENCE_INDEX · public-surface-map · AGENT_READ_LINKS updates
+Shipped:
+- MARKET_ANALYSIS_2026_LOCKED_v1.md — live research synthesis (Agent 365, E-23, EU AI Act, Copilot stall, competitors)
+- NOETFIELD_FORWARD_QUEUE_100_v1.md — ship-fwd-060..159 / FQ-001..100 in 10 waves
+- SSOT_INDEX + LOCKED_REFERENCE_INDEX links
 
-Verify: ./scripts/plan-with-no-asf-verify.sh — PASS (branch)
-Promote: Q-NF-SPEC-PROMOTE — recommend Form PICK before public spec promotion
+Verify: ./scripts/plan-with-no-asf-verify.sh — PASS
+Promote: Form PICK before www stats / battlecards / investor one-pager
 
-task: Comprehensive SSOT + SME provider blueprint embed
+task: Market analysis + 100 forward plans from locked SSOT + live research
 agent: NF-CLOUD-AGENT
 main: bfc5578
-head: 8903efd
-next: ASK founder — merge SSOT PR; iter 19 (#52) separate bounded order; Form PICK for spec promote; no SourceA edit
+head: 6c49240
+next: ASK founder — merge with PR #53 or separate; pick FQ-001–003 for iter 20; Form PICK on promote

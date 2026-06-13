@@ -37,7 +37,7 @@ The market has **inverted**: buyers no longer lead with “what can the agent do
 
 - Central **Agent Registry**, Entra identity, Purview DLP, Defender monitoring ([Microsoft Learn CAF](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization))
 - Purview: audit, classification, Compliance Manager assessments for Agent 365 ([Purview docs](https://learn.microsoft.com/en-us/purview/ai-agent-365))
-- KPMG deploying Copilot + Agent 365 to **276,000+** professionals — headline is **governance layer**, not agent novelty ([Digital Applied analysis](https://www.digitalapplied.com/blog/kpmemnezhadsina144-dot-kpmg-microsoft-agent-365-deployment-2026-enterprise-governance-analysis))
+- KPMG deploying Copilot + Agent 365 to **276,000+** professionals — headline is **governance layer**, not agent novelty ([Digital Applied analysis](https://www.digitalapplied.com/blog/kpmg-microsoft-agent-365-deployment-2026-enterprise-governance-analysis))
 
 ### Production vs maturity gap
 
