@@ -175,4 +175,4 @@ Per [UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](../architecture/UNIFIED_ENGIN
 
 > **The product is the receipt, not the model.** In 2026, regulated buyers purchase **provable pre-execution decisions** — Microsoft supplies the registry; Noetfield supplies the **signed export your board puts in the governance meeting.**
 
-**Next disk deliverable:** Execute forward queue **FQ-001–010** (Agent 365 complement copy + E-23 mapping page) after Form PICK on promote.
+**Next disk deliverable:** Execute v1 **FQ-001–010** or v2 **FQ-101–103** (Trust Center + Playwright smoke) after Form PICK on promote. Full upgraded queue: [NOETFIELD_FORWARD_QUEUE_100_v2.md](./NOETFIELD_FORWARD_QUEUE_100_v2.md).

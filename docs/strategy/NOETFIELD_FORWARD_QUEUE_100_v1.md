@@ -212,6 +212,7 @@ After current iter 19 (057–059) ships:
 
 ## Related
 
+- [NOETFIELD_FORWARD_QUEUE_100_v2.md](./NOETFIELD_FORWARD_QUEUE_100_v2.md) — FQ-101–200 upgraded (trust center, Playwright, institutional UI)  
 - [MARKET_ANALYSIS_2026_LOCKED_v1.md](./MARKET_ANALYSIS_2026_LOCKED_v1.md)  
 - [GTM_NEXT.md](../ops/plans/no-asf/GTM_NEXT.md)  
 - [SSOT_INDEX.md](../SSOT_INDEX.md)
