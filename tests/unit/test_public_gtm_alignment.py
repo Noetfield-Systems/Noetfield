@@ -64,6 +64,22 @@ def test_enterprise_page_structure() -> None:
     assert "not RPAA retail payments" in text
 
 
+def test_institutional_2026_frame_on_tier_pages() -> None:
+    pages = (
+        "index.html",
+        "enterprise/index.html",
+        "partners/index.html",
+        "trust-center/index.html",
+        "trust-ledger/index.html",
+        "copilot/index.html",
+    )
+    for rel in pages:
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        assert 'name="nf-institutional"' in text, rel
+        assert "noetfield-institutional-2026.css" in text, rel
+        assert "nf-site-2026" in text, rel
+
+
 def test_bank_pilot_frifi_structure() -> None:
     text = (ROOT / "bank-pilot" / "index.html").read_text(encoding="utf-8")
     assert "OSFI E-23" in text

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ <meta name="nf-institutional" content="2026-06" />
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>Noetfield — Governance Execution Infrastructure</title>
@@ -14,9 +15,10 @@
  <link rel="stylesheet" href="/assets/noetfield-components.css" />
  <link rel="stylesheet" href="/assets/noetfield-institutional.css" />
  <link rel="stylesheet" href="/assets/noetfield-sales.css" />
+ <link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />
  <script src="/assets/noetfield-shell.js" defer></script>
 </head>
-<body>
+<body class="nf-site-2026">
  <div class="bg" aria-hidden="true"></div>
  <a class="skip" href="#main">Skip to content</a>
  <header id="nfHeader"></header>
@@ -29,7 +31,7 @@
  We evaluate operational intent, index metadata-only evidence from M365 connectors, and produce signed
  <strong>Trust Ledger Entries (TLE v1)</strong> — procurement-grade go/no-go records your board and auditors can defend.
  </p>
- <div class="nf-cta-actions" style="margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.75rem">
+ <div class="nf-hero-actions">
  <a class="btn btn-primary" href="/copilot/pilot/">Become a design partner</a>
  <a class="btn btn-secondary" href="/copilot/demo/">5-minute demo</a>
  <a class="btn btn-secondary" href="/cognitive-dashboard/">Open Governance Console</a>
@@ -69,23 +71,23 @@
  </div>
  </div>
 
- <p class="nf-section-label">Governance execution</p>
- <div class="nf-prs">
- <article class="nf-prs-card">
- <span class="nf-prs-num" aria-hidden="true">1</span>
- <h2>Block</h2>
- <p>Invalid Copilot-adjacent changes and policy violations are rejected before external systems execute.</p>
- </article>
- <article class="nf-prs-card">
- <span class="nf-prs-num" aria-hidden="true">2</span>
- <h2>Record</h2>
- <p>Allowed paths produce signed Trust Ledger Entries with confidence score and immutable audit lineage.</p>
- </article>
- <article class="nf-prs-card">
- <span class="nf-prs-num" aria-hidden="true">3</span>
- <h2>Export</h2>
- <p>Board-ready PDF and procurement bundles — tamper-evident integrity checks fail on drift.</p>
- </article>
+ <p class="nf-section-label">Governance execution pipeline</p>
+ <div class="nf-pipeline nf-pipeline-section" role="list" aria-label="Governance execution pipeline">
+ <div class="nf-pipeline-step nf-pipeline-step-active" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">1</span>
+ <span class="nf-pipeline-label">Block</span>
+ <span class="nf-pipeline-detail">Invalid Copilot-adjacent changes blocked before external systems execute</span>
+ </div>
+ <div class="nf-pipeline-step" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">2</span>
+ <span class="nf-pipeline-label">Record</span>
+ <span class="nf-pipeline-detail">Signed TLE v1 with confidence score and immutable audit lineage</span>
+ </div>
+ <div class="nf-pipeline-step" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">3</span>
+ <span class="nf-pipeline-label">Export</span>
+ <span class="nf-pipeline-detail">Board-ready PDF and procurement ZIP — tamper-evident integrity checks</span>
+ </div>
  </div>
 
  <p class="nf-section-label">Problem · Risk · Solution</p>

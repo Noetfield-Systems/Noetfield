@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# UI content checks beyond HTTP status — catches stale Next builds and route collisions.
+# UI content checks beyond HTTP status — institutional site 2026 E2E suite.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 # shellcheck source=dev-ports.sh
@@ -30,17 +30,35 @@ check_html() {
   fi
 }
 
-echo "=== verify-ui-e2e ==="
+echo "=== verify-ui-e2e (institutional site 2026) ==="
 
-check_html "${BASE}/workspace" "workspace list" "Trust Ledger Workspace" "Create TLE draft"
-check_html "${BASE}/workspace/connectors" "connectors page" "M365 evidence connectors" "Register + mock connect" "Last sync"
-check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashboard" "Submit operational intent" "Shadow mode" "Governance execution pipeline"
-check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent" "Institutional demo" "Governance execution pipeline"
-check_html "${BASE}/audit" "audit page" "Audit log" "Diligence export"
-check_html "${BASE}/trust-ledger" "trust ledger list" "Trust Ledger" "Trust Ledger v1"
-check_html "${BASE}/trust-ledger/new" "trust ledger new" "Create Trust Ledger draft" "TLE Generator" "Governance execution pipeline"
-check_html "${BASE}/partners/" "partners page" "Partner programs" "Trust Ledger" "90 days"
-check_html "${BASE}/" "homepage" "audit trail your Copilot deployment" "Become a design partner" "5-minute demo" "Procurement pack" "Trust center"
+# --- Static www: institutional frame ---
+for path in "/" "/enterprise/" "/partners/" "/bank-pilot/" "/trust-center/" "/trust-ledger/" "/copilot/"; do
+  label="${path//\//}"
+  label="${label:-homepage}"
+  html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}${path}" 2>/dev/null || true)"
+  if echo "$html" | grep -qF 'nf-institutional" content="2026-06"'; then
+    echo "OK   ${label} institutional meta 2026-06"
+  else
+    echo "FAIL ${label} missing nf-institutional 2026-06 meta" >&2
+    fail=1
+  fi
+  if echo "$html" | grep -qF "noetfield-institutional-2026.css"; then
+    echo "OK   ${label} institutional-2026.css"
+  else
+    echo "FAIL ${label} missing institutional-2026.css" >&2
+    fail=1
+  fi
+done
+
+check_html "${BASE}/" "homepage" \
+  "audit trail your Copilot deployment" \
+  "Become a design partner" \
+  "5-minute demo" \
+  "Procurement pack" \
+  "Trust center" \
+  "Governance execution pipeline"
+
 home_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/" 2>/dev/null || true)"
 if echo "$home_html" | grep -qF 'href="/copilot/procurement/"'; then
   echo "OK   homepage procurement hero href"
@@ -48,13 +66,32 @@ else
   echo "FAIL homepage missing /copilot/procurement/ href" >&2
   fail=1
 fi
-check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment" "5-minute demo" "Copilot governance metrics"
+if echo "$home_html" | grep -qF 'nf-pipeline'; then
+  echo "OK   homepage pipeline strip"
+else
+  echo "FAIL homepage missing nf-pipeline" >&2
+  fail=1
+fi
+
+# --- Console routes ---
+check_html "${BASE}/workspace" "workspace list" "Trust Ledger Workspace" "Create TLE draft" "Governance execution pipeline"
+check_html "${BASE}/workspace/connectors" "connectors page" "M365 evidence connectors" "Register + mock connect" "Last sync"
+check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashboard" "Submit operational intent" "Governance execution pipeline" "Institutional site 2026"
+check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent" "Institutional demo" "Governance execution pipeline"
+check_html "${BASE}/audit" "audit page" "Audit log" "Diligence export"
+check_html "${BASE}/trust-ledger" "trust ledger list" "Trust Ledger" "Trust Ledger v1"
+check_html "${BASE}/trust-ledger/new" "trust ledger new" "Create Trust Ledger draft" "TLE Generator" "Governance execution pipeline"
+
+# --- Institutional buyer surfaces ---
+check_html "${BASE}/partners/" "partners page" "Partner programs" "Trust Ledger" "90 days" "Governance execution pipeline"
+check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment" "5-minute demo" "Copilot governance metrics" "Governance execution pipeline"
 check_html "${BASE}/copilot/pilot/" "copilot pilot" "Design-partner Go/No-Go" "Design partner program"
 check_html "${BASE}/copilot/demo/" "copilot demo" "5-minute demo" "Demo script (locked narrative)" "confidence score"
 check_html "${BASE}/copilot/procurement/" "procurement buyer" "buyer pack" "Procurement pack (ZIP)" "NIST AI RMF"
 check_html "${BASE}/trust-center/" "trust center" "governance posture" "Control checkpoints" "Not a SOC 2"
-check_html "${BASE}/bank-pilot/" "bank pilot" "OSFI E-23" "Governance execution pipeline" "Not an RPAA payment service provider" "Block"
+check_html "${BASE}/bank-pilot/" "bank pilot" "OSFI E-23" "Governance execution pipeline" "Not an RPAA payment service provider"
 check_html "${BASE}/enterprise/" "enterprise page" "OSFI E-23" "Governance execution pipeline" "not RPAA retail payments" "Request Governance Brief"
+check_html "${BASE}/trust-ledger/" "trust ledger www" "Governance execution pipeline" "TLE v1" "Trust center"
 check_html "${BASE}/trust-ledger/sample-report/" "tle samples" "Trust Ledger"
 
 ws_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/workspace" 2>/dev/null || true)"
@@ -66,7 +103,6 @@ else
   fail=1
 fi
 
-# TLE detail must expose PDF export in client chunk (CSR page)
 tle_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/workspace/TLE-015DCFB8B953" 2>/dev/null || true)"
 tle_chunk="$(echo "$tle_html" | grep -oE '/_next/static/chunks/app/workspace/%5Btle_id%5D/page-[^"]+\.js' | head -1)"
 if [[ -n "$tle_chunk" ]]; then
@@ -102,7 +138,6 @@ else
   echo "OK   connectors not captured by [tle_id]"
 fi
 
-# Evaluate → result flow: confidence score visible on result page (GTM demo step 2)
 eval_json="$(curl -sS --connect-timeout 5 -X POST "${BASE}/evaluate" \
   -H "Content-Type: application/json" \
   -d '{"actor":"ui-e2e","action":"smoke","context":"verify-ui-e2e confidence","metadata":{}}' 2>/dev/null || echo '{}')"
@@ -131,7 +166,7 @@ fi
 
 if [[ "$fail" -eq 0 ]]; then
   echo ""
-  echo "verify-ui-e2e passed."
+  echo "verify-ui-e2e passed (institutional site 2026)."
   exit 0
 fi
 exit 1

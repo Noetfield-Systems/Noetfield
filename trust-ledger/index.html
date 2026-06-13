@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ <meta name="nf-institutional" content="2026-06" />
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>Noetfield — Trust Ledger</title>
@@ -13,22 +14,68 @@
  <link rel="stylesheet" href="/assets/noetfield-components.css" />
  <link rel="stylesheet" href="/assets/noetfield-institutional.css" />
  <link rel="stylesheet" href="/assets/noetfield-sales.css" />
+ <link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />
  <script src="/assets/noetfield-shell.js" defer></script>
 </head>
-<body>
+<body class="nf-site-2026">
  <div class="bg" aria-hidden="true"></div>
  <a class="skip" href="#main">Skip to content</a>
  <header id="nfHeader"></header>
  <main id="main" class="wrap nf-page">
  <header class="nf-hero">
- <p class="nf-eyebrow">Trust Ledger · Copilot</p>
+ <p class="nf-eyebrow">Trust Ledger · Copilot · June 2026</p>
  <h1>The audit trail your Copilot rollout will be asked for</h1>
  <p class="nf-lead">
  <strong>Trust Ledger Entries (TLE v1)</strong> are the canonical authorization records for Copilot adoption: evidence from Purview, Entra ID, and M365 audit metadata—signed approval chains, confidence scores, and board-ready export. Every engagement produces at least one signed TLE. Not a payment ledger or wallet.
  </p>
- <p><a class="btn btn-secondary" href="/docs/spec/examples/tle-v1-go.yaml">Sample TLE (Go)</a>
- <a class="btn btn-secondary" href="/docs/diligence/EVIDENCE_INTAKE_CONTRACT_v1.md">Evidence Intake Contract v1</a></p>
+ <div class="nf-hero-actions">
+ <a class="btn btn-primary" href="/workspace/">Trust Ledger workspace</a>
+ <a class="btn btn-secondary" href="/cognitive-dashboard/">Governance Console</a>
+ <a class="btn btn-secondary" href="/trust-center/">Trust center</a>
+ </div>
  </header>
+
+ <div class="nf-metrics" role="list" aria-label="Trust Ledger metrics">
+ <div class="nf-metrics-item nf-metrics-ok" role="listitem">
+ <p class="nf-metrics-label">Receipt</p>
+ <p class="nf-metrics-value">TLE v1</p>
+ <p class="nf-metrics-hint">Signed go/no-go + confidence</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">Evidence</p>
+ <p class="nf-metrics-value">Metadata</p>
+ <p class="nf-metrics-hint">Purview · Entra · audit index</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">Export</p>
+ <p class="nf-metrics-value">PDF + ZIP</p>
+ <p class="nf-metrics-hint">Board pack · procurement bundle</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">Lineage</p>
+ <p class="nf-metrics-value">RID</p>
+ <p class="nf-metrics-hint">Immutable audit export</p>
+ </div>
+ </div>
+
+ <p class="nf-section-label">Governance execution pipeline</p>
+ <div class="nf-pipeline nf-pipeline-section" role="list" aria-label="Governance execution pipeline">
+ <div class="nf-pipeline-step nf-pipeline-step-active" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">1</span>
+ <span class="nf-pipeline-label">Evaluate</span>
+ <span class="nf-pipeline-detail">Policy decision with reason_code and Request ID</span>
+ </div>
+ <div class="nf-pipeline-step" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">2</span>
+ <span class="nf-pipeline-label">Record</span>
+ <span class="nf-pipeline-detail">Append to governed audit log — integrity hash per event</span>
+ </div>
+ <div class="nf-pipeline-step" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">3</span>
+ <span class="nf-pipeline-label">Export</span>
+ <span class="nf-pipeline-detail">audit-export by RID · TLE API · workspace PDF</span>
+ </div>
+ </div>
 
  <section class="nf-section nf-highlight">
  <h2>Try the live demo path</h2>
@@ -37,6 +84,14 @@
  <a class="btn btn-primary" href="/cognitive-dashboard">Cognitive dashboard</a>
  <a class="btn btn-secondary" href="/workspace">Trust Ledger workspace</a>
  <a class="btn btn-secondary" href="/trust-ledger/sample-report/">TLE v1 samples</a>
+ </p>
+ </section>
+
+ <section class="nf-section">
+ <h2>Reference artifacts</h2>
+ <p class="nf-cta-row">
+ <a class="btn btn-secondary" href="/docs/spec/examples/tle-v1-go.yaml">Sample TLE (Go)</a>
+ <a class="btn btn-secondary" href="/docs/diligence/EVIDENCE_INTAKE_CONTRACT_v1.md">Evidence Intake Contract v1</a>
  </p>
  </section>
 

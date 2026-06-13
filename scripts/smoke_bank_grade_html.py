@@ -19,8 +19,20 @@ CONSOLE_HTML = (
 )
 
 P0_MARKERS = ('name="viewport"', "nfHeader", "noetfield-tokens.css")
+INSTITUTIONAL_2026_MARKERS = (
+    'name="nf-institutional"',
+    "noetfield-institutional-2026.css",
+    "nf-site-2026",
+)
 BANK_PILOT_MARKERS = ("OSFI E-23", "nf-policy-callout", "noetfield-frfi.css")
 ENTERPRISE_MARKERS = ("OSFI E-23", "Governance execution pipeline", "noetfield-frfi.css")
+TIER_2026_PAGES = (
+    ROOT / "index.html",
+    ROOT / "partners" / "index.html",
+    ROOT / "trust-center" / "index.html",
+    ROOT / "trust-ledger" / "index.html",
+    ROOT / "copilot" / "index.html",
+)
 CONSOLE_MARKERS = (
     "noetfield-tokens.css",
     "noetfield-console.css",
@@ -47,6 +59,15 @@ def main() -> int:
         for marker in extra_markers.get(path, ()):
             if marker not in text:
                 errors.append(f"{path.relative_to(ROOT)}: missing {marker!r}")
+
+    for path in TIER_2026_PAGES:
+        if not path.is_file():
+            errors.append(f"missing tier page: {path.relative_to(ROOT)}")
+            continue
+        text = path.read_text(encoding="utf-8")
+        for marker in INSTITUTIONAL_2026_MARKERS:
+            if marker not in text:
+                errors.append(f"{path.relative_to(ROOT)}: missing 2026 frame {marker!r}")
 
     if not CONSOLE_HTML.is_file():
         errors.append("governance-console-v1.html missing")

@@ -445,8 +445,19 @@
     }
   }
 
+  async function injectInstitutionalStatus() {
+    if (!document.body.classList.contains("nf-site-2026")) return;
+    var header = document.getElementById("nfHeader");
+    if (!header || document.querySelector(".nf-site-status")) return;
+    var mount = document.createElement("div");
+    mount.id = "nfSiteStatus";
+    header.insertAdjacentElement("afterend", mount);
+    await injectOne("nfSiteStatus", "institutional-status.html");
+  }
+
   async function injectShell() {
     await injectOne("nfHeader", "header.html");
+    await injectInstitutionalStatus();
     await injectOfferingsStrip();
     await injectOne("nfFooter", "footer.html");
   }

@@ -1,0 +1,139 @@
+/* Noetfield institutional site — June 2026 frame
+   Load after noetfield-components.css on all GTM tier pages. */
+
+.nf-site-2026 {
+  --nf-site-max: 72rem;
+}
+
+.nf-site-2026 .nf-page {
+  padding-top: 0;
+}
+
+/* Status strip — mirrors Governance Console shell */
+.nf-site-status {
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 7, 11, 0.92);
+  font-size: var(--text-xs);
+  color: var(--muted2);
+}
+.nf-site-status-inner {
+  max-width: var(--nf-site-max, 72rem);
+  margin: 0 auto;
+  padding: 10px clamp(16px, 4vw, 24px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+.nf-site-status strong {
+  color: var(--muted);
+  font-weight: 600;
+}
+.nf-site-status-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+.nf-site-status-links a {
+  color: var(--muted2);
+  text-decoration: none;
+  transition: color var(--motion-fast) ease;
+}
+.nf-site-status-links a:hover {
+  color: var(--text);
+}
+.nf-site-status-links a.nf-site-status-accent {
+  color: var(--gold);
+}
+
+/* Hero actions — replace inline flex on tier pages */
+.nf-hero-actions,
+.nf-hero .nf-hero-actions,
+.nf-cta-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Highlight band — trust-ledger, demo callouts */
+.nf-highlight {
+  border: 1px solid rgba(200, 163, 73, 0.35);
+  border-radius: var(--radius);
+  padding: clamp(20px, 4vw, 28px);
+  background:
+    radial-gradient(520px 180px at 0% 0%, rgba(200, 163, 73, 0.1), transparent 65%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+}
+.nf-highlight h2 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  font-weight: 650;
+}
+.nf-highlight p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  max-width: 72ch;
+}
+
+.nf-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 4px;
+}
+
+/* Two-column institutional sections */
+.nf-inst-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: var(--section-y);
+}
+@media (max-width: 768px) {
+  .nf-inst-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.nf-inst-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: var(--panel2);
+}
+.nf-inst-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 650;
+}
+.nf-inst-card p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: var(--leading-body);
+}
+
+/* Pipeline section label pairing */
+.nf-pipeline-section {
+  margin-bottom: var(--section-y);
+}
+
+/* Wider hero on institutional tier */
+.nf-site-2026 .nf-hero h1 {
+  max-width: 24ch;
+}
+
+/* Console parity marker in static HTML (e2e) */
+.nf-institutional-marker {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
