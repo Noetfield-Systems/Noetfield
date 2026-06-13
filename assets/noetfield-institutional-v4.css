@@ -220,3 +220,76 @@
 .nf-site-2026.nf-v4 .nf-dir-card.featured {
   border-color: rgba(200, 163, 73, 0.4);
 }
+
+/* Async demo stepper — visual checklist (bank-ui-043) */
+.nf-demo-stepper {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+.nf-demo-stepper li {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+}
+.nf-demo-stepper .nf-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--gold);
+  border: 1px solid rgba(200, 163, 73, 0.45);
+  background: rgba(200, 163, 73, 0.1);
+}
+.nf-demo-stepper .nf-step-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+.nf-demo-stepper .nf-step-link {
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+/* Integrity checksum badge (bank-ui-054) */
+.nf-checksum-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  font-size: var(--text-xs);
+  font-family: ui-monospace, monospace;
+  color: var(--muted2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+}
+.nf-checksum-badge strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Trust center freshness (bank-ui-034) */
+.nf-last-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+  color: var(--muted2);
+}
+.nf-last-verified time {
+  color: var(--ok);
+  font-weight: 600;
+}

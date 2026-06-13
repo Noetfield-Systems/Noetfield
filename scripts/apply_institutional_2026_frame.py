@@ -17,12 +17,16 @@ TIER_PAGES = (
     ROOT / "federal" / "index.html",
     ROOT / "trust-center" / "index.html",
     ROOT / "trust-ledger" / "index.html",
+    ROOT / "trust-ledger" / "sample-report" / "index.html",
     ROOT / "copilot" / "index.html",
     ROOT / "copilot" / "demo" / "index.html",
     ROOT / "copilot" / "pilot" / "index.html",
+    ROOT / "copilot" / "trial" / "index.html",
     ROOT / "copilot" / "procurement" / "index.html",
     ROOT / "trust-brief" / "index.html",
     ROOT / "console" / "index.html",
+    ROOT / "gate" / "intake" / "index.html",
+    ROOT / "faq" / "index.html",
 )
 
 CSS_2026 = '<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />'
@@ -38,14 +42,15 @@ FRFI_CSS = '<link rel="stylesheet" href="/assets/noetfield-frfi.css" />'
 
 GRID_PAGES = {
     "partners", "partners/msp", "federal", "trust-center", "trust-ledger",
-    "enterprise", "bank-pilot", "index",
+    "enterprise", "bank-pilot", "index", "trust-ledger/sample-report",
 }
 
 FRFI_PAGES = {"bank-pilot", "enterprise", "federal"}
 BANK_GRADE_PAGES = {
     "index", "enterprise", "bank-pilot", "trust-center", "trust-ledger",
-    "copilot", "copilot/demo", "copilot/pilot", "copilot/trial", "copilot/procurement",
-    "partners", "partners/msp", "federal", "trust-brief", "console",
+    "trust-ledger/sample-report", "copilot", "copilot/demo", "copilot/pilot",
+    "copilot/trial", "copilot/procurement", "partners", "partners/msp",
+    "federal", "trust-brief", "console", "gate/intake", "faq",
 }
 
 

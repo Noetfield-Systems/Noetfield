@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
+import { TrialBanner } from "@/components/TrialBanner";
 import { useApiHealth } from "@/lib/useApiHealth";
 import { wwwHref } from "@/lib/www-links";
 
@@ -86,7 +87,10 @@ export function Shell({ children, active }: ShellProps) {
           </nav>
         </div>
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+        <TrialBanner />
+        {children}
+      </main>
       <Footer />
     </div>
   );

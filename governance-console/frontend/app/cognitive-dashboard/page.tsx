@@ -5,6 +5,7 @@ import { Shell } from "@/components/Shell";
 import { EvaluateForm } from "@/components/EvaluateForm";
 import { DevPortBanner } from "@/components/DevPortBanner";
 import { MetricStrip } from "@/components/MetricStrip";
+import { OnboardingStepper } from "@/components/OnboardingStepper";
 import { PolicyCallout } from "@/components/PolicyCallout";
 import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { apiBaseLabel } from "@/lib/health";
@@ -18,6 +19,7 @@ export default function CognitiveDashboardPage() {
   return (
     <Shell active="dashboard">
       <DevPortBanner />
+      <OnboardingStepper />
       <section className="mb-6">
         <p className="nf-eyebrow">Cognitive governance</p>
         <h2 className="mt-1 font-serif text-3xl font-semibold text-white">Cognitive dashboard</h2>

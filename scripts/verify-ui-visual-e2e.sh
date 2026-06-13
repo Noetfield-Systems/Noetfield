@@ -65,7 +65,7 @@ else
 fi
 
 # v4 frame on GTM tier routes.
-for path in "/" "/enterprise/" "/trust-center/" "/copilot/" "/bank-pilot/"; do
+for path in "/" "/enterprise/" "/trust-center/" "/copilot/" "/bank-pilot/" "/copilot/trial/" "/copilot/demo/" "/gate/intake/" "/copilot/procurement/"; do
   label="${path//\//}"
   label="${label:-homepage}"
   html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}${path}" 2>/dev/null || true)"
@@ -82,6 +82,33 @@ for path in "/" "/enterprise/" "/trust-center/" "/copilot/" "/bank-pilot/"; do
     fail=1
   fi
 done
+
+# Copilot hub — hero CTA discipline (≤2 in primary block).
+copilot_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/copilot/" 2>/dev/null || true)"
+copilot_cta="$(echo "$copilot_html" | python3 -c "
+import re, sys
+html = sys.stdin.read()
+m = re.search(r'nf-hero-actions--primary\">(.*?)</div>', html, re.S)
+if not m:
+    print(99)
+else:
+    print(len(re.findall(r'class=\"btn ', m.group(1))))
+" 2>/dev/null || echo "99")"
+if [[ "$copilot_cta" -le 2 ]]; then
+  echo "OK   copilot hero primary button count ($copilot_cta ≤ 2)"
+else
+  echo "FAIL copilot hero has $copilot_cta primary buttons" >&2
+  fail=1
+fi
+
+# Demo async stepper present.
+demo_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/copilot/demo/" 2>/dev/null || true)"
+if echo "$demo_html" | grep -qF 'class="nf-demo-stepper"'; then
+  echo "OK   demo nf-demo-stepper"
+else
+  echo "FAIL demo missing nf-demo-stepper" >&2
+  fail=1
+fi
 
 # Header tag no longer truncates long institutional phrase.
 header_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/assets/partials/header.html" 2>/dev/null || true)"

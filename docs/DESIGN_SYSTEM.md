@@ -1,6 +1,43 @@
-# Noetfield design system v3 (www)
+# Noetfield design system v5 (www + console)
 
-Institutional dark + gold UI for public GTM surfaces. **Do not** change positioning copy or SKU count when editing styles.
+Institutional dark + gold UI for public GTM surfaces and Governance Console. **Do not** change positioning copy or SKU count when editing styles.
+
+## v5 stylesheet load order (GTM tier pages)
+
+```html
+<link rel="stylesheet" href="/assets/noetfield-tokens.css" />
+<link rel="stylesheet" href="/assets/noetfield-shell.css" />
+<link rel="stylesheet" href="/assets/noetfield-components.css" />
+<link rel="stylesheet" href="/assets/noetfield-institutional.css" />
+<link rel="stylesheet" href="/assets/noetfield-sales.css" />
+<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />
+<link rel="stylesheet" href="/assets/noetfield-institutional-grid.css" /> <!-- grid pages -->
+<link rel="stylesheet" href="/assets/noetfield-bank-grade.css" />
+<link rel="stylesheet" href="/assets/noetfield-institutional-v4.css" />
+```
+
+**Body classes:** `nf-site-2026 nf-bank-grade nf-v4` (+ `nf-frfi` on enterprise / bank-pilot / federal).
+
+**Automation:** `python3 scripts/apply_institutional_2026_frame.py` · verify: `./scripts/verify-ui-frame-parity.sh`
+
+## v4 components (tier-1 UI)
+
+| Class | Use |
+|-------|-----|
+| `.nf-trust-hero` | 2-col hero + TLE receipt card (homepage) |
+| `.nf-tle-receipt-card` | Live receipt preview |
+| `.nf-framework-grid-v4` | Framework orientation grid |
+| `.nf-hero-actions--primary` | ≤2 hero CTAs |
+| `.nf-hero-links` | Secondary text links under hero |
+| `.nf-demo-stepper` | Async demo visual checklist |
+| `.nf-checksum-badge` | Procurement ZIP integrity |
+| `.nf-last-verified` | Trust center freshness |
+
+Console mirrors tokens via `governance-console/frontend/tailwind.config.ts` (`accent`, `surface`).
+
+---
+
+## v3 baseline (legacy reference)
 
 ## Stylesheet load order
 

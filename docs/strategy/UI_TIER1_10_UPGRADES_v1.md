@@ -8,7 +8,9 @@
 | Parent | [INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md](./INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md) (100 items) |
 | Packaging | [PACKAGING_TIER_SANDBOX_LOCKED_v1.md](./PACKAGING_TIER_SANDBOX_LOCKED_v1.md) |
 
-**Purpose:** Condense the 100-plan into **10 shippable upgrades** that move Noetfield www + console UI from credible institutional v4 to **world-class tier-1** — the bar set by top identity/compliance SaaS (self-serve trial, async product demo, published tiers, in-product trust center, browser CI).
+**Purpose:** Condense the 100-plan into **10 shippable upgrades** that move Noetfield www + console UI from credible institutional v4 to **world-class tier-1**.
+
+**Shipped (iter 21 — UI level-up):** #2 partial (frame parity gate + gate/faq/sample-report) · #3 partial (TrialBanner + OnboardingStepper) · #6 partial (checksum badge) · #8 partial (nf-demo-stepper) · #5 partial (trust center v4 grid + last verified) · DESIGN_SYSTEM v5
 
 **Bottleneck unchanged:** Customer #1 board PDF in a real governance meeting. UI upgrades **accelerate trial → proof**, they do not replace proof.
 
