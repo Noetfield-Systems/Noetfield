@@ -175,7 +175,21 @@ Maps to shipped product + portfolio engine behavior — **do not name internal e
 
 ---
 
-## 10. Verify (commercial truth)
+## 10. Digital trust lane (locked)
+
+Full lane architecture: [NOETFIELD_DIGITAL_TRUST_LANE_LOCKED_v1.md](./NOETFIELD_DIGITAL_TRUST_LANE_LOCKED_v1.md)
+
+**Lane:** Regulated digital trust for M365 Copilot rollout decisions — signed TLE + board PDF + procurement ZIP.
+
+**North star:** Board-grade, tamper-evident go/no-go receipts before production scope opens.
+
+**Urgency hook (orientation):** EU AI Act Art. 12 · Aug 2026 — tamper-evident decision record expectations for institutional buyers.
+
+**Public www:** No vendor comparison tables — delivery outcomes, buyer map, honest moat only.
+
+---
+
+## 11. Verify (commercial truth)
 
 ```bash
 make verify-gtm          # pre-demo bundle
@@ -187,7 +201,7 @@ make ship-verify         # cloud superset
 
 ---
 
-## 11. Agent instruction
+## 12. Agent instruction
 
 When ASF says **implement** from this SSOT:
 

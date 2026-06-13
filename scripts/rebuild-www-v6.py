@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-WWW_VER = "25"
+WWW_VER = "26"
 
 # Copilot Governance Pack — locked lead SKU ($2k–10k · 90 days · board PDF success signal)
 PILOT_SKU = "Copilot Governance Pack"
@@ -15,6 +15,13 @@ PILOT_SUCCESS = "board PDF in a real governance meeting"
 PILOT_INTAKE = "/trust-brief/intake/?interest=pilot&vector=copilot-governance"
 TRUST_BRIEF_INTAKE = "/trust-brief/intake/"
 MEGA_CTA_TITLE = "Board PDF in your next governance meeting"
+
+# Lane-native north star (docs/strategy/NOETFIELD_DIGITAL_TRUST_LANE_LOCKED_v1.md)
+LANE_NORTH_STAR = (
+    "For regulated EU and US institutions rolling out Microsoft 365 Copilot: Noetfield produces "
+    "board-grade, tamper-evident go/no-go receipts — signed Trust Ledger Entries, confidence scores, "
+    "and procurement exports — before production scope opens."
+)
 
 # Above-fold regulatory marquee — EU + US institutional lane (orientation only)
 HERO_MARQUEE = ["EU AI Act Art. 12", "ISO 42001", "DORA orientation", "NIST AI RMF"]
@@ -45,9 +52,9 @@ COPY = {
     "hero_lead": (
         "Noetfield is the <strong>AI Governance &amp; Evidence</strong> layer for Microsoft 365 Copilot — "
         "<strong>board-grade, tamper-evident decision records</strong> for <strong>EU and US regulated institutions</strong>. "
-        "Every go/no-go produces a signed Trust Ledger Entry — invalid changes <strong>blocked</strong>, allowed decisions "
-        "<strong>receipted</strong>, export <strong>fail closed</strong> on tamper. Metadata-only M365 — complement Purview "
-        "and Copilot Control System, not replace."
+        "Every go/no-go produces a signed Trust Ledger Entry — a record <strong>independent of the app under audit</strong> — "
+        "invalid changes <strong>blocked</strong>, allowed decisions <strong>receipted</strong>, export <strong>fail closed</strong> on tamper. "
+        "Metadata-only M365 · evaluate → record → export before production scope opens."
     ),
     "demo_sentence": "Show the record your auditor would accept before Copilot touches production data.",
     "mega_sub": (
@@ -65,7 +72,7 @@ COPY = {
         "(~5 minutes in sandbox)."
     ),
     "closing_competitive": (
-        "Your peers roll out Copilot with slides. You roll out with <strong>signed receipts</strong>."
+        "Roll out Copilot with <strong>signed receipts</strong> — board PDF, procurement ZIP, and verified export integrity."
     ),
 }
 
@@ -344,18 +351,116 @@ def self_serve_rail() -> str:
  </nav>"""
 
 
-def three_traps_section() -> str:
+def copilot_governance_gaps_section() -> str:
+    """Three governance gaps — problem framing without vendor comparison."""
     return """
- <section class="nf-section-block nf-section--elevated" aria-labelledby="traps-title">
+ <section class="nf-section-block nf-section--elevated" aria-labelledby="governance-gaps">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">!</span><div>
- <p class="nf-eyebrow" id="traps-title">Why governance fails today</p>
- <h2>Three traps before Copilot touches production data</h2>
- <p class="nf-section-lead">Most rollouts stall on policy decks and spreadsheets — not on Microsoft readiness alone.</p>
+ <p class="nf-eyebrow" id="governance-gaps">Governance gaps</p>
+ <h2>Three gaps regulated Copilot rollouts must close before production</h2>
+ <p class="nf-section-lead">Policy readiness alone does not produce a signed go/no-go record your board and auditors can inspect.</p>
  </div></div>
  <div class="nf-traps-grid">
- <article class="nf-trap-card"><p class="nf-trap-card__label">Purview-only trap</p><h3>You labeled data. Nobody receipted the go/no-go.</h3><p>Purview readiness is necessary — it is not a signed Copilot execution record your board can defend.</p></article>
- <article class="nf-trap-card"><p class="nf-trap-card__label">Spreadsheet trap</p><h3>Policy lives in SharePoint. Evidence lives in someone&rsquo;s inbox.</h3><p>When audit asks who approved Copilot for production, the thread is gone.</p></article>
- <article class="nf-trap-card"><p class="nf-trap-card__label">Retrofit trap</p><h3>You discover the gap in the audit — not before rollout.</h3><p>Regulators and boards ask <em>after</em> Copilot already touched production data.</p></article>
+ <article class="nf-trap-card"><p class="nf-trap-card__label">Gap 01</p><h3>No signed execution receipt per go/no-go</h3><p>Labels and policies exist — but audit asks for a tamper-evident decision record tied to each Copilot rollout decision.</p></article>
+ <article class="nf-trap-card"><p class="nf-trap-card__label">Gap 02</p><h3>Evidence scattered across inboxes and decks</h3><p>When risk committee asks who approved production scope, the thread is not exportable for diligence.</p></article>
+ <article class="nf-trap-card"><p class="nf-trap-card__label">Gap 03</p><h3>Audit discovery after rollout — not before</h3><p>Boards and regulators ask for records <em>after</em> Copilot touched production data unless you receipt decisions upfront.</p></article>
+ </div>
+ </section>"""
+
+
+def digital_trust_lane_block() -> str:
+    """Noetfield lane definition — Copilot rollout trust (no vendor names)."""
+    return f"""
+ <section class="nf-section-block nf-section--elevated" aria-labelledby="digital-trust-lane">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">◎</span><div>
+ <p class="nf-eyebrow" id="digital-trust-lane">Digital trust lane</p>
+ <h2>Trust at Copilot rollout decisions — not identity onboarding, not generic LLM proxy</h2>
+ <p class="nf-section-lead">{LANE_NORTH_STAR}</p>
+ </div></div>
+ <div class="nf-lane-grid">
+ <article class="nf-lane-card"><p class="nf-lane-card__tag">Noetfield wedge</p><h3>Copilot go/no-go evidence</h3><p>Evaluate operational intent → signed TLE → board PDF + procurement ZIP. Metadata-only M365 stack.</p></article>
+ <article class="nf-lane-card"><p class="nf-lane-card__tag">Buyer</p><h3>CISO · GRC · procurement · board</h3><p>EU and US regulated institutions rolling out Microsoft 365 Copilot under audit scrutiny.</p></article>
+ <article class="nf-lane-card nf-lane-card--gold"><p class="nf-lane-card__tag">Trust mechanism</p><h3>Signed receipt + export integrity</h3><p>Tamper-evident decision records · confidence score · fail-closed export · independent of the app under audit.</p></article>
+ </div>
+ <aside class="nf-callout nf-callout--urgency"><p><strong>EU AI Act Art. 12 orientation (Aug 2026):</strong> High-risk logging expectations are accelerating board demand for automatic, tamper-evident decision records — orientation only, not legal advice or certifier claims.</p></aside>
+ </section>"""
+
+
+def regulated_buyer_triggers_block() -> str:
+    """Regulated buyer trigger map — EU + US institutional lanes."""
+    rows = [
+        ("EU AI Act Art. 12", "EU", "Automatic tamper-evident decision records", "TLE v1 + fail-closed export"),
+        ("DORA / NIS2", "EU financial", "Incident evidence · audit trails", "Board PDF + procurement ZIP"),
+        ("NIST AI RMF / ISO 42001", "US", "Govern · manage · evidence mapping", "Framework orientation in exports"),
+        ("FFIEC / OSFI / GC ADM", "US/CA · public &amp; bank", "Board oversight · metadata-only", "Federal + bank-pilot lanes"),
+        ("Copilot enterprise rollout", "EU + US", "Signed go/no-go before production scope", f"<a href=\"{PILOT_INTAKE}\">Copilot Governance Pack</a>"),
+    ]
+    body = "".join(f"<tr><td><strong>{t}</strong></td><td>{r}</td><td>{n}</td><td>{f}</td></tr>" for t, r, n, f in rows)
+    return f"""
+ <section class="nf-section-block" aria-labelledby="buyer-triggers">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">EU+US</span><div>
+ <p class="nf-eyebrow" id="buyer-triggers">Regulated buyer map</p>
+ <h2>What triggers institutional buyers — and what Noetfield delivers</h2>
+ <p class="nf-section-lead">Orientation for CISO, GRC, legal, and procurement — not legal advice.</p>
+ </div></div>
+ <div class="nf-table-wrap"><table class="nf-table nf-table--compact"><thead><tr><th>Trigger</th><th>Region / sector</th><th>Buyer need</th><th>Noetfield deliverable</th></tr></thead><tbody>{body}</tbody></table></div>
+ </section>"""
+
+
+def honest_moat_grid() -> str:
+    """Honest capability claims — evidence and do-not-claim boundaries."""
+    claims = [
+        ("Signed go/no-go receipt per Copilot decision", "TLE v1 + evaluate API", "available"),
+        ("Board + procurement exports", "Board PDF · procurement ZIP", "available"),
+        ("M365-native evidence index", "Purview · Entra · audit metadata", "available"),
+        ("Fail-closed export integrity", "/trust-ledger/verify/", "available"),
+        ("Fixed-fee institutional pilot", "Copilot Governance Pack $2k–10k", "available"),
+        ("Ed25519 / Merkle transparency log", "Roadmap · orientation on verify page", "roadmap"),
+    ]
+    dont = [
+        "ISO / SOC / eIDAS certification from Noetfield",
+        "Identity verification or KYC at onboarding",
+        "Payment custody · MSB execution · money transmission",
+        "Full Article 12 compliance certifier claims",
+        "Platform ARR · logo wall · inflated references",
+    ]
+    items = "".join(
+        f'<article class="nf-moat-item"><h3>{c}</h3><p>{e}</p><span class="nf-signal-badge nf-signal-badge--{s}">{SCOPE_LABELS[s]}</span></article>'
+        for c, e, s in claims
+    )
+    dont_li = "".join(f"<li>{d}</li>" for d in dont)
+    return f"""
+ <section class="nf-section-block" aria-labelledby="honest-moat">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">✓</span><div>
+ <p class="nf-eyebrow" id="honest-moat">Honest scope</p>
+ <h2>What you can claim in diligence today</h2>
+ <p class="nf-section-lead">Available now with demo and export walkthrough — Planned and out-of-scope labeled honestly.</p>
+ </div></div>
+ <div class="nf-moat-grid">{items}</div>
+ <aside class="nf-callout"><p><strong>Do not claim:</strong></p><ul class="nf-hero-panel-list">{dont_li}</ul></aside>
+ </section>"""
+
+
+def buyer_delivery_outcomes_table() -> str:
+    """Positive delivery map — no competitor or approach comparison."""
+    return """
+ <section class="nf-section-block" aria-labelledby="delivery-outcomes">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">→</span><div>
+ <p class="nf-eyebrow" id="delivery-outcomes">Delivery outcomes</p>
+ <h2>What regulated buyers receive from Noetfield</h2>
+ <p class="nf-section-lead">Same evaluate → TLE → export spine from sandbox through Copilot Governance Pack production tenant.</p>
+ </div></div>
+ <div class="nf-table-wrap">
+ <table class="nf-table nf-table--compact">
+ <thead><tr><th>Buyer need</th><th>Noetfield deliverable</th></tr></thead>
+ <tbody>
+ <tr><td><strong>Signed go/no-go per Copilot decision</strong></td><td>TLE v1 · confidence score · Request ID lineage</td></tr>
+ <tr><td><strong>Board and risk committee evidence</strong></td><td>Board PDF used in governance meeting — pilot success signal</td></tr>
+ <tr><td><strong>Procurement and legal diligence</strong></td><td>Procurement ZIP · fail-closed export integrity verification</td></tr>
+ <tr><td><strong>M365 metadata evidence index</strong></td><td>Purview · Entra · audit connectors — read-only · metadata-only</td></tr>
+ <tr><td><strong>Fixed-fee institutional entry</strong></td><td>Copilot Governance Pack · $2k–10k · 90 days · QuickScan to Readiness Pilot bands</td></tr>
+ </tbody>
+ </table>
  </div>
  </section>"""
 
@@ -555,25 +660,8 @@ def governance_output_suite() -> str:
 
 
 def contrast_table_section() -> str:
-    return """
- <section class="nf-section-block" aria-labelledby="contrast-title">
- <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">⇄</span><div>
- <p class="nf-eyebrow" id="contrast-title">Why Noetfield</p>
- <h2>What you tried vs what breaks vs what Noetfield delivers</h2>
- <p class="nf-section-lead">Self-sort in one table — built for CISO, GRC, and procurement reviewers.</p>
- </div></div>
- <div class="nf-contrast-table-wrap">
- <table class="nf-contrast-table">
- <thead><tr><th>Approach</th><th>What breaks</th><th>Noetfield</th></tr></thead>
- <tbody>
- <tr><td>Purview + policy deck only</td><td>No signed execution receipt per go/no-go</td><td>TLE v1 + confidence score on every decision</td></tr>
- <tr><td>Spreadsheet + email approvals</td><td>No tamper-evident export for diligence</td><td>Board PDF + procurement ZIP · fail closed on tamper</td></tr>
- <tr><td>Enterprise GRC platform rollout</td><td>Slow · expensive · not Copilot-native</td><td>Metadata-only M365 · evaluate in minutes</td></tr>
- <tr><td>Consultant PDF once</td><td>Static · ages before next rollout wave</td><td>Live evaluate + export cadence per tenant</td></tr>
- </tbody>
- </table>
- </div>
- </section>"""
+    """Legacy alias — positive delivery outcomes only (no comparison framing)."""
+    return buyer_delivery_outcomes_table()
 
 
 def fit_qualification_body() -> str:
@@ -701,7 +789,7 @@ def pilot_page_body() -> str:
  <article class="nf-loop-step"><p class="nf-loop-step-num">Wk 6</p><h3>Governance meeting</h3><p>Board PDF in real risk, legal, or board session — pilot success signal.</p></article>
  </div>
  </section>
- """ + pilot_success_criteria_block() + milestone_pricing_ladder() + assurance_levels_block() + eu_us_regulatory_block() + role_testimonials_strip() + """
+ """ + pilot_success_criteria_block() + milestone_pricing_ladder() + assurance_levels_block() + regulated_buyer_triggers_block() + eu_us_regulatory_block() + honest_moat_grid() + role_testimonials_strip() + """
  <section class="nf-section-block" aria-labelledby="pilot-out">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">04</span><div>
  <p class="nf-eyebrow" id="pilot-out">Out of scope</p>
@@ -865,7 +953,7 @@ def homepage() -> str:
         '</header>',
         hero_regulatory_chips() + "\n </header>",
         1,
-    ) + stat_bar() + pilot_hero_wedge() + social_proof_industry_strip() + buyer_journey_strip() + institution_icp_strip() + role_testimonials_strip() + three_traps_section() + self_serve_rail() + "\n </section>"
+    ) + stat_bar() + pilot_hero_wedge() + digital_trust_lane_block() + social_proof_industry_strip() + buyer_journey_strip() + institution_icp_strip() + regulated_buyer_triggers_block() + role_testimonials_strip() + copilot_governance_gaps_section() + self_serve_rail() + "\n </section>"
 
     act_prove = f"""
  <section class="nf-section-block nf-act-prove" aria-labelledby="act-prove">
@@ -919,6 +1007,7 @@ def homepage() -> str:
  </div></div>
  {fit_qualification_body()}
  {assurance_levels_block()}
+ {honest_moat_grid()}
  {procurement_rail()}
  {ciso_strip()}
  {scope_block()}

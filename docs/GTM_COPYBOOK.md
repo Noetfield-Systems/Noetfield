@@ -7,7 +7,7 @@
 
 ## Narrative spine (www v16 — packaging)
 
-**Master plan:** [WWW_V16_PACKAGING_PLAN_LOCKED_v1.md](../WWW_V16_PACKAGING_PLAN_LOCKED_v1.md) · institutional baseline [WWW_V13_INSTITUTIONAL_100_PLAN_LOCKED_v1.md](./WWW_V13_INSTITUTIONAL_100_PLAN_LOCKED_v1.md)
+**Master plan:** [WWW_V16_PACKAGING_PLAN_LOCKED_v1.md](../WWW_V16_PACKAGING_PLAN_LOCKED_v1.md) · institutional baseline [WWW_V13_INSTITUTIONAL_100_PLAN_LOCKED_v1.md](./WWW_V13_INSTITUTIONAL_100_PLAN_LOCKED_v1.md) · lane [NOETFIELD_DIGITAL_TRUST_LANE_LOCKED_v1.md](./strategy/NOETFIELD_DIGITAL_TRUST_LANE_LOCKED_v1.md)
 
 | Element | Copy |
 |---------|------|
