@@ -13,6 +13,8 @@ site into an enterprise AI governance operating system.
 
 | Doc | Audience |
 |-----|----------|
+| [docs/INDEX.md](docs/INDEX.md) | Fast doc router |
+| [docs/SSOT_INDEX.md](docs/SSOT_INDEX.md) | Master index (constitutional + strategy + spec) |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Public horizons + shipped summary |
 | [docs/strategy/noetfield-future-path.md](docs/strategy/noetfield-future-path.md) | Product strategy (2026–2027) |
 | [GitHub Issues](https://github.com/kazemnezhadsina144-dot/Noetfield/issues) | Team execution (`launch`, `legal`, `engineering`) |

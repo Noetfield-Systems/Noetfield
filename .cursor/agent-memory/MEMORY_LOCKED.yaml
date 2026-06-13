@@ -1,8 +1,8 @@
 # Noetfield agent memory — LOCKED (versioned in git)
 # Read at EVERY session start. Bump version when adding lessons.
 
-version: 9
-updated: "2026-06-10T12:00:00Z"
+version: 10
+updated: "2026-06-12T00:00:00Z"
 updated_by: NF-CLOUD-AGENT
 
 company_scope:
@@ -116,10 +116,12 @@ pre_commit_checklist:
 
 session_start_checklist:
   - Read MEMORY_LOCKED.yaml
+  - Read docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md if docs feel fragmented (or SKILL-009)
   - Read incidents/REGISTRY.md open items
   - Read PROJECT_BOUNDARIES_LOCKED.md
   - Apply SKILL-007 if any rule conflict detected
   - Apply SKILL-006 ask-before-implement
   - Apply SKILL-001 scope gate (after permission only)
   - Apply SKILL-008 agentic commercial boundary
+  - Apply SKILL-009 docs-ssot-entry before creating new doc indexes
   - Read FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md

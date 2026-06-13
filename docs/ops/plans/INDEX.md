@@ -4,8 +4,10 @@
 |--------|-------|
 | Total plans | 1000 |
 | Agent (`no_asf`) | 990 |
-| Done | 1000 |
+| Registry synced | 1000 |
 | ASF-only flagged | 10 |
+
+**Note:** `Registry synced: 1000` means all NF-PLAN rows exist in `registry.json` — **not** engineering complete. **Active ship queue:** [no-asf/GTM_NEXT.md](./no-asf/GTM_NEXT.md).
 
 ## Organization
 

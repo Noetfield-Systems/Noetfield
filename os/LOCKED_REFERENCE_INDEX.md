@@ -11,6 +11,7 @@
 | Layer | Document | Path |
 |-------|----------|------|
 | **SSOT index** | Master index | [docs/SSOT_INDEX.md](../docs/SSOT_INDEX.md) |
+| **Unified doc map** | Silo router | [docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md](../docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md) |
 | **Unified engine model** | Commercial front vs portfolio engine | [docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](../docs/architecture/UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md) |
 | **SME provider blueprint** | High-grade SME product model | [docs/architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md](../docs/architecture/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md) |
 | **Site policy** | Active routes | [docs/site/ACTIVE_SITE_POLICY.md](../docs/site/ACTIVE_SITE_POLICY.md) |

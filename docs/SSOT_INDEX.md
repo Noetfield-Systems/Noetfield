@@ -5,6 +5,8 @@
 **Updated:** 2026-06-12  
 **Supremacy:** GCIP v4 (L0) → [NORTH_STAR.md](../NORTH_STAR.md) → locks in this table
 
+**Fragmented?** Read [ops/DOCS_UNIFIED_MAP_LOCKED_v1.md](./ops/DOCS_UNIFIED_MAP_LOCKED_v1.md) (one page) · [INDEX.md](./INDEX.md) (fast router)
+
 ---
 
 ## Read order (60 seconds)
@@ -63,6 +65,7 @@
 | [POSITIONING_CLIENT_SYNTHESIS_v1.md](./diligence/POSITIONING_CLIENT_SYNTHESIS_v1.md) | Client + investor-safe GTM synthesis |
 | [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](./strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md) | Client-safe site plan + 10-step institutional redesign |
 | [INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md](./strategy/INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md) | VC / FRFI bank-grade UI 100-plan |
+| [UI_TIER1_10_UPGRADES_v1.md](./strategy/UI_TIER1_10_UPGRADES_v1.md) | Next 10 world-class UI upgrades (post v4) |
 | [MARKET_SUCCESS_1000_ROADMAP_v1.md](./strategy/MARKET_SUCCESS_1000_ROADMAP_v1.md) | Market success model 1000-step × 10-phase roadmap (SM-01–SM-10) |
 | [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | Forward queue v1 FQ-001–100 |
 | [NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md) | Forward queue v5 FQ-401–500 (M lane) |
@@ -89,6 +92,7 @@
 
 | Doc | Role |
 |-----|------|
+| [DOCS_UNIFIED_MAP_LOCKED_v1.md](./ops/DOCS_UNIFIED_MAP_LOCKED_v1.md) | **One-page silo map** — entry points, plan IDs, precedence |
 | [AGENT_READ_LINKS_LOCKED_v1.md](./ops/AGENT_READ_LINKS_LOCKED_v1.md) | Cloud read order |
 | [SOURCEA_MANDATORY_SYNC_STATUS_v1.md](./ops/SOURCEA_MANDATORY_SYNC_STATUS_v1.md) | SourceA mirror status |
 | [GTM_NEXT.md](./ops/plans/no-asf/GTM_NEXT.md) | Tier A ship queue |

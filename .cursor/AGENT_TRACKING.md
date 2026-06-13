@@ -7,7 +7,7 @@
 1. [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](../docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md)
 2. [.cursor/agent-memory/MEMORY_LOCKED.yaml](agent-memory/MEMORY_LOCKED.yaml) — **session memory**
 3. [.cursor/incidents/REGISTRY.md](incidents/REGISTRY.md) — **incident reports**
-4. [.cursor/skills/](skills/) — scope gate, pre-commit, session report, incident filing
+4. [.cursor/skills/](skills/) — scope gate, pre-commit, session report, incident filing, **docs SSOT entry (SKILL-009)**
 5. `./scripts/verify-agent-scope.sh` — run before every commit
 6. [docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md](../docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md) — **tag + date on every agent doc**
 
@@ -15,14 +15,15 @@
 
 **Noetfield cloud (`noetfield_cloud`):** [docs/ops/AGENT_READ_LINKS_LOCKED_v1.md](../docs/ops/AGENT_READ_LINKS_LOCKED_v1.md) (§ Cloud ship) · [docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) · paste: [docs/ops/ready_to_paste_noetfield_cloud.txt](../docs/ops/ready_to_paste_noetfield_cloud.txt). Canonical index: Desktop `SourceA/founder/repo-agent-notices/AGENT_READ_LINKS_INDEX.md` — never repo → SourceA.
 
-## Ship rule (ASF) — two different things
+## Ship rule (bounded implement)
 
 | What it is | Blocks shipping? |
 |------------|------------------|
 | **Ingest** — send your answer to the system (YAML + Prompt OS inbox / ingest scripts) | **No** — required **after** you ship |
-| **Waiting for the next order** — pause until Prompt OS / M8 sends the next prompt | **Yes** — do **not** do this |
+| **Unbounded self-start** — editing without founder task scope | **Yes** — see R-007 / R-008 in MEMORY |
 
-- **Ship from:** [os/plan.json](../os/plan.json) · [os/SHIP_NOW.md](../os/SHIP_NOW.md) — execute `next_tasks` and sprint backlog **without waiting** for the next chat order.
+- **Ship from:** [os/plan.json](../os/plan.json) · [os/SHIP_NOW.md](../os/SHIP_NOW.md) · [GTM_NEXT.md](../docs/ops/plans/no-asf/GTM_NEXT.md) — execute **bounded** `next_tasks` when founder assigns implement scope.
+- **Doc entry:** [docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md](../docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md) — read when fragmented.
 - **Ingest:** every completed session → system ([docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md](../docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md)).
 - **Do not edit** Sina Prompt OS code. **Do not weaken** Prompt OS — it coordinates; Noetfield repo delivers.
 

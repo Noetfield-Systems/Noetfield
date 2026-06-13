@@ -54,6 +54,53 @@ else
   fail=1
 fi
 
+# SSOT_INDEX path — must resolve to docs/SSOT_INDEX.md (not docs/ops/)
+if [[ -f docs/SSOT_INDEX.md ]]; then
+  echo "OK   docs/SSOT_INDEX.md exists"
+else
+  echo "FAIL missing docs/SSOT_INDEX.md" >&2
+  fail=1
+fi
+if [[ -f docs/ops/SSOT_INDEX.md ]]; then
+  echo "FAIL docs/ops/SSOT_INDEX.md must not exist (use docs/SSOT_INDEX.md)" >&2
+  fail=1
+else
+  echo "OK   no duplicate docs/ops/SSOT_INDEX.md"
+fi
+if grep -qE '\[SSOT_INDEX\.md\]\(\.\./SSOT_INDEX\.md\)' docs/ops/AGENT_READ_LINKS_LOCKED_v1.md 2>/dev/null; then
+  echo "OK   AGENT_READ_LINKS SSOT_INDEX path correct"
+else
+  echo "FAIL AGENT_READ_LINKS must link ../SSOT_INDEX.md (not ./SSOT_INDEX.md)" >&2
+  fail=1
+fi
+
+# Unified doc map + router
+for f in docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md docs/INDEX.md .cursor/skills/SKILL-009-docs-ssot-entry.md; do
+  if [[ -f "$f" ]]; then
+    echo "OK   exists $f"
+  else
+    echo "FAIL missing $f" >&2
+    fail=1
+  fi
+done
+if grep -q 'QUICK_PICK precedence' docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md 2>/dev/null \
+   && grep -q 'GTM_NEXT open' docs/ops/plans/no-asf/QUICK_PICK.md 2>/dev/null; then
+  echo "OK   QUICK_PICK precedence declared"
+else
+  echo "FAIL QUICK_PICK / unified map missing precedence rule" >&2
+  fail=1
+fi
+if grep -q 'Registry synced' docs/ops/plans/INDEX.md 2>/dev/null && ! grep -qE '^| Done |' docs/ops/plans/INDEX.md 2>/dev/null; then
+  echo "OK   plan registry INDEX metric clarified"
+else
+  if grep -q 'Registry synced' docs/ops/plans/INDEX.md 2>/dev/null; then
+    echo "OK   plan registry INDEX metric clarified"
+  else
+    echo "FAIL plan INDEX still uses misleading Done: 1000" >&2
+    fail=1
+  fi
+fi
+
 # GTM_NEXT and QUICK_PICK alignment
 if [[ -f docs/ops/plans/no-asf/GTM_NEXT.md ]] && [[ -f docs/ops/plans/no-asf/QUICK_PICK.md ]]; then
   if grep -q 'GTM_NEXT' docs/ops/plans/no-asf/QUICK_PICK.md; then

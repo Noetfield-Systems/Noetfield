@@ -2,19 +2,26 @@
 
 When the founder says **PLAN WITH NO ASF**, start here. Pick **≤3** agent items (not `asf_only` / not S8 Hub).
 
+**Precedence (LOCKED):** [DOCS_UNIFIED_MAP_LOCKED_v1.md](../../DOCS_UNIFIED_MAP_LOCKED_v1.md) § QUICK_PICK precedence  
+1. **GTM_NEXT open `ship-*` tasks win** — implement from [GTM_NEXT.md](./GTM_NEXT.md) first.  
+2. **Only if GTM_NEXT is empty** — pick from wisdom `ship-fwd-*` backlog below.
+
 **Wise rules:** [WISDOM_PICK_RULES_v1.md](../PROMPT_PACK_LOCKED/WISDOM_PICK_RULES_v1.md) · **Synthesis:** [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](../PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)  
 **All 500 ranked:** [ALL_500_TIER_INDEX_v1.md](../PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md) · **Index JSON:** `prompt_wise` per ID
 
 **Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`
 
-## v4 wise pick (read `prompt_wise` first)
+## Active queue — GTM_NEXT (iter 19) ← pick here first
 
-1. Filter `ship_status: open`
-2. Sort **`wisdom_score`** descending
-3. Span **proof-demo** + **proof-export** clusters per iter
-4. Max 2× S0 · defer MSP/federal unless sprint declared
+See [GTM_NEXT.md](./GTM_NEXT.md) for shipped table.
 
-## Next 3 — proof chain (wisdom computed)
+1. **ship-procurement-openapi-verify-057**
+2. **ship-services-governance-readme-openapi-058**
+3. **ship-tenth-audit-merge-rule-059**
+
+## Backlog — wisdom picks (when GTM_NEXT empty)
+
+Filter `ship_status: open` · sort **`wisdom_score`** descending · max 2× S0.
 
 | # | ID | Wisdom | Cluster | Plan |
 |---|-----|--------|---------|------|
@@ -27,14 +34,6 @@ When the founder says **PLAN WITH NO ASF**, start here. Pick **≤3** agent item
 ## Sprint themes (pick one focus/week)
 
 See [WISDOM_PICK_RULES_v1.md](../PROMPT_PACK_LOCKED/WISDOM_PICK_RULES_v1.md) — `customer-1-proof-week` · `copilot-story-week` · `msp-enablement-week`
-
-## GTM_NEXT (disk verify — iter 19)
-
-See [GTM_NEXT.md](./GTM_NEXT.md) for shipped table.
-
-1. **ship-procurement-openapi-verify-057**
-2. **ship-services-governance-readme-openapi-058**
-3. **ship-tenth-audit-merge-rule-059**
 
 ## Agentic only — Hub (S8)
 
