@@ -21,17 +21,30 @@ TIER_PAGES = (
 )
 
 CSS_LINK = '<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />'
+BENCHMARK_CSS = '<link rel="stylesheet" href="/assets/noetfield-benchmark-ui.css" />'
 META_MARKER = '<meta name="nf-institutional" content="2026-06" />'
 FRFI_CSS = '<link rel="stylesheet" href="/assets/noetfield-frfi.css" />'
 
 
 def ensure_stylesheet(text: str) -> str:
-    if "noetfield-institutional-2026.css" in text:
-        return text
-    anchor = '<link rel="stylesheet" href="/assets/noetfield-sales.css" />'
-    if anchor in text:
-        return text.replace(anchor, anchor + "\n " + CSS_LINK, 1)
-    return text.replace("</head>", f" {CSS_LINK}\n</head>", 1)
+    if "noetfield-institutional-2026.css" not in text:
+        anchor = '<link rel="stylesheet" href="/assets/noetfield-sales.css" />'
+        if anchor in text:
+            text = text.replace(anchor, anchor + "\n " + CSS_LINK, 1)
+        else:
+            text = text.replace("</head>", f" {CSS_LINK}\n</head>", 1)
+    if BENCHMARK_CSS not in text:
+        if CSS_LINK in text:
+            text = text.replace(CSS_LINK, CSS_LINK + "\n " + BENCHMARK_CSS, 1)
+        elif "noetfield-institutional-2026.css" in text:
+            text = text.replace(
+                '<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />',
+                CSS_LINK + "\n " + BENCHMARK_CSS,
+                1,
+            )
+        else:
+            text = text.replace("</head>", f" {BENCHMARK_CSS}\n</head>", 1)
+    return text
 
 
 def ensure_meta(text: str) -> str:

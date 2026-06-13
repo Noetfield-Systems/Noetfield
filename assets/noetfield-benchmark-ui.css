@@ -1,0 +1,121 @@
+/* Benchmark UI patterns — framework grids, compare tables, MSP tiers
+   Load after noetfield-institutional-2026.css on benchmark surfaces. */
+
+.nf-framework-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: var(--section-y);
+}
+@media (max-width: 900px) {
+  .nf-framework-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.nf-framework-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  background: var(--panel2);
+}
+.nf-framework-card h3 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+.nf-framework-card .nf-framework-tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.nf-framework-card p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: var(--leading-body);
+}
+.nf-framework-card .nf-framework-status {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: var(--text-xs);
+  color: var(--muted2);
+}
+
+.nf-compare-table th:first-child {
+  width: 28%;
+}
+.nf-compare-table .nf-compare-yes {
+  color: #2de38a;
+  font-weight: 600;
+}
+.nf-compare-table .nf-compare-partial {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.nf-msp-tier {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: var(--section-y);
+}
+@media (max-width: 768px) {
+  .nf-msp-tier {
+    grid-template-columns: 1fr;
+  }
+}
+.nf-msp-tier-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  background: var(--panel2);
+}
+.nf-msp-tier-card.featured {
+  border-color: rgba(200, 163, 73, 0.42);
+  background: linear-gradient(180deg, rgba(200, 163, 73, 0.09), rgba(255, 255, 255, 0.02));
+}
+.nf-msp-tier-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.nf-msp-tier-card .nf-tier-label {
+  font-size: var(--text-xs);
+  color: var(--gold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.nf-msp-tier-card p,
+.nf-msp-tier-card li {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: var(--leading-body);
+}
+.nf-msp-tier-card ul {
+  margin: 8px 0 0;
+  padding-left: 1.2rem;
+}
+
+.nf-complement-strip {
+  border: 1px solid rgba(122, 167, 255, 0.35);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: rgba(122, 167, 255, 0.06);
+  margin-bottom: var(--section-y);
+}
+.nf-complement-strip h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+.nf-complement-strip p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: var(--leading-body);
+  max-width: 72ch;
+}

@@ -54,6 +54,35 @@ export default function CognitiveDashboardPage() {
         ]}
       />
 
+      <section
+        className="nf-card mb-8 grid gap-3 border border-border bg-panel/80 p-5 sm:grid-cols-3"
+        aria-label="Framework orientation"
+      >
+        <div>
+          <p className="nf-eyebrow">NIST AI RMF</p>
+          <p className="mt-1 text-sm font-semibold text-white">Govern · Manage</p>
+          <p className="mt-1 text-xs text-muted-2">TLE export orientation — procurement ZIP</p>
+        </div>
+        <div>
+          <p className="nf-eyebrow">Copilot complement</p>
+          <p className="mt-1 text-sm font-semibold text-white">Registry vs receipt</p>
+          <p className="mt-1 text-xs text-muted-2">
+            <a href={wwwHref("/copilot/")} className="text-accent hover:underline">
+              Agent 365 + Purview complement
+            </a>
+          </p>
+        </div>
+        <div>
+          <p className="nf-eyebrow">Trust center</p>
+          <p className="mt-1 text-sm font-semibold text-white">Control checkpoints</p>
+          <p className="mt-1 text-xs text-muted-2">
+            <a href={wwwHref("/trust-center/")} className="text-accent hover:underline">
+              Framework diligence grid
+            </a>
+          </p>
+        </div>
+      </section>
+
       <PolicyCallout tag="OSFI E-23" title="Shadow evidence for model-risk committees" tone="info">
         <p>
           Use Bank Pilot mode for FRFI diligence — evaluate intent, record RID lineage, export TLE for board

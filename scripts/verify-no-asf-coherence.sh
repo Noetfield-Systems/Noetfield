@@ -345,6 +345,28 @@ else
   fail=1
 fi
 
+# Federal lane — F only, no clearance or RPAA claims
+federal_page="${ROOT}/federal/index.html"
+if [[ -f "$federal_page" ]]; then
+  if grep -qF "F lane lock" "$federal_page" && grep -qF "NIST AI RMF" "$federal_page"; then
+    echo "OK   federal lane AIA/ADM/NIST markers"
+  else
+    echo "FAIL federal page missing F lane framework markers" >&2
+    fail=1
+  fi
+  fed_forbidden=("security clearance granted" "RPAA registered" "Treasury Board approved")
+  for phrase in "${fed_forbidden[@]}"; do
+    if grep -qiF "$phrase" "$federal_page" 2>/dev/null; then
+      echo "FAIL federal page forbidden claim: $phrase" >&2
+      fail=1
+    fi
+  done
+  echo "OK   federal lane claim fences"
+else
+  echo "FAIL missing federal/index.html" >&2
+  fail=1
+fi
+
 if [[ "$fail" -eq 0 ]]; then
   echo ""
   echo "verify-no-asf-coherence passed."

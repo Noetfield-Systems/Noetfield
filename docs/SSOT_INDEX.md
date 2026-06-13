@@ -60,6 +60,7 @@
 | Doc | Role |
 |-----|------|
 | [MARKET_ANALYSIS_2026_LOCKED_v1.md](./strategy/MARKET_ANALYSIS_2026_LOCKED_v1.md) | Live research synthesis (June 2026) |
+| [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](./strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md) | Benchmark map + 10-step institutional redesign |
 | [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | 100 forward plans FQ-001–100 |
 | [NOETFIELD_GTM_60_DAY_LOCKED_v1.md](./strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | 60-day CEO fence |
 
