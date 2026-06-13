@@ -68,6 +68,9 @@
 | [UI_TIER1_10_UPGRADES_v1.md](./strategy/UI_TIER1_10_UPGRADES_v1.md) | Next 10 world-class UI upgrades (post v4) |
 | [MARKET_SUCCESS_1000_ROADMAP_v1.md](./strategy/MARKET_SUCCESS_1000_ROADMAP_v1.md) | Market success model 1000-step × 10-phase roadmap (SM-01–SM-10) |
 | [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | Forward queue v1 FQ-001–100 |
+| [NOETFIELD_FORWARD_QUEUE_100_v2.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v2.md) | Forward queue v2 FQ-101–200 (lane archive) |
+| [NOETFIELD_FORWARD_QUEUE_100_v3.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v3.md) | Forward queue v3 FQ-201–300 (lane archive) |
+| [NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md) | Forward queue v4 FQ-301–400 (F lane) |
 | [NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md) | Forward queue v5 FQ-401–500 (M lane) |
 | [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./ops/plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md) | Deep analysis — 500 prompts pattern-mapped |
 | [ALL_500_TIER_INDEX_v1.md](./ops/plans/PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md) | Full 500 priority-ranked table |

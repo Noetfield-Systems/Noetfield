@@ -54,9 +54,10 @@ flowchart TD
 ## Phase 0 — Session start (before any edit)
 
 1. Read [.cursor/agent-memory/MEMORY_LOCKED.yaml](../../.cursor/agent-memory/MEMORY_LOCKED.yaml)
-2. Read [.cursor/incidents/REGISTRY.md](../../.cursor/incidents/REGISTRY.md) — **open** incidents
-3. Read [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md)
-4. Run scope gate skill: [.cursor/skills/SKILL-001-scope-gate-before-work.md](../../.cursor/skills/SKILL-001-scope-gate-before-work.md)
+2. Read [DOCS_UNIFIED_MAP_LOCKED_v1.md](./DOCS_UNIFIED_MAP_LOCKED_v1.md) if docs feel fragmented — [SKILL-009](../../.cursor/skills/SKILL-009-docs-ssot-entry.md)
+3. Read [.cursor/incidents/REGISTRY.md](../../.cursor/incidents/REGISTRY.md) — **open** incidents
+4. Read [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md)
+5. Run scope gate skill: [.cursor/skills/SKILL-001-scope-gate-before-work.md](../../.cursor/skills/SKILL-001-scope-gate-before-work.md)
 
 ---
 
@@ -66,7 +67,7 @@ Also at session start (cloud agents):
 
 5. Apply **R-011** — [.cursor/skills/SKILL-008-agentic-commercial-boundary.md](../../.cursor/skills/SKILL-008-agentic-commercial-boundary.md)
 6. Read [FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md](./FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md)
-7. Queue source when registry 1000/1000: [plans/no-asf/GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) — outreach execution = agentic Hub only
+7. Queue source: [plans/no-asf/GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) (active) · wisdom backlog in [QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) when GTM_NEXT empty — outreach execution = agentic Hub only
 
 **cursor-reply format (iter 13+):** [reports/cursor-reply-latest.txt](../../reports/cursor-reply-latest.txt) must include `main: <short-sha>` (merge base) and on feature branches `head: <short-sha>` citing the **ship commit** (parent of the closeout-only reply commit). Coherence verify FAILs on drift.
 
