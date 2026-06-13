@@ -18,9 +18,9 @@ if [[ "$code" != "200" ]]; then
 fi
 
 body="$(curl -sS --connect-timeout 5 "${BASE}/audit/export" -H "${TENANT}" 2>/dev/null || echo '{}')"
-if python3 -c "
+if printf '%s' "$body" | python3 -c "
 import json, sys
-b = json.loads(sys.argv[1])
+b = json.load(sys.stdin)
 assert b.get('tenant_id'), 'missing tenant_id'
 assert isinstance(b.get('events'), list), 'missing events list'
 assert b.get('event_count', 0) >= 0, 'invalid event_count'
@@ -30,8 +30,8 @@ if b['events']:
     assert e.get('rid', '').startswith('RID-'), 'invalid rid'
     assert e.get('integrity_hash'), 'missing integrity_hash'
 print('OK')
-" "$body" 2>/dev/null; then
-  count="$(python3 -c "import json,sys; print(json.loads(sys.argv[1])['event_count'])" "$body")"
+" 2>/dev/null; then
+  count="$(printf '%s' "$body" | python3 -c "import json,sys; print(json.load(sys.stdin)['event_count'])")"
   echo "OK   audit export bundle (${count} events)"
 else
   echo "FAIL audit export JSON schema" >&2
