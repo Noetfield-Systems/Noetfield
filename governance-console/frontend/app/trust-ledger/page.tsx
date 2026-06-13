@@ -3,7 +3,20 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Shell } from "@/components/Shell";
+import { EmptyState } from "@/components/EmptyState";
+import { LoadingBlock } from "@/components/LoadingBlock";
+import { MetricStrip } from "@/components/MetricStrip";
+import { PageHero } from "@/components/PageHero";
+import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { formatConfidence, listTles, TrustLedgerEntry } from "@/lib/trustLedger";
+import { wwwHref } from "@/lib/www-links";
+
+function statusClass(status: string): string {
+  if (status === "Approved") return "text-emerald-300";
+  if (status === "Rejected") return "text-red-300";
+  if (status === "PendingApproval") return "text-amber-300";
+  return "text-muted";
+}
 
 export default function TrustLedgerListPage() {
   const [status, setStatus] = useState("");
@@ -28,25 +41,47 @@ export default function TrustLedgerListPage() {
     load();
   }, []);
 
+  const approved = rows.filter((r) => r.status === "Approved").length;
+
   return (
     <Shell active="trust-ledger">
-      <section className="mb-6 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <h2 className="text-2xl font-semibold text-white">Trust Ledger</h2>
-          <p className="mt-2 text-sm text-muted">
-            Read-only view of Trust Ledger Entries (TLE v1). Copilot audit trail for procurement sign-off.
-          </p>
-        </div>
-        <Link
-          href="/trust-ledger/new"
-          className="rounded-lg border border-accent px-4 py-2 text-sm text-accent hover:bg-accent/10"
-        >
+      <PageHero
+        eyebrow="Trust Ledger v1"
+        title="Trust Ledger"
+        lead="Read-only institutional view of Trust Ledger Entries — signed go/no-go records with confidence score for procurement sign-off."
+      />
+
+      <WorkflowStepper
+        active="record"
+        hrefs={{
+          block: "/evaluate",
+          export: wwwHref("/copilot/procurement/"),
+        }}
+      />
+
+      <MetricStrip
+        metrics={[
+          { label: "Entries", value: loading ? "…" : String(rows.length), hint: "TLE v1 records" },
+          { label: "Approved", value: loading ? "…" : String(approved), tone: approved > 0 ? "ok" : "default" },
+          { label: "Evidence", value: "Metadata", hint: "Purview · Entra · audit index" },
+          { label: "Export", value: "PDF + ZIP", hint: "Board pack · procurement pack" },
+        ]}
+      />
+
+      <div className="mb-6 flex flex-wrap gap-3">
+        <Link href="/trust-ledger/new" className="nf-btn-primary">
           New TLE draft
         </Link>
-      </section>
+        <Link href="/workspace" className="nf-btn-secondary">
+          Workspace (approvals)
+        </Link>
+        <Link href={wwwHref("/trust-ledger/sample-report/")} className="nf-btn-secondary">
+          TLE samples
+        </Link>
+      </div>
 
       <form
-        className="mb-6 flex flex-wrap gap-2"
+        className="nf-card mb-6 flex flex-wrap gap-3 p-4"
         onSubmit={(e) => {
           e.preventDefault();
           load(status);
@@ -55,7 +90,8 @@ export default function TrustLedgerListPage() {
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="rounded-lg border border-border bg-panel px-3 py-2 text-sm"
+          className="nf-input"
+          aria-label="Filter by status"
         >
           <option value="">All statuses</option>
           <option value="PendingApproval">Pending approval</option>
@@ -63,10 +99,7 @@ export default function TrustLedgerListPage() {
           <option value="Rejected">Rejected</option>
           <option value="Draft">Draft</option>
         </select>
-        <button
-          type="submit"
-          className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-white/5"
-        >
+        <button type="submit" className="nf-btn-primary">
           Filter
         </button>
         <button
@@ -75,54 +108,70 @@ export default function TrustLedgerListPage() {
             setStatus("");
             load();
           }}
-          className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-white/5"
+          className="nf-btn-secondary"
         >
           Reset
         </button>
       </form>
 
       {error && (
-        <p className="mb-4 rounded-lg border border-red-900 bg-red-950/50 px-3 py-2 text-sm text-red-300">
+        <p className="mb-4 rounded-lg border border-red-900/80 bg-red-950/40 px-4 py-3 text-sm text-red-200" role="alert">
           {error}
         </p>
       )}
 
-      {loading && <p className="text-sm text-muted">Loading…</p>}
+      {loading && <LoadingBlock label="Loading Trust Ledger entries…" />}
 
       {!loading && rows.length === 0 && (
-        <p className="text-sm text-muted">
-          No TLEs yet.{" "}
-          <Link href="/trust-ledger/new" className="text-accent hover:underline">
-            Create a draft
-          </Link>{" "}
-          or run <code className="text-accent">./scripts/tle-smoke.sh --api</code>.
-        </p>
+        <EmptyState
+          title="No Trust Ledger entries yet"
+          description="Create a draft or run tle-smoke to seed sample entries for procurement review."
+          action={{ label: "Create TLE draft →", href: "/trust-ledger/new" }}
+        />
       )}
 
       {!loading && rows.length > 0 && (
-        <ul className="space-y-3">
-          {rows.map((row) => (
-            <li
-              key={row.tle_id}
-              className="rounded-lg border border-border bg-panel/60 px-4 py-3 hover:border-accent/40"
-            >
-              <Link href={`/trust-ledger/${encodeURIComponent(row.tle_id)}`} className="block">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="font-mono text-sm text-accent">{row.tle_id}</span>
-                  <div className="flex items-center gap-2">
-                    {row.confidence_score !== undefined && (
-                      <span className="rounded bg-accent/20 px-2 py-0.5 text-xs text-accent">
-                        Confidence {formatConfidence(row.confidence_score)}
+        <div className="nf-card overflow-x-auto">
+          <table className="nf-data-table">
+            <thead>
+              <tr>
+                <th>TLE ID</th>
+                <th>Decision</th>
+                <th>Confidence</th>
+                <th>Status</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr key={row.tle_id}>
+                  <td>
+                    <code>{row.tle_id}</code>
+                  </td>
+                  <td className="max-w-xs text-white/90">{row.decision ?? "—"}</td>
+                  <td>
+                    {row.confidence_score !== undefined ? (
+                      <span className="nf-status-pill nf-status-pill-accent">
+                        {formatConfidence(row.confidence_score)}
                       </span>
+                    ) : (
+                      "—"
                     )}
-                    <span className="rounded bg-white/10 px-2 py-0.5 text-xs uppercase">{row.status}</span>
-                  </div>
-                </div>
-                <p className="mt-2 text-sm text-muted line-clamp-2">{row.decision ?? "—"}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                  </td>
+                  <td className={`font-medium ${statusClass(row.status)}`}>{row.status}</td>
+                  <td>
+                    <Link
+                      href={`/trust-ledger/${encodeURIComponent(row.tle_id)}`}
+                      className="text-sm text-accent hover:underline"
+                    >
+                      Open →
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </Shell>
   );

@@ -88,6 +88,7 @@ class ConnectorResponse(BaseModel):
     ingest_mode: str
     status: str
     oauth_connected: bool = False
+    last_sync: datetime | None = None
     created_at: datetime
 
 

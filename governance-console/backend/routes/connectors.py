@@ -26,6 +26,7 @@ def _to_response(row: ConnectorRecord) -> ConnectorResponse:
         ingest_mode=row.ingest_mode,
         status=row.status,
         oauth_connected=bool((row.oauth_json or {}).get("connected_at")),
+        last_sync=row.last_sync,
         created_at=row.created_at,
     )
 

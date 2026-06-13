@@ -116,4 +116,32 @@ body {
   .nf-data-table code {
     @apply font-mono text-xs text-accent;
   }
+
+  .nf-status-pill {
+    @apply inline-flex rounded-full border px-2.5 py-0.5 text-xs font-semibold;
+  }
+
+  .nf-status-pill-accent {
+    @apply border-accent/40 bg-accent/10 text-accent;
+  }
+
+  .nf-status-pill-ok {
+    @apply border-ok/35 bg-ok/10 text-ok;
+  }
+
+  .nf-status-pill-warn {
+    @apply border-accent/35 bg-accent/10 text-accent;
+  }
+
+  .nf-status-pill-default {
+    @apply border-border bg-white/5 text-muted;
+  }
+
+  .nf-empty-state {
+    @apply border-dashed border-border/80;
+  }
+
+  .nf-breadcrumbs ol {
+    @apply list-none p-0 m-0;
+  }
 }

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Shell } from "@/components/Shell";
 import { LoadingBlock } from "@/components/LoadingBlock";
 import { PageHero } from "@/components/PageHero";
+import { MetricStrip } from "@/components/MetricStrip";
 import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { draftTle, listTles, TleSummary } from "@/lib/api";
 import { wwwHref } from "@/lib/www-links";
@@ -68,6 +69,15 @@ export default function WorkspacePage() {
       />
 
       <WorkflowStepper active="record" />
+
+      <MetricStrip
+        metrics={[
+          { label: "Entries", value: loading ? "…" : String(rows.length), hint: "Trust Ledger v1" },
+          { label: "Export", value: "PDF + ZIP", hint: "Board pack · procurement" },
+          { label: "Evidence", value: "Indexed", hint: "Purview · Entra · audit" },
+          { label: "Role", value: "Approver", hint: "Dev workspace RBAC" },
+        ]}
+      />
 
       <p className="mb-6 flex flex-wrap gap-x-4 gap-y-1 text-sm">
         <Link href="/workspace/connectors" className="text-accent hover:underline">

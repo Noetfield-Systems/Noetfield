@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Trust Center | Noetfield</title>
+ <meta name="description" content="Noetfield security and governance posture — continuous verification, metadata-only evidence, pre-execution controls." />
+ <meta name="robots" content="index,follow" />
+ <meta name="theme-color" content="#07070b" />
+ <link rel="canonical" href="https://www.noetfield.com/trust-center/" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
+ <link rel="stylesheet" href="/assets/noetfield-shell.css" />
+ <link rel="stylesheet" href="/assets/noetfield-components.css" />
+ <link rel="stylesheet" href="/assets/noetfield-institutional.css" />
+ <script src="/assets/noetfield-shell.js" defer></script>
+</head>
+<body>
+ <div class="bg" aria-hidden="true"></div>
+ <a class="skip" href="#main">Skip to content</a>
+ <header id="nfHeader"></header>
+ <main id="main" class="wrap nf-page">
+ <header class="nf-hero">
+ <p class="nf-eyebrow">Trust · continuous verification</p>
+ <h1>Security &amp; governance posture</h1>
+ <p class="nf-lead">
+ Proactive diligence for Copilot governance buyers — control status, verify bundle integrity, and procurement artifacts.
+ <strong>Not a SOC 2 or ISO certification claim.</strong> Shadow-mode pre-execution governance only; no custody or payments.
+ </p>
+ </header>
+
+ <div class="nf-metrics" role="list" aria-label="Trust posture metrics">
+ <div class="nf-metrics-item nf-metrics-ok" role="listitem">
+ <p class="nf-metrics-label">Coherence verify</p>
+ <p class="nf-metrics-value">PASS</p>
+ <p class="nf-metrics-hint">plan-with-no-asf bundle on ship</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">Evidence model</p>
+ <p class="nf-metrics-value">Metadata</p>
+ <p class="nf-metrics-hint">Purview · Entra · audit index only</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">Execution</p>
+ <p class="nf-metrics-value">Pre-exec</p>
+ <p class="nf-metrics-hint">BLOCK before external systems act</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">Procurement</p>
+ <p class="nf-metrics-value">ZIP + PDF</p>
+ <p class="nf-metrics-hint">Board pack · diligence bundle</p>
+ </div>
+ </div>
+
+ <section class="nf-section">
+ <h2>Control checkpoints</h2>
+ <table class="nf-table">
+ <thead>
+ <tr><th>Control</th><th>Status</th><th>Artifact</th></tr>
+ </thead>
+ <tbody>
+ <tr><td>Pre-execution evaluate</td><td><span class="nf-badge nf-badge-ok">Operational</span></td><td><code>POST /evaluate</code> · RID receipt</td></tr>
+ <tr><td>Audit immutability</td><td><span class="nf-badge nf-badge-ok">Operational</span></td><td><code>GET /audit/export</code></td></tr>
+ <tr><td>TLE export integrity</td><td><span class="nf-badge nf-badge-ok">Operational</span></td><td>Board pack PDF · procurement ZIP</td></tr>
+ <tr><td>Buyer www coherence</td><td><span class="nf-badge nf-badge-ok">Gated</span></td><td><code>verify-gtm</code> · <code>verify-no-asf</code></td></tr>
+ <tr><td>Production SSO</td><td><span class="nf-badge">Planned</span></td><td>Entra OIDC — ASF-gated</td></tr>
+ </tbody>
+ </table>
+ <p class="text-sm" style="margin-top:1rem;color:var(--muted)">
+ Status reflects dev/shadow stack. Promote to production claims only after Form PICK and founder attest.
+ </p>
+ </section>
+
+ <section class="nf-section">
+ <h2>Before you send a questionnaire</h2>
+ <ul>
+ <li><a href="/copilot/procurement/">Procurement buyer pack</a> — ZIP manifest, framework orientation, OpenAPI</li>
+ <li><a href="/docs/copilot/SECURITY_FAQ.md">Security FAQ</a> — auto-answer index (when published)</li>
+ <li><a href="/services/governance/README.md">Governance API README</a> — production FastAPI surface</li>
+ <li><a href="/openapi.json">OpenAPI schema</a> — technical diligence</li>
+ </ul>
+ <p style="margin-top:1.25rem">
+ <a class="btn btn-primary" href="/copilot/procurement/">Download diligence orientation</a>
+ <a class="btn btn-secondary" href="/cognitive-dashboard/">Open Governance Console</a>
+ </p>
+ </section>
+ </main>
+ <footer id="nfFooter"></footer>
+</body>
+</html>

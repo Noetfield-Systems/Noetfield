@@ -33,11 +33,12 @@ check_html() {
 echo "=== verify-ui-e2e ==="
 
 check_html "${BASE}/workspace" "workspace list" "Trust Ledger Workspace" "Create TLE draft"
-check_html "${BASE}/workspace/connectors" "connectors page" "M365 evidence connectors" "Register + mock connect"
-check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashboard" "Submit operational intent"
-check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent"
-check_html "${BASE}/audit" "audit page" "Audit log"
-check_html "${BASE}/" "homepage" "audit trail your Copilot deployment" "Become a design partner" "5-minute demo" "Procurement pack"
+check_html "${BASE}/workspace/connectors" "connectors page" "M365 evidence connectors" "Register + mock connect" "Last sync"
+check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashboard" "Submit operational intent" "Shadow mode" "Governance execution pipeline"
+check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent" "Institutional demo" "Governance execution pipeline"
+check_html "${BASE}/audit" "audit page" "Audit log" "Diligence export"
+check_html "${BASE}/trust-ledger" "trust ledger list" "Trust Ledger" "Trust Ledger v1"
+check_html "${BASE}/" "homepage" "audit trail your Copilot deployment" "Become a design partner" "5-minute demo" "Procurement pack" "Trust center"
 home_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/" 2>/dev/null || true)"
 if echo "$home_html" | grep -qF 'href="/copilot/procurement/"'; then
   echo "OK   homepage procurement hero href"
@@ -49,6 +50,7 @@ check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment
 check_html "${BASE}/copilot/pilot/" "copilot pilot" "Design-partner Go/No-Go" "Design partner program"
 check_html "${BASE}/copilot/demo/" "copilot demo" "5-minute demo" "Demo script (locked narrative)" "confidence score"
 check_html "${BASE}/copilot/procurement/" "procurement buyer" "buyer pack" "Procurement pack (ZIP)" "NIST AI RMF"
+check_html "${BASE}/trust-center/" "trust center" "governance posture" "Control checkpoints" "Not a SOC 2"
 check_html "${BASE}/trust-ledger/sample-report/" "tle samples" "Trust Ledger"
 
 ws_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/workspace" 2>/dev/null || true)"

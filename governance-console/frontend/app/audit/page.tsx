@@ -4,8 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Shell } from "@/components/Shell";
 import { DecisionBadge } from "@/components/DecisionBadge";
+import { EmptyState } from "@/components/EmptyState";
 import { LoadingBlock } from "@/components/LoadingBlock";
+import { MetricStrip } from "@/components/MetricStrip";
 import { PageHero } from "@/components/PageHero";
+import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { AuditRecord, listAudit } from "@/lib/api";
 
 export default function AuditPage() {
@@ -30,12 +33,26 @@ export default function AuditPage() {
     load();
   }, []);
 
+  const allowCount = rows.filter((r) => r.decision.toLowerCase() === "allow").length;
+  const denyCount = rows.filter((r) => r.decision.toLowerCase() === "deny").length;
+
   return (
     <Shell active="audit">
       <PageHero
         eyebrow="Compliance"
         title="Audit log"
-        lead="Every evaluation is stored with a unique RID for immutable compliance traceability."
+        lead="Every evaluation is stored with a unique RID for immutable compliance traceability — the same evidence spine examiners expect from pre-execution governance."
+      />
+
+      <WorkflowStepper active="record" hrefs={{ block: "/evaluate", export: "/workspace" }} />
+
+      <MetricStrip
+        metrics={[
+          { label: "Events", value: loading ? "…" : String(rows.length), hint: "Current tenant view" },
+          { label: "Allowed", value: loading ? "…" : String(allowCount), tone: "ok" },
+          { label: "Denied", value: loading ? "…" : String(denyCount), tone: denyCount > 0 ? "warn" : "default" },
+          { label: "Export", value: "JSON", hint: "Diligence bundle download" },
+        ]}
       />
 
       <div
@@ -44,11 +61,11 @@ export default function AuditPage() {
         aria-label="Audit export bundle"
       >
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-muted">Diligence export</p>
+          <p className="nf-eyebrow">Diligence export</p>
           <p className="mt-1 text-sm text-white/90">
             Download JSON bundle for engagement intake — includes{" "}
-            <strong>{loading ? "…" : rows.length}</strong> event{rows.length === 1 ? "" : "s"} in
-            current view (tenant: pilot default).
+            <strong>{loading ? "…" : rows.length}</strong> event{rows.length === 1 ? "" : "s"} in current
+            view (tenant: pilot default).
           </p>
           <p className="mt-1 text-xs text-muted-2">
             Board packs use TLE export from{" "}
@@ -64,7 +81,7 @@ export default function AuditPage() {
       </div>
 
       <form
-        className="nf-card mb-8 flex flex-wrap gap-3 p-4"
+        className="nf-card mb-6 flex flex-wrap gap-3 p-4"
         onSubmit={(e) => {
           e.preventDefault();
           load(q);
@@ -104,34 +121,60 @@ export default function AuditPage() {
       {loading && <LoadingBlock label="Loading audit records…" />}
 
       {!loading && rows.length === 0 && (
-        <div className="nf-card p-8 text-center">
-          <p className="text-muted">No evaluations yet.</p>
-          <Link href="/evaluate" className="mt-3 inline-block text-sm text-accent hover:underline">
-            Submit your first intent →
-          </Link>
-        </div>
+        <EmptyState
+          title="No evaluations yet"
+          description="Submit operational intent to generate your first immutable RID receipt."
+          action={{ label: "Evaluate intent →", href: "/evaluate" }}
+        />
       )}
 
-      <ul className="space-y-3">
-        {rows.map((row) => (
-          <li key={row.rid}>
-            <Link href={`/result/${encodeURIComponent(row.rid)}`} className="nf-card-hover block p-5">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <code className="font-mono text-sm text-accent">{row.rid}</code>
-                <DecisionBadge decision={row.decision} />
-              </div>
-              <p className="mt-3 text-sm text-white/90">
-                {row.actor}
-                <span className="text-muted-2"> · </span>
-                {row.action}
-              </p>
-              <p className="mt-1 text-xs text-muted-2">
-                Risk {row.risk_score} · {new Date(row.timestamp).toLocaleString()}
-              </p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {!loading && rows.length > 0 && (
+        <div className="nf-card overflow-x-auto">
+          <table className="nf-data-table">
+            <thead>
+              <tr>
+                <th>RID</th>
+                <th>Decision</th>
+                <th>Actor</th>
+                <th>Action</th>
+                <th>Risk</th>
+                <th>Timestamp</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr key={row.rid}>
+                  <td>
+                    <code>{row.rid}</code>
+                  </td>
+                  <td>
+                    <DecisionBadge decision={row.decision} />
+                  </td>
+                  <td className="max-w-[140px] truncate text-white/90" title={row.actor}>
+                    {row.actor}
+                  </td>
+                  <td className="max-w-[160px] truncate" title={row.action}>
+                    {row.action}
+                  </td>
+                  <td>
+                    <span className="font-mono text-xs">{row.risk_score}</span>
+                  </td>
+                  <td className="text-xs text-muted-2">{new Date(row.timestamp).toLocaleString()}</td>
+                  <td>
+                    <Link
+                      href={`/result/${encodeURIComponent(row.rid)}`}
+                      className="text-sm text-accent hover:underline"
+                    >
+                      Open →
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </Shell>
   );
 }

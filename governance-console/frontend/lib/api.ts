@@ -147,6 +147,7 @@ export type ConnectorSummary = {
   status: string;
   oauth_connected: boolean;
   required_scopes: string[];
+  last_sync?: string | null;
 };
 
 export function listConnectors(): Promise<ConnectorSummary[]> {

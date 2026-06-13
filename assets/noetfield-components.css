@@ -151,6 +151,24 @@
   letter-spacing: 0.04em;
 }
 
+/* —— Status badges (trust center, tables) —— */
+.nf-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+.nf-badge-ok {
+  border-color: rgba(45, 227, 138, 0.35);
+  color: #2de38a;
+  background: rgba(45, 227, 138, 0.08);
+}
+
 /* —— Offerings —— */
 .nf-offerings {
   margin-bottom: var(--section-y);

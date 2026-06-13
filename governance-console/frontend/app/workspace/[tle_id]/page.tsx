@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Shell } from "@/components/Shell";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { LoadingBlock } from "@/components/LoadingBlock";
 import { PageHero } from "@/components/PageHero";
 import { WorkflowStepper } from "@/components/WorkflowStepper";
@@ -64,11 +65,12 @@ export default function TleViewerPage() {
 
   return (
     <Shell active="workspace">
-      <p className="mb-4">
-        <Link href="/workspace" className="text-sm text-accent hover:underline">
-          ← Trust Ledger
-        </Link>
-      </p>
+      <Breadcrumbs
+        items={[
+          { label: "Workspace", href: "/workspace" },
+          { label: tle?.tle_id ?? tleId },
+        ]}
+      />
 
       {loading && <LoadingBlock label="Loading TLE…" />}
 
