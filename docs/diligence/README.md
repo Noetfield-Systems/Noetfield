@@ -14,6 +14,7 @@
 | Sample audit export (redacted) | [sample-audit-export.redacted.json](./sample-audit-export.redacted.json) |
 | OpenAPI (filtered, institutional) | [../api/openapi.json](../api/openapi.json) · live `/openapi.json` on platform |
 | RPAA-safe positioning | [rpaa-positioning-onepager.md](./rpaa-positioning-onepager.md) |
+| Canada FRFI E-23 alignment | [CANADA_FRFI_E23_ALIGNMENT_v1.md](./CANADA_FRFI_E23_ALIGNMENT_v1.md) |
 | Print / board PDF styles | [../../assets/noetfield-print.css](../../assets/noetfield-print.css) · [../collateral/](../collateral/) |
 | MSB partner templates | [../../ops/templates/msb/](../../ops/templates/msb/) |
 | E-23 vendor evidence API | `GET /api/v1/governance/vendor-evidence` |

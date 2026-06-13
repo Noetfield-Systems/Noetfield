@@ -144,4 +144,8 @@ body {
   .nf-breadcrumbs ol {
     @apply list-none p-0 m-0;
   }
+
+  .nf-policy-callout {
+    @apply rounded-xl border p-5;
+  }
 }

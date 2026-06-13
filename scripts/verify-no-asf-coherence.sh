@@ -314,6 +314,37 @@ else
   echo "SKIP gh not available for PR checks"
 fi
 
+# Bank Pilot www — no false RPAA / BoC supervision claims (ship-fwd-075)
+bank_pilot="${ROOT}/bank-pilot/index.html"
+if [[ -f "$bank_pilot" ]]; then
+  forbidden=(
+    "RPAA registered"
+    "Bank of Canada supervised"
+    "registered with the Bank of Canada"
+    "payment service provider registration"
+  )
+  bp_ok=1
+  for phrase in "${forbidden[@]}"; do
+    if grep -qiF "$phrase" "$bank_pilot" 2>/dev/null; then
+      echo "FAIL bank-pilot contains forbidden claim: $phrase" >&2
+      bp_ok=0
+      fail=1
+    fi
+  done
+  if [[ "$bp_ok" -eq 1 ]]; then
+    echo "OK   bank-pilot no forbidden RPAA claims"
+  fi
+  if grep -qF "OSFI E-23" "$bank_pilot" && grep -qF "nf-policy-callout" "$bank_pilot"; then
+    echo "OK   bank-pilot E-23 policy fence present"
+  else
+    echo "FAIL bank-pilot missing E-23 policy fence markers" >&2
+    fail=1
+  fi
+else
+  echo "FAIL missing bank-pilot/index.html" >&2
+  fail=1
+fi
+
 if [[ "$fail" -eq 0 ]]; then
   echo ""
   echo "verify-no-asf-coherence passed."

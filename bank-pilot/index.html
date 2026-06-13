@@ -4,28 +4,120 @@
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>Noetfield — Bank Pilot (Shadow Governance)</title>
- <meta name="description" content="Read-only Bank Pilot: policy evaluation in shadow mode for OSFI E-23 readiness." />
+ <meta name="description" content="Read-only Bank Pilot: policy evaluation in shadow mode for OSFI E-23 readiness. Governance vendor layer — not RPAA PSP." />
  <link rel="canonical" href="https://www.noetfield.com/bank-pilot/" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
  <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
  <link rel="stylesheet" href="/assets/noetfield-shell.css" />
  <link rel="stylesheet" href="/assets/noetfield-components.css" />
  <link rel="stylesheet" href="/assets/noetfield-institutional.css" />
+ <link rel="stylesheet" href="/assets/noetfield-frfi.css" />
  <link rel="stylesheet" href="/assets/noetfield-sales.css" />
  <script src="/assets/noetfield-shell.js" defer></script>
 </head>
-<body>
+<body class="nf-frfi">
  <div class="bg" aria-hidden="true"></div>
  <a class="skip" href="#main">Skip to content</a>
  <header id="nfHeader"></header>
  <main id="main" class="wrap nf-page">
  <header class="nf-hero">
- <p class="nf-eyebrow">Bank Pilot · Shadow mode</p>
- <h1>Governance simulation for FRFI buyers</h1>
+ <p class="nf-eyebrow">Bank Pilot · Shadow mode · Canada FRFI</p>
+ <h1>Governance evidence for OSFI E-23 readiness</h1>
  <p class="nf-lead">
- Evaluate operational intent against policy <strong>before</strong> any partner or bank execution layer acts. Read-only pilot — no payment rails or custody inside Noetfield.
+ Evaluate operational intent against policy <strong>before</strong> any partner or bank execution layer acts. Read-only pilot — no payment rails, custody, or RPAA retail payments claims inside Noetfield.
  </p>
+ <div class="nf-hero-actions">
+ <a class="btn btn-primary" href="/gate/intake/?vector=bank-pilot&amp;interest=bank-pilot">Discuss Bank Pilot</a>
+ <a class="btn btn-secondary" href="/console/">Governance Console</a>
+ <a class="btn btn-secondary" href="/docs/diligence/CANADA_FRFI_E23_ALIGNMENT_v1.md">E-23 alignment</a>
+ </div>
  </header>
+
+ <div class="nf-metrics" role="list" aria-label="Bank Pilot posture">
+ <div class="nf-metrics-item nf-metrics-ok" role="listitem">
+ <p class="nf-metrics-label">Pilot mode</p>
+ <p class="nf-metrics-value">Shadow</p>
+ <p class="nf-metrics-hint">Evaluate before enforce</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">OSFI E-23</p>
+ <p class="nf-metrics-value">May 2027</p>
+ <p class="nf-metrics-hint">Model risk · third-party AI</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">Receipt</p>
+ <p class="nf-metrics-value">TLE v1</p>
+ <p class="nf-metrics-hint">RID-keyed audit export</p>
+ </div>
+ <div class="nf-metrics-item" role="listitem">
+ <p class="nf-metrics-label">Execution</p>
+ <p class="nf-metrics-value">Pre-exec</p>
+ <p class="nf-metrics-hint">BLOCK before external systems act</p>
+ </div>
+ </div>
+
+ <aside class="nf-policy-callout nf-policy-callout-fence" aria-label="Regulatory fence">
+ <p class="nf-policy-tag">Regulatory fence</p>
+ <h3>Not an RPAA payment service provider</h3>
+ <p>
+ Noetfield is a <strong>governance vendor layer</strong> for FRFI model-risk and AI oversight — not Bank of Canada retail payments supervision, not a registered payment service provider, not custody or settlement. When MSB or payment execution is required, route to licensed partners (e.g. TrustField). See <a href="/docs/diligence/rpaa-positioning-onepager.md">RPAA-safe positioning</a>.
+ </p>
+ </aside>
+
+ <p class="nf-section-label">Block · Record · Export</p>
+ <div class="nf-pipeline" role="list" aria-label="Governance execution pipeline">
+ <div class="nf-pipeline-step nf-pipeline-step-active" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">1</span>
+ <span class="nf-pipeline-label">Block</span>
+ <span class="nf-pipeline-detail">POST evaluate — allow or deny before execution</span>
+ </div>
+ <div class="nf-pipeline-step" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">2</span>
+ <span class="nf-pipeline-label">Record</span>
+ <span class="nf-pipeline-detail">Immutable compliance log keyed by RID</span>
+ </div>
+ <div class="nf-pipeline-step" role="listitem">
+ <span class="nf-pipeline-num" aria-hidden="true">3</span>
+ <span class="nf-pipeline-label">Export</span>
+ <span class="nf-pipeline-detail">Board pack PDF · procurement ZIP · vendor evidence</span>
+ </div>
+ </div>
+
+ <section class="nf-section">
+ <h2>OSFI E-23 mapping (orientation)</h2>
+ <p>Guideline E-23 (effective May 1, 2027) expects FRFIs to govern models with non-negligible risk, including third-party and AI/ML. Noetfield supplies evaluate + export artifacts — your institution owns the model risk program.</p>
+ <table class="nf-table nf-e23-map">
+ <thead>
+ <tr><th>E-23 area</th><th>Noetfield artifact</th><th>Status</th></tr>
+ </thead>
+ <tbody>
+ <tr><td>Model inventory metadata</td><td>TLE cover — model ID, risk tier, owner</td><td><span class="nf-badge nf-badge-ok">Pilot</span></td></tr>
+ <tr><td>Third-party / vendor AI</td><td><code>GET /vendor-evidence</code> starter pack</td><td><span class="nf-badge nf-badge-ok">Pilot</span></td></tr>
+ <tr><td>Lifecycle governance</td><td>Shadow evaluate → enforce sign-off</td><td><span class="nf-badge nf-badge-ok">Operational</span></td></tr>
+ <tr><td>Audit trail</td><td><code>GET /audit-export</code> by RID</td><td><span class="nf-badge nf-badge-ok">Operational</span></td></tr>
+ <tr><td>Board committee pack</td><td>Trust Ledger PDF + diligence ZIP</td><td><span class="nf-badge nf-badge-ok">Operational</span></td></tr>
+ </tbody>
+ </table>
+ <p style="margin-top:1rem;font-size:var(--text-sm);color:var(--muted2)">
+ Orientation only — not legal advice. Full mapping: <a href="/docs/diligence/CANADA_FRFI_E23_ALIGNMENT_v1.md">CANADA_FRFI_E23_ALIGNMENT_v1</a>.
+ </p>
+ </section>
+
+ <section class="nf-section">
+ <h2>Canada 2026 policy context</h2>
+ <div class="nf-reg-grid">
+ <article class="nf-reg-card">
+ <h3>OSFI E-23 — FRFI model risk</h3>
+ <p>Primary alignment for bank and credit-union buyers. Inventory, validation, and third-party AI governance — evidenced via shadow pilots and TLE export.</p>
+ <span class="nf-reg-timing">Effective May 1, 2027</span>
+ </article>
+ <article class="nf-reg-card">
+ <h3>Bank of Canada RPAA — retail payments</h3>
+ <p>Supervises payment service providers — not Noetfield. FRFIs are generally outside RPAA retail payments perimeter. Payment execution stays with licensed partners.</p>
+ <span class="nf-reg-timing">Annual reports due March 31, 2026 (PSPs)</span>
+ </article>
+ </div>
+ </section>
 
  <section class="nf-section">
  <h2>Sample evaluate (curl)</h2>
@@ -41,21 +133,26 @@
     "mode": "shadow",
     "request_id": "RID-BANK-PILOT-DEMO"
   }'</code></pre>
+ <p style="margin-top:12px">Then export by RID: <code>GET /api/v1/governance/audit-export?request_id=RID-BANK-PILOT-DEMO</code>. API reference: <a href="/docs/api/">Governance API</a>.</p>
  </section>
 
- <section class="nf-section">
- <h2>Audit export</h2>
- <p>Immutable compliance slice by Request ID for vendor due diligence. Full route reference: <a href="/docs/api/">Governance API</a>.</p>
- </section>
+ <aside class="nf-policy-callout nf-policy-callout-info" aria-label="TrustField handoff">
+ <p class="nf-policy-tag">Partner handoff</p>
+ <h3>When execution is required</h3>
+ <p>
+ MSB, corridor, or settlement execution routes to <strong>TrustField Technologies</strong> or your existing licensed stack. Noetfield remains the pre-execution governance and evidence layer.
+ </p>
+ </aside>
 
  <aside class="nf-cta-band">
  <div>
  <h2>Request Bank Pilot access</h2>
- <p>Engagements via operations intake with RID lineage</p>
+ <p>Engagements via operations intake with RID lineage — shadow simulation only</p>
  </div>
  <div class="nf-cta-actions">
  <a class="btn btn-primary" href="/gate/intake/?vector=bank-pilot&amp;interest=bank-pilot">Discuss Bank Pilot</a>
- <a class="btn btn-secondary" href="/console/">Governance Console</a>
+ <a class="btn btn-secondary" href="/enterprise/">Enterprise overview</a>
+ <a class="btn btn-secondary" href="/trust-center/">Trust center</a>
  </div>
  </aside>
  </main>

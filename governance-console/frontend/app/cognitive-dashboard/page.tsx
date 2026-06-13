@@ -5,6 +5,7 @@ import { Shell } from "@/components/Shell";
 import { EvaluateForm } from "@/components/EvaluateForm";
 import { DevPortBanner } from "@/components/DevPortBanner";
 import { MetricStrip } from "@/components/MetricStrip";
+import { PolicyCallout } from "@/components/PolicyCallout";
 import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { apiBaseLabel } from "@/lib/health";
 import { platformConsoleHref } from "@/lib/platform-console";
@@ -52,6 +53,13 @@ export default function CognitiveDashboardPage() {
           { label: "Design partner", value: "CAD $2K+", hint: "Board PDF in governance meeting" },
         ]}
       />
+
+      <PolicyCallout tag="OSFI E-23" title="Shadow evidence for model-risk committees" tone="info">
+        <p>
+          Use Bank Pilot mode for FRFI diligence — evaluate intent, record RID lineage, export TLE for board
+          packs. Execution stays in your licensed environment.
+        </p>
+      </PolicyCallout>
 
       <section
         className="mb-8 rounded-xl border border-accent/30 bg-accent/5 p-6"

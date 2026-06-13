@@ -59,6 +59,24 @@ def test_enterprise_page_structure() -> None:
     for heading in ("Problem", "Risk", "Solution"):
         assert heading in text
     assert "Golden Edge" not in text
+    assert "OSFI E-23" in text
+    assert "Governance execution pipeline" in text
+    assert "not RPAA retail payments" in text
+
+
+def test_bank_pilot_frifi_structure() -> None:
+    text = (ROOT / "bank-pilot" / "index.html").read_text(encoding="utf-8")
+    assert "OSFI E-23" in text
+    assert "Not an RPAA payment service provider" in text
+    assert "nf-policy-callout" in text
+    assert "Governance execution pipeline" in text
+    forbidden = (
+        "RPAA registered",
+        "Bank of Canada supervised",
+        "registered with the Bank of Canada",
+    )
+    for phrase in forbidden:
+        assert phrase.lower() not in text.lower(), f"bank-pilot contains forbidden: {phrase}"
 
 
 def test_directory_redirects_home() -> None:

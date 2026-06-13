@@ -53,6 +53,8 @@ check_html "${BASE}/copilot/pilot/" "copilot pilot" "Design-partner Go/No-Go" "D
 check_html "${BASE}/copilot/demo/" "copilot demo" "5-minute demo" "Demo script (locked narrative)" "confidence score"
 check_html "${BASE}/copilot/procurement/" "procurement buyer" "buyer pack" "Procurement pack (ZIP)" "NIST AI RMF"
 check_html "${BASE}/trust-center/" "trust center" "governance posture" "Control checkpoints" "Not a SOC 2"
+check_html "${BASE}/bank-pilot/" "bank pilot" "OSFI E-23" "Governance execution pipeline" "Not an RPAA payment service provider" "Block"
+check_html "${BASE}/enterprise/" "enterprise page" "OSFI E-23" "Governance execution pipeline" "not RPAA retail payments" "Request Governance Brief"
 check_html "${BASE}/trust-ledger/sample-report/" "tle samples" "Trust Ledger"
 
 ws_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/workspace" 2>/dev/null || true)"

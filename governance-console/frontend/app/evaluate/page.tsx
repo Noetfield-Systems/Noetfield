@@ -5,6 +5,7 @@ import { Shell } from "@/components/Shell";
 import { EvaluateForm } from "@/components/EvaluateForm";
 import { MetricStrip } from "@/components/MetricStrip";
 import { PageHero } from "@/components/PageHero";
+import { PolicyCallout } from "@/components/PolicyCallout";
 import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { wwwHref } from "@/lib/www-links";
 
@@ -33,6 +34,13 @@ export default function EvaluatePage() {
           { label: "Demo", value: "5 min", hint: "Board-ready confidence badge" },
         ]}
       />
+
+      <PolicyCallout tag="Canada FRFI" title="Governance vendor — not RPAA PSP" tone="fence">
+        <p>
+          Shadow evaluate and audit export support OSFI E-23 evidence workflows. Noetfield does not execute
+          payments, hold custody, or claim Bank of Canada retail payments supervision.
+        </p>
+      </PolicyCallout>
 
       <section
         className="nf-card mb-8 border border-accent/30 bg-accent/5 p-6"

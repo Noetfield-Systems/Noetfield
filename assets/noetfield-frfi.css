@@ -1,0 +1,94 @@
+/* FRFI / bank-grade surfaces — OSFI E-23 alignment, policy fences */
+
+.nf-frfi .nf-hero h1 {
+  max-width: 28ch;
+}
+
+.nf-policy-callout {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 18px 20px;
+  background: var(--panel2);
+  margin-bottom: var(--section-y);
+}
+.nf-policy-callout-fence {
+  border-color: rgba(200, 163, 73, 0.42);
+  background:
+    radial-gradient(480px 160px at 0% 0%, rgba(200, 163, 73, 0.1), transparent 65%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+}
+.nf-policy-callout-info {
+  border-color: rgba(122, 167, 255, 0.35);
+  background: rgba(122, 167, 255, 0.06);
+}
+.nf-policy-callout-ok {
+  border-color: rgba(45, 227, 138, 0.35);
+  background: rgba(45, 227, 138, 0.06);
+}
+.nf-policy-callout h3 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.nf-policy-callout p,
+.nf-policy-callout li {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: var(--leading-body);
+}
+.nf-policy-callout ul {
+  margin: 8px 0 0;
+  padding-left: 1.2rem;
+}
+.nf-policy-callout .nf-policy-tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.nf-reg-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: var(--section-y);
+}
+@media (max-width: 768px) {
+  .nf-reg-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.nf-reg-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  background: var(--panel2);
+}
+.nf-reg-card h3 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+.nf-reg-card p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: var(--leading-body);
+}
+.nf-reg-card .nf-reg-timing {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: var(--text-xs);
+  color: var(--muted2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nf-e23-map th:first-child {
+  width: 34%;
+}

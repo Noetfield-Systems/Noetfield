@@ -19,6 +19,8 @@ CONSOLE_HTML = (
 )
 
 P0_MARKERS = ('name="viewport"', "nfHeader", "noetfield-tokens.css")
+BANK_PILOT_MARKERS = ("OSFI E-23", "nf-policy-callout", "noetfield-frfi.css")
+ENTERPRISE_MARKERS = ("OSFI E-23", "Governance execution pipeline", "noetfield-frfi.css")
 CONSOLE_MARKERS = (
     "noetfield-tokens.css",
     "noetfield-console.css",
@@ -30,12 +32,19 @@ CONSOLE_MARKERS = (
 
 def main() -> int:
     errors: list[str] = []
+    extra_markers: dict[Path, tuple[str, ...]] = {
+        ROOT / "bank-pilot" / "index.html": BANK_PILOT_MARKERS,
+        ROOT / "enterprise" / "index.html": ENTERPRISE_MARKERS,
+    }
     for path in P0_PAGES:
         if not path.is_file():
             errors.append(f"missing P0 page: {path.relative_to(ROOT)}")
             continue
         text = path.read_text(encoding="utf-8")
         for marker in P0_MARKERS:
+            if marker not in text:
+                errors.append(f"{path.relative_to(ROOT)}: missing {marker!r}")
+        for marker in extra_markers.get(path, ()):
             if marker not in text:
                 errors.append(f"{path.relative_to(ROOT)}: missing {marker!r}")
 
