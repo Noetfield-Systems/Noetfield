@@ -51,7 +51,7 @@ export default function ConnectorsPage() {
   }, []);
 
   return (
-    <Shell active="workspace">
+    <Shell active="connectors">
       <p className="mb-4">
         <Link href="/workspace" className="text-sm text-accent hover:underline">
           ← Trust Ledger

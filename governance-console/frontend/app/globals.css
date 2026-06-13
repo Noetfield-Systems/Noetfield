@@ -45,4 +45,75 @@ body {
   .nf-spinner {
     @apply inline-block h-4 w-4 animate-spin rounded-full border-2 border-black/20 border-t-black;
   }
+
+  .nf-institutional-hero {
+    background:
+      radial-gradient(1000px 420px at 8% 0%, rgba(200, 163, 73, 0.14), transparent 58%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    box-shadow: 0 14px 50px rgba(0, 0, 0, 0.35);
+  }
+
+  .nf-pipeline-step {
+    @apply relative flex flex-col rounded-xl border border-border bg-panel/80 p-4 transition;
+  }
+
+  .nf-pipeline-step-active {
+    @apply border-accent/45 bg-accent/10 ring-1 ring-accent/20;
+  }
+
+  .nf-pipeline-num {
+    @apply mb-2 inline-flex h-7 w-7 items-center justify-center rounded-lg border border-accent/40 text-xs font-bold text-accent;
+  }
+
+  .nf-pipeline-label {
+    @apply text-sm font-semibold text-white;
+  }
+
+  .nf-pipeline-detail {
+    @apply mt-1 text-xs leading-relaxed text-muted-2;
+  }
+
+  .nf-metrics-item {
+    @apply rounded-xl border border-border bg-panel p-4;
+  }
+
+  .nf-metrics-ok {
+    @apply border-ok/30 bg-ok/5;
+  }
+
+  .nf-metrics-warn {
+    @apply border-accent/35 bg-accent/5;
+  }
+
+  .nf-metrics-label {
+    @apply text-[10px] font-semibold uppercase tracking-widest text-muted-2;
+  }
+
+  .nf-metrics-value {
+    @apply mt-2 font-serif text-2xl font-semibold text-white;
+  }
+
+  .nf-metrics-hint {
+    @apply mt-1 text-xs text-muted-2;
+  }
+
+  .nf-data-table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  .nf-data-table th {
+    @apply border-b border-border px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-muted-2;
+  }
+
+  .nf-data-table td {
+    @apply border-b border-border/60 px-4 py-3 align-top text-muted;
+  }
+
+  .nf-data-table tr:hover td {
+    @apply bg-white/[0.03];
+  }
+
+  .nf-data-table code {
+    @apply font-mono text-xs text-accent;
+  }
 }

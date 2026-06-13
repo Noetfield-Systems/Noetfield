@@ -4,9 +4,12 @@ import Link from "next/link";
 import { Shell } from "@/components/Shell";
 import { EvaluateForm } from "@/components/EvaluateForm";
 import { DevPortBanner } from "@/components/DevPortBanner";
+import { MetricStrip } from "@/components/MetricStrip";
+import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { apiBaseLabel } from "@/lib/health";
 import { platformConsoleHref } from "@/lib/platform-console";
 import { useApiHealth } from "@/lib/useApiHealth";
+import { wwwHref } from "@/lib/www-links";
 
 export default function CognitiveDashboardPage() {
   const health = useApiHealth();
@@ -14,28 +17,47 @@ export default function CognitiveDashboardPage() {
   return (
     <Shell active="dashboard">
       <DevPortBanner />
-      <section className="mb-8">
-        <p className="text-xs uppercase tracking-widest text-accent">Cognitive governance</p>
-        <h2 className="mt-1 text-2xl font-semibold text-white">Cognitive dashboard</h2>
-        <p className="mt-2 max-w-2xl text-sm text-muted">
-          Dev sandbox for pre-execution intent evaluation. Production pilots use{" "}
-          <a
-            className="text-accent underline"
-            href="https://platform.noetfield.com/console"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            platform console
+      <section className="mb-6">
+        <p className="nf-eyebrow">Cognitive governance</p>
+        <h2 className="mt-1 font-serif text-3xl font-semibold text-white">Cognitive dashboard</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+          Institutional sandbox for pre-execution intent evaluation — the same{" "}
+          <strong className="text-white">Block · Record · Export</strong> path buyers see on{" "}
+          <a href={wwwHref("/copilot/demo/")} className="text-accent hover:underline">
+            noetfield.com
           </a>
           .
         </p>
       </section>
 
+      <WorkflowStepper
+        active="block"
+        hrefs={{
+          block: "/evaluate",
+          record: "/workspace",
+          export: wwwHref("/copilot/procurement/"),
+        }}
+      />
+
+      <MetricStrip
+        metrics={[
+          {
+            label: "Governance API",
+            value: health?.ok ? "Operational" : health === null ? "Checking…" : "Offline",
+            hint: apiBaseLabel(),
+            tone: health?.ok ? "ok" : health === null ? "default" : "warn",
+          },
+          { label: "Demo path", value: "≤ 5 min", hint: "Evaluate → confidence → TLE export" },
+          { label: "Evidence", value: "Metadata", hint: "Purview · Entra · audit index" },
+          { label: "Design partner", value: "CAD $2K+", hint: "Board PDF in governance meeting" },
+        ]}
+      />
+
       <section
         className="mb-8 rounded-xl border border-accent/30 bg-accent/5 p-6"
         aria-label="5-minute demo"
       >
-        <p className="text-xs uppercase tracking-widest text-accent">5-minute demo</p>
+        <p className="nf-eyebrow">5-minute demo</p>
         <h3 className="mt-1 text-lg font-semibold text-white">Evaluate → confidence score → Trust Ledger</h3>
         <p className="mt-2 max-w-2xl text-sm text-muted">
           Submit intent below, open the result RID, and show the <strong className="text-white">confidence score</strong>{" "}
@@ -46,60 +68,38 @@ export default function CognitiveDashboardPage() {
           for TLE PDF export.
         </p>
         <p className="mt-3 text-sm">
-          <Link href="/copilot/demo/" className="text-accent hover:underline">
+          <Link href={wwwHref("/copilot/demo/")} className="text-accent hover:underline">
             Locked demo script →
           </Link>
         </p>
       </section>
 
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-border bg-panel p-4">
-          <p className="text-xs uppercase tracking-wide text-muted">Governance API</p>
-          <p className="mt-2 font-mono text-xs text-white/90">{apiBaseLabel()}</p>
-          <p className="mt-2 text-sm">
-            {health === null ? (
-              <span className="text-muted">Checking…</span>
-            ) : health.ok ? (
-              <span className="text-emerald-400">Operational · {health.detail}</span>
-            ) : (
-              <span className="text-red-300">Offline · {health.detail}</span>
-            )}
-          </p>
-          {!health?.ok && health !== null && (
-            <p className="mt-2 text-xs text-muted">
-              Start stack:{" "}
-              <code className="rounded bg-black/40 px-1">make dev-local</code>
-            </p>
-          )}
-        </div>
-        <Link
-          href="/audit"
-          className="rounded-xl border border-border bg-panel p-4 transition hover:border-accent/40"
-        >
-          <p className="text-xs uppercase tracking-wide text-muted">Compliance</p>
+        <Link href="/audit" className="nf-card-hover block p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-2">Compliance</p>
           <p className="mt-2 text-lg font-medium text-white">Audit log</p>
-          <p className="mt-1 text-sm text-muted">Search evaluations by RID</p>
+          <p className="mt-1 text-sm text-muted-2">Search evaluations by RID</p>
         </Link>
-        <Link
-          href="/trust-ledger"
-          className="rounded-xl border border-border bg-panel p-4 transition hover:border-accent/40"
-        >
-          <p className="text-xs uppercase tracking-wide text-muted">Trust Ledger</p>
+        <Link href="/workspace" className="nf-card-hover block p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-2">Trust Ledger</p>
           <p className="mt-2 text-lg font-medium text-white">TLE workspace</p>
-          <p className="mt-1 text-sm text-muted">Read-only list, detail, PDF export</p>
+          <p className="mt-1 text-sm text-muted-2">Approvals · PDF · procurement ZIP</p>
         </Link>
-        <a
-          href={platformConsoleHref()}
-          className="rounded-xl border border-border bg-panel p-4 transition hover:border-accent/40"
-        >
-          <p className="text-xs uppercase tracking-wide text-muted">Platform console</p>
-          <p className="mt-2 text-lg font-medium text-white">Governance console</p>
-          <p className="mt-1 text-sm text-muted">Local port 8001 or 13080/console (make dev-local)</p>
+        <Link href="/workspace/connectors" className="nf-card-hover block p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-2">Connectors</p>
+          <p className="mt-2 text-lg font-medium text-white">M365 evidence</p>
+          <p className="mt-1 text-sm text-muted-2">Register + mock connect</p>
+        </Link>
+        <a href={platformConsoleHref()} className="nf-card-hover block p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-2">Platform API</p>
+          <p className="mt-2 text-lg font-medium text-white">Legacy console</p>
+          <p className="mt-1 text-sm text-muted-2">Port 8001 evaluate shell</p>
         </a>
       </div>
 
-      <section>
-        <h3 className="mb-3 text-lg font-semibold text-white">Submit operational intent</h3>
+      <section className="nf-card p-6">
+        <h3 className="mb-1 text-lg font-semibold text-white">Submit operational intent</h3>
+        <p className="mb-4 text-sm text-muted-2">Pre-execution evaluation — policy fires before external execution.</p>
         <EvaluateForm />
       </section>
     </Shell>

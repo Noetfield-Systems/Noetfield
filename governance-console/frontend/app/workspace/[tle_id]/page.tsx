@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Shell } from "@/components/Shell";
 import { LoadingBlock } from "@/components/LoadingBlock";
 import { PageHero } from "@/components/PageHero";
+import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { approveTle, canApproveInWorkspace, getTle, getWorkspaceRole, TleDetail } from "@/lib/api";
 import { wwwHref } from "@/lib/www-links";
 
@@ -78,6 +79,8 @@ export default function TleViewerPage() {
             title={String(doc.decision ?? "Trust Ledger Entry")}
             lead={`Status ${tle.status} · ${String(doc.date ?? "")} · Role ${getWorkspaceRole()}`}
           />
+
+          <WorkflowStepper active="export" />
 
           <div
             className="nf-card mb-8 flex flex-wrap items-center justify-between gap-4 border border-accent/30 bg-accent/5 p-6"

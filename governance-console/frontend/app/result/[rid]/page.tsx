@@ -7,6 +7,7 @@ import { Shell } from "@/components/Shell";
 import { DecisionBadge } from "@/components/DecisionBadge";
 import { RidCopy } from "@/components/RidCopy";
 import { RiskMeter } from "@/components/RiskMeter";
+import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { AuditRecord, getAudit } from "@/lib/api";
 
 export default function ResultPage() {
@@ -22,13 +23,18 @@ export default function ResultPage() {
   }, [rid]);
 
   return (
-    <Shell>
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <h2 className="text-2xl font-semibold text-white">Governance decision</h2>
-        <Link href="/evaluate" className="text-sm text-accent hover:underline">
+    <Shell active="evaluate">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <p className="nf-eyebrow">Governance decision</p>
+          <h2 className="font-serif text-2xl font-semibold text-white">Pre-execution result</h2>
+        </div>
+        <Link href="/evaluate" className="nf-btn-secondary text-sm">
           New evaluation
         </Link>
       </div>
+
+      <WorkflowStepper active="block" hrefs={{ record: "/workspace", export: "/workspace" }} />
 
       {error && (
         <p className="rounded-lg border border-red-900 bg-red-950/50 px-3 py-2 text-sm text-red-300">
@@ -90,6 +96,15 @@ export default function ResultPage() {
           <Link href="/audit" className="inline-block text-sm text-accent hover:underline">
             View full audit log →
           </Link>
+          <div className="nf-card mt-6 border border-accent/25 bg-accent/5 p-5">
+            <p className="text-sm font-medium text-white">Next: Record in Trust Ledger</p>
+            <p className="mt-1 text-sm text-muted-2">
+              Open Workspace to create a TLE draft from this RID and export board PDF / procurement ZIP.
+            </p>
+            <Link href="/workspace" className="nf-btn-primary mt-4 inline-flex text-sm">
+              Trust Ledger Workspace →
+            </Link>
+          </div>
         </div>
       )}
     </Shell>

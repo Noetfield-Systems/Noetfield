@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Shell } from "@/components/Shell";
 import { LoadingBlock } from "@/components/LoadingBlock";
 import { PageHero } from "@/components/PageHero";
+import { WorkflowStepper } from "@/components/WorkflowStepper";
 import { draftTle, listTles, TleSummary } from "@/lib/api";
 import { wwwHref } from "@/lib/www-links";
 
@@ -65,6 +66,9 @@ export default function WorkspacePage() {
         title="Trust Ledger Workspace"
         lead="Procurement-grade authorization records for Copilot adoption — evidence, confidence score, and approval chain."
       />
+
+      <WorkflowStepper active="record" />
+
       <p className="mb-6 flex flex-wrap gap-x-4 gap-y-1 text-sm">
         <Link href="/workspace/connectors" className="text-accent hover:underline">
           M365 connectors (dev OAuth)
@@ -81,7 +85,7 @@ export default function WorkspacePage() {
       </p>
 
       <form
-        className="nf-card mb-8 flex flex-wrap gap-3 p-4"
+        className="nf-card mb-6 flex flex-wrap gap-3 p-4"
         onSubmit={(e) => {
           e.preventDefault();
           load(q, statusFilter);
@@ -122,7 +126,7 @@ export default function WorkspacePage() {
         </button>
       </form>
 
-      <div className="mb-8 flex flex-wrap gap-3">
+      <div className="mb-6 flex flex-wrap gap-3">
         <button type="button" className="nf-btn-primary" disabled={drafting} onClick={createDraft}>
           {drafting ? "Creating draft…" : "Create TLE draft from pilot evidence"}
         </button>
@@ -151,31 +155,58 @@ export default function WorkspacePage() {
         </div>
       )}
 
-      <ul className="space-y-3">
-        {rows.map((row) => (
-          <li key={row.tle_id}>
-            <Link href={`/workspace/${encodeURIComponent(row.tle_id)}`} className="nf-card-hover block p-5">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <code className="font-mono text-sm text-accent">{row.tle_id}</code>
-                <div className="flex flex-wrap items-center gap-2">
-                  <span
-                    className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent"
-                    aria-label={`Confidence ${(row.confidence_score * 100).toFixed(0)} percent`}
-                  >
-                    {(row.confidence_score * 100).toFixed(0)}% confidence
-                  </span>
-                  <span className={`text-sm font-medium ${statusClass(row.status)}`}>{row.status}</span>
-                </div>
-              </div>
-              <p className="mt-3 text-sm text-white/90">{row.decision}</p>
-              <p className="mt-1 text-xs text-muted-2">
-                {row.date}
-                {row.source_rid ? ` · RID ${row.source_rid}` : ""}
-              </p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {!loading && rows.length > 0 && (
+        <div className="nf-card overflow-x-auto">
+          <table className="nf-data-table">
+            <thead>
+              <tr>
+                <th>TLE ID</th>
+                <th>Decision</th>
+                <th>Confidence</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr key={row.tle_id}>
+                  <td>
+                    <code>{row.tle_id}</code>
+                  </td>
+                  <td className="max-w-xs text-white/90">{row.decision}</td>
+                  <td>
+                    <span
+                      className="inline-flex rounded-full border border-accent/40 bg-accent/10 px-2.5 py-0.5 text-xs font-semibold text-accent"
+                      aria-label={`Confidence ${(row.confidence_score * 100).toFixed(0)} percent`}
+                    >
+                      {(row.confidence_score * 100).toFixed(0)}%
+                    </span>
+                  </td>
+                  <td className={`font-medium ${statusClass(row.status)}`}>{row.status}</td>
+                  <td className="text-xs text-muted-2">
+                    {row.date}
+                    {row.source_rid ? (
+                      <>
+                        <br />
+                        <span className="font-mono">RID {row.source_rid}</span>
+                      </>
+                    ) : null}
+                  </td>
+                  <td>
+                    <Link
+                      href={`/workspace/${encodeURIComponent(row.tle_id)}`}
+                      className="text-sm text-accent hover:underline"
+                    >
+                      Open →
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </Shell>
   );
 }
