@@ -27,6 +27,18 @@ PAGES=(
   faq/index.html
   console/index.html
   ai-automation/index.html
+  status/index.html
+  privacy/index.html
+  docs/api/index.html
+  contact/index.html
+)
+
+PARTIALS=(
+  assets/partials/institutional-status.html
+)
+
+CONSOLE_TSX=(
+  governance-console/frontend/components/Shell.tsx
 )
 
 FORBIDDEN=(
@@ -59,17 +71,24 @@ FORBIDDEN=(
   'Operating Model'
   'repo-native'
   'agent self-audit'
+  'Institutional site 2026'
+  'open (dev)'
+  'packages/sdk'
+  'kazemnezhadsina144-dot'
+  'Repository docs'
+  'Gate and Partners lanes'
+  'Lane assignment'
 )
 
-for rel in "${PAGES[@]}"; do
+scan_file() {
+  local rel="$1"
+  local label="$2"
   if [[ ! -f "$rel" ]]; then
     echo "SKIP missing $rel"
-    continue
+    return 0
   fi
+  local text page_fail=0
   text="$(cat "$rel")"
-  label="${rel%/index.html}"
-  label="${label:-homepage}"
-  page_fail=0
   for phrase in "${FORBIDDEN[@]}"; do
     if grep -qF "$phrase" <<< "$text"; then
       echo "FAIL $label — internal phrase: $phrase" >&2
@@ -80,11 +99,32 @@ for rel in "${PAGES[@]}"; do
   if [[ "$page_fail" -eq 0 ]]; then
     echo "OK   $label buyer-audience clean"
   fi
+}
+
+for rel in "${PAGES[@]}"; do
+  label="${rel%/index.html}"
+  label="${label:-homepage}"
+  scan_file "$rel" "$label"
 done
+
+for rel in "${PARTIALS[@]}"; do
+  scan_file "$rel" "partial:${rel}"
+done
+
+for rel in "${CONSOLE_TSX[@]}"; do
+  scan_file "$rel" "console:${rel}"
+done
+
+if [[ ! -f trust-center/index.html ]]; then
+  echo "FAIL trust-center/index.html missing — required tier page" >&2
+  fail=1
+else
+  echo "OK   trust-center/index.html present"
+fi
 
 if [[ "$fail" -eq 0 ]]; then
   echo ""
-  echo "verify-www-buyer-audience passed."
+  echo "verify-www-buyer-audience passed (${#PAGES[@]} pages + partials + console shell)."
   exit 0
 fi
 echo ""

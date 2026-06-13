@@ -40,3 +40,6 @@ jobs:
 
       - name: Public site health
         run: make site-health
+
+      - name: Buyer-audience copy gate
+        run: ./scripts/verify-www-buyer-audience.sh

@@ -23,7 +23,7 @@ export function Shell({ children, active }: ShellProps) {
       <div className="border-b border-border/80 bg-surface/90 text-xs text-muted-2">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2">
           <span>
-            <strong className="text-muted">Institutional site 2026</strong> · Shadow mode · Pre-execution governance · No
+            <strong className="text-muted">Governance Console</strong> · Shadow mode · Pre-execution governance · No
             custody or payments
           </span>
           <span className="flex flex-wrap items-center gap-3">

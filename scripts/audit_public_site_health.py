@@ -14,6 +14,7 @@ TIER_PAGES = (
     ROOT / "trust-brief" / "index.html",
     ROOT / "copilot" / "index.html",
     ROOT / "console" / "index.html",
+    ROOT / "trust-center" / "index.html",
 )
 
 REQUIRED_SHELL_PARTIALS = (

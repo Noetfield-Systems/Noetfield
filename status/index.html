@@ -50,10 +50,13 @@
         var ok = data.status === "operational";
         summary.textContent = ok ? "All monitored services operational." : "One or more services degraded.";
         summary.className = ok ? "ok" : "warn";
+        var authLabel = data.governance_pilot_auth_required
+          ? "Pilot API authentication required"
+          : "Pilot API authentication not required";
         var items = [
-          "API: " + (data.service || "noetfield-platform"),
-          "Governance pilot auth: " + (data.governance_pilot_auth_required ? "required" : "open (dev)"),
-          "Governance API: /api/v1/governance (production pilots)",
+          "Platform API: operational",
+          authLabel,
+          "Governance API: /api/v1/governance (evaluate · audit export)",
         ];
         var eco = data.ecosystem || {};
         if (eco.website_chat) items.push("Website chat: " + (eco.website_chat.configured ? "configured" : "not configured"));

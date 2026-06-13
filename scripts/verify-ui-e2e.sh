@@ -91,7 +91,7 @@ fi
 # --- Console routes ---
 check_html "${BASE}/workspace" "workspace list" "Trust Ledger Workspace" "Create TLE draft" "Governance execution pipeline"
 check_html "${BASE}/workspace/connectors" "connectors page" "Evidence connectors" "Register + mock connect" "Last sync"
-check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashboard" "Submit operational intent" "Governance execution pipeline" "Institutional site 2026" "Framework orientation" "Registry vs receipt" "Starter tier" "Full async demo"
+check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashboard" "Submit operational intent" "Governance execution pipeline" "Governance Console" "Framework orientation" "Registry vs receipt" "Starter tier" "Full async demo"
 check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent" "Institutional demo" "Governance execution pipeline"
 check_html "${BASE}/audit" "audit page" "Audit log" "Diligence export"
 check_html "${BASE}/trust-ledger" "trust ledger list" "Trust Ledger" "Trust Ledger v1"

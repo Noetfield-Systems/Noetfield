@@ -160,6 +160,24 @@ def test_public_site_health_script() -> None:
     assert result.returncode == 0, result.stdout + result.stderr
 
 
+def test_buyer_audience_gate_script() -> None:
+    script = ROOT / "scripts" / "verify-www-buyer-audience.sh"
+    result = subprocess.run(
+        ["bash", str(script)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_institutional_status_strip_buyer_copy() -> None:
+    text = (ROOT / "assets" / "partials" / "institutional-status.html").read_text(encoding="utf-8")
+    assert "Governance vendor layer" in text
+    assert 'href="/console/"' in text
+    assert "Institutional site 2026" not in text
+
+
 def test_product_brief_external_only() -> None:
     text = (ROOT / "PRODUCT_BRIEF.md").read_text(encoding="utf-8")
     assert "Golden Edge" not in text
