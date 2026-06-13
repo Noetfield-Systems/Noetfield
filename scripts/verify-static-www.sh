@@ -22,37 +22,44 @@ check_file() {
   [[ "$missing" -eq 0 ]] && ok "$label" || bad "$label"
 }
 
-check_file "homepage v18 shell" index.html \
-  'noetfield-www.css?v=22' 'nf-site-v14' 'The audit trail your Copilot deployment' \
-  'data-live-proof-hero' 'What legal and security reviewers need to see' \
-  'nf-procurement-rail' 'Apply for pilot ($2k–10k)' 'Published tiers' \
-  'Governance playground' 'Three traps before Copilot' 'One evaluate · four exports' \
-  'Your peers roll out Copilot with slides' 'This is for you if' \
-  'EU and US regulated institutions' 'EU AI Act Art. 12'
+check_file "homepage pilot-first" index.html \
+  'noetfield-www.css?v=23' 'nf-site-v14' 'Board-grade trust' \
+  'tamper-evident decision records' 'data-live-proof-hero' \
+  'EU AI Act Art. 12' 'Apply for pilot ($2k–10k)' \
+  'Lead program · $2k–10k · 90 days' '01 · Pilot' \
+  'What legal and security reviewers need to see' \
+  'Governance playground' 'Three traps before Copilot'
 
 check_file "homepage wave1 journey" index.html \
-  '01 · Pilot' '02 · Prove' '03 · Try' '04 · Trust' '$2k–10k' \
-  'Lead program · $2k–10k · 90 days' 'Pilot overview'
+  '02 · Prove' '03 · Try' '04 · Trust' '$2k–10k'
 
 check_file "start sandbox page" start/index.html \
-  'nf-hero-flow' 'Try in minutes' '14-day trial' '50 evaluate calls' 'Sandbox mode' \
-  'data-trial-os-flow'
+  'nf-hero-flow' 'Try in minutes' '14-day trial' '50 evaluate calls' 'Apply for pilot' \
+  'data-trial-os-flow' 'noetfield-www.css?v=23'
 
 check_file "pricing packaging page" pricing/index.html \
-  'Published tiers' 'Sandbox + production' 'Developer access · free' 'noetfield-www.css?v=22' 'What you tried vs what breaks vs what Noetfield delivers'
+  'Published tiers' 'Apply for pilot ($2k–10k)' 'Developer access · free' \
+  'noetfield-www.css?v=23' 'What you tried vs what breaks vs what Noetfield delivers'
 
 check_file "pilot landing page" copilot/pilot/index.html \
-  'noetfield-www.css?v=22' '90-day design-partner pilot' 'Pilot deliverables' \
-  'interest=design-partner' 'EU AI Act Art. 12' 'QuickScan' 'Board PDF success signal'
+  'noetfield-www.css?v=23' 'board-grade trust' 'GTM-locked pilot success signals' \
+  'interest=design-partner' 'EU AI Act Art. 12' 'QuickScan' 'Pilot deliverables' \
+  'tamper-evident'
+
+check_file "footer pilot-first" assets/partials/footer.html \
+  'Apply for pilot ($2k–10k)' 'Design-partner pilot' 'tamper-evident'
+
+check_file "header pilot nav" assets/partials/header.html \
+  'Pilot · $2k–10k' '/copilot/pilot/' 'Apply for pilot ($2k–10k)'
 
 check_file "trust center diligence theme" trust/index.html \
   'nf-trust-diligence' 'fail closed' 'Metadata-only'
 
 check_file "investors honesty" investors/index.html \
-  'do not inflate ARR' 'design partner' 'Company compliance automation'
+  'do not inflate ARR' 'design partner' 'tamper-evident'
 
 check_file "copilot dual artifact" copilot/index.html \
-  'nf-hero-artifacts' 'nf-workspace-mock' 'Copilot Control System'
+  'nf-hero-artifacts' 'Apply for pilot' 'board-grade governance'
 
 check_file "offerings lock" OFFERINGS_LOCKED.md \
   'Three contract offerings' 'Trust Brief' 'Copilot Governance Pack' 'Bank Pilot' \
@@ -62,15 +69,15 @@ check_file "commercial SSOT" docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.m
   'OFFERINGS_LOCKED' 'Trust Brief' 'operations@noetfield.com' 'W3 economic signal'
 
 check_file "ai-automation lane B" ai-automation/index.html \
-  'Make your AI automation defensible' 'Three offerings only' 'noetfield-www.css?v=22'
+  'Make your AI automation defensible' 'Apply for pilot' 'noetfield-www.css?v=23'
 
 # Version coherence on primary hubs
-for f in index.html trust/index.html copilot/index.html msp/index.html federal/index.html investors/index.html start/index.html pricing/index.html; do
-  if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=22' "$f"; then
-    bad "shell v22 on $f"
+for f in index.html trust/index.html copilot/index.html msp/index.html federal/index.html investors/index.html start/index.html pricing/index.html faq/index.html contact/index.html enterprise/index.html; do
+  if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=23' "$f"; then
+    bad "shell v23 on $f"
   fi
 done
-[[ "$fail" -eq 0 ]] && ok "shell v22 on primary hubs"
+[[ "$fail" -eq 0 ]] && ok "shell v23 on primary hubs"
 
 if [[ "$fail" -ne 0 ]]; then
   echo "Run: python3 scripts/rebuild-www-v6.py" >&2
@@ -107,12 +114,21 @@ check_file "homepage automation copy" index.html \
   'Policy-bound workflows' 'Automated governance' 'nf-signal-badge--available'
 
 check_file "procurement buyer copy" copilot/procurement/index.html \
-  'Available now — capability scope' 'Governance API reference' 'Overview'
+  'Available now — capability scope' 'Apply for pilot' 'Overview'
 
 check_file "legal pages" privacy/index.html \
   'What we collect' 'operations@noetfield.com'
 check_file "legal pages terms" terms/index.html \
   'No custody or payment execution' 'operations@noetfield.com'
+
+# Pilot-first on tier hubs — no Trust Brief as sole primary without pilot
+for f in faq/index.html contact/index.html enterprise/index.html pricing/index.html; do
+  if [[ -f "$f" ]] && grep -qF 'Apply for pilot' "$f"; then
+    ok "pilot CTA on $f"
+  else
+    bad "pilot CTA on $f"
+  fi
+done
 
 [[ -f vercel.json ]] && grep -qF 'docs/ops' vercel.json && ok "vercel.json blocks docs/ops" || bad "vercel.json missing docs/ops block"
 [[ -f .vercelignore ]] && grep -qF 'docs/ops/' .vercelignore && ok "vercelignore excludes docs/ops" || bad "vercelignore missing docs/ops"

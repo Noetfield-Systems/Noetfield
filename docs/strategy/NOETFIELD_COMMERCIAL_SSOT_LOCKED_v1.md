@@ -69,7 +69,8 @@ See [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md).
 | **Copilot Governance Pack** | Design partner $2k–10k pilot | Block + record + export (TLE + board PDF) |
 | **Bank Pilot** | Custom | Read-only shadow simulation — no execution authority |
 
-**Primary CTA (contract):** [Request Governance Brief](/trust-brief/intake/) · `operations@noetfield.com`
+**Primary CTA (lead):** [Apply for design-partner pilot](/trust-brief/intake/?interest=design-partner&vector=copilot-governance) · `operations@noetfield.com`  
+**Primary CTA (land):** [Request Trust Brief](/trust-brief/intake/)
 
 **Self-serve CTA (access):** [Start free sandbox](/start/) — no sales call · 14-day · 50 evaluates
 

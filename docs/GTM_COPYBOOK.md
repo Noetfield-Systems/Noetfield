@@ -17,7 +17,8 @@
 | **Agentic** | Agents execute investigate → triage → draft TLE → act on low-risk — not “AI assist” alone. |
 | **Three verbs** | Evaluate · Record · Export |
 | **Complement line** | Complement Purview and Copilot Control System — not replace. Metadata-only M365. |
-| **Primary CTA (contract)** | Request Governance Brief → `/trust-brief/intake/` |
+| **Primary CTA (lead)** | Apply for design-partner pilot → `/trust-brief/intake/?interest=design-partner&vector=copilot-governance` |
+| **Primary CTA (land)** | Request Trust Brief → `/trust-brief/intake/` |
 | **Primary CTA (try)** | Start free sandbox → `/start/` |
 | **Trust diligence** | `/trust/` · `/trust-ledger/verify/` |
 | **Inbox** | operations@noetfield.com · include **RID** on contract threads · [COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md](./ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md) |
@@ -28,11 +29,11 @@
 
 | Stage | URL | Hero CTA |
 |-------|-----|----------|
+| Lead | `/copilot/pilot/` | Apply for pilot ($2k–10k) |
 | Try | `/start/` | Start free sandbox |
-| Compare | `/pricing/` | Start sandbox · Apply to design partner |
+| Compare | `/pricing/` | Apply for pilot · Start sandbox |
 | Demo | `/copilot/demo/` | 5-minute demo |
-| Apply | `/copilot/pilot/` | Become a design partner |
-| Buy | `/trust-brief/` | Request Governance Brief |
+| Land | `/trust-brief/` | Request Trust Brief |
 
 ---
 
@@ -48,17 +49,18 @@
 
 | URL | Eyebrow | Primary CTA | Secondary |
 |-----|---------|-------------|-----------|
-| `/` | AI Governance & Evidence · M365 Copilot | Start free sandbox | Design partner · 5-minute demo |
-| `/start/` | Self-serve · no sales call | Start sandbox | 5-minute demo |
-| `/pricing/` | Access paths + contract programs | Start free sandbox | Request Governance Brief |
-| `/enterprise/` | Enterprise · Banks · Regulated institutions | Request Governance Brief (`?source=enterprise`) | Bank Pilot, `/docs/api/` |
-| `/trust/` | Trust & security | Procurement pack | Verify export |
-| `/trust-brief/` | Trust Brief · 6 weeks · $10,000 | Request Governance Brief | — |
-| `/copilot/` | Copilot Governance Pack | Start free sandbox or Request Brief | `/copilot/pilot/` |
-| `/bank-pilot/` | Bank Pilot · Shadow mode | Discuss Bank Pilot | Trust Brief |
+| `/` | Board-grade trust · EU + US institutions | Apply for pilot ($2k–10k) | 5-minute demo · Start sandbox |
+| `/start/` | Self-serve · no sales call | Apply for pilot | Start sandbox · 5-minute demo |
+| `/pricing/` | Access paths + contract programs | Apply for pilot ($2k–10k) | Start free sandbox |
+| `/enterprise/` | Enterprise · Banks · Regulated institutions | Apply for pilot | Request Trust Brief · Bank Pilot |
+| `/trust/` | Trust & security | Apply for pilot | Procurement pack · Verify export |
+| `/trust-brief/` | Trust Brief · 6 weeks · $10,000 | Request Trust Brief | Apply for pilot first |
+| `/copilot/` | Copilot Governance Pack · EU + US | Apply for pilot | 5-minute demo · Procurement pack |
+| `/copilot/pilot/` | Design partner · $2k–10k | Apply for pilot | 5-minute demo |
+| `/bank-pilot/` | Bank Pilot · Shadow mode | Discuss Bank Pilot | Apply for pilot |
 | `/partners/` | Partners · Channel | Partner intake | `/docs/api/` in footer |
-| `/console/` | Governance Console | Start free sandbox | Open console |
-| `/docs/api/` | Governance API | Start free sandbox | Request production keys |
+| `/console/` | Governance Console | 5-minute demo | Apply for pilot |
+| `/docs/api/` | Governance API | Apply for pilot | Start sandbox |
 | `/trust-ledger/` | Trust Ledger | Open workspace | TLE samples |
 
 ---

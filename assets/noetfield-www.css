@@ -816,6 +816,34 @@ body.nf-www.nf-trust-diligence .nf-signal-badge--shipped {
   color: #1a6b42;
 }
 
+body.nf-www .nf-trust--hero {
+  margin-top: 20px;
+  margin-bottom: 0;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 900px) {
+  body.nf-www .nf-trust--hero {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+body.nf-www .nf-hero-cinematic .nf-trust--hero .nf-trust__item {
+  text-align: left;
+  padding: 14px 16px;
+}
+
+body.nf-www .nf-hero-cinematic .nf-trust--hero .nf-trust__item strong {
+  font-size: 0.8125rem;
+  font-family: var(--font-sans);
+  letter-spacing: 0.02em;
+}
+
+body.nf-www .nf-hero-cinematic .nf-trust--hero .nf-trust__item span {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
 body.nf-www.nf-site-v13 .nf-stat-bar {
   border-color: rgba(200, 163, 73, 0.22);
 }

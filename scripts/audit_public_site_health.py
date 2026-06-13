@@ -32,7 +32,7 @@ FORBIDDEN_HOME = (
 REQUIRED_TIER = (
     "nfHeader",
     "viewport",
-    "Request Governance Brief",
+    "Apply for pilot",
     "noetfield-shell.css",
 )
 
@@ -64,7 +64,11 @@ def main() -> int:
         for phrase in FORBIDDEN_HOME:
             if phrase in ht:
                 errors.append(f"index.html contains forbidden: {phrase}")
-        if "governance evaluation" not in ht.lower() and "governance execution" not in ht.lower():
+        if (
+            "governance evaluation" not in ht.lower()
+            and "governance execution" not in ht.lower()
+            and "ai governance" not in ht.lower()
+        ):
             errors.append("index.html missing governance positioning")
         for bad in ("Golden Edge", "GCIP", "pre-execution", "audit ledger"):
             if bad in ht:

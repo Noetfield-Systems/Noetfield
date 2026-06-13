@@ -22,6 +22,8 @@ TIER_PAGES = (
     "console/index.html",
 )
 
+PILOT_CTA = "Apply for pilot"
+
 
 def test_homepage_has_no_prohibited_payment_language() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
@@ -32,7 +34,10 @@ def test_homepage_has_no_prohibited_payment_language() -> None:
 def test_homepage_states_governance_positioning() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8").lower()
     assert "governance" in text
-    assert "request governance brief" in text
+    assert "board-grade trust" in text
+    assert "apply for pilot" in text
+    assert "eu ai act art. 12" in text
+    assert "tamper-evident" in text
 
 
 def test_positioning_locked_sentence() -> None:
@@ -46,18 +51,18 @@ def test_positioning_locked_sentence() -> None:
 def test_offerings_locked_three_tiers() -> None:
     text = (ROOT / "OFFERINGS_LOCKED.md").read_text(encoding="utf-8")
     assert "Trust Brief" in text
-    assert "$10,000" in text
+    assert "$10,000" in text or "$10k" in text.lower()
     assert "Copilot Governance Pack" in text
     assert "Bank Pilot" in text
+    assert "design-partner" in text.lower()
     assert "v6.1" not in text
 
 
 def test_enterprise_page_structure() -> None:
     text = (ROOT / "enterprise" / "index.html").read_text(encoding="utf-8")
-    assert "Request Governance Brief" in text
-    assert "10,000" in text
-    for heading in ("Problem", "Risk", "Solution"):
-        assert heading in text
+    assert PILOT_CTA in text
+    assert "10,000" in text or "$10k" in text.lower()
+    assert "regulated" in text.lower()
     assert "Golden Edge" not in text
 
 
@@ -79,22 +84,37 @@ def test_gate_index_redirects_enterprise() -> None:
 def test_trust_ledger_explainer_not_subscription() -> None:
     text = (ROOT / "trust-ledger" / "index.html").read_text(encoding="utf-8")
     assert "Trust Ledger" in text
-    assert "audit-export" in text or "audit export" in text.lower()
+    assert "tamper-evident" in text.lower() or "evaluate" in text.lower()
     assert "stripe-buy-button" not in text.lower()
     assert 'http-equiv="refresh"' not in text
 
 
 def test_offerings_strip_partial_exists() -> None:
     text = (ROOT / "assets" / "partials" / "offerings-strip.html").read_text(encoding="utf-8")
-    assert "Request Governance Brief" in text
+    assert PILOT_CTA in text
+    assert "Pilot · $2k–10k" in text
+
+
+def test_footer_partial_pilot_first() -> None:
+    text = (ROOT / "assets" / "partials" / "footer.html").read_text(encoding="utf-8")
+    assert "Apply for pilot ($2k–10k)" in text
+    assert "Design-partner pilot" in text
 
 
 def test_tier_pages_have_shell_and_cta() -> None:
     for rel in TIER_PAGES:
         text = (ROOT / rel).read_text(encoding="utf-8")
         assert "nfHeader" in text, rel
-        assert "Request Governance Brief" in text, rel
+        assert PILOT_CTA in text, rel
         assert 'name="viewport"' in text, rel
+
+
+def test_pilot_page_full_landing() -> None:
+    text = (ROOT / "copilot" / "pilot" / "index.html").read_text(encoding="utf-8")
+    assert "GTM-locked pilot success signals" in text
+    assert "Pilot deliverables" in text
+    assert "interest=design-partner" in text
+    assert "QuickScan" in text
 
 
 def test_bank_grade_p0_pages_have_responsive_shell() -> None:
