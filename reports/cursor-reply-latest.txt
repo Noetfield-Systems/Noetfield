@@ -1,16 +1,15 @@
-Market research + forward queue 100 — complete (Noetfield cloud)
+High-grade institutional UI — complete (Noetfield cloud)
 
-Shipped (commit 9e47f68):
-- MARKET_ANALYSIS_2026_LOCKED_v1.md — live research synthesis
-- NOETFIELD_FORWARD_QUEUE_100_v1.md — FQ-001..100 / ship-fwd-060..159
-- verify-audit-export.sh stdin fix for large bundles
-- SSOT_INDEX + LOCKED_REFERENCE_INDEX links
+Shipped (commit 88509bc):
+- WorkflowStepper + MetricStrip (Block · Record · Export pipeline)
+- Governance Console Shell: status bar, sticky nav, www/procurement links
+- Workspace institutional data table; dashboard metrics; result TLE CTA
+- Static www: metrics strip on homepage; nf-pipeline/table CSS; procurement polish
 
-Verify: ./scripts/plan-with-no-asf-verify.sh — PASS
-Promote: Form PICK before www stats / battlecards
+Verify: make verify-ui-e2e + ./scripts/plan-with-no-asf-verify.sh — PASS
 
-task: Market analysis + 100 forward plans
+task: Upgrade UI to full E2E high-grade institutional SME provider
 agent: NF-CLOUD-AGENT
 main: bfc5578
-head: 9e47f68
-next: ASK founder — merge PR #53; pick FQ-001–003 iter 20; Form PICK on promote
+head: 88509bc
+next: ASK founder — merge PR; Playwright browser E2E (FQ wave 9); SSO shell post-revenue
