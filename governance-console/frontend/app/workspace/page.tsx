@@ -72,7 +72,7 @@ export default function WorkspacePage() {
       <PageHero
         eyebrow="Trust Ledger v1"
         title="Trust Ledger Workspace"
-        lead="Procurement-grade authorization records for Copilot adoption — evidence, confidence score, and approval chain."
+        lead="Signed Trust Ledger Entries for Copilot go/no-go — M365 evidence index, confidence score, approval chain, and board-ready export."
       />
       {oauthSuccess && (
         <p
@@ -184,7 +184,7 @@ export default function WorkspacePage() {
                   <span className={`text-sm font-medium ${statusClass(row.status)}`}>{row.status}</span>
                 </div>
               </div>
-              <p className="mt-3 text-sm text-white/90">{row.decision}</p>
+              <p className="mt-3 text-sm text-muted">{row.decision}</p>
               <p className="mt-1 text-xs text-muted-2">
                 {row.date}
                 {row.source_rid ? ` · RID ${row.source_rid}` : ""}

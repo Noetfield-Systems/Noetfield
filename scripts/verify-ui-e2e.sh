@@ -37,25 +37,29 @@ check_html "${BASE}/workspace/connectors" "connectors page" "M365 evidence conne
 check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashboard" "Submit operational intent"
 check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent"
 check_html "${BASE}/audit" "audit page" "Audit log"
-check_html "${BASE}/" "homepage" "audit trail your Copilot deployment" "Become a design partner" "5-minute demo" "Procurement pack"
-home_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/" 2>/dev/null || true)"
-if echo "$home_html" | grep -qF 'href="/copilot/procurement/"'; then
-  echo "OK   homepage procurement hero href"
-else
-  echo "FAIL homepage missing /copilot/procurement/ href" >&2
-  fail=1
-fi
-check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment" "5-minute demo"
+check_html "${BASE}/" "homepage" "audit trail your Copilot deployment" "Become a design partner" "5-minute demo" "Start free sandbox"
+check_html "${BASE}/" "homepage packaging" "Published tiers" "Fully agentic workflows" "Developer access · free"
+check_html "${BASE}/start/" "start sandbox" "Sign up → sandbox → try the product" "50 evaluate calls" "Sandbox mode"
+check_html "${BASE}/pricing/" "pricing tiers" "Sandbox + production" "14-day trial" "Apply to design partner"
+check_html "${BASE}/docs/api/" "api sandbox CTA" "Start free sandbox" "Sandbox + production"
+check_html "${BASE}/" "homepage v15 procurement rail" "Procurement" "Trust center" "Verify export" "Procurement pack"
+check_html "${BASE}/" "homepage v15 ciso strip" "What legal and security reviewers need to see" "Fail-closed export"
+check_html "${BASE}/" "homepage v12 sections" "The moment Copilot becomes auditable" "Execution receipts" "Copilot Control System" "What buyers ask"
+check_html "${BASE}/trust/" "trust center" "Trust center" "Metadata-only" "fail closed on tamper" "Shipped"
+check_html "${BASE}/trust-ledger/verify/" "tle verify" "fail closed on tamper" "Verify export integrity"
+check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment" "Copilot Control System" "Phase 2"
 check_html "${BASE}/copilot/pilot/" "copilot pilot" "Design-partner Go/No-Go" "Design partner program"
-check_html "${BASE}/copilot/demo/" "copilot demo" "5-minute demo" "Demo script (locked narrative)" "confidence score" "Purview" "Entra" "SharePoint"
-check_html "${BASE}/copilot/procurement/" "procurement buyer" "buyer pack" "Procurement pack (ZIP)" "NIST AI RMF"
+check_html "${BASE}/copilot/demo/" "copilot demo" "5-minute demo" "Copilot Control System" "confidence score" "Purview" "Entra" "SharePoint"
+check_html "${BASE}/copilot/procurement/" "procurement buyer" "Procurement-grade export" "NIST AI RMF" "/trust/"
 check_html "${BASE}/copilot/sme/" "copilot sme pack" "SME Governance Pack" "90-day design partner" "confidence score"
-check_html "${BASE}/trust-brief/" "trust brief" "$10,000" "Request Governance Brief"
-check_html "${BASE}/federal/" "federal lane" "June 24, 2026" "Algorithmic Impact Assessment" "Copilot PIN" "Automated Decision-Making" "unclassified"
-check_html "${BASE}/msp/" "msp partner lane" "Readiness to Record" "Phase 1" "Phase 2" "partner"
-check_html "${BASE}/" "homepage scope" "What we ship" "Pre-execution intent check" "Signed Trust Ledger Entry"
+check_html "${BASE}/trust-brief/" "trust brief" '$10,000' "Request Governance Brief"
+check_html "${BASE}/federal/" "federal lane" "June 24, 2026" "Algorithmic Impact Assessment" "Copilot PIN" "canada.ca" "tbs-sct.canada.ca" "not a federal certifier"
+check_html "${BASE}/msp/" "msp partner lane" "Readiness → Record" "Phase 1" "Phase 2" "W3-MSP"
+check_html "${BASE}/" "homepage scope" "Shipped today" "Pre-execution evaluate" "TLE v1"
 check_html "${BASE}/" "homepage receipt" "Trust Ledger Entry" "export_integrity" "fail closed"
-check_html "${BASE}/investors/" "investors success model" "Land → Expand → Channel" "Trust Brief" "Copilot Governance Pack"
+check_html "${BASE}/" "homepage v18 live proof" "data-live-proof-hero" "live-proof-hero"
+check_html "${BASE}/start/" "start trial os" "data-trial-os-flow" "trial-os-flow"
+check_html "${BASE}/investors/" "investors success model" "Land → Expand → Channel" "Accepting design partners" "Company compliance automation"
 check_html "${BASE}/trust-ledger/sample-report/" "tle samples" "Trust Ledger"
 check_html "${BASE}/ai-automation/" "ai-automation operator" "Make your AI automation defensible" "Request Governance Brief" "Scope (locked)"
 
@@ -179,6 +183,18 @@ else
     fail=1
   fi
 fi
+
+# Public www must not name third-party vendors (buyer-safe copy)
+VENDOR_PATTERN='Veridra|Vanta|Drata|OneTrust|Inforcer|Securiti|Credo AI|Holistic AI|Audital'
+for path in / /trust/ /copilot/ /msp/ /federal/ /investors/; do
+  page_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}${path}" 2>/dev/null || true)"
+  if echo "$page_html" | grep -Eiq "$VENDOR_PATTERN"; then
+    echo "FAIL vendor name on ${path} — public www must use zone labels only" >&2
+    fail=1
+  else
+    echo "OK   no vendor names on ${path}"
+  fi
+done
 
 if [[ "$fail" -eq 0 ]]; then
   echo ""

@@ -8,6 +8,16 @@ cd "$ROOT"
 
 echo "=== verify-gtm (pre-demo bundle) ==="
 
+if [[ -f scripts/verify-no-competitor-names.sh ]]; then
+  chmod +x scripts/verify-no-competitor-names.sh
+  ./scripts/verify-no-competitor-names.sh
+fi
+
+if [[ -f scripts/verify-static-www.sh ]]; then
+  chmod +x scripts/verify-static-www.sh
+  ./scripts/verify-static-www.sh
+fi
+
 if [[ -f scripts/validate-noetfield-1000-sources.py ]]; then
   python3 scripts/validate-noetfield-1000-sources.py
 fi
@@ -41,6 +51,7 @@ fi
 
 make verify-local-dev
 make verify-ui-e2e
+make verify-ui-visual
 make copilot-pilot-e2e
 make procurement-pack-e2e
 

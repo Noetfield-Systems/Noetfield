@@ -12,7 +12,7 @@
 (function () {
   "use strict";
 
-  var SHELL_VERSION = "2026.06.02.v10";
+  var SHELL_VERSION = "2026.06.02.v18";
   var PARTIALS_BASE = "/assets/partials";
   var RID_KEY = "nf_rid";
 

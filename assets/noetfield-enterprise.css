@@ -700,7 +700,7 @@
   }
 }
 
-/* —— TLE receipt mock (Veridra-style proof) —— */
+/* —— TLE receipt mock (receipt-first proof) —— */
 .nf-receipt-mock {
   border: 1px solid rgba(45, 227, 138, 0.28);
   border-radius: var(--radius);
@@ -991,7 +991,7 @@
 }
 
 /* =============================================================================
-   INSTITUTIONAL REDESIGN v5 — global site polish (Veridra / Credo grade)
+   INSTITUTIONAL REDESIGN v5 — global site polish
    ============================================================================= */
 
 body.nf-site-v5 {

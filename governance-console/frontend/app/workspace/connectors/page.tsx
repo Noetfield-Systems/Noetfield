@@ -88,7 +88,7 @@ export default function ConnectorsPage() {
         <ul className="space-y-3">
           {rows.map((c) => (
             <li key={c.connector_id} className="nf-card p-4 text-sm">
-              <p className="font-medium text-white">{c.connector_id}</p>
+              <p className="font-medium text-text">{c.connector_id}</p>
               <p className="text-muted-2">
                 {c.connector_type} · {c.status}
                 {c.oauth_connected ? " · OAuth connected" : ""}
