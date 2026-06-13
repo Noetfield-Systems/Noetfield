@@ -15,18 +15,40 @@ When the NF-PLAN registry is fully synced (`1000/1000 done`), pick the next **�
 
 `ship-*-NNN` = GTM Tier A queue (`next_tasks`). `nf-*-NNN` in engineering manifest = product waves — numeric suffix overlap is intentional (e.g. `ship-trust-brief-demo-042` ≠ `nf-homepage-design-partner-042`).
 
-## Next GTM Tier A (NF-CLOUD disk) — iter 19 proposals
+## Next GTM Tier A (NF-CLOUD disk) — iter 21 proposals
+
+**Post-packaging:** trial automation · OpenAPI self-serve · partner sandbox banner.
 
 Founder pick or bounded `implement`:
 
-1. **ship-procurement-openapi-verify-057** · Verify `/openapi.json` returns 200 in gtm-ops bundle  
-   Outcome: Production API schema reachable from buyer verify.
+1. **ship-trial-intake-automation-063** · Wire trial vector in intake email audit  
+   Outcome: `vector=trial` parity across all buyer pages.
 
-1. **ship-services-governance-readme-openapi-058** · services/governance README cites `/openapi.json` path  
-   Outcome: Prod README matches procurement buyer link.
+1. **ship-partner-sandbox-banner-064** · ship-fwd-524 partner env banner on `/partners/msp/`  
+   Outcome: Staging banner for MSP async demos.
 
-1. **ship-tenth-audit-merge-rule-059** · Document tenth-audit branch in ENGINEERING_DONE_MANIFEST closeout template  
-   Outcome: Audit iteration naming stays traceable in manifest.
+1. **ship-openapi-self-serve-doc-065** · Self-serve API doc block on `/copilot/trial/`  
+   Outcome: Try API without sales call — openapi link prominent.
+
+## Recently shipped (iter 20)
+
+| ID | Shipped |
+|----|---------|
+| ship-packaging-trial-page-060 | `/copilot/trial/` · verify-packaging-tier |
+| ship-packaging-tiers-www-061 | Published tiers index · copilot · enterprise |
+| ship-agentic-autonomous-copy-062 | Agentic autonomous narrative on www |
+
+## Next GTM Tier A (NF-CLOUD disk) — iter 20 proposals (shipped)
+
+## Recently shipped (iter 19)
+
+| ID | Shipped |
+|----|---------|
+| ship-procurement-openapi-verify-057 | OpenAPI 200 in gtm-ops bundle |
+| ship-services-governance-readme-openapi-058 | services/governance README openapi path |
+| ship-tenth-audit-merge-rule-059 | Tenth-audit manifest template |
+
+## Prior iter 19 proposals (archived)
 
 ## Agentic only — Hub (not NF-CLOUD implement)
 

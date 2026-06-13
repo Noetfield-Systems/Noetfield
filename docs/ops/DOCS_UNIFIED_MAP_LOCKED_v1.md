@@ -54,6 +54,7 @@ os/SHIP_NOW.md → os/plan.json → GTM_NEXT.md → QUICK_PICK.md
 | **NF-PLAN registry** | `docs/ops/plans/registry.json` | Engineering IDs NF-PLAN-* |
 | **nf-future library** | `os/plans/nf-future-*.md` | Long-horizon stubs nf-future-* |
 | **Market roadmap** | `docs/strategy/MARKET_SUCCESS_1000_ROADMAP_v1.md` | Archetype steps mr-* (SM-01–10) |
+| **Packaging tiers** | `docs/strategy/PACKAGING_TIER_SANDBOX_LOCKED_v1.md` | Async demo · trial · published tiers |
 | **Forward queues** | `docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v*.md` | Strategy backlog FQ-* |
 | **Unified 500 pack** | `docs/ops/plans/PROMPT_PACK_LOCKED/` | Pattern-ranked picks |
 | **Agent governance** | `.cursor/rules/` · `.cursor/skills/` · `MEMORY_LOCKED.yaml` | Session law |

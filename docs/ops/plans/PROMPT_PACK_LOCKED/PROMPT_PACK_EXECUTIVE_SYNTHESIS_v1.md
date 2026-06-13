@@ -5,6 +5,22 @@
 
 ---
 
+**Bottleneck:** GTM validation 2/10 — pick **S9-packaging** then **S0** before **S7**.
+
+## Packaging sprint (iter 20 — LOCKED goals)
+
+| Goal | Target | Ship IDs |
+|------|--------|----------|
+| Async demo without sales call | Trial page + evaluate path | ship-packaging-trial-page-060 |
+| Published tiers on www | Starter · Sandbox · Production | ship-packaging-tiers-www-061 |
+| Agentic autonomous narrative | Production tier copy | ship-agentic-autonomous-copy-062 |
+
+**Persona pattern:** free starter tier · 14-day trial · 50 evaluate checks · dev sandbox + production modes — no vendor names on www.
+
+**SSOT:** [PACKAGING_TIER_SANDBOX_LOCKED_v1.md](../../../strategy/PACKAGING_TIER_SANDBOX_LOCKED_v1.md)
+
+---
+
 ## Executive summary
 
 All **500 forward-queue prompts** (FQ-001–500) were analyzed against the
@@ -59,7 +75,15 @@ All **500 forward-queue prompts** (FQ-001–500) were analyzed against the
 | S7-hardening | 116 | engineering-hygiene | 1 |
 | S8-agentic | 47 | hub-commercial | 0 Hub |
 
+| S8-agentic | 47 | hub-commercial | 0 Hub |
+| S9-packaging | 3 | async-demo · trial-sandbox | 2 |
+
 ## What to pick (wise — based on our goals)
+
+### Pick first (P0 — packaging iter 20)
+
+**S9-packaging** disk tasks — trial page, published tiers, agentic autonomous copy.  
+Then **S0-proof** for board PDF moment.
 
 ### Pick first (P0 — customer #1)
 

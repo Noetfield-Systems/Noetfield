@@ -44,7 +44,7 @@ GRID_PAGES = {
 FRFI_PAGES = {"bank-pilot", "enterprise", "federal"}
 BANK_GRADE_PAGES = {
     "index", "enterprise", "bank-pilot", "trust-center", "trust-ledger",
-    "copilot", "copilot/demo", "copilot/pilot", "copilot/procurement",
+    "copilot", "copilot/demo", "copilot/pilot", "copilot/trial", "copilot/procurement",
     "partners", "partners/msp", "federal", "trust-brief", "console",
 }
 

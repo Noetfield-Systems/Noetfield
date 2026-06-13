@@ -68,10 +68,10 @@ if [[ -f docs/ops/plans/no-asf/GTM_NEXT.md ]] && [[ -f docs/ops/plans/no-asf/QUI
     echo "FAIL QUICK_PICK missing GTM_NEXT inline content" >&2
     fail=1
   fi
-  if grep -q 'ship-procurement-openapi-verify-057' docs/ops/plans/no-asf/GTM_NEXT.md && grep -q 'ship-procurement-openapi-verify-057' docs/ops/plans/no-asf/QUICK_PICK.md; then
-    echo "OK   QUICK_PICK mirrors GTM_NEXT iter 19"
+  if grep -q 'ship-packaging-trial-page-060' docs/ops/plans/no-asf/GTM_NEXT.md && grep -q 'ship-packaging-trial-page-060' docs/ops/plans/no-asf/QUICK_PICK.md; then
+    echo "OK   QUICK_PICK mirrors GTM_NEXT iter 20"
   else
-    echo "FAIL QUICK_PICK out of sync with GTM_NEXT iter 19 picks" >&2
+    echo "FAIL QUICK_PICK out of sync with GTM_NEXT iter 20 picks" >&2
     fail=1
   fi
   if grep -q 'Agentic only' docs/ops/plans/no-asf/GTM_NEXT.md && grep -q 'ship-design-partner-outreach-026' docs/ops/plans/no-asf/GTM_NEXT.md; then

@@ -61,6 +61,7 @@ PRIORITY = {
     "/copilot/demo/": 0.88,
     "/copilot/procurement/": 0.87,
     "/copilot/pilot/": 0.86,
+    "/copilot/trial/": 0.90,
     "/status/": 0.75,
     "/faq/": 0.8,
     "/for-whom/": 0.8,

@@ -323,7 +323,8 @@ Responsibilities:
 - Procurement confidence
 - Case studies
 - Security and compliance posture
-- Conversion to intake or platform trial
+- Conversion to intake, **platform trial**, or **free dev sandbox** (`/copilot/trial/`)
+- Published tiers: Starter · Sandbox · Production (packaging modes within three SKUs)
 
 ### 8.2 Identity Service
 

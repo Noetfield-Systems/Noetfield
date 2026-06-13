@@ -37,8 +37,9 @@ The **1000 NF-PLAN registry** is fully synced (`done` = pattern dedup). The **50
 | **S5-federal** | AIA · ADM · NIST | `/federal/` F lane only | 0–1 |
 | **S7-hardening** | Engineering best practice | Coherence · openapi · pytest | after S0–S4 |
 | **S8-agentic** | Hub commercial | Outreach send/call — **never NF-CLOUD** | Hub only |
+| **S9-packaging** | async-demo · trial-sandbox · published-tiers | Starter → Sandbox → Production ladder on www | **2** |
 
-**Rule:** `PLAN WITH NO ASF` picks **≤3** from **S0 → S6 → S2 → S4** first; **max 2 S0** per iter; never three S7 tasks in one iter.
+**Rule:** `PLAN WITH NO ASF` picks **≤3** from **S9 → S0 → S6 → S2 → S4** first; **max 2 S0** per iter; never three S7 tasks in one iter.
 
 ### v2 intelligence signals
 

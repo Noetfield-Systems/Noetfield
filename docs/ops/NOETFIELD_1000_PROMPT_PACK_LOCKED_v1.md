@@ -9,6 +9,22 @@
 
 ---
 
+## Appendix — packaging tier sprint (iter 20)
+
+**SSOT:** [PACKAGING_TIER_SANDBOX_LOCKED_v1.md](../strategy/PACKAGING_TIER_SANDBOX_LOCKED_v1.md)
+
+When founder requests **packaging / async demo / trial sandbox** upgrade:
+
+| Pick | ID | Outcome |
+|------|-----|---------|
+| 1 | ship-packaging-trial-page-060 | `/copilot/trial/` · verify-packaging-tier |
+| 2 | ship-packaging-tiers-www-061 | Published tiers on www |
+| 3 | ship-agentic-autonomous-copy-062 | Agentic autonomous production narrative |
+
+**Success tier:** S9-packaging (pick before S7 hardening).
+
+---
+
 ## Trigger: PLAN WITH NO ASF
 
 > **CLOUD AGENTS:** Read the **Appendix — post-sync era** and **Step table overlay** below before the locked step table. Post-sync queue = GTM_NEXT, not GTM_PRIORITY outreach rows.

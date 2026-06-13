@@ -14,8 +14,9 @@
 | `/enterprise/` | Institutional PRS · three offerings | `public-surface-map`, `OFFERINGS_LOCKED` | CISO/CRO narrative | `operations@` |
 | `/trust-brief/` | $10K diagnostic | `OFFERINGS_LOCKED` | 6-week engagement scope | `/trust-brief/intake/` |
 | `/copilot/` | Copilot Governance Pack hero | `NOETFIELD_COPILOT_SME_*`, SME blueprint | M365 governance · evidence | `/copilot/pilot/` |
-| `/copilot/demo/` | 5-minute demo | `DEMO_REHEARSAL_CHECKLIST` | Evaluate → TLE → export | Link only |
-| `/copilot/pilot/` | Design partner program | `DESIGN_PARTNER_*`, SME blueprint | CAD $2K–$10K · board PDF | `operations@` |
+| `/copilot/demo/` | Full async demo | `DEMO_REHEARSAL_CHECKLIST` | Evaluate → TLE → export · no sales call | Link + trial |
+| `/copilot/trial/` | Starter tier · trial | `PACKAGING_TIER_SANDBOX_LOCKED` | 14-day · 50 checks · dev sandbox | `/gate/intake/?vector=trial` |
+| `/copilot/pilot/` | Sandbox · design partner | `DESIGN_PARTNER_*`, SME blueprint | Dev + production mode · CAD $2K–10K | `operations@` |
 | `/copilot/procurement/` | Diligence pack | `PROCUREMENT_ONE_PAGER` | Controls · OpenAPI cite | `operations@` |
 | `/copilot/quickscan/*` | Self-assessment | SME buyer journey | Readiness steps | Optional |
 | `/copilot/readiness/` | Rollout checklist | `copilot-readiness-pilot-runbook` | Pre-pilot gates | Link |
