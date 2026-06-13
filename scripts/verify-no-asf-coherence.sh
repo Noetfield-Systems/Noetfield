@@ -314,6 +314,50 @@ else
   echo "SKIP gh not available for PR checks"
 fi
 
+# Forward queue v5 — FQ-401–500 MSP-only lane lock (ship-fwd-550)
+v5="${ROOT}/docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md"
+if [[ -f "$v5" ]]; then
+  if grep -qF "MSP-ONLY lane lock" "$v5" && grep -qF "FQ-401–500" "$v5" 2>/dev/null || grep -qF "401–500" "$v5"; then
+    echo "OK   forward queue v5 MSP lane lock header"
+  else
+    echo "FAIL v5 missing MSP lane lock header" >&2
+    fail=1
+  fi
+  if grep -qF "NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md" docs/SSOT_INDEX.md 2>/dev/null \
+     && grep -qF "NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md" os/LOCKED_REFERENCE_INDEX.md 2>/dev/null; then
+    echo "OK   SSOT indexes v5 MSP queue"
+  else
+    echo "FAIL SSOT missing v5 MSP queue link" >&2
+    fail=1
+  fi
+  if python3 - <<'PY' "$v5"
+import re, sys
+from pathlib import Path
+text = Path(sys.argv[1]).read_text()
+rows = re.findall(r"ship-fwd-\d+ \| (\d+) \| .*? \| (M\+[AHD]) \|", text)
+fq = {int(a) for a, _ in rows}
+lanes = {b for _, b in rows}
+bad = sorted(set(range(401, 501)) - fq)
+if len(rows) != 100 or bad or lanes - {"M+A", "M+H", "M+D"}:
+    raise SystemExit(1)
+PY
+  then
+    echo "OK   v5 has 100 M-lane rows FQ-401–500"
+  else
+    echo "FAIL v5 lane/FQ validation" >&2
+    fail=1
+  fi
+  if grep -qE '\| [^|]+ \| [^|]+ \| [^|]+ \| F\+' "$v5" 2>/dev/null; then
+    echo "FAIL v5 contains F-lane rows" >&2
+    fail=1
+  else
+    echo "OK   v5 no F-lane rows"
+  fi
+else
+  echo "FAIL missing docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md" >&2
+  fail=1
+fi
+
 if [[ "$fail" -eq 0 ]]; then
   echo ""
   echo "verify-no-asf-coherence passed."

@@ -2,7 +2,7 @@
 
 **Status:** Research-derived forward queue · **MSP-ONLY lane lock** — Form PICK before implement  
 **Path:** `docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md`  
-**Updated:** 2026-06-03  
+**Updated:** 2026-06-13  
 **Grounding:** [MARKET_ANALYSIS_2026_LOCKED_v1.md](./MARKET_ANALYSIS_2026_LOCKED_v1.md) · [NOETFIELD_FORWARD_QUEUE_100_v3.md](./NOETFIELD_FORWARD_QUEUE_100_v3.md) · Microsoft Partner Center May 2026 · Pax8 Agent 365 · Fusion Computing MSP pilots  
 **ID namespace:** `ship-fwd-460` … `ship-fwd-559` (continues v4 post–`ship-fwd-459`)
 
