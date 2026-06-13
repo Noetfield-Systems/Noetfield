@@ -63,6 +63,7 @@
 | [POSITIONING_CLIENT_SYNTHESIS_v1.md](./diligence/POSITIONING_CLIENT_SYNTHESIS_v1.md) | Client + investor-safe GTM synthesis |
 | [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](./strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md) | Client-safe site plan + 10-step institutional redesign |
 | [INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md](./strategy/INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md) | VC / FRFI bank-grade UI 100-plan |
+| [MARKET_SUCCESS_1000_ROADMAP_v1.md](./strategy/MARKET_SUCCESS_1000_ROADMAP_v1.md) | Market success model 1000-step × 10-phase roadmap (SM-01–SM-10) |
 | [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | Forward queue v1 FQ-001–100 |
 | [NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md) | Forward queue v5 FQ-401–500 (M lane) |
 | [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./ops/plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md) | Deep analysis — 500 prompts pattern-mapped |

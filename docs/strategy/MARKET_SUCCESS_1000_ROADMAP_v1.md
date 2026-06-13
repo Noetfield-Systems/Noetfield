@@ -1,10 +1,11 @@
-# Market success model roadmap — 1000 steps × 10 phases (v2)
+# Market success model roadmap — 1000 steps × 10 phases (v3)
 
 **Status:** Strategic execution roadmap — **internal only** · not www copy without Form PICK
 **Path:** `docs/strategy/MARKET_SUCCESS_1000_ROADMAP_v1.md`
 **Updated:** 2026-06-03
 **Generator:** `scripts/generate_market_success_1000_roadmap.py` + `scripts/market_success_1000_steps_data.py`
-**Grounding:** [MARKET_ANALYSIS_2026_LOCKED_v1.md](./MARKET_ANALYSIS_2026_LOCKED_v1.md) · [SUCCESS_MODEL_TIERS_v1.md](../ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md)
+**Verify:** `scripts/verify-market-success-roadmap.sh` (in `plan-with-no-asf-verify`)
+**Grounding:** [MARKET_ANALYSIS_2026_LOCKED_v1.md](./MARKET_ANALYSIS_2026_LOCKED_v1.md) · [SUCCESS_MODEL_TIERS_v1.md](../ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) · [INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md](./INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md)
 
 > **Client-safe rule:** Archetypes **SM-01–SM-10** map to June 2026 market examples **#1–#10** — **no vendor names** in repo or www. Use pattern language externally.
 
@@ -74,6 +75,26 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 | P3 | 10 | SM-10 | Graph dedup + Customer #1 proof log |
 
 **Rule:** ≤3 tasks per iter · max 2 S0-proof picks · no vendor names on www.
+
+### E2E regression gate (run from scratch)
+
+Before promoting any phase milestone or www claim:
+
+```bash
+bash scripts/plan-with-no-asf-verify.sh   # full bundle
+bash scripts/verify-market-success-roadmap.sh
+python -m pytest tests/ -q
+python scripts/audit_final_system_lock.py  # 0 RPAA violations
+```
+
+| Gate | Pass criteria |
+|------|---------------|
+| plan-with-no-asf-verify | UI e2e · copilot pilot · procurement pack · coherence |
+| verify-market-success-roadmap | 1000 steps · 10 phases · generator sync · no vendors |
+| pytest | 179+ passed |
+| audit_final_system_lock | 0 forbidden public-layer violations |
+
+**Phase 10 close (mr-0991–1000):** all four gates green + Customer #1 proof log signed.
 
 ---
 

@@ -40,6 +40,9 @@ cd "$ROOT"
 
 python3 scripts/smoke_bank_grade_html.py
 
+chmod +x scripts/verify-market-success-roadmap.sh
+./scripts/verify-market-success-roadmap.sh
+
 chmod +x scripts/verify-no-asf-coherence.sh
 ./scripts/verify-no-asf-coherence.sh
 
