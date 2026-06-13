@@ -2,26 +2,37 @@
 
 When the founder says **PLAN WITH NO ASF**, start here. Pick the next **≤3 agent** items (not `asf_only` / not S8 Hub).
 
-**Unified 500 queue:** [UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) · **Next 50 enriched:** [ENRICHED_PICKS_NEXT_50_v1.md](../PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md)  
-**1000 registry:** [registry.json](../registry.json) (synced — pattern dedup) · **Tier taxonomy:** [SUCCESS_MODEL_TIERS_v1.md](../PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md)
+**v2 intelligence:** [PICK_INTELLIGENCE_v1.md](../PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) · **Unified 500:** [UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md)  
+**Tier taxonomy:** [SUCCESS_MODEL_TIERS_v1.md](../PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md)  
+**Next 50 auto-ranked:** [ENRICHED_PICKS_NEXT_50_v1.md](../PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md)  
+**Machine index:** [unified_500_index.json](../PROMPT_PACK_LOCKED/unified_500_index.json) (`prompt_structured` per plan)
 
-**Update:** `python3 scripts/generate_unified_prompt_pack_500.py` after forward-queue edits
+**Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`
 
-## Pick order (success model)
+## Wise pick order (v2)
 
-1. **S0-proof** — demo · TLE · procurement (customer #1)
-2. **S6-tle-wedge** — receipt differentiation
-3. **S2-copilot-complement** — Agent 365 / Purview
-4. **S4-trust-ui** — trust center / diligence
-5. **S3-msp** or **S5-federal** — lane-locked only when ICP matches
+1. Filter `ship_status: open` — skip `partial` unless extending a live slice
+2. Sort `priority_rank` ascending (lower = sooner)
+3. Max **2× S0** per iter · diversify tier · never 3× S7
+4. Read `prompt_structured.pre_read` + obey `stop_if` before code
 
-## Next 3 recommended (unified 500 — June 2026)
+| Tier | Pick when |
+|------|-----------|
+| **S0-proof** | Customer #1 — demo · TLE · procurement |
+| **S6-tle-wedge** | Receipt differentiation at procurement close |
+| **S2-copilot** | Agent 365 / Purview complement story |
+| **S4-trust-ui** | Diligence questionnaire inbound |
+| **S3-msp / S5-federal** | Lane-locked only when ICP matches |
 
-| Priority | ID | FQ | Tier | Plan |
-|----------|-----|-----|------|------|
-| 1 | ship-fwd-170 | 111 | S0 | Playwright smoke suite (`verify-ui-e2e` extension) |
-| 2 | ship-fwd-470 | 411 | S3 | 90-day MSP pilot SOW template v2 |
-| 3 | ship-fwd-520 | 461 | S3 | `make partner-verify` MSP technical smoke |
+## Next 3 recommended (v2 computed — open rows)
+
+| Priority | ID | FQ | Tier | GTM | Plan |
+|----------|-----|-----|------|-----|------|
+| 1 | ship-fwd-087 | 028 | S0 | 100 | Behavioral log export endpoint stub |
+| 2 | ship-fwd-091 | 032 | S0 | 100 | QuickScan scoring rubric v2 |
+| 3 | ship-fwd-081 | 022 | S6 | 88 | Tamper FAIL export verify hardening |
+
+**Also high rank:** `ship-fwd-170` (Playwright smoke, S0 rank ~8) · `ship-fwd-520` (partner-verify, MSP)
 
 ## GTM_NEXT (disk verify — iter 19 carry)
 
@@ -35,12 +46,12 @@ When the founder says **PLAN WITH NO ASF**, start here. Pick the next **≤3 age
 |----|---------|
 | **ship-design-partner-outreach-026** | One named CIO + demo URL sent |
 
-## Unified top 25 (machine-ranked)
+## Suggested iter bundle 1 (smart 3-pack)
 
-See [UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) § Top 25 picks.
+See [UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) § Suggested iter bundles — proof-first diversified packs.
 
 ## Recently completed (context)
 
+- v2 intelligence engine: weighted tiers · ship-aware · GTM impact scoring
+- 440 open · 60 partial forward-queue rows (filesystem-aware)
 - Institutional benchmark 10-step www + console pass (PR #54)
-- Unified 500 index generated (`unified_500_index.json`)
-- 1000-pack registry fully synced (pattern propagation — not empty backlog)

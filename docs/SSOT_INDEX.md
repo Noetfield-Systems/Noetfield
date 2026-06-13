@@ -63,6 +63,7 @@
 | [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](./strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md) | Benchmark map + 10-step institutional redesign |
 | [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | Forward queue v1 FQ-001–100 |
 | [NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md) | Forward queue v5 FQ-401–500 (M lane) |
+| [PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md](./ops/plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) | v2 pick logic — GTM impact · ship-aware |
 | [UNIFIED_500_MASTER_v1.md](./ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) | Unified 500 prompt pack — S0–S8 tiers |
 | [SUCCESS_MODEL_TIERS_v1.md](./ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) | Benchmark success model taxonomy |
 | [NOETFIELD_GTM_60_DAY_LOCKED_v1.md](./strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | 60-day CEO fence |

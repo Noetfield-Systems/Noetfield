@@ -371,8 +371,9 @@ fi
 unified_json="docs/ops/plans/PROMPT_PACK_LOCKED/unified_500_index.json"
 unified_master="docs/ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md"
 unified_tiers="docs/ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md"
+unified_intel="docs/ops/plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md"
 unified_gen="scripts/generate_unified_prompt_pack_500.py"
-for f in "$unified_json" "$unified_master" "$unified_tiers" "$unified_gen"; do
+for f in "$unified_json" "$unified_master" "$unified_tiers" "$unified_intel" "$unified_gen"; do
   if [[ -f "$f" ]]; then
     echo "OK   exists $f"
   else
@@ -388,6 +389,11 @@ data = json.loads(p.read_text())
 errs = []
 if data.get("count") != 500:
     errs.append(f"count={data.get('count')} expected 500")
+if data.get("version") != "v2":
+    errs.append(f"version={data.get('version')} expected v2")
+next3 = data.get("next_3_recommended", [])
+if len(next3) != 3:
+    errs.append(f"next_3_recommended len={len(next3)} expected 3")
 plans = data.get("plans", [])
 if len(plans) != 500:
     errs.append(f"plans array len={len(plans)} expected 500")
@@ -397,6 +403,9 @@ if len(top) != 25:
 ids = [x["id"] for x in plans]
 if len(set(ids)) != 500:
     errs.append("duplicate plan ids in unified index")
+p0 = plans[0] if plans else {}
+if "prompt_structured" not in p0 or "gtm_impact" not in p0:
+    errs.append("plans missing v2 fields (prompt_structured, gtm_impact)")
 fqs = [x.get("fq") for x in plans]
 if len(set(fqs)) != 500 or min(fqs) != 1 or max(fqs) != 500:
     errs.append(f"fq coverage: unique={len(set(fqs))} min={min(fqs) if fqs else 0} max={max(fqs) if fqs else 0}")
@@ -413,6 +422,7 @@ PY
 fi
 if [[ -f docs/ops/plans/no-asf/QUICK_PICK.md ]]; then
   if grep -q 'UNIFIED_500_MASTER_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
+     && grep -q 'PICK_INTELLIGENCE_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
      && grep -q 'SUCCESS_MODEL_TIERS_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
      && grep -q 'generate_unified_prompt_pack_500' docs/ops/plans/no-asf/QUICK_PICK.md; then
     echo "OK   QUICK_PICK unified 500 references"
@@ -422,6 +432,12 @@ if [[ -f docs/ops/plans/no-asf/QUICK_PICK.md ]]; then
   fi
 fi
 if [[ -f "$unified_master" ]] && [[ -f "$unified_json" ]] && command -v python3 >/dev/null 2>&1; then
+  if grep -q 'Next 3 recommended' "$unified_master" && grep -q 'Suggested iter bundles' "$unified_master"; then
+    echo "OK   UNIFIED_500_MASTER v2 sections (next 3 + bundles)"
+  else
+    echo "FAIL UNIFIED_500_MASTER missing v2 sections" >&2
+    fail=1
+  fi
   master_top="$(grep -cE '^[0-9]+\. \*\*ship-fwd-' "$unified_master" 2>/dev/null || true)"
   master_top="${master_top:-0}"
   if [[ "$master_top" -ge 25 ]]; then

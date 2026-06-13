@@ -45,6 +45,8 @@ When the founder says **PLAN WITH NO ASF**, run this fixed sequence — no ASF w
 | **Unified 500 (FQ-001–500)** | [plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md](./plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) |
 | **Success model tiers** | [plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md](./plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) |
 | **Enriched next 50 picks** | [plans/PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md](./plans/PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md) |
+| **Pick intelligence (v2)** | [plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md](./plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) |
+| **Machine index (JSON)** | [plans/PROMPT_PACK_LOCKED/unified_500_index.json](./plans/PROMPT_PACK_LOCKED/unified_500_index.json) |
 | **Markdown stubs** | [os/plans/](../../os/plans/) (`nf-future-*`) |
 
 **Regenerate:** `python3 scripts/generate-prompt-pack-v2.py`  
@@ -173,12 +175,13 @@ When `sync-prompt-pack-status.py` reports **1000/1000 `done`**, the registry is 
 
 ## Appendix — unified 500 forward queue (FQ-001–500)
 
-**Added:** 2026-06-13 · **Agent-maintained addendum**
+**Added:** 2026-06-13 · **Agent-maintained addendum** · **v2 intelligence engine**
 
-The **500 forward-queue prompts** (FQ-001–500 across v1–v5 batches) are the live strategic backlog, re-tiered against the **benchmark success model** (S0–S8). Use this layer **after** GTM_NEXT disk picks when choosing proof-first work.
+The **500 forward-queue prompts** (FQ-001–500) are re-tiered with **v2 pick intelligence**: weighted success tiers, GTM impact scoring (0–100), ship-aware status (`open` / `partial`), and structured `prompt_structured` fields per plan.
 
 | Asset | Path |
 |-------|------|
+| Pick intelligence | [PICK_INTELLIGENCE_v1.md](./plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) |
 | Machine index (500 plans) | [unified_500_index.json](./plans/PROMPT_PACK_LOCKED/unified_500_index.json) |
 | Human master + top 25 | [UNIFIED_500_MASTER_v1.md](./plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) |
 | Success tier taxonomy | [SUCCESS_MODEL_TIERS_v1.md](./plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) |

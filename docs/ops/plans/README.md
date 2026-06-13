@@ -9,6 +9,7 @@
 |------|---------|
 | [../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md](../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md) | **LOCKED** — 1000 prompt pack master index |
 | [PROMPT_PACK_LOCKED/](./PROMPT_PACK_LOCKED/) | GTM 100, agent ops 50, drift 100, tier gates, sources |
+| [PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md](./PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) | **v2 pick logic** — GTM impact · ship-aware · iter bundles |
 | [PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md](./PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) | **Unified 500** — FQ-001–500 success-model tiers |
 | [PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md](./PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) | S0–S8 benchmark taxonomy |
 | [PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md](./PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md) | Next 50 enriched forward-queue picks |

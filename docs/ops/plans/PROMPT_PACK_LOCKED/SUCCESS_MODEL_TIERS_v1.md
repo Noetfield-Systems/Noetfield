@@ -1,8 +1,9 @@
-# Success model tiers — prompt pack taxonomy (v1)
+# Success model tiers — prompt pack taxonomy (v2)
 
 **Status:** LOCKED taxonomy for unified 500 + 1000 pack picks  
 **Path:** `docs/ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md`  
-**Parent:** [UNIFIED_500_MASTER_v1.md](./UNIFIED_500_MASTER_v1.md)
+**Engine:** v2 — weighted keywords · GTM impact · ship-aware status  
+**Parent:** [UNIFIED_500_MASTER_v1.md](./UNIFIED_500_MASTER_v1.md) · [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
 
 ---
 
@@ -37,7 +38,16 @@ The **1000 NF-PLAN registry** is fully synced (`done` = pattern dedup). The **50
 | **S7-hardening** | Engineering best practice | Coherence · openapi · pytest | after S0–S4 |
 | **S8-agentic** | Hub commercial | Outreach send/call — **never NF-CLOUD** | Hub only |
 
-**Rule:** `PLAN WITH NO ASF` picks **≤3** from **S0 → S6 → S2 → S4** first; never three S7 tasks in one iter.
+**Rule:** `PLAN WITH NO ASF` picks **≤3** from **S0 → S6 → S2 → S4** first; **max 2 S0** per iter; never three S7 tasks in one iter.
+
+### v2 intelligence signals
+
+| Signal | Effect |
+|--------|--------|
+| `priority_rank` | Lower = pick sooner (composite score) |
+| `gtm_impact` | 0–100 buyer-visible weight |
+| `ship_status` | `open` > `partial` > skip `shipped` |
+| `prompt_structured` | pre_read · success_when · stop_if · anti_scope |
 
 ---
 
@@ -70,13 +80,19 @@ The **1000 NF-PLAN registry** is fully synced (`done` = pattern dedup). The **50
 
 ---
 
-## Enriched prompt template (copy-paste)
+## Enriched prompt template (v2 structured)
+
+Load `prompt_structured` from [unified_500_index.json](./unified_500_index.json) for the plan ID:
 
 ```
-As NF-CLOUD-AGENT (Noetfield only), implement {ship-fwd-NNN} FQ-{NNN}:
-{plan title}. Outcome: {outcome}. Success tier: {S0–S8}.
-Read: MEMORY_LOCKED + INSTITUTIONAL_BENCHMARK_10_STEP_PLAN + {lane doc}.
-Verify: {verify}. ≤3 tasks this iter. Update cursor-reply-latest.txt.
+role: NF-CLOUD-AGENT
+task: {plan title}
+outcome: {buyer-visible outcome}
+pre_read: [MEMORY_LOCKED, tier doc, lane doc]
+success_when: [verify passes, buyer page loads, ...]
+stop_if: [R-001, R-011, ≤3 tasks, no RPAA claims]
+anti_scope: [Tier B connectors, SSO, drift ML, infra sprawl]
+verify: {verify command}
 ```
 
 **F lane suffix:** `Read FEDERAL_AIA_ADM_NIST_v1 — no clearance/RPAA claims.`  
@@ -87,6 +103,7 @@ Verify: {verify}. ≤3 tasks this iter. Update cursor-reply-latest.txt.
 
 ## Related
 
+- [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
 - [UNIFIED_500_MASTER_v1.md](./UNIFIED_500_MASTER_v1.md)
 - [unified_500_index.json](./unified_500_index.json)
 - [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](../../strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md)
