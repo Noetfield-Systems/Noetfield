@@ -8,7 +8,7 @@
 
 **Lane key:** **A** = NF-CLOUD disk · **H** = Hub/agentic only · **D** = docs/spec only
 
-**v3 upgrade thesis:** v1 named categories; v2 named buyer-grade UX patterns; v3 names **operational proof at scale** — quarterly board RAG packs, credit-union MSP channel kits, Purview GA posture, drift/red-team hardening, and incident tabletop cadence — still scoped to receipt export law.
+**v3 upgrade thesis:** v1 named categories; v2 named buyer-grade UX patterns; v3 names **operational proof at scale** — quarterly board RAG packs, credit-union MSP channel kits, compliance metadata GA posture, drift/red-team hardening, and incident tabletop cadence — still scoped to receipt export law.
 
 ---
 
@@ -23,7 +23,7 @@
 | ship-fwd-264 | 205 | T1 | D | Compliance score definition | % systems with signed TLE sample | docs | EU readiness traffic-light |
 | ship-fwd-265 | 206 | T2 | A | Trend arrows on dashboard | QoQ block rate + export count | verify-ui-e2e | executive dashboard |
 | ship-fwd-266 | 207 | T1 | D | Actions-needed footer on board PDF | 2–3 bullets for board decision | manual | EPC quarterly cadence |
-| ship-fwd-267 | 208 | T2 | D | Vendor concentration ratio doc | Internal — M365 complement framing | confidentiality | OpenEmpower KPI |
+| ship-fwd-267 | 208 | T2 | D | Vendor concentration ratio doc | Internal — workspace complement framing | confidentiality | OpenEmpower KPI |
 | ship-fwd-268 | 209 | T1 | H | CFO/CRO intro outreach wave | Agentic regulated SMB CFO list | Hub | board oversight |
 | ship-fwd-269 | 210 | T1 | A | `/copilot/governance/` board metrics cite | One factual KPI strip | verify-gtm | governance meeting |
 
@@ -37,11 +37,11 @@
 | ship-fwd-271 | 212 | T1 | D | 25-point readiness crosswalk | Map QuickScan to ABT framework | spec review | myabt CU framework |
 | ship-fwd-272 | 213 | T1 | A | `/bank-pilot/` credit union variant | Shadow narrative — no RPAA | verify-no-asf | Canadian CU |
 | ship-fwd-273 | 214 | T2 | H | BC credit union outreach batch | Agentic wave — E-23 + Copilot | Hub | OSFI runway |
-| ship-fwd-274 | 215 | T1 | D | Guardian operating model one-pager | Entra + Purview + receipt layer | verify-gtm | ABT Guardian |
-| ship-fwd-275 | 216 | T2 | A | Member NPI fence in evaluate policy | BLOCK overshare patterns test | pytest | Purview DLP complement |
+| ship-fwd-274 | 215 | T1 | D | Guardian operating model one-pager | identity + compliance metadata + receipt layer | verify-gtm | ABT Guardian |
+| ship-fwd-275 | 216 | T2 | A | Member NPI fence in evaluate policy | BLOCK overshare patterns test | pytest | compliance metadata DLP complement |
 | ship-fwd-276 | 217 | T1 | D | PIPEDA + Law 25 metadata FAQ | Residency + audit retention bullets | verify-gtm | Fusion Computing |
 | ship-fwd-277 | 218 | T2 | H | MSP partner intro — Fusion pattern | Agentic Toronto/Vancouver MSPs | Hub | 60% activation SOW |
-| ship-fwd-278 | 219 | T1 | A | Purview GA five-step posture card | Link from `/copilot/readiness/` | verify-gtm | MC1280556 rollout |
+| ship-fwd-278 | 219 | T1 | A | compliance metadata GA five-step posture card | Link from `/copilot/readiness/` | verify-gtm | MC1280556 rollout |
 | ship-fwd-279 | 220 | T2 | D | Examiner evidence pack outline | What CCO hands NCUA/OSFI reviewer | docs | financial institutions |
 
 ---
@@ -89,7 +89,7 @@
 | ship-fwd-302 | 243 | T2 | H | MSP partner outreach — Canada | Agentic CSP partners Q1 2026 | Hub | channel GTM |
 | ship-fwd-303 | 244 | T1 | D | Granular delegated admin FAQ | GDAP least-privilege narrative | verify-gtm | ABT partner model |
 | ship-fwd-304 | 245 | T2 | A | White-label board PDF header option | Partner logo slot — Form PICK | manual | channel revenue |
-| ship-fwd-305 | 246 | T1 | D | Agent 365 Step 5 governance card | First three agents named template | verify-gtm | E7 Canada guide |
+| ship-fwd-305 | 246 | T1 | D | workspace agent registry Step 5 governance card | First three agents named template | verify-gtm | E7 Canada guide |
 | ship-fwd-306 | 247 | T2 | A | Partner pytest smoke pack | MSP can run `make ship-verify` subset | plan-with-no-asf | partner technical |
 | ship-fwd-307 | 248 | T1 | H | n8n partner lead routing spec | Founder approve Hub workflow | agentic | W3 integration |
 | ship-fwd-308 | 249 | T2 | D | Revenue share hypothesis memo | Internal — not www | confidentiality | second earner |
@@ -106,7 +106,7 @@
 | ship-fwd-312 | 253 | T2 | D | Quebec Law 25 AI notice outline | Internal counsel draft | legal draft | Fusion step 4 |
 | ship-fwd-313 | 254 | T1 | A | Data minimization in evaluate schema | Reject excess payload fields | pytest | privacy by design |
 | ship-fwd-314 | 255 | T2 | D | Retention schedule matrix | TLE vs audit vs traces | docs | Art. 19 + OSFI |
-| ship-fwd-315 | 256 | T1 | D | Inference region honest statement | M365 region — no false residency claim | verify-gtm | canada-partner-gtm |
+| ship-fwd-315 | 256 | T1 | D | Inference region honest statement | workspace region — no false residency claim | verify-gtm | canada-partner-gtm |
 | ship-fwd-316 | 257 | T2 | A | PII pattern blocklist expansion | Public chat + evaluate guards | pytest | CU member NPI |
 | ship-fwd-317 | 258 | T1 | D | Consent basis for training fence | No training on buyer data — ever | verify-no-asf | regulatory exposure |
 | ship-fwd-318 | 259 | T2 | A | Export redaction audit log | Who redacted what field | pytest | legal review |
@@ -140,7 +140,7 @@
 | ship-fwd-332 | 273 | T1 | D | SharePoint oversharing checklist v2 | Permission debt remediation ol | verify-gtm | QueryNow stall |
 | ship-fwd-333 | 274 | T2 | A | Retrieval policy BLOCK test | Unapproved corpus → REJECT | pytest | pre-execution |
 | ship-fwd-334 | 275 | T1 | D | Prompt library starter — 10 prompts | Governance meeting pack prompts | verify-gtm | MSP office hours |
-| ship-fwd-335 | 276 | T2 | A | `corpus_id` manifest stub API | Approved sources list mock | pytest | Purview index |
+| ship-fwd-335 | 276 | T2 | A | `corpus_id` manifest stub API | Approved sources list mock | pytest | compliance metadata index |
 | ship-fwd-336 | 277 | T1 | D | Hallucination escalation path | Human review before export | docs | board defensibility |
 | ship-fwd-337 | 278 | T2 | H | Knowledge admin outreach | Agentic — SharePoint owners | Hub | permission debt |
 | ship-fwd-338 | 279 | T1 | A | QuickScan RAG readiness dimension | 6th scoring axis optional | verify-gtm | Nexigen readiness |
@@ -152,12 +152,12 @@
 
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
-| ship-fwd-340 | 281 | T1 | D | Registry vs observability diagram | Agent 365 + Noetfield receipt layer | verify-gtm | category education |
+| ship-fwd-340 | 281 | T1 | D | Registry vs observability diagram | workspace agent registry + Noetfield receipt layer | verify-gtm | category education |
 | ship-fwd-341 | 282 | T2 | A | Fleet BLOCK/ALLOW ratio API | `GET /api/v1/fleet/ratios` mock | pytest | fleet governance |
 | ship-fwd-342 | 283 | T1 | A | Console fleet summary widget | MetricStrip fleet row | verify-ui-e2e | 72%/21% gap |
-| ship-fwd-343 | 284 | T2 | D | Purview audit export crosswalk | Map Purview event types → TLE | spec | Purview GA |
-| ship-fwd-344 | 285 | T2 | A | Agent lifecycle state enum | draft/active/revoked in manifest | pytest | Agent 365 registry |
-| ship-fwd-345 | 286 | T1 | D | Fiddler/Airia honest compare v3 | Receipt vs execution-trail | confidentiality | competitive |
+| ship-fwd-343 | 284 | T2 | D | compliance metadata audit export crosswalk | Map compliance metadata event types → TLE | spec | compliance metadata GA |
+| ship-fwd-344 | 285 | T2 | A | Agent lifecycle state enum | draft/active/revoked in manifest | pytest | workspace agent registry registry |
+| ship-fwd-345 | 286 | T1 | D | Internal positioning — receipt vs trail | Receipt vs execution-trail | confidentiality | competitive |
 | ship-fwd-346 | 287 | T2 | A | `last_evaluated_at` per agent row | Workspace connectors enrichment | dev-local | operational proof |
 | ship-fwd-347 | 288 | T2 | H | Agent owner accountability outreach | Agentic — named owner campaign | Hub | ClearPoint owner rule |
 | ship-fwd-348 | 289 | T1 | A | Copilot Studio agent receipt path | Studio agent ID in evaluate | tle-smoke | First West agents |
@@ -215,7 +215,7 @@ After v2 picks (`ship-fwd-160`, `ship-fwd-170`, `ship-fwd-180`) or parallel wher
 2. **ship-fwd-270** — Credit union Copilot case cite pack (FQ-211)  
 3. **ship-fwd-290** — AI incident response playbook v1 (FQ-231)  
 
-**Canadian channel trio:** ship-fwd-274 + ship-fwd-278 + ship-fwd-300 (Guardian + Purview GA + MSP kit)
+**Canadian channel trio:** ship-fwd-274 + ship-fwd-278 + ship-fwd-300 (Guardian + compliance metadata GA + MSP kit)
 
 ---
 
@@ -226,9 +226,9 @@ After v2 picks (`ship-fwd-160`, `ship-fwd-170`, `ship-fwd-180`) or parallel wher
 | Board RAG reporting | [OpenEmpower board metrics](https://www.openempower.com/blog/ai-governance-board-reporting-metrics-executives-need) | Export cover + metrics API — no F1 scores |
 | Quarterly cadence | [EPC Group board template](https://www.epcgroup.net/blog/ai-governance-risk-board-reporting-template) | 5–10 page narrative template |
 | Scorecard integration | [ClearPoint AI governance guide](https://www.clearpointstrategy.com/blog/ai-governance-guide) | Wire into existing GRC — not parallel dashboard |
-| Credit union rollout | [First West CU story](https://www.microsoft.com/en/customers/story/26016-first-west-credit-union-microsoft-365-copilot) | Case cite — complement Purview |
+| Credit union rollout | credit-union case pattern | Case cite — complement compliance metadata |
 | CU readiness 25-point | [ABT CU framework](https://www.myabt.com/blog/ai-readiness-assessment-credit-unions) | QuickScan crosswalk |
-| Purview AI GA | [ABT Purview GA guide](https://www.myabt.com/blog/microsoft-purview-for-ai-agents-ga-financial-institutions) | Five-step posture card |
+| compliance metadata AI GA | [ABT compliance metadata GA guide](https://www.myabt.com/blog/microsoft-compliance metadata-for-ai-agents-ga-financial-institutions) | Five-step posture card |
 | MSP activation | [Fusion Computing E7 Canada](https://fusioncomputing.ca/microsoft-365-e7-canadian-smbs/) | 90-day pilot SOW + activation dashboard |
 | GRC integration | [GRC in age of AI](https://www.youtube.com/watch?v=LrQbgbnWIEI) | Incident + drift into existing ITIL |
 

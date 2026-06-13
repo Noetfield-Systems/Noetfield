@@ -10,7 +10,7 @@
 
 **Execution sub-lane:** **F+A** = NF-CLOUD disk · **F+H** = Hub/agentic only · **F+D** = docs/spec only
 
-**v4 thesis:** Batches 001–300 mixed ICP; **301–400 is one lane** — US federal acquisition, ATO/FedRAMP posture, NIST AI RMF, GSA/OMB diligence — still **receipt export** law (complement M365/Agent 365, no custody).
+**v4 thesis:** Batches 001–300 mixed ICP; **301–400 is one lane** — US federal acquisition, ATO/FedRAMP posture, NIST AI RMF, GSA/OMB diligence — still **receipt export** law (complement workspace/workspace agent registry, no custody).
 
 ---
 
@@ -59,7 +59,7 @@
 | ship-fwd-384 | 325 | T2 | F+D | CA-7 continuous monitoring map | Drift verify ↔ monitoring story | spec | GOVERNANCE_DRIFT |
 | ship-fwd-385 | 326 | T1 | F+A | Trust center FedRAMP row | Status: planned — not authorized | verify-gtm | trust center |
 | ship-fwd-386 | 327 | T2 | F+D | PIA / SORN coordination outline | Privacy early involvement | legal draft | GSA privacy |
-| ship-fwd-387 | 328 | T2 | F+A | SSO SCIM federal requirements doc | Entra + SCIM spec — ASF gated | spec | FedRAMP enterprise |
+| ship-fwd-387 | 328 | T2 | F+A | SSO SCIM federal requirements doc | identity + SCIM spec — ASF gated | spec | FedRAMP enterprise |
 | ship-fwd-388 | 329 | T1 | F+D | Unauthorized AI use fence | No federal production hero | verify-no-asf | EFROS compliance |
 | ship-fwd-389 | 330 | T2 | F+H | Outreach: federal ISSO community | Agentic — posture not pitch | Hub | ATO reviewers |
 
@@ -103,7 +103,7 @@
 
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
-| ship-fwd-410 | 351 | T1 | F+A | Trust center federal section v2 | NIST + OMB rows live-safe | verify-gtm | Vanta federal pattern |
+| ship-fwd-410 | 351 | T1 | F+A | Trust center federal section v2 | NIST + OMB rows live-safe | verify-gtm | trust-center-grid |
 | ship-fwd-411 | 352 | T1 | F+A | `last_verified_at` federal context | Status cites verify on `/federal/` | plan-with-no-asf | continuous proof |
 | ship-fwd-412 | 353 | T2 | F+A | Control catalog NIST subcategory map | Each control → pytest name | pytest | EPC 47-control |
 | ship-fwd-413 | 354 | T1 | F+D | Federal security questionnaire JSON | Machine-readable federal answers | verify-gtm | questionnaire deflection |
@@ -137,7 +137,7 @@
 
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
-| ship-fwd-430 | 371 | T1 | F+A | Federal procurement auto-fill JSON v2 | GovCon questionnaire bundle | verify-gtm | Vanta deflection |
+| ship-fwd-430 | 371 | T1 | F+A | Federal procurement auto-fill JSON v2 | GovCon questionnaire bundle | verify-gtm | questionnaire-deflection |
 | ship-fwd-431 | 372 | T1 | F+A | Postman collection federal profile | Tagged federal endpoints | verify-gtm | technical buyers |
 | ship-fwd-432 | 373 | T2 | F+D | Subcontractor flow-down clause outline | Prime → sub AI governance | confidentiality | CMMC flow-down |
 | ship-fwd-433 | 374 | T1 | F+D | Data rights & IP federal FAQ | FAR data rights orientation | verify-gtm | GSA contracts |
@@ -154,10 +154,10 @@
 
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
-| ship-fwd-440 | 381 | T1 | F+D | Federal Copilot adoption narrative | M365 in agency tenant — complement | verify-gtm | Agent 365 federal |
-| ship-fwd-441 | 382 | T1 | F+A | `/federal/copilot/` page stub | Civilian agency funnel only | verify-gtm | federal M365 |
-| ship-fwd-442 | 383 | T2 | F+D | Purview federal tenant posture card | Five-step — agency variant | verify-gtm | Purview AI GA |
-| ship-fwd-443 | 384 | T1 | F+D | PIV/CAC SSO orientation | Federal identity — spec only | spec | Entra federal |
+| ship-fwd-440 | 381 | T1 | F+D | Federal Copilot adoption narrative | workspace in agency tenant — complement | verify-gtm | workspace agent registry federal |
+| ship-fwd-441 | 382 | T1 | F+A | `/federal/copilot/` page stub | Civilian agency funnel only | verify-gtm | federal workspace |
+| ship-fwd-442 | 383 | T2 | F+D | compliance metadata federal tenant posture card | Five-step — agency variant | verify-gtm | compliance metadata AI GA |
+| ship-fwd-443 | 384 | T1 | F+D | PIV/CAC SSO orientation | Federal identity — spec only | spec | identity federal |
 | ship-fwd-444 | 385 | T2 | F+A | Federal permission debt checklist | Oversharing — civilian agencies | verify-gtm | QueryNow stall |
 | ship-fwd-445 | 386 | T1 | F+H | Outreach: civilian agency IT leads | Agentic — not defense | Hub | OMB inventory |
 | ship-fwd-446 | 387 | T2 | F+D | Records management federal FAQ | NARA alignment — metadata | docs | federal records |
@@ -198,7 +198,7 @@
 
 | Batch | FQ range | Lane | ICP |
 |-------|----------|------|-----|
-| v1 | 001–100 | Mixed (A/H/D) | Agent 365, OSFI, EU, SME |
+| v1 | 001–100 | Mixed (A/H/D) | workspace agent registry, OSFI, EU, SME |
 | v2 | 101–200 | Mixed | Trust center, Playwright, UI |
 | v3 | 201–300 | Mixed | Board, CU, MSP, drift |
 | **v4** | **301–400** | **F only** | **US federal acquisition & GovCon** |

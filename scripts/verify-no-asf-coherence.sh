@@ -465,6 +465,36 @@ if [[ -f "$unified_master" ]] && [[ -f "$unified_json" ]] && command -v python3 
   fi
 fi
 
+# Client-safe copy — no competitor/vendor names on www or prompt pack
+FORBIDDEN_VENDOR_RE='Vanta|Inforcer|Veridra|Credo|Drata|OneTrust|Holistic|Fiddler|Gateplex|Cloudiway|AvePoint|Lighthouse|ADJUDON|Audital|Trinitite|Modulos|benchmark-ui|BENCHMARK_SYNTHESIS|INSTITUTIONAL_BENCHMARK|COPILOT_COMPLEMENT_BENCHMARK|Typical GRC'
+vendor_fail=0
+vendor_paths=(
+  index.html
+  copilot/index.html
+  trust-center/index.html
+  trust-ledger/index.html
+  partners/index.html
+  partners/msp/index.html
+  federal/index.html
+  enterprise/index.html
+  copilot/procurement/index.html
+  docs/ops/plans/PROMPT_PACK_LOCKED/unified_500_index.json
+  docs/ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md
+  docs/ops/plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md
+)
+for vf in "${vendor_paths[@]}"; do
+  if [[ -f "$vf" ]] && grep -qiE "$FORBIDDEN_VENDOR_RE" "$vf" 2>/dev/null; then
+    echo "FAIL forbidden vendor/compare string in $vf" >&2
+    grep -niE "$FORBIDDEN_VENDOR_RE" "$vf" 2>/dev/null | head -3 >&2 || true
+    vendor_fail=1
+  fi
+done
+if [[ "$vendor_fail" -eq 0 ]]; then
+  echo "OK   client-safe copy guard (no vendor names on www/prompt pack)"
+else
+  fail=1
+fi
+
 if [[ "$fail" -eq 0 ]]; then
   echo ""
   echo "verify-no-asf-coherence passed."

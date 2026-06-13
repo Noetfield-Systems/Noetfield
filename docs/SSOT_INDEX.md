@@ -60,14 +60,14 @@
 | Doc | Role |
 |-----|------|
 | [MARKET_ANALYSIS_2026_LOCKED_v1.md](./strategy/MARKET_ANALYSIS_2026_LOCKED_v1.md) | Live research synthesis (June 2026) |
-| [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](./strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md) | Benchmark map + 10-step institutional redesign |
+| [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](./strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md) | Client-safe site plan + 10-step institutional redesign |
 | [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | Forward queue v1 FQ-001–100 |
 | [NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md) | Forward queue v5 FQ-401–500 (M lane) |
-| [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./ops/plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md) | Deep analysis — 500 prompts benchmark-mapped |
+| [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./ops/plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md) | Deep analysis — 500 prompts pattern-mapped |
 | [ALL_500_TIER_INDEX_v1.md](./ops/plans/PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md) | Full 500 priority-ranked table |
-| [PICK_INTELLIGENCE_v1.md](./ops/plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) | v3 pick logic — goal alignment · benchmark refs |
+| [PICK_INTELLIGENCE_v1.md](./ops/plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) | v3 pick logic — goal alignment · pattern refs |
 | [UNIFIED_500_MASTER_v1.md](./ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) | Unified 500 prompt pack — S0–S8 tiers |
-| [SUCCESS_MODEL_TIERS_v1.md](./ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) | Benchmark success model taxonomy |
+| [SUCCESS_MODEL_TIERS_v1.md](./ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) | Client success model taxonomy |
 | [NOETFIELD_GTM_60_DAY_LOCKED_v1.md](./strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | 60-day CEO fence |
 
 ---

@@ -24,19 +24,19 @@
 
 | Cluster | Count | Wise use |
 |---------|-------|----------|
-| general | 190 | Evaluate case-by-case |
-| msp-channel | 76 | MSP sprint only (M lane) |
-| proof-export | 68 | Same iter or next — tamper, board pack, TLE export |
-| federal-lane | 49 | Federal intake only (F lane) |
-| copilot-registry | 46 | Design partner briefing — Agent 365 complement |
+| general | 195 | Evaluate case-by-case |
+| msp-channel | 78 | MSP sprint only (M lane) |
+| proof-export | 71 | Same iter or next — tamper, board pack, TLE export |
+| federal-lane | 50 | Federal intake only (F lane) |
+| copilot-registry | 34 | Design partner briefing — registry-vs-receipt complement |
 | proof-demo | 27 | Customer #1 iter — demo script, Playwright, QuickScan |
 | ops-hardening | 26 | After proof ships |
-| trust-diligence | 18 | Security questionnaire inbound |
+| trust-diligence | 19 | Security questionnaire inbound |
 
 ## Sprint themes (founder pick one/week)
 
 - **customer-1-proof-week** (avg wisdom 100): ship-fwd-097 · ship-fwd-109 · ship-fwd-124 · ship-fwd-170 · ship-fwd-260
-- **copilot-story-week** (avg wisdom 88): ship-fwd-062 · ship-fwd-461 · ship-fwd-060 · ship-fwd-220 · ship-fwd-229
+- **copilot-story-week** (avg wisdom 80): ship-fwd-062 · ship-fwd-229 · ship-fwd-509 · ship-fwd-064 · ship-fwd-069
 - **trust-diligence-week** (avg wisdom 72): ship-fwd-385 · ship-fwd-203 · ship-fwd-083 · ship-fwd-166 · ship-fwd-161
 - **msp-enablement-week** (avg wisdom 87): ship-fwd-477 · ship-fwd-499 · ship-fwd-489 · ship-fwd-492 · ship-fwd-490
 - **federal-intake-week** (avg wisdom 49): ship-fwd-401 · ship-fwd-373 · ship-fwd-374 · ship-fwd-412 · ship-fwd-395

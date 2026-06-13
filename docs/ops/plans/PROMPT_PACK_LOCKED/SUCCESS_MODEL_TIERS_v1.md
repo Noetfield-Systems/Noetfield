@@ -9,7 +9,7 @@
 
 ## Why this exists
 
-The **1000 NF-PLAN registry** is fully synced (`done` = pattern dedup). The **500 forward queue** (FQ-001–500) is the live strategic backlog. This doc **re-tiers both** against the **benchmark success model** so agents pick proof-first work, not infra sprawl.
+The **1000 NF-PLAN registry** is fully synced (`done` = pattern dedup). The **500 forward queue** (FQ-001–500) is the live strategic backlog. This doc **re-tiers both** against the **client success model** so agents pick proof-first work, not infra sprawl.
 
 **Bottleneck (locked):** GTM validation 2/10 — pick **S0** before **S7**.
 
@@ -19,21 +19,21 @@ The **1000 NF-PLAN registry** is fully synced (`done` = pattern dedup). The **50
 
 | Axis | Values | Meaning |
 |------|--------|---------|
-| **Success tier (S0–S8)** | Benchmark-aligned buyer outcome | What wins deals |
+| **Success tier (S0–S8)** | Pattern-aligned buyer outcome | What wins deals |
 | **Execution lane (A/D/H/F/M)** | How work ships | A=disk · D=docs · H=Hub · F/M=ICP lock |
 
 ---
 
 ## Success tiers (priority order)
 
-| Tier | Benchmark reference | Noetfield goal | Max picks / iter |
-|------|---------------------|----------------|------------------|
-| **S0-proof** | 5-min demo · board PDF | One contracted pilot uses TLE export in meeting | **2** |
-| **S6-tle-wedge** | Veridra · ADJUDON · Audital | Procurement closes on receipt portability | 1 |
-| **S2-copilot-complement** | Purview · Agent 365 · Inforcer | Registry-vs-receipt story on www | 1 |
-| **S4-trust-ui** | OneTrust · Vanta · Drata | Trust center + framework grid diligence | 1 |
-| **S1-positioning** | Credo · Holistic | Hero/copy refresh (Form PICK) | 0–1 |
-| **S3-msp-channel** | AvePoint · Lighthouse | `/partners/msp/` + SOW attach | 0–1 |
+| Tier | Pattern cluster | Noetfield goal | Max picks / iter |
+|------|-----------------|----------------|------------------|
+| **S0-proof** | board-pdf-moment | One contracted pilot uses TLE export in meeting | **2** |
+| **S6-tle-wedge** | receipt-export-wedge | Procurement closes on receipt portability | 1 |
+| **S2-copilot-complement** | registry-vs-receipt | Registry-vs-receipt story on www | 1 |
+| **S4-trust-ui** | trust-center-grid | Trust center + framework grid diligence | 1 |
+| **S1-positioning** | buyer-hero | Hero/copy refresh (Form PICK) | 0–1 |
+| **S3-msp-channel** | msp-two-tier | `/partners/msp/` + SOW attach | 0–1 |
 | **S5-federal** | AIA · ADM · NIST | `/federal/` F lane only | 0–1 |
 | **S7-hardening** | Engineering best practice | Coherence · openapi · pytest | after S0–S4 |
 | **S8-agentic** | Hub commercial | Outreach send/call — **never NF-CLOUD** | Hub only |
@@ -106,4 +106,4 @@ verify: {verify command}
 - [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
 - [UNIFIED_500_MASTER_v1.md](./UNIFIED_500_MASTER_v1.md)
 - [unified_500_index.json](./unified_500_index.json)
-- [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](../../strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md)
+- [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](../../strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md)

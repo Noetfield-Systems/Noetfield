@@ -114,28 +114,28 @@ PATH_ARTIFACTS: tuple[tuple[str, str], ...] = (
 PRE_READ_BY_TIER: dict[str, tuple[str, ...]] = {
     "S0-proof": (
         "MEMORY_LOCKED.yaml",
-        "INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md",
+        "INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md",
         "NOETFIELD_GTM_60_DAY_LOCKED_v1.md",
     ),
     "S6-tle-wedge": (
         "MEMORY_LOCKED.yaml",
         "TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md",
-        "POSITIONING_BENCHMARK_SYNTHESIS_v1.md",
+        "POSITIONING_CLIENT_SYNTHESIS_v1.md",
     ),
     "S2-copilot-complement": (
         "MEMORY_LOCKED.yaml",
-        "COPILOT_COMPLEMENT_BENCHMARK_v1.md",
+        "COPILOT_COMPLEMENT_GUIDE_v1.md",
         "NOETFIELD_COPILOT_SME_SYSTEM_DESIGN_LOCKED_v1.md",
     ),
     "S4-trust-ui": (
         "MEMORY_LOCKED.yaml",
-        "INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md",
+        "INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md",
         "PAGE_AUTHORITY_MAP.md",
     ),
     "S1-positioning": (
         "MEMORY_LOCKED.yaml",
         "PRODUCT_TRUTH.md",
-        "POSITIONING_BENCHMARK_SYNTHESIS_v1.md",
+        "POSITIONING_CLIENT_SYNTHESIS_v1.md",
     ),
     "S3-msp-channel": (
         "MEMORY_LOCKED.yaml",
@@ -171,58 +171,58 @@ ANTI_SCOPE = (
     "Infrastructure sprawl unrelated to outcome",
 )
 
-# Benchmark success model — maps tiers to reference vendors + 10-step plan
-BENCHMARK_BY_TIER: dict[str, dict[str, str | int | tuple[str, ...]]] = {
+# Success patterns — maps tiers to internal pattern labels + 10-step plan
+PATTERN_BY_TIER: dict[str, dict[str, str | int | tuple[str, ...]]] = {
     "S0-proof": {
-        "refs": ("Vanta", "Drata", "Credo AI"),
+        "refs": ("board-pdf-moment", "demo-path", "procurement-zip"),
         "step": 5,
         "wedge": "5-min board PDF moment — buyer sees confidence + export path",
         "goal": "customer_1",
     },
     "S6-tle-wedge": {
-        "refs": ("Veridra", "ADJUDON", "Audital"),
+        "refs": ("receipt-export-wedge", "rid-lineage", "tamper-verify"),
         "step": 7,
         "wedge": "One receipt board, auditor, and MSP cite — same RID",
         "goal": "tle_wedge",
     },
     "S2-copilot-complement": {
-        "refs": ("Microsoft Purview", "Agent 365", "Inforcer"),
+        "refs": ("registry-vs-receipt", "metadata-index", "msp-evaluate"),
         "step": 3,
         "wedge": "Registry tells what exists; Noetfield tells what was permitted",
         "goal": "copilot_story",
     },
     "S4-trust-ui": {
-        "refs": ("OneTrust", "Vanta", "Drata"),
+        "refs": ("trust-center-grid", "framework-rows", "diligence-shortcut"),
         "step": 5,
         "wedge": "Honest framework grid — oriented not certified",
         "goal": "trust_diligence",
     },
     "S1-positioning": {
-        "refs": ("Credo AI", "Holistic AI", "Veridra"),
+        "refs": ("buyer-hero", "receipt-wedge", "procurement-line"),
         "step": 2,
         "wedge": "Audit trail your Copilot deployment will be asked for",
         "goal": "positioning",
     },
     "S3-msp-channel": {
-        "refs": ("Inforcer", "AvePoint", "Lighthouse"),
+        "refs": ("msp-two-tier", "90-day-sow", "white-label-export"),
         "step": 4,
         "wedge": "MSP delivers receipt, not another dashboard",
         "goal": "msp_channel",
     },
     "S5-federal": {
-        "refs": ("Canada AIA", "TBS ADM", "NIST AI RMF"),
+        "refs": ("federal-framework-map", "aia-adm-nist", "vendor-layer-only"),
         "step": 6,
         "wedge": "Pre-execution evidence — vendor layer only",
         "goal": "federal_lane",
     },
     "S7-hardening": {
-        "refs": ("Engineering best practice",),
+        "refs": ("engineering-hygiene",),
         "step": 10,
         "wedge": "Verify bundle stays green — no buyer story alone",
         "goal": "engineering",
     },
     "S8-agentic": {
-        "refs": ("Hub commercial",),
+        "refs": ("hub-commercial",),
         "step": 0,
         "wedge": "Founder Hub sends; NF-CLOUD never dials",
         "goal": "agentic",
@@ -319,12 +319,12 @@ def infer_ship_status(plan: str, outcome: str) -> str:
     return "open"
 
 
-def benchmark_meta(row: dict) -> dict:
+def pattern_meta(row: dict) -> dict:
     tier = row["success_tier"]
-    meta = BENCHMARK_BY_TIER.get(tier, BENCHMARK_BY_TIER["S7-hardening"])
+    meta = PATTERN_BY_TIER.get(tier, PATTERN_BY_TIER["S7-hardening"])
     return {
-        "benchmark_refs": list(meta["refs"]),
-        "benchmark_step": meta["step"],
+        "pattern_refs": list(meta["refs"]),
+        "pattern_step": meta["step"],
         "copy_wedge": meta["wedge"],
         "locked_goal": meta["goal"],
     }
@@ -334,7 +334,7 @@ def goal_alignment_score(row: dict) -> int:
     if row["ship_status"] == "shipped":
         return 0
     blob = f"{row['plan']} {row['outcome']}".lower()
-    tier_goal = BENCHMARK_BY_TIER.get(row["success_tier"], {}).get("goal", "engineering")
+    tier_goal = PATTERN_BY_TIER.get(row["success_tier"], {}).get("goal", "engineering")
     kws = GOAL_ALIGNMENT_KEYWORDS.get(tier_goal, ())
     score = sum(w for k, w in kws if k in blob)
     if row["success_tier"] == "S0-proof":
@@ -370,7 +370,7 @@ def buyer_moment(row: dict) -> str:
     moments = {
         "S0-proof": "CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min",
         "S6-tle-wedge": "Procurement asks for tamper evidence → export FAIL on mutation proves integrity",
-        "S2-copilot-complement": "M365 admin compares Purview registry vs Noetfield receipt in briefing",
+        "S2-copilot-complement": "Workspace admin compares platform registry vs Noetfield receipt in briefing",
         "S4-trust-ui": "Security reviewer opens trust center → framework grid + honest posture",
         "S1-positioning": "Founder Form PICK → hero copy matches PRODUCT_TRUTH",
         "S3-msp-channel": "MSP partner attaches 90-day SOW → white-label board PDF for end client",
@@ -383,9 +383,9 @@ def buyer_moment(row: dict) -> str:
 
 def redesigned_prompt(row: dict) -> str:
     """Brainstorm-enriched high-grade agent instruction."""
-    bm = benchmark_meta(row)
+    bm = pattern_meta(row)
     s = row.get("prompt_structured") or structured_prompt(row)
-    refs = " · ".join(bm["benchmark_refs"][:3])
+    refs = " · ".join(bm["pattern_refs"][:3])
     artifact = infer_artifact_path(row)
     moment = buyer_moment(row)
     if row["lane"].endswith("+H") or row["lane"] == "H":
@@ -401,7 +401,7 @@ def redesigned_prompt(row: dict) -> str:
         f"**Tier:** {row['success_tier']} · **Phase:** {row.get('gtm_phase', '')} · "
         f"**Goal:** {bm['locked_goal']} · **GTM:** {row.get('gtm_impact', 0)} · "
         f"**Alignment:** {row.get('goal_alignment', 0)}\n"
-        f"**Benchmark pattern ({refs}):** {bm['copy_wedge']}\n"
+        f"**Success pattern ({refs}):** {bm['copy_wedge']}\n"
         f"**Buyer moment:** {moment}\n"
         f"**Task:** {row['plan']}\n"
         f"**Outcome:** {row['outcome']}\n"
@@ -723,7 +723,7 @@ def parse_queues() -> list[dict]:
             row["gtm_impact"] = gtm_impact_score(row)
             row["goal_alignment"] = goal_alignment_score(row)
             row["gtm_phase"] = GTM_PHASE_BY_TIER.get(row["success_tier"], "P6-hardening")
-            row.update(benchmark_meta(row))
+            row.update(pattern_meta(row))
             row["artifact_path"] = infer_artifact_path(row)
             row["buyer_moment"] = buyer_moment(row)
             row["pick_cluster"] = classify_pick_cluster(plan, outcome)
@@ -786,14 +786,14 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
         "",
         "## Success model tiers (pick order)",
         "",
-        "| Tier | Benchmark lane | Pick when |",
-        "|------|----------------|-----------|",
-        "| **S0-proof** | Demo / TLE / procurement | Customer #1 — board PDF in real meeting |",
-        "| **S6-tle-wedge** | Veridra · ADJUDON · Audital | Procurement close — receipt differentiation |",
-        "| **S2-copilot-complement** | Purview · Agent 365 · Inforcer | Copilot design partner runway |",
-        "| **S4-trust-ui** | OneTrust · Vanta · Drata | Diligence questionnaire inbound |",
-        "| **S1-positioning** | Credo · Holistic · Veridra | www copy refresh after Form PICK |",
-        "| **S3-msp-channel** | Inforcer · AvePoint · Lighthouse | MSP partner briefing |",
+        "| Tier | Pattern cluster | Pick when |",
+        "|------|-----------------|-----------|",
+        "| **S0-proof** | board-pdf-moment | Customer #1 — board PDF in real meeting |",
+        "| **S6-tle-wedge** | receipt-export-wedge | Procurement close — receipt differentiation |",
+        "| **S2-copilot-complement** | registry-vs-receipt | Copilot design partner runway |",
+        "| **S4-trust-ui** | trust-center-grid | Diligence questionnaire inbound |",
+        "| **S1-positioning** | buyer-hero | www copy refresh after Form PICK |",
+        "| **S3-msp-channel** | msp-two-tier | MSP partner briefing |",
         "| **S5-federal** | AIA · ADM · NIST | F lane intake only |",
         "| **S7-hardening** | Engineering hygiene | After S0–S4 slices ship |",
         "| **S8-agentic** | Hub outreach | R-011 — not NF-CLOUD disk |",
@@ -818,7 +818,7 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
             f"{i}. **{r['id']}** FQ-{r['fq']:03d} · `{r['success_tier']}` · "
             f"{r.get('gtm_phase', '')} · GTM {r['gtm_impact']} · goal {r.get('goal_alignment', 0)} · "
             f"{r['ship_status']} · {r['plan']} — _{r['pick_rationale']}_ — "
-            f"benchmark: {', '.join(r.get('benchmark_refs', [])[:2])}"
+            f"pattern: {', '.join(r.get('pattern_refs', [])[:2])}"
         )
 
     lines.extend(["", "## Enriched prompts by success tier", ""])
@@ -852,7 +852,7 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
         "- [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)",
         "- [SUCCESS_MODEL_TIERS_v1.md](./SUCCESS_MODEL_TIERS_v1.md)",
         "- [ENRICHED_PICKS_NEXT_50_v1.md](./ENRICHED_PICKS_NEXT_50_v1.md)",
-        "- [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](../../strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md)",
+        "- [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](../../strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md)",
         "",
     ])
     out.write_text("\n".join(lines), encoding="utf-8")
@@ -870,9 +870,9 @@ def emit_enriched_picks(rows: list[dict], out: Path) -> None:
         ("H", "S1-positioning", "S1 Positioning", 4),
     ]
     lines = [
-        "# Enriched prompt picks — next 50 (v3 benchmark-ranked)",
+        "# Enriched prompt picks — next 50 (pattern-ranked)",
         "",
-        "**Status:** Goal-aligned · benchmark-mapped · auto-ranked",
+        "**Status:** Goal-aligned · pattern-mapped · auto-ranked",
         "**Full redesigned prompts:** `unified_500_index.json` → `prompt_redesigned` per ID",
         "**Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`",
         "**Pick rule:** ≤3 per iter · open first · read `prompt_structured` in index JSON",
@@ -886,15 +886,15 @@ def emit_enriched_picks(rows: list[dict], out: Path) -> None:
         tier_rows.sort(key=priority_score)
         lines.append(f"## Wave {wave_id} — {title}")
         lines.append("")
-        lines.append("| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |")
-        lines.append("|---|-----|-----|-----|------|--------|-----------|------|")
+        lines.append("| # | ID | FQ | GTM | Goal | Status | Pattern | Plan |")
+        lines.append("|---|-----|-----|-----|------|--------|---------|------|")
         shown = 0
         for r in tier_rows:
             if shown >= limit:
                 break
             pick_num += 1
             label = f"{wave_id}{shown + 1}"
-            refs = r.get("benchmark_refs", ["—"])[0]
+            refs = r.get("pattern_refs", ["—"])[0]
             lines.append(
                 f"| {label} | {r['id']} | {r['fq']:03d} | {r['gtm_impact']} | "
                 f"{r.get('goal_alignment', 0)} | {r['ship_status']} | {refs} | {r['plan'][:35]} |"
@@ -933,7 +933,7 @@ def emit_pick_intelligence(rows: list[dict], bundles: list[dict], out: Path) -> 
     lines = [
         "# Pick intelligence — unified 500 v3",
         "",
-        "**Status:** LOCKED pick logic · benchmark synthesis",
+        "**Status:** LOCKED pick logic · pattern synthesis",
         "**Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`",
         "",
         "## Executive rule",
@@ -945,9 +945,9 @@ def emit_pick_intelligence(rows: list[dict], bundles: list[dict], out: Path) -> 
         "",
         "| Signal | Weight | Why |",
         "|--------|--------|-----|",
-        "| Success tier (S0–S8) | 0–100 base | Benchmark-aligned buyer outcome |",
+        "| Success tier (S0–S8) | 0–100 base | Pattern-aligned buyer outcome |",
         "| Goal alignment | 0–100 | Locked goal keyword match (customer_1, tle_wedge, …) |",
-        "| Benchmark step | 1–10 | Maps to INSTITUTIONAL_BENCHMARK_10_STEP_PLAN |",
+        "| Pattern step | 1–10 | Maps to INSTITUTIONAL_SITE_PLAN_10_STEP |",
         "| T1 vs T2/T3 | +12 / +5 | Revenue-critical path |",
         "| Disk lane (A) | +10 | Ships buyer-visible artifact |",
         "| Hub lane (H) | −20 | R-011 — not NF-CLOUD implement |",
@@ -998,8 +998,8 @@ def emit_pick_intelligence(rows: list[dict], bundles: list[dict], out: Path) -> 
         "| `anti_scope` | Tier B/C / P9 deferrals |",
         "| `pick_rationale` | Why this rank |",
         "| `prompt_redesigned` | Full brainstorm-enriched agent brief |",
-        "| `benchmark_refs` | Reference vendors (Vanta, Inforcer, …) |",
-        "| `copy_wedge` | Buyer-facing pattern from benchmark |",
+        "| `pattern_refs` | Internal pattern labels (trust-center-grid, msp-two-tier, …) |",
+        "| `copy_wedge` | Buyer-facing pattern wedge |",
         "",
         "## Related",
         "",
@@ -1022,7 +1022,7 @@ def emit_executive_synthesis(rows: list[dict], next_3: list[dict], out: Path) ->
     lines = [
         "# Prompt pack executive synthesis — unified 500 (v3)",
         "",
-        "**Status:** Deep analysis · benchmark-mapped · goal-prioritized",
+        "**Status:** Deep analysis · pattern-mapped · goal-prioritized",
         "**Generated:** `scripts/generate_unified_prompt_pack_500.py`",
         "",
         "---",
@@ -1030,8 +1030,8 @@ def emit_executive_synthesis(rows: list[dict], next_3: list[dict], out: Path) ->
         "## Executive summary",
         "",
         "All **500 forward-queue prompts** (FQ-001–500) were analyzed against the",
-        "**INSTITUTIONAL_BENCHMARK_10_STEP_PLAN** success model and re-tiered into",
-        "**S0–S8** with **goal alignment scoring**, **benchmark vendor references**, and",
+        "**INSTITUTIONAL_SITE_PLAN_10_STEP** success model and re-tiered into",
+        "**S0–S8** with **goal alignment scoring**, **internal pattern references**, and",
         "**brainstorm-enriched `prompt_redesigned`** briefs per plan.",
         "",
         f"| Metric | Value |",
@@ -1063,7 +1063,7 @@ def emit_executive_synthesis(rows: list[dict], next_3: list[dict], out: Path) ->
     phase_labels = {
         "P1-proof-moment": "Customer #1 — demo · board PDF",
         "P2-tle-wedge": "Procurement — receipt differentiation",
-        "P3-copilot-story": "Agent 365 / Purview complement",
+        "P3-copilot-story": "Registry-vs-receipt complement",
         "P4-trust-diligence": "Trust center · positioning",
         "P5-channel": "MSP + federal lanes",
         "P6-hardening": "Engineering hygiene",
@@ -1074,13 +1074,13 @@ def emit_executive_synthesis(rows: list[dict], next_3: list[dict], out: Path) ->
 
     lines.extend([
         "",
-        "## Success tier distribution (benchmark-mapped)",
+        "## Success tier distribution (pattern-mapped)",
         "",
-        "| Tier | Count | Benchmark refs | Pick cap/iter |",
-        "|------|-------|----------------|---------------|",
+        "| Tier | Count | Pattern refs | Pick cap/iter |",
+        "|------|-------|--------------|---------------|",
     ])
     for st in sorted(TIER_PICK_ORDER.keys(), key=lambda x: TIER_PICK_ORDER[x]):
-        meta = BENCHMARK_BY_TIER.get(st, {})
+        meta = PATTERN_BY_TIER.get(st, {})
         refs = ", ".join(meta.get("refs", ())[:3])
         cap = "2" if st == "S0-proof" else ("0 Hub" if st == "S8-agentic" else "1")
         lines.append(f"| {st} | {tier_counts.get(st, 0)} | {refs} | {cap} |")
@@ -1127,21 +1127,21 @@ def emit_executive_synthesis(rows: list[dict], next_3: list[dict], out: Path) ->
         lines.append("")
 
     lines.extend([
-        "## Brainstorm — benchmark → Noetfield only",
+        "## Brainstorm — pattern → Noetfield only",
         "",
-        "| Benchmark teaches | Noetfield keeps | Noetfield drops |",
-        "|-------------------|-----------------|-----------------|",
-        "| Vanta trust center UX | Framework grid + honest posture | SOC 2 certification claims |",
-        "| Inforcer MSP model | 90-day SOW + white-label TLE | Client billing through NF |",
-        "| Purview registry | Complement evaluate + RID | Competing with Microsoft |",
-        "| Veridra receipts | Tamper FAIL + board PDF path | Custody / PSP claims |",
-        "| Canada AIA | F lane mapping doc | Clearance / RPAA claims |",
+        "| Pattern teaches | Noetfield keeps | Noetfield drops |",
+        "|-----------------|-----------------|-----------------|",
+        "| trust-center-grid | Framework grid + honest posture | SOC 2 certification claims |",
+        "| msp-two-tier | 90-day SOW + white-label TLE | Client billing through NF |",
+        "| registry-vs-receipt | Complement evaluate + RID | Competing with platform registry |",
+        "| receipt-export-wedge | Tamper FAIL + board PDF path | Custody / PSP claims |",
+        "| federal-framework-map | F lane mapping doc | Clearance / RPAA claims |",
         "",
         "## Related",
         "",
         "- [ALL_500_TIER_INDEX_v1.md](./ALL_500_TIER_INDEX_v1.md)",
         "- [UNIFIED_500_MASTER_v1.md](./UNIFIED_500_MASTER_v1.md)",
-        "- [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](../../strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md)",
+        "- [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](../../strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md)",
         "",
     ])
     out.write_text("\n".join(lines), encoding="utf-8")
@@ -1274,7 +1274,7 @@ def emit_wisdom_pick_rules(rows: list[dict], sprint_themes: list[dict], next_3: 
     cluster_use = {
         "proof-demo": "Customer #1 iter — demo script, Playwright, QuickScan",
         "proof-export": "Same iter or next — tamper, board pack, TLE export",
-        "copilot-registry": "Design partner briefing — Agent 365 complement",
+        "copilot-registry": "Design partner briefing — registry-vs-receipt complement",
         "trust-diligence": "Security questionnaire inbound",
         "msp-channel": "MSP sprint only (M lane)",
         "federal-lane": "Federal intake only (F lane)",

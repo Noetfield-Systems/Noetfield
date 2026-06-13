@@ -21,7 +21,7 @@ TIER_PAGES = (
 )
 
 CSS_LINK = '<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />'
-BENCHMARK_CSS = '<link rel="stylesheet" href="/assets/noetfield-benchmark-ui.css" />'
+BENCHMARK_CSS = '<link rel="stylesheet" href="/assets/noetfield-institutional-grid.css" />'
 META_MARKER = '<meta name="nf-institutional" content="2026-06" />'
 FRFI_CSS = '<link rel="stylesheet" href="/assets/noetfield-frfi.css" />'
 

@@ -10,9 +10,9 @@
 
 ## Executive summary
 
-The market has **inverted**: buyers no longer lead with “what can the agent do?” — they lead with **“who governs the fleet, and where is the receipt?”** Microsoft Agent 365 GA (May 2026), KPMG’s 276K-seat deployment, and a persistent **72% production / ~21% mature governance** gap create a **mid-market wedge** that Noetfield’s locked model already names: **block + record + export** at pre-execution, sold as **Copilot Governance Pack** — not as a portfolio engine SKU.
+The market has **inverted**: buyers no longer lead with “what can the agent do?” — they lead with **“who governs the fleet, and where is the receipt?”** workspace platform workspace agent registry GA (May 2026), KPMG’s 276K-seat deployment, and a persistent **72% production / ~21% mature governance** gap create a **mid-market wedge** that Noetfield’s locked model already names: **block + record + export** at pre-execution, sold as **Copilot Governance Pack** — not as a portfolio engine SKU.
 
-**Noetfield’s winning lane:** Complement Microsoft’s control plane with **signed TLE receipts, tamper-evident export, and procurement-grade evidence** for orgs that stall between Copilot pilot and production.
+**Noetfield’s winning lane:** Complement workspace platform’s control plane with **signed TLE receipts, tamper-evident export, and procurement-grade evidence** for orgs that stall between Copilot pilot and production.
 
 ---
 
@@ -33,19 +33,19 @@ The market has **inverted**: buyers no longer lead with “what can the agent do
 
 ## 2. Structural shift — agents outran governance
 
-### Microsoft Agent 365 (GA May 1, 2026)
+### workspace platform workspace agent registry (GA May 1, 2026)
 
-- Central **Agent Registry**, Entra identity, Purview DLP, Defender monitoring ([Microsoft Learn CAF](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization))
-- Purview: audit, classification, Compliance Manager assessments for Agent 365 ([Purview docs](https://learn.microsoft.com/en-us/purview/ai-agent-365))
-- KPMG deploying Copilot + Agent 365 to **276,000+** professionals — headline is **governance layer**, not agent novelty ([Digital Applied analysis](https://www.digitalapplied.com/blog/kpmg-microsoft-agent-365-deployment-2026-enterprise-governance-analysis))
+- Central **Agent Registry**, identity identity, compliance metadata DLP, Defender monitoring ([workspace platform Learn CAF](https://learn.workspace platform.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization))
+- compliance metadata: audit, classification, Compliance Manager assessments for workspace agent registry ([compliance metadata docs](https://learn.workspace platform.com/en-us/compliance metadata/ai-agent-365))
+- KPMG deploying Copilot + workspace agent registry to **276,000+** professionals — headline is **governance layer**, not agent novelty ([Digital Applied analysis](https://www.digitalapplied.com/blog/kpmg-workspace platform-agent-365-deployment-2026-enterprise-governance-analysis))
 
 ### Production vs maturity gap
 
-- Directional industry surveys cited in market commentary: **~72%** enterprises run agents in production vs **~21%** with mature governance ([Digital Applied](https://www.digitalapplied.com/blog/kpmg-microsoft-agent-365-deployment-2026-enterprise-governance-analysis))
+- Directional industry surveys cited in market commentary: **~72%** enterprises run agents in production vs **~21%** with mature governance ([Digital Applied](https://www.digitalapplied.com/blog/kpmg-workspace platform-agent-365-deployment-2026-enterprise-governance-analysis))
 
-**Insight:** Microsoft owns **inventory + platform policy**. Buyers still need **decision receipts, board PDFs, tamper-evident export, and procurement ZIP** that survive **examiners and OSFI/EU auditors** — especially mid-market firms without Big Four budgets.
+**Insight:** workspace platform owns **inventory + platform policy**. Buyers still need **decision receipts, board PDFs, tamper-evident export, and procurement ZIP** that survive **examiners and OSFI/EU auditors** — especially mid-market firms without Big Four budgets.
 
-**Noetfield positioning:** *“Agent 365 tells you what’s registered; Noetfield receipts what was allowed, blocked, and exported — with signed TLE your board can defend.”*
+**Noetfield positioning:** *“workspace agent registry tells you what’s registered; Noetfield receipts what was allowed, blocked, and exported — with signed TLE your board can defend.”*
 
 ---
 
@@ -55,10 +55,10 @@ The market has **inverted**: buyers no longer lead with “what can the agent do
 
 | Driver | Evidence |
 |--------|----------|
-| **Permission debt** | 40% delayed rollout 3+ months over oversharing; 64% cite governance/security time sink ([QueryNow / Gartner via Computerworld](https://www.querynow.com/resources/whitepapers/past-the-stall-m365-copilot-rollouts)) |
+| **Permission debt** | 40% delayed rollout 3+ months over oversharing; 64% cite governance/security time sink ([QueryNow / Gartner via Computerworld](https://www.querynow.com/resources/whitepapers/past-the-stall-workspace-copilot-rollouts)) |
 | **Adoption > controls** | 65% use AI; only ~25% fully implemented AI governance ([AuditBoard 2025 via Stoneridge](https://stoneridgesoftware.com/from-license-purchase-to-landed-value-the-flight-plan-playbook-for-copilot-adoption/)) |
-| **Governance before scale** | Microsoft’s own blueprint: remediate oversharing → guardrails → regulations ([QueryNow citing MS docs](https://www.querynow.com/resources/whitepapers/past-the-stall-m365-copilot-rollouts)) |
-| **Readiness not licenses** | Mid-market stall = data quality, permissions, workflow integration — not Copilot quality ([Nexigen](https://www.nexigen.com/blog/microsoft-copilot-mid-market-readiness)) |
+| **Governance before scale** | workspace platform’s own blueprint: remediate oversharing → guardrails → regulations ([QueryNow citing MS docs](https://www.querynow.com/resources/whitepapers/past-the-stall-workspace-copilot-rollouts)) |
+| **Readiness not licenses** | Mid-market stall = data quality, permissions, workflow integration — not Copilot quality ([Nexigen](https://www.nexigen.com/blog/workspace platform-copilot-mid-market-readiness)) |
 
 **Insight:** The buyer problem is **“pilot → production”** with **provable controls**, not **“buy more Copilot seats.”**
 
@@ -66,18 +66,18 @@ The market has **inverted**: buyers no longer lead with “what can the agent do
 
 ---
 
-## 4. Competitive landscape — pre-execution evidence layer
+## 4. Category patterns — pre-execution evidence layer
 
-| Vendor | Claim | Noetfield differentiation |
-|--------|-------|---------------------------|
-| [Fuzentry (AWS Marketplace)](https://aws.amazon.com/marketplace/pp/prodview-yrioiul4luq2a) | Pre-execution policy + KMS-signed receipts | **M365-native** + TLE v1 + Copilot procurement story |
-| [Olympus / Solstice](https://solsticestudio.ai/olympus) | Control plane, pre-call policy | Noetfield: **board PDF + Canadian regulatory mapping** |
-| [Fiddler AI](https://www.fiddler.ai/control-plane) | Agent control plane + guardrails | Noetfield: **SME price band** + shadow pilot, not ML observability-only |
-| [Gateplex](https://gateplex.ai/) | <20ms hard block + compliance PDF | Noetfield: **Trust Ledger brand** + Purview/Entra metadata index |
-| [Airia](https://airia.com/defensible-ai-execution-level-audit-trails/) | Execution-level audit in orchestration | Noetfield: **pre-execution only** — no payment/custody claims |
-| **Microsoft Agent 365** | Registry + Purview + Entra | **Complement, don’t compete** — receipt export + diligence pack |
+Buyers evaluate vendors on four patterns — Noetfield owns the **receipt export** pattern:
 
-**Insight:** Category is crowding on **“control plane.”** Noetfield wins on **narrow ICP + export artifact + Canadian/EU mapping + Copilot GTM**, not generic agent mesh.
+| Pattern | Buyer question | Noetfield answer |
+|---------|----------------|------------------|
+| **Registry / inventory** | What agents exist? | Observe only — complement, do not replace |
+| **Control plane / guardrails** | Can we block bad actions? | Pre-execution evaluate + confidence score |
+| **Observability / audit trail** | What happened after the fact? | RID-keyed export before execution acts |
+| **Compliance pack / diligence** | What do we show the board? | TLE v1 + board PDF + procurement ZIP |
+
+**Insight:** Category noise clusters on control-plane claims. Noetfield wins on **narrow ICP + export artifact + Canadian/EU mapping + Copilot GTM**, not generic agent mesh.
 
 ---
 
@@ -123,9 +123,9 @@ The market has **inverted**: buyers no longer lead with “what can the agent do
 | | |
 |--|--|
 | **Strengths** | Locked pre-execution law; TLE v1 shipped; Copilot funnel live; verify bundle; Canadian narrative |
-| **Weaknesses** | Dual dev/prod stack; no production SSO; brand awareness vs Microsoft |
-| **Opportunities** | Agent 365 complement; E-23 runway; EU logging deadline; mid-market stall |
-| **Threats** | Microsoft bundles governance; observability vendors move upstack; analyst category confusion |
+| **Weaknesses** | Dual dev/prod stack; no production SSO; brand awareness vs workspace platform |
+| **Opportunities** | workspace agent registry complement; E-23 runway; EU logging deadline; mid-market stall |
+| **Threats** | workspace platform bundles governance; observability vendors move upstack; analyst category confusion |
 
 ---
 
@@ -135,7 +135,7 @@ Per [UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](../architecture/UNIFIED_ENGIN
 
 1. **Film W1 demo** as Noetfield story — engine proves underneath  
 2. **Package** 90-day design partner on noetfield.com — CAD sandbox from $2K  
-3. **Outreach** as Noetfield to CISO/GRC/M365 — never “buy our engine”  
+3. **Outreach** as Noetfield to CISO/GRC/workspace — never “buy our engine”  
 4. **TrustField second** — same receipt export, MSB wedge on trustfield.ca  
 5. **No separate engine GTM** — credibility flows up to commercial brand  
 
@@ -156,23 +156,23 @@ Per [UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](../architecture/UNIFIED_ENGIN
 
 | Topic | URL |
 |-------|-----|
-| Agent 365 GA | https://m365admin.handsontek.net/microsoft-agent-365-becomes-generally-available-ga/ |
-| KPMG + governance | https://www.digitalapplied.com/blog/kpmg-microsoft-agent-365-deployment-2026-enterprise-governance-analysis |
-| Microsoft CAF agents | https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization |
-| Purview + Agent 365 | https://learn.microsoft.com/en-us/purview/ai-agent-365 |
+| workspace agent registry GA | https://m365admin.handsontek.net/workspace platform-agent-365-becomes-generally-available-ga/ |
+| KPMG + governance | https://www.digitalapplied.com/blog/kpmg-workspace platform-agent-365-deployment-2026-enterprise-governance-analysis |
+| workspace platform CAF agents | https://learn.workspace platform.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization |
+| compliance metadata + workspace agent registry | https://learn.workspace platform.com/en-us/compliance metadata/ai-agent-365 |
 | AI governance market | https://www.persistencemarketresearch.com/market-research/ai-governance-market.asp |
 | Gartner governance spend | https://www.expresscomputer.in/news/gartner-global-ai-regulations-fuel-billion-dollar-market-for-ai-governance-platforms/134121/ |
 | Forrester CAGR | https://www.forrester.com/blogs/ai-governance-software-spend-will-see-30-cagr-from-2024-to-2030/ |
 | Pre-execution Fuzentry | https://aws.amazon.com/marketplace/pp/prodview-yrioiul4luq2a |
 | OSFI E-23 | https://www.osfi-bsif.gc.ca/en/news/backgrounder-guideline-e-23-model-risk-management |
 | EU AI Act Omnibus | https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/ |
-| Copilot stall | https://www.querynow.com/resources/whitepapers/past-the-stall-m365-copilot-rollouts |
-| Mid-market readiness | https://www.nexigen.com/blog/microsoft-copilot-mid-market-readiness |
+| Copilot stall | https://www.querynow.com/resources/whitepapers/past-the-stall-workspace-copilot-rollouts |
+| Mid-market readiness | https://www.nexigen.com/blog/workspace platform-copilot-mid-market-readiness |
 
 ---
 
 ## 11. Golden insight
 
-> **The product is the receipt, not the model.** In 2026, regulated buyers purchase **provable pre-execution decisions** — Microsoft supplies the registry; Noetfield supplies the **signed export your board puts in the governance meeting.**
+> **The product is the receipt, not the model.** In 2026, regulated buyers purchase **provable pre-execution decisions** — workspace platform supplies the registry; Noetfield supplies the **signed export your board puts in the governance meeting.**
 
-**Next disk deliverable:** Execute forward queue **FQ-001–010** (Agent 365 complement copy + E-23 mapping page) after Form PICK on promote.
+**Next disk deliverable:** Execute forward queue **FQ-001–010** (workspace agent registry complement copy + E-23 mapping page) after Form PICK on promote.

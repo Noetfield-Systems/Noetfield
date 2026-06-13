@@ -10,20 +10,20 @@
 
 ---
 
-## Wave 1 — Agent 365 complement positioning (FQ-001–010)
+## Wave 1 — workspace agent registry complement positioning (FQ-001–010)
 
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
-| ship-fwd-060 | 001 | T1 | D | Agent 365 complement one-pager | www-safe “registry vs receipt” narrative | verify-gtm | KPMG/Agent 365 GA |
-| ship-fwd-061 | 002 | T1 | D | Purview parity checklist page | Map Noetfield controls to Purview capabilities | plan-with-no-asf | Microsoft Purview docs |
-| ship-fwd-062 | 003 | T1 | A | Agent registry gap verify script | Assert procurement cites Agent 365 complement | verify-gtm-ops | CAF agent governance |
+| ship-fwd-060 | 001 | T1 | D | workspace agent registry complement one-pager | www-safe “registry vs receipt” narrative | verify-gtm | KPMG/workspace agent registry GA |
+| ship-fwd-061 | 002 | T1 | D | compliance metadata parity checklist page | Map Noetfield controls to compliance metadata capabilities | plan-with-no-asf | workspace compliance metadata docs |
+| ship-fwd-062 | 003 | T1 | A | Agent registry gap verify script | Assert procurement cites workspace agent registry complement | verify-gtm-ops | CAF agent governance |
 | ship-fwd-063 | 004 | T2 | D | CISO brief: fleet governance 2026 | PDF outline for design partner outreach | manual | 72%/21% gap |
-| ship-fwd-064 | 005 | T1 | A | `/copilot/governance/` Agent 365 section | Buyer page block without competing MS | verify-gtm | Agent 365 GA |
-| ship-fwd-065 | 006 | T2 | D | Entra agent identity crosswalk doc | Internal map Entra agent ID → RID | docs lint | Microsoft Entra AI |
-| ship-fwd-066 | 007 | T1 | A | Connector manifest Agent 365 stub row | `last_sync` placeholder in connectors API | pytest | CAF registry |
-| ship-fwd-067 | 008 | T2 | H | Outreach list: M365 admins post-GA | Hub tracker row template | agentic | Agent 365 GA |
-| ship-fwd-068 | 009 | T1 | D | Competitive vs Fiddler positioning | Internal battlecard — receipt export | confidentiality | Fiddler control plane |
-| ship-fwd-069 | 010 | T1 | A | Homepage meta refresh Agent 365 era | SEO description governance execution | verify-gtm | Market inversion |
+| ship-fwd-064 | 005 | T1 | A | `/copilot/governance/` workspace agent registry section | Buyer page block without competing MS | verify-gtm | workspace agent registry GA |
+| ship-fwd-065 | 006 | T2 | D | identity agent identity crosswalk doc | Internal map identity agent ID → RID | docs lint | identity metadata |
+| ship-fwd-066 | 007 | T1 | A | Connector manifest workspace agent registry stub row | `last_sync` placeholder in connectors API | pytest | CAF registry |
+| ship-fwd-067 | 008 | T2 | H | Outreach list: workspace admins post-GA | Hub tracker row template | agentic | workspace agent registry GA |
+| ship-fwd-068 | 009 | T1 | D | Internal positioning — receipt export | Internal battlecard — receipt export | confidentiality | positioning-internal |
+| ship-fwd-069 | 010 | T1 | A | Homepage meta refresh workspace agent registry era | SEO description governance execution | verify-gtm | Market inversion |
 
 ---
 
@@ -57,7 +57,7 @@
 | ship-fwd-086 | 027 | T2 | D | NIST AI RMF tier mapping | GTM appendix for US subsidiaries | docs | MarketsandMarkets |
 | ship-fwd-087 | 028 | T1 | A | Behavioral log export endpoint stub | `GET /api/v1/events/replay` narrative link | tle-smoke | Art. 12 query |
 | ship-fwd-088 | 029 | T2 | H | Outreach: EU ops Canadian HQs | Agentic AB/ON multinationals | Hub | EU deadline |
-| ship-fwd-089 | 030 | T1 | D | Competitive vs Gateplex EU PDF | Internal — compliance export | confidentiality | Gateplex EU |
+| ship-fwd-089 | 030 | T1 | D | Internal positioning — compliance export | Internal — compliance export | confidentiality | positioning-internal |
 
 ---
 
@@ -104,7 +104,7 @@
 | ship-fwd-112 | 053 | T1 | A | Security questionnaire auto-answers | `docs/copilot/SECURITY_FAQ.md` | verify-gtm | procurement |
 | ship-fwd-113 | 054 | T2 | A | SOC2-ready control mapping draft | Internal — not claim SOC2 | confidentiality | enterprise buyers |
 | ship-fwd-114 | 055 | T1 | A | README www 200 verify governance | services/governance README link | plan-with-no-asf | iter 20 060 |
-| ship-fwd-115 | 056 | T2 | D | DPA template outline | Data processing — metadata only | legal draft | Purview metadata |
+| ship-fwd-115 | 056 | T2 | D | DPA template outline | Data processing — metadata only | legal draft | compliance metadata metadata |
 | ship-fwd-116 | 057 | T1 | A | Control catalog ↔ API parity | Each control maps to test | pytest | copilot-control-catalog |
 | ship-fwd-117 | 058 | T2 | D | Pen test scope doc | Shadow pilot boundaries | docs | Bank Pilot |
 | ship-fwd-118 | 059 | T1 | A | Trust-brief parity all buyer pages | 4-page loop in verify | verify-no-asf | shipped pattern |
@@ -116,8 +116,8 @@
 
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
-| ship-fwd-120 | 061 | T2 | A | Purview connector sync demo | `last_sync` visible in UI | dev-local | Evidence index |
-| ship-fwd-121 | 062 | T2 | A | Entra agent manifest v2 | Agent sponsor field | pytest | Agent 365 |
+| ship-fwd-120 | 061 | T2 | A | compliance metadata connector sync demo | `last_sync` visible in UI | dev-local | Evidence index |
+| ship-fwd-121 | 062 | T2 | A | identity agent manifest v2 | Agent sponsor field | pytest | workspace agent registry |
 | ship-fwd-122 | 063 | T1 | A | TLE sample pack refresh | 3 industry samples updated | verify-gtm | positioning |
 | ship-fwd-123 | 064 | T2 | A | Evidence hash chain doc | HMAC chain spec public-safe | spec | EU tamper |
 | ship-fwd-124 | 065 | T1 | A | Board pack template v2 | Institutional print CSS | manual | STRATEGIC_LOCK |
@@ -155,7 +155,7 @@
 | ship-fwd-142 | 083 | T1 | A | Coherence verify forward queue gate | FAIL if FQ T1 done missing manifest | verify-no-asf | audit discipline |
 | ship-fwd-143 | 084 | T2 | A | UI e2e flaky dashboard fix doc | NF_DEV_FORCE_DASHBOARD_BUILD | dev-local | ops note |
 | ship-fwd-144 | 085 | T1 | A | Intake email audit CI | `audit_intake_email.py` in ship-verify | make ship-verify | STRATEGIC_LOCK |
-| ship-fwd-145 | 086 | T2 | A | M365 OAuth stub → design doc | Production OAuth gated ASF | spec | blueprint honest |
+| ship-fwd-145 | 086 | T2 | A | workspace OAuth stub → design doc | Production OAuth gated ASF | spec | blueprint honest |
 | ship-fwd-146 | 087 | T1 | A | Public chat guardrail test | Public chat blocks PII patterns | pytest | SME AI domain |
 | ship-fwd-147 | 088 | T2 | D | Incident response AI playbook | `.cursor/incidents` template | docs | agentic ops |
 | ship-fwd-148 | 089 | T1 | A | SHIP_DONE_MAP forward queue sync | sync-prompt-pack FQ patterns | sync script | registry |
@@ -194,7 +194,7 @@
 
 After current iter 19 (057–059) ships:
 
-1. **ship-fwd-060** — Agent 365 complement one-pager (FQ-001)  
+1. **ship-fwd-060** — workspace agent registry complement one-pager (FQ-001)  
 2. **ship-fwd-081** — EU tamper FAIL export hardening (FQ-022)  
 3. **ship-fwd-090** — QuickScan scoring rubric v2 (FQ-032)  
 

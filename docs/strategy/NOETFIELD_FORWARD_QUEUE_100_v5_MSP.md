@@ -3,14 +3,14 @@
 **Status:** Research-derived forward queue · **MSP-ONLY lane lock** — Form PICK before implement  
 **Path:** `docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md`  
 **Updated:** 2026-06-13  
-**Grounding:** [MARKET_ANALYSIS_2026_LOCKED_v1.md](./MARKET_ANALYSIS_2026_LOCKED_v1.md) · [NOETFIELD_FORWARD_QUEUE_100_v3.md](./NOETFIELD_FORWARD_QUEUE_100_v3.md) · Microsoft Partner Center May 2026 · Pax8 Agent 365 · Fusion Computing MSP pilots  
+**Grounding:** [MARKET_ANALYSIS_2026_LOCKED_v1.md](./MARKET_ANALYSIS_2026_LOCKED_v1.md) · [NOETFIELD_FORWARD_QUEUE_100_v3.md](./NOETFIELD_FORWARD_QUEUE_100_v3.md) · CSP partner Center May 2026 · Pax8 workspace agent registry · Fusion Computing MSP pilots  
 **ID namespace:** `ship-fwd-460` … `ship-fwd-559` (continues v4 post–`ship-fwd-459`)
 
 **Lane lock (v5):** **M** = **MSP-only** — every row in this batch. No federal (F), OSFI, EU, or direct-enterprise picks.
 
 **Execution sub-lane:** **M+A** = NF-CLOUD disk · **M+H** = Hub/agentic only · **M+D** = docs/spec only
 
-**v5 thesis:** Batches 001–300 mixed ICP; **301–400 = F**; **401–500 = M** — CSP/MSP partners sell **Copilot governance evidence** as a repeatable managed service (90-day pilot, activation dashboard, GDAP, white-label board PDF) — complement Agent 365, not compete.
+**v5 thesis:** Batches 001–300 mixed ICP; **301–400 = F**; **401–500 = M** — CSP/MSP partners sell **Copilot governance evidence** as a repeatable managed service (90-day pilot, activation dashboard, GDAP, white-label board PDF) — complement workspace agent registry, not compete.
 
 ---
 
@@ -19,10 +19,10 @@
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
 | ship-fwd-460 | 401 | T1 | M+D | MSP enablement kit v3 | `/partners/` master partner page | verify-gtm | v3 ship-fwd-300 extend |
-| ship-fwd-461 | 402 | T1 | M+D | Agent 365 MSP complement one-pager | Registry vs receipt — partner-safe | verify-gtm | Pax8 Agent 365 |
+| ship-fwd-461 | 402 | T1 | M+D | workspace agent registry MSP complement one-pager | Registry vs receipt — partner-safe | verify-gtm | Pax8 workspace agent registry |
 | ship-fwd-462 | 403 | T1 | M+A | `/partners/msp/` landing stub | CSP governance pack positioning | verify-gtm | Partner Center May 2026 |
 | ship-fwd-463 | 404 | T2 | M+D | MSP vs MIP service category memo | Managed intelligence provider lane | docs | Pax8 MIP |
-| ship-fwd-464 | 405 | T1 | M+D | Frontier Suite partner FAQ | E7 bundle — orientation not SKU | verify-no-asf | Microsoft Frontier |
+| ship-fwd-464 | 405 | T1 | M+D | Frontier Suite partner FAQ | E7 bundle — orientation not SKU | verify-no-asf | workspace suite |
 | ship-fwd-465 | 406 | T2 | M+H | Outreach: Pax8-style distributors | Agentic CSP aggregators | Hub | channel scale |
 | ship-fwd-466 | 407 | T1 | M+D | Partner pitch deck outline (8 slides) | Receipt export for client audits | Form PICK | MSP GTM |
 | ship-fwd-467 | 408 | T2 | M+A | Partner logo slot policy | White-label rules — Form PICK | manual | co-brand |
@@ -53,8 +53,8 @@
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
 | ship-fwd-480 | 421 | T1 | M+D | GDAP least-privilege FAQ v2 | Partner admin boundaries | verify-gtm | ABT partner model |
-| ship-fwd-481 | 422 | T2 | M+D | DAP vs GDAP migration note | Legacy delegate deprecation | docs | Microsoft partner |
-| ship-fwd-482 | 423 | T1 | M+D | Partner access scope card | What NF needs vs M365 tenant | verify-gtm | metadata only |
+| ship-fwd-481 | 422 | T2 | M+D | DAP vs GDAP migration note | Legacy delegate deprecation | docs | CSP partner |
+| ship-fwd-482 | 423 | T1 | M+D | Partner access scope card | What NF needs vs workspace tenant | verify-gtm | metadata only |
 | ship-fwd-483 | 424 | T2 | M+A | Tenant connect stub doc | Multi-client — dev only | spec | MSP operations |
 | ship-fwd-484 | 425 | T1 | M+D | Annual GDAP review checklist | Partner security hygiene | docs | least privilege |
 | ship-fwd-485 | 426 | T2 | M+H | Outreach: GDAP program leads | Agentic partner ops | Hub | channel trust |
@@ -90,7 +90,7 @@
 | ship-fwd-501 | 442 | T2 | M+H | CSP partner outreach — US SMB | Agentic Pax8-style motion | Hub | Frontier SMB |
 | ship-fwd-502 | 443 | T1 | M+D | Partner tier playbook | Registered vs silver vs gold | docs | channel tiers |
 | ship-fwd-503 | 444 | T2 | M+H | n8n partner lead routing v2 | Founder approve Hub workflow | agentic | W3 integration |
-| ship-fwd-504 | 445 | T1 | M+D | Microsoft CloudAscent align note | High-propensity account story | docs | MS partner blog |
+| ship-fwd-504 | 445 | T1 | M+D | CSP growth program align note | High-propensity account story | docs | MS partner blog |
 | ship-fwd-505 | 446 | T2 | M+H | Outreach: Copilot Practice Building alumni | Agentic MSP training grads | Hub | Pax8 bootcamp |
 | ship-fwd-506 | 447 | T1 | M+D | FY27 partner SKO talking points | Receipt layer for renewals | Form PICK | July 2026 SKO |
 | ship-fwd-507 | 448 | T2 | M+D | Marketplace listing hypothesis | Stage 2+ — not W3 SKU | confidentiality | second earner |
@@ -103,12 +103,12 @@
 
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
-| ship-fwd-510 | 451 | T1 | M+D | Securing M365 before Copilot checklist | MSP pre-flight ol | verify-gtm | Pax8 May 2026 |
+| ship-fwd-510 | 451 | T1 | M+D | Securing workspace before Copilot checklist | MSP pre-flight ol | verify-gtm | Pax8 May 2026 |
 | ship-fwd-511 | 452 | T1 | M+D | Permission debt remediation SOP | Client oversharing fix path | verify-gtm | QueryNow stall |
 | ship-fwd-512 | 453 | T2 | M+D | Prompt library starter v2 — 20 prompts | By vertical: legal, finance, ops | verify-gtm | office hours |
 | ship-fwd-513 | 454 | T1 | M+A | Readiness score partner report | QuickScan PDF for client | verify-gtm | Nexigen readiness |
 | ship-fwd-514 | 455 | T2 | M+D | Change management RACI for MSP | Sponsor · MSP · client IT | docs | adoption |
-| ship-fwd-515 | 456 | T1 | M+D | Agent 365 Step 5 client worksheet | First three agents named | verify-gtm | E7 Canada guide |
+| ship-fwd-515 | 456 | T1 | M+D | workspace agent registry Step 5 client worksheet | First three agents named | verify-gtm | E7 Canada guide |
 | ship-fwd-516 | 457 | T2 | M+A | Client governance meeting agenda | 30-min board moment script | manual | demo film |
 | ship-fwd-517 | 458 | T1 | M+D | Training:governance ratio note | $1 training:$1 license cite | docs | QueryNow ratio |
 | ship-fwd-518 | 459 | T2 | M+H | Outreach: stalled Copilot clients | Agentic MSP rescue list | Hub | past the stall |
@@ -154,11 +154,11 @@
 
 | ID | FQ | T | L | Plan | Outcome | Verify | Research driver |
 |----|----|---|---|------|---------|--------|-----------------|
-| ship-fwd-540 | 481 | T2 | M+A | Partner fleet summary dashboard spec | Cross-client BLOCK/ALLOW view | spec | Agent 365 observe |
+| ship-fwd-540 | 481 | T2 | M+A | Partner fleet summary dashboard spec | Cross-client BLOCK/ALLOW view | spec | workspace agent registry observe |
 | ship-fwd-541 | 482 | T2 | M+A | Client health score stub API | `GET /api/v1/partner/clients` mock | pytest | MSP NOC |
 | ship-fwd-542 | 483 | T1 | M+D | Monthly client governance report template | 1-pager for sponsor | Form PICK | managed service |
 | ship-fwd-543 | 484 | T2 | M+D | Drift alert MSP escalation path | When to page client vs log | docs | incident |
-| ship-fwd-544 | 485 | T1 | M+A | Connector `last_sync` partner view | Per-client in partner spec | dev-local | Purview sync |
+| ship-fwd-544 | 485 | T1 | M+A | Connector `last_sync` partner view | Per-client in partner spec | dev-local | compliance metadata sync |
 | ship-fwd-545 | 486 | T2 | M+D | Data residency per-client note | Canada vs US tenant map | docs | PIPEDA |
 | ship-fwd-546 | 487 | T1 | M+D | Client offboarding runbook | Export + revoke GDAP | docs | partner ops |
 | ship-fwd-547 | 488 | T2 | M+H | Outreach: multi-client MSP NOC leads | Agentic ops-focused MSPs | Hub | fleet ops |
@@ -223,10 +223,10 @@
 | Pattern | Source | Noetfield scope |
 |---------|--------|-----------------|
 | CSP 3-year Copilot term | [Partner Center May 2026](https://learn.microsoft.com/en-us/partner-center/announcements/2026-may) | Term guide — services attach |
-| Frontier partner motion | [Microsoft partner blog](https://blogs.microsoft.com/blog/2026/04/21/accelerating-frontier-transformation-with-microsoft-partners/) | Repeatable outcome → governance cadence |
-| Agent 365 MSP service | [Pax8 Agent 365](https://www.pax8.com/blog/microsoft-agent-365/) | Complement registry with receipt export |
+| Frontier partner motion | [CSP partner blog](https://blogs.microsoft.com/blog/2026/04/21/accelerating-frontier-transformation-with-microsoft-partners/) | Repeatable outcome → governance cadence |
+| workspace agent registry MSP service | [Pax8 workspace agent registry](https://www.pax8.com/blog/microsoft-agent-365/) | Complement registry with receipt export |
 | MSP-led activation | [Fusion Computing E7 Canada](https://fusioncomputing.ca/microsoft-365-e7-canadian-smbs/) | 90-day SOW + office hours |
-| Partner training stack | [Pax8 May 2026 update](https://www.pax8.com/blog/microsoft-update-may-2026/) | Securing M365 before Copilot checklist |
+| Partner training stack | [Pax8 May 2026 update](https://www.pax8.com/blog/microsoft-update-may-2026/) | Securing workspace before Copilot checklist |
 
 ---
 

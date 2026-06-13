@@ -38,7 +38,7 @@ Intake adds [`/assets/noetfield-intake.css`](/assets/noetfield-intake.css).
 | `.nf-status-panel` | `/status/` |
 | `.nf-prose` | Legal / long-form |
 
-June 2026 frame: [`noetfield-institutional-2026.css`](/assets/noetfield-institutional-2026.css) · benchmark patterns: [`noetfield-benchmark-ui.css`](/assets/noetfield-benchmark-ui.css) · plan: [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md)
+June 2026 frame: [`noetfield-institutional-2026.css`](/assets/noetfield-institutional-2026.css) · institutional grid: [`noetfield-institutional-grid.css`](/assets/noetfield-institutional-grid.css) · plan: [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md)
 
 ## Shell
 

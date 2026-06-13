@@ -15,7 +15,7 @@
  <link rel="stylesheet" href="/assets/noetfield-institutional.css" />
  <link rel="stylesheet" href="/assets/noetfield-sales.css" />
  <link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />
- <link rel="stylesheet" href="/assets/noetfield-benchmark-ui.css" />
+ <link rel="stylesheet" href="/assets/noetfield-institutional-grid.css" />
  <script src="/assets/noetfield-shell.js" defer></script>
 </head>
 <body class="nf-site-2026">
@@ -27,7 +27,7 @@
  <p class="nf-eyebrow">Trust Ledger · Copilot · June 2026</p>
  <h1>The audit trail your Copilot rollout will be asked for</h1>
  <p class="nf-lead">
- <strong>Trust Ledger Entries (TLE v1)</strong> are the canonical authorization records for Copilot adoption: evidence from Purview, Entra ID, and M365 audit metadata—signed approval chains, confidence scores, and board-ready export. Every engagement produces at least one signed TLE. Not a payment ledger or wallet.
+ <strong>Trust Ledger Entries (TLE v1)</strong> are the canonical authorization records for Copilot adoption: metadata-only evidence from your workspace compliance and identity index—signed approval chains, confidence scores, and board-ready export. Every engagement produces at least one signed TLE. Not a payment ledger or wallet.
  </p>
  <div class="nf-hero-actions">
  <a class="btn btn-primary" href="/workspace/">Trust Ledger workspace</a>
@@ -45,7 +45,7 @@
  <div class="nf-metrics-item" role="listitem">
  <p class="nf-metrics-label">Evidence</p>
  <p class="nf-metrics-value">Metadata</p>
- <p class="nf-metrics-hint">Purview · Entra · audit index</p>
+ <p class="nf-metrics-hint">Compliance · identity · audit index</p>
  </div>
  <div class="nf-metrics-item" role="listitem">
  <p class="nf-metrics-label">Export</p>
@@ -89,21 +89,16 @@
  </section>
 
  <section class="nf-section">
- <h2>TLE differentiation — receipt export wedge</h2>
- <p>Buyers compare decision receipts and audit portability. Noetfield TLE v1 optimizes for <strong>one RID</strong> your board, auditor, and MSP cite — signed go/no-go, confidence score, board PDF, procurement ZIP in a single path.</p>
- <table class="nf-table nf-compare-table">
- <thead>
- <tr><th>Capability</th><th>Noetfield TLE v1</th><th>Typical GRC / log tools</th></tr>
- </thead>
- <tbody>
- <tr><td>Pre-execution evaluate</td><td class="nf-compare-yes">RID receipt before M365 acts</td><td class="nf-compare-partial">Often post-hoc</td></tr>
- <tr><td>Signed go/no-go</td><td class="nf-compare-yes">TLE v1 + confidence score</td><td class="nf-compare-partial">Policy docs only</td></tr>
- <tr><td>Board pack export</td><td class="nf-compare-yes">PDF in one demo path</td><td class="nf-compare-partial">Manual assembly</td></tr>
- <tr><td>Procurement ZIP</td><td class="nf-compare-yes">OpenAPI + manifest</td><td class="nf-compare-partial">Varies</td></tr>
- <tr><td>Immutable RID lineage</td><td class="nf-compare-yes">audit-export by RID</td><td class="nf-compare-partial">Varies</td></tr>
- </tbody>
- </table>
- <p style="margin-top:1rem;font-size:var(--text-sm);color:var(--muted2)">Benchmark set: Veridra · ADJUDON · Audital · Trinitite — structure only, not competitive claims. See <a href="/docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md">TLE positioning v1.2</a>.</p>
+ <h2>TLE capabilities — receipt export wedge</h2>
+ <p>Noetfield TLE v1 optimizes for <strong>one RID</strong> your board, auditor, and MSP cite — signed go/no-go, confidence score, board PDF, and procurement ZIP in a single path.</p>
+ <ul>
+ <li><strong>Pre-execution evaluate</strong> — RID receipt before workspace systems act</li>
+ <li><strong>Signed go/no-go</strong> — TLE v1 with confidence score</li>
+ <li><strong>Board pack export</strong> — PDF in one demo path</li>
+ <li><strong>Procurement ZIP</strong> — OpenAPI spec + manifest</li>
+ <li><strong>Immutable RID lineage</strong> — audit-export by RID</li>
+ </ul>
+ <p style="margin-top:1rem;font-size:var(--text-sm);color:var(--muted2)">See <a href="/docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md">TLE positioning v1.2</a> for procurement language.</p>
  </section>
 
  <section class="nf-section">
@@ -135,7 +130,7 @@
  <section class="nf-section" id="security-buyer">
  <h2>For CISO and security buyers</h2>
  <p>
- <strong>Security buyer line:</strong> Trust Ledger is a <strong>governance evidence layer</strong> for Copilot adoption — metadata-only M365 evidence (Purview, Entra ID, audit logs), immutable audit export by RID, and signed TLE with <strong>confidence score</strong>. No payment routing, custody, or balance claims.
+ <strong>Security buyer line:</strong> Trust Ledger is a <strong>governance evidence layer</strong> for Copilot adoption — metadata-only workspace evidence (compliance, identity, and audit logs), immutable audit export by RID, and signed TLE with <strong>confidence score</strong>. No payment routing, custody, or balance claims.
  </p>
  <ul>
  <li>Evidence ingest is metadata-only — see <a href="/docs/diligence/EVIDENCE_INTAKE_CONTRACT_v1.md">Evidence Intake Contract v1</a></li>

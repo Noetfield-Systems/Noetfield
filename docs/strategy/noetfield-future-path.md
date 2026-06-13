@@ -94,7 +94,7 @@ From engineering and www work tracked in **GitHub Issues** (see [ROADMAP.md](../
 |------|--------|
 | AI governance / pre-execution policy | **Core** |
 | Bank due diligence & simulation | **Core** (Bank Pilot v6.1) |
-| Microsoft Copilot compliance | **Core** (Copilot pack) |
+| workspace platform Copilot compliance | **Core** (Copilot pack) |
 | Payments / FX / wallets | **Out of scope** |
 | TrustField corporate / VIRLUX GTM | **Out of scope** (other trackers) |
 

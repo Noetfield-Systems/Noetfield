@@ -78,7 +78,7 @@ When ASF says **implement** from this lock: pick **one** Lane A module task in `
 
 For each domain: **System Design (modules)** · **Execution Flow** · **Data Objects** · **Agents** · **Risks/Controls** · **Implementation Output**.
 
-**Assumptions:** SME scale · Microsoft 365 + cloud storage · phased rollout MVP → automation · no clarifying questions.
+**Assumptions:** SME scale · workspace platform 365 + cloud storage · phased rollout MVP → automation · no clarifying questions.
 
 ---
 
@@ -368,7 +368,7 @@ For each domain: **System Design (modules)** · **Execution Flow** · **Data Obj
 
 ## Operational assumptions (inferred)
 
-- Microsoft 365 + cloud storage; connectors: OneDrive, SharePoint, bank CSV, email.
+- workspace platform 365 + cloud storage; connectors: OneDrive, SharePoint, bank CSV, email.
 - Signing: HSM or cloud KMS.
 - Scale: single-tenant pilot → multi-tenant RBAC Phase 5.
 

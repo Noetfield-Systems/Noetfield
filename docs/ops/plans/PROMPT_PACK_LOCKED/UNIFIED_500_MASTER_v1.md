@@ -26,57 +26,57 @@ Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
 
 ## Success model tiers (pick order)
 
-| Tier | Benchmark lane | Pick when |
-|------|----------------|-----------|
-| **S0-proof** | Demo / TLE / procurement | Customer #1 — board PDF in real meeting |
-| **S6-tle-wedge** | Veridra · ADJUDON · Audital | Procurement close — receipt differentiation |
-| **S2-copilot-complement** | Purview · Agent 365 · Inforcer | Copilot design partner runway |
-| **S4-trust-ui** | OneTrust · Vanta · Drata | Diligence questionnaire inbound |
-| **S1-positioning** | Credo · Holistic · Veridra | www copy refresh after Form PICK |
-| **S3-msp-channel** | Inforcer · AvePoint · Lighthouse | MSP partner briefing |
+| Tier | Pattern cluster | Pick when |
+|------|-----------------|-----------|
+| **S0-proof** | board-pdf-moment | Customer #1 — board PDF in real meeting |
+| **S6-tle-wedge** | receipt-export-wedge | Procurement close — receipt differentiation |
+| **S2-copilot-complement** | registry-vs-receipt | Copilot design partner runway |
+| **S4-trust-ui** | trust-center-grid | Diligence questionnaire inbound |
+| **S1-positioning** | buyer-hero | www copy refresh after Form PICK |
+| **S3-msp-channel** | msp-two-tier | MSP partner briefing |
 | **S5-federal** | AIA · ADM · NIST | F lane intake only |
 | **S7-hardening** | Engineering hygiene | After S0–S4 slices ship |
 | **S8-agentic** | Hub outreach | R-011 — not NF-CLOUD disk |
 
 ## Suggested iter bundles (smart 3-packs)
 
-- **iter-1** — wisdom 288 · GTM 300: `ship-fwd-097`, `ship-fwd-081`, `ship-fwd-062`
-- **iter-2** — wisdom 288 · GTM 294: `ship-fwd-109`, `ship-fwd-105`, `ship-fwd-461`
-- **iter-3** — wisdom 279 · GTM 300: `ship-fwd-124`, `ship-fwd-103`, `ship-fwd-060`
-- **iter-4** — wisdom 272 · GTM 300: `ship-fwd-170`, `ship-fwd-068`, `ship-fwd-229`
-- **iter-5** — wisdom 270 · GTM 300: `ship-fwd-260`, `ship-fwd-289`, `ship-fwd-220`
+- **iter-1** — wisdom 278 · GTM 300: `ship-fwd-097`, `ship-fwd-081`, `ship-fwd-229`
+- **iter-2** — wisdom 273 · GTM 300: `ship-fwd-109`, `ship-fwd-105`, `ship-fwd-064`
+- **iter-3** — wisdom 264 · GTM 300: `ship-fwd-124`, `ship-fwd-103`, `ship-fwd-099`
+- **iter-4** — wisdom 262 · GTM 300: `ship-fwd-170`, `ship-fwd-068`, `ship-fwd-173`
+- **iter-5** — wisdom 253 · GTM 300: `ship-fwd-260`, `ship-fwd-289`, `ship-fwd-094`
 
 ## Top 25 picks (priority rank)
 
-1. **ship-fwd-097** FQ-038 · `S0-proof` · P1-proof-moment · GTM 100 · goal 100 · open · Demo script “governance meeting” — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-2. **ship-fwd-109** FQ-050 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · Board pack PDF cover E-23 fields — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-3. **ship-fwd-124** FQ-065 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · Board pack template v2 — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-4. **ship-fwd-170** FQ-111 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · Playwright smoke suite v1 — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-5. **ship-fwd-260** FQ-201 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · Board pack RAG summary block — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-6. **ship-fwd-139** FQ-080 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · `make demo-url` CI artifact — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-7. **ship-fwd-181** FQ-122 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · `MetricStrip` on cognitive-dashboard — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-8. **ship-fwd-262** FQ-203 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · `GET /api/v1/metrics/board` stub — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-9. **ship-fwd-301** FQ-242 · `S0-proof` · P1-proof-moment · GTM 100 · goal 100 · open · Partner demo URL + activation dashboard spec — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-10. **ship-fwd-091** FQ-032 · `S0-proof` · P1-proof-moment · GTM 100 · goal 80 · open · QuickScan scoring rubric v2 — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-11. **ship-fwd-338** FQ-279 · `S0-proof` · P1-proof-moment · GTM 100 · goal 80 · open · QuickScan RAG readiness dimension — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-12. **ship-fwd-175** FQ-116 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · Trace-on-failure config — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-13. **ship-fwd-474** FQ-415 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · `make partner-demo-url` artifact — _disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-14. **ship-fwd-271** FQ-212 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · 25-point readiness crosswalk — _T1 critical · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-15. **ship-fwd-171** FQ-112 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · `make verify-playwright` gate — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-16. **ship-fwd-214** FQ-155 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · Sample TLE redaction mode — _disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-17. **ship-fwd-299** FQ-240 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · Incident export in procurement ZIP — _disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-18. **ship-fwd-155** FQ-096 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · W3 economic signal verify — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-19. **ship-fwd-182** FQ-123 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · Shell status bar + www links — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-20. **ship-fwd-215** FQ-156 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · `make procurement-pack` one-shot — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-21. **ship-fwd-219** FQ-160 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · Procurement page verify hardening — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-22. **ship-fwd-319** FQ-260 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · Privacy FAQ in procurement auto-fill — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-23. **ship-fwd-238** FQ-179 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · `make demo-url` staging parity — _disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-24. **ship-fwd-265** FQ-206 · `S0-proof` · P1-proof-moment · GTM 100 · goal 64 · open · Trend arrows on dashboard — _disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
-25. **ship-fwd-087** FQ-028 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · Behavioral log export endpoint stub — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — benchmark: Vanta, Drata
+1. **ship-fwd-097** FQ-038 · `S0-proof` · P1-proof-moment · GTM 100 · goal 100 · open · Demo script “governance meeting” — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+2. **ship-fwd-109** FQ-050 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · Board pack PDF cover E-23 fields — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+3. **ship-fwd-124** FQ-065 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · Board pack template v2 — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+4. **ship-fwd-170** FQ-111 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · Playwright smoke suite v1 — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+5. **ship-fwd-260** FQ-201 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · Board pack RAG summary block — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+6. **ship-fwd-139** FQ-080 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · `make demo-url` CI artifact — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+7. **ship-fwd-181** FQ-122 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · `MetricStrip` on cognitive-dashboard — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+8. **ship-fwd-262** FQ-203 · `S0-proof` · P1-proof-moment · GTM 100 · goal 96 · open · `GET /api/v1/metrics/board` stub — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+9. **ship-fwd-301** FQ-242 · `S0-proof` · P1-proof-moment · GTM 100 · goal 100 · open · Partner demo URL + activation dashboard spec — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+10. **ship-fwd-091** FQ-032 · `S0-proof` · P1-proof-moment · GTM 100 · goal 80 · open · QuickScan scoring rubric v2 — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+11. **ship-fwd-338** FQ-279 · `S0-proof` · P1-proof-moment · GTM 100 · goal 80 · open · QuickScan RAG readiness dimension — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+12. **ship-fwd-062** FQ-003 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · Agent registry gap verify script — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+13. **ship-fwd-175** FQ-116 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · Trace-on-failure config — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+14. **ship-fwd-474** FQ-415 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · `make partner-demo-url` artifact — _disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+15. **ship-fwd-271** FQ-212 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · 25-point readiness crosswalk — _T1 critical · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+16. **ship-fwd-171** FQ-112 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · `make verify-playwright` gate — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+17. **ship-fwd-214** FQ-155 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · Sample TLE redaction mode — _disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+18. **ship-fwd-299** FQ-240 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · Incident export in procurement ZIP — _disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+19. **ship-fwd-155** FQ-096 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · W3 economic signal verify — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+20. **ship-fwd-182** FQ-123 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · Shell status bar + www links — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+21. **ship-fwd-215** FQ-156 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · `make procurement-pack` one-shot — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+22. **ship-fwd-219** FQ-160 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · Procurement page verify hardening — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+23. **ship-fwd-319** FQ-260 · `S0-proof` · P1-proof-moment · GTM 100 · goal 88 · open · Privacy FAQ in procurement auto-fill — _T1 critical · disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+24. **ship-fwd-238** FQ-179 · `S0-proof` · P1-proof-moment · GTM 100 · goal 56 · open · `make demo-url` staging parity — _disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
+25. **ship-fwd-265** FQ-206 · `S0-proof` · P1-proof-moment · GTM 100 · goal 64 · open · Trend arrows on dashboard — _disk-ship · S0-proof · greenfield · high GTM impact_ — pattern: board-pdf-moment, demo-path
 
 ## Enriched prompts by success tier
 
-### S0 — Proof (demo · TLE · procurement) (56 plans)
+### S0 — Proof (demo · TLE · procurement) (60 plans)
 
 - **ship-fwd-097** FQ-038 · GTM 100 · goal 100 · open · A · Demo script “governance meeting”
   - Wedge: 5-min board PDF moment — buyer sees confidence + export path
@@ -86,9 +86,9 @@ Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
   - Wedge: 5-min board PDF moment — buyer sees confidence + export path
 - **ship-fwd-170** FQ-111 · GTM 100 · goal 96 · open · A · Playwright smoke suite v1
   - Wedge: 5-min board PDF moment — buyer sees confidence + export path
-- _…and 52 more in tier_
+- _…and 56 more in tier_
 
-### S6 — TLE differentiation (36 plans)
+### S6 — TLE differentiation (41 plans)
 
 - **ship-fwd-081** FQ-022 · GTM 100 · goal 92 · open · A · Tamper FAIL export verify hardening
   - Wedge: One receipt board, auditor, and MSP cite — same RID
@@ -96,21 +96,21 @@ Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
   - Wedge: One receipt board, auditor, and MSP cite — same RID
 - **ship-fwd-103** FQ-044 · GTM 100 · goal 84 · open · A · RID continuity cross-service
   - Wedge: One receipt board, auditor, and MSP cite — same RID
-- **ship-fwd-068** FQ-009 · GTM 100 · goal 64 · open · D · Competitive vs Fiddler positioning
+- **ship-fwd-068** FQ-009 · GTM 100 · goal 64 · open · D · Internal positioning — receipt export
   - Wedge: One receipt board, auditor, and MSP cite — same RID
-- _…and 32 more in tier_
+- _…and 37 more in tier_
 
-### S2 — Copilot complement (39 plans)
+### S2 — Copilot complement (20 plans)
 
-- **ship-fwd-062** FQ-003 · GTM 100 · goal 96 · open · A · Agent registry gap verify script
+- **ship-fwd-229** FQ-170 · GTM 100 · goal 88 · open · A · Copilot governance workspace agent registry CTA
   - Wedge: Registry tells what exists; Noetfield tells what was permitted
-- **ship-fwd-461** FQ-402 · GTM 94 · goal 72 · open · M+D · Agent 365 MSP complement one-pager
+- **ship-fwd-064** FQ-005 · GTM 100 · goal 76 · open · A · `/copilot/governance/` workspace agent registry section
   - Wedge: Registry tells what exists; Noetfield tells what was permitted
-- **ship-fwd-060** FQ-001 · GTM 100 · goal 72 · open · D · Agent 365 complement one-pager
+- **ship-fwd-099** FQ-040 · GTM 100 · goal 64 · open · A · `/copilot/quickscan/` step verify
   - Wedge: Registry tells what exists; Noetfield tells what was permitted
-- **ship-fwd-229** FQ-170 · GTM 100 · goal 92 · open · A · Copilot governance Agent 365 CTA
+- **ship-fwd-173** FQ-114 · GTM 100 · goal 64 · open · A · Copilot funnel browser E2E
   - Wedge: Registry tells what exists; Noetfield tells what was permitted
-- _…and 35 more in tier_
+- _…and 16 more in tier_
 
 ### S4 — Trust / institutional UI (16 plans)
 
@@ -124,19 +124,19 @@ Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
   - Wedge: Honest framework grid — oriented not certified
 - _…and 12 more in tier_
 
-### S1 — Positioning / copy (7 plans)
+### S1 — Positioning / copy (8 plans)
 
-- **ship-fwd-069** FQ-010 · GTM 97 · goal 56 · open · A · Homepage meta refresh Agent 365 era
+- **ship-fwd-069** FQ-010 · GTM 97 · goal 56 · open · A · Homepage meta refresh workspace agent registry era
   - Wedge: Audit trail your Copilot deployment will be asked for
 - **ship-fwd-131** FQ-072 · GTM 97 · goal 56 · open · A · Homepage social proof strip
   - Wedge: Audit trail your Copilot deployment will be asked for
 - **ship-fwd-231** FQ-172 · GTM 97 · goal 56 · open · A · Homepage proof slot v2
   - Wedge: Audit trail your Copilot deployment will be asked for
-- **ship-fwd-079** FQ-020 · GTM 77 · goal 32 · open · D · Canada channel one-pager update
+- **ship-fwd-089** FQ-030 · GTM 79 · goal 32 · open · D · Internal positioning — compliance export
   - Wedge: Audit trail your Copilot deployment will be asked for
-- _…and 3 more in tier_
+- _…and 4 more in tier_
 
-### S3 — MSP channel (91 plans)
+### S3 — MSP channel (94 plans)
 
 - **ship-fwd-477** FQ-418 · GTM 100 · goal 76 · open · M+A · QuickScan partner-branded export
   - Wedge: MSP delivers receipt, not another dashboard
@@ -146,9 +146,9 @@ Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
   - Wedge: MSP delivers receipt, not another dashboard
 - **ship-fwd-489** FQ-430 · GTM 100 · goal 76 · open · M+A · Partner security FAQ in procurement
   - Wedge: MSP delivers receipt, not another dashboard
-- _…and 87 more in tier_
+- _…and 90 more in tier_
 
-### S5 — Federal lane (96 plans)
+### S5 — Federal lane (98 plans)
 
 - **ship-fwd-203** FQ-144 · GTM 100 · goal 68 · open · A · Framework picker on procurement
   - Wedge: Pre-execution evidence — vendor layer only
@@ -158,19 +158,19 @@ Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
   - Wedge: Pre-execution evidence — vendor layer only
 - **ship-fwd-450** FQ-391 · GTM 96 · goal 56 · open · F+A · Forward queue v4 coherence gate
   - Wedge: Pre-execution evidence — vendor layer only
-- _…and 92 more in tier_
+- _…and 94 more in tier_
 
-### S7 — Hardening (112 plans)
+### S7 — Hardening (116 plans)
 
+- **ship-fwd-066** FQ-007 · GTM 67 · goal 56 · open · A · Connector manifest workspace agent registry stub row
+  - Wedge: Verify bundle stays green — no buyer story alone
 - **ship-fwd-234** FQ-175 · GTM 77 · goal 56 · open · A · Economic signal verify v2
   - Wedge: Verify bundle stays green — no buyer story alone
 - **ship-fwd-092** FQ-033 · GTM 71 · goal 56 · open · A · Permission debt checklist ol
   - Wedge: Verify bundle stays green — no buyer story alone
 - **ship-fwd-110** FQ-051 · GTM 71 · goal 56 · open · A · OpenAPI status field `openapi` path
   - Wedge: Verify bundle stays green — no buyer story alone
-- **ship-fwd-136** FQ-077 · GTM 71 · goal 56 · open · A · Footer Governance API discoverability
-  - Wedge: Verify bundle stays green — no buyer story alone
-- _…and 108 more in tier_
+- _…and 112 more in tier_
 
 ### S8 — Agentic (Hub) (47 plans)
 
@@ -191,4 +191,4 @@ Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
 - [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)
 - [SUCCESS_MODEL_TIERS_v1.md](./SUCCESS_MODEL_TIERS_v1.md)
 - [ENRICHED_PICKS_NEXT_50_v1.md](./ENRICHED_PICKS_NEXT_50_v1.md)
-- [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](../../strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md)
+- [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](../../strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md)

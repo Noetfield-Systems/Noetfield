@@ -1,6 +1,6 @@
 # Pick intelligence — unified 500 v3
 
-**Status:** LOCKED pick logic · benchmark synthesis
+**Status:** LOCKED pick logic · pattern synthesis
 **Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`
 
 ## Executive rule
@@ -12,9 +12,9 @@
 
 | Signal | Weight | Why |
 |--------|--------|-----|
-| Success tier (S0–S8) | 0–100 base | Benchmark-aligned buyer outcome |
+| Success tier (S0–S8) | 0–100 base | Pattern-aligned buyer outcome |
 | Goal alignment | 0–100 | Locked goal keyword match (customer_1, tle_wedge, …) |
-| Benchmark step | 1–10 | Maps to INSTITUTIONAL_BENCHMARK_10_STEP_PLAN |
+| Pattern step | 1–10 | Maps to INSTITUTIONAL_SITE_PLAN_10_STEP |
 | T1 vs T2/T3 | +12 / +5 | Revenue-critical path |
 | Disk lane (A) | +10 | Ships buyer-visible artifact |
 | Hub lane (H) | −20 | R-011 — not NF-CLOUD implement |
@@ -47,11 +47,11 @@ flowchart TD
 
 ## Suggested iter bundles
 
-- **iter-1** (GTM 300): ship-fwd-097 · ship-fwd-081 · ship-fwd-062
-- **iter-2** (GTM 294): ship-fwd-109 · ship-fwd-105 · ship-fwd-461
-- **iter-3** (GTM 300): ship-fwd-124 · ship-fwd-103 · ship-fwd-060
-- **iter-4** (GTM 300): ship-fwd-170 · ship-fwd-068 · ship-fwd-229
-- **iter-5** (GTM 300): ship-fwd-260 · ship-fwd-289 · ship-fwd-220
+- **iter-1** (GTM 300): ship-fwd-097 · ship-fwd-081 · ship-fwd-229
+- **iter-2** (GTM 300): ship-fwd-109 · ship-fwd-105 · ship-fwd-064
+- **iter-3** (GTM 300): ship-fwd-124 · ship-fwd-103 · ship-fwd-099
+- **iter-4** (GTM 300): ship-fwd-170 · ship-fwd-068 · ship-fwd-173
+- **iter-5** (GTM 300): ship-fwd-260 · ship-fwd-289 · ship-fwd-094
 
 ## Structured prompt fields
 
@@ -65,8 +65,8 @@ Every plan in `unified_500_index.json` includes `prompt_structured`:
 | `anti_scope` | Tier B/C / P9 deferrals |
 | `pick_rationale` | Why this rank |
 | `prompt_redesigned` | Full brainstorm-enriched agent brief |
-| `benchmark_refs` | Reference vendors (Vanta, Inforcer, …) |
-| `copy_wedge` | Buyer-facing pattern from benchmark |
+| `pattern_refs` | Internal pattern labels (trust-center-grid, msp-two-tier, …) |
+| `copy_wedge` | Buyer-facing pattern wedge |
 
 ## Related
 

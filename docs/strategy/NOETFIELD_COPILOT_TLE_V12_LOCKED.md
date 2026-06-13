@@ -79,7 +79,7 @@ Default factors (weights must sum to 1.0):
 |--------|--------|--------|
 | `required_evidence_coverage` | 0.40 | Evidence index vs required connector set |
 | `control_pass_rate` | 0.35 | Copilot control catalog test results |
-| `sensitivity_boundary_compliance` | 0.25 | Purview / label boundary checks |
+| `sensitivity_boundary_compliance` | 0.25 | compliance metadata / label boundary checks |
 
 Score is **reproducible** from stored inputs — no LLM randomness in v1.
 
@@ -107,7 +107,7 @@ When ASF says **implement** from this lock:
 
 **Homepage hero (Trust Ledger):**
 
-> Governance & evidence for Microsoft Copilot — before you deploy, not after the audit.
+> Governance & evidence for workspace platform Copilot — before you deploy, not after the audit.
 
 **Procurement one-pager headline:**
 

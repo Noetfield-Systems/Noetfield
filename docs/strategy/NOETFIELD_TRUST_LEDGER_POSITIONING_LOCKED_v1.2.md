@@ -36,7 +36,7 @@
 |--------|----------------|
 | **Trust Ledger Core** | Append-only TLE store; signed digests; exportable board packs |
 | **Evidence Index** | Metadata catalog (sources, hashes, retention) |
-| **Evidence Intake Connector Layer** | Purview, Entra ID, M365 Audit Logs, SharePoint + optional connectors |
+| **Evidence Intake Connector Layer** | compliance metadata, identity metadata, M365 Audit Logs, SharePoint + optional connectors |
 | **Decision Log UI (Trust Ledger Workspace v0)** | Read-only nav, search, TLE viewer, PDF/Board Pack export |
 | **TLE Generator** | Template engine: intake → TLE YAML/JSON + **Confidence Score** |
 | **Procurement Asset Manager** | Evidence Intake Contract generator + ingestion rules UI |
@@ -149,7 +149,7 @@ Bridge from Phase 1: [tenant-append-only-audit-schema-outline.md](../spec/tenant
 
 - TLE draft from ingested evidence + template  
 - Two+ approvers sign; signed TLE immutable  
-- Purview + Entra ID metadata ingested and displayed  
+- compliance metadata + identity metadata metadata ingested and displayed  
 - PDF export with evidence index + signatures  
 - Hashes + `audit_digest` verifiable via KMS stub  
 
