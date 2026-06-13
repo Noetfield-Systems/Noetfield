@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply June 2026 institutional site frame to GTM tier HTML pages."""
+"""Apply June 2026 institutional + bank-grade site frame to GTM tier HTML pages."""
 
 from __future__ import annotations
 
@@ -13,37 +13,64 @@ TIER_PAGES = (
     ROOT / "enterprise" / "index.html",
     ROOT / "bank-pilot" / "index.html",
     ROOT / "partners" / "index.html",
+    ROOT / "partners" / "msp" / "index.html",
+    ROOT / "federal" / "index.html",
     ROOT / "trust-center" / "index.html",
     ROOT / "trust-ledger" / "index.html",
     ROOT / "copilot" / "index.html",
+    ROOT / "copilot" / "demo" / "index.html",
+    ROOT / "copilot" / "pilot" / "index.html",
+    ROOT / "copilot" / "procurement" / "index.html",
     ROOT / "trust-brief" / "index.html",
     ROOT / "console" / "index.html",
 )
 
-CSS_LINK = '<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />'
-BENCHMARK_CSS = '<link rel="stylesheet" href="/assets/noetfield-institutional-grid.css" />'
+CSS_2026 = '<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />'
+GRID_CSS = '<link rel="stylesheet" href="/assets/noetfield-institutional-grid.css" />'
+BANK_CSS = '<link rel="stylesheet" href="/assets/noetfield-bank-grade.css" />'
 META_MARKER = '<meta name="nf-institutional" content="2026-06" />'
 FRFI_CSS = '<link rel="stylesheet" href="/assets/noetfield-frfi.css" />'
 
+GRID_PAGES = {
+    "partners", "partners/msp", "federal", "trust-center", "trust-ledger",
+    "enterprise", "bank-pilot", "index",
+}
 
-def ensure_stylesheet(text: str) -> str:
+FRFI_PAGES = {"bank-pilot", "enterprise", "federal"}
+BANK_GRADE_PAGES = {
+    "index", "enterprise", "bank-pilot", "trust-center", "trust-ledger",
+    "copilot", "copilot/demo", "copilot/pilot", "copilot/procurement",
+    "partners", "partners/msp", "federal", "trust-brief", "console",
+}
+
+
+def page_key(path: Path) -> str:
+    rel = path.relative_to(ROOT)
+    if rel.name != "index.html":
+        return str(rel.parent).replace("\\", "/")
+    parent = str(rel.parent).replace("\\", "/")
+    return "." if parent == "." else parent
+
+
+def insert_after_anchor(text: str, anchor: str, insert: str) -> str:
+    if insert in text:
+        return text
+    if anchor in text:
+        return text.replace(anchor, anchor + "\n " + insert, 1)
+    return text.replace("</head>", f" {insert}\n</head>", 1)
+
+
+def ensure_stylesheets(text: str, key: str) -> str:
+    anchor = '<link rel="stylesheet" href="/assets/noetfield-sales.css" />'
     if "noetfield-institutional-2026.css" not in text:
-        anchor = '<link rel="stylesheet" href="/assets/noetfield-sales.css" />'
-        if anchor in text:
-            text = text.replace(anchor, anchor + "\n " + CSS_LINK, 1)
-        else:
-            text = text.replace("</head>", f" {CSS_LINK}\n</head>", 1)
-    if BENCHMARK_CSS not in text:
-        if CSS_LINK in text:
-            text = text.replace(CSS_LINK, CSS_LINK + "\n " + BENCHMARK_CSS, 1)
-        elif "noetfield-institutional-2026.css" in text:
-            text = text.replace(
-                '<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />',
-                CSS_LINK + "\n " + BENCHMARK_CSS,
-                1,
-            )
-        else:
-            text = text.replace("</head>", f" {BENCHMARK_CSS}\n</head>", 1)
+        text = insert_after_anchor(text, anchor, CSS_2026)
+    if key in GRID_PAGES and GRID_CSS not in text:
+        text = insert_after_anchor(text, CSS_2026, GRID_CSS)
+    if key in BANK_GRADE_PAGES and BANK_CSS not in text:
+        anchor2 = GRID_CSS if GRID_CSS in text else CSS_2026
+        text = insert_after_anchor(text, anchor2, BANK_CSS)
+    if key in FRFI_PAGES and FRFI_CSS not in text:
+        text = insert_after_anchor(text, CSS_2026, FRFI_CSS)
     return text
 
 
@@ -53,13 +80,64 @@ def ensure_meta(text: str) -> str:
     return text.replace("<head>", "<head>\n " + META_MARKER, 1)
 
 
-def ensure_body_class(text: str) -> str:
-    if "nf-site-2026" in text:
-        return text
-    text = re.sub(r"<body([^>]*)>", r'<body\1 class="nf-site-2026">', text, count=1)
-    if 'class="nf-site-2026"' not in text:
-        text = text.replace("<body>", '<body class="nf-site-2026">', 1)
+def merge_body_classes(existing: str, *classes: str) -> str:
+    found = set(re.findall(r"\b([\w-]+)\b", existing or ""))
+    for c in classes:
+        found.add(c)
+    ordered = []
+    for c in ("nf-frfi", "nf-site-2026", "nf-bank-grade"):
+        if c in found:
+            ordered.append(c)
+    for c in sorted(found):
+        if c not in ordered:
+            ordered.append(c)
+    return " ".join(ordered)
+
+
+def ensure_body_class(text: str, key: str) -> str:
+    classes = ["nf-site-2026"]
+    if key in FRFI_PAGES:
+        classes.insert(0, "nf-frfi")
+    if key in BANK_GRADE_PAGES:
+        classes.append("nf-bank-grade")
+
+    def repl(match: re.Match[str]) -> str:
+        attrs = match.group(1) or ""
+        class_match = re.search(r'\bclass="([^"]*)"', attrs)
+        if class_match:
+            merged = merge_body_classes(class_match.group(1), *classes)
+            attrs = re.sub(r'\bclass="[^"]*"', f'class="{merged}"', attrs, count=1)
+            attrs = re.sub(r'\bclass="[^"]*"\s+class="[^"]*"', f'class="{merged}"', attrs)
+        else:
+            attrs = (attrs + f' class="{" ".join(classes)}"').strip()
+        return f"<body{attrs}>"
+
+    if re.search(r"<body[^>]*class=", text):
+        text = re.sub(r"<body([^>]*)>", repl, text, count=1)
+        text = re.sub(
+            r'class="([^"]*)"\s+class="([^"]*)"',
+            lambda m: f'class="{merge_body_classes(m.group(1), m.group(2))}"',
+            text,
+            count=1,
+        )
+    else:
+        text = re.sub(
+            r"<body([^>]*)>",
+            lambda m: f'<body{m.group(1)} class="{" ".join(classes)}">',
+            text,
+            count=1,
+        )
     return text
+
+
+def ensure_skip_link(text: str) -> str:
+    if 'class="skip"' in text or "skip to content" in text.lower():
+        return text
+    return text.replace(
+        '<header id="nfHeader">',
+        '<a class="skip" href="#main">Skip to content</a>\n <header id="nfHeader">',
+        1,
+    )
 
 
 def strip_inline_hero_actions(text: str) -> str:
@@ -73,31 +151,20 @@ def strip_inline_hero_actions(text: str) -> str:
     )
 
 
-def ensure_frfi_on_bank_enterprise(text: str, path: Path) -> str:
-    if path.name != "index.html":
-        return text
-    if path.parent.name not in ("bank-pilot", "enterprise"):
-        return text
-    if "noetfield-frfi.css" in text:
-        return text
-    if CSS_LINK in text:
-        return text.replace(CSS_LINK, CSS_LINK + "\n " + FRFI_CSS, 1)
-    return text
-
-
 def main() -> int:
     changed = 0
     for path in TIER_PAGES:
         if not path.is_file():
             print("SKIP missing", path.relative_to(ROOT))
             continue
+        key = page_key(path)
         original = path.read_text(encoding="utf-8")
         updated = original
-        updated = ensure_stylesheet(updated)
         updated = ensure_meta(updated)
-        updated = ensure_body_class(updated)
+        updated = ensure_stylesheets(updated, key)
+        updated = ensure_body_class(updated, key)
+        updated = ensure_skip_link(updated)
         updated = strip_inline_hero_actions(updated)
-        updated = ensure_frfi_on_bank_enterprise(updated, path)
         if updated != original:
             path.write_text(updated, encoding="utf-8")
             print("OK  ", path.relative_to(ROOT))

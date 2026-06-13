@@ -22,6 +22,7 @@ P0_MARKERS = ('name="viewport"', "nfHeader", "noetfield-tokens.css")
 INSTITUTIONAL_2026_MARKERS = (
     'name="nf-institutional"',
     "noetfield-institutional-2026.css",
+    "noetfield-bank-grade.css",
     "nf-site-2026",
 )
 BANK_PILOT_MARKERS = ("OSFI E-23", "nf-policy-callout", "noetfield-frfi.css")
