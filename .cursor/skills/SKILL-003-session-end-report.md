@@ -8,7 +8,8 @@
 2. Fill all required fields.
 3. List `verify_commands_run` with exit codes.
 4. If new mistake pattern → bump [.cursor/agent-memory/MEMORY_LOCKED.yaml](../agent-memory/MEMORY_LOCKED.yaml) `version` + add `lessons` entry.
-5. Optional YAML footer for Prompt OS ingest — [EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md](../../docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md).
+5. File `session_end` event via [SKILL-010](./SKILL-010-agentic-event-gate.md) (R-012).
+6. Optional YAML footer for Prompt OS ingest — [EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md](../../docs/spec/EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md).
 
 ## Minimum reply to user
 

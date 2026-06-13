@@ -9,6 +9,7 @@
    - `ops/private/`
    - `docs/internal/`
 3. Run `./scripts/verify-agent-scope.sh` — must exit 0.
+4. Before push/PR: run `./scripts/verify-agent-enforcement.sh` — must exit 0 (R-013).
 4. Scan staged diff for forbidden strings (script covers tracked files; also check commit message):
 
 | Forbidden in commit msg / diff | Block |

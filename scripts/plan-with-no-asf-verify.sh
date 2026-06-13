@@ -8,8 +8,8 @@ cd "$ROOT"
 
 echo "=== plan-with-no-asf-verify ==="
 
-chmod +x scripts/verify-agent-scope.sh
-./scripts/verify-agent-scope.sh
+chmod +x scripts/verify-agent-scope.sh scripts/verify-agent-enforcement.sh
+./scripts/verify-agent-enforcement.sh
 
 health="$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 3 "http://127.0.0.1:${NF_DEV_PUBLIC_PORT}/health" 2>/dev/null || echo "000")"
 if [[ "$health" != "200" ]]; then

@@ -1,8 +1,8 @@
 # Noetfield agent memory — LOCKED (versioned in git)
 # Read at EVERY session start. Bump version when adding lessons.
 
-version: 9
-updated: "2026-06-10T12:00:00Z"
+version: 11
+updated: "2026-06-13T00:00:00Z"
 updated_by: NF-CLOUD-AGENT
 
 company_scope:
@@ -55,12 +55,20 @@ hard_rules:
     incident: INCIDENT-2026-06-06-003
     since: "2026-06-06"
   - id: R-010
-    rule: On rule conflict, run SKILL-007 before edits. Precedence — founder order > R-001–R-011 > incidents > execution_authority false > workflow bundles > ship-first/plan.json.
+    rule: On rule conflict, run SKILL-007 before edits. Precedence — founder order > R-001–R-013 > incidents > execution_authority false > workflow bundles > ship-first/plan.json.
     since: "2026-06-06"
   - id: R-011
     rule: Cursor AUTO-RUN is not P0. Commercial outreach and calls = agentic layer only; founder Hub + ASK. NF-CLOUD = validators + www/GTM assets — never send email/call as founder.
     source: docs/ops/FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md
     since: "2026-06-10"
+  - id: R-012
+    rule: File agent events to .cursor/events/REGISTRY.md at session end and on gate/verify failures — SKILL-010.
+    source: docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md
+    since: "2026-06-13"
+  - id: R-013
+    rule: Run ./scripts/verify-agent-enforcement.sh before every push and PR (in addition to verify-agent-scope before commit).
+    source: docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md
+    since: "2026-06-13"
 
 recurring_mistakes:
   - id: M-001
@@ -105,6 +113,9 @@ lessons:
   - id: L-006
     lesson: Incidents 002–005 closed 2026-06-06 after controls on main — law remains active via R-007/R-008/R-010; closure does not relax ask-first.
     since: "2026-06-06"
+  - id: L-007
+    lesson: Eval→enforce chain is formalized — events registry + verify-agent-enforcement gate; incidents remain for boundary violations only.
+    since: "2026-06-13"
 
 pre_commit_checklist:
   - Read MEMORY_LOCKED.yaml if not read this session
@@ -114,12 +125,20 @@ pre_commit_checklist:
   - Confirm diff is Noetfield-only
   - No trustfield.ca / TF-* / UPG TrustField strings in tracked files
 
+pre_push_checklist:
+  - ./scripts/verify-agent-enforcement.sh
+  - File session_end event via SKILL-010 (R-012)
+
 session_start_checklist:
   - Read MEMORY_LOCKED.yaml
+  - Read docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md (60s)
+  - Read docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md if docs feel fragmented (or SKILL-009)
   - Read incidents/REGISTRY.md open items
   - Read PROJECT_BOUNDARIES_LOCKED.md
   - Apply SKILL-007 if any rule conflict detected
   - Apply SKILL-006 ask-before-implement
   - Apply SKILL-001 scope gate (after permission only)
   - Apply SKILL-008 agentic commercial boundary
+  - Apply SKILL-009 docs-ssot-entry before creating new doc indexes
+  - Apply SKILL-010 — plan session_id for event filing
   - Read FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md

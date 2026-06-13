@@ -7,20 +7,26 @@ alwaysApply: true
 
 # Noetfield self-audit loop (mandatory)
 
-Follow [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](../../docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md).
+Follow [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](../../docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md) and [docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md](../../docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md).
 
 ## Session start
 
-1. Read [.cursor/agent-memory/MEMORY_LOCKED.yaml](../agent-memory/MEMORY_LOCKED.yaml) — includes **R-011**
+1. Read [.cursor/agent-memory/MEMORY_LOCKED.yaml](../agent-memory/MEMORY_LOCKED.yaml) — includes **R-011**–**R-013**
 2. Read [.cursor/incidents/REGISTRY.md](../incidents/REGISTRY.md) open items
 3. Apply [.cursor/skills/SKILL-001-scope-gate-before-work.md](../skills/SKILL-001-scope-gate-before-work.md)
 4. Apply [.cursor/skills/SKILL-008-agentic-commercial-boundary.md](../skills/SKILL-008-agentic-commercial-boundary.md)
-5. Read [FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md](../../docs/ops/FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md)
+5. Apply [.cursor/skills/SKILL-010-agentic-event-gate.md](../skills/SKILL-010-agentic-event-gate.md) — plan session_id
+6. Read [FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md](../../docs/ops/FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md)
 
 ## Before commit
 
 - [.cursor/skills/SKILL-002-pre-commit-audit.md](../skills/SKILL-002-pre-commit-audit.md)
 - `./scripts/verify-agent-scope.sh` must pass
+
+## Before push / PR
+
+- `./scripts/verify-agent-enforcement.sh` must pass (R-013)
+- File `session_end` event (R-012)
 
 ## Docs
 

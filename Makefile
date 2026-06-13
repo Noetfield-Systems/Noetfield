@@ -51,6 +51,10 @@ verify-agent-scope:
 	@chmod +x scripts/verify-agent-scope.sh
 	./scripts/verify-agent-scope.sh
 
+verify-agent-enforcement:
+	@chmod +x scripts/verify-agent-enforcement.sh
+	./scripts/verify-agent-enforcement.sh
+
 verify-ui-e2e:
 	@chmod +x scripts/verify-ui-e2e.sh
 	./scripts/verify-ui-e2e.sh

@@ -60,6 +60,12 @@ flowchart TD
 
 ---
 
+## § Post-audit addendum (2026-06-13 — enforcement v2)
+
+8. Read [AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md](./AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md) — eval→enforce chain
+9. Apply **R-012** / **SKILL-010** — file events at session end
+10. Apply **R-013** — `verify-agent-enforcement.sh` before push/PR
+
 ## § Post-audit addendum (2026-06-10 — agent-maintained)
 
 Also at session start (cloud agents):
@@ -98,6 +104,11 @@ Every agent-written doc: [AGENT_DOC_TAGGING_LOCKED_v1.md](./AGENT_DOC_TAGGING_LO
 2. Apply: [.cursor/skills/SKILL-002-pre-commit-audit.md](../../.cursor/skills/SKILL-002-pre-commit-audit.md)
 3. If scope script FAIL → do not commit; file incident if boundary was crossed
 
+## Phase 2b — Pre-push enforcement (mandatory)
+
+1. Run: `./scripts/verify-agent-enforcement.sh` (R-013)
+2. File `verify_run` + `session_end` events via [.cursor/skills/SKILL-010-agentic-event-gate.md](../../.cursor/skills/SKILL-010-agentic-event-gate.md) (R-012)
+
 ---
 
 ## Phase 3 — Session end report
@@ -132,10 +143,13 @@ Optional ingest footer: [EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md](../spec/EXECUTIO
 | Asset | Path |
 |-------|------|
 | Memory | [.cursor/agent-memory/MEMORY_LOCKED.yaml](../../.cursor/agent-memory/MEMORY_LOCKED.yaml) |
+| Enforcement map | [docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md](./AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md) |
 | Incidents | [.cursor/incidents/](../../.cursor/incidents/) |
+| Events | [.cursor/events/](../../.cursor/events/) |
 | Skills | [.cursor/skills/](../../.cursor/skills/) |
 | Session reports | [.cursor/reports/](../../.cursor/reports/) |
 | Scope verify | [scripts/verify-agent-scope.sh](../../scripts/verify-agent-scope.sh) |
+| Enforcement verify | [scripts/verify-agent-enforcement.sh](../../scripts/verify-agent-enforcement.sh) |
 | Boundaries | [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md) |
 
 ---
@@ -144,7 +158,9 @@ Optional ingest footer: [EXECUTION_TRUTH_AGENT_REPLY_LOCKED.md](../spec/EXECUTIO
 
 ```bash
 ./scripts/verify-agent-scope.sh
+./scripts/verify-agent-enforcement.sh
 test -f docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md
+test -f docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md
 test -f .cursor/agent-memory/MEMORY_LOCKED.yaml
 ```
 

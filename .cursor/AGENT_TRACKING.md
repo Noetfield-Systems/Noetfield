@@ -5,11 +5,14 @@
 ## Self-audit loop (mandatory)
 
 1. [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](../docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md)
-2. [.cursor/agent-memory/MEMORY_LOCKED.yaml](agent-memory/MEMORY_LOCKED.yaml) — **session memory**
-3. [.cursor/incidents/REGISTRY.md](incidents/REGISTRY.md) — **incident reports**
-4. [.cursor/skills/](skills/) — scope gate, pre-commit, session report, incident filing
-5. `./scripts/verify-agent-scope.sh` — run before every commit
-6. [docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md](../docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md) — **tag + date on every agent doc**
+2. [docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md](../docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md) — **eval→enforce map**
+3. [.cursor/agent-memory/MEMORY_LOCKED.yaml](agent-memory/MEMORY_LOCKED.yaml) — **session memory**
+4. [.cursor/incidents/REGISTRY.md](incidents/REGISTRY.md) — **incident reports**
+5. [.cursor/events/REGISTRY.md](events/REGISTRY.md) — **session/gate events** (SKILL-010)
+6. [.cursor/skills/](skills/) — scope gate, pre-commit, session report, incident filing, event gate
+7. `./scripts/verify-agent-scope.sh` — run before every commit (R-005)
+8. `./scripts/verify-agent-enforcement.sh` — run before push/PR (R-013)
+9. [docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md](../docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md) — **tag + date on every agent doc**
 
 **Law:** Noetfield only. **Never** TrustField / trustfield.ca / VIRLUX. See [INCIDENT-2026-06-06-001](incidents/INCIDENT-2026-06-06-001-trustfield-scope-bleed.md).
 

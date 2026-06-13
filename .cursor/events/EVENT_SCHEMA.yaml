@@ -1,0 +1,62 @@
+# Agent event schema — lightweight session/gate audit trail
+# File events per SKILL-010 / R-012. Bump schema_version on breaking changes.
+
+schema_version: 1
+updated: "2026-06-13T00:00:00Z"
+
+event_types:
+  session_start:
+    required: [agent_tag, session_id, memory_version]
+    optional: [branch, task_summary]
+  scope_gate_pass:
+    required: [agent_tag, session_id, company]
+    optional: [task_summary]
+  scope_gate_fail:
+    required: [agent_tag, session_id, reason]
+    optional: [forbidden_token]
+  rule_conflict:
+    required: [agent_tag, session_id, rules_in_conflict, winner]
+    optional: [resolution]
+  verify_run:
+    required: [agent_tag, session_id, script, exit_code]
+    optional: [branch, commit_sha]
+  pre_commit:
+    required: [agent_tag, session_id, verify_scope_exit]
+    optional: [files_changed]
+  session_end:
+    required: [agent_tag, session_id, shipped_summary, scope_confirmed]
+    optional: [open_items, verify_commands]
+  incident_filed:
+    required: [agent_tag, session_id, incident_id, severity]
+    optional: [title]
+
+fields:
+  agent_tag:
+    type: string
+    enum: [NF-CLOUD-AGENT, noetfield_local]
+  session_id:
+    type: string
+    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+$"
+    example: "2026-06-13-agentic-enforcement-v2"
+  memory_version:
+    type: integer
+    minimum: 11
+  company:
+    type: string
+    enum: [Noetfield]
+  scope_confirmed:
+    type: string
+    enum: [noetfield_only]
+  exit_code:
+    type: integer
+  script:
+    type: string
+    examples:
+      - verify-agent-scope.sh
+      - verify-agent-enforcement.sh
+      - plan-with-no-asf-verify.sh
+
+filing:
+  registry: .cursor/events/REGISTRY.md
+  skill: .cursor/skills/SKILL-010-agentic-event-gate.md
+  rule: R-012

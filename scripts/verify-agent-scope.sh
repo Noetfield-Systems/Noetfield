@@ -17,11 +17,14 @@ done < <(git ls-files 2>/dev/null | grep -E '(^ops/private/|^docs/internal/)' ||
 # 2) Required self-audit files
 for f in \
   docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md \
+  docs/ops/AGENTIC_ENFORCEMENT_MAP_LOCKED_v1.md \
   docs/ops/FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md \
   .cursor/agent-memory/MEMORY_LOCKED.yaml \
   .cursor/incidents/REGISTRY.md \
+  .cursor/events/REGISTRY.md \
   .cursor/skills/SKILL-001-scope-gate-before-work.md \
-  .cursor/skills/SKILL-008-agentic-commercial-boundary.md; do
+  .cursor/skills/SKILL-008-agentic-commercial-boundary.md \
+  .cursor/skills/SKILL-010-agentic-event-gate.md; do
   if [[ -f "$f" ]]; then
     echo "OK   exists $f"
   else
@@ -37,12 +40,14 @@ else
   echo "OK   memory version locked"
 fi
 
-if grep -q 'R-011' .cursor/agent-memory/MEMORY_LOCKED.yaml 2>/dev/null; then
-  echo "OK   R-011 agentic commercial law locked"
-else
-  echo "FAIL MEMORY_LOCKED.yaml missing R-011" >&2
-  fail=1
-fi
+for rid in R-011 R-012 R-013; do
+  if grep -q "$rid" .cursor/agent-memory/MEMORY_LOCKED.yaml 2>/dev/null; then
+    echo "OK   $rid locked"
+  else
+    echo "FAIL MEMORY_LOCKED.yaml missing $rid" >&2
+    fail=1
+  fi
+done
 
 # 3) Scan git-tracked files only — product/www must not implement TrustField
 is_allowlisted() {
