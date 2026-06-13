@@ -28,6 +28,11 @@ TIER_PAGES = (
 CSS_2026 = '<link rel="stylesheet" href="/assets/noetfield-institutional-2026.css" />'
 GRID_CSS = '<link rel="stylesheet" href="/assets/noetfield-institutional-grid.css" />'
 BANK_CSS = '<link rel="stylesheet" href="/assets/noetfield-bank-grade.css" />'
+V4_CSS = '<link rel="stylesheet" href="/assets/noetfield-institutional-v4.css" />'
+FONT_PRECONNECT = (
+    '<link rel="preconnect" href="https://fonts.googleapis.com" />\n'
+    ' <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />'
+)
 META_MARKER = '<meta name="nf-institutional" content="2026-06" />'
 FRFI_CSS = '<link rel="stylesheet" href="/assets/noetfield-frfi.css" />'
 
@@ -69,6 +74,10 @@ def ensure_stylesheets(text: str, key: str) -> str:
     if key in BANK_GRADE_PAGES and BANK_CSS not in text:
         anchor2 = GRID_CSS if GRID_CSS in text else CSS_2026
         text = insert_after_anchor(text, anchor2, BANK_CSS)
+    if key in BANK_GRADE_PAGES and V4_CSS not in text:
+        text = insert_after_anchor(text, BANK_CSS, V4_CSS)
+    if key in BANK_GRADE_PAGES and 'rel="preconnect" href="https://fonts.googleapis.com"' not in text:
+        text = insert_after_anchor(text, V4_CSS if V4_CSS in text else BANK_CSS, FONT_PRECONNECT)
     if key in FRFI_PAGES and FRFI_CSS not in text:
         text = insert_after_anchor(text, CSS_2026, FRFI_CSS)
     return text
@@ -85,7 +94,7 @@ def merge_body_classes(existing: str, *classes: str) -> str:
     for c in classes:
         found.add(c)
     ordered = []
-    for c in ("nf-frfi", "nf-site-2026", "nf-bank-grade"):
+    for c in ("nf-frfi", "nf-site-2026", "nf-bank-grade", "nf-v4"):
         if c in found:
             ordered.append(c)
     for c in sorted(found):
@@ -100,6 +109,7 @@ def ensure_body_class(text: str, key: str) -> str:
         classes.insert(0, "nf-frfi")
     if key in BANK_GRADE_PAGES:
         classes.append("nf-bank-grade")
+        classes.append("nf-v4")
 
     def repl(match: re.Match[str]) -> str:
         attrs = match.group(1) or ""
