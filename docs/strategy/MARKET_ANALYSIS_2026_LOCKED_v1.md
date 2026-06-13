@@ -175,4 +175,4 @@ Per [UNIFIED_ENGINE_COMMERCIAL_MODEL_LOCKED_v1.md](../architecture/UNIFIED_ENGIN
 
 > **The product is the receipt, not the model.** In 2026, regulated buyers purchase **provable pre-execution decisions** — Microsoft supplies the registry; Noetfield supplies the **signed export your board puts in the governance meeting.**
 
-**Next disk deliverable:** Federal lane **FQ-301–303** (OMB appendix + `/federal/` stub) or v3 **FQ-201** after Form PICK. Federal batch: [NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md](./NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md) (400 plans total).
+**Next disk deliverable:** MSP lane **FQ-401–403** (partner kit + `/partners/msp/`) or federal **FQ-301** after Form PICK. Lanes: [F v4](./NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md) · [M v5](./NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md) (500 plans total).

@@ -64,6 +64,7 @@
 | [NOETFIELD_FORWARD_QUEUE_100_v2.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v2.md) | Upgraded forward plans FQ-101–200 (`ship-fwd-160`–`259`) |
 | [NOETFIELD_FORWARD_QUEUE_100_v3.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v3.md) | Scale forward plans FQ-201–300 (`ship-fwd-260`–`359`) |
 | [NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md) | **Federal-only** FQ-301–400 (`ship-fwd-360`–`459`) |
+| [NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md) | **MSP-only** FQ-401–500 (`ship-fwd-460`–`559`) |
 | [NOETFIELD_GTM_60_DAY_LOCKED_v1.md](./strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | 60-day CEO fence |
 
 ---

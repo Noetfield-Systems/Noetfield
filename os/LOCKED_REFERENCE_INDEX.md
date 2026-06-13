@@ -21,6 +21,7 @@
 | **Forward queue v2** | FQ-101–200 upgraded plans | [docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v2.md](../docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v2.md) |
 | **Forward queue v3** | FQ-201–300 scale plans | [docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v3.md](../docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v3.md) |
 | **Forward queue v4 federal** | FQ-301–400 **F lane only** | [docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md](../docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v4_FEDERAL.md) |
+| **Forward queue v5 MSP** | FQ-401–500 **M lane only** | [docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md](../docs/strategy/NOETFIELD_FORWARD_QUEUE_100_v5_MSP.md) |
 | Agent team sync | Team sync LOCKED v1 | [docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) |
 | Drift cloud read order | Cloud drift read order | [docs/ops/NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md) |
 | Agent context | Read order LOCKED v1 | [docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md](../docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md) |
