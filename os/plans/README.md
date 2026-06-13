@@ -1,18 +1,16 @@
 # Noetfield future plans library (NO ASF)
 
-**Count:** 1000 plan stubs (regenerate with `python3 scripts/generate-future-plans.py`)  
-**Canonical path:** `~/Desktop/Noetfield/os/plans/`  
-**Cursor mirror:** `~/.cursor/plans/noetfield-os/` (index only; full library stays in repo)
+**Count:** 1000 plan stubs (`nf-future-*`)  
+**Namespace:** `nf-future-0001` … `nf-future-1000` — see [DOCS_UNIFIED_MAP_LOCKED_v1.md](../../docs/ops/DOCS_UNIFIED_MAP_LOCKED_v1.md) for ID rules  
+**Active ship:** [GTM_NEXT.md](../../docs/ops/plans/no-asf/GTM_NEXT.md) (`ship-*`) — **not** this library
 
 ## When you say “plan with no ASF”
 
-Agents must:
+1. Pick from **[GTM_NEXT.md](../../docs/ops/plans/no-asf/GTM_NEXT.md)** first (`ship-*` IDs).
+2. If GTM_NEXT empty → wisdom backlog in [QUICK_PICK.md](../../docs/ops/plans/no-asf/QUICK_PICK.md) (`ship-fwd-*`).
+3. Long-term stubs here (`nf-future-*`) via [REGISTRY.json](./REGISTRY.json) — bridge: [BRIDGE_NF_PLAN_TO_NF_FUTURE.json](../../docs/ops/plans/BRIDGE_NF_PLAN_TO_NF_FUTURE.json).
 
-1. **Not** wait for ASF commit, push, ingest, or SourceA edits.
-2. Read [`REGISTRY.json`](./REGISTRY.json) or [`REGISTRY.md`](./REGISTRY.md).
-3. Pick the highest-value **backlog** item matching current `os/SHIP_NOW.md` / sprint (prefer **T0** then **T1**, lower phase number when tied).
-4. Open the plan file under `phase-*/T*/nf-future-*.md` and execute it (verify → ingest → sync → commit).
-5. **Update** the plan front matter `status: done` and append a line to [`REGISTRY.json`](./REGISTRY.json) `plans[].status` (or re-run generator after editing templates).
+Agents must **not** wait for ASF commit, push, ingest, or SourceA edits.
 
 ## Organization
 
@@ -32,7 +30,8 @@ Agents must:
 
 ## Active ship queue
 
-Immediate work still flows through [`os/plan.json`](../plan.json) `next_tasks` and [`os/SHIP_NOW.md`](../SHIP_NOW.md). This library is the **long-term backlog**; move items into `next_tasks` when ready to implement.
+**Authoritative:** [GTM_NEXT.md](../../docs/ops/plans/no-asf/GTM_NEXT.md) · [os/plan.json](../plan.json) · [os/SHIP_NOW.md](../SHIP_NOW.md).  
+This library is **long-term backlog** (`nf-future-*`); move items into GTM_NEXT when ready.
 
 ## Maintenance
 

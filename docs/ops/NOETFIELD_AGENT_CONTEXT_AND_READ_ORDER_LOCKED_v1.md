@@ -8,7 +8,7 @@
 | Lane | `noetfield_cloud` — semi-separate |
 | Thread | `THREAD-PORTFOLIO` |
 | Plane | `[DELIVERY]` |
-| Authority | ASF — bounded ship from [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) + `os/plan.json` `ship_rule` / `agentic_queue` when registry 1000/1000; ingest after; no self-start from `plan.json` alone (R-007/R-011) |
+| Authority | ASF — bounded ship from [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) + `os/plan.json`; registry synced (not engineering done); ingest after; no self-start (R-007/R-011) |
 
 **Link index (in-repo):** [AGENT_READ_LINKS_LOCKED_v1.md](./AGENT_READ_LINKS_LOCKED_v1.md) → § Cloud ship  
 **Canonical index (Mac):** `~/Desktop/SourceA/founder/repo-agent-notices/AGENT_READ_LINKS_INDEX.md`
@@ -20,18 +20,19 @@
 ### A. Git (cloud-safe)
 
 1. [AGENT_READ_LINKS_LOCKED_v1.md](./AGENT_READ_LINKS_LOCKED_v1.md) — § Cloud ship
-2. [NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](./NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) — local↔cloud bridge (committed)
-3. This file
-4. [os/SHIP_NOW.md](../../os/SHIP_NOW.md) → [os/plan.json](../../os/plan.json) · [os/LOCKED_REFERENCE_INDEX.md](../../os/LOCKED_REFERENCE_INDEX.md)
-5. **Long-term plans (1000):** [plans/no-asf/QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) when user says **PLAN WITH NO ASF**
-6. [os/sprint-trust-ledger-v1.2.md](../../os/sprint-trust-ledger-v1.2.md) or [lane_a_sprint_map.md](./lane_a_sprint_map.md)
-7. [PRODUCT_TRUTH.md](../../PRODUCT_TRUTH.md) · [POSITIONING.md](../../POSITIONING.md) · [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md)
-8. [docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md](../spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md)
-8b. **Diligence / external frameworks (LOCKED):** [docs/references/README.md](../references/README.md) — sources handbook + drift detection book (TLE, Trust Brief, monitoring)  
-8c. **Drift blueprints (after local push):** [NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md](./NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md) → [GOVERNANCE_DRIFT_BLUEPRINTS_INDEX_LOCKED_v1.md](../references/GOVERNANCE_DRIFT_BLUEPRINTS_INDEX_LOCKED_v1.md)
-9. [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md)
-10. [.cursor/AGENT_TRACKING.md](../../.cursor/AGENT_TRACKING.md)
-11. Active task (Issue / PR / Prompt OS task string)
+2. [DOCS_UNIFIED_MAP_LOCKED_v1.md](./DOCS_UNIFIED_MAP_LOCKED_v1.md) — if fragmented (SKILL-009)
+3. [NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](./NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) — local↔cloud bridge (committed)
+4. This file
+5. [os/SHIP_NOW.md](../../os/SHIP_NOW.md) → [os/plan.json](../../os/plan.json) → [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md)
+6. [plans/no-asf/QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) when user says **PLAN WITH NO ASF** (wisdom backlog only if GTM_NEXT empty)
+7. [os/sprint-trust-ledger-v1.2.md](../../os/sprint-trust-ledger-v1.2.md) or [lane_a_sprint_map.md](./lane_a_sprint_map.md)
+8. [PRODUCT_TRUTH.md](../../PRODUCT_TRUTH.md) · [POSITIONING.md](../../POSITIONING.md) · [OFFERINGS_LOCKED.md](../../OFFERINGS_LOCKED.md)
+9. [docs/spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md](../spec/TRUST_LEDGER_PRODUCT_BLUEPRINT_v1.2_LOCKED.md)
+10. **Diligence / frameworks (LOCKED):** [docs/references/README.md](../references/README.md)
+11. **Drift blueprints:** [NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md](./NOETFIELD_DRIFT_BLUEPRINTS_CLOUD_READ_ORDER_LOCKED_v1.md)
+12. [PROJECT_BOUNDARIES_LOCKED.md](../../PROJECT_BOUNDARIES_LOCKED.md)
+13. [.cursor/AGENT_TRACKING.md](../../.cursor/AGENT_TRACKING.md)
+14. Active task (Issue / PR / Prompt OS task string)
 
 ---
 
@@ -40,7 +41,7 @@
 Does **not** replace locked authority line above without founder unlock. Cloud agents also read:
 
 - [FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md](./FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md) — R-011
-- [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) — queue when registry 1000/1000 done
+- [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) — active ship queue (registry synced ≠ done)
 - [AGENTIC_COMMERCIAL_HANDOFF_v1.md](./AGENTIC_COMMERCIAL_HANDOFF_v1.md) — outreach = agentic layer
 
 **Ship rule (bounded):** Founder explicit `implement` + ≤3 tasks from GTM_NEXT — not self-start from `plan.json` or GTM_PRIORITY outreach rows alone.

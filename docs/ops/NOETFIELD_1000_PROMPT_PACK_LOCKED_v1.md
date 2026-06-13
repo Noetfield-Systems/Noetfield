@@ -18,14 +18,15 @@ When the founder says **PLAN WITH NO ASF**, run this fixed sequence — no ASF w
 | Step | Action |
 |------|--------|
 | 0 | Read [.cursor/agent-memory/MEMORY_LOCKED.yaml](../../.cursor/agent-memory/MEMORY_LOCKED.yaml) + SKILL-001 — **Noetfield only** |
-| 1 | Merge open ship PR to `main` if one exists |
-| 2 | Read [os/SHIP_NOW.md](../../os/SHIP_NOW.md) + [plans/no-asf/QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) |
-| 3 | Pick **max 3** tasks: GTM Tier A, Lane A — from [PROMPT_PACK_LOCKED/GTM_PRIORITY_100.md](./plans/PROMPT_PACK_LOCKED/GTM_PRIORITY_100.md) or QUICK_PICK |
-| 4 | Write `next_tasks` in [os/plan.json](../../os/plan.json) |
-| 5 | Branch `cursor/<slug>-37f0` → implement → `npm run build` if console touched |
-| 6 | Run **`./scripts/plan-with-no-asf-verify.sh`** |
-| 7 | `python3 scripts/sync-prompt-pack-status.py` → update plan stubs → [reports/cursor-reply-latest.txt](../../reports/cursor-reply-latest.txt) |
-| 8 | `./scripts/verify-agent-scope.sh` → commit `[NF-CLOUD-AGENT]` → push → draft PR |
+| 1 | Read [DOCS_UNIFIED_MAP_LOCKED_v1.md](./DOCS_UNIFIED_MAP_LOCKED_v1.md) if fragmented (SKILL-009) |
+| 2 | Merge open ship PR to `main` if one exists |
+| 3 | Read [os/SHIP_NOW.md](../../os/SHIP_NOW.md) → **[GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) first** → [QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) wisdom backlog if GTM_NEXT empty |
+| 4 | Pick **max 3** tasks from **GTM_NEXT** (`ship-*` IDs) — exclude `agentic_only` / **026** |
+| 5 | Write `next_tasks` in [os/plan.json](../../os/plan.json) |
+| 6 | Branch `cursor/<slug>-37f0` → implement → `npm run build` if console touched |
+| 7 | Run **`./scripts/plan-with-no-asf-verify.sh`** |
+| 8 | `python3 scripts/sync-prompt-pack-status.py` → update plan stubs → [reports/cursor-reply-latest.txt](../../reports/cursor-reply-latest.txt) |
+| 9 | `./scripts/verify-agent-scope.sh` → commit `[NF-CLOUD-AGENT]` → push → draft PR |
 
 ---
 
@@ -35,8 +36,9 @@ When the founder says **PLAN WITH NO ASF**, run this fixed sequence — no ASF w
 |-------|------|
 | **Machine registry (1000)** | [docs/ops/plans/registry.json](./plans/registry.json) |
 | **Bridge NF-PLAN ↔ nf-future** | [docs/ops/plans/BRIDGE_NF_PLAN_TO_NF_FUTURE.json](./plans/BRIDGE_NF_PLAN_TO_NF_FUTURE.json) |
-| **Quick pick (next 25)** | [docs/ops/plans/no-asf/QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) |
-| **GTM priority 100** | [plans/PROMPT_PACK_LOCKED/GTM_PRIORITY_100.md](./plans/PROMPT_PACK_LOCKED/GTM_PRIORITY_100.md) |
+| **Quick pick** | [docs/ops/plans/no-asf/QUICK_PICK.md](./plans/no-asf/QUICK_PICK.md) — GTM_NEXT wins; wisdom backlog second |
+| **Active ship queue** | [docs/ops/plans/no-asf/GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) |
+| **GTM priority 100** | [plans/PROMPT_PACK_LOCKED/GTM_PRIORITY_100.md](./plans/PROMPT_PACK_LOCKED/GTM_PRIORITY_100.md) (historical) |
 | **Agent ops 50** | [plans/PROMPT_PACK_LOCKED/AGENT_OPS_50.md](./plans/PROMPT_PACK_LOCKED/AGENT_OPS_50.md) |
 | **Drift & research 100** | [plans/PROMPT_PACK_LOCKED/DRIFT_AND_RESEARCH_100.md](./plans/PROMPT_PACK_LOCKED/DRIFT_AND_RESEARCH_100.md) |
 | **Tier B/C gates** | [plans/PROMPT_PACK_LOCKED/TIER_GATES.md](./plans/PROMPT_PACK_LOCKED/TIER_GATES.md) |
@@ -68,7 +70,8 @@ When the founder says **PLAN WITH NO ASF**, run this fixed sequence — no ASF w
 | Self-audit loop | [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](./AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md) |
 | Drift blueprints | [docs/references/GOVERNANCE_DRIFT_BLUEPRINTS_INDEX_LOCKED_v1.md](../references/GOVERNANCE_DRIFT_BLUEPRINTS_INDEX_LOCKED_v1.md) |
 | Architecture verdict | [docs/SOURCE_OF_TRUTH/uploaded/2026-05-batch-010/noetfield-architecture-verdict-postgres-first-fa.md](../SOURCE_OF_TRUTH/uploaded/2026-05-batch-010/noetfield-architecture-verdict-postgres-first-fa.md) |
-| Ship queue | [os/SHIP_NOW.md](../../os/SHIP_NOW.md) · [os/plan.json](../../os/plan.json) |
+| Ship queue | [os/SHIP_NOW.md](../../os/SHIP_NOW.md) · [GTM_NEXT.md](./plans/no-asf/GTM_NEXT.md) · [os/plan.json](../../os/plan.json) |
+| Doc map | [DOCS_UNIFIED_MAP_LOCKED_v1.md](./DOCS_UNIFIED_MAP_LOCKED_v1.md) |
 
 ---
 

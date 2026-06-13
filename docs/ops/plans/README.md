@@ -1,19 +1,21 @@
 # Noetfield plan library (1000 plans)
 
 **Lane:** `noetfield_cloud` · **Thread:** THREAD-PORTFOLIO  
-**Use when:** Founder or agent says **PLAN WITH NO ASF** — do not wait for ASF; pick from agent-ready backlog.
+**Fragmented?** [DOCS_UNIFIED_MAP_LOCKED_v1.md](../DOCS_UNIFIED_MAP_LOCKED_v1.md) · [../INDEX.md](../INDEX.md)
 
 ## Start here
 
 | File | Purpose |
 |------|---------|
-| [../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md](../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md) | **LOCKED** — 1000 prompt pack master index |
+| [no-asf/GTM_NEXT.md](./no-asf/GTM_NEXT.md) | **Active ship queue** — pick `ship-*` tasks here first |
+| [no-asf/QUICK_PICK.md](./no-asf/QUICK_PICK.md) | PLAN WITH NO ASF — GTM_NEXT wins; wisdom `ship-fwd-*` when empty |
+| [../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md](../NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md) | LOCKED — 1000 prompt pack orchestration |
 | [PROMPT_PACK_LOCKED/](./PROMPT_PACK_LOCKED/) | GTM 100, agent ops 50, drift 100, tier gates, sources |
-| [PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md](./PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) | **v2 pick logic** — GTM impact · ship-aware · iter bundles |
+| [PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md](./PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) | Pick logic — wisdom score · ship-aware · iter bundles |
 | [PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md](./PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) | **Unified 500** — FQ-001–500 success-model tiers |
 | [PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md](./PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) | S0–S8 benchmark taxonomy |
 | [PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md](./PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md) | Next 50 enriched forward-queue picks |
-| [no-asf/QUICK_PICK.md](./no-asf/QUICK_PICK.md) | **PLAN WITH NO ASF** — unified 500 + GTM_NEXT picks |
+| [no-asf/QUICK_PICK.md](./no-asf/QUICK_PICK.md) | Wisdom backlog + GTM_NEXT mirror |
 | [BRIDGE_NF_PLAN_TO_NF_FUTURE.json](./BRIDGE_NF_PLAN_TO_NF_FUTURE.json) | NF-PLAN ↔ nf-future crosswalk |
 | [INDEX.md](./INDEX.md) | Counts, phase/tier map |
 | [registry.json](./registry.json) | All 1000 plans (machine-readable, v2 prompt-ready) |

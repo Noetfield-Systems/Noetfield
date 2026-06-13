@@ -101,6 +101,23 @@ else
   fi
 fi
 
+# Prompt pack + agent context — GTM_NEXT precedence
+if grep -qE 'GTM_NEXT.*first|GTM_NEXT wins' docs/ops/NOETFIELD_1000_PROMPT_PACK_LOCKED_v1.md 2>/dev/null \
+   && grep -qE 'GTM_NEXT.*win|pick here first' docs/ops/plans/no-asf/QUICK_PICK.md 2>/dev/null \
+   && grep -qE 'GTM_NEXT|Active ship queue' docs/ops/plans/README.md 2>/dev/null; then
+  echo "OK   prompt pack GTM_NEXT precedence aligned"
+else
+  echo "FAIL prompt pack / plans README missing GTM_NEXT precedence" >&2
+  fail=1
+fi
+if [[ -f docs/strategy/README.md ]] && [[ -f docs/DESIGN_SYSTEM.md ]] \
+   && grep -q 'noetfield-institutional-v4' docs/DESIGN_SYSTEM.md 2>/dev/null; then
+  echo "OK   strategy router + design system v4 indexed"
+else
+  echo "FAIL strategy README or DESIGN_SYSTEM v4 missing" >&2
+  fail=1
+fi
+
 # GTM_NEXT and QUICK_PICK alignment
 if [[ -f docs/ops/plans/no-asf/GTM_NEXT.md ]] && [[ -f docs/ops/plans/no-asf/QUICK_PICK.md ]]; then
   if grep -q 'GTM_NEXT' docs/ops/plans/no-asf/QUICK_PICK.md; then

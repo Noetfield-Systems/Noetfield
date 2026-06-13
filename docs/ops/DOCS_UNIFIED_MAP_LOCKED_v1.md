@@ -147,4 +147,22 @@ When founder says **PLAN WITH NO ASF**:
 1. Tag with agent header if agent-authored ([AGENT_DOC_TAGGING_LOCKED_v1.md](./AGENT_DOC_TAGGING_LOCKED_v1.md)).
 2. Add **one line** to [SSOT_INDEX.md](../SSOT_INDEX.md) — not a new index file.
 3. If ship-related → add to `GTM_NEXT` or registry, not a third queue.
-4. Run `./scripts/plan-with-no-asf-verify.sh` before merge.
+4. Run `./scripts/plan-with-no-asf-verify.sh` if touching ops/ship/verify paths.
+
+---
+
+## Flat `docs/` root files (taxonomy)
+
+| Category | Examples |
+|----------|----------|
+| **Entry / index** | `INDEX.md`, `SSOT_INDEX.md`, `SHIP_NOW.md` (redirect) |
+| **Runbooks** | `GO_LIVE.md`, `RUNBOOK.md`, `LOCAL_DEV.md`, `STAGING.md` |
+| **GTM / launch** | `GTM_COPYBOOK.md`, `MARKET_ENTRY_30_DAY.md`, `GTM_BANK_GRADE_FINAL.md` |
+| **Checklists** | `BANK_GRADE_CHECKLIST.md`, `WAVE0_SHIP_CHECKLIST.md` |
+| **Site policy** | `CANONICAL_WWW.md`, `FINAL_PUBLIC_SITE.md`, `SITE_ARCHITECTURE.md` |
+| **Design** | `DESIGN_SYSTEM.md` |
+| **Public roadmap** | `ROADMAP.md` |
+| **Phase archives** | `PHASE_3_*.md` — superseded by `docs/spec/`; context only |
+| **MSB channel** | `MSB_DEPLOY_AND_PILOT.md`, `MSB_STAGING_INTEGRATION.md` |
+
+Prefer subfolder READMEs: `ops/`, `strategy/`, `spec/`, `references/`, `diligence/`.

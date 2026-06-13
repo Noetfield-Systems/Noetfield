@@ -78,6 +78,7 @@
 | [UNIFIED_500_MASTER_v1.md](./ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) | Unified 500 prompt pack — S0–S8 tiers |
 | [SUCCESS_MODEL_TIERS_v1.md](./ops/plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) | Client success model taxonomy |
 | [NOETFIELD_GTM_60_DAY_LOCKED_v1.md](./strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | 60-day CEO fence |
+| [strategy/README.md](./strategy/README.md) | Strategy folder router |
 
 ---
 
