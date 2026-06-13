@@ -55,15 +55,12 @@
 
 ---
 
-## Site & GTM
+## Strategy & GTM
 
 | Doc | Role |
 |-----|------|
-| [ACTIVE_SITE_POLICY.md](./site/ACTIVE_SITE_POLICY.md) | Live vs legacy routes |
-| [PAGE_AUTHORITY_MAP.md](./site/PAGE_AUTHORITY_MAP.md) | URL ownership matrix |
-| [SITE_ARCHITECTURE.md](./SITE_ARCHITECTURE.md) | Full IA reference |
-| [public-surface-map.md](./strategy/public-surface-map.md) | Tone + surface roles |
-| [SME_BUYER_JOURNEY.md](./copilot/SME_BUYER_JOURNEY.md) | Copilot funnel stages |
+| [MARKET_ANALYSIS_2026_LOCKED_v1.md](./strategy/MARKET_ANALYSIS_2026_LOCKED_v1.md) | Live research synthesis (June 2026) |
+| [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | 100 forward plans FQ-001–100 |
 | [NOETFIELD_GTM_60_DAY_LOCKED_v1.md](./strategy/NOETFIELD_GTM_60_DAY_LOCKED_v1.md) | 60-day CEO fence |
 
 ---
