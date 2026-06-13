@@ -55,7 +55,7 @@ body.nf-www.nf-site-v14 .nf-artifact-panel-dots i:nth-child(3) {
 
 body.nf-www.nf-site-v14 .nf-artifact-panel-file {
   flex: 1;
-  font-family: ui-monospace, "IBM Plex Mono", monospace;
+  font-family: ui-monospace, var(--font-mono), monospace;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.55);
 }

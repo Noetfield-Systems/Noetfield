@@ -589,7 +589,7 @@
   font-size: 0.88rem;
   color: var(--gold);
   margin-bottom: 6px;
-  font-family: ui-monospace, "IBM Plex Mono", monospace;
+  font-family: ui-monospace, var(--font-mono), monospace;
 }
 .nf-file-card p {
   margin: 0;
@@ -710,7 +710,7 @@
   padding: 0;
   overflow: hidden;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  font-family: ui-monospace, "IBM Plex Mono", "SF Mono", monospace;
+  font-family: ui-monospace, var(--font-mono), "SF Mono", monospace;
   font-size: 11.5px;
   line-height: 1.55;
 }

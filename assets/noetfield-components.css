@@ -328,7 +328,7 @@
   line-height: 1.5;
 }
 .nf-code-block code {
-  font-family: ui-monospace, "IBM Plex Mono", monospace;
+  font-family: ui-monospace, var(--font-mono), monospace;
   color: var(--text);
 }
 

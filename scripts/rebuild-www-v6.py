@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-WWW_VER = "20"
+WWW_VER = "21"
 
 FONT_LINK = (
     ' <link rel="preconnect" href="https://fonts.googleapis.com" />\n'
@@ -15,10 +15,16 @@ FONT_LINK = (
 )
 
 SCOPE_LABELS = {
-    "shipped": "Available",
+    "available": "Available",
     "orientation": "Orientation",
     "roadmap": "Planned",
     "na": "Out of scope",
+}
+SCOPE_BADGES = {
+    "available": "nf-signal-badge--available",
+    "orientation": "nf-signal-badge--orientation",
+    "roadmap": "nf-signal-badge--roadmap",
+    "na": "nf-signal-badge--na",
 }
 
 # Commercial narrative — SSOT: docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.md · docs/GTM_COPYBOOK.md
@@ -233,23 +239,17 @@ def hero(kicker: str, eyebrow: str, h1: str, lead: str, badges: list[tuple[str, 
 
 def scope_rows_html() -> str:
     items = [
-        ("Pre-execution evaluate", "shipped"),
-        ("TLE v1 + workspace UI", "shipped"),
-        ("Board PDF · procurement ZIP", "shipped"),
-        ("M365 metadata connectors", "shipped"),
+        ("Pre-execution evaluate", "available"),
+        ("TLE v1 + workspace UI", "available"),
+        ("Board PDF · procurement ZIP", "available"),
+        ("M365 metadata connectors", "available"),
         ("Framework citations", "orientation"),
         ("Payment rails / MSB execution", "na"),
     ]
-    badges = {
-        "shipped": "nf-signal-badge--shipped",
-        "orientation": "nf-signal-badge--orientation",
-        "roadmap": "nf-signal-badge--roadmap",
-        "na": "nf-signal-badge--na",
-    }
     labels = SCOPE_LABELS
     return "".join(
         f'<div class="nf-trust-signal"><span class="nf-trust-signal-label">{l}</span>'
-        f'<span class="nf-signal-badge {badges[k]}">{labels[k]}</span></div>'
+        f'<span class="nf-signal-badge {SCOPE_BADGES[k]}">{labels[k]}</span></div>'
         for l, k in items
     )
 
@@ -465,16 +465,16 @@ def packaging_tiers_grid(compact: bool = False) -> str:
 
 def agentic_autonomous_section() -> str:
     return """
- <section class="nf-section-block nf-section--elevated" aria-labelledby="agentic-title">
+ <section class="nf-section-block nf-section--elevated" aria-labelledby="automation-title">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">A</span><div>
- <p class="nf-eyebrow" id="agentic-title">Agentic governance</p>
- <h2>Fully agentic workflows — not AI assist alone</h2>
- <p class="nf-section-lead">Governance agents execute investigate → triage → draft → act on policy-bounded paths. High-risk Copilot go/no-go stays with named human approvers; low-risk allows auto-record to signed TLE when policy permits.</p>
+ <p class="nf-eyebrow" id="automation-title">Automated governance</p>
+ <h2>Policy-bound workflows — not manual checklists alone</h2>
+ <p class="nf-section-lead">Your team sets policy. Noetfield runs investigate → triage → draft → approve on metadata-only M365 evidence — same evaluate semantics as <code>POST /evaluate</code>. High-risk Copilot go/no-go stays with named human approvers.</p>
  </div></div>
  <div class="nf-agentic-grid">
- <article class="nf-agentic-step"><strong>Investigate</strong><p>Agent pulls M365 metadata gaps — Purview labels, Entra CA, audit indices — before rollout sign-off.</p></article>
- <article class="nf-agentic-step"><strong>Triage</strong><p>Confidence score and policy rules route allow, review, or deny — same semantics as <code>POST /evaluate</code>.</p></article>
- <article class="nf-agentic-step"><strong>Draft TLE</strong><p>Agent prepares Trust Ledger Entry YAML, approval chain, and evidence index for human sign-off.</p></article>
+ <article class="nf-agentic-step"><strong>Investigate</strong><p>Surfaces Purview label gaps, Entra CA posture, and audit index coverage before rollout sign-off.</p></article>
+ <article class="nf-agentic-step"><strong>Triage</strong><p>Confidence score and policy rules route allow, review, or deny — recorded on every decision.</p></article>
+ <article class="nf-agentic-step"><strong>Draft TLE</strong><p>Prepares Trust Ledger Entry YAML, approval chain, and evidence index for human sign-off.</p></article>
  <article class="nf-agentic-step"><strong>Act on low-risk</strong><p>Pre-approved policy paths auto-record sandbox evaluates; production requires design partner keys and approver chain.</p></article>
  </div>
  </section>"""
@@ -495,22 +495,16 @@ def sandbox_signup_form(next_path: str = "/cognitive-dashboard/?sandbox=1") -> s
 
 def ciso_strip() -> str:
     cards = [
-        ("Metadata-only M365", "Purview · Entra · audit indices — evidence index on every TLE, no mailbox custody.", "shipped", SCOPE_LABELS["shipped"]),
-        ("Fail-closed export", "Board PDF and procurement ZIP fail verification when tampered — by design.", "shipped", SCOPE_LABELS["shipped"]),
+        ("Metadata-only M365", "Purview · Entra · audit indices — evidence index on every TLE, no mailbox custody.", "available", SCOPE_LABELS["available"]),
+        ("Fail-closed export", "Board PDF and procurement ZIP fail verification when tampered — by design.", "available", SCOPE_LABELS["available"]),
         ("Canada trust posture", "Data handling and GC buyer notes for regulated procurement.", "orientation", SCOPE_LABELS["orientation"]),
         ("SOC 2 Type II", "Independent audit planned — not yet completed.", "roadmap", SCOPE_LABELS["roadmap"]),
         ("SSO / SAML", "Enterprise IdP for console access — planned product capability.", "roadmap", SCOPE_LABELS["roadmap"]),
         ("No custody rails", "No payment execution, MSB, asset custody, or money-transmission claims.", "na", SCOPE_LABELS["na"]),
     ]
-    badges = {
-        "shipped": "nf-signal-badge--shipped",
-        "orientation": "nf-signal-badge--orientation",
-        "roadmap": "nf-signal-badge--roadmap",
-        "na": "nf-signal-badge--na",
-    }
     items = "".join(
         f'<article class="nf-ciso-card"><h3>{h}</h3><p>{p}</p>'
-        f'<span class="nf-signal-badge {badges[k]}">{label}</span></article>'
+        f'<span class="nf-signal-badge {SCOPE_BADGES[k]}">{label}</span></article>'
         for h, p, k, label in cards
     )
     return f"""
@@ -796,19 +790,17 @@ def msp_phase_diagram() -> str:
 
 def trust_center_body() -> str:
     cert_rows = [
-        ("TLE v1 + workspace", "shipped"),
-        ("Export integrity fail-closed", "shipped"),
-        ("M365 metadata-only processing", "shipped"),
-        ("Board PDF + procurement ZIP", "shipped"),
+        ("TLE v1 + workspace", "available"),
+        ("Export integrity fail-closed", "available"),
+        ("M365 metadata-only processing", "available"),
+        ("Board PDF + procurement ZIP", "available"),
         ("SOC 2 Type II", "roadmap"),
         ("ISO 27001 / 42001 certification", "na"),
         ("Ed25519 / Merkle transparency log", "roadmap"),
     ]
-    badges = {"shipped": "nf-signal-badge--shipped", "roadmap": "nf-signal-badge--roadmap", "na": "nf-signal-badge--na"}
-    labels = SCOPE_LABELS
     cert_html = "".join(
         f'<div class="nf-trust-signal"><span class="nf-trust-signal-label">{l}</span>'
-        f'<span class="nf-signal-badge {badges[k]}">{labels[k]}</span></div>'
+        f'<span class="nf-signal-badge {SCOPE_BADGES[k]}">{SCOPE_LABELS[k]}</span></div>'
         for l, k in cert_rows
     )
     return hero(
@@ -1044,7 +1036,7 @@ def pricing_page_body() -> str:
  <tr><td>Evaluate API</td><td>50 calls / 14 days</td><td>Per SOW · tenant-scoped keys</td></tr>
  <tr><td>M365 connectors</td><td>Mock OAuth</td><td>Metadata-only Purview · Entra · audit</td></tr>
  <tr><td>TLE export</td><td>Sample YAML + orientation PDF</td><td>Board PDF + procurement ZIP</td></tr>
- <tr><td>Agentic workflows</td><td>Investigate · triage · draft (sandbox)</td><td>Full chain + named approvers</td></tr>
+ <tr><td>Policy automation</td><td>Investigate · triage · draft (sandbox)</td><td>Full chain + named approvers</td></tr>
  <tr><td>Sales call required</td><td>No</td><td>Program intake · SOW</td></tr>
  </tbody></table></div>
  </section>
@@ -1457,12 +1449,12 @@ def main() -> None:
  <p class="nf-section-lead">No fake traction. Product converts in a 5-minute demo — economic proof is a contracted pilot and referenceable board PDF.</p>
  </div></div>
  <div class="nf-trust-signals-grid">
- <div class="nf-trust-signal"><span class="nf-trust-signal-label">Governance evaluate + TLE v1 + workspace</span><span class="nf-signal-badge nf-signal-badge--shipped">Available</span></div>
- <div class="nf-trust-signal"><span class="nf-trust-signal-label">Board PDF + procurement ZIP export</span><span class="nf-signal-badge nf-signal-badge--shipped">Available</span></div>
- <div class="nf-trust-signal"><span class="nf-trust-signal-label">M365 metadata evidence index</span><span class="nf-signal-badge nf-signal-badge--shipped">Available</span></div>
+ <div class="nf-trust-signal"><span class="nf-trust-signal-label">Governance evaluate + TLE v1 + workspace</span><span class="nf-signal-badge nf-signal-badge--available">Available</span></div>
+ <div class="nf-trust-signal"><span class="nf-trust-signal-label">Board PDF + procurement ZIP export</span><span class="nf-signal-badge nf-signal-badge--available">Available</span></div>
+ <div class="nf-trust-signal"><span class="nf-trust-signal-label">M365 metadata evidence index</span><span class="nf-signal-badge nf-signal-badge--available">Available</span></div>
  <div class="nf-trust-signal"><span class="nf-trust-signal-label">First org: TLE in production + board PDF in meeting</span><span class="nf-signal-badge nf-signal-badge--orientation">Target</span></div>
  <div class="nf-trust-signal"><span class="nf-trust-signal-label">Design partner LOI / deposit ≥ CAD 2K</span><span class="nf-signal-badge nf-signal-badge--orientation">Target</span></div>
- <div class="nf-trust-signal"><span class="nf-trust-signal-label">Governance Monitor MRR · tenant refresh</span><span class="nf-signal-badge nf-signal-badge--roadmap">Roadmap</span></div>
+ <div class="nf-trust-signal"><span class="nf-trust-signal-label">Governance Monitor MRR · tenant refresh</span><span class="nf-signal-badge nf-signal-badge--roadmap">Planned</span></div>
  </div>
  </section>
 

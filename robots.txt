@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /docs/ops/
+Disallow: /docs/strategy/
+Disallow: /docs/references/
+Disallow: /docs/spec/
+Disallow: /docs/SOURCE_OF_TRUTH/
+Disallow: /scripts/
+Disallow: /services/
+Disallow: /reports/
+Disallow: /os/
 
-Sitemap: https://noetfield.com/sitemap.xml
+Sitemap: https://www.noetfield.com/sitemap.xml

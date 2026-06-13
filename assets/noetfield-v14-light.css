@@ -298,6 +298,7 @@ body.nf-www.nf-site-v14 .nf-loop-step-num {
   color: var(--gold);
 }
 
+body.nf-www.nf-site-v14 .nf-signal-badge--available,
 body.nf-www.nf-site-v14 .nf-signal-badge--shipped {
   background: rgba(13, 122, 74, 0.1);
   color: var(--ok);

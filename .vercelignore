@@ -8,6 +8,7 @@ prompts/
 infrastructure/
 governance-console/
 services/
+docs/*.md
 docs/ops/
 docs/strategy/
 docs/references/

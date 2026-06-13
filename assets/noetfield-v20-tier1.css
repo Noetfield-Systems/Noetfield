@@ -435,6 +435,7 @@ body.nf-www.nf-site-v14 .nf-self-serve-rail .btn {
 }
 
 /* —— Scope badges (buyer language) —— */
+body.nf-www.nf-site-v14 .nf-signal-badge--available,
 body.nf-www.nf-site-v14 .nf-signal-badge--shipped {
   background: rgba(13, 122, 74, 0.1);
   border-color: rgba(13, 122, 74, 0.25);

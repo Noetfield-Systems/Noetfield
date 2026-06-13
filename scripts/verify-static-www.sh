@@ -23,7 +23,7 @@ check_file() {
 }
 
 check_file "homepage v18 shell" index.html \
-  'noetfield-www.css?v=20' 'nf-site-v14' 'The audit trail your Copilot deployment' \
+  'noetfield-www.css?v=21' 'nf-site-v14' 'The audit trail your Copilot deployment' \
   'data-live-proof-hero' 'What legal and security reviewers need to see' \
   'nf-procurement-rail' 'Start free sandbox' 'Published tiers' \
   'Governance playground' 'Three traps before Copilot' 'One evaluate · four exports' \
@@ -37,7 +37,7 @@ check_file "start sandbox page" start/index.html \
   'data-trial-os-flow'
 
 check_file "pricing packaging page" pricing/index.html \
-  'Published tiers' 'Sandbox + production' 'Developer access · free' 'noetfield-www.css?v=20' 'What you tried vs what breaks vs what Noetfield delivers'
+  'Published tiers' 'Sandbox + production' 'Developer access · free' 'noetfield-www.css?v=21' 'What you tried vs what breaks vs what Noetfield delivers'
 
 check_file "trust center diligence theme" trust/index.html \
   'nf-trust-diligence' 'fail closed' 'Metadata-only'
@@ -55,15 +55,15 @@ check_file "commercial SSOT" docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.m
   'OFFERINGS_LOCKED' 'Trust Brief' 'operations@noetfield.com' 'W3 economic signal'
 
 check_file "ai-automation lane B" ai-automation/index.html \
-  'Make your AI automation defensible' 'Three offerings only' 'noetfield-www.css?v=20'
+  'Make your AI automation defensible' 'Three offerings only' 'noetfield-www.css?v=21'
 
 # Version coherence on primary hubs
 for f in index.html trust/index.html copilot/index.html msp/index.html federal/index.html investors/index.html start/index.html pricing/index.html; do
-  if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=20' "$f"; then
-    bad "shell v20 on $f"
+  if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=21' "$f"; then
+    bad "shell v21 on $f"
   fi
 done
-[[ "$fail" -eq 0 ]] && ok "shell v20 on primary hubs"
+[[ "$fail" -eq 0 ]] && ok "shell v21 on primary hubs"
 
 if [[ "$fail" -ne 0 ]]; then
   echo "Run: python3 scripts/rebuild-www-v6.py" >&2
@@ -84,9 +84,9 @@ done
 [[ "$www_fail" -eq 0 ]] && ok "no comparison framing on public www" || fail=1
 
 # P0 — no internal / founder / agent copy on public www
-LEAK_PATTERN='maintained in repo|not claimed on www|plan-with-no-asf|AGENT_SELF_AUDIT|repo-native|ASSERT→|Founder-led \+ agentic|pipeline stage [0-9]|W3 PASS|Product on disk|/docs/ops/|services/governance/README|nf-card__tag">Hub<|Shipped today — honest|execution infrastructure|API offline'
+LEAK_PATTERN='maintained in repo|not claimed on www|plan-with-no-asf|AGENT_SELF_AUDIT|repo-native|ASSERT→|Founder-led \+ agentic|pipeline stage [0-9]|W3 PASS|Product on disk|/docs/ops/|services/governance/README|nf-card__tag">Hub<|Shipped today — honest|execution infrastructure|API offline|what we ship|our roadmap|Fully agentic|Governance agents|IBM Plex'
 leak_fail=0
-for f in index.html copilot/procurement/index.html privacy/index.html terms/index.html status/index.html \
+for f in index.html start/index.html copilot/procurement/index.html privacy/index.html terms/index.html status/index.html \
   trust/index.html faq/index.html investors/index.html trust-ledger/verify/index.html; do
   if [[ -f "$f" ]] && grep -E -q "$LEAK_PATTERN" "$f"; then
     echo "FAIL verify-static-www: P0 copy leak in $f" >&2
@@ -95,6 +95,9 @@ for f in index.html copilot/procurement/index.html privacy/index.html terms/inde
   fi
 done
 [[ "$leak_fail" -eq 0 ]] && ok "no P0 copy leaks on public www" || fail=1
+
+check_file "homepage automation copy" index.html \
+  'Policy-bound workflows' 'Automated governance' 'nf-signal-badge--available'
 
 check_file "procurement buyer copy" copilot/procurement/index.html \
   'Available now — capability scope' 'Governance API reference' 'Overview'
