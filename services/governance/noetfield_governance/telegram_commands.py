@@ -34,7 +34,7 @@ def offerings_message() -> str:
         f"1. {bold('Trust Brief')} — $10,000 · 6 weeks\n"
         "Governance audit, AI policy mapping, risk exposure analysis.\n\n"
         f"2. {bold('Copilot Governance Pack')}\n"
-        "Enterprise AI compliance for Microsoft 365 Copilot rollouts.\n\n"
+        "Enterprise AI compliance for workspace Copilot rollouts.\n\n"
         f"3. {bold('Bank Pilot')}\n"
         "Read-only governance simulation · shadow mode · no execution rights.\n\n"
         f"{link(INTAKE_URL, 'Request Governance Brief')}"

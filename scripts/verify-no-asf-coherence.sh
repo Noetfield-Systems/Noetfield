@@ -480,7 +480,10 @@ vendor_paths=(
   copilot/procurement/index.html
   docs/ops/plans/PROMPT_PACK_LOCKED/unified_500_index.json
   docs/ops/plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md
-  docs/ops/plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md
+  docs/copilot/PROCUREMENT_ONE_PAGER.md
+  docs/copilot/DESIGN_PARTNER_PIPELINE_v1.md
+  docs/copilot/DESIGN_PARTNER_SOW_OUTLINE.md
+  docs/diligence/POSITIONING_CLIENT_SYNTHESIS_v1.md
 )
 for vf in "${vendor_paths[@]}"; do
   if [[ -f "$vf" ]] && grep -qiE "$FORBIDDEN_VENDOR_RE" "$vf" 2>/dev/null; then

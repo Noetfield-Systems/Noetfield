@@ -54,7 +54,14 @@ See [DEPLOYMENT_ARCHITECTURE.md](../DEPLOYMENT_ARCHITECTURE.md).
 
 ## 6. Warnings (review)
 
+- `copilot/demo/index.html`: procurement label
+- `copilot/index.html`: procurement label
+- `copilot/pilot/index.html`: procurement label
+- `copilot/procurement/index.html`: procurement label
+- `index.html`: procurement label
 - `trust-brief/intake/index.html`: procurement label
+- `trust-ledger/index.html`: procurement label
+- `trust-ledger/sample-report/index.html`: procurement label
 
 ## 7. SOT ↔ Backend ↔ Public Site
 

@@ -33,7 +33,7 @@ logger = logging.getLogger("noetfield.governance.telegram.webhook")
 
 _COPILOT_MSG = (
     "<b>Copilot Governance Pack</b>\n"
-    "Enterprise AI compliance and policy validation for Microsoft 365 Copilot.\n\n"
+    "Enterprise AI compliance and policy validation for workspace Copilot.\n\n"
     "Rollout gating, policy alignment, and defensible compliance logging.\n\n"
     '<a href="https://www.noetfield.com/copilot/">Learn more</a> · '
     '<a href="https://www.noetfield.com/trust-brief/intake/">Request Brief</a>'

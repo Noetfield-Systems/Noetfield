@@ -63,7 +63,7 @@ def compute_confidence_score(
         {
             "factor": "source_diversity",
             "contribution": round(diversity_contrib, 4),
-            "detail": ", ".join(sorted(trusted)) if trusted else "no trusted M365 sources",
+            "detail": ", ".join(sorted(trusted)) if trusted else "no trusted workspace sources",
         }
     )
     score += diversity_contrib

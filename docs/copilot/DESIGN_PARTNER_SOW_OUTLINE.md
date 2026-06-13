@@ -6,7 +6,7 @@
 
 ## One-line scope
 
-Noetfield provides the **AI Governance & Evidence layer** for a Microsoft 365 Copilot readiness pilot: evaluate operational intent, index metadata-only M365 evidence, produce signed **Trust Ledger Entries (TLE v1)**, and export board-ready diligence artifacts.
+Noetfield provides the **AI Governance & Evidence layer** for a workspace Copilot readiness pilot: evaluate operational intent, index metadata-only workspace evidence, produce signed **Trust Ledger Entries (TLE v1)**, and export board-ready diligence artifacts.
 
 **Buyer line:** *We produce the audit trail your Copilot deployment will be asked for later.*
 
@@ -14,8 +14,8 @@ Noetfield provides the **AI Governance & Evidence layer** for a Microsoft 365 Co
 
 | Deliverable | Description |
 |-------------|-------------|
-| Governance evaluate | Pre-execution allow/deny/review with RID lineage |
-| Evidence index | Metadata-only Purview, Entra ID, Audit, SharePoint connectors (read-only) |
+| Governance evaluate | Allow/deny/review before execution with RID lineage |
+| Evidence index | Metadata-only compliance, identity, audit, collaboration connectors (read-only) |
 | TLE v1 | Signed go/no-go with confidence score + sequential approval chain |
 | Board pack | JSON, HTML, PDF export |
 | Procurement pack | One-click ZIP (JSON + PDF + README + audit slice) |
@@ -24,13 +24,13 @@ Noetfield provides the **AI Governance & Evidence layer** for a Microsoft 365 Co
 ## Out of scope
 
 - Payment initiation, custody, settlement, money transmission
-- Production Azure AD secrets management (founder vault)
+- Production identity secrets management (founder vault)
 - TrustField / VIRLUX / member portal execution
 - Lane C features
 
 ## Success signals (GTM locked)
 
-1. Partner uploads or connects evidence (M365 metadata).
+1. Partner uploads or connects evidence (workspace metadata).
 2. Partner generates at least one **approved TLE** with visible confidence score.
 3. Partner exports **board pack PDF** and uses it in a governance meeting (board, risk, or legal).
 4. Optional: partner shares procurement ZIP with diligence reviewers.

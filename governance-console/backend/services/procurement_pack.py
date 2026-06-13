@@ -26,7 +26,7 @@ Contents:
 Framework alignment (orientation only — not legal advice):
 - NIST AI RMF Govern/Manage — decision documentation
 - ISO/IEC 42001-style evidence and approval records
-- Microsoft Purview / M365 evidence metadata (when connector ingested)
+- Workspace connector evidence metadata (when connector ingested)
 
 References: docs/references/GOVERNANCE_SOURCES_BOOK_v1.md (Noetfield implementation repo)
 

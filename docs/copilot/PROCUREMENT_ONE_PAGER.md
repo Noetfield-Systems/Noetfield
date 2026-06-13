@@ -1,20 +1,20 @@
 # Noetfield — Copilot Procurement One-Pager
 
-**Positioning:** AI Governance & Evidence layer for Microsoft 365 Copilot adoption.
+**Positioning:** AI Governance & Evidence layer for workspace Copilot adoption.
 
 **Buyer line:** *We produce the audit trail your Copilot deployment will be asked for later.*
 
 ## What you get
 
-- Pre-execution **governance evaluate** (allow / deny / review) with RID lineage
-- **Evidence Index** — metadata-only ingest (Purview, Entra ID, Audit, SharePoint)
+- Governance evaluate before execution (allow / deny / review) with RID lineage
+- **Evidence Index** — metadata-only ingest (compliance, identity, audit, collaboration sites)
 - **Trust Ledger Entry (TLE v1)** — signed go/no-go with **confidence score** and approval chain
 - **Board pack export** — JSON, HTML, PDF
 - **Procurement pack (ZIP)** — one-click diligence bundle (JSON + PDF + README + optional audit slice)
 
 ## Framework orientation
 
-Primary citations: `docs/references/GOVERNANCE_SOURCES_BOOK_v1.md` (NIST AI RMF, ISO 42001, EU AI Act, Microsoft Purview). Orientation only — not legal advice.
+Primary citations: `docs/references/GOVERNANCE_SOURCES_BOOK_v1.md` (NIST AI RMF, ISO 42001, EU AI Act). Orientation only — not legal advice.
 
 ## Out of scope
 
