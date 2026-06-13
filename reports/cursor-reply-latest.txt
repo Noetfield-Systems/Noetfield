@@ -1,15 +1,16 @@
 Market research + forward queue 100 — complete (Noetfield cloud)
 
-Shipped:
-- MARKET_ANALYSIS_2026_LOCKED_v1.md — live research synthesis (Agent 365, E-23, EU AI Act, Copilot stall, competitors)
-- NOETFIELD_FORWARD_QUEUE_100_v1.md — ship-fwd-060..159 / FQ-001..100 in 10 waves
+Shipped (commit 9e47f68):
+- MARKET_ANALYSIS_2026_LOCKED_v1.md — live research synthesis
+- NOETFIELD_FORWARD_QUEUE_100_v1.md — FQ-001..100 / ship-fwd-060..159
+- verify-audit-export.sh stdin fix for large bundles
 - SSOT_INDEX + LOCKED_REFERENCE_INDEX links
 
 Verify: ./scripts/plan-with-no-asf-verify.sh — PASS
-Promote: Form PICK before www stats / battlecards / investor one-pager
+Promote: Form PICK before www stats / battlecards
 
-task: Market analysis + 100 forward plans from locked SSOT + live research
+task: Market analysis + 100 forward plans
 agent: NF-CLOUD-AGENT
 main: bfc5578
-head: 6c49240
-next: ASK founder — merge with PR #53 or separate; pick FQ-001–003 for iter 20; Form PICK on promote
+head: 9e47f68
+next: ASK founder — merge PR #53; pick FQ-001–003 iter 20; Form PICK on promote
