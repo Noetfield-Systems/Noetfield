@@ -60,6 +60,7 @@
 | Doc | Role |
 |-----|------|
 | [MARKET_ANALYSIS_2026_LOCKED_v1.md](./strategy/MARKET_ANALYSIS_2026_LOCKED_v1.md) | Live research synthesis (June 2026) |
+| [POSITIONING_CLIENT_SYNTHESIS_v1.md](./diligence/POSITIONING_CLIENT_SYNTHESIS_v1.md) | Client + investor-safe GTM synthesis |
 | [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](./strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md) | Client-safe site plan + 10-step institutional redesign |
 | [INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md](./strategy/INSTITUTIONAL_BANK_GRADE_100_PLAN_v1.md) | VC / FRFI bank-grade UI 100-plan |
 | [NOETFIELD_FORWARD_QUEUE_100_v1.md](./strategy/NOETFIELD_FORWARD_QUEUE_100_v1.md) | Forward queue v1 FQ-001–100 |

@@ -7,7 +7,7 @@ Noetfield is governance execution infrastructure for regulated organizations. We
 ## What are the three offerings?
 
 1. **Trust Brief — $10,000** — Six-week engagement: governance audit, AI policy mapping, risk exposure analysis.
-2. **Copilot Governance Pack** — Enterprise AI compliance and policy validation for Microsoft 365 Copilot rollouts.
+2. **Copilot Governance Pack** — Enterprise AI compliance and policy validation for workspace Copilot rollouts.
 3. **Bank Pilot** — Read-only governance simulation only (shadow mode). No execution rights.
 
 ## How do I engage?

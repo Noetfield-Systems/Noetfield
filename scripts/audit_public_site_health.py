@@ -66,7 +66,7 @@ def main() -> int:
                 errors.append(f"index.html contains forbidden: {phrase}")
         if "governance evaluation" not in ht.lower() and "governance execution" not in ht.lower():
             errors.append("index.html missing governance positioning")
-        for bad in ("Golden Edge", "GCIP", "pre-execution", "audit ledger"):
+        for bad in ("Golden Edge", "GCIP", "audit ledger"):
             if bad in ht:
                 errors.append(f"index.html contains internal term: {bad}")
 

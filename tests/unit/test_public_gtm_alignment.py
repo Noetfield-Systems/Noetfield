@@ -62,6 +62,7 @@ def test_enterprise_page_structure() -> None:
     assert "OSFI E-23" in text
     assert "Governance execution pipeline" in text
     assert "not RPAA retail payments" in text
+    assert "Commercial model" in text
 
 
 def test_institutional_2026_frame_on_tier_pages() -> None:

@@ -49,7 +49,21 @@ for path in "/" "/enterprise/" "/partners/" "/bank-pilot/" "/trust-center/" "/tr
     echo "FAIL ${label} missing institutional-2026.css" >&2
     fail=1
   fi
+  if echo "$html" | grep -qF "noetfield-bank-grade.css"; then
+    echo "OK   ${label} bank-grade.css"
+  else
+    echo "FAIL ${label} missing bank-grade.css" >&2
+    fail=1
+  fi
 done
+
+home_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/" 2>/dev/null || true)"
+if echo "$home_html" | grep -qF 'nf-proof-bar'; then
+  echo "OK   homepage proof diligence bar"
+else
+  echo "FAIL homepage missing nf-proof-bar" >&2
+  fail=1
+fi
 
 check_html "${BASE}/" "homepage" \
   "audit trail your Copilot deployment" \
@@ -75,7 +89,7 @@ fi
 
 # --- Console routes ---
 check_html "${BASE}/workspace" "workspace list" "Trust Ledger Workspace" "Create TLE draft" "Governance execution pipeline"
-check_html "${BASE}/workspace/connectors" "connectors page" "M365 evidence connectors" "Register + mock connect" "Last sync"
+check_html "${BASE}/workspace/connectors" "connectors page" "Evidence connectors" "Register + mock connect" "Last sync"
 check_html "${BASE}/cognitive-dashboard" "cognitive dashboard" "Cognitive dashboard" "Submit operational intent" "Governance execution pipeline" "Institutional site 2026" "Framework orientation" "Registry vs receipt"
 check_html "${BASE}/evaluate" "evaluate page" "Submit operational intent" "Institutional demo" "Governance execution pipeline"
 check_html "${BASE}/audit" "audit page" "Audit log" "Diligence export"
@@ -90,8 +104,8 @@ check_html "${BASE}/copilot/demo/" "copilot demo" "5-minute demo" "Demo script (
 check_html "${BASE}/copilot/procurement/" "procurement buyer" "buyer pack" "Procurement pack (ZIP)" "NIST AI RMF"
 check_html "${BASE}/trust-center/" "trust center" "governance posture" "Control checkpoints" "Not a SOC 2" "Framework orientation"
 check_html "${BASE}/bank-pilot/" "bank pilot" "OSFI E-23" "Governance execution pipeline" "Not an RPAA payment service provider"
-check_html "${BASE}/enterprise/" "enterprise page" "OSFI E-23" "Governance execution pipeline" "not RPAA retail payments" "Request Governance Brief"
-check_html "${BASE}/trust-ledger/" "trust ledger www" "Governance execution pipeline" "TLE v1" "TLE differentiation" "Trust center"
+check_html "${BASE}/enterprise/" "enterprise page" "OSFI E-23" "Governance execution pipeline" "not RPAA retail payments" "Request Governance Brief" "Commercial model"
+check_html "${BASE}/trust-ledger/" "trust ledger www" "Governance execution pipeline" "TLE v1" "TLE capabilities" "Trust center"
 check_html "${BASE}/partners/msp/" "partners msp" "MSP two-tier" "Tier 1" "Tier 2" "Governance execution pipeline"
 check_html "${BASE}/federal/" "federal lane" "Federal lane" "AIA" "NIST AI RMF" "F lane lock"
 check_html "${BASE}/trust-ledger/sample-report/" "tle samples" "Trust Ledger"

@@ -10,7 +10,7 @@ Intake: `/trust-brief/intake/`
 
 ## Copilot Governance Pack
 
-Enterprise AI compliance layer and policy validation for Microsoft 365 Copilot rollouts.
+Enterprise AI compliance layer and policy validation for workspace Copilot rollouts.
 
 ## Bank Pilot
 

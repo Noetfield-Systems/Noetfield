@@ -30,6 +30,8 @@ See [WISDOM_PICK_RULES_v1.md](../PROMPT_PACK_LOCKED/WISDOM_PICK_RULES_v1.md) —
 
 ## GTM_NEXT (disk verify — iter 19)
 
+See [GTM_NEXT.md](./GTM_NEXT.md) for shipped table.
+
 1. **ship-procurement-openapi-verify-057**
 2. **ship-services-governance-readme-openapi-058**
 3. **ship-tenth-audit-merge-rule-059**

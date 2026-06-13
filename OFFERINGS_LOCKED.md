@@ -14,7 +14,7 @@ Six-week engagement: governance audit, AI policy mapping, risk exposure analysis
 
 ## 2. Copilot Governance Pack
 
-Enterprise AI compliance layer and policy validation for Microsoft 365 Copilot rollouts.
+Enterprise AI compliance layer and policy validation for workspace Copilot rollouts.
 
 ---
 

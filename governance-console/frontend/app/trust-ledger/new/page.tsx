@@ -119,7 +119,7 @@ export default function TrustLedgerNewPage() {
           {!loading && evidence.length === 0 && (
             <p className="mt-2 text-sm text-muted-2">
               No evidence indexed. Run <code className="text-accent">./scripts/tle-smoke.sh --api</code> or connect
-              M365 in{" "}
+              evidence in{" "}
               <Link href="/workspace/connectors" className="text-accent hover:underline">
                 Connectors
               </Link>

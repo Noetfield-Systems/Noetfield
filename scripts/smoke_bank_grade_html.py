@@ -25,14 +25,19 @@ INSTITUTIONAL_2026_MARKERS = (
     "noetfield-bank-grade.css",
     "nf-site-2026",
 )
-BANK_PILOT_MARKERS = ("OSFI E-23", "nf-policy-callout", "noetfield-frfi.css")
-ENTERPRISE_MARKERS = ("OSFI E-23", "Governance execution pipeline", "noetfield-frfi.css")
+BANK_PILOT_MARKERS = ("OSFI E-23", "nf-policy-callout", "noetfield-frfi.css", "nf-proof-bar")
+ENTERPRISE_MARKERS = ("OSFI E-23", "Governance execution pipeline", "noetfield-frfi.css", "Commercial model")
 TIER_2026_PAGES = (
     ROOT / "index.html",
     ROOT / "partners" / "index.html",
+    ROOT / "partners" / "msp" / "index.html",
     ROOT / "trust-center" / "index.html",
     ROOT / "trust-ledger" / "index.html",
     ROOT / "copilot" / "index.html",
+    ROOT / "copilot" / "demo" / "index.html",
+    ROOT / "federal" / "index.html",
+    ROOT / "bank-pilot" / "index.html",
+    ROOT / "enterprise" / "index.html",
 )
 CONSOLE_MARKERS = (
     "noetfield-tokens.css",

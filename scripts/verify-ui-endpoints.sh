@@ -53,7 +53,7 @@ check_html "http://127.0.0.1:${PUBLIC}/audit" "audit export CTA" "Export bundle 
 check_html "http://127.0.0.1:${PUBLIC}/trust-ledger" "trust-ledger list" "New TLE draft"
 check_html "http://127.0.0.1:${PUBLIC}/trust-ledger/new" "tle generator" "TLE Generator"
 check_html "http://127.0.0.1:${PUBLIC}/workspace" "workspace list" "Trust Ledger Workspace"
-check_html "http://127.0.0.1:${PUBLIC}/workspace/connectors" "workspace connectors" "M365 evidence connectors"
+check_html "http://127.0.0.1:${PUBLIC}/workspace/connectors" "workspace connectors" "Evidence connectors"
 
 # Static www + docs (regression: /docs/api must not hit platform OpenAPI)
 check "http://127.0.0.1:${PUBLIC}/docs/api/" "docs/api index" "200"

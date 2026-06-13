@@ -466,7 +466,7 @@ if [[ -f "$unified_master" ]] && [[ -f "$unified_json" ]] && command -v python3 
 fi
 
 # Client-safe copy — no competitor/vendor names on www or prompt pack
-FORBIDDEN_VENDOR_RE='Vanta|Inforcer|Veridra|Credo|Drata|OneTrust|Holistic|Fiddler|Gateplex|Cloudiway|AvePoint|Lighthouse|ADJUDON|Audital|Trinitite|Modulos|benchmark-ui|BENCHMARK_SYNTHESIS|INSTITUTIONAL_BENCHMARK|COPILOT_COMPLEMENT_BENCHMARK|Typical GRC'
+FORBIDDEN_VENDOR_RE='Vanta|Inforcer|Veridra|Credo|Drata|OneTrust|Holistic|Fiddler|Gateplex|Cloudiway|AvePoint|Lighthouse|ADJUDON|Audital|Trinitite|Modulos|benchmark-ui|BENCHMARK_SYNTHESIS|INSTITUTIONAL_BENCHMARK|COPILOT_COMPLEMENT_BENCHMARK|Typical GRC|Microsoft Purview|Microsoft 365|\\bM365\\b'
 vendor_fail=0
 vendor_paths=(
   index.html

@@ -63,7 +63,7 @@ export default function TrustLedgerListPage() {
         metrics={[
           { label: "Entries", value: loading ? "…" : String(rows.length), hint: "TLE v1 records" },
           { label: "Approved", value: loading ? "…" : String(approved), tone: approved > 0 ? "ok" : "default" },
-          { label: "Evidence", value: "Metadata", hint: "Purview · Entra · audit index" },
+          { label: "Evidence", value: "Metadata", hint: "Compliance · identity · audit index" },
           { label: "Export", value: "PDF + ZIP", hint: "Board pack · procurement pack" },
         ]}
       />

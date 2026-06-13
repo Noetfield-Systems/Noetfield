@@ -74,14 +74,14 @@ export default function WorkspacePage() {
         metrics={[
           { label: "Entries", value: loading ? "…" : String(rows.length), hint: "Trust Ledger v1" },
           { label: "Export", value: "PDF + ZIP", hint: "Board pack · procurement" },
-          { label: "Evidence", value: "Indexed", hint: "Purview · Entra · audit" },
+          { label: "Evidence", value: "Indexed", hint: "Compliance · identity · audit" },
           { label: "Role", value: "Approver", hint: "Dev workspace RBAC" },
         ]}
       />
 
       <p className="mb-6 flex flex-wrap gap-x-4 gap-y-1 text-sm">
         <Link href="/workspace/connectors" className="text-accent hover:underline">
-          M365 connectors (dev OAuth)
+          Evidence connectors (dev OAuth)
         </Link>
         <Link href={wwwHref("/copilot/demo/")} className="text-accent hover:underline">
           5-minute demo script

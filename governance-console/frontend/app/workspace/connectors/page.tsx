@@ -75,14 +75,14 @@ export default function ConnectorsPage() {
       <Breadcrumbs
         items={[
           { label: "Workspace", href: "/workspace" },
-          { label: "M365 connectors" },
+          { label: "Evidence connectors" },
         ]}
       />
 
       <PageHero
         eyebrow="Evidence index"
-        title="M365 evidence connectors"
-        lead="Complement Agent 365 and Purview with metadata-only evidence ingest. Local dev uses mock OAuth — Last sync visible after connect."
+        title="Evidence connectors"
+        lead="Complement workspace agent registry with metadata-only evidence ingest. Local dev uses mock OAuth — Last sync visible after connect."
       />
 
       <WorkflowStepper
@@ -103,7 +103,7 @@ export default function ConnectorsPage() {
             tone: connectedCount > 0 ? "ok" : "default",
           },
           { label: "Ingest", value: "Metadata", hint: "No content hoarding" },
-          { label: "Agent 365", value: "Complement", hint: "Registry vs receipt" },
+          { label: "Registry", value: "Complement", hint: "Registry vs receipt" },
         ]}
       />
 
@@ -112,7 +112,7 @@ export default function ConnectorsPage() {
           className="mb-4 rounded-lg border border-emerald-900/80 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200"
           role="status"
         >
-          Mock OAuth connected — <code>{success}</code>. M365 evidence ingested.
+          Mock OAuth connected — <code>{success}</code>. Workspace evidence ingested.
         </p>
       )}
       {error && (
@@ -123,7 +123,7 @@ export default function ConnectorsPage() {
 
       <div className="mb-6 flex flex-wrap gap-3">
         <button type="button" className="nf-btn-primary" disabled={registering} onClick={() => registerM365()}>
-          {registering ? "Registering…" : "Register + mock connect (M365)"}
+          {registering ? "Registering…" : "Register + mock connect"}
         </button>
         <Link href="/workspace" className="nf-btn-secondary">
           Trust Ledger Workspace

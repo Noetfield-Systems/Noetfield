@@ -34,6 +34,18 @@
 | Federal AI inventory | AIA/ADM/NIST orientation | `/federal/` |
 | Security review | Trust center + evidence contract | `/trust-center/` |
 
+## Investor snapshot (client-safe)
+
+| Lens | Noetfield answer |
+|------|------------------|
+| **Category** | Pre-execution governance evidence — signed receipt export |
+| **Wedge** | Board PDF + procurement ZIP in one demo path |
+| **Business model** | Trust Brief ($10K) → design partner (CAD $2K+) → MSP channel attach |
+| **ICP** | Regulated mid-market, FRFI shadow pilots, MSP Copilot rollouts |
+| **Moat** | RID-keyed TLE v1 + tamper-evident export + Canadian/EU mapping |
+| **GTM proof** | Customer #1 uses board PDF in real governance meeting |
+| **Boundaries** | No PSP/custody · no SOC 2 claims · complement not replace registry |
+
 ## Related
 
 - [INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md](../strategy/INSTITUTIONAL_SITE_PLAN_10_STEP_v1.md)

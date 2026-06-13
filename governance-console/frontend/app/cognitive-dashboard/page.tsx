@@ -49,7 +49,7 @@ export default function CognitiveDashboardPage() {
             tone: health?.ok ? "ok" : health === null ? "default" : "warn",
           },
           { label: "Demo path", value: "≤ 5 min", hint: "Evaluate → confidence → TLE export" },
-          { label: "Evidence", value: "Metadata", hint: "Purview · Entra · audit index" },
+          { label: "Evidence", value: "Metadata", hint: "Compliance · identity · audit index" },
           { label: "Design partner", value: "CAD $2K+", hint: "Board PDF in governance meeting" },
         ]}
       />
@@ -68,7 +68,7 @@ export default function CognitiveDashboardPage() {
           <p className="mt-1 text-sm font-semibold text-white">Registry vs receipt</p>
           <p className="mt-1 text-xs text-muted-2">
             <a href={wwwHref("/copilot/")} className="text-accent hover:underline">
-              Agent 365 + Purview complement
+              Registry complement guide
             </a>
           </p>
         </div>
@@ -124,7 +124,7 @@ export default function CognitiveDashboardPage() {
         </Link>
         <Link href="/workspace/connectors" className="nf-card-hover block p-4">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-2">Connectors</p>
-          <p className="mt-2 text-lg font-medium text-white">M365 evidence</p>
+          <p className="mt-2 text-lg font-medium text-white">Evidence connectors</p>
           <p className="mt-1 text-sm text-muted-2">Register + mock connect</p>
         </Link>
         <a href={platformConsoleHref()} className="nf-card-hover block p-4">

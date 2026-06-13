@@ -129,7 +129,7 @@ else
   fail=1
 fi
 conn_html="$(curl -sS --connect-timeout 5 "http://127.0.0.1:${PUBLIC}/workspace/connectors" 2>/dev/null || true)"
-if echo "$conn_html" | grep -qF "M365 evidence connectors"; then
+if echo "$conn_html" | grep -qF "Evidence connectors"; then
   echo "OK   Workspace connectors (content)"
 elif echo "$conn_html" | grep -qF 'tle_id","connectors"'; then
   echo "FAIL Workspace connectors — stale Next build routes /connectors as TLE id" >&2

@@ -54,11 +54,16 @@ PRIORITY = {
     "/gate/intake/": 0.85,
     "/bank-pilot/": 0.88,
     "/partners/": 0.88,
+    "/partners/msp/": 0.86,
+    "/trust-center/": 0.87,
+    "/federal/": 0.85,
     "/trust-ledger/": 0.82,
+    "/copilot/demo/": 0.88,
+    "/copilot/procurement/": 0.87,
+    "/copilot/pilot/": 0.86,
     "/status/": 0.75,
     "/faq/": 0.8,
     "/for-whom/": 0.8,
-    "/trust-ledger/": 0.8,
     "/about/": 0.7,
 }
 
@@ -78,7 +83,16 @@ MARKETING_TOP = {
     "resources",
     "terms",
     "trust-brief",
-    "trust-ledger",
+    "trust-center",
+    "federal",
+}
+
+# Second-level marketing paths (index.html at depth 2)
+MARKETING_SUB = {
+    ("partners", "msp"),
+    ("copilot", "demo"),
+    ("copilot", "procurement"),
+    ("copilot", "pilot"),
 }
 
 
@@ -97,6 +111,8 @@ def is_public_route(path: Path) -> bool:
     elif rel.parts[:2] == ("gate", "intake"):
         pass
     elif rel.parts[:2] == ("trust-brief", "intake"):
+        pass
+    elif depth == 2 and tuple(rel.parts[:2]) in MARKETING_SUB:
         pass
     else:
         return False

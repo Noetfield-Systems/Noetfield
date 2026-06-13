@@ -30,7 +30,7 @@ export default function EvaluatePage() {
         metrics={[
           { label: "Decision path", value: "< 2 sec", hint: "Evaluate → RID → confidence score" },
           { label: "Receipt", value: "Immutable", hint: "Every evaluation stored with RID" },
-          { label: "Policy mode", value: "Pre-exec", hint: "BLOCK before M365 or partners act" },
+          { label: "Policy mode", value: "Pre-exec", hint: "BLOCK before workspace or partners act" },
           { label: "Demo", value: "5 min", hint: "Board-ready confidence badge" },
         ]}
       />
