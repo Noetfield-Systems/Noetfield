@@ -208,106 +208,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0101 | T1 | A | Ship Multi-framework dashboard spec — P2 item 001 | buyer-visible on www for multi-framework dashboard spec | verify-gtm | continuous-proof |
-| mr-0102 | T2 | A | Lock Multi-framework dashboard spec — P2 item 002 | committee artifact ready for multi-framework dashboard spec | verify-ui-e2e | continuous-proof |
-| mr-0103 | T1 | D | Wire Multi-framework dashboard spec — P2 item 003 | regression gate green for multi-framework dashboard spec | verify-gtm-ops-docs | continuous-proof |
-| mr-0104 | T1 | A | Extend Multi-framework dashboard spec — P2 item 004 | procurement self-serve path for multi-framework dashboard spec | verify-ui-endpoints | continuous-proof |
-| mr-0105 | T2 | A | Document Multi-framework dashboard spec — P2 item 005 | console parity achieved for multi-framework dashboard spec | plan-with-no-asf-verify | continuous-proof |
-| mr-0106 | T1 | A | Verify Multi-framework dashboard spec — P2 item 006 | doc linked from funnel for multi-framework dashboard spec | verify-no-asf-coherence | continuous-proof |
-| mr-0107 | T1 | D | Polish Multi-framework dashboard spec — P2 item 007 | API export verified for multi-framework dashboard spec | pytest | continuous-proof |
-| mr-0108 | T2 | A | Automate Multi-framework dashboard spec — P2 item 008 | manual review passed for multi-framework dashboard spec | manual | continuous-proof |
-| mr-0109 | T1 | A | Elevate Multi-framework dashboard spec — P2 item 009 | e2e flow green for multi-framework dashboard spec | procurement-pack-e2e | continuous-proof |
-| mr-0110 | T1 | H | Harden Multi-framework dashboard spec — P2 item 010 | GTM signal captured for multi-framework dashboard spec | verify-msb-partner-openapi | continuous-proof |
-| mr-0111 | T2 | A | Ship ISO+NIST orientation rows — P2 item 011 | buyer-visible on www for iso+nist orientation rows | verify-gtm | continuous-proof |
-| mr-0112 | T1 | A | Lock ISO+NIST orientation rows — P2 item 012 | committee artifact ready for iso+nist orientation rows | verify-ui-e2e | continuous-proof |
-| mr-0113 | T1 | D | Wire ISO+NIST orientation rows — P2 item 013 | regression gate green for iso+nist orientation rows | verify-gtm-ops-docs | continuous-proof |
-| mr-0114 | T2 | A | Extend ISO+NIST orientation rows — P2 item 014 | procurement self-serve path for iso+nist orientation rows | verify-ui-endpoints | continuous-proof |
-| mr-0115 | T1 | A | Document ISO+NIST orientation rows — P2 item 015 | console parity achieved for iso+nist orientation rows | plan-with-no-asf-verify | continuous-proof |
-| mr-0116 | T1 | A | Verify ISO+NIST orientation rows — P2 item 016 | doc linked from funnel for iso+nist orientation rows | verify-no-asf-coherence | continuous-proof |
-| mr-0117 | T2 | D | Polish ISO+NIST orientation rows — P2 item 017 | API export verified for iso+nist orientation rows | pytest | continuous-proof |
-| mr-0118 | T1 | A | Automate ISO+NIST orientation rows — P2 item 018 | manual review passed for iso+nist orientation rows | manual | continuous-proof |
-| mr-0119 | T1 | A | Elevate ISO+NIST orientation rows — P2 item 019 | e2e flow green for iso+nist orientation rows | procurement-pack-e2e | continuous-proof |
-| mr-0120 | T2 | H | Harden ISO+NIST orientation rows — P2 item 020 | GTM signal captured for iso+nist orientation rows | verify-msb-partner-openapi | continuous-proof |
-| mr-0121 | T1 | A | Ship Auditor workspace export view — P2 item 021 | buyer-visible on www for auditor workspace export view | verify-gtm | continuous-proof |
-| mr-0122 | T1 | A | Lock Auditor workspace export view — P2 item 022 | committee artifact ready for auditor workspace export view | verify-ui-e2e | continuous-proof |
-| mr-0123 | T2 | D | Wire Auditor workspace export view — P2 item 023 | regression gate green for auditor workspace export view | verify-gtm-ops-docs | continuous-proof |
-| mr-0124 | T1 | A | Extend Auditor workspace export view — P2 item 024 | procurement self-serve path for auditor workspace export view | verify-ui-endpoints | continuous-proof |
-| mr-0125 | T1 | A | Document Auditor workspace export view — P2 item 025 | console parity achieved for auditor workspace export view | plan-with-no-asf-verify | continuous-proof |
-| mr-0126 | T2 | A | Verify Auditor workspace export view — P2 item 026 | doc linked from funnel for auditor workspace export view | verify-no-asf-coherence | continuous-proof |
-| mr-0127 | T1 | D | Polish Auditor workspace export view — P2 item 027 | API export verified for auditor workspace export view | pytest | continuous-proof |
-| mr-0128 | T1 | A | Automate Auditor workspace export view — P2 item 028 | manual review passed for auditor workspace export view | manual | continuous-proof |
-| mr-0129 | T2 | A | Elevate Auditor workspace export view — P2 item 029 | e2e flow green for auditor workspace export view | procurement-pack-e2e | continuous-proof |
-| mr-0130 | T1 | H | Harden Auditor workspace export view — P2 item 030 | GTM signal captured for auditor workspace export view | verify-msb-partner-openapi | continuous-proof |
-| mr-0131 | T1 | A | Ship Cloud connector freshness UI — P2 item 031 | buyer-visible on www for cloud connector freshness ui | verify-gtm | continuous-proof |
-| mr-0132 | T2 | A | Lock Cloud connector freshness UI — P2 item 032 | committee artifact ready for cloud connector freshness ui | verify-ui-e2e | continuous-proof |
-| mr-0133 | T1 | D | Wire Cloud connector freshness UI — P2 item 033 | regression gate green for cloud connector freshness ui | verify-gtm-ops-docs | continuous-proof |
-| mr-0134 | T1 | A | Extend Cloud connector freshness UI — P2 item 034 | procurement self-serve path for cloud connector freshness ui | verify-ui-endpoints | continuous-proof |
-| mr-0135 | T2 | A | Document Cloud connector freshness UI — P2 item 035 | console parity achieved for cloud connector freshness ui | plan-with-no-asf-verify | continuous-proof |
-| mr-0136 | T1 | A | Verify Cloud connector freshness UI — P2 item 036 | doc linked from funnel for cloud connector freshness ui | verify-no-asf-coherence | continuous-proof |
-| mr-0137 | T1 | D | Polish Cloud connector freshness UI — P2 item 037 | API export verified for cloud connector freshness ui | pytest | continuous-proof |
-| mr-0138 | T2 | A | Automate Cloud connector freshness UI — P2 item 038 | manual review passed for cloud connector freshness ui | manual | continuous-proof |
-| mr-0139 | T1 | A | Elevate Cloud connector freshness UI — P2 item 039 | e2e flow green for cloud connector freshness ui | procurement-pack-e2e | continuous-proof |
-| mr-0140 | T1 | H | Harden Cloud connector freshness UI — P2 item 040 | GTM signal captured for cloud connector freshness ui | verify-msb-partner-openapi | continuous-proof |
-| mr-0141 | T2 | A | Ship HR/identity metadata index — P2 item 041 | buyer-visible on www for hr/identity metadata index | verify-gtm | continuous-proof |
-| mr-0142 | T1 | A | Lock HR/identity metadata index — P2 item 042 | committee artifact ready for hr/identity metadata index | verify-ui-e2e | continuous-proof |
-| mr-0143 | T1 | D | Wire HR/identity metadata index — P2 item 043 | regression gate green for hr/identity metadata index | verify-gtm-ops-docs | continuous-proof |
-| mr-0144 | T2 | A | Extend HR/identity metadata index — P2 item 044 | procurement self-serve path for hr/identity metadata index | verify-ui-endpoints | continuous-proof |
-| mr-0145 | T1 | A | Document HR/identity metadata index — P2 item 045 | console parity achieved for hr/identity metadata index | plan-with-no-asf-verify | continuous-proof |
-| mr-0146 | T1 | A | Verify HR/identity metadata index — P2 item 046 | doc linked from funnel for hr/identity metadata index | verify-no-asf-coherence | continuous-proof |
-| mr-0147 | T2 | D | Polish HR/identity metadata index — P2 item 047 | API export verified for hr/identity metadata index | pytest | continuous-proof |
-| mr-0148 | T1 | A | Automate HR/identity metadata index — P2 item 048 | manual review passed for hr/identity metadata index | manual | continuous-proof |
-| mr-0149 | T1 | A | Elevate HR/identity metadata index — P2 item 049 | e2e flow green for hr/identity metadata index | procurement-pack-e2e | continuous-proof |
-| mr-0150 | T2 | H | Harden HR/identity metadata index — P2 item 050 | GTM signal captured for hr/identity metadata index | verify-msb-partner-openapi | continuous-proof |
-| mr-0151 | T1 | A | Ship Framework expansion playbook — P2 item 051 | buyer-visible on www for framework expansion playbook | verify-gtm | continuous-proof |
-| mr-0152 | T1 | A | Lock Framework expansion playbook — P2 item 052 | committee artifact ready for framework expansion playbook | verify-ui-e2e | continuous-proof |
-| mr-0153 | T2 | D | Wire Framework expansion playbook — P2 item 053 | regression gate green for framework expansion playbook | verify-gtm-ops-docs | continuous-proof |
-| mr-0154 | T1 | A | Extend Framework expansion playbook — P2 item 054 | procurement self-serve path for framework expansion playbook | verify-ui-endpoints | continuous-proof |
-| mr-0155 | T1 | A | Document Framework expansion playbook — P2 item 055 | console parity achieved for framework expansion playbook | plan-with-no-asf-verify | continuous-proof |
-| mr-0156 | T2 | A | Verify Framework expansion playbook — P2 item 056 | doc linked from funnel for framework expansion playbook | verify-no-asf-coherence | continuous-proof |
-| mr-0157 | T1 | D | Polish Framework expansion playbook — P2 item 057 | API export verified for framework expansion playbook | pytest | continuous-proof |
-| mr-0158 | T1 | A | Automate Framework expansion playbook — P2 item 058 | manual review passed for framework expansion playbook | manual | continuous-proof |
-| mr-0159 | T2 | A | Elevate Framework expansion playbook — P2 item 059 | e2e flow green for framework expansion playbook | procurement-pack-e2e | continuous-proof |
-| mr-0160 | T1 | H | Harden Framework expansion playbook — P2 item 060 | GTM signal captured for framework expansion playbook | verify-msb-partner-openapi | continuous-proof |
-| mr-0161 | T1 | A | Ship Compliance operating rhythm doc — P2 item 061 | buyer-visible on www for compliance operating rhythm doc | verify-gtm | continuous-proof |
-| mr-0162 | T2 | A | Lock Compliance operating rhythm doc — P2 item 062 | committee artifact ready for compliance operating rhythm doc | verify-ui-e2e | continuous-proof |
-| mr-0163 | T1 | D | Wire Compliance operating rhythm doc — P2 item 063 | regression gate green for compliance operating rhythm doc | verify-gtm-ops-docs | continuous-proof |
-| mr-0164 | T1 | A | Extend Compliance operating rhythm doc — P2 item 064 | procurement self-serve path for compliance operating rhythm doc | verify-ui-endpoints | continuous-proof |
-| mr-0165 | T2 | A | Document Compliance operating rhythm doc — P2 item 065 | console parity achieved for compliance operating rhythm doc | plan-with-no-asf-verify | continuous-proof |
-| mr-0166 | T1 | A | Verify Compliance operating rhythm doc — P2 item 066 | doc linked from funnel for compliance operating rhythm doc | verify-no-asf-coherence | continuous-proof |
-| mr-0167 | T1 | D | Polish Compliance operating rhythm doc — P2 item 067 | API export verified for compliance operating rhythm doc | pytest | continuous-proof |
-| mr-0168 | T2 | A | Automate Compliance operating rhythm doc — P2 item 068 | manual review passed for compliance operating rhythm doc | manual | continuous-proof |
-| mr-0169 | T1 | A | Elevate Compliance operating rhythm doc — P2 item 069 | e2e flow green for compliance operating rhythm doc | procurement-pack-e2e | continuous-proof |
-| mr-0170 | T1 | H | Harden Compliance operating rhythm doc — P2 item 070 | GTM signal captured for compliance operating rhythm doc | verify-msb-partner-openapi | continuous-proof |
-| mr-0171 | T2 | A | Ship Real-time control status badges — P2 item 071 | buyer-visible on www for real-time control status badges | verify-gtm | continuous-proof |
-| mr-0172 | T1 | A | Lock Real-time control status badges — P2 item 072 | committee artifact ready for real-time control status badges | verify-ui-e2e | continuous-proof |
-| mr-0173 | T1 | D | Wire Real-time control status badges — P2 item 073 | regression gate green for real-time control status badges | verify-gtm-ops-docs | continuous-proof |
-| mr-0174 | T2 | A | Extend Real-time control status badges — P2 item 074 | procurement self-serve path for real-time control status badges | verify-ui-endpoints | continuous-proof |
-| mr-0175 | T1 | A | Document Real-time control status badges — P2 item 075 | console parity achieved for real-time control status badges | plan-with-no-asf-verify | continuous-proof |
-| mr-0176 | T1 | A | Verify Real-time control status badges — P2 item 076 | doc linked from funnel for real-time control status badges | verify-no-asf-coherence | continuous-proof |
-| mr-0177 | T2 | D | Polish Real-time control status badges — P2 item 077 | API export verified for real-time control status badges | pytest | continuous-proof |
-| mr-0178 | T1 | A | Automate Real-time control status badges — P2 item 078 | manual review passed for real-time control status badges | manual | continuous-proof |
-| mr-0179 | T1 | A | Elevate Real-time control status badges — P2 item 079 | e2e flow green for real-time control status badges | procurement-pack-e2e | continuous-proof |
-| mr-0180 | T2 | H | Harden Real-time control status badges — P2 item 080 | GTM signal captured for real-time control status badges | verify-msb-partner-openapi | continuous-proof |
-| mr-0181 | T1 | A | Ship Multi-entity scope callout — P2 item 081 | buyer-visible on www for multi-entity scope callout | verify-gtm | continuous-proof |
-| mr-0182 | T1 | A | Lock Multi-entity scope callout — P2 item 082 | committee artifact ready for multi-entity scope callout | verify-ui-e2e | continuous-proof |
-| mr-0183 | T2 | D | Wire Multi-entity scope callout — P2 item 083 | regression gate green for multi-entity scope callout | verify-gtm-ops-docs | continuous-proof |
-| mr-0184 | T1 | A | Extend Multi-entity scope callout — P2 item 084 | procurement self-serve path for multi-entity scope callout | verify-ui-endpoints | continuous-proof |
-| mr-0185 | T1 | A | Document Multi-entity scope callout — P2 item 085 | console parity achieved for multi-entity scope callout | plan-with-no-asf-verify | continuous-proof |
-| mr-0186 | T2 | A | Verify Multi-entity scope callout — P2 item 086 | doc linked from funnel for multi-entity scope callout | verify-no-asf-coherence | continuous-proof |
-| mr-0187 | T1 | D | Polish Multi-entity scope callout — P2 item 087 | API export verified for multi-entity scope callout | pytest | continuous-proof |
-| mr-0188 | T1 | A | Automate Multi-entity scope callout — P2 item 088 | manual review passed for multi-entity scope callout | manual | continuous-proof |
-| mr-0189 | T2 | A | Elevate Multi-entity scope callout — P2 item 089 | e2e flow green for multi-entity scope callout | procurement-pack-e2e | continuous-proof |
-| mr-0190 | T1 | H | Harden Multi-entity scope callout — P2 item 090 | GTM signal captured for multi-entity scope callout | verify-msb-partner-openapi | continuous-proof |
-| mr-0191 | T1 | A | Ship Phase 2 regression bundle — P2 item 091 | buyer-visible on www for phase 2 regression bundle | verify-gtm | continuous-proof |
-| mr-0192 | T2 | A | Lock Phase 2 regression bundle — P2 item 092 | committee artifact ready for phase 2 regression bundle | verify-ui-e2e | continuous-proof |
-| mr-0193 | T1 | D | Wire Phase 2 regression bundle — P2 item 093 | regression gate green for phase 2 regression bundle | verify-gtm-ops-docs | continuous-proof |
-| mr-0194 | T1 | A | Extend Phase 2 regression bundle — P2 item 094 | procurement self-serve path for phase 2 regression bundle | verify-ui-endpoints | continuous-proof |
-| mr-0195 | T2 | A | Document Phase 2 regression bundle — P2 item 095 | console parity achieved for phase 2 regression bundle | plan-with-no-asf-verify | continuous-proof |
-| mr-0196 | T1 | A | Verify Phase 2 regression bundle — P2 item 096 | doc linked from funnel for phase 2 regression bundle | verify-no-asf-coherence | continuous-proof |
-| mr-0197 | T1 | D | Polish Phase 2 regression bundle — P2 item 097 | API export verified for phase 2 regression bundle | pytest | continuous-proof |
-| mr-0198 | T2 | A | Automate Phase 2 regression bundle — P2 item 098 | manual review passed for phase 2 regression bundle | manual | continuous-proof |
-| mr-0199 | T1 | A | Elevate Phase 2 regression bundle — P2 item 099 | e2e flow green for phase 2 regression bundle | procurement-pack-e2e | continuous-proof |
-| mr-0200 | T1 | H | Harden Phase 2 regression bundle — P2 item 100 | GTM signal captured for phase 2 regression bundle | verify-msb-partner-openapi | continuous-proof |
+| mr-0101 | T1 | A | Ship multi-framework control grid to /trust-center/ | Prospect sees ISO + NIST + EU orientation in one view | verify-gtm | continuous-proof |
+| mr-0102 | T2 | A | Add framework selector filter to trust center grid | Reviewer narrows to relevant regime without sales call | verify-ui-e2e | continuous-proof |
+| mr-0103 | T1 | A | Wire multi-framework badge strip on enterprise page | Three-framework orientation visible above fold | verify-gtm | continuous-proof |
+| mr-0104 | T1 | D | Add framework expansion roadmap section to trust FAQ | Buyer knows which frameworks queue next | verify-gtm-ops-docs | continuous-proof |
+| mr-0105 | T2 | D | Publish framework overlap index (one control → N frameworks) | Efficiency argument documented for procurement | verify-gtm | continuous-proof |
+| mr-0106 | T1 | A | Add cross-framework dedup call-out on /trust-center/ | Single evidence satisfying multiple frameworks visible | verify-gtm | continuous-proof |
+| mr-0107 | T1 | A | Wire framework audit status pill per row | ISO/NIST/EU rows show last_verified_at freshness | verify-ui-e2e | continuous-proof |
+| mr-0108 | T2 | A | Add printable multi-framework summary for committees | Board pack shows all active framework orientations | manual | continuous-proof |
+| mr-0109 | T1 | D | Spec multi-entity scope note on framework grid | Global entities see scope callout without confusion | verify-gtm | continuous-proof |
+| mr-0110 | T1 | A | Add framework roadmap CTA on enterprise page | CISO logs expansion interest via trust center | verify-gtm | continuous-proof |
+| mr-0111 | T2 | A | Publish ISO 27001 orientation section in /trust-center/ | ISO-focused reviewer self-serves without NDA | verify-gtm | continuous-proof |
+| mr-0112 | T1 | D | Add ISO Annex A control mapping stub to trust FAQ | 93-control orientation visible as metadata rows | verify-gtm-ops-docs | continuous-proof |
+| mr-0113 | T1 | A | Wire ISO control freshness badge to last_verified_at | ISO row timestamp matches connector ingest cycle | verify-ui-e2e | continuous-proof |
+| mr-0114 | T2 | A | Add ISO honest-posture note (orientation-not-certified) | ISO stance matches trust center honest-posture language | verify-no-asf-coherence | continuous-proof |
+| mr-0115 | T1 | D | Document ISO evidence intake scope in contract link | ISO controls collected as metadata only | verify-gtm-ops-docs | continuous-proof |
+| mr-0116 | T1 | A | Add ISO audit export path from trust center | ISO-mapped export bundle downloadable pre-audit | verify-ui-e2e | continuous-proof |
+| mr-0117 | T2 | A | Spec ISO ISMS orientation block on /trust-center/ | ISMS scope note visible to security reviewers | verify-gtm | continuous-proof |
+| mr-0118 | T1 | A | Wire ISO row to procurement ZIP CTA | ISO-scoped diligence bundle one-click download | procurement-pack-e2e | continuous-proof |
+| mr-0119 | T1 | D | Add ISO expansion note to connector orientation doc | New connectors extend ISO evidence set | verify-gtm-ops-docs | continuous-proof |
+| mr-0120 | T2 | A | Polish ISO section zebra rows for committee print | Print CSS renders ISO control table cleanly | manual | continuous-proof |
+| mr-0121 | T1 | A | Ship auditor export view stub in console | Audit-ready bundle accessible from workspace | verify-ui-e2e | continuous-proof |
+| mr-0122 | T1 | A | Add RID-keyed export link from auditor view | Every bundle ties to immutable receipt ID | verify-ui-endpoints | continuous-proof |
+| mr-0123 | T2 | D | Spec auditor view access tier (read-only role) | Auditor sees evidence without operator permissions | spec review | continuous-proof |
+| mr-0124 | T1 | A | Add export timestamp on all auditor-facing docs | Freshness assertion visible on cover page | verify-ui-e2e | continuous-proof |
+| mr-0125 | T1 | A | Wire SHA-256 checksum to auditor export bundle | Tamper-awareness call-out on bundle README | verify-gtm | continuous-proof |
+| mr-0126 | T2 | D | Publish auditor workspace orientation one-pager | Auditor onboarding self-serve without call | verify-gtm-ops-docs | continuous-proof |
+| mr-0127 | T1 | D | Add audit bundle format orientation to trust FAQ | Reviewer knows JSON + PDF structure before login | verify-gtm | continuous-proof |
+| mr-0128 | T1 | A | Spec auditor view role handoff in procurement ZIP | Bundle README explains auditor access path | procurement-pack-e2e | continuous-proof |
+| mr-0129 | T2 | A | Add connector coverage map to auditor view | Which connectors feed which control rows visible | verify-ui-e2e | continuous-proof |
+| mr-0130 | T1 | A | Wire auditor export CTA from trust center | Audit-ready path accessible without sales call | verify-gtm | continuous-proof |
+| mr-0131 | T1 | A | Add connector last_sync timestamp to /trust-center/ | Evidence freshness claim grounded in real sync data | verify-ui-e2e | continuous-proof |
+| mr-0132 | T2 | A | Wire connector health endpoint for ops monitoring | Sync failures visible to ops team before prospects see stale | verify-ui-endpoints | continuous-proof |
+| mr-0133 | T1 | D | Add connector freshness callout to diligence doc | Hourly-vs-annual distinction documented externally | verify-gtm-ops-docs | continuous-proof |
+| mr-0134 | T1 | A | Spec connector stale-alert threshold (>24 h) | Ops paged before trust center shows stale badge | verify-ui-endpoints | continuous-proof |
+| mr-0135 | T2 | A | Add connector coverage count to trust center hero | Buyer sees N connectors feeding evidence layer | verify-gtm | continuous-proof |
+| mr-0136 | T1 | A | Wire connector last_sync to procurement ZIP manifest | Export bundle README shows sync timestamp | procurement-pack-e2e | continuous-proof |
+| mr-0137 | T1 | D | Add new-connector onboarding runbook link | MSP partners can extend connector set self-serve | verify-gtm-ops-docs | continuous-proof |
+| mr-0138 | T2 | D | Spec metadata-only connector intake scope | No raw log ingestion policy visible on /trust-center/ | verify-gtm | continuous-proof |
+| mr-0139 | T1 | A | Publish connector list (categories only, no logos) | Categories without brand marks on public page | verify-no-asf-coherence | continuous-proof |
+| mr-0140 | T1 | A | Add connector freshness smoke test to regression suite | Stale connector caught before release | pytest | continuous-proof |
+| mr-0141 | T2 | A | Add HR/identity metadata orientation row to /trust-center/ | Identity connector scope visible to security reviewers | verify-gtm | continuous-proof |
+| mr-0142 | T1 | A | Wire HR connector last_sync to trust center strip | Identity evidence freshness visible on trust surface | verify-ui-e2e | continuous-proof |
+| mr-0143 | T1 | D | Add access-review orientation block to trust FAQ | Reviewers see access-change evidence pattern | verify-gtm-ops-docs | continuous-proof |
+| mr-0144 | T2 | D | Spec HR metadata-only intake fence | Personal data not collected in evidence layer | verify-no-asf-coherence | continuous-proof |
+| mr-0145 | T1 | D | Add identity risk orientation note to diligence doc | Access anomaly evidence scope documented | verify-gtm-ops-docs | continuous-proof |
+| mr-0146 | T1 | D | Publish HR metadata schema stub (fields only) | Legal reviewer confirms PII fence without source access | verify-gtm | continuous-proof |
+| mr-0147 | T2 | A | Wire HR row to framework grid (ISO access-control orientation) | ISO access control row references HR connector | verify-ui-e2e | continuous-proof |
+| mr-0148 | T1 | D | Add offboarding evidence orientation to trust FAQ | Access revocation signal documented for reviewers | verify-gtm-ops-docs | continuous-proof |
+| mr-0149 | T1 | A | Spec HR connector scope note in procurement ZIP | Bundle explains HR metadata limits | procurement-pack-e2e | continuous-proof |
+| mr-0150 | T2 | A | Add identity scope smoke test to regression | HR metadata fence verified on each deploy | pytest | continuous-proof |
+| mr-0151 | T1 | D | Publish framework expansion playbook link on /trust-center/ | Buyers know next framework queue without custom call | verify-gtm | continuous-proof |
+| mr-0152 | T1 | D | Add expansion roadmap table to trust FAQ | ISO → SOC2 orientation → EU AI Act sequence documented | verify-gtm-ops-docs | continuous-proof |
+| mr-0153 | T2 | A | Wire framework expansion CTA on enterprise page | CISO can request next framework via trust center | verify-gtm | continuous-proof |
+| mr-0154 | T1 | D | Spec framework onboarding runbook (internal) | Ops team can activate new framework in one sprint | spec review | continuous-proof |
+| mr-0155 | T1 | D | Add framework deprecation fence to playbook | No sunsetting frameworks added without review gate | verify-no-asf-coherence | continuous-proof |
+| mr-0156 | T2 | A | Document framework activation turnaround in procurement ZIP | Commercial expectation set in export bundle | procurement-pack-e2e | continuous-proof |
+| mr-0157 | T1 | A | Add new-framework preview row (coming-soon pattern) | Prospect sees pipeline without premature claims | verify-gtm | continuous-proof |
+| mr-0158 | T1 | D | Spec framework evidence mapping worksheet template | Design-partner gets blank worksheet for workshops | verify-gtm | continuous-proof |
+| mr-0159 | T2 | A | Wire framework expansion to design-partner CTA | Enterprise buyer can shape framework priorities | verify-gtm | continuous-proof |
+| mr-0160 | T1 | D | Add framework expansion to Phase 2 retrospective | Learnings feed Phase 3 enterprise playbook | docs review | continuous-proof |
+| mr-0161 | T1 | D | Publish compliance operating rhythm orientation doc | Buyers understand continuous-not-point-in-time posture | verify-gtm-ops-docs | continuous-proof |
+| mr-0162 | T2 | D | Add monthly cadence block to trust FAQ | Weekly/monthly evidence cadence documented for reviewers | verify-gtm | continuous-proof |
+| mr-0163 | T1 | A | Wire operating rhythm doc link from /trust-center/ | Self-serve compliance cadence orientation | verify-gtm | continuous-proof |
+| mr-0164 | T1 | D | Add rhythm metric examples to diligence one-pager | Number of control refreshes per week visible | verify-gtm-ops-docs | continuous-proof |
+| mr-0165 | T2 | D | Spec evidence age policy (max-N-days threshold) | Policy prevents stale evidence accumulating | spec review | continuous-proof |
+| mr-0166 | T1 | A | Add compliance rhythm to TLE export cover block | Board PDF shows evidence cadence claim | verify-ui-e2e | continuous-proof |
+| mr-0167 | T1 | A | Wire rhythm doc to procurement ZIP bundle | Legal reviewer sees operating cadence in bundle | procurement-pack-e2e | continuous-proof |
+| mr-0168 | T2 | D | Publish compliance rhythm FAQ (top 5 questions) | Questionnaire deflection on audit frequency | verify-gtm-ops-docs | continuous-proof |
+| mr-0169 | T1 | H | Add operating rhythm to design-partner workshop agenda | Enterprise buyer co-designs cadence expectations | manual | continuous-proof |
+| mr-0170 | T1 | A | Add rhythm verification smoke test to regression | Connector ingest cadence asserted per deploy | pytest | continuous-proof |
+| mr-0171 | T2 | A | Add live control status badge to trust center grid | Prospects see current-state not archived screenshot | verify-ui-e2e | continuous-proof |
+| mr-0172 | T1 | A | Wire badge color logic to control freshness threshold | Green/amber/red based on last_verified_at delta | verify-ui-e2e | continuous-proof |
+| mr-0173 | T1 | D | Add badge legend to trust FAQ | CISO understands badge semantics without call | verify-gtm | continuous-proof |
+| mr-0174 | T2 | D | Spec badge state machine (passing/needs-attention/stale) | Three-state model documented for design-partner review | spec review | continuous-proof |
+| mr-0175 | T1 | A | Add badge to TLE export cover block | Board PDF shows control state snapshot at export time | verify-ui-e2e | continuous-proof |
+| mr-0176 | T1 | A | Wire badge to procurement ZIP manifest | Export bundle captures control state at download time | procurement-pack-e2e | continuous-proof |
+| mr-0177 | T2 | A | Add badge accessibility ARIA labels for screen readers | a11y baseline maintained on /trust-center/ | smoke_bank_grade | continuous-proof |
+| mr-0178 | T1 | A | Publish badge explanation block on /trust-center/ | Copy explains badge semantics without ML hype | verify-gtm | continuous-proof |
+| mr-0179 | T1 | A | Smoke test badge rendering on bank-grade CSS stack | Badges visible on institutional CSS theme | smoke_bank_grade | continuous-proof |
+| mr-0180 | T2 | A | Add badge regression test to CI gate | Badge state mismatch caught before each deploy | pytest | continuous-proof |
+| mr-0181 | T1 | A | Add multi-entity scope note to trust center hero | Global procurement teams see entity coverage | verify-gtm | continuous-proof |
+| mr-0182 | T1 | A | Wire entity scope selector stub to /trust-center/ | Enterprise buyer can scope evidence per entity | verify-ui-e2e | continuous-proof |
+| mr-0183 | T2 | D | Document multi-entity evidence consolidation pattern | Operations doc for multi-subsidiary rollout | verify-gtm-ops-docs | continuous-proof |
+| mr-0184 | T1 | A | Add entity scope field to procurement ZIP README | Legal reviewer confirms coverage without call | procurement-pack-e2e | continuous-proof |
+| mr-0185 | T1 | D | Spec entity isolation fence for shared connectors | Data from entity A not visible to entity B | spec review | continuous-proof |
+| mr-0186 | T2 | D | Add multi-entity FAQ block to /trust-center/ | Common questions deflected for global buyers | verify-gtm | continuous-proof |
+| mr-0187 | T1 | A | Wire entity count to trust center header copy | N-entities copy on enterprise page | verify-gtm | continuous-proof |
+| mr-0188 | T1 | A | Add multi-entity scope to TLE export cover | Board PDF clarifies which entities are in scope | verify-ui-e2e | continuous-proof |
+| mr-0189 | T2 | D | Spec multi-entity pricing orientation in trust FAQ | Enterprise buyer sees per-entity model stub | verify-gtm | continuous-proof |
+| mr-0190 | T1 | A | Add entity smoke test to regression gate | Entity isolation asserted per deploy | pytest | continuous-proof |
+| mr-0191 | T1 | A | Run verify-ui-e2e suite green on Phase 2 routes | All multi-framework trust center routes pass | verify-ui-e2e | continuous-proof |
+| mr-0192 | T2 | A | Pass verify-no-asf-coherence on all Phase 2 surfaces | No brand names on framework grid or /trust-center/ | verify-no-asf-coherence | continuous-proof |
+| mr-0193 | T1 | A | Pass audit_final_system_lock 0 violations on Phase 2 HTML | RPAA-safe public copy confirmed for phase 2 | audit_final_system_lock | continuous-proof |
+| mr-0194 | T1 | A | Pass test_public_gtm_alignment on Phase 2 routes | Framework grid copy alignment green | pytest | continuous-proof |
+| mr-0195 | T2 | A | Run procurement-pack-e2e with multi-framework ZIP | ISO + NIST + EU rows in export package | procurement-pack-e2e | continuous-proof |
+| mr-0196 | T1 | A | Run smoke_bank_grade on Phase 2 enterprise routes | Bank-grade CSS confirmed on all framework pages | smoke_bank_grade | continuous-proof |
+| mr-0197 | T1 | H | Log Phase 2 deal influenced in ops log | Revenue-influenced metric recorded | manual | continuous-proof |
+| mr-0198 | T2 | H | Record first multi-framework trust center walkthrough | 90-second CISO comprehension validated | manual | continuous-proof |
+| mr-0199 | T1 | D | Phase 2 retrospective doc (1 page) | What worked / what to defer feeds Phase 3 | docs review | continuous-proof |
+| mr-0200 | T1 | H | Sign off Phase 2 → unlock Phase 3 picks | mr-0200 ready in GTM_NEXT | manual | continuous-proof |
 
 ## Phase 3 — TrustPlatform — enterprise trust umbrella (mr-0201–mr-0300)
 
@@ -324,106 +324,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0201 | T1 | A | Ship Enterprise trust umbrella nav — P3 item 001 | buyer-visible on www for enterprise trust umbrella nav | verify-gtm | enterprise-trust |
-| mr-0202 | T2 | A | Lock Enterprise trust umbrella nav — P3 item 002 | committee artifact ready for enterprise trust umbrella nav | verify-ui-e2e | enterprise-trust |
-| mr-0203 | T1 | D | Wire Enterprise trust umbrella nav — P3 item 003 | regression gate green for enterprise trust umbrella nav | verify-gtm-ops-docs | enterprise-trust |
-| mr-0204 | T1 | A | Extend Enterprise trust umbrella nav — P3 item 004 | procurement self-serve path for enterprise trust umbrella nav | verify-ui-endpoints | enterprise-trust |
-| mr-0205 | T2 | A | Document Enterprise trust umbrella nav — P3 item 005 | console parity achieved for enterprise trust umbrella nav | plan-with-no-asf-verify | enterprise-trust |
-| mr-0206 | T1 | A | Verify Enterprise trust umbrella nav — P3 item 006 | doc linked from funnel for enterprise trust umbrella nav | verify-no-asf-coherence | enterprise-trust |
-| mr-0207 | T1 | D | Polish Enterprise trust umbrella nav — P3 item 007 | API export verified for enterprise trust umbrella nav | pytest | enterprise-trust |
-| mr-0208 | T2 | A | Automate Enterprise trust umbrella nav — P3 item 008 | manual review passed for enterprise trust umbrella nav | manual | enterprise-trust |
-| mr-0209 | T1 | A | Elevate Enterprise trust umbrella nav — P3 item 009 | e2e flow green for enterprise trust umbrella nav | procurement-pack-e2e | enterprise-trust |
-| mr-0210 | T1 | H | Harden Enterprise trust umbrella nav — P3 item 010 | GTM signal captured for enterprise trust umbrella nav | verify-msb-partner-openapi | enterprise-trust |
-| mr-0211 | T2 | A | Ship Privacy+risk+AI module map — P3 item 011 | buyer-visible on www for privacy+risk+ai module map | verify-gtm | enterprise-trust |
-| mr-0212 | T1 | A | Lock Privacy+risk+AI module map — P3 item 012 | committee artifact ready for privacy+risk+ai module map | verify-ui-e2e | enterprise-trust |
-| mr-0213 | T1 | D | Wire Privacy+risk+AI module map — P3 item 013 | regression gate green for privacy+risk+ai module map | verify-gtm-ops-docs | enterprise-trust |
-| mr-0214 | T2 | A | Extend Privacy+risk+AI module map — P3 item 014 | procurement self-serve path for privacy+risk+ai module map | verify-ui-endpoints | enterprise-trust |
-| mr-0215 | T1 | A | Document Privacy+risk+AI module map — P3 item 015 | console parity achieved for privacy+risk+ai module map | plan-with-no-asf-verify | enterprise-trust |
-| mr-0216 | T1 | A | Verify Privacy+risk+AI module map — P3 item 016 | doc linked from funnel for privacy+risk+ai module map | verify-no-asf-coherence | enterprise-trust |
-| mr-0217 | T2 | D | Polish Privacy+risk+AI module map — P3 item 017 | API export verified for privacy+risk+ai module map | pytest | enterprise-trust |
-| mr-0218 | T1 | A | Automate Privacy+risk+AI module map — P3 item 018 | manual review passed for privacy+risk+ai module map | manual | enterprise-trust |
-| mr-0219 | T1 | A | Elevate Privacy+risk+AI module map — P3 item 019 | e2e flow green for privacy+risk+ai module map | procurement-pack-e2e | enterprise-trust |
-| mr-0220 | T2 | H | Harden Privacy+risk+AI module map — P3 item 020 | GTM signal captured for privacy+risk+ai module map | verify-msb-partner-openapi | enterprise-trust |
-| mr-0221 | T1 | A | Ship Regulatory mapping table — P3 item 021 | buyer-visible on www for regulatory mapping table | verify-gtm | enterprise-trust |
-| mr-0222 | T1 | A | Lock Regulatory mapping table — P3 item 022 | committee artifact ready for regulatory mapping table | verify-ui-e2e | enterprise-trust |
-| mr-0223 | T2 | D | Wire Regulatory mapping table — P3 item 023 | regression gate green for regulatory mapping table | verify-gtm-ops-docs | enterprise-trust |
-| mr-0224 | T1 | A | Extend Regulatory mapping table — P3 item 024 | procurement self-serve path for regulatory mapping table | verify-ui-endpoints | enterprise-trust |
-| mr-0225 | T1 | A | Document Regulatory mapping table — P3 item 025 | console parity achieved for regulatory mapping table | plan-with-no-asf-verify | enterprise-trust |
-| mr-0226 | T2 | A | Verify Regulatory mapping table — P3 item 026 | doc linked from funnel for regulatory mapping table | verify-no-asf-coherence | enterprise-trust |
-| mr-0227 | T1 | D | Polish Regulatory mapping table — P3 item 027 | API export verified for regulatory mapping table | pytest | enterprise-trust |
-| mr-0228 | T1 | A | Automate Regulatory mapping table — P3 item 028 | manual review passed for regulatory mapping table | manual | enterprise-trust |
-| mr-0229 | T2 | A | Elevate Regulatory mapping table — P3 item 029 | e2e flow green for regulatory mapping table | procurement-pack-e2e | enterprise-trust |
-| mr-0230 | T1 | H | Harden Regulatory mapping table — P3 item 030 | GTM signal captured for regulatory mapping table | verify-msb-partner-openapi | enterprise-trust |
-| mr-0231 | T1 | A | Ship AI inventory orientation row — P3 item 031 | buyer-visible on www for ai inventory orientation row | verify-gtm | enterprise-trust |
-| mr-0232 | T2 | A | Lock AI inventory orientation row — P3 item 032 | committee artifact ready for ai inventory orientation row | verify-ui-e2e | enterprise-trust |
-| mr-0233 | T1 | D | Wire AI inventory orientation row — P3 item 033 | regression gate green for ai inventory orientation row | verify-gtm-ops-docs | enterprise-trust |
-| mr-0234 | T1 | A | Extend AI inventory orientation row — P3 item 034 | procurement self-serve path for ai inventory orientation row | verify-ui-endpoints | enterprise-trust |
-| mr-0235 | T2 | A | Document AI inventory orientation row — P3 item 035 | console parity achieved for ai inventory orientation row | plan-with-no-asf-verify | enterprise-trust |
-| mr-0236 | T1 | A | Verify AI inventory orientation row — P3 item 036 | doc linked from funnel for ai inventory orientation row | verify-no-asf-coherence | enterprise-trust |
-| mr-0237 | T1 | D | Polish AI inventory orientation row — P3 item 037 | API export verified for ai inventory orientation row | pytest | enterprise-trust |
-| mr-0238 | T2 | A | Automate AI inventory orientation row — P3 item 038 | manual review passed for ai inventory orientation row | manual | enterprise-trust |
-| mr-0239 | T1 | A | Elevate AI inventory orientation row — P3 item 039 | e2e flow green for ai inventory orientation row | procurement-pack-e2e | enterprise-trust |
-| mr-0240 | T1 | H | Harden AI inventory orientation row — P3 item 040 | GTM signal captured for ai inventory orientation row | verify-msb-partner-openapi | enterprise-trust |
-| mr-0241 | T2 | A | Ship Policy workflow spec — P3 item 041 | buyer-visible on www for policy workflow spec | verify-gtm | enterprise-trust |
-| mr-0242 | T1 | A | Lock Policy workflow spec — P3 item 042 | committee artifact ready for policy workflow spec | verify-ui-e2e | enterprise-trust |
-| mr-0243 | T1 | D | Wire Policy workflow spec — P3 item 043 | regression gate green for policy workflow spec | verify-gtm-ops-docs | enterprise-trust |
-| mr-0244 | T2 | A | Extend Policy workflow spec — P3 item 044 | procurement self-serve path for policy workflow spec | verify-ui-endpoints | enterprise-trust |
-| mr-0245 | T1 | A | Document Policy workflow spec — P3 item 045 | console parity achieved for policy workflow spec | plan-with-no-asf-verify | enterprise-trust |
-| mr-0246 | T1 | A | Verify Policy workflow spec — P3 item 046 | doc linked from funnel for policy workflow spec | verify-no-asf-coherence | enterprise-trust |
-| mr-0247 | T2 | D | Polish Policy workflow spec — P3 item 047 | API export verified for policy workflow spec | pytest | enterprise-trust |
-| mr-0248 | T1 | A | Automate Policy workflow spec — P3 item 048 | manual review passed for policy workflow spec | manual | enterprise-trust |
-| mr-0249 | T1 | A | Elevate Policy workflow spec — P3 item 049 | e2e flow green for policy workflow spec | procurement-pack-e2e | enterprise-trust |
-| mr-0250 | T2 | H | Harden Policy workflow spec — P3 item 050 | GTM signal captured for policy workflow spec | verify-msb-partner-openapi | enterprise-trust |
-| mr-0251 | T1 | A | Ship Global entity scope doc — P3 item 051 | buyer-visible on www for global entity scope doc | verify-gtm | enterprise-trust |
-| mr-0252 | T1 | A | Lock Global entity scope doc — P3 item 052 | committee artifact ready for global entity scope doc | verify-ui-e2e | enterprise-trust |
-| mr-0253 | T2 | D | Wire Global entity scope doc — P3 item 053 | regression gate green for global entity scope doc | verify-gtm-ops-docs | enterprise-trust |
-| mr-0254 | T1 | A | Extend Global entity scope doc — P3 item 054 | procurement self-serve path for global entity scope doc | verify-ui-endpoints | enterprise-trust |
-| mr-0255 | T1 | A | Document Global entity scope doc — P3 item 055 | console parity achieved for global entity scope doc | plan-with-no-asf-verify | enterprise-trust |
-| mr-0256 | T2 | A | Verify Global entity scope doc — P3 item 056 | doc linked from funnel for global entity scope doc | verify-no-asf-coherence | enterprise-trust |
-| mr-0257 | T1 | D | Polish Global entity scope doc — P3 item 057 | API export verified for global entity scope doc | pytest | enterprise-trust |
-| mr-0258 | T1 | A | Automate Global entity scope doc — P3 item 058 | manual review passed for global entity scope doc | manual | enterprise-trust |
-| mr-0259 | T2 | A | Elevate Global entity scope doc — P3 item 059 | e2e flow green for global entity scope doc | procurement-pack-e2e | enterprise-trust |
-| mr-0260 | T1 | H | Harden Global entity scope doc — P3 item 060 | GTM signal captured for global entity scope doc | verify-msb-partner-openapi | enterprise-trust |
-| mr-0261 | T1 | A | Ship Procurement umbrella one-pager — P3 item 061 | buyer-visible on www for procurement umbrella one-pager | verify-gtm | enterprise-trust |
-| mr-0262 | T2 | A | Lock Procurement umbrella one-pager — P3 item 062 | committee artifact ready for procurement umbrella one-pager | verify-ui-e2e | enterprise-trust |
-| mr-0263 | T1 | D | Wire Procurement umbrella one-pager — P3 item 063 | regression gate green for procurement umbrella one-pager | verify-gtm-ops-docs | enterprise-trust |
-| mr-0264 | T1 | A | Extend Procurement umbrella one-pager — P3 item 064 | procurement self-serve path for procurement umbrella one-pager | verify-ui-endpoints | enterprise-trust |
-| mr-0265 | T2 | A | Document Procurement umbrella one-pager — P3 item 065 | console parity achieved for procurement umbrella one-pager | plan-with-no-asf-verify | enterprise-trust |
-| mr-0266 | T1 | A | Verify Procurement umbrella one-pager — P3 item 066 | doc linked from funnel for procurement umbrella one-pager | verify-no-asf-coherence | enterprise-trust |
-| mr-0267 | T1 | D | Polish Procurement umbrella one-pager — P3 item 067 | API export verified for procurement umbrella one-pager | pytest | enterprise-trust |
-| mr-0268 | T2 | A | Automate Procurement umbrella one-pager — P3 item 068 | manual review passed for procurement umbrella one-pager | manual | enterprise-trust |
-| mr-0269 | T1 | A | Elevate Procurement umbrella one-pager — P3 item 069 | e2e flow green for procurement umbrella one-pager | procurement-pack-e2e | enterprise-trust |
-| mr-0270 | T1 | H | Harden Procurement umbrella one-pager — P3 item 070 | GTM signal captured for procurement umbrella one-pager | verify-msb-partner-openapi | enterprise-trust |
-| mr-0271 | T2 | A | Ship Land-expand module CTAs — P3 item 071 | buyer-visible on www for land-expand module ctas | verify-gtm | enterprise-trust |
-| mr-0272 | T1 | A | Lock Land-expand module CTAs — P3 item 072 | committee artifact ready for land-expand module ctas | verify-ui-e2e | enterprise-trust |
-| mr-0273 | T1 | D | Wire Land-expand module CTAs — P3 item 073 | regression gate green for land-expand module ctas | verify-gtm-ops-docs | enterprise-trust |
-| mr-0274 | T2 | A | Extend Land-expand module CTAs — P3 item 074 | procurement self-serve path for land-expand module ctas | verify-ui-endpoints | enterprise-trust |
-| mr-0275 | T1 | A | Document Land-expand module CTAs — P3 item 075 | console parity achieved for land-expand module ctas | plan-with-no-asf-verify | enterprise-trust |
-| mr-0276 | T1 | A | Verify Land-expand module CTAs — P3 item 076 | doc linked from funnel for land-expand module ctas | verify-no-asf-coherence | enterprise-trust |
-| mr-0277 | T2 | D | Polish Land-expand module CTAs — P3 item 077 | API export verified for land-expand module ctas | pytest | enterprise-trust |
-| mr-0278 | T1 | A | Automate Land-expand module CTAs — P3 item 078 | manual review passed for land-expand module ctas | manual | enterprise-trust |
-| mr-0279 | T1 | A | Elevate Land-expand module CTAs — P3 item 079 | e2e flow green for land-expand module ctas | procurement-pack-e2e | enterprise-trust |
-| mr-0280 | T2 | H | Harden Land-expand module CTAs — P3 item 080 | GTM signal captured for land-expand module ctas | verify-msb-partner-openapi | enterprise-trust |
-| mr-0281 | T1 | A | Ship Executive trust briefing deck — P3 item 081 | buyer-visible on www for executive trust briefing deck | verify-gtm | enterprise-trust |
-| mr-0282 | T1 | A | Lock Executive trust briefing deck — P3 item 082 | committee artifact ready for executive trust briefing deck | verify-ui-e2e | enterprise-trust |
-| mr-0283 | T2 | D | Wire Executive trust briefing deck — P3 item 083 | regression gate green for executive trust briefing deck | verify-gtm-ops-docs | enterprise-trust |
-| mr-0284 | T1 | A | Extend Executive trust briefing deck — P3 item 084 | procurement self-serve path for executive trust briefing deck | verify-ui-endpoints | enterprise-trust |
-| mr-0285 | T1 | A | Document Executive trust briefing deck — P3 item 085 | console parity achieved for executive trust briefing deck | plan-with-no-asf-verify | enterprise-trust |
-| mr-0286 | T2 | A | Verify Executive trust briefing deck — P3 item 086 | doc linked from funnel for executive trust briefing deck | verify-no-asf-coherence | enterprise-trust |
-| mr-0287 | T1 | D | Polish Executive trust briefing deck — P3 item 087 | API export verified for executive trust briefing deck | pytest | enterprise-trust |
-| mr-0288 | T1 | A | Automate Executive trust briefing deck — P3 item 088 | manual review passed for executive trust briefing deck | manual | enterprise-trust |
-| mr-0289 | T2 | A | Elevate Executive trust briefing deck — P3 item 089 | e2e flow green for executive trust briefing deck | procurement-pack-e2e | enterprise-trust |
-| mr-0290 | T1 | H | Harden Executive trust briefing deck — P3 item 090 | GTM signal captured for executive trust briefing deck | verify-msb-partner-openapi | enterprise-trust |
-| mr-0291 | T1 | A | Ship Phase 3 enterprise scale gate — P3 item 091 | buyer-visible on www for phase 3 enterprise scale gate | verify-gtm | enterprise-trust |
-| mr-0292 | T2 | A | Lock Phase 3 enterprise scale gate — P3 item 092 | committee artifact ready for phase 3 enterprise scale gate | verify-ui-e2e | enterprise-trust |
-| mr-0293 | T1 | D | Wire Phase 3 enterprise scale gate — P3 item 093 | regression gate green for phase 3 enterprise scale gate | verify-gtm-ops-docs | enterprise-trust |
-| mr-0294 | T1 | A | Extend Phase 3 enterprise scale gate — P3 item 094 | procurement self-serve path for phase 3 enterprise scale gate | verify-ui-endpoints | enterprise-trust |
-| mr-0295 | T2 | A | Document Phase 3 enterprise scale gate — P3 item 095 | console parity achieved for phase 3 enterprise scale gate | plan-with-no-asf-verify | enterprise-trust |
-| mr-0296 | T1 | A | Verify Phase 3 enterprise scale gate — P3 item 096 | doc linked from funnel for phase 3 enterprise scale gate | verify-no-asf-coherence | enterprise-trust |
-| mr-0297 | T1 | D | Polish Phase 3 enterprise scale gate — P3 item 097 | API export verified for phase 3 enterprise scale gate | pytest | enterprise-trust |
-| mr-0298 | T2 | A | Automate Phase 3 enterprise scale gate — P3 item 098 | manual review passed for phase 3 enterprise scale gate | manual | enterprise-trust |
-| mr-0299 | T1 | A | Elevate Phase 3 enterprise scale gate — P3 item 099 | e2e flow green for phase 3 enterprise scale gate | procurement-pack-e2e | enterprise-trust |
-| mr-0300 | T1 | H | Harden Phase 3 enterprise scale gate — P3 item 100 | GTM signal captured for phase 3 enterprise scale gate | verify-msb-partner-openapi | enterprise-trust |
+| mr-0201 | T1 | A | Ship enterprise trust umbrella nav block | Buyer sees privacy + risk + AI in one procurement scope | verify-gtm | enterprise-trust |
+| mr-0202 | T2 | A | Add trust platform overview section to enterprise page | CISO maps all trust modules without sales call | verify-gtm | enterprise-trust |
+| mr-0203 | T1 | A | Wire trust platform nav cross-links on all tier pages | Module navigation reachable from every funnel route | verify-ui-e2e | enterprise-trust |
+| mr-0204 | T1 | A | Add trust platform one-pager CTA on enterprise page | Procurement team self-serves scope overview | verify-gtm | enterprise-trust |
+| mr-0205 | T2 | D | Publish trust platform FAQ index (20 questions) | Enterprise questionnaire deflection doc linked from /enterprise/ | verify-gtm-ops-docs | enterprise-trust |
+| mr-0206 | T1 | A | Add trust platform ROI callout to enterprise hero | Committee-scan proof points above fold | verify-gtm | enterprise-trust |
+| mr-0207 | T1 | A | Wire trust platform to procurement ZIP CTA | One-click enterprise diligence bundle path | procurement-pack-e2e | enterprise-trust |
+| mr-0208 | T2 | A | Add trust platform scope table to /trust-center/ | Privacy + risk + AI rows in one grid | verify-ui-e2e | enterprise-trust |
+| mr-0209 | T1 | A | Spec trust platform landing page for /enterprise/ | Unified scope above fold for global buyers | verify-gtm | enterprise-trust |
+| mr-0210 | T1 | A | Add trust platform print CSS for board committees | Board can print enterprise scope without console login | manual | enterprise-trust |
+| mr-0211 | T2 | A | Add privacy module orientation row to /trust-center/ | Privacy-focused reviewers self-serve scope | verify-gtm | enterprise-trust |
+| mr-0212 | T1 | D | Wire privacy FAQ link from trust center | Common privacy questions deflected via self-serve FAQ | verify-gtm-ops-docs | enterprise-trust |
+| mr-0213 | T1 | D | Publish privacy-module orientation one-pager | Legal team self-serves scope without NDA | verify-gtm-ops-docs | enterprise-trust |
+| mr-0214 | T2 | A | Add GDPR orientation row to trust center framework grid | EU reviewer finds privacy posture without call | verify-gtm | enterprise-trust |
+| mr-0215 | T1 | D | Add privacy connector scope note to trust FAQ | Data minimisation claim visible to reviewers | verify-no-asf-coherence | enterprise-trust |
+| mr-0216 | T1 | A | Wire privacy row to procurement ZIP bundle | Legal reviewer gets privacy scope in export | procurement-pack-e2e | enterprise-trust |
+| mr-0217 | T2 | H | Add privacy orientation to design-partner workshop | Design-partner co-designs privacy evidence fields | manual | enterprise-trust |
+| mr-0218 | T1 | D | Spec privacy evidence intake contract v2 | Privacy scope additions documented for /trust-center/ | spec review | enterprise-trust |
+| mr-0219 | T1 | A | Add privacy to TLE export cover block | Board PDF includes privacy module scope | verify-ui-e2e | enterprise-trust |
+| mr-0220 | T2 | A | Wire privacy → enterprise trust cross-links | Privacy module nav connects to enterprise page | verify-ui-e2e | enterprise-trust |
+| mr-0221 | T1 | A | Add AI inventory orientation row to /trust-center/ | AI-governance CISO finds scope without call | verify-gtm | enterprise-trust |
+| mr-0222 | T1 | D | Publish AI inventory scope note in trust FAQ | Buyers understand AI asset discovery without hype | verify-gtm-ops-docs | enterprise-trust |
+| mr-0223 | T2 | A | Wire AI inventory orientation doc from /trust-center/ | Self-serve AI scope without NDA gate | verify-gtm | enterprise-trust |
+| mr-0224 | T1 | A | Add AI inventory field stub to TLE export cover | Board PDF shows AI-in-scope count stub | verify-ui-e2e | enterprise-trust |
+| mr-0225 | T1 | D | Spec AI inventory metadata-only intake fence | No model weights collected in evidence layer | verify-no-asf-coherence | enterprise-trust |
+| mr-0226 | T2 | A | Add AI inventory expansion CTA for design-partner | Enterprise buyer shapes AI evidence fields | verify-gtm | enterprise-trust |
+| mr-0227 | T1 | A | Wire AI inventory to ISO 42001 orientation row | AI evidence feeds ISO AI governance framework row | verify-ui-e2e | enterprise-trust |
+| mr-0228 | T1 | D | Add AI inventory FAQ block to /trust-center/ | Common questions deflected on AI governance scope | verify-gtm | enterprise-trust |
+| mr-0229 | T2 | A | Publish AI inventory orientation on /trust-center/ | AI-module copy block visible on main trust surface | verify-gtm | enterprise-trust |
+| mr-0230 | T1 | A | Add AI inventory to procurement ZIP bundle | Export includes AI scope orientation section | procurement-pack-e2e | enterprise-trust |
+| mr-0231 | T1 | A | Ship regulatory mapping table on /trust-center/ | Prospect maps their regime to governance controls | verify-gtm | enterprise-trust |
+| mr-0232 | T2 | A | Add regime-to-control crosswalk stub | GDPR / AI Act / OSFI rows visible as orientation | verify-ui-e2e | enterprise-trust |
+| mr-0233 | T1 | A | Wire regulatory mapping to trust center grid | Framework rows link to regime crosswalk | verify-ui-e2e | enterprise-trust |
+| mr-0234 | T1 | D | Publish regulatory mapping orientation doc | Legal team self-serves crosswalk without workshop | verify-gtm-ops-docs | enterprise-trust |
+| mr-0235 | T2 | D | Add regulatory FAQ index (10 regimes) | Top regime questions deflected pre-procurement | verify-gtm | enterprise-trust |
+| mr-0236 | T1 | A | Wire regulatory mapping to procurement ZIP bundle | Export includes regime-to-control crosswalk | procurement-pack-e2e | enterprise-trust |
+| mr-0237 | T1 | D | Add new-regime onboarding note to trust FAQ | Buyers know how new regulations are added | verify-gtm | enterprise-trust |
+| mr-0238 | T2 | D | Spec regulatory mapping update cadence | Crosswalk refreshed within N days of new rule | spec review | enterprise-trust |
+| mr-0239 | T1 | A | Add regulatory mapping to TLE export cover | Board PDF shows applicable regime rows | verify-ui-e2e | enterprise-trust |
+| mr-0240 | T1 | A | Add regulatory mapping smoke test to regression | Crosswalk rows present in trust center CI check | pytest | enterprise-trust |
+| mr-0241 | T2 | D | Spec policy approval workflow for design-partner | Enterprise policy lifecycle documented | spec review | enterprise-trust |
+| mr-0242 | T1 | D | Add policy workflow orientation to trust FAQ | Buyers understand policy lifecycle without call | verify-gtm | enterprise-trust |
+| mr-0243 | T1 | A | Wire policy workflow doc link from /trust-center/ | Self-serve policy evidence path visible | verify-gtm | enterprise-trust |
+| mr-0244 | T2 | D | Publish policy workflow one-pager for procurement | Legal team maps policy lifecycle to contract | verify-gtm-ops-docs | enterprise-trust |
+| mr-0245 | T1 | D | Add policy change notification spec | Buyers know when policies update via trust center | verify-gtm | enterprise-trust |
+| mr-0246 | T1 | D | Spec governance-as-code policy field map | Policy YAML fields documented for design-partner | spec review | enterprise-trust |
+| mr-0247 | T2 | A | Wire policy workflow to TLE export | Board PDF includes active policy snapshot | verify-ui-e2e | enterprise-trust |
+| mr-0248 | T1 | A | Add policy workflow to procurement ZIP README | Bundle explains policy coverage and update cadence | procurement-pack-e2e | enterprise-trust |
+| mr-0249 | T1 | H | Add policy evidence orientation to design-partner workshop | Co-design policy evidence fields with enterprise buyer | manual | enterprise-trust |
+| mr-0250 | T2 | A | Add policy workflow smoke test to regression | Policy fields present in export bundle CI check | pytest | enterprise-trust |
+| mr-0251 | T1 | A | Add land-expand CTA strip to enterprise page | First module → next module path visible above fold | verify-gtm | enterprise-trust |
+| mr-0252 | T1 | A | Wire expand CTA from trust module to next module | Trust → privacy → AI upgrade path reachable | verify-ui-e2e | enterprise-trust |
+| mr-0253 | T2 | A | Publish land-expand pricing orientation (per-module) | Enterprise buyer sees per-module expansion model | verify-gtm | enterprise-trust |
+| mr-0254 | T1 | A | Add expand CTA to TLE export PDF | Board PDF includes next-module expansion path | verify-ui-e2e | enterprise-trust |
+| mr-0255 | T1 | A | Wire expand CTAs to design-partner path | Enterprise design-partner sees expansion roadmap | verify-gtm | enterprise-trust |
+| mr-0256 | T2 | D | Add land-expand FAQ block to /trust-center/ | Common expansion questions deflected pre-call | verify-gtm-ops-docs | enterprise-trust |
+| mr-0257 | T1 | H | Add expand trigger metrics to GTM ops log | Module expansion deal logged in influenced pipeline | manual | enterprise-trust |
+| mr-0258 | T1 | D | Spec module activation runbook (internal) | Ops team activates module without re-procurement | spec review | enterprise-trust |
+| mr-0259 | T2 | A | Wire land-expand to MSP channel playbook | MSP partners can expand on behalf of enterprise | verify-gtm | enterprise-trust |
+| mr-0260 | T1 | D | Add land-expand step to Phase 3 retrospective | Expansion conversion tracked for Phase 4 | docs review | enterprise-trust |
+| mr-0261 | T1 | D | Publish global entity scope doc for /enterprise/ | Multi-jurisdiction buyers see entity coverage | verify-gtm-ops-docs | enterprise-trust |
+| mr-0262 | T2 | A | Add jurisdiction orientation table to /trust-center/ | EU / North America / APAC rows visible | verify-gtm | enterprise-trust |
+| mr-0263 | T1 | A | Wire jurisdiction rows to regulatory mapping table | Jurisdiction drives applicable regime crosswalk | verify-ui-e2e | enterprise-trust |
+| mr-0264 | T1 | D | Add multi-jurisdiction FAQ to /trust-center/ | Common global scope questions deflected | verify-gtm | enterprise-trust |
+| mr-0265 | T2 | D | Spec jurisdiction isolation fence for shared infrastructure | Data residency policy visible on /trust-center/ | verify-no-asf-coherence | enterprise-trust |
+| mr-0266 | T1 | A | Add jurisdiction field to procurement ZIP | Legal reviewer confirms geographic scope in bundle | procurement-pack-e2e | enterprise-trust |
+| mr-0267 | T1 | A | Wire jurisdiction to TLE export cover block | Board PDF clarifies geographic evidence scope | verify-ui-e2e | enterprise-trust |
+| mr-0268 | T2 | H | Add global scope orientation to design-partner workshop | Co-design geographic evidence coverage | manual | enterprise-trust |
+| mr-0269 | T1 | D | Publish multi-jurisdiction pricing note | Enterprise buyer understands per-jurisdiction model stub | verify-gtm | enterprise-trust |
+| mr-0270 | T1 | A | Add jurisdiction smoke test to regression | Jurisdiction fields present in export bundle CI check | pytest | enterprise-trust |
+| mr-0271 | T2 | D | Spec executive trust briefing deck outline | Board-ready briefing template for enterprise | spec review | enterprise-trust |
+| mr-0272 | T1 | A | Add trust briefing CTA to enterprise page | Executive procurement path visible above fold | verify-gtm | enterprise-trust |
+| mr-0273 | T1 | A | Wire trust briefing to TLE export cover | Board PDF is the executive leave-behind artifact | verify-ui-e2e | enterprise-trust |
+| mr-0274 | T2 | D | Add trust briefing preparation checklist to trust FAQ | Enterprise buyer knows what to prepare before meeting | verify-gtm-ops-docs | enterprise-trust |
+| mr-0275 | T1 | D | Spec trust briefing 30-minute agenda template | Founder has repeatable C-suite meeting script | spec review | enterprise-trust |
+| mr-0276 | T1 | D | Add trust briefing to MSP channel playbook | MSP partners can deliver briefing on behalf of Noetfield | verify-gtm | enterprise-trust |
+| mr-0277 | T2 | A | Wire trust briefing doc to procurement ZIP | Bundle includes briefing orientation one-pager | procurement-pack-e2e | enterprise-trust |
+| mr-0278 | T1 | D | Add executive buyer FAQ (10 questions) | C-suite questionnaire deflection doc | verify-gtm-ops-docs | enterprise-trust |
+| mr-0279 | T1 | H | Add trust briefing rehearsal step to GTM ops log | Dry-run with board PDF logged with timestamp | manual | enterprise-trust |
+| mr-0280 | T2 | H | Add trust briefing metric to GTM reporting | Board PDF delivered in enterprise deal tracked | manual | enterprise-trust |
+| mr-0281 | T1 | D | Ship enterprise procurement umbrella one-pager | Legal team self-serves full scope without call | verify-gtm-ops-docs | enterprise-trust |
+| mr-0282 | T1 | A | Wire umbrella one-pager to procurement ZIP | Bundle includes enterprise scope one-pager | procurement-pack-e2e | enterprise-trust |
+| mr-0283 | T2 | A | Add umbrella one-pager CTA to /trust-center/ | One-click enterprise diligence path from trust surface | verify-gtm | enterprise-trust |
+| mr-0284 | T1 | A | Add umbrella one-pager to TLE export bundle | Board PDF accompanied by scope one-pager | verify-ui-e2e | enterprise-trust |
+| mr-0285 | T1 | A | Publish umbrella one-pager link on /enterprise/ | Enterprise page has direct one-pager download | verify-gtm | enterprise-trust |
+| mr-0286 | T2 | D | Add umbrella one-pager to MSP channel kit | MSP partners include it in prospect outreach | verify-gtm | enterprise-trust |
+| mr-0287 | T1 | D | Spec umbrella one-pager update cadence | One-pager refreshed after each module addition | spec review | enterprise-trust |
+| mr-0288 | T1 | A | Add umbrella one-pager print CSS | Print-grade rendering for committee leave-behind | manual | enterprise-trust |
+| mr-0289 | T2 | A | Wire umbrella one-pager to design-partner path | Design-partner uses umbrella scope as baseline | verify-gtm | enterprise-trust |
+| mr-0290 | T1 | A | Add umbrella one-pager smoke test to regression | PDF/bundle structure verified in CI gate | procurement-pack-e2e | enterprise-trust |
+| mr-0291 | T1 | A | Run verify-ui-e2e green on all Phase 3 enterprise routes | Enterprise trust platform routes pass | verify-ui-e2e | enterprise-trust |
+| mr-0292 | T2 | A | Pass verify-no-asf-coherence on Phase 3 pages | No brand names on enterprise trust surfaces | verify-no-asf-coherence | enterprise-trust |
+| mr-0293 | T1 | A | Pass audit_final_system_lock on Phase 3 HTML | Enterprise copy RPAA-safe confirmed | audit_final_system_lock | enterprise-trust |
+| mr-0294 | T1 | A | Pass test_public_gtm_alignment on Phase 3 routes | Enterprise page GTM copy alignment green | pytest | enterprise-trust |
+| mr-0295 | T2 | A | Run procurement-pack-e2e with enterprise bundle | Privacy + AI + risk rows in export package | procurement-pack-e2e | enterprise-trust |
+| mr-0296 | T1 | A | Run smoke_bank_grade on Phase 3 enterprise page | Bank-grade CSS confirmed on enterprise trust routes | smoke_bank_grade | enterprise-trust |
+| mr-0297 | T1 | H | Log Phase 3 enterprise deal influenced in ops log | Revenue-influenced metric recorded | manual | enterprise-trust |
+| mr-0298 | T2 | H | Record first enterprise trust briefing dry-run | Board PDF used in meeting validated | manual | enterprise-trust |
+| mr-0299 | T1 | D | Phase 3 retrospective doc (1 page) | Module expansion learnings feed Phase 4 | docs review | enterprise-trust |
+| mr-0300 | T1 | H | Sign off Phase 3 → unlock Phase 4 picks | mr-0300 ready in GTM_NEXT | manual | enterprise-trust |
 
 ## Phase 4 — PolicyPack — EU AI Act + NIST policy products (mr-0301–mr-0400)
 
@@ -440,106 +440,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0301 | T1 | A | Ship EU AI Act policy pack block — P4 item 001 | buyer-visible on www for eu ai act policy pack block | verify-gtm | policy-pack |
-| mr-0302 | T2 | A | Lock EU AI Act policy pack block — P4 item 002 | committee artifact ready for eu ai act policy pack block | verify-ui-e2e | policy-pack |
-| mr-0303 | T1 | D | Wire EU AI Act policy pack block — P4 item 003 | regression gate green for eu ai act policy pack block | verify-gtm-ops-docs | policy-pack |
-| mr-0304 | T1 | A | Extend EU AI Act policy pack block — P4 item 004 | procurement self-serve path for eu ai act policy pack block | verify-ui-endpoints | policy-pack |
-| mr-0305 | T2 | A | Document EU AI Act policy pack block — P4 item 005 | console parity achieved for eu ai act policy pack block | plan-with-no-asf-verify | policy-pack |
-| mr-0306 | T1 | A | Verify EU AI Act policy pack block — P4 item 006 | doc linked from funnel for eu ai act policy pack block | verify-no-asf-coherence | policy-pack |
-| mr-0307 | T1 | D | Polish EU AI Act policy pack block — P4 item 007 | API export verified for eu ai act policy pack block | pytest | policy-pack |
-| mr-0308 | T2 | A | Automate EU AI Act policy pack block — P4 item 008 | manual review passed for eu ai act policy pack block | manual | policy-pack |
-| mr-0309 | T1 | A | Elevate EU AI Act policy pack block — P4 item 009 | e2e flow green for eu ai act policy pack block | procurement-pack-e2e | policy-pack |
-| mr-0310 | T1 | H | Harden EU AI Act policy pack block — P4 item 010 | GTM signal captured for eu ai act policy pack block | verify-msb-partner-openapi | policy-pack |
-| mr-0311 | T2 | A | Ship NIST AI RMF pack orientation — P4 item 011 | buyer-visible on www for nist ai rmf pack orientation | verify-gtm | policy-pack |
-| mr-0312 | T1 | A | Lock NIST AI RMF pack orientation — P4 item 012 | committee artifact ready for nist ai rmf pack orientation | verify-ui-e2e | policy-pack |
-| mr-0313 | T1 | D | Wire NIST AI RMF pack orientation — P4 item 013 | regression gate green for nist ai rmf pack orientation | verify-gtm-ops-docs | policy-pack |
-| mr-0314 | T2 | A | Extend NIST AI RMF pack orientation — P4 item 014 | procurement self-serve path for nist ai rmf pack orientation | verify-ui-endpoints | policy-pack |
-| mr-0315 | T1 | A | Document NIST AI RMF pack orientation — P4 item 015 | console parity achieved for nist ai rmf pack orientation | plan-with-no-asf-verify | policy-pack |
-| mr-0316 | T1 | A | Verify NIST AI RMF pack orientation — P4 item 016 | doc linked from funnel for nist ai rmf pack orientation | verify-no-asf-coherence | policy-pack |
-| mr-0317 | T2 | D | Polish NIST AI RMF pack orientation — P4 item 017 | API export verified for nist ai rmf pack orientation | pytest | policy-pack |
-| mr-0318 | T1 | A | Automate NIST AI RMF pack orientation — P4 item 018 | manual review passed for nist ai rmf pack orientation | manual | policy-pack |
-| mr-0319 | T1 | A | Elevate NIST AI RMF pack orientation — P4 item 019 | e2e flow green for nist ai rmf pack orientation | procurement-pack-e2e | policy-pack |
-| mr-0320 | T2 | H | Harden NIST AI RMF pack orientation — P4 item 020 | GTM signal captured for nist ai rmf pack orientation | verify-msb-partner-openapi | policy-pack |
-| mr-0321 | T1 | A | Ship ISO 42001 pack crosswalk — P4 item 021 | buyer-visible on www for iso 42001 pack crosswalk | verify-gtm | policy-pack |
-| mr-0322 | T1 | A | Lock ISO 42001 pack crosswalk — P4 item 022 | committee artifact ready for iso 42001 pack crosswalk | verify-ui-e2e | policy-pack |
-| mr-0323 | T2 | D | Wire ISO 42001 pack crosswalk — P4 item 023 | regression gate green for iso 42001 pack crosswalk | verify-gtm-ops-docs | policy-pack |
-| mr-0324 | T1 | A | Extend ISO 42001 pack crosswalk — P4 item 024 | procurement self-serve path for iso 42001 pack crosswalk | verify-ui-endpoints | policy-pack |
-| mr-0325 | T1 | A | Document ISO 42001 pack crosswalk — P4 item 025 | console parity achieved for iso 42001 pack crosswalk | plan-with-no-asf-verify | policy-pack |
-| mr-0326 | T2 | A | Verify ISO 42001 pack crosswalk — P4 item 026 | doc linked from funnel for iso 42001 pack crosswalk | verify-no-asf-coherence | policy-pack |
-| mr-0327 | T1 | D | Polish ISO 42001 pack crosswalk — P4 item 027 | API export verified for iso 42001 pack crosswalk | pytest | policy-pack |
-| mr-0328 | T1 | A | Automate ISO 42001 pack crosswalk — P4 item 028 | manual review passed for iso 42001 pack crosswalk | manual | policy-pack |
-| mr-0329 | T2 | A | Elevate ISO 42001 pack crosswalk — P4 item 029 | e2e flow green for iso 42001 pack crosswalk | procurement-pack-e2e | policy-pack |
-| mr-0330 | T1 | H | Harden ISO 42001 pack crosswalk — P4 item 030 | GTM signal captured for iso 42001 pack crosswalk | verify-msb-partner-openapi | policy-pack |
-| mr-0331 | T1 | A | Ship Policy pack activation UX spec — P4 item 031 | buyer-visible on www for policy pack activation ux spec | verify-gtm | policy-pack |
-| mr-0332 | T2 | A | Lock Policy pack activation UX spec — P4 item 032 | committee artifact ready for policy pack activation ux spec | verify-ui-e2e | policy-pack |
-| mr-0333 | T1 | D | Wire Policy pack activation UX spec — P4 item 033 | regression gate green for policy pack activation ux spec | verify-gtm-ops-docs | policy-pack |
-| mr-0334 | T1 | A | Extend Policy pack activation UX spec — P4 item 034 | procurement self-serve path for policy pack activation ux spec | verify-ui-endpoints | policy-pack |
-| mr-0335 | T2 | A | Document Policy pack activation UX spec — P4 item 035 | console parity achieved for policy pack activation ux spec | plan-with-no-asf-verify | policy-pack |
-| mr-0336 | T1 | A | Verify Policy pack activation UX spec — P4 item 036 | doc linked from funnel for policy pack activation ux spec | verify-no-asf-coherence | policy-pack |
-| mr-0337 | T1 | D | Polish Policy pack activation UX spec — P4 item 037 | API export verified for policy pack activation ux spec | pytest | policy-pack |
-| mr-0338 | T2 | A | Automate Policy pack activation UX spec — P4 item 038 | manual review passed for policy pack activation ux spec | manual | policy-pack |
-| mr-0339 | T1 | A | Elevate Policy pack activation UX spec — P4 item 039 | e2e flow green for policy pack activation ux spec | procurement-pack-e2e | policy-pack |
-| mr-0340 | T1 | H | Harden Policy pack activation UX spec — P4 item 040 | GTM signal captured for policy pack activation ux spec | verify-msb-partner-openapi | policy-pack |
-| mr-0341 | T2 | A | Ship Risk register export fields — P4 item 041 | buyer-visible on www for risk register export fields | verify-gtm | policy-pack |
-| mr-0342 | T1 | A | Lock Risk register export fields — P4 item 042 | committee artifact ready for risk register export fields | verify-ui-e2e | policy-pack |
-| mr-0343 | T1 | D | Wire Risk register export fields — P4 item 043 | regression gate green for risk register export fields | verify-gtm-ops-docs | policy-pack |
-| mr-0344 | T2 | A | Extend Risk register export fields — P4 item 044 | procurement self-serve path for risk register export fields | verify-ui-endpoints | policy-pack |
-| mr-0345 | T1 | A | Document Risk register export fields — P4 item 045 | console parity achieved for risk register export fields | plan-with-no-asf-verify | policy-pack |
-| mr-0346 | T1 | A | Verify Risk register export fields — P4 item 046 | doc linked from funnel for risk register export fields | verify-no-asf-coherence | policy-pack |
-| mr-0347 | T2 | D | Polish Risk register export fields — P4 item 047 | API export verified for risk register export fields | pytest | policy-pack |
-| mr-0348 | T1 | A | Automate Risk register export fields — P4 item 048 | manual review passed for risk register export fields | manual | policy-pack |
-| mr-0349 | T1 | A | Elevate Risk register export fields — P4 item 049 | e2e flow green for risk register export fields | procurement-pack-e2e | policy-pack |
-| mr-0350 | T2 | H | Harden Risk register export fields — P4 item 050 | GTM signal captured for risk register export fields | verify-msb-partner-openapi | policy-pack |
-| mr-0351 | T1 | A | Ship Governance-as-code README — P4 item 051 | buyer-visible on www for governance-as-code readme | verify-gtm | policy-pack |
-| mr-0352 | T1 | A | Lock Governance-as-code README — P4 item 052 | committee artifact ready for governance-as-code readme | verify-ui-e2e | policy-pack |
-| mr-0353 | T2 | D | Wire Governance-as-code README — P4 item 053 | regression gate green for governance-as-code readme | verify-gtm-ops-docs | policy-pack |
-| mr-0354 | T1 | A | Extend Governance-as-code README — P4 item 054 | procurement self-serve path for governance-as-code readme | verify-ui-endpoints | policy-pack |
-| mr-0355 | T1 | A | Document Governance-as-code README — P4 item 055 | console parity achieved for governance-as-code readme | plan-with-no-asf-verify | policy-pack |
-| mr-0356 | T2 | A | Verify Governance-as-code README — P4 item 056 | doc linked from funnel for governance-as-code readme | verify-no-asf-coherence | policy-pack |
-| mr-0357 | T1 | D | Polish Governance-as-code README — P4 item 057 | API export verified for governance-as-code readme | pytest | policy-pack |
-| mr-0358 | T1 | A | Automate Governance-as-code README — P4 item 058 | manual review passed for governance-as-code readme | manual | policy-pack |
-| mr-0359 | T2 | A | Elevate Governance-as-code README — P4 item 059 | e2e flow green for governance-as-code readme | procurement-pack-e2e | policy-pack |
-| mr-0360 | T1 | H | Harden Governance-as-code README — P4 item 060 | GTM signal captured for governance-as-code readme | verify-msb-partner-openapi | policy-pack |
-| mr-0361 | T1 | A | Ship Design-partner policy workshop — P4 item 061 | buyer-visible on www for design-partner policy workshop | verify-gtm | policy-pack |
-| mr-0362 | T2 | A | Lock Design-partner policy workshop — P4 item 062 | committee artifact ready for design-partner policy workshop | verify-ui-e2e | policy-pack |
-| mr-0363 | T1 | D | Wire Design-partner policy workshop — P4 item 063 | regression gate green for design-partner policy workshop | verify-gtm-ops-docs | policy-pack |
-| mr-0364 | T1 | A | Extend Design-partner policy workshop — P4 item 064 | procurement self-serve path for design-partner policy workshop | verify-ui-endpoints | policy-pack |
-| mr-0365 | T2 | A | Document Design-partner policy workshop — P4 item 065 | console parity achieved for design-partner policy workshop | plan-with-no-asf-verify | policy-pack |
-| mr-0366 | T1 | A | Verify Design-partner policy workshop — P4 item 066 | doc linked from funnel for design-partner policy workshop | verify-no-asf-coherence | policy-pack |
-| mr-0367 | T1 | D | Polish Design-partner policy workshop — P4 item 067 | API export verified for design-partner policy workshop | pytest | policy-pack |
-| mr-0368 | T2 | A | Automate Design-partner policy workshop — P4 item 068 | manual review passed for design-partner policy workshop | manual | policy-pack |
-| mr-0369 | T1 | A | Elevate Design-partner policy workshop — P4 item 069 | e2e flow green for design-partner policy workshop | procurement-pack-e2e | policy-pack |
-| mr-0370 | T1 | H | Harden Design-partner policy workshop — P4 item 070 | GTM signal captured for design-partner policy workshop | verify-msb-partner-openapi | policy-pack |
-| mr-0371 | T2 | A | Ship Automated evidence field map — P4 item 071 | buyer-visible on www for automated evidence field map | verify-gtm | policy-pack |
-| mr-0372 | T1 | A | Lock Automated evidence field map — P4 item 072 | committee artifact ready for automated evidence field map | verify-ui-e2e | policy-pack |
-| mr-0373 | T1 | D | Wire Automated evidence field map — P4 item 073 | regression gate green for automated evidence field map | verify-gtm-ops-docs | policy-pack |
-| mr-0374 | T2 | A | Extend Automated evidence field map — P4 item 074 | procurement self-serve path for automated evidence field map | verify-ui-endpoints | policy-pack |
-| mr-0375 | T1 | A | Document Automated evidence field map — P4 item 075 | console parity achieved for automated evidence field map | plan-with-no-asf-verify | policy-pack |
-| mr-0376 | T1 | A | Verify Automated evidence field map — P4 item 076 | doc linked from funnel for automated evidence field map | verify-no-asf-coherence | policy-pack |
-| mr-0377 | T2 | D | Polish Automated evidence field map — P4 item 077 | API export verified for automated evidence field map | pytest | policy-pack |
-| mr-0378 | T1 | A | Automate Automated evidence field map — P4 item 078 | manual review passed for automated evidence field map | manual | policy-pack |
-| mr-0379 | T1 | A | Elevate Automated evidence field map — P4 item 079 | e2e flow green for automated evidence field map | procurement-pack-e2e | policy-pack |
-| mr-0380 | T2 | H | Harden Automated evidence field map — P4 item 080 | GTM signal captured for automated evidence field map | verify-msb-partner-openapi | policy-pack |
-| mr-0381 | T1 | A | Ship Legal reviewer pack index — P4 item 081 | buyer-visible on www for legal reviewer pack index | verify-gtm | policy-pack |
-| mr-0382 | T1 | A | Lock Legal reviewer pack index — P4 item 082 | committee artifact ready for legal reviewer pack index | verify-ui-e2e | policy-pack |
-| mr-0383 | T2 | D | Wire Legal reviewer pack index — P4 item 083 | regression gate green for legal reviewer pack index | verify-gtm-ops-docs | policy-pack |
-| mr-0384 | T1 | A | Extend Legal reviewer pack index — P4 item 084 | procurement self-serve path for legal reviewer pack index | verify-ui-endpoints | policy-pack |
-| mr-0385 | T1 | A | Document Legal reviewer pack index — P4 item 085 | console parity achieved for legal reviewer pack index | plan-with-no-asf-verify | policy-pack |
-| mr-0386 | T2 | A | Verify Legal reviewer pack index — P4 item 086 | doc linked from funnel for legal reviewer pack index | verify-no-asf-coherence | policy-pack |
-| mr-0387 | T1 | D | Polish Legal reviewer pack index — P4 item 087 | API export verified for legal reviewer pack index | pytest | policy-pack |
-| mr-0388 | T1 | A | Automate Legal reviewer pack index — P4 item 088 | manual review passed for legal reviewer pack index | manual | policy-pack |
-| mr-0389 | T2 | A | Elevate Legal reviewer pack index — P4 item 089 | e2e flow green for legal reviewer pack index | procurement-pack-e2e | policy-pack |
-| mr-0390 | T1 | H | Harden Legal reviewer pack index — P4 item 090 | GTM signal captured for legal reviewer pack index | verify-msb-partner-openapi | policy-pack |
-| mr-0391 | T1 | A | Ship Phase 4 policy pack verify — P4 item 091 | buyer-visible on www for phase 4 policy pack verify | verify-gtm | policy-pack |
-| mr-0392 | T2 | A | Lock Phase 4 policy pack verify — P4 item 092 | committee artifact ready for phase 4 policy pack verify | verify-ui-e2e | policy-pack |
-| mr-0393 | T1 | D | Wire Phase 4 policy pack verify — P4 item 093 | regression gate green for phase 4 policy pack verify | verify-gtm-ops-docs | policy-pack |
-| mr-0394 | T1 | A | Extend Phase 4 policy pack verify — P4 item 094 | procurement self-serve path for phase 4 policy pack verify | verify-ui-endpoints | policy-pack |
-| mr-0395 | T2 | A | Document Phase 4 policy pack verify — P4 item 095 | console parity achieved for phase 4 policy pack verify | plan-with-no-asf-verify | policy-pack |
-| mr-0396 | T1 | A | Verify Phase 4 policy pack verify — P4 item 096 | doc linked from funnel for phase 4 policy pack verify | verify-no-asf-coherence | policy-pack |
-| mr-0397 | T1 | D | Polish Phase 4 policy pack verify — P4 item 097 | API export verified for phase 4 policy pack verify | pytest | policy-pack |
-| mr-0398 | T2 | A | Automate Phase 4 policy pack verify — P4 item 098 | manual review passed for phase 4 policy pack verify | manual | policy-pack |
-| mr-0399 | T1 | A | Elevate Phase 4 policy pack verify — P4 item 099 | e2e flow green for phase 4 policy pack verify | procurement-pack-e2e | policy-pack |
-| mr-0400 | T1 | H | Harden Phase 4 policy pack verify — P4 item 100 | GTM signal captured for phase 4 policy pack verify | verify-msb-partner-openapi | policy-pack |
+| mr-0301 | T1 | A | Ship EU AI Act orientation block on /trust-center/ | CISO sees EU AI Act scope without legal advice | verify-gtm | policy-pack |
+| mr-0302 | T2 | A | Add EU AI Act risk-tier orientation table | High/limited/minimal-risk rows visible to reviewers | verify-ui-e2e | policy-pack |
+| mr-0303 | T1 | A | Wire EU AI Act orientation to framework grid | EU AI Act row in trust center framework section | verify-ui-e2e | policy-pack |
+| mr-0304 | T1 | A | Publish EU AI Act Aug 2 2026 urgency callout | Deadline framing drives procurement timing | verify-gtm | policy-pack |
+| mr-0305 | T2 | D | Add EU AI Act FAQ index (10 questions) | Common questions deflected before procurement call | verify-gtm-ops-docs | policy-pack |
+| mr-0306 | T1 | A | Wire EU AI Act row to procurement ZIP CTA | EU AI Act diligence bundle one-click download | procurement-pack-e2e | policy-pack |
+| mr-0307 | T1 | A | Add EU AI Act honest-posture note (orientation-not-legal-advice) | Copy fence: orientation not legal advice on every EU row | verify-no-asf-coherence | policy-pack |
+| mr-0308 | T2 | A | Add EU AI Act section to TLE export cover | Board PDF shows EU AI Act orientation scope | verify-ui-e2e | policy-pack |
+| mr-0309 | T1 | H | Wire EU AI Act to design-partner workshop agenda | Enterprise buyer shapes EU AI evidence fields | manual | policy-pack |
+| mr-0310 | T1 | A | Add EU AI Act orientation smoke test to regression | EU AI Act rows present on /trust-center/ CI check | pytest | policy-pack |
+| mr-0311 | T2 | A | Add NIST AI RMF orientation section to /trust-center/ | CISO sees NIST AI governance posture | verify-gtm | policy-pack |
+| mr-0312 | T1 | A | Wire NIST AI RMF rows to framework grid | NIST AI rows alongside ISO and EU in grid | verify-ui-e2e | policy-pack |
+| mr-0313 | T1 | A | Add NIST AI RMF function mapping stub (Govern/Map/Measure/Manage) | Four-function orientation visible in /trust-center/ | verify-gtm | policy-pack |
+| mr-0314 | T2 | D | Publish NIST AI RMF orientation FAQ | Common NIST AI questions deflected pre-call | verify-gtm-ops-docs | policy-pack |
+| mr-0315 | T1 | A | Wire NIST AI RMF to procurement ZIP bundle | NIST AI orientation section in export | procurement-pack-e2e | policy-pack |
+| mr-0316 | T1 | A | Add NIST AI RMF to TLE export cover block | Board PDF shows NIST AI scope | verify-ui-e2e | policy-pack |
+| mr-0317 | T2 | A | Add NIST AI RMF honest-posture note | Orientation-not-certified language on NIST AI row | verify-no-asf-coherence | policy-pack |
+| mr-0318 | T1 | D | Spec NIST AI RMF evidence field map for design-partner | Design-partner gets NIST AI evidence worksheet | verify-gtm | policy-pack |
+| mr-0319 | T1 | A | Wire NIST AI RMF to EU AI Act crosswalk | Overlap between NIST and EU rows highlighted | verify-ui-e2e | policy-pack |
+| mr-0320 | T2 | A | Add NIST AI RMF regression test to CI gate | NIST AI rows present in /trust-center/ CI check | pytest | policy-pack |
+| mr-0321 | T1 | A | Add ISO 42001 orientation row to /trust-center/ | AI governance reviewer finds ISO 42001 posture | verify-gtm | policy-pack |
+| mr-0322 | T1 | A | Wire ISO 42001 to framework grid alongside ISO 27001 | AI + security ISO rows visible in one grid | verify-ui-e2e | policy-pack |
+| mr-0323 | T2 | A | Add ISO 42001 / EU AI Act crosswalk stub | Shared requirements highlighted to reduce duplication | verify-gtm | policy-pack |
+| mr-0324 | T1 | D | Publish ISO 42001 orientation FAQ | ISO 42001 questions deflected before procurement | verify-gtm-ops-docs | policy-pack |
+| mr-0325 | T1 | A | Wire ISO 42001 to procurement ZIP bundle | ISO 42001 orientation section in export | procurement-pack-e2e | policy-pack |
+| mr-0326 | T2 | A | Add ISO 42001 honest-posture note (orientation-not-certified) | ISO 42001 fence matches trust center language | verify-no-asf-coherence | policy-pack |
+| mr-0327 | T1 | D | Spec ISO 42001 evidence field map for design-partner | Design-partner gets ISO 42001 evidence worksheet | verify-gtm | policy-pack |
+| mr-0328 | T1 | A | Wire ISO 42001 to TLE export cover block | Board PDF shows ISO 42001 scope | verify-ui-e2e | policy-pack |
+| mr-0329 | T2 | A | Add ISO 42001 to multi-framework crosswalk index | One-control-multi-framework visible for ISO 42001 | verify-gtm | policy-pack |
+| mr-0330 | T1 | A | Add ISO 42001 regression test to CI gate | ISO 42001 rows present in /trust-center/ CI check | pytest | policy-pack |
+| mr-0331 | T1 | D | Spec policy pack activation flow in console | Enterprise buyer activates pack in N clicks | spec review | policy-pack |
+| mr-0332 | T2 | A | Add policy pack activation CTA to /trust-center/ | Buyer self-serves policy pack without sales call | verify-gtm | policy-pack |
+| mr-0333 | T1 | A | Wire policy pack activation to TLE receipt | Receipt minted when pack activated | verify-ui-e2e | policy-pack |
+| mr-0334 | T1 | D | Add policy pack activation FAQ to /trust-center/ | Common activation questions deflected pre-call | verify-gtm-ops-docs | policy-pack |
+| mr-0335 | T2 | D | Spec policy pack de-activation fence | Pack cannot be silently removed post-audit | spec review | policy-pack |
+| mr-0336 | T1 | D | Add pack activation confirmation email spec | Buyer gets activation receipt in inbox | spec review | policy-pack |
+| mr-0337 | T1 | A | Wire pack activation to procurement ZIP | Bundle includes activation confirmation | procurement-pack-e2e | policy-pack |
+| mr-0338 | T2 | H | Add pack activation to design-partner workshop | Co-design activation flow with enterprise buyer | manual | policy-pack |
+| mr-0339 | T1 | D | Publish policy pack activation one-pager | Legal team confirms scope at activation | verify-gtm-ops-docs | policy-pack |
+| mr-0340 | T1 | A | Add pack activation smoke test to regression | Activation flow asserted in CI gate | pytest | policy-pack |
+| mr-0341 | T2 | D | Spec risk register export fields for TLE bundle | Enterprise buyer gets risk register stub in board PDF | spec review | policy-pack |
+| mr-0342 | T1 | A | Add risk register orientation row to /trust-center/ | Buyer sees risk-evidence layer without call | verify-gtm | policy-pack |
+| mr-0343 | T1 | A | Wire risk register to procurement ZIP | Export bundle includes risk register stub | procurement-pack-e2e | policy-pack |
+| mr-0344 | T2 | D | Add risk register FAQ to /trust-center/ | Risk register questions deflected pre-procurement | verify-gtm-ops-docs | policy-pack |
+| mr-0345 | T1 | D | Spec risk register field metadata-only fence | No sensitive risk content collected in platform | verify-no-asf-coherence | policy-pack |
+| mr-0346 | T1 | A | Add risk register to TLE export cover block | Board PDF shows active risk register stub | verify-ui-e2e | policy-pack |
+| mr-0347 | T2 | A | Wire risk register fields to EU AI Act orientation | Risk tier from EU AI Act drives risk register rows | verify-ui-e2e | policy-pack |
+| mr-0348 | T1 | D | Spec risk register update cadence with connector ingest | Risk register refreshes with evidence ingest | spec review | policy-pack |
+| mr-0349 | T1 | H | Add risk register to design-partner field map | Enterprise buyer shapes risk evidence fields | manual | policy-pack |
+| mr-0350 | T2 | A | Add risk register smoke test to regression | Risk register fields present in export CI check | pytest | policy-pack |
+| mr-0351 | T1 | D | Publish governance-as-code README on /trust-center/ | Technical reviewer sees code-first evidence posture | verify-gtm-ops-docs | policy-pack |
+| mr-0352 | T1 | A | Add governance YAML schema stub to procurement ZIP | Legal team sees machine-readable policy fields | procurement-pack-e2e | policy-pack |
+| mr-0353 | T2 | A | Wire governance-as-code CTA from /trust-center/ | Developer-buyer path from trust center to docs | verify-gtm | policy-pack |
+| mr-0354 | T1 | D | Add governance YAML field explanations to trust FAQ | 5 fields explained without engineering jargon | verify-gtm | policy-pack |
+| mr-0355 | T1 | D | Spec governance-as-code version control fence | Policy changes tracked via signed Git pattern | spec review | policy-pack |
+| mr-0356 | T2 | A | Add governance YAML to TLE export bundle | Board PDF accompanied by machine-readable policy | verify-ui-e2e | policy-pack |
+| mr-0357 | T1 | A | Wire governance YAML to EU AI Act orientation | EU AI Act fields visible in YAML schema | verify-ui-e2e | policy-pack |
+| mr-0358 | T1 | H | Add governance-as-code to design-partner workshop | Co-design YAML schema with technical enterprise buyer | manual | policy-pack |
+| mr-0359 | T2 | D | Publish governance-as-code FAQ (5 questions) | Developer buyer questions deflected pre-call | verify-gtm-ops-docs | policy-pack |
+| mr-0360 | T1 | A | Add governance YAML smoke test to regression | YAML schema valid in CI gate | pytest | policy-pack |
+| mr-0361 | T1 | D | Spec design-partner workshop agenda (3 hours) | Founder has repeatable workshop structure | spec review | policy-pack |
+| mr-0362 | T2 | A | Add design-partner CTA to /enterprise/ | Enterprise buyer sees path to co-design policy pack | verify-gtm | policy-pack |
+| mr-0363 | T1 | A | Wire design-partner CAD $2K+ pricing callout | Pricing band visible on design-partner CTA | verify-gtm | policy-pack |
+| mr-0364 | T1 | D | Publish design-partner outcomes one-pager | Prospect understands workshop deliverables | verify-gtm-ops-docs | policy-pack |
+| mr-0365 | T2 | D | Spec design-partner evidence field worksheet template | Workshop artifact for policy field co-design | spec review | policy-pack |
+| mr-0366 | T1 | A | Add design-partner to procurement ZIP bundle | Bundle explains design-partner engagement path | procurement-pack-e2e | policy-pack |
+| mr-0367 | T1 | A | Wire design-partner output to TLE receipt | Policy fields locked in TLE after workshop sign-off | verify-ui-e2e | policy-pack |
+| mr-0368 | T2 | H | Add design-partner success metric to GTM ops log | Workshop deal value and fields captured | manual | policy-pack |
+| mr-0369 | T1 | D | Spec design-partner follow-up cadence | Pilot step after workshop clearly defined | spec review | policy-pack |
+| mr-0370 | T1 | D | Add design-partner to Phase 4 retrospective | Workshop learnings feed Phase 5 | docs review | policy-pack |
+| mr-0371 | T2 | D | Publish automated evidence field map for EU AI Act | Technical buyer sees auto-collected field list | verify-gtm-ops-docs | policy-pack |
+| mr-0372 | T1 | A | Add evidence field map to procurement ZIP | Export bundle includes auto-evidence field list | procurement-pack-e2e | policy-pack |
+| mr-0373 | T1 | A | Wire evidence field map to /trust-center/ | Buyers see automated vs manual evidence distinction | verify-gtm | policy-pack |
+| mr-0374 | T2 | A | Add evidence field map to TLE export | Board PDF includes auto-field summary | verify-ui-e2e | policy-pack |
+| mr-0375 | T1 | D | Spec evidence field metadata-only fence | Auto-collected fields documented as metadata-only | verify-no-asf-coherence | policy-pack |
+| mr-0376 | T1 | D | Add evidence field FAQ to /trust-center/ | Common field questions deflected pre-engineering call | verify-gtm | policy-pack |
+| mr-0377 | T2 | A | Wire evidence field map to ISO 42001 orientation | ISO 42001 fields visible in field map | verify-ui-e2e | policy-pack |
+| mr-0378 | T1 | D | Add evidence field versioning spec | Field map versioned per policy pack update | spec review | policy-pack |
+| mr-0379 | T1 | H | Add evidence field map to design-partner worksheet | Co-design auto-evidence scope with enterprise buyer | manual | policy-pack |
+| mr-0380 | T2 | A | Add evidence field smoke test to regression | Required fields present in export CI check | pytest | policy-pack |
+| mr-0381 | T1 | D | Publish legal reviewer pack index on /trust-center/ | Legal team self-serves all diligence docs | verify-gtm-ops-docs | policy-pack |
+| mr-0382 | T1 | A | Wire legal reviewer index to procurement ZIP | Bundle README points to all legal-reviewer docs | procurement-pack-e2e | policy-pack |
+| mr-0383 | T2 | D | Add legal reviewer FAQ (10 questions) | Common legal questions deflected pre-review | verify-gtm-ops-docs | policy-pack |
+| mr-0384 | T1 | A | Wire legal reviewer index to TLE export | Board PDF accompanied by legal index | verify-ui-e2e | policy-pack |
+| mr-0385 | T1 | A | Add legal reviewer CTA on /trust-center/ | Legal team path visible from trust surface | verify-gtm | policy-pack |
+| mr-0386 | T2 | D | Spec legal reviewer access tier (doc-only path) | Legal team accesses docs without console login | spec review | policy-pack |
+| mr-0387 | T1 | H | Add legal reviewer to design-partner workshop | Legal stakeholder invited to co-design session | manual | policy-pack |
+| mr-0388 | T1 | D | Publish legal reviewer orientation checklist | 10-step checklist for legal review of policy pack | verify-gtm-ops-docs | policy-pack |
+| mr-0389 | T2 | A | Add legal reviewer print CSS for pack index | Print-grade rendering for legal team leave-behind | manual | policy-pack |
+| mr-0390 | T1 | A | Add legal reviewer doc smoke test to regression | All legal-reviewer docs present in bundle CI check | pytest | policy-pack |
+| mr-0391 | T1 | A | Run verify-ui-e2e green on all Phase 4 trust routes | EU AI Act + NIST + ISO 42001 routes pass | verify-ui-e2e | policy-pack |
+| mr-0392 | T2 | A | Pass verify-no-asf-coherence on Phase 4 surfaces | No brand names on policy pack copy | verify-no-asf-coherence | policy-pack |
+| mr-0393 | T1 | A | Pass audit_final_system_lock on Phase 4 HTML | Policy pack copy RPAA-safe confirmed | audit_final_system_lock | policy-pack |
+| mr-0394 | T1 | A | Pass test_public_gtm_alignment on Phase 4 routes | EU AI Act copy alignment green | pytest | policy-pack |
+| mr-0395 | T2 | A | Run procurement-pack-e2e with policy pack ZIP | EU AI Act + NIST + ISO 42001 in export | procurement-pack-e2e | policy-pack |
+| mr-0396 | T1 | A | Run smoke_bank_grade on Phase 4 trust routes | Bank-grade CSS on policy pack pages | smoke_bank_grade | policy-pack |
+| mr-0397 | T1 | H | Log Phase 4 design-partner deal in ops log | Revenue-influenced metric recorded | manual | policy-pack |
+| mr-0398 | T2 | H | Record first policy pack design-partner workshop | EU AI Act fields co-designed validated | manual | policy-pack |
+| mr-0399 | T1 | D | Phase 4 retrospective doc (1 page) | Policy pack learnings feed Phase 5 | docs review | policy-pack |
+| mr-0400 | T1 | H | Sign off Phase 4 → unlock Phase 5 picks | mr-0400 ready in GTM_NEXT | manual | policy-pack |
 
 ## Phase 5 — LifecycleGov — AI lifecycle + federal depth (mr-0401–mr-0500)
 
@@ -556,106 +556,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0401 | T1 | A | Ship AI factsheet export stub — P5 item 001 | buyer-visible on www for ai factsheet export stub | verify-gtm | lifecycle-evidence |
-| mr-0402 | T2 | A | Lock AI factsheet export stub — P5 item 002 | committee artifact ready for ai factsheet export stub | verify-ui-e2e | lifecycle-evidence |
-| mr-0403 | T1 | D | Wire AI factsheet export stub — P5 item 003 | regression gate green for ai factsheet export stub | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0404 | T1 | A | Extend AI factsheet export stub — P5 item 004 | procurement self-serve path for ai factsheet export stub | verify-ui-endpoints | lifecycle-evidence |
-| mr-0405 | T2 | A | Document AI factsheet export stub — P5 item 005 | console parity achieved for ai factsheet export stub | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0406 | T1 | A | Verify AI factsheet export stub — P5 item 006 | doc linked from funnel for ai factsheet export stub | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0407 | T1 | D | Polish AI factsheet export stub — P5 item 007 | API export verified for ai factsheet export stub | pytest | lifecycle-evidence |
-| mr-0408 | T2 | A | Automate AI factsheet export stub — P5 item 008 | manual review passed for ai factsheet export stub | manual | lifecycle-evidence |
-| mr-0409 | T1 | A | Elevate AI factsheet export stub — P5 item 009 | e2e flow green for ai factsheet export stub | procurement-pack-e2e | lifecycle-evidence |
-| mr-0410 | T1 | H | Harden AI factsheet export stub — P5 item 010 | GTM signal captured for ai factsheet export stub | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0411 | T2 | A | Ship Bias/drift orientation row — P5 item 011 | buyer-visible on www for bias/drift orientation row | verify-gtm | lifecycle-evidence |
-| mr-0412 | T1 | A | Lock Bias/drift orientation row — P5 item 012 | committee artifact ready for bias/drift orientation row | verify-ui-e2e | lifecycle-evidence |
-| mr-0413 | T1 | D | Wire Bias/drift orientation row — P5 item 013 | regression gate green for bias/drift orientation row | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0414 | T2 | A | Extend Bias/drift orientation row — P5 item 014 | procurement self-serve path for bias/drift orientation row | verify-ui-endpoints | lifecycle-evidence |
-| mr-0415 | T1 | A | Document Bias/drift orientation row — P5 item 015 | console parity achieved for bias/drift orientation row | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0416 | T1 | A | Verify Bias/drift orientation row — P5 item 016 | doc linked from funnel for bias/drift orientation row | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0417 | T2 | D | Polish Bias/drift orientation row — P5 item 017 | API export verified for bias/drift orientation row | pytest | lifecycle-evidence |
-| mr-0418 | T1 | A | Automate Bias/drift orientation row — P5 item 018 | manual review passed for bias/drift orientation row | manual | lifecycle-evidence |
-| mr-0419 | T1 | A | Elevate Bias/drift orientation row — P5 item 019 | e2e flow green for bias/drift orientation row | procurement-pack-e2e | lifecycle-evidence |
-| mr-0420 | T2 | H | Harden Bias/drift orientation row — P5 item 020 | GTM signal captured for bias/drift orientation row | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0421 | T1 | A | Ship Agent monitoring spec 2026 — P5 item 021 | buyer-visible on www for agent monitoring spec 2026 | verify-gtm | lifecycle-evidence |
-| mr-0422 | T1 | A | Lock Agent monitoring spec 2026 — P5 item 022 | committee artifact ready for agent monitoring spec 2026 | verify-ui-e2e | lifecycle-evidence |
-| mr-0423 | T2 | D | Wire Agent monitoring spec 2026 — P5 item 023 | regression gate green for agent monitoring spec 2026 | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0424 | T1 | A | Extend Agent monitoring spec 2026 — P5 item 024 | procurement self-serve path for agent monitoring spec 2026 | verify-ui-endpoints | lifecycle-evidence |
-| mr-0425 | T1 | A | Document Agent monitoring spec 2026 — P5 item 025 | console parity achieved for agent monitoring spec 2026 | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0426 | T2 | A | Verify Agent monitoring spec 2026 — P5 item 026 | doc linked from funnel for agent monitoring spec 2026 | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0427 | T1 | D | Polish Agent monitoring spec 2026 — P5 item 027 | API export verified for agent monitoring spec 2026 | pytest | lifecycle-evidence |
-| mr-0428 | T1 | A | Automate Agent monitoring spec 2026 — P5 item 028 | manual review passed for agent monitoring spec 2026 | manual | lifecycle-evidence |
-| mr-0429 | T2 | A | Elevate Agent monitoring spec 2026 — P5 item 029 | e2e flow green for agent monitoring spec 2026 | procurement-pack-e2e | lifecycle-evidence |
-| mr-0430 | T1 | H | Harden Agent monitoring spec 2026 — P5 item 030 | GTM signal captured for agent monitoring spec 2026 | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0431 | T1 | A | Ship FedRAMP path orientation doc — P5 item 031 | buyer-visible on www for fedramp path orientation doc | verify-gtm | lifecycle-evidence |
-| mr-0432 | T2 | A | Lock FedRAMP path orientation doc — P5 item 032 | committee artifact ready for fedramp path orientation doc | verify-ui-e2e | lifecycle-evidence |
-| mr-0433 | T1 | D | Wire FedRAMP path orientation doc — P5 item 033 | regression gate green for fedramp path orientation doc | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0434 | T1 | A | Extend FedRAMP path orientation doc — P5 item 034 | procurement self-serve path for fedramp path orientation doc | verify-ui-endpoints | lifecycle-evidence |
-| mr-0435 | T2 | A | Document FedRAMP path orientation doc — P5 item 035 | console parity achieved for fedramp path orientation doc | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0436 | T1 | A | Verify FedRAMP path orientation doc — P5 item 036 | doc linked from funnel for fedramp path orientation doc | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0437 | T1 | D | Polish FedRAMP path orientation doc — P5 item 037 | API export verified for fedramp path orientation doc | pytest | lifecycle-evidence |
-| mr-0438 | T2 | A | Automate FedRAMP path orientation doc — P5 item 038 | manual review passed for fedramp path orientation doc | manual | lifecycle-evidence |
-| mr-0439 | T1 | A | Elevate FedRAMP path orientation doc — P5 item 039 | e2e flow green for fedramp path orientation doc | procurement-pack-e2e | lifecycle-evidence |
-| mr-0440 | T1 | H | Harden FedRAMP path orientation doc — P5 item 040 | GTM signal captured for fedramp path orientation doc | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0441 | T2 | A | Ship Regulatory accelerator index — P5 item 041 | buyer-visible on www for regulatory accelerator index | verify-gtm | lifecycle-evidence |
-| mr-0442 | T1 | A | Lock Regulatory accelerator index — P5 item 042 | committee artifact ready for regulatory accelerator index | verify-ui-e2e | lifecycle-evidence |
-| mr-0443 | T1 | D | Wire Regulatory accelerator index — P5 item 043 | regression gate green for regulatory accelerator index | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0444 | T2 | A | Extend Regulatory accelerator index — P5 item 044 | procurement self-serve path for regulatory accelerator index | verify-ui-endpoints | lifecycle-evidence |
-| mr-0445 | T1 | A | Document Regulatory accelerator index — P5 item 045 | console parity achieved for regulatory accelerator index | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0446 | T1 | A | Verify Regulatory accelerator index — P5 item 046 | doc linked from funnel for regulatory accelerator index | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0447 | T2 | D | Polish Regulatory accelerator index — P5 item 047 | API export verified for regulatory accelerator index | pytest | lifecycle-evidence |
-| mr-0448 | T1 | A | Automate Regulatory accelerator index — P5 item 048 | manual review passed for regulatory accelerator index | manual | lifecycle-evidence |
-| mr-0449 | T1 | A | Elevate Regulatory accelerator index — P5 item 049 | e2e flow green for regulatory accelerator index | procurement-pack-e2e | lifecycle-evidence |
-| mr-0450 | T2 | H | Harden Regulatory accelerator index — P5 item 050 | GTM signal captured for regulatory accelerator index | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0451 | T1 | A | Ship Hybrid cloud evidence map — P5 item 051 | buyer-visible on www for hybrid cloud evidence map | verify-gtm | lifecycle-evidence |
-| mr-0452 | T1 | A | Lock Hybrid cloud evidence map — P5 item 052 | committee artifact ready for hybrid cloud evidence map | verify-ui-e2e | lifecycle-evidence |
-| mr-0453 | T2 | D | Wire Hybrid cloud evidence map — P5 item 053 | regression gate green for hybrid cloud evidence map | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0454 | T1 | A | Extend Hybrid cloud evidence map — P5 item 054 | procurement self-serve path for hybrid cloud evidence map | verify-ui-endpoints | lifecycle-evidence |
-| mr-0455 | T1 | A | Document Hybrid cloud evidence map — P5 item 055 | console parity achieved for hybrid cloud evidence map | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0456 | T2 | A | Verify Hybrid cloud evidence map — P5 item 056 | doc linked from funnel for hybrid cloud evidence map | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0457 | T1 | D | Polish Hybrid cloud evidence map — P5 item 057 | API export verified for hybrid cloud evidence map | pytest | lifecycle-evidence |
-| mr-0458 | T1 | A | Automate Hybrid cloud evidence map — P5 item 058 | manual review passed for hybrid cloud evidence map | manual | lifecycle-evidence |
-| mr-0459 | T2 | A | Elevate Hybrid cloud evidence map — P5 item 059 | e2e flow green for hybrid cloud evidence map | procurement-pack-e2e | lifecycle-evidence |
-| mr-0460 | T1 | H | Harden Hybrid cloud evidence map — P5 item 060 | GTM signal captured for hybrid cloud evidence map | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0461 | T1 | A | Ship Model lifecycle RID linkage — P5 item 061 | buyer-visible on www for model lifecycle rid linkage | verify-gtm | lifecycle-evidence |
-| mr-0462 | T2 | A | Lock Model lifecycle RID linkage — P5 item 062 | committee artifact ready for model lifecycle rid linkage | verify-ui-e2e | lifecycle-evidence |
-| mr-0463 | T1 | D | Wire Model lifecycle RID linkage — P5 item 063 | regression gate green for model lifecycle rid linkage | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0464 | T1 | A | Extend Model lifecycle RID linkage — P5 item 064 | procurement self-serve path for model lifecycle rid linkage | verify-ui-endpoints | lifecycle-evidence |
-| mr-0465 | T2 | A | Document Model lifecycle RID linkage — P5 item 065 | console parity achieved for model lifecycle rid linkage | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0466 | T1 | A | Verify Model lifecycle RID linkage — P5 item 066 | doc linked from funnel for model lifecycle rid linkage | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0467 | T1 | D | Polish Model lifecycle RID linkage — P5 item 067 | API export verified for model lifecycle rid linkage | pytest | lifecycle-evidence |
-| mr-0468 | T2 | A | Automate Model lifecycle RID linkage — P5 item 068 | manual review passed for model lifecycle rid linkage | manual | lifecycle-evidence |
-| mr-0469 | T1 | A | Elevate Model lifecycle RID linkage — P5 item 069 | e2e flow green for model lifecycle rid linkage | procurement-pack-e2e | lifecycle-evidence |
-| mr-0470 | T1 | H | Harden Model lifecycle RID linkage — P5 item 070 | GTM signal captured for model lifecycle rid linkage | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0471 | T2 | A | Ship Marketplace add-on pattern doc — P5 item 071 | buyer-visible on www for marketplace add-on pattern doc | verify-gtm | lifecycle-evidence |
-| mr-0472 | T1 | A | Lock Marketplace add-on pattern doc — P5 item 072 | committee artifact ready for marketplace add-on pattern doc | verify-ui-e2e | lifecycle-evidence |
-| mr-0473 | T1 | D | Wire Marketplace add-on pattern doc — P5 item 073 | regression gate green for marketplace add-on pattern doc | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0474 | T2 | A | Extend Marketplace add-on pattern doc — P5 item 074 | procurement self-serve path for marketplace add-on pattern doc | verify-ui-endpoints | lifecycle-evidence |
-| mr-0475 | T1 | A | Document Marketplace add-on pattern doc — P5 item 075 | console parity achieved for marketplace add-on pattern doc | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0476 | T1 | A | Verify Marketplace add-on pattern doc — P5 item 076 | doc linked from funnel for marketplace add-on pattern doc | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0477 | T2 | D | Polish Marketplace add-on pattern doc — P5 item 077 | API export verified for marketplace add-on pattern doc | pytest | lifecycle-evidence |
-| mr-0478 | T1 | A | Automate Marketplace add-on pattern doc — P5 item 078 | manual review passed for marketplace add-on pattern doc | manual | lifecycle-evidence |
-| mr-0479 | T1 | A | Elevate Marketplace add-on pattern doc — P5 item 079 | e2e flow green for marketplace add-on pattern doc | procurement-pack-e2e | lifecycle-evidence |
-| mr-0480 | T2 | H | Harden Marketplace add-on pattern doc — P5 item 080 | GTM signal captured for marketplace add-on pattern doc | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0481 | T1 | A | Ship CRO committee readout spec — P5 item 081 | buyer-visible on www for cro committee readout spec | verify-gtm | lifecycle-evidence |
-| mr-0482 | T1 | A | Lock CRO committee readout spec — P5 item 082 | committee artifact ready for cro committee readout spec | verify-ui-e2e | lifecycle-evidence |
-| mr-0483 | T2 | D | Wire CRO committee readout spec — P5 item 083 | regression gate green for cro committee readout spec | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0484 | T1 | A | Extend CRO committee readout spec — P5 item 084 | procurement self-serve path for cro committee readout spec | verify-ui-endpoints | lifecycle-evidence |
-| mr-0485 | T1 | A | Document CRO committee readout spec — P5 item 085 | console parity achieved for cro committee readout spec | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0486 | T2 | A | Verify CRO committee readout spec — P5 item 086 | doc linked from funnel for cro committee readout spec | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0487 | T1 | D | Polish CRO committee readout spec — P5 item 087 | API export verified for cro committee readout spec | pytest | lifecycle-evidence |
-| mr-0488 | T1 | A | Automate CRO committee readout spec — P5 item 088 | manual review passed for cro committee readout spec | manual | lifecycle-evidence |
-| mr-0489 | T2 | A | Elevate CRO committee readout spec — P5 item 089 | e2e flow green for cro committee readout spec | procurement-pack-e2e | lifecycle-evidence |
-| mr-0490 | T1 | H | Harden CRO committee readout spec — P5 item 090 | GTM signal captured for cro committee readout spec | verify-msb-partner-openapi | lifecycle-evidence |
-| mr-0491 | T1 | A | Ship Phase 5 lifecycle verify — P5 item 091 | buyer-visible on www for phase 5 lifecycle verify | verify-gtm | lifecycle-evidence |
-| mr-0492 | T2 | A | Lock Phase 5 lifecycle verify — P5 item 092 | committee artifact ready for phase 5 lifecycle verify | verify-ui-e2e | lifecycle-evidence |
-| mr-0493 | T1 | D | Wire Phase 5 lifecycle verify — P5 item 093 | regression gate green for phase 5 lifecycle verify | verify-gtm-ops-docs | lifecycle-evidence |
-| mr-0494 | T1 | A | Extend Phase 5 lifecycle verify — P5 item 094 | procurement self-serve path for phase 5 lifecycle verify | verify-ui-endpoints | lifecycle-evidence |
-| mr-0495 | T2 | A | Document Phase 5 lifecycle verify — P5 item 095 | console parity achieved for phase 5 lifecycle verify | plan-with-no-asf-verify | lifecycle-evidence |
-| mr-0496 | T1 | A | Verify Phase 5 lifecycle verify — P5 item 096 | doc linked from funnel for phase 5 lifecycle verify | verify-no-asf-coherence | lifecycle-evidence |
-| mr-0497 | T1 | D | Polish Phase 5 lifecycle verify — P5 item 097 | API export verified for phase 5 lifecycle verify | pytest | lifecycle-evidence |
-| mr-0498 | T2 | A | Automate Phase 5 lifecycle verify — P5 item 098 | manual review passed for phase 5 lifecycle verify | manual | lifecycle-evidence |
-| mr-0499 | T1 | A | Elevate Phase 5 lifecycle verify — P5 item 099 | e2e flow green for phase 5 lifecycle verify | procurement-pack-e2e | lifecycle-evidence |
-| mr-0500 | T1 | H | Harden Phase 5 lifecycle verify — P5 item 100 | GTM signal captured for phase 5 lifecycle verify | verify-msb-partner-openapi | lifecycle-evidence |
+| mr-0401 | T1 | D | Spec AI factsheet export fields for TLE bundle | Committee artifact for model evidence | spec review | lifecycle-evidence |
+| mr-0402 | T2 | A | Add AI factsheet orientation row to /trust-center/ | AI governance reviewer finds factsheet posture | verify-gtm | lifecycle-evidence |
+| mr-0403 | T1 | A | Wire AI factsheet to TLE export cover block | Board PDF includes AI factsheet stub | verify-ui-e2e | lifecycle-evidence |
+| mr-0404 | T1 | D | Add AI factsheet FAQ to /trust-center/ | Factsheet questions deflected pre-engineering call | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0405 | T2 | D | Spec AI factsheet metadata-only intake fence | No model weights in factsheet evidence layer | verify-no-asf-coherence | lifecycle-evidence |
+| mr-0406 | T1 | A | Wire AI factsheet to procurement ZIP bundle | Export includes AI factsheet orientation | procurement-pack-e2e | lifecycle-evidence |
+| mr-0407 | T1 | A | Add AI factsheet to ISO 42001 crosswalk | ISO 42001 evidence maps to factsheet fields | verify-ui-e2e | lifecycle-evidence |
+| mr-0408 | T2 | D | Spec AI factsheet update trigger on model change | Factsheet refreshes when model version changes | spec review | lifecycle-evidence |
+| mr-0409 | T1 | H | Add AI factsheet orientation to design-partner workshop | Co-design factsheet fields with enterprise buyer | manual | lifecycle-evidence |
+| mr-0410 | T1 | A | Add AI factsheet smoke test to regression | Factsheet fields present in export CI check | pytest | lifecycle-evidence |
+| mr-0411 | T2 | A | Add bias/drift monitoring orientation row to /trust-center/ | Model risk reviewer finds bias posture quickly | verify-gtm | lifecycle-evidence |
+| mr-0412 | T1 | D | Publish bias/drift FAQ index (10 questions) | Common bias/drift questions deflected pre-call | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0413 | T1 | A | Wire bias/drift orientation to framework grid | NIST AI RMF measure function references bias row | verify-ui-e2e | lifecycle-evidence |
+| mr-0414 | T2 | A | Add bias/drift honest-posture note (monitoring-not-guaranteeing) | Monitoring-not-guaranteeing language on bias row | verify-no-asf-coherence | lifecycle-evidence |
+| mr-0415 | T1 | A | Wire bias/drift to TLE export cover | Board PDF shows bias monitoring scope | verify-ui-e2e | lifecycle-evidence |
+| mr-0416 | T1 | A | Add bias/drift to procurement ZIP bundle | Export includes bias monitoring orientation | procurement-pack-e2e | lifecycle-evidence |
+| mr-0417 | T2 | D | Spec bias/drift threshold alerting stub | Ops alerted when drift exceeds threshold | spec review | lifecycle-evidence |
+| mr-0418 | T1 | A | Add bias/drift to AI factsheet fields | Factsheet captures bias/drift monitoring metadata | verify-ui-e2e | lifecycle-evidence |
+| mr-0419 | T1 | H | Add bias/drift to design-partner workshop | Co-design bias evidence fields with enterprise buyer | manual | lifecycle-evidence |
+| mr-0420 | T2 | A | Add bias/drift smoke test to regression | Bias/drift rows present in /trust-center/ CI check | pytest | lifecycle-evidence |
+| mr-0421 | T1 | D | Spec agent monitoring evidence fields for TLE | Board PDF captures agent governance posture | spec review | lifecycle-evidence |
+| mr-0422 | T1 | A | Add agent monitoring orientation row to /trust-center/ | AI agent reviewer finds monitoring scope | verify-gtm | lifecycle-evidence |
+| mr-0423 | T2 | A | Wire agent monitoring to NIST AI RMF govern function | NIST govern row references agent monitoring | verify-ui-e2e | lifecycle-evidence |
+| mr-0424 | T1 | D | Publish agent monitoring FAQ (10 questions) | Common agent monitoring questions deflected | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0425 | T1 | A | Add agent monitoring honest-posture note (monitoring-not-controlling) | Monitoring-not-controlling language on agent row | verify-no-asf-coherence | lifecycle-evidence |
+| mr-0426 | T2 | A | Wire agent monitoring to TLE export cover | Board PDF shows agent governance scope | verify-ui-e2e | lifecycle-evidence |
+| mr-0427 | T1 | A | Add agent monitoring to procurement ZIP bundle | Export includes agent monitoring orientation | procurement-pack-e2e | lifecycle-evidence |
+| mr-0428 | T1 | D | Spec agent monitoring metadata-only intake fence | No agent output collected in evidence layer | verify-no-asf-coherence | lifecycle-evidence |
+| mr-0429 | T2 | H | Add agent monitoring to design-partner workshop | Co-design agent evidence fields with enterprise buyer | manual | lifecycle-evidence |
+| mr-0430 | T1 | A | Add agent monitoring smoke test to regression | Agent monitoring rows present in /trust-center/ CI | pytest | lifecycle-evidence |
+| mr-0431 | T1 | A | Add FedRAMP orientation row to /federal/ page | Federal reviewer finds authority-to-operate posture | verify-gtm | lifecycle-evidence |
+| mr-0432 | T2 | D | Publish FedRAMP path FAQ (10 questions) | Common FedRAMP questions deflected pre-call | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0433 | T1 | A | Wire FedRAMP orientation to federal lane /trust-center/ | Federal-specific trust surface cross-links | verify-ui-e2e | lifecycle-evidence |
+| mr-0434 | T1 | A | Add FedRAMP honest-posture note (orientation-not-authorized) | ATO fence: orientation only — no authorization claim | verify-no-asf-coherence | lifecycle-evidence |
+| mr-0435 | T2 | A | Wire FedRAMP to procurement ZIP federal bundle | Federal export bundle includes FedRAMP orientation | procurement-pack-e2e | lifecycle-evidence |
+| mr-0436 | T1 | A | Add FedRAMP to TLE export federal cover block | Board PDF shows FedRAMP path orientation | verify-ui-e2e | lifecycle-evidence |
+| mr-0437 | T1 | A | Add OSCAL crosswalk note on FedRAMP row | FedRAMP path links to OSCAL compliance-as-code | verify-gtm | lifecycle-evidence |
+| mr-0438 | T2 | D | Spec FedRAMP evidence field map for design-partner | Federal buyer co-designs evidence scope | spec review | lifecycle-evidence |
+| mr-0439 | T1 | A | Add FedRAMP design-partner path CTA on /federal/ | Federal buyer sees co-design path from federal page | verify-gtm | lifecycle-evidence |
+| mr-0440 | T1 | A | Add FedRAMP fence smoke test to regression | No ATO claim on /federal/ page CI check | pytest | lifecycle-evidence |
+| mr-0441 | T2 | D | Publish regulatory accelerator index on /trust-center/ | Enterprise buyer sees pre-built regime orientations | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0442 | T1 | A | Wire accelerator index to framework grid | Each regime links its accelerator orientation | verify-ui-e2e | lifecycle-evidence |
+| mr-0443 | T1 | D | Add accelerator FAQ (10 questions) | Common accelerator questions deflected pre-call | verify-gtm | lifecycle-evidence |
+| mr-0444 | T2 | A | Wire accelerator index to procurement ZIP | Export includes regulatory accelerator list | procurement-pack-e2e | lifecycle-evidence |
+| mr-0445 | T1 | A | Add accelerator pricing note (per-regime model stub) | Enterprise buyer sees per-accelerator model | verify-gtm | lifecycle-evidence |
+| mr-0446 | T1 | A | Add accelerator to TLE export cover block | Board PDF shows applicable accelerators | verify-ui-e2e | lifecycle-evidence |
+| mr-0447 | T2 | A | Wire accelerator to EU AI Act urgency callout | Aug 2 2026 deadline drives accelerator adoption | verify-gtm | lifecycle-evidence |
+| mr-0448 | T1 | D | Spec accelerator update cadence on regulation change | Accelerator refreshed within N days of new rule | spec review | lifecycle-evidence |
+| mr-0449 | T1 | H | Add accelerator to design-partner workshop | Co-design accelerator scope with enterprise buyer | manual | lifecycle-evidence |
+| mr-0450 | T2 | A | Add accelerator smoke test to regression | Accelerator rows present in /trust-center/ CI check | pytest | lifecycle-evidence |
+| mr-0451 | T1 | D | Publish hybrid cloud evidence map on /trust-center/ | Multi-cloud buyer sees coverage without gap | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0452 | T1 | A | Add hybrid cloud orientation row to /trust-center/ | Cloud architect reviewer finds evidence scope | verify-gtm | lifecycle-evidence |
+| mr-0453 | T2 | A | Wire hybrid cloud to connector freshness UI | Multi-cloud connectors show per-cloud sync status | verify-ui-e2e | lifecycle-evidence |
+| mr-0454 | T1 | D | Add hybrid cloud FAQ (10 questions) | Common hybrid cloud questions deflected pre-call | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0455 | T1 | D | Spec multi-cloud connector isolation fence | Cloud A evidence isolated from cloud B | spec review | lifecycle-evidence |
+| mr-0456 | T2 | A | Wire hybrid cloud to procurement ZIP bundle | Export includes multi-cloud coverage orientation | procurement-pack-e2e | lifecycle-evidence |
+| mr-0457 | T1 | A | Add hybrid cloud to TLE export cover | Board PDF shows multi-cloud evidence scope | verify-ui-e2e | lifecycle-evidence |
+| mr-0458 | T1 | A | Wire hybrid cloud to FedRAMP orientation row | Federal-cloud hybrid evidence path documented | verify-gtm | lifecycle-evidence |
+| mr-0459 | T2 | H | Add hybrid cloud to design-partner workshop | Co-design multi-cloud evidence fields with enterprise | manual | lifecycle-evidence |
+| mr-0460 | T1 | A | Add hybrid cloud smoke test to regression | Multi-cloud rows present in /trust-center/ CI check | pytest | lifecycle-evidence |
+| mr-0461 | T1 | D | Spec model lifecycle RID linkage for TLE | Each model version gets unique receipt ID | spec review | lifecycle-evidence |
+| mr-0462 | T2 | A | Add model lifecycle orientation row to /trust-center/ | Model risk reviewer finds lifecycle posture | verify-gtm | lifecycle-evidence |
+| mr-0463 | T1 | A | Wire model version bump to TLE receipt creation | RID increments on model version change | verify-ui-e2e | lifecycle-evidence |
+| mr-0464 | T1 | D | Add model lifecycle FAQ to /trust-center/ | Common model lifecycle questions deflected | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0465 | T2 | D | Spec model retirement evidence fence | Retired model receipts immutable — not deleted | spec review | lifecycle-evidence |
+| mr-0466 | T1 | A | Wire model lifecycle to AI factsheet fields | Factsheet captures model version history | verify-ui-e2e | lifecycle-evidence |
+| mr-0467 | T1 | A | Add model lifecycle to procurement ZIP | Export includes model version evidence | procurement-pack-e2e | lifecycle-evidence |
+| mr-0468 | T2 | A | Add model lifecycle to TLE export cover | Board PDF shows model version evidence summary | verify-ui-e2e | lifecycle-evidence |
+| mr-0469 | T1 | H | Add model lifecycle to design-partner workshop | Co-design model version evidence fields with enterprise | manual | lifecycle-evidence |
+| mr-0470 | T1 | A | Add model lifecycle smoke test to regression | RID linkage asserted in export CI check | pytest | lifecycle-evidence |
+| mr-0471 | T2 | D | Spec marketplace add-on activation pattern for console | Enterprise buyer activates add-on in N clicks | spec review | lifecycle-evidence |
+| mr-0472 | T1 | A | Add marketplace add-on CTA to /enterprise/ | Add-on expansion path visible above fold | verify-gtm | lifecycle-evidence |
+| mr-0473 | T1 | A | Wire add-on activation to TLE receipt | Receipt minted when add-on activated | verify-ui-e2e | lifecycle-evidence |
+| mr-0474 | T2 | D | Add marketplace add-on FAQ to /trust-center/ | Common add-on questions deflected pre-call | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0475 | T1 | A | Add marketplace add-on to procurement ZIP bundle | Bundle explains add-on activation path | procurement-pack-e2e | lifecycle-evidence |
+| mr-0476 | T1 | A | Add marketplace add-on pricing orientation | Per-add-on model stub visible on /enterprise/ | verify-gtm | lifecycle-evidence |
+| mr-0477 | T2 | D | Wire marketplace add-on to MSP channel playbook | MSP partners can deploy add-ons on behalf of enterprise | verify-gtm | lifecycle-evidence |
+| mr-0478 | T1 | D | Spec add-on de-activation fence | Add-on cannot be silently removed post-audit | spec review | lifecycle-evidence |
+| mr-0479 | T1 | H | Add marketplace add-on to design-partner path | Design-partner shapes add-on evidence scope | manual | lifecycle-evidence |
+| mr-0480 | T2 | A | Add marketplace add-on smoke test to regression | Add-on activation flow asserted in CI gate | pytest | lifecycle-evidence |
+| mr-0481 | T1 | D | Spec CRO committee readout template | Chief Risk Officer artifact for lifecycle evidence | spec review | lifecycle-evidence |
+| mr-0482 | T1 | A | Add CRO-oriented trust center copy to /enterprise/ | Risk-committee language on enterprise page | verify-gtm | lifecycle-evidence |
+| mr-0483 | T2 | A | Wire CRO readout to TLE export cover | Board PDF includes CRO-ready summary | verify-ui-e2e | lifecycle-evidence |
+| mr-0484 | T1 | D | Add CRO FAQ (10 questions) | Risk committee questions deflected pre-meeting | verify-gtm-ops-docs | lifecycle-evidence |
+| mr-0485 | T1 | A | Wire CRO readout to procurement ZIP | Export bundle includes CRO committee one-pager | procurement-pack-e2e | lifecycle-evidence |
+| mr-0486 | T2 | A | Add OSFI E-23 orientation note to CRO readout | FRFI-oriented CRO artifact includes E-23 fields | verify-gtm | lifecycle-evidence |
+| mr-0487 | T1 | D | Spec CRO readout 20-minute meeting agenda | Founder has repeatable CRO meeting script | spec review | lifecycle-evidence |
+| mr-0488 | T1 | H | Add CRO readout to design-partner workshop | CRO stakeholder invited to co-design evidence fields | manual | lifecycle-evidence |
+| mr-0489 | T2 | A | Add CRO readout print CSS | Print-grade rendering for committee leave-behind | manual | lifecycle-evidence |
+| mr-0490 | T1 | A | Add CRO readout smoke test to regression | CRO fields present in export bundle CI check | pytest | lifecycle-evidence |
+| mr-0491 | T1 | A | Run verify-ui-e2e green on all Phase 5 lifecycle routes | AI factsheet + federal routes pass | verify-ui-e2e | lifecycle-evidence |
+| mr-0492 | T2 | A | Pass verify-no-asf-coherence on Phase 5 pages | No brand names on lifecycle evidence surfaces | verify-no-asf-coherence | lifecycle-evidence |
+| mr-0493 | T1 | A | Pass audit_final_system_lock on Phase 5 HTML | Federal lane copy RPAA-safe confirmed | audit_final_system_lock | lifecycle-evidence |
+| mr-0494 | T1 | A | Pass test_public_gtm_alignment on Phase 5 routes | AI governance copy alignment green | pytest | lifecycle-evidence |
+| mr-0495 | T2 | A | Run procurement-pack-e2e with lifecycle bundle | AI factsheet + FedRAMP + CRO in export | procurement-pack-e2e | lifecycle-evidence |
+| mr-0496 | T1 | A | Run smoke_bank_grade on Phase 5 federal routes | Bank-grade CSS on federal and lifecycle pages | smoke_bank_grade | lifecycle-evidence |
+| mr-0497 | T1 | H | Log Phase 5 enterprise deal influenced in ops log | Revenue-influenced metric recorded | manual | lifecycle-evidence |
+| mr-0498 | T2 | H | Record first CRO committee readout dry-run | Board PDF used in risk committee validated | manual | lifecycle-evidence |
+| mr-0499 | T1 | D | Phase 5 retrospective doc (1 page) | Lifecycle learnings feed Phase 6 | docs review | lifecycle-evidence |
+| mr-0500 | T1 | H | Sign off Phase 5 → unlock Phase 6 picks | mr-0500 ready in GTM_NEXT | manual | lifecycle-evidence |
 
 ## Phase 6 — StackAttach — complement not replace (mr-0501–mr-0600)
 
@@ -672,106 +672,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0501 | T1 | A | Ship Registry-vs-receipt complement strip — P6 item 001 | buyer-visible on www for registry-vs-receipt complement strip | verify-gtm | registry-vs-receipt |
-| mr-0502 | T2 | A | Lock Registry-vs-receipt complement strip — P6 item 002 | committee artifact ready for registry-vs-receipt complement strip | verify-ui-e2e | registry-vs-receipt |
-| mr-0503 | T1 | D | Wire Registry-vs-receipt complement strip — P6 item 003 | regression gate green for registry-vs-receipt complement strip | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0504 | T1 | A | Extend Registry-vs-receipt complement strip — P6 item 004 | procurement self-serve path for registry-vs-receipt complement strip | verify-ui-endpoints | registry-vs-receipt |
-| mr-0505 | T2 | A | Document Registry-vs-receipt complement strip — P6 item 005 | console parity achieved for registry-vs-receipt complement strip | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0506 | T1 | A | Verify Registry-vs-receipt complement strip — P6 item 006 | doc linked from funnel for registry-vs-receipt complement strip | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0507 | T1 | D | Polish Registry-vs-receipt complement strip — P6 item 007 | API export verified for registry-vs-receipt complement strip | pytest | registry-vs-receipt |
-| mr-0508 | T2 | A | Automate Registry-vs-receipt complement strip — P6 item 008 | manual review passed for registry-vs-receipt complement strip | manual | registry-vs-receipt |
-| mr-0509 | T1 | A | Elevate Registry-vs-receipt complement strip — P6 item 009 | e2e flow green for registry-vs-receipt complement strip | procurement-pack-e2e | registry-vs-receipt |
-| mr-0510 | T1 | H | Harden Registry-vs-receipt complement strip — P6 item 010 | GTM signal captured for registry-vs-receipt complement strip | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0511 | T2 | A | Ship Evaluate-before-act pipeline copy — P6 item 011 | buyer-visible on www for evaluate-before-act pipeline copy | verify-gtm | registry-vs-receipt |
-| mr-0512 | T1 | A | Lock Evaluate-before-act pipeline copy — P6 item 012 | committee artifact ready for evaluate-before-act pipeline copy | verify-ui-e2e | registry-vs-receipt |
-| mr-0513 | T1 | D | Wire Evaluate-before-act pipeline copy — P6 item 013 | regression gate green for evaluate-before-act pipeline copy | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0514 | T2 | A | Extend Evaluate-before-act pipeline copy — P6 item 014 | procurement self-serve path for evaluate-before-act pipeline copy | verify-ui-endpoints | registry-vs-receipt |
-| mr-0515 | T1 | A | Document Evaluate-before-act pipeline copy — P6 item 015 | console parity achieved for evaluate-before-act pipeline copy | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0516 | T1 | A | Verify Evaluate-before-act pipeline copy — P6 item 016 | doc linked from funnel for evaluate-before-act pipeline copy | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0517 | T2 | D | Polish Evaluate-before-act pipeline copy — P6 item 017 | API export verified for evaluate-before-act pipeline copy | pytest | registry-vs-receipt |
-| mr-0518 | T1 | A | Automate Evaluate-before-act pipeline copy — P6 item 018 | manual review passed for evaluate-before-act pipeline copy | manual | registry-vs-receipt |
-| mr-0519 | T1 | A | Elevate Evaluate-before-act pipeline copy — P6 item 019 | e2e flow green for evaluate-before-act pipeline copy | procurement-pack-e2e | registry-vs-receipt |
-| mr-0520 | T2 | H | Harden Evaluate-before-act pipeline copy — P6 item 020 | GTM signal captured for evaluate-before-act pipeline copy | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0521 | T1 | A | Ship Workspace attach diagram — P6 item 021 | buyer-visible on www for workspace attach diagram | verify-gtm | registry-vs-receipt |
-| mr-0522 | T1 | A | Lock Workspace attach diagram — P6 item 022 | committee artifact ready for workspace attach diagram | verify-ui-e2e | registry-vs-receipt |
-| mr-0523 | T2 | D | Wire Workspace attach diagram — P6 item 023 | regression gate green for workspace attach diagram | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0524 | T1 | A | Extend Workspace attach diagram — P6 item 024 | procurement self-serve path for workspace attach diagram | verify-ui-endpoints | registry-vs-receipt |
-| mr-0525 | T1 | A | Document Workspace attach diagram — P6 item 025 | console parity achieved for workspace attach diagram | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0526 | T2 | A | Verify Workspace attach diagram — P6 item 026 | doc linked from funnel for workspace attach diagram | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0527 | T1 | D | Polish Workspace attach diagram — P6 item 027 | API export verified for workspace attach diagram | pytest | registry-vs-receipt |
-| mr-0528 | T1 | A | Automate Workspace attach diagram — P6 item 028 | manual review passed for workspace attach diagram | manual | registry-vs-receipt |
-| mr-0529 | T2 | A | Elevate Workspace attach diagram — P6 item 029 | e2e flow green for workspace attach diagram | procurement-pack-e2e | registry-vs-receipt |
-| mr-0530 | T1 | H | Harden Workspace attach diagram — P6 item 030 | GTM signal captured for workspace attach diagram | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0531 | T1 | A | Ship ITSM-linked risk orientation — P6 item 031 | buyer-visible on www for itsm-linked risk orientation | verify-gtm | registry-vs-receipt |
-| mr-0532 | T2 | A | Lock ITSM-linked risk orientation — P6 item 032 | committee artifact ready for itsm-linked risk orientation | verify-ui-e2e | registry-vs-receipt |
-| mr-0533 | T1 | D | Wire ITSM-linked risk orientation — P6 item 033 | regression gate green for itsm-linked risk orientation | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0534 | T1 | A | Extend ITSM-linked risk orientation — P6 item 034 | procurement self-serve path for itsm-linked risk orientation | verify-ui-endpoints | registry-vs-receipt |
-| mr-0535 | T2 | A | Document ITSM-linked risk orientation — P6 item 035 | console parity achieved for itsm-linked risk orientation | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0536 | T1 | A | Verify ITSM-linked risk orientation — P6 item 036 | doc linked from funnel for itsm-linked risk orientation | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0537 | T1 | D | Polish ITSM-linked risk orientation — P6 item 037 | API export verified for itsm-linked risk orientation | pytest | registry-vs-receipt |
-| mr-0538 | T2 | A | Automate ITSM-linked risk orientation — P6 item 038 | manual review passed for itsm-linked risk orientation | manual | registry-vs-receipt |
-| mr-0539 | T1 | A | Elevate ITSM-linked risk orientation — P6 item 039 | e2e flow green for itsm-linked risk orientation | procurement-pack-e2e | registry-vs-receipt |
-| mr-0540 | T1 | H | Harden ITSM-linked risk orientation — P6 item 040 | GTM signal captured for itsm-linked risk orientation | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0541 | T2 | A | Ship Control tower complement FAQ — P6 item 041 | buyer-visible on www for control tower complement faq | verify-gtm | registry-vs-receipt |
-| mr-0542 | T1 | A | Lock Control tower complement FAQ — P6 item 042 | committee artifact ready for control tower complement faq | verify-ui-e2e | registry-vs-receipt |
-| mr-0543 | T1 | D | Wire Control tower complement FAQ — P6 item 043 | regression gate green for control tower complement faq | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0544 | T2 | A | Extend Control tower complement FAQ — P6 item 044 | procurement self-serve path for control tower complement faq | verify-ui-endpoints | registry-vs-receipt |
-| mr-0545 | T1 | A | Document Control tower complement FAQ — P6 item 045 | console parity achieved for control tower complement faq | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0546 | T1 | A | Verify Control tower complement FAQ — P6 item 046 | doc linked from funnel for control tower complement faq | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0547 | T2 | D | Polish Control tower complement FAQ — P6 item 047 | API export verified for control tower complement faq | pytest | registry-vs-receipt |
-| mr-0548 | T1 | A | Automate Control tower complement FAQ — P6 item 048 | manual review passed for control tower complement faq | manual | registry-vs-receipt |
-| mr-0549 | T1 | A | Elevate Control tower complement FAQ — P6 item 049 | e2e flow green for control tower complement faq | procurement-pack-e2e | registry-vs-receipt |
-| mr-0550 | T2 | H | Harden Control tower complement FAQ — P6 item 050 | GTM signal captured for control tower complement faq | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0551 | T1 | A | Ship No-rip-replace positioning lock — P6 item 051 | buyer-visible on www for no-rip-replace positioning lock | verify-gtm | registry-vs-receipt |
-| mr-0552 | T1 | A | Lock No-rip-replace positioning lock — P6 item 052 | committee artifact ready for no-rip-replace positioning lock | verify-ui-e2e | registry-vs-receipt |
-| mr-0553 | T2 | D | Wire No-rip-replace positioning lock — P6 item 053 | regression gate green for no-rip-replace positioning lock | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0554 | T1 | A | Extend No-rip-replace positioning lock — P6 item 054 | procurement self-serve path for no-rip-replace positioning lock | verify-ui-endpoints | registry-vs-receipt |
-| mr-0555 | T1 | A | Document No-rip-replace positioning lock — P6 item 055 | console parity achieved for no-rip-replace positioning lock | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0556 | T2 | A | Verify No-rip-replace positioning lock — P6 item 056 | doc linked from funnel for no-rip-replace positioning lock | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0557 | T1 | D | Polish No-rip-replace positioning lock — P6 item 057 | API export verified for no-rip-replace positioning lock | pytest | registry-vs-receipt |
-| mr-0558 | T1 | A | Automate No-rip-replace positioning lock — P6 item 058 | manual review passed for no-rip-replace positioning lock | manual | registry-vs-receipt |
-| mr-0559 | T2 | A | Elevate No-rip-replace positioning lock — P6 item 059 | e2e flow green for no-rip-replace positioning lock | procurement-pack-e2e | registry-vs-receipt |
-| mr-0560 | T1 | H | Harden No-rip-replace positioning lock — P6 item 060 | GTM signal captured for no-rip-replace positioning lock | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0561 | T1 | A | Ship Platform policy handoff spec — P6 item 061 | buyer-visible on www for platform policy handoff spec | verify-gtm | registry-vs-receipt |
-| mr-0562 | T2 | A | Lock Platform policy handoff spec — P6 item 062 | committee artifact ready for platform policy handoff spec | verify-ui-e2e | registry-vs-receipt |
-| mr-0563 | T1 | D | Wire Platform policy handoff spec — P6 item 063 | regression gate green for platform policy handoff spec | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0564 | T1 | A | Extend Platform policy handoff spec — P6 item 064 | procurement self-serve path for platform policy handoff spec | verify-ui-endpoints | registry-vs-receipt |
-| mr-0565 | T2 | A | Document Platform policy handoff spec — P6 item 065 | console parity achieved for platform policy handoff spec | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0566 | T1 | A | Verify Platform policy handoff spec — P6 item 066 | doc linked from funnel for platform policy handoff spec | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0567 | T1 | D | Polish Platform policy handoff spec — P6 item 067 | API export verified for platform policy handoff spec | pytest | registry-vs-receipt |
-| mr-0568 | T2 | A | Automate Platform policy handoff spec — P6 item 068 | manual review passed for platform policy handoff spec | manual | registry-vs-receipt |
-| mr-0569 | T1 | A | Elevate Platform policy handoff spec — P6 item 069 | e2e flow green for platform policy handoff spec | procurement-pack-e2e | registry-vs-receipt |
-| mr-0570 | T1 | H | Harden Platform policy handoff spec — P6 item 070 | GTM signal captured for platform policy handoff spec | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0571 | T2 | A | Ship Receipt layer architecture doc — P6 item 071 | buyer-visible on www for receipt layer architecture doc | verify-gtm | registry-vs-receipt |
-| mr-0572 | T1 | A | Lock Receipt layer architecture doc — P6 item 072 | committee artifact ready for receipt layer architecture doc | verify-ui-e2e | registry-vs-receipt |
-| mr-0573 | T1 | D | Wire Receipt layer architecture doc — P6 item 073 | regression gate green for receipt layer architecture doc | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0574 | T2 | A | Extend Receipt layer architecture doc — P6 item 074 | procurement self-serve path for receipt layer architecture doc | verify-ui-endpoints | registry-vs-receipt |
-| mr-0575 | T1 | A | Document Receipt layer architecture doc — P6 item 075 | console parity achieved for receipt layer architecture doc | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0576 | T1 | A | Verify Receipt layer architecture doc — P6 item 076 | doc linked from funnel for receipt layer architecture doc | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0577 | T2 | D | Polish Receipt layer architecture doc — P6 item 077 | API export verified for receipt layer architecture doc | pytest | registry-vs-receipt |
-| mr-0578 | T1 | A | Automate Receipt layer architecture doc — P6 item 078 | manual review passed for receipt layer architecture doc | manual | registry-vs-receipt |
-| mr-0579 | T1 | A | Elevate Receipt layer architecture doc — P6 item 079 | e2e flow green for receipt layer architecture doc | procurement-pack-e2e | registry-vs-receipt |
-| mr-0580 | T2 | H | Harden Receipt layer architecture doc — P6 item 080 | GTM signal captured for receipt layer architecture doc | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0581 | T1 | A | Ship Copilot GTM complement guide — P6 item 081 | buyer-visible on www for copilot gtm complement guide | verify-gtm | registry-vs-receipt |
-| mr-0582 | T1 | A | Lock Copilot GTM complement guide — P6 item 082 | committee artifact ready for copilot gtm complement guide | verify-ui-e2e | registry-vs-receipt |
-| mr-0583 | T2 | D | Wire Copilot GTM complement guide — P6 item 083 | regression gate green for copilot gtm complement guide | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0584 | T1 | A | Extend Copilot GTM complement guide — P6 item 084 | procurement self-serve path for copilot gtm complement guide | verify-ui-endpoints | registry-vs-receipt |
-| mr-0585 | T1 | A | Document Copilot GTM complement guide — P6 item 085 | console parity achieved for copilot gtm complement guide | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0586 | T2 | A | Verify Copilot GTM complement guide — P6 item 086 | doc linked from funnel for copilot gtm complement guide | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0587 | T1 | D | Polish Copilot GTM complement guide — P6 item 087 | API export verified for copilot gtm complement guide | pytest | registry-vs-receipt |
-| mr-0588 | T1 | A | Automate Copilot GTM complement guide — P6 item 088 | manual review passed for copilot gtm complement guide | manual | registry-vs-receipt |
-| mr-0589 | T2 | A | Elevate Copilot GTM complement guide — P6 item 089 | e2e flow green for copilot gtm complement guide | procurement-pack-e2e | registry-vs-receipt |
-| mr-0590 | T1 | H | Harden Copilot GTM complement guide — P6 item 090 | GTM signal captured for copilot gtm complement guide | verify-msb-partner-openapi | registry-vs-receipt |
-| mr-0591 | T1 | A | Ship Phase 6 attach verify — P6 item 091 | buyer-visible on www for phase 6 attach verify | verify-gtm | registry-vs-receipt |
-| mr-0592 | T2 | A | Lock Phase 6 attach verify — P6 item 092 | committee artifact ready for phase 6 attach verify | verify-ui-e2e | registry-vs-receipt |
-| mr-0593 | T1 | D | Wire Phase 6 attach verify — P6 item 093 | regression gate green for phase 6 attach verify | verify-gtm-ops-docs | registry-vs-receipt |
-| mr-0594 | T1 | A | Extend Phase 6 attach verify — P6 item 094 | procurement self-serve path for phase 6 attach verify | verify-ui-endpoints | registry-vs-receipt |
-| mr-0595 | T2 | A | Document Phase 6 attach verify — P6 item 095 | console parity achieved for phase 6 attach verify | plan-with-no-asf-verify | registry-vs-receipt |
-| mr-0596 | T1 | A | Verify Phase 6 attach verify — P6 item 096 | doc linked from funnel for phase 6 attach verify | verify-no-asf-coherence | registry-vs-receipt |
-| mr-0597 | T1 | D | Polish Phase 6 attach verify — P6 item 097 | API export verified for phase 6 attach verify | pytest | registry-vs-receipt |
-| mr-0598 | T2 | A | Automate Phase 6 attach verify — P6 item 098 | manual review passed for phase 6 attach verify | manual | registry-vs-receipt |
-| mr-0599 | T1 | A | Elevate Phase 6 attach verify — P6 item 099 | e2e flow green for phase 6 attach verify | procurement-pack-e2e | registry-vs-receipt |
-| mr-0600 | T1 | H | Harden Phase 6 attach verify — P6 item 100 | GTM signal captured for phase 6 attach verify | verify-msb-partner-openapi | registry-vs-receipt |
+| mr-0501 | T1 | A | Ship registry-vs-receipt positioning strip on /trust-center/ | Buyer sees complement-not-replace posture | verify-gtm | registry-vs-receipt |
+| mr-0502 | T2 | A | Add receipt-layer-only copy to /enterprise/ | No rip-replace language in enterprise hero copy | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0503 | T1 | A | Wire complement strip to procurement ZIP CTA | Buyer self-serves complement scope without call | procurement-pack-e2e | registry-vs-receipt |
+| mr-0504 | T1 | D | Publish registry-vs-receipt FAQ (10 questions) | Common complement questions deflected pre-call | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0505 | T2 | A | Add complement positioning to trust center hero | Registry stays; receipt layer added on top — visible | verify-gtm | registry-vs-receipt |
+| mr-0506 | T1 | A | Wire complement strip to TLE export cover | Board PDF shows receipt layer scope | verify-ui-e2e | registry-vs-receipt |
+| mr-0507 | T1 | D | Add complement architecture diagram to trust FAQ | Buyer sees receipt layer in architecture diagram | verify-gtm | registry-vs-receipt |
+| mr-0508 | T2 | A | Spec complement-not-replace honest-posture fence | No replace-your-registry language anywhere in copy | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0509 | T1 | A | Add complement strip to /copilot/ page | /copilot/ is receipt layer — registry stays in place | verify-gtm | registry-vs-receipt |
+| mr-0510 | T1 | A | Add complement smoke test to regression | No rip-replace language found in CI check | pytest | registry-vs-receipt |
+| mr-0511 | T2 | A | Add evaluate-before-act copy block to /copilot/ | Buyer sees receipt-before-execution posture | verify-gtm | registry-vs-receipt |
+| mr-0512 | T1 | A | Wire evaluate-before-act to trust center architecture diagram | Copilot evaluate step visible in evidence flow | verify-ui-e2e | registry-vs-receipt |
+| mr-0513 | T1 | D | Publish evaluate-before-act FAQ (10 questions) | Common pre-execution governance questions deflected | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0514 | T2 | A | Add evaluate-before-act to TLE export cover | Board PDF shows pre-execution receipt claim | verify-ui-e2e | registry-vs-receipt |
+| mr-0515 | T1 | A | Wire evaluate-before-act to procurement ZIP | Export includes evaluate step orientation | procurement-pack-e2e | registry-vs-receipt |
+| mr-0516 | T1 | H | Add evaluate-before-act to design-partner workshop | Co-design pre-execution evidence with enterprise buyer | manual | registry-vs-receipt |
+| mr-0517 | T2 | D | Spec evaluate-before-act RID linkage | Every evaluate action tied to immutable receipt | spec review | registry-vs-receipt |
+| mr-0518 | T1 | A | Add evaluate-before-act to ITSM attach orientation | ITSM ticket can trigger evaluate action in Copilot | verify-gtm | registry-vs-receipt |
+| mr-0519 | T1 | A | Add evaluate-before-act honest-posture note | Evaluate-not-block language on /copilot/ copy | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0520 | T2 | A | Add evaluate-before-act smoke test to regression | Evaluate step asserted in CI gate | pytest | registry-vs-receipt |
+| mr-0521 | T1 | D | Spec workspace attach diagram for /trust-center/ | Architecture diagram shows receipt layer attach | spec review | registry-vs-receipt |
+| mr-0522 | T1 | A | Add workspace attach orientation row to /trust-center/ | Technical reviewer finds attach scope | verify-gtm | registry-vs-receipt |
+| mr-0523 | T2 | A | Wire workspace attach to complement positioning strip | Attach diagram reinforces no-rip-replace posture | verify-ui-e2e | registry-vs-receipt |
+| mr-0524 | T1 | D | Add workspace attach FAQ (10 questions) | Common attach questions deflected pre-call | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0525 | T1 | A | Wire workspace attach diagram to TLE export | Board PDF includes attach architecture | verify-ui-e2e | registry-vs-receipt |
+| mr-0526 | T2 | A | Add workspace attach to procurement ZIP | Export includes attach diagram orientation | procurement-pack-e2e | registry-vs-receipt |
+| mr-0527 | T1 | D | Spec workspace attach integration pattern (API not DB) | Attach via API — not direct database access | spec review | registry-vs-receipt |
+| mr-0528 | T1 | H | Add workspace attach to design-partner workshop | Co-design attach scope with enterprise buyer | manual | registry-vs-receipt |
+| mr-0529 | T2 | A | Add workspace attach diagram print CSS | Print-grade rendering for committee leave-behind | manual | registry-vs-receipt |
+| mr-0530 | T1 | A | Add workspace attach smoke test to regression | Attach diagram present in /trust-center/ CI check | pytest | registry-vs-receipt |
+| mr-0531 | T1 | A | Add ITSM-linked risk orientation row to /trust-center/ | IT governance buyer finds ITSM attach posture | verify-gtm | registry-vs-receipt |
+| mr-0532 | T2 | D | Publish ITSM attach FAQ (10 questions) | Common ITSM integration questions deflected | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0533 | T1 | A | Wire ITSM attach to complement positioning strip | ITSM integration reinforces no-rip-replace | verify-ui-e2e | registry-vs-receipt |
+| mr-0534 | T1 | A | Add ITSM attach to procurement ZIP | Export includes ITSM integration orientation | procurement-pack-e2e | registry-vs-receipt |
+| mr-0535 | T2 | D | Spec ITSM ticket trigger for receipt creation | Change ticket triggers TLE receipt in Copilot | spec review | registry-vs-receipt |
+| mr-0536 | T1 | A | Wire ITSM attach to TLE export cover | Board PDF shows ITSM-integrated scope | verify-ui-e2e | registry-vs-receipt |
+| mr-0537 | T1 | A | Add ITSM attach honest-posture note | No replace-your-ITSM language on any page | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0538 | T2 | H | Add ITSM attach to design-partner workshop | Co-design ITSM evidence fields with enterprise buyer | manual | registry-vs-receipt |
+| mr-0539 | T1 | D | Wire ITSM attach to MSP channel playbook | MSP partners can deploy ITSM attach | verify-gtm | registry-vs-receipt |
+| mr-0540 | T1 | A | Add ITSM attach smoke test to regression | ITSM orientation rows present in CI check | pytest | registry-vs-receipt |
+| mr-0541 | T2 | D | Publish control tower complement FAQ (10 questions) | IT buyer with control tower sees complement path | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0542 | T1 | A | Wire control tower FAQ to complement positioning strip | FAQ reinforces no-rip-replace posture | verify-ui-e2e | registry-vs-receipt |
+| mr-0543 | T1 | A | Add control tower FAQ to /trust-center/ | Self-serve path for IT governance buyer | verify-gtm | registry-vs-receipt |
+| mr-0544 | T2 | A | Wire control tower FAQ to procurement ZIP | Bundle includes control tower complement orientation | procurement-pack-e2e | registry-vs-receipt |
+| mr-0545 | T1 | A | Add control tower complement copy to /enterprise/ | IT governance buyer sees complement above fold | verify-gtm | registry-vs-receipt |
+| mr-0546 | T1 | A | Add control tower to TLE export cover | Board PDF shows complement scope | verify-ui-e2e | registry-vs-receipt |
+| mr-0547 | T2 | D | Spec control tower attach integration pattern (API only) | Attach via API — not native replacement | spec review | registry-vs-receipt |
+| mr-0548 | T1 | A | Add control tower honest-posture fence | No replace-your-control-tower language in copy | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0549 | T1 | H | Add control tower FAQ to design-partner workshop | Co-design control tower attach scope | manual | registry-vs-receipt |
+| mr-0550 | T2 | A | Add control tower smoke test to regression | No replace-language found in CI check | pytest | registry-vs-receipt |
+| mr-0551 | T1 | A | Audit all www copy for rip-replace language | Zero rip-replace claims in buyer-visible HTML | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0552 | T1 | A | Add no-rip-replace posture block to /trust-center/ | Complement posture explicit on trust surface | verify-gtm | registry-vs-receipt |
+| mr-0553 | T2 | A | Wire no-rip-replace to procurement ZIP README | Bundle README opens with complement posture statement | procurement-pack-e2e | registry-vs-receipt |
+| mr-0554 | T1 | A | Add no-rip-replace to TLE export cover | Board PDF states receipt-not-replacement scope | verify-ui-e2e | registry-vs-receipt |
+| mr-0555 | T1 | D | Add no-rip-replace FAQ to /trust-center/ | 5 complement questions deflected pre-call | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0556 | T2 | D | Spec no-rip-replace copy review checklist | All new copy reviewed against complement fence | spec review | registry-vs-receipt |
+| mr-0557 | T1 | D | Add no-rip-replace to design-partner positioning brief | Design-partner sees complement framing clearly | verify-gtm | registry-vs-receipt |
+| mr-0558 | T1 | A | Wire no-rip-replace to verify-no-asf-coherence CI gate | CI check catches rip-replace language on each deploy | pytest | registry-vs-receipt |
+| mr-0559 | T2 | D | Add no-rip-replace to MSP channel playbook | MSP partners trained on complement positioning | verify-gtm | registry-vs-receipt |
+| mr-0560 | T1 | D | Add no-rip-replace to Phase 6 retrospective | Positioning learnings logged for Phase 7 | docs review | registry-vs-receipt |
+| mr-0561 | T1 | D | Spec platform policy handoff for TLE receipt creation | Policy from platform triggers receipt in Copilot | spec review | registry-vs-receipt |
+| mr-0562 | T2 | A | Add policy handoff orientation row to /trust-center/ | Technical buyer sees policy handoff posture | verify-gtm | registry-vs-receipt |
+| mr-0563 | T1 | A | Wire policy handoff to TLE export cover | Board PDF shows policy-to-receipt chain | verify-ui-e2e | registry-vs-receipt |
+| mr-0564 | T1 | D | Add policy handoff FAQ to /trust-center/ | Common policy handoff questions deflected | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0565 | T2 | A | Wire policy handoff to procurement ZIP | Export includes policy handoff orientation | procurement-pack-e2e | registry-vs-receipt |
+| mr-0566 | T1 | D | Spec policy handoff API contract (signed payload) | Handoff via signed payload — not direct database access | spec review | registry-vs-receipt |
+| mr-0567 | T1 | H | Add policy handoff to design-partner workshop | Co-design policy handoff fields with enterprise buyer | manual | registry-vs-receipt |
+| mr-0568 | T2 | A | Wire policy handoff to ITSM attach pattern | ITSM policy change triggers handoff receipt | verify-ui-e2e | registry-vs-receipt |
+| mr-0569 | T1 | A | Add policy handoff honest-posture note | Handoff-not-replace language on /copilot/ copy | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0570 | T1 | A | Add policy handoff smoke test to regression | Handoff pattern asserted in CI gate | pytest | registry-vs-receipt |
+| mr-0571 | T2 | D | Publish receipt layer architecture doc on /trust-center/ | Technical reviewer sees receipt layer scope | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0572 | T1 | A | Wire architecture doc to complement positioning strip | Architecture reinforces no-rip-replace posture | verify-ui-e2e | registry-vs-receipt |
+| mr-0573 | T1 | D | Add receipt layer architecture FAQ (10 questions) | Common architecture questions deflected pre-call | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0574 | T2 | A | Wire architecture doc to procurement ZIP | Export includes architecture orientation | procurement-pack-e2e | registry-vs-receipt |
+| mr-0575 | T1 | A | Add architecture doc to TLE export cover | Board PDF includes receipt layer architecture summary | verify-ui-e2e | registry-vs-receipt |
+| mr-0576 | T1 | D | Spec receipt layer isolation fence | Receipt layer does not touch source-of-truth system | spec review | registry-vs-receipt |
+| mr-0577 | T2 | H | Add architecture doc to design-partner workshop | Co-design receipt layer scope with enterprise buyer | manual | registry-vs-receipt |
+| mr-0578 | T1 | A | Add architecture diagram print CSS | Print-grade rendering for committee leave-behind | manual | registry-vs-receipt |
+| mr-0579 | T1 | A | Wire architecture doc to /copilot/ page | /copilot/ architecture references receipt layer scope | verify-gtm | registry-vs-receipt |
+| mr-0580 | T2 | A | Add architecture doc smoke test to regression | Architecture doc present in CI check | pytest | registry-vs-receipt |
+| mr-0581 | T1 | D | Publish Copilot GTM complement guide on /copilot/ | Technical buyer sees /copilot/ as receipt layer | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0582 | T1 | A | Wire Copilot complement guide to /enterprise/ | Enterprise buyer sees Copilot + complement path | verify-ui-e2e | registry-vs-receipt |
+| mr-0583 | T2 | D | Add Copilot complement FAQ (10 questions) | Common Copilot integration questions deflected | verify-gtm-ops-docs | registry-vs-receipt |
+| mr-0584 | T1 | A | Wire Copilot complement guide to procurement ZIP | Bundle includes /copilot/ complement orientation | procurement-pack-e2e | registry-vs-receipt |
+| mr-0585 | T1 | A | Add Copilot complement to TLE export cover | Board PDF shows /copilot/ scope | verify-ui-e2e | registry-vs-receipt |
+| mr-0586 | T2 | A | Add Copilot 5-minute demo path from /copilot/ | 5-minute demo accessible from complement guide | verify-gtm | registry-vs-receipt |
+| mr-0587 | T1 | H | Add Copilot complement to design-partner workshop | Co-design receipt scope with enterprise buyer | manual | registry-vs-receipt |
+| mr-0588 | T1 | A | Spec Copilot complement honest-posture note | No replace-your-copilot language on any page | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0589 | T2 | D | Add Copilot complement to MSP channel playbook | MSP partners trained on /copilot/ attach | verify-gtm | registry-vs-receipt |
+| mr-0590 | T1 | A | Add Copilot complement smoke test to regression | Complement guide present in CI check | pytest | registry-vs-receipt |
+| mr-0591 | T1 | A | Run verify-ui-e2e green on all Phase 6 attach routes | Complement and receipt layer routes pass | verify-ui-e2e | registry-vs-receipt |
+| mr-0592 | T2 | A | Pass verify-no-asf-coherence on Phase 6 surfaces | No rip-replace or brand names in copy | verify-no-asf-coherence | registry-vs-receipt |
+| mr-0593 | T1 | A | Pass audit_final_system_lock on Phase 6 HTML | Receipt layer copy RPAA-safe confirmed | audit_final_system_lock | registry-vs-receipt |
+| mr-0594 | T1 | A | Pass test_public_gtm_alignment on Phase 6 routes | Complement positioning copy alignment green | pytest | registry-vs-receipt |
+| mr-0595 | T2 | A | Run procurement-pack-e2e with complement bundle | ITSM + registry + receipt in export package | procurement-pack-e2e | registry-vs-receipt |
+| mr-0596 | T1 | A | Run smoke_bank_grade on Phase 6 enterprise routes | Bank-grade CSS on complement pages | smoke_bank_grade | registry-vs-receipt |
+| mr-0597 | T1 | H | Log Phase 6 enterprise deal influenced in ops log | Revenue-influenced metric recorded | manual | registry-vs-receipt |
+| mr-0598 | T2 | H | Record first ITSM attach design-partner session | Receipt layer complement validated in real meeting | manual | registry-vs-receipt |
+| mr-0599 | T1 | D | Phase 6 retrospective doc (1 page) | Complement learnings feed Phase 7 | docs review | registry-vs-receipt |
+| mr-0600 | T1 | H | Sign off Phase 6 → unlock Phase 7 picks | mr-0600 ready in GTM_NEXT | manual | registry-vs-receipt |
 
 ## Phase 7 — ComplianceCode — OSCAL + live controls (mr-0601–mr-0700)
 
@@ -788,106 +788,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0601 | T1 | A | Ship OSCAL export stub in ZIP — P7 item 001 | buyer-visible on www for oscal export stub in zip | verify-gtm | continuous-controls |
-| mr-0602 | T2 | A | Lock OSCAL export stub in ZIP — P7 item 002 | committee artifact ready for oscal export stub in zip | verify-ui-e2e | continuous-controls |
-| mr-0603 | T1 | D | Wire OSCAL export stub in ZIP — P7 item 003 | regression gate green for oscal export stub in zip | verify-gtm-ops-docs | continuous-controls |
-| mr-0604 | T1 | A | Extend OSCAL export stub in ZIP — P7 item 004 | procurement self-serve path for oscal export stub in zip | verify-ui-endpoints | continuous-controls |
-| mr-0605 | T2 | A | Document OSCAL export stub in ZIP — P7 item 005 | console parity achieved for oscal export stub in zip | plan-with-no-asf-verify | continuous-controls |
-| mr-0606 | T1 | A | Verify OSCAL export stub in ZIP — P7 item 006 | doc linked from funnel for oscal export stub in zip | verify-no-asf-coherence | continuous-controls |
-| mr-0607 | T1 | D | Polish OSCAL export stub in ZIP — P7 item 007 | API export verified for oscal export stub in zip | pytest | continuous-controls |
-| mr-0608 | T2 | A | Automate OSCAL export stub in ZIP — P7 item 008 | manual review passed for oscal export stub in zip | manual | continuous-controls |
-| mr-0609 | T1 | A | Elevate OSCAL export stub in ZIP — P7 item 009 | e2e flow green for oscal export stub in zip | procurement-pack-e2e | continuous-controls |
-| mr-0610 | T1 | H | Harden OSCAL export stub in ZIP — P7 item 010 | GTM signal captured for oscal export stub in zip | verify-msb-partner-openapi | continuous-controls |
-| mr-0611 | T2 | A | Ship API-first evidence manifest — P7 item 011 | buyer-visible on www for api-first evidence manifest | verify-gtm | continuous-controls |
-| mr-0612 | T1 | A | Lock API-first evidence manifest — P7 item 012 | committee artifact ready for api-first evidence manifest | verify-ui-e2e | continuous-controls |
-| mr-0613 | T1 | D | Wire API-first evidence manifest — P7 item 013 | regression gate green for api-first evidence manifest | verify-gtm-ops-docs | continuous-controls |
-| mr-0614 | T2 | A | Extend API-first evidence manifest — P7 item 014 | procurement self-serve path for api-first evidence manifest | verify-ui-endpoints | continuous-controls |
-| mr-0615 | T1 | A | Document API-first evidence manifest — P7 item 015 | console parity achieved for api-first evidence manifest | plan-with-no-asf-verify | continuous-controls |
-| mr-0616 | T1 | A | Verify API-first evidence manifest — P7 item 016 | doc linked from funnel for api-first evidence manifest | verify-no-asf-coherence | continuous-controls |
-| mr-0617 | T2 | D | Polish API-first evidence manifest — P7 item 017 | API export verified for api-first evidence manifest | pytest | continuous-controls |
-| mr-0618 | T1 | A | Automate API-first evidence manifest — P7 item 018 | manual review passed for api-first evidence manifest | manual | continuous-controls |
-| mr-0619 | T1 | A | Elevate API-first evidence manifest — P7 item 019 | e2e flow green for api-first evidence manifest | procurement-pack-e2e | continuous-controls |
-| mr-0620 | T2 | H | Harden API-first evidence manifest — P7 item 020 | GTM signal captured for api-first evidence manifest | verify-msb-partner-openapi | continuous-controls |
-| mr-0621 | T1 | A | Ship Self-updating paperwork spec — P7 item 021 | buyer-visible on www for self-updating paperwork spec | verify-gtm | continuous-controls |
-| mr-0622 | T1 | A | Lock Self-updating paperwork spec — P7 item 022 | committee artifact ready for self-updating paperwork spec | verify-ui-e2e | continuous-controls |
-| mr-0623 | T2 | D | Wire Self-updating paperwork spec — P7 item 023 | regression gate green for self-updating paperwork spec | verify-gtm-ops-docs | continuous-controls |
-| mr-0624 | T1 | A | Extend Self-updating paperwork spec — P7 item 024 | procurement self-serve path for self-updating paperwork spec | verify-ui-endpoints | continuous-controls |
-| mr-0625 | T1 | A | Document Self-updating paperwork spec — P7 item 025 | console parity achieved for self-updating paperwork spec | plan-with-no-asf-verify | continuous-controls |
-| mr-0626 | T2 | A | Verify Self-updating paperwork spec — P7 item 026 | doc linked from funnel for self-updating paperwork spec | verify-no-asf-coherence | continuous-controls |
-| mr-0627 | T1 | D | Polish Self-updating paperwork spec — P7 item 027 | API export verified for self-updating paperwork spec | pytest | continuous-controls |
-| mr-0628 | T1 | A | Automate Self-updating paperwork spec — P7 item 028 | manual review passed for self-updating paperwork spec | manual | continuous-controls |
-| mr-0629 | T2 | A | Elevate Self-updating paperwork spec — P7 item 029 | e2e flow green for self-updating paperwork spec | procurement-pack-e2e | continuous-controls |
-| mr-0630 | T1 | H | Harden Self-updating paperwork spec — P7 item 030 | GTM signal captured for self-updating paperwork spec | verify-msb-partner-openapi | continuous-controls |
-| mr-0631 | T1 | A | Ship Live control state endpoint — P7 item 031 | buyer-visible on www for live control state endpoint | verify-gtm | continuous-controls |
-| mr-0632 | T2 | A | Lock Live control state endpoint — P7 item 032 | committee artifact ready for live control state endpoint | verify-ui-e2e | continuous-controls |
-| mr-0633 | T1 | D | Wire Live control state endpoint — P7 item 033 | regression gate green for live control state endpoint | verify-gtm-ops-docs | continuous-controls |
-| mr-0634 | T1 | A | Extend Live control state endpoint — P7 item 034 | procurement self-serve path for live control state endpoint | verify-ui-endpoints | continuous-controls |
-| mr-0635 | T2 | A | Document Live control state endpoint — P7 item 035 | console parity achieved for live control state endpoint | plan-with-no-asf-verify | continuous-controls |
-| mr-0636 | T1 | A | Verify Live control state endpoint — P7 item 036 | doc linked from funnel for live control state endpoint | verify-no-asf-coherence | continuous-controls |
-| mr-0637 | T1 | D | Polish Live control state endpoint — P7 item 037 | API export verified for live control state endpoint | pytest | continuous-controls |
-| mr-0638 | T2 | A | Automate Live control state endpoint — P7 item 038 | manual review passed for live control state endpoint | manual | continuous-controls |
-| mr-0639 | T1 | A | Elevate Live control state endpoint — P7 item 039 | e2e flow green for live control state endpoint | procurement-pack-e2e | continuous-controls |
-| mr-0640 | T1 | H | Harden Live control state endpoint — P7 item 040 | GTM signal captured for live control state endpoint | verify-msb-partner-openapi | continuous-controls |
-| mr-0641 | T2 | A | Ship CCM dashboard orientation — P7 item 041 | buyer-visible on www for ccm dashboard orientation | verify-gtm | continuous-controls |
-| mr-0642 | T1 | A | Lock CCM dashboard orientation — P7 item 042 | committee artifact ready for ccm dashboard orientation | verify-ui-e2e | continuous-controls |
-| mr-0643 | T1 | D | Wire CCM dashboard orientation — P7 item 043 | regression gate green for ccm dashboard orientation | verify-gtm-ops-docs | continuous-controls |
-| mr-0644 | T2 | A | Extend CCM dashboard orientation — P7 item 044 | procurement self-serve path for ccm dashboard orientation | verify-ui-endpoints | continuous-controls |
-| mr-0645 | T1 | A | Document CCM dashboard orientation — P7 item 045 | console parity achieved for ccm dashboard orientation | plan-with-no-asf-verify | continuous-controls |
-| mr-0646 | T1 | A | Verify CCM dashboard orientation — P7 item 046 | doc linked from funnel for ccm dashboard orientation | verify-no-asf-coherence | continuous-controls |
-| mr-0647 | T2 | D | Polish CCM dashboard orientation — P7 item 047 | API export verified for ccm dashboard orientation | pytest | continuous-controls |
-| mr-0648 | T1 | A | Automate CCM dashboard orientation — P7 item 048 | manual review passed for ccm dashboard orientation | manual | continuous-controls |
-| mr-0649 | T1 | A | Elevate CCM dashboard orientation — P7 item 049 | e2e flow green for ccm dashboard orientation | procurement-pack-e2e | continuous-controls |
-| mr-0650 | T2 | H | Harden CCM dashboard orientation — P7 item 050 | GTM signal captured for ccm dashboard orientation | verify-msb-partner-openapi | continuous-controls |
-| mr-0651 | T1 | A | Ship 90% faster cert narrative fence — P7 item 051 | buyer-visible on www for 90% faster cert narrative fence | verify-gtm | continuous-controls |
-| mr-0652 | T1 | A | Lock 90% faster cert narrative fence — P7 item 052 | committee artifact ready for 90% faster cert narrative fence | verify-ui-e2e | continuous-controls |
-| mr-0653 | T2 | D | Wire 90% faster cert narrative fence — P7 item 053 | regression gate green for 90% faster cert narrative fence | verify-gtm-ops-docs | continuous-controls |
-| mr-0654 | T1 | A | Extend 90% faster cert narrative fence — P7 item 054 | procurement self-serve path for 90% faster cert narrative fence | verify-ui-endpoints | continuous-controls |
-| mr-0655 | T1 | A | Document 90% faster cert narrative fence — P7 item 055 | console parity achieved for 90% faster cert narrative fence | plan-with-no-asf-verify | continuous-controls |
-| mr-0656 | T2 | A | Verify 90% faster cert narrative fence — P7 item 056 | doc linked from funnel for 90% faster cert narrative fence | verify-no-asf-coherence | continuous-controls |
-| mr-0657 | T1 | D | Polish 90% faster cert narrative fence — P7 item 057 | API export verified for 90% faster cert narrative fence | pytest | continuous-controls |
-| mr-0658 | T1 | A | Automate 90% faster cert narrative fence — P7 item 058 | manual review passed for 90% faster cert narrative fence | manual | continuous-controls |
-| mr-0659 | T2 | A | Elevate 90% faster cert narrative fence — P7 item 059 | e2e flow green for 90% faster cert narrative fence | procurement-pack-e2e | continuous-controls |
-| mr-0660 | T1 | H | Harden 90% faster cert narrative fence — P7 item 060 | GTM signal captured for 90% faster cert narrative fence | verify-msb-partner-openapi | continuous-controls |
-| mr-0661 | T1 | A | Ship 60% audit-prep automation target — P7 item 061 | buyer-visible on www for 60% audit-prep automation target | verify-gtm | continuous-controls |
-| mr-0662 | T2 | A | Lock 60% audit-prep automation target — P7 item 062 | committee artifact ready for 60% audit-prep automation target | verify-ui-e2e | continuous-controls |
-| mr-0663 | T1 | D | Wire 60% audit-prep automation target — P7 item 063 | regression gate green for 60% audit-prep automation target | verify-gtm-ops-docs | continuous-controls |
-| mr-0664 | T1 | A | Extend 60% audit-prep automation target — P7 item 064 | procurement self-serve path for 60% audit-prep automation target | verify-ui-endpoints | continuous-controls |
-| mr-0665 | T2 | A | Document 60% audit-prep automation target — P7 item 065 | console parity achieved for 60% audit-prep automation target | plan-with-no-asf-verify | continuous-controls |
-| mr-0666 | T1 | A | Verify 60% audit-prep automation target — P7 item 066 | doc linked from funnel for 60% audit-prep automation target | verify-no-asf-coherence | continuous-controls |
-| mr-0667 | T1 | D | Polish 60% audit-prep automation target — P7 item 067 | API export verified for 60% audit-prep automation target | pytest | continuous-controls |
-| mr-0668 | T2 | A | Automate 60% audit-prep automation target — P7 item 068 | manual review passed for 60% audit-prep automation target | manual | continuous-controls |
-| mr-0669 | T1 | A | Elevate 60% audit-prep automation target — P7 item 069 | e2e flow green for 60% audit-prep automation target | procurement-pack-e2e | continuous-controls |
-| mr-0670 | T1 | H | Harden 60% audit-prep automation target — P7 item 070 | GTM signal captured for 60% audit-prep automation target | verify-msb-partner-openapi | continuous-controls |
-| mr-0671 | T2 | A | Ship Compliance-as-code README — P7 item 071 | buyer-visible on www for compliance-as-code readme | verify-gtm | continuous-controls |
-| mr-0672 | T1 | A | Lock Compliance-as-code README — P7 item 072 | committee artifact ready for compliance-as-code readme | verify-ui-e2e | continuous-controls |
-| mr-0673 | T1 | D | Wire Compliance-as-code README — P7 item 073 | regression gate green for compliance-as-code readme | verify-gtm-ops-docs | continuous-controls |
-| mr-0674 | T2 | A | Extend Compliance-as-code README — P7 item 074 | procurement self-serve path for compliance-as-code readme | verify-ui-endpoints | continuous-controls |
-| mr-0675 | T1 | A | Document Compliance-as-code README — P7 item 075 | console parity achieved for compliance-as-code readme | plan-with-no-asf-verify | continuous-controls |
-| mr-0676 | T1 | A | Verify Compliance-as-code README — P7 item 076 | doc linked from funnel for compliance-as-code readme | verify-no-asf-coherence | continuous-controls |
-| mr-0677 | T2 | D | Polish Compliance-as-code README — P7 item 077 | API export verified for compliance-as-code readme | pytest | continuous-controls |
-| mr-0678 | T1 | A | Automate Compliance-as-code README — P7 item 078 | manual review passed for compliance-as-code readme | manual | continuous-controls |
-| mr-0679 | T1 | A | Elevate Compliance-as-code README — P7 item 079 | e2e flow green for compliance-as-code readme | procurement-pack-e2e | continuous-controls |
-| mr-0680 | T2 | H | Harden Compliance-as-code README — P7 item 080 | GTM signal captured for compliance-as-code readme | verify-msb-partner-openapi | continuous-controls |
-| mr-0681 | T1 | A | Ship Federal OSCAL crosswalk — P7 item 081 | buyer-visible on www for federal oscal crosswalk | verify-gtm | continuous-controls |
-| mr-0682 | T1 | A | Lock Federal OSCAL crosswalk — P7 item 082 | committee artifact ready for federal oscal crosswalk | verify-ui-e2e | continuous-controls |
-| mr-0683 | T2 | D | Wire Federal OSCAL crosswalk — P7 item 083 | regression gate green for federal oscal crosswalk | verify-gtm-ops-docs | continuous-controls |
-| mr-0684 | T1 | A | Extend Federal OSCAL crosswalk — P7 item 084 | procurement self-serve path for federal oscal crosswalk | verify-ui-endpoints | continuous-controls |
-| mr-0685 | T1 | A | Document Federal OSCAL crosswalk — P7 item 085 | console parity achieved for federal oscal crosswalk | plan-with-no-asf-verify | continuous-controls |
-| mr-0686 | T2 | A | Verify Federal OSCAL crosswalk — P7 item 086 | doc linked from funnel for federal oscal crosswalk | verify-no-asf-coherence | continuous-controls |
-| mr-0687 | T1 | D | Polish Federal OSCAL crosswalk — P7 item 087 | API export verified for federal oscal crosswalk | pytest | continuous-controls |
-| mr-0688 | T1 | A | Automate Federal OSCAL crosswalk — P7 item 088 | manual review passed for federal oscal crosswalk | manual | continuous-controls |
-| mr-0689 | T2 | A | Elevate Federal OSCAL crosswalk — P7 item 089 | e2e flow green for federal oscal crosswalk | procurement-pack-e2e | continuous-controls |
-| mr-0690 | T1 | H | Harden Federal OSCAL crosswalk — P7 item 090 | GTM signal captured for federal oscal crosswalk | verify-msb-partner-openapi | continuous-controls |
-| mr-0691 | T1 | A | Ship Phase 7 CCM verify — P7 item 091 | buyer-visible on www for phase 7 ccm verify | verify-gtm | continuous-controls |
-| mr-0692 | T2 | A | Lock Phase 7 CCM verify — P7 item 092 | committee artifact ready for phase 7 ccm verify | verify-ui-e2e | continuous-controls |
-| mr-0693 | T1 | D | Wire Phase 7 CCM verify — P7 item 093 | regression gate green for phase 7 ccm verify | verify-gtm-ops-docs | continuous-controls |
-| mr-0694 | T1 | A | Extend Phase 7 CCM verify — P7 item 094 | procurement self-serve path for phase 7 ccm verify | verify-ui-endpoints | continuous-controls |
-| mr-0695 | T2 | A | Document Phase 7 CCM verify — P7 item 095 | console parity achieved for phase 7 ccm verify | plan-with-no-asf-verify | continuous-controls |
-| mr-0696 | T1 | A | Verify Phase 7 CCM verify — P7 item 096 | doc linked from funnel for phase 7 ccm verify | verify-no-asf-coherence | continuous-controls |
-| mr-0697 | T1 | D | Polish Phase 7 CCM verify — P7 item 097 | API export verified for phase 7 ccm verify | pytest | continuous-controls |
-| mr-0698 | T2 | A | Automate Phase 7 CCM verify — P7 item 098 | manual review passed for phase 7 ccm verify | manual | continuous-controls |
-| mr-0699 | T1 | A | Elevate Phase 7 CCM verify — P7 item 099 | e2e flow green for phase 7 ccm verify | procurement-pack-e2e | continuous-controls |
-| mr-0700 | T1 | H | Harden Phase 7 CCM verify — P7 item 100 | GTM signal captured for phase 7 ccm verify | verify-msb-partner-openapi | continuous-controls |
+| mr-0601 | T1 | A | Ship OSCAL export stub in procurement ZIP | Federal buyer gets OSCAL-formatted evidence bundle | procurement-pack-e2e | continuous-controls |
+| mr-0602 | T2 | A | Add OSCAL orientation row to /federal/ page | Federal reviewer finds OSCAL posture quickly | verify-gtm | continuous-controls |
+| mr-0603 | T1 | A | Wire OSCAL to framework grid in /trust-center/ | OSCAL row in trust center framework section | verify-ui-e2e | continuous-controls |
+| mr-0604 | T1 | D | Publish OSCAL FAQ (10 questions) | Common OSCAL questions deflected pre-call | verify-gtm-ops-docs | continuous-controls |
+| mr-0605 | T2 | A | Add OSCAL honest-posture note (OSCAL-compatible not OSCAL-native) | OSCAL-compatible language only — no native claim | verify-no-asf-coherence | continuous-controls |
+| mr-0606 | T1 | A | Wire OSCAL to TLE export cover | Board PDF shows OSCAL scope | verify-ui-e2e | continuous-controls |
+| mr-0607 | T1 | A | Add OSCAL note to FedRAMP orientation row | FedRAMP path references OSCAL export | verify-gtm | continuous-controls |
+| mr-0608 | T2 | D | Spec OSCAL component definition stub | Component definition fields for federal reviewer | spec review | continuous-controls |
+| mr-0609 | T1 | A | Add OSCAL design-partner path CTA on /federal/ | Federal buyer shapes OSCAL evidence fields | verify-gtm | continuous-controls |
+| mr-0610 | T1 | A | Add OSCAL smoke test to regression | OSCAL stub present in export bundle CI check | pytest | continuous-controls |
+| mr-0611 | T2 | D | Publish API-first evidence manifest on /trust-center/ | Technical buyer sees API-accessible evidence layer | verify-gtm-ops-docs | continuous-controls |
+| mr-0612 | T1 | A | Wire API manifest to /trust-center/ orientation | Self-serve API evidence path from trust surface | verify-gtm | continuous-controls |
+| mr-0613 | T1 | D | Add API manifest FAQ (10 questions) | Common API evidence questions deflected pre-call | verify-gtm-ops-docs | continuous-controls |
+| mr-0614 | T2 | A | Wire API manifest to procurement ZIP | Export includes API manifest orientation | procurement-pack-e2e | continuous-controls |
+| mr-0615 | T1 | A | Add API manifest to TLE export cover | Board PDF shows API-accessible evidence scope | verify-ui-e2e | continuous-controls |
+| mr-0616 | T1 | A | Spec OpenAPI evidence endpoint definition | Evidence endpoint documented in OpenAPI spec | verify-ui-endpoints | continuous-controls |
+| mr-0617 | T2 | A | Add API manifest to /federal/ lane | Federal API-first evidence path documented | verify-gtm | continuous-controls |
+| mr-0618 | T1 | H | Add API manifest to design-partner workshop | Co-design API evidence fields with enterprise buyer | manual | continuous-controls |
+| mr-0619 | T1 | A | Wire API manifest to OSCAL export | OSCAL export accessible via API endpoint | verify-ui-endpoints | continuous-controls |
+| mr-0620 | T2 | A | Add API manifest smoke test to regression | API manifest present in /trust-center/ CI check | pytest | continuous-controls |
+| mr-0621 | T1 | D | Spec self-updating evidence paperwork for TLE bundle | Board PDF updates when evidence refreshes | spec review | continuous-controls |
+| mr-0622 | T1 | A | Add self-updating copy block to /trust-center/ | Never-stale evidence posture copy above fold | verify-gtm | continuous-controls |
+| mr-0623 | T2 | A | Wire self-updating to last_verified_at badge | Self-updating evidence tied to freshness signal | verify-ui-e2e | continuous-controls |
+| mr-0624 | T1 | D | Publish self-updating FAQ (5 questions) | Common self-updating questions deflected | verify-gtm-ops-docs | continuous-controls |
+| mr-0625 | T1 | A | Add self-updating to TLE export cover | Board PDF shows self-updating evidence claim | verify-ui-e2e | continuous-controls |
+| mr-0626 | T2 | A | Wire self-updating to procurement ZIP | Bundle includes self-updating orientation | procurement-pack-e2e | continuous-controls |
+| mr-0627 | T1 | A | Add self-updating honest-posture note | Metadata freshness — not raw log freshness | verify-no-asf-coherence | continuous-controls |
+| mr-0628 | T1 | D | Spec self-updating trigger on connector ingest | Evidence PDF regenerates on sync completion | spec review | continuous-controls |
+| mr-0629 | T2 | H | Add self-updating to design-partner workshop | Co-design update cadence with enterprise buyer | manual | continuous-controls |
+| mr-0630 | T1 | A | Add self-updating smoke test to regression | Update trigger asserted in CI gate | pytest | continuous-controls |
+| mr-0631 | T1 | D | Spec live control state endpoint for console | Ops team queries control state in real time | spec review | continuous-controls |
+| mr-0632 | T2 | A | Add live control state orientation row to /trust-center/ | Security reviewer finds live state posture | verify-gtm | continuous-controls |
+| mr-0633 | T1 | A | Wire live control state to connector freshness UI | Live state badge updates with connector sync | verify-ui-e2e | continuous-controls |
+| mr-0634 | T1 | D | Publish live control state FAQ (10 questions) | Common live controls questions deflected | verify-gtm-ops-docs | continuous-controls |
+| mr-0635 | T2 | A | Add live control state to TLE export cover | Board PDF shows live-state snapshot at export | verify-ui-e2e | continuous-controls |
+| mr-0636 | T1 | A | Wire live control state to procurement ZIP | Export includes live state snapshot at bundle time | procurement-pack-e2e | continuous-controls |
+| mr-0637 | T1 | A | Spec live control state health endpoint for ops | Ops paged when state endpoint unhealthy | verify-ui-endpoints | continuous-controls |
+| mr-0638 | T2 | A | Add live control state to OSCAL export | OSCAL component definition includes live state | verify-ui-e2e | continuous-controls |
+| mr-0639 | T1 | H | Add live control state to design-partner workshop | Co-design live state fields with enterprise buyer | manual | continuous-controls |
+| mr-0640 | T1 | A | Add live control state smoke test to regression | Live state endpoint asserted in CI gate | pytest | continuous-controls |
+| mr-0641 | T2 | A | Add CCM orientation row to /trust-center/ | Continuous controls monitoring scope visible | verify-gtm | continuous-controls |
+| mr-0642 | T1 | D | Publish CCM FAQ (10 questions) | Common CCM questions deflected pre-call | verify-gtm-ops-docs | continuous-controls |
+| mr-0643 | T1 | A | Wire CCM orientation to framework grid | CCM row linked to ISO 27001 and SOC2 rows | verify-ui-e2e | continuous-controls |
+| mr-0644 | T2 | A | Add CCM to TLE export cover | Board PDF shows CCM scope | verify-ui-e2e | continuous-controls |
+| mr-0645 | T1 | A | Wire CCM to procurement ZIP | Export includes CCM orientation | procurement-pack-e2e | continuous-controls |
+| mr-0646 | T1 | A | Add CCM honest-posture note (monitoring-not-auditing) | CCM is evidence layer — not audit opinion | verify-no-asf-coherence | continuous-controls |
+| mr-0647 | T2 | D | Spec CCM dashboard access tier (read-only view) | Read-only CCM view for compliance team | spec review | continuous-controls |
+| mr-0648 | T1 | H | Add CCM to design-partner workshop | Co-design CCM evidence fields with enterprise buyer | manual | continuous-controls |
+| mr-0649 | T1 | A | Wire CCM to OSCAL export component definition | CCM state included in OSCAL component | verify-ui-e2e | continuous-controls |
+| mr-0650 | T2 | A | Add CCM smoke test to regression | CCM orientation rows present in CI check | pytest | continuous-controls |
+| mr-0651 | T1 | D | Publish 60% audit-prep reduction honest narrative | Market bar matched via export automation posture | verify-gtm | continuous-controls |
+| mr-0652 | T1 | A | Wire audit prep narrative to /trust-center/ | Self-serve automation posture from trust surface | verify-gtm | continuous-controls |
+| mr-0653 | T2 | D | Add audit prep FAQ (10 questions) | Common audit prep questions deflected pre-call | verify-gtm-ops-docs | continuous-controls |
+| mr-0654 | T1 | A | Add audit prep honest-posture fence | 60% is benchmark posture — not a guaranteed outcome | verify-no-asf-coherence | continuous-controls |
+| mr-0655 | T1 | A | Wire audit prep narrative to TLE export | Board PDF shows audit prep automation scope | verify-ui-e2e | continuous-controls |
+| mr-0656 | T2 | A | Wire audit prep to procurement ZIP | Export includes audit prep automation orientation | procurement-pack-e2e | continuous-controls |
+| mr-0657 | T1 | D | Spec audit prep time-to-evidence metric | Time from connector sync to board PDF measured | spec review | continuous-controls |
+| mr-0658 | T1 | H | Add audit prep narrative to design-partner workshop | Co-design audit prep automation scope | manual | continuous-controls |
+| mr-0659 | T2 | A | Wire audit prep narrative to /federal/ lane | Federal audit prep path documented on /federal/ | verify-gtm | continuous-controls |
+| mr-0660 | T1 | A | Add audit prep smoke test to regression | Automation narrative present in /trust-center/ CI check | pytest | continuous-controls |
+| mr-0661 | T1 | A | Add federal OSCAL crosswalk table to /federal/ page | Federal reviewer maps OSCAL to applicable controls | verify-gtm | continuous-controls |
+| mr-0662 | T2 | A | Wire OSCAL crosswalk to NIST 800-53 orientation | NIST 800-53 rows reference OSCAL export | verify-ui-e2e | continuous-controls |
+| mr-0663 | T1 | D | Publish OSCAL crosswalk FAQ (10 questions) | Common federal OSCAL questions deflected | verify-gtm-ops-docs | continuous-controls |
+| mr-0664 | T1 | A | Wire OSCAL crosswalk to procurement ZIP federal bundle | Federal export includes OSCAL crosswalk | procurement-pack-e2e | continuous-controls |
+| mr-0665 | T2 | A | Add OSCAL crosswalk to TLE federal cover | Federal board PDF shows OSCAL scope | verify-ui-e2e | continuous-controls |
+| mr-0666 | T1 | A | Add OSCAL crosswalk honest-posture note | OSCAL-compatible not OSCAL-certified language | verify-no-asf-coherence | continuous-controls |
+| mr-0667 | T1 | D | Spec OSCAL crosswalk update cadence | Crosswalk refreshed when NIST publishes new revision | spec review | continuous-controls |
+| mr-0668 | T2 | H | Add OSCAL crosswalk to design-partner workshop | Federal buyer co-designs OSCAL evidence fields | manual | continuous-controls |
+| mr-0669 | T1 | A | Wire OSCAL crosswalk to /bank-pilot/ page | FRFI-oriented OSCAL posture on bank-pilot | verify-gtm | continuous-controls |
+| mr-0670 | T1 | A | Add OSCAL crosswalk smoke test to regression | OSCAL crosswalk rows present in /federal/ CI check | pytest | continuous-controls |
+| mr-0671 | T2 | D | Publish compliance-as-code README on /trust-center/ | Developer buyer sees code-first evidence posture | verify-gtm-ops-docs | continuous-controls |
+| mr-0672 | T1 | A | Wire compliance-as-code README to /trust-center/ | Self-serve developer path from trust surface | verify-gtm | continuous-controls |
+| mr-0673 | T1 | A | Add compliance YAML schema stub to procurement ZIP | Legal team sees machine-readable control fields | procurement-pack-e2e | continuous-controls |
+| mr-0674 | T2 | D | Add compliance-as-code FAQ (5 questions) | Developer buyer questions deflected pre-call | verify-gtm-ops-docs | continuous-controls |
+| mr-0675 | T1 | A | Wire compliance YAML to OSCAL export | Compliance YAML maps to OSCAL component definition | verify-ui-e2e | continuous-controls |
+| mr-0676 | T1 | A | Add compliance-as-code to TLE export bundle | Board PDF accompanied by compliance YAML | verify-ui-e2e | continuous-controls |
+| mr-0677 | T2 | D | Spec compliance YAML version control fence | Policy YAML tracked in Git with signed commits | spec review | continuous-controls |
+| mr-0678 | T1 | H | Add compliance-as-code to design-partner workshop | Co-design compliance YAML schema with enterprise buyer | manual | continuous-controls |
+| mr-0679 | T1 | A | Wire compliance-as-code to governance-as-code README | Compliance and governance YAML schemas linked | verify-gtm | continuous-controls |
+| mr-0680 | T2 | A | Add compliance-as-code smoke test to regression | YAML schema valid in CI gate | pytest | continuous-controls |
+| mr-0681 | T1 | D | Spec audit-prep time metric for enterprise reporting | Time-to-evidence measured and logged per deployment | spec review | continuous-controls |
+| mr-0682 | T1 | H | Add audit-prep metric to GTM ops log | Time-to-evidence delta recorded per deal | manual | continuous-controls |
+| mr-0683 | T2 | A | Wire audit-prep metric to TLE export cover | Board PDF shows time-to-evidence benchmark | verify-ui-e2e | continuous-controls |
+| mr-0684 | T1 | A | Add audit-prep metric honest-posture fence | Benchmark-not-guarantee language on metric copy | verify-no-asf-coherence | continuous-controls |
+| mr-0685 | T1 | D | Publish audit-prep metric FAQ (5 questions) | Common metric questions deflected pre-call | verify-gtm | continuous-controls |
+| mr-0686 | T2 | A | Wire audit-prep metric to procurement ZIP | Export includes time-to-evidence benchmark | procurement-pack-e2e | continuous-controls |
+| mr-0687 | T1 | D | Spec audit-prep baseline measurement methodology | Methodology for time-to-evidence documented | spec review | continuous-controls |
+| mr-0688 | T1 | H | Add audit-prep metric to design-partner workshop | Co-design time-to-evidence baseline with enterprise buyer | manual | continuous-controls |
+| mr-0689 | T2 | A | Wire audit-prep metric to trust center copy | Up-to-60%-faster posture on /trust-center/ | verify-gtm | continuous-controls |
+| mr-0690 | T1 | A | Add audit-prep metric smoke test to regression | Metric language present in /trust-center/ CI check | pytest | continuous-controls |
+| mr-0691 | T1 | A | Run verify-ui-e2e green on all Phase 7 compliance routes | OSCAL + CCM + federal routes pass | verify-ui-e2e | continuous-controls |
+| mr-0692 | T2 | A | Pass verify-no-asf-coherence on Phase 7 surfaces | No brand names or false certification claims in copy | verify-no-asf-coherence | continuous-controls |
+| mr-0693 | T1 | A | Pass audit_final_system_lock on Phase 7 HTML | Compliance copy RPAA-safe confirmed | audit_final_system_lock | continuous-controls |
+| mr-0694 | T1 | A | Pass test_public_gtm_alignment on Phase 7 routes | CCM copy alignment green | pytest | continuous-controls |
+| mr-0695 | T2 | A | Run procurement-pack-e2e with compliance bundle | OSCAL + CCM + live controls in export | procurement-pack-e2e | continuous-controls |
+| mr-0696 | T1 | A | Run smoke_bank_grade on Phase 7 federal routes | Bank-grade CSS on compliance pages | smoke_bank_grade | continuous-controls |
+| mr-0697 | T1 | H | Log Phase 7 federal deal influenced in ops log | Revenue-influenced metric recorded | manual | continuous-controls |
+| mr-0698 | T2 | H | Record first OSCAL export in federal design-partner | OSCAL bundle used in federal meeting validated | manual | continuous-controls |
+| mr-0699 | T1 | D | Phase 7 retrospective doc (1 page) | CCM learnings feed Phase 8 | docs review | continuous-controls |
+| mr-0700 | T1 | H | Sign off Phase 7 → unlock Phase 8 picks | mr-0700 ready in GTM_NEXT | manual | continuous-controls |
 
 ## Phase 8 — AgenticGRC — workflow agents (R-011 fenced) (mr-0701–mr-0800)
 
@@ -904,106 +904,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0701 | T1 | A | Ship Questionnaire deflection agent spec — P8 item 001 | buyer-visible on www for questionnaire deflection agent spec | verify-gtm | agentic-grc |
-| mr-0702 | T2 | A | Lock Questionnaire deflection agent spec — P8 item 002 | committee artifact ready for questionnaire deflection agent spec | verify-ui-e2e | agentic-grc |
-| mr-0703 | T1 | D | Wire Questionnaire deflection agent spec — P8 item 003 | regression gate green for questionnaire deflection agent spec | verify-gtm-ops-docs | agentic-grc |
-| mr-0704 | T1 | A | Extend Questionnaire deflection agent spec — P8 item 004 | procurement self-serve path for questionnaire deflection agent spec | verify-ui-endpoints | agentic-grc |
-| mr-0705 | T2 | A | Document Questionnaire deflection agent spec — P8 item 005 | console parity achieved for questionnaire deflection agent spec | plan-with-no-asf-verify | agentic-grc |
-| mr-0706 | T1 | A | Verify Questionnaire deflection agent spec — P8 item 006 | doc linked from funnel for questionnaire deflection agent spec | verify-no-asf-coherence | agentic-grc |
-| mr-0707 | T1 | D | Polish Questionnaire deflection agent spec — P8 item 007 | API export verified for questionnaire deflection agent spec | pytest | agentic-grc |
-| mr-0708 | T2 | A | Automate Questionnaire deflection agent spec — P8 item 008 | manual review passed for questionnaire deflection agent spec | manual | agentic-grc |
-| mr-0709 | T1 | A | Elevate Questionnaire deflection agent spec — P8 item 009 | e2e flow green for questionnaire deflection agent spec | procurement-pack-e2e | agentic-grc |
-| mr-0710 | T1 | H | Harden Questionnaire deflection agent spec — P8 item 010 | GTM signal captured for questionnaire deflection agent spec | verify-msb-partner-openapi | agentic-grc |
-| mr-0711 | T2 | A | Ship Policy draft agent (internal) — P8 item 011 | buyer-visible on www for policy draft agent (internal) | verify-gtm | agentic-grc |
-| mr-0712 | T1 | A | Lock Policy draft agent (internal) — P8 item 012 | committee artifact ready for policy draft agent (internal) | verify-ui-e2e | agentic-grc |
-| mr-0713 | T1 | D | Wire Policy draft agent (internal) — P8 item 013 | regression gate green for policy draft agent (internal) | verify-gtm-ops-docs | agentic-grc |
-| mr-0714 | T2 | A | Extend Policy draft agent (internal) — P8 item 014 | procurement self-serve path for policy draft agent (internal) | verify-ui-endpoints | agentic-grc |
-| mr-0715 | T1 | A | Document Policy draft agent (internal) — P8 item 015 | console parity achieved for policy draft agent (internal) | plan-with-no-asf-verify | agentic-grc |
-| mr-0716 | T1 | A | Verify Policy draft agent (internal) — P8 item 016 | doc linked from funnel for policy draft agent (internal) | verify-no-asf-coherence | agentic-grc |
-| mr-0717 | T2 | D | Polish Policy draft agent (internal) — P8 item 017 | API export verified for policy draft agent (internal) | pytest | agentic-grc |
-| mr-0718 | T1 | A | Automate Policy draft agent (internal) — P8 item 018 | manual review passed for policy draft agent (internal) | manual | agentic-grc |
-| mr-0719 | T1 | A | Elevate Policy draft agent (internal) — P8 item 019 | e2e flow green for policy draft agent (internal) | procurement-pack-e2e | agentic-grc |
-| mr-0720 | T2 | H | Harden Policy draft agent (internal) — P8 item 020 | GTM signal captured for policy draft agent (internal) | verify-msb-partner-openapi | agentic-grc |
-| mr-0721 | T1 | A | Ship TPRM evidence gap agent — P8 item 021 | buyer-visible on www for tprm evidence gap agent | verify-gtm | agentic-grc |
-| mr-0722 | T1 | A | Lock TPRM evidence gap agent — P8 item 022 | committee artifact ready for tprm evidence gap agent | verify-ui-e2e | agentic-grc |
-| mr-0723 | T2 | D | Wire TPRM evidence gap agent — P8 item 023 | regression gate green for tprm evidence gap agent | verify-gtm-ops-docs | agentic-grc |
-| mr-0724 | T1 | A | Extend TPRM evidence gap agent — P8 item 024 | procurement self-serve path for tprm evidence gap agent | verify-ui-endpoints | agentic-grc |
-| mr-0725 | T1 | A | Document TPRM evidence gap agent — P8 item 025 | console parity achieved for tprm evidence gap agent | plan-with-no-asf-verify | agentic-grc |
-| mr-0726 | T2 | A | Verify TPRM evidence gap agent — P8 item 026 | doc linked from funnel for tprm evidence gap agent | verify-no-asf-coherence | agentic-grc |
-| mr-0727 | T1 | D | Polish TPRM evidence gap agent — P8 item 027 | API export verified for tprm evidence gap agent | pytest | agentic-grc |
-| mr-0728 | T1 | A | Automate TPRM evidence gap agent — P8 item 028 | manual review passed for tprm evidence gap agent | manual | agentic-grc |
-| mr-0729 | T2 | A | Elevate TPRM evidence gap agent — P8 item 029 | e2e flow green for tprm evidence gap agent | procurement-pack-e2e | agentic-grc |
-| mr-0730 | T1 | H | Harden TPRM evidence gap agent — P8 item 030 | GTM signal captured for tprm evidence gap agent | verify-msb-partner-openapi | agentic-grc |
-| mr-0731 | T1 | A | Ship Evidence ingest agent stub — P8 item 031 | buyer-visible on www for evidence ingest agent stub | verify-gtm | agentic-grc |
-| mr-0732 | T2 | A | Lock Evidence ingest agent stub — P8 item 032 | committee artifact ready for evidence ingest agent stub | verify-ui-e2e | agentic-grc |
-| mr-0733 | T1 | D | Wire Evidence ingest agent stub — P8 item 033 | regression gate green for evidence ingest agent stub | verify-gtm-ops-docs | agentic-grc |
-| mr-0734 | T1 | A | Extend Evidence ingest agent stub — P8 item 034 | procurement self-serve path for evidence ingest agent stub | verify-ui-endpoints | agentic-grc |
-| mr-0735 | T2 | A | Document Evidence ingest agent stub — P8 item 035 | console parity achieved for evidence ingest agent stub | plan-with-no-asf-verify | agentic-grc |
-| mr-0736 | T1 | A | Verify Evidence ingest agent stub — P8 item 036 | doc linked from funnel for evidence ingest agent stub | verify-no-asf-coherence | agentic-grc |
-| mr-0737 | T1 | D | Polish Evidence ingest agent stub — P8 item 037 | API export verified for evidence ingest agent stub | pytest | agentic-grc |
-| mr-0738 | T2 | A | Automate Evidence ingest agent stub — P8 item 038 | manual review passed for evidence ingest agent stub | manual | agentic-grc |
-| mr-0739 | T1 | A | Elevate Evidence ingest agent stub — P8 item 039 | e2e flow green for evidence ingest agent stub | procurement-pack-e2e | agentic-grc |
-| mr-0740 | T1 | H | Harden Evidence ingest agent stub — P8 item 040 | GTM signal captured for evidence ingest agent stub | verify-msb-partner-openapi | agentic-grc |
-| mr-0741 | T2 | A | Ship Framework mapper agent — P8 item 041 | buyer-visible on www for framework mapper agent | verify-gtm | agentic-grc |
-| mr-0742 | T1 | A | Lock Framework mapper agent — P8 item 042 | committee artifact ready for framework mapper agent | verify-ui-e2e | agentic-grc |
-| mr-0743 | T1 | D | Wire Framework mapper agent — P8 item 043 | regression gate green for framework mapper agent | verify-gtm-ops-docs | agentic-grc |
-| mr-0744 | T2 | A | Extend Framework mapper agent — P8 item 044 | procurement self-serve path for framework mapper agent | verify-ui-endpoints | agentic-grc |
-| mr-0745 | T1 | A | Document Framework mapper agent — P8 item 045 | console parity achieved for framework mapper agent | plan-with-no-asf-verify | agentic-grc |
-| mr-0746 | T1 | A | Verify Framework mapper agent — P8 item 046 | doc linked from funnel for framework mapper agent | verify-no-asf-coherence | agentic-grc |
-| mr-0747 | T2 | D | Polish Framework mapper agent — P8 item 047 | API export verified for framework mapper agent | pytest | agentic-grc |
-| mr-0748 | T1 | A | Automate Framework mapper agent — P8 item 048 | manual review passed for framework mapper agent | manual | agentic-grc |
-| mr-0749 | T1 | A | Elevate Framework mapper agent — P8 item 049 | e2e flow green for framework mapper agent | procurement-pack-e2e | agentic-grc |
-| mr-0750 | T2 | H | Harden Framework mapper agent — P8 item 050 | GTM signal captured for framework mapper agent | verify-msb-partner-openapi | agentic-grc |
-| mr-0751 | T1 | A | Ship Remediation task agent spec — P8 item 051 | buyer-visible on www for remediation task agent spec | verify-gtm | agentic-grc |
-| mr-0752 | T1 | A | Lock Remediation task agent spec — P8 item 052 | committee artifact ready for remediation task agent spec | verify-ui-e2e | agentic-grc |
-| mr-0753 | T2 | D | Wire Remediation task agent spec — P8 item 053 | regression gate green for remediation task agent spec | verify-gtm-ops-docs | agentic-grc |
-| mr-0754 | T1 | A | Extend Remediation task agent spec — P8 item 054 | procurement self-serve path for remediation task agent spec | verify-ui-endpoints | agentic-grc |
-| mr-0755 | T1 | A | Document Remediation task agent spec — P8 item 055 | console parity achieved for remediation task agent spec | plan-with-no-asf-verify | agentic-grc |
-| mr-0756 | T2 | A | Verify Remediation task agent spec — P8 item 056 | doc linked from funnel for remediation task agent spec | verify-no-asf-coherence | agentic-grc |
-| mr-0757 | T1 | D | Polish Remediation task agent spec — P8 item 057 | API export verified for remediation task agent spec | pytest | agentic-grc |
-| mr-0758 | T1 | A | Automate Remediation task agent spec — P8 item 058 | manual review passed for remediation task agent spec | manual | agentic-grc |
-| mr-0759 | T2 | A | Elevate Remediation task agent spec — P8 item 059 | e2e flow green for remediation task agent spec | procurement-pack-e2e | agentic-grc |
-| mr-0760 | T1 | H | Harden Remediation task agent spec — P8 item 060 | GTM signal captured for remediation task agent spec | verify-msb-partner-openapi | agentic-grc |
-| mr-0761 | T1 | A | Ship Hub-only outreach fence (R-011) — P8 item 061 | buyer-visible on www for hub-only outreach fence (r-011) | verify-gtm | agentic-grc |
-| mr-0762 | T2 | A | Lock Hub-only outreach fence (R-011) — P8 item 062 | committee artifact ready for hub-only outreach fence (r-011) | verify-ui-e2e | agentic-grc |
-| mr-0763 | T1 | D | Wire Hub-only outreach fence (R-011) — P8 item 063 | regression gate green for hub-only outreach fence (r-011) | verify-gtm-ops-docs | agentic-grc |
-| mr-0764 | T1 | A | Extend Hub-only outreach fence (R-011) — P8 item 064 | procurement self-serve path for hub-only outreach fence (r-011) | verify-ui-endpoints | agentic-grc |
-| mr-0765 | T2 | A | Document Hub-only outreach fence (R-011) — P8 item 065 | console parity achieved for hub-only outreach fence (r-011) | plan-with-no-asf-verify | agentic-grc |
-| mr-0766 | T1 | A | Verify Hub-only outreach fence (R-011) — P8 item 066 | doc linked from funnel for hub-only outreach fence (r-011) | verify-no-asf-coherence | agentic-grc |
-| mr-0767 | T1 | D | Polish Hub-only outreach fence (R-011) — P8 item 067 | API export verified for hub-only outreach fence (r-011) | pytest | agentic-grc |
-| mr-0768 | T2 | A | Automate Hub-only outreach fence (R-011) — P8 item 068 | manual review passed for hub-only outreach fence (r-011) | manual | agentic-grc |
-| mr-0769 | T1 | A | Elevate Hub-only outreach fence (R-011) — P8 item 069 | e2e flow green for hub-only outreach fence (r-011) | procurement-pack-e2e | agentic-grc |
-| mr-0770 | T1 | H | Harden Hub-only outreach fence (R-011) — P8 item 070 | GTM signal captured for hub-only outreach fence (r-011) | verify-msb-partner-openapi | agentic-grc |
-| mr-0771 | T2 | A | Ship Agent roster doc (16→46 roadmap) — P8 item 071 | buyer-visible on www for agent roster doc (16→46 roadmap) | verify-gtm | agentic-grc |
-| mr-0772 | T1 | A | Lock Agent roster doc (16→46 roadmap) — P8 item 072 | committee artifact ready for agent roster doc (16→46 roadmap) | verify-ui-e2e | agentic-grc |
-| mr-0773 | T1 | D | Wire Agent roster doc (16→46 roadmap) — P8 item 073 | regression gate green for agent roster doc (16→46 roadmap) | verify-gtm-ops-docs | agentic-grc |
-| mr-0774 | T2 | A | Extend Agent roster doc (16→46 roadmap) — P8 item 074 | procurement self-serve path for agent roster doc (16→46 roadmap) | verify-ui-endpoints | agentic-grc |
-| mr-0775 | T1 | A | Document Agent roster doc (16→46 roadmap) — P8 item 075 | console parity achieved for agent roster doc (16→46 roadmap) | plan-with-no-asf-verify | agentic-grc |
-| mr-0776 | T1 | A | Verify Agent roster doc (16→46 roadmap) — P8 item 076 | doc linked from funnel for agent roster doc (16→46 roadmap) | verify-no-asf-coherence | agentic-grc |
-| mr-0777 | T2 | D | Polish Agent roster doc (16→46 roadmap) — P8 item 077 | API export verified for agent roster doc (16→46 roadmap) | pytest | agentic-grc |
-| mr-0778 | T1 | A | Automate Agent roster doc (16→46 roadmap) — P8 item 078 | manual review passed for agent roster doc (16→46 roadmap) | manual | agentic-grc |
-| mr-0779 | T1 | A | Elevate Agent roster doc (16→46 roadmap) — P8 item 079 | e2e flow green for agent roster doc (16→46 roadmap) | procurement-pack-e2e | agentic-grc |
-| mr-0780 | T2 | H | Harden Agent roster doc (16→46 roadmap) — P8 item 080 | GTM signal captured for agent roster doc (16→46 roadmap) | verify-msb-partner-openapi | agentic-grc |
-| mr-0781 | T1 | A | Ship GRC hours-saved metric spec — P8 item 081 | buyer-visible on www for grc hours-saved metric spec | verify-gtm | agentic-grc |
-| mr-0782 | T1 | A | Lock GRC hours-saved metric spec — P8 item 082 | committee artifact ready for grc hours-saved metric spec | verify-ui-e2e | agentic-grc |
-| mr-0783 | T2 | D | Wire GRC hours-saved metric spec — P8 item 083 | regression gate green for grc hours-saved metric spec | verify-gtm-ops-docs | agentic-grc |
-| mr-0784 | T1 | A | Extend GRC hours-saved metric spec — P8 item 084 | procurement self-serve path for grc hours-saved metric spec | verify-ui-endpoints | agentic-grc |
-| mr-0785 | T1 | A | Document GRC hours-saved metric spec — P8 item 085 | console parity achieved for grc hours-saved metric spec | plan-with-no-asf-verify | agentic-grc |
-| mr-0786 | T2 | A | Verify GRC hours-saved metric spec — P8 item 086 | doc linked from funnel for grc hours-saved metric spec | verify-no-asf-coherence | agentic-grc |
-| mr-0787 | T1 | D | Polish GRC hours-saved metric spec — P8 item 087 | API export verified for grc hours-saved metric spec | pytest | agentic-grc |
-| mr-0788 | T1 | A | Automate GRC hours-saved metric spec — P8 item 088 | manual review passed for grc hours-saved metric spec | manual | agentic-grc |
-| mr-0789 | T2 | A | Elevate GRC hours-saved metric spec — P8 item 089 | e2e flow green for grc hours-saved metric spec | procurement-pack-e2e | agentic-grc |
-| mr-0790 | T1 | H | Harden GRC hours-saved metric spec — P8 item 090 | GTM signal captured for grc hours-saved metric spec | verify-msb-partner-openapi | agentic-grc |
-| mr-0791 | T1 | A | Ship Phase 8 agentic verify — P8 item 091 | buyer-visible on www for phase 8 agentic verify | verify-gtm | agentic-grc |
-| mr-0792 | T2 | A | Lock Phase 8 agentic verify — P8 item 092 | committee artifact ready for phase 8 agentic verify | verify-ui-e2e | agentic-grc |
-| mr-0793 | T1 | D | Wire Phase 8 agentic verify — P8 item 093 | regression gate green for phase 8 agentic verify | verify-gtm-ops-docs | agentic-grc |
-| mr-0794 | T1 | A | Extend Phase 8 agentic verify — P8 item 094 | procurement self-serve path for phase 8 agentic verify | verify-ui-endpoints | agentic-grc |
-| mr-0795 | T2 | A | Document Phase 8 agentic verify — P8 item 095 | console parity achieved for phase 8 agentic verify | plan-with-no-asf-verify | agentic-grc |
-| mr-0796 | T1 | A | Verify Phase 8 agentic verify — P8 item 096 | doc linked from funnel for phase 8 agentic verify | verify-no-asf-coherence | agentic-grc |
-| mr-0797 | T1 | D | Polish Phase 8 agentic verify — P8 item 097 | API export verified for phase 8 agentic verify | pytest | agentic-grc |
-| mr-0798 | T2 | A | Automate Phase 8 agentic verify — P8 item 098 | manual review passed for phase 8 agentic verify | manual | agentic-grc |
-| mr-0799 | T1 | A | Elevate Phase 8 agentic verify — P8 item 099 | e2e flow green for phase 8 agentic verify | procurement-pack-e2e | agentic-grc |
-| mr-0800 | T1 | H | Harden Phase 8 agentic verify — P8 item 100 | GTM signal captured for phase 8 agentic verify | verify-msb-partner-openapi | agentic-grc |
+| mr-0701 | T1 | H | Spec questionnaire deflection agent (internal Hub only) | GRC team gets auto-draft answers for security portals | spec review | agentic-grc |
+| mr-0702 | T2 | A | Add questionnaire deflection orientation to /trust-center/ | Buyers see questionnaire deflection posture | verify-gtm | agentic-grc |
+| mr-0703 | T1 | D | Wire questionnaire deflection to trust FAQ | Trust FAQ deflects questionnaires pre-call | verify-gtm-ops-docs | agentic-grc |
+| mr-0704 | T1 | D | Publish questionnaire deflection FAQ (10 questions) | Common questionnaire questions deflected | verify-gtm-ops-docs | agentic-grc |
+| mr-0705 | T2 | A | Add questionnaire deflection to TLE export | Board PDF shows deflection scope | verify-ui-e2e | agentic-grc |
+| mr-0706 | T1 | A | Wire questionnaire deflection to procurement ZIP | Export includes deflection orientation | procurement-pack-e2e | agentic-grc |
+| mr-0707 | T1 | H | Spec questionnaire agent R-011 Hub fence | Deflection agent runs in Hub only — no external outreach | spec review | agentic-grc |
+| mr-0708 | T2 | H | Add questionnaire deflection metric to GTM ops log | Questionnaires deflected count logged per quarter | manual | agentic-grc |
+| mr-0709 | T1 | H | Wire questionnaire deflection to design-partner workshop | Co-design deflection scope with enterprise buyer | manual | agentic-grc |
+| mr-0710 | T1 | A | Add questionnaire deflection smoke test to regression | Deflection paths present in /trust-center/ CI check | pytest | agentic-grc |
+| mr-0711 | T2 | H | Spec policy draft agent for internal Hub | GRC team gets auto-drafted policy stubs | spec review | agentic-grc |
+| mr-0712 | T1 | H | Add policy agent R-011 fence to spec | Agent outputs reviewed before any external use | spec review | agentic-grc |
+| mr-0713 | T1 | A | Wire policy draft output to TLE receipt | Draft policy triggers receipt on human approval | verify-ui-e2e | agentic-grc |
+| mr-0714 | T2 | H | Spec policy draft field map for EU AI Act | Agent drafts EU AI Act policy sections | spec review | agentic-grc |
+| mr-0715 | T1 | D | Add policy draft agent FAQ (5 questions) | Common policy agent questions deflected pre-call | verify-gtm | agentic-grc |
+| mr-0716 | T1 | H | Wire policy draft to design-partner workshop | Enterprise buyer co-designs policy agent fields | manual | agentic-grc |
+| mr-0717 | T2 | H | Spec policy draft agent approval workflow | Human review required before receipt minted | spec review | agentic-grc |
+| mr-0718 | T1 | D | Add policy draft agent to agent roster doc | Agent #2 in 16→46 roadmap listed | docs review | agentic-grc |
+| mr-0719 | T1 | A | Wire policy draft agent to governance-as-code YAML | Policy draft output maps to YAML schema | verify-ui-e2e | agentic-grc |
+| mr-0720 | T2 | A | Add policy draft agent smoke test to regression | Agent spec present in CI gate | pytest | agentic-grc |
+| mr-0721 | T1 | H | Spec TPRM evidence gap agent for Hub | Third-party risk gaps auto-surfaced in Hub | spec review | agentic-grc |
+| mr-0722 | T1 | H | Add TPRM agent R-011 fence to spec | TPRM agent runs in Hub only — no external push | spec review | agentic-grc |
+| mr-0723 | T2 | A | Wire TPRM agent output to TLE receipt | Gap closure triggers receipt creation | verify-ui-e2e | agentic-grc |
+| mr-0724 | T1 | A | Add TPRM evidence gap orientation to /trust-center/ | Third-party risk posture visible to reviewers | verify-gtm | agentic-grc |
+| mr-0725 | T1 | D | Publish TPRM evidence FAQ (10 questions) | Common TPRM questions deflected pre-call | verify-gtm-ops-docs | agentic-grc |
+| mr-0726 | T2 | A | Wire TPRM evidence to procurement ZIP | Export includes TPRM orientation | procurement-pack-e2e | agentic-grc |
+| mr-0727 | T1 | D | Add TPRM agent to agent roster doc | Agent #3 in 16→46 roadmap listed | docs review | agentic-grc |
+| mr-0728 | T1 | A | Wire TPRM agent to connector evidence index | TPRM gaps surfaced from connector metadata | verify-ui-e2e | agentic-grc |
+| mr-0729 | T2 | H | Add TPRM agent to design-partner workshop | Enterprise buyer co-designs TPRM evidence scope | manual | agentic-grc |
+| mr-0730 | T1 | A | Add TPRM agent smoke test to regression | TPRM agent spec present in CI gate | pytest | agentic-grc |
+| mr-0731 | T1 | H | Spec evidence ingest agent for Hub | Auto-ingest from connected source on schedule | spec review | agentic-grc |
+| mr-0732 | T2 | H | Add evidence ingest agent R-011 fence | Ingest agent runs in Hub only — no external push | spec review | agentic-grc |
+| mr-0733 | T1 | A | Wire evidence ingest to connector freshness UI | Ingest agent updates last_sync on /trust-center/ | verify-ui-e2e | agentic-grc |
+| mr-0734 | T1 | D | Add evidence ingest FAQ (5 questions) | Common ingest questions deflected pre-call | verify-gtm | agentic-grc |
+| mr-0735 | T2 | A | Wire evidence ingest to TLE receipt creation | Ingest completion triggers receipt in console | verify-ui-e2e | agentic-grc |
+| mr-0736 | T1 | D | Add evidence ingest to agent roster doc | Agent #4 in 16→46 roadmap listed | docs review | agentic-grc |
+| mr-0737 | T1 | H | Spec evidence ingest error handling and ops paging | Ingest failure paged to ops before trust center shows stale | spec review | agentic-grc |
+| mr-0738 | T2 | A | Wire evidence ingest to governance YAML | Ingest populates YAML field values | verify-ui-e2e | agentic-grc |
+| mr-0739 | T1 | H | Add evidence ingest to design-partner workshop | Co-design ingest trigger cadence with enterprise buyer | manual | agentic-grc |
+| mr-0740 | T1 | A | Add evidence ingest smoke test to regression | Ingest agent spec present in CI gate | pytest | agentic-grc |
+| mr-0741 | T2 | H | Spec framework mapper agent for Hub | Agent maps new controls to existing frameworks | spec review | agentic-grc |
+| mr-0742 | T1 | H | Add framework mapper R-011 fence | Mapper output reviewed before /trust-center/ updates | spec review | agentic-grc |
+| mr-0743 | T1 | A | Wire framework mapper to multi-framework grid | Mapper output populates new framework rows | verify-ui-e2e | agentic-grc |
+| mr-0744 | T2 | D | Add framework mapper FAQ (5 questions) | Common framework mapper questions deflected | verify-gtm | agentic-grc |
+| mr-0745 | T1 | A | Wire framework mapper to governance YAML | Mapper populates cross-framework YAML fields | verify-ui-e2e | agentic-grc |
+| mr-0746 | T1 | D | Add framework mapper to agent roster doc | Agent #5 in 16→46 roadmap listed | docs review | agentic-grc |
+| mr-0747 | T2 | A | Wire framework mapper to EU AI Act crosswalk | Mapper handles EU AI Act and ISO 42001 overlap | verify-ui-e2e | agentic-grc |
+| mr-0748 | T1 | H | Add framework mapper to design-partner workshop | Enterprise buyer co-designs framework mapping rules | manual | agentic-grc |
+| mr-0749 | T1 | H | Spec framework mapper accuracy gate | Mapper output requires human sign-off above threshold | spec review | agentic-grc |
+| mr-0750 | T2 | A | Add framework mapper smoke test to regression | Mapper spec present in CI gate | pytest | agentic-grc |
+| mr-0751 | T1 | H | Spec remediation task agent for Hub | Gaps auto-assigned as tasks to GRC team in Hub | spec review | agentic-grc |
+| mr-0752 | T1 | H | Add remediation agent R-011 fence | Task agent runs in Hub — assignments not external | spec review | agentic-grc |
+| mr-0753 | T2 | A | Wire remediation task to TLE receipt | Remediation completion triggers receipt | verify-ui-e2e | agentic-grc |
+| mr-0754 | T1 | D | Add remediation task FAQ (5 questions) | Common remediation questions deflected pre-call | verify-gtm | agentic-grc |
+| mr-0755 | T1 | A | Wire remediation task to ITSM attach pattern | Remediation tasks can sync to ITSM ticket | verify-ui-e2e | agentic-grc |
+| mr-0756 | T2 | D | Add remediation task to agent roster doc | Agent #6 in 16→46 roadmap listed | docs review | agentic-grc |
+| mr-0757 | T1 | H | Spec remediation task priority field (high/medium/low) | Priority field on task assignments in Hub | spec review | agentic-grc |
+| mr-0758 | T1 | A | Wire remediation task to CCM dashboard | Open remediations visible in CCM view | verify-ui-e2e | agentic-grc |
+| mr-0759 | T2 | H | Add remediation task to design-partner workshop | Co-design task assignment rules with enterprise buyer | manual | agentic-grc |
+| mr-0760 | T1 | A | Add remediation task smoke test to regression | Remediation agent spec present in CI gate | pytest | agentic-grc |
+| mr-0761 | T1 | H | Document R-011 outreach fence in agent roster | All agents: Hub internal only — no external outreach | docs review | agentic-grc |
+| mr-0762 | T2 | A | Add R-011 fence callout to /copilot/ page | Hub fence visible to technical buyers | verify-gtm | agentic-grc |
+| mr-0763 | T1 | A | Wire R-011 fence to verify-no-asf-coherence CI gate | CI check catches external outreach language | pytest | agentic-grc |
+| mr-0764 | T1 | D | Publish R-011 FAQ (5 questions) | Common Hub fence questions deflected pre-call | verify-gtm-ops-docs | agentic-grc |
+| mr-0765 | T2 | H | Add R-011 fence to design-partner workshop brief | Enterprise buyer understands Hub-only agent scope | manual | agentic-grc |
+| mr-0766 | T1 | H | Spec R-011 fence technical enforcement pattern | Agent outbound blocked at network layer in Hub | spec review | agentic-grc |
+| mr-0767 | T1 | A | Add R-011 fence to TLE export cover | Board PDF states Hub-only agent scope | verify-ui-e2e | agentic-grc |
+| mr-0768 | T2 | A | Wire R-011 fence to procurement ZIP README | Bundle opens with Hub-only agent statement | procurement-pack-e2e | agentic-grc |
+| mr-0769 | T1 | A | Add R-011 fence audit check to regression | Outreach pattern blocked verified in CI | pytest | agentic-grc |
+| mr-0770 | T1 | H | Sign off R-011 fence before any agent ships | No agent deployed without Hub-fence sign-off | manual | agentic-grc |
+| mr-0771 | T2 | H | Publish agent roster doc in Hub (internal only) | 16 initial agents documented with expansion roadmap | docs review | agentic-grc |
+| mr-0772 | T1 | H | Add agent roster to design-partner workshop brief | Enterprise buyer sees 16→46 agent roadmap | manual | agentic-grc |
+| mr-0773 | T1 | A | Wire agent roster to /trust-center/ architecture | /trust-center/ references agent scope without roster details | verify-gtm | agentic-grc |
+| mr-0774 | T2 | D | Add agent expansion FAQ (5 questions) | Common agent expansion questions deflected | verify-gtm | agentic-grc |
+| mr-0775 | T1 | H | Spec agent graduation criteria (internal → external) | Criteria for agent moving from Hub to trust surface | spec review | agentic-grc |
+| mr-0776 | T1 | H | Add hours-saved metric to agent roster doc | GRC time saved per agent documented in roster | docs review | agentic-grc |
+| mr-0777 | T2 | H | Wire agent roster to GTM ops log | Agents deployed count logged per quarter | manual | agentic-grc |
+| mr-0778 | T1 | H | Spec agent versioning pattern (RID-linked) | Agent version tied to TLE receipt | spec review | agentic-grc |
+| mr-0779 | T1 | H | Add agent roster milestone to Phase 8 close | 16-agent target validated before GTM promotion | manual | agentic-grc |
+| mr-0780 | T2 | A | Add agent roster smoke test to regression | Roster structure valid in CI gate | pytest | agentic-grc |
+| mr-0781 | T1 | H | Spec GRC hours-saved metric methodology | Hours saved per workflow documented | spec review | agentic-grc |
+| mr-0782 | T1 | H | Add hours-saved metric to GTM ops log | Time-to-completion delta per GRC task logged | manual | agentic-grc |
+| mr-0783 | T2 | A | Wire hours-saved metric to TLE export cover | Board PDF shows GRC hours saved posture | verify-ui-e2e | agentic-grc |
+| mr-0784 | T1 | A | Add hours-saved honest-posture fence | Up-to-70%-less-manual-GRC posture — not guaranteed | verify-no-asf-coherence | agentic-grc |
+| mr-0785 | T1 | D | Publish hours-saved FAQ (5 questions) | Common GRC efficiency questions deflected | verify-gtm | agentic-grc |
+| mr-0786 | T2 | A | Wire hours-saved metric to procurement ZIP | Export includes GRC efficiency posture claim | procurement-pack-e2e | agentic-grc |
+| mr-0787 | T1 | H | Spec hours-saved baseline measurement method | Before/after methodology documented | spec review | agentic-grc |
+| mr-0788 | T1 | H | Add hours-saved metric to design-partner workshop | Co-design efficiency measurement with enterprise buyer | manual | agentic-grc |
+| mr-0789 | T2 | H | Wire hours-saved to agent roster doc | Per-agent hours saved tracked in roster | docs review | agentic-grc |
+| mr-0790 | T1 | A | Add hours-saved smoke test to regression | Metric language present in /trust-center/ CI check | pytest | agentic-grc |
+| mr-0791 | T1 | A | Run verify-ui-e2e green on all Phase 8 agentic routes | /copilot/ + agent-facing routes pass | verify-ui-e2e | agentic-grc |
+| mr-0792 | T2 | A | Pass verify-no-asf-coherence on Phase 8 surfaces | No external outreach or brand names in copy | verify-no-asf-coherence | agentic-grc |
+| mr-0793 | T1 | A | Pass audit_final_system_lock on Phase 8 HTML | Agentic copy RPAA-safe confirmed | audit_final_system_lock | agentic-grc |
+| mr-0794 | T1 | A | Pass test_public_gtm_alignment on Phase 8 routes | Agentic GRC copy alignment green | pytest | agentic-grc |
+| mr-0795 | T2 | A | Run procurement-pack-e2e with agentic bundle | Questionnaire deflection + Hub fence in export | procurement-pack-e2e | agentic-grc |
+| mr-0796 | T1 | A | Run smoke_bank_grade on Phase 8 routes | Bank-grade CSS on agentic pages | smoke_bank_grade | agentic-grc |
+| mr-0797 | T1 | H | Log Phase 8 agentic deal influenced in ops log | Revenue-influenced metric recorded | manual | agentic-grc |
+| mr-0798 | T2 | H | Record first questionnaire deflection with agent | Agent deflection validated in real deal | manual | agentic-grc |
+| mr-0799 | T1 | D | Phase 8 retrospective doc (1 page) | Agentic GRC learnings feed Phase 9 | docs review | agentic-grc |
+| mr-0800 | T1 | H | Sign off Phase 8 → unlock Phase 9 picks | mr-0800 ready in GTM_NEXT | manual | agentic-grc |
 
 ## Phase 9 — EnterpriseGRC — regulated board reporting (mr-0801–mr-0900)
 
@@ -1020,106 +1020,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0801 | T1 | A | Ship Enterprise risk register export — P9 item 001 | buyer-visible on www for enterprise risk register export | verify-gtm | board-reporting |
-| mr-0802 | T2 | A | Lock Enterprise risk register export — P9 item 002 | committee artifact ready for enterprise risk register export | verify-ui-e2e | board-reporting |
-| mr-0803 | T1 | D | Wire Enterprise risk register export — P9 item 003 | regression gate green for enterprise risk register export | verify-gtm-ops-docs | board-reporting |
-| mr-0804 | T1 | A | Extend Enterprise risk register export — P9 item 004 | procurement self-serve path for enterprise risk register export | verify-ui-endpoints | board-reporting |
-| mr-0805 | T2 | A | Document Enterprise risk register export — P9 item 005 | console parity achieved for enterprise risk register export | plan-with-no-asf-verify | board-reporting |
-| mr-0806 | T1 | A | Verify Enterprise risk register export — P9 item 006 | doc linked from funnel for enterprise risk register export | verify-no-asf-coherence | board-reporting |
-| mr-0807 | T1 | D | Polish Enterprise risk register export — P9 item 007 | API export verified for enterprise risk register export | pytest | board-reporting |
-| mr-0808 | T2 | A | Automate Enterprise risk register export — P9 item 008 | manual review passed for enterprise risk register export | manual | board-reporting |
-| mr-0809 | T1 | A | Elevate Enterprise risk register export — P9 item 009 | e2e flow green for enterprise risk register export | procurement-pack-e2e | board-reporting |
-| mr-0810 | T1 | H | Harden Enterprise risk register export — P9 item 010 | GTM signal captured for enterprise risk register export | verify-msb-partner-openapi | board-reporting |
-| mr-0811 | T2 | A | Ship Regulatory change feed stub — P9 item 011 | buyer-visible on www for regulatory change feed stub | verify-gtm | board-reporting |
-| mr-0812 | T1 | A | Lock Regulatory change feed stub — P9 item 012 | committee artifact ready for regulatory change feed stub | verify-ui-e2e | board-reporting |
-| mr-0813 | T1 | D | Wire Regulatory change feed stub — P9 item 013 | regression gate green for regulatory change feed stub | verify-gtm-ops-docs | board-reporting |
-| mr-0814 | T2 | A | Extend Regulatory change feed stub — P9 item 014 | procurement self-serve path for regulatory change feed stub | verify-ui-endpoints | board-reporting |
-| mr-0815 | T1 | A | Document Regulatory change feed stub — P9 item 015 | console parity achieved for regulatory change feed stub | plan-with-no-asf-verify | board-reporting |
-| mr-0816 | T1 | A | Verify Regulatory change feed stub — P9 item 016 | doc linked from funnel for regulatory change feed stub | verify-no-asf-coherence | board-reporting |
-| mr-0817 | T2 | D | Polish Regulatory change feed stub — P9 item 017 | API export verified for regulatory change feed stub | pytest | board-reporting |
-| mr-0818 | T1 | A | Automate Regulatory change feed stub — P9 item 018 | manual review passed for regulatory change feed stub | manual | board-reporting |
-| mr-0819 | T1 | A | Elevate Regulatory change feed stub — P9 item 019 | e2e flow green for regulatory change feed stub | procurement-pack-e2e | board-reporting |
-| mr-0820 | T2 | H | Harden Regulatory change feed stub — P9 item 020 | GTM signal captured for regulatory change feed stub | verify-msb-partner-openapi | board-reporting |
-| mr-0821 | T1 | A | Ship Executive dashboard spec — P9 item 021 | buyer-visible on www for executive dashboard spec | verify-gtm | board-reporting |
-| mr-0822 | T1 | A | Lock Executive dashboard spec — P9 item 022 | committee artifact ready for executive dashboard spec | verify-ui-e2e | board-reporting |
-| mr-0823 | T2 | D | Wire Executive dashboard spec — P9 item 023 | regression gate green for executive dashboard spec | verify-gtm-ops-docs | board-reporting |
-| mr-0824 | T1 | A | Extend Executive dashboard spec — P9 item 024 | procurement self-serve path for executive dashboard spec | verify-ui-endpoints | board-reporting |
-| mr-0825 | T1 | A | Document Executive dashboard spec — P9 item 025 | console parity achieved for executive dashboard spec | plan-with-no-asf-verify | board-reporting |
-| mr-0826 | T2 | A | Verify Executive dashboard spec — P9 item 026 | doc linked from funnel for executive dashboard spec | verify-no-asf-coherence | board-reporting |
-| mr-0827 | T1 | D | Polish Executive dashboard spec — P9 item 027 | API export verified for executive dashboard spec | pytest | board-reporting |
-| mr-0828 | T1 | A | Automate Executive dashboard spec — P9 item 028 | manual review passed for executive dashboard spec | manual | board-reporting |
-| mr-0829 | T2 | A | Elevate Executive dashboard spec — P9 item 029 | e2e flow green for executive dashboard spec | procurement-pack-e2e | board-reporting |
-| mr-0830 | T1 | H | Harden Executive dashboard spec — P9 item 030 | GTM signal captured for executive dashboard spec | verify-msb-partner-openapi | board-reporting |
-| mr-0831 | T1 | A | Ship Fortune-scale board reporting — P9 item 031 | buyer-visible on www for fortune-scale board reporting | verify-gtm | board-reporting |
-| mr-0832 | T2 | A | Lock Fortune-scale board reporting — P9 item 032 | committee artifact ready for fortune-scale board reporting | verify-ui-e2e | board-reporting |
-| mr-0833 | T1 | D | Wire Fortune-scale board reporting — P9 item 033 | regression gate green for fortune-scale board reporting | verify-gtm-ops-docs | board-reporting |
-| mr-0834 | T1 | A | Extend Fortune-scale board reporting — P9 item 034 | procurement self-serve path for fortune-scale board reporting | verify-ui-endpoints | board-reporting |
-| mr-0835 | T2 | A | Document Fortune-scale board reporting — P9 item 035 | console parity achieved for fortune-scale board reporting | plan-with-no-asf-verify | board-reporting |
-| mr-0836 | T1 | A | Verify Fortune-scale board reporting — P9 item 036 | doc linked from funnel for fortune-scale board reporting | verify-no-asf-coherence | board-reporting |
-| mr-0837 | T1 | D | Polish Fortune-scale board reporting — P9 item 037 | API export verified for fortune-scale board reporting | pytest | board-reporting |
-| mr-0838 | T2 | A | Automate Fortune-scale board reporting — P9 item 038 | manual review passed for fortune-scale board reporting | manual | board-reporting |
-| mr-0839 | T1 | A | Elevate Fortune-scale board reporting — P9 item 039 | e2e flow green for fortune-scale board reporting | procurement-pack-e2e | board-reporting |
-| mr-0840 | T1 | H | Harden Fortune-scale board reporting — P9 item 040 | GTM signal captured for fortune-scale board reporting | verify-msb-partner-openapi | board-reporting |
-| mr-0841 | T2 | A | Ship Banking/insurance ICP copy — P9 item 041 | buyer-visible on www for banking/insurance icp copy | verify-gtm | board-reporting |
-| mr-0842 | T1 | A | Lock Banking/insurance ICP copy — P9 item 042 | committee artifact ready for banking/insurance icp copy | verify-ui-e2e | board-reporting |
-| mr-0843 | T1 | D | Wire Banking/insurance ICP copy — P9 item 043 | regression gate green for banking/insurance icp copy | verify-gtm-ops-docs | board-reporting |
-| mr-0844 | T2 | A | Extend Banking/insurance ICP copy — P9 item 044 | procurement self-serve path for banking/insurance icp copy | verify-ui-endpoints | board-reporting |
-| mr-0845 | T1 | A | Document Banking/insurance ICP copy — P9 item 045 | console parity achieved for banking/insurance icp copy | plan-with-no-asf-verify | board-reporting |
-| mr-0846 | T1 | A | Verify Banking/insurance ICP copy — P9 item 046 | doc linked from funnel for banking/insurance icp copy | verify-no-asf-coherence | board-reporting |
-| mr-0847 | T2 | D | Polish Banking/insurance ICP copy — P9 item 047 | API export verified for banking/insurance icp copy | pytest | board-reporting |
-| mr-0848 | T1 | A | Automate Banking/insurance ICP copy — P9 item 048 | manual review passed for banking/insurance icp copy | manual | board-reporting |
-| mr-0849 | T1 | A | Elevate Banking/insurance ICP copy — P9 item 049 | e2e flow green for banking/insurance icp copy | procurement-pack-e2e | board-reporting |
-| mr-0850 | T2 | H | Harden Banking/insurance ICP copy — P9 item 050 | GTM signal captured for banking/insurance icp copy | verify-msb-partner-openapi | board-reporting |
-| mr-0851 | T1 | A | Ship IDC-style ROI narrative fence — P9 item 051 | buyer-visible on www for idc-style roi narrative fence | verify-gtm | board-reporting |
-| mr-0852 | T1 | A | Lock IDC-style ROI narrative fence — P9 item 052 | committee artifact ready for idc-style roi narrative fence | verify-ui-e2e | board-reporting |
-| mr-0853 | T2 | D | Wire IDC-style ROI narrative fence — P9 item 053 | regression gate green for idc-style roi narrative fence | verify-gtm-ops-docs | board-reporting |
-| mr-0854 | T1 | A | Extend IDC-style ROI narrative fence — P9 item 054 | procurement self-serve path for idc-style roi narrative fence | verify-ui-endpoints | board-reporting |
-| mr-0855 | T1 | A | Document IDC-style ROI narrative fence — P9 item 055 | console parity achieved for idc-style roi narrative fence | plan-with-no-asf-verify | board-reporting |
-| mr-0856 | T2 | A | Verify IDC-style ROI narrative fence — P9 item 056 | doc linked from funnel for idc-style roi narrative fence | verify-no-asf-coherence | board-reporting |
-| mr-0857 | T1 | D | Polish IDC-style ROI narrative fence — P9 item 057 | API export verified for idc-style roi narrative fence | pytest | board-reporting |
-| mr-0858 | T1 | A | Automate IDC-style ROI narrative fence — P9 item 058 | manual review passed for idc-style roi narrative fence | manual | board-reporting |
-| mr-0859 | T2 | A | Elevate IDC-style ROI narrative fence — P9 item 059 | e2e flow green for idc-style roi narrative fence | procurement-pack-e2e | board-reporting |
-| mr-0860 | T1 | H | Harden IDC-style ROI narrative fence — P9 item 060 | GTM signal captured for idc-style roi narrative fence | verify-msb-partner-openapi | board-reporting |
-| mr-0861 | T1 | A | Ship OSFI E-23 committee script — P9 item 061 | buyer-visible on www for osfi e-23 committee script | verify-gtm | board-reporting |
-| mr-0862 | T2 | A | Lock OSFI E-23 committee script — P9 item 062 | committee artifact ready for osfi e-23 committee script | verify-ui-e2e | board-reporting |
-| mr-0863 | T1 | D | Wire OSFI E-23 committee script — P9 item 063 | regression gate green for osfi e-23 committee script | verify-gtm-ops-docs | board-reporting |
-| mr-0864 | T1 | A | Extend OSFI E-23 committee script — P9 item 064 | procurement self-serve path for osfi e-23 committee script | verify-ui-endpoints | board-reporting |
-| mr-0865 | T2 | A | Document OSFI E-23 committee script — P9 item 065 | console parity achieved for osfi e-23 committee script | plan-with-no-asf-verify | board-reporting |
-| mr-0866 | T1 | A | Verify OSFI E-23 committee script — P9 item 066 | doc linked from funnel for osfi e-23 committee script | verify-no-asf-coherence | board-reporting |
-| mr-0867 | T1 | D | Polish OSFI E-23 committee script — P9 item 067 | API export verified for osfi e-23 committee script | pytest | board-reporting |
-| mr-0868 | T2 | A | Automate OSFI E-23 committee script — P9 item 068 | manual review passed for osfi e-23 committee script | manual | board-reporting |
-| mr-0869 | T1 | A | Elevate OSFI E-23 committee script — P9 item 069 | e2e flow green for osfi e-23 committee script | procurement-pack-e2e | board-reporting |
-| mr-0870 | T1 | H | Harden OSFI E-23 committee script — P9 item 070 | GTM signal captured for osfi e-23 committee script | verify-msb-partner-openapi | board-reporting |
-| mr-0871 | T2 | A | Ship FRFI shadow pilot checklist — P9 item 071 | buyer-visible on www for frfi shadow pilot checklist | verify-gtm | board-reporting |
-| mr-0872 | T1 | A | Lock FRFI shadow pilot checklist — P9 item 072 | committee artifact ready for frfi shadow pilot checklist | verify-ui-e2e | board-reporting |
-| mr-0873 | T1 | D | Wire FRFI shadow pilot checklist — P9 item 073 | regression gate green for frfi shadow pilot checklist | verify-gtm-ops-docs | board-reporting |
-| mr-0874 | T2 | A | Extend FRFI shadow pilot checklist — P9 item 074 | procurement self-serve path for frfi shadow pilot checklist | verify-ui-endpoints | board-reporting |
-| mr-0875 | T1 | A | Document FRFI shadow pilot checklist — P9 item 075 | console parity achieved for frfi shadow pilot checklist | plan-with-no-asf-verify | board-reporting |
-| mr-0876 | T1 | A | Verify FRFI shadow pilot checklist — P9 item 076 | doc linked from funnel for frfi shadow pilot checklist | verify-no-asf-coherence | board-reporting |
-| mr-0877 | T2 | D | Polish FRFI shadow pilot checklist — P9 item 077 | API export verified for frfi shadow pilot checklist | pytest | board-reporting |
-| mr-0878 | T1 | A | Automate FRFI shadow pilot checklist — P9 item 078 | manual review passed for frfi shadow pilot checklist | manual | board-reporting |
-| mr-0879 | T1 | A | Elevate FRFI shadow pilot checklist — P9 item 079 | e2e flow green for frfi shadow pilot checklist | procurement-pack-e2e | board-reporting |
-| mr-0880 | T2 | H | Harden FRFI shadow pilot checklist — P9 item 080 | GTM signal captured for frfi shadow pilot checklist | verify-msb-partner-openapi | board-reporting |
-| mr-0881 | T1 | A | Ship Bank pilot proof bar polish — P9 item 081 | buyer-visible on www for bank pilot proof bar polish | verify-gtm | board-reporting |
-| mr-0882 | T1 | A | Lock Bank pilot proof bar polish — P9 item 082 | committee artifact ready for bank pilot proof bar polish | verify-ui-e2e | board-reporting |
-| mr-0883 | T2 | D | Wire Bank pilot proof bar polish — P9 item 083 | regression gate green for bank pilot proof bar polish | verify-gtm-ops-docs | board-reporting |
-| mr-0884 | T1 | A | Extend Bank pilot proof bar polish — P9 item 084 | procurement self-serve path for bank pilot proof bar polish | verify-ui-endpoints | board-reporting |
-| mr-0885 | T1 | A | Document Bank pilot proof bar polish — P9 item 085 | console parity achieved for bank pilot proof bar polish | plan-with-no-asf-verify | board-reporting |
-| mr-0886 | T2 | A | Verify Bank pilot proof bar polish — P9 item 086 | doc linked from funnel for bank pilot proof bar polish | verify-no-asf-coherence | board-reporting |
-| mr-0887 | T1 | D | Polish Bank pilot proof bar polish — P9 item 087 | API export verified for bank pilot proof bar polish | pytest | board-reporting |
-| mr-0888 | T1 | A | Automate Bank pilot proof bar polish — P9 item 088 | manual review passed for bank pilot proof bar polish | manual | board-reporting |
-| mr-0889 | T2 | A | Elevate Bank pilot proof bar polish — P9 item 089 | e2e flow green for bank pilot proof bar polish | procurement-pack-e2e | board-reporting |
-| mr-0890 | T1 | H | Harden Bank pilot proof bar polish — P9 item 090 | GTM signal captured for bank pilot proof bar polish | verify-msb-partner-openapi | board-reporting |
-| mr-0891 | T1 | A | Ship Phase 9 regulated verify — P9 item 091 | buyer-visible on www for phase 9 regulated verify | verify-gtm | board-reporting |
-| mr-0892 | T2 | A | Lock Phase 9 regulated verify — P9 item 092 | committee artifact ready for phase 9 regulated verify | verify-ui-e2e | board-reporting |
-| mr-0893 | T1 | D | Wire Phase 9 regulated verify — P9 item 093 | regression gate green for phase 9 regulated verify | verify-gtm-ops-docs | board-reporting |
-| mr-0894 | T1 | A | Extend Phase 9 regulated verify — P9 item 094 | procurement self-serve path for phase 9 regulated verify | verify-ui-endpoints | board-reporting |
-| mr-0895 | T2 | A | Document Phase 9 regulated verify — P9 item 095 | console parity achieved for phase 9 regulated verify | plan-with-no-asf-verify | board-reporting |
-| mr-0896 | T1 | A | Verify Phase 9 regulated verify — P9 item 096 | doc linked from funnel for phase 9 regulated verify | verify-no-asf-coherence | board-reporting |
-| mr-0897 | T1 | D | Polish Phase 9 regulated verify — P9 item 097 | API export verified for phase 9 regulated verify | pytest | board-reporting |
-| mr-0898 | T2 | A | Automate Phase 9 regulated verify — P9 item 098 | manual review passed for phase 9 regulated verify | manual | board-reporting |
-| mr-0899 | T1 | A | Elevate Phase 9 regulated verify — P9 item 099 | e2e flow green for phase 9 regulated verify | procurement-pack-e2e | board-reporting |
-| mr-0900 | T1 | H | Harden Phase 9 regulated verify — P9 item 100 | GTM signal captured for phase 9 regulated verify | verify-msb-partner-openapi | board-reporting |
+| mr-0801 | T1 | A | Ship enterprise risk register export in TLE bundle | Board-ready risk register artifact for regulated enterprise | verify-ui-e2e | board-reporting |
+| mr-0802 | T2 | A | Add risk register orientation row to /trust-center/ | Enterprise GRC buyer finds risk evidence scope | verify-gtm | board-reporting |
+| mr-0803 | T1 | A | Wire risk register to procurement ZIP | Export bundle includes risk register stub | procurement-pack-e2e | board-reporting |
+| mr-0804 | T1 | D | Publish risk register FAQ (10 questions) | Common enterprise risk questions deflected | verify-gtm-ops-docs | board-reporting |
+| mr-0805 | T2 | D | Spec risk register field metadata-only fence | No sensitive risk content collected in platform | verify-no-asf-coherence | board-reporting |
+| mr-0806 | T1 | A | Add risk register to TLE export cover | Board PDF shows active risk register stub | verify-ui-e2e | board-reporting |
+| mr-0807 | T1 | A | Wire risk register to OSFI E-23 orientation | E-23 technology risk rows map to risk register | verify-ui-e2e | board-reporting |
+| mr-0808 | T2 | A | Add risk register print CSS for committees | Print-grade rendering for board leave-behind | manual | board-reporting |
+| mr-0809 | T1 | H | Add risk register to design-partner workshop | Co-design risk evidence fields with enterprise buyer | manual | board-reporting |
+| mr-0810 | T1 | A | Add risk register smoke test to regression | Risk register fields present in export CI check | pytest | board-reporting |
+| mr-0811 | T2 | D | Spec regulatory change feed for enterprise | New regulations surface in trust center without manual work | spec review | board-reporting |
+| mr-0812 | T1 | A | Add regulatory change feed orientation row to /trust-center/ | Enterprise GRC buyer sees live regulatory tracking | verify-gtm | board-reporting |
+| mr-0813 | T1 | A | Wire regulatory feed to trust center framework grid | New regulation rows added when feed updates | verify-ui-e2e | board-reporting |
+| mr-0814 | T2 | D | Publish regulatory feed FAQ (10 questions) | Common regulatory tracking questions deflected | verify-gtm-ops-docs | board-reporting |
+| mr-0815 | T1 | D | Spec regulatory feed update cadence (weekly) | Feed refreshed weekly with regulation deltas | spec review | board-reporting |
+| mr-0816 | T1 | A | Wire regulatory feed to TLE export cover | Board PDF shows active regulatory change log | verify-ui-e2e | board-reporting |
+| mr-0817 | T2 | A | Add regulatory feed to procurement ZIP | Export includes regulatory change summary | procurement-pack-e2e | board-reporting |
+| mr-0818 | T1 | D | Spec regulatory feed scope (OSFI, EU AI Act, NIST cycle) | Feed covers applicable jurisdiction change cycle | spec review | board-reporting |
+| mr-0819 | T1 | H | Add regulatory feed to design-partner workshop | Co-design feed scope with enterprise buyer | manual | board-reporting |
+| mr-0820 | T2 | A | Add regulatory feed smoke test to regression | Feed structure valid in CI gate | pytest | board-reporting |
+| mr-0821 | T1 | D | Spec executive GRC dashboard for console | C-suite risk posture artifact at a glance | spec review | board-reporting |
+| mr-0822 | T1 | A | Add executive dashboard CTA to /enterprise/ | Executive procurement path visible above fold | verify-gtm | board-reporting |
+| mr-0823 | T2 | A | Wire executive dashboard to TLE export | Board PDF is the portable executive dashboard | verify-ui-e2e | board-reporting |
+| mr-0824 | T1 | D | Add executive dashboard FAQ (10 questions) | C-suite questionnaire deflection doc | verify-gtm-ops-docs | board-reporting |
+| mr-0825 | T1 | D | Spec executive dashboard access tier (board-only view) | Board view separate from ops view | spec review | board-reporting |
+| mr-0826 | T2 | A | Wire executive dashboard to procurement ZIP | Bundle includes executive summary orientation | procurement-pack-e2e | board-reporting |
+| mr-0827 | T1 | A | Add executive dashboard print CSS | Print-grade rendering for board meeting | manual | board-reporting |
+| mr-0828 | T1 | A | Add OSFI E-23 fields to executive dashboard | Technology risk rows in board PDF | verify-ui-e2e | board-reporting |
+| mr-0829 | T2 | H | Add executive dashboard to design-partner workshop | Co-design board PDF fields with enterprise buyer | manual | board-reporting |
+| mr-0830 | T1 | A | Add executive dashboard smoke test to regression | Board PDF fields present in export CI check | pytest | board-reporting |
+| mr-0831 | T1 | A | Ship board reporting artifact template | Leave-behind format for committee review | verify-ui-e2e | board-reporting |
+| mr-0832 | T2 | A | Wire board reporting template to TLE export | Board PDF uses standardized template | verify-ui-e2e | board-reporting |
+| mr-0833 | T1 | A | Add board reporting template to procurement ZIP | Bundle includes board artifact orientation | procurement-pack-e2e | board-reporting |
+| mr-0834 | T1 | D | Publish board reporting FAQ (10 questions) | Common board reporting questions deflected | verify-gtm-ops-docs | board-reporting |
+| mr-0835 | T2 | A | Add board reporting to /trust-center/ CTA | Enterprise buyer sees board artifact path | verify-gtm | board-reporting |
+| mr-0836 | T1 | D | Spec board reporting update cadence (quarterly) | Board PDF regenerated each quarter | spec review | board-reporting |
+| mr-0837 | T1 | A | Add board reporting print CSS | Print-grade rendering for boardroom leave-behind | manual | board-reporting |
+| mr-0838 | T2 | A | Wire board reporting to OSFI E-23 orientation | E-23 fields in board PDF for FRFI buyers | verify-ui-e2e | board-reporting |
+| mr-0839 | T1 | H | Add board reporting to design-partner workshop | Co-design board artifact fields with enterprise buyer | manual | board-reporting |
+| mr-0840 | T1 | A | Add board reporting smoke test to regression | Board artifact structure valid in CI gate | pytest | board-reporting |
+| mr-0841 | T2 | A | Add banking/insurance ICP copy to /bank-pilot/ | FRFI buyer sees institution-specific posture | verify-gtm | board-reporting |
+| mr-0842 | T1 | A | Wire bank-pilot copy to RPAA fence | No RPAA supervision or custody claims in copy | verify-no-asf-coherence | board-reporting |
+| mr-0843 | T1 | A | Add insurance ICP copy to /enterprise/ | Insurance buyer sees regulated ICP posture | verify-gtm | board-reporting |
+| mr-0844 | T2 | D | Publish banking/insurance FAQ (10 questions) | Common regulated ICP questions deflected | verify-gtm-ops-docs | board-reporting |
+| mr-0845 | T1 | A | Add banking/insurance ICP to TLE export cover | Board PDF shows regulated-entity scope | verify-ui-e2e | board-reporting |
+| mr-0846 | T1 | A | Wire banking/insurance ICP to procurement ZIP | Bundle includes regulated-ICP orientation | procurement-pack-e2e | board-reporting |
+| mr-0847 | T2 | A | Add FRFI shadow pilot CTA to /bank-pilot/ | FRFI buyer sees shadow-only pilot path | verify-gtm | board-reporting |
+| mr-0848 | T1 | H | Add banking/insurance ICP to design-partner workshop | Co-design regulated ICP evidence fields | manual | board-reporting |
+| mr-0849 | T1 | A | Wire banking ICP to OSFI E-23 table | E-23 technology risk rows visible to FRFI buyer | verify-ui-e2e | board-reporting |
+| mr-0850 | T2 | A | Add banking/insurance ICP smoke test to regression | RPAA fence verified in CI check | pytest | board-reporting |
+| mr-0851 | T1 | A | Add analyst-style ROI narrative to /enterprise/ | Committee-scan ROI proof points above fold | verify-gtm | board-reporting |
+| mr-0852 | T1 | A | Wire ROI narrative honest-posture fence | Up-to-N%-productivity posture — not guaranteed | verify-no-asf-coherence | board-reporting |
+| mr-0853 | T2 | A | Add ROI narrative to TLE export cover | Board PDF shows ROI posture | verify-ui-e2e | board-reporting |
+| mr-0854 | T1 | D | Publish ROI narrative FAQ (5 questions) | Common ROI questions deflected pre-call | verify-gtm-ops-docs | board-reporting |
+| mr-0855 | T1 | A | Wire ROI narrative to procurement ZIP | Export includes ROI orientation | procurement-pack-e2e | board-reporting |
+| mr-0856 | T2 | D | Spec ROI narrative measurement methodology | Methodology for enterprise productivity claim documented | spec review | board-reporting |
+| mr-0857 | T1 | H | Add ROI narrative to design-partner workshop | Co-design ROI measurement with enterprise buyer | manual | board-reporting |
+| mr-0858 | T1 | A | Wire ROI narrative to board reporting template | Board PDF includes ROI claim in executive summary | verify-ui-e2e | board-reporting |
+| mr-0859 | T2 | D | Add ROI narrative to MSP channel playbook | MSP partners trained on ROI posture | verify-gtm | board-reporting |
+| mr-0860 | T1 | A | Add ROI narrative smoke test to regression | ROI posture language present in CI check | pytest | board-reporting |
+| mr-0861 | T1 | D | Publish OSFI E-23 committee script for /bank-pilot/ | Founder has repeatable FRFI meeting script | verify-gtm-ops-docs | board-reporting |
+| mr-0862 | T2 | A | Add E-23 orientation table to /bank-pilot/ | Technology risk rows visible to FRFI reviewer | verify-gtm | board-reporting |
+| mr-0863 | T1 | A | Wire E-23 table to TLE export cover | Board PDF includes E-23 technology risk fields | verify-ui-e2e | board-reporting |
+| mr-0864 | T1 | D | Add E-23 FAQ (10 questions) | OSFI E-23 questions deflected pre-meeting | verify-gtm-ops-docs | board-reporting |
+| mr-0865 | T2 | A | Wire E-23 to procurement ZIP federal/bank bundle | Export includes E-23 orientation section | procurement-pack-e2e | board-reporting |
+| mr-0866 | T1 | A | Add E-23 RPAA fence to committee script | No supervision or custody claims in script | verify-no-asf-coherence | board-reporting |
+| mr-0867 | T1 | D | Spec E-23 committee script 30-minute agenda | Structured agenda for FRFI committee meeting | spec review | board-reporting |
+| mr-0868 | T2 | A | Add E-23 print CSS for committee leave-behind | Print-grade E-23 table for boardroom | manual | board-reporting |
+| mr-0869 | T1 | A | Wire E-23 to /bank-pilot/ shadow badge | Shadow-only badge reinforces RPAA fence | verify-gtm | board-reporting |
+| mr-0870 | T1 | A | Add E-23 committee script smoke test to regression | E-23 fields present in /bank-pilot/ CI check | pytest | board-reporting |
+| mr-0871 | T2 | D | Publish FRFI shadow pilot checklist on /bank-pilot/ | FRFI buyer has self-serve shadow pilot path | verify-gtm-ops-docs | board-reporting |
+| mr-0872 | T1 | A | Wire shadow pilot checklist to RPAA fence | Checklist items enforce no-supervision posture | verify-no-asf-coherence | board-reporting |
+| mr-0873 | T1 | A | Add shadow pilot CTA to /trust-center/ | Trust center routes to shadow pilot path | verify-gtm | board-reporting |
+| mr-0874 | T2 | D | Add FRFI shadow pilot FAQ (10 questions) | Common shadow pilot questions deflected | verify-gtm-ops-docs | board-reporting |
+| mr-0875 | T1 | A | Wire FRFI shadow pilot to TLE export | Board PDF shows shadow-mode scope | verify-ui-e2e | board-reporting |
+| mr-0876 | T1 | A | Add FRFI shadow pilot to procurement ZIP | Bundle includes shadow pilot checklist | procurement-pack-e2e | board-reporting |
+| mr-0877 | T2 | D | Spec FRFI shadow pilot exit criteria | Criteria for shadow → governance rollout defined | spec review | board-reporting |
+| mr-0878 | T1 | A | Add FRFI shadow pilot print CSS | Print-grade checklist for committee review | manual | board-reporting |
+| mr-0879 | T1 | H | Add FRFI shadow pilot to design-partner workshop | Co-design shadow pilot scope with FRFI buyer | manual | board-reporting |
+| mr-0880 | T2 | A | Add FRFI shadow pilot smoke test to regression | RPAA fence verified in /bank-pilot/ CI check | pytest | board-reporting |
+| mr-0881 | T1 | A | Polish /bank-pilot/ proof bar for committee review | Committee-scan proof points above fold on /bank-pilot/ | verify-gtm | board-reporting |
+| mr-0882 | T1 | A | Wire proof bar to shadow badge on /bank-pilot/ | Shadow-only badge persistent on bank-pilot | smoke_bank_grade | board-reporting |
+| mr-0883 | T2 | A | Add proof bar to TLE export cover | Board PDF includes proof bar summary | verify-ui-e2e | board-reporting |
+| mr-0884 | T1 | D | Add proof bar FAQ (5 questions) | Common proof questions deflected pre-meeting | verify-gtm-ops-docs | board-reporting |
+| mr-0885 | T1 | A | Wire proof bar to OSFI E-23 table | E-23 rows reinforce proof bar claims | verify-ui-e2e | board-reporting |
+| mr-0886 | T2 | A | Add proof bar to procurement ZIP | Bundle includes proof bar orientation | procurement-pack-e2e | board-reporting |
+| mr-0887 | T1 | D | Spec proof bar update cadence | Proof bar refreshed on each new pilot milestone | spec review | board-reporting |
+| mr-0888 | T1 | A | Add proof bar print CSS | Print-grade proof bar for committee leave-behind | manual | board-reporting |
+| mr-0889 | T2 | D | Wire proof bar to MSP channel kit | MSP partners include proof bar in prospect outreach | verify-gtm | board-reporting |
+| mr-0890 | T1 | A | Add proof bar smoke test to regression | Proof bar present in /bank-pilot/ CI check | pytest | board-reporting |
+| mr-0891 | T1 | A | Run verify-ui-e2e green on all Phase 9 regulated routes | /bank-pilot/ + enterprise GRC routes pass | verify-ui-e2e | board-reporting |
+| mr-0892 | T2 | A | Pass verify-no-asf-coherence on Phase 9 surfaces | No RPAA violations or brand names in copy | verify-no-asf-coherence | board-reporting |
+| mr-0893 | T1 | A | Pass audit_final_system_lock on Phase 9 HTML | FRFI copy RPAA-safe confirmed | audit_final_system_lock | board-reporting |
+| mr-0894 | T1 | A | Pass test_public_gtm_alignment on Phase 9 routes | Board reporting copy alignment green | pytest | board-reporting |
+| mr-0895 | T2 | A | Run procurement-pack-e2e with regulated bundle | E-23 + FRFI + board reporting in export | procurement-pack-e2e | board-reporting |
+| mr-0896 | T1 | A | Run smoke_bank_grade on Phase 9 /bank-pilot/ routes | Bank-grade CSS on all regulated pages | smoke_bank_grade | board-reporting |
+| mr-0897 | T1 | H | Log Phase 9 FRFI deal influenced in ops log | Revenue-influenced metric recorded | manual | board-reporting |
+| mr-0898 | T2 | H | Record first FRFI shadow pilot board PDF in meeting | Board PDF used in FRFI committee validated | manual | board-reporting |
+| mr-0899 | T1 | D | Phase 9 retrospective doc (1 page) | Regulated ICP learnings feed Phase 10 | docs review | board-reporting |
+| mr-0900 | T1 | H | Sign off Phase 9 → unlock Phase 10 picks | mr-0900 ready in GTM_NEXT | manual | board-reporting |
 
 ## Phase 10 — GovernanceGraph — cross-framework dedup + Customer #1 (mr-0901–mr-1000)
 
@@ -1136,106 +1136,106 @@ June 2026 governance spend (~$2.5B category) rewards **continuous proof**, **pol
 
 | ID | T | L | Plan | Outcome | Verify | Pattern |
 |----|---|---|------|---------|--------|---------|
-| mr-0901 | T1 | A | Ship Governance graph data model spec — P10 item 001 | buyer-visible on www for governance graph data model spec | verify-gtm | governance-graph |
-| mr-0902 | T2 | A | Lock Governance graph data model spec — P10 item 002 | committee artifact ready for governance graph data model spec | verify-ui-e2e | governance-graph |
-| mr-0903 | T1 | D | Wire Governance graph data model spec — P10 item 003 | regression gate green for governance graph data model spec | verify-gtm-ops-docs | governance-graph |
-| mr-0904 | T1 | A | Extend Governance graph data model spec — P10 item 004 | procurement self-serve path for governance graph data model spec | verify-ui-endpoints | governance-graph |
-| mr-0905 | T2 | A | Document Governance graph data model spec — P10 item 005 | console parity achieved for governance graph data model spec | plan-with-no-asf-verify | governance-graph |
-| mr-0906 | T1 | A | Verify Governance graph data model spec — P10 item 006 | doc linked from funnel for governance graph data model spec | verify-no-asf-coherence | governance-graph |
-| mr-0907 | T1 | D | Polish Governance graph data model spec — P10 item 007 | API export verified for governance graph data model spec | pytest | governance-graph |
-| mr-0908 | T2 | A | Automate Governance graph data model spec — P10 item 008 | manual review passed for governance graph data model spec | manual | governance-graph |
-| mr-0909 | T1 | A | Elevate Governance graph data model spec — P10 item 009 | e2e flow green for governance graph data model spec | procurement-pack-e2e | governance-graph |
-| mr-0910 | T1 | H | Harden Governance graph data model spec — P10 item 010 | GTM signal captured for governance graph data model spec | verify-msb-partner-openapi | governance-graph |
-| mr-0911 | T2 | A | Ship EU AI Act + ISO dedup map — P10 item 011 | buyer-visible on www for eu ai act + iso dedup map | verify-gtm | governance-graph |
-| mr-0912 | T1 | A | Lock EU AI Act + ISO dedup map — P10 item 012 | committee artifact ready for eu ai act + iso dedup map | verify-ui-e2e | governance-graph |
-| mr-0913 | T1 | D | Wire EU AI Act + ISO dedup map — P10 item 013 | regression gate green for eu ai act + iso dedup map | verify-gtm-ops-docs | governance-graph |
-| mr-0914 | T2 | A | Extend EU AI Act + ISO dedup map — P10 item 014 | procurement self-serve path for eu ai act + iso dedup map | verify-ui-endpoints | governance-graph |
-| mr-0915 | T1 | A | Document EU AI Act + ISO dedup map — P10 item 015 | console parity achieved for eu ai act + iso dedup map | plan-with-no-asf-verify | governance-graph |
-| mr-0916 | T1 | A | Verify EU AI Act + ISO dedup map — P10 item 016 | doc linked from funnel for eu ai act + iso dedup map | verify-no-asf-coherence | governance-graph |
-| mr-0917 | T2 | D | Polish EU AI Act + ISO dedup map — P10 item 017 | API export verified for eu ai act + iso dedup map | pytest | governance-graph |
-| mr-0918 | T1 | A | Automate EU AI Act + ISO dedup map — P10 item 018 | manual review passed for eu ai act + iso dedup map | manual | governance-graph |
-| mr-0919 | T1 | A | Elevate EU AI Act + ISO dedup map — P10 item 019 | e2e flow green for eu ai act + iso dedup map | procurement-pack-e2e | governance-graph |
-| mr-0920 | T2 | H | Harden EU AI Act + ISO dedup map — P10 item 020 | GTM signal captured for eu ai act + iso dedup map | verify-msb-partner-openapi | governance-graph |
-| mr-0921 | T1 | A | Ship One-control-multi-framework UX — P10 item 021 | buyer-visible on www for one-control-multi-framework ux | verify-gtm | governance-graph |
-| mr-0922 | T1 | A | Lock One-control-multi-framework UX — P10 item 022 | committee artifact ready for one-control-multi-framework ux | verify-ui-e2e | governance-graph |
-| mr-0923 | T2 | D | Wire One-control-multi-framework UX — P10 item 023 | regression gate green for one-control-multi-framework ux | verify-gtm-ops-docs | governance-graph |
-| mr-0924 | T1 | A | Extend One-control-multi-framework UX — P10 item 024 | procurement self-serve path for one-control-multi-framework ux | verify-ui-endpoints | governance-graph |
-| mr-0925 | T1 | A | Document One-control-multi-framework UX — P10 item 025 | console parity achieved for one-control-multi-framework ux | plan-with-no-asf-verify | governance-graph |
-| mr-0926 | T2 | A | Verify One-control-multi-framework UX — P10 item 026 | doc linked from funnel for one-control-multi-framework ux | verify-no-asf-coherence | governance-graph |
-| mr-0927 | T1 | D | Polish One-control-multi-framework UX — P10 item 027 | API export verified for one-control-multi-framework ux | pytest | governance-graph |
-| mr-0928 | T1 | A | Automate One-control-multi-framework UX — P10 item 028 | manual review passed for one-control-multi-framework ux | manual | governance-graph |
-| mr-0929 | T2 | A | Elevate One-control-multi-framework UX — P10 item 029 | e2e flow green for one-control-multi-framework ux | procurement-pack-e2e | governance-graph |
-| mr-0930 | T1 | H | Harden One-control-multi-framework UX — P10 item 030 | GTM signal captured for one-control-multi-framework ux | verify-msb-partner-openapi | governance-graph |
-| mr-0931 | T1 | A | Ship Monetary risk quant stub — P10 item 031 | buyer-visible on www for monetary risk quant stub | verify-gtm | governance-graph |
-| mr-0932 | T2 | A | Lock Monetary risk quant stub — P10 item 032 | committee artifact ready for monetary risk quant stub | verify-ui-e2e | governance-graph |
-| mr-0933 | T1 | D | Wire Monetary risk quant stub — P10 item 033 | regression gate green for monetary risk quant stub | verify-gtm-ops-docs | governance-graph |
-| mr-0934 | T1 | A | Extend Monetary risk quant stub — P10 item 034 | procurement self-serve path for monetary risk quant stub | verify-ui-endpoints | governance-graph |
-| mr-0935 | T2 | A | Document Monetary risk quant stub — P10 item 035 | console parity achieved for monetary risk quant stub | plan-with-no-asf-verify | governance-graph |
-| mr-0936 | T1 | A | Verify Monetary risk quant stub — P10 item 036 | doc linked from funnel for monetary risk quant stub | verify-no-asf-coherence | governance-graph |
-| mr-0937 | T1 | D | Polish Monetary risk quant stub — P10 item 037 | API export verified for monetary risk quant stub | pytest | governance-graph |
-| mr-0938 | T2 | A | Automate Monetary risk quant stub — P10 item 038 | manual review passed for monetary risk quant stub | manual | governance-graph |
-| mr-0939 | T1 | A | Elevate Monetary risk quant stub — P10 item 039 | e2e flow green for monetary risk quant stub | procurement-pack-e2e | governance-graph |
-| mr-0940 | T1 | H | Harden Monetary risk quant stub — P10 item 040 | GTM signal captured for monetary risk quant stub | verify-msb-partner-openapi | governance-graph |
-| mr-0941 | T2 | A | Ship Agent governance graph row — P10 item 041 | buyer-visible on www for agent governance graph row | verify-gtm | governance-graph |
-| mr-0942 | T1 | A | Lock Agent governance graph row — P10 item 042 | committee artifact ready for agent governance graph row | verify-ui-e2e | governance-graph |
-| mr-0943 | T1 | D | Wire Agent governance graph row — P10 item 043 | regression gate green for agent governance graph row | verify-gtm-ops-docs | governance-graph |
-| mr-0944 | T2 | A | Extend Agent governance graph row — P10 item 044 | procurement self-serve path for agent governance graph row | verify-ui-endpoints | governance-graph |
-| mr-0945 | T1 | A | Document Agent governance graph row — P10 item 045 | console parity achieved for agent governance graph row | plan-with-no-asf-verify | governance-graph |
-| mr-0946 | T1 | A | Verify Agent governance graph row — P10 item 046 | doc linked from funnel for agent governance graph row | verify-no-asf-coherence | governance-graph |
-| mr-0947 | T2 | D | Polish Agent governance graph row — P10 item 047 | API export verified for agent governance graph row | pytest | governance-graph |
-| mr-0948 | T1 | A | Automate Agent governance graph row — P10 item 048 | manual review passed for agent governance graph row | manual | governance-graph |
-| mr-0949 | T1 | A | Elevate Agent governance graph row — P10 item 049 | e2e flow green for agent governance graph row | procurement-pack-e2e | governance-graph |
-| mr-0950 | T2 | H | Harden Agent governance graph row — P10 item 050 | GTM signal captured for agent governance graph row | verify-msb-partner-openapi | governance-graph |
-| mr-0951 | T1 | A | Ship Cross-framework query API sketch — P10 item 051 | buyer-visible on www for cross-framework query api sketch | verify-gtm | governance-graph |
-| mr-0952 | T1 | A | Lock Cross-framework query API sketch — P10 item 052 | committee artifact ready for cross-framework query api sketch | verify-ui-e2e | governance-graph |
-| mr-0953 | T2 | D | Wire Cross-framework query API sketch — P10 item 053 | regression gate green for cross-framework query api sketch | verify-gtm-ops-docs | governance-graph |
-| mr-0954 | T1 | A | Extend Cross-framework query API sketch — P10 item 054 | procurement self-serve path for cross-framework query api sketch | verify-ui-endpoints | governance-graph |
-| mr-0955 | T1 | A | Document Cross-framework query API sketch — P10 item 055 | console parity achieved for cross-framework query api sketch | plan-with-no-asf-verify | governance-graph |
-| mr-0956 | T2 | A | Verify Cross-framework query API sketch — P10 item 056 | doc linked from funnel for cross-framework query api sketch | verify-no-asf-coherence | governance-graph |
-| mr-0957 | T1 | D | Polish Cross-framework query API sketch — P10 item 057 | API export verified for cross-framework query api sketch | pytest | governance-graph |
-| mr-0958 | T1 | A | Automate Cross-framework query API sketch — P10 item 058 | manual review passed for cross-framework query api sketch | manual | governance-graph |
-| mr-0959 | T2 | A | Elevate Cross-framework query API sketch — P10 item 059 | e2e flow green for cross-framework query api sketch | procurement-pack-e2e | governance-graph |
-| mr-0960 | T1 | H | Harden Cross-framework query API sketch — P10 item 060 | GTM signal captured for cross-framework query api sketch | verify-msb-partner-openapi | governance-graph |
-| mr-0961 | T1 | A | Ship Customer #1 proof log template — P10 item 061 | buyer-visible on www for customer #1 proof log template | verify-gtm | governance-graph |
-| mr-0962 | T2 | A | Lock Customer #1 proof log template — P10 item 062 | committee artifact ready for customer #1 proof log template | verify-ui-e2e | governance-graph |
-| mr-0963 | T1 | D | Wire Customer #1 proof log template — P10 item 063 | regression gate green for customer #1 proof log template | verify-gtm-ops-docs | governance-graph |
-| mr-0964 | T1 | A | Extend Customer #1 proof log template — P10 item 064 | procurement self-serve path for customer #1 proof log template | verify-ui-endpoints | governance-graph |
-| mr-0965 | T2 | A | Document Customer #1 proof log template — P10 item 065 | console parity achieved for customer #1 proof log template | plan-with-no-asf-verify | governance-graph |
-| mr-0966 | T1 | A | Verify Customer #1 proof log template — P10 item 066 | doc linked from funnel for customer #1 proof log template | verify-no-asf-coherence | governance-graph |
-| mr-0967 | T1 | D | Polish Customer #1 proof log template — P10 item 067 | API export verified for customer #1 proof log template | pytest | governance-graph |
-| mr-0968 | T2 | A | Automate Customer #1 proof log template — P10 item 068 | manual review passed for customer #1 proof log template | manual | governance-graph |
-| mr-0969 | T1 | A | Elevate Customer #1 proof log template — P10 item 069 | e2e flow green for customer #1 proof log template | procurement-pack-e2e | governance-graph |
-| mr-0970 | T1 | H | Harden Customer #1 proof log template — P10 item 070 | GTM signal captured for customer #1 proof log template | verify-msb-partner-openapi | governance-graph |
-| mr-0971 | T2 | A | Ship Form PICK final sign-off — P10 item 071 | buyer-visible on www for form pick final sign-off | verify-gtm | governance-graph |
-| mr-0972 | T1 | A | Lock Form PICK final sign-off — P10 item 072 | committee artifact ready for form pick final sign-off | verify-ui-e2e | governance-graph |
-| mr-0973 | T1 | D | Wire Form PICK final sign-off — P10 item 073 | regression gate green for form pick final sign-off | verify-gtm-ops-docs | governance-graph |
-| mr-0974 | T2 | A | Extend Form PICK final sign-off — P10 item 074 | procurement self-serve path for form pick final sign-off | verify-ui-endpoints | governance-graph |
-| mr-0975 | T1 | A | Document Form PICK final sign-off — P10 item 075 | console parity achieved for form pick final sign-off | plan-with-no-asf-verify | governance-graph |
-| mr-0976 | T1 | A | Verify Form PICK final sign-off — P10 item 076 | doc linked from funnel for form pick final sign-off | verify-no-asf-coherence | governance-graph |
-| mr-0977 | T2 | D | Polish Form PICK final sign-off — P10 item 077 | API export verified for form pick final sign-off | pytest | governance-graph |
-| mr-0978 | T1 | A | Automate Form PICK final sign-off — P10 item 078 | manual review passed for form pick final sign-off | manual | governance-graph |
-| mr-0979 | T1 | A | Elevate Form PICK final sign-off — P10 item 079 | e2e flow green for form pick final sign-off | procurement-pack-e2e | governance-graph |
-| mr-0980 | T2 | H | Harden Form PICK final sign-off — P10 item 080 | GTM signal captured for form pick final sign-off | verify-msb-partner-openapi | governance-graph |
-| mr-0981 | T1 | A | Ship Full 1000-step regression — P10 item 081 | buyer-visible on www for full 1000-step regression | verify-gtm | governance-graph |
-| mr-0982 | T1 | A | Lock Full 1000-step regression — P10 item 082 | committee artifact ready for full 1000-step regression | verify-ui-e2e | governance-graph |
-| mr-0983 | T2 | D | Wire Full 1000-step regression — P10 item 083 | regression gate green for full 1000-step regression | verify-gtm-ops-docs | governance-graph |
-| mr-0984 | T1 | A | Extend Full 1000-step regression — P10 item 084 | procurement self-serve path for full 1000-step regression | verify-ui-endpoints | governance-graph |
-| mr-0985 | T1 | A | Document Full 1000-step regression — P10 item 085 | console parity achieved for full 1000-step regression | plan-with-no-asf-verify | governance-graph |
-| mr-0986 | T2 | A | Verify Full 1000-step regression — P10 item 086 | doc linked from funnel for full 1000-step regression | verify-no-asf-coherence | governance-graph |
-| mr-0987 | T1 | D | Polish Full 1000-step regression — P10 item 087 | API export verified for full 1000-step regression | pytest | governance-graph |
-| mr-0988 | T1 | A | Automate Full 1000-step regression — P10 item 088 | manual review passed for full 1000-step regression | manual | governance-graph |
-| mr-0989 | T2 | A | Elevate Full 1000-step regression — P10 item 089 | e2e flow green for full 1000-step regression | procurement-pack-e2e | governance-graph |
-| mr-0990 | T1 | H | Harden Full 1000-step regression — P10 item 090 | GTM signal captured for full 1000-step regression | verify-msb-partner-openapi | governance-graph |
-| mr-0991 | T1 | A | Ship Market roadmap complete ceremony — P10 item 091 | buyer-visible on www for market roadmap complete ceremony | verify-gtm | governance-graph |
-| mr-0992 | T2 | A | Lock Market roadmap complete ceremony — P10 item 092 | committee artifact ready for market roadmap complete ceremony | verify-ui-e2e | governance-graph |
-| mr-0993 | T1 | D | Wire Market roadmap complete ceremony — P10 item 093 | regression gate green for market roadmap complete ceremony | verify-gtm-ops-docs | governance-graph |
-| mr-0994 | T1 | A | Extend Market roadmap complete ceremony — P10 item 094 | procurement self-serve path for market roadmap complete ceremony | verify-ui-endpoints | governance-graph |
-| mr-0995 | T2 | A | Document Market roadmap complete ceremony — P10 item 095 | console parity achieved for market roadmap complete ceremony | plan-with-no-asf-verify | governance-graph |
-| mr-0996 | T1 | A | Verify Market roadmap complete ceremony — P10 item 096 | doc linked from funnel for market roadmap complete ceremony | verify-no-asf-coherence | governance-graph |
-| mr-0997 | T1 | D | Polish Market roadmap complete ceremony — P10 item 097 | API export verified for market roadmap complete ceremony | pytest | governance-graph |
-| mr-0998 | T2 | A | Automate Market roadmap complete ceremony — P10 item 098 | manual review passed for market roadmap complete ceremony | manual | governance-graph |
-| mr-0999 | T1 | A | Elevate Market roadmap complete ceremony — P10 item 099 | e2e flow green for market roadmap complete ceremony | procurement-pack-e2e | governance-graph |
-| mr-1000 | T1 | H | Harden Market roadmap complete ceremony — P10 item 100 | GTM signal captured for market roadmap complete ceremony | verify-msb-partner-openapi | governance-graph |
+| mr-0901 | T1 | D | Spec governance graph data model for console | One-control-multi-framework visible in graph | spec review | governance-graph |
+| mr-0902 | T2 | A | Add governance graph orientation row to /trust-center/ | Enterprise buyer sees graph-based posture | verify-gtm | governance-graph |
+| mr-0903 | T1 | A | Wire governance graph to framework grid | Graph dedup visible as cross-framework overlap rows | verify-ui-e2e | governance-graph |
+| mr-0904 | T1 | D | Publish governance graph FAQ (10 questions) | Common graph model questions deflected | verify-gtm-ops-docs | governance-graph |
+| mr-0905 | T2 | A | Add governance graph to TLE export cover | Board PDF shows graph-based evidence scope | verify-ui-e2e | governance-graph |
+| mr-0906 | T1 | A | Wire governance graph to procurement ZIP | Export includes governance graph orientation | procurement-pack-e2e | governance-graph |
+| mr-0907 | T1 | D | Spec governance graph query API | Graph queryable via API for technical buyers | spec review | governance-graph |
+| mr-0908 | T2 | H | Add governance graph to design-partner workshop | Enterprise buyer co-designs graph schema | manual | governance-graph |
+| mr-0909 | T1 | A | Wire governance graph to OSCAL export | OSCAL component ties to governance graph node | verify-ui-e2e | governance-graph |
+| mr-0910 | T1 | A | Add governance graph smoke test to regression | Graph model structure valid in CI gate | pytest | governance-graph |
+| mr-0911 | T2 | A | Publish EU AI Act / ISO 42001 dedup map on /trust-center/ | One control satisfies both frameworks — visible | verify-gtm | governance-graph |
+| mr-0912 | T1 | A | Wire dedup map to framework grid | Grid shows shared-control rows for EU AI Act + ISO 42001 | verify-ui-e2e | governance-graph |
+| mr-0913 | T1 | D | Add dedup map FAQ (10 questions) | Common framework overlap questions deflected | verify-gtm-ops-docs | governance-graph |
+| mr-0914 | T2 | A | Wire dedup map to procurement ZIP | Export includes dedup map orientation | procurement-pack-e2e | governance-graph |
+| mr-0915 | T1 | A | Add dedup map to TLE export cover | Board PDF shows cross-framework dedup scope | verify-ui-e2e | governance-graph |
+| mr-0916 | T1 | D | Spec dedup map update cadence | Map refreshed when new framework version published | spec review | governance-graph |
+| mr-0917 | T2 | A | Wire dedup map to governance graph node | Graph node shared across deduped frameworks | verify-ui-e2e | governance-graph |
+| mr-0918 | T1 | H | Add dedup map to design-partner workshop | Co-design cross-framework overlap with enterprise buyer | manual | governance-graph |
+| mr-0919 | T1 | A | Wire dedup map to EU AI Act urgency callout | Dedup reduces cost of Aug 2 2026 compliance | verify-gtm | governance-graph |
+| mr-0920 | T2 | A | Add dedup map smoke test to regression | Dedup rows present in /trust-center/ CI check | pytest | governance-graph |
+| mr-0921 | T1 | D | Spec one-control-multi-framework UX in console | Single control row shows N framework satisfactions | spec review | governance-graph |
+| mr-0922 | T1 | A | Add one-control-multi UX orientation to /trust-center/ | Efficiency posture visible to CISO reviewer | verify-gtm | governance-graph |
+| mr-0923 | T2 | A | Wire one-control-multi UX to framework grid | Grid shows multi-framework badges per control row | verify-ui-e2e | governance-graph |
+| mr-0924 | T1 | D | Add one-control-multi FAQ (10 questions) | Common efficiency questions deflected pre-call | verify-gtm-ops-docs | governance-graph |
+| mr-0925 | T1 | A | Wire one-control-multi UX to TLE export | Board PDF shows multi-framework control summary | verify-ui-e2e | governance-graph |
+| mr-0926 | T2 | A | Wire one-control-multi UX to procurement ZIP | Export includes multi-framework control orientation | procurement-pack-e2e | governance-graph |
+| mr-0927 | T1 | A | Add one-control-multi UX to governance graph | Graph visualises multi-framework control nodes | verify-ui-e2e | governance-graph |
+| mr-0928 | T1 | H | Add one-control-multi UX to design-partner workshop | Enterprise buyer co-designs multi-framework UX | manual | governance-graph |
+| mr-0929 | T2 | A | Wire one-control-multi UX to EU AI Act dedup map | EU AI Act rows reference multi-framework control | verify-ui-e2e | governance-graph |
+| mr-0930 | T1 | A | Add one-control-multi smoke test to regression | Multi-framework badge rendering CI check | pytest | governance-graph |
+| mr-0931 | T1 | D | Spec monetary risk quantification stub for TLE | Board PDF shows risk value estimate stub | spec review | governance-graph |
+| mr-0932 | T2 | A | Add monetary risk orientation row to /trust-center/ | Enterprise buyer sees risk quantification scope | verify-gtm | governance-graph |
+| mr-0933 | T1 | A | Wire monetary risk to TLE export cover | Board PDF includes risk value stub | verify-ui-e2e | governance-graph |
+| mr-0934 | T1 | D | Add monetary risk FAQ (10 questions) | Common risk quantification questions deflected | verify-gtm-ops-docs | governance-graph |
+| mr-0935 | T2 | A | Wire monetary risk to procurement ZIP | Export includes risk quantification orientation | procurement-pack-e2e | governance-graph |
+| mr-0936 | T1 | A | Add monetary risk honest-posture note | Risk estimate — not actuarial opinion | verify-no-asf-coherence | governance-graph |
+| mr-0937 | T1 | D | Spec monetary risk quantification methodology stub | Risk quantification method documented for buyers | spec review | governance-graph |
+| mr-0938 | T2 | H | Add monetary risk to design-partner workshop | Co-design risk quantification fields with enterprise buyer | manual | governance-graph |
+| mr-0939 | T1 | A | Wire monetary risk to governance graph node | Risk value attached to governance graph node | verify-ui-e2e | governance-graph |
+| mr-0940 | T1 | A | Add monetary risk smoke test to regression | Risk quant stub present in export CI check | pytest | governance-graph |
+| mr-0941 | T2 | H | Spec agent governance graph node for Hub | Each agent has governance graph node in TLE | spec review | governance-graph |
+| mr-0942 | T1 | A | Add agent governance orientation row to /trust-center/ | AI agent governance scope visible on trust surface | verify-gtm | governance-graph |
+| mr-0943 | T1 | A | Wire agent governance node to TLE receipt | Agent activation mints governance graph receipt | verify-ui-e2e | governance-graph |
+| mr-0944 | T2 | D | Add agent governance FAQ (10 questions) | Common agent governance questions deflected | verify-gtm-ops-docs | governance-graph |
+| mr-0945 | T1 | A | Wire agent governance to EU AI Act high-risk row | High-risk AI agent maps to EU AI Act governance row | verify-ui-e2e | governance-graph |
+| mr-0946 | T1 | A | Wire agent governance node to governance graph | Agent node visible in cross-framework graph | verify-ui-e2e | governance-graph |
+| mr-0947 | T2 | A | Add agent governance to procurement ZIP | Export includes agent governance scope | procurement-pack-e2e | governance-graph |
+| mr-0948 | T1 | H | Add agent governance R-011 fence to graph spec | Hub-only agents fence documented in governance graph | spec review | governance-graph |
+| mr-0949 | T1 | H | Add agent governance to design-partner workshop | Co-design agent governance fields with enterprise buyer | manual | governance-graph |
+| mr-0950 | T2 | A | Add agent governance smoke test to regression | Agent governance node present in CI gate | pytest | governance-graph |
+| mr-0951 | T1 | D | Spec cross-framework query API for technical buyers | Query which frameworks a control satisfies | spec review | governance-graph |
+| mr-0952 | T1 | A | Add query API orientation to /trust-center/ | Technical reviewer finds API-first governance posture | verify-gtm | governance-graph |
+| mr-0953 | T2 | A | Wire query API to OpenAPI spec | Governance query endpoint in OpenAPI docs | verify-ui-endpoints | governance-graph |
+| mr-0954 | T1 | D | Add query API FAQ (10 questions) | Common API governance questions deflected | verify-gtm-ops-docs | governance-graph |
+| mr-0955 | T1 | A | Wire query API to governance graph | API surfaces governance graph nodes | verify-ui-endpoints | governance-graph |
+| mr-0956 | T2 | A | Add query API to TLE export cover | Board PDF shows API-accessible governance scope | verify-ui-e2e | governance-graph |
+| mr-0957 | T1 | A | Wire query API to procurement ZIP | Export includes API governance orientation | procurement-pack-e2e | governance-graph |
+| mr-0958 | T1 | H | Add query API to design-partner workshop | Co-design API governance schema with enterprise buyer | manual | governance-graph |
+| mr-0959 | T2 | D | Spec query API auth pattern (API key + RID) | API key tied to immutable receipt ID | spec review | governance-graph |
+| mr-0960 | T1 | A | Add query API smoke test to regression | API endpoint spec present in CI gate | pytest | governance-graph |
+| mr-0961 | T1 | H | Publish Customer #1 proof log template in ops log | Founder captures first governance meeting evidence | docs review | governance-graph |
+| mr-0962 | T2 | A | Add Customer #1 CTA to /enterprise/ | Enterprise buyer sees Customer #1 milestone path | verify-gtm | governance-graph |
+| mr-0963 | T1 | H | Wire Customer #1 proof log to GTM ops log | Board PDF used in meeting logged with timestamp | manual | governance-graph |
+| mr-0964 | T1 | D | Add Customer #1 FAQ (5 questions) | Common first-customer questions deflected | verify-gtm-ops-docs | governance-graph |
+| mr-0965 | T2 | H | Spec Customer #1 success criteria | Criteria: board PDF used in real governance meeting | spec review | governance-graph |
+| mr-0966 | T1 | A | Add Customer #1 proof to TLE export cover | Board PDF is the Customer #1 committee artifact | verify-ui-e2e | governance-graph |
+| mr-0967 | T1 | A | Wire Customer #1 proof to procurement ZIP | Bundle includes Customer #1 proof orientation | procurement-pack-e2e | governance-graph |
+| mr-0968 | T2 | H | Add Customer #1 debrief template to ops log | Capture persona + deal value + fields used | docs review | governance-graph |
+| mr-0969 | T1 | H | Spec Customer #1 → Customer #2 expansion path | Learnings from #1 feed #2 positioning | spec review | governance-graph |
+| mr-0970 | T1 | A | Add Customer #1 proof smoke test to regression | Proof log structure valid in CI gate | pytest | governance-graph |
+| mr-0971 | T2 | A | Publish Form PICK gate checklist on /trust-center/ | No overstated claims in outbound without PICK sign-off | verify-gtm | governance-graph |
+| mr-0972 | T1 | A | Wire Form PICK to verify-no-asf-coherence CI gate | CI check enforces PICK fence on all buyer paths | pytest | governance-graph |
+| mr-0973 | T1 | D | Add Form PICK FAQ (5 questions) | Common PICK gate questions deflected | verify-gtm-ops-docs | governance-graph |
+| mr-0974 | T2 | A | Add Form PICK to TLE export cover | Board PDF confirms PICK gate passed | verify-ui-e2e | governance-graph |
+| mr-0975 | T1 | A | Wire Form PICK to procurement ZIP README | Bundle README confirms PICK gate passed | procurement-pack-e2e | governance-graph |
+| mr-0976 | T1 | D | Spec Form PICK trigger criteria | Criteria for when PICK sign-off is required | spec review | governance-graph |
+| mr-0977 | T2 | H | Add Form PICK to design-partner brief | Design-partner engagement gated by PICK sign-off | manual | governance-graph |
+| mr-0978 | T1 | D | Wire Form PICK to MSP channel playbook | MSP partners trained on PICK gate | verify-gtm | governance-graph |
+| mr-0979 | T1 | H | Run Form PICK final audit on 1000-step roadmap | Roadmap clean before GTM promotion | manual | governance-graph |
+| mr-0980 | T2 | H | Sign off Form PICK for full market roadmap | mr-1000 PICK-signed in GTM_NEXT | manual | governance-graph |
+| mr-0981 | T1 | A | Run full verify-ui-e2e suite across all 10 phases | All phase trust routes pass | verify-ui-e2e | governance-graph |
+| mr-0982 | T1 | A | Pass verify-no-asf-coherence on all phases output | Zero brand names across all 10 phases | verify-no-asf-coherence | governance-graph |
+| mr-0983 | T2 | A | Pass audit_final_system_lock on full roadmap HTML | Entire roadmap copy RPAA-safe confirmed | audit_final_system_lock | governance-graph |
+| mr-0984 | T1 | A | Pass test_public_gtm_alignment on full roadmap | All 10 phases GTM copy alignment green | pytest | governance-graph |
+| mr-0985 | T1 | A | Run procurement-pack-e2e on all 10 phase bundles | All 10 phase export bundles valid | procurement-pack-e2e | governance-graph |
+| mr-0986 | T2 | A | Run smoke_bank_grade on full site | Bank-grade CSS on every tier page | smoke_bank_grade | governance-graph |
+| mr-0987 | T1 | A | Run test_public_simplification on full roadmap | No internal architecture terms in roadmap output | pytest | governance-graph |
+| mr-0988 | T1 | A | Verify 1000 steps total in generated roadmap | Step count exactly 1000 in markdown output | pytest | governance-graph |
+| mr-0989 | T2 | A | Run generate_market_success_1000_roadmap.py clean | Roadmap MD generated with 0 errors | pytest | governance-graph |
+| mr-0990 | T1 | H | Log full regression pass in ops log | 1000-step regression green recorded with timestamp | manual | governance-graph |
+| mr-0991 | T1 | H | Record market roadmap v1 go-live date in ops log | Founder has 1000-step roadmap completion timestamp | manual | governance-graph |
+| mr-0992 | T2 | H | Run first full prospect walkthrough with 10-phase roadmap | 90-second comprehension validated per phase | manual | governance-graph |
+| mr-0993 | T1 | H | Log access request count for full roadmap | Baseline metric established across all 10 phases | manual | governance-graph |
+| mr-0994 | T1 | H | Capture top 10 buyer questions across all phases | Cross-phase FAQ gaps feed FAQ v2 | manual | governance-graph |
+| mr-0995 | T2 | H | Debrief template: which phase drove deal | Phase-attributed deal value logged in ops | verify-gtm-ops-docs | governance-graph |
+| mr-0996 | T1 | D | Pick next 3 items from GTM_NEXT after ceremony (≤3 rule) | QUICK_PICK updated from 1000-step learnings | verify-quick-pick-fresh | governance-graph |
+| mr-0997 | T1 | H | Form PICK final sign-off before any promotion | No brand names in outbound confirmed | manual | governance-graph |
+| mr-0998 | T2 | H | Customer #1 dry-run: 10-phase board PDF in meeting | Internal rehearsal with full roadmap artifact | manual | governance-graph |
+| mr-0999 | T1 | D | Market roadmap 1000-step retrospective doc (1 page) | What worked across all 10 phases / what to defer | docs review | governance-graph |
+| mr-1000 | T1 | H | Sign off market roadmap → unlock GTM campaign | mr-1000 ready — market roadmap complete | manual | governance-graph |
 
 ---
 
