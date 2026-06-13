@@ -6,6 +6,7 @@
 @import url("noetfield-v18-live-proof.css");
 @import url("noetfield-v18-trial-os.css");
 @import url("noetfield-v18-motion.css");
+@import url("noetfield-v18-wave1.css");
 
 body.nf-www {
   --section-y: clamp(64px, 9vw, 104px);

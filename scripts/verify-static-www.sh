@@ -23,16 +23,21 @@ check_file() {
 }
 
 check_file "homepage v18 shell" index.html \
-  'noetfield-www.css?v=18' 'nf-site-v14' 'The audit trail your Copilot deployment' \
+  'noetfield-www.css?v=19' 'nf-site-v14' 'The audit trail your Copilot deployment' \
   'data-live-proof-hero' 'What legal and security reviewers need to see' \
-  'nf-procurement-rail' 'Start free sandbox' 'Published tiers'
+  'nf-procurement-rail' 'Start free sandbox' 'Published tiers' \
+  'Governance playground' 'Three traps before Copilot' 'One evaluate · four exports' \
+  'Your peers roll out Copilot with slides' 'This is for you if'
+
+check_file "homepage wave1 journey" index.html \
+  '01 · Try' '02 · Prove' '03 · Package' '04 · Trust' '6 wk → 5 min'
 
 check_file "start sandbox page" start/index.html \
   'Sign up → sandbox → try the product' '14-day trial' '50 evaluate calls' 'Sandbox mode' \
   'data-trial-os-flow'
 
 check_file "pricing packaging page" pricing/index.html \
-  'Published tiers' 'Sandbox + production' 'Developer access · free' 'noetfield-www.css?v=18'
+  'Published tiers' 'Sandbox + production' 'Developer access · free' 'noetfield-www.css?v=19' 'What you tried vs what breaks'
 
 check_file "trust center diligence theme" trust/index.html \
   'nf-trust-diligence' 'fail closed' 'Metadata-only'
@@ -50,15 +55,15 @@ check_file "commercial SSOT" docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.m
   'OFFERINGS_LOCKED' 'Trust Brief' 'operations@noetfield.com' 'W3 economic signal'
 
 check_file "ai-automation lane B" ai-automation/index.html \
-  'Make your AI automation defensible' 'Three offerings only' 'noetfield-www.css?v=18'
+  'Make your AI automation defensible' 'Three offerings only' 'noetfield-www.css?v=19'
 
 # Version coherence on primary hubs
 for f in index.html trust/index.html copilot/index.html msp/index.html federal/index.html investors/index.html start/index.html pricing/index.html; do
-  if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=18' "$f"; then
-    bad "shell v18 on $f"
+  if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=19' "$f"; then
+    bad "shell v19 on $f"
   fi
 done
-[[ "$fail" -eq 0 ]] && ok "shell v18 on primary hubs"
+[[ "$fail" -eq 0 ]] && ok "shell v19 on primary hubs"
 
 if [[ "$fail" -ne 0 ]]; then
   echo "Run: python3 scripts/rebuild-www-v6.py" >&2

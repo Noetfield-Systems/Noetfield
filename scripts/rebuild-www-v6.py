@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-WWW_VER = "18"
+WWW_VER = "19"
 
 # Commercial narrative — SSOT: docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.md · docs/GTM_COPYBOOK.md
 COPY = {
@@ -28,6 +28,13 @@ COPY = {
         "signed TLE v1, board PDF, procurement ZIP. Invalid changes blocked · allowed decisions receipted · export fails closed on tamper."
     ),
     "sandbox_limits": "14-day sandbox · 50 evaluate calls · mock M365 connectors · no sales call",
+    "first_receipt_promise": (
+        "Run one evaluate · get one signed receipt · <strong>before your next Copilot standup</strong> "
+        "(~5 minutes in sandbox)."
+    ),
+    "closing_competitive": (
+        "Your peers roll out Copilot with slides. You roll out with <strong>signed receipts</strong>."
+    ),
 }
 
 HEAD = """<!DOCTYPE html>
@@ -88,15 +95,22 @@ def receipt(rid: str = "RID-2026-0602-HOME", footer: str = "Live sample · <a hr
 
 
 def live_proof_panel() -> str:
-    """UI-01 Live Proof Hero — mini evaluate + animated receipt."""
+    """UI-01 Governance Playground — scenario picker + mini evaluate + scorecard receipt."""
     return f"""
- <div id="nfLiveProofHero" class="nf-live-proof-panel" data-live-proof-hero="live-proof-hero" aria-label="Live evaluate mini">
+ <div id="nfLiveProofHero" class="nf-live-proof-panel" data-live-proof-hero="live-proof-hero" aria-label="Governance playground">
  <form id="nfLiveProofForm" class="nf-live-proof-form">
- <h3>Try evaluate — live receipt</h3>
- <p>POST <code>/evaluate</code> from the homepage · Trust Ledger Entry fields match export semantics.</p>
- <label>Actor<input type="text" name="actor" value="www-hero" autocomplete="off" /></label>
+ <h3>Governance playground</h3>
+ <p class="nf-scorecard-hint">Every go/no-go gets a <strong>confidence score</strong> + evidence index — not a black-box AI yes.</p>
+ <label>Scenario
+ <select name="scenario" id="nfLiveProofScenario" aria-label="Evaluate scenario">
+ <option value="copilot_rollout" selected>Copilot rollout · production scope</option>
+ <option value="guest_access">Guest access · external sharing</option>
+ <option value="data_export">Bulk export · high sensitivity</option>
+ </select>
+ </label>
+ <label>Actor<input type="text" name="actor" value="security-team" autocomplete="off" /></label>
  <label>Action<input type="text" name="action" value="copilot_rollout" autocomplete="off" /></label>
- <label>Context<textarea name="context">Copilot rollout governance check — homepage live proof</textarea></label>
+ <label>Context<textarea name="context">Copilot rollout governance check — homepage playground</textarea></label>
  <button type="submit" class="btn btn-primary">Evaluate intent</button>
  </form>
  <div id="nfLiveProofReceipt" class="nf-live-proof-receipt-host" aria-live="polite">
@@ -238,12 +252,16 @@ def scope_block() -> str:
 
 
 def stat_bar() -> str:
+    return outcome_stat_bar()
+
+
+def outcome_stat_bar() -> str:
     return """
- <div class="nf-stat-bar" role="region" aria-label="Key metrics">
- <div class="nf-stat-bar-item"><strong>4</strong><span>Evaluate · Decide · Record · Export</span></div>
- <div class="nf-stat-bar-item"><strong>$10k</strong><span>Trust Brief · governance diagnostic</span></div>
- <div class="nf-stat-bar-item"><strong>90d</strong><span>Design partner · board PDF path</span></div>
- <div class="nf-stat-bar-item"><strong>3</strong><span>Contract SKUs · no catalog creep</span></div>
+ <div class="nf-stat-bar nf-stat-bar--outcome" role="region" aria-label="Outcome metrics">
+ <div class="nf-stat-bar-item"><strong>6 wk → 5 min</strong><span>Trust Brief diagnostic vs live evaluate demo</span></div>
+ <div class="nf-stat-bar-item"><strong>1 RID</strong><span>Intake → evaluate → export on one thread</span></div>
+ <div class="nf-stat-bar-item"><strong>4 exports</strong><span>TLE · board PDF · procurement ZIP · audit</span></div>
+ <div class="nf-stat-bar-item"><strong>3 SKUs</strong><span>Contract programs · no catalog creep</span></div>
  </div>"""
 
 
@@ -296,6 +314,104 @@ def self_serve_rail() -> str:
  <a href="/copilot/demo/">5-minute demo</a>
  <a class="btn btn-primary" href="/start/">Start free sandbox</a>
  </nav>"""
+
+
+def three_traps_section() -> str:
+    return """
+ <section class="nf-section-block nf-section--elevated" aria-labelledby="traps-title">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">!</span><div>
+ <p class="nf-eyebrow" id="traps-title">Why governance fails today</p>
+ <h2>Three traps before Copilot touches production data</h2>
+ <p class="nf-section-lead">Most rollouts stall on policy decks and spreadsheets — not on Microsoft readiness alone.</p>
+ </div></div>
+ <div class="nf-traps-grid">
+ <article class="nf-trap-card"><p class="nf-trap-card__label">Purview-only trap</p><h3>You labeled data. Nobody receipted the go/no-go.</h3><p>Purview readiness is necessary — it is not a signed Copilot execution record your board can defend.</p></article>
+ <article class="nf-trap-card"><p class="nf-trap-card__label">Spreadsheet trap</p><h3>Policy lives in SharePoint. Evidence lives in someone&rsquo;s inbox.</h3><p>When audit asks who approved Copilot for production, the thread is gone.</p></article>
+ <article class="nf-trap-card"><p class="nf-trap-card__label">Retrofit trap</p><h3>You discover the gap in the audit — not before rollout.</h3><p>Regulators and boards ask <em>after</em> Copilot already touched production data.</p></article>
+ </div>
+ </section>"""
+
+
+def buyer_journey_strip() -> str:
+    return """
+ <nav class="nf-journey-strip" aria-label="Buyer journey — Try Prove Package Trust">
+ <a class="nf-journey-step" href="/start/"><span class="nf-journey-step__num">01 · Try</span><strong>Start free sandbox</strong><span>~5 min · first receipt · mock M365</span></a>
+ <a class="nf-journey-step" href="/copilot/demo/"><span class="nf-journey-step__num">02 · Prove</span><strong>5-minute demo</strong><span>Evaluate → confidence score → export</span></a>
+ <a class="nf-journey-step" href="/pricing/"><span class="nf-journey-step__num">03 · Package</span><strong>Published tiers</strong><span>Sandbox · design partner · 3 SKUs</span></a>
+ <a class="nf-journey-step" href="/trust/"><span class="nf-journey-step__num">04 · Trust</span><strong>Trust center</strong><span>Procurement pack · verify export</span></a>
+ </nav>"""
+
+
+def governance_output_suite() -> str:
+    return """
+ <section class="nf-section-block" aria-labelledby="export-suite-title">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">↗</span><div>
+ <p class="nf-eyebrow" id="export-suite-title">Governance Output Suite</p>
+ <h2>One evaluate · four exports</h2>
+ <p class="nf-section-lead">Buyers file artifacts — not API access alone. Same spine from sandbox to production tenant.</p>
+ </div></div>
+ <div class="nf-export-suite" role="list">
+ <article class="nf-export-suite__item" role="listitem"><span class="nf-export-suite__icon">TLE</span><h3>TLE v1 YAML</h3><p>Signed decision · confidence score · approval chain · evidence index.</p></article>
+ <article class="nf-export-suite__item" role="listitem"><span class="nf-export-suite__icon">PDF</span><h3>Board PDF</h3><p>Executive-ready digest for governance and budget conversations.</p></article>
+ <article class="nf-export-suite__item" role="listitem"><span class="nf-export-suite__icon">ZIP</span><h3>Procurement ZIP</h3><p>Buyer diligence bundle · fail-closed integrity on tamper.</p></article>
+ <article class="nf-export-suite__item is-roadmap" role="listitem"><span class="nf-export-suite__icon">API</span><h3>Audit export <span class="nf-signal-badge nf-signal-badge--roadmap">Roadmap</span></h3><p>Tenant audit bundle · SIEM / GRC webhooks — orientation on roadmap.</p></article>
+ </div>
+ </section>"""
+
+
+def contrast_table_section() -> str:
+    return """
+ <section class="nf-section-block" aria-labelledby="contrast-title">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">⇄</span><div>
+ <p class="nf-eyebrow" id="contrast-title">Why Noetfield</p>
+ <h2>What you tried vs what breaks vs what we ship</h2>
+ <p class="nf-section-lead">Self-sort in one table — built for CISO, GRC, and procurement reviewers.</p>
+ </div></div>
+ <div class="nf-contrast-table-wrap">
+ <table class="nf-contrast-table">
+ <thead><tr><th>Approach</th><th>What breaks</th><th>Noetfield</th></tr></thead>
+ <tbody>
+ <tr><td>Purview + policy deck only</td><td>No signed execution receipt per go/no-go</td><td>TLE v1 + confidence score on every decision</td></tr>
+ <tr><td>Spreadsheet + email approvals</td><td>No tamper-evident export for diligence</td><td>Board PDF + procurement ZIP · fail closed on tamper</td></tr>
+ <tr><td>Enterprise GRC platform rollout</td><td>Slow · expensive · not Copilot-native</td><td>Metadata-only M365 · evaluate in minutes</td></tr>
+ <tr><td>Consultant PDF once</td><td>Static · ages before next rollout wave</td><td>Live evaluate + export cadence per tenant</td></tr>
+ </tbody>
+ </table>
+ </div>
+ </section>"""
+
+
+def fit_qualification_body() -> str:
+    return """
+ <div class="nf-fit-grid">
+ <article class="nf-fit-card nf-fit-card--yes"><h3>This is for you if</h3><ul>
+ <li>You are rolling out or scaling <strong>Microsoft 365 Copilot</strong> under legal or procurement scrutiny</li>
+ <li>You need <strong>metadata-only</strong> M365 evidence — no mailbox custody</li>
+ <li>You want <strong>honest scope</strong> — Available · Planned · Out of scope badges, not certifier claims</li>
+ <li>You need a receipt your <strong>board and auditor</strong> can inspect before production scope opens</li>
+ </ul></article>
+ <article class="nf-fit-card nf-fit-card--no"><h3>This is not for you if</h3><ul>
+ <li>You need payment rails, custody, MSB execution, or transaction processing</li>
+ <li>You want full mailbox/content surveillance — we index metadata only</li>
+ <li>You need ISO/SOC <strong>certification</strong> from us — we produce governance artifacts, not company certification</li>
+ <li>You want a generic AI chatbot catalog — three contract SKUs only</li>
+ </ul></article>
+ </div>"""
+
+
+def fit_qualification_section() -> str:
+    return """
+ <section class="nf-section-block" aria-labelledby="fit-title">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">?</span><div>
+ <p class="nf-eyebrow" id="fit-title">Fit</p>
+ <h2>Built for regulated Copilot buyers</h2>
+ </div></div>
+""" + fit_qualification_body() + """
+ </section>"""
+
+
+def closing_competitive_line() -> str:
+    return f'<p class="nf-closing-line">{COPY["closing_competitive"]}</p>'
 
 
 def packaging_tiers_grid(compact: bool = False) -> str:
@@ -407,17 +523,27 @@ def write(rel: str, title: str, desc: str, canonical: str, body: str, body_class
 
 
 def homepage() -> str:
-    """UI-03 four-act homepage — Try · Prove · Package · Trust."""
-    act_try = hero(
+    """UI-03 four-act homepage — Try · Prove · Package · Trust (+ Wave 1 conversion blocks)."""
+    act_try = f"""
+ <section class="nf-section-block nf-act-try" aria-labelledby="act-try">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">01</span><div>
+ <p class="nf-eyebrow" id="act-try">Try</p>
+ <h2 class="nf-sr-only">Try evaluate — governance playground</h2>
+ </div></div>
+""" + hero(
         "Governance execution · Canada",
         "AI Governance &amp; Evidence · Microsoft 365 Copilot",
         COPY["hero_h1"],
         COPY["hero_lead"],
-        [("Trust Ledger · TLE v1", True), ("No custody · no payment rails", False)],
-        [("/start/", "Start free sandbox", True), ("/copilot/demo/", "5-minute demo", False), ("/copilot/pilot/", "Become a design partner", False)],
+        [("First receipt · ~5 min", True), ("Trust Ledger · TLE v1", True), ("No custody · no payment rails", False)],
+        [("/start/", "Start free sandbox", True), ("/copilot/demo/", "5-minute demo", False), ("/trust-brief/intake/", "Request Governance Brief", False)],
         ["NIST AI RMF", "ISO-style evidence", "Microsoft Purview", "RPAA-safe vendor"],
         live_proof_panel(),
-    ) + stat_bar() + self_serve_rail()
+    ).replace(
+        '<p class="nf-lead">',
+        f'<p class="nf-first-receipt-promise">{COPY["first_receipt_promise"]}</p>\n <p class="nf-lead">',
+        1,
+    ) + stat_bar() + buyer_journey_strip() + three_traps_section() + self_serve_rail() + "\n </section>"
 
     act_prove = f"""
  <section class="nf-section-block nf-act-prove" aria-labelledby="act-prove">
@@ -438,6 +564,7 @@ def homepage() -> str:
         ("/copilot/procurement/", "ZIP", "Procurement pack", "Buyer diligence ZIP · NIST AI RMF · trust center crosswalk"),
         ("/trust-ledger/verify/", "✓", "Verify export", "Fail-closed export integrity walkthrough"),
     ])}
+ {governance_output_suite()}
  <p class="nf-section-lead" style="margin-top:20px"><a href="/copilot/">What buyers ask</a> · extended FAQ · stack complement · category map on the Copilot hub.</p>
  </section>"""
 
@@ -448,6 +575,7 @@ def homepage() -> str:
  <h2>Published tiers — sandbox to contract</h2>
  <p class="nf-section-lead">Start free in developer sandbox, apply to the design partner program, or buy a locked contract SKU — same evaluate → TLE → export spine.</p>
  </div></div>
+ {contrast_table_section()}
  {packaging_tiers_grid(compact=True)}
  <p class="nf-section-lead"><a href="/pricing/">See all tiers</a> · Sandbox + production modes · three contract SKUs only.</p>
  </section>
@@ -460,7 +588,20 @@ def homepage() -> str:
  {offerings_three_skus()}
  </section>"""
 
-    act_trust = procurement_rail() + ciso_strip() + scope_block() + mega_cta() + sticky_mobile_cta()
+    act_trust = f"""
+ <section class="nf-section-block nf-act-trust" aria-labelledby="act-trust">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">04</span><div>
+ <p class="nf-eyebrow" id="act-trust">Trust</p>
+ <h2>Procurement diligence — honest scope</h2>
+ <p class="nf-section-lead">For you / not for you · trust center · export verification.</p>
+ </div></div>
+ {fit_qualification_body()}
+ {procurement_rail()}
+ {ciso_strip()}
+ {scope_block()}
+ {closing_competitive_line()}
+ </section>
+""" + mega_cta() + sticky_mobile_cta()
 
     return act_try + act_prove + act_package + act_trust
 
@@ -856,6 +997,7 @@ def start_page_body() -> str:
  {trial_os_wizard()}
  <aside class="nf-callout"><p><strong>Sandbox vs production:</strong> Sandbox uses mock connectors and local evaluate limits. Production mode unlocks via <a href="/copilot/pilot/">design partner program</a> or Trust Brief engagement.</p></aside>
  </section>
+ {fit_qualification_section()}
  {agentic_autonomous_section()}
 """ + packaging_tiers_grid(compact=True) + mega_cta("Upgrade to design partner", "Production keys · real M365 metadata · board PDF in governance meeting", ("/copilot/pilot/", "Apply to design partner"), ("/pricing/", "Compare tiers"))
 
@@ -888,7 +1030,7 @@ def pricing_page_body() -> str:
  <tr><td>Sales call required</td><td>No</td><td>Program intake · SOW</td></tr>
  </tbody></table></div>
  </section>
-""" + section_block("02", "Tiers", "Access paths and contract programs", packaging_tiers_grid(compact=True), "Free sandbox is developer access — not a fourth contract SKU.") + mega_cta()
+""" + contrast_table_section() + section_block("02", "Tiers", "Access paths and contract programs", packaging_tiers_grid(compact=True), "Free sandbox is developer access — not a fourth contract SKU.") + mega_cta()
 
 
 def ai_automation_body() -> str:

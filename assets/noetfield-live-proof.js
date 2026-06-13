@@ -1,10 +1,49 @@
-/** Live Proof Hero — homepage mini evaluate → animated receipt (v18 UI-01). */
+/** Governance Playground — homepage scenario picker + mini evaluate → scorecard receipt (v19). */
 (function () {
   var PANEL_ID = "nfLiveProofHero";
   var ROWS = ["tle_id", "decision", "confidence_score", "rid", "evidence_index", "export_integrity"];
 
+  var SCENARIOS = {
+    copilot_rollout: {
+      action: "copilot_rollout",
+      actor: "security-team",
+      context: "Copilot rollout to production M365 tenant — pre-execution governance check",
+      decision: "allow",
+      score: "0.82",
+    },
+    guest_access: {
+      action: "guest_sharing",
+      actor: "collaboration-lead",
+      context: "External guest access to Copilot-enabled SharePoint — sharing boundary review",
+      decision: "review",
+      score: "0.71",
+    },
+    data_export: {
+      action: "bulk_export",
+      actor: "data-governance",
+      context: "Bulk export of Copilot-indexed content — high sensitivity classification",
+      decision: "deny",
+      score: "0.91",
+    },
+  };
+
   function qs(sel, root) {
     return (root || document).querySelector(sel);
+  }
+
+  function activeScenario(form) {
+    var key = (qs('[name="scenario"]', form) || {}).value || "copilot_rollout";
+    return SCENARIOS[key] || SCENARIOS.copilot_rollout;
+  }
+
+  function applyScenario(form) {
+    var s = activeScenario(form);
+    var actor = qs('[name="actor"]', form);
+    var action = qs('[name="action"]', form);
+    var context = qs('[name="context"]', form);
+    if (actor) actor.value = s.actor;
+    if (action) action.value = s.action;
+    if (context) context.value = s.context;
   }
 
   function skeletonReceipt(container) {
@@ -27,7 +66,7 @@
         );
       }).join("") +
       "</dl>" +
-      '<p class="nf-receipt-mock-footer nf-live-proof-footer">Submit intent to generate a live receipt.</p>' +
+      '<p class="nf-receipt-mock-footer nf-live-proof-footer">Pick a scenario and evaluate to generate a scorecard receipt.</p>' +
       "</aside></div>";
   }
 
@@ -42,19 +81,13 @@
     row.classList.add("nf-live-proof-row--in");
   }
 
-  function renderReceipt(container, data, rid) {
-    var panel = container.querySelector(".nf-live-proof-receipt");
-    if (!panel) return;
-    panel.setAttribute("aria-busy", "false");
-    var badge = panel.querySelector(".nf-live-proof-badge");
-    if (badge) badge.textContent = "Verified";
-
+  function receiptMap(data, rid, scenario) {
     var score =
       typeof data.risk_score === "number"
         ? (1 - Math.min(1, Math.max(0, data.risk_score))).toFixed(2)
-        : "0.82";
-    var decision = data.decision || "allow";
-    var map = {
+        : scenario.score;
+    var decision = data.decision || scenario.decision;
+    return {
       tle_id: "TLE-015DCFB8B953",
       decision: decision,
       confidence_score: score,
@@ -62,7 +95,14 @@
       evidence_index: "purview · entra · audit",
       export_integrity: "PASS · fail closed on tamper",
     };
+  }
 
+  function paintReceipt(container, map) {
+    var panel = container.querySelector(".nf-live-proof-receipt");
+    if (!panel) return;
+    panel.setAttribute("aria-busy", "false");
+    var badge = panel.querySelector(".nf-live-proof-badge");
+    if (badge) badge.textContent = "Verified";
     ROWS.forEach(function (key, i) {
       setTimeout(function () {
         animateRow(
@@ -72,8 +112,11 @@
         );
       }, 80 * i);
     });
+  }
 
-    var foot = panel.querySelector(".nf-live-proof-footer");
+  function renderReceipt(container, data, rid, scenario) {
+    paintReceipt(container, receiptMap(data, rid, scenario));
+    var foot = container.querySelector(".nf-live-proof-footer");
     if (foot) {
       foot.innerHTML =
         '<a href="/result/' +
@@ -83,45 +126,40 @@
     }
   }
 
-  function degradedReceipt(container, msg) {
+  function degradedReceipt(container, scenario) {
     skeletonReceipt(container);
     var foot = container.querySelector(".nf-live-proof-footer");
     if (foot) {
       foot.innerHTML =
-        (msg || "Live evaluate is temporarily unavailable") +
-        ' — <span class="nf-live-proof-degraded">showing sample receipt</span> · ' +
+        'Live evaluate is temporarily unavailable — <span class="nf-live-proof-degraded">showing sample scorecard</span> · ' +
         '<a href="/start/">Try the sandbox</a>';
     }
-    var map = {
-      tle_id: "TLE-015DCFB8B953",
-      decision: "allow",
-      confidence_score: "0.82",
-      rid: "RID-2026-0602-HOME",
-      evidence_index: "purview · entra · audit",
-      export_integrity: "PASS · fail closed on tamper",
-    };
-    ROWS.forEach(function (key) {
-      animateRow(
-        container.querySelector('[data-key="' + key + '"]'),
-        map[key],
-        key === "export_integrity"
-      );
-    });
+    paintReceipt(
+      container,
+      receiptMap({}, "RID-2026-0602-HOME", scenario)
+    );
   }
 
   function bindForm(root) {
     var form = qs("#nfLiveProofForm", root);
     if (!form) return;
     var receiptHost = qs("#nfLiveProofReceipt", root);
+    var scenarioSelect = qs('[name="scenario"]', form);
     skeletonReceipt(receiptHost);
+    applyScenario(form);
+
+    if (scenarioSelect) {
+      scenarioSelect.addEventListener("change", function () {
+        applyScenario(form);
+      });
+    }
 
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
-      var actor = (qs('[name="actor"]', form) || {}).value || "www-hero";
-      var action = (qs('[name="action"]', form) || {}).value || "copilot_rollout";
-      var context =
-        (qs('[name="context"]', form) || {}).value ||
-        "Homepage live proof — Copilot governance evaluate";
+      var scenario = activeScenario(form);
+      var actor = (qs('[name="actor"]', form) || {}).value || scenario.actor;
+      var action = (qs('[name="action"]', form) || {}).value || scenario.action;
+      var context = (qs('[name="context"]', form) || {}).value || scenario.context;
       var btn = qs('button[type="submit"]', form);
       if (btn) {
         btn.disabled = true;
@@ -136,7 +174,7 @@
           actor: actor,
           action: action,
           context: context,
-          metadata: { source: "live-proof-hero" },
+          metadata: { source: "live-proof-hero", scenario: (qs('[name="scenario"]', form) || {}).value },
         }),
       })
         .then(function (res) {
@@ -145,13 +183,13 @@
         })
         .then(function (data) {
           if (!data.rid) throw new Error("no rid");
-          renderReceipt(receiptHost, data, data.rid);
+          renderReceipt(receiptHost, data, data.rid, scenario);
           if (window.noetfieldSandbox && window.noetfieldSandbox.incrementEvaluate) {
             window.noetfieldSandbox.incrementEvaluate();
           }
         })
         .catch(function () {
-          degradedReceipt(receiptHost);
+          degradedReceipt(receiptHost, scenario);
         })
         .finally(function () {
           if (btn) {
