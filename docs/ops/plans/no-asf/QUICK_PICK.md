@@ -2,37 +2,38 @@
 
 When the founder says **PLAN WITH NO ASF**, start here. Pick the next **≤3 agent** items (not `asf_only` / not S8 Hub).
 
-**v2 intelligence:** [PICK_INTELLIGENCE_v1.md](../PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) · **Unified 500:** [UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md)  
+**Executive synthesis:** [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](../PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)  
+**Unified 500 master:** [UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md)  
 **Tier taxonomy:** [SUCCESS_MODEL_TIERS_v1.md](../PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md)  
-**Next 50 auto-ranked:** [ENRICHED_PICKS_NEXT_50_v1.md](../PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md)  
-**Machine index:** [unified_500_index.json](../PROMPT_PACK_LOCKED/unified_500_index.json) (`prompt_structured` per plan)
+**v3 intelligence:** [PICK_INTELLIGENCE_v1.md](../PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) · **All 500 ranked:** [ALL_500_TIER_INDEX_v1.md](../PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md)  
+**Redesigned prompts:** [unified_500_index.json](../PROMPT_PACK_LOCKED/unified_500_index.json) → `prompt_redesigned` per ID
 
 **Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`
 
-## Wise pick order (v2)
+## Wise pick order (v3 — benchmark + goals)
 
-1. Filter `ship_status: open` — skip `partial` unless extending a live slice
-2. Sort `priority_rank` ascending (lower = sooner)
-3. Max **2× S0** per iter · diversify tier · never 3× S7
-4. Read `prompt_structured.pre_read` + obey `stop_if` before code
+1. Filter `ship_status: open` — skip `partial` unless extending live slice
+2. Sort `priority_rank` ascending · read `prompt_redesigned` before code
+3. **P0 goals:** `customer_1` + `tle_wedge` first (board PDF · tamper export)
+4. Max **2× S0** per iter · diversify tier · never 3× S7 · never mix F+M ICP
 
-| Tier | Pick when |
-|------|-----------|
-| **S0-proof** | Customer #1 — demo · TLE · procurement |
-| **S6-tle-wedge** | Receipt differentiation at procurement close |
-| **S2-copilot** | Agent 365 / Purview complement story |
-| **S4-trust-ui** | Diligence questionnaire inbound |
-| **S3-msp / S5-federal** | Lane-locked only when ICP matches |
+| Phase | Goal | Pick when |
+|-------|------|-----------|
+| P1-proof | customer_1 | Demo · QuickScan · board PDF in meeting |
+| P2-wedge | tle_wedge | Procurement tamper · receipt portability |
+| P3-story | copilot_story | Agent 365 / Purview complement |
+| P4-diligence | trust_diligence | Framework grid · diligence inbound |
+| P5-channel | msp / federal | Lane-locked only |
 
-## Next 3 recommended (v2 computed — open rows)
+## Next 3 recommended (v3 computed)
 
-| Priority | ID | FQ | Tier | GTM | Plan |
-|----------|-----|-----|------|-----|------|
-| 1 | ship-fwd-087 | 028 | S0 | 100 | Behavioral log export endpoint stub |
-| 2 | ship-fwd-091 | 032 | S0 | 100 | QuickScan scoring rubric v2 |
-| 3 | ship-fwd-081 | 022 | S6 | 88 | Tamper FAIL export verify hardening |
+| # | ID | FQ | Tier | Goal align | Plan |
+|---|-----|-----|------|------------|------|
+| 1 | ship-fwd-097 | 038 | S0 | 100 | Demo script “governance meeting” (5-min board PDF) |
+| 2 | ship-fwd-301 | 242 | S0 | 100 | Partner demo URL + activation dashboard spec |
+| 3 | ship-fwd-081 | 022 | S6 | 92 | Tamper FAIL export verify hardening |
 
-**Also high rank:** `ship-fwd-170` (Playwright smoke, S0 rank ~8) · `ship-fwd-520` (partner-verify, MSP)
+**Also rank ≤10:** `ship-fwd-170` Playwright · `ship-fwd-091` QuickScan · `ship-fwd-087` behavioral log
 
 ## GTM_NEXT (disk verify — iter 19 carry)
 
@@ -46,12 +47,6 @@ When the founder says **PLAN WITH NO ASF**, start here. Pick the next **≤3 age
 |----|---------|
 | **ship-design-partner-outreach-026** | One named CIO + demo URL sent |
 
-## Suggested iter bundle 1 (smart 3-pack)
+## Inventory (v3)
 
-See [UNIFIED_500_MASTER_v1.md](../PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) § Suggested iter bundles — proof-first diversified packs.
-
-## Recently completed (context)
-
-- v2 intelligence engine: weighted tiers · ship-aware · GTM impact scoring
-- 440 open · 60 partial forward-queue rows (filesystem-aware)
-- Institutional benchmark 10-step www + console pass (PR #54)
+440 open · 60 partial · 500 total — full table in ALL_500_TIER_INDEX_v1.md

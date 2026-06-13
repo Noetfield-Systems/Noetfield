@@ -45,7 +45,9 @@ When the founder says **PLAN WITH NO ASF**, run this fixed sequence — no ASF w
 | **Unified 500 (FQ-001–500)** | [plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md](./plans/PROMPT_PACK_LOCKED/UNIFIED_500_MASTER_v1.md) |
 | **Success model tiers** | [plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md](./plans/PROMPT_PACK_LOCKED/SUCCESS_MODEL_TIERS_v1.md) |
 | **Enriched next 50 picks** | [plans/PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md](./plans/PROMPT_PACK_LOCKED/ENRICHED_PICKS_NEXT_50_v1.md) |
-| **Pick intelligence (v2)** | [plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md](./plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) |
+| **Pick intelligence (v3)** | [plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md](./plans/PROMPT_PACK_LOCKED/PICK_INTELLIGENCE_v1.md) |
+| **Executive synthesis** | [plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md) |
+| **All 500 tier index** | [plans/PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md](./plans/PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md) |
 | **Machine index (JSON)** | [plans/PROMPT_PACK_LOCKED/unified_500_index.json](./plans/PROMPT_PACK_LOCKED/unified_500_index.json) |
 | **Markdown stubs** | [os/plans/](../../os/plans/) (`nf-future-*`) |
 

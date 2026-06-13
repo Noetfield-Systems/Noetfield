@@ -1,6 +1,7 @@
-# Enriched prompt picks — next 50 (v2 auto-ranked)
+# Enriched prompt picks — next 50 (v3 benchmark-ranked)
 
-**Status:** Machine-ranked from v2 intelligence engine
+**Status:** Goal-aligned · benchmark-mapped · auto-ranked
+**Full redesigned prompts:** `unified_500_index.json` → `prompt_redesigned` per ID
 **Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`
 **Pick rule:** ≤3 per iter · open first · read `prompt_structured` in index JSON
 
@@ -8,93 +9,93 @@
 
 ## Wave A — S0 proof (customer #1)
 
-| # | ID | FQ | GTM | Status | Plan | Rationale |
-|---|-----|-----|-----|--------|------|-----------|
-| A1 | ship-fwd-087 | 028 | 100 | open | Behavioral log export endpoint stub | T1 critical · disk-ship · S0-proof · greenfield · high GTM impact |
-| A2 | ship-fwd-091 | 032 | 100 | open | QuickScan scoring rubric v2 | T1 critical · disk-ship · S0-proof · greenfield · high GTM impact |
-| A3 | ship-fwd-097 | 038 | 100 | open | Demo script “governance meeting” | T1 critical · disk-ship · S0-proof · greenfield · high GTM impact |
-| A4 | ship-fwd-109 | 050 | 100 | open | Board pack PDF cover E-23 fields | T1 critical · disk-ship · S0-proof · greenfield · high GTM impact |
-| A5 | ship-fwd-124 | 065 | 100 | open | Board pack template v2 | T1 critical · disk-ship · S0-proof · greenfield · high GTM impact |
-| A6 | ship-fwd-139 | 080 | 100 | open | `make demo-url` CI artifact | T1 critical · disk-ship · S0-proof · greenfield · high GTM impact |
-| A7 | ship-fwd-155 | 096 | 100 | open | W3 economic signal verify | T1 critical · disk-ship · S0-proof · greenfield · high GTM impact |
-| A8 | ship-fwd-170 | 111 | 100 | open | Playwright smoke suite v1 | T1 critical · disk-ship · S0-proof · greenfield · high GTM impact |
+| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
+|---|-----|-----|-----|------|--------|-----------|------|
+| A1 | ship-fwd-097 | 038 | 100 | 100 | open | Vanta | Demo script “governance meeting” |
+| A2 | ship-fwd-301 | 242 | 100 | 100 | open | Vanta | Partner demo URL + activation dashb |
+| A3 | ship-fwd-109 | 050 | 100 | 96 | open | Vanta | Board pack PDF cover E-23 fields |
+| A4 | ship-fwd-124 | 065 | 100 | 96 | open | Vanta | Board pack template v2 |
+| A5 | ship-fwd-170 | 111 | 100 | 96 | open | Vanta | Playwright smoke suite v1 |
+| A6 | ship-fwd-181 | 122 | 100 | 96 | open | Vanta | `MetricStrip` on cognitive-dashboar |
+| A7 | ship-fwd-260 | 201 | 100 | 96 | open | Vanta | Board pack RAG summary block |
+| A8 | ship-fwd-262 | 203 | 100 | 96 | open | Vanta | `GET /api/v1/metrics/board` stub |
 
 ## Wave B — S6 TLE wedge (procurement)
 
-| # | ID | FQ | GTM | Status | Plan | Rationale |
-|---|-----|-----|-----|--------|------|-----------|
-| B1 | ship-fwd-081 | 022 | 100 | open | Tamper FAIL export verify hardening | T1 critical · disk-ship · S6-tle-wedge · greenfield · high GTM impact |
-| B2 | ship-fwd-100 | 041 | 100 | open | BLOCK path audit receipt test | T1 critical · disk-ship · S6-tle-wedge · greenfield · high GTM impact |
-| B3 | ship-fwd-101 | 042 | 100 | open | ALLOW path TLE auto-draft | T1 critical · disk-ship · S6-tle-wedge · greenfield · high GTM impact |
-| B4 | ship-fwd-103 | 044 | 100 | open | RID continuity cross-service | T1 critical · disk-ship · S6-tle-wedge · greenfield · high GTM impact |
-| B5 | ship-fwd-105 | 046 | 100 | open | Export tamper regression test | T1 critical · disk-ship · S6-tle-wedge · greenfield · high GTM impact |
-| B6 | ship-fwd-122 | 063 | 100 | open | TLE sample pack refresh | T1 critical · disk-ship · S6-tle-wedge · greenfield · high GTM impact |
+| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
+|---|-----|-----|-----|------|--------|-----------|------|
+| B1 | ship-fwd-081 | 022 | 100 | 92 | open | Veridra | Tamper FAIL export verify hardening |
+| B2 | ship-fwd-105 | 046 | 100 | 92 | open | Veridra | Export tamper regression test |
+| B3 | ship-fwd-103 | 044 | 100 | 84 | open | Veridra | RID continuity cross-service |
+| B4 | ship-fwd-100 | 041 | 100 | 72 | open | Veridra | BLOCK path audit receipt test |
+| B5 | ship-fwd-289 | 230 | 100 | 72 | open | Veridra | TLE export drift annotation |
+| B6 | ship-fwd-321 | 262 | 100 | 72 | open | Veridra | Prompt injection BLOCK fixtures |
 
 ## Wave C — S2 Copilot complement
 
-| # | ID | FQ | GTM | Status | Plan | Rationale |
-|---|-----|-----|-----|--------|------|-----------|
-| C1 | ship-fwd-062 | 003 | 100 | open | Agent registry gap verify script | T1 critical · disk-ship · S2-copilot-complement · greenfield · high GTM impact |
-| C2 | ship-fwd-064 | 005 | 100 | open | `/copilot/governance/` Agent 365 section | T1 critical · disk-ship · S2-copilot-complement · greenfield · high GTM impact |
-| C3 | ship-fwd-066 | 007 | 100 | open | Connector manifest Agent 365 stub row | T1 critical · disk-ship · S2-copilot-complement · greenfield · high GTM impact |
-| C4 | ship-fwd-094 | 035 | 100 | open | Pilot success metrics strip | T1 critical · disk-ship · S2-copilot-complement · greenfield · high GTM impact |
-| C5 | ship-fwd-099 | 040 | 100 | open | `/copilot/quickscan/` step verify | T1 critical · disk-ship · S2-copilot-complement · greenfield · high GTM impact |
-| C6 | ship-fwd-112 | 053 | 100 | open | Security questionnaire auto-answers | T1 critical · disk-ship · S2-copilot-complement · greenfield · high GTM impact |
+| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
+|---|-----|-----|-----|------|--------|-----------|------|
+| C1 | ship-fwd-062 | 003 | 100 | 96 | open | Microsoft Purview | Agent registry gap verify script |
+| C2 | ship-fwd-229 | 170 | 100 | 92 | open | Microsoft Purview | Copilot governance Agent 365 CTA |
+| C3 | ship-fwd-064 | 005 | 100 | 80 | open | Microsoft Purview | `/copilot/governance/` Agent 365 se |
+| C4 | ship-fwd-278 | 219 | 100 | 80 | open | Microsoft Purview | Purview GA five-step posture card |
+| C5 | ship-fwd-066 | 007 | 100 | 72 | open | Microsoft Purview | Connector manifest Agent 365 stub r |
+| C6 | ship-fwd-224 | 165 | 100 | 72 | open | Microsoft Purview | Purview sync status in console |
 
 ## Wave D — S4 Trust UI
 
-| # | ID | FQ | GTM | Status | Plan | Rationale |
-|---|-----|-----|-----|--------|------|-----------|
-| D1 | ship-fwd-111 | 052 | 100 | open | Procurement ZIP manifest v2 | T1 critical · disk-ship · S4-trust-ui · greenfield · high GTM impact |
-| D2 | ship-fwd-211 | 152 | 100 | open | OpenAPI diff in procurement ZIP | T1 critical · disk-ship · S4-trust-ui · greenfield · high GTM impact |
-| D3 | ship-fwd-249 | 190 | 100 | open | Postman collection in procurement ZIP | T1 critical · disk-ship · S4-trust-ui · greenfield · high GTM impact |
-| D4 | ship-fwd-385 | 326 | 100 | open | Trust center FedRAMP row | T1 critical · disk-ship · S4-trust-ui · greenfield · high GTM impact |
-| D5 | ship-fwd-083 | 024 | 96 | open | Procurement EU annex paragraph | T1 critical · S4-trust-ui · greenfield · high GTM impact |
-| D6 | ship-fwd-166 | 107 | 92 | open | Trust Center vs SOC2 claim fence | T1 critical · S4-trust-ui · greenfield · high GTM impact |
+| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
+|---|-----|-----|-----|------|--------|-----------|------|
+| D1 | ship-fwd-385 | 326 | 100 | 72 | open | OneTrust | Trust center FedRAMP row |
+| D2 | ship-fwd-111 | 052 | 100 | 56 | open | OneTrust | Procurement ZIP manifest v2 |
+| D3 | ship-fwd-211 | 152 | 100 | 56 | open | OneTrust | OpenAPI diff in procurement ZIP |
+| D4 | ship-fwd-249 | 190 | 100 | 56 | open | OneTrust | Postman collection in procurement Z |
+| D5 | ship-fwd-083 | 024 | 96 | 48 | open | OneTrust | Procurement EU annex paragraph |
+| D6 | ship-fwd-166 | 107 | 92 | 48 | open | OneTrust | Trust Center vs SOC2 claim fence |
 
 ## Wave E — S3 MSP channel
 
-| # | ID | FQ | GTM | Status | Plan | Rationale |
-|---|-----|-----|-----|--------|------|-----------|
-| E1 | ship-fwd-309 | 250 | 100 | open | Partner procurement annex | T1 critical · disk-ship · S3-msp-channel · greenfield · high GTM impact |
-| E2 | ship-fwd-471 | 412 | 100 | open | Activation dashboard spec | T1 critical · disk-ship · S3-msp-channel · greenfield · high GTM impact |
-| E3 | ship-fwd-477 | 418 | 100 | open | QuickScan partner-branded export | T1 critical · disk-ship · S3-msp-channel · greenfield · high GTM impact |
-| E4 | ship-fwd-489 | 430 | 100 | open | Partner security FAQ in procurement | T1 critical · disk-ship · S3-msp-channel · greenfield · high GTM impact |
-| E5 | ship-fwd-490 | 431 | 100 | open | White-label board PDF header v2 | T1 critical · disk-ship · S3-msp-channel · greenfield · high GTM impact |
-| E6 | ship-fwd-492 | 433 | 100 | open | Partner procurement ZIP annex v2 | T1 critical · disk-ship · S3-msp-channel · greenfield · high GTM impact |
-| E7 | ship-fwd-499 | 440 | 100 | open | Demo film MSP cut script | T1 critical · disk-ship · S3-msp-channel · greenfield · high GTM impact |
-| E8 | ship-fwd-548 | 489 | 100 | open | Partner metrics API stub | T1 critical · disk-ship · S3-msp-channel · greenfield · high GTM impact |
+| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
+|---|-----|-----|-----|------|--------|-----------|------|
+| E1 | ship-fwd-309 | 250 | 100 | 76 | open | Inforcer | Partner procurement annex |
+| E2 | ship-fwd-477 | 418 | 100 | 76 | open | Inforcer | QuickScan partner-branded export |
+| E3 | ship-fwd-489 | 430 | 100 | 76 | open | Inforcer | Partner security FAQ in procurement |
+| E4 | ship-fwd-490 | 431 | 100 | 76 | open | Inforcer | White-label board PDF header v2 |
+| E5 | ship-fwd-492 | 433 | 100 | 76 | open | Inforcer | Partner procurement ZIP annex v2 |
+| E6 | ship-fwd-499 | 440 | 100 | 76 | open | Inforcer | Demo film MSP cut script |
+| E7 | ship-fwd-469 | 410 | 98 | 76 | open | Inforcer | Partner CTA on copilot hub |
+| E8 | ship-fwd-548 | 489 | 100 | 64 | open | Inforcer | Partner metrics API stub |
 
 ## Wave F — S5 Federal (F lane)
 
-| # | ID | FQ | GTM | Status | Plan | Rationale |
-|---|-----|-----|-----|--------|------|-----------|
-| F1 | ship-fwd-114 | 055 | 100 | open | README www 200 verify governance | T1 critical · disk-ship · S5-federal · greenfield · high GTM impact |
-| F2 | ship-fwd-203 | 144 | 100 | open | Framework picker on procurement | T1 critical · disk-ship · S5-federal · greenfield · high GTM impact |
-| F3 | ship-fwd-450 | 391 | 96 | open | Forward queue v4 coherence gate | T1 critical · disk-ship · S5-federal · greenfield · high GTM impact |
-| F4 | ship-fwd-383 | 324 | 88 | open | FedRAMP vs receipt export narrative | T1 critical · S5-federal · greenfield · high GTM impact |
-| F5 | ship-fwd-070 | 011 | 84 | open | OSFI E-23 mapping appendix | T1 critical · S5-federal · greenfield · buyer-visible |
-| F6 | ship-fwd-360 | 301 | 84 | open | OMB M-25-22 acquisition appendix | T1 critical · S5-federal · greenfield · buyer-visible |
+| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
+|---|-----|-----|-----|------|--------|-----------|------|
+| F1 | ship-fwd-203 | 144 | 100 | 68 | open | Canada AIA | Framework picker on procurement |
+| F2 | ship-fwd-114 | 055 | 100 | 64 | open | Canada AIA | README www 200 verify governance |
+| F3 | ship-fwd-450 | 391 | 96 | 56 | open | Canada AIA | Forward queue v4 coherence gate |
+| F4 | ship-fwd-360 | 301 | 84 | 40 | open | Canada AIA | OMB M-25-22 acquisition appendix |
+| F5 | ship-fwd-383 | 324 | 88 | 32 | open | Canada AIA | FedRAMP vs receipt export narrative |
+| F6 | ship-fwd-070 | 011 | 84 | 32 | open | Canada AIA | OSFI E-23 mapping appendix |
 
 ## Wave G — S7 Hardening (after proof)
 
-| # | ID | FQ | GTM | Status | Plan | Rationale |
-|---|-----|-----|-----|--------|------|-----------|
-| G1 | ship-fwd-234 | 175 | 77 | open | Economic signal verify v2 | T1 critical · disk-ship · S7-hardening · greenfield · buyer-visible |
-| G2 | ship-fwd-092 | 033 | 71 | open | Permission debt checklist ol | T1 critical · disk-ship · S7-hardening · greenfield · buyer-visible |
-| G3 | ship-fwd-110 | 051 | 71 | open | OpenAPI status field `openapi` path | T1 critical · disk-ship · S7-hardening · greenfield · buyer-visible |
-| G4 | ship-fwd-136 | 077 | 71 | open | Footer Governance API discoverability | T1 critical · disk-ship · S7-hardening · greenfield · buyer-visible |
-| G5 | ship-fwd-168 | 109 | 71 | open | `last_verified_at` in openapi.json | T1 critical · disk-ship · S7-hardening · greenfield · buyer-visible |
-| G6 | ship-fwd-188 | 129 | 71 | open | Deprecate `governance-console-v1.html` | T1 critical · disk-ship · S7-hardening · greenfield · buyer-visible |
+| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
+|---|-----|-----|-----|------|--------|-----------|------|
+| G1 | ship-fwd-234 | 175 | 77 | 56 | open | Engineering best practice | Economic signal verify v2 |
+| G2 | ship-fwd-092 | 033 | 71 | 56 | open | Engineering best practice | Permission debt checklist ol |
+| G3 | ship-fwd-110 | 051 | 71 | 56 | open | Engineering best practice | OpenAPI status field `openapi` path |
+| G4 | ship-fwd-136 | 077 | 71 | 56 | open | Engineering best practice | Footer Governance API discoverabili |
+| G5 | ship-fwd-168 | 109 | 71 | 56 | open | Engineering best practice | `last_verified_at` in openapi.json |
+| G6 | ship-fwd-188 | 129 | 71 | 56 | open | Engineering best practice | Deprecate `governance-console-v1.ht |
 
 ## Wave H — S1 Positioning
 
-| # | ID | FQ | GTM | Status | Plan | Rationale |
-|---|-----|-----|-----|--------|------|-----------|
-| H1 | ship-fwd-069 | 010 | 97 | open | Homepage meta refresh Agent 365 era | T1 critical · disk-ship · S1-positioning · greenfield · high GTM impact |
-| H2 | ship-fwd-131 | 072 | 97 | open | Homepage social proof strip | T1 critical · disk-ship · S1-positioning · greenfield · high GTM impact |
-| H3 | ship-fwd-231 | 172 | 97 | open | Homepage proof slot v2 | T1 critical · disk-ship · S1-positioning · greenfield · high GTM impact |
-| H4 | ship-fwd-079 | 020 | 77 | open | Canada channel one-pager update | T1 critical · S1-positioning · greenfield · buyer-visible |
+| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |
+|---|-----|-----|-----|------|--------|-----------|------|
+| H1 | ship-fwd-069 | 010 | 97 | 56 | open | Credo AI | Homepage meta refresh Agent 365 era |
+| H2 | ship-fwd-131 | 072 | 97 | 56 | open | Credo AI | Homepage social proof strip |
+| H3 | ship-fwd-231 | 172 | 97 | 56 | open | Credo AI | Homepage proof slot v2 |
+| H4 | ship-fwd-079 | 020 | 77 | 32 | open | Credo AI | Canada channel one-pager update |
 
 ---
 
@@ -104,7 +105,7 @@
 PLAN WITH NO ASF — pick ≤3 from ENRICHED_PICKS waves (open rows first).
 
 For each task:
-1. Load prompt_structured from unified_500_index.json for the ID
+1. Load prompt_redesigned from unified_500_index.json for the ID
 2. Read every pre_read doc; obey stop_if and anti_scope
 3. Branch cursor/{slug}-37f0
 4. Implement outcome only

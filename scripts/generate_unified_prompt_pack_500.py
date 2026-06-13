@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Analyze + emit unified 500 forward-queue index — v2 intelligence engine."""
+"""Analyze + emit unified 500 forward-queue index — v3 benchmark synthesis engine."""
 
 from __future__ import annotations
 
@@ -171,6 +171,100 @@ ANTI_SCOPE = (
     "Infrastructure sprawl unrelated to outcome",
 )
 
+# Benchmark success model — maps tiers to reference vendors + 10-step plan
+BENCHMARK_BY_TIER: dict[str, dict[str, str | int | tuple[str, ...]]] = {
+    "S0-proof": {
+        "refs": ("Vanta", "Drata", "Credo AI"),
+        "step": 5,
+        "wedge": "5-min board PDF moment — buyer sees confidence + export path",
+        "goal": "customer_1",
+    },
+    "S6-tle-wedge": {
+        "refs": ("Veridra", "ADJUDON", "Audital"),
+        "step": 7,
+        "wedge": "One receipt board, auditor, and MSP cite — same RID",
+        "goal": "tle_wedge",
+    },
+    "S2-copilot-complement": {
+        "refs": ("Microsoft Purview", "Agent 365", "Inforcer"),
+        "step": 3,
+        "wedge": "Registry tells what exists; Noetfield tells what was permitted",
+        "goal": "copilot_story",
+    },
+    "S4-trust-ui": {
+        "refs": ("OneTrust", "Vanta", "Drata"),
+        "step": 5,
+        "wedge": "Honest framework grid — oriented not certified",
+        "goal": "trust_diligence",
+    },
+    "S1-positioning": {
+        "refs": ("Credo AI", "Holistic AI", "Veridra"),
+        "step": 2,
+        "wedge": "Audit trail your Copilot deployment will be asked for",
+        "goal": "positioning",
+    },
+    "S3-msp-channel": {
+        "refs": ("Inforcer", "AvePoint", "Lighthouse"),
+        "step": 4,
+        "wedge": "MSP delivers receipt, not another dashboard",
+        "goal": "msp_channel",
+    },
+    "S5-federal": {
+        "refs": ("Canada AIA", "TBS ADM", "NIST AI RMF"),
+        "step": 6,
+        "wedge": "Pre-execution evidence — vendor layer only",
+        "goal": "federal_lane",
+    },
+    "S7-hardening": {
+        "refs": ("Engineering best practice",),
+        "step": 10,
+        "wedge": "Verify bundle stays green — no buyer story alone",
+        "goal": "engineering",
+    },
+    "S8-agentic": {
+        "refs": ("Hub commercial",),
+        "step": 0,
+        "wedge": "Founder Hub sends; NF-CLOUD never dials",
+        "goal": "agentic",
+    },
+}
+
+GTM_PHASE_BY_TIER = {
+    "S0-proof": "P1-proof-moment",
+    "S6-tle-wedge": "P2-tle-wedge",
+    "S2-copilot-complement": "P3-copilot-story",
+    "S4-trust-ui": "P4-trust-diligence",
+    "S1-positioning": "P4-trust-diligence",
+    "S3-msp-channel": "P5-channel",
+    "S5-federal": "P5-channel",
+    "S7-hardening": "P6-hardening",
+    "S8-agentic": "P7-agentic",
+}
+
+# Locked Noetfield goals — keyword weights for alignment scoring
+GOAL_ALIGNMENT_KEYWORDS: dict[str, tuple[tuple[str, int], ...]] = {
+    "customer_1": (
+        ("board", 5), ("demo", 4), ("procurement", 4), ("pilot", 4), ("quickscan", 3),
+        ("confidence", 3), ("5-min", 4), ("governance meeting", 5),
+    ),
+    "tle_wedge": (
+        ("export", 4), ("tamper", 5), ("receipt", 4), ("rid", 3), ("immutable", 3),
+        ("audit-export", 4), ("board pdf", 4),
+    ),
+    "copilot_story": (
+        ("agent 365", 4), ("purview", 4), ("registry", 3), ("copilot", 2), ("complement", 3),
+    ),
+    "trust_diligence": (
+        ("trust center", 4), ("framework", 3), ("diligence", 4), ("control checkpoint", 3),
+    ),
+    "msp_channel": (
+        ("msp", 3), ("partner", 2), ("sow", 4), ("gdap", 3), ("white-label", 3), ("90-day", 3),
+    ),
+    "federal_lane": (
+        ("aia", 3), ("adm", 2), ("nist", 3), ("federal", 2), ("omb", 2),
+    ),
+}
+
 
 def classify_success_tier(plan: str, outcome: str, lane: str, icp_lane: str) -> str:
     blob = f"{plan} {outcome}".lower()
@@ -209,6 +303,101 @@ def infer_ship_status(plan: str, outcome: str) -> str:
     return "open"
 
 
+def benchmark_meta(row: dict) -> dict:
+    tier = row["success_tier"]
+    meta = BENCHMARK_BY_TIER.get(tier, BENCHMARK_BY_TIER["S7-hardening"])
+    return {
+        "benchmark_refs": list(meta["refs"]),
+        "benchmark_step": meta["step"],
+        "copy_wedge": meta["wedge"],
+        "locked_goal": meta["goal"],
+    }
+
+
+def goal_alignment_score(row: dict) -> int:
+    if row["ship_status"] == "shipped":
+        return 0
+    blob = f"{row['plan']} {row['outcome']}".lower()
+    tier_goal = BENCHMARK_BY_TIER.get(row["success_tier"], {}).get("goal", "engineering")
+    kws = GOAL_ALIGNMENT_KEYWORDS.get(tier_goal, ())
+    score = sum(w for k, w in kws if k in blob)
+    if row["success_tier"] == "S0-proof":
+        score += sum(w for k, w in GOAL_ALIGNMENT_KEYWORDS["customer_1"] if k in blob)
+    if row["tier"] == "T1":
+        score += 8
+    if row["lane"] in ("A", "F+A", "M+A"):
+        score += 6
+    if row["ship_status"] == "partial":
+        score = int(score * 0.4)
+    return max(0, min(100, score * 4))
+
+
+def infer_artifact_path(row: dict) -> str:
+    blob = f"{row['plan']} {row['outcome']}"
+    for m in re.findall(r"`(/[^`]+)`", blob):
+        return m
+    for m in re.findall(r"(/[\w\-./]+)", row["plan"]):
+        if m.startswith("/") and len(m) > 2:
+            return m
+    lane_hints = {
+        "S2-copilot-complement": "/copilot/",
+        "S4-trust-ui": "/trust-center/",
+        "S6-tle-wedge": "/trust-ledger/",
+        "S3-msp-channel": "/partners/msp/",
+        "S5-federal": "/federal/",
+    }
+    return lane_hints.get(row["success_tier"], "docs/ or governance-console/")
+
+
+def buyer_moment(row: dict) -> str:
+    tier = row["success_tier"]
+    moments = {
+        "S0-proof": "CIO opens demo URL → sees evaluate + confidence → exports board PDF in <5 min",
+        "S6-tle-wedge": "Procurement asks for tamper evidence → export FAIL on mutation proves integrity",
+        "S2-copilot-complement": "M365 admin compares Purview registry vs Noetfield receipt in briefing",
+        "S4-trust-ui": "Security reviewer opens trust center → framework grid + honest posture",
+        "S1-positioning": "Founder Form PICK → hero copy matches PRODUCT_TRUTH",
+        "S3-msp-channel": "MSP partner attaches 90-day SOW → white-label board PDF for end client",
+        "S5-federal": "Federal vendor diligence → AIA/ADM/NIST mapping without clearance claims",
+        "S7-hardening": "Engineer merges PR → verify bundle green, no www regression",
+        "S8-agentic": "Hub sends one named CIO outreach — NF-CLOUD updated tracker template only",
+    }
+    return moments.get(tier, "Buyer-visible artifact ships with verify gate")
+
+
+def redesigned_prompt(row: dict) -> str:
+    """Brainstorm-enriched high-grade agent instruction."""
+    bm = benchmark_meta(row)
+    s = row.get("prompt_structured") or structured_prompt(row)
+    refs = " · ".join(bm["benchmark_refs"][:3])
+    artifact = infer_artifact_path(row)
+    moment = buyer_moment(row)
+    if row["lane"].endswith("+H") or row["lane"] == "H":
+        return (
+            f"## {row['id']} FQ-{row['fq']:03d} [HUB ONLY]\n"
+            f"**Task:** {row['plan']}\n"
+            f"**Outcome:** {row['outcome']}\n"
+            f"**NF-CLOUD scope:** Maintain copy/template on disk. Hub executes per R-011.\n"
+            f"**Stop:** No send/call from cloud agent.\n"
+        )
+    return (
+        f"## {row['id']} FQ-{row['fq']:03d}\n"
+        f"**Tier:** {row['success_tier']} · **Phase:** {row.get('gtm_phase', '')} · "
+        f"**Goal:** {bm['locked_goal']} · **GTM:** {row.get('gtm_impact', 0)} · "
+        f"**Alignment:** {row.get('goal_alignment', 0)}\n"
+        f"**Benchmark pattern ({refs}):** {bm['copy_wedge']}\n"
+        f"**Buyer moment:** {moment}\n"
+        f"**Task:** {row['plan']}\n"
+        f"**Outcome:** {row['outcome']}\n"
+        f"**Primary artifact:** `{artifact}`\n"
+        f"**Pre-read:** {', '.join(s['pre_read'][:4])}\n"
+        f"**Success when:** {'; '.join(s['success_when'][:3])}\n"
+        f"**Stop if:** {'; '.join(s['stop_if'][:3])}\n"
+        f"**Anti-scope:** {'; '.join(s['anti_scope'][:2])}\n"
+        f"**Verify:** `{s['verify']}` · ≤3 tasks this iter\n"
+    )
+
+
 def gtm_impact_score(row: dict) -> int:
     if row["ship_status"] == "shipped":
         return 0
@@ -236,13 +425,14 @@ def gtm_impact_score(row: dict) -> int:
 
 
 def priority_score(row: dict) -> int:
-    """Lower = higher priority for picking."""
+    """Lower = higher priority. Blends tier, GTM, goal alignment, ship status."""
     tier = TIER_PICK_ORDER.get(row["success_tier"], 9)
     t1 = 0 if row["tier"] == "T1" else (1 if row["tier"] == "T2" else 2)
     lane = 0 if row["lane"].endswith("+A") or row["lane"] == "A" else 1
     shipped = 0 if row["ship_status"] == "open" else (5 if row["ship_status"] == "partial" else 50)
-    impact = 100 - gtm_impact_score(row)
-    return tier * 1000 + shipped + impact + t1 * 10 + lane
+    impact = 100 - row.get("gtm_impact", gtm_impact_score(row))
+    goal = 100 - row.get("goal_alignment", 0)
+    return tier * 1000 + shipped + impact + goal // 2 + t1 * 10 + lane
 
 
 def pick_rationale(row: dict) -> str:
@@ -406,10 +596,16 @@ def parse_queues() -> list[dict]:
             row["success_tier"] = classify_success_tier(plan, outcome, lane, icp_lane)
             row["ship_status"] = infer_ship_status(plan, outcome)
             row["gtm_impact"] = gtm_impact_score(row)
-            row["priority_rank"] = 0  # filled after sort
+            row["goal_alignment"] = goal_alignment_score(row)
+            row["gtm_phase"] = GTM_PHASE_BY_TIER.get(row["success_tier"], "P6-hardening")
+            row.update(benchmark_meta(row))
+            row["artifact_path"] = infer_artifact_path(row)
+            row["buyer_moment"] = buyer_moment(row)
+            row["priority_rank"] = 0
             row["pick_rationale"] = pick_rationale(row)
             row["prompt_structured"] = structured_prompt(row)
             row["prompt_enriched"] = enriched_prompt(row)
+            row["prompt_redesigned"] = redesigned_prompt(row)
             rows.append(row)
     ranked = sorted(rows, key=priority_score)
     for i, r in enumerate(ranked, 1):
@@ -423,11 +619,14 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
         by_success[r["success_tier"]].append(r)
 
     lines = [
-        "# Unified 500 prompt pack — v2 intelligence engine",
+        "# Unified 500 prompt pack — v3 benchmark synthesis",
         "",
-        "**Status:** Smart-tiered forward queue FQ-001–500 + benchmark alignment",
+        "**Status:** Deep-tiered FQ-001–500 · benchmark-mapped · goal-aligned",
         "**Generated by:** `scripts/generate_unified_prompt_pack_500.py`",
-        f"**Rows:** {len(rows)} · **Engine:** v2 (weighted tiers · ship-aware · GTM impact)",
+        f"**Rows:** {len(rows)} · **Engine:** v3 (benchmark refs · goal alignment · redesigned prompts)",
+        "",
+        "**Deep analysis:** [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)",
+        "**Full 500 table:** [ALL_500_TIER_INDEX_v1.md](./ALL_500_TIER_INDEX_v1.md)",
         "",
         "## How agents should pick (wise order)",
         "",
@@ -435,19 +634,20 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
         "2. **Sort** by `priority_rank` ascending (lower = pick sooner)",
         "3. **Cap** ≤3 per iter · max 2 S0 · never 3× S7 · never mix S8 Hub disk work",
         "4. **Diversify** tier + lane per bundle — use suggested iter packs below",
-        "5. **Read** `prompt_structured.pre_read` before implement",
+        "5. **Read** `prompt_redesigned` or `prompt_structured` before implement",
         "",
-        "Full intelligence doc: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)",
+        "Full intelligence: [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)",
         "",
         "## Next 3 recommended (computed)",
         "",
-        "| # | ID | FQ | Tier | GTM | Status | Plan |",
-        "|---|-----|-----|------|-----|--------|------|",
+        "| # | ID | FQ | Tier | Phase | GTM | Goal | Status | Plan |",
+        "|---|-----|-----|------|-------|-----|------|--------|------|",
     ]
     for i, r in enumerate(next_3, 1):
         lines.append(
             f"| {i} | **{r['id']}** | {r['fq']:03d} | `{r['success_tier']}` | "
-            f"{r['gtm_impact']} | {r['ship_status']} | {r['plan'][:50]} |"
+            f"{r.get('gtm_phase', '')} | {r['gtm_impact']} | {r.get('goal_alignment', 0)} | "
+            f"{r['ship_status']} | {r['plan'][:45]} |"
         )
 
     lines.extend([
@@ -482,8 +682,9 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
     for i, r in enumerate(ranked[:25], 1):
         lines.append(
             f"{i}. **{r['id']}** FQ-{r['fq']:03d} · `{r['success_tier']}` · "
-            f"GTM {r['gtm_impact']} · {r['ship_status']} · {r['plan']} — "
-            f"_{r['pick_rationale']}_ — verify `{r['verify']}`"
+            f"{r.get('gtm_phase', '')} · GTM {r['gtm_impact']} · goal {r.get('goal_alignment', 0)} · "
+            f"{r['ship_status']} · {r['plan']} — _{r['pick_rationale']}_ — "
+            f"benchmark: {', '.join(r.get('benchmark_refs', [])[:2])}"
         )
 
     lines.extend(["", "## Enriched prompts by success tier", ""])
@@ -502,16 +703,18 @@ def emit_markdown(rows: list[dict], out: Path, bundles: list[dict], next_3: list
         items = sorted(by_success[st], key=lambda r: r["priority_rank"])
         lines.append(f"### {tier_labels.get(st, st)} ({len(items)} plans)")
         lines.append("")
-        for r in items[:6]:
-            lines.append(f"- **{r['id']}** FQ-{r['fq']:03d} · GTM {r['gtm_impact']} · {r['ship_status']} · {r['lane']} · {r['plan']}")
-            lines.append(f"  - {r['prompt_enriched'][:220]}…")
-        if len(items) > 6:
-            lines.append(f"- _…and {len(items) - 6} more in tier_")
+        for r in items[:4]:
+            lines.append(f"- **{r['id']}** FQ-{r['fq']:03d} · GTM {r['gtm_impact']} · goal {r.get('goal_alignment', 0)} · {r['ship_status']} · {r['lane']} · {r['plan']}")
+            lines.append(f"  - Wedge: {r.get('copy_wedge', '')[:120]}")
+        if len(items) > 4:
+            lines.append(f"- _…and {len(items) - 4} more in tier_")
         lines.append("")
 
     lines.extend([
         "## Related",
         "",
+        "- [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)",
+        "- [ALL_500_TIER_INDEX_v1.md](./ALL_500_TIER_INDEX_v1.md)",
         "- [PICK_INTELLIGENCE_v1.md](./PICK_INTELLIGENCE_v1.md)",
         "- [SUCCESS_MODEL_TIERS_v1.md](./SUCCESS_MODEL_TIERS_v1.md)",
         "- [ENRICHED_PICKS_NEXT_50_v1.md](./ENRICHED_PICKS_NEXT_50_v1.md)",
@@ -533,9 +736,10 @@ def emit_enriched_picks(rows: list[dict], out: Path) -> None:
         ("H", "S1-positioning", "S1 Positioning", 4),
     ]
     lines = [
-        "# Enriched prompt picks — next 50 (v2 auto-ranked)",
+        "# Enriched prompt picks — next 50 (v3 benchmark-ranked)",
         "",
-        "**Status:** Machine-ranked from v2 intelligence engine",
+        "**Status:** Goal-aligned · benchmark-mapped · auto-ranked",
+        "**Full redesigned prompts:** `unified_500_index.json` → `prompt_redesigned` per ID",
         "**Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`",
         "**Pick rule:** ≤3 per iter · open first · read `prompt_structured` in index JSON",
         "",
@@ -548,17 +752,18 @@ def emit_enriched_picks(rows: list[dict], out: Path) -> None:
         tier_rows.sort(key=priority_score)
         lines.append(f"## Wave {wave_id} — {title}")
         lines.append("")
-        lines.append("| # | ID | FQ | GTM | Status | Plan | Rationale |")
-        lines.append("|---|-----|-----|-----|--------|------|-----------|")
+        lines.append("| # | ID | FQ | GTM | Goal | Status | Benchmark | Plan |")
+        lines.append("|---|-----|-----|-----|------|--------|-----------|------|")
         shown = 0
         for r in tier_rows:
             if shown >= limit:
                 break
             pick_num += 1
             label = f"{wave_id}{shown + 1}"
+            refs = r.get("benchmark_refs", ["—"])[0]
             lines.append(
                 f"| {label} | {r['id']} | {r['fq']:03d} | {r['gtm_impact']} | "
-                f"{r['ship_status']} | {r['plan'][:40]} | {r['pick_rationale']} |"
+                f"{r.get('goal_alignment', 0)} | {r['ship_status']} | {refs} | {r['plan'][:35]} |"
             )
             shown += 1
         lines.append("")
@@ -571,7 +776,7 @@ def emit_enriched_picks(rows: list[dict], out: Path) -> None:
         "PLAN WITH NO ASF — pick ≤3 from ENRICHED_PICKS waves (open rows first).",
         "",
         "For each task:",
-        "1. Load prompt_structured from unified_500_index.json for the ID",
+        "1. Load prompt_redesigned from unified_500_index.json for the ID",
         "2. Read every pre_read doc; obey stop_if and anti_scope",
         "3. Branch cursor/{slug}-37f0",
         "4. Implement outcome only",
@@ -592,9 +797,9 @@ def emit_pick_intelligence(rows: list[dict], bundles: list[dict], out: Path) -> 
     open_count = sum(1 for r in rows if r["ship_status"] == "open")
     partial_count = sum(1 for r in rows if r["ship_status"] == "partial")
     lines = [
-        "# Pick intelligence — unified 500 v2",
+        "# Pick intelligence — unified 500 v3",
         "",
-        "**Status:** LOCKED pick logic for cloud agents",
+        "**Status:** LOCKED pick logic · benchmark synthesis",
         "**Regenerate:** `python3 scripts/generate_unified_prompt_pack_500.py`",
         "",
         "## Executive rule",
@@ -602,16 +807,16 @@ def emit_pick_intelligence(rows: list[dict], bundles: list[dict], out: Path) -> 
         "> Pick **proof that buyers can see in 5 minutes** before **engineering hygiene**.",
         "> GTM validation is 2/10 until a board PDF is used in a real governance meeting.",
         "",
-        "## v2 scoring model",
+        "## v3 scoring model (GTM + goal alignment)",
         "",
         "| Signal | Weight | Why |",
         "|--------|--------|-----|",
         "| Success tier (S0–S8) | 0–100 base | Benchmark-aligned buyer outcome |",
+        "| Goal alignment | 0–100 | Locked goal keyword match (customer_1, tle_wedge, …) |",
+        "| Benchmark step | 1–10 | Maps to INSTITUTIONAL_BENCHMARK_10_STEP_PLAN |",
         "| T1 vs T2/T3 | +12 / +5 | Revenue-critical path |",
         "| Disk lane (A) | +10 | Ships buyer-visible artifact |",
         "| Hub lane (H) | −20 | R-011 — not NF-CLOUD implement |",
-        "| Buyer keywords | +6 | www · demo · procurement · board |",
-        "| Verify maturity | +4 | plan-with-no-asf / verify-gtm family |",
         "| `partial` status | ×0.35 | Extend only when slice already live |",
         "| `shipped` status | 0 | Skip — log in GTM_NEXT instead |",
         "",
@@ -658,14 +863,176 @@ def emit_pick_intelligence(rows: list[dict], bundles: list[dict], out: Path) -> 
         "| `stop_if` | Hard gates (R-001, R-011, ≤3 tasks) |",
         "| `anti_scope` | Tier B/C / P9 deferrals |",
         "| `pick_rationale` | Why this rank |",
+        "| `prompt_redesigned` | Full brainstorm-enriched agent brief |",
+        "| `benchmark_refs` | Reference vendors (Vanta, Inforcer, …) |",
+        "| `copy_wedge` | Buyer-facing pattern from benchmark |",
         "",
         "## Related",
         "",
+        "- [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)",
         "- [SUCCESS_MODEL_TIERS_v1.md](./SUCCESS_MODEL_TIERS_v1.md)",
         "- [UNIFIED_500_MASTER_v1.md](./UNIFIED_500_MASTER_v1.md)",
         "- [QUICK_PICK.md](../no-asf/QUICK_PICK.md)",
         "",
     ])
+    out.write_text("\n".join(lines), encoding="utf-8")
+
+
+def emit_executive_synthesis(rows: list[dict], next_3: list[dict], out: Path) -> None:
+    open_n = sum(1 for r in rows if r["ship_status"] == "open")
+    partial_n = sum(1 for r in rows if r["ship_status"] == "partial")
+    tier_counts = Counter(r["success_tier"] for r in rows)
+    phase_counts = Counter(r.get("gtm_phase", "") for r in rows)
+    goal_counts = Counter(r.get("locked_goal", "") for r in rows)
+
+    lines = [
+        "# Prompt pack executive synthesis — unified 500 (v3)",
+        "",
+        "**Status:** Deep analysis · benchmark-mapped · goal-prioritized",
+        "**Generated:** `scripts/generate_unified_prompt_pack_500.py`",
+        "",
+        "---",
+        "",
+        "## Executive summary",
+        "",
+        "All **500 forward-queue prompts** (FQ-001–500) were analyzed against the",
+        "**INSTITUTIONAL_BENCHMARK_10_STEP_PLAN** success model and re-tiered into",
+        "**S0–S8** with **goal alignment scoring**, **benchmark vendor references**, and",
+        "**brainstorm-enriched `prompt_redesigned`** briefs per plan.",
+        "",
+        f"| Metric | Value |",
+        f"|--------|-------|",
+        f"| Total plans | 500 |",
+        f"| Open (pick now) | {open_n} |",
+        f"| Partial (extend only) | {partial_n} |",
+        f"| Bottleneck | GTM validation 2/10 — **customer #1 proof** |",
+        "",
+        "## Locked goal distribution",
+        "",
+        "| Goal | Plans | Priority |",
+        "|------|-------|----------|",
+    ]
+    goal_order = ("customer_1", "tle_wedge", "copilot_story", "trust_diligence", "msp_channel", "federal_lane", "positioning", "engineering", "agentic")
+    for g in goal_order:
+        c = goal_counts.get(g, 0)
+        if c:
+            pri = "**P0**" if g in ("customer_1", "tle_wedge") else ("**P1**" if g in ("copilot_story", "trust_diligence") else "P2+")
+            lines.append(f"| {g} | {c} | {pri} |")
+
+    lines.extend([
+        "",
+        "## GTM phase organization",
+        "",
+        "| Phase | Theme | Count |",
+        "|-------|-------|-------|",
+    ])
+    phase_labels = {
+        "P1-proof-moment": "Customer #1 — demo · board PDF",
+        "P2-tle-wedge": "Procurement — receipt differentiation",
+        "P3-copilot-story": "Agent 365 / Purview complement",
+        "P4-trust-diligence": "Trust center · positioning",
+        "P5-channel": "MSP + federal lanes",
+        "P6-hardening": "Engineering hygiene",
+        "P7-agentic": "Hub outreach only",
+    }
+    for ph in sorted(phase_counts.keys()):
+        lines.append(f"| {ph} | {phase_labels.get(ph, ph)} | {phase_counts[ph]} |")
+
+    lines.extend([
+        "",
+        "## Success tier distribution (benchmark-mapped)",
+        "",
+        "| Tier | Count | Benchmark refs | Pick cap/iter |",
+        "|------|-------|----------------|---------------|",
+    ])
+    for st in sorted(TIER_PICK_ORDER.keys(), key=lambda x: TIER_PICK_ORDER[x]):
+        meta = BENCHMARK_BY_TIER.get(st, {})
+        refs = ", ".join(meta.get("refs", ())[:3])
+        cap = "2" if st == "S0-proof" else ("0 Hub" if st == "S8-agentic" else "1")
+        lines.append(f"| {st} | {tier_counts.get(st, 0)} | {refs} | {cap} |")
+
+    lines.extend([
+        "",
+        "## What to pick (wise — based on our goals)",
+        "",
+        "### Pick first (P0 — customer #1)",
+        "",
+        "S0-proof + S6-tle-wedge disk tasks that produce **board PDF**, **tamper export**,",
+        "**demo URL**, or **QuickScan** — buyer must see value in 5 minutes.",
+        "",
+        "### Pick second (P1 — story + diligence)",
+        "",
+        "S2-copilot complement + S4-trust-ui — registry-vs-receipt narrative and framework grid.",
+        "",
+        "### Pick when ICP matches (P2)",
+        "",
+        "S3-msp (v5 batch 401–500) · S5-federal (v4 batch 301–400) — never mixed in one iter.",
+        "",
+        "### Defer (P3)",
+        "",
+        f"S7-hardening ({tier_counts.get('S7-hardening', 0)} plans) — after S0–S4 slices ship.",
+        "S8-agentic — Hub only (R-011).",
+        "",
+        "## Next 3 recommended (computed)",
+        "",
+    ])
+    for i, r in enumerate(next_3, 1):
+        lines.append(f"{i}. **{r['id']}** · {r['success_tier']} · goal align {r.get('goal_alignment', 0)} · {r['plan']}")
+        lines.append(f"   - Wedge: {r.get('copy_wedge', '')}")
+        lines.append(f"   - Moment: {r.get('buyer_moment', '')[:100]}")
+        lines.append("")
+
+    lines.extend([
+        "## Top 10 redesigned prompts (brainstorm sample)",
+        "",
+    ])
+    ranked = sorted(rows, key=priority_score)
+    for r in ranked[:10]:
+        lines.append(r.get("prompt_redesigned", ""))
+        lines.append("---")
+        lines.append("")
+
+    lines.extend([
+        "## Brainstorm — benchmark → Noetfield only",
+        "",
+        "| Benchmark teaches | Noetfield keeps | Noetfield drops |",
+        "|-------------------|-----------------|-----------------|",
+        "| Vanta trust center UX | Framework grid + honest posture | SOC 2 certification claims |",
+        "| Inforcer MSP model | 90-day SOW + white-label TLE | Client billing through NF |",
+        "| Purview registry | Complement evaluate + RID | Competing with Microsoft |",
+        "| Veridra receipts | Tamper FAIL + board PDF path | Custody / PSP claims |",
+        "| Canada AIA | F lane mapping doc | Clearance / RPAA claims |",
+        "",
+        "## Related",
+        "",
+        "- [ALL_500_TIER_INDEX_v1.md](./ALL_500_TIER_INDEX_v1.md)",
+        "- [UNIFIED_500_MASTER_v1.md](./UNIFIED_500_MASTER_v1.md)",
+        "- [INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md](../../strategy/INSTITUTIONAL_BENCHMARK_10_STEP_PLAN_v1.md)",
+        "",
+    ])
+    out.write_text("\n".join(lines), encoding="utf-8")
+
+
+def emit_all_500_index(rows: list[dict], out: Path) -> None:
+    ranked = sorted(rows, key=priority_score)
+    lines = [
+        "# All 500 prompts — tier index (v3 priority order)",
+        "",
+        "**Generated:** `scripts/generate_unified_prompt_pack_500.py`",
+        f"**Sorted by:** `priority_rank` (1 = pick first)",
+        "",
+        "| Rank | ID | FQ | Tier | Phase | GTM | Goal | Status | Benchmark | Plan |",
+        "|------|-----|-----|------|-------|-----|------|--------|-----------|------|",
+    ]
+    for r in ranked:
+        refs = r.get("benchmark_refs", ["—"])[0]
+        plan = r["plan"].replace("|", "/")[:40]
+        lines.append(
+            f"| {r['priority_rank']} | {r['id']} | {r['fq']:03d} | {r['success_tier']} | "
+            f"{r.get('gtm_phase', '')} | {r['gtm_impact']} | {r.get('goal_alignment', 0)} | "
+            f"{r['ship_status']} | {refs} | {plan} |"
+        )
+    lines.extend(["", "## Related", "", "- [PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md](./PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md)", ""])
     out.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -715,17 +1082,21 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     payload = {
-        "version": "v2",
-        "engine": "weighted-tiers+ship-aware+gtm-impact",
+        "version": "v3",
+        "engine": "benchmark-synthesis+goal-alignment+redesigned-prompts",
         "count": len(rows),
         "success_tier_counts": dict(Counter(r["success_tier"] for r in rows)),
         "ship_status_counts": dict(Counter(r["ship_status"] for r in rows)),
+        "gtm_phase_counts": dict(Counter(r.get("gtm_phase", "") for r in rows)),
+        "locked_goal_counts": dict(Counter(r.get("locked_goal", "") for r in rows)),
         "icp_counts": dict(Counter(r["icp_lane"] for r in rows)),
         "top_25_ids": [r["id"] for r in ranked[:25]],
         "next_3_recommended": [
             {"id": r["id"], "fq": r["fq"], "success_tier": r["success_tier"],
-             "gtm_impact": r["gtm_impact"], "ship_status": r["ship_status"],
-             "pick_rationale": r["pick_rationale"]}
+             "gtm_phase": r.get("gtm_phase"), "gtm_impact": r["gtm_impact"],
+             "goal_alignment": r.get("goal_alignment", 0),
+             "ship_status": r["ship_status"], "pick_rationale": r["pick_rationale"],
+             "benchmark_refs": r.get("benchmark_refs", []), "copy_wedge": r.get("copy_wedge", "")}
             for r in next_3
         ],
         "iter_bundles": bundles,
@@ -738,9 +1109,12 @@ def main() -> int:
     emit_markdown(rows, out_dir / "UNIFIED_500_MASTER_v1.md", bundles, next_3)
     emit_enriched_picks(rows, out_dir / "ENRICHED_PICKS_NEXT_50_v1.md")
     emit_pick_intelligence(rows, bundles, out_dir / "PICK_INTELLIGENCE_v1.md")
+    emit_executive_synthesis(rows, next_3, out_dir / "PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md")
+    emit_all_500_index(rows, out_dir / "ALL_500_TIER_INDEX_v1.md")
 
-    print(f"unified_500_index.json: {len(rows)} plans (v2)")
+    print(f"unified_500_index.json: {len(rows)} plans (v3)")
     print(f"ship status: {payload['ship_status_counts']}")
+    print(f"goals: {payload['locked_goal_counts']}")
     print(f"next 3: {[r['id'] for r in next_3]}")
     print("success tiers:", payload["success_tier_counts"])
     return 0

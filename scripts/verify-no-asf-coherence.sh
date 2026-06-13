@@ -389,8 +389,8 @@ data = json.loads(p.read_text())
 errs = []
 if data.get("count") != 500:
     errs.append(f"count={data.get('count')} expected 500")
-if data.get("version") != "v2":
-    errs.append(f"version={data.get('version')} expected v2")
+if data.get("version") != "v3":
+    errs.append(f"version={data.get('version')} expected v3")
 next3 = data.get("next_3_recommended", [])
 if len(next3) != 3:
     errs.append(f"next_3_recommended len={len(next3)} expected 3")
@@ -405,7 +405,9 @@ if len(set(ids)) != 500:
     errs.append("duplicate plan ids in unified index")
 p0 = plans[0] if plans else {}
 if "prompt_structured" not in p0 or "gtm_impact" not in p0:
-    errs.append("plans missing v2 fields (prompt_structured, gtm_impact)")
+    errs.append("plans missing v3 fields (prompt_structured, gtm_impact)")
+if "prompt_redesigned" not in p0 or "goal_alignment" not in p0:
+    errs.append("plans missing v3 fields (prompt_redesigned, goal_alignment)")
 fqs = [x.get("fq") for x in plans]
 if len(set(fqs)) != 500 or min(fqs) != 1 or max(fqs) != 500:
     errs.append(f"fq coverage: unique={len(set(fqs))} min={min(fqs) if fqs else 0} max={max(fqs) if fqs else 0}")
@@ -420,6 +422,15 @@ PY
     fail=1
   fi
 fi
+for f in docs/ops/plans/PROMPT_PACK_LOCKED/PROMPT_PACK_EXECUTIVE_SYNTHESIS_v1.md \
+         docs/ops/plans/PROMPT_PACK_LOCKED/ALL_500_TIER_INDEX_v1.md; do
+  if [[ -f "$f" ]]; then
+    echo "OK   exists $f"
+  else
+    echo "FAIL missing v3 asset: $f" >&2
+    fail=1
+  fi
+done
 if [[ -f docs/ops/plans/no-asf/QUICK_PICK.md ]]; then
   if grep -q 'UNIFIED_500_MASTER_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
      && grep -q 'PICK_INTELLIGENCE_v1' docs/ops/plans/no-asf/QUICK_PICK.md \
