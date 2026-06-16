@@ -375,6 +375,7 @@
  <option>Microsoft 365 Copilot rollout</option>
  <option>AI inventory / governance baseline</option>
  <option>Audit / regulator readiness</option>
+ <option value="investor-diligence">Investor / acquirer diligence (target Copilot governance)</option>
  <option>Client due diligence / vendor scrutiny</option>
  <option>Incident / exception pressure</option>
  <option>Board policy / reporting requirements</option>
@@ -577,7 +578,7 @@
  <div class="panel" aria-label="Engagement intake routing" style="margin-top:12px;">
  <div class="label">Routing</div>
  <div class="small" style="margin-top:8px;">
- Card purchase (where possible) or Engagement artifact via engagement intake. Use Request ID for internal tracking.
+ Card purchase (where possible) or Engagement artifact via engagement intake. Use Request ID for continuity across Gate and Status.
  </div>
  <div class="actions" style="margin-top:12px;">
  <a class="btn primary" href="/gate/sales/" data-rid-link>Open purchase hub</a>
@@ -677,6 +678,11 @@
  if (pre) pre.value = tier || "";
  var tierSel = document.getElementById("tb_tier");
  if (tierSel && (tier === "base" || tier === "pro" || tier === "enterprise")) tierSel.value = tier;
+ var vector = sp.get("vector") || "";
+ if (vector === "investor-diligence") {
+ var driver = document.getElementById("tb_driver");
+ if (driver) driver.value = "investor-diligence";
+ }
  }catch(e){}
  }
 

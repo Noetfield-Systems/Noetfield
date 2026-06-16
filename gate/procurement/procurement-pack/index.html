@@ -319,6 +319,27 @@
  </div>
  </section>
 
+ <section class="nfCard" aria-label="Investor diligence folder" style="margin-top:14px;">
+ <div class="nfCardHd">
+ <h2 class="nfCardTitle">Investor diligence folder</h2>
+ <p class="nfMuted">Forwardable artifacts for VC/PE and corp dev teams diligencing a target’s Copilot governance posture.</p>
+ </div>
+ <div class="nfCardBd">
+ <div class="nfBlock">
+ <h3>Buy-side collateral (orientation only)</h3>
+ <ul>
+ <li><a href="/docs/diligence/INVESTOR_GOVERNANCE_CHECKLIST_MAP_v1.md">18-item checklist map</a> — honest coverage and gaps</li>
+ <li><a href="/docs/diligence/IC_GOVERNANCE_APPENDIX_TEMPLATE_v1.md">IC governance appendix template</a> — maturity rubric for investment committee</li>
+ <li><a href="/trust-ledger/sample-report/" data-rid-link>TLE v1 samples</a> — exportable go/no-go audit trail examples</li>
+ <li><a href="/gate/diligence/" data-rid-link>Investor diligence lane</a> — buy-side overview and Trust Brief intake</li>
+ </ul>
+ <div class="nfNotice" style="margin-top:12px;">
+ <strong>Orientation only — not legal advice.</strong> Technical AI DD and certification claims are out of scope; map gaps to specialist lanes as needed.
+ </div>
+ </div>
+ </div>
+ </section>
+
  <section class="nfCard" aria-label="Forwardable internal note" style="margin-top:14px;">
  <div class="nfCardHd">
  <h2 class="nfCardTitle">Forwardable internal note</h2>
@@ -330,6 +351,7 @@
  <p style="color:var(--muted2);line-height:1.75;margin:0;">
  Vendor: Noetfield Systems Inc. • Engagement: fixed-scope governance/readiness package • Delivery: asynchronous-first (email-first) •
  Engagement intake path: engagement artifact supported • Tracking: Request ID (RID) for governance flow and status.
+ Investor diligence: <a href="/gate/diligence/" data-rid-link>buy-side governance lane</a> maps to Trust Brief — orientation artifacts, not legal advice.
  </p>
  <div class="nfNotice" style="margin-top:12px;">
  Use <strong>Copy summary</strong> above to copy a complete message with the current RID and direct links.
@@ -539,6 +561,9 @@
  lines.push("Engagement intake Pack: " + base + "/gate/procurement/procurement-pack/?rid=" + encodeURIComponent(rid));
  lines.push("Security & Privacy summary: " + base + "/gate/procurement/security-privacy-summary/?rid=" + encodeURIComponent(rid));
  lines.push("Contracting notes: " + base + "/gate/procurement/contracting-notes/?rid=" + encodeURIComponent(rid));
+ lines.push("Investor diligence lane: " + base + "/gate/diligence/?rid=" + encodeURIComponent(rid));
+ lines.push("Checklist map: " + base + "/docs/diligence/INVESTOR_GOVERNANCE_CHECKLIST_MAP_v1.md");
+ lines.push("IC appendix template: " + base + "/docs/diligence/IC_GOVERNANCE_APPENDIX_TEMPLATE_v1.md");
  lines.push("Status: " + base + "/status/?rid=" + encodeURIComponent(rid));
  lines.push("");
  lines.push("Snapshot:");

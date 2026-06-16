@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic verify-investor-lane
 
 PYTHONPATH_VALUE := packages/types:packages/config:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance
 
@@ -51,3 +51,7 @@ final-lock-audit:
 
 verify-final-lock: final-lock-audit
 	pytest tests/unit/test_public_gtm_alignment.py tests/unit/test_golden_edge_v3.py -q
+
+verify-investor-lane:
+	./scripts/verify-investor-diligence-lane.sh
+	python3 -m pytest tests/unit/test_investor_diligence_lane.py -q

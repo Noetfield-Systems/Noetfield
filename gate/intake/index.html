@@ -460,6 +460,7 @@
  <option value="copilot-readiness-standard">Microsoft 365 Copilot Readiness — Standard (4 weeks)</option>
  <option value="copilot-readiness-extended">Microsoft 365 Copilot Readiness — Extended (6 weeks)</option>
  <option value="trust-brief">Trust Brief (6 weeks)</option>
+ <option value="investor-diligence">Investor / acquirer diligence (target Copilot governance)</option>
  <option value="trust-ledger">Trust Ledger (Ongoing)</option>
  <option value="partner">Partner lane</option>
  </select>
@@ -817,6 +818,8 @@
  // Prefill from query params
  var qNeed = norm(qs("need"));
  if (qNeed) setNeed(qNeed);
+ var qVector = norm(qs("vector"));
+ if (qVector === "investor-diligence") setNeed("investor-diligence");
 
  // Form handling
  var form = document.getElementById("nfIntakeForm");
