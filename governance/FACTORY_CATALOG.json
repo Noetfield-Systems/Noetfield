@@ -24,6 +24,69 @@
     "payment_execution",
     "ecommerce_checkout"
   ],
+  "platform_tree": {
+    "id": "noetfield_platform",
+    "name": "Noetfield",
+    "children": [
+      {
+        "id": "governance",
+        "display_name": "Governance",
+        "layer": true,
+        "anchor_key": "governance"
+      },
+      {
+        "id": "runtime",
+        "display_name": "Runtime",
+        "layer": true,
+        "anchor_key": "runtime"
+      },
+      {
+        "id": "control_plane",
+        "display_name": "Control Plane",
+        "layer": true,
+        "anchor_key": "control_plane"
+      },
+      {
+        "id": "policy_engine",
+        "display_name": "Policy Engine",
+        "layer": true,
+        "anchor_key": "policy_engine"
+      },
+      {
+        "id": "factory_catalog",
+        "display_name": "Factory Catalog",
+        "layer": true,
+        "anchor_key": "factory_catalog",
+        "children": [
+          {
+            "id": "ma_diligence",
+            "display_name": "M&A Factory",
+            "factory_id": "trust_brief_diligence_v1"
+          },
+          {
+            "id": "rwa_factory",
+            "display_name": "RWA Factory",
+            "factory_id": "rwa_governance_overlay_v1"
+          },
+          {
+            "id": "legal_factory",
+            "display_name": "Legal Factory",
+            "factory_id": "legal_review_v1"
+          },
+          {
+            "id": "aml_factory",
+            "display_name": "AML Factory",
+            "factory_id": "aml_governance_trace_v1"
+          },
+          {
+            "id": "copilot_governance",
+            "display_name": "Copilot Governance Readiness",
+            "factory_id": "copilot_governance_readiness_v1"
+          }
+        ]
+      }
+    ]
+  },
   "factories": [
     {
       "id": "copilot_governance_readiness_v1",
@@ -43,11 +106,12 @@
       "tier": "tier_3",
       "capability": "due_diligence",
       "sku": "Trust_Brief",
-      "status": "planned",
+      "status": "live",
       "priority": "P0",
       "spec_path": "packages/schemas/factories/trust_brief_diligence_v1.yaml",
-      "route": null,
-      "visibility": "platform"
+      "route": "POST /factories/trust_brief_diligence_v1/run",
+      "visibility": "platform",
+      "alias": "M&A Factory"
     },
     {
       "id": "legal_review_v1",

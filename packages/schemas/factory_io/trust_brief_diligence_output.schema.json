@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TrustBriefDiligenceFactoryOutput",
+  "type": "object",
+  "required": ["factory_id", "run_id", "factory_status", "ic_appendix", "checklist_map", "audit_package", "replay_hint"],
+  "properties": {
+    "factory_id": { "type": "string" },
+    "run_id": { "type": "string", "format": "uuid" },
+    "factory_status": { "enum": ["completed", "pending_approval", "vetoed"] },
+    "ic_appendix": { "type": "object" },
+    "checklist_map": { "type": "object" },
+    "audit_package": { "type": "object" },
+    "replay_hint": { "type": "string" },
+    "policy_decision": { "type": "object" }
+  }
+}

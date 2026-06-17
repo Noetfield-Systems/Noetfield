@@ -26,10 +26,12 @@
     "make verify-law-stack",
     "make sync-derived-docs",
     "make verify-factory-copilot",
-    "make verify-factory-catalog"
+    "make verify-factory-catalog",
+    "make verify-factory-trust-brief"
   ],
   "factory_specs": [
-    "packages/schemas/factories/copilot_governance_readiness_v1.yaml"
+    "packages/schemas/factories/copilot_governance_readiness_v1.yaml",
+    "packages/schemas/factories/trust_brief_diligence_v1.yaml"
   ],
   "catalog_manifests": [
     "governance/FACTORY_CATALOG.json",

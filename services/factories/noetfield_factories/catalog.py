@@ -48,3 +48,55 @@ def allowed_gtm_skus() -> list[str]:
 
 def blocked_capabilities() -> list[str]:
     return list(load_factory_catalog().get("blocked_capabilities", []))
+
+
+def _factory_status_map() -> dict[str, dict[str, Any]]:
+    return {entry["id"]: entry for entry in catalog_factory_entries()}
+
+
+def enrich_platform_tree(node: dict[str, Any], status_map: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    """Merge factory status from catalog into platform_tree nodes."""
+    enriched = dict(node)
+    factory_id = enriched.get("factory_id")
+    if factory_id and factory_id in status_map:
+        entry = status_map[factory_id]
+        enriched["status"] = entry.get("status")
+        enriched["sku"] = entry.get("sku")
+        enriched["route"] = entry.get("route")
+        enriched["callable"] = entry.get("status") == "live"
+    anchor_key = enriched.get("anchor_key")
+    if anchor_key:
+        anchors = load_factory_catalog().get("platform_layer_anchors", {})
+        enriched["anchor"] = anchors.get(anchor_key)
+    children = enriched.get("children")
+    if children:
+        enriched["children"] = [
+            enrich_platform_tree(child, status_map) for child in children if isinstance(child, dict)
+        ]
+    return enriched
+
+
+def load_platform_catalog() -> dict[str, Any]:
+    catalog = load_factory_catalog()
+    status_map = _factory_status_map()
+    platform_tree = catalog.get("platform_tree", {})
+    return {
+        "catalog_version": catalog.get("catalog_version"),
+        "platform_tree": enrich_platform_tree(platform_tree, status_map),
+        "layer_anchors": catalog.get("platform_layer_anchors", {}),
+        "callable_factory_ids": [f["id"] for f in live_factory_entries()],
+        "factories": [
+            {
+                "id": e["id"],
+                "name": e.get("name"),
+                "alias": e.get("alias"),
+                "tier": e.get("tier"),
+                "capability": e.get("capability"),
+                "sku": e.get("sku"),
+                "status": e.get("status"),
+                "route": e.get("route"),
+                "callable": e.get("status") == "live",
+            }
+            for e in catalog_factory_entries()
+        ],
+    }

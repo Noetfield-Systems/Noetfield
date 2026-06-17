@@ -2,7 +2,9 @@
 
 from uuid import UUID, uuid4
 
-from fastapi import FastAPI, Header, HTTPException, Request, Response
+from typing import Any
+
+from fastapi import Body, FastAPI, Header, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict
 
 from noetfield_config import get_settings
@@ -21,16 +23,20 @@ from noetfield_events import (
 )
 from noetfield_events.context import reset_request_context, set_request_context
 from noetfield_factories import (
+    CopilotFactoryRunRequest,
     FactoryRunRequest,
     FactoryStatus,
     FactoryValidationError,
+    TrustBriefFactoryRunRequest,
     catalog_factory_entries,
     get_factory_runner,
     is_factory_live,
     list_factory_ids,
     load_factory_catalog,
+    load_platform_catalog,
     load_tier_catalog,
 )
+from noetfield_trust_brief import TrustBriefDiligenceCommand, TrustBriefDiligenceRuntime
 from noetfield_governance.golden_edge_v3 import (
     GoldenEdgeEvaluateRequest,
     GoldenEdgeV3Engine,
@@ -137,14 +143,27 @@ copilot_demo_runtime = CopilotGovernanceDemoRuntime(
     run_store=copilot_run_store,
 )
 
-copilot_factory_runner = get_factory_runner(
-    "copilot_governance_readiness_v1",
-    demo_runtime=copilot_demo_runtime,
-    event_bus=event_bus,
-    audit_store=audit_store,
-    graph_store=graph_store,
+trust_brief_runtime = TrustBriefDiligenceRuntime(
+    signal_pipeline=signal_pipeline,
+    graph_mutations=graph_mutations,
+    graph_reflections=graph_reflections,
+    workflow_state_machine=workflow_state_machine,
     governance_runtime=governance_runtime,
+    golden_edge=golden_edge_v3,
+    inspector_execution_loop=inspector_execution_loop,
 )
+
+
+def _factory_runner_for(factory_id: str):
+    return get_factory_runner(
+        factory_id,
+        demo_runtime=copilot_demo_runtime,
+        trust_brief_runtime=trust_brief_runtime,
+        event_bus=event_bus,
+        audit_store=audit_store,
+        graph_store=graph_store,
+        governance_runtime=governance_runtime,
+    )
 
 
 class ApprovalDecisionRequest(BaseModel):
@@ -392,6 +411,11 @@ async def list_factories() -> dict[str, object]:
     }
 
 
+@app.get("/catalog/platform", tags=["catalog"])
+async def catalog_platform() -> dict[str, object]:
+    return load_platform_catalog()
+
+
 @app.get("/catalog/tiers", tags=["catalog"])
 async def catalog_tiers() -> dict[str, object]:
     tier_catalog = load_tier_catalog()
@@ -409,19 +433,27 @@ async def catalog_tiers() -> dict[str, object]:
 @app.post("/factories/{factory_id}/run", tags=["factories"])
 async def run_factory(
     factory_id: str,
-    command: CopilotGovernanceCommand,
     response: Response,
+    body: dict[str, Any] = Body(...),
     x_request_id: str | None = Header(default=None, alias="X-Request-Id"),
 ) -> dict[str, object]:
     if not is_factory_live(factory_id):
         raise HTTPException(status_code=404, detail=f"Factory not live or unknown: {factory_id}")
-    if factory_id != copilot_factory_runner.FACTORY_ID:
-        raise HTTPException(status_code=404, detail=f"Factory runner not wired: {factory_id}")
 
+    runner = _factory_runner_for(factory_id)
     try:
-        result = await copilot_factory_runner.run(
-            FactoryRunRequest(command=command, source_request_id=x_request_id)
-        )
+        if factory_id == "copilot_governance_readiness_v1":
+            command = CopilotGovernanceCommand.model_validate(body)
+            result = await runner.run(
+                CopilotFactoryRunRequest(command=command, source_request_id=x_request_id)
+            )
+        elif factory_id == "trust_brief_diligence_v1":
+            command = TrustBriefDiligenceCommand.model_validate(body)
+            result = await runner.run(
+                TrustBriefFactoryRunRequest(command=command, source_request_id=x_request_id)
+            )
+        else:
+            raise HTTPException(status_code=404, detail=f"Factory runner not wired: {factory_id}")
     except FactoryValidationError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 

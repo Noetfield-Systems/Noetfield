@@ -121,7 +121,10 @@ def test_factory_spec_loads() -> None:
     assert spec["metadata"]["factory_type"] == "copilot_governance_readiness"
     nodes = spec["spec"]["nodes"]
     assert 5 <= len(nodes) <= 12
-    assert list_factory_ids() == ["copilot_governance_readiness_v1"]
+    assert set(list_factory_ids()) == {
+        "copilot_governance_readiness_v1",
+        "trust_brief_diligence_v1",
+    }
 
 
 def test_factory_yaml_parseable() -> None:

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noetfield — Factory Catalog</title>
+  <meta name="description" content="Platform factory catalog: Governance, Runtime, Control Plane, Policy Engine, and governed AI factories." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #06080a; --surface: #0d1117; --border: rgba(255,255,255,0.06);
+      --text: #e8eaed; --muted: #8b949e; --accent: #00d084; --warn: #ffb703;
+      --danger: #f85149; --deferred: #a371f7;
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Mono', monospace; min-height: 100vh; }
+    .layout { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+    nav { background: var(--surface); border-right: 1px solid var(--border); padding: 24px 16px; }
+    nav .logo { font-family: Syne, sans-serif; font-weight: 700; margin-bottom: 28px; display: flex; align-items: center; gap: 8px; }
+    nav .dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+    nav a { display: block; color: var(--muted); text-decoration: none; padding: 10px 8px; font-size: 13px; border-radius: 6px; }
+    nav a.active, nav a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    main { padding: 32px 28px; max-width: 900px; }
+    h1 { font-family: Syne, sans-serif; font-size: 1.5rem; margin-bottom: 8px; }
+    .sub { color: var(--muted); font-size: 13px; margin-bottom: 28px; line-height: 1.6; }
+    .tree { list-style: none; }
+    .tree ul { list-style: none; margin-left: 20px; border-left: 1px solid var(--border); padding-left: 16px; }
+    .tree li { margin: 10px 0; font-size: 13px; }
+    .layer { font-weight: 600; color: var(--text); }
+    .anchor { color: var(--muted); font-size: 11px; display: block; margin-top: 2px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 8px; }
+    .live { background: rgba(0,208,132,0.15); color: var(--accent); }
+    .planned { background: rgba(255,183,3,0.12); color: var(--warn); }
+    .deferred { background: rgba(163,113,247,0.15); color: var(--deferred); }
+    .blocked { background: rgba(248,81,73,0.15); color: var(--danger); }
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-top: 24px; }
+    .panel h2 { font-family: Syne, sans-serif; font-size: 1rem; margin-bottom: 12px; }
+    .err { color: var(--danger); font-size: 12px; }
+    @media (max-width: 768px) { .layout { grid-template-columns: 1fr; } nav { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav aria-label="Platform navigation">
+      <div class="logo"><span class="dot"></span> Noetfield</div>
+      <a href="/platform/dashboard/">Overview</a>
+      <a class="active" href="/platform/factories/">Factory catalog</a>
+      <a href="/platform/">Platform hub</a>
+      <a href="/">Public site</a>
+    </nav>
+    <main>
+      <h1>Factory catalog</h1>
+      <p class="sub">Platform stack: Governance → Runtime → Control Plane → Policy Engine → Factory Catalog. Live factories are callable via <code>POST /factories/{id}/run</code> on the runtime API.</p>
+      <ul class="tree" id="platform-tree"></ul>
+      <div class="panel">
+        <h2>API</h2>
+        <p class="sub" style="margin-bottom:0"><code>GET /catalog/platform</code> · <code>GET /factories</code></p>
+      </div>
+      <p class="err" id="load-error" hidden></p>
+    </main>
+  </div>
+  <script>
+    const PILOT_CATALOG = {"catalog_version":"2026.06.03","callable_factory_ids":["copilot_governance_readiness_v1","trust_brief_diligence_v1"],"platform_tree":{"id":"noetfield_platform","name":"Noetfield","children":[{"id":"governance","display_name":"Governance","layer":true,"anchor":"services/governance/noetfield_governance/golden_edge_v3.py"},{"id":"runtime","display_name":"Runtime","layer":true,"anchor":"services/governance/noetfield_governance/api.py"},{"id":"control_plane","display_name":"Control Plane","layer":true,"anchor":"services/workflow/noetfield_workflow/state_machine.py"},{"id":"policy_engine","display_name":"Policy Engine","layer":true,"anchor":"services/governance/noetfield_governance/policy_pack.py"},{"id":"factory_catalog","display_name":"Factory Catalog","layer":true,"anchor":"services/factories/noetfield_factories/","children":[{"id":"ma_diligence","display_name":"M&A Factory","factory_id":"trust_brief_diligence_v1","status":"live","callable":true},{"id":"rwa_factory","display_name":"RWA Factory","factory_id":"rwa_governance_overlay_v1","status":"deferred","callable":false},{"id":"legal_factory","display_name":"Legal Factory","factory_id":"legal_review_v1","status":"planned","callable":false},{"id":"aml_factory","display_name":"AML Factory","factory_id":"aml_governance_trace_v1","status":"planned","callable":false},{"id":"copilot_governance","display_name":"Copilot Governance Readiness","factory_id":"copilot_governance_readiness_v1","status":"live","callable":true}]}]}};
+
+    function badge(status) {
+      if (!status) return '';
+      return `<span class="badge ${status}">${status}</span>`;
+    }
+
+    function renderNode(node) {
+      const li = document.createElement('li');
+      if (node.layer) {
+        li.innerHTML = `<span class="layer">${node.display_name || node.id}</span>${badge(node.status)}`;
+        if (node.anchor) li.innerHTML += `<span class="anchor">${node.anchor}</span>`;
+      } else {
+        li.innerHTML = `<span>${node.display_name || node.id}</span>${badge(node.status)}`;
+        if (node.factory_id) li.innerHTML += `<span class="anchor">${node.factory_id}</span>`;
+      }
+      if (node.children && node.children.length) {
+        const ul = document.createElement('ul');
+        node.children.forEach(c => ul.appendChild(renderNode(c)));
+        li.appendChild(ul);
+      }
+      return li;
+    }
+
+    async function load() {
+      const root = document.getElementById('platform-tree');
+      let data = PILOT_CATALOG;
+      try {
+        const apiBase = window.NOETFIELD_API_BASE || '';
+        const res = await fetch(`${apiBase}/catalog/platform`);
+        if (res.ok) data = await res.json();
+      } catch (_) { /* pilot fallback */ }
+      const tree = data.platform_tree;
+      if (!tree) {
+        document.getElementById('load-error').hidden = false;
+        document.getElementById('load-error').textContent = 'Could not load platform tree.';
+        return;
+      }
+      root.appendChild(renderNode(tree));
+    }
+    load();
+  </script>
+</body>
+</html>

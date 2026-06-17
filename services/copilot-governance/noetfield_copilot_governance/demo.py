@@ -256,8 +256,11 @@ class CopilotGovernanceDemoRuntime:
                 target_entity_type="graph_reflection",
                 target_entity_id=str(state.reflection_id),
                 payload={
+                    "factory_id": "copilot_governance_readiness_v1",
+                    "run_id": str(state.run_id),
                     "signal_id": str(state.signal.signal_id),
                     "relationship_id": str(state.relationship_id),
+                    "control_plane_state": "INITIATED",
                 },
                 created_by=state.command.submitted_by,
             )
@@ -285,6 +288,8 @@ class CopilotGovernanceDemoRuntime:
                     actor_id=state.command.submitted_by,
                     confidence=0.8,
                     payload={
+                        "factory_id": "copilot_governance_readiness_v1",
+                        "run_id": str(state.run_id),
                         "module": "copilot_governance",
                         "workflow_id": str(workflow.workflow_id),
                         "reflection_id": str(state.reflection_id),

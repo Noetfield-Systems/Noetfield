@@ -44,7 +44,7 @@ flowchart TB
 
 | SKU | Source | Factory |
 |-----|--------|---------|
-| Trust Brief | [`OFFERINGS.md`](../../OFFERINGS.md) §1 | `trust_brief_diligence_v1` (planned) |
+| Trust Brief | [`OFFERINGS.md`](../../OFFERINGS.md) §1 | `trust_brief_diligence_v1` (**live**) |
 | Copilot Readiness Pack | OFFERINGS §2 | `copilot_governance_readiness_v1` (**live**) |
 | Bank Pilot v6.1 | OFFERINGS §3 | platform overlay — no separate factory yet |
 
@@ -77,7 +77,7 @@ flowchart TB
 | Capability | Status | Factory | GTM SKU |
 |------------|--------|---------|---------|
 | Compliance | **live** | `copilot_governance_readiness_v1` | Copilot Readiness Pack |
-| Due Diligence | partial | `trust_brief_diligence_v1` | Trust Brief |
+| Due Diligence | **live** | `trust_brief_diligence_v1` | Trust Brief |
 | RAG Systems | planned | — | — |
 | E-commerce Engine | **blocked** | `ecommerce_engine_v1` | — |
 
@@ -88,7 +88,7 @@ flowchart TB
 | Factory | Tier | Status | Route |
 |---------|------|--------|-------|
 | Copilot Governance Readiness | T3 | **live** | `POST /factories/copilot_governance_readiness_v1/run` |
-| Trust Brief Due Diligence | T3 | planned | — |
+| Trust Brief Due Diligence (M&A Factory) | T3 | **live** | `POST /factories/trust_brief_diligence_v1/run` |
 | Legal Review | T2 | planned | — |
 | AML Governance Trace | T3 | planned | — |
 | Marketing Artifact | T1 | planned | — |
@@ -112,10 +112,31 @@ Named aliases (M&A, RWA, Legal, AML) map to factory IDs in `CAPABILITY_TIER_CATA
 
 ---
 
+## Platform tree (five layers)
+
+```
+Noetfield Platform
+├── Governance
+├── Runtime
+├── Control Plane
+├── Policy Engine
+└── Factory Catalog
+    ├── M&A Factory → trust_brief_diligence_v1 (live)
+    ├── RWA Factory → rwa_governance_overlay_v1 (deferred)
+    ├── Legal Factory → legal_review_v1 (planned)
+    ├── AML Factory → aml_governance_trace_v1 (planned)
+    └── Copilot Governance Readiness → copilot_governance_readiness_v1 (live)
+```
+
+Machine-readable: `platform_tree` in [`FACTORY_CATALOG.json`](../../governance/FACTORY_CATALOG.json) · console: [`platform/factories/index.html`](../../platform/factories/index.html)
+
+---
+
 ## API (platform only)
 
 | Endpoint | Purpose |
 |----------|---------|
+| `GET /catalog/platform` | Five-layer platform tree + factory children |
 | `GET /catalog/tiers` | Full tier tree + factory aliases |
 | `GET /factories` | Factory registry with tier, status, SKU |
 | `POST /factories/{id}/run` | Execute **live** factories only |
@@ -136,4 +157,5 @@ Named aliases (M&A, RWA, Legal, AML) map to factory IDs in `CAPABILITY_TIER_CATA
 ```bash
 make verify-factory-catalog
 make verify-factory-copilot
+make verify-factory-trust-brief
 ```

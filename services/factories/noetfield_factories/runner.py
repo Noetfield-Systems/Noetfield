@@ -290,11 +290,14 @@ def get_factory_runner(
     audit_store: Any,
     graph_store: Any,
     governance_runtime: Any,
+    trust_brief_runtime: Any = None,
 ) -> CopilotGovernanceFactoryRunner:
-    if factory_id != CopilotGovernanceFactoryRunner.FACTORY_ID:
-        raise FactoryNotFoundError(factory_id)
-    return CopilotGovernanceFactoryRunner(
+    from .dispatch import get_factory_runner as dispatch_get_factory_runner
+
+    return dispatch_get_factory_runner(
+        factory_id,
         demo_runtime=demo_runtime,
+        trust_brief_runtime=trust_brief_runtime,
         event_bus=event_bus,
         audit_store=audit_store,
         graph_store=graph_store,

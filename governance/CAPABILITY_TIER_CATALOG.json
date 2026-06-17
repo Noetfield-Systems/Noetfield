@@ -111,7 +111,7 @@
         {
           "id": "due_diligence",
           "name": "Due Diligence",
-          "status": "partial",
+          "status": "live",
           "factory_id": "trust_brief_diligence_v1",
           "gtm_sku": "Trust_Brief",
           "visibility": "platform",
@@ -145,7 +145,7 @@
       "id": "ma_diligence",
       "name": "M&A Factory",
       "maps_to_factory_id": "trust_brief_diligence_v1",
-      "status": "planned",
+      "status": "live",
       "note": "Diligence artifact factory — not deal execution"
     },
     {

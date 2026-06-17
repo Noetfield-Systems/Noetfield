@@ -31,7 +31,8 @@ def test_factory_catalog_has_live_copilot() -> None:
 def test_list_factory_ids_matches_live_catalog() -> None:
     assert "copilot_governance_readiness_v1" in list_factory_ids()
     assert is_factory_live("copilot_governance_readiness_v1")
-    assert not is_factory_live("trust_brief_diligence_v1")
+    assert "trust_brief_diligence_v1" in list_factory_ids()
+    assert is_factory_live("trust_brief_diligence_v1")
 
 
 def test_tier_catalog_gtm_skus_allowed() -> None:
@@ -50,7 +51,7 @@ def test_planned_factory_stubs_exist() -> None:
         for f in catalog_factory_entries()
         if f.get("status") == "planned" and f.get("spec_path")
     ]
-    assert len(planned) >= 5
+    assert len(planned) >= 4
     for entry in planned:
         path = ROOT / entry["spec_path"]
         assert path.is_file(), f"missing stub: {entry['id']}"

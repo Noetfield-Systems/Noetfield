@@ -28,6 +28,14 @@ blocked = set(factory_cat['blocked_capabilities'])
 live = [f for f in factory_cat['factories'] if f.get('status') == 'live']
 if len(live) < 1:
     raise SystemExit('no live factories in catalog')
+platform_tree = factory_cat.get('platform_tree')
+if not platform_tree:
+    raise SystemExit('missing platform_tree in FACTORY_CATALOG.json')
+fc = next(c for c in platform_tree['children'] if c['id'] == 'factory_catalog')
+aliases = {c['id']: c.get('factory_id') for c in fc.get('children', [])}
+for key in ('ma_diligence', 'rwa_factory', 'legal_factory', 'aml_factory'):
+    if key not in aliases:
+        raise SystemExit(f'missing factory catalog alias: {key}')
 for f in live:
     spec = f.get('spec_path')
     if not spec or not (root / spec).is_file():
@@ -62,7 +70,7 @@ for f in planned_with_spec:
 ok "FACTORY_CATALOG.json and CAPABILITY_TIER_CATALOG.json valid"
 
 grep -q "verify-factory-catalog" Makefile || fail "Makefile missing verify-factory-catalog"
-grep -q "GET /catalog/tiers" docs/LAWS/ROUTING.md || fail "ROUTING missing catalog API"
+grep -q "GET /catalog/platform" docs/LAWS/ROUTING.md || fail "ROUTING missing /catalog/platform"
 grep -q "catalog_manifests" governance/LAW_STACK.json || fail "LAW_STACK missing catalog_manifests"
 
 ok "Makefile, ROUTING, LAW_STACK wired"

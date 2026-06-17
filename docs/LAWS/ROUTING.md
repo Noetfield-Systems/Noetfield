@@ -27,6 +27,7 @@
 | Route | Purpose |
 |-------|---------|
 | `platform.noetfield.com` | Runtime API + workspace |
+| `GET /catalog/platform` | Five-layer platform tree + factory children |
 | `GET /catalog/tiers` | Capability tier tree (not on www) |
 | `GET /factories` | Factory registry with tier, status, SKU |
 | `POST /factories/{id}/run` | Execute live factories only |

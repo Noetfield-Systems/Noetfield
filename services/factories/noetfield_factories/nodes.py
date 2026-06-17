@@ -7,6 +7,7 @@ from typing import Any
 from uuid import UUID
 
 from noetfield_copilot_governance import CopilotGovernanceCommand, CopilotPipelineState
+from noetfield_trust_brief import TrustBriefDiligenceCommand, TrustBriefPipelineState
 from noetfield_events import EventReplayCursor
 from noetfield_governance.golden_edge_v3 import AgentLoopDecision
 from noetfield_types import Actor, ActorType, WorkflowState
@@ -40,6 +41,120 @@ def intake_validate(command: CopilotGovernanceCommand) -> CopilotGovernanceComma
             f"signal_payload.source must be one of {sorted(allowed_sources)}"
         )
     return command
+
+
+def intake_validate_trust_brief(command: TrustBriefDiligenceCommand) -> TrustBriefDiligenceCommand:
+    """n01 — validate Trust Brief / M&A diligence intake."""
+    if not command.submitted_by.strip():
+        raise FactoryValidationError("submitted_by is required")
+    payload = dict(command.signal_payload)
+    source = payload.get("source")
+    summary = payload.get("summary")
+    if not source or not summary:
+        if payload.get("target_name") or payload.get("thesis"):
+            payload.setdefault("source", "investor_diligence")
+            payload.setdefault(
+                "summary",
+                str(payload.get("thesis") or payload.get("target_name")),
+            )
+            return command.model_copy(update={"signal_payload": payload})
+        raise FactoryValidationError(
+            "signal_payload requires source and summary",
+            details={"signal_payload": payload},
+        )
+    allowed = {"investor_diligence", "manual", "webhook"}
+    if str(source) not in allowed:
+        raise FactoryValidationError(f"signal_payload.source must be one of {sorted(allowed)}")
+    return command
+
+
+async def package_trust_brief_deliverable(
+    *,
+    factory_id: str,
+    state: TrustBriefPipelineState,
+    event_bus: Any,
+    audit_store: Any,
+    graph_store: Any,
+    governance_runtime: Any,
+) -> dict[str, Any]:
+    """n08 — IC appendix + checklist map for Trust Brief diligence."""
+    command = state.command
+    tenant_id = command.tenant_id
+    organization_id = command.organization_id
+
+    replayed_events = await event_bus.replay(
+        EventReplayCursor(after_sequence=0, event_types=frozenset({"*"}))
+    )
+    events = [e for e in replayed_events if e.correlation_id == state.run_id] or replayed_events
+    event_types = [event.event_type for event in events]
+
+    pending_approvals = []
+    if governance_runtime is not None:
+        pending_approvals = await governance_runtime.approvals.list_pending(tenant_id)
+
+    workflow_state = (
+        state.workflow_state.value
+        if state.workflow_state is not None
+        else WorkflowState.PENDING_REVIEW.value
+    )
+    approval_required = state.approval_id is not None or workflow_state == "pending_review"
+
+    ic_appendix = {
+        "title": "Investor Governance IC Appendix",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "target_summary": str(command.signal_payload.get("summary", "")),
+        "executive_summary": (
+            "Diligence signal ingested, linked to governance graph, evaluated by policy "
+            "and inspectors, queued for human IC review before export."
+        ),
+        "governance_state": {
+            "workflow_state": workflow_state,
+            "approval_required": approval_required,
+            "approval_id": str(state.approval_id) if state.approval_id else None,
+        },
+        "orientation": "Not legal advice. Maps to INVESTOR_GOVERNANCE_CHECKLIST_MAP_v1.",
+    }
+
+    checklist_map = {
+        "map_version": "INVESTOR_GOVERNANCE_CHECKLIST_MAP_v1",
+        "groups": [
+            {"id": "policy_documentation", "item_count": 5},
+            {"id": "bias_fairness_harm", "item_count": 5},
+            {"id": "data_ip", "item_count": 4},
+            {"id": "regulatory_exposure", "item_count": 4},
+        ],
+        "honest_gaps_documented": True,
+        "noetfield_deliverables": ["/trust-brief/", "/gate/diligence/"],
+    }
+
+    audit_records = getattr(audit_store, "records", [])
+    audit_package: dict[str, Any] = {
+        "tenant_id": str(tenant_id),
+        "organization_id": str(organization_id),
+        "signal_id": str(state.signal.signal_id) if state.signal else None,
+        "workflow_id": str(state.workflow_id) if state.workflow_id else None,
+        "event_count": len(events),
+        "audit_record_count": len(audit_records),
+        "event_types": event_types,
+        "pending_approval_count": len(pending_approvals),
+        "events": [event.model_dump(mode="json") for event in events],
+    }
+
+    if state.policy_decision and state.policy_decision.decision == AgentLoopDecision.REJECT:
+        factory_status = "vetoed"
+    elif approval_required:
+        factory_status = "pending_approval"
+    else:
+        factory_status = "completed"
+
+    return {
+        "factory_id": factory_id,
+        "factory_status": factory_status,
+        "ic_appendix": ic_appendix,
+        "checklist_map": checklist_map,
+        "audit_package": audit_package,
+        "replay_hint": f"/events/replay?correlation_id={state.run_id}",
+    }
 
 
 async def package_copilot_deliverable(

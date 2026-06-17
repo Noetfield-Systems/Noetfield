@@ -17,6 +17,37 @@ class FactoryStatus(StrEnum):
     VETOED = "vetoed"
 
 
+class CopilotFactoryRunRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    command: CopilotGovernanceCommand
+    source_request_id: str | None = None
+
+
+# Backward-compatible alias
+FactoryRunRequest = CopilotFactoryRunRequest
+
+
+class TrustBriefFactoryRunRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    command: "TrustBriefDiligenceCommand"
+    source_request_id: str | None = None
+
+
+class TrustBriefFactoryOutput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    factory_id: str
+    run_id: UUID
+    factory_status: FactoryStatus
+    ic_appendix: dict[str, Any]
+    checklist_map: dict[str, Any]
+    audit_package: dict[str, Any]
+    replay_hint: str
+    policy_decision: dict[str, Any] | None = None
+
+
 class CopilotGovernanceFactoryOutput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -30,8 +61,7 @@ class CopilotGovernanceFactoryOutput(BaseModel):
     policy_decision: dict[str, Any] | None = None
 
 
-class FactoryRunRequest(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+# Resolve forward ref
+from noetfield_trust_brief import TrustBriefDiligenceCommand  # noqa: E402
 
-    command: CopilotGovernanceCommand
-    source_request_id: str | None = None
+TrustBriefFactoryRunRequest.model_rebuild()

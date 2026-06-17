@@ -8,8 +8,10 @@ from .catalog import (
     is_factory_live,
     live_factory_entries,
     load_factory_catalog,
+    load_platform_catalog,
     load_tier_catalog,
 )
+from .dispatch import get_factory_runner
 from .exceptions import (
     FactoryError,
     FactoryNotFoundError,
@@ -17,10 +19,19 @@ from .exceptions import (
     FactoryVetoError,
 )
 from .loader import list_catalog_factory_ids, list_factory_ids, load_factory_spec
-from .models import CopilotGovernanceFactoryOutput, FactoryRunRequest, FactoryStatus
-from .runner import CopilotGovernanceFactoryRunner, get_factory_runner
+from .models import (
+    CopilotFactoryRunRequest,
+    CopilotGovernanceFactoryOutput,
+    FactoryRunRequest,
+    FactoryStatus,
+    TrustBriefFactoryOutput,
+    TrustBriefFactoryRunRequest,
+)
+from .runner import CopilotGovernanceFactoryRunner
+from .trust_brief_runner import TrustBriefFactoryRunner
 
 __all__ = [
+    "CopilotFactoryRunRequest",
     "CopilotGovernanceFactoryOutput",
     "CopilotGovernanceFactoryRunner",
     "FactoryError",
@@ -29,6 +40,9 @@ __all__ = [
     "FactoryStatus",
     "FactoryValidationError",
     "FactoryVetoError",
+    "TrustBriefFactoryOutput",
+    "TrustBriefFactoryRunRequest",
+    "TrustBriefFactoryRunner",
     "allowed_gtm_skus",
     "blocked_capabilities",
     "catalog_factory_entries",
@@ -40,5 +54,6 @@ __all__ = [
     "live_factory_entries",
     "load_factory_catalog",
     "load_factory_spec",
+    "load_platform_catalog",
     "load_tier_catalog",
 ]
