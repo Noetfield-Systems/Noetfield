@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic verify-investor-lane
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic verify-investor-lane verify-commercial-agentic
 
 PYTHONPATH_VALUE := packages/types:packages/config:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance
 
@@ -55,3 +55,8 @@ verify-final-lock: final-lock-audit
 verify-investor-lane:
 	./scripts/verify-investor-diligence-lane.sh
 	python3 -m pytest tests/unit/test_investor_diligence_lane.py -q
+
+verify-commercial-agentic:
+	chmod +x ./scripts/verify-commercial-agentic.sh
+	./scripts/verify-commercial-agentic.sh
+	python3 -m pytest tests/unit/test_commercial_agentic.py -q

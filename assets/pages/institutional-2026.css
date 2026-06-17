@@ -160,7 +160,7 @@
 /* ── Path steps (TrustField-style) ── */
 .nf26-path {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 12px;
   margin-top: 8px;
 }
@@ -542,7 +542,7 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .nf26-path,
+  .nf26-path { grid-template-columns: repeat(3, 1fr); }
   .nf26-spine,
   .nf26-surfaces,
   .nf26-pricing { grid-template-columns: 1fr 1fr; }
@@ -627,4 +627,140 @@
 }
 @media (max-width: 760px) {
   .grid, .fw-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Agentic commercial: ADK-style event trace ── */
+.nf26-eventTrace {
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+.nf26-eventRow {
+  display: grid;
+  grid-template-columns: 88px 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+}
+.nf26-eventRow:last-child { border-bottom: none; }
+.nf26-eventRow.active {
+  background: rgba(45, 227, 138, 0.06);
+  border-left: 3px solid var(--nf26-accent, #2de38a);
+}
+.nf26-eventTime {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--muted2);
+}
+.nf26-eventName { font-weight: 800; color: var(--text); }
+.nf26-eventDetail { color: var(--muted2); line-height: 1.55; margin-top: 4px; }
+.nf26-eventBadge {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.nf26-eventBadge.ok {
+  border-color: rgba(45, 227, 138, 0.35);
+  color: var(--nf26-accent);
+}
+
+/* ── Demo stepper (gaming-style progress loop) ── */
+.nf26-demoStepper {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.nf26-demoStep {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+.nf26-demoStep:hover { border-color: rgba(200, 163, 73, 0.35); }
+.nf26-demoStep[aria-current="step"] {
+  border-color: rgba(200, 163, 73, 0.55);
+  background: rgba(200, 163, 73, 0.1);
+}
+.nf26-demoStepNum {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.nf26-demoStepTitle { font-size: 13px; font-weight: 850; }
+
+/* ── Human-in-the-loop gate (AG-UI pattern) ── */
+.nf26-hitlGate {
+  border-radius: 14px;
+  border: 1px solid rgba(200, 163, 73, 0.4);
+  background:
+    radial-gradient(400px 160px at 0% 0%, rgba(200, 163, 73, 0.12), transparent 70%),
+    rgba(255, 255, 255, 0.03);
+  padding: 16px 18px;
+  margin-top: 14px;
+}
+.nf26-hitlGate h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 900;
+}
+.nf26-hitlGate p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted2);
+  line-height: 1.65;
+}
+
+/* ── Sandbox trial meter ── */
+.nf26-sandboxMeter {
+  border-radius: var(--radius);
+  border: 1px solid rgba(122, 167, 255, 0.25);
+  background: rgba(122, 167, 255, 0.06);
+  padding: 18px;
+}
+.nf26-sandboxMeter h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 900;
+}
+.nf26-meterBar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  margin: 8px 0 12px;
+}
+.nf26-meterFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--nf26-blue), var(--nf26-accent));
+  transition: width 0.4s ease;
+}
+.nf26-meterLegend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted2);
+}
+
+@media (max-width: 760px) {
+  .nf26-eventRow { grid-template-columns: 1fr; gap: 6px; }
 }

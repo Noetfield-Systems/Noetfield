@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Noetfield — 5-Minute Copilot Governance Demo</title>
+ <meta name="description" content="Interactive walkthrough: evaluate Copilot intent, confidence score, human approver gate, and Trust Ledger export — ADK-style event trace for institutional buyers. Canada · non-custodial." />
+ <meta name="robots" content="index,follow" />
+ <link rel="canonical" href="https://www.noetfield.com/copilot/demo/" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="stylesheet" href="/assets/noetfield-shell.css" />
+ <script src="/assets/noetfield-shell.js" defer></script>
+</head>
+<body class="nf26-page">
+ <div class="bg" aria-hidden="true"></div>
+ <a class="skip" href="#main">Skip to content</a>
+ <header id="nfHeader"></header>
+
+ <main id="main" class="wrap">
+ <section class="nf26-hero" aria-label="Demo hero">
+ <div class="nf26-heroShell">
+ <div class="nf26-heroInner">
+ <div class="nf26-eyebrow"><span class="dot" aria-hidden="true"></span> 5-minute demo · agentic governance trace</div>
+ <h1 class="nf26-h1 wide">See evaluate → approve → export in one thread</h1>
+ <p class="nf26-heroLead">
+ Institutional buyers use this loop before production Copilot scope opens.
+ Inspired by <strong>agent event traces</strong> (Google ADK-style inspection) — orientation only on www;
+ live evaluate runs on your tenant after pilot intake.
+ </p>
+ <div class="nf26-metaRow">
+ <div class="nf26-pill"><strong>Spine</strong> Evaluate → TLE → export</div>
+ <div class="nf26-pill"><strong>HITL</strong> Named approver on high-risk</div>
+ <div class="nf26-pill"><strong>RID</strong> One Request ID thread</div>
+ </div>
+ <div class="nf26-actions">
+ <a class="btn primary" href="/copilot/trial/" data-rid-link>Start free trial</a>
+ <a class="btn" href="/gate/sales/" data-rid-link>Published tiers</a>
+ <a class="btn secondary" href="/trust-ledger/sample-report/" data-rid-link>TLE samples</a>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <section class="nf26-section" aria-labelledby="stepper-heading">
+ <div class="nf26-sectionHead">
+ <div class="nf26-kicker">Interactive proof</div>
+ <h2 class="nf26-h2" id="stepper-heading">Click each step — event trace updates</h2>
+ <p class="nf26-lead">Same semantics as production: policy-bound workflow with human gate before export.</p>
+ </div>
+
+ <div class="nf26-demoStepper" role="tablist" aria-label="Demo steps">
+ <button type="button" class="nf26-demoStep" role="tab" data-step="0" aria-current="step">
+ <div class="nf26-demoStepNum">01</div>
+ <div class="nf26-demoStepTitle">Evaluate</div>
+ </button>
+ <button type="button" class="nf26-demoStep" role="tab" data-step="1">
+ <div class="nf26-demoStepNum">02</div>
+ <div class="nf26-demoStepTitle">Confidence</div>
+ </button>
+ <button type="button" class="nf26-demoStep" role="tab" data-step="2">
+ <div class="nf26-demoStepNum">03</div>
+ <div class="nf26-demoStepTitle">Human approve</div>
+ </button>
+ <button type="button" class="nf26-demoStep" role="tab" data-step="3">
+ <div class="nf26-demoStepNum">04</div>
+ <div class="nf26-demoStepTitle">Record TLE</div>
+ </button>
+ <button type="button" class="nf26-demoStep" role="tab" data-step="4">
+ <div class="nf26-demoStepNum">05</div>
+ <div class="nf26-demoStepTitle">Export</div>
+ </button>
+ </div>
+
+ <div class="nf26-grid2">
+ <div class="nf26-eventTrace" id="eventTrace" aria-live="polite" aria-label="Agent event trace"></div>
+ <div>
+ <div class="nf26-hitlGate" id="hitlPanel">
+ <h4>Human-in-the-loop (AG-UI pattern)</h4>
+ <p id="hitlCopy">High-risk Copilot scope routes to a <strong>named approver</strong> before any export is valid. Low-risk sandbox paths auto-record only.</p>
+ </div>
+ <pre class="nf26-codeBlock" id="tlePreview" aria-label="TLE preview"><span class="key">tle_id</span>: <span class="val">tle_demo_001</span>
+<span class="key">decision</span>: <span class="val">conditional</span>
+<span class="key">confidence</span>: <span class="val">0.72</span>
+<span class="key">approver</span>: <span class="val">pending — CISO delegate</span>
+<span class="key">rid</span>: <span class="val">(your Request ID)</span></pre>
+ <p style="margin-top:12px;font-size:13px;color:var(--muted2)">
+ Orientation sample — not live tenant data. <a href="/trust-ledger/verify/">Verify export integrity</a>.
+ </p>
+ </div>
+ </div>
+ </section>
+
+ <section class="nf26-section" aria-labelledby="catalog-heading">
+ <div class="nf26-sectionHead">
+ <div class="nf26-kicker">A2UI-style catalog</div>
+ <h2 class="nf26-h2" id="catalog-heading">Approved commercial surfaces only</h2>
+ <p class="nf26-lead">Public www uses a locked component catalog — cards, badges, exports — not arbitrary agent HTML.</p>
+ </div>
+ <div class="nf26-surfaces">
+ <a class="nf26-surface" href="/copilot/trial/" data-rid-link>
+ <div class="nf26-surfaceTag">Try</div>
+ <h3>Developer trial</h3>
+ <p>Mock M365 · capped evaluates · no sales call required for orientation.</p>
+ <span class="btn secondary">Trial sandbox</span>
+ </a>
+ <a class="nf26-surface" href="/copilot/readiness/" data-rid-link>
+ <div class="nf26-surfaceTag">Lead</div>
+ <h3>Copilot Readiness</h3>
+ <p>2 / 4 / 6 week bands · board-ready pack · fixed scope.</p>
+ <span class="btn secondary">Readiness</span>
+ </a>
+ <a class="nf26-surface" href="/gate/sales/" data-rid-link>
+ <div class="nf26-surfaceTag">Buy</div>
+ <h3>Sales hub</h3>
+ <p>Published tiers · commercial license (card) · engagement artifact lane.</p>
+ <span class="btn secondary">Sales</span>
+ </a>
+ </div>
+ </section>
+
+ <section class="nf26-ctaBand">
+ <h2>Run this on your governance meeting agenda</h2>
+ <p>Apply for Copilot Readiness or Trust Brief — include your Request ID in intake.</p>
+ <div class="nf26-actions">
+ <a class="btn primary" href="/gate/sales/" data-rid-link>Start at Sales</a>
+ <a class="btn" href="/copilot/trial/" data-rid-link>Free trial</a>
+ </div>
+ </section>
+ </main>
+
+ <footer id="nfFooter"></footer>
+
+ <script>
+ (function () {
+ var steps = [
+  { name: "POST /evaluate", detail: "Pre-execution policy check on Copilot operational intent.", badge: "signal", time: "T+0ms" },
+  { name: "Policy router", detail: "Purview label gap + Entra CA posture surfaced for reviewer.", badge: "inspect", time: "T+42ms" },
+  { name: "Confidence score", detail: "0.72 — route: conditional (human review required).", badge: "score", time: "T+88ms" },
+  { name: "Workflow: pending_review", detail: "Approver chain: CISO delegate · RID threaded.", badge: "HITL", time: "T+120ms" },
+  { name: "TLE draft", detail: "Signed entry prepared — metadata-only M365 evidence index.", badge: "record", time: "T+180ms" },
+  { name: "Export gate", detail: "Board PDF + procurement ZIP fail closed if tampered.", badge: "export", time: "T+210ms" }
+ ];
+ var activeSlice = [1, 2, 3, 4, 5, 6];
+ var hitl = [
+  "Signal ingested. Policy rules evaluate metadata-only M365 connectors.",
+  "Confidence 0.72 — automatic allow blocked; review queue opened.",
+  "Human-in-the-loop: <strong>named approver</strong> must sign before TLE is valid for board export.",
+  "Approver signed — TLE v1 YAML sealed with evidence index.",
+  "Export bundle ready — board PDF + procurement ZIP with integrity verify path."
+ ];
+ var tle = [
+  "tle_id: tle_demo_001\ndecision: evaluating\nconfidence: —\napprover: —",
+  "tle_id: tle_demo_001\ndecision: conditional\nconfidence: 0.72\napprover: pending",
+  "tle_id: tle_demo_001\ndecision: conditional\nconfidence: 0.72\napprover: pending — CISO delegate",
+  "tle_id: tle_demo_001\ndecision: approved\nconfidence: 0.72\napprover: jchen@institution.example",
+  "tle_id: tle_demo_001\ndecision: exported\nconfidence: 0.72\nexport: board_pdf + procurement_zip"
+ ];
+ var trace = document.getElementById("eventTrace");
+ var hitlCopy = document.getElementById("hitlCopy");
+ var tlePre = document.getElementById("tlePreview");
+ var tabs = document.querySelectorAll(".nf26-demoStep");
+
+ function render(stepIdx) {
+  var end = activeSlice[stepIdx];
+  trace.innerHTML = steps.slice(0, end).map(function (s, i) {
+   var cls = i === end - 1 ? " nf26-eventRow active" : " nf26-eventRow";
+   return '<div class="' + cls.trim() + '"><div class="nf26-eventTime">' + s.time + '</div><div><div class="nf26-eventName">' + s.name + '</div><div class="nf26-eventDetail">' + s.detail + '</div></div><span class="nf26-eventBadge' + (s.badge === "HITL" ? " ok" : "") + '">' + s.badge + '</span></div>';
+  }).join("");
+  hitlCopy.innerHTML = hitl[stepIdx];
+  tlePre.textContent = tle[stepIdx];
+  tabs.forEach(function (t, i) {
+   if (i === stepIdx) { t.setAttribute("aria-current", "step"); } else { t.removeAttribute("aria-current"); }
+  });
+ }
+ tabs.forEach(function (btn) {
+  btn.addEventListener("click", function () { render(parseInt(btn.getAttribute("data-step"), 10)); });
+ });
+ render(0);
+ })();
+ </script>
+</body>
+</html>

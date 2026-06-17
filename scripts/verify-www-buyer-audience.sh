@@ -13,6 +13,8 @@ PAGES=(
   trust-brief/index.html
   trust-brief/intake/index.html
   copilot/index.html
+  copilot/demo/index.html
+  copilot/trial/index.html
   gate/intake/index.html
   gate/diligence/index.html
   gate/procurement/index.html
