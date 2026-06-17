@@ -33,7 +33,7 @@ demo="$(cat copilot/demo/index.html)"
 trial="$(cat copilot/trial/index.html)"
 header="$(cat assets/partials/header.html)"
 
-for phrase in "nf26-demoStepper" "nf26-eventTrace" "Human-in-the-loop" "evaluate"; do
+for phrase in "nf26-demoStepper" "nf26-eventTrace" "nf26-progressRing" "Human-in-the-loop" "evaluate"; do
   if ! grep -qiF "$phrase" <<< "$demo"; then
     echo "FAIL copilot/demo missing: $phrase" >&2
     fail=1
@@ -78,6 +78,14 @@ if grep -qiF "fourth SKU" <<< "$trial" || grep -qiF "fourth product" <<< "$demo"
   fail=1
 else
   echo "OK   three-SKU boundary preserved"
+fi
+
+footer="$(cat assets/partials/footer.html)"
+if ! grep -qF '/copilot/demo/' <<< "$footer" || ! grep -qF '/copilot/trial/' <<< "$footer"; then
+  echo "FAIL footer must link demo and trial" >&2
+  fail=1
+else
+  echo "OK   footer links demo + trial"
 fi
 
 if [[ "$fail" -eq 0 ]]; then

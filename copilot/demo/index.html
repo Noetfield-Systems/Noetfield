@@ -48,6 +48,15 @@
  <p class="nf26-lead">Same semantics as production: policy-bound workflow with human gate before export.</p>
  </div>
 
+ <div class="nf26-progressWrap" aria-label="Demo session progress">
+ <div class="nf26-progressRing" id="progressRing" style="--pct:20"><span id="progressPct">20%</span></div>
+ <div class="nf26-progressMeta">
+ <h4 id="progressTitle">Session: Evaluate started</h4>
+ <p id="progressSub">Complete all 5 steps to unlock export achievement — then start trial or Sales.</p>
+ </div>
+ </div>
+ <div class="nf26-achievement" id="achievement" role="status">Export proof unlocked — board-ready artifact path visible</div>
+
  <div class="nf26-demoStepper" role="tablist" aria-label="Demo steps">
  <button type="button" class="nf26-demoStep" role="tab" data-step="0" aria-current="step">
  <div class="nf26-demoStepNum">01</div>
@@ -159,6 +168,19 @@
  var hitlCopy = document.getElementById("hitlCopy");
  var tlePre = document.getElementById("tlePreview");
  var tabs = document.querySelectorAll(".nf26-demoStep");
+ var ring = document.getElementById("progressRing");
+ var pctEl = document.getElementById("progressPct");
+ var titleEl = document.getElementById("progressTitle");
+ var subEl = document.getElementById("progressSub");
+ var ach = document.getElementById("achievement");
+ var titles = [
+  "Session: Evaluate started",
+  "Session: Confidence scored",
+  "Session: Human gate active",
+  "Session: TLE recorded",
+  "Session: Export ready"
+ ];
+ var pcts = [20, 40, 60, 80, 100];
 
  function render(stepIdx) {
   var end = activeSlice[stepIdx];
@@ -171,6 +193,16 @@
   tabs.forEach(function (t, i) {
    if (i === stepIdx) { t.setAttribute("aria-current", "step"); } else { t.removeAttribute("aria-current"); }
   });
+  ring.style.setProperty("--pct", String(pcts[stepIdx]));
+  pctEl.textContent = pcts[stepIdx] + "%";
+  titleEl.textContent = titles[stepIdx];
+  if (stepIdx >= 4) {
+   ach.classList.add("show");
+   subEl.textContent = "Achievement unlocked — upgrade to trial sandbox or published Sales tiers.";
+  } else {
+   ach.classList.remove("show");
+   subEl.textContent = "Complete all 5 steps to unlock export achievement — then start trial or Sales.";
+  }
  }
  tabs.forEach(function (btn) {
   btn.addEventListener("click", function () { render(parseInt(btn.getAttribute("data-step"), 10)); });

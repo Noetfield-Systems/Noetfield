@@ -30,9 +30,34 @@
 ### Patterns we do **not** adopt on www
 
 - Arbitrary agent-generated HTML/JS (XSS / prompt-injection UI risk — A2UI exists to prevent this)
-- “Gaming” loot-box or engagement dark patterns — use **progress loops** for governance proof only
+- Loot-box, dark-pattern engagement, or manipulative urgency timers
 - Payment/custody sandbox copy (legacy `/login/`, `/kits/` — retired from nav, decommission target)
 - Fourth retail SKU or MSB orchestration framing
+
+---
+
+## Gaming-style commercial agentic (ethical adoption)
+
+High-converting **game and platform** products use progress loops — we adopt the **mechanics**, not manipulation, for governance proof.
+
+| Source | Pattern | Noetfield use | Avoid |
+|--------|---------|---------------|-------|
+| **Google AI Studio / Vertex** | Free sandbox quota → paid project | Trial: 50 evaluates → Readiness SKU | Fake scarcity |
+| **ADK Web UI** | Run trace → inspect events → replay | Demo stepper unlocks event rows | Infinite scroll noise |
+| **Xbox / Play Pass** | Try library → subscribe for full | Demo → trial → Sales catalog | Hidden cancel traps |
+| **Duolingo-style loops** | Session complete + progress ring | Demo completion % → CTA unlock | Streak punishment |
+| **AG-UI Dojo** | Interactive sandbox lessons | `/copilot/demo/` click-through proof | Gamified paywalls |
+| **Mobile F2P (ethical)** | Achievement on milestone | “Export unlocked” badge at step 5 | Loot boxes |
+
+### Institutional gaming UI primitives (added to catalog)
+
+| Primitive | CSS class | Use |
+|-----------|-----------|-----|
+| Progress ring | `nf26-progressRing` | Demo session completion |
+| Achievement badge | `nf26-achievement` | Milestone unlock (e.g. export ready) |
+| XP strip | `nf26-xpStrip` | Step progress toward commercial CTA |
+
+**Rule:** Progress celebrates **governance proof completed**, not time-on-site. Every loop ends at a **published SKU** or honest “out of scope.”
 
 ---
 
@@ -84,14 +109,15 @@ Agents and demos may only emit surfaces built from this catalog on public www:
 
 ## E2E commercial polish checklist
 
-- [ ] `/copilot/demo/` — 5-minute interactive proof (stepper + sample TLE JSON)
-- [ ] `/copilot/trial/` — sandbox orientation, limits, upgrade CTAs
-- [ ] Header Programs → Demo + Trial
-- [ ] Homepage + `/copilot/` + `/gate/sales/` cross-links
-- [ ] `verify-commercial-agentic.sh` passes
-- [ ] No legacy fintech sandbox in indexed nav
-- [ ] Three contract SKUs only on all commercial pages
-
+- [x] `/copilot/demo/` — 5-minute interactive proof (stepper + sample TLE JSON + progress ring)
+- [x] `/copilot/trial/` — sandbox orientation, limits, upgrade CTAs
+- [x] Header Try → Demo + Trial
+- [x] Homepage + `/copilot/` + `/gate/sales/` cross-links
+- [x] `verify-commercial-agentic.sh` passes
+- [x] No legacy fintech sandbox in indexed nav
+- [x] Three contract SKUs only on all commercial pages
+- [x] Footer Try links (demo/trial)
+- [ ] Live runtime on `platform.noetfield.com` (future)
 ---
 
 ## Backend bridge (future platform subdomain)
