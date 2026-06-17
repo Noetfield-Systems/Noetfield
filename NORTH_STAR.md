@@ -2,6 +2,8 @@
 
 **Status:** Production alignment constitution · **Supremacy:** GCIP v4 (L0) overrides all documents, code comments, marketing copy, and partner decks on conflict.
 
+**Visible law stack:** [docs/LAWS/CURRENT_STACK_v2026.md](docs/LAWS/CURRENT_STACK_v2026.md) · **Hub:** [docs/LAWS/README.md](docs/LAWS/README.md) · **Verify:** `make verify-law-stack`
+
 ## What Noetfield is
 
 Noetfield is **pre-execution governance infrastructure** for institutional AI systems and regulated enterprise workflows.

@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic verify-investor-lane verify-commercial-agentic
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic verify-investor-lane verify-commercial-agentic verify-law-stack sync-derived-docs
 
 PYTHONPATH_VALUE := packages/types:packages/config:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance
 
@@ -60,3 +60,12 @@ verify-commercial-agentic:
 	chmod +x ./scripts/verify-commercial-agentic.sh
 	./scripts/verify-commercial-agentic.sh
 	python3 -m pytest tests/unit/test_commercial_agentic.py -q
+
+sync-derived-docs:
+	chmod +x ./scripts/sync-derived-docs.sh
+	./scripts/sync-derived-docs.sh
+
+verify-law-stack:
+	chmod +x ./scripts/verify-law-stack.sh
+	./scripts/verify-law-stack.sh
+	python3 -m pytest tests/unit/test_law_stack.py -q

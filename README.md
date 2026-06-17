@@ -1,6 +1,17 @@
 # Noetfield Systems
 Infrastructure for AI trust and stewardship
 
+## Current law stack (read first)
+
+**Visible entry:** [docs/LAWS/README.md](docs/LAWS/README.md) · **Latest stack:** [docs/LAWS/CURRENT_STACK_v2026.md](docs/LAWS/CURRENT_STACK_v2026.md) · **L0 pointer:** [L0-law/CURRENT.md](L0-law/CURRENT.md)
+
+```bash
+make verify-law-stack    # anti-fragmentation / anti-drift
+make sync-derived-docs   # regenerate L2 + All-Documents mirrors
+```
+
+Old constitutional versions stay in batch folders — indexed in [docs/SOURCE_OF_TRUTH/archive/SUPERSESSION_INDEX.md](docs/SOURCE_OF_TRUTH/archive/SUPERSESSION_INDEX.md), not deleted (registry path integrity).
+
 ## Platform blueprint
 
 See [PLATFORM_BLUEPRINT.md](PLATFORM_BLUEPRINT.md) for the architecture

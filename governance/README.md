@@ -16,4 +16,6 @@ Canonical artifacts for **internal cognitive OS** (not public GTM).
 
 **Legal supremacy:** GCIP v4 (`docs/SOURCE_OF_TRUTH/`) overrides this tree on conflict.
 
+**Machine manifest:** [`LAW_STACK.json`](./LAW_STACK.json) · **Human hub:** [`docs/LAWS/README.md`](../docs/LAWS/README.md)
+
 **Runtime:** `POST /v3/evaluate`, `POST /v3/agent-loop` — `make api-v3` (port 8001)
