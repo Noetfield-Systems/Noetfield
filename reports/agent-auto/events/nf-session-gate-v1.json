@@ -3,7 +3,7 @@
   "ok": true,
   "agent_id": "noetfield_cloud",
   "role": "cloud",
-  "generated_at": "2026-06-17T23:30:30Z",
+  "generated_at": "2026-06-18T00:17:43Z",
   "repo_root": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield",
   "gates": [
     {
@@ -25,6 +25,21 @@
       "gate": "docs/ops/NF_GAOS_W1_LOCKED_v1.md",
       "ok": true,
       "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W1_LOCKED_v1.md"
+    },
+    {
+      "gate": "docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md",
+      "ok": true,
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md"
+    },
+    {
+      "gate": "data/nf_orient_routing_v1.json",
+      "ok": true,
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_orient_routing_v1.json"
+    },
+    {
+      "gate": "os/NF_REPO_CAPABILITY_MAP.json",
+      "ok": true,
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_REPO_CAPABILITY_MAP.json"
     },
     {
       "gate": "os/NF_UNIFIED_ROUTING_GRAPH.json",

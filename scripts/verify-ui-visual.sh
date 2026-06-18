@@ -66,12 +66,13 @@ else
 fi
 
 if [[ -f "${ROOT}/governance-console/playwright/visual.spec.ts" ]]; then
-  if command -v npx >/dev/null 2>&1 && [[ -d "${ROOT}/governance-console/frontend/node_modules" ]]; then
-    (cd "${ROOT}/governance-console/frontend" && npx playwright test ../playwright/visual.spec.ts --reporter=line 2>/dev/null) || {
+  if [[ "${NF_PLAYWRIGHT_VISUAL:-0}" == "1" ]] && command -v npx >/dev/null 2>&1 && [[ -d "${ROOT}/governance-console/frontend/node_modules" ]]; then
+    # Headless only — never pop Chrome for founder. Opt-in: NF_PLAYWRIGHT_VISUAL=1
+    (cd "${ROOT}/governance-console/frontend" && CI=1 npx playwright test ../playwright/visual.spec.ts --reporter=line 2>/dev/null) || {
       echo "WARN playwright visual spec skipped or failed — marker checks above are required"
     }
   else
-    echo "SKIP playwright (install frontend deps to enable full baselines)"
+    echo "SKIP playwright (curl markers sufficient; set NF_PLAYWRIGHT_VISUAL=1 to opt in headless)"
   fi
 fi
 

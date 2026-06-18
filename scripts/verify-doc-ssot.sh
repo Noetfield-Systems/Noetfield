@@ -86,6 +86,15 @@ check_file "sandbox funnel metrics 061" docs/copilot/SANDBOX_FUNNEL_METRICS_SPEC
 check_file "copilot intake hub report 062" docs/copilot/INTAKE_COPILOT_GOVERNANCE_HUB_REPORT_v1.md \
   'vector=copilot-governance' 'INTAKE REPORT' 'copilot-governance'
 
+check_file "nf-gaos w3 factory spine" docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md \
+  'make verify-nf-gaos-w3' 'prove-nf-factory-spine'
+
+if [[ -x scripts/verify-nf-gaos-w3.sh ]]; then
+  ./scripts/verify-nf-gaos-w3.sh && ok "nf-gaos-w3 prove bundle"
+else
+  bad "nf-gaos-w3 verify script missing"
+fi
+
 if [[ -x scripts/verify-nf-gaos-w0.sh ]]; then
   ./scripts/verify-nf-gaos-w0.sh && ok "nf-gaos-w0 verify bundle"
 else

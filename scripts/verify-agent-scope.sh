@@ -53,8 +53,8 @@ else
   fail=1
 fi
 
-# NF-GAOS W1 — exactly 4 alwaysApply core rules
-core_rules=(nf-authority-stack.mdc nf-routing-card.mdc noetfield-ask-before-edit.mdc nf-ship-bundle.mdc)
+# NF-GAOS W1+W3 — 5 alwaysApply core rules
+core_rules=(nf-authority-stack.mdc nf-routing-card.mdc noetfield-ask-before-edit.mdc nf-ship-bundle.mdc nf-factory-spine-w3.mdc)
 for r in "${core_rules[@]}"; do
   if [[ -f ".cursor/rules/$r" ]] && grep -q 'alwaysApply: true' ".cursor/rules/$r"; then
     echo "OK   core rule $r"

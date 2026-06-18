@@ -23,18 +23,18 @@
           "display_name": "Signal Ingestion Runtime"
         },
         "causation_id": null,
-        "correlation_id": "141f5f95-a847-4a3c-8117-97dee3798be7",
-        "entity_id": "a991a80a-2cad-48ab-b4a0-232293a50b11",
+        "correlation_id": "d1bf2b4d-9f05-453a-b7c4-fab5b04cd966",
+        "entity_id": "f6e7a9b0-d2ed-49f7-9c8d-65c958e0f7bc",
         "entity_type": "signal",
-        "event_id": "7221b3d6-66ab-41f1-ae95-bdb756f40d5f",
+        "event_id": "ebf5e762-6843-4104-b9e9-3c397bb698fd",
         "event_type": "SIGNAL_INGESTED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.516115Z",
+        "occurred_at": "2026-06-18T00:17:40.342171Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "ingestion_run_id": null,
-          "observed_at": "2026-06-17T23:35:17.515915+00:00",
+          "observed_at": "2026-06-18T00:17:40.341978+00:00",
           "payload_hash": "62633b6275f7f795c9b456cafd6fea92a7159a9cfee381d00e3b3cafdddb6a0e",
           "provenance": {
             "ingestion": "manual_or_webhook",
@@ -58,14 +58,14 @@
           "display_name": "Live Graph Mutation Engine"
         },
         "causation_id": null,
-        "correlation_id": "eb4af67c-9d70-4592-bd10-054d2cd96c54",
-        "entity_id": "78e10761-e75b-4f7b-9173-f185b426e99c",
+        "correlation_id": "d0c94bc1-9cd4-43c6-ba3c-60d039541d53",
+        "entity_id": "66bee212-0cde-4704-9bfa-288b6ce1de12",
         "entity_type": "entity_relationship",
-        "event_id": "ad367849-ffaa-4ca0-99ca-053b4eb1d743",
+        "event_id": "b9b7f07c-5663-4b10-a54f-8b413bc050e9",
         "event_type": "RELATIONSHIP_INFERRED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.516256Z",
+        "occurred_at": "2026-06-18T00:17:40.342301Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "confidence_delta": 0.2,
@@ -90,14 +90,14 @@
           "display_name": "Temporal Graph Reflection Cycle"
         },
         "causation_id": null,
-        "correlation_id": "3624d937-0754-40ea-8561-1d3969f42b47",
-        "entity_id": "7c648ce5-e1b6-466e-8066-ef1cebc8162f",
+        "correlation_id": "157fd1d6-4a7c-44b6-b5be-cba685de4c58",
+        "entity_id": "74c664d5-3085-4ebb-8177-db1afabb5fd8",
         "entity_type": "graph_reflection",
-        "event_id": "f1e03119-9a69-4714-8f05-137581dddccf",
+        "event_id": "033ec47b-b42d-4da4-8360-8eb40f5e117a",
         "event_type": "GRAPH_REFLECTION_COMPLETED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.516347Z",
+        "occurred_at": "2026-06-18T00:17:40.342399Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "inferred_count": 0,
@@ -118,19 +118,19 @@
           "display_name": "demo.governance.lead@noetfield.local"
         },
         "causation_id": null,
-        "correlation_id": "f421edab-c1e2-4a9c-a05a-393c4f9fb210",
-        "entity_id": "6c2fc574-a8c7-4159-a7de-ff30aac6b11b",
+        "correlation_id": "9d114751-f690-4803-b1b5-43a23f6aae75",
+        "entity_id": "0829d8cf-d394-45bf-b0e0-b4bffad9e2bb",
         "entity_type": "workflow",
-        "event_id": "3d16bded-6ce6-4373-9d83-f5b6523da442",
+        "event_id": "3b4e106c-2098-4517-a50e-a56f84003c53",
         "event_type": "WORKFLOW_STARTED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.516440Z",
+        "occurred_at": "2026-06-18T00:17:40.342487Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "reason": "workflow_started",
           "state": "draft",
-          "target_entity_id": "7c648ce5-e1b6-466e-8066-ef1cebc8162f",
+          "target_entity_id": "74c664d5-3085-4ebb-8177-db1afabb5fd8",
           "target_entity_type": "graph_reflection",
           "workflow_type": "copilot_governance_review"
         },
@@ -147,19 +147,19 @@
           "display_name": "demo.governance.lead@noetfield.local"
         },
         "causation_id": null,
-        "correlation_id": "90806c5e-2665-41d1-b111-cd3fde13d8a5",
-        "entity_id": "6c2fc574-a8c7-4159-a7de-ff30aac6b11b",
+        "correlation_id": "5044b98d-2896-4d80-8745-350738875d04",
+        "entity_id": "0829d8cf-d394-45bf-b0e0-b4bffad9e2bb",
         "entity_type": "workflow",
-        "event_id": "b98c0f30-1bf4-4631-8965-23e61922cf97",
+        "event_id": "668a43fe-619f-49f0-ad52-15aa23d99986",
         "event_type": "WORKFLOW_STARTED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.516523Z",
+        "occurred_at": "2026-06-18T00:17:40.342573Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "reason": "Copilot Governance requires human approval before publication.",
           "state": "pending_review",
-          "target_entity_id": "7c648ce5-e1b6-466e-8066-ef1cebc8162f",
+          "target_entity_id": "74c664d5-3085-4ebb-8177-db1afabb5fd8",
           "target_entity_type": "graph_reflection",
           "workflow_type": "copilot_governance_review"
         },
@@ -176,14 +176,14 @@
           "display_name": "demo.governance.lead@noetfield.local"
         },
         "causation_id": null,
-        "correlation_id": "68ea9895-f0b1-438c-8648-8b8168d6186d",
-        "entity_id": "6c2fc574-a8c7-4159-a7de-ff30aac6b11b",
+        "correlation_id": "225c4053-48e4-4bdd-bfd9-1e19003e91cb",
+        "entity_id": "0829d8cf-d394-45bf-b0e0-b4bffad9e2bb",
         "entity_type": "copilot_governance_run",
-        "event_id": "d5ecfd3a-7519-460e-84e2-74e8ed23e2e8",
+        "event_id": "abffb7bd-53c8-48fd-ab85-656f6c64537c",
         "event_type": "POLICY_EVALUATED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.516632Z",
+        "occurred_at": "2026-06-18T00:17:40.342684Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "allowed": true,
@@ -218,28 +218,28 @@
           "display_name": "demo.governance.lead@noetfield.local"
         },
         "causation_id": null,
-        "correlation_id": "ba69f912-3fa0-444c-b2c7-9ca21e34871f",
-        "entity_id": "bc4f4d4f-d764-4643-9801-036a55fc81e5",
+        "correlation_id": "bdace3f2-b433-48b3-82c5-9d14b8547bdb",
+        "entity_id": "274dc90d-3887-4622-9418-e424f8458022",
         "entity_type": "approval",
-        "event_id": "ec987eb5-37cd-4ebe-b80c-0515fcc6404a",
+        "event_id": "5480ef00-dd36-4891-a0a0-b36718688285",
         "event_type": "HUMAN_APPROVAL_REQUESTED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.517189Z",
+        "occurred_at": "2026-06-18T00:17:40.343083Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "action": "run_copilot_governance_demo",
-          "approval_id": "bc4f4d4f-d764-4643-9801-036a55fc81e5",
+          "approval_id": "274dc90d-3887-4622-9418-e424f8458022",
           "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
           "payload": {
             "module": "copilot_governance",
-            "reflection_id": "7c648ce5-e1b6-466e-8066-ef1cebc8162f",
-            "workflow_id": "6c2fc574-a8c7-4159-a7de-ff30aac6b11b"
+            "reflection_id": "74c664d5-3085-4ebb-8177-db1afabb5fd8",
+            "workflow_id": "0829d8cf-d394-45bf-b0e0-b4bffad9e2bb"
           },
           "reason": "governance boundary requires human review",
-          "requested_at": "2026-06-17T23:35:17.517162Z",
+          "requested_at": "2026-06-18T00:17:40.343062Z",
           "requested_by": "demo.governance.lead@noetfield.local",
-          "resource_id": "6c2fc574-a8c7-4159-a7de-ff30aac6b11b",
+          "resource_id": "0829d8cf-d394-45bf-b0e0-b4bffad9e2bb",
           "resource_type": "copilot_governance_run",
           "tenant_id": "e4d444f4-4d7f-538d-aaa8-c15adbd05921"
         },
@@ -256,19 +256,19 @@
           "display_name": "demo.governance.lead@noetfield.local"
         },
         "causation_id": null,
-        "correlation_id": "8318c027-9d65-4483-8469-2db274e18066",
-        "entity_id": "433efa78-8b80-4187-9206-0238a6ddeefd",
+        "correlation_id": "a68a81c8-db8c-4652-99d4-77bb5912cb09",
+        "entity_id": "dcdbfcc7-f7df-41ee-8186-a1776edf578a",
         "entity_type": "inspector_collaboration",
-        "event_id": "141b6aa3-d431-4042-95ce-27ddb2140e34",
+        "event_id": "909669b3-2fad-45a0-8744-6076ed6fad5a",
         "event_type": "INSPECTOR_COLLABORATION_STARTED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.517285Z",
+        "occurred_at": "2026-06-18T00:17:40.343177Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "graph_scope": {
             "module": "copilot_governance",
-            "relationship_id": "78e10761-e75b-4f7b-9173-f185b426e99c"
+            "relationship_id": "66bee212-0cde-4704-9bfa-288b6ce1de12"
           },
           "inspectors": [
             "opportunity_hunter",
@@ -290,14 +290,14 @@
           "display_name": "opportunity_hunter"
         },
         "causation_id": null,
-        "correlation_id": "0bfc21fd-6c0f-44a0-9493-f5067392b995",
-        "entity_id": "b36ecbb8-fa81-4546-8544-3564f354b9ed",
+        "correlation_id": "bd7665ef-f9ec-486f-882c-139f285f8cd4",
+        "entity_id": "80eb49bf-25af-4d4b-9357-885514ddc865",
         "entity_type": "inspector_run",
-        "event_id": "d3b348eb-0584-4fe3-b83e-09cb2970988b",
+        "event_id": "c4b75125-8d6a-495b-93da-564678784ff2",
         "event_type": "INSPECTOR_COMPLETED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.517490Z",
+        "occurred_at": "2026-06-18T00:17:40.343344Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "audit_event_refs": [],
@@ -309,7 +309,7 @@
                 "rationale": "No signal corpus has been attached yet.",
                 "score": 0.5
               },
-              "finding_id": "21a1b335-abdc-4f9b-905a-1b054381f190",
+              "finding_id": "5ebd69c9-8ea7-4183-9383-809e88f21295",
               "finding_type": "market_opportunity",
               "governance_boundary": {
                 "allowed_actions": [],
@@ -330,7 +330,7 @@
           ],
           "inspector_name": "opportunity_hunter",
           "requires_human_review": true,
-          "run_id": "b36ecbb8-fa81-4546-8544-3564f354b9ed"
+          "run_id": "80eb49bf-25af-4d4b-9357-885514ddc865"
         },
         "policy_context": {},
         "risk_context": {},
@@ -345,14 +345,14 @@
           "display_name": "threat_monitor"
         },
         "causation_id": null,
-        "correlation_id": "5c524615-36c3-4c73-bb56-4d43e425f8a8",
-        "entity_id": "4e7a4bdf-b2ab-4d5d-8475-4d0ff432f607",
+        "correlation_id": "d2b28555-933e-4f0d-925b-53a12a1e4906",
+        "entity_id": "8c27366a-1ab3-4b9c-8398-4026ab13a769",
         "entity_type": "inspector_run",
-        "event_id": "95ee7bc6-1551-474d-b488-c7b2844827b9",
+        "event_id": "cfd5fdd5-cc31-41a3-819b-70ed3581a9a3",
         "event_type": "INSPECTOR_COMPLETED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.517569Z",
+        "occurred_at": "2026-06-18T00:17:40.343412Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "audit_event_refs": [],
@@ -364,7 +364,7 @@
                 "rationale": "No monitored risk feeds have been configured yet.",
                 "score": 0.5
               },
-              "finding_id": "75d25516-f527-423b-a5bd-91ce31e5f51d",
+              "finding_id": "c080814e-6e2d-4ebd-b665-aec506d14e53",
               "finding_type": "strategic_threat",
               "governance_boundary": {
                 "allowed_actions": [],
@@ -385,7 +385,7 @@
           ],
           "inspector_name": "threat_monitor",
           "requires_human_review": true,
-          "run_id": "4e7a4bdf-b2ab-4d5d-8475-4d0ff432f607"
+          "run_id": "8c27366a-1ab3-4b9c-8398-4026ab13a769"
         },
         "policy_context": {},
         "risk_context": {},
@@ -400,14 +400,14 @@
           "display_name": "lead_scout"
         },
         "causation_id": null,
-        "correlation_id": "a6639830-c5fd-4df5-855a-c827599116f0",
-        "entity_id": "ccfb2307-de18-41ab-864a-c3b8600aad87",
+        "correlation_id": "b77d5325-81ea-467e-a457-292caf0e047d",
+        "entity_id": "941e06dd-272a-4d7a-a58a-aef982989489",
         "entity_type": "inspector_run",
-        "event_id": "7429739f-45f3-4f7c-b4e7-245f630aabc7",
+        "event_id": "cdc5c856-ae96-4798-977b-b66d43da5876",
         "event_type": "INSPECTOR_COMPLETED",
         "event_version": "1.0",
         "integrity_hash": null,
-        "occurred_at": "2026-06-17T23:35:17.517663Z",
+        "occurred_at": "2026-06-18T00:17:40.343478Z",
         "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
         "payload": {
           "audit_event_refs": [],
@@ -419,7 +419,7 @@
                 "rationale": "No account graph or lead sources have been configured yet.",
                 "score": 0.5
               },
-              "finding_id": "fa79f539-7d3b-46c1-9811-0af61e73792f",
+              "finding_id": "ea6ea708-e718-4259-957b-0465433eba40",
               "finding_type": "qualified_lead_signal",
               "governance_boundary": {
                 "allowed_actions": [],
@@ -440,7 +440,7 @@
           ],
           "inspector_name": "lead_scout",
           "requires_human_review": true,
-          "run_id": "ccfb2307-de18-41ab-864a-c3b8600aad87"
+          "run_id": "941e06dd-272a-4d7a-a58a-aef982989489"
         },
         "policy_context": {},
         "risk_context": {},
@@ -451,28 +451,28 @@
     ],
     "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
     "pending_approval_count": 1,
-    "signal_id": "a991a80a-2cad-48ab-b4a0-232293a50b11",
+    "signal_id": "f6e7a9b0-d2ed-49f7-9c8d-65c958e0f7bc",
     "tenant_id": "e4d444f4-4d7f-538d-aaa8-c15adbd05921",
-    "workflow_id": "6c2fc574-a8c7-4159-a7de-ff30aac6b11b"
+    "workflow_id": "0829d8cf-d394-45bf-b0e0-b4bffad9e2bb"
   },
   "board_brief": {
     "executive_summary": "The demo signal was ingested, linked into the governance graph, evaluated by policy, moved into workflow review, and preserved in a replayable audit trail.",
-    "generated_at": "2026-06-17T23:35:17.517754+00:00",
+    "generated_at": "2026-06-18T00:17:40.343586+00:00",
     "governance_state": {
-      "approval_id": "bc4f4d4f-d764-4643-9801-036a55fc81e5",
+      "approval_id": "274dc90d-3887-4622-9418-e424f8458022",
       "approval_required": true,
       "policy_enforced": true,
       "workflow_state": "pending_review"
     },
     "graph_state": {
-      "reflection_id": "7c648ce5-e1b6-466e-8066-ef1cebc8162f",
+      "reflection_id": "74c664d5-3085-4ebb-8177-db1afabb5fd8",
       "relationship_count": 1,
-      "relationship_id": "78e10761-e75b-4f7b-9173-f185b426e99c"
+      "relationship_id": "66bee212-0cde-4704-9bfa-288b6ce1de12"
     },
     "inspector_state": {
       "finding_count": 3,
       "requires_human_review": true,
-      "run_id": "e0e866e1-bb77-4e80-8a32-60f9d2e0a0dd",
+      "run_id": "68ebcb5e-2fed-42b2-9564-300bfb0cbb77",
       "status": "completed"
     },
     "positioning": "AI Trust Infrastructure for regulated enterprises",
@@ -526,15 +526,15 @@
   },
   "policy_version_hash": "sha256:1a3302cae15d498d",
   "runtime_result": {
-    "approval_id": "bc4f4d4f-d764-4643-9801-036a55fc81e5",
+    "approval_id": "274dc90d-3887-4622-9418-e424f8458022",
     "organization_id": "c905b9e2-db23-5497-9072-aacc4a87c8ad",
-    "reflection_id": "7c648ce5-e1b6-466e-8066-ef1cebc8162f",
-    "relationship_id": "78e10761-e75b-4f7b-9173-f185b426e99c",
+    "reflection_id": "74c664d5-3085-4ebb-8177-db1afabb5fd8",
+    "relationship_id": "66bee212-0cde-4704-9bfa-288b6ce1de12",
     "replay_hint": "/events/replay?after_sequence=0&event_type=*",
-    "run_id": "b453d917-2797-4833-bd82-e374ea0b573d",
-    "signal_id": "a991a80a-2cad-48ab-b4a0-232293a50b11",
+    "run_id": "164d2809-83db-467e-ba73-6044d8accfe3",
+    "signal_id": "f6e7a9b0-d2ed-49f7-9c8d-65c958e0f7bc",
     "tenant_id": "e4d444f4-4d7f-538d-aaa8-c15adbd05921",
-    "workflow_id": "6c2fc574-a8c7-4159-a7de-ff30aac6b11b",
+    "workflow_id": "0829d8cf-d394-45bf-b0e0-b4bffad9e2bb",
     "workflow_state": "pending_review"
   },
   "status": "ready_for_demo"

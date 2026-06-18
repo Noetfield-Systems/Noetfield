@@ -1,0 +1,241 @@
+{
+  "schema_version": "nf-truth-bundle-v1",
+  "generated_at": "2026-06-18T00:17:43Z",
+  "agent_id": "noetfield_cloud",
+  "plane": "noetfield_cloud",
+  "session_gate": {
+    "schema_version": "nf-session-gate-v1",
+    "ok": true,
+    "agent_id": "noetfield_cloud",
+    "role": "cloud",
+    "generated_at": "2026-06-18T00:17:43Z",
+    "repo_root": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield",
+    "gates": [
+      {
+        "gate": "entry/START_HERE_LOCKED_v1.md",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/entry/START_HERE_LOCKED_v1.md"
+      },
+      {
+        "gate": "ROUTING_CARD.md",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/ROUTING_CARD.md"
+      },
+      {
+        "gate": "docs/ops/NF_GAOS_W0_LOCKED_v1.md",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W0_LOCKED_v1.md"
+      },
+      {
+        "gate": "docs/ops/NF_GAOS_W1_LOCKED_v1.md",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W1_LOCKED_v1.md"
+      },
+      {
+        "gate": "docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md"
+      },
+      {
+        "gate": "data/nf_orient_routing_v1.json",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_orient_routing_v1.json"
+      },
+      {
+        "gate": "os/NF_REPO_CAPABILITY_MAP.json",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_REPO_CAPABILITY_MAP.json"
+      },
+      {
+        "gate": "os/NF_UNIFIED_ROUTING_GRAPH.json",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_UNIFIED_ROUTING_GRAPH.json"
+      },
+      {
+        "gate": "os/NF_SSOT_INVENTORY.json",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_SSOT_INVENTORY.json"
+      },
+      {
+        "gate": "os/NF_BAVT_STRATEGY.json",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_BAVT_STRATEGY.json"
+      },
+      {
+        "gate": "os/plan.json",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/plan.json"
+      },
+      {
+        "gate": "os/SHIP_NOW.md",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/SHIP_NOW.md"
+      },
+      {
+        "gate": "PROJECT_BOUNDARIES_LOCKED.md",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/PROJECT_BOUNDARIES_LOCKED.md"
+      },
+      {
+        "gate": ".cursor/agent-memory/MEMORY_LOCKED.yaml",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/.cursor/agent-memory/MEMORY_LOCKED.yaml"
+      },
+      {
+        "gate": ".cursor/incidents/REGISTRY.md",
+        "ok": true,
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/.cursor/incidents/REGISTRY.md"
+      },
+      {
+        "gate": "memory_R-007",
+        "ok": true
+      },
+      {
+        "gate": "memory_R-011",
+        "ok": true
+      },
+      {
+        "gate": "memory_version",
+        "ok": true
+      },
+      {
+        "gate": "open_p0_incidents",
+        "ok": true,
+        "count": 0
+      }
+    ],
+    "next": "make nf-live-orient"
+  },
+  "stale_guard": {
+    "schema_version": "nf-stale-guard-v1",
+    "generated_at": "2026-06-18T00:17:43Z",
+    "context_stale": false,
+    "pending_task": {
+      "id": "ship-sandbox-server-side-057",
+      "title": "Optional server-side sandbox session persistence",
+      "plan": "governance-console/backend/",
+      "status": "pending"
+    },
+    "issues": [],
+    "heal": null
+  },
+  "voyage_integrity": {
+    "schema_version": "nf-voyage-integrity-v1",
+    "generated_at": "2026-06-18T00:17:43Z",
+    "ok": true,
+    "pending_task": {
+      "id": "ship-sandbox-server-side-057",
+      "title": "Optional server-side sandbox session persistence",
+      "plan": "governance-console/backend/",
+      "status": "pending"
+    },
+    "gates": [
+      {
+        "gate": "pending_in_ship_now",
+        "ok": true,
+        "id": "ship-sandbox-server-side-057"
+      },
+      {
+        "gate": "pending_in_gtm_next",
+        "ok": true,
+        "id": "ship-sandbox-server-side-057"
+      },
+      {
+        "gate": "locked_refs_unique_ids",
+        "ok": true
+      },
+      {
+        "gate": "cursor_reply_sha_present",
+        "ok": true,
+        "optional": true
+      }
+    ]
+  },
+  "live_routing": {
+    "schema_version": "nf-live-routing-v1",
+    "generated_at": "2026-06-18T00:17:43Z",
+    "agent_id": "noetfield_cloud",
+    "pending_task": {
+      "id": "ship-sandbox-server-side-057",
+      "title": "Optional server-side sandbox session persistence"
+    },
+    "git": {
+      "sha": "1ada511",
+      "branch": "ship/nf-gaos-w2-production"
+    },
+    "sourcea_mirror": true,
+    "boot": [
+      "make nf-onboard"
+    ],
+    "pins": {
+      "start_here": "entry/START_HERE_LOCKED_v1.md",
+      "routing_card": "ROUTING_CARD.md",
+      "live_status": "reports/agent-auto/LIVE-STATUS.md",
+      "graph": "os/NF_UNIFIED_ROUTING_GRAPH.json"
+    }
+  },
+  "live_surfaces": {
+    "schema_version": "nf-live-surfaces-v1",
+    "generated_at": "2026-06-18T00:17:42Z",
+    "agent_id": "noetfield_cloud",
+    "plane": "noetfield_cloud",
+    "product_now_line": "ship-sandbox-server-side-057 \u2014 Optional server-side sandbox session persistence",
+    "portfolio_now_line": "portfolio 171/300 done",
+    "gate_ok": true,
+    "context_stale": false,
+    "voyage_ok": true,
+    "pending_task": {
+      "id": "ship-sandbox-server-side-057",
+      "title": "Optional server-side sandbox session persistence",
+      "plan": "governance-console/backend/",
+      "status": "pending"
+    },
+    "git_sha": "1ada511",
+    "routing_pending": {
+      "id": "ship-sandbox-server-side-057",
+      "title": "Optional server-side sandbox session persistence"
+    },
+    "quote_rule": "Agents must quote product_now_line from this file \u2014 not chat memory",
+    "heal": null
+  },
+  "receipt_cascade": {
+    "schema_version": "nf-receipt-cascade-v1",
+    "generated_at": "2026-06-18T00:17:42Z",
+    "ok": true,
+    "failures": [],
+    "nodes": [],
+    "ssot": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_orient_routing_v1.json",
+    "heal": null,
+    "orient_read_chain": [
+      "entry/START_HERE_LOCKED_v1.md",
+      "ROUTING_CARD.md",
+      "reports/agent-auto/LIVE-STATUS.md",
+      "os/plan.json",
+      "os/SHIP_NOW.md",
+      "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md"
+    ]
+  },
+  "gatekeeper": {
+    "schema_version": "nf-gatekeeper-v1",
+    "generated_at": "2026-06-18T00:17:42Z",
+    "status": "PASS",
+    "ok": true,
+    "safe_to_implement": true,
+    "reasons": [],
+    "agent_id": "noetfield_cloud",
+    "pending_task_id": "ship-sandbox-server-side-057",
+    "founder_implement": false,
+    "product_now_line": "ship-sandbox-server-side-057 \u2014 Optional server-side sandbox session persistence",
+    "next": "SAFE TO IMPLEMENT"
+  },
+  "portfolio": {
+    "total": 300,
+    "done": 171,
+    "backlog": 129,
+    "registry": "/Users/sinakazemnezhad/Desktop/1 PAGER/portfolio-300-locked/REGISTRY.json"
+  },
+  "live_status": "reports/agent-auto/LIVE-STATUS.md",
+  "routing_card": "ROUTING_CARD.md",
+  "product_now_line": "ship-sandbox-server-side-057 \u2014 Optional server-side sandbox session persistence",
+  "portfolio_now_line": "portfolio 171/300 done"
+}

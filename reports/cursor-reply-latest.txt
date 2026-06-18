@@ -1,47 +1,56 @@
 ---
 agent_tag: nf-local-repo-agent
 agent_display: "[NF-LOCAL-REPO-AGENT]"
-authored_at: "2026-06-13"
-doc_id: cursor-reply-v18-merge-main
+authored_at: "2026-06-18"
+doc_id: cursor-reply-nf-gaos-w2-step1-complete
 ---
 
-> **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-06-13
+> **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-06-18
 
-**Merged to main — www v18 tier-1 UI + commercial SSOT**
+**NF-GAOS W2 Step 1 complete — T0→T3 + verify-final-lock green**
 
-## Tenth audit closeout (main @ b822423)
+## Verify
 
-- Phase 1: PR #48 merged — iter 18 on main
-- Phase 2–7: checkpoint verify, OpenAPI bridge, MERGED_WINDOW config shipped
-- Phase 8–10: GTM_NEXT iter 19 seeded; verify PASS
+```text
+make verify-all-tiers — PASS
+make verify-final-lock — PASS (231 pytest)
+make verify-nf-gaos-w3 — PASS
+```
 
-## Shipped on feature branch (now on main)
+## Shipped
 
-- www v18: Live Proof Hero, Trial OS, four-act homepage, motion/a11y CSS
-- governance-console: AppShell 2.0, Receipt Studio, Decision Timeline, onboarding
-- Commercial SSOT + SME provider blueprint + `/copilot/sme/` embed
-- v16 packaging: `/start/` · `/pricing/` · agentic workflows
+- Step 1: rebuild-www gtm-ops parity, trust-ledger buyer block, offline pytest conftest
+- W3 factory spine: orient SSOT, 5 alwaysApply rules, inventory sync
+- Plan coherence: QUICK_PICK, SHIP_DONE_MAP, ENGINEERING_DONE_MANIFEST portfolio wave
+- docs/reference stub self-ref WARN fixed
 
-## Docs (new LOCKED)
+## Production blockers (founder)
 
-- `docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.md`
-- `docs/strategy/NOETFIELD_SME_PROVIDER_BLUEPRINT_LOCKED_v1.md`
-- `docs/WWW_V18_TIER1_UI_MASTERPLAN_LOCKED_v1.md`
+- `RESEND_API_KEY` empty in `~/.sina/secrets.env` → `www_email_configured: false`
+- `www.noetfield.com` not under `noetfield-systems` Vercel scope — alias blocked
+- Fix: set Resend key + attach domain to `noetfield-systems/www`, then `bash scripts/auto-heal-www.sh`
 
-## Next
+head: 1ada511
+main: 6d241ab
 
-- Vercel production deploy from main (confirm www.noetfield.com shows v18)
-- Optional: Cloudflare cache purge
-- P1: platform API host for Live Proof `/evaluate` on production
+---
 
 ```yaml
 schema_version: 1
 repo: noetfield
 agent_tag: nf-local-repo-agent
-task: "Merge cursor/bank-grade-fullstack-37f0 → main (www v18 + commercial SSOT)"
+task: "NF-GAOS W2 Step 1 — green all verify tiers + W3 spine"
 status: done
-verify_passed: pending-post-merge
-next_action: "Founder: confirm Vercel deploy · purge CDN cache if needed"
-reported_at: "2026-06-13T00:00:00Z"
+verify_passed: true
+verify_command: "make verify-all-tiers && make verify-final-lock"
+verify_output_summary: "T0–T3 green; 231 pytest; W3 PASS"
+blocked_reason: "Production intake: RESEND_API_KEY + Vercel domain scope"
+next_action: "Founder: Resend key + Vercel domain; Step 2 merge PR"
+evidence_paths:
+  - scripts/rebuild-www-v6.py
+  - docs/ops/NF_GAOS_W2_UPGRADE_10_STEP_LOCKED_v1.md
+reported_at: "2026-06-18T00:20:00Z"
 reporter: cursor
+head: 1ada511
+main: 6d241ab
 ```

@@ -8,6 +8,10 @@
 
 **Portfolio N-P8 (2026-06-17):** `ship-portfolio-np8-sticky-cta-078` + `ship-portfolio-np8-regression-079` **done** — pilot sticky CTA on gate + intake · Governance Runtime regression SSOT · `wait-dev-www-ready.sh` cold-boot fix · `bash …/scripts/verify-portfolio-300-phase8.sh` PASS.
 
+**Portfolio T-P8 (2026-06-17):** TrustField invoicing rail **5/5 done** — SSOT read chain · conflict matrix · RPAA map · export roadmap · SOC2 gate · `bash …/scripts/verify-portfolio-300-phase13.sh` PASS.
+
+**Portfolio 300 Phase 14 (2026-06-17):** Next 100 plans **100/100 done** — SourceA S-P1/S-P2 · WitnessBC W-P1–W-P3 · seven77 7-P1/7-P2 · Virlux V-P1 · registry **171/300** · `bash …/scripts/verify-portfolio-300-phase14.sh` PASS.
+
 **Portfolio T-P7 (2026-06-17):** TrustField MSP partner ops **10/10 done** — COPY_SAFETY · CASL · pricing tiers · invoicing rail notice · W3 queue SSOT · `bash …/scripts/verify-portfolio-300-phase12.sh` PASS.
 
 **Portfolio T-P6 (2026-06-17):** TrustField Canada RWA partner attestation **20/20 done** — 30-account outreach packs · Ocree SOW stub · `bash …/scripts/verify-portfolio-300-phase11.sh` PASS.
@@ -39,6 +43,10 @@
 **Portfolio 300 10-step (2026-06-17):** LOCKED — 300 enriched plans in `~/Desktop/1 PAGER/portfolio-300-locked/` · pick: `python3 …/scripts/pick-portfolio-plan.py --w3-first` · validate PASS.
 
 **Portfolio 300 Phase 2 (2026-06-17):** N-P1 wave **15/15 done** — Copilot Governance Pack commercial pack · QuickScan $2k–$3.5k aligned on `/copilot/pilot/` · `bash …/scripts/verify-portfolio-300-phase2.sh` PASS.
+
+**Portfolio 300 Phase 14 (2026-06-17):** Next 100 plans **100/100 done** — SourceA Asset B DFY + platform · WitnessBC FLOW/OPS/toolkit · seven77 Gate 0 + funder firewall · Virlux SME pilot · `bash …/scripts/verify-portfolio-300-phase14.sh` PASS.
+
+**Portfolio 300 Phase 13 (2026-06-17):** T-P8 invoicing rail wave **5/5 done** — vault SSOT chain · brand conflict matrix · SOC2 gate · `bash …/scripts/verify-portfolio-300-phase13.sh` PASS.
 
 **Portfolio 300 Phase 12 (2026-06-17):** T-P7 MSP partner ops wave **10/10 done** — COPY_SAFETY · CASL · pricing · invoicing rail · `bash …/scripts/verify-portfolio-300-phase12.sh` PASS.
 

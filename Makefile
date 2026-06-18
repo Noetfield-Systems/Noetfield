@@ -173,6 +173,26 @@ nf-voyage-integrity:
 nf-orient:
 	@python3 scripts/nf_orient_v1.py --json
 
+nf-live-surfaces:
+	@python3 scripts/nf_live_surfaces_v1.py --json
+
+nf-truth-bundle:
+	@python3 scripts/nf_truth_bundle_v1.py --json
+
+nf-receipt-cascade:
+	@python3 scripts/nf_receipt_cascade_v1.py --json
+
+nf-gatekeeper:
+	@python3 scripts/nf_gatekeeper_v1.py --json
+
+verify-nf-gaos-w3:
+	@chmod +x scripts/verify-nf-gaos-w3.sh scripts/nf-repo-find.sh scripts/prove-nf-factory-spine.sh
+	./scripts/verify-nf-gaos-w3.sh
+
+nf-prove-factory-spine:
+	@chmod +x scripts/prove-nf-factory-spine.sh
+	./scripts/prove-nf-factory-spine.sh
+
 nf-bavt:
 	@chmod +x scripts/nf-bavt-run.sh
 	./scripts/nf-bavt-run.sh

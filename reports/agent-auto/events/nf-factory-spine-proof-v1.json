@@ -1,0 +1,56 @@
+{
+  "schema_version": "nf-factory-spine-proof-v1",
+  "generated_at": "2026-06-18T00:17:43Z",
+  "ok": true,
+  "proof_count": 9,
+  "passed": 9,
+  "failed": 0,
+  "proofs": [
+    {
+      "proof": "cascade_ssot_shape",
+      "ok": true,
+      "detail": "sources=5"
+    },
+    {
+      "proof": "onboard_pipeline_exit_0",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "proof": "receipts_on_disk",
+      "ok": true,
+      "detail": "all receipts present"
+    },
+    {
+      "proof": "product_now_line_plan",
+      "ok": true,
+      "detail": "expected='ship-sandbox-server-side-057 \u2014 Optional server-side sandbox session persistence' got='ship-sandbox-server-side-057 \u2014 Optional server-side sandbox session persistence'"
+    },
+    {
+      "proof": "truth_bundle_keys",
+      "ok": true,
+      "detail": "missing=[] line='ship-sandbox-server-side-057 \u2014 Optional server-side sandbox session persistence'"
+    },
+    {
+      "proof": "stale_injection_denies",
+      "ok": true,
+      "detail": "cascade_fail=True stale_node=True gate_denied=True stale_reason=True"
+    },
+    {
+      "proof": "founder_implement_required",
+      "ok": true,
+      "detail": "exit=1 reasons=['FOUNDER_IMPLEMENT_REQUIRED']"
+    },
+    {
+      "proof": "founder_implement_passes",
+      "ok": true,
+      "detail": "exit=0 safe=True"
+    },
+    {
+      "proof": "executor_lock_acquire_release",
+      "ok": true,
+      "detail": "locked=True"
+    }
+  ],
+  "product_now_line": "ship-sandbox-server-side-057 \u2014 Optional server-side sandbox session persistence"
+}

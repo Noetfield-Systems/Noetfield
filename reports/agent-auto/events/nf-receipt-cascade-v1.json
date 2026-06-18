@@ -1,0 +1,17 @@
+{
+  "schema_version": "nf-receipt-cascade-v1",
+  "generated_at": "2026-06-18T00:17:43Z",
+  "ok": true,
+  "failures": [],
+  "nodes": [],
+  "ssot": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_orient_routing_v1.json",
+  "heal": null,
+  "orient_read_chain": [
+    "entry/START_HERE_LOCKED_v1.md",
+    "ROUTING_CARD.md",
+    "reports/agent-auto/LIVE-STATUS.md",
+    "os/plan.json",
+    "os/SHIP_NOW.md",
+    "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md"
+  ]
+}

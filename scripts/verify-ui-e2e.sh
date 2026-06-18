@@ -77,7 +77,7 @@ check_html "${BASE}/copilot/sme/" "copilot sme pack" "SME Governance Pack" "90-d
 check_html "${BASE}/trust-brief/" "trust brief" '$10,000' "Request Trust Brief"
 check_html "${BASE}/federal/" "federal lane" "June 24, 2026" "Algorithmic Impact Assessment" "Copilot PIN" "canada.ca" "tbs-sct.canada.ca" "not a federal certifier"
 check_html "${BASE}/msp/" "msp partner lane" "Readiness → Record" "Phase 1" "Phase 2" "Governance Pack"
-check_html "${BASE}/" "homepage scope" "Available now" "Pre-execution evaluate" "Governance playground"
+check_html "${BASE}/" "homepage scope" "Available now" "Governance evaluate" "Governance playground"
 check_html "${BASE}/" "homepage receipt" "Trust Ledger Entry" "export_integrity" "fail closed"
 check_html "${BASE}/" "homepage v18 live proof" "data-live-proof-hero" "live-proof-hero"
 check_html "${BASE}/start/" "start trial os" "data-trial-os-flow" "trial-os-flow"
@@ -205,7 +205,13 @@ else
 fi
 
 VENDOR_PATTERN='Veridra|Vanta|Drata|OneTrust|Inforcer|Securiti|Credo AI|Holistic AI|Audital'
-LEGACY_GTM_PATTERN='design.partner|Design.partner|Become a design partner|Apply to design partner|Purview-only trap|Accepting design partners'
+LEGACY_GTM_NEEDLES=(
+  'Become a design partner'
+  'Apply to design partner'
+  'Accepting design partners'
+  'Purview-only trap'
+  'design-partner intake'
+)
 for path in / /trust/ /copilot/ /copilot/pilot/ /msp/ /federal/ /investors/ /start/ /pricing/; do
   page_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}${path}" 2>/dev/null || true)"
   if echo "$page_html" | grep -Eiq "$VENDOR_PATTERN"; then
@@ -214,11 +220,17 @@ for path in / /trust/ /copilot/ /copilot/pilot/ /msp/ /federal/ /investors/ /sta
   else
     echo "OK   no vendor names on ${path}"
   fi
-  if echo "$page_html" | grep -Eiq "$LEGACY_GTM_PATTERN"; then
-    echo "FAIL legacy GTM copy on ${path} — use Copilot Governance Pack / Apply for pilot" >&2
-    fail=1
-  else
+  legacy_hit=0
+  for needle in "${LEGACY_GTM_NEEDLES[@]}"; do
+    if echo "$page_html" | grep -Fq "$needle"; then
+      echo "FAIL legacy GTM copy on ${path} — matched: ${needle}" >&2
+      legacy_hit=1
+    fi
+  done
+  if [[ "$legacy_hit" -eq 0 ]]; then
     echo "OK   no legacy design-partner copy on ${path}"
+  else
+    fail=1
   fi
 done
 

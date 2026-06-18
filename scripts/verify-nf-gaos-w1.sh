@@ -8,6 +8,7 @@ fail=0
 echo "=== verify-nf-gaos-w1 ==="
 
 ./scripts/verify-nf-gaos-w0.sh || fail=1
+./scripts/verify-nf-gaos-w3.sh || fail=1
 ./scripts/verify-nf-anti-fragmentation-v1.sh || fail=1
 python3 scripts/nf_voyage_integrity_v1.py --json >/dev/null || fail=1
 bash scripts/nf-bavt-run.sh --fast --json >/dev/null || fail=1

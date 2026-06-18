@@ -52,6 +52,9 @@ python3 scripts/smoke_bank_grade_html.py
 chmod +x scripts/verify-no-asf-coherence.sh
 ./scripts/verify-no-asf-coherence.sh
 
+chmod +x scripts/verify-nf-gaos-w3.sh scripts/prove-nf-factory-spine.sh
+./scripts/verify-nf-gaos-w3.sh
+
 if [[ -n "${NF_STAGING_URL:-}" ]]; then
   echo "NF_STAGING_URL set — running optional staging-smoke …"
   chmod +x scripts/staging-smoke.sh

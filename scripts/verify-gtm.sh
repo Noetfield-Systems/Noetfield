@@ -40,6 +40,13 @@ fi
 chmod +x scripts/wait-dev-www-ready.sh
 ./scripts/wait-dev-www-ready.sh
 
+# Cold-boot guard: local dev checks can fail if proxy restarted between static verify and GTM.
+if ! make verify-local-dev >/dev/null 2>&1; then
+  echo "verify-local-dev preflight failed — rebooting dev stack once…"
+  ./scripts/dev-local-all.sh
+  ./scripts/wait-dev-www-ready.sh
+fi
+
 if [[ -f scripts/smoke-seed-m365-evidence-stub.sh ]]; then
   chmod +x scripts/smoke-seed-m365-evidence-stub.sh
   ./scripts/smoke-seed-m365-evidence-stub.sh

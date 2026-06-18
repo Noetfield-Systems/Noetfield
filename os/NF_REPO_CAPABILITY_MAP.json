@@ -1,0 +1,31 @@
+{
+  "schema": "nf-repo-capability-map-v1",
+  "version": "1.0.0",
+  "repo_id": "noetfield",
+  "code_root": "/Users/sinakazemnezhad/Desktop/Noetfield",
+  "product_root": "Noetfield-All-Documents/Noetfield",
+  "mono_pointer": "../SinaaiMonoRepo",
+  "queue_prefix": "nf-",
+  "forbidden_prefix_mix": ["sa-*", "mx-*"],
+  "tasks": {
+    "onboard": {"run": "make nf-onboard", "tier": "T0"},
+    "gatekeeper": {"run": "make nf-gatekeeper", "tier": "T0"},
+    "live_surfaces": {"run": "make nf-live-surfaces", "tier": "T0"},
+    "truth_bundle": {"run": "make nf-truth-bundle", "tier": "T0"},
+    "receipt_cascade": {"run": "make nf-receipt-cascade", "tier": "T0"},
+    "orient": {"run": "make nf-orient", "tier": "T1", "founder_or_lost_only": true},
+    "verify_static": {"run": "make verify-all-static", "tier": "T1"},
+    "verify_gtm": {"run": "make verify-gtm", "tier": "T2"},
+    "pick_plan": {"run": "make pick-no-asf-plan", "tier": "T1"},
+    "portfolio_pick": {"run": "python3 ~/Desktop/1\\ PAGER/portfolio-300-locked/scripts/pick-portfolio-plan.py --w3-first", "tier": "W3"}
+  },
+  "receipts": {
+    "session_gate": "~/.sina/nf_session_gate_receipt_v1.json",
+    "live_surfaces": "~/.sina/nf-live-surfaces-v1.json",
+    "truth_bundle": "~/.sina/nf-truth-bundle-v1.json",
+    "gatekeeper": "~/.sina/nf-gatekeeper-receipt-v1.json",
+    "receipt_cascade": "~/.sina/nf-receipt-cascade-v1.json"
+  },
+  "entry_law": "ROUTING_CARD.md · data/nf_orient_routing_v1.json",
+  "sourcea_worker": "read-only — builds sa-* on ~/Desktop/SourceA"
+}

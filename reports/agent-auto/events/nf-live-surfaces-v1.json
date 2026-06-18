@@ -1,0 +1,24 @@
+{
+  "schema_version": "nf-live-surfaces-v1",
+  "generated_at": "2026-06-18T00:17:43Z",
+  "agent_id": "noetfield_cloud",
+  "plane": "noetfield_cloud",
+  "product_now_line": "ship-sandbox-server-side-057 \u2014 Optional server-side sandbox session persistence",
+  "portfolio_now_line": "portfolio 171/300 done",
+  "gate_ok": true,
+  "context_stale": false,
+  "voyage_ok": true,
+  "pending_task": {
+    "id": "ship-sandbox-server-side-057",
+    "title": "Optional server-side sandbox session persistence",
+    "plan": "governance-console/backend/",
+    "status": "pending"
+  },
+  "git_sha": "1ada511",
+  "routing_pending": {
+    "id": "ship-sandbox-server-side-057",
+    "title": "Optional server-side sandbox session persistence"
+  },
+  "quote_rule": "Agents must quote product_now_line from this file \u2014 not chat memory",
+  "heal": null
+}

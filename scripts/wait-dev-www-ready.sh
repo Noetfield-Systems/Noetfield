@@ -11,6 +11,8 @@ NEEDLES=(
   "audit trail your Copilot deployment"
   "Apply for pilot"
   "Start free sandbox"
+  "data-live-proof-hero"
+  "live-proof-hero"
 )
 
 health_ok() {
@@ -20,13 +22,17 @@ health_ok() {
 }
 
 www_ok() {
-  local html
+  local html start_html
   html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/" 2>/dev/null || true)"
   [[ -n "$html" ]] || return 1
   local n
   for n in "${NEEDLES[@]}"; do
     echo "$html" | grep -qF "$n" || return 1
   done
+  start_html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}/start/" 2>/dev/null || true)"
+  [[ -n "$start_html" ]] || return 1
+  echo "$start_html" | grep -qF "data-trial-os-flow" || return 1
+  echo "$start_html" | grep -qF "trial-os-flow" || return 1
   return 0
 }
 

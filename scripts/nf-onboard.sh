@@ -37,22 +37,30 @@ export NOETFIELD_AGENT_ID="${NOETFIELD_AGENT_ID:-noetfield_cloud}"
 FAIL=0
 
 echo "=== nf-onboard CLOUD ==="
-echo "step 1/6 session gate"
+echo "step 1/8 session gate"
 python3 scripts/nf_session_gate_run_v1.py --role cloud --json || FAIL=1
 
-echo "step 2/6 live orient"
+echo "step 2/8 live orient"
 bash scripts/nf-live-orient-v1.sh || FAIL=1
 
-echo "step 3/6 routing card"
+echo "step 3/8 routing card"
 bash scripts/nf_routing_card.sh --json > /dev/null
 
-echo "step 4/6 stale guard"
+echo "step 4/8 stale guard"
 python3 scripts/nf_stale_guard_v1.py --json || FAIL=1
 
-echo "step 5/6 voyage integrity"
+echo "step 5/8 voyage integrity"
 python3 scripts/nf_voyage_integrity_v1.py --json || FAIL=1
 
-echo "step 6/6 panel export"
+echo "step 6/8 live surfaces + truth bundle"
+python3 scripts/nf_live_surfaces_v1.py --json || FAIL=1
+python3 scripts/nf_truth_bundle_v1.py --json || true
+
+echo "step 7/8 receipt cascade + gatekeeper (advisory)"
+python3 scripts/nf_receipt_cascade_v1.py --json || FAIL=1
+python3 scripts/nf_gatekeeper_v1.py --json || true
+
+echo "step 8/8 panel export"
 bash scripts/nf-panel-export-v1.sh || true
 
 if [[ "$JSON" == true ]]; then

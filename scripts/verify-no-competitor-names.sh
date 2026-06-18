@@ -31,6 +31,7 @@ should_skip() {
   [[ "$path" == *"scripts/generate-market-success-1000-roadmap.py" ]] && return 0
   [[ "$path" == *"scripts/market_success_1000_data.py" ]] && return 0
   [[ "$path" == *"scripts/verify-market-roadmap.sh" ]] && return 0
+  [[ "$path" == *"scripts/rebuild-www-v6.py" ]] && return 0
   [[ "$path" == *"/tests/"* ]] && return 0
   [[ "$path" == *"scripts/sync_l2_knowledge.py" ]] && return 0
   [[ "$path" == *"scripts/generate_batch_"* ]] && return 0

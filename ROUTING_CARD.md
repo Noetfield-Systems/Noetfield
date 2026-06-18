@@ -51,9 +51,11 @@ Then: **ASK** founder unless **`implement`** already given.
 | What ships now? | Live probe → `os/plan.json` pending `next_tasks[0]` |
 | Full routing graph? | `bash scripts/nf-unified-routing.sh --json` |
 | Pick next GTM task? | `make pick-wise` or `make pick-no-asf-plan` |
-| Am I allowed to edit? | Gate PASS + founder **`implement`** |
-| Ecosystem big picture? | Routing Panel `:8780` (Mac) · SourceA Worker routing law |
-| Orient / lost? | Re-run `make nf-onboard` · read LIVE-STATUS |
+| Am I allowed to edit? | Gate PASS + `make nf-gatekeeper` + founder **`implement`** |
+| Live one-liner? | `~/.sina/nf-live-surfaces-v1.json` → `product_now_line` |
+| **Prove factory spine?** | `make nf-prove-factory-spine` → `~/.sina/nf-factory-spine-proof-v1.json` |
+| Execution gate? | `make nf-gatekeeper` (FAIL = EXECUTION DENIED) |
+| Lost / cascade FAIL? | `make nf-orient` (manual only — not boot) |
 | Commercial outreach? | `AGENTIC_COMMERCIAL_HANDOFF_v1.md` — not cursor disk for 026 |
 
 ---

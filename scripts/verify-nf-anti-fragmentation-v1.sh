@@ -28,12 +28,12 @@ for e in boot:
 print(f"OK   boot entries {len(boot)}")
 PY
 
-# exactly 4 alwaysApply core rules
+# exactly 5 alwaysApply core rules (W3 factory spine + W1 quad)
 count=$(grep -rl 'alwaysApply: true' .cursor/rules/nf-*.mdc .cursor/rules/noetfield-ask-before-edit.mdc 2>/dev/null | wc -l | tr -d ' ')
-if [[ "$count" -eq 4 ]]; then
-  echo "OK   4 alwaysApply core rules"
+if [[ "$count" -eq 5 ]]; then
+  echo "OK   5 alwaysApply core rules"
 else
-  echo "FAIL expected 4 alwaysApply core rules, got $count" >&2
+  echo "FAIL expected 5 alwaysApply core rules, got $count" >&2
   fail=1
 fi
 

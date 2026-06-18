@@ -35,6 +35,9 @@ def main() -> int:
         ("session_gate", ["python3", "scripts/nf_session_gate_run_v1.py", "--json"]),
         ("live_orient", ["bash", "scripts/nf-live-orient-v1.sh"]),
         ("voyage_integrity", ["python3", "scripts/nf_voyage_integrity_v1.py", "--json"]),
+        ("live_surfaces", ["python3", "scripts/nf_live_surfaces_v1.py", "--json"]),
+        ("receipt_cascade", ["python3", "scripts/nf_receipt_cascade_v1.py", "--json"]),
+        ("gatekeeper", ["python3", "scripts/nf_gatekeeper_v1.py", "--json"]),
     ]:
         rc, out = _run(cmd, root)
         steps.append({"step": label, "ok": rc == 0, "exit_code": rc})
@@ -48,12 +51,18 @@ def main() -> int:
     events = root / "reports/agent-auto/events"
     stale = {}
     routing = {}
+    cascade = {}
+    surfaces = {}
     if (events / "nf-stale-guard-v1.json").is_file():
         stale = json.loads((events / "nf-stale-guard-v1.json").read_text())
     if (events / "nf-live-routing-v1.json").is_file():
         routing = json.loads((events / "nf-live-routing-v1.json").read_text())
+    if (events / "nf-receipt-cascade-v1.json").is_file():
+        cascade = json.loads((events / "nf-receipt-cascade-v1.json").read_text())
+    if (events / "nf-live-surfaces-v1.json").is_file():
+        surfaces = json.loads((events / "nf-live-surfaces-v1.json").read_text())
 
-    pending = routing.get("pending_task") or stale.get("pending_task")
+    pending = surfaces.get("pending_task") or routing.get("pending_task") or stale.get("pending_task")
     next_action = "ASK founder for implement order"
     if pending and pending.get("id"):
         next_action = f"Propose task {pending['id']} — wait for founder implement"
@@ -65,6 +74,8 @@ def main() -> int:
         "steps": steps,
         "routing_ladder": ladder,
         "pending_task": pending,
+        "product_now_line": surfaces.get("product_now_line"),
+        "receipt_cascade": cascade,
         "next_action": next_action,
         "read_chain": [
             "entry/START_HERE_LOCKED_v1.md",

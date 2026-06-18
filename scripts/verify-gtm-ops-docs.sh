@@ -23,7 +23,7 @@ check_url() {
   fi
 }
 
-check_url "${BASE}/docs/copilot/DESIGN_PARTNER_PIPELINE_v1.md" "pipeline doc"
+check_url "${BASE}/docs/copilot/COPILOT_GOVERNANCE_PIPELINE_v1.md" "pipeline doc"
 check_url "${BASE}/docs/ops/DEMO_REHEARSAL_CHECKLIST_v1.md" "demo rehearsal doc"
 check_url "${BASE}/docs/copilot/BUYER_DEBRIEF_TEMPLATE_v1.md" "buyer debrief doc"
 check_url "${BASE}/docs/strategy/channel-outreach/bc-ai-for-all-2026.md" "bc-ai outreach doc"
@@ -33,7 +33,7 @@ check_url "${BASE}/docs/copilot/PROCUREMENT_ONE_PAGER.md" "procurement one-pager
 check_url "${BASE}/docs/references/GOVERNANCE_SOURCES_BOOK_v1.md" "governance sources book doc"
 check_url "${BASE}/docs/references/GOVERNANCE_SOURCES_HANDBOOK_LOCKED_v1.md" "governance sources handbook doc"
 
-pipeline_body="$(curl -sS --connect-timeout 5 "${BASE}/docs/copilot/DESIGN_PARTNER_PIPELINE_v1.md" 2>/dev/null || true)"
+pipeline_body="$(curl -sS --connect-timeout 5 "${BASE}/docs/copilot/COPILOT_GOVERNANCE_PIPELINE_v1.md" 2>/dev/null || true)"
 if echo "$pipeline_body" | grep -qF "bc-ai-for-all-2026"; then
   echo "OK   pipeline doc bc-ai channel reference"
 else
@@ -49,10 +49,10 @@ fi
 
 for path in "/copilot/pilot/" "/copilot/demo/"; do
   html="$(curl -sS --connect-timeout 5 -H "Accept: text/html" "${BASE}${path}" 2>/dev/null || true)"
-  if echo "$html" | grep -qF "DESIGN_PARTNER_PIPELINE_v1.md"; then
+  if echo "$html" | grep -qF "COPILOT_GOVERNANCE_PIPELINE_v1.md"; then
     echo "OK   ${path} pipeline runbook link"
   else
-    echo "FAIL ${path} missing DESIGN_PARTNER_PIPELINE_v1.md link" >&2
+    echo "FAIL ${path} missing COPILOT_GOVERNANCE_PIPELINE_v1.md link" >&2
     fail=1
   fi
   if echo "$html" | grep -qF "bc-ai-for-all-2026.md"; then
