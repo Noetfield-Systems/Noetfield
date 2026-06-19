@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack verify-gtm verify-no-vendor-names verify-static-www verify-www verify-investor-lane verify-commercial-agentic verify-law-stack sync-derived-docs verify-factory-copilot verify-factory-catalog verify-factory-trust-brief
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack verify-gtm verify-no-vendor-names verify-static-www verify-www verify-investor-lane verify-commercial-agentic verify-law-stack sync-derived-docs verify-factory-copilot verify-factory-catalog verify-factory-trust-brief verify-stripe-catalog
 
 PYTHONPATH_VALUE := packages/types:packages/config:packages/sdk:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance:services/factories:services/trust-brief
 
@@ -379,3 +379,7 @@ verify-factory-trust-brief:
 	chmod +x ./scripts/verify-factory-trust-brief.sh
 	./scripts/verify-factory-trust-brief.sh
 	PYTHONPATH=$(PYTHONPATH_VALUE) python3 -m pytest tests/unit/test_factory_trust_brief.py -q
+
+verify-stripe-catalog:
+	chmod +x ./scripts/verify-stripe-catalog.sh
+	./scripts/verify-stripe-catalog.sh

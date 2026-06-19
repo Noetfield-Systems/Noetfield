@@ -143,6 +143,19 @@ class Settings(BaseSettings):
         description="Canonical institutional status page linked from API health payloads.",
     )
 
+    stripe_secret_key: SecretStr | None = Field(
+        default=None,
+        description="Stripe secret key — server-side only; commercial licensing checkout fulfillment.",
+    )
+    stripe_webhook_secret: SecretStr | None = Field(
+        default=None,
+        description="Stripe webhook signing secret for checkout.session.completed fulfillment.",
+    )
+    stripe_publishable_key: str | None = Field(
+        default=None,
+        description="Stripe publishable key — only if embedding Checkout client-side (optional).",
+    )
+
 
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:

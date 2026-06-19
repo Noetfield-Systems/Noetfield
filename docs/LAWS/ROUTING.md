@@ -15,6 +15,7 @@
 | `/copilot/trial/` | Free sandbox | Product access, not SKU |
 | `/copilot/readiness/` | Readiness Pack | OFFERINGS §2 |
 | `/gate/sales/` | Purchase hub | Stripe commercial license |
+| `/gate/sales/thanks/` | Post-checkout landing | Stripe redirect + session_id |
 | `/gate/diligence/` | Investor buy-side lane | INVESTOR_GOVERNANCE_LANE_LOCKED |
 | `/gate/procurement/` | Engagement intake | Bank pilot path |
 | `/trust-ledger/` | Trust Ledger product | PLATFORM_BLUEPRINT §11 |

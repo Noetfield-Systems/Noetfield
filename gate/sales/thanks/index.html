@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Noetfield — Purchase received</title>
+ <meta name="robots" content="noindex,nofollow" />
+ <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
+ <link rel="stylesheet" href="/assets/noetfield-shell.css" />
+ <link rel="stylesheet" href="/assets/noetfield-www.css?v=40" />
+ <script src="/assets/noetfield-shell.js?v=40" defer></script>
+</head>
+<body class="nf-www nf-site-v14">
+ <div class="bg" aria-hidden="true"></div>
+ <header id="nfHeader"></header>
+ <main id="main" class="nf-main nf-page" style="max-width:720px;margin:0 auto;padding:3rem 1.5rem;">
+  <h1>Thank you — payment received</h1>
+  <p class="nf-lead">Operations will confirm your commercial license and send onboarding within one business day.</p>
+  <p id="sessionHint" class="nf-muted" style="font-family:JetBrains Mono,monospace;font-size:.85rem;"></p>
+  <div class="nf-cta-actions" style="margin-top:1.5rem;">
+   <a class="btn btn-primary" href="/trust-brief/intake/">Complete intake</a>
+   <a class="btn btn-secondary" href="/gate/sales/">Back to purchase hub</a>
+  </div>
+  <aside class="nf-stripe-disclaimer" style="margin-top:2rem;padding:1rem;border-radius:8px;background:rgba(0,0,0,.04);font-size:.85rem;">
+   Software and professional services license only. Noetfield does not execute payments, custody, or settlement on your behalf.
+  </aside>
+ </main>
+ <footer id="nfFooter"></footer>
+ <script>
+  const params = new URLSearchParams(location.search);
+  const sid = params.get("session_id");
+  const sku = params.get("sku");
+  if (sid) {
+    document.getElementById("sessionHint").textContent = `Reference: ${sid}${sku ? " · " + sku : ""}`;
+  }
+ </script>
+</body>
+</html>
