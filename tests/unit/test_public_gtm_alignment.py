@@ -1,6 +1,7 @@
 """Public HTML must align with final GTM simplification (no legacy surfaces)."""
 
 from pathlib import Path
+import json
 import subprocess
 import sys
 
@@ -130,6 +131,17 @@ def test_msp_end_client_buyer_block() -> None:
     assert "msp-end-client" in text
     assert "End client" in text
     assert "/copilot/pilot/" in text
+
+
+def test_stripe_purchase_hub_live() -> None:
+    text = (ROOT / "gate" / "sales" / "index.html").read_text(encoding="utf-8")
+    assert "nf-stripe-disclaimer" in text
+    assert "noetfield-stripe-catalog.json" in text
+    assert "Pay with Stripe" in text
+    catalog = json.loads((ROOT / "assets" / "noetfield-stripe-catalog.json").read_text(encoding="utf-8"))
+    links = [o["payment_link_url"] for o in catalog["offerings"] if o.get("payment_link_url")]
+    assert len(links) >= 2
+    assert all(u.startswith("https://buy.stripe.com/") for u in links)
 
 
 def test_status_intake_health_widget() -> None:

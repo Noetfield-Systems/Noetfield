@@ -3,11 +3,78 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Noetfield</title>
- <meta http-equiv="refresh" content="0;url=/enterprise/" />
- <link rel="canonical" href="https://www.noetfield.com/enterprise/" />
+ <title>Noetfield — Purchase Hub</title>
+ <meta name="description" content="Commercial licensing for Trust Brief, Copilot Readiness Pack, and Bank Pilot scoping. Software and services only — no custody or payment rails." />
+ <meta name="robots" content="index,follow" />
+ <meta name="theme-color" content="#f4f5f8" />
+ <link rel="canonical" href="https://www.noetfield.com/gate/sales/" />
+ <meta name="nf-chat-api-base" content="https://platform.noetfield.com" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
+ <link rel="stylesheet" href="/assets/noetfield-shell.css" />
+ <link rel="stylesheet" href="/assets/noetfield-www.css?v=40" />
+ <script src="/assets/noetfield-shell.js?v=40" defer></script>
+ <style>
+  .nf-sales-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
+  @media (min-width: 768px) { .nf-sales-grid { grid-template-columns: repeat(3, 1fr); } }
+  .nf-sales-card { border: 1px solid var(--nf-border, rgba(0,0,0,.08)); border-radius: 12px; padding: 1.25rem; background: var(--nf-surface, #fff); }
+  .nf-sales-card h3 { margin: 0 0 .5rem; font-size: 1.1rem; }
+  .nf-sales-price { font-family: "JetBrains Mono", monospace; font-size: .9rem; color: var(--nf-muted, #5f6368); margin-bottom: .75rem; }
+  .nf-stripe-disclaimer { margin-top: 2rem; padding: 1rem 1.25rem; border-radius: 10px; background: rgba(0,0,0,.03); font-size: .85rem; line-height: 1.6; color: var(--nf-muted, #5f6368); }
+  .nf-sales-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+ </style>
 </head>
-<body>
- <p><a href="/enterprise/">Continue</a></p>
+<body class="nf-www nf-site-v14">
+ <div class="bg" aria-hidden="true"></div>
+ <a class="skip" href="#main">Skip to content</a>
+ <header id="nfHeader"></header>
+ <main id="main" class="nf-main nf-page">
+  <header class="nf-hero-cinematic">
+   <div>
+    <p class="nf-hero-kicker"><span class="nf-hero-kicker-dot" aria-hidden="true"></span> Purchase hub · Commercial license</p>
+    <h1>Three institutional SKUs — software and services only</h1>
+    <p class="nf-lead">Stripe checkout for published Trust Brief and Copilot Readiness Pack licenses. Bank Pilot remains intake-scoped. No custody, settlement, or payment execution.</p>
+   </div>
+  </header>
+
+  <section class="nf-section-block" aria-labelledby="sales-skus">
+   <div class="nf-section-block-head">
+    <span class="nf-section-num" aria-hidden="true">01</span>
+    <div><p class="nf-eyebrow" id="sales-skus">Licensed offerings</p><h2>Checkout or intake</h2></div>
+   </div>
+   <div class="nf-sales-grid" id="salesGrid" aria-live="polite"></div>
+  </section>
+
+  <aside class="nf-stripe-disclaimer" role="note">
+   <strong>Commercial licensing only.</strong> Noetfield Systems Inc. uses Stripe solely to sell software and professional services licenses.
+   We do not perform financial custody, payment execution, settlement orchestration, or money transmission.
+   Purchases are subject to our <a href="/terms/">Terms</a> and <a href="/privacy/">Privacy Policy</a>.
+   Questions: <a href="mailto:operations@noetfield.com">operations@noetfield.com</a>.
+  </aside>
+ </main>
+ <footer id="nfFooter"></footer>
+ <script>
+  (async function () {
+    const grid = document.getElementById("salesGrid");
+    let catalog;
+    try {
+      const res = await fetch("/assets/noetfield-stripe-catalog.json");
+      catalog = await res.json();
+    } catch (_) {
+      grid.innerHTML = "<p>Catalog unavailable. Email <a href=\"mailto:operations@noetfield.com\">operations@noetfield.com</a>.</p>";
+      return;
+    }
+    grid.innerHTML = catalog.offerings.map((o) => {
+      const buy = o.payment_link_url
+        ? `<a class="btn btn-primary" href="${o.payment_link_url}" rel="noopener">Pay with Stripe</a>`
+        : "";
+      const intake = `<a class="btn btn-secondary" href="${o.intake_url}">Request scoping</a>`;
+      return `<article class="nf-sales-card"><h3>${o.title}</h3><p class="nf-sales-price">${o.price_label}</p><p>${o.description}</p><div class="nf-sales-actions">${buy}${intake}</div></article>`;
+    }).join("");
+  })();
+ </script>
 </body>
 </html>

@@ -1,0 +1,56 @@
+{
+  "catalog_version": "2026.06.03",
+  "account_id": "acct_1SfSseJ03eJkL57J",
+  "display_name": "NOETFIELD SYSTEMS INC.",
+  "mode": "live",
+  "rule": "final-lock-stripe-commercial-licensing-only",
+  "note": "Stripe for software/service commercial licensing only — not payment execution, custody, or MSB.",
+  "allowed_gtm_skus": [
+    "Trust_Brief",
+    "Copilot_Readiness_Pack",
+    "Bank_Pilot_v6.1"
+  ],
+  "offerings": [
+    {
+      "gtm_sku": "Trust_Brief",
+      "name": "Trust Brief — Governance Diagnostic (6 weeks)",
+      "price_usd_cents": 1000000,
+      "stripe_product_id": "prod_UjRo1dABHWfU3H",
+      "stripe_price_id": "price_1TjyvAJ03eJkL57JSpeoWsjz",
+      "payment_link_id": "plink_1TjyvtJ03eJkL57J1vb6kOU8",
+      "payment_link_url": "https://buy.stripe.com/cNi4gA3iUaa0g0W0UA1Nu0b",
+      "factory_id": "trust_brief_diligence_v1",
+      "checkout_type": "payment_link",
+      "intake_fallback": "/trust-brief/intake/"
+    },
+    {
+      "gtm_sku": "Copilot_Readiness_Pack",
+      "name": "Copilot Readiness Pack — Starter (90 days)",
+      "price_usd_cents": 200000,
+      "stripe_product_id": "prod_UjRpZlYGEnRbSe",
+      "stripe_price_id": "price_1TjyvWJ03eJkL57JKNgPp5Gp",
+      "payment_link_id": "plink_1Tjyw8J03eJkL57JJmJGB4du",
+      "payment_link_url": "https://buy.stripe.com/eVq7sM9Hi3LCbKGgTy1Nu0c",
+      "factory_id": "copilot_governance_readiness_v1",
+      "checkout_type": "payment_link",
+      "intake_fallback": "/trust-brief/intake/?interest=pilot&vector=copilot-governance"
+    },
+    {
+      "gtm_sku": "Bank_Pilot_v6.1",
+      "name": "Bank Pilot v6.1",
+      "checkout_type": "intake_only",
+      "note": "Custom scoping — no direct Stripe checkout",
+      "intake_fallback": "/bank-pilot/"
+    }
+  ],
+  "legacy_products_deferred": [
+    "prod_TeKod35MeI1btA",
+    "prod_TdiNZEW5SG8YF6",
+    "prod_TdGFAVIPOMSyec"
+  ],
+  "webhook_events": [
+    "checkout.session.completed",
+    "checkout.session.async_payment_succeeded"
+  ],
+  "success_url_template": "https://www.noetfield.com/gate/sales/thanks/?session_id={CHECKOUT_SESSION_ID}&sku={sku}"
+}

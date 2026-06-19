@@ -48,7 +48,7 @@ At Trial OS step 5 (`/start/#trial-os`):
 2. Copilot Readiness upgrade CTA — intake URL with RID pre-filled
 3. Factory demo buttons — observe-only orientation for 3 live factories
 
-Stripe checkout (when wired) remains **commercial licensing only** — not a sandbox entitlement.
+Stripe checkout at `/gate/sales/` is **live** (Payment Links) — **commercial licensing only**, not a sandbox entitlement.
 
 ---
 

@@ -94,6 +94,12 @@ check_file "next steps hub" next/index.html \
   'next-buyer' 'next-investor' 'next-partner' 'next-ops' \
   'RESEND_API_KEY' 'noetfield-intake-status.js' 'Apply for pilot'
 
+check_file "stripe purchase hub" gate/sales/index.html \
+  'nf-stripe-disclaimer' 'noetfield-stripe-catalog.json' 'Pay with Stripe' 'Trust Brief'
+
+check_file "stripe catalog public" assets/noetfield-stripe-catalog.json \
+  'buy.stripe.com' 'Copilot_Readiness_Pack' 'Trust_Brief'
+
 check_file "vercel intake API" vercel.json \
   'api/public/chat'
 
