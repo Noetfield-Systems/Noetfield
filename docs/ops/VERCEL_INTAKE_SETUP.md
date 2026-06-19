@@ -1,9 +1,19 @@
 # Vercel www — intake email go-live
 
-**Inbox:** operations@noetfield.com  
+**Inbox:** operations@noetfield.com (Google Workspace — **active**)  
 **Project:** `web` · scope `noetfield-systems`
 
-## Required (Production)
+## Status (2026-06-03)
+
+| Layer | Status |
+|-------|--------|
+| **Google Workspace inbox** | **Active** — `operations@noetfield.com` receives direct email; Reply from Gmail/Outlook works |
+| **Form → inbox delivery** | Wire on Vercel — `RESEND_API_KEY` (or platform SMTP fallback) |
+| **Platform intake store** | Optional — email-only path works when platform intake is disabled |
+
+Direct email and `mailto:` fallbacks on intake forms work today. Form auto-notify + auto-ack require Resend (or SMTP) below.
+
+## Required for form delivery (Production)
 
 ```bash
 RESEND_API_KEY=re_xxxxxxxx

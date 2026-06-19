@@ -1,4 +1,4 @@
-"""Canonical operational intake email (Gmail monitor loop target)."""
+"""Canonical operational intake email — Google Workspace inbox (active)."""
 
 CANONICAL_INTAKE_EMAIL = "operations@noetfield.com"
 

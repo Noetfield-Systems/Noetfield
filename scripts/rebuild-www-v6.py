@@ -1978,15 +1978,16 @@ def next_steps_ops_lane() -> str:
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">⚙</span><div>
  <p class="nf-eyebrow" id="next-ops-title">Operations · intake go-live</p>
  <h2>Wire forms → operations@noetfield.com</h2>
- <p class="nf-section-lead">Code is deployed — enable Resend on Vercel <code>web</code> project to turn on async email delivery. Check live status on <a href="/status/">/status/</a>.</p>
+ <p class="nf-section-lead"><strong>Google Workspace inbox is active</strong> — <code>operations@noetfield.com</code> receives direct email today. Remaining step: enable Resend on Vercel <code>web</code> so every form auto-notifies that inbox. Check live status on <a href="/status/">/status/</a>.</p>
  </div></div>
  <div class="nf-loop nf-loop--next">
+ <article class="nf-loop-step nf-loop-step--gold"><p class="nf-loop-step-num">✓</p><h3>Workspace inbox</h3><p><code>operations@noetfield.com</code> active in Google Workspace · direct email + Reply works.</p></article>
  <article class="nf-loop-step"><p class="nf-loop-step-num">1</p><h3>Resend domain</h3><p>Verify noetfield.com · create API key · notifications@ sender.</p></article>
  <article class="nf-loop-step"><p class="nf-loop-step-num">2</p><h3>Vercel env</h3><p><code>RESEND_API_KEY</code> · <code>INTAKE_EMAIL_TO=operations@noetfield.com</code> · redeploy www.</p></article>
  <article class="nf-loop-step"><p class="nf-loop-step-num">3</p><h3>Verify health</h3><p><code>GET /api/intake/health</code> → <code>www_email_configured: true</code> · test contact form.</p><a class="btn btn-secondary" href="/status/">Check status</a></article>
- <article class="nf-loop-step nf-loop-step--gold"><p class="nf-loop-step-num">4</p><h3>Reply from inbox</h3><p>Ops notification Reply-To = submitter · auto-ack to prospect · RID in thread.</p><a class="btn btn-secondary" href="/contact/#contact-form">Test contact form</a></article>
+ <article class="nf-loop-step"><p class="nf-loop-step-num">4</p><h3>Reply from inbox</h3><p>Ops notification Reply-To = submitter · auto-ack to prospect · RID in thread.</p><a class="btn btn-secondary" href="/contact/#contact-form">Test contact form</a></article>
  </div>
- <aside class="nf-callout"><p><strong>Founder doc:</strong> <code>docs/ops/VERCEL_INTAKE_SETUP.md</code> (repo) · Platform persistence optional — email-only path works when platform intake is disabled.</p></aside>
+ <aside class="nf-callout"><p><strong>Founder doc:</strong> <code>docs/ops/VERCEL_INTAKE_SETUP.md</code> (repo) · Inbox live in Google Workspace · form delivery via Resend · platform persistence optional.</p></aside>
  <div class="nf-trust-signals-grid" data-intake-health-host aria-live="polite" style="margin-top:16px">
  <div class="nf-trust-signal"><span class="nf-trust-signal-label">Intake health</span><span class="nf-signal-badge nf-signal-badge--orientation">Loading…</span></div>
  </div>
@@ -2026,7 +2027,7 @@ def status_intake_health_section() -> str:
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">✉</span><div>
  <p class="nf-eyebrow" id="intake-health-title">Intake delivery</p>
  <h2>Form → operations inbox</h2>
- <p class="nf-section-lead">Live check — www Resend email and platform intake persistence. When email is configured, every form notifies <strong>operations@noetfield.com</strong> with Reply-To set to the submitter. <a href="/next/#next-ops">Ops go-live steps →</a></p>
+ <p class="nf-section-lead"><strong>operations@noetfield.com</strong> is active in Google Workspace (direct email works). This panel checks <em>form delivery</em> — Resend on www and platform intake persistence. When form delivery is configured, every submit notifies the inbox with Reply-To set to the submitter. <a href="/next/#next-ops">Ops go-live steps →</a></p>
  </div></div>
  <div class="nf-trust-signals-grid" data-intake-health-host aria-live="polite">
  <div class="nf-trust-signal"><span class="nf-trust-signal-label">Checking…</span><span class="nf-signal-badge nf-signal-badge--orientation">Loading</span></div>
@@ -2157,7 +2158,7 @@ def legal_prose(kind: str) -> str:
  <section><h2>Public website</h2><p>Marketing pages, sandbox signup, pricing, and buyer documentation are available.</p></section>
  <section><h2>Workspace and evaluate API</h2><p>Sandbox evaluate and workspace are available for self-serve trial. Production API keys and tenant-scoped evaluate are provisioned per Copilot Governance Pack or Trust Brief SOW.</p></section>
  <section><h2>Engagement support</h2><p>For status on your organization&rsquo;s engagement, use <a href="/contact/?topic=other#contact-form">async contact</a> or operations@noetfield.com with your Request ID.</p></section>
- <section><h2>Intake not delivering?</h2><p>Check delivery mode on this page. Ops setup: <code>docs/ops/VERCEL_INTAKE_SETUP.md</code> (founder) — requires <code>RESEND_API_KEY</code> on Vercel www project.</p></section>
+ <section><h2>Intake not delivering?</h2><p>Direct email to operations@noetfield.com works via Google Workspace. If <em>forms</em> are not notifying the inbox, check delivery mode above. Ops setup: <code>docs/ops/VERCEL_INTAKE_SETUP.md</code> (founder) — wire <code>RESEND_API_KEY</code> on Vercel www project.</p></section>
  </div>""",
     }
     return blocks[kind]

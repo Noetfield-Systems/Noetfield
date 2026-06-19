@@ -18,16 +18,21 @@
   }
 
   function opsNextSteps(ready) {
+    var inboxNote =
+      "<p><strong>Google Workspace inbox active.</strong> <code>operations@noetfield.com</code> receives direct email — reply from Gmail/Outlook in the same thread.</p>";
     if (ready) {
       return (
         '<aside class="nf-callout nf-callout--urgency" style="margin-top:16px">' +
-        "<p><strong>Intake live.</strong> Forms notify operations@noetfield.com · Reply-To = submitter · auto-ack enabled.</p>" +
+        inboxNote +
+        "<p><strong>Form delivery live.</strong> Every form notifies operations@noetfield.com · Reply-To = submitter · auto-ack enabled.</p>" +
         "</aside>"
       );
     }
     return (
       '<aside class="nf-callout nf-callout--urgency" style="margin-top:16px">' +
-      "<p><strong>Next step — enable email:</strong> Add <code>RESEND_API_KEY</code> on Vercel <code>web</code> → redeploy → verify here. " +
+      inboxNote +
+      "<p><strong>Next step — wire form delivery:</strong> Add <code>RESEND_API_KEY</code> on Vercel <code>web</code> → redeploy → verify here. " +
+      "Until then, use <code>mailto:</code> fallbacks on intake forms or email operations@ directly. " +
       '<a href="/next/#next-ops">Full ops checklist →</a></p>' +
       "</aside>"
     );
@@ -41,8 +46,9 @@
     var mode = h.delivery_mode || "unconfigured";
 
     host.innerHTML =
+      badge("Google Workspace inbox", "available") +
       badge("Form intake API", enabled ? "available" : "orientation") +
-      badge("WWW email (Resend)", www ? "available" : "orientation") +
+      badge("WWW form delivery (Resend)", www ? "available" : "orientation") +
       badge("Platform intake store", platform ? "available" : "orientation") +
       badge("Auto-ack to submitter", h.auto_ack_enabled ? "available" : "na") +
       '<p class="nf-section-lead" style="margin-top:12px">Delivery mode: <code>' +
@@ -56,8 +62,9 @@
   function initHost(host) {
     if (!host || !window.NFIntakeCore) return;
     host.innerHTML =
+      badge("Google Workspace inbox", "available") +
       badge("Form intake API", "orientation") +
-      badge("WWW email (Resend)", "orientation") +
+      badge("WWW form delivery (Resend)", "orientation") +
       badge("Platform intake store", "orientation") +
       badge("Auto-ack to submitter", "orientation");
     window.NFIntakeCore.checkHealth().then(function (h) {

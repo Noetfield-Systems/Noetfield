@@ -136,6 +136,7 @@ def test_status_intake_health_widget() -> None:
     text = (ROOT / "status" / "index.html").read_text(encoding="utf-8")
     assert "data-intake-health-host" in text
     assert "noetfield-intake-status.js" in text
+    assert "Google Workspace" in text
 
 
 def test_next_steps_hub_page() -> None:
@@ -144,6 +145,7 @@ def test_next_steps_hub_page() -> None:
     assert "next-investor" in text
     assert "next-ops" in text
     assert "RESEND_API_KEY" in text
+    assert "Google Workspace" in text
     index = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "/next/" in index
 

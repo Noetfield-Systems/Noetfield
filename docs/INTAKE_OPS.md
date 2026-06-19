@@ -2,7 +2,7 @@
 
 **Inbox:** operations@noetfield.com (canonical — [packages/config/noetfield_config/intake.py](../packages/config/noetfield_config/intake.py))
 
-## Platform wiring
+**Google Workspace:** Inbox is **active** (2026-06-03). Direct email and Reply-from-inbox work. Form auto-notify is a separate layer — see go-live below.
 
 ## Platform + www wiring
 
