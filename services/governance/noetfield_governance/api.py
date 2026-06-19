@@ -54,9 +54,11 @@ from noetfield_events import (
     event_catalog,
 )
 from noetfield_factories import (
+    AmlFactoryRunRequest,
     CopilotFactoryRunRequest,
     FactoryStatus,
     FactoryValidationError,
+    LegalFactoryRunRequest,
     TrustBriefFactoryRunRequest,
     catalog_factory_entries,
     get_factory_runner,
@@ -66,6 +68,8 @@ from noetfield_factories import (
     load_platform_catalog,
     load_tier_catalog,
 )
+from noetfield_aml_trace import AmlGovernanceTraceCommand, AmlGovernanceTraceRuntime
+from noetfield_legal_review import LegalReviewCommand, LegalReviewRuntime
 from noetfield_trust_brief import TrustBriefDiligenceCommand, TrustBriefDiligenceRuntime
 from noetfield_governance.golden_edge_v3 import (
     GoldenEdgeEvaluateRequest,
@@ -217,12 +221,34 @@ trust_brief_runtime = TrustBriefDiligenceRuntime(
     inspector_execution_loop=inspector_execution_loop,
 )
 
+legal_review_runtime = LegalReviewRuntime(
+    signal_pipeline=signal_pipeline,
+    graph_mutations=graph_mutations,
+    graph_reflections=graph_reflections,
+    workflow_state_machine=workflow_state_machine,
+    governance_runtime=governance_runtime,
+    golden_edge=golden_edge_v3,
+    inspector_execution_loop=inspector_execution_loop,
+)
+
+aml_trace_runtime = AmlGovernanceTraceRuntime(
+    signal_pipeline=signal_pipeline,
+    graph_mutations=graph_mutations,
+    graph_reflections=graph_reflections,
+    workflow_state_machine=workflow_state_machine,
+    governance_runtime=governance_runtime,
+    golden_edge=golden_edge_v3,
+    inspector_execution_loop=inspector_execution_loop,
+)
+
 
 def _factory_runner_for(factory_id: str):
     return get_factory_runner(
         factory_id,
         demo_runtime=copilot_demo_runtime,
         trust_brief_runtime=trust_brief_runtime,
+        legal_review_runtime=legal_review_runtime,
+        aml_trace_runtime=aml_trace_runtime,
         event_bus=event_bus,
         audit_store=audit_store,
         graph_store=graph_store,
@@ -619,6 +645,16 @@ async def run_factory(
             command = TrustBriefDiligenceCommand.model_validate(body)
             result = await runner.run(
                 TrustBriefFactoryRunRequest(command=command, source_request_id=x_request_id)
+            )
+        elif factory_id == "legal_review_v1":
+            command = LegalReviewCommand.model_validate(body)
+            result = await runner.run(
+                LegalFactoryRunRequest(command=command, source_request_id=x_request_id)
+            )
+        elif factory_id == "aml_governance_trace_v1":
+            command = AmlGovernanceTraceCommand.model_validate(body)
+            result = await runner.run(
+                AmlFactoryRunRequest(command=command, source_request_id=x_request_id)
             )
         else:
             raise HTTPException(status_code=404, detail=f"Factory runner not wired: {factory_id}")

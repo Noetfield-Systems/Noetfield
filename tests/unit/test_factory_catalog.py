@@ -21,6 +21,19 @@ from noetfield_factories import (
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def test_factory_catalog_has_four_live_factories() -> None:
+    catalog = load_factory_catalog()
+    live = [f for f in catalog["factories"] if f["status"] == "live"]
+    assert len(live) == 4
+    live_ids = {f["id"] for f in live}
+    assert live_ids == {
+        "copilot_governance_readiness_v1",
+        "trust_brief_diligence_v1",
+        "legal_review_v1",
+        "aml_governance_trace_v1",
+    }
+
+
 def test_factory_catalog_has_live_copilot() -> None:
     catalog = load_factory_catalog()
     live = [f for f in catalog["factories"] if f["status"] == "live"]
@@ -33,6 +46,10 @@ def test_list_factory_ids_matches_live_catalog() -> None:
     assert is_factory_live("copilot_governance_readiness_v1")
     assert "trust_brief_diligence_v1" in list_factory_ids()
     assert is_factory_live("trust_brief_diligence_v1")
+    assert "legal_review_v1" in list_factory_ids()
+    assert is_factory_live("legal_review_v1")
+    assert "aml_governance_trace_v1" in list_factory_ids()
+    assert is_factory_live("aml_governance_trace_v1")
 
 
 def test_tier_catalog_gtm_skus_allowed() -> None:
@@ -51,7 +68,7 @@ def test_planned_factory_stubs_exist() -> None:
         for f in catalog_factory_entries()
         if f.get("status") == "planned" and f.get("spec_path")
     ]
-    assert len(planned) >= 4
+    assert len(planned) >= 2
     for entry in planned:
         path = ROOT / entry["spec_path"]
         assert path.is_file(), f"missing stub: {entry['id']}"

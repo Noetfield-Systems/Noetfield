@@ -119,10 +119,10 @@
       "tier": "tier_2",
       "capability": "legal",
       "sku": null,
-      "status": "planned",
+      "status": "live",
       "priority": "P1",
       "spec_path": "packages/schemas/factories/legal_review_v1.yaml",
-      "route": null,
+      "route": "POST /factories/legal_review_v1/run",
       "visibility": "platform"
     },
     {
@@ -131,10 +131,10 @@
       "tier": "tier_3",
       "capability": "compliance",
       "sku": null,
-      "status": "planned",
+      "status": "live",
       "priority": "P1",
       "spec_path": "packages/schemas/factories/aml_governance_trace_v1.yaml",
-      "route": null,
+      "route": "POST /factories/aml_governance_trace_v1/run",
       "visibility": "platform"
     },
     {

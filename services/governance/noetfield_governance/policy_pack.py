@@ -42,6 +42,8 @@ class GovernancePolicyPack:
             "export_audit_package",
             "run_copilot_governance_demo",
             "run_trust_brief_diligence",
+            "run_legal_review",
+            "run_aml_governance_trace",
         }
     )
     blocked_autonomous_actions: frozenset[str] = frozenset(

@@ -6,7 +6,9 @@ from datetime import datetime, timezone
 from typing import Any
 from uuid import UUID
 
+from noetfield_aml_trace import AmlGovernanceTraceCommand, AmlGovernanceTracePipelineState
 from noetfield_copilot_governance import CopilotGovernanceCommand, CopilotPipelineState
+from noetfield_legal_review import LegalReviewCommand, LegalReviewPipelineState
 from noetfield_trust_brief import TrustBriefDiligenceCommand, TrustBriefPipelineState
 from noetfield_events import EventReplayCursor
 from noetfield_governance.golden_edge_v3 import AgentLoopDecision
@@ -43,6 +45,56 @@ def intake_validate(command: CopilotGovernanceCommand) -> CopilotGovernanceComma
     return command
 
 
+def intake_validate_legal(command: LegalReviewCommand) -> LegalReviewCommand:
+    """n01 — validate Legal review intake."""
+    if not command.submitted_by.strip():
+        raise FactoryValidationError("submitted_by is required")
+    payload = dict(command.signal_payload)
+    source = payload.get("source")
+    summary = payload.get("summary")
+    if not source or not summary:
+        if payload.get("policy_name") or payload.get("jurisdiction"):
+            payload.setdefault("source", "legal_ops")
+            payload.setdefault(
+                "summary",
+                str(payload.get("policy_name") or payload.get("jurisdiction")),
+            )
+            return command.model_copy(update={"signal_payload": payload})
+        raise FactoryValidationError(
+            "signal_payload requires source and summary",
+            details={"signal_payload": payload},
+        )
+    allowed = {"legal_ops", "manual", "webhook"}
+    if str(source) not in allowed:
+        raise FactoryValidationError(f"signal_payload.source must be one of {sorted(allowed)}")
+    return command
+
+
+def intake_validate_aml(command: AmlGovernanceTraceCommand) -> AmlGovernanceTraceCommand:
+    """n01 — validate AML governance trace intake."""
+    if not command.submitted_by.strip():
+        raise FactoryValidationError("submitted_by is required")
+    payload = dict(command.signal_payload)
+    source = payload.get("source")
+    summary = payload.get("summary")
+    if not source or not summary:
+        if payload.get("screening_program") or payload.get("corridor"):
+            payload.setdefault("source", "compliance_ops")
+            payload.setdefault(
+                "summary",
+                str(payload.get("screening_program") or payload.get("corridor")),
+            )
+            return command.model_copy(update={"signal_payload": payload})
+        raise FactoryValidationError(
+            "signal_payload requires source and summary",
+            details={"signal_payload": payload},
+        )
+    allowed = {"compliance_ops", "manual", "webhook"}
+    if str(source) not in allowed:
+        raise FactoryValidationError(f"signal_payload.source must be one of {sorted(allowed)}")
+    return command
+
+
 def intake_validate_trust_brief(command: TrustBriefDiligenceCommand) -> TrustBriefDiligenceCommand:
     """n01 — validate Trust Brief / M&A diligence intake."""
     if not command.submitted_by.strip():
@@ -66,6 +118,158 @@ def intake_validate_trust_brief(command: TrustBriefDiligenceCommand) -> TrustBri
     if str(source) not in allowed:
         raise FactoryValidationError(f"signal_payload.source must be one of {sorted(allowed)}")
     return command
+
+
+async def package_legal_deliverable(
+    *,
+    factory_id: str,
+    state: LegalReviewPipelineState,
+    event_bus: Any,
+    audit_store: Any,
+    graph_store: Any,
+    governance_runtime: Any,
+) -> dict[str, Any]:
+    """n08 — policy review package for Legal factory."""
+    command = state.command
+    tenant_id = command.tenant_id
+    organization_id = command.organization_id
+
+    replayed_events = await event_bus.replay(
+        EventReplayCursor(after_sequence=0, event_types=frozenset({"*"}))
+    )
+    events = [e for e in replayed_events if e.correlation_id == state.run_id] or replayed_events
+    event_types = [event.event_type for event in events]
+
+    pending_approvals = []
+    if governance_runtime is not None:
+        pending_approvals = await governance_runtime.approvals.list_pending(tenant_id)
+
+    workflow_state = (
+        state.workflow_state.value
+        if state.workflow_state is not None
+        else WorkflowState.PENDING_REVIEW.value
+    )
+    approval_required = state.approval_id is not None or workflow_state == "pending_review"
+
+    policy_review_package = {
+        "title": "Policy Review Package",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "policy_summary": str(command.signal_payload.get("summary", "")),
+        "executive_summary": (
+            "Legal review signal ingested, linked to governance graph, evaluated by policy "
+            "and inspectors, queued for human review before policy package export."
+        ),
+        "governance_state": {
+            "workflow_state": workflow_state,
+            "approval_required": approval_required,
+            "approval_id": str(state.approval_id) if state.approval_id else None,
+        },
+        "orientation": "Policy review package for governance workflows — not legal advice.",
+    }
+
+    audit_records = getattr(audit_store, "records", [])
+    audit_package: dict[str, Any] = {
+        "tenant_id": str(tenant_id),
+        "organization_id": str(organization_id),
+        "signal_id": str(state.signal.signal_id) if state.signal else None,
+        "workflow_id": str(state.workflow_id) if state.workflow_id else None,
+        "event_count": len(events),
+        "audit_record_count": len(audit_records),
+        "event_types": event_types,
+        "pending_approval_count": len(pending_approvals),
+        "events": [event.model_dump(mode="json") for event in events],
+    }
+
+    if state.policy_decision and state.policy_decision.decision == AgentLoopDecision.REJECT:
+        factory_status = "vetoed"
+    elif approval_required:
+        factory_status = "pending_approval"
+    else:
+        factory_status = "completed"
+
+    return {
+        "factory_id": factory_id,
+        "factory_status": factory_status,
+        "policy_review_package": policy_review_package,
+        "audit_package": audit_package,
+        "replay_hint": f"/events/replay?correlation_id={state.run_id}",
+    }
+
+
+async def package_aml_deliverable(
+    *,
+    factory_id: str,
+    state: AmlGovernanceTracePipelineState,
+    event_bus: Any,
+    audit_store: Any,
+    graph_store: Any,
+    governance_runtime: Any,
+) -> dict[str, Any]:
+    """n08 — AML governance trace audit package."""
+    command = state.command
+    tenant_id = command.tenant_id
+    organization_id = command.organization_id
+
+    replayed_events = await event_bus.replay(
+        EventReplayCursor(after_sequence=0, event_types=frozenset({"*"}))
+    )
+    events = [e for e in replayed_events if e.correlation_id == state.run_id] or replayed_events
+    event_types = [event.event_type for event in events]
+
+    pending_approvals = []
+    if governance_runtime is not None:
+        pending_approvals = await governance_runtime.approvals.list_pending(tenant_id)
+
+    workflow_state = (
+        state.workflow_state.value
+        if state.workflow_state is not None
+        else WorkflowState.PENDING_REVIEW.value
+    )
+    approval_required = state.approval_id is not None or workflow_state == "pending_review"
+
+    aml_trace_audit_package = {
+        "title": "AML Governance Trace Audit Package",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "trace_summary": str(command.signal_payload.get("summary", "")),
+        "executive_summary": (
+            "AML governance trace signal ingested, linked to compliance graph, evaluated by "
+            "policy and inspectors, queued for human review before audit package export."
+        ),
+        "governance_state": {
+            "workflow_state": workflow_state,
+            "approval_required": approval_required,
+            "approval_id": str(state.approval_id) if state.approval_id else None,
+        },
+        "orientation": "Governance trace only — not MSB registration, screening execution, or payment routing.",
+    }
+
+    audit_records = getattr(audit_store, "records", [])
+    audit_package: dict[str, Any] = {
+        "tenant_id": str(tenant_id),
+        "organization_id": str(organization_id),
+        "signal_id": str(state.signal.signal_id) if state.signal else None,
+        "workflow_id": str(state.workflow_id) if state.workflow_id else None,
+        "event_count": len(events),
+        "audit_record_count": len(audit_records),
+        "event_types": event_types,
+        "pending_approval_count": len(pending_approvals),
+        "events": [event.model_dump(mode="json") for event in events],
+    }
+
+    if state.policy_decision and state.policy_decision.decision == AgentLoopDecision.REJECT:
+        factory_status = "vetoed"
+    elif approval_required:
+        factory_status = "pending_approval"
+    else:
+        factory_status = "completed"
+
+    return {
+        "factory_id": factory_id,
+        "factory_status": factory_status,
+        "aml_trace_audit_package": aml_trace_audit_package,
+        "audit_package": audit_package,
+        "replay_hint": f"/events/replay?correlation_id={state.run_id}",
+    }
 
 
 async def package_trust_brief_deliverable(

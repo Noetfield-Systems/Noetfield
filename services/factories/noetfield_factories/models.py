@@ -35,6 +35,20 @@ class TrustBriefFactoryRunRequest(BaseModel):
     source_request_id: str | None = None
 
 
+class LegalFactoryRunRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    command: "LegalReviewCommand"
+    source_request_id: str | None = None
+
+
+class AmlFactoryRunRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    command: "AmlGovernanceTraceCommand"
+    source_request_id: str | None = None
+
+
 class TrustBriefFactoryOutput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -43,6 +57,30 @@ class TrustBriefFactoryOutput(BaseModel):
     factory_status: FactoryStatus
     ic_appendix: dict[str, Any]
     checklist_map: dict[str, Any]
+    audit_package: dict[str, Any]
+    replay_hint: str
+    policy_decision: dict[str, Any] | None = None
+
+
+class LegalFactoryOutput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    factory_id: str
+    run_id: UUID
+    factory_status: FactoryStatus
+    policy_review_package: dict[str, Any]
+    audit_package: dict[str, Any]
+    replay_hint: str
+    policy_decision: dict[str, Any] | None = None
+
+
+class AmlFactoryOutput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    factory_id: str
+    run_id: UUID
+    factory_status: FactoryStatus
+    aml_trace_audit_package: dict[str, Any]
     audit_package: dict[str, Any]
     replay_hint: str
     policy_decision: dict[str, Any] | None = None
@@ -61,7 +99,11 @@ class CopilotGovernanceFactoryOutput(BaseModel):
     policy_decision: dict[str, Any] | None = None
 
 
-# Resolve forward ref
+# Resolve forward refs
+from noetfield_aml_trace import AmlGovernanceTraceCommand  # noqa: E402
+from noetfield_legal_review import LegalReviewCommand  # noqa: E402
 from noetfield_trust_brief import TrustBriefDiligenceCommand  # noqa: E402
 
 TrustBriefFactoryRunRequest.model_rebuild()
+LegalFactoryRunRequest.model_rebuild()
+AmlFactoryRunRequest.model_rebuild()

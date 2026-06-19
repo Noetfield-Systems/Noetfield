@@ -45,6 +45,8 @@ where = [
   "services/copilot-governance",
   "services/factories",
   "services/trust-brief",
+  "services/legal-review",
+  "services/aml-trace",
 ]
 include = ["noetfield_*"]
 
@@ -86,4 +88,6 @@ pythonpath = [
   "services/copilot-governance",
   "services/factories",
   "services/trust-brief",
+  "services/legal-review",
+  "services/aml-trace",
 ]

@@ -2,7 +2,7 @@ apiVersion: noetfield.ai/factory/v1
 kind: Factory
 metadata:
   id: legal_review_v1
-  version: "0.1.0"
+  version: "1.0.0"
   factory_type: legal_review
   target_user: legal_ops_lead
   output_format: policy_review_package
@@ -11,15 +11,88 @@ metadata:
   tier: tier_2
   capability: legal
   visibility: platform
-  status: planned
-  priority: P1
-  runtime_binding: null
+  status: live
+  runtime_binding: services/legal-review/noetfield_legal_review/review.py
 
 spec:
   constraints:
+    cost_tier: low
+    max_nodes: 12
+    max_concurrent_inspectors: 3
     stateless_workers: true
+    durable_state_store: postgres
+    min_confidence: 0.75
+
   governance:
     pre_execution_gate: golden_edge_v3
-  nodes: []
+    agent_loop_endpoint: /v3/agent-loop
+    blocked_autonomous_actions:
+      - publish_board_report
+      - export_audit_package
+      - approve_workflow
+
+  input_schema: packages/schemas/factory_io/legal_review_input.schema.json
+  output_schema: packages/schemas/factory_io/legal_review_output.schema.json
+
+  nodes:
+    - id: n01_intake_validate
+      type: validator
+      handler: noetfield_factories.nodes.intake_validate_legal
+      timeout_sec: 5
+      retries: 0
+      emits: [FACTORY_RUN_STARTED]
+
+    - id: n02_signal_ingest
+      type: pipeline
+      handler: noetfield_signals.pipeline.ingest
+      timeout_sec: 15
+      retries: 2
+      emits: [SIGNAL_INGESTED]
+
+    - id: n03_graph_mutate
+      type: pipeline
+      handler: noetfield_graph.mutation.mutate_relationship
+      timeout_sec: 15
+      retries: 2
+      emits: [RELATIONSHIP_INFERRED]
+
+    - id: n04_graph_reflect
+      type: pipeline
+      handler: noetfield_graph.reflection.run
+      timeout_sec: 20
+      retries: 1
+      emits: [GRAPH_REFLECTION_COMPLETED]
+
+    - id: n05_inspector_collaborate
+      type: multi_agent
+      handler: noetfield_inspectors.collaboration.run
+      parallel: true
+      max_agents: 3
+      timeout_sec: 30
+      retries: 1
+      emits: [INSPECTOR_COLLABORATION_STARTED, INSPECTOR_COMPLETED]
+
+    - id: n06_policy_evaluate
+      type: governance
+      handler: noetfield_governance.golden_edge_v3.evaluate
+      timeout_sec: 10
+      retries: 0
+      emits: [POLICY_EVALUATED]
+
+    - id: n07_workflow_govern
+      type: governance
+      handler: composite
+      timeout_sec: 20
+      retries: 1
+      emits: [WORKFLOW_STARTED, HUMAN_APPROVAL_REQUESTED]
+
+    - id: n08_package_export
+      type: packager
+      handler: noetfield_factories.nodes.package_legal_deliverable
+      timeout_sec: 15
+      retries: 1
+      emits: [EVIDENCE_ATTACHED, AI_OUTPUT_GENERATED]
+
   deployment:
-    http_route: null
+    service: noetfield_governance.api:app
+    http_route: POST /factories/legal_review_v1/run

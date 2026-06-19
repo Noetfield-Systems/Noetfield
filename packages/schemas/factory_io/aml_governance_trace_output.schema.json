@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AmlGovernanceTraceFactoryOutput",
+  "type": "object",
+  "required": ["factory_id", "run_id", "factory_status", "aml_trace_audit_package", "audit_package", "replay_hint"],
+  "properties": {
+    "factory_id": { "type": "string" },
+    "run_id": { "type": "string", "format": "uuid" },
+    "factory_status": { "enum": ["completed", "pending_approval", "vetoed"] },
+    "aml_trace_audit_package": { "type": "object" },
+    "audit_package": { "type": "object" },
+    "replay_hint": { "type": "string" },
+    "policy_decision": { "type": "object" }
+  }
+}
