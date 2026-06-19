@@ -2,7 +2,25 @@
 
 **Agent tag:** `NF-CLOUD-AGENT`  
 **Rule:** R-009 — do not pseudo-ACK missing mandatory files  
-**Updated:** 2026-06-11 (tenth audit fix — post–PR #48 merge @ b822423)
+**Updated:** 2026-06-03 (10-step ship plan — Step 2 bridge)
+
+---
+
+## Step 2 bridge (10-step ship plan)
+
+After every ops go-live, founder Mac:
+
+```bash
+./scripts/sync-sourceA-desktop.sh
+```
+
+Then:
+
+1. Bump `governance/OPS_LIVE_STATUS_LOCKED.json` `status_version`
+2. Mirror ops deltas to TrustField notice (R-001 — Noetfield repo does not auto-sync)
+3. Optional: `NF_REQUIRE_SOURCEA=1 ./scripts/verify-agent-scope.sh`
+
+**Cloud agent:** Cannot run sync on VM — uses [OPS_LIVE_STATUS_LOCKED.json](../../governance/OPS_LIVE_STATUS_LOCKED.json) + [OPS_WITNESS_AUDIT_LOCKED_v1.md](./OPS_WITNESS_AUDIT_LOCKED_v1.md) until mirror exists.
 
 ---
 

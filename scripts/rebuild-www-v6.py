@@ -1550,6 +1550,7 @@ def agentic_autonomous_section() -> str:
  <article class="nf-agentic-step"><strong>Draft TLE</strong><p>Prepares Trust Ledger Entry YAML, approval chain, and evidence index for human sign-off.</p></article>
  <article class="nf-agentic-step"><strong>Act on low-risk</strong><p>Pre-approved policy paths auto-record sandbox evaluates; production requires Governance Pack keys and approver chain.</p></article>
  </div>
+ <p class="nf-section-lead" style="margin-top:12px">Agent manifest (schema-locked): <a href="/assets/noetfield-agent-manifest.json"><code>noetfield-agent-manifest.json</code></a> · <code>packages/schemas/agent-manifest.schema.json</code></p>
  </section>"""
 
 
@@ -2035,6 +2036,20 @@ def status_intake_health_section() -> str:
  </section>"""
 
 
+def status_sandbox_health_section() -> str:
+    return """
+ <section class="nf-section-block" aria-labelledby="sandbox-health-title">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">◇</span><div>
+ <p class="nf-eyebrow" id="sandbox-health-title">Sandbox API</p>
+ <h2>Server-backed trial sessions</h2>
+ <p class="nf-section-lead">Live check — platform <code>/api/sandbox/health</code> · Redis persistence when configured. See <code>docs/ops/SANDBOX_PRODUCTION_PERSISTENCE.md</code>.</p>
+ </div></div>
+ <div class="nf-trust-signals-grid" data-sandbox-health-host aria-live="polite">
+ <div class="nf-trust-signal"><span class="nf-trust-signal-label">Checking…</span><span class="nf-signal-badge nf-signal-badge--orientation">Loading</span></div>
+ </div>
+ </section>"""
+
+
 def status_page_script() -> str:
     return f"""
  <script src="/assets/noetfield-intake-status.js?v={WWW_VER}" defer></script>"""
@@ -2209,6 +2224,8 @@ def procurement_diligence_body() -> str:
  <p style="margin-top:1rem">
  Production API surface:
  <a href="/docs/api/">Governance API reference</a>
+ · <a href="/docs/api/openapi.json">openapi.json</a>
+ · <a href="/docs/services/governance/README.md">services/governance README</a>
  (evaluate, trust ledger, audit export) — orientation only.
  </p>
  </section>
@@ -2609,7 +2626,7 @@ def main() -> None:
     write("status/index.html", "Noetfield — Status", "Noetfield platform status.", "/status/",
           hero("", "", "Platform status", "Public surfaces, intake delivery, and workspace availability.",
                [], [("/contact/", "Contact", False)], [], receipt("RID-STATUS", "Operational metadata only.")) +
-          status_intake_health_section() + legal_prose("status") + """
+          status_intake_health_section() + status_sandbox_health_section() + legal_prose("status") + """
  <section class="nf-section-block" aria-labelledby="status-next-title">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">→</span><div>
  <p class="nf-eyebrow" id="status-next-title">Upgrade paths</p>

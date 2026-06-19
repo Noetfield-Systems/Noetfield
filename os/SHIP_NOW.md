@@ -4,11 +4,13 @@
 
 ## Active queue (`next_tasks`)
 
-**Packaging v16 + www v18 (2026-06-13):** Self-serve sandbox — `/start/` · `/pricing/` · tier-1 UI · [WWW_V16_PACKAGING_PLAN_LOCKED_v1.md](docs/WWW_V16_PACKAGING_PLAN_LOCKED_v1.md) · [WWW_V18_TIER1_UI_MASTERPLAN_LOCKED_v1.md](docs/WWW_V18_TIER1_UI_MASTERPLAN_LOCKED_v1.md).
+**10-step ship wave (2026-06-03):** Merged to `main` — ops witness (R-013), Workspace inbox, Stripe purchase hub, factory catalog live, sandbox API, agent manifest, OpenAPI verify. **Deferred:** form Resend (founder Vercel env). See [governance/OPS_LIVE_STATUS_LOCKED.json](governance/OPS_LIVE_STATUS_LOCKED.json).
+
+**Packaging v16 + www v18:** Self-serve sandbox — `/start/` · `/pricing/` · tier-1 UI · [WWW_V16_PACKAGING_PLAN_LOCKED_v1.md](docs/WWW_V16_PACKAGING_PLAN_LOCKED_v1.md) · [WWW_V18_TIER1_UI_MASTERPLAN_LOCKED_v1.md](docs/WWW_V18_TIER1_UI_MASTERPLAN_LOCKED_v1.md).
 
 **Shipped tenth audit (PR #48 @ b822423):** iter 18 on main — checkpoint verify hardening, OpenAPI bridge, MERGED_WINDOW config.
 
-**Cloud GTM iter 19:** see [GTM_NEXT.md](docs/ops/plans/no-asf/GTM_NEXT.md) (server-side sandbox optional, agentic manifest wire, doc-ssot guards, OpenAPI verify).
+**Cloud GTM iter 20:** WWW v18 Wave B (command center shell, design tokens) — after founder Resend go-live.
 
 **Shipped ninth audit (PR #47 @ 46a36a3):** iter 17 on main.
 

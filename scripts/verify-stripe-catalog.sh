@@ -44,6 +44,7 @@ if 'noetfield-stripe-catalog.json' not in sales:
 ok "STRIPE_CATALOG.json and public purchase hub valid"
 
 grep -q "STRIPE_WEBHOOK_SECRET" .env.example || fail ".env.example missing STRIPE_WEBHOOK_SECRET"
+grep -q '/api/stripe/webhook' services/governance/noetfield_governance/api.py || fail "api.py missing stripe webhook route"
 grep -q "verify-stripe-catalog" Makefile || fail "Makefile missing verify-stripe-catalog"
 
 ok "env template and Makefile wired"

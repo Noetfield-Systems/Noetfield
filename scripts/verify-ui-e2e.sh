@@ -202,6 +202,13 @@ for path in / /trust/ /copilot/ /copilot/pilot/ /msp/ /federal/ /investors/ /sta
   fi
 done
 
+echo ""
+echo "=== visual QA (www v18 wave A) ==="
+check_html "${BASE}/gate/sales/" "stripe purchase hub" "Pay with Stripe" "nf-stripe-disclaimer" "Trust Brief"
+check_html "${BASE}/status/" "status sandbox widget" "data-sandbox-health-host" "Sandbox API"
+check_html "${BASE}/start/" "start agent manifest" "noetfield-agent-manifest.json" "agent-manifest.schema.json"
+check_html "${BASE}/next/" "next ops witness" "Google Workspace" "RESEND_API_KEY"
+
 if [[ "$fail" -eq 0 ]]; then
   echo ""
   echo "verify-ui-e2e passed."

@@ -24,12 +24,13 @@ Only merge **Noetfield GTM / PLAN WITH NO ASF** ship PRs from branches matching:
 
 ## Pending ship PR
 
-_None — post–tenth-audit merge; next ship PR requires founder bounded order._
+_None — 10-step wave merged to main @ 3956afe5; founder: Resend env + SourceA sync._
 
 ## Recently merged
 
 | PR | Branch | Notes |
 |----|--------|-------|
+| #76 | cursor/google-workspace-intake-37f0 | Ops witness R-013 · Workspace inbox · Stripe hub · 10-step ship |
 | #48 | cursor/tenth-audit-iter18-37f0 | Tenth audit — iter 18 (054–056) @ b822423 |
 | #47 | cursor/ninth-audit-iter17-37f0 | Ninth audit — iter 17 (051–053) @ 46a36a3 |
 | #46 | cursor/eighth-audit-iter16-37f0 | Eighth audit — iter 16 (048–050) @ f2103d3 |

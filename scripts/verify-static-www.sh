@@ -100,6 +100,12 @@ check_file "stripe purchase hub" gate/sales/index.html \
 check_file "stripe catalog public" assets/noetfield-stripe-catalog.json \
   'buy.stripe.com' 'Copilot_Readiness_Pack' 'Trust_Brief'
 
+check_file "agent manifest public" assets/noetfield-agent-manifest.json \
+  'noetfield-copilot-governance' 'copilot_assessment' 'deny_tools_default'
+
+check_file "status sandbox health" status/index.html \
+  'data-sandbox-health-host' 'Sandbox API' 'SANDBOX_PRODUCTION_PERSISTENCE'
+
 check_file "vercel intake API" vercel.json \
   'api/public/chat'
 

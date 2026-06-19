@@ -17,27 +17,29 @@ When the NF-PLAN registry is fully synced (`1000/1000 done`), pick the next **�
 
 `ship-*-NNN` = GTM Tier A queue (`next_tasks`). `nf-*-NNN` in engineering manifest = product waves — numeric suffix overlap is intentional.
 
-## Next GTM Tier A (NF-CLOUD disk) — iter 19 proposals
+## Next GTM Tier A (NF-CLOUD disk) — iter 20 proposals
 
 Founder pick or bounded `implement`:
 
-1. **ship-sandbox-server-side-057** · Persist sandbox sessions server-side (optional) — today localStorage only  
-   Outcome: Production-grade trial without inventing fourth SKU.
+1. **ship-www-v18-wave-b-063** · Command Center Shell 2.0 + design token unification  
+   Outcome: Product UI matches www tier-1 bar.
 
-1. **ship-agentic-workflow-manifest-058** · Wire `packages/schemas/agent-manifest.schema.json` to public agentic copy on `/start/`  
-   Outcome: Investigate/triage/draft paths documented in product, not marketing-only.
+1. **ship-stripe-webhook-prod-064** · Configure `STRIPE_WEBHOOK_SECRET` on platform + Stripe dashboard endpoint  
+   Outcome: Post-checkout auto-notify operations@.
 
-1. **ship-pricing-verify-doc-ssot-059** · Add v16 packaging docs to `verify-doc-ssot.sh` locked refs  
-   Outcome: Agents cannot drift from packaging SSOT.
+1. **ship-resend-form-delivery-065** · Founder Vercel env — flip OPS_LIVE form_delivery to live  
+   Outcome: `www_email_configured: true` on `/status/`.
 
-1. **ship-procurement-openapi-verify-060** · Verify `/openapi.json` returns 200 in gtm-ops bundle  
-   Outcome: Production API schema reachable from buyer verify.
+## Shipped iter 19 (10-step wave @ main)
 
-1. **ship-services-governance-readme-openapi-061** · services/governance README cites `/openapi.json` path  
-   Outcome: Prod README matches procurement buyer link.
+| ID | Shipped |
+|----|---------|
+| ship-sandbox-server-side-057 | Sandbox API + `SANDBOX_PRODUCTION_PERSISTENCE.md` + status health widget |
+| ship-agentic-workflow-manifest-058 | `noetfield-agent-manifest.json` on `/start/` |
+| ship-procurement-openapi-verify-060 | `verify-procurement-openapi.sh` |
+| ship-services-governance-readme-openapi-061 | README + procurement OpenAPI links (already wired) |
 
-1. **ship-tenth-audit-merge-rule-062** · Document tenth-audit branch in ENGINEERING_DONE_MANIFEST closeout template  
-   Outcome: Audit iteration naming stays traceable in manifest.
+## Prior iter 19 proposals (superseded by 10-step ship)
 
 ## Agentic only — Hub (not NF-CLOUD implement)
 

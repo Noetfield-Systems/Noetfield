@@ -999,6 +999,24 @@ async def sandbox_export_board_pdf(request: Request) -> Response:
     )
 
 
+@app.post("/api/stripe/webhook", tags=["stripe"], include_in_schema=False)
+async def stripe_commercial_webhook(request: Request) -> dict[str, object]:
+    """Stripe checkout.session.completed — notify operations@ (commercial licensing only)."""
+    from noetfield_governance.stripe_webhook import handle_stripe_webhook
+
+    sig = (request.headers.get("stripe-signature") or "").strip()
+    payload = await request.body()
+    result = await handle_stripe_webhook(settings, payload, sig)
+    if not result.get("ok"):
+        err = str(result.get("error") or "webhook_error")
+        if err == "invalid_signature":
+            raise HTTPException(status_code=400, detail=err)
+        if err == "stripe_webhook_not_configured":
+            raise HTTPException(status_code=503, detail=err)
+        raise HTTPException(status_code=400, detail=err)
+    return result
+
+
 @app.get("/api/ecosystem/public", tags=["ecosystem"])
 async def ecosystem_public() -> dict[str, object]:
     """Non-secret config for www (also in assets/noetfield-ecosystem.json)."""

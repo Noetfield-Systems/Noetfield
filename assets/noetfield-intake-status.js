@@ -74,6 +74,41 @@
 
   function init() {
     document.querySelectorAll("[data-intake-health-host]").forEach(initHost);
+    initSandboxHealth();
+  }
+
+  function sandboxApiBase() {
+    var meta = document.querySelector('meta[name="nf-chat-api-base"]');
+    return (meta && meta.getAttribute("content")) || "https://platform.noetfield.com";
+  }
+
+  function initSandboxHealth() {
+    document.querySelectorAll("[data-sandbox-health-host]").forEach(function (host) {
+      host.innerHTML = badge("Sandbox API", "orientation");
+      var base = sandboxApiBase().replace(/\/$/, "");
+      fetch(base + "/api/sandbox/health")
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (h) {
+          var enabled = h && h.enabled === true;
+          var redis = h && h.redis_backed === true;
+          host.innerHTML =
+            badge("Sandbox API", enabled ? "available" : "orientation") +
+            badge("Redis sessions", redis ? "available" : "orientation") +
+            badge("Observe mode", h && h.mode === "observe" ? "available" : "orientation") +
+            '<p class="nf-section-lead" style="margin-top:12px">Limit: <code>' +
+            (h.evaluate_limit || 50) +
+            "</code> evaluates · TTL <code>" +
+            (h.trial_days || 14) +
+            "d</code></p>";
+        })
+        .catch(function () {
+          host.innerHTML =
+            badge("Sandbox API", "orientation") +
+            '<p class="nf-section-lead" style="margin-top:12px">Platform sandbox health unreachable — local trial may still work via www.</p>';
+        });
+    });
   }
 
   if (document.readyState === "loading") {

@@ -1,0 +1,33 @@
+{
+  "agent_id": "noetfield-copilot-governance",
+  "version": "1.0.0",
+  "display_name": "Copilot Governance Agent",
+  "role": "copilot_assessment",
+  "allowed_actions": [
+    "evaluate_intent",
+    "draft_tle",
+    "surface_evidence_gaps",
+    "recommend_policy_path"
+  ],
+  "denied_actions": [
+    "execute_payment",
+    "custody_funds",
+    "modify_production_connector",
+    "send_outbound_email_without_approval"
+  ],
+  "data_scopes": [
+    "tenant_audit_read",
+    "policy_pack_read",
+    "purview_metadata_read",
+    "entra_metadata_read"
+  ],
+  "approval_threshold": "single_human",
+  "deny_tools_default": true,
+  "prompt_template_ref": "docs/strategy/NOETFIELD_COPILOT_SME_SYSTEM_DESIGN_LOCKED_v1.md",
+  "max_tool_calls_per_run": 12,
+  "metadata": {
+    "mode_sandbox": "observe",
+    "mode_production": "enforce",
+    "schema": "packages/schemas/agent-manifest.schema.json"
+  }
+}

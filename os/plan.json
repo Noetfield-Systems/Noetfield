@@ -4,7 +4,7 @@
   "status": "active",
   "ship_mandate": "os/SHIP_NOW.md",
   "ship_rule": "Bounded founder implement order + os/plan.json GTM_NEXT queue + agentic_queue (026 Hub only); ingest after VERIFY (required); do not edit SinaPromptOS; no self-start from plan.json alone (R-007/R-011); local Mac may also pick from os/plan-library/noetfield-1000/",
-  "last_updated": "2026-06-13",
+  "last_updated": "2026-06-03",
   "positioning_lock": "docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md",
   "agent_context_lock": "docs/ops/NOETFIELD_AGENT_CONTEXT_AND_READ_ORDER_LOCKED_v1.md",
   "sprint_backlog": "os/sprint-trust-ledger-v1.2.md",
@@ -114,14 +114,14 @@
     {
       "id": "ship-sandbox-server-side-057",
       "title": "Optional server-side sandbox session persistence",
-      "plan": "governance-console/backend/",
-      "status": "pending"
+      "plan": "docs/ops/SANDBOX_PRODUCTION_PERSISTENCE.md",
+      "status": "done"
     },
     {
       "id": "ship-agentic-workflow-manifest-058",
       "title": "Wire agent manifest schema to public agentic workflow copy",
-      "plan": "packages/schemas/agent-manifest.schema.json",
-      "status": "pending"
+      "plan": "assets/noetfield-agent-manifest.json",
+      "status": "done"
     },
     {
       "id": "ship-pricing-verify-doc-ssot-059",
