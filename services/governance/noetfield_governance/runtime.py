@@ -14,7 +14,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from noetfield_events import AsyncEventBus, EventTrace, EventType, build_event
 from noetfield_governance.policies import PolicyEvaluator, PolicyInput
-from noetfield_types import Actor, ActorType, GovernanceBoundary
+from noetfield_types import Actor, ActorType, GovernanceBoundary, coerce_jsonb_mapping
 
 
 class GovernanceExecutionState(StrEnum):
@@ -209,7 +209,7 @@ class PostgresApprovalQueueStore:
                 resource_type=row["resource_type"],
                 resource_id=row["resource_id"],
                 reason=row["reason"],
-                payload=dict(row["payload"] or {}),
+                payload=coerce_jsonb_mapping(row["payload"]),
                 requested_at=row["requested_at"],
             )
             for row in rows

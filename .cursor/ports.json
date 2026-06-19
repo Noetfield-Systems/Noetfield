@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Noetfield website + apps",
+    "port": 13080,
+    "path": "/"
+  },
+  {
+    "name": "Governance console (legacy)",
+    "port": 8001,
+    "path": "/console"
+  }
+]

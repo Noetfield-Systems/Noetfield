@@ -32,6 +32,7 @@ build-backend = "setuptools.build_meta"
 where = [
   "packages/types",
   "packages/config",
+  "packages/sdk",
   "services/events",
   "services/ledger",
   "services/graph",
@@ -72,6 +73,7 @@ testpaths = ["tests"]
 pythonpath = [
   "packages/types",
   "packages/config",
+  "packages/sdk",
   "services/events",
   "services/ledger",
   "services/graph",

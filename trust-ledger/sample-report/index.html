@@ -1,169 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="utf-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1" />
-
- <title>Noetfield — AI Trust Ledger Sample Report</title>
- <meta name="description" content="Sample AI Trust Ledger artefacts for boards and regulators — illustrating how material AI decisions, safeguards, incidents, and accountability are recorded in a concise, board-ready format." />
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Noetfield — TLE v1 Sample Report</title>
+ <meta name="description" content="Sample Trust Ledger Entry YAML reports." />
  <meta name="robots" content="index,follow" />
- <meta name="author" content="Noetfield Systems Inc." />
- <meta name="theme-color" content="#07070b" />
-
+ <meta name="theme-color" content="#f4f5f8" />
  <link rel="canonical" href="https://www.noetfield.com/trust-ledger/sample-report/" />
-
+ <meta name="nf-chat-api-base" content="https://platform.noetfield.com" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
- <link rel="apple-touch-icon" href="/noetfield-favicon-512.png" />
-
- <meta property="og:type" content="website" />
- <meta property="og:site_name" content="Noetfield" />
- <meta property="og:title" content="Noetfield — AI Trust Ledger Sample Report" />
- <meta property="og:description" content="View an online sample board report and a 1-page ledger entry — designed for board packs, committees, and supervisory exchanges." />
- <meta property="og:url" content="https://www.noetfield.com/trust-ledger/sample-report/" />
- <meta property="og:image" content="https://www.noetfield.com/noetfield-og.png" />
-
- <meta name="twitter:card" content="summary_large_image" />
- <meta name="twitter:title" content="Noetfield — AI Trust Ledger Sample Report" />
- <meta name="twitter:description" content="Sample AI Trust Ledger artefacts for boards and regulators." />
- <meta name="twitter:image" content="https://www.noetfield.com/noetfield-og.png" />
-
- <!-- Shared shell assets -->
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
  <link rel="stylesheet" href="/assets/noetfield-shell.css" />
- <script defer src="/assets/noetfield-shell.js"></script>
-
- <style>
- /* Page-scoped (safe) */
- .nf-wrap{max-width:1040px;margin:0 auto;padding:26px 16px 40px;}
- .nf-skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
- .nf-skip:focus{left:16px;top:16px;width:auto;height:auto;z-index:9999;padding:10px 12px;border-radius:10px;background:rgba(15,23,42,.95);border:1px solid rgba(148,163,253,.35)}
- .nf-hero{padding:18px 0 10px}
- .nf-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.72;margin-bottom:10px}
- .nf-h1{font-size:clamp(28px,3.2vw,36px);line-height:1.12;margin:0 0 10px}
- .nf-lead{max-width:720px;opacity:.86;line-height:1.65;margin:0 0 16px}
- .nf-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
- .nf-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:10px 14px;border-radius:999px;border:1px solid rgba(148,163,253,.28);background:rgba(15,23,42,.65);text-decoration:none}
- .nf-btnPrimary{background:linear-gradient(135deg,#f9fafb,#e5e7eb);color:#07070b;border-color:transparent}
- .nf-btn:hover{transform:translateY(-1px)}
- .nf-note{margin-top:10px;font-size:12px;opacity:.72}
- .nf-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;margin-top:18px}
- .nf-card{border-radius:16px;border:1px solid rgba(148,163,253,.18);background:rgba(3,7,18,.55);padding:14px 14px 12px}
- .nf-card h2{font-size:14px;letter-spacing:.14em;text-transform:uppercase;opacity:.72;margin:0 0 8px}
- .nf-card p{margin:0 0 8px;line-height:1.65;opacity:.86}
- .nf-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
- .nf-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid rgba(148,163,253,.28);opacity:.82}
- .nf-list{margin:8px 0 0;padding:0;list-style:none}
- .nf-list li{position:relative;padding-left:14px;line-height:1.65;opacity:.86;margin:6px 0}
- .nf-list li:before{content:"•";position:absolute;left:2px;top:0;opacity:.8}
- .nf-divider{margin:20px 0;border:none;border-top:1px solid rgba(255,255,255,.10)}
- .nf-footerMini{font-size:12px;opacity:.70;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
- .nf-muted{opacity:.70}
- @media (max-width: 860px){
- .nf-grid{grid-template-columns:minmax(0,1fr)}
- .nf-actions{flex-direction:column}
- .nf-btn{width:100%}
- }
- </style>
+ <link rel="stylesheet" href="/assets/noetfield-www.css?v=40" />
+ <link rel="stylesheet" href="/assets/noetfield-print.css?v=40" media="print" />
+ <script src="/assets/noetfield-shell.js?v=40" defer></script>
+ <script src="/assets/noetfield-intake-core.js?v=40" defer></script>
+ <script src="/assets/noetfield-forms.js?v=40" defer></script>
 </head>
+<body class="nf-www nf-site-v14">
+ <div class="bg" aria-hidden="true"></div>
+ <a class="skip" href="#main">Skip to content</a>
+ <header id="nfHeader"></header>
+ <main id="main" class="nf-main nf-page">
 
-<body class="nf26-page">
- <a class="nf-skip" href="#main">Skip to content</a>
-
- <!-- Header injected by shell.js (ids + data attrs for compatibility) -->
- <div id="siteHeader" data-include="/assets/partials/header.html"></div>
-
- <main id="main" class="nf-wrap" aria-label="AI Trust Ledger sample report">
- <section class="nf-hero">
- <div class="nf-kicker">Sample artefacts</div>
- <h1 class="nf-h1">How an <span style="opacity:.92">AI Trust Ledger</span> looks in practice</h1>
- <p class="nf-lead">
- This page contains public, illustrative samples designed for boards, committees, and supervisors.
- They demonstrate the structure — not your data. No confidential content is required to review these samples.
- </p>
-
- <div class="nf-actions">
- <a class="nf-btn nf-btnPrimary" href="/trust-ledger/online-report/" target="_blank" rel="noopener">
- View sample board report (online)
- </a>
- <a class="nf-btn" href="/trust-ledger/sample-report/online/" aria-label="Legacy path sample board report (online)">
- Legacy link (if referenced)
- </a>
- <a class="nf-btn" href="/gate/" target="_blank" rel="noopener">
- Request a tailored sample pack via Gate
- </a>
+ <header class="nf-hero-cinematic">
+ <div>
+ <p class="nf-hero-kicker"><span class="nf-hero-kicker-dot" aria-hidden="true"></span> TLE v1 samples</p>
+ <p class="nf-eyebrow">Orientation artifacts</p>
+ <h1>Sample Trust Ledger Entry reports</h1>
+ <p class="nf-lead">Go, conditional, and rejected YAML samples — canonical schema orientation for procurement and engineering.</p>
+ <div class="nf-hero-badges"><span class="nf-badge-pill nf-badge-pill--gold">YAML download</span><span class="nf-badge-pill">Not live records</span></div>
+ <div class="nf-cta-actions"><a class="btn btn-primary" href="/workspace/">Workspace</a><a class="btn btn-secondary" href="/copilot/demo/">5-minute demo</a></div>
+ <ul class="nf-marquee" aria-label="Framework alignment"></ul>
  </div>
-
- <div class="nf-note">
- Public page. Non-confidential. Illustrative metrics and identifiers.
+ 
+ <div class="nf-artifact-panel">
+ <div class="nf-artifact-panel-chrome">
+ <span class="nf-artifact-panel-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+ <span class="nf-artifact-panel-file">tle-receipt.yaml</span>
+ <span class="nf-artifact-panel-badge">Verified</span>
  </div>
- </section>
-
- <hr class="nf-divider" />
-
- <section class="nf-grid" aria-label="What is included">
- <div class="nf-card">
- <h2>What these samples show</h2>
- <p>
- A board-safe way to record one material AI decision: scope, accountability, safeguards, evidence, and
- how incidents and changes are carried forward into board actions.
- </p>
- <ul class="nf-list">
- <li>Human-readable, decision-first formatting (no deep technical detail required).</li>
- <li>Clear ownership: business owner, risk owner, governance function.</li>
- <li>Change and incident visibility across a reporting period.</li>
- <li>Board actions: approvals, conditions, and follow-ups.</li>
- </ul>
- <div class="nf-tags">
- <span class="nf-tag">Board-ready</span>
- <span class="nf-tag">Regulator-facing</span>
- <span class="nf-tag">Governance-first</span>
- </div>
- </div>
-
- <aside class="nf-card">
- <h2>Included on this page</h2>
- <ul class="nf-list">
- <li><strong>Online board report</strong> (multi-section) — the standard “what changed, what happened, what is requested.”</li>
- <li><strong>Legacy path</strong> retained temporarily for existing references.</li>
- <li><strong>Gate request</strong> for a tailored sample pack aligned to your governance language.</li>
- </ul>
- <p class="nf-muted" style="margin-top:10px">
- For implementation, samples are adapted to the organisation’s risk taxonomy, committee structure,
- regulatory context, and evidence repositories.
- </p>
+ <aside class="nf-receipt-mock" aria-label="Trust Ledger Entry receipt">
+ <dl class="nf-receipt-mock-body">
+ <div class="nf-receipt-row"><dt>tle_id</dt><dd>TLE-015DCFB8B953</dd></div>
+ <div class="nf-receipt-row"><dt>decision</dt><dd>allow</dd></div>
+ <div class="nf-receipt-row"><dt>confidence_score</dt><dd>0.82</dd></div>
+ <div class="nf-receipt-row"><dt>rid</dt><dd>RID-2026-0602-SAMPLE</dd></div>
+ <div class="nf-receipt-row"><dt>evidence_index</dt><dd>purview · entra · audit</dd></div>
+ <div class="nf-receipt-row"><dt>export_integrity</dt><dd class="nf-receipt-ok">PASS · fail closed on tamper</dd></div>
+ </dl>
+ <p class="nf-receipt-mock-footer">Orientation sample — not a live record.</p>
  </aside>
- </section>
-
- <hr class="nf-divider" />
-
- <section class="nf-card" aria-label="Outline">
- <h2>Typical report outline</h2>
- <ul class="nf-list">
- <li>Executive Summary (headlines + board decisions requested)</li>
- <li>Material AI inventory snapshot</li>
- <li>Significant changes (new / changed / decommissioned)</li>
- <li>Incidents, exceptions, near-misses</li>
- <li>Controls & testing (what exists, how often tested, results)</li>
- <li>Provider & infrastructure view (where third parties matter)</li>
- <li>Board actions & approvals (items, deadlines, conditions)</li>
- <li>Annex (system profiles, mappings, glossary)</li>
- </ul>
- </section>
-
- <hr class="nf-divider" />
-
- <div class="nf-footerMini" aria-label="Page footer">
- <div>© <span id="year"></span> Noetfield Systems Inc.</div>
- <div class="nf-muted">
- Prefer a guided start? Begin with <a href="/trust-brief/">Trust Brief</a> or enter via <a href="/gate/">Gate</a>.
  </div>
+ </header>
+ <section class="nf-trust-signals" aria-labelledby="scope-title">
+ <h2 id="scope-title">Available now — capability scope</h2>
+ <p class="nf-trust-signals-lead">Honest scope for procurement — what you can demo, export, and defend today.</p>
+ <div class="nf-trust-signals-grid"><div class="nf-trust-signal"><span class="nf-trust-signal-label">Pre-execution evaluate</span><span class="nf-signal-badge nf-signal-badge--available">Available</span></div><div class="nf-trust-signal"><span class="nf-trust-signal-label">TLE v1 + workspace UI</span><span class="nf-signal-badge nf-signal-badge--available">Available</span></div><div class="nf-trust-signal"><span class="nf-trust-signal-label">Board PDF · procurement ZIP</span><span class="nf-signal-badge nf-signal-badge--available">Available</span></div><div class="nf-trust-signal"><span class="nf-trust-signal-label">M365 metadata connectors</span><span class="nf-signal-badge nf-signal-badge--available">Available</span></div><div class="nf-trust-signal"><span class="nf-trust-signal-label">Framework citations</span><span class="nf-signal-badge nf-signal-badge--orientation">Orientation</span></div><div class="nf-trust-signal"><span class="nf-trust-signal-label">Payment rails / MSB execution</span><span class="nf-signal-badge nf-signal-badge--na">Out of scope</span></div></div>
+ </section>
+ <section class="nf-cta-mega" aria-labelledby="cta-h">
+ <h2 id="cta-h">Board PDF in your next governance meeting</h2>
+ <p>Non-confidential intake · include your Request ID · Copilot Governance Pack ($2k–10k · 90 days · board PDF), Trust Brief ($10k), federal or MSP lane · operations@noetfield.com</p>
+ <div class="nf-cta-actions">
+ <a class="btn btn-primary" href="/trust-brief/intake/?interest=pilot&vector=copilot-governance">Apply for pilot ($2k–10k)</a>
+ <a class="btn btn-secondary" href="/trust-brief/intake/">Request Trust Brief ($10k)</a>
  </div>
+ </section>
  </main>
-
- <!-- Footer injected by shell.js -->
- <div id="siteFooter" data-include="/assets/partials/footer.html"></div>
-
- <script>
- document.getElementById("year").textContent = new Date().getFullYear();
- </script>
+ <footer id="nfFooter"></footer>
 </body>
 </html>

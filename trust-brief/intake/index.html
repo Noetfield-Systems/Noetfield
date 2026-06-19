@@ -12,6 +12,7 @@
  <meta name="theme-color" content="#07070b" />
 
  <link rel="canonical" href="https://www.noetfield.com/trust-brief/intake/" />
+ <meta name="nf-chat-api-base" content="https://platform.noetfield.com" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
  <link rel="apple-touch-icon" href="/noetfield-favicon-512.png" />
 
@@ -27,224 +28,21 @@
  <meta name="twitter:description" content="Start Trust Brief intake. Board-ready outputs in 6 weeks. Public intake is non-confidential." />
  <meta name="twitter:image" content="https://www.noetfield.com/noetfield-og.png" />
 
- <!-- LOCKED SHELL -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
  <link rel="stylesheet" href="/assets/noetfield-shell.css" />
- <script src="/assets/noetfield-shell.js" defer></script>
+ <link rel="stylesheet" href="/assets/noetfield-www.css?v=40" />
+ <link rel="stylesheet" href="/assets/noetfield-intake.css" />
+ <script src="/assets/noetfield-intake-email.js" defer></script>
+ <script src="/assets/noetfield-intake-core.js"></script>
+ <script src="/assets/noetfield-intake-pilot-mode.js"></script>
+ <script src="/assets/noetfield-intake-ecosystem-mode.js"></script>
+ <script src="/assets/noetfield-intake-api.js" defer></script>
+ <script src="/assets/noetfield-shell.js?v=40" defer></script>
 
- <style>
- /* Align with Trust Brief v7 visuals (heroShell / cards / blocks / rail / sticky) */
- .hero{padding:18px 0 10px}
- .grid{
- display:grid;
- grid-template-columns: 1.12fr .88fr;
- gap:16px;
- margin: 14px 0 72px;
- align-items:start;
- }
- .card{
- border-radius:var(--radius);
- border:1px solid rgba(255,255,255,.11);
- background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.022));
- box-shadow: var(--shadow2);
- overflow:hidden;
- min-width:0;
- }
- .hd{ padding:18px 18px 0; }
- .bd{ padding:18px; }
-
- .heroShell{
- position:relative;
- border-radius: calc(var(--radius) + 8px);
- border: 1px solid rgba(255,255,255,.11);
- background:
- radial-gradient(1100px 420px at 16% 0%, rgba(200,163,73,.18), transparent 60%),
- radial-gradient(1100px 420px at 92% 10%, rgba(122,167,255,.10), transparent 62%),
- linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.022));
- box-shadow: var(--shadow);
- overflow:hidden;
- }
- .heroShell::before{
- content:"";
- position:absolute; inset:-1px;
- background: linear-gradient(120deg, rgba(200,163,73,.26), transparent 30%, rgba(255,255,255,.08) 68%, transparent);
- opacity:.44;
- pointer-events:none;
- mask-image: linear-gradient(180deg, black 0%, black 58%, transparent 96%);
- }
- .heroInner{padding: 22px 18px; position:relative; z-index:1}
-
- .eyebrow{
- display:inline-flex; gap:10px; align-items:center;
- color:var(--muted);
- font-size:13px;
- padding:9px 12px;
- border-radius:999px;
- border:1px solid rgba(255,255,255,.13);
- background: rgba(255,255,255,.035);
- }
- .dot{
- width:8px; height:8px; border-radius:50%;
- background: rgba(200,163,73,.97);
- box-shadow: 0 0 0 3px rgba(200,163,73,.18);
- }
- h1{margin:12px 0 10px; font-size:34px; line-height:1.07; letter-spacing:-0.75px}
- .lead{margin:0; color:var(--muted); font-size:16px; max-width: 1040px; line-height:1.75}
- .lead strong{color:var(--text); font-weight:950}
-
- .metaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
- .pill{
- display:inline-flex; align-items:center; gap:10px;
- padding:9px 12px;
- border-radius:999px;
- border:1px solid rgba(255,255,255,.12);
- background: rgba(255,255,255,.03);
- color:var(--muted);
- font-size:13px;
- white-space:nowrap;
- }
- .pill strong{color:var(--text); font-weight:900}
-
- .actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px}
- .btn.small{ min-height:40px; padding:9px 12px; font-size:13px; }
-
- .notice{
- margin-top:12px;
- padding:12px 12px;
- border-radius:14px;
- border:1px solid rgba(255,255,255,.10);
- background: rgba(255,255,255,.03);
- color:var(--muted2);
- font-size:12.8px;
- line-height:1.6;
- }
- .notice strong{ color:var(--text); font-weight:900; }
-
- .cardTitle{ margin:0 0 8px; font-size:18px; letter-spacing:-0.2px; }
- .muted{ color:var(--muted); line-height:1.7; margin:0; }
-
- .groupTitle{
- margin:18px 0 8px;
- font-size:14px;
- letter-spacing:.22em;
- text-transform:uppercase;
- color:var(--muted2);
- }
-
- .blocks{ display:grid; gap:12px; margin-top:12px; }
- .block{
- border-radius:16px;
- border:1px solid rgba(255,255,255,.11);
- background: rgba(255,255,255,.03);
- padding:14px;
- overflow:hidden;
- transition: border-color .15s ease, background .15s ease, transform .06s ease;
- }
- .block:hover{border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.05)}
- .block:active{transform: translateY(1px)}
- .blockTop{ display:flex; gap:10px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
- .block h3{ margin:0; font-size:16px; letter-spacing:-.2px; font-weight:950; }
- .tag{
- display:inline-flex; align-items:center; gap:8px;
- padding:7px 10px;
- border-radius:999px;
- border:1px solid rgba(255,255,255,.12);
- background: rgba(255,255,255,.03);
- color:var(--muted2);
- font-size:12.4px;
- white-space:nowrap;
- }
- .block p{ margin:10px 0 0; color:var(--muted); line-height:1.7; }
- .block ul{ margin:10px 0 0; padding-left:18px; color:var(--muted2); line-height:1.6; }
- .block li{ margin:6px 0; }
-
- /* Form (aligned) */
- .form{ display:grid; gap:12px; margin-top:12px; }
- .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
- .field label{
- display:block;
- font-size:11px;
- letter-spacing:.24em;
- text-transform:uppercase;
- color:var(--muted2);
- margin:0 0 6px;
- }
- .field input, .field select, .field textarea{
- width:100%;
- border-radius:12px;
- border:1px solid rgba(255,255,255,.12);
- background: rgba(255,255,255,.03);
- color: var(--text);
- padding:12px;
- outline:none;
- min-height:44px;
- }
- .field textarea{ min-height:120px; resize:vertical; }
- .help{ margin-top:6px; color:var(--muted2); font-size:12.6px; line-height:1.55; }
-
- .ridBox{
- margin-top:12px;
- padding:12px;
- border-radius:14px;
- border:1px solid rgba(255,255,255,.10);
- background: rgba(255,255,255,.03);
- color:var(--muted2);
- font-size:12.8px;
- line-height:1.6;
- }
- .ridBox strong{color:var(--text); font-weight:900}
- .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
-
- /* Rail */
- .rail{ position: sticky; top: 14px; }
- .panel{
- border-radius:16px;
- border:1px solid rgba(255,255,255,.10);
- background: rgba(255,255,255,.03);
- padding:14px;
- }
- .panelTop{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:flex-start; }
- .label{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted2); }
- .value{ font-size:18px; font-weight:950; letter-spacing:-.2px; margin-top:6px; }
- .price{ font-size:26px; font-weight:950; letter-spacing:-.3px; margin-top:6px; white-space:nowrap; }
- .small{ margin-top:10px; color:var(--muted2); font-size:12.8px; line-height:1.6; }
-
- /* Sticky bottom CTA */
- .stickyCta{
- position: sticky;
- bottom: 0;
- z-index: 20;
- padding: 10px 0;
- background: linear-gradient(180deg, rgba(7,7,11,0) 0%, rgba(7,7,11,.78) 22%, rgba(7,7,11,.92) 100%);
- backdrop-filter: blur(10px);
- border-top: 1px solid rgba(255,255,255,.08);
- }
- .stickyInner{
- display:flex;
- gap:12px;
- align-items:center;
- justify-content:space-between;
- padding: 0 16px;
- max-width: 1120px;
- margin: 0 auto;
- }
- .stickyText{
- min-width:0;
- color:var(--muted);
- font-size:12.6px;
- line-height:1.4;
- }
- .stickyText strong{ color:var(--text); font-weight:950; }
-
- @media (max-width: 980px){
- .grid{ grid-template-columns: 1fr; }
- .rail{ position: relative; top: 0; }
- .row2{ grid-template-columns: 1fr; }
- h1{ font-size: 30px; }
- }
- @media (max-width: 760px){
- .stickyText{display:none}
- }
- </style>
+ <!-- legacy inline removed — see noetfield-intake.css -->
 
  <script type="application/ld+json">
  {
@@ -259,20 +57,21 @@
  </script>
 </head>
 
-<body class="nf26-page">
+<body class="nf-www nf-site-v14">
  <div class="bg" aria-hidden="true"></div>
  <a class="skip" href="#main">Skip to content</a>
 
  <header id="nfHeader"></header>
 
  <main id="main" class="wrap">
- <!-- HERO -->
- <section class="hero" aria-label="Trust Brief intake hero">
+ <!-- HERO — Trust Brief (default) -->
+ <section class="hero" id="intakeHeroTrustBrief" aria-label="Trust Brief intake hero">
  <div class="heroShell">
  <div class="heroInner">
  <div class="eyebrow"><span class="dot"></span> Trust Brief • Intake • public (non-confidential)</div>
 
  <h1>Confirm scope. Get a board-ready baseline.</h1>
+ <p class="muted" style="margin-top:10px;"><strong>Trust Brief list price: $10,000 CAD</strong> (six weeks, fixed engagement). The scope estimator below is for planning only—not a checkout or contract.</p>
 
  <p class="lead">
  This intake confirms scope signals (use-case band, teams, engagement intake path) so delivery can stay <strong>defensible</strong>:
@@ -290,7 +89,7 @@
  <div class="actions" aria-label="Hero actions">
  <a class="btn primary" href="#intake">Start intake</a>
  <a class="btn secondary" href="/trust-brief/#pricing" data-rid-link>View pricing</a>
- <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Engagement artifact</a>
+ <a class="btn secondary" href="/gate/intake/?vector=trust-brief" data-rid-link>Engagement gateway</a>
  <a class="btn secondary" href="/gate/sales/" data-rid-link>Purchase hub</a>
  </div>
 
@@ -303,26 +102,76 @@
  </div>
  </section>
 
+ <!-- HERO — Copilot Governance Pack pilot (?interest=pilot) -->
+ <section class="hero" id="intakeHeroPilot" aria-label="Copilot Governance Pack pilot intake" hidden>
+ <div class="heroShell heroShell--pilot">
+ <div class="heroInner">
+ <div class="eyebrow"><span class="dot"></span> Copilot Governance Pack · Pilot intake · $2k–10k</div>
+ <h1>Apply for a board-grade Copilot pilot</h1>
+ <p class="muted" style="margin-top:10px;"><strong>Fixed-fee pilot · $2,000 – $10,000 CAD · 90 days</strong>. Success signal: one approved TLE and board PDF used in a real governance meeting.</p>
+ <p class="lead">
+ Non-confidential intake for regulated EU and US institutions rolling out Microsoft 365 Copilot —
+ <strong>live TLE records</strong>, metadata-only M365 evidence index, and procurement-grade exports.
+ </p>
+ <div class="metaRow" aria-label="Pilot highlights">
+ <div class="pill"><strong>90 days</strong> Readiness Pilot</div>
+ <div class="pill"><strong>Board PDF</strong> in governance meeting</div>
+ <div class="pill"><strong>TLE v1</strong> tamper-evident export</div>
+ <div class="pill"><strong>Metadata-only</strong> Purview · Entra · audit</div>
+ </div>
+ <div class="actions" aria-label="Pilot hero actions">
+ <a class="btn primary" href="#intake">Submit pilot application</a>
+ <a class="btn secondary" href="/copilot/pilot/" data-rid-link>Pilot overview</a>
+ <a class="btn secondary" href="/copilot/demo/" data-rid-link>5-minute demo</a>
+ <a class="btn secondary" href="/start/" data-rid-link>Try sandbox first</a>
+ </div>
+ <div class="notice" role="note">
+ <strong>Public intake:</strong> non-confidential only. Final SOW and fee band confirmed after kickoff with operations@noetfield.com.
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- HERO — Work with Noetfield ecosystem (?interest=partner&vector=work-with-us) -->
+ <section class="hero" id="intakeHeroEcosystem" aria-label="Work with Noetfield application" hidden>
+ <div class="heroShell heroShell--pilot">
+ <div class="heroInner">
+ <div class="eyebrow"><span class="dot"></span> Work with Noetfield · Ecosystem apply</div>
+ <h1>Connector · facilitator · co-partner · partner · investor</h1>
+ <p class="muted" style="margin-top:10px;"><strong>Help regulated institutions attach Copilot Governance Pack</strong> — $2k–10k pilots · board PDF success signal · metadata-only M365 receipts.</p>
+ <p class="lead">Non-confidential application for people and firms who introduce buyers, lead rollout workshops, co-deliver pilots, attach as MSP/SI after Purview readiness, or explore the investor path.</p>
+ <div class="actions" aria-label="Ecosystem hero actions">
+ <a class="btn primary" href="#intake">Complete application</a>
+ <a class="btn secondary" href="/work-with-us/" data-rid-link>Program overview</a>
+ <a class="btn secondary" href="/copilot/demo/" data-rid-link>5-minute demo</a>
+ </div>
+ </div>
+ </div>
+ </section>
+
  <!-- GRID -->
  <section class="grid" aria-label="Trust Brief intake layout">
  <!-- LEFT -->
  <div>
  <section class="card" id="intake" aria-label="Intake form">
  <div class="hd">
- <h2 class="cardTitle">Intake</h2>
- <p class="muted">Two minutes to confirm scope signals. Final scope/quote confirmed after kickoff.</p>
+ <h2 class="cardTitle" id="tbFormTitle">Intake</h2>
+ <p class="muted" id="tbFormLead">Two minutes to confirm scope signals. Final scope/quote confirmed after kickoff.</p>
  </div>
 
  <div class="bd">
  <form class="form" id="tbIntakeForm"
- action="https://formspree.io/xyzrdrpv"
- method="POST"
- accept-charset="UTF-8">
+ action="#"
+ method="post"
+ accept-charset="UTF-8"
+ novalidate>
 
  <!-- governance flow -->
  <input type="hidden" name="package" value="trust-brief" />
  <input type="hidden" name="page" value="/trust-brief/intake/" />
  <input type="hidden" name="rid" value="" data-rid-field />
+ <input type="hidden" name="intake_vector" id="tb_intake_vector" value="trust-brief-intake" />
+ <input type="hidden" name="alert_destination" value="operations@noetfield.com" />
  <input type="hidden" name="prefill_tier" value="" data-prefill-tier />
 
  <div class="groupTitle">Contact</div>
@@ -366,7 +215,7 @@
  </div>
  </div>
 
- <div class="groupTitle">Scope signals</div>
+ <div class="groupTitle">Rollout context</div>
  <div class="row2">
  <div class="field">
  <label for="tb_driver">Primary driver</label>
@@ -375,7 +224,6 @@
  <option>Microsoft 365 Copilot rollout</option>
  <option>AI inventory / governance baseline</option>
  <option>Audit / regulator readiness</option>
- <option value="investor-diligence">Investor / acquirer diligence (target Copilot governance)</option>
  <option>Client due diligence / vendor scrutiny</option>
  <option>Incident / exception pressure</option>
  <option>Board policy / reporting requirements</option>
@@ -394,6 +242,33 @@
  </div>
  </div>
 
+ <div class="pilot-scope-fields" hidden>
+ <div class="groupTitle">Pilot scope</div>
+ <div class="row2">
+ <div class="field">
+ <label for="tb_pilot_band">Pilot band</label>
+ <select id="tb_pilot_band" name="pilot_band">
+ <option value="quickscan">QuickScan · $2,000 · 4 weeks</option>
+ <option value="readiness" selected>Readiness Pilot · $5k–10k · 90 days (recommended)</option>
+ <option value="unsure">Not sure — scoping call</option>
+ </select>
+ <div class="help">Fixed-fee Copilot Governance Pack — no SKU creep. Final band confirmed in SOW.</div>
+ </div>
+ <div class="field">
+ <label for="tb_pilot_region">Institution region</label>
+ <select id="tb_pilot_region" name="pilot_region">
+ <option value="eu-us" selected>EU + US regulated institution</option>
+ <option value="eu">EU only</option>
+ <option value="us">US only</option>
+ <option value="ca">Canada</option>
+ <option value="other">Other</option>
+ </select>
+ </div>
+ </div>
+ </div>
+
+ <div class="groupTitle tb-estimator-fields">Trust Brief scope estimator</div>
+ <div class="tb-estimator-fields">
  <div class="row2">
  <div class="field">
  <label for="tb_usecases">Use cases (band)</label>
@@ -458,6 +333,7 @@
  </select>
  </div>
  </div>
+ </div>
 
  <div class="field">
  <label for="tb_notes">Notes for scope (high-level only)</label>
@@ -475,8 +351,10 @@
 
  <div class="actions" aria-label="Form actions">
  <button class="btn primary" type="submit">Send intake</button>
- <a class="btn secondary" id="tbEmailInstead" href="mailto:sales@noetfield.com">Email instead</a>
- <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Engagement artifact</a>
+ <a class="btn secondary" id="tbEmailInstead" href="mailto:operations@noetfield.com">Email operations</a>
+ <span id="tbFormActionsTrustBrief">
+ <a class="btn secondary" href="/gate/intake/?vector=trust-brief" data-rid-link>Engagement gateway</a>
+ </span>
  <a class="btn secondary" href="/status/" data-rid-link>Status</a>
  </div>
 
@@ -487,22 +365,23 @@
  </span>
  </div>
 
- <div class="notice">
+ <div class="notice" id="tbNextStepNotice">
  <strong>Next step:</strong> scope confirmation → kickoff scheduling (using Request ID) → week-by-week delivery → board memo + starter ledger pack.
  <br />
- <strong>Contact:</strong> sales@noetfield.com • procurement@noetfield.com • billing@noetfield.com • trust@noetfield.com • legal@noetfield.com
+ <strong>Operational intake:</strong> operations@noetfield.com (all SKUs and validation brief kickoffs)
  </div>
 
+ <div id="tbIntakeErr" class="notice" style="display:none;color:var(--warn,#e8b84a);" role="alert"></div>
  <div id="tbOk" style="display:none;">
  <div class="notice">
- <strong>Received.</strong> Next step is scope confirmation and kickoff scheduling.
+ <strong>Received.</strong> Your intake was recorded instantly (<code id="tbIntakeId"></code>). Operations is notified asynchronously and will reply within one business day at operations@noetfield.com — keep your Request ID in the subject line.
  </div>
  </div>
  </form>
  </div>
  </section>
 
- <section class="card" aria-label="What to prepare" style="margin-top:16px;">
+ <section class="card" id="tbPrepareTrustBrief" aria-label="What to prepare" style="margin-top:16px;">
  <div class="hd">
  <h2 class="cardTitle">What to prepare</h2>
  <p class="muted">Non-confidential, high-level inputs that speed kickoff.</p>
@@ -539,20 +418,80 @@
  </div>
  </div>
  </section>
+
+ <section class="card" id="tbPreparePilot" aria-label="Pilot kickoff prep" style="margin-top:16px;" hidden>
+ <div class="hd">
+ <h2 class="cardTitle">What speeds pilot kickoff</h2>
+ <p class="muted">Non-confidential · high-level only · no credentials or tenant secrets in this form.</p>
+ </div>
+ <div class="bd">
+ <div class="blocks">
+ <article class="block">
+ <div class="blockTop"><h3>Copilot rollout context</h3><span class="tag">Input</span></div>
+ <ul>
+ <li>Target business units for Copilot go/no-go receipts</li>
+ <li>Named approvers (CISO, GRC, legal, procurement)</li>
+ <li>Board or risk committee date you want the PDF for</li>
+ </ul>
+ </article>
+ <article class="block">
+ <div class="blockTop"><h3>M365 evidence path</h3><span class="tag">Input</span></div>
+ <ul>
+ <li>Purview / Entra / audit metadata — read-only orientation</li>
+ <li>Tenant admin contact for connector scoping (post-kickoff)</li>
+ <li>Sandbox evaluate completed (optional) — <a href="/start/">Start sandbox</a></li>
+ </ul>
+ </article>
+ <article class="block">
+ <div class="blockTop"><h3>Success signal</h3><span class="tag">Pilot</span></div>
+ <p>One approved TLE and board PDF used in a real governance meeting — fixed fee $2k–10k · 90 days.</p>
+ </article>
+ </div>
+ </div>
+ </section>
+
+ <section class="card" id="tbPrepareEcosystem" aria-label="Ecosystem prep" style="margin-top:16px;" hidden>
+ <div class="hd">
+ <h2 class="cardTitle">What to include in your application</h2>
+ <p class="muted">High-level only — no confidential client data.</p>
+ </div>
+ <div class="bd">
+ <div class="blocks">
+ <article class="block">
+ <div class="blockTop"><h3>Your lane</h3><span class="tag">Role</span></div>
+ <ul>
+ <li>Connector — regulated buyer intros</li>
+ <li>Facilitator — workshops &amp; kickoffs</li>
+ <li>Co-partner — joint Governance Pack delivery</li>
+ <li>Partner — MSP / SI / advisory attach</li>
+ <li>Investor — capital / strategic / angel intro</li>
+ </ul>
+ </article>
+ <article class="block">
+ <div class="blockTop"><h3>Practice context</h3><span class="tag">Input</span></div>
+ <ul>
+ <li>Copilot / Purview / M365 governance experience</li>
+ <li>Target sectors (EU / US regulated)</li>
+ <li>Geographies you cover</li>
+ </ul>
+ </article>
+ </div>
+ </div>
+ </section>
  </div>
 
  <!-- RIGHT -->
  <aside class="rail" aria-label="Tier guidance rail">
  <section class="card" aria-label="Tier guidance">
  <div class="hd">
- <h2 class="cardTitle">Tier direction</h2>
- <p class="muted">Auto-derived from your inputs (override available).</p>
+ <h2 class="cardTitle" id="tbTierRailTitle">Tier direction</h2>
+ <p class="muted" id="tbTierRailLead">Auto-derived from your inputs (override available).</p>
  </div>
  <div class="bd">
  <div class="panel" aria-label="Tier panel">
  <div class="panelTop">
  <div>
- <div class="label">Recommended tier</div>
+ <div class="label" id="tbTierLabel">Recommended tier</div>
  <div class="value" id="tbTierOut">—</div>
  </div>
  <div>
@@ -565,8 +504,8 @@
 
  <div class="actions" style="margin-top:12px;">
  <button class="btn secondary" type="button" id="tbCopySummary">Copy summary</button>
- <a class="btn secondary" id="tbEmailProc" href="mailto:procurement@noetfield.com">Email procurement</a>
- <a class="btn secondary" href="/trust-brief/#pricing" data-rid-link>Back to pricing</a>
+ <a class="btn secondary" id="tbEmailProc" href="mailto:operations@noetfield.com">Email operations</a>
+ <a class="btn secondary" id="tbBackLink" href="/trust-brief/#pricing" data-rid-link>Back to pricing</a>
  </div>
 
  <div class="notice" style="margin-top:12px;">
@@ -577,12 +516,22 @@
 
  <div class="panel" aria-label="Engagement intake routing" style="margin-top:12px;">
  <div class="label">Routing</div>
- <div class="small" style="margin-top:8px;">
- Card purchase (where possible) or Engagement artifact via engagement intake. Use Request ID for continuity across Gate and Status.
+ <div class="small" id="tbRoutingCopy" style="margin-top:8px;">
+ Card purchase (where possible) or Engagement artifact via engagement intake. Use Request ID for internal tracking.
  </div>
- <div class="actions" style="margin-top:12px;">
+ <div class="actions" id="tbRoutingActionsTrustBrief" style="margin-top:12px;">
  <a class="btn primary" href="/gate/sales/" data-rid-link>Open purchase hub</a>
- <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Engagement artifact</a>
+ <a class="btn secondary" href="/gate/intake/?vector=trust-brief" data-rid-link>Engagement gateway</a>
+ </div>
+ <div class="actions" id="tbRoutingActionsPilot" style="margin-top:12px;" hidden>
+ <a class="btn primary" href="#intake">Submit pilot application</a>
+ <a class="btn secondary" href="/copilot/pilot/" data-rid-link>Pilot overview</a>
+ <a class="btn secondary" href="/copilot/demo/" data-rid-link>5-minute demo</a>
+ </div>
+ <div class="actions" id="tbRoutingActionsEcosystem" style="margin-top:12px;" hidden>
+ <a class="btn primary" href="#intake">Submit application</a>
+ <a class="btn secondary" href="/work-with-us/" data-rid-link>Program overview</a>
+ <a class="btn secondary" href="/msp/" data-rid-link>MSP lane</a>
  </div>
  </div>
  </div>
@@ -590,12 +539,16 @@
  </aside>
  </section>
 
- <section class="stickyCta" aria-label="Sticky CTA">
+ <section class="stickyCta" id="intakeStickyCta" aria-label="Sticky CTA">
  <div class="stickyInner">
- <div class="stickyText"><strong>Trust Brief intake</strong> — non-confidential. Confirm scope signals and route via engagement intake if needed.</div>
- <div class="actions" style="margin-top:0">
+ <div class="stickyText" id="tbStickyText"><strong>Trust Brief intake</strong> — non-confidential. Confirm scope signals and route via engagement intake if needed.</div>
+ <div class="actions" id="tbStickyActionsTrustBrief" style="margin-top:0">
  <a class="btn primary" href="#intake">Start intake</a>
- <a class="btn secondary" href="/gate/procurement/?focus=trust_brief" data-rid-link>Engagement artifact</a>
+ <a class="btn secondary" href="/gate/intake/?vector=trust-brief" data-rid-link>Engagement gateway</a>
+ </div>
+ <div class="actions" id="tbStickyActionsPilot" style="margin-top:0" hidden>
+ <a class="btn primary" href="#intake">Submit pilot application</a>
+ <a class="btn secondary" href="/copilot/demo/" data-rid-link>5-minute demo</a>
  </div>
  </div>
  </section>
@@ -608,7 +561,7 @@
  function ridNew(){
  var ts = Date.now().toString(36);
  var rnd = Math.random().toString(36).slice(2, 8);
- return ("NF-" + ts + "-" + rnd).toUpperCase();
+ return ("RID-" + ts + "-" + rnd).toUpperCase();
  }
  function ridGet(){
  try { return localStorage.getItem("nf_rid") || ""; } catch(e){ return ""; }
@@ -638,13 +591,31 @@
  }
  }
 
+ var INTAKE_EMAIL = (window.NOETFIELD_CANONICAL_INTAKE_EMAIL || "operations@noetfield.com");
+
+ function intakeVector(){
+ try{
+ var sp = new URLSearchParams(location.search);
+ if (sp.get("interest") === "design-partner") {
+  sp.set("interest", "pilot");
+  history.replaceState(null, "", location.pathname + "?" + sp.toString());
+ }
+ return (sp.get("vector") || sp.get("interest") || sp.get("source") || "trust-brief-intake").trim();
+ }catch(e){ return "trust-brief-intake"; }
+ }
+
  function mailto(to, subject, body){
+ if (window.noetfieldIntakeMailto) return window.noetfieldIntakeMailto(subject, body, intakeVector());
  function enc(s){ return encodeURIComponent(s || ""); }
- return "mailto:" + enc(to) + "?subject=" + enc(subject) + "&body=" + enc(body);
+ var v = intakeVector();
+ var subj = subject || "Noetfield — Intake";
+ if (v && subj.indexOf("[vector:") === -1) subj = "[vector:" + v + "] " + subj;
+ var fullBody = (body || "") + "\n\nSource vector: " + v + "\nAlert destination: " + INTAKE_EMAIL + "\n";
+ return "mailto:" + enc(INTAKE_EMAIL) + "?subject=" + enc(subj) + "&body=" + enc(fullBody);
  }
 
  function baseFromBand(band){
- if (band === "1-3") return { name:"TB — Base", price:12500, ucIncluded:3, teamsIncluded:1 };
+ if (band === "1-3") return { name:"TB — Base (Trust Brief $10,000)", price:10000, ucIncluded:3, teamsIncluded:1 };
  if (band === "4-8") return { name:"TB — Pro", price:18500, ucIncluded:8, teamsIncluded:3 };
  if (band === "9-15") return { name:"TB — Enterprise", price:27500, ucIncluded:15, teamsIncluded:4 };
  return { name:"TB — Enterprise (custom)", price:27500, ucIncluded:15, teamsIncluded:4, custom:true };
@@ -678,15 +649,18 @@
  if (pre) pre.value = tier || "";
  var tierSel = document.getElementById("tb_tier");
  if (tierSel && (tier === "base" || tier === "pro" || tier === "enterprise")) tierSel.value = tier;
- var vector = sp.get("vector") || "";
- if (vector === "investor-diligence") {
- var driver = document.getElementById("tb_driver");
- if (driver) driver.value = "investor-diligence";
- }
+ var vecEl = document.getElementById("tb_intake_vector");
+ if (vecEl) vecEl.value = intakeVector();
  }catch(e){}
  }
 
  function buildSummary(){
+ if (window.NFIntakePilot && window.NFIntakePilot.isPilotIntake()) {
+  return window.NFIntakePilot.buildPilotSummary({ rid: ridGet() || "—", intakeVector: intakeVector });
+ }
+ if (window.NFIntakeEcosystem && window.NFIntakeEcosystem.isEcosystemIntake()) {
+  return window.NFIntakeEcosystem.buildEcosystemSummary({ rid: ridGet() || "—", intakeVector: intakeVector });
+ }
  var rid = ridGet() || "—";
  var band = (document.getElementById("tb_usecases")||{}).value || "";
  var teamsSel = (document.getElementById("tb_teams")||{}).value || "";
@@ -702,7 +676,7 @@
  if (!band || !teamsSel || !risk || !evidence) return null;
 
  var base = baseFromBand(band);
- if (prefTier === "base") base = { name:"TB — Base", price:12500, ucIncluded:3, teamsIncluded:1 };
+ if (prefTier === "base") base = { name:"TB — Base (Trust Brief $10,000)", price:10000, ucIncluded:3, teamsIncluded:1 };
  if (prefTier === "pro") base = { name:"TB — Pro", price:18500, ucIncluded:8, teamsIncluded:3 };
  if (prefTier === "enterprise") base = { name:"TB — Enterprise", price:27500, ucIncluded:15, teamsIncluded:4 };
 
@@ -733,6 +707,8 @@
  "Tier direction: " + base.name + "\n" +
  "Inputs: Use cases " + band + ", Teams " + teamsSel + ", Risk " + risk + ", Evidence " + evidence + "\n" +
  "Typical fee guidance: " + fmtCAD(total) + "\n" +
+ "Source vector: " + intakeVector() + "\n" +
+ "Alert destination: " + INTAKE_EMAIL + "\n" +
  "Engagement intake path: " + (proc || "—") + "\n" +
  "Notes (high-level): " + (notes || "—") + "\n" +
  "Disclosure: Guidance only; final quote confirmed after kickoff. Public intake is non-confidential.\n";
@@ -746,23 +722,31 @@
  var lineOut = document.getElementById("tbLineOut");
  var emailProc = document.getElementById("tbEmailProc");
  var emailInstead = document.getElementById("tbEmailInstead");
+ var isPilot = window.NFIntakePilot && window.NFIntakePilot.isPilotIntake();
+ var isEco = window.NFIntakeEcosystem && window.NFIntakeEcosystem.isEcosystemIntake();
 
  var s = buildSummary();
  if (!s){
  if (tierOut) tierOut.textContent = "—";
  if (priceOut) priceOut.textContent = "—";
- if (lineOut) lineOut.textContent = "Select form inputs to populate tier direction.";
- if (emailProc) emailProc.href = "mailto:procurement@noetfield.com";
- if (emailInstead) emailInstead.href = "mailto:sales@noetfield.com";
+ if (lineOut) lineOut.textContent = isPilot
+  ? "Copilot Governance Pack · select pilot band to update fee guidance."
+  : isEco
+  ? "Work with Noetfield · complete your application."
+  : "Select form inputs to populate tier direction.";
+ if (emailProc) emailProc.href = mailto(INTAKE_EMAIL, isPilot ? "Noetfield — Copilot Governance Pack | Pilot intake" : "Noetfield — Trust Brief | Engagement intake", "");
+ if (emailInstead) emailInstead.href = mailto(INTAKE_EMAIL, isPilot ? "Noetfield — Copilot Governance Pack Intake" : "Noetfield — Trust Brief Intake", "");
  return;
  }
 
  if (tierOut) tierOut.textContent = s.tierName;
- if (priceOut) priceOut.textContent = fmtCAD(s.total);
+ if (priceOut) priceOut.textContent = s.priceLabel || fmtCAD(s.total);
  if (lineOut) lineOut.textContent = s.line;
 
- if (emailProc) emailProc.href = mailto("procurement@noetfield.com", "Noetfield — Trust Brief | Engagement intake / Invoice Request (" + s.rid + ")", s.body);
- if (emailInstead) emailInstead.href = mailto("sales@noetfield.com", "Noetfield — Trust Brief Intake (" + s.rid + ")", s.body);
+ var subj = isPilot ? "Noetfield — Copilot Governance Pack | Pilot intake (" + s.rid + ")" : "Noetfield — Trust Brief | Engagement intake (" + s.rid + ")";
+ var subjForm = isPilot ? "Noetfield — Copilot Governance Pack Intake (" + s.rid + ")" : "Noetfield — Trust Brief Intake (" + s.rid + ")";
+ if (emailProc) emailProc.href = mailto(INTAKE_EMAIL, subj, s.body);
+ if (emailInstead) emailInstead.href = mailto(INTAKE_EMAIL, subjForm, s.body);
 
  try { window.__tbSummary = s.body; } catch(e){}
  }
@@ -806,14 +790,22 @@
  }
 
  ridInit();
+ if (window.NFIntakePilot) window.NFIntakePilot.applyDomMode();
+ if (window.NFIntakeEcosystem) window.NFIntakeEcosystem.applyDomMode();
  prefill();
  applySummary();
 
- ["tb_usecases","tb_teams","tb_risk","tb_evidence","tb_tier","tb_proc","tb_driver","tb_start","tb_org","tb_notes"].forEach(function(id){
+ var debouncedApply;
+ function scheduleApplySummary(){
+  if (debouncedApply) clearTimeout(debouncedApply);
+  debouncedApply = setTimeout(applySummary, 120);
+ }
+
+ ["tb_usecases","tb_teams","tb_risk","tb_evidence","tb_tier","tb_proc","tb_driver","tb_start","tb_org","tb_notes","tb_pilot_band","tb_pilot_region","tb_name","tb_email","tb_role"].forEach(function(id){
  var el = document.getElementById(id);
  if (!el) return;
  el.addEventListener("change", applySummary);
- if (id === "tb_notes") el.addEventListener("input", function(){ /* quiet */ });
+ el.addEventListener("input", scheduleApplySummary);
  });
 
  document.querySelectorAll("[data-copy-rid]").forEach(function(btn){
@@ -822,29 +814,8 @@
  var copyBtn = document.getElementById("tbCopySummary");
  if (copyBtn) copyBtn.addEventListener("click", copySummary);
 
- var form = document.getElementById("tbIntakeForm");
- var okWrap = document.getElementById("tbOk");
- if (form && okWrap){
- form.addEventListener("submit", function(){
- try { okWrap.style.display = "block"; } catch(e){}
- });
- }
+ /* Submit handled by noetfield-intake-api.js (POST /api/intake) */
  })();
  </script>
-
- <!--
- CONFIG
- - Replace Formspree endpoint with Trust Brief-specific endpoint.
- - Optional: create /trust-brief/thanks/ and configure redirect.
-
- SMOKE TEST
- - GET /trust-brief/intake/ returns 200
- - /assets/noetfield-shell.css and /assets/noetfield-shell.js return 200
- - header/footer injected into #nfHeader/#nfFooter
- - RID persists (localStorage) and appears + hidden field
- - Tier rail updates as inputs change
- - Copy RID + Copy summary work
- - Mailto links include RID + summary
- -->
 </body>
 </html>

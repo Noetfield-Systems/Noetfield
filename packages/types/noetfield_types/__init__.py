@@ -1,5 +1,6 @@
 """Shared typed domain contracts for Noetfield v3.1."""
 
+from .db import coerce_jsonb_mapping
 from .domain import (
     Actor,
     ActorType,
@@ -17,6 +18,7 @@ from .domain import (
 )
 
 __all__ = [
+    "coerce_jsonb_mapping",
     "Actor",
     "ActorType",
     "AIDecision",

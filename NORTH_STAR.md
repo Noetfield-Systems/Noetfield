@@ -2,11 +2,11 @@
 
 **Status:** Production alignment constitution · **Supremacy:** GCIP v4 (L0) overrides all documents, code comments, marketing copy, and partner decks on conflict.
 
-**Visible law stack:** [docs/LAWS/CURRENT_STACK_v2026.md](docs/LAWS/CURRENT_STACK_v2026.md) · **Hub:** [docs/LAWS/README.md](docs/LAWS/README.md) · **Verify:** `make verify-law-stack`
+**Public product sentence (locked):** see [PRODUCT_TRUTH.md](PRODUCT_TRUTH.md). **Revenue tiers:** [OFFERINGS_LOCKED.md](OFFERINGS_LOCKED.md). **Strategic boundaries:** [STRATEGIC_LOCK.md](STRATEGIC_LOCK.md).
 
 ## What Noetfield is
 
-Noetfield is **pre-execution governance infrastructure** for institutional AI systems and regulated enterprise workflows.
+Noetfield is **Governance Execution & AI Policy Enforcement Infrastructure** for regulated organizations (pre-execution layer for institutional AI systems and enterprise workflows).
 
 It is a **coordination and instruction layer** that:
 
@@ -48,7 +48,7 @@ Only these three are **contractable** public offerings:
 2. **Copilot Readiness Pack** — enterprise AI compliance + policy alignment (M365 Copilot)  
 3. **Bank Pilot v6.1** — read-only visibility + governance overlay (no execution authority)
 
-See [OFFERINGS.md](OFFERINGS.md) for scope boundaries.
+See [OFFERINGS_LOCKED.md](OFFERINGS_LOCKED.md) for scope boundaries.
 
 ## Document hierarchy (L0 → L5)
 
@@ -70,9 +70,9 @@ See [OFFERINGS.md](OFFERINGS.md) for scope boundaries.
 | procurement (visible copy) | engagement intake |
 | invoice / PO | engagement artifact |
 | payment intent | *(remove)* |
-| card payment (Stripe) | commercial license (card) |
+| card payment (card checkout) | commercial license (card) |
 
-Stripe: **commercial software licensing / service subscription only**, with disclaimer that Noetfield performs no custody, payment routing, or money transmission.
+Card checkout: **commercial software licensing / service subscription only**, with disclaimer that Noetfield performs no custody, payment routing, or money transmission.
 
 **Domain:** `noetfield.com` = institutional only · `platform.noetfield.com` = demos/runtime.
 

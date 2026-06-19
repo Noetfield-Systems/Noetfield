@@ -1,0 +1,143 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Shell } from "@/components/Shell";
+import { DecisionBadge } from "@/components/DecisionBadge";
+import { LoadingBlock } from "@/components/LoadingBlock";
+import { PageHero } from "@/components/PageHero";
+import { AuditRecord, listAudit } from "@/lib/api";
+
+export default function AuditPage() {
+  const [q, setQ] = useState("");
+  const [rows, setRows] = useState<AuditRecord[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  async function load(search?: string) {
+    setLoading(true);
+    setError(null);
+    try {
+      setRows(await listAudit(search));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Failed to load audit log.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  return (
+    <Shell active="audit">
+      <PageHero
+        eyebrow="Compliance"
+        title="Audit log"
+        lead="RID-threaded compliance log for every governance evaluate — search by actor, action, or Request ID for audit and procurement review."
+      />
+
+      <p className="mb-6 text-sm">
+        <Link href="/audit/timeline" className="text-accent hover:underline">
+          Decision timeline →
+        </Link>
+      </p>
+
+      <div
+        className="nf-card mb-8 flex flex-wrap items-center justify-between gap-4 border border-accent/30 bg-accent/5 p-6"
+        role="region"
+        aria-label="Audit export bundle"
+      >
+        <div>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted">Diligence export</p>
+          <p className="mt-1 text-sm text-muted">
+            Download JSON bundle for engagement intake — includes{" "}
+            <strong>{loading ? "…" : rows.length}</strong> event{rows.length === 1 ? "" : "s"} in
+            current view (tenant: pilot default).
+          </p>
+          <p className="mt-1 text-xs text-muted-2">
+            Board packs use TLE export from{" "}
+            <Link href="/workspace" className="text-accent hover:underline">
+              Workspace
+            </Link>
+            .
+          </p>
+        </div>
+        <a href="/audit/export" className="nf-btn-primary shrink-0" download>
+          Export bundle (JSON)
+        </a>
+      </div>
+
+      <form
+        className="nf-card mb-8 flex flex-wrap gap-3 p-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          load(q);
+        }}
+      >
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search by RID, actor, or action…"
+          className="nf-input min-w-[240px] flex-1"
+          aria-label="Search audit log"
+        />
+        <button type="submit" className="nf-btn-primary">
+          Search
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setQ("");
+            load();
+          }}
+          className="nf-btn-secondary"
+        >
+          Reset
+        </button>
+      </form>
+
+      {error && (
+        <p
+          className="mb-4 rounded-lg border border-red-900/80 bg-red-950/40 px-4 py-3 text-sm text-red-200"
+          role="alert"
+        >
+          {error}
+        </p>
+      )}
+
+      {loading && <LoadingBlock label="Loading audit records…" />}
+
+      {!loading && rows.length === 0 && (
+        <div className="nf-card p-8 text-center">
+          <p className="text-muted">No evaluations yet.</p>
+          <Link href="/evaluate" className="mt-3 inline-block text-sm text-accent hover:underline">
+            Submit your first intent →
+          </Link>
+        </div>
+      )}
+
+      <ul className="space-y-3">
+        {rows.map((row) => (
+          <li key={row.rid}>
+            <Link href={`/result/${encodeURIComponent(row.rid)}`} className="nf-card-hover block p-5">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <code className="font-mono text-sm text-accent">{row.rid}</code>
+                <DecisionBadge decision={row.decision} />
+              </div>
+              <p className="mt-3 text-sm text-muted">
+                {row.actor}
+                <span className="text-muted-2"> · </span>
+                {row.action}
+              </p>
+              <p className="mt-1 text-xs text-muted-2">
+                Risk {row.risk_score} · {new Date(row.timestamp).toLocaleString()}
+              </p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Shell>
+  );
+}

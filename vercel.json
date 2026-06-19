@@ -1,0 +1,33 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": null,
+  "rewrites": [
+    {
+      "source": "/api/public/chat",
+      "destination": "https://platform.noetfield.com/api/public/chat"
+    },
+    {
+      "source": "/api/ecosystem/public",
+      "destination": "https://platform.noetfield.com/api/ecosystem/public"
+    }
+  ],
+  "redirects": [
+    { "source": "/docs/ops/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/docs/ops", "destination": "/404", "statusCode": 404 },
+    { "source": "/.cursor/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/os/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/reports/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/scripts/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/services/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/governance-console/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/docs/references/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/docs/spec/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/docs/SOURCE_OF_TRUTH/:path*", "destination": "/404", "statusCode": 404 },
+    { "source": "/docs/LOCAL_DEV.md", "destination": "/404", "statusCode": 404 },
+    { "source": "/docs/ROADMAP.md", "destination": "/404", "statusCode": 404 },
+    { "source": "/docs/LEGAL.md", "destination": "/404", "statusCode": 404 },
+    { "source": "/docs/MARKET_ENTRY_30_DAY.md", "destination": "/404", "statusCode": 404 }
+  ]
+}

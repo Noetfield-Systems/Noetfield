@@ -1,139 +1,60 @@
-<!-- /assets/partials/header.html — v5.0 (institutional Canada 2026) -->
-<div class="instTopbar" role="region" aria-label="Institutional notice">
- <div class="instTopbarInner">
- <div class="instTopbarLeft">
- <span class="instCaBadge" aria-label="Canada">
- <svg class="instMaple" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
- <path fill="currentColor" d="M12 2l1.2 3.6h3.8l-3.1 2.2 1.2 3.6L12 9.2 8.9 11.4l1.2-3.6-3.1-2.2h3.8L12 2zm-7.4 8.2l2.8 2-1 3.2 2.8-2 2.8 2-1-3.2 2.8-2h-3.5l-1.1-3.4-1.1 3.4H4.6zm14.8 0h-3.5l-1.1-3.4-1.1 3.4h-3.5l2.8 2-1 3.2 2.8-2 2.8 2-1-3.2 2.8-2zM12 14.8l-2.2 3.2h4.4L12 14.8z"/>
- </svg>
- Canada
- </span>
- <span class="instTopbarText">Noetfield Systems Inc. · Vancouver, BC</span>
- <span class="instTopbarSep" aria-hidden="true">·</span>
- <span class="instTopbarText">Governance infrastructure · Non-custodial · PIPEDA-aligned intake</span>
- </div>
- <div class="instTopbarRight" aria-label="Utility links">
- <a href="/status/" data-rid-link class="instTopbarLink statusLink"><span class="statusDot" aria-hidden="true"></span>Status</a>
- <a href="/privacy/" class="instTopbarLink">Privacy</a>
- <a href="/contact/" data-rid-link class="instTopbarLink">Contact</a>
- </div>
- </div>
-</div>
-
-<div class="instHeaderShell">
- <div class="nav" role="navigation" aria-label="Noetfield global navigation">
+<!-- Public navigation — www v22 pilot-first -->
+<div class="nav" role="navigation" aria-label="Noetfield navigation">
  <a class="brand" href="/" aria-label="Noetfield home">
- <img class="brandMark" src="/noetfield-favicon-512.png" alt="Noetfield mark" />
- <div class="brandText">
- <div class="name">Noetfield</div>
- <div class="tag">Copilot governance · Trust Ledger · Canada</div>
- </div>
+ <span class="brandMark" aria-hidden="true">
+ <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <rect x="2" y="2" width="6" height="6" rx="1.5" fill="#c8a349"/>
+ <rect x="10" y="2" width="6" height="6" rx="1.5" fill="rgba(255,255,255,0.22)"/>
+ <rect x="2" y="10" width="6" height="6" rx="1.5" fill="rgba(255,255,255,0.14)"/>
+ <rect x="10" y="10" width="6" height="6" rx="1.5" fill="rgba(200,163,73,0.55)"/>
+ </svg>
+ </span>
+ <span class="brandText"><span class="name">Noetfield</span></span>
  </a>
 
  <nav class="menu" aria-label="Primary navigation">
- <div class="menuPrimary" aria-label="Products and reference">
- <div class="navGroup" aria-label="Products">
- <span class="navGroupLabel">Products</span>
- <div class="navGroupLinks">
- <a href="/trust-ledger/">Trust Ledger</a>
- <a href="/trust-brief/">Trust Brief</a>
+ <div class="menuPrimary">
  <a href="/copilot/">Copilot</a>
+ <a href="/copilot/pilot/">Pilot</a>
+ <a href="/trust/">Trust</a>
+ <a href="/pricing/">Pricing</a>
+ <a href="/federal/">Federal</a>
+ <a href="/msp/">MSP</a>
+ <a href="/work-with-us/">Work with us</a>
+ <a href="/investors/diligence/">Investors</a>
+ <a href="/next/">Next steps</a>
  </div>
- </div>
- <div class="navGroup" aria-label="Reference">
- <span class="navGroupLabel">Reference</span>
- <div class="navGroupLinks">
- <a href="/playbook/">Playbook</a>
- <a href="/for-whom/">For Whom</a>
- </div>
- </div>
- <div class="navGroup" aria-label="Try">
- <span class="navGroupLabel">Try</span>
- <div class="navGroupLinks">
- <a href="/copilot/demo/" data-rid-link>Demo</a>
- <a href="/copilot/trial/" data-rid-link>Trial</a>
- </div>
- </div>
- <div class="navGroup" aria-label="Programs">
- <span class="navGroupLabel">Programs</span>
- <div class="navGroupLinks">
- <a href="/gate/" data-rid-link>Gate</a>
- <a href="/gate/procurement/" data-rid-link>Procurement</a>
- <a href="/gate/diligence/" data-rid-link>Diligence</a>
- </div>
- </div>
- </div>
-
- <div class="menuActions" aria-label="Account actions">
- <a class="pilltab cta" href="/gate/sales/" data-rid-link aria-label="Start at Sales">Start</a>
- <a class="login" href="/portal/login/" data-rid-link>Login</a>
+ <div class="menuActions">
+ <a class="nav-link" href="/copilot/demo/">Demo</a>
+ <a class="nav-link" href="/start/">Sandbox</a>
+ <a class="nav-cta" href="/trust-brief/intake/?interest=pilot&amp;vector=copilot-governance">Pilot · $2k–10k</a>
  </div>
  </nav>
 
- <button
- class="burger"
- id="burger"
- type="button"
- aria-label="Open menu"
- aria-expanded="false"
- aria-controls="mobilePanel"
- >
- <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+ <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
+ <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="24" height="24">
  <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
  </svg>
  </button>
- </div>
+</div>
 
- <div class="mobilePanel" id="mobilePanel" hidden>
+<div class="mobilePanel" id="mobilePanel" hidden>
  <div class="mobileInner">
- <div class="mobileIntro">
- <span class="instCaBadge"><svg class="instMaple" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l1.2 3.6h3.8l-3.1 2.2 1.2 3.6L12 9.2 8.9 11.4l1.2-3.6-3.1-2.2h3.8L12 2z"/></svg>Canada</span>
- <span>Vancouver, BC · Regulated institutions · Non-custodial</span>
- </div>
- <a class="mobileCTA" href="/gate/sales/" data-rid-link>Start at Sales</a>
-
- <div class="mobileSection">
- <div class="mobileSectionLabel">Products</div>
  <div class="mobileGrid">
- <a href="/trust-ledger/">Trust Ledger</a>
- <a href="/trust-brief/">Trust Brief</a>
+ <a class="mobileCTA" href="/trust-brief/intake/?interest=pilot&amp;vector=copilot-governance">Apply for pilot ($2k–10k)</a>
+ <a class="mobileCTA" href="/start/">Start free sandbox</a>
+ <a href="/copilot/pilot/">Copilot Governance Pack</a>
  <a href="/copilot/">Copilot</a>
- </div>
- </div>
-
- <div class="mobileSection">
- <div class="mobileSectionLabel">Reference</div>
- <div class="mobileGrid">
- <a href="/playbook/">Playbook</a>
- <a href="/for-whom/">For Whom</a>
- </div>
- </div>
-
- <div class="mobileSection">
- <div class="mobileSectionLabel">Try</div>
- <div class="mobileGrid">
- <a href="/copilot/demo/" data-rid-link>5-min demo</a>
- <a href="/copilot/trial/" data-rid-link>Free trial</a>
- </div>
- </div>
-
- <div class="mobileSection">
- <div class="mobileSectionLabel">Programs</div>
- <div class="mobileGrid">
- <a href="/gate/" data-rid-link>Gate</a>
- <a href="/gate/procurement/" data-rid-link>Procurement</a>
- <a href="/gate/diligence/" data-rid-link>Investor diligence</a>
- </div>
- </div>
-
- <div class="mobileSection">
- <div class="mobileSectionLabel">Account</div>
- <div class="mobileGrid">
- <a class="statusLink" href="/status/" data-rid-link><span class="statusDot" aria-hidden="true"></span>Status</a>
- <a href="/portal/login/" data-rid-link>Login</a>
- <a href="/contact/" data-rid-link>Contact</a>
- </div>
- </div>
+ <a href="/trust/">Trust center</a>
+ <a href="/pricing/">Pricing</a>
+ <a href="/copilot/demo/">5-minute demo</a>
+ <a href="/federal/">Federal</a>
+ <a href="/msp/">MSP partners</a>
+ <a href="/work-with-us/">Work with us</a>
+ <a href="/investors/diligence/">Diligence vault</a>
+ <a href="/trust-brief/intake/" data-rid-link>Trust Brief intake</a>
+ <a href="/enterprise/">Enterprise</a>
+ <a href="/copilot/procurement/">Procurement pack</a>
  </div>
  </div>
 </div>

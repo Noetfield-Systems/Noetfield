@@ -1,6 +1,21 @@
 .DS_Store
 .env
 .env.*
+.dev-cognitive-dashboard.env
+.platform-console.pid
+.platform-console.log
+.www-dev.pid
+.www-dev.log
+.dev-proxy.pid
+.dev-proxy.log
+.dev-redirect.pid
+.dev-redirect.log
+.dev-tunnel.pid
+.dev-tunnel.log
+.dev-tunnel-url.txt
+.local-dev-urls.txt
+.cognitive-dashboard.log
+.cognitive-dashboard.pid
 !.env.example
 
 __pycache__/
@@ -23,3 +38,11 @@ coverage/
 
 tmp/
 logs/
+
+# Founder/agent internal tracking (not public — see ops/README.md)
+ops/private/
+
+# Confidential internal docs — [AUTO] index; agents read on disk only; never commit or quote publicly
+docs/internal/
+.dev-tunnel-url.txt.tmp
+.vercel

@@ -1,30 +1,22 @@
-/* /assets/noetfield-shell.css — v2.6 (institutional Canada header 2026) */
+/* /assets/noetfield-shell.css — v3.0 (institutional shell; tokens in noetfield-tokens.css) */
 /* Noetfield Shell (Header + Mobile Nav + Footer) */
-/* Version: locked-2026.06+institutional-ca-header */
 
-@import url('./pages/institutional-2026.css');
-
+/* Fallback tokens if tokens.css omitted on a legacy page */
 :root{
   --bg0:#07070b; --bg1:#0b0b14;
   --panel: rgba(255,255,255,.055);
   --panel2: rgba(255,255,255,.038);
-
   --text:#eff0f7; --muted:#b9bbcf; --muted2:#8e91ad;
   --line: rgba(255,255,255,.11);
-
   --gold:#c8a349;
   --ok:#2de38a; --okGlow: rgba(45,227,138,.18);
-  --ca-red:#e63946;
-  --ca-red-dim: rgba(230,57,70,.14);
-  --ca-maple: #ff6b6b;
-
-  --radius:18px; --max:1180px;
+  --radius:18px; --max:1140px;
   --shadow: 0 28px 80px rgba(0,0,0,.62);
   --shadow2: 0 14px 50px rgba(0,0,0,.50);
-  --focus: 0 0 0 4px rgba(200,163,73,.18);
-
+  --focus: 0 0 0 4px rgba(200,163,73,.22);
   --navH: 72px;
-  --topbarH: 34px;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Inter", ui-sans-serif, system-ui, sans-serif;
   color-scheme: dark;
 }
 
@@ -32,7 +24,7 @@
 html,body{height:100%}
 body{
   margin:0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family: var(--font-sans);
   color: var(--text);
   background: linear-gradient(180deg, var(--bg0), var(--bg1));
   overflow-x:hidden;
@@ -138,87 +130,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   filter: brightness(1.06);
 }
 
-/* ===== Header (SCOPED to #nfHeader) — Institutional Canada ===== */
+/* ===== Header (SCOPED to #nfHeader) ===== */
 #nfHeader{
   position:sticky;
   top:0;
   z-index:60;
-}
-
-/* Canada institutional top ribbon */
-#nfHeader .instTopbar{
-  border-bottom:1px solid rgba(255,255,255,.08);
-  background:
-    linear-gradient(90deg, rgba(230,57,70,.08) 0%, rgba(255,255,255,.02) 18%, rgba(255,255,255,.02) 82%, rgba(230,57,70,.06) 100%),
-    rgba(6,6,10,.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-#nfHeader .instTopbarInner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:7px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  min-height:var(--topbarH);
-  font-size:11.5px;
-  color:var(--muted2);
-}
-#nfHeader .instTopbarLeft{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  flex-wrap:wrap;
-  min-width:0;
-}
-#nfHeader .instTopbarRight{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  flex-shrink:0;
-}
-#nfHeader .instTopbarSep{ opacity:.45; }
-#nfHeader .instTopbarText{ white-space:nowrap; }
-#nfHeader .instTopbarLink{
-  color:var(--muted);
-  padding:4px 8px;
-  border-radius:8px;
-  border:1px solid transparent;
-  font-size:11.5px;
-  transition: color .15s ease, background .15s ease, border-color .15s ease;
-}
-#nfHeader .instTopbarLink:hover{
-  color:var(--text);
-  border-color:rgba(255,255,255,.1);
-  background:rgba(255,255,255,.04);
-}
-#nfHeader .instCaBadge{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  padding:3px 9px 3px 7px;
-  border-radius:999px;
-  border:1px solid rgba(230,57,70,.35);
-  background:var(--ca-red-dim);
-  color:#ffb4ba;
-  font-size:10px;
-  font-weight:850;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  flex-shrink:0;
-}
-#nfHeader .instMaple{
-  width:11px;
-  height:11px;
-  opacity:.95;
-}
-
-#nfHeader .instHeaderShell{
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background: rgba(8,8,12,.72);
+  background: rgba(8,8,12,.62);
   border-bottom: 1px solid rgba(255,255,255,.10);
 }
 
@@ -262,45 +181,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   display:inline-flex;
   align-items:center;
   gap:8px;
-  padding:6px 10px;
+  padding:7px 10px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.12);
   background: rgba(255,255,255,.03);
-  font-size:10px;
+  font-size:10.5px;
   color:var(--muted2);
-  margin-top:5px;
-  letter-spacing:.18em;
+  margin-top:6px;
+  letter-spacing:.28em;
   text-transform:uppercase;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  max-width:340px;
+  max-width:320px;
   opacity:.95;
-}
-
-/* Grouped institutional nav */
-#nfHeader .navGroup{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:0 4px;
-  border-right:1px solid rgba(255,255,255,.08);
-}
-#nfHeader .navGroup:last-child{ border-right:0; }
-#nfHeader .navGroupLabel{
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:var(--muted2);
-  opacity:.75;
-  padding:0 4px;
-  white-space:nowrap;
-}
-#nfHeader .navGroupLinks{
-  display:flex;
-  align-items:center;
-  gap:4px;
 }
 
 /* Menu */
@@ -324,15 +218,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   flex:1 1 auto;
   justify-content:center;
   overflow:hidden;
-  gap:2px;
 }
 #nfHeader .menuActions{
   flex:0 0 auto;
   justify-content:flex-end;
 }
 
-#nfHeader .menu a,
-#nfHeader .navGroupLinks a{
+#nfHeader .menu a{
   color:var(--muted);
   padding:8px 10px;
   border-radius:14px;
@@ -343,24 +235,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-size:12.75px;
   line-height:1;
 }
-#nfHeader .menu a:hover,
-#nfHeader .navGroupLinks a:hover{
+#nfHeader .menu a:hover{
   color:var(--text);
   border-color:rgba(255,255,255,.10);
   background:rgba(255,255,255,.045);
 }
-#nfHeader .menu a:active,
-#nfHeader .navGroupLinks a:active{transform: translateY(1px)}
+#nfHeader .menu a:active{transform: translateY(1px)}
 
 #nfHeader .menu a.active,
-#nfHeader .menu a[aria-current="page"],
-#nfHeader .navGroupLinks a.active,
-#nfHeader .navGroupLinks a[aria-current="page"]{
+#nfHeader .menu a[aria-current="page"]{
   color:var(--text);
   border-color:rgba(200,163,73,.38);
   background:
     radial-gradient(240px 90px at 50% 0%, rgba(255,255,255,.10), transparent 60%),
     linear-gradient(180deg, rgba(200,163,73,.22), rgba(200,163,73,.10));
+  box-shadow: inset 0 -2px 0 rgba(200,163,73,.55);
 }
 
 #nfHeader .menu a.pilltab{
@@ -429,41 +318,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Mobile panel */
 #nfHeader .mobilePanel{
   border-top:1px solid rgba(255,255,255,.10);
-  background: rgba(8,8,12,.88);
+  background: rgba(8,8,12,.74);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
-#nfHeader .mobileInner{max-width:var(--max); margin:0 auto; padding:12px 14px 18px;}
-#nfHeader .mobileIntro{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:8px;
-  margin-bottom:12px;
-  padding:10px 12px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.08);
-  background:rgba(255,255,255,.03);
-  color:var(--muted2);
-  font-size:12px;
-  line-height:1.5;
-}
-#nfHeader .mobileSection{ margin-top:12px; }
-#nfHeader .mobileSectionLabel{
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--muted2);
-  margin:0 0 8px 4px;
-}
+#nfHeader .mobileInner{max-width:var(--max); margin:0 auto; padding:12px 14px 16px;}
 #nfHeader .mobileGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
 }
-#nfHeader .mobileGrid a,
-#nfHeader a.mobileCTA{
+#nfHeader .mobileGrid a{
   padding:12px 12px;
   border-radius:16px;
   border:1px solid rgba(255,255,255,.12);
@@ -475,17 +340,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   align-items:center;
   justify-content:center;
   text-align:center;
-}
-#nfHeader a.mobileCTA{
-  display:flex;
-  width:100%;
-  margin-bottom:4px;
-  border:1px solid rgba(200,163,73,.62);
-  background:
-    radial-gradient(260px 100px at 35% 0%, rgba(255,255,255,.12), transparent 62%),
-    linear-gradient(180deg, rgba(200,163,73,.24), rgba(200,163,73,.11));
-  color: var(--text);
-  font-weight:900;
 }
 #nfHeader .mobileGrid a:hover{
   color:var(--text);
@@ -510,10 +364,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-weight:900;
 }
 
-/* DESKTOP: boxed institutional header */
+/* DESKTOP: boxed header */
 @media (min-width: 981px){
   #nfHeader{
-    padding: 10px 16px 0;
+    padding: 12px 16px 0;
     background: transparent !important;
     border: 0 !important;
     box-shadow: none !important;
@@ -521,41 +375,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     -webkit-backdrop-filter: none !important;
   }
 
-  #nfHeader .instHeaderShell{
-    width: min(1220px, calc(100% - 32px));
+  #nfHeader .nav{
+    width: min(1200px, calc(100% - 32px));
     margin: 0 auto;
     border-radius: 18px;
     border: 1px solid rgba(255,255,255,.11);
-    background: rgba(10,10,16,.58);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10,10,16,.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: var(--shadow2);
-    overflow: hidden;
-  }
-
-  #nfHeader .instTopbar{
-    border-radius: 18px 18px 0 0;
-    border-bottom:1px solid rgba(255,255,255,.08);
-  }
-
-  #nfHeader .instTopbarInner{
-    max-width:none;
-    padding:7px 18px;
-  }
-
-  #nfHeader .nav{
-    width:100%;
-    max-width:none;
-    margin:0;
-    border-radius:0;
-    border:0;
-    background:transparent;
-    box-shadow:none;
-    backdrop-filter:none;
   }
 
   #nfHeader .mobilePanel{
-    width: min(1220px, calc(100% - 32px));
+    width: min(1200px, calc(100% - 32px));
     margin: 8px auto 0;
     border-radius: 18px;
     overflow:hidden;
@@ -589,6 +421,7 @@ footer{
 }
 
 .footBrand{display:flex; align-items:center; gap:10px; color:var(--muted)}
+.footBrand span{font-weight:850; color:var(--text)}
 .footBrand img{
   width:28px; height:28px; border-radius:10px;
   border:1px solid rgba(255,255,255,.12);
@@ -613,6 +446,19 @@ footer{
   transition: background .15s ease, border-color .15s ease, color .15s ease;
   display:flex; align-items:center;
 }
+.fLinks .nfLinkBtn{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:0;
+  border:0;
+  background:transparent;
+  font:inherit;
+  color:inherit;
+  cursor:pointer;
+  text-decoration:none;
+}
+.fLinks .nfLinkBtn:hover{text-decoration:underline;}
 .fLinks a:hover{
   color:var(--text);
   border-color:rgba(255,255,255,.16);
@@ -755,15 +601,9 @@ footer{
 body.navOpen{ overflow:hidden; }
 
 /* Responsive locks */
-@media (max-width: 1240px){
-  #nfHeader .navGroupLabel{ display:none; }
-  #nfHeader .navGroup{ border-right:0; padding:0; }
-}
 @media (max-width: 1140px){
   #nfHeader .menu{display:none}
   #nfHeader .burger{display:flex}
-  #nfHeader .instTopbarText{ display:none; }
-  #nfHeader .instTopbarSep{ display:none; }
 }
 @media (max-width: 980px){
   .footerTop{grid-template-columns:1fr 1fr;}
@@ -779,6 +619,58 @@ body.navOpen{ overflow:hidden; }
 }
 @media (max-width: 420px){
   #nfHeader .mobileGrid{grid-template-columns:1fr}
+}
+
+/* ===== Institutional offerings strip (injected) ===== */
+.nfOfferStrip{
+  border-bottom:1px solid rgba(200,163,73,.22);
+  background: linear-gradient(180deg, rgba(200,163,73,.08), rgba(200,163,73,.02));
+}
+.nfOfferStripInner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:10px 16px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 14px;
+  font-size:12px;
+}
+.nfOfferStripLabel{
+  color:var(--muted2);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:700;
+  margin-right:4px;
+}
+.nfOfferStrip a{
+  color:var(--text);
+  text-decoration:none;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid transparent;
+}
+.nfOfferStrip a:hover{
+  border-color:rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04);
+}
+.nfOfferStripSep{
+  width:1px;
+  height:16px;
+  background:rgba(255,255,255,.12);
+  margin:0 4px;
+}
+.nfOfferStripCta{
+  border:1px solid rgba(200,163,73,.55) !important;
+  background:rgba(200,163,73,.12) !important;
+  font-weight:750;
+}
+.nfOfferStripMuted{
+  color:var(--muted2) !important;
+  margin-left:auto;
+}
+@media (max-width:640px){
+  .nfOfferStripMuted{margin-left:0; width:100%;}
 }
 
 /* Reduced motion */

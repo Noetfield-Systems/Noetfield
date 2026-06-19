@@ -1,0 +1,153 @@
+# Noetfield agent memory — LOCKED (versioned in git)
+# Read at EVERY session start. Bump version when adding lessons.
+
+version: 12
+updated: "2026-06-13T18:00:00Z"
+updated_by: NF-CLOUD-AGENT
+
+packaging_v16:
+  master_plan: docs/WWW_V16_PACKAGING_PLAN_LOCKED_v1.md
+  inbox_routing: docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md
+  start_url: /start/
+  pricing_url: /pricing/
+  sandbox_limits: "14-day trial · 50 evaluate calls · mock M365 · no sales call"
+  contract_skus: 3
+  free_tier: "Developer access — not a fourth contract SKU"
+  agentic_public: "Investigate → triage → draft TLE → act on low-risk; human approvers on high-risk"
+  verify: "make verify-ui-e2e && make verify-static-www"
+
+tier1_ui_v18:
+  masterplan: docs/WWW_V18_TIER1_UI_MASTERPLAN_LOCKED_v1.md
+  north_star: "TTFR < 90s — landing to real RID + confidence + export orientation"
+  build_waves: "A Live Proof + Trial OS · B Shell + Receipt Studio · C Design system + Agent deck · D Visual QA"
+  pick_ids: UI-01 through UI-10
+
+doc_navigation:
+  hub: docs/README.md
+  unified_index: docs/DOC_UNIFIED_INDEX_LOCKED_v1.md
+  domain_index: os/LOCKED_REFERENCE_INDEX.md
+  cursor_layer: .cursor/README.md
+  pick_next: docs/ops/plans/no-asf/QUICK_PICK.md
+  active_ship: os/SHIP_NOW.md
+  verify: make verify-doc-ssot
+
+company_scope:
+  our_company: Noetfield
+  our_domains:
+    - noetfield.com
+    - www.noetfield.com
+  our_repo: kazemnezhadsina144-dot/Noetfield
+  never_touch:
+    - TrustField Technologies
+    - trustfield.ca
+    - TrustField repo / TF-* work
+    - VIRLUX / VL-*
+
+founder_lock: "Your job is Noetfield only. Any other repo, site, or company is prohibited."
+
+hard_rules:
+  - id: R-001
+    rule: NOETFIELD ONLY. Any other repo, site, or company is prohibited — including TrustField, trustfield.ca, VIRLUX, and all non-Noetfield workspaces.
+    incident: INCIDENT-2026-06-06-001
+    since: "2026-06-06"
+    reaffirmed: "2026-06-06"
+  - id: R-002
+    rule: NEVER commit ops/private/ or docs/internal/.
+    since: "2026-05-29"
+  - id: R-003
+    rule: Noetfield never touches payments, custody, settlement, or present-tense PSP/MSB claims.
+    source: PRODUCT_TRUTH.md
+  - id: R-004
+    rule: Internal research docs are context only — not an implementation mandate for other companies.
+    incident: INCIDENT-2026-06-06-001
+    since: "2026-06-06"
+  - id: R-005
+    rule: Run ./scripts/verify-agent-scope.sh before every commit.
+    since: "2026-06-06"
+  - id: R-006
+    rule: Tag + date header ONLY on docs this agent writes. Never add headers to other people's docs.
+    source: docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md
+    since: "2026-06-06"
+  - id: R-007
+    rule: NO disk edits (write, delete, commit, push, PR) without explicit founder permission and bounded task order.
+    incident: INCIDENT-2026-06-06-002
+    since: "2026-06-06"
+  - id: R-008
+    rule: ALWAYS ask for next move, clarification, and suggested implementation before acting. Default advise-only.
+    incident: INCIDENT-2026-06-06-005
+    since: "2026-06-06"
+  - id: R-009
+    rule: If mandatory SourceA handoff file is not on disk, BLOCK — do not pseudo-ACK; ask founder to sync or paste.
+    incident: INCIDENT-2026-06-06-003
+    since: "2026-06-06"
+  - id: R-010
+    rule: On rule conflict, run SKILL-007 before edits. Precedence — founder order > R-001–R-011 > incidents > execution_authority false > workflow bundles > ship-first/plan.json.
+    since: "2026-06-06"
+  - id: R-011
+    rule: Cursor AUTO-RUN is not P0. Commercial outreach and calls = agentic layer only; founder Hub + ASK. NF-CLOUD = validators + www/GTM assets — never send email/call as founder.
+    source: docs/ops/FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md
+    since: "2026-06-10"
+
+recurring_mistakes:
+  - id: M-001
+    pattern: Treating TrustField / trustfield.ca as in-scope for cloud agent
+    occurrences: 3
+    last_seen: "2026-06-06"
+    corrective_action: Scope gate SKILL-001 + verify-agent-scope.sh + decline reply
+  - id: M-002
+    pattern: Planning UPG/vendor-pack/pricing for TrustField from Noetfield workspace
+    occurrences: 2
+    last_seen: "2026-06-06"
+    corrective_action: Redirect to Noetfield-only tasks; never offer TrustField www work
+  - id: M-003
+    pattern: Editing disk without founder permission or ask-first step
+    occurrences: 2
+    last_seen: "2026-06-06"
+    corrective_action: SKILL-006 + R-007 + noetfield-ask-before-edit.mdc
+  - id: M-004
+    pattern: ACK of SourceA/Brain law without file on disk
+    occurrences: 1
+    last_seen: "2026-06-06"
+    corrective_action: R-009 block + extend sync-sourceA-desktop.sh (founder)
+
+lessons:
+  - id: L-001
+    lesson: User has stated multiple times — TrustField is NOT our job. Apologize once, fix rules, do not repeat.
+    incident: INCIDENT-2026-06-06-001
+  - id: L-002
+    lesson: Fintech 50 research in docs/internal/ informs patterns for Noetfield Tier D only (audit export UX) — not TrustField GTM.
+    incident: INCIDENT-2026-06-06-001
+  - id: L-003
+    lesson: Cloud agent has no persistent chat memory — git-tracked MEMORY_LOCKED.yaml + incidents are the memory.
+    since: "2026-06-06"
+  - id: L-004
+    lesson: IMPLEMENT is not blanket permission — confirm bounded task and file scope unless founder names the bundle.
+    incident: INCIDENT-2026-06-06-002
+    since: "2026-06-06"
+  - id: L-005
+    lesson: Open PRs and backlog items are not "done" — session end must list open items and ASK founder next move.
+    incident: INCIDENT-2026-06-06-004
+    since: "2026-06-06"
+  - id: L-006
+    lesson: Incidents 002–005 closed 2026-06-06 after controls on main — law remains active via R-007/R-008/R-010; closure does not relax ask-first.
+    since: "2026-06-06"
+
+pre_commit_checklist:
+  - Read MEMORY_LOCKED.yaml if not read this session
+  - Founder permission received for this edit scope (R-007)
+  - ASK step completed this session (R-008)
+  - ./scripts/verify-agent-scope.sh
+  - Confirm diff is Noetfield-only
+  - No trustfield.ca / TF-* / UPG TrustField strings in tracked files
+
+session_start_checklist:
+  - Read MEMORY_LOCKED.yaml
+  - Read docs/DOC_UNIFIED_INDEX_LOCKED_v1.md (navigation SSOT)
+  - Read docs/WWW_V16_PACKAGING_PLAN_LOCKED_v1.md when touching www/GTM/commercial copy
+  - Read incidents/REGISTRY.md open items
+  - Read PROJECT_BOUNDARIES_LOCKED.md
+  - Apply SKILL-007 if any rule conflict detected
+  - Apply SKILL-006 ask-before-implement
+  - Apply SKILL-001 scope gate (after permission only)
+  - Apply SKILL-008 agentic commercial boundary
+  - Read FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md

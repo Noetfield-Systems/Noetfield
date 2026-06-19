@@ -11,9 +11,9 @@
 
 ## Archived tooling (do not wire to Noetfield runtime)
 
-- **n8n** — workflow automation experiments (archived)
-- **Ollama** — local model dev only in docker-compose; not production authority
-- **PAIOS** — separate personal AI OS lineage; PAIOS-only reference
+- **n8n** — archived workflow experiments (no runtime wiring)
+- **Ollama** — local dev inference only in `docker-compose`; not production authority · blueprint: [docs/strategy/local-ollama-agent-runtime-blueprint.md](../docs/strategy/local-ollama-agent-runtime-blueprint.md)
+- **PAIOS** — `reference-products/` only; must not drive `services/governance` or Golden Edge v3
 
 ## Supremacy
 

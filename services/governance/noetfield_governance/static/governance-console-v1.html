@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noetfield — Governance Evaluation Interface</title>
+  <link rel="icon" href="https://www.noetfield.com/noetfield-favicon-512.png" type="image/png" />
+  <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
+  <link rel="stylesheet" href="/assets/noetfield-console.css" />
+</head>
+<body class="nf-console">
+  <div class="nf-console-banner" role="status">
+    <strong>Shadow mode:</strong> evaluations are policy-only — Noetfield does not execute payments or hold custody (Bank Pilot / MSB / exchange).
+    Documented API: <code>POST /api/v1/governance/evaluate</code>
+  </div>
+
+  <div class="nf-pilot-auth" id="pilotAuthPanel">
+    <label for="pilotKeyInput">Pilot API key (optional in dev)</label>
+    <input type="password" id="pilotKeyInput" autocomplete="off" placeholder="Bearer token for production pilots" aria-describedby="pilotKeyHint" />
+    <p class="nf-pilot-hint" id="pilotKeyHint">Stored in session only. Required when <code>GOVERNANCE_PILOT_AUTH_REQUIRED=true</code>. See <a class="nf-link" href="https://www.noetfield.com/docs/api/">Governance API</a>.</p>
+  </div>
+
+  <header class="nf-console-head">
+    <h1>Governance Evaluation Interface</h1>
+    <p class="nf-console-sub">Submit operational intent for governance evaluation. View the decision, RID lineage, and compliance log. For authorized evaluations only.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1 — Submit intent</h2>
+      <p class="hint">Describe the action under review (structured scenario). Uses v1 evaluate API when available.</p>
+      <div class="row rid-row">
+        <span class="label">Request ID (RID)</span>
+        <input type="text" id="ridInput" placeholder="RID-… (auto-generated if empty)" aria-label="Request ID" />
+        <div class="rid-actions">
+          <button type="button" class="secondary" id="copyRidBtn">Copy RID</button>
+          <button type="button" class="secondary" id="newRidBtn">New RID</button>
+        </div>
+      </div>
+      <p class="hint">Presets:
+        <button type="button" class="secondary" data-preset="bank">Bank</button>
+        <button type="button" class="secondary" data-preset="exchange">Exchange</button>
+        <button type="button" class="secondary" data-preset="msb">MSB</button>
+        <button type="button" class="secondary" data-preset="copilot">Copilot</button>
+      </p>
+      <textarea id="intentInput" spellcheck="false" aria-label="Intent under review"></textarea>
+      <button type="button" id="submitIntentBtn">Submit Intent</button>
+      <p class="err" id="submitError" hidden></p>
+    </section>
+
+    <section>
+      <h2>2 — Decision</h2>
+      <div id="decisionEmpty" class="nf-console-sub">Submit an intent to see the governance decision.</div>
+      <div id="decisionBody" hidden>
+        <div class="decision" id="decisionLabel"></div>
+        <div class="row">
+          <span class="label">Policy rule</span>
+          <span class="value" id="policyRule"></span>
+        </div>
+        <div class="row">
+          <span class="label">Decision reason</span>
+          <span class="value" id="decisionReason"></span>
+        </div>
+        <div class="row">
+          <span class="label">Policy references</span>
+          <ul class="policy-list" id="policyRefs"></ul>
+        </div>
+        <div class="row">
+          <span class="label">Request ID</span>
+          <span class="value" id="ridDisplay">—</span>
+        </div>
+        <button type="button" class="secondary" id="viewLogBtn">View Decision + Compliance Log</button>
+        <button type="button" class="secondary" id="exportAuditBtn">Copy audit export URL</button>
+        <a class="nf-link" id="openAuditLink" href="#" target="_blank" rel="noopener" hidden>Open audit export</a>
+      </div>
+    </section>
+
+    <section class="full">
+      <h2>Compliance log</h2>
+      <p class="hint">Immutable record of governance evaluations for this scenario.</p>
+      <p class="err" id="logError" hidden></p>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Event</th>
+              <th>Subject</th>
+              <th>Owner</th>
+              <th>Record</th>
+            </tr>
+          </thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var PILOT_KEY_STORAGE = "noetfield_governance_pilot_api_key";
+      var evaluatePath = "/api/v1/governance/evaluate";
+      var logPath = "/api/v1/governance/ledger";
+      var exportPath = "/api/v1/governance/audit-export";
+      var lastRid = null;
+      var lastDecision = null;
+      var intentInput = document.getElementById("intentInput");
+      var pilotKeyInput = document.getElementById("pilotKeyInput");
+
+      var defaultScenario = {
+        tenant_id: "00000000-0000-4000-8000-000000000001",
+        organization_id: "00000000-0000-4000-8000-000000000002",
+        action: "publish_board_report",
+        resource_type: "governance_artifact",
+        resource_id: "evaluation-demo-1",
+        actor_id: "governance-console",
+        confidence: 0.9,
+        payload: { source: "governance-evaluation-interface" },
+        mode: "shadow"
+      };
+      intentInput.value = JSON.stringify(defaultScenario, null, 2);
+
+      function loadPilotKey() {
+        try {
+          var saved = sessionStorage.getItem(PILOT_KEY_STORAGE);
+          if (saved) pilotKeyInput.value = saved;
+        } catch (e) { /* private mode */ }
+      }
+
+      function savePilotKey() {
+        try {
+          var v = pilotKeyInput.value.trim();
+          if (v) sessionStorage.setItem(PILOT_KEY_STORAGE, v);
+          else sessionStorage.removeItem(PILOT_KEY_STORAGE);
+        } catch (e) { /* private mode */ }
+      }
+
+      pilotKeyInput.addEventListener("change", savePilotKey);
+      pilotKeyInput.addEventListener("blur", savePilotKey);
+      loadPilotKey();
+
+      function authHeaders(extra) {
+        var headers = extra || { "Content-Type": "application/json" };
+        var key = pilotKeyInput.value.trim();
+        if (key) headers.Authorization = "Bearer " + key;
+        return headers;
+      }
+
+      function generateRid() {
+        var ts = Date.now().toString(36).toUpperCase();
+        var rand = Math.random().toString(36).slice(2, 8).toUpperCase();
+        return "RID-" + ts + "-" + rand;
+      }
+
+      function auditExportUrl(rid) {
+        var url = new URL(window.location.origin + exportPath);
+        url.searchParams.set("request_id", rid);
+        url.searchParams.set("limit", "500");
+        return url.toString();
+      }
+
+      function displayLabel(decision) {
+        if (decision === "PROCEED") return { cls: "ALLOW", text: "ALLOWED" };
+        if (decision === "REJECT") return { cls: "REJECT", text: "NOT ALLOWED" };
+        return { cls: "REVIEW", text: "REQUIRES REVIEW" };
+      }
+
+      function renderPolicyRefs(refs) {
+        var ul = document.getElementById("policyRefs");
+        ul.innerHTML = "";
+        if (!refs || !refs.length) {
+          ul.innerHTML = "<li>None recorded</li>";
+          return;
+        }
+        refs.forEach(function (ref) {
+          var li = document.createElement("li");
+          li.textContent = typeof ref === "string" ? ref : JSON.stringify(ref);
+          ul.appendChild(li);
+        });
+      }
+
+      function showDecision(data) {
+        lastDecision = data;
+        lastRid = data.request_id || lastRid;
+        if (lastRid) {
+          document.getElementById("ridDisplay").textContent = lastRid;
+          document.getElementById("ridInput").value = lastRid;
+          var openLink = document.getElementById("openAuditLink");
+          openLink.href = auditExportUrl(lastRid);
+          openLink.hidden = false;
+        }
+        document.getElementById("decisionEmpty").hidden = true;
+        document.getElementById("decisionBody").hidden = false;
+        var label = displayLabel(data.decision);
+        var el = document.getElementById("decisionLabel");
+        el.textContent = label.text;
+        el.className = "decision " + label.cls;
+        document.getElementById("policyRule").textContent = data.reason_code || "—";
+        document.getElementById("decisionReason").textContent = data.reason || "—";
+        renderPolicyRefs(data.policy_refs);
+      }
+
+      async function loadComplianceLog() {
+        var errEl = document.getElementById("logError");
+        var body = document.getElementById("logBody");
+        errEl.hidden = true;
+        body.innerHTML = "";
+        try {
+          var scenario = JSON.parse(intentInput.value);
+          var url = new URL(window.location.origin + logPath);
+          if (scenario.tenant_id) url.searchParams.set("tenant_id", scenario.tenant_id);
+          url.searchParams.set("limit", "100");
+          var res = await fetch(url, { headers: authHeaders({}) });
+          if (res.status === 401) throw new Error("Pilot API key required. Enter your Bearer token above.");
+          if (!res.ok) throw new Error("Compliance log is unavailable.");
+          var data = await res.json();
+          var entries = data.entries || [];
+          if (!entries.length) {
+            body.innerHTML = "<tr><td colspan=\"5\" style=\"color:var(--muted)\">No log entries yet.</td></tr>";
+            return;
+          }
+          entries.forEach(function (e) {
+            var tr = document.createElement("tr");
+            var subject = (e.resource_type || "item") + " · " + (e.resource_id || "");
+            var owner = (e.actor_type || "system") + " / " + (e.actor_id || "");
+            var seal = e.integrity_hash ? String(e.integrity_hash).slice(0, 12) + "…" : "—";
+            tr.innerHTML =
+              "<td>" + (e.occurred_at || "") + "</td>" +
+              "<td>" + (e.action || "").replace(/_/g, " ") + "</td>" +
+              "<td>" + subject + "</td>" +
+              "<td>" + owner + "</td>" +
+              "<td>" + seal + "</td>";
+            body.appendChild(tr);
+          });
+        } catch (e) {
+          errEl.textContent = e instanceof SyntaxError ? "Scenario format is invalid." : String(e);
+          errEl.hidden = false;
+        }
+      }
+
+      async function submitIntent() {
+        var errEl = document.getElementById("submitError");
+        var btn = document.getElementById("submitIntentBtn");
+        errEl.hidden = true;
+        btn.disabled = true;
+        savePilotKey();
+        try {
+          var body = JSON.parse(intentInput.value);
+          var ridField = document.getElementById("ridInput").value.trim();
+          if (ridField) body.request_id = ridField;
+          body.mode = body.mode || "shadow";
+          var res = await fetch(window.location.origin + evaluatePath, {
+            method: "POST",
+            headers: authHeaders({ "Content-Type": "application/json" }),
+            body: JSON.stringify(body)
+          });
+          var text = await res.text();
+          if (!res.ok) {
+            if (res.status === 401) {
+              throw new Error("Pilot API key required. Enter your Bearer token in the field above.");
+            }
+            if (res.status === 429) {
+              throw new Error("Rate limit exceeded. Wait a minute or contact operations@noetfield.com.");
+            }
+            var detail = text;
+            try { detail = JSON.parse(text).detail || text; } catch (ignore) {}
+            throw new Error(typeof detail === "string" ? detail : "Evaluation could not be completed.");
+          }
+          showDecision(JSON.parse(text));
+          await loadComplianceLog();
+        } catch (e) {
+          errEl.textContent = e instanceof SyntaxError ? "Scenario format is invalid." : String(e);
+          errEl.hidden = false;
+        } finally {
+          btn.disabled = false;
+        }
+      }
+
+      async function viewDecisionAndLog() {
+        if (lastDecision) showDecision(lastDecision);
+        await loadComplianceLog();
+        document.getElementById("decisionBody").hidden = false;
+        document.getElementById("decisionEmpty").hidden = true;
+      }
+
+      document.getElementById("exportAuditBtn").addEventListener("click", function () {
+        if (!lastRid) {
+          alert("Submit an evaluation first to obtain a RID.");
+          return;
+        }
+        var url = auditExportUrl(lastRid);
+        navigator.clipboard.writeText(url).catch(function () {
+          prompt("Audit export URL:", url);
+        });
+      });
+
+      document.getElementById("copyRidBtn").addEventListener("click", function () {
+        var rid = document.getElementById("ridInput").value.trim() || lastRid;
+        if (!rid) {
+          rid = generateRid();
+          document.getElementById("ridInput").value = rid;
+        }
+        navigator.clipboard.writeText(rid).catch(function () {
+          prompt("RID:", rid);
+        });
+      });
+
+      document.getElementById("newRidBtn").addEventListener("click", function () {
+        document.getElementById("ridInput").value = generateRid();
+      });
+
+      async function loadPreset(name) {
+        try {
+          var res = await fetch(window.location.origin + "/api/v1/governance/scenario-presets/" + name, {
+            headers: authHeaders({})
+          });
+          if (!res.ok) throw new Error("Preset unavailable");
+          intentInput.value = JSON.stringify(await res.json(), null, 2);
+        } catch (e) {
+          alert("Could not load preset: " + name);
+        }
+      }
+
+      document.querySelectorAll("[data-preset]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          loadPreset(btn.getAttribute("data-preset"));
+        });
+      });
+
+      document.getElementById("submitIntentBtn").addEventListener("click", submitIntent);
+      document.getElementById("viewLogBtn").addEventListener("click", viewDecisionAndLog);
+    })();
+  </script>
+</body>
+</html>
