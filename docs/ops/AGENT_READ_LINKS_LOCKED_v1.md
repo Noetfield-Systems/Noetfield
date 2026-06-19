@@ -27,8 +27,10 @@
 ### Read order
 
 1. This file — § Cloud ship (below)
-2. [AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](./AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md) — memory, incidents, scope gate
-3. [.cursor/agent-memory/MEMORY_LOCKED.yaml](../../.cursor/agent-memory/MEMORY_LOCKED.yaml) — includes **R-011** agentic commercial law
+2. [governance/OPS_LIVE_STATUS_LOCKED.json](../../governance/OPS_LIVE_STATUS_LOCKED.json) — **founder ops truth (read before build, R-013)**
+3. [OPS_WITNESS_AUDIT_LOCKED_v1.md](./OPS_WITNESS_AUDIT_LOCKED_v1.md) — audit-before-build protocol
+4. [AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](./AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md) — memory, incidents, scope gate
+5. [.cursor/agent-memory/MEMORY_LOCKED.yaml](../../.cursor/agent-memory/MEMORY_LOCKED.yaml) — includes **R-011** agentic commercial law · **R-013** witness
 4. [FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md](./FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md) — no AUTO-RUN; outreach = agentic
 5. [AGENTIC_COMMERCIAL_HANDOFF_v1.md](./AGENTIC_COMMERCIAL_HANDOFF_v1.md) — NF-CLOUD vs Hub split
 6. [NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md](./NOETFIELD_AGENT_TEAM_SYNC_LOCKED_v1.md) — local↔cloud bridge
@@ -58,6 +60,7 @@
 | Agentic handoff | [AGENTIC_COMMERCIAL_HANDOFF_v1.md](./AGENTIC_COMMERCIAL_HANDOFF_v1.md) |
 | SourceA sync status | [SOURCEA_MANDATORY_SYNC_STATUS_v1.md](./SOURCEA_MANDATORY_SYNC_STATUS_v1.md) |
 | Agent memory | [.cursor/agent-memory/MEMORY_LOCKED.yaml](../../.cursor/agent-memory/MEMORY_LOCKED.yaml) |
+| **Ops live status** | [governance/OPS_LIVE_STATUS_LOCKED.json](../../governance/OPS_LIVE_STATUS_LOCKED.json) |
 | Incidents | [.cursor/incidents/REGISTRY.md](../../.cursor/incidents/REGISTRY.md) |
 | Sprint backlog | [docs/spec/SPRINT_BACKLOG_WEEKS_0-8.md](../spec/SPRINT_BACKLOG_WEEKS_0-8.md) |
 | Lane A map | [lane_a_sprint_map.md](./lane_a_sprint_map.md) |
@@ -72,6 +75,8 @@
 | `./scripts/verify-local-dev.sh` | Dev stack / unified proxy `:13080` |
 | `NF_REQUIRE_SOURCEA=1 ./scripts/verify-agent-scope.sh` | Optional — enforce SourceA mirror on founder Mac sync |
 | `./scripts/tle-smoke.sh` | TLE examples + schema sanity |
+| `./scripts/witness-session-start.sh` | **Every session start (R-013)** |
+| `make verify-ops-live` | OPS witness SSOT anti-drift |
 | `./scripts/verify-ui-build-checklist.sh` | **Mandatory before any UI/www/form edit** |
 | `make verify-freemium-policy` | Sandbox v2 observe/enforce gate |
 

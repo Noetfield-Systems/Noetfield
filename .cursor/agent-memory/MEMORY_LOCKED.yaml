@@ -1,8 +1,8 @@
 # Noetfield agent memory — LOCKED (versioned in git)
 # Read at EVERY session start. Bump version when adding lessons.
 
-version: 13
-updated: "2026-06-03T12:00:00Z"
+version: 14
+updated: "2026-06-03T18:00:00Z"
 updated_by: NF-CLOUD-AGENT
 
 packaging_v16:
@@ -31,6 +31,8 @@ doc_navigation:
   cursor_layer: .cursor/README.md
   pick_next: docs/ops/plans/no-asf/QUICK_PICK.md
   active_ship: os/SHIP_NOW.md
+  ops_live_status: governance/OPS_LIVE_STATUS_LOCKED.json
+  witness_audit: docs/ops/OPS_WITNESS_AUDIT_LOCKED_v1.md
   verify: make verify-doc-ssot
 
 company_scope:
@@ -93,6 +95,10 @@ hard_rules:
     rule: BEFORE any UI/form/www/app edit — read docs/ops/UI_BUILD_CHECKLIST_LOCKED_v1.md and run make verify-ui-build-checklist. No invitation/calendar CTAs on public surfaces; self-serve sandbox + async intake only.
     source: docs/ops/UI_BUILD_CHECKLIST_LOCKED_v1.md
     since: "2026-06-03"
+  - id: R-013
+    rule: BEFORE any plan/build — read governance/OPS_LIVE_STATUS_LOCKED.json and run ./scripts/witness-session-start.sh. Founder ops on disk beats chat. Do not treat form Resend as inbox-pending when Google Workspace inbox is live. Email form auto-notify is deferred post-factory per founder order — document fallbacks, do not block factory work.
+    source: docs/ops/OPS_WITNESS_AUDIT_LOCKED_v1.md
+    since: "2026-06-03"
 
 recurring_mistakes:
   - id: M-001
@@ -115,6 +121,11 @@ recurring_mistakes:
     occurrences: 1
     last_seen: "2026-06-06"
     corrective_action: R-009 block + extend sync-sourceA-desktop.sh (founder)
+  - id: M-005
+    pattern: Building/planning before reading OPS_LIVE_STATUS — stale www copy treated as truth; founder chat updates ignored
+    occurrences: 2
+    last_seen: "2026-06-03"
+    corrective_action: SKILL-010 + R-013 + witness-session-start.sh + make verify-ops-live
 
 lessons:
   - id: L-001
@@ -137,6 +148,9 @@ lessons:
   - id: L-006
     lesson: Incidents 002–005 closed 2026-06-06 after controls on main — law remains active via R-007/R-008/R-010; closure does not relax ask-first.
     since: "2026-06-06"
+  - id: L-007
+    lesson: Founder ops updates (Workspace inbox live, Stripe live, email form deferred) must land in governance/OPS_LIVE_STATUS_LOCKED.json same session — chat alone does not reach the next agent or TrustField.
+    since: "2026-06-03"
 
 pre_commit_checklist:
   - Read MEMORY_LOCKED.yaml if not read this session
@@ -149,6 +163,8 @@ pre_commit_checklist:
   - No trustfield.ca / TF-* / UPG TrustField strings in tracked files
 
 session_start_checklist:
+  - Read governance/OPS_LIVE_STATUS_LOCKED.json (R-013 witness)
+  - Run ./scripts/witness-session-start.sh
   - Read MEMORY_LOCKED.yaml
   - Read docs/DOC_UNIFIED_INDEX_LOCKED_v1.md (navigation SSOT)
   - Read docs/ops/UI_BUILD_CHECKLIST_LOCKED_v1.md before ANY UI/form/www work (R-012)
@@ -158,5 +174,6 @@ session_start_checklist:
   - Apply SKILL-007 if any rule conflict detected
   - Apply SKILL-006 ask-before-implement
   - Apply SKILL-001 scope gate (after permission only)
+  - Apply SKILL-010 witness before build (R-013)
   - Apply SKILL-008 agentic commercial boundary
   - Read FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md

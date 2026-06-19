@@ -11,10 +11,12 @@
 
 ## 1. Inbox principles
 
-1. **Self-serve first** — sandbox users do not need a thread unless they hit limits or request production keys.
-2. **RID on every human thread** — footer `data-rid` or evaluate `rid` when escalating.
-3. **No sales call for sandbox** — agentic layer may nurture; founder Hub approves outbound only (R-011).
-4. **Three contract SKUs** — intake vectors map to Trust Brief · Copilot Pack · Bank Pilot — never invent a fourth product line.
+1. **Google Workspace inbox is live** — `operations@noetfield.com` receives direct email today (2026-06-03). Reply-from-inbox works.
+2. **Form auto-notify deferred post-factory** — `RESEND_API_KEY` on Vercel www wires every form → inbox + auto-ack. Intentionally after factory build wave. Until then: `mailto:` fallbacks + direct email.
+3. **Self-serve first** — sandbox users do not need a thread unless they hit limits or request production keys.
+3. **RID on every human thread** — footer `data-rid` or evaluate `rid` when escalating.
+4. **No sales call for sandbox** — agentic layer may nurture; founder Hub approves outbound only (R-011).
+5. **Three contract SKUs** — intake vectors map to Trust Brief · Copilot Pack · Bank Pilot — never invent a fourth product line.
 
 ---
 
@@ -72,6 +74,7 @@ Ask: [upgrade | Trust Brief | Bank Pilot | federal | MSP]
 
 ## 6. Verify
 
+- `make verify-ops-live` — OPS witness SSOT (R-013)
 - Public pages link to `operations@noetfield.com` only for **contract** paths
 - `/start/` does not require email to operations@ — local session only
 - `make verify-ui-e2e` — start · pricing · api sandbox CTAs green

@@ -1,0 +1,69 @@
+{
+  "status_version": "2026.06.03",
+  "updated": "2026-06-03T18:00:00Z",
+  "updated_by": "NF-CLOUD-AGENT",
+  "rule": "Founder ops truth on disk beats chat, branch assumptions, and stale www copy. Agents MUST read this file before building.",
+  "witness_order": [
+    "governance/OPS_LIVE_STATUS_LOCKED.json",
+    ".cursor/agent-memory/MEMORY_LOCKED.yaml",
+    "docs/ops/AGENT_READ_LINKS_LOCKED_v1.md",
+    "os/SHIP_NOW.md",
+    "os/plan.json next_tasks (open items only)",
+    "curl /api/intake/health + /gate/sales/ (production when reachable)"
+  ],
+  "layers": {
+    "google_workspace_inbox": {
+      "id": "ops-inbox-workspace",
+      "status": "live",
+      "address": "operations@noetfield.com",
+      "meaning": "Direct email + Reply-from-Gmail/Outlook works. This is NOT the same as form auto-notify.",
+      "verified_by": "founder 2026-06-03"
+    },
+    "form_delivery_resend": {
+      "id": "ops-form-delivery",
+      "status": "deferred_post_factory",
+      "meaning": "RESEND_API_KEY on Vercel www — auto-notify inbox on every form submit + auto-ack. Intentionally after factory build wave.",
+      "production_health_field": "www_email_configured",
+      "production_last_seen": "false (2026-06-03)",
+      "fallback": "mailto: on intake forms + direct email to operations@"
+    },
+    "stripe_commercial_licensing": {
+      "id": "ops-stripe-checkout",
+      "status": "live",
+      "hub": "/gate/sales/",
+      "catalog": "governance/STRIPE_CATALOG.json",
+      "mode": "live",
+      "account_id": "acct_1SfSseJ03eJkL57J",
+      "payment_links": 2,
+      "note": "Commercial licensing only — not payment execution/custody"
+    },
+    "platform_factories": {
+      "id": "ops-factories",
+      "status": "in_progress",
+      "catalog": "governance/FACTORY_CATALOG.json",
+      "priority": "Build factories before wiring form delivery (founder order 2026-06-03)"
+    }
+  },
+  "founder_orders_active": [
+    {
+      "id": "FO-001",
+      "order": "Audit everything and update before building new features",
+      "since": "2026-06-03"
+    },
+    {
+      "id": "FO-002",
+      "order": "Email form sending deferred until after factory build — inbox is live via Google Workspace",
+      "since": "2026-06-03"
+    }
+  ],
+  "stale_sources_do_not_trust": [
+    "Chat-only founder updates (not yet written to this file)",
+    "status/next copy that predates OPS_LIVE_STATUS_LOCKED.json",
+    "Branch-local work (stripe-gtm-setup, sandbox-v2) not merged to deploy branch",
+    "ops/private/sourceA/ when mirror missing on cloud VM"
+  ],
+  "trustfield_boundary": {
+    "note": "TrustField / trustfield.ca is a separate company (R-001). This file does NOT sync to TrustField agents automatically.",
+    "bridge": "Founder must sync SourceA SEMI_NOTICE or paste into TrustField repo separately"
+  }
+}

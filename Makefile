@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack verify-gtm verify-no-vendor-names verify-static-www verify-www verify-investor-lane verify-commercial-agentic verify-law-stack sync-derived-docs verify-factory-copilot verify-factory-catalog verify-factory-trust-brief verify-factory-legal verify-factory-aml verify-freemium-policy verify-ui-build-checklist verify-stripe-catalog
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack verify-gtm verify-no-vendor-names verify-static-www verify-www verify-investor-lane verify-commercial-agentic verify-law-stack sync-derived-docs verify-factory-copilot verify-factory-catalog verify-factory-trust-brief verify-factory-legal verify-factory-aml verify-freemium-policy verify-ui-build-checklist verify-stripe-catalog verify-ops-live witness-session-start
 
 PYTHONPATH_VALUE := packages/types:packages/config:packages/sdk:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance:services/factories:services/trust-brief:services/legal-review:services/aml-trace
 
@@ -101,7 +101,7 @@ verify-static-www:
 	@chmod +x scripts/verify-static-www.sh
 	./scripts/verify-static-www.sh
 
-verify-www: verify-no-vendor-names verify-ui-build-checklist verify-stripe-catalog verify-static-www
+verify-www: verify-no-vendor-names verify-ops-live verify-ui-build-checklist verify-stripe-catalog verify-static-www
 	@python3 scripts/rebuild-www-v6.py
 	@$(MAKE) verify-static-www
 
@@ -401,3 +401,11 @@ verify-ui-build-checklist:
 verify-stripe-catalog:
 	chmod +x ./scripts/verify-stripe-catalog.sh
 	./scripts/verify-stripe-catalog.sh
+
+verify-ops-live:
+	chmod +x ./scripts/verify-ops-live.sh
+	./scripts/verify-ops-live.sh
+
+witness-session-start:
+	chmod +x ./scripts/witness-session-start.sh
+	./scripts/witness-session-start.sh

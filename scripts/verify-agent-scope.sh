@@ -26,7 +26,10 @@ for f in \
   .cursor/incidents/REGISTRY.md \
   .cursor/skills/SKILL-001-scope-gate-before-work.md \
   .cursor/skills/SKILL-008-agentic-commercial-boundary.md \
-  .cursor/skills/SKILL-009-ui-build-checklist-mandatory.md; do
+  .cursor/skills/SKILL-009-ui-build-checklist-mandatory.md \
+  .cursor/skills/SKILL-010-witness-before-build.md \
+  governance/OPS_LIVE_STATUS_LOCKED.json \
+  docs/ops/OPS_WITNESS_AUDIT_LOCKED_v1.md; do
   if [[ -f "$f" ]]; then
     echo "OK   exists $f"
   else
@@ -53,6 +56,20 @@ if grep -q 'R-012' .cursor/agent-memory/MEMORY_LOCKED.yaml 2>/dev/null; then
   echo "OK   R-012 UI build checklist law locked"
 else
   echo "FAIL MEMORY_LOCKED.yaml missing R-012" >&2
+  fail=1
+fi
+
+if grep -q 'R-013' .cursor/agent-memory/MEMORY_LOCKED.yaml 2>/dev/null; then
+  echo "OK   R-013 ops witness law locked"
+else
+  echo "FAIL MEMORY_LOCKED.yaml missing R-013" >&2
+  fail=1
+fi
+
+if [[ -f governance/OPS_LIVE_STATUS_LOCKED.json ]]; then
+  echo "OK   OPS_LIVE_STATUS_LOCKED.json present"
+else
+  echo "FAIL missing governance/OPS_LIVE_STATUS_LOCKED.json" >&2
   fail=1
 fi
 
