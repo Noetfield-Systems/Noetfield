@@ -2,6 +2,7 @@
 
 | ID | Date | Severity | Status | Title |
 |----|------|----------|--------|-------|
+| [INCIDENT-2026-06-03-006](./INCIDENT-2026-06-03-006-ops-staleness.md) | 2026-06-03 | **P1** | **closed** | Ops staleness — built before witness; OPS_LIVE + R-013 shipped |
 | [INCIDENT-2026-06-06-005](./INCIDENT-2026-06-06-005-always-ask-next-move.md) | 2026-06-06 | **P0** | **closed** | Founder law — always ask next move before action |
 | [INCIDENT-2026-06-06-002](./INCIDENT-2026-06-06-002-unauthorized-disk-edits.md) | 2026-06-06 | **P1** | **closed** | Unauthorized disk edits without founder permission |
 | [INCIDENT-2026-06-06-003](./INCIDENT-2026-06-06-003-mandatory-sourcea-not-read.md) | 2026-06-06 | **P2** | **closed** | Mandatory SourceA files not read — partial ACK |
