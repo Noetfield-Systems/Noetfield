@@ -48,6 +48,7 @@ bash ~/Desktop/1\ PAGER/portfolio-300-locked/scripts/verify-portfolio-300-phase1
 
 ## Cross-refs
 
-- [NF_LIVING_SYSTEM_CHARTER_DRAFT_v3.md](./NF_LIVING_SYSTEM_CHARTER_DRAFT_v3.md) — **internal agents only** (Mac + cloud) · not www · agent sync law on cloud main before lock
+- [NF_LIVING_SYSTEM_CHARTER_LOCKED_INTERNAL_v1.md](./NF_LIVING_SYSTEM_CHARTER_LOCKED_INTERNAL_v1.md) — **locked internal** · Mac + cloud agents · **not public www**
+- [archive/](./archive/) — v1/v2 superseded sources (lineage only)
 - [NF_FACTORY_ROUND_16_PREP_LOCKED_v1.md](../ops/NF_FACTORY_ROUND_16_PREP_LOCKED_v1.md)
 - [PORTFOLIO_300_PHASE16_10_STEP_LOCKED_v1.md](file:///Users/sinakazemnezhad/Desktop/1%20PAGER/PORTFOLIO_300_PHASE16_10_STEP_LOCKED_v1.md)

@@ -77,12 +77,20 @@ check_file "registry nf-1000 sources" os/plan-library/noetfield-1000/REGISTRY.js
 check_file "platform entity split index" docs/platform/NF_PLATFORM_ENTITY_SPLIT_INDEX_v1.md \
   'pf-0266' 'pf-0275' 'PL-P1' 'separate_brand_law'
 
-check_file "living system charter v3" docs/platform/NF_LIVING_SYSTEM_CHARTER_DRAFT_v3.md \
-  'status: draft' 'visibility: internal-agent-only' 'not_www: true' \
-  'Agent sync law (internal only)' '260/300' 'never public www'
+check_file "living system charter locked internal" docs/platform/NF_LIVING_SYSTEM_CHARTER_LOCKED_INTERNAL_v1.md \
+  'status: locked-internal' 'visibility: internal-agent-only' 'not_www: true' \
+  'public_www: false' 'Agent sync law (internal only)' '260/300' 'never public www'
+
+check_file "charter archive sources" docs/platform/archive/README.md \
+  'NF_ENTITY_INDEPENDENCE_AND_LONG_RUN_DRAFT_v1.md' 'NF_ENTITY_INDEPENDENCE_AND_LONG_RUN_DRAFT_v2.md' \
+  'NF_LIVING_SYSTEM_CHARTER_LOCKED_INTERNAL_v1.md'
+
+check_file "charter v3 redirect" docs/platform/NF_LIVING_SYSTEM_CHARTER_DRAFT_v3.md \
+  'NF_LIVING_SYSTEM_CHARTER_LOCKED_INTERNAL_v1.md' 'superseded'
 
 check_file "ops live witness" governance/OPS_LIVE_STATUS_LOCKED.json \
-  'internal-agent-only' 'living_system_charter_v3' 'agent_surfaces' 'portfolio 260/300 done'
+  'internal-agent-only' 'living_system_charter' 'charter_status' 'locked-internal' \
+  'agent_surfaces' 'portfolio 260/300 done'
 
 if [[ -f ops/private/agent-reference/README.md ]]; then
   ok "private agent-reference README"

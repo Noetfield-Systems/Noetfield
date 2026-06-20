@@ -1,7 +1,7 @@
 {
-  "status_version": "2026.06.20.agent-sync",
-  "updated": "2026-06-20T01:19:08Z",
-  "updated_by": "NF-LOCAL-REPO-AGENT",
+  "status_version": "2026.06.20.charter-lock-internal",
+  "updated": "2026-06-20T12:00:00Z",
+  "updated_by": "NF-CLOUD-AGENT",
   "rule": "Founder ops truth on disk beats chat, branch assumptions, and stale www copy. Agents MUST read this file before building.",
   "visibility": "internal-agent-only",
   "not_www": true,
@@ -29,10 +29,14 @@
     "sync_law": "Both agents read this file on git main — not www"
   },
   "internal_agent_docs": {
-    "living_system_charter_v3": "docs/platform/NF_LIVING_SYSTEM_CHARTER_DRAFT_v3.md",
+    "living_system_charter": "docs/platform/NF_LIVING_SYSTEM_CHARTER_LOCKED_INTERNAL_v1.md",
+    "living_system_charter_archive": "docs/platform/archive/",
+    "living_system_charter_redirect": "docs/platform/NF_LIVING_SYSTEM_CHARTER_DRAFT_v3.md",
     "live_status": "reports/agent-auto/LIVE-STATUS.md",
     "routing_card": "ROUTING_CARD.md"
   },
+  "charter_status": "locked-internal",
+  "charter_public_www": false,
   "charter_present": true,
   "layers": {
     "google_workspace_inbox": {
