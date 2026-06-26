@@ -248,10 +248,14 @@ done
 
 [[ -f vercel.json ]] && grep -qF 'docs/ops' vercel.json && ok "vercel.json blocks docs/ops" || bad "vercel.json missing docs/ops block"
 [[ -f vercel.json ]] && grep -qF 'docs/platform' vercel.json && ok "vercel.json blocks docs/platform" || bad "vercel.json missing docs/platform block"
-[[ -f vercel.json ]] && grep -qF 'governance/' vercel.json && ok "vercel.json blocks governance" || bad "vercel.json missing governance block"
+[[ -f vercel.json ]] && grep -qF 'OPS_LIVE_STATUS_LOCKED.json' vercel.json && ok "vercel.json blocks OPS_LIVE" || bad "vercel.json missing OPS_LIVE block"
+[[ -f vercel.json ]] && grep -qF 'OFFERINGS_LOCKED.md' vercel.json && ok "vercel.json blocks OFFERINGS_LOCKED" || bad "vercel.json missing OFFERINGS_LOCKED block"
+[[ -f vercel.json ]] && ! grep -qF '"/governance"' vercel.json && ok "vercel.json keeps public /governance page" || bad "vercel.json must not 404 the public governance hub"
 [[ -f .vercelignore ]] && grep -qF 'docs/ops/' .vercelignore && ok "vercelignore excludes docs/ops" || bad "vercelignore missing docs/ops"
 [[ -f .vercelignore ]] && grep -qF 'docs/platform/' .vercelignore && ok "vercelignore excludes docs/platform" || bad "vercelignore missing docs/platform"
-[[ -f .vercelignore ]] && grep -qF 'governance/' .vercelignore && ok "vercelignore excludes governance" || bad "vercelignore missing governance"
+[[ -f .vercelignore ]] && grep -qF 'governance/*.json' .vercelignore && ok "vercelignore excludes governance json" || bad "vercelignore missing governance json"
+[[ -f .vercelignore ]] && grep -qF 'OFFERINGS_LOCKED.md' .vercelignore && ok "vercelignore excludes OFFERINGS_LOCKED" || bad "vercelignore missing OFFERINGS_LOCKED"
+[[ -f governance/index.html ]] && ok "public governance hub html present" || bad "missing governance/index.html"
 [[ -f .vercelignore ]] && grep -qF 'docs/mockups/' .vercelignore && ok "vercelignore excludes docs/mockups" || bad "vercelignore missing docs/mockups"
 
 # Truth mockups — ban invented product copy on public www

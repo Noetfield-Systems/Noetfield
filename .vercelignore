@@ -7,7 +7,13 @@ scripts/
 prompts/
 infrastructure/
 governance-console/
-governance/
+governance/*.json
+governance/*.md
+governance/oas-engine/
+governance/golden-edge-synth/
+governance/alignment-scoring/
+governance/README.md
+OFFERINGS_LOCKED.md
 services/
 docs/*.md
 docs/mockups/
