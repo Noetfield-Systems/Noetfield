@@ -46,3 +46,4 @@ ops/private/
 docs/internal/
 .dev-tunnel-url.txt.tmp
 .vercel
+.env*
