@@ -3,8 +3,8 @@
 # Source this from deploy/heal scripts; do not fork per agent.
 set -euo pipefail
 
-export NF_VERCEL_SCOPE="${NF_VERCEL_SCOPE:-noetfield-systems}"
-export NF_VERCEL_PROJECT="${NF_VERCEL_PROJECT:-www}"
+export NF_VERCEL_SCOPE="${NF_VERCEL_SCOPE:-the-777-foundation}"
+export NF_VERCEL_PROJECT="${NF_VERCEL_PROJECT:-noetfield}"
 export NF_WWW_CANONICAL_URL="${NF_WWW_CANONICAL_URL:-https://www.noetfield.com}"
 export NF_WWW_LIVE_DOMAIN="${NF_WWW_LIVE_DOMAIN:-www.noetfield.com}"
 # Legacy slugs to remove if they reappear (duplicate CLI deploys)

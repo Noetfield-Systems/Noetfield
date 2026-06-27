@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Production deploy www.noetfield.com → Vercel project the-777-foundation/noetfield
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+# shellcheck source=scripts/www-vercel-canonical.sh
+source "$ROOT/scripts/www-vercel-canonical.sh"
+
+log() { printf '[deploy-www-vercel] %s\n' "$*"; }
+
+log "scope=$NF_VERCEL_SCOPE project=$NF_VERCEL_PROJECT"
+
+if [[ ! -d .vercel ]] || ! grep -q '"projectName": "noetfield"' .vercel/project.json 2>/dev/null; then
+  rm -rf .vercel
+  npx vercel link --project "$NF_VERCEL_PROJECT" --scope "$NF_VERCEL_SCOPE" --yes
+fi
+
+npx vercel deploy --prod --scope "$NF_VERCEL_SCOPE" --yes
+
+log "health check…"
+curl -sS "${NF_WWW_CANONICAL_URL}/health"
+echo
+curl -sS "${NF_WWW_CANONICAL_URL}/api/intake/health" | python3 -m json.tool 2>/dev/null || true
+log "done — ${NF_WWW_CANONICAL_URL}"
