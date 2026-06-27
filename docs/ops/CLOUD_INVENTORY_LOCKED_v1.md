@@ -13,7 +13,7 @@
 | `www.noetfield.com` | Vercel (`210ae8d5…vercel-dns-017.com`) | Public www |
 | `noetfield.com` | Vercel apex | Apex redirect/site |
 | `platform.noetfield.com` | Railway `9e1kt78m.up.railway.app` | Platform API + Postgres |
-| `api.noetfield.com` | **Not provisioned** | GEL hosted API (backlog) |
+| `api.noetfield.com` | Railway `gel-api` | **Live** (2026-06-26) |
 
 ---
 
