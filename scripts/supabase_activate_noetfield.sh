@@ -28,6 +28,11 @@ load_env() {
   SUPABASE_ANON="${NOETFIELD_SUPABASE_ANON_KEY:-${SUPABASE_ANON_KEY:-$(read_vault NOETFIELD_SUPABASE_ANON_KEY || true)}}"
   SUPABASE_SERVICE="${NOETFIELD_SUPABASE_SERVICE_ROLE_KEY:-${SUPABASE_SERVICE_ROLE_KEY:-$(read_vault NOETFIELD_SUPABASE_SERVICE_ROLE_KEY || true)}}"
   DATABASE_URL="${NOETFIELD_SUPABASE_DATABASE_URL:-${SUPABASE_DATABASE_URL:-$(read_vault NOETFIELD_SUPABASE_DATABASE_URL || true)}}"
+  DB_PASSWORD="${SUPABASE_DB_PASSWORD:-$(read_vault SUPABASE_DB_PASSWORD || true)}"
+
+  if [[ -z "$DATABASE_URL" && -n "$DB_PASSWORD" && -n "$REF" ]]; then
+    DATABASE_URL="postgresql://postgres.${REF}:${DB_PASSWORD}@aws-0-us-west-1.pooler.supabase.com:6543/postgres"
+  fi
 
   if [[ -z "$SUPABASE_URL" && -n "$REF" ]]; then
     SUPABASE_URL="https://${REF}.supabase.co"
@@ -49,17 +54,37 @@ run_migrations() {
 }
 
 run_heartbeat() {
-  require_api
+  [[ -n "$SUPABASE_URL" ]] || die "SUPABASE_URL missing (expected in ${SOURCEA_SECRETS})"
   log "REST heartbeat → ${SUPABASE_URL}"
-  local code
-  code="$(curl -sS -o /dev/null -w '%{http_code}' \
-    "${SUPABASE_URL}/rest/v1/" \
-    -H "apikey: ${SUPABASE_ANON}" \
-    -H "Authorization: Bearer ${SUPABASE_ANON}" || echo 000)"
-  if [[ "$code" != "200" && "$code" != "401" ]]; then
-    die "REST ping returned HTTP ${code}"
+
+  local anon_code svc_code storage_code
+  if [[ -n "$SUPABASE_ANON" ]]; then
+    anon_code="$(curl -sS -o /dev/null -w '%{http_code}' \
+      "${SUPABASE_URL}/rest/v1/" \
+      -H "apikey: ${SUPABASE_ANON}" \
+      -H "Authorization: Bearer ${SUPABASE_ANON}" || echo 000)"
+    log "REST anon ping HTTP ${anon_code}"
   fi
-  log "REST ping OK (HTTP ${code})"
+
+  if [[ -n "$SUPABASE_SERVICE" ]]; then
+    svc_code="$(curl -sS -o /dev/null -w '%{http_code}' \
+      "${SUPABASE_URL}/rest/v1/" \
+      -H "apikey: ${SUPABASE_SERVICE}" \
+      -H "Authorization: Bearer ${SUPABASE_SERVICE}" || echo 000)"
+    storage_code="$(curl -sS -o /dev/null -w '%{http_code}' \
+      "${SUPABASE_URL}/storage/v1/bucket" \
+      -H "apikey: ${SUPABASE_SERVICE}" \
+      -H "Authorization: Bearer ${SUPABASE_SERVICE}" || echo 000)"
+    log "REST service_role ping HTTP ${svc_code}; storage HTTP ${storage_code}"
+    if [[ "$svc_code" != "200" && "$svc_code" != "401" && "$svc_code" != "406" ]]; then
+      die "service_role REST ping failed HTTP ${svc_code}"
+    fi
+  else
+    [[ -n "$SUPABASE_ANON" ]] || die "SUPABASE_ANON_KEY or SUPABASE_SERVICE_ROLE_KEY required"
+    if [[ "$anon_code" != "200" && "$anon_code" != "401" ]]; then
+      die "REST ping returned HTTP ${anon_code}"
+    fi
+  fi
 
   if [[ -n "$DATABASE_URL" ]]; then
     log "SQL heartbeat SELECT 1…"
@@ -86,11 +111,23 @@ PY
 }
 
 wire_railway() {
-  require_db
   command -v railway >/dev/null || die "railway CLI not installed"
-  log "Setting Railway ${RAILWAY_SERVICE} DATABASE_URL → Supabase pooler…"
+  [[ -n "$SUPABASE_URL" && -n "$SUPABASE_SERVICE" ]] || die "SUPABASE_URL + service role key required"
+
+  log "Setting Railway ${RAILWAY_SERVICE} Supabase env vars…"
   RAILWAY_CALLER="skill:use-railway" railway variable set --service "$RAILWAY_SERVICE" \
-    "DATABASE_URL=${DATABASE_URL}"
+    "SUPABASE_URL=${SUPABASE_URL}" \
+    "SUPABASE_ANON_KEY=${SUPABASE_ANON}" \
+    "SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE}"
+
+  if [[ -n "$DATABASE_URL" ]]; then
+    log "Setting Railway DATABASE_URL → Supabase pooler…"
+    RAILWAY_CALLER="skill:use-railway" railway variable set --service "$RAILWAY_SERVICE" \
+      "DATABASE_URL=${DATABASE_URL}"
+  else
+    log "SKIP DATABASE_URL (add SUPABASE_DB_PASSWORD to ${SOURCEA_SECRETS} for migrations + DB wire-up)"
+  fi
+
   log "Redeploying ${RAILWAY_SERVICE}…"
   RAILWAY_CALLER="skill:use-railway" railway up --service "$RAILWAY_SERVICE" -d -y
   log "Railway wire-up submitted — verify platform /health after ~2 min"
@@ -102,7 +139,7 @@ Usage: $0 [--migrations] [--heartbeat] [--wire-railway] [--all]
 
   --migrations    Apply infrastructure/supabase/migrations to NOETFIELD_SUPABASE_DATABASE_URL
   --heartbeat     REST + SQL ping (registers activity)
-  --wire-railway  Point platform-api DATABASE_URL at Supabase and redeploy
+  --wire-railway  Set SUPABASE_* on platform-api (+ DATABASE_URL if password set) and redeploy
   --all           migrations + heartbeat + wire-railway
 
 Env / vault keys: NOETFIELD_SUPABASE_URL, NOETFIELD_SUPABASE_ANON_KEY,
