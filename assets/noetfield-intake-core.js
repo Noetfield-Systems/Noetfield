@@ -3,7 +3,7 @@
   "use strict";
 
   var INTAKE_EMAIL = "operations@noetfield.com";
-  var CANONICAL_INTAKE_ORIGIN = "https://project-gc7lm.vercel.app";
+  var CANONICAL_INTAKE_ORIGIN = "https://www.noetfield.com";
 
   function metaBase(name) {
     var meta = document.querySelector('meta[name="' + name + '"]');

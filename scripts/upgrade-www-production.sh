@@ -37,7 +37,7 @@ HEAL_SKIP_ENV=1 ./scripts/auto-heal-www.sh || {
   log "WARN: auto-heal exited non-zero — check DNS alias for www.noetfield.com"
 }
 
-BASE="https://project-gc7lm.vercel.app"
+BASE="https://www.noetfield.com"
 log "canonical smoke:"
 for p in "/" "/copilot/proof-case/" "/copilot/governance-audit-trail/" "/copilot/procurement/" "/copilot/demo/" "/api/intake/health"; do
   code="$(curl -sS -o /tmp/nf-upgrade-body -w '%{http_code}' -L "${BASE}${p}" 2>/dev/null || echo 000)"

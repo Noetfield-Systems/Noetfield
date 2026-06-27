@@ -47,7 +47,7 @@ parents:
 
 | Surface | Healthy when | Current |
 |---------|--------------|---------|
-| Canonical Vercel deploy | `project-gc7lm.vercel.app` intake `www_email_configured: true` | **OK** (resend) |
+| Canonical Vercel deploy | `www.noetfield.com` intake `www_email_configured: true` | **OK** (resend) |
 | Live www domain | `www.noetfield.com` aliases canonical project | **FAIL** — domain not under `noetfield-systems` scope |
 | Platform API | `platform.noetfield.com` evaluate + audit-export | **NOT LIVE** |
 

@@ -114,7 +114,7 @@ canonical_deploy_url() {
     | awk -v p="$NF_VERCEL_PROJECT" '$1==p {print $2; exit}')"
   # Prefer stable alias with intake env; team default URL may sit behind Vercel auth.
   if [[ -z "$url" ]] || [[ "$url" == *"-noetfield-systems.vercel.app" ]]; then
-    url="${NF_WWW_DEPLOY_URL:-https://project-gc7lm.vercel.app}"
+    url="${NF_WWW_DEPLOY_URL:-https://www.noetfield.com}"
   fi
   printf '%s' "$url"
 }

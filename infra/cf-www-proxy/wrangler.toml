@@ -8,4 +8,4 @@ routes = [
 ]
 
 [vars]
-ORIGIN = "https://project-gc7lm.vercel.app"
+ORIGIN = "https://www.noetfield.com"

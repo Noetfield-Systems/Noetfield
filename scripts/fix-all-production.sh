@@ -24,5 +24,5 @@ HEAL_SKIP_ENV=1 ./scripts/auto-heal-www.sh || true
 
 echo ""
 echo "=== Health ==="
-curl -sS "https://project-gc7lm.vercel.app/api/intake/health" 2>/dev/null; echo
+curl -sS "https://www.noetfield.com/api/intake/health" 2>/dev/null; echo
 curl -sS "https://www.noetfield.com/api/intake/health" 2>/dev/null; echo

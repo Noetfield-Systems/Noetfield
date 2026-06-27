@@ -6,7 +6,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # shellcheck source=scripts/www-vercel-canonical.sh
 source "$ROOT/scripts/www-vercel-canonical.sh"
 
-CANON="${NF_WWW_DEPLOY_URL:-https://project-gc7lm.vercel.app}"
+CANON="${NF_WWW_DEPLOY_URL:-https://www.noetfield.com}"
 LIVE="https://www.noetfield.com"
 TARGET_CNAME="d2e47b585a01bc61.vercel-dns-017.com"
 
