@@ -8,4 +8,5 @@ routes = [
 ]
 
 [vars]
-ORIGIN = "https://www.noetfield.com"
+# Direct Vercel origin — never www.noetfield.com (would loop if CF route is active).
+ORIGIN = "https://noetfield-the-777-foundation.vercel.app"

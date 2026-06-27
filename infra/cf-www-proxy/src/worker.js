@@ -1,4 +1,4 @@
-const ORIGIN = (typeof ORIGIN_HOST !== "undefined" ? ORIGIN_HOST : null) || "https://www.noetfield.com";
+const ORIGIN = (typeof ORIGIN_HOST !== "undefined" ? ORIGIN_HOST : null) || "https://noetfield-the-777-foundation.vercel.app";
 
 export default {
   async fetch(request, env) {
