@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-06-28",
+  "primary_page": "/ai-factories/",
+  "technical_page": "/ai-factories/spec/",
+  "config_files": {
+    "gate_lane": "/config/gate-ai-factory-design.json",
+    "status_type": "/config/status-ai-factory.json"
+  },
+  "homepage_band": {
+    "label": "AI Factory Layer",
+    "headline": "AI factories for governed work.",
+    "body": "Stateless multi-agent pipelines with request IDs, policy checks, evidence trails, and Trust Ledger-ready audit."
+  },
+  "gate_lane": {
+    "id": "ai_factory_design",
+    "label": "AI Factory Design",
+    "timeline": "1-2 weeks"
+  },
+  "status_type": {
+    "id": "ai_factory",
+    "label": "AI Factory"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "ai_factory",
+  "label": "AI Factory",
+  "source_lane": "ai_factory_design",
+  "lanes": [
+    "intake",
+    "design",
+    "spec_review",
+    "validation",
+    "deployment",
+    "ledger_complete"
+  ],
+  "record_fields": [
+    "request_id",
+    "factory_type",
+    "current_node",
+    "policy_decision",
+    "audit_state",
+    "next_action",
+    "final_output_hash"
+  ],
+  "policy_decisions": [
+    "ALLOW",
+    "BLOCK",
+    "ESCALATE"
+  ],
+  "terminal_states": [
+    "completed",
+    "partial",
+    "failed"
+  ]
+}

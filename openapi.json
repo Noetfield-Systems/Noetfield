@@ -1,0 +1,24 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Noetfield AI Factory Layer API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/config": {
+      "get": {
+        "summary": "Return AI Factory route and lane config"
+      }
+    },
+    "/api/gate/ai-factory-design": {
+      "post": {
+        "summary": "Submit an AI Factory Design Gate intake"
+      }
+    },
+    "/api/status/ai-factory": {
+      "get": {
+        "summary": "Return AI Factory status preview"
+      }
+    }
+  }
+}

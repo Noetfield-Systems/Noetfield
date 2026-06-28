@@ -154,6 +154,30 @@ check_file "commercial SSOT" docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.m
 check_file "ai-automation lane B" ai-automation/index.html \
   'Make your AI automation defensible' 'Apply for pilot' 'noetfield-www.css?v=41'
 
+check_file "ai factories route" ai-factories/index.html \
+  'AI factories for governed work.' 'AI Factory Design' 'Submit to Gate' \
+  'noetfield-ai-factory.css?v=1' 'noetfield-ai-factory.js?v=1' \
+  '/api/gate/ai-factory-design' 'Trust Ledger'
+
+check_file "ai factories spec route" ai-factories/spec/index.html \
+  'YAML Factory Spec.' 'Copyable deployment contract' 'Submit to Gate' \
+  'noetfield-ai-factory.css?v=1' 'noetfield-ai-factory.js?v=1'
+
+check_file "ai factories config" noetfield-ai-factory-lanes.json \
+  '/ai-factories/' 'AI Factory Design' 'AI Factory'
+
+check_file "ai factories gate config" config/gate-ai-factory-design.json \
+  'AI Factory Design' 'YAML Factory Spec' 'ALLOW / BLOCK / ESCALATE'
+
+check_file "ai factories status config" config/status-ai-factory.json \
+  'AI Factory' 'ledger_complete' 'ESCALATE'
+
+check_file "ai factories api" api/gate/ai-factory-design.js \
+  'buildFactoryReceipt' 'validateGateRequest'
+
+check_file "ai factories status api" api/status/ai-factory.js \
+  'buildStatusPreview' 'request_id'
+
 # Version coherence on primary hubs
 for f in index.html trust/index.html copilot/index.html msp/index.html federal/index.html investors/index.html start/index.html pricing/index.html faq/index.html contact/index.html enterprise/index.html; do
   if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=41' "$f"; then

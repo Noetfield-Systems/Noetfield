@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Noetfield — AI Factory Spec</title>
+ <meta name="description" content="Copyable YAML Factory Spec for Noetfield AI Factory Design." />
+ <meta name="robots" content="index,follow" />
+ <meta name="theme-color" content="#f4f5f8" />
+ <link rel="canonical" href="https://www.noetfield.com/ai-factories/spec/" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
+ <link rel="stylesheet" href="/assets/noetfield-shell.css" />
+ <link rel="stylesheet" href="/assets/noetfield-www.css?v=41" />
+ <link rel="stylesheet" href="/assets/noetfield-ai-factory.css?v=1" />
+ <script src="/assets/noetfield-shell.js?v=41" defer></script>
+ <script src="/assets/noetfield-ai-factory.js?v=1" defer></script>
+</head>
+<body class="nf-www nf-site-v14 nf-page-ai-factory">
+ <div class="bg" aria-hidden="true"></div>
+ <a class="skip" href="#main">Skip to content</a>
+ <header id="nfHeader"></header>
+ <main id="main" class="nf-main nf-page">
+ <header class="nf-hero-cinematic">
+ <div>
+ <p class="nf-hero-kicker"><span class="nf-hero-kicker-dot" aria-hidden="true"></span> Technical Spec</p>
+ <p class="nf-eyebrow">Runtime · nodes · schemas · audit</p>
+ <h1>YAML Factory Spec.</h1>
+ <p class="nf-lead">A copyable deployment contract for the Noetfield AI Factory Layer.</p>
+ <div class="nf-cta-actions"><a class="btn btn-primary" href="#builder">Generate Spec</a><a class="btn btn-secondary" href="/ai-factories/">Back to overview</a></div>
+ </div>
+ <aside class="nf-hero-panel" aria-label="Spec summary">
+ <p class="nf-hero-panel-label">Contract surface</p>
+ <ul class="nf-hero-panel-list"><li>9 pipeline nodes</li><li>7 required agents</li><li>Input and output schemas</li><li>Stateless execution rules</li></ul>
+ </aside>
+ </header>
+ <section class="nf-section-block nf-af-builder" id="builder" aria-labelledby="builder-title">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">01</span><div>
+ <p class="nf-eyebrow">Spec Builder</p>
+ <h2 id="builder-title">Configure the factory contract.</h2>
+ </div></div>
+ <div class="nf-af-builder-grid">
+ <form class="nf-af-form" id="factory-form" data-gate-endpoint="/api/gate/ai-factory-design">
+ <label>Factory type<input name="factoryType" value="Evidence Brief Factory" autocomplete="off" /></label>
+ <label>Target user<input name="targetUser" value="Board and compliance teams" autocomplete="off" /></label>
+ <label>Output format<select name="outputFormat"><option>Board-ready brief</option><option>YAML Factory Spec</option><option>JSON evidence packet</option><option>Compliance memo</option></select></label>
+ <label>Policy mode<select name="policyMode"><option>ALLOW / BLOCK / ESCALATE</option><option>BLOCK by default</option><option>Escalate regulated outputs</option></select></label>
+ <button class="btn btn-primary" type="submit">Submit to Gate</button>
+ </form>
+ <div class="nf-af-receipt" id="gate-receipt" aria-live="polite"><p class="nf-card__tag">Gate receipt</p><h3>Waiting for factory intake</h3><p>Submit the builder to create an AI Factory Design receipt.</p></div>
+ </div>
+ </section>
+ <section class="nf-section-block" id="spec" aria-labelledby="spec-title">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">02</span><div>
+ <p class="nf-eyebrow">YAML Factory Spec</p>
+ <h2 id="spec-title">Copyable deployment contract.</h2>
+ </div></div>
+ <div class="nf-af-code-actions"><button class="btn btn-secondary" id="copy-spec" type="button">Copy Spec</button></div>
+ <pre class="nf-af-code" id="yaml-output" tabindex="0"></pre>
+ </section>
+ </main>
+ <footer id="nfFooter"></footer>
+</body>
+</html>

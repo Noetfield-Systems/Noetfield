@@ -1,0 +1,111 @@
+.nf-page-ai-factory .nf-af-node-graph {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(112px, 1fr));
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.nf-page-ai-factory .nf-af-node-graph span,
+.nf-page-ai-factory .nf-af-receipt,
+.nf-page-ai-factory .nf-af-form {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel2);
+}
+
+.nf-page-ai-factory .nf-af-node-graph span {
+  min-height: 58px;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  color: var(--text);
+  font-weight: 700;
+  text-align: center;
+}
+
+.nf-page-ai-factory .nf-af-builder-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(280px, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.nf-page-ai-factory .nf-af-form,
+.nf-page-ai-factory .nf-af-receipt {
+  padding: 18px;
+}
+
+.nf-page-ai-factory .nf-af-form {
+  display: grid;
+  gap: 12px;
+}
+
+.nf-page-ai-factory .nf-af-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: var(--text-sm);
+  font-weight: 650;
+}
+
+.nf-page-ai-factory .nf-af-form input,
+.nf-page-ai-factory .nf-af-form select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+}
+
+.nf-page-ai-factory .nf-af-receipt h3 {
+  margin: 8px 0;
+}
+
+.nf-page-ai-factory .nf-af-receipt p,
+.nf-page-ai-factory .nf-af-receipt li {
+  color: var(--muted);
+}
+
+.nf-page-ai-factory .nf-af-receipt ul {
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+
+.nf-page-ai-factory .nf-af-code-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.nf-page-ai-factory .nf-af-code {
+  max-height: 720px;
+  overflow: auto;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgba(15, 17, 23, 0.14);
+  border-radius: var(--radius-sm);
+  background: #0f1514;
+  color: #e9f1ea;
+  font: 0.85rem/1.55 "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  white-space: pre;
+}
+
+@media (max-width: 900px) {
+  .nf-page-ai-factory .nf-af-builder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nf-page-ai-factory .nf-af-node-graph {
+    grid-template-columns: repeat(3, minmax(112px, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .nf-page-ai-factory .nf-af-node-graph {
+    grid-template-columns: 1fr;
+  }
+}

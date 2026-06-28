@@ -1,0 +1,25 @@
+{
+  "id": "ai_factory_design",
+  "label": "AI Factory Design",
+  "track": "Factory",
+  "entry_page": "/ai-factories/",
+  "technical_page": "/ai-factories/spec/",
+  "timeline": "1-2 weeks",
+  "summary": "For teams that need a repeatable AI workflow turned into a governed, stateless, cloud-ready multi-agent pipeline.",
+  "deliverables": [
+    "YAML Factory Spec",
+    "Node Graph Description",
+    "Execution Flow",
+    "Input and Output Schemas",
+    "Required Agent Roster",
+    "Failure Handling Strategy",
+    "Logging and Audit Structure",
+    "Minimal Deployment Plan"
+  ],
+  "routing": {
+    "idempotency_key": "request_id",
+    "default_status_type": "ai_factory",
+    "default_status_lane": "intake",
+    "default_policy_mode": "ALLOW / BLOCK / ESCALATE"
+  }
+}
