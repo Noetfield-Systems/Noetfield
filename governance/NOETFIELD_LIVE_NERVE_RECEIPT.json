@@ -1,7 +1,7 @@
 {
   "gate": "PASS",
-  "generated_at": "2026-06-29T04:29:24.590012Z",
-  "git_sha": "2cfa6b900dd070a5fb8510b1219ec52f1fff1ac6",
+  "generated_at": "2026-06-29T04:29:53.139931Z",
+  "git_sha": "dea83d395e3da72cea2e690fc559e56ab0a2e76c",
   "next_safe_action": "use this receipt as current truth before docs or chat summaries",
   "nodes": {
     "N1_PUBLIC_OUTPUT": {
@@ -51,7 +51,7 @@
       "base": "https://platform.noetfield.com",
       "ok": true,
       "provider": "openrouter",
-      "reply_preview": "Noetfield provides an AI Governance & Evidence layer, primarily for Microsoft 365 Copilot adoption. We produce the audit trail that regulated organizations will need for their Copilot rollouts. This includes signed go/no-go decisions, Trust",
+      "reply_preview": "Noetfield provides an AI Governance & Evidence layer, primarily for Microsoft 365 Copilot adoption. Our purpose is to produce the audit trail that regulated organizations will need for their Copilot rollouts.\n\nThis means we turn high-risk A",
       "stale_hits": [],
       "status": 200
     },
