@@ -1,10 +1,26 @@
 # Internal / engineering — exclude from public www deploy
 .cursor/
+.agents/
 .github/
+.pytest_cache/
+entry/
+L0-law/
+L1-operational/
+L2-knowledge/
+L3-external/
+tests/
+packages/
+infra/
+ops/
+apps/
+_archive/
+Noetfield-All-Documents/
+.sina-agent/
 os/
 reports/
 scripts/
 prompts/
+data/chatbot/
 infrastructure/
 governance-console/
 governance/*.json
@@ -14,6 +30,10 @@ governance/golden-edge-synth/
 governance/alignment-scoring/
 governance/README.md
 OFFERINGS_LOCKED.md
+PROJECT_BOUNDARIES_LOCKED.md
+ROUTING_CARD.md
+*_LOCKED.md
+*_SSOT*.md
 platform/
 services/
 docs/*.md

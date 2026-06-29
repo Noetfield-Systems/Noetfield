@@ -1,0 +1,37 @@
+{
+  "gate": "PASS",
+  "generated_at": "2026-06-29T01:47:32.251466Z",
+  "git_sha": "31b62c1303cb7d8fccb044414c245aa80765bcdd",
+  "next_safe_action": "use this receipt as current truth before docs or chat summaries",
+  "nodes": {
+    "N1_PUBLIC_OUTPUT": {
+      "blocked_count": 0,
+      "findings": [],
+      "ok": true,
+      "output": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/.vercel/output/static"
+    },
+    "N2_CHAT_TRUTH": {
+      "bundle_version": "NOETFIELD-CHATBOT-KNOWLEDGE-V1-p28-2026-06-29",
+      "manifest_hash": "c6ba9baa25af9efed74b2c126d974d539ecaa2584ffc3b4d261c9f493a51963e",
+      "ok": true,
+      "stats": {
+        "chars": 24035,
+        "knowledge_bundle_version": "NOETFIELD-CHATBOT-KNOWLEDGE-V1-p28-2026-06-29",
+        "knowledge_files": 15,
+        "loaded": true,
+        "manifest_ok": true,
+        "manifest_violations": 0,
+        "pinned_chars": 9485
+      },
+      "violations": []
+    },
+    "N3_DOC_FRESHNESS": {
+      "contract": "public markdown requires generated metadata in phase 2; raw internal docs are blocked from output now",
+      "ok": true,
+      "public_markdown_count": 63
+    }
+  },
+  "ok": true,
+  "repo": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield",
+  "schema": "noetfield-live-nerve-receipt-v1"
+}

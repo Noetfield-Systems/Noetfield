@@ -26,6 +26,12 @@ PATHS_200 = (
     "/investors/",
     "/work-with-us/",
     "/governance/",
+    "/ai-factories/",
+    "/ai-factories/spec/",
+    "/openapi.json",
+    "/config/gate-ai-factory-design.json",
+    "/config/status-ai-factory.json",
+    "/noetfield-ai-factory-lanes.json",
     "/health",
 )
 
@@ -34,6 +40,16 @@ PATHS_404 = (
     "/governance/OPS_LIVE_STATUS_LOCKED.json",
     "/governance/LAW_STACK.json",
     "/OFFERINGS_LOCKED.md",
+    "/PROJECT_BOUNDARIES_LOCKED.md",
+    "/ROUTING_CARD.md",
+    "/.agents/skills/cloudflare/SKILL.md",
+    "/entry/START_HERE_LOCKED_v1.md",
+    "/L0-law/PUBLIC_WWW_BRAND_E2E_LAW_LOCKED_v1.md",
+    "/tests/unit/test_public_chat.py",
+    "/packages/schemas/governance.schema.json",
+    "/infra/cf-www-proxy/wrangler.toml",
+    "/infrastructure/supabase/migrations/0005_public_ecosystem_platform.sql",
+    "/data/chatbot/MANIFEST.json",
     "/platform/",
     "/platform/factories/",
     "/platform/dashboard/",
@@ -52,6 +68,15 @@ HOME_NEEDLES = (
 )
 
 PILOT_NEEDLES = ("nfPilotApplyForm", "Copilot Governance Pack", "tamper-evident")
+
+AI_FACTORY_NEEDLES = (
+    ("/ai-factories/", ("AI factories for governed work.", "AI Factory Design", "Submit to Gate")),
+    ("/ai-factories/spec/", ("YAML Factory Spec.", "Copyable deployment contract", "Submit to Gate")),
+    ("/openapi.json", ("Noetfield AI Factory Layer API", "/api/gate/ai-factory-design")),
+    ("/config/gate-ai-factory-design.json", ("AI Factory Design", "YAML Factory Spec")),
+    ("/config/status-ai-factory.json", ("AI Factory", "ledger_complete")),
+    ("/noetfield-ai-factory-lanes.json", ("AI Factory Design", "/ai-factories/")),
+)
 
 CLIENT_PAGES = ("/copilot/procurement/", "/status/", "/next/")
 
@@ -148,6 +173,19 @@ def main() -> int:
             print(f"FAIL pilot missing: {needle}", file=sys.stderr)
             fail += 1
 
+    for path, needles in AI_FACTORY_NEEDLES:
+        code, body = fetch(f"{BASE}{path}")
+        if not (200 <= code < 300):
+            print(f"FAIL AI Factory path {path} ({code})", file=sys.stderr)
+            fail += 1
+            continue
+        missing = [needle for needle in needles if needle not in body]
+        if missing:
+            print(f"FAIL AI Factory {path} missing: {missing}", file=sys.stderr)
+            fail += 1
+        else:
+            print(f"OK   AI Factory contract {path}")
+
     for path in CLIENT_PAGES:
         _, html = fetch(f"{BASE}{path}")
         hits = INTERNAL_COPY.findall(html)
@@ -191,15 +229,39 @@ def main() -> int:
         print(f"FAIL /api/public/chat/health ({chat_code})", file=sys.stderr)
         fail += 1
 
-    chat_post = json.dumps({"message": "What is Noetfield?", "session_id": "e2e-smoke"}).encode()
+    chat_post = json.dumps(
+        {"message": "What should I read before applying?", "session_id": "e2e-smoke"}
+    ).encode()
     chat_post_code, chat_post_body = fetch(
         f"{BASE}/api/public/chat", method="POST", data=chat_post
     )
     if 200 <= chat_post_code < 300:
         try:
             reply = json.loads(chat_post_body).get("reply", "")
-            if reply and "governance" in reply.lower():
-                print("OK   POST /api/public/chat FAQ reply")
+            banned = (
+                "move money",
+                "hold custody",
+                "execute transactions",
+                "hardcoded faq",
+                "product_brief.md",
+                "positioning.md",
+                "offerings_locked.md",
+                "docs/",
+            )
+            reply_lower = reply.lower()
+            if any(term in reply_lower for term in banned):
+                print(f"FAIL chat reply bad framing: {reply[:200]}", file=sys.stderr)
+                fail += 1
+            elif reply and (
+                "trust-brief" in reply_lower
+                or "pricing" in reply_lower
+                or "start" in reply_lower
+                or "governance" in reply_lower
+                or "apply" in reply_lower
+                or "read" in reply_lower
+                or "copilot" in reply_lower
+            ):
+                print("OK   POST /api/public/chat contextual reply")
             else:
                 print(f"FAIL chat reply unexpected: {chat_post_body[:200]}", file=sys.stderr)
                 fail += 1
@@ -246,6 +308,58 @@ def main() -> int:
         print(f"FAIL POST /evaluate ({code}): {eval_body[:200]}", file=sys.stderr)
         fail += 1
 
+    factory_payload = json.dumps(
+        {
+            "factory_type": "Compliance Evidence Factory",
+            "target_user": "Operations team",
+            "output_format": "Board-ready brief",
+            "payload": {"scope": "regulated workflow"},
+        }
+    ).encode()
+    code, factory_body = fetch(
+        f"{BASE}/api/gate/ai-factory-design", method="POST", data=factory_payload
+    )
+    if 200 <= code < 300:
+        try:
+            factory = json.loads(factory_body)
+            if (
+                factory.get("gate_lane") == "AI Factory Design"
+                and factory.get("status_record", {}).get("policy_decision")
+                in {"ALLOW", "BLOCK", "ESCALATE"}
+            ):
+                print(
+                    "OK   POST /api/gate/ai-factory-design "
+                    f"{factory.get('status_record', {}).get('policy_decision')}"
+                )
+            else:
+                print(f"FAIL AI Factory gate contract: {factory_body[:200]}", file=sys.stderr)
+                fail += 1
+        except json.JSONDecodeError:
+            print("FAIL AI Factory gate not JSON", file=sys.stderr)
+            fail += 1
+    else:
+        print(f"FAIL POST /api/gate/ai-factory-design ({code}): {factory_body[:200]}", file=sys.stderr)
+        fail += 1
+
+    code, status_body = fetch(f"{BASE}/api/status/ai-factory?request_id=e2e-ai-factory")
+    if 200 <= code < 300:
+        try:
+            status = json.loads(status_body)
+            if (
+                status.get("request_type") == "AI Factory"
+                and status.get("request_id") == "e2e-ai-factory"
+            ):
+                print("OK   GET /api/status/ai-factory")
+            else:
+                print(f"FAIL AI Factory status contract: {status_body[:200]}", file=sys.stderr)
+                fail += 1
+        except json.JSONDecodeError:
+            print("FAIL AI Factory status not JSON", file=sys.stderr)
+            fail += 1
+    else:
+        print(f"FAIL GET /api/status/ai-factory ({code}): {status_body[:200]}", file=sys.stderr)
+        fail += 1
+
     spine_code, spine_body = fetch(f"{BASE}/api/health")
     if 200 <= spine_code < 300:
         try:
@@ -262,7 +376,10 @@ def main() -> int:
         print(f"FAIL www spine /api/health ({spine_code})", file=sys.stderr)
         fail += 1
 
-    print("INFO platform.noetfield.com + api.noetfield.com — out of www E2E scope until DNS provisioned (see L0-law §7)")
+    print(
+        "INFO platform.noetfield.com + api.noetfield.com — verified by dedicated "
+        "platform/GEL smoke checks, not by the public www leak-prevention E2E."
+    )
 
     print()
     if fail:

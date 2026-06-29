@@ -6,8 +6,9 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-WWW_VER = "40"
-LIVE_PROOF_WWW_VER = "43"  # homepage + investors live-proof bundle (pf-0068)
+WWW_VER = "41"
+LIVE_PROOF_WWW_VER = "41"  # homepage + investors live-proof bundle; keep shell verifier aligned
+INVESTOR_DILIGENCE_WWW_VER = "43"
 
 # Pages maintained by Intelligence 613 lane — never overwrite on rebuild
 PROTECTED_INTELLIGENCE_PATHS = frozenset({
@@ -141,7 +142,13 @@ FOOT = """
 """
 
 
-def receipt(rid: str = "RID-2026-0602-HOME", footer: str = "Live sample · <a href=\"/trust-ledger/sample-report/\">Download TLE YAML</a>") -> str:
+def receipt(
+    rid: str = "RID-2026-0602-HOME",
+    footer: str = "Live sample · <a href=\"/trust-ledger/sample-report/\">Download TLE YAML</a>",
+    decision: str = "allow",
+    confidence_score: str = "0.82",
+    evidence_index: str = "purview · entra · audit",
+) -> str:
     return f"""
  <div class="nf-artifact-panel">
  <div class="nf-artifact-panel-chrome">
@@ -152,10 +159,10 @@ def receipt(rid: str = "RID-2026-0602-HOME", footer: str = "Live sample · <a hr
  <aside class="nf-receipt-mock" aria-label="Trust Ledger Entry receipt">
  <dl class="nf-receipt-mock-body">
  <div class="nf-receipt-row"><dt>tle_id</dt><dd>TLE-015DCFB8B953</dd></div>
- <div class="nf-receipt-row"><dt>decision</dt><dd>allow</dd></div>
- <div class="nf-receipt-row"><dt>confidence_score</dt><dd>0.82</dd></div>
+ <div class="nf-receipt-row"><dt>decision</dt><dd>{decision}</dd></div>
+ <div class="nf-receipt-row"><dt>confidence_score</dt><dd>{confidence_score}</dd></div>
  <div class="nf-receipt-row"><dt>rid</dt><dd>{rid}</dd></div>
- <div class="nf-receipt-row"><dt>evidence_index</dt><dd>purview · entra · audit</dd></div>
+ <div class="nf-receipt-row"><dt>evidence_index</dt><dd>{evidence_index}</dd></div>
  <div class="nf-receipt-row"><dt>export_integrity</dt><dd class="nf-receipt-ok">PASS · fail closed on tamper</dd></div>
  </dl>
  <p class="nf-receipt-mock-footer">{footer}</p>
@@ -180,13 +187,21 @@ def live_proof_panel() -> str:
         f'data-live-proof-lane="{key}" aria-pressed="{"true" if active else "false"}">{label}</button>'
         for key, label, active in lane_pills
     )
+    initial_receipt = receipt(
+        "RID-2026-0602-HOME",
+        'Illustrative sandbox output · choose a scenario to run live evaluate · <a href="/trust-ledger/sample-report/">Download TLE YAML</a>',
+        "review",
+        "0.64",
+        "purview dspm · policy v3.2 · approver chain",
+    )
     return f"""
  <div id="nfLiveProofHero" class="nf-live-proof-panel" data-live-proof-hero="live-proof-hero" aria-label="Governance playground">
  <form id="nfLiveProofForm" class="nf-live-proof-form">
  <h3>Governance playground</h3>
  <p id="nfScenarioOfDay" class="nf-scenario-of-day" aria-live="polite"></p>
- <p class="nf-scorecard-hint">Every go/no-go gets a <strong>confidence score</strong> + evidence index — Copilot, Trust Brief, Bank Pilot, AI automation, governance specialist, <strong>VC diligence</strong>, and partner shadow lanes.</p>
+ <p class="nf-scorecard-hint">Local-first simulation: scenarios now route through risk facts, confidence, evidence gaps, and next-step conditions — not a fixed allow sample.</p>
  <div class="nf-live-proof-lanes" role="group" aria-label="Product lane filter">{pills_html}</div>
+ <div id="nfScenarioDeck" class="nf-scenario-deck" aria-label="Scenario outcome shortcuts"></div>
  <label>Scenario
  <select name="scenario" id="nfLiveProofScenario" aria-label="Evaluate scenario"></select>
  </label>
@@ -196,10 +211,10 @@ def live_proof_panel() -> str:
  <button type="submit" class="btn btn-primary">Evaluate intent</button>
  </form>
  <div id="nfLiveProofReceipt" class="nf-live-proof-receipt-host" aria-live="polite">
- {receipt("RID-2026-0602-HOME", 'Illustrative sandbox output · Live sample · <a href="/trust-ledger/sample-report/">Download TLE YAML</a> · <a href="/docs/www/NF_LIVE_PROOF_HERO_RECEIPT_v1.md">NF_LIVE_PROOF_HERO_RECEIPT</a>')}
+ {initial_receipt}
  </div>
  </div>
- <script src="/assets/noetfield-live-proof.js?v={WWW_VER}" defer></script>"""
+<script src="/assets/noetfield-live-proof.js?v=45" defer></script>"""
 
 
 def trial_os_wizard() -> str:
@@ -2104,18 +2119,18 @@ def next_steps_partner_lane() -> str:
 def next_steps_ops_lane() -> str:
     return """
  <section class="nf-section-block nf-section--elevated" id="next-ops" aria-labelledby="next-ops-title">
- <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">⚙</span><div>
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">→</span><div>
  <p class="nf-eyebrow" id="next-ops-title">Operations · intake status</p>
- <h2>operations@noetfield.com — live inbox</h2>
- <p class="nf-section-lead">Google Workspace inbox is <strong>active</strong>. Direct email works now. WWW form auto-send (Resend) is <strong>deferred until after factory</strong> — factory spine + portfolio waves are P0.</p>
+ <h2>Send non-confidential intake with your Request ID</h2>
+ <p class="nf-section-lead">Use the public form or email operations@noetfield.com directly. Include your footer Request ID when available so the team can connect your sandbox, demo, pilot, or partner inquiry.</p>
  </div></div>
  <div class="nf-loop nf-loop--next">
- <article class="nf-loop-step nf-loop-step--gold"><p class="nf-loop-step-num">✓</p><h3>Google Workspace inbox</h3><p><strong>operations@noetfield.com</strong> active — direct email + Reply works.</p></article>
- <article class="nf-loop-step"><p class="nf-loop-step-num">—</p><h3>Form auto-send (Resend)</h3><p><strong>Deferred post-factory.</strong> Intake uses mailto + direct email until then. Spec: <code>docs/ops/VERCEL_INTAKE_SETUP.md</code></p></article>
- <article class="nf-loop-step"><p class="nf-loop-step-num">→</p><h3>Factory P0</h3><p>Phase 17 prep · OPS-P1 verify · portfolio <strong>260/300</strong> · <code>make nf-prove-factory-spine</code> before Resend lift.</p><a class="btn btn-secondary" href="/status/">Check status</a></article>
- <article class="nf-loop-step"><p class="nf-loop-step-num">✉</p><h3>Contact now</h3><p>Prospects email <strong>operations@noetfield.com</strong> directly · include footer Request ID.</p><a class="btn btn-secondary" href="/contact/#contact-form">Contact form</a></article>
+ <article class="nf-loop-step nf-loop-step--gold"><p class="nf-loop-step-num">1</p><h3>Choose a lane</h3><p>Copilot pilot, Trust Brief, Bank Pilot, MSP partner, investor diligence, or general enterprise inquiry.</p></article>
+ <article class="nf-loop-step"><p class="nf-loop-step-num">2</p><h3>Send non-confidential context</h3><p>Use the public form or email operations@noetfield.com. Do not send confidential data before kickoff.</p></article>
+ <article class="nf-loop-step"><p class="nf-loop-step-num">3</p><h3>Include Request ID</h3><p>Attach the footer Request ID when available so the inquiry can be routed to the right path.</p><a class="btn btn-secondary" href="/status/">Check status</a></article>
+ <article class="nf-loop-step"><p class="nf-loop-step-num">4</p><h3>Book the next proof step</h3><p>Most buyers start with demo, sandbox, or Copilot Governance Pack pilot intake.</p><a class="btn btn-secondary" href="/contact/#contact-form">Contact form</a></article>
  </div>
- <aside class="nf-callout"><p><strong>Law:</strong> Factory first · email sending deferred · founder never sends outbound (Hub approve).</p></aside>
+ <aside class="nf-callout"><p><strong>Response posture:</strong> Async intake first. Secure sharing protocols are confirmed after kickoff.</p></aside>
  <div class="nf-trust-signals-grid" data-intake-health-host aria-live="polite" style="margin-top:16px">
  <div class="nf-trust-signal"><span class="nf-trust-signal-label">Intake health</span><span class="nf-signal-badge nf-signal-badge--orientation">Loading…</span></div>
  </div>
@@ -2130,7 +2145,7 @@ def next_steps_page_body() -> str:
             "What to do next — buyer, investor, partner, or ops",
             "Every path ends in a <strong>signed receipt</strong> or honest async handoff to operations@noetfield.com. "
             "Three contract SKUs only — no scope creep.",
-            [("Buyer · Investor · Partner", True), ("Ops go-live checklist", True)],
+            [("Buyer · Investor · Partner", True), ("Enterprise standard", True), ("Ops go-live checklist", True)],
             [(PILOT_INTAKE, "Apply for pilot", True), ("/investors/diligence/", "Diligence vault", False)],
             ["Evaluate → TLE → export", "Board PDF signal", "Metadata-only M365"],
             receipt("RID-2026-0602-NEXT", "Live paths — <a href=\"/status/\">status</a> · <a href=\"/copilot/demo/\">demo</a>"),
@@ -2353,8 +2368,8 @@ def procurement_diligence_body() -> str:
  <strong>control checkpoint</strong> at evaluate and export:
  <strong>Evaluate</strong> operational intent before production use;
  <strong>Enforce</strong> fail-closed export when board PDF or procurement ZIP bundles are tampered.
- Verify script: <code>plan-with-no-asf-verify.sh</code> ·
- audit loop: <a href="/docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md">AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md</a>.
+ Verification evidence is buyer-facing: signed TLE, board PDF, procurement ZIP,
+ and fail-closed export checks.
  </p>
  <p style="margin-top:1rem">
  Production API surface:
@@ -2636,19 +2651,31 @@ def main() -> None:
         write(rel, title, desc, canon,
               hub_page(kick, eye, h1, lead, badges, actions, [], side, extra))
 
-    write("enterprise/index.html", "Noetfield Enterprise — Governance for Regulated Organizations",
-          "For banks, regulated enterprises, and institutional buyers. Three offerings from $10,000.",
+    write("enterprise/index.html", "Noetfield Enterprise — Copilot Governance Evidence for Regulated Organizations",
+          "For CCO, CRO, CISO, CTO, procurement, and board teams approving Microsoft 365 Copilot. Paid pilots from $2k-10k.",
           "/enterprise/",
           hub_page("Enterprise · Banks · Regulated institutions", "Institutional buyers",
-                   "Governance evaluation for institutions that cannot afford policy failure",
-                   "For CCO, CRO, and technology leaders: policy-bound evaluate, signed Trust Ledger evidence, and audit lineage your board and regulators can inspect — governance layer only, no custody or payment rails.",
-                   [("From $10,000", True), ("Read-only Bank Pilot", False), ("No custody", False)],
-                   [(PILOT_INTAKE, "Apply for pilot", True), (TRUST_BRIEF_INTAKE, "Request Trust Brief", False), ("/console/", "Governance Console", False)],
+                   "The audit trail your Copilot rollout will be asked for later",
+                   "For CCO, CRO, CISO, CTO, procurement, and board teams: Noetfield turns each Copilot or AI go/no-go into signed evidence — policy check, confidence score, named approvers, metadata-only M365 evidence index, Trust Ledger Entry, board PDF, and procurement ZIP. Governance layer only: no custody, no payment rails, no production execution authority.",
+                   [("Copilot pilot $2k-10k", True), ("Board PDF + procurement ZIP", False), ("No custody", False)],
+                   [(PILOT_INTAKE, "Apply for Copilot pilot", True), ("/copilot/demo/", "Watch 5-minute demo", False), (TRUST_BRIEF_INTAKE, "Request Trust Brief", False)],
                    [],
-                   panel("What we do not do", ["No transaction execution or custody", "No movement of financial value", "Governance evaluation layer only", "Policy-aligned allow or deny + compliance log"]),
+                   panel("What buyers receive", ["Signed go/no-go receipt per high-risk decision", "TLE v1 with confidence score and approval chain", "Board PDF for governance meetings", "Procurement ZIP with fail-closed export integrity"]),
                    """
- <section class="nf-section-block" aria-labelledby="ent-skus">
+ <section class="nf-section-block" aria-labelledby="ent-buyer">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">01</span><div>
+ <p class="nf-eyebrow" id="ent-buyer">Buyer problem</p><h2>Copilot spreads before legal, risk, and procurement have a defensible record</h2>
+ <p class="nf-section-lead">The client is not buying "allow or deny." They are buying a decision package their governance committee can use before production scope opens.</p>
+ </div></div>
+ <div class="nf-table-wrap"><table class="nf-table"><thead><tr><th>Buyer asks</th><th>Noetfield answer</th></tr></thead><tbody>
+ <tr><td>Who approved this Copilot use case?</td><td>Named approvers, confidence score, and Request ID lineage on the TLE.</td></tr>
+ <tr><td>What evidence did we inspect?</td><td>Metadata-only M365 evidence index: Purview, Entra, SharePoint, and audit references when connected.</td></tr>
+ <tr><td>What can we show the board or procurement?</td><td>Board PDF and procurement ZIP generated from the same Trust Ledger record.</td></tr>
+ <tr><td>What happens if an export is changed?</td><td>Fail-closed integrity verification: tampered exports do not verify.</td></tr>
+ </tbody></table></div>
+ </section>
+ <section class="nf-section-block" aria-labelledby="ent-skus">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">02</span><div>
  <p class="nf-eyebrow" id="ent-skus">Institutional SKUs</p><h2>Trust Brief → Copilot Pack → Bank Pilot</h2>
  </div></div>
 """ + offerings_three_skus() + """
@@ -3277,18 +3304,14 @@ def main() -> None:
 
 
 def patch_www_verify_needles() -> None:
-    """Apply portfolio verify needles after sync (v43 shell + gate intake.css)."""
-    v43_pages = ("index.html", "investors/index.html", "investors/diligence/index.html")
-    for rel in v43_pages:
-        path = ROOT / rel
-        if not path.is_file():
-            continue
-        orig = path.read_text(encoding="utf-8")
-        text = orig.replace(f"noetfield-www.css?v={WWW_VER}", f"noetfield-www.css?v={LIVE_PROOF_WWW_VER}")
-        text = text.replace(f"noetfield-shell.js?v={WWW_VER}", f"noetfield-shell.js?v={LIVE_PROOF_WWW_VER}")
+    """Apply portfolio verify needles after sync."""
+    diligence = ROOT / "investors/diligence/index.html"
+    if diligence.is_file():
+        orig = diligence.read_text(encoding="utf-8")
+        text = orig.replace(f"noetfield-www.css?v={WWW_VER}", f"noetfield-www.css?v={INVESTOR_DILIGENCE_WWW_VER}")
         if text != orig:
-            path.write_text(text, encoding="utf-8")
-            print("patched v43", rel)
+            diligence.write_text(text, encoding="utf-8")
+            print("patched investor diligence css", "investors/diligence/index.html")
 
     gate = ROOT / "gate/intake/index.html"
     if gate.is_file():

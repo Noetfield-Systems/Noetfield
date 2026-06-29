@@ -37,5 +37,159 @@
   "plans_open": 58,
   "full_register": "docs/ops/CHATBOT_KNOWLEDGE_UPGRADE_LOCKED_v1.md#10-phases--100-plans-full-register",
   "deploy_required": "platform.noetfield.com governance service",
-  "distilled_at": "2026-06-27T06:04:06Z"
+  "distilled_at": "2026-06-29T01:30:00Z",
+  "schema_version": "noetfield-chatbot-manifest-v2",
+  "runtime_contract": "manifest_allowlist_fresh_public_sources_only",
+  "public_sources": [
+    {
+      "path": "data/chatbot/knowledge/canada-regulatory-2026.md",
+      "visibility": "public",
+      "source_label": "Canada regulatory context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "11a916773126bbe76bf2c2e9466bc5fcc669b643443b6bd5748379cbdc61aca4",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/developer-tools.md",
+      "visibility": "public",
+      "source_label": "Developer tools",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "8c60dd2b62f9d565d7975aa0d4b40cf523a673bdf8f3c3a2c225875d5ea89921",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/faq-live.md",
+      "visibility": "public",
+      "source_label": "Public site context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "fc5f1a68cd5fc28c47e546f624b4a932b8e2212eb7cbbc877469bb077645b1b4",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/faq.md",
+      "visibility": "public",
+      "source_label": "Public site context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "8e76bab57cce39054e922510377d3d41c5b5de3d0777b0105318fcfc92803ce0",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/gel-runtime.md",
+      "visibility": "public",
+      "source_label": "GEL runtime public context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "681b852d2b85b4841ab9fcb07dd2e6b5aaa2e30f8501f0e372149ef15d010443",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/intelligence-lane.md",
+      "visibility": "public",
+      "source_label": "Intelligence lane public context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "319dec77e44c87e04017db0c7700cb316dce040b9a53547d3ba4323196597e5a",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/investor-public.md",
+      "visibility": "public",
+      "source_label": "Investor public context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "0eeb7b818377d60ccc12a2bb26b50fdaed1ccc0bdfab89fe1e017e6f6c222b0f",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/offerings.md",
+      "visibility": "public",
+      "source_label": "Public offerings context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "b8121078601fe99e9a3c67e2b8a9ee25f49de9d2f0ed302894ac03f52d5772b4",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/partner-control-layer.md",
+      "visibility": "public",
+      "source_label": "Partner control layer",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "9cf7bc472d95eaf2e0a20613117ea2355c97616a57197bcda40b2424ab64e6dd",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/positioning.md",
+      "visibility": "public",
+      "source_label": "Public positioning context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "8974340214264dbab5cf8fce85ad8dc0c1982cd07eca7fe3c1eeb2cde65fc947",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/pricing-matrix.md",
+      "visibility": "public",
+      "source_label": "Pricing public context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "2a184c73bb1e326bb5f6c3b895412e67a5f7f39f0b0618e06eb880662d550ebc",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/site-surfaces.md",
+      "visibility": "public",
+      "source_label": "Public site map",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "6d304ec9120d92ef6a466dc0e9e1ce37876696c1fbb28ef139917873b84886ba",
+      "superseded": false
+    },
+    {
+      "path": "data/chatbot/knowledge/trust-ledger-public.md",
+      "visibility": "public",
+      "source_label": "Trust Ledger public context",
+      "source_url": "/faq/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "6485eb39607b81abe8528db0953379723b79f745892a2e487eb29edd58474c21",
+      "superseded": false
+    },
+    {
+      "path": "PRODUCT_BRIEF.md",
+      "visibility": "public",
+      "source_label": "Public product brief",
+      "source_url": "/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "d6d59f96f3d4728efd3765d04050c943e25b3baaabc52fae21cf2d6706170e88",
+      "superseded": false
+    },
+    {
+      "path": "OFFERINGS_LOCKED.md",
+      "visibility": "public",
+      "source_label": "Public offerings",
+      "source_url": "/",
+      "updated_at": "2026-06-29T01:30:00Z",
+      "valid_until": "2026-07-29T00:00:00Z",
+      "content_hash": "7cc3108cf369f586f2addea4a5553c281e945a2c351b8c7f4fd1c1f7a0793d2c",
+      "superseded": false
+    }
+  ]
 }

@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|--------|
 | **Status** | LOCKED — single navigation SSOT for docs, agent memory, plans, and skills |
-| **Updated** | 2026-06-13 |
+| **Updated** | 2026-06-29 |
 | **Router** | [README.md](./README.md) |
 | **Verify** | `make verify-doc-ssot` |
 | **Reports** | [`reports/README.md`](../reports/README.md) — ephemeral ingest/handoff only |
@@ -14,6 +14,7 @@
 
 | Order | Asset | Path |
 |-------|-------|------|
+| 0a | **Live nerve receipt** | `make verify-live-nerve` → `governance/NOETFIELD_LIVE_NERVE_RECEIPT.json` |
 | 0 | **NF-GAOS boot** | `make nf-onboard` → `reports/agent-auto/LIVE-STATUS.md` |
 | 0b | Role picker | `entry/START_HERE_LOCKED_v1.md` |
 | 0c | Routing pin | `ROUTING_CARD.md` |
@@ -74,6 +75,12 @@
 
 | Domain | Canonical |
 |--------|-----------|
+| **Ownership / sync charter** | `docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md` |
+| **Website / NOOS real sync handoff** | `docs/ops/NOETFIELD_WEBSITE_NOOS_REAL_SYNC_HANDOFF_LOCKED_v1.md` |
+| **Live nerve handoff** | `docs/ops/NOETFIELD_LIVE_NERVE_HANDOFF_LOCKED_v1.md` |
+| **Cloud inventory** | `docs/ops/CLOUD_INVENTORY_LOCKED_v1.md` |
+| **Vercel www deploy** | `docs/ops/VERCEL_WWW_DEPLOY_LOCKED_v1.md` |
+| **Cloudflare www proxy** | `docs/ops/CF_WWW_PROXY_LOCKED_v1.md` |
 | Design patterns R1–R25 | `docs/DESIGN_REFERENCE_GOALS_LOCKED_v1.md` |
 | **Packaging program (v16)** | `docs/WWW_V16_PACKAGING_PLAN_LOCKED_v1.md` |
 | **Tier-1 UI masterplan (v18)** | `docs/WWW_V18_TIER1_UI_MASTERPLAN_LOCKED_v1.md` |

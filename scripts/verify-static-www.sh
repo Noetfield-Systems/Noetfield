@@ -126,6 +126,9 @@ check_file "vercel intake API" vercel.json \
 check_file "www chat handler" api/public/chat/index.js \
   'www-local' 'operations@noetfield.com'
 
+chmod +x scripts/verify-public-chat-truth.sh
+scripts/verify-public-chat-truth.sh
+
 check_file "www intake serverless" api/intake.js \
   'sendIntakeEmails' 'operations@noetfield.com'
 
@@ -279,6 +282,12 @@ done
 [[ -f vercel.json ]] && grep -qF '/platform' vercel.json && ok "vercel.json blocks platform" || bad "vercel.json missing platform block"
 [[ -f governance/index.html ]] && ok "public governance hub html present" || bad "missing governance/index.html"
 [[ -f .vercelignore ]] && grep -qF 'docs/mockups/' .vercelignore && ok "vercelignore excludes docs/mockups" || bad "vercelignore missing docs/mockups"
+[[ -f .vercelignore ]] && grep -qF '.agents/' .vercelignore && ok "vercelignore excludes .agents" || bad "vercelignore missing .agents"
+[[ -f .vercelignore ]] && grep -qF 'data/chatbot/' .vercelignore && ok "vercelignore excludes raw chatbot data" || bad "vercelignore missing data/chatbot"
+[[ -f vercel.json ]] && grep -qF '/.agents' vercel.json && ok "vercel.json blocks .agents" || bad "vercel.json missing .agents block"
+[[ -f vercel.json ]] && grep -qF '/data/chatbot' vercel.json && ok "vercel.json blocks raw chatbot data" || bad "vercel.json missing raw chatbot block"
+python3 scripts/verify-public-output-allowlist.py || fail=1
+bash scripts/verify-public-chat-truth.sh || fail=1
 
 # Truth mockups — ban invented product copy on public www
 FAKE_PATTERN='FINTRAC|HIPAA policy pack|Factory catalog|Most deployed|\$48,?000|\$48k transfer|18 nodes|24 nodes|Governed Exchange|Audit Factory'

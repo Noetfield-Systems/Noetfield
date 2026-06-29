@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack verify-gtm verify-no-vendor-names verify-static-www verify-ui-build-checklist nf-ui-checklist verify-www verify-tier0 verify-tier1 verify-tier2 verify-tier3 verify-all-tiers verify-nf-gaos-w2
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack verify-gtm verify-no-vendor-names verify-static-www verify-ui-build-checklist nf-ui-checklist verify-www verify-tier0 verify-tier1 verify-tier2 verify-tier3 verify-all-tiers verify-nf-gaos-w2 verify-public-output-allowlist verify-public-chat-truth nf-live-nerve verify-live-nerve
 
 PYTHONPATH_VALUE := packages/types:packages/config:packages/sdk:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance
 
@@ -119,6 +119,19 @@ verify-no-vendor-names:
 verify-static-www:
 	@chmod +x scripts/verify-static-www.sh
 	./scripts/verify-static-www.sh
+
+verify-public-output-allowlist:
+	@python3 scripts/verify-public-output-allowlist.py
+
+verify-public-chat-truth:
+	@chmod +x scripts/verify-public-chat-truth.sh
+	./scripts/verify-public-chat-truth.sh
+
+nf-live-nerve:
+	@python3 scripts/noetfield_live_nerve.py --write
+
+verify-live-nerve:
+	@python3 scripts/noetfield_live_nerve.py --write
 
 verify-www-e2e:
 	@chmod +x scripts/check_noetfield_com_e2e.py
@@ -322,6 +335,7 @@ ship-verify:
 	@echo "=== ship-verify (Noetfield merge/deploy readiness) ==="
 	@chmod +x scripts/verify-agent-scope.sh 2>/dev/null || true
 	@./scripts/verify-agent-scope.sh
+	@python3 scripts/noetfield_live_nerve.py --write
 	@chmod +x scripts/verify-nf-gaos-w1.sh 2>/dev/null || true
 	@./scripts/verify-nf-gaos-w1.sh
 	@test -f docs/SHIP_NOW.md

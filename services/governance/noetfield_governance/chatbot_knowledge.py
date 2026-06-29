@@ -4,16 +4,15 @@ from __future__ import annotations
 
 import json
 import re
+import hashlib
+from datetime import datetime, timezone
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 _KNOWLEDGE_DIR = _REPO_ROOT / "data" / "chatbot" / "knowledge"
-_EXTRA_MD = (
-    _REPO_ROOT / "PRODUCT_BRIEF.md",
-    _REPO_ROOT / "OFFERINGS_LOCKED.md",
-)
+_MANIFEST_PATH = _REPO_ROOT / "data" / "chatbot" / "MANIFEST.json"
 
 # Always inject these knowledge files when question lane matches (even when trimming).
 _LANE_FILES: dict[str, tuple[str, ...]] = {
@@ -55,7 +54,8 @@ _LANE_PATTERNS: dict[str, re.Pattern[str]] = {
 }
 
 _BUILTIN_CORE = """## Source: Public site context (core)
-Noetfield is governance execution infrastructure. Three contract SKUs: Trust Brief, Copilot Governance Pack, Bank Pilot.
+Noetfield produces the audit trail a regulated Copilot rollout will be asked for later: signed go/no-go receipts, Trust Ledger Entries, board PDF, procurement ZIP, and metadata-only M365 evidence before production scope opens.
+Lead paid path: Copilot Governance Pack ($2k-10k, 90 days). Contract SKUs: Copilot Governance Pack, Trust Brief, Bank Pilot.
 GEL = Governance Execution Layer — see /gel/ and gel-runtime.md.
 Developer tools: pip install noetfield-gate · api.noetfield.com
 Intake: operations@noetfield.com with RID in subject.
@@ -255,11 +255,104 @@ def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8").strip()
 
 
+def _rel_path(path: Path) -> str:
+    return path.resolve().relative_to(_REPO_ROOT.resolve()).as_posix()
+
+
+def _parse_manifest_time(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+@lru_cache(maxsize=1)
+def _manifest() -> dict[str, Any]:
+    if not _MANIFEST_PATH.is_file():
+        return {}
+    try:
+        return json.loads(_MANIFEST_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+
+
+def _manifest_public_sources() -> dict[str, dict[str, Any]]:
+    data = _manifest()
+    entries = data.get("public_sources") or []
+    sources: dict[str, dict[str, Any]] = {}
+    if isinstance(entries, list):
+        for entry in entries:
+            if isinstance(entry, dict) and isinstance(entry.get("path"), str):
+                sources[entry["path"]] = entry
+    return sources
+
+
+def _manifest_allowed_paths() -> list[Path]:
+    sources = _manifest_public_sources()
+    if sources:
+        return [_REPO_ROOT / rel for rel in sources]
+    data = _manifest()
+    names = data.get("knowledge_files") or []
+    paths = [_KNOWLEDGE_DIR / name for name in names if isinstance(name, str)]
+    paths.extend(_REPO_ROOT / name for name in data.get("extra_sources", []) if isinstance(name, str))
+    return paths
+
+
+def _validate_manifest_source(path: Path) -> tuple[bool, str]:
+    rel = _rel_path(path)
+    source = _manifest_public_sources().get(rel)
+    if not source:
+        return False, f"{rel} is not in chatbot manifest public_sources"
+    if source.get("visibility") != "public":
+        return False, f"{rel} is not marked visibility=public"
+    if source.get("superseded") is True:
+        return False, f"{rel} is superseded"
+    expires = _parse_manifest_time(source.get("valid_until"))
+    if not expires:
+        return False, f"{rel} is missing valid_until"
+    if expires < datetime.now(timezone.utc):
+        return False, f"{rel} expired at {source.get('valid_until')}"
+    expected_hash = source.get("content_hash")
+    if not isinstance(expected_hash, str) or not expected_hash:
+        return False, f"{rel} is missing content_hash"
+    if path.is_file():
+        actual_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual_hash != expected_hash:
+            return False, f"{rel} content_hash mismatch"
+    return True, "ok"
+
+
+def knowledge_manifest_violations() -> list[str]:
+    violations: list[str] = []
+    sources = _manifest_public_sources()
+    allowed = set(sources)
+    if not sources:
+        violations.append("data/chatbot/MANIFEST.json has no public_sources allowlist")
+    if _KNOWLEDGE_DIR.is_dir():
+        for path in sorted(_KNOWLEDGE_DIR.glob("*.md")):
+            rel = _rel_path(path)
+            if rel not in allowed:
+                violations.append(f"{rel} is unmanifested")
+    for path in _manifest_allowed_paths():
+        if not path.is_file():
+            violations.append(f"{_rel_path(path)} missing")
+            continue
+        ok, message = _validate_manifest_source(path)
+        if not ok:
+            violations.append(message)
+    return violations
+
+
 def _source_block(path: Path, *, core: bool = False) -> str:
     body = _read(path)
     if not body:
         return ""
-    label = _PUBLIC_SOURCE_LABELS.get(path.name, path.stem.replace("-", " ").title())
+    source = _manifest_public_sources().get(_rel_path(path), {})
+    label = source.get("source_label") or _PUBLIC_SOURCE_LABELS.get(
+        path.name, path.stem.replace("-", " ").title()
+    )
     if core:
         label = f"{label} (core)"
     return f"## Source: {label}\n{body}"
@@ -268,13 +361,11 @@ def _source_block(path: Path, *, core: bool = False) -> str:
 @lru_cache(maxsize=1)
 def build_knowledge_context() -> str:
     """Single context block injected into the model system instruction."""
+    violations = knowledge_manifest_violations()
+    if violations:
+        raise RuntimeError("Invalid chatbot knowledge manifest: " + "; ".join(violations[:5]))
     chunks: list[str] = []
-    if _KNOWLEDGE_DIR.is_dir():
-        for path in sorted(_KNOWLEDGE_DIR.glob("*.md")):
-            block = _source_block(path)
-            if block:
-                chunks.append(block)
-    for path in _EXTRA_MD:
+    for path in _manifest_allowed_paths():
         block = _source_block(path)
         if block:
             chunks.append(block)
@@ -292,6 +383,9 @@ _PINNED_PATHS: tuple[Path, ...] = (
 
 
 def _pinned_sections() -> str:
+    violations = knowledge_manifest_violations()
+    if violations:
+        raise RuntimeError("Invalid chatbot knowledge manifest: " + "; ".join(violations[:5]))
     chunks: list[str] = []
     for path in _PINNED_PATHS:
         block = _source_block(path, core=True)
@@ -303,6 +397,9 @@ def _pinned_sections() -> str:
 
 
 def _forced_lane_sections(lanes: list[str]) -> str:
+    violations = knowledge_manifest_violations()
+    if violations:
+        raise RuntimeError("Invalid chatbot knowledge manifest: " + "; ".join(violations[:5]))
     if not lanes:
         return ""
     names: list[str] = []
@@ -325,12 +422,10 @@ def _forced_lane_sections(lanes: list[str]) -> str:
 
 
 def knowledge_bundle_version() -> str:
-    manifest = _REPO_ROOT / "data" / "chatbot" / "MANIFEST.json"
-    if not manifest.is_file():
+    if not _MANIFEST_PATH.is_file():
         return "NOETFIELD-CHATBOT-UNKNOWN"
-    try:
-        data = json.loads(manifest.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
+    data = _manifest()
+    if not data:
         return "NOETFIELD-CHATBOT-INVALID"
     trace = data.get("trace_id", "NOETFIELD-CHATBOT")
     done = data.get("plans_done", 0)
@@ -347,8 +442,10 @@ def knowledge_context_stats() -> dict[str, int | bool | str]:
         "loaded": bool(full.strip()),
         "chars": len(full),
         "pinned_chars": len(pinned),
-        "knowledge_files": len(list(_KNOWLEDGE_DIR.glob("*.md"))) if _KNOWLEDGE_DIR.is_dir() else 0,
+        "knowledge_files": len(_manifest_allowed_paths()),
         "knowledge_bundle_version": knowledge_bundle_version(),
+        "manifest_ok": not knowledge_manifest_violations(),
+        "manifest_violations": len(knowledge_manifest_violations()),
     }
 
 

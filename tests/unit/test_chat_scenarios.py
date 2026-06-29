@@ -8,6 +8,7 @@ from noetfield_governance.chatbot_knowledge import (
     build_query_with_subject,
     detect_question_lanes,
     infer_subject_phrase,
+    knowledge_manifest_violations,
     select_relevant_excerpt,
 )
 from noetfield_governance import chatbot_knowledge
@@ -85,6 +86,32 @@ def test_knowledge_corpus_size() -> None:
     ctx = select_relevant_excerpt("overview")
     assert len(ctx) > 20_000
     assert "gel-runtime.md" in ctx.lower() or "Governance Execution Layer" in ctx
+
+
+def test_chatbot_knowledge_manifest_is_fail_closed() -> None:
+    assert knowledge_manifest_violations() == []
+
+
+def test_public_chat_corpus_rejects_stale_positioning() -> None:
+    ctx = select_relevant_excerpt("Executive overview").lower()
+    forbidden = (
+        "noetfield provides governance execution infrastructure",
+        "noetfield is governance execution infrastructure",
+        "records a defensible compliance log",
+        "record a compliance log, and return allow or deny",
+        "returns a clear allow or deny decision",
+        "support compliance and risk management in ai adoption",
+    )
+    for phrase in forbidden:
+        assert phrase not in ctx
+    for phrase in (
+        "audit trail a regulated copilot rollout will be asked for later",
+        "copilot governance pack",
+        "board pdf",
+        "procurement zip",
+        "metadata-only m365",
+    ):
+        assert phrase in ctx
 
 
 def test_model_context_uses_public_source_labels() -> None:
