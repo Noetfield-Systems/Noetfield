@@ -1,7 +1,7 @@
 {
   "gate": "PASS",
-  "generated_at": "2026-06-29T04:33:56.701071Z",
-  "git_sha": "a8d7bb20cabca54ebc11295f94e0c797cf0e05a8",
+  "generated_at": "2026-06-29T04:38:37.014526Z",
+  "git_sha": "01af5c7ede202077cce150388a581909d266e12d",
   "next_safe_action": "use this receipt as current truth before docs or chat summaries",
   "nodes": {
     "N13_ROUTE_INVENTORY": {
@@ -57,7 +57,7 @@
       "base": "https://platform.noetfield.com",
       "ok": true,
       "provider": "openrouter",
-      "reply_preview": "Noetfield provides an AI Governance & Evidence layer, primarily for Microsoft 365 Copilot adoption. We produce the audit trail that regulated organizations will need for their Copilot rollouts. This includes signed go/no-go decisions, Trust",
+      "reply_preview": "Noetfield provides an AI Governance & Evidence layer, primarily for Microsoft 365 Copilot adoption. We produce the audit trail that regulated organizations will need for their Copilot rollouts. This includes signed go/no-go receipts, Trust ",
       "stale_hits": [],
       "status": 200
     },
@@ -84,5 +84,27 @@
   },
   "ok": true,
   "repo": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield",
-  "schema": "noetfield-live-nerve-receipt-v1"
+  "schema": "noetfield-live-nerve-receipt-v1",
+  "scope": "website-platform-public",
+  "scope_semantics": {
+    "ecosystem_green": false,
+    "ecosystem_green_policy": "Do not claim full ecosystem green from this website/platform receipt alone. Full ecosystem green requires every named scope receipt to be PASS, or DEGRADED only when warnings are explicit and accepted by that scope owner.",
+    "named_scope_receipts": {
+      "foundation_pattern": "SourceA session/foundation receipts; warning-only from this repo",
+      "gel_runtime": "~/Projects/noetfeld-os/docs/_NOOS_AGENT/live_sync/NOOS_LIVE_SYNC_RECEIPT.json",
+      "studio_boundary": "~/Projects/noetfeld-os/docs/_NOOS_AGENT/live_sync/NOOS_LIVE_SYNC_RECEIPT.json",
+      "website_platform_public": "governance/NOETFIELD_LIVE_NERVE_RECEIPT.json"
+    },
+    "public_scope_gate": "PASS",
+    "sourcea_foundation_drift": {
+      "blocks_www_deploy": false,
+      "policy": "SourceA drift is a foundation-pattern warning. It must be repaired in SourceA/NOOS, but it does not fail Noetfield www deploy unless a Noetfield runtime/public node fails.",
+      "status": "warning_only"
+    },
+    "status_language": {
+      "DEGRADED": "Required runtime is usable, but named non-blocking warnings must be acknowledged.",
+      "FAIL": "One or more required nodes failed; repair before using docs as truth.",
+      "PASS": "All required nodes for the named scope are green."
+    }
+  }
 }

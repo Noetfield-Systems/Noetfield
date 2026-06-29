@@ -26,6 +26,12 @@ WWW_BASE = "https://www.noetfield.com"
 PLATFORM_BASE = "https://platform.noetfield.com"
 GEL_BASE = "https://api.noetfield.com"
 
+STATUS_LANGUAGE = {
+    "PASS": "All required nodes for the named scope are green.",
+    "DEGRADED": "Required runtime is usable, but named non-blocking warnings must be acknowledged.",
+    "FAIL": "One or more required nodes failed; repair before using docs as truth.",
+}
+
 STALE_CHAT_TERMS = (
     "governance execution infrastructure",
     "compliance log",
@@ -284,7 +290,7 @@ def build_receipt() -> dict[str, Any]:
     route_nav = route_nav_status()
     registry = validator_node_registry_status()
     route_inventory = route_inventory_status()
-    ok = bool(
+    public_scope_ok = bool(
         public_output["ok"]
         and chatbot["ok"]
         and docs["ok"]
@@ -296,16 +302,42 @@ def build_receipt() -> dict[str, Any]:
         and registry["ok"]
         and route_inventory["ok"]
     )
+    gate = "PASS" if public_scope_ok else "FAIL"
     return {
         "schema": "noetfield-live-nerve-receipt-v1",
+        "scope": "website-platform-public",
+        "scope_semantics": {
+            "status_language": STATUS_LANGUAGE,
+            "public_scope_gate": gate,
+            "ecosystem_green": False,
+            "ecosystem_green_policy": (
+                "Do not claim full ecosystem green from this website/platform receipt alone. "
+                "Full ecosystem green requires every named scope receipt to be PASS, or DEGRADED only "
+                "when warnings are explicit and accepted by that scope owner."
+            ),
+            "sourcea_foundation_drift": {
+                "status": "warning_only",
+                "blocks_www_deploy": False,
+                "policy": (
+                    "SourceA drift is a foundation-pattern warning. It must be repaired in SourceA/NOOS, "
+                    "but it does not fail Noetfield www deploy unless a Noetfield runtime/public node fails."
+                ),
+            },
+            "named_scope_receipts": {
+                "website_platform_public": "governance/NOETFIELD_LIVE_NERVE_RECEIPT.json",
+                "gel_runtime": "~/Projects/noetfeld-os/docs/_NOOS_AGENT/live_sync/NOOS_LIVE_SYNC_RECEIPT.json",
+                "studio_boundary": "~/Projects/noetfeld-os/docs/_NOOS_AGENT/live_sync/NOOS_LIVE_SYNC_RECEIPT.json",
+                "foundation_pattern": "SourceA session/foundation receipts; warning-only from this repo",
+            },
+        },
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "repo": str(ROOT),
         "git_sha": git_sha(),
-        "ok": ok,
-        "gate": "PASS" if ok else "FAIL",
+        "ok": public_scope_ok,
+        "gate": gate,
         "next_safe_action": (
             "use this receipt as current truth before docs or chat summaries"
-            if ok
+            if public_scope_ok
             else "repair failed local/live nerve surfaces before using docs as truth"
         ),
         "nodes": {

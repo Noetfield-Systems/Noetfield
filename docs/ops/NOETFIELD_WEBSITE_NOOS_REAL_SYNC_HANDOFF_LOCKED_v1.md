@@ -78,6 +78,14 @@ governance/NOETFIELD_LIVE_NERVE_RECEIPT.json
 
 If the receipt is missing or `gate=FAIL`, the next safe action is to repair the live nerve. Do not use stale docs as implementation truth while the live nerve is failing.
 
+The website receipt scope is:
+
+```text
+website-platform-public
+```
+
+It proves public website/platform readiness. It does not by itself prove full ecosystem green.
+
 Current live nerve nodes:
 
 ```text
@@ -92,7 +100,9 @@ N8_ROUTE_NAV_TRUTH
 N9_VALIDATOR_NODE_REGISTRY
 ```
 
-This means website, platform public chat, and GEL readiness are checked together before claiming the ecosystem is green.
+This means website, platform public chat, and GEL readiness are checked together before claiming the public website/platform scope is green.
+
+Full ecosystem green requires every named scope receipt to be `PASS`, or `DEGRADED` only when warnings are explicit and accepted by that scope owner. SourceA foundation drift remains a foundation warning, not a Noetfield `www` deploy blocker, unless it causes a Noetfield public/runtime node to fail.
 
 ## Write Rule
 

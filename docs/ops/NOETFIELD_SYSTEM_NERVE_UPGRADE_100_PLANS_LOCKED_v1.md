@@ -37,6 +37,10 @@ P0 is not "ideas". P0 means the system must fail closed when public output, rout
 10. Add `governance/ROUTE_INVENTORY.json` as the source for required public 200 routes.
 11. Wire production E2E to read `ROUTE_INVENTORY.json`.
 12. Add `N13_ROUTE_INVENTORY` and `scripts/verify-route-inventory.py`.
+13. Add receipt scope semantics: `PASS`, `DEGRADED`, `FAIL`.
+14. Make the website live receipt explicitly scoped to `website-platform-public`.
+15. Prevent this receipt from being used alone as a full ecosystem green claim.
+16. Record SourceA foundation drift as warning-only for website deploys unless a Noetfield public/runtime node fails.
 
 ### Remaining P0 Decisions
 

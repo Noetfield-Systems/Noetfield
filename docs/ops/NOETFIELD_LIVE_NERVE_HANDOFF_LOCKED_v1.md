@@ -20,6 +20,14 @@ governance/NOETFIELD_LIVE_NERVE_RECEIPT.json
 
 If this receipt is missing or `gate=FAIL`, repair the live nerve before using docs as truth.
 
+This receipt is scoped to:
+
+```text
+website-platform-public
+```
+
+It can prove public website/platform readiness. It must not be used alone to claim the full ecosystem is green.
+
 ## Required First Read
 
 Before implementation work in the website/platform repo:
@@ -46,6 +54,16 @@ governance/NOETFIELD_LIVE_NERVE_RECEIPT.json
 - `N8_ROUTE_NAV_TRUTH`: public nav labels do not imply missing hubs or stale public company language.
 - `N9_VALIDATOR_NODE_REGISTRY`: validator registry and node catalog have no orphan validators, orphan live nodes, or missing files.
 - `N13_ROUTE_INVENTORY`: required public 200 routes come from `governance/ROUTE_INVENTORY.json`, not hardcoded E2E tuples.
+
+## PASS / DEGRADED / FAIL
+
+- `PASS`: all required nodes for this named scope are green.
+- `DEGRADED`: required runtime is usable, but named non-blocking warnings must be acknowledged.
+- `FAIL`: one or more required nodes failed; repair before using docs as truth.
+
+Full ecosystem green requires every named scope receipt to be `PASS`, or `DEGRADED` only when warnings are explicit and accepted by that scope owner.
+
+SourceA foundation drift is a warning for this website/platform receipt. It does not block `www.noetfield.com` deploy unless a Noetfield public/runtime node fails.
 
 ## Agent Rule
 
