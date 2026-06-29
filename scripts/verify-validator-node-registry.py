@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import json
-import re
 import argparse
 from pathlib import Path
 from typing import Any
@@ -23,11 +22,6 @@ def file_exists(rel_path: str) -> bool:
     return (ROOT / rel_path).exists()
 
 
-def is_live_receipt_node(node_id: str) -> bool:
-    match = re.match(r"^N(\d+)_", node_id)
-    return bool(match and int(match.group(1)) <= 9)
-
-
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--skip-live-receipt", action="store_true")
@@ -43,6 +37,11 @@ def main() -> int:
     validator_ids = {row.get("id") for row in validators}
     node_ids = {row.get("id") for row in nodes}
     active_node_ids = {row.get("id") for row in nodes if row.get("status") == "active"}
+    live_receipt_node_ids = {
+        row.get("id")
+        for row in nodes
+        if row.get("status") == "active" and "V5_LIVE_NERVE" in set(row.get("validator_ids", []))
+    }
 
     if validator_doc.get("schema") != "noetfield-validator-registry-v1":
         failures.append("VALIDATOR_REGISTRY.json has wrong schema")
@@ -94,7 +93,7 @@ def main() -> int:
             if node_id not in node_ids:
                 failures.append(f"live receipt has node missing from catalog: {node_id}")
         for node_id in active_node_ids:
-            if isinstance(node_id, str) and is_live_receipt_node(node_id) and node_id not in live_nodes:
+            if isinstance(node_id, str) and node_id in live_receipt_node_ids and node_id not in live_nodes:
                 failures.append(f"active live node missing from receipt: {node_id}")
 
     if failures:

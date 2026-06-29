@@ -1,7 +1,7 @@
 {
   "gate": "PASS",
-  "generated_at": "2026-06-29T04:38:37.014526Z",
-  "git_sha": "01af5c7ede202077cce150388a581909d266e12d",
+  "generated_at": "2026-06-29T04:43:28.345425Z",
+  "git_sha": "a2d852ac34d4b52d4651bb5c48b2592705dec137",
   "next_safe_action": "use this receipt as current truth before docs or chat summaries",
   "nodes": {
     "N13_ROUTE_INVENTORY": {
@@ -9,6 +9,11 @@
       "ok": true,
       "stderr": "",
       "stdout": "verify-route-inventory: PASS mode=structural routes=20\n"
+    },
+    "N14_RECEIPT_FRESHNESS": {
+      "expires_at": "2026-06-29T05:13:28.345425Z",
+      "ok": true,
+      "valid_for_seconds": 1800
     },
     "N1_PUBLIC_OUTPUT": {
       "blocked_count": 0,
@@ -57,7 +62,7 @@
       "base": "https://platform.noetfield.com",
       "ok": true,
       "provider": "openrouter",
-      "reply_preview": "Noetfield provides an AI Governance & Evidence layer, primarily for Microsoft 365 Copilot adoption. We produce the audit trail that regulated organizations will need for their Copilot rollouts. This includes signed go/no-go receipts, Trust ",
+      "reply_preview": "Noetfield provides an AI Governance & Evidence layer, primarily for Microsoft 365 Copilot adoption. We produce the audit trail that regulated organizations will need for their Copilot rollouts. This includes policy-bound go/no-go decisions,",
       "stale_hits": [],
       "status": 200
     },
@@ -79,10 +84,17 @@
       "command": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 scripts/verify-validator-node-registry.py --skip-live-receipt",
       "ok": true,
       "stderr": "",
-      "stdout": "verify-validator-node-registry: PASS\nmode=structural validators=10 nodes=13 live_nodes=0\n"
+      "stdout": "verify-validator-node-registry: PASS\nmode=structural validators=11 nodes=14 live_nodes=0\n"
     }
   },
   "ok": true,
+  "receipt_freshness": {
+    "expires_at": "2026-06-29T05:13:28.345425Z",
+    "generated_at": "2026-06-29T04:43:28.345425Z",
+    "policy": "Agents must run make verify-live-nerve before implementation if this receipt is expired.",
+    "stale_after": "expires_at",
+    "valid_for_seconds": 1800
+  },
   "repo": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield",
   "schema": "noetfield-live-nerve-receipt-v1",
   "scope": "website-platform-public",

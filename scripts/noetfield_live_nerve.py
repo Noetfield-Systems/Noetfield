@@ -11,7 +11,7 @@ import subprocess
 import sys
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -25,6 +25,7 @@ ROUTE_INVENTORY_SCRIPT = ROOT / "scripts" / "verify-route-inventory.py"
 WWW_BASE = "https://www.noetfield.com"
 PLATFORM_BASE = "https://platform.noetfield.com"
 GEL_BASE = "https://api.noetfield.com"
+LIVE_RECEIPT_VALID_SECONDS = 1800
 
 STATUS_LANGUAGE = {
     "PASS": "All required nodes for the named scope are green.",
@@ -280,6 +281,8 @@ def public_doc_freshness() -> dict[str, Any]:
 
 
 def build_receipt() -> dict[str, Any]:
+    generated_at = datetime.now(timezone.utc)
+    expires_at = generated_at + timedelta(seconds=LIVE_RECEIPT_VALID_SECONDS)
     public_output = public_output_status()
     chatbot = chatbot_status()
     docs = public_doc_freshness()
@@ -305,6 +308,13 @@ def build_receipt() -> dict[str, Any]:
     gate = "PASS" if public_scope_ok else "FAIL"
     return {
         "schema": "noetfield-live-nerve-receipt-v1",
+        "receipt_freshness": {
+            "valid_for_seconds": LIVE_RECEIPT_VALID_SECONDS,
+            "generated_at": generated_at.isoformat().replace("+00:00", "Z"),
+            "expires_at": expires_at.isoformat().replace("+00:00", "Z"),
+            "stale_after": "expires_at",
+            "policy": "Agents must run make verify-live-nerve before implementation if this receipt is expired.",
+        },
         "scope": "website-platform-public",
         "scope_semantics": {
             "status_language": STATUS_LANGUAGE,
@@ -330,7 +340,7 @@ def build_receipt() -> dict[str, Any]:
                 "foundation_pattern": "SourceA session/foundation receipts; warning-only from this repo",
             },
         },
-        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "generated_at": generated_at.isoformat().replace("+00:00", "Z"),
         "repo": str(ROOT),
         "git_sha": git_sha(),
         "ok": public_scope_ok,
@@ -351,6 +361,11 @@ def build_receipt() -> dict[str, Any]:
             "N8_ROUTE_NAV_TRUTH": route_nav,
             "N9_VALIDATOR_NODE_REGISTRY": registry,
             "N13_ROUTE_INVENTORY": route_inventory,
+            "N14_RECEIPT_FRESHNESS": {
+                "ok": True,
+                "valid_for_seconds": LIVE_RECEIPT_VALID_SECONDS,
+                "expires_at": expires_at.isoformat().replace("+00:00", "Z"),
+            },
         },
     }
 

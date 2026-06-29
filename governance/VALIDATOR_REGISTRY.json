@@ -52,7 +52,8 @@
         "N7_GEL_LIVE_RUNTIME",
         "N8_ROUTE_NAV_TRUTH",
         "N9_VALIDATOR_NODE_REGISTRY",
-        "N13_ROUTE_INVENTORY"
+        "N13_ROUTE_INVENTORY",
+        "N14_RECEIPT_FRESHNESS"
       ]
     },
     {
@@ -94,6 +95,14 @@
       "script": "scripts/verify-route-inventory.py",
       "receipt": null,
       "node_ids": ["N13_ROUTE_INVENTORY"]
+    },
+    {
+      "id": "V11_LIVE_NERVE_RECEIPT_FRESHNESS",
+      "scope": "live-nerve-receipt-freshness",
+      "command": "python3 scripts/verify-live-nerve-receipt.py",
+      "script": "scripts/verify-live-nerve-receipt.py",
+      "receipt": "governance/NOETFIELD_LIVE_NERVE_RECEIPT.json",
+      "node_ids": ["N14_RECEIPT_FRESHNESS"]
     }
   ]
 }

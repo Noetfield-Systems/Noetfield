@@ -41,6 +41,9 @@ P0 is not "ideas". P0 means the system must fail closed when public output, rout
 14. Make the website live receipt explicitly scoped to `website-platform-public`.
 15. Prevent this receipt from being used alone as a full ecosystem green claim.
 16. Record SourceA foundation drift as warning-only for website deploys unless a Noetfield public/runtime node fails.
+17. Add receipt freshness metadata with `generated_at`, `expires_at`, and `valid_for_seconds`.
+18. Add `N14_RECEIPT_FRESHNESS` and `scripts/verify-live-nerve-receipt.py`.
+19. Wire receipt freshness verification into `make verify-live-nerve`.
 
 ### Remaining P0 Decisions
 

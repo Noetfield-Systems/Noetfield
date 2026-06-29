@@ -120,6 +120,15 @@
       "description": "Public route inventory is the source for production E2E required-live routes.",
       "files": ["governance/ROUTE_INVENTORY.json", "scripts/verify-route-inventory.py", "scripts/check_noetfield_com_e2e.py"],
       "validator_ids": ["V5_LIVE_NERVE", "V6_PRODUCTION_WWW_E2E", "V7_STATIC_WWW", "V10_ROUTE_INVENTORY"]
+    },
+    {
+      "id": "N14_RECEIPT_FRESHNESS",
+      "tier": "T0_safety",
+      "owner": "website-platform",
+      "status": "active",
+      "description": "Stored live nerve receipt has explicit expiry and cannot be trusted after its freshness window.",
+      "files": ["governance/NOETFIELD_LIVE_NERVE_RECEIPT.json", "scripts/verify-live-nerve-receipt.py", "scripts/noetfield_live_nerve.py"],
+      "validator_ids": ["V5_LIVE_NERVE", "V11_LIVE_NERVE_RECEIPT_FRESHNESS"]
     }
   ]
 }

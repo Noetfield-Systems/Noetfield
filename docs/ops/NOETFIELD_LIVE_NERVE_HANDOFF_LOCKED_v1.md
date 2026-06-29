@@ -54,6 +54,7 @@ governance/NOETFIELD_LIVE_NERVE_RECEIPT.json
 - `N8_ROUTE_NAV_TRUTH`: public nav labels do not imply missing hubs or stale public company language.
 - `N9_VALIDATOR_NODE_REGISTRY`: validator registry and node catalog have no orphan validators, orphan live nodes, or missing files.
 - `N13_ROUTE_INVENTORY`: required public 200 routes come from `governance/ROUTE_INVENTORY.json`, not hardcoded E2E tuples.
+- `N14_RECEIPT_FRESHNESS`: stored live nerve receipt has an explicit expiry and must be refreshed when expired.
 
 ## PASS / DEGRADED / FAIL
 
@@ -64,6 +65,24 @@ governance/NOETFIELD_LIVE_NERVE_RECEIPT.json
 Full ecosystem green requires every named scope receipt to be `PASS`, or `DEGRADED` only when warnings are explicit and accepted by that scope owner.
 
 SourceA foundation drift is a warning for this website/platform receipt. It does not block `www.noetfield.com` deploy unless a Noetfield public/runtime node fails.
+
+## Freshness
+
+The receipt includes:
+
+```text
+receipt_freshness.generated_at
+receipt_freshness.expires_at
+receipt_freshness.valid_for_seconds
+```
+
+If `expires_at` is in the past, run:
+
+```bash
+make verify-live-nerve
+```
+
+before using the receipt for implementation truth.
 
 ## Agent Rule
 
