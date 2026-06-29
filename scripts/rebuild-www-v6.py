@@ -2374,8 +2374,7 @@ def procurement_diligence_body() -> str:
  <p style="margin-top:1rem">
  Production API surface:
  <a href="/openapi.json">OpenAPI</a> ·
- <a href="/docs/api/">Governance API reference</a> ·
- <a href="/services/governance/README.md">services/governance README</a>
+<a href="/docs/api/">Governance API reference</a>
  (evaluate, trust ledger, audit export) — orientation only.
  </p>
  </section>
