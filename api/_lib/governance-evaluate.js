@@ -14,6 +14,10 @@ function riskSeverity(riskScore) {
   return "Low";
 }
 
+function confidenceFromRisk(riskScore) {
+  return Math.round((100 - Math.min(100, Math.max(0, riskScore))) / 100 * 100) / 100;
+}
+
 function buildConfidenceFactors(action, riskScore, reasons) {
   const description =
     (action || "").trim().slice(0, 120) ||
@@ -25,7 +29,7 @@ function buildConfidenceFactors(action, riskScore, reasons) {
       severity: riskSeverity(riskScore),
     },
   ];
-  const governanceValue = Math.round((100 - riskScore) / 100 * 100) / 100;
+  const governanceValue = confidenceFromRisk(riskScore);
   return {
     risk_summary: riskSummary,
     confidence_factors: [
@@ -44,7 +48,8 @@ function parsePolicyVersion(meta) {
 function evaluateIntent({ actor, action, context, metadata }) {
   const reasons = [];
   const conditions = [];
-  let score = 10;
+  const reasonCodes = [];
+  let score = 8;
 
   const actorClean = (actor || "").trim();
   const actionClean = (action || "").trim().toLowerCase();
@@ -74,34 +79,111 @@ function evaluateIntent({ actor, action, context, metadata }) {
     };
   }
 
-  if (
-    actionClean.includes("transfer") ||
-    actionClean.includes("payment") ||
-    actionClean.includes("withdraw")
-  ) {
-    score += 35;
-    reasons.push("Action suggests value movement — elevated pre-execution scrutiny.");
+  const riskTier = String(meta.risk_tier || meta.riskTier || "standard").toLowerCase();
+  if (riskTier === "medium") {
+    score += 14;
+    reasonCodes.push("risk_tier_medium");
+  } else if (riskTier === "high") {
+    score += 28;
+    reasonCodes.push("risk_tier_high");
+  } else if (riskTier === "critical") {
+    score += 42;
+    reasonCodes.push("risk_tier_critical");
   }
 
   if (contextClean.includes("unknown") || contextClean.includes("unverified")) {
-    score += 25;
+    score += 12;
     reasons.push("Context contains unverified or unknown signals.");
+    reasonCodes.push("unverified_context");
   }
 
   if (contextClean.length < 12) {
     score += 15;
     reasons.push("Context is minimal — insufficient operational detail for STP.");
+    reasonCodes.push("minimal_context");
   }
 
   if (meta.high_risk === true) {
     score += 20;
     reasons.push("Metadata flagged high_risk=true.");
+    reasonCodes.push("high_risk_flag");
   }
 
   if (meta.pii_exposure === true) {
     score += 15;
-    reasons.push("Metadata flagged pii_exposure=true.");
+    reasons.push("Metadata flagged personal or sensitive data exposure.");
     conditions.push("Human review required before Copilot or agent execution.");
+    reasonCodes.push("sensitive_data_exposure");
+  }
+
+  if (meta.sensitive_data === true || meta.sensitivity === "high") {
+    score += 14;
+    reasons.push("Sensitive information is in scope for the evaluate.");
+    conditions.push("Attach Purview labels, DLP status, and evidence owner before approval.");
+    reasonCodes.push("sensitive_information_scope");
+  }
+
+  if (meta.broad_sharing === true || meta.oversharing === true) {
+    score += 24;
+    reasons.push("Potential oversharing could make restricted content visible through AI search or grounding.");
+    conditions.push("Run access review and restrict broad SharePoint links before production rollout.");
+    reasonCodes.push("oversharing_risk");
+  }
+
+  if (meta.external_users === true || contextClean.includes("external guest")) {
+    score += 14;
+    reasons.push("External-user access changes the approval boundary.");
+    conditions.push("Confirm Entra access review and named business owner.");
+    reasonCodes.push("external_access_boundary");
+  }
+
+  if (meta.prompt_dlp_gap === true || meta.dlp_gap === true) {
+    score += 18;
+    reasons.push("Prompt or content DLP coverage is incomplete.");
+    conditions.push("Close DLP gap or keep the workflow in review mode.");
+    reasonCodes.push("dlp_gap");
+  }
+
+  if (meta.agentic_tool_access === "write" || meta.write_access === true) {
+    score += 24;
+    reasons.push("Agentic workflow has write-capable tool access.");
+    conditions.push("Require human checkpoint, tool allowlist, and kill-switch owner.");
+    reasonCodes.push("agentic_write_access");
+  }
+
+  if (meta.irreversible_action === true) {
+    score += 20;
+    reasons.push("Requested action has irreversible or hard-to-reverse operational impact.");
+    conditions.push("Escalate to named approver before execution.");
+    reasonCodes.push("irreversible_action");
+  }
+
+  if (meta.evidence_ready === false) {
+    score += 14;
+    reasons.push("Evidence package is incomplete.");
+    conditions.push("Attach policy version, evidence index, and approver chain.");
+    reasonCodes.push("evidence_incomplete");
+  }
+
+  if (meta.ai_act_transparency === "missing") {
+    score += 16;
+    reasons.push("AI transparency or disclosure evidence is missing.");
+    conditions.push("Map Article 50-style disclosure and generated-content labeling before launch.");
+    reasonCodes.push("transparency_gap");
+  }
+
+  if (meta.gpai_vendor_status === "unverified") {
+    score += 14;
+    reasons.push("GPAI/vendor compliance evidence is unverified.");
+    conditions.push("Request model/version transparency and vendor flow-down evidence.");
+    reasonCodes.push("vendor_gpai_unverified");
+  }
+
+  if (meta.model_risk_owner === false || meta.model_risk_owner === "missing") {
+    score += 12;
+    reasons.push("No named model-risk or governance owner is attached.");
+    conditions.push("Assign accountable owner before board or production use.");
+    reasonCodes.push("owner_missing");
   }
 
   if (policyVersion >= 3.2) {
@@ -111,10 +193,12 @@ function evaluateIntent({ actor, action, context, metadata }) {
         "Policy v3.2 blocks guest access in production Copilot scope — stale briefing detected."
       );
       conditions.push("Re-brief against Copilot Acceptable Use v3.2 before rollout.");
+      reasonCodes.push("policy_v32_guest_access");
     }
     if (actionClean.includes("copilot_rollout") && contextClean.includes("production")) {
       score += 10;
       reasons.push("Production Copilot rollout requires v3.2 evidence index and approver chain.");
+      reasonCodes.push("production_copilot_scope");
     }
   }
 
@@ -141,11 +225,16 @@ function evaluateIntent({ actor, action, context, metadata }) {
   return {
     decision,
     risk_score: score,
+    risk_level: riskSeverity(score),
+    confidence_score: confidenceFromRisk(score),
     reason: reasons,
+    reason_codes: reasonCodes,
     conditions,
     rid: generateRid(),
     policy_version: policyVersion,
     tenant_id: meta.tenant_id || "demo-tenant",
+    scenario: meta.scenario || null,
+    product_lane: meta.product_lane || null,
     ...conf,
   };
 }
@@ -193,8 +282,10 @@ function applySsotChange({ fromVersion, toVersion, pending }) {
 
 function buildTleReceipt(evalResult, scenario) {
   const score =
-    typeof evalResult.risk_score === "number"
-      ? (1 - Math.min(1, Math.max(0, evalResult.risk_score / 100))).toFixed(2)
+    typeof evalResult.confidence_score === "number"
+      ? evalResult.confidence_score.toFixed(2)
+      : typeof evalResult.risk_score === "number"
+      ? confidenceFromRisk(evalResult.risk_score).toFixed(2)
       : scenario.score || "0.82";
   return {
     tle_id: "TLE-" + (evalResult.rid || "DEMO").slice(-12).toUpperCase(),

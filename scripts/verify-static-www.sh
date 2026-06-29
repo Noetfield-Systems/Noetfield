@@ -283,9 +283,11 @@ done
 [[ -f governance/index.html ]] && ok "public governance hub html present" || bad "missing governance/index.html"
 [[ -f .vercelignore ]] && grep -qF 'docs/mockups/' .vercelignore && ok "vercelignore excludes docs/mockups" || bad "vercelignore missing docs/mockups"
 [[ -f .vercelignore ]] && grep -qF '.agents/' .vercelignore && ok "vercelignore excludes .agents" || bad "vercelignore missing .agents"
-[[ -f .vercelignore ]] && grep -qF 'data/chatbot/' .vercelignore && ok "vercelignore excludes raw chatbot data" || bad "vercelignore missing data/chatbot"
+[[ -f .vercelignore ]] && grep -qF 'data/' .vercelignore && ok "vercelignore excludes raw data" || bad "vercelignore missing data"
+[[ -f .vercelignore ]] && grep -qF 'ops/' .vercelignore && ok "vercelignore excludes private ops" || bad "vercelignore missing ops"
 [[ -f vercel.json ]] && grep -qF '/.agents' vercel.json && ok "vercel.json blocks .agents" || bad "vercel.json missing .agents block"
-[[ -f vercel.json ]] && grep -qF '/data/chatbot' vercel.json && ok "vercel.json blocks raw chatbot data" || bad "vercel.json missing raw chatbot block"
+[[ -f vercel.json ]] && grep -qF '/data' vercel.json && ok "vercel.json blocks raw data" || bad "vercel.json missing raw data block"
+[[ -f vercel.json ]] && grep -qF '/ops' vercel.json && ok "vercel.json blocks private ops" || bad "vercel.json missing private ops block"
 python3 scripts/verify-public-output-allowlist.py || fail=1
 bash scripts/verify-public-chat-truth.sh || fail=1
 

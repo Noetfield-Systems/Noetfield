@@ -1,11 +1,11 @@
 # Vercel www — intake email go-live
 
-**Inbox:** operations@noetfield.com  
-**Google Workspace:** **ACTIVE** (2026-06-18) — mailbox live; direct email works  
-**Status:** **DEFERRED post-factory** — enable Resend only after factory spine + portfolio waves complete  
+**Inbox:** operations@noetfield.com
+**Google Workspace:** **ACTIVE** (2026-06-18) — mailbox live; direct email works
+**Status:** **DEFERRED post-factory** — enable Resend only after factory spine + portfolio waves complete
 
 > Founder law: factory first · email sending second · do not boot sessions into Resend setup.
-**Canonical project:** `www` · scope `noetfield-systems`  
+**Canonical project:** `noetfield` · scope `the-777-foundation`
 **One project only** — run `./scripts/auto-heal-www.sh` to dedupe, sync env, deploy, verify.
 
 ## Required (Production)
@@ -35,10 +35,10 @@ chmod +x scripts/auto-heal-www.sh
 
 What it does:
 
-1. Renames legacy `project-gc7lm` → `www` if needed  
-2. Removes duplicate projects (`web`, `project-j43wr`)  
-3. Syncs intake env from founder vault  
-4. Deploys production  
+1. Verifies canonical Vercel project `the-777-foundation/noetfield`
+2. Keeps legacy duplicate projects (`project-gc7lm`, `web`, `project-j43wr`) out of the live path
+3. Syncs intake env from founder vault
+4. Deploys production
 5. Checks intake health on canonical URL + `www.noetfield.com`
 
 Dry run: `HEAL_DRY_RUN=1 ./scripts/auto-heal-www.sh`

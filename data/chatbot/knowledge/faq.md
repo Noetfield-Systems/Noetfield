@@ -2,13 +2,34 @@
 
 ## What is Noetfield?
 
-Noetfield is governance execution infrastructure for regulated organizations. We evaluate AI-driven operational intent before execution and produce board-ready evidence from the decision path.
+Noetfield produces the audit trail a regulated Copilot rollout will be asked for later.
+
+For CCO, CRO, CISO, CTO, procurement, and board teams, Noetfield turns each high-risk AI or Microsoft 365 Copilot go/no-go into signed evidence: policy check, confidence score, named approvers, metadata-only M365 evidence index, Trust Ledger Entry, board PDF, and procurement ZIP. The value is not "a chatbot" or "an API" by itself. The value is a defensible record before Copilot or agentic automation touches production scope.
+
+Plain English: we make AI execution impossible to bypass governance.
 
 ## What are the three offerings?
 
-1. **Trust Brief — $10,000** — Six-week engagement: governance audit, AI policy mapping, risk exposure analysis.
-2. **Copilot Governance Pack** — Enterprise AI compliance and policy validation for Microsoft 365 Copilot rollouts.
-3. **Bank Pilot** — Read-only governance simulation only (shadow mode). No execution rights.
+1. **Copilot Governance Pack — $2k–10k · 90 days** — lead paid pilot for Microsoft 365 Copilot rollouts. Buyer receives live TLE records, board PDF for a governance meeting, and procurement ZIP.
+2. **Trust Brief — $10,000 · 6 weeks** — governance diagnostic before enterprise scale: policy map, AI risk exposure, executive summary, and recommended rollout scope.
+3. **Bank Pilot — custom** — read-only shadow governance simulation for FRFI and regulated institutions. No execution rights, custody, or payment rails.
+
+## What buyer problem do we solve?
+
+Copilot and agentic workflows move faster than policy sign-off. Buyers need proof that production use was reviewed, approved, denied, or escalated under their rules. Noetfield gives them the evidence package they can put in front of a board, auditor, procurement team, MSP partner, or regulator-facing risk committee.
+
+## What does a client receive?
+
+- Signed go/no-go receipts with Request ID lineage.
+- Trust Ledger Entry (TLE v1) with confidence score and approval chain.
+- Metadata-only M365 evidence index: Purview, Entra, SharePoint/audit references when connected.
+- Board PDF for governance and budget meetings.
+- Procurement ZIP for legal, vendor risk, and diligence review.
+- Fail-closed export integrity: tampered exports do not verify.
+
+## Why would a real client pay now?
+
+Because their internal team is already being asked to approve Copilot, AI automation, or agent workflows without a clean decision record. Noetfield sells a concrete paid path: start with a 5-minute demo or sandbox, run a $2k–10k Copilot Governance Pack pilot, and produce a board PDF/procurement ZIP the buyer can actually use.
 
 ## How do I engage?
 

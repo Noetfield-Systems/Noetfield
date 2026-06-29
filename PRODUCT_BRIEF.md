@@ -5,8 +5,10 @@
 
 ## Definition
 
-Noetfield is an **AI Governance & Evidence layer for Copilot adoption** — governance execution infrastructure that evaluates AI-driven operational intent before execution and produces **Trust Ledger Entries (TLEs)** for procurement and board signoff.
+Noetfield is an **AI Governance & Evidence layer for Copilot adoption**. We produce the audit trail a regulated Copilot rollout will be asked for later: policy-bound go/no-go decisions, signed **Trust Ledger Entries (TLEs)**, metadata-only M365 evidence index, board PDF, and procurement ZIP before production scope opens.
 
 ## Value
 
-Regulated organizations adopt copilots faster than policy can keep pace. Noetfield provides structured assessments and a Trust Ledger that checks whether a proposed Copilot deployment is authorized under your rules, records defensible evidence, and returns a clear go/no-go decision before rollout.
+Regulated organizations adopt copilots faster than policy can keep pace. Noetfield gives CCO, CRO, CISO, CTO, procurement, and board teams a defensible decision package: who approved the use case, what evidence was inspected, what policy applied, what changed, and whether the export still verifies.
+
+The lead paid path is the **Copilot Governance Pack ($2k-10k · 90 days)**. The buyer success signal is simple: one real organization uses a Noetfield board PDF in a governance meeting.

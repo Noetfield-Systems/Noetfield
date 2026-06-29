@@ -47,15 +47,16 @@ parents:
 
 | Surface | Healthy when | Current |
 |---------|--------------|---------|
-| Canonical Vercel deploy | `www.noetfield.com` intake `www_email_configured: true` | **OK** (resend) |
-| Live www domain | `www.noetfield.com` aliases canonical project | **FAIL** — domain not under `noetfield-systems` scope |
-| Platform API | `platform.noetfield.com` evaluate + audit-export | **NOT LIVE** |
+| Canonical Vercel deploy | `www.noetfield.com` via Vercel project `the-777-foundation/noetfield` | **LIVE** |
+| Live www domain | `www.noetfield.com` aliases canonical project | **LIVE** |
+| Platform API | `platform.noetfield.com/health` | **LIVE** |
+| GEL API | `api.noetfield.com/health` | **LIVE** on Railway `gel-api` |
 
 ## Founder Actions (Hub one-tap)
 
 | Action | Command |
 |--------|---------|
-| Attach www domain | Vercel → `noetfield-systems/www` → add `www.noetfield.com` |
+| Verify www domain | Vercel → `the-777-foundation/noetfield` → `www.noetfield.com` |
 | Set Resend key | `RESEND_API_KEY=re_…` in `~/.sina/secrets.env` → `bash scripts/auto-heal-www.sh` |
 | Merge ship PR | GitHub merge after CI green |
 | Platform smoke | `PLATFORM_HEALTH_BASE=https://platform.noetfield.com ./scripts/deploy_platform_smoke.sh` |

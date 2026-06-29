@@ -91,7 +91,9 @@ def test_homepage_pro_ui_frozen_structure() -> None:
     assert len(lines) >= 320, f"homepage has {len(lines)} lines; expected ≥320 (pro UI floor)"
     assert text.count("<section") == 5, "homepage must keep four-act + mega CTA (5 sections)"
     assert "nfLiveProofHero" in text
-    assert "Governance playground" in text
+    assert "Governance simulation engine" in text
+    assert "nfScenarioDeck" in text
+    assert "Local-first simulation" in text
     assert "nf-stat-bar" in text
     assert "nf-journey-strip" in text
     assert "nf-act-prove" in text
@@ -150,12 +152,18 @@ def test_governance_page_multi_product_playground() -> None:
     js = (ROOT / "assets" / "noetfield-live-proof.js").read_text(encoding="utf-8")
     assert "trust_brief" in js
     assert "bank_board_report" in js
-    assert "msb_transfer_intent" in js
+    assert "bank_agentic_aml_triage" in js
     assert "agentic_workflow" in js
     assert "specialist_investigate" in js
     assert 'specialist: "Governance specialist"' in js
     assert "vc_shadow_evaluate" in js
     assert 'investor: "VC diligence"' in js
+    assert "partner_claims_intake" in js
+    assert "partner_agent_handoff" in js
+    assert "confidenceFromRisk" in js
+    assert "risk_score" in js
+    assert "localEvaluateIntent" in js
+    assert "RID-MAC-" in js
 
 
 def test_investor_diligence_vault_page() -> None:

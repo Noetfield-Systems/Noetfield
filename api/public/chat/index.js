@@ -1,6 +1,47 @@
 /** POST /api/public/chat — proxies platform chat; local fallback only routes intake. */
 
 const CANONICAL_INTAKE = "operations@noetfield.com";
+const EXECUTIVE_OVERVIEW_REPLY =
+  "Noetfield produces the audit trail a regulated Copilot rollout will be asked for later. " +
+  "For CCO, CRO, CISO, CTO, procurement, and board teams, Noetfield turns each high-risk Microsoft 365 Copilot or AI go/no-go into signed evidence: policy check, confidence score, named approvers, metadata-only M365 evidence index, Trust Ledger Entry, board PDF, and procurement ZIP. " +
+  "The lead paid path is the Copilot Governance Pack ($2k-10k, 90 days): live TLE records, board PDF for a governance meeting, and procurement ZIP for diligence. " +
+  "Trust Brief is the $10k diagnostic when policy mapping comes first. Bank Pilot is read-only shadow governance for regulated institutions. " +
+  "Plain English: we make AI execution impossible to bypass governance. We do not move money, hold custody, or execute transactions.";
+
+const EXECUTIVE_OVERVIEW_CITATIONS = [
+  "/enterprise/",
+  "/copilot/pilot/",
+  "/copilot/demo/",
+  "/trust-brief/intake/?interest=pilot&vector=copilot-governance",
+];
+
+function executiveOverviewReply(provider) {
+  return {
+    reply: EXECUTIVE_OVERVIEW_REPLY,
+    provider,
+    citations: EXECUTIVE_OVERVIEW_CITATIONS,
+    intake_email: CANONICAL_INTAKE,
+  };
+}
+
+function isExecutiveOverview(message) {
+  const text = String(message || "").toLowerCase();
+  return (
+    text === "executive overview" ||
+    text.includes("help me understand noetfield") ||
+    text.includes("what is noetfield") ||
+    text.includes("what does noetfield do")
+  );
+}
+
+function isStaleInfrastructureReply(reply) {
+  const text = String(reply || "").toLowerCase();
+  return (
+    text.includes("noetfield provides governance execution infrastructure") ||
+    (text.includes("record a compliance log") && text.includes("allow or deny decisions")) ||
+    (text.includes("our offerings include the trust brief") && text.includes("support compliance and risk management"))
+  );
+}
 
 function routeOnlyFallback() {
   return {
@@ -34,6 +75,9 @@ module.exports = async function handler(req, res) {
   if (message.length > 2000) {
     return res.status(400).json({ detail: "message too long" });
   }
+  if (isExecutiveOverview(message)) {
+    return res.status(200).json(executiveOverviewReply("www-controlled-executive-overview"));
+  }
 
   const platformBase = (process.env.PLATFORM_API_BASE || "https://platform.noetfield.com").replace(/\/$/, "");
   try {
@@ -47,6 +91,9 @@ module.exports = async function handler(req, res) {
         return null;
       });
       if (data && data.reply) {
+        if (isStaleInfrastructureReply(data.reply)) {
+          return res.status(200).json(executiveOverviewReply("www-stale-platform-guard"));
+        }
         return res.status(200).json(data);
       }
     }

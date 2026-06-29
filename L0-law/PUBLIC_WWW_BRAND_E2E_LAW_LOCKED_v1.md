@@ -1,8 +1,8 @@
 # PUBLIC WWW BRAND & E2E LAW (LOCKED v1)
 
-**Layer:** L0-adjacent operational law (public deploy boundary)  
-**Updated:** 2026-06-26  
-**Owner:** Noetfield Systems Inc. (holding company · www.noetfield.com)  
+**Layer:** L0-adjacent operational law (public deploy boundary)
+**Updated:** 2026-06-26
+**Owner:** Noetfield Systems Inc. (holding company · www.noetfield.com)
 **Enforcement:** `scripts/verify-static-www.sh` (offline disk) · `scripts/check_noetfield_com_e2e.py` (production smoke)
 
 ---
@@ -24,16 +24,16 @@ Repo copies of internal docs **stay on disk for agents** — they are **not www*
 
 **Required homepage phrases (disk + live E2E):**
 
-- Board-grade trust  
-- tamper-evident decision records  
-- Apply for pilot ($2k–10k)  
-- Copilot Governance Pack · Trust Brief · Bank Pilot  
-- Commercial path · Diagnostic Sprint · 01 · Diagnose → 04 · Govern  
+- Board-grade trust
+- tamper-evident decision records
+- Apply for pilot ($2k–10k)
+- Copilot Governance Pack · Trust Brief · Bank Pilot
+- Commercial path · Diagnostic Sprint · 01 · Diagnose → 04 · Govern
 
 **Forbidden on public HTML** (buyer-visible pages):
 
-- Founder/agent ops: `founder never`, `Hub approve`, `613 GTM`, `AGENT_SELF_AUDIT`, `plan-with-no-asf`, `RESEND_API_KEY`, `docs/ops/`, `make nf-prove`, portfolio wave counts  
-- Internal repo language: `OFFERINGS_LOCKED`, `SourceA`, `W3 economic signal`, `design partner`  
+- Founder/agent ops: `founder never`, `Hub approve`, `613 GTM`, `AGENT_SELF_AUDIT`, `plan-with-no-asf`, `RESEND_API_KEY`, `docs/ops/`, `make nf-prove`, portfolio wave counts
+- Internal repo language: `OFFERINGS_LOCKED`, `SourceA`, `W3 economic signal`, `design partner`
 - Engineering surfaces linked from marketing: `/platform/factories/`, `services/governance/README`
 
 ---
@@ -63,12 +63,12 @@ Repo copies of internal docs **stay on disk for agents** — they are **not www*
 
 ## 4. Production E2E contract
 
-Run: `python3 scripts/check_noetfield_com_e2e.py`  
+Run: `python3 scripts/check_noetfield_com_e2e.py`
 Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 ### HTTP 200 required
 
-`/`, `/start/`, `/pricing/`, `/copilot/`, `/copilot/pilot/`, `/copilot/demo/`, `/copilot/proof-case/`, `/trust/`, `/trust-brief/intake/`, `/trust-ledger/sample-report/`, `/investors/`, `/work-with-us/`, `/health` (or `/api/health`), `/governance/`
+`/`, `/start/`, `/pricing/`, `/copilot/`, `/copilot/pilot/`, `/copilot/demo/`, `/copilot/proof-case/`, `/trust/`, `/trust-brief/intake/`, `/trust-ledger/sample-report/`, `/investors/`, `/work-with-us/`, `/health` (or `/api/health`), `/governance/`, `/ai-factories/`, `/ai-factories/spec/`, `/openapi.json`, `/config/gate-ai-factory-design.json`, `/config/status-ai-factory.json`, `/noetfield-ai-factory-lanes.json`
 
 ### HTTP 404 required (internal leak regression)
 
@@ -76,19 +76,21 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 ### API smoke
 
-- `/api/health` — `status: ok`, `service: noetfield-www`  
-- `/api/intake/health` — `www_email_configured: true`, `delivery_mode: resend`, honest `platform_reachable`  
-- `/api/public/chat/health` — `ok: true`, `mode: www-local` or `platform-proxy`  
-- POST `/api/public/chat` — FAQ reply (www-local until platform LLM proxy)  
-- GET `/api/ecosystem/public` — `chat_api_base` same-origin (`""`) until platform DNS live  
-- POST `/evaluate` — returns `rid`  
+- `/api/health` — `status: ok`, `service: noetfield-www`
+- `/api/intake/health` — `www_email_configured: true`, `delivery_mode: resend`, honest `platform_reachable`
+- `/api/public/chat/health` — `ok: true`, `mode: www-local` or `platform-proxy`
+- POST `/api/public/chat` — contextual assistant response or routing-only fallback; never a static rule script
+- GET `/api/ecosystem/public` — `chat_api_base` same-origin (`""`) until platform DNS live
+- POST `/evaluate` — returns `rid`
+- POST `/api/gate/ai-factory-design` — returns `gate_lane: AI Factory Design` and a policy decision
+- GET `/api/status/ai-factory?request_id=...` — returns an AI Factory status preview
 
-**Out of www E2E scope (until DNS):** `platform.noetfield.com`, `api.noetfield.com` — tracked in §7 upgrade plan.
+**Out of www E2E scope:** dedicated platform/GEL health probes for `platform.noetfield.com` and `api.noetfield.com`. The public www E2E remains focused on website behavior and leak prevention.
 
 ### Copy smoke (homepage + pilot)
 
-- Homepage: Apply for pilot, Copilot Governance Pack, Trust Brief, **Board-grade trust**, operations@noetfield.com  
-- Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident  
+- Homepage: Apply for pilot, Copilot Governance Pack, Trust Brief, **Board-grade trust**, operations@noetfield.com
+- Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident
 
 ---
 
@@ -113,19 +115,19 @@ www.noetfield.com must **never hard-depend** on subdomains that are not DNS-prov
 | Tier | Host | Status (2026-06-26) | Next action |
 |------|------|---------------------|-------------|
 | **L0 — Institutional www** | `www.noetfield.com` | **Live** — marketing, intake (Resend), sandbox evaluate, www-local FAQ chat | Maintain E2E law |
-| **L1 — Platform spine** | `platform.noetfield.com` | **Not DNS-live** — do not rewrite www API to dead host | UPG-WWW-001: Railway deploy + Cloudflare CNAME → platform health 200 |
-| **L2 — GEL API lane** | `api.noetfield.com` | **Not DNS-live** — noetfeld-os FastAPI `:8000` isolated | UPG-WWW-002: provision after L1; `/health` in separate smoke |
+| **L1 — Platform spine** | `platform.noetfield.com` | **Live** — Railway platform API health 200 | Keep platform smoke separate from www E2E |
+| **L2 — GEL API lane** | `api.noetfield.com` | **Live** — noetfeld-os Railway `gel-api`, local port `8001` | Keep `/health` and `/readiness` in separate GEL smoke |
 | **L3 — LLM chat proxy** | platform `/api/public/chat` | Deferred until L1 | UPG-WWW-003: env keys on platform; www health `mode: platform-proxy` |
 | **L4 — Telegram + ecosystem** | platform webhooks | Deferred | UPG-WWW-004: footer `@username` when bot live |
 
 ### Enforcement rules
 
-1. **No vercel.json rewrites** to `platform.noetfield.com` until L1 passes dedicated platform smoke.  
-2. **`platform_reachable`** on intake health must be boolean from successful fetch — never inferred from `{}`.  
-3. **`chat_api_base`** in ecosystem JSON stays same-origin until L3.  
-4. Production E2E (`check_noetfield_com_e2e.py`) asserts **www spine only**; platform/GEL probes belong in `scripts/verify_platform_health.py` after DNS.
+1. **No vercel.json rewrites** to `platform.noetfield.com` unless L1 passes dedicated platform smoke.
+2. **`platform_reachable`** on intake health must be boolean from successful fetch — never inferred from `{}`.
+3. **`chat_api_base`** in ecosystem JSON stays same-origin until L3.
+4. Production E2E (`check_noetfield_com_e2e.py`) asserts **www spine only**; platform/GEL probes belong in dedicated platform/GEL smoke checks.
 
-### Run after L1 DNS live
+### Run after platform/GEL changes
 
 ```bash
 PLATFORM_BASE=https://platform.noetfield.com python3 scripts/verify_platform_health.py

@@ -2,7 +2,7 @@
 
 **Status:** LOCKED  
 **Date:** 2026-06-26  
-**Witnessed:** Phase 6 verify gates green
+**Witnessed:** Phase 6 verify gates green; Phase 8 GEL/API receipt refreshed 2026-06-26
 
 ---
 
@@ -52,7 +52,7 @@
 | Repo | Visibility | Lane |
 |------|------------|------|
 | `Noetfield` | Public | www + platform spine |
-| `noetfeld-os` | Private | GEL prototype port 8001 |
+| `noetfeld-os` | Private | GEL runtime + `api.noetfield.com` port 8001 |
 | `noetfield-studio-ide` | Private | Agent IDE port 3005 |
 | `SinaaiMonoRepo` | Public | **Legacy** — do not use for live delivery |
 
@@ -83,7 +83,11 @@ Not in active Noetfield production path (`SUPABASE_URL=missing_or_local` in ops 
 | GEL pytest | 23 passed |
 | www E2E | PASS |
 | platform /health | 200 |
-| api.noetfield.com | Expected fail |
+| api.noetfield.com | Live on Railway `gel-api`; see Phase 8 receipt |
 | `noetfield gate` | PASS |
+
+## Ownership
+
+Detailed lane ownership and anti-duplication rules are locked in `docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md`.
 
 **Locked by:** noetfeld-os-cursor-chat

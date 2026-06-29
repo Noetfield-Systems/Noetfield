@@ -20,6 +20,7 @@ os/
 reports/
 scripts/
 prompts/
+data/
 data/chatbot/
 infrastructure/
 governance-console/
@@ -32,6 +33,7 @@ governance/README.md
 OFFERINGS_LOCKED.md
 PROJECT_BOUNDARIES_LOCKED.md
 ROUTING_CARD.md
+railway.toml
 *_LOCKED.md
 *_SSOT*.md
 platform/

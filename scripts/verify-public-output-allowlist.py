@@ -34,6 +34,9 @@ FORBIDDEN_PREFIXES = (
     "scripts/",
     "services/",
     "os/",
+    "ops/",
+    "data/",
+    "var/",
     "platform/",
     "governance-console/",
     "data/",
@@ -44,6 +47,7 @@ FORBIDDEN_PREFIXES = (
 
 FORBIDDEN_EXACT = {
     "Makefile",
+    "railway.toml",
     "PROJECT_BOUNDARIES_LOCKED.md",
     "OFFERINGS_LOCKED.md",
     "ROUTING_CARD.md",

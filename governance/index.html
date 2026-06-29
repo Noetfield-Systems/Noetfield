@@ -15,9 +15,9 @@
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
  <link rel="stylesheet" href="/assets/noetfield-shell.css" />
- <link rel="stylesheet" href="/assets/noetfield-www.css?v=43" />
+ <link rel="stylesheet" href="/assets/noetfield-www.css?v=41" />
  <link rel="stylesheet" href="/assets/noetfield-print.css?v=41" media="print" />
- <script src="/assets/noetfield-shell.js?v=43" defer></script>
+ <script src="/assets/noetfield-shell.js?v=41" defer></script>
  <script src="/assets/noetfield-intake-core.js?v=41" defer></script>
  <script src="/assets/noetfield-forms.js?v=41" defer></script>
 </head>
@@ -51,10 +51,11 @@
  
  <div id="nfLiveProofHero" class="nf-live-proof-panel" data-live-proof-hero="live-proof-hero" aria-label="Governance playground">
  <form id="nfLiveProofForm" class="nf-live-proof-form">
- <h3>Governance playground</h3>
+<h3>Governance simulation engine</h3>
  <p id="nfScenarioOfDay" class="nf-scenario-of-day" aria-live="polite"></p>
- <p class="nf-scorecard-hint">Every go/no-go gets a <strong>confidence score</strong> + evidence index — Copilot, Trust Brief, Bank Pilot, AI automation, governance specialist, <strong>VC diligence</strong>, and partner shadow lanes.</p>
+<p class="nf-scorecard-hint">Local-first simulation: scenarios now route through risk facts, confidence, evidence gaps, and next-step conditions — not a fixed allow sample.</p>
  <div class="nf-live-proof-lanes" role="group" aria-label="Product lane filter"><button type="button" class="nf-live-proof-lane is-active" data-live-proof-lane="all" aria-pressed="true">All</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="copilot" aria-pressed="false">Copilot Pack</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="trust_brief" aria-pressed="false">Trust Brief</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="bank" aria-pressed="false">Bank Pilot</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="automation" aria-pressed="false">AI automation</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="specialist" aria-pressed="false">Governance specialist</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="investor" aria-pressed="false">VC diligence</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="partner" aria-pressed="false">Partner shadow</button></div>
+<div id="nfScenarioDeck" class="nf-scenario-deck" aria-label="Scenario outcome shortcuts"></div>
  <label>Scenario
  <select name="scenario" id="nfLiveProofScenario" aria-label="Evaluate scenario"></select>
  </label>
@@ -74,18 +75,18 @@
  <aside class="nf-receipt-mock" aria-label="Trust Ledger Entry receipt">
  <dl class="nf-receipt-mock-body">
  <div class="nf-receipt-row"><dt>tle_id</dt><dd>TLE-015DCFB8B953</dd></div>
- <div class="nf-receipt-row"><dt>decision</dt><dd>allow</dd></div>
- <div class="nf-receipt-row"><dt>confidence_score</dt><dd>0.82</dd></div>
+<div class="nf-receipt-row"><dt>decision</dt><dd>review</dd></div>
+<div class="nf-receipt-row"><dt>confidence_score</dt><dd>0.64</dd></div>
  <div class="nf-receipt-row"><dt>rid</dt><dd>RID-2026-0602-HOME</dd></div>
- <div class="nf-receipt-row"><dt>evidence_index</dt><dd>purview · entra · audit</dd></div>
+<div class="nf-receipt-row"><dt>evidence_index</dt><dd>purview dspm · policy v3.2 · approver chain</dd></div>
  <div class="nf-receipt-row"><dt>export_integrity</dt><dd class="nf-receipt-ok">PASS · fail closed on tamper</dd></div>
  </dl>
- <p class="nf-receipt-mock-footer">Illustrative sandbox output · Live sample · <a href="/trust-ledger/sample-report/">Download TLE YAML</a> · <a href="/docs/www/NF_LIVE_PROOF_HERO_RECEIPT_v1.md">NF_LIVE_PROOF_HERO_RECEIPT</a></p>
+<p class="nf-receipt-mock-footer">Illustrative sandbox output · choose a scenario to run live evaluate · <a href="/trust-ledger/sample-report/">Download TLE YAML</a></p>
  </aside>
  </div>
  </div>
  </div>
- <script src="/assets/noetfield-live-proof.js?v=41" defer></script>
+<script src="/assets/noetfield-live-proof.js?v=45" defer></script>
  
  <div class="nf-trust nf-trust--hero" role="region" aria-label="Regulatory orientation above fold">
  <div class="nf-trust__item"><strong>EU AI Act Art. 12</strong><span>Tamper-evident decision record orientation</span></div><div class="nf-trust__item"><strong>ISO 42001</strong><span>AI management system evidence mapping</span></div><div class="nf-trust__item"><strong>DORA</strong><span>Incident evidence · audit trail exports</span></div><div class="nf-trust__item"><strong>NIST AI RMF</strong><span>Govern · Map · Measure · Manage</span></div>

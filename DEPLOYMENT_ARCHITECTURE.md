@@ -6,6 +6,7 @@
 |------|---------|---------|
 | **`https://www.noetfield.com`** | Institutional surface | GCIP v4 narrative, Trust Brief, Copilot Readiness, Gate **engagement intake**, legal pages. **No** agent-loop demos, **no** treasury UI, **no** payment product. |
 | **`https://platform.noetfield.com`** (preferred) or **`https://console.noetfield.com`** | Technical / pilot surface | FastAPI Golden Edge v3 (`/v3/evaluate`, `/v3/agent-loop`), governance console, event replay, bank pilot dashboards. |
+| **`https://api.noetfield.com`** | GEL runtime | noetfeld-os decision API, health/readiness, TLE/runtime evidence. |
 
 ### Hard rules
 
@@ -17,8 +18,9 @@
 ## Static site (institutional)
 
 - **Source:** repository root HTML (`index.html`, `gate/`, `trust-brief/`, `copilot/`, …)
-- **Deploy:** static host (Cloudflare Pages, S3+CDN, or nginx) → `noetfield.com`
+- **Deploy:** Vercel project `the-777-foundation/noetfield` → `www.noetfield.com`
 - **Branch:** `main`
+- **Runbook:** `docs/ops/VERCEL_WWW_DEPLOY_LOCKED_v1.md`
 
 ## Backend runtime
 
