@@ -45,6 +45,7 @@ governance/NOETFIELD_LIVE_NERVE_RECEIPT.json
 - `N7_GEL_LIVE_RUNTIME`: `api.noetfield.com` health/readiness are live and ready.
 - `N8_ROUTE_NAV_TRUTH`: public nav labels do not imply missing hubs or stale public company language.
 - `N9_VALIDATOR_NODE_REGISTRY`: validator registry and node catalog have no orphan validators, orphan live nodes, or missing files.
+- `N13_ROUTE_INVENTORY`: required public 200 routes come from `governance/ROUTE_INVENTORY.json`, not hardcoded E2E tuples.
 
 ## Agent Rule
 

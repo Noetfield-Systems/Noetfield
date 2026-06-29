@@ -33,6 +33,7 @@
     { "source": "/governance/PUBLIC_OUTPUT_DENYLIST.json", "destination": "/404", "statusCode": 404 },
     { "source": "/governance/VALIDATOR_REGISTRY.json", "destination": "/404", "statusCode": 404 },
     { "source": "/governance/NODE_CATALOG.json", "destination": "/404", "statusCode": 404 },
+    { "source": "/governance/ROUTE_INVENTORY.json", "destination": "/404", "statusCode": 404 },
     { "source": "/governance/FREEMIUM_POLICY_LOCKED_v1.md", "destination": "/404", "statusCode": 404 },
     { "source": "/governance/README.md", "destination": "/404", "statusCode": 404 },
     { "source": "/governance/oas-engine/:path*", "destination": "/404", "statusCode": 404 },

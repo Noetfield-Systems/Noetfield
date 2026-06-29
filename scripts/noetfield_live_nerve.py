@@ -21,6 +21,7 @@ DENYLIST = ROOT / "governance" / "PUBLIC_OUTPUT_DENYLIST.json"
 PUBLIC_OUTPUT_SCRIPT = ROOT / "scripts" / "verify-public-output-allowlist.py"
 ROUTE_NAV_SCRIPT = ROOT / "scripts" / "verify-route-nav-truth.py"
 VALIDATOR_NODE_SCRIPT = ROOT / "scripts" / "verify-validator-node-registry.py"
+ROUTE_INVENTORY_SCRIPT = ROOT / "scripts" / "verify-route-inventory.py"
 WWW_BASE = "https://www.noetfield.com"
 PLATFORM_BASE = "https://platform.noetfield.com"
 GEL_BASE = "https://api.noetfield.com"
@@ -194,6 +195,22 @@ def validator_node_registry_status() -> dict[str, Any]:
     }
 
 
+def route_inventory_status() -> dict[str, Any]:
+    result = subprocess.run(
+        [sys.executable, str(ROUTE_INVENTORY_SCRIPT)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    return {
+        "ok": result.returncode == 0,
+        "command": f"{sys.executable} {ROUTE_INVENTORY_SCRIPT.relative_to(ROOT).as_posix()}",
+        "stdout": result.stdout[-1200:],
+        "stderr": result.stderr[-1200:],
+    }
+
+
 def chatbot_status() -> dict[str, Any]:
     for rel in (
         ".",
@@ -266,6 +283,7 @@ def build_receipt() -> dict[str, Any]:
     gel_live = gel_status()
     route_nav = route_nav_status()
     registry = validator_node_registry_status()
+    route_inventory = route_inventory_status()
     ok = bool(
         public_output["ok"]
         and chatbot["ok"]
@@ -276,6 +294,7 @@ def build_receipt() -> dict[str, Any]:
         and gel_live["ok"]
         and route_nav["ok"]
         and registry["ok"]
+        and route_inventory["ok"]
     )
     return {
         "schema": "noetfield-live-nerve-receipt-v1",
@@ -299,6 +318,7 @@ def build_receipt() -> dict[str, Any]:
             "N7_GEL_LIVE_RUNTIME": gel_live,
             "N8_ROUTE_NAV_TRUTH": route_nav,
             "N9_VALIDATOR_NODE_REGISTRY": registry,
+            "N13_ROUTE_INVENTORY": route_inventory,
         },
     }
 

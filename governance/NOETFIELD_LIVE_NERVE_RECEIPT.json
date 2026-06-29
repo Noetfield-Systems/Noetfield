@@ -1,9 +1,15 @@
 {
   "gate": "PASS",
-  "generated_at": "2026-06-29T04:29:53.139931Z",
-  "git_sha": "dea83d395e3da72cea2e690fc559e56ab0a2e76c",
+  "generated_at": "2026-06-29T04:33:24.750242Z",
+  "git_sha": "d1c858ca33b983ccaf0e6a82c557ee99d6c5c025",
   "next_safe_action": "use this receipt as current truth before docs or chat summaries",
   "nodes": {
+    "N13_ROUTE_INVENTORY": {
+      "command": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 scripts/verify-route-inventory.py",
+      "ok": true,
+      "stderr": "",
+      "stdout": "verify-route-inventory: PASS mode=structural routes=20\n"
+    },
     "N1_PUBLIC_OUTPUT": {
       "blocked_count": 0,
       "findings": [],
@@ -33,7 +39,7 @@
     "N4_WWW_LIVE_OUTPUT": {
       "base": "https://www.noetfield.com",
       "blocked_count": 23,
-      "denylist_hash": "adb5f4a723636b5134c85453663caa8e95033753d1a079a13ebcdff535ee76e8",
+      "denylist_hash": "cf4457b94ecc7460fc74b3e33765601f42cf6e20823e13f9b03021fe5c671905",
       "health_preview": "{\"status\":\"ok\",\"service\":\"noetfield-www\",\"surface\":\"institutional\"}",
       "health_status": 200,
       "leaks": [],
@@ -51,7 +57,7 @@
       "base": "https://platform.noetfield.com",
       "ok": true,
       "provider": "openrouter",
-      "reply_preview": "Noetfield provides an AI Governance & Evidence layer, primarily for Microsoft 365 Copilot adoption. Our purpose is to produce the audit trail that regulated organizations will need for their Copilot rollouts.\n\nThis means we turn high-risk A",
+      "reply_preview": "Noetfield provides an AI Governance & Evidence layer specifically designed for Microsoft 365 Copilot adoption. Our purpose is to produce the audit trail that regulated organizations will need for their Copilot rollouts.\n\nFor CCO, CRO, CISO,",
       "stale_hits": [],
       "status": 200
     },
@@ -73,7 +79,7 @@
       "command": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 scripts/verify-validator-node-registry.py --skip-live-receipt",
       "ok": true,
       "stderr": "",
-      "stdout": "verify-validator-node-registry: PASS\nmode=structural validators=9 nodes=12 live_nodes=0\n"
+      "stdout": "verify-validator-node-registry: PASS\nmode=structural validators=10 nodes=13 live_nodes=0\n"
     }
   },
   "ok": true,

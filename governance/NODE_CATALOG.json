@@ -111,6 +111,15 @@
       "description": "SourceA foundation drift is visible as warning in NOOS, not a website deployment blocker.",
       "files": ["docs/ops/NOETFIELD_WEBSITE_NOOS_REAL_SYNC_HANDOFF_LOCKED_v1.md"],
       "validator_ids": []
+    },
+    {
+      "id": "N13_ROUTE_INVENTORY",
+      "tier": "T1_truth",
+      "owner": "website-platform",
+      "status": "active",
+      "description": "Public route inventory is the source for production E2E required-live routes.",
+      "files": ["governance/ROUTE_INVENTORY.json", "scripts/verify-route-inventory.py", "scripts/check_noetfield_com_e2e.py"],
+      "validator_ids": ["V5_LIVE_NERVE", "V6_PRODUCTION_WWW_E2E", "V7_STATIC_WWW", "V10_ROUTE_INVENTORY"]
     }
   ]
 }

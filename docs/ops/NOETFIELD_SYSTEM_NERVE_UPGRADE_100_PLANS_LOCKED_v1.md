@@ -34,6 +34,9 @@ P0 is not "ideas". P0 means the system must fail closed when public output, rout
 7. Add a node catalog that maps live nerve nodes to owners, tiers, files, and validator ids.
 8. Add validator/node registry verification and wire it into static and live nerve checks.
 9. Add `N9_VALIDATOR_NODE_REGISTRY` to the live nerve receipt.
+10. Add `governance/ROUTE_INVENTORY.json` as the source for required public 200 routes.
+11. Wire production E2E to read `ROUTE_INVENTORY.json`.
+12. Add `N13_ROUTE_INVENTORY` and `scripts/verify-route-inventory.py`.
 
 ### Remaining P0 Decisions
 

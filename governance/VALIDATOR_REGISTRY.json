@@ -51,7 +51,8 @@
         "N6_PLATFORM_CHAT_SEMANTIC",
         "N7_GEL_LIVE_RUNTIME",
         "N8_ROUTE_NAV_TRUTH",
-        "N9_VALIDATOR_NODE_REGISTRY"
+        "N9_VALIDATOR_NODE_REGISTRY",
+        "N13_ROUTE_INVENTORY"
       ]
     },
     {
@@ -60,7 +61,7 @@
       "command": "python3 scripts/check_noetfield_com_e2e.py",
       "script": "scripts/check_noetfield_com_e2e.py",
       "receipt": null,
-      "node_ids": ["N4_WWW_LIVE_OUTPUT", "N5_WWW_CHAT_SEMANTIC"]
+      "node_ids": ["N4_WWW_LIVE_OUTPUT", "N5_WWW_CHAT_SEMANTIC", "N13_ROUTE_INVENTORY"]
     },
     {
       "id": "V7_STATIC_WWW",
@@ -68,7 +69,7 @@
       "command": "bash scripts/verify-static-www.sh",
       "script": "scripts/verify-static-www.sh",
       "receipt": null,
-      "node_ids": ["N1_PUBLIC_OUTPUT", "N2_CHAT_TRUTH", "N4_WWW_LIVE_OUTPUT", "N8_ROUTE_NAV_TRUTH"]
+      "node_ids": ["N1_PUBLIC_OUTPUT", "N2_CHAT_TRUTH", "N4_WWW_LIVE_OUTPUT", "N8_ROUTE_NAV_TRUTH", "N13_ROUTE_INVENTORY"]
     },
     {
       "id": "V8_REPO_POLICY",
@@ -85,6 +86,14 @@
       "script": "scripts/verify-validator-node-registry.py",
       "receipt": null,
       "node_ids": ["N9_VALIDATOR_NODE_REGISTRY"]
+    },
+    {
+      "id": "V10_ROUTE_INVENTORY",
+      "scope": "route-inventory",
+      "command": "python3 scripts/verify-route-inventory.py",
+      "script": "scripts/verify-route-inventory.py",
+      "receipt": null,
+      "node_ids": ["N13_ROUTE_INVENTORY"]
     }
   ]
 }

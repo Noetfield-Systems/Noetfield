@@ -131,6 +131,7 @@ scripts/verify-public-chat-truth.sh
 python3 scripts/verify-public-denylist-sync.py
 python3 scripts/verify-route-nav-truth.py
 python3 scripts/verify-validator-node-registry.py --skip-live-receipt
+python3 scripts/verify-route-inventory.py
 
 check_file "www intake serverless" api/intake.js \
   'sendIntakeEmails' 'operations@noetfield.com'

@@ -14,29 +14,7 @@ from pathlib import Path
 BASE = os.environ.get("NOETFIELD_E2E_BASE", "https://www.noetfield.com")
 ROOT = Path(__file__).resolve().parents[1]
 DENYLIST = ROOT / "governance" / "PUBLIC_OUTPUT_DENYLIST.json"
-
-PATHS_200 = (
-    "/",
-    "/start/",
-    "/pricing/",
-    "/copilot/",
-    "/copilot/pilot/",
-    "/copilot/demo/",
-    "/copilot/proof-case/",
-    "/trust/",
-    "/trust-brief/intake/",
-    "/trust-ledger/sample-report/",
-    "/investors/",
-    "/work-with-us/",
-    "/governance/",
-    "/ai-factories/",
-    "/ai-factories/spec/",
-    "/openapi.json",
-    "/config/gate-ai-factory-design.json",
-    "/config/status-ai-factory.json",
-    "/noetfield-ai-factory-lanes.json",
-    "/health",
-)
+ROUTE_INVENTORY = ROOT / "governance" / "ROUTE_INVENTORY.json"
 
 API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 
@@ -97,6 +75,11 @@ def denied_paths() -> tuple[str, ...]:
     return tuple(dict.fromkeys(paths))
 
 
+def required_public_paths() -> tuple[str, ...]:
+    inventory = json.loads(ROUTE_INVENTORY.read_text(encoding="utf-8"))
+    return tuple(row["path"] for row in inventory.get("routes", []) if row.get("expected_status") == 200)
+
+
 def main() -> int:
     fail = 0
     print("=== NOETFIELD.COM PRODUCTION E2E ===")
@@ -110,7 +93,7 @@ def main() -> int:
         print(f"FAIL apex noetfield.com ({code})", file=sys.stderr)
         fail += 1
 
-    for path in PATHS_200:
+    for path in required_public_paths():
         code, _ = fetch(f"{BASE}{path}")
         label = f"{path} ({code})"
         if path == "/health" and code == 404:

@@ -1,0 +1,155 @@
+{
+  "schema": "noetfield-route-inventory-v1",
+  "updated_at": "2026-06-29",
+  "owner": "website-platform",
+  "purpose": "Single source for public www routes that must remain live. Production E2E reads this file instead of owning route truth in code.",
+  "routes": [
+    {
+      "path": "/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Homepage / buyer entry",
+      "source": "index.html"
+    },
+    {
+      "path": "/start/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Free sandbox entry",
+      "source": "start/index.html"
+    },
+    {
+      "path": "/pricing/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Published tiers",
+      "source": "pricing/index.html"
+    },
+    {
+      "path": "/copilot/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Copilot governance hub",
+      "source": "copilot/index.html"
+    },
+    {
+      "path": "/copilot/pilot/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Copilot pilot landing",
+      "source": "copilot/pilot/index.html"
+    },
+    {
+      "path": "/copilot/demo/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Five-minute demo",
+      "source": "copilot/demo/index.html"
+    },
+    {
+      "path": "/copilot/proof-case/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Proof-case page",
+      "source": "copilot/proof-case/index.html"
+    },
+    {
+      "path": "/trust/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Trust center",
+      "source": "trust/index.html"
+    },
+    {
+      "path": "/trust-brief/intake/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Trust Brief / pilot intake",
+      "source": "trust-brief/intake/index.html"
+    },
+    {
+      "path": "/trust-ledger/sample-report/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Sample TLE report",
+      "source": "trust-ledger/sample-report/index.html"
+    },
+    {
+      "path": "/investors/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Investor page",
+      "source": "investors/index.html"
+    },
+    {
+      "path": "/work-with-us/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Partner / work-with-us page",
+      "source": "work-with-us/index.html"
+    },
+    {
+      "path": "/governance/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Enterprise governance hub",
+      "source": "governance/index.html"
+    },
+    {
+      "path": "/ai-factories/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "AI Factory route",
+      "source": "ai-factories/index.html"
+    },
+    {
+      "path": "/ai-factories/spec/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "AI Factory spec route",
+      "source": "ai-factories/spec/index.html"
+    },
+    {
+      "path": "/openapi.json",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Public OpenAPI contract",
+      "source": "openapi.json"
+    },
+    {
+      "path": "/config/gate-ai-factory-design.json",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "AI Factory gate config",
+      "source": "config/gate-ai-factory-design.json"
+    },
+    {
+      "path": "/config/status-ai-factory.json",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "AI Factory status config",
+      "source": "config/status-ai-factory.json"
+    },
+    {
+      "path": "/noetfield-ai-factory-lanes.json",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "AI Factory lane config",
+      "source": "noetfield-ai-factory-lanes.json"
+    },
+    {
+      "path": "/health",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Public health rewrite",
+      "source": "api/health.js"
+    }
+  ],
+  "known_missing_decisions": [
+    {
+      "path": "/intelligence/",
+      "status": "intentionally_missing_until_decided",
+      "decision": "Build a real Intelligence hub or keep nav as Home."
+    }
+  ]
+}
