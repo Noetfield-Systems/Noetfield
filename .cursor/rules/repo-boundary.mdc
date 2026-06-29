@@ -1,0 +1,17 @@
+---
+description: Repo-local boundary, lane, and cleanup policy
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Repo Boundary Policy
+
+Source of truth: `repo-policy.json`. Verify with `python3 scripts/check_repo_policy.py`.
+
+- Pick one policy lane per pass; do not mix website/platform, repo-policy, docs, live-nerve, generated-output, or cross-repo contract work.
+- Keep Noetfield repo-owned work in this repo. Other products/entities belong in their own repo unless a repo-local contract/export/manifest/API says otherwise.
+- Use contracts, exports, manifests, APIs, and live receipts for cross-repo dependencies. Do not depend on another repo's private scripts as this repo's execution path.
+- Generated/evidence/backlog/archive outputs need snapshots plus manifests or tracked receipts; do not leave loose dirty payloads as policy truth.
+- Keep coherent passes to 20-40 files maximum and one atomic commit when committing is requested.
+- Use high intelligence for reviews and decisions; use deterministic validators/manifests for bulk scanning.

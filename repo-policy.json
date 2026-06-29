@@ -1,0 +1,211 @@
+{
+  "schema": "noetfield-repo-policy-v1",
+  "repo": {
+    "name": "noetfield-monorepo",
+    "package_name": "noetfield-monorepo",
+    "root": "Noetfield-All-Documents/Noetfield",
+    "policy_scope": "this repository only"
+  },
+  "authority_sources": [
+    "README.md",
+    "PROJECT_BOUNDARIES_LOCKED.md",
+    "ROUTING_CARD.md",
+    "docs/DOC_UNIFIED_INDEX_LOCKED_v1.md",
+    "docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md",
+    "docs/ops/NOETFIELD_LIVE_NERVE_HANDOFF_LOCKED_v1.md",
+    "docs/ops/NOETFIELD_CANONICAL_SHIP_REPO_LOCKED_v1.md",
+    "docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md",
+    ".cursor/rules/nf-authority-stack.mdc",
+    ".cursor/rules/nf-anti-staleness-max.mdc",
+    ".cursor/rules/noetfield-agent-doc-tagging.mdc",
+    "package.json",
+    "vercel.json",
+    "railway.toml",
+    ".vercelignore",
+    "Makefile"
+  ],
+  "lanes": {
+    "website": {
+      "owns": [
+        "www.noetfield.com",
+        "public website copy",
+        "public chatbot knowledge",
+        "Vercel public output verification"
+      ],
+      "required_authority": [
+        "ROUTING_CARD.md",
+        "docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md",
+        "governance/NOETFIELD_LIVE_NERVE_RECEIPT.json"
+      ],
+      "verify": [
+        "make verify-live-nerve",
+        "make verify-static-www"
+      ]
+    },
+    "platform-spine": {
+      "owns": [
+        "platform.noetfield.com integration",
+        "governance services",
+        "public chat/intake integration"
+      ],
+      "required_authority": [
+        "docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md",
+        "railway.toml",
+        "services/governance/README.md"
+      ],
+      "verify": [
+        "make verify-live-nerve",
+        "make verify-platform-health"
+      ]
+    },
+    "repo-policy": {
+      "owns": [
+        "AGENTS.md",
+        ".cursor/rules/repo-boundary.mdc",
+        "repo-policy.json",
+        "scripts/check_repo_policy.py",
+        "docs/ops/REPO_POLICY_BOUNDARY_LOCKED_v1.md"
+      ],
+      "required_authority": [
+        "PROJECT_BOUNDARIES_LOCKED.md",
+        "docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md",
+        ".cursor/rules/nf-authority-stack.mdc"
+      ],
+      "verify": [
+        "python3 scripts/check_repo_policy.py",
+        "git diff --check"
+      ]
+    },
+    "docs-policy": {
+      "owns": [
+        "repo-local docs and locked handoffs"
+      ],
+      "required_authority": [
+        "docs/DOC_UNIFIED_INDEX_LOCKED_v1.md",
+        "docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md",
+        ".cursor/rules/noetfield-agent-doc-tagging.mdc"
+      ],
+      "verify": [
+        "make verify-doc-ssot",
+        "python3 scripts/check_repo_policy.py"
+      ]
+    },
+    "live-nerve": {
+      "owns": [
+        "governance/NOETFIELD_LIVE_NERVE_RECEIPT.json",
+        "live semantic/public-output receipts",
+        "live route/nav truth receipts"
+      ],
+      "required_authority": [
+        "docs/ops/NOETFIELD_LIVE_NERVE_HANDOFF_LOCKED_v1.md",
+        "Makefile"
+      ],
+      "verify": [
+        "make verify-live-nerve"
+      ]
+    },
+    "generated-output": {
+      "owns": [
+        "generated public output only through source generators and manifests"
+      ],
+      "required_authority": [
+        ".vercelignore",
+        "vercel.json",
+        "scripts/verify-public-output-allowlist.py"
+      ],
+      "verify": [
+        "make verify-public-denylist-sync",
+        "make verify-live-nerve"
+      ]
+    },
+    "cross-repo-contract": {
+      "owns": [
+        "repo-local contracts, exports, manifests, APIs, and handoff docs"
+      ],
+      "required_authority": [
+        "PROJECT_BOUNDARIES_LOCKED.md",
+        "docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md"
+      ],
+      "verify": [
+        "python3 scripts/check_repo_policy.py"
+      ]
+    }
+  },
+  "boundaries": {
+    "repo_owned_work_stays_here": true,
+    "one_lane_per_pass": true,
+    "max_files_per_pass": 40,
+    "target_files_per_pass": "20-40",
+    "atomic_commit_per_coherent_lane": true,
+    "high_intelligence_use": [
+      "decisions",
+      "reviews",
+      "gap analysis",
+      "policy interpretation"
+    ],
+    "bulk_scanning_use": [
+      "validators",
+      "manifests",
+      "receipts",
+      "deterministic searches"
+    ]
+  },
+  "forbidden_active_work": [
+    {
+      "name": "TrustField",
+      "reason": "PROJECT_BOUNDARIES_LOCKED.md marks TrustField execution outside this repo"
+    },
+    {
+      "name": "VIRLUX",
+      "reason": "PROJECT_BOUNDARIES_LOCKED.md marks VIRLUX outside this repo"
+    },
+    {
+      "name": "SourceA",
+      "reason": "ROUTING_CARD.md and ownership charter allow foundation patterns only when explicitly required"
+    },
+    {
+      "name": "Noetfield OS / GEL runtime implementation",
+      "reason": "Ownership charter assigns api.noetfield.com GEL runtime to noetfeld-os"
+    },
+    {
+      "name": "Studio IDE active implementation",
+      "reason": "Ownership charter assigns Studio IDE to noetfield-studio-ide"
+    }
+  ],
+  "cross_repo_dependency_policy": {
+    "allowed": [
+      "contracts",
+      "exports",
+      "manifests",
+      "APIs",
+      "live receipts",
+      "locked handoff docs"
+    ],
+    "not_allowed": [
+      "private scripts from another repo as this repo execution path",
+      "loose copied active work from another product",
+      "unmanifested evidence or backlog payloads"
+    ]
+  },
+  "generated_output_policy": {
+    "rule": "generated, evidence, backlog, and archive outputs must be represented by snapshots plus manifests or tracked receipts, not loose dirty files",
+    "guarded_paths": [
+      "governance/",
+      "reports/",
+      "docs/ops/plans/",
+      "os/plan-library/",
+      ".vercel/output/"
+    ]
+  },
+  "validator": {
+    "script": "scripts/check_repo_policy.py",
+    "json_syntax": true,
+    "git_diff_check": true,
+    "clean_tree_guard": true
+  },
+  "claims_intentionally_avoided": [
+    "No claim that this repo owns GEL runtime implementation beyond website/platform integration.",
+    "No claim that SourceA, TrustField, VIRLUX, Noetfield OS, or Studio IDE active work belongs in this repo.",
+    "No claim that generated receipts are always commit-ready without manifest/snapshot policy."
+  ]
+}
