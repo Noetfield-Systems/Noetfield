@@ -96,6 +96,13 @@
       "source": "governance/index.html"
     },
     {
+      "path": "/ai-value-governance-os/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "AI Value Governance OS — enterprise spend, usage, value, and governance control plane",
+      "source": "ai-value-governance-os/index.html"
+    },
+    {
       "path": "/ai-factories/",
       "expected_status": 200,
       "owner": "website-platform",
