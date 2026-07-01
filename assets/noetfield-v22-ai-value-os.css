@@ -1,0 +1,622 @@
+/* Visual Polish v1 — AI Value Governance OS enterprise landing */
+
+body.nf-www.nf-site-v14.nf-page-ai-value-os {
+  --avos-section-y: clamp(56px, 7vw, 88px);
+  --avos-panel: #ffffff;
+  --avos-panel-muted: #f8f9fb;
+  --avos-ink: #0a0c10;
+  --avos-muted: #5c6370;
+  --avos-line: rgba(15, 17, 23, 0.08);
+  --avos-gold: #8a6b1f;
+  --avos-gold-soft: rgba(200, 163, 73, 0.12);
+}
+
+body.nf-page-ai-value-os .nf-main {
+  padding-top: 4px;
+}
+
+/* —— Hero —— */
+body.nf-page-ai-value-os .nf-avos-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: clamp(28px, 4vw, 44px);
+  align-items: stretch;
+  padding: clamp(36px, 5vw, 56px);
+  margin-bottom: clamp(28px, 4vw, 40px);
+  border-radius: 16px;
+  border: 1px solid rgba(200, 163, 73, 0.22);
+  background:
+    radial-gradient(900px 420px at 0% 0%, rgba(200, 163, 73, 0.11), transparent 58%),
+    radial-gradient(700px 360px at 100% 12%, rgba(15, 17, 23, 0.04), transparent 55%),
+    linear-gradient(180deg, #fff 0%, #fafbfc 100%);
+  box-shadow: 0 1px 2px rgba(15, 17, 23, 0.04), 0 24px 64px rgba(15, 17, 23, 0.06);
+}
+
+body.nf-page-ai-value-os .nf-avos-hero__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+body.nf-page-ai-value-os .nf-avos-hero .nf-hero-kicker {
+  margin-bottom: 16px;
+  border-color: rgba(138, 107, 31, 0.28);
+  background: rgba(200, 163, 73, 0.08);
+  color: var(--avos-gold);
+}
+
+body.nf-page-ai-value-os .nf-avos-hero .nf-hero-kicker-dot {
+  background: var(--avos-gold);
+  box-shadow: 0 0 10px rgba(200, 163, 73, 0.45);
+}
+
+body.nf-page-ai-value-os .nf-avos-hero .nf-eyebrow {
+  margin-bottom: 10px;
+}
+
+body.nf-page-ai-value-os .nf-avos-hero h1 {
+  max-width: 16ch;
+  margin: 0 0 18px;
+  font-size: clamp(2.125rem, 4.8vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.034em;
+  color: var(--avos-ink);
+}
+
+body.nf-page-ai-value-os .nf-avos-hero .nf-lead {
+  max-width: 54ch;
+  margin: 0 0 22px;
+  font-size: clamp(1.0625rem, 1.8vw, 1.1875rem);
+  line-height: 1.62;
+  color: var(--avos-muted);
+}
+
+body.nf-page-ai-value-os .nf-avos-hero .nf-hero-badges {
+  margin-bottom: 24px;
+  gap: 8px;
+}
+
+body.nf-page-ai-value-os .nf-avos-hero .nf-cta-actions {
+  margin-top: 4px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+body.nf-page-ai-value-os .nf-avos-hero .nf-cta-actions .btn-primary {
+  min-height: 44px;
+  padding: 0 20px;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  box-shadow: 0 8px 24px rgba(10, 12, 16, 0.14);
+}
+
+body.nf-page-ai-value-os .nf-avos-hero-panel {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(22px, 3vw, 28px);
+  border-radius: 14px;
+  border: 1px solid var(--avos-line);
+  background: var(--avos-panel-muted);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+body.nf-page-ai-value-os .nf-avos-hero-panel .nf-hero-panel-label {
+  margin: 0 0 14px;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--avos-gold);
+}
+
+body.nf-page-ai-value-os .nf-avos-hero-panel ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  counter-reset: avos-step;
+}
+
+body.nf-page-ai-value-os .nf-avos-hero-panel li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--avos-line);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--avos-ink);
+  letter-spacing: -0.01em;
+}
+
+body.nf-page-ai-value-os .nf-avos-hero-panel li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+body.nf-page-ai-value-os .nf-avos-hero-panel li::before {
+  counter-increment: avos-step;
+  content: counter(avos-step, decimal-leading-zero);
+  flex: 0 0 28px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--avos-gold);
+}
+
+/* —— Metrics strip —— */
+body.nf-page-ai-value-os .nf-avos-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-bottom: var(--avos-section-y);
+  border: 1px solid var(--avos-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 17, 23, 0.04);
+}
+
+body.nf-page-ai-value-os .nf-avos-metric {
+  padding: 18px 20px;
+  border-right: 1px solid var(--avos-line);
+}
+
+body.nf-page-ai-value-os .nf-avos-metric:last-child {
+  border-right: none;
+}
+
+body.nf-page-ai-value-os .nf-avos-metric strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--avos-ink);
+}
+
+body.nf-page-ai-value-os .nf-avos-metric span {
+  display: block;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--avos-muted);
+}
+
+body.nf-page-ai-value-os .nf-avos-metric code {
+  font-size: 0.75rem;
+  color: var(--avos-gold);
+}
+
+/* —— Section rhythm —— */
+body.nf-page-ai-value-os .nf-section-block {
+  margin-bottom: var(--avos-section-y);
+  padding-bottom: 0;
+}
+
+body.nf-page-ai-value-os .nf-section-block--band {
+  margin-left: calc(-1 * clamp(16px, 3vw, 28px));
+  margin-right: calc(-1 * clamp(16px, 3vw, 28px));
+  padding: clamp(32px, 4vw, 48px) clamp(20px, 3vw, 28px);
+  border-top: 1px solid var(--avos-line);
+  border-bottom: 1px solid var(--avos-line);
+  background: var(--avos-panel-muted);
+}
+
+body.nf-page-ai-value-os .nf-section-block-head {
+  margin-bottom: clamp(24px, 3vw, 32px);
+}
+
+body.nf-page-ai-value-os .nf-section-block-head h2 {
+  max-width: 22ch;
+}
+
+body.nf-page-ai-value-os .nf-section-lead {
+  max-width: 62ch;
+  font-size: 1.0625rem;
+  line-height: 1.62;
+}
+
+/* —— Problem cards —— */
+body.nf-page-ai-value-os .nf-avos-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+body.nf-page-ai-value-os .nf-avos-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 22px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--avos-line);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 17, 23, 0.03);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+body.nf-page-ai-value-os .nf-avos-card:hover {
+  border-color: rgba(200, 163, 73, 0.28);
+  box-shadow: 0 12px 32px rgba(15, 17, 23, 0.06);
+  transform: translateY(-2px);
+}
+
+body.nf-page-ai-value-os .nf-avos-card__tag {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--avos-gold);
+}
+
+body.nf-page-ai-value-os .nf-avos-card h3 {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--avos-ink);
+}
+
+body.nf-page-ai-value-os .nf-avos-card p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.58;
+  color: var(--avos-muted);
+}
+
+body.nf-page-ai-value-os .nf-avos-card ul {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+body.nf-page-ai-value-os .nf-avos-card ul li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--avos-muted);
+}
+
+body.nf-page-ai-value-os .nf-avos-card ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(200, 163, 73, 0.55);
+}
+
+body.nf-page-ai-value-os .nf-avos-card--featured {
+  border-color: rgba(200, 163, 73, 0.32);
+  background:
+    radial-gradient(480px 220px at 0% 0%, rgba(200, 163, 73, 0.08), transparent 60%),
+    #fff;
+}
+
+/* —— System flow —— */
+body.nf-page-ai-value-os .nf-avos-flow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body.nf-page-ai-value-os .nf-avos-flow-step {
+  position: relative;
+  padding: 18px 16px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--avos-line);
+  background: #fff;
+  min-height: 100%;
+}
+
+body.nf-page-ai-value-os .nf-avos-flow-step:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: rgba(15, 17, 23, 0.22);
+  z-index: 1;
+}
+
+body.nf-page-ai-value-os .nf-avos-flow-step__num {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--avos-gold);
+}
+
+body.nf-page-ai-value-os .nf-avos-flow-step h3 {
+  margin: 0 0 8px;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: var(--avos-ink);
+}
+
+body.nf-page-ai-value-os .nf-avos-flow-step p {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.52;
+  color: var(--avos-muted);
+}
+
+body.nf-page-ai-value-os .nf-avos-flow--compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* —— Callout —— */
+body.nf-page-ai-value-os .nf-avos-callout {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(200, 163, 73, 0.22);
+  background: rgba(200, 163, 73, 0.06);
+}
+
+body.nf-page-ai-value-os .nf-avos-callout p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--avos-muted);
+}
+
+body.nf-page-ai-value-os .nf-avos-callout strong {
+  color: var(--avos-ink);
+}
+
+/* —— Engagement ladder —— */
+body.nf-page-ai-value-os .nf-revenue-ladder {
+  margin-top: 28px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--avos-line);
+  background: #fff;
+}
+
+body.nf-page-ai-value-os .nf-revenue-step {
+  min-height: 88px;
+}
+
+/* —— Buyer personas —— */
+body.nf-page-ai-value-os .nf-avos-buyers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+body.nf-page-ai-value-os .nf-avos-buyers .nf-badge-pill {
+  padding: 10px 14px;
+  font-size: 0.8125rem;
+  font-weight: 550;
+  border-radius: 999px;
+  border: 1px solid var(--avos-line);
+  background: #fff;
+  color: var(--avos-muted);
+}
+
+/* —— Proof grid —— */
+body.nf-page-ai-value-os .nf-avos-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+body.nf-page-ai-value-os .nf-avos-proof-item {
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--avos-line);
+  background: #fff;
+}
+
+body.nf-page-ai-value-os .nf-avos-proof-item strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--avos-ink);
+}
+
+body.nf-page-ai-value-os .nf-avos-proof-item p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--avos-muted);
+}
+
+body.nf-page-ai-value-os .nf-avos-proof-item code {
+  font-size: 0.8125rem;
+}
+
+body.nf-page-ai-value-os .nf-avos-proof-note {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.58;
+  color: var(--avos-muted);
+}
+
+/* —— Mega CTA —— */
+body.nf-page-ai-value-os .nf-avos-cta {
+  padding: clamp(40px, 6vw, 56px);
+  border-radius: 16px;
+  border: 1px solid rgba(200, 163, 73, 0.28);
+  background:
+    radial-gradient(900px 360px at 50% 0%, rgba(200, 163, 73, 0.12), transparent 62%),
+    linear-gradient(180deg, #fff, #faf8f3);
+  box-shadow: 0 16px 48px rgba(15, 17, 23, 0.06);
+}
+
+body.nf-page-ai-value-os .nf-avos-cta .nf-section-block-head h2 {
+  max-width: none;
+}
+
+body.nf-page-ai-value-os .nf-avos-cta-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 24px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+body.nf-page-ai-value-os .nf-avos-cta-checklist li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--avos-muted);
+}
+
+body.nf-page-ai-value-os .nf-avos-cta-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--avos-gold);
+}
+
+body.nf-page-ai-value-os .nf-avos-cta .nf-cta-actions .btn-primary {
+  min-height: 46px;
+  padding: 0 22px;
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+body.nf-page-ai-value-os .nf-avos-boundary {
+  margin-top: 24px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--avos-line);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+body.nf-page-ai-value-os .nf-avos-boundary p {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.58;
+  color: var(--avos-muted);
+}
+
+/* —— Related links —— */
+body.nf-page-ai-value-os .nf-depth-links {
+  gap: 10px;
+}
+
+body.nf-page-ai-value-os .nf-depth-links a {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--avos-line);
+  background: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* —— Inline CTA band —— */
+body.nf-page-ai-value-os .nf-avos-inline-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--avos-line);
+}
+
+/* —— Mobile —— */
+@media (max-width: 1100px) {
+  body.nf-page-ai-value-os .nf-avos-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  body.nf-page-ai-value-os .nf-avos-flow-step:not(:last-child)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  body.nf-page-ai-value-os .nf-avos-hero {
+    grid-template-columns: 1fr;
+  }
+
+  body.nf-page-ai-value-os .nf-avos-cards {
+    grid-template-columns: 1fr;
+  }
+
+  body.nf-page-ai-value-os .nf-avos-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.nf-page-ai-value-os .nf-avos-metric:nth-child(2) {
+    border-right: none;
+  }
+
+  body.nf-page-ai-value-os .nf-avos-metric:nth-child(1),
+  body.nf-page-ai-value-os .nf-avos-metric:nth-child(2) {
+    border-bottom: 1px solid var(--avos-line);
+  }
+
+  body.nf-page-ai-value-os .nf-avos-flow,
+  body.nf-page-ai-value-os .nf-avos-flow--compact {
+    grid-template-columns: 1fr;
+  }
+
+  body.nf-page-ai-value-os .nf-avos-proof-grid,
+  body.nf-page-ai-value-os .nf-avos-cta-checklist {
+    grid-template-columns: 1fr;
+  }
+
+  body.nf-page-ai-value-os .nf-avos-hero h1 {
+    max-width: none;
+  }
+
+  body.nf-page-ai-value-os .nf-avos-hero .nf-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.nf-page-ai-value-os .nf-avos-hero .nf-cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  body.nf-page-ai-value-os .nf-section-block--band {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  body.nf-page-ai-value-os .nf-avos-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  body.nf-page-ai-value-os .nf-avos-metric {
+    border-right: none;
+    border-bottom: 1px solid var(--avos-line);
+  }
+
+  body.nf-page-ai-value-os .nf-avos-metric:last-child {
+    border-bottom: none;
+  }
+}

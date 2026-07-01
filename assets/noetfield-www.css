@@ -9,6 +9,7 @@
 @import url("noetfield-v18-wave1.css");
 @import url("noetfield-v20-tier1.css?v=42");
 @import url("noetfield-v21-fullwidth.css");
+@import url("noetfield-v22-ai-value-os.css?v=1");
 
 body.nf-www {
   --section-y: clamp(64px, 9vw, 104px);
