@@ -1,0 +1,79 @@
+---
+org: Noetfield-Systems
+repo: Noetfield
+version: "1.0"
+created: "2026-07-03"
+status: active
+
+# Agent Configuration
+primary_agent: Copilot
+integrator: Vercel deployer
+role: T1 builder · web surface worker
+branch: main
+tier: T1
+
+# Synchronization
+must_sync_with:
+  - Noetfield-Systems/sina-governance-SSOT (for trust ledger samples)
+  - Noetfield-Systems/TrustField-Technologies (for platform hooks)
+
+# Execution Context
+workflows:
+  - vercel-www-deploy.yml (T1 web deployment)
+  - verify-www-buyer-audience.sh (T1 audience verification)
+  - trust-ledger-sample-export (M4 asset export)
+
+# Governance
+required_receipts:
+  - web_deployment_receipt_v1.json
+  - buyer_audience_verification_receipt_v1.json
+  - tlee_sample_export_receipt_v1.json
+
+forbidden_actions:
+  - Deploy without passing buyer-audience-verify gate
+  - Use of old org slug "kazemnezhadsina144-dot" (see ROUTING_MATRIX.md)
+  - Merge to main without passing web checks
+  - Modify locked markdown files without HISTORICAL_REFERENCE marker
+  - Production mutation without approval
+
+# Mission Assignment
+mission_id: M4
+mission_name: platform_surface
+value_class: market_presence_asset
+spend_cap:
+  - T1
+  - T2
+
+# Tool Access (See ROUTING_MATRIX.md for full L17 tier definitions)
+tool_access:
+  - tier: T1
+    access_type: GitHub-native repo worker
+    allowed_tools:
+      - GitHub Issues API (read/write)
+      - GitHub PR API (read/write)
+      - File Edit (branch only)
+      - Git Commit/Push (branch only)
+      - Copilot Chat
+  - tier: T2
+    access_type: Local builder (Cursor)
+    allowed_tools:
+      - Local Terminal (build, test)
+      - Local File System
+      - Package Managers (npm, pip)
+
+# Pre-Execution Checklist
+pre_exec_checklist:
+  - "[ ] Read repo state before acting"
+  - "[ ] buyer-audience-verify passes before deployment"
+  - "[ ] No old slug 'kazemnezhadsina144-dot' in Vercel config"
+  - "[ ] TLEE samples from SSOT fetched with Noetfield-Systems URLs"
+  - "[ ] Do not edit LOCKED docs (mark HISTORICAL_REFERENCE)"
+  - "[ ] Git clean: all changes committed to branch"
+
+# Copilot Instructions Reference
+copilot_instructions_file: .github/copilot-instructions.md
+
+# Audit Trail
+last_verified: null
+last_verified_sha: null
+verification_window: "INVALIDATED_BY_MIGRATION → Ready for restart"

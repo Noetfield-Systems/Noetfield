@@ -1,3 +1,15 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 # Noetfield roadmap (public)
 
 **Product strategy (detail):** [strategy/noetfield-future-path.md](strategy/noetfield-future-path.md)
@@ -34,7 +46,7 @@ This page is safe for a **public** repository. Detailed `NF-*` checklists and fo
 |----------|--------|
 | **Public / partners** | This file + strategy doc + GitHub Releases |
 | **Agents (local)** | [.cursor/AGENT_TRACKING.md](../.cursor/AGENT_TRACKING.md) → `ops/private/todolist/` when present |
-| **Agents (cloud) + team** | [GitHub Issues](https://github.com/kazemnezhadsina144-dot/Noetfield/issues) |
+| **Agents (cloud) + team** | [GitHub Issues](https://github.com/Noetfield-Systems/Noetfield/issues) |
 | **Founder private** | `ops/private/` (gitignored — run `./scripts/bootstrap-private-ops.sh`) |
 
 **Boundaries:** [PROJECT_BOUNDARIES_LOCKED.md](../PROJECT_BOUNDARIES_LOCKED.md) — Noetfield only in this repo; TrustField and VIRLUX are separate entities.

@@ -1,6 +1,18 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 # UPG-SUPABASE-001 — Noetfield Systems Supabase activation
 
-**Project:** Noetfield Systems · ref `tkgpapowwplupyekpivy` · org `kazemnezhadsina144-dot's Org`  
+**Project:** Noetfield Systems · ref `tkgpapowwplupyekpivy` · org `Noetfield-Systems's Org`  
 **Dashboard:** https://supabase.com/dashboard/project/tkgpapowwplupyekpivy  
 **Trigger:** Supabase inactivity email (2026-06-26) — auto-pause if no activity continues.
 

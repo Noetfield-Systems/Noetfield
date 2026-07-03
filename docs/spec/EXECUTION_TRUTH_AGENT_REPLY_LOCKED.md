@@ -1,3 +1,15 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 # Execution Truth — agent reply ingest (LOCKED)
 
 **Law (external):** `SourceA/SINAAI_EXECUTION_TRUTH_LAYER_LOCKED_v1.md`, `SINAAI_AGENT_YAML_INGEST_LOCKED_v1.md`

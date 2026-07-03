@@ -1,3 +1,15 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 # NF-GAOS W2 — 10-Step Upgrade to Next Level (LOCKED v1)
 
 ```yaml
@@ -80,7 +92,7 @@ Commit any post-push drift (pipeline doc rename, gtm-ops needles) before merge.
 
 ### 2 — Merge ship PR
 
-- URL: https://github.com/kazemnezhadsina144-dot/Noetfield/pull/new/ship/nf-gaos-w2-production
+- URL: https://github.com/Noetfield-Systems/Noetfield/pull/new/ship/nf-gaos-w2-production
 - Two commits: (1) NF-GAOS W0/W1 + governance runtime (2) www + GTM + portfolio
 
 ### 3 — Platform production host

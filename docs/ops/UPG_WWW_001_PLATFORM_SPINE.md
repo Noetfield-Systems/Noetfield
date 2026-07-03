@@ -1,3 +1,15 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 # UPG-WWW-001 — Platform spine go-live
 
 **Goal:** `https://platform.noetfield.com/health` → 200 with governance FastAPI on Railway; www chat upgrades to LLM proxy automatically when platform is reachable.
@@ -10,9 +22,9 @@
 
 ## Blocker (2026-06-26)
 
-Railway **trial resource limit** hit on workspace `kazemnezhadsina144-dot's Projects` — trial caps **1 GB RAM / 2 vCPU / 1 GB disk**; `mergepack-api` is **4/4 services** (~$1.97/mo usage); orphan `npx @railway/cli@latest up` has Postgres only; adding `platform-api` fails with *resource provision limit exceeded*.
+Railway **trial resource limit** hit on workspace `Noetfield-Systems's Projects` — trial caps **1 GB RAM / 2 vCPU / 1 GB disk**; `mergepack-api` is **4/4 services** (~$1.97/mo usage); orphan `npx @railway/cli@latest up` has Postgres only; adding `platform-api` fails with *resource provision limit exceeded*.
 
-**Separate Supabase project (email 2026-06-26):** **Noetfield Systems** Supabase ref `tkgpapowwplupyekpivy` under **`kazemnezhadsina144-dot's Org`** is flagged for auto-pause due to inactivity — platform currently uses **Railway Postgres**, not Supabase cloud. See **`docs/ops/UPG_SUPABASE_001_ACTIVATION.md`** to apply migrations + wire DATABASE_URL.
+**Separate Supabase project (email 2026-06-26):** **Noetfield Systems** Supabase ref `tkgpapowwplupyekpivy` under **`Noetfield-Systems's Org`** is flagged for auto-pause due to inactivity — platform currently uses **Railway Postgres**, not Supabase cloud. See **`docs/ops/UPG_SUPABASE_001_ACTIVATION.md`** to apply migrations + wire DATABASE_URL.
 
 **Railway org note:** deploy platform API in the org where Hobby/trial quota allows (`noetfield-platform` project `94ade24c-…` on kazemnezhadsina144@gmail.com workspace after Hobby unlock).
 

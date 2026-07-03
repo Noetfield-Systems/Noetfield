@@ -1,3 +1,15 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 # MSB partner deploy and pilot keys
 
 **Audience:** Founder / platform ops after merge to `main`.  
@@ -5,7 +17,7 @@
 
 ## 1. Merge and release
 
-1. Merge [PR #11](https://github.com/kazemnezhadsina144-dot/Noetfield/pull/11) (institutional API + partner GTM) into `main`.
+1. Merge [PR #11](https://github.com/Noetfield-Systems/Noetfield/pull/11) (institutional API + partner GTM) into `main`.
 2. Tag or deploy from `main` per [GO_LIVE.md](./GO_LIVE.md).
 
 ## 2. Deploy surfaces

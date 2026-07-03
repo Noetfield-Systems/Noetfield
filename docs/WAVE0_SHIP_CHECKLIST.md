@@ -1,3 +1,15 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 # Wave 0 — Ship and prove (founder checklist)
 
 **Status:** Active after PR #10 merge to `main`.  
@@ -7,9 +19,9 @@
 
 ## Repo (done on `main`)
 
-- Merge [PR #10](https://github.com/kazemnezhadsina144-dot/Noetfield/pull/10)
-- Merge [PR #14](https://github.com/kazemnezhadsina144-dot/Noetfield/pull/14) — governance pilot runbook, rate limits, export script
-- Merge [PR #15](https://github.com/kazemnezhadsina144-dot/Noetfield/pull/15) — bank-grade stack, `docs/ops/` `noetfield_cloud`, dev `:13080`, Trust Ledger P0 docs
+- Merge [PR #10](https://github.com/Noetfield-Systems/Noetfield/pull/10)
+- Merge [PR #14](https://github.com/Noetfield-Systems/Noetfield/pull/14) — governance pilot runbook, rate limits, export script
+- Merge [PR #15](https://github.com/Noetfield-Systems/Noetfield/pull/15) — bank-grade stack, `docs/ops/` `noetfield_cloud`, dev `:13080`, Trust Ledger P0 docs
 - `make ship-verify` on `main` (tle-smoke + verify-local-dev + bank-grade HTML)
 - Bank-grade repo deliverables — [BANK_GRADE_CHECKLIST.md](./BANK_GRADE_CHECKLIST.md) · [diligence/](./diligence/)
 - Procurement visible-copy warnings cleared (engagement intake wording)

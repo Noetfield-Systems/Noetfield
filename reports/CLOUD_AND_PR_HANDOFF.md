@@ -15,7 +15,7 @@ doc_id: cloud-and-pr-handoff-all-lanes
 
 **Open draft PR (founder one-click):**
 
-https://github.com/kazemnezhadsina144-dot/Noetfield/compare/main...cursor/bank-grade-fullstack-37f0?expand=1
+https://github.com/Noetfield-Systems/Noetfield/compare/main...cursor/bank-grade-fullstack-37f0?expand=1
 
 **Title:** `Phase 2 evidence-connectors: nf-0202–nf-0209 (local repo agent)`
 
@@ -28,8 +28,8 @@ https://github.com/kazemnezhadsina144-dot/Noetfield/compare/main...cursor/bank-g
 ```
 Bounded order — merge PR #48 only.
 
-Repo: kazemnezhadsina144-dot/Noetfield
-PR: https://github.com/kazemnezhadsina144-dot/Noetfield/pull/48
+Repo: Noetfield-Systems/Noetfield
+PR: https://github.com/Noetfield-Systems/Noetfield/pull/48
 Branch: cursor/tenth-audit-iter18-37f0 → main
 
 Pre: Local verify PASS on tenth-audit branch (coherence bundle).
@@ -46,7 +46,7 @@ ASK before any other merge.
 ```
 Bounded order — debug PR #49 CI only (no merge until green).
 
-PR: https://github.com/kazemnezhadsina144-dot/Noetfield/pull/49
+PR: https://github.com/Noetfield-Systems/Noetfield/pull/49
 Branch: cursor/design-token-migration-37f0
 Head: 973e619b
 

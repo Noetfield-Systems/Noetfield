@@ -1,3 +1,15 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 # NOETFIELD CLOUD INVENTORY — LOCKED v1
 
 **Status:** LOCKED  
@@ -24,7 +36,7 @@
 | Team | `the-777-foundation` |
 | Project | **`noetfield`** |
 | Dashboard | https://vercel.com/the-777-foundation/noetfield |
-| GitHub | `kazemnezhadsina144-dot/Noetfield` → `main` auto-deploy |
+| GitHub | `Noetfield-Systems/Noetfield` → `main` auto-deploy |
 | Runbook | `docs/ops/VERCEL_WWW_DEPLOY_LOCKED_v1.md` |
 
 ---

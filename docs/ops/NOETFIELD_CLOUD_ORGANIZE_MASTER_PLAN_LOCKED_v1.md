@@ -1,3 +1,15 @@
+<!-- ADVISOR_ARCHITECT_CHECKLIST_STUB (auto-inserted) -->
+Advisor / Architect Minimal Checklist (AUTO-STUB)
+-----------------------------------------------
+
+- protects: Which founder goal does this protect? (pick one)
+- sina_workload: reduces / increases + short rationale
+- permission_loop: yes / no + explanation
+- sandbox_autonomy: yes / no + where/how (sandbox lane path)
+- target_to_blocker: yes / no + mitigation
+- canon_version: (string)
+- sandbox_evidence: link(s) to sandbox receipt(s)
+
 <!-- NOOS-AGENT-DOC -->
 # NOETFIELD CLOUD ORGANIZE MASTER PLAN — LOCKED v1
 
@@ -178,9 +190,9 @@ PyPI noetfield-gate publish live · npm @noetfield/gate · chatbot Phase 3-10 ·
 | E2E verify | `check_noetfield_com_e2e.py` PASS; API live status superseded by Phase 8 receipt |
 
 **GitHub remotes:**
-- https://github.com/kazemnezhadsina144-dot/Noetfield
-- https://github.com/kazemnezhadsina144-dot/noetfeld-os (private)
-- https://github.com/kazemnezhadsina144-dot/noetfield-studio-ide (private)
+- https://github.com/Noetfield-Systems/Noetfield
+- https://github.com/Noetfield-Systems/noetfeld-os (private)
+- https://github.com/Noetfield-Systems/noetfield-studio-ide (private)
 
 **Vercel www (2026-06-26):**
 - Team: `the-777-foundation` · Project: **`noetfield`** (not `www`)
