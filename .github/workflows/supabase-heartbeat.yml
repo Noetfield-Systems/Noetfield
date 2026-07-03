@@ -1,4 +1,9 @@
 # UPG-SUPABASE-001 — weekly activity to prevent Supabase free-tier auto-pause.
+# SLO targets (hardened):
+# - REST ping: 200 or 401 (auth rejection OK) = pass
+# - SQL ping: heartbeat query returns 1 in <5s
+# - Weekly success rate >95% (consecutive failures = Kaizen escalation)
+
 name: Supabase heartbeat
 
 on:
@@ -50,3 +55,13 @@ jobs:
 
           asyncio.run(main())
           PY
+
+      - name: Report health status
+        if: always()
+        run: |
+          status="${{ job.status }}"
+          echo "workflow_name=supabase-heartbeat" >> $GITHUB_OUTPUT
+          echo "slo_target=rest_200_or_401,sql_response<5s,weekly_pass_rate>95%" >> $GITHUB_OUTPUT
+          echo "health_status=${status}" >> $GITHUB_OUTPUT
+          echo "Supabase heartbeat: ${status}" | tee -a ${{ runner.temp }}/workflow-health.txt
+        id: report

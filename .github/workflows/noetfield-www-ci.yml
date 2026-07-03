@@ -1,3 +1,8 @@
+# SLO targets (hardened):
+# - Website build and publish: pass rate >99% on main, latency <60s
+# - Sitemap verification: 100% (health blocking)
+# - Public health audit: zero critical issues on main (drift detected = Kaizen)
+
 name: Noetfield WWW CI
 
 on:
@@ -40,3 +45,13 @@ jobs:
 
       - name: Public site health
         run: make site-health
+
+      - name: Report health status
+        if: always()
+        run: |
+          status="${{ job.status }}"
+          echo "workflow_name=noetfield-www-ci" >> $GITHUB_OUTPUT
+          echo "slo_target=pass_rate>99%,latency<60s,zero_critical_issues" >> $GITHUB_OUTPUT
+          echo "health_status=${status}" >> $GITHUB_OUTPUT
+          echo "Noetfield WWW health: ${status}" | tee -a ${{ runner.temp }}/workflow-health.txt
+        id: report

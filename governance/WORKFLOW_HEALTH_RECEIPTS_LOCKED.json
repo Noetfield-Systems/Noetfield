@@ -1,0 +1,40 @@
+{
+  "schema": "noetfield-workflow-health-receipts-v1",
+  "lock_date": "2026-07-02T22:52:00Z",
+  "workflows": {
+    "noetfield-www-ci": {
+      "slo_targets": {
+        "pass_rate": ">99%",
+        "latency_seconds": "<60",
+        "critical_issues": 0
+      },
+      "trigger": ["push:main", "pull_request"],
+      "owner": "site-health"
+    },
+    "platform-deploy": {
+      "slo_targets": {
+        "pass_rate": ">95%",
+        "compile": "ok",
+        "breaking_changes": 0,
+        "startup_seconds": "<10"
+      },
+      "trigger": ["push:main", "pull_request", "workflow_dispatch"],
+      "owner": "ecosystem-health"
+    },
+    "supabase-heartbeat": {
+      "slo_targets": {
+        "rest_response": "200|401",
+        "sql_response_seconds": "<5",
+        "weekly_pass_rate": ">95%"
+      },
+      "trigger": ["schedule:weekly", "workflow_dispatch"],
+      "owner": "database-health"
+    }
+  },
+  "kaizen_escalation_policy": {
+    "slo_miss": "low_priority",
+    "consecutive_failures_2plus": "medium_priority",
+    "pattern_weekly": "high_priority_with_remediation"
+  },
+  "note": "Phase 1: SLO targets and health scoring defined. Phase 2: auto-file Kaizen proofs on SLO miss/drift."
+}

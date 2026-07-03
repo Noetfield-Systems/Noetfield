@@ -1,3 +1,8 @@
+# SLO targets (hardened):
+# - Platform validate: pass rate >95% on main, compile all packages OK
+# - Ecosystem health check: zero breaking changes (drift = Kaizen)
+# - Deploy smoke: API starts and responds in <10s
+
 name: Platform CI (deploy-ready)
 
 on:
@@ -53,6 +58,16 @@ jobs:
           sleep 4
           PLATFORM_HEALTH_BASE=http://127.0.0.1:8001 ./scripts/deploy_platform_smoke.sh
           kill %1 || true
+
+      - name: Report health status
+        if: always()
+        run: |
+          status="${{ job.status }}"
+          echo "workflow_name=platform-deploy" >> $GITHUB_OUTPUT
+          echo "slo_target=pass_rate>95%,compile_ok,zero_breaking_changes,startup<10s" >> $GITHUB_OUTPUT
+          echo "health_status=${status}" >> $GITHUB_OUTPUT
+          echo "Platform health: ${status}" | tee -a ${{ runner.temp }}/workflow-health.txt
+        id: report
 
   # Production deploy: wire your host (Fly, ECS, VM) here when secrets are available.
   # deploy:
