@@ -1,1 +1,13 @@
-kazemnezhadsina144-dot
+## Noetfield repo forbidden active-config markers
+
+The following legacy slugs must NOT appear in active configuration (repo identity, code, scripts, configs):
+
+- kazemnezhadsina144-dot (broken form OK: kazemnezhadsina144[-]dot)
+
+They may appear only in:
+- Historical evidence/archive documents
+- This file (canonical reference)
+- `.github/copilot-instructions.md` (policy reference)
+- Comments explaining why they are forbidden
+
+Authority: `.github/copilot-instructions.md`, `repo-policy.json`
