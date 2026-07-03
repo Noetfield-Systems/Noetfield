@@ -1,0 +1,121 @@
+name: Noetfield Daily Heartbeat (Phase 2B)
+on:
+  schedule:
+    # 06:00 UTC daily
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Collect health probe
+        run: |
+          python3 scripts/noetfield_health_v1.py > /tmp/health_probe.json
+          cat /tmp/health_probe.json
+
+      - name: Collect cleanliness check
+        run: |
+          python3 scripts/verify_repo_cleanliness_v1.py > /tmp/cleanliness.json
+          cat /tmp/cleanliness.json
+
+      - name: Run SLO scoring
+        run: |
+          python3 scripts/slo_scorer_v1.py > /tmp/slo_scores.json
+          cat /tmp/slo_scores.json
+
+      - name: Aggregate into heartbeat receipt
+        run: |
+          python3 << 'EOF'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          def utc_now():
+              return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+          # Load probe data
+          health_probe = {}
+          cleanliness = {}
+          slo_scores = {}
+
+          try:
+              with open('/tmp/health_probe.json') as f:
+                  health_probe = json.load(f)
+          except: pass
+
+          try:
+              with open('/tmp/cleanliness.json') as f:
+                  cleanliness = json.load(f)
+          except: pass
+
+          try:
+              with open('/tmp/slo_scores.json') as f:
+                  slo_scores = json.load(f)
+          except: pass
+
+          # Build heartbeat receipt v1
+          heartbeat = {
+              "schema": "heartbeat-receipt-v1",
+              "timestamp": utc_now(),
+              "cycle": "daily",
+              "service": "noetfield",
+              "health_probe": health_probe,
+              "cleanliness_report": cleanliness,
+              "slo_scores": slo_scores,
+              "escalations": [],
+          }
+
+          # Check for escalations (e.g., SLO miss or high dirty count)
+          if slo_scores.get("kaizen_receipts_filed", 0) > 0:
+              heartbeat["escalations"].append({
+                  "type": "slo_miss",
+                  "count": slo_scores.get("kaizen_receipts_filed", 0),
+                  "priority": "high",
+              })
+
+          if cleanliness.get("status") == "TRIAGE_REQUIRED":
+              heartbeat["escalations"].append({
+                  "type": "dirty_triage",
+                  "dirty_count": cleanliness.get("dirty_count", 0),
+                  "priority": "medium",
+              })
+
+          # Write to governance
+          governance_dir = Path("governance")
+          governance_dir.mkdir(exist_ok=True)
+
+          heartbeat_log = governance_dir / "NOETFIELD_HEARTBEAT_v1.jsonl"
+          with open(heartbeat_log, "a") as f:
+              f.write(json.dumps(heartbeat) + "\n")
+
+          print(f"Heartbeat written: {heartbeat_log}")
+          print(json.dumps(heartbeat, indent=2))
+          EOF
+
+      - name: Commit cycle receipts and heartbeat
+        if: always()
+        run: |
+          cd "${{ github.workspace }}"
+          git config user.name "Copilot Workflow"
+          git config user.email "copilot@github.com"
+          
+          # Check if anything changed
+          if git status --short | grep -E "^(governance|scripts)"; then
+            git add governance/ scripts/
+            git commit -m "chore: emit cycle receipts and daily heartbeat receipt" || true
+            git push origin HEAD:${{ github.ref }} || true
+          else
+            echo "No changes to commit"
+          fi
