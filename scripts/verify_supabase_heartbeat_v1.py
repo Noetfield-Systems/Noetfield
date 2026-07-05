@@ -10,8 +10,15 @@ import sys
 import asyncpg
 import urllib.request
 
+_SCRIPTS = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPTS not in sys.path:
+    sys.path.insert(0, _SCRIPTS)
+
+from nf_vault_env import ensure_noetfield_supabase_env  # noqa: E402
+
 
 def main() -> int:
+    ensure_noetfield_supabase_env()
     supabase_url = os.environ["NOETFIELD_SUPABASE_URL"].rstrip("/")
     anon_key = os.environ["NOETFIELD_SUPABASE_ANON_KEY"].strip()
     db_url = os.environ["NOETFIELD_SUPABASE_DATABASE_URL"].replace("postgresql+asyncpg://", "postgresql://")

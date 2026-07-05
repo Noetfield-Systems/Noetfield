@@ -4,20 +4,12 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VAULT="${NF_SECRETS_VAULT:-$HOME/.sina/secrets.env}"
-SOURCEA_SECRETS="${HOME}/.sourcea-secrets/noetfield.env"
 WORKER_DIR="$ROOT/infra/nf-probe-cron"
 
 read_vault() {
   local key="$1"
   [[ -f "$VAULT" ]] || return 1
   grep -E "^${key}=" "$VAULT" | tail -1 | cut -d= -f2- | tr -d '\r\n' | sed -e 's/^"//' -e 's/"$//'
-}
-
-load_secrets() {
-  if [[ -f "$SOURCEA_SECRETS" ]]; then
-    # shellcheck disable=SC1090
-    set -a && source "$SOURCEA_SECRETS" && set +a
-  fi
 }
 
 log() { printf '[deploy-nf-probe-cron] %s\n' "$*"; }
@@ -35,12 +27,11 @@ GIT_SHA="$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || true)"
 LIVE_PLATFORM_SHA="$(curl -sS "${PLATFORM_BASE:-https://platform.noetfield.com}/api/public/chat/health" 2>/dev/null | python3 -c "import json,sys; print(json.load(sys.stdin).get('git_sha',''))" 2>/dev/null || true)"
 EXPECTED_SHA="${LIVE_PLATFORM_SHA:-$GIT_SHA}"
 
-load_secrets
+# shellcheck source=scripts/load_noetfield_vault_env.sh
+source "${ROOT}/scripts/load_noetfield_vault_env.sh"
 
-SUPABASE_URL="$(read_vault NOETFIELD_SUPABASE_URL || read_vault SUPABASE_URL || true)"
-SUPABASE_URL="${NOETFIELD_SUPABASE_URL:-${SUPABASE_URL:-}}"
-SUPABASE_SERVICE="$(read_vault NOETFIELD_SUPABASE_SERVICE_ROLE_KEY || read_vault SUPABASE_SERVICE_ROLE_KEY || true)"
-SUPABASE_SERVICE="${NOETFIELD_SUPABASE_SERVICE_ROLE_KEY:-${SUPABASE_SERVICE_ROLE_KEY:-${SUPABASE_SERVICE:-}}}"
+SUPABASE_URL="${NOETFIELD_SUPABASE_URL:-}"
+SUPABASE_SERVICE="${NOETFIELD_SUPABASE_SERVICE_ROLE_KEY:-}"
 TELEGRAM_TOKEN="$(read_vault TELEGRAM_NOETFIELD_OPS_BOT_TOKEN || true)"
 TELEGRAM_CHAT="$(read_vault TELEGRAM_OPS_CHAT_ID || true)"
 [[ -n "$TELEGRAM_CHAT" ]] || TELEGRAM_CHAT="8635650894"

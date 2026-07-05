@@ -12,8 +12,15 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+from nf_vault_env import ensure_noetfield_supabase_env  # noqa: E402
+
 
 def supabase_config() -> tuple[str, str]:
+    ensure_noetfield_supabase_env()
     url = (
         os.environ.get("NOETFIELD_SUPABASE_URL")
         or os.environ.get("SUPABASE_URL")
@@ -26,7 +33,8 @@ def supabase_config() -> tuple[str, str]:
     )
     if not url or not key:
         raise RuntimeError(
-            "NOETFIELD_SUPABASE_URL and NOETFIELD_SUPABASE_SERVICE_ROLE_KEY required"
+            "NOETFIELD_SUPABASE_URL and NOETFIELD_SUPABASE_SERVICE_ROLE_KEY required "
+            "(set env or add to ~/.sourcea-secrets/noetfield.env)"
         )
     return url, key
 
