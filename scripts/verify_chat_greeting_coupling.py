@@ -37,7 +37,13 @@ def asset_hash() -> str:
 
 
 def fetch_json(url: str) -> dict[str, object]:
-    req = urllib.request.Request(url, headers={"Accept": "application/json"})
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": "noetfield-verify-chat-greeting-coupling/1.0",
+        },
+    )
     with urllib.request.urlopen(req, timeout=20) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
@@ -67,7 +73,10 @@ def live_hashes(platform_base: str, www_base: str) -> tuple[str | None, str | No
         pass
     try:
         asset_url = f"{www_base.rstrip('/')}/assets/nf-chat-greeting-ssot.js"
-        req = urllib.request.Request(asset_url)
+        req = urllib.request.Request(
+            asset_url,
+            headers={"User-Agent": "noetfield-verify-chat-greeting-coupling/1.0"},
+        )
         with urllib.request.urlopen(req, timeout=20) as resp:
             text = resp.read().decode("utf-8")
         match = re.search(r"sha256=([a-f0-9]{64})", text)
