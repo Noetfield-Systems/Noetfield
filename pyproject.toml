@@ -22,6 +22,8 @@ dependencies = [
   "temporalio",
   "uvicorn",
   "pyyaml",
+  "google-auth",
+  "requests",
 ]
 
 [build-system]
