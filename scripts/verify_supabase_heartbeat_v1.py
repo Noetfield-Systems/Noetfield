@@ -17,11 +17,27 @@ if _SCRIPTS not in sys.path:
 from nf_vault_env import ensure_noetfield_supabase_env  # noqa: E402
 
 
+def require_env(name: str) -> str:
+    value = os.environ.get(name, "").strip()
+    if not value:
+        print(
+            f"FAIL: {name} missing — set GitHub Actions secret or run "
+            "scripts/sync_noetfield_supabase_github_secrets.sh from ~/.sourcea-secrets/noetfield.env",
+            file=sys.stderr,
+        )
+        return ""
+    return value
+
+
 def main() -> int:
     ensure_noetfield_supabase_env()
-    supabase_url = os.environ["NOETFIELD_SUPABASE_URL"].rstrip("/")
-    anon_key = os.environ["NOETFIELD_SUPABASE_ANON_KEY"].strip()
-    db_url = os.environ["NOETFIELD_SUPABASE_DATABASE_URL"].replace("postgresql+asyncpg://", "postgresql://")
+    supabase_url = require_env("NOETFIELD_SUPABASE_URL")
+    anon_key = require_env("NOETFIELD_SUPABASE_ANON_KEY")
+    db_url = require_env("NOETFIELD_SUPABASE_DATABASE_URL")
+    if not supabase_url or not anon_key or not db_url:
+        return 1
+    supabase_url = supabase_url.rstrip("/")
+    db_url = db_url.replace("postgresql+asyncpg://", "postgresql://")
 
     req = urllib.request.Request(
         f"{supabase_url}/rest/v1/",

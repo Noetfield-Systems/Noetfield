@@ -433,6 +433,10 @@ def procurement_rail() -> str:
 
 def trust_sidebar_rail() -> str:
     """Sticky diligence rail — trust center reference layout (v14)."""
+    trust_receipt = receipt(
+        "RID-2026-0602-TRUST",
+        'Sample receipt — <a href="/trust-ledger/sample-report/">download YAML</a>',
+    )
     return f"""
  <aside class="nf-trust-sidebar" aria-label="Diligence shortcuts">
  <p class="nf-trust-sidebar__label">Procurement rail</p>
@@ -442,7 +446,7 @@ def trust_sidebar_rail() -> str:
  <a href="/copilot/procurement/">Procurement pack</a>
  <a href="/status/">Status</a>
  </nav>
- {receipt("RID-2026-0602-TRUST", "Sample receipt — <a href=\"/trust-ledger/sample-report/\">download YAML</a>")}
+ {trust_receipt}
  <p class="nf-trust-sidebar__note">Capabilities marked <strong>Available</strong> are Shipped in sandbox and pilot — orientation only, not certification.</p>
  </aside>"""
 

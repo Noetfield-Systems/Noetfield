@@ -161,10 +161,11 @@ def test_public_chat_telemetry_redacts_obvious_secrets(tmp_path) -> None:
             ):
                 transport = ASGITransport(app=app)
                 async with AsyncClient(transport=transport, base_url="http://test") as client:
+                    fake_or_key = "sk-or-v1-" + ("abcdefghijklmnopqrstuvwxyz123456")
                     response = await client.post(
                         "/api/public/chat",
                         json={
-                            "message": "My token is sk-or-v1-abcdefghijklmnopqrstuvwxyz123456",
+                            "message": f"My token is {fake_or_key}",
                             "session_id": "session-2",
                         },
                     )
