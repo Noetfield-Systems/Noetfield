@@ -16,6 +16,10 @@
     "lint": "npm --workspaces --if-present run lint",
     "typecheck": "npm --workspaces --if-present run typecheck"
   },
+  "dependencies": {
+    "@tailwindcss/postcss": "latest",
+    "autoprefixer": "latest"
+  },
   "engines": {
     "node": "22.x"
   }
