@@ -1,12 +1,13 @@
 FROM node:22-alpine AS deps
-WORKDIR /app
-COPY package.json package-lock.json ./
+WORKDIR /app/governance-console/frontend
+COPY governance-console/frontend/package.json governance-console/frontend/package-lock.json ./
 RUN npm ci
 
 FROM node:22-alpine AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+WORKDIR /app/governance-console/frontend
+COPY packages/ui-tokens /app/packages/ui-tokens
+COPY --from=deps /app/governance-console/frontend/node_modules ./node_modules
+COPY governance-console/frontend .
 ARG NEXT_PUBLIC_API_URL=http://localhost:8000
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 RUN npm run build
@@ -19,9 +20,9 @@ ENV HOSTNAME=0.0.0.0
 
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder /app/governance-console/frontend/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/governance-console/frontend/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/governance-console/frontend/.next/static ./.next/static
 
 USER nextjs
 EXPOSE 3000

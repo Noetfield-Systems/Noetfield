@@ -40,6 +40,14 @@ create index if not exists idx_probe_cron_receipts_run
 comment on table improvement_queue is 'Actionable findings from automated probes (machine_safe gates auto-fix lanes).';
 comment on table probe_cron_receipts is '15-min probe cron receipts — intake, greeting, drift, uptime.';
 
+-- Plain Postgres CI lacks Supabase API roles; create stub when missing.
+do $$
+begin
+  if not exists (select 1 from pg_roles where rolname = 'service_role') then
+    create role service_role nologin;
+  end if;
+end $$;
+
 grant usage on schema noetfield to service_role;
 grant select, insert, update on improvement_queue to service_role;
 grant select, insert on probe_cron_receipts to service_role;
