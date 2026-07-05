@@ -52,4 +52,5 @@ def test_probe_receipt_status_check() -> None:
 def test_improvement_queue_migration_lexical_order() -> None:
     migrations = sorted((ROOT / "infrastructure" / "supabase" / "migrations").glob("*.sql"))
     names = [m.name for m in migrations]
-    assert names[-1] == "0013_improvement_queue_and_probe_receipts.sql"
+    assert "0013_improvement_queue_and_probe_receipts.sql" in names
+    assert names[-1] == "0014_probe_tables_public_rest.sql"
