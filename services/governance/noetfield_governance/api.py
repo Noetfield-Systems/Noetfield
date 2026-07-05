@@ -24,6 +24,7 @@ from noetfield_governance.public_chat_intelligence import (
     evaluate_intent_alignment,
 )
 from noetfield_governance.public_chat import answer_public_question, resolve_chat_provider
+from noetfield_governance.public_chat_copy import public_chat_greeting_payload
 from noetfield_governance.public_chat_telemetry import (
     PublicChatTelemetrySettings,
     build_public_chat_event,
@@ -835,6 +836,16 @@ def _secret(value: SecretStr | None) -> str:
 
 def _admin_dashboard_secret() -> str:
     return _secret(settings.admin_dashboard_secret) or _secret(settings.telegram_webhook_secret)
+
+
+@app.get("/api/public/chat/greeting", tags=["public-chat"])
+async def public_chat_greeting() -> dict[str, object]:
+    payload = public_chat_greeting_payload()
+    return {
+        "greeting": payload["greeting"],
+        "citations": payload["citations"],
+        "source": "platform-disk-ssot",
+    }
 
 
 @app.get("/api/public/chat/health", tags=["public-chat"])

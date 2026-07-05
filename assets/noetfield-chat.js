@@ -62,6 +62,7 @@
 
   var CITATION_LABELS = {
     "/pricing/": "Pricing",
+    "/intelligence/intake/": "Diagnostic Sprint",
     "/gel/": "GEL overview",
     "/copilot/pilot/": "Copilot Governance Pack",
     "/trust-brief/": "Trust Brief",
@@ -281,8 +282,27 @@
     appendMsg(
       log,
       "bot",
-      "I'm the Noetfield site assistant. Ask about pricing, governance evaluation, GEL, pilots, or investor diligence — I'll answer from our public product pages."
+      "Hi — one moment…",
+      "typing"
     );
+    fetch((apiBase() || "") + "/api/public/chat/greeting", { headers: { Accept: "application/json" } })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        var host = log.querySelector(".nfChatMsg.bot");
+        if (host) removeEl(host);
+        if (data && data.greeting) {
+          appendMsg(log, "bot", data.greeting, "", data.citations || []);
+          return;
+        }
+        appendMsg(log, "bot", "Hi — what are you working on?", "", ["/pricing/"]);
+      })
+      .catch(function () {
+        var host = log.querySelector(".nfChatMsg.bot");
+        if (host) removeEl(host);
+        appendMsg(log, "bot", "Hi — what are you working on?", "", ["/pricing/"]);
+      });
 
     function setOpen(open) {
       panel.classList.toggle("open", open);

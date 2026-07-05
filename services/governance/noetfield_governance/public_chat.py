@@ -16,6 +16,7 @@ from noetfield_governance.chatbot_knowledge import (
     is_greeting_message,
     select_relevant_excerpt,
 )
+from noetfield_governance.public_chat_copy import public_chat_greeting_llm_guidance
 from noetfield_governance.observability import trace_public_chat
 from noetfield_governance import redis_runtime
 from noetfield_governance.gemini_client import generate_reply as gemini_generate_reply
@@ -72,12 +73,8 @@ def _system_instruction(
         )
     greeting = ""
     if user_greeting:
-        greeting = (
-            "\nThe user sent a brief greeting only. Reply warmly in one or two short sentences — "
-            "offer help with Noetfield pricing, Copilot Governance Pack, GEL, or Trust Brief. "
-            "Do not lecture them on how to ask questions. Do not mention unrelated regulations "
-            "(stablecoin, banking acts) unless they asked.\n"
-        )
+        guidance = public_chat_greeting_llm_guidance()
+        greeting = f"\n{guidance}\n" if guidance else ""
     return f"""You are the Noetfield institutional assistant on www.noetfield.com — for buyers, developers, partners, and investors.
 
 Tone: natural, thoughtful, concise, and calm. Sound like a capable human product guide, not a FAQ script or compliance bot. No hype or startup slang.

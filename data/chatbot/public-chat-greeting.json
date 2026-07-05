@@ -1,0 +1,6 @@
+{
+  "schema": "noetfield-public-chat-greeting-v1",
+  "greeting": "Hi — I can help you figure out if Noetfield fits what you're working on, or start with a Diagnostic Sprint to audit your AI setup. What are you working on?",
+  "citations": ["/intelligence/intake/", "/pricing/"],
+  "llm_greeting_guidance": "The user sent a brief greeting only. Reply in one or two short sentences, warm and direct. End with a question about their situation or goal. Offer Noetfield fit or a Diagnostic Sprint when natural. No acronyms they did not use first. No instructions on how to ask. No bot self-description. Do not mention stablecoin, banking regulation, or unrelated compliance topics unless they asked."
+}

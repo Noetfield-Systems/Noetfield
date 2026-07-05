@@ -64,7 +64,8 @@ def test_public_chat_has_no_local_faq_rule_engine() -> None:
     assert "deterministic_reply_for_intent" not in intent_helper
     assert "deterministic_policy" not in intent_helper
     assert "Ask naturally" not in frontend
-    assert "site assistant" in frontend
+    assert "/api/public/chat/greeting" in frontend
+    assert "site assistant" not in frontend
     assert "move money" not in vercel_fallback
     assert "hold custody" not in vercel_fallback
     assert "isInternalSourceLeakReply" in vercel_fallback
@@ -405,13 +406,37 @@ def test_public_chat_rejects_empty_message() -> None:
     asyncio.run(run())
 
 
+def test_public_chat_greeting_ssot() -> None:
+    from noetfield_governance.public_chat_copy import public_chat_greeting_text
+
+    text = public_chat_greeting_text()
+    lower = text.lower()
+    assert "what are you working on" in lower
+    assert "diagnostic sprint" in lower
+    assert "ask naturally" not in lower
+    assert "gel" not in lower.split()
+
+
+def test_public_chat_greeting_endpoint() -> None:
+    async def run() -> None:
+        transport = ASGITransport(app=app)
+        async with AsyncClient(transport=transport, base_url="http://test") as client:
+            response = await client.get("/api/public/chat/greeting")
+        assert response.status_code == 200
+        body = response.json()
+        assert "Diagnostic Sprint" in body["greeting"]
+        assert "/intelligence/intake/" in body["citations"]
+
+    asyncio.run(run())
+
+
 def test_greeting_uses_llm_with_pinned_context_only() -> None:
     async def run() -> None:
         def fake_generate(*, system_instruction: str, user_message: str, **kwargs: object) -> str:
             assert user_message == "HI"
             assert "Stablecoin" not in system_instruction
             assert "brief greeting" in system_instruction.lower()
-            return "Hi — happy to help. Ask about pricing, GEL, or the Copilot Governance Pack."
+            return "Hi — what are you working on?"
 
         with patch("noetfield_governance.public_chat._generate_sync", side_effect=fake_generate) as generate:
             reply, provider, citations = await answer_public_question(
