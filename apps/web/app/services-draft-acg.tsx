@@ -1,16 +1,19 @@
 /**
- * Draft Service Page: Agentic Cost Governance
+ * Draft Service Page: Agentic Cost Governance (ACG-v1)
  * 
- * Status: DRAFT (not published to live site)
- * This page is a draft component prepared for review.
- * Do NOT render to live www.noetfield.com until:
+ * Status: DRAFT (hidden from live site)
+ * This page is a draft component prepared for internal review.
+ * 
+ * BLOCKER: Do NOT render to live www.noetfield.com until:
  * - Noetfield repo reconciliation is complete
  * - Vercel live deployment truth is verified
  * - NOOS receives updated lane receipt with service draft
- * - Buyer-audience verification passes
+ * - Buyer-audience team approves messaging
+ * - Founder approval obtained
  * - Messaging coordination clears
  * 
  * Created: 2026-07-05
+ * Last Updated: 2026-07-05
  */
 
 "use client";
@@ -19,6 +22,7 @@ import React from "react";
 
 interface ServiceModule {
   title: string;
+  tagline: string;
   description: string;
   timeline: string;
   deliverables: string[];
@@ -27,62 +31,67 @@ interface ServiceModule {
 const modules: ServiceModule[] = [
   {
     title: "AI Spend Leak Audit",
-    description: "Discover the hidden cost surface. Map all AI consumption, model usage, cost attribution, and ROI leakage.",
+    tagline: "See the hidden cost surface",
+    description: "Discover where your AI spend actually goes. We map all AI consumption across APIs, agents, and embedded models—then show you the leak zones and ROI impact.",
     timeline: "1–2 weeks",
     deliverables: [
-      "Spend surface map (APIs, agents, embedded models)",
-      "Model usage breakdown by task/workflow",
+      "Spend surface map (all AI APIs, agents, embedded models)",
+      "Model usage breakdown by task and workflow",
       "Cost attribution to business outcomes",
-      "Leak zone identification (auto-escalations, silent defaults)",
-      "ROI leakage estimate and margin impact"
+      "Leak zone identification (auto-escalations, silent defaults, shared-key bleed)",
+      "Margin impact estimate (quantified ROI leakage)"
     ]
   },
   {
     title: "Premium Model Firewall",
-    description: "Lock in cost-safe model routing. Define policies, escalation gates, budget caps, and fallback behavior.",
+    tagline: "Lock in cost-safe defaults",
+    description: "Define which models work for which tasks. We help you set cost-safe defaults, approval gates for premium models, and hard budget caps—then integrate with your systems.",
     timeline: "2–4 weeks",
     deliverables: [
-      "Cost-safe model policy per task",
-      "Premium escalation gates (approval, budget triggers)",
-      "Hard budget caps per service/team/workflow",
-      "Graceful fallback degradation policy",
-      "API key isolation and audit trail"
+      "Cost-safe routing policy (cheap ≠ routine, pay-as-needed for complex)",
+      "Premium escalation gates (explicit approval, budget triggers)",
+      "Hard budget caps per service, team, and workflow",
+      "Graceful fallback policy (retry, circuit-break, or escalate)",
+      "API key isolation with audit trail per credential"
     ]
   },
   {
     title: "Automation Cost Ledger",
-    description: "Every automation action auditable. Real-time cost tracking, model reasoning logs, approval trails, anomaly detection.",
-    timeline: "Ongoing integration",
+    tagline: "Every dollar auditable, every decision logged",
+    description: "Track real-time AI spend with full visibility. Know why each model was chosen, who approved premium spend, and detect anomalies before they hurt margins.",
+    timeline: "Ongoing",
     deliverables: [
       "Real-time cost per automation invocation",
-      "Model selection reasoning log",
-      "Approval trail (premium escalations)",
-      "Monthly cost summary by automation/model/team",
+      "Model selection reasoning (policy, fallback, explicit request)",
+      "Approval trail (who approved premium escalations, when, why)",
+      "Monthly cost summary by automation, model tier, and team",
       "Anomaly detection and spike alerts"
     ]
   },
   {
     title: "Model ROI Router",
-    description: "Align model selection to business outcomes. Smart routing, A/B cost comparison, outcome tracking, recommendations.",
+    tagline: "Cost-per-outcome, not cost-per-invocation",
+    description: "Align model selection to business outcomes, not cost-cutting alone. We recommend the cheapest model that meets your quality bar—then measure if it works.",
     timeline: "4–6 weeks",
     deliverables: [
-      "ROI target setting per automation task",
-      "Smart model routing (cost vs. quality)",
-      "A/B cost comparison analysis",
-      "Outcome-to-model correlation tracking",
-      "Cost savings recommendations"
+      "ROI targets per automation task (acceptable cost-per-outcome)",
+      "Smart routing algorithm (minimum cost meeting quality bar)",
+      "A/B cost analysis (savings from cheaper model variants)",
+      "Outcome-to-model correlation (which models drive results?)",
+      "Downgrade recommendations (when cheaper models work as well)"
     ]
   },
   {
     title: "Premium Escalation Policy",
-    description: "Earn the right to expensive models. Thresholds, approval workflows, cost-benefit analysis, governance trails.",
+    tagline: "Expensive models earn approval, not accidental spend",
+    description: "Make premium model spend intentional, not automatic. We define thresholds, approval workflows, and cost-benefit analysis so premium choices are always auditable.",
     timeline: "2–3 weeks",
     deliverables: [
-      "Escalation threshold definition",
-      "Approval workflow (human + policy gates)",
-      "Cost-benefit analysis per escalation",
+      "Escalation threshold definition (when cheap models fail)",
+      "Approval workflow with human + policy gates",
+      "Cost-benefit analysis per escalation (ROI of premium vs. baseline)",
       "Spend tracking and escalation rate monitoring",
-      "Full governance audit log"
+      "Full governance audit log (who, why, when, outcome)"
     ]
   }
 ];
@@ -121,19 +130,30 @@ export default function ServiceDraftACG() {
       </div>
 
       {/* Hero Section */}
-      <section className="mx-auto max-w-5xl mb-16">
+      <section className="mx-auto max-w-5xl mb-20">
         <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">
-          Service Draft
+          For Enterprise Teams
         </p>
-        <h1 className="mt-6 text-5xl font-semibold tracking-tight">
+        <h1 className="mt-6 text-6xl font-semibold tracking-tight leading-tight">
           Agentic Cost Governance
         </h1>
-        <p className="mt-6 text-xl font-medium text-emerald-300">
+        <p className="mt-8 text-2xl font-medium text-emerald-300 max-w-4xl">
           We help companies keep AI automation without letting silent premium-model defaults destroy ROI.
         </p>
-        <p className="mt-4 max-w-3xl text-lg text-slate-300">
-          Background agents, GitHub Copilot, Cursor, Claude, and custom workflows leak cost silently. We audit the spend surface, enforce policy, and restore ROI.
-        </p>
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-4">
+            <p className="text-sm font-semibold text-slate-400 mb-2">The Problem</p>
+            <p className="text-slate-300">
+              Background agents, Copilot, Cursor, Claude, and OpenAI automation leak cost silently. Expensive models auto-escalate. Premium defaults activate unknowingly. Finance can't track ROI.
+            </p>
+          </div>
+          <div className="rounded-lg border border-emerald-800 bg-emerald-950/30 p-4">
+            <p className="text-sm font-semibold text-emerald-300 mb-2">Our Solution</p>
+            <p className="text-emerald-200">
+              We audit your spend surface, lock in cost-safe policies, and restore ROI through transparent ledger, approval gates, and outcome correlation.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Buyer Pain Points */}
@@ -152,38 +172,55 @@ export default function ServiceDraftACG() {
         </div>
       </section>
 
-      {/* Core Modules */}
-      <section className="mx-auto max-w-5xl mb-16">
-        <h2 className="text-3xl font-semibold mb-8">Five Core Modules</h2>
-        <div className="space-y-6">
+      {/* How It Works Section */}
+      <section className="mx-auto max-w-5xl mb-20">
+        <h2 className="text-3xl font-semibold mb-4">How We Restore Your AI ROI</h2>
+        <p className="text-slate-300 mb-10 max-w-3xl">
+          Five modules, delivered sequentially or in parallel. Each builds visibility, enforces governance, and measurably improves cost-per-outcome.
+        </p>
+        <div className="space-y-8">
           {modules.map((module, idx) => (
             <div
               key={idx}
-              className="rounded-lg border border-slate-800 bg-slate-900/50 p-6"
+              className="rounded-lg border border-slate-800 bg-slate-900/50 p-8 hover:border-cyan-700 hover:bg-slate-900/70 transition"
             >
-              <div className="flex items-start justify-between gap-4 mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-cyan-300">
-                    {idx + 1}. {module.title}
-                  </h3>
-                  <p className="text-slate-300 mt-2">{module.description}</p>
+              {/* Module Header */}
+              <div className="flex items-start justify-between gap-6 mb-6">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-2xl font-bold text-cyan-300">{idx + 1}</span>
+                    <div>
+                      <h3 className="text-2xl font-semibold text-slate-100">
+                        {module.title}
+                      </h3>
+                      <p className="text-sm text-emerald-300 italic mt-1">{module.tagline}</p>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-sm text-slate-400 whitespace-nowrap">
-                  {module.timeline}
-                </span>
+                <div className="text-right flex-shrink-0">
+                  <p className="text-xs uppercase tracking-wider text-slate-500 mb-1">Timeline</p>
+                  <p className="text-lg font-semibold text-cyan-300">{module.timeline}</p>
+                </div>
               </div>
-              <div className="ml-0 mt-4">
-                <p className="text-sm font-semibold text-slate-400 mb-2">
-                  Deliverables:
+
+              {/* Module Description */}
+              <p className="text-slate-300 mb-6 leading-relaxed">
+                {module.description}
+              </p>
+
+              {/* Deliverables */}
+              <div>
+                <p className="text-sm font-semibold text-slate-400 mb-3 uppercase tracking-wider">
+                  What You Get
                 </p>
-                <ul className="space-y-1">
+                <ul className="space-y-2">
                   {module.deliverables.map((deliverable, didx) => (
                     <li
                       key={didx}
-                      className="text-sm text-slate-300 flex gap-2"
+                      className="text-sm text-slate-300 flex gap-3"
                     >
-                      <span className="text-emerald-400 flex-shrink-0">✓</span>
-                      {deliverable}
+                      <span className="text-emerald-400 font-bold flex-shrink-0">✓</span>
+                      <span>{deliverable}</span>
                     </li>
                   ))}
                 </ul>
@@ -254,46 +291,97 @@ export default function ServiceDraftACG() {
         </div>
       </section>
 
-      {/* Non-Claims */}
-      <section className="mx-auto max-w-5xl mb-16">
-        <h2 className="text-3xl font-semibold mb-8">What This Service Is NOT</h2>
-        <div className="grid gap-3">
-          {nonClaims.map((claim, idx) => (
-            <div key={idx} className="flex gap-3 text-slate-300">
-              <span className="text-slate-500 flex-shrink-0">✗</span>
-              {claim}
+      {/* Governance Boundary Section */}
+      <section className="mx-auto max-w-5xl mb-20">
+        <h2 className="text-3xl font-semibold mb-8">Clear Scope: What We Are & Aren't</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* What We Are NOT */}
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+            <h3 className="text-lg font-semibold text-slate-300 mb-4">What We're NOT</h3>
+            <div className="space-y-3">
+              {nonClaims.map((claim, idx) => (
+                <div key={idx} className="flex gap-3 text-sm text-slate-400">
+                  <span className="text-slate-600 flex-shrink-0 mt-0.5">—</span>
+                  <p>{claim}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="mt-8 rounded-lg border border-emerald-800 bg-emerald-950/30 p-6">
-          <p className="text-sm font-semibold text-emerald-300 mb-3">What This Service IS:</p>
-          <ul className="space-y-2 text-sm text-emerald-200">
-            <li>✓ Governance + audit + policy layer for AI cost control</li>
-            <li>✓ Operational intelligence (spend surface, attribution, anomalies)</li>
-            <li>✓ Policy enforcement toolkit (routing, gates, caps)</li>
-            <li>✓ Transparency and auditability for automation spend</li>
-          </ul>
+          </div>
+
+          {/* What We ARE */}
+          <div className="rounded-lg border border-emerald-800 bg-emerald-950/30 p-6">
+            <h3 className="text-lg font-semibold text-emerald-300 mb-4">What We ARE</h3>
+            <ul className="space-y-3 text-sm">
+              <li className="flex gap-3 text-emerald-200">
+                <span className="text-emerald-400 flex-shrink-0 font-bold mt-0.5">✓</span>
+                <span>Governance + audit + policy layer for AI cost control</span>
+              </li>
+              <li className="flex gap-3 text-emerald-200">
+                <span className="text-emerald-400 flex-shrink-0 font-bold mt-0.5">✓</span>
+                <span>Operational intelligence (spend surface, attribution, anomalies)</span>
+              </li>
+              <li className="flex gap-3 text-emerald-200">
+                <span className="text-emerald-400 flex-shrink-0 font-bold mt-0.5">✓</span>
+                <span>Policy enforcement toolkit (routing, gates, caps)</span>
+              </li>
+              <li className="flex gap-3 text-emerald-200">
+                <span className="text-emerald-400 flex-shrink-0 font-bold mt-0.5">✓</span>
+                <span>Transparency and auditability for automation spend</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* Status & Next Steps */}
-      <section className="mx-auto max-w-5xl mb-16 rounded-lg border border-slate-800 bg-slate-900/50 p-6">
-        <h2 className="text-xl font-semibold mb-4">Status & Timeline</h2>
-        <div className="space-y-3 text-sm text-slate-300">
-          <p>✅ <span className="text-emerald-300">Draft stage:</span> Service brief and positioning complete</p>
-          <p>⏸️ <span className="text-amber-300">Review stage:</span> Awaiting founder/stakeholder review</p>
-          <p>⏸️ <span className="text-amber-300">Integration stage:</span> Awaiting Noetfield reconciliation + Vercel verification</p>
-          <p>⏸️ <span className="text-amber-300">Publication stage:</span> After NOOS coordination clear</p>
-          <p>⏸️ <span className="text-amber-300">Go-live stage:</span> After buyer-audience verification</p>
+      {/* Review & Next Steps */}
+      <section className="mx-auto max-w-5xl mb-20">
+        <div className="rounded-lg border border-cyan-800 bg-cyan-950/20 p-8">
+          <h2 className="text-2xl font-semibold mb-4 text-cyan-300">Ready to Control Your AI Spend?</h2>
+          <p className="text-slate-300 mb-6 max-w-3xl">
+            This service draft is under internal review. If you're an enterprise team deploying background agents, GitHub Copilot, Cursor, or custom AI automation—and you're concerned about silent cost escalation—we'd like to hear from you.
+          </p>
+          <div className="space-y-2 text-sm text-slate-400">
+            <p>✓ Service positioning and deliverables are defined</p>
+            <p>✓ Governance boundaries are clear</p>
+            <p>✓ Timeline and scope are realistic</p>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <section className="mx-auto max-w-5xl text-center text-slate-500 text-sm">
-        <p>Drafted by: [NF-LOCAL-REPO-AGENT]</p>
-        <p>Date: 2026-07-05</p>
-        <p className="mt-4 text-amber-600 font-semibold">
-          DRAFT — Not for publication until reconciliation complete and review approved
+      {/* Status & Timeline */}
+      <section className="mx-auto max-w-5xl mb-20">
+        <h3 className="text-xl font-semibold mb-6 text-slate-300">Service Status</h3>
+        <div className="space-y-4 text-sm">
+          <div className="flex gap-4">
+            <span className="text-emerald-400 font-bold flex-shrink-0">✅</span>
+            <div>
+              <p className="font-semibold text-slate-200">Draft Complete</p>
+              <p className="text-slate-400">Service brief, positioning, modules, and UI ready for review</p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <span className="text-amber-400 font-bold flex-shrink-0">⏸️</span>
+            <div>
+              <p className="font-semibold text-slate-200">Under Review</p>
+              <p className="text-slate-400">Awaiting founder approval and buyer-audience validation</p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <span className="text-slate-500 font-bold flex-shrink-0">⏹️</span>
+            <div>
+              <p className="font-semibold text-slate-200">Not Live</p>
+              <p className="text-slate-400">Service page is hidden. Zero exposure until all gates clear.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Draft Footer */}
+      <section className="mx-auto max-w-5xl border-t border-slate-800 pt-12 text-center text-slate-500 text-xs">
+        <p className="mb-2">DRAFT SERVICE PAGE</p>
+        <p className="mb-4">Created: 2026-07-05 | Status: Internal Review Only</p>
+        <p className="text-amber-600 font-semibold">
+          Not for publication until all gates clear: founder approval + buyer-audience review + Vercel verification + NOOS coordination + reconciliation complete
         </p>
       </section>
     </main>
