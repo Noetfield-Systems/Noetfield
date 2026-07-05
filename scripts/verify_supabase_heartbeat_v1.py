@@ -8,6 +8,7 @@ import os
 import sys
 
 import asyncpg
+import urllib.error
 import urllib.request
 
 _SCRIPTS = os.path.dirname(os.path.abspath(__file__))
@@ -47,8 +48,11 @@ def main() -> int:
         },
         method="GET",
     )
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        code = resp.status
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            code = resp.status
+    except urllib.error.HTTPError as exc:
+        code = exc.code
     print(f"REST HTTP {code}")
     if code not in (200, 401):
         return 1
