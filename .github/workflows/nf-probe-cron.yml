@@ -1,0 +1,18 @@
+# nf-probe-cron — 15-min probe runner (uptime, greeting, drift, intake E2E).
+# Bridges CF cron account limit: triggers deployed Worker /run endpoint.
+name: NF probe cron
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  run-probes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger nf-probe-cron worker
+        run: |
+          resp="$(curl -sS -X POST "https://nf-probe-cron.sina-kazemnezhad-ca.workers.dev/run")"
+          echo "$resp"
+          python3 -c "import json,sys; d=json.load(sys.stdin); sys.exit(0 if d.get('ok') else 1)" <<<"$resp"

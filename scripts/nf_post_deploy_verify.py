@@ -155,7 +155,11 @@ def main() -> int:
     parser.add_argument("--deploy-failed", default="", help="Set when deploy command failed before verify")
     parser.add_argument("--www-base", default=WWW_BASE, help="WWW base URL for live checks")
     parser.add_argument("--platform-base", default=PLATFORM_BASE, help="Platform base URL for intake status polling")
-    parser.add_argument("--skip-intake-e2e", action="store_true", help="Skip intake webhook E2E check")
+    parser.add_argument(
+        "--skip-intake-e2e",
+        action="store_true",
+        help="Skip intake Telegram+DB E2E check",
+    )
     args = parser.parse_args()
 
     sha = expected_sha(args.expected_sha or None)
