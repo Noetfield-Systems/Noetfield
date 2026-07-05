@@ -26,7 +26,5 @@ log "health check…"
 curl -sS "${NF_WWW_CANONICAL_URL}/health"
 echo
 curl -sS "${NF_WWW_CANONICAL_URL}/api/intake/health" | python3 -m json.tool 2>/dev/null || true
-python3 scripts/verify_chat_greeting_coupling.py --live || {
-  log "WARN: live greeting coupling not yet green — platform deploy may still be propagating"
-}
+python3 scripts/nf_post_deploy_verify.py --surface www || true
 log "done — ${NF_WWW_CANONICAL_URL}"

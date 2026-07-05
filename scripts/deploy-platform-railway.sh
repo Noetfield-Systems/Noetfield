@@ -170,6 +170,7 @@ main() {
     python3 "$ROOT/scripts/verify_chat_greeting_coupling.py" --live \
       --platform-base "https://${PLATFORM_DOMAIN}" || \
       log "WARN: live greeting coupling not yet green on platform"
+    python3 "$ROOT/scripts/nf_post_deploy_verify.py" --surface platform || true
     log "Next: www chat will auto-proxy when PLATFORM_API_BASE resolves (no vercel rewrite needed)"
     exit 0
   fi
