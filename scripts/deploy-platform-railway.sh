@@ -78,6 +78,11 @@ set_platform_variables() {
 
 deploy_api() {
   log "Deploying platform API (Dockerfile.api)..."
+  local git_sha
+  git_sha="$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || true)"
+  if [[ -n "$git_sha" ]]; then
+    railway_cmd variable set --service "$API_SERVICE" --skip-deploys "GIT_SHA=${git_sha}"
+  fi
   railway_cmd up --service "$API_SERVICE" -d -y
 }
 
