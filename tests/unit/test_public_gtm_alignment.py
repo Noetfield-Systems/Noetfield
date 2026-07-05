@@ -52,7 +52,7 @@ def test_governance_page_states_copilot_positioning() -> None:
 
 def test_header_nav_intelligence_primary() -> None:
     text = (ROOT / "assets" / "partials" / "header.html").read_text(encoding="utf-8")
-    assert 'href="/">Intelligence</a>' in text
+    assert 'href="/intelligence/">Intelligence</a>' in text
     assert text.index("Intelligence") < text.index("Copilot Pack")
     assert "/intelligence/intake/" in text
     assert "Book Diagnostic" in text

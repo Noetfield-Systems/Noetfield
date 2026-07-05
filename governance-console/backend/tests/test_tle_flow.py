@@ -15,8 +15,8 @@ from sqlalchemy.pool import StaticPool
 _test_db = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
 os.environ["DATABASE_URL"] = f"sqlite:///{_test_db.name}"
 
-from db.bootstrap import init_schema, migrate_audit_logs_to_events, seed_pilot_evidence  # noqa: E402
-from db.models import ConnectorRecord, EvidenceIndex, PILOT_TENANT_ID  # noqa: E402
+from db.bootstrap import migrate_audit_logs_to_events, seed_pilot_evidence  # noqa: E402
+from db.models import Base, ConnectorRecord, EvidenceIndex, PILOT_TENANT_ID  # noqa: E402
 from db.session import get_db  # noqa: E402
 from main import app  # noqa: E402
 from services.evidence_hash import CONTENT_HASH_RE, content_hash_for_metadata  # noqa: E402
@@ -39,7 +39,7 @@ def override_get_db():
 
 @pytest.fixture(scope="module", autouse=True)
 def setup_db():
-    init_schema()
+    Base.metadata.create_all(bind=engine)
     db = TestingSessionLocal()
     try:
         migrate_audit_logs_to_events(db)

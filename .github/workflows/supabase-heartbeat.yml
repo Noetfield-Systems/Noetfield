@@ -12,6 +12,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Require Supabase secrets
+        env:
+          NOETFIELD_SUPABASE_URL: ${{ secrets.NOETFIELD_SUPABASE_URL }}
+          NOETFIELD_SUPABASE_ANON_KEY: ${{ secrets.NOETFIELD_SUPABASE_ANON_KEY }}
+          NOETFIELD_SUPABASE_DATABASE_URL: ${{ secrets.NOETFIELD_SUPABASE_DATABASE_URL }}
+        run: |
+          missing=0
+          for key in NOETFIELD_SUPABASE_URL NOETFIELD_SUPABASE_ANON_KEY NOETFIELD_SUPABASE_DATABASE_URL; do
+            if [ -z "${!key}" ]; then
+              echo "::error::Missing GitHub secret ${key} — run scripts/sync_noetfield_supabase_github_secrets.sh on Mac"
+              missing=1
+            fi
+          done
+          [ "$missing" -eq 0 ]
+
       - name: Heartbeat SLO report
         env:
           NOETFIELD_SUPABASE_URL: ${{ secrets.NOETFIELD_SUPABASE_URL }}

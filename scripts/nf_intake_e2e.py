@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Intake E2E — submit test intake, poll platform for Resend webhook delivery status."""
+"""Intake E2E — Telegram + DB PASS: submit test intake, telegram_delivered, Postgres dedupe."""
 
 from __future__ import annotations
 
@@ -19,20 +19,23 @@ if str(ROOT / "scripts") not in sys.path:
 
 from nf_factory_lib_v1 import iso_now, write_event, write_sina  # noqa: E402
 
-USER_AGENT = "noetfield-intake-e2e/1.0"
-SCHEMA_VERSION = "nf-intake-e2e-v1"
+USER_AGENT = "noetfield-intake-e2e/2.0"
+SCHEMA_VERSION = "nf-intake-e2e-v2"
 DEFAULT_PLATFORM_BASE = "https://platform.noetfield.com"
 DEFAULT_WWW_BASE = "https://www.noetfield.com"
-POLL_INTERVAL_SEC = 3.0
-POLL_TIMEOUT_SEC = 120.0
-TERMINAL_STATUSES = frozenset({"delivered", "bounced"})
 
 
 def make_request_id() -> str:
     return f"RID-E2E-{int(time.time())}"
 
 
-def fetch_json(url: str, *, method: str = "GET", body: dict[str, Any] | None = None, timeout: float = 25.0) -> tuple[int, dict[str, Any]]:
+def fetch_json(
+    url: str,
+    *,
+    method: str = "GET",
+    body: dict[str, Any] | None = None,
+    timeout: float = 25.0,
+) -> tuple[int, dict[str, Any]]:
     data = None
     headers = {"Accept": "application/json", "User-Agent": USER_AGENT}
     if body is not None:
@@ -56,40 +59,12 @@ def intake_health_url(base: str) -> str:
     return f"{base.rstrip('/')}/api/intake/health"
 
 
-def platform_status_url(platform_base: str, request_id: str) -> str:
-    query = urllib.parse.urlencode({"request_id": request_id})
-    return f"{platform_base.rstrip('/')}/api/intake/status?{query}"
-
-
-def skip_reason_for_target(*, intake_url: str, platform_base: str) -> str | None:
-    platform_code, platform_health = fetch_json(intake_health_url(platform_base))
-    if platform_code != 200:
-        return f"platform_intake_health_unreachable:{platform_code}"
-
-    if not platform_health.get("email_delivery_tracking"):
-        return "email_delivery_tracking_not_configured"
-
-    parsed = urllib.parse.urlparse(intake_url)
-    target_base = f"{parsed.scheme}://{parsed.netloc}"
-    if target_base.rstrip("/") == platform_base.rstrip("/"):
-        if not platform_health.get("ops_email_configured"):
-            return "platform_ops_email_not_configured"
-        return None
-
-    target_code, target_health = fetch_json(intake_health_url(target_base))
-    if target_code != 200:
-        return f"target_intake_health_unreachable:{target_code}"
-    if not target_health.get("www_email_configured") and not target_health.get("ops_email_configured"):
-        return "target_intake_email_not_configured"
-    return None
-
-
-def submit_test_intake(intake_url: str, request_id: str) -> tuple[bool, dict[str, Any]]:
-    body = {
+def e2e_intake_body(request_id: str) -> dict[str, Any]:
+    return {
         "organization": "NF E2E Deploy Verify",
         "contact_name": "NF E2E Bot",
         "contact_email": "e2e@noetfield.com",
-        "message": f"Automated post-deploy intake E2E — {iso_now()}. Ignore.",
+        "message": f"Automated intake E2E — {iso_now()}. Ignore.",
         "request_id": request_id,
         "sku": "general",
         "vector": "contact",
@@ -100,44 +75,49 @@ def submit_test_intake(intake_url: str, request_id: str) -> tuple[bool, dict[str
             "async": True,
         },
     }
+
+
+def skip_reason_for_target(*, intake_url: str, platform_base: str) -> str | None:
+    platform_code, platform_health = fetch_json(intake_health_url(platform_base))
+    if platform_code != 200:
+        return f"platform_intake_health_unreachable:{platform_code}"
+    if platform_health.get("storage") != "postgres":
+        return "platform_intake_storage_not_postgres"
+
+    parsed = urllib.parse.urlparse(intake_url)
+    target_base = f"{parsed.scheme}://{parsed.netloc}"
+    if target_base.rstrip("/") == platform_base.rstrip("/"):
+        return None
+
+    target_code, target_health = fetch_json(intake_health_url(target_base))
+    if target_code != 200:
+        return f"target_intake_health_unreachable:{target_code}"
+    if not target_health.get("www_telegram_configured") and not target_health.get("ops_telegram_configured"):
+        return "target_intake_telegram_not_configured"
+    return None
+
+
+def submit_test_intake(intake_url: str, body: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
     code, payload = fetch_json(intake_url, method="POST", body=body, timeout=30.0)
     ok = 200 <= code < 300 and bool(payload.get("intake_id") or payload.get("ok"))
     return ok, {"http_status": code, **payload}
 
 
-def poll_delivery_status(
+def verify_db_dedupe(
+    intake_url: str,
     *,
-    platform_base: str,
     request_id: str,
-    poll_interval: float,
-    poll_timeout: float,
-) -> dict[str, Any]:
-    deadline = time.monotonic() + poll_timeout
-    attempts = 0
-    last: dict[str, Any] = {}
-
-    while time.monotonic() < deadline:
-        attempts += 1
-        code, payload = fetch_json(platform_status_url(platform_base, request_id))
-        last = {"http_status": code, **payload}
-        if code == 404:
-            time.sleep(poll_interval)
-            continue
-        status = str(payload.get("email_archive_status") or "").lower()
-        if status in TERMINAL_STATUSES:
-            return {
-                "attempts": attempts,
-                "final_status": status,
-                "last": last,
-                "timed_out": False,
-            }
-        time.sleep(poll_interval)
-
-    return {
-        "attempts": attempts,
-        "final_status": str(last.get("email_archive_status") or ""),
-        "last": last,
-        "timed_out": True,
+    expected_intake_id: str,
+    body: dict[str, Any],
+) -> tuple[bool, dict[str, Any]]:
+    code, payload = fetch_json(intake_url, method="POST", body=body, timeout=30.0)
+    got = str(payload.get("intake_id") or "")
+    ok = 200 <= code < 300 and got == expected_intake_id
+    return ok, {
+        "http_status": code,
+        "expected_intake_id": expected_intake_id,
+        "dedupe_intake_id": got or None,
+        "dedupe_ok": ok,
     }
 
 
@@ -150,15 +130,14 @@ def build_receipt(
     platform_base: str,
     reason: str | None,
     submit: dict[str, Any] | None,
-    poll: dict[str, Any] | None,
+    dedupe: dict[str, Any] | None,
 ) -> dict[str, Any]:
     intake_id = ""
+    telegram_delivered: bool | None = None
     if submit:
         intake_id = str(submit.get("intake_id") or "")
-    if not intake_id and poll and poll.get("last"):
-        last = poll["last"]
-        if isinstance(last, dict):
-            intake_id = str(last.get("intake_id") or "")
+        if "telegram_delivered" in submit:
+            telegram_delivered = bool(submit.get("telegram_delivered"))
 
     return {
         "schema_version": SCHEMA_VERSION,
@@ -168,11 +147,12 @@ def build_receipt(
         "reason": reason,
         "request_id": request_id,
         "intake_id": intake_id or None,
+        "telegram_delivered": telegram_delivered,
         "intake_url": intake_url,
         "platform_base": platform_base,
-        "platform_status_url": platform_status_url(platform_base, request_id),
+        "pass_definition": "telegram_delivered_and_db_dedupe",
         "submit": submit,
-        "poll": poll,
+        "dedupe": dedupe,
     }
 
 
@@ -185,11 +165,10 @@ def run_e2e(
     *,
     intake_url: str,
     platform_base: str,
-    poll_interval: float,
-    poll_timeout: float,
     force: bool,
 ) -> dict[str, Any]:
     request_id = make_request_id()
+    body = e2e_intake_body(request_id)
 
     if not force:
         skip = skip_reason_for_target(intake_url=intake_url, platform_base=platform_base)
@@ -202,12 +181,15 @@ def run_e2e(
                 platform_base=platform_base,
                 reason=skip,
                 submit=None,
-                poll=None,
+                dedupe=None,
             )
             write_receipt(receipt)
             return receipt
 
-    submit_ok, submit_payload = submit_test_intake(intake_url, request_id)
+    submit_ok, submit_payload = submit_test_intake(intake_url, body)
+    intake_id = str(submit_payload.get("intake_id") or "")
+    telegram_ok = bool(submit_payload.get("telegram_delivered"))
+
     if not submit_ok:
         receipt = build_receipt(
             ok=False,
@@ -217,56 +199,67 @@ def run_e2e(
             platform_base=platform_base,
             reason="intake_submit_failed",
             submit=submit_payload,
-            poll=None,
+            dedupe=None,
         )
         write_receipt(receipt)
         return receipt
 
-    poll = poll_delivery_status(
-        platform_base=platform_base,
-        request_id=request_id,
-        poll_interval=poll_interval,
-        poll_timeout=poll_timeout,
-    )
-    final_status = str(poll.get("final_status") or "").lower()
-
-    if final_status == "delivered":
+    if not telegram_ok:
         receipt = build_receipt(
-            ok=True,
-            status="pass",
+            ok=False,
+            status="fail",
             request_id=request_id,
             intake_url=intake_url,
             platform_base=platform_base,
-            reason=None,
+            reason="telegram_not_delivered",
             submit=submit_payload,
-            poll=poll,
+            dedupe=None,
         )
         write_receipt(receipt)
         return receipt
 
-    reason = "email_archive_bounced" if final_status == "bounced" else "webhook_delivery_timeout"
+    dedupe_ok, dedupe_payload = verify_db_dedupe(
+        intake_url,
+        request_id=request_id,
+        expected_intake_id=intake_id,
+        body=body,
+    )
+    if not dedupe_ok:
+        receipt = build_receipt(
+            ok=False,
+            status="fail",
+            request_id=request_id,
+            intake_url=intake_url,
+            platform_base=platform_base,
+            reason="db_dedupe_failed",
+            submit=submit_payload,
+            dedupe=dedupe_payload,
+        )
+        write_receipt(receipt)
+        return receipt
+
     receipt = build_receipt(
-        ok=False,
-        status="fail",
+        ok=True,
+        status="pass",
         request_id=request_id,
         intake_url=intake_url,
         platform_base=platform_base,
-        reason=reason,
+        reason=None,
         submit=submit_payload,
-        poll=poll,
+        dedupe=dedupe_payload,
     )
     write_receipt(receipt)
     return receipt
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Intake E2E — submit + poll webhook delivery status")
+    parser = argparse.ArgumentParser(
+        description="Intake E2E — telegram_delivered + Postgres dedupe (PASS definition v2)"
+    )
     parser.add_argument("--intake-url", default="", help="POST target (default: {www}/api/intake)")
     parser.add_argument("--www-base", default=DEFAULT_WWW_BASE, help="WWW base when --intake-url omitted")
     parser.add_argument("--platform-base", default=DEFAULT_PLATFORM_BASE)
-    parser.add_argument("--poll-interval", type=float, default=POLL_INTERVAL_SEC)
-    parser.add_argument("--poll-timeout", type=float, default=POLL_TIMEOUT_SEC)
-    parser.add_argument("--force", action="store_true", help="Run even when tracking/email not configured")
+    parser.add_argument("--force", action="store_true", help="Run even when telegram/storage prechecks fail")
     parser.add_argument("--json", action="store_true", help="Print receipt JSON to stdout")
     args = parser.parse_args()
 
@@ -274,8 +267,6 @@ def main() -> int:
     receipt = run_e2e(
         intake_url=intake_url,
         platform_base=args.platform_base.rstrip("/"),
-        poll_interval=max(1.0, args.poll_interval),
-        poll_timeout=max(10.0, args.poll_timeout),
         force=args.force,
     )
 
@@ -288,7 +279,7 @@ def main() -> int:
             "nf_intake_e2e: PASS "
             f"request_id={receipt.get('request_id')} "
             f"intake_id={receipt.get('intake_id')} "
-            f"email_archive_status=delivered"
+            f"telegram_delivered=true db_dedupe=true"
         )
     else:
         print(
