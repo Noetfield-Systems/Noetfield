@@ -76,6 +76,15 @@ ok "commercial agentic surfaces"
 python3 -m pytest tests/unit/test_commercial_agentic.py -q || fail=1
 ok "commercial agentic unit tests"
 
+# 9 — Site-audit machine v2 (disk / P0)
+chmod +x scripts/verify-site-audit.sh
+./scripts/verify-site-audit.sh || fail=1
+ok "site-audit disk P0 gate"
+
+# 10 — Site-audit unit tests
+python3 -m pytest tests/unit/test_site_audit_machine.py -q || fail=1
+ok "site-audit machine unit tests"
+
 if [[ "$fail" -ne 0 ]]; then
   echo "Run: python3 scripts/rebuild-www-v6.py && bash scripts/verify-ui-build-checklist.sh" >&2
   exit 1

@@ -1,4 +1,4 @@
-.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack verify-gtm verify-no-vendor-names verify-static-www verify-ui-build-checklist nf-ui-checklist verify-www verify-tier0 verify-tier1 verify-tier2 verify-tier3 verify-all-tiers verify-nf-gaos-w2 verify-public-output-allowlist verify-public-chat-truth verify-public-denylist-sync verify-route-nav-truth verify-validator-node-registry verify-route-inventory verify-live-nerve-receipt nf-live-nerve verify-live-nerve
+.PHONY: bootstrap validate api api-v3 apply-migrations ingest-sot-dry-run ingest-sot phase32-smoke phase32-postgres-smoke phase33-verify phase33-postgres-verify phase35-demo final-lock-audit final-lock-semantic governance-console-up governance-console-e2e governance-console-down plan-with-no-asf-verify sync-prompt-pack generate-prompt-pack verify-gtm verify-no-vendor-names verify-static-www verify-ui-build-checklist nf-ui-checklist verify-site-audit verify-www verify-tier0 verify-tier1 verify-tier2 verify-tier3 verify-all-tiers verify-nf-gaos-w2 verify-public-output-allowlist verify-public-chat-truth verify-public-denylist-sync verify-route-nav-truth verify-validator-node-registry verify-route-inventory verify-live-nerve-receipt nf-live-nerve verify-live-nerve
 
 PYTHONPATH_VALUE := packages/types:packages/config:packages/sdk:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance
 
@@ -176,6 +176,10 @@ verify-ui-build-checklist:
 verify-commercial-agentic:
 	@chmod +x scripts/verify-commercial-agentic.sh
 	./scripts/verify-commercial-agentic.sh
+
+verify-site-audit:
+	@chmod +x scripts/verify-site-audit.sh
+	./scripts/verify-site-audit.sh
 
 nf-ui-checklist: verify-ui-build-checklist
 
