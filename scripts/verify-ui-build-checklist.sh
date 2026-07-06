@@ -67,6 +67,15 @@ done
 python3 -m pytest tests/unit/test_public_gtm_alignment.py tests/unit/test_public_simplification.py -q || fail=1
 ok "public GTM + simplification unit tests"
 
+# 7 — Commercial agentic (demo stepper + trial + footer links)
+chmod +x scripts/verify-commercial-agentic.sh
+./scripts/verify-commercial-agentic.sh || fail=1
+ok "commercial agentic surfaces"
+
+# 8 — Commercial agentic unit tests
+python3 -m pytest tests/unit/test_commercial_agentic.py -q || fail=1
+ok "commercial agentic unit tests"
+
 if [[ "$fail" -ne 0 ]]; then
   echo "Run: python3 scripts/rebuild-www-v6.py && bash scripts/verify-ui-build-checklist.sh" >&2
   exit 1

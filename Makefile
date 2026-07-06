@@ -173,6 +173,10 @@ verify-ui-build-checklist:
 	@chmod +x scripts/verify-ui-build-checklist.sh
 	./scripts/verify-ui-build-checklist.sh
 
+verify-commercial-agentic:
+	@chmod +x scripts/verify-commercial-agentic.sh
+	./scripts/verify-commercial-agentic.sh
+
 nf-ui-checklist: verify-ui-build-checklist
 
 verify-www: verify-no-vendor-names

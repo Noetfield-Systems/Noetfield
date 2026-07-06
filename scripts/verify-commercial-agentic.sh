@@ -39,6 +39,14 @@ for phrase in "nf26-demoStepper" "nf26-eventTrace" "nf26-progressRing" "Human-in
     fail=1
   fi
 done
+if ! grep -qF "noetfield-agent-trace-demo.js" <<< "$demo"; then
+  echo "FAIL copilot/demo missing: noetfield-agent-trace-demo.js" >&2
+  fail=1
+fi
+if [[ ! -f assets/noetfield-agent-trace-demo.js ]]; then
+  echo "FAIL missing assets/noetfield-agent-trace-demo.js" >&2
+  fail=1
+fi
 echo "OK   copilot/demo has agentic demo patterns"
 
 for phrase in "sandbox" "three contract" "Copilot Readiness" "mock M365" "/start/"; do

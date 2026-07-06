@@ -1460,6 +1460,44 @@ def eu_us_regulatory_block() -> str:
  </section>"""
 
 
+def agent_trace_demo_section() -> str:
+    """ADK-style interactive agent trace — stepper + event rows."""
+    return f"""
+ <section class="nf-section-block nf-section--elevated" aria-labelledby="agent-trace-title">
+ <link rel="stylesheet" href="/assets/pages/institutional-2026.css" />
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">▶</span><div>
+ <p class="nf-eyebrow" id="agent-trace-title">Interactive agent trace</p>
+ <h2>Step-by-step governance run</h2>
+ <p class="nf-section-lead">Follow each agent step from policy evaluation through signed Trust Ledger Entry. <strong>Human-in-the-loop</strong> approval gates are highlighted at each decision point.</p>
+ </div></div>
+ <div class="nf26-progressRing" id="nf26-progressRing" style="--pct:25" hidden aria-hidden="true"><span>25%</span></div>
+ <div class="nf26-demoStepper" id="nf26-demoStepper" role="tablist" aria-label="Agent trace steps">
+ <button type="button" class="nf26-demoStep" role="tab" data-step="0" aria-current="step">
+ <div class="nf26-demoStepNum">01</div>
+ <div class="nf26-demoStepTitle">Policy load</div>
+ </button>
+ <button type="button" class="nf26-demoStep" role="tab" data-step="1">
+ <div class="nf26-demoStepNum">02</div>
+ <div class="nf26-demoStepTitle">Evaluate intent</div>
+ </button>
+ <button type="button" class="nf26-demoStep" role="tab" data-step="2">
+ <div class="nf26-demoStepNum">03</div>
+ <div class="nf26-demoStepTitle">Human-in-the-loop review</div>
+ </button>
+ <button type="button" class="nf26-demoStep" role="tab" data-step="3">
+ <div class="nf26-demoStepNum">04</div>
+ <div class="nf26-demoStepTitle">Sign TLE</div>
+ </button>
+ <button type="button" class="nf26-demoStep" role="tab" data-step="4">
+ <div class="nf26-demoStepNum">05</div>
+ <div class="nf26-demoStepTitle">Export</div>
+ </button>
+ </div>
+ <div class="nf26-eventTrace" id="nf26-eventTrace" aria-live="polite" aria-label="Agent event trace"></div>
+ <script src="/assets/noetfield-agent-trace-demo.js?v={WWW_VER}" defer></script>
+ </section>"""
+
+
 def copilot_demo_body() -> str:
     """5-minute policy-change governance demo — interactive nfSsotDemo + locked buyer story."""
     ws_mock = """
@@ -1513,10 +1551,8 @@ def copilot_demo_body() -> str:
  <script src="/assets/noetfield-ssot-demo.js?v={WWW_VER}" defer></script>
  </section>
 """ + copilot_link_cards(
-        '<a class="nf-card nf-card--link" href="/copilot/"><p class="nf-card__tag">Overview</p><h3>Copilot Governance Pack</h3><p>Full offering overview.</p></a>',
-        '<a class="nf-card nf-card--link" href="/trust-ledger/sample-report/"><p class="nf-card__tag">Samples</p><h3>Trust Ledger YAML</h3><p>Go · conditional · rejected.</p></a>',
         '<a class="nf-card nf-card--link" href="/copilot/proof-case/"><p class="nf-card__tag">Proof</p><h3>Redacted proof case</h3><p>Evaluate → TLE → board export.</p></a>',
-    ) + buyer_proof_links_section() + mega_cta(
+    ) + buyer_proof_links_section() + agent_trace_demo_section() + mega_cta(
         "Board PDF in your next governance meeting",
         "Non-confidential intake · Copilot Governance Pack ($2k–10k) · Trust Brief ($10k) · operations@noetfield.com",
         (PILOT_INTAKE, "Apply for pilot ($2k–10k)"),
