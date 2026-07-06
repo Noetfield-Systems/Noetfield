@@ -404,25 +404,40 @@
       "</aside></div>";
   }
 
-  function resetProofPanel(root, fullIdle) {
-    hasEvaluated = false;
-    lastEvaluateData = null;
-    var receiptHost = qs("#nfLiveProofReceipt", root);
+  function showTracePanel(root) {
+    var panel = qs("#nfLpTracePanel", root);
+    if (!panel) return;
+    panel.hidden = false;
+    panel.classList.remove("is-idle");
+  }
+
+  function hideTracePanel(root) {
+    var panel = qs("#nfLpTracePanel", root);
+    if (!panel) return;
+    panel.hidden = true;
+    panel.classList.add("is-idle");
     var trace = qs("#nfLpEventTrace", root);
-    var why = qs("#nfLpWhy", root);
-    var hitl = qs("#nfLpHitl", root);
-    var badge = qs("#nfLpTraceBadge", root);
-    var phases = qs("#nfLiveProofRunPhases", root);
     if (trace) trace.innerHTML = "";
+    var why = qs("#nfLpWhy", root);
     if (why) {
       why.hidden = true;
       why.innerHTML = "";
     }
+    var hitl = qs("#nfLpHitl", root);
     if (hitl) {
       hitl.hidden = true;
       hitl.innerHTML = "";
     }
+    var badge = qs("#nfLpTraceBadge", root);
     if (badge) badge.textContent = "Pending";
+  }
+
+  function resetProofPanel(root, fullIdle) {
+    hasEvaluated = false;
+    lastEvaluateData = null;
+    var receiptHost = qs("#nfLiveProofReceipt", root);
+    hideTracePanel(root);
+    var phases = qs("#nfLiveProofRunPhases", root);
     if (phases) phases.hidden = true;
     if (receiptHost && fullIdle !== false) receiptHost.innerHTML = idleReceiptHtml();
   }
@@ -1025,6 +1040,7 @@
 
       resetProofPanel(root, false);
       skeletonReceipt(receiptHost);
+      showTracePanel(root);
       setRunPhase(root, "intent");
 
       var evaluatePromise = fetchEvaluate(actor, action, context, scenario);

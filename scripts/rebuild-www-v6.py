@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WWW_VER = "42"
-LIVE_PROOF_WWW_VER = "46"  # homepage + investors live-proof bundle; keep shell verifier aligned
+LIVE_PROOF_WWW_VER = "47"  # homepage + investors live-proof bundle; keep shell verifier aligned
 INVESTOR_DILIGENCE_WWW_VER = "43"
 
 # Pages maintained by Intelligence 613 lane — never overwrite on rebuild
@@ -201,6 +201,14 @@ def live_proof_panel() -> str:
  <button type="button" class="nf-live-proof-persona" data-live-proof-persona="diligence" aria-pressed="false"><strong>VC &amp; Partner</strong><span>Shadow evaluate · channel</span></button>
  </div>
  <div id="nfScenarioDeck" class="nf-scenario-deck" aria-label="Scenario stories"></div>
+ <div class="nf-live-proof-submit-wrap">
+ <button type="submit" class="btn btn-primary" id="nfLiveProofSubmit">Evaluate intent</button>
+ <div class="nf-live-proof-run-phases" id="nfLiveProofRunPhases" hidden aria-live="polite">
+ <span class="nf-live-proof-run-phase" data-run-phase="intent">Submitting intent</span>
+ <span class="nf-live-proof-run-phase" data-run-phase="policy">Policy + evidence scan</span>
+ <span class="nf-live-proof-run-phase" data-run-phase="tle">Signing TLE receipt</span>
+ </div>
+ </div>
  <details class="nf-live-proof-advanced">
  <summary>Advanced intent fields</summary>
  <label>Scenario
@@ -214,15 +222,9 @@ def live_proof_panel() -> str:
  <summary>More product lanes</summary>
  <div class="nf-live-proof-lanes" role="group" aria-label="Product lane filter">{pills_html}</div>
  </details>
- <button type="submit" class="btn btn-primary" id="nfLiveProofSubmit">Evaluate intent</button>
- <div class="nf-live-proof-run-phases" id="nfLiveProofRunPhases" hidden aria-live="polite">
- <span class="nf-live-proof-run-phase" data-run-phase="intent">Submitting intent</span>
- <span class="nf-live-proof-run-phase" data-run-phase="policy">Policy + evidence scan</span>
- <span class="nf-live-proof-run-phase" data-run-phase="tle">Signing TLE receipt</span>
- </div>
  </form>
  <div class="nf-live-proof-proof" id="nfLiveProofProof">
- <div class="nf-lp-trace-panel" id="nfLpTracePanel">
+ <div class="nf-lp-trace-panel is-idle" id="nfLpTracePanel" hidden>
  <div class="nf-lp-trace-head">
  <span class="nf-lp-trace-title">Execution trace</span>
  <span class="nf-lp-trace-badge" id="nfLpTraceBadge">Pending</span>
