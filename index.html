@@ -55,44 +55,54 @@
  <ul class="nf-marquee" aria-label="Framework alignment"><li>EU AI Act Art. 12</li><li>ISO 42001</li><li>DORA orientation</li><li>NIST AI RMF</li><li>Microsoft Purview</li></ul>
  </div>
  
- <div id="nfLiveProofHero" class="nf-live-proof-panel" data-live-proof-hero="live-proof-hero" aria-label="Governance playground">
+
+<div id="nfLiveProofHero" class="nf-live-proof-panel" data-live-proof-hero="live-proof-hero" aria-label="Governance playground">
+ <div class="nf-live-proof-shell">
  <form id="nfLiveProofForm" class="nf-live-proof-form">
-<h3>Governance simulation engine</h3>
+ <h3>Governance simulation engine</h3>
  <p id="nfScenarioOfDay" class="nf-scenario-of-day" aria-live="polite"></p>
-<p class="nf-scorecard-hint">Local-first simulation: scenarios now route through risk facts, confidence, evidence gaps, and next-step conditions — not a fixed allow sample.</p>
- <div class="nf-live-proof-lanes" role="group" aria-label="Product lane filter"><button type="button" class="nf-live-proof-lane is-active" data-live-proof-lane="all" aria-pressed="true">All</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="copilot" aria-pressed="false">Copilot Pack</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="trust_brief" aria-pressed="false">Trust Brief</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="bank" aria-pressed="false">Bank Pilot</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="automation" aria-pressed="false">AI automation</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="specialist" aria-pressed="false">Governance specialist</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="investor" aria-pressed="false">VC diligence</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="partner" aria-pressed="false">Partner shadow</button></div>
-<div id="nfScenarioDeck" class="nf-scenario-deck" aria-label="Scenario outcome shortcuts"></div>
+ <p class="nf-scorecard-hint">Pick a persona and scenario, then <strong>Evaluate intent</strong> — event trace and TLE receipt generate on submit (sandbox).</p>
+ <div class="nf-live-proof-personas" role="group" aria-label="Buyer persona">
+ <button type="button" class="nf-live-proof-persona is-active" data-live-proof-persona="copilot" aria-pressed="true"><strong>Copilot owner</strong><span>Rollout · DLP · M365 evidence</span></button>
+ <button type="button" class="nf-live-proof-persona" data-live-proof-persona="trust_brief" aria-pressed="false"><strong>GRC / Trust Brief</strong><span>Policy · vendor · EU AI Act</span></button>
+ <button type="button" class="nf-live-proof-persona" data-live-proof-persona="diligence" aria-pressed="false"><strong>VC &amp; Partner</strong><span>Shadow evaluate · channel</span></button>
+ </div>
+ <div id="nfScenarioDeck" class="nf-scenario-deck" aria-label="Scenario stories"></div>
+ <details class="nf-live-proof-advanced">
+ <summary>Advanced intent fields</summary>
  <label>Scenario
  <select name="scenario" id="nfLiveProofScenario" aria-label="Evaluate scenario"></select>
  </label>
  <label>Actor<input type="text" name="actor" value="security-team" autocomplete="off" /></label>
  <label>Action<input type="text" name="action" value="copilot_rollout" autocomplete="off" /></label>
  <label>Context<textarea name="context">Copilot rollout governance check — homepage playground</textarea></label>
- <button type="submit" class="btn btn-primary">Evaluate intent</button>
+ </details>
+ <details class="nf-live-proof-lanes-more">
+ <summary>More product lanes</summary>
+ <div class="nf-live-proof-lanes" role="group" aria-label="Product lane filter"><button type="button" class="nf-live-proof-lane" data-live-proof-lane="all" aria-pressed="false">All</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="copilot" aria-pressed="false">Copilot Pack</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="trust_brief" aria-pressed="false">Trust Brief</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="bank" aria-pressed="false">Bank Pilot</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="automation" aria-pressed="false">AI automation</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="specialist" aria-pressed="false">Governance specialist</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="investor" aria-pressed="false">VC diligence</button><button type="button" class="nf-live-proof-lane" data-live-proof-lane="partner" aria-pressed="false">Partner shadow</button></div>
+ </details>
+ <button type="submit" class="btn btn-primary" id="nfLiveProofSubmit">Evaluate intent</button>
+ <div class="nf-live-proof-run-phases" id="nfLiveProofRunPhases" hidden aria-live="polite">
+ <span class="nf-live-proof-run-phase" data-run-phase="intent">Submitting intent</span>
+ <span class="nf-live-proof-run-phase" data-run-phase="policy">Policy + evidence scan</span>
+ <span class="nf-live-proof-run-phase" data-run-phase="tle">Signing TLE receipt</span>
+ </div>
  </form>
- <div id="nfLiveProofReceipt" class="nf-live-proof-receipt-host" aria-live="polite">
- 
- <div class="nf-artifact-panel">
- <div class="nf-artifact-panel-chrome">
- <span class="nf-artifact-panel-dots" aria-hidden="true"><i></i><i></i><i></i></span>
- <span class="nf-artifact-panel-file">tle-receipt.yaml</span>
- <span class="nf-artifact-panel-badge">Verified</span>
+ <div class="nf-live-proof-proof" id="nfLiveProofProof">
+ <div class="nf-lp-trace-panel" id="nfLpTracePanel">
+ <div class="nf-lp-trace-head">
+ <span class="nf-lp-trace-title">Execution trace</span>
+ <span class="nf-lp-trace-badge" id="nfLpTraceBadge">Pending</span>
  </div>
- <aside class="nf-receipt-mock" aria-label="Trust Ledger Entry receipt">
- <dl class="nf-receipt-mock-body">
- <div class="nf-receipt-row"><dt>tle_id</dt><dd>TLE-015DCFB8B953</dd></div>
-<div class="nf-receipt-row"><dt>decision</dt><dd>review</dd></div>
-<div class="nf-receipt-row"><dt>confidence_score</dt><dd>0.64</dd></div>
- <div class="nf-receipt-row"><dt>rid</dt><dd>RID-2026-0602-HOME</dd></div>
-<div class="nf-receipt-row"><dt>evidence_index</dt><dd>purview dspm · policy v3.2 · approver chain</dd></div>
- <div class="nf-receipt-row"><dt>export_integrity</dt><dd class="nf-receipt-ok">PASS · fail closed on tamper</dd></div>
- </dl>
-<p class="nf-receipt-mock-footer">Illustrative sandbox output · choose a scenario to run live evaluate · <a href="/trust-ledger/sample-report/">Download TLE YAML</a></p>
- </aside>
+ <div class="nf-lp-eventTrace" id="nfLpEventTrace" aria-live="polite" aria-label="Governance event trace"></div>
+ <div class="nf-lp-hitl" id="nfLpHitl" hidden role="region" aria-label="Human-in-the-loop gate"></div>
+ <div class="nf-lp-why" id="nfLpWhy" hidden aria-label="Decision rationale"></div>
+ </div>
+ <div id="nfLiveProofReceipt" class="nf-live-proof-receipt-host" aria-live="polite"></div>
  </div>
  </div>
  </div>
-<script src="/assets/noetfield-live-proof.js?v=42" defer></script>
+<script src="/assets/noetfield-live-proof.js?v=46" defer></script>
  
  <div class="nf-trust nf-trust--hero" role="region" aria-label="Regulatory orientation above fold">
  <div class="nf-trust__item"><strong>EU AI Act Art. 12</strong><span>Tamper-evident decision record orientation</span></div><div class="nf-trust__item"><strong>ISO 42001</strong><span>AI management system evidence mapping</span></div><div class="nf-trust__item"><strong>DORA</strong><span>Incident evidence · audit trail exports</span></div><div class="nf-trust__item"><strong>NIST AI RMF</strong><span>Govern · Map · Measure · Manage</span></div>
