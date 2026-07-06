@@ -159,7 +159,7 @@ check_file "commercial SSOT" docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.m
   'OFFERINGS_LOCKED' 'Trust Brief' 'operations@noetfield.com' 'W3 economic signal'
 
 check_file "ai-automation lane B" ai-automation/index.html \
-  'Make your AI automation defensible' 'Apply for pilot' 'noetfield-www.css?v=41'
+  'Make your AI automation defensible' 'Apply for pilot' 'noetfield-www.css?v=42'
 
 check_file "ai factories route" ai-factories/index.html \
   'AI factories for governed work.' 'AI Factory Design' 'Submit to Gate' \
@@ -187,11 +187,11 @@ check_file "ai factories status api" api/status/ai-factory.js \
 
 # Version coherence on primary hubs
 for f in index.html trust/index.html copilot/index.html msp/index.html federal/index.html investors/index.html start/index.html pricing/index.html faq/index.html contact/index.html enterprise/index.html; do
-  if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=41' "$f"; then
-    bad "shell v41 on $f"
+  if [[ -f "$f" ]] && ! grep -qF 'noetfield-shell.js?v=42' "$f"; then
+    bad "shell v42 on $f"
   fi
 done
-[[ "$fail" -eq 0 ]] && ok "shell v41 on primary hubs"
+[[ "$fail" -eq 0 ]] && ok "shell v42 on primary hubs"
 
 LEGACY_GTM='design-partner|Design partner|Become a design partner|Purview-only trap|Accepting design partners|Available now vs what capital accelerates'
 legacy_fail=0

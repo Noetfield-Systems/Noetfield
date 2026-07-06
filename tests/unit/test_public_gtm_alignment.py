@@ -32,13 +32,15 @@ def test_homepage_has_no_prohibited_payment_language() -> None:
         assert phrase not in text, f"index.html still contains: {phrase}"
 
 
-def test_homepage_states_intelligence_positioning() -> None:
+def test_homepage_states_three_sku_entry_paths() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8").lower()
-    assert "noetfield intelligence" in text
-    assert "automate the work your team still does in spreadsheets" in text
-    assert "diagnostic sprint" in text
-    assert "/intelligence/intake/" in text
+    assert "apply for pilot" in text
+    assert "request trust brief" in text
+    assert "start sandbox" in text
+    assert "/trust-brief/intake/" in text
+    assert "/start/" in text
     assert "governed" in text
+    assert "diagnostic sprint" in text or "/intelligence/" in text
 
 
 def test_governance_page_states_copilot_positioning() -> None:
