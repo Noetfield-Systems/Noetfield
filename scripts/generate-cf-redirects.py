@@ -71,6 +71,8 @@ def main() -> int:
                 lines.append(f"https://{host}{source} {dest} {status}")
             continue
         if source and dest:
+            if dest == "/404":
+                dest = "/404.html"
             lines.append(f"{source} {dest} {status}")
 
     text = "\n".join(lines) + "\n"

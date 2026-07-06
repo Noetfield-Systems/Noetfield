@@ -36,6 +36,20 @@ if errors:
 print("OK   denylist paths absent from www-pages-dist")
 PY
 
+if [[ ! -f "${DIST}/404.html" ]]; then
+  echo "FAIL missing 404.html in www-pages-dist" >&2
+  fail=1
+else
+  echo "OK   404.html present"
+fi
+
+if [[ -f "${DIST}/_redirects" ]] && grep -q ' /404\.html 404' "${DIST}/_redirects"; then
+  echo "OK   deny redirects target /404.html"
+else
+  echo "FAIL _redirects missing /404.html deny targets" >&2
+  fail=1
+fi
+
 for needle in _redirects "Open workspace" "nf26-demoStepper"; do
   case "$needle" in
     _redirects)

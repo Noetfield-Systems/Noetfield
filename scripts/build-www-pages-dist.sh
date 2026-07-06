@@ -11,6 +11,7 @@ log() { printf '[build-www-pages-dist] %s\n' "$*"; }
 log "sync greeting SSOT…"
 python3 scripts/sync_chat_greeting_asset.py
 python3 scripts/generate-cf-redirects.py
+python3 scripts/generate-www-deny-middleware.py
 
 log "clean ${DIST}"
 rm -rf "$DIST"
