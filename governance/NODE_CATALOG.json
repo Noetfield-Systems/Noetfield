@@ -11,7 +11,7 @@
       "status": "active",
       "description": "Generated public output contains no internal truth surfaces.",
       "files": ["scripts/verify-public-output-allowlist.py", "governance/PUBLIC_OUTPUT_DENYLIST.json"],
-      "validator_ids": ["V1_PUBLIC_OUTPUT_ALLOWLIST", "V5_LIVE_NERVE", "V7_STATIC_WWW"]
+      "validator_ids": ["V1_PUBLIC_OUTPUT_ALLOWLIST", "V5_LIVE_NERVE", "V7_STATIC_WWW", "V12_SITE_AUDIT_DISK"]
     },
     {
       "id": "N2_CHAT_TRUTH",
@@ -38,7 +38,7 @@
       "status": "active",
       "description": "Live www public routes are healthy and internal/public denylist URLs return 404.",
       "files": ["governance/PUBLIC_OUTPUT_DENYLIST.json", "scripts/check_noetfield_com_e2e.py", "scripts/noetfield_live_nerve.py"],
-      "validator_ids": ["V3_PUBLIC_DENYLIST_SYNC", "V5_LIVE_NERVE", "V6_PRODUCTION_WWW_E2E", "V7_STATIC_WWW"]
+      "validator_ids": ["V3_PUBLIC_DENYLIST_SYNC", "V5_LIVE_NERVE", "V6_PRODUCTION_WWW_E2E", "V7_STATIC_WWW", "V12_SITE_AUDIT_DISK"]
     },
     {
       "id": "N5_WWW_CHAT_SEMANTIC",
@@ -119,7 +119,7 @@
       "status": "active",
       "description": "Public route inventory is the source for production E2E required-live routes.",
       "files": ["governance/ROUTE_INVENTORY.json", "scripts/verify-route-inventory.py", "scripts/check_noetfield_com_e2e.py"],
-      "validator_ids": ["V5_LIVE_NERVE", "V6_PRODUCTION_WWW_E2E", "V7_STATIC_WWW", "V10_ROUTE_INVENTORY"]
+      "validator_ids": ["V5_LIVE_NERVE", "V6_PRODUCTION_WWW_E2E", "V7_STATIC_WWW", "V10_ROUTE_INVENTORY", "V12_SITE_AUDIT_DISK"]
     },
     {
       "id": "N14_RECEIPT_FRESHNESS",
@@ -128,7 +128,7 @@
       "status": "active",
       "description": "Stored live nerve receipt has explicit expiry and cannot be trusted after its freshness window.",
       "files": ["governance/NOETFIELD_LIVE_NERVE_RECEIPT.json", "scripts/verify-live-nerve-receipt.py", "scripts/noetfield_live_nerve.py"],
-      "validator_ids": ["V5_LIVE_NERVE", "V11_LIVE_NERVE_RECEIPT_FRESHNESS"]
+      "validator_ids": ["V5_LIVE_NERVE", "V11_LIVE_NERVE_RECEIPT_FRESHNESS", "V12_SITE_AUDIT_DISK"]
     }
   ]
 }

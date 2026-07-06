@@ -1,6 +1,6 @@
 {
   "schema": "noetfield-validator-registry-v1",
-  "updated_at": "2026-06-29",
+  "updated_at": "2026-07-06",
   "owner": "website-platform",
   "purpose": "Machine-readable registry of Noetfield website/platform validators. No validator should be trusted if it is not registered here and mapped to a nerve node.",
   "validators": [
@@ -103,6 +103,14 @@
       "script": "scripts/verify-live-nerve-receipt.py",
       "receipt": "governance/NOETFIELD_LIVE_NERVE_RECEIPT.json",
       "node_ids": ["N14_RECEIPT_FRESHNESS"]
+    },
+    {
+      "id": "V12_SITE_AUDIT_DISK",
+      "scope": "site-audit-disk",
+      "command": "bash scripts/verify-site-audit.sh",
+      "script": "scripts/verify-site-audit.sh",
+      "receipt": "reports/www-audit/MANIFEST.json",
+      "node_ids": ["N1_PUBLIC_OUTPUT", "N4_WWW_LIVE_OUTPUT", "N13_ROUTE_INVENTORY", "N14_RECEIPT_FRESHNESS"]
     }
   ]
 }

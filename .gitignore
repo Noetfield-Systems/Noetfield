@@ -51,3 +51,4 @@ docs/internal/
 .dev-tunnel-url.txt.tmp
 .vercel
 .env*
+reports/www-audit/snapshots/
