@@ -22,7 +22,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  validate:
+  platform-deploy-smoke:
+    name: platform-deploy-smoke
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +45,7 @@ jobs:
 
   # Production deploy: wire your host (Fly, ECS, VM) here when secrets are available.
   # deploy:
-  #   needs: validate
+  #   needs: platform-deploy-smoke
   #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
   #   runs-on: ubuntu-latest
   #   steps:
