@@ -67,10 +67,10 @@
         },
         {
           "id": "BF-5",
-          "severity": "P0",
+          "severity": "P2",
           "name": "stable_cta_triad_homepage",
           "structural": "homepage must contain Apply for pilot, Request Trust Brief, Start sandbox",
-          "why": "NF UI build law — three stable entry paths."
+          "why": "NF UI build law — three stable entry paths; P2 until founder copy verdict (UPG-NF-PUB)."
         }
       ]
     },

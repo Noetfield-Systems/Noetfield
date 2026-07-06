@@ -3,17 +3,17 @@
   "schema": "nf-site-audit-receipt-v2",
   "lane": "noetfield",
   "loop": "site-audit",
-  "run_at": "2026-07-06T12:46:46Z",
+  "run_at": "2026-07-06T12:57:39Z",
   "crawl_root": "disk://noetfield-repo",
   "crawl_mode": "disk",
   "pages_audited": 18,
   "pages_crawled": 18,
   "lenses_version": "2.0.0",
   "state": "COMPLETE",
-  "findings_total": 41,
+  "findings_total": 42,
   "by_severity": {
     "P1": 40,
-    "P2": 1
+    "P2": 2
   },
   "findings": [
     {
@@ -22,19 +22,9 @@
       "check": "SM-2",
       "severity": "P1",
       "decision": "FAIL",
-      "reason": "title 74ch > 60",
-      "evidence": "Noetfield \u2014 Governed AI operations \u00b7 Copilot pilot \u00b7 Trust Brief \u00b7 Sandbox",
-      "snapshot_sha": "9f7d7f6909a7fee5521bae297cd8732b828e678e17b643a42dacfe4f1889a36a"
-    },
-    {
-      "page": "disk:///",
-      "www_path": "/",
-      "check": "SM-2",
-      "severity": "P1",
-      "decision": "FAIL",
       "reason": "meta description missing or outside 50-160ch",
-      "evidence": "Noetfield \u2014 Apply for Copilot Governance Pack pilot, Request Trust Brief, or Start sandbox. Governed AI for Canadian SMEs and enterprise buyers. Async intake: operations@noetfield.com.",
-      "snapshot_sha": "9f7d7f6909a7fee5521bae297cd8732b828e678e17b643a42dacfe4f1889a36a"
+      "evidence": "Noetfield Intelligence \u2014 governed AI consulting for Canadian SMEs. Diagnostic Sprint from $2,500. Enterprise Copilot governance, Trust Brief, and TLE receipts on one spine.",
+      "snapshot_sha": "28a13ef1281eeacf7fc6e7bfc01067d9314be40c421bdf32467ad582f8669528"
     },
     {
       "page": "disk:///",
@@ -44,7 +34,7 @@
       "decision": "FAIL",
       "reason": "og:image absent",
       "evidence": "no og:image property in head",
-      "snapshot_sha": "9f7d7f6909a7fee5521bae297cd8732b828e678e17b643a42dacfe4f1889a36a"
+      "snapshot_sha": "28a13ef1281eeacf7fc6e7bfc01067d9314be40c421bdf32467ad582f8669528"
     },
     {
       "page": "disk:///",
@@ -54,7 +44,17 @@
       "decision": "FAIL",
       "reason": "price figure not in canonical pricing table",
       "evidence": "$8k",
-      "snapshot_sha": "9f7d7f6909a7fee5521bae297cd8732b828e678e17b643a42dacfe4f1889a36a"
+      "snapshot_sha": "28a13ef1281eeacf7fc6e7bfc01067d9314be40c421bdf32467ad582f8669528"
+    },
+    {
+      "page": "disk:///",
+      "www_path": "/",
+      "check": "BF-5",
+      "severity": "P2",
+      "decision": "FAIL",
+      "reason": "homepage missing stable CTAs (deferred until copy verdict)",
+      "evidence": "Request Trust Brief",
+      "snapshot_sha": "28a13ef1281eeacf7fc6e7bfc01067d9314be40c421bdf32467ad582f8669528"
     },
     {
       "page": "disk:///start/",
@@ -164,7 +164,7 @@
       "decision": "FAIL",
       "reason": "og:image absent",
       "evidence": "no og:image property in head",
-      "snapshot_sha": "131f483005e96307b47032d4a83a12ab923b5d250666d4d5d777fa100d0f5e11"
+      "snapshot_sha": "e8ce577ab6e6baab12c455238cea17ed21b661631418c2cbe99dcb7e9b2b42dc"
     },
     {
       "page": "disk:///copilot/proof-case/",
@@ -423,6 +423,14 @@
       "decision": "FAIL",
       "reason": "orphan page: 0 inbound internal links",
       "evidence": "/about/"
+    },
+    {
+      "page": "SITE-WIDE",
+      "check": "NC-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "header partial drift vs pricing-table golden sha",
+      "evidence": "expected 8cb0400f5e22\u2026 got a6d7c124bf19\u2026"
     }
   ],
   "llm_proposals_pending": [

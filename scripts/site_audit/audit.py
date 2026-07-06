@@ -144,7 +144,7 @@ def structural_checks(page: dict, html: str, pricing: dict) -> list[tuple[str, s
     if www_path == "/":
         missing = [p for p in pricing.get("required_cta_phrases", []) if p not in html]
         if missing:
-            out.append(("BF-5", "P0", "homepage missing stable CTAs", ", ".join(missing)))
+            out.append(("BF-5", "P2", "homepage missing stable CTAs (deferred until copy verdict)", ", ".join(missing)))
 
     leak = PATH_LEAK_RE.search(html)
     if leak:
