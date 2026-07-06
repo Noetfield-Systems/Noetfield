@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WWW_VER = "42"
-LIVE_PROOF_WWW_VER = "47"  # homepage + investors live-proof bundle; keep shell verifier aligned
+LIVE_PROOF_WWW_VER = "48"  # homepage + investors live-proof bundle; keep shell verifier aligned
 INVESTOR_DILIGENCE_WWW_VER = "43"
 
 # Pages maintained by Intelligence 613 lane — never overwrite on rebuild
@@ -171,7 +171,26 @@ def receipt(
  </div>"""
 
 
-def live_proof_panel() -> str:
+def hero_live_proof_artifact() -> str:
+    """Decorative TLE sample for hero column — live evaluate runs in full-width band below."""
+    return receipt(
+        rid="RID-2026-0602-HOME",
+        footer="Illustrative sample · run <strong>Evaluate intent</strong> below for a live sandbox receipt",
+        decision="review",
+        confidence_score="0.64",
+        evidence_index="purview · entra · audit",
+    )
+
+
+def live_proof_band() -> str:
+    """Full-width Governance Playground — form + trace at page width, not hero sidebar."""
+    return f"""
+ <div class="nf-live-proof-band" aria-label="Governance playground">
+{live_proof_panel(inner_only=True).strip()}
+ </div>"""
+
+
+def live_proof_panel(*, inner_only: bool = False) -> str:
     """UI-01 Governance Playground — persona entry, guided evaluate, event trace + TLE receipt."""
     lane_pills = (
         ("all", "All", False),
@@ -188,7 +207,7 @@ def live_proof_panel() -> str:
         f'data-live-proof-lane="{key}" aria-pressed="false">{label}</button>'
         for key, label, _active in lane_pills
     )
-    return f"""
+    panel_html = f"""
  <div id="nfLiveProofHero" class="nf-live-proof-panel" data-live-proof-hero="live-proof-hero" aria-label="Governance playground">
  <div class="nf-live-proof-shell">
  <form id="nfLiveProofForm" class="nf-live-proof-form">
@@ -224,7 +243,7 @@ def live_proof_panel() -> str:
  </details>
  </form>
  <div class="nf-live-proof-proof" id="nfLiveProofProof">
- <div class="nf-lp-trace-panel is-idle" id="nfLpTracePanel" hidden>
+ <div class="nf-lp-trace-panel is-idle" id="nfLpTracePanel">
  <div class="nf-lp-trace-head">
  <span class="nf-lp-trace-title">Execution trace</span>
  <span class="nf-lp-trace-badge" id="nfLpTraceBadge">Pending</span>
@@ -236,8 +255,11 @@ def live_proof_panel() -> str:
  <div id="nfLiveProofReceipt" class="nf-live-proof-receipt-host" aria-live="polite"></div>
  </div>
  </div>
- </div>
-<script src="/assets/noetfield-live-proof.js?v={LIVE_PROOF_WWW_VER}" defer></script>"""
+ </div>"""
+    script = f'<script src="/assets/noetfield-live-proof.js?v={LIVE_PROOF_WWW_VER}" defer></script>'
+    if inner_only:
+        return panel_html + "\n" + script
+    return panel_html + "\n" + script
 
 
 def trial_os_wizard() -> str:
@@ -2038,7 +2060,7 @@ def homepage() -> str:
         [("Copilot Governance Pack · $2k–10k", True), ("Tamper-evident TLE", True), ("Board-grade trust", False)],
         [(PILOT_INTAKE, "Apply for pilot ($2k–10k)", True), ("/copilot/demo/", "5-minute demo", False), ("/start/", "Start free sandbox", False)],
         HERO_MARQUEE + ["Microsoft Purview"],
-        live_proof_panel(),
+        hero_live_proof_artifact(),
         h1_class="nf-hero-h1--wide",
     ).replace(
         '<p class="nf-lead">',
@@ -2050,7 +2072,7 @@ def homepage() -> str:
         1,
     ).replace(
         '</header>',
-        hero_regulatory_chips() + "\n </header>",
+        live_proof_band() + hero_regulatory_chips() + "\n </header>",
         1,
     ) + stat_bar() + pilot_hero_wedge() + social_proof_industry_strip() + buyer_journey_strip() + revenue_path_ladder_inner() + homepage_depth_links() + "\n </section>"
 

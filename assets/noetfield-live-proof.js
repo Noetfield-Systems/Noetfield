@@ -404,20 +404,23 @@
       "</aside></div>";
   }
 
-  function showTracePanel(root) {
+  function traceIdleHtml() {
+    return (
+      '<div class="nf-lp-eventRow nf-lp-eventRow--idle">' +
+      '<span class="nf-lp-eventTime">—</span>' +
+      '<div><span class="nf-lp-eventName">Awaiting evaluate</span>' +
+      '<div class="nf-lp-eventDetail">Pick a persona and scenario, then press <strong>Evaluate intent</strong>.</div></div>' +
+      '<span class="nf-lp-eventBadge">idle</span></div>'
+    );
+  }
+
+  function showTraceIdle(root) {
     var panel = qs("#nfLpTracePanel", root);
     if (!panel) return;
     panel.hidden = false;
-    panel.classList.remove("is-idle");
-  }
-
-  function hideTracePanel(root) {
-    var panel = qs("#nfLpTracePanel", root);
-    if (!panel) return;
-    panel.hidden = true;
     panel.classList.add("is-idle");
     var trace = qs("#nfLpEventTrace", root);
-    if (trace) trace.innerHTML = "";
+    if (trace) trace.innerHTML = traceIdleHtml();
     var why = qs("#nfLpWhy", root);
     if (why) {
       why.hidden = true;
@@ -429,14 +432,25 @@
       hitl.innerHTML = "";
     }
     var badge = qs("#nfLpTraceBadge", root);
-    if (badge) badge.textContent = "Pending";
+    if (badge) badge.textContent = "Ready";
+  }
+
+  function showTracePanel(root) {
+    var panel = qs("#nfLpTracePanel", root);
+    if (!panel) return;
+    panel.hidden = false;
+    panel.classList.remove("is-idle");
+  }
+
+  function hideTracePanel(root) {
+    showTraceIdle(root);
   }
 
   function resetProofPanel(root, fullIdle) {
     hasEvaluated = false;
     lastEvaluateData = null;
     var receiptHost = qs("#nfLiveProofReceipt", root);
-    hideTracePanel(root);
+    showTraceIdle(root);
     var phases = qs("#nfLiveProofRunPhases", root);
     if (phases) phases.hidden = true;
     if (receiptHost && fullIdle !== false) receiptHost.innerHTML = idleReceiptHtml();

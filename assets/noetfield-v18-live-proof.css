@@ -308,61 +308,80 @@ body.nf-www .nf-receipt-row dd.nf-receipt-deny {
   color: var(--text, #0f1117);
 }
 
+/* ── Full-width playground band (below hero copy + artifact) ── */
+.nf-live-proof-band {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-top: clamp(8px, 1.5vw, 16px);
+}
+
+.nf-hero-cinematic:has(.nf-live-proof-band) {
+  align-items: start;
+}
+
+.nf-hero-cinematic:has(.nf-live-proof-band):not(:has(.nf-artifact-panel)) > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.nf-hero-cinematic:has(.nf-live-proof-band) > .nf-trust--hero,
+.nf-hero-cinematic:has(.nf-live-proof-band) > .nf-section-lead {
+  grid-column: 1 / -1;
+}
+
+.nf-live-proof-band .nf-live-proof-panel {
+  width: 100%;
+}
+
+.nf-live-proof-band .nf-live-proof-form {
+  padding: clamp(18px, 2.2vw, 24px);
+}
+
+.nf-live-proof-band .nf-live-proof-form h3 {
+  font-size: 1.0625rem;
+}
+
 @media (min-width: 960px) {
-  .nf-hero-cinematic:has(.nf-live-proof-panel) {
-    grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+  .nf-live-proof-band .nf-live-proof-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: clamp(16px, 2vw, 24px);
     align-items: start;
+  }
+
+  .nf-live-proof-band .nf-scenario-deck {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* Hero sidebar is too narrow for a 2-col inner grid — always stack form then proof */
-.nf-hero-cinematic .nf-live-proof-shell {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 .nf-live-proof-submit-wrap {
-  position: sticky;
-  bottom: 0;
-  z-index: 3;
-  padding: 8px 0 4px;
-  margin-top: 4px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--panel, #fff) 28%);
+  margin-top: 8px;
+  padding: 0;
+  background: none;
 }
 
 .nf-live-proof-submit-wrap .btn {
   width: 100%;
-  min-height: 46px;
-  font-size: 0.875rem;
+  min-height: 48px;
+  font-size: 0.9375rem;
   font-weight: 700;
-  box-shadow: 0 10px 24px rgba(15, 17, 23, 0.12);
 }
 
-.nf-hero-cinematic .nf-live-proof-panel {
-  max-height: min(78vh, 920px);
-  overflow: auto;
-  overscroll-behavior: contain;
+.nf-lp-trace-panel.is-idle .nf-lp-trace-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(232, 234, 239, 0.72);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
-.nf-hero-cinematic .nf-live-proof-form {
-  padding-bottom: 4px;
-}
-
-.nf-lp-trace-panel.is-idle,
-.nf-lp-trace-panel[hidden] {
-  display: none !important;
+.nf-lp-eventRow--idle {
+  opacity: 0.85;
+  border-style: dashed;
 }
 
 @media (max-width: 959px) {
-  .nf-live-proof-panel {
-    order: -1;
-  }
-
-  .nf-live-proof-shell {
+  .nf-live-proof-band .nf-live-proof-shell {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
   }
 }
 
@@ -501,7 +520,8 @@ body.nf-www .nf-receipt-row dd.nf-receipt-deny {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-height: 220px;
+  min-height: 120px;
+  max-height: min(320px, 42vh);
   overflow: auto;
   font-family: var(--mono, "JetBrains Mono", monospace);
   font-size: 0.6875rem;
