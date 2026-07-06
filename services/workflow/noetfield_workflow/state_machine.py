@@ -12,7 +12,7 @@ import asyncpg
 from pydantic import BaseModel, ConfigDict, Field
 
 from noetfield_events import AsyncEventBus, EventType, build_event
-from noetfield_types import Actor, ActorType, WorkflowState, coerce_jsonb_mapping
+from noetfield_types import Actor, ActorType, WorkflowState, coerce_jsonb_mapping, get_pool
 
 
 ALLOWED_TRANSITIONS: dict[WorkflowState, set[WorkflowState]] = {
@@ -98,12 +98,10 @@ class PostgresWorkflowStore:
 
     async def connect(self) -> None:
         if self._pool is None:
-            self._pool = await asyncpg.create_pool(self._database_url)
+            self._pool = await get_pool(self._database_url)
 
     async def close(self) -> None:
-        if self._pool is not None:
-            await self._pool.close()
-            self._pool = None
+        self._pool = None
 
     async def create(self, workflow: WorkflowInstance) -> WorkflowInstance:
         await self.connect()

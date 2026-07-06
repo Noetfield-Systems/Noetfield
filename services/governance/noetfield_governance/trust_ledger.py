@@ -10,6 +10,8 @@ from typing import Literal, Protocol
 from uuid import uuid4
 
 import asyncpg
+
+from noetfield_types import get_pool
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import Response
 from pydantic import BaseModel, ConfigDict, Field
@@ -439,7 +441,7 @@ class PostgresTrustLedgerStore:
 
     async def connect(self) -> None:
         if self._pool is None:
-            self._pool = await asyncpg.create_pool(self._database_url)
+            self._pool = await get_pool(self._database_url)
 
     async def ingest_evidence(self, payload: EvidenceIngestRequest) -> EvidenceObject:
         await self.connect()

@@ -35,6 +35,7 @@ from noetfield_governance.public_chat_telemetry import (
     telemetry_stats,
 )
 from noetfield_governance import intake_repository, redis_runtime
+from noetfield_types import close_all_pools
 from noetfield_governance.intake_notify import (
     intake_email_configured,
     notify_ops_inbox,
@@ -420,6 +421,7 @@ async def shutdown_runtime() -> None:
         close = getattr(store, "close", None)
         if close is not None:
             await close()
+    await close_all_pools()
 
 
 @app.get("/health", tags=["system"], include_in_schema=True)

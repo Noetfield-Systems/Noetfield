@@ -9,6 +9,8 @@ from uuid import UUID
 
 import asyncpg
 
+from noetfield_types import get_pool
+
 
 @dataclass(frozen=True)
 class UntriagedSignal:
@@ -41,12 +43,10 @@ class SignalTriageStore:
 
     async def connect(self) -> None:
         if self._pool is None:
-            self._pool = await asyncpg.create_pool(self._database_url)
+            self._pool = await get_pool(self._database_url)
 
     async def close(self) -> None:
-        if self._pool is not None:
-            await self._pool.close()
-            self._pool = None
+        self._pool = None
 
     async def list_untriaged(
         self,

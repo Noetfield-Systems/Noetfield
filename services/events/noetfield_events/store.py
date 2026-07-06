@@ -9,7 +9,7 @@ from typing import Protocol
 import asyncpg
 
 from .bus import DeadLetterRecord, EventTrace
-from noetfield_types import Actor, ActorType, GovernanceEvent, coerce_jsonb_mapping
+from noetfield_types import Actor, ActorType, GovernanceEvent, coerce_jsonb_mapping, get_pool
 
 
 @dataclass(frozen=True)
@@ -88,12 +88,10 @@ class PostgresEventStore:
 
     async def connect(self) -> None:
         if self._pool is None:
-            self._pool = await asyncpg.create_pool(self._database_url)
+            self._pool = await get_pool(self._database_url)
 
     async def close(self) -> None:
-        if self._pool is not None:
-            await self._pool.close()
-            self._pool = None
+        self._pool = None
 
     async def append(self, event: GovernanceEvent, trace: EventTrace) -> int:
         await self.connect()
@@ -278,12 +276,10 @@ class PostgresDeadLetterStore:
 
     async def connect(self) -> None:
         if self._pool is None:
-            self._pool = await asyncpg.create_pool(self._database_url)
+            self._pool = await get_pool(self._database_url)
 
     async def close(self) -> None:
-        if self._pool is not None:
-            await self._pool.close()
-            self._pool = None
+        self._pool = None
 
     async def append(self, record: DeadLetterRecord) -> None:
         await self.connect()
