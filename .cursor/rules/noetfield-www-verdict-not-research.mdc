@@ -1,0 +1,50 @@
+---
+description: Public www — upgrade from verdicts, never paste research/audit onto HTML
+globs:
+  - "**/*.html"
+  - "scripts/verify-static-www.sh"
+  - "scripts/rebuild-www-v6.py"
+  - "assets/noetfield-www.css"
+  - "assets/partials/**"
+alwaysApply: true
+---
+
+# Noetfield www — verdict-first, client-grade
+
+**Do not put research on the website.** Audits, deep-research reports, and competitor notes are **internal input**. The live site is **client product**.
+
+## Goal (60-second buyer test)
+
+A regulated buyer must understand: what this is, who it's for, one primary next step (pilot / Trust Brief / sandbox), what is proven vs illustrative — with **zero** fake logos, certs, ARR, testimonials, or founder/SSOT jargon.
+
+## Forbidden
+
+- External audit / research report → direct HTML or bulk hub rewrite
+- "Upgrade homepage per audit" without claim–evidence matrix + founder verdict
+- Mixing tech PRs (asset pins, verify scripts, CI) with unreviewed copy/IA in one merge
+
+## Required before copy/IA changes
+
+1. Verdict per finding: **ACCEPT | REJECT | DEFER**
+2. Claim–evidence matrix (claim → receipt/source or remove)
+3. Competitor bench (structure/tone only — no named competitor tables in commits/www)
+4. P0 list only for autonomous edits; P1+ needs founder/copy gate
+
+## Allowed without verdict (engineering hygiene)
+
+- Asset `?v=` coherence, `verify-static-www.sh` gates, broken links, apex redirects, intake wiring, CI/E2E hooks
+- Remove unsupported claims (Small Fix Rule)
+
+## PR split rule
+
+- **PR A:** verify + assets + CI → merge when green
+- **PR B:** copy/IA → only after verdict + matrix signed
+
+## Checks after any www edit
+
+```bash
+bash scripts/verify-static-www.sh
+bash scripts/verify-ui-build-checklist.sh
+```
+
+Read first: `docs/www/NF_UI_BUILD_CHECKLIST_LOCKED_v1.md` · `docs/www/NF_WWW_LANGUAGE_LAYERS_LOCKED_v1.md`
