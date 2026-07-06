@@ -23,13 +23,13 @@ check_file() {
 }
 
 check_file "homepage intelligence-first" index.html \
-  'noetfield-www.css?v=41' 'nf-site-v14' 'Board-grade trust' \
+  'noetfield-www.css?v=42' 'nf-site-v14' \
   'data-live-proof-hero' 'nf-live-proof-lanes' 'nf-product-lane-strip' \
   'Governance specialist' 'agentic-specialist' 'VC diligence' \
   'Trust Brief' 'Bank Pilot' 'Explore product lanes' \
-  'tamper-evident decision records' 'nfScenarioOfDay' \
-  'Apply for pilot ($2k–10k)' '01 · Diagnose' 'Diagnostic Sprint' \
-  'Copilot Governance Pack' 'Commercial path' 'Start free sandbox' \
+  'tamper-evident' 'nfScenarioOfDay' \
+  'Apply for pilot' '01 · Diagnose' 'Diagnostic Sprint' \
+  'Copilot Governance Pack' 'Commercial path' 'Start sandbox' \
   'fail closed' 'Copilot becomes auditable'
 
 check_file "homepage buyer journey" index.html \
@@ -45,14 +45,14 @@ fi
 
 check_file "start sandbox page" start/index.html \
   'nf-hero-flow' 'Try in minutes' '14-day trial' '50 evaluate calls' 'Apply for pilot' \
-  'data-trial-os-flow' 'NF_SANDBOX_NURTURE_SEQUENCE' 'noetfield-www.css?v=41'
+  'data-trial-os-flow' 'NF_SANDBOX_NURTURE_SEQUENCE' 'noetfield-www.css?v=42'
 
 check_file "pricing packaging page" pricing/index.html \
-  'Published tiers' 'Apply for pilot ($2k–10k)' 'Milestone pricing' 'Developer access · free' \
-  'noetfield-www.css?v=41' 'What regulated buyers receive from Noetfield'
+  'Published tiers' 'Apply for pilot' 'Milestone pricing' 'Developer access · free' \
+  'noetfield-www.css?v=42' 'What regulated buyers receive from Noetfield'
 
 check_file "pilot landing page" copilot/pilot/index.html \
-  'noetfield-www.css?v=41' 'Board-grade trust' 'GTM-locked pilot success signals' \
+  'noetfield-www.css?v=42' 'Board-grade trust' 'GTM-locked pilot success signals' \
   'interest=pilot' 'nfPilotApplyForm' 'Milestone pricing' \
   'Export assurance' 'QuickScan' 'Pilot deliverables' 'tamper-evident' \
   'Copilot Governance Pack' 'Regulated buyer map' 'Honest scope' \
@@ -60,7 +60,7 @@ check_file "pilot landing page" copilot/pilot/index.html \
   'noetfield-intake-core.js' 'nfPilotApplyStatus'
 
 check_file "work with us program" work-with-us/index.html \
-  'noetfield-www.css?v=41' 'Work with Noetfield' 'Connector' 'Facilitator' \
+  'noetfield-www.css?v=42' 'Work with Noetfield' 'Connector' 'Facilitator' \
   'Co-partner' 'Apply to work with us' 'nfPartnerApplyForm' 'Apply → enable → earn' \
   'noetfield-intake-core.js' 'nfPartnerApplyStatus' 'Investor' '/investors/' \
   'nf-wwu-investor-spotlight' 'nf-wwu-lane-pill' 'noetfield-work-with-us.js'
@@ -93,28 +93,28 @@ check_file "status intake health" status/index.html \
   'data-intake-health-host' 'noetfield-intake-status.js' 'Intake delivery' '/next/'
 
 check_file "header institutional nav" assets/partials/header.html \
-  'href="/"' '/copilot/' '/templates/' '/trust/' '/federal/' '/msp/' '/copilot/demo/' 'Pilot · $2k–10k'
+  'href="/"' '/copilot/' '/templates/' '/trust/' '/federal/' '/msp/' '/copilot/demo/' 'Apply for pilot'
 
 check_file "footer enterprise nav" assets/partials/footer.html \
   '/investors/' '/next/' 'Diligence vault' 'Copilot Governance Pack'
 
 check_file "templates catalog page" templates/index.html \
   'copilot-governance-v1' 'bank-pilot-v1' 'Trust Brief' \
-  'Governance Runtime' 'noetfield-www.css?v=41' 'Deploy governed AI templates'
+  'Governance Runtime' 'noetfield-www.css?v=42' 'Deploy governed AI templates'
 
 check_file "runtime landing page" runtime/index.html \
   'Policy before execution' 'REQUIRE_HUMAN_REVIEW' 'copilot-governance-v1' \
-  'POST /api/v1/governance/evaluate' 'Illustrative sandbox output' 'noetfield-www.css?v=41'
+  'POST /api/v1/governance/evaluate' 'Illustrative sandbox output' 'noetfield-www.css?v=42'
 
 check_file "federal lane page" federal/index.html \
   'Federal Governance Pack' 'NF_OSFI_E23_DILIGENCE_REFRESH' 'NF_METADATA_EVIDENCE_INDEX' \
-  'AIA' 'Copilot PIN' 'noetfield-www.css?v=41'
+  'AIA' 'Copilot PIN' 'noetfield-www.css?v=42'
 
 check_file "partner banner embed" banner/index.html \
   'noindex,nofollow' 'REQUIRE_HUMAN_REVIEW' 'Illustrative — no fabricated hash' 'copilot-governance-v1'
 
 check_file "header pilot CTA" assets/partials/header.html \
-  'Pilot · $2k–10k' '/trust-brief/intake/?interest=pilot'
+  'Apply for pilot' '/trust-brief/intake/?interest=pilot'
 
 check_file "next steps hub" next/index.html \
   'next-buyer' 'next-investor' 'next-partner' 'next-ops' \
@@ -203,6 +203,17 @@ while IFS= read -r -d '' html; do
   fi
 done < <(find . -name '*.html' -not -path './node_modules/*' -not -path './www-pages-dist/*' -print0)
 [[ "$stale_intake_fail" -eq 0 ]] && ok "no stale intake-core/forms v=41 in html" || fail=1
+
+# No stale www.css pins (v=41 superseded by v=42)
+stale_www_fail=0
+while IFS= read -r -d '' html; do
+  if grep -qE 'noetfield-www\.css\?v=41' "$html"; then
+    echo "FAIL verify-static-www: stale noetfield-www.css v=41 in $html" >&2
+    grep -En 'noetfield-www\.css\?v=41' "$html" >&2 || true
+    stale_www_fail=1
+  fi
+done < <(find . -name '*.html' -not -path './node_modules/*' -not -path './www-pages-dist/*' -print0)
+[[ "$stale_www_fail" -eq 0 ]] && ok "no stale noetfield-www.css v=41 in html" || fail=1
 
 LEGACY_GTM='design-partner|Design partner|Become a design partner|Purview-only trap|Accepting design partners|Available now vs what capital accelerates'
 legacy_fail=0
