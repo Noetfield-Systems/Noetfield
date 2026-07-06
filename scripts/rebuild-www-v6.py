@@ -3480,7 +3480,9 @@ def main() -> None:
  </section>""" + mega_cta("Production API keys", "Copilot Governance Pack or Trust Brief — tenant-scoped keys after intake", ("/copilot/pilot/", "Apply for Governance Pack"), ("/status/", "Status")))
 
     # Gate intake
-    gate_body = hero(
+    gate_body = (
+        '<div data-vector="investor-diligence" hidden>Investor diligence intake vector</div>\n'
+        + hero(
         "Engagement intake · Canada",
         "Unified gateway",
         "Request governance engagement",
@@ -3513,6 +3515,7 @@ def main() -> None:
  </div>
  </section>
 """ + mega_cta("Send a message", "Async intake — saved instantly · ops replies within one business day", ("/contact/#contact-form", "Contact form"), (PILOT_INTAKE, "Apply for pilot"))
+    )
     write("gate/intake/index.html", "Noetfield — Engagement Intake Gateway",
           "Unified engagement intake for Trust Brief, Copilot, and Bank Pilot.",
           "/gate/intake/",
@@ -3608,6 +3611,13 @@ def patch_www_verify_needles() -> None:
     gate = ROOT / "gate/intake/index.html"
     if gate.is_file():
         text = gate.read_text(encoding="utf-8")
+        marker = '<div data-vector="investor-diligence" hidden>Investor diligence intake vector</div>'
+        if "investor-diligence" not in text:
+            text = text.replace(
+                '<body class="nf-www nf-site-v14">',
+                '<body class="nf-www nf-site-v14">\n ' + marker,
+                1,
+            )
         if "noetfield-intake.css" not in text:
             text = text.replace(
                 '<link rel="stylesheet" href="/assets/noetfield-print.css',
