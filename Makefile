@@ -177,6 +177,10 @@ verify-commercial-agentic:
 	@chmod +x scripts/verify-commercial-agentic.sh
 	./scripts/verify-commercial-agentic.sh
 
+verify-www-interactive-fidelity:
+	@chmod +x scripts/verify-www-interactive-fidelity.sh
+	./scripts/verify-www-interactive-fidelity.sh
+
 verify-site-audit:
 	@chmod +x scripts/verify-site-audit.sh
 	./scripts/verify-site-audit.sh

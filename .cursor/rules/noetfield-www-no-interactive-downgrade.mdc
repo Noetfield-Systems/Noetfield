@@ -1,0 +1,48 @@
+---
+description: CRITICAL — never downgrade interactive sandbox/demo surfaces when upgrading other www parts
+alwaysApply: true
+---
+
+# Noetfield www — no interactive downgrade (CRITICAL)
+
+**Validators passing ≠ product upgrade.** Do not ship www changes that shrink, simplify, or replace **live client-facing interactive surfaces** with static mocks or motion-only widgets.
+
+## Real sandbox SSOT (where clients actually run technology)
+
+| Surface | URL / path | What it is |
+|---------|------------|------------|
+| **Governance workspace** | `localhost:13080/workspace` (dev-local) | Next.js — Create TLE, connectors, board PDF/ZIP |
+| **Homepage live proof** | `/` + `noetfield-live-proof.js` | Scenario picker → evaluate (platform proxy) |
+| **Trial sandbox** | `/start/` + `noetfield-sandbox.js` | Signup + evaluate path |
+| **Copilot demo** | `/copilot/demo/` | `nfSsotDemo` + `nf26-demoStepper` + agent trace — **not** hero mock alone |
+| **Platform API** | `platform.noetfield.com` | `POST /evaluate`, tenant receipts |
+
+**NOT real sandbox:** `nf-workspace-mock`, `nf-receipt-mock`, hardcoded `TLE-015DCFB8B953`, decorative hero asides.  
+**Broken today:** `www.noetfield.com/workspace/` — static HTML, governance-console **not deployed** to Pages. Do not claim "Open workspace" works on production until deploy exists.
+
+## Forbidden agent moves
+
+- Removing `nf26-demoStepper`, `nf26-eventTrace`, `nfSsotDemo`, `nfLiveProofForm` to pass CI, asset pins, or copy audits
+- Replacing `scripts/templates/copilot-demo-nf26.html` institutional demo with mock-only hero
+- Treating `rebuild-www-v6.py` `copilot_demo_body()` mock output as sufficient "demo upgrade"
+- Bulk `?v=` pin bumps that revert interactive HTML from an older generator output
+- Calling site-audit PASS while buyer cannot run evaluate from the changed URL
+
+## Required before merge (any PR touching demo/start/index/workspace)
+
+```bash
+bash scripts/verify-www-interactive-fidelity.sh
+bash scripts/verify-commercial-agentic.sh
+```
+
+Baseline: `data/www-interactive-baseline-v1.json` — bump `min_bytes` / markers only with founder sign-off + incident note.
+
+## If you must change interactive surfaces
+
+1. **Upgrade only** — same or more hooks, bytes, and evaluate paths unless founder orders removal
+2. File incident if production `/workspace/` CTAs remain broken
+3. Prefer restore from `scripts/templates/copilot-demo-nf26.html` over new mock panels
+
+## Authority
+
+`.cursor/incidents/INCIDENT-2026-07-06-001-www-sandbox-downgrade.md` · R-012 · M-005 · `verify-www-interactive-fidelity.sh`
