@@ -83,7 +83,7 @@ check_file "investors async intake" investors/index.html \
 check_file "investor diligence vault" investors/diligence/index.html \
   'Investor Diligence Vault' 'nfInvestorDiligenceForm' 'investor-diligence' \
   'Shadow Governance Brief' '18-item checklist' 'nf-vault-checklist' \
-  'noetfield-www.css?v=43' 'NF_INVESTOR_DILIGENCE_VAULT' \
+  'noetfield-www.css?v=42' 'NF_INVESTOR_DILIGENCE_VAULT' \
   'noetfield-intake-core.js'
 
 check_file "msp end-client buyer block" msp/index.html \
@@ -192,6 +192,17 @@ for f in index.html trust/index.html copilot/index.html msp/index.html federal/i
   fi
 done
 [[ "$fail" -eq 0 ]] && ok "shell v41 on primary hubs"
+
+# No stale intake/forms asset pins (v=41 superseded by v=42)
+stale_intake_fail=0
+while IFS= read -r -d '' html; do
+  if grep -qE 'noetfield-intake-core\.js\?v=41|noetfield-forms\.js\?v=41' "$html"; then
+    echo "FAIL verify-static-www: stale intake/forms v=41 in $html" >&2
+    grep -En 'noetfield-intake-core\.js\?v=41|noetfield-forms\.js\?v=41' "$html" >&2 || true
+    stale_intake_fail=1
+  fi
+done < <(find . -name '*.html' -not -path './node_modules/*' -not -path './www-pages-dist/*' -print0)
+[[ "$stale_intake_fail" -eq 0 ]] && ok "no stale intake-core/forms v=41 in html" || fail=1
 
 LEGACY_GTM='design-partner|Design partner|Become a design partner|Purview-only trap|Accepting design partners|Available now vs what capital accelerates'
 legacy_fail=0
