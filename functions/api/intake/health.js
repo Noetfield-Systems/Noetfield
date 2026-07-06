@@ -111,11 +111,13 @@ var require_intake_email = __commonJS({
       const rid = body.request_id || intakeId;
       return "Hi" + name + ",\n\nYour message was saved instantly. Operations at Noetfield will follow up within one business day.\n\nReference: " + rid + "\nIntake ID: " + intakeId + "\n\nReply to this email or write " + CANONICAL + " \u2014 include your Request ID in any follow-up.\n\n\u2014 Noetfield Operations\n" + CANONICAL + "\n";
     }
-    async function sendResend({ from, to, subject, text, replyTo }) {
+    async function sendResend({ from, to, subject, text, replyTo, requestId }) {
       const key = (process.env.RESEND_API_KEY || "").trim();
       if (!key) return { ok: false, error: "missing_api_key" };
       const payload = { from, to, subject, text };
       if (replyTo) payload.reply_to = replyTo;
+      const rid = String(requestId || "").trim().toUpperCase();
+      if (rid) payload.tags = [{ name: "request_id", value: rid }];
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -150,7 +152,8 @@ var require_intake_email = __commonJS({
         to: [inbox],
         subject: intakeSubject(body, intakeId),
         text: opsBodyText(body, intakeId),
-        replyTo: body.contact_email
+        replyTo: body.contact_email,
+        requestId: body.request_id || ids.rid || null
       });
       const ops = opsResult.ok;
       let ack = false;
@@ -160,7 +163,8 @@ var require_intake_email = __commonJS({
           to: [body.contact_email],
           subject: "Noetfield \u2014 message received (" + (body.request_id || intakeId) + ")",
           text: ackBody(body, intakeId),
-          replyTo: CANONICAL
+          replyTo: CANONICAL,
+          requestId: body.request_id || ids.rid || null
         });
         ack = ackResult.ok;
       }
@@ -177,10 +181,72 @@ var require_intake_email = __commonJS({
   }
 });
 
+// api/_lib/intake-telegram.js
+var require_intake_telegram = __commonJS({
+  "api/_lib/intake-telegram.js"(exports, module) {
+    var DEFAULT_CHAT_ID = "8635650894";
+    function telegramConfigured() {
+      const token = (process.env.TELEGRAM_NOETFIELD_OPS_BOT_TOKEN || "").trim();
+      const chatId = (process.env.TELEGRAM_OPS_CHAT_ID || DEFAULT_CHAT_ID).trim();
+      return Boolean(token && chatId);
+    }
+    function formatIntakeTelegramText(body, intakeId) {
+      const name = String(body.contact_name || "\u2014").trim() || "\u2014";
+      const company = String(body.organization || "\u2014").trim() || "\u2014";
+      const message = String(body.message || "").trim() || "\u2014";
+      const id = String(intakeId || "\u2014").trim() || "\u2014";
+      return ["name: " + name, "company: " + company, "message: " + message, "intake ID: " + id].join("\n");
+    }
+    async function sendIntakeTelegram(body, intakeId) {
+      const token = (process.env.TELEGRAM_NOETFIELD_OPS_BOT_TOKEN || "").trim();
+      const chatId = (process.env.TELEGRAM_OPS_CHAT_ID || DEFAULT_CHAT_ID).trim();
+      if (!token || !chatId) {
+        return { ok: false, configured: false, error: "missing_telegram_config" };
+      }
+      const text = formatIntakeTelegramText(body, intakeId);
+      const res = await fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text.slice(0, 4096),
+          disable_web_page_preview: true
+        })
+      });
+      const payload = await res.json().catch(function() {
+        return {};
+      });
+      if (res.ok && payload.ok) {
+        return {
+          ok: true,
+          configured: true,
+          message_id: payload.result && payload.result.message_id ? payload.result.message_id : null
+        };
+      }
+      const err = payload.description || "http_" + res.status;
+      console.error("intake_telegram_failed", err);
+      return { ok: false, configured: true, error: err };
+    }
+    module.exports = {
+      DEFAULT_CHAT_ID,
+      telegramConfigured,
+      formatIntakeTelegramText,
+      sendIntakeTelegram
+    };
+  }
+});
+
 // api/intake/health.js
 var require_health = __commonJS({
   "api/intake/health.js"(exports, module) {
     var { CANONICAL, emailConfigured } = require_intake_email();
+    var { telegramConfigured } = require_intake_telegram();
+    function deliveryMode(telegram, email) {
+      if (telegram && email) return "telegram+resend-archive";
+      if (telegram) return "telegram";
+      if (email) return "resend-archive";
+      return "unconfigured";
+    }
     module.exports = async function handler2(req, res) {
       res.setHeader("Access-Control-Allow-Origin", "*");
       if (req.method !== "GET") {
@@ -204,20 +270,23 @@ var require_health = __commonJS({
       } catch (_) {
         platform = { enabled: false };
       }
+      const wwwTelegram = telegramConfigured();
       const wwwEmail = emailConfigured();
       const platformEnabled = platform.enabled === true;
-      const intakeReady = wwwEmail || platformEnabled || Boolean(platform.ops_email_configured);
+      const intakeReady = platformEnabled || wwwTelegram || wwwEmail || Boolean(platform.ops_email_configured);
       return res.status(200).json({
         enabled: intakeReady,
         intake_email: CANONICAL,
-        storage: platform.storage || (wwwEmail ? "www-email" : "www-proxy"),
+        storage: platform.storage || (platformEnabled ? "postgres" : wwwTelegram ? "www-telegram" : "www-proxy"),
         ops_webhook_configured: Boolean(platform.ops_webhook_configured),
+        ops_telegram_configured: wwwTelegram,
         ops_email_configured: wwwEmail || Boolean(platform.ops_email_configured),
         www_email_configured: wwwEmail,
+        www_telegram_configured: wwwTelegram,
         platform_intake_enabled: platformEnabled,
         auto_ack_enabled: (process.env.INTAKE_AUTO_ACK_ENABLED || "true").toLowerCase() !== "false",
         platform_reachable: platformReachable,
-        delivery_mode: wwwEmail ? "resend" : platformEnabled ? "platform" : "unconfigured"
+        delivery_mode: deliveryMode(wwwTelegram, wwwEmail)
       });
     };
   }

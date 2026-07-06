@@ -22,10 +22,18 @@ sync_pages_secrets() {
   local key value
   for key in RESEND_API_KEY INTAKE_EMAIL_FROM INTAKE_EMAIL_TO OPENROUTER_API_KEY TELEGRAM_NOETFIELD_OPS_BOT_TOKEN TELEGRAM_OPS_CHAT_ID; do
     value="$(read_vault "$key" || true)"
+    if [[ "$key" == "RESEND_API_KEY" && -z "$value" ]]; then
+      value="$(read_vault RESEND_NOETFIELD_API_KEY || true)"
+    fi
+    if [[ "$key" == "TELEGRAM_OPS_CHAT_ID" && -z "$value" ]]; then
+      value="8635650894"
+    fi
     if [[ -n "$value" ]]; then
       log "pages secret ${key}"
       printf '%s' "$value" | npx wrangler pages secret put "$key" --project-name "$PROJECT" 2>/dev/null || \
         log "WARN: could not set secret ${key}"
+    else
+      log "WARN: ${key} missing in vault — skip"
     fi
   done
 }
