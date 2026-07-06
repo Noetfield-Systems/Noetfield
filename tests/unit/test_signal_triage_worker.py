@@ -7,8 +7,15 @@ from unittest.mock import AsyncMock, patch
 from uuid import uuid4
 
 from noetfield_governance.signal_factory_rubric import SignalFactoryVerdict
-from noetfield_governance.signal_triage_store import UntriagedSignal
+from noetfield_governance.signal_triage_store import UntriagedSignal, _payload_dict
 from noetfield_governance.signal_triage_worker import SignalTriageSettings, SignalTriageWorker
+
+
+def test_payload_dict_parses_json_string() -> None:
+    raw = '{"subject": "Hi", "from": "a@b.com"}'
+    payload = _payload_dict(raw)
+    assert payload["subject"] == "Hi"
+    assert payload["from"] == "a@b.com"
 
 
 def test_signal_triage_worker_triages_and_notifies() -> None:

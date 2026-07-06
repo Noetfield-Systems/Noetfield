@@ -71,17 +71,18 @@ set_platform_variables() {
   [[ -n "$or_key" ]] && railway_cmd variable set --service "$API_SERVICE" --skip-deploys OPENROUTER_API_KEY="$or_key"
   [[ -n "$resend_key" ]] && railway_cmd variable set --service "$API_SERVICE" --skip-deploys RESEND_API_KEY="$resend_key"
   [[ -n "$resend_webhook_secret" ]] && railway_cmd variable set --service "$API_SERVICE" --skip-deploys RESEND_WEBHOOK_SECRET="$resend_webhook_secret"
-  local gmail_sa tg_token tg_chat sweep_enabled triage_enabled admin_secret
-  gmail_sa="$(read_gmail_service_account_json 2>/dev/null || true)"
+  local gmail_app_pw tg_token tg_chat sweep_enabled triage_enabled admin_secret
+  gmail_app_pw="$(read_gmail_app_password 2>/dev/null || true)"
   tg_token="$(read_platform_vault TELEGRAM_NOETFIELD_OPS_BOT_TOKEN 2>/dev/null || read_platform_vault TELEGRAM_BOT_TOKEN 2>/dev/null || true)"
   tg_chat="$(read_platform_vault TELEGRAM_OPS_CHAT_ID 2>/dev/null || true)"
   admin_secret="$(read_platform_vault ADMIN_DASHBOARD_SECRET 2>/dev/null || true)"
   sweep_enabled="${GMAIL_SWEEP_ENABLED:-false}"
   triage_enabled="${SIGNAL_TRIAGE_ENABLED:-false}"
-  if [[ -n "$gmail_sa" ]]; then
+  if [[ -n "$gmail_app_pw" ]]; then
     sweep_enabled="${GMAIL_SWEEP_ENABLED:-true}"
     triage_enabled="${SIGNAL_TRIAGE_ENABLED:-true}"
-    railway_cmd variable set --service "$API_SERVICE" --skip-deploys GMAIL_SERVICE_ACCOUNT_JSON="$gmail_sa"
+    railway_cmd variable set --service "$API_SERVICE" --skip-deploys GMAIL_APP_PASSWORD="$gmail_app_pw"
+    railway_cmd variable set --service "$API_SERVICE" --skip-deploys NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD="$gmail_app_pw"
   fi
   railway_cmd variable set --service "$API_SERVICE" --skip-deploys \
     GMAIL_SWEEP_ENABLED="$sweep_enabled" \

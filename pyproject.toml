@@ -22,7 +22,6 @@ dependencies = [
   "temporalio",
   "uvicorn",
   "pyyaml",
-  "google-auth",
   "requests",
 ]
 

@@ -26,33 +26,12 @@ read_platform_vault() {
   return 1
 }
 
-read_gmail_service_account_json() {
-  local inline file
-  inline="$(read_platform_vault GMAIL_SERVICE_ACCOUNT_JSON 2>/dev/null || true)"
-  if [[ -n "$inline" ]]; then
-    printf '%s' "$inline"
-    return 0
-  fi
-  for key in GMAIL_SERVICE_ACCOUNT_JSON_FILE GOOGLE_APPLICATION_CREDENTIALS; do
-    file="$(read_platform_vault "$key" 2>/dev/null || true)"
-    if [[ -n "$file" && -f "$file" ]]; then
-      cat "$file"
-      return 0
-    fi
-  done
-  for file in \
-    "${HOME}/.sourcea-secrets/noetfield-gmail-service-account.json" \
-    "${HOME}/.sourcea-secrets/gmail-service-account.json" \
-    "${HOME}/.sina/noetfield-gmail-service-account.json"; do
-    if [[ -f "$file" ]]; then
-      cat "$file"
-      return 0
-    fi
-  done
-  for key in GOOGLE_SERVICE_ACCOUNT_JSON NOETFIELD_GMAIL_SERVICE_ACCOUNT_JSON; do
-    inline="$(read_platform_vault "$key" 2>/dev/null || true)"
-    if [[ -n "$inline" ]]; then
-      printf '%s' "$inline"
+read_gmail_app_password() {
+  for key in GMAIL_APP_PASSWORD NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD; do
+    local val
+    val="$(read_platform_vault "$key" 2>/dev/null || true)"
+    if [[ -n "$val" ]]; then
+      printf '%s' "$val"
       return 0
     fi
   done
@@ -66,8 +45,8 @@ from pathlib import Path
 
 keys = [
     "ADMIN_DASHBOARD_SECRET",
-    "GMAIL_SERVICE_ACCOUNT_JSON",
-    "GMAIL_SERVICE_ACCOUNT_JSON_FILE",
+    "GMAIL_APP_PASSWORD",
+    "NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD",
     "TELEGRAM_NOETFIELD_OPS_BOT_TOKEN",
     "TELEGRAM_BOT_TOKEN",
     "TELEGRAM_OPS_CHAT_ID",
@@ -94,15 +73,9 @@ merged: dict[str, str] = {}
 for f in files:
     merged.update(parse(Path(f)))
 
-gmail_file_candidates = [
-    merged.get("GMAIL_SERVICE_ACCOUNT_JSON_FILE", ""),
-    merged.get("GOOGLE_APPLICATION_CREDENTIALS", ""),
-    str(Path.home() / ".sourcea-secrets/noetfield-gmail-service-account.json"),
-    str(Path.home() / ".sourcea-secrets/gmail-service-account.json"),
-]
-gmail_json = bool(merged.get("GMAIL_SERVICE_ACCOUNT_JSON") or merged.get("GOOGLE_SERVICE_ACCOUNT_JSON"))
-if not gmail_json:
-    gmail_json = any(Path(p).is_file() for p in gmail_file_candidates if p)
+gmail_app = bool(
+    merged.get("GMAIL_APP_PASSWORD") or merged.get("NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD")
+)
 
 tg = merged.get("TELEGRAM_NOETFIELD_OPS_BOT_TOKEN") or merged.get("TELEGRAM_BOT_TOKEN")
 print(
@@ -111,7 +84,7 @@ print(
             "vault_files": {Path(f).name: Path(f).is_file() for f in files},
             "resolved": {
                 "ADMIN_DASHBOARD_SECRET": bool(merged.get("ADMIN_DASHBOARD_SECRET")),
-                "GMAIL_SERVICE_ACCOUNT_JSON": gmail_json,
+                "GMAIL_APP_PASSWORD": gmail_app,
                 "TELEGRAM_OPS_BOT_TOKEN": bool(tg),
                 "TELEGRAM_OPS_CHAT_ID": bool(merged.get("TELEGRAM_OPS_CHAT_ID")),
                 "DATABASE_URL": bool(
@@ -131,9 +104,9 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
       shift
       read_platform_vault "${1:?key required}"
       ;;
-    gmail-json) read_gmail_service_account_json ;;
+    gmail-app-password) read_gmail_app_password ;;
     *)
-      echo "usage: $0 [status|get KEY|gmail-json]" >&2
+      echo "usage: $0 [status|get KEY|gmail-app-password]" >&2
       exit 2
       ;;
   esac

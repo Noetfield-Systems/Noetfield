@@ -124,11 +124,15 @@ class Settings(BaseSettings):
     )
     gmail_mailbox: str = Field(
         default="operations@noetfield.com",
-        description="Workspace mailbox to impersonate for Gmail API sweep.",
+        description="Workspace mailbox for IMAP operations inbox sweep.",
     )
-    gmail_service_account_json: SecretStr | None = Field(
+    gmail_app_password: SecretStr | None = Field(
         default=None,
-        description="Google service account JSON (domain-wide delegation) for Gmail API.",
+        description="Workspace app password for Gmail IMAP sweep.",
+        validation_alias=AliasChoices(
+            "GMAIL_APP_PASSWORD",
+            "NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD",
+        ),
     )
     gmail_processed_label: str = Field(
         default="nf-processed",

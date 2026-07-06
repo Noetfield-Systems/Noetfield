@@ -1,4 +1,4 @@
-"""Scheduled Gmail sweep — operations@ → signals (triage layer follows)."""
+"""Scheduled operations@ IMAP sweep → signals (Signal Factory triage follows)."""
 
 from __future__ import annotations
 
@@ -12,8 +12,9 @@ from uuid import UUID
 
 from noetfield_signals import IngestSignalCommand, SignalIngestionPipeline
 
-from noetfield_governance.gmail_client import GmailClient, message_to_signal_payload
+from noetfield_governance.gmail_imap_client import GmailImapClient
 from noetfield_governance.gmail_sweep_store import GmailSweepStore
+from noetfield_governance.inbox_message import message_to_signal_payload
 
 logger = logging.getLogger("noetfield.governance.gmail_sweep")
 
@@ -24,7 +25,7 @@ SIGNAL_TYPE = "operations_inbox_email"
 class GmailSweepSettings:
     enabled: bool
     mailbox: str
-    service_account_json: str
+    app_password: str
     processed_label: str
     search_query: str
     tenant_id: UUID
@@ -44,8 +45,8 @@ def _secret(value: object | None) -> str:
 def settings_from_platform(settings: object) -> GmailSweepSettings | None:
     if not bool(getattr(settings, "gmail_sweep_enabled", False)):
         return None
-    sa_json = _secret(getattr(settings, "gmail_service_account_json", None))
-    if not sa_json:
+    app_password = _secret(getattr(settings, "gmail_app_password", None)) or None
+    if not app_password:
         return None
     tenant_raw = str(getattr(settings, "operations_inbox_tenant_id", "") or "").strip()
     org_raw = str(getattr(settings, "operations_inbox_organization_id", "") or "").strip()
@@ -54,7 +55,7 @@ def settings_from_platform(settings: object) -> GmailSweepSettings | None:
     return GmailSweepSettings(
         enabled=True,
         mailbox=str(getattr(settings, "gmail_mailbox", "operations@noetfield.com") or "").strip(),
-        service_account_json=sa_json,
+        app_password=app_password,
         processed_label=str(getattr(settings, "gmail_processed_label", "nf-processed") or "nf-processed"),
         search_query=str(
             getattr(settings, "gmail_sweep_query", "label:INBOX -label:nf-processed") or ""
@@ -84,14 +85,15 @@ class GmailSweepWorker:
         sweep_settings: GmailSweepSettings,
         signal_pipeline: SignalIngestionPipeline,
         sweep_store: GmailSweepStore,
-        client: GmailClient | None = None,
+        client: GmailImapClient | None = None,
     ) -> None:
         self._settings = sweep_settings
         self._signal_pipeline = signal_pipeline
         self._store = sweep_store
-        self._client = client or GmailClient(
-            service_account_json=sweep_settings.service_account_json,
-            impersonate_user=sweep_settings.mailbox,
+        self._client = client or GmailImapClient(
+            mailbox=sweep_settings.mailbox,
+            app_password=sweep_settings.app_password,
+            processed_label=sweep_settings.processed_label,
         )
         self._lock = asyncio.Lock()
 
@@ -126,11 +128,11 @@ class GmailSweepWorker:
                     observed_at=_parse_observed_at(message.received_at),
                     payload=payload,
                     provenance={
-                        "ingestion": "gmail_sweep",
+                        "ingestion": "imap_sweep",
                         "mailbox": self._settings.mailbox,
                         "gmail_thread_id": message.thread_id,
                     },
-                    actor_id="gmail-sweep-worker",
+                    actor_id="imap-sweep-worker",
                 )
                 signal, _trace = await self._signal_pipeline.ingest(command)
                 await self._store.mark_processed(
@@ -166,7 +168,7 @@ class GmailSweepWorker:
                 metadata=result,
             )
             logger.info(
-                "gmail_sweep_completed seen=%s ingested=%s skipped=%s",
+                "imap_sweep_completed seen=%s ingested=%s skipped=%s",
                 seen,
                 ingested,
                 skipped,
@@ -174,7 +176,7 @@ class GmailSweepWorker:
             return result
         except Exception as exc:
             err = str(exc)[:500]
-            logger.exception("gmail_sweep_failed %s", err)
+            logger.exception("imap_sweep_failed %s", err)
             await self._store.finish_run(
                 run_id,
                 status="failed",
@@ -197,6 +199,7 @@ class GmailSweepWorker:
         latest = await self._store.latest_run()
         return {
             "enabled": True,
+            "transport": "imap",
             "mailbox": self._settings.mailbox,
             "search_query": self._settings.search_query,
             "processed_label": self._settings.processed_label,
@@ -245,7 +248,7 @@ async def start_gmail_sweep_scheduler(settings: object) -> None:
             try:
                 await worker.run_once()
             except Exception:
-                logger.exception("gmail_sweep_scheduler_tick_failed")
+                logger.exception("imap_sweep_scheduler_tick_failed")
             await asyncio.sleep(interval)
 
     if _gmail_sweep_task is None or _gmail_sweep_task.done():

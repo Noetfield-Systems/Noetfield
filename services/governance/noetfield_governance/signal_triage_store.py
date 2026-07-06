@@ -20,6 +20,20 @@ class UntriagedSignal:
     received_at: object
 
 
+def _payload_dict(raw: object) -> dict[str, Any]:
+    if raw is None:
+        return {}
+    if isinstance(raw, dict):
+        return raw
+    if isinstance(raw, str):
+        try:
+            parsed = json.loads(raw)
+            return parsed if isinstance(parsed, dict) else {}
+        except json.JSONDecodeError:
+            return {}
+    return dict(raw)  # type: ignore[arg-type]
+
+
 class SignalTriageStore:
     def __init__(self, database_url: str) -> None:
         self._database_url = database_url.replace("postgresql+asyncpg://", "postgresql://")
@@ -58,7 +72,7 @@ class SignalTriageStore:
             )
         out: list[UntriagedSignal] = []
         for row in rows:
-            payload = dict(row["payload"] or {})
+            payload = _payload_dict(row["payload"])
             out.append(
                 UntriagedSignal(
                     signal_id=UUID(str(row["id"])),

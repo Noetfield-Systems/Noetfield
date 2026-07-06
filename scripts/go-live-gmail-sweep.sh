@@ -37,20 +37,21 @@ sync_railway_env() {
   platform_vault_status | python3 -m json.tool
 
   log "Syncing Railway env on service ${API_SERVICE}…"
-  local gmail_sa tg_token tg_chat admin_secret
-  gmail_sa="$(read_gmail_service_account_json 2>/dev/null || true)"
+  local gmail_app_pw tg_token tg_chat admin_secret
+  gmail_app_pw="$(read_gmail_app_password 2>/dev/null || true)"
   tg_token="$(read_platform_vault TELEGRAM_NOETFIELD_OPS_BOT_TOKEN 2>/dev/null || read_platform_vault TELEGRAM_BOT_TOKEN 2>/dev/null || true)"
   tg_chat="$(read_platform_vault TELEGRAM_OPS_CHAT_ID 2>/dev/null || true)"
   admin_secret="$(read_platform_vault ADMIN_DASHBOARD_SECRET 2>/dev/null || true)"
 
   local sweep_enabled="false" triage_enabled="false"
-  if [[ -n "$gmail_sa" ]]; then
+  if [[ -n "$gmail_app_pw" ]]; then
     sweep_enabled="true"
     triage_enabled="true"
-    railway_cmd variable set --service "$API_SERVICE" --skip-deploys GMAIL_SERVICE_ACCOUNT_JSON="$gmail_sa"
-    log "OK GMAIL_SERVICE_ACCOUNT_JSON"
+    railway_cmd variable set --service "$API_SERVICE" --skip-deploys GMAIL_APP_PASSWORD="$gmail_app_pw"
+    railway_cmd variable set --service "$API_SERVICE" --skip-deploys NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD="$gmail_app_pw"
+    log "OK GMAIL_APP_PASSWORD (IMAP)"
   else
-    log "WARN: Gmail service account JSON not found in vault paths — sweep stays disabled"
+    log "WARN: NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD missing — sweep stays disabled"
   fi
 
   if [[ -n "$tg_token" && -n "$tg_chat" ]]; then

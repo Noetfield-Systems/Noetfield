@@ -1,4 +1,4 @@
-"""Gmail message parsing and sweep worker tests."""
+"""Gmail / IMAP sweep worker tests."""
 
 from __future__ import annotations
 
@@ -7,37 +7,14 @@ from datetime import datetime, timezone
 from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
 
-from noetfield_governance.gmail_client import GmailMessage, message_to_signal_payload, parse_gmail_message
+from noetfield_governance.inbox_message import GmailMessage, message_to_signal_payload
 from noetfield_governance.gmail_sweep_worker import GmailSweepSettings, GmailSweepWorker
-
-
-def test_parse_gmail_message_extracts_headers_and_body() -> None:
-    payload = {
-        "id": "msg123",
-        "threadId": "thr456",
-        "snippet": "Hello ops",
-        "payload": {
-            "headers": [
-                {"name": "Subject", "value": "Test subject"},
-                {"name": "From", "value": "lead@example.com"},
-                {"name": "To", "value": "operations@noetfield.com"},
-                {"name": "Date", "value": "Mon, 05 Jul 2026 12:00:00 +0000"},
-            ],
-            "mimeType": "text/plain",
-            "body": {"data": "SGVsbG8gb3Bz"},
-        },
-    }
-    message = parse_gmail_message(payload)
-    assert message.message_id == "msg123"
-    assert message.subject == "Test subject"
-    assert message.from_addr == "lead@example.com"
-    assert "Hello" in message.body_text
 
 
 def test_message_to_signal_payload_shape() -> None:
     message = GmailMessage(
-        message_id="msg123",
-        thread_id="thr456",
+        message_id="imap:42",
+        thread_id="imap-thread:42",
         subject="Subject",
         from_addr="lead@example.com",
         to_addrs=["operations@noetfield.com"],
@@ -49,7 +26,7 @@ def test_message_to_signal_payload_shape() -> None:
     )
     payload = message_to_signal_payload(message, mailbox="operations@noetfield.com")
     assert payload["channel"] == "operations_inbox"
-    assert payload["gmail_message_id"] == "msg123"
+    assert payload["gmail_message_id"] == "imap:42"
 
 
 def test_gmail_sweep_worker_skips_processed_messages() -> None:
@@ -57,9 +34,9 @@ def test_gmail_sweep_worker_skips_processed_messages() -> None:
         settings = GmailSweepSettings(
             enabled=True,
             mailbox="operations@noetfield.com",
-            service_account_json='{"type":"service_account","client_email":"x","private_key":"y"}',
+            app_password="app-pass",
             processed_label="nf-processed",
-            search_query="label:INBOX",
+            search_query="INBOX",
             tenant_id=uuid4(),
             organization_id=uuid4(),
             max_messages=5,
@@ -78,7 +55,7 @@ def test_gmail_sweep_worker_skips_processed_messages() -> None:
         client.fetch_message.return_value = GmailMessage(
             message_id="new",
             thread_id="t2",
-            subject="Inbound",
+            subject="Hi",
             from_addr="lead@example.com",
             to_addrs=["operations@noetfield.com"],
             cc_addrs=[],
@@ -87,7 +64,6 @@ def test_gmail_sweep_worker_skips_processed_messages() -> None:
             body_text="body",
             headers={},
         )
-        client.mark_processed.return_value = None
 
         pipeline = AsyncMock()
         pipeline.ingest.return_value = (
@@ -111,3 +87,35 @@ def test_gmail_sweep_worker_skips_processed_messages() -> None:
         client.mark_processed.assert_called_once()
 
     asyncio.run(run())
+
+
+def test_settings_from_platform_requires_app_password() -> None:
+    from types import SimpleNamespace
+
+    from noetfield_governance.gmail_sweep_worker import settings_from_platform
+
+    settings = SimpleNamespace(
+        gmail_sweep_enabled=True,
+        gmail_app_password="app-pass",
+        gmail_mailbox="operations@noetfield.com",
+        gmail_processed_label="nf-processed",
+        gmail_sweep_query="INBOX",
+        operations_inbox_tenant_id="00000000-0000-4000-8000-000000000001",
+        operations_inbox_organization_id="00000000-0000-4000-8000-000000000002",
+        gmail_sweep_max_messages=10,
+    )
+    parsed = settings_from_platform(settings)
+    assert parsed is not None
+    assert parsed.app_password == "app-pass"
+
+    missing = SimpleNamespace(
+        gmail_sweep_enabled=True,
+        gmail_app_password=None,
+        gmail_mailbox="operations@noetfield.com",
+        gmail_processed_label="nf-processed",
+        gmail_sweep_query="INBOX",
+        operations_inbox_tenant_id="00000000-0000-4000-8000-000000000001",
+        operations_inbox_organization_id="00000000-0000-4000-8000-000000000002",
+        gmail_sweep_max_messages=10,
+    )
+    assert settings_from_platform(missing) is None
