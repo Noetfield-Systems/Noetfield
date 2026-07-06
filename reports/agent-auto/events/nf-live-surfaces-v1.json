@@ -1,6 +1,6 @@
 {
   "schema_version": "nf-live-surfaces-v1",
-  "generated_at": "2026-06-28T14:08:44Z",
+  "generated_at": "2026-07-06T13:25:41Z",
   "agent_id": "noetfield_cloud",
   "plane": "noetfield_cloud",
   "product_now_line": "no pending next_tasks",
@@ -8,7 +8,7 @@
   "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES",
   "defer_active": true,
   "w3_send_ready": false,
-  "w3_email_send_deferred": false,
+  "w3_email_send_deferred": true,
   "commercial_blockers": [
     "factory_now",
     "w3_critic_circle",
@@ -18,16 +18,16 @@
     "w3_send_ready"
   ],
   "advisory_line": "advisory \u00b7 idle \u00b7 SourceA Sina read \u2192 Noetfield compile \u2192 TrustField send",
-  "portfolio_parent_at": "2026-06-27T19:30:32Z",
-  "mono_nerve_ok": true,
+  "portfolio_parent_at": "2026-07-06T08:29:32Z",
+  "mono_nerve_ok": false,
   "operations_inbox": "ACTIVE",
-  "gate_ok": true,
-  "context_stale": false,
+  "gate_ok": false,
+  "context_stale": true,
   "voyage_ok": true,
   "pending_task": null,
-  "git_sha": "7b8058d8",
+  "git_sha": "86fcd02e",
   "routing_pending": null,
   "quote_rule": "Quote product_now_line AND email_send_defer_line \u2014 not chat memory",
-  "heal": null,
+  "heal": "make nf-onboard",
   "surfaces_ok": true
 }

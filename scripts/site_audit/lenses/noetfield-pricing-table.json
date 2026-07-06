@@ -1,0 +1,35 @@
+{
+  "schema": "nf-site-audit-pricing-table-v1",
+  "version": "1.0.0",
+  "owner": "website-platform",
+  "max_nav_fingerprints": 2,
+  "expected_entity": "Noetfield Systems Inc.",
+  "header_partial_sha256": "8cb0400f5e22c4e10fb2af5c6c27f3436b2b66590b2468688acd65399164e11a",
+  "required_cta_phrases": [
+    "Apply for pilot",
+    "Request Trust Brief",
+    "Start sandbox"
+  ],
+  "allowed_phrases": [
+    "$2,500",
+    "$2k",
+    "$2k–10k",
+    "$2,000",
+    "$10,000",
+    "$10k",
+    "from $2,500",
+    "from $10,000",
+    "free",
+    "Free",
+    "14-day",
+    "50 evaluate"
+  ],
+  "money_paths": [
+    "/pricing/",
+    "/copilot/pilot/",
+    "/trust-brief/",
+    "/trust-brief/intake/",
+    "/start/",
+    "/enterprise/"
+  ]
+}

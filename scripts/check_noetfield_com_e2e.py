@@ -22,8 +22,15 @@ HOME_NEEDLES = (
     "Apply for pilot",
     "Copilot Governance Pack",
     "Trust Brief",
-    "Board-grade trust",
+    "Start sandbox",
     "operations@noetfield.com",
+)
+
+DEMO_NEEDLES = (
+    "nf26-demoStepper",
+    "nf26-eventTrace",
+    "noetfield-agent-trace-demo.js",
+    "Human-in-the-loop",
 )
 
 PILOT_NEEDLES = ("nfPilotApplyForm", "Copilot Governance Pack", "tamper-evident")
@@ -144,6 +151,14 @@ def main() -> int:
             print(f"OK   pilot: {needle}")
         else:
             print(f"FAIL pilot missing: {needle}", file=sys.stderr)
+            fail += 1
+
+    _, demo = fetch(f"{BASE}/copilot/demo/")
+    for needle in DEMO_NEEDLES:
+        if needle in demo:
+            print(f"OK   copilot/demo: {needle}")
+        else:
+            print(f"FAIL copilot/demo missing: {needle}", file=sys.stderr)
             fail += 1
 
     for path, needles in AI_FACTORY_NEEDLES:

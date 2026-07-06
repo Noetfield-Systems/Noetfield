@@ -40,7 +40,8 @@ origins = os.getenv(
     "CORS_ORIGINS",
     "http://localhost:3000,http://127.0.0.1:3000,"
     "http://localhost:13080,http://127.0.0.1:13080,"
-    "http://localhost:13000,http://127.0.0.1:13000",
+    "http://localhost:13000,http://127.0.0.1:13000,"
+    "https://www.noetfield.com,https://noetfield.com",
 ).split(",")
 
 app.add_middleware(

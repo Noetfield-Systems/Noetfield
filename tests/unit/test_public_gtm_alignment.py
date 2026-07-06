@@ -91,7 +91,7 @@ def test_homepage_pro_ui_frozen_structure() -> None:
     assert len(lines) >= 320, f"homepage has {len(lines)} lines; expected ≥320 (pro UI floor)"
     assert text.count("<section") == 5, "homepage must keep four-act + mega CTA (5 sections)"
     assert "nfLiveProofHero" in text
-    assert "Governance simulation engine" in text
+    assert "Governance playground" in text
     assert "nfScenarioDeck" in text
     assert "Local-first simulation" in text
     assert "nf-stat-bar" in text

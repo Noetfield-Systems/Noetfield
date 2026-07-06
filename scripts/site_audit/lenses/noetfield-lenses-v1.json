@@ -1,0 +1,179 @@
+{
+  "_law": "L5 founder-gated. Agents may ADD checks via PR; never weaken or delete a failing check.",
+  "schema": "nf-site-audit-lenses-v1",
+  "version": "2.0.0",
+  "surface": "www.noetfield.com",
+  "merged_from": [
+    "site-audit-machine/lenses.json v1.0.0",
+    "mechanical-gate-v2-additions.json"
+  ],
+  "lenses": {
+    "render_integrity": {
+      "role": "Any human with eyes — catches what static generators leak",
+      "checks": [
+        {
+          "id": "RI-1",
+          "severity": "P0",
+          "name": "unrendered_template_var",
+          "regex": "\\{[A-Z_]{2,}\\}|\\{\\{[^}]+\\}\\}|\\$\\{[a-zA-Z_]+\\}|%[A-Z_]{3,}%",
+          "why": "Literal {ENTITY}-style variables shipped to prod."
+        },
+        {
+          "id": "RI-2",
+          "severity": "P0",
+          "name": "placeholder_counter",
+          "regex": "(?:>|\\s)(?:—|--|N/A|TBD|XXX|\\?\\?\\?)(?:</\\w+>|\\s)*(?:jobs|verified|clients|stars|★|score|/100)",
+          "why": "Em-dash stats read as zero proof on a proof-branded site."
+        },
+        {
+          "id": "RI-3",
+          "severity": "P1",
+          "name": "lorem_or_sample_copy",
+          "regex": "lorem ipsum|PLACEHOLDER|sample text here|coming soon",
+          "why": "Draft copy in production."
+        },
+        {
+          "id": "RI-4",
+          "severity": "P1",
+          "name": "broken_internal_anchor",
+          "structural": "every href=#x must have matching id=x on page",
+          "why": "Dead in-page jumps."
+        }
+      ]
+    },
+    "buyer_founder": {
+      "role": "Startup founder with budget, 90 seconds of patience",
+      "checks": [
+        {
+          "id": "BF-1",
+          "severity": "P0",
+          "name": "mailto_cta_on_money_page",
+          "structural": "primary CTA on pricing/pilot pages resolves to mailto:",
+          "why": "mailto = no intake, no receipt, no funnel."
+        },
+        {
+          "id": "BF-2",
+          "severity": "P1",
+          "name": "price_consistency",
+          "structural": "every $ figure cross-checked against noetfield-pricing-table.json",
+          "why": "Cross-page price drift confuses buyers."
+        },
+        {
+          "id": "BF-3",
+          "severity": "P1",
+          "name": "cta_count_above_fold",
+          "structural": "count distinct CTAs in hero; flag if > 3",
+          "why": "Decision paralysis above the fold."
+        },
+        {
+          "id": "BF-5",
+          "severity": "P2",
+          "name": "stable_cta_triad_homepage",
+          "structural": "homepage must contain Apply for pilot, Request Trust Brief, Start sandbox",
+          "why": "NF UI build law — three stable entry paths; P2 until founder copy verdict (UPG-NF-PUB)."
+        }
+      ]
+    },
+    "enterprise_procurement": {
+      "role": "Procurement officer / security reviewer",
+      "checks": [
+        {
+          "id": "EP-1",
+          "severity": "P0",
+          "name": "legal_pages_exist",
+          "structural": "privacy + terms reachable from footer, return 200",
+          "why": "Instant procurement fail without legal pages."
+        },
+        {
+          "id": "EP-3",
+          "severity": "P0",
+          "name": "entity_consistency",
+          "structural": "legal entity name identical on every page footer",
+          "why": "Entity mismatch breaks diligence."
+        }
+      ]
+    },
+    "seo_machine": {
+      "role": "Googlebot + AI crawlers",
+      "checks": [
+        {
+          "id": "SM-1",
+          "severity": "P1",
+          "name": "one_h1_per_page",
+          "structural": "exactly one <h1>"
+        },
+        {
+          "id": "SM-2",
+          "severity": "P1",
+          "name": "meta_complete",
+          "structural": "title<=60ch, description 50-160ch, og:image present"
+        },
+        {
+          "id": "SM-5",
+          "severity": "P2",
+          "name": "internal_orphans",
+          "structural": "flag crawled pages with 0 inbound internal links"
+        }
+      ]
+    },
+    "nav_coherence": {
+      "role": "Returning visitor building a mental map",
+      "checks": [
+        {
+          "id": "NC-1",
+          "severity": "P0",
+          "name": "nav_fingerprint_limit",
+          "structural": "max 2 nav fingerprints site-wide; disk uses assets/partials/header.html SSOT",
+          "why": "Two brains on one domain confuses buyers."
+        },
+        {
+          "id": "NC-2",
+          "severity": "P1",
+          "name": "header_partial_golden_sha",
+          "structural": "header partial sha256 matches pricing-table golden"
+        }
+      ]
+    },
+    "deploy_integrity": {
+      "role": "Deploy boundary — disk vs live vs denylist",
+      "checks": [
+        {
+          "id": "DI-1",
+          "severity": "P1",
+          "name": "spa_fallback_detect",
+          "structural": "same body sha256 as homepage on non-home path => SPA_FALLBACK row, excluded from pass math"
+        },
+        {
+          "id": "DI-2",
+          "severity": "P0",
+          "name": "denylist_path_not_html",
+          "structural": "crawl must not treat PUBLIC_OUTPUT_DENYLIST probe paths as buyer HTML"
+        }
+      ]
+    },
+    "receipt_hygiene": {
+      "role": "Audit output must not leak founder machine paths",
+      "checks": [
+        {
+          "id": "RH-1",
+          "severity": "P0",
+          "name": "no_local_path_in_public_html",
+          "regex": "/Users/[^\\s\"'<>]+|~/[^\\s\"'<>]+",
+          "why": "Founder path leaks in public HTML or receipts."
+        }
+      ]
+    },
+    "investor_vc": {
+      "role": "VC associate — 3-minute diligence pass",
+      "checks": [
+        {
+          "id": "IV-3",
+          "severity": "P2",
+          "name": "positioning_single_sentence",
+          "llm": "Can a stranger state what Noetfield sells in one sentence after the hero? Score 0-5.",
+          "why": "Positioning sprawl on homepage."
+        }
+      ]
+    }
+  }
+}

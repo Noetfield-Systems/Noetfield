@@ -1,0 +1,39 @@
+{
+  "schema": "nf-site-audit-registry-v1",
+  "version": "2.0.0",
+  "updated_at": "2026-07-06",
+  "owner": "website-platform",
+  "surface": "www.noetfield.com",
+  "law": "docs/www/NF_SITE_AUDIT_MACHINE_LOCKED_v1.md",
+  "lenses": "scripts/site_audit/lenses/noetfield-lenses-v1.json",
+  "pricing_table": "scripts/site_audit/lenses/noetfield-pricing-table.json",
+  "entrypoints": {
+    "cli": "scripts/nf_site_audit_v1.py",
+    "disk_gate": "scripts/verify-site-audit.sh",
+    "live_gate": "python3 scripts/nf_site_audit_v1.py --mode live --fail-on P0"
+  },
+  "receipt_dir": "reports/www-audit/receipts",
+  "manifest": "reports/www-audit/MANIFEST.json",
+  "modes": {
+    "disk": {
+      "runner": "ci-or-mac",
+      "seed": "governance/ROUTE_INVENTORY.json",
+      "purpose": "PR + pre-ship regression on repo HTML"
+    },
+    "live": {
+      "runner": "railway-or-founder-mac",
+      "seed": "sitemap.xml + BFS",
+      "purpose": "L4 independent verify after deploy"
+    }
+  },
+  "verify_law": {
+    "fixer_not_verifier": true,
+    "min_seconds_after_deploy": 60,
+    "receipt_hygiene": "no /Users or ~/ paths in receipt JSON"
+  },
+  "autorun_target": {
+    "cadence": "weekly",
+    "channel": "railway-cron-or-cf-worker",
+    "status": "registry-only"
+  }
+}

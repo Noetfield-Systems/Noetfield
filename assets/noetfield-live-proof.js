@@ -711,7 +711,7 @@
         ' <br><a href="/result/' +
         encodeURIComponent(rid) +
         '">Open full result</a> · ' +
-        '<a href="/cognitive-dashboard/?sandbox=1">Continue in sandbox</a>';
+        '<a href="/start/?sandbox=1">Continue in sandbox</a>';
     }
   }
 

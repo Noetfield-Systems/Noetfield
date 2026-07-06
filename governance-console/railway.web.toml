@@ -1,0 +1,10 @@
+# Governance Console Next UI — /workspace on www (proxy from Cloudflare)
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "governance-console/Dockerfile.www"
+
+[deploy]
+healthcheckPath = "/workspace"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

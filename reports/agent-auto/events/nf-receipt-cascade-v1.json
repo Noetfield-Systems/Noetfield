@@ -1,11 +1,25 @@
 {
   "schema_version": "nf-receipt-cascade-v1",
-  "generated_at": "2026-06-28T14:08:40Z",
-  "ok": true,
-  "failures": [],
-  "nodes": [],
-  "ssot": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_orient_routing_v1.json",
-  "heal": null,
+  "generated_at": "2026-07-06T13:25:40Z",
+  "ok": false,
+  "failures": [
+    {
+      "node_id": "nf_mono_nerve",
+      "reason": "ok=false",
+      "ok": false
+    },
+    {
+      "node_id": "nf_stale_guard",
+      "reason": "context_stale=true",
+      "ok": false
+    }
+  ],
+  "nodes": [
+    "nf_mono_nerve",
+    "nf_stale_guard"
+  ],
+  "ssot": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/data/nf_orient_routing_v1.json",
+  "heal": "make nf-onboard",
   "orient_read_chain": [
     "entry/START_HERE_LOCKED_v1.md",
     "ROUTING_CARD.md",

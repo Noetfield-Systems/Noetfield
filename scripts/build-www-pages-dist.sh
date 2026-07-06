@@ -11,6 +11,7 @@ log() { printf '[build-www-pages-dist] %s\n' "$*"; }
 log "sync greeting SSOT…"
 python3 scripts/sync_chat_greeting_asset.py
 python3 scripts/generate-cf-redirects.py
+python3 scripts/generate-www-deny-middleware.py
 
 log "clean ${DIST}"
 rm -rf "$DIST"
@@ -41,5 +42,8 @@ else
 fi
 
 cp "${ROOT}/_redirects" "${DIST}/_redirects"
+python3 scripts/purge-www-denylist-from-dist.py
 node scripts/bundle-pages-functions.mjs
+chmod +x scripts/verify-www-pages-dist.sh
+bash scripts/verify-www-pages-dist.sh
 log "done — ${DIST} ($(find "$DIST" -type f | wc -l | tr -d ' ') files) + functions/"

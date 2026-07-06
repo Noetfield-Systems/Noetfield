@@ -1,105 +1,105 @@
 {
   "schema_version": "nf-session-gate-v1",
-  "ok": true,
+  "ok": false,
   "agent_id": "noetfield_cloud",
   "role": "cloud",
-  "generated_at": "2026-06-28T14:08:48Z",
-  "repo_root": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield",
+  "generated_at": "2026-07-06T13:25:40Z",
+  "repo_root": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield",
   "gates": [
     {
       "gate": "entry/START_HERE_LOCKED_v1.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/entry/START_HERE_LOCKED_v1.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/entry/START_HERE_LOCKED_v1.md"
     },
     {
       "gate": "ROUTING_CARD.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/ROUTING_CARD.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/ROUTING_CARD.md"
     },
     {
       "gate": "docs/ops/NF_GAOS_W0_LOCKED_v1.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W0_LOCKED_v1.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/NF_GAOS_W0_LOCKED_v1.md"
     },
     {
       "gate": "docs/ops/NF_GAOS_W1_LOCKED_v1.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W1_LOCKED_v1.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/NF_GAOS_W1_LOCKED_v1.md"
     },
     {
       "gate": "docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md"
     },
     {
       "gate": "docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md"
     },
     {
       "gate": "docs/ops/NF_ANTI_STALENESS_MAXIMUM_FIX_SET_LOCKED_v1.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_ANTI_STALENESS_MAXIMUM_FIX_SET_LOCKED_v1.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/NF_ANTI_STALENESS_MAXIMUM_FIX_SET_LOCKED_v1.md"
     },
     {
       "gate": "data/nf_anti_staleness_max_v1.json",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_anti_staleness_max_v1.json"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/data/nf_anti_staleness_max_v1.json"
     },
     {
       "gate": "data/nf_orient_routing_v1.json",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_orient_routing_v1.json"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/data/nf_orient_routing_v1.json"
     },
     {
       "gate": "data/nf_mono_nerve_wiring_v1.json",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_mono_nerve_wiring_v1.json"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/data/nf_mono_nerve_wiring_v1.json"
     },
     {
       "gate": "os/NF_REPO_CAPABILITY_MAP.json",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_REPO_CAPABILITY_MAP.json"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/NF_REPO_CAPABILITY_MAP.json"
     },
     {
       "gate": "os/NF_UNIFIED_ROUTING_GRAPH.json",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_UNIFIED_ROUTING_GRAPH.json"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/NF_UNIFIED_ROUTING_GRAPH.json"
     },
     {
       "gate": "os/NF_SSOT_INVENTORY.json",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_SSOT_INVENTORY.json"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/NF_SSOT_INVENTORY.json"
     },
     {
       "gate": "os/NF_BAVT_STRATEGY.json",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_BAVT_STRATEGY.json"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/NF_BAVT_STRATEGY.json"
     },
     {
       "gate": "os/plan.json",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/plan.json"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/plan.json"
     },
     {
       "gate": "os/SHIP_NOW.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/SHIP_NOW.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/SHIP_NOW.md"
     },
     {
       "gate": "PROJECT_BOUNDARIES_LOCKED.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/PROJECT_BOUNDARIES_LOCKED.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/PROJECT_BOUNDARIES_LOCKED.md"
     },
     {
       "gate": ".cursor/agent-memory/MEMORY_LOCKED.yaml",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/.cursor/agent-memory/MEMORY_LOCKED.yaml"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/.cursor/agent-memory/MEMORY_LOCKED.yaml"
     },
     {
       "gate": ".cursor/incidents/REGISTRY.md",
       "ok": true,
-      "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/.cursor/incidents/REGISTRY.md"
+      "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/.cursor/incidents/REGISTRY.md"
     },
     {
       "gate": "memory_R-007",
@@ -115,7 +115,7 @@
     },
     {
       "gate": "mono_defer_ssot",
-      "ok": true,
+      "ok": false,
       "path": "/Users/sinakazemnezhad/Desktop/SourceA/data/commercial-email-send-defer-v1.json"
     },
     {
@@ -143,5 +143,5 @@
       "count": 0
     }
   ],
-  "next": "make nf-live-orient"
+  "next": "fix missing gates before edits"
 }

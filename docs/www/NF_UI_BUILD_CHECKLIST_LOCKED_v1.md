@@ -27,6 +27,7 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 ```bash
 make nf-ui-checklist   # must PASS before ship
+make verify-site-audit # disk site-audit P0 (see NF_SITE_AUDIT_MACHINE_LOCKED_v1.md)
 ```
 
 ---

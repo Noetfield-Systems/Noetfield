@@ -67,6 +67,29 @@ done
 python3 -m pytest tests/unit/test_public_gtm_alignment.py tests/unit/test_public_simplification.py -q || fail=1
 ok "public GTM + simplification unit tests"
 
+# 7 — Commercial agentic (demo stepper + trial + footer links)
+chmod +x scripts/verify-commercial-agentic.sh
+./scripts/verify-commercial-agentic.sh || fail=1
+ok "commercial agentic surfaces"
+
+# 7b — Interactive fidelity anti-downgrade (CRITICAL — R-012)
+chmod +x scripts/verify-www-interactive-fidelity.sh
+./scripts/verify-www-interactive-fidelity.sh || fail=1
+ok "www interactive fidelity (no downgrade)"
+
+# 8 — Commercial agentic unit tests
+python3 -m pytest tests/unit/test_commercial_agentic.py -q || fail=1
+ok "commercial agentic unit tests"
+
+# 9 — Site-audit machine v2 (disk / P0)
+chmod +x scripts/verify-site-audit.sh
+./scripts/verify-site-audit.sh || fail=1
+ok "site-audit disk P0 gate"
+
+# 10 — Site-audit unit tests
+python3 -m pytest tests/unit/test_site_audit_machine.py -q || fail=1
+ok "site-audit machine unit tests"
+
 if [[ "$fail" -ne 0 ]]; then
   echo "Run: python3 scripts/rebuild-www-v6.py && bash scripts/verify-ui-build-checklist.sh" >&2
   exit 1

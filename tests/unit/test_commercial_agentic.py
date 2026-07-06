@@ -22,6 +22,15 @@ def test_demo_page_has_interactive_agent_trace() -> None:
     assert "nf26-demoStepper" in text
     assert "nf26-eventTrace" in text
     assert "Human-in-the-loop" in text
+    assert "noetfield-agent-trace-demo.js" in text
+
+
+def test_demo_agent_trace_script_on_disk() -> None:
+    script = ROOT / "assets" / "noetfield-agent-trace-demo.js"
+    text = script.read_text(encoding="utf-8")
+    assert script.is_file()
+    assert "nf26-demoStepper" in text
+    assert "nf26-eventTrace" in text
 
 
 def test_trial_page_positions_sandbox_not_fourth_sku() -> None:
@@ -39,6 +48,12 @@ def test_trial_page_links_start_sandbox() -> None:
 
 def test_header_links_demo_and_trial() -> None:
     text = HEADER.read_text(encoding="utf-8")
+    assert "/copilot/demo/" in text
+    assert "/copilot/trial/" in text
+
+
+def test_footer_links_demo_and_trial() -> None:
+    text = (ROOT / "assets" / "partials" / "footer.html").read_text(encoding="utf-8")
     assert "/copilot/demo/" in text
     assert "/copilot/trial/" in text
 

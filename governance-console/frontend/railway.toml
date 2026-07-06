@@ -1,0 +1,12 @@
+# Governance Console Next UI — served at /workspace on www via Cloudflare proxy
+# Deploy: bash scripts/deploy-gov-sandbox-railway.sh
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile.www"
+
+[deploy]
+healthcheckPath = "/workspace"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

@@ -91,6 +91,10 @@ hard_rules:
     rule: Cursor AUTO-RUN is not P0. Commercial outreach and calls = agentic layer only; founder Hub + ASK. NF-CLOUD = validators + www/GTM assets — never send email/call as founder.
     source: docs/ops/FOUNDER_AGENTIC_COMMERCIAL_AND_NO_CURSOR_AUTORUN_LOCKED_v1.md
     since: "2026-06-10"
+  - id: R-012
+    rule: NEVER downgrade interactive buyer sandbox/demo surfaces (nfSsotDemo, nf26-demoStepper, nfLiveProofForm, agent trace, trial evaluate) when upgrading copy, CI, asset pins, or audit gates. Static nf-workspace-mock is not a real sandbox. Run verify-www-interactive-fidelity.sh before merge.
+    incident: INCIDENT-2026-07-06-001-www-sandbox-downgrade
+    since: "2026-07-06"
 
 recurring_mistakes:
   - id: M-001
@@ -113,6 +117,11 @@ recurring_mistakes:
     occurrences: 1
     last_seen: "2026-06-06"
     corrective_action: R-009 block + extend sync-sourceA-desktop.sh (founder)
+  - id: M-005
+    pattern: Replacing live/interactive www demo or sandbox with static mocks or motion-only widgets while claiming validator/audit upgrade
+    occurrences: 2
+    last_seen: "2026-07-06"
+    corrective_action: R-012 + verify-www-interactive-fidelity.sh + restore copilot-demo-nf26 template; never bulk pin-bump from stale generator output
 
 lessons:
   - id: L-001
