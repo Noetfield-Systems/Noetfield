@@ -12,6 +12,7 @@ tests/
 packages/
 infra/
 ops/
+var/
 apps/
 _archive/
 Noetfield-All-Documents/

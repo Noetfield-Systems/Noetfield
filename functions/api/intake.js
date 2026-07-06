@@ -111,11 +111,13 @@ var require_intake_email = __commonJS({
       const rid = body.request_id || intakeId;
       return "Hi" + name + ",\n\nYour message was saved instantly. Operations at Noetfield will follow up within one business day.\n\nReference: " + rid + "\nIntake ID: " + intakeId + "\n\nReply to this email or write " + CANONICAL + " \u2014 include your Request ID in any follow-up.\n\n\u2014 Noetfield Operations\n" + CANONICAL + "\n";
     }
-    async function sendResend({ from, to, subject, text, replyTo }) {
+    async function sendResend({ from, to, subject, text, replyTo, requestId }) {
       const key = (process.env.RESEND_API_KEY || "").trim();
       if (!key) return { ok: false, error: "missing_api_key" };
       const payload = { from, to, subject, text };
       if (replyTo) payload.reply_to = replyTo;
+      const rid = String(requestId || "").trim().toUpperCase();
+      if (rid) payload.tags = [{ name: "request_id", value: rid }];
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -150,7 +152,8 @@ var require_intake_email = __commonJS({
         to: [inbox],
         subject: intakeSubject(body, intakeId),
         text: opsBodyText(body, intakeId),
-        replyTo: body.contact_email
+        replyTo: body.contact_email,
+        requestId: body.request_id || ids.rid || null
       });
       const ops = opsResult.ok;
       let ack = false;
@@ -160,7 +163,8 @@ var require_intake_email = __commonJS({
           to: [body.contact_email],
           subject: "Noetfield \u2014 message received (" + (body.request_id || intakeId) + ")",
           text: ackBody(body, intakeId),
-          replyTo: CANONICAL
+          replyTo: CANONICAL,
+          requestId: body.request_id || ids.rid || null
         });
         ack = ackResult.ok;
       }
@@ -177,10 +181,66 @@ var require_intake_email = __commonJS({
   }
 });
 
+// api/_lib/intake-telegram.js
+var require_intake_telegram = __commonJS({
+  "api/_lib/intake-telegram.js"(exports, module) {
+    var DEFAULT_CHAT_ID = "8635650894";
+    function telegramConfigured() {
+      const token = (process.env.TELEGRAM_NOETFIELD_OPS_BOT_TOKEN || "").trim();
+      const chatId = (process.env.TELEGRAM_OPS_CHAT_ID || DEFAULT_CHAT_ID).trim();
+      return Boolean(token && chatId);
+    }
+    function formatIntakeTelegramText(body, intakeId) {
+      const name = String(body.contact_name || "\u2014").trim() || "\u2014";
+      const company = String(body.organization || "\u2014").trim() || "\u2014";
+      const message = String(body.message || "").trim() || "\u2014";
+      const id = String(intakeId || "\u2014").trim() || "\u2014";
+      return ["name: " + name, "company: " + company, "message: " + message, "intake ID: " + id].join("\n");
+    }
+    async function sendIntakeTelegram(body, intakeId) {
+      const token = (process.env.TELEGRAM_NOETFIELD_OPS_BOT_TOKEN || "").trim();
+      const chatId = (process.env.TELEGRAM_OPS_CHAT_ID || DEFAULT_CHAT_ID).trim();
+      if (!token || !chatId) {
+        return { ok: false, configured: false, error: "missing_telegram_config" };
+      }
+      const text = formatIntakeTelegramText(body, intakeId);
+      const res = await fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text.slice(0, 4096),
+          disable_web_page_preview: true
+        })
+      });
+      const payload = await res.json().catch(function() {
+        return {};
+      });
+      if (res.ok && payload.ok) {
+        return {
+          ok: true,
+          configured: true,
+          message_id: payload.result && payload.result.message_id ? payload.result.message_id : null
+        };
+      }
+      const err = payload.description || "http_" + res.status;
+      console.error("intake_telegram_failed", err);
+      return { ok: false, configured: true, error: err };
+    }
+    module.exports = {
+      DEFAULT_CHAT_ID,
+      telegramConfigured,
+      formatIntakeTelegramText,
+      sendIntakeTelegram
+    };
+  }
+});
+
 // api/intake.js
 var require_intake = __commonJS({
   "api/intake.js"(exports, module) {
     var { CANONICAL, emailConfigured, sendIntakeEmails, opsBodyText } = require_intake_email();
+    var { sendIntakeTelegram, telegramConfigured } = require_intake_telegram();
     function randomIntakeId() {
       const hex = Array.from({ length: 12 }, function() {
         return Math.floor(Math.random() * 16).toString(16);
@@ -218,15 +278,32 @@ var require_intake = __commonJS({
         console.error("platform_intake_forward_failed", err && err.message ? err.message : err);
       }
       const intakeId = platformData && platformData.intake_id || randomIntakeId();
+      let telegramResult = { ok: false, configured: telegramConfigured() };
+      try {
+        telegramResult = await sendIntakeTelegram(body, intakeId);
+      } catch (err) {
+        console.error("intake_telegram_failed", err && err.message ? err.message : err);
+      }
       let emailResult = { ops: false, ack: false, configured: emailConfigured() };
       try {
         emailResult = await sendIntakeEmails(body, { intakeId, rid: body.request_id || null });
       } catch (err) {
-        console.error("intake_email_failed", err && err.message ? err.message : err);
+        console.error("intake_email_archive_failed", err && err.message ? err.message : err);
       }
       if (platformOk && platformData) {
         return res.status(200).json({
           ...platformData,
+          telegram_delivered: telegramResult.ok,
+          email_delivered: emailResult.ops,
+          email_ack: emailResult.ack
+        });
+      }
+      if (telegramResult.ok) {
+        return res.status(200).json({
+          intake_id: intakeId,
+          request_id: body.request_id || null,
+          message: "Intake recorded \u2014 operations notified on Telegram",
+          telegram_delivered: true,
           email_delivered: emailResult.ops,
           email_ack: emailResult.ack
         });
@@ -235,7 +312,8 @@ var require_intake = __commonJS({
         return res.status(200).json({
           intake_id: intakeId,
           request_id: body.request_id || null,
-          message: "Intake recorded \u2014 operations notified by email",
+          message: "Intake recorded \u2014 operations archive email sent",
+          telegram_delivered: false,
           email_delivered: true,
           email_ack: emailResult.ack
         });
@@ -243,10 +321,13 @@ var require_intake = __commonJS({
       const mailSubject = "[vector:" + (body.vector || "web-intake") + "] Noetfield \u2014 Intake fallback (" + intakeId + ")";
       const mailBody = opsBodyText(body, intakeId);
       return res.status(502).json({
-        detail: "Intake unavailable \u2014 email not configured. Use /contact/ or email operations@noetfield.com with your Request ID.",
+        detail: "Intake unavailable \u2014 platform record failed and ops notify did not deliver. Use /contact/ or email operations@noetfield.com with your Request ID.",
         intake_id: intakeId,
+        telegram_delivered: false,
+        email_delivered: false,
         mailto: "mailto:" + CANONICAL + "?subject=" + encodeURIComponent(mailSubject) + "&body=" + encodeURIComponent(mailBody),
-        www_email_configured: emailResult.configured
+        www_email_configured: emailResult.configured,
+        www_telegram_configured: telegramResult.configured
       });
     };
   }
@@ -318,6 +399,13 @@ function bindEnv(env) {
   }
   return base;
 }
+function queryToObject(url) {
+  const out = {};
+  url.searchParams.forEach((value, key) => {
+    out[key] = value;
+  });
+  return out;
+}
 async function runVercelHandler(handler2, context) {
   const { request, env } = context;
   bindEnv(env);
@@ -325,6 +413,7 @@ async function runVercelHandler(handler2, context) {
   const req = {
     method: request.method,
     url: url.pathname + url.search,
+    query: queryToObject(url),
     headers: headersToObject(request),
     body: await readBody(request)
   };

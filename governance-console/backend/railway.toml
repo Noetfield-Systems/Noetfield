@@ -1,0 +1,12 @@
+# Governance Console API — public sandbox spine for www.noetfield.com/workspace proxy
+# Deploy: bash scripts/deploy-gov-sandbox-railway.sh
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

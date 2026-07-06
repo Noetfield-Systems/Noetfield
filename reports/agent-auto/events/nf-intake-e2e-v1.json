@@ -1,0 +1,30 @@
+{
+  "schema_version": "nf-intake-e2e-v2",
+  "generated_at": "2026-07-06T13:23:18Z",
+  "ok": true,
+  "status": "pass",
+  "reason": null,
+  "request_id": "RID-E2E-1783344195",
+  "intake_id": "INT-14B3A9102B79",
+  "telegram_delivered": true,
+  "intake_url": "https://www.noetfield.com/api/intake",
+  "platform_base": "https://platform.noetfield.com",
+  "pass_definition": "telegram_delivered_and_db_dedupe",
+  "submit": {
+    "http_status": 200,
+    "ok": true,
+    "intake_id": "INT-14B3A9102B79",
+    "request_id": "RID-E2E-1783344195",
+    "intake_email": "operations@noetfield.com",
+    "message": "Intake recorded. Operations notified asynchronously \u2014 follow-up via email within one business day.",
+    "telegram_delivered": true,
+    "email_delivered": true,
+    "email_ack": true
+  },
+  "dedupe": {
+    "http_status": 200,
+    "expected_intake_id": "INT-14B3A9102B79",
+    "dedupe_intake_id": "INT-14B3A9102B79",
+    "dedupe_ok": true
+  }
+}

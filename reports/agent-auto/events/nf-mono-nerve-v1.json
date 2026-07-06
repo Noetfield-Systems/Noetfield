@@ -1,13 +1,13 @@
 {
   "schema_version": "nf-mono-nerve-v1",
-  "generated_at": "2026-07-05T07:25:28Z",
+  "generated_at": "2026-07-06T13:25:41Z",
   "ok": false,
   "agent_id": "noetfield_cloud",
   "defer_active": true,
   "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES",
   "operations_inbox": {
     "schema": "noetfield-operations-inbox-active-v1",
-    "at": "2026-07-05T07:25:28Z",
+    "at": "2026-07-06T13:25:41Z",
     "ok": true,
     "inbox": "operations@noetfield.com",
     "gw_status": "ACTIVE",
@@ -18,7 +18,7 @@
     "one_law": "GW inbox receive OPEN \u00b7 Resend/form auto-send DEFERRED until after factory"
   },
   "defer_receipt_at": null,
-  "agent_live_surfaces_at": "2026-07-02T04:01:49Z",
+  "agent_live_surfaces_at": "2026-07-06T08:29:32Z",
   "founder_cascade_latest_at": "2026-06-24T08:37:18Z",
   "founder_cascade_newer_than_ship": false,
   "mono_newer_than_live_status": false,
@@ -69,7 +69,7 @@
     {
       "gate": "agent_live_surfaces",
       "ok": true,
-      "synced_at": "2026-07-02T04:01:49Z"
+      "synced_at": "2026-07-06T08:29:32Z"
     },
     {
       "gate": "founder_cascade_readable",

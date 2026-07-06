@@ -2,6 +2,105 @@
   "schema": "nf-www-audit-manifest-v1",
   "receipts": [
     {
+      "path": "reports/www-audit/receipts/audit_20260706T132545Z.json",
+      "run_at": "2026-07-06T13:25:45Z",
+      "mode": "disk",
+      "findings_total": 44,
+      "by_severity": {
+        "P1": 41,
+        "P2": 3
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260706T132535Z.json",
+      "run_at": "2026-07-06T13:25:35Z",
+      "mode": "disk",
+      "findings_total": 44,
+      "by_severity": {
+        "P1": 41,
+        "P2": 3
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260706T132534Z.json",
+      "run_at": "2026-07-06T13:25:34Z",
+      "mode": "disk",
+      "findings_total": 44,
+      "by_severity": {
+        "P1": 41,
+        "P2": 3
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260706T131404Z.json",
+      "run_at": "2026-07-06T13:14:04Z",
+      "mode": "disk",
+      "findings_total": 44,
+      "by_severity": {
+        "P1": 41,
+        "P2": 3
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260706T131353Z.json",
+      "run_at": "2026-07-06T13:13:53Z",
+      "mode": "disk",
+      "findings_total": 44,
+      "by_severity": {
+        "P1": 41,
+        "P2": 3
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260706T131025Z.json",
+      "run_at": "2026-07-06T13:10:25Z",
+      "mode": "disk",
+      "findings_total": 44,
+      "by_severity": {
+        "P1": 41,
+        "P2": 3
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260706T131015Z.json",
+      "run_at": "2026-07-06T13:10:15Z",
+      "mode": "disk",
+      "findings_total": 44,
+      "by_severity": {
+        "P1": 41,
+        "P2": 3
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260706T131014Z.json",
+      "run_at": "2026-07-06T13:10:14Z",
+      "mode": "disk",
+      "findings_total": 44,
+      "by_severity": {
+        "P1": 41,
+        "P2": 3
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260706T125938Z.json",
+      "run_at": "2026-07-06T12:59:38Z",
+      "mode": "disk",
+      "findings_total": 42,
+      "by_severity": {
+        "P1": 41,
+        "P2": 1
+      },
+      "state": "COMPLETE"
+    },
+    {
       "path": "reports/www-audit/receipts/audit_20260706T125739Z.json",
       "run_at": "2026-07-06T12:57:39Z",
       "mode": "disk",

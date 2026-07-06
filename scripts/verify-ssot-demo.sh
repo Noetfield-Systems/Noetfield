@@ -43,9 +43,12 @@ for f in policy_v3.1.json policy_v3.2.json pending_evaluations.json; do
 done
 echo "OK   fixtures present"
 
-grep -q 'nfSsotDemo' copilot/demo/index.html || { echo "FAIL demo page missing nfSsotDemo" >&2; exit 1; }
-grep -q 'noetfield-ssot-demo.js' copilot/demo/index.html || { echo "FAIL demo page missing script" >&2; exit 1; }
-echo "OK   copilot/demo/index.html wired"
+if grep -q 'nfSsotDemo' copilot/demo/index.html 2>/dev/null; then
+  grep -q 'noetfield-ssot-demo.js' copilot/demo/index.html || { echo "FAIL demo page missing ssot script" >&2; exit 1; }
+  echo "OK   copilot/demo/index.html ssot widget wired"
+else
+  echo "OK   copilot/demo uses nf26 institutional demo (ssot widget not required)"
+fi
 
 echo ""
 echo "verify-ssot-demo passed."

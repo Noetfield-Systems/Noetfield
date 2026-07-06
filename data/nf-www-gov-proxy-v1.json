@@ -1,0 +1,7 @@
+{
+  "schema": "nf-www-gov-proxy-v1",
+  "enabled": false,
+  "gov_web_origin": "",
+  "gov_api_origin": "",
+  "notes": "Set enabled=true and origins after: bash scripts/deploy-gov-sandbox-railway.sh"
+}

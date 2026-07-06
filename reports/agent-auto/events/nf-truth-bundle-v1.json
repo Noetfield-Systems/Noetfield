@@ -1,18 +1,18 @@
 {
   "schema_version": "nf-truth-bundle-v1",
-  "generated_at": "2026-06-28T14:08:40Z",
+  "generated_at": "2026-07-06T13:25:40Z",
   "agent_id": "noetfield_cloud",
   "plane": "noetfield_cloud",
   "mono_nerve": {
     "schema_version": "nf-mono-nerve-v1",
-    "generated_at": "2026-06-28T14:08:39Z",
-    "ok": true,
+    "generated_at": "2026-07-06T13:25:40Z",
+    "ok": false,
     "agent_id": "noetfield_cloud",
     "defer_active": true,
     "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES",
     "operations_inbox": {
       "schema": "noetfield-operations-inbox-active-v1",
-      "at": "2026-06-28T14:08:38Z",
+      "at": "2026-07-06T13:25:40Z",
       "ok": true,
       "inbox": "operations@noetfield.com",
       "gw_status": "ACTIVE",
@@ -22,27 +22,24 @@
       "ssot_doc": "docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md",
       "one_law": "GW inbox receive OPEN \u00b7 Resend/form auto-send DEFERRED until after factory"
     },
-    "defer_receipt_at": "2026-06-28T14:08:38Z",
-    "agent_live_surfaces_at": "2026-06-27T19:30:32Z",
+    "defer_receipt_at": null,
+    "agent_live_surfaces_at": "2026-07-06T08:29:32Z",
     "founder_cascade_latest_at": "2026-06-24T08:37:18Z",
     "founder_cascade_newer_than_ship": false,
     "mono_newer_than_live_status": false,
     "trustfield_pulse": {
-      "ok": true,
-      "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES \u00b7 TF_MACLAW=ACTIVE \u00b7 attract_users",
-      "defer_active": false,
-      "commercial_send_allowed": true,
-      "synced_at": "2026-06-28T14:08:39Z"
+      "ok": false,
+      "error": "Command '['/Library/Frameworks/Python.framework/Versions/3.12/bin/python3', '/Users/sinakazemnezhad/Desktop/TrustField Technologies/scripts/tf_fleet_live_wire_v1.py', '--json', '--no-refresh']' return"
     },
     "gates": [
       {
         "gate": "defer_ssot",
-        "ok": true,
+        "ok": false,
         "path": "/Users/sinakazemnezhad/Desktop/SourceA/data/commercial-email-send-defer-v1.json"
       },
       {
         "gate": "defer_script",
-        "ok": true,
+        "ok": false,
         "path": "/Users/sinakazemnezhad/Desktop/SourceA/scripts/commercial_email_send_defer_v1.py"
       },
       {
@@ -57,8 +54,8 @@
       },
       {
         "gate": "defer_assess",
-        "ok": true,
-        "detail": null
+        "ok": false,
+        "detail": "missing defer script /Users/sinakazemnezhad/Desktop/SourceA/scripts/commercial_email_send_defer_v1.py"
       },
       {
         "gate": "operations_inbox_receipt",
@@ -77,7 +74,7 @@
       {
         "gate": "agent_live_surfaces",
         "ok": true,
-        "synced_at": "2026-06-27T19:30:32Z"
+        "synced_at": "2026-07-06T08:29:32Z"
       },
       {
         "gate": "founder_cascade_readable",
@@ -86,116 +83,116 @@
       },
       {
         "gate": "trustfield_fleet_wire",
-        "ok": true,
-        "detail": null
+        "ok": false,
+        "detail": "Command '['/Library/Frameworks/Python.framework/Versions/3.12/bin/python3', '/Users/sinakazemnezhad/Desktop/TrustField Technologies/scripts/tf_fleet_live_wire_v1.py', '--json', '--no-refresh']' return"
       }
     ],
     "wiring_ssot": "data/nf_mono_nerve_wiring_v1.json",
-    "heal": null,
+    "heal": "make nf-onboard",
     "quote_rule": "Quote product_now_line AND email_send_defer_line \u2014 not chat memory"
   },
   "session_gate": {
     "schema_version": "nf-session-gate-v1",
-    "ok": true,
+    "ok": false,
     "agent_id": "noetfield_cloud",
     "role": "cloud",
-    "generated_at": "2026-06-28T14:08:39Z",
-    "repo_root": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield",
+    "generated_at": "2026-07-06T13:25:40Z",
+    "repo_root": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield",
     "gates": [
       {
         "gate": "entry/START_HERE_LOCKED_v1.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/entry/START_HERE_LOCKED_v1.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/entry/START_HERE_LOCKED_v1.md"
       },
       {
         "gate": "ROUTING_CARD.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/ROUTING_CARD.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/ROUTING_CARD.md"
       },
       {
         "gate": "docs/ops/NF_GAOS_W0_LOCKED_v1.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W0_LOCKED_v1.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/NF_GAOS_W0_LOCKED_v1.md"
       },
       {
         "gate": "docs/ops/NF_GAOS_W1_LOCKED_v1.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W1_LOCKED_v1.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/NF_GAOS_W1_LOCKED_v1.md"
       },
       {
         "gate": "docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/NF_GAOS_W3_FACTORY_SPINE_LOCKED_v1.md"
       },
       {
         "gate": "docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md"
       },
       {
         "gate": "docs/ops/NF_ANTI_STALENESS_MAXIMUM_FIX_SET_LOCKED_v1.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/docs/ops/NF_ANTI_STALENESS_MAXIMUM_FIX_SET_LOCKED_v1.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/docs/ops/NF_ANTI_STALENESS_MAXIMUM_FIX_SET_LOCKED_v1.md"
       },
       {
         "gate": "data/nf_anti_staleness_max_v1.json",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_anti_staleness_max_v1.json"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/data/nf_anti_staleness_max_v1.json"
       },
       {
         "gate": "data/nf_orient_routing_v1.json",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_orient_routing_v1.json"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/data/nf_orient_routing_v1.json"
       },
       {
         "gate": "data/nf_mono_nerve_wiring_v1.json",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_mono_nerve_wiring_v1.json"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/data/nf_mono_nerve_wiring_v1.json"
       },
       {
         "gate": "os/NF_REPO_CAPABILITY_MAP.json",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_REPO_CAPABILITY_MAP.json"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/NF_REPO_CAPABILITY_MAP.json"
       },
       {
         "gate": "os/NF_UNIFIED_ROUTING_GRAPH.json",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_UNIFIED_ROUTING_GRAPH.json"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/NF_UNIFIED_ROUTING_GRAPH.json"
       },
       {
         "gate": "os/NF_SSOT_INVENTORY.json",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_SSOT_INVENTORY.json"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/NF_SSOT_INVENTORY.json"
       },
       {
         "gate": "os/NF_BAVT_STRATEGY.json",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/NF_BAVT_STRATEGY.json"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/NF_BAVT_STRATEGY.json"
       },
       {
         "gate": "os/plan.json",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/plan.json"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/plan.json"
       },
       {
         "gate": "os/SHIP_NOW.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/os/SHIP_NOW.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/os/SHIP_NOW.md"
       },
       {
         "gate": "PROJECT_BOUNDARIES_LOCKED.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/PROJECT_BOUNDARIES_LOCKED.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/PROJECT_BOUNDARIES_LOCKED.md"
       },
       {
         "gate": ".cursor/agent-memory/MEMORY_LOCKED.yaml",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/.cursor/agent-memory/MEMORY_LOCKED.yaml"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/.cursor/agent-memory/MEMORY_LOCKED.yaml"
       },
       {
         "gate": ".cursor/incidents/REGISTRY.md",
         "ok": true,
-        "path": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/.cursor/incidents/REGISTRY.md"
+        "path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/.cursor/incidents/REGISTRY.md"
       },
       {
         "gate": "memory_R-007",
@@ -211,7 +208,7 @@
       },
       {
         "gate": "mono_defer_ssot",
-        "ok": true,
+        "ok": false,
         "path": "/Users/sinakazemnezhad/Desktop/SourceA/data/commercial-email-send-defer-v1.json"
       },
       {
@@ -239,23 +236,25 @@
         "count": 0
       }
     ],
-    "next": "make nf-live-orient"
+    "next": "fix missing gates before edits"
   },
   "stale_guard": {
     "schema_version": "nf-stale-guard-v1",
-    "generated_at": "2026-06-28T14:08:40Z",
-    "context_stale": false,
+    "generated_at": "2026-07-06T13:25:40Z",
+    "context_stale": true,
     "pending_task": null,
-    "issues": [],
-    "mono_synced_at": "2026-06-27T19:30:32Z",
+    "issues": [
+      "nf-mono-nerve not PASS \u2014 run make nf-mono-nerve"
+    ],
+    "mono_synced_at": "2026-07-06T08:29:32Z",
     "founder_cascade_at": "2026-06-24T08:37:18Z",
     "founder_disk_sync_at": "2026-06-24T08:37:18Z",
     "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES",
-    "heal": null
+    "heal": "make nf-onboard"
   },
   "voyage_integrity": {
     "schema_version": "nf-voyage-integrity-v1",
-    "generated_at": "2026-06-28T14:08:40Z",
+    "generated_at": "2026-07-06T13:25:40Z",
     "ok": true,
     "pending_task": null,
     "gates": [
@@ -277,14 +276,14 @@
   },
   "live_routing": {
     "schema_version": "nf-live-routing-v1",
-    "generated_at": "2026-06-28T14:08:40Z",
+    "generated_at": "2026-07-06T13:25:40Z",
     "agent_id": "noetfield_cloud",
     "pending_task": null,
     "git": {
-      "sha": "7b8058d8",
-      "branch": "main"
+      "sha": "86fcd02e",
+      "branch": "fix/www-tech-only"
     },
-    "sourcea_mirror": true,
+    "sourcea_mirror": false,
     "boot": [
       "make nf-onboard"
     ],
@@ -297,7 +296,7 @@
   },
   "live_surfaces": {
     "schema_version": "nf-live-surfaces-v1",
-    "generated_at": "2026-06-28T14:08:40Z",
+    "generated_at": "2026-07-06T13:25:40Z",
     "agent_id": "noetfield_cloud",
     "plane": "noetfield_cloud",
     "product_now_line": "no pending next_tasks",
@@ -305,7 +304,7 @@
     "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES",
     "defer_active": true,
     "w3_send_ready": false,
-    "w3_email_send_deferred": false,
+    "w3_email_send_deferred": true,
     "commercial_blockers": [
       "factory_now",
       "w3_critic_circle",
@@ -315,27 +314,41 @@
       "w3_send_ready"
     ],
     "advisory_line": "advisory \u00b7 idle \u00b7 SourceA Sina read \u2192 Noetfield compile \u2192 TrustField send",
-    "portfolio_parent_at": "2026-06-27T19:30:32Z",
-    "mono_nerve_ok": true,
+    "portfolio_parent_at": "2026-07-06T08:29:32Z",
+    "mono_nerve_ok": false,
     "operations_inbox": "ACTIVE",
-    "gate_ok": true,
-    "context_stale": false,
+    "gate_ok": false,
+    "context_stale": true,
     "voyage_ok": true,
     "pending_task": null,
-    "git_sha": "7b8058d8",
+    "git_sha": "86fcd02e",
     "routing_pending": null,
     "quote_rule": "Quote product_now_line AND email_send_defer_line \u2014 not chat memory",
-    "heal": null,
+    "heal": "make nf-onboard",
     "surfaces_ok": true
   },
   "receipt_cascade": {
     "schema_version": "nf-receipt-cascade-v1",
-    "generated_at": "2026-06-28T14:08:29Z",
-    "ok": true,
-    "failures": [],
-    "nodes": [],
-    "ssot": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/data/nf_orient_routing_v1.json",
-    "heal": null,
+    "generated_at": "2026-07-06T13:25:29Z",
+    "ok": false,
+    "failures": [
+      {
+        "node_id": "nf_mono_nerve",
+        "reason": "ok=false",
+        "ok": false
+      },
+      {
+        "node_id": "nf_stale_guard",
+        "reason": "context_stale=true",
+        "ok": false
+      }
+    ],
+    "nodes": [
+      "nf_mono_nerve",
+      "nf_stale_guard"
+    ],
+    "ssot": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield/data/nf_orient_routing_v1.json",
+    "heal": "make nf-onboard",
     "orient_read_chain": [
       "entry/START_HERE_LOCKED_v1.md",
       "ROUTING_CARD.md",
@@ -361,12 +374,15 @@
   },
   "gatekeeper": {
     "schema_version": "nf-gatekeeper-v1",
-    "generated_at": "2026-06-28T14:08:35Z",
+    "generated_at": "2026-07-06T13:25:29Z",
     "status": "FAIL",
     "ok": false,
     "safe_to_implement": false,
     "reasons": [
-      "FOUNDER_IMPLEMENT_REQUIRED"
+      "SESSION_GATE_FAIL",
+      "MONO_NERVE_FAIL",
+      "CONTEXT_STALE",
+      "RECEIPT_CASCADE_FAIL:nf_mono_nerve,nf_stale_guard"
     ],
     "agent_id": "noetfield_cloud",
     "pending_task_id": "",
@@ -389,25 +405,25 @@
   "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES",
   "ecosystem_nerve": {
     "schema": "ecosystem-live-nerve-v1",
-    "generated_at": "2026-06-28T14:08:39Z",
-    "ok": true,
+    "generated_at": "2026-07-06T13:25:40Z",
+    "ok": false,
     "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES",
     "defer_active": true,
     "planes": {
       "noetfield": {
         "receipt": "~/.sina/nf-mono-nerve-v1.json",
-        "ok": true,
+        "ok": false,
         "operations_inbox": "ACTIVE"
       },
       "trustfield": {
         "receipt": "~/.sina/tf-live-surfaces-v1.json",
-        "ok": true,
+        "ok": false,
         "commercial_send_allowed": true
       },
       "sourcea_parent": {
         "receipt": "~/.sina/agent-live-surfaces-v1.json",
-        "synced_at": "2026-06-27T19:30:32Z",
-        "factory_now_line": "factory-now \u00b7 Cloud Workers.app owns Cloud Forge Run \u00b7 head CLOUD-SEC-7167 \u00b7 batch 73 \u00b7 100 rows/10min \u00b7 100 tasks/row"
+        "synced_at": "2026-07-06T08:29:32Z",
+        "factory_now_line": "factory-now \u00b7 Cloud Workers.app owns Cloud Forge Run \u00b7 head CLOUD-SEC-7968 \u00b7 batch 81 \u00b7 100 rows/10min \u00b7 100 tasks/row"
       }
     },
     "sequencing_law": "GW inbox receive OPEN \u00b7 Resend/W3 send DEFERRED until factory + sites + founder lift",

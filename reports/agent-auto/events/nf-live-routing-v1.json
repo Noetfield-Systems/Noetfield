@@ -1,13 +1,13 @@
 {
   "schema_version": "nf-live-routing-v1",
-  "generated_at": "2026-06-28T14:08:48Z",
+  "generated_at": "2026-07-06T13:25:41Z",
   "agent_id": "noetfield_cloud",
   "pending_task": null,
   "git": {
-    "sha": "7b8058d8",
-    "branch": "main"
+    "sha": "86fcd02e",
+    "branch": "fix/www-tech-only"
   },
-  "sourcea_mirror": true,
+  "sourcea_mirror": false,
   "boot": [
     "make nf-onboard"
   ],

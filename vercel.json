@@ -15,6 +15,12 @@
   ],
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "noetfield.com" }],
+      "destination": "https://www.noetfield.com/:path*",
+      "statusCode": 301
+    },
+    {
       "source": "/",
       "has": [{ "type": "host", "value": "status.noetfield.com" }],
       "destination": "https://www.noetfield.com/status/",

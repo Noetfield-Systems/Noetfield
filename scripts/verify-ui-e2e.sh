@@ -71,7 +71,7 @@ check_html "${BASE}/trust/" "trust center" "Trust center" "Metadata-only" "fail 
 check_html "${BASE}/trust-ledger/verify/" "tle verify" "fail closed on tamper" "Verify export integrity"
 check_html "${BASE}/copilot/" "copilot hub" "audit trail your Copilot deployment" "Phase 2" "Copilot Governance Pack"
 check_html "${BASE}/copilot/pilot/" "copilot pilot" "Copilot Governance Pack" "GTM-locked pilot success signals" "nfPilotApplyForm"
-check_html "${BASE}/copilot/demo/" "copilot demo" "Five-minute buyer story" "SSOT_CHANGED" "allow · 0.80" "Trust Ledger"
+check_html "${BASE}/copilot/demo/" "copilot demo" "nf26-demoStepper" "nf26-eventTrace" "Human-in-the-loop" "Open workspace"
 check_html "${BASE}/copilot/procurement/" "procurement buyer" "Procurement-grade export" "NIST AI RMF" "/trust/"
 check_html "${BASE}/copilot/sme/" "copilot sme pack" "SME Governance Pack" "90-day Governance Pack" "confidence score"
 check_html "${BASE}/trust-brief/" "trust brief" '$10,000' "Request Trust Brief"

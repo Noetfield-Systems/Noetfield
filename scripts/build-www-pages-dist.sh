@@ -41,5 +41,8 @@ else
 fi
 
 cp "${ROOT}/_redirects" "${DIST}/_redirects"
+python3 scripts/purge-www-denylist-from-dist.py
 node scripts/bundle-pages-functions.mjs
+chmod +x scripts/verify-www-pages-dist.sh
+bash scripts/verify-www-pages-dist.sh
 log "done — ${DIST} ($(find "$DIST" -type f | wc -l | tr -d ' ') files) + functions/"

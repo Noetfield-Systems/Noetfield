@@ -136,6 +136,13 @@ function bindEnv(env) {
   }
   return base;
 }
+function queryToObject(url) {
+  const out = {};
+  url.searchParams.forEach((value, key) => {
+    out[key] = value;
+  });
+  return out;
+}
 async function runVercelHandler(handler2, context) {
   const { request, env } = context;
   bindEnv(env);
@@ -143,6 +150,7 @@ async function runVercelHandler(handler2, context) {
   const req = {
     method: request.method,
     url: url.pathname + url.search,
+    query: queryToObject(url),
     headers: headersToObject(request),
     body: await readBody(request)
   };

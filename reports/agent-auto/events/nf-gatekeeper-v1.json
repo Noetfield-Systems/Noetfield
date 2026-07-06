@@ -1,15 +1,20 @@
 {
   "schema_version": "nf-gatekeeper-v1",
-  "generated_at": "2026-06-28T14:08:46Z",
-  "status": "PASS",
-  "ok": true,
-  "safe_to_implement": true,
-  "reasons": [],
+  "generated_at": "2026-07-06T13:25:40Z",
+  "status": "FAIL",
+  "ok": false,
+  "safe_to_implement": false,
+  "reasons": [
+    "SESSION_GATE_FAIL",
+    "MONO_NERVE_FAIL",
+    "CONTEXT_STALE",
+    "RECEIPT_CASCADE_FAIL:nf_mono_nerve,nf_stale_guard"
+  ],
   "agent_id": "noetfield_cloud",
   "pending_task_id": "",
-  "founder_implement": true,
+  "founder_implement": false,
   "product_now_line": "no pending next_tasks",
   "email_send_defer_line": "email-defer \u00b7 ON \u00b7 main=5/5 \u00b7 sites=RED \u00b7 email=AFTER_MAIN \u00b7 lift=YES",
   "defer_active": true,
-  "next": "SAFE TO IMPLEMENT"
+  "next": "EXECUTION DENIED \u2014 fix reasons then re-run nf-gatekeeper"
 }

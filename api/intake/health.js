@@ -4,9 +4,8 @@ const { CANONICAL, emailConfigured } = require("../_lib/intake-email");
 const { telegramConfigured } = require("../_lib/intake-telegram");
 
 function deliveryMode(telegram, email) {
-  if (telegram && email) return "telegram+resend-archive";
+  if (email) return "resend";
   if (telegram) return "telegram";
-  if (email) return "resend-archive";
   return "unconfigured";
 }
 
