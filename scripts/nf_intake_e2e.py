@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Intake E2E — Telegram + DB PASS: submit test intake, telegram_delivered, Postgres dedupe."""
+"""Intake E2E — test intake health receipt: Postgres path + dedupe (not customer lead spam)."""
 
 from __future__ import annotations
 
@@ -64,7 +64,7 @@ def e2e_intake_body(request_id: str) -> dict[str, Any]:
         "organization": "NF E2E Deploy Verify",
         "contact_name": "NF E2E Bot",
         "contact_email": "e2e@noetfield.com",
-        "message": f"Automated intake E2E — {iso_now()}. Ignore.",
+        "message": f"Automated intake E2E health probe — {iso_now()}",
         "request_id": request_id,
         "sku": "general",
         "vector": "contact",
@@ -72,9 +72,22 @@ def e2e_intake_body(request_id: str) -> dict[str, Any]:
         "metadata": {
             "form_id": "nf_intake_e2e",
             "topic": "e2e",
+            "intake_kind": "test",
+            "pipeline": "nf_intake_e2e:deploy_verify",
             "async": True,
         },
     }
+
+
+def probe_telegram_ok(submit: dict[str, Any] | None) -> bool:
+    """Probe PASS — skipped lead Telegram is OK when intake persisted."""
+    if not submit:
+        return False
+    if submit.get("telegram_skipped_probe") and submit.get("intake_persisted"):
+        return True
+    if submit.get("telegram_delivered") and submit.get("intake_kind") == "test":
+        return True
+    return submit.get("intake_kind") == "test" and submit.get("telegram_mode") == "receipt_only"
 
 
 def skip_reason_for_target(*, intake_url: str, platform_base: str) -> str | None:
@@ -118,6 +131,8 @@ def verify_db_dedupe(
         "expected_intake_id": expected_intake_id,
         "dedupe_intake_id": got or None,
         "dedupe_ok": ok,
+        "telegram_skipped_probe": bool(payload.get("telegram_skipped_probe")),
+        "dedupe_checked": bool(payload.get("deduped")),
     }
 
 
@@ -134,10 +149,23 @@ def build_receipt(
 ) -> dict[str, Any]:
     intake_id = ""
     telegram_delivered: bool | None = None
+    telegram_mode: str | None = None
+    intake_kind: str | None = None
+    telegram_skipped_probe: bool | None = None
+    intake_persisted: bool | None = None
+    dedupe_checked: bool | None = None
     if submit:
         intake_id = str(submit.get("intake_id") or "")
         if "telegram_delivered" in submit:
             telegram_delivered = bool(submit.get("telegram_delivered"))
+        telegram_mode = str(submit.get("telegram_mode") or "") or None
+        intake_kind = str(submit.get("intake_kind") or "") or None
+        if "telegram_skipped_probe" in submit:
+            telegram_skipped_probe = bool(submit.get("telegram_skipped_probe"))
+        if "intake_persisted" in submit:
+            intake_persisted = bool(submit.get("intake_persisted"))
+    if dedupe is not None:
+        dedupe_checked = bool(dedupe.get("dedupe_ok"))
 
     return {
         "schema_version": SCHEMA_VERSION,
@@ -148,9 +176,15 @@ def build_receipt(
         "request_id": request_id,
         "intake_id": intake_id or None,
         "telegram_delivered": telegram_delivered,
+        "telegram_mode": telegram_mode,
+        "intake_kind": intake_kind,
+        "telegram_skipped_probe": telegram_skipped_probe,
+        "intake_persisted": intake_persisted,
+        "dedupe_checked": dedupe_checked,
         "intake_url": intake_url,
         "platform_base": platform_base,
-        "pass_definition": "telegram_delivered_and_db_dedupe",
+        "pass_definition": "probe_intake_persisted_and_db_dedupe",
+        "receipt_path": "reports/agent-auto/events/nf-intake-e2e-v1.json",
         "submit": submit,
         "dedupe": dedupe,
     }
@@ -188,7 +222,7 @@ def run_e2e(
 
     submit_ok, submit_payload = submit_test_intake(intake_url, body)
     intake_id = str(submit_payload.get("intake_id") or "")
-    telegram_ok = bool(submit_payload.get("telegram_delivered"))
+    telegram_ok = probe_telegram_ok(submit_payload)
 
     if not submit_ok:
         receipt = build_receipt(
@@ -211,7 +245,7 @@ def run_e2e(
             request_id=request_id,
             intake_url=intake_url,
             platform_base=platform_base,
-            reason="telegram_not_delivered",
+            reason="test_intake_path_failed",
             submit=submit_payload,
             dedupe=None,
         )
@@ -254,7 +288,7 @@ def run_e2e(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Intake E2E — telegram_delivered + Postgres dedupe (PASS definition v2)"
+        description="Intake E2E — test intake path + Postgres dedupe (health receipt v3)"
     )
     parser.add_argument("--intake-url", default="", help="POST target (default: {www}/api/intake)")
     parser.add_argument("--www-base", default=DEFAULT_WWW_BASE, help="WWW base when --intake-url omitted")
@@ -279,7 +313,9 @@ def main() -> int:
             "nf_intake_e2e: PASS "
             f"request_id={receipt.get('request_id')} "
             f"intake_id={receipt.get('intake_id')} "
-            f"telegram_delivered=true db_dedupe=true"
+            f"telegram_skipped_probe={receipt.get('telegram_skipped_probe')} "
+            f"intake_persisted={receipt.get('intake_persisted')} "
+            f"dedupe_checked={receipt.get('dedupe_checked')}"
         )
     else:
         print(

@@ -1,5 +1,7 @@
 /** Intake inbox email — Resend delivery to operations@ + submitter ack (www serverless). */
 
+const { isTestIntake } = require("./intake-test");
+
 const CANONICAL = "operations@noetfield.com";
 
 function meta(body) {
@@ -138,6 +140,10 @@ function emailConfigured() {
 }
 
 async function sendIntakeEmails(body, ids) {
+  if (isTestIntake(body)) {
+    return { ops: false, ack: false, configured: emailConfigured(), skipped: true, intake_kind: "test" };
+  }
+
   const intakeId = ids.intakeId;
   const from =
     (process.env.INTAKE_EMAIL_FROM || "").trim() ||

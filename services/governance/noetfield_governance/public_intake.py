@@ -10,6 +10,7 @@ from typing import Literal
 from noetfield_config import CANONICAL_INTAKE_EMAIL
 from noetfield_governance import intake_repository, redis_runtime
 from noetfield_governance.intake_store import IntakeRecord
+from noetfield_governance.intake_test import ensure_test_metadata
 
 _MAX_ORG_LEN = 200
 _MAX_MESSAGE_LEN = 8000
@@ -77,6 +78,12 @@ async def submit_intake(
 
     await _check_rate_limit(client_key or "anonymous")
 
+    meta = ensure_test_metadata(
+        metadata,
+        request_id=rid,
+        contact_email=email,
+    )
+
     return await intake_repository.record_intake(
         organization=org,
         contact_email=email,
@@ -86,7 +93,7 @@ async def submit_intake(
         sku=sku,
         vector=(vector or "web-intake").strip()[:120],
         source=source,
-        metadata=metadata,
+        metadata=meta,
     )
 
 

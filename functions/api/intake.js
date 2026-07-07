@@ -24,9 +24,57 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
+// api/_lib/intake-test.js
+var require_intake_test = __commonJS({
+  "api/_lib/intake-test.js"(exports, module) {
+    var TEST_FORM_IDS = /* @__PURE__ */ new Set(["nf_intake_e2e", "nf_probe_cron"]);
+    var TEST_TOPICS = /* @__PURE__ */ new Set(["e2e", "probe"]);
+    var TEST_EMAILS = /* @__PURE__ */ new Set(["e2e@noetfield.com", "probe@noetfield.com"]);
+    function meta(body) {
+      return body && typeof body.metadata === "object" && body.metadata ? body.metadata : {};
+    }
+    function isTestIntake(body) {
+      if (!body || typeof body !== "object") return false;
+      const m = meta(body);
+      if (m.intake_kind === "test") return true;
+      const formId = String(m.form_id || "").toLowerCase();
+      if (TEST_FORM_IDS.has(formId)) return true;
+      const topic = String(m.topic || "").toLowerCase();
+      if (TEST_TOPICS.has(topic)) return true;
+      const email = String(body.contact_email || "").trim().toLowerCase();
+      if (TEST_EMAILS.has(email)) return true;
+      const rid = String(body.request_id || "").toUpperCase();
+      if (/^RID-(E2E|PROBE)-/.test(rid)) return true;
+      return false;
+    }
+    function testPipelineLabel(body) {
+      const m = meta(body);
+      if (m.pipeline) return String(m.pipeline);
+      const formId = String(m.form_id || "").toLowerCase();
+      if (formId === "nf_probe_cron") return "probe_cron:intake_e2e";
+      if (formId === "nf_intake_e2e") return "nf_intake_e2e:deploy_verify";
+      if (m.topic === "probe") return "probe:intake";
+      if (m.topic === "e2e") return "e2e:intake";
+      return "test:intake";
+    }
+    function ensureTestMetadata(body) {
+      if (!isTestIntake(body)) return body;
+      const m = { ...meta(body), intake_kind: "test" };
+      if (!m.pipeline) m.pipeline = testPipelineLabel(body);
+      return { ...body, metadata: m };
+    }
+    module.exports = {
+      isTestIntake,
+      testPipelineLabel,
+      ensureTestMetadata
+    };
+  }
+});
+
 // api/_lib/intake-email.js
 var require_intake_email = __commonJS({
   "api/_lib/intake-email.js"(exports, module) {
+    var { isTestIntake } = require_intake_test();
     var CANONICAL = "operations@noetfield.com";
     function meta(body) {
       return body && typeof body.metadata === "object" && body.metadata ? body.metadata : {};
@@ -137,6 +185,9 @@ var require_intake_email = __commonJS({
       return Boolean((process.env.RESEND_API_KEY || "").trim());
     }
     async function sendIntakeEmails(body, ids) {
+      if (isTestIntake(body)) {
+        return { ops: false, ack: false, configured: emailConfigured(), skipped: true, intake_kind: "test" };
+      }
       const intakeId = ids.intakeId;
       const from = (process.env.INTAKE_EMAIL_FROM || "").trim() || "Noetfield Intake <notifications@noetfield.com>";
       const inbox = (process.env.INTAKE_EMAIL_TO || CANONICAL).trim();
@@ -184,11 +235,44 @@ var require_intake_email = __commonJS({
 // api/_lib/intake-telegram.js
 var require_intake_telegram = __commonJS({
   "api/_lib/intake-telegram.js"(exports, module) {
+    var { isTestIntake, testPipelineLabel } = require_intake_test();
     var DEFAULT_CHAT_ID = "8635650894";
+    var DEDUP_TTL_MS = 24 * 60 * 60 * 1e3;
+    var _notifiedIntakeIds = /* @__PURE__ */ new Map();
+    var _notifiedRequestIds = /* @__PURE__ */ new Map();
     function telegramConfigured() {
       const token = (process.env.TELEGRAM_NOETFIELD_OPS_BOT_TOKEN || "").trim();
       const chatId = (process.env.TELEGRAM_OPS_CHAT_ID || DEFAULT_CHAT_ID).trim();
       return Boolean(token && chatId);
+    }
+    function pruneNotifiedDedup() {
+      const now = Date.now();
+      for (const [id, ts] of _notifiedIntakeIds) {
+        if (now - ts > DEDUP_TTL_MS) _notifiedIntakeIds.delete(id);
+      }
+      for (const [id, ts] of _notifiedRequestIds) {
+        if (now - ts > DEDUP_TTL_MS) _notifiedRequestIds.delete(id);
+      }
+    }
+    function wasRequestNotified(requestId) {
+      if (!requestId) return false;
+      pruneNotifiedDedup();
+      return _notifiedRequestIds.has(String(requestId).toUpperCase());
+    }
+    function markRequestNotified(requestId) {
+      if (!requestId) return;
+      pruneNotifiedDedup();
+      _notifiedRequestIds.set(String(requestId).toUpperCase(), Date.now());
+    }
+    function wasIntakeNotified(intakeId) {
+      if (!intakeId) return false;
+      pruneNotifiedDedup();
+      return _notifiedIntakeIds.has(intakeId);
+    }
+    function markIntakeNotified(intakeId) {
+      if (!intakeId) return;
+      pruneNotifiedDedup();
+      _notifiedIntakeIds.set(intakeId, Date.now());
     }
     function formatIntakeTelegramText(body, intakeId) {
       const name = String(body.contact_name || "\u2014").trim() || "\u2014";
@@ -197,13 +281,92 @@ var require_intake_telegram = __commonJS({
       const id = String(intakeId || "\u2014").trim() || "\u2014";
       return ["name: " + name, "company: " + company, "message: " + message, "intake ID: " + id].join("\n");
     }
-    async function sendIntakeTelegram(body, intakeId) {
+    function formatHealthReceiptTelegram({
+      pass,
+      pipeline,
+      intakeId,
+      timestamp,
+      founderActionRequired,
+      receiptPath,
+      supabaseReceiptId,
+      reason
+    }) {
+      const lines = [
+        "NF " + (pass ? "PASS" : "FAIL") + " \xB7 TEST",
+        "pipeline: " + (pipeline || "test:intake"),
+        "intake_id: " + (intakeId || "\u2014"),
+        "at: " + (timestamp || (/* @__PURE__ */ new Date()).toISOString()),
+        "founder_action: " + (founderActionRequired ? "yes" : "no")
+      ];
+      if (receiptPath) lines.push("receipt: " + receiptPath);
+      if (supabaseReceiptId) lines.push("supabase_receipt: " + supabaseReceiptId);
+      if (reason) lines.push("reason: " + reason);
+      return lines.join("\n");
+    }
+    function telegramPathOk(result) {
+      if (!result) return false;
+      if (result.telegram_skipped_probe) return true;
+      if (result.ok && result.mode === "receipt_only") return true;
+      return Boolean(result.ok);
+    }
+    function probeTelegramSkipped(result) {
+      return Boolean(result && (result.telegram_skipped_probe || result.skipped && result.intake_kind === "test"));
+    }
+    async function sendIntakeTelegram(body, intakeId, options) {
+      const opts = options || {};
       const token = (process.env.TELEGRAM_NOETFIELD_OPS_BOT_TOKEN || "").trim();
       const chatId = (process.env.TELEGRAM_OPS_CHAT_ID || DEFAULT_CHAT_ID).trim();
-      if (!token || !chatId) {
+      const configured = Boolean(token && chatId);
+      const id = String(intakeId || "").trim();
+      const requestId = String(body.request_id || "").trim().toUpperCase();
+      if (!configured) {
         return { ok: false, configured: false, error: "missing_telegram_config" };
       }
+      if (isTestIntake(body)) {
+        const alreadyNotified = id && (opts.deduped || wasIntakeNotified(id)) || requestId && wasRequestNotified(requestId);
+        if (alreadyNotified) {
+          return {
+            ok: true,
+            configured: true,
+            skipped: true,
+            reason: opts.deduped ? "request_id_dedup" : "intake_id_dedup",
+            intake_kind: "test",
+            telegram_skipped_probe: true,
+            telegram_mode: "receipt_only"
+          };
+        }
+        if (!opts.probeFail) {
+          if (requestId) markRequestNotified(requestId);
+          return {
+            ok: true,
+            configured: true,
+            skipped: true,
+            intake_kind: "test",
+            telegram_skipped_probe: true,
+            telegram_mode: "receipt_only"
+          };
+        }
+        const text2 = formatHealthReceiptTelegram({
+          pass: false,
+          pipeline: testPipelineLabel(body),
+          intakeId: id,
+          timestamp: opts.timestamp || (/* @__PURE__ */ new Date()).toISOString(),
+          founderActionRequired: true,
+          receiptPath: opts.receiptPath || null,
+          supabaseReceiptId: opts.supabaseReceiptId || null,
+          reason: opts.reason || "probe_fail"
+        });
+        markIntakeNotified(id);
+        if (requestId) markRequestNotified(requestId);
+        return sendTelegramRaw(token, chatId, text2);
+      }
       const text = formatIntakeTelegramText(body, intakeId);
+      const result = await sendTelegramRaw(token, chatId, text);
+      if (result.ok && id) markIntakeNotified(id);
+      if (result.ok && requestId) markRequestNotified(requestId);
+      return result;
+    }
+    async function sendTelegramRaw(token, chatId, text) {
       const res = await fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -220,7 +383,8 @@ var require_intake_telegram = __commonJS({
         return {
           ok: true,
           configured: true,
-          message_id: payload.result && payload.result.message_id ? payload.result.message_id : null
+          message_id: payload.result && payload.result.message_id ? payload.result.message_id : null,
+          telegram_mode: "sent"
         };
       }
       const err = payload.description || "http_" + res.status;
@@ -231,7 +395,14 @@ var require_intake_telegram = __commonJS({
       DEFAULT_CHAT_ID,
       telegramConfigured,
       formatIntakeTelegramText,
-      sendIntakeTelegram
+      formatHealthReceiptTelegram,
+      sendIntakeTelegram,
+      telegramPathOk,
+      probeTelegramSkipped,
+      wasIntakeNotified,
+      markIntakeNotified,
+      wasRequestNotified,
+      markRequestNotified
     };
   }
 });
@@ -240,7 +411,8 @@ var require_intake_telegram = __commonJS({
 var require_intake = __commonJS({
   "api/intake.js"(exports, module) {
     var { CANONICAL, emailConfigured, sendIntakeEmails, opsBodyText } = require_intake_email();
-    var { sendIntakeTelegram, telegramConfigured } = require_intake_telegram();
+    var { isTestIntake, ensureTestMetadata } = require_intake_test();
+    var { sendIntakeTelegram, telegramConfigured, telegramPathOk } = require_intake_telegram();
     function randomIntakeId() {
       const hex = Array.from({ length: 12 }, function() {
         return Math.floor(Math.random() * 16).toString(16);
@@ -260,7 +432,7 @@ var require_intake = __commonJS({
       if (req.method !== "POST") {
         return res.status(405).json({ detail: "Method not allowed" });
       }
-      const body = req.body || {};
+      const body = ensureTestMetadata(req.body || {});
       const platformBase = (process.env.PLATFORM_API_BASE || "https://platform.noetfield.com").replace(/\/$/, "");
       let platformData = null;
       let platformOk = false;
@@ -278,11 +450,25 @@ var require_intake = __commonJS({
         console.error("platform_intake_forward_failed", err && err.message ? err.message : err);
       }
       const intakeId = platformData && platformData.intake_id || randomIntakeId();
+      const deduped = Boolean(platformData && platformData.deduped);
       let telegramResult = { ok: false, configured: telegramConfigured() };
       try {
-        telegramResult = await sendIntakeTelegram(body, intakeId);
+        telegramResult = await sendIntakeTelegram(body, intakeId, { deduped });
       } catch (err) {
         console.error("intake_telegram_failed", err && err.message ? err.message : err);
+      }
+      const telegramDelivered = telegramPathOk(telegramResult);
+      const intakeKind = isTestIntake(body) ? "test" : "lead";
+      const notifyExtras = {
+        telegram_delivered: telegramDelivered,
+        telegram_mode: telegramResult.telegram_mode || (telegramResult.ok ? "sent" : "none"),
+        intake_kind: intakeKind,
+        deduped
+      };
+      if (intakeKind === "test") {
+        notifyExtras.telegram_skipped_probe = Boolean(telegramResult.telegram_skipped_probe);
+        notifyExtras.intake_persisted = platformOk;
+        notifyExtras.dedupe_checked = deduped;
       }
       let emailResult = { ops: false, ack: false, configured: emailConfigured() };
       try {
@@ -293,17 +479,17 @@ var require_intake = __commonJS({
       if (platformOk && platformData) {
         return res.status(200).json({
           ...platformData,
-          telegram_delivered: telegramResult.ok,
+          ...notifyExtras,
           email_delivered: emailResult.ops,
           email_ack: emailResult.ack
         });
       }
-      if (telegramResult.ok) {
+      if (telegramDelivered) {
         return res.status(200).json({
           intake_id: intakeId,
           request_id: body.request_id || null,
-          message: "Intake recorded \u2014 operations notified on Telegram",
-          telegram_delivered: true,
+          message: intakeKind === "test" ? "Test intake recorded \u2014 health receipt only" : "Intake recorded \u2014 operations notified on Telegram",
+          ...notifyExtras,
           email_delivered: emailResult.ops,
           email_ack: emailResult.ack
         });
@@ -313,6 +499,7 @@ var require_intake = __commonJS({
           intake_id: intakeId,
           request_id: body.request_id || null,
           message: "Intake recorded \u2014 operations archive email sent",
+          ...notifyExtras,
           telegram_delivered: false,
           email_delivered: true,
           email_ack: emailResult.ack

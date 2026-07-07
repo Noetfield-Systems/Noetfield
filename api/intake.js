@@ -1,7 +1,8 @@
 /** POST /api/intake — platform DB (source of truth) + Telegram ops + Resend archive. */
 
 const { CANONICAL, emailConfigured, sendIntakeEmails, opsBodyText } = require("./_lib/intake-email");
-const { sendIntakeTelegram, telegramConfigured } = require("./_lib/intake-telegram");
+const { isTestIntake, ensureTestMetadata } = require("./_lib/intake-test");
+const { sendIntakeTelegram, telegramConfigured, telegramPathOk } = require("./_lib/intake-telegram");
 
 function randomIntakeId() {
   const hex = Array.from({ length: 12 }, function () {
@@ -26,7 +27,7 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ detail: "Method not allowed" });
   }
 
-  const body = req.body || {};
+  const body = ensureTestMetadata(req.body || {});
   const platformBase = (process.env.PLATFORM_API_BASE || "https://platform.noetfield.com").replace(/\/$/, "");
   let platformData = null;
   let platformOk = false;
@@ -47,11 +48,26 @@ module.exports = async function handler(req, res) {
 
   const intakeId = (platformData && platformData.intake_id) || randomIntakeId();
 
+  const deduped = Boolean(platformData && platformData.deduped);
   let telegramResult = { ok: false, configured: telegramConfigured() };
   try {
-    telegramResult = await sendIntakeTelegram(body, intakeId);
+    telegramResult = await sendIntakeTelegram(body, intakeId, { deduped: deduped });
   } catch (err) {
     console.error("intake_telegram_failed", err && err.message ? err.message : err);
+  }
+
+  const telegramDelivered = telegramPathOk(telegramResult);
+  const intakeKind = isTestIntake(body) ? "test" : "lead";
+  const notifyExtras = {
+    telegram_delivered: telegramDelivered,
+    telegram_mode: telegramResult.telegram_mode || (telegramResult.ok ? "sent" : "none"),
+    intake_kind: intakeKind,
+    deduped: deduped,
+  };
+  if (intakeKind === "test") {
+    notifyExtras.telegram_skipped_probe = Boolean(telegramResult.telegram_skipped_probe);
+    notifyExtras.intake_persisted = platformOk;
+    notifyExtras.dedupe_checked = deduped;
   }
 
   let emailResult = { ops: false, ack: false, configured: emailConfigured() };
@@ -64,18 +80,21 @@ module.exports = async function handler(req, res) {
   if (platformOk && platformData) {
     return res.status(200).json({
       ...platformData,
-      telegram_delivered: telegramResult.ok,
+      ...notifyExtras,
       email_delivered: emailResult.ops,
       email_ack: emailResult.ack,
     });
   }
 
-  if (telegramResult.ok) {
+  if (telegramDelivered) {
     return res.status(200).json({
       intake_id: intakeId,
       request_id: body.request_id || null,
-      message: "Intake recorded — operations notified on Telegram",
-      telegram_delivered: true,
+      message:
+        intakeKind === "test"
+          ? "Test intake recorded — health receipt only"
+          : "Intake recorded — operations notified on Telegram",
+      ...notifyExtras,
       email_delivered: emailResult.ops,
       email_ack: emailResult.ack,
     });
@@ -86,6 +105,7 @@ module.exports = async function handler(req, res) {
       intake_id: intakeId,
       request_id: body.request_id || null,
       message: "Intake recorded — operations archive email sent",
+      ...notifyExtras,
       telegram_delivered: false,
       email_delivered: true,
       email_ack: emailResult.ack,

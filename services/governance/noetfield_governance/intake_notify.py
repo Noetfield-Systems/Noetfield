@@ -13,6 +13,7 @@ from typing import Protocol
 
 from noetfield_config import CANONICAL_INTAKE_EMAIL
 from noetfield_governance.intake_store import IntakeRecord
+from noetfield_governance.intake_test import is_test_intake
 
 logger = logging.getLogger("noetfield.governance.intake.notify")
 
@@ -296,6 +297,13 @@ def send_intake_email(
 
 
 def notify_ops_inbox(settings: IntakeEmailSettings, record: IntakeRecord) -> bool:
+    if is_test_intake(
+        metadata=record.metadata,
+        request_id=record.request_id,
+        contact_email=record.contact_email,
+    ):
+        logger.info("intake_email_skipped test intake intake_id=%s", record.intake_id)
+        return False
     inbox = (settings.intake_email_to or CANONICAL_INTAKE_EMAIL).strip()
     return send_intake_email(
         settings,
@@ -308,6 +316,12 @@ def notify_ops_inbox(settings: IntakeEmailSettings, record: IntakeRecord) -> boo
 
 
 def notify_submitter_ack(settings: IntakeEmailSettings, record: IntakeRecord) -> bool:
+    if is_test_intake(
+        metadata=record.metadata,
+        request_id=record.request_id,
+        contact_email=record.contact_email,
+    ):
+        return False
     if not settings.intake_auto_ack_enabled:
         return False
     return send_intake_email(
@@ -329,6 +343,12 @@ def intake_email_configured(settings: IntakeEmailSettings) -> bool:
 
 
 def notify_ops_webhook(webhook_url: str, record: IntakeRecord) -> bool:
+    if is_test_intake(
+        metadata=record.metadata,
+        request_id=record.request_id,
+        contact_email=record.contact_email,
+    ):
+        return False
     url = (webhook_url or "").strip()
     if not url:
         return False

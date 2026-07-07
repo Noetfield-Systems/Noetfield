@@ -60,6 +60,7 @@ from noetfield_governance.signal_triage_worker import (
     start_signal_triage_scheduler,
     stop_signal_triage_scheduler,
 )
+from noetfield_governance.intake_test import is_test_intake
 from noetfield_governance.public_intake import submit_intake
 from noetfield_governance.sandbox_service import (
     build_board_export_pdf,
@@ -792,6 +793,8 @@ class PublicIntakeResponse(BaseModel):
     request_id: str | None
     intake_email: str = CANONICAL_INTAKE_EMAIL
     message: str = "Intake recorded. Operations notified asynchronously — follow-up via email within one business day."
+    deduped: bool = False
+    intake_kind: Literal["lead", "test"] = "lead"
 
 
 class PublicAnalyticsEventRequest(BaseModel):
@@ -1114,6 +1117,13 @@ async def _notify_intake_background(record: object) -> None:
 
     if not isinstance(record, IntakeRecord):
         return
+    if is_test_intake(
+        metadata=record.metadata,
+        request_id=record.request_id,
+        contact_email=record.contact_email,
+    ):
+        logger.info("intake_ops_notify_skipped test intake intake_id=%s", record.intake_id)
+        return
     url = (settings.intake_ops_webhook_url or "").strip()
     if url:
         await asyncio.to_thread(notify_ops_webhook, url, record)
@@ -1210,6 +1220,10 @@ async def public_intake(
         raise HTTPException(status_code=503, detail="Public intake API is disabled")
     client_host = request.client.host if request.client else "unknown"
     client_key = f"{client_host}:{body.contact_email}"
+    deduped = False
+    if body.request_id:
+        existing = await intake_repository.get_by_request_id(body.request_id)
+        deduped = existing is not None
     try:
         rec = await submit_intake(
             organization=body.organization,
@@ -1227,16 +1241,35 @@ async def public_intake(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except PermissionError as exc:
         raise HTTPException(status_code=429, detail=str(exc)) from exc
+    intake_kind: Literal["lead", "test"] = (
+        "test"
+        if is_test_intake(
+            metadata=rec.metadata,
+            request_id=rec.request_id,
+            contact_email=rec.contact_email,
+        )
+        else "lead"
+    )
     logger.info(
-        "public_intake_recorded intake_id=%s rid=%s org=%s",
+        "public_intake_recorded intake_id=%s rid=%s org=%s kind=%s deduped=%s",
         rec.intake_id,
         rec.request_id or "",
         rec.organization[:80],
+        intake_kind,
+        deduped,
     )
-    background_tasks.add_task(_notify_intake_background, rec)
+    if not deduped:
+        background_tasks.add_task(_notify_intake_background, rec)
     return PublicIntakeResponse(
         intake_id=rec.intake_id,
         request_id=rec.request_id,
+        deduped=deduped,
+        intake_kind=intake_kind,
+        message=(
+            "Test intake recorded — health receipt only."
+            if intake_kind == "test"
+            else PublicIntakeResponse.model_fields["message"].default
+        ),
     )
 
 

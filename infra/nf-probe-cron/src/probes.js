@@ -1,6 +1,8 @@
 /** @typedef {{ ok: boolean, probe: string, status: string, reason?: string, receipt: Record<string, unknown> }} ProbeResult */
 
 const PROBE_NAMES = ["uptime", "greeting", "drift", "intake_e2e"];
+const TELEGRAM_PASS_ON_SUCCESS = (env) => (env.PROBE_TELEGRAM_PASS || "0").trim() === "1";
+const _notifiedProbeIntakeIds = new Map();
 
 /**
  * @param {string} url
@@ -69,12 +71,55 @@ async function sendTelegram(env, text) {
     body: JSON.stringify({
       chat_id: chatId,
       text: text.slice(0, 4096),
-      parse_mode: "HTML",
       disable_web_page_preview: true,
     }),
   });
   const body = await res.json().catch(() => ({}));
   return { ok: Boolean(body.ok), error: body.description };
+}
+
+/**
+ * @param {{
+ *   pass: boolean,
+ *   pipeline: string,
+ *   intakeId?: string | null,
+ *   timestamp: string,
+ *   founderActionRequired: boolean,
+ *   receiptPath?: string | null,
+ *   supabaseReceiptId?: string | null,
+ *   reason?: string | null,
+ *   runId?: string | null,
+ * }} fields
+ */
+function formatHealthReceiptTelegram(fields) {
+  const lines = [
+    `NF ${fields.pass ? "PASS" : "FAIL"} · TEST`,
+    `pipeline: ${fields.pipeline}`,
+    `intake_id: ${fields.intakeId || "—"}`,
+    `at: ${fields.timestamp}`,
+    `founder_action: ${fields.founderActionRequired ? "yes" : "no"}`,
+  ];
+  if (fields.receiptPath) lines.push(`receipt: ${fields.receiptPath}`);
+  if (fields.supabaseReceiptId) lines.push(`supabase_receipt: ${fields.supabaseReceiptId}`);
+  if (fields.runId) lines.push(`run_id: ${fields.runId}`);
+  if (fields.reason) lines.push(`reason: ${fields.reason}`);
+  return lines.join("\n");
+}
+
+function wasProbeIntakeNotified(intakeId) {
+  if (!intakeId) return false;
+  return _notifiedProbeIntakeIds.has(intakeId);
+}
+
+function markProbeIntakeNotified(intakeId) {
+  if (!intakeId) return;
+  _notifiedProbeIntakeIds.set(intakeId, Date.now());
+}
+
+function intakeTelegramPathOk(body) {
+  if (!body || typeof body !== "object") return false;
+  if (body.telegram_delivered) return true;
+  return body.intake_kind === "test" && body.telegram_mode === "receipt_only";
 }
 
 /**
@@ -202,12 +247,17 @@ export async function probeIntakeE2e(env) {
     organization: "NF Probe Cron",
     contact_name: "NF Probe Bot",
     contact_email: "probe@noetfield.com",
-    message: `Automated probe intake — ${new Date().toISOString()}. Ignore.`,
+    message: `Automated intake health probe — ${new Date().toISOString()}`,
     request_id: requestId,
     sku: "general",
     vector: "contact",
     source: "api",
-    metadata: { form_id: "nf_probe_cron", topic: "probe" },
+    metadata: {
+      form_id: "nf_probe_cron",
+      topic: "probe",
+      intake_kind: "test",
+      pipeline: "probe_cron:intake_e2e",
+    },
   };
   const receipt = { request_id: requestId, submit: null, dedupe: null };
 
@@ -230,7 +280,8 @@ export async function probeIntakeE2e(env) {
   receipt.submit = { status: submit.status, body: submit.body };
 
   const intakeId = submit.body && submit.body.intake_id ? String(submit.body.intake_id) : "";
-  const telegramOk = Boolean(submit.body && submit.body.telegram_delivered);
+  receipt.intake_id = intakeId || null;
+  const telegramOk = intakeTelegramPathOk(submit.body);
   if (submit.status < 200 || submit.status >= 300 || !intakeId) {
     return {
       ok: false,
@@ -311,7 +362,7 @@ export async function runAllProbes(env) {
         ...result.receipt,
         ok: result.ok,
         reason: result.reason || null,
-        pass_definition: name === "intake_e2e" ? "telegram_delivered_and_db_dedupe" : null,
+        pass_definition: name === "intake_e2e" ? "test_intake_path_and_db_dedupe" : null,
         checked_at: checkedAt,
       },
       checked_at: checkedAt,
@@ -332,14 +383,48 @@ export async function runAllProbes(env) {
   }
 
   const failures = results.filter((r) => !r.ok);
+  const intakeProbe = results.find((r) => r.probe === "intake_e2e");
+  const intakeId =
+    intakeProbe && intakeProbe.receipt && intakeProbe.receipt.intake_id
+      ? String(intakeProbe.receipt.intake_id)
+      : "";
+
   if (failures.length) {
-    const lines = failures.map(
-      (f) => `• <b>${f.probe}</b>: ${f.reason || f.status}`
-    );
-    await sendTelegram(
-      env,
-      `<b>Noetfield probe cron FAIL</b>\nrun_id: ${runId}\n` + lines.join("\n")
-    );
+    for (const failure of failures) {
+      const pipeline =
+        failure.probe === "intake_e2e"
+          ? "probe_cron:intake_e2e"
+          : `probe_cron:${failure.probe}`;
+      const notifyIntakeId = failure.probe === "intake_e2e" ? intakeId : null;
+      if (notifyIntakeId && wasProbeIntakeNotified(notifyIntakeId)) {
+        continue;
+      }
+      const text = formatHealthReceiptTelegram({
+        pass: false,
+        pipeline,
+        intakeId: notifyIntakeId,
+        timestamp: checkedAt,
+        founderActionRequired: true,
+        receiptPath: `probe_cron_receipts/${runId}`,
+        supabaseReceiptId: runId,
+        reason: failure.reason || failure.status,
+        runId,
+      });
+      await sendTelegram(env, text);
+      if (notifyIntakeId) markProbeIntakeNotified(notifyIntakeId);
+    }
+  } else if (TELEGRAM_PASS_ON_SUCCESS(env)) {
+    const text = formatHealthReceiptTelegram({
+      pass: true,
+      pipeline: "probe_cron:all",
+      intakeId: intakeId || null,
+      timestamp: checkedAt,
+      founderActionRequired: false,
+      receiptPath: `probe_cron_receipts/${runId}`,
+      supabaseReceiptId: runId,
+      runId,
+    });
+    await sendTelegram(env, text);
   }
 
   return { runId, checkedAt, results, ok: failures.length === 0 };
