@@ -1,0 +1,28 @@
+name: Verify gov-sandbox live
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  verify-gov-sandbox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify Railway gov-sandbox origins
+        run: bash scripts/verify-gov-sandbox-railway.sh
+
+      - name: Verify www workspace proxy
+        run: bash scripts/verify-www-live-sandbox.sh
+
+      - name: Manifest + disk config
+        run: bash scripts/check-gov-railway-manifest.sh
+
+      - name: Alert on failure
+        if: failure()
+        run: |
+          python3 scripts/nf_post_deploy_verify.py \
+            --deploy-failed "gov-sandbox CI verify" \
+            --surface www || true

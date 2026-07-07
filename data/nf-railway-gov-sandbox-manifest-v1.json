@@ -1,0 +1,50 @@
+{
+  "schema": "nf-railway-gov-sandbox-manifest-v1",
+  "version": "1.0.0",
+  "project_id": "94ade24c-9b24-4d8d-a443-9ddc5bf6ef54",
+  "forbidden_dockerfile": "infrastructure/docker/Dockerfile.api",
+  "forbidden_note": "platform-api image — never deploy to gov-sandbox services",
+  "services": {
+    "gov-sandbox-api": {
+      "builder": "DOCKERFILE",
+      "dockerfile_path": "governance-console/backend/Dockerfile",
+      "railway_toml": "governance-console/backend/railway.toml",
+      "deploy_command": "railway up ./governance-console/backend --path-as-root -s gov-sandbox-api",
+      "health_path": "/health",
+      "health_service": "governance-console-api",
+      "watch_patterns": ["governance-console/backend/**"],
+      "database_url": "sqlite:////data/gov_sandbox.db",
+      "volume_mount": "/data",
+      "custom_domain": "sandbox-api.noetfield.com",
+      "railway_domain_fallback": "gov-sandbox-api-production.up.railway.app"
+    },
+    "gov-sandbox-web": {
+      "builder": "DOCKERFILE",
+      "dockerfile_path": "governance-console/Dockerfile.www",
+      "railway_toml": "governance-console/railway.web.toml",
+      "deploy_command": "railway up -s gov-sandbox-web (repo root; build config via environment edit)",
+      "health_path": "/workspace",
+      "health_markers": ["_next"],
+      "watch_patterns": ["governance-console/**", "packages/ui-tokens/**"],
+      "custom_domain": "sandbox.noetfield.com",
+      "railway_domain_fallback": "gov-sandbox-web-production.up.railway.app"
+    }
+  },
+  "staging": {
+    "environment": "staging",
+    "api_service": "gov-sandbox-api-staging",
+    "web_service": "gov-sandbox-web-staging",
+    "proxy_config": "data/nf-www-gov-proxy-staging-v1.json"
+  },
+  "verify_scripts": [
+    "scripts/verify-gov-sandbox-railway.sh",
+    "scripts/verify-www-live-sandbox.sh",
+    "scripts/assert-gov-railway-config.sh",
+    "scripts/check-gov-railway-manifest.sh"
+  ],
+  "deploy_scripts": {
+    "railway": "scripts/deploy-gov-sandbox-railway.sh",
+    "e2e": "scripts/deploy-gov-sandbox-e2e.sh",
+    "staging": "scripts/deploy-gov-sandbox-staging.sh"
+  }
+}

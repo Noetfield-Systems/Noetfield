@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 
 from db.bootstrap import init_schema, migrate_audit_logs_to_events, migrate_dev_schema_patches, seed_pilot_evidence
 from db.session import SessionLocal, engine
+from middleware.sandbox_guard import SandboxGuardMiddleware
 from routes import audit, connectors, evaluate, evidence, sandbox, tle
 
 load_dotenv()
@@ -51,6 +52,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(SandboxGuardMiddleware)
+
+SCHEMA_VERSION = "gov-sandbox-api-v1"
 
 app.include_router(evaluate.router)
 app.include_router(audit.router)
@@ -60,12 +64,12 @@ app.include_router(tle.router)
 app.include_router(sandbox.router)
 
 
-_health_cache: tuple[float, dict[str, str]] | None = None
+_health_cache: tuple[float, dict[str, object]] | None = None
 _HEALTH_TTL_SEC = 2.0
 
 
 @app.get("/health")
-def health() -> dict[str, str]:
+def health() -> dict[str, object]:
     import time
 
     global _health_cache
@@ -77,6 +81,13 @@ def health() -> dict[str, str]:
         db.execute(text("SELECT 1"))
     finally:
         db.close()
-    payload = {"status": "ok", "service": "governance-console-api", "database": "ok"}
+    git_sha = os.getenv("GIT_SHA", "").strip() or os.getenv("RAILWAY_GIT_COMMIT_SHA", "").strip()
+    payload: dict[str, object] = {
+        "status": "ok",
+        "service": "governance-console-api",
+        "database": "ok",
+        "schema_version": SCHEMA_VERSION,
+        "git_sha": git_sha,
+    }
     _health_cache = (now, payload)
     return payload

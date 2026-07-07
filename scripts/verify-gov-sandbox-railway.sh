@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 PROXY_CFG="${ROOT}/data/nf-www-gov-proxy-v1.json"
+RECEIPT="${ROOT}/reports/agent-auto/events/nf-gov-sandbox-v1.json"
 API_SERVICE="${NF_GOV_API_SERVICE:-gov-sandbox-api}"
 WEB_SERVICE="${NF_GOV_WEB_SERVICE:-gov-sandbox-web}"
 fail=0
@@ -36,6 +37,15 @@ else
   fail=1
 fi
 
+if [[ -n "${NF_EXPECT_SHA:-}" ]]; then
+  live_sha="$(python3 -c "import json,sys; d=json.loads(sys.argv[1]); print(d.get('git_sha',''))" "$health_body" 2>/dev/null || true)"
+  if [[ -n "$live_sha" && "$live_sha" == "${NF_EXPECT_SHA}"* ]]; then
+    echo "OK   git_sha matches NF_EXPECT_SHA (${NF_EXPECT_SHA:0:12})"
+  elif [[ -n "$live_sha" ]]; then
+    echo "NOTE git_sha=${live_sha:0:12} NF_EXPECT_SHA=${NF_EXPECT_SHA:0:12} (deploy may be in flight)"
+  fi
+fi
+
 web_html="$(curl -sSL --connect-timeout 15 -H "Accept: text/html" "${web_origin}/workspace" 2>/dev/null || true)"
 if grep -qF '_next' <<< "$web_html"; then
   echo "OK   ${web_origin}/workspace has Next.js shell"
@@ -58,11 +68,29 @@ if command -v railway >/dev/null 2>&1; then
   done
 fi
 
+mkdir -p "${ROOT}/reports/agent-auto/events"
+python3 -c "
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+receipt = {
+    'schema': 'nf-gov-sandbox-verify-v1',
+    'verified_at': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+    'ok': $( [[ $fail -eq 0 ]] && echo True || echo False ),
+    'api_origin': '$(printf '%s' "$api_origin")',
+    'web_origin': '$(printf '%s' "$web_origin")',
+}
+Path('${RECEIPT}').write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
+print('wrote ${RECEIPT}')
+"
+
 if [[ "$fail" -eq 0 ]]; then
   echo ""
   echo "verify-gov-sandbox-railway passed."
   exit 0
 fi
+
+python3 scripts/nf_post_deploy_verify.py --deploy-failed "verify-gov-sandbox-railway" --surface www 2>/dev/null || true
 echo ""
 echo "verify-gov-sandbox-railway failed." >&2
 exit 1

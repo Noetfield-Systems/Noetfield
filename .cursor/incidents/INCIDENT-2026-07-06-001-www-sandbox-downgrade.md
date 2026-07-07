@@ -117,6 +117,7 @@ Railway gov-sandbox-api + gov-sandbox-web → SUCCESS
 - **R-012** (MEMORY_LOCKED): Never replace live client sandbox surfaces with static mocks or motion-only widgets on www without founder order. Validators passing ≠ product upgrade.
 - **M-005**: Treating `nf-workspace-mock` + “Open workspace” as acceptable buyer demo.
 - Agent www passes must include **buyer can run evaluate** proof, not only HTML needles.
+- **SSOT:** [`data/nf-railway-gov-sandbox-manifest-v1.json`](../../data/nf-railway-gov-sandbox-manifest-v1.json) + `scripts/check-gov-railway-manifest.sh`
 
 ---
 

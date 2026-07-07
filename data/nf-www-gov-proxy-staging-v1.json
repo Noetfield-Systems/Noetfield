@@ -1,0 +1,7 @@
+{
+  "schema": "nf-www-gov-proxy-v1",
+  "enabled": false,
+  "gov_web_origin": "",
+  "gov_api_origin": "",
+  "notes": "Staging proxy — set enabled=true after: NF_RAILWAY_ENV=staging bash scripts/deploy-gov-sandbox-staging.sh"
+}
