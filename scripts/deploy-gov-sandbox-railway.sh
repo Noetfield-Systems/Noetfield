@@ -16,12 +16,30 @@ USE_CUSTOM_DOMAINS="${NF_GOV_USE_CUSTOM_DOMAINS:-1}"
 API_CUSTOM_DOMAIN="${NF_GOV_API_DOMAIN:-sandbox-api.noetfield.com}"
 WEB_CUSTOM_DOMAIN="${NF_GOV_WEB_DOMAIN:-sandbox.noetfield.com}"
 DATA_MOUNT="${NF_GOV_DATA_MOUNT:-/data}"
-DATABASE_URL="${NF_GOV_DATABASE_URL:-sqlite:////data/gov_sandbox.db}"
+DATABASE_URL="${NF_GOV_DATABASE_URL:-sqlite:///./gov_sandbox.db}"
 RAILWAY_CALLER="${RAILWAY_CALLER:-scripts/deploy-gov-sandbox-railway}"
 SESSION="${RAILWAY_AGENT_SESSION:-gov-sandbox-$(date +%s)}"
 GIT_SHA="$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || true)"
 
-log() { printf '[deploy-gov-sandbox-railway] %s\n' "$*"; }
+log() { printf '[deploy-gov-sandbox-railway] %s\n' "$*" >&2; }
+
+run_with_timeout() {
+  local secs="$1"
+  shift
+  "$@" &
+  local pid=$!
+  local elapsed=0
+  while kill -0 "$pid" 2>/dev/null && [[ "$elapsed" -lt "$secs" ]]; do
+    sleep 1
+    elapsed=$((elapsed + 1))
+  done
+  if kill -0 "$pid" 2>/dev/null; then
+    kill "$pid" 2>/dev/null
+    wait "$pid" 2>/dev/null || true
+    return 124
+  fi
+  wait "$pid"
+}
 
 on_fail() {
   local code=$?
@@ -98,36 +116,89 @@ ensure_data_volume() {
   link_service "$API_SERVICE"
   if railway_cmd volume list -s "$API_SERVICE" 2>/dev/null | grep -q "${DATA_MOUNT}"; then
     log "volume mounted at ${DATA_MOUNT}"
+    DATABASE_URL="${NF_GOV_DATABASE_URL:-sqlite:////data/gov_sandbox.db}"
     return 0
   fi
   log "provisioning volume mount ${DATA_MOUNT} on ${API_SERVICE}…"
-  railway_cmd volume add -m "$DATA_MOUNT" -s "$API_SERVICE" >/dev/null 2>&1 || \
-    log "WARN: volume add failed — using ephemeral sqlite until volume provisioned"
+  if railway_cmd volume add -m "$DATA_MOUNT" -s "$API_SERVICE" >/dev/null 2>&1; then
+    log "volume mounted at ${DATA_MOUNT}"
+    DATABASE_URL="${NF_GOV_DATABASE_URL:-sqlite:////data/gov_sandbox.db}"
+    return 0
+  fi
+  log "WARN: volume add failed — using ephemeral sqlite at ./gov_sandbox.db"
+  DATABASE_URL="${NF_GOV_DATABASE_URL:-sqlite:///./gov_sandbox.db}"
+}
+
+write_api_deploy_stamp() {
+  printf '%s\n' "${GIT_SHA:-deploy-$(date -u +%Y%m%dT%H%M%SZ)}" > "${ROOT}/governance-console/backend/.nf-deploy-stamp"
+}
+
+latest_deployment_meta() {
+  local svc="$1"
+  railway_cmd deployment list -s "$svc" --json 2>/dev/null | python3 -c "
+import json, sys
+raw = sys.stdin.read().strip()
+if not raw:
+    print('UNKNOWN', '', '')
+    raise SystemExit(0)
+items = json.loads(raw)
+if not items:
+    print('UNKNOWN', '', '')
+    raise SystemExit(0)
+latest = items[0]
+meta = latest.get('meta') or {}
+print(latest.get('status', 'UNKNOWN'), latest.get('id', ''), meta.get('skippedReason', '') or '')
+" 2>/dev/null || echo "UNKNOWN  "
 }
 
 wait_for_deployment_success() {
   local name="$1"
-  local attempt status
+  local attempt status dep_id skip_reason
   link_service "$name"
-  for attempt in $(seq 1 30); do
-    status="$(railway_cmd service status -s "$name" 2>/dev/null | grep -E '^Status:' | awk '{print $2}' || true)"
+  sleep 5
+  for attempt in $(seq 1 45); do
+    read -r status dep_id skip_reason <<< "$(latest_deployment_meta "$name")"
     case "$status" in
       SUCCESS)
-        log "${name} deployment SUCCESS"
+        if [[ "$skip_reason" == "No changes to watched files" ]]; then
+          log "WARN ${name} latest deployment SKIPPED (watch paths) — retry with deploy stamp"
+          return 2
+        fi
+        log "${name} deployment SUCCESS (${dep_id})"
         return 0
         ;;
+      SKIPPED)
+        log "WARN ${name} deployment SKIPPED (${dep_id}) — retry required"
+        return 2
+        ;;
       FAILED|CRASHED)
-        log "FAIL ${name} deployment ${status}"
+        log "FAIL ${name} deployment ${status} (${dep_id})"
         return 1
         ;;
       *)
-        log "waiting for ${name} deploy (${attempt}/30) status=${status:-unknown}…"
+        log "waiting for ${name} deploy (${attempt}/45) status=${status:-unknown} id=${dep_id:-?}…"
         sleep 10
         ;;
     esac
   done
   log "WARN: ${name} deployment did not reach SUCCESS in time"
   return 1
+}
+
+with_gov_web_railway_toml() {
+  local web_toml="${ROOT}/governance-console/railway.web.toml"
+  local root_toml="${ROOT}/railway.toml"
+  local backup=""
+  if [[ ! -f "$web_toml" ]]; then
+    log "FAIL missing ${web_toml}"
+    return 1
+  fi
+  if [[ -f "$root_toml" ]]; then
+    backup="$(mktemp)"
+    cp "$root_toml" "$backup"
+  fi
+  cp "$web_toml" "$root_toml"
+  trap 'if [[ -n "${backup:-}" && -f "${backup}" ]]; then cp "${backup}" "${ROOT}/railway.toml"; rm -f "${backup}"; fi' RETURN
 }
 
 proxy_cfg_origin() {
@@ -163,43 +234,121 @@ bash scripts/check-gov-railway-manifest.sh
 
 link_service "$API_SERVICE"
 
+pin_gov_railway_build_config() {
+  local api_id web_id
+  api_id="$(railway_cmd service list --json 2>/dev/null | python3 -c "
+import json, sys
+raw = sys.stdin.read().strip()
+if not raw:
+    raise SystemExit(0)
+data = json.loads(raw)
+items = data if isinstance(data, list) else data.get('services', [])
+for x in items:
+    if x.get('name') == '${API_SERVICE}':
+        print(x.get('id', ''))
+        break
+" 2>/dev/null || true)"
+  web_id="$(railway_cmd service list --json 2>/dev/null | python3 -c "
+import json, sys
+raw = sys.stdin.read().strip()
+if not raw:
+    raise SystemExit(0)
+data = json.loads(raw)
+items = data if isinstance(data, list) else data.get('services', [])
+for x in items:
+    if x.get('name') == '${WEB_SERVICE}':
+        print(x.get('id', ''))
+        break
+" 2>/dev/null || true)"
+  if [[ -z "$api_id" || -z "$web_id" ]]; then
+    log "WARN: could not resolve Railway service ids for build config pin"
+    return 0
+  fi
+  python3 -c "
+import json
+patch = {
+  'services': {
+    '${api_id}': {
+      'build': {
+        'builder': 'DOCKERFILE',
+        'dockerfilePath': 'Dockerfile',
+        'watchPatterns': ['**'],
+      },
+      'deploy': {'healthcheckPath': '/health', 'healthcheckTimeout': 120},
+    },
+    '${web_id}': {
+      'build': {
+        'builder': 'DOCKERFILE',
+        'dockerfilePath': 'governance-console/Dockerfile.www',
+        'watchPatterns': ['governance-console/**', 'packages/ui-tokens/**'],
+      },
+      'deploy': {'healthcheckPath': '/workspace', 'healthcheckTimeout': 300},
+    },
+  }
+}
+print(json.dumps(patch))
+" | run_with_timeout 30 railway_cmd environment edit --json -m "gov-sandbox: governance-console dockerfiles" >/dev/null 2>&1 \
+    || log "WARN: could not patch Railway build config (API uses --path-as-root)"
+}
+
 log "pin Railway build config (gov-console images, not platform-api)…"
-railway_cmd environment edit -p "$PROJECT_ID" -e "$ENV_NAME" \
-  --service-config "$API_SERVICE" build.builder DOCKERFILE \
-  --service-config "$API_SERVICE" build.dockerfilePath "governance-console/backend/Dockerfile" \
-  --service-config "$API_SERVICE" build.watchPatterns '["governance-console/backend/**"]' \
-  --service-config "$WEB_SERVICE" build.builder DOCKERFILE \
-  --service-config "$WEB_SERVICE" build.dockerfilePath "governance-console/Dockerfile.www" \
-  --service-config "$WEB_SERVICE" build.watchPatterns '["governance-console/**","packages/ui-tokens/**"]' \
-  -m "gov-sandbox: governance-console dockerfiles" \
-  >/dev/null 2>&1 || log "WARN: could not patch Railway build config"
+pin_gov_railway_build_config
 
 ensure_data_volume
 
 log "set API variables (CORS, SQLite volume path, GIT_SHA)…"
-railway_cmd variable set \
-  -s "$API_SERVICE" \
-  --set "CORS_ORIGINS=https://www.noetfield.com,https://noetfield.com,http://localhost:13080" \
-  --set "DATABASE_URL=${DATABASE_URL}" \
-  --set "GIT_SHA=${GIT_SHA}" \
+if ! railway_cmd variable set -s "$API_SERVICE" \
+  "CORS_ORIGINS=https://www.noetfield.com,https://noetfield.com,http://localhost:13080" \
+  "DATABASE_URL=${DATABASE_URL}" \
+  "GIT_SHA=${GIT_SHA}" \
   --skip-deploys \
-  >/dev/null 2>&1 || log "WARN: could not set API variables"
+  >/dev/null 2>&1; then
+  log "WARN: could not set API variables"
+fi
 
 log "deploy API (${API_SERVICE})…"
 ensure_railway_domain "$API_SERVICE" "$API_CUSTOM_DOMAIN"
+write_api_deploy_stamp
 (
   cd "${ROOT}"
-  railway_cmd up "./governance-console/backend" --path-as-root -s "$API_SERVICE" -d -m "gov-sandbox-api: governance-console backend"
+  railway_cmd up "./governance-console/backend" --path-as-root -s "$API_SERVICE" -d -m "gov-sandbox-api: governance-console backend ${GIT_SHA:0:12}"
 )
-wait_for_deployment_success "$API_SERVICE"
+if ! wait_for_deployment_success "$API_SERVICE"; then
+  rc=$?
+  if [[ "$rc" -eq 2 ]]; then
+    write_api_deploy_stamp
+    printf 'retry-%s\n' "$(date -u +%s)" >> "${ROOT}/governance-console/backend/.nf-deploy-stamp"
+    (
+      cd "${ROOT}"
+      railway_cmd up "./governance-console/backend" --path-as-root -s "$API_SERVICE" -d -m "gov-sandbox-api: forced ${GIT_SHA:0:12}"
+    )
+    wait_for_deployment_success "$API_SERVICE" || exit 4
+  else
+    exit "$rc"
+  fi
+fi
 
 log "deploy Web (${WEB_SERVICE})…"
 ensure_railway_domain "$WEB_SERVICE" "$WEB_CUSTOM_DOMAIN"
 (
   cd "${ROOT}"
-  railway_cmd up -s "$WEB_SERVICE" -d -m "gov-sandbox-web: Next workspace /workspace"
+  with_gov_web_railway_toml
+  railway_cmd up -s "$WEB_SERVICE" -d -m "gov-sandbox-web: Next workspace ${GIT_SHA:0:12}"
 )
-wait_for_deployment_success "$WEB_SERVICE"
+if ! wait_for_deployment_success "$WEB_SERVICE"; then
+  rc=$?
+  if [[ "$rc" -eq 2 ]]; then
+    (
+      cd "${ROOT}"
+      with_gov_web_railway_toml
+      printf 'retry-%s\n' "$(date -u +%s)" > "${ROOT}/governance-console/.nf-web-deploy-stamp"
+      railway_cmd up -s "$WEB_SERVICE" -d -m "gov-sandbox-web: forced ${GIT_SHA:0:12}"
+    )
+    wait_for_deployment_success "$WEB_SERVICE" || exit 5
+  else
+    exit "$rc"
+  fi
+fi
 
 log "resolve Railway service URLs…"
 API_RAILWAY="$(wait_for_railway_url "$API_SERVICE" || true)"
@@ -225,6 +374,9 @@ WEB_URL="$(prefer_url "$WEB_CUSTOM_DOMAIN" "$WEB_RAILWAY")"
 log "API URL: ${API_URL}"
 log "WEB URL: ${WEB_URL}"
 
+SHA_NOTE="${GIT_SHA:0:12}"
+[[ -z "$SHA_NOTE" ]] && SHA_NOTE="unknown"
+
 python3 - <<PY
 import json
 from pathlib import Path
@@ -233,7 +385,7 @@ cfg = {
     "enabled": True,
     "gov_web_origin": "${WEB_URL}".rstrip("/"),
     "gov_api_origin": "${API_URL}".rstrip("/"),
-    "notes": f"gov-sandbox deploy env=${ENV_NAME} sha=${GIT_SHA[:12] if GIT_SHA else 'unknown'}",
+    "notes": "gov-sandbox deploy env=${ENV_NAME} sha=${SHA_NOTE}",
 }
 path = Path("${PROXY_CFG}")
 path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")

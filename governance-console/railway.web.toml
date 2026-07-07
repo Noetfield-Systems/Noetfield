@@ -2,6 +2,7 @@
 [build]
 builder = "DOCKERFILE"
 dockerfilePath = "governance-console/Dockerfile.www"
+watchPatterns = ["governance-console/**", "packages/ui-tokens/**"]
 
 [deploy]
 healthcheckPath = "/workspace"
