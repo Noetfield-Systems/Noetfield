@@ -59,6 +59,45 @@ wait_for_railway_url() {
   return 1
 }
 
+ensure_railway_domain() {
+  local name="$1"
+  link_service "$name"
+  local existing
+  existing="$(railway_service_url "$name" || true)"
+  if [[ -n "$existing" ]]; then
+    log "domain exists: ${name} → ${existing}"
+    return 0
+  fi
+  log "creating Railway domain for ${name}…"
+  railway_cmd domain -s "$name" >/dev/null 2>&1 || log "WARN: could not create domain for ${name}"
+  sleep 5
+}
+
+wait_for_deployment_success() {
+  local name="$1"
+  local attempt status
+  link_service "$name"
+  for attempt in $(seq 1 30); do
+    status="$(railway_cmd service status -s "$name" 2>/dev/null | grep -E '^Status:' | awk '{print $2}' || true)"
+    case "$status" in
+      SUCCESS)
+        log "${name} deployment SUCCESS"
+        return 0
+        ;;
+      FAILED|CRASHED)
+        log "FAIL ${name} deployment ${status}"
+        return 1
+        ;;
+      *)
+        log "waiting for ${name} deploy (${attempt}/30) status=${status:-unknown}…"
+        sleep 10
+        ;;
+    esac
+  done
+  log "WARN: ${name} deployment did not reach SUCCESS in time"
+  return 1
+}
+
 proxy_cfg_origin() {
   local key="$1"
   python3 -c "
@@ -80,8 +119,10 @@ log "pin Railway build config (gov-console images, not platform-api)…"
 railway_cmd environment edit -e "$ENV_NAME" \
   --service-config "$API_SERVICE" build.builder DOCKERFILE \
   --service-config "$API_SERVICE" build.dockerfilePath "governance-console/backend/Dockerfile" \
+  --service-config "$API_SERVICE" build.watchPatterns '["governance-console/backend/**"]' \
   --service-config "$WEB_SERVICE" build.builder DOCKERFILE \
   --service-config "$WEB_SERVICE" build.dockerfilePath "governance-console/Dockerfile.www" \
+  --service-config "$WEB_SERVICE" build.watchPatterns '["governance-console/**","packages/ui-tokens/**"]' \
   -m "gov-sandbox: governance-console dockerfiles" \
   >/dev/null 2>&1 || log "WARN: could not patch Railway build config"
 
@@ -95,13 +136,16 @@ railway_cmd variable set \
 
 log "deploy API (${API_SERVICE})…"
 link_service "$API_SERVICE"
+ensure_railway_domain "$API_SERVICE"
 (
   cd "${ROOT}"
   railway_cmd up "./governance-console/backend" --path-as-root -s "$API_SERVICE" -d -m "gov-sandbox-api: governance-console backend"
 )
+wait_for_deployment_success "$API_SERVICE" || exit 2
 
 log "deploy Web (${WEB_SERVICE})…"
 link_service "$WEB_SERVICE"
+ensure_railway_domain "$WEB_SERVICE"
 (
   cd "${ROOT}"
   if [[ -f railway.toml ]]; then
@@ -115,6 +159,7 @@ link_service "$WEB_SERVICE"
     rm -f railway.toml
   fi
 )
+wait_for_deployment_success "$WEB_SERVICE" || exit 2
 
 log "resolve Railway service URLs (domain list + retry)…"
 API_URL="$(wait_for_railway_url "$API_SERVICE" || true)"
@@ -159,6 +204,12 @@ log "smoke API…"
 curl -sf "${API_URL}/health" | head -c 200
 echo
 log "smoke WEB workspace…"
-curl -sf "${WEB_URL}/workspace" | grep -qE '_next|Trust Ledger Workspace' && log "OK workspace shell" || log "WARN: workspace shell missing on Railway URL"
+curl -sfL "${WEB_URL}/workspace" | grep -qE '_next|Trust Ledger Workspace' || {
+  log "FAIL workspace shell missing on Railway URL"
+  exit 3
+}
+log "OK workspace shell on Railway"
+
+bash scripts/verify-gov-sandbox-railway.sh || exit 4
 
 log "done — run: bash scripts/deploy-www-cloudflare.sh to promote www proxy"
