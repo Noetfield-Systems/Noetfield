@@ -109,7 +109,7 @@ const nonClaims = [
 
 export default function ServiceACG() {
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-16 text-slate-100">
+    <main id="main-content" className="min-h-screen bg-slate-950 px-6 py-16 text-slate-100">
       {/* Hero Section */}
       <section className="mx-auto max-w-5xl mb-20">
         <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">
@@ -325,12 +325,6 @@ export default function ServiceACG() {
             Contact: operations@noetfield.com
           </p>
         </div>
-      </section>
-
-      {/* Footer */}
-      <section className="mx-auto max-w-5xl border-t border-slate-800 pt-12 text-center text-slate-500 text-xs">
-        <p>Agentic Cost Governance Service</p>
-        <p className="mt-2">Published: 2026-07-05</p>
       </section>
     </main>
   );

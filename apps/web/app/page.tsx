@@ -17,7 +17,7 @@ const services = [
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-16 text-slate-100">
+    <main id="main-content" className="min-h-screen bg-slate-950 px-6 py-16 text-slate-100">
       <section className="mx-auto max-w-5xl">
         <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">Noetfield v3.1</p>
         <h1 className="mt-6 text-5xl font-semibold tracking-tight">
