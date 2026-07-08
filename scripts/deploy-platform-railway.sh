@@ -109,6 +109,14 @@ deploy_api() {
     railway_cmd variable set --service "$API_SERVICE" --skip-deploys "GIT_SHA=${git_sha}"
   fi
   railway_cmd up --service "$API_SERVICE" -d -y
+  if [[ -n "$git_sha" ]]; then
+    log "Waiting for live platform git_sha to match ${git_sha:0:12}…"
+    PLATFORM_BASE="https://${PLATFORM_DOMAIN}" \
+      "$ROOT/scripts/wait-for-platform-sha.sh" --expected-sha "$git_sha" --platform-base "https://${PLATFORM_DOMAIN}"
+    python3 "$ROOT/scripts/nf_post_deploy_verify.py" --expected-sha "$git_sha" --surface platform \
+      --platform-base "https://${PLATFORM_DOMAIN}"
+    "$ROOT/scripts/sync-probe-expected-sha.sh" "$git_sha" || log "WARN: probe EXPECTED_GIT_SHA sync skipped"
+  fi
 }
 
 wait_for_railway_url() {

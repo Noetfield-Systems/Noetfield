@@ -1,6 +1,21 @@
 #!/bin/sh
 set -eu
 
+# Keep .deploy_git_sha aligned with Railway runtime identity so health git_sha
+# matches repo HEAD even when the image stamp is from an older build layer.
+_deploy_sha=""
+for _key in GIT_SHA RAILWAY_GIT_COMMIT_SHA VERCEL_GIT_COMMIT_SHA; do
+  eval "_val=\${$_key:-}"
+  if [ -n "$_val" ]; then
+    _deploy_sha="$_val"
+    break
+  fi
+done
+if [ -n "$_deploy_sha" ]; then
+  printf '%s\n' "$_deploy_sha" > /app/.deploy_git_sha
+  export GIT_SHA="$_deploy_sha"
+fi
+
 # Railway / Render often provide postgresql:// — normalize for asyncpg consumers.
 case "${DATABASE_URL:-}" in
   postgresql://*)
