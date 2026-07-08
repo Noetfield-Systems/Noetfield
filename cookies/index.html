@@ -3,11 +3,47 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Noetfield</title>
- <meta http-equiv="refresh" content="0;url=/" />
- <link rel="canonical" href="https://www.noetfield.com/" />
+ <title>Noetfield — Cookies</title>
+ <meta name="description" content="Cookie categories used on noetfield.com." />
+ <meta name="robots" content="index,follow" />
+ <meta name="theme-color" content="#f4f5f8" />
+ <link rel="canonical" href="https://www.noetfield.com/cookies/" />
+ <meta name="nf-chat-api-base" content="https://platform.noetfield.com" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
+ <link rel="stylesheet" href="/assets/noetfield-shell.css" />
+ <link rel="stylesheet" href="/assets/noetfield-www.css?v=42" />
+ <link rel="stylesheet" href="/assets/noetfield-print.css?v=42" media="print" />
+
+ <script src="/assets/noetfield-shell.js?v=42" defer></script>
+ <script src="/assets/noetfield-intake-core.js?v=42" defer></script>
+ <script src="/assets/noetfield-forms.js?v=42" defer></script>
 </head>
-<body>
- <p><a href="/">Continue</a></p>
+<body class="nf-www nf-site-v14">
+ <div class="bg" aria-hidden="true"></div>
+ <a class="skip" href="#main">Skip to content</a>
+ <header id="nfHeader"></header>
+ <main id="main" class="nf-main nf-page">
+
+ <header class="nf-hero-cinematic">
+ <div>
+ <h1>Cookies</h1>
+ <p class="nf-lead">Essential storage by default — analytics is optional.</p>
+ <div class="nf-cta-actions"><button type="button" class="btn btn-secondary" data-cookie-manage>Cookie preferences</button></div>
+ </div>
+ </header>
+ <div class="nf-prose">
+ <section><h2>Essential (always on)</h2><p>Required to remember your cookie choice while using this site.</p>
+ <table><thead><tr><th>Name</th><th>Storage</th><th>Purpose</th></tr></thead>
+ <tbody><tr><td><code>noetfield_cookie_consent_v1</code></td><td>localStorage</td><td>Stores your consent decision</td></tr>
+ <tr><td><code>nf_rid</code></td><td>sessionStorage</td><td>Request ID for intake threading</td></tr></tbody></table></section>
+ <section><h2>Analytics (optional)</h2><p>If you opt in, we record first-party page and CTA events to <code>/api/analytics/event</code> on noetfield.com. No third-party ad trackers are used.</p></section>
+ <section><h2>Manage preferences</h2><p>Use <button type="button" class="nf-cookie-manage-link" data-cookie-manage>Cookie preferences</button> in the footer or the button above. See also <a href="/privacy/">Privacy</a>.</p></section>
+ </div>
+ </main>
+ <footer id="nfFooter"></footer>
 </body>
 </html>

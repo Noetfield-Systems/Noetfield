@@ -12,7 +12,7 @@
 (function () {
   "use strict";
 
-  var SHELL_VERSION = "2026.06.26.v21";
+  var SHELL_VERSION = "2026.07.08.v22";
   var PARTIALS_BASE = "/assets/partials";
   var RID_KEY = "nf_rid";
 
@@ -469,7 +469,36 @@
     } catch (_) {}
   }
 
+  function hasAnalyticsConsent() {
+    try {
+      if (window.NFCookieConsent && window.NFCookieConsent.read) {
+        var row = window.NFCookieConsent.read();
+        return !!(row && row.analytics);
+      }
+      var raw = localStorage.getItem("noetfield_cookie_consent_v1");
+      if (!raw) return false;
+      return JSON.parse(raw).analytics === true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function loadCookieConsent(done) {
+    if (window.NFCookieConsent) {
+      done();
+      return;
+    }
+    var s = document.createElement("script");
+    s.src = "/assets/noetfield-cookie-consent.js?v=" + encodeURIComponent(SHELL_VERSION);
+    s.defer = true;
+    s.onload = done;
+    s.onerror = done;
+    document.head.appendChild(s);
+  }
+
   function installAnalytics() {
+    if (window.__nfAnalyticsInstalled) return;
+    window.__nfAnalyticsInstalled = true;
     window.NFAnalytics = window.NFAnalytics || { track: track };
     track("page_view", { component: "page", title: document.title || "" });
     document.addEventListener("click", function (ev) {
@@ -619,7 +648,14 @@
     initBurger();
     normalizeFooterCTA();
     ensureFeedbackTab(rid, eco);
-    installAnalytics();
+
+    loadCookieConsent(function () {
+      if (hasAnalyticsConsent()) installAnalytics();
+      document.addEventListener("nf:cookie-consent", function (ev) {
+        if (ev.detail && ev.detail.analytics) installAnalytics();
+      });
+    });
+
     loadPublicChat();
 
     emitReady(rid);
