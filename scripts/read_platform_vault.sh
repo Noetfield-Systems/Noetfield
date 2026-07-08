@@ -58,6 +58,9 @@ keys = [
     "DATABASE_URL",
     "RESEND_API_KEY",
     "OPENROUTER_API_KEY",
+    "VOYAGE_API_KEY",
+    "EMBEDDING_PROVIDER",
+    "VOYAGE_MODEL",
 ]
 files = sys.argv[1:]
 
@@ -94,6 +97,8 @@ print(
                 "DATABASE_URL": bool(
                     merged.get("DATABASE_URL") or merged.get("NOETFIELD_SUPABASE_DATABASE_URL")
                 ),
+                "VOYAGE_API_KEY": bool(merged.get("VOYAGE_API_KEY")),
+                "EMBEDDING_PROVIDER": bool(merged.get("EMBEDDING_PROVIDER")),
             },
         }
     )

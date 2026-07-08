@@ -30,6 +30,7 @@ def build_truth_bundle() -> dict:
         "session_gate": load_event("nf-session-gate-v1.json", root) or load_sina("nf_session_gate_receipt_v1.json"),
         "stale_guard": load_event("nf-stale-guard-v1.json", root),
         "voyage_integrity": load_event("nf-voyage-integrity-v1.json", root),
+        "voyage_ai_live_wire": load_event("nf-voyage-ai-live-wire-v1.json", root) or load_sina("nf-voyage-ai-live-wire-v1.json"),
         "live_routing": load_event("nf-live-routing-v1.json", root),
         "live_surfaces": load_event("nf-live-surfaces-v1.json", root) or load_sina("nf-live-surfaces-v1.json"),
         "receipt_cascade": load_event("nf-receipt-cascade-v1.json", root),

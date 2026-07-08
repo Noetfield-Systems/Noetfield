@@ -55,8 +55,11 @@ bash scripts/nf_routing_card.sh --json > /dev/null
 echo "step 6/11 stale guard"
 python3 scripts/nf_stale_guard_v1.py --json || FAIL=1
 
-echo "step 7/11 voyage integrity"
+echo "step 7/12 voyage integrity (queue alignment)"
 python3 scripts/nf_voyage_integrity_v1.py --json || FAIL=1
+
+echo "step 7b/12 voyage AI live wire (SourceA VOYAGE_API_KEY anti-drift)"
+python3 scripts/nf_voyage_ai_live_wire_v1.py --json || FAIL=1
 
 echo "step 8/12 live surfaces + truth bundle"
 python3 scripts/nf_live_surfaces_v1.py --json || FAIL=1

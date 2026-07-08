@@ -49,6 +49,14 @@ def run_gatekeeper(require_implement: bool = False) -> dict:
     if voyage and not voyage.get("ok", True):
         reasons.append("VOYAGE_INTEGRITY_FAIL")
 
+    voyage_ai = load_event("nf-voyage-ai-live-wire-v1.json", root) or load_sina("nf-voyage-ai-live-wire-v1.json") or {}
+    if voyage_ai.get("required_when_key_present") and not voyage_ai.get("ok", False):
+        provider = voyage_ai.get("provider") or {}
+        if provider.get("voyage_key_on_disk") and provider.get("mode") == "hash_local":
+            reasons.append("VOYAGE_AI_FAKE_GREEN")
+        else:
+            reasons.append("VOYAGE_AI_WIRE_FAIL")
+
     cascade = load_event("nf-receipt-cascade-v1.json", root) or load_sina("nf-receipt-cascade-v1.json") or {}
     if cascade and not cascade.get("ok", True):
         nodes = cascade.get("nodes") or []

@@ -272,6 +272,10 @@ nf-voyage-integrity:
 	@chmod +x scripts/nf-voyage-integrity-pipeline.sh
 	./scripts/nf-voyage-integrity-pipeline.sh
 
+nf-voyage-ai-wire:
+	@chmod +x scripts/verify-nf-voyage-ai-live-wire-v1.sh
+	./scripts/verify-nf-voyage-ai-live-wire-v1.sh
+
 nf-orient:
 	@python3 scripts/nf_orient_v1.py --json
 

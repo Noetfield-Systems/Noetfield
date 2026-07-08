@@ -83,6 +83,7 @@ def build_live_surfaces(root: Path | None = None) -> dict:
     gate = load_event("nf-session-gate-v1.json", root) or load_sina("nf_session_gate_receipt_v1.json") or {}
     stale = load_event("nf-stale-guard-v1.json", root) or {}
     voyage = load_event("nf-voyage-integrity-v1.json", root) or {}
+    voyage_ai = load_event("nf-voyage-ai-live-wire-v1.json", root) or load_sina("nf-voyage-ai-live-wire-v1.json") or {}
     routing = load_event("nf-live-routing-v1.json", root) or {}
 
     pid = (pending or {}).get("id", "")
@@ -97,6 +98,13 @@ def build_live_surfaces(root: Path | None = None) -> dict:
     gate_ok = bool(gate.get("ok"))
     context_stale = bool(stale.get("context_stale"))
     voyage_ok = bool(voyage.get("ok", True))
+    voyage_ai_ok = bool(voyage_ai.get("ok", True))
+    voyage_line = (
+        voyage_ai.get("voyage_line")
+        or voyage_ai.get("sourcea_voyage_line")
+        or (load_sina("agent-live-surfaces-v1.json") or {}).get("voyage_line")
+        or ""
+    )
 
     portfolio_block = _portfolio_commercial_blockers()
     email_line = portfolio_block.get("email_send_defer_line") or mono_nerve.get("email_send_defer_line") or ""
@@ -123,6 +131,15 @@ def build_live_surfaces(root: Path | None = None) -> dict:
         "gate_ok": gate_ok,
         "context_stale": context_stale,
         "voyage_ok": voyage_ok,
+        "voyage_ai_ok": voyage_ai_ok,
+        "voyage_line": voyage_line or None,
+        "voyage_ai": {
+            "receipt": "reports/agent-auto/events/nf-voyage-ai-live-wire-v1.json",
+            "mode": (voyage_ai.get("provider") or {}).get("mode"),
+            "model": (voyage_ai.get("provider") or {}).get("model"),
+            "semantic": (voyage_ai.get("provider") or {}).get("semantic"),
+            "search_hits": (voyage_ai.get("search") or {}).get("hits"),
+        },
         "pending_task": pending,
         "git_sha": _git_short(root),
         "routing_pending": routing.get("pending_task"),
@@ -155,7 +172,7 @@ def main() -> int:
         if surfaces.get("email_send_defer_line"):
             print(f"email_send_defer_line: {surfaces['email_send_defer_line']}")
         print(f"defer_active={surfaces.get('defer_active')} w3_send_ready={surfaces.get('w3_send_ready')}")
-        print(f"gate_ok={surfaces['gate_ok']} stale={surfaces['context_stale']} voyage_ok={surfaces['voyage_ok']}")
+        print(f"gate_ok={surfaces['gate_ok']} stale={surfaces['context_stale']} voyage_ok={surfaces['voyage_ok']} voyage_ai_ok={surfaces.get('voyage_ai_ok')}")
     ok = bool(surfaces.get("surfaces_ok")) and bool(surfaces.get("email_send_defer_line")) and bool(surfaces.get("mono_nerve_ok"))
     return 0 if ok else 1
 

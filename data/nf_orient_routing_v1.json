@@ -35,6 +35,7 @@
     {"id": "nf_session_gate", "path": "nf-session-gate-v1.json", "sina": "nf_session_gate_receipt_v1.json", "fail_node": "nf_session_gate"},
     {"id": "nf_stale_guard", "path": "nf-stale-guard-v1.json", "fail_node": "nf_stale_guard", "stale_field": "context_stale"},
     {"id": "nf_voyage_integrity", "path": "nf-voyage-integrity-v1.json", "fail_node": "nf_voyage_integrity", "ok_field": "ok"},
+    {"id": "nf_voyage_ai_live_wire", "path": "nf-voyage-ai-live-wire-v1.json", "sina": "nf-voyage-ai-live-wire-v1.json", "fail_node": "nf_voyage_ai_live_wire", "ok_field": "ok"},
     {"id": "nf_live_routing", "path": "nf-live-routing-v1.json", "fail_node": "nf_routing_card"},
     {"id": "nf_live_surfaces", "path": "nf-live-surfaces-v1.json", "sina": "nf-live-surfaces-v1.json", "fail_node": "nf_live_surfaces", "required_line": "product_now_line", "required_line_2": "email_send_defer_line"},
     {"id": "nf_orient_read_chain", "path": "nf-orient-read-chain-v1.json", "sina": "nf-orient-read-chain-v1.json", "fail_node": "nf_orient_read_chain", "ok_field": "ok"}
