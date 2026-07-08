@@ -20,6 +20,23 @@ DEFAULT_QUERY = "Noetfield copilot governance pilot trust brief intake"
 KNOWLEDGE_DIR = "data/chatbot/knowledge"
 
 
+def _rate_limited(reason: str) -> bool:
+    text = (reason or "").lower()
+    return "429" in text or "rate limit" in text or "rate limits" in text
+
+
+def _degraded_search(*, reason: str, query: str, chunk_count: int = 0) -> dict:
+    return {
+        "ok": True,
+        "degraded": True,
+        "reason": reason,
+        "hits": 0,
+        "mode": "rate_limited",
+        "chunk_count": chunk_count,
+        "query": query[:80],
+    }
+
+
 def _knowledge_chunks(root: Path) -> list[dict]:
     base = root / KNOWLEDGE_DIR
     if not base.is_dir():
@@ -72,7 +89,10 @@ def _active_search(*, root: Path, query: str) -> dict:
         if len(qvec) < 8:
             return {"ok": False, "reason": "empty_embedding", "hits": 0}
     except Exception as exc:
-        return {"ok": False, "reason": str(exc), "hits": 0}
+        reason = str(exc)
+        if _rate_limited(reason):
+            return _degraded_search(reason="voyage_rate_limited", query=query)
+        return {"ok": False, "reason": reason, "hits": 0}
 
     chunks = _knowledge_chunks(root)
     if len(chunks) < 3:
@@ -86,15 +106,24 @@ def _active_search(*, root: Path, query: str) -> dict:
         }
 
     scored: list[tuple[float, dict]] = []
+    rate_limited = False
     for chunk in chunks[:12]:
         try:
             cvec = embed_text(chunk["text"][:1200], is_query=False)
             score = cosine(qvec, cvec)
-        except Exception:
+        except Exception as exc:
+            if _rate_limited(str(exc)):
+                rate_limited = True
             score = 0.0
         scored.append((score, chunk))
     scored.sort(key=lambda row: row[0], reverse=True)
     hits = [row for row in scored if row[0] > 0.01][:3]
+    if not hits and rate_limited:
+        return _degraded_search(
+            reason="voyage_rate_limited_partial",
+            query=query,
+            chunk_count=len(chunks),
+        )
     top = hits[0] if hits else (0.0, {})
     return {
         "ok": len(hits) >= 1,
@@ -113,7 +142,9 @@ def _compose_voyage_line(*, provider: dict, index: dict, search: dict) -> str:
     model = provider.get("model") or "?"
     chunks = index.get("chunk_count") or 0
     hits = search.get("hits") or 0
-    if provider.get("ok") and search.get("ok"):
+    if search.get("degraded"):
+        status = "RATE_LIMIT"
+    elif provider.get("ok") and search.get("ok"):
         status = "ACTIVE"
     elif provider.get("ok") and index.get("ok"):
         status = "READY"
@@ -139,8 +170,9 @@ def run_voyage_ai_live_wire(*, query: str = DEFAULT_QUERY, root: Path | None = N
 
     key_on_disk = bool(provider.get("voyage_key_on_disk"))
     ok = True
+    degraded = bool(search.get("degraded"))
     if key_on_disk:
-        ok = bool(provider.get("ok")) and bool(search.get("ok"))
+        ok = bool(provider.get("ok")) and (bool(search.get("ok")) or degraded)
     else:
         ok = True
         provider["note"] = "VOYAGE_API_KEY not configured — wire advisory only"
@@ -152,6 +184,7 @@ def run_voyage_ai_live_wire(*, query: str = DEFAULT_QUERY, root: Path | None = N
     receipt = {
         "schema_version": "nf-voyage-ai-live-wire-v1",
         "ok": ok,
+        "degraded": degraded,
         "generated_at": iso_now(),
         "law": "SourceA SECRETS_VAULT.md · nf-embedding-provider-v1 · INCIDENT-036 guard",
         "voyage_line": voyage_line,

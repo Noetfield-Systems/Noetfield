@@ -40,6 +40,26 @@ def test_fake_green_provider_status(monkeypatch) -> None:
     assert status["ok"] is False
 
 
+def test_rate_limited_search_is_degraded_ok(monkeypatch, tmp_path: Path) -> None:
+    root = tmp_path / "repo"
+    knowledge = root / "data" / "chatbot" / "knowledge"
+    knowledge.mkdir(parents=True)
+    for name in ("faq.md", "site.md", "offerings.md"):
+        (knowledge / name).write_text(f"# {name}\nNoetfield governance pilot.\n", encoding="utf-8")
+
+    monkeypatch.setattr(wire, "provider_payload", lambda: {"mode": "voyage", "model": "voyage-4-lite", "semantic": True, "hybrid": True, "producer": "x", "voyage_key_on_disk": True})
+    monkeypatch.setattr(wire, "voyage_key_on_disk", lambda: True)
+
+    def _boom(text: str, is_query: bool = False) -> list[float]:
+        raise RuntimeError('Embedding API error 429: {"detail":"rate limits"}')
+
+    monkeypatch.setattr(wire, "embed_text", _boom)
+    receipt = wire.run_voyage_ai_live_wire(root=root, query="pilot")
+    assert receipt["ok"] is True
+    assert receipt["degraded"] is True
+    assert receipt["search"]["mode"] == "rate_limited"
+
+
 def test_live_wire_advisory_without_key(monkeypatch, tmp_path: Path) -> None:
     root = tmp_path / "repo"
     knowledge = root / "data" / "chatbot" / "knowledge"

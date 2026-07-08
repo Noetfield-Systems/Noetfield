@@ -132,6 +132,7 @@ def build_live_surfaces(root: Path | None = None) -> dict:
         "context_stale": context_stale,
         "voyage_ok": voyage_ok,
         "voyage_ai_ok": voyage_ai_ok,
+        "voyage_ai_degraded": bool(voyage_ai.get("degraded")),
         "voyage_line": voyage_line or None,
         "voyage_ai": {
             "receipt": "reports/agent-auto/events/nf-voyage-ai-live-wire-v1.json",
