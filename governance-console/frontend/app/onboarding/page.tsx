@@ -17,7 +17,7 @@ export default function OnboardingPage() {
       <UsageMeter className="mb-6" />
       <ol className="nf-card list-decimal space-y-4 p-6 pl-10 text-sm text-muted">
         <li>Account — work email and org (local sandbox tenant).</li>
-        <li>Environment — Sandbox active · Production locked until design partner.</li>
+        <li>Environment — Sandbox active · Production locked until pilot approval.</li>
         <li>Connect mock M365 — OAuth success UI in workspace connectors.</li>
         <li>First evaluate — POST /evaluate with confidence score and RID.</li>
         <li>Receipt + export — board PDF and procurement ZIP from workspace.</li>
