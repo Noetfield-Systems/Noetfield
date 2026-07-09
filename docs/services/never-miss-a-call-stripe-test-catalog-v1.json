@@ -1,0 +1,46 @@
+{
+  "catalog_version": "2026.07.09-draft",
+  "product_id": "never-miss-a-call",
+  "mode": "test",
+  "note": "Stripe TEST-mode scaffold only — no live account, no live Price IDs, no real charges. Prepared alongside services/never-miss-a-call/index.html so the setup fee + subscription can be wired once a Stripe test account/product exists. The live page does not link to Stripe; its only CTA is the missed-call-audit lead form.",
+  "billing_model": {
+    "setup_fee": {
+      "kind": "one_time",
+      "price_usd_cents": 49700,
+      "label": "Setup fee — $497 one-time",
+      "stripe_product_id": "TODO_create_in_stripe_test_mode",
+      "stripe_price_id": "TODO_create_in_stripe_test_mode"
+    },
+    "subscription": {
+      "kind": "recurring",
+      "interval": "month",
+      "price_usd_cents": 29700,
+      "label": "Monthly plan — $297/mo, up to 500 answered minutes included",
+      "included_minutes": 500,
+      "contract_term": "month-to-month, cancel anytime",
+      "stripe_product_id": "TODO_create_in_stripe_test_mode",
+      "stripe_price_id": "TODO_create_in_stripe_test_mode"
+    },
+    "overage": {
+      "kind": "metered",
+      "unit": "minute",
+      "price_usd_cents": 49,
+      "label": "Overage — $0.49/min beyond 500 included minutes/mo",
+      "stripe_product_id": "TODO_create_in_stripe_test_mode",
+      "stripe_price_id": "TODO_create_in_stripe_test_mode",
+      "billing_scheme": "per_unit",
+      "usage_type": "metered"
+    },
+    "guarantee": "14-day answered-or-refunded — refund setup fee + first month if not satisfied within 14 days"
+  },
+  "payment_link_url": null,
+  "checkout_type": "not_wired",
+  "blockers_before_enabling_checkout": [
+    "Create a Stripe TEST-mode account/workspace (or a test-mode product set inside the existing account) — do not reuse governance/STRIPE_CATALOG.json (that catalog is mode=live, different SKUs, different verify gate)",
+    "Create Product + one-time Price ($497) for setup fee in test mode",
+    "Create Product + recurring monthly Price ($297/mo) in test mode",
+    "Create Product + metered recurring Price ($0.49/min, usage_type=metered) in test mode, attached to the same subscription via a second subscription item",
+    "Paste the resulting test-mode price/product IDs into this file",
+    "Only after founder sign-off: replace payment_link_url / checkout_type and wire a Stripe Checkout Session (test mode) into the page — do not point at buy.stripe.com live links"
+  ]
+}

@@ -2022,27 +2022,32 @@ def write(
     *,
     main_class: str = "nf-main nf-page",
     head_extra: str = "",
+    shell: bool = True,
 ) -> None:
+    """shell=False drops the shared nfHeader/nfFooter injection + noetfield-shell.js —
+    for standalone lead-gen pages that must not surface the Noetfield enterprise
+    nav/brand chrome (e.g. white-label local-service microsites)."""
     if rel in PROTECTED_INTELLIGENCE_PATHS and (ROOT / rel).is_file():
         print("skip protected", rel)
         return
     path = ROOT / rel
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        HEAD.format(
-            title=title,
-            desc=desc,
-            canonical=canonical,
-            www_ver=WWW_VER,
-            body_class=body_class,
-            font_link=FONT_LINK,
-            main_class=main_class,
-            head_extra=head_extra,
-        )
-        + body
-        + FOOT,
-        encoding="utf-8",
+    head = HEAD.format(
+        title=title,
+        desc=desc,
+        canonical=canonical,
+        www_ver=WWW_VER,
+        body_class=body_class,
+        font_link=FONT_LINK,
+        main_class=main_class,
+        head_extra=head_extra,
     )
+    foot = FOOT
+    if not shell:
+        head = head.replace(f' <script src="/assets/noetfield-shell.js?v={WWW_VER}" defer></script>\n', "")
+        head = head.replace(' <header id="nfHeader"></header>\n', "")
+        foot = foot.replace(' <footer id="nfFooter"></footer>\n', "")
+    path.write_text(head + body + foot, encoding="utf-8")
     print("wrote", rel)
 
 
@@ -2869,43 +2874,51 @@ def agentic_cost_governance_body() -> str:
 
 
 def never_miss_a_call_body() -> str:
-    """Never Miss a Call — AI receptionist for local service businesses (SourceA product)."""
-    trial_cta = "https://buy.stripe.com/PLACEHOLDER_never_miss_a_call"  # TODO(stripe): swap for the live Payment Link once the SKU exists in Stripe
+    """Never Miss a Call — AI receptionist lead-gen page for local service businesses.
+
+    Vendor-neutral by design (no company/brand name in copy): shell=False at the
+    write() call site drops the shared nfHeader/nfFooter + enterprise nav. Lead
+    capture reuses the existing generic intake pipeline (data-nf-intake-form ->
+    /api/intake -> platform DB + ops notify) — see never_miss_a_call section of
+    docs/services/never-miss-a-call-stripe-test-setup-v1.md for the Stripe
+    test-mode wiring prepared alongside this page.
+    """
+    audit_cta = "#audit-form"
     return hero(
-        "AI receptionist · Local service businesses",
-        "Never Miss a Call",
-        "Never miss another customer call.",
-        "Your AI receptionist answers 24/7, books appointments, and texts you every lead — under $6/day.",
-        [("24/7 live answering", True), ("Under $6/day", False)],
-        [(trial_cta, "Start 7-day free trial", True)],
-        ["24/7 answering", "Appointment booking", "Instant lead texts"],
+        "",
+        "AI Receptionist for Local Service Businesses",
+        "Never Miss Another Call.",
+        "Your AI receptionist answers every call, day or night, books the job, and texts you the details — before you even have to pick up the phone.",
+        [("Every call answered", True), ("Setup in a day", False)],
+        [(audit_cta, "Get my free missed-call audit", True)],
+        ["Every call answered", "Appointments booked automatically", "You get a text the moment it ends"],
         panel(
-            "What's included",
+            "What you get",
             [
                 "24/7 call answering",
-                "Appointment booking",
-                "Lead capture + text alerts",
-                "Call transcripts",
-                "Bilingual support",
+                "Appointments booked into your calendar",
+                "Instant text summary after every call",
+                "Full call transcript",
+                "Callers are always told they're speaking with an AI",
             ],
         ),
     ) + f"""
  <section class="nf-section-block" aria-labelledby="nmc-01">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">01</span><div>
  <p class="nf-eyebrow" id="nmc-01">The problem</p>
- <h2>Local businesses miss 60–80% of calls</h2>
- <p class="nf-section-lead">Every missed call is a lost job. Customers who can't reach you the first time rarely call back — they call the next business on the list.</p>
+ <h2>A missed call doesn't come back as a voicemail</h2>
+ <p class="nf-section-lead">It comes back as a call to the next business on the list. When nobody picks up, most callers don't wait around — they hang up and dial someone else. You don't get a notification for the job you lost. You just never hear from that customer again.</p>
  </div></div>
  </section>
  <section class="nf-section-block" aria-labelledby="nmc-02">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">02</span><div>
  <p class="nf-eyebrow" id="nmc-02">How it works</p>
- <h2>Live in a day. Answering every call from day one.</h2>
+ <h2>Forward your line. Every call gets answered from day one.</h2>
  </div></div>
  <div class="nf-cards">
- <article class="nf-card"><p class="nf-card__tag">Step 1</p><h3>Set up in a day</h3><p>We configure your AI receptionist with your services, hours, and booking calendar — live within 24 hours.</p></article>
- <article class="nf-card"><p class="nf-card__tag">Step 2</p><h3>AI answers every call</h3><p>Callers get a natural, professional conversation, 24/7 — no hold music, no voicemail, no missed jobs.</p></article>
- <article class="nf-card"><p class="nf-card__tag">Step 3</p><h3>You get every lead by text</h3><p>Every call is summarized and texted to you instantly, with appointments booked straight into your calendar.</p></article>
+ <article class="nf-card"><p class="nf-card__tag">Step 1</p><h3>Forward your business line</h3><p>Keep the number you already use. Forward it to your AI receptionist — most businesses are live within a day, no new hardware and no new number to hand out.</p></article>
+ <article class="nf-card"><p class="nf-card__tag">Step 2</p><h3>Your AI receptionist answers and books the job</h3><p>Every caller gets a real conversation — hours, pricing questions, availability — and the AI checks your calendar and books the appointment on the spot. Every call opens with a clear AI disclosure.</p></article>
+ <article class="nf-card"><p class="nf-card__tag">Step 3</p><h3>You get a text the second the call ends</h3><p>Name, number, what they need, and what got booked — sent straight to your phone. Nothing sits in a voicemail box.</p></article>
  </div>
  </section>
  <section class="nf-section-block" aria-labelledby="nmc-03">
@@ -2914,33 +2927,84 @@ def never_miss_a_call_body() -> str:
  <h2>Everything you need to stop losing jobs to voicemail</h2>
  </div></div>
  <div class="nf-outcome-grid">
- <article class="nf-outcome-card"><p class="nf-outcome-label">Always on</p><h3>24/7 answering</h3><p>Nights, weekends, holidays — every call gets picked up.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Always on</p><h3>24/7 call answering</h3><p>Nights, weekends, holidays — every call gets picked up.</p></article>
  <article class="nf-outcome-card"><p class="nf-outcome-label">Booking</p><h3>Appointment booking</h3><p>Straight into your calendar — no double-booking, no back-and-forth.</p></article>
- <article class="nf-outcome-card"><p class="nf-outcome-label">Leads</p><h3>Lead capture</h3><p>Name, number, and job details captured on every call.</p></article>
- <article class="nf-outcome-card"><p class="nf-outcome-label">Alerts</p><h3>Text summaries</h3><p>A text for every call, the moment it ends.</p></article>
- <article class="nf-outcome-card"><p class="nf-outcome-label">Records</p><h3>Call transcripts</h3><p>A full transcript of every conversation, searchable anytime.</p></article>
- <article class="nf-outcome-card nf-outcome-card--approved"><p class="nf-outcome-label">Reach more</p><h3>Bilingual</h3><p>English and Spanish, so you never lose a caller to a language barrier.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Leads</p><h3>Every lead captured</h3><p>Name, number, and job details captured on every call.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Alerts</p><h3>Instant text summaries</h3><p>A text the moment each call ends.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Records</p><h3>Call transcripts</h3><p>A full transcript of every conversation.</p></article>
+ <article class="nf-outcome-card nf-outcome-card--approved"><p class="nf-outcome-label">Disclosure</p><h3>AI, always disclosed</h3><p>Every caller is told up front they're speaking with an AI receptionist.</p></article>
  </div>
  </section>
- <aside class="nf-callout nf-callout--urgency"><p><strong>One captured job pays for months of service.</strong> Most local service jobs are worth more than a year of this — and every missed call is a job you never even knew you lost.</p></aside>
- <section class="nf-section-block" aria-labelledby="pricing">
+ <section class="nf-section-block" aria-labelledby="nmc-04">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">04</span><div>
- <p class="nf-eyebrow" id="pricing">Pricing</p>
- <h2>Simple plans, no contracts</h2>
- <p class="nf-section-lead">Less than $6/day on the Starter plan — cancel anytime.</p>
+ <p class="nf-eyebrow" id="nmc-04">Pricing</p>
+ <h2>Simple, transparent pricing</h2>
+ <p class="nf-section-lead">One plan. No tiers to compare, no contract to sign.</p>
  </div></div>
- <div class="nf-offerings-v5">
- <article class="nf-offer-card"><p class="meta">Starter</p><p class="price">$149/mo</p><p>24/7 answering and appointment booking for one location — everything you need to stop missing calls.</p><a class="btn btn-secondary" href="{trial_cta}">Start free trial</a></article>
- <article class="nf-offer-card nf-offer-card--featured"><p class="meta">Pro · Most popular</p><p class="price">$249/mo</p><p>Everything in Starter, plus bilingual support, priority lead texts, and monthly performance reports.</p><a class="btn btn-primary" href="{trial_cta}">Start free trial</a></article>
- <article class="nf-offer-card"><p class="meta">Setup</p><p class="price">$199 one-time</p><p>White-glove onboarding — number setup, call scripts, and calendar integration, done for you in 24 hours.</p><a class="btn btn-secondary" href="/contact/?topic=other#contact-form">Ask a question</a></article>
+ <div class="nf-outcome-grid">
+ <article class="nf-outcome-card nf-outcome-card--approved"><p class="nf-outcome-label">Setup</p><h3>$497 one-time</h3><p>White-glove onboarding — number forwarding, call scripts, and calendar integration.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Monthly</p><h3>$297/mo</h3><p>Up to 500 answered minutes included every month.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Overage</p><h3>$0.49/min</h3><p>Only for minutes used beyond the 500 included — every call still gets answered.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Contract</p><h3>Month-to-month</h3><p>Cancel anytime — no long-term commitment.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Guarantee</p><h3>14-day answered-or-refunded</h3><p>Not answering and booking calls the way it should? Tell us within 14 days for a refund.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Fit</p><h3>Local service businesses</h3><p>Built for trades that book jobs by phone. Not currently available for medical, legal, or financial services.</p></article>
  </div>
- </section>""" + mega_cta(
-        "Never miss another call again.",
-        "Start your 7-day free trial — no contract, cancel anytime.",
-        (trial_cta, "Start free trial"),
-        ("/contact/?topic=other#contact-form", "Talk to us"),
-    ) + """
- <aside class="nf-callout" style="text-align:center"><p><strong>SourceA</strong> — an AI receptionist product by Noetfield. Questions? <a href="mailto:operations@noetfield.com">operations@noetfield.com</a>.</p></aside>"""
+ <p class="nf-cta-actions" style="margin-top:20px"><a class="btn btn-primary" href="{audit_cta}">Get my free missed-call audit</a></p>
+ </section>
+ <section class="nf-section-block" aria-labelledby="nmc-05">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">05</span><div>
+ <p class="nf-eyebrow" id="nmc-05">FAQ</p>
+ <h2>AI disclosure, recording, and the fine print</h2>
+ </div></div>
+ <div class="nf-faq-list" style="display:grid;gap:10px">
+ <details style="border:1px solid var(--line,#e3e3e3);border-radius:10px;padding:14px 18px"><summary style="cursor:pointer;font-weight:600">Will my customers know they're talking to an AI?</summary><p style="margin-top:10px">Yes. Every call opens with a short, clear disclosure that the caller is speaking with an AI receptionist, not a person.</p></details>
+ <details style="border:1px solid var(--line,#e3e3e3);border-radius:10px;padding:14px 18px"><summary style="cursor:pointer;font-weight:600">Are calls recorded?</summary><p style="margin-top:10px">Yes. Calls are recorded and transcribed so you get a full summary and text alert after every call. Callers hear a disclosure at the start of the call. You're responsible for confirming call-recording requirements for your state or province before going live.</p></details>
+ <details style="border:1px solid var(--line,#e3e3e3);border-radius:10px;padding:14px 18px"><summary style="cursor:pointer;font-weight:600">What kind of businesses is this for?</summary><p style="margin-top:10px">Local service businesses that book jobs by phone — HVAC, plumbing, electrical, roofing, garage doors, landscaping, cleaning, pest control, locksmiths, and similar trades. We don't currently support medical, legal, or financial services.</p></details>
+ <details style="border:1px solid var(--line,#e3e3e3);border-radius:10px;padding:14px 18px"><summary style="cursor:pointer;font-weight:600">Is there a contract?</summary><p style="margin-top:10px">No. Service is month-to-month and you can cancel anytime.</p></details>
+ <details style="border:1px solid var(--line,#e3e3e3);border-radius:10px;padding:14px 18px"><summary style="cursor:pointer;font-weight:600">What happens if I go over 500 minutes?</summary><p style="margin-top:10px">Overage is billed at $0.49 per minute beyond the 500 answered minutes included each month. There's no cap and no cutoff — every call still gets answered.</p></details>
+ <details style="border:1px solid var(--line,#e3e3e3);border-radius:10px;padding:14px 18px"><summary style="cursor:pointer;font-weight:600">What's the 14-day guarantee?</summary><p style="margin-top:10px">If your AI receptionist isn't answering and booking calls the way it should in your first 14 days, tell us and we'll refund the setup fee and your first month.</p></details>
+ <details style="border:1px solid var(--line,#e3e3e3);border-radius:10px;padding:14px 18px"><summary style="cursor:pointer;font-weight:600">How fast can I get set up?</summary><p style="margin-top:10px">Most businesses are live within a day of forwarding their line — we configure your hours, services, and calendar for you.</p></details>
+ </div>
+ </section>
+ <section class="nf-section-block" aria-labelledby="audit-form-title" id="audit-form">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">06</span><div>
+ <p class="nf-eyebrow" id="audit-form-title">Get started</p>
+ <h2>Get my free missed-call audit</h2>
+ <p class="nf-section-lead">Tell us about your business. We'll show you how many calls you're likely missing today and what a booked AI receptionist would look like for you — no obligation, no cost.</p>
+ </div></div>
+ <form id="nfMissedCallAuditForm" class="form" data-nf-intake-form data-intake-vector="missed-call-audit" data-intake-sku="never-miss-a-call" data-submit-label="Get my free audit" data-intake-headline="Audit request received" data-intake-detail="We review your business and follow up within one business day with your free missed-call audit.">
+ <input type="hidden" name="topic" value="missed-call-audit" />
+ <div class="groupTitle">Your business</div>
+ <div class="row2">
+ <div class="field"><label for="mca_name">Your name</label><input id="mca_name" name="name" autocomplete="name" required /></div>
+ <div class="field"><label for="mca_org">Business name</label><input id="mca_org" name="org" autocomplete="organization" required /></div>
+ </div>
+ <div class="row2">
+ <div class="field"><label for="mca_email">Email</label><input id="mca_email" name="email" type="email" autocomplete="email" required /></div>
+ <div class="field"><label for="mca_phone">Phone number</label><input id="mca_phone" name="notes" type="tel" autocomplete="tel" required placeholder="Best number to reach you" /></div>
+ </div>
+ <div class="field"><label for="mca_type">Type of business</label>
+ <select id="mca_type" name="role">
+ <option value="">Select one</option>
+ <option>HVAC</option>
+ <option>Plumbing</option>
+ <option>Electrical</option>
+ <option>Roofing</option>
+ <option>Landscaping / lawn care</option>
+ <option>Cleaning services</option>
+ <option>Pest control</option>
+ <option>Garage door</option>
+ <option>Locksmith</option>
+ <option>General contractor</option>
+ <option>Other local service business</option>
+ </select>
+ </div>
+ <div data-nf-intake-status hidden></div>
+ <button type="submit" class="btn btn-primary">Get my free missed-call audit</button>
+ <p style="font-size:.8rem;color:var(--muted,#767676);margin-top:8px">No spam. We don't share your information. Local service businesses only — we currently don't support medical, legal, or financial service providers.</p>
+ </form>
+ </section>
+ <aside class="nf-callout" style="text-align:center"><p>AI receptionist service for local service businesses. All calls are recorded and every call opens with an AI disclosure. Not currently available for medical, legal, or financial service providers.</p></aside>"""
 
 
 def main() -> None:
@@ -3690,10 +3754,12 @@ def main() -> None:
 
     write(
         "services/never-miss-a-call/index.html",
-        "Never Miss a Call — AI Receptionist for Local Service Businesses | Noetfield",
-        "AI receptionist for local service businesses — answers every call 24/7, books appointments, and texts you every lead. Plans from $149/mo.",
+        "Never Miss Another Call — AI Receptionist for Local Service Businesses",
+        "Your AI receptionist answers every call 24/7, books the job, and texts you the details. $497 setup, $297/mo, 500 minutes included. Get your free missed-call audit.",
         "/services/never-miss-a-call/",
         never_miss_a_call_body(),
+        shell=False,
+        head_extra=' <link rel="stylesheet" href="/assets/noetfield-intake.css" />',
     )
 
     # Batch-update remaining shell pages CSS only
