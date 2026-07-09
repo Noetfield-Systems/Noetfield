@@ -2868,6 +2868,81 @@ def agentic_cost_governance_body() -> str:
     )
 
 
+def never_miss_a_call_body() -> str:
+    """Never Miss a Call — AI receptionist for local service businesses (SourceA product)."""
+    trial_cta = "https://buy.stripe.com/PLACEHOLDER_never_miss_a_call"  # TODO(stripe): swap for the live Payment Link once the SKU exists in Stripe
+    return hero(
+        "AI receptionist · Local service businesses",
+        "Never Miss a Call",
+        "Never miss another customer call.",
+        "Your AI receptionist answers 24/7, books appointments, and texts you every lead — under $6/day.",
+        [("24/7 live answering", True), ("Under $6/day", False)],
+        [(trial_cta, "Start 7-day free trial", True)],
+        ["24/7 answering", "Appointment booking", "Instant lead texts"],
+        panel(
+            "What's included",
+            [
+                "24/7 call answering",
+                "Appointment booking",
+                "Lead capture + text alerts",
+                "Call transcripts",
+                "Bilingual support",
+            ],
+        ),
+    ) + f"""
+ <section class="nf-section-block" aria-labelledby="nmc-01">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">01</span><div>
+ <p class="nf-eyebrow" id="nmc-01">The problem</p>
+ <h2>Local businesses miss 60–80% of calls</h2>
+ <p class="nf-section-lead">Every missed call is a lost job. Customers who can't reach you the first time rarely call back — they call the next business on the list.</p>
+ </div></div>
+ </section>
+ <section class="nf-section-block" aria-labelledby="nmc-02">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">02</span><div>
+ <p class="nf-eyebrow" id="nmc-02">How it works</p>
+ <h2>Live in a day. Answering every call from day one.</h2>
+ </div></div>
+ <div class="nf-cards">
+ <article class="nf-card"><p class="nf-card__tag">Step 1</p><h3>Set up in a day</h3><p>We configure your AI receptionist with your services, hours, and booking calendar — live within 24 hours.</p></article>
+ <article class="nf-card"><p class="nf-card__tag">Step 2</p><h3>AI answers every call</h3><p>Callers get a natural, professional conversation, 24/7 — no hold music, no voicemail, no missed jobs.</p></article>
+ <article class="nf-card"><p class="nf-card__tag">Step 3</p><h3>You get every lead by text</h3><p>Every call is summarized and texted to you instantly, with appointments booked straight into your calendar.</p></article>
+ </div>
+ </section>
+ <section class="nf-section-block" aria-labelledby="nmc-03">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">03</span><div>
+ <p class="nf-eyebrow" id="nmc-03">What's included</p>
+ <h2>Everything you need to stop losing jobs to voicemail</h2>
+ </div></div>
+ <div class="nf-outcome-grid">
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Always on</p><h3>24/7 answering</h3><p>Nights, weekends, holidays — every call gets picked up.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Booking</p><h3>Appointment booking</h3><p>Straight into your calendar — no double-booking, no back-and-forth.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Leads</p><h3>Lead capture</h3><p>Name, number, and job details captured on every call.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Alerts</p><h3>Text summaries</h3><p>A text for every call, the moment it ends.</p></article>
+ <article class="nf-outcome-card"><p class="nf-outcome-label">Records</p><h3>Call transcripts</h3><p>A full transcript of every conversation, searchable anytime.</p></article>
+ <article class="nf-outcome-card nf-outcome-card--approved"><p class="nf-outcome-label">Reach more</p><h3>Bilingual</h3><p>English and Spanish, so you never lose a caller to a language barrier.</p></article>
+ </div>
+ </section>
+ <aside class="nf-callout nf-callout--urgency"><p><strong>One captured job pays for months of service.</strong> Most local service jobs are worth more than a year of this — and every missed call is a job you never even knew you lost.</p></aside>
+ <section class="nf-section-block" aria-labelledby="pricing">
+ <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">04</span><div>
+ <p class="nf-eyebrow" id="pricing">Pricing</p>
+ <h2>Simple plans, no contracts</h2>
+ <p class="nf-section-lead">Less than $6/day on the Starter plan — cancel anytime.</p>
+ </div></div>
+ <div class="nf-offerings-v5">
+ <article class="nf-offer-card"><p class="meta">Starter</p><p class="price">$149/mo</p><p>24/7 answering and appointment booking for one location — everything you need to stop missing calls.</p><a class="btn btn-secondary" href="{trial_cta}">Start free trial</a></article>
+ <article class="nf-offer-card nf-offer-card--featured"><p class="meta">Pro · Most popular</p><p class="price">$249/mo</p><p>Everything in Starter, plus bilingual support, priority lead texts, and monthly performance reports.</p><a class="btn btn-primary" href="{trial_cta}">Start free trial</a></article>
+ <article class="nf-offer-card"><p class="meta">Setup</p><p class="price">$199 one-time</p><p>White-glove onboarding — number setup, call scripts, and calendar integration, done for you in 24 hours.</p><a class="btn btn-secondary" href="/contact/?topic=other#contact-form">Ask a question</a></article>
+ </div>
+ </section>""" + mega_cta(
+        "Never miss another call again.",
+        "Start your 7-day free trial — no contract, cancel anytime.",
+        (trial_cta, "Start free trial"),
+        ("/contact/?topic=other#contact-form", "Talk to us"),
+    ) + """
+ <aside class="nf-callout" style="text-align:center"><p><strong>SourceA</strong> — an AI receptionist product by Noetfield. Questions? <a href="mailto:operations@noetfield.com">operations@noetfield.com</a>.</p></aside>"""
+
+
 def main() -> None:
     # Intelligence homepage: protected hand-maintained at index.html (613 primary GTM)
     write("governance/index.html", "Noetfield — Enterprise AI Governance &amp; Trust Ledger Evidence",
@@ -3611,6 +3686,14 @@ def main() -> None:
         "Governance layer for AI automation spend — leak audit, premium model firewall, cost ledger, ROI routing, and escalation policy.",
         "/services/agentic-cost-governance/",
         agentic_cost_governance_body(),
+    )
+
+    write(
+        "services/never-miss-a-call/index.html",
+        "Never Miss a Call — AI Receptionist for Local Service Businesses | Noetfield",
+        "AI receptionist for local service businesses — answers every call 24/7, books appointments, and texts you every lead. Plans from $149/mo.",
+        "/services/never-miss-a-call/",
+        never_miss_a_call_body(),
     )
 
     # Batch-update remaining shell pages CSS only
