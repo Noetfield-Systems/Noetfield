@@ -51,6 +51,14 @@ KAIZEN_RECIPES: dict[str, dict[str, list[list[str]]]] = {
             ],
         ],
     },
+    "partner_apply_reference_error": {
+        "fix": [["python3", "scripts/nf_kaizen_fix_partner_apply_reference_error_v1.py"]],
+        "verify": [["python3", "scripts/verify_partner_apply_reference_error_v1.py"]],
+    },
+    "ecosystem_estimator_fields_leak": {
+        "fix": [["python3", "scripts/nf_kaizen_fix_ecosystem_estimator_leak_v1.py"]],
+        "verify": [["python3", "scripts/verify_ecosystem_estimator_leak_v1.py"]],
+    },
 }
 
 

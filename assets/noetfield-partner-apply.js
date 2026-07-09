@@ -84,11 +84,11 @@
         successCopy: {
           headline: "Application recorded — async handoff to operations",
           detail:
-            fields.role === "investor"
+            role === "investor"
               ? "Your investor inquiry was saved instantly. We share the Land · Expand · Channel brief and follow up within one business day."
               : "Your ecosystem application was saved instantly. Partner review and enablement orientation follow within one business day.",
           extraHtml:
-            (fields.role === "investor"
+            (role === "investor"
               ? '<p class="nf-section-lead" style="margin-top:10px"><a href="/investors/">Investor brief</a> · <a href="/copilot/demo/">5-minute demo</a>'
               : '<p class="nf-section-lead" style="margin-top:10px"><a href="/copilot/demo/">5-minute demo</a> · <a href="/start/">Try sandbox</a>') +
             ' · <a href="/trust-brief/intake/?interest=partner&amp;vector=work-with-us&amp;role=' +
