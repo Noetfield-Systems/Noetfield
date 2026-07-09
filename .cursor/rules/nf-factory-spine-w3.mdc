@@ -39,7 +39,7 @@ Must PASS. Receipt: `~/.sina/nf-factory-spine-proof-v1.json` (15 proofs incl. ec
 
 - Auto-run `make nf-orient` on session start
 - Mix `sa-*` / `mx-*` tasks in nf cloud session
-- Edit `~/Desktop/SourceA/`
+- Edit `~/Desktop/Noetfield-Systems/SourceA/`
 - Open visible Chrome / rapid browser tabs
 - Run `make verify-gtm` in loops
 
