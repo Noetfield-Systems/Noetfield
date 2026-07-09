@@ -4,7 +4,10 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "nf_admin_secret";
+  // In-memory only for this page view — deliberately NOT persisted to localStorage
+  // (an admin bearer secret in Web Storage is readable by anything that runs on this
+  // origin, e.g. an XSS in any other public script). Re-enter it per visit.
+  var memorySecret = "";
 
   function $(id) {
     return document.getElementById(id);
@@ -20,18 +23,11 @@
   }
 
   function secret() {
-    try {
-      return localStorage.getItem(STORAGE_KEY) || "";
-    } catch (_) {
-      return "";
-    }
+    return memorySecret;
   }
 
   function setSecret(value) {
-    try {
-      if (value) localStorage.setItem(STORAGE_KEY, value);
-      else localStorage.removeItem(STORAGE_KEY);
-    } catch (_) {}
+    memorySecret = value || "";
   }
 
   function setStatus(message, kind) {
