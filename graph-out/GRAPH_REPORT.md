@@ -1,7 +1,7 @@
-# L0 Repo Graph Report — sina-governance-ssot
+# L0 Repo Graph Report — Noetfield
 
-Generated (last indexed): `2026-07-09T07:18:53Z`
-Total files: 6998 · Total size: 186.9MB · Edges detected: 21196
+Generated (last indexed): `2026-07-09T08:11:32Z` · template `v1.1.0`
+Total files: 7001 · Total size: 186.9MB · Edges detected: 21198
 
 **Read this file first.** Do not spawn broad repo-reading agents ("understand the repo", "map subsystem X", "audit Y") until you have read this report and, if you need more detail, queried the index with `python3 scripts/query_repo_graph_v1.py <subsystem-or-keyword>`. This report + a query response should answer routing questions ("which files touch X", "how big is subsystem Y") without opening every file in the subsystem.
 
@@ -61,6 +61,7 @@ Total files: 6998 · Total size: 186.9MB · Edges detected: 21196
 | status/ | 1 | 6.1KB | `status/index.html` |
 | console/ | 1 | 6.0KB | `console/index.html` |
 | contact/ | 1 | 5.6KB | `contact/index.html` |
+| receipts/ | 4 | 5.5KB | `receipts/l0-repo-graph-verify-20260709T071851Z.json`, `receipts/l0-repo-graph-verify-20260709T072028Z.json`, `receipts/l0-repo-graph-verify-20260709T075120Z.json`, `receipts/.gitkeep` |
 | partners/ | 1 | 5.4KB | `partners/index.html` |
 | templates/ | 1 | 5.4KB | `templates/index.html` |
 | banner/ | 1 | 5.3KB | `banner/index.html` |
@@ -78,27 +79,26 @@ Total files: 6998 · Total size: 186.9MB · Edges detected: 21196
 | .sina-agent/ | 2 | 1.5KB | `.sina-agent/.cursor/rules/workspace-governance.mdc`, `.sina-agent/README.md` |
 | config/ | 2 | 1.3KB | `config/gate-ai-factory-design.json`, `config/status-ai-factory.json` |
 | L1-operational/ | 1 | 708B | `L1-operational/README.md` |
-| for-whom/ | 2 | 678B | `for-whom/index.html`, `for-whom/mandate/index.html` |
 | portal/ | 2 | 678B | `portal/index.html`, `portal/login/index.html` |
+| for-whom/ | 2 | 678B | `for-whom/index.html`, `for-whom/mandate/index.html` |
 | .agent-policy/ | 1 | 623B | `.agent-policy/dispatch-templates/ADVISOR_ARCHITECT_CHECKLIST.md` |
 | L3-external/ | 1 | 501B | `L3-external/README.md` |
 | feedback/ | 1 | 422B | `feedback/index.html` |
 | resources/ | 1 | 372B | `resources/index.html` |
-| thanks/ | 1 | 339B | `thanks/index.html` |
-| login/ | 1 | 339B | `login/index.html` |
 | accessibility/ | 1 | 339B | `accessibility/index.html` |
-| policies/ | 1 | 339B | `policies/index.html` |
-| signup/ | 1 | 339B | `signup/index.html` |
+| thanks/ | 1 | 339B | `thanks/index.html` |
 | directory/ | 1 | 339B | `directory/index.html` |
-| app/ | 1 | 339B | `app/index.html` |
-| kits/ | 1 | 339B | `kits/index.html` |
+| policies/ | 1 | 339B | `policies/index.html` |
+| login/ | 1 | 339B | `login/index.html` |
 | ex/ | 1 | 339B | `ex/index.html` |
-| receipts/ | 1 | 0B | `receipts/.gitkeep` |
+| kits/ | 1 | 339B | `kits/index.html` |
+| signup/ | 1 | 339B | `signup/index.html` |
+| app/ | 1 | 339B | `app/index.html` |
 | (root files) | 55 | 406.3KB | `package-lock.json`, `noetfield-gate-512.png`, `noetfield-og.png`, `index.html`, `PLATFORM_BLUEPRINT.md`, `Makefile` |
 
 ## Dependency / reference edges
 
-21196 static repo-relative path references were detected across .py/.sh/.md/.json/.yaml/.yml/.jsonc files (best-effort regex scan, not a real import graph — this is a governance/docs-heavy repo, not a single-language codebase). Full edge list is in `graph_index_v1.json`; query by file or subsystem with the query script rather than reading it directly.
+21198 static repo-relative path references were detected across .py/.sh/.md/.json/.yaml/.yml/.jsonc files (best-effort regex scan, not a real import graph). Full edge list is in `graph_index_v1.json`; query by file or subsystem with the query script rather than reading it directly.
 
 ## Ignored directories
 
@@ -116,4 +116,4 @@ python3 scripts/query_repo_graph_v1.py <subsystem-name|keyword|path-fragment>
 python3 scripts/build_repo_graph_v1.py
 ```
 
-Rebuild whenever the file layout changes materially (new subsystem, large doc/data additions) — this report drifts from truth otherwise. See `docs/L0_REPO_GRAPH_MEMORY_v1.md` for the token budget rule and the broad-read prevention rule.
+Rebuild whenever the file layout changes materially (new subsystem, large doc/data additions). See `docs/L0_REPO_GRAPH_MEMORY_v1.md` for the token budget rule and the broad-read prevention rule.
