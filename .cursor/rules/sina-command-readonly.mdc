@@ -5,9 +5,9 @@ alwaysApply: true
 
 # Sina Command — read only
 
-Never modify `~/Desktop/SourceA/` or Sina Command UI/scripts from this chat.
+Never modify `~/Desktop/Noetfield-Systems/SourceA/` or Sina Command UI/scripts from this chat.
 
-**Private workspace:** `/Users/sinakazemnezhad/.sina/agent-workspaces/noetfield_cloud/` (notes, INBOX) — product code in `/Users/sinakazemnezhad/Desktop/Noetfield` only. Marker: `.sina-agent/README.md`.
+**Private workspace:** `/Users/sinakazemnezhad/.sina/agent-workspaces/noetfield_cloud/` (notes, INBOX) — product code in `/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield` only. Marker: `.sina-agent/README.md`.
 
 **Founder law:** No Terminal for founder — add **Actions** one-tap or run commands yourself.
 

@@ -76,7 +76,7 @@ Seed locally: `./scripts/bootstrap-private-ops.sh` · MSB pack: `./scripts/seed-
 **Not in git.** Read only if present after founder bootstrap:
 
 - `ops/private/sourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md` (mirror)
-- Desktop canonical: `~/Desktop/SourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md`
+- Desktop canonical: `~/Desktop/Noetfield-Systems/SourceA/AUTO_CONFLICT_ENGINE_V3_LOCKED.md`
 
 Do not copy this doctrine into `docs/`, www, or commits. Cross-plane notes use `[DESIGN]` `[EXECUTION]` `[DELIVERY]` when relevant.
 
