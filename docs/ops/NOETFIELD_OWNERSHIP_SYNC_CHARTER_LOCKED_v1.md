@@ -28,9 +28,9 @@ Keep Noetfield.com, the Noetfield cloud repo, Noetfield OS, and Studio IDE movin
 
 | Lane | Owner repo | Owns | Does not own |
 |------|------------|------|--------------|
-| Public website | `~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/` | `www.noetfield.com`, Vercel project `noetfield`, public copy, public chatbot knowledge, website verification | GEL runtime implementation |
+| Public website | `~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/` | `www.noetfield.com`, Cloudflare Pages project `noetfield-www`, public copy, public chatbot knowledge, website verification | GEL runtime implementation |
 | Platform spine | `~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/` | `platform.noetfield.com`, governance services, public platform docs, intake/chat integration | SourceA internal factory runtime |
-| GEL runtime | `~/Projects/noetfeld-os/` | `api.noetfield.com`, FastAPI GEL runtime, `noetfield-gate`, TLE/runtime evidence, NOOS agent vault | Website source or Vercel deploy ownership |
+| GEL runtime | `~/Projects/noetfeld-os/` | `api.noetfield.com`, FastAPI GEL runtime, `noetfield-gate`, TLE/runtime evidence, NOOS agent vault | Website source or Cloudflare Pages deploy ownership |
 | Studio IDE | `~/Desktop/Noetfield/noetfield-studio-ide/` | Local/desktop Agent IDE on port `3005` | Website truth, GEL runtime truth |
 | Foundation patterns | SourceA | Engine patterns, governance receipt patterns, safety law | Default Noetfield.com implementation |
 

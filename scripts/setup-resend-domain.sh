@@ -116,8 +116,7 @@ STATUS="$(resend domains get "$DOMAIN_ID" --api-key "$RESEND_KEY" --json 2>/dev/
 log "domain status: ${STATUS}"
 
 FROM_ADDR="Noetfield Intake <intake@${RESEND_DOMAIN}>"
-log "set Vercel INTAKE_EMAIL_FROM=${FROM_ADDR}"
-npx vercel env add INTAKE_EMAIL_FROM production --scope noetfield-systems --force --yes --value "$FROM_ADDR" >/dev/null 2>&1 || true
+log "INTAKE_EMAIL_FROM=${FROM_ADDR} — set INTAKE_EMAIL_FROM in ~/.sina/secrets.env; scripts/deploy-www-cloudflare.sh syncs it to Cloudflare Pages as a secret on every deploy"
 
 if [[ "$STATUS" == "verified" ]]; then
   log "PASS - Resend domain verified"

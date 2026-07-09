@@ -22,22 +22,16 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 | Host | Target | Role |
 |------|--------|------|
-| `www.noetfield.com` | Vercel (`210ae8d5…vercel-dns-017.com`) | Public www |
-| `noetfield.com` | Vercel apex | Apex redirect/site |
+| `www.noetfield.com` | Cloudflare Pages (project `noetfield-www`) | Public www |
+| `noetfield.com` | Cloudflare Pages (project `noetfield-www`) apex | Apex redirect/site |
 | `platform.noetfield.com` | Railway `9e1kt78m.up.railway.app` | Platform API + Postgres |
 | `api.noetfield.com` | Railway `gel-api` | **Live** (2026-06-26) |
 
 ---
 
-## Vercel
+## Vercel (retired 2026-07-09)
 
-| Field | Value |
-|-------|--------|
-| Team | `the-777-foundation` |
-| Project | **`noetfield`** |
-| Dashboard | https://vercel.com/the-777-foundation/noetfield |
-| GitHub | `Noetfield-Systems/Noetfield` → `main` auto-deploy |
-| Runbook | `docs/ops/VERCEL_WWW_DEPLOY_LOCKED_v1.md` |
+Vercel (team `the-777-foundation`, project `noetfield`) was the prior host for www + apex; it was retired and fully deleted 2026-07-09. Cloudflare Pages (project `noetfield-www`) is now canonical — see `## Cloudflare` below.
 
 ---
 
@@ -52,10 +46,16 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 ## Cloudflare
 
+| Field | Value |
+|-------|--------|
+| Project | Cloudflare Pages `noetfield-www` |
+| Serves | `www.noetfield.com`, `noetfield.com` apex |
+| Deploy | `scripts/deploy-www-cloudflare.sh` → builds `www-pages-dist/` via `scripts/build-www-pages-dist.sh`, then `npx wrangler pages deploy` |
+| Runbook | `docs/ops/CF_WWW_PROXY_LOCKED_v1.md` |
+
 | Worker | Route | State |
 |--------|-------|-------|
-| `noetfield-www-proxy` | `www.noetfield.com/*` | Deployed; **dormant** (www = direct Vercel) |
-| Runbook | `docs/ops/CF_WWW_PROXY_LOCKED_v1.md` | |
+| `noetfield-www-proxy` | `www.noetfield.com/*` | Deployed (Vercel retired 2026-07-09; see runbook for current role) |
 
 ---
 

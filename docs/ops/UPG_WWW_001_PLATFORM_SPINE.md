@@ -12,6 +12,8 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 # UPG-WWW-001 — Platform spine go-live
 
+**Status (2026-07-09):** LIVE — `https://platform.noetfield.com/health` and `https://api.noetfield.com/health` both return 200 from Railway (`noetfield-platform` project). This doc is the canonical Railway platform/backend reference, paralleling `docs/ops/CF_WWW_PROXY_LOCKED_v1.md` for www. Vercel has been fully retired from the Noetfield stack (2026-07-09) — the "Rollback" section below has been corrected accordingly; do not point anything back at Vercel.
+
 **Goal:** `https://platform.noetfield.com/health` → 200 with governance FastAPI on Railway; www chat upgrades to LLM proxy automatically when platform is reachable.
 
 ## Prerequisites
@@ -20,15 +22,15 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 - Cloudflare DNS token in `~/.sina/secrets.env` (`CF_NOETFIELD_API_TOKEN` or `CF_API_TOKEN`)
 - Vault keys: `OPENROUTER_API_KEY`, `RESEND_API_KEY`, `EVENT_INTEGRITY_SECRET` (recommended)
 
-## Blocker (2026-06-26)
+## Blocker (2026-06-26) — RESOLVED
 
-Railway **trial resource limit** hit on workspace `Noetfield-Systems's Projects` — trial caps **1 GB RAM / 2 vCPU / 1 GB disk**; `mergepack-api` is **4/4 services** (~$1.97/mo usage); orphan `npx @railway/cli@latest up` has Postgres only; adding `platform-api` fails with *resource provision limit exceeded*.
+Railway **trial resource limit** hit on workspace `Noetfield-Systems's Projects` — trial caps **1 GB RAM / 2 vCPU / 1 GB disk**; `mergepack-api` is **4/4 services** (~$1.97/mo usage); orphan `npx @railway/cli@latest up` has Postgres only; adding `platform-api` fails with *resource provision limit exceeded*. **Resolved as of 2026-07-09** — `platform-api` is deployed and live on Railway; kept below for historical record.
 
 **Separate Supabase project (email 2026-06-26):** **Noetfield Systems** Supabase ref `tkgpapowwplupyekpivy` under **`Noetfield-Systems's Org`** is flagged for auto-pause due to inactivity — platform currently uses **Railway Postgres**, not Supabase cloud. See **`docs/ops/UPG_SUPABASE_001_ACTIVATION.md`** to apply migrations + wire DATABASE_URL.
 
 **Railway org note:** deploy platform API in the org where Hobby/trial quota allows (`noetfield-platform` project `94ade24c-…` on kazemnezhadsina144@gmail.com workspace after Hobby unlock).
 
-**Unblock options (pick one):**
+**Unblock options (historical — already resolved, kept for reference):**
 
 | Option | Action |
 |--------|--------|
@@ -80,4 +82,4 @@ www `api/public/chat/index.js` already tries platform first, then falls back to 
 
 ## Rollback
 
-Point `platform.noetfield.com` CNAME back to Vercel bridge only if emergency — www remains independent (L0-law §7).
+Vercel is retired (2026-07-09) — there is no Vercel bridge to roll back to. In an emergency, point `platform.noetfield.com` CNAME to a maintenance page or a known-good Railway deployment instead. www remains independent (L0-law §7).

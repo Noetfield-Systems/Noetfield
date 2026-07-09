@@ -144,9 +144,9 @@ P0 is not "ideas". P0 means the system must fail closed when public output, rout
 77. Add "do not use for implementation" banner to RCA docs.
 78. Add daily doc freshness receipt.
 79. Add Railway deploy status node for `platform-api`.
-80. Add Vercel deploy status node for www.
+80. ~~Add Vercel deploy status node for www.~~ WON'T DO — Vercel retired 2026-07-09; use a Cloudflare Pages deploy status node instead.
 81. Add Railway deploy/version node for `gel-api`.
-82. Compare GitHub SHA, Vercel SHA, Railway deployment, and receipt SHA.
+82. ~~Compare GitHub SHA, Vercel SHA, Railway deployment, and receipt SHA.~~ WON'T DO as written — Vercel retired 2026-07-09; compare GitHub SHA, Cloudflare Pages deployment SHA, Railway deployment, and receipt SHA instead.
 83. Alert when live bundle version differs from repo manifest.
 84. Add canary chat prompt set after deploy.
 85. Run live nerve after every deploy.

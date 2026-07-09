@@ -9,10 +9,9 @@ After **any** production deploy, verify live surfaces match disk **before** tell
 
 ## Triggers
 
-- `./scripts/deploy-www-cloudflare.sh` (canonical www)
-- `./scripts/deploy-www-vercel.sh` (legacy — remove after CF cutover)
+- `./scripts/deploy-www-cloudflare.sh` (canonical www — Vercel retired 2026-07-09, do not use)
 - `./scripts/deploy-platform-railway.sh` or `railway up` on `platform-api`
-- Any manual Vercel/Railway production deploy
+- Any manual Cloudflare/Railway production deploy
 
 ## Required flow
 
@@ -20,7 +19,7 @@ After **any** production deploy, verify live surfaces match disk **before** tell
 EXPECTED_SHA=$(git rev-parse HEAD)
 
 # deploy command here — if it fails, alert immediately:
-python3 scripts/nf_post_deploy_verify.py --deploy-failed "www vercel" --surface www || true
+python3 scripts/nf_post_deploy_verify.py --deploy-failed "www cloudflare" --surface www || true
 
 # after successful deploy:
 python3 scripts/nf_post_deploy_verify.py --expected-sha "$EXPECTED_SHA"

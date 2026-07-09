@@ -83,7 +83,7 @@ def load_public_output_module() -> Any:
 
 def public_output_status() -> dict[str, Any]:
     module = load_public_output_module()
-    output = ROOT / ".vercel" / "output" / "static"
+    output = ROOT / "www-pages-dist"
     findings = module.scan(output)
     return {
         "ok": not findings,

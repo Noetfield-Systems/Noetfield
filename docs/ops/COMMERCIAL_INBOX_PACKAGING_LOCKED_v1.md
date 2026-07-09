@@ -27,7 +27,7 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 1. **Factory + portfolio waves** — gates, verify, disk closeout (`make nf-prove-factory-spine`, Phase 16+)
 2. **Google Workspace inbox** — **done** · `operations@noetfield.com` receives direct email now
-3. **Resend / Vercel form auto-notify** — **deferred until after factory** · not session boot · not queue head
+3. **Resend / Cloudflare Pages www form auto-notify** — **deferred until after factory** · not session boot · not queue head
 
 Intake until Resend ships: **mailto:** links · direct email · optional platform persistence — never mandatory sales call.
 
@@ -36,7 +36,7 @@ Intake until Resend ships: **mailto:** links · direct email · optional platfor
 ## 1. Inbox principles
 
 1. **Google Workspace inbox is live** — `operations@noetfield.com` receives direct email today (2026-06-03). Reply-from-inbox works.
-2. **Form auto-notify deferred post-factory** — `RESEND_API_KEY` on Vercel www wires every form → inbox + auto-ack. Intentionally after factory build wave. Until then: `mailto:` fallbacks + direct email.
+2. **Form auto-notify deferred post-factory** — `RESEND_API_KEY` on Cloudflare Pages www wires every form → inbox + auto-ack. Intentionally after factory build wave. Until then: `mailto:` fallbacks + direct email.
 3. **Self-serve first** — sandbox users do not need a thread unless they hit limits or request production keys.
 3. **RID on every human thread** — footer `data-rid` or evaluate `rid` when escalating.
 4. **No sales call for sandbox** — agentic layer may nurture; founder Hub approves outbound only (R-011).

@@ -15,7 +15,7 @@ enabled = h.get('enabled')
 www = h.get('www_email_configured')
 print(f\"  enabled={enabled}  www_email={www}  delivery_mode={mode}\")
 if not www and mode == 'unconfigured':
-    print('  NEXT: Run ./scripts/auto-heal-www.sh — see docs/ops/VERCEL_INTAKE_SETUP.md')
+    print('  NEXT: set intake keys in ~/.sina/secrets.env, then run ./scripts/deploy-www-cloudflare.sh — see docs/ops/VERCEL_INTAKE_SETUP.md')
     sys.exit(1)
 print('  OK')
 "

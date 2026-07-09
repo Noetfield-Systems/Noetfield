@@ -56,7 +56,7 @@ governance/NOETFIELD_LIVE_NERVE_RECEIPT.json
 
 ## What The Receipt Proves
 
-- `N1_PUBLIC_OUTPUT`: generated `.vercel/output/static` does not expose internal truth surfaces.
+- `N1_PUBLIC_OUTPUT`: generated `www-pages-dist/` (Cloudflare Pages build output; Vercel retired 2026-07-09) does not expose internal truth surfaces.
 - `N2_CHAT_TRUTH`: public chatbot knowledge is manifest-gated, public, fresh, and hash-matched.
 - `N3_DOC_FRESHNESS`: public Markdown exposure is accounted for and raw internal docs are blocked from output.
 - `N4_WWW_LIVE_OUTPUT`: live `www.noetfield.com` blocks internal/static truth URLs.

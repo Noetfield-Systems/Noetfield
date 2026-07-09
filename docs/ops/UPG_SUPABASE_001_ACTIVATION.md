@@ -20,7 +20,7 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 | Layer | Where it runs today |
 |-------|---------------------|
-| **www** | Vercel (`www.noetfield.com`) |
+| **www** | Cloudflare Pages (`www.noetfield.com`) — Vercel retired 2026-07-09 |
 | **platform API** | Railway `noetfield-platform` / `platform-api` |
 | **Postgres (live)** | Railway managed Postgres (`DATABASE_URL=${{Postgres.DATABASE_URL}}`) |
 | **Supabase cloud** | **Provisioned but idle** — migrations live in repo only |

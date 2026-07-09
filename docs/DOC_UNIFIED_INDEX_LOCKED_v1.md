@@ -91,8 +91,9 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 | **Website / NOOS real sync handoff** | `docs/ops/NOETFIELD_WEBSITE_NOOS_REAL_SYNC_HANDOFF_LOCKED_v1.md` |
 | **Live nerve handoff** | `docs/ops/NOETFIELD_LIVE_NERVE_HANDOFF_LOCKED_v1.md` |
 | **Cloud inventory** | `docs/ops/CLOUD_INVENTORY_LOCKED_v1.md` |
-| **Vercel www deploy** | `docs/ops/VERCEL_WWW_DEPLOY_LOCKED_v1.md` |
+| **Cloudflare Pages www deploy** | `docs/ops/CF_WWW_PROXY_LOCKED_v1.md` |
 | **Cloudflare www proxy** | `docs/ops/CF_WWW_PROXY_LOCKED_v1.md` |
+| **Railway platform deploy** | `docs/ops/UPG_WWW_001_PLATFORM_SPINE.md` |
 | Design patterns R1–R25 | `docs/DESIGN_REFERENCE_GOALS_LOCKED_v1.md` |
 | **Packaging program (v16)** | `docs/WWW_V16_PACKAGING_PLAN_LOCKED_v1.md` |
 | **Tier-1 UI masterplan (v18)** | `docs/WWW_V18_TIER1_UI_MASTERPLAN_LOCKED_v1.md` |

@@ -15,7 +15,7 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 ## Security (required)
 
 - **Never** put `OPENROUTER_API_KEY` or `GEMINI_API_KEY` in frontend JavaScript, HTML, or git.
-- Configure keys only on the server: `.env`, Vercel env vars, or your secrets manager.
+- Configure keys only on the server: `.env`, Cloudflare Pages secrets (`wrangler pages secret put`), or your secrets manager.
 - If a key was pasted into chat, email, or a repo, **revoke it immediately** (OpenRouter dashboard or Google AI Studio) and create a new key.
 
 ## Architecture
@@ -126,6 +126,6 @@ The backend prompt asks for compact, board-ready answers: answer first, then one
 
 Production chat history is retained only after deploying the telemetry-enabled platform API with a durable `PUBLIC_CHAT_TELEMETRY_PATH`. Without that deploy, `www.noetfield.com` can answer users but cannot yet retain first-party operator history.
 
-## Vercel alternative
+## Cloudflare Pages Functions (current approach)
 
-You may proxy Gemini from a Vercel Serverless Function instead of FastAPI; keep the same rule: key in env, browser calls your `/api/chat` only.
+`www.noetfield.com` is served from Cloudflare Pages (project `noetfield-www`), so the public chat widget can also be proxied through a Cloudflare Pages Function instead of calling the FastAPI platform host directly. The function at `functions/api/public/chat.js` implements this proxy — it reads the provider API key from a Cloudflare Pages secret (never from the browser) and forwards the request, using `functions/_lib/vercel-adapter.js` internally as a request/response compatibility shim. Same rule as always: key stays server-side, the browser only ever calls `/api/public/chat`.

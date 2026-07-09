@@ -16,7 +16,7 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 **Google Workspace (2026-06-18):** `operations@noetfield.com` is **active** — prospects can email directly; founder/ops can Reply from the inbox.
 
-**Form auto-send (Resend):** **DEFERRED post-factory** — do not prioritize before factory spine + portfolio waves. Spec when ready: [VERCEL_INTAKE_SETUP.md](./ops/VERCEL_INTAKE_SETUP.md).
+**Form auto-send (Resend):** **DEFERRED post-factory** — do not prioritize before factory spine + portfolio waves. Spec when ready: [CF_WWW_PROXY_LOCKED_v1.md](./ops/CF_WWW_PROXY_LOCKED_v1.md).
 
 ## Platform wiring
 
@@ -24,13 +24,13 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 | Setting | Where | Purpose |
 |---------|-------|---------|
-| `RESEND_API_KEY` | **Vercel www** + platform | Delivers every form to `operations@noetfield.com`; `Reply-To` = submitter |
-| `INTAKE_EMAIL_TO` | Vercel www + platform | Default `operations@noetfield.com` |
-| `INTAKE_AUTO_ACK_ENABLED` | Vercel www + platform | Instant receipt to submitter |
+| `RESEND_API_KEY` | **Cloudflare Pages www** (auto-synced via `scripts/deploy-www-cloudflare.sh`) + Railway platform | Delivers every form to `operations@noetfield.com`; `Reply-To` = submitter |
+| `INTAKE_EMAIL_TO` | Cloudflare Pages www (auto-synced via `scripts/deploy-www-cloudflare.sh`) + Railway platform | Default `operations@noetfield.com` |
+| `INTAKE_AUTO_ACK_ENABLED` | Cloudflare Pages www (auto-synced via `scripts/deploy-www-cloudflare.sh`) + Railway platform | Instant receipt to submitter |
 | `INTAKE_OPS_WEBHOOK_URL` | platform | Slack-compatible webhook (optional) |
 | `GET /api/intake/health` | www or platform | `ops_email_configured` / `www_email_configured` / `delivery_mode` |
 
-**Go-live:** [docs/ops/VERCEL_INTAKE_SETUP.md](./ops/VERCEL_INTAKE_SETUP.md)
+**Go-live:** [docs/ops/CF_WWW_PROXY_LOCKED_v1.md](./ops/CF_WWW_PROXY_LOCKED_v1.md)
 
 ## Investor diligence vector
 

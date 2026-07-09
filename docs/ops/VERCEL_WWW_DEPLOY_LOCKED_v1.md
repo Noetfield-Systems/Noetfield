@@ -12,13 +12,23 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 # VERCEL WWW DEPLOY — LOCKED v1
 
-**Status:** LOCKED  
+> **SUPERSEDED 2026-07-09 — Vercel retired, see [`docs/ops/CF_WWW_PROXY_LOCKED_v1.md`](./CF_WWW_PROXY_LOCKED_v1.md) for the current Cloudflare Pages deploy path.**
+>
+> This runbook described the Vercel project (`the-777-foundation` / `noetfield`) that served www.noetfield.com through 2026-07-09. On that date the founder retired Vercel from the Noetfield stack entirely: the Vercel project was deleted (team, dashboard, and all deployments below no longer exist), and `scripts/deploy-www-vercel.sh` plus related Vercel-provisioning scripts were removed from the repo.
+>
+> The current, canonical deploy path is:
+> - **www.noetfield.com / noetfield.com (apex):** Cloudflare Pages, project `noetfield-www`, deployed via `scripts/deploy-www-cloudflare.sh` (builds `www-pages-dist/` via `scripts/build-www-pages-dist.sh`, then `npx wrangler pages deploy`). See `docs/ops/CF_WWW_PROXY_LOCKED_v1.md`.
+> - **platform.noetfield.com / api.noetfield.com (backend):** Railway — already live there. See `docs/ops/CLOUD_INVENTORY_LOCKED_v1.md`.
+>
+> Everything below this notice is historical record only. Do not run these commands, do not use these links (the Vercel dashboard/project no longer exists), and do not treat this as a live fallback or rollback target.
+
+**Status:** LOCKED (historical — superseded 2026-07-09)
 **Date:** 2026-06-26  
-**Audience:** Founder + agents — where www lives on Vercel
+**Audience:** Founder + agents — where www lived on Vercel (no longer current)
 
 ---
 
-## Where to find it in Vercel
+## Where to find it in Vercel *(historical — project deleted 2026-07-09)*
 
 | Field | Value |
 |-------|--------|
@@ -31,7 +41,7 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 ---
 
-## Deploy from Mac (CLI)
+## Deploy from Mac (CLI) *(historical — script deleted 2026-07-09, do not run)*
 
 ```bash
 cd ~/Desktop/Noetfield/Noetfield-All-Documents/Noetfield
@@ -48,7 +58,7 @@ npx vercel deploy --prod --scope the-777-foundation --yes
 
 ---
 
-## Verify
+## Verify *(historical)*
 
 ```bash
 curl -sS https://www.noetfield.com/health
@@ -60,7 +70,7 @@ Pass: `www_email_configured: true`, `delivery_mode: resend`.
 
 ---
 
-## Common confusion
+## Common confusion *(historical)*
 
 | Wrong | Right |
 |-------|-------|
@@ -70,7 +80,7 @@ Pass: `www_email_configured: true`, `delivery_mode: resend`.
 
 ---
 
-## Latest production deploy (2026-06-26)
+## Latest production deploy (2026-06-26) *(historical — last known deploy before Vercel retirement)*
 
 | Field | Value |
 |-------|--------|
@@ -79,3 +89,5 @@ Pass: `www_email_configured: true`, `delivery_mode: resend`.
 | Aliases | www.noetfield.com, noetfield.com, noetfield.vercel.app |
 
 **Locked by:** noetfeld-os-cursor-chat
+
+**Superseded by:** docs/ops/CF_WWW_PROXY_LOCKED_v1.md (2026-07-09)

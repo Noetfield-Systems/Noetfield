@@ -59,7 +59,7 @@ Live E2E and static verification passed on 2026-06-28 after the AI Factory Layer
 - [ ] E2E-024 Add regression check that serverless function count stays at or below 12 on Hobby.
 - [ ] E2E-025 Add production E2E output line naming the deployed git SHA when available.
 - [ ] E2E-026 Add Cloudflare proxy header check for `x-noetfield-proxy`.
-- [ ] E2E-027 Add Vercel cache sanity check for fresh AI Factory deploys.
+- [ ] E2E-027 ~~Add Vercel cache sanity check for fresh AI Factory deploys.~~ WON'T DO — Vercel retired 2026-07-09.
 - [ ] E2E-028 Add fallback check for `/api/health` when `/health` is rewritten.
 - [ ] E2E-029 Add JSON parse checks for every public JSON route.
 - [ ] E2E-030 Add HTTP content-type checks for HTML and JSON routes.
@@ -194,7 +194,7 @@ Live E2E and static verification passed on 2026-06-28 after the AI Factory Layer
 - [ ] E2E-147 Add knowledge bundle size regression threshold.
 - [ ] E2E-148 Add stale knowledge scan for old Noetfield OS Phase 1 claims.
 - [ ] E2E-149 Add stale knowledge scan for old `api.noetfield.com` claims.
-- [ ] E2E-150 Add stale knowledge scan for old Vercel project claims.
+- [ ] E2E-150 Add stale knowledge scan for old Vercel project claims. STILL RELEVANT post-retirement — scan should flag any remaining "Vercel is canonical" claims across the repo.
 - [ ] E2E-151 Add answer-quality eval for buyer-safe language.
 - [ ] E2E-152 Add answer-quality eval for no internal ops terms.
 - [ ] E2E-153 Add answer-quality eval for CTA consistency.
@@ -243,23 +243,23 @@ Live E2E and static verification passed on 2026-06-28 after the AI Factory Layer
 
 ## Lane 7 - Deployment And CI
 
-- [ ] E2E-193 Add Vercel function count check to `verify-static-www`.
-- [ ] E2E-194 Add Vercel function count check to CI.
+- [ ] E2E-193 ~~Add Vercel function count check to `verify-static-www`.~~ WON'T DO — Vercel retired 2026-07-09; use a Cloudflare Pages Functions count check instead.
+- [ ] E2E-194 ~~Add Vercel function count check to CI.~~ WON'T DO — Vercel retired 2026-07-09; use a Cloudflare Pages Functions count check instead.
 - [ ] E2E-195 Add Node runtime pin check.
-- [ ] E2E-196 Add `npx vercel build --prod` to deploy readiness when Vercel settings exist.
-- [ ] E2E-197 Add warning if Vercel output target is preview during prod deploy.
+- [ ] E2E-196 ~~Add `npx vercel build --prod` to deploy readiness when Vercel settings exist.~~ WON'T DO — Vercel retired 2026-07-09.
+- [ ] E2E-197 ~~Add warning if Vercel output target is preview during prod deploy.~~ WON'T DO — Vercel retired 2026-07-09; use a Cloudflare Pages preview-vs-production warning instead.
 - [ ] E2E-198 Add CI check that PYTHONPATH matches Makefile service paths.
 - [ ] E2E-199 Add CI check for missing service roots.
 - [ ] E2E-200 Add CI check for serverless function additions.
-- [ ] E2E-201 Add CI check for `.vercelignore` public allowlist.
+- [ ] E2E-201 Add CI check for `.vercelignore` public allowlist. STILL RELEVANT — `.vercelignore` remains load-bearing for the Cloudflare Pages build (`scripts/build-www-pages-dist.sh` rsyncs with `--exclude-from=.vercelignore`).
 - [ ] E2E-202 Add CI check for public JSON config allowlist.
 - [ ] E2E-203 Add CI check for accidental docs publishing.
-- [ ] E2E-204 Add CI check for generated `.vercel` files not committed.
+- [ ] E2E-204 ~~Add CI check for generated `.vercel` files not committed.~~ WON'T DO — Vercel retired 2026-07-09; no more `.vercel/` directory is ever generated.
 - [ ] E2E-205 Add CI check for package-lock engine drift.
 - [ ] E2E-206 Add CI check for GitHub Actions path filters.
-- [ ] E2E-207 Add CI check for Vercel deployment status after push.
+- [ ] E2E-207 ~~Add CI check for Vercel deployment status after push.~~ WON'T DO — Vercel retired 2026-07-09; use a Cloudflare Pages deployment status check instead.
 - [ ] E2E-208 Add retry-safe live route polling after deploy.
-- [ ] E2E-209 Add failure parser for `vercel inspect --logs`.
+- [ ] E2E-209 ~~Add failure parser for `vercel inspect --logs`.~~ WON'T DO — Vercel retired 2026-07-09; use `wrangler pages deployment tail` instead.
 - [ ] E2E-210 Add failure parser for GitHub commit statuses.
 - [ ] E2E-211 Add failure parser for GitHub check annotations.
 - [ ] E2E-212 Add no-secret output scrubber for deploy logs.
@@ -272,7 +272,7 @@ Live E2E and static verification passed on 2026-06-28 after the AI Factory Layer
 - [ ] E2E-219 Add public config static policy.
 - [ ] E2E-220 Add deploy preview smoke for PRs.
 - [ ] E2E-221 Add production smoke for merges.
-- [ ] E2E-222 Add cache purge note for Cloudflare/Vercel.
+- [ ] E2E-222 Add cache purge note for Cloudflare. (Vercel retired 2026-07-09 — Cloudflare only.)
 - [ ] E2E-223 Add deploy SHA stamp to status output.
 - [ ] E2E-224 Add deploy closeout template.
 
@@ -342,7 +342,7 @@ Live E2E and static verification passed on 2026-06-28 after the AI Factory Layer
 - [ ] E2E-283 Add JSON route compression check.
 - [ ] E2E-284 Add cache header review.
 - [ ] E2E-285 Add Cloudflare cache age review.
-- [ ] E2E-286 Add Vercel cache status review.
+- [ ] E2E-286 ~~Add Vercel cache status review.~~ WON'T DO — Vercel retired 2026-07-09; use a Cloudflare Pages cache status review instead.
 - [ ] E2E-287 Add latency tracking for critical routes.
 - [ ] E2E-288 Add p95 response budget for live smoke.
 

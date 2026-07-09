@@ -10,7 +10,7 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = ROOT / ".vercel" / "output" / "static"
+DEFAULT_OUTPUT = ROOT / "www-pages-dist"
 DENYLIST = ROOT / "governance" / "PUBLIC_OUTPUT_DENYLIST.json"
 
 def public_denylist() -> dict[str, list[str]]:

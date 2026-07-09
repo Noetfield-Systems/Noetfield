@@ -19,7 +19,7 @@ def _email_lane_paths(root: Path) -> list[str]:
         "api/_lib/intake-email.js",
         "api/intake.js",
         "scripts/setup-resend-domain.sh",
-        "scripts/auto-heal-www.sh",
+        "scripts/deploy-www-cloudflare.sh",
         "docs/ops/VERCEL_INTAKE_SETUP.md",
     ])
 

@@ -12,72 +12,16 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 # Vercel www — intake email go-live
 
-**Inbox:** operations@noetfield.com
-**Google Workspace:** **ACTIVE** (2026-06-18) — mailbox live; direct email works
-**Status:** **DEFERRED post-factory** — enable Resend only after factory spine + portfolio waves complete
+**Status:** **SUPERSEDED 2026-07-09 — Vercel retired**
 
-> Founder law: factory first · email sending second · do not boot sessions into Resend setup.
-**Canonical project:** `noetfield` · scope `the-777-foundation`
-**One project only** — run `./scripts/auto-heal-www.sh` to dedupe, sync env, deploy, verify.
+> This runbook described intake-email setup for the Vercel project (`the-777-foundation/noetfield`), which has been fully deleted. `scripts/auto-heal-www.sh` (referenced throughout the old version of this doc) is deleted in the same change. Nothing below is live — kept only as a pointer to the current setup.
 
-## Required (Production)
+## Current setup
 
-```bash
-RESEND_API_KEY=re_xxxxxxxx
-INTAKE_EMAIL_FROM=Noetfield Intake <notifications@noetfield.com>
-INTAKE_EMAIL_TO=operations@noetfield.com
-INTAKE_AUTO_ACK_ENABLED=true
-```
+Intake email config now lives as **Cloudflare Pages secrets** on the `noetfield-www` project (`RESEND_API_KEY`, `INTAKE_EMAIL_FROM`, `INTAKE_EMAIL_TO`, `INTAKE_AUTO_ACK_ENABLED`, etc.).
 
-Source of truth for keys: `~/.sina/secrets.env` (auto-heal reads and pushes to Vercel).
+There is no separate manual setup step anymore. `scripts/deploy-www-cloudflare.sh` syncs these secrets automatically on every deploy via its `sync_pages_secrets()` function, which reads from `~/.sina/secrets.env` — the same founder vault used before. Before deploying, just confirm the vault has the right keys; the deploy script pushes them to Cloudflare Pages for you.
 
-## Resend domain
+For the full current deploy path (build via `scripts/build-www-pages-dist.sh`, deploy via `npx wrangler pages deploy`), see [CF_WWW_PROXY_LOCKED_v1.md](CF_WWW_PROXY_LOCKED_v1.md) and [CLOUD_INVENTORY_LOCKED_v1.md](CLOUD_INVENTORY_LOCKED_v1.md).
 
-1. [resend.com](https://resend.com) → Domains → add `noetfield.com`
-2. Add DNS records Resend provides (SPF/DKIM)
-3. Create API key with send permission
-
-## Auto-heal (recommended)
-
-```bash
-cd /path/to/Noetfield
-chmod +x scripts/auto-heal-www.sh
-./scripts/auto-heal-www.sh
-```
-
-What it does:
-
-1. Verifies canonical Vercel project `the-777-foundation/noetfield`
-2. Keeps legacy duplicate projects (`project-gc7lm`, `web`, `project-j43wr`) out of the live path
-3. Syncs intake env from founder vault
-4. Deploys production
-5. Checks intake health on canonical URL + `www.noetfield.com`
-
-Dry run: `HEAL_DRY_RUN=1 ./scripts/auto-heal-www.sh`
-
-## Manual verify
-
-```bash
-./scripts/check-intake-health.sh
-# expect: www_email_configured true, delivery_mode resend
-```
-
-**Public ops checklist:** [noetfield.com/next/#next-ops](https://www.noetfield.com/next/#next-ops)
-
-## Platform (optional persistence)
-
-If platform intake is disabled in production, www still works when `RESEND_API_KEY` is set — forms email ops directly without platform storage.
-
-Enable platform: set `PUBLIC_INTAKE_ENABLED=true` on platform.noetfield.com Render/env.
-
-## Vectors routed to ops
-
-| Vector | Label |
-|--------|--------|
-| `contact` | Contact |
-| `copilot-governance` | Governance Pack apply |
-| `investor-diligence` | Investor diligence vault |
-| `work-with-us` | Work with Noetfield / Investor brief |
-| `sandbox-signup` | Sandbox signup |
-
-See [INTAKE_OPS.md](../INTAKE_OPS.md).
+See [INTAKE_OPS.md](../INTAKE_OPS.md) for the intake vectors routed to ops.

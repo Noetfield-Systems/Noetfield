@@ -23,6 +23,8 @@ parents:
   - docs/ops/NF_VERIFY_TIERS_LOCKED_v1.md
 ```
 
+> **SUPERSEDED 2026-07-09** — Vercel retired; `www.noetfield.com` is now served by Cloudflare Pages (project `noetfield-www`), see `docs/ops/CF_WWW_PROXY_LOCKED_v1.md`. The "Canonical Vercel deploy" row below reflects historical status as of 2026-06-18 and is no longer current.
+
 ## One sentence
 
 > **Green T0→T3 on ship branch · merge · live platform · Wave 0 RID · panel visibility — machines lock production truth.**

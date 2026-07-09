@@ -30,7 +30,7 @@
         "www.noetfield.com",
         "public website copy",
         "public chatbot knowledge",
-        "Vercel public output verification"
+        "Cloudflare Pages public output verification"
       ],
       "required_authority": [
         "ROUTING_CARD.md",
@@ -194,7 +194,7 @@
       "reports/",
       "docs/ops/plans/",
       "os/plan-library/",
-      ".vercel/output/"
+      "www-pages-dist/"
     ]
   },
   "validator": {
