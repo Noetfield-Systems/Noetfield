@@ -2884,7 +2884,7 @@ def never_miss_a_call_body() -> str:
     test-mode wiring prepared alongside this page.
     """
     audit_cta = "#audit-form"
-    return hero(
+    hero_html = hero(
         "",
         "AI Receptionist for Local Service Businesses",
         "Never Miss Another Call.",
@@ -2902,7 +2902,12 @@ def never_miss_a_call_body() -> str:
                 "Callers are always told they're speaking with an AI",
             ],
         ),
-    ) + f"""
+    )
+    # hero() leaves a whitespace-only line where the empty `kicker` arg would
+    # render (this skin hides .nf-hero-kicker via CSS anyway, see
+    # assets/noetfield-v14-light.css) — strip it so `git diff --check` is clean.
+    hero_html = "\n".join(line.rstrip() for line in hero_html.splitlines())
+    return hero_html + f"""
  <section class="nf-section-block" aria-labelledby="nmc-01">
  <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">01</span><div>
  <p class="nf-eyebrow" id="nmc-01">The problem</p>
