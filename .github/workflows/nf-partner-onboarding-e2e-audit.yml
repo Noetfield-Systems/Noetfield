@@ -50,15 +50,15 @@ jobs:
             --scope partner-onboarding-e2e-audit --budget-seconds 600 --json \
             -- python3 scripts/nf_partner_onboarding_e2e_audit_v1.py --json
 
-      - name: Commit latest receipt (cockpit reads this)
+      - name: Commit latest receipt (cockpit + api/admin/partner-onboarding-audit.js read this)
         if: always()
         run: |
-          if git diff --quiet -- reports/agent-auto/partner-onboarding-audit/; then
+          if git diff --quiet -- admin/partner-onboarding/latest.json; then
             echo "no receipt changes"
             exit 0
           fi
           git config user.name "nf-partner-onboarding-e2e-audit"
           git config user.email "nf-partner-onboarding-e2e-audit@users.noreply.github.com"
-          git add reports/agent-auto/partner-onboarding-audit/
+          git add admin/partner-onboarding/latest.json
           git commit -m "Partner-onboarding e2e audit: latest receipt"
           git push origin HEAD:main || echo "push skipped (branch protection — open PR manually)"

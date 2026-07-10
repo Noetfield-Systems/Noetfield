@@ -41,7 +41,10 @@ TEST_EMAIL = "e2e@noetfield.com"  # recognized by api/_lib/intake-test.js — ne
 RUN_ID = str(uuid.uuid4())
 TS = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-RECEIPT_DIR = ROOT / "reports" / "agent-auto" / "partner-onboarding-audit"
+# /reports/* is on governance/PUBLIC_OUTPUT_DENYLIST.json (purged from every public
+# build) and Cloudflare Pages Functions can't read local disk (workerd, not Node) — so
+# the receipt the admin cockpit reads has to be a normal public static asset instead.
+RECEIPT_DIR = ROOT / "admin" / "partner-onboarding"
 LATEST_PATH = RECEIPT_DIR / "latest.json"
 
 VAULT = Path.home() / ".sina" / "secrets.env"
@@ -566,11 +569,10 @@ def main() -> int:
     score = score_from_findings(findings)
     receipt = build_receipt(findings, browser_ran=browser_ran, score=score)
 
+    # Only latest.json is public/committed — history lives in
+    # public.partner_onboarding_audit_runs (Supabase), not as a pile of static files.
     RECEIPT_DIR.mkdir(parents=True, exist_ok=True)
     LATEST_PATH.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
-    (RECEIPT_DIR / f"{TS.replace(':', '')}.json").write_text(
-        json.dumps(receipt, indent=2) + "\n", encoding="utf-8"
-    )
 
     if args.dry_run:
         print(json.dumps(receipt, indent=2))
