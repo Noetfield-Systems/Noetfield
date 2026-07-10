@@ -20,6 +20,7 @@ from nf_vault_env import ensure_noetfield_supabase_env  # noqa: E402
 
 ROI_RANK = (
     "policy_compliance",
+    "partner_conversion_integrity",
     "repo_stability",
     "drift_alignment",
     "greeting_coupling",

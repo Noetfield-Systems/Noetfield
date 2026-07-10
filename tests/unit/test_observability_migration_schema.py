@@ -56,4 +56,5 @@ def test_observability_migration_lexical_order() -> None:
         "0014_probe_tables_public_rest.sql",
         "0015_operations_signal_triage.sql",
         "0016_operations_inbox_tenant_seed.sql",
+        "0017_partner_onboarding_audit_runs.sql",
     ]

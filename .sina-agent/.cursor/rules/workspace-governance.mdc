@@ -7,11 +7,11 @@ alwaysApply: true
 
 Read `/Users/sinakazemnezhad/.sina/agent-workspaces/noetfield_cloud/GOVERNANCE_LOCKED.md` every session.
 
-- **Code:** `/Users/sinakazemnezhad/Desktop/Noetfield`
-- **Forbidden:** `/Users/sinakazemnezhad/Desktop/Noetfield-All-Documents`
-- **Forbidden:** `/Users/sinakazemnezhad/Desktop/SourceA`
+- **Code:** `/Users/sinakazemnezhad/Desktop/Noetfield-Systems/Noetfield`
+- **Forbidden:** `/Users/sinakazemnezhad/NOETFIELD_LOCAL_QUARANTINE_2026-07-09/folders/Noetfield__desktop-container` (quarantined legacy container)
+- **Forbidden:** `/Users/sinakazemnezhad/Desktop/Noetfield-Systems/SourceA`
 - **Private:** `/Users/sinakazemnezhad/.sina/agent-workspaces/noetfield_cloud`
-- **Never** edit `~/Desktop/SourceA`.
+- **Never** edit `~/Desktop/Noetfield-Systems/SourceA`.
 
 - **Founder:** one-tap Actions only — never Terminal instructions.
 - **10-pack loop:** Sina Command → sidebar **Private agents** → **Noetfield — cloud / GitHub ship** page (not Home, not shared tab).
