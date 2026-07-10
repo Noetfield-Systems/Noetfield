@@ -52,6 +52,7 @@ PRIMARY_NAV = (
     "/trust/",
     "/federal/",
     "/msp/",
+    "/partners/",
     "/copilot/demo/",
 )
 
@@ -88,7 +89,7 @@ def test_header_primary_nav_items() -> None:
     primary = header.split('class="menuPrimary"', 1)[1].split("</div>", 1)[0]
     for href in PRIMARY_NAV:
         assert href in primary, href
-    assert primary.count("<a ") == 10
+    assert primary.count("<a ") == 11
     assert "/directory/" not in header
     assert 'href="/gate/' not in header
     assert "Work with us" not in primary

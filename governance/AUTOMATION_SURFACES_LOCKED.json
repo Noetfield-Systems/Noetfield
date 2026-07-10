@@ -169,6 +169,24 @@
       "kind": "policy-manifest",
       "path": "governance/COPILOT_SCHEDULED_AUTOMATIONS_LOCKED.json",
       "purpose": "All Copilot scheduled automations disabled — Kaizen + daily heartbeat replace them."
+    },
+    {
+      "id": "nf-partner-onboarding-e2e-audit",
+      "kind": "scheduled-workflow",
+      "path": ".github/workflows/nf-partner-onboarding-e2e-audit.yml",
+      "purpose": "6-hourly live/browser check of the commission (Connector) and strategic (Co-partner/Partner/Investor) partner apply funnel — findings feed improvement_queue, run history feeds partner_onboarding_audit_runs, critical findings page Telegram."
+    },
+    {
+      "id": "nf-partner-onboarding-audit-script",
+      "kind": "script",
+      "path": "scripts/nf_partner_onboarding_e2e_audit_v1.py",
+      "purpose": "Partner-onboarding e2e audit runner — HTTP + Playwright checks, receipt, queue enqueue, Telegram alert."
+    },
+    {
+      "id": "partner-onboarding-admin-cockpit",
+      "kind": "admin-page",
+      "path": "admin/partner-onboarding/index.html",
+      "purpose": "Read-only X-Admin-Secret cockpit rendering the last committed partner-onboarding audit receipt."
     }
   ]
 }

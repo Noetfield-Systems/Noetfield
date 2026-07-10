@@ -133,3 +133,35 @@ www.noetfield.com must **never hard-depend** on subdomains that are not DNS-prov
 PLATFORM_BASE=https://platform.noetfield.com python3 scripts/verify_platform_health.py
 NOETFIELD_E2E_BASE=https://www.noetfield.com python3 scripts/check_noetfield_com_e2e.py
 ```
+
+---
+
+## 8. Partner onboarding browser-behavioral contract (ADDITIVE — pending founder sign-off)
+
+**Added:** 2026-07-09 · **Status:** proposed, not yet founder-approved per §6 amendment rule — flagged for review, not silently authoritative.
+
+`check_noetfield_com_e2e.py` is pure-HTTP (status codes + copy needles) and cannot see a JS
+exception thrown inside an onsubmit handler, or a form field that is `required` but hidden
+by a CSS/JS bug. Those failure modes are real (found live on `/work-with-us/` and
+`/trust-brief/intake/`) and need a real browser. This section documents the *new*,
+separate enforcement layer — it does not change anything in §1–§7.
+
+**Enforcement:** `scripts/nf_partner_onboarding_e2e_audit_v1.py` (Playwright + Chromium),
+run every 6 hours by `.github/workflows/nf-partner-onboarding-e2e-audit.yml`.
+
+**Must hold true in production:**
+
+| Check | Pass condition |
+|---|---|
+| Quick Apply (Connector) submit | Clicking submit on `#nfPartnerApplyForm` fires `POST /api/intake` and throws no `pageerror` |
+| Ecosystem apply form | `/trust-brief/intake/?interest=partner&vector=work-with-us&role=<lane>` hides every `.tb-estimator-fields` element — no required Trust-Brief pricing field is visible |
+| Investor inquiry | `#nfInvestorForm` submit reaches a success state within 8s |
+| MSP / next-step CTAs | `/msp/` and `/next/` never link their partner CTA to `/gate/partners/intake/` while that path meta-refreshes to `/enterprise/` |
+
+**Out of scope:** commission-figure disclosure and nav-placement checks in the same
+script are advisory (high/medium severity, non-blocking) — content and IA decisions stay
+founder-gated, only the four rows above are pass/fail.
+
+**Amendment note:** this section was added by an automated audit session, not by the
+founder. Per §6, changes to this law require founder approval — treat §8 as a proposal to
+ratify or reject, not as already-locked law.

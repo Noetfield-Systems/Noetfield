@@ -98,9 +98,9 @@
     if (prepareTb) prepareTb.hidden = true;
     if (prepareEco) prepareEco.hidden = false;
 
-    var trustEstimator = document.querySelector(".tb-estimator-fields");
+    var trustEstimatorEls = document.querySelectorAll(".tb-estimator-fields");
     var pilotScope = document.querySelector(".pilot-scope-fields");
-    if (trustEstimator) trustEstimator.hidden = true;
+    trustEstimatorEls.forEach(function (el) { el.hidden = true; });
     if (pilotScope) pilotScope.hidden = true;
 
     var formTitle = document.getElementById("tbFormTitle");
