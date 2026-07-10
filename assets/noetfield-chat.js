@@ -235,7 +235,7 @@
 
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/assets/noetfield-chat.css?v=7";
+    link.href = "/assets/noetfield-chat.css?v=8";
     document.head.appendChild(link);
 
     var fab = el("button", "nfChatFab", "✦");
