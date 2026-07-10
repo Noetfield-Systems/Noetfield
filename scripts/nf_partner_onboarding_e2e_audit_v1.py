@@ -251,10 +251,12 @@ def check_commission_disclosure() -> list[dict[str, Any]]:
 
 
 def check_nav_discoverability() -> list[dict[str, Any]]:
-    _, home = fetch(f"{BASE}/")
-    nav_match = re.search(r'<nav class="menu.*?</nav>', home, re.S)
-    nav_html = nav_match.group(0) if nav_match else ""
-    hits = [p for p in ("/partners/", "/work-with-us/", "/investors/") if p in nav_html]
+    # The header (including the primary <nav>) is injected client-side by
+    # noetfield-shell.js, not present in the homepage's raw server-rendered HTML — check
+    # the actual source partial instead. urllib follows the redirect to the extension-less
+    # canonical path.
+    _, header = fetch(f"{BASE}/assets/partials/header.html")
+    hits = [p for p in ("/partners/", "/work-with-us/", "/investors/") if p in header]
     if not hits:
         return [
             make_finding(
