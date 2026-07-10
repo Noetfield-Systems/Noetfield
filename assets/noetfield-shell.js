@@ -615,7 +615,7 @@
     if (document.querySelector('script[data-nf-chat]')) return;
     function loadChatScript() {
       var s = document.createElement("script");
-      s.src = "/assets/noetfield-chat.js?v=7";
+      s.src = "/assets/noetfield-chat.js?v=8";
       s.defer = true;
       s.setAttribute("data-nf-chat", "1");
       document.body.appendChild(s);

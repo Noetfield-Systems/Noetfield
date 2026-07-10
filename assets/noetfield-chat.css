@@ -27,6 +27,29 @@
   background: linear-gradient(135deg, #d4b85a, #a8842e);
 }
 
+/* Below 768px, .nf-sticky-mobile-cta (noetfield-v18-motion.css, only present on
+   index.html/governance/index.html) pins a full-width button bar to the viewport
+   bottom — without this offset the chat FAB sits inside that bar's footprint and
+   overlaps its right-hand button.
+   - Scoped with :has() to the pages that actually render the bar, not every page
+     that loads this stylesheet — elsewhere the FAB keeps its normal bottom offset.
+   - :has() also raises specificity to (0,0,2,0), which is what actually matters:
+     the existing @media (max-width: 480px) block further down this same file
+     re-declares plain .nfChatFab { bottom: 14px } at (0,0,1,0) — same layer, no
+     !important, so on any viewport <=480px (i.e. most real phones) that later,
+     lower-specificity-tied rule was winning purely on source order and silently
+     undoing this fix. Higher specificity wins regardless of source order or which
+     max-width breakpoint matches. */
+@media (max-width: 768px) {
+  body:has(.nf-sticky-mobile-cta) .nfChatFab {
+    right: 16px;
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+  body:has(.nf-sticky-mobile-cta) .nfChatPanel {
+    bottom: calc(150px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 .nfChatPanel {
   position: fixed;
   right: 22px;
