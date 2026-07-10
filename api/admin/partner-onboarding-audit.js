@@ -1,16 +1,9 @@
 /** GET /api/admin/partner-onboarding-audit — serves the last committed audit receipt.
- *  Batch/cron result, not a live proxy — no platform.noetfield.com dependency. */
+ *  Batch/cron result, not a live proxy — no platform.noetfield.com dependency.
+ *  Runs as a Cloudflare Pages Function (workerd, not Node) — no fs/disk access, so this
+ *  fetches the receipt as a same-origin static asset instead of reading it off disk. */
 
-const fs = require("fs");
-const path = require("path");
-
-const RECEIPT_PATH = path.join(
-  process.cwd(),
-  "reports",
-  "agent-auto",
-  "partner-onboarding-audit",
-  "latest.json"
-);
+const RECEIPT_PATH = "/admin/partner-onboarding/latest.json";
 
 function cors(res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -33,9 +26,17 @@ module.exports = async function handler(req, res) {
     return res.status(401).json({ detail: "X-Admin-Secret required" });
   }
 
+  const host = req.headers["host"] || "www.noetfield.com";
+  const origin = `https://${host}`;
+
   try {
-    const raw = fs.readFileSync(RECEIPT_PATH, "utf8");
-    const data = JSON.parse(raw);
+    const forwarded = await fetch(origin + RECEIPT_PATH, {
+      headers: { Accept: "application/json" },
+    });
+    if (!forwarded.ok) {
+      throw new Error(`receipt fetch HTTP ${forwarded.status}`);
+    }
+    const data = await forwarded.json();
     return res.status(200).json(data);
   } catch (err) {
     console.error("partner_onboarding_audit_receipt_read_failed", err && err.message ? err.message : err);
