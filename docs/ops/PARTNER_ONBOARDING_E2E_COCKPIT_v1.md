@@ -33,7 +33,10 @@ GitHub Actions cron (every 6h, *.yml)
     -> scripts/nf_partner_onboarding_e2e_audit_v1.py
          - HTTP checks (stdlib urllib, always run)
          - Playwright/Chromium checks (real click, real console/network capture)
-         -> reports/agent-auto/partner-onboarding-audit/latest.json  (committed to main)
+         -> admin/partner-onboarding/latest.json  (committed to main — NOT reports/,
+            which is on the public-output denylist and gets purged from every build;
+            Cloudflare Pages Functions also have no disk/fs access, so the API route
+            fetches this as a same-origin static asset, not a file read)
          -> public.improvement_queue        (Kaizen-consumable findings)
          -> public.partner_onboarding_audit_runs  (score history)
          -> Telegram @noetfield_ops_bot     (critical findings only)

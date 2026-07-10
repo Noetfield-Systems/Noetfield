@@ -1,0 +1,71 @@
+{
+  "schema": "nf-partner-onboarding-audit-v1",
+  "run_id": "c32eb2a2-077d-4301-87a6-925a605be415",
+  "generated_at": "2026-07-10T01:18:06Z",
+  "base": "https://www.noetfield.com",
+  "score": 90,
+  "status": "fail",
+  "critical_count": 0,
+  "high_count": 1,
+  "browser_checks_ran": true,
+  "checks": [
+    {
+      "id": "Quick Apply (Connector) submits cleanly",
+      "label": "Quick Apply (Connector) submits cleanly",
+      "state": "available",
+      "detail": "OK"
+    },
+    {
+      "id": "Ecosystem apply form free of Trust Brief leakage",
+      "label": "Ecosystem apply form free of Trust Brief leakage",
+      "state": "available",
+      "detail": "OK"
+    },
+    {
+      "id": "Investor inquiry form submits cleanly",
+      "label": "Investor inquiry form submits cleanly",
+      "state": "available",
+      "detail": "OK"
+    },
+    {
+      "id": "MSP / next-step CTAs reach a live intake",
+      "label": "MSP / next-step CTAs reach a live intake",
+      "state": "available",
+      "detail": "OK"
+    },
+    {
+      "id": "Commission/referral figure disclosed",
+      "label": "Commission/referral figure disclosed",
+      "state": "fail",
+      "detail": "/work-with-us/ mentions referral/commission language with no stated figure"
+    },
+    {
+      "id": "Partner program discoverable from primary nav",
+      "label": "Partner program discoverable from primary nav",
+      "state": "available",
+      "detail": "OK"
+    },
+    {
+      "id": "Partner-adjacent routes all resolve",
+      "label": "Partner-adjacent routes all resolve",
+      "state": "available",
+      "detail": "OK"
+    },
+    {
+      "id": "Partner collateral linked and reachable",
+      "label": "Partner collateral linked and reachable",
+      "state": "available",
+      "detail": "OK"
+    }
+  ],
+  "findings": [
+    {
+      "check_id": "commission_disclosure_missing",
+      "severity": "high",
+      "summary": "/work-with-us/ mentions referral/commission language with no stated figure",
+      "detail": "/work-with-us/ references a referral or intro fee but never states a percentage or dollar amount \u2014 a Connector applicant cannot evaluate the offer.",
+      "machine_safe": false,
+      "kaizen_recipe": null
+    }
+  ]
+}

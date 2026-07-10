@@ -23,13 +23,21 @@
     }
   }
 
+  // setLane() dispatches "change" so any other listener on the select stays in sync,
+  // but the select's own change handler below calls setLane() right back — without this
+  // guard that's unbounded recursion (RangeError: Maximum call stack size exceeded) on
+  // every pill click.
+  var settingLane = false;
+
   function setLane(lane, scroll) {
     var select = document.getElementById("nfPartnerRole");
     var notes = document.getElementById("nfPartnerNotes");
-    if (!select || !lane) return;
+    if (!select || !lane || settingLane) return;
 
     select.value = lane;
+    settingLane = true;
     select.dispatchEvent(new Event("change", { bubbles: true }));
+    settingLane = false;
 
     document.querySelectorAll(".nf-wwu-lane-pill").forEach(function (btn) {
       var active = btn.getAttribute("data-wwu-lane") === lane;
