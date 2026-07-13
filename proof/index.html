@@ -3,31 +3,91 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Proof — Noetfield case study library</title>
- <meta name="description" content="Public case studies with claims, evidence, gaps, timeline, and machine-readable JSON bundles." />
+ <title>Proof — Case study library</title>
+ <meta name="description" content="Noetfield Investor Workflow case study library — honest evidence-linked diligence profiles with public JSON bundles." />
+ <meta name="robots" content="index,follow" />
+ <meta name="theme-color" content="#07080a" />
  <link rel="canonical" href="https://www.noetfield.com/proof/" />
- <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
- <link rel="stylesheet" href="/assets/noetfield-shell.css" />
- <link rel="stylesheet" href="/assets/noetfield-www.css?v=42" />
- <script src="/assets/noetfield-shell.js?v=42" defer></script>
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=1" />
 </head>
-<body class="nf-www nf-site-v14">
- <div class="bg" aria-hidden="true"></div>
- <header id="nfHeader"></header>
- <main id="main" class="nf-main nf-page">
- <header class="nf-hero-cinematic">
- <p class="nf-eyebrow">Investor Workflow · public audits</p>
- <h1>Case study library</h1>
- <p class="nf-lead">Honest diligence profiles — not pitch decks. Each study documents claims, evidence, gaps, timeline, and roadmap.</p>
- </header>
- <section class="nf-section-block">
- <div class="nf-cards">
-  <a class="nf-card nf-card--link" href="/proof/noetfield"><p class="nf-card__tag">Live · v0.1</p><h3>Noetfield Systems Inc.</h3><p>Self-audit Case Study #1 — company-level findings.</p></a>
-  <article class="nf-card"><p class="nf-card__tag">Planned</p><h3>SourceA</h3><p>Case Study #2 — governed execution product.</p></article>
-  <article class="nf-card"><p class="nf-card__tag">Planned</p><h3>SourceB</h3><p>Case Study #3 — commercial surface.</p></article>
+<body class="nf-gate nf-gate--page">
+ <div class="nf-gate__bg" aria-hidden="true"></div>
+ <div class="nf-gate__frame">
+  <header class="nf-gate__top">
+   <a class="nf-gate__mark" href="/">Noetfield Systems Inc.</a>
+   <nav class="nf-gate__nav" aria-label="Site">
+    <a href="/enterprise/">Enterprise</a>
+    <a href="/investors/">Investor</a>
+    <a href="/motors/">Motors</a>
+    <a href="/about/">About</a>
+    <a href="/proof/" aria-current="page">Proof</a>
+   </nav>
+  </header>
+
+  <main id="main" class="nf-gate__main">
+   <a class="nf-gate__back" href="/">← Home</a>
+
+   <header class="nf-page-hero">
+    <p class="nf-page-kicker">Investor Workflow · Case study library</p>
+    <h1>Honest case studies with evidence, not slides</h1>
+    <p class="nf-page-lead">Each case study demonstrates the diagnosis system on real material: claims, evidence, gaps, timeline, roadmap, and a public JSON bundle. Noetfield Systems Inc. is Study #1.</p>
+   </header>
+
+   <section class="nf-page-section" aria-labelledby="proof-live">
+    <h2 id="proof-live">Published</h2>
+    <div class="nf-proof-list">
+     <a class="nf-proof-item" href="/proof/noetfield/">
+      <div>
+       <div class="nf-proof-item__title">Case Study #1 — Noetfield Systems Inc.</div>
+       <div class="nf-proof-item__meta">Parent company self-audit · PUBLIC AUDIT v0.1</div>
+      </div>
+      <span class="nf-proof-item__status">Live</span>
+     </a>
+    </div>
+   </section>
+
+   <section class="nf-page-section" aria-labelledby="proof-planned">
+    <h2 id="proof-planned">Planned rollout</h2>
+    <div class="nf-proof-list">
+     <div class="nf-proof-item nf-proof-item--soon">
+      <div>
+       <div class="nf-proof-item__title">Case Study #2 — SourceA</div>
+       <div class="nf-proof-item__meta">/proof/sourcea · v0.2</div>
+      </div>
+      <span class="nf-proof-item__status">Planned</span>
+     </div>
+     <div class="nf-proof-item nf-proof-item--soon">
+      <div>
+       <div class="nf-proof-item__title">Case Study #3 — SourceB</div>
+       <div class="nf-proof-item__meta">/proof/sourceb · v0.3</div>
+      </div>
+      <span class="nf-proof-item__status">Planned</span>
+     </div>
+     <div class="nf-proof-item nf-proof-item--soon">
+      <div>
+       <div class="nf-proof-item__title">Case Study #4 — Noetfield Motor / OS</div>
+       <div class="nf-proof-item__meta">/proof/motor · v0.4</div>
+      </div>
+      <span class="nf-proof-item__status">Planned</span>
+     </div>
+    </div>
+   </section>
+
+   <section class="nf-page-section" aria-labelledby="proof-cta">
+    <h2 id="proof-cta">Run an audit on your company or deal</h2>
+    <div class="nf-page-cta">
+     <a class="nf-page-btn" href="/investor-workflows/">Investor workflows</a>
+     <a class="nf-page-btn nf-page-btn--ghost" href="/contact/?topic=investor-workflow#contact-form">Request audit</a>
+    </div>
+   </section>
+  </main>
+
+  <footer class="nf-gate__foot"><span>© 2026 Noetfield Systems Inc. · Canada</span></footer>
  </div>
- </section>
- </main>
- <footer id="nfFooter"></footer>
 </body>
 </html>
