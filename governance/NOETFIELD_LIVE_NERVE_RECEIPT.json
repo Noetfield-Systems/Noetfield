@@ -19,7 +19,7 @@
       "blocked_count": 0,
       "findings": [],
       "ok": true,
-      "output": "/Users/sinakazemnezhad/Desktop/Noetfield/Noetfield-All-Documents/Noetfield/.vercel/output/static"
+      "output": "www-pages-dist (Cloudflare Pages build output — see scripts/build-www-pages-dist.sh)"
     },
     "N2_CHAT_TRUTH": {
       "bundle_version": "NOETFIELD-CHATBOT-KNOWLEDGE-V1-p28-2026-06-29",

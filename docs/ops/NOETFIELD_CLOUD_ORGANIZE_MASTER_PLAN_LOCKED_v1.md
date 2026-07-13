@@ -123,7 +123,7 @@ Single ordered checklist for every Noetfield asset (local, GitHub, Vercel, Railw
 
 Replace `project-gc7lm.vercel.app` → `www.noetfield.com` in:
 
-**Noetfield repo:** `infra/cf-www-proxy/*`, `assets/noetfield-intake-core.js`, `trust-brief/intake/index.html`, `scripts/www-vercel-canonical.sh`, `scripts/upgrade-www-production.sh`, `scripts/fix-all-production.sh`, `scripts/diagnose-www-fragmentation.sh`, `scripts/auto-heal-www.sh`, `docs/ops/NF_GAOS_W2_LOCKED_v1.md`
+**Noetfield repo:** `infra/cf-www-proxy/*`, `assets/noetfield-intake-core.js`, `trust-brief/intake/index.html`, `scripts/deploy-www-cloudflare.sh`, `scripts/build-www-pages-dist.sh`, `docs/www/WWW_IMPLEMENTATION_STATUS_v1.md`, `docs/ops/NF_GAOS_W2_LOCKED_v1.md`
 
 **noetfeld-os repo:** `scripts/check_noetfield_com_e2e.py`, docs 010/011/013/014
 
@@ -199,7 +199,7 @@ PyPI noetfield-gate publish live · npm @noetfield/gate · chatbot Phase 3-10 ·
 - Dashboard: https://vercel.com/the-777-foundation/noetfield
 - Production: `dpl_4mWNMRWceW9ag4co5S6fsAPqJjj7` → https://www.noetfield.com
 - GitHub auto-deploy: connected to `Noetfield` repo `main`
-- Runbook: `docs/ops/VERCEL_WWW_DEPLOY_LOCKED_v1.md` · `scripts/deploy-www-vercel.sh`
+- Runbook: `docs/ops/CF_WWW_PROXY_LOCKED_v1.md` · `scripts/deploy-www-cloudflare.sh`
 
 **CF www proxy (2026-06-26 — Phase 3):**
 - Worker: `noetfield-www-proxy` version `f1864fff-6054-47ec-815a-c0cc14f1bb78`

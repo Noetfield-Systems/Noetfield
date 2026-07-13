@@ -36,34 +36,14 @@
     "default_branch_confidence": "main (aligned with local)"
   },
   "deploy_truth": {
-    "platform": "Vercel",
-    "deploy_config_found": true,
-    "vercel_json_path": "vercel.json",
-    "config_status": "VERIFIED",
-    "framework": null,
-    "rewrites": [
-      {
-        "source": "/health",
-        "destination": "/api/health"
-      },
-      {
-        "source": "/evaluate",
-        "destination": "/api/demo/evaluate"
-      }
-    ],
-    "security_redirects_enforced": true,
-    "governance_paths_blocked": [
-      "/docs/ops/*",
-      "/docs/platform/*",
-      "/governance/*",
-      "/platform/*",
-      "/reports/*",
-      "/scripts/*",
-      "/data/*",
-      "/ops/*"
-    ],
-    "sensitive_paths_404_count": 106,
-    "platform_state_note": "Cannot verify live Vercel deployment state from config alone; recommend direct Vercel console check"
+    "stale": true,
+    "superseded_by": "docs/www/WWW_IMPLEMENTATION_STATUS_v1.md",
+    "platform": "Cloudflare Pages",
+    "project": "noetfield-www",
+    "deploy_script": "scripts/deploy-www-cloudflare.sh",
+    "routes_config": "governance/www-pages-routes.json",
+    "exclude_config": "www-pages-deploy.exclude",
+    "note": "Vercel retired 2026-07-09. This receipt deploy_truth was historical; do not use."
   },
   "sg_alignment": {
     "status": "VERIFIED",
