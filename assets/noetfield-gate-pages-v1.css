@@ -384,3 +384,164 @@ body.nf-gate.nf-gate--page .nf-gate__main {
 .nf-proof-item--soon .nf-proof-item__status {
   color: rgba(236, 234, 228, 0.35);
 }
+
+/* Corporate homepage — five-section investor surface */
+body.nf-gate.nf-gate--corp .nf-gate__frame {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+body.nf-gate.nf-gate--corp .nf-gate__main {
+  align-items: stretch;
+  justify-content: flex-start;
+  max-width: none;
+  padding: clamp(1.5rem, 4vh, 2.5rem) 0 clamp(3rem, 6vh, 4rem);
+}
+
+body.nf-gate.nf-gate--corp .nf-page-hero {
+  max-width: 780px;
+}
+
+.nf-corp-directions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nf-corp-directions a {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(236, 234, 228, 0.45);
+}
+
+.nf-corp-directions a:hover,
+.nf-corp-directions a:focus-visible {
+  color: #c9a962;
+  outline: none;
+}
+
+.nf-proof-cat {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 720px) {
+  .nf-proof-cat {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.nf-proof-cat__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.nf-proof-cat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.nf-proof-cat__head h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #f0eee8;
+}
+
+.nf-proof-cat__item p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(236, 234, 228, 0.62);
+}
+
+.nf-proof-cat__item a {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #c9a962;
+}
+
+.nf-status--partial {
+  color: #c9a962;
+}
+
+.nf-status--planned {
+  color: rgba(236, 234, 228, 0.4);
+}
+
+.nf-founder-panel {
+  display: grid;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  padding: 1.15rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+@media (min-width: 640px) {
+  .nf-founder-panel {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.nf-founder-panel dt {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(236, 234, 228, 0.42);
+}
+
+.nf-founder-panel dd {
+  margin: 0.15rem 0 0.85rem;
+  font-size: 0.92rem;
+  color: rgba(236, 234, 228, 0.78);
+}
+
+.nf-capital-lanes {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .nf-capital-lanes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.nf-capital-lane {
+  padding: 1.15rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.nf-capital-lane h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #f0eee8;
+}
+
+.nf-capital-lane p {
+  margin: 0 0 0.35rem;
+  font-size: 0.88rem;
+}

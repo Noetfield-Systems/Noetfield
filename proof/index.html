@@ -3,8 +3,8 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Proof — Case study library</title>
- <meta name="description" content="Noetfield Investor Workflow case study library — honest evidence-linked diligence profiles with public JSON bundles." />
+ <title>Proof — Company evidence ledger</title>
+ <meta name="description" content="Noetfield Systems Inc. company-level evidence index — claims, status, and evidence links. Honest scope discipline." />
  <meta name="robots" content="index,follow" />
  <meta name="theme-color" content="#07080a" />
  <link rel="canonical" href="https://www.noetfield.com/proof/" />
@@ -13,7 +13,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
- <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=2" />
 </head>
 <body class="nf-gate nf-gate--page">
  <div class="nf-gate__bg" aria-hidden="true"></div>
@@ -21,11 +21,9 @@
   <header class="nf-gate__top">
    <a class="nf-gate__mark" href="/">Noetfield Systems Inc.</a>
    <nav class="nf-gate__nav" aria-label="Site">
-    <a href="/enterprise/">Enterprise</a>
-    <a href="/investors/">Investor</a>
-    <a href="/motors/">Motors</a>
-    <a href="/about/">About</a>
     <a href="/proof/" aria-current="page">Proof</a>
+    <a href="/invest/">Invest</a>
+    <a href="/about/">Company</a>
    </nav>
   </header>
 
@@ -33,56 +31,90 @@
    <a class="nf-gate__back" href="/">← Home</a>
 
    <header class="nf-page-hero">
-    <p class="nf-page-kicker">Investor Workflow · Case study library</p>
-    <h1>Honest case studies with evidence, not slides</h1>
-    <p class="nf-page-lead">Each case study demonstrates the diagnosis system on real material: claims, evidence, gaps, timeline, roadmap, and a public JSON bundle. Noetfield Systems Inc. is Study #1.</p>
+    <p class="nf-page-kicker">Company evidence index</p>
+    <h1>Proof ledger — claims linked to evidence</h1>
+    <p class="nf-page-lead">Honest scope: Available · Planned · Orientation · Out of scope. No fabricated certifications, custody claims, or vanity metrics.</p>
    </header>
 
-   <section class="nf-page-section" aria-labelledby="proof-live">
-    <h2 id="proof-live">Published</h2>
+   <section class="nf-page-section" aria-labelledby="ledger-exec">
+    <h2 id="ledger-exec">Execution claims</h2>
+    <div class="nf-page-table-wrap">
+     <table class="nf-page-table">
+      <thead><tr><th>Claim</th><th>Status</th><th>Evidence</th></tr></thead>
+      <tbody>
+       <tr>
+        <td>Live product surfaces</td>
+        <td><span class="nf-status nf-status--proven">Verified</span></td>
+        <td><a href="/enterprise/">/enterprise</a> · <a href="https://sourcea.app/">sourcea.app</a></td>
+       </tr>
+       <tr>
+        <td>Governance infrastructure (TLE, board PDF, exports)</td>
+        <td><span class="nf-status nf-status--proven">Verified</span></td>
+        <td><a href="/trust-ledger/sample-report/board-memo.pdf">Board memo PDF</a> · <a href="/ai-value-governance-os/">AI Value OS</a></td>
+       </tr>
+       <tr>
+        <td>Deterministic sandbox execution</td>
+        <td><span class="nf-status nf-status--partial">Partial</span></td>
+        <td><a href="/start/">/start</a> sandbox</td>
+       </tr>
+       <tr>
+        <td>Scheduled / tick-driven motor</td>
+        <td><span class="nf-status nf-status--partial">Operating</span></td>
+        <td><a href="/proof/noetfield/">Case Study #1</a> · <a href="/roadmap/">roadmap</a></td>
+       </tr>
+       <tr>
+        <td>Event-driven gateway (full chain)</td>
+        <td><span class="nf-status">Commissioning</span></td>
+        <td><a href="/roadmap/">Milestone target</a></td>
+       </tr>
+       <tr>
+        <td>Full app-building loop (concept → live → receipt)</td>
+        <td><span class="nf-status nf-status--planned">Not yet proven</span></td>
+        <td>Target: contiguous receipts under commissioning</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </section>
+
+   <section class="nf-page-section" aria-labelledby="ledger-cases">
+    <h2 id="ledger-cases">Case studies</h2>
     <div class="nf-proof-list">
      <a class="nf-proof-item" href="/proof/noetfield/">
       <div>
        <div class="nf-proof-item__title">Case Study #1 — Noetfield Systems Inc.</div>
-       <div class="nf-proof-item__meta">Parent company self-audit · PUBLIC AUDIT v0.1</div>
+       <div class="nf-proof-item__meta">Parent company self-audit · PUBLIC AUDIT v0.1 · JSON bundle</div>
       </div>
       <span class="nf-proof-item__status">Live</span>
      </a>
-    </div>
-   </section>
-
-   <section class="nf-page-section" aria-labelledby="proof-planned">
-    <h2 id="proof-planned">Planned rollout</h2>
-    <div class="nf-proof-list">
      <div class="nf-proof-item nf-proof-item--soon">
       <div>
        <div class="nf-proof-item__title">Case Study #2 — SourceA</div>
-       <div class="nf-proof-item__meta">/proof/sourcea · v0.2</div>
+       <div class="nf-proof-item__meta">v0.2 planned</div>
       </div>
       <span class="nf-proof-item__status">Planned</span>
      </div>
      <div class="nf-proof-item nf-proof-item--soon">
       <div>
        <div class="nf-proof-item__title">Case Study #3 — SourceB</div>
-       <div class="nf-proof-item__meta">/proof/sourceb · v0.3</div>
-      </div>
-      <span class="nf-proof-item__status">Planned</span>
-     </div>
-     <div class="nf-proof-item nf-proof-item--soon">
-      <div>
-       <div class="nf-proof-item__title">Case Study #4 — Noetfield Motor / OS</div>
-       <div class="nf-proof-item__meta">/proof/motor · v0.4</div>
+       <div class="nf-proof-item__meta">v0.3 planned</div>
       </div>
       <span class="nf-proof-item__status">Planned</span>
      </div>
     </div>
    </section>
 
-   <section class="nf-page-section" aria-labelledby="proof-cta">
-    <h2 id="proof-cta">Run an audit on your company or deal</h2>
+   <section class="nf-page-section" aria-labelledby="ledger-json">
+    <h2 id="ledger-json">Machine-readable bundle</h2>
+    <pre class="nf-page-loop">fetch("https://www.noetfield.com/proof/noetfield.json")</pre>
+    <div class="nf-page-cta"><a class="nf-page-btn" href="/proof/noetfield.json">Download JSON</a></div>
+   </section>
+
+   <section class="nf-page-section" aria-labelledby="ledger-cta">
+    <h2 id="ledger-cta">Run an audit on your company or deal</h2>
     <div class="nf-page-cta">
      <a class="nf-page-btn" href="/investor-workflows/">Investor workflows</a>
-     <a class="nf-page-btn nf-page-btn--ghost" href="/contact/?topic=investor-workflow#contact-form">Request audit</a>
+     <a class="nf-page-btn nf-page-btn--ghost" href="/investors/diligence/">VC diligence product →</a>
     </div>
    </section>
   </main>
