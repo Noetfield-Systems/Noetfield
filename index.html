@@ -6,42 +6,50 @@
  <title>Noetfield Systems</title>
  <meta name="description" content="Noetfield Systems Inc." />
  <meta name="robots" content="index,follow" />
- <meta name="theme-color" content="#0a0c10" />
+ <meta name="theme-color" content="#07080a" />
  <link rel="canonical" href="https://www.noetfield.com/" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
- <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
- <link rel="stylesheet" href="/assets/noetfield-shell.css" />
- <link rel="stylesheet" href="/assets/noetfield-www.css?v=42" />
- <link rel="stylesheet" href="/assets/noetfield-corporate-home-v1.css?v=2" />
- <script src="/assets/noetfield-shell.js?v=42" defer></script>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
 </head>
-<body class="nf-www nf-site-v14 nf-corp-home">
- <div class="bg" aria-hidden="true"></div>
- <a class="skip" href="#main">Skip to content</a>
- <header id="nfHeader"></header>
- <main id="main" class="nf-main nf-page nf-corp-gate">
+<body class="nf-gate">
+ <div class="nf-gate__bg" aria-hidden="true"></div>
 
- <section class="nf-corp-hero nf-corp-gate" aria-labelledby="gate-title">
- <p class="nf-eyebrow">Noetfield Systems Inc.</p>
- <h1 id="gate-title" class="nf-sr-only">Noetfield Systems</h1>
+ <div class="nf-gate__frame">
+  <header class="nf-gate__top">
+   <a class="nf-gate__mark" href="/">Noetfield Systems Inc.</a>
+   <span class="nf-gate__locale">Canada</span>
+  </header>
 
- <nav class="nf-direction-grid" aria-label="Main directions">
-  <a class="nf-direction-tile" href="/enterprise/"><span class="nf-direction-tile__label">Enterprise</span></a>
-  <a class="nf-direction-tile" href="/investors/"><span class="nf-direction-tile__label">Investor</span></a>
-  <a class="nf-direction-tile" href="/motors/"><span class="nf-direction-tile__label">Motor &amp; Custom Workflow</span></a>
- </nav>
+  <main id="main" class="nf-gate__main">
+   <h1 class="nf-gate__title">Noetfield <em>Systems</em></h1>
 
- <nav class="nf-direction-secondary" aria-label="Secondary">
-  <a href="/about/">About</a>
-  <span aria-hidden="true">·</span>
-  <a href="/proof/noetfield">Proof</a>
- </nav>
- </section>
+   <nav class="nf-gate__directions" aria-label="Main directions">
+    <a class="nf-gate__dir" href="/enterprise/">
+     <span class="nf-gate__dir-arrow" aria-hidden="true">↗</span>
+     <span class="nf-gate__dir-label">Enterprise</span>
+    </a>
+    <a class="nf-gate__dir" href="/investors/">
+     <span class="nf-gate__dir-arrow" aria-hidden="true">↗</span>
+     <span class="nf-gate__dir-label">Investor</span>
+    </a>
+    <a class="nf-gate__dir" href="/motors/">
+     <span class="nf-gate__dir-arrow" aria-hidden="true">↗</span>
+     <span class="nf-gate__dir-label">Motor &amp; Custom Workflow</span>
+    </a>
+   </nav>
 
- </main>
- <footer id="nfFooter"></footer>
+   <nav class="nf-gate__meta" aria-label="Secondary">
+    <a href="/about/">About</a>
+    <a href="/proof/noetfield">Proof</a>
+   </nav>
+  </main>
+
+  <footer class="nf-gate__foot">
+   <span>© 2026 Noetfield Systems Inc.</span>
+  </footer>
+ </div>
 </body>
 </html>
