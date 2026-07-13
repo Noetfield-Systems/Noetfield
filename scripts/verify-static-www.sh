@@ -120,7 +120,7 @@ check_file "next steps hub" next/index.html \
   'next-buyer' 'next-investor' 'next-partner' 'next-ops' \
   'noetfield-intake-status.js' 'Apply for pilot' 'Enterprise standard'
 
-check_file "vercel intake API" vercel.json \
+check_file "www pages routes" governance/www-pages-routes.json \
   '/api/health'
 
 check_file "www chat handler" api/public/chat/index.js \
@@ -295,25 +295,27 @@ for f in faq/index.html contact/index.html enterprise/index.html pricing/index.h
   fi
 done
 
-[[ -f vercel.json ]] && grep -qF 'docs/ops' vercel.json && ok "vercel.json blocks docs/ops" || bad "vercel.json missing docs/ops block"
-[[ -f vercel.json ]] && grep -qF 'docs/platform' vercel.json && ok "vercel.json blocks docs/platform" || bad "vercel.json missing docs/platform block"
-[[ -f vercel.json ]] && grep -qF 'OPS_LIVE_STATUS_LOCKED.json' vercel.json && ok "vercel.json blocks OPS_LIVE" || bad "vercel.json missing OPS_LIVE block"
-[[ -f vercel.json ]] && grep -qF 'OFFERINGS_LOCKED.md' vercel.json && ok "vercel.json blocks OFFERINGS_LOCKED" || bad "vercel.json missing OFFERINGS_LOCKED block"
-[[ -f vercel.json ]] && ! grep -qF '"/governance"' vercel.json && ok "vercel.json keeps public /governance page" || bad "vercel.json must not 404 the public governance hub"
-[[ -f .vercelignore ]] && grep -qF 'docs/ops/' .vercelignore && ok "vercelignore excludes docs/ops" || bad "vercelignore missing docs/ops"
-[[ -f .vercelignore ]] && grep -qF 'docs/platform/' .vercelignore && ok "vercelignore excludes docs/platform" || bad "vercelignore missing docs/platform"
-[[ -f .vercelignore ]] && grep -qF 'governance/*.json' .vercelignore && ok "vercelignore excludes governance json" || bad "vercelignore missing governance json"
-[[ -f .vercelignore ]] && grep -qF 'OFFERINGS_LOCKED.md' .vercelignore && ok "vercelignore excludes OFFERINGS_LOCKED" || bad "vercelignore missing OFFERINGS_LOCKED"
-[[ -f .vercelignore ]] && grep -qF 'platform/' .vercelignore && ok "vercelignore excludes platform" || bad "vercelignore missing platform"
-[[ -f vercel.json ]] && grep -qF '/platform' vercel.json && ok "vercel.json blocks platform" || bad "vercel.json missing platform block"
+[[ -f governance/www-pages-routes.json ]] && grep -qF 'docs/ops' governance/www-pages-routes.json && ok "www-pages-routes blocks docs/ops" || bad "www-pages-routes missing docs/ops block"
+[[ -f governance/www-pages-routes.json ]] && grep -qF 'docs/platform' governance/www-pages-routes.json && ok "www-pages-routes blocks docs/platform" || bad "www-pages-routes missing docs/platform block"
+[[ -f governance/www-pages-routes.json ]] && grep -qF 'OPS_LIVE_STATUS_LOCKED.json' governance/www-pages-routes.json && ok "www-pages-routes blocks OPS_LIVE" || bad "www-pages-routes missing OPS_LIVE block"
+[[ -f governance/www-pages-routes.json ]] && grep -qF 'OFFERINGS_LOCKED.md' governance/www-pages-routes.json && ok "www-pages-routes blocks OFFERINGS_LOCKED" || bad "www-pages-routes missing OFFERINGS_LOCKED block"
+[[ -f governance/www-pages-routes.json ]] && ! grep -qF '"/governance"' governance/www-pages-routes.json && ok "www-pages-routes keeps public /governance page" || bad "www-pages-routes must not 404 the public governance hub"
+[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/ops/' www-pages-deploy.exclude && ok "deploy exclude omits docs/ops" || bad "deploy exclude missing docs/ops"
+[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/platform/' www-pages-deploy.exclude && ok "deploy exclude omits docs/platform" || bad "deploy exclude missing docs/platform"
+[[ -f www-pages-deploy.exclude ]] && grep -qF 'governance/*.json' www-pages-deploy.exclude && ok "deploy exclude omits governance json" || bad "deploy exclude missing governance json"
+[[ -f www-pages-deploy.exclude ]] && grep -qF 'OFFERINGS_LOCKED.md' www-pages-deploy.exclude && ok "deploy exclude omits OFFERINGS_LOCKED" || bad "deploy exclude missing OFFERINGS_LOCKED"
+[[ -f www-pages-deploy.exclude ]] && grep -qF 'platform/' www-pages-deploy.exclude && ok "deploy exclude omits platform" || bad "deploy exclude missing platform"
+[[ -f governance/www-pages-routes.json ]] && grep -qF '/platform' governance/www-pages-routes.json && ok "www-pages-routes blocks platform" || bad "www-pages-routes missing platform block"
 [[ -f governance/index.html ]] && ok "public governance hub html present" || bad "missing governance/index.html"
-[[ -f .vercelignore ]] && grep -qF 'docs/mockups/' .vercelignore && ok "vercelignore excludes docs/mockups" || bad "vercelignore missing docs/mockups"
-[[ -f .vercelignore ]] && grep -qF '.agents/' .vercelignore && ok "vercelignore excludes .agents" || bad "vercelignore missing .agents"
-[[ -f .vercelignore ]] && grep -qF 'data/' .vercelignore && ok "vercelignore excludes raw data" || bad "vercelignore missing data"
-[[ -f .vercelignore ]] && grep -qF 'ops/' .vercelignore && ok "vercelignore excludes private ops" || bad "vercelignore missing ops"
-[[ -f vercel.json ]] && grep -qF '/.agents' vercel.json && ok "vercel.json blocks .agents" || bad "vercel.json missing .agents block"
-[[ -f vercel.json ]] && grep -qF '/data' vercel.json && ok "vercel.json blocks raw data" || bad "vercel.json missing raw data block"
-[[ -f vercel.json ]] && grep -qF '/ops' vercel.json && ok "vercel.json blocks private ops" || bad "vercel.json missing private ops block"
+[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/mockups/' www-pages-deploy.exclude && ok "deploy exclude omits docs/mockups" || bad "deploy exclude missing docs/mockups"
+[[ -f www-pages-deploy.exclude ]] && grep -qF '.agents/' www-pages-deploy.exclude && ok "deploy exclude omits .agents" || bad "deploy exclude missing .agents"
+[[ -f www-pages-deploy.exclude ]] && grep -qF '/data/' www-pages-deploy.exclude && ok "deploy exclude omits root data" || bad "deploy exclude missing /data/"
+[[ -f www-pages-deploy.exclude ]] && grep -qF 'ops/' www-pages-deploy.exclude && ok "deploy exclude omits private ops" || bad "deploy exclude missing ops"
+[[ -f governance/www-pages-routes.json ]] && grep -qF '/.agents' governance/www-pages-routes.json && ok "www-pages-routes blocks .agents" || bad "www-pages-routes missing .agents block"
+[[ -f governance/www-pages-routes.json ]] && grep -qF '/data' governance/www-pages-routes.json && ok "www-pages-routes blocks raw data" || bad "www-pages-routes missing raw data block"
+[[ -f governance/www-pages-routes.json ]] && grep -qF '/ops' governance/www-pages-routes.json && ok "www-pages-routes blocks private ops" || bad "www-pages-routes missing private ops block"
+[[ ! -f vercel.json ]] && ok "vercel.json removed" || bad "vercel.json must be removed"
+[[ ! -f .vercelignore ]] && ok ".vercelignore removed" || bad ".vercelignore must be removed"
 python3 scripts/verify-public-output-allowlist.py || fail=1
 bash scripts/verify-public-chat-truth.sh || fail=1
 

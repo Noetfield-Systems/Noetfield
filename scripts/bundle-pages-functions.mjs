@@ -40,10 +40,10 @@ function functionOutPath(apiRel) {
 
 function entrySource(apiRel) {
   const importPath = `../../api/${apiRel}`.replace(/\\/g, "/");
-  return `import { runVercelHandler } from "../../functions/_lib/vercel-adapter.js";
+  return `import { runNodeHandler } from "../../functions/_lib/pages-node-handler-adapter.js";
 import * as handlerModule from "${importPath}";
 const handler = handlerModule.default || handlerModule;
-export const onRequest = (context) => runVercelHandler(handler, context);
+export const onRequest = (context) => runNodeHandler(handler, context);
 `;
 }
 
@@ -75,9 +75,11 @@ async function main() {
   fs.mkdirSync(tmpDir, { recursive: true });
   fs.rmSync(path.join(DIST_FUNCTIONS, "api"), { recursive: true, force: true });
 
-  const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, "vercel.json"), "utf8"));
+  const routesConfig = JSON.parse(
+    fs.readFileSync(path.join(ROOT, "governance", "www-pages-routes.json"), "utf8")
+  );
   const aliasRoutes = [];
-  for (const rule of vercel.rewrites || []) {
+  for (const rule of routesConfig.rewrites || []) {
     const source = String(rule.source || "").trim().replace(/^\//, "");
     const dest = String(rule.destination || "").trim();
     if (!source || !dest.startsWith("/api/")) continue;

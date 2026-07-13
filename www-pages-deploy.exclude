@@ -1,4 +1,5 @@
-# Internal / engineering — exclude from public www deploy
+# Internal / engineering — exclude from public www Cloudflare Pages deploy
+# Used by scripts/build-www-pages-dist.sh (rsync --exclude-from)
 .cursor/
 .agents/
 .github/
@@ -21,8 +22,8 @@ os/
 reports/
 scripts/
 prompts/
-data/
-data/chatbot/
+/data/
+/data/chatbot/
 infrastructure/
 governance-console/
 governance/*.json

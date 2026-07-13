@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify public-output denylist is wired into Vercel and probes."""
+"""Verify public-output denylist is wired into www deploy config and probes."""
 
 from __future__ import annotations
 
@@ -9,8 +9,8 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DENYLIST = ROOT / "governance" / "PUBLIC_OUTPUT_DENYLIST.json"
-VERCEL_JSON = ROOT / "vercel.json"
-VERCELIGNORE = ROOT / ".vercelignore"
+ROUTES = ROOT / "governance" / "www-pages-routes.json"
+DEPLOY_EXCLUDE = ROOT / "www-pages-deploy.exclude"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -18,14 +18,14 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def redirect_sources() -> set[str]:
-    config = load_json(VERCEL_JSON)
+    config = load_json(ROUTES)
     return {row.get("source", "") for row in config.get("redirects", [])}
 
 
-def vercelignore_lines() -> set[str]:
+def deploy_exclude_lines() -> set[str]:
     return {
         line.strip()
-        for line in VERCELIGNORE.read_text(encoding="utf-8").splitlines()
+        for line in DEPLOY_EXCLUDE.read_text(encoding="utf-8").splitlines()
         if line.strip() and not line.strip().startswith("#")
     }
 
@@ -43,27 +43,27 @@ def main() -> int:
     denylist = load_json(DENYLIST)
     exact_paths = denylist.get("exact_paths", [])
     prefix_paths = denylist.get("prefix_paths", [])
-    ignore_patterns = denylist.get("vercelignore_patterns", [])
+    ignore_patterns = denylist.get("www_deploy_exclude_patterns", [])
     probe_paths = denylist.get("probe_paths", [])
     sources = redirect_sources()
-    ignores = vercelignore_lines()
+    excludes = deploy_exclude_lines()
 
     failures: list[str] = []
 
     for pattern in ignore_patterns:
-        if pattern not in ignores:
-            failures.append(f".vercelignore missing pattern: {pattern}")
+        if pattern not in excludes:
+            failures.append(f"www-pages-deploy.exclude missing pattern: {pattern}")
 
     for path in exact_paths:
         if path not in sources:
-            failures.append(f"vercel.json missing exact redirect: {path}")
+            failures.append(f"www-pages-routes.json missing exact redirect: {path}")
 
     for prefix in prefix_paths:
         base, wildcard = prefix_redirects(prefix)
         if wildcard not in sources:
-            failures.append(f"vercel.json missing prefix redirect: {wildcard}")
+            failures.append(f"www-pages-routes.json missing prefix redirect: {wildcard}")
         if base not in sources:
-            failures.append(f"vercel.json missing prefix base redirect: {base}")
+            failures.append(f"www-pages-routes.json missing prefix base redirect: {base}")
 
     for path in probe_paths:
         if not path_is_covered(path, exact_paths, prefix_paths):

@@ -67,7 +67,7 @@ var require_traction = __commonJS({
   }
 });
 
-// functions/_lib/vercel-adapter.js
+// functions/_lib/pages-node-handler-adapter.js
 function headersToObject(request) {
   const out = {};
   request.headers.forEach((value, key) => {
@@ -140,7 +140,7 @@ function queryToObject(url) {
   });
   return out;
 }
-async function runVercelHandler(handler2, context) {
+async function runNodeHandler(handler2, context) {
   const { request, env } = context;
   bindEnv(env);
   const url = new URL(request.url);
@@ -165,7 +165,7 @@ async function runVercelHandler(handler2, context) {
 // tmp/pages-function-entries/api__admin__traction.js
 var handlerModule = __toESM(require_traction());
 var handler = handlerModule.default || handlerModule;
-var onRequest = (context) => runVercelHandler(handler, context);
+var onRequest = (context) => runNodeHandler(handler, context);
 export {
   onRequest
 };

@@ -1,6 +1,7 @@
 """Public HTML must align with final GTM simplification (no legacy surfaces)."""
 
 from pathlib import Path
+import json
 import subprocess
 import sys
 
@@ -129,8 +130,8 @@ def test_global_intake_wiring_on_www() -> None:
     assert "data-nf-intake-form" in contact
     investors = (ROOT / "investors" / "index.html").read_text(encoding="utf-8")
     assert "nfInvestorForm" in investors
-    vercel = (ROOT / "vercel.json").read_text(encoding="utf-8")
-    assert "/api/health" in vercel
+    routes = json.loads((ROOT / "governance" / "www-pages-routes.json").read_text(encoding="utf-8"))
+    assert "/api/health" in json.dumps(routes)
     assert (ROOT / "api" / "public" / "chat" / "index.js").is_file()
     assert (ROOT / "api" / "intake.js").is_file()
     intake_api = (ROOT / "api" / "intake.js").read_text(encoding="utf-8")

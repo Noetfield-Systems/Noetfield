@@ -1,8 +1,5 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "installCommand": "",
-  "buildCommand": "",
+  "schema": "noetfield-www-pages-routes-v1",
   "rewrites": [
     {
       "source": "/health",

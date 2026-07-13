@@ -19,9 +19,8 @@
     ".cursor/rules/nf-anti-staleness-max.mdc",
     ".cursor/rules/noetfield-agent-doc-tagging.mdc",
     "package.json",
-    "vercel.json",
-    "railway.toml",
-    ".vercelignore",
+    "governance/www-pages-routes.json",
+    "www-pages-deploy.exclude",
     "Makefile"
   ],
   "lanes": {
@@ -109,8 +108,8 @@
         "generated public output only through source generators and manifests"
       ],
       "required_authority": [
-        ".vercelignore",
-        "vercel.json",
+        "www-pages-deploy.exclude",
+        "governance/www-pages-routes.json",
         "scripts/verify-public-output-allowlist.py"
       ],
       "verify": [

@@ -1,57 +1,162 @@
-const SUPABASE_URL = "https://ldfruywifqnfpwsfgmdl.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnJ1eXdpZnFuZnB3c2ZnbWRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwMzY3OTIsImV4cCI6MjA5NTYxMjc5Mn0.ETJQMWEO0eIgwDh9YSmtZ5C-jHGT31oXC1PdsUWR5RQ";
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __commonJS = (cb, mod) => function __require() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 
-async function verifyAccessToken(token) {
-  if (!token) return false;
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      apikey: SUPABASE_ANON_KEY,
-    },
+// api/auth/invest-session.js
+var require_invest_session = __commonJS({
+  "api/auth/invest-session.js"(exports, module) {
+    var SUPABASE_URL = "https://ldfruywifqnfpwsfgmdl.supabase.co";
+    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnJ1eXdpZnFuZnB3c2ZnbWRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwMzY3OTIsImV4cCI6MjA5NTYxMjc5Mn0.ETJQMWEO0eIgwDh9YSmtZ5C-jHGT31oXC1PdsUWR5RQ";
+    async function verifyAccessToken(token) {
+      if (!token) return false;
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          apikey: SUPABASE_ANON_KEY
+        }
+      });
+      return res.ok;
+    }
+    module.exports = async function handler2(req, res) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Cache-Control", "no-store");
+      if (req.method !== "POST") {
+        return res.status(405).json({ ok: false, error: "method_not_allowed" });
+      }
+      const token = req.body && req.body.access_token;
+      if (!await verifyAccessToken(token)) {
+        return res.status(401).json({ ok: false, error: "unauthorized" });
+      }
+      res.setHeader(
+        "Set-Cookie",
+        "nf_invest_auth=1; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800"
+      );
+      return res.status(200).json({ ok: true });
+    };
+  }
+});
+
+// functions/_lib/pages-node-handler-adapter.js
+function headersToObject(request) {
+  const out = {};
+  request.headers.forEach((value, key) => {
+    out[key] = value;
   });
-  return res.ok;
+  return out;
 }
-
-function investCookieHeaders() {
-  return {
-    "Set-Cookie":
-      "nf_invest_auth=1; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800",
-    "Cache-Control": "no-store",
+function createRes() {
+  let statusCode = 200;
+  const headers = {};
+  let settled = null;
+  const res = {
+    status(code) {
+      statusCode = code;
+      return res;
+    },
+    setHeader(key, value) {
+      headers[key] = value;
+      return res;
+    },
+    json(data) {
+      headers["content-type"] = headers["content-type"] || "application/json;charset=UTF-8";
+      settled = new Response(JSON.stringify(data), { status: statusCode, headers });
+      return settled;
+    },
+    end(body) {
+      settled = new Response(body == null ? null : String(body), { status: statusCode, headers });
+      return settled;
+    },
+    _response() {
+      return settled;
+    }
   };
+  return res;
 }
-
-export async function onRequestPost(context) {
-  let body;
+async function readBody(request) {
+  if (request.method === "GET" || request.method === "HEAD" || request.method === "OPTIONS") {
+    return {};
+  }
+  const contentType = request.headers.get("content-type") || "";
+  if (contentType.includes("application/json")) {
+    try {
+      return await request.json();
+    } catch (_) {
+      return {};
+    }
+  }
+  const text = await request.text();
+  if (!text) return {};
   try {
-    body = await context.request.json();
-  } catch {
-    return new Response(JSON.stringify({ ok: false, error: "invalid_json" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return JSON.parse(text);
+  } catch (_) {
+    return { raw: text };
   }
-
-  const token = body && body.access_token;
-  if (!(await verifyAccessToken(token))) {
-    return new Response(JSON.stringify({ ok: false, error: "unauthorized" }), {
-      status: 401,
-      headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
-    });
+}
+function bindEnv(env) {
+  const base = typeof process !== "undefined" && process.env ? { ...process.env } : {};
+  for (const [key, value] of Object.entries(env || {})) {
+    if (value != null) base[key] = String(value);
   }
-
-  return new Response(JSON.stringify({ ok: true }), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-      ...investCookieHeaders(),
-    },
+  if (typeof process !== "undefined") {
+    process.env = base;
+  }
+  return base;
+}
+function queryToObject(url) {
+  const out = {};
+  url.searchParams.forEach((value, key) => {
+    out[key] = value;
+  });
+  return out;
+}
+async function runNodeHandler(handler2, context) {
+  const { request, env } = context;
+  bindEnv(env);
+  const url = new URL(request.url);
+  const req = {
+    method: request.method,
+    url: url.pathname + url.search,
+    query: queryToObject(url),
+    headers: headersToObject(request),
+    body: await readBody(request)
+  };
+  const res = createRes();
+  const result = await handler2(req, res);
+  if (result instanceof Response) return result;
+  const fromRes = res._response();
+  if (fromRes instanceof Response) return fromRes;
+  return new Response(JSON.stringify({ detail: "handler did not send a response" }), {
+    status: 500,
+    headers: { "content-type": "application/json" }
   });
 }
 
-export async function onRequest() {
-  return new Response(JSON.stringify({ ok: false, error: "method_not_allowed" }), {
-    status: 405,
-    headers: { "Content-Type": "application/json" },
-  });
-}
+// tmp/pages-function-entries/api__auth__invest-session.js
+var handlerModule = __toESM(require_invest_session());
+var handler = handlerModule.default || handlerModule;
+var onRequest = (context) => runNodeHandler(handler, context);
+export {
+  onRequest
+};

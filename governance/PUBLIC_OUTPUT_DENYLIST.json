@@ -76,7 +76,7 @@
     "/tests/",
     "/var/"
   ],
-  "vercelignore_patterns": [
+  "www_deploy_exclude_patterns": [
     ".cursor/",
     ".agents/",
     ".github/",
@@ -98,8 +98,8 @@
     "reports/",
     "scripts/",
     "prompts/",
-    "data/",
-    "data/chatbot/",
+    "/data/",
+    "/data/chatbot/",
     "infrastructure/",
     "governance-console/",
     "governance/*.json",

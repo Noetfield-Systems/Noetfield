@@ -8,5 +8,5 @@ routes = [
 ]
 
 [vars]
-# Direct Vercel origin — never www.noetfield.com (would loop if CF route is active).
-ORIGIN = "https://noetfield-the-777-foundation.vercel.app"
+# Cloudflare Pages origin — never www.noetfield.com (would loop if CF route is active).
+ORIGIN = "https://noetfield-www.pages.dev"

@@ -1,4 +1,4 @@
-/** Bridge Vercel-style (req, res) handlers to Cloudflare Pages Functions. */
+/** Bridge Node-style (req, res) API handlers to Cloudflare Pages Functions. */
 
 function headersToObject(request) {
   const out = {};
@@ -78,7 +78,7 @@ function queryToObject(url) {
   return out;
 }
 
-export async function runVercelHandler(handler, context) {
+export async function runNodeHandler(handler, context) {
   const { request, env } = context;
   bindEnv(env);
   const url = new URL(request.url);
@@ -100,10 +100,10 @@ export async function runVercelHandler(handler, context) {
   });
 }
 
-export function createVercelHandler(handler) {
+export function createNodeHandler(handler) {
   const fn = typeof handler === "function" ? handler : handler?.default;
   if (typeof fn !== "function") {
     throw new Error("handler is not a function");
   }
-  return (context) => runVercelHandler(fn, context);
+  return (context) => runNodeHandler(fn, context);
 }

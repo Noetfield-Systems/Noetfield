@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Build static output directory for Cloudflare Pages (mirrors .vercelignore exclusions).
+# Build static output directory for Cloudflare Pages.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 DIST="${ROOT}/www-pages-dist"
+EXCLUDE="${ROOT}/www-pages-deploy.exclude"
 
 log() { printf '[build-www-pages-dist] %s\n' "$*"; }
 
@@ -17,13 +18,11 @@ log "clean ${DIST}"
 rm -rf "$DIST"
 mkdir -p "$DIST"
 
-log "copy static files (respecting .vercelignore)…"
+log "copy static files (respecting www-pages-deploy.exclude)…"
 if command -v rsync >/dev/null 2>&1; then
   rsync -a \
-    --exclude-from="${ROOT}/.vercelignore" \
+    --exclude-from="${EXCLUDE}" \
     --exclude 'www-pages-dist/' \
-    --exclude 'vercel.json' \
-    --exclude '.vercel/' \
     --exclude '.vscode/' \
     --exclude '.git/' \
     --exclude '.venv/' \

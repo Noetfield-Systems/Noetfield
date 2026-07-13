@@ -38,7 +38,7 @@ Repo copies of internal docs **stay on disk for agents** — they are **not www*
 
 ---
 
-## 3. Deploy boundary (vercel.json + .vercelignore)
+## 3. Deploy boundary (www-pages-routes.json + www-pages-deploy.exclude)
 
 ### Must return 404 on www (redirect or exclude)
 
@@ -98,7 +98,7 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 Before every www deploy merge: **`make verify-static-www`** must PASS.
 
-Disk HTML, partials, `vercel.json`, and `.vercelignore` are the **source of truth** for what may ship. Production E2E confirms live deploy matches this law.
+Disk HTML, partials, `governance/www-pages-routes.json`, and `www-pages-deploy.exclude` are the **source of truth** for what may ship. Production E2E confirms live deploy matches this law.
 
 ---
 
@@ -122,7 +122,7 @@ www.noetfield.com must **never hard-depend** on subdomains that are not DNS-prov
 
 ### Enforcement rules
 
-1. **No vercel.json rewrites** to `platform.noetfield.com` unless L1 passes dedicated platform smoke.
+1. **No www route rewrites** to `platform.noetfield.com` unless L1 passes dedicated platform smoke.
 2. **`platform_reachable`** on intake health must be boolean from successful fetch — never inferred from `{}`.
 3. **`chat_api_base`** in ecosystem JSON stays same-origin until L3.
 4. Production E2E (`check_noetfield_com_e2e.py`) asserts **www spine only**; platform/GEL probes belong in dedicated platform/GEL smoke checks.

@@ -18,7 +18,7 @@
 ## Static site (institutional)
 
 - **Source:** repository root HTML (`index.html`, `gate/`, `trust-brief/`, `copilot/`, …)
-- **Deploy:** Cloudflare Pages project `noetfield-www` (via `scripts/deploy-www-cloudflare.sh`) → `www.noetfield.com` (Vercel retired 2026-07-09)
+- **Deploy:** Cloudflare Pages project `noetfield-www` (via `scripts/deploy-www-cloudflare.sh`) → `www.noetfield.com`
 - **Branch:** `main`
 - **Runbook:** `docs/ops/CF_WWW_PROXY_LOCKED_v1.md`
 
