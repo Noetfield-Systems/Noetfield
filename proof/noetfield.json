@@ -57,15 +57,14 @@
         }
       ],
       "gaps": [
-        "Corporate homepage does not yet present all three fields equally.",
-        "Dedicated /motors and /investor-workflows routes not yet live."
+        "Direction gate live at /; Field 3 (/investor-workflows/) not linked from homepage.",
+        "Enterprise field still primary on legacy surfaces under /enterprise/ and contract URLs."
       ],
       "corrective_actions": [
-        "Ship Case Study #1 proof page.",
-        "Rebuild corporate homepage with three-field architecture.",
-        "Migrate current enterprise content to /enterprise."
+        "Keep direction gate minimal — do not replace with marketing homepage.",
+        "Optional: add Field 3 entry if founder requests."
       ],
-      "next_milestone": "Public proof page live at /proof/noetfield.",
+      "next_milestone": "Maintain one-subject page boundaries across gate routes.",
       "capital_or_dependency_required": "Site rebuild capacity (Lane C); not blocked on funding."
     },
     {
@@ -85,13 +84,12 @@
         }
       ],
       "gaps": [
-        "Site does not yet reflect motors or investor workflow product lines."
+        "Motors and investor-workflow gate pages live; legacy enterprise URLs still carry primary GEL narrative."
       ],
       "corrective_actions": [
-        "Rebuild noetfield.com as corporate home.",
-        "Move enterprise content to /enterprise."
+        "Keep /enterprise/ frozen; direction traffic via / gate."
       ],
-      "next_milestone": "Corporate homepage v1 with three-field navigation.",
+      "next_milestone": "Direction gate + gate pages remain scoped (one subject per page).",
       "capital_or_dependency_required": null
     },
     {
@@ -172,10 +170,10 @@
     }
   ],
   "gaps_summary": [
-    "Corporate site does not yet reflect three-field company identity.",
+    "Field 3 not on homepage gate (by design until founder adds it).",
     "Full governed execution chain under commissioning.",
     "Independent external verification not established.",
-    "External free audit product (/audit/start) not yet live.",
+    "/audit/start product funnel not yet built (use /investor-workflows/ + contact).",
     "Additional case studies (SourceA, SourceB) planned but not yet published."
   ],
   "milestones": [
@@ -183,7 +181,7 @@
       "id": "M-001",
       "phase": "now",
       "name": "Public proof page live (Case Study #1)",
-      "status": "IN_COMMISSIONING",
+      "status": "LIVE",
       "receipt_target": "proof-page-live-receipt-v1",
       "unlocks": "Credible LinkedIn follow-up; live demo of Investor Workflow format."
     },
@@ -198,10 +196,10 @@
     {
       "id": "M-003",
       "phase": "next",
-      "name": "Corporate homepage rebuild (three fields)",
-      "status": "PLANNED",
+      "name": "Direction gate homepage (minimal tiles)",
+      "status": "LIVE",
       "receipt_target": "corporate-home-v1-receipt",
-      "unlocks": "Public site matches company identity; enterprise content at /enterprise."
+      "unlocks": "Founder-approved entry; enterprise at /enterprise/; one-subject gate pages."
     },
     {
       "id": "M-004",

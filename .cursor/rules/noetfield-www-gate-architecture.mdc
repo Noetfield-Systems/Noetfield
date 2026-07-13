@@ -1,0 +1,30 @@
+---
+description: www gate architecture — read before editing / or gate pages; prevents agent downgrade
+globs:
+  - "index.html"
+  - "**/motors/**"
+  - "**/investors/**"
+  - "**/investor-workflows/**"
+  - "**/proof/**"
+  - "**/roadmap/**"
+  - "**/about/**"
+  - "**/invest/**"
+  - "**/auth/**"
+  - "assets/noetfield-gate*.css"
+  - "assets/noetfield-invest-auth*.js"
+alwaysApply: false
+---
+
+# www gate architecture (locked)
+
+**SSOT:** [docs/www/WWW_IMPLEMENTATION_STATUS_v1.md](../../docs/www/WWW_IMPLEMENTATION_STATUS_v1.md)
+
+Before editing gate pages:
+
+1. **`/`** — direction gate only. No product SKUs, pricing, governance cards, or corporate marketing essay.
+2. **`/enterprise/`** — frozen unless founder explicitly scopes it.
+3. **One page = one subject** — do not add Case Study, Roadmap, TrustField, invest, or other-direction tiles to the wrong page.
+4. **Do not revert `/` to old institutional homepage** or add global `header.html` to gate pages.
+5. **Cloudflare deploy only** — `www-pages-deploy.exclude` + `governance/www-pages-routes.json`. Never reintroduce Vercel artifacts.
+
+If blueprint §3 conflicts with WWW_IMPLEMENTATION_STATUS, **status file wins** for live www work.

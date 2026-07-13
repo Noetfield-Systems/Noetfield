@@ -40,7 +40,7 @@ P0 is not "ideas". P0 means the system must fail closed when public output, rout
 1. Create this disk plan as the durable planning artifact.
 2. Create one shared public denylist source for public leak paths.
 3. Wire production E2E and live nerve to read that shared denylist.
-4. Add a denylist sync validator so `.vercelignore`, `vercel.json`, live nerve, and E2E cannot drift silently.
+4. Add a denylist sync validator so `www-pages-deploy.exclude`, `governance/www-pages-routes.json`, live nerve, and E2E cannot drift silently.
 5. Add route/nav truth gating for the known `/intelligence/` issue.
 6. Add a validator registry that maps validator id, scope, command, script, receipt, and node ids.
 7. Add a node catalog that maps live nerve nodes to owners, tiers, files, and validator ids.
@@ -67,7 +67,7 @@ P0 is not "ideas". P0 means the system must fail closed when public output, rout
 
 1. Make `NOETFIELD_LIVE_NERVE_RECEIPT.json` the first-read law for all website/platform work.
 2. Make `NOOS_LIVE_SYNC_RECEIPT.json` the first-read law for NOOS runtime work.
-3. Use one shared public denylist source for `.vercelignore`, `vercel.json`, E2E, and live nerve.
+3. Use one shared public denylist source for `www-pages-deploy.exclude`, `governance/www-pages-routes.json`, E2E, and live nerve.
 4. Fail validation when denylist coverage differs across files.
 5. Fail live nerve when stale public chatbot framing returns.
 6. Mark RCA/history docs as historical so agents do not reuse bad examples.

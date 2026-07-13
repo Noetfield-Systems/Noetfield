@@ -17,7 +17,8 @@
 
 ## Static site (institutional)
 
-- **Source:** repository root HTML (`index.html`, `gate/`, `trust-brief/`, `copilot/`, …)
+- **Source:** repository root HTML — gate pages at `/`, `/motors/`, `/investors/`, etc.; enterprise frozen at `/enterprise/`
+- **Agent SSOT:** `docs/www/WWW_IMPLEMENTATION_STATUS_v1.md` (canonical: `noetfeld-OS/noetfield-org/WWW_IMPLEMENTATION_STATUS_v1.md`)
 - **Deploy:** Cloudflare Pages project `noetfield-www` (via `scripts/deploy-www-cloudflare.sh`) → `www.noetfield.com`
 - **Branch:** `main`
 - **Runbook:** `docs/ops/CF_WWW_PROXY_LOCKED_v1.md`

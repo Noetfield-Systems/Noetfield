@@ -30,5 +30,6 @@ Follow [docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md](../../docs/ops/AGENT_SELF_A
 
 ## Deep read (when task needs it)
 
+- [docs/www/WWW_IMPLEMENTATION_STATUS_v1.md](../../docs/www/WWW_IMPLEMENTATION_STATUS_v1.md) — **www gate routes + anti-downgrade (read before / edits)**
 - [docs/DOC_UNIFIED_INDEX_LOCKED_v1.md](../../docs/DOC_UNIFIED_INDEX_LOCKED_v1.md)
 - [docs/ops/AGENT_READ_LINKS_LOCKED_v1.md](../../docs/ops/AGENT_READ_LINKS_LOCKED_v1.md) § Cloud ship

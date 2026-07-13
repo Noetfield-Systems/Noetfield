@@ -251,7 +251,7 @@ Live E2E and static verification passed on 2026-06-28 after the AI Factory Layer
 - [ ] E2E-198 Add CI check that PYTHONPATH matches Makefile service paths.
 - [ ] E2E-199 Add CI check for missing service roots.
 - [ ] E2E-200 Add CI check for serverless function additions.
-- [ ] E2E-201 Add CI check for `.vercelignore` public allowlist. STILL RELEVANT — `.vercelignore` remains load-bearing for the Cloudflare Pages build (`scripts/build-www-pages-dist.sh` rsyncs with `--exclude-from=.vercelignore`).
+- [ ] E2E-201 Add CI check for `www-pages-deploy.exclude` public allowlist. STILL RELEVANT — exclude file is load-bearing for Cloudflare Pages build (`scripts/build-www-pages-dist.sh` rsyncs with `--exclude-from=www-pages-deploy.exclude`).
 - [ ] E2E-202 Add CI check for public JSON config allowlist.
 - [ ] E2E-203 Add CI check for accidental docs publishing.
 - [ ] E2E-204 ~~Add CI check for generated `.vercel` files not committed.~~ WON'T DO — Vercel retired 2026-07-09; no more `.vercel/` directory is ever generated.
