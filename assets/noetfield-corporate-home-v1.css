@@ -1,102 +1,72 @@
-/* Corporate homepage v1 — minimal investor-grade surface (2026) */
-body.nf-www.nf-corp-home .nf-corp-hero {
-  padding: clamp(2.5rem, 6vw, 5rem) 0 2rem;
-  max-width: 1120px;
+/* Main page v2 — direction gate only (no product copy) */
+body.nf-www.nf-corp-home .nf-corp-gate {
+  min-height: min(72vh, 640px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(3rem, 8vw, 6rem) 1.25rem;
+  max-width: 920px;
   margin: 0 auto;
 }
-body.nf-www.nf-corp-home .nf-corp-hero h1 {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  max-width: 18ch;
-  margin-bottom: 1rem;
+body.nf-www.nf-corp-home .nf-corp-gate .nf-eyebrow {
+  margin-bottom: 2.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
 }
-body.nf-www.nf-corp-home .nf-corp-lead {
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  color: var(--nf-muted, rgba(255, 255, 255, 0.72));
-  max-width: 52ch;
-  line-height: 1.55;
-}
-body.nf-www.nf-corp-home .nf-corp-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 1.5rem;
-  margin: 1.75rem 0 2rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-}
-body.nf-www.nf-corp-home .nf-corp-stats span {
-  padding: 0.45rem 0.75rem;
-  border: 1px solid rgba(200, 163, 73, 0.35);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-}
-body.nf-www.nf-corp-home .nf-field-grid {
+body.nf-www.nf-corp-home .nf-direction-grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  margin: 2rem 0;
+  gap: 0.75rem;
+  width: min(100%, 520px);
+  margin: 0 auto 2rem;
 }
-body.nf-www.nf-corp-home .nf-field-card {
-  display: block;
-  padding: 1.35rem 1.25rem;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
-  backdrop-filter: blur(8px);
+@media (min-width: 640px) {
+  body.nf-www.nf-corp-home .nf-direction-grid {
+    grid-template-columns: repeat(3, 1fr);
+    width: min(100%, 720px);
+  }
+}
+body.nf-www.nf-corp-home .nf-direction-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.5rem;
+  padding: 1rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.15s, background 0.15s;
 }
-body.nf-www.nf-corp-home .nf-field-card:hover {
-  border-color: rgba(200, 163, 73, 0.55);
-  transform: translateY(-2px);
+body.nf-www.nf-corp-home .nf-direction-tile:hover {
+  border-color: rgba(200, 163, 73, 0.5);
+  background: rgba(200, 163, 73, 0.06);
 }
-body.nf-www.nf-corp-home .nf-field-card__num {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
-  color: #c8a349;
-  margin-bottom: 0.5rem;
-}
-body.nf-www.nf-corp-home .nf-field-card h3 {
-  font-size: 1.1rem;
-  margin: 0 0 0.5rem;
-}
-body.nf-www.nf-corp-home .nf-field-card p {
-  font-size: 0.92rem;
-  color: var(--nf-muted, rgba(255, 255, 255, 0.68));
-  margin: 0;
-  line-height: 1.45;
-}
-body.nf-www.nf-corp-home .nf-corp-pipeline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  align-items: center;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.55);
-  margin: 1.5rem 0;
-}
-body.nf-www.nf-corp-home .nf-corp-pipeline strong {
-  color: #c8a349;
-  font-weight: 500;
-}
-body.nf-www.nf-corp-home .nf-proof-strip {
-  margin: 2.5rem 0;
-  padding: 1.25rem 1.35rem;
-  border-radius: 14px;
-  border: 1px solid rgba(200, 163, 73, 0.4);
-  background: rgba(200, 163, 73, 0.08);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-}
-body.nf-www.nf-corp-home .nf-proof-strip p {
-  margin: 0;
-  max-width: 42ch;
+body.nf-www.nf-corp-home .nf-direction-tile__label {
   font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+body.nf-www.nf-corp-home .nf-direction-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.85rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+}
+body.nf-www.nf-corp-home .nf-direction-secondary a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+}
+body.nf-www.nf-corp-home .nf-direction-secondary a:hover {
+  color: #c8a349;
+}
+body.nf-www.nf-corp-home .nf-direction-secondary span {
+  color: rgba(255, 255, 255, 0.25);
 }
