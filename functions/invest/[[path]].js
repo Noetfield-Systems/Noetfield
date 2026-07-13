@@ -5,7 +5,9 @@ function hasInvestCookie(request) {
 
 function redirectSignIn(request) {
   const url = new URL(request.url);
-  const signIn = new URL("/auth/sign-in/", url.origin);
+  const origin =
+    url.hostname.endsWith("noetfield.com") ? "https://www.noetfield.com" : url.origin;
+  const signIn = new URL("/auth/sign-in/", origin);
   signIn.searchParams.set("next", url.pathname + url.search);
   return Response.redirect(signIn.toString(), 302);
 }
