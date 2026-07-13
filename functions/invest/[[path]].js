@@ -5,16 +5,13 @@ function hasInvestCookie(request) {
 
 function publicOrigin(request) {
   const forwarded = request.headers.get("X-Forwarded-Host");
-  const host = (forwarded || request.headers.get("Host") || new URL(request.url).host)
-    .split(",")[0]
-    .trim()
-    .split(":")[0];
+  const forwardedHost = forwarded ? forwarded.split(",")[0].trim().split(":")[0] : "";
+  if (forwardedHost.endsWith("noetfield.com")) {
+    return `https://${forwardedHost}`;
+  }
+  const host = (request.headers.get("Host") || "").split(":")[0];
   if (host.endsWith("noetfield.com")) {
     return `https://${host}`;
-  }
-  const url = new URL(request.url);
-  if (host.endsWith("pages.dev")) {
-    return url.origin;
   }
   return "https://www.noetfield.com";
 }
