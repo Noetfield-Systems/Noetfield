@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Investor sign in — Noetfield Systems</title>
+ <meta name="robots" content="noindex,nofollow" />
+ <meta name="theme-color" content="#07080a" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=4" />
+ <link rel="stylesheet" href="/assets/noetfield-invest-auth-v1.css?v=1" />
+</head>
+<body class="nf-gate nf-gate--auth">
+ <div class="nf-gate__bg" aria-hidden="true"></div>
+ <div class="nf-gate__frame">
+  <header class="nf-gate__top">
+   <a class="nf-gate__mark" href="/">Noetfield Systems Inc.</a>
+   <span class="nf-gate__locale">Investor access</span>
+  </header>
+  <main id="main" class="nf-gate__main">
+   <a class="nf-vc-back" href="/">← Home</a>
+   <section class="nf-auth-card">
+    <h1>Investor sign in</h1>
+    <p class="nf-vc-lead">Private investor materials — verified access only.</p>
+    <button type="button" class="nf-auth-google" id="nf-auth-google">Sign in with Google</button>
+    <p class="nf-auth-divider">or email</p>
+    <form id="nf-auth-signin-form">
+     <label class="nf-auth-field">Email
+      <input class="nf-auth-input" type="email" id="nf-auth-email" autocomplete="username" placeholder="you@fund.com" required />
+     </label>
+     <label class="nf-auth-field">Password
+      <input class="nf-auth-input" type="password" id="nf-auth-password" autocomplete="current-password" placeholder="Password" />
+     </label>
+     <button type="submit" class="nf-auth-submit">Sign in</button>
+    </form>
+    <p class="nf-auth-foot"><button type="button" id="nf-auth-magic" style="background:none;border:none;color:#c9a962;cursor:pointer;font:inherit">Email magic link</button></p>
+    <p class="nf-auth-status" id="nf-auth-status" hidden></p>
+    <p class="nf-auth-foot"><a href="/">Public site</a></p>
+   </section>
+  </main>
+  <footer class="nf-gate__foot"><span>© 2026 Noetfield Systems Inc.</span></footer>
+ </div>
+ <script src="/assets/noetfield-invest-auth-v1.js?v=1"></script>
+ <script>document.addEventListener("DOMContentLoaded", function () { window.NoetfieldInvestAuth.bootSignInPage(); });</script>
+</body>
+</html>

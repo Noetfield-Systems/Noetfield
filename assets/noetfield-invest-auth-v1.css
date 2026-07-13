@@ -1,0 +1,133 @@
+/* Investor auth — matches gate dark surface */
+body.nf-gate.nf-gate--auth .nf-gate__main {
+  align-items: stretch;
+  justify-content: flex-start;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vh, 2.5rem) 0 3rem;
+}
+
+.nf-auth-card {
+  padding: 1.5rem 1.35rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+  animation: nf-vc-rise 0.55s ease both;
+}
+
+.nf-auth-card h1 {
+  margin: 0 0 0.5rem;
+  font-family: "Newsreader", "Georgia", serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+  color: #f5f3ed;
+}
+
+.nf-auth-card .nf-vc-lead {
+  margin-bottom: 1.25rem;
+  font-size: 0.92rem;
+}
+
+.nf-auth-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 2.75rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f0eee8;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.nf-auth-google:hover,
+.nf-auth-google:focus-visible {
+  border-color: rgba(201, 169, 98, 0.45);
+  background: rgba(201, 169, 98, 0.1);
+  outline: none;
+}
+
+.nf-auth-divider {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(236, 234, 228, 0.35);
+}
+
+.nf-auth-field {
+  display: block;
+  margin-bottom: 0.85rem;
+  font-size: 0.78rem;
+  color: rgba(236, 234, 228, 0.55);
+}
+
+.nf-auth-input {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.25);
+  color: #f0eee8;
+  font: inherit;
+}
+
+.nf-auth-submit {
+  width: 100%;
+  min-height: 2.65rem;
+  margin-top: 0.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 169, 98, 0.45);
+  background: rgba(201, 169, 98, 0.14);
+  color: #f0eee8;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.nf-auth-status {
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+  color: rgba(236, 234, 228, 0.55);
+}
+
+.nf-auth-status.is-error {
+  color: #e8a0a0;
+}
+
+.nf-auth-status.is-ok {
+  color: #7ec99a;
+}
+
+.nf-auth-foot {
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  text-align: center;
+  color: rgba(236, 234, 228, 0.4);
+}
+
+.nf-auth-foot a {
+  color: #c9a962;
+  text-decoration: none;
+}
+
+.nf-invest-gate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  font-size: 0.88rem;
+  color: rgba(236, 234, 228, 0.5);
+  letter-spacing: 0.04em;
+}

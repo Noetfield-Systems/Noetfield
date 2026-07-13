@@ -4,7 +4,8 @@
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>Invest — Noetfield Systems Inc.</title>
- <meta name="description" content="Invest in Noetfield Systems Inc." />
+ <meta name="description" content="Private investor materials — Noetfield Systems Inc." />
+ <meta name="robots" content="noindex,nofollow" />
  <meta name="theme-color" content="#07080a" />
  <link rel="canonical" href="https://www.noetfield.com/invest/" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
@@ -19,39 +20,50 @@
  <div class="nf-gate__frame">
   <header class="nf-gate__top">
    <a class="nf-gate__mark" href="/">Noetfield Systems Inc.</a>
-   <span class="nf-gate__locale">Canada</span>
+   <span class="nf-gate__locale">Investor · private</span>
   </header>
-  <main id="main" class="nf-gate__main">
+
+  <div id="nf-invest-gate" class="nf-invest-gate">Verifying access…</div>
+
+  <main id="nf-invest-app" class="nf-gate__main" hidden>
    <a class="nf-vc-back" href="/">← Home</a>
    <header class="nf-vc-hero">
-    <p class="nf-vc-kicker">Invest</p>
+    <p class="nf-vc-kicker">Invest · private</p>
     <h1>Equity in Noetfield</h1>
-    <p class="nf-vc-lead">For investors considering ownership in the company — not buying diligence on other companies.</p>
+    <p class="nf-vc-lead">For verified investors only. Not a public offer.</p>
    </header>
    <div class="nf-vc-strip">
     <span class="nf-vc-pill">Angel ~CA$150K–300K</span>
     <span class="nf-vc-pill">Pre-seed ~US$750K–1M</span>
    </div>
-   <nav class="nf-vc-grid nf-vc-grid--3" aria-label="Invest paths">
+   <nav class="nf-vc-grid nf-vc-grid--2" aria-label="Investor materials">
     <a class="nf-vc-tile" href="/proof/noetfield/">
      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
      <span class="nf-vc-tile__label">Case Study #1</span>
      <span class="nf-vc-tile__desc">Technical diligence — public self-audit with JSON.</span>
     </a>
-    <a class="nf-vc-tile" href="/proof/">
+    <a class="nf-vc-tile" href="/proof/noetfield.json">
      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
-     <span class="nf-vc-tile__label">Proof library</span>
-     <span class="nf-vc-tile__desc">All published case studies and evidence.</span>
+     <span class="nf-vc-tile__label">Evidence bundle</span>
+     <span class="nf-vc-tile__desc">Machine-readable audit data.</span>
     </a>
     <a class="nf-vc-tile" href="/contact/?topic=investor-workflow#contact-form">
      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
      <span class="nf-vc-tile__label">Discuss the round</span>
      <span class="nf-vc-tile__desc">Request the commissioning brief.</span>
     </a>
+    <a class="nf-vc-tile" href="/roadmap/">
+     <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+     <span class="nf-vc-tile__label">Roadmap</span>
+     <span class="nf-vc-tile__desc">Live, in progress, and planned.</span>
+    </a>
    </nav>
-   <p class="nf-vc-note">Portfolio diligence product → <a href="/investors/diligence/">Diligence Vault</a> (different path).</p>
+   <p class="nf-vc-note">Portfolio diligence product is separate → <a href="/investors/diligence/">Diligence Vault</a>. <a href="/auth/sign-out/">Sign out</a></p>
   </main>
+
   <footer class="nf-gate__foot"><span>© 2026 Noetfield Systems Inc.</span></footer>
  </div>
+ <script src="/assets/noetfield-invest-auth-v1.js?v=1"></script>
+ <script>document.addEventListener("DOMContentLoaded", function () { window.NoetfieldInvestAuth.guardInvestPage(); });</script>
 </body>
 </html>
