@@ -545,3 +545,70 @@ body.nf-gate.nf-gate--corp .nf-page-hero {
   margin: 0 0 0.35rem;
   font-size: 0.88rem;
 }
+
+/* Minimal page — plain links, no newspaper layout */
+body.nf-gate.nf-gate--minimal .nf-gate__main {
+  max-width: 520px;
+}
+
+body.nf-gate.nf-gate--minimal .nf-page-hero {
+  margin-bottom: 1.5rem;
+}
+
+body.nf-gate.nf-gate--minimal .nf-page-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.nf-page-links {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.nf-page-links a {
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: rgba(236, 234, 228, 0.68);
+  transition: color 0.15s ease;
+}
+
+.nf-page-links a:hover,
+.nf-page-links a:focus-visible {
+  color: #c9a962;
+  outline: none;
+}
+
+.nf-page-links li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nf-page-links li::before {
+  content: "→";
+  font-size: 0.75rem;
+  color: rgba(236, 234, 228, 0.25);
+}
+
+.nf-page-aside {
+  margin-top: 2rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(236, 234, 228, 0.4);
+}
+
+.nf-page-aside a {
+  color: rgba(201, 169, 98, 0.75);
+  text-decoration: none;
+}
+
+.nf-page-aside a:hover,
+.nf-page-aside a:focus-visible {
+  color: #c9a962;
+  outline: none;
+}
