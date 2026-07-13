@@ -3,11 +3,25 @@ function hasInvestCookie(request) {
   return /(?:^|;\s*)nf_invest_auth=1(?:;|$)/.test(cookie);
 }
 
+function publicOrigin(request) {
+  const forwarded = request.headers.get("X-Forwarded-Host");
+  const host = (forwarded || request.headers.get("Host") || new URL(request.url).host)
+    .split(",")[0]
+    .trim()
+    .split(":")[0];
+  if (host.endsWith("noetfield.com")) {
+    return `https://${host}`;
+  }
+  const url = new URL(request.url);
+  if (host.endsWith("pages.dev")) {
+    return url.origin;
+  }
+  return "https://www.noetfield.com";
+}
+
 function redirectSignIn(request) {
   const url = new URL(request.url);
-  const origin =
-    url.hostname.endsWith("noetfield.com") ? "https://www.noetfield.com" : url.origin;
-  const signIn = new URL("/auth/sign-in/", origin);
+  const signIn = new URL("/auth/sign-in/", publicOrigin(request));
   signIn.searchParams.set("next", url.pathname + url.search);
   return Response.redirect(signIn.toString(), 302);
 }
