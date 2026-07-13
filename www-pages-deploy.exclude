@@ -20,6 +20,7 @@ Noetfield-All-Documents/
 .sina-agent/
 os/
 reports/
+graph-out/
 scripts/
 prompts/
 /data/
