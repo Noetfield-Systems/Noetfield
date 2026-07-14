@@ -89,7 +89,7 @@ Used during CS#2 www deploy to “isolate” proof files. Isolation of commit sc
 - [x] **File this incident** + registry + MEMORY bump (R-014).
 - [x] **Install mandatory pre-deploy anti-stale / protected-surface gate** — `scripts/nf_www_deploy_anti_stale_v1.py` + `config/noetfield-www-protected-surfaces.v1.json` (candidate PR; fail-closed). Live HTML is a constraint signal, not SSOT.
 - [x] **Wire gate into** `scripts/deploy-www-cloudflare.sh` before `wrangler pages deploy` (requires `NF_AUTHORIZED_PROMOTE_SHA`).
-- [x] **Commit universal change-preservation law** — `.cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc` (local alwaysApply alone is not repository control).
+- [x] **Commit universal change-preservation law** — `.cursor/rules/000-noetfield-universal-change-preservation-law-v1.1.mdc` (local alwaysApply alone is not repository control; `…-v1.mdc` is MOVED stub only).
 - [ ] **Founder promote** enforcement candidate (`CANDIDATE_PENDING_UNIVERSAL_POLICY_INTEGRATION`) + sign-off on protected-surface markers. Incident stays **open** until merge; no institutional closure from this checklist alone.
 
 ---
