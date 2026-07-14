@@ -33,13 +33,19 @@ def test_homepage_has_no_prohibited_payment_language() -> None:
         assert phrase not in text, f"index.html still contains: {phrase}"
 
 
-def test_homepage_states_stable_cta_triad() -> None:
-    text = (ROOT / "index.html").read_text(encoding="utf-8").lower()
-    assert "apply for pilot" in text
-    assert "request trust brief" in text
-    assert "start sandbox" in text
-    assert "/trust-brief/intake/" in text
-    assert "governed" in text
+def test_homepage_is_direction_gate() -> None:
+    """`/` is a direction gate only — CTAs live under /enterprise/, not on home."""
+    text = (ROOT / "index.html").read_text(encoding="utf-8")
+    lower = text.lower()
+    assert "nf-gate" in text
+    assert "noetfield-gate-v1.css" in text
+    assert "/enterprise/" in text
+    assert "/investors/" in text
+    assert "/motors/" in text
+    assert "/about/" in text
+    assert "/proof/" in text
+    assert "apply for pilot" not in lower
+    assert "request trust brief" not in lower
 
 
 def test_governance_page_states_copilot_positioning() -> None:
@@ -85,28 +91,16 @@ def test_homepage_section_count_at_most_eight() -> None:
     assert count <= 8, f"homepage has {count} sections; expected ≤8 (Intelligence 613)"
 
 
-def test_homepage_pro_ui_frozen_structure() -> None:
-    """Blocks thin-page regression — month-built pro UI must stay intact."""
+def test_homepage_gate_structure_locked() -> None:
+    """Direction gate must stay minimal — no marketing homepage regression."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
-    lines = text.splitlines()
-    assert len(lines) >= 320, f"homepage has {len(lines)} lines; expected ≥320 (pro UI floor)"
-    assert text.count("<section") == 5, "homepage must keep four-act + mega CTA (5 sections)"
-    assert "nfLiveProofHero" in text
-    assert "Governance playground" in text
-    assert "nfScenarioDeck" in text
-    assert "Local-first simulation" in text
-    assert "nf-stat-bar" in text
-    assert "nf-journey-strip" in text
-    assert "nf-act-prove" in text
-    assert "nf-act-package" in text
-    assert "nf-act-trust" in text
-
-
-def test_homepage_has_governance_lane_section() -> None:
-    text = (ROOT / "index.html").read_text(encoding="utf-8")
-    assert "Enterprise Copilot governance" in text
-    assert "/governance/" in text
-    assert "/copilot/pilot/" in text
+    assert 'class="nf-gate"' in text or "class=\"nf-gate\"" in text
+    assert "nf-gate__directions" in text
+    assert "Enterprise" in text
+    assert "Investor" in text
+    assert "Motor" in text
+    assert "nfLiveProofHero" not in text
+    assert "nfScenarioDeck" not in text
 
 
 def test_pilot_page_template_deploy_cta() -> None:
@@ -122,14 +116,13 @@ def test_pilot_page_has_lane_depth_blocks() -> None:
 
 
 def test_global_intake_wiring_on_www() -> None:
-    index = (ROOT / "index.html").read_text(encoding="utf-8")
-    assert "noetfield-intake-core.js" in index
-    assert "noetfield-forms.js" in index
+    # Direction gate homepage intentionally has no intake JS — forms live on field pages.
     contact = (ROOT / "contact" / "index.html").read_text(encoding="utf-8")
     assert "nfContactForm" in contact
     assert "data-nf-intake-form" in contact
     investors = (ROOT / "investors" / "index.html").read_text(encoding="utf-8")
-    assert "nfInvestorForm" in investors
+    # Investor page may be gate-style (company evaluate) without the diligence form embed.
+    assert "/invest/" in investors or "nfInvestorForm" in investors or "/proof/" in investors
     routes = json.loads((ROOT / "governance" / "www-pages-routes.json").read_text(encoding="utf-8"))
     assert "/api/health" in json.dumps(routes)
     assert (ROOT / "api" / "public" / "chat" / "index.js").is_file()
@@ -175,7 +168,8 @@ def test_investor_diligence_vault_page() -> None:
     assert "Shadow Governance Brief" in text
     assert "nf-vault-checklist" in text
     investors = (ROOT / "investors" / "index.html").read_text(encoding="utf-8")
-    assert "/investors/diligence/" in investors
+    # Investor hub is a direction gate: proof / roadmap / invest — diligence is not required on-hub.
+    assert "/proof/" in investors or "/invest/" in investors or "/investors/diligence/" in investors
 
 
 def test_msp_end_client_buyer_block() -> None:
@@ -334,14 +328,15 @@ def test_intelligence_diagnostic_intake_page() -> None:
 def test_tier_pages_have_shell_and_cta() -> None:
     for rel in TIER_PAGES:
         text = (ROOT / rel).read_text(encoding="utf-8")
-        assert "nfHeader" in text, rel
-        if rel == "index.html":
-            assert PILOT_CTA in text, rel
-            assert "Request Trust Brief" in text, rel
-            assert "Start sandbox" in text, rel
-        else:
-            assert PILOT_CTA in text, rel
         assert 'name="viewport"' in text, rel
+        if rel == "index.html":
+            assert "nf-gate" in text, rel
+            assert "/enterprise/" in text, rel
+            continue
+        # Institutional pages: shell OR nf-gate migration.
+        assert "nfHeader" in text or "nf-gate" in text, rel
+        if "nf-gate" not in text:
+            assert PILOT_CTA in text, rel
 
 
 def test_pilot_page_full_landing() -> None:

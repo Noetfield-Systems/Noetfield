@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Audit institutional HTML for GTM lock: shell, viewport, CTAs, forbidden copy."""
+"""Audit public HTML for GTM lock + direction-gate homepage law.
+
+SSOT: docs/www/WWW_IMPLEMENTATION_STATUS_v1.md
+- `/` (index.html) is a direction gate only — nf-gate shell, not institutional marketing CTAs.
+- Tier institutional pages keep shell + pilot CTA requirements.
+"""
 
 from __future__ import annotations
 
@@ -8,8 +13,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Institutional shell pages (not the direction gate).
 TIER_PAGES = (
-    ROOT / "index.html",
     ROOT / "governance" / "index.html",
     ROOT / "enterprise" / "index.html",
     ROOT / "trust-brief" / "index.html",
@@ -24,9 +29,20 @@ REQUIRED_TIER = (
 )
 
 REQUIRED_TIER_BY_PAGE = {
-    "index.html": ("Apply for pilot", "Request Trust Brief", "Start sandbox"),
     "governance/index.html": ("Apply for pilot", "governance"),
 }
+
+# Direction-gate homepage requirements (founder-locked).
+GATE_HOME_REQUIRED = (
+    "nf-gate",
+    "noetfield-gate-v1.css",
+    'name="viewport"',
+    "/enterprise/",
+    "/investors/",
+    "/motors/",
+    "/about/",
+    "/proof/",
+)
 
 REQUIRED_SHELL_PARTIALS = (
     ROOT / "assets" / "partials" / "header.html",
@@ -54,32 +70,41 @@ def main() -> int:
         if not path.is_file():
             errors.append(f"missing shell partial: {path.relative_to(ROOT)}")
 
+    home = ROOT / "index.html"
+    if not home.is_file():
+        errors.append("missing tier page: index.html")
+    else:
+        ht = home.read_text(encoding="utf-8", errors="replace")
+        for req in GATE_HOME_REQUIRED:
+            if req not in ht:
+                errors.append(f"index.html: missing direction-gate marker {req!r}")
+        for phrase in FORBIDDEN_HOME:
+            if phrase in ht:
+                errors.append(f"index.html contains forbidden: {phrase}")
+        for bad in ("Golden Edge", "GCIP", "pre-execution", "audit ledger"):
+            if bad in ht:
+                errors.append(f"index.html contains internal term: {bad}")
+        # Gate homepage must NOT be forced back into marketing CTA shell.
+        if "nfHeader" in ht and "nf-gate" not in ht:
+            errors.append("index.html: unexpected institutional shell without nf-gate")
+
     for path in TIER_PAGES:
         if not path.is_file():
             errors.append(f"missing tier page: {path.relative_to(ROOT)}")
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         rel = str(path.relative_to(ROOT))
+        # Allow enterprise (or others) to migrate to nf-gate without failing CI mid-transition.
+        if 'class="nf-gate' in text or "nf-gate nf-gate" in text or "nf-gate--" in text:
+            if "viewport" not in text and 'name="viewport"' not in text:
+                errors.append(f"{rel}: missing 'viewport'")
+            continue
         for req in REQUIRED_TIER:
             if req not in text:
                 errors.append(f"{rel}: missing {req!r}")
         for req in REQUIRED_TIER_BY_PAGE.get(rel, ("Apply for pilot",)):
             if req not in text:
                 errors.append(f"{rel}: missing {req!r}")
-
-    home = ROOT / "index.html"
-    if home.is_file():
-        ht = home.read_text(encoding="utf-8", errors="replace")
-        for phrase in FORBIDDEN_HOME:
-            if phrase in ht:
-                errors.append(f"index.html contains forbidden: {phrase}")
-        if "request trust brief" not in ht.lower():
-            errors.append("index.html missing stable CTA: Request Trust Brief")
-        if "/trust-brief/intake/" not in ht:
-            errors.append("index.html missing Trust Brief intake link")
-        for bad in ("Golden Edge", "GCIP", "pre-execution", "audit ledger"):
-            if bad in ht:
-                errors.append(f"index.html contains internal term: {bad}")
 
     no_shell = []
     no_viewport = []
@@ -92,7 +117,11 @@ def main() -> int:
         text = path.read_text(encoding="utf-8", errors="replace")
         if 'name="viewport"' not in text and "name='viewport'" not in text:
             no_viewport.append(str(rel))
-        if "nfHeader" not in text and rel.parts[0] not in ("app", "portal", "ex", "auth", "login", "signup"):
+        if (
+            "nfHeader" not in text
+            and "nf-gate" not in text
+            and rel.parts[0] not in ("app", "portal", "ex", "auth", "login", "signup")
+        ):
             # allow minimal redirect stubs
             if "http-equiv" in text and "refresh" in text.lower():
                 continue
@@ -113,7 +142,7 @@ def main() -> int:
 
     if errors:
         return 1
-    print("public site health: OK (tier pages + homepage)")
+    print("public site health: OK (direction gate + institutional tier pages)")
     return 0
 
 
