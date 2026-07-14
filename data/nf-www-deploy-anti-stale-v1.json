@@ -1,0 +1,37 @@
+{
+  "schema": "nf-www-deploy-anti-stale-v1",
+  "version": 1,
+  "authority": {
+    "incident": ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
+    "rule": "R-014",
+    "universal_law": ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+    "memory": "MEMORY_LOCKED.yaml R-014 M-006 L-007"
+  },
+  "fail_closed": true,
+  "homepage_path": "index.html",
+  "homepage_lock": {
+    "required_markers": [
+      "nf-gate",
+      "Enterprise",
+      "Motor",
+      "/enterprise/",
+      "/motors/",
+      "/proof/"
+    ],
+    "forbidden_markers": [
+      "/investors/",
+      "/invest/",
+      "Investor",
+      "Invest in Noetfield"
+    ]
+  },
+  "live_ahead_policy": {
+    "enabled": true,
+    "description": "If live homepage already satisfies the lock and dist fails any required/forbidden check that live passes, treat dist as stale overwrite risk and FAIL."
+  },
+  "notes": [
+    "Git HEAD is not automatically newer than production.",
+    "Scoped commit is not scoped deploy.",
+    "Local Cursor alwaysApply rules are not repository control until committed and gated."
+  ]
+}

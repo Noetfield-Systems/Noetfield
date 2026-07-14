@@ -236,6 +236,10 @@ verify-nf-anti-staleness-max:
 	@chmod +x scripts/verify-nf-anti-staleness-max.sh scripts/verify-nf-mono-nerve-wire.sh scripts/verify-nf-agent-report-language.sh
 	./scripts/verify-nf-anti-staleness-max.sh
 
+# R-014 / INCIDENT-2026-07-14-001 — offline unit tests for www deploy anti-stale gate
+verify-nf-www-deploy-anti-stale:
+	@cd scripts && python3 -m unittest test_nf_www_deploy_anti_stale_v1.py -v
+
 verify-nf-agent-report-language:
 	@chmod +x scripts/verify-nf-agent-report-language.sh
 	./scripts/verify-nf-agent-report-language.sh

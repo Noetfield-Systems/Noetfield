@@ -1,0 +1,126 @@
+---
+description: NOETFIELD UNIVERSAL CHANGE-PRESERVATION LAW v1 — scoped mutation only; preserve unrelated work; no unapproved promote/merge/deploy
+alwaysApply: true
+---
+
+# NOETFIELD UNIVERSAL CHANGE-PRESERVATION LAW v1
+
+Applies to every repository, product, website, infrastructure surface, and every coding or automation agent (Cursor, Codex, Claude Code, ChatGPT Work, GitHub Actions, Noetfield Motor workers, future agents).
+
+## CORE INVARIANT
+
+Authorized to implement only the explicitly requested change. Not authorized to reinterpret, replace, clean up, modernize, restore, regenerate, reformat, downgrade, or redeploy unrelated existing work.
+
+Required state transition:
+
+`VERIFIED BASELINE + AUTHORIZED CHANGESET = CANDIDATE STATE`
+
+Do not reconstruct candidate state from whatever local, historical, cached, clean, or convenient snapshot is found.
+
+## MANDATORY PREFLIGHT
+
+Before modifying any file, report:
+
+1. repository name and absolute path
+2. current branch
+3. local HEAD
+4. origin default-branch HEAD
+5. working-tree status
+6. ahead/behind and ancestry relationship
+7. active worktrees and mutation branches
+8. current production release SHA or build identifier, when applicable
+9. whether live, local, origin, and documented release truth agree
+10. exact allowed paths
+11. exact protected paths and surfaces
+12. whether deployment authority has been granted
+
+If local, origin, intended release, and live state conflict → `BLOCKED_BASELINE_CONFLICT`
+
+If public release contains work not represented by verified Git source → `LIVE_AHEAD_OF_GIT`
+
+Do not overwrite live-ahead work with an older clean commit.
+
+## WORKSPACE RULES
+
+- Do not work directly in the canonical production workspace.
+- Use an isolated worktree and isolated branch.
+- One mutation lane per repository unless founder explicitly authorizes parallel work.
+- Unrelated dirty files are protected existing work — not blockers for isolated scoped work.
+- Do not stash, reset, restore, clean, checkout over, reformat, regenerate, stage, commit, or deploy unrelated dirty files.
+- Never use "clean HEAD" as proof it is newest or founder-approved.
+- Never deploy a full repository from a baseline that excludes newer locked work.
+
+## SCOPE RULES
+
+Before editing, establish a machine-readable task manifest containing:
+
+- verified baseline SHA
+- allowed paths
+- protected paths
+- expected outputs
+- forbidden operations
+- deployment authority
+- merge authority
+- locked terminology, routes, capabilities, and public markers
+
+Only files inside the allowlist may change.
+
+Any unexpected changed file → `BLOCKED_SCOPE_BREACH`
+
+Do not silently include, restore, normalize, or explain away unrelated changes.
+
+## PRESERVATION RULES
+
+An update to one component must not reduce, remove, revert, or downgrade any unrelated component.
+
+Require explicit founder authorization for: deletion; route removal; capability removal; content rollback; pricing change; terminology change; shared-layout replacement; configuration replacement; dependency-wide upgrade; generated-output replacement; migration affecting existing data; restoration of an older version; broad visual redesign; cross-repository mutation.
+
+CI and verification must prove:
+
+- changed files ⊆ allowed paths
+- protected files remain equivalent to baseline
+- locked routes and markers remain present
+- no unrelated capabilities disappeared
+- candidate history preserves approved ancestry
+- generated artifacts do not contain stale surfaces
+- public-facing output matches the approved candidate
+
+## AUTHORITY SEPARATION
+
+Builders build. Verifiers verify. Promotion workflows deploy.
+
+Agents may create: isolated branches; scoped changes; tests; commits; pull requests; verification reports; promotion candidates.
+
+Agents may NOT without explicit authority: merge; deploy; force-push; reset; delete branches; rewrite history; modify production redirects; alter credentials; promote a release; select an older release because it is cleaner.
+
+## PRODUCTION RULE
+
+Production deployment requires exact command:
+
+`PROMOTE <SURFACE> <FULL_COMMIT_SHA>`
+
+Deployment workflow must build the exact approved SHA — not local workspace, implicit HEAD, dirty directory, cached artifact, or whichever branch is checked out.
+
+After deployment, verify the real public surface: expected routes; content markers; capabilities; absence of deprecated markers; deployed build/SHA identity; redirects; API behavior where relevant.
+
+A successful provider deployment is not proof that the correct product was released.
+
+## REQUIRED TERMINAL VERDICTS
+
+Use one of these exact verdicts:
+
+- `PASS_SCOPED_CHANGE`
+- `BLOCKED_BASELINE_CONFLICT`
+- `LIVE_AHEAD_OF_GIT`
+- `BLOCKED_SCOPE_BREACH`
+- `BLOCKED_PROTECTED_SURFACE_REGRESSION`
+- `BLOCKED_NON_DESCENDANT_CANDIDATE`
+- `BLOCKED_STALE_RELEASE`
+- `BLOCKED_UNAPPROVED_PROMOTION`
+- `CANDIDATE_PENDING_FOUNDER_PROMOTION`
+
+Do not claim completion when preservation, release identity, or public verification is unproven.
+
+## WORKER POSTURE
+
+Worker executes or reports blocked. Worker does not accept, acknowledge, ratify, or reinterpret this law.

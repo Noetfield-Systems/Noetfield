@@ -41,6 +41,8 @@ ensure_project() {
 
 bash scripts/build-www-pages-dist.sh
 python3 scripts/verify_chat_greeting_coupling.py
+# R-014 / INCIDENT-2026-07-14-001 — fail closed before promote (live is a deploy constraint)
+python3 scripts/nf_www_deploy_anti_stale_v1.py --dist www-pages-dist --live "$CANONICAL"
 
 ensure_project
 sync_pages_secrets

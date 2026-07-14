@@ -87,10 +87,10 @@ Used during CS#2 www deploy to “isolate” proof files. Isolation of commit sc
 - [x] **T0 — Remove Investor/invest from live homepage** (`8054406e` + production deploy `2710df84`). Verified live: Enterprise · Motor only.
 - [x] **E2E fail-closed** if homepage reintroduces `/investors/`, `/invest/`, or “Investor”.
 - [x] **File this incident** + registry + MEMORY bump (R-014).
-- [ ] **Install mandatory pre-deploy anti-stale gate** — compare `www-pages-dist` to live `www.noetfield.com` for locked paths; FAIL if package is older/leakier than live.
-- [ ] **Wire gate into** `scripts/deploy-www-cloudflare.sh` before `wrangler pages deploy`.
-- [ ] **Cursor rule:** NEVER stash www WIP then deploy HEAD to “isolate” a scoped change.
-- [ ] **Founder sign-off** on anti-stale gate markers list (`/`, invest-leak denylist, interactive surfaces).
+- [x] **Install mandatory pre-deploy anti-stale gate** — `scripts/nf_www_deploy_anti_stale_v1.py` + SSOT `data/nf-www-deploy-anti-stale-v1.json` (fail-closed vs live lock markers).
+- [x] **Wire gate into** `scripts/deploy-www-cloudflare.sh` before `wrangler pages deploy`.
+- [x] **Cursor rule + universal law committed** — `nf-www-anti-stale-deploy.mdc` + `000-noetfield-universal-change-preservation-law-v1.mdc` (local alwaysApply alone is not control).
+- [ ] **Founder promote** this enforcement PR (merge) + sign-off on markers list; first live www promote with gate green. Incident stays **open** until merge.
 
 ---
 

@@ -1,0 +1,34 @@
+{
+  "schema": "nf-www-anti-stale-enforcement-task-manifest-v1",
+  "version": 1,
+  "verdict": "CANDIDATE_PENDING_FOUNDER_PROMOTION",
+  "authority": {
+    "founder_order": "Commit the rule and implement the Noetfield-specific gate together in one isolated enforcement PR—without deploying, merging, or touching product files.",
+    "incident": ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
+    "rule": "R-014",
+    "note": "Local uncommitted Cursor alwaysApply is not repository control. PASS_SCOPED_CHANGE does not apply to rule install alone."
+  },
+  "scope": {
+    "allowed_paths": [
+      ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+      ".cursor/rules/nf-www-anti-stale-deploy.mdc",
+      ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
+      "data/nf-www-deploy-anti-stale-v1.json",
+      "data/nf-www-anti-stale-enforcement-task-manifest-v1.json",
+      "scripts/nf_www_deploy_anti_stale_v1.py",
+      "scripts/test_nf_www_deploy_anti_stale_v1.py",
+      "scripts/deploy-www-cloudflare.sh",
+      "Makefile"
+    ],
+    "forbidden": [
+      "product HTML/CSS/JS content pages",
+      "deploy",
+      "merge",
+      "unrelated WIP on main"
+    ]
+  },
+  "deploy_authority": "NONE",
+  "merge_authority": "NONE",
+  "branch": "cursor/www-anti-stale-enforcement-37f0",
+  "base": "origin/main"
+}
