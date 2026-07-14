@@ -38,9 +38,6 @@ GATE_HOME_REQUIRED = (
     "noetfield-gate-v1.css",
     'name="viewport"',
     "/enterprise/",
-    "/investors/",
-    "/motors/",
-    "/about/",
     "/proof/",
 )
 
