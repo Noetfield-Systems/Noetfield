@@ -120,10 +120,10 @@ recurring_mistakes:
     last_seen: "2026-06-06"
     corrective_action: Redirect to Noetfield-only tasks; never offer TrustField www work
   - id: M-003
-    pattern: Editing disk without founder permission or ask-first step
-    occurrences: 2
-    last_seen: "2026-06-06"
-    corrective_action: SKILL-006 + R-007 + noetfield-ask-before-edit.mdc
+    pattern: Treating CPL as permission-before-action / asking founder for routine edit-commit-PR approval
+    occurrences: 3
+    last_seen: "2026-07-14"
+    corrective_action: CPL v1.1 + SKILL-006 autonomous execute + R-007/R-008 — ask only for irreversible/destructive authority or material ambiguity
   - id: M-004
     pattern: ACK of SourceA/Brain law without file on disk
     occurrences: 1
@@ -151,13 +151,15 @@ lessons:
     lesson: Cloud agent has no persistent chat memory — git-tracked MEMORY_LOCKED.yaml + incidents are the memory.
     since: "2026-06-06"
   - id: L-004
-    lesson: IMPLEMENT is not blanket permission — confirm bounded task and file scope unless founder names the bundle.
+    lesson: IMPLEMENT / task instruction authorizes ordinary scoped work under CPL v1.1. Infer smallest scope and execute; do not manufacture ask-first theater. Still forbid unrelated overwrite/destructive promote.
     incident: INCIDENT-2026-06-06-002
     since: "2026-06-06"
+    revised: "2026-07-14"
   - id: L-005
-    lesson: Open PRs and backlog items are not "done" — session end must list open items and ASK founder next move.
+    lesson: Open PRs and backlog items are not "done" — session end receipt must list open items. Do not ask routine "may I…?" for work already implied by the task; ask only on real stop conditions.
     incident: INCIDENT-2026-06-06-004
     since: "2026-06-06"
+    revised: "2026-07-14"
   - id: L-006
     lesson: Incidents 002–005 closed 2026-06-06. Ask-first posture is superseded by CPL v1.1 (autonomous scoped execute + preserve). R-007/R-008 revised 2026-07-14 — still forbid unauthorized unrelated/destructive edits; no longer require permission theater for routine work.
     since: "2026-06-06"
