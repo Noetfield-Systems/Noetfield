@@ -87,10 +87,10 @@ Used during CS#2 www deploy to “isolate” proof files. Isolation of commit sc
 - [x] **T0 — Remove Investor/invest from live homepage** (`8054406e` + production deploy `2710df84`). Verified live: Enterprise · Motor only.
 - [x] **E2E fail-closed** if homepage reintroduces `/investors/`, `/invest/`, or “Investor”.
 - [x] **File this incident** + registry + MEMORY bump (R-014).
-- [ ] **Install mandatory pre-deploy anti-stale gate** — compare `www-pages-dist` to live `www.noetfield.com` for locked paths; FAIL if package is older/leakier than live.
-- [ ] **Wire gate into** `scripts/deploy-www-cloudflare.sh` before `wrangler pages deploy`.
-- [ ] **Cursor rule:** NEVER stash www WIP then deploy HEAD to “isolate” a scoped change.
-- [ ] **Founder sign-off** on anti-stale gate markers list (`/`, invest-leak denylist, interactive surfaces).
+- [x] **Install mandatory pre-deploy anti-stale / protected-surface gate** — `scripts/nf_www_deploy_anti_stale_v1.py` + `config/noetfield-www-protected-surfaces.v1.json` (candidate PR; fail-closed). Live HTML is a constraint signal, not SSOT.
+- [x] **Wire gate into** `scripts/deploy-www-cloudflare.sh` before `wrangler pages deploy` (requires `NF_AUTHORIZED_PROMOTE_SHA`).
+- [x] **Commit universal change-preservation law** — `.cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc` (local alwaysApply alone is not repository control).
+- [ ] **Founder promote** enforcement candidate (`CANDIDATE_PENDING_UNIVERSAL_POLICY_INTEGRATION`) + sign-off on protected-surface markers. Incident stays **open** until merge; no institutional closure from this checklist alone.
 
 ---
 
@@ -98,11 +98,12 @@ Used during CS#2 www deploy to “isolate” proof files. Isolation of commit sc
 
 ### R-014 — Never deploy stale www over locked live
 
-1. **Live is a deploy constraint.** Before production www promote, the outbound dist must be checked against live locked pages.
-2. **Forbidden:** `git stash` (or clean checkout) of www WIP → deploy HEAD → overwrite live with older HTML.
-3. **Forbidden on `/`:** Investor tile, `/investors/`, `/invest/`, “Invest in Noetfield”, or any invest-in-company CTA.
-4. **Scoped commit ≠ scoped deploy.** If dist includes pages you did not intend to change, you must either exclude them or prove they are not a regression vs live.
-5. **Fail closed** on anti-stale / anti-leak check. Do not promote on “CI passed” alone.
+1. **Promotion chain:** founder-approved source SHA → verified build → exact-SHA promotion → verified public fingerprint → immutable receipt. Live HTML is **not** SSOT.
+2. **Live is a deploy constraint.** Refuse candidates that regress locks already satisfied on production (`LIVE_AHEAD_OF_GIT`).
+3. **Forbidden:** `git stash` (or clean checkout) of www WIP → deploy HEAD → overwrite live with older HTML.
+4. **Forbidden on `/`:** Investor tile, `/investors/`, `/invest/`, “Invest in Noetfield”, or any invest-in-company CTA.
+5. **Scoped commit ≠ scoped deploy.** Exact `NF_AUTHORIZED_PROMOTE_SHA` required; dirty/implicit HEAD promote refused.
+6. **Fail closed.** HTTP 200 / CI green / marketing text alone are insufficient proof.
 
 ### Agent checklist (every www deploy)
 
@@ -110,9 +111,10 @@ Used during CS#2 www deploy to “isolate” proof files. Isolation of commit sc
 # 1. Do NOT stash founder www WIP to get a "clean" tree
 # 2. Build dist
 bash scripts/build-www-pages-dist.sh
-# 3. Anti-stale / anti-leak vs live (mandatory once script lands)
-python3 scripts/nf_www_deploy_anti_stale_v1.py --dist www-pages-dist --live https://www.noetfield.com
-# 4. Only then: deploy-www-cloudflare.sh + post-deploy verify
+# 3. Exact authorized SHA must equal clean HEAD; gate must PASS
+export NF_AUTHORIZED_PROMOTE_SHA="$(git rev-parse HEAD)"  # only after founder authorize that SHA
+./scripts/deploy-www-cloudflare.sh   # invokes nf_www_deploy_anti_stale_v1.py --mode promote
+# 4. Post-deploy verify + immutable receipt (not HTTP 200 alone)
 ```
 
 ---

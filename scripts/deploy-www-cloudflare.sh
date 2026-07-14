@@ -42,12 +42,30 @@ ensure_project() {
 bash scripts/build-www-pages-dist.sh
 python3 scripts/verify_chat_greeting_coupling.py
 
+# Universal change-preservation / R-014 — fail closed before Pages promote.
+# Exact-SHA promotion: set NF_AUTHORIZED_PROMOTE_SHA to the founder-approved full SHA.
+# Live HTML is a constraint signal, not SSOT. Insufficient: HTTP 200 / CI green alone.
+EXPECTED_SHA="$(git rev-parse HEAD)"
+if [[ -z "${NF_AUTHORIZED_PROMOTE_SHA:-}" ]]; then
+  log "FAIL: NF_AUTHORIZED_PROMOTE_SHA is required (exact-SHA promotion; implicit HEAD forbidden)"
+  exit 5
+fi
+GATE_ARGS=(
+  --mode promote
+  --dist www-pages-dist
+  --live "$CANONICAL"
+  --authorized-sha "$NF_AUTHORIZED_PROMOTE_SHA"
+)
+if [[ -n "${NF_VERIFIED_BASELINE_SHA:-}" ]]; then
+  GATE_ARGS+=(--baseline-sha "$NF_VERIFIED_BASELINE_SHA")
+fi
+python3 scripts/nf_www_deploy_anti_stale_v1.py "${GATE_ARGS[@]}"
+
 ensure_project
 sync_pages_secrets
 
-EXPECTED_SHA="$(git rev-parse HEAD)"
-log "deploy branch=${BRANCH} sha=${EXPECTED_SHA:0:12}"
-DEPLOY_OUT="$(npx wrangler pages deploy www-pages-dist --project-name "$PROJECT" --branch "$BRANCH" --commit-dirty=true 2>&1)"
+log "deploy branch=${BRANCH} sha=${EXPECTED_SHA:0:12} authorized=${NF_AUTHORIZED_PROMOTE_SHA:0:12}"
+DEPLOY_OUT="$(npx wrangler pages deploy www-pages-dist --project-name "$PROJECT" --branch "$BRANCH" --commit-hash="$EXPECTED_SHA" 2>&1)"
 printf '%s\n' "$DEPLOY_OUT"
 
 PREVIEW_URL="$(printf '%s\n' "$DEPLOY_OUT" | grep -Eo 'https://[a-z0-9.-]+\.pages\.dev' | tail -1 || true)"

@@ -1,0 +1,72 @@
+{
+  "schema": "nf-change-manifest-v1",
+  "manifest_id": "www-universal-policy-enforcement-v1",
+  "updated_at": "2026-07-14T01:37:09Z",
+  "verdict": "CANDIDATE_PENDING_UNIVERSAL_POLICY_INTEGRATION",
+  "repository": "Noetfield-Systems/Noetfield",
+  "repository_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-nf-universal-policy-enforcement-v1",
+  "branch": "cursor/www-universal-policy-enforcement-37f0",
+  "verified_baseline_sha": "b546e3cf796bd5f69307a932f75c89b61083e589",
+  "origin_main_sha_at_preflight": "b546e3cf796bd5f69307a932f75c89b61083e589",
+  "pre_mutation_head": "b546e3cf796bd5f69307a932f75c89b61083e589",
+  "mutation_phase": "candidate_ready",
+  "allowed_paths": [
+    ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+    ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
+    "docs/governance/",
+    "config/change-manifests/",
+    "config/noetfield-www-protected-surfaces.v1.json",
+    "scripts/nf_www_deploy_anti_stale_v1.py",
+    "scripts/deploy-www-cloudflare.sh",
+    ".github/workflows/noetfield-www-ci.yml"
+  ],
+  "changed_paths_observed": [
+    ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
+    ".github/workflows/noetfield-www-ci.yml",
+    "scripts/deploy-www-cloudflare.sh",
+    ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+    "config/change-manifests/",
+    "config/noetfield-www-protected-surfaces.v1.json",
+    "docs/governance/",
+    "scripts/nf_www_deploy_anti_stale_v1.py"
+  ],
+  "scope_breaches": [],
+  "expected_outputs": [
+    "durable committed copy of change-preservation law at .cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+    "protected-surfaces SSOT",
+    "fail-closed anti-stale / protected-surface gate",
+    "minimum deploy-script gate invocation with NF_AUTHORIZED_PROMOTE_SHA",
+    "non-skippable CI self-test of gate",
+    "governance candidate doc"
+  ],
+  "forbidden_operations": [
+    "deploy",
+    "merge",
+    "auto-merge",
+    "stash",
+    "reset",
+    "restore",
+    "clean",
+    "force-push",
+    "product page edits",
+    "institutional-closure claim"
+  ],
+  "deployment_authority": "NONE",
+  "merge_authority": "NONE",
+  "promotion_authority": "NONE",
+  "canonical_promotion_chain": [
+    "founder-approved source SHA",
+    "verified build",
+    "exact-SHA promotion",
+    "verified public fingerprint",
+    "immutable receipt"
+  ],
+  "not_source_of_truth": [
+    "live HTML alone",
+    "HTTP 200",
+    "CI green alone",
+    "generic marketing text"
+  ],
+  "supersedes_pr": 106,
+  "status": "CANDIDATE_PENDING_UNIVERSAL_POLICY_INTEGRATION"
+}

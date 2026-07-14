@@ -1,0 +1,64 @@
+{
+  "schema": "noetfield-www-protected-surfaces-v1",
+  "version": 1,
+  "authority": {
+    "law": ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+    "incident": ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
+    "rule": "R-014",
+    "note": "Founder-approved locked markers are authority. Live HTML is a deploy constraint signal, not SSOT."
+  },
+  "canonical_url": "https://www.noetfield.com",
+  "promotion_chain": [
+    "founder-approved source SHA",
+    "verified build",
+    "exact-SHA promotion",
+    "verified public fingerprint",
+    "immutable receipt"
+  ],
+  "insufficient_proof": [
+    "HTTP 200 alone",
+    "CI green alone",
+    "generic marketing text",
+    "live HTML as sole authority",
+    "clean local HEAD without authorized SHA"
+  ],
+  "protected_paths": [
+    "index.html",
+    "enterprise/index.html",
+    "motors/index.html",
+    "proof/index.html",
+    "about/index.html"
+  ],
+  "surfaces": {
+    "homepage": {
+      "path": "index.html",
+      "route": "/",
+      "required_markers": [
+        "nf-gate",
+        "Enterprise",
+        "Motor",
+        "/enterprise/",
+        "/motors/",
+        "/proof/"
+      ],
+      "forbidden_markers": [
+        "/investors/",
+        "/invest/",
+        "Investor",
+        "Invest in Noetfield"
+      ],
+      "required_routes": [
+        "/enterprise/",
+        "/motors/",
+        "/proof/"
+      ]
+    }
+  },
+  "deploy_constraints": {
+    "require_authorized_promote_sha": true,
+    "require_clean_worktree": true,
+    "forbid_stash_based_isolation": true,
+    "forbid_commit_dirty_promote_without_sha": true,
+    "reject_non_descendant_of_baseline_when_baseline_set": true
+  }
+}
