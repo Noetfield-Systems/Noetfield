@@ -89,7 +89,7 @@ Do **not** use the old “I will not edit disk until you choose A/B/C” templat
 | **SKILL-007** | **This — on rule conflict** |
 | **SKILL-011** | **Git/PR file conflicts (R-013)** |
 | SKILL-001 | Scope gate inside task |
-| `000-noetfield-universal-change-preservation-law-v1.mdc` | alwaysApply binding law |
+| `000-noetfield-universal-change-preservation-law-v1.1.mdc` | alwaysApply binding law (v1 path is MOVED stub) |
 | `noetfield-ask-before-edit.mdc` | pointer to CPL v1.1 |
 
 ---

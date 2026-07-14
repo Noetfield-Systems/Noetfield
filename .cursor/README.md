@@ -17,7 +17,7 @@ make nf-onboard
 
 | Rule | File |
 |------|------|
-| **CPL v1.1 (binding)** | [rules/000-noetfield-universal-change-preservation-law-v1.mdc](./rules/000-noetfield-universal-change-preservation-law-v1.mdc) |
+| **CPL v1.1 (binding)** | [rules/000-noetfield-universal-change-preservation-law-v1.1.mdc](./rules/000-noetfield-universal-change-preservation-law-v1.1.mdc) |
 | Authority + scope | [rules/nf-authority-stack.mdc](./rules/nf-authority-stack.mdc) |
 | Boot ladder | [rules/nf-routing-card.mdc](./rules/nf-routing-card.mdc) |
 | Ask policy → CPL v1.1 | [rules/noetfield-ask-before-edit.mdc](./rules/noetfield-ask-before-edit.mdc) |
