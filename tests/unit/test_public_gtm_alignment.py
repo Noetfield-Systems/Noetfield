@@ -100,8 +100,10 @@ def test_homepage_gate_structure_locked() -> None:
     assert 'class="nf-gate"' in text or "class=\"nf-gate\"" in text
     assert "nf-gate__directions" in text
     assert "Enterprise" in text
-    assert "Investor" in text
     assert "Motor" in text
+    assert "Investor" not in text
+    assert "/investors/" not in text
+    assert "/invest/" not in text
     assert "nfLiveProofHero" not in text
     assert "nfScenarioDeck" not in text
 
