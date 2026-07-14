@@ -18,12 +18,23 @@ ROUTE_INVENTORY = ROOT / "governance" / "ROUTE_INVENTORY.json"
 
 API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 
+# Direction-gate homepage (WWW_IMPLEMENTATION_STATUS_v1) — CTAs live under /enterprise/.
 HOME_NEEDLES = (
+    "nf-gate",
+    "Enterprise",
+    "Investor",
+    "Motor",
+    "/enterprise/",
+    "/investors/",
+    "/motors/",
+    "/proof/",
+)
+
+# Institutional CTAs must remain reachable from the enterprise field, not `/`.
+ENTERPRISE_NEEDLES = (
     "Apply for pilot",
-    "Copilot Governance Pack",
-    "Trust Brief",
+    "Request Trust Brief",
     "Start sandbox",
-    "operations@noetfield.com",
 )
 
 DEMO_NEEDLES = (
@@ -143,6 +154,14 @@ def main() -> int:
             print(f"OK   homepage: {needle}")
         else:
             print(f"FAIL homepage missing: {needle}", file=sys.stderr)
+            fail += 1
+
+    _, enterprise = fetch(f"{BASE}/enterprise/")
+    for needle in ENTERPRISE_NEEDLES:
+        if needle in enterprise:
+            print(f"OK   enterprise: {needle}")
+        else:
+            print(f"FAIL enterprise missing: {needle}", file=sys.stderr)
             fail += 1
 
     _, pilot = fetch(f"{BASE}/copilot/pilot/")

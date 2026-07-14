@@ -87,10 +87,12 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 **Out of www E2E scope:** dedicated platform/GEL health probes for `platform.noetfield.com` and `api.noetfield.com`. The public www E2E remains focused on website behavior and leak prevention.
 
-### Copy smoke (homepage + pilot)
+### Copy smoke (homepage + enterprise + pilot)
 
-- Homepage: Apply for pilot, Copilot Governance Pack, Trust Brief, **Board-grade trust**, operations@noetfield.com
+- Homepage (direction gate): `nf-gate`, Enterprise, Investor, Motor, `/enterprise/`, `/investors/`, `/motors/`, `/proof/`
+- Enterprise field: Apply for pilot, Request Trust Brief, Start sandbox
 - Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident
+- Interactive demo/trial: remain on `/copilot/demo/` and `/copilot/trial/` (not required on `/`)
 
 ---
 

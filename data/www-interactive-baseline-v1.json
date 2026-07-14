@@ -1,14 +1,15 @@
 {
   "schema": "www-interactive-baseline-v1",
-  "version": "1.0.0",
-  "authority": "INCIDENT-2026-07-06-001-www-sandbox-downgrade",
-  "updated_at": "2026-07-06T13:05:00Z",
+  "version": "1.1.0",
+  "authority": "INCIDENT-2026-07-06-001-www-sandbox-downgrade + WWW_IMPLEMENTATION_STATUS_v1 direction gate",
+  "updated_at": "2026-07-14T01:10:00Z",
   "live_sandbox_ssot": {
+    "governance_workspace_public": "https://www.noetfield.com/workspace",
     "governance_workspace_local": "http://localhost:13080/workspace",
     "platform_evaluate": "https://platform.noetfield.com",
-    "homepage_live_proof": "index.html#nfLiveProofForm",
+    "homepage": "index.html direction gate only — interactive evaluate lives on /copilot/demo/, /start/, /workspace/",
     "trial_signup": "/start/",
-    "note": "Static nf-workspace-mock is orientation-only. Real client sandbox = evaluate API + trial OS + governance-console workspace (not yet on www /workspace/)."
+    "note": "Static nf-workspace-mock is orientation-only. Real client sandbox = evaluate API + trial OS + governance-console workspace via www proxy."
   },
   "surfaces": [
     {
@@ -27,14 +28,13 @@
       ]
     },
     {
-      "id": "homepage-live-proof",
+      "id": "homepage-direction-gate",
       "path": "index.html",
-      "min_bytes": 12000,
+      "min_bytes": 1500,
       "required_markers": [
-        "nfLiveProofForm",
-        "nfLiveProofScenario",
-        "noetfield-live-proof.js",
-        "Evaluate intent"
+        "nf-gate",
+        "/enterprise/",
+        "/proof/"
       ]
     },
     {

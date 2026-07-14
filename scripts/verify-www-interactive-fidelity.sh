@@ -51,8 +51,12 @@ if demo.is_file():
         )
 
 index = root / "index.html"
-if index.is_file() and "nfLiveProofForm" not in index.read_text(encoding="utf-8", errors="replace"):
-    errors.append("homepage: missing nfLiveProofForm live evaluate playground")
+if index.is_file():
+    it = index.read_text(encoding="utf-8", errors="replace")
+    if "nf-gate" not in it:
+        errors.append("homepage: missing nf-gate direction-gate shell")
+    if "nfLiveProofForm" in it and "nf-gate__directions" not in it:
+        errors.append("homepage: unexpected live-proof playground on non-gate homepage")
 
 if errors:
     for e in errors:

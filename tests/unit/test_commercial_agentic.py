@@ -58,7 +58,12 @@ def test_footer_links_demo_and_trial() -> None:
     assert "/copilot/trial/" in text
 
 
-def test_homepage_links_commercial_agentic_surfaces() -> None:
+def test_homepage_is_direction_gate_not_demo_host() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
-    assert "/copilot/demo/" in text
-    assert "/copilot/trial/" in text
+    assert "nf-gate" in text
+    assert "/enterprise/" in text
+    assert "nfLiveProofForm" not in text
+    # Demo/trial remain linked from shell partials, not required on the gate homepage.
+    header = HEADER.read_text(encoding="utf-8")
+    assert "/copilot/demo/" in header
+    assert "/copilot/trial/" in header
