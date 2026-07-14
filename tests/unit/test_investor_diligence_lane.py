@@ -23,13 +23,26 @@ def test_homepage_has_no_gcip_bleed() -> None:
     assert "(internal)" not in text
 
 
-def test_homepage_has_modern_shell_and_spine() -> None:
+def test_homepage_is_direction_gate_not_marketing_shell() -> None:
+    """`/` is the locked direction gate; institutional shell lives under /enterprise/."""
     text = HOME.read_text(encoding="utf-8")
-    assert 'id="nfHeader"' in text
-    assert 'id="nfFooter"' in text
-    assert "nf26-hero" in text
-    assert "Evaluate" in text
-    assert "Trust Ledger" in text
+    lower = text.lower()
+    assert "nf-gate" in text
+    assert "nf-gate__directions" in text
+    assert "/enterprise/" in text
+    assert "/motors/" in text
+    assert "Investor" not in text
+    assert "/investors/" not in text
+    assert "/invest/" not in text
+    assert "investor" not in lower
+    assert 'id="nfHeader"' not in text
+    assert "nf26-hero" not in text
+
+    enterprise = (ROOT / "enterprise" / "index.html").read_text(encoding="utf-8")
+    assert 'id="nfHeader"' in enterprise
+    assert 'id="nfFooter"' in enterprise
+    assert "Evaluate" in enterprise
+    assert "Trust Ledger" in enterprise
 
 
 def test_checklist_map_references_all_four_groups() -> None:
