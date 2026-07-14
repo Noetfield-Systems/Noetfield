@@ -1,0 +1,41 @@
+---
+description: WWW anti-stale deploy — never overwrite locked live with git HEAD
+globs:
+alwaysApply: true
+---
+
+# Noetfield www — anti-stale deploy (CRITICAL)
+
+**Incident:** `.cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md`  
+**Rule:** R-014 · MEMORY_LOCKED.yaml
+
+## Law
+
+**Live www is a deploy constraint.** Git `HEAD` is not automatically newer than production.
+
+## Forbidden agent moves
+
+1. `git stash` (or clean checkout) of www WIP → `deploy-www-cloudflare.sh` from HEAD to “isolate” a small change
+2. Redeploying full site from last week’s committed HTML while founder-locked live pages are newer
+3. Putting **Investor** / `/investors/` / `/invest/` / “Invest in Noetfield” on `/`
+4. Claiming “scoped deploy” when `www-pages-dist` still contains unchanged-but-stale homepage/enterprise HTML vs live
+
+## Required before production www promote
+
+```bash
+bash scripts/build-www-pages-dist.sh
+# When present (mandatory once shipped):
+python3 scripts/nf_www_deploy_anti_stale_v1.py --dist www-pages-dist --live https://www.noetfield.com
+./scripts/deploy-www-cloudflare.sh
+python3 scripts/nf_post_deploy_verify.py --expected-sha "$(git rev-parse HEAD)" --surface www
+```
+
+## Homepage lock (2026-07-14)
+
+`/` directions: **Enterprise** · **Motor** (+ About · Proof only).  
+**No** invest-in-Noetfield entry on the public homepage.
+
+## Related
+
+- R-012 interactive anti-downgrade
+- `docs/www/WWW_IMPLEMENTATION_STATUS_v1.md`

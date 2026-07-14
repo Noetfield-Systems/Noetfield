@@ -1,8 +1,8 @@
 # Noetfield agent memory — LOCKED (versioned in git)
 # Read at EVERY session start. Bump version when adding lessons.
 
-version: 14
-updated: "2026-07-08T02:15:00Z"
+version: 15
+updated: "2026-07-14T01:20:00Z"
 updated_by: NF-LOCAL-REPO-AGENT
 
 packaging_v16:
@@ -99,6 +99,10 @@ hard_rules:
     rule: Before resolving any PR/git merge conflict, load SKILL-011-pr-conflict-resolver, classify files per data/nf-pr-conflict-resolver-v1.json, and PASS verify_pr_conflict_resolver_v1.py before merge-ready claims.
     source: docs/ops/NF_PR_CONFLICT_RESOLVER_LOCKED_v1.md
     since: "2026-07-08"
+  - id: R-014
+    rule: NEVER deploy stale www over locked live. Do not stash www WIP then deploy git HEAD to "isolate" a change. Before production www promote, compare outbound dist to live locked pages; FAIL if package reintroduces invest-in-Noetfield on `/` (/investors/, /invest/, Investor tile) or drops locked live markers. Scoped commit ≠ scoped deploy.
+    incident: INCIDENT-2026-07-14-001-www-stale-deploy-overwrite
+    since: "2026-07-14"
 
 recurring_mistakes:
   - id: M-001
@@ -126,6 +130,11 @@ recurring_mistakes:
     occurrences: 2
     last_seen: "2026-07-06"
     corrective_action: R-012 + verify-www-interactive-fidelity.sh + restore copilot-demo-nf26 template; never bulk pin-bump from stale generator output
+  - id: M-006
+    pattern: Stash www WIP / clean to HEAD then deploy full site — overwrites locked live with stale last-day/last-week HTML (including Investor leak on `/`)
+    occurrences: 3
+    last_seen: "2026-07-14"
+    corrective_action: R-014 + live-vs-dist anti-stale gate before wrangler pages deploy; never stash-to-isolate www deploys
 
 lessons:
   - id: L-001
@@ -148,6 +157,13 @@ lessons:
   - id: L-006
     lesson: Incidents 002–005 closed 2026-06-06 after controls on main — law remains active via R-007/R-008/R-010; closure does not relax ask-first.
     since: "2026-06-06"
+  - id: L-007
+    lesson: Git HEAD is not automatically newer than live www. Stash-then-deploy-HEAD is a production downgrade pattern. Invest-in-Noetfield must never appear on `/`.
+    incident: INCIDENT-2026-07-14-001-www-stale-deploy-overwrite
+    since: "2026-07-14"
+  - id: L-008
+    lesson: NF-GAOS W0 locked — run make nf-onboard every session; trust LIVE-STATUS.md over SHIP_NOW prose tables.
+    since: "2026-06-17"
 
 pre_commit_checklist:
   - Read MEMORY_LOCKED.yaml if not read this session
@@ -157,14 +173,12 @@ pre_commit_checklist:
   - python3 scripts/verify_pr_conflict_resolver_v1.py
   - Confirm diff is Noetfield-only
   - No trustfield.ca / TF-* / UPG TrustField strings in tracked files
-
-  - id: L-007
-    lesson: NF-GAOS W0 locked — run make nf-onboard every session; trust LIVE-STATUS.md over SHIP_NOW prose tables.
-    since: "2026-06-17"
+  - For www deploy: R-014 anti-stale — do not stash www WIP then ship HEAD; compare dist to live first
 
 session_start_checklist:
   - make nf-onboard (or read reports/agent-auto/LIVE-STATUS.md if just run)
   - Read entry/START_HERE_LOCKED_v1.md — your role row only
   - Read ROUTING_CARD.md
   - Read MEMORY_LOCKED.yaml
+  - Read open P0/P1 incidents in .cursor/incidents/REGISTRY.md
   - Read docs/ops/NF_GAOS_W0_LOCKED_v1.md when implementing agent/gov changes
