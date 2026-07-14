@@ -1,7 +1,7 @@
 {
   "schema": "nf-change-manifest-v1",
   "manifest_id": "www-universal-policy-enforcement-v1",
-  "updated_at": "2026-07-14T01:37:09Z",
+  "updated_at": "2026-07-14T01:37:22Z",
   "verdict": "CANDIDATE_PENDING_UNIVERSAL_POLICY_INTEGRATION",
   "repository": "Noetfield-Systems/Noetfield",
   "repository_path": "/Users/sinakazemnezhad/Desktop/Noetfield-Systems/_wt-nf-universal-policy-enforcement-v1",
@@ -68,5 +68,7 @@
     "generic marketing text"
   ],
   "supersedes_pr": 106,
-  "status": "CANDIDATE_PENDING_UNIVERSAL_POLICY_INTEGRATION"
+  "status": "CANDIDATE_PENDING_UNIVERSAL_POLICY_INTEGRATION",
+  "candidate_sha": "0148c2efec4d5e086f80fd67bffbbb4d26e44431",
+  "ancestry": "descendant_of_verified_baseline_sha"
 }
