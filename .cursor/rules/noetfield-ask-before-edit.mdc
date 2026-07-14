@@ -1,41 +1,47 @@
 ---
-description: Founder law — always ask before disk edits; permission required
+description: SUPERSEDED by Autonomous Change-Preservation Law v1.1 — execute scoped work; ask only for irreversible/destructive authority
 globs:
   - "**/*"
 alwaysApply: true
 ---
 
-# Noetfield — ASK BEFORE EDIT (founder law)
+# Noetfield — ASK POLICY (superseded → CPL v1.1)
 
-**Every agent. Every session.**
+**Binding law:** [000-noetfield-universal-change-preservation-law-v1.mdc](000-noetfield-universal-change-preservation-law-v1.mdc) — **NOETFIELD AUTONOMOUS CHANGE-PRESERVATION LAW v1.1**
 
-## Law
+This file no longer requires founder permission before routine scoped work. The old ask-before-every-edit posture is retired.
 
-1. **Always ask** for next move, clarification, and suggested implementation before acting.
-2. **No disk edits** (write, delete, commit, push, PR) without **explicit founder permission** and task order.
-3. Default mode: **read / advise / propose** — not implement.
+## Core
 
-## Required flow
+Execute autonomously. Preserve unrelated work.
+
+The user’s task instruction is authority for ordinary scoped work. Infer the smallest reasonable scope and proceed.
+
+## Do not ask for routine permission
+
+Do not ask before: inspect; fetch; isolated branch/worktree; scoped edits; shell; declared deps; build/test/lint/verify; retry reversible failures; commit; open/update PR; receipts; in-scope repair.
+
+Perform preflight automatically. Do not stop merely to report it. Put results in the final receipt.
+
+## Ask founder only when
+
+1. Action would destroy or overwrite unrelated work
+2. Material contradiction cannot be safely resolved
+3. Destructive migration, deletion, force-push, history rewrite, credential/authority change, money movement, contract/legal action, or irreversible external send is required
+4. Merge or production deploy is required but not authorized by the current instruction or standing authority
+5. Exact production baseline cannot be established and continuing could downgrade
+
+## Default flow
 
 ```
-Understand → Propose options → ASK founder → Wait for order → Bounded edit
+Task → infer scope → isolated lane → execute → verify preservation → receipt + verdict
 ```
 
 ## Skills
 
-- [.cursor/skills/SKILL-006-ask-before-implement.md](../skills/SKILL-006-ask-before-implement.md)
-- [.cursor/skills/SKILL-001-scope-gate-before-work.md](../skills/SKILL-001-scope-gate-before-work.md) — after permission, before scope pass
-
-## Memory
-
-- R-007: No edits without founder permission
-- R-008: Always ask next move before implement
-- R-009: Block if mandatory SourceA file missing on disk
-
-## Incidents
-
-INCIDENT-2026-06-06-002 through 005 — see [.cursor/incidents/REGISTRY.md](../incidents/REGISTRY.md)
+- [.cursor/skills/SKILL-006-ask-before-implement.md](../skills/SKILL-006-ask-before-implement.md) — autonomous scoped execute (v1.1)
+- [.cursor/skills/SKILL-007-auto-conflict-resolution.md](../skills/SKILL-007-auto-conflict-resolution.md) — CPL v1.1 wins over ask-first for routine work
 
 ## Rule conflicts
 
-On any conflict with ship-first, no-ASF, or bare `IMPLEMENT` → [.cursor/skills/SKILL-007-auto-conflict-resolution.md](../skills/SKILL-007-auto-conflict-resolution.md) + [noetfield-rule-conflict-resolution.mdc](noetfield-rule-conflict-resolution.mdc). **This rule wins** until founder T0 order.
+On conflict with ship-first, no-ASF, or bare `IMPLEMENT` → SKILL-007. **CPL v1.1 wins for routine reversible scoped work.** Do not manufacture blockers to reintroduce ask-first.
