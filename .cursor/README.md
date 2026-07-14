@@ -13,13 +13,14 @@ make nf-onboard
 3. [../ROUTING_CARD.md](../ROUTING_CARD.md)
 4. [../docs/ops/NF_GAOS_W1_LOCKED_v1.md](../docs/ops/NF_GAOS_W1_LOCKED_v1.md)
 
-## AlwaysApply rules (4 core)
+## AlwaysApply rules (core)
 
 | Rule | File |
 |------|------|
+| **CPL v1.1 (binding)** | [rules/000-noetfield-universal-change-preservation-law-v1.1.mdc](./rules/000-noetfield-universal-change-preservation-law-v1.1.mdc) |
 | Authority + scope | [rules/nf-authority-stack.mdc](./rules/nf-authority-stack.mdc) |
 | Boot ladder | [rules/nf-routing-card.mdc](./rules/nf-routing-card.mdc) |
-| Ask before edit | [rules/noetfield-ask-before-edit.mdc](./rules/noetfield-ask-before-edit.mdc) |
+| Ask policy → CPL v1.1 | [rules/noetfield-ask-before-edit.mdc](./rules/noetfield-ask-before-edit.mdc) |
 | Ship bundle | [rules/nf-ship-bundle.mdc](./rules/nf-ship-bundle.mdc) |
 
 Retired rules → MOVED stubs (`noetfield-ship-first.mdc`, etc.)
@@ -37,7 +38,7 @@ make verify-doc-ssot
 | ID | File | When |
 |----|------|------|
 | SKILL-001 | [skills/SKILL-001-scope-gate-before-work.md](./skills/SKILL-001-scope-gate-before-work.md) | Before any work |
-| SKILL-006 | [skills/SKILL-006-ask-before-implement.md](./skills/SKILL-006-ask-before-implement.md) | Default ask-first |
+| SKILL-006 | [skills/SKILL-006-ask-before-implement.md](./skills/SKILL-006-ask-before-implement.md) | Autonomous scoped execute (CPL v1.1) |
 | SKILL-007 | [skills/SKILL-007-auto-conflict-resolution.md](./skills/SKILL-007-auto-conflict-resolution.md) | Rule conflicts |
 | SKILL-008 | [skills/SKILL-008-agentic-commercial-boundary.md](./skills/SKILL-008-agentic-commercial-boundary.md) | Commercial boundary |
 

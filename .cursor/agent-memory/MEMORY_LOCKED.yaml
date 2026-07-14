@@ -1,8 +1,8 @@
 # Noetfield agent memory — LOCKED (versioned in git)
 # Read at EVERY session start. Bump version when adding lessons.
 
-version: 15
-updated: "2026-07-14T01:20:00Z"
+version: 16
+updated: "2026-07-14T01:40:00Z"
 updated_by: NF-LOCAL-REPO-AGENT
 
 packaging_v16:
@@ -73,13 +73,17 @@ hard_rules:
     source: docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md
     since: "2026-06-06"
   - id: R-007
-    rule: NO disk edits (write, delete, commit, push, PR) without explicit founder permission and bounded task order.
+    rule: "CPL v1.1 — task instruction authorizes ordinary scoped work (edit/commit/PR/test). Do not destroy, overwrite, or commit unrelated work. Do not ask for routine permission."
     incident: INCIDENT-2026-06-06-002
+    superseding_law: NOETFIELD_AUTONOMOUS_CHANGE_PRESERVATION_LAW_v1.1
     since: "2026-06-06"
+    revised: "2026-07-14"
   - id: R-008
-    rule: ALWAYS ask for next move, clarification, and suggested implementation before acting. Default advise-only.
+    rule: "CPL v1.1 — do not ask for routine permission. Ask only for irreversible/destructive authority, material ambiguity, unauthorized merge/deploy, or downgrade risk. Default = autonomous scoped execute + preserve unrelated work."
     incident: INCIDENT-2026-06-06-005
+    superseding_law: NOETFIELD_AUTONOMOUS_CHANGE_PRESERVATION_LAW_v1.1
     since: "2026-06-06"
+    revised: "2026-07-14"
   - id: R-009
     rule: If mandatory SourceA handoff file is not on disk, BLOCK — do not pseudo-ACK; ask founder to sync or paste.
     incident: INCIDENT-2026-06-06-003
@@ -116,10 +120,10 @@ recurring_mistakes:
     last_seen: "2026-06-06"
     corrective_action: Redirect to Noetfield-only tasks; never offer TrustField www work
   - id: M-003
-    pattern: Editing disk without founder permission or ask-first step
-    occurrences: 2
-    last_seen: "2026-06-06"
-    corrective_action: SKILL-006 + R-007 + noetfield-ask-before-edit.mdc
+    pattern: Treating CPL as permission-before-action / asking founder for routine edit-commit-PR approval
+    occurrences: 3
+    last_seen: "2026-07-14"
+    corrective_action: CPL v1.1 + SKILL-006 autonomous execute + R-007/R-008 — ask only for irreversible/destructive authority or material ambiguity
   - id: M-004
     pattern: ACK of SourceA/Brain law without file on disk
     occurrences: 1
@@ -147,16 +151,19 @@ lessons:
     lesson: Cloud agent has no persistent chat memory — git-tracked MEMORY_LOCKED.yaml + incidents are the memory.
     since: "2026-06-06"
   - id: L-004
-    lesson: IMPLEMENT is not blanket permission — confirm bounded task and file scope unless founder names the bundle.
+    lesson: IMPLEMENT / task instruction authorizes ordinary scoped work under CPL v1.1. Infer smallest scope and execute; do not manufacture ask-first theater. Still forbid unrelated overwrite/destructive promote.
     incident: INCIDENT-2026-06-06-002
     since: "2026-06-06"
+    revised: "2026-07-14"
   - id: L-005
-    lesson: Open PRs and backlog items are not "done" — session end must list open items and ASK founder next move.
+    lesson: Open PRs and backlog items are not "done" — session end receipt must list open items. Do not ask routine "may I…?" for work already implied by the task; ask only on real stop conditions.
     incident: INCIDENT-2026-06-06-004
     since: "2026-06-06"
+    revised: "2026-07-14"
   - id: L-006
-    lesson: Incidents 002–005 closed 2026-06-06 after controls on main — law remains active via R-007/R-008/R-010; closure does not relax ask-first.
+    lesson: Incidents 002–005 closed 2026-06-06. Ask-first posture is superseded by CPL v1.1 (autonomous scoped execute + preserve). R-007/R-008 revised 2026-07-14 — still forbid unauthorized unrelated/destructive edits; no longer require permission theater for routine work.
     since: "2026-06-06"
+    revised: "2026-07-14"
   - id: L-007
     lesson: Git HEAD is not automatically newer than live www. Stash-then-deploy-HEAD is a production downgrade pattern. Invest-in-Noetfield must never appear on `/`.
     incident: INCIDENT-2026-07-14-001-www-stale-deploy-overwrite
@@ -167,8 +174,8 @@ lessons:
 
 pre_commit_checklist:
   - Read MEMORY_LOCKED.yaml if not read this session
-  - Founder permission received for this edit scope (R-007)
-  - ASK step completed this session (R-008)
+  - CPL v1.1 — changed files within task scope; unrelated dirty untouched (R-007)
+  - No routine permission ask; stop only on real blocker conditions (R-008)
   - ./scripts/verify-agent-scope.sh
   - python3 scripts/verify_pr_conflict_resolver_v1.py
   - Confirm diff is Noetfield-only

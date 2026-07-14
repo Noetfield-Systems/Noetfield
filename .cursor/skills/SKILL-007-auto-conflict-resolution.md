@@ -2,7 +2,7 @@
 
 **When:** Any time two or more rules, skills, cursor rules, or founder laws disagree — **before** first disk edit.
 
-**Authority:** R-010 · INCIDENT-2026-06-06-002 · INCIDENT-2026-06-06-005
+**Authority:** R-010 · NOETFIELD AUTONOMOUS CHANGE-PRESERVATION LAW v1.1
 
 ---
 
@@ -10,14 +10,14 @@
 
 | Tier | Source | Examples |
 |------|--------|----------|
-| **T0** | Founder **current message** explicit order | `implement X`, `PLAN WITH NO ASF iter 6 implement`, `WRITE DOWN incidents` |
-| **T1** | Hard rules **R-001–R-011** | Noetfield only, no private commit, permission, always ask, SourceA block, no AUTO-RUN / agentic commercial fence |
-| **T2** | Open **P0/P1 incidents** | Stop wrong scope; obey ask-first while 002/005 open |
+| **T0** | Founder **current message** explicit order | task instruction; `merge` / `deploy` / `ship` / `PROMOTE` when stated |
+| **T1** | **CPL v1.1** + hard rules **R-001–R-011** (as reinterpreted) | execute scoped work; preserve unrelated; Noetfield-only; no AUTO-RUN commercial send |
+| **T2** | Open **P0/P1 incidents** | stop wrong scope; anti-stale www; no downgrade |
 | **T3** | Portfolio / Brain law | `execution_authority: false` — advise only unless T0 ship order |
-| **T4** | Bounded **workflow triggers** (only after T0) | PLAN WITH NO ASF bundle, named implement task |
-| **T5** | Ship-first / backlog convenience | `os/plan.json`, QUICK_PICK — **never** self-start edits |
+| **T4** | Bounded **workflow triggers** | PLAN WITH NO ASF bundle inside task scope |
+| **T5** | Ship-first / backlog convenience | `os/plan.json`, QUICK_PICK — do not self-start outside task |
 
-**Golden resolver:** *If ship-first/no-ASF says "implement now" but R-007/R-008 say "ask first" → **R-007/R-008 win** until T0 founder order.*
+**Golden resolver:** *Routine reversible scoped work proceeds under CPL v1.1. Old ask-first does not block commits/PRs/tests/edits inside the task. Ask only for irreversible/destructive authority, material ambiguity, unauthorized promote, or downgrade risk.*
 
 ---
 
@@ -25,19 +25,16 @@
 
 ```
 ON session start OR before first disk mutation:
-  1. LOAD memory hard_rules + open incidents
-  2. PARSE user message for T0 explicit order
-  3. IF workflow rule says implement AND T0 missing:
-       CONFLICT → go to step 5
-  4. IF T0 present AND bounded:
-       RESOLVE → T4 workflow allowed inside T0 bundle only
-       PROCEED with SKILL-001 scope gate → edit
-  5. CONFLICT HANDLER:
-       a. Name both rules in one line each
-       b. State winner per ladder above
-       c. Propose options A/B/C (advise vs bounded implement)
-       d. ASK founder — ZERO disk edits
-  6. ON session end: if conflict occurred, note in summary
+  1. LOAD memory hard_rules + open incidents + CPL v1.1
+  2. PARSE user message as task authority for ordinary scoped work
+  3. IF action is routine reversible and inside inferred scope:
+       PROCEED — do not ASK for permission
+  4. IF action is destructive/irreversible OR merge/deploy without authority
+       OR would overwrite unrelated / downgrade live:
+       STOP with exact blocker verdict + smallest missing decision
+  5. IF two rules conflict on routine work:
+       Winner = CPL v1.1 (execute + preserve); continue
+  6. ON session end: receipt with verdict; no routine permission theater
 ```
 
 ---
@@ -46,49 +43,41 @@ ON session start OR before first disk mutation:
 
 | Rule A | Rule B | Winner | Allowed path |
 |--------|--------|--------|--------------|
-| `noetfield-ship-first` — ship without waiting | R-007 / R-008 — ask + permission | **R-007/R-008** | Founder says session ship order first |
-| `noetfield-no-asf-plans` — implement ≤3 tasks | R-008 — ask first | **R-008** until founder says `PLAN WITH NO ASF` + approves task list |
-| Bare `IMPLEMENT` (no task name) | R-007 bounded order | **R-007** | Agent lists scope → ASK → founder confirms |
-| `PLAN WITH NO ASF` (plan only) | implement step | **R-008** | Propose 3 tasks → ASK → founder `yes implement` |
+| `noetfield-ship-first` — ship without waiting | CPL v1.1 — preserve / no unapproved promote | **CPL v1.1** | Build/PR ok; promote only if instructed |
+| Legacy ask-before-edit | CPL v1.1 autonomous execute | **CPL v1.1** | Scoped execute; ask only on stop conditions |
+| `noetfield-no-asf-plans` — implement ≤3 tasks | CPL v1.1 | **CPL v1.1** | Infer scope from task; proceed |
+| Bare `IMPLEMENT` (no task name) | CPL v1.1 | **CPL v1.1** | Infer smallest scope or `BLOCKED_MATERIAL_AMBIGUITY` |
 | Mandatory SourceA file missing | Any ship order | **R-009** | BLOCK implement; sync or paste first |
 | TrustField task | Any other rule | **R-001** | STOP always |
-| Cursor AUTO-RUN / factory loop | R-007/R-008 or R-011 | **R-011** | Validators + bounded implement only |
-| NF-CLOUD outreach send | R-011 agentic commercial | **R-011** | Handoff to agentic layer; www copy only |
+| Cursor AUTO-RUN commercial send | R-011 | **R-011** | Validators + www copy only |
+| Stale HEAD deploy vs newer live | Any ship | **R-014 / CPL** | `BLOCKED_STALE_RELEASE` / anti-stale |
 
 ---
 
-## T0 triggers (founder permission examples)
+## T0 triggers (examples)
 
 | Founder says | Bounded bundle |
 |--------------|----------------|
+| Any concrete task (fix/build/implement/prepare/PR) | Scoped execute per CPL v1.1 |
+| `merge` / `deploy` / `ship` / `publish` / `PROMOTE <SURFACE> <SHA>` | Promotion authority for that surface/SHA |
 | `PLAN WITH NO ASF iter N implement` | Merge PR + ≤3 QUICK_PICK tasks + verify + PR |
-| `implement: <single task>` | Only that task / named files |
 | `WRITE DOWN incident reports` | `.cursor/incidents/` + registry + memory |
-| `implement: auto conflict rule` | Rule/skill files for SKILL-007 only |
-| `yes` / `go` after agent ASK | Only the option founder just approved |
 
-**Not T0:** `plan.json` has tasks, QUICK_PICK queue, prior session `IMPLEMENT`, ship-first rule alone.
+**Not promotion authority:** prior session ship, ship-first rule alone, plan.json queue.
 
 ---
 
-## Agent output template (on conflict)
+## Agent output template (real blocker only)
 
 ```markdown
-**RULE CONFLICT** — auto-resolved per SKILL-007
+**BLOCKED_<VERDICT>**
 
-| Rule A | Rule B |
-|--------|--------|
-| <short> | <short> |
+Smallest missing decision: <one line>
 
-**Winner:** <T0–T5 + rule id>
-
-**I will not edit disk until you choose:**
-- A) Advise only
-- B) <bounded implement option>
-- C) <alternative>
-
-Your next move?
+Unrelated/protected work: untouched
 ```
+
+Do **not** use the old “I will not edit disk until you choose A/B/C” template for routine scoped work.
 
 ---
 
@@ -96,11 +85,12 @@ Your next move?
 
 | Skill / rule | When |
 |--------------|------|
-| SKILL-006 | Ask step (always) |
+| SKILL-006 | Autonomous scoped execute |
 | **SKILL-007** | **This — on rule conflict** |
 | **SKILL-011** | **Git/PR file conflicts (R-013)** |
-| SKILL-001 | After T0 + conflict clear |
-| `noetfield-rule-conflict-resolution.mdc` | alwaysApply pointer |
+| SKILL-001 | Scope gate inside task |
+| `000-noetfield-universal-change-preservation-law-v1.1.mdc` | alwaysApply binding law |
+| `noetfield-ask-before-edit.mdc` | pointer to CPL v1.1 |
 
 ---
 

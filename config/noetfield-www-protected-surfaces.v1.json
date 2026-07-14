@@ -2,7 +2,7 @@
   "schema": "noetfield-www-protected-surfaces-v1",
   "version": 1,
   "authority": {
-    "law": ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+    "law": ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.1.mdc",
     "incident": ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
     "rule": "R-014",
     "note": "Founder-approved locked markers are authority. Live HTML is a deploy constraint signal, not SSOT."

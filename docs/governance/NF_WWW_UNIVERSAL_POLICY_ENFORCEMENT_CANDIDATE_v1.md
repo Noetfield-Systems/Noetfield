@@ -14,7 +14,7 @@ doc_id: nf-www-universal-policy-enforcement-candidate-v1
 
 ## What this candidate is
 
-1. Durable repository copy of `.cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc`
+1. Durable repository copy of `.cursor/rules/000-noetfield-universal-change-preservation-law-v1.1.mdc`
 2. Noetfield.com anti-stale / protected-surface gate under that law
 
 ## Authority chain (canonical)

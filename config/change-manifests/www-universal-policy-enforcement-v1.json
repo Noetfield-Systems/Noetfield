@@ -11,6 +11,7 @@
   "pre_mutation_head": "b546e3cf796bd5f69307a932f75c89b61083e589",
   "mutation_phase": "candidate_ready",
   "allowed_paths": [
+    ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.1.mdc",
     ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
     ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
     "docs/governance/",
@@ -24,6 +25,7 @@
     ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
     ".github/workflows/noetfield-www-ci.yml",
     "scripts/deploy-www-cloudflare.sh",
+    ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.1.mdc",
     ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
     "config/change-manifests/",
     "config/noetfield-www-protected-surfaces.v1.json",
@@ -32,7 +34,7 @@
   ],
   "scope_breaches": [],
   "expected_outputs": [
-    "durable committed copy of change-preservation law at .cursor/rules/000-noetfield-universal-change-preservation-law-v1.mdc",
+    "durable committed copy of change-preservation law at .cursor/rules/000-noetfield-universal-change-preservation-law-v1.1.mdc",
     "protected-surfaces SSOT",
     "fail-closed anti-stale / protected-surface gate",
     "minimum deploy-script gate invocation with NF_AUTHORIZED_PROMOTE_SHA",

@@ -17,4 +17,4 @@ else
   echo "SKIP SourceA cursor_agent_self_audit close (not on founder Mac)"
 fi
 
-echo "Closeout: ingest YAML + ASK founder next move (R-008)"
+echo "Closeout: ingest YAML + receipt (CPL v1.1 / R-008 — ask only on real stop conditions)"
