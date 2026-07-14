@@ -1,0 +1,70 @@
+{
+  "schema": "nf-cs2-gisf-live-capture-v1",
+  "run_id": "CS2-GISF-2026-07-14T005554Z",
+  "captured_at": "2026-07-14T00:55:54Z",
+  "git_sha": "bcd94e454eb8caa3be8775c0695986afa5bfd48d",
+  "label": "Client-Zero / Internal Demonstration \u2014 live probe",
+  "probes": {
+    "www_workspace_trailing_slash": {
+      "url": "https://www.noetfield.com/workspace/",
+      "http_code": "200",
+      "has_next": true,
+      "has_trust_ledger_workspace": true,
+      "has_create_tle_draft": true,
+      "has_workspace_mock": false,
+      "bytes": 15360,
+      "sha256": "17ada9e28c7d59bb4b80e25f384ba96fe4d17142b042ba701884bd804c0ceeef"
+    },
+    "www_workspace": {
+      "url": "https://www.noetfield.com/workspace",
+      "http_code": "200",
+      "has_next": true,
+      "has_trust_ledger_workspace": true,
+      "has_create_tle_draft": true,
+      "has_workspace_mock": false,
+      "bytes": 15360,
+      "sha256": "17ada9e28c7d59bb4b80e25f384ba96fe4d17142b042ba701884bd804c0ceeef"
+    },
+    "www_tle": {
+      "url": "https://www.noetfield.com/tle",
+      "http_code": "200",
+      "body_preview": "[]",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "railway_api_health": {
+      "url": "https://gov-sandbox-api-production.up.railway.app/health",
+      "http_code": "200",
+      "body": "{\"status\":\"ok\",\"service\":\"governance-console-api\",\"database\":\"ok\",\"schema_version\":\"gov-sandbox-api-v1\",\"git_sha\":\"d8bb0e16194ef65acb8d356acbf143d539ff3145\"}",
+      "sha256": "c755368369977fa1795acc3f2870aa838c37dacff0f0e076f0d237dc839e2b04"
+    },
+    "railway_web_workspace": {
+      "url": "https://gov-sandbox-web-production.up.railway.app/workspace",
+      "http_code": "200",
+      "has_next": true,
+      "has_trust_ledger_workspace": true,
+      "has_create_tle_draft": true,
+      "has_workspace_mock": false,
+      "bytes": 15360,
+      "sha256": "17ada9e28c7d59bb4b80e25f384ba96fe4d17142b042ba701884bd804c0ceeef"
+    }
+  },
+  "independent_gates": {
+    "verify-www-live-sandbox.sh": {
+      "exit_code": 0,
+      "stdout_tail": "=== verify-www-live-sandbox ===\nOK   https://www.noetfield.com/workspace/ serves Next.js app shell (_next)\nOK   https://www.noetfield.com/workspace/ has: Trust Ledger Workspace\nOK   https://www.noetfield.com/workspace/ has: Create TLE draft\nOK   workspace is not static mock\nOK   https://www.noetfield.com/tle returns 200\n\nverify-www-live-sandbox passed.\n",
+      "stderr_tail": ""
+    },
+    "verify-gov-sandbox-railway.sh": {
+      "exit_code": 0,
+      "stdout_tail": "=== verify-gov-sandbox-railway ===\nOK   https://gov-sandbox-api-production.up.railway.app/health governance-console-api\nOK   https://gov-sandbox-web-production.up.railway.app/workspace has Next.js shell\nOK   Railway gov-sandbox-api deployment SUCCESS\nOK   Railway gov-sandbox-web deployment SUCCESS\nwrote reports/agent-auto/events/nf-gov-sandbox-v1.json\n\nverify-gov-sandbox-railway passed.\n",
+      "stderr_tail": ""
+    }
+  },
+  "summary": {
+    "www_workspace_next_shell": "PASS",
+    "www_tle_proxy": "PASS",
+    "railway_api_health": "PASS",
+    "verify_www_live_sandbox_exit": 0,
+    "verify_gov_sandbox_railway_exit": 0
+  }
+}

@@ -33,12 +33,14 @@
 | `/proof/` | **LIVE** | Case study library index | |
 | `/proof/noetfield/` | **LIVE** | Case Study #1 | v0.1 |
 | `/proof/noetfield.json` | **LIVE** | Public evidence bundle | |
+| `/proof/governed-replacement/` | **LIVE** | Case Study #2 · Client-Zero WRAP | v0.1 · not Fortune-500 claim |
+| `/proof/governed-replacement.json` | **LIVE** | CS#2 machine evidence + hashes | |
 | `/roadmap/` | **LIVE** | Milestone tiles | |
 | `/about/` | **LIVE** | Company + three direction tiles | Replaces blueprint `/company` for now |
 | `/company/` | **NOT BUILT** | Blueprint name | Use `/about/` |
 | `/audit/start/` | **NOT BUILT** | Free external audit entry | Use `/investor-workflows/` + `/contact/` |
-| `/proof/sourcea/` | **NOT BUILT** | Case Study #2 | Planned v0.2 |
-| `/proof/sourceb/` | **NOT BUILT** | Case Study #3 | Planned v0.3 |
+| `/proof/sourcea/` | **NOT BUILT** | Case Study #3 (was mislabelled CS#2) | Planned |
+| `/proof/sourceb/` | **NOT BUILT** | Later case study | Planned |
 | `/protocol/` | **DEFERRED** | Public protocol marketing | Do not ship |
 
 ---

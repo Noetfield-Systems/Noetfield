@@ -1,0 +1,393 @@
+{
+  "schema": "noetfield_public_evidence_bundle_v1",
+  "entity": "Noetfield Systems Inc.",
+  "entity_type": "client_zero_demonstration",
+  "generated_at": "2026-07-14T00:56:43Z",
+  "audit_version": "0.1",
+  "audit_label": "PUBLIC CLIENT-ZERO PROOF v0.1 \u2014 Case Study #2 \u00b7 Governed replacement / wrap. Internal demonstration only. Not a Fortune-500 deployment claim.",
+  "disclosure_level": "public",
+  "verdict_target": "PUBLIC_CLIENT_ZERO_PROOF_READY",
+  "case_study": {
+    "number": 2,
+    "title": "Governed Application Replacement \u2014 Client-Zero / Internal Demonstration",
+    "slug": "governed-replacement",
+    "label": "Client-Zero / Internal Demonstration",
+    "story": "Noetfield's buyer-facing Trust Ledger workspace at /workspace/ was served as a static mock that misrepresented the real governance console. This case study records the retain/wrap/replace decision, failed verification, repair, independent re-verification, promotion, and live re-proof \u2014 without claiming external enterprise production maturity.",
+    "commercial_field": "Enterprise \u00b7 Governed Application Factory (Lane 1)",
+    "workflow_under_change": {
+      "name": "Public Trust Ledger Workspace entry path",
+      "public_url": "https://www.noetfield.com/workspace",
+      "before": "Static www HTML / mock workspace presentation \u2014 no Next.js app shell on the public buyer path",
+      "after": "WRAP: public /workspace proxies to the live governance-console sandbox (Next.js) with independent live gates"
+    }
+  },
+  "decision": {
+    "decision": "WRAP",
+    "decided_at": "2026-07-06",
+    "alternatives_considered": [
+      "RETAIN",
+      "REPLACE",
+      "WRAP"
+    ],
+    "why_not_retain": "RETAIN would keep a static mock on a buyer CTA path \u2014 classified as a critical product regression (incident INCIDENT-2026-07-06-001).",
+    "why_not_full_replace": "Full REPLACE of the static www host with the Next.js console on Cloudflare Pages was larger than needed; the real console already existed as a deployable service.",
+    "why_wrap": "WRAP preserves the public www path buyers already use, while serving the real governance-console UI and API through a bounded proxy to a dedicated sandbox runtime.",
+    "status": "DEMONSTRATED",
+    "authority": "Founder-closed incident corrective actions (2026-07-07)"
+  },
+  "lifecycle": [
+    {
+      "stage": "current_manual_state",
+      "status": "PROVEN",
+      "summary": "Before repair, public /workspace did not serve the Next.js Trust Ledger Workspace app shell.",
+      "evidence": [
+        {
+          "tier": "INCIDENT_RECORD",
+          "id": "INCIDENT-2026-07-06-001",
+          "description": "Founder-classified critical regression: static mock / missing live workspace on www"
+        },
+        {
+          "tier": "PUBLIC_URL_BEFORE",
+          "description": "Documented curl of www /workspace returned static HTML without _next / Trust Ledger Workspace markers"
+        }
+      ]
+    },
+    {
+      "stage": "retain_wrap_replace_decision",
+      "status": "DEMONSTRATED",
+      "summary": "WRAP selected over RETAIN (unacceptable mock) and full REPLACE (oversized for this bounded surface).",
+      "evidence": [
+        {
+          "tier": "PUBLIC_CONFIG",
+          "description": "Gov proxy enabled for /workspace and related API prefixes",
+          "url": "https://www.noetfield.com/workspace"
+        },
+        {
+          "tier": "DECISION_PACKET",
+          "description": "This bundle decision object"
+        }
+      ]
+    },
+    {
+      "stage": "specification_and_controls",
+      "status": "DEMONSTRATED",
+      "summary": "Acceptance criteria: public /workspace must serve Next.js _next assets; must not contain nf-workspace-mock; /tle must return 2xx; Railway health must identify governance-console-api.",
+      "evidence": [
+        {
+          "tier": "GATE_SCRIPT",
+          "name": "verify-www-live-sandbox.sh"
+        },
+        {
+          "tier": "GATE_SCRIPT",
+          "name": "verify-gov-sandbox-railway.sh"
+        },
+        {
+          "tier": "MEMORY_RULE",
+          "id": "R-012",
+          "description": "No interactive downgrade of live client sandbox surfaces"
+        }
+      ]
+    },
+    {
+      "stage": "bounded_build",
+      "status": "DEMONSTRATED",
+      "summary": "Bounded deploy of gov-sandbox-api + gov-sandbox-web and www proxy enablement \u2014 not a full Motor rewrite.",
+      "evidence": [
+        {
+          "tier": "LIVE_SERVICE",
+          "url": "https://gov-sandbox-api-production.up.railway.app/health"
+        },
+        {
+          "tier": "LIVE_SERVICE",
+          "url": "https://gov-sandbox-web-production.up.railway.app/workspace"
+        },
+        {
+          "tier": "PUBLIC_URL",
+          "url": "https://www.noetfield.com/workspace"
+        }
+      ]
+    },
+    {
+      "stage": "failed_verification",
+      "status": "PROVEN",
+      "summary": "2026-07-06 verification failed: public buyer path lacked Next.js shell and presented mock workspace semantics.",
+      "failure": {
+        "detected_by": "Founder review + live curl inspection of www /workspace and /copilot/demo mock markers",
+        "failure_mode": "Static / mock presentation on a path labelled as workspace; Open workspace CTA did not reach real Trust Ledger Workspace",
+        "epoch": "2026-07-06"
+      },
+      "evidence": [
+        {
+          "tier": "INCIDENT_RECORD",
+          "id": "INCIDENT-2026-07-06-001"
+        }
+      ]
+    },
+    {
+      "stage": "repair",
+      "status": "DEMONSTRATED",
+      "summary": "Deployed sandbox runtime services and enabled www proxy so /workspace serves the real console shell.",
+      "repaired_by": "Founder-directed corrective actions closed in incident resolution (2026-07-07)",
+      "evidence": [
+        {
+          "tier": "INCIDENT_RESOLUTION",
+          "id": "INCIDENT-2026-07-06-001",
+          "closed_at": "2026-07-07"
+        }
+      ]
+    },
+    {
+      "stage": "independent_verification_pass",
+      "status": "PROVEN",
+      "summary": "Independent gate scripts (not the builder narrative) re-ran and passed on live capture.",
+      "independence_note": "verify-www-live-sandbox.sh and verify-gov-sandbox-railway.sh are separate fail-closed gates from the HTML/marketing surface.",
+      "evidence": [
+        {
+          "tier": "LIVE_CAPTURE",
+          "run_id": "CS2-GISF-2026-07-14T005554Z",
+          "captured_at": "2026-07-14T00:55:54Z",
+          "repo_git_sha": "bcd94e454eb8caa3be8775c0695986afa5bfd48d",
+          "runtime_api_git_sha": "d8bb0e16194ef65acb8d356acbf143d539ff3145",
+          "gates": {
+            "verify-www-live-sandbox.sh": {
+              "exit_code": 0,
+              "stdout_tail": "=== verify-www-live-sandbox ===\nOK   https://www.noetfield.com/workspace/ serves Next.js app shell (_next)\nOK   https://www.noetfield.com/workspace/ has: Trust Ledger Workspace\nOK   https://www.noetfield.com/workspace/ has: Create TLE draft\nOK   workspace is not static mock\nOK   https://www.noetfield.com/tle returns 200\n\nverify-www-live-sandbox passed.\n",
+              "stderr_tail": ""
+            },
+            "verify-gov-sandbox-railway.sh": {
+              "exit_code": 0,
+              "stdout_tail": "=== verify-gov-sandbox-railway ===\nOK   https://gov-sandbox-api-production.up.railway.app/health governance-console-api\nOK   https://gov-sandbox-web-production.up.railway.app/workspace has Next.js shell\nOK   Railway gov-sandbox-api deployment SUCCESS\nOK   Railway gov-sandbox-web deployment SUCCESS\nwrote reports/agent-auto/events/nf-gov-sandbox-v1.json\n\nverify-gov-sandbox-railway passed.\n",
+              "stderr_tail": ""
+            }
+          },
+          "probe_hashes": {
+            "www_workspace_sha256": "17ada9e28c7d59bb4b80e25f384ba96fe4d17142b042ba701884bd804c0ceeef",
+            "railway_api_health_sha256": "c755368369977fa1795acc3f2870aa838c37dacff0f0e076f0d237dc839e2b04",
+            "www_tle_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        }
+      ]
+    },
+    {
+      "stage": "human_promotion_decision",
+      "status": "DEMONSTRATED",
+      "summary": "Founder closed the incident after live gate PASS \u2014 treating the wrapped /workspace path as the promoted buyer sandbox entry.",
+      "promotion": {
+        "authorized_by": "Founder",
+        "authorized_at": "2026-07-07",
+        "artifact": "Incident INCIDENT-2026-07-06-001 status=closed + proxy enabled",
+        "not_agent_self_pass": true
+      }
+    },
+    {
+      "stage": "final_receipt",
+      "status": "PROVEN",
+      "summary": "This public bundle plus live capture receipt and gate stdout constitute the final public receipt for Client-Zero Case Study #2 v0.1.",
+      "receipt": {
+        "run_id": "CS2-GISF-2026-07-14T005554Z",
+        "public_page": "/proof/governed-replacement/",
+        "machine_bundle": "/proof/governed-replacement.json",
+        "live_capture_event": "reports/agent-auto/events/nf-cs2-gisf-live-capture-v1.json"
+      }
+    },
+    {
+      "stage": "cost_time_value",
+      "status": "PARTIAL",
+      "summary": "Calendar repair window is evidenced; dollar ROI and total engineering hours are not measured and are not invented.",
+      "baseline": {
+        "failure_epoch": "2026-07-06",
+        "promotion_epoch": "2026-07-07",
+        "calendar_span_days": 1,
+        "engineering_hours": {
+          "status": "NOT_MEASURED",
+          "label": "PLANNED"
+        },
+        "dollar_cost": {
+          "status": "NOT_MEASURED",
+          "label": "PLANNED"
+        },
+        "value_demonstrated": [
+          "Buyer /workspace path serves real Next.js Trust Ledger Workspace markers (DEMONSTRATED on live capture)",
+          "Static mock marker nf-workspace-mock absent on /workspace (DEMONSTRATED)",
+          "Independent live gates exit 0 (PROVEN on capture run_id)"
+        ],
+        "value_not_claimed": [
+          "Fortune-500 production deployment",
+          "Measured license-cost displacement",
+          "External customer replacement ROI"
+        ]
+      }
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "C-WORKFLOW-IDENTIFY",
+      "name": "Identify legacy/manual buyer workflow",
+      "status": "PROVEN"
+    },
+    {
+      "id": "C-DECISION-WRAP",
+      "name": "Retain / wrap / replace decision with rationale",
+      "status": "DEMONSTRATED"
+    },
+    {
+      "id": "C-CONTROLS",
+      "name": "Acceptance criteria + independent gate scripts",
+      "status": "DEMONSTRATED"
+    },
+    {
+      "id": "C-BOUNDED-BUILD",
+      "name": "Bounded wrap deploy (sandbox runtime + proxy)",
+      "status": "DEMONSTRATED"
+    },
+    {
+      "id": "C-FAIL-DETECT",
+      "name": "Failed verification detection",
+      "status": "PROVEN"
+    },
+    {
+      "id": "C-REPAIR",
+      "name": "Repair after failed verification",
+      "status": "DEMONSTRATED"
+    },
+    {
+      "id": "C-INDEP-VERIFY",
+      "name": "Independent verification pass",
+      "status": "PROVEN"
+    },
+    {
+      "id": "C-PROMOTE",
+      "name": "Human promotion decision",
+      "status": "DEMONSTRATED"
+    },
+    {
+      "id": "C-RECEIPT",
+      "name": "Final evidence receipt + hashes",
+      "status": "PROVEN"
+    },
+    {
+      "id": "C-COST-VALUE",
+      "name": "Measured cost/time/value comparison",
+      "status": "PLANNED"
+    },
+    {
+      "id": "C-EXTERNAL-CUSTOMER",
+      "name": "External enterprise replacement pilot",
+      "status": "PLANNED"
+    },
+    {
+      "id": "C-FULL-MOTOR",
+      "name": "Full Motor-governed software factory runtime",
+      "status": "PLANNED"
+    }
+  ],
+  "architecture": {
+    "before": {
+      "label": "Static mock path",
+      "nodes": [
+        "Buyer",
+        "www.noetfield.com/workspace",
+        "Static HTML / mock markers"
+      ]
+    },
+    "after": {
+      "label": "Governed WRAP",
+      "nodes": [
+        "Buyer",
+        "www.noetfield.com/workspace (Pages proxy)",
+        "gov-sandbox-web (Next.js Trust Ledger Workspace)",
+        "gov-sandbox-api (/tle health + APIs)",
+        "Independent verify scripts"
+      ]
+    }
+  },
+  "limitations": [
+    "Internal client-zero demonstration \u2014 not an external customer engagement.",
+    "Does not claim Fortune-500 or regulated production maturity.",
+    "Cost/time dollar metrics are not measured in this version.",
+    "Does not implement the full Motor software-factory product.",
+    "Some historical failure evidence is incident-backed; contiguous machine hashes begin at the live capture receipt."
+  ],
+  "next_proof": [
+    "Measure engineering hours and hosting cost for a second wrap/replace candidate.",
+    "Run one bounded internal Replace (not only Wrap) with the same fail\u2192repair\u2192promote receipt pattern.",
+    "Package Option 2 outreach memo from this public proof for a named enterprise/frontier operator."
+  ],
+  "evidence_manifest": {
+    "run_id": "CS2-GISF-2026-07-14T005554Z",
+    "repo_git_sha": "bcd94e454eb8caa3be8775c0695986afa5bfd48d",
+    "runtime_api_git_sha": "d8bb0e16194ef65acb8d356acbf143d539ff3145",
+    "captured_at": "2026-07-14T00:55:54Z",
+    "checks": [
+      {
+        "name": "verify-www-live-sandbox.sh",
+        "exit_code": 0,
+        "result": "PASS"
+      },
+      {
+        "name": "verify-gov-sandbox-railway.sh",
+        "exit_code": 0,
+        "result": "PASS"
+      }
+    ],
+    "hashes": {
+      "www_workspace_html_sha256": "17ada9e28c7d59bb4b80e25f384ba96fe4d17142b042ba701884bd804c0ceeef",
+      "www_tle_body_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "railway_api_health_sha256": "c755368369977fa1795acc3f2870aa838c37dacff0f0e076f0d237dc839e2b04",
+      "railway_web_workspace_html_sha256": "17ada9e28c7d59bb4b80e25f384ba96fe4d17142b042ba701884bd804c0ceeef"
+    },
+    "receipts": [
+      {
+        "kind": "live_capture",
+        "path": "reports/agent-auto/events/nf-cs2-gisf-live-capture-v1.json"
+      },
+      {
+        "kind": "public_bundle",
+        "path": "proof/governed-replacement.json"
+      },
+      {
+        "kind": "incident",
+        "id": "INCIDENT-2026-07-06-001",
+        "closed_at": "2026-07-07"
+      }
+    ]
+  },
+  "attachments": [
+    {
+      "label": "Live workspace (public)",
+      "url": "https://www.noetfield.com/workspace"
+    },
+    {
+      "label": "Application Factory offer (separate narrative page \u2014 not this proof)",
+      "url": "https://www.noetfield.com/enterprise/application-factory/"
+    },
+    {
+      "label": "Proof library",
+      "url": "https://www.noetfield.com/proof/"
+    }
+  ],
+  "evidence_links": [
+    {
+      "label": "Case Study #2 page",
+      "url": "/proof/governed-replacement/"
+    },
+    {
+      "label": "Machine-readable evidence bundle",
+      "url": "/proof/governed-replacement.json"
+    }
+  ],
+  "diagnosis_summary": {
+    "stages_reviewed": 10,
+    "proven": 4,
+    "demonstrated": 5,
+    "partial": 1,
+    "planned_capabilities": 3
+  },
+  "exclusions_note": "This public bundle excludes: private repository filesystem paths, credentials, secrets, personal data, undisclosed commercial information, raw agent traces, and any fabricated metrics or timestamps.",
+  "integrity": {
+    "schema": "noetfield_public_evidence_bundle_v1",
+    "digest_algorithm": "sha256",
+    "digest": "2d4f8079adfc1852b1fa14004375ecfc28f45080e288eed8f173c224c6cf1e68",
+    "note": "sha256 of canonical JSON with integrity.digest set to empty string"
+  }
+}

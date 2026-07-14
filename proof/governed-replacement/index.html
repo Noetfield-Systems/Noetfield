@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Case Study #2 — Governed Replacement (Client-Zero)</title>
+ <meta name="description" content="Client-Zero / Internal Demonstration: Noetfield wrapped the public Trust Ledger workspace path after failed verification, repair, independent re-check, and founder promotion." />
+ <meta name="theme-color" content="#07080a" />
+ <link rel="canonical" href="https://www.noetfield.com/proof/governed-replacement/" />
+ <meta property="og:title" content="Case Study #2 — Governed Replacement (Client-Zero)" />
+ <meta property="og:description" content="Internal demonstration with contiguous evidence. Not a Fortune-500 deployment claim." />
+ <meta property="og:url" content="https://www.noetfield.com/proof/governed-replacement/" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=5" />
+</head>
+<body class="nf-gate nf-gate--vc">
+ <div class="nf-gate__bg" aria-hidden="true"></div>
+ <div class="nf-gate__frame">
+  <header class="nf-gate__top">
+   <a class="nf-gate__mark" href="/">Noetfield Systems Inc.</a>
+   <span class="nf-gate__locale">Client-Zero</span>
+  </header>
+  <main id="main" class="nf-gate__main">
+   <a class="nf-vc-back" href="/proof/">← Proof</a>
+   <header class="nf-vc-hero">
+    <p class="nf-vc-kicker">Case Study #2 · Client-Zero / Internal Demonstration</p>
+    <h1>Governed replacement — WRAP of the public workspace path</h1>
+    <p class="nf-vc-lead">One bounded internal workflow: the buyer-facing Trust Ledger workspace entry. Failed verification, repair, independent re-check, founder promotion, and a live receipt — without Fortune-500 claims.</p>
+   </header>
+   <div class="nf-vc-strip">
+    <span class="nf-vc-pill nf-vc-pill--live">Verdict: PUBLIC_CLIENT_ZERO_PROOF_READY</span>
+    <span class="nf-vc-pill">Decision: WRAP</span>
+    <span class="nf-vc-pill">Not external customer production</span>
+   </div>
+
+   <section class="nf-vc-section">
+    <h2>What was being replaced or improved?</h2>
+    <p>The public entry path <a href="https://www.noetfield.com/workspace">www.noetfield.com/workspace</a> was supposed to open the Trust Ledger Workspace. Before repair it presented as a static / mock path — buyers could not reach the real Next.js governance console from that CTA.</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>Why WRAP instead of RETAIN or full REPLACE?</h2>
+    <table class="nf-vc-table">
+     <thead>
+      <tr><th>Option</th><th>Verdict</th></tr>
+     </thead>
+     <tbody>
+      <tr><td>Retain</td><td>Rejected — keeping a mock on a buyer workspace path was a critical product regression (incident closed 2026-07-07).</td></tr>
+      <tr><td>Replace</td><td>Deferred for this surface — full Pages host swap was larger than needed; the real console already existed as a deployable sandbox service.</td></tr>
+      <tr><td>Wrap</td><td>Selected — keep the public URL; proxy to the live governance-console sandbox with independent live gates.</td></tr>
+     </tbody>
+    </table>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>Before → after architecture</h2>
+    <pre class="nf-vc-flow">BEFORE
+Buyer → www /workspace → static HTML / mock markers
+                         (no Next.js app shell)
+
+AFTER (WRAP)
+Buyer → www /workspace (edge proxy)
+      → gov-sandbox-web (Next.js Trust Ledger Workspace)
+      → gov-sandbox-api (/tle + APIs)
+      → independent verify scripts (fail-closed)</pre>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>Policies and acceptance criteria</h2>
+    <ul>
+     <li>Public <code>/workspace</code> must serve Next.js <code>_next</code> assets.</li>
+     <li>Must not contain <code>nf-workspace-mock</code>.</li>
+     <li>Public <code>/tle</code> must return HTTP 2xx.</li>
+     <li>Sandbox API health must identify <code>governance-console-api</code>.</li>
+     <li>No interactive downgrade of live client sandbox surfaces (R-012).</li>
+    </ul>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>Failure → repair → verification</h2>
+    <pre class="nf-vc-flow">2026-07-06  FAIL
+  Detected by: founder review + live path inspection
+  Failure: static / mock workspace on buyer CTA path
+
+2026-07-07  REPAIR + PROMOTE
+  Repair: sandbox runtime deploy + www proxy enablement
+  Independent gates: verify-www-live-sandbox · verify-gov-sandbox-railway
+  Authority: founder closed incident after live PASS
+
+2026-07-14  RE-PROOF (this publication)
+  Live capture run_id: CS2-GISF-2026-07-14T005554Z
+  Independent gates: PASS · PASS
+  Workspace HTML sha256: 17ada9e28c7d59bb4b80e25f384ba96fe4d17142b042ba701884bd804c0ceeef</pre>
+   </section>
+
+   <nav class="nf-vc-grid nf-vc-grid--2" aria-label="Capability labels">
+    <div class="nf-vc-tile nf-vc-tile--static">
+     <span class="nf-vc-tile__label">Proven</span>
+     <span class="nf-vc-tile__desc">Failed verification epoch · independent live gate PASS · final receipt hashes · workspace not mock</span>
+    </div>
+    <div class="nf-vc-tile nf-vc-tile--static">
+     <span class="nf-vc-tile__label">Demonstrated</span>
+     <span class="nf-vc-tile__desc">WRAP decision · controls · bounded build · repair · founder promotion</span>
+    </div>
+    <div class="nf-vc-tile nf-vc-tile--static">
+     <span class="nf-vc-tile__label">Partial</span>
+     <span class="nf-vc-tile__desc">Cost/time/value — calendar span evidenced; dollars and hours not measured</span>
+    </div>
+    <div class="nf-vc-tile nf-vc-tile--static">
+     <span class="nf-vc-tile__label">Planned</span>
+     <span class="nf-vc-tile__desc">Measured ROI · external customer pilot · full Motor factory runtime</span>
+    </div>
+   </nav>
+
+   <section class="nf-vc-section">
+    <h2>Promotion and measurable value</h2>
+    <p><strong>Who authorized promotion?</strong> Founder — incident closed 2026-07-07 after independent live PASS (not an agent self-PASS).</p>
+    <p><strong>What value is demonstrated?</strong> The public workspace path serves the real Trust Ledger Workspace shell; mock markers are absent; independent gates exit 0 on the publication capture.</p>
+    <p><strong>What is not claimed?</strong> Fortune-500 deployment, license-cost displacement, or external customer ROI. Engineering hours and dollar cost remain <em>not measured</em>.</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>Limitations and next proof</h2>
+    <p>This is Client-Zero / Internal Demonstration only. Next proofs: measure hours/cost on a second candidate; run one bounded Replace (not only Wrap) with the same fail→repair→promote pattern; generate a concise outreach memo from this public pack.</p>
+   </section>
+
+   <nav class="nf-vc-grid nf-vc-grid--2" aria-label="Evidence">
+    <a class="nf-vc-tile" href="/proof/governed-replacement.json">
+     <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+     <span class="nf-vc-tile__label">Evidence bundle (JSON)</span>
+     <span class="nf-vc-tile__desc">Machine-readable lifecycle, hashes, checks, receipts.</span>
+    </a>
+    <a class="nf-vc-tile" href="https://www.noetfield.com/workspace">
+     <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+     <span class="nf-vc-tile__label">Live workspace path</span>
+     <span class="nf-vc-tile__desc">Public surface under test — open and inspect.</span>
+    </a>
+   </nav>
+
+   <p class="nf-vc-note">
+    Related offer page (narrative, not this proof): <a href="/enterprise/application-factory/">Governed Application Factory</a>.
+    Case Study #1: <a href="/proof/noetfield/">Noetfield self-audit</a>.
+   </p>
+  </main>
+  <footer class="nf-gate__foot"><span>© 2026 Noetfield Systems Inc.</span></footer>
+ </div>
+</body>
+</html>
