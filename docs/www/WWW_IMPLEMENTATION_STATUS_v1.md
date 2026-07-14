@@ -10,7 +10,7 @@
 
 ## 0. Anti-downgrade rules (locked by founder)
 
-1. **`/` is a direction gate only** — three tiles (Enterprise · Investor · Motor) + About · Proof. **No** product copy, SKUs, pricing, governance OS cards, or “three commercial fields” marketing essay on `/`.
+1. **`/` is a direction gate only** — Enterprise · Motor + About · Proof. **No** Invest / Investor / `/investors/` / `/invest/` on the homepage (invest-in-Noetfield is prohibited public leak). **No** product copy, SKUs, pricing, or marketing essay on `/`.
 2. **`/enterprise/` is frozen** — old institutional/Copilot homepage. **Do not edit** unless founder explicitly scopes it.
 3. **One page = one subject** — do not cross-link unrelated directions (e.g. no Case Study / Roadmap / TrustField on `/motors/`; no diligence product on `/investors/`).
 4. **Do not revert `/` to a corporate/product marketing homepage** — founder rejected that (2026-07-13).
@@ -23,12 +23,12 @@
 
 | Route | Status | Purpose | Notes |
 |-------|--------|---------|-------|
-| `/` | **LIVE** | Direction gate | Enterprise · Investor · Motor + About · Proof |
+| `/` | **LIVE** | Direction gate | Enterprise · Motor + About · Proof — **no Investor/invest** |
 | `/enterprise/` | **LIVE · FROZEN** | Field 1 — Enterprise AI Governance | Old homepage content; do not mutate |
 | `/motors/` | **LIVE** | Field 2 — motors & custom workflows | Commission paths only |
-| `/investors/` | **LIVE** | Evaluate **Noetfield the company** | Proof · Roadmap · `/invest/` |
+| `/investors/` | **LIVE · NOT ON HOMEPAGE** | Evaluate **Noetfield the company** | Never linked from `/` |
 | `/investor-workflows/` | **LIVE** | Field 3 — audit **your** deal/company | Not linked from `/` homepage |
-| `/invest/` | **LIVE · GATED** | Private round materials | Supabase/Google auth; edge cookie |
+| `/invest/` | **LIVE · GATED** | Private round materials | Supabase/Google auth; edge cookie — never on `/` |
 | `/auth/sign-in/` | **LIVE** | Investor sign-in | portfolio-spine Supabase |
 | `/proof/` | **LIVE** | Case study library index | |
 | `/proof/noetfield/` | **LIVE** | Case Study #1 | v0.1 |

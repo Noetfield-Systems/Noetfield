@@ -40,10 +40,13 @@ def test_homepage_is_direction_gate() -> None:
     assert "nf-gate" in text
     assert "noetfield-gate-v1.css" in text
     assert "/enterprise/" in text
-    assert "/investors/" in text
     assert "/motors/" in text
     assert "/about/" in text
     assert "/proof/" in text
+    assert "/investors/" not in text
+    assert "/invest/" not in text
+    assert "investor" not in lower
+    assert "invest in noetfield" not in lower
     assert "apply for pilot" not in lower
     assert "request trust brief" not in lower
 

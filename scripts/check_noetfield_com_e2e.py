@@ -22,12 +22,18 @@ API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 HOME_NEEDLES = (
     "nf-gate",
     "Enterprise",
-    "Investor",
     "Motor",
     "/enterprise/",
-    "/investors/",
     "/motors/",
     "/proof/",
+)
+
+# Explicitly forbidden on public homepage (invest-in-Noetfield leak).
+HOME_FORBIDDEN = (
+    "/investors/",
+    "/invest/",
+    "Invest in Noetfield",
+    "Investor",
 )
 
 # Institutional CTAs must remain reachable from the enterprise field, not `/`.
@@ -155,6 +161,12 @@ def main() -> int:
         else:
             print(f"FAIL homepage missing: {needle}", file=sys.stderr)
             fail += 1
+    for bad in HOME_FORBIDDEN:
+        if bad in home:
+            print(f"FAIL homepage invest leak: {bad!r}", file=sys.stderr)
+            fail += 1
+        else:
+            print(f"OK   homepage free of {bad!r}")
 
     _, enterprise = fetch(f"{BASE}/enterprise/")
     for needle in ENTERPRISE_NEEDLES:

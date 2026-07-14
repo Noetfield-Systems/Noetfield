@@ -89,7 +89,8 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 ### Copy smoke (homepage + enterprise + pilot)
 
-- Homepage (direction gate): `nf-gate`, Enterprise, Investor, Motor, `/enterprise/`, `/investors/`, `/motors/`, `/proof/`
+- Homepage (direction gate): `nf-gate`, Enterprise, Motor, `/enterprise/`, `/motors/`, `/proof/`
+- Homepage **forbidden**: `/investors/`, `/invest/`, “Investor”, “Invest in Noetfield”
 - Enterprise field: Apply for pilot, Request Trust Brief, Start sandbox
 - Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident
 - Interactive demo/trial: remain on `/copilot/demo/` and `/copilot/trial/` (not required on `/`)
