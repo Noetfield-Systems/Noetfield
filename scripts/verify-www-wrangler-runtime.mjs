@@ -14,6 +14,7 @@ const runtimeReportPath = path.join(
 );
 const port = Number(process.env.NF_WRANGLER_TEST_PORT || "8797");
 const base = `http://127.0.0.1:${port}`;
+const runtimeTimeoutMs = Number(process.env.NF_WRANGLER_RUNTIME_TIMEOUT_MS || "120000");
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -42,6 +43,9 @@ const wranglerArgs = [
 const child = spawn("npx", wranglerArgs, {
   cwd: root,
   env: { ...process.env, NO_COLOR: "1" },
+  // npx may retain Wrangler as a child process on Linux. A dedicated process
+  // group lets the verifier stop the complete runtime tree deterministically.
+  detached: process.platform !== "win32",
   stdio: ["ignore", "pipe", "pipe"],
 });
 let logs = "";
@@ -61,6 +65,7 @@ async function waitUntilReady() {
     try {
       const response = await fetch(`${base}/api/health`, {
         headers: { Host: "www.noetfield.com" },
+        signal: AbortSignal.timeout(2000),
       });
       if (response.status === 200) return;
     } catch (_) {
@@ -76,6 +81,7 @@ async function probe(pathname, expectedStatus, rule) {
   const response = await fetch(`${base}${pathname}${join}nf_rel_002=wrangler`, {
     redirect: "manual",
     headers: { Host: "www.noetfield.com" },
+    signal: AbortSignal.timeout(5000),
   });
   return {
     requested_path: pathname,
@@ -88,7 +94,46 @@ async function probe(pathname, expectedStatus, rule) {
 
 const rows = [];
 let failure = null;
-try {
+let runtimeTimer;
+
+function childIsRunning() {
+  return child.exitCode === null && child.signalCode === null;
+}
+
+function signalRuntimeTree(signal) {
+  if (!childIsRunning()) return;
+  try {
+    if (process.platform !== "win32" && child.pid) {
+      process.kill(-child.pid, signal);
+    } else {
+      child.kill(signal);
+    }
+  } catch (error) {
+    if (error?.code !== "ESRCH") throw error;
+  }
+}
+
+async function stopRuntimeTree() {
+  signalRuntimeTree("SIGTERM");
+  await Promise.race([
+    new Promise((resolve) => {
+      if (!childIsRunning()) return resolve();
+      child.once("exit", resolve);
+    }),
+    new Promise((resolve) => setTimeout(resolve, 3000)),
+  ]);
+  if (childIsRunning()) {
+    signalRuntimeTree("SIGKILL");
+    await Promise.race([
+      new Promise((resolve) => child.once("exit", resolve)),
+      new Promise((resolve) => setTimeout(resolve, 1000)),
+    ]);
+  }
+  child.stdout.destroy();
+  child.stderr.destroy();
+}
+
+async function runProbes() {
   await waitUntilReady();
   for (const row of matrix.rows) {
     rows.push(
@@ -112,15 +157,21 @@ try {
   }
   rows.push(await probe("/invest/", 302, "INVEST_ACCESS_CONTROL"));
   rows.push(await probe("/api/auth/invest-config", 200, "INVEST_RUNTIME_CONFIG"));
+}
+
+try {
+  const deadline = new Promise((_, reject) => {
+    runtimeTimer = setTimeout(
+      () => reject(new Error(`Wrangler probe deadline exceeded (${runtimeTimeoutMs}ms)`)),
+      runtimeTimeoutMs,
+    );
+  });
+  await Promise.race([runProbes(), deadline]);
 } catch (error) {
   failure = String(error?.stack || error);
 } finally {
-  child.kill("SIGTERM");
-  await new Promise((resolve) => {
-    if (child.exitCode !== null) return resolve();
-    child.once("exit", resolve);
-    setTimeout(resolve, 3000);
-  });
+  clearTimeout(runtimeTimer);
+  await stopRuntimeTree();
 }
 
 const failed = rows.filter((row) => row.result === "FAIL");
