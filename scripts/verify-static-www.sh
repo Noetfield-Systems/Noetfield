@@ -22,18 +22,87 @@ check_file() {
   [[ "$missing" -eq 0 ]] && ok "$label" || bad "$label"
 }
 
-check_file "homepage intelligence-first" index.html \
-  'noetfield-www.css?v=42' 'nf-site-v14' \
-  'data-live-proof-hero' 'nf-live-proof-lanes' 'nf-product-lane-strip' \
-  'Governance specialist' 'agentic-specialist' 'VC diligence' \
-  'Trust Brief' 'Bank Pilot' 'Explore product lanes' \
-  'tamper-evident' 'nfScenarioOfDay' \
-  'Apply for pilot' '01 · Diagnose' 'Diagnostic Sprint' \
-  'Copilot Governance Pack' 'Commercial path' 'Start sandbox' \
-  'fail closed' 'Copilot becomes auditable'
+check_absent() {
+  local label="$1" file="$2"
+  shift 2
+  [[ -f "$file" ]] || { bad "$label — missing $file"; return; }
+  local present=0 needle
+  for needle in "$@"; do
+    if grep -qF "$needle" "$file"; then
+      echo "     unexpectedly present in $file: $needle" >&2
+      present=1
+    fi
+  done
+  [[ "$present" -eq 0 ]] && ok "$label" || bad "$label"
+}
 
-check_file "homepage buyer journey" index.html \
-  '02 · Build' '03 · Prove' '04 · Govern' '$2k–10k' 'Published tiers'
+# NF-REL-002 protected surfaces. The superseded v42 marketing-home and investor
+# form expectations remain available as a historical fixture; they are not the
+# canonical direction-gate contract selected from e83aff92764c916362767f1dcb616bc3ece9535f.
+check_file "protected homepage direction gate" index.html \
+  '<title>Noetfield Systems</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/" />' \
+  '<body class="nf-gate">' '<main id="main" class="nf-gate__main">' \
+  '<h1 class="nf-gate__title">Noetfield <em>Systems</em></h1>' \
+  '<nav class="nf-gate__directions" aria-label="Main directions">' \
+  'href="/enterprise/"' 'href="/motors/"' 'href="/about/"' 'href="/proof/"' \
+  '/assets/noetfield-gate-v1.css?v=1'
+check_absent "protected homepage stays conversion-neutral" index.html \
+  'nfLiveProofHero' 'nfInvestorForm' 'Apply for pilot' '/investors/' '/invest/'
+
+check_file "protected investors direction gate" investors/index.html \
+  '<title>Investor — Noetfield Systems</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
+  '<h1>Proof before pitch</h1>' \
+  'Evaluate Noetfield Systems Inc. — what is proven, what is open, and what comes next.' \
+  'aria-label="Investor paths"' 'href="/proof/noetfield/"' 'href="/roadmap/"' \
+  'href="/invest/"' 'Private round materials — sign in required.'
+check_absent "protected investors hub has no embedded intake" investors/index.html \
+  'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js'
+
+check_file "protected proof truth boundaries" proof/index.html \
+  '<title>Proof — Noetfield Systems</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/proof/" />' \
+  '<h1>Evidence, not slides</h1>' \
+  'What is proven, what is planned, and what must still be demonstrated before broad claims.' \
+  'Case Study #1 — Noetfield' 'Parent company self-audit. Live now.' \
+  'Case Study #2 — Governed replacement' \
+  'Client-Zero / Internal Demonstration · WRAP of /workspace · live.' \
+  'not a Fortune-500 deployment claim' 'Coming next.'
+
+check_file "protected enterprise commercial surface" enterprise/index.html \
+  '<title>Noetfield — Copilot governance · Trust Brief · sandbox</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/enterprise/" />' \
+  '<h1 class="nf-hero-h1--wide">Governed AI operations—from sandbox receipt to board-ready proof.</h1>' \
+  'noetfield-shell.js?v=42' 'Apply for pilot' 'Request Trust Brief' 'Start sandbox' \
+  'No custody rails' 'not company certification'
+
+check_file "historical v42 expectations archived" \
+  tests/fixtures/www/historical-v42-protected-surface-expectations.json \
+  'historical-v42-protected-surface-expectations-v1' \
+  'homepage intelligence-first' 'investors async intake' 'investors honesty' \
+  'noetfield-www.css?v=42' 'nfInvestorForm' 'Shipped today'
+
+check_file "public motor enquiries stay on contact paths" motors/index.html \
+  'href="/contact/"' 'href="/contact/?topic=governed-motor"' \
+  'href="/contact/?topic=custom-workflow"' 'href="/contact/?topic=custom-gpt-motor"'
+check_absent "public motor cards do not enter private workspace" motors/index.html \
+  'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
+  'href="/workspace/workspace"'
+
+check_file "private invest route contract" invest/index.html \
+  '<meta name="robots" content="noindex,nofollow" />' \
+  'For verified investors only. Not a public offer.' \
+  'Investor workflow product' 'Public information about evidence-based diligence workflows.' \
+  '/assets/noetfield-invest-auth-v1.js?v=2'
+check_file "private invest Pages access control" 'functions/invest/[[path]].js' \
+  'nf_invest_auth=1' 'return redirectSignIn(request);' \
+  'headers.set("Cache-Control", "private, no-store")'
+check_absent "public investor workflow is informational, not an offering" investor-workflows/index.html \
+  'public securities offering' 'buy shares' 'purchase equity' 'subscribe for shares'
+
+check_file "about positioning is provisional" about/index.html \
+  'Provisional corporate positioning.' 'Recovered source pending NF-WEB-001 review.'
 
 # Homepage IA compression — ≤8 top-level sections (U5 v17)
 section_count="$(grep -c '<section' index.html || true)"
@@ -76,9 +145,6 @@ check_file "gate intake page" gate/intake/index.html \
 
 check_file "contact async intake" contact/index.html \
   'nfContactForm' 'data-nf-intake-form' 'noetfield-forms.js' 'noetfield-intake-core.js'
-
-check_file "investors async intake" investors/index.html \
-  'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'Diligence vault'
 
 check_file "investor diligence vault" investors/diligence/index.html \
   'Investor Diligence Vault' 'nfInvestorDiligenceForm' 'investor-diligence' \
@@ -145,9 +211,6 @@ check_file "footer pilot-first" assets/partials/footer.html \
 check_file "trust center diligence theme" trust/index.html \
   'nf-trust-diligence' 'nf-trust-doc-layout' 'fail closed' 'Metadata-only' 'Shipped'
 
-check_file "investors honesty" investors/index.html \
-  'do not inflate ARR' 'Governance Pack' 'tamper-evident' 'Board PDF pilots open' 'Shipped today'
-
 check_file "copilot dual artifact" copilot/index.html \
   'nf-hero-artifacts' 'Apply for pilot' 'board-grade governance'
 
@@ -186,7 +249,7 @@ check_file "ai factories status api" api/status/ai-factory.js \
   'buildStatusPreview' 'request_id'
 
 # Version coherence on primary hubs (shell + www css v=42)
-for f in index.html trust/index.html copilot/index.html msp/index.html federal/index.html investors/index.html start/index.html pricing/index.html faq/index.html contact/index.html enterprise/index.html; do
+for f in trust/index.html copilot/index.html msp/index.html federal/index.html start/index.html pricing/index.html faq/index.html contact/index.html enterprise/index.html; do
   if [[ -f "$f" ]] && ! grep -qE 'noetfield-shell\.js\?v=42' "$f"; then
     bad "shell v42 on $f"
   fi

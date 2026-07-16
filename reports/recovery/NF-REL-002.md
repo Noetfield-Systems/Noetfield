@@ -58,11 +58,12 @@
 | Route | SHA-256 | Title | H1 |
 |---|---|---|---|
 | `/` | `0d602e1d328cf7ff942fe87b1399968f1ec4d89a4f928351699758f164948cf0` | Noetfield Systems | Noetfield Systems |
-| `/about/` | `c3f894c7d5a11ae0fa9324bbfd44defaa3a1aa0bbcfc37ed9bb97dc8d2667556` | About — Noetfield Systems Inc. | Noetfield Systems Inc. |
+| `/about/` | `dda92cd65ded6045a7ddd96a23d856c5a4ffe523c801e5c126f75515c90f4410` | About — Noetfield Systems Inc. | Noetfield Systems Inc. |
 | `/investors/` | `0601ab0e65cfaa568e08cb555de4444ff2aedb44c8d3d12930d54b2fa4989659` | Investor — Noetfield Systems | Proof before pitch |
 | `/proof/` | `93b493cfb0ee686857a754f2284eaa86361a310ad3de95deecb9de3b2df5b229` | Proof — Noetfield Systems | Evidence, not slides |
 | `/enterprise/` | `7c46b7b2862c631b82dc69f78a4f3d6d606963be8c1582e002987424f29eddfa` | Noetfield — Copilot governance · Trust Brief · sandbox | Governed AI operations—from sandbox receipt to board-ready proof. |
-| `/motors/` | `c0aadac85b6eb746257251db462f5d3429b05de08fc64b25650a99a29963622d` | Motor & Custom Workflow — Noetfield Systems | Built around how you work |
+| `/motors/` | `14e0d479b52101f800aacf6d2a90af4021ded84ae80b3b06eed10830ac0f20a5` | Motor & Custom Workflow — Noetfield Systems | Built around how you work |
+| `/invest/` | `67eac43fe760aa090ba423e0887e2f7a7278a6944b2517efe762f25cca6260b5` | Invest — Noetfield Systems Inc. | Equity in Noetfield |
 | `/noetfield-favicon-512.png` | `8e5821c32cf29cda3c88d5a425dc4d4fc2b2519c0be87ea4325dc3788ac726c3` | Binary | Binary |
 
 Plain paths and `?nf_rel_002=1` variants returned `200` with identical hashes in
@@ -104,6 +105,31 @@ domain after explicit approval. This recovery PR does not change indexing.
 - Favicon: present, non-empty, and query-stable.
 - `python3 scripts/check_repo_policy.py`: PASS.
 - `git diff --check`: PASS.
-- `make verify-static-www`: FAILS on legacy v42 homepage and Investors expectations already incompatible with the committed direction-gate baseline. Enterprise checks pass after semantic selection of the committed page. The stale assertions were not weakened in this recovery.
+- `make verify-static-www`: PASS in a clean checkout-equivalent. It now asserts the selected homepage, Investors, Proof, and Enterprise contracts precisely; superseded v42 homepage and Investor expectations remain in `tests/fixtures/www/historical-v42-protected-surface-expectations.json`.
+- `node scripts/test-invest-access-control.mjs`: PASS. Unauthenticated and lookalike-cookie requests redirect to sign-in, authorized reads are `private, no-store`, and non-read methods return `405`.
+- `node scripts/verify-www-deny-middleware.mjs`: PASS (`157/157`). Machine-readable results are in `reports/recovery/NF-REL-002-denylist-matrix.json`.
+- Local Wrangler Pages runtime: PASS for all `157` security-matrix rows; required public routes and favicon returned `200` with query-stable hashes, while `/invest/?nf_rel_002=runtime` returned the expected sign-in `302`.
+
+## PR #111 required-repair decisions
+
+### Public conversion paths
+
+- Motors: recovered copy remains, but all four public cards route to `/contact/` or a scoped `/contact/?topic=...` enquiry. No Motor card links directly to `/workspace/onboarding`, `/workspace/cognitive-dashboard`, or `/workspace/workspace`.
+- Invest: `/invest/` remains behind `functions/invest/[[path]].js`; the static page is `noindex,nofollow`, hidden until authentication, and served only after the Pages Function sees the authenticated HttpOnly session cookie. The public `/investor-workflows/` link is labeled as product information rather than a discussion of the private round.
+- About: recovered corporate-positioning copy is visibly labeled `Provisional corporate positioning` and pending NF-WEB-001 review. It was not expanded further.
+
+### Denylist migration
+
+The matrix exercises every former `404` route source, every current exact deny,
+both root and nested probes for every deny prefix, query-string variants, and the
+required `/governance/` and `/services/` cases. `/governance/` is an intentional
+public product hub; its sensitive files and internal subtrees return `404`.
+`/services/` has no directory index and returns `404`, while the two existing named
+public service product routes remain in the artifact. Internal service prefixes are
+middleware-denied. No protected repository source was downloadable in local Pages
+runtime verification.
+
+The canonical apex/WWW topology remains unchanged: apex permanently redirects to
+WWW with path and query preserved, and WWW proxies one complete Pages artifact.
 
 No cache purge, merge, deployment, or production mutation was performed.

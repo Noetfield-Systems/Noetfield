@@ -79,6 +79,20 @@ else
   fail=1
 fi
 
+if node scripts/test-invest-access-control.mjs; then
+  echo "OK   private invest route rejects unauthenticated requests"
+else
+  echo "FAIL private invest route access control" >&2
+  fail=1
+fi
+
+if node scripts/verify-www-deny-middleware.mjs; then
+  echo "OK   Pages middleware deny migration matrix"
+else
+  echo "FAIL Pages middleware deny migration matrix" >&2
+  fail=1
+fi
+
 if python3 scripts/verify-www-recovery-baseline.py; then
   echo "OK   protected recovery baseline complete"
 else
