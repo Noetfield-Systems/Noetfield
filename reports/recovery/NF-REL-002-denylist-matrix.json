@@ -4,9 +4,9 @@
   "generated_middleware": "functions/_middleware.js",
   "generated_middleware_sha256": "cd5c86df1725dd9a8468e63f8d2d94c90de298655dd9d9d25b75fc2a22f6f0d5",
   "exact_artifact_manifest": "tmp/nf-rel-002/public-artifact-manifest.json",
-  "exact_artifact_manifest_sha256": "db7622be755a88b79637adbfd1cf45cf1c5078ea8470fd11a89c417781c9122a",
+  "exact_artifact_manifest_sha256": "3dbe1e6c230d1103fa5e10aca6da6dc659d6e9fbfe78ee9f9c42c8bdd6a3595f",
   "exact_artifact_manifest_schema": "nf-rel-002-public-artifact-manifest-v1",
-  "artifact_static_file_count": 201,
+  "artifact_static_file_count": 213,
   "unexpected_artifact_paths": [],
   "query_string_tested": "?nf_rel_002=deny",
   "public_exceptions": [
