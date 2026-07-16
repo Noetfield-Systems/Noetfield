@@ -43,20 +43,21 @@ else
   echo "OK   404.html present"
 fi
 
-if [[ -f "${DIST}/_redirects" ]] && grep -q ' /404\.html 404' "${DIST}/_redirects"; then
-  echo "OK   deny redirects target /404.html"
+if [[ -f "${DIST}/_redirects" ]] && ! grep -qE '(^https?://|[[:space:]]404$)' "${DIST}/_redirects"; then
+  echo "OK   _redirects contains only Pages-supported rules"
 else
-  echo "FAIL _redirects missing /404.html deny targets" >&2
+  echo "FAIL _redirects contains unsupported host or 404 rules" >&2
   fail=1
 fi
 
 for needle in _redirects "Open workspace" "nf26-demoStepper"; do
   case "$needle" in
     _redirects)
-      if [[ -f "${DIST}/_redirects" ]] && grep -q 'noetfield.com' "${DIST}/_redirects"; then
-        echo "OK   apex redirect in _redirects"
+      if grep -q 'pattern = "noetfield.com/\*"' infra/cf-www-proxy/wrangler.toml && \
+         grep -q 'pattern = "www.noetfield.com/\*"' infra/cf-www-proxy/wrangler.toml; then
+        echo "OK   apex and www share the canonical proxy topology"
       else
-        echo "FAIL _redirects missing apex redirect" >&2
+        echo "FAIL canonical proxy topology missing apex or www route" >&2
         fail=1
       fi
       ;;
@@ -70,6 +71,20 @@ for needle in _redirects "Open workspace" "nf26-demoStepper"; do
       ;;
   esac
 done
+
+if node scripts/test-cf-www-proxy.mjs; then
+  echo "OK   proxy preserves apex path and query strings"
+else
+  echo "FAIL proxy apex/query behavior" >&2
+  fail=1
+fi
+
+if python3 scripts/verify-www-recovery-baseline.py; then
+  echo "OK   protected recovery baseline complete"
+else
+  echo "FAIL protected recovery baseline incomplete" >&2
+  fail=1
+fi
 
 if [[ "$fail" -eq 0 ]]; then
   echo ""
