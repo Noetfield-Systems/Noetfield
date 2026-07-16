@@ -5,9 +5,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -17,6 +19,7 @@ PLATFORM_BASE = "https://platform.noetfield.com"
 WWW_BASE = "https://www.noetfield.com"
 USER_AGENT = "noetfield-post-deploy-verify/1.0"
 PIN_FILE = ROOT / "data" / "nf-platform-deploy-pin-v1.json"
+FULL_SHA = re.compile(r"^[0-9a-f]{40}$")
 
 
 def read_vault(key: str) -> str:
@@ -28,13 +31,20 @@ def read_vault(key: str) -> str:
     return ""
 
 
-def fetch_json(url: str) -> dict[str, object]:
+def fetch_json_response(url: str) -> tuple[dict[str, object], dict[str, str]]:
     req = urllib.request.Request(
         url,
         headers={"Accept": "application/json", "User-Agent": USER_AGENT},
     )
     with urllib.request.urlopen(req, timeout=25) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+        body = json.loads(resp.read().decode("utf-8"))
+        headers = {key.lower(): value for key, value in resp.headers.items()}
+        return body, headers
+
+
+def fetch_json(url: str) -> dict[str, object]:
+    body, _headers = fetch_json_response(url)
+    return body
 
 
 def platform_expected_sha() -> str:
@@ -85,12 +95,43 @@ def verify_platform(sha: str) -> list[str]:
     return failures
 
 
-def verify_www(www_base: str) -> list[str]:
+def verify_www(
+    www_base: str,
+    sha: str,
+    *,
+    provider_verified_release: bool = False,
+) -> list[str]:
     failures: list[str] = []
+    if not FULL_SHA.fullmatch(sha):
+        return ["www expected SHA must be a full lowercase 40-character git SHA"]
+    base = www_base.rstrip("/")
+    hostname = (urllib.parse.urlsplit(base).hostname or "").lower()
     try:
-        health = fetch_json(f"{www_base.rstrip('/')}/api/health")
+        health, headers = fetch_json_response(f"{base}/api/health?nf_release={sha}")
+        if not isinstance(health, dict):
+            failures.append(f"www health payload is not an object from {www_base}")
+            health = {}
         if health.get("service") != "noetfield-www":
             failures.append(f"www health unexpected payload from {www_base}")
+        live_sha = str(health.get("git_sha") or "").strip().lower()
+        if FULL_SHA.fullmatch(live_sha) and live_sha != sha:
+            failures.append(f"www health git_sha={live_sha} expected={sha}")
+
+        release_header = headers.get("x-noetfield-release", "").strip().lower()
+        proxy_header = headers.get("x-noetfield-proxy", "").strip().lower()
+        if hostname == "www.noetfield.com":
+            if proxy_header != "cf-www-proxy":
+                failures.append(
+                    f"www canonical proxy identity={proxy_header or 'missing'}"
+                )
+            if release_header != sha:
+                failures.append(
+                    f"www canonical release={release_header or 'missing'} expected={sha}"
+                )
+        elif not provider_verified_release and live_sha != sha:
+            failures.append(
+                "www direct release identity unavailable; exact provider metadata was not asserted"
+            )
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
         failures.append(f"www health unreachable at {www_base}: {exc}")
 
@@ -180,6 +221,11 @@ def main() -> int:
     parser.add_argument("--www-base", default=WWW_BASE, help="WWW base URL for live checks")
     parser.add_argument("--platform-base", default=PLATFORM_BASE, help="Platform base URL for intake status polling")
     parser.add_argument(
+        "--provider-verified-release",
+        action="store_true",
+        help="Accept exact Pages provider metadata as direct-origin release identity",
+    )
+    parser.add_argument(
         "--skip-intake-e2e",
         action="store_true",
         help="Skip intake Telegram+DB E2E check",
@@ -195,7 +241,13 @@ def main() -> int:
     if args.surface in ("platform", "both"):
         failures.extend(verify_platform(sha))
     if args.surface in ("www", "both"):
-        failures.extend(verify_www(args.www_base))
+        failures.extend(
+            verify_www(
+                args.www_base,
+                sha,
+                provider_verified_release=args.provider_verified_release,
+            )
+        )
 
     if not failures and not args.skip_intake_e2e and not args.deploy_failed:
         failures.extend(

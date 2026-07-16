@@ -6,13 +6,28 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import shutil
 from pathlib import Path, PurePosixPath
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWLIST_PATH = ROOT / "governance" / "www-public-artifact-v1.json"
 DIST = ROOT / "www-pages-dist"
 RECEIPT_PATH = ROOT / "tmp" / "nf-rel-002" / "public-artifact-manifest.json"
+ASSET_VERSION_LENGTH = 16
+CSS_IMPORT_PATTERN = re.compile(
+    r"(?P<prefix>@import\s+url\(\s*(?P<quote>['\"]))"
+    r"(?P<value>[^'\"]+)"
+    r"(?P<suffix>(?P=quote)\s*\))",
+    re.IGNORECASE,
+)
+HTML_ASSET_PATTERN = re.compile(
+    r"(?P<prefix>\b(?:href|src)\s*=\s*(?P<quote>['\"]))"
+    r"(?P<value>/assets/[^'\"]+)"
+    r"(?P<suffix>(?P=quote))",
+    re.IGNORECASE,
+)
 
 FORBIDDEN_ROOT_FILES = {
     "AGENTS.md",
@@ -166,6 +181,121 @@ def function_files_on_disk() -> list[str]:
     )
 
 
+def local_asset_target(source: Path, value: str) -> tuple[Path, str] | None:
+    parsed = urlsplit(value)
+    if parsed.scheme or parsed.netloc or not parsed.path:
+        return None
+    if parsed.path.startswith("/"):
+        target = DIST / parsed.path.lstrip("/")
+    else:
+        target = source.parent / parsed.path
+    try:
+        target = target.resolve()
+        target.relative_to(DIST.resolve())
+    except ValueError as exc:
+        raise ValueError(f"asset reference escapes public artifact: {value}") from exc
+    return target, parsed.fragment
+
+
+def versioned_value(source: Path, value: str) -> str:
+    resolved = local_asset_target(source, value)
+    if resolved is None:
+        return value
+    target, fragment = resolved
+    if not target.is_file():
+        raise ValueError(
+            f"public asset reference is absent: {source.relative_to(DIST)} -> {value}"
+        )
+    path = urlsplit(value).path
+    rendered = f"{path}?v={sha256_file(target)[:ASSET_VERSION_LENGTH]}"
+    return f"{rendered}#{fragment}" if fragment else rendered
+
+
+def rewrite_css_imports(static_files: list[str]) -> None:
+    css_files = [DIST / rel for rel in static_files if rel.endswith(".css")]
+    visiting: set[Path] = set()
+    complete: set[Path] = set()
+
+    def rewrite(path: Path) -> None:
+        if path in complete:
+            return
+        if path in visiting:
+            raise ValueError(f"cyclic public CSS import: {path.relative_to(DIST)}")
+        visiting.add(path)
+        text = path.read_text(encoding="utf-8")
+        for match in CSS_IMPORT_PATTERN.finditer(text):
+            resolved = local_asset_target(path, match.group("value"))
+            if resolved is None:
+                continue
+            target, _fragment = resolved
+            if target.suffix.lower() == ".css":
+                if not target.is_file():
+                    raise ValueError(
+                        f"public CSS import is absent: {path.relative_to(DIST)} -> "
+                        f"{match.group('value')}"
+                    )
+                rewrite(target)
+
+        def replace(match: re.Match[str]) -> str:
+            value = versioned_value(path, match.group("value"))
+            return f"{match.group('prefix')}{value}{match.group('suffix')}"
+
+        rendered = CSS_IMPORT_PATTERN.sub(replace, text)
+        if rendered != text:
+            path.write_text(rendered, encoding="utf-8")
+        visiting.remove(path)
+        complete.add(path)
+
+    for path in css_files:
+        rewrite(path)
+
+
+def rewrite_html_asset_references(static_files: list[str]) -> None:
+    for rel in static_files:
+        if not rel.endswith(".html"):
+            continue
+        path = DIST / rel
+        text = path.read_text(encoding="utf-8")
+
+        def replace(match: re.Match[str]) -> str:
+            value = versioned_value(path, match.group("value"))
+            return f"{match.group('prefix')}{value}{match.group('suffix')}"
+
+        rendered = HTML_ASSET_PATTERN.sub(replace, text)
+        if rendered != text:
+            path.write_text(rendered, encoding="utf-8")
+
+
+def verify_versioned_asset_references(static_files: list[str]) -> list[str]:
+    errors: list[str] = []
+    patterns = {
+        ".css": CSS_IMPORT_PATTERN,
+        ".html": HTML_ASSET_PATTERN,
+    }
+    for rel in static_files:
+        path = DIST / rel
+        pattern = patterns.get(path.suffix.lower())
+        if pattern is None:
+            continue
+        text = path.read_text(encoding="utf-8")
+        for match in pattern.finditer(text):
+            value = match.group("value")
+            resolved = local_asset_target(path, value)
+            if resolved is None:
+                continue
+            target, _fragment = resolved
+            if not target.is_file():
+                errors.append(f"missing versioned asset: {rel} -> {value}")
+                continue
+            expected = f"v={sha256_file(target)[:ASSET_VERSION_LENGTH]}"
+            if urlsplit(value).query != expected:
+                errors.append(
+                    f"non-deterministic asset reference: {rel} -> {value} "
+                    f"(expected ?{expected})"
+                )
+    return errors
+
+
 def build_receipt(
     data: dict[str, object], static_files: list[str], function_files: list[str]
 ) -> dict[str, object]:
@@ -190,6 +320,7 @@ def build_receipt(
         "baseline_sha": data["baseline_sha"],
         "allowlist_path": ALLOWLIST_PATH.relative_to(ROOT).as_posix(),
         "allowlist_sha256": sha256_file(ALLOWLIST_PATH),
+        "asset_reference_versioning": f"sha256-{ASSET_VERSION_LENGTH}",
         "static_file_count": len(static_rows),
         "pages_function_file_count": len(function_rows),
         "artifact_file_count": len(static_rows) + len(function_rows),
@@ -227,6 +358,10 @@ def verify_exact(
     if errors:
         return {}, errors
 
+    errors.extend(verify_versioned_asset_references(static_files))
+    if errors:
+        return {}, errors
+
     receipt = build_receipt(data, static_files, function_files)
     expected_text = render_receipt(receipt)
     if not RECEIPT_PATH.is_file():
@@ -259,6 +394,12 @@ def main() -> int:
             destination = DIST / rel
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / rel, destination)
+        try:
+            rewrite_css_imports(static_files)
+            rewrite_html_asset_references(static_files)
+        except (OSError, UnicodeError, ValueError) as exc:
+            print(f"FAIL public artifact asset versioning: {exc}")
+            return 1
         receipt = build_receipt(data, static_files, function_files)
         RECEIPT_PATH.parent.mkdir(parents=True, exist_ok=True)
         RECEIPT_PATH.write_text(render_receipt(receipt), encoding="utf-8")
