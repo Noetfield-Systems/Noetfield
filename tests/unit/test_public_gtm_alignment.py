@@ -61,7 +61,9 @@ def test_governance_page_states_copilot_positioning() -> None:
     assert "tamper-evident" in text
 
 
-def test_header_nav_intelligence_primary() -> None:
+def test_product_lane_header_retains_intelligence_navigation() -> None:
+    # This shared header remains a product-lane contract; corporate nf-corp
+    # pages use their standalone shell and are not defined by this ordering.
     text = (ROOT / "assets" / "partials" / "header.html").read_text(encoding="utf-8")
     assert 'href="/intelligence/">Intelligence</a>' in text
     assert text.index("Intelligence") < text.index("Copilot Pack")
@@ -92,7 +94,7 @@ def test_public_www_has_no_legacy_comparison_headlines() -> None:
 def test_homepage_section_count_at_most_eight() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     count = text.count("<section")
-    assert count <= 8, f"homepage has {count} sections; expected ≤8 (Intelligence 613)"
+    assert count <= 8, f"homepage has {count} sections; expected ≤8 (corporate surface)"
 
 
 def test_homepage_corporate_structure_locked() -> None:
@@ -103,7 +105,9 @@ def test_homepage_corporate_structure_locked() -> None:
         "Custom AI Motors",
         "Enterprise AI Governance",
         "SourceA",
+        "Live product surface · formal case study planned",
         "SourceB",
+        "Live commercial service · formal case study planned",
         "Investor Workflows",
     ):
         assert label in text
@@ -180,7 +184,8 @@ def test_investor_diligence_vault_page() -> None:
     assert "Shadow Governance Brief" in text
     assert "nf-vault-checklist" in text
     investors = (ROOT / "investors" / "index.html").read_text(encoding="utf-8")
-    # Investor hub is a direction gate: proof / roadmap / invest — diligence is not required on-hub.
+    # Public investor hub remains an informational company-evaluation surface;
+    # the detailed diligence vault stays on its scoped route.
     assert "/proof/" in investors or "/invest/" in investors or "/investors/diligence/" in investors
 
 

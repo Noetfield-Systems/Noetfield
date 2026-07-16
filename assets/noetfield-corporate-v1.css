@@ -275,6 +275,7 @@ body.nf-corp {
 .nf-status--demonstrated { color: var(--nf-blue); background: rgba(54, 95, 139, 0.07); }
 .nf-status--planned { color: #7e6d4c; background: rgba(126, 109, 76, 0.08); }
 .nf-status--separate { color: #76558b; background: rgba(118, 85, 139, 0.07); }
+.nf-status--live { color: var(--nf-green); background: rgba(47, 115, 83, 0.07); }
 
 .nf-system-card__group { padding: 1.2rem 0 0.4rem; }
 .nf-system-card__group p { margin-bottom: 0.65rem; color: #6b7685; font-family: "DM Mono", monospace; font-size: 0.62rem; text-transform: uppercase; }

@@ -1,7 +1,7 @@
 # PUBLIC WWW BRAND & E2E LAW (LOCKED v1)
 
 **Layer:** L0-adjacent operational law (public deploy boundary)
-**Updated:** 2026-06-26
+**Updated:** 2026-07-16
 **Owner:** Noetfield Systems Inc. (holding company · www.noetfield.com)
 **Enforcement:** `scripts/verify-static-www.sh` (offline disk) · `scripts/check_noetfield_com_e2e.py` (production smoke)
 
@@ -9,18 +9,27 @@
 
 ## 1. Purpose
 
-www.noetfield.com is the **institutional buyer surface** for Noetfield Intelligence and Enterprise Copilot governance. It must read as a **credible holding-company-grade** vendor to regulated buyers, investors, and partners — never as an internal agent repo, founder ops log, or engineering catalog.
+www.noetfield.com is the **corporate and institutional entry surface** for Noetfield Systems Inc., a Vancouver-based AI-native systems company and product studio. It must make the company, its governed AI execution systems, portfolio evidence boundaries and contact paths legible to buyers, investors, incubators and operating partners — never as an internal agent repo, founder ops log, or engineering catalog.
 
 Repo copies of internal docs **stay on disk for agents** — they are **not www**.
 
 ---
 
-## 2. Public brand posture (613 Intelligence + enterprise governance)
+## 2. Public brand posture (governed AI execution systems and product studio)
 
-| Lane | Primary CTA | Enterprise sub-lane |
-|------|-------------|---------------------|
-| **Intelligence** | Book Diagnostic Sprint · from $2,500 | — |
-| **Governance** | Apply for pilot ($2k–10k) · Copilot Governance Pack | Trust Brief · Bank Pilot · board PDF |
+Noetfield is not a single product. The corporate surface presents the following portfolio truth:
+
+| Portfolio surface | Status | Public boundary |
+|-------------------|--------|-----------------|
+| **Custom AI Motors** | **Available** | Scoped custom systems and workflow commissions can be assessed now. |
+| **Enterprise AI Governance** | **Demonstrated · client-zero** | Public internal demonstrations and evidence exist; no external enterprise deployment is claimed. |
+| **SourceA** | **Live product surface · formal case study planned** | Noetfield’s professional governed-execution product and infrastructure. No external-client proof is claimed yet. |
+| **SourceB** | **Live commercial service · formal case study planned** | SourceB.ca is a live multilingual service with an operating lead path. No customers, revenue, installations or external traction are claimed. |
+| **Investor Workflows** | **Demonstrated internally** | Evidence-oriented investment and company-evaluation workflows exist; independent external validation remains open. |
+
+TrustField is a **separate venture in formation** that Noetfield may support technically. It is not a Noetfield product or subsidiary.
+
+Diagnostic Sprint from $2,500 and Copilot pilot $2k–10k remain **legacy/product-lane references** on their appropriate product pages. They are not homepage authority and do not represent Noetfield-wide corporate pricing.
 
 **Required homepage concepts (disk + live E2E):**
 
@@ -34,7 +43,7 @@ Repo copies of internal docs **stay on disk for agents** — they are **not www*
 
 - Founder/agent ops: `founder never`, `Hub approve`, `613 GTM`, `AGENT_SELF_AUDIT`, `plan-with-no-asf`, `RESEND_API_KEY`, `docs/ops/`, `make nf-prove`, portfolio wave counts
 - Internal repo language: `OFFERINGS_LOCKED`, `W3 economic signal`, `design partner`
-- `SourceA` is allowed only as a status-labeled portfolio/case-study reference, never as a public SKU or unqualified client proof
+- `SourceA` and `SourceB` are allowed only as the status-labeled portfolio/case-study references defined above, never as public SKUs, external-client proof, or unsupported traction claims
 - Engineering surfaces linked from marketing: `/platform/factories/`, `services/governance/README`
 
 ---
@@ -88,9 +97,10 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 **Out of www E2E scope:** dedicated platform/GEL health probes for `platform.noetfield.com` and `api.noetfield.com`. The public www E2E remains focused on website behavior and leak prevention.
 
-### Copy smoke (homepage + enterprise + pilot)
+### Copy smoke (corporate homepage + enterprise + pilot)
 
-- Homepage (corporate entry): `nf-corp`, Custom AI Motors, Enterprise AI Governance, SourceA, SourceB, Investor Workflows, `/enterprise/`, `/motors/`, `/proof/`, `/investors/`
+- Homepage (corporate entry): `nf-corp`, Vancouver-based AI-native systems company and product studio, Custom AI Motors, Enterprise AI Governance, SourceA, SourceB, Investor Workflows, `/enterprise/`, `/motors/`, `/proof/`, `/investors/`
+- Portfolio statuses: `Live product surface · formal case study planned` and `Live commercial service · formal case study planned`
 - Homepage **forbidden**: `/invest/`, “Invest in Noetfield”, unsupported traction claims
 - Enterprise field: Apply for pilot, Request Trust Brief, Start sandbox
 - Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident
