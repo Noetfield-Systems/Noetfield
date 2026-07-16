@@ -41,7 +41,7 @@ make verify-site-audit # disk site-audit P0 (see NF_SITE_AUDIT_MACHINE_LOCKED_v1
 | Client institutional | Federal, bank, VC | Diligence, procurement, honest scope |
 | Developer | API / sandbox | `/start/`, `/docs/api/`, `/runtime/`, demo widget |
 
-**Banned on public www:** `W3 economic signal`, `Lane SSOT`, `nurture SSOT`, `commercial SSOT`, `SSOT: <a`, `REGISTRY.json`, `OFFERINGS_LOCKED` in body, `docs/ops/` links, invitation language. **NF-WEB-001 portfolio truth:** `SourceA` is **Live product surface · formal case study planned** and `SourceB` is **Live commercial service · formal case study planned**. Both remain status-labeled corporate portfolio references; neither is a public SKU, external-client proof or unsupported traction claim.
+**Banned on public www:** `W3 economic signal`, `Lane SSOT`, `nurture SSOT`, `commercial SSOT`, `SSOT: <a`, `REGISTRY.json`, `OFFERINGS_LOCKED` in body, `docs/ops/` links, invitation language. **NF-WEB-001 portfolio truth:** `SourceA` is **Live product surface · case study planned** and `SourceB` is **Live commercial service · case study planned**. Both remain status-labeled corporate portfolio references; neither is a public SKU, external-client proof or unsupported traction claim.
 
 **No invitation:** No “design partner”, “Become a…”, “Accepting design partners”, “You’re invited”, scarcity invites. Use **Apply for pilot**, **Start sandbox**, **Request Trust Brief** — stable program CTAs only.
 

@@ -36,7 +36,7 @@ def main() -> int:
 
     if ABOUT.is_file():
         about = ABOUT.read_text(encoding="utf-8")
-        if "SourceA" in about and "Live product surface · formal case study planned" not in about:
+        if "SourceA" in about and "Live product surface · case study planned" not in about:
             fail("public /about/ contains an unscoped SourceA reference", failures)
         for term in ("TrustField Technologies Inc.", "Intelligence home"):
             if term in about:

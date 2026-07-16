@@ -23,8 +23,8 @@ Noetfield is not a single product. The corporate surface presents the following 
 |-------------------|--------|-----------------|
 | **Custom AI Motors** | **Available** | Scoped custom systems and workflow commissions can be assessed now. |
 | **Enterprise AI Governance** | **Demonstrated · client-zero** | Public internal demonstrations and evidence exist; no external enterprise deployment is claimed. |
-| **SourceA** | **Live product surface · formal case study planned** | Noetfield’s professional governed-execution product and infrastructure. No external-client proof is claimed yet. |
-| **SourceB** | **Live commercial service · formal case study planned** | SourceB.ca is a live multilingual service with an operating lead path. No customers, revenue, installations or external traction are claimed. |
+| **SourceA** | **Live product surface · case study planned** | Noetfield’s professional governed-execution product and infrastructure. No external-client proof is claimed yet. |
+| **SourceB** | **Live commercial service · case study planned** | SourceB.ca is a live multilingual service with an operating lead path. No customers, revenue, installations or external traction are claimed. |
 | **Investor Workflows** | **Demonstrated internally** | Evidence-oriented investment and company-evaluation workflows exist; independent external validation remains open. |
 
 TrustField is a **separate venture in formation** that Noetfield may support technically. It is not a Noetfield product or subsidiary.
@@ -100,7 +100,7 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 ### Copy smoke (corporate homepage + enterprise + pilot)
 
 - Homepage (corporate entry): `nf-corp`, Vancouver-based AI-native systems company and product studio, Custom AI Motors, Enterprise AI Governance, SourceA, SourceB, Investor Workflows, `/enterprise/`, `/motors/`, `/proof/`, `/investors/`
-- Portfolio statuses: `Live product surface · formal case study planned` and `Live commercial service · formal case study planned`
+- Portfolio statuses: `Live product surface · case study planned` and `Live commercial service · case study planned`
 - Homepage **forbidden**: `/invest/`, “Invest in Noetfield”, unsupported traction claims
 - Enterprise field: Apply for pilot, Request Trust Brief, Start sandbox
 - Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident

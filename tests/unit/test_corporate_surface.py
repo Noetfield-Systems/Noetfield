@@ -62,8 +62,8 @@ def test_homepage_statuses_preserve_claim_boundaries() -> None:
     for status in (
         "Available",
         "Demonstrated · client-zero",
-        "Live product surface · formal case study planned",
-        "Live commercial service · formal case study planned",
+        "Live product surface · case study planned",
+        "Live commercial service · case study planned",
         "Not claimed",
     ):
         assert status in text
@@ -108,10 +108,10 @@ def test_three_contact_paths_are_present_on_all_corporate_pages() -> None:
 def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     for path in PAGES:
         text = read(path)
-        assert "Live product surface · formal case study planned" in text, path
+        assert "Live product surface · case study planned" in text, path
         assert "Noetfield’s professional governed-execution product and infrastructure" in text, path
         assert "No external-client proof is claimed yet" in text, path
-        assert "Live commercial service · formal case study planned" in text, path
+        assert "Live commercial service · case study planned" in text, path
         assert "SourceB.ca is a live multilingual service with an operating lead path" in text, path
         assert "No customers, revenue, installations or external traction are claimed" in text, path
         assert "a formal public Noetfield case study remains planned" in text, path

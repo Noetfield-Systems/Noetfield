@@ -105,9 +105,9 @@ def test_homepage_corporate_structure_locked() -> None:
         "Custom AI Motors",
         "Enterprise AI Governance",
         "SourceA",
-        "Live product surface · formal case study planned",
+        "Live product surface · case study planned",
         "SourceB",
-        "Live commercial service · formal case study planned",
+        "Live commercial service · case study planned",
         "Investor Workflows",
     ):
         assert label in text

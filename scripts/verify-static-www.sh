@@ -44,8 +44,8 @@ check_file "protected corporate homepage" index.html \
   '<body class="nf-corp">' '<main id="main">' \
   'Governed AI systems that can act—and show their work.' \
   'Custom AI Motors' 'Enterprise AI Governance' \
-  'SourceA' 'Live product surface · formal case study planned' 'No external-client proof is claimed yet' \
-  'SourceB' 'Live commercial service · formal case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
+  'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
   'No customers, revenue, installations or external traction are claimed' 'Investor Workflows' \
   'Evidence &amp; proof' 'What Noetfield is seeking' 'Founder &amp; company' \
   'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
@@ -60,8 +60,8 @@ check_file "protected ecosystem and investor surface" investors/index.html \
   'Proof, boundaries and the next field opportunity.' \
   'not a public securities offering or solicitation' \
   'What exists—and what does not yet.' 'These labels describe evidence state, not commercial traction.' \
-  'SourceA' 'Live product surface · formal case study planned' 'No external-client proof is claimed yet' \
-  'SourceB' 'Live commercial service · formal case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
+  'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
   'No customers, revenue, installations or external traction are claimed' \
   'href="/proof/noetfield/"' 'href="/roadmap/"' 'href="/invest/"' \
   'Private materials remain access-controlled.' 'Verified parties only · sign-in required'
@@ -133,8 +133,8 @@ check_absent "recovered frontier page has no workspace conversion" frontier-syst
 
 check_file "about corporate positioning and venture boundary" about/index.html \
   'An operating company for governed AI systems.' 'Founder &amp; company' \
-  'SourceA — Live product surface · formal case study planned.' 'No external-client proof is claimed yet' \
-  'SourceB — Live commercial service · formal case study planned.' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'SourceA — Live product surface · case study planned.' 'No external-client proof is claimed yet' \
+  'SourceB — Live commercial service · case study planned.' 'SourceB.ca is a live multilingual service with an operating lead path' \
   'No customers, revenue, installations or external traction are claimed' \
   'A separate venture in formation that Noetfield may support.' \
   'TrustField is not presented as a Noetfield product or subsidiary.'
