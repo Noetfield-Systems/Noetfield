@@ -5,7 +5,8 @@ account_id = "0d0b967b77e2e5535455d39ff3dae72c"
 
 routes = [
   { pattern = "noetfield.com/*", zone_name = "noetfield.com" },
-  { pattern = "www.noetfield.com/*", zone_name = "noetfield.com" }
+  { pattern = "www.noetfield.com/*", zone_name = "noetfield.com" },
+  { pattern = "status.noetfield.com/*", zone_name = "noetfield.com" }
 ]
 
 [vars]
@@ -13,3 +14,4 @@ routes = [
 ORIGIN = "https://noetfield-www.pages.dev"
 APEX_HOST = "noetfield.com"
 CANONICAL_HOST = "www.noetfield.com"
+STATUS_HOST = "status.noetfield.com"
