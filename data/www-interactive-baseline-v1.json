@@ -1,13 +1,13 @@
 {
   "schema": "www-interactive-baseline-v1",
-  "version": "1.1.0",
-  "authority": "INCIDENT-2026-07-06-001-www-sandbox-downgrade + WWW_IMPLEMENTATION_STATUS_v1 direction gate",
-  "updated_at": "2026-07-14T01:10:00Z",
+  "version": "1.2.0",
+  "authority": "INCIDENT-2026-07-06-001-www-sandbox-downgrade + NF-WEB-001 corporate entry",
+  "updated_at": "2026-07-16T10:28:00Z",
   "live_sandbox_ssot": {
     "governance_workspace_public": "https://www.noetfield.com/workspace",
     "governance_workspace_local": "http://localhost:13080/workspace",
     "platform_evaluate": "https://platform.noetfield.com",
-    "homepage": "index.html direction gate only — interactive evaluate lives on /copilot/demo/, /start/, /workspace/",
+    "homepage": "index.html corporate entry — interactive evaluate remains on /copilot/demo/, /start/, /workspace/",
     "trial_signup": "/start/",
     "note": "Static nf-workspace-mock is orientation-only. Real client sandbox = evaluate API + trial OS + governance-console workspace via www proxy."
   },
@@ -28,12 +28,13 @@
       ]
     },
     {
-      "id": "homepage-direction-gate",
+      "id": "homepage-corporate-entry",
       "path": "index.html",
       "min_bytes": 1500,
       "required_markers": [
-        "nf-gate",
+        "nf-corp",
         "/enterprise/",
+        "/investors/",
         "/proof/"
       ]
     },

@@ -81,12 +81,12 @@ done
 echo "OK   header links demo + trial"
 
 index="$(cat index.html)"
-# Direction-gate homepage must route to Enterprise — demo/trial live under header/footer and /enterprise/.
-if ! grep -qF '/enterprise/' <<< "$index" || ! grep -qF 'nf-gate' <<< "$index"; then
-  echo "FAIL homepage must remain direction gate (/enterprise/ + nf-gate)" >&2
+# Corporate homepage must retain the approved company and portfolio entry.
+if ! grep -qF '/enterprise/' <<< "$index" || ! grep -qF 'nf-corp' <<< "$index" || ! grep -qF '/investors/' <<< "$index"; then
+  echo "FAIL homepage must retain corporate entry (/enterprise/ + /investors/ + nf-corp)" >&2
   fail=1
 else
-  echo "OK   homepage is direction gate (enterprise entry)"
+  echo "OK   homepage is corporate entry (company + portfolio)"
 fi
 if grep -qF 'nfLiveProofForm' <<< "$index"; then
   echo "FAIL homepage must not host nfLiveProofForm (interactive lives on /copilot/demo/ and /start/)" >&2

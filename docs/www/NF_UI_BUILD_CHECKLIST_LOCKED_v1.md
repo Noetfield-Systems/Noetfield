@@ -41,7 +41,7 @@ make verify-site-audit # disk site-audit P0 (see NF_SITE_AUDIT_MACHINE_LOCKED_v1
 | Client institutional | Federal, bank, VC | Diligence, procurement, honest scope |
 | Developer | API / sandbox | `/start/`, `/docs/api/`, `/runtime/`, demo widget |
 
-**Banned on public www:** `W3 economic signal`, `Lane SSOT`, `nurture SSOT`, `commercial SSOT`, `SSOT: <a`, `SourceA`, `REGISTRY.json`, `OFFERINGS_LOCKED` in body, `docs/ops/` links, invitation language.
+**Banned on public www:** `W3 economic signal`, `Lane SSOT`, `nurture SSOT`, `commercial SSOT`, `SSOT: <a`, `REGISTRY.json`, `OFFERINGS_LOCKED` in body, `docs/ops/` links, invitation language. **NF-WEB-001 exception:** `SourceA` may appear only as a clearly status-labeled corporate portfolio/case-study reference; never as a public SKU or unqualified client proof.
 
 **No invitation:** No “design partner”, “Become a…”, “Accepting design partners”, “You’re invited”, scarcity invites. Use **Apply for pilot**, **Start sandbox**, **Request Trust Brief** — stable program CTAs only.
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Audit public HTML for GTM lock + direction-gate homepage law.
+"""Audit public HTML for GTM lock + corporate homepage law.
 
 SSOT: docs/www/WWW_IMPLEMENTATION_STATUS_v1.md
-- `/` (index.html) is a direction gate only — nf-gate shell, not institutional marketing CTAs.
+- `/` (index.html) is the corporate entry surface for company, portfolio and proof.
 - Tier institutional pages keep shell + pilot CTA requirements.
 """
 
@@ -32,13 +32,18 @@ REQUIRED_TIER_BY_PAGE = {
     "governance/index.html": ("Apply for pilot", "governance"),
 }
 
-# Direction-gate homepage requirements (founder-locked).
-GATE_HOME_REQUIRED = (
-    "nf-gate",
-    "noetfield-gate-v1.css",
+# Corporate homepage requirements (NF-WEB-001).
+CORPORATE_HOME_REQUIRED = (
+    "nf-corp",
+    "noetfield-corporate-v1.css",
     'name="viewport"',
     "/enterprise/",
+    "/motors/",
+    "/investors/",
     "/proof/",
+    "Custom AI Motors",
+    "Investor Workflows",
+    "What Noetfield is seeking",
 )
 
 REQUIRED_SHELL_PARTIALS = (
@@ -72,18 +77,17 @@ def main() -> int:
         errors.append("missing tier page: index.html")
     else:
         ht = home.read_text(encoding="utf-8", errors="replace")
-        for req in GATE_HOME_REQUIRED:
+        for req in CORPORATE_HOME_REQUIRED:
             if req not in ht:
-                errors.append(f"index.html: missing direction-gate marker {req!r}")
+                errors.append(f"index.html: missing corporate marker {req!r}")
         for phrase in FORBIDDEN_HOME:
             if phrase in ht:
                 errors.append(f"index.html contains forbidden: {phrase}")
         for bad in ("Golden Edge", "GCIP", "pre-execution", "audit ledger"):
             if bad in ht:
                 errors.append(f"index.html contains internal term: {bad}")
-        # Gate homepage must NOT be forced back into marketing CTA shell.
-        if "nfHeader" in ht and "nf-gate" not in ht:
-            errors.append("index.html: unexpected institutional shell without nf-gate")
+        if "nf-gate__directions" in ht:
+            errors.append("index.html: stale recovery direction-gate structure")
 
     for path in TIER_PAGES:
         if not path.is_file():
@@ -139,7 +143,7 @@ def main() -> int:
 
     if errors:
         return 1
-    print("public site health: OK (direction gate + institutional tier pages)")
+    print("public site health: OK (corporate entry + institutional tier pages)")
     return 0
 
 

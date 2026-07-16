@@ -22,18 +22,19 @@ Repo copies of internal docs **stay on disk for agents** — they are **not www*
 | **Intelligence** | Book Diagnostic Sprint · from $2,500 | — |
 | **Governance** | Apply for pilot ($2k–10k) · Copilot Governance Pack | Trust Brief · Bank Pilot · board PDF |
 
-**Required homepage phrases (disk + live E2E):**
+**Required homepage concepts (disk + live E2E):**
 
-- Board-grade trust
-- tamper-evident decision records
-- Apply for pilot ($2k–10k)
-- Copilot Governance Pack · Trust Brief · Bank Pilot
-- Commercial path · Diagnostic Sprint · 01 · Diagnose → 04 · Govern
+- Vancouver-based AI-native systems company and product studio
+- governed AI execution: act, verify, escalate, recover and produce evidence
+- Custom AI Motors · Enterprise AI Governance · SourceA · SourceB · Investor Workflows
+- explicit Available · Demonstrated · Planned · Not claimed boundaries
+- Incubator / ecosystem · Operating partner · Pilot / client contact paths
 
 **Forbidden on public HTML** (buyer-visible pages):
 
 - Founder/agent ops: `founder never`, `Hub approve`, `613 GTM`, `AGENT_SELF_AUDIT`, `plan-with-no-asf`, `RESEND_API_KEY`, `docs/ops/`, `make nf-prove`, portfolio wave counts
-- Internal repo language: `OFFERINGS_LOCKED`, `SourceA`, `W3 economic signal`, `design partner`
+- Internal repo language: `OFFERINGS_LOCKED`, `W3 economic signal`, `design partner`
+- `SourceA` is allowed only as a status-labeled portfolio/case-study reference, never as a public SKU or unqualified client proof
 - Engineering surfaces linked from marketing: `/platform/factories/`, `services/governance/README`
 
 ---
@@ -89,8 +90,8 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 ### Copy smoke (homepage + enterprise + pilot)
 
-- Homepage (direction gate): `nf-gate`, Enterprise, Motor, `/enterprise/`, `/motors/`, `/proof/`
-- Homepage **forbidden**: `/investors/`, `/invest/`, “Investor”, “Invest in Noetfield”
+- Homepage (corporate entry): `nf-corp`, Custom AI Motors, Enterprise AI Governance, SourceA, SourceB, Investor Workflows, `/enterprise/`, `/motors/`, `/proof/`, `/investors/`
+- Homepage **forbidden**: `/invest/`, “Invest in Noetfield”, unsupported traction claims
 - Enterprise field: Apply for pilot, Request Trust Brief, Start sandbox
 - Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident
 - Interactive demo/trial: remain on `/copilot/demo/` and `/copilot/trial/` (not required on `/`)

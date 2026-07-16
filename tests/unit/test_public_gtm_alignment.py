@@ -33,22 +33,23 @@ def test_homepage_has_no_prohibited_payment_language() -> None:
         assert phrase not in text, f"index.html still contains: {phrase}"
 
 
-def test_homepage_is_direction_gate() -> None:
-    """`/` is a direction gate only — CTAs live under /enterprise/, not on home."""
+def test_homepage_is_corporate_entry_surface() -> None:
+    """`/` explains the company, portfolio, proof state and contact paths."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     lower = text.lower()
-    assert "nf-gate" in text
-    assert "noetfield-gate-v1.css" in text
+    assert 'class="nf-corp"' in text
+    assert "noetfield-corporate-v1.css" in text
     assert "/enterprise/" in text
     assert "/motors/" in text
     assert "/about/" in text
     assert "/proof/" in text
-    assert "/investors/" not in text
+    assert "/investors/" in text
     assert "/invest/" not in text
-    assert "investor" not in lower
+    assert "investor workflows" in lower
     assert "invest in noetfield" not in lower
-    assert "apply for pilot" not in lower
-    assert "request trust brief" not in lower
+    assert "pilot / client" in lower
+    assert "incubator / ecosystem" in lower
+    assert "operating partner" in lower
 
 
 def test_governance_page_states_copilot_positioning() -> None:
@@ -94,15 +95,21 @@ def test_homepage_section_count_at_most_eight() -> None:
     assert count <= 8, f"homepage has {count} sections; expected ≤8 (Intelligence 613)"
 
 
-def test_homepage_gate_structure_locked() -> None:
-    """Direction gate must stay minimal — no marketing homepage regression."""
+def test_homepage_corporate_structure_locked() -> None:
+    """The company entry must retain its required institutional structure."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
-    assert 'class="nf-gate"' in text or "class=\"nf-gate\"" in text
-    assert "nf-gate__directions" in text
-    assert "Enterprise" in text
-    assert "Motor" in text
-    assert "Investor" not in text
-    assert "/investors/" not in text
+    assert 'class="nf-corp"' in text
+    for label in (
+        "Custom AI Motors",
+        "Enterprise AI Governance",
+        "SourceA",
+        "SourceB",
+        "Investor Workflows",
+    ):
+        assert label in text
+    assert "What Noetfield is seeking" in text
+    assert "Founder &amp; company" in text
+    assert "/investors/" in text
     assert "/invest/" not in text
     assert "nfLiveProofHero" not in text
     assert "nfScenarioDeck" not in text
@@ -335,8 +342,9 @@ def test_tier_pages_have_shell_and_cta() -> None:
         text = (ROOT / rel).read_text(encoding="utf-8")
         assert 'name="viewport"' in text, rel
         if rel == "index.html":
-            assert "nf-gate" in text, rel
+            assert "nf-corp" in text, rel
             assert "/enterprise/" in text, rel
+            assert "/investors/" in text, rel
             continue
         # Institutional pages: shell OR nf-gate migration.
         assert "nfHeader" in text or "nf-gate" in text, rel
