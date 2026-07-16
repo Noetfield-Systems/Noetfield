@@ -1,4 +1,4 @@
-/** POST /api/auth/invest-sign-out — clear nf_invest_auth cookie. */
+/** POST /api/auth/invest-sign-out — clear protected investor bearer cookie. */
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -9,7 +9,7 @@ module.exports = async function handler(req, res) {
 
   res.setHeader(
     "Set-Cookie",
-    "nf_invest_auth=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
+    "nf_invest_token=; Path=/invest; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
   );
   return res.status(200).json({ ok: true });
 };

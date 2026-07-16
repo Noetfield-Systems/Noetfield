@@ -1,4 +1,4 @@
-/** POST /api/auth/invest-session — verify Supabase token, set nf_invest_auth cookie. */
+/** POST /api/auth/invest-session — verify Supabase token, set protected bearer cookie. */
 
 const SUPABASE_URL = "https://ldfruywifqnfpwsfgmdl.supabase.co";
 const SUPABASE_ANON_KEY =
@@ -29,7 +29,7 @@ module.exports = async function handler(req, res) {
 
   res.setHeader(
     "Set-Cookie",
-    "nf_invest_auth=1; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800"
+    `nf_invest_token=${encodeURIComponent(token)}; Path=/invest; HttpOnly; Secure; SameSite=Lax; Max-Age=3600`
   );
   return res.status(200).json({ ok: true });
 };

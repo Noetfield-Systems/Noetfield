@@ -106,7 +106,7 @@ domain after explicit approval. This recovery PR does not change indexing.
 - `python3 scripts/check_repo_policy.py`: PASS.
 - `git diff --check`: PASS.
 - `make verify-static-www`: PASS in a clean checkout-equivalent. It now asserts the selected homepage, Investors, Proof, and Enterprise contracts precisely; superseded v42 homepage and Investor expectations remain in `tests/fixtures/www/historical-v42-protected-surface-expectations.json`.
-- `node scripts/test-invest-access-control.mjs`: PASS. Unauthenticated and lookalike-cookie requests redirect to sign-in, authorized reads are `private, no-store`, and non-read methods return `405`.
+- `node scripts/test-invest-access-control.mjs`: PASS. Unauthenticated, legacy-boolean, and forged-token requests redirect to sign-in; the session endpoint verifies the Supabase token before issuing an HttpOnly bearer cookie; the protected route reverifies that token on every read; authorized responses are `private, no-store`; and non-read methods return `405`.
 - `node scripts/verify-www-deny-middleware.mjs`: PASS (`157/157`). Machine-readable results are in `reports/recovery/NF-REL-002-denylist-matrix.json`.
 - Local Wrangler Pages runtime: PASS for all `157` security-matrix rows; required public routes and favicon returned `200` with query-stable hashes, while `/invest/?nf_rel_002=runtime` returned the expected sign-in `302`.
 
@@ -115,7 +115,7 @@ domain after explicit approval. This recovery PR does not change indexing.
 ### Public conversion paths
 
 - Motors: recovered copy remains, but all four public cards route to `/contact/` or a scoped `/contact/?topic=...` enquiry. No Motor card links directly to `/workspace/onboarding`, `/workspace/cognitive-dashboard`, or `/workspace/workspace`.
-- Invest: `/invest/` remains behind `functions/invest/[[path]].js`; the static page is `noindex,nofollow`, hidden until authentication, and served only after the Pages Function sees the authenticated HttpOnly session cookie. The public `/investor-workflows/` link is labeled as product information rather than a discussion of the private round.
+- Invest: `/invest/` remains behind `functions/invest/[[path]].js`; the static page is `noindex,nofollow`, hidden until authentication, and served only after the Pages Function successfully reverifies the Supabase bearer token held in its short-lived HttpOnly cookie. The former unsigned boolean cookie is rejected. The public `/investor-workflows/` link is labeled as product information rather than a discussion of the private round.
 - About: recovered corporate-positioning copy is visibly labeled `Provisional corporate positioning` and pending NF-WEB-001 review. It was not expanded further.
 
 ### Denylist migration

@@ -96,8 +96,13 @@ check_file "private invest route contract" invest/index.html \
   'Investor workflow product' 'Public information about evidence-based diligence workflows.' \
   '/assets/noetfield-invest-auth-v1.js?v=2'
 check_file "private invest Pages access control" 'functions/invest/[[path]].js' \
-  'nf_invest_auth=1' 'return redirectSignIn(request);' \
+  'nf_invest_token' 'verifyAccessToken(token, env)' 'return redirectSignIn(request);' \
   'headers.set("Cache-Control", "private, no-store")'
+check_file "private invest session issuance" api/auth/invest-session.js \
+  'verifyAccessToken(token)' 'nf_invest_token=${encodeURIComponent(token)}' \
+  'Path=/invest; HttpOnly; Secure; SameSite=Lax; Max-Age=3600'
+check_absent "private invest has no unsigned boolean bypass" 'functions/invest/[[path]].js' \
+  'nf_invest_auth=1'
 check_absent "public investor workflow is informational, not an offering" investor-workflows/index.html \
   'public securities offering' 'buy shares' 'purchase equity' 'subscribe for shares'
 
