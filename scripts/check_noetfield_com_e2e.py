@@ -18,22 +18,30 @@ ROUTE_INVENTORY = ROOT / "governance" / "ROUTE_INVENTORY.json"
 
 API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 
-# Direction-gate homepage (WWW_IMPLEMENTATION_STATUS_v1) — CTAs live under /enterprise/.
+# Corporate entry homepage — product CTAs remain on their scoped field pages.
 HOME_NEEDLES = (
-    "nf-gate",
-    "Enterprise",
-    "Motor",
+    "nf-corp",
+    "Custom AI Motors",
+    "Enterprise AI Governance",
+    "SourceA",
+    "Live product surface · formal case study planned",
+    "No external-client proof is claimed yet",
+    "SourceB",
+    "Live commercial service · formal case study planned",
+    "SourceB.ca is a live multilingual service with an operating lead path",
+    "No customers, revenue, installations or external traction are claimed",
+    "Investor Workflows",
     "/enterprise/",
     "/motors/",
     "/proof/",
+    "/investors/",
 )
 
-# Explicitly forbidden on public homepage (invest-in-Noetfield leak).
+# Explicitly forbidden on the public corporate homepage.
 HOME_FORBIDDEN = (
-    "/investors/",
     "/invest/",
     "Invest in Noetfield",
-    "Investor",
+    "nfInvestorForm",
 )
 
 # Institutional CTAs must remain reachable from the enterprise field, not `/`.

@@ -13,7 +13,7 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 # NF WWW Language Layers — LOCKED v1
 
 **Scope:** Public www (`www.noetfield.com`) and generated marketing HTML.  
-**Strategy:** Client-facing first. Internal factory (ASF, W3, portfolio, SourceA) stays in repo/docs/ops — shown only as **sample, sandbox, demo**.
+**Strategy:** Client-facing first. Internal factory (ASF, W3 and operating internals) stays in repo/docs/ops. NF-WEB-001 permits the status-labeled portfolio references **SourceA — Live product surface · formal case study planned** and **SourceB — Live commercial service · formal case study planned** on the corporate surface, never internal process exposition or unsupported traction claims.
 
 **Mandatory UI gate:** [NF_UI_BUILD_CHECKLIST_LOCKED_v1.md](./NF_UI_BUILD_CHECKLIST_LOCKED_v1.md) — `make nf-ui-checklist` before any www/form/app UI ship.
 
@@ -30,7 +30,8 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 - `W3 economic signal` → use **What success looks like**
 - `Lane SSOT`, `commercial SSOT`, `nurture SSOT`, `SSOT:` doc links in sticky CTAs
-- `SourceA`, `REGISTRY.json`, `OFFERINGS_LOCKED` in page body
+- `SourceA` as a public SKU, unqualified client proof or internal process label; a status-labeled corporate portfolio/case-study reference is allowed
+- `REGISTRY.json`, `OFFERINGS_LOCKED` in page body
 - `docs/ops/` links on status, homepage, intake
 - `(founder)` in form options
 - **Invitation copy** — design partner, Become a…, Accepting design partners, You're invited

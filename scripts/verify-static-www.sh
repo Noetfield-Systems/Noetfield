@@ -36,29 +36,37 @@ check_absent() {
   [[ "$present" -eq 0 ]] && ok "$label" || bad "$label"
 }
 
-# NF-REL-002 protected surfaces. The superseded v42 marketing-home and investor
-# form expectations remain available as a historical fixture; they are not the
-# canonical direction-gate contract selected from e83aff92764c916362767f1dcb616bc3ece9535f.
-check_file "protected homepage direction gate" index.html \
-  '<title>Noetfield Systems</title>' \
+# NF-WEB-001 protected corporate surfaces. The NF-REL-002 recovery gate and
+# superseded v42 marketing expectations remain history, not the active contract.
+check_file "protected corporate homepage" index.html \
+  '<title>Noetfield Systems — Governed AI Execution</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
-  '<body class="nf-gate">' '<main id="main" class="nf-gate__main">' \
-  '<h1 class="nf-gate__title">Noetfield <em>Systems</em></h1>' \
-  '<nav class="nf-gate__directions" aria-label="Main directions">' \
+  '<body class="nf-corp">' '<main id="main">' \
+  'Governed AI systems that can act—and show their work.' \
+  'Custom AI Motors' 'Enterprise AI Governance' \
+  'SourceA' 'Live product surface · formal case study planned' 'No external-client proof is claimed yet' \
+  'SourceB' 'Live commercial service · formal case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'No customers, revenue, installations or external traction are claimed' 'Investor Workflows' \
+  'Evidence &amp; proof' 'What Noetfield is seeking' 'Founder &amp; company' \
+  'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
   'href="/enterprise/"' 'href="/motors/"' 'href="/about/"' 'href="/proof/"' \
-  '/assets/noetfield-gate-v1.css?v=1'
-check_absent "protected homepage stays conversion-neutral" index.html \
-  'nfLiveProofHero' 'nfInvestorForm' 'Apply for pilot' '/investors/' '/invest/'
+  'href="/investors/"' '/assets/noetfield-corporate-v1.css?v=1'
+check_absent "protected homepage has no private or unsupported conversion" index.html \
+  'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield'
 
-check_file "protected investors direction gate" investors/index.html \
-  '<title>Investor — Noetfield Systems</title>' \
+check_file "protected ecosystem and investor surface" investors/index.html \
+  '<title>Ecosystem &amp; Investors — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
-  '<h1>Proof before pitch</h1>' \
-  'Evaluate Noetfield Systems Inc. — what is proven, what is open, and what comes next.' \
-  'aria-label="Investor paths"' 'href="/proof/noetfield/"' 'href="/roadmap/"' \
-  'href="/invest/"' 'Private round materials — sign in required.'
+  'Proof, boundaries and the next field opportunity.' \
+  'not a public securities offering or solicitation' \
+  'What exists—and what does not yet.' 'These labels describe evidence state, not commercial traction.' \
+  'SourceA' 'Live product surface · formal case study planned' 'No external-client proof is claimed yet' \
+  'SourceB' 'Live commercial service · formal case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'No customers, revenue, installations or external traction are claimed' \
+  'href="/proof/noetfield/"' 'href="/roadmap/"' 'href="/invest/"' \
+  'Private materials remain access-controlled.' 'Verified parties only · sign-in required'
 check_absent "protected investors hub has no embedded intake" investors/index.html \
-  'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js'
+  'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'href="/workspace/'
 
 check_file "protected proof truth boundaries" proof/index.html \
   '<title>Proof — Noetfield Systems</title>' \
@@ -123,8 +131,13 @@ check_file "frontier prototype uses scoped enquiry" frontier-systems/index.html 
 check_absent "recovered frontier page has no workspace conversion" frontier-systems/index.html \
   'href="/workspace/'
 
-check_file "about positioning is provisional" about/index.html \
-  'Provisional corporate positioning.' 'Recovered source pending NF-WEB-001 review.'
+check_file "about corporate positioning and venture boundary" about/index.html \
+  'An operating company for governed AI systems.' 'Founder &amp; company' \
+  'SourceA — Live product surface · formal case study planned.' 'No external-client proof is claimed yet' \
+  'SourceB — Live commercial service · formal case study planned.' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'No customers, revenue, installations or external traction are claimed' \
+  'A separate venture in formation that Noetfield may support.' \
+  'TrustField is not presented as a Noetfield product or subsidiary.'
 
 # Homepage IA compression — ≤8 top-level sections (U5 v17)
 section_count="$(grep -c '<section' index.html || true)"

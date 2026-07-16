@@ -33,22 +33,23 @@ def test_homepage_has_no_prohibited_payment_language() -> None:
         assert phrase not in text, f"index.html still contains: {phrase}"
 
 
-def test_homepage_is_direction_gate() -> None:
-    """`/` is a direction gate only — CTAs live under /enterprise/, not on home."""
+def test_homepage_is_corporate_entry_surface() -> None:
+    """`/` explains the company, portfolio, proof state and contact paths."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     lower = text.lower()
-    assert "nf-gate" in text
-    assert "noetfield-gate-v1.css" in text
+    assert 'class="nf-corp"' in text
+    assert "noetfield-corporate-v1.css" in text
     assert "/enterprise/" in text
     assert "/motors/" in text
     assert "/about/" in text
     assert "/proof/" in text
-    assert "/investors/" not in text
+    assert "/investors/" in text
     assert "/invest/" not in text
-    assert "investor" not in lower
+    assert "investor workflows" in lower
     assert "invest in noetfield" not in lower
-    assert "apply for pilot" not in lower
-    assert "request trust brief" not in lower
+    assert "pilot / client" in lower
+    assert "incubator / ecosystem" in lower
+    assert "operating partner" in lower
 
 
 def test_governance_page_states_copilot_positioning() -> None:
@@ -60,7 +61,9 @@ def test_governance_page_states_copilot_positioning() -> None:
     assert "tamper-evident" in text
 
 
-def test_header_nav_intelligence_primary() -> None:
+def test_product_lane_header_retains_intelligence_navigation() -> None:
+    # This shared header remains a product-lane contract; corporate nf-corp
+    # pages use their standalone shell and are not defined by this ordering.
     text = (ROOT / "assets" / "partials" / "header.html").read_text(encoding="utf-8")
     assert 'href="/intelligence/">Intelligence</a>' in text
     assert text.index("Intelligence") < text.index("Copilot Pack")
@@ -91,18 +94,26 @@ def test_public_www_has_no_legacy_comparison_headlines() -> None:
 def test_homepage_section_count_at_most_eight() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     count = text.count("<section")
-    assert count <= 8, f"homepage has {count} sections; expected ≤8 (Intelligence 613)"
+    assert count <= 8, f"homepage has {count} sections; expected ≤8 (corporate surface)"
 
 
-def test_homepage_gate_structure_locked() -> None:
-    """Direction gate must stay minimal — no marketing homepage regression."""
+def test_homepage_corporate_structure_locked() -> None:
+    """The company entry must retain its required institutional structure."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
-    assert 'class="nf-gate"' in text or "class=\"nf-gate\"" in text
-    assert "nf-gate__directions" in text
-    assert "Enterprise" in text
-    assert "Motor" in text
-    assert "Investor" not in text
-    assert "/investors/" not in text
+    assert 'class="nf-corp"' in text
+    for label in (
+        "Custom AI Motors",
+        "Enterprise AI Governance",
+        "SourceA",
+        "Live product surface · formal case study planned",
+        "SourceB",
+        "Live commercial service · formal case study planned",
+        "Investor Workflows",
+    ):
+        assert label in text
+    assert "What Noetfield is seeking" in text
+    assert "Founder &amp; company" in text
+    assert "/investors/" in text
     assert "/invest/" not in text
     assert "nfLiveProofHero" not in text
     assert "nfScenarioDeck" not in text
@@ -173,7 +184,8 @@ def test_investor_diligence_vault_page() -> None:
     assert "Shadow Governance Brief" in text
     assert "nf-vault-checklist" in text
     investors = (ROOT / "investors" / "index.html").read_text(encoding="utf-8")
-    # Investor hub is a direction gate: proof / roadmap / invest — diligence is not required on-hub.
+    # Public investor hub remains an informational company-evaluation surface;
+    # the detailed diligence vault stays on its scoped route.
     assert "/proof/" in investors or "/invest/" in investors or "/investors/diligence/" in investors
 
 
@@ -335,8 +347,9 @@ def test_tier_pages_have_shell_and_cta() -> None:
         text = (ROOT / rel).read_text(encoding="utf-8")
         assert 'name="viewport"' in text, rel
         if rel == "index.html":
-            assert "nf-gate" in text, rel
+            assert "nf-corp" in text, rel
             assert "/enterprise/" in text, rel
+            assert "/investors/" in text, rel
             continue
         # Institutional pages: shell OR nf-gate migration.
         assert "nfHeader" in text or "nf-gate" in text, rel

@@ -25,25 +25,32 @@ def test_homepage_has_no_gcip_bleed() -> None:
 
 def test_homepage_has_modern_shell_and_spine() -> None:
     text = HOME.read_text(encoding="utf-8")
-    # NF-REL-002 intentionally selects the direction-gate recovery baseline.
-    # The superseded v42 shell/spine contract is preserved in the historical
-    # fixture rather than asserted by the active Phase 3 suite.
+    # NF-WEB-001 replaces the recovery direction gate with the approved
+    # corporate entry surface. Recovery and v42 expectations remain historical.
     required = (
-        "<title>Noetfield Systems</title>",
+        "<title>Noetfield Systems — Governed AI Execution</title>",
         '<link rel="canonical" href="https://www.noetfield.com/" />',
-        '<body class="nf-gate">',
-        '<main id="main" class="nf-gate__main">',
-        '<h1 class="nf-gate__title">Noetfield <em>Systems</em></h1>',
-        '<nav class="nf-gate__directions" aria-label="Main directions">',
+        '<body class="nf-corp">',
+        '<main id="main">',
+        "Governed AI systems that can act—and show their work.",
+        'id="capabilities"',
+        "Custom AI Motors",
+        "Enterprise AI Governance",
+        "SourceA",
+        "Live product surface · formal case study planned",
+        "SourceB",
+        "Live commercial service · formal case study planned",
+        "Investor Workflows",
         'href="/enterprise/"',
         'href="/motors/"',
         'href="/about/"',
         'href="/proof/"',
-        "/assets/noetfield-gate-v1.css?v=1",
+        'href="/investors/"',
+        "/assets/noetfield-corporate-v1.css?v=1",
     )
     for contract in required:
         assert contract in text
-    for superseded in ('id="nfHeader"', 'id="nfFooter"', "nf26-hero", "nfInvestorForm"):
+    for superseded in ('nf-gate__directions', 'id="nfHeader"', "nf26-hero", "nfInvestorForm"):
         assert superseded not in text
 
 
