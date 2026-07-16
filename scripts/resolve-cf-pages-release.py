@@ -59,6 +59,8 @@ def rows(document: Any) -> list[dict[str, Any]]:
     value = document
     if isinstance(document, dict):
         value = document.get("result", document.get("deployments", document.get("projects")))
+    if isinstance(value, dict):
+        return [value]
     if not isinstance(value, list):
         raise ValueError("Wrangler JSON is not a list")
     return [row for row in value if isinstance(row, dict)]
@@ -85,7 +87,15 @@ def validate_project(document: Any, *, project_name: str, expected_branch: str) 
         (
             row
             for row in rows(document)
-            if text(nested(row, ("name",), ("project_name",), ("projectName",)))
+            if text(
+                nested(
+                    row,
+                    ("name",),
+                    ("project_name",),
+                    ("projectName",),
+                    ("Project Name",),
+                )
+            )
             == project_name
         ),
         None,

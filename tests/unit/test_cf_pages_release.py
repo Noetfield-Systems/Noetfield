@@ -32,6 +32,21 @@ def test_project_requires_the_expected_production_branch() -> None:
     )
 
 
+def test_project_accepts_authoritative_api_object() -> None:
+    document = {
+        "success": True,
+        "result": {"name": "noetfield-www", "production_branch": "main"},
+    }
+    assert (
+        MODULE.validate_project(
+            document,
+            project_name="noetfield-www",
+            expected_branch="main",
+        )
+        == "main"
+    )
+
+
 @pytest.mark.parametrize(
     "document",
     [

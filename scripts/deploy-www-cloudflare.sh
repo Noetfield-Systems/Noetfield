@@ -10,6 +10,7 @@ BRANCH="${CF_PAGES_BRANCH:-main}"
 CANONICAL="${NF_WWW_CANONICAL_URL:-https://www.noetfield.com}"
 VAULT="${NF_SECRETS_VAULT:-$HOME/.sina/secrets.env}"
 ZONE="${CF_NOETFIELD_ZONE_ID:-456aeba6b1a37d1fadbf6443cb929468}"
+ACCOUNT="${CLOUDFLARE_ACCOUNT_ID:-0d0b967b77e2e5535455d39ff3dae72c}"
 PAGES_ALIAS="https://${PROJECT}.pages.dev"
 WRANGLER_VERSION="${CF_WRANGLER_VERSION:-4.103.0}"
 WRANGLER=(npx --yes "wrangler@${WRANGLER_VERSION}")
@@ -28,6 +29,33 @@ read_vault() {
   local key="$1"
   if [[ ! -f "$VAULT" ]]; then return 1; fi
   grep -E "^${key}=" "$VAULT" | tail -1 | cut -d= -f2- | tr -d '\r\n' | sed -e 's/^"//' -e 's/"$//' || true
+}
+
+provider_token() {
+  local token
+  token="${CLOUDFLARE_API_TOKEN:-}"
+  if [[ -n "$token" ]]; then
+    printf '%s' "$token"
+    return 0
+  fi
+  if token="$("${WRANGLER[@]}" auth token --json 2>/dev/null | python3 -c '
+import json, sys
+value = json.load(sys.stdin).get("token", "")
+if not value:
+    raise SystemExit(1)
+print(value, end="")
+')"; then
+    printf '%s' "$token"
+    return 0
+  fi
+  read_vault CF_NOETFIELD_API_TOKEN || read_vault CF_API_TOKEN
+}
+
+cloudflare_api_get() {
+  local path="$1"
+  curl -sS --fail-with-body \
+    -H "Authorization: Bearer ${CF_PROVIDER_TOKEN}" \
+    "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT}/${path}"
 }
 
 assert_clean_release_source() {
@@ -54,31 +82,18 @@ sync_pages_secrets() {
 }
 
 ensure_project() {
-  local projects branch status
-  projects="$("${WRANGLER[@]}" pages project list --json)"
-  if branch="$(printf '%s' "$projects" | python3 scripts/resolve-cf-pages-release.py project \
-      --project-name "$PROJECT" --expected-branch "$BRANCH")"; then
-    log "project exists: ${PROJECT} (production branch=${branch})"
-    return 0
-  else
-    status=$?
-  fi
-  if [[ "$status" -ne 4 ]]; then
-    return "$status"
-  fi
-  log "creating Pages project ${PROJECT} (production branch=${BRANCH})"
-  "${WRANGLER[@]}" pages project create "$PROJECT" --production-branch "$BRANCH" --compatibility-flags nodejs_compat
-  projects="$("${WRANGLER[@]}" pages project list --json)"
-  printf '%s' "$projects" | python3 scripts/resolve-cf-pages-release.py project \
-    --project-name "$PROJECT" --expected-branch "$BRANCH" >/dev/null
+  local project branch
+  project="$(cloudflare_api_get "pages/projects/${PROJECT}")"
+  branch="$(printf '%s' "$project" | python3 scripts/resolve-cf-pages-release.py project \
+    --project-name "$PROJECT" --expected-branch "$BRANCH")"
+  log "canonical project confirmed: ${PROJECT} (production branch=${branch})"
 }
 
 resolve_deployment() {
   local expected_sha="$1"
   local attempt deployments row
   for attempt in $(seq 1 12); do
-    deployments="$("${WRANGLER[@]}" pages deployment list \
-      --project-name "$PROJECT" --environment production --json)"
+    deployments="$(cloudflare_api_get "pages/projects/${PROJECT}/deployments?env=production")"
     if row="$(printf '%s' "$deployments" | python3 scripts/resolve-cf-pages-release.py deployment \
         --project-name "$PROJECT" --expected-branch "$BRANCH" \
         --expected-sha "$expected_sha")"; then
@@ -201,16 +216,15 @@ PY
 }
 
 purge_public_host_cache() {
-  local token response
-  token="${CLOUDFLARE_API_TOKEN:-$(read_vault CF_NOETFIELD_API_TOKEN || read_vault CF_API_TOKEN || true)}"
-  if [[ -z "$token" ]]; then
+  local response
+  if [[ -z "$CF_PROVIDER_TOKEN" ]]; then
     log "FAIL: cache purge requested but no Cloudflare API token is available"
     return 1
   fi
   log "purging scoped host cache: noetfield.com, www.noetfield.com"
   response="$(curl -sS --fail-with-body -X POST \
-    "https://api.cloudflare.com/client/v4/zones/${ZONE}/purge_cache" \
-    -H "Authorization: Bearer ${token}" \
+      "https://api.cloudflare.com/client/v4/zones/${ZONE}/purge_cache" \
+      -H "Authorization: Bearer ${CF_PROVIDER_TOKEN}" \
     -H "Content-Type: application/json" \
     --data '{"hosts":["noetfield.com","www.noetfield.com"]}')"
   PURGE_RESPONSE="$response"
@@ -307,6 +321,12 @@ PY
 EXPECTED_SHA="$(git rev-parse HEAD)"
 if [[ ! "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
   log "FAIL: git HEAD is not a full release SHA"
+  exit 2
+fi
+
+CF_PROVIDER_TOKEN="$(provider_token)"
+if [[ -z "$CF_PROVIDER_TOKEN" ]]; then
+  log "FAIL: Cloudflare provider credential is unavailable"
   exit 2
 fi
 
