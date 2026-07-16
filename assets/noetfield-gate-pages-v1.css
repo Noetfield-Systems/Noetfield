@@ -12,6 +12,69 @@ body.nf-gate.nf-gate--vc .nf-gate__main {
   padding: clamp(1.25rem, 4vh, 2rem) 0 clamp(3rem, 7vh, 4.5rem);
 }
 
+.nf-vc-site-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.7rem, 2vw, 1.2rem);
+  margin-left: auto;
+}
+
+.nf-vc-site-nav a,
+.nf-vc-footer a {
+  color: rgba(236, 234, 228, 0.55);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.nf-vc-site-nav a:hover,
+.nf-vc-site-nav a:focus-visible,
+.nf-vc-site-nav a[aria-current="page"],
+.nf-vc-footer a:hover,
+.nf-vc-footer a:focus-visible {
+  color: #c9a962;
+  outline: none;
+}
+
+.nf-vc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+}
+
+.nf-vc-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+}
+
+@media (max-width: 720px) {
+  body.nf-gate.nf-gate--vc .nf-gate__top {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .nf-vc-site-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    overflow-x: auto;
+    padding-bottom: 0.35rem;
+  }
+
+  .nf-vc-site-nav a {
+    white-space: nowrap;
+  }
+
+  .nf-vc-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 @keyframes nf-vc-rise {
   from {
     opacity: 0;

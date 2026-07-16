@@ -10,8 +10,10 @@ routes = [
 ]
 
 [vars]
-# Cloudflare Pages origin — never www.noetfield.com (would loop if CF route is active).
-ORIGIN = "https://noetfield-www.pages.dev"
+# Production deploys override both values with an immutable Pages deployment URL
+# and its exact git SHA. These fail-closed defaults must never serve public HTML.
+ORIGIN = "https://release-required.invalid"
+RELEASE_SHA = "UNSET"
 APEX_HOST = "noetfield.com"
 CANONICAL_HOST = "www.noetfield.com"
 STATUS_HOST = "status.noetfield.com"

@@ -1,11 +1,17 @@
 """NF-WEB-001 corporate entry surface contracts."""
 
 from pathlib import Path
+import json
 import re
 
 
 ROOT = Path(__file__).resolve().parents[2]
 PAGES = (ROOT / "index.html", ROOT / "about" / "index.html", ROOT / "investors" / "index.html")
+BRIDGE_PAGES = (
+    ROOT / "proof" / "index.html",
+    ROOT / "motors" / "index.html",
+    ROOT / "investor-workflows" / "index.html",
+)
 
 
 def read(path: Path) -> str:
@@ -113,3 +119,28 @@ def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     home = read(ROOT / "index.html")
     assert "Separate system · case study planned" not in home
     assert ">Planned</span></div>\n      <h3>SourceB</h3>" not in home
+
+
+def test_public_bridge_pages_have_coherent_navigation_and_footer() -> None:
+    for path in BRIDGE_PAGES:
+        text = read(path)
+        assert 'class="nf-vc-site-nav"' in text, path
+        assert 'class="nf-gate__foot nf-vc-footer"' in text, path
+        for href in ("/about/", "/proof/", "/motors/", "/investors/", "/contact/"):
+            assert href in text, f"{path}: {href}"
+
+
+def test_every_public_contact_topic_has_a_select_option() -> None:
+    contact = read(ROOT / "contact" / "index.html")
+    configured = set(re.findall(r'<option value="([^"#]+)"', contact))
+    artifact = json.loads(read(ROOT / "governance" / "www-public-artifact-v1.json"))
+    referenced: set[str] = set()
+    for rel in artifact["static_files"]:
+        if not rel.endswith(".html"):
+            continue
+        referenced.update(
+            topic.split("#", 1)[0]
+            for topic in re.findall(r'href="/contact/\?topic=([^"&]+)', read(ROOT / rel))
+        )
+    assert referenced <= configured, f"missing contact topics: {sorted(referenced - configured)}"
+    assert "YOUR_FORMSPREE_ID" not in contact
