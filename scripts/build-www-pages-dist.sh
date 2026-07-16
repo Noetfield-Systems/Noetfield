@@ -5,7 +5,6 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 DIST="${ROOT}/www-pages-dist"
-EXCLUDE="${ROOT}/www-pages-deploy.exclude"
 
 log() { printf '[build-www-pages-dist] %s\n' "$*"; }
 
@@ -13,36 +12,16 @@ log "sync greeting SSOT…"
 python3 scripts/sync_chat_greeting_asset.py
 python3 scripts/generate-cf-redirects.py
 python3 scripts/generate-www-deny-middleware.py
+node scripts/bundle-pages-functions.mjs
 
 log "clean ${DIST}"
-rm -rf "$DIST"
-mkdir -p "$DIST"
-
-log "copy static files (respecting www-pages-deploy.exclude)…"
-if command -v rsync >/dev/null 2>&1; then
-  rsync -a \
-    --exclude-from="${EXCLUDE}" \
-    --exclude 'www-pages-dist/' \
-    --exclude '.vscode/' \
-    --exclude '.git/' \
-    --exclude '.venv/' \
-    --exclude 'venv/' \
-    --exclude 'node_modules/' \
-    --exclude 'package-lock.json' \
-    --exclude 'package.json' \
-    --exclude '__pycache__/' \
-    --exclude 'api/' \
-    --exclude 'functions/' \
-    --exclude 'wrangler.toml' \
-    "${ROOT}/" "${DIST}/"
-else
-  log "FAIL: rsync required"
+if [[ "$DIST" != "${ROOT}/www-pages-dist" || "$ROOT" == "/" ]]; then
+  log "FAIL: unsafe artifact path ${DIST}"
   exit 1
 fi
+rm -rf -- "$DIST"
+mkdir -p "$DIST"
 
-cp "${ROOT}/_redirects" "${DIST}/_redirects"
-python3 scripts/purge-www-denylist-from-dist.py
-node scripts/bundle-pages-functions.mjs
-chmod +x scripts/verify-www-pages-dist.sh
-bash scripts/verify-www-pages-dist.sh
-log "done — ${DIST} ($(find "$DIST" -type f | wc -l | tr -d ' ') files) + functions/"
+log "copy exact tracked public allowlist and generate deterministic receipt…"
+python3 scripts/build-public-www-artifact.py --mode build
+log "done — exact artifact receipt reports $(find "$DIST" -type f | wc -l | tr -d ' ') static files"

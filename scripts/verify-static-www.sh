@@ -101,10 +101,27 @@ check_file "private invest Pages access control" 'functions/invest/[[path]].js' 
 check_file "private invest session issuance" api/auth/invest-session.js \
   'verifyAccessToken(token)' 'nf_invest_token=${encodeURIComponent(token)}' \
   'Path=/invest; HttpOnly; Secure; SameSite=Lax; Max-Age=3600'
+check_file "private invest browser config is server-rendered" api/auth/invest-config.js \
+  'Cache-Control", "private, no-store' 'X-Robots-Tag", "noindex, nofollow' \
+  'process.env.SUPABASE_URL' 'process.env.SUPABASE_ANON_KEY'
+check_file "invest auth loads no-store runtime config" assets/noetfield-invest-auth-v1.js \
+  'const CONFIG_URL = "/api/auth/invest-config";'
 check_absent "private invest has no unsigned boolean bypass" 'functions/invest/[[path]].js' \
   'nf_invest_auth=1'
 check_absent "public investor workflow is informational, not an offering" investor-workflows/index.html \
   'public securities offering' 'buy shares' 'purchase equity' 'subscribe for shares'
+check_file "public investor workflow uses scoped enquiry paths" investor-workflows/index.html \
+  'href="/contact/?topic=investor-audit"' \
+  'href="/contact/?topic=investor-diligence"' \
+  'href="/contact/?topic=investor-workflow"' \
+  'href="/contact/?topic=custom-investor-motor"'
+check_absent "recovered investor workflow has no workspace conversion" investor-workflows/index.html \
+  'href="/workspace/'
+check_file "frontier prototype uses scoped enquiry" frontier-systems/index.html \
+  'href="/contact/?topic=frontier-governance-prototype"' \
+  'Discuss the governance-control prototype'
+check_absent "recovered frontier page has no workspace conversion" frontier-systems/index.html \
+  'href="/workspace/'
 
 check_file "about positioning is provisional" about/index.html \
   'Provisional corporate positioning.' 'Recovered source pending NF-WEB-001 review.'
@@ -119,7 +136,8 @@ fi
 
 check_file "start sandbox page" start/index.html \
   'nf-hero-flow' 'Try in minutes' '14-day trial' '50 evaluate calls' 'Apply for pilot' \
-  'data-trial-os-flow' 'NF_SANDBOX_NURTURE_SEQUENCE' 'noetfield-www.css?v=42'
+  'data-trial-os-flow' 'href="/copilot/demo/">view the public demo guide' \
+  'href="/openapi.json">Governance API' 'noetfield-www.css?v=42'
 
 check_file "pricing packaging page" pricing/index.html \
   'Published tiers' 'Apply for pilot' 'Milestone pricing' 'Developer access · free' \
@@ -154,7 +172,7 @@ check_file "contact async intake" contact/index.html \
 check_file "investor diligence vault" investors/diligence/index.html \
   'Investor Diligence Vault' 'nfInvestorDiligenceForm' 'investor-diligence' \
   'Shadow Governance Brief' '18-item checklist' 'nf-vault-checklist' \
-  'NF_INVESTOR_DILIGENCE_VAULT' \
+  'href="/proof/">public evidence index' 'href="/openapi.json"' \
   'noetfield-intake-core.js'
 
 check_file "msp end-client buyer block" msp/index.html \
@@ -178,8 +196,9 @@ check_file "runtime landing page" runtime/index.html \
   'POST /api/v1/governance/evaluate' 'Illustrative sandbox output' 'noetfield-www.css?v=42'
 
 check_file "federal lane page" federal/index.html \
-  'Federal Governance Pack' 'NF_OSFI_E23_DILIGENCE_REFRESH' 'NF_METADATA_EVIDENCE_INDEX' \
-  'AIA' 'Copilot PIN' 'noetfield-www.css?v=42'
+  'Federal Governance Pack' 'href="/contact/?topic=federal-governance-pack"' \
+  'href="/bank-pilot/"' 'href="/proof/"' 'href="/trust-ledger/"' \
+  'AIA' 'Copilot procurement checklist' 'Not a federal certifier' 'noetfield-www.css?v=42'
 
 check_file "partner banner embed" banner/index.html \
   'noindex,nofollow' 'REQUIRE_HUMAN_REVIEW' 'Illustrative — no fabricated hash' 'copilot-governance-v1'
@@ -368,20 +387,21 @@ done
 [[ -f governance/www-pages-routes.json ]] && grep -qF 'OPS_LIVE_STATUS_LOCKED.json' governance/www-pages-routes.json && ok "www-pages-routes blocks OPS_LIVE" || bad "www-pages-routes missing OPS_LIVE block"
 [[ -f governance/www-pages-routes.json ]] && grep -qF 'OFFERINGS_LOCKED.md' governance/www-pages-routes.json && ok "www-pages-routes blocks OFFERINGS_LOCKED" || bad "www-pages-routes missing OFFERINGS_LOCKED block"
 [[ -f governance/www-pages-routes.json ]] && ! grep -qF '"/governance"' governance/www-pages-routes.json && ok "www-pages-routes keeps public /governance page" || bad "www-pages-routes must not 404 the public governance hub"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/ops/' www-pages-deploy.exclude && ok "deploy exclude omits docs/ops" || bad "deploy exclude missing docs/ops"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/platform/' www-pages-deploy.exclude && ok "deploy exclude omits docs/platform" || bad "deploy exclude missing docs/platform"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'governance/*.json' www-pages-deploy.exclude && ok "deploy exclude omits governance json" || bad "deploy exclude missing governance json"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'OFFERINGS_LOCKED.md' www-pages-deploy.exclude && ok "deploy exclude omits OFFERINGS_LOCKED" || bad "deploy exclude missing OFFERINGS_LOCKED"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'platform/' www-pages-deploy.exclude && ok "deploy exclude omits platform" || bad "deploy exclude missing platform"
 [[ -f governance/www-pages-routes.json ]] && grep -qF '/platform' governance/www-pages-routes.json && ok "www-pages-routes blocks platform" || bad "www-pages-routes missing platform block"
 [[ -f governance/index.html ]] && ok "public governance hub html present" || bad "missing governance/index.html"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/mockups/' www-pages-deploy.exclude && ok "deploy exclude omits docs/mockups" || bad "deploy exclude missing docs/mockups"
-[[ -f www-pages-deploy.exclude ]] && grep -qF '.agents/' www-pages-deploy.exclude && ok "deploy exclude omits .agents" || bad "deploy exclude missing .agents"
-[[ -f www-pages-deploy.exclude ]] && grep -qF '/data/' www-pages-deploy.exclude && ok "deploy exclude omits root data" || bad "deploy exclude missing /data/"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'ops/' www-pages-deploy.exclude && ok "deploy exclude omits private ops" || bad "deploy exclude missing ops"
 [[ -f governance/www-pages-routes.json ]] && grep -qF '/.agents' governance/www-pages-routes.json && ok "www-pages-routes blocks .agents" || bad "www-pages-routes missing .agents block"
 [[ -f governance/www-pages-routes.json ]] && grep -qF '/data' governance/www-pages-routes.json && ok "www-pages-routes blocks raw data" || bad "www-pages-routes missing raw data block"
 [[ -f governance/www-pages-routes.json ]] && grep -qF '/ops' governance/www-pages-routes.json && ok "www-pages-routes blocks private ops" || bad "www-pages-routes missing private ops block"
+check_file "explicit public artifact allowlist" governance/www-public-artifact-v1.json \
+  'noetfield-www-public-artifact-allowlist-v1' \
+  '"static_files": [' '"pages_function_files": [' \
+  '"governance/index.html"' '"proof/noetfield.json"' \
+  '"functions/_middleware.js"' '"functions/invest/[[path]].js"'
+check_absent "public artifact allowlist excludes repository internals" governance/www-public-artifact-v1.json \
+  '"AGENTS.md"' '"README.md"' '"repo-policy.json"' '"Makefile"' \
+  '"PRODUCT_BRIEF.md"' '"FOUNDER_CANON.md"' '"docs/' '"scripts/' \
+  '"tests/' '"reports/' '"packages/' \
+  '"assets/noetfield-platform-auth-config-v1.json"'
 [[ ! -f vercel.json ]] && ok "vercel.json removed" || bad "vercel.json must be removed"
 [[ ! -f .vercelignore ]] && ok ".vercelignore removed" || bad ".vercelignore must be removed"
 python3 scripts/verify-public-output-allowlist.py || fail=1

@@ -14,6 +14,7 @@ function assert(condition, message) {
 
 const require = createRequire(import.meta.url);
 const sessionHandler = require(path.join(root, "api/auth/invest-session.js"));
+const configHandler = require(path.join(root, "api/auth/invest-config.js"));
 
 function responseRecorder() {
   const state = { status: 200, headers: {}, body: null };
@@ -41,6 +42,21 @@ async function run(request, env = {}) {
     next: async () => new Response("unexpected pass-through", { status: 200 }),
   });
 }
+
+const config = responseRecorder();
+await configHandler({ method: "GET" }, config.res);
+assert(config.state.status === 200, `config endpoint status ${config.state.status}`);
+assert(
+  config.state.headers["cache-control"] === "private, no-store",
+  `config cache-control ${config.state.headers["cache-control"]}`,
+);
+assert(config.state.body?.configured === true, "config endpoint is not configured");
+assert(config.state.body?.supabase_url?.startsWith("https://"), "config URL missing");
+assert(config.state.body?.supabase_anon_key, "config anon key missing");
+
+const configPost = responseRecorder();
+await configHandler({ method: "POST" }, configPost.res);
+assert(configPost.state.status === 405, `config method status ${configPost.state.status}`);
 
 const unauthenticated = await run(
   new Request("https://www.noetfield.com/invest/?nf_rel_002=1"),

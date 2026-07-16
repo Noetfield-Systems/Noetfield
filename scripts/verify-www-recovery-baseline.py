@@ -37,6 +37,27 @@ DYNAMIC_PREFIXES = (
     "/workspace/",
     "/cdn-cgi/",
 )
+RECOVERED_PUBLIC_FILES = {
+    "about/index.html",
+    "enterprise/agent-transformation/index.html",
+    "enterprise/application-factory/index.html",
+    "enterprise/copilot-governance/index.html",
+    "frontier-systems/index.html",
+    "frontier-systems/memo/index.html",
+    "invest/index.html",
+    "investor-workflows/index.html",
+    "motors/index.html",
+}
+NON_PUBLIC_LINK_PREFIXES = (
+    "/.agents/",
+    "/.claude/",
+    "/.cursor/",
+    "/docs/",
+    "/packages/",
+    "/reports/",
+    "/scripts/",
+    "/tests/",
+)
 
 
 def sha256(data: bytes) -> str:
@@ -49,6 +70,7 @@ class PageParser(HTMLParser):
         self.title_parts: list[str] = []
         self.h1_parts: list[str] = []
         self.references: list[str] = []
+        self.navigation_references: list[str] = []
         self._in_title = False
         self._h1_depth = 0
 
@@ -60,8 +82,12 @@ class PageParser(HTMLParser):
             self._h1_depth += 1
         if tag in {"a", "link"} and values.get("href"):
             self.references.append(str(values["href"]))
+            if tag == "a":
+                self.navigation_references.append(str(values["href"]))
         elif tag in {"script", "img", "source"} and values.get("src"):
             self.references.append(str(values["src"]))
+        elif tag == "form" and values.get("action"):
+            self.references.append(str(values["action"]))
 
     def handle_endtag(self, tag: str) -> None:
         if tag == "title":
@@ -137,10 +163,28 @@ def main() -> int:
         if not parser.h1:
             failures.append(f"missing h1: {relative}")
         rows.append((route, sha256(data), parser.title, parser.h1))
+
+    html_count = 0
+    for path in sorted(DIST.rglob("*.html")):
+        relative = path.relative_to(DIST).as_posix()
+        parser = PageParser()
+        parser.feed(path.read_text(encoding="utf-8", errors="ignore"))
+        html_count += 1
         for reference in parser.references:
+            parsed = urllib.parse.urlsplit(reference)
+            local_path = urllib.parse.unquote(parsed.path)
+            if local_path.startswith(NON_PUBLIC_LINK_PREFIXES):
+                failures.append(f"non-public reference from {relative}: {reference}")
             target = local_target(reference)
             if target is not None and not target.is_file():
-                failures.append(f"broken reference from {route}: {reference}")
+                failures.append(f"broken reference from {relative}: {reference}")
+        if relative in RECOVERED_PUBLIC_FILES:
+            for reference in parser.navigation_references:
+                parsed = urllib.parse.urlsplit(reference)
+                if parsed.path == "/workspace" or parsed.path.startswith("/workspace/"):
+                    failures.append(
+                        f"unapproved workspace navigation from {relative}: {reference}"
+                    )
 
     favicon = DIST / FAVICON.lstrip("/")
     if not favicon.is_file() or favicon.stat().st_size == 0:
@@ -187,6 +231,7 @@ def main() -> int:
         print("\t".join(row))
     if favicon.is_file():
         print(f"{FAVICON}\t{sha256(favicon.read_bytes())}\tbinary\tbinary")
+    print(f"artifact_html_checked\t{html_count}")
 
     if failures:
         for failure in sorted(set(failures)):

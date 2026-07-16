@@ -1,11 +1,11 @@
 /**
  * Noetfield investor auth — Supabase portfolio-spine (Google · email · magic link).
- * Config: /assets/noetfield-platform-auth-config-v1.json
+ * Browser-safe runtime config: /api/auth/invest-config (private, no-store).
  */
 (function (global) {
   "use strict";
 
-  const CONFIG_URL = "/assets/noetfield-platform-auth-config-v1.json";
+  const CONFIG_URL = "/api/auth/invest-config";
   const SUPABASE_CDN = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js";
   const INVEST_SESSION_API = "/api/auth/invest-session";
 

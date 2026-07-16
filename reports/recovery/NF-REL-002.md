@@ -80,7 +80,7 @@ Proposed canonical topology, encoded but not deployed:
 1. `noetfield.com/*` and `www.noetfield.com/*` enter `noetfield-www-proxy`.
 2. Apex receives a `308` to `www`, preserving path and query.
 3. `www` proxies the same path and query to `noetfield-www.pages.dev`.
-4. Pages serves one complete `www-pages-dist` artifact plus the bundled Functions tree.
+4. Pages serves one exact-manifest `www-pages-dist` artifact plus the bundled Functions tree.
 
 ## `x-robots-tag: noindex`
 
@@ -97,18 +97,40 @@ domain after explicit approval. This recovery PR does not change indexing.
 
 ## Verification
 
-- Complete build: `520` files plus bundled Pages Functions.
+- Complete build: `201` exact-allowlisted static files plus `21` bundled Pages Functions (`222` deployment units).
+- Deterministic path+hash receipt: `tmp/nf-rel-002/public-artifact-manifest.json`,
+  generated from `governance/www-public-artifact-v1.json`; repeated-build SHA-256
+  `db7622be755a88b79637adbfd1cf45cf1c5078ea8470fd11a89c417781c9122a`.
+- Public-output allowlist: PASS, with `0` unexpected paths. Repository roots,
+  internal JSON configuration, dot-directories, docs, source, tests, scripts,
+  reports, backups, editor files, and archives are absent.
 - Protected routes and recovered linked pages: `200` locally.
 - Query variants: identical status and hashes.
 - Apex/www host-header variants: identical artifact bodies.
-- Internal references from recovered pages: resolved or explicitly dynamic (`/api/`, `/workspace/`).
+- All `142` deployed HTML/partial files pass local link and asset resolution.
+  No deployed page links into the excluded `/docs/` tree. Recovered NF-REL-002
+  pages contain no `/workspace/*` conversion navigation.
 - Favicon: present, non-empty, and query-stable.
 - `python3 scripts/check_repo_policy.py`: PASS.
 - `git diff --check`: PASS.
-- `make verify-static-www`: PASS in a clean checkout-equivalent. It now asserts the selected homepage, Investors, Proof, and Enterprise contracts precisely; superseded v42 homepage and Investor expectations remain in `tests/fixtures/www/historical-v42-protected-surface-expectations.json`.
+- `make verify-static-www`: PASS end to end. It now performs a clean exact build
+  first, fails closed if the artifact is absent, verifies the source allowlist,
+  probes the exact artifact and generated Functions, runs the protected content
+  contracts, and compares repeated-build manifests. Superseded v42 homepage and
+  Investor expectations remain in
+  `tests/fixtures/www/historical-v42-protected-surface-expectations.json`.
 - `node scripts/test-invest-access-control.mjs`: PASS. Unauthenticated, legacy-boolean, and forged-token requests redirect to sign-in; the session endpoint verifies the Supabase token before issuing an HttpOnly bearer cookie; the protected route reverifies that token on every read; authorized responses are `private, no-store`; and non-read methods return `405`.
-- `node scripts/verify-www-deny-middleware.mjs`: PASS (`157/157`). Machine-readable results are in `reports/recovery/NF-REL-002-denylist-matrix.json`.
-- Local Wrangler Pages runtime: PASS for all `157` security-matrix rows; required public routes and favicon returned `200` with query-stable hashes, while `/invest/?nf_rel_002=runtime` returned the expected sign-in `302`.
+- `node scripts/verify-www-deny-middleware.mjs`: PASS (`181/181`) against
+  the exact static artifact and generated middleware. Machine-readable results
+  are in `reports/recovery/NF-REL-002-denylist-matrix.json`.
+- Local Wrangler Pages runtime: PASS (`190/190`), including all deny-matrix
+  rows, required public routes, favicon, Invest sign-in redirect, server-rendered
+  browser auth configuration, and zero unexpected artifact probes.
+- Phase 3 workflow-equivalent memory verification: compile PASS; memory smoke
+  PASS; `CI=true pytest tests/unit -q` = `392 passed, 2 skipped`; ecosystem
+  health PASS; six ephemeral platform health endpoints PASS. PostgreSQL-backed
+  steps require the GitHub Actions PostgreSQL service and are reported by the
+  PR workflow.
 
 ## PR #111 required-repair decisions
 
@@ -121,8 +143,9 @@ domain after explicit approval. This recovery PR does not change indexing.
 ### Denylist migration
 
 The matrix exercises every former `404` route source, every current exact deny,
-both root and nested probes for every deny prefix, query-string variants, and the
-required `/governance/` and `/services/` cases. `/governance/` is an intentional
+both root and nested probes for every deny prefix, mandatory root/source/config/
+backup absence probes, query-string variants, and the required `/governance/`
+and `/services/` cases. `/governance/` is an intentional
 public product hub; its sensitive files and internal subtrees return `404`.
 `/services/` has no directory index and returns `404`, while the two existing named
 public service product routes remain in the artifact. Internal service prefixes are

@@ -121,8 +121,12 @@ verify-no-vendor-names:
 	./scripts/verify-no-competitor-names.sh
 
 verify-static-www:
-	@chmod +x scripts/verify-static-www.sh
+	@chmod +x scripts/build-www-pages-dist.sh scripts/verify-www-pages-dist.sh scripts/verify-static-www.sh scripts/verify-www-artifact-determinism.sh
+	./scripts/build-www-pages-dist.sh
+	python3 scripts/verify-public-output-allowlist.py
+	./scripts/verify-www-pages-dist.sh
 	./scripts/verify-static-www.sh
+	./scripts/verify-www-artifact-determinism.sh
 
 verify-public-output-allowlist:
 	@python3 scripts/verify-public-output-allowlist.py

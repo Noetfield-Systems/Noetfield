@@ -2,6 +2,12 @@
   "schema": "nf-rel-002-pages-deny-middleware-matrix-v1",
   "baseline_sha": "e83aff92764c916362767f1dcb616bc3ece9535f",
   "generated_middleware": "functions/_middleware.js",
+  "generated_middleware_sha256": "cd5c86df1725dd9a8468e63f8d2d94c90de298655dd9d9d25b75fc2a22f6f0d5",
+  "exact_artifact_manifest": "tmp/nf-rel-002/public-artifact-manifest.json",
+  "exact_artifact_manifest_sha256": "db7622be755a88b79637adbfd1cf45cf1c5078ea8470fd11a89c417781c9122a",
+  "exact_artifact_manifest_schema": "nf-rel-002-public-artifact-manifest-v1",
+  "artifact_static_file_count": 201,
+  "unexpected_artifact_paths": [],
   "query_string_tested": "?nf_rel_002=deny",
   "public_exceptions": [
     {
@@ -16,8 +22,8 @@
     }
   ],
   "summary": {
-    "total": 157,
-    "passed": 157,
+    "total": 181,
+    "passed": 181,
     "failed": 0
   },
   "rows": [
@@ -84,6 +90,26 @@
       "result": "PASS"
     },
     {
+      "requested_protected_path": "/.agents/skills/cloudflare/SKILL.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.agents/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.agents/skills/cloudflare/SKILL.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.claude/launch.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/.claude/launch.json",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.claude/launch.json"
+      ],
+      "result": "PASS"
+    },
+    {
       "requested_protected_path": "/.cursor",
       "expected_status": 404,
       "actual_status": 404,
@@ -111,6 +137,36 @@
       "source_coverage": [
         "denylist_prefix_nested:/.cursor/",
         "former_redirect:/.cursor/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.cursor/README.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.cursor/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.cursor/README.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.DS_Store",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/.DS_Store",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.DS_Store"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.env",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/.env",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.env"
       ],
       "result": "PASS"
     },
@@ -146,6 +202,26 @@
       "result": "PASS"
     },
     {
+      "requested_protected_path": "/AGENTS.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/AGENTS.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/AGENTS.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/api/auth/invest-session.js",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/api/auth/invest-session.js",
+      "source_coverage": [
+        "mandatory_artifact_absence:/api/auth/invest-session.js"
+      ],
+      "result": "PASS"
+    },
+    {
       "requested_protected_path": "/apps",
       "expected_status": 404,
       "actual_status": 404,
@@ -173,6 +249,36 @@
       "source_coverage": [
         "denylist_prefix_nested:/apps/",
         "former_redirect:/apps/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/archive.zip",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/archive.zip",
+      "source_coverage": [
+        "mandatory_artifact_absence:/archive.zip"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/assets/noetfield-platform-auth-config-v1.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/assets/noetfield-platform-auth-config-v1.json",
+      "source_coverage": [
+        "mandatory_artifact_absence:/assets/noetfield-platform-auth-config-v1.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/config/gate-ai-factory-design.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/config/gate-ai-factory-design.json",
+      "source_coverage": [
+        "mandatory_artifact_absence:/config/gate-ai-factory-design.json"
       ],
       "result": "PASS"
     },
@@ -272,6 +378,16 @@
       "result": "PASS"
     },
     {
+      "requested_protected_path": "/docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/ops/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md"
+      ],
+      "result": "PASS"
+    },
+    {
       "requested_protected_path": "/docs/platform",
       "expected_status": 404,
       "actual_status": 404,
@@ -299,6 +415,26 @@
       "source_coverage": [
         "denylist_prefix_nested:/docs/platform/",
         "former_redirect:/docs/platform/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/README.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/docs/README.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/docs/README.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/README.md.bak.1783081948",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/docs/README.md.bak.1783081948",
+      "source_coverage": [
+        "mandatory_artifact_absence:/docs/README.md.bak.1783081948"
       ],
       "result": "PASS"
     },
@@ -434,6 +570,26 @@
       "source_coverage": [
         "denylist_prefix_nested:/entry/",
         "former_redirect:/entry/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/FOUNDER_CANON.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/FOUNDER_CANON.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/FOUNDER_CANON.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/functions/invest/[[path]].js",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/functions/invest/[[path]].js",
+      "source_coverage": [
+        "mandatory_artifact_absence:/functions/invest/[[path]].js"
       ],
       "result": "PASS"
     },
@@ -890,6 +1046,16 @@
       "result": "PASS"
     },
     {
+      "requested_protected_path": "/Makefile",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/Makefile",
+      "source_coverage": [
+        "mandatory_artifact_absence:/Makefile"
+      ],
+      "result": "PASS"
+    },
+    {
       "requested_protected_path": "/Noetfield-All-Documents",
       "expected_status": 404,
       "actual_status": 404,
@@ -1025,6 +1191,16 @@
       "result": "PASS"
     },
     {
+      "requested_protected_path": "/packages/schemas/tle-v1.schema.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/packages/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/packages/schemas/tle-v1.schema.json"
+      ],
+      "result": "PASS"
+    },
+    {
       "requested_protected_path": "/platform",
       "expected_status": 404,
       "actual_status": 404,
@@ -1056,6 +1232,16 @@
       "result": "PASS"
     },
     {
+      "requested_protected_path": "/PRODUCT_BRIEF.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/PRODUCT_BRIEF.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/PRODUCT_BRIEF.md"
+      ],
+      "result": "PASS"
+    },
+    {
       "requested_protected_path": "/PROJECT_BOUNDARIES_LOCKED.md",
       "expected_status": 404,
       "actual_status": 404,
@@ -1074,6 +1260,26 @@
       "source_coverage": [
         "denylist_exact:/railway.toml",
         "former_redirect:/railway.toml"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/README.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/README.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/README.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/repo-policy.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/repo-policy.json",
+      "source_coverage": [
+        "mandatory_artifact_absence:/repo-policy.json"
       ],
       "result": "PASS"
     },
@@ -1105,6 +1311,16 @@
       "source_coverage": [
         "denylist_prefix_nested:/reports/",
         "former_redirect:/reports/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/reports/recovery/NF-REL-002.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/reports/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/reports/recovery/NF-REL-002.md"
       ],
       "result": "PASS"
     },
@@ -1147,6 +1363,16 @@
       "source_coverage": [
         "denylist_prefix_nested:/scripts/",
         "former_redirect:/scripts/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/scripts/build-www-pages-dist.sh",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/scripts/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/scripts/build-www-pages-dist.sh"
       ],
       "result": "PASS"
     },
@@ -1595,6 +1821,16 @@
       "result": "PASS"
     },
     {
+      "requested_protected_path": "/temporary.tmp",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/temporary.tmp",
+      "source_coverage": [
+        "mandatory_artifact_absence:/temporary.tmp"
+      ],
+      "result": "PASS"
+    },
+    {
       "requested_protected_path": "/tests",
       "expected_status": 404,
       "actual_status": 404,
@@ -1622,6 +1858,16 @@
       "source_coverage": [
         "denylist_prefix_nested:/tests/",
         "former_redirect:/tests/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/tests/unit/test_investor_diligence_lane.py",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/tests/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/tests/unit/test_investor_diligence_lane.py"
       ],
       "result": "PASS"
     },

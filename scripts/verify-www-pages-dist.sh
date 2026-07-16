@@ -13,6 +13,20 @@ if [[ ! -d "$DIST" ]]; then
   exit 1
 fi
 
+if python3 scripts/verify-public-output-allowlist.py; then
+  echo "OK   exact public-output allowlist"
+else
+  echo "FAIL exact public-output allowlist" >&2
+  fail=1
+fi
+
+if python3 scripts/build-public-www-artifact.py --mode verify; then
+  echo "OK   deterministic path+hash artifact manifest"
+else
+  echo "FAIL deterministic path+hash artifact manifest" >&2
+  fail=1
+fi
+
 python3 - <<'PY'
 import json
 import sys
@@ -90,6 +104,13 @@ if node scripts/verify-www-deny-middleware.mjs; then
   echo "OK   Pages middleware deny migration matrix"
 else
   echo "FAIL Pages middleware deny migration matrix" >&2
+  fail=1
+fi
+
+if node scripts/verify-www-wrangler-runtime.mjs; then
+  echo "OK   local Wrangler exact-artifact security probes"
+else
+  echo "FAIL local Wrangler exact-artifact security probes" >&2
   fail=1
 fi
 
