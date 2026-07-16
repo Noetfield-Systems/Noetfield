@@ -1,5 +1,10 @@
 # NF-REL-002 — Recoverable website baseline
 
+> Historical recovery receipt. This document records the NF-REL-002 source-selection
+> decisions; it is not a current deployment manifest or release authority. The live
+> public-artifact authority is `governance/www-public-artifact-v1.json`, the manifest
+> generated from the exact build, and the fail-closed production workflow receipt.
+
 ## Authority and isolation
 
 - Baseline: `e83aff92764c916362767f1dcb616bc3ece9535f` (`origin/main`).
@@ -97,10 +102,13 @@ domain after explicit approval. This recovery PR does not change indexing.
 
 ## Verification
 
-- Complete build: `201` exact-allowlisted static files plus `21` bundled Pages Functions (`222` deployment units).
-- Deterministic path+hash receipt: `tmp/nf-rel-002/public-artifact-manifest.json`,
-  generated from `governance/www-public-artifact-v1.json`; repeated-build SHA-256
-  `db7622be755a88b79637adbfd1cf45cf1c5078ea8470fd11a89c417781c9122a`.
+- Complete-build file counts are derived from the exact allowlisted artifact; this
+  historical narrative does not duplicate a mutable count.
+- The deterministic path+hash receipt is generated at
+  `tmp/nf-rel-002/public-artifact-manifest.json` from
+  `governance/www-public-artifact-v1.json`. Its SHA-256 is computed and recorded by
+  the verification and production workflows; no fixed hash in this narrative is a
+  deployment authority.
 - Public-output allowlist: PASS, with `0` unexpected paths. Repository roots,
   internal JSON configuration, dot-directories, docs, source, tests, scripts,
   reports, backups, editor files, and archives are absent.
