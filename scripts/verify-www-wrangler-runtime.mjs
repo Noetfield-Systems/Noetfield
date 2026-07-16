@@ -2,15 +2,20 @@
 /** Probe the exact static artifact and generated Functions through Wrangler Pages. */
 
 import fs from "node:fs";
+import crypto from "node:crypto";
 import path from "node:path";
 import { spawn } from "node:child_process";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const dist = path.join(root, "www-pages-dist");
-const matrixPath = path.join(root, "reports/recovery/NF-REL-002-denylist-matrix.json");
+const matrixPath = path.join(root, "tmp/noetfield-www/denylist-matrix.json");
+const artifactManifestPath = path.join(
+  root,
+  "tmp/noetfield-www/public-artifact-manifest.json",
+);
 const runtimeReportPath = path.join(
   root,
-  "tmp/nf-rel-002/wrangler-runtime-probes.json",
+  "tmp/noetfield-www/wrangler-runtime-probes.json",
 );
 const port = Number(process.env.NF_WRANGLER_TEST_PORT || "8797");
 const base = `http://127.0.0.1:${port}`;
@@ -22,8 +27,26 @@ function assert(condition, message) {
 
 assert(fs.existsSync(dist), "missing www-pages-dist; build the exact artifact first");
 assert(fs.existsSync(matrixPath), "missing deny matrix; verify exact middleware first");
+assert(fs.existsSync(artifactManifestPath), "missing exact artifact manifest");
 
 const matrix = JSON.parse(fs.readFileSync(matrixPath, "utf8"));
+const artifactManifest = JSON.parse(fs.readFileSync(artifactManifestPath, "utf8"));
+const artifactManifestSha256 = crypto
+  .createHash("sha256")
+  .update(fs.readFileSync(artifactManifestPath))
+  .digest("hex");
+assert(
+  matrix.exact_artifact_manifest_sha256 === artifactManifestSha256,
+  "deny matrix does not attest the exact current artifact manifest",
+);
+assert(
+  matrix.artifact_static_file_count === artifactManifest.static_file_count,
+  "deny matrix static count does not match the exact current artifact",
+);
+assert(
+  matrix.source_git_sha === artifactManifest.source_git_sha,
+  "deny matrix source SHA does not match the exact current artifact",
+);
 const wranglerArgs = [
   "--yes",
   "wrangler@4",
@@ -176,7 +199,7 @@ try {
 
 const failed = rows.filter((row) => row.result === "FAIL");
 const report = {
-  schema: "nf-rel-002-wrangler-runtime-probes-v1",
+  schema: "noetfield-www-wrangler-runtime-probes-v1",
   runtime: "wrangler@4 pages dev",
   exact_artifact_manifest_sha256: matrix.exact_artifact_manifest_sha256,
   unexpected_artifact_probe_count: matrix.unexpected_artifact_paths.length,

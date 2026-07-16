@@ -105,7 +105,7 @@ domain after explicit approval. This recovery PR does not change indexing.
 - Complete-build file counts are derived from the exact allowlisted artifact; this
   historical narrative does not duplicate a mutable count.
 - The deterministic path+hash receipt is generated at
-  `tmp/nf-rel-002/public-artifact-manifest.json` from
+  `tmp/noetfield-www/public-artifact-manifest.json` from
   `governance/www-public-artifact-v1.json`. Its SHA-256 is computed and recorded by
   the verification and production workflows; no fixed hash in this narrative is a
   deployment authority.
@@ -130,7 +130,8 @@ domain after explicit approval. This recovery PR does not change indexing.
 - `node scripts/test-invest-access-control.mjs`: PASS. Unauthenticated, legacy-boolean, and forged-token requests redirect to sign-in; the session endpoint verifies the Supabase token before issuing an HttpOnly bearer cookie; the protected route reverifies that token on every read; authorized responses are `private, no-store`; and non-read methods return `405`.
 - `node scripts/verify-www-deny-middleware.mjs`: PASS (`181/181`) against
   the exact static artifact and generated middleware. Machine-readable results
-  are in `reports/recovery/NF-REL-002-denylist-matrix.json`.
+  are generated at `tmp/noetfield-www/denylist-matrix.json`; no mutable
+  verification hash or file count is tracked as source authority.
 - Local Wrangler Pages runtime: PASS (`190/190`), including all deny-matrix
   rows, required public routes, favicon, Invest sign-in redirect, server-rendered
   browser auth configuration, and zero unexpected artifact probes.

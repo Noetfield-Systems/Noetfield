@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
-"""Build and attest the exact NF-REL-002 Cloudflare Pages deployment units."""
+"""Build and attest the exact production Cloudflare Pages deployment units."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import os
 import re
 import shutil
+import subprocess
 from pathlib import Path, PurePosixPath
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWLIST_PATH = ROOT / "governance" / "www-public-artifact-v1.json"
 DIST = ROOT / "www-pages-dist"
-RECEIPT_PATH = ROOT / "tmp" / "nf-rel-002" / "public-artifact-manifest.json"
+RECEIPT_PATH = ROOT / "tmp" / "noetfield-www" / "public-artifact-manifest.json"
 ASSET_VERSION_LENGTH = 16
 CSS_IMPORT_PATTERN = re.compile(
     r"(?P<prefix>@import\s+url\(\s*(?P<quote>['\"]))"
@@ -101,6 +103,17 @@ def sha256_bytes(data: bytes) -> str:
 
 def sha256_file(path: Path) -> str:
     return sha256_bytes(path.read_bytes())
+
+
+def source_git_sha() -> str:
+    candidate = os.environ.get("GITHUB_SHA", "").strip().lower()
+    if not re.fullmatch(r"[0-9a-f]{40}", candidate):
+        candidate = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+        ).strip().lower()
+    if not re.fullmatch(r"[0-9a-f]{40}", candidate):
+        raise ValueError("source git SHA must be a full lowercase commit SHA")
+    return candidate
 
 
 def load_allowlist() -> dict[str, object]:
@@ -316,8 +329,8 @@ def build_receipt(
         for rel in function_files
     ]
     return {
-        "schema": "nf-rel-002-public-artifact-manifest-v1",
-        "baseline_sha": data["baseline_sha"],
+        "schema": "noetfield-www-public-artifact-manifest-v1",
+        "source_git_sha": source_git_sha(),
         "allowlist_path": ALLOWLIST_PATH.relative_to(ROOT).as_posix(),
         "allowlist_sha256": sha256_file(ALLOWLIST_PATH),
         "asset_reference_versioning": f"sha256-{ASSET_VERSION_LENGTH}",

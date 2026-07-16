@@ -1,7 +1,6 @@
 {
   "schema": "noetfield-www-public-artifact-allowlist-v1",
-  "baseline_sha": "e83aff92764c916362767f1dcb616bc3ece9535f",
-  "purpose": "Exact source allowlist for the NF-REL-002 Cloudflare Pages artifact.",
+  "purpose": "Exact source allowlist for the production Cloudflare Pages artifact.",
   "public_json_files": [
     "assets/noetfield-ecosystem.json",
     "assets/noetfield-stripe-catalog.json",

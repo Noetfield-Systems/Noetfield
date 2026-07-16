@@ -10,10 +10,10 @@ const middlewarePath = path.join(root, "functions/_middleware.js");
 const artifactAllowlistPath = path.join(root, "governance/www-public-artifact-v1.json");
 const artifactManifestPath = path.join(
   root,
-  "tmp/nf-rel-002/public-artifact-manifest.json",
+  "tmp/noetfield-www/public-artifact-manifest.json",
 );
 const distPath = path.join(root, "www-pages-dist");
-const reportPath = path.join(root, "reports/recovery/NF-REL-002-denylist-matrix.json");
+const reportPath = path.join(root, "tmp/noetfield-www/denylist-matrix.json");
 
 const denylist = JSON.parse(fs.readFileSync(denylistPath, "utf8"));
 const routes = JSON.parse(fs.readFileSync(routesPath, "utf8"));
@@ -187,11 +187,11 @@ for (const item of [...requested.values()].sort((a, b) => a.pathname.localeCompa
 
 const failed = rows.filter((row) => row.result === "FAIL");
 const report = {
-  schema: "nf-rel-002-pages-deny-middleware-matrix-v1",
-  baseline_sha: "e83aff92764c916362767f1dcb616bc3ece9535f",
+  schema: "noetfield-www-pages-deny-middleware-matrix-v1",
+  source_git_sha: artifactManifest.source_git_sha,
   generated_middleware: "functions/_middleware.js",
   generated_middleware_sha256: sha256File(middlewarePath),
-  exact_artifact_manifest: "tmp/nf-rel-002/public-artifact-manifest.json",
+  exact_artifact_manifest: "tmp/noetfield-www/public-artifact-manifest.json",
   exact_artifact_manifest_sha256: sha256File(artifactManifestPath),
   exact_artifact_manifest_schema: artifactManifest.schema,
   artifact_static_file_count: actualArtifactFiles.length,

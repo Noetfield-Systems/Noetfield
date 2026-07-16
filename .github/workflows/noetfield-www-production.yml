@@ -24,7 +24,6 @@ on:
       - "package.json"
       - "proof/*.json"
       - "pyproject.toml"
-      - "reports/recovery/NF-REL-002-denylist-matrix.json"
       - "robots.txt"
       - "scripts/bundle-pages-functions.mjs"
       - "scripts/build-public-www-artifact.py"

@@ -4,7 +4,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-MANIFEST="tmp/nf-rel-002/public-artifact-manifest.json"
+MANIFEST="tmp/noetfield-www/public-artifact-manifest.json"
 FIRST="$(mktemp "${TMPDIR:-/tmp}/nf-rel-002-artifact-manifest.XXXXXX")"
 trap 'rm -f "$FIRST"' EXIT
 
