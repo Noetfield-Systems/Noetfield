@@ -39,7 +39,7 @@ check_absent() {
 # NF-WEB-001 protected corporate surfaces. The NF-REL-002 recovery gate and
 # superseded v42 marketing expectations remain history, not the active contract.
 check_file "protected corporate homepage" index.html \
-  '<title>Noetfield Systems — Governed AI Execution</title>' \
+  '<title>Noetfield Systems Inc. — Governed AI Execution</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp">' '<main id="main">' \
   'Governed AI systems that can act—and show their work.' \
@@ -69,7 +69,7 @@ check_absent "protected investors hub has no embedded intake" investors/index.ht
   'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'href="/workspace/'
 
 check_file "protected proof truth boundaries" proof/index.html \
-  '<title>Proof — Noetfield Systems</title>' \
+  '<title>Proof &amp; Public Evidence — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/proof/" />' \
   '<h1>Evidence, not slides</h1>' \
   'What is proven, what is planned, and what must still be demonstrated before broad claims.' \
@@ -79,7 +79,7 @@ check_file "protected proof truth boundaries" proof/index.html \
   'not a Fortune-500 deployment claim' 'Coming next.'
 
 check_file "protected enterprise commercial surface" enterprise/index.html \
-  '<title>Noetfield — Copilot governance · Trust Brief · sandbox</title>' \
+  '<title>Governed AI Enterprise Systems — Noetfield</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/enterprise/" />' \
   '<h1 class="nf-hero-h1--wide">Governed AI operations—from sandbox receipt to board-ready proof.</h1>' \
   'noetfield-shell.js?v=42' 'Apply for pilot' 'Request Trust Brief' 'Start sandbox' \

@@ -13,6 +13,8 @@ import subprocess
 from pathlib import Path, PurePosixPath
 from urllib.parse import urlsplit
 
+from noetfield_social_preview_v2 import apply_metadata_to_artifact
+
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWLIST_PATH = ROOT / "governance" / "www-public-artifact-v1.json"
 DIST = ROOT / "www-pages-dist"
@@ -408,6 +410,9 @@ def main() -> int:
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / rel, destination)
         try:
+            applied = apply_metadata_to_artifact(ROOT, DIST, [
+                rel for rel in static_files if rel.endswith(".html")
+            ])
             rewrite_css_imports(static_files)
             rewrite_html_asset_references(static_files)
         except (OSError, UnicodeError, ValueError) as exc:
@@ -418,7 +423,8 @@ def main() -> int:
         RECEIPT_PATH.write_text(render_receipt(receipt), encoding="utf-8")
         print(
             "build-public-www-artifact: "
-            f"{len(static_files)} static + {len(function_files)} function files"
+            f"{len(static_files)} static + {len(function_files)} function files; "
+            f"social_metadata={applied}"
         )
         return 0
 

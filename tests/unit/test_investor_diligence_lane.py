@@ -28,7 +28,7 @@ def test_homepage_has_modern_shell_and_spine() -> None:
     # NF-WEB-001 replaces the recovery direction gate with the approved
     # corporate entry surface. Recovery and v42 expectations remain historical.
     required = (
-        "<title>Noetfield Systems — Governed AI Execution</title>",
+        "<title>Noetfield Systems Inc. — Governed AI Execution</title>",
         '<link rel="canonical" href="https://www.noetfield.com/" />',
         '<body class="nf-corp">',
         '<main id="main">',

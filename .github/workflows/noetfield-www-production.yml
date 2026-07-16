@@ -10,6 +10,7 @@ on:
       - "_redirects"
       - "api/**"
       - "assets/**"
+      - "data/noetfield-social-preview-v2.json"
       - "favicon.ico"
       - "functions/**"
       - "gate/**/*.pdf"
@@ -34,6 +35,7 @@ on:
       - "scripts/generate-www-deny-middleware.py"
       - "scripts/generate_sitemap.py"
       - "scripts/nf_post_deploy_verify.py"
+      - "scripts/noetfield_social_preview_v2.py"
       - "scripts/rebuild-www-v6.py"
       - "scripts/resolve-cf-pages-release.py"
       - "scripts/sync_chat_greeting_asset.py"
@@ -45,6 +47,7 @@ on:
       - "sitemap.xml"
       - "tests/unit/test_corporate_surface.py"
       - "tests/unit/test_cf_pages_release.py"
+      - "tests/unit/test_social_preview_v2.py"
       - "trust-ledger/**/*.pdf"
       - "trust-ledger/**/*.yaml"
       - ".github/workflows/noetfield-www-production.yml"
@@ -124,7 +127,8 @@ jobs:
           make verify-static-www
           python3 -m pytest -q \
             tests/unit/test_corporate_surface.py \
-            tests/unit/test_cf_pages_release.py
+            tests/unit/test_cf_pages_release.py \
+            tests/unit/test_social_preview_v2.py
           node scripts/test-cf-www-proxy.mjs
           bash -n scripts/deploy-www-cloudflare.sh scripts/deploy-cf-www-proxy.sh
           python3 -m py_compile \
