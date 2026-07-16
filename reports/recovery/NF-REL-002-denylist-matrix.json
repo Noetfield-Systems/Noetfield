@@ -1,0 +1,1906 @@
+{
+  "schema": "nf-rel-002-pages-deny-middleware-matrix-v1",
+  "baseline_sha": "e83aff92764c916362767f1dcb616bc3ece9535f",
+  "generated_middleware": "functions/_middleware.js",
+  "generated_middleware_sha256": "cd5c86df1725dd9a8468e63f8d2d94c90de298655dd9d9d25b75fc2a22f6f0d5",
+  "exact_artifact_manifest": "tmp/nf-rel-002/public-artifact-manifest.json",
+  "exact_artifact_manifest_sha256": "db7622be755a88b79637adbfd1cf45cf1c5078ea8470fd11a89c417781c9122a",
+  "exact_artifact_manifest_schema": "nf-rel-002-public-artifact-manifest-v1",
+  "artifact_static_file_count": 201,
+  "unexpected_artifact_paths": [],
+  "query_string_tested": "?nf_rel_002=deny",
+  "public_exceptions": [
+    {
+      "path": "/governance/",
+      "reason": "Intentional public governance product hub; sensitive governance files and internal subtrees remain denied."
+    }
+  ],
+  "artifact_absence_checks": [
+    {
+      "path": "/services/",
+      "reason": "No directory index is shipped; named public service product routes remain preserved."
+    }
+  ],
+  "summary": {
+    "total": 181,
+    "passed": 181,
+    "failed": 0
+  },
+  "rows": [
+    {
+      "requested_protected_path": "/_archive",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/_archive/",
+      "source_coverage": [
+        "former_redirect:/_archive"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/_archive/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/_archive/",
+      "source_coverage": [
+        "denylist_prefix_root:/_archive/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/_archive/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/_archive/",
+      "source_coverage": [
+        "denylist_prefix_nested:/_archive/",
+        "former_redirect:/_archive/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.agents",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.agents/",
+      "source_coverage": [
+        "former_redirect:/.agents"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.agents/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.agents/",
+      "source_coverage": [
+        "denylist_prefix_root:/.agents/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.agents/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.agents/",
+      "source_coverage": [
+        "denylist_prefix_nested:/.agents/",
+        "former_redirect:/.agents/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.agents/skills/cloudflare/SKILL.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.agents/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.agents/skills/cloudflare/SKILL.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.claude/launch.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/.claude/launch.json",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.claude/launch.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.cursor",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.cursor/",
+      "source_coverage": [
+        "former_redirect:/.cursor"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.cursor/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.cursor/",
+      "source_coverage": [
+        "denylist_prefix_root:/.cursor/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.cursor/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.cursor/",
+      "source_coverage": [
+        "denylist_prefix_nested:/.cursor/",
+        "former_redirect:/.cursor/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.cursor/README.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.cursor/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.cursor/README.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.DS_Store",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/.DS_Store",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.DS_Store"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.env",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/.env",
+      "source_coverage": [
+        "mandatory_artifact_absence:/.env"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.sina-agent",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.sina-agent/",
+      "source_coverage": [
+        "former_redirect:/.sina-agent"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.sina-agent/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.sina-agent/",
+      "source_coverage": [
+        "denylist_prefix_root:/.sina-agent/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/.sina-agent/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/.sina-agent/",
+      "source_coverage": [
+        "denylist_prefix_nested:/.sina-agent/",
+        "former_redirect:/.sina-agent/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/AGENTS.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/AGENTS.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/AGENTS.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/api/auth/invest-session.js",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/api/auth/invest-session.js",
+      "source_coverage": [
+        "mandatory_artifact_absence:/api/auth/invest-session.js"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/apps",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/apps/",
+      "source_coverage": [
+        "former_redirect:/apps"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/apps/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/apps/",
+      "source_coverage": [
+        "denylist_prefix_root:/apps/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/apps/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/apps/",
+      "source_coverage": [
+        "denylist_prefix_nested:/apps/",
+        "former_redirect:/apps/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/archive.zip",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/archive.zip",
+      "source_coverage": [
+        "mandatory_artifact_absence:/archive.zip"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/assets/noetfield-platform-auth-config-v1.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/assets/noetfield-platform-auth-config-v1.json",
+      "source_coverage": [
+        "mandatory_artifact_absence:/assets/noetfield-platform-auth-config-v1.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/config/gate-ai-factory-design.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/config/gate-ai-factory-design.json",
+      "source_coverage": [
+        "mandatory_artifact_absence:/config/gate-ai-factory-design.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/data",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/data/",
+      "source_coverage": [
+        "former_redirect:/data"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/data/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/data/",
+      "source_coverage": [
+        "denylist_prefix_root:/data/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/data/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/data/",
+      "source_coverage": [
+        "denylist_prefix_nested:/data/",
+        "former_redirect:/data/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/LEGAL.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/docs/LEGAL.md",
+      "source_coverage": [
+        "denylist_exact:/docs/LEGAL.md",
+        "former_redirect:/docs/LEGAL.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/LOCAL_DEV.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/docs/LOCAL_DEV.md",
+      "source_coverage": [
+        "denylist_exact:/docs/LOCAL_DEV.md",
+        "former_redirect:/docs/LOCAL_DEV.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/MARKET_ENTRY_30_DAY.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/docs/MARKET_ENTRY_30_DAY.md",
+      "source_coverage": [
+        "denylist_exact:/docs/MARKET_ENTRY_30_DAY.md",
+        "former_redirect:/docs/MARKET_ENTRY_30_DAY.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/ops",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/ops/",
+      "source_coverage": [
+        "former_redirect:/docs/ops"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/ops/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/ops/",
+      "source_coverage": [
+        "denylist_prefix_root:/docs/ops/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/ops/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/ops/",
+      "source_coverage": [
+        "denylist_prefix_nested:/docs/ops/",
+        "former_redirect:/docs/ops/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/ops/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/docs/ops/AGENT_SELF_AUDIT_LOOP_LOCKED_v1.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/platform",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/platform/",
+      "source_coverage": [
+        "former_redirect:/docs/platform"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/platform/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/platform/",
+      "source_coverage": [
+        "denylist_prefix_root:/docs/platform/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/platform/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/platform/",
+      "source_coverage": [
+        "denylist_prefix_nested:/docs/platform/",
+        "former_redirect:/docs/platform/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/README.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/docs/README.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/docs/README.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/README.md.bak.1783081948",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/docs/README.md.bak.1783081948",
+      "source_coverage": [
+        "mandatory_artifact_absence:/docs/README.md.bak.1783081948"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/references",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/references/",
+      "source_coverage": [
+        "former_redirect:/docs/references"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/references/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/references/",
+      "source_coverage": [
+        "denylist_prefix_root:/docs/references/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/references/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/references/",
+      "source_coverage": [
+        "denylist_prefix_nested:/docs/references/",
+        "former_redirect:/docs/references/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/ROADMAP.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/docs/ROADMAP.md",
+      "source_coverage": [
+        "denylist_exact:/docs/ROADMAP.md",
+        "former_redirect:/docs/ROADMAP.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/SOURCE_OF_TRUTH",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/SOURCE_OF_TRUTH/",
+      "source_coverage": [
+        "former_redirect:/docs/SOURCE_OF_TRUTH"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/SOURCE_OF_TRUTH/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/SOURCE_OF_TRUTH/",
+      "source_coverage": [
+        "denylist_prefix_root:/docs/SOURCE_OF_TRUTH/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/SOURCE_OF_TRUTH/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/SOURCE_OF_TRUTH/",
+      "source_coverage": [
+        "denylist_prefix_nested:/docs/SOURCE_OF_TRUTH/",
+        "former_redirect:/docs/SOURCE_OF_TRUTH/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/spec",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/spec/",
+      "source_coverage": [
+        "former_redirect:/docs/spec"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/spec/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/spec/",
+      "source_coverage": [
+        "denylist_prefix_root:/docs/spec/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/docs/spec/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/docs/spec/",
+      "source_coverage": [
+        "denylist_prefix_nested:/docs/spec/",
+        "former_redirect:/docs/spec/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/entry",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/entry/",
+      "source_coverage": [
+        "former_redirect:/entry"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/entry/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/entry/",
+      "source_coverage": [
+        "denylist_prefix_root:/entry/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/entry/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/entry/",
+      "source_coverage": [
+        "denylist_prefix_nested:/entry/",
+        "former_redirect:/entry/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/FOUNDER_CANON.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/FOUNDER_CANON.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/FOUNDER_CANON.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/functions/invest/[[path]].js",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/functions/invest/[[path]].js",
+      "source_coverage": [
+        "mandatory_artifact_absence:/functions/invest/[[path]].js"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance-console",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance-console/",
+      "source_coverage": [
+        "former_redirect:/governance-console"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance-console/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance-console/",
+      "source_coverage": [
+        "denylist_prefix_root:/governance-console/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance-console/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance-console/",
+      "source_coverage": [
+        "denylist_prefix_nested:/governance-console/",
+        "former_redirect:/governance-console/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/",
+      "expected_status": 200,
+      "actual_status": 200,
+      "middleware_rule_responsible": "PUBLIC_EXCEPTION:/governance/",
+      "source_coverage": [
+        "intentional_public_governance_hub"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/alignment-scoring",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/alignment-scoring/",
+      "source_coverage": [
+        "former_redirect:/governance/alignment-scoring"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/alignment-scoring/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/alignment-scoring/",
+      "source_coverage": [
+        "denylist_prefix_root:/governance/alignment-scoring/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/alignment-scoring/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/alignment-scoring/",
+      "source_coverage": [
+        "denylist_prefix_nested:/governance/alignment-scoring/",
+        "former_redirect:/governance/alignment-scoring/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/CAPABILITY_TIER_CATALOG.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/CAPABILITY_TIER_CATALOG.json",
+      "source_coverage": [
+        "denylist_exact:/governance/CAPABILITY_TIER_CATALOG.json",
+        "former_redirect:/governance/CAPABILITY_TIER_CATALOG.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/FACTORY_CATALOG.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/FACTORY_CATALOG.json",
+      "source_coverage": [
+        "denylist_exact:/governance/FACTORY_CATALOG.json",
+        "former_redirect:/governance/FACTORY_CATALOG.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/FREEMIUM_POLICY_LOCKED_v1.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/FREEMIUM_POLICY_LOCKED_v1.md",
+      "source_coverage": [
+        "denylist_exact:/governance/FREEMIUM_POLICY_LOCKED_v1.md",
+        "former_redirect:/governance/FREEMIUM_POLICY_LOCKED_v1.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/golden-edge-synth",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/golden-edge-synth/",
+      "source_coverage": [
+        "former_redirect:/governance/golden-edge-synth"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/golden-edge-synth/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/golden-edge-synth/",
+      "source_coverage": [
+        "denylist_prefix_root:/governance/golden-edge-synth/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/golden-edge-synth/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/golden-edge-synth/",
+      "source_coverage": [
+        "denylist_prefix_nested:/governance/golden-edge-synth/",
+        "former_redirect:/governance/golden-edge-synth/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/LAW_STACK.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/LAW_STACK.json",
+      "source_coverage": [
+        "denylist_exact:/governance/LAW_STACK.json",
+        "former_redirect:/governance/LAW_STACK.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/NODE_CATALOG.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/NODE_CATALOG.json",
+      "source_coverage": [
+        "denylist_exact:/governance/NODE_CATALOG.json",
+        "former_redirect:/governance/NODE_CATALOG.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/oas-engine",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/oas-engine/",
+      "source_coverage": [
+        "former_redirect:/governance/oas-engine"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/oas-engine/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/oas-engine/",
+      "source_coverage": [
+        "denylist_prefix_root:/governance/oas-engine/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/oas-engine/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/governance/oas-engine/",
+      "source_coverage": [
+        "denylist_prefix_nested:/governance/oas-engine/",
+        "former_redirect:/governance/oas-engine/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/OPS_LIVE_STATUS_LOCKED.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/OPS_LIVE_STATUS_LOCKED.json",
+      "source_coverage": [
+        "denylist_exact:/governance/OPS_LIVE_STATUS_LOCKED.json",
+        "former_redirect:/governance/OPS_LIVE_STATUS_LOCKED.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/PUBLIC_OUTPUT_DENYLIST.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/PUBLIC_OUTPUT_DENYLIST.json",
+      "source_coverage": [
+        "denylist_exact:/governance/PUBLIC_OUTPUT_DENYLIST.json",
+        "former_redirect:/governance/PUBLIC_OUTPUT_DENYLIST.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/README.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/README.md",
+      "source_coverage": [
+        "denylist_exact:/governance/README.md",
+        "former_redirect:/governance/README.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/ROUTE_INVENTORY.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/ROUTE_INVENTORY.json",
+      "source_coverage": [
+        "denylist_exact:/governance/ROUTE_INVENTORY.json",
+        "former_redirect:/governance/ROUTE_INVENTORY.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/strategy-alignment-map.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/strategy-alignment-map.json",
+      "source_coverage": [
+        "denylist_exact:/governance/strategy-alignment-map.json",
+        "former_redirect:/governance/strategy-alignment-map.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/STRIPE_CATALOG.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/STRIPE_CATALOG.json",
+      "source_coverage": [
+        "denylist_exact:/governance/STRIPE_CATALOG.json",
+        "former_redirect:/governance/STRIPE_CATALOG.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/governance/VALIDATOR_REGISTRY.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/governance/VALIDATOR_REGISTRY.json",
+      "source_coverage": [
+        "denylist_exact:/governance/VALIDATOR_REGISTRY.json",
+        "former_redirect:/governance/VALIDATOR_REGISTRY.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/infra",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/infra/",
+      "source_coverage": [
+        "former_redirect:/infra"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/infra/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/infra/",
+      "source_coverage": [
+        "denylist_prefix_root:/infra/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/infra/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/infra/",
+      "source_coverage": [
+        "denylist_prefix_nested:/infra/",
+        "former_redirect:/infra/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/infrastructure",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/infrastructure/",
+      "source_coverage": [
+        "former_redirect:/infrastructure"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/infrastructure/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/infrastructure/",
+      "source_coverage": [
+        "denylist_prefix_root:/infrastructure/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/infrastructure/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/infrastructure/",
+      "source_coverage": [
+        "denylist_prefix_nested:/infrastructure/",
+        "former_redirect:/infrastructure/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L0-law",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L0-law/",
+      "source_coverage": [
+        "former_redirect:/L0-law"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L0-law/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L0-law/",
+      "source_coverage": [
+        "denylist_prefix_root:/L0-law/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L0-law/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L0-law/",
+      "source_coverage": [
+        "denylist_prefix_nested:/L0-law/",
+        "former_redirect:/L0-law/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L1-operational",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L1-operational/",
+      "source_coverage": [
+        "former_redirect:/L1-operational"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L1-operational/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L1-operational/",
+      "source_coverage": [
+        "denylist_prefix_root:/L1-operational/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L1-operational/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L1-operational/",
+      "source_coverage": [
+        "denylist_prefix_nested:/L1-operational/",
+        "former_redirect:/L1-operational/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L2-knowledge",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L2-knowledge/",
+      "source_coverage": [
+        "former_redirect:/L2-knowledge"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L2-knowledge/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L2-knowledge/",
+      "source_coverage": [
+        "denylist_prefix_root:/L2-knowledge/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L2-knowledge/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L2-knowledge/",
+      "source_coverage": [
+        "denylist_prefix_nested:/L2-knowledge/",
+        "former_redirect:/L2-knowledge/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L3-external",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L3-external/",
+      "source_coverage": [
+        "former_redirect:/L3-external"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L3-external/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L3-external/",
+      "source_coverage": [
+        "denylist_prefix_root:/L3-external/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/L3-external/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/L3-external/",
+      "source_coverage": [
+        "denylist_prefix_nested:/L3-external/",
+        "former_redirect:/L3-external/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/Makefile",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/Makefile",
+      "source_coverage": [
+        "mandatory_artifact_absence:/Makefile"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/Noetfield-All-Documents",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/Noetfield-All-Documents/",
+      "source_coverage": [
+        "former_redirect:/Noetfield-All-Documents"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/Noetfield-All-Documents/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/Noetfield-All-Documents/",
+      "source_coverage": [
+        "denylist_prefix_root:/Noetfield-All-Documents/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/Noetfield-All-Documents/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/Noetfield-All-Documents/",
+      "source_coverage": [
+        "denylist_prefix_nested:/Noetfield-All-Documents/",
+        "former_redirect:/Noetfield-All-Documents/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/OFFERINGS_LOCKED.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/OFFERINGS_LOCKED.md",
+      "source_coverage": [
+        "denylist_exact:/OFFERINGS_LOCKED.md",
+        "former_redirect:/OFFERINGS_LOCKED.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/ops",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/ops/",
+      "source_coverage": [
+        "former_redirect:/ops"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/ops/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/ops/",
+      "source_coverage": [
+        "denylist_prefix_root:/ops/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/ops/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/ops/",
+      "source_coverage": [
+        "denylist_prefix_nested:/ops/",
+        "former_redirect:/ops/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/os",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/os/",
+      "source_coverage": [
+        "former_redirect:/os"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/os/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/os/",
+      "source_coverage": [
+        "denylist_prefix_root:/os/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/os/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/os/",
+      "source_coverage": [
+        "denylist_prefix_nested:/os/",
+        "former_redirect:/os/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/packages",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/packages/",
+      "source_coverage": [
+        "former_redirect:/packages"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/packages/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/packages/",
+      "source_coverage": [
+        "denylist_prefix_root:/packages/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/packages/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/packages/",
+      "source_coverage": [
+        "denylist_prefix_nested:/packages/",
+        "former_redirect:/packages/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/packages/schemas/tle-v1.schema.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/packages/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/packages/schemas/tle-v1.schema.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/platform",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/platform/",
+      "source_coverage": [
+        "former_redirect:/platform"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/platform/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/platform/",
+      "source_coverage": [
+        "denylist_prefix_root:/platform/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/platform/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/platform/",
+      "source_coverage": [
+        "denylist_prefix_nested:/platform/",
+        "former_redirect:/platform/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/PRODUCT_BRIEF.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/PRODUCT_BRIEF.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/PRODUCT_BRIEF.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/PROJECT_BOUNDARIES_LOCKED.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/PROJECT_BOUNDARIES_LOCKED.md",
+      "source_coverage": [
+        "denylist_exact:/PROJECT_BOUNDARIES_LOCKED.md",
+        "former_redirect:/PROJECT_BOUNDARIES_LOCKED.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/railway.toml",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/railway.toml",
+      "source_coverage": [
+        "denylist_exact:/railway.toml",
+        "former_redirect:/railway.toml"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/README.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/README.md",
+      "source_coverage": [
+        "mandatory_artifact_absence:/README.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/repo-policy.json",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/repo-policy.json",
+      "source_coverage": [
+        "mandatory_artifact_absence:/repo-policy.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/reports",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/reports/",
+      "source_coverage": [
+        "former_redirect:/reports"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/reports/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/reports/",
+      "source_coverage": [
+        "denylist_prefix_root:/reports/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/reports/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/reports/",
+      "source_coverage": [
+        "denylist_prefix_nested:/reports/",
+        "former_redirect:/reports/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/reports/recovery/NF-REL-002.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/reports/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/reports/recovery/NF-REL-002.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/ROUTING_CARD.md",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "EXACT:/ROUTING_CARD.md",
+      "source_coverage": [
+        "denylist_exact:/ROUTING_CARD.md",
+        "former_redirect:/ROUTING_CARD.md"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/scripts",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/scripts/",
+      "source_coverage": [
+        "former_redirect:/scripts"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/scripts/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/scripts/",
+      "source_coverage": [
+        "denylist_prefix_root:/scripts/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/scripts/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/scripts/",
+      "source_coverage": [
+        "denylist_prefix_nested:/scripts/",
+        "former_redirect:/scripts/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/scripts/build-www-pages-dist.sh",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/scripts/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/scripts/build-www-pages-dist.sh"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PASSTHROUGH;STATIC_ARTIFACT_ABSENCE:/services/",
+      "source_coverage": [
+        "no_public_services_directory_index"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/ai-runtime",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/ai-runtime/",
+      "source_coverage": [
+        "former_redirect:/services/ai-runtime"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/ai-runtime/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/ai-runtime/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/ai-runtime/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/ai-runtime/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/ai-runtime/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/ai-runtime/",
+        "former_redirect:/services/ai-runtime/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/aml-trace",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/aml-trace/",
+      "source_coverage": [
+        "former_redirect:/services/aml-trace"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/aml-trace/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/aml-trace/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/aml-trace/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/aml-trace/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/aml-trace/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/aml-trace/",
+        "former_redirect:/services/aml-trace/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/copilot-governance",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/copilot-governance/",
+      "source_coverage": [
+        "former_redirect:/services/copilot-governance"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/copilot-governance/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/copilot-governance/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/copilot-governance/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/copilot-governance/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/copilot-governance/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/copilot-governance/",
+        "former_redirect:/services/copilot-governance/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/events",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/events/",
+      "source_coverage": [
+        "former_redirect:/services/events"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/events/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/events/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/events/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/events/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/events/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/events/",
+        "former_redirect:/services/events/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/factories",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/factories/",
+      "source_coverage": [
+        "former_redirect:/services/factories"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/factories/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/factories/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/factories/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/factories/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/factories/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/factories/",
+        "former_redirect:/services/factories/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/governance",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/governance/",
+      "source_coverage": [
+        "former_redirect:/services/governance"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/governance/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/governance/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/governance/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/governance/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/governance/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/governance/",
+        "former_redirect:/services/governance/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/graph",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/graph/",
+      "source_coverage": [
+        "former_redirect:/services/graph"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/graph/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/graph/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/graph/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/graph/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/graph/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/graph/",
+        "former_redirect:/services/graph/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/identity",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/identity/",
+      "source_coverage": [
+        "former_redirect:/services/identity"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/identity/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/identity/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/identity/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/identity/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/identity/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/identity/",
+        "former_redirect:/services/identity/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/inspectors",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/inspectors/",
+      "source_coverage": [
+        "former_redirect:/services/inspectors"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/inspectors/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/inspectors/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/inspectors/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/inspectors/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/inspectors/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/inspectors/",
+        "former_redirect:/services/inspectors/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/ledger",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/ledger/",
+      "source_coverage": [
+        "former_redirect:/services/ledger"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/ledger/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/ledger/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/ledger/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/ledger/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/ledger/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/ledger/",
+        "former_redirect:/services/ledger/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/legal-review",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/legal-review/",
+      "source_coverage": [
+        "former_redirect:/services/legal-review"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/legal-review/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/legal-review/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/legal-review/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/legal-review/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/legal-review/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/legal-review/",
+        "former_redirect:/services/legal-review/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/signals",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/signals/",
+      "source_coverage": [
+        "former_redirect:/services/signals"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/signals/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/signals/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/signals/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/signals/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/signals/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/signals/",
+        "former_redirect:/services/signals/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/trust-brief",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/trust-brief/",
+      "source_coverage": [
+        "former_redirect:/services/trust-brief"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/trust-brief/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/trust-brief/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/trust-brief/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/trust-brief/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/trust-brief/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/trust-brief/",
+        "former_redirect:/services/trust-brief/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/workflow",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/workflow/",
+      "source_coverage": [
+        "former_redirect:/services/workflow"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/workflow/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/workflow/",
+      "source_coverage": [
+        "denylist_prefix_root:/services/workflow/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/services/workflow/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/services/workflow/",
+      "source_coverage": [
+        "denylist_prefix_nested:/services/workflow/",
+        "former_redirect:/services/workflow/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/temporary.tmp",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "STATIC_ARTIFACT_ABSENCE:/temporary.tmp",
+      "source_coverage": [
+        "mandatory_artifact_absence:/temporary.tmp"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/tests",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/tests/",
+      "source_coverage": [
+        "former_redirect:/tests"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/tests/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/tests/",
+      "source_coverage": [
+        "denylist_prefix_root:/tests/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/tests/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/tests/",
+      "source_coverage": [
+        "denylist_prefix_nested:/tests/",
+        "former_redirect:/tests/:path*"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/tests/unit/test_investor_diligence_lane.py",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/tests/",
+      "source_coverage": [
+        "mandatory_artifact_absence:/tests/unit/test_investor_diligence_lane.py"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/var",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/var/",
+      "source_coverage": [
+        "former_redirect:/var"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/var/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/var/",
+      "source_coverage": [
+        "denylist_prefix_root:/var/"
+      ],
+      "result": "PASS"
+    },
+    {
+      "requested_protected_path": "/var/__nf_rel_002_probe__/artifact.txt",
+      "expected_status": 404,
+      "actual_status": 404,
+      "middleware_rule_responsible": "PREFIX:/var/",
+      "source_coverage": [
+        "denylist_prefix_nested:/var/",
+        "former_redirect:/var/:path*"
+      ],
+      "result": "PASS"
+    }
+  ]
+}

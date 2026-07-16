@@ -34,6 +34,7 @@ coverage/
 *.tsbuildinfo
 
 .terraform/
+.wrangler/
 *.tfstate
 *.tfstate.*
 
@@ -51,6 +52,7 @@ docs/internal/
 .dev-tunnel-url.txt.tmp
 .env*
 reports/www-audit/snapshots/
+reports/recovery/*.patch
 
 # L0 repo graph memory — full index is a large local cache (~4MB, sprawling repo);
 # rebuild on demand via scripts/build_repo_graph_v1.py (~2s). Only graph-out/GRAPH_REPORT.md is committed.

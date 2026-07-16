@@ -5,18 +5,37 @@ on:
     branches: [main]
     paths:
       - "**/*.html"
+      - "api/**"
       - "assets/**"
+      - "functions/**"
+      - "governance/PUBLIC_OUTPUT_DENYLIST.json"
+      - "governance/www-public-artifact-v1.json"
+      - "Makefile"
+      - "scripts/build-public-www-artifact.py"
+      - "scripts/build-www-pages-dist.sh"
       - "scripts/generate_sitemap.py"
       - "scripts/audit_public_site_health.py"
+      - "scripts/verify-public-output-allowlist.py"
+      - "scripts/verify-www-**"
       - "sitemap.xml"
       - ".github/workflows/noetfield-www-ci.yml"
   pull_request:
     paths:
       - "**/*.html"
+      - "api/**"
       - "assets/**"
+      - "functions/**"
+      - "governance/PUBLIC_OUTPUT_DENYLIST.json"
+      - "governance/www-public-artifact-v1.json"
+      - "Makefile"
+      - "scripts/build-public-www-artifact.py"
+      - "scripts/build-www-pages-dist.sh"
       - "scripts/generate_sitemap.py"
       - "scripts/audit_public_site_health.py"
+      - "scripts/verify-public-output-allowlist.py"
+      - "scripts/verify-www-**"
       - "sitemap.xml"
+      - "tests/unit/test_investor_diligence_lane.py"
 
 jobs:
   www-health:
@@ -30,10 +49,19 @@ jobs:
         with:
           python-version: "3.11"
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
       - name: Install test dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
+          npm ci
+
+      - name: Exact public artifact verification
+        run: make verify-static-www
 
       - name: Public site health
         run: python3 scripts/report_slo_health_v1.py --scope public-site-ci --budget-seconds 180 -- make site-health

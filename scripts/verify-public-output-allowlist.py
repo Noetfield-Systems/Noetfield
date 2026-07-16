@@ -1,178 +1,178 @@
 #!/usr/bin/env python3
-"""Fail closed when generated public output exposes internal Noetfield truth."""
+"""Fail closed unless public output exactly matches the tracked allowlist."""
 
 from __future__ import annotations
 
 import argparse
 import json
-import re
-import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "www-pages-dist"
+ALLOWLIST = ROOT / "governance" / "www-public-artifact-v1.json"
 DENYLIST = ROOT / "governance" / "PUBLIC_OUTPUT_DENYLIST.json"
 
-def public_denylist() -> dict[str, list[str]]:
+FORBIDDEN_ROOT_FILES = {
+    "AGENTS.md",
+    "README.md",
+    "repo-policy.json",
+    "Makefile",
+    "PRODUCT_BRIEF.md",
+    "FOUNDER_CANON.md",
+    "package.json",
+    "package-lock.json",
+    "pyproject.toml",
+    "wrangler.toml",
+    "railway.toml",
+}
+FORBIDDEN_PREFIXES = {
+    ".agents/",
+    ".claude/",
+    ".cursor/",
+    ".git/",
+    ".github/",
+    ".noetfield/",
+    ".sina-agent/",
+    ".vscode/",
+    "L0-law/",
+    "L1-operational/",
+    "L2-knowledge/",
+    "L3-external/",
+    "Noetfield-All-Documents/",
+    "_archive/",
+    "api/",
+    "apps/",
+    "config/",
+    "data/",
+    "docs/",
+    "governance-console/",
+    "infra/",
+    "infrastructure/",
+    "node_modules/",
+    "ops/",
+    "os/",
+    "packages/",
+    "receipts/",
+    "reports/",
+    "scripts/",
+    "tests/",
+    "tmp/",
+    "tools/",
+    "var/",
+}
+FORBIDDEN_SUFFIXES = (
+    ".bak",
+    ".gz",
+    ".orig",
+    ".py",
+    ".pyc",
+    ".rej",
+    ".sh",
+    ".sql",
+    ".tar",
+    ".tmp",
+    ".toml",
+    ".tsx",
+    ".ts",
+    ".zip",
+    "~",
+    ".swp",
+    ".swo",
+)
+
+
+def expected_files() -> set[str]:
+    data = json.loads(ALLOWLIST.read_text(encoding="utf-8"))
+    return set(data["static_files"])
+
+
+def denylist() -> dict[str, list[str]]:
     return json.loads(DENYLIST.read_text(encoding="utf-8"))
 
 
-def forbidden_prefixes() -> tuple[str, ...]:
-    denylist = public_denylist()
-    prefixes = [prefix.lstrip("/") for prefix in denylist.get("prefix_paths", [])]
-    return tuple(dict.fromkeys(prefixes + ["prompts/"]))
+def actual_files(output: Path) -> set[str]:
+    return {
+        path.relative_to(output).as_posix()
+        for path in output.rglob("*")
+        if path.is_file()
+    }
 
 
-def forbidden_exact() -> set[str]:
-    denylist = public_denylist()
-    exact = {path.lstrip("/") for path in denylist.get("exact_paths", [])}
-    exact.update({"Makefile", "railway.json", "package-lock.json"})
-    return exact
-
-FORBIDDEN_ROOT_PATTERNS = (
-    re.compile(r"^[A-Z0-9_./-]*LOCKED(?:_[A-Za-z0-9.-]+)?\.md$"),
-    re.compile(r"^[A-Z0-9_./-]*SSOT(?:_[A-Za-z0-9.-]+)?\.md$"),
-)
-
-TEXT_SUFFIXES = {
-    ".html",
-    ".htm",
-    ".js",
-    ".json",
-    ".md",
-    ".txt",
-    ".css",
-    ".xml",
-}
-
-FORBIDDEN_CONTENT_PATTERNS = (
-    re.compile(r"/docs/ops/", re.I),
-    re.compile(r"docs/ops/", re.I),
-    re.compile(r"/services/", re.I),
-    re.compile(r"services/governance", re.I),
-    re.compile(r"AGENT_SELF_AUDIT", re.I),
-    re.compile(r"plan-with-no-asf", re.I),
-    re.compile(r"make nf-prove", re.I),
-    re.compile(r"Hub approve", re.I),
-    re.compile(r"founder never", re.I),
-    re.compile(r"SourceA", re.I),
-    re.compile(r"/Users/sinakazemnezhad/", re.I),
-    re.compile(r"ops/private", re.I),
-    re.compile(r"\.jsonl\b", re.I),
-)
-
-PUBLIC_MARKDOWN_PREFIXES = (
-    "docs/api/",
-    "docs/copilot/",
-    "docs/diligence/",
-    "docs/federal/",
-    "docs/msp/",
-    "docs/runtime/",
-    "docs/templates/",
-    "docs/trust-brief/",
-)
-
-
-def rel(path: Path, root: Path) -> str:
-    return path.relative_to(root).as_posix()
-
-
-def is_forbidden(rel_path: str) -> str | None:
-    if rel_path in forbidden_exact():
-        return "forbidden exact file"
-    if any(rel_path.startswith(prefix) for prefix in forbidden_prefixes()):
-        return "forbidden internal prefix"
-    if "/" not in rel_path:
-        if any(pattern.search(rel_path) for pattern in FORBIDDEN_ROOT_PATTERNS):
-            return "forbidden root truth doc"
-    if rel_path.endswith(".md") and not rel_path.startswith(PUBLIC_MARKDOWN_PREFIXES):
-        return "markdown is not in public-doc allowlist"
-    if rel_path.endswith(".jsonl"):
-        return "jsonl telemetry/log file"
+def forbidden_reason(rel_path: str) -> str | None:
+    if rel_path in FORBIDDEN_ROOT_FILES:
+        return "internal root file"
+    if any(rel_path.startswith(prefix) for prefix in FORBIDDEN_PREFIXES):
+        return "internal/source prefix"
+    lower = rel_path.lower()
+    if ".bak" in Path(lower).name or lower.endswith(FORBIDDEN_SUFFIXES):
+        return "backup/source/editor/archive/temporary file"
     return None
 
 
-def content_findings(path: Path, rel_path: str) -> list[dict[str, str]]:
-    if path.suffix not in TEXT_SUFFIXES:
-        return []
-    try:
-        text = path.read_text(encoding="utf-8", errors="ignore")
-    except OSError:
-        return []
-    findings: list[dict[str, str]] = []
-    for pattern in FORBIDDEN_CONTENT_PATTERNS:
-        if pattern.search(text):
-            findings.append(
-                {
-                    "path": rel_path,
-                    "reason": f"forbidden internal content: {pattern.pattern}",
-                }
-            )
-    return findings
-
-
 def scan(output: Path) -> list[dict[str, str]]:
-    if not output.exists():
-        return []
+    if not output.is_dir():
+        return [{"path": "<artifact>", "reason": "artifact directory is absent"}]
+
+    expected = expected_files()
+    actual = actual_files(output)
     findings: list[dict[str, str]] = []
-    for path in output.rglob("*"):
-        if not path.is_file():
-            continue
-        rel_path = rel(path, output)
-        reason = is_forbidden(rel_path)
+    for path in sorted(expected - actual):
+        findings.append({"path": path, "reason": "allowlisted artifact path is missing"})
+    for path in sorted(actual - expected):
+        findings.append({"path": path, "reason": "unexpected path is not allowlisted"})
+
+    denied = denylist()
+    exact = {path.lstrip("/") for path in denied.get("exact_paths", [])}
+    prefixes = tuple(path.lstrip("/") for path in denied.get("prefix_paths", []))
+    for path in sorted(actual):
+        reason = forbidden_reason(path)
+        if path in exact:
+            reason = "PUBLIC_OUTPUT_DENYLIST exact path"
+        elif path.startswith(prefixes):
+            reason = "PUBLIC_OUTPUT_DENYLIST prefix path"
         if reason:
-            findings.append({"path": rel_path, "reason": reason})
-            continue
-        findings.extend(content_findings(path, rel_path))
+            findings.append({"path": path, "reason": reason})
     return findings
-
-
-def clean(output: Path, findings: list[dict[str, str]]) -> None:
-    for finding in findings:
-        target = output / finding["path"]
-        if target.is_file():
-            target.unlink()
-    for directory in sorted((p for p in output.rglob("*") if p.is_dir()), reverse=True):
-        try:
-            directory.rmdir()
-        except OSError:
-            pass
-    for prefix in forbidden_prefixes():
-        top = output / prefix.split("/", 1)[0]
-        if top.exists() and top.is_dir() and not any(top.iterdir()):
-            shutil.rmtree(top)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
-    parser.add_argument("--clean", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     output = Path(args.output)
     findings = scan(output)
-    if args.clean and findings:
-        clean(output, findings)
-        findings = scan(output)
-
+    unexpected = [
+        finding
+        for finding in findings
+        if finding["reason"].startswith("unexpected")
+        or "internal" in finding["reason"]
+        or "DENYLIST" in finding["reason"]
+        or "backup" in finding["reason"]
+    ]
     payload = {
         "ok": not findings,
         "output": str(output),
         "blocked_count": len(findings),
-        "findings": findings[:100],
+        "unexpected_count": len(unexpected),
+        "findings": findings,
     }
     if args.json:
         print(json.dumps(payload, indent=2, sort_keys=True))
     elif findings:
         for finding in findings[:100]:
             print(
-                f"FAIL public-output-allowlist: {finding['path']} ({finding['reason']})"
+                f"FAIL public-output-allowlist: {finding['path']} "
+                f"({finding['reason']})"
             )
         if len(findings) > 100:
             print(f"FAIL public-output-allowlist: {len(findings) - 100} more findings")
     else:
-        print("OK   public-output-allowlist: generated output contains no internal truth surfaces")
+        print(
+            "OK   public-output-allowlist: exact artifact; "
+            f"{len(actual_files(output))} static files; unexpected=0"
+        )
     return 0 if not findings else 1
 
 

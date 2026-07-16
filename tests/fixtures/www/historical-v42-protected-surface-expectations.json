@@ -1,0 +1,72 @@
+{
+  "schema": "historical-v42-protected-surface-expectations-v1",
+  "status": "historical-only",
+  "superseded_by": "NF-REL-002 protected direction-gate baseline at e83aff92764c916362767f1dcb616bc3ece9535f",
+  "do_not_apply_to": [
+    "index.html",
+    "investors/index.html"
+  ],
+  "expectations": [
+    {
+      "label": "homepage intelligence-first",
+      "file": "index.html",
+      "needles": [
+        "noetfield-www.css?v=42",
+        "nf-site-v14",
+        "data-live-proof-hero",
+        "nf-live-proof-lanes",
+        "nf-product-lane-strip",
+        "Governance specialist",
+        "agentic-specialist",
+        "VC diligence",
+        "Trust Brief",
+        "Bank Pilot",
+        "Explore product lanes",
+        "tamper-evident",
+        "nfScenarioOfDay",
+        "Apply for pilot",
+        "01 · Diagnose",
+        "Diagnostic Sprint",
+        "Copilot Governance Pack",
+        "Commercial path",
+        "Start sandbox",
+        "fail closed",
+        "Copilot becomes auditable",
+        "02 · Build",
+        "03 · Prove",
+        "04 · Govern",
+        "$2k–10k",
+        "Published tiers"
+      ]
+    },
+    {
+      "label": "investors async intake",
+      "file": "investors/index.html",
+      "needles": [
+        "nfInvestorForm",
+        "data-nf-intake-form",
+        "noetfield-intake-core.js",
+        "Diligence vault"
+      ]
+    },
+    {
+      "label": "investors honesty",
+      "file": "investors/index.html",
+      "needles": [
+        "do not inflate ARR",
+        "Governance Pack",
+        "tamper-evident",
+        "Board PDF pilots open",
+        "Shipped today"
+      ]
+    },
+    {
+      "label": "shell v42 on retired marketing hubs",
+      "files": [
+        "index.html",
+        "investors/index.html"
+      ],
+      "needle": "noetfield-shell.js?v=42"
+    }
+  ]
+}

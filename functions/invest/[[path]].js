@@ -1,6 +1,36 @@
-function hasInvestCookie(request) {
+const SUPABASE_URL = "https://ldfruywifqnfpwsfgmdl.supabase.co";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnJ1eXdpZnFuZnB3c2ZnbWRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwMzY3OTIsImV4cCI6MjA5NTYxMjc5Mn0.ETJQMWEO0eIgwDh9YSmtZ5C-jHGT31oXC1PdsUWR5RQ";
+
+function investToken(request) {
   const cookie = request.headers.get("Cookie") || "";
-  return /(?:^|;\s*)nf_invest_auth=1(?:;|$)/.test(cookie);
+  for (const part of cookie.split(";")) {
+    const [rawName, ...rawValue] = part.trim().split("=");
+    if (rawName !== "nf_invest_token") continue;
+    try {
+      return decodeURIComponent(rawValue.join("="));
+    } catch (_) {
+      return null;
+    }
+  }
+  return null;
+}
+
+async function verifyAccessToken(token, env) {
+  if (!token) return false;
+  const origin = String(env?.SUPABASE_URL || SUPABASE_URL).replace(/\/$/, "");
+  const anonKey = env?.SUPABASE_ANON_KEY || SUPABASE_ANON_KEY;
+  try {
+    const response = await fetch(`${origin}/auth/v1/user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        apikey: anonKey,
+      },
+    });
+    return response.ok;
+  } catch (_) {
+    return false;
+  }
 }
 
 function publicOrigin(request) {
@@ -20,7 +50,10 @@ function redirectSignIn(request) {
   const url = new URL(request.url);
   const signIn = new URL("/auth/sign-in/", publicOrigin(request));
   signIn.searchParams.set("next", url.pathname + url.search);
-  return Response.redirect(signIn.toString(), 302);
+  return new Response(null, {
+    status: 302,
+    headers: { Location: signIn.toString(), "Cache-Control": "no-store" },
+  });
 }
 
 export async function onRequest(context) {
@@ -30,7 +63,8 @@ export async function onRequest(context) {
     return new Response("Method not allowed", { status: 405 });
   }
 
-  if (!hasInvestCookie(request)) {
+  const token = investToken(request);
+  if (!(await verifyAccessToken(token, env))) {
     return redirectSignIn(request);
   }
 

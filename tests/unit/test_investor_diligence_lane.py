@@ -25,11 +25,26 @@ def test_homepage_has_no_gcip_bleed() -> None:
 
 def test_homepage_has_modern_shell_and_spine() -> None:
     text = HOME.read_text(encoding="utf-8")
-    assert 'id="nfHeader"' in text
-    assert 'id="nfFooter"' in text
-    assert "nf26-hero" in text
-    assert "Evaluate" in text
-    assert "Trust Ledger" in text
+    # NF-REL-002 intentionally selects the direction-gate recovery baseline.
+    # The superseded v42 shell/spine contract is preserved in the historical
+    # fixture rather than asserted by the active Phase 3 suite.
+    required = (
+        "<title>Noetfield Systems</title>",
+        '<link rel="canonical" href="https://www.noetfield.com/" />',
+        '<body class="nf-gate">',
+        '<main id="main" class="nf-gate__main">',
+        '<h1 class="nf-gate__title">Noetfield <em>Systems</em></h1>',
+        '<nav class="nf-gate__directions" aria-label="Main directions">',
+        'href="/enterprise/"',
+        'href="/motors/"',
+        'href="/about/"',
+        'href="/proof/"',
+        "/assets/noetfield-gate-v1.css?v=1",
+    )
+    for contract in required:
+        assert contract in text
+    for superseded in ('id="nfHeader"', 'id="nfFooter"', "nf26-hero", "nfInvestorForm"):
+        assert superseded not in text
 
 
 def test_checklist_map_references_all_four_groups() -> None:
