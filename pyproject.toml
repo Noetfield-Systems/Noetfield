@@ -54,6 +54,7 @@ include = ["noetfield_*"]
 [project.optional-dependencies]
 dev = [
   "mypy",
+  "pillow==12.2.0",
   "pytest",
   "ruff",
   "playwright>=1.48,<2",

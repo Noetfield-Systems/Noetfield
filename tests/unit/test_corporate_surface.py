@@ -19,6 +19,11 @@ def read(path: Path) -> str:
 
 
 def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
+    expected_images = {
+        ROOT / "index.html": "noetfield-corporate-v2.png",
+        ROOT / "about" / "index.html": "noetfield-corporate-v2.png",
+        ROOT / "investors" / "index.html": "noetfield-investors-v2.png",
+    }
     for path in PAGES:
         text = read(path)
         assert "/assets/noetfield-corporate-v1.css?v=1" in text, path
@@ -27,7 +32,11 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
         assert "Evidence before claims." in text, path
         assert 'property="og:title"' in text, path
         assert 'property="og:description"' in text, path
-        assert 'property="og:image" content="https://www.noetfield.com/noetfield-og.png"' in text, path
+        expected = f"https://www.noetfield.com/assets/social/{expected_images[path]}"
+        assert f'property="og:image" content="{expected}"' in text, path
+        assert 'property="og:image:width" content="1200"' in text, path
+        assert 'property="og:image:height" content="630"' in text, path
+        assert f'name="twitter:image" content="{expected}"' in text, path
         assert text.count("<h1") == 1, path
         for landmark in ("<header", "<nav", '<main id="main">', "<footer"):
             assert landmark in text, f"{path}: {landmark}"
