@@ -6,7 +6,7 @@
 | **Agent display** | `[NF-LOCAL-REPO-AGENT]` |
 | **Doc id** | incident-www-stale-deploy-overwrite-2026-07-14 |
 | **Severity** | **P0** (founder-classified **critical** — week of locked live work ruined by stale ship) |
-| **Status** | **open** |
+| **Status** | **closed** — 2026-07-17 |
 | **Reporter** | founder |
 | **Surfaces** | `www.noetfield.com/` · deploy path · agent www ship workflow |
 | **Related** | INCIDENT-2026-07-06-001 (interactive downgrade) · R-012 |
@@ -87,10 +87,10 @@ Used during CS#2 www deploy to “isolate” proof files. Isolation of commit sc
 - [x] **T0 — Remove Investor/invest from live homepage** (`8054406e` + production deploy `2710df84`). Verified live: Enterprise · Motor only.
 - [x] **E2E fail-closed** if homepage reintroduces `/investors/`, `/invest/`, or “Investor”.
 - [x] **File this incident** + registry + MEMORY bump (R-014).
-- [ ] **Install mandatory pre-deploy anti-stale gate** — compare `www-pages-dist` to live `www.noetfield.com` for locked paths; FAIL if package is older/leakier than live.
-- [ ] **Wire gate into** `scripts/deploy-www-cloudflare.sh` before `wrangler pages deploy`.
-- [ ] **Cursor rule:** NEVER stash www WIP then deploy HEAD to “isolate” a scoped change.
-- [ ] **Founder sign-off** on anti-stale gate markers list (`/`, invest-leak denylist, interactive surfaces).
+- [x] **Install mandatory pre-deploy anti-stale gate** — v2 compares `www-pages-dist` to live `www.noetfield.com` for protected surfaces and fails closed if the package regresses or leaks prohibited content.
+- [x] **Wire gate into** `scripts/deploy-www-cloudflare.sh` before `wrangler pages deploy`.
+- [x] **Cursor rule:** NEVER stash www WIP then deploy HEAD to “isolate” a scoped change.
+- [x] **Founder sign-off** on the v2 protected-surface contract and incident closure, given explicitly on 2026-07-17.
 
 ---
 
@@ -111,7 +111,7 @@ Used during CS#2 www deploy to “isolate” proof files. Isolation of commit sc
 # 2. Build dist
 bash scripts/build-www-pages-dist.sh
 # 3. Anti-stale / anti-leak vs live (mandatory once script lands)
-python3 scripts/nf_www_deploy_anti_stale_v1.py --dist www-pages-dist --live https://www.noetfield.com
+python3 scripts/nf_www_deploy_anti_stale_v2.py --dist www-pages-dist --live https://www.noetfield.com
 # 4. Only then: deploy-www-cloudflare.sh + post-deploy verify
 ```
 
@@ -119,7 +119,32 @@ python3 scripts/nf_www_deploy_anti_stale_v1.py --dist www-pages-dist --live http
 
 ## Apology
 
-The agent prioritized “clean git isolation” and CI convenience over the founder’s locked live product. That shipped a prohibited Investor homepage entry and burned a week of locked work. That is a **critical production regression pattern**, not a minor process slip. **This incident stays open** until the anti-stale deploy gate is installed and wired.
+The agent prioritized “clean git isolation” and CI convenience over the founder’s locked live product. That shipped a prohibited Investor homepage entry and burned a week of locked work. That is a **critical production regression pattern**, not a minor process slip. The incident was closed only after the v2 fail-closed guard was independently reviewed, merged, deployed from exact `main`, and verified live.
+
+---
+
+## Closure evidence — 2026-07-17
+
+> **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-07-17
+
+Founder explicitly authorized review, merge, exact-SHA deployment, and closure of this P0 incident. Closure is supported by the following immutable evidence:
+
+| Evidence | Exact value |
+|----------|-------------|
+| Guard implementation PR | `#119` — `Fix P0 WWW stale-deployment guard` |
+| Reviewed candidate SHA | `ce85b64b93a5e1971bb6d24acd85b812a7a652f2` |
+| Normal merge / deployed `main` SHA | `e0165192cd625366bb95a8f682db14e1facff58f` |
+| Production workflow | `Noetfield WWW Production` run `29562673649` — **PASS** |
+| Cloudflare Pages deployment | `05debd27-97ba-40dd-8fca-26a0f47986eb` |
+| Immutable origin | `https://05debd27.noetfield-www.pages.dev` |
+| Production receipt SHA-256 | `d7f9e599d1be5380e1f17078083cc8d4aec34ad3e3c416f5e285a9d66ee8ce83` |
+| Workflow evidence artifact | `8399916713` — ZIP SHA-256 `e1845a9d5b436fd6f23a43d4839d4622752e0cbcfceb26d2c993eec635c29edb` |
+
+The production workflow checked out the exact merge SHA, passed the exact-release verification before deployment, deployed that SHA, uploaded five evidence files, and posted the receipt back to PR `#119`. Post-deploy verification passed at `https://www.noetfield.com`; both the canonical health endpoint and immutable Pages origin returned `git_sha=e0165192cd625366bb95a8f682db14e1facff58f`, and the canonical response carried `x-noetfield-release` with the same full SHA.
+
+The v2 guard protects `/`, `/about/`, `/enterprise/`, `/motors/`, and `/proof/`; enforces the homepage investor-leak denylist; preserves interactive-surface markers; binds deployment authorization to an exact candidate SHA; and emits a deterministic anti-stale receipt. It intentionally supersedes the v1 route assumption: `/investors/` is now the public Ecosystem evidence page and `/investor-workflows/` is a governed product route, while invest-in-Noetfield CTAs remain prohibited on `/`.
+
+**Closure verdict:** the mandatory anti-stale gate is installed and wired before promotion, the agent rule is present, exact-SHA production evidence is archived, and the protected live release matches the authorized merge. P0 `INCIDENT-2026-07-14-001` is therefore **closed**.
 
 ---
 

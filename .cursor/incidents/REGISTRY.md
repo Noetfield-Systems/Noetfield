@@ -2,7 +2,7 @@
 
 | ID | Date | Severity | Status | Title |
 |----|------|----------|--------|-------|
-| [INCIDENT-2026-07-14-001](./INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md) | 2026-07-14 | **P0** | **open** | WWW stale deploy overwrote locked live — Investor leak on `/` |
+| [INCIDENT-2026-07-14-001](./INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md) | 2026-07-14 | **P0** | **closed** | WWW stale deploy overwrote locked live — Investor leak on `/` |
 | [INCIDENT-2026-07-06-001](./INCIDENT-2026-07-06-001-www-sandbox-downgrade.md) | 2026-07-06 | **P1** | **closed** | WWW sandbox downgraded to static mocks — workspace proxy restored |
 | [INCIDENT-2026-06-03-006](./INCIDENT-2026-06-03-006-ops-staleness.md) | 2026-06-03 | **P1** | **closed** | Ops staleness — built before witness; OPS_LIVE + R-013 shipped |
 | [INCIDENT-2026-06-06-005](./INCIDENT-2026-06-06-005-always-ask-next-move.md) | 2026-06-06 | **P0** | **closed** | Founder law — always ask next move before action |
