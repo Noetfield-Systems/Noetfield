@@ -152,6 +152,72 @@ test -z "$output"
     assert result.returncode == 0, result.stderr
 
 
+def test_surface_verification_retries_transient_asset_propagation(
+    tmp_path: Path,
+) -> None:
+    function = _shell_function("verify_release_surface", "sha256_url")
+    counter = tmp_path / "calls"
+    counter.write_text("0", encoding="utf-8")
+    script = f"""
+set -euo pipefail
+counter="$1"
+log() {{ printf '%s\n' "$*"; }}
+sleep() {{ :; }}
+python3() {{
+  local count
+  count="$(cat "$counter")"
+  count=$((count + 1))
+  printf '%s' "$count" > "$counter"
+  [[ "$count" -ge 2 ]]
+}}
+{function}
+verify_release_surface https://immutable.example --expected-sha {SHA} --surface www
+test "$(cat "$counter")" -eq 2
+"""
+    result = subprocess.run(
+        ["bash", "-c", script, "bash", str(counter)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "full surface verification pending (1/12)" in result.stdout
+    assert "full surface verification ready (2)" in result.stdout
+
+
+def test_surface_verification_remains_fail_closed_after_retry_budget(
+    tmp_path: Path,
+) -> None:
+    function = _shell_function("verify_release_surface", "sha256_url")
+    counter = tmp_path / "calls"
+    counter.write_text("0", encoding="utf-8")
+    script = f"""
+set -euo pipefail
+counter="$1"
+log() {{ printf '%s\n' "$*"; }}
+sleep() {{ :; }}
+python3() {{
+  local count
+  count="$(cat "$counter")"
+  printf '%s' "$((count + 1))" > "$counter"
+  return 1
+}}
+{function}
+if verify_release_surface https://immutable.example --expected-sha {SHA} --surface www; then
+  exit 9
+fi
+test "$(cat "$counter")" -eq 12
+"""
+    result = subprocess.run(
+        ["bash", "-c", script, "bash", str(counter)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "full surface verification pending (12/12)" in result.stdout
+
+
 def test_content_comparison_retries_a_transient_pages_404(tmp_path: Path) -> None:
     function = _shell_function("compare_release_content", "confirm_proxy_pin")
     counter = tmp_path / "calls"
