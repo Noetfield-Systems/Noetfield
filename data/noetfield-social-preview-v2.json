@@ -89,8 +89,8 @@
   ],
   "metadata_overrides": {
     "/": {
-      "title": "Noetfield Systems Inc. — Governed AI Execution",
-      "description": "Noetfield builds governed AI products, custom AI Motors and specialized institutional workflows on shared governed infrastructure."
+      "title": "Noetfield Systems Inc. — AI Motors & Governed Execution",
+      "description": "Noetfield builds AI Motors: governed execution systems that coordinate models, agents, tools, policies, knowledge, workflows and human authority."
     },
     "/about/": {
       "title": "About Noetfield Systems Inc.",
@@ -105,8 +105,8 @@
       "description": "Build, replace and promote institutional software through governed production, independent verification and evidence."
     },
     "/motors/": {
-      "title": "Custom AI Motors — Noetfield Systems",
-      "description": "Custom systems that turn intent, policy, tools and authority into coordinated execution, verification, escalation and recovery."
+      "title": "AI Motors for Governed Execution — Noetfield Systems",
+      "description": "What an AI Motor is, how it coordinates models, agents, tools, policy and human authority, and how it verifies, escalates, recovers and records outcomes."
     },
     "/investors/": {
       "title": "Ecosystem & Investors — Noetfield Systems",
