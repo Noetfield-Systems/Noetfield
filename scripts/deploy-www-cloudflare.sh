@@ -16,6 +16,7 @@ WRANGLER_VERSION="${CF_WRANGLER_VERSION:-4.103.0}"
 WRANGLER=(npx --yes "wrangler@${WRANGLER_VERSION}")
 DEPLOY_RECEIPT_PATH="${CF_DEPLOY_RECEIPT_PATH:-/tmp/noetfield-www-deploy-receipt.json}"
 ARTIFACT_MANIFEST="${ROOT}/tmp/noetfield-www/public-artifact-manifest.json"
+ANTI_STALE_RECEIPT="${NF_WWW_ANTI_STALE_RECEIPT:-/tmp/noetfield-www-anti-stale-v2.json}"
 PURGE_RESPONSE='{"status":"not_requested"}'
 PROXY_DEPLOY_OUT=""
 PROXY_HTTP_STATUS=""
@@ -277,8 +278,9 @@ print("[deploy-www-cloudflare] scoped cache purge accepted")
 }
 
 write_deploy_receipt() {
-  local manifest_hash
+  local manifest_hash anti_stale_hash
   manifest_hash="$(shasum -a 256 "$ARTIFACT_MANIFEST" | awk '{print $1}')"
+  anti_stale_hash="$(shasum -a 256 "$ANTI_STALE_RECEIPT" | awk '{print $1}')"
   NF_RECEIPT_PATH="$DEPLOY_RECEIPT_PATH" \
   NF_RECEIPT_EXPECTED_SHA="$EXPECTED_SHA" \
   NF_RECEIPT_RELEASE_SHA="$DEPLOYED_SHA" \
@@ -296,6 +298,8 @@ write_deploy_receipt() {
   NF_RECEIPT_PURGE_RESPONSE="$PURGE_RESPONSE" \
   NF_RECEIPT_MANIFEST_PATH="${ARTIFACT_MANIFEST#$ROOT/}" \
   NF_RECEIPT_MANIFEST_SHA256="$manifest_hash" \
+  NF_RECEIPT_ANTI_STALE_PATH="${ANTI_STALE_RECEIPT#$ROOT/}" \
+  NF_RECEIPT_ANTI_STALE_SHA256="$anti_stale_hash" \
   python3 - <<'PY'
 import json
 import os
@@ -342,6 +346,11 @@ receipt = {
         "path": value("NF_RECEIPT_MANIFEST_PATH"),
         "sha256": value("NF_RECEIPT_MANIFEST_SHA256"),
     },
+    "anti_stale_guard": {
+        "path": value("NF_RECEIPT_ANTI_STALE_PATH"),
+        "sha256": value("NF_RECEIPT_ANTI_STALE_SHA256"),
+        "verification": "PASS",
+    },
     "verification": {
         "success": True,
         "canonical_url": "https://www.noetfield.com",
@@ -375,6 +384,18 @@ python3 scripts/verify-public-output-allowlist.py
 python3 scripts/build-public-www-artifact.py --mode verify
 python3 scripts/verify_chat_greeting_coupling.py
 assert_clean_release_source "after build"
+
+AUTHORIZED_SHA="${NF_AUTHORIZED_PROMOTE_SHA:-}"
+if [[ -z "$AUTHORIZED_SHA" ]]; then
+  log "FAIL: NF_AUTHORIZED_PROMOTE_SHA is required for exact-SHA promotion"
+  exit 2
+fi
+python3 scripts/nf_www_deploy_anti_stale_v2.py \
+  --dist www-pages-dist \
+  --live "$CANONICAL" \
+  --expected-sha "$EXPECTED_SHA" \
+  --authorized-sha "$AUTHORIZED_SHA" \
+  --receipt "$ANTI_STALE_RECEIPT"
 
 ensure_project
 sync_pages_secrets

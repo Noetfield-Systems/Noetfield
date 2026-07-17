@@ -36,6 +36,7 @@ on:
       - "scripts/generate-www-deny-middleware.py"
       - "scripts/generate_sitemap.py"
       - "scripts/nf_post_deploy_verify.py"
+      - "scripts/nf_www_deploy_anti_stale_v2.py"
       - "scripts/noetfield_social_preview_v2.py"
       - "scripts/rebuild-www-v6.py"
       - "scripts/resolve-cf-pages-release.py"
@@ -48,7 +49,9 @@ on:
       - "sitemap.xml"
       - "tests/unit/test_corporate_surface.py"
       - "tests/unit/test_cf_pages_release.py"
+      - "tests/unit/test_nf_www_deploy_anti_stale_v2.py"
       - "tests/unit/test_social_preview_v2.py"
+      - "config/noetfield-www-protected-surfaces.v2.json"
       - "trust-ledger/**/*.pdf"
       - "trust-ledger/**/*.yaml"
       - ".github/workflows/noetfield-www-production.yml"
@@ -130,10 +133,12 @@ jobs:
             tests/unit/test_corporate_surface.py \
             tests/unit/test_ai_motor_category.py \
             tests/unit/test_cf_pages_release.py \
+            tests/unit/test_nf_www_deploy_anti_stale_v2.py \
             tests/unit/test_social_preview_v2.py
           node scripts/test-cf-www-proxy.mjs
           bash -n scripts/deploy-www-cloudflare.sh scripts/deploy-cf-www-proxy.sh
           python3 -m py_compile \
+            scripts/nf_www_deploy_anti_stale_v2.py \
             scripts/resolve-cf-pages-release.py \
             scripts/nf_post_deploy_verify.py
           git diff --exit-code
@@ -150,6 +155,8 @@ jobs:
           CF_WRANGLER_VERSION: "4.103.0"
           CF_WWW_PROXY_FORCE_TOKEN: "1"
           NF_SKIP_INTAKE_E2E: "1"
+          NF_AUTHORIZED_PROMOTE_SHA: ${{ github.sha }}
+          NF_WWW_ANTI_STALE_RECEIPT: release-receipts/noetfield-www-anti-stale-v2.json
         run: |
           set -euo pipefail
           test -n "$CLOUDFLARE_API_TOKEN"
@@ -192,7 +199,20 @@ jobs:
           if canonical_pass is None:
               raise SystemExit("canonical exact-release verification PASS is missing")
 
+          anti_stale_path = Path(os.environ["NF_WWW_ANTI_STALE_RECEIPT"])
+          anti_stale = json.loads(anti_stale_path.read_text(encoding="utf-8"))
+          if anti_stale.get("ok") is not True:
+              raise SystemExit("anti-stale protected-surface receipt is not PASS")
+          if anti_stale.get("candidate_sha") != expected_sha:
+              raise SystemExit("anti-stale receipt candidate does not match GitHub SHA")
+          anti_stale_digest = hashlib.sha256(anti_stale_path.read_bytes()).hexdigest()
+
           receipt = {
+              "anti_stale_guard": {
+                  "path": str(anti_stale_path),
+                  "sha256": anti_stale_digest,
+                  "verification": "PASS",
+              },
               "cache_action": {
                   "accepted": True,
                   "hosts": ["noetfield.com", "www.noetfield.com"],
@@ -228,6 +248,7 @@ jobs:
               handle.write(f"- Pages deployment: `{deployment_id}`\n")
               handle.write(f"- Immutable origin: `{immutable_url.rstrip('/')}`\n")
               handle.write(f"- Receipt SHA-256: `{digest}`\n")
+              handle.write(f"- Anti-stale guard SHA-256: `{anti_stale_digest}`\n")
               handle.write("- Scoped host cache purge: `PASS`\n")
               handle.write("- Canonical verification: `PASS`\n")
           PY
