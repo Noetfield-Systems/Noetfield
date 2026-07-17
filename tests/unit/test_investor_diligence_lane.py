@@ -28,7 +28,7 @@ def test_homepage_has_modern_shell_and_spine() -> None:
     # NF-WEB-001 replaces the recovery direction gate with the approved
     # corporate entry surface. Recovery and v42 expectations remain historical.
     required = (
-        "<title>Noetfield Systems Inc. — Governed AI Execution</title>",
+        "<title>Noetfield Systems Inc. — AI Motors &amp; Governed Execution</title>",
         '<link rel="canonical" href="https://www.noetfield.com/" />',
         '<body class="nf-corp">',
         '<main id="main">',
@@ -46,7 +46,7 @@ def test_homepage_has_modern_shell_and_spine() -> None:
         'href="/about/"',
         'href="/proof/"',
         'href="/investors/"',
-        "/assets/noetfield-corporate-v1.css?v=1",
+        "/assets/noetfield-corporate-v1.css?v=2",
     )
     for contract in required:
         assert contract in text

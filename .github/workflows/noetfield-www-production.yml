@@ -46,7 +46,6 @@ on:
       - "scripts/verify-www-**"
       - "sitemap.xml"
       - "tests/unit/test_corporate_surface.py"
-      - "tests/unit/test_ai_motor_category.py"
       - "tests/unit/test_cf_pages_release.py"
       - "tests/unit/test_social_preview_v2.py"
       - "trust-ledger/**/*.pdf"
