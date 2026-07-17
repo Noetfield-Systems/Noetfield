@@ -36,6 +36,7 @@ on:
       - "scripts/generate_sitemap.py"
       - "scripts/audit_public_site_health.py"
       - "scripts/nf_post_deploy_verify.py"
+      - "scripts/nf_www_deploy_anti_stale_v2.py"
       - "scripts/noetfield_social_preview_v2.py"
       - "scripts/rebuild-www-v6.py"
       - "scripts/resolve-cf-pages-release.py"
@@ -49,7 +50,9 @@ on:
       - "tests/unit/test_corporate_surface.py"
       - "tests/unit/test_ai_motor_category.py"
       - "tests/unit/test_cf_pages_release.py"
+      - "tests/unit/test_nf_www_deploy_anti_stale_v2.py"
       - "tests/unit/test_social_preview_v2.py"
+      - "config/noetfield-www-protected-surfaces.v2.json"
       - "receipts/noetfield-social-preview-v2.json"
       - "trust-ledger/**/*.pdf"
       - "trust-ledger/**/*.yaml"
@@ -89,6 +92,7 @@ on:
       - "scripts/generate_sitemap.py"
       - "scripts/audit_public_site_health.py"
       - "scripts/nf_post_deploy_verify.py"
+      - "scripts/nf_www_deploy_anti_stale_v2.py"
       - "scripts/noetfield_social_preview_v2.py"
       - "scripts/rebuild-www-v6.py"
       - "scripts/resolve-cf-pages-release.py"
@@ -102,7 +106,9 @@ on:
       - "tests/unit/test_corporate_surface.py"
       - "tests/unit/test_ai_motor_category.py"
       - "tests/unit/test_cf_pages_release.py"
+      - "tests/unit/test_nf_www_deploy_anti_stale_v2.py"
       - "tests/unit/test_social_preview_v2.py"
+      - "config/noetfield-www-protected-surfaces.v2.json"
       - "receipts/noetfield-social-preview-v2.json"
       - "tests/unit/test_investor_diligence_lane.py"
       - "trust-ledger/**/*.pdf"
@@ -136,8 +142,17 @@ jobs:
       - name: Exact public artifact verification
         run: make verify-static-www
 
+      - name: Protected-surface anti-stale gate
+        run: |
+          SHA="$(git rev-parse HEAD)"
+          python3 scripts/nf_www_deploy_anti_stale_v2.py \
+            --dist www-pages-dist \
+            --offline \
+            --expected-sha "$SHA" \
+            --authorized-sha "$SHA"
+
       - name: Delivery release contracts
-        run: python3 -m pytest -q tests/unit/test_corporate_surface.py tests/unit/test_ai_motor_category.py tests/unit/test_cf_pages_release.py tests/unit/test_social_preview_v2.py
+        run: python3 -m pytest -q tests/unit/test_corporate_surface.py tests/unit/test_ai_motor_category.py tests/unit/test_cf_pages_release.py tests/unit/test_nf_www_deploy_anti_stale_v2.py tests/unit/test_social_preview_v2.py
 
       - name: Public site health
         run: python3 scripts/report_slo_health_v1.py --scope public-site-ci --budget-seconds 180 -- make site-health
