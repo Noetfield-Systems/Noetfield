@@ -1384,7 +1384,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/",
-      "description": "Noetfield builds governed AI products, custom AI Motors and specialized institutional workflows on shared governed infrastructure.",
+      "description": "Noetfield builds AI Motors: governed execution systems that coordinate models, agents, tools, policies, knowledge, workflows and human authority.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1395,7 +1395,7 @@
       },
       "profile": "corporate",
       "route": "/",
-      "title": "Noetfield Systems Inc. \u2014 Governed AI Execution",
+      "title": "Noetfield Systems Inc. \u2014 AI Motors & Governed Execution",
       "verdict": "PASS"
     },
     {
@@ -1528,7 +1528,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/motors/",
-      "description": "Custom systems that turn intent, policy, tools and authority into coordinated execution, verification, escalation and recovery.",
+      "description": "What an AI Motor is, how it coordinates models, agents, tools, policy and human authority, and how it verifies, escalates, recovers and records outcomes.",
       "image_sha256": "d8348d2f73a32e0140a4c7ba27778e54fbf3879f6b787bd63d32d34179107200",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1539,7 +1539,7 @@
       },
       "profile": "motors",
       "route": "/motors/",
-      "title": "Custom AI Motors \u2014 Noetfield Systems",
+      "title": "AI Motors for Governed Execution \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
