@@ -143,18 +143,42 @@ sha256_url() {
   local base="$1"
   local path="$2"
   local expected_sha="$3"
-  curl -sS --fail "${base%/}${path}?nf_release=${expected_sha}" | shasum -a 256 | awk '{print $1}'
+  local body_file hash
+  body_file="$(mktemp "${TMPDIR:-/tmp}/nf-www-content.XXXXXX")"
+  if ! curl -sS --fail "${base%/}${path}?nf_release=${expected_sha}" -o "$body_file"; then
+    rm -f -- "$body_file"
+    return 1
+  fi
+  if ! hash="$(shasum -a 256 "$body_file" | awk '{print $1}')"; then
+    rm -f -- "$body_file"
+    return 1
+  fi
+  rm -f -- "$body_file"
+  printf '%s' "$hash"
 }
 
 compare_release_content() {
   local expected_base="$1"
   local observed_base="$2"
   local expected_sha="$3"
-  local path expected_hash observed_hash
+  local path attempt expected_hash observed_hash matched
   for path in / /assets/noetfield-corporate-v1.css /noetfield-favicon-512.png; do
-    expected_hash="$(sha256_url "$expected_base" "$path" "$expected_sha")"
-    observed_hash="$(sha256_url "$observed_base" "$path" "$expected_sha")"
-    if [[ -z "$expected_hash" || "$expected_hash" != "$observed_hash" ]]; then
+    expected_hash=""
+    observed_hash=""
+    matched=0
+    for attempt in $(seq 1 12); do
+      expected_hash=""
+      observed_hash=""
+      if expected_hash="$(sha256_url "$expected_base" "$path" "$expected_sha")" &&
+         observed_hash="$(sha256_url "$observed_base" "$path" "$expected_sha")" &&
+         [[ -n "$expected_hash" && "$expected_hash" == "$observed_hash" ]]; then
+        matched=1
+        break
+      fi
+      log "release content pending path=${path} expected=${expected_hash:-unavailable} observed=${observed_hash:-unavailable} (${attempt}/12)"
+      sleep 2
+    done
+    if [[ "$matched" != "1" ]]; then
       log "FAIL: release content mismatch path=${path} expected=${expected_hash:-missing} observed=${observed_hash:-missing}"
       return 1
     fi
