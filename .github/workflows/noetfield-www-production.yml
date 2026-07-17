@@ -25,6 +25,7 @@ on:
       - "package.json"
       - "proof/*.json"
       - "pyproject.toml"
+      - "receipts/noetfield-social-preview-v2.json"
       - "robots.txt"
       - "scripts/bundle-pages-functions.mjs"
       - "scripts/build-public-www-artifact.py"
