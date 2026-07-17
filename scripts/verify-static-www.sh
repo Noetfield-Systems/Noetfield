@@ -42,7 +42,7 @@ check_file "protected corporate homepage" index.html \
   '<title>Noetfield Systems Inc. — AI Motors &amp; Governed Execution</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp">' '<main id="main">' \
-  'Governed AI systems that can act—and show their work.' \
+  'Governed AI systems that can act and show their work.' \
   'Noetfield builds AI Motors: governed execution systems' \
   'Models generate. Agents participate. Motors operate.' \
   'Governs, executes, verifies, escalates, recovers and records the operational system.' \

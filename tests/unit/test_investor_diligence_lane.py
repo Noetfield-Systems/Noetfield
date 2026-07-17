@@ -32,7 +32,7 @@ def test_homepage_has_modern_shell_and_spine() -> None:
         '<link rel="canonical" href="https://www.noetfield.com/" />',
         '<body class="nf-corp">',
         '<main id="main">',
-        "Governed AI systems that can act—and show their work.",
+        "Governed AI systems that can act and show their work.",
         'id="capabilities"',
         "Custom AI Motors",
         "Enterprise AI Governance",
