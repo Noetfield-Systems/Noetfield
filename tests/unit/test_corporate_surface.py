@@ -1,15 +1,13 @@
 """NF-WEB-001 corporate entry surface contracts."""
 
-from pathlib import Path
 import json
 import re
-
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PAGES = (ROOT / "index.html", ROOT / "about" / "index.html", ROOT / "investors" / "index.html")
 BRIDGE_PAGES = (
     ROOT / "proof" / "index.html",
-    ROOT / "motors" / "index.html",
     ROOT / "investor-workflows" / "index.html",
 )
 
@@ -19,6 +17,11 @@ def read(path: Path) -> str:
 
 
 def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
+    expected_css_versions = {
+        ROOT / "index.html": "v=2",
+        ROOT / "about" / "index.html": "v=1",
+        ROOT / "investors" / "index.html": "v=1",
+    }
     expected_images = {
         ROOT / "index.html": "noetfield-corporate-v2.png",
         ROOT / "about" / "index.html": "noetfield-corporate-v2.png",
@@ -26,7 +29,8 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
     }
     for path in PAGES:
         text = read(path)
-        assert "/assets/noetfield-corporate-v1.css?v=1" in text, path
+        css_version = expected_css_versions[path]
+        assert f"/assets/noetfield-corporate-v1.css?{css_version}" in text, path
         assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text, path
         assert 'class="nf-corp-footer"' in text, path
         assert "Evidence before claims." in text, path
@@ -46,9 +50,13 @@ def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
     text = read(ROOT / "index.html")
     required = (
         "Vancouver · AI-native systems company &amp; product studio",
-        "human intent, business policy, institutional knowledge, AI capability and decision authority",
+        "human intent, business policy, institutional knowledge, AI capability "
+        "and decision authority",
         "act, verify, escalate, recover and produce evidence",
         "The institutional execution problem",
+        "Noetfield builds AI Motors: governed execution systems",
+        "Models generate. Agents participate. Motors operate.",
+        "Governs, executes, verifies, escalates, recovers and records the operational system.",
         "Custom AI Motors",
         "Enterprise AI Governance",
         "SourceA",
@@ -63,7 +71,7 @@ def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
     )
     for phrase in required:
         assert phrase in text
-    assert text.count("<section") == 7
+    assert text.count("<section") == 8
 
 
 def test_homepage_statuses_preserve_claim_boundaries() -> None:
@@ -79,7 +87,9 @@ def test_homepage_statuses_preserve_claim_boundaries() -> None:
     assert "not an external enterprise claim" in text
     assert "independent external validation remains planned" in text
     assert "not a certifier, regulated institution, payment operator or custodian" in text
-    assert not re.search(r"trusted by|fortune.?500|\d+[+]? (?:clients|customers|enterprises)", text, re.I)
+    assert not re.search(
+        r"trusted by|fortune.?500|\d+[+]? (?:clients|customers|enterprises)", text, re.I
+    )
     assert "$" not in text
 
 
@@ -111,14 +121,16 @@ def test_three_contact_paths_are_present_on_all_corporate_pages() -> None:
     for path in PAGES:
         text = read(path)
         for topic in topics:
-            assert f'/contact/?topic={topic}' in text, f"{path}: {topic}"
+            assert f"/contact/?topic={topic}" in text, f"{path}: {topic}"
 
 
 def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     for path in PAGES:
         text = read(path)
         assert "Live product surface · case study planned" in text, path
-        assert "Noetfield’s professional governed-execution product and infrastructure" in text, path
+        assert "Noetfield’s professional governed-execution product and infrastructure" in text, (
+            path
+        )
         assert "No external-client proof is claimed yet" in text, path
         assert "Live commercial service · case study planned" in text, path
         assert "SourceB.ca is a live multilingual service with an operating lead path" in text, path
@@ -137,6 +149,15 @@ def test_public_bridge_pages_have_coherent_navigation_and_footer() -> None:
         assert 'class="nf-gate__foot nf-vc-footer"' in text, path
         for href in ("/about/", "/proof/", "/motors/", "/investors/", "/contact/"):
             assert href in text, f"{path}: {href}"
+
+
+def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
+    text = read(ROOT / "motors" / "index.html")
+    assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text
+    assert 'class="nf-corp-footer"' in text
+    assert '<a href="/motors/" aria-current="page">AI Motors</a>' in text
+    for href in ("/about/", "/proof/", "/motors/", "/investors/"):
+        assert href in text
 
 
 def test_every_public_contact_topic_has_a_select_option() -> None:

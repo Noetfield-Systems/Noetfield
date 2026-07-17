@@ -39,10 +39,13 @@ check_absent() {
 # NF-WEB-001 protected corporate surfaces. The NF-REL-002 recovery gate and
 # superseded v42 marketing expectations remain history, not the active contract.
 check_file "protected corporate homepage" index.html \
-  '<title>Noetfield Systems Inc. — Governed AI Execution</title>' \
+  '<title>Noetfield Systems Inc. — AI Motors &amp; Governed Execution</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp">' '<main id="main">' \
   'Governed AI systems that can act—and show their work.' \
+  'Noetfield builds AI Motors: governed execution systems' \
+  'Models generate. Agents participate. Motors operate.' \
+  'Governs, executes, verifies, escalates, recovers and records the operational system.' \
   'Custom AI Motors' 'Enterprise AI Governance' \
   'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
   'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
@@ -50,7 +53,7 @@ check_file "protected corporate homepage" index.html \
   'Evidence &amp; proof' 'What Noetfield is seeking' 'Founder &amp; company' \
   'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
   'href="/enterprise/"' 'href="/motors/"' 'href="/about/"' 'href="/proof/"' \
-  'href="/investors/"' '/assets/noetfield-corporate-v1.css?v=1'
+  'href="/investors/"' '/assets/noetfield-corporate-v1.css?v=2'
 check_absent "protected homepage has no private or unsupported conversion" index.html \
   'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield'
 
@@ -91,12 +94,20 @@ check_file "historical v42 expectations archived" \
   'homepage intelligence-first' 'investors async intake' 'investors honesty' \
   'noetfield-www.css?v=42' 'nfInvestorForm' 'Shipped today'
 
-check_file "public motor enquiries stay on contact paths" motors/index.html \
-  'href="/contact/"' 'href="/contact/?topic=governed-motor"' \
-  'href="/contact/?topic=custom-workflow"' 'href="/contact/?topic=custom-gpt-motor"'
-check_absent "public motor cards do not enter private workspace" motors/index.html \
+check_file "AI Motor category definition and engagement stay public" motors/index.html \
+  '<title>AI Motors for Governed Execution — Noetfield Systems</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/motors/" />' \
+  'An AI Motor is a governed execution system that transforms events and human intent into verified operational outcomes' \
+  'Models provide intelligence. Agents perform bounded tasks. Workflows describe operating paths.' \
+  'Models generate. Agents participate. Motors operate.' \
+  'Governance surrounds execution from intake to evidence.' \
+  'Model &amp; agent orchestration' 'Verification &amp; repair' 'Recovery' 'Promotion &amp; evidence' \
+  'A bounded software change—not just a coding agent.' \
+  'No external customer adoption, broad production proof or independent validation is claimed.' \
+  'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=2'
+check_absent "public Motor page has no private workspace or obsolete category framing" motors/index.html \
   'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
-  'href="/workspace/workspace"'
+  'href="/workspace/workspace"' 'Motor &amp; Custom Workflow' 'Custom GPT motor setup'
 
 check_file "private invest route contract" invest/index.html \
   '<meta name="robots" content="noindex,nofollow" />' \
