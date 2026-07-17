@@ -139,6 +139,21 @@ PY
   return 1
 }
 
+verify_release_surface() {
+  local base="$1"
+  shift
+  local attempt
+  for attempt in $(seq 1 12); do
+    if python3 scripts/nf_post_deploy_verify.py --www-base "$base" "$@"; then
+      log "${base} full surface verification ready (${attempt})"
+      return 0
+    fi
+    log "${base} full surface verification pending (${attempt}/12)"
+    sleep 2
+  done
+  return 1
+}
+
 sha256_url() {
   local base="$1"
   local path="$2"
@@ -392,9 +407,11 @@ wait_for_service_health "$IMMUTABLE_URL" "$EXPECTED_SHA" || {
   log "FAIL: immutable Pages deployment health is unavailable"
   exit 3
 }
-python3 scripts/nf_post_deploy_verify.py --expected-sha "$EXPECTED_SHA" \
-  --surface www --www-base "$IMMUTABLE_URL" --skip-intake-e2e \
-  --provider-verified-release
+verify_release_surface "$IMMUTABLE_URL" --expected-sha "$EXPECTED_SHA" \
+  --surface www --skip-intake-e2e --provider-verified-release || {
+  log "FAIL: immutable Pages deployment surface verification did not stabilize"
+  exit 3
+}
 
 if [[ "$BRANCH" == "main" ]]; then
   wait_for_service_health "$PAGES_ALIAS" "$EXPECTED_SHA" || {
@@ -405,9 +422,11 @@ if [[ "$BRANCH" == "main" ]]; then
     log "FAIL: Pages production alias does not serve the exact deployment content"
     exit 3
   }
-  python3 scripts/nf_post_deploy_verify.py --expected-sha "$EXPECTED_SHA" \
-    --surface www --www-base "$PAGES_ALIAS" --skip-intake-e2e \
-    --provider-verified-release
+  verify_release_surface "$PAGES_ALIAS" --expected-sha "$EXPECTED_SHA" \
+    --surface www --skip-intake-e2e --provider-verified-release || {
+    log "FAIL: Pages production alias surface verification did not stabilize"
+    exit 3
+  }
 
   if ! PROXY_DEPLOY_OUT="$(CF_WWW_ORIGIN="$IMMUTABLE_URL" \
     NF_WWW_RELEASE_SHA="$EXPECTED_SHA" \
@@ -439,11 +458,14 @@ if [[ "$BRANCH" == "main" ]]; then
     log "FAIL: canonical content differs after cache action"
     exit 4
   }
-  VERIFY_ARGS=(--expected-sha "$EXPECTED_SHA" --surface www --www-base "$CANONICAL")
+  VERIFY_ARGS=(--expected-sha "$EXPECTED_SHA" --surface www)
   if [[ "${NF_SKIP_INTAKE_E2E:-0}" == "1" ]]; then
     VERIFY_ARGS+=(--skip-intake-e2e)
   fi
-  python3 scripts/nf_post_deploy_verify.py "${VERIFY_ARGS[@]}"
+  verify_release_surface "$CANONICAL" "${VERIFY_ARGS[@]}" || {
+    log "FAIL: canonical surface verification did not stabilize"
+    exit 4
+  }
   write_deploy_receipt
 fi
 
