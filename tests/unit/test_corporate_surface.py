@@ -172,6 +172,10 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert "Paid customer delivery is not claimed." in text
     assert "Demonstrated on staging Runway" in text
     assert "Evidence before claims." in text
+    assert "Trading Performance" in text
+    assert "Video Qualify" in text
+    assert "Commissioning Specialist" in text
+    assert "Software Repair" in text
     assert text.count("<h1") == 1
     assert 'href="/assets/noetfield-runways-v1.css?v=1"' in text
     for forbidden in (
