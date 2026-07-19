@@ -1485,7 +1485,7 @@ async def sandbox_export_board_pdf(request: Request) -> Response:
 
 @app.post("/api/stripe/webhook", tags=["stripe"], include_in_schema=False)
 async def stripe_commercial_webhook(request: Request) -> dict[str, object]:
-    """Stripe checkout.session.completed — notify operations@ (commercial licensing only)."""
+    """Stripe checkout.session.completed — entitlement/outbox + ops notify."""
     from noetfield_governance.stripe_webhook import handle_stripe_webhook
 
     sig = (request.headers.get("stripe-signature") or "").strip()
@@ -1499,6 +1499,67 @@ async def stripe_commercial_webhook(request: Request) -> dict[str, object]:
             raise HTTPException(status_code=503, detail=err)
         raise HTTPException(status_code=400, detail=err)
     return result
+
+
+@app.get("/api/product/entitlements/{entitlement_id}", tags=["product"], include_in_schema=False)
+async def product_entitlement_status(entitlement_id: str) -> dict[str, object]:
+    from noetfield_governance.product_jobs import entitlement_payload
+
+    payload = entitlement_payload(entitlement_id)
+    if not payload:
+        raise HTTPException(status_code=404, detail="ENTITLEMENT_NOT_FOUND")
+    return payload
+
+
+@app.post("/api/product/jobs/submit", tags=["product"], include_in_schema=False)
+async def product_job_submit(body: dict[str, object] = Body(...)) -> dict[str, object]:
+    from noetfield_governance.product_jobs import submit_product_job
+
+    status, payload = await asyncio.to_thread(submit_product_job, settings, body)
+    if status >= 400:
+        raise HTTPException(status_code=status, detail=payload)
+    return payload
+
+
+@app.get("/api/product/jobs/{job_id}", tags=["product"], include_in_schema=False)
+async def product_job_status(job_id: str) -> dict[str, object]:
+    from noetfield_governance.product_jobs import proxy_product_job
+
+    status, payload = await asyncio.to_thread(proxy_product_job, settings, "GET", job_id)
+    if status >= 400:
+        raise HTTPException(status_code=status, detail=payload)
+    return payload
+
+
+@app.get("/api/product/jobs/{job_id}/result", tags=["product"], include_in_schema=False)
+async def product_job_result(job_id: str) -> dict[str, object]:
+    from noetfield_governance.product_jobs import proxy_product_job
+
+    status, payload = await asyncio.to_thread(proxy_product_job, settings, "GET", job_id, "result")
+    if status >= 400:
+        raise HTTPException(status_code=status, detail=payload)
+    return payload
+
+
+@app.get("/api/product/jobs/{job_id}/download", tags=["product"], include_in_schema=False)
+async def product_job_download(job_id: str, artifact_id: str | None = None) -> dict[str, object]:
+    from noetfield_governance.product_jobs import proxy_product_job
+
+    query = {"artifact_id": artifact_id} if artifact_id else None
+    status, payload = await asyncio.to_thread(proxy_product_job, settings, "GET", job_id, "download", None, query)
+    if status >= 400:
+        raise HTTPException(status_code=status, detail=payload)
+    return payload
+
+
+@app.post("/api/product/jobs/{job_id}/acceptance", tags=["product"], include_in_schema=False)
+async def product_job_acceptance(job_id: str, body: dict[str, object] = Body(...)) -> dict[str, object]:
+    from noetfield_governance.product_jobs import proxy_product_job
+
+    status, payload = await asyncio.to_thread(proxy_product_job, settings, "POST", job_id, "acceptance", body)
+    if status >= 400:
+        raise HTTPException(status_code=status, detail=payload)
+    return payload
 
 
 @app.get("/api/ecosystem/public", tags=["ecosystem"])

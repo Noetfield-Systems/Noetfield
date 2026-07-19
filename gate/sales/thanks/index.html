@@ -20,8 +20,9 @@
   <h1>Thank you — payment received</h1>
   <p class="nf-lead">Operations will confirm your commercial license and send onboarding within one business day.</p>
   <p id="sessionHint" class="nf-muted" style="font-family:JetBrains Mono,monospace;font-size:.85rem;"></p>
+  <p id="researchHint" class="nf-muted" hidden style="margin-top:1rem;font-size:.9rem;"></p>
   <div class="nf-cta-actions" style="margin-top:1.5rem;">
-   <a class="btn btn-primary" href="/trust-brief/intake/">Complete intake</a>
+   <a class="btn btn-primary" id="primaryNext" href="/trust-brief/intake/">Complete intake</a>
    <a class="btn btn-secondary" href="/gate/sales/">Back to purchase hub</a>
   </div>
   <aside class="nf-stripe-disclaimer" style="margin-top:2rem;padding:1rem;border-radius:8px;background:rgba(0,0,0,.04);font-size:.85rem;">
@@ -35,6 +36,25 @@
   const sku = params.get("sku");
   if (sid) {
     document.getElementById("sessionHint").textContent = `Reference: ${sid}${sku ? " · " + sku : ""}`;
+  }
+  const researchSkus = new Set([
+    "Vendor_Decision_Brief",
+    "vendor_decision_brief",
+    "vendor-decision-brief",
+    "Spreadsheet_KPI_Pack",
+    "spreadsheet_kpi_pack",
+    "spreadsheet-kpi-pack",
+    "RFP_Response_Pack",
+    "rfp_response_pack",
+    "rfp-response-pack",
+  ]);
+  if (sku && [...researchSkus].some((value) => value.toLowerCase() === sku.toLowerCase())) {
+    const hint = document.getElementById("researchHint");
+    const primary = document.getElementById("primaryNext");
+    hint.hidden = false;
+    hint.textContent = "Research product checkout recorded. Track entitlement and submit your job after payment confirmation.";
+    primary.textContent = "Open research result hub";
+    primary.href = `/gate/research/result/?session_id=${encodeURIComponent(sid || "")}&sku=${encodeURIComponent(sku)}`;
   }
  </script>
 </body>

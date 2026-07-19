@@ -288,6 +288,18 @@ class Settings(BaseSettings):
         default=None,
         description="Stripe publishable key — only if embedding Checkout client-side (optional).",
     )
+    runway_job_gateway_base_url: str | None = Field(
+        default=None,
+        description="Shared Runway Job Gateway base URL (e.g. https://runway-gateway.example). Unset = HOLD.",
+    )
+    runway_job_gateway_key_id: str | None = Field(
+        default=None,
+        description="Gateway HMAC key id for noetfield.com product job submit.",
+    )
+    runway_job_gateway_hmac_secret: SecretStr | None = Field(
+        default=None,
+        description="Gateway HMAC secret for noetfield.com product job submit.",
+    )
 
 
 @lru_cache(maxsize=1)

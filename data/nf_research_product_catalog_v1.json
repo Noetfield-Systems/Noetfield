@@ -1,0 +1,28 @@
+{
+  "schema": "noetfield.research-product-catalog.v0.1",
+  "runway_id": "research",
+  "recipe_version": "0.1.0",
+  "products": [
+    {
+      "gtm_sku": "Vendor_Decision_Brief",
+      "sku_aliases": ["vendor_decision_brief", "vendor-decision-brief"],
+      "recipe_id": "vendor-decision-brief",
+      "display_name": "Vendor Decision Brief",
+      "price_hypothesis_usd": 699
+    },
+    {
+      "gtm_sku": "Spreadsheet_KPI_Pack",
+      "sku_aliases": ["spreadsheet_kpi_pack", "spreadsheet-kpi-pack"],
+      "recipe_id": "spreadsheet-kpi-pack",
+      "display_name": "Spreadsheet KPI Pack",
+      "price_hypothesis_usd": 599
+    },
+    {
+      "gtm_sku": "RFP_Response_Pack",
+      "sku_aliases": ["rfp_response_pack", "rfp-response-pack"],
+      "recipe_id": "rfp-response-pack",
+      "display_name": "RFP Response Pack",
+      "price_hypothesis_usd": 1499
+    }
+  ]
+}

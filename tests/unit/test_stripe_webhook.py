@@ -5,6 +5,7 @@ from __future__ import annotations
 from unittest.mock import MagicMock, patch
 
 from noetfield_governance.stripe_webhook import (
+    create_research_entitlement_outbox,
     notify_stripe_checkout,
     parse_checkout_completed,
 )
@@ -54,3 +55,19 @@ def test_notify_stripe_checkout_uses_intake_email() -> None:
         )
     assert ok is True
     send.assert_called_once()
+
+
+def test_create_research_entitlement_outbox_for_rfp_pack() -> None:
+    fulfillment = create_research_entitlement_outbox(
+        {
+            "session_id": "cs_research",
+            "customer_email": "buyer@corp.com",
+            "sku": "RFP_Response_Pack",
+            "amount_total": "149900",
+            "currency": "USD",
+        }
+    )
+    assert fulfillment is not None
+    assert fulfillment["recipe_id"] == "rfp-response-pack"
+    assert fulfillment["runway_id"] == "research"
+    assert fulfillment["outbox_status"] == "pending_submit"
