@@ -4,13 +4,7 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-}) : x)(function(x) {
-  if (typeof require !== "undefined") return require.apply(this, arguments);
-  throw Error('Dynamic require of "' + x + '" is not supported');
-});
-var __commonJS = (cb, mod) => function __require2() {
+var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __copyProps = (to, from, except, desc) => {
@@ -33,22 +27,45 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 // api/_lib/runway-hmac.js
 var require_runway_hmac = __commonJS({
   "api/_lib/runway-hmac.js"(exports, module) {
-    var { createHmac, createHash, randomBytes } = __require("node:crypto");
-    function sha256Hex(bytes) {
-      return createHash("sha256").update(bytes).digest("hex");
+    function toHex(buffer) {
+      return Array.from(new Uint8Array(buffer), (b) => b.toString(16).padStart(2, "0")).join("");
     }
-    function signRequest(secret, method, path, timestamp, nonce, bodyBytes) {
+    function utf8(text) {
+      return new TextEncoder().encode(text);
+    }
+    async function sha256Hex(bytes) {
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return toHex(digest);
+    }
+    async function hmacSha256Hex(secret, message) {
+      const key = await crypto.subtle.importKey(
+        "raw",
+        utf8(secret),
+        { name: "HMAC", hash: "SHA-256" },
+        false,
+        ["sign"]
+      );
+      const sig = await crypto.subtle.sign("HMAC", key, utf8(message));
+      return toHex(sig);
+    }
+    function randomNonceHex() {
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      return toHex(bytes);
+    }
+    async function signRequest(secret, method, path, timestamp, nonce, bodyBytes) {
+      const bodyHash = await sha256Hex(bodyBytes);
       const canonical = `${method.toUpperCase()}
 ${path}
 ${timestamp}
 ${nonce}
-${sha256Hex(bodyBytes)}`;
-      return createHmac("sha256", secret).update(canonical).digest("hex");
+${bodyHash}`;
+      return hmacSha256Hex(secret, canonical);
     }
-    function buildSignedHeaders({ secret, keyId, method, path, bodyBytes }) {
+    async function buildSignedHeaders({ secret, keyId, method, path, bodyBytes }) {
       const timestamp = (/* @__PURE__ */ new Date()).toISOString().replace(/\.\d{3}Z$/, "Z");
-      const nonce = randomBytes(16).toString("hex");
-      const signature = signRequest(secret, method, path, timestamp, nonce, bodyBytes);
+      const nonce = randomNonceHex();
+      const signature = await signRequest(secret, method, path, timestamp, nonce, bodyBytes);
       return {
         authorization: `NOETFIELD-HMAC ${keyId}:${signature}`,
         "x-noetfield-timestamp": timestamp,
@@ -136,8 +153,8 @@ var require_runway_public_dispatch = __commonJS({
       return `www-${recipeId.slice(0, 24)}-${stamp}-${rand}`.slice(0, 128);
     }
     async function signedFetch(config, method, path, payload) {
-      const bodyBytes = payload == null ? Buffer.alloc(0) : Buffer.from(JSON.stringify(payload), "utf8");
-      const headers = buildSignedHeaders({
+      const bodyBytes = payload == null ? new Uint8Array(0) : new TextEncoder().encode(JSON.stringify(payload));
+      const headers = await buildSignedHeaders({
         secret: config.secret,
         keyId: config.keyId,
         method,

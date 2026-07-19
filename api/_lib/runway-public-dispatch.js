@@ -82,8 +82,11 @@ function makeIdempotencyKey(recipeId) {
 }
 
 async function signedFetch(config, method, path, payload) {
-  const bodyBytes = payload == null ? Buffer.alloc(0) : Buffer.from(JSON.stringify(payload), "utf8");
-  const headers = buildSignedHeaders({
+  const bodyBytes =
+    payload == null
+      ? new Uint8Array(0)
+      : new TextEncoder().encode(JSON.stringify(payload));
+  const headers = await buildSignedHeaders({
     secret: config.secret,
     keyId: config.keyId,
     method,
