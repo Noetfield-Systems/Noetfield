@@ -37,7 +37,7 @@ var require_demo = __commonJS({
       steps: [
         ["validate_intent", "Validate the decision contract", "deterministic"],
         ["score_options", "Score options against approved criteria", "deterministic"],
-        ["synthesize_brief", "Synthesize the decision brief", "model backed"],
+        ["synthesize_brief", "Compose the bounded decision brief", "deterministic"],
         ["verify_evidence", "Verify citations and unsupported claims", "deterministic"],
         ["render_artifacts", "Render DOCX and PDF artifacts", "tool backed"],
         ["deliver_receipt", "Deliver artifacts with a receipt", "deterministic"]
@@ -109,7 +109,8 @@ var require_demo = __commonJS({
       const timestamp = (/* @__PURE__ */ new Date()).toISOString();
       const nonce = crypto.randomUUID().replace(/-/g, "");
       const digest = await sha256Hex(payload);
-      const canonical = [method, path, timestamp, nonce, digest].join("\n");
+      const canonicalPath = new URL(path, "https://runway.internal").pathname;
+      const canonical = [method, canonicalPath, timestamp, nonce, digest].join("\n");
       const signature = await hmacSha256Hex(secret, canonical);
       const response = await fetch(base + path, {
         method,
@@ -176,7 +177,7 @@ var require_demo = __commonJS({
         return res.status(400).json({ error: "unsupported_fixture_action" });
       }
       if (!liveAuthorized(req)) return res.status(401).json({ error: "live_demo_auth_required" });
-      const allowed = /* @__PURE__ */ new Set(["blueprint", "approve", "events", "result"]);
+      const allowed = /* @__PURE__ */ new Set(["blueprint", "approve", "events", "result", "download", "acceptance"]);
       if (!allowed.has(action)) return res.status(400).json({ error: "unsupported_live_action" });
       let response;
       if (action === "blueprint") {
@@ -188,6 +189,17 @@ var require_demo = __commonJS({
           expires_at: body.expires_at,
           approval_token: body.approval_token
         });
+      } else if (action === "acceptance") {
+        if (!/^rj_[0-9a-f]{32}$/.test(String(body.job_id || ""))) return res.status(400).json({ error: "invalid_job_id" });
+        if (!["accepted", "rejected", "revise_requested"].includes(String(body.state || ""))) return res.status(400).json({ error: "invalid_acceptance_state" });
+        response = await gatewayFetch("POST", `/v1/jobs/${body.job_id}/acceptance`, {
+          state: body.state,
+          ...typeof body.reason === "string" ? { reason: body.reason.slice(0, 2e3) } : {}
+        });
+      } else if (action === "download") {
+        if (!/^rj_[0-9a-f]{32}$/.test(String(body.job_id || ""))) return res.status(400).json({ error: "invalid_job_id" });
+        if (!/^[A-Za-z0-9._-]{1,128}$/.test(String(body.artifact_id || ""))) return res.status(400).json({ error: "invalid_artifact_id" });
+        response = await gatewayFetch("GET", `/v1/jobs/${body.job_id}/download?artifact_id=${encodeURIComponent(body.artifact_id)}`, null);
       } else {
         if (!/^rj_[0-9a-f]{32}$/.test(String(body.job_id || ""))) return res.status(400).json({ error: "invalid_job_id" });
         response = await gatewayFetch("GET", `/v1/jobs/${body.job_id}/${action}`, null);

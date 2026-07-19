@@ -99,8 +99,8 @@
 
       <span class="nf-rw-console__label">Steps</span>
       <ol class="nf-rw-console__steps">
-       <li><span>01</span><span>Diagnose</span><span>model-backed</span><span>PASS</span></li>
-       <li><span>02</span><span>Fix</span><span>model-backed</span><span>PASS</span></li>
+       <li><span>01</span><span>Diagnose</span><span>machine-backed</span><span>PASS</span></li>
+       <li><span>02</span><span>Fix</span><span>proposal-backed</span><span>PASS</span></li>
        <li><span>03</span><span>Verify</span><span>deterministic check</span><span>PASS</span></li>
       </ol>
 
@@ -109,10 +109,10 @@
 
       <dl class="nf-rw-console__metrics">
        <dt>Execution steps</dt><dd>3</dd>
-       <dt>Model invocations</dt><dd>2</dd>
+       <dt>Bounded proposals</dt><dd>2</dd>
        <dt>Deterministic checks</dt><dd>1</dd>
        <dt>Repairs</dt><dd>0</dd>
-       <dt>Metered model cost</dt><dd>measuring</dd>
+       <dt>Proposal cost</dt><dd>not reconciled</dd>
        <dt>Budget cap</dt><dd>scoped per job</dd>
       </dl>
 
@@ -259,10 +259,10 @@
       <h3>software-repair</h3>
       <dl>
        <dt>Steps</dt><dd>3</dd>
-       <dt>Model invocations</dt><dd>2</dd>
+       <dt>Bounded proposals</dt><dd>2</dd>
        <dt>Deterministic checks</dt><dd>1</dd>
        <dt>Repairs</dt><dd>0</dd>
-       <dt>Metered model cost</dt><dd>measuring</dd>
+       <dt>Proposal cost</dt><dd>not reconciled</dd>
        <dt>Budget cap</dt><dd>scoped per job</dd>
       </dl>
      </article>
@@ -271,10 +271,10 @@
       <h3>software-repair</h3>
       <dl>
        <dt>Steps</dt><dd>5</dd>
-       <dt>Model invocations</dt><dd>4</dd>
+       <dt>Bounded proposals</dt><dd>4</dd>
        <dt>Deterministic checks</dt><dd>failed</dd>
        <dt>Bounded repairs</dt><dd>2</dd>
-       <dt>Metered model cost</dt><dd>measuring</dd>
+       <dt>Proposal cost</dt><dd>not reconciled</dd>
        <dt>Stop condition</dt><dd>within cap</dd>
       </dl>
      </article>
@@ -443,7 +443,7 @@
       },
       execute: {
         title: "Execute",
-        body: "01 Diagnose (model-backed)\n02 Fix (model-backed)\n03 Verify (deterministic)"
+        body: "01 Diagnose (machine-backed)\n02 Fix (proposal-backed)\n03 Verify (deterministic)"
       },
       verify: {
         title: "Verify",
