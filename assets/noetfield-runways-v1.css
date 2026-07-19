@@ -202,6 +202,19 @@ body.nf-runways-page .nf-rw-cta .nf-button--secondary:hover {
   text-transform: uppercase;
 }
 
+.nf-rw-console__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1rem 0 0.85rem;
+}
+
+.nf-rw-status--amber {
+  color: #f0d59a;
+  border-color: rgba(240, 213, 154, 0.45);
+  background: rgba(240, 213, 154, 0.08);
+}
+
 .nf-rw-status--qualified {
   background: rgba(61, 155, 106, 0.18);
   color: #7fd3a6;

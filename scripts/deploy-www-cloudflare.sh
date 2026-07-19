@@ -72,14 +72,29 @@ assert_clean_release_source() {
 
 sync_pages_secrets() {
   local key value
-  for key in RESEND_API_KEY INTAKE_EMAIL_FROM INTAKE_EMAIL_TO OPENROUTER_API_KEY TELEGRAM_NOETFIELD_OPS_BOT_TOKEN TELEGRAM_OPS_CHAT_ID; do
-    value="$(read_vault "$key" || true)"
+  for key in RESEND_API_KEY INTAKE_EMAIL_FROM INTAKE_EMAIL_TO OPENROUTER_API_KEY TELEGRAM_NOETFIELD_OPS_BOT_TOKEN TELEGRAM_OPS_CHAT_ID RUNWAY_RUNTIME_API_SECRET RUNWAY_RUNTIME_BASE_URL RUNWAY_RUNTIME_KEY_ID; do
+    value="${!key:-}"
+    if [[ -z "$value" ]]; then
+      value="$(read_vault "$key" || true)"
+    fi
     if [[ -n "$value" ]]; then
       log "pages secret ${key}"
       printf '%s' "$value" | "${WRANGLER[@]}" pages secret put "$key" --project-name "$PROJECT" 2>/dev/null || \
         log "WARN: could not set secret ${key}"
     fi
   done
+  if [[ -z "${RUNWAY_RUNTIME_BASE_URL:-}" ]] && [[ -z "$(read_vault RUNWAY_RUNTIME_BASE_URL || true)" ]]; then
+    log "pages secret RUNWAY_RUNTIME_BASE_URL (default staging)"
+    printf '%s' "https://noetfield-runway-runtime-api-staging.sina-kazemnezhad-ca.workers.dev" | \
+      "${WRANGLER[@]}" pages secret put RUNWAY_RUNTIME_BASE_URL --project-name "$PROJECT" 2>/dev/null || \
+      log "WARN: could not set secret RUNWAY_RUNTIME_BASE_URL"
+  fi
+  if [[ -z "${RUNWAY_RUNTIME_KEY_ID:-}" ]] && [[ -z "$(read_vault RUNWAY_RUNTIME_KEY_ID || true)" ]]; then
+    log "pages secret RUNWAY_RUNTIME_KEY_ID (default staging-proof)"
+    printf '%s' "staging-proof" | \
+      "${WRANGLER[@]}" pages secret put RUNWAY_RUNTIME_KEY_ID --project-name "$PROJECT" 2>/dev/null || \
+      log "WARN: could not set secret RUNWAY_RUNTIME_KEY_ID"
+  fi
 }
 
 ensure_project() {

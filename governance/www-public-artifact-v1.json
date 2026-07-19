@@ -248,6 +248,8 @@
     "functions/api/intake/health.js",
     "functions/api/public/chat.js",
     "functions/api/public/chat/health.js",
+    "functions/api/runway/job-status.js",
+    "functions/api/runway/jobs.js",
     "functions/api/status/ai-factory.js",
     "functions/evaluate.js",
     "functions/health.js",
