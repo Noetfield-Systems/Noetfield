@@ -135,8 +135,9 @@ var require_runway_public_dispatch = __commonJS({
     function buildPublicIntake(recipe, idempotencyKey) {
       return {
         schema: "noetfield.job-intake.v0.1",
-        tenant_id: "tenant-www-public-demo",
-        entitlement_id: "ent-www-public-demo",
+        // Staging Motor entitlements are pinned in runway-cloud-runtime wrangler.jsonc.
+        tenant_id: "tenant-staging-proof",
+        entitlement_id: "ent-staging-proof",
         runway_id: recipe.runway_id,
         recipe_id: recipe.recipe_id,
         recipe_version: recipe.recipe_version,
