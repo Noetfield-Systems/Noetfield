@@ -75,7 +75,7 @@ var require_demo = __commonJS({
       ["EXECUTION_SUBMITTED", "Draft artifacts produced."],
       ["VERIFICATION_CLAIMED", "Independent checks started."],
       ["JOB_TERMINAL", "Verifier qualified the fixture result."],
-      ["RESULT_RECORDED", "Artifacts and receipt recorded."]
+      ["RESULT_PERSISTED", "Artifacts and receipt recorded."]
     ].map(function(row, index) {
       return {
         sequence: index + 1,
