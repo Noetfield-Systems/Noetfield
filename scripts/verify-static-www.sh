@@ -22,18 +22,133 @@ check_file() {
   [[ "$missing" -eq 0 ]] && ok "$label" || bad "$label"
 }
 
-check_file "homepage intelligence-first" index.html \
-  'noetfield-www.css?v=42' 'nf-site-v14' \
-  'data-live-proof-hero' 'nf-live-proof-lanes' 'nf-product-lane-strip' \
-  'Governance specialist' 'agentic-specialist' 'VC diligence' \
-  'Trust Brief' 'Bank Pilot' 'Explore product lanes' \
-  'tamper-evident' 'nfScenarioOfDay' \
-  'Apply for pilot' '01 · Diagnose' 'Diagnostic Sprint' \
-  'Copilot Governance Pack' 'Commercial path' 'Start sandbox' \
-  'fail closed' 'Copilot becomes auditable'
+check_absent() {
+  local label="$1" file="$2"
+  shift 2
+  [[ -f "$file" ]] || { bad "$label — missing $file"; return; }
+  local present=0 needle
+  for needle in "$@"; do
+    if grep -qF "$needle" "$file"; then
+      echo "     unexpectedly present in $file: $needle" >&2
+      present=1
+    fi
+  done
+  [[ "$present" -eq 0 ]] && ok "$label" || bad "$label"
+}
 
-check_file "homepage buyer journey" index.html \
-  '02 · Build' '03 · Prove' '04 · Govern' '$2k–10k' 'Published tiers'
+# NF-WEB-001 protected corporate surfaces. The NF-REL-002 recovery gate and
+# superseded v42 marketing expectations remain history, not the active contract.
+check_file "protected corporate homepage" index.html \
+  '<title>Noetfield Systems Inc. — AI Motors &amp; Governed Execution</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/" />' \
+  '<body class="nf-corp">' '<main id="main">' \
+  'Governed AI systems that can act and show their work.' \
+  'Noetfield builds AI Motors: governed execution systems' \
+  'Models generate. Agents participate. Motors operate.' \
+  'Governs, executes, verifies, escalates, recovers and records the operational system.' \
+  'Custom AI Motors' 'Enterprise AI Governance' \
+  'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
+  'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'No customers, revenue, installations or external traction are claimed' 'Investor Workflows' \
+  'Evidence &amp; proof' 'What Noetfield is seeking' 'Founder &amp; company' \
+  'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
+  'href="/enterprise/"' 'href="/motors/"' 'href="/about/"' 'href="/proof/"' \
+  'href="/investors/"' '/assets/noetfield-corporate-v1.css?v=2'
+check_absent "protected homepage has no private or unsupported conversion" index.html \
+  'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield'
+
+check_file "protected ecosystem and investor surface" investors/index.html \
+  '<title>Ecosystem &amp; Investors — Noetfield Systems</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
+  'Proof, boundaries and the next field opportunity.' \
+  'not a public securities offering or solicitation' \
+  'What exists—and what does not yet.' 'These labels describe evidence state, not commercial traction.' \
+  'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
+  'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'No customers, revenue, installations or external traction are claimed' \
+  'href="/proof/noetfield/"' 'href="/roadmap/"' 'href="/invest/"' \
+  'Private materials remain access-controlled.' 'Verified parties only · sign-in required'
+check_absent "protected investors hub has no embedded intake" investors/index.html \
+  'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'href="/workspace/'
+
+check_file "protected proof truth boundaries" proof/index.html \
+  '<title>Proof &amp; Public Evidence — Noetfield Systems</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/proof/" />' \
+  '<h1>Evidence, not slides</h1>' \
+  'What is proven, what is planned, and what must still be demonstrated before broad claims.' \
+  'Case Study #1 — Noetfield' 'Parent company self-audit. Live now.' \
+  'Case Study #2 — Governed replacement' \
+  'Client-Zero / Internal Demonstration · WRAP of /workspace · live.' \
+  'not a Fortune-500 deployment claim' 'Coming next.'
+
+check_file "protected enterprise commercial surface" enterprise/index.html \
+  '<title>Governed AI Enterprise Systems — Noetfield</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/enterprise/" />' \
+  '<h1 class="nf-hero-h1--wide">Governed AI operations—from sandbox receipt to board-ready proof.</h1>' \
+  'noetfield-shell.js?v=42' 'Apply for pilot' 'Request Trust Brief' 'Start sandbox' \
+  'No custody rails' 'not company certification'
+
+check_file "historical v42 expectations archived" \
+  tests/fixtures/www/historical-v42-protected-surface-expectations.json \
+  'historical-v42-protected-surface-expectations-v1' \
+  'homepage intelligence-first' 'investors async intake' 'investors honesty' \
+  'noetfield-www.css?v=42' 'nfInvestorForm' 'Shipped today'
+
+check_file "AI Motor category definition and engagement stay public" motors/index.html \
+  '<title>AI Motors for Governed Execution — Noetfield Systems</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/motors/" />' \
+  'An AI Motor is a governed execution system that transforms events and human intent into verified operational outcomes' \
+  'Models provide intelligence. Agents perform bounded tasks. Workflows describe operating paths.' \
+  'Models generate. Agents participate. Motors operate.' \
+  'Governance surrounds execution from intake to evidence.' \
+  'Model &amp; agent orchestration' 'Verification &amp; repair' 'Recovery' 'Promotion &amp; evidence' \
+  'A bounded software change—not just a coding agent.' \
+  'No external customer adoption, broad production proof or independent validation is claimed.' \
+  'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=2'
+check_absent "public Motor page has no private workspace or obsolete category framing" motors/index.html \
+  'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
+  'href="/workspace/workspace"' 'Motor &amp; Custom Workflow' 'Custom GPT motor setup'
+
+check_file "private invest route contract" invest/index.html \
+  '<meta name="robots" content="noindex,nofollow" />' \
+  'For verified investors only. Not a public offer.' \
+  'Investor workflow product' 'Public information about evidence-based diligence workflows.' \
+  '/assets/noetfield-invest-auth-v1.js?v=2'
+check_file "private invest Pages access control" 'functions/invest/[[path]].js' \
+  'nf_invest_token' 'verifyAccessToken(token, env)' 'return redirectSignIn(request);' \
+  'headers.set("Cache-Control", "private, no-store")'
+check_file "private invest session issuance" api/auth/invest-session.js \
+  'verifyAccessToken(token)' 'nf_invest_token=${encodeURIComponent(token)}' \
+  'Path=/invest; HttpOnly; Secure; SameSite=Lax; Max-Age=3600'
+check_file "private invest browser config is server-rendered" api/auth/invest-config.js \
+  'Cache-Control", "private, no-store' 'X-Robots-Tag", "noindex, nofollow' \
+  'process.env.SUPABASE_URL' 'process.env.SUPABASE_ANON_KEY'
+check_file "invest auth loads no-store runtime config" assets/noetfield-invest-auth-v1.js \
+  'const CONFIG_URL = "/api/auth/invest-config";'
+check_absent "private invest has no unsigned boolean bypass" 'functions/invest/[[path]].js' \
+  'nf_invest_auth=1'
+check_absent "public investor workflow is informational, not an offering" investor-workflows/index.html \
+  'public securities offering' 'buy shares' 'purchase equity' 'subscribe for shares'
+check_file "public investor workflow uses scoped enquiry paths" investor-workflows/index.html \
+  'href="/contact/?topic=investor-audit"' \
+  'href="/contact/?topic=investor-diligence"' \
+  'href="/contact/?topic=investor-workflow"' \
+  'href="/contact/?topic=custom-investor-motor"'
+check_absent "recovered investor workflow has no workspace conversion" investor-workflows/index.html \
+  'href="/workspace/'
+check_file "frontier prototype uses scoped enquiry" frontier-systems/index.html \
+  'href="/contact/?topic=frontier-governance-prototype"' \
+  'Discuss the governance-control prototype'
+check_absent "recovered frontier page has no workspace conversion" frontier-systems/index.html \
+  'href="/workspace/'
+
+check_file "about corporate positioning and venture boundary" about/index.html \
+  'An operating company for governed AI systems.' 'Founder &amp; company' \
+  'SourceA — Live product surface · case study planned.' 'No external-client proof is claimed yet' \
+  'SourceB — Live commercial service · case study planned.' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'No customers, revenue, installations or external traction are claimed' \
+  'A separate venture in formation that Noetfield may support.' \
+  'TrustField is not presented as a Noetfield product or subsidiary.'
 
 # Homepage IA compression — ≤8 top-level sections (U5 v17)
 section_count="$(grep -c '<section' index.html || true)"
@@ -45,7 +160,8 @@ fi
 
 check_file "start sandbox page" start/index.html \
   'nf-hero-flow' 'Try in minutes' '14-day trial' '50 evaluate calls' 'Apply for pilot' \
-  'data-trial-os-flow' 'NF_SANDBOX_NURTURE_SEQUENCE' 'noetfield-www.css?v=42'
+  'data-trial-os-flow' 'href="/copilot/demo/">view the public demo guide' \
+  'href="/openapi.json">Governance API' 'noetfield-www.css?v=42'
 
 check_file "pricing packaging page" pricing/index.html \
   'Published tiers' 'Apply for pilot' 'Milestone pricing' 'Developer access · free' \
@@ -77,13 +193,10 @@ check_file "gate intake page" gate/intake/index.html \
 check_file "contact async intake" contact/index.html \
   'nfContactForm' 'data-nf-intake-form' 'noetfield-forms.js' 'noetfield-intake-core.js'
 
-check_file "investors async intake" investors/index.html \
-  'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'Diligence vault'
-
 check_file "investor diligence vault" investors/diligence/index.html \
   'Investor Diligence Vault' 'nfInvestorDiligenceForm' 'investor-diligence' \
   'Shadow Governance Brief' '18-item checklist' 'nf-vault-checklist' \
-  'NF_INVESTOR_DILIGENCE_VAULT' \
+  'href="/proof/">public evidence index' 'href="/openapi.json"' \
   'noetfield-intake-core.js'
 
 check_file "msp end-client buyer block" msp/index.html \
@@ -107,8 +220,9 @@ check_file "runtime landing page" runtime/index.html \
   'POST /api/v1/governance/evaluate' 'Illustrative sandbox output' 'noetfield-www.css?v=42'
 
 check_file "federal lane page" federal/index.html \
-  'Federal Governance Pack' 'NF_OSFI_E23_DILIGENCE_REFRESH' 'NF_METADATA_EVIDENCE_INDEX' \
-  'AIA' 'Copilot PIN' 'noetfield-www.css?v=42'
+  'Federal Governance Pack' 'href="/contact/?topic=federal-governance-pack"' \
+  'href="/bank-pilot/"' 'href="/proof/"' 'href="/trust-ledger/"' \
+  'AIA' 'Copilot procurement checklist' 'Not a federal certifier' 'noetfield-www.css?v=42'
 
 check_file "partner banner embed" banner/index.html \
   'noindex,nofollow' 'REQUIRE_HUMAN_REVIEW' 'Illustrative — no fabricated hash' 'copilot-governance-v1'
@@ -144,9 +258,6 @@ check_file "footer pilot-first" assets/partials/footer.html \
 
 check_file "trust center diligence theme" trust/index.html \
   'nf-trust-diligence' 'nf-trust-doc-layout' 'fail closed' 'Metadata-only' 'Shipped'
-
-check_file "investors honesty" investors/index.html \
-  'do not inflate ARR' 'Governance Pack' 'tamper-evident' 'Board PDF pilots open' 'Shipped today'
 
 check_file "copilot dual artifact" copilot/index.html \
   'nf-hero-artifacts' 'Apply for pilot' 'board-grade governance'
@@ -186,7 +297,7 @@ check_file "ai factories status api" api/status/ai-factory.js \
   'buildStatusPreview' 'request_id'
 
 # Version coherence on primary hubs (shell + www css v=42)
-for f in index.html trust/index.html copilot/index.html msp/index.html federal/index.html investors/index.html start/index.html pricing/index.html faq/index.html contact/index.html enterprise/index.html; do
+for f in trust/index.html copilot/index.html msp/index.html federal/index.html start/index.html pricing/index.html faq/index.html contact/index.html enterprise/index.html; do
   if [[ -f "$f" ]] && ! grep -qE 'noetfield-shell\.js\?v=42' "$f"; then
     bad "shell v42 on $f"
   fi
@@ -300,20 +411,21 @@ done
 [[ -f governance/www-pages-routes.json ]] && grep -qF 'OPS_LIVE_STATUS_LOCKED.json' governance/www-pages-routes.json && ok "www-pages-routes blocks OPS_LIVE" || bad "www-pages-routes missing OPS_LIVE block"
 [[ -f governance/www-pages-routes.json ]] && grep -qF 'OFFERINGS_LOCKED.md' governance/www-pages-routes.json && ok "www-pages-routes blocks OFFERINGS_LOCKED" || bad "www-pages-routes missing OFFERINGS_LOCKED block"
 [[ -f governance/www-pages-routes.json ]] && ! grep -qF '"/governance"' governance/www-pages-routes.json && ok "www-pages-routes keeps public /governance page" || bad "www-pages-routes must not 404 the public governance hub"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/ops/' www-pages-deploy.exclude && ok "deploy exclude omits docs/ops" || bad "deploy exclude missing docs/ops"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/platform/' www-pages-deploy.exclude && ok "deploy exclude omits docs/platform" || bad "deploy exclude missing docs/platform"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'governance/*.json' www-pages-deploy.exclude && ok "deploy exclude omits governance json" || bad "deploy exclude missing governance json"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'OFFERINGS_LOCKED.md' www-pages-deploy.exclude && ok "deploy exclude omits OFFERINGS_LOCKED" || bad "deploy exclude missing OFFERINGS_LOCKED"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'platform/' www-pages-deploy.exclude && ok "deploy exclude omits platform" || bad "deploy exclude missing platform"
 [[ -f governance/www-pages-routes.json ]] && grep -qF '/platform' governance/www-pages-routes.json && ok "www-pages-routes blocks platform" || bad "www-pages-routes missing platform block"
 [[ -f governance/index.html ]] && ok "public governance hub html present" || bad "missing governance/index.html"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'docs/mockups/' www-pages-deploy.exclude && ok "deploy exclude omits docs/mockups" || bad "deploy exclude missing docs/mockups"
-[[ -f www-pages-deploy.exclude ]] && grep -qF '.agents/' www-pages-deploy.exclude && ok "deploy exclude omits .agents" || bad "deploy exclude missing .agents"
-[[ -f www-pages-deploy.exclude ]] && grep -qF '/data/' www-pages-deploy.exclude && ok "deploy exclude omits root data" || bad "deploy exclude missing /data/"
-[[ -f www-pages-deploy.exclude ]] && grep -qF 'ops/' www-pages-deploy.exclude && ok "deploy exclude omits private ops" || bad "deploy exclude missing ops"
 [[ -f governance/www-pages-routes.json ]] && grep -qF '/.agents' governance/www-pages-routes.json && ok "www-pages-routes blocks .agents" || bad "www-pages-routes missing .agents block"
 [[ -f governance/www-pages-routes.json ]] && grep -qF '/data' governance/www-pages-routes.json && ok "www-pages-routes blocks raw data" || bad "www-pages-routes missing raw data block"
 [[ -f governance/www-pages-routes.json ]] && grep -qF '/ops' governance/www-pages-routes.json && ok "www-pages-routes blocks private ops" || bad "www-pages-routes missing private ops block"
+check_file "explicit public artifact allowlist" governance/www-public-artifact-v1.json \
+  'noetfield-www-public-artifact-allowlist-v1' \
+  '"static_files": [' '"pages_function_files": [' \
+  '"governance/index.html"' '"proof/noetfield.json"' \
+  '"functions/_middleware.js"' '"functions/invest/[[path]].js"'
+check_absent "public artifact allowlist excludes repository internals" governance/www-public-artifact-v1.json \
+  '"AGENTS.md"' '"README.md"' '"repo-policy.json"' '"Makefile"' \
+  '"PRODUCT_BRIEF.md"' '"FOUNDER_CANON.md"' '"docs/' '"scripts/' \
+  '"tests/' '"reports/' '"packages/' \
+  '"assets/noetfield-platform-auth-config-v1.json"'
 [[ ! -f vercel.json ]] && ok "vercel.json removed" || bad "vercel.json must be removed"
 [[ ! -f .vercelignore ]] && ok ".vercelignore removed" || bad ".vercelignore must be removed"
 python3 scripts/verify-public-output-allowlist.py || fail=1

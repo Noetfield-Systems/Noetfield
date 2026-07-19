@@ -1,0 +1,91 @@
+{
+  "schema": "noetfield-www-protected-surfaces-v2",
+  "version": 2,
+  "authority": {
+    "incident": ".cursor/incidents/INCIDENT-2026-07-14-001-www-stale-deploy-overwrite.md",
+    "law": ".cursor/rules/000-noetfield-universal-change-preservation-law-v1.1.mdc",
+    "rule": "R-014",
+    "live_semantics": "Live is a comparison constraint, not the source of truth."
+  },
+  "canonical_url": "https://www.noetfield.com",
+  "surfaces": {
+    "homepage": {
+      "dist_path": "index.html",
+      "route": "/",
+      "required_text": [
+        "Governed AI systems that can act and show their work.",
+        "Noetfield builds AI Motors",
+        "Evidence before claims."
+      ],
+      "required_links": [
+        "/enterprise/",
+        "/motors/",
+        "/proof/",
+        "/about/",
+        "/investors/"
+      ],
+      "forbidden_text": [
+        "Invest in Noetfield",
+        "Private Investor Materials"
+      ],
+      "forbidden_link_prefixes": [
+        "/invest/",
+        "/workspace/"
+      ]
+    },
+    "enterprise": {
+      "dist_path": "enterprise/index.html",
+      "route": "/enterprise/",
+      "required_text": [
+        "Governed AI operations—from sandbox receipt to board-ready proof."
+      ],
+      "forbidden_link_prefixes": [
+        "/invest/",
+        "/workspace/"
+      ]
+    },
+    "motors": {
+      "dist_path": "motors/index.html",
+      "route": "/motors/",
+      "required_text": [
+        "AI Motors for governed execution"
+      ],
+      "required_links": [
+        "/proof/"
+      ],
+      "forbidden_link_prefixes": [
+        "/invest/",
+        "/workspace/"
+      ]
+    },
+    "proof": {
+      "dist_path": "proof/index.html",
+      "route": "/proof/",
+      "required_text": [
+        "Evidence, not slides"
+      ],
+      "required_links": [
+        "/proof/noetfield/",
+        "/proof/noetfield.json"
+      ],
+      "forbidden_link_prefixes": [
+        "/invest/",
+        "/workspace/"
+      ]
+    },
+    "about": {
+      "dist_path": "about/index.html",
+      "route": "/about/",
+      "required_text": [
+        "An operating company for governed AI systems."
+      ],
+      "required_links": [
+        "/proof/"
+      ],
+      "forbidden_link_prefixes": [
+        "/invest/",
+        "/workspace/"
+      ]
+    }
+  }
+}

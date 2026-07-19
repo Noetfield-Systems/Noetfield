@@ -20,9 +20,10 @@ import os
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -39,7 +40,7 @@ EXPECTED_ROI = "partner_conversion_integrity"
 TEST_EMAIL = "e2e@noetfield.com"  # recognized by api/_lib/intake-test.js — never a real lead/alert
 
 RUN_ID = str(uuid.uuid4())
-TS = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+TS = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 # /reports/* is on governance/PUBLIC_OUTPUT_DENYLIST.json (purged from every public
 # build) and Cloudflare Pages Functions can't read local disk (workerd, not Node) — so
@@ -76,6 +77,14 @@ ROUTE_SWEEP = (
     "/gate/partners/investors/",
     "/gate/partners/integration/",
     "/gate/partners/apply-integration/",
+)
+
+INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/noetfield/", "/roadmap/", "/invest/")
+INVESTOR_CONTACT_TOPICS = ("incubator-ecosystem", "operating-partner", "pilot-client")
+INVESTOR_DISCLOSURES = (
+    "not a public securities offering or solicitation",
+    "private materials remain access-controlled",
+    "nothing on this page bypasses authentication",
 )
 
 
@@ -185,7 +194,7 @@ def check_route_sweep() -> list[dict[str, Any]]:
 
 def check_dead_gate_partners_redirect() -> list[dict[str, Any]]:
     code, body = fetch(f"{BASE}/gate/partners/intake/")
-    if code and 'url=/enterprise/' in body:
+    if code and "url=/enterprise/" in body:
         return [
             make_finding(
                 check_id="dead_gate_partners_redirect",
@@ -203,15 +212,24 @@ def check_dead_gate_partners_redirect() -> list[dict[str, Any]]:
 
 def check_msp_and_next_dead_ctas() -> list[dict[str, Any]]:
     findings = []
-    for path, label, severity in (("/msp/", "msp_dead_cta", "critical"), ("/next/", "next_dead_cta", "high")):
+    for path, label, severity in (
+        ("/msp/", "msp_dead_cta", "critical"),
+        ("/next/", "next_dead_cta", "high"),
+    ):
         _, body = fetch(f"{BASE}{path}")
         if 'href="/gate/partners/intake/"' in body:
             findings.append(
                 make_finding(
                     check_id=label,
                     severity=severity,
-                    summary=f"{path} still links its partner CTA to the dead /gate/partners/intake/ redirect",
-                    detail=f"{path} contains href=\"/gate/partners/intake/\" — repoint to a live intake destination.",
+                    summary=(
+                        f"{path} still links its partner CTA to the dead "
+                        "/gate/partners/intake/ redirect"
+                    ),
+                    detail=(
+                        f'{path} contains href="/gate/partners/intake/" — repoint to a '
+                        "live intake destination."
+                    ),
                 )
             )
     return findings
@@ -265,7 +283,7 @@ def check_nav_discoverability() -> list[dict[str, Any]]:
                 summary="Partners / Work with us / Investors absent from primary navigation",
                 detail=(
                     "None of /partners/, /work-with-us/, /investors/ appear inside the header "
-                    "<nav class=\"menu\"> block — only reachable via the footer."
+                    '<nav class="menu"> block — only reachable via the footer.'
                 ),
             )
         ]
@@ -290,7 +308,10 @@ def check_orphaned_partner_pdfs() -> list[dict[str, Any]]:
                     check_id="orphaned_partner_pdf",
                     severity="medium",
                     summary=f"{pdf} is live but linked from no partner page",
-                    detail=f"{pdf} resolves 200 but is not referenced from /partners/, /work-with-us/, or /msp/.",
+                    detail=(
+                        f"{pdf} resolves 200 but is not referenced from /partners/, "
+                        "/work-with-us/, or /msp/."
+                    ),
                 )
             )
     return findings
@@ -319,21 +340,57 @@ def run_browser_checks() -> tuple[list[dict[str, Any]], bool]:
         from playwright.sync_api import sync_playwright
     except ImportError:
         print(
-            "WARN: playwright not installed — quick-apply / ecosystem-form / investor-form "
+            "WARN: playwright not installed — quick-apply / ecosystem-form / investor-journey "
             "browser checks SKIPPED (not counted as pass)",
             file=sys.stderr,
         )
         return [], False
 
     findings: list[dict[str, Any]] = []
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        try:
-            findings.extend(_check_quick_apply_reference_error(browser))
-            findings.extend(_check_ecosystem_estimator_leak(browser))
-            findings.extend(_check_investor_form_regression(browser))
-        finally:
-            browser.close()
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            try:
+                browser_checks = (
+                    (
+                        "quick_apply_browser_error",
+                        "Quick Apply browser check could not complete",
+                        _check_quick_apply_reference_error,
+                    ),
+                    (
+                        "ecosystem_browser_error",
+                        "Ecosystem browser check could not complete",
+                        _check_ecosystem_estimator_leak,
+                    ),
+                    (
+                        "investor_journey_browser_error",
+                        "Investor journey browser check could not complete",
+                        _check_investor_journey,
+                    ),
+                )
+                for check_id, summary, check in browser_checks:
+                    try:
+                        findings.extend(check(browser))
+                    except Exception as exc:
+                        findings.append(
+                            make_finding(
+                                check_id=check_id,
+                                severity="critical",
+                                summary=summary,
+                                detail=f"{type(exc).__name__}: {str(exc)[:500]}",
+                            )
+                        )
+            finally:
+                browser.close()
+    except Exception as exc:
+        return [
+            make_finding(
+                check_id="browser_runtime_error",
+                severity="critical",
+                summary="Playwright browser runtime could not start",
+                detail=f"{type(exc).__name__}: {str(exc)[:500]}",
+            )
+        ], False
     return findings, True
 
 
@@ -374,7 +431,10 @@ def _check_quick_apply_reference_error(browser) -> list[dict[str, Any]]:
                     check_id="quick_apply_no_network_activity",
                     severity="critical",
                     summary="Quick Apply submit produced no POST /api/intake and no JS error",
-                    detail="Clicked #nfPartnerApplyForm submit; no POST to /api/intake within 4s and no pageerror captured.",
+                    detail=(
+                        "Clicked #nfPartnerApplyForm submit; no POST to /api/intake "
+                        "within 4s and no pageerror captured."
+                    ),
                     machine_safe=True,
                     kaizen_recipe="partner_apply_reference_error",
                 )
@@ -400,7 +460,10 @@ def _check_ecosystem_estimator_leak(browser) -> list[dict[str, Any]]:
                     check_id="ecosystem_mode_not_activated",
                     severity="critical",
                     summary="Ecosystem intake mode never activated for a partner-vector URL",
-                    detail="body.intake-ecosystem-mode class never appeared — the page stayed in Trust Brief mode.",
+                    detail=(
+                        "body.intake-ecosystem-mode class never appeared — the page "
+                        "stayed in Trust Brief mode."
+                    ),
                 )
             ]
 
@@ -436,7 +499,9 @@ def _check_ecosystem_estimator_leak(browser) -> list[dict[str, Any]]:
                 make_finding(
                     check_id="ecosystem_estimator_fields_leak",
                     severity="critical",
-                    summary="Trust Brief pricing-scope fields leak into the partner application form",
+                    summary=(
+                        "Trust Brief pricing-scope fields leak into the partner application form"
+                    ),
                     detail=(
                         "Required, visible fields with no partner-relevant meaning: "
                         + ", ".join(leaked)
@@ -452,32 +517,120 @@ def _check_ecosystem_estimator_leak(browser) -> list[dict[str, Any]]:
         page.close()
 
 
-def _check_investor_form_regression(browser) -> list[dict[str, Any]]:
-    page = browser.new_page()
-    page_errors: list[str] = []
-    page.on("pageerror", lambda exc: page_errors.append(str(exc)))
-    try:
-        page.goto(f"{BASE}/investors/", wait_until="networkidle", timeout=30000)
-        page.locator('#nfInvestorForm [name="email"]').fill(TEST_EMAIL)
-        page.locator('#nfInvestorForm [name="org"]').fill("Noetfield E2E Audit")
-        page.locator('#nfInvestorForm button[type="submit"]').click()
-        try:
-            page.wait_for_selector(
-                "#nfInvestorStatus.nf-intake-async-status--ok", timeout=8000
+def check_investor_evidence_contract(html: str) -> list[dict[str, Any]]:
+    """Validate the current public Ecosystem journey without restoring the retired form."""
+    findings: list[dict[str, Any]] = []
+    lower = html.lower()
+
+    if re.search(r"id=[\"']nfInvestorForm[\"']", html):
+        findings.append(
+            make_finding(
+                check_id="investor_legacy_form_exposed",
+                severity="critical",
+                summary="Retired investor inquiry form is exposed on /investors/",
+                detail=(
+                    "The current contract is evidence-first with explicit contact topics and "
+                    "restricted /invest/ access; #nfInvestorForm must not return."
+                ),
             )
-        except Exception:
+        )
+
+    missing_links = [href for href in INVESTOR_EVIDENCE_LINKS if f'href="{href}"' not in html]
+    if missing_links:
+        findings.append(
+            make_finding(
+                check_id="investor_evidence_link_missing",
+                severity="critical",
+                summary="Public Ecosystem evidence journey is incomplete",
+                detail="Missing required evidence or restricted-access links: "
+                + ", ".join(missing_links),
+            )
+        )
+
+    missing_topics = [
+        topic for topic in INVESTOR_CONTACT_TOPICS if f'href="/contact/?topic={topic}"' not in html
+    ]
+    if missing_topics:
+        findings.append(
+            make_finding(
+                check_id="investor_contact_path_missing",
+                severity="critical",
+                summary="Public Ecosystem contact journey is incomplete",
+                detail="Missing required contact topics: " + ", ".join(missing_topics),
+            )
+        )
+
+    missing_disclosures = [phrase for phrase in INVESTOR_DISCLOSURES if phrase not in lower]
+    if missing_disclosures:
+        findings.append(
+            make_finding(
+                check_id="investor_disclosure_missing",
+                severity="critical",
+                summary="Public Ecosystem disclosure or access boundary is missing",
+                detail="Missing required boundary language: " + "; ".join(missing_disclosures),
+            )
+        )
+
+    return findings
+
+
+def _check_investor_journey(browser) -> list[dict[str, Any]]:
+    page = browser.new_page()
+    try:
+        response = page.goto(f"{BASE}/investors/", wait_until="networkidle", timeout=30000)
+        if response is None or response.status >= 400:
+            status = "no response" if response is None else f"HTTP {response.status}"
             return [
                 make_finding(
-                    check_id="investor_form_regression",
+                    check_id="investor_ecosystem_unavailable",
                     severity="critical",
-                    summary="Investor inquiry form on /investors/ no longer submits successfully",
-                    detail=(
-                        f"No success state on #nfInvestorStatus within 8s. "
-                        f"pageerror: {page_errors[0][:300] if page_errors else 'none'}"
-                    ),
+                    summary="Public Ecosystem page is unavailable",
+                    detail=f"GET /investors/ returned {status}.",
                 )
             ]
-        return []
+
+        findings = check_investor_evidence_contract(page.content())
+
+        page.goto(f"{BASE}/invest/", wait_until="domcontentloaded", timeout=30000)
+        try:
+            page.wait_for_url(re.compile(r".*/auth/sign-in/.*"), timeout=10000)
+        except Exception:
+            app = page.locator("#nf-invest-app")
+            if app.count() and not app.is_hidden():
+                findings.append(
+                    make_finding(
+                        check_id="investor_access_control_bypass",
+                        severity="critical",
+                        summary="Restricted investor materials are visible without sign-in",
+                        detail="A fresh browser context exposed #nf-invest-app on /invest/.",
+                    )
+                )
+                return findings
+            findings.append(
+                make_finding(
+                    check_id="investor_signin_redirect_invalid",
+                    severity="critical",
+                    summary="Restricted /invest/ journey did not reach sign-in",
+                    detail=(
+                        "A fresh browser context remained at "
+                        f"{page.url!r}; expected /auth/sign-in/?next=/invest/."
+                    ),
+                )
+            )
+            return findings
+
+        target = urllib.parse.urlparse(page.url)
+        next_values = urllib.parse.parse_qs(target.query).get("next", [])
+        if target.path != "/auth/sign-in/" or next_values != ["/invest/"]:
+            findings.append(
+                make_finding(
+                    check_id="investor_signin_redirect_invalid",
+                    severity="critical",
+                    summary="Restricted /invest/ sign-in redirect lost its return path",
+                    detail=f"Observed redirect URL: {page.url!r}.",
+                )
+            )
+        return findings
     finally:
         page.close()
 
@@ -511,10 +664,14 @@ def to_queue_row(f: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_receipt(findings: list[dict[str, Any]], *, browser_ran: bool, score: int) -> dict[str, Any]:
+def build_receipt(
+    findings: list[dict[str, Any]], *, browser_ran: bool, score: int
+) -> dict[str, Any]:
     critical = [f for f in findings if f["severity"] == "critical"]
     high = [f for f in findings if f["severity"] == "high"]
-    status = "fail" if critical else ("error" if not browser_ran else "pass" if not findings else "fail")
+    status = (
+        "fail" if critical else ("error" if not browser_ran else "pass" if not findings else "fail")
+    )
 
     def check_state(check_ids: tuple[str, ...], label: str) -> dict[str, Any]:
         hit = [f for f in findings if f["check_id"] in check_ids]
@@ -523,19 +680,52 @@ def build_receipt(findings: list[dict[str, Any]], *, browser_ran: bool, score: i
         return {"id": label, "label": label, "state": "available", "detail": "OK"}
 
     checks = [
-        check_state(("quick_apply_reference_error", "quick_apply_no_network_activity"), "Quick Apply (Connector) submits cleanly"),
-        check_state(("ecosystem_mode_not_activated", "ecosystem_estimator_fields_leak"), "Ecosystem apply form free of Trust Brief leakage"),
-        check_state(("investor_form_regression",), "Investor inquiry form submits cleanly"),
-        check_state(("dead_gate_partners_redirect", "msp_dead_cta", "next_dead_cta"), "MSP / next-step CTAs reach a live intake"),
+        check_state(
+            (
+                "quick_apply_reference_error",
+                "quick_apply_no_network_activity",
+                "quick_apply_browser_error",
+            ),
+            "Quick Apply (Connector) submits cleanly",
+        ),
+        check_state(
+            (
+                "ecosystem_mode_not_activated",
+                "ecosystem_estimator_fields_leak",
+                "ecosystem_browser_error",
+            ),
+            "Ecosystem apply form free of Trust Brief leakage",
+        ),
+        check_state(
+            (
+                "investor_ecosystem_unavailable",
+                "investor_legacy_form_exposed",
+                "investor_evidence_link_missing",
+                "investor_contact_path_missing",
+                "investor_disclosure_missing",
+                "investor_access_control_bypass",
+                "investor_signin_redirect_invalid",
+                "investor_journey_browser_error",
+            ),
+            "Investor evidence and restricted-access journey is intact",
+        ),
+        check_state(
+            ("dead_gate_partners_redirect", "msp_dead_cta", "next_dead_cta"),
+            "MSP / next-step CTAs reach a live intake",
+        ),
         check_state(("commission_disclosure_missing",), "Commission/referral figure disclosed"),
-        check_state(("nav_partner_discoverability",), "Partner program discoverable from primary nav"),
+        check_state(
+            ("nav_partner_discoverability",), "Partner program discoverable from primary nav"
+        ),
         check_state(("route_sweep",), "Partner-adjacent routes all resolve"),
         check_state(("orphaned_partner_pdf",), "Partner collateral linked and reachable"),
+        check_state(("browser_runtime_error",), "Playwright browser runtime starts"),
     ]
     if not browser_ran:
         for c in checks[:3]:
-            c["state"] = "orientation"
-            c["detail"] = "Playwright unavailable in this run — not verified"
+            if c["state"] == "available":
+                c["state"] = "orientation"
+                c["detail"] = "Playwright unavailable in this run — not verified"
 
     return {
         "schema": "nf-partner-onboarding-audit-v1",
@@ -555,7 +745,9 @@ def build_receipt(findings: list[dict[str, Any]], *, browser_ran: bool, score: i
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--json", action="store_true")
-    parser.add_argument("--dry-run", action="store_true", help="skip Supabase/queue/Telegram writes")
+    parser.add_argument(
+        "--dry-run", action="store_true", help="skip Supabase/queue/Telegram writes"
+    )
     parser.add_argument("--skip-browser", action="store_true", help="skip Playwright checks")
     args = parser.parse_args()
 
@@ -601,7 +793,11 @@ def main() -> int:
             f"critical: {receipt['critical_count']}",
             f"high: {receipt['high_count']}",
             f"run_id: {RUN_ID}",
-            *[f"- {f['check_id']}: {f['summary']}" for f in findings if f["severity"] == "critical"],
+            *[
+                f"- {f['check_id']}: {f['summary']}"
+                for f in findings
+                if f["severity"] == "critical"
+            ],
         ]
         send_telegram_alert(title=title, lines=lines)
 

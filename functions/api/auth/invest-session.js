@@ -51,7 +51,7 @@ var require_invest_session = __commonJS({
       }
       res.setHeader(
         "Set-Cookie",
-        "nf_invest_auth=1; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800"
+        `nf_invest_token=${encodeURIComponent(token)}; Path=/invest; HttpOnly; Secure; SameSite=Lax; Max-Age=3600`
       );
       return res.status(200).json({ ok: true });
     };

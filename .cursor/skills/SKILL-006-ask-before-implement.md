@@ -1,48 +1,49 @@
-# SKILL-006 — Ask before implement (founder law)
+# SKILL-006 — Autonomous scoped execute (CPL v1.1)
 
-**When:** Every session — before first disk mutation and at session end.
+**When:** Every session — before disk mutation and at session end.
 
-**Authority:** INCIDENT-2026-06-06-005 · MEMORY_LOCKED R-007 · R-008
+**Authority:** NOETFIELD AUTONOMOUS CHANGE-PRESERVATION LAW v1.1 · MEMORY_LOCKED R-007 · R-008 (reinterpreted)
 
 **On rule conflict:** Run [SKILL-007-auto-conflict-resolution.md](./SKILL-007-auto-conflict-resolution.md) first.
 
 ---
 
-## Before any disk edit
-
-1. State what you understood from the user message.
-2. List **suggested** next moves (options A/B/C).
-3. **ASK** founder: which option, or provide clarification.
-4. Wait for explicit order: task name, file scope, or `implement <bounded task>`.
-5. Only then: edit, commit, push (if authorized).
-
 ## Default mode
 
-**Advise-only** — no writes until founder orders.
+**Execute autonomously within the task’s reasonable scope. Preserve unrelated work.**
 
-## Exceptions (still bounded)
+Do not ask for routine permission. Do not stop merely to report preflight.
+
+## Before disk edit
+
+1. Infer smallest reasonable authorized scope from the task.
+2. Prefer isolated branch/worktree; leave unrelated dirty files untouched.
+3. Preflight automatically (baseline, ancestry, allow/protect paths, deploy authority).
+4. Proceed with scoped edits, tests, commits, and PRs as needed.
+5. Verify preservation before closing (scope subset; protected surfaces intact; no stale restore).
+
+## Ask founder only for
 
 | Trigger | Meaning |
 |---------|---------|
-| `implement <task>` | Permission for **named** task only — confirm scope if ambiguous |
-| `PLAN WITH NO ASF` + founder iter order | Ship bundle per that workflow — still one bounded iter |
-| `WRITE DOWN incident reports` | Permission to write `.cursor/incidents/` + registry + memory bump |
+| Destroy/overwrite unrelated work | Stop — `BLOCKED_SCOPE_BREACH` / preservation risk |
+| Material ambiguity | Stop — `BLOCKED_MATERIAL_AMBIGUITY` + smallest missing decision |
+| Destructive / irreversible action | Stop — `BLOCKED_DESTRUCTIVE_AUTHORITY` |
+| Merge/deploy without instruction or standing authority | Stop — do not promote |
+| Unknown production baseline + downgrade risk | Stop — `BLOCKED_BASELINE_CONFLICT` / `BLOCKED_STALE_RELEASE` |
 
-## Session end (mandatory)
+## Session end
 
-1. Full summary: done / open / blocked.
-2. Open incidents table from `REGISTRY.md`.
-3. **ASK:** "What is your next move?"
-4. Optional: `reports/cursor-reply-latest.txt` + YAML footer **only if founder ordered closeout**.
+1. Receipt: baseline, scope, changed paths, preservation checks, verdict.
+2. Open blockers only if a real stop condition applies.
+3. Do **not** ask “May I…?” for routine next steps already implied by the task.
 
-## Fail response
-
-If user message is ambiguous:
+## Fail response (real blocker only)
 
 ```
-I will not edit disk yet.
-Suggested options: [A] [B] [C]
-Which should I do, or clarify scope?
+BLOCKED_<VERDICT>
+Smallest missing decision: <one line>
+Protected/unrelated work left untouched.
 ```
 
 ---

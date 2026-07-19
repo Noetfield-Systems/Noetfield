@@ -5,18 +5,116 @@ on:
     branches: [main]
     paths:
       - "**/*.html"
+      - "404.html"
+      - "BingSiteAuth.xml"
+      - "_redirects"
+      - "api/**"
       - "assets/**"
+      - "data/noetfield-social-preview-v2.json"
+      - "favicon.ico"
+      - "functions/**"
+      - "gate/**/*.pdf"
+      - "governance/PUBLIC_OUTPUT_DENYLIST.json"
+      - "governance/www-pages-routes.json"
+      - "governance/www-public-artifact-v1.json"
+      - "infra/cf-www-proxy/**"
+      - "Makefile"
+      - "noetfield-*.png"
+      - "openapi.json"
+      - "package-lock.json"
+      - "package.json"
+      - "proof/*.json"
+      - "pyproject.toml"
+      - "robots.txt"
+      - "scripts/bundle-pages-functions.mjs"
+      - "scripts/build-public-www-artifact.py"
+      - "scripts/build-www-pages-dist.sh"
+      - "scripts/deploy-cf-www-proxy.sh"
+      - "scripts/deploy-www-cloudflare.sh"
+      - "scripts/generate-cf-redirects.py"
+      - "scripts/generate-www-deny-middleware.py"
       - "scripts/generate_sitemap.py"
       - "scripts/audit_public_site_health.py"
+      - "scripts/nf_post_deploy_verify.py"
+      - "scripts/nf_www_deploy_anti_stale_v2.py"
+      - "scripts/noetfield_social_preview_v2.py"
+      - "scripts/rebuild-www-v6.py"
+      - "scripts/resolve-cf-pages-release.py"
+      - "scripts/sync_chat_greeting_asset.py"
+      - "scripts/test-cf-www-proxy.mjs"
+      - "scripts/test-invest-access-control.mjs"
+      - "scripts/verify_chat_greeting_coupling.py"
+      - "scripts/verify-public-output-allowlist.py"
+      - "scripts/verify-www-**"
       - "sitemap.xml"
+      - "tests/unit/test_corporate_surface.py"
+      - "tests/unit/test_ai_motor_category.py"
+      - "tests/unit/test_cf_pages_release.py"
+      - "tests/unit/test_nf_www_deploy_anti_stale_v2.py"
+      - "tests/unit/test_social_preview_v2.py"
+      - "config/noetfield-www-protected-surfaces.v2.json"
+      - "receipts/noetfield-social-preview-v2.json"
+      - "trust-ledger/**/*.pdf"
+      - "trust-ledger/**/*.yaml"
       - ".github/workflows/noetfield-www-ci.yml"
+      - ".github/workflows/noetfield-www-production.yml"
   pull_request:
     paths:
       - "**/*.html"
+      - "404.html"
+      - "BingSiteAuth.xml"
+      - "_redirects"
+      - "api/**"
       - "assets/**"
+      - "data/noetfield-social-preview-v2.json"
+      - "favicon.ico"
+      - "functions/**"
+      - "gate/**/*.pdf"
+      - "governance/PUBLIC_OUTPUT_DENYLIST.json"
+      - "governance/www-pages-routes.json"
+      - "governance/www-public-artifact-v1.json"
+      - "infra/cf-www-proxy/**"
+      - "Makefile"
+      - "noetfield-*.png"
+      - "openapi.json"
+      - "package-lock.json"
+      - "package.json"
+      - "proof/*.json"
+      - "pyproject.toml"
+      - "robots.txt"
+      - "scripts/bundle-pages-functions.mjs"
+      - "scripts/build-public-www-artifact.py"
+      - "scripts/build-www-pages-dist.sh"
+      - "scripts/deploy-cf-www-proxy.sh"
+      - "scripts/deploy-www-cloudflare.sh"
+      - "scripts/generate-cf-redirects.py"
+      - "scripts/generate-www-deny-middleware.py"
       - "scripts/generate_sitemap.py"
       - "scripts/audit_public_site_health.py"
+      - "scripts/nf_post_deploy_verify.py"
+      - "scripts/nf_www_deploy_anti_stale_v2.py"
+      - "scripts/noetfield_social_preview_v2.py"
+      - "scripts/rebuild-www-v6.py"
+      - "scripts/resolve-cf-pages-release.py"
+      - "scripts/sync_chat_greeting_asset.py"
+      - "scripts/test-cf-www-proxy.mjs"
+      - "scripts/test-invest-access-control.mjs"
+      - "scripts/verify_chat_greeting_coupling.py"
+      - "scripts/verify-public-output-allowlist.py"
+      - "scripts/verify-www-**"
       - "sitemap.xml"
+      - "tests/unit/test_corporate_surface.py"
+      - "tests/unit/test_ai_motor_category.py"
+      - "tests/unit/test_cf_pages_release.py"
+      - "tests/unit/test_nf_www_deploy_anti_stale_v2.py"
+      - "tests/unit/test_social_preview_v2.py"
+      - "config/noetfield-www-protected-surfaces.v2.json"
+      - "receipts/noetfield-social-preview-v2.json"
+      - "tests/unit/test_investor_diligence_lane.py"
+      - "trust-ledger/**/*.pdf"
+      - "trust-ledger/**/*.yaml"
+      - ".github/workflows/noetfield-www-ci.yml"
+      - ".github/workflows/noetfield-www-production.yml"
 
 jobs:
   www-health:
@@ -30,10 +128,31 @@ jobs:
         with:
           python-version: "3.11"
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
       - name: Install test dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
+          npm ci
+
+      - name: Exact public artifact verification
+        run: make verify-static-www
+
+      - name: Protected-surface anti-stale gate
+        run: |
+          SHA="$(git rev-parse HEAD)"
+          python3 scripts/nf_www_deploy_anti_stale_v2.py \
+            --dist www-pages-dist \
+            --offline \
+            --expected-sha "$SHA" \
+            --authorized-sha "$SHA"
+
+      - name: Delivery release contracts
+        run: python3 -m pytest -q tests/unit/test_corporate_surface.py tests/unit/test_ai_motor_category.py tests/unit/test_cf_pages_release.py tests/unit/test_nf_www_deploy_anti_stale_v2.py tests/unit/test_social_preview_v2.py
 
       - name: Public site health
         run: python3 scripts/report_slo_health_v1.py --scope public-site-ci --budget-seconds 180 -- make site-health

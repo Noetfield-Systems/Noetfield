@@ -1,0 +1,149 @@
+{
+  "schema": "noetfield-social-preview-v2",
+  "site_name": "Noetfield",
+  "site_origin": "https://www.noetfield.com",
+  "font": "assets/social/fonts/SpaceGrotesk-VF.ttf",
+  "cards": {
+    "corporate": {
+      "filename": "noetfield-corporate-v2.png",
+      "eyebrow": "NOETFIELD SYSTEMS INC.",
+      "headline": "Governed AI execution.",
+      "supporting": "Products, custom AI Motors and institutional workflows built on shared governed infrastructure.",
+      "footer": "Vancouver, Canada · noetfield.com",
+      "alt": "Noetfield Systems Inc. — governed AI execution, products, custom AI Motors and institutional workflows."
+    },
+    "enterprise": {
+      "filename": "noetfield-enterprise-v2.png",
+      "eyebrow": "NOETFIELD · ENTERPRISE",
+      "headline": "Governed Application Factory",
+      "supporting": "Code generation is becoming abundant. Governed software production is not.",
+      "footer": "Execution · Verification · Evidence",
+      "alt": "Noetfield Enterprise — Governed Application Factory with execution, verification and evidence."
+    },
+    "motors": {
+      "filename": "noetfield-motors-v2.png",
+      "eyebrow": "NOETFIELD · CUSTOM SYSTEMS",
+      "headline": "Custom AI Motors",
+      "supporting": "Systems that turn intent, policy, tools and authority into coordinated execution.",
+      "footer": "Act · Verify · Escalate · Recover",
+      "alt": "Noetfield Custom AI Motors — systems that turn intent, policy, tools and authority into coordinated execution."
+    },
+    "investors": {
+      "filename": "noetfield-investors-v2.png",
+      "eyebrow": "NOETFIELD · ECOSYSTEM & INVESTORS",
+      "headline": "Built to be examined.",
+      "supporting": "Products, infrastructure, current evidence and the next commissioning stage.",
+      "footer": "Noetfield Systems Inc. · Vancouver",
+      "alt": "Noetfield ecosystem and investors — products, infrastructure, current evidence and the next commissioning stage."
+    },
+    "proof": {
+      "filename": "noetfield-proof-v2.png",
+      "eyebrow": "NOETFIELD · PROOF",
+      "headline": "Evidence before claims.",
+      "supporting": "Current systems, verified states and public execution receipts.",
+      "footer": "Build · Verify · Record",
+      "alt": "Noetfield proof — current systems, verified states and public execution receipts."
+    },
+    "frontier": {
+      "filename": "noetfield-frontier-v2.png",
+      "eyebrow": "NOETFIELD · FRONTIER SYSTEMS",
+      "headline": "Shared work before title.",
+      "supporting": "A founding-counterpart path for governed execution and institutional AI infrastructure.",
+      "footer": "Mutual discovery · Bounded work · Long-term alignment",
+      "alt": "Noetfield Frontier Systems — shared work before title and a founding-counterpart path for governed execution."
+    }
+  },
+  "route_profiles": {
+    "/": "corporate",
+    "/about/": "corporate",
+    "/enterprise/": "enterprise",
+    "/enterprise/application-factory/": "enterprise",
+    "/frontier-systems/": "frontier",
+    "/frontier-systems/memo/": "frontier",
+    "/invest/": "investors",
+    "/investors/": "investors",
+    "/motors/": "motors",
+    "/proof/": "proof"
+  },
+  "profile_prefixes": [
+    {
+      "profile": "frontier",
+      "prefixes": ["/frontier-systems/"]
+    },
+    {
+      "profile": "investors",
+      "prefixes": ["/investor-workflows/", "/investors/", "/invest/", "/gate/investors/", "/gate/partners/investors/"]
+    },
+    {
+      "profile": "proof",
+      "prefixes": ["/proof/", "/status/", "/trust-ledger/sample-report/"]
+    },
+    {
+      "profile": "motors",
+      "prefixes": ["/motors/", "/ai-automation/", "/factory/", "/services/never-miss-a-call/"]
+    },
+    {
+      "profile": "enterprise",
+      "prefixes": ["/enterprise/", "/copilot/", "/trust/", "/trust-brief/", "/trust-ledger/", "/governance/", "/ai-factories/", "/ai-value-governance-os/", "/playbook/", "/pricing/", "/start/", "/intelligence/", "/bank-pilot/", "/msp/", "/federal/", "/services/agentic-cost-governance/"]
+    }
+  ],
+  "metadata_overrides": {
+    "/": {
+      "title": "Noetfield Systems Inc. — AI Motors & Governed Execution",
+      "description": "Noetfield builds AI Motors: governed execution systems that coordinate models, agents, tools, policies, knowledge, workflows and human authority."
+    },
+    "/about/": {
+      "title": "About Noetfield Systems Inc.",
+      "description": "Meet the Vancouver company building governed AI products, custom AI Motors and specialized institutional workflows."
+    },
+    "/enterprise/": {
+      "title": "Governed AI Enterprise Systems — Noetfield",
+      "description": "Explore Noetfield enterprise systems for governed application production, agent transformation and verifiable institutional execution."
+    },
+    "/enterprise/application-factory/": {
+      "title": "Governed Application Factory — Noetfield Enterprise",
+      "description": "Build, replace and promote institutional software through governed production, independent verification and evidence."
+    },
+    "/motors/": {
+      "title": "AI Motors for Governed Execution — Noetfield Systems",
+      "description": "What an AI Motor is, how it coordinates models, agents, tools, policy and human authority, and how it verifies, escalates, recovers and records outcomes."
+    },
+    "/investors/": {
+      "title": "Ecosystem & Investors — Noetfield Systems",
+      "description": "Review Noetfield products, infrastructure, current evidence boundaries and the next commissioning stage."
+    },
+    "/invest/": {
+      "title": "Private Investor Materials — Noetfield Systems Inc.",
+      "description": "Access-controlled investor materials for verified parties. This route is not a public securities offering or solicitation."
+    },
+    "/proof/": {
+      "title": "Proof & Public Evidence — Noetfield Systems",
+      "description": "Inspect current Noetfield systems, verified states, evidence boundaries and public execution receipts."
+    },
+    "/frontier-systems/": {
+      "title": "Frontier Systems — Noetfield Systems",
+      "description": "A founding-counterpart path for governed execution and institutional AI infrastructure, beginning with bounded shared work."
+    },
+    "/frontier-systems/memo/": {
+      "title": "Frontier Systems Collaboration Memo — Noetfield",
+      "description": "Mutual discovery, bounded technical work and long-term alignment before role, title or ownership discussions."
+    },
+    "/trust-brief/intake/": {
+      "title": "Enterprise Intake — Noetfield Systems",
+      "description": "Start a non-confidential intake for a governed AI pilot, Trust Brief or institutional workflow assessment."
+    }
+  },
+  "source_sync_routes": [
+    "/",
+    "/about/",
+    "/enterprise/",
+    "/enterprise/application-factory/",
+    "/frontier-systems/",
+    "/frontier-systems/memo/",
+    "/invest/",
+    "/investors/",
+    "/motors/",
+    "/proof/",
+    "/trust-brief/intake/"
+  ]
+}

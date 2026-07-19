@@ -1,0 +1,320 @@
+name: Noetfield WWW Production
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "404.html"
+      - "BingSiteAuth.xml"
+      - "_redirects"
+      - "api/**"
+      - "assets/**"
+      - "data/noetfield-social-preview-v2.json"
+      - "favicon.ico"
+      - "functions/**"
+      - "gate/**/*.pdf"
+      - "governance/PUBLIC_OUTPUT_DENYLIST.json"
+      - "governance/www-pages-routes.json"
+      - "governance/www-public-artifact-v1.json"
+      - "infra/cf-www-proxy/**"
+      - "Makefile"
+      - "noetfield-*.png"
+      - "openapi.json"
+      - "package-lock.json"
+      - "package.json"
+      - "proof/*.json"
+      - "pyproject.toml"
+      - "receipts/noetfield-social-preview-v2.json"
+      - "robots.txt"
+      - "scripts/bundle-pages-functions.mjs"
+      - "scripts/build-public-www-artifact.py"
+      - "scripts/build-www-pages-dist.sh"
+      - "scripts/deploy-cf-www-proxy.sh"
+      - "scripts/deploy-www-cloudflare.sh"
+      - "scripts/generate-cf-redirects.py"
+      - "scripts/generate-www-deny-middleware.py"
+      - "scripts/generate_sitemap.py"
+      - "scripts/nf_post_deploy_verify.py"
+      - "scripts/nf_www_deploy_anti_stale_v2.py"
+      - "scripts/noetfield_social_preview_v2.py"
+      - "scripts/rebuild-www-v6.py"
+      - "scripts/resolve-cf-pages-release.py"
+      - "scripts/sync_chat_greeting_asset.py"
+      - "scripts/test-cf-www-proxy.mjs"
+      - "scripts/test-invest-access-control.mjs"
+      - "scripts/verify_chat_greeting_coupling.py"
+      - "scripts/verify-public-output-allowlist.py"
+      - "scripts/verify-www-**"
+      - "sitemap.xml"
+      - "tests/unit/test_corporate_surface.py"
+      - "tests/unit/test_cf_pages_release.py"
+      - "tests/unit/test_nf_www_deploy_anti_stale_v2.py"
+      - "tests/unit/test_social_preview_v2.py"
+      - "config/noetfield-www-protected-surfaces.v2.json"
+      - "trust-ledger/**/*.pdf"
+      - "trust-ledger/**/*.yaml"
+      - ".github/workflows/noetfield-www-production.yml"
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: noetfield-www-production
+  cancel-in-progress: false
+
+jobs:
+  deploy-exact-main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Initialize release evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-receipts
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          Path("release-receipts/workflow-context.json").write_text(
+              json.dumps(
+                  {
+                      "event": os.environ["GITHUB_EVENT_NAME"],
+                      "repository": os.environ["GITHUB_REPOSITORY"],
+                      "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+                      "run_id": os.environ["GITHUB_RUN_ID"],
+                      "sha": os.environ["GITHUB_SHA"],
+                      "status": "verification_pending",
+                  },
+                  indent=2,
+                  sort_keys=True,
+              )
+              + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Install release dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+          npm ci
+
+      - name: Verify exact release candidate
+        shell: bash
+        run: |
+          exec > >(tee release-receipts/predeploy-verification.log) 2>&1
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          make verify-static-www
+          python3 -m pytest -q \
+            tests/unit/test_corporate_surface.py \
+            tests/unit/test_ai_motor_category.py \
+            tests/unit/test_cf_pages_release.py \
+            tests/unit/test_nf_www_deploy_anti_stale_v2.py \
+            tests/unit/test_social_preview_v2.py
+          node scripts/test-cf-www-proxy.mjs
+          bash -n scripts/deploy-www-cloudflare.sh scripts/deploy-cf-www-proxy.sh
+          python3 -m py_compile \
+            scripts/nf_www_deploy_anti_stale_v2.py \
+            scripts/resolve-cf-pages-release.py \
+            scripts/nf_post_deploy_verify.py
+          git diff --exit-code
+
+      - name: Deploy exact main release
+        id: deploy
+        shell: bash
+        env:
+          CI: "true"
+          CLOUDFLARE_ACCOUNT_ID: "0d0b967b77e2e5535455d39ff3dae72c"
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_PAGES_BRANCH: "main"
+          CF_PURGE_AFTER_DEPLOY: "1"
+          CF_WRANGLER_VERSION: "4.103.0"
+          CF_WWW_PROXY_FORCE_TOKEN: "1"
+          NF_SKIP_INTAKE_E2E: "1"
+          NF_AUTHORIZED_PROMOTE_SHA: ${{ github.sha }}
+          NF_WWW_ANTI_STALE_RECEIPT: release-receipts/noetfield-www-anti-stale-v2.json
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          LOG="release-receipts/noetfield-www-production.log"
+          RECEIPT="release-receipts/noetfield-www-production.json"
+          bash scripts/deploy-www-cloudflare.sh 2>&1 | tee "$LOG"
+          python3 - "$LOG" "$RECEIPT" <<'PY'
+          import datetime as dt
+          import hashlib
+          import json
+          import os
+          import re
+          import sys
+          from pathlib import Path
+
+          log_path = Path(sys.argv[1])
+          receipt_path = Path(sys.argv[2])
+          text = log_path.read_text(encoding="utf-8", errors="replace")
+          matches = re.findall(
+              r"deployment_id=([A-Za-z0-9-]+)\s+"
+              r"release=([0-9a-f]{40})\s+"
+              r"origin=(https://[a-z0-9-]+\.noetfield-www\.pages\.dev/?)(?:\s|$)",
+              text,
+          )
+          if not matches:
+              raise SystemExit("validated Cloudflare deployment identity is missing from deploy log")
+          deployment_id, release_sha, immutable_url = matches[-1]
+          expected_sha = os.environ["GITHUB_SHA"]
+          if release_sha != expected_sha:
+              raise SystemExit(
+                  f"deployed release {release_sha} does not match GitHub SHA {expected_sha}"
+              )
+          if "[deploy-www-cloudflare] scoped cache purge accepted" not in text:
+              raise SystemExit("scoped production cache purge was not confirmed")
+          canonical_pass = re.search(
+              rf"nf_post_deploy_verify: PASS sha={re.escape(expected_sha[:12])} "
+              r"surface=www www=https://www\.noetfield\.com/?(?:\s|$)",
+              text,
+          )
+          if canonical_pass is None:
+              raise SystemExit("canonical exact-release verification PASS is missing")
+
+          anti_stale_path = Path(os.environ["NF_WWW_ANTI_STALE_RECEIPT"])
+          anti_stale = json.loads(anti_stale_path.read_text(encoding="utf-8"))
+          if anti_stale.get("ok") is not True:
+              raise SystemExit("anti-stale protected-surface receipt is not PASS")
+          if anti_stale.get("candidate_sha") != expected_sha:
+              raise SystemExit("anti-stale receipt candidate does not match GitHub SHA")
+          anti_stale_digest = hashlib.sha256(anti_stale_path.read_bytes()).hexdigest()
+
+          receipt = {
+              "anti_stale_guard": {
+                  "path": str(anti_stale_path),
+                  "sha256": anti_stale_digest,
+                  "verification": "PASS",
+              },
+              "cache_action": {
+                  "accepted": True,
+                  "hosts": ["noetfield.com", "www.noetfield.com"],
+                  "scope": "hosts",
+              },
+              "canonical_url": "https://www.noetfield.com",
+              "cloudflare_pages_deployment_id": deployment_id,
+              "cloudflare_pages_immutable_url": immutable_url.rstrip("/"),
+              "deployed_sha": release_sha,
+              "github": {
+                  "repository": os.environ["GITHUB_REPOSITORY"],
+                  "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+                  "run_id": os.environ["GITHUB_RUN_ID"],
+              },
+              "recorded_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+              "schema": "noetfield-www-production-release-receipt-v1",
+              "verification": "PASS",
+          }
+          receipt_path.write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          digest = hashlib.sha256(receipt_path.read_bytes()).hexdigest()
+          with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as handle:
+              handle.write(f"deployment_id={deployment_id}\n")
+              handle.write(f"deployed_sha={release_sha}\n")
+              handle.write(f"immutable_url={immutable_url.rstrip('/')}\n")
+              handle.write(f"receipt_path={receipt_path}\n")
+              handle.write(f"receipt_sha256={digest}\n")
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as handle:
+              handle.write("## Noetfield WWW production release\n\n")
+              handle.write(f"- Deployed SHA: `{release_sha}`\n")
+              handle.write(f"- Pages deployment: `{deployment_id}`\n")
+              handle.write(f"- Immutable origin: `{immutable_url.rstrip('/')}`\n")
+              handle.write(f"- Receipt SHA-256: `{digest}`\n")
+              handle.write(f"- Anti-stale guard SHA-256: `{anti_stale_digest}`\n")
+              handle.write("- Scoped host cache purge: `PASS`\n")
+              handle.write("- Canonical verification: `PASS`\n")
+          PY
+
+      - name: Upload production evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: noetfield-www-production-${{ github.sha }}-${{ github.run_attempt }}
+          path: release-receipts/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Post compact production receipt to merged PR
+        if: ${{ success() }}
+        uses: actions/github-script@v7
+        env:
+          RECEIPT_PATH: ${{ steps.deploy.outputs.receipt_path }}
+          RECEIPT_SHA256: ${{ steps.deploy.outputs.receipt_sha256 }}
+        with:
+          script: |
+            const fs = require("fs");
+            const receipt = JSON.parse(fs.readFileSync(process.env.RECEIPT_PATH, "utf8"));
+            const { owner, repo } = context.repo;
+            const { data: pulls } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner,
+              repo,
+              commit_sha: context.sha,
+            });
+            const pull = pulls.find((item) => item.merged_at && item.base.ref === "main") || pulls[0];
+            if (!pull) {
+              core.setFailed(`No pull request is associated with deployed SHA ${context.sha}`);
+              return;
+            }
+            const marker = `<!-- noetfield-www-production:${receipt.deployed_sha} -->`;
+            const body = [
+              marker,
+              "### NF-WEB-002 production receipt",
+              "",
+              `- Status: **${receipt.verification}**`,
+              `- Main/deployed SHA: \`${receipt.deployed_sha}\``,
+              `- Cloudflare Pages deployment: \`${receipt.cloudflare_pages_deployment_id}\``,
+              `- Immutable origin: ${receipt.cloudflare_pages_immutable_url}`,
+              `- Cache action: scoped purge for \`${receipt.cache_action.hosts.join("\`, \`")}\``,
+              `- Receipt SHA-256: \`${process.env.RECEIPT_SHA256}\``,
+              `- Workflow run: ${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`,
+            ].join("\n");
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: pull.number,
+              per_page: 100,
+            });
+            const prior = comments.find((comment) => comment.body && comment.body.includes(marker));
+            if (prior) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: prior.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: pull.number,
+                body,
+              });
+            }

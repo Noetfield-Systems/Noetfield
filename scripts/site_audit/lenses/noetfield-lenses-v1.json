@@ -189,8 +189,8 @@
           "id": "ALH-2",
           "severity": "P0",
           "name": "founder_jargon_on_public_html",
-          "regex": "(?i)Lane SSOT|nurture SSOT|commercial SSOT|W3 economic signal|SourceA|REGISTRY\\.json|docs/ops/",
-          "why": "Founder factory language on buyer surfaces — unclear to regulated buyers."
+          "regex": "(?i)Lane SSOT|nurture SSOT|commercial SSOT|W3 economic signal|REGISTRY\\.json|docs/ops/",
+          "why": "Founder factory language on buyer surfaces — unclear to regulated buyers. SourceA is governed separately by the NF-WEB-001 status-label contract."
         },
         {
           "id": "ALH-3",

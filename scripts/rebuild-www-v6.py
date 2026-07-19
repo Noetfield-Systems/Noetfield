@@ -1124,6 +1124,24 @@ def contact_intake_form() -> str:
  <option value="federal">Federal / public sector</option>
  <option value="feedback">Site feedback</option>
  <option value="other">Other · operations triage</option>
+ <option value="pilot-client">Pilot / client · bounded institutional workflow</option>
+ <option value="incubator-ecosystem">Incubator / ecosystem</option>
+ <option value="operating-partner">Operating partner</option>
+ <option value="governed-motor">Governed execution motor</option>
+ <option value="custom-workflow">Custom operating workflow</option>
+ <option value="custom-gpt-motor">Custom GPT motor</option>
+ <option value="investor-audit">Investor audit</option>
+ <option value="investor-workflow">Investor workflow design</option>
+ <option value="custom-investor-motor">Custom investor motor</option>
+ <option value="build">Automation build</option>
+ <option value="retainer">AI operations retainer</option>
+ <option value="privacy">Privacy inquiry</option>
+ <option value="bank-pilot-boundary">Bank pilot boundary</option>
+ <option value="frontier-governance-prototype">Frontier governance prototype</option>
+ <option value="federal-governance-pack">Federal governance pack</option>
+ <option value="msp-delivery-boundaries">MSP delivery boundaries</option>
+ <option value="msp-governance-pack">MSP governance pack</option>
+ <option value="procurement-diligence">Procurement diligence</option>
  </select>
  </label>
  <label>Your name (optional)<input type="text" name="name" autocomplete="name" placeholder="Your name" /></label>

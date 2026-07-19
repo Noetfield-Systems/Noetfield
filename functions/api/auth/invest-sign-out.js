@@ -35,7 +35,7 @@ var require_invest_sign_out = __commonJS({
       }
       res.setHeader(
         "Set-Cookie",
-        "nf_invest_auth=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
+        "nf_invest_token=; Path=/invest; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
       );
       return res.status(200).json({ ok: true });
     };

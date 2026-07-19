@@ -1,0 +1,15 @@
+---
+description: Noetfield WWW R-014 — exact-SHA protected-surface gate before every production promotion
+alwaysApply: true
+---
+
+# Noetfield WWW anti-stale deploy law (R-014)
+
+- Never stash, discard, or hide newer website work and then deploy an older clean HEAD.
+- Production promotion requires a clean exact Git SHA matching `NF_AUTHORIZED_PROMOTE_SHA`.
+- Build the complete public artifact, then run `scripts/nf_www_deploy_anti_stale_v2.py` before any Cloudflare mutation.
+- The versioned contract is `config/noetfield-www-protected-surfaces.v2.json`.
+- `/investors/` as the public Ecosystem route and `/investor-workflows/` as a product route are allowed.
+- `/invest/`, `/workspace/`, “Invest in Noetfield,” and private-investor CTAs remain prohibited on protected public surfaces.
+- Live HTML is a comparison constraint, not the source of truth.
+- A guard failure is `BLOCKED_PROTECTED_SURFACE_REGRESSION`; do not deploy.

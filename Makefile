@@ -121,8 +121,19 @@ verify-no-vendor-names:
 	./scripts/verify-no-competitor-names.sh
 
 verify-static-www:
-	@chmod +x scripts/verify-static-www.sh
+	@chmod +x scripts/build-www-pages-dist.sh scripts/verify-www-pages-dist.sh scripts/verify-static-www.sh scripts/verify-www-artifact-determinism.sh
+	./scripts/build-www-pages-dist.sh
+	python3 scripts/noetfield_social_preview_v2.py verify
+	python3 scripts/verify-public-output-allowlist.py
+	./scripts/verify-www-pages-dist.sh
 	./scripts/verify-static-www.sh
+	./scripts/verify-www-artifact-determinism.sh
+
+generate-social-previews:
+	@python3 scripts/noetfield_social_preview_v2.py render
+
+verify-social-previews:
+	@python3 scripts/noetfield_social_preview_v2.py verify
 
 verify-public-output-allowlist:
 	@python3 scripts/verify-public-output-allowlist.py

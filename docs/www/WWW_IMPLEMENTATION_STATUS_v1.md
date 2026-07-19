@@ -10,11 +10,11 @@
 
 ## 0. Anti-downgrade rules (locked by founder)
 
-1. **`/` is a direction gate only** — Enterprise · Motor + About · Proof. **No** Invest / Investor / `/investors/` / `/invest/` on the homepage (invest-in-Noetfield is prohibited public leak). **No** product copy, SKUs, pricing, or marketing essay on `/`.
+1. **`/` is the corporate entry surface** — Noetfield Systems Inc. is a Vancouver-based AI-native systems company and product studio. The page presents governed AI execution, Custom AI Motors, Enterprise AI Governance, SourceA, SourceB, Investor Workflows, evidence boundaries and three contact paths. It contains no corporate-wide pricing, securities offering or unsupported traction claim.
 2. **`/enterprise/` is frozen** — old institutional/Copilot homepage. **Do not edit** unless founder explicitly scopes it.
 3. **One page = one subject** — do not cross-link unrelated directions (e.g. no Case Study / Roadmap / TrustField on `/motors/`; no diligence product on `/investors/`).
-4. **Do not revert `/` to a corporate/product marketing homepage** — founder rejected that (2026-07-13).
-5. **Do not change global `header.html`** for gate pages — gate pages use standalone `nf-gate` shell.
+4. **Do not collapse `/` into one product lane** — product-specific pricing and commercial copy remain on their appropriate product pages; the corporate page must keep the portfolio and evidence boundaries coherent.
+5. **Do not change global `header.html`** for product-lane pages — corporate pages use the standalone `nf-corp` shell.
 6. **Vercel is removed** — use `www-pages-deploy.exclude` + `governance/www-pages-routes.json`. Never reintroduce `.vercelignore` / `vercel.json`.
 
 ---
@@ -23,11 +23,11 @@
 
 | Route | Status | Purpose | Notes |
 |-------|--------|---------|-------|
-| `/` | **LIVE** | Direction gate | Enterprise · Motor + About · Proof — **no Investor/invest** |
+| `/` | **LIVE** | Corporate entry | Company, governed execution, portfolio, proof and contact paths |
 | `/enterprise/` | **LIVE · FROZEN** | Field 1 — Enterprise AI Governance | Old homepage content; do not mutate |
 | `/motors/` | **LIVE** | Field 2 — motors & custom workflows | Commission paths only |
-| `/investors/` | **LIVE · NOT ON HOMEPAGE** | Evaluate **Noetfield the company** | Never linked from `/` |
-| `/investor-workflows/` | **LIVE** | Field 3 — audit **your** deal/company | Not linked from `/` homepage |
+| `/investors/` | **LIVE · informational** | Evaluate **Noetfield the company** | Public evidence and support sought; not a securities offering |
+| `/investor-workflows/` | **LIVE** | Field 3 — audit **your** deal/company | Public informational workflow surface |
 | `/invest/` | **LIVE · GATED** | Private round materials | Supabase/Google auth; edge cookie — never on `/` |
 | `/auth/sign-in/` | **LIVE** | Investor sign-in | portfolio-spine Supabase |
 | `/proof/` | **LIVE** | Case study library index | |
@@ -36,11 +36,11 @@
 | `/proof/governed-replacement/` | **LIVE** | Case Study #2 · Client-Zero WRAP | v0.1 · not Fortune-500 claim |
 | `/proof/governed-replacement.json` | **LIVE** | CS#2 machine evidence + hashes | |
 | `/roadmap/` | **LIVE** | Milestone tiles | |
-| `/about/` | **LIVE** | Company + three direction tiles | Replaces blueprint `/company` for now |
+| `/about/` | **LIVE** | Company, operating model and portfolio boundaries | Corporate positioning and contact paths |
 | `/company/` | **NOT BUILT** | Blueprint name | Use `/about/` |
 | `/audit/start/` | **NOT BUILT** | Free external audit entry | Use `/investor-workflows/` + `/contact/` |
-| `/proof/sourcea/` | **NOT BUILT** | Case Study #3 (was mislabelled CS#2) | Planned |
-| `/proof/sourceb/` | **NOT BUILT** | Later case study | Planned |
+| `/proof/sourcea/` | **NOT BUILT** | Formal SourceA case study | Planned; SourceA product surface is live |
+| `/proof/sourceb/` | **NOT BUILT** | Formal SourceB case study | Planned; SourceB.ca service is live |
 | `/protocol/` | **DEFERRED** | Public protocol marketing | Do not ship |
 
 ---
@@ -49,13 +49,13 @@
 
 | Page | Allowed content | Forbidden on this page |
 |------|-----------------|------------------------|
-| `/` | Direction tiles, About, Proof links | Product copy, SKUs, pricing, case study body |
+| `/` | Company identity, portfolio, evidence boundaries and contact paths | Corporate-wide pricing, securities offering, unsupported traction claims |
 | `/motors/` | Commissioning, governed motor, custom workflow | Proof, roadmap, TrustField, SourceA pitch, investor paths |
-| `/investors/` | Case study, roadmap, invest in Noetfield | Diligence product, audit-your-deal (→ `/investor-workflows/`) |
+| `/investors/` | Company thesis, portfolio state, evidence, roadmap and support sought | Private materials, securities solicitation or authentication bypass |
 | `/investor-workflows/` | Request audit, diligence vault, workflow design | Invest in Noetfield, case study library |
 | `/proof/*` | Evidence, case studies, JSON bundles | Invest CTAs, motor commissioning |
 | `/roadmap/` | Milestones only | Cross-direction footer links |
-| `/about/` | Company identity + three directions | Private invest materials |
+| `/about/` | Company identity, operating model, portfolio boundaries and contact paths | Private invest materials |
 
 ---
 
@@ -81,23 +81,22 @@
 
 | Blueprint says | Actual (2026-07-13) |
 |----------------|---------------------|
-| `/` = corporate homepage (3 fields) | `/` = **minimal direction gate** (founder-approved) |
-| Nav: Enterprise \| Motors \| Investor Workflows on homepage | Homepage has Enterprise \| **Investor** \| Motor — **Investor Workflows** is separate route, not on `/` |
+| `/` = corporate homepage (3 fields) | `/` = **corporate entry surface** (NF-WEB-001) |
+| Nav: Enterprise \| Motors \| Investor Workflows on homepage | Homepage presents the company portfolio, including Investor Workflows, with scoped product and contact links |
 | `/company` | **`/about/`** implemented instead |
 | `/audit/start` | **Not built** — contact + `/investor-workflows/` |
-| Lane C “Rebuild homepage” pending | **Direction gate shipped**; marketing homepage explicitly **not** requested |
+| Lane C “Rebuild homepage” pending | **Corporate entry surface shipped**; product pages remain scoped and unchanged |
 | Case Study #1 publish pending | **Shipped** at `/proof/noetfield/` |
 
-Strategy positioning (three commercial fields, proof library model, naming table) remains **locked**. Site architecture in §3 must be read **through this status file**.
+Product-lane strategy (three commercial fields, proof library model, naming table) remains **locked for its scoped product pages**. The corporate entry surface uses the portfolio posture above; site architecture in §3 must be read **through this status file**.
 
 ---
 
 ## 5. Not yet implemented (safe backlog)
 
 - `/audit/start/` productized free audit funnel
-- `/company/` (or expand `/about/` to full company page)
-- Case studies #2–#5 (`/proof/sourcea`, etc.)
-- Homepage tile or nav to `/investor-workflows/` (if founder wants Field 3 on gate)
+- `/company/` (blueprint alias; `/about/` is the live corporate page)
+- Formal SourceA and SourceB public case studies (`/proof/sourcea`, `/proof/sourceb`)
 - `intelligence.noetfield.com` subdomain swap (advisor P0 — **not done**)
 - `proof-page-live-receipt-v1` formal receipt emission
 - SG ratification of company strategy blueprint (Lane B)
