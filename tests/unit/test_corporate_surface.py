@@ -174,6 +174,12 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert "Evidence before claims." in text
     assert text.count("<h1") == 1
     assert 'href="/assets/noetfield-runways-v1.css?v=1"' in text
+    assert 'src="/assets/noetfield-runways-demo-v1.js?v=1"' in text
+    assert "Clarify. Inspect. Approve. Watch the build." in text
+    assert "Safe fixture · demonstrated contract" in text
+    assert "It does not execute a live job, incur cost, or claim paid delivery." in text
+    assert "Total reconciled machine cost" in text
+    assert "Not yet reconciled" in text
     for forbidden in (
         "Ruflo",
         "CrewAI",
