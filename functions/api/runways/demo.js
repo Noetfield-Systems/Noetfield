@@ -4,13 +4,7 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-}) : x)(function(x) {
-  if (typeof require !== "undefined") return require.apply(this, arguments);
-  throw Error('Dynamic require of "' + x + '" is not supported');
-});
-var __commonJS = (cb, mod) => function __require2() {
+var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __copyProps = (to, from, except, desc) => {
@@ -33,7 +27,6 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 // api/runways/demo.js
 var require_demo = __commonJS({
   "api/runways/demo.js"(exports, module) {
-    var { createHmac, randomUUID } = __require("node:crypto");
     var FIXTURE_BLUEPRINT = {
       schema: "noetfield.job-blueprint.v0.1",
       blueprint_id: "bp_00000000000000000000000000000001",
@@ -94,6 +87,19 @@ var require_demo = __commonJS({
         return part.toString(16).padStart(2, "0");
       }).join("");
     }
+    async function hmacSha256Hex(secret, value) {
+      const key = await crypto.subtle.importKey(
+        "raw",
+        bytes(secret),
+        { name: "HMAC", hash: "SHA-256" },
+        false,
+        ["sign"]
+      );
+      const signature = await crypto.subtle.sign("HMAC", key, bytes(value));
+      return Array.from(new Uint8Array(signature)).map(function(part) {
+        return part.toString(16).padStart(2, "0");
+      }).join("");
+    }
     async function gatewayFetch(method, path, body) {
       const base = String(process.env.RUNWAY_GATEWAY_BASE_URL || "").replace(/\/$/, "");
       const keyId = String(process.env.RUNWAY_GATEWAY_KEY_ID || "");
@@ -101,10 +107,10 @@ var require_demo = __commonJS({
       if (!base || !keyId || secret.length < 32) throw new Error("live staging Gateway is not configured");
       const payload = body == null ? new Uint8Array() : bytes(JSON.stringify(body));
       const timestamp = (/* @__PURE__ */ new Date()).toISOString();
-      const nonce = randomUUID().replace(/-/g, "");
+      const nonce = crypto.randomUUID().replace(/-/g, "");
       const digest = await sha256Hex(payload);
       const canonical = [method, path, timestamp, nonce, digest].join("\n");
-      const signature = createHmac("sha256", secret).update(canonical).digest("hex");
+      const signature = await hmacSha256Hex(secret, canonical);
       const response = await fetch(base + path, {
         method,
         headers: {

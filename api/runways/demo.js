@@ -1,5 +1,3 @@
-const { createHmac, randomUUID } = require("node:crypto");
-
 const FIXTURE_BLUEPRINT = {
   schema: "noetfield.job-blueprint.v0.1",
   blueprint_id: "bp_00000000000000000000000000000001",
@@ -64,6 +62,20 @@ async function sha256Hex(value) {
   }).join("");
 }
 
+async function hmacSha256Hex(secret, value) {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    bytes(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const signature = await crypto.subtle.sign("HMAC", key, bytes(value));
+  return Array.from(new Uint8Array(signature)).map(function (part) {
+    return part.toString(16).padStart(2, "0");
+  }).join("");
+}
+
 async function gatewayFetch(method, path, body) {
   const base = String(process.env.RUNWAY_GATEWAY_BASE_URL || "").replace(/\/$/, "");
   const keyId = String(process.env.RUNWAY_GATEWAY_KEY_ID || "");
@@ -71,10 +83,10 @@ async function gatewayFetch(method, path, body) {
   if (!base || !keyId || secret.length < 32) throw new Error("live staging Gateway is not configured");
   const payload = body == null ? new Uint8Array() : bytes(JSON.stringify(body));
   const timestamp = new Date().toISOString();
-  const nonce = randomUUID().replace(/-/g, "");
+  const nonce = crypto.randomUUID().replace(/-/g, "");
   const digest = await sha256Hex(payload);
   const canonical = [method, path, timestamp, nonce, digest].join("\n");
-  const signature = createHmac("sha256", secret).update(canonical).digest("hex");
+  const signature = await hmacSha256Hex(secret, canonical);
   const response = await fetch(base + path, {
     method,
     headers: {
