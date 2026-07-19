@@ -131,6 +131,7 @@ jobs:
           make verify-static-www
           python3 -m pytest -q \
             tests/unit/test_corporate_surface.py \
+            tests/unit/test_runway_public_dispatch.py \
             tests/unit/test_ai_motor_category.py \
             tests/unit/test_cf_pages_release.py \
             tests/unit/test_nf_www_deploy_anti_stale_v2.py \
@@ -157,6 +158,9 @@ jobs:
           NF_SKIP_INTAKE_E2E: "1"
           NF_AUTHORIZED_PROMOTE_SHA: ${{ github.sha }}
           NF_WWW_ANTI_STALE_RECEIPT: release-receipts/noetfield-www-anti-stale-v2.json
+          RUNWAY_RUNTIME_API_SECRET: ${{ secrets.RUNWAY_RUNTIME_API_SECRET }}
+          RUNWAY_RUNTIME_BASE_URL: https://noetfield-runway-runtime-api-staging.sina-kazemnezhad-ca.workers.dev
+          RUNWAY_RUNTIME_KEY_ID: staging-proof
         run: |
           set -euo pipefail
           test -n "$CLOUDFLARE_API_TOKEN"

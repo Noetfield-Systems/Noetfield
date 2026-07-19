@@ -187,9 +187,11 @@ def test_runways_page_is_honest_product_surface() -> None:
         "hundreds of public agents",
     ):
         assert forbidden not in text, forbidden
-    assert 'href="/contact/?topic=governed-motor"' in text
-    assert 'href="/contact/?topic=custom-workflow"' in text
+    assert 'href="/contact/?topic=enterprise-governance"' in text
     assert 'href="/contact/?topic=pilot-client"' in text
+    assert 'id="rw-dispatch-btn"' in text
+    assert 'fetch("/api/runway/jobs"' in text
+    assert "POST /v1/jobs" in text
 
 
 def test_homepage_footer_links_to_runways() -> None:
