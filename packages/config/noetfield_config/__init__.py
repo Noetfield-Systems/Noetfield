@@ -187,6 +187,10 @@ class Settings(BaseSettings):
     intake_smtp_user: str | None = None
     intake_smtp_password: SecretStr | None = None
     intake_smtp_use_tls: bool = True
+    motor_gateway_url: str | None = Field(
+        default=None,
+        description="Optional unified Motor gateway base URL for enterprise intake events.",
+    )
     redis_sessions_enabled: bool = True
 
     telegram_bot_enabled: bool = True

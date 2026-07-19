@@ -28,6 +28,7 @@ class IntakeRecord:
     source: str
     message: str
     metadata: dict[str, Any]
+    qualification_json: dict[str, Any] | None = None
     email_archive_status: str | None = None
     email_archive_updated_at: str | None = None
     email_archive_detail: str | None = None
@@ -44,6 +45,7 @@ def record_intake(
     vector: str = "web-intake",
     source: str = "api",
     metadata: dict[str, Any] | None = None,
+    qualification_json: dict[str, Any] | None = None,
 ) -> IntakeRecord:
     rec = IntakeRecord(
         intake_id="INT-" + uuid.uuid4().hex[:12].upper(),
@@ -57,6 +59,7 @@ def record_intake(
         source=source,
         message=message.strip(),
         metadata=metadata or {},
+        qualification_json=qualification_json,
     )
     with _lock:
         _records.appendleft(asdict(rec))

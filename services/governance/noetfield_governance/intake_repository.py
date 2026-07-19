@@ -31,6 +31,7 @@ class IntakeStoreBackend(Protocol):
         vector: str = "web-intake",
         source: str = "api",
         metadata: dict[str, Any] | None = None,
+        qualification_json: dict[str, Any] | None = None,
     ) -> IntakeRecord: ...
 
     async def list_recent(self, *, limit: int = 50) -> list[dict[str, Any]]: ...

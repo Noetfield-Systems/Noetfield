@@ -61,7 +61,7 @@ from noetfield_governance.signal_triage_worker import (
     stop_signal_triage_scheduler,
 )
 from noetfield_governance.intake_test import is_test_intake
-from noetfield_governance.public_intake import submit_intake
+from noetfield_governance.public_intake import emit_enterprise_intake_motor_receipt, submit_intake
 from noetfield_governance.sandbox_service import (
     build_board_export_pdf,
     provision_sandbox,
@@ -1133,6 +1133,19 @@ async def _notify_intake_background(record: object) -> None:
         await asyncio.to_thread(notify_ops_webhook, url, record)
     await asyncio.to_thread(notify_ops_inbox, settings, record)
     await asyncio.to_thread(notify_submitter_ack, settings, record)
+    if record.qualification_json:
+        receipt = await asyncio.to_thread(
+            emit_enterprise_intake_motor_receipt,
+            record,
+            motor_gateway_url=settings.motor_gateway_url,
+        )
+        if receipt:
+            logger.info(
+                "enterprise_intake_motor_receipt intake_id=%s mode=%s delivered=%s",
+                record.intake_id,
+                receipt.get("mode"),
+                receipt.get("delivered"),
+            )
 
 
 @app.post("/api/intake/resend/webhook", tags=["intake"], include_in_schema=False)

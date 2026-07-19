@@ -9,6 +9,11 @@ from typing import Literal
 
 from noetfield_config import CANONICAL_INTAKE_EMAIL
 from noetfield_governance import intake_repository, redis_runtime
+from noetfield_governance.enterprise_intake_motor import emit_enterprise_intake_motor_event
+from noetfield_governance.enterprise_intake_qualifier import (
+    is_enterprise_intake,
+    qualify_enterprise_intake,
+)
 from noetfield_governance.intake_store import IntakeRecord
 from noetfield_governance.intake_test import ensure_test_metadata
 
@@ -84,6 +89,18 @@ async def submit_intake(
         contact_email=email,
     )
 
+    qualification_json: dict | None = None
+    if is_enterprise_intake(vector=(vector or "web-intake").strip()[:120], sku=sku, metadata=meta):
+        qualification_json = qualify_enterprise_intake(
+            organization=org,
+            contact_email=email,
+            message=body,
+            vector=(vector or "web-intake").strip()[:120],
+            sku=sku,
+            request_id=rid,
+            metadata=meta,
+        ).to_qualification_json()
+
     return await intake_repository.record_intake(
         organization=org,
         contact_email=email,
@@ -94,7 +111,24 @@ async def submit_intake(
         vector=(vector or "web-intake").strip()[:120],
         source=source,
         metadata=meta,
+        qualification_json=qualification_json,
     )
+
+
+def emit_enterprise_intake_motor_receipt(
+    record: IntakeRecord,
+    *,
+    motor_gateway_url: str | None,
+) -> dict[str, object] | None:
+    """Best-effort Motor emit; returns outbox receipt dict when qualification exists."""
+    if not record.qualification_json:
+        return None
+    receipt = emit_enterprise_intake_motor_event(
+        record=record,
+        qualification_json=record.qualification_json,
+        motor_gateway_url=motor_gateway_url,
+    )
+    return receipt.to_dict()
 
 
 async def intake_ops_summary() -> dict[str, object]:

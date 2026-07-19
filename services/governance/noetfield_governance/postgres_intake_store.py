@@ -38,6 +38,7 @@ class PostgresIntakeStore:
         vector: str = "web-intake",
         source: str = "api",
         metadata: dict[str, Any] | None = None,
+        qualification_json: dict[str, Any] | None = None,
     ) -> IntakeRecord:
         await self.connect()
         assert self._pool is not None
@@ -59,6 +60,7 @@ class PostgresIntakeStore:
             source=source,
             message=message.strip(),
             metadata=metadata or {},
+            qualification_json=qualification_json,
         )
 
         async with self._pool.acquire() as connection:
@@ -66,9 +68,10 @@ class PostgresIntakeStore:
                 """
                 insert into noetfield.public_intakes (
                   intake_id, request_id, organization, contact_name,
-                  contact_email, sku, vector, source, message, metadata
+                  contact_email, sku, vector, source, message, metadata,
+                  qualification_json
                 )
-                values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::jsonb)
+                values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::jsonb, $11::jsonb)
                 """,
                 rec.intake_id,
                 rec.request_id,
@@ -80,6 +83,9 @@ class PostgresIntakeStore:
                 rec.source,
                 rec.message,
                 json.dumps(rec.metadata, default=str),
+                json.dumps(rec.qualification_json, default=str)
+                if rec.qualification_json is not None
+                else None,
             )
         return rec
 
@@ -91,6 +97,7 @@ class PostgresIntakeStore:
                 """
                 select intake_id, created_at, request_id, organization, contact_name,
                        contact_email, sku, vector, source, message, metadata,
+                       qualification_json,
                        email_archive_status, email_archive_updated_at, email_archive_detail
                 from noetfield.public_intakes
                 where request_id = $1
@@ -122,6 +129,7 @@ class PostgresIntakeStore:
                 where request_id = $1
                 returning intake_id, created_at, request_id, organization, contact_name,
                           contact_email, sku, vector, source, message, metadata,
+                          qualification_json,
                           email_archive_status, email_archive_updated_at, email_archive_detail
                 """,
                 rid,
@@ -141,6 +149,7 @@ class PostgresIntakeStore:
                 """
                 select intake_id, created_at, request_id, organization, contact_name,
                        contact_email, sku, vector, source, message, metadata,
+                       qualification_json,
                        email_archive_status, email_archive_updated_at, email_archive_detail
                 from noetfield.public_intakes
                 order by created_at desc
@@ -162,6 +171,9 @@ def _row_to_record(row: asyncpg.Record) -> IntakeRecord:
     meta = row["metadata"]
     if isinstance(meta, str):
         meta = json.loads(meta)
+    qual = row["qualification_json"] if "qualification_json" in row else None
+    if isinstance(qual, str):
+        qual = json.loads(qual)
     created = row["created_at"]
     if hasattr(created, "isoformat"):
         created = created.isoformat()
@@ -180,6 +192,7 @@ def _row_to_record(row: asyncpg.Record) -> IntakeRecord:
         source=row["source"],
         message=row["message"],
         metadata=dict(meta or {}),
+        qualification_json=dict(qual) if qual else None,
         email_archive_status=row["email_archive_status"] if "email_archive_status" in row else None,
         email_archive_updated_at=str(archive_updated) if archive_updated else None,
         email_archive_detail=row["email_archive_detail"] if "email_archive_detail" in row else None,
