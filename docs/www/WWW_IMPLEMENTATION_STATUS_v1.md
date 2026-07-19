@@ -26,6 +26,7 @@
 | `/` | **LIVE** | Corporate entry | Company, governed execution, portfolio, proof and contact paths |
 | `/enterprise/` | **LIVE · FROZEN** | Field 1 — Enterprise AI Governance | Old homepage content; do not mutate |
 | `/motors/` | **LIVE** | Field 2 — motors & custom workflows | Commission paths only |
+| `/runways/` | **CANDIDATE** | Product — verified agentic execution catalog | Goal → verified output; honest status badges; no TrustField / vendor names / paid claims |
 | `/investors/` | **LIVE · informational** | Evaluate **Noetfield the company** | Public evidence and support sought; not a securities offering |
 | `/investor-workflows/` | **LIVE** | Field 3 — audit **your** deal/company | Public informational workflow surface |
 | `/invest/` | **LIVE · GATED** | Private round materials | Supabase/Google auth; edge cookie — never on `/` |
@@ -51,6 +52,7 @@
 |------|-----------------|------------------------|
 | `/` | Company identity, portfolio, evidence boundaries and contact paths | Corporate-wide pricing, securities offering, unsupported traction claims |
 | `/motors/` | Commissioning, governed motor, custom workflow | Proof, roadmap, TrustField, SourceA pitch, investor paths |
+| `/runways/` | Runway taxonomy, catalog, demonstrated receipts, three deploy paths | Vendor names, TrustField, invest/securities, invented agent counts, paid traction, margin claims |
 | `/investors/` | Company thesis, portfolio state, evidence, roadmap and support sought | Private materials, securities solicitation or authentication bypass |
 | `/investor-workflows/` | Request audit, diligence vault, workflow design | Invest in Noetfield, case study library |
 | `/proof/*` | Evidence, case studies, JSON bundles | Invest CTAs, motor commissioning |

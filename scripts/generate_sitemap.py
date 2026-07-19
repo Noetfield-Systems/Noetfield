@@ -65,6 +65,8 @@ PRIORITY = {
     "/for-whom/": 0.8,
     "/trust-ledger/": 0.8,
     "/about/": 0.7,
+    "/runways/": 0.9,
+    "/motors/": 0.9,
 }
 
 # Top-level marketing paths (index.html at depth 1) included if indexable
@@ -90,6 +92,8 @@ MARKETING_TOP = {
     "for-whom",
     "privacy",
     "resources",
+    "runways",
+    "motors",
     "terms",
     "trust-brief",
 }
