@@ -1,4 +1,5 @@
 /** POST /api/runway/jobs — public allowlisted Motor dispatch (HMAC via server secrets). */
+/* secret-bind: redeploy after Pages RUNWAY_RUNTIME_API_SECRET sync */
 
 const { dispatchPublicJob, listPublicRecipes } = require("../_lib/runway-public-dispatch");
 
