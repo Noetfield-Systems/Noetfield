@@ -131,6 +131,7 @@ jobs:
           make verify-static-www
           python3 -m pytest -q \
             tests/unit/test_corporate_surface.py \
+            tests/unit/test_runway_public_dispatch.py \
             tests/unit/test_ai_motor_category.py \
             tests/unit/test_cf_pages_release.py \
             tests/unit/test_nf_www_deploy_anti_stale_v2.py \
