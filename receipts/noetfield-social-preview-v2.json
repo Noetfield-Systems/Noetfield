@@ -51,8 +51,8 @@
     }
   ],
   "indexable_route_count": 60,
-  "noindex_route_count": 77,
-  "route_count": 137,
+  "noindex_route_count": 78,
+  "route_count": 138,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -1316,6 +1316,22 @@
       "profile": "corporate",
       "route": "/gate/research/",
       "title": "Noetfield \u00b7 Research",
+      "verdict": "NOINDEX_DOCUMENTED"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/gate/research/result/",
+      "description": "Explore Result from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/gate/research/result/",
+      "title": "Noetfield \u2014 Research product result",
       "verdict": "NOINDEX_DOCUMENTED"
     },
     {

@@ -14,9 +14,13 @@
   }
 
   function render(el, lines) {
-    el.innerHTML = lines.map(function (line) {
-      return "<p>" + line + "</p>";
-    }).join("");
+    var fragment = document.createDocumentFragment();
+    lines.forEach(function (line) {
+      var paragraph = document.createElement("p");
+      paragraph.textContent = String(line);
+      fragment.appendChild(paragraph);
+    });
+    el.replaceChildren(fragment);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
