@@ -156,8 +156,42 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
     assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text
     assert 'class="nf-corp-footer"' in text
     assert '<a href="/motors/" aria-current="page">AI Motors</a>' in text
+    assert 'href="/runways/"' in text
     for href in ("/about/", "/proof/", "/motors/", "/investors/"):
         assert href in text
+
+
+def test_runways_page_is_honest_product_surface() -> None:
+    text = read(ROOT / "runways" / "index.html")
+    assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text
+    assert 'class="nf-corp-footer"' in text
+    assert '<a href="/runways/" aria-current="page">Runways</a>' in text
+    assert "From goal to verified output." in text
+    assert "Agents participate. Runways finish the work." in text
+    assert "The models may be probabilistic. The runway is controlled." in text
+    assert "Paid customer delivery is not claimed." in text
+    assert "Demonstrated on staging Runway" in text
+    assert "Evidence before claims." in text
+    assert text.count("<h1") == 1
+    assert 'href="/assets/noetfield-runways-v1.css?v=1"' in text
+    for forbidden in (
+        "Ruflo",
+        "CrewAI",
+        "LangGraph",
+        "TrustField",
+        "99.9%",
+        "hundreds of public agents",
+    ):
+        assert forbidden not in text, forbidden
+    assert 'href="/contact/?topic=governed-motor"' in text
+    assert 'href="/contact/?topic=custom-workflow"' in text
+    assert 'href="/contact/?topic=pilot-client"' in text
+
+
+def test_homepage_footer_links_to_runways() -> None:
+    text = read(ROOT / "index.html")
+    assert 'href="/runways/"' in text
+    assert "Governed AI systems that can act and show their work." in text
 
 
 def test_every_public_contact_topic_has_a_select_option() -> None:
