@@ -8,6 +8,9 @@ from typing import Any
 
 from noetfield_config import CANONICAL_INTAKE_EMAIL
 
+from noetfield_governance.product_entitlement_store import get_product_entitlement_store
+from noetfield_governance.research_product_catalog import resolve_research_product
+
 logger = logging.getLogger("noetfield.governance.stripe")
 
 
@@ -79,6 +82,27 @@ def notify_stripe_checkout(settings: object, details: dict[str, str]) -> bool:
     )
 
 
+def create_research_entitlement_outbox(details: dict[str, str]) -> dict[str, Any] | None:
+    product = resolve_research_product(details.get("sku", ""))
+    if not product:
+        return None
+    store = get_product_entitlement_store()
+    entitlement, outbox = store.create_from_checkout(details, product)
+    return {
+        "schema": "noetfield.product-checkout-fulfillment.v0.1",
+        "entitlement_id": entitlement.entitlement_id,
+        "tenant_id": entitlement.tenant_id,
+        "runway_id": entitlement.runway_id,
+        "recipe_id": entitlement.recipe_id,
+        "recipe_version": entitlement.recipe_version,
+        "outbox_event_id": outbox.event_id,
+        "outbox_status": outbox.status,
+        "job_submit_ready": True,
+        "submit_path": "/api/product/jobs/submit",
+        "result_path_template": "/gate/research/result/?entitlement_id={entitlement_id}",
+    }
+
+
 async def handle_stripe_webhook(
     settings: object,
     payload: bytes,
@@ -96,11 +120,21 @@ async def handle_stripe_webhook(
     details = parse_checkout_completed(event)
     if not details:
         return {"ok": True, "handled": False, "type": event.get("type")}
+    fulfillment = create_research_entitlement_outbox(details)
     emailed = notify_stripe_checkout(settings, details)
     logger.info(
-        "stripe_checkout_completed session=%s sku=%s emailed=%s",
+        "stripe_checkout_completed session=%s sku=%s emailed=%s fulfillment=%s",
         details.get("session_id"),
         details.get("sku"),
         emailed,
+        bool(fulfillment),
     )
-    return {"ok": True, "handled": True, "emailed": emailed, "session_id": details.get("session_id")}
+    response: dict[str, object] = {
+        "ok": True,
+        "handled": True,
+        "emailed": emailed,
+        "session_id": details.get("session_id"),
+    }
+    if fulfillment:
+        response["fulfillment"] = fulfillment
+    return response
