@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Noetfield Deterministic API — Drop-in OpenAI Replacement</title>
+ <meta name="description" content="Drop-in OpenAI replacement. Cheaper. Guaranteed valid JSON and tool calls. Change one base_url line. Get an API key with starter credits." />
+ <meta name="robots" content="index,follow" />
+ <link rel="canonical" href="https://www.noetfield.com/deterministic-api/" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:title" content="Noetfield Deterministic API — Drop-in OpenAI Replacement" />
+ <meta property="og:description" content="Cheaper OpenAI-compatible chat completions with guaranteed valid JSON and tool calls. Change one base_url line." />
+ <meta property="og:url" content="https://www.noetfield.com/deterministic-api/" />
+ <meta property="og:type" content="website" />
+ <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta property="og:image:width" content="1200" />
+ <meta property="og:image:height" content="630" />
+ <meta property="og:image:alt" content="Noetfield Deterministic API — drop-in OpenAI replacement." />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Noetfield Deterministic API — Drop-in OpenAI Replacement" />
+ <meta name="twitter:description" content="Cheaper OpenAI-compatible chat completions with guaranteed valid JSON and tool calls. Change one base_url line." />
+ <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta name="theme-color" content="#0d1a2b" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=2" />
+ <link rel="stylesheet" href="/assets/noetfield-deterministic-api-v1.css?v=1" />
+ <script type="application/ld+json">
+ {
+   "@context": "https://schema.org",
+   "@type": "WebPage",
+   "name": "Noetfield Deterministic API",
+   "url": "https://www.noetfield.com/deterministic-api/",
+   "description": "Drop-in OpenAI-compatible API with guaranteed valid JSON and tool calls.",
+   "isPartOf": {
+     "@type": "WebSite",
+     "name": "Noetfield",
+     "url": "https://www.noetfield.com/"
+   }
+ }
+ </script>
+</head>
+<body class="nf-corp nf-dapi-page">
+ <a class="nf-skip" href="#main">Skip to main content</a>
+ <header class="nf-corp-header">
+  <div class="nf-corp-wrap nf-corp-navrow">
+   <a class="nf-corp-brand" href="/" aria-label="Noetfield Systems home">
+    <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
+    <span>Noetfield <small>Deterministic API</small></span>
+   </a>
+   <nav class="nf-corp-nav" aria-label="Primary navigation">
+    <a href="/deterministic-api/" aria-current="page">API</a>
+    <a href="#proof">Proof</a>
+    <a href="#referral">Referral</a>
+    <a class="nf-corp-nav__cta" href="#get-key">Get API key</a>
+   </nav>
+  </div>
+ </header>
+
+ <main id="main">
+  <section class="nf-dapi-hero" aria-labelledby="dapi-hero-title">
+   <div class="nf-corp-wrap nf-dapi-hero__grid">
+    <div>
+     <p class="nf-dapi-brand">Noetfield</p>
+     <h1 id="dapi-hero-title">Deterministic API</h1>
+     <p class="nf-dapi-promise">Drop-in OpenAI replacement · cheaper · guaranteed valid JSON / tool calls</p>
+     <p class="nf-dapi-lead">Keep your OpenAI SDK. Change one line. Responses leave only when structure and tool calls are valid.</p>
+     <div class="nf-corp-actions">
+      <a class="nf-button nf-button--primary" href="#get-key">Get API key + starter credits</a>
+      <a class="nf-button nf-button--secondary" href="#referral">Refer a friend</a>
+     </div>
+    </div>
+
+    <aside class="nf-dapi-panel" id="proof" aria-label="One-line base_url proof">
+     <div class="nf-dapi-panel__bar">
+      <span>Proof · one line</span>
+      <span class="nf-dapi-panel__badge">Staging</span>
+     </div>
+     <pre class="nf-dapi-code" tabindex="0"><code><span class="nf-dapi-code__comment"># OpenAI-compatible client</span>
+<span class="nf-dapi-code__key">base_url</span> = <span class="nf-dapi-code__str">"https://nf-deterministic-api-v1-staging.sina-kazemnezhad-ca.workers.dev/v1"</span>
+
+<span class="nf-dapi-code__comment"># same SDK · POST /v1/chat/completions</span>
+<span class="nf-dapi-code__key">api_key</span>  = <span class="nf-dapi-code__str">"nf_…"</span></code></pre>
+     <p class="nf-dapi-panel__note">Swap the base URL. Keep models, schemas, and tool-call shapes your app already expects.</p>
+    </aside>
+   </div>
+  </section>
+
+  <section class="nf-dapi-section" aria-labelledby="why-title">
+   <div class="nf-corp-wrap">
+    <p class="nf-corp-eyebrow">What you buy</p>
+    <h2 id="why-title">Usable outcomes over model lottery.</h2>
+    <p class="nf-dapi-section-lead">You are not buying a model catalog. You are buying an OpenAI-compatible endpoint that returns structured results you can ship.</p>
+    <div class="nf-dapi-grid" role="list">
+     <article role="listitem">
+      <h3>Drop-in compatible</h3>
+      <p><code>POST /v1/chat/completions</code> with the client you already use. One <code>base_url</code> change.</p>
+     </article>
+     <article role="listitem">
+      <h3>Cheaper path</h3>
+      <p>Cost-efficient models underneath. You keep the OpenAI-shaped interface on top.</p>
+     </article>
+     <article role="listitem">
+      <h3>Guaranteed shape</h3>
+      <p>Valid JSON and tool calls before the response leaves the API — repair or escalate on failure.</p>
+     </article>
+    </div>
+  </div>
+  </section>
+
+  <section class="nf-dapi-section nf-dapi-section--navy" id="get-key" aria-labelledby="key-title">
+   <div class="nf-corp-wrap nf-dapi-key-grid">
+    <div>
+     <p class="nf-corp-eyebrow">Access</p>
+     <h2 id="key-title">Get an API key + starter credits</h2>
+     <p class="nf-dapi-section-lead nf-dapi-section-lead--light">Request a key. We issue staging access and starter credits so you can point traffic at the endpoint above.</p>
+     <ul class="nf-dapi-bullets">
+      <li>OpenAI-compatible <code>/v1/chat/completions</code></li>
+      <li>Starter credits with your first key</li>
+      <li>Staging base URL live for integration</li>
+     </ul>
+    </div>
+    <form class="nf-dapi-form" id="nfDapiKeyForm" aria-label="Request API key">
+     <label>Work email
+      <input type="email" name="email" required autocomplete="email" placeholder="you@company.com" />
+     </label>
+     <label>Company (optional)
+      <input type="text" name="company" autocomplete="organization" placeholder="Company" />
+     </label>
+     <label>Monthly LLM spend (optional)
+      <select name="spend">
+       <option value="">Select range</option>
+       <option value="under-1k">Under $1k</option>
+       <option value="1k-5k">$1k–$5k</option>
+       <option value="5k-25k">$5k–$25k</option>
+       <option value="25k-plus">$25k+</option>
+      </select>
+     </label>
+     <button type="submit" class="nf-button nf-button--primary">Request API key</button>
+     <p class="nf-dapi-form__hint">Opens a short mail to <a href="mailto:operations@noetfield.com">operations@noetfield.com</a> — no self-serve issuer yet.</p>
+     <p class="nf-dapi-form__status" id="nfDapiKeyStatus" hidden aria-live="polite"></p>
+    </form>
+   </div>
+  </section>
+
+  <section class="nf-dapi-section" id="referral" aria-labelledby="ref-title">
+   <div class="nf-corp-wrap nf-dapi-ref">
+    <div>
+     <p class="nf-corp-eyebrow">Referral</p>
+     <h2 id="ref-title">Refer a friend → both get +$100 API credit</h2>
+     <p class="nf-dapi-section-lead">When someone you refer activates a key and starts using the API, you both receive +$100 in API credit. Credit only — not cash.</p>
+     <a class="nf-button nf-button--primary" href="mailto:operations@noetfield.com?subject=Deterministic%20API%20referral&amp;body=My%20email%3A%0AFriend%20email%3A%0A">Start a referral</a>
+    </div>
+    <aside class="nf-dapi-ref-card" aria-label="Referral summary">
+     <p class="nf-dapi-ref-card__label">Both sides</p>
+     <p class="nf-dapi-ref-card__value">+$100</p>
+     <p class="nf-dapi-ref-card__note">API credit each · applied after the referred key is active</p>
+    </aside>
+   </div>
+  </section>
+ </main>
+
+ <footer class="nf-corp-footer">
+  <div class="nf-corp-wrap nf-corp-footer__base">
+   <span>© 2026 Noetfield Systems Inc.</span>
+   <nav aria-label="Footer">
+    <a href="/">Home</a>
+    <a href="/deterministic-api/">Deterministic API</a>
+    <a href="/contact/">Contact</a>
+   </nav>
+  </div>
+ </footer>
+
+ <script>
+  (function () {
+    var form = document.getElementById("nfDapiKeyForm");
+    if (!form) return;
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var email = (form.email.value || "").trim();
+      var company = (form.company.value || "").trim();
+      var spend = form.spend.value || "";
+      if (!email) return;
+      var body = [
+        "Request: Deterministic API key + starter credits",
+        "Email: " + email,
+        "Company: " + (company || "(not provided)"),
+        "Monthly LLM spend: " + (spend || "(not provided)"),
+        "",
+        "Preferred staging base_url:",
+        "https://nf-deterministic-api-v1-staging.sina-kazemnezhad-ca.workers.dev/v1"
+      ].join("\n");
+      var href =
+        "mailto:operations@noetfield.com" +
+        "?subject=" + encodeURIComponent("Deterministic API key request") +
+        "&body=" + encodeURIComponent(body);
+      var status = document.getElementById("nfDapiKeyStatus");
+      if (status) {
+        status.hidden = false;
+        status.textContent = "Opening your mail client to request a key…";
+      }
+      window.location.href = href;
+    });
+  })();
+ </script>
+</body>
+</html>
