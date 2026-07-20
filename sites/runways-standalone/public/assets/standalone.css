@@ -1,0 +1,14 @@
+/* Standalone product overrides — portable across brands */
+.rw-standalone .nf-corp-brand small {
+  opacity: 0.72;
+  font-weight: 400;
+}
+
+.rw-standalone .nf-rw-hero h1 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: -0.04em;
+}
+
+.rw-standalone .nf-rw-section--panel {
+  background: #f7f4ee;
+}
