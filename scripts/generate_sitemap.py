@@ -67,6 +67,7 @@ PRIORITY = {
     "/about/": 0.7,
     "/runways/": 0.9,
     "/motors/": 0.9,
+    "/deterministic-api/": 0.9,
 }
 
 # Top-level marketing paths (index.html at depth 1) included if indexable
@@ -94,6 +95,7 @@ MARKETING_TOP = {
     "resources",
     "runways",
     "motors",
+    "deterministic-api",
     "terms",
     "trust-brief",
 }
@@ -143,7 +145,7 @@ def url_path(index_path: Path) -> str:
 
 
 def changefreq(url: str) -> str:
-    if url in ("/", "/trust-brief/", "/enterprise/"):
+    if url in ("/", "/trust-brief/", "/enterprise/", "/deterministic-api/"):
         return "weekly"
     return "monthly"
 
