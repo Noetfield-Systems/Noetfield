@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 61,
+  "indexable_route_count": 62,
   "noindex_route_count": 77,
-  "route_count": 138,
+  "route_count": 139,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -644,6 +644,22 @@
       "profile": "enterprise",
       "route": "/copilot/trial/",
       "title": "Noetfield \u2014 Copilot Governance Trial Sandbox",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/deterministic-api/",
+      "description": "Drop-in OpenAI replacement. Cheaper. Guaranteed valid JSON and tool calls. Change one base_url line. Get an API key with starter credits.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/deterministic-api/",
+      "title": "Noetfield Deterministic API \u2014 Drop-in OpenAI Replacement",
       "verdict": "PASS"
     },
     {
