@@ -1,0 +1,358 @@
+/* /assets/noetfield-deterministic-api-v1.css — Deterministic API landing (extends nf-corp) */
+
+body.nf-dapi-page {
+  --dapi-mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  background:
+    radial-gradient(1100px 420px at 8% -12%, rgba(54, 95, 139, 0.22), transparent 58%),
+    radial-gradient(900px 380px at 92% 0%, rgba(167, 123, 47, 0.14), transparent 52%),
+    linear-gradient(180deg, #0d1a2b 0%, #12243a 34%, #f3f0e9 34%, #f3f0e9 100%);
+}
+
+body.nf-dapi-page .nf-corp-header {
+  background: rgba(13, 26, 43, 0.92);
+  border-bottom-color: rgba(232, 236, 244, 0.14);
+  color: #eef2f7;
+}
+
+body.nf-dapi-page .nf-corp-brand,
+body.nf-dapi-page .nf-corp-nav a {
+  color: #eef2f7;
+}
+
+body.nf-dapi-page .nf-corp-nav a[aria-current="page"] {
+  color: #f0d59a;
+}
+
+body.nf-dapi-page .nf-corp-nav__cta {
+  background: #f0d59a;
+  color: #0d1a2b !important;
+  border-color: #f0d59a;
+}
+
+.nf-dapi-hero {
+  padding: 4.25rem 0 3.25rem;
+  color: #eef2f7;
+}
+
+.nf-dapi-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 2.25rem;
+  align-items: start;
+}
+
+.nf-dapi-brand {
+  margin: 0 0 0.55rem;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #fff;
+}
+
+.nf-dapi-hero h1 {
+  margin: 0 0 1rem;
+  max-width: none;
+  font-size: clamp(1.55rem, 2.8vw, 2.15rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #f0d59a;
+}
+
+.nf-dapi-promise {
+  margin: 0 0 1rem;
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  line-height: 1.45;
+  color: #fff;
+}
+
+.nf-dapi-lead {
+  margin: 0 0 1.6rem;
+  max-width: 34rem;
+  color: rgba(215, 222, 234, 0.88);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+body.nf-dapi-page .nf-dapi-hero .nf-button--primary {
+  background: #f0d59a;
+  color: #0d1a2b !important;
+  border-color: #f0d59a;
+}
+
+body.nf-dapi-page .nf-dapi-hero .nf-button--secondary {
+  border-color: rgba(240, 213, 154, 0.55);
+  color: #f0d59a !important;
+}
+
+body.nf-dapi-page .nf-dapi-hero .nf-button--secondary:hover {
+  background: rgba(240, 213, 154, 0.1);
+}
+
+.nf-dapi-panel {
+  border: 1px solid rgba(232, 236, 244, 0.18);
+  border-radius: 14px;
+  background: rgba(8, 14, 24, 0.72);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.nf-dapi-panel__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(232, 236, 244, 0.12);
+  font-family: var(--dapi-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(215, 222, 234, 0.78);
+}
+
+.nf-dapi-panel__badge {
+  color: #0d1a2b;
+  background: #f0d59a;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+}
+
+.nf-dapi-code {
+  margin: 0;
+  padding: 1.15rem 1.1rem 1.25rem;
+  overflow-x: auto;
+  font-family: var(--dapi-mono);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: #e8eef8;
+  white-space: pre;
+}
+
+.nf-dapi-code__comment { color: rgba(215, 222, 234, 0.48); }
+.nf-dapi-code__key { color: #f0d59a; }
+.nf-dapi-code__str { color: #9fd6b5; }
+
+.nf-dapi-panel__note {
+  margin: 0;
+  padding: 0.9rem 1.1rem 1.1rem;
+  border-top: 1px solid rgba(232, 236, 244, 0.1);
+  color: rgba(215, 222, 234, 0.72);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.nf-dapi-section {
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+  background: #f3f0e9;
+  color: var(--nf-ink);
+}
+
+.nf-dapi-section--navy {
+  background: #0d1a2b;
+  color: #eef2f7;
+}
+
+.nf-dapi-section--navy .nf-corp-eyebrow {
+  color: #d5aa59;
+}
+
+.nf-dapi-section--navy h2 {
+  color: #fff;
+}
+
+.nf-dapi-section-lead {
+  max-width: 40rem;
+  margin: 0 0 2rem;
+  color: #405064;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.nf-dapi-section-lead--light {
+  color: rgba(215, 222, 234, 0.82);
+}
+
+.nf-dapi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.nf-dapi-grid article {
+  padding: 1.35rem 1.25rem;
+  border: 1px solid rgba(17, 27, 42, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.nf-dapi-grid h3 {
+  margin: 0 0 0.55rem;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.nf-dapi-grid p {
+  margin: 0;
+  color: #526073;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.nf-dapi-grid code {
+  font-family: var(--dapi-mono);
+  font-size: 0.8em;
+}
+
+.nf-dapi-key-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.nf-dapi-bullets {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+  color: rgba(215, 222, 234, 0.82);
+  font-size: 0.95rem;
+}
+
+.nf-dapi-bullets li::before {
+  content: "→";
+  margin-right: 0.55rem;
+  color: #f0d59a;
+}
+
+.nf-dapi-bullets code {
+  font-family: var(--dapi-mono);
+  font-size: 0.85em;
+  color: #f0d59a;
+}
+
+.nf-dapi-form {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.35rem;
+  border: 1px solid rgba(232, 236, 244, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nf-dapi-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-family: var(--dapi-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(215, 222, 234, 0.7);
+}
+
+.nf-dapi-form input,
+.nf-dapi-form select {
+  min-height: 46px;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(232, 236, 244, 0.2);
+  border-radius: 8px;
+  background: rgba(8, 14, 24, 0.55);
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.95rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.nf-dapi-form input::placeholder {
+  color: rgba(215, 222, 234, 0.4);
+}
+
+.nf-dapi-form .nf-button--primary {
+  background: #f0d59a;
+  color: #0d1a2b !important;
+  border-color: #f0d59a;
+  margin-top: 0.25rem;
+}
+
+.nf-dapi-form__hint,
+.nf-dapi-form__status {
+  margin: 0;
+  color: rgba(215, 222, 234, 0.62);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.nf-dapi-form__hint a {
+  color: #f0d59a;
+}
+
+.nf-dapi-ref {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.nf-dapi-ref-card {
+  padding: 1.6rem 1.4rem;
+  border: 1px solid rgba(17, 27, 42, 0.12);
+  border-radius: 14px;
+  background: #fff;
+  text-align: center;
+}
+
+.nf-dapi-ref-card__label {
+  margin: 0 0 0.4rem;
+  font-family: var(--dapi-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #78571d;
+}
+
+.nf-dapi-ref-card__value {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(2.8rem, 5vw, 3.6rem);
+  line-height: 1;
+  color: #0d1a2b;
+}
+
+.nf-dapi-ref-card__note {
+  margin: 0.75rem 0 0;
+  color: #526073;
+  font-size: 0.88rem;
+}
+
+body.nf-dapi-page .nf-corp-footer {
+  padding-top: 1.5rem;
+  background: #0d1a2b;
+}
+
+body.nf-dapi-page .nf-corp-footer__base nav {
+  display: flex;
+  flex-direction: row;
+  gap: 1.1rem;
+}
+
+@media (max-width: 900px) {
+  .nf-dapi-hero__grid,
+  .nf-dapi-key-grid,
+  .nf-dapi-ref,
+  .nf-dapi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nf-dapi-hero {
+    padding-top: 3rem;
+  }
+}
