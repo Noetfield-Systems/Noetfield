@@ -1,0 +1,45 @@
+name: Deploy Runways Standalone
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "sites/runways-standalone/**"
+      - ".github/workflows/deploy-runways-standalone.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: noetfield-runways-standalone
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Deploy Pages project noetfield-runways
+        working-directory: sites/runways-standalone
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: "0d0b967b77e2e5535455d39ff3dae72c"
+          CF_PAGES_PROJECT: noetfield-runways
+          CF_PAGES_BRANCH: main
+        run: bash scripts/deploy.sh
+      - name: Verify live
+        run: |
+          set -euo pipefail
+          for i in 1 2 3 4 5 6 7 8; do
+            code="$(curl -sS -o /tmp/rw.html -w '%{http_code}' https://noetfield-runways.pages.dev/ || true)"
+            if [[ "$code" == "200" ]] && grep -qE 'id="rw-hero-title"|Runways' /tmp/rw.html; then
+              echo "PASS live $code"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "FAIL live verify"; exit 1

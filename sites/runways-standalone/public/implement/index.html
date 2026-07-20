@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Implement Runways — Brand playbook</title>
+ <meta name="description" content="How Noetfield, Trustfield, SourceA, and SourceB adopt the standalone Runways product pattern on Cloudflare." />
+ <link rel="canonical" href="https://noetfield-runways.pages.dev/implement/" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/shell.css" />
+ <link rel="stylesheet" href="/assets/runways.css" />
+ <link rel="stylesheet" href="/assets/standalone.css" />
+</head>
+<body class="nf-corp nf-runways-page rw-standalone">
+ <header class="nf-corp-header">
+  <div class="nf-corp-wrap nf-corp-navrow">
+   <a class="nf-corp-brand" href="/"><span class="nf-corp-brand__mark" aria-hidden="true">R</span><span>Runways <small>implement</small></span></a>
+   <nav class="nf-corp-nav" aria-label="Primary"><a href="/">Product</a><a href="/implement/" aria-current="page">Implement</a><a class="nf-corp-nav__cta" href="/#live-console">Try live</a></nav>
+  </div>
+ </header>
+ <main id="main">
+  <section class="nf-rw-section nf-rw-section--paper" style="padding-top:4rem">
+   <div class="nf-corp-wrap" style="max-width:46rem">
+    <p class="nf-rw-eyebrow">Brand playbook</p>
+    <h1 style="font-family:Newsreader,Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:500">Port Runways without forking the Motor.</h1>
+    <p class="nf-rw-lead">This Cloudflare Pages site is the <strong>sellable standalone surface</strong>. The Motor stays in NOETFIELD-RUNWAY. Each brand ships its own landing + HMAC proxy; none re-implement the control plane.</p>
+
+    <h2 style="margin-top:2.5rem;font-family:Newsreader,Georgia,serif">1. Split surfaces</h2>
+    <ul class="nf-rw-lead">
+     <li><strong>Product landing</strong> — this repo path: <code>sites/runways-standalone/</code> → own Pages project.</li>
+     <li><strong>Corporate site</strong> — Noetfield/Trustfield/Source* keep brand narrative; deep-link here to sell the capability.</li>
+     <li><strong>Motor</strong> — shared staging/production Worker at <code>POST /v1/jobs</code> (HMAC).</li>
+    </ul>
+
+    <h2 style="margin-top:2rem;font-family:Newsreader,Georgia,serif">2. Minimum copy for another brand</h2>
+    <ol class="nf-rw-lead">
+     <li>Clone <code>sites/runways-standalone/</code>.</li>
+     <li>Replace brand mark, fonts only if the brand system requires it, and legal footer.</li>
+     <li>Keep honesty badges: Demonstrated / Available / Planned — never invent revenue claims.</li>
+     <li>Point enterprise CTA to that brand’s intake; keep demo dispatch on allowlisted recipes.</li>
+     <li>Deploy as a <em>separate</em> Cloudflare Pages project (do not bury inside the corporate artifact allowlist unless you intentionally want one deploy unit).</li>
+    </ol>
+
+    <h2 style="margin-top:2rem;font-family:Newsreader,Georgia,serif">3. Required secrets (Pages)</h2>
+    <pre style="font-family:DM Mono,monospace;font-size:0.85rem;background:#0b1220;color:#eef2f7;padding:1rem;border-radius:12px;overflow:auto">RUNWAY_RUNTIME_API_SECRET
+RUNWAY_RUNTIME_BASE_URL=https://…workers.dev
+RUNWAY_RUNTIME_KEY_ID=staging-proof</pre>
+
+    <h2 style="margin-top:2rem;font-family:Newsreader,Georgia,serif">4. Cost doctrine (shared)</h2>
+    <p class="nf-rw-lead">Workers own routing/state/validation. Cheap-first model matrix. Structured JSON. Compress prompts before invoke. Cache repeated goals. Verifier—not the model—qualifies.</p>
+
+    <h2 style="margin-top:2rem;font-family:Newsreader,Georgia,serif">5. Suggested brand wiring</h2>
+    <ul class="nf-rw-lead">
+     <li><strong>Noetfield</strong> — corporate <code>/runways/</code> + this standalone sell site.</li>
+     <li><strong>Trustfield.ca</strong> — link “Governed execution” → this product or a Trustfield-skinned clone.</li>
+     <li><strong>SourceA / SourceB</strong> — contract SKU pages deep-link; do not duplicate Motor.</li>
+    </ul>
+
+    <p style="margin-top:2.5rem"><a class="nf-button nf-button--primary" href="/">Back to product</a>
+    <a class="nf-button nf-button--secondary" href="https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY">Motor source</a></p>
+   </div>
+  </section>
+ </main>
+ <footer class="nf-corp-footer"><div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Reference surface for family brands.</span></div></footer>
+</body>
+</html>
