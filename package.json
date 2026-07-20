@@ -14,7 +14,8 @@
     "dev:admin": "npm --workspace apps/admin run dev",
     "dev:cognitive-dashboard": "bash scripts/dev-cognitive-dashboard.sh",
     "lint": "npm --workspaces --if-present run lint",
-    "typecheck": "npm --workspaces --if-present run typecheck"
+    "typecheck": "npm --workspaces --if-present run typecheck",
+    "test:runways-cockpit": "node tests/noetfield-runways-cockpit.e2e.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "latest",
@@ -24,6 +25,7 @@
     "node": "22.x"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "playwright": "^1.49.1"
   }
 }

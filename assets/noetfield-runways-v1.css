@@ -461,6 +461,193 @@ body.nf-runways-page .nf-rw-cta .nf-button--secondary:hover {
   color: var(--nf-ink-soft);
 }
 
+/* Guided Cockpit — public evaluation ICP (safe fixture by default) */
+.nf-rw-demo {
+  border-top: 1px solid var(--nf-line);
+}
+
+.nf-rw-demo__heading,
+.nf-rw-demo__status {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.nf-rw-demo__phases {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  list-style: none;
+  margin: 2rem 0 1rem;
+  padding: 0;
+}
+
+.nf-rw-demo__phases li {
+  align-items: center;
+  border: 1px solid var(--nf-line);
+  border-radius: 10px;
+  color: var(--nf-ink-soft);
+  display: flex;
+  font-size: 0.83rem;
+  gap: 0.55rem;
+  padding: 0.65rem;
+}
+
+.nf-rw-demo__phases span {
+  align-items: center;
+  background: #e2ddd2;
+  border-radius: 999px;
+  display: inline-flex;
+  flex: 0 0 1.7rem;
+  font-family: var(--rw-mono);
+  height: 1.7rem;
+  justify-content: center;
+}
+
+.nf-rw-demo__phases li.is-active {
+  border-color: var(--nf-gold);
+  color: var(--nf-ink);
+}
+
+.nf-rw-demo__phases li.is-active span {
+  background: var(--nf-navy);
+  color: #fff;
+}
+
+.nf-rw-demo__panel {
+  background: #fff;
+  border: 1px solid var(--nf-line);
+  border-radius: 14px;
+  padding: 1.35rem;
+}
+
+.nf-rw-demo__form {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.nf-rw-demo__form label {
+  color: var(--nf-ink-soft);
+  display: grid;
+  font-size: 0.83rem;
+  font-weight: 600;
+  gap: 0.35rem;
+}
+
+.nf-rw-demo__form input,
+.nf-rw-demo__form textarea {
+  background: #faf8f3;
+  border: 1px solid var(--nf-line);
+  border-radius: 8px;
+  color: var(--nf-ink);
+  font: inherit;
+  padding: 0.7rem 0.75rem;
+}
+
+.nf-rw-demo__wide {
+  grid-column: 1 / -1;
+}
+
+.nf-rw-demo__steps,
+.nf-rw-demo__events {
+  display: grid;
+  gap: 0.55rem;
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.nf-rw-demo__steps li,
+.nf-rw-demo__events li {
+  align-items: center;
+  background: #faf8f3;
+  border: 1px solid var(--nf-line);
+  border-radius: 9px;
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.7rem 0.8rem;
+}
+
+.nf-rw-demo__steps li > span,
+.nf-rw-demo__events li > span {
+  align-items: center;
+  background: var(--nf-navy);
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  flex: 0 0 1.8rem;
+  font-family: var(--rw-mono);
+  height: 1.8rem;
+  justify-content: center;
+}
+
+.nf-rw-demo__steps small {
+  color: var(--nf-ink-soft);
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.nf-rw-demo__events time {
+  color: var(--nf-ink-soft);
+  font-family: var(--rw-mono);
+  font-size: 0.72rem;
+}
+
+.nf-rw-demo__cost {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 1rem 0;
+}
+
+.nf-rw-demo__cost div {
+  background: #f3f0e9;
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+
+.nf-rw-demo__cost dt {
+  color: var(--nf-ink-soft);
+  font-size: 0.75rem;
+}
+
+.nf-rw-demo__cost dd {
+  font-weight: 600;
+  margin: 0.25rem 0 0;
+}
+
+.nf-rw-demo__artifacts {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 1rem 0;
+}
+
+.nf-rw-demo__artifacts article {
+  background: #f3f0e9;
+  border: 1px solid var(--nf-line);
+  border-radius: 9px;
+  padding: 0.9rem;
+}
+
+.nf-rw-demo__artifacts small {
+  color: var(--nf-ink-soft);
+  display: block;
+  margin-top: 0.25rem;
+  word-break: break-word;
+}
+
+.nf-rw-demo__error {
+  background: #fff0f0;
+  border: 1px solid rgba(196, 75, 75, 0.4);
+  border-radius: 8px;
+  color: #8a2929;
+  margin: 0.8rem 0 0;
+  padding: 0.75rem;
+}
+
 /* Catalog */
 .nf-rw-groups {
   display: grid;
@@ -621,6 +808,23 @@ body.nf-runways-page .nf-corp-brand--footer {
   .nf-rw-ladder,
   .nf-rw-cards {
     grid-template-columns: 1fr;
+  }
+
+  .nf-rw-demo__heading,
+  .nf-rw-demo__status {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nf-rw-demo__phases,
+  .nf-rw-demo__form,
+  .nf-rw-demo__cost,
+  .nf-rw-demo__artifacts {
+    grid-template-columns: 1fr;
+  }
+
+  .nf-rw-demo__wide {
+    grid-column: auto;
   }
 
   .nf-rw-console__steps li {

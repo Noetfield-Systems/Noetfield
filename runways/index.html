@@ -28,6 +28,7 @@
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=2" />
  <link rel="stylesheet" href="/assets/noetfield-runways-v1.css?v=1" />
+ <script src="/assets/noetfield-runways-demo-v1.js?v=1" defer></script>
  <script type="application/ld+json">
  {
    "@context": "https://schema.org",
@@ -98,8 +99,8 @@
 
       <span class="nf-rw-console__label">Steps</span>
       <ol class="nf-rw-console__steps">
-       <li><span>01</span><span>Diagnose</span><span>model-backed</span><span>PASS</span></li>
-       <li><span>02</span><span>Fix</span><span>model-backed</span><span>PASS</span></li>
+       <li><span>01</span><span>Diagnose</span><span>machine-backed</span><span>PASS</span></li>
+       <li><span>02</span><span>Fix</span><span>proposal-backed</span><span>PASS</span></li>
        <li><span>03</span><span>Verify</span><span>deterministic check</span><span>PASS</span></li>
       </ol>
 
@@ -108,16 +109,85 @@
 
       <dl class="nf-rw-console__metrics">
        <dt>Execution steps</dt><dd>3</dd>
-       <dt>Model invocations</dt><dd>2</dd>
+       <dt>Bounded proposals</dt><dd>2</dd>
        <dt>Deterministic checks</dt><dd>1</dd>
        <dt>Repairs</dt><dd>0</dd>
-       <dt>Metered model cost</dt><dd>measuring</dd>
+       <dt>Proposal cost</dt><dd>not reconciled</dd>
        <dt>Budget cap</dt><dd>scoped per job</dd>
       </dl>
 
       <p class="nf-rw-console__note">Evidence class: Demonstrated Motor job · redacted public console. Paid customer delivery is not claimed. Agent swarm counts are omitted until an Event Ledger supplies them.</p>
      </div>
     </aside>
+   </div>
+  </section>
+
+  <!-- Guided Cockpit · evaluation ICP -->
+  <section class="nf-rw-section nf-rw-section--paper nf-rw-demo" id="guided-demo" aria-labelledby="guided-demo-title">
+   <div class="nf-corp-wrap">
+    <p class="nf-rw-eyebrow">Interactive fixture · Guided Cockpit</p>
+    <div class="nf-rw-demo__heading">
+     <div>
+      <h2 id="guided-demo-title">Clarify. Inspect. Approve. Watch the build.</h2>
+      <p class="nf-rw-lead">This safe fixture uses the same blueprint, approval, event, and result shapes as the staging Motor. It does not execute a live job, incur cost, or claim paid delivery.</p>
+     </div>
+     <span class="nf-rw-badge">Safe fixture · demonstrated contract</span>
+    </div>
+
+    <ol class="nf-rw-demo__phases" aria-label="Guided Cockpit phases">
+     <li class="is-active" data-demo-phase-indicator="1"><span>1</span>Clarify</li>
+     <li data-demo-phase-indicator="2"><span>2</span>Blueprint &amp; approve</li>
+     <li data-demo-phase-indicator="3"><span>3</span>Build events</li>
+     <li data-demo-phase-indicator="4"><span>4</span>Delivery receipt</li>
+    </ol>
+
+    <div class="nf-rw-demo__panel" data-demo-phase="1">
+     <form id="rw-demo-form">
+      <div class="nf-rw-demo__form">
+       <label class="nf-rw-demo__wide">Decision question<input name="question" required value="Which operating option best fits this team?" /></label>
+       <label class="nf-rw-demo__wide">Scope and context<textarea name="scope" required rows="3">A ten-person service team comparing two operational options.</textarea></label>
+       <label>Acceptance criteria<input name="criteria" required value="fit, cost, support" /></label>
+       <label>Budget cap (USD)<input name="budget" type="number" min="0.01" step="0.01" value="2.00" /></label>
+       <label>Option A<input name="option_a" required value="Option A" /></label>
+       <label>Evidence A<input name="evidence_a" type="url" required value="https://example.com/evidence-a" /></label>
+       <label>Option B<input name="option_b" required value="Option B" /></label>
+       <label>Evidence B<input name="evidence_b" type="url" required value="https://example.com/evidence-b" /></label>
+      </div>
+      <p class="nf-rw-footnote">The clarification fields come from the Decision Brief intent contract—not a generic chat prompt.</p>
+      <button class="nf-button nf-button--primary" type="submit">Generate blueprint</button>
+     </form>
+    </div>
+
+    <div class="nf-rw-demo__panel" data-demo-phase="2" hidden>
+     <div class="nf-rw-demo__status"><span class="nf-rw-status nf-rw-status--qualified">Ready for approval</span><code id="rw-demo-blueprint-id"></code></div>
+     <ol class="nf-rw-demo__steps" id="rw-demo-steps"></ol>
+     <dl class="nf-rw-demo__cost">
+      <div><dt>Budget cap</dt><dd id="rw-demo-budget"></dd></div>
+      <div><dt>Metered model cost</dt><dd>Measured during live execution</dd></div>
+      <div><dt>External tools</dt><dd>Not measured in fixture</dd></div>
+      <div><dt>Total reconciled machine cost</dt><dd>Not yet reconciled</dd></div>
+     </dl>
+     <p class="nf-rw-footnote">Nothing has executed. In live mode, approval is cryptographically bound to the exact intake and expires after 30 minutes.</p>
+     <div class="nf-corp-actions">
+      <button class="nf-button nf-button--primary" id="rw-demo-approve" type="button">Approve fixture build</button>
+      <button class="nf-button nf-button--secondary" id="rw-demo-edit" type="button">Edit answers</button>
+     </div>
+    </div>
+
+    <div class="nf-rw-demo__panel" data-demo-phase="3" hidden>
+     <div class="nf-rw-demo__status"><span class="nf-rw-status nf-rw-status--qualified">Fixture event ledger</span><code id="rw-demo-job-id"></code></div>
+     <ol class="nf-rw-demo__events" id="rw-demo-events" aria-live="polite"></ol>
+     <button class="nf-button nf-button--primary" id="rw-demo-result" type="button">Inspect delivery receipt</button>
+    </div>
+
+    <div class="nf-rw-demo__panel" data-demo-phase="4" hidden>
+     <div class="nf-rw-demo__status"><span class="nf-rw-status nf-rw-status--qualified">Qualified fixture</span><code>fixture://noetfield-runways/guided-cockpit-v1</code></div>
+     <div class="nf-rw-demo__artifacts" id="rw-demo-artifacts"></div>
+     <p class="nf-rw-footnote">Artifact names demonstrate the delivery contract; fixture downloads are intentionally disabled. Real DOCX/PDF staging artifacts have separate hash-verified proof. Paid customer delivery is not claimed.</p>
+     <a class="nf-button nf-button--secondary" href="/proof/">Review public proof</a>
+    </div>
+
+    <p class="nf-rw-demo__error" id="rw-demo-error" role="alert" hidden></p>
    </div>
   </section>
 
@@ -189,10 +259,10 @@
       <h3>software-repair</h3>
       <dl>
        <dt>Steps</dt><dd>3</dd>
-       <dt>Model invocations</dt><dd>2</dd>
+       <dt>Bounded proposals</dt><dd>2</dd>
        <dt>Deterministic checks</dt><dd>1</dd>
        <dt>Repairs</dt><dd>0</dd>
-       <dt>Metered model cost</dt><dd>measuring</dd>
+       <dt>Proposal cost</dt><dd>not reconciled</dd>
        <dt>Budget cap</dt><dd>scoped per job</dd>
       </dl>
      </article>
@@ -201,10 +271,10 @@
       <h3>software-repair</h3>
       <dl>
        <dt>Steps</dt><dd>5</dd>
-       <dt>Model invocations</dt><dd>4</dd>
+       <dt>Bounded proposals</dt><dd>4</dd>
        <dt>Deterministic checks</dt><dd>failed</dd>
        <dt>Bounded repairs</dt><dd>2</dd>
-       <dt>Metered model cost</dt><dd>measuring</dd>
+       <dt>Proposal cost</dt><dd>not reconciled</dd>
        <dt>Stop condition</dt><dd>within cap</dd>
       </dl>
      </article>
@@ -409,7 +479,7 @@
       },
       execute: {
         title: "Execute",
-        body: "01 Diagnose (model-backed)\n02 Fix (model-backed)\n03 Verify (deterministic)"
+        body: "01 Diagnose (machine-backed)\n02 Fix (proposal-backed)\n03 Verify (deterministic)"
       },
       verify: {
         title: "Verify",
