@@ -291,8 +291,61 @@ body.nf-dapi-page .nf-dapi-hero .nf-button--secondary:hover {
   line-height: 1.45;
 }
 
+.nf-dapi-form__status--error {
+  color: #f0a8a8;
+}
+
 .nf-dapi-form__hint a {
   color: #f0d59a;
+}
+
+.nf-dapi-key-result {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.95rem;
+  border: 1px solid rgba(240, 213, 154, 0.35);
+  border-radius: 10px;
+  background: rgba(8, 14, 24, 0.65);
+}
+
+.nf-dapi-key-result__label {
+  margin: 0;
+  font-family: var(--dapi-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #f0d59a;
+}
+
+.nf-dapi-key-result__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.nf-dapi-key-result__value {
+  display: block;
+  overflow-x: auto;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-family: var(--dapi-mono);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.nf-dapi-key-result__meta {
+  margin: 0;
+  color: rgba(215, 222, 234, 0.7);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.nf-dapi-key-result .nf-button--secondary {
+  white-space: nowrap;
 }
 
 .nf-dapi-ref {

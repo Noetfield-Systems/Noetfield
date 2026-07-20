@@ -26,7 +26,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=2" />
- <link rel="stylesheet" href="/assets/noetfield-deterministic-api-v1.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-deterministic-api-v1.css?v=2" />
  <script type="application/ld+json">
  {
    "@context": "https://schema.org",
@@ -76,13 +76,13 @@
     <aside class="nf-dapi-panel" id="proof" aria-label="One-line base_url proof">
      <div class="nf-dapi-panel__bar">
       <span>Proof · one line</span>
-      <span class="nf-dapi-panel__badge">Staging</span>
+      <span class="nf-dapi-panel__badge">Production</span>
      </div>
      <pre class="nf-dapi-code" tabindex="0"><code><span class="nf-dapi-code__comment"># OpenAI-compatible client</span>
-<span class="nf-dapi-code__key">base_url</span> = <span class="nf-dapi-code__str">"https://nf-deterministic-api-v1-staging.sina-kazemnezhad-ca.workers.dev/v1"</span>
+<span class="nf-dapi-code__key">base_url</span> = <span class="nf-dapi-code__str">"https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1"</span>
 
 <span class="nf-dapi-code__comment"># same SDK · POST /v1/chat/completions</span>
-<span class="nf-dapi-code__key">api_key</span>  = <span class="nf-dapi-code__str">"nf_…"</span></code></pre>
+<span class="nf-dapi-code__key">api_key</span>  = <span class="nf-dapi-code__str">"sk-nf-…"</span></code></pre>
      <p class="nf-dapi-panel__note">Swap the base URL. Keep models, schemas, and tool-call shapes your app already expects.</p>
     </aside>
    </div>
@@ -115,11 +115,11 @@
     <div>
      <p class="nf-corp-eyebrow">Access</p>
      <h2 id="key-title">Get an API key + starter credits</h2>
-     <p class="nf-dapi-section-lead nf-dapi-section-lead--light">Request a key. We issue staging access and starter credits so you can point traffic at the endpoint above.</p>
+     <p class="nf-dapi-section-lead nf-dapi-section-lead--light">Self-serve signup issues a production key once and grants <strong>$100</strong> starter credit. Copy the key immediately — it is not shown again.</p>
      <ul class="nf-dapi-bullets">
       <li>OpenAI-compatible <code>/v1/chat/completions</code></li>
-      <li>Starter credits with your first key</li>
-      <li>Staging base URL live for integration</li>
+      <li>$100 starter credits with your first key</li>
+      <li>Production base URL live for integration</li>
      </ul>
     </div>
     <form class="nf-dapi-form" id="nfDapiKeyForm" aria-label="Request API key">
@@ -129,18 +129,23 @@
      <label>Company (optional)
       <input type="text" name="company" autocomplete="organization" placeholder="Company" />
      </label>
-     <label>Monthly LLM spend (optional)
-      <select name="spend">
-       <option value="">Select range</option>
-       <option value="under-1k">Under $1k</option>
-       <option value="1k-5k">$1k–$5k</option>
-       <option value="5k-25k">$5k–$25k</option>
-       <option value="25k-plus">$25k+</option>
-      </select>
+     <label>Friend email for referral credit (optional)
+      <input type="email" name="referral_email" autocomplete="email" placeholder="friend@company.com" />
      </label>
-     <button type="submit" class="nf-button nf-button--primary">Request API key</button>
-     <p class="nf-dapi-form__hint">Opens a short mail to <a href="mailto:operations@noetfield.com">operations@noetfield.com</a> — no self-serve issuer yet.</p>
+     <label>Referral code (optional)
+      <input type="text" name="referral_code" autocomplete="off" placeholder="ref_…" spellcheck="false" />
+     </label>
+     <button type="submit" class="nf-button nf-button--primary">Get API key</button>
+     <p class="nf-dapi-form__hint">Key is shown once in this browser. We never email the raw key.</p>
      <p class="nf-dapi-form__status" id="nfDapiKeyStatus" hidden aria-live="polite"></p>
+     <div class="nf-dapi-key-result" id="nfDapiKeyResult" hidden>
+      <p class="nf-dapi-key-result__label">Your API key (copy now)</p>
+      <div class="nf-dapi-key-result__row">
+       <code id="nfDapiKeyValue" class="nf-dapi-key-result__value"></code>
+       <button type="button" class="nf-button nf-button--secondary" id="nfDapiKeyCopy">Copy</button>
+      </div>
+      <p class="nf-dapi-key-result__meta" id="nfDapiKeyMeta"></p>
+     </div>
     </form>
    </div>
   </section>
@@ -150,13 +155,13 @@
     <div>
      <p class="nf-corp-eyebrow">Referral</p>
      <h2 id="ref-title">Refer a friend → both get +$100 API credit</h2>
-     <p class="nf-dapi-section-lead">When someone you refer activates a key and starts using the API, you both receive +$100 in API credit. Credit only — not cash.</p>
-     <a class="nf-button nf-button--primary" href="mailto:operations@noetfield.com?subject=Deterministic%20API%20referral&amp;body=My%20email%3A%0AFriend%20email%3A%0A">Start a referral</a>
+     <p class="nf-dapi-section-lead">Share your referral code from signup. When a friend signs up with that code, the referrer receives +$100 API credit. Credit only — not cash.</p>
+     <a class="nf-button nf-button--primary" href="#get-key">Get a key + referral code</a>
     </div>
     <aside class="nf-dapi-ref-card" aria-label="Referral summary">
      <p class="nf-dapi-ref-card__label">Both sides</p>
      <p class="nf-dapi-ref-card__value">+$100</p>
-     <p class="nf-dapi-ref-card__note">API credit each · applied after the referred key is active</p>
+     <p class="nf-dapi-ref-card__note">API credit · referrer credited when a valid referral_code is used at signup</p>
     </aside>
    </div>
   </section>
@@ -175,34 +180,102 @@
 
  <script>
   (function () {
+    var SIGNUP_URL = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1/signup";
     var form = document.getElementById("nfDapiKeyForm");
     if (!form) return;
+    var statusEl = document.getElementById("nfDapiKeyStatus");
+    var resultEl = document.getElementById("nfDapiKeyResult");
+    var keyEl = document.getElementById("nfDapiKeyValue");
+    var metaEl = document.getElementById("nfDapiKeyMeta");
+    var copyBtn = document.getElementById("nfDapiKeyCopy");
+
+    function setStatus(msg, isError) {
+      if (!statusEl) return;
+      statusEl.hidden = false;
+      statusEl.textContent = msg;
+      statusEl.classList.toggle("nf-dapi-form__status--error", !!isError);
+    }
+
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       var email = (form.email.value || "").trim();
       var company = (form.company.value || "").trim();
-      var spend = form.spend.value || "";
+      var referralEmail = (form.referral_email.value || "").trim();
+      var referralCode = (form.referral_code.value || "").trim();
       if (!email) return;
-      var body = [
-        "Request: Deterministic API key + starter credits",
-        "Email: " + email,
-        "Company: " + (company || "(not provided)"),
-        "Monthly LLM spend: " + (spend || "(not provided)"),
-        "",
-        "Preferred staging base_url:",
-        "https://nf-deterministic-api-v1-staging.sina-kazemnezhad-ca.workers.dev/v1"
-      ].join("\n");
-      var href =
-        "mailto:operations@noetfield.com" +
-        "?subject=" + encodeURIComponent("Deterministic API key request") +
-        "&body=" + encodeURIComponent(body);
-      var status = document.getElementById("nfDapiKeyStatus");
-      if (status) {
-        status.hidden = false;
-        status.textContent = "Opening your mail client to request a key…";
-      }
-      window.location.href = href;
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      if (resultEl) resultEl.hidden = true;
+      setStatus("Creating your key…", false);
+
+      var payload = {
+        email: email,
+        caller_site: "www.noetfield.com"
+      };
+      if (company) payload.organization = company;
+      if (referralEmail) payload.referral_email = referralEmail;
+      if (referralCode) payload.referral_code = referralCode;
+
+      fetch(SIGNUP_URL, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            return { ok: res.ok, status: res.status, data: data };
+          });
+        })
+        .then(function (out) {
+          if (!out.ok || !out.data || !out.data.api_key) {
+            var err =
+              (out.data && out.data.error && out.data.error.message) ||
+              "Signup failed. Try again or use a different email.";
+            setStatus(err, true);
+            return;
+          }
+          // Never send the raw key to analytics or remote logs.
+          if (keyEl) keyEl.textContent = out.data.api_key;
+          if (metaEl) {
+            var credit = out.data.starter_credit_usd != null ? out.data.starter_credit_usd : 100;
+            var ref = out.data.referral_code ? " · your referral code: " + out.data.referral_code : "";
+            metaEl.textContent =
+              "Starter credit: $" + credit + ". Shown once — store it securely." + ref;
+          }
+          if (resultEl) resultEl.hidden = false;
+          setStatus("Key issued. Copy it now — it will not be shown again.", false);
+          form.reset();
+        })
+        .catch(function () {
+          setStatus("Network error reaching the API. Check your connection and retry.", true);
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
+
+    if (copyBtn && keyEl) {
+      copyBtn.addEventListener("click", function () {
+        var key = keyEl.textContent || "";
+        if (!key) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(key).then(function () {
+            copyBtn.textContent = "Copied";
+            setTimeout(function () { copyBtn.textContent = "Copy"; }, 1600);
+          });
+        } else {
+          var range = document.createRange();
+          range.selectNodeContents(keyEl);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          try { document.execCommand("copy"); } catch (e) {}
+          copyBtn.textContent = "Copied";
+          setTimeout(function () { copyBtn.textContent = "Copy"; }, 1600);
+        }
+      });
+    }
   })();
  </script>
 </body>
