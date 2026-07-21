@@ -200,6 +200,19 @@ def test_homepage_footer_links_to_runways() -> None:
     assert "Governed AI systems that can act and show their work." in text
 
 
+def test_corporate_nav_includes_deploy_tab_to_live_builder() -> None:
+    """Deploy tab opens the always-synced Company New builder on app.noetfield.com."""
+    for path in (*PAGES, ROOT / "motors" / "index.html"):
+        text = read(path)
+        assert 'href="https://app.noetfield.com/"' in text, path
+        assert ">Deploy</a>" in text, path
+    home = read(ROOT / "index.html")
+    assert (
+        '<nav aria-label="Systems">' in home
+        and 'href="https://app.noetfield.com/">Deploy</a>' in home
+    )
+
+
 def test_every_public_contact_topic_has_a_select_option() -> None:
     contact = read(ROOT / "contact" / "index.html")
     configured = set(re.findall(r'<option value="([^"#]+)"', contact))
