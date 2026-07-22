@@ -46,9 +46,10 @@ ensure_data_services() {
 }
 
 ensure_governance_pilot_keys() {
-  # Fail closed: never ship AUTH_REQUIRED=true without GOVERNANCE_PILOT_API_KEYS.
+  # Fail closed when AUTH_REQUIRED unless env keys OR ADMIN_DASHBOARD_SECRET (DB bootstrap).
   local auth_required="${GOVERNANCE_PILOT_AUTH_REQUIRED:-true}"
   local pilot_keys="${GOVERNANCE_PILOT_API_KEYS:-}"
+  local admin_secret=""
   if [[ -z "$pilot_keys" ]]; then
     pilot_keys="$(read_platform_vault GOVERNANCE_PILOT_API_KEYS 2>/dev/null || true)"
   fi
@@ -65,12 +66,19 @@ ensure_governance_pilot_keys() {
       fi
     fi
   fi
+  admin_secret="${ADMIN_DASHBOARD_SECRET:-}"
+  if [[ -z "$admin_secret" ]]; then
+    admin_secret="$(read_platform_vault ADMIN_DASHBOARD_SECRET 2>/dev/null || true)"
+  fi
   if [[ "$auth_required" == "true" || "$auth_required" == "1" ]]; then
-    if [[ -z "$pilot_keys" ]]; then
-      log "FAIL: GOVERNANCE_PILOT_AUTH_REQUIRED=true but GOVERNANCE_PILOT_API_KEYS is empty"
-      log "  → Set GOVERNANCE_PILOT_API_KEYS in env or ~/.noetfield-platform-secrets/{noetfield,platform}.env"
-      log "  → Format: <tenant_uuid>:<secret>  (console Bearer uses secret only)"
+    if [[ -z "$pilot_keys" && -z "$admin_secret" ]]; then
+      log "FAIL: GOVERNANCE_PILOT_AUTH_REQUIRED=true but neither GOVERNANCE_PILOT_API_KEYS nor ADMIN_DASHBOARD_SECRET is available"
+      log "  → Set GOVERNANCE_PILOT_API_KEYS (break-glass) or ADMIN_DASHBOARD_SECRET (DB key generator bootstrap)"
+      log "  → Format for env keys: <tenant_uuid>:<secret>  (console Bearer uses secret only)"
       exit 4
+    fi
+    if [[ -z "$pilot_keys" && -n "$admin_secret" ]]; then
+      log "WARN: no GOVERNANCE_PILOT_API_KEYS — deploy allowed via ADMIN_DASHBOARD_SECRET (DB bootstrap required)"
     fi
   fi
   if [[ -n "$pilot_keys" ]]; then

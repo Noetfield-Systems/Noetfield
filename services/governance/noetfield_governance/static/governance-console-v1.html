@@ -45,8 +45,77 @@
       <button type="button" class="secondary nf-toggle-visibility" id="toggleKeyVisibility" aria-pressed="false" aria-label="Show API key">Show</button>
       <button type="button" class="secondary" id="testConnectionBtn">Test connection</button>
     </div>
-    <p class="nf-pilot-hint" id="pilotKeyHint">Session only — cleared when this browser tab closes. Paste the <strong>secret</strong> only (not <code>tenant:secret</code>). Required when <code>GOVERNANCE_PILOT_AUTH_REQUIRED=true</code>. See <a class="nf-link" href="https://www.noetfield.com/docs/api/">Governance API</a>.</p>
+    <p class="nf-pilot-hint" id="pilotKeyHint">Session only — cleared when this browser tab closes. Prefer <strong>Generate key</strong> below. Paste the <strong>secret</strong> only (not <code>tenant:secret</code>). See <a class="nf-link" href="https://www.noetfield.com/docs/api/">Governance API</a>.</p>
   </div>
+
+  <section class="nf-keys-panel" id="apiKeysPanel" aria-labelledby="apiKeysHeading">
+    <div class="nf-keys-panel-head">
+      <h2 id="apiKeysHeading">API Keys</h2>
+      <p class="nf-keys-once">Secret shown once. Store it; we only keep a hash.</p>
+    </div>
+    <div class="nf-keys-grid">
+      <div class="nf-keys-field">
+        <label for="adminSecretInput">Admin secret (bootstrap)</label>
+        <input type="password" id="adminSecretInput" autocomplete="off" placeholder="X-Admin-Secret — only needed when no pilot key yet" />
+      </div>
+      <div class="nf-keys-field">
+        <label for="keyLabelInput">Label</label>
+        <input type="text" id="keyLabelInput" autocomplete="off" value="Founder console" />
+      </div>
+      <div class="nf-keys-field">
+        <span class="label" id="audienceLabel">Audience</span>
+        <div class="nf-segmented nf-audience-toggle" role="group" aria-labelledby="audienceLabel">
+          <button type="button" class="nf-segment is-active" data-audience="founder" aria-pressed="true">Founder</button>
+          <button type="button" class="nf-segment" data-audience="client" aria-pressed="false">Client</button>
+        </div>
+      </div>
+      <div class="nf-keys-field">
+        <label for="keyTenantInput">Tenant UUID (optional)</label>
+        <input type="text" id="keyTenantInput" class="nf-mono-input" autocomplete="off" placeholder="00000000-0000-4000-8000-…" spellcheck="false" />
+      </div>
+    </div>
+    <div class="nf-keys-actions">
+      <button type="button" class="nf-primary" id="generateKeyBtn">Generate key</button>
+      <button type="button" class="secondary" id="refreshKeysBtn">Refresh list</button>
+      <button type="button" class="secondary" id="testConnectionBtnKeys">Test connection</button>
+    </div>
+    <div class="nf-keys-reveal" id="keyRevealBox" hidden>
+      <div class="nf-keys-reveal-head">
+        <span class="label">New secret (copy now)</span>
+        <div class="nf-keys-reveal-actions">
+          <button type="button" class="secondary" id="copySecretBtn">Copy</button>
+          <button type="button" class="nf-primary" id="useSecretNowBtn">Use this key now</button>
+        </div>
+      </div>
+      <code class="nf-keys-secret" id="revealedSecret"></code>
+    </div>
+    <p class="err" id="keysError" hidden role="alert"></p>
+    <div class="nf-table-wrap nf-keys-table-wrap">
+      <table id="keysTable">
+        <thead>
+          <tr>
+            <th scope="col">Prefix</th>
+            <th scope="col">Label</th>
+            <th scope="col">Scopes</th>
+            <th scope="col">Created</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="keysBody">
+          <tr class="nf-empty-row">
+            <td colspan="5">No keys loaded. Generate a key or Refresh list with credentials.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nf-keys-confirm" id="revokeConfirm" hidden>
+      <p id="revokeConfirmText">Revoke this key?</p>
+      <div class="nf-keys-confirm-actions">
+        <button type="button" class="secondary" id="revokeCancelBtn">Cancel</button>
+        <button type="button" class="nf-danger" id="revokeConfirmBtn">Revoke</button>
+      </div>
+    </div>
+  </section>
 
   <header class="nf-console-head">
     <h1>Governance Console</h1>
@@ -147,19 +216,35 @@
   <script>
     (function () {
       var PILOT_KEY_STORAGE = "noetfield_governance_pilot_api_key";
+      var ADMIN_SECRET_STORAGE = "noetfield_admin_dashboard_secret";
       var evaluatePath = "/api/v1/governance/evaluate";
       var logPath = "/api/v1/governance/ledger";
       var exportPath = "/api/v1/governance/audit-export";
       var presetsPath = "/api/v1/governance/scenario-presets/";
+      var pilotKeysPath = "/api/v1/admin/pilot-keys";
+      var FOUNDER_SCOPES = ["workspace:read", "workspace:write", "workspace:admin", "governance:read", "governance:write"];
+      var CLIENT_SCOPES = ["governance:read", "governance:write", "workspace:read"];
       var lastRid = null;
       var lastDecision = null;
       var activePreset = null;
       var authOkToastShown = false;
+      var keyAudience = "founder";
+      var pendingRevokeId = null;
+      var lastGeneratedSecret = null;
       var intentInput = document.getElementById("intentInput");
       var pilotKeyInput = document.getElementById("pilotKeyInput");
       var keyIndicator = document.getElementById("keyIndicator");
       var toastRegion = document.getElementById("toastRegion");
       var authStatusBanner = document.getElementById("authStatusBanner");
+      var adminSecretInput = document.getElementById("adminSecretInput");
+      var keyLabelInput = document.getElementById("keyLabelInput");
+      var keyTenantInput = document.getElementById("keyTenantInput");
+      var keyRevealBox = document.getElementById("keyRevealBox");
+      var revealedSecret = document.getElementById("revealedSecret");
+      var keysBody = document.getElementById("keysBody");
+      var keysError = document.getElementById("keysError");
+      var revokeConfirm = document.getElementById("revokeConfirm");
+      var revokeConfirmText = document.getElementById("revokeConfirmText");
 
       var defaultScenario = {
         tenant_id: "00000000-0000-4000-8000-000000000001",
@@ -581,6 +666,212 @@
       document.getElementById("testConnectionBtn").addEventListener("click", testConnection);
       document.getElementById("submitIntentBtn").addEventListener("click", submitIntent);
       document.getElementById("viewLogBtn").addEventListener("click", viewDecisionAndLog);
+
+      function loadAdminSecret() {
+        try {
+          var saved = sessionStorage.getItem(ADMIN_SECRET_STORAGE);
+          if (saved && adminSecretInput) adminSecretInput.value = saved;
+        } catch (e) { /* private mode */ }
+      }
+
+      function saveAdminSecret() {
+        try {
+          var v = (adminSecretInput.value || "").trim();
+          if (v) sessionStorage.setItem(ADMIN_SECRET_STORAGE, v);
+          else sessionStorage.removeItem(ADMIN_SECRET_STORAGE);
+        } catch (e) { /* private mode */ }
+      }
+
+      function adminKeysHeaders(extra) {
+        var headers = extra || { "Content-Type": "application/json" };
+        var pilot = currentPilotSecret();
+        if (pilot) {
+          headers.Authorization = "Bearer " + pilot;
+        } else {
+          var admin = (adminSecretInput.value || "").trim();
+          if (admin) headers["X-Admin-Secret"] = admin;
+        }
+        return headers;
+      }
+
+      function setAudience(audience) {
+        keyAudience = audience === "client" ? "client" : "founder";
+        document.querySelectorAll("[data-audience]").forEach(function (btn) {
+          var on = btn.getAttribute("data-audience") === keyAudience;
+          btn.classList.toggle("is-active", on);
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        if (keyLabelInput) {
+          var current = (keyLabelInput.value || "").trim();
+          if (!current || current === "Founder console" || current.indexOf("Client —") === 0) {
+            keyLabelInput.value = keyAudience === "founder" ? "Founder console" : "Client — ";
+          }
+        }
+      }
+
+      function showKeyReveal(secret) {
+        lastGeneratedSecret = secret;
+        revealedSecret.textContent = secret;
+        keyRevealBox.hidden = false;
+      }
+
+      function useSecretNow() {
+        if (!lastGeneratedSecret) return;
+        pilotKeyInput.value = lastGeneratedSecret;
+        savePilotKey();
+        authOkToastShown = false;
+        noteAuthSuccess();
+        showToast("Pilot key applied", "ok");
+      }
+
+      function renderKeys(keys) {
+        keysBody.textContent = "";
+        if (!keys || !keys.length) {
+          var emptyTr = document.createElement("tr");
+          emptyTr.className = "nf-empty-row";
+          var emptyTd = document.createElement("td");
+          emptyTd.colSpan = 5;
+          emptyTd.textContent = "No active keys.";
+          emptyTr.appendChild(emptyTd);
+          keysBody.appendChild(emptyTr);
+          return;
+        }
+        keys.forEach(function (k) {
+          var tr = document.createElement("tr");
+          appendLogCell(tr, k.key_prefix || "—");
+          appendLogCell(tr, k.label || "—");
+          appendLogCell(tr, (k.scopes || []).join(" · ") || "—");
+          appendLogCell(tr, k.created_at ? String(k.created_at).slice(0, 19).replace("T", " ") : "—");
+          var td = document.createElement("td");
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "secondary nf-revoke-btn";
+          btn.textContent = "Revoke";
+          btn.setAttribute("data-key-id", k.key_id);
+          btn.addEventListener("click", function () {
+            pendingRevokeId = k.key_id;
+            revokeConfirmText.textContent = "Revoke key " + (k.key_prefix || k.key_id) + "?";
+            revokeConfirm.hidden = false;
+          });
+          td.appendChild(btn);
+          tr.appendChild(td);
+          keysBody.appendChild(tr);
+        });
+      }
+
+      async function listKeys() {
+        keysError.hidden = true;
+        if (!currentPilotSecret() && !(adminSecretInput.value || "").trim()) {
+          return;
+        }
+        try {
+          saveAdminSecret();
+          var res = await fetch(window.location.origin + pilotKeysPath, {
+            headers: adminKeysHeaders({})
+          });
+          var text = await res.text();
+          var detail = detailFromBody(text);
+          if (!res.ok) {
+            throw new Error(detail || ("List failed (" + res.status + ")"));
+          }
+          var data = JSON.parse(text);
+          renderKeys(data.keys || []);
+        } catch (e) {
+          keysError.textContent = String(e.message || e);
+          keysError.hidden = false;
+        }
+      }
+
+      async function generateKey() {
+        keysError.hidden = true;
+        var btn = document.getElementById("generateKeyBtn");
+        btn.disabled = true;
+        try {
+          saveAdminSecret();
+          var label = (keyLabelInput.value || "").trim() || (keyAudience === "founder" ? "Founder console" : "Client");
+          var tenantRaw = (keyTenantInput.value || "").trim();
+          var body = {
+            label: label,
+            tenant_id: tenantRaw || null,
+            scopes: keyAudience === "founder" ? FOUNDER_SCOPES : CLIENT_SCOPES
+          };
+          var res = await fetch(window.location.origin + pilotKeysPath, {
+            method: "POST",
+            headers: adminKeysHeaders({ "Content-Type": "application/json" }),
+            body: JSON.stringify(body)
+          });
+          var text = await res.text();
+          var detail = detailFromBody(text);
+          if (!res.ok) {
+            throw new Error(detail || ("Generate failed (" + res.status + ")"));
+          }
+          var data = JSON.parse(text);
+          if (!data.secret) throw new Error("Server did not return a secret");
+          showKeyReveal(data.secret);
+          pilotKeyInput.value = data.secret;
+          savePilotKey();
+          authOkToastShown = false;
+          noteAuthSuccess();
+          showToast("Key generated — secret shown once", "ok");
+          await listKeys();
+        } catch (e) {
+          keysError.textContent = String(e.message || e);
+          keysError.hidden = false;
+          showToast(String(e.message || e), "error");
+        } finally {
+          btn.disabled = false;
+        }
+      }
+
+      async function revokeKeyConfirmed() {
+        if (!pendingRevokeId) return;
+        keysError.hidden = true;
+        try {
+          saveAdminSecret();
+          var res = await fetch(window.location.origin + pilotKeysPath + "/" + pendingRevokeId + "/revoke", {
+            method: "POST",
+            headers: adminKeysHeaders({})
+          });
+          var text = await res.text();
+          var detail = detailFromBody(text);
+          if (!res.ok) throw new Error(detail || ("Revoke failed (" + res.status + ")"));
+          showToast("Key revoked", "ok");
+          pendingRevokeId = null;
+          revokeConfirm.hidden = true;
+          await listKeys();
+        } catch (e) {
+          keysError.textContent = String(e.message || e);
+          keysError.hidden = false;
+          showToast(String(e.message || e), "error");
+        }
+      }
+
+      document.querySelectorAll("[data-audience]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setAudience(btn.getAttribute("data-audience"));
+        });
+      });
+      if (adminSecretInput) {
+        adminSecretInput.addEventListener("change", saveAdminSecret);
+        adminSecretInput.addEventListener("blur", saveAdminSecret);
+      }
+      document.getElementById("generateKeyBtn").addEventListener("click", generateKey);
+      document.getElementById("refreshKeysBtn").addEventListener("click", listKeys);
+      document.getElementById("testConnectionBtnKeys").addEventListener("click", testConnection);
+      document.getElementById("copySecretBtn").addEventListener("click", function () {
+        if (!lastGeneratedSecret) return;
+        copyText(lastGeneratedSecret, "Secret copied");
+      });
+      document.getElementById("useSecretNowBtn").addEventListener("click", useSecretNow);
+      document.getElementById("revokeCancelBtn").addEventListener("click", function () {
+        pendingRevokeId = null;
+        revokeConfirm.hidden = true;
+      });
+      document.getElementById("revokeConfirmBtn").addEventListener("click", revokeKeyConfirmed);
+
+      loadAdminSecret();
+      setAudience("founder");
+      listKeys();
     })();
   </script>
 </body>

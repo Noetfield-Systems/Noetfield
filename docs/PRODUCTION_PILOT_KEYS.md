@@ -14,28 +14,50 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 
 Server-side only — never commit secrets. See [.env.example](../.env.example).
 
-## Enable pilot auth
+## Primary path: Console Generate
 
-On **platform.noetfield.com** (not www):
+On **https://platform.noetfield.com/console**:
+
+1. Open the **API Keys** panel.
+2. Bootstrap (first key): paste `ADMIN_DASHBOARD_SECRET` into the Admin secret field → **Generate key**.
+3. Later keys: use a pilot Bearer with `workspace:admin`, or the admin secret.
+4. Copy the secret **once** (shown only in the create response). The server stores a hash only.
+5. Click **Use this key now** to fill the Pilot Bearer field for this session.
+
+Admin API (same auth rules):
+
+- `POST /api/v1/admin/pilot-keys` — create (`secret` only in 201 body)
+- `GET /api/v1/admin/pilot-keys` — list (never secrets)
+- `POST /api/v1/admin/pilot-keys/{key_id}/revoke`
+
+## Break-glass: env keys
+
+`GOVERNANCE_PILOT_API_KEYS` remains a fallback when DB keys are unavailable or for emergency access. Prefer console Generate for founders and clients.
 
 ```bash
 GOVERNANCE_PILOT_AUTH_REQUIRED=true
 GOVERNANCE_PILOT_API_KEYS=<tenant_uuid>:<secret>[,<tenant_uuid2>:<secret2>]
 ```
 
-Format: comma-separated `tenant_id:secret` pairs on the **server env**. The `tenant_id` must match JSON body `tenant_id` on evaluate.
+Format: comma-separated `tenant_id:secret` pairs on the **server env**. Client `Authorization` uses the **secret only**.
 
-Client `Authorization` header uses the **secret only** (see `_parse_pilot_keys` in `pilot_auth.py`). Do **not** send `tenant:secret` as the Bearer token.
+Auth order: env keys first, then hashed DB keys (`pilot_api_keys`). If auth is required and neither env nor DB has keys → `503`.
 
-## Issue a prospect key (example)
+## Issue a prospect / client key
 
-1. Generate secret: `openssl rand -hex 24`
-2. Pick stable tenant UUID for the prospect sandbox (or use org id from engagement letter).
-3. Add `tenant_uuid:secret` to `GOVERNANCE_PILOT_API_KEYS` and redeploy/restart platform.
-4. Send prospect: `Authorization: Bearer <secret>` (secret only — not the tenant prefix).
-5. Founder console paste: same Bearer secret only (from `CONSOLE_BEARER` in `~/.noetfield-platform-secrets/`).
+1. Console → Audience **Client** (scopes: `governance:read`, `governance:write`, `workspace:read`) — or Founder for full scopes including `workspace:admin`.
+2. Optional tenant UUID binding.
+3. Generate → send the prospect the secret once (Bearer only).
+4. Revoke from the Keys table when the engagement ends.
 
-Deploy scripts fail closed when `GOVERNANCE_PILOT_AUTH_REQUIRED=true` and keys are missing; they sync from `~/.noetfield-platform-secrets/{noetfield,platform}.env` when present.
+## Deploy notes
+
+Deploy scripts fail closed when `GOVERNANCE_PILOT_AUTH_REQUIRED=true` unless either:
+
+- `GOVERNANCE_PILOT_API_KEYS` is present (vault/env/remote), **or**
+- `ADMIN_DASHBOARD_SECRET` is present (DB bootstrap via console / admin API).
+
+They still sync env pilot keys from vault when present (do not wipe Railway keys).
 
 ## Verify
 

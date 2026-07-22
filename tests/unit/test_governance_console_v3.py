@@ -85,6 +85,13 @@ def test_governance_console_html_served() -> None:
             assert "Authenticated" in text
             assert "nf-wordmark" in text or "Noetfield" in text
             assert "nf-top-chrome" in text
+            assert "API Keys" in text
+            assert "Generate key" in text
+            assert "apiKeysPanel" in text
+            assert "generateKeyBtn" in text
+            assert "noetfield_admin_dashboard_secret" in text
+            assert "Secret shown once" in text
+            assert "refreshKeysBtn" in text
 
     asyncio.run(run())
 
@@ -98,5 +105,6 @@ def test_governance_console_v3_assets_served() -> None:
             assert console_css.status_code == 200
             assert "--gold" in tokens.text
             assert ".nf-console" in console_css.text
+            assert ".nf-keys-panel" in console_css.text
 
     asyncio.run(run())

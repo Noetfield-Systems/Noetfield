@@ -124,6 +124,8 @@ from noetfield_governance.golden_edge_v3 import (
 )
 from noetfield_governance.governance_rid import generate_rid, normalize_rid
 from noetfield_governance.governance_v1 import GovernanceV1Deps, router as governance_v1_router
+from noetfield_governance.pilot_key_store import InMemoryPilotKeyStore, PostgresPilotKeyStore
+from noetfield_governance.pilot_keys_admin import router as pilot_keys_admin_router
 from noetfield_governance.trust_ledger import (
     InMemoryTrustLedgerStore,
     PostgresTrustLedgerStore,
@@ -205,6 +207,7 @@ app = FastAPI(
 install_public_openapi(app)
 app.include_router(governance_v1_router)
 app.include_router(trust_ledger_router)
+app.include_router(pilot_keys_admin_router)
 
 _cors_origins = [
     o.strip()
@@ -217,7 +220,7 @@ if _cors_origins:
         allow_origins=_cors_origins,
         allow_credentials=False,
         allow_methods=["GET", "POST", "OPTIONS"],
-        allow_headers=["Content-Type", "Authorization"],
+        allow_headers=["Content-Type", "Authorization", "X-Admin-Secret", "X-API-Key"],
     )
 
 _REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -252,6 +255,18 @@ copilot_run_store = (
 analytics_store = (
     PostgresAnalyticsStore(settings.database_url) if postgres_mode else InMemoryAnalyticsStore()
 )
+
+_pilot_key_pepper = (
+    settings.event_integrity_secret.get_secret_value()
+    if settings.event_integrity_secret
+    else "replace-with-kms-managed-secret"
+)
+pilot_key_store = (
+    PostgresPilotKeyStore(settings.database_url, pepper=_pilot_key_pepper)
+    if postgres_mode
+    else InMemoryPilotKeyStore(pepper=_pilot_key_pepper)
+)
+app.state.pilot_key_store = pilot_key_store
 
 audit_runtime = AuditLedgerRuntime(store=audit_store)
 signal_pipeline = SignalIngestionPipeline(event_bus=event_bus, store=signal_store)
@@ -397,6 +412,11 @@ async def startup_platform() -> None:
         database_url=settings.database_url,
     )
     await start_signal_triage_scheduler(settings)
+    # Always wire a store (Postgres in prod; in-memory for staging/tests).
+    app.state.pilot_key_store = pilot_key_store
+    connect = getattr(pilot_key_store, "connect", None)
+    if connect is not None:
+        await connect()
 
 
 @app.on_event("shutdown")
@@ -416,6 +436,7 @@ async def shutdown_runtime() -> None:
         approval_queue,
         reflection_store,
         copilot_run_store,
+        pilot_key_store,
     ]
     for store in stores:
         close = getattr(store, "close", None)
