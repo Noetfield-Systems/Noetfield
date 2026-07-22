@@ -33,6 +33,7 @@ module.exports = async function handler(req, res) {
   const body = req.body && typeof req.body === "object" ? req.body : {};
   const outcome = await dispatchPublicJob({
     recipeId: body.recipe_id || body.recipeId,
+    goal: body.goal || null,
     env: process.env,
   });
   return res.status(outcome.httpStatus).json(outcome.body);

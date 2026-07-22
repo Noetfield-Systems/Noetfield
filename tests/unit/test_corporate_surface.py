@@ -200,7 +200,7 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert "Commissioning Specialist" in text
     assert "Software Repair" in text
     assert text.count("<h1") == 1
-    assert 'href="/assets/noetfield-runways-v1.css?v=1"' in text
+    assert 'href="/assets/noetfield-runways-v1.css?v=2"' in text
     for forbidden in (
         "Ruflo",
         "CrewAI",
@@ -212,6 +212,7 @@ def test_runways_page_is_honest_product_surface() -> None:
         assert forbidden not in text, forbidden
     assert 'href="/contact/?topic=enterprise-governance"' in text
     assert 'href="/contact/?topic=pilot-client"' in text
+    assert 'href="/runways/decision-brief/"' in text
     assert 'id="rw-dispatch-btn"' in text
     assert 'fetch("/api/runway/jobs"' in text
     assert "POST /v1/jobs" in text

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Vendor Decision Brief — Noetfield</title>
+ <meta name="description" content="Order a Vendor Decision Brief: submit your question, run a verified research job, track status, and download the finished output." />
+ <meta name="robots" content="index,follow" />
+ <link rel="canonical" href="https://www.noetfield.com/runways/decision-brief/" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:title" content="Vendor Decision Brief — Noetfield" />
+ <meta property="og:description" content="Submit a vendor decision question. Track the job. Download the verified brief." />
+ <meta property="og:url" content="https://www.noetfield.com/runways/decision-brief/" />
+ <meta property="og:type" content="website" />
+ <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="theme-color" content="#0b1220" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=2" />
+ <link rel="stylesheet" href="/assets/noetfield-runways-v1.css?v=2" />
+</head>
+<body class="nf-corp nf-runways-page nf-decision-brief-page">
+ <a class="nf-skip" href="#main">Skip to main content</a>
+ <header class="nf-corp-header">
+  <div class="nf-corp-wrap nf-corp-navrow">
+   <a class="nf-corp-brand" href="/" aria-label="Noetfield Systems home">
+    <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
+    <span>Noetfield Systems <small>Inc.</small></span>
+   </a>
+   <nav class="nf-corp-nav" aria-label="Primary navigation">
+    <a href="/runways/">Runways</a>
+    <a href="/runways/decision-brief/" aria-current="page">Decision Brief</a>
+    <a href="/proof/">Proof</a>
+    <a class="nf-corp-nav__cta" href="/contact/?topic=decision-brief-pilot">Paid pilot</a>
+   </nav>
+  </div>
+ </header>
+
+ <main id="main">
+  <section class="nf-rw-hero" aria-labelledby="db-title">
+   <div class="nf-corp-wrap nf-rw-hero__grid">
+    <div>
+     <p class="nf-rw-kicker">Product · Vendor Decision Brief</p>
+     <h1 id="db-title">Compare vendors. Get a verified brief.</h1>
+     <p class="nf-rw-hero__lead">Tell us the decision. We run a governed research job, verify the output, and return a reopenable brief with evidence—not a chat transcript.</p>
+     <ul class="nf-rw-trust" aria-label="What you get">
+      <li>Submitted → Running → Ready</li>
+      <li>Evidence-backed synthesis</li>
+      <li>Receipt for what ran</li>
+     </ul>
+     <p class="nf-db-honesty">Live staging demo below. Paid customer delivery is scoped as a pilot (no public price on this page).</p>
+     <div class="nf-corp-actions">
+      <a class="nf-button nf-button--primary" href="#order">Run a demo brief</a>
+      <a class="nf-button nf-button--secondary" href="/contact/?topic=decision-brief-pilot">Start a paid pilot</a>
+     </div>
+    </div>
+    <aside class="nf-rw-console" aria-label="Delivery path">
+     <div class="nf-rw-console__bar">
+      <span>Customer path</span>
+      <span class="nf-rw-status nf-rw-status--qualified">SKU · Decision Brief</span>
+     </div>
+     <div class="nf-rw-console__body">
+      <ol class="nf-rw-console__steps">
+       <li><span>1</span><span>Form</span><span>Your question + scope</span></li>
+       <li><span>2</span><span>Job</span><span>Motor runs the recipe</span></li>
+       <li><span>3</span><span>Status</span><span>Submitted · Running · Ready</span></li>
+       <li><span>4</span><span>Output</span><span>Artifacts + receipt</span></li>
+      </ol>
+     </div>
+    </aside>
+   </div>
+  </section>
+
+  <section class="nf-rw-section nf-rw-section--paper" id="order" aria-labelledby="order-title">
+   <div class="nf-corp-wrap nf-db-layout">
+    <div>
+     <p class="nf-rw-eyebrow">01 · Order</p>
+     <h2 id="order-title">Describe the decision.</h2>
+     <p class="nf-rw-lead">This demo uses the live staging Motor. For a paid, managed delivery with your vendors and deadlines, start a pilot.</p>
+     <form id="db-form" class="nf-db-form" novalidate>
+      <label>
+       <span>Decision question</span>
+       <textarea id="db-question" name="question" rows="3" required maxlength="500" placeholder="Which vendor best fits our document-automation scope?"></textarea>
+      </label>
+      <label>
+       <span>Scope (optional)</span>
+       <input id="db-scope" name="scope" type="text" maxlength="300" placeholder="e.g. Canadian SMB, SOC2 required, under 50 seats" />
+      </label>
+      <label>
+       <span>Criteria (optional, comma-separated)</span>
+       <input id="db-criteria" name="criteria" type="text" maxlength="240" placeholder="security, fit, price" />
+      </label>
+      <div class="nf-corp-actions">
+       <button class="nf-button nf-button--primary" type="submit" id="db-submit">Run demo brief</button>
+       <a class="nf-button nf-button--secondary" href="/contact/?topic=decision-brief-pilot">Paid pilot instead</a>
+      </div>
+      <p class="nf-db-form__note">No public self-serve checkout yet. Paid work is invoiced through pilot intake.</p>
+     </form>
+    </div>
+
+    <aside class="nf-rw-console" id="db-console" aria-live="polite">
+     <div class="nf-rw-console__bar">
+      <span>Job status</span>
+      <span id="db-status" class="nf-rw-status">Idle</span>
+     </div>
+     <div class="nf-rw-console__body">
+      <p class="nf-rw-console__label">Job ID</p>
+      <p id="db-job" class="nf-rw-console__goal">—</p>
+      <p class="nf-rw-console__label">Artifacts</p>
+      <ul id="db-artifacts" class="nf-db-artifacts">
+       <li>None yet</li>
+      </ul>
+      <p id="db-note" class="nf-rw-console__note">Submit a question to start. The page will poll until the job finishes.</p>
+     </div>
+    </aside>
+   </div>
+  </section>
+
+  <section class="nf-rw-cta" aria-labelledby="db-cta-title">
+   <div class="nf-corp-wrap">
+    <h2 id="db-cta-title">Ready for a paid, managed brief?</h2>
+    <p>Pilot your vendors, deadline, and acceptance criteria. We scope the engagement—no public price table here.</p>
+    <div class="nf-corp-actions">
+     <a class="nf-button nf-button--primary" href="/contact/?topic=decision-brief-pilot">Start paid pilot</a>
+     <a class="nf-button nf-button--secondary" href="/runways/">Back to Runways</a>
+    </div>
+   </div>
+  </section>
+ </main>
+
+ <footer class="nf-corp-footer">
+  <div class="nf-corp-wrap nf-corp-footer__grid">
+   <div>
+    <a class="nf-corp-brand nf-corp-brand--footer" href="/">
+     <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
+     <span>Noetfield Systems <small>Inc.</small></span>
+    </a>
+    <p>Verified agentic execution.<br />Vancouver, British Columbia, Canada.</p>
+   </div>
+   <nav aria-label="Company"><strong>Company</strong><a href="/about/">About</a><a href="/proof/">Proof</a></nav>
+   <nav aria-label="Product"><strong>Product</strong><a href="/runways/">Runways</a><a href="/runways/decision-brief/" aria-current="page">Decision Brief</a></nav>
+   <nav aria-label="Contact"><strong>Contact</strong><a href="/contact/?topic=decision-brief-pilot">Decision Brief pilot</a></nav>
+  </div>
+  <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
+ </footer>
+
+ <script>
+  (function () {
+    var form = document.getElementById("db-form");
+    var submitBtn = document.getElementById("db-submit");
+    var statusEl = document.getElementById("db-status");
+    var jobEl = document.getElementById("db-job");
+    var noteEl = document.getElementById("db-note");
+    var artifactsEl = document.getElementById("db-artifacts");
+
+    function setStatus(text, kind) {
+      statusEl.textContent = text;
+      statusEl.className = "nf-rw-status" + (kind ? " nf-rw-status--" + kind : "");
+    }
+
+    function setArtifacts(rows) {
+      artifactsEl.innerHTML = "";
+      if (!rows || !rows.length) {
+        var li = document.createElement("li");
+        li.textContent = "None yet";
+        artifactsEl.appendChild(li);
+        return;
+      }
+      rows.forEach(function (row) {
+        var li = document.createElement("li");
+        li.textContent = (row.filename || row.artifact_id || "artifact") +
+          (row.content_type ? " · " + row.content_type : "");
+        artifactsEl.appendChild(li);
+      });
+    }
+
+    async function pollStatus(jobId, attempt) {
+      var res = await fetch("/api/runway/job-status?job_id=" + encodeURIComponent(jobId), {
+        headers: { Accept: "application/json" }
+      });
+      var data = await res.json().catch(function () { return {}; });
+      if (res.status === 202 || String(data.status || "").toLowerCase() === "running") {
+        setStatus("Running", "amber");
+        if (attempt < 60) {
+          window.setTimeout(function () { pollStatus(jobId, attempt + 1); }, 2500);
+        } else {
+          setStatus("Still running", "amber");
+          noteEl.textContent = "Job is still running. Refresh later with this job id, or start a paid pilot for managed delivery.";
+          submitBtn.disabled = false;
+        }
+        return;
+      }
+      if (!res.ok || data.ok === false) {
+        setStatus("Failed", "failed");
+        noteEl.textContent = data.detail || "Could not read job status.";
+        submitBtn.disabled = false;
+        return;
+      }
+      var terminal = String(data.status || "").toLowerCase();
+      if (terminal === "succeeded" || terminal === "qualified" || terminal === "complete") {
+        setStatus("Ready", "qualified");
+      } else if (terminal.indexOf("fail") >= 0) {
+        setStatus("Failed", "failed");
+      } else {
+        setStatus(terminal || "Complete", "qualified");
+      }
+      setArtifacts(data.artifacts || []);
+      noteEl.textContent = "Job " + jobId + " finished (" + (data.status || "unknown") + "). Demo artifacts are listed above. For paid delivery of your vendors and deadline, start a pilot.";
+      submitBtn.disabled = false;
+    }
+
+    form.addEventListener("submit", async function (ev) {
+      ev.preventDefault();
+      var question = (document.getElementById("db-question").value || "").trim();
+      if (!question) {
+        setStatus("Need question", "failed");
+        noteEl.textContent = "Enter a decision question first.";
+        return;
+      }
+      var scope = (document.getElementById("db-scope").value || "").trim();
+      var criteriaRaw = (document.getElementById("db-criteria").value || "").trim();
+      var criteria = criteriaRaw
+        ? criteriaRaw.split(",").map(function (c) { return c.trim(); }).filter(Boolean).slice(0, 8)
+        : [];
+
+      submitBtn.disabled = true;
+      setStatus("Submitting", "amber");
+      jobEl.textContent = "…";
+      setArtifacts([]);
+      noteEl.textContent = "Sending allowlisted Vendor Decision Brief to the staging Motor…";
+
+      try {
+        var res = await fetch("/api/runway/jobs", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            recipe_id: "vendor-decision-brief",
+            goal: { question: question, scope: scope, criteria: criteria }
+          })
+        });
+        var data = await res.json().catch(function () { return {}; });
+        if (!res.ok || !data.job_id) {
+          setStatus("Unavailable", "failed");
+          jobEl.textContent = "—";
+          noteEl.textContent = (data.detail || "Dispatch unavailable.") +
+            " Use paid pilot intake for a managed run.";
+          submitBtn.disabled = false;
+          return;
+        }
+        jobEl.textContent = data.job_id;
+        setStatus("Submitted", "amber");
+        noteEl.textContent = "Accepted. Polling until Ready…";
+        pollStatus(data.job_id, 0);
+      } catch (err) {
+        setStatus("Unavailable", "failed");
+        noteEl.textContent = "Network error. Try again or start a paid pilot.";
+        submitBtn.disabled = false;
+      }
+    });
+  })();
+ </script>
+</body>
+</html>

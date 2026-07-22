@@ -24,6 +24,9 @@ def test_public_dispatch_module_locks_allowlist_and_hmac_path() -> None:
     assert (ROOT / "api" / "runway" / "jobs.js").is_file()
     assert (ROOT / "api" / "runway" / "job-status.js").is_file()
     assert (ROOT / "api" / "_lib" / "runway-hmac.js").is_file()
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert "PUBLIC_BUDGET_USD = 1" in text or "budget_usd: PUBLIC_BUDGET_USD" in text
+    assert "/v1/intake" in text
     _load_via_node_require_shape()
 
 
@@ -32,4 +35,14 @@ def test_runways_page_exposes_dual_cta_paths() -> None:
     assert 'href="/contact/?topic=enterprise-governance"' in text
     assert 'id="rw-dispatch-btn"' in text
     assert "/api/runway/jobs" in text
-    assert "POST /v1/jobs" in text
+    assert 'href="/runways/decision-brief/"' in text
+
+
+def test_decision_brief_buyer_page_exists() -> None:
+    page = ROOT / "runways" / "decision-brief" / "index.html"
+    assert page.is_file()
+    text = page.read_text(encoding="utf-8")
+    assert 'recipe_id: "vendor-decision-brief"' in text
+    assert "/api/runway/jobs" in text
+    assert "/contact/?topic=decision-brief-pilot" in text
+    assert 'id="db-form"' in text
