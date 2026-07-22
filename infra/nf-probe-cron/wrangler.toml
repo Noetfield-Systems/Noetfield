@@ -11,4 +11,4 @@ WWW_BASE = "https://www.noetfield.com"
 PLATFORM_BASE = "https://platform.noetfield.com"
 GREETING_SSOT_HASH = "f73217eec3f7b956f10da9bc83bf25522113fa97d3fd9d850eecb5c9d32bb970"
 # Live platform Railway deploy pin — sync via scripts/sync_nf_probe_expected_sha.sh
-EXPECTED_GIT_SHA = "8dc7c94cfa0144f2e2f905617bc556bd5661a73f"
+EXPECTED_GIT_SHA = "3c2c9981be38420bb9077444971dc4605c9ac7a3"
