@@ -77,6 +77,8 @@ def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
         assert phrase in text
     assert "Tesla" not in text
     assert "Tesla-class" not in text
+    assert "Verified operational outcome" not in text
+    assert "Controlled outcome verified against acceptance criteria" in text
     assert "governed execution systems that coordinate" not in text
     assert "records the operational system" not in text
     assert text.count("<section") == 8

@@ -61,7 +61,7 @@ def test_homepage_introduces_the_category_before_the_portfolio() -> None:
 def test_homepage_mental_model_does_not_put_ai_before_the_motor() -> None:
     text = visible_text(HOME)
     assert "Event or human intent" in text
-    assert "Verified operational outcome" in text
+    assert "Controlled outcome verified against acceptance criteria" in text
     assert "governed execution runtime around intelligence" in text
     for forbidden in (
         "AI decides",
