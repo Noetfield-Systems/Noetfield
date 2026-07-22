@@ -1,4 +1,4 @@
-/* Governance Evaluation Interface — platform console (v3 tokens) */
+/* Noetfield Governance Console — board-grade operator shell */
 
 body.nf-console {
   margin: 0;
@@ -7,8 +7,107 @@ body.nf-console {
   font-size: var(--text-sm);
   line-height: var(--leading-body);
   color: var(--text);
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(200, 163, 73, 0.08), transparent 55%),
+  background:
+    radial-gradient(1200px 600px at 18% -12%, rgba(200, 163, 73, 0.09), transparent 55%),
+    radial-gradient(900px 480px at 92% 8%, rgba(122, 167, 255, 0.05), transparent 50%),
     linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+.nf-console .nf-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--gold);
+  color: #0b0b14;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.nf-console .nf-skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+/* —— Top chrome —— */
+.nf-console .nf-top-chrome {
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 7, 11, 0.72);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.nf-console .nf-top-chrome-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.nf-console .nf-brand-block {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nf-console .nf-wordmark {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.nf-console .nf-wordmark:hover {
+  color: var(--gold-bright);
+}
+
+.nf-console .nf-brand-sep {
+  width: 1px;
+  height: 1.1em;
+  background: var(--line);
+  align-self: center;
+}
+
+.nf-console .nf-product-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.nf-console .nf-top-chrome-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nf-console .nf-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gold-dim);
+  background: rgba(200, 163, 73, 0.1);
+  color: var(--gold-bright);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.nf-console .nf-docs-link {
+  font-weight: 500;
 }
 
 .nf-console .nf-console-banner {
@@ -22,25 +121,13 @@ body.nf-console {
   max-width: 1152px;
 }
 
-.nf-console header.nf-console-head {
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--line);
+.nf-console .nf-console-banner code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--gold-bright);
 }
 
-.nf-console header.nf-console-head h1 {
-  font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  font-weight: 600;
-  margin: 0 0 6px;
-}
-
-.nf-console .nf-console-sub {
-  color: var(--muted);
-  font-size: var(--text-sm);
-  margin: 0;
-  max-width: 640px;
-}
-
+/* —— Auth —— */
 .nf-console .nf-pilot-auth {
   margin: 12px 24px 0;
   max-width: 1152px;
@@ -48,9 +135,19 @@ body.nf-console {
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
   background: var(--panel);
+  box-shadow: var(--shadow2);
 }
 
-.nf-console .nf-pilot-auth label {
+.nf-console .nf-pilot-auth-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.nf-console .nf-pilot-auth label,
+.nf-console .label {
   display: block;
   font-size: var(--text-xs);
   text-transform: uppercase;
@@ -60,16 +157,59 @@ body.nf-console {
   font-weight: 600;
 }
 
-.nf-console .nf-pilot-auth input {
+.nf-console .nf-key-indicator {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted2);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.nf-console .nf-key-indicator[data-set="true"] {
+  border-color: rgba(45, 227, 138, 0.35);
+  color: var(--ok);
+  background: var(--okGlow);
+}
+
+.nf-console .nf-pilot-key-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  max-width: 560px;
+}
+
+.nf-console .nf-pilot-auth input,
+.nf-console .nf-mono-input {
+  flex: 1;
   width: 100%;
-  max-width: 480px;
   background: var(--bg1);
   border: 1px solid var(--line);
   color: var(--text);
   border-radius: var(--radius-sm);
   padding: 10px 12px;
-  font-family: ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.nf-console .nf-pilot-auth input:focus,
+.nf-console .nf-mono-input:focus,
+.nf-console textarea:focus,
+.nf-console button:focus-visible,
+.nf-console a.nf-link:focus-visible,
+.nf-console .nf-segment:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-color: var(--gold-dim);
+}
+
+.nf-console .nf-toggle-visibility {
+  margin: 0 !important;
+  min-width: 72px;
+  min-height: 44px;
 }
 
 .nf-console .nf-pilot-hint {
@@ -78,11 +218,45 @@ body.nf-console {
   color: var(--muted2);
 }
 
+.nf-console .nf-pilot-hint code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* —— Page head —— */
+.nf-console header.nf-console-head {
+  padding: 22px 24px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nf-console header.nf-console-head h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+  font-weight: 600;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.nf-console .nf-console-sub {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  margin: 0;
+  max-width: 640px;
+}
+
+.nf-console .nf-empty-state {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  padding: 8px 0 4px;
+}
+
+/* —— Layout —— */
 .nf-console main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  padding: 20px 24px 48px;
+  padding: 8px 24px 56px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -91,8 +265,22 @@ body.nf-console {
   .nf-console main {
     grid-template-columns: 1fr;
   }
+
+  .nf-console .nf-pilot-key-row,
+  .nf-console .rid-input-row {
+    flex-direction: column;
+  }
+
+  .nf-console .rid-actions {
+    width: 100%;
+  }
+
+  .nf-console .rid-actions .secondary {
+    flex: 1;
+  }
 }
 
+.nf-console section.nf-panel,
 .nf-console section {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -114,17 +302,75 @@ body.nf-console {
   font-weight: 600;
 }
 
+/* —— Presets (segmented) —— */
+.nf-console .nf-preset-block {
+  margin: 14px 0 12px;
+}
+
+.nf-console .nf-segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg1);
+}
+
+.nf-console .nf-segment {
+  flex: 1 1 auto;
+  min-width: 72px;
+  min-height: 44px;
+  margin: 0 !important;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nf-console .nf-segment:last-child {
+  border-right: none;
+}
+
+.nf-console .nf-segment:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nf-console .nf-segment.is-active,
+.nf-console .nf-segment[aria-pressed="true"] {
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(200, 163, 73, 0.28), rgba(200, 163, 73, 0.1));
+  box-shadow: inset 0 -2px 0 var(--gold);
+}
+
+/* —— Code / JSON panel —— */
+.nf-console .nf-code-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #050508;
+  overflow: hidden;
+}
+
 .nf-console textarea {
   width: 100%;
-  min-height: 180px;
-  background: var(--bg1);
-  border: 1px solid var(--line);
+  min-height: 200px;
+  background: transparent;
+  border: none;
   color: var(--text);
-  border-radius: var(--radius-sm);
-  padding: 12px;
-  font-family: ui-monospace, monospace;
+  padding: 14px;
+  font-family: var(--font-mono);
   font-size: 12px;
+  line-height: 1.55;
   resize: vertical;
+  box-sizing: border-box;
+  display: block;
 }
 
 .nf-console .hint {
@@ -133,6 +379,7 @@ body.nf-console {
   margin: 0 0 10px;
 }
 
+/* —— Buttons —— */
 .nf-console button {
   margin-top: 12px;
   background: linear-gradient(180deg, rgba(200, 163, 73, 0.35), rgba(200, 163, 73, 0.12));
@@ -144,25 +391,46 @@ body.nf-console {
   cursor: pointer;
   font-size: var(--text-sm);
   font-family: inherit;
+  min-height: 44px;
 }
 
-.nf-console button:disabled {
-  opacity: 0.5;
+.nf-console button.nf-primary {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.nf-console button:disabled,
+.nf-console button[aria-busy="true"] {
+  opacity: 0.55;
   cursor: not-allowed;
 }
 
 .nf-console button.secondary {
   background: transparent;
   border: 1px solid var(--line);
-  margin-left: 8px;
+  margin-left: 0;
   margin-top: 8px;
 }
 
+.nf-console .nf-decision-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.nf-console .nf-decision-actions .secondary {
+  margin-top: 0;
+}
+
+/* —— Decision —— */
 .nf-console .decision {
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-family: var(--font-serif);
+  letter-spacing: -0.01em;
 }
 
 .nf-console .decision.REJECT {
@@ -178,19 +446,43 @@ body.nf-console {
 }
 
 .nf-console .row {
-  margin-bottom: 8px;
-}
-
-.nf-console .label {
-  color: var(--muted2);
-  display: block;
-  font-size: var(--text-xs);
-  margin-bottom: 2px;
+  margin-bottom: 10px;
 }
 
 .nf-console .value {
   font-size: var(--text-sm);
-  word-break: break-all;
+  word-break: break-word;
+}
+
+.nf-console .nf-mono,
+.nf-console .value.nf-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.nf-console .rid-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.nf-console .rid-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nf-console .rid-actions .secondary {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+/* —— Table —— */
+.nf-console .nf-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.18);
 }
 
 .nf-console table {
@@ -202,14 +494,28 @@ body.nf-console {
 .nf-console th,
 .nf-console td {
   text-align: left;
-  padding: 10px 8px;
+  padding: 11px 12px;
   border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.nf-console tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .nf-console th {
   color: var(--muted2);
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.nf-console .nf-empty-row td {
+  color: var(--muted);
+  text-align: center;
+  padding: 28px 16px;
 }
 
 .nf-console .err {
@@ -225,25 +531,70 @@ body.nf-console {
   font-size: var(--text-sm);
 }
 
-.nf-console .rid-row input {
-  width: 100%;
-  background: var(--bg1);
-  border: 1px solid var(--line);
-  color: var(--text);
-  border-radius: var(--radius-sm);
-  padding: 8px 10px;
-  font-family: ui-monospace, monospace;
-  font-size: 12px;
-}
-
-.nf-console .rid-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
 .nf-console a.nf-link {
   color: var(--gold);
   font-size: var(--text-sm);
+  text-decoration: none;
+}
+
+.nf-console a.nf-link:hover {
+  color: var(--gold-bright);
+  text-decoration: underline;
+}
+
+/* —— Toasts —— */
+.nf-console .nf-toast-region {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(360px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.nf-console .nf-toast {
+  pointer-events: auto;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: rgba(11, 11, 20, 0.96);
+  color: var(--text);
+  font-size: var(--text-sm);
+  box-shadow: var(--shadow2);
+  animation: nf-toast-in var(--motion-base, 0.2s) ease-out;
+}
+
+.nf-console .nf-toast-ok {
+  border-color: rgba(45, 227, 138, 0.35);
+}
+
+.nf-console .nf-toast-error {
+  border-color: rgba(248, 81, 73, 0.45);
+  color: #ffb4b0;
+}
+
+.nf-console .nf-toast-out {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+@keyframes nf-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-console .nf-toast {
+    animation: none;
+  }
 }

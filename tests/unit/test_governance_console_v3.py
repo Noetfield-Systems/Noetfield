@@ -69,6 +69,7 @@ def test_governance_console_html_served() -> None:
             response = await client.get("/console")
             assert response.status_code == 200
             text = response.text
+            assert "Governance Console" in text
             assert "Governance Evaluation Interface" in text
             assert "Submit Intent" in text
             assert "Compliance log" in text
@@ -76,6 +77,8 @@ def test_governance_console_html_served() -> None:
             assert "noetfield-console.css" in text
             assert "pilotKeyInput" in text
             assert "noetfield_governance_pilot_api_key" in text
+            assert "nf-wordmark" in text or "Noetfield" in text
+            assert "nf-top-chrome" in text
 
     asyncio.run(run())
 
