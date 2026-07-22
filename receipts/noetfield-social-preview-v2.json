@@ -648,7 +648,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/deterministic-api/",
-      "description": "Drop-in OpenAI replacement. Cheaper. Guaranteed valid JSON and tool calls. Change one base_url line. Get an API key with starter credits.",
+      "description": "Noetfield API is a drop-in OpenAI replacement. Cheaper. Guaranteed valid JSON and tool calls. Change one base_url line. Get an API key with $10 starter credits.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -659,7 +659,7 @@
       },
       "profile": "corporate",
       "route": "/deterministic-api/",
-      "title": "Noetfield Deterministic API \u2014 Drop-in OpenAI Replacement",
+      "title": "Noetfield API \u2014 Drop-in OpenAI Replacement",
       "verdict": "PASS"
     },
     {
