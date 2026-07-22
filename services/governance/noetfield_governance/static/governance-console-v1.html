@@ -33,16 +33,19 @@
     Documented API: <code>POST /api/v1/governance/evaluate</code>
   </div>
 
+  <div class="nf-auth-status-banner" id="authStatusBanner" hidden role="alert" data-kind=""></div>
+
   <div class="nf-pilot-auth" id="pilotAuthPanel">
     <div class="nf-pilot-auth-head">
-      <label for="pilotKeyInput">Pilot API key</label>
+      <label for="pilotKeyInput">Pilot Bearer secret</label>
       <span class="nf-key-indicator" id="keyIndicator" data-set="false" aria-live="polite">No key</span>
     </div>
     <div class="nf-pilot-key-row">
-      <input type="password" id="pilotKeyInput" autocomplete="off" placeholder="Bearer token for production pilots" aria-describedby="pilotKeyHint" />
+      <input type="password" id="pilotKeyInput" autocomplete="off" placeholder="Paste Bearer secret only (not tenant:secret)" aria-describedby="pilotKeyHint" />
       <button type="button" class="secondary nf-toggle-visibility" id="toggleKeyVisibility" aria-pressed="false" aria-label="Show API key">Show</button>
+      <button type="button" class="secondary" id="testConnectionBtn">Test connection</button>
     </div>
-    <p class="nf-pilot-hint" id="pilotKeyHint">Session only — cleared when this browser tab closes. Required when <code>GOVERNANCE_PILOT_AUTH_REQUIRED=true</code>. See <a class="nf-link" href="https://www.noetfield.com/docs/api/">Governance API</a>.</p>
+    <p class="nf-pilot-hint" id="pilotKeyHint">Session only — cleared when this browser tab closes. Paste the <strong>secret</strong> only (not <code>tenant:secret</code>). Required when <code>GOVERNANCE_PILOT_AUTH_REQUIRED=true</code>. See <a class="nf-link" href="https://www.noetfield.com/docs/api/">Governance API</a>.</p>
   </div>
 
   <header class="nf-console-head">
@@ -147,13 +150,16 @@
       var evaluatePath = "/api/v1/governance/evaluate";
       var logPath = "/api/v1/governance/ledger";
       var exportPath = "/api/v1/governance/audit-export";
+      var presetsPath = "/api/v1/governance/scenario-presets/";
       var lastRid = null;
       var lastDecision = null;
       var activePreset = null;
+      var authOkToastShown = false;
       var intentInput = document.getElementById("intentInput");
       var pilotKeyInput = document.getElementById("pilotKeyInput");
       var keyIndicator = document.getElementById("keyIndicator");
       var toastRegion = document.getElementById("toastRegion");
+      var authStatusBanner = document.getElementById("authStatusBanner");
 
       var defaultScenario = {
         tenant_id: "00000000-0000-4000-8000-000000000001",
@@ -168,9 +174,21 @@
       };
       intentInput.value = JSON.stringify(defaultScenario, null, 2);
 
+      function clearToastsOfKind(kind) {
+        if (!toastRegion) return;
+        Array.prototype.slice.call(toastRegion.querySelectorAll(".nf-toast")).forEach(function (el) {
+          if (!kind || el.getAttribute("data-kind") === kind) {
+            if (el.parentNode) el.parentNode.removeChild(el);
+          }
+        });
+      }
+
       function showToast(message, kind) {
+        var toastKind = kind || "info";
+        clearToastsOfKind(toastKind);
         var el = document.createElement("div");
         el.className = "nf-toast" + (kind ? " nf-toast-" + kind : "");
+        el.setAttribute("data-kind", toastKind);
         el.textContent = message;
         toastRegion.appendChild(el);
         window.setTimeout(function () {
@@ -178,11 +196,85 @@
           window.setTimeout(function () {
             if (el.parentNode) el.parentNode.removeChild(el);
           }, 220);
-        }, 2800);
+        }, 3200);
+      }
+
+      function hideAuthBanner() {
+        authStatusBanner.hidden = true;
+        authStatusBanner.textContent = "";
+        authStatusBanner.setAttribute("data-kind", "");
+      }
+
+      function showAuthBanner(kind, message) {
+        authStatusBanner.hidden = false;
+        authStatusBanner.setAttribute("data-kind", kind || "");
+        authStatusBanner.textContent = message;
+      }
+
+      function detailFromBody(text) {
+        if (!text) return "";
+        try {
+          var parsed = JSON.parse(text);
+          var d = parsed.detail != null ? parsed.detail : parsed.message;
+          if (typeof d === "string") return d;
+          if (Array.isArray(d)) {
+            return d.map(function (item) {
+              if (typeof item === "string") return item;
+              return item.msg || JSON.stringify(item);
+            }).join("; ");
+          }
+          if (d != null) return JSON.stringify(d);
+        } catch (ignore) {}
+        return String(text).slice(0, 240);
+      }
+
+      function classifyAuthFailure(status, detail) {
+        var lower = String(detail || "").toLowerCase();
+        if (status === 503 && lower.indexOf("no keys are configured") !== -1) {
+          return {
+            kind: "config",
+            message: "Server misconfigured: governance pilot authentication is required but no keys are configured (503). Ops must set GOVERNANCE_PILOT_API_KEYS on platform-api."
+          };
+        }
+        if (status === 401) {
+          return {
+            kind: "auth",
+            message: "Unauthorized (401): invalid or missing pilot Bearer secret. Paste the secret only — not tenant:secret."
+          };
+        }
+        return null;
+      }
+
+      function noteAuthSuccess() {
+        hideAuthBanner();
+        if (!authOkToastShown) {
+          authOkToastShown = true;
+          showToast("Authenticated", "ok");
+        }
+      }
+
+      function handleAuthResponse(status, detail) {
+        var classified = classifyAuthFailure(status, detail);
+        if (classified) {
+          showAuthBanner(classified.kind, classified.message);
+          return classified.message;
+        }
+        return null;
+      }
+
+      function normalizePilotSecret(raw) {
+        var v = String(raw || "").trim();
+        var m = v.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}:(.+)$/);
+        if (m) return m[1].trim();
+        return v;
+      }
+
+      function currentPilotSecret() {
+        return normalizePilotSecret(pilotKeyInput.value);
       }
 
       function updateKeyIndicator() {
-        var hasKey = !!pilotKeyInput.value.trim();
+        var hasKey = !!currentPilotSecret();
         keyIndicator.setAttribute("data-set", hasKey ? "true" : "false");
         keyIndicator.textContent = hasKey ? "Key set" : "No key";
       }
@@ -190,21 +282,25 @@
       function loadPilotKey() {
         try {
           var saved = sessionStorage.getItem(PILOT_KEY_STORAGE);
-          if (saved) pilotKeyInput.value = saved;
+          if (saved) pilotKeyInput.value = normalizePilotSecret(saved);
         } catch (e) { /* private mode */ }
         updateKeyIndicator();
       }
 
       function savePilotKey() {
         try {
-          var v = pilotKeyInput.value.trim();
+          var v = currentPilotSecret();
+          if (v !== pilotKeyInput.value.trim()) pilotKeyInput.value = v;
           if (v) sessionStorage.setItem(PILOT_KEY_STORAGE, v);
           else sessionStorage.removeItem(PILOT_KEY_STORAGE);
         } catch (e) { /* private mode */ }
         updateKeyIndicator();
       }
 
-      pilotKeyInput.addEventListener("input", updateKeyIndicator);
+      pilotKeyInput.addEventListener("input", function () {
+        authOkToastShown = false;
+        updateKeyIndicator();
+      });
       pilotKeyInput.addEventListener("change", savePilotKey);
       pilotKeyInput.addEventListener("blur", savePilotKey);
       loadPilotKey();
@@ -220,7 +316,7 @@
 
       function authHeaders(extra) {
         var headers = extra || { "Content-Type": "application/json" };
-        var key = pilotKeyInput.value.trim();
+        var key = currentPilotSecret();
         if (key) headers.Authorization = "Bearer " + key;
         return headers;
       }
@@ -307,9 +403,13 @@
           if (scenario.tenant_id) url.searchParams.set("tenant_id", scenario.tenant_id);
           url.searchParams.set("limit", "100");
           var res = await fetch(url, { headers: authHeaders({}) });
-          if (res.status === 401) throw new Error("Pilot API key required. Enter your Bearer token above.");
-          if (!res.ok) throw new Error("Compliance log is unavailable.");
-          var data = await res.json();
+          var text = await res.text();
+          var detail = detailFromBody(text);
+          var authMsg = handleAuthResponse(res.status, detail);
+          if (authMsg) throw new Error(authMsg);
+          if (!res.ok) throw new Error("Compliance log unavailable (" + res.status + "): " + (detail || res.statusText));
+          noteAuthSuccess();
+          var data = JSON.parse(text);
           var entries = data.entries || [];
           if (!entries.length) {
             var emptyTr = document.createElement("tr");
@@ -334,7 +434,7 @@
             body.appendChild(tr);
           });
         } catch (e) {
-          errEl.textContent = e instanceof SyntaxError ? "Scenario format is invalid." : String(e);
+          errEl.textContent = e instanceof SyntaxError ? "Scenario format is invalid." : String(e.message || e);
           errEl.hidden = false;
           showToast(errEl.textContent, "error");
         }
@@ -359,22 +459,23 @@
             body: JSON.stringify(body)
           });
           var text = await res.text();
+          var detail = detailFromBody(text);
           if (!res.ok) {
-            if (res.status === 401) {
-              throw new Error("Pilot API key required. Enter your Bearer token in the field above.");
-            }
+            var authMsg = handleAuthResponse(res.status, detail);
+            if (authMsg) throw new Error(authMsg);
             if (res.status === 429) {
               throw new Error("Rate limit exceeded. Wait a minute or contact operations@noetfield.com.");
             }
-            var detail = text;
-            try { detail = JSON.parse(text).detail || text; } catch (ignore) {}
-            throw new Error(typeof detail === "string" ? detail : "Evaluation could not be completed.");
+            throw new Error(typeof detail === "string" && detail
+              ? ("Evaluation failed (" + res.status + "): " + detail)
+              : "Evaluation could not be completed (" + res.status + ").");
           }
+          noteAuthSuccess();
           showDecision(JSON.parse(text));
           await loadComplianceLog();
           showToast("Evaluation complete", "ok");
         } catch (e) {
-          var msg = e instanceof SyntaxError ? "Scenario format is invalid." : String(e);
+          var msg = e instanceof SyntaxError ? "Scenario format is invalid." : String(e.message || e);
           errEl.textContent = msg;
           errEl.hidden = false;
           showToast(msg, "error");
@@ -427,16 +528,47 @@
       });
 
       async function loadPreset(name) {
+        savePilotKey();
         try {
-          var res = await fetch(window.location.origin + "/api/v1/governance/scenario-presets/" + name, {
+          var res = await fetch(window.location.origin + presetsPath + name, {
             headers: authHeaders({})
           });
-          if (!res.ok) throw new Error("Preset unavailable");
-          intentInput.value = JSON.stringify(await res.json(), null, 2);
+          var text = await res.text();
+          var detail = detailFromBody(text);
+          if (!res.ok) {
+            var authMsg = handleAuthResponse(res.status, detail);
+            var serverDetail = authMsg || (detail || res.statusText || "unavailable");
+            throw new Error("Could not load preset " + name + " (" + res.status + "): " + serverDetail);
+          }
+          noteAuthSuccess();
+          intentInput.value = JSON.stringify(JSON.parse(text), null, 2);
           setActivePreset(name);
           showToast("Loaded " + name + " preset", "ok");
         } catch (e) {
-          showToast("Could not load preset: " + name, "error");
+          showToast(String(e.message || e), "error");
+        }
+      }
+
+      async function testConnection() {
+        var btn = document.getElementById("testConnectionBtn");
+        savePilotKey();
+        btn.disabled = true;
+        try {
+          var res = await fetch(window.location.origin + presetsPath + "bank", {
+            headers: authHeaders({})
+          });
+          var text = await res.text();
+          var detail = detailFromBody(text);
+          if (!res.ok) {
+            var authMsg = handleAuthResponse(res.status, detail);
+            throw new Error(authMsg || ("Connection failed (" + res.status + "): " + (detail || res.statusText)));
+          }
+          noteAuthSuccess();
+          showToast("Connection OK — presets reachable", "ok");
+        } catch (e) {
+          showToast(String(e.message || e), "error");
+        } finally {
+          btn.disabled = false;
         }
       }
 
@@ -446,6 +578,7 @@
         });
       });
 
+      document.getElementById("testConnectionBtn").addEventListener("click", testConnection);
       document.getElementById("submitIntentBtn").addEventListener("click", submitIntent);
       document.getElementById("viewLogBtn").addEventListener("click", viewDecisionAndLog);
     })();

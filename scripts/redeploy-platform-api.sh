@@ -5,6 +5,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+# shellcheck source=scripts/read_platform_vault.sh
+source "${ROOT}/scripts/read_platform_vault.sh"
+
 API_SERVICE="${RAILWAY_API_SERVICE:-platform-api}"
 PLATFORM_DOMAIN="${NF_PLATFORM_LIVE_DOMAIN:-platform.noetfield.com}"
 PLATFORM_BASE="https://${PLATFORM_DOMAIN}"
@@ -24,6 +27,62 @@ fi
 
 command -v railway >/dev/null || { log "FAIL: railway CLI missing"; exit 1; }
 railway_cmd whoami >/dev/null
+
+# Fail closed: do not redeploy auth-required with empty pilot keys.
+ensure_pilot_keys_before_redeploy() {
+  local auth_required pilot_keys remote_auth remote_keys
+  auth_required="${GOVERNANCE_PILOT_AUTH_REQUIRED:-}"
+  pilot_keys="${GOVERNANCE_PILOT_API_KEYS:-}"
+  if [[ -z "$pilot_keys" ]]; then
+    pilot_keys="$(read_platform_vault GOVERNANCE_PILOT_API_KEYS 2>/dev/null || true)"
+  fi
+  if [[ -z "$pilot_keys" ]]; then
+    local bearer tenant
+    bearer="$(read_platform_vault CONSOLE_BEARER 2>/dev/null || true)"
+    tenant="${GOVERNANCE_PILOT_TENANT_ID:-00000000-0000-4000-8000-000000000001}"
+    if [[ -n "$bearer" ]]; then
+      if [[ "$bearer" == *:* ]]; then
+        pilot_keys="$bearer"
+      else
+        pilot_keys="${tenant}:${bearer}"
+      fi
+    fi
+  fi
+  remote_auth="$(railway_cmd variable list --service "$API_SERVICE" --json 2>/dev/null | python3 -c '
+import json,sys
+try:
+  d=json.load(sys.stdin)
+  print(str((d or {}).get("GOVERNANCE_PILOT_AUTH_REQUIRED") or "").strip())
+except Exception:
+  print("")
+' 2>/dev/null || true)"
+  remote_keys="$(railway_cmd variable list --service "$API_SERVICE" --json 2>/dev/null | python3 -c '
+import json,sys
+try:
+  d=json.load(sys.stdin)
+  print(str((d or {}).get("GOVERNANCE_PILOT_API_KEYS") or "").strip())
+except Exception:
+  print("")
+' 2>/dev/null || true)"
+  if [[ -z "$auth_required" ]]; then
+    auth_required="$remote_auth"
+  fi
+  if [[ "$auth_required" == "true" || "$auth_required" == "1" ]]; then
+    if [[ -n "$pilot_keys" ]]; then
+      log "Syncing GOVERNANCE_PILOT_API_KEYS before redeploy (last4=${pilot_keys: -4})"
+      railway_cmd variable set --service "$API_SERVICE" --skip-deploys \
+        "GOVERNANCE_PILOT_API_KEYS=${pilot_keys}"
+    elif [[ -z "$remote_keys" ]]; then
+      log "FAIL: GOVERNANCE_PILOT_AUTH_REQUIRED=true but no GOVERNANCE_PILOT_API_KEYS in vault/env/remote"
+      log "  → Set keys in ~/.noetfield-platform-secrets/noetfield.env then retry"
+      exit 4
+    else
+      log "Remote GOVERNANCE_PILOT_API_KEYS already present (last4=${remote_keys: -4})"
+    fi
+  fi
+}
+
+ensure_pilot_keys_before_redeploy
 
 log "greeting SSOT coupling check…"
 python3 "$ROOT/scripts/sync_chat_greeting_asset.py"

@@ -10,6 +10,8 @@ PLATFORM_SECRETS="${NOETFIELD_PLATFORM_SECRETS:-$HOME/.noetfield-platform-secret
 PLATFORM_VAULT_FILES=(
   "${HOME}/.sourcea-secrets/noetfield-admin-dashboard.env"
   "${PLATFORM_SECRETS}/noetfield.env"
+  "${PLATFORM_SECRETS}/platform.env"
+  "${PLATFORM_SECRETS}/console-bearer.env"
   "${PLATFORM_SECRETS}/noetfield-db.env"
   "${HOME}/.sourcea-secrets/noetfield.env"
   "${HOME}/.sourcea-secrets/noetfield-db.env"
@@ -61,6 +63,8 @@ keys = [
     "VOYAGE_API_KEY",
     "EMBEDDING_PROVIDER",
     "VOYAGE_MODEL",
+    "GOVERNANCE_PILOT_API_KEYS",
+    "CONSOLE_BEARER",
 ]
 files = sys.argv[1:]
 
@@ -99,6 +103,8 @@ print(
                 ),
                 "VOYAGE_API_KEY": bool(merged.get("VOYAGE_API_KEY")),
                 "EMBEDDING_PROVIDER": bool(merged.get("EMBEDDING_PROVIDER")),
+                "GOVERNANCE_PILOT_API_KEYS": bool(merged.get("GOVERNANCE_PILOT_API_KEYS")),
+                "CONSOLE_BEARER": bool(merged.get("CONSOLE_BEARER")),
             },
         }
     )
