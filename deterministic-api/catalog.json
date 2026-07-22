@@ -1,0 +1,79 @@
+{
+  "schema": "noetfield.deterministic-api-catalog.v1.2",
+  "product_id": "nf-deterministic-api",
+  "product_name": "Noetfield API",
+  "brand": "Noetfield",
+  "independent_commercial_plane": false,
+  "lock_doc": "NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1",
+  "one_liner": "Drop-in OpenAI-compatible API. Cheaper. Guaranteed valid JSON and tool calls.",
+  "not_sold": [
+    "Motor",
+    "Runways",
+    "governance",
+    "agent platform"
+  ],
+  "flagship": {
+    "id": "chat-completions",
+    "method": "POST",
+    "path": "/v1/chat/completions",
+    "compatibility": "OpenAI Chat Completions",
+    "promise": "Valid JSON schemas and tool calls guaranteed; auto-repair before response leaves the API",
+    "status": "flagship_live_signup"
+  },
+  "live": {
+    "landing": "https://www.noetfield.com/deterministic-api/",
+    "catalog": "https://www.noetfield.com/deterministic-api/catalog.json",
+    "api_base": "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev",
+    "signup": "POST /v1/signup",
+    "chat": "POST /v1/chat/completions",
+    "balance": "GET /v1/balance",
+    "models": "GET /v1/models",
+    "starter_credit_usd": 10,
+    "referral_credit_usd": 10
+  },
+  "drop_in": {
+    "before": "https://api.openai.com/v1",
+    "after": "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1",
+    "sdk_note": "Keep OpenAI SDK. Change only base_url and API key."
+  },
+  "referral": {
+    "credit_usd": 10,
+    "both_sides": true,
+    "kind": "api_credit_not_cash"
+  },
+  "buyers": [
+    "SaaS CTO / VP Engineering with >$5k/mo LLM spend",
+    "AI agency founders / builders",
+    "AI FinOps leads"
+  ],
+  "acquisition": {
+    "primary": "intent_ads",
+    "loop": "intent ads → landing → API key → credits → refer (+$10) → top-up",
+    "not": [
+      "NVIDIA inbound fantasy",
+      "governance theater as SKU",
+      "brand awareness ads"
+    ]
+  },
+  "sister_site_rules": {
+    "source_of_truth": "https://www.noetfield.com/deterministic-api/catalog.json",
+    "do": [
+      "Link to www.noetfield.com/deterministic-api/ for API sales",
+      "Reuse product_id and flagship path exactly",
+      "Pass caller_site when recording signups"
+    ],
+    "do_not": [
+      "Invent a parallel OpenAI-proxy SKU with different promises",
+      "Sell Motor / Runways / governance as the buyer SKU",
+      "Fork recipe/product IDs"
+    ],
+    "caller_sites": [
+      "www.noetfield.com",
+      "noetfield.com",
+      "trustfield.ca",
+      "sourcea.app",
+      "sourceb.app",
+      "internal"
+    ]
+  }
+}
