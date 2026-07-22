@@ -90,7 +90,7 @@
   "metadata_overrides": {
     "/": {
       "title": "Noetfield Systems Inc. — AI Motors & Governed Execution",
-      "description": "Noetfield builds AI Motors: governed execution systems that coordinate models, agents, tools, policies, knowledge, workflows and human authority."
+      "description": "Noetfield builds AI Motors: governed deterministic execution runtimes that turn intent into controlled outcomes verified against defined acceptance criteria."
     },
     "/about/": {
       "title": "About Noetfield Systems Inc.",

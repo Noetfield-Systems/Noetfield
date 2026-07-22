@@ -46,12 +46,16 @@ def test_homepage_introduces_the_category_before_the_portfolio() -> None:
     motor_section = text.index('id="ai-motors"')
     portfolio_section = text.index('id="capabilities"')
     assert motor_section < portfolio_section
-    assert "Noetfield builds AI Motors: governed execution systems" in text
+    assert "Noetfield builds AI Motors: governed deterministic execution runtimes" in text
+    assert "controlled outcomes verified against defined acceptance criteria" in text
+    assert DISTINCTION_LINE in text
     assert MEMORABLE_LINE in text
     assert text.count(f'<p class="nf-motor-manifesto">{MEMORABLE_LINE}</p>') == 1
     for component in ("Model", "Agent", "Workflow", "Automation", "AI Motor"):
         assert f"<span>{component}</span>" in text
     assert 'href="/motors/">Explore AI Motors' in text
+    assert '<a href="/motors/">AI Motors</a>' in text
+    assert '<a href="/runways/">Runways</a>' in text
 
 
 def test_homepage_mental_model_does_not_put_ai_before_the_motor() -> None:
@@ -74,7 +78,10 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
     assert DISTINCTION_LINE in text
     assert MEMORABLE_LINE in text
     assert text.count(MEMORABLE_LINE) == 1
-    assert "many models, engines, agents, runways and workflows inside one Motor" in text
+    assert (
+        "A Motor may coordinate models, engines, agents, runways and workflows "
+        "under one execution contract."
+    ) in text
     assert (
         "Provides a specialized intelligence or decision capability—such as "
         "inference, retrieval, rules, scoring, planning, classification, or generation."
@@ -92,6 +99,9 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
         "governs and executes the whole system",
         "governs the environment",
         "whole operational system",
+        "many models, engines, agents, runways and workflows inside one Motor",
+        "many engines inside",
+        "like a Tesla",
     ):
         assert forbidden not in text
     assert text.count("<h1") == 1

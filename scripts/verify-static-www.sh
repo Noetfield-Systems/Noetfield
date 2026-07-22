@@ -43,9 +43,11 @@ check_file "protected corporate homepage" index.html \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp">' '<main id="main">' \
   'Governed AI systems that can act and show their work.' \
-  'Noetfield builds AI Motors: governed execution systems' \
+  'Noetfield builds AI Motors: governed deterministic execution runtimes' \
+  'controlled outcomes verified against defined acceptance criteria' \
   'Models generate. Agents participate. Motors operate.' \
-  'Governs, executes, verifies, escalates, recovers and records the operational system.' \
+  'Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.' \
+  'Operates under contract—verifies, escalates, recovers and records' \
   'Custom AI Motors' 'Enterprise AI Governance' \
   'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
   'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
@@ -113,9 +115,14 @@ check_file "AI Motor category definition and engagement stay public" motors/inde
 check_absent "public Motor page has no private workspace or obsolete category framing" motors/index.html \
   'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
   'href="/workspace/workspace"' 'Motor &amp; Custom Workflow' 'Custom GPT motor setup' \
-  'Tesla' 'Tesla-class' 'governs and executes the whole system' 'governs the environment'
-check_absent "homepage has no Tesla-class car analogy" index.html \
-  'Tesla' 'Tesla-class' 'like a Tesla'
+  'Tesla' 'Tesla-class' 'governs and executes the whole system' 'governs the environment' \
+  'many models, engines, agents, runways and workflows inside one Motor' \
+  'many engines inside'
+check_absent "homepage has no Tesla-class car analogy or whole-system Motor framing" index.html \
+  'Tesla' 'Tesla-class' 'like a Tesla' \
+  'governed execution systems that coordinate' \
+  'governs and executes the whole system' \
+  'records the operational system'
 
 check_file "private invest route contract" invest/index.html \
   '<meta name="robots" content="noindex,nofollow" />' \

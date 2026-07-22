@@ -37,6 +37,8 @@ Diagnostic Sprint from $2,500 and Copilot pilot $2k–10k remain **legacy/produc
 - Vancouver-based AI-native systems company and product studio
 - governed AI execution: act, verify, escalate, recover and produce evidence
 - Custom AI Motors · Enterprise AI Governance · SourceA · SourceB · TrustField · Investor Workflows
+- Option A Motor vocabulary: Motors are governed **deterministic execution runtimes** (not the whole company stack); prefer “controlled outcomes verified against defined acceptance criteria”
+- Distinction line: Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.
 - explicit Available · Demonstrated · Planned · Not claimed boundaries
 - Incubator / ecosystem · Operating partner · Pilot / client contact paths
 
@@ -44,6 +46,7 @@ Diagnostic Sprint from $2,500 and Copilot pilot $2k–10k remain **legacy/produc
 
 - Founder/agent ops: `founder never`, `Hub approve`, `613 GTM`, `AGENT_SELF_AUDIT`, `plan-with-no-asf`, `RESEND_API_KEY`, `docs/ops/`, `make nf-prove`, portfolio wave counts
 - Internal repo language: `OFFERINGS_LOCKED`, `W3 economic signal`, `design partner`
+- Motor car analogies: `Tesla`, `Tesla-class`, “many engines inside”, Motor defined as the whole car / whole system
 - `SourceA`, `SourceB`, and `TrustField` are allowed only as the status-labeled portfolio/case-study references defined above, never as unsupported traction claims or TrustField implementation surfaces hosted on www.noetfield.com
 - Engineering surfaces linked from marketing: `/platform/factories/`, `services/governance/README`
 

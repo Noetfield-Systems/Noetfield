@@ -22,6 +22,9 @@ API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 HOME_NEEDLES = (
     "nf-corp",
     "Custom AI Motors",
+    "governed deterministic execution runtimes",
+    "controlled outcomes verified against defined acceptance criteria",
+    "Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.",
     "Enterprise AI Governance",
     "SourceA",
     "Live product surface · case study planned",
@@ -35,6 +38,7 @@ HOME_NEEDLES = (
     "Investor Workflows",
     "/enterprise/",
     "/motors/",
+    "/runways/",
     "/proof/",
     "/investors/",
 )
@@ -44,6 +48,10 @@ HOME_FORBIDDEN = (
     "/invest/",
     "Invest in Noetfield",
     "nfInvestorForm",
+    "Tesla",
+    "Tesla-class",
+    "governed execution systems that coordinate",
+    "records the operational system",
 )
 
 # Institutional CTAs must remain reachable from the enterprise field, not `/`.
@@ -173,10 +181,45 @@ def main() -> int:
             fail += 1
     for bad in HOME_FORBIDDEN:
         if bad in home:
-            print(f"FAIL homepage invest leak: {bad!r}", file=sys.stderr)
+            print(f"FAIL homepage forbidden copy: {bad!r}", file=sys.stderr)
             fail += 1
         else:
             print(f"OK   homepage free of {bad!r}")
+
+    motors_needles = (
+        "governed execution runtime",
+        "controlled outcomes verified against defined acceptance criteria",
+        "Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.",
+        "A Motor may coordinate models, engines, agents, runways and workflows under one execution contract.",
+    )
+    motors_forbidden = (
+        "Tesla",
+        "Tesla-class",
+        "many models, engines, agents, runways and workflows inside one Motor",
+        "many engines inside",
+        "governs and executes the whole system",
+    )
+    _, motors = fetch(f"{BASE}/motors/")
+    for needle in motors_needles:
+        if needle in motors:
+            print(f"OK   motors: {needle}")
+        else:
+            print(f"FAIL motors missing: {needle}", file=sys.stderr)
+            fail += 1
+    for bad in motors_forbidden:
+        if bad in motors:
+            print(f"FAIL motors forbidden copy: {bad!r}", file=sys.stderr)
+            fail += 1
+        else:
+            print(f"OK   motors free of {bad!r}")
+
+    _, runways = fetch(f"{BASE}/runways/")
+    for bad in ("Tesla", "Tesla-class", "many engines inside"):
+        if bad in runways:
+            print(f"FAIL runways forbidden copy: {bad!r}", file=sys.stderr)
+            fail += 1
+        else:
+            print(f"OK   runways free of {bad!r}")
 
     _, enterprise = fetch(f"{BASE}/enterprise/")
     for needle in ENTERPRISE_NEEDLES:
