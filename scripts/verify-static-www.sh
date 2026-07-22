@@ -121,7 +121,6 @@ check_absent "public Motor page has no private workspace or obsolete category fr
   'many engines inside'
 check_absent "homepage has no Tesla-class car analogy or whole-system Motor framing" index.html \
   'Verified operational outcome' \
-
   'Tesla' 'Tesla-class' 'like a Tesla' \
   'governed execution systems that coordinate' \
   'governs and executes the whole system' \
