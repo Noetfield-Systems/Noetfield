@@ -23,6 +23,18 @@
       "destination": "https://www.noetfield.com/status/",
       "statusCode": 308
     },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "packs.noetfield.com" }],
+      "destination": "https://www.noetfield.com/research-packs/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "packs.noetfield.com" }],
+      "destination": "https://www.noetfield.com/research-packs/:path*",
+      "statusCode": 301
+    },
     { "source": "/docs/ops/:path*", "destination": "/404", "statusCode": 404 },
     { "source": "/docs/ops", "destination": "/404", "statusCode": 404 },
     { "source": "/docs/platform/:path*", "destination": "/404", "statusCode": 404 },

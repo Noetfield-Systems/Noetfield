@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adapt Research packs — implement on sister sites</title>
+  <meta name="description" content="Copy the Research packs commercial contract into Noetfield, Sister surface, SourceA, or SourceB plans without forking recipe IDs." />
+  <link rel="stylesheet" href="/research-packs/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Syne:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    .play {
+      width: min(860px, calc(100% - 2.5rem));
+      margin: 0 auto;
+      padding: 3.5rem 0 4rem;
+    }
+    .play h1 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -0.04em;
+      margin: 0 0 0.6rem;
+    }
+    .play ol { padding-left: 1.2rem; color: var(--muted); }
+    .play li + li { margin-top: 0.55rem; }
+    pre {
+      background: #10241c;
+      color: #d7efe4;
+      padding: 1rem 1.1rem;
+      overflow: auto;
+      font: 0.82rem/1.45 var(--mono);
+      border-radius: 2px;
+    }
+    .topnav {
+      width: min(860px, calc(100% - 2.5rem));
+      margin: 1.5rem auto 0;
+      font-family: var(--display);
+    }
+    .topnav a { text-decoration: none; border-bottom: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <div class="topnav"><a href="/research-packs/">← Research packs</a></div>
+  <main class="play">
+    <h1>Adapt playbook</h1>
+    <p class="lede" style="margin:0 0 1.5rem;color:var(--muted);max-width:48ch">
+      Use this site as the independent commercial SSOT. Sister repos copy the contract into their plans; they do not invent parallel SKUs.
+    </p>
+
+    <h2 style="font-family:var(--display);letter-spacing:-0.02em">1. Pull the catalog</h2>
+    <pre>GET /catalog.json</pre>
+
+    <h2 style="font-family:var(--display);letter-spacing:-0.02em">2. Set caller_site</h2>
+    <pre>sourceb.app | noetfield.com | sister surfaces | internal</pre>
+    <p style="color:var(--muted)">SourceA learns the contract; keep <code>caller_site</code> as <code>internal</code> unless a dedicated enum is added.</p>
+
+    <h2 style="font-family:var(--display);letter-spacing:-0.02em">3. Intake shape</h2>
+    <pre>{
+  "schema": "noetfield.job-intake.v0.1",
+  "tenant_id": "…",
+  "entitlement_id": "…",
+  "runway_id": "research",
+  "recipe_id": "vendor-decision-brief",
+  "recipe_version": "0.1.0",
+  "idempotency_key": "…",
+  "caller_site": "sourceb.app",
+  "input": { "goal": { } }
+}</pre>
+
+    <h2 style="font-family:var(--display);letter-spacing:-0.02em">4. Delivery loop</h2>
+    <ol>
+      <li><code>POST /v1/jobs/blueprint</code></li>
+      <li><code>POST /v1/jobs/{id}/approve</code></li>
+      <li><code>GET /v1/jobs/{id}/result</code> → download tickets</li>
+      <li><code>POST /v1/jobs/{id}/acceptance</code> with accepted | rejected | revise_requested</li>
+    </ol>
+
+    <h2 style="font-family:var(--display);letter-spacing:-0.02em">5. Do not fork</h2>
+    <ol>
+      <li>Keep recipe IDs exactly as in <a href="/research-packs/catalog.json">catalog.json</a>.</li>
+      <li>Keep prices aligned until a founder price change updates the catalog.</li>
+      <li>Point Buy CTAs at this Research packs commercial site or your site’s embed of the same checkout/lead flow.</li>
+      <li>Observe kill criteria at runtime <code>/v1/kill-criteria</code>.</li>
+    </ol>
+
+    <p style="margin-top:2rem">
+      <a class="btn btn--ink" href="/#order">Buy on Research packs</a>
+      <a class="btn btn--line" href="/research-packs/catalog.json">catalog.json</a>
+    </p>
+  </main>
+</body>
+</html>
