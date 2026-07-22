@@ -1400,7 +1400,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/",
-      "description": "Noetfield builds AI Motors: governed execution systems that coordinate models, agents, tools, policies, knowledge, workflows and human authority.",
+      "description": "Noetfield builds AI Motors: governed deterministic execution runtimes that turn intent into controlled outcomes verified against defined acceptance criteria.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
