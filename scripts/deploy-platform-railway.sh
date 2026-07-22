@@ -45,6 +45,41 @@ ensure_data_services() {
   railway_cmd add --database redis --service "$REDIS_SERVICE" 2>/dev/null || log "  redis service exists or add skipped"
 }
 
+ensure_governance_pilot_keys() {
+  # Fail closed: never ship AUTH_REQUIRED=true without GOVERNANCE_PILOT_API_KEYS.
+  local auth_required="${GOVERNANCE_PILOT_AUTH_REQUIRED:-true}"
+  local pilot_keys="${GOVERNANCE_PILOT_API_KEYS:-}"
+  if [[ -z "$pilot_keys" ]]; then
+    pilot_keys="$(read_platform_vault GOVERNANCE_PILOT_API_KEYS 2>/dev/null || true)"
+  fi
+  if [[ -z "$pilot_keys" ]]; then
+    # Compose tenant:secret from CONSOLE_BEARER when present.
+    local bearer tenant
+    bearer="$(read_platform_vault CONSOLE_BEARER 2>/dev/null || true)"
+    tenant="${GOVERNANCE_PILOT_TENANT_ID:-00000000-0000-4000-8000-000000000001}"
+    if [[ -n "$bearer" ]]; then
+      if [[ "$bearer" == *:* ]]; then
+        pilot_keys="$bearer"
+      else
+        pilot_keys="${tenant}:${bearer}"
+      fi
+    fi
+  fi
+  if [[ "$auth_required" == "true" || "$auth_required" == "1" ]]; then
+    if [[ -z "$pilot_keys" ]]; then
+      log "FAIL: GOVERNANCE_PILOT_AUTH_REQUIRED=true but GOVERNANCE_PILOT_API_KEYS is empty"
+      log "  → Set GOVERNANCE_PILOT_API_KEYS in env or ~/.noetfield-platform-secrets/{noetfield,platform}.env"
+      log "  → Format: <tenant_uuid>:<secret>  (console Bearer uses secret only)"
+      exit 4
+    fi
+  fi
+  if [[ -n "$pilot_keys" ]]; then
+    log "Syncing GOVERNANCE_PILOT_API_KEYS from vault/env (last4=${pilot_keys: -4})"
+    railway_cmd variable set --service "$API_SERVICE" --skip-deploys \
+      "GOVERNANCE_PILOT_API_KEYS=${pilot_keys}"
+  fi
+}
+
 set_platform_variables() {
   log "Setting platform API variables on service ${API_SERVICE}..."
   local or_key resend_key resend_webhook_secret event_secret
@@ -52,6 +87,8 @@ set_platform_variables() {
   resend_key="$(read_platform_vault RESEND_API_KEY || true)"
   resend_webhook_secret="$(read_platform_vault RESEND_WEBHOOK_SECRET || true)"
   event_secret="$(read_platform_vault EVENT_INTEGRITY_SECRET || true)"
+
+  ensure_governance_pilot_keys
 
   railway_cmd variable set --service "$API_SERVICE" --skip-deploys \
     NOETFIELD_ENV=prod \

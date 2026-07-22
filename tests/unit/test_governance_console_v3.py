@@ -77,6 +77,12 @@ def test_governance_console_html_served() -> None:
             assert "noetfield-console.css" in text
             assert "pilotKeyInput" in text
             assert "noetfield_governance_pilot_api_key" in text
+            assert "Pilot Bearer secret" in text
+            assert "Paste Bearer secret only" in text
+            assert "testConnectionBtn" in text
+            assert "authStatusBanner" in text
+            assert "no keys are configured" in text
+            assert "Authenticated" in text
             assert "nf-wordmark" in text or "Noetfield" in text
             assert "nf-top-chrome" in text
 
