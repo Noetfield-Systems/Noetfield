@@ -5,6 +5,8 @@ const { buildSignedHeaders } = require("./runway-hmac");
 const DEFAULT_BASE =
   "https://noetfield-runway-runtime-api-staging.sina-kazemnezhad-ca.workers.dev";
 const DEFAULT_KEY_ID = "staging-proof";
+/** Staging entitlement ceiling is $5 — keep public demo under that. */
+const PUBLIC_BUDGET_USD = 1;
 
 const PUBLIC_RECIPES = Object.freeze({
   "vendor-decision-brief": Object.freeze({
@@ -59,7 +61,25 @@ function resolveRecipe(recipeId) {
   return PUBLIC_RECIPES[key] || null;
 }
 
-function buildPublicIntake(recipe, idempotencyKey) {
+function sanitizeBuyerGoal(raw, fallbackGoal) {
+  if (!raw || typeof raw !== "object") return fallbackGoal;
+  const question = String(raw.question || raw.title || "").trim().slice(0, 500);
+  const scope = String(raw.scope || "").trim().slice(0, 300);
+  const criteria = Array.isArray(raw.criteria)
+    ? raw.criteria.map((c) => String(c).trim().slice(0, 80)).filter(Boolean).slice(0, 8)
+    : [];
+  if (!question) return fallbackGoal;
+  return {
+    ...fallbackGoal,
+    question,
+    ...(scope ? { scope } : {}),
+    ...(criteria.length ? { criteria } : {}),
+    buyer_supplied: true,
+  };
+}
+
+function buildPublicIntake(recipe, idempotencyKey, goalOverride) {
+  const goal = sanitizeBuyerGoal(goalOverride, recipe.goal);
   return {
     schema: "noetfield.job-intake.v0.1",
     // Staging Motor entitlements are pinned in runway-cloud-runtime wrangler.jsonc.
@@ -71,8 +91,8 @@ function buildPublicIntake(recipe, idempotencyKey) {
     idempotency_key: idempotencyKey,
     requested_at: new Date().toISOString().replace(/\.\d{3}Z$/, "Z"),
     caller_site: "noetfield.com",
-    budget_usd: 25,
-    input: { goal: recipe.goal },
+    budget_usd: PUBLIC_BUDGET_USD,
+    input: { goal },
   };
 }
 
@@ -80,6 +100,18 @@ function makeIdempotencyKey(recipeId) {
   const stamp = Date.now().toString(36);
   const rand = Math.random().toString(36).slice(2, 10);
   return `www-${recipeId.slice(0, 24)}-${stamp}-${rand}`.slice(0, 128);
+}
+
+function summarizeArtifacts(resultJson) {
+  const artifacts = Array.isArray(resultJson && resultJson.artifacts)
+    ? resultJson.artifacts
+    : [];
+  return artifacts.slice(0, 12).map((row) => ({
+    artifact_id: row.artifact_id || null,
+    filename: row.filename || null,
+    content_type: row.content_type || null,
+    byte_length: row.byte_length || null,
+  }));
 }
 
 async function signedFetch(config, method, path, payload) {
@@ -109,7 +141,7 @@ async function signedFetch(config, method, path, payload) {
   return { status: response.status, json, text };
 }
 
-async function dispatchPublicJob({ recipeId, env } = {}) {
+async function dispatchPublicJob({ recipeId, goal, env } = {}) {
   const config = runtimeConfig(env);
   if (!config.configured) {
     return {
@@ -139,8 +171,16 @@ async function dispatchPublicJob({ recipeId, env } = {}) {
     };
   }
 
-  const intake = buildPublicIntake(recipe, makeIdempotencyKey(recipe.recipe_id));
-  const result = await signedFetch(config, "POST", "/v1/jobs", intake);
+  const intake = buildPublicIntake(
+    recipe,
+    makeIdempotencyKey(recipe.recipe_id),
+    goal
+  );
+  // Prefer /v1/intake (canonical); /v1/jobs remains an alias on the Motor.
+  let result = await signedFetch(config, "POST", "/v1/intake", intake);
+  if (result.status === 404) {
+    result = await signedFetch(config, "POST", "/v1/jobs", intake);
+  }
   if (result.status !== 200 && result.status !== 202) {
     return {
       ok: false,
@@ -150,7 +190,7 @@ async function dispatchPublicJob({ recipeId, env } = {}) {
         code: "MOTOR_DISPATCH_FAILED",
         detail: (result.json && (result.json.detail || result.json.error)) || "Motor rejected the job.",
         motor_status: result.status,
-        intake_fallback: "/contact/?topic=enterprise-governance",
+        intake_fallback: "/contact/?topic=decision-brief-pilot",
       },
     };
   }
@@ -168,7 +208,8 @@ async function dispatchPublicJob({ recipeId, env } = {}) {
       label: recipe.label,
       job_id: jobId,
       status_path: jobId ? `/api/runway/job-status?job_id=${encodeURIComponent(jobId)}` : null,
-      note: "Staging Motor dispatch. Paid customer delivery is not claimed.",
+      note: "Staging Motor dispatch. Paid customer delivery is scoped via pilot intake.",
+      paid_pilot_path: "/contact/?topic=decision-brief-pilot",
     },
   };
 }
@@ -223,6 +264,8 @@ async function readPublicJobStatus({ jobId, env } = {}) {
     };
   }
 
+  const status = String((result.json && result.json.status) || "unknown");
+  const artifacts = summarizeArtifacts(result.json);
   return {
     ok: true,
     httpStatus: 200,
@@ -230,14 +273,17 @@ async function readPublicJobStatus({ jobId, env } = {}) {
       ok: true,
       job_id: id,
       environment: "staging",
-      status: result.json.status || "unknown",
+      status,
+      artifacts,
       result: result.json,
+      paid_pilot_path: "/contact/?topic=decision-brief-pilot",
     },
   };
 }
 
 module.exports = {
   PUBLIC_RECIPES,
+  PUBLIC_BUDGET_USD,
   runtimeConfig,
   listPublicRecipes,
   resolveRecipe,

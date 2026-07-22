@@ -27,7 +27,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=2" />
- <link rel="stylesheet" href="/assets/noetfield-runways-v1.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-runways-v1.css?v=2" />
  <script type="application/ld+json">
  {
    "@context": "https://schema.org",
@@ -71,7 +71,7 @@
      <h1 id="rw-hero-title">From goal to verified output.</h1>
      <p class="nf-rw-hero__lead">Give Noetfield a goal. The shared Motor selects a versioned specialized runway—repair, research, video, markets, or commissioning—dispatches bounded agents and tools, executes under policy, verifies the result, repairs within limits, and returns the output with a receipt.</p>
      <div class="nf-corp-actions">
-      <a class="nf-button nf-button--primary" href="#live-console">Dispatch a staging job</a>
+      <a class="nf-button nf-button--primary" href="/runways/decision-brief/">Order Decision Brief</a>
       <a class="nf-button nf-button--secondary" href="/contact/?topic=enterprise-governance">Enterprise intake</a>
       <!-- Canonical: https://www.noetfield.com/research-packs/ -->
       <a class="nf-button nf-button--secondary" href="/research-packs/">Research packs</a>
@@ -267,10 +267,10 @@
       <p class="nf-rw-group__label">Decide</p>
       <div class="nf-rw-cards">
        <article class="nf-rw-card" id="decision-brief">
-        <span class="nf-rw-badge">Demonstrated on staging Runway</span>
+        <span class="nf-rw-badge">Buyer path live</span>
         <h3>Decision Brief</h3>
         <p>Research, evidence, synthesis, citation coverage, and reopenable DOCX/PDF output.</p>
-        <p class="nf-rw-card__meta">Staging artifact loop · paid delivery not claimed</p>
+        <p class="nf-rw-card__meta"><a href="/runways/decision-brief/">Order / demo</a> · paid pilot via contact</p>
        </article>
        <article class="nf-rw-card" id="spreadsheet-kpi">
         <span class="nf-rw-badge">Demonstrated on staging Runway</span>
@@ -330,12 +330,17 @@
   <section class="nf-rw-section nf-rw-section--paper" id="deploy" aria-labelledby="deploy-title">
    <div class="nf-corp-wrap">
     <p class="nf-rw-eyebrow">05 · Deploy</p>
-    <h2 id="deploy-title">Four ways to run a runway.</h2>
+    <h2 id="deploy-title">Ways to run a runway.</h2>
     <p class="nf-rw-lead">Commercial units are Jobs, Runways, deployment, and accepted outcomes—not agent count.</p>
     <div class="nf-rw-deploy">
      <article>
+      <h3>Vendor Decision Brief</h3>
+      <p>Customer form → staging Motor job → status → artifacts. Paid delivery is scoped as a pilot.</p>
+      <a class="nf-button nf-button--primary" href="/runways/decision-brief/">Open Decision Brief</a>
+     </article>
+     <article>
       <h3>Dispatch a Staging Job</h3>
-      <p>Run the allowlisted Vendor Decision Brief on the shared staging Motor via signed <code>POST /v1/jobs</code>.</p>
+      <p>Run the allowlisted Vendor Decision Brief on the shared staging Motor via signed intake.</p>
       <a class="nf-button nf-button--primary" href="#live-console">Open live console</a>
      </article>
      <article>
