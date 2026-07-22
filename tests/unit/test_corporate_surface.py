@@ -57,7 +57,6 @@ def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
         "Noetfield builds AI Motors: governed execution systems",
         "Models generate. Agents participate. Motors operate.",
         "Governs, executes, verifies, escalates, recovers and records the operational system.",
-        "For clarification: like a Tesla-class car",
         "Custom AI Motors",
         "Enterprise AI Governance",
         "SourceA",
@@ -74,6 +73,8 @@ def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
     )
     for phrase in required:
         assert phrase in text
+    assert "Tesla" not in text
+    assert "Tesla-class" not in text
     assert text.count("<section") == 8
 
 

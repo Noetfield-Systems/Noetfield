@@ -99,9 +99,12 @@ check_file "historical v42 expectations archived" \
 check_file "AI Motor category definition and engagement stay public" motors/index.html \
   '<title>AI Motors for Governed Execution — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/motors/" />' \
-  'An AI Motor is a governed execution system that transforms events and human intent into verified operational outcomes' \
-  'Models provide intelligence. Agents perform bounded tasks. Workflows describe operating paths.' \
+  'An AI Motor is a governed execution runtime that turns authenticated events and human intent into controlled outcomes verified against defined acceptance criteria' \
+  'Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.' \
+  'Provides a specialized intelligence or decision capability' \
+  'A versioned execution path for a defined class of outcome' \
   'Models generate. Agents participate. Motors operate.' \
+  'A Motor is defined by what it does when execution should not continue.' \
   'Governance surrounds execution from intake to evidence.' \
   'Model &amp; agent orchestration' 'Verification &amp; repair' 'Recovery' 'Promotion &amp; evidence' \
   'A bounded software change—not just a coding agent.' \
@@ -109,7 +112,10 @@ check_file "AI Motor category definition and engagement stay public" motors/inde
   'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=2'
 check_absent "public Motor page has no private workspace or obsolete category framing" motors/index.html \
   'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
-  'href="/workspace/workspace"' 'Motor &amp; Custom Workflow' 'Custom GPT motor setup'
+  'href="/workspace/workspace"' 'Motor &amp; Custom Workflow' 'Custom GPT motor setup' \
+  'Tesla' 'Tesla-class' 'governs and executes the whole system' 'governs the environment'
+check_absent "homepage has no Tesla-class car analogy" index.html \
+  'Tesla' 'Tesla-class' 'like a Tesla'
 
 check_file "private invest route contract" invest/index.html \
   '<meta name="robots" content="noindex,nofollow" />' \
