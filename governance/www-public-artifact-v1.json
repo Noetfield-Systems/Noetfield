@@ -4,6 +4,7 @@
   "public_json_files": [
     "assets/noetfield-ecosystem.json",
     "assets/noetfield-stripe-catalog.json",
+    "deterministic-api/catalog.json",
     "openapi.json",
     "proof/governed-replacement.json",
     "proof/noetfield.json"
@@ -108,8 +109,8 @@
     "copilot/readiness/intake/index.html",
     "copilot/sme/index.html",
     "copilot/trial/index.html",
-    "deterministic-api/index.html",
     "deterministic-api/catalog.json",
+    "deterministic-api/index.html",
     "directory/index.html",
     "enterprise/agent-transformation/index.html",
     "enterprise/application-factory/index.html",
