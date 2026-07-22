@@ -66,6 +66,7 @@ PRIORITY = {
     "/trust-ledger/": 0.8,
     "/about/": 0.7,
     "/runways/": 0.9,
+    "/runways/decision-brief/": 0.85,
     "/motors/": 0.9,
     "/deterministic-api/": 0.9,
 }
@@ -106,6 +107,7 @@ MARKETING_NESTED = {
     ("copilot", "pilot"),
     ("copilot", "demo"),
     ("copilot", "procurement"),
+    ("runways", "decision-brief"),
 }
 
 
