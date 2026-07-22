@@ -71,8 +71,10 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
     assert CANONICAL_DEFINITION in text
     assert JSON_LD_DEFINITION in text
     assert (
-        "One Motor. Many engines. Engines think and draft. Agents take bounded tasks. "
-        "Workflows are paths. The Motor advances, verifies, escalates and records."
+        "One Motor. Many engines. Like a Tesla-class car: the vehicle turns human intent "
+        "into action and work; engines and computers run inside it. Engines think and draft. "
+        "Agents take bounded tasks. Workflows are paths. The Motor advances, verifies, "
+        "escalates and records."
     ) in text
     assert MEMORABLE_LINE in text
     assert text.count(MEMORABLE_LINE) == 1
