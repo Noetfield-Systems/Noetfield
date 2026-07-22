@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 68,
+  "indexable_route_count": 69,
   "noindex_route_count": 77,
-  "route_count": 145,
+  "route_count": 146,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -2036,6 +2036,22 @@
       "profile": "corporate",
       "route": "/runtime/",
       "title": "Governance Runtime \u2014 Policy before execution | Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/runways/decision-brief/",
+      "description": "Order a Vendor Decision Brief: submit your question, run a verified research job, track status, and download the finished output.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/runways/decision-brief/",
+      "title": "Vendor Decision Brief \u2014 Noetfield",
       "verdict": "PASS"
     },
     {
