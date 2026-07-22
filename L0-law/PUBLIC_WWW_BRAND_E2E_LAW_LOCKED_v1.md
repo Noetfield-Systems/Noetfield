@@ -1,7 +1,7 @@
 # PUBLIC WWW BRAND & E2E LAW (LOCKED v1)
 
 **Layer:** L0-adjacent operational law (public deploy boundary)
-**Updated:** 2026-07-16
+**Updated:** 2026-07-22
 **Owner:** Noetfield Systems Inc. (holding company · www.noetfield.com)
 **Enforcement:** `scripts/verify-static-www.sh` (offline disk) · `scripts/check_noetfield_com_e2e.py` (production smoke)
 
@@ -25,9 +25,10 @@ Noetfield is not a single product. The corporate surface presents the following 
 | **Enterprise AI Governance** | **Demonstrated · client-zero** | Public internal demonstrations and evidence exist; no external enterprise deployment is claimed. |
 | **SourceA** | **Live product surface · case study planned** | Noetfield’s professional governed-execution product and infrastructure. No external-client proof is claimed yet. |
 | **SourceB** | **Live commercial service · case study planned** | SourceB.ca is a live multilingual service with an operating lead path. No customers, revenue, installations or external traction are claimed. |
+| **TrustField** | **Live product surface · case study planned** | TrustField.ca is a live Canadian payments compliance operations surface (MSBs, fintechs, PSPs) and a Noetfield Systems Inc. product. No customers, revenue, or external traction are claimed beyond the live surface. |
 | **Investor Workflows** | **Demonstrated internally** | Evidence-oriented investment and company-evaluation workflows exist; independent external validation remains open. |
 
-TrustField is a **separate venture in formation** that Noetfield may support technically. It is not a Noetfield product or subsidiary.
+TrustField is presented as a **Noetfield Systems Inc. product** with a live public surface at trustfield.ca. Portfolio copy may link to that surface; this repo still must not host TrustField implementation code.
 
 Diagnostic Sprint from $2,500 and Copilot pilot $2k–10k remain **legacy/product-lane references** on their appropriate product pages. They are not homepage authority and do not represent Noetfield-wide corporate pricing.
 
@@ -35,7 +36,7 @@ Diagnostic Sprint from $2,500 and Copilot pilot $2k–10k remain **legacy/produc
 
 - Vancouver-based AI-native systems company and product studio
 - governed AI execution: act, verify, escalate, recover and produce evidence
-- Custom AI Motors · Enterprise AI Governance · SourceA · SourceB · Investor Workflows
+- Custom AI Motors · Enterprise AI Governance · SourceA · SourceB · TrustField · Investor Workflows
 - explicit Available · Demonstrated · Planned · Not claimed boundaries
 - Incubator / ecosystem · Operating partner · Pilot / client contact paths
 
@@ -43,7 +44,7 @@ Diagnostic Sprint from $2,500 and Copilot pilot $2k–10k remain **legacy/produc
 
 - Founder/agent ops: `founder never`, `Hub approve`, `613 GTM`, `AGENT_SELF_AUDIT`, `plan-with-no-asf`, `RESEND_API_KEY`, `docs/ops/`, `make nf-prove`, portfolio wave counts
 - Internal repo language: `OFFERINGS_LOCKED`, `W3 economic signal`, `design partner`
-- `SourceA` and `SourceB` are allowed only as the status-labeled portfolio/case-study references defined above, never as public SKUs, external-client proof, or unsupported traction claims
+- `SourceA`, `SourceB`, and `TrustField` are allowed only as the status-labeled portfolio/case-study references defined above, never as unsupported traction claims or TrustField implementation surfaces hosted on www.noetfield.com
 - Engineering surfaces linked from marketing: `/platform/factories/`, `services/governance/README`
 
 ---

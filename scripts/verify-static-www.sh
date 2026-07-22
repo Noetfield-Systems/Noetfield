@@ -49,6 +49,7 @@ check_file "protected corporate homepage" index.html \
   'Custom AI Motors' 'Enterprise AI Governance' \
   'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
   'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'TrustField' 'href="https://trustfield.ca/"' 'Canadian payments compliance operations' \
   'No customers, revenue, installations or external traction are claimed' 'Investor Workflows' \
   'Evidence &amp; proof' 'What Noetfield is seeking' 'Founder &amp; company' \
   'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
@@ -65,6 +66,7 @@ check_file "protected ecosystem and investor surface" investors/index.html \
   'What exists—and what does not yet.' 'These labels describe evidence state, not commercial traction.' \
   'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
   'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
+  'TrustField' 'Live product surface · case study planned' \
   'No customers, revenue, installations or external traction are claimed' \
   'href="/proof/noetfield/"' 'href="/roadmap/"' 'href="/invest/"' \
   'Private materials remain access-controlled.' 'Verified parties only · sign-in required'
@@ -142,13 +144,18 @@ check_file "frontier prototype uses scoped enquiry" frontier-systems/index.html 
 check_absent "recovered frontier page has no workspace conversion" frontier-systems/index.html \
   'href="/workspace/'
 
-check_file "about corporate positioning and venture boundary" about/index.html \
+check_file "about corporate positioning and TrustField product boundary" about/index.html \
   'An operating company for governed AI systems.' 'Founder &amp; company' \
   'SourceA — Live product surface · case study planned.' 'No external-client proof is claimed yet' \
   'SourceB — Live commercial service · case study planned.' 'SourceB.ca is a live multilingual service with an operating lead path' \
   'No customers, revenue, installations or external traction are claimed' \
-  'A separate venture in formation that Noetfield may support.' \
-  'TrustField is not presented as a Noetfield product or subsidiary.'
+  'TrustField' 'A Noetfield Systems Inc. product' 'href="https://trustfield.ca/"'
+
+check_file "homepage TrustField portfolio card" index.html \
+  '<h3>TrustField</h3>' 'href="https://trustfield.ca/"' \
+  'Live product surface · case study planned' \
+  'Canadian payments compliance operations' \
+  'A Noetfield Systems Inc. product'
 
 # Homepage IA compression — ≤8 top-level sections (U5 v17)
 section_count="$(grep -c '<section' index.html || true)"

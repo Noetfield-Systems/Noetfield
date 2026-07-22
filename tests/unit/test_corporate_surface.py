@@ -62,6 +62,8 @@ def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
         "Enterprise AI Governance",
         "SourceA",
         "SourceB",
+        "TrustField",
+        "trustfield.ca",
         "Investor Workflows",
         "Evidence &amp; proof",
         "What Noetfield is seeking",
@@ -104,8 +106,10 @@ def test_about_states_founder_company_and_trustfield_boundary() -> None:
     assert "Founder &amp; company" in text
     assert "founder-led" in text
     assert "Vancouver, British Columbia" in text
-    assert "A separate venture in formation that Noetfield may support" in text
-    assert "not presented as a Noetfield product or subsidiary" in text
+    assert "TrustField" in text
+    assert "A Noetfield Systems Inc. product" in text
+    assert 'href="https://trustfield.ca/"' in text
+    assert "not presented as a Noetfield product or subsidiary" not in text
 
 
 def test_ecosystem_page_is_informational_and_preserves_invest_security() -> None:
@@ -141,6 +145,24 @@ def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     home = read(ROOT / "index.html")
     assert "Separate system · case study planned" not in home
     assert ">Planned</span></div>\n      <h3>SourceB</h3>" not in home
+
+
+def test_trustfield_is_listed_as_live_noetfield_product() -> None:
+    home = read(ROOT / "index.html")
+    assert "<h3>TrustField</h3>" in home
+    assert 'href="https://trustfield.ca/"' in home
+    assert "Live product surface · case study planned" in home
+    assert "A Noetfield Systems Inc. product" in home
+    assert "A separate venture in formation" not in home
+
+    about = read(ROOT / "about" / "index.html")
+    assert "TrustField" in about
+    assert 'href="https://trustfield.ca/"' in about
+    assert "not presented as a Noetfield product" not in about
+
+    investors = read(ROOT / "investors" / "index.html")
+    assert ">TrustField<" in investors or "TrustField</strong>" in investors
+    assert "trustfield.ca" in investors.lower() or "TrustField.ca" in investors
 
 
 def test_public_bridge_pages_have_coherent_navigation_and_footer() -> None:
