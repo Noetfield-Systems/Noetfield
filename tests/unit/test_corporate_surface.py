@@ -54,9 +54,11 @@ def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
         "and decision authority",
         "act, verify, escalate, recover and produce evidence",
         "The institutional execution problem",
-        "Noetfield builds AI Motors: governed execution systems",
+        "Noetfield builds AI Motors: governed deterministic execution runtimes",
+        "controlled outcomes verified against defined acceptance criteria",
         "Models generate. Agents participate. Motors operate.",
-        "Governs, executes, verifies, escalates, recovers and records the operational system.",
+        "Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.",
+        "Operates under contract—verifies, escalates, recovers and records. Engines provide capability; Motors execute.",
         "Custom AI Motors",
         "Enterprise AI Governance",
         "SourceA",
@@ -75,6 +77,8 @@ def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
         assert phrase in text
     assert "Tesla" not in text
     assert "Tesla-class" not in text
+    assert "governed execution systems that coordinate" not in text
+    assert "records the operational system" not in text
     assert text.count("<section") == 8
 
 
@@ -183,6 +187,37 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
     assert 'href="/runways/"' in text
     for href in ("/about/", "/proof/", "/motors/", "/investors/"):
         assert href in text
+
+
+def test_corporate_primary_nav_is_advisor_consistent() -> None:
+    """Shared corporate headers keep Capabilities · AI Motors · Runways · Proof · About · Deploy · Contact."""
+    expected = (
+        'href="/#capabilities">Capabilities</a>',
+        'href="/motors/"',
+        'href="/runways/"',
+        'href="/proof/"',
+        'href="/about/"',
+        'href="https://app.noetfield.com/">Deploy</a>',
+        'href="/contact/?topic=pilot-client">Contact</a>',
+    )
+    for path in (
+        ROOT / "index.html",
+        ROOT / "motors" / "index.html",
+        ROOT / "about" / "index.html",
+        ROOT / "investors" / "index.html",
+    ):
+        text = read(path)
+        nav_match = re.search(
+            r'<nav class="nf-corp-nav" aria-label="Primary navigation">(.*?)</nav>',
+            text,
+            flags=re.DOTALL,
+        )
+        assert nav_match, path
+        nav = nav_match.group(1)
+        positions = [nav.index(item) for item in expected]
+        assert positions == sorted(positions), path
+        assert 'href="/deterministic-api/"' not in nav, path
+        assert ">Ecosystem</a>" not in nav, path
 
 
 def test_runways_page_is_honest_product_surface() -> None:
