@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 62,
+  "indexable_route_count": 68,
   "noindex_route_count": 77,
-  "route_count": 139,
+  "route_count": 145,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -1892,6 +1892,102 @@
       "profile": "proof",
       "route": "/proof/noetfield/",
       "title": "Case Study #1 \u2014 Noetfield Systems Inc.",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/research-packs/404.html",
+      "description": "Explore 404.html from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/research-packs/404.html",
+      "title": "Not found \u00b7 Research packs \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/research-packs/adapt/",
+      "description": "Copy the Research packs commercial contract into Noetfield, Sister surface, SourceA, or SourceB plans without forking recipe IDs.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/research-packs/adapt/",
+      "title": "Adapt Research packs \u2014 implement on sister sites \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/research-packs/",
+      "description": "Buy Vendor Decision Briefs, KPI packs, and RFP responses as governed commercial research packs on Noetfield. Fulfilled on the shared Job Gateway.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/research-packs/",
+      "title": "Research packs \u2014 Governed commercial research \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/research-packs/privacy.html",
+      "description": "Privacy handling and telemetry data policy for Research packs landing pages.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/research-packs/privacy.html",
+      "title": "Research packs \u2014 Privacy statement \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/research-packs/success.html",
+      "description": "Lead intent captured for Research packs commercial pack checkout.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/research-packs/success.html",
+      "title": "Research packs \u2014 Thanks, your request is captured \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/research-packs/terms.html",
+      "description": "Commercial terms for Research packs independent research pack sales.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/research-packs/terms.html",
+      "title": "Research packs \u2014 Terms of Service \u2014 Noetfield",
       "verdict": "PASS"
     },
     {
