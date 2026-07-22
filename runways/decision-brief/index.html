@@ -4,12 +4,12 @@
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>Vendor Decision Brief — Noetfield</title>
- <meta name="description" content="Run a Vendor Decision Brief on the staging Motor: submit a question, track the job, and review verified artifacts." />
+ <meta name="description" content="Compare vendors with a verified Decision Brief: clear criteria, evidence, and a reopenable written recommendation." />
  <meta name="robots" content="index,follow" />
  <link rel="canonical" href="https://www.noetfield.com/runways/decision-brief/" />
  <meta property="og:site_name" content="Noetfield" />
  <meta property="og:title" content="Vendor Decision Brief — Noetfield" />
- <meta property="og:description" content="Submit a vendor decision question. Track the job. Review the verified brief artifacts." />
+ <meta property="og:description" content="Compare vendors with a verified Decision Brief: clear criteria, evidence, and a reopenable written recommendation." />
  <meta property="og:url" content="https://www.noetfield.com/runways/decision-brief/" />
  <meta property="og:type" content="website" />
  <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
@@ -20,7 +20,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=2" />
- <link rel="stylesheet" href="/assets/noetfield-runways-v1.css?v=2" />
+ <link rel="stylesheet" href="/assets/noetfield-runways-v1.css?v=3" />
 </head>
 <body class="nf-corp nf-runways-page nf-decision-brief-page">
  <a class="nf-skip" href="#main">Skip to main content</a>
@@ -43,31 +43,30 @@
   <section class="nf-rw-hero" aria-labelledby="db-title">
    <div class="nf-corp-wrap nf-rw-hero__grid">
     <div>
-     <p class="nf-rw-kicker">Product · Vendor Decision Brief</p>
-     <h1 id="db-title">Compare vendors. Get a verified brief.</h1>
-     <p class="nf-rw-hero__lead">Submit a decision question. The staging Motor runs a governed research recipe and returns verified artifacts with a receipt—not a chat transcript.</p>
-     <ul class="nf-rw-trust" aria-label="What this demo shows">
-      <li>Submitted → Running → Ready</li>
-      <li>Evidence-backed synthesis</li>
-      <li>Receipt for what ran</li>
+     <p class="nf-rw-kicker">Vendor Decision Brief</p>
+     <h1 id="db-title">Choose a vendor with a brief you can stand behind.</h1>
+     <p class="nf-rw-hero__lead">Describe the decision. Noetfield returns a written recommendation with criteria, evidence, and files you can reopen—not a chat thread you have to interpret later.</p>
+     <ul class="nf-rw-trust" aria-label="What you receive">
+      <li>Clear recommendation</li>
+      <li>Evidence tied to criteria</li>
+      <li>DOCX and PDF you can share</li>
      </ul>
-     <p class="nf-db-honesty">This page is a live staging demo. It is not a checkout.</p>
      <div class="nf-corp-actions">
-      <a class="nf-button nf-button--primary" href="#order">Run a demo brief</a>
-      <a class="nf-button nf-button--secondary" href="/runways/">Back to Runways</a>
+      <a class="nf-button nf-button--primary" href="#order">Try a sample brief</a>
+      <a class="nf-button nf-button--secondary" href="/contact/?topic=decision-brief-pilot">Talk to us</a>
      </div>
     </div>
-    <aside class="nf-rw-console" aria-label="Demo path">
+    <aside class="nf-rw-console" aria-label="How it works">
      <div class="nf-rw-console__bar">
-      <span>Demo path</span>
-      <span class="nf-rw-status nf-rw-status--qualified">Recipe · vendor-decision-brief</span>
+      <span>How it works</span>
+      <span class="nf-rw-status nf-rw-status--qualified">Decision Brief</span>
      </div>
      <div class="nf-rw-console__body">
       <ol class="nf-rw-console__steps">
-       <li><span>1</span><span>Form</span><span>Your question + scope</span></li>
-       <li><span>2</span><span>Job</span><span>Motor runs the recipe</span></li>
-       <li><span>3</span><span>Status</span><span>Submitted · Running · Ready</span></li>
-       <li><span>4</span><span>Output</span><span>Artifacts + receipt</span></li>
+       <li><span>1</span><span>Ask</span><span>Your decision and constraints</span></li>
+       <li><span>2</span><span>Run</span><span>Governed research against your criteria</span></li>
+       <li><span>3</span><span>Review</span><span>Status updates while work finishes</span></li>
+       <li><span>4</span><span>Receive</span><span>Verified brief and supporting files</span></li>
       </ol>
      </div>
     </aside>
@@ -77,9 +76,9 @@
   <section class="nf-rw-section nf-rw-section--paper" id="order" aria-labelledby="order-title">
    <div class="nf-corp-wrap nf-db-layout">
     <div>
-     <p class="nf-rw-eyebrow">01 · Demo</p>
-     <h2 id="order-title">Describe the decision.</h2>
-     <p class="nf-rw-lead">Uses the live staging Motor and the allowlisted Vendor Decision Brief recipe.</p>
+     <p class="nf-rw-eyebrow">Sample brief</p>
+     <h2 id="order-title">What decision are you making?</h2>
+     <p class="nf-rw-lead">Enter a real or sample vendor question. You will see progress and the finished files when the brief is ready.</p>
      <form id="db-form" class="nf-db-form" novalidate>
       <label>
        <span>Decision question</span>
@@ -87,32 +86,32 @@
       </label>
       <label>
        <span>Scope (optional)</span>
-       <input id="db-scope" name="scope" type="text" maxlength="300" placeholder="e.g. Canadian SMB, SOC2 required, under 50 seats" />
+       <input id="db-scope" name="scope" type="text" maxlength="300" placeholder="e.g. Canadian SMB, SOC 2 required, under 50 seats" />
       </label>
       <label>
        <span>Criteria (optional, comma-separated)</span>
        <input id="db-criteria" name="criteria" type="text" maxlength="240" placeholder="security, fit, price" />
       </label>
       <div class="nf-corp-actions">
-       <button class="nf-button nf-button--primary" type="submit" id="db-submit">Run demo brief</button>
+       <button class="nf-button nf-button--primary" type="submit" id="db-submit">Start sample brief</button>
       </div>
-      <p class="nf-db-form__note">Staging demo only. No payment is collected on this page. <a href="/contact/?topic=decision-brief-pilot">Contact</a> for anything beyond the demo.</p>
+      <p class="nf-db-form__note">This is a free sample run so you can see the product. For a brief on your vendors and timeline, <a href="/contact/?topic=decision-brief-pilot">contact Noetfield</a>.</p>
      </form>
     </div>
 
     <aside class="nf-rw-console" id="db-console" aria-live="polite">
      <div class="nf-rw-console__bar">
-      <span>Job status</span>
-      <span id="db-status" class="nf-rw-status">Idle</span>
+      <span>Progress</span>
+      <span id="db-status" class="nf-rw-status">Waiting</span>
      </div>
      <div class="nf-rw-console__body">
-      <p class="nf-rw-console__label">Job ID</p>
+      <p class="nf-rw-console__label">Reference</p>
       <p id="db-job" class="nf-rw-console__goal">—</p>
-      <p class="nf-rw-console__label">Artifacts</p>
+      <p class="nf-rw-console__label">Files</p>
       <ul id="db-artifacts" class="nf-db-artifacts">
        <li>None yet</li>
       </ul>
-      <p id="db-note" class="nf-rw-console__note">Submit a question to start. The page will poll until the job finishes.</p>
+      <p id="db-note" class="nf-rw-console__note">Submit a question to begin. This panel updates until the brief is ready.</p>
      </div>
     </aside>
    </div>
@@ -160,7 +159,7 @@
       }
       items.forEach(function (a) {
         var li = document.createElement("li");
-        var name = a.filename || a.artifact_id || "artifact";
+        var name = a.filename || a.artifact_id || "file";
         var meta = [];
         if (a.content_type) meta.push(a.content_type);
         if (a.byte_length != null) meta.push(a.byte_length + " bytes");
@@ -175,31 +174,33 @@
       });
       var data = await res.json().catch(function () { return {}; });
       if (!res.ok || data.ok === false) {
-        setStatus("Error", "failed");
-        noteEl.textContent = data.detail || data.code || ("Status HTTP " + res.status);
+        setStatus("Unavailable", "failed");
+        noteEl.textContent = "We could not refresh progress. Try again in a moment, or contact Noetfield if it continues.";
         submitBtn.disabled = false;
         return;
       }
       var st = String(data.status || "").toLowerCase();
       jobEl.textContent = jobId;
       if (st === "queued" || st === "accepted" || st === "submitted") {
-        setStatus("Submitted", "amber");
+        setStatus("Queued", "amber");
+        noteEl.textContent = "Your sample brief is queued.";
       } else if (st === "running" || st === "in_progress" || st === "processing") {
-        setStatus("Running", "amber");
+        setStatus("In progress", "amber");
+        noteEl.textContent = "Research is in progress. This panel updates automatically.";
       } else if (st === "succeeded" || st === "qualified" || st === "complete") {
         setStatus("Ready", "qualified");
         setArtifacts(data.artifacts || []);
-        noteEl.textContent = "Job " + jobId + " finished (" + (data.status || "unknown") + "). Demo artifacts are listed above.";
+        noteEl.textContent = "Your sample brief is ready. Files are listed above.";
         submitBtn.disabled = false;
         return;
       } else if (st.indexOf("fail") >= 0 || st === "cancelled" || st === "canceled") {
-        setStatus(st || "Failed", "failed");
+        setStatus("Did not finish", "failed");
         setArtifacts(data.artifacts || []);
-        noteEl.textContent = "Job " + jobId + " ended with status " + (data.status || "unknown") + ".";
+        noteEl.textContent = "This sample run did not finish. Try again, or contact Noetfield for help.";
         submitBtn.disabled = false;
         return;
       } else {
-        setStatus(data.status || "Polling", "amber");
+        setStatus(data.status || "Working", "amber");
       }
       pollTimer = setTimeout(function () { poll(jobId); }, 2500);
     }
@@ -209,8 +210,8 @@
       if (pollTimer) clearTimeout(pollTimer);
       var question = (document.getElementById("db-question").value || "").trim();
       if (!question) {
-        setStatus("Need question", "failed");
-        noteEl.textContent = "Enter a decision question first.";
+        setStatus("Need a question", "failed");
+        noteEl.textContent = "Enter the decision you want the brief to answer.";
         return;
       }
       var scope = (document.getElementById("db-scope").value || "").trim();
@@ -220,10 +221,10 @@
         : [];
 
       submitBtn.disabled = true;
-      setStatus("Submitting", "amber");
+      setStatus("Starting", "amber");
       jobEl.textContent = "…";
       setArtifacts([]);
-      noteEl.textContent = "Dispatching allowlisted Vendor Decision Brief to the staging Motor…";
+      noteEl.textContent = "Starting your sample brief…";
 
       try {
         var res = await fetch("/api/runway/jobs", {
@@ -240,25 +241,25 @@
         });
         var data = await res.json().catch(function () { return {}; });
         if (!res.ok || data.ok === false) {
-          setStatus("Blocked", "failed");
-          noteEl.textContent = data.detail || data.code || ("Dispatch HTTP " + res.status);
+          setStatus("Unavailable", "failed");
+          noteEl.textContent = "We could not start this sample right now. Please try again later, or contact Noetfield.";
           submitBtn.disabled = false;
           return;
         }
         var jobId = data.job_id;
         if (!jobId) {
-          setStatus("No job id", "failed");
-          noteEl.textContent = "Dispatch returned no job_id.";
+          setStatus("Unavailable", "failed");
+          noteEl.textContent = "We could not start this sample right now. Please try again later.";
           submitBtn.disabled = false;
           return;
         }
         jobEl.textContent = jobId;
-        setStatus("Submitted", "amber");
-        noteEl.textContent = "Polling job status…";
+        setStatus("Queued", "amber");
+        noteEl.textContent = "Your sample brief is queued.";
         poll(jobId);
       } catch (err) {
-        setStatus("Error", "failed");
-        noteEl.textContent = String(err && err.message ? err.message : err);
+        setStatus("Unavailable", "failed");
+        noteEl.textContent = "We could not reach the service. Check your connection and try again.";
         submitBtn.disabled = false;
       }
     });

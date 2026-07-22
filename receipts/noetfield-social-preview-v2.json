@@ -2040,7 +2040,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/runways/decision-brief/",
-      "description": "Run a Vendor Decision Brief on the staging Motor: submit a question, track the job, and review verified artifacts.",
+      "description": "Compare vendors with a verified Decision Brief: clear criteria, evidence, and a reopenable written recommendation.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
