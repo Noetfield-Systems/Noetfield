@@ -45,7 +45,7 @@ def test_homepage_introduces_the_category_before_the_portfolio() -> None:
     motor_section = text.index('id="ai-motors"')
     portfolio_section = text.index('id="capabilities"')
     assert motor_section < portfolio_section
-    assert "Noetfield builds AI Motors: governed execution systems" in text
+    assert "Noetfield builds AI Motors: governed execution vehicles" in text
     assert MEMORABLE_LINE in text
     assert text.count(f'<p class="nf-motor-manifesto">{MEMORABLE_LINE}</p>') == 1
     for component in ("AI engine", "Agent", "Workflow", "Automation", "AI Motor"):
