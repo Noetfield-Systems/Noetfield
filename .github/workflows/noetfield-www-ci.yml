@@ -45,6 +45,11 @@ on:
       - "scripts/test-invest-access-control.mjs"
       - "scripts/verify_chat_greeting_coupling.py"
       - "scripts/verify-public-output-allowlist.py"
+      - "scripts/verify-static-www.sh"
+      - "scripts/check_noetfield_com_e2e.py"
+      - "scripts/verify-agent-scope.sh"
+      - "scripts/verify-public-chat-truth.sh"
+      - "L0-law/PUBLIC_WWW_BRAND_E2E_LAW_LOCKED_v1.md"
       - "scripts/verify-www-**"
       - "sitemap.xml"
       - "tests/unit/test_corporate_surface.py"
@@ -101,6 +106,11 @@ on:
       - "scripts/test-invest-access-control.mjs"
       - "scripts/verify_chat_greeting_coupling.py"
       - "scripts/verify-public-output-allowlist.py"
+      - "scripts/verify-static-www.sh"
+      - "scripts/check_noetfield_com_e2e.py"
+      - "scripts/verify-agent-scope.sh"
+      - "scripts/verify-public-chat-truth.sh"
+      - "L0-law/PUBLIC_WWW_BRAND_E2E_LAW_LOCKED_v1.md"
       - "scripts/verify-www-**"
       - "sitemap.xml"
       - "tests/unit/test_corporate_surface.py"
@@ -115,6 +125,10 @@ on:
       - "trust-ledger/**/*.yaml"
       - ".github/workflows/noetfield-www-ci.yml"
       - ".github/workflows/noetfield-www-production.yml"
+
+concurrency:
+  group: noetfield-www-ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   www-health:

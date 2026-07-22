@@ -30,6 +30,8 @@ HOME_NEEDLES = (
     "Live commercial service · case study planned",
     "SourceB.ca is a live multilingual service with an operating lead path",
     "No customers, revenue, installations or external traction are claimed",
+    "TrustField",
+    "trustfield.ca",
     "Investor Workflows",
     "/enterprise/",
     "/motors/",

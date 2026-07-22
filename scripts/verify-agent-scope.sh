@@ -77,17 +77,21 @@ is_allowlisted() {
   [[ "$f" == PROJECT_BOUNDARIES_LOCKED.md ]] && return 0
   [[ "$f" == scripts/verify-agent-scope.sh ]] && return 0
   [[ "$f" == .cursor/AGENT_TRACKING.md ]] && return 0
+  [[ "$f" == L0-law/PUBLIC_WWW_BRAND_E2E_LAW_LOCKED_v1.md ]] && return 0
+  [[ "$f" == scripts/verify-static-www.sh ]] && return 0
+  [[ "$f" == scripts/check_noetfield_com_e2e.py ]] && return 0
   return 1
 }
 
-BLEED_PATTERNS='trustfield\.ca|canonical.*trustfield\.ca|VENDOR_DILIGENCE_PACK|web/lib/company-copy|deploy TrustField|TrustField Vercel|UPG-003|UPG-004|UPG-011'
+BLEED_PATTERNS='VENDOR_DILIGENCE_PACK|web/lib/company-copy|deploy TrustField|TrustField Vercel|UPG-003|UPG-004|UPG-011'
 
 product_files=()
 while IFS= read -r f; do
   [[ -z "$f" ]] && continue
   is_allowlisted "$f" && continue
   case "$f" in
-    governance-console/*|index.html|copilot/*|partners/*|assets/*|*.html|Makefile) product_files+=("$f") ;;
+    tools/*|node_modules/*|www-pages-dist/*) continue ;;
+    governance-console/*|index.html|about/*|investors/*|motors/*|copilot/*|partners/*|assets/*|*.html|Makefile) product_files+=("$f") ;;
   esac
 done < <(git ls-files 2>/dev/null)
 

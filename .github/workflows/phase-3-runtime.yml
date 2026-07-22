@@ -10,7 +10,39 @@ on:
       - "infrastructure/supabase/**"
       - "pyproject.toml"
       - ".github/workflows/phase-3-runtime.yml"
+      - "!**/*.html"
+      - "!assets/**"
+      - "!sitemap.xml"
+      - "!L0-law/**"
+      - "!tests/unit/test_corporate_surface.py"
+      - "!tests/unit/test_ai_motor_category.py"
+      - "!tests/unit/test_social_preview_v2.py"
+      - "!tests/unit/test_public_*.py"
+      - "!tests/unit/test_investor_diligence_lane.py"
+      - "!tests/unit/test_cf_pages_release.py"
+      - "!tests/unit/test_nf_www_deploy_anti_stale_v2.py"
+      - "!scripts/verify-static-www.sh"
+      - "!scripts/check_noetfield_com_e2e.py"
+      - "!scripts/verify-agent-scope.sh"
+      - "!scripts/generate_sitemap.py"
+      - "!scripts/audit_public_site_health.py"
+      - "!scripts/build-public-www-artifact.py"
+      - "!scripts/build-www-pages-dist.sh"
+      - "!scripts/deploy-www-cloudflare.sh"
+      - "!scripts/deploy-cf-www-proxy.sh"
+      - "!scripts/nf_www_deploy_anti_stale_v2.py"
+      - "!scripts/nf_post_deploy_verify.py"
+      - "!scripts/noetfield_social_preview_v2.py"
+      - "!scripts/verify-public-output-allowlist.py"
+      - "!scripts/verify-www-**"
+      - "!scripts/report_slo_health_v1.py"
+      - "!scripts/sync_chat_greeting_asset.py"
+      - "!scripts/verify_chat_greeting_coupling.py"
   workflow_dispatch:
+
+concurrency:
+  group: phase-3-runtime-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   backend-runtime:
