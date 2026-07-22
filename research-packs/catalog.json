@@ -1,0 +1,89 @@
+{
+  "schema": "noetfield.runway-commercial-catalog.v1",
+  "product": "Research packs",
+  "tagline": "Governed commercial research packs \u2014 sold on Noetfield, fulfilled on the shared Job Gateway.",
+  "runtime_base_url": "https://noetfield-runway-runtime-api-staging.sina-kazemnezhad-ca.workers.dev",
+  "workspace_path": "/v1/sourceb/workspace",
+  "caller_sites": [
+    "sourceb.app",
+    "noetfield.com",
+    "internal"
+  ],
+  "intake_schema": "noetfield.job-intake.v0.1",
+  "auth": {
+    "scheme": "NOETFIELD-HMAC",
+    "headers": [
+      "authorization",
+      "x-noetfield-timestamp",
+      "x-noetfield-nonce"
+    ]
+  },
+  "flow": [
+    "POST /v1/jobs/blueprint",
+    "POST /v1/jobs/{blueprint_id}/approve",
+    "GET /v1/jobs/{job_id}/result",
+    "GET /v1/jobs/{job_id}/download?artifact_id=\u2026",
+    "POST /v1/jobs/{job_id}/acceptance"
+  ],
+  "skus": [
+    {
+      "recipe_id": "vendor-decision-brief",
+      "name": "Vendor Decision Brief",
+      "price_usd": 699,
+      "qualified_cost_hypothesis_usd": 34,
+      "deliverables": [
+        "DOCX brief",
+        "PDF brief",
+        "citations",
+        "acceptance gate"
+      ],
+      "runway_id": "research"
+    },
+    {
+      "recipe_id": "spreadsheet-kpi-pack",
+      "name": "Spreadsheet KPI Pack",
+      "price_usd": 599,
+      "qualified_cost_hypothesis_usd": 24,
+      "deliverables": [
+        "KPI workbook",
+        "definition sheet",
+        "citations"
+      ],
+      "runway_id": "research"
+    },
+    {
+      "recipe_id": "rfp-response-pack",
+      "name": "RFP Response Pack",
+      "price_usd": 1499,
+      "qualified_cost_hypothesis_usd": 140,
+      "deliverables": [
+        "Response DOCX",
+        "compliance matrix",
+        "citations"
+      ],
+      "runway_id": "research"
+    }
+  ],
+  "adapt_for": [
+    {
+      "site": "noetfield.com",
+      "caller_site": "noetfield.com",
+      "notes": "Canonical buy surface at /research-packs/. Motor selection stays on /runways/; fulfillment via shared Job Gateway."
+    },
+    {
+      "site": "sourceb.app",
+      "caller_site": "sourceb.app",
+      "notes": "Primary delivery UI via Job Gateway workspace. Map workspace jobs to research recipes only."
+    },
+    {
+      "site": "sourcea.app",
+      "caller_site": "internal",
+      "notes": "Learn contract + kill criteria; SourceA stays Operating Brain / contract SKUs \u2014 do not duplicate research recipes."
+    }
+  ],
+  "observe": {
+    "kill_criteria": "/v1/kill-criteria",
+    "build_loop_registry": "/v1/build-loop/registry"
+  },
+  "canonical_url": "https://www.noetfield.com/research-packs/"
+}

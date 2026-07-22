@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Research packs — Governed commercial research</title>
+  <meta name="description" content="Buy Vendor Decision Briefs, KPI packs, and RFP responses as governed commercial research packs on Noetfield. Fulfilled on the shared Job Gateway." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://www.noetfield.com/research-packs/" />
+  <meta property="og:title" content="Research packs — Governed commercial research" />
+  <meta property="og:description" content="Commercial research packs on a shared Job Gateway. Sister product surfaces adapt the catalog — they do not fork the recipes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.noetfield.com/research-packs/" />
+  <meta name="theme-color" content="#0b1a14" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Syne:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/research-packs/styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Vendor Decision Brief",
+    "brand": { "@type": "Brand", "name": "Noetfield" },
+    "description": "Governed vendor decision brief with DOCX/PDF deliverables and acceptance gate.",
+    "offers": { "@type": "Offer", "price": "699", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#order">Skip to order</a>
+
+  <section class="hero" aria-label="Research packs hero">
+    <div class="hero__plane" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div>
+        <h1 class="brand"><small>Noetfield commercial</small>Research packs</h1>
+        <p class="headline">Sell the brief. Keep the receipt.</p>
+        <p class="support">Governed research packs with downloadable deliverables and accept/reject — sold here, fulfilled on the shared Job Gateway.</p>
+        <div class="cta-row">
+          <a class="btn btn--primary" href="#order">Buy a pack</a>
+          <a class="btn btn--ghost" href="/research-packs/adapt/">Adapt for your site</a>
+        </div>
+      </div>
+      <aside class="mock" aria-label="Sample Vendor Decision Brief">
+        <div>
+          <div class="mock__eyebrow">Deliverable · DOCX / PDF</div>
+          <h2>Vendor Decision Brief</h2>
+          <p>Ranked options, scored criteria, cited evidence, acceptance gate.</p>
+        </div>
+        <div class="mock__bars" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="mock__foot">
+          <span>recipe · vendor-decision-brief</span>
+          <span>$699</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="skus" aria-labelledby="skus-title">
+    <h2 id="skus-title">Commercial SKUs</h2>
+    <p class="lede">Fixed recipe IDs. Same prices across sister surfaces. Machine catalog at <a href="/research-packs/catalog.json"><code>/catalog.json</code></a>.</p>
+    <div class="sku-grid" id="sku-grid"></div>
+  </section>
+
+  <section class="section" aria-labelledby="sister-title">
+    <h2 id="sister-title">How this connects</h2>
+    <p class="lede">Sister product surfaces should implement against this catalog — not invent parallel SKUs.</p>
+    <div class="adapt-list">
+      <div class="adapt-row"><strong>SourceB</strong><p>Primary delivery UI via Job Gateway workspace. Map workspace jobs to research recipes only.</p></div>
+      <div class="adapt-row"><strong>Noetfield</strong><p>Enterprise narrative + Motor selection; fulfill commercial packs through the shared gateway with <code>caller_site: noetfield.com</code>.</p></div>
+      <div class="adapt-row"><strong>SourceA</strong><p>Study the contract and kill criteria; keep SourceA on Operating Brain / contract SKUs — do not duplicate research recipes.</p></div>
+    </div>
+    <p style="margin-top:1.5rem"><a class="btn btn--line" href="/research-packs/adapt/">Open adapt playbook</a></p>
+  </section>
+
+  <section class="section order" id="order" aria-labelledby="order-title">
+    <h2 id="order-title">Buy independently</h2>
+    <p class="lede">Record purchase intent. If a Stripe Payment Link is bound, you go straight to checkout; otherwise we activate entitlement and you open the delivery workspace.</p>
+    <form id="order-form">
+      <label>Work email
+        <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+      </label>
+      <label>Name
+        <input id="name" name="name" type="text" autocomplete="name" />
+      </label>
+      <label>Organization
+        <input id="organization" name="organization" type="text" autocomplete="organization" />
+      </label>
+      <label>SKU
+        <select id="recipe_id" name="recipe_id">
+          <option value="vendor-decision-brief">Vendor Decision Brief · $699</option>
+          <option value="spreadsheet-kpi-pack">Spreadsheet KPI Pack · $599</option>
+          <option value="rfp-response-pack">RFP Response Pack · $1,499</option>
+        </select>
+      </label>
+      <label>Which site will embed this?
+        <select id="caller_site" name="caller_site">
+          <option value="noetfield.com" selected>noetfield.com (Research packs)</option>
+          <option value="sourceb.app">sourceb.app</option>
+          <option value="sourcea.app">sourcea.app (learn only)</option>
+        </select>
+      </label>
+      <label>Note (optional)
+        <textarea id="note" name="note" rows="3" placeholder="Vendor shortlist, deadline, constraints…"></textarea>
+      </label>
+      <button class="btn btn--ink" type="submit">Continue to purchase</button>
+      <p class="status" id="status" role="status"></p>
+    </form>
+  </section>
+
+  <footer class="site-footer">
+    <div>Research packs · Noetfield Systems Inc.</div>
+    <nav aria-label="Footer">
+      <a href="/research-packs/catalog.json">Catalog JSON</a>
+      <a href="/research-packs/adapt/">Adapt</a>
+      <a id="workspace-link" href="https://noetfield-runway-runtime-api-staging.sina-kazemnezhad-ca.workers.dev/v1/sourceb/workspace">Delivery workspace</a>
+      <a href="/api/research-packs/health">Health</a>
+    </nav>
+  </footer>
+
+  <script>
+    const fallbackSkus = [
+      { recipe_id: "vendor-decision-brief", name: "Vendor Decision Brief", price_usd: 699, deliverables: ["DOCX brief", "PDF brief", "citations", "acceptance gate"] },
+      { recipe_id: "spreadsheet-kpi-pack", name: "Spreadsheet KPI Pack", price_usd: 599, deliverables: ["KPI workbook", "definition sheet", "citations"] },
+      { recipe_id: "rfp-response-pack", name: "RFP Response Pack", price_usd: 1499, deliverables: ["Response DOCX", "compliance matrix", "citations"] }
+    ];
+
+    function money(n) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+    }
+
+    function renderSkus(skus) {
+      const grid = document.getElementById("sku-grid");
+      grid.innerHTML = skus.map((sku) => `
+        <article class="sku">
+          <h3>${sku.name}</h3>
+          <p class="price">${money(sku.price_usd)}</p>
+          <ul>${(sku.deliverables || []).map((d) => `<li>${d}</li>`).join("")}</ul>
+          <a class="btn btn--line" href="#order" data-recipe="${sku.recipe_id}">Select</a>
+        </article>
+      `).join("");
+      grid.querySelectorAll("[data-recipe]").forEach((el) => {
+        el.addEventListener("click", () => {
+          document.getElementById("recipe_id").value = el.getAttribute("data-recipe");
+        });
+      });
+    }
+
+    fetch("/research-packs/catalog.json")
+      .then((r) => r.json())
+      .then((cat) => {
+        renderSkus(cat.skus || fallbackSkus);
+        if (cat.runtime_base_url && cat.workspace_path) {
+          document.getElementById("workspace-link").href = cat.runtime_base_url.replace(/\/+$/, "") + cat.workspace_path;
+        }
+      })
+      .catch(() => renderSkus(fallbackSkus));
+
+    document.getElementById("order-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const status = document.getElementById("status");
+      status.textContent = "Recording…";
+      const payload = {
+        email: document.getElementById("email").value,
+        name: document.getElementById("name").value,
+        organization: document.getElementById("organization").value,
+        recipe_id: document.getElementById("recipe_id").value,
+        caller_site: document.getElementById("caller_site").value,
+        note: document.getElementById("note").value,
+        source: "research-packs-www"
+      };
+      try {
+        const links = await fetch("/api/research-packs/checkout-links").then((r) => r.json()).catch(() => null);
+        const direct = links && links.links && links.links[payload.recipe_id];
+        if (direct) {
+          await fetch("/api/research-packs/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
+          status.textContent = "Opening Stripe checkout…";
+          location.href = direct;
+          return;
+        }
+        const res = await fetch("/api/research-packs/leads", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const body = await res.json();
+        if (!res.ok) {
+          status.textContent = body.error || ("Failed " + res.status);
+          return;
+        }
+        status.textContent = "Intent recorded · " + body.lead_id;
+        if (body.next && body.next.url) {
+          const go = document.createElement("a");
+          go.className = "btn btn--primary";
+          go.href = body.next.url;
+          go.textContent = body.next.kind === "stripe_payment_link" ? "Pay now" : "Open delivery workspace";
+          go.style.marginTop = "0.75rem";
+          status.after(go);
+        }
+      } catch (err) {
+        status.textContent = String(err && err.message ? err.message : err);
+      }
+    });
+  </script>
+</body>
+</html>
