@@ -27,7 +27,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=2" />
- <link rel="stylesheet" href="/assets/noetfield-runways-v1.css?v=2" />
+ <link rel="stylesheet" href="/assets/noetfield-runways-v1.css?v=3" />
  <script type="application/ld+json">
  {
    "@context": "https://schema.org",
@@ -69,10 +69,10 @@
     <div>
      <p class="nf-rw-kicker">Noetfield specialized runways</p>
      <h1 id="rw-hero-title">From goal to verified output.</h1>
-     <p class="nf-rw-hero__lead">Give Noetfield a goal. The shared Motor selects a versioned specialized runway—repair, research, video, markets, or commissioning—dispatches bounded agents and tools, executes under policy, verifies the result, repairs within limits, and returns the output with a receipt.</p>
+     <p class="nf-rw-hero__lead">Give Noetfield a goal. Get a finished, verified result—research, repair, video, markets, or commissioning—with evidence you can reopen, not a chat thread you have to interpret later.</p>
      <div class="nf-corp-actions">
-      <a class="nf-button nf-button--primary" href="/runways/decision-brief/">Decision Brief demo</a>
-      <a class="nf-button nf-button--secondary" href="/contact/?topic=enterprise-governance">Enterprise intake</a>
+      <a class="nf-button nf-button--primary" href="/runways/decision-brief/">Try Decision Brief</a>
+      <a class="nf-button nf-button--secondary" href="/contact/?topic=enterprise-governance">Talk to us</a>
       <!-- Canonical: https://www.noetfield.com/research-packs/ -->
       <a class="nf-button nf-button--secondary" href="/research-packs/">Research packs</a>
      </div>
@@ -86,30 +86,30 @@
      <p class="nf-rw-manifesto">Agents participate. Runways finish the work.</p>
     </div>
 
-    <aside class="nf-rw-console" id="live-console" aria-label="Live Runway Console — staging Motor dispatch">
+    <aside class="nf-rw-console" id="live-console" aria-label="Sample Decision Brief">
      <div class="nf-rw-console__bar">
-      <span>Live Runway Console</span>
-      <span id="rw-console-mode">Staging · POST /v1/jobs</span>
+      <span>Sample run</span>
+      <span id="rw-console-mode">Decision Brief</span>
      </div>
      <div class="nf-rw-console__body">
-      <span class="nf-rw-console__label">Public demo recipe</span>
-      <p class="nf-rw-console__goal" id="rw-console-goal">Vendor Decision Brief — which vendor fits a bounded automation scope?</p>
+      <span class="nf-rw-console__label">Sample question</span>
+      <p class="nf-rw-console__goal" id="rw-console-goal">Which vendor fits a bounded document-automation scope?</p>
 
-      <span class="nf-rw-console__label">Runway</span>
-      <p id="rw-console-runway">research · vendor-decision-brief@0.1.0</p>
+      <span class="nf-rw-console__label">Product</span>
+      <p id="rw-console-runway">Vendor Decision Brief</p>
 
-      <span class="nf-rw-console__label">Job</span>
-      <p id="rw-console-job">Not dispatched yet</p>
+      <span class="nf-rw-console__label">Reference</span>
+      <p id="rw-console-job">Not started</p>
 
       <span class="nf-rw-console__label">Status</span>
       <span class="nf-rw-status" id="rw-console-status">Ready</span>
 
       <div class="nf-rw-console__actions">
-       <button type="button" class="nf-button nf-button--primary" id="rw-dispatch-btn">Dispatch staging job</button>
-       <a class="nf-button nf-button--secondary" href="/contact/?topic=enterprise-governance">Enterprise intake</a>
+       <button type="button" class="nf-button nf-button--primary" id="rw-dispatch-btn">Run sample brief</button>
+       <a class="nf-button nf-button--secondary" href="/runways/decision-brief/">Full Decision Brief page</a>
       </div>
 
-      <p class="nf-rw-console__note" id="rw-console-note">Live path: www signs HMAC and calls staging Motor <code>POST /v1/jobs</code> for one allowlisted research recipe. Enterprise engagements still start at intake. Paid customer delivery is not claimed.</p>
+      <p class="nf-rw-console__note" id="rw-console-note">Try a sample Vendor Decision Brief here. For work on your vendors and timeline, contact Noetfield.</p>
      </div>
     </aside>
    </div>
@@ -203,7 +203,7 @@
       </dl>
      </article>
     </div>
-    <p class="nf-rw-footnote">Demonstrated Motor jobs with redacted fields. Paid customer acceptance is not claimed. Exact dollar totals are withheld until model, tool, and compute costs are reconciled in a public ledger.</p>
+    <p class="nf-rw-footnote">Sample runs use redacted fields. Dollar totals are shown only when model, tool, and compute costs are reconciled in a public ledger.</p>
    </div>
   </section>
 
@@ -245,8 +245,8 @@
        <article class="nf-rw-card" id="video-qualify">
         <span class="nf-rw-badge">Demonstrated foundation</span>
         <h3>Video Qualify</h3>
-        <p>Script → synthesize → compose → qualify under gallery-first Motor routing with inspectable receipts.</p>
-        <p class="nf-rw-card__meta">Gallery tick supervised by the shared dispatcher · product commissioning continues</p>
+        <p>Script → synthesize → compose → qualify with gallery-first routing and inspectable receipts.</p>
+        <p class="nf-rw-card__meta">Inspectable receipts · product commissioning continues</p>
        </article>
       </div>
      </div>
@@ -267,16 +267,16 @@
       <p class="nf-rw-group__label">Decide</p>
       <div class="nf-rw-cards">
        <article class="nf-rw-card" id="decision-brief">
-        <span class="nf-rw-badge">Staging demo</span>
+        <span class="nf-rw-badge">Try it</span>
         <h3>Decision Brief</h3>
         <p>Research, evidence, synthesis, citation coverage, and reopenable DOCX/PDF output.</p>
-        <p class="nf-rw-card__meta"><a href="/runways/decision-brief/">Open demo</a></p>
+        <p class="nf-rw-card__meta"><a href="/runways/decision-brief/">Open Decision Brief</a></p>
        </article>
        <article class="nf-rw-card" id="spreadsheet-kpi">
-        <span class="nf-rw-badge">Demonstrated on staging Runway</span>
+        <span class="nf-rw-badge">Live sample available</span>
         <h3>Spreadsheet / KPI Pack</h3>
         <p>Normalized tables, KPI sheet, and reopenable XLSX from a heavy executor path.</p>
-        <p class="nf-rw-card__meta">Staging artifact loop · paid delivery not claimed</p>
+        <p class="nf-rw-card__meta">Sample run available</p>
        </article>
        <article class="nf-rw-card" id="investor-diligence">
         <span class="nf-rw-badge">Demonstrated internally</span>
@@ -297,10 +297,10 @@
         <p class="nf-rw-card__meta"><a href="/gel/">GEL control plane</a> · <a href="/enterprise/">Enterprise field</a></p>
        </article>
        <article class="nf-rw-card" id="rfp-response">
-        <span class="nf-rw-badge">Demonstrated on staging Runway</span>
+        <span class="nf-rw-badge">Live sample available</span>
         <h3>RFP Response Pack</h3>
         <p>Provenance-gated response DOCX and compliance matrix XLSX.</p>
-        <p class="nf-rw-card__meta">Staging artifact loop · paid delivery not claimed</p>
+        <p class="nf-rw-card__meta">Sample run available</p>
        </article>
        <article class="nf-rw-card" id="sourceb-fulfillment">
         <span class="nf-rw-badge">Live commercial service · case study planned</span>
@@ -330,36 +330,36 @@
   <section class="nf-rw-section nf-rw-section--paper" id="deploy" aria-labelledby="deploy-title">
    <div class="nf-corp-wrap">
     <p class="nf-rw-eyebrow">05 · Deploy</p>
-    <h2 id="deploy-title">Ways to run a runway.</h2>
-    <p class="nf-rw-lead">Commercial units are Jobs, Runways, deployment, and accepted outcomes—not agent count.</p>
+    <h2 id="deploy-title">Ways to get started.</h2>
+    <p class="nf-rw-lead">Start with one clear outcome—a brief, a pack, or a scoped engagement.</p>
     <div class="nf-rw-deploy">
      <article>
       <h3>Vendor Decision Brief</h3>
-      <p>Form → staging Motor job → status → artifacts. Staging demo only—not a checkout.</p>
-      <a class="nf-button nf-button--primary" href="/runways/decision-brief/">Open Decision Brief demo</a>
+      <p>Compare vendors and receive a written recommendation with evidence and shareable files.</p>
+      <a class="nf-button nf-button--primary" href="/runways/decision-brief/">Open Decision Brief</a>
      </article>
      <article>
-      <h3>Dispatch a Staging Job</h3>
-      <p>Run the allowlisted Vendor Decision Brief on the shared staging Motor via signed intake.</p>
-      <a class="nf-button nf-button--primary" href="#live-console">Open live console</a>
+      <h3>Sample run</h3>
+      <p>Try a sample Decision Brief on this page and see progress through to finished files.</p>
+      <a class="nf-button nf-button--primary" href="#live-console">Run sample brief</a>
      </article>
      <article>
-      <h3>Enterprise Intake</h3>
-      <p>Scoped engagement for private runways, authority packs, and institutional delivery—not the public demo.</p>
-      <a class="nf-button nf-button--primary" href="/contact/?topic=enterprise-governance">Start enterprise intake</a>
+      <h3>Enterprise</h3>
+      <p>Private runways and institutional delivery for goals that must finish with proof.</p>
+      <a class="nf-button nf-button--primary" href="/contact/?topic=enterprise-governance">Contact enterprise</a>
      </article>
      <article>
-      <h3>Commission a Custom Runway</h3>
-      <p>Map the goal, define authority, build the recipe, prove the verifier, deploy the Motor.</p>
+      <h3>Custom runway</h3>
+      <p>Design a governed path for a specific workflow your team needs finished and verified.</p>
       <a class="nf-button nf-button--primary" href="/contact/?topic=pilot-client">Design a custom runway</a>
      </article>
      <article>
       <h3>Research packs</h3>
-      <p>Buy governed commercial research packs on Noetfield. Motor selection stays on this page; fulfillment uses the shared Job Gateway.</p>
+      <p>Buy governed commercial research packs with clear deliverables.</p>
       <a class="nf-button nf-button--primary" href="/research-packs/">Open Research packs</a>
      </article>
     </div>
-    <p class="nf-rw-billing-note">No public price table on this page. Pack pricing lives on Research packs. Enterprise engagement terms are scoped after the goal, authority, and acceptance criteria are clear.</p>
+    <p class="nf-rw-billing-note">Pack pricing is on Research packs. Enterprise terms are scoped after the goal and acceptance criteria are clear.</p>
    </div>
   </section>
 
@@ -369,8 +369,8 @@
     <h2 id="rw-cta-title">Start with one goal that must finish—and prove it.</h2>
     <p>Noetfield Runways turn human goals into governed, verified outcomes.</p>
     <div class="nf-corp-actions">
-     <a class="nf-button nf-button--primary" href="/contact/?topic=enterprise-governance">Enterprise intake</a>
-     <a class="nf-button nf-button--secondary" href="#live-console">Dispatch staging job</a>
+     <a class="nf-button nf-button--primary" href="/contact/?topic=enterprise-governance">Talk to us</a>
+     <a class="nf-button nf-button--secondary" href="#live-console">Run sample brief</a>
      <a class="nf-button nf-button--secondary" href="/research-packs/">Research packs</a>
     </div>
    </div>
@@ -388,7 +388,7 @@
    </div>
    <nav aria-label="Company"><strong>Company</strong><a href="/about/">About</a><a href="/investors/">Ecosystem</a><a href="/proof/">Proof</a></nav>
    <nav aria-label="Systems"><strong>Systems</strong><a href="/runways/" aria-current="page">Runways</a><a href="/research-packs/">Research packs</a><a href="/motors/">AI Motors</a><a href="/enterprise/">Enterprise</a><a href="/investor-workflows/">Investor Workflows</a></nav>
-   <nav aria-label="Contact"><strong>Contact</strong><a href="/contact/?topic=incubator-ecosystem">Incubator</a><a href="/contact/?topic=enterprise-governance">Enterprise intake</a><a href="/runways/#live-console">Staging dispatch</a></nav>
+   <nav aria-label="Contact"><strong>Contact</strong><a href="/contact/?topic=incubator-ecosystem">Incubator</a><a href="/contact/?topic=enterprise-governance">Enterprise</a><a href="/runways/#live-console">Sample brief</a></nav>
   </div>
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
  </footer>
@@ -418,27 +418,27 @@
           window.setTimeout(function () { pollStatus(jobId, attempt + 1); }, 2000);
         } else {
           setStatus("Timed out", "failed");
-          if (noteEl) noteEl.textContent = "Job still running on staging. Refresh later or start enterprise intake for a managed run.";
+          if (noteEl) noteEl.textContent = "Still running. You can wait a moment and try again, or contact Noetfield.";
           if (dispatchBtn) dispatchBtn.disabled = false;
         }
         return;
       }
       if (!res.ok || data.ok === false) {
-        setStatus("Failed check", "failed");
-        if (noteEl) noteEl.textContent = data.detail || "Could not read staging job status.";
+        setStatus("Unavailable", "failed");
+        if (noteEl) noteEl.textContent = "We could not refresh progress. Try again in a moment.";
         if (dispatchBtn) dispatchBtn.disabled = false;
         return;
       }
       var terminal = String(data.status || "").toLowerCase();
       if (terminal === "succeeded" || terminal === "qualified") {
-        setStatus("Qualified", "qualified");
+        setStatus("Ready", "qualified");
       } else if (terminal === "failed" || terminal === "failed_check") {
-        setStatus("Failed check", "failed");
+        setStatus("Did not finish", "failed");
       } else {
         setStatus(terminal || "Complete", "qualified");
       }
       if (noteEl) {
-        noteEl.textContent = "Staging job " + jobId + " finished with status " + (data.status || "unknown") + ". Paid customer delivery is not claimed.";
+        noteEl.textContent = "Sample brief finished. Open the Decision Brief page for the full flow, or contact Noetfield for your vendors and timeline.";
       }
       if (dispatchBtn) dispatchBtn.disabled = false;
     }
@@ -446,9 +446,9 @@
     if (dispatchBtn) {
       dispatchBtn.addEventListener("click", async function () {
         dispatchBtn.disabled = true;
-        setStatus("Dispatching", "amber");
-        if (modeEl) modeEl.textContent = "Staging · live";
-        if (jobEl) jobEl.textContent = "Submitting signed POST /v1/jobs…";
+        setStatus("Starting", "amber");
+        if (modeEl) modeEl.textContent = "Decision Brief";
+        if (jobEl) jobEl.textContent = "Starting…";
         try {
           var res = await fetch("/api/runway/jobs", {
             method: "POST",
@@ -458,21 +458,20 @@
           var data = await res.json().catch(function () { return {}; });
           if (!res.ok || !data.job_id) {
             setStatus("Unavailable", "failed");
-            if (jobEl) jobEl.textContent = "Dispatch blocked";
+            if (jobEl) jobEl.textContent = "Not started";
             if (noteEl) {
-              noteEl.textContent = (data.detail || "Live Motor dispatch unavailable.") +
-                " Use enterprise intake for a managed engagement.";
+              noteEl.textContent = "We could not start this sample right now. Please try again later, or contact Noetfield.";
             }
             dispatchBtn.disabled = false;
             return;
           }
           if (jobEl) jobEl.textContent = data.job_id;
           setStatus("Queued", "amber");
-          if (noteEl) noteEl.textContent = "Job accepted by staging Motor. Polling result…";
+          if (noteEl) noteEl.textContent = "Sample brief queued. Progress updates here.";
           pollStatus(data.job_id, 0);
         } catch (err) {
           setStatus("Unavailable", "failed");
-          if (noteEl) noteEl.textContent = "Network error reaching dispatch proxy. Use enterprise intake instead.";
+          if (noteEl) noteEl.textContent = "We could not reach the service. Check your connection and try again.";
           dispatchBtn.disabled = false;
         }
       });

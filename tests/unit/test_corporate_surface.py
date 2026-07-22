@@ -192,15 +192,13 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert "From goal to verified output." in text
     assert "Agents participate. Runways finish the work." in text
     assert "The models may be probabilistic. The runway is controlled." in text
-    assert "Paid customer delivery is not claimed." in text
-    assert "Demonstrated on staging Runway" in text
     assert "Evidence before claims." in text
     assert "Trading Performance" in text
     assert "Video Qualify" in text
     assert "Commissioning Specialist" in text
     assert "Software Repair" in text
     assert text.count("<h1") == 1
-    assert 'href="/assets/noetfield-runways-v1.css?v=2"' in text
+    assert 'href="/assets/noetfield-runways-v1.css?v=3"' in text
     for forbidden in (
         "Ruflo",
         "CrewAI",
@@ -208,6 +206,10 @@ def test_runways_page_is_honest_product_surface() -> None:
         "TrustField",
         "99.9%",
         "hundreds of public agents",
+        "HMAC",
+        "POST /v1/jobs",
+        "allowlisted",
+        "staging Motor",
     ):
         assert forbidden not in text, forbidden
     assert 'href="/contact/?topic=enterprise-governance"' in text
@@ -215,7 +217,6 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert 'href="/runways/decision-brief/"' in text
     assert 'id="rw-dispatch-btn"' in text
     assert 'fetch("/api/runway/jobs"' in text
-    assert "POST /v1/jobs" in text
 
 
 def test_homepage_footer_links_to_runways() -> None:

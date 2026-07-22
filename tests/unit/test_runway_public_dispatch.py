@@ -46,3 +46,12 @@ def test_decision_brief_buyer_page_exists() -> None:
     assert "/api/runway/jobs" in text
     assert "/contact/?topic=decision-brief-pilot" in text
     assert 'id="db-form"' in text
+    for forbidden in (
+        "HMAC",
+        "POST /v1/jobs",
+        "allowlisted",
+        "staging Motor",
+        "Ready for a paid",
+        "managed brief",
+    ):
+        assert forbidden not in text, forbidden
