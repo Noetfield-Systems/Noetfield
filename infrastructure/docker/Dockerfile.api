@@ -17,6 +17,7 @@ COPY docs/FINAL_PUBLIC_SITE.md ./docs/FINAL_PUBLIC_SITE.md
 COPY scripts/apply_postgres_migrations.py ./scripts/apply_postgres_migrations.py
 COPY infrastructure/supabase/migrations ./infrastructure/supabase/migrations
 COPY infrastructure/docker/platform-entrypoint.sh /entrypoint.sh
+COPY assets ./assets
 
 RUN pip install --no-cache-dir --upgrade pip \
   && pip install --no-cache-dir -e . \

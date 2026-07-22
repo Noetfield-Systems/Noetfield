@@ -3,56 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noetfield — Governance Evaluation Interface</title>
+  <title>Noetfield — Governance Console</title>
   <link rel="icon" href="https://www.noetfield.com/noetfield-favicon-512.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
   <link rel="stylesheet" href="/assets/noetfield-console.css" />
 </head>
 <body class="nf-console">
+  <a class="nf-skip-link" href="#mainContent">Skip to content</a>
+
+  <header class="nf-top-chrome" role="banner">
+    <div class="nf-top-chrome-inner">
+      <div class="nf-brand-block">
+        <a class="nf-wordmark" href="https://www.noetfield.com/" aria-label="Noetfield home">Noetfield</a>
+        <span class="nf-brand-sep" aria-hidden="true"></span>
+        <span class="nf-product-name">Governance Console</span>
+      </div>
+      <div class="nf-top-chrome-actions">
+        <span class="nf-badge nf-badge-shadow" title="Evaluations are policy-only">Shadow mode</span>
+        <a class="nf-link nf-docs-link" href="https://www.noetfield.com/docs/api/">Docs API</a>
+      </div>
+    </div>
+  </header>
+
   <div class="nf-console-banner" role="status">
     <strong>Shadow mode:</strong> evaluations are policy-only — Noetfield does not execute payments or hold custody (Bank Pilot / MSB / exchange).
     Documented API: <code>POST /api/v1/governance/evaluate</code>
   </div>
 
   <div class="nf-pilot-auth" id="pilotAuthPanel">
-    <label for="pilotKeyInput">Pilot API key (optional in dev)</label>
-    <input type="password" id="pilotKeyInput" autocomplete="off" placeholder="Bearer token for production pilots" aria-describedby="pilotKeyHint" />
-    <p class="nf-pilot-hint" id="pilotKeyHint">Stored in session only. Required when <code>GOVERNANCE_PILOT_AUTH_REQUIRED=true</code>. See <a class="nf-link" href="https://www.noetfield.com/docs/api/">Governance API</a>.</p>
+    <div class="nf-pilot-auth-head">
+      <label for="pilotKeyInput">Pilot API key</label>
+      <span class="nf-key-indicator" id="keyIndicator" data-set="false" aria-live="polite">No key</span>
+    </div>
+    <div class="nf-pilot-key-row">
+      <input type="password" id="pilotKeyInput" autocomplete="off" placeholder="Bearer token for production pilots" aria-describedby="pilotKeyHint" />
+      <button type="button" class="secondary nf-toggle-visibility" id="toggleKeyVisibility" aria-pressed="false" aria-label="Show API key">Show</button>
+    </div>
+    <p class="nf-pilot-hint" id="pilotKeyHint">Session only — cleared when this browser tab closes. Required when <code>GOVERNANCE_PILOT_AUTH_REQUIRED=true</code>. See <a class="nf-link" href="https://www.noetfield.com/docs/api/">Governance API</a>.</p>
   </div>
 
   <header class="nf-console-head">
-    <h1>Governance Evaluation Interface</h1>
-    <p class="nf-console-sub">Submit operational intent for governance evaluation. View the decision, RID lineage, and compliance log. For authorized evaluations only.</p>
+    <h1>Governance Console</h1>
+    <p class="nf-console-sub">Governance Evaluation Interface — submit operational intent, review the decision, RID lineage, and compliance log. For authorized evaluations only.</p>
   </header>
 
-  <main>
-    <section>
-      <h2>1 — Submit intent</h2>
+  <main id="mainContent">
+    <section class="nf-panel" aria-labelledby="submitHeading">
+      <h2 id="submitHeading">Submit intent</h2>
       <p class="hint">Describe the action under review (structured scenario). Uses v1 evaluate API when available.</p>
+
       <div class="row rid-row">
-        <span class="label">Request ID (RID)</span>
-        <input type="text" id="ridInput" placeholder="RID-… (auto-generated if empty)" aria-label="Request ID" />
-        <div class="rid-actions">
-          <button type="button" class="secondary" id="copyRidBtn">Copy RID</button>
-          <button type="button" class="secondary" id="newRidBtn">New RID</button>
+        <label class="label" for="ridInput">Request ID (RID)</label>
+        <div class="rid-input-row">
+          <input type="text" id="ridInput" class="nf-mono-input" placeholder="RID-… (auto-generated if empty)" aria-label="Request ID" spellcheck="false" />
+          <div class="rid-actions">
+            <button type="button" class="secondary" id="copyRidBtn">Copy</button>
+            <button type="button" class="secondary" id="newRidBtn">New</button>
+          </div>
         </div>
       </div>
-      <p class="hint">Presets:
-        <button type="button" class="secondary" data-preset="bank">Bank</button>
-        <button type="button" class="secondary" data-preset="exchange">Exchange</button>
-        <button type="button" class="secondary" data-preset="msb">MSB</button>
-        <button type="button" class="secondary" data-preset="copilot">Copilot</button>
-      </p>
-      <textarea id="intentInput" spellcheck="false" aria-label="Intent under review"></textarea>
-      <button type="button" id="submitIntentBtn">Submit Intent</button>
-      <p class="err" id="submitError" hidden></p>
+
+      <div class="nf-preset-block">
+        <span class="label" id="presetLabel">Scenario preset</span>
+        <div class="nf-segmented" role="group" aria-labelledby="presetLabel">
+          <button type="button" class="nf-segment" data-preset="bank" aria-pressed="false">Bank</button>
+          <button type="button" class="nf-segment" data-preset="exchange" aria-pressed="false">Exchange</button>
+          <button type="button" class="nf-segment" data-preset="msb" aria-pressed="false">MSB</button>
+          <button type="button" class="nf-segment" data-preset="copilot" aria-pressed="false">Copilot</button>
+        </div>
+      </div>
+
+      <label class="label" for="intentInput">Intent JSON</label>
+      <div class="nf-code-panel">
+        <textarea id="intentInput" spellcheck="false" aria-label="Intent under review"></textarea>
+      </div>
+
+      <button type="button" class="nf-primary" id="submitIntentBtn" aria-busy="false">Submit Intent</button>
+      <p class="err" id="submitError" hidden role="alert"></p>
     </section>
 
-    <section>
-      <h2>2 — Decision</h2>
-      <div id="decisionEmpty" class="nf-console-sub">Submit an intent to see the governance decision.</div>
+    <section class="nf-panel" aria-labelledby="decisionHeading">
+      <h2 id="decisionHeading">Decision</h2>
+      <div id="decisionEmpty" class="nf-empty-state">Submit an intent to see the governance decision.</div>
       <div id="decisionBody" hidden>
-        <div class="decision" id="decisionLabel"></div>
+        <div class="decision" id="decisionLabel" role="status"></div>
         <div class="row">
           <span class="label">Policy rule</span>
           <span class="value" id="policyRule"></span>
@@ -67,34 +104,42 @@
         </div>
         <div class="row">
           <span class="label">Request ID</span>
-          <span class="value" id="ridDisplay">—</span>
+          <span class="value nf-mono" id="ridDisplay">—</span>
         </div>
-        <button type="button" class="secondary" id="viewLogBtn">View Decision + Compliance Log</button>
-        <button type="button" class="secondary" id="exportAuditBtn">Copy audit export URL</button>
-        <a class="nf-link" id="openAuditLink" href="#" target="_blank" rel="noopener" hidden>Open audit export</a>
+        <div class="nf-decision-actions">
+          <button type="button" class="secondary" id="viewLogBtn">View Decision + Compliance Log</button>
+          <button type="button" class="secondary" id="exportAuditBtn">Copy audit export URL</button>
+          <a class="nf-link" id="openAuditLink" href="#" target="_blank" rel="noopener" hidden>Open audit export</a>
+        </div>
       </div>
     </section>
 
-    <section class="full">
-      <h2>Compliance log</h2>
+    <section class="nf-panel full" aria-labelledby="logHeading">
+      <h2 id="logHeading">Compliance log</h2>
       <p class="hint">Immutable record of governance evaluations for this scenario.</p>
-      <p class="err" id="logError" hidden></p>
-      <div style="overflow-x:auto;">
+      <p class="err" id="logError" hidden role="alert"></p>
+      <div class="nf-table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Time</th>
-              <th>Event</th>
-              <th>Subject</th>
-              <th>Owner</th>
-              <th>Record</th>
+              <th scope="col">Time</th>
+              <th scope="col">Event</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Record</th>
             </tr>
           </thead>
-          <tbody id="logBody"></tbody>
+          <tbody id="logBody">
+            <tr class="nf-empty-row">
+              <td colspan="5">No log entries yet. Submit an intent to load the compliance log.</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </section>
   </main>
+
+  <div class="nf-toast-region" id="toastRegion" aria-live="polite" aria-relevant="additions"></div>
 
   <script>
     (function () {
@@ -104,8 +149,11 @@
       var exportPath = "/api/v1/governance/audit-export";
       var lastRid = null;
       var lastDecision = null;
+      var activePreset = null;
       var intentInput = document.getElementById("intentInput");
       var pilotKeyInput = document.getElementById("pilotKeyInput");
+      var keyIndicator = document.getElementById("keyIndicator");
+      var toastRegion = document.getElementById("toastRegion");
 
       var defaultScenario = {
         tenant_id: "00000000-0000-4000-8000-000000000001",
@@ -120,11 +168,31 @@
       };
       intentInput.value = JSON.stringify(defaultScenario, null, 2);
 
+      function showToast(message, kind) {
+        var el = document.createElement("div");
+        el.className = "nf-toast" + (kind ? " nf-toast-" + kind : "");
+        el.textContent = message;
+        toastRegion.appendChild(el);
+        window.setTimeout(function () {
+          el.classList.add("nf-toast-out");
+          window.setTimeout(function () {
+            if (el.parentNode) el.parentNode.removeChild(el);
+          }, 220);
+        }, 2800);
+      }
+
+      function updateKeyIndicator() {
+        var hasKey = !!pilotKeyInput.value.trim();
+        keyIndicator.setAttribute("data-set", hasKey ? "true" : "false");
+        keyIndicator.textContent = hasKey ? "Key set" : "No key";
+      }
+
       function loadPilotKey() {
         try {
           var saved = sessionStorage.getItem(PILOT_KEY_STORAGE);
           if (saved) pilotKeyInput.value = saved;
         } catch (e) { /* private mode */ }
+        updateKeyIndicator();
       }
 
       function savePilotKey() {
@@ -133,11 +201,22 @@
           if (v) sessionStorage.setItem(PILOT_KEY_STORAGE, v);
           else sessionStorage.removeItem(PILOT_KEY_STORAGE);
         } catch (e) { /* private mode */ }
+        updateKeyIndicator();
       }
 
+      pilotKeyInput.addEventListener("input", updateKeyIndicator);
       pilotKeyInput.addEventListener("change", savePilotKey);
       pilotKeyInput.addEventListener("blur", savePilotKey);
       loadPilotKey();
+
+      document.getElementById("toggleKeyVisibility").addEventListener("click", function () {
+        var btn = document.getElementById("toggleKeyVisibility");
+        var showing = pilotKeyInput.type === "text";
+        pilotKeyInput.type = showing ? "password" : "text";
+        btn.setAttribute("aria-pressed", showing ? "false" : "true");
+        btn.setAttribute("aria-label", showing ? "Show API key" : "Hide API key");
+        btn.textContent = showing ? "Show" : "Hide";
+      });
 
       function authHeaders(extra) {
         var headers = extra || { "Content-Type": "application/json" };
@@ -165,11 +244,22 @@
         return { cls: "REVIEW", text: "REQUIRES REVIEW" };
       }
 
+      function setActivePreset(name) {
+        activePreset = name;
+        document.querySelectorAll("[data-preset]").forEach(function (btn) {
+          var on = btn.getAttribute("data-preset") === name;
+          btn.classList.toggle("is-active", on);
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      }
+
       function renderPolicyRefs(refs) {
         var ul = document.getElementById("policyRefs");
-        ul.innerHTML = "";
+        ul.textContent = "";
         if (!refs || !refs.length) {
-          ul.innerHTML = "<li>None recorded</li>";
+          var empty = document.createElement("li");
+          empty.textContent = "None recorded";
+          ul.appendChild(empty);
           return;
         }
         refs.forEach(function (ref) {
@@ -200,11 +290,17 @@
         renderPolicyRefs(data.policy_refs);
       }
 
+      function appendLogCell(tr, text) {
+        var td = document.createElement("td");
+        td.textContent = text == null ? "" : String(text);
+        tr.appendChild(td);
+      }
+
       async function loadComplianceLog() {
         var errEl = document.getElementById("logError");
         var body = document.getElementById("logBody");
         errEl.hidden = true;
-        body.innerHTML = "";
+        body.textContent = "";
         try {
           var scenario = JSON.parse(intentInput.value);
           var url = new URL(window.location.origin + logPath);
@@ -216,7 +312,13 @@
           var data = await res.json();
           var entries = data.entries || [];
           if (!entries.length) {
-            body.innerHTML = "<tr><td colspan=\"5\" style=\"color:var(--muted)\">No log entries yet.</td></tr>";
+            var emptyTr = document.createElement("tr");
+            emptyTr.className = "nf-empty-row";
+            var emptyTd = document.createElement("td");
+            emptyTd.colSpan = 5;
+            emptyTd.textContent = "No log entries yet.";
+            emptyTr.appendChild(emptyTd);
+            body.appendChild(emptyTr);
             return;
           }
           entries.forEach(function (e) {
@@ -224,17 +326,17 @@
             var subject = (e.resource_type || "item") + " · " + (e.resource_id || "");
             var owner = (e.actor_type || "system") + " / " + (e.actor_id || "");
             var seal = e.integrity_hash ? String(e.integrity_hash).slice(0, 12) + "…" : "—";
-            tr.innerHTML =
-              "<td>" + (e.occurred_at || "") + "</td>" +
-              "<td>" + (e.action || "").replace(/_/g, " ") + "</td>" +
-              "<td>" + subject + "</td>" +
-              "<td>" + owner + "</td>" +
-              "<td>" + seal + "</td>";
+            appendLogCell(tr, e.occurred_at || "");
+            appendLogCell(tr, String(e.action || "").replace(/_/g, " "));
+            appendLogCell(tr, subject);
+            appendLogCell(tr, owner);
+            appendLogCell(tr, seal);
             body.appendChild(tr);
           });
         } catch (e) {
           errEl.textContent = e instanceof SyntaxError ? "Scenario format is invalid." : String(e);
           errEl.hidden = false;
+          showToast(errEl.textContent, "error");
         }
       }
 
@@ -243,6 +345,8 @@
         var btn = document.getElementById("submitIntentBtn");
         errEl.hidden = true;
         btn.disabled = true;
+        btn.setAttribute("aria-busy", "true");
+        btn.textContent = "Evaluating…";
         savePilotKey();
         try {
           var body = JSON.parse(intentInput.value);
@@ -268,11 +372,16 @@
           }
           showDecision(JSON.parse(text));
           await loadComplianceLog();
+          showToast("Evaluation complete", "ok");
         } catch (e) {
-          errEl.textContent = e instanceof SyntaxError ? "Scenario format is invalid." : String(e);
+          var msg = e instanceof SyntaxError ? "Scenario format is invalid." : String(e);
+          errEl.textContent = msg;
           errEl.hidden = false;
+          showToast(msg, "error");
         } finally {
           btn.disabled = false;
+          btn.setAttribute("aria-busy", "false");
+          btn.textContent = "Submit Intent";
         }
       }
 
@@ -283,15 +392,24 @@
         document.getElementById("decisionEmpty").hidden = true;
       }
 
-      document.getElementById("exportAuditBtn").addEventListener("click", function () {
-        if (!lastRid) {
-          alert("Submit an evaluation first to obtain a RID.");
+      function copyText(text, successMsg) {
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
+          showToast("Clipboard unavailable", "error");
           return;
         }
-        var url = auditExportUrl(lastRid);
-        navigator.clipboard.writeText(url).catch(function () {
-          prompt("Audit export URL:", url);
+        navigator.clipboard.writeText(text).then(function () {
+          showToast(successMsg || "Copied", "ok");
+        }).catch(function () {
+          showToast("Copy failed", "error");
         });
+      }
+
+      document.getElementById("exportAuditBtn").addEventListener("click", function () {
+        if (!lastRid) {
+          showToast("Submit an evaluation first to obtain a RID.", "error");
+          return;
+        }
+        copyText(auditExportUrl(lastRid), "Audit export URL copied");
       });
 
       document.getElementById("copyRidBtn").addEventListener("click", function () {
@@ -300,13 +418,12 @@
           rid = generateRid();
           document.getElementById("ridInput").value = rid;
         }
-        navigator.clipboard.writeText(rid).catch(function () {
-          prompt("RID:", rid);
-        });
+        copyText(rid, "RID copied");
       });
 
       document.getElementById("newRidBtn").addEventListener("click", function () {
         document.getElementById("ridInput").value = generateRid();
+        showToast("New RID generated", "ok");
       });
 
       async function loadPreset(name) {
@@ -316,8 +433,10 @@
           });
           if (!res.ok) throw new Error("Preset unavailable");
           intentInput.value = JSON.stringify(await res.json(), null, 2);
+          setActivePreset(name);
+          showToast("Loaded " + name + " preset", "ok");
         } catch (e) {
-          alert("Could not load preset: " + name);
+          showToast("Could not load preset: " + name, "error");
         }
       }
 
