@@ -68,11 +68,17 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
     assert text.count(CANONICAL_DEFINITION) >= 2  # visible definition and JSON-LD
     assert (
         "Models provide intelligence. Agents perform bounded tasks. Workflows describe "
-        "operating paths. The Motor governs and executes the whole system."
+        "operating paths. The Motor governs and executes the whole system. For "
+        "clarification: like a Tesla-class car, the Motor turns human intent into "
+        "action and work, with many engines and computers inside."
     ) in text
     assert MEMORABLE_LINE in text
     assert text.count(MEMORABLE_LINE) == 1
     assert "many models, agents and workflows inside one Motor" in text
+    assert (
+        "For clarification: like a Tesla-class car, the Motor turns human intent "
+        "into action and work, with many engines and computers inside."
+    ) in text
     assert text.count("<h1") == 1
 
 
