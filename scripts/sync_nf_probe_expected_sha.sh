@@ -56,13 +56,10 @@ PY
 
 sync_wrangler_secret() {
   local sha="$1"
-  if [[ -z "${CLOUDFLARE_API_TOKEN:-}${CF_API_TOKEN:-}" ]]; then
-    log "WARN: no Cloudflare token — skip wrangler secret put (run from Mac vault or GHA with CLOUDFLARE_API_TOKEN)"
-    return 0
-  fi
-  log "wrangler secret put EXPECTED_GIT_SHA"
-  cd "$WORKER_DIR"
-  printf '%s' "$sha" | wrangler secret put EXPECTED_GIT_SHA >/dev/null
+  # EXPECTED_GIT_SHA is a [vars] binding — secret put conflicts (CF 10053).
+  # Live update is wrangler deploy with updated wrangler.toml var.
+  log "skip secret put for EXPECTED_GIT_SHA (plain var; deploy applies it)"
+  return 0
 }
 
 main() {
