@@ -28,11 +28,12 @@ fi
 command -v railway >/dev/null || { log "FAIL: railway CLI missing"; exit 1; }
 railway_cmd whoami >/dev/null
 
-# Fail closed: do not redeploy auth-required with empty pilot keys.
+# Fail closed: do not redeploy auth-required without env keys OR admin secret (DB bootstrap).
 ensure_pilot_keys_before_redeploy() {
-  local auth_required pilot_keys remote_auth remote_keys
+  local auth_required pilot_keys remote_auth remote_keys admin_secret
   auth_required="${GOVERNANCE_PILOT_AUTH_REQUIRED:-}"
   pilot_keys="${GOVERNANCE_PILOT_API_KEYS:-}"
+  admin_secret="${ADMIN_DASHBOARD_SECRET:-}"
   if [[ -z "$pilot_keys" ]]; then
     pilot_keys="$(read_platform_vault GOVERNANCE_PILOT_API_KEYS 2>/dev/null || true)"
   fi
@@ -47,6 +48,9 @@ ensure_pilot_keys_before_redeploy() {
         pilot_keys="${tenant}:${bearer}"
       fi
     fi
+  fi
+  if [[ -z "$admin_secret" ]]; then
+    admin_secret="$(read_platform_vault ADMIN_DASHBOARD_SECRET 2>/dev/null || true)"
   fi
   remote_auth="$(railway_cmd variable list --service "$API_SERVICE" --json 2>/dev/null | python3 -c '
 import json,sys
@@ -72,12 +76,14 @@ except Exception:
       log "Syncing GOVERNANCE_PILOT_API_KEYS before redeploy (last4=${pilot_keys: -4})"
       railway_cmd variable set --service "$API_SERVICE" --skip-deploys \
         "GOVERNANCE_PILOT_API_KEYS=${pilot_keys}"
-    elif [[ -z "$remote_keys" ]]; then
-      log "FAIL: GOVERNANCE_PILOT_AUTH_REQUIRED=true but no GOVERNANCE_PILOT_API_KEYS in vault/env/remote"
-      log "  → Set keys in ~/.noetfield-platform-secrets/noetfield.env then retry"
-      exit 4
-    else
+    elif [[ -n "$remote_keys" ]]; then
       log "Remote GOVERNANCE_PILOT_API_KEYS already present (last4=${remote_keys: -4})"
+    elif [[ -n "$admin_secret" ]]; then
+      log "WARN: no env/remote pilot keys — redeploy allowed via ADMIN_DASHBOARD_SECRET (DB bootstrap)"
+    else
+      log "FAIL: GOVERNANCE_PILOT_AUTH_REQUIRED=true but no GOVERNANCE_PILOT_API_KEYS and no ADMIN_DASHBOARD_SECRET"
+      log "  → Set keys or ADMIN_DASHBOARD_SECRET in ~/.noetfield-platform-secrets then retry"
+      exit 4
     fi
   fi
 }

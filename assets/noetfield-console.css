@@ -627,3 +627,126 @@ body.nf-console {
     animation: none;
   }
 }
+
+/* —— API Keys panel —— */
+.nf-console .nf-keys-panel {
+  margin: 12px 24px 0;
+  max-width: 1152px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow2);
+}
+
+.nf-console .nf-keys-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.nf-console .nf-keys-panel-head h2 {
+  margin: 0;
+}
+
+.nf-console .nf-keys-once {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--gold-bright);
+}
+
+.nf-console .nf-keys-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 720px) {
+  .nf-console .nf-keys-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nf-console .nf-keys-field input {
+  width: 100%;
+  background: var(--bg1);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.nf-console .nf-keys-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.nf-console .nf-keys-reveal {
+  margin: 0 0 12px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(200, 163, 73, 0.4);
+  background: rgba(200, 163, 73, 0.08);
+}
+
+.nf-console .nf-keys-reveal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.nf-console .nf-keys-reveal-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nf-console .nf-keys-secret {
+  display: block;
+  word-break: break-all;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.nf-console .nf-keys-table-wrap {
+  margin-top: 4px;
+}
+
+.nf-console .nf-keys-confirm {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid rgba(248, 81, 73, 0.4);
+  border-radius: var(--radius-sm);
+  background: rgba(248, 81, 73, 0.08);
+}
+
+.nf-console .nf-keys-confirm-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.nf-console .nf-danger {
+  background: rgba(248, 81, 73, 0.2) !important;
+  border-color: rgba(248, 81, 73, 0.55) !important;
+  color: #ffb4b0 !important;
+}
+
+.nf-console .nf-revoke-btn {
+  min-height: 36px !important;
+  margin: 0 !important;
+}

@@ -15,6 +15,7 @@ WORKSPACE_WRITE_SCOPES = frozenset({"workspace:write", "workspace:admin"})
 ALL_PILOT_SCOPES = frozenset(
     {"workspace:read", "workspace:write", "workspace:admin", "governance:read", "governance:write"}
 )
+CLIENT_DEFAULT_SCOPES = frozenset({"governance:read", "governance:write", "workspace:read"})
 
 
 @dataclass(frozen=True)
@@ -24,6 +25,7 @@ class PilotAuthContext:
     tenant_id: UUID | None
     scopes: frozenset[str]
     key_label: str = "pilot"
+    key_id: UUID | None = None
 
 
 def _parse_scopes(raw: str) -> frozenset[str]:
@@ -84,24 +86,57 @@ def _secret(value: SecretStr | None) -> str:
     return value.get_secret_value().strip() if value else ""
 
 
+def env_pilot_keys_configured() -> bool:
+    return bool(_parse_pilot_keys(get_settings().governance_pilot_api_keys))
+
+
+async def _store_has_active_keys(request: Request) -> bool:
+    store = getattr(request.app.state, "pilot_key_store", None)
+    if store is None:
+        return False
+    try:
+        return int(await store.count_active()) > 0
+    except Exception:
+        return False
+
+
 async def require_pilot_auth(request: Request) -> PilotAuthContext:
     settings = get_settings()
     if not settings.governance_pilot_auth_required:
         return PilotAuthContext(tenant_id=None, scopes=ALL_PILOT_SCOPES, key_label="open-pilot-dev")
 
-    keys = _parse_pilot_keys(settings.governance_pilot_api_keys)
-    if not keys:
+    env_keys = _parse_pilot_keys(settings.governance_pilot_api_keys)
+    presented = _extract_bearer(request)
+
+    if presented and presented in env_keys:
+        tenant_id, scopes = env_keys[presented]
+        return PilotAuthContext(tenant_id=tenant_id, scopes=scopes, key_label="pilot")
+
+    store = getattr(request.app.state, "pilot_key_store", None)
+    if presented and store is not None:
+        record = await store.lookup_by_secret(presented)
+        if record is not None:
+            return PilotAuthContext(
+                tenant_id=record.tenant_id,
+                scopes=frozenset(record.scopes) or ALL_PILOT_SCOPES,
+                key_label=record.key_prefix or "pilot",
+                key_id=record.key_id,
+            )
+
+    has_env = bool(env_keys)
+    has_db = await _store_has_active_keys(request) if store is not None else False
+    if not has_env and not has_db:
         raise HTTPException(
             status_code=503,
             detail="Governance pilot authentication is required but no keys are configured",
         )
+    raise HTTPException(status_code=401, detail="Invalid or missing pilot API key")
 
-    presented = _extract_bearer(request)
-    if not presented or presented not in keys:
-        raise HTTPException(status_code=401, detail="Invalid or missing pilot API key")
 
-    tenant_id, scopes = keys[presented]
-    return PilotAuthContext(tenant_id=tenant_id, scopes=scopes, key_label="pilot")
+def require_pilot_keys_admin(auth: PilotAuthContext) -> None:
+    if "workspace:admin" in auth.scopes:
+        return
+    raise HTTPException(status_code=403, detail="Pilot scope workspace:admin required")
 
 
 def assert_tenant_allowed(auth: PilotAuthContext, tenant_id: UUID) -> None:
