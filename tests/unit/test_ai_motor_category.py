@@ -12,11 +12,16 @@ CSS = ROOT / "assets" / "noetfield-corporate-v1.css"
 METADATA = ROOT / "data" / "noetfield-social-preview-v2.json"
 
 CANONICAL_DEFINITION = (
-    "An AI Motor is a governed execution system that transforms events and human "
-    "intent into verified operational outcomes by coordinating models, agents, tools, "
-    "policies, organizational knowledge, workflows, and human authority."
+    "An AI Motor is a governed execution runtime that turns authenticated events "
+    "and human intent into controlled outcomes verified against defined acceptance "
+    "criteria. It coordinates models, specialized engines, agents, tools, policies, "
+    "organizational knowledge, versioned runways, workflows, and human authority."
 )
 MEMORABLE_LINE = "Models generate. Agents participate. Motors operate."
+DISTINCTION_LINE = (
+    "Engines provide capability. Agents perform bounded tasks. Runways qualify "
+    "outcomes. Motors operate."
+)
 
 
 def read(path: Path) -> str:
@@ -66,19 +71,29 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
     text = visible_text(MOTORS)
     assert CANONICAL_DEFINITION in text
     assert text.count(CANONICAL_DEFINITION) >= 2  # visible definition and JSON-LD
-    assert (
-        "Models provide intelligence. Agents perform bounded tasks. Workflows describe "
-        "operating paths. The Motor governs and executes the whole system. For "
-        "clarification: like a Tesla-class car, the Motor turns human intent into "
-        "action and work, with many engines and computers inside."
-    ) in text
+    assert DISTINCTION_LINE in text
     assert MEMORABLE_LINE in text
     assert text.count(MEMORABLE_LINE) == 1
-    assert "many models, agents and workflows inside one Motor" in text
+    assert "many models, engines, agents, runways and workflows inside one Motor" in text
     assert (
-        "For clarification: like a Tesla-class car, the Motor turns human intent "
-        "into action and work, with many engines and computers inside."
+        "Provides a specialized intelligence or decision capability—such as "
+        "inference, retrieval, rules, scoring, planning, classification, or generation."
     ) in text
+    assert (
+        "A versioned execution path for a defined class of outcome, including its "
+        "input contract, authority requirements, acceptance criteria, verification, "
+        "repair limits, stop conditions, and receipt."
+    ) in text
+    for component in ("Model", "AI Engine", "Agent", "Workflow", "Tool", "Policy", "Human", "Runway", "AI Motor"):
+        assert f"<span>{component}</span>" in text
+    for forbidden in (
+        "Tesla",
+        "Tesla-class",
+        "governs and executes the whole system",
+        "governs the environment",
+        "whole operational system",
+    ):
+        assert forbidden not in text
     assert text.count("<h1") == 1
 
 
@@ -106,7 +121,7 @@ def test_motors_architecture_preserves_governance_around_execution() -> None:
         "Approve · Escalate",
         "Recover · Safe stop",
         "Promote and record evidence",
-        "Verified operational outcome",
+        "Controlled outcome verified against acceptance criteria",
     )
     positions = [text.index(item) for item in required_in_order]
     assert positions == sorted(positions)
