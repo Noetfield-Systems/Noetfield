@@ -109,6 +109,7 @@
     "copilot/sme/index.html",
     "copilot/trial/index.html",
     "deterministic-api/index.html",
+    "deterministic-api/catalog.json",
     "directory/index.html",
     "enterprise/agent-transformation/index.html",
     "enterprise/application-factory/index.html",
