@@ -115,6 +115,15 @@ body.nf-corp {
 .nf-corp-nav a:hover { color: var(--nf-gold-dark); }
 .nf-corp-nav a[aria-current="page"] { color: var(--nf-ink); }
 
+.nf-corp-nav__deploy {
+  padding: 0.36rem 0.62rem;
+  border: 1px solid rgba(167, 123, 47, 0.36);
+  border-radius: 999px;
+  background: rgba(167, 123, 47, 0.08);
+  color: var(--nf-ink) !important;
+  white-space: nowrap;
+}
+
 .nf-corp-nav__cta {
   padding: 0.62rem 0.92rem;
   border-radius: 7px;
