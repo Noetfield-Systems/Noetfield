@@ -32,18 +32,19 @@ REQUIRED_TIER_BY_PAGE = {
     "governance/index.html": ("Apply for pilot", "governance"),
 }
 
-# Corporate homepage requirements (NF-WEB-001).
+# Corporate homepage requirements (advisor P1 one-company narrative).
 CORPORATE_HOME_REQUIRED = (
     "nf-corp",
     "noetfield-corporate-v1.css",
     'name="viewport"',
-    "/enterprise/",
     "/motors/",
+    "/runways/",
     "/investors/",
     "/proof/",
-    "Custom AI Motors",
-    "Investor Workflows",
-    "What Noetfield is seeking",
+    "AI systems that can act—and show why the action was allowed.",
+    "Inspect current proof",
+    "TrustField",
+    "A receipt is not certification.",
 )
 
 REQUIRED_SHELL_PARTIALS = (
