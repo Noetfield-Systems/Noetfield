@@ -34,22 +34,24 @@ def test_homepage_has_no_prohibited_payment_language() -> None:
 
 
 def test_homepage_is_corporate_entry_surface() -> None:
-    """`/` explains the company, portfolio, proof state and contact paths."""
+    """`/` explains the company narrative, proof focus, and contact paths."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     lower = text.lower()
     assert 'class="nf-corp"' in text
     assert "noetfield-corporate-v1.css" in text
-    assert "/enterprise/" in text
     assert "/motors/" in text
     assert "/about/" in text
     assert "/proof/" in text
     assert "/investors/" in text
+    assert "/runways/" in text
     assert "/invest/" not in text
-    assert "investor workflows" in lower
+    assert "trustfield" in lower
     assert "invest in noetfield" not in lower
     assert "pilot / client" in lower
     assert "incubator / ecosystem" in lower
     assert "operating partner" in lower
+    assert "sourcea" not in lower
+    assert "sourceb" not in lower
 
 
 def test_governance_page_states_copilot_positioning() -> None:
@@ -98,21 +100,23 @@ def test_homepage_section_count_at_most_eight() -> None:
 
 
 def test_homepage_corporate_structure_locked() -> None:
-    """The company entry must retain its required institutional structure."""
+    """The company entry retains the advisor one-narrative structure."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     assert 'class="nf-corp"' in text
     for label in (
-        "Custom AI Motors",
-        "Enterprise AI Governance",
-        "SourceA",
-        "Live product surface · case study planned",
-        "SourceB",
-        "Live commercial service · case study planned",
-        "Investor Workflows",
+        "AI systems that can act—and show why the action was allowed.",
+        "AI capability is abundant. Governed execution is not.",
+        "Governed Software Change",
+        "Decision Brief",
+        "Institutional Workflow Commissioning",
+        "TrustField",
+        "A receipt is not certification.",
+        "Inspect current proof",
     ):
         assert label in text
-    assert "What Noetfield is seeking" in text
-    assert "Founder &amp; company" in text
+    assert "SourceA" not in text
+    assert "SourceB" not in text
+    assert "Investor Workflows" not in text
     assert "/investors/" in text
     assert "/invest/" not in text
     assert "nfLiveProofHero" not in text
@@ -348,8 +352,9 @@ def test_tier_pages_have_shell_and_cta() -> None:
         assert 'name="viewport"' in text, rel
         if rel == "index.html":
             assert "nf-corp" in text, rel
-            assert "/enterprise/" in text, rel
+            assert "/motors/" in text, rel
             assert "/investors/" in text, rel
+            assert "/proof/" in text, rel
             continue
         # Institutional pages: shell OR nf-gate migration.
         assert "nfHeader" in text or "nf-gate" in text, rel

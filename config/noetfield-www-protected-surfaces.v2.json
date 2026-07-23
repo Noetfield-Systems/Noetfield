@@ -13,16 +13,18 @@
       "dist_path": "index.html",
       "route": "/",
       "required_text": [
-        "Governed AI systems that can act and show their work.",
+        "AI systems that can act—and show why the action was allowed.",
         "Noetfield builds AI Motors",
         "Evidence before claims."
       ],
       "required_links": [
-        "/enterprise/",
         "/motors/",
+        "/runways/",
         "/proof/",
         "/about/",
-        "/investors/"
+        "/investors/",
+        "/trust/",
+        "/privacy/"
       ],
       "forbidden_text": [
         "Invest in Noetfield",

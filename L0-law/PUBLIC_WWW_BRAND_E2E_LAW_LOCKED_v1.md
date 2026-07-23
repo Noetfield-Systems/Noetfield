@@ -1,7 +1,7 @@
 # PUBLIC WWW BRAND & E2E LAW (LOCKED v1)
 
 **Layer:** L0-adjacent operational law (public deploy boundary)
-**Updated:** 2026-07-22
+**Updated:** 2026-07-23
 **Owner:** Noetfield Systems Inc. (holding company · www.noetfield.com)
 **Enforcement:** `scripts/verify-static-www.sh` (offline disk) · `scripts/check_noetfield_com_e2e.py` (production smoke)
 
@@ -15,18 +15,22 @@ Repo copies of internal docs **stay on disk for agents** — they are **not www*
 
 ---
 
-## 2. Public brand posture (governed AI execution systems and product studio)
+## 2. Public brand posture (governed execution systems)
 
-Noetfield is not a single product. The corporate surface presents the following portfolio truth:
+www.noetfield.com presents **one company narrative**: Noetfield builds governed execution systems for consequential AI work. AI Motors are governed execution runtimes with deterministic controls (Option A — not the whole company stack; no car analogies).
 
-| Portfolio surface | Status | Public boundary |
-|-------------------|--------|-----------------|
-| **Custom AI Motors** | **Available** | Scoped custom systems and workflow commissions can be assessed now. |
-| **Enterprise AI Governance** | **Demonstrated · client-zero** | Public internal demonstrations and evidence exist; no external enterprise deployment is claimed. |
-| **SourceA** | **Live product surface · case study planned** | Noetfield’s professional governed-execution product and infrastructure. No external-client proof is claimed yet. |
-| **SourceB** | **Live commercial service · case study planned** | SourceB.ca is a live multilingual service with an operating lead path. No customers, revenue, installations or external traction are claimed. |
-| **TrustField** | **Live product surface · case study planned** | TrustField.ca is a live Canadian compliance workflow surface for governed workflow setup and operations (MSBs, fintechs, PSPs) and a Noetfield Systems Inc. product. No customers, revenue, or external traction are claimed beyond the live surface. |
-| **Investor Workflows** | **Demonstrated internally** | Evidence-oriented investment and company-evaluation workflows exist; independent external validation remains open. |
+**Homepage posture (advisor P1):**
+
+- Company line: governed execution systems for consequential AI work
+- Motor line: Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.
+- Distinction: Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.
+- Current proof: P05-class **client-zero commissioning focus** only — link to `/proof/` for published evidence. Do **not** invent P05 SHAs, witness runs, or PASS_P05 claims on `/`.
+- Runways featured (three): Governed Software Change · Decision Brief · Institutional Workflow Commissioning
+- Vertical: TrustField only (workflow-first compliance setup/operations at trustfield.ca) — not SourceA/SourceB/Investor Workflows equal cards
+- Nav: AI Motors · Runways · Proof · Company · Contact
+- Footer: Investors · Trust & Security · Privacy · Proof · Evidence before claims
+
+Portfolio detail for SourceA / SourceB / Investor Workflows may remain on About / Investors with honest status labels. It is **not** required as six equal homepage cards.
 
 TrustField is presented as a **Noetfield Systems Inc. product** with a live public surface at trustfield.ca. Portfolio copy may link to that surface; this repo still must not host TrustField implementation code.
 
@@ -34,20 +38,22 @@ Diagnostic Sprint from $2,500 and Copilot pilot $2k–10k remain **legacy/produc
 
 **Required homepage concepts (disk + live E2E):**
 
-- Vancouver-based AI-native systems company and product studio
-- governed AI execution: act, verify, escalate, recover and produce evidence
-- Custom AI Motors · Enterprise AI Governance · SourceA · SourceB · TrustField · Investor Workflows
-- Option A Motor vocabulary: Motors are governed **deterministic execution runtimes** (not the whole company stack); prefer “controlled outcomes verified against defined acceptance criteria”
-- Distinction line: Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.
-- explicit Available · Demonstrated · Planned · Not claimed boundaries
+- Vancouver, Canada · Governed execution systems
+- AI systems that can act—and show why the action was allowed
+- AI capability is abundant. Governed execution is not.
+- Option A Motor vocabulary + distinction/memorable lines above
+- P05-class client-zero commissioning focus → `/proof/` (honest evidence boundary)
+- TrustField vertical (workflow-first)
 - Incubator / ecosystem · Operating partner · Pilot / client contact paths
+- Receipt ≠ certification / universal correctness
 
 **Forbidden on public HTML** (buyer-visible pages):
 
 - Founder/agent ops: `founder never`, `Hub approve`, `613 GTM`, `AGENT_SELF_AUDIT`, `plan-with-no-asf`, `RESEND_API_KEY`, `docs/ops/`, `make nf-prove`, portfolio wave counts
 - Internal repo language: `OFFERINGS_LOCKED`, `W3 economic signal`, `design partner`
 - Motor car analogies: `Tesla`, `Tesla-class`, “many engines inside”, Motor defined as the whole car / whole system
-- `SourceA`, `SourceB`, and `TrustField` are allowed only as the status-labeled portfolio/case-study references defined above, never as unsupported traction claims or TrustField implementation surfaces hosted on www.noetfield.com
+- Invented P05 SHAs, witness-run IDs, or PASS_P05 claims on the homepage
+- `SourceA` / `SourceB` as equal homepage portfolio cards (allowed with status labels on About/Investors only)
 - Engineering surfaces linked from marketing: `/platform/factories/`, `services/governance/README`
 
 ---
@@ -103,9 +109,8 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 ### Copy smoke (corporate homepage + enterprise + pilot)
 
-- Homepage (corporate entry): `nf-corp`, Vancouver-based AI-native systems company and product studio, Custom AI Motors, Enterprise AI Governance, SourceA, SourceB, Investor Workflows, `/enterprise/`, `/motors/`, `/proof/`, `/investors/`
-- Portfolio statuses: `Live product surface · case study planned` and `Live commercial service · case study planned`
-- Homepage **forbidden**: `/invest/`, “Invest in Noetfield”, unsupported traction claims
+- Homepage (corporate entry): `nf-corp`, one company narrative, AI Motors / Runways / Proof / TrustField vertical, `/motors/`, `/runways/`, `/proof/`, `/investors/`, `/trust/`, `/privacy/`
+- Homepage **forbidden**: `/invest/`, “Invest in Noetfield”, SourceA/SourceB/Investor Workflows equal cards, invented P05 SHAs/PASS_P05, unsupported traction claims
 - Enterprise field: Apply for pilot, Request Trust Brief, Start sandbox
 - Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident
 - Interactive demo/trial: remain on `/copilot/demo/` and `/copilot/trial/` (not required on `/`)

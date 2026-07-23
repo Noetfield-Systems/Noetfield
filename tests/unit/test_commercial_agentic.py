@@ -61,8 +61,9 @@ def test_footer_links_demo_and_trial() -> None:
 def test_homepage_is_corporate_entry_not_demo_host() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "nf-corp" in text
-    assert "/enterprise/" in text
+    assert "/motors/" in text
     assert "/investors/" in text
+    assert "/proof/" in text
     assert "nfLiveProofForm" not in text
     # Demo/trial remain linked from product shell partials, not required on the corporate homepage.
     header = HEADER.read_text(encoding="utf-8")
