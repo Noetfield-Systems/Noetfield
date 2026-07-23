@@ -86,7 +86,9 @@ check_file "protected proof truth boundaries" proof/index.html \
   'not a Fortune-500 deployment claim' 'Coming next.'
 
 check_file "protected enterprise commercial surface" enterprise/index.html \
-  '<title>Governed AI Enterprise Systems — Noetfield</title>' \
+  '<title>Legacy commercial lane — Enterprise — Noetfield</title>' \
+  '<meta name="robots" content="noindex,nofollow" />' \
+  'nf-legacy-lane-banner' \
   '<link rel="canonical" href="https://www.noetfield.com/enterprise/" />' \
   '<h1 class="nf-hero-h1--wide">Governed AI operations—from sandbox receipt to board-ready proof.</h1>' \
   'noetfield-shell.js?v=42' 'Apply for pilot' 'Request Trust Brief' 'Start sandbox' \
@@ -185,8 +187,10 @@ check_file "start sandbox page" start/index.html \
   'href="/openapi.json">Governance API' 'noetfield-www.css?v=42'
 
 check_file "pricing packaging page" pricing/index.html \
-  'Published tiers' 'Apply for pilot' 'Milestone pricing' 'Developer access · free' \
-  'noetfield-www.css?v=42' 'What regulated buyers receive from Noetfield'
+  '<title>Specialized lane — Pricing &amp; packaging — Noetfield</title>' \
+  '<meta name="robots" content="noindex,nofollow" />' \
+  'nf-legacy-lane-banner' 'Published tiers' 'Apply for pilot' 'Milestone pricing' \
+  'Developer access · free' 'noetfield-www.css?v=42' 'What regulated buyers receive from Noetfield'
 
 check_file "pilot landing page" copilot/pilot/index.html \
   'noetfield-www.css?v=42' 'Board-grade trust' 'GTM-locked pilot success signals' \

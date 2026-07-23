@@ -81,12 +81,12 @@ done
 echo "OK   header links demo + trial"
 
 index="$(cat index.html)"
-# Corporate homepage must retain the approved company and portfolio entry.
-if ! grep -qF '/enterprise/' <<< "$index" || ! grep -qF 'nf-corp' <<< "$index" || ! grep -qF '/investors/' <<< "$index"; then
-  echo "FAIL homepage must retain corporate entry (/enterprise/ + /investors/ + nf-corp)" >&2
+# Corporate homepage must retain the approved company narrative entry (Motors · Runways · Investors).
+if ! grep -qF '/motors/' <<< "$index" || ! grep -qF '/runways/' <<< "$index" || ! grep -qF 'nf-corp' <<< "$index" || ! grep -qF '/investors/' <<< "$index"; then
+  echo "FAIL homepage must retain corporate entry (/motors/ + /runways/ + /investors/ + nf-corp)" >&2
   fail=1
 else
-  echo "OK   homepage is corporate entry (company + portfolio)"
+  echo "OK   homepage is corporate entry (Motors · Runways · Investors)"
 fi
 if grep -qF 'nfLiveProofForm' <<< "$index"; then
   echo "FAIL homepage must not host nfLiveProofForm (interactive lives on /copilot/demo/ and /start/)" >&2
