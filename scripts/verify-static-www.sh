@@ -42,22 +42,21 @@ check_file "protected corporate homepage" index.html \
   '<title>Noetfield Systems Inc. — AI Motors &amp; Governed Execution</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp">' '<main id="main">' \
-  'Governed AI systems that can act and show their work.' \
-  'Noetfield builds AI Motors: governed execution runtimes with deterministic controls' \
-  'controlled outcomes verified against defined acceptance criteria' \
-  'Controlled outcome verified against acceptance criteria' \
-  'Models generate. Agents participate. Motors operate.' \
-  'Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.' \
-  'Operates under contract—verifies, escalates, recovers and records' \
-  'Custom AI Motors' 'Enterprise AI Governance' \
-  'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
-  'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
-  'TrustField' 'href="https://trustfield.ca/"' 'Canadian compliance workflow' \
-  'No customers, revenue, installations or external traction are claimed' 'Investor Workflows' \
-  'Evidence &amp; proof' 'What Noetfield is seeking' 'Founder &amp; company' \
+  'AI systems that can act—and show why the action was allowed.' \
+  'Noetfield builds AI Motors: governed execution runtimes that coordinate' \
+  'Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.' \
+  'Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.' \
+  'AI capability is abundant. Governed execution is not.' \
+  'P05-class client-zero commissioning is the present focus.' \
+  'does not invent SHAs, witness runs, or PASS_P05 claims' \
+  'Governed Software Change' 'Decision Brief' 'Institutional Workflow Commissioning' \
+  'TrustField' 'href="https://trustfield.ca/"' 'compliance workflow setup and operations' \
+  'A receipt is not certification.' \
+  'Inspect current proof' 'Discuss one workflow' \
   'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
-  'href="/enterprise/"' 'href="/motors/"' 'href="/about/"' 'href="/proof/"' \
-  'href="/investors/"' '/assets/noetfield-corporate-v1.css?v=2'
+  'href="/motors/"' 'href="/runways/"' 'href="/about/"' 'href="/proof/"' \
+  'href="/investors/"' 'href="/trust/"' 'href="/privacy/"' \
+  '/assets/noetfield-corporate-v1.css?v=2'
 check_absent "protected homepage has no private or unsupported conversion" index.html \
   'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield'
 
@@ -167,10 +166,9 @@ check_file "about corporate positioning and TrustField product boundary" about/i
   'No customers, revenue, installations or external traction are claimed' \
   'TrustField' 'A Noetfield Systems Inc. product' 'href="https://trustfield.ca/"'
 
-check_file "homepage TrustField portfolio card" index.html \
-  '<h3>TrustField</h3>' 'href="https://trustfield.ca/"' \
-  'Live product surface · case study planned' \
-  'Canadian compliance workflow' \
+check_file "homepage TrustField vertical" index.html \
+  'TrustField — compliance workflow operations.' 'href="https://trustfield.ca/"' \
+  'compliance workflow setup and operations' \
   'A Noetfield Systems Inc. product'
 
 # Homepage IA compression — ≤8 top-level sections (U5 v17)

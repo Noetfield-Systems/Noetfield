@@ -25,23 +25,17 @@ def test_homepage_has_no_gcip_bleed() -> None:
 
 def test_homepage_has_modern_shell_and_spine() -> None:
     text = HOME.read_text(encoding="utf-8")
-    # NF-WEB-001 replaces the recovery direction gate with the approved
-    # corporate entry surface. Recovery and v42 expectations remain historical.
+    # NF-WEB-001 corporate entry — one company narrative (advisor P1).
     required = (
         "<title>Noetfield Systems Inc. — AI Motors &amp; Governed Execution</title>",
         '<link rel="canonical" href="https://www.noetfield.com/" />',
         '<body class="nf-corp">',
         '<main id="main">',
-        "Governed AI systems that can act and show their work.",
-        'id="capabilities"',
-        "Custom AI Motors",
-        "Enterprise AI Governance",
-        "SourceA",
-        "Live product surface · case study planned",
-        "SourceB",
-        "Live commercial service · case study planned",
-        "Investor Workflows",
-        'href="/enterprise/"',
+        "AI systems that can act—and show why the action was allowed.",
+        'id="ai-motors"',
+        'id="current-proof"',
+        'id="runways"',
+        "TrustField",
         'href="/motors/"',
         'href="/about/"',
         'href="/proof/"',
@@ -50,7 +44,16 @@ def test_homepage_has_modern_shell_and_spine() -> None:
     )
     for contract in required:
         assert contract in text
-    for superseded in ('nf-gate__directions', 'id="nfHeader"', "nf26-hero", "nfInvestorForm"):
+    for superseded in (
+        'nf-gate__directions',
+        'id="nfHeader"',
+        "nf26-hero",
+        "nfInvestorForm",
+        'id="capabilities"',
+        "SourceA",
+        "SourceB",
+        "Investor Workflows",
+    ):
         assert superseded not in text
 
 

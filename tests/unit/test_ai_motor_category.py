@@ -17,8 +17,13 @@ CANONICAL_DEFINITION = (
     "criteria. It coordinates models, specialized engines, agents, tools, policies, "
     "organizational knowledge, versioned runways, workflows, and human authority."
 )
-MEMORABLE_LINE = "Models generate. Agents participate. Motors operate."
+MEMORABLE_LINE = "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts."
 DISTINCTION_LINE = (
+    "Engines provide capability. Agents perform bounded work. Runways define how "
+    "results qualify. Motors govern execution."
+)
+MOTORS_MEMORABLE_LINE = "Models generate. Agents participate. Motors operate."
+MOTORS_DISTINCTION_LINE = (
     "Engines provide capability. Agents perform bounded tasks. Runways qualify "
     "outcomes. Motors operate."
 )
@@ -41,17 +46,18 @@ def json_ld(path: Path) -> list[dict[str, object]]:
     return [json.loads(block) for block in blocks]
 
 
-def test_homepage_introduces_the_category_before_the_portfolio() -> None:
+def test_homepage_introduces_the_category_before_other_sections() -> None:
     text = visible_text(HOME)
     motor_section = text.index('id="ai-motors"')
-    portfolio_section = text.index('id="capabilities"')
-    assert motor_section < portfolio_section
-    assert "Noetfield builds AI Motors: governed execution runtimes with deterministic controls" in text
+    proof_section = text.index('id="current-proof"')
+    runways_section = text.index('id="runways"')
+    assert motor_section < proof_section < runways_section
+    assert "Noetfield builds AI Motors: governed execution runtimes that coordinate" in text
     assert "controlled outcomes verified against defined acceptance criteria" in text
     assert DISTINCTION_LINE in text
     assert MEMORABLE_LINE in text
     assert text.count(f'<p class="nf-motor-manifesto">{MEMORABLE_LINE}</p>') == 1
-    for component in ("Model", "Agent", "Workflow", "Automation", "AI Motor"):
+    for component in ("Engine", "Agent", "Runway", "AI Motor"):
         assert f"<span>{component}</span>" in text
     assert 'href="/motors/">Explore AI Motors' in text
     assert '<a href="/motors/">AI Motors</a>' in text
@@ -60,13 +66,14 @@ def test_homepage_introduces_the_category_before_the_portfolio() -> None:
 
 def test_homepage_mental_model_does_not_put_ai_before_the_motor() -> None:
     text = visible_text(HOME)
-    assert "Event or human intent" in text
-    assert "Controlled outcome verified against acceptance criteria" in text
-    assert "governed execution runtime around intelligence" in text
+    assert "Authorized event" in text
+    assert "Accepted outcome + receipt" in text
+    assert "Motors govern execution" in text
     for forbidden in (
         "AI decides",
         "Motor executes",
         'AI capability</span><i aria-hidden="true">→</i><strong>Governed execution',
+        "Verified operational outcome",
     ):
         assert forbidden not in text
 
@@ -75,9 +82,9 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
     text = visible_text(MOTORS)
     assert CANONICAL_DEFINITION in text
     assert text.count(CANONICAL_DEFINITION) >= 2  # visible definition and JSON-LD
-    assert DISTINCTION_LINE in text
-    assert MEMORABLE_LINE in text
-    assert text.count(MEMORABLE_LINE) == 1
+    assert MOTORS_DISTINCTION_LINE in text
+    assert MOTORS_MEMORABLE_LINE in text
+    assert text.count(MOTORS_MEMORABLE_LINE) == 1
     assert (
         "A Motor may coordinate models, engines, agents, runways and workflows "
         "under one execution contract."
