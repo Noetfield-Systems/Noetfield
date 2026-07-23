@@ -46,7 +46,7 @@ def test_homepage_introduces_the_category_before_the_portfolio() -> None:
     motor_section = text.index('id="ai-motors"')
     portfolio_section = text.index('id="capabilities"')
     assert motor_section < portfolio_section
-    assert "Noetfield builds AI Motors: governed deterministic execution runtimes" in text
+    assert "Noetfield builds AI Motors: governed execution runtimes with deterministic controls" in text
     assert "controlled outcomes verified against defined acceptance criteria" in text
     assert DISTINCTION_LINE in text
     assert MEMORABLE_LINE in text
