@@ -76,6 +76,7 @@
    <nav class="nf-corp-nav" aria-label="Primary navigation">
     <a href="/deterministic-api/" aria-current="page">API</a>
     <a href="#proof">Proof</a>
+    <a href="#top-up">Top up</a>
     <a href="#referral">Boundary</a>
     <a class="nf-corp-nav__cta" href="#get-key">Get API key</a>
    </nav>
@@ -173,6 +174,37 @@
    </div>
   </section>
 
+  <section class="nf-dapi-section" id="top-up" aria-labelledby="topup-title">
+   <div class="nf-corp-wrap nf-dapi-key-grid">
+    <div>
+     <p class="nf-corp-eyebrow">Billing</p>
+     <h2 id="topup-title">Top up Noetfield API credits</h2>
+     <p class="nf-dapi-section-lead">Paid top-ups go through Stripe Checkout. Credits land on your tenant after payment. Amounts: <strong>$10 / $25 / $50 / $100</strong>.</p>
+     <ul class="nf-dapi-bullets">
+      <li>Paste the API key you received at signup</li>
+      <li>Choose an amount and continue to Stripe</li>
+      <li>Webhook credits your balance automatically</li>
+     </ul>
+     <p class="nf-dapi-form__hint" id="nfDapiTopupBanner" hidden aria-live="polite"></p>
+    </div>
+    <form class="nf-dapi-form" id="nfDapiTopupForm" aria-label="Top up API credits">
+     <label>API key
+      <input type="password" name="api_key" required autocomplete="off" spellcheck="false" placeholder="sk-nf-…" />
+     </label>
+     <label>Amount
+      <select name="amount_cents" required>
+       <option value="1000">$10 credits</option>
+       <option value="2500">$25 credits</option>
+       <option value="5000">$50 credits</option>
+       <option value="10000">$100 credits</option>
+      </select>
+     </label>
+     <button type="submit" class="nf-button nf-button--primary">Continue to Stripe</button>
+     <p class="nf-dapi-form__status" id="nfDapiTopupStatus" hidden aria-live="polite"></p>
+    </form>
+   </div>
+  </section>
+
   <section class="nf-dapi-section" id="referral" aria-labelledby="ref-title">
    <div class="nf-corp-wrap nf-dapi-ref">
     <div>
@@ -204,14 +236,19 @@
 
  <script>
   (function () {
-    var SIGNUP_URL = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1/signup";
+    var API_BASE = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev";
+    var SIGNUP_URL = API_BASE + "/v1/signup";
+    var CHECKOUT_URL = API_BASE + "/v1/billing/create-checkout";
     var form = document.getElementById("nfDapiKeyForm");
-    if (!form) return;
+    var topupForm = document.getElementById("nfDapiTopupForm");
     var statusEl = document.getElementById("nfDapiKeyStatus");
     var resultEl = document.getElementById("nfDapiKeyResult");
     var keyEl = document.getElementById("nfDapiKeyValue");
     var metaEl = document.getElementById("nfDapiKeyMeta");
     var copyBtn = document.getElementById("nfDapiKeyCopy");
+    var topupStatus = document.getElementById("nfDapiTopupStatus");
+    var topupBanner = document.getElementById("nfDapiTopupBanner");
+    var topupKeyInput = topupForm ? topupForm.api_key : null;
 
     function setStatus(msg, isError) {
       if (!statusEl) return;
@@ -220,64 +257,82 @@
       statusEl.classList.toggle("nf-dapi-form__status--error", !!isError);
     }
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      var email = (form.email.value || "").trim();
-      var company = (form.company.value || "").trim();
-      var referralEmail = (form.referral_email.value || "").trim();
-      var referralCode = (form.referral_code.value || "").trim();
-      if (!email) return;
+    function setTopupStatus(msg, isError) {
+      if (!topupStatus) return;
+      topupStatus.hidden = false;
+      topupStatus.textContent = msg;
+      topupStatus.classList.toggle("nf-dapi-form__status--error", !!isError);
+    }
 
-      var submitBtn = form.querySelector('button[type="submit"]');
-      if (submitBtn) submitBtn.disabled = true;
-      if (resultEl) resultEl.hidden = true;
-      setStatus("Creating your key…", false);
+    var params = new URLSearchParams(window.location.search);
+    if (topupBanner && params.get("topup") === "success") {
+      topupBanner.hidden = false;
+      topupBanner.textContent = "Payment received. Credits appear on your balance within a few seconds — refresh balance via GET /v1/balance.";
+    } else if (topupBanner && params.get("topup") === "cancel") {
+      topupBanner.hidden = false;
+      topupBanner.textContent = "Checkout canceled. No charge. You can top up again anytime.";
+    }
 
-      var payload = {
-        email: email,
-        caller_site: "www.noetfield.com"
-      };
-      if (company) payload.organization = company;
-      if (referralEmail) payload.referral_email = referralEmail;
-      if (referralCode) payload.referral_code = referralCode;
+    if (form) {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var email = (form.email.value || "").trim();
+        var company = (form.company.value || "").trim();
+        var referralEmail = (form.referral_email.value || "").trim();
+        var referralCode = (form.referral_code.value || "").trim();
+        if (!email) return;
 
-      fetch(SIGNUP_URL, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-        .then(function (res) {
-          return res.json().then(function (data) {
-            return { ok: res.ok, status: res.status, data: data };
+        var submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
+        if (resultEl) resultEl.hidden = true;
+        setStatus("Creating your key…", false);
+
+        var payload = {
+          email: email,
+          caller_site: "www.noetfield.com"
+        };
+        if (company) payload.organization = company;
+        if (referralEmail) payload.referral_email = referralEmail;
+        if (referralCode) payload.referral_code = referralCode;
+
+        fetch(SIGNUP_URL, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(payload)
+        })
+          .then(function (res) {
+            return res.json().then(function (data) {
+              return { ok: res.ok, status: res.status, data: data };
+            });
+          })
+          .then(function (out) {
+            if (!out.ok || !out.data || !out.data.api_key) {
+              var err =
+                (out.data && out.data.error && out.data.error.message) ||
+                "Signup failed. Try again or use a different email.";
+              setStatus(err, true);
+              return;
+            }
+            if (keyEl) keyEl.textContent = out.data.api_key;
+            if (topupKeyInput) topupKeyInput.value = out.data.api_key;
+            if (metaEl) {
+              var credit = out.data.starter_credit_usd != null ? out.data.starter_credit_usd : 10;
+              var ref = out.data.referral_code ? " · your referral code: " + out.data.referral_code : "";
+              metaEl.textContent =
+                "Noetfield API starter credit: $" + credit + ". Shown once — store it securely." + ref;
+            }
+            if (resultEl) resultEl.hidden = false;
+            setStatus("Key issued. Copy it now — it will not be shown again.", false);
+            form.reset();
+          })
+          .catch(function () {
+            setStatus("Network error reaching the API. Check your connection and retry.", true);
+          })
+          .finally(function () {
+            if (submitBtn) submitBtn.disabled = false;
           });
-        })
-        .then(function (out) {
-          if (!out.ok || !out.data || !out.data.api_key) {
-            var err =
-              (out.data && out.data.error && out.data.error.message) ||
-              "Signup failed. Try again or use a different email.";
-            setStatus(err, true);
-            return;
-          }
-          // Never send the raw key to analytics or remote logs.
-          if (keyEl) keyEl.textContent = out.data.api_key;
-          if (metaEl) {
-            var credit = out.data.starter_credit_usd != null ? out.data.starter_credit_usd : 10;
-            var ref = out.data.referral_code ? " · your referral code: " + out.data.referral_code : "";
-            metaEl.textContent =
-              "Noetfield API starter credit: $" + credit + ". Shown once — store it securely." + ref;
-          }
-          if (resultEl) resultEl.hidden = false;
-          setStatus("Key issued. Copy it now — it will not be shown again.", false);
-          form.reset();
-        })
-        .catch(function () {
-          setStatus("Network error reaching the API. Check your connection and retry.", true);
-        })
-        .finally(function () {
-          if (submitBtn) submitBtn.disabled = false;
-        });
-    });
+      });
+    }
 
     if (copyBtn && keyEl) {
       copyBtn.addEventListener("click", function () {
@@ -298,6 +353,51 @@
           copyBtn.textContent = "Copied";
           setTimeout(function () { copyBtn.textContent = "Copy"; }, 1600);
         }
+      });
+    }
+
+    if (topupForm) {
+      topupForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var apiKey = (topupForm.api_key.value || "").trim();
+        var amountCents = Number(topupForm.amount_cents.value);
+        if (!apiKey || !amountCents) return;
+        var submitBtn = topupForm.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
+        setTopupStatus("Opening Stripe Checkout…", false);
+        fetch(CHECKOUT_URL, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: "Bearer " + apiKey
+          },
+          body: JSON.stringify({
+            amount_cents: amountCents,
+            success_url: "https://www.noetfield.com/deterministic-api/?topup=success",
+            cancel_url: "https://www.noetfield.com/deterministic-api/?topup=cancel"
+          })
+        })
+          .then(function (res) {
+            return res.json().then(function (data) {
+              return { ok: res.ok, data: data };
+            });
+          })
+          .then(function (out) {
+            if (!out.ok || !out.data || !out.data.checkout_url) {
+              var err =
+                (out.data && out.data.error && out.data.error.message) ||
+                "Could not start Checkout. Check the API key and try again.";
+              setTopupStatus(err, true);
+              return;
+            }
+            window.location.href = out.data.checkout_url;
+          })
+          .catch(function () {
+            setTopupStatus("Network error reaching billing. Retry.", true);
+          })
+          .finally(function () {
+            if (submitBtn) submitBtn.disabled = false;
+          });
       });
     }
   })();

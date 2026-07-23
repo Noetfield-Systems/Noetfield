@@ -28,8 +28,11 @@
     "chat": "POST /v1/chat/completions",
     "balance": "GET /v1/balance",
     "models": "GET /v1/models",
+    "create_checkout": "POST /v1/billing/create-checkout",
+    "stripe_webhook": "POST /v1/billing/stripe-webhook",
     "starter_credit_usd": 10,
-    "referral_credit_usd": 10
+    "referral_credit_usd": 10,
+    "topup_amounts_usd": [10, 25, 50, 100]
   },
   "drop_in": {
     "before": "https://api.openai.com/v1",
