@@ -50,8 +50,8 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 69,
-  "noindex_route_count": 77,
+  "indexable_route_count": 68,
+  "noindex_route_count": 78,
   "route_count": 146,
   "routes": [
     {
@@ -648,7 +648,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/deterministic-api/",
-      "description": "Noetfield API is a drop-in OpenAI replacement. Cheaper. Guaranteed valid JSON and tool calls. Change one base_url line. Get an API key with $10 starter credits.",
+      "description": "Noetfield API is an OpenAI-compatible engine endpoint. Responses leave only when JSON schemas and tool calls are valid\u2014or the call fails closed. Change one base_url line. Starter credits available.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -659,7 +659,7 @@
       },
       "profile": "corporate",
       "route": "/deterministic-api/",
-      "title": "Noetfield API \u2014 Drop-in OpenAI Replacement",
+      "title": "Noetfield API \u2014 Schema-valid engine endpoint",
       "verdict": "PASS"
     },
     {
@@ -696,7 +696,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/enterprise/application-factory/",
-      "description": "Build, replace and promote institutional software through governed production, independent verification and evidence.",
+      "description": "Build, replace and promote institutional software through governed production, separate verification and evidence.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1368,7 +1368,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/gel/",
-      "description": "Noetfield GEL \u2014 pre-execution policy gate, signed decision receipts, and Trust Ledger export for agentic workflows.",
+      "description": "GEL is the control layer inside Noetfield Motors: policy before execution, receipts after, with deterministic controls around consequential AI work.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1400,7 +1400,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/",
-      "description": "Noetfield builds AI Motors: governed deterministic execution runtimes that turn intent into controlled outcomes verified against defined acceptance criteria.",
+      "description": "Noetfield builds AI Motors: governed execution runtimes with deterministic controls that turn intent into controlled outcomes verified against defined acceptance criteria.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1912,10 +1912,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/research-packs/adapt/",
-      "description": "Copy the Research packs commercial contract into Noetfield, Sister surface, SourceA, or SourceB plans without forking recipe IDs.",
+      "description": "Research packs commercial page. Internal implementation notes have been removed from the public site.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1923,12 +1923,12 @@
       },
       "profile": "corporate",
       "route": "/research-packs/adapt/",
-      "title": "Adapt Research packs \u2014 implement on sister sites \u2014 Noetfield",
-      "verdict": "PASS"
+      "title": "Research packs \u2014 buyer page \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/research-packs/",
-      "description": "Buy Vendor Decision Briefs, KPI packs, and RFP responses as governed commercial research packs on Noetfield. Fulfilled on the shared Job Gateway.",
+      "description": "Buy Vendor Decision Briefs, KPI packs, and RFP responses as governed commercial research packs on Noetfield \u2014 with downloadable deliverables and accept/reject gates.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -2056,7 +2056,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/runways/",
-      "description": "Noetfield Runways: verified agentic execution from goal to verified output. Versioned runways, policy gates, independent verification, bounded repair, and receipts.",
+      "description": "Noetfield Runways: governed agentic execution from goal to accepted output\u2014or a documented safe stop. Versioned runways, policy gates, separate verification, bounded repair, and receipts.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -2067,7 +2067,7 @@
       },
       "profile": "corporate",
       "route": "/runways/",
-      "title": "Noetfield Runways \u2014 Verified Agentic Execution",
+      "title": "Noetfield Runways \u2014 From goal to accepted output",
       "verdict": "PASS"
     },
     {

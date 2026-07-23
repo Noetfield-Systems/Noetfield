@@ -49,12 +49,13 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
 def test_homepage_explains_company_portfolio_proof_and_asks() -> None:
     text = read(ROOT / "index.html")
     required = (
-        "Vancouver · AI-native systems company &amp; product studio",
+        "Vancouver · AI systems company building governed execution infrastructure",
         "human intent, business policy, institutional knowledge, AI capability "
         "and decision authority",
         "act, verify, escalate, recover and produce evidence",
         "The institutional execution problem",
-        "Noetfield builds AI Motors: governed deterministic execution runtimes",
+        "Noetfield builds AI Motors: governed execution runtimes with deterministic controls",
+        "Noetfield applies one governed execution architecture to consequential workflows",
         "controlled outcomes verified against defined acceptance criteria",
         "Models generate. Agents participate. Motors operate.",
         "Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.",
@@ -227,8 +228,8 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text
     assert 'class="nf-corp-footer"' in text
     assert '<a href="/runways/" aria-current="page">Runways</a>' in text
-    assert "From goal to verified output." in text
-    assert "Agents participate. Runways finish the work." in text
+    assert "From goal to accepted output—or a documented safe stop." in text
+    assert "Agents perform bounded work. Runways define how the result qualifies." in text
     assert "The models may be probabilistic. The runway is controlled." in text
     assert "Evidence before claims." in text
     assert "Trading Performance" in text

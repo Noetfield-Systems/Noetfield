@@ -22,7 +22,7 @@ API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 HOME_NEEDLES = (
     "nf-corp",
     "Custom AI Motors",
-    "governed deterministic execution runtimes",
+    "governed execution runtimes with deterministic controls",
     "controlled outcomes verified against defined acceptance criteria",
     "Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.",
     "Enterprise AI Governance",

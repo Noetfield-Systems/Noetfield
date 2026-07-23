@@ -43,7 +43,7 @@ check_file "protected corporate homepage" index.html \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp">' '<main id="main">' \
   'Governed AI systems that can act and show their work.' \
-  'Noetfield builds AI Motors: governed deterministic execution runtimes' \
+  'Noetfield builds AI Motors: governed execution runtimes with deterministic controls' \
   'controlled outcomes verified against defined acceptance criteria' \
   'Controlled outcome verified against acceptance criteria' \
   'Models generate. Agents participate. Motors operate.' \
@@ -150,7 +150,8 @@ check_file "public investor workflow uses scoped enquiry paths" investor-workflo
   'href="/contact/?topic=investor-audit"' \
   'href="/contact/?topic=investor-diligence"' \
   'href="/contact/?topic=investor-workflow"' \
-  'href="/contact/?topic=custom-investor-motor"'
+  'Diligence Runway' \
+  'href="/runways/"'
 check_absent "recovered investor workflow has no workspace conversion" investor-workflows/index.html \
   'href="/workspace/'
 check_file "frontier prototype uses scoped enquiry" frontier-systems/index.html \
@@ -381,7 +382,7 @@ done
 [[ "$www_fail" -eq 0 ]] && ok "no comparison framing on public www" || fail=1
 
 # P0 — no internal / founder / agent copy on public www
-LEAK_PATTERN='maintained in repo|not claimed on www|plan-with-no-asf|AGENT_SELF_AUDIT|repo-native|ASSERT→|Founder-led \+ agentic|pipeline stage [0-9]|W3 PASS|Product on disk|/docs/ops/|services/governance/README|nf-card__tag">Hub<|Shipped today — honest|execution infrastructure|API offline|what we ship|our roadmap|Fully agentic|Governance agents|IBM Plex'
+LEAK_PATTERN='maintained in repo|not claimed on www|plan-with-no-asf|AGENT_SELF_AUDIT|repo-native|ASSERT→|Founder-led \+ agentic|pipeline stage [0-9]|W3 PASS|Product on disk|/docs/ops/|services/governance/README|nf-card__tag">Hub<|Shipped today — honest|API offline|what we ship|our roadmap|Fully agentic|Governance agents|IBM Plex'
 leak_fail=0
 # copilot/procurement — buyer diligence surface; ops doc hrefs allowed (gtm-ops parity)
 for f in index.html start/index.html privacy/index.html terms/index.html status/index.html \

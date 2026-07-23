@@ -9,48 +9,48 @@
       "eyebrow": "NOETFIELD SYSTEMS INC.",
       "headline": "Governed AI execution.",
       "supporting": "Products, custom AI Motors and institutional workflows built on shared governed infrastructure.",
-      "footer": "Vancouver, Canada · noetfield.com",
-      "alt": "Noetfield Systems Inc. — governed AI execution, products, custom AI Motors and institutional workflows."
+      "footer": "Vancouver, Canada \u00b7 noetfield.com",
+      "alt": "Noetfield Systems Inc. \u2014 governed AI execution, products, custom AI Motors and institutional workflows."
     },
     "enterprise": {
       "filename": "noetfield-enterprise-v2.png",
-      "eyebrow": "NOETFIELD · ENTERPRISE",
+      "eyebrow": "NOETFIELD \u00b7 ENTERPRISE",
       "headline": "Governed Application Factory",
       "supporting": "Code generation is becoming abundant. Governed software production is not.",
-      "footer": "Execution · Verification · Evidence",
-      "alt": "Noetfield Enterprise — Governed Application Factory with execution, verification and evidence."
+      "footer": "Execution \u00b7 Verification \u00b7 Evidence",
+      "alt": "Noetfield Enterprise \u2014 Governed Application Factory with execution, verification and evidence."
     },
     "motors": {
       "filename": "noetfield-motors-v2.png",
-      "eyebrow": "NOETFIELD · CUSTOM SYSTEMS",
+      "eyebrow": "NOETFIELD \u00b7 CUSTOM SYSTEMS",
       "headline": "Custom AI Motors",
       "supporting": "Systems that turn intent, policy, tools and authority into coordinated execution.",
-      "footer": "Act · Verify · Escalate · Recover",
-      "alt": "Noetfield Custom AI Motors — systems that turn intent, policy, tools and authority into coordinated execution."
+      "footer": "Act \u00b7 Verify \u00b7 Escalate \u00b7 Recover",
+      "alt": "Noetfield Custom AI Motors \u2014 systems that turn intent, policy, tools and authority into coordinated execution."
     },
     "investors": {
       "filename": "noetfield-investors-v2.png",
-      "eyebrow": "NOETFIELD · ECOSYSTEM & INVESTORS",
+      "eyebrow": "NOETFIELD \u00b7 ECOSYSTEM & INVESTORS",
       "headline": "Built to be examined.",
       "supporting": "Products, infrastructure, current evidence and the next commissioning stage.",
-      "footer": "Noetfield Systems Inc. · Vancouver",
-      "alt": "Noetfield ecosystem and investors — products, infrastructure, current evidence and the next commissioning stage."
+      "footer": "Noetfield Systems Inc. \u00b7 Vancouver",
+      "alt": "Noetfield ecosystem and investors \u2014 products, infrastructure, current evidence and the next commissioning stage."
     },
     "proof": {
       "filename": "noetfield-proof-v2.png",
-      "eyebrow": "NOETFIELD · PROOF",
+      "eyebrow": "NOETFIELD \u00b7 PROOF",
       "headline": "Evidence before claims.",
       "supporting": "Current systems, verified states and public execution receipts.",
-      "footer": "Build · Verify · Record",
-      "alt": "Noetfield proof — current systems, verified states and public execution receipts."
+      "footer": "Build \u00b7 Verify \u00b7 Record",
+      "alt": "Noetfield proof \u2014 current systems, verified states and public execution receipts."
     },
     "frontier": {
       "filename": "noetfield-frontier-v2.png",
-      "eyebrow": "NOETFIELD · FRONTIER SYSTEMS",
+      "eyebrow": "NOETFIELD \u00b7 FRONTIER SYSTEMS",
       "headline": "Shared work before title.",
       "supporting": "A founding-counterpart path for governed execution and institutional AI infrastructure.",
-      "footer": "Mutual discovery · Bounded work · Long-term alignment",
-      "alt": "Noetfield Frontier Systems — shared work before title and a founding-counterpart path for governed execution."
+      "footer": "Mutual discovery \u00b7 Bounded work \u00b7 Long-term alignment",
+      "alt": "Noetfield Frontier Systems \u2014 shared work before title and a founding-counterpart path for governed execution."
     }
   },
   "route_profiles": {
@@ -68,69 +68,119 @@
   "profile_prefixes": [
     {
       "profile": "frontier",
-      "prefixes": ["/frontier-systems/"]
+      "prefixes": [
+        "/frontier-systems/"
+      ]
     },
     {
       "profile": "investors",
-      "prefixes": ["/investor-workflows/", "/investors/", "/invest/", "/gate/investors/", "/gate/partners/investors/"]
+      "prefixes": [
+        "/investor-workflows/",
+        "/investors/",
+        "/invest/",
+        "/gate/investors/",
+        "/gate/partners/investors/"
+      ]
     },
     {
       "profile": "proof",
-      "prefixes": ["/proof/", "/status/", "/trust-ledger/sample-report/"]
+      "prefixes": [
+        "/proof/",
+        "/status/",
+        "/trust-ledger/sample-report/"
+      ]
     },
     {
       "profile": "motors",
-      "prefixes": ["/motors/", "/ai-automation/", "/factory/", "/services/never-miss-a-call/"]
+      "prefixes": [
+        "/motors/",
+        "/ai-automation/",
+        "/factory/",
+        "/services/never-miss-a-call/"
+      ]
     },
     {
       "profile": "enterprise",
-      "prefixes": ["/enterprise/", "/copilot/", "/trust/", "/trust-brief/", "/trust-ledger/", "/governance/", "/ai-factories/", "/ai-value-governance-os/", "/playbook/", "/pricing/", "/start/", "/intelligence/", "/bank-pilot/", "/msp/", "/federal/", "/services/agentic-cost-governance/"]
+      "prefixes": [
+        "/enterprise/",
+        "/copilot/",
+        "/trust/",
+        "/trust-brief/",
+        "/trust-ledger/",
+        "/governance/",
+        "/ai-factories/",
+        "/ai-value-governance-os/",
+        "/playbook/",
+        "/pricing/",
+        "/start/",
+        "/intelligence/",
+        "/bank-pilot/",
+        "/msp/",
+        "/federal/",
+        "/services/agentic-cost-governance/"
+      ]
     }
   ],
   "metadata_overrides": {
     "/": {
-      "title": "Noetfield Systems Inc. — AI Motors & Governed Execution",
-      "description": "Noetfield builds AI Motors: governed deterministic execution runtimes that turn intent into controlled outcomes verified against defined acceptance criteria."
+      "title": "Noetfield Systems Inc. \u2014 AI Motors & Governed Execution",
+      "description": "Noetfield builds AI Motors: governed execution runtimes with deterministic controls that turn intent into controlled outcomes verified against defined acceptance criteria."
     },
     "/about/": {
       "title": "About Noetfield Systems Inc.",
       "description": "Meet the Vancouver company building governed AI products, custom AI Motors and specialized institutional workflows."
     },
     "/enterprise/": {
-      "title": "Governed AI Enterprise Systems — Noetfield",
+      "title": "Governed AI Enterprise Systems \u2014 Noetfield",
       "description": "Explore Noetfield enterprise systems for governed application production, agent transformation and verifiable institutional execution."
     },
     "/enterprise/application-factory/": {
-      "title": "Governed Application Factory — Noetfield Enterprise",
-      "description": "Build, replace and promote institutional software through governed production, independent verification and evidence."
+      "title": "Governed Application Factory \u2014 Noetfield Enterprise",
+      "description": "Build, replace and promote institutional software through governed production, separate verification and evidence."
     },
     "/motors/": {
-      "title": "AI Motors for Governed Execution — Noetfield Systems",
+      "title": "AI Motors for Governed Execution \u2014 Noetfield Systems",
       "description": "What an AI Motor is, how it coordinates models, agents, tools, policy and human authority, and how it verifies, escalates, recovers and records outcomes."
     },
     "/investors/": {
-      "title": "Ecosystem & Investors — Noetfield Systems",
+      "title": "Ecosystem & Investors \u2014 Noetfield Systems",
       "description": "Review Noetfield products, infrastructure, current evidence boundaries and the next commissioning stage."
     },
     "/invest/": {
-      "title": "Private Investor Materials — Noetfield Systems Inc.",
+      "title": "Private Investor Materials \u2014 Noetfield Systems Inc.",
       "description": "Access-controlled investor materials for verified parties. This route is not a public securities offering or solicitation."
     },
     "/proof/": {
-      "title": "Proof & Public Evidence — Noetfield Systems",
+      "title": "Proof & Public Evidence \u2014 Noetfield Systems",
       "description": "Inspect current Noetfield systems, verified states, evidence boundaries and public execution receipts."
     },
     "/frontier-systems/": {
-      "title": "Frontier Systems — Noetfield Systems",
+      "title": "Frontier Systems \u2014 Noetfield Systems",
       "description": "A founding-counterpart path for governed execution and institutional AI infrastructure, beginning with bounded shared work."
     },
     "/frontier-systems/memo/": {
-      "title": "Frontier Systems Collaboration Memo — Noetfield",
+      "title": "Frontier Systems Collaboration Memo \u2014 Noetfield",
       "description": "Mutual discovery, bounded technical work and long-term alignment before role, title or ownership discussions."
     },
     "/trust-brief/intake/": {
-      "title": "Enterprise Intake — Noetfield Systems",
+      "title": "Enterprise Intake \u2014 Noetfield Systems",
       "description": "Start a non-confidential intake for a governed AI pilot, Trust Brief or institutional workflow assessment."
+    },
+    "/runways/": {
+      "title": "Noetfield Runways \u2014 From goal to accepted output",
+      "description": "Noetfield Runways: governed agentic execution from goal to accepted output\u2014or a documented safe stop. Versioned runways, policy gates, separate verification, bounded repair, and receipts."
+    },
+    "/gel/": {
+      "title": "Noetfield GEL \u2014 Governance Execution Layer",
+      "description": "GEL is the control layer inside Noetfield Motors: policy before execution, receipts after, with deterministic controls around consequential AI work."
+    },
+    "/deterministic-api/": {
+      "title": "Noetfield API \u2014 Schema-valid engine endpoint",
+      "description": "Noetfield API is an OpenAI-compatible engine endpoint. Responses leave only when JSON schemas and tool calls are valid\u2014or the call fails closed. Change one base_url line. Starter credits available."
+    },
+    "/research-packs/": {
+      "title": "Research packs \u2014 Governed commercial research \u2014 Noetfield",
+      "description": "Buy Vendor Decision Briefs, KPI packs, and RFP responses as governed commercial research packs on Noetfield \u2014 with downloadable deliverables and accept/reject gates."
     }
   },
   "source_sync_routes": [
