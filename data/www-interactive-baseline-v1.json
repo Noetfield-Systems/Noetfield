@@ -1,8 +1,8 @@
 {
   "schema": "www-interactive-baseline-v1",
-  "version": "1.2.0",
-  "authority": "INCIDENT-2026-07-06-001-www-sandbox-downgrade + NF-WEB-001 corporate entry",
-  "updated_at": "2026-07-16T10:28:00Z",
+  "version": "1.3.0",
+  "authority": "INCIDENT-2026-07-06-001-www-sandbox-downgrade + NF-WEB-001 corporate entry + narrative P2 demotion",
+  "updated_at": "2026-07-23T03:05:00Z",
   "live_sandbox_ssot": {
     "governance_workspace_public": "https://www.noetfield.com/workspace",
     "governance_workspace_local": "http://localhost:13080/workspace",
@@ -33,7 +33,8 @@
       "min_bytes": 1500,
       "required_markers": [
         "nf-corp",
-        "/enterprise/",
+        "/motors/",
+        "/runways/",
         "/investors/",
         "/proof/"
       ]

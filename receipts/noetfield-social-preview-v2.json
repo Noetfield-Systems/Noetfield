@@ -50,8 +50,8 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 68,
-  "noindex_route_count": 78,
+  "indexable_route_count": 60,
+  "noindex_route_count": 86,
   "route_count": 146,
   "routes": [
     {
@@ -648,10 +648,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/deterministic-api/",
-      "description": "Noetfield API is an OpenAI-compatible engine endpoint. Responses leave only when JSON schemas and tool calls are valid\u2014or the call fails closed. Change one base_url line. Starter credits available.",
+      "description": "Specialized engine-endpoint lane. Schema-valid API surface \u2014 not the primary company definition. See AI Motors for the company narrative.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -659,8 +659,8 @@
       },
       "profile": "corporate",
       "route": "/deterministic-api/",
-      "title": "Noetfield API \u2014 Schema-valid engine endpoint",
-      "verdict": "PASS"
+      "title": "Specialized lane \u2014 Deterministic API \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/directory/",
@@ -728,10 +728,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/enterprise/",
-      "description": "Explore Noetfield enterprise systems for governed application production, agent transformation and verifiable institutional execution.",
+      "description": "Specialized enterprise commercial lane \u2014 see AI Motors for the company narrative. Copilot Governance Pack, Trust Brief, and sandbox paths remain available here.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -739,8 +739,8 @@
       },
       "profile": "enterprise",
       "route": "/enterprise/",
-      "title": "Governed AI Enterprise Systems \u2014 Noetfield",
-      "verdict": "PASS"
+      "title": "Legacy commercial lane \u2014 Enterprise \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/ex/",
@@ -1368,10 +1368,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/gel/",
-      "description": "GEL is the control layer inside Noetfield Motors: policy before execution, receipts after, with deterministic controls around consequential AI work.",
+      "description": "Specialized Governance Execution Layer lane inside Motors. Canonical company narrative: AI Motors \u00b7 Runways \u00b7 Proof \u00b7 Company \u00b7 Contact.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1379,8 +1379,8 @@
       },
       "profile": "corporate",
       "route": "/gel/",
-      "title": "Noetfield GEL \u2014 Governance Execution Layer",
-      "verdict": "PASS"
+      "title": "Specialized lane \u2014 GEL \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/governance/",
@@ -1416,10 +1416,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/intelligence/",
-      "description": "Noetfield Intelligence \u2014 Diagnostic Sprint, Automation Build, and AI Ops Partner for Canadian SMEs. Governed automation with board-grade receipts when you need proof.",
+      "description": "Legacy SME consulting lane (Diagnostic Sprint and related offers). See AI Motors for the company narrative.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1427,8 +1427,8 @@
       },
       "profile": "enterprise",
       "route": "/intelligence/",
-      "title": "Noetfield Intelligence \u2014 AI consulting for Canadian SMEs",
-      "verdict": "PASS"
+      "title": "Specialized lane \u2014 Intelligence \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/intelligence/intake/",
@@ -1464,10 +1464,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/investor-workflows/",
-      "description": "Evidence-based audits for investors \u2014 Noetfield Systems Inc.",
+      "description": "Specialized investor-workflow product lane \u2014 evidence-based diligence workflows. Not the primary company definition. See AI Motors \u00b7 Runways \u00b7 Proof.",
       "image_sha256": "6a6fce45cfbec7cc22c286e7073ab95af8143826022125541831888e6c93216c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-investors-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1475,8 +1475,8 @@
       },
       "profile": "investors",
       "route": "/investor-workflows/",
-      "title": "Investor Workflows \u2014 Noetfield Systems",
-      "verdict": "PASS"
+      "title": "Specialized lane \u2014 Investor Workflows \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/investors/diligence/",
@@ -1576,10 +1576,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/next/",
-      "description": "Next steps for buyers, investors, partners, and ops \u2014 sandbox to board PDF, diligence vault to shadow brief, intake go-live checklist.",
+      "description": "Legacy buyer-paths hub. Canonical company narrative: AI Motors \u00b7 Runways \u00b7 Proof \u00b7 Company \u00b7 Contact.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1587,8 +1587,8 @@
       },
       "profile": "corporate",
       "route": "/next/",
-      "title": "Noetfield \u2014 Next Steps",
-      "verdict": "PASS"
+      "title": "Specialized lane \u2014 Next steps hub \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/partners/",
@@ -1816,10 +1816,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/pricing/",
-      "description": "Published tiers: free developer sandbox, Copilot Governance Pack, Trust Brief and Bank Pilot contract SKUs.",
+      "description": "Legacy pricing & packaging lane for published SKUs. Canonical company narrative: AI Motors \u00b7 Runways \u00b7 Proof \u00b7 Company \u00b7 Contact.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1827,8 +1827,8 @@
       },
       "profile": "enterprise",
       "route": "/pricing/",
-      "title": "Noetfield \u2014 Pricing & Packaging",
-      "verdict": "PASS"
+      "title": "Specialized lane \u2014 Pricing & packaging \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/privacy/",
@@ -1928,10 +1928,10 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/research-packs/",
-      "description": "Buy Vendor Decision Briefs, KPI packs, and RFP responses as governed commercial research packs on Noetfield \u2014 with downloadable deliverables and accept/reject gates.",
+      "description": "Specialized commercial research packs lane. See Runways and AI Motors for the company narrative.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1939,8 +1939,8 @@
       },
       "profile": "corporate",
       "route": "/research-packs/",
-      "title": "Research packs \u2014 Governed commercial research \u2014 Noetfield",
-      "verdict": "PASS"
+      "title": "Specialized lane \u2014 Research packs \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/research-packs/privacy.html",
@@ -2056,7 +2056,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/runways/",
-      "description": "Noetfield Runways: governed agentic execution from goal to accepted output\u2014or a documented safe stop. Versioned runways, policy gates, separate verification, bounded repair, and receipts.",
+      "description": "Governed qualification paths from goal to accepted output\u2014or a documented safe stop. Three public runways: Governed Software Change, Decision Brief, and Institutional Workflow Commissioning.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -2067,7 +2067,7 @@
       },
       "profile": "corporate",
       "route": "/runways/",
-      "title": "Noetfield Runways \u2014 From goal to accepted output",
+      "title": "Noetfield Runways \u2014 Governed qualification paths",
       "verdict": "PASS"
     },
     {

@@ -3040,7 +3040,7 @@ def main() -> None:
           "Developer sandbox: sign up, try Governance API and workspace without a sales call. 14-day trial, 50 evaluate calls.",
           "/start/", start_page_body())
 
-    write("pricing/index.html", "Noetfield — Pricing &amp; Packaging",
+    write("pricing/index.html", "Specialized lane — Pricing &amp; packaging — Noetfield",
           "Published tiers: free developer sandbox, Copilot Governance Pack, Trust Brief and Bank Pilot contract SKUs.",
           "/pricing/", pricing_page_body())
 
@@ -3148,7 +3148,7 @@ def main() -> None:
         write(rel, title, desc, canon,
               hub_page(kick, eye, h1, lead, badges, actions, [], side, extra))
 
-    write("enterprise/index.html", "Noetfield Enterprise — Copilot Governance Evidence for Regulated Organizations",
+    write("enterprise/index.html", "Legacy commercial lane — Enterprise — Noetfield",
           "For CCO, CRO, CISO, CTO, procurement, and board teams approving Microsoft 365 Copilot. Paid pilots from $2k-10k.",
           "/enterprise/",
           hub_page("Enterprise · Banks · Regulated institutions", "Institutional buyers",
@@ -3595,7 +3595,7 @@ def main() -> None:
               ("/investors/", "Investor brief"),
           ))
 
-    write("next/index.html", "Noetfield — Next Steps",
+    write("next/index.html", "Specialized lane — Next steps hub — Noetfield",
           "Next steps for buyers, investors, partners, and ops — sandbox to board PDF, diligence vault to shadow brief, intake go-live checklist.",
           "/next/",
           next_steps_page_body())

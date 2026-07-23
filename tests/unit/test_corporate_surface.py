@@ -206,6 +206,7 @@ def test_corporate_primary_nav_is_advisor_consistent() -> None:
         ROOT / "motors" / "index.html",
         ROOT / "about" / "index.html",
         ROOT / "investors" / "index.html",
+        ROOT / "runways" / "index.html",
     ):
         text = read(path)
         nav_match = re.search(
@@ -230,15 +231,20 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert 'class="nf-corp-footer"' in text
     assert '<a href="/runways/" aria-current="page">Runways</a>' in text
     assert "From goal to accepted output—or a documented safe stop." in text
-    assert "Agents perform bounded work. Runways define how the result qualifies." in text
+    assert "Bounded workers perform scoped work. Runways define how the result qualifies." in text
     assert "The models may be probabilistic. The runway is controlled." in text
     assert "Evidence before claims." in text
+    assert "Three public runways" in text
+    assert "Governed Software Change" in text
+    assert "Institutional Workflow Commissioning" in text
+    assert "Additional / planned / internal paths" in text
     assert "Trading Performance" in text
     assert "Video Qualify" in text
     assert "Commissioning Specialist" in text
     assert "Software Repair" in text
     assert text.count("<h1") == 1
     assert 'href="/assets/noetfield-runways-v1.css?v=3"' in text
+    assert "agentic" not in text.lower()
     for forbidden in (
         "Ruflo",
         "CrewAI",
@@ -252,11 +258,54 @@ def test_runways_page_is_honest_product_surface() -> None:
         "staging Motor",
     ):
         assert forbidden not in text, forbidden
-    assert 'href="/contact/?topic=enterprise-governance"' in text
+    assert 'href="/contact/?topic=governed-motor"' in text
     assert 'href="/contact/?topic=pilot-client"' in text
     assert 'href="/runways/decision-brief/"' in text
     assert 'id="rw-dispatch-btn"' in text
     assert 'fetch("/api/runway/jobs"' in text
+    assert 'href="/enterprise/"' not in text
+    assert 'href="/research-packs/"' not in text
+    assert 'href="/investor-workflows/"' not in text
+
+
+def test_runways_primary_nav_matches_homepage() -> None:
+    text = read(ROOT / "runways" / "index.html")
+    nav_match = re.search(
+        r'<nav class="nf-corp-nav" aria-label="Primary navigation">(.*?)</nav>',
+        text,
+        flags=re.DOTALL,
+    )
+    assert nav_match
+    nav = nav_match.group(1)
+    expected = (
+        'href="/motors/"',
+        'href="/runways/"',
+        'href="/proof/"',
+        'href="/about/"',
+        'href="/contact/?topic=pilot-client">Contact</a>',
+    )
+    positions = [nav.index(item) for item in expected]
+    assert positions == sorted(positions)
+
+
+def test_legacy_identity_pages_are_demoted() -> None:
+    legacy = (
+        "enterprise",
+        "pricing",
+        "intelligence",
+        "deterministic-api",
+        "research-packs",
+        "investor-workflows",
+        "gel",
+        "next",
+    )
+    for slug in legacy:
+        text = read(ROOT / slug / "index.html")
+        assert '<meta name="robots" content="noindex,nofollow" />' in text, slug
+        assert "nf-legacy-lane-banner" in text, slug
+        assert 'href="/motors/"' in text, slug
+        assert 'href="/runways/"' in text, slug
+        assert "index,follow" not in text or "noindex,nofollow" in text, slug
 
 
 def test_homepage_footer_links_to_runways_and_trust() -> None:
@@ -269,6 +318,24 @@ def test_homepage_footer_links_to_runways_and_trust() -> None:
     assert 'href="/deterministic-api/"' not in text
     assert 'href="/enterprise/"' not in text
     assert 'href="/investor-workflows/"' not in text
+
+
+def test_corporate_footers_do_not_promote_legacy_systems() -> None:
+    for rel in ("about/index.html", "investors/index.html", "motors/index.html", "runways/index.html"):
+        text = read(ROOT / rel)
+        footer_match = re.search(
+            r'<footer class="nf-corp-footer">(.*?)</footer>',
+            text,
+            flags=re.DOTALL,
+        )
+        assert footer_match, rel
+        footer = footer_match.group(1)
+        assert 'href="/enterprise/"' not in footer, rel
+        assert 'href="/investor-workflows/"' not in footer, rel
+        assert 'href="/deterministic-api/"' not in footer, rel
+        assert 'href="/research-packs/"' not in footer, rel
+        assert 'href="/motors/"' in footer, rel
+        assert 'href="/runways/"' in footer, rel
 
 
 def test_corporate_homepage_nav_has_no_deploy_tab() -> None:
