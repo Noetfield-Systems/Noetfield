@@ -52,7 +52,7 @@ check_file "protected corporate homepage" index.html \
   'Custom AI Motors' 'Enterprise AI Governance' \
   'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
   'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
-  'TrustField' 'href="https://trustfield.ca/"' 'Canadian payments compliance operations' \
+  'TrustField' 'href="https://trustfield.ca/"' 'Canadian compliance workflow' \
   'No customers, revenue, installations or external traction are claimed' 'Investor Workflows' \
   'Evidence &amp; proof' 'What Noetfield is seeking' 'Founder &amp; company' \
   'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
@@ -169,7 +169,7 @@ check_file "about corporate positioning and TrustField product boundary" about/i
 check_file "homepage TrustField portfolio card" index.html \
   '<h3>TrustField</h3>' 'href="https://trustfield.ca/"' \
   'Live product surface · case study planned' \
-  'Canadian payments compliance operations' \
+  'Canadian compliance workflow' \
   'A Noetfield Systems Inc. product'
 
 # Homepage IA compression — ≤8 top-level sections (U5 v17)

@@ -25,7 +25,7 @@ Noetfield is not a single product. The corporate surface presents the following 
 | **Enterprise AI Governance** | **Demonstrated · client-zero** | Public internal demonstrations and evidence exist; no external enterprise deployment is claimed. |
 | **SourceA** | **Live product surface · case study planned** | Noetfield’s professional governed-execution product and infrastructure. No external-client proof is claimed yet. |
 | **SourceB** | **Live commercial service · case study planned** | SourceB.ca is a live multilingual service with an operating lead path. No customers, revenue, installations or external traction are claimed. |
-| **TrustField** | **Live product surface · case study planned** | TrustField.ca is a live Canadian payments compliance operations surface (MSBs, fintechs, PSPs) and a Noetfield Systems Inc. product. No customers, revenue, or external traction are claimed beyond the live surface. |
+| **TrustField** | **Live product surface · case study planned** | TrustField.ca is a live Canadian compliance workflow surface for governed workflow setup and operations (MSBs, fintechs, PSPs) and a Noetfield Systems Inc. product. No customers, revenue, or external traction are claimed beyond the live surface. |
 | **Investor Workflows** | **Demonstrated internally** | Evidence-oriented investment and company-evaluation workflows exist; independent external validation remains open. |
 
 TrustField is presented as a **Noetfield Systems Inc. product** with a live public surface at trustfield.ca. Portfolio copy may link to that surface; this repo still must not host TrustField implementation code.
