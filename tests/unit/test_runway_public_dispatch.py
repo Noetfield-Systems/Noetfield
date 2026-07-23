@@ -32,10 +32,12 @@ def test_public_dispatch_module_locks_allowlist_and_hmac_path() -> None:
 
 def test_runways_page_exposes_dual_cta_paths() -> None:
     text = (ROOT / "runways" / "index.html").read_text(encoding="utf-8")
-    assert 'href="/contact/?topic=enterprise-governance"' in text
+    assert 'href="/contact/?topic=governed-motor"' in text
     assert 'id="rw-dispatch-btn"' in text
     assert "/api/runway/jobs" in text
     assert 'href="/runways/decision-brief/"' in text
+    assert "Three public runways" in text
+    assert 'href="/contact/?topic=enterprise-governance"' not in text
 
 
 def test_decision_brief_buyer_page_exists() -> None:
