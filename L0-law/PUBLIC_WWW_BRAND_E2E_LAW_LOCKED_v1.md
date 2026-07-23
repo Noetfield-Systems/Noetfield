@@ -27,7 +27,7 @@ www.noetfield.com presents **one company narrative**: Noetfield builds governed 
 - Current proof: P05-class **client-zero commissioning focus** only — link to `/proof/` for published evidence. Do **not** invent P05 SHAs, witness runs, or PASS_P05 claims on `/`.
 - Runways featured (three): Governed Software Change · Decision Brief · Institutional Workflow Commissioning
 - Vertical: TrustField only (workflow-first compliance setup/operations at trustfield.ca) — not SourceA/SourceB/Investor Workflows equal cards
-- Nav: AI Motors · Runways · Proof · Company · Contact
+- Nav: AI Motors · Runways · Proof · Company · Deploy (`https://app.noetfield.com/`) · Contact
 - Footer: Investors · Trust & Security · Privacy · Proof · Evidence before claims
 
 Portfolio detail for SourceA / SourceB / Investor Workflows may remain on About / Investors with honest status labels. It is **not** required as six equal homepage cards.
@@ -109,7 +109,7 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 ### Copy smoke (corporate homepage + enterprise + pilot)
 
-- Homepage (corporate entry): `nf-corp`, one company narrative, AI Motors / Runways / Proof / TrustField vertical, `/motors/`, `/runways/`, `/proof/`, `/investors/`, `/trust/`, `/privacy/`
+- Homepage (corporate entry): `nf-corp`, one company narrative, AI Motors / Runways / Proof / TrustField vertical, `/motors/`, `/runways/`, `/proof/`, `/investors/`, `/trust/`, `/privacy/`, and a header/footer Deploy path to `https://app.noetfield.com/`
 - Homepage **forbidden**: `/invest/`, “Invest in Noetfield”, SourceA/SourceB/Investor Workflows equal cards, invented P05 SHAs/PASS_P05, unsupported traction claims
 - Enterprise field: Apply for pilot, Request Trust Brief, Start sandbox
 - Pilot: nfPilotApplyForm, Copilot Governance Pack, tamper-evident

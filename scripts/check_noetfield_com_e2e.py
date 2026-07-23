@@ -36,6 +36,7 @@ HOME_NEEDLES = (
     "/investors/",
     "/trust/",
     "/privacy/",
+    'href="https://app.noetfield.com/">Deploy</a>',
 )
 
 # Explicitly forbidden on the public corporate homepage.

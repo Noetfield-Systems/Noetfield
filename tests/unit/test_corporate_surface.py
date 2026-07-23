@@ -193,12 +193,13 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
 
 
 def test_corporate_primary_nav_is_advisor_consistent() -> None:
-    """Shared corporate headers keep AI Motors · Runways · Proof · Company · Contact."""
+    """Shared corporate headers keep the company IA plus its live app entry."""
     expected = (
         'href="/motors/"',
         'href="/runways/"',
         'href="/proof/"',
         'href="/about/"',
+        'href="https://app.noetfield.com/">Deploy</a>',
         'href="/contact/?topic=pilot-client">Contact</a>',
     )
     for path in (
@@ -220,7 +221,6 @@ def test_corporate_primary_nav_is_advisor_consistent() -> None:
         assert positions == sorted(positions), path
         assert 'href="/#capabilities"' not in nav, path
         assert 'href="/deterministic-api/"' not in nav, path
-        assert ">Deploy</a>" not in nav, path
         assert ">Ecosystem</a>" not in nav, path
         assert ">Capabilities</a>" not in nav, path
 
@@ -282,6 +282,7 @@ def test_runways_primary_nav_matches_homepage() -> None:
         'href="/runways/"',
         'href="/proof/"',
         'href="/about/"',
+        'href="https://app.noetfield.com/">Deploy</a>',
         'href="/contact/?topic=pilot-client">Contact</a>',
     )
     positions = [nav.index(item) for item in expected]
@@ -338,9 +339,9 @@ def test_corporate_footers_do_not_promote_legacy_systems() -> None:
         assert 'href="/runways/"' in footer, rel
 
 
-def test_corporate_homepage_nav_has_no_deploy_tab() -> None:
-    """Advisor primary nav removes Deploy / Capabilities from the corporate shell."""
-    for path in (*PAGES, ROOT / "motors" / "index.html"):
+def test_corporate_nav_and_footer_link_to_live_app() -> None:
+    """Every corporate route keeps one visible Deploy path in header and footer."""
+    for path in (*PAGES, ROOT / "motors" / "index.html", ROOT / "runways" / "index.html"):
         text = read(path)
         nav_match = re.search(
             r'<nav class="nf-corp-nav" aria-label="Primary navigation">(.*?)</nav>',
@@ -349,8 +350,26 @@ def test_corporate_homepage_nav_has_no_deploy_tab() -> None:
         )
         assert nav_match, path
         nav = nav_match.group(1)
-        assert ">Deploy</a>" not in nav, path
+        assert nav.count('href="https://app.noetfield.com/">Deploy</a>') == 1, path
+        footer_match = re.search(
+            r'<footer class="nf-corp-footer">(.*?)</footer>',
+            text,
+            flags=re.DOTALL,
+        )
+        assert footer_match, path
+        assert 'href="https://app.noetfield.com/">Deploy</a>' in footer_match.group(1), path
         assert 'href="/#capabilities"' not in nav, path
+
+
+def test_deploy_tab_is_not_hidden_by_mobile_navigation_rules() -> None:
+    css = read(ROOT / "assets" / "noetfield-corporate-v1.css")
+    assert ".nf-corp-nav__deploy {" in css
+    assert "white-space: nowrap;" in css
+    assert not re.search(
+        r"\.nf-corp-nav__deploy\s*\{[^}]*display\s*:\s*none",
+        css,
+        flags=re.DOTALL,
+    )
 
 
 def test_every_public_contact_topic_has_a_select_option() -> None:

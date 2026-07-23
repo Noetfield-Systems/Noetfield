@@ -56,6 +56,7 @@ check_file "protected corporate homepage" index.html \
   'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
   'href="/motors/"' 'href="/runways/"' 'href="/about/"' 'href="/proof/"' \
   'href="/investors/"' 'href="/trust/"' 'href="/privacy/"' \
+  'href="https://app.noetfield.com/">Deploy</a>' \
   '/assets/noetfield-corporate-v1.css?v=2'
 check_absent "protected homepage has no private or unsupported conversion" index.html \
   'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield'
@@ -172,6 +173,11 @@ check_file "homepage TrustField vertical" index.html \
   'TrustField — compliance workflow operations.' 'href="https://trustfield.ca/"' \
   'compliance workflow setup and operations' \
   'A Noetfield Systems Inc. product'
+
+for corporate_page in index.html about/index.html investors/index.html motors/index.html runways/index.html; do
+  check_file "corporate app entry on ${corporate_page}" "$corporate_page" \
+    'href="https://app.noetfield.com/">Deploy</a>'
+done
 
 # Homepage IA compression — ≤8 top-level sections (U5 v17)
 section_count="$(grep -c '<section' index.html || true)"
