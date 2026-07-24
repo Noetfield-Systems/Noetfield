@@ -1,5 +1,5 @@
 {
-  "schema": "noetfield.deterministic-api-catalog.v1.3",
+  "schema": "noetfield.deterministic-api-catalog.v1.4",
   "product_id": "nf-deterministic-api",
   "product_name": "Noetfield API",
   "brand": "Noetfield",
@@ -50,6 +50,21 @@
     "before": "https://api.openai.com/v1",
     "after": "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1",
     "sdk_note": "Keep OpenAI SDK for chat. Use POST /v1/tasks for deterministic webpage repair."
+  },
+  "models": {
+    "standard": {
+      "id": "noetfield-deterministic",
+      "lane": "standard",
+      "note": "Cheap flash matrix. Default for general chat."
+    },
+    "coding_pro": {
+      "id": "noetfield-coding-pro",
+      "lane": "coding_pro",
+      "enable": "Workspace → Enable Coding Pro, then set model=noetfield-coding-pro",
+      "stack": "Deterministic planner + parallel cheap workers → DeepSeek chat → GLM → Kimi code → HF coder",
+      "client_markup": 4,
+      "note": "Same base_url + key. Higher per-token rate for coding quality."
+    }
   },
   "referral": {
     "credit_usd": 10,
