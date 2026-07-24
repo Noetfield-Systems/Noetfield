@@ -11,6 +11,7 @@ on:
       - "api/**"
       - "assets/**"
       - "data/noetfield-social-preview-v2.json"
+      - "deterministic-api/**"
       - "favicon.ico"
       - "functions/**"
       - "gate/**/*.pdf"
