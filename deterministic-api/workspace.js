@@ -277,6 +277,48 @@
     }
     renderKeys(ws.keys || []);
 
+    const planKicker = $("#plan-kicker");
+    const planStatus = $("#plan-status");
+    const codingSnippet = $("#coding-pro-snippet");
+    const dropIn = $("#drop-in-code");
+
+    function renderPlan(planId, workspace) {
+      const id = planId || (workspace && workspace.product_plan) || "standard";
+      if (planKicker) planKicker.textContent = id === "coding_pro" ? "coding_pro" : "standard";
+      if (codingSnippet) codingSnippet.hidden = id !== "coding_pro";
+      if (dropIn) {
+        const model = id === "coding_pro" ? "noetfield-coding-pro" : "noetfield-deterministic";
+        dropIn.textContent =
+          'base_url = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1"\n' +
+          'api_key  = "sk-nf-…"\n' +
+          `model    = "${model}"`;
+      }
+    }
+    renderPlan(ws.product_plan, ws);
+
+    async function setPlan(product_plan) {
+      setStatus(planStatus, product_plan === "coding_pro" ? "Enabling Coding Pro…" : "Switching to Standard…");
+      const { res: pRes, data: pData } = await api("/v1/customer/plan", {
+        method: "POST",
+        body: JSON.stringify({ product_plan }),
+      });
+      if (!pRes.ok || !pData.ok) {
+        setStatus(planStatus, errMsg(pData, "Could not update plan"), "is-error");
+        return;
+      }
+      renderPlan(pData.product_plan, null);
+      setStatus(
+        planStatus,
+        pData.product_plan === "coding_pro"
+          ? "Coding Pro on — use model noetfield-coding-pro (~4× token rate)."
+          : "Standard lane active — model noetfield-deterministic.",
+        "is-ok",
+      );
+    }
+
+    $("#enable-coding-pro-btn")?.addEventListener("click", () => setPlan("coding_pro"));
+    $("#use-standard-btn")?.addEventListener("click", () => setPlan("standard"));
+
     const newKey = $("#api-newkey");
     const newKeyTools = $("#api-newkey-tools");
     const keyStatus = $("#key-status");
