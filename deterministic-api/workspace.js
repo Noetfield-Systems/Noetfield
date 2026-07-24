@@ -2,11 +2,11 @@
 (function () {
   const API = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev";
   const SESSION_KEY = "nf_dapi_session";
+  let lastRawKey = "";
 
   function $(sel) {
     return document.querySelector(sel);
   }
-
 
   function errMsg(data, fallback) {
     if (!data) return fallback;
@@ -21,6 +21,7 @@
     if (!el) return;
     el.textContent = msg || "";
     el.classList.toggle("is-error", kind === "is-error");
+    el.classList.toggle("is-ok", kind === "is-ok");
   }
 
   function getSession() {
@@ -72,6 +73,33 @@
       el.onerror = () => reject(new Error("Could not load Google sign-in"));
       document.head.appendChild(el);
     });
+  }
+
+  async function copyText(text) {
+    if (!text) return false;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch {
+      /* fall through */
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch {
+      ok = false;
+    }
+    document.body.removeChild(ta);
+    return ok;
   }
 
   async function signInWithGoogle(cfg, statusEl) {
@@ -211,6 +239,8 @@
     }
     const emailEl = $("#user-email");
     if (emailEl) emailEl.textContent = me.user?.email || "";
+    const live = $("#live-chip");
+    if (live) live.hidden = false;
 
     $("#signout-btn")?.addEventListener("click", async () => {
       await api("/v1/customer/signout", { method: "POST", body: "{}" });
@@ -228,15 +258,19 @@
     const bal = $("#api-balance");
     if (bal) bal.textContent = `$${(typeof ws.balance_usd === "number" ? ws.balance_usd : 0).toFixed(2)}`;
     const tenant = $("#api-tenant");
-    if (tenant) tenant.textContent = ws.tenant_id ? `Tenant ${ws.tenant_id}` : "";
+    if (tenant) tenant.textContent = ws.tenant_id ? `tenant ${ws.tenant_id}` : "";
+
     const keysEl = $("#api-keys");
+    const keyCount = $("#key-count");
     function renderKeys(keys) {
+      const list = keys || [];
+      if (keyCount) keyCount.textContent = `${list.length} active`;
       if (!keysEl) return;
-      keysEl.innerHTML = keys.length
-        ? keys
+      keysEl.innerHTML = list.length
+        ? list
             .map(
               (k) =>
-                `<div class="dapi-key-row"><code>${escapeHtml(k.key_hash_prefix)}…</code> <span class="dapi-muted">${escapeHtml(k.status)}</span></div>`,
+                `<div class="dapi-key-row"><code>${escapeHtml(k.key_hash_prefix)}…</code> <span class="dapi-pill">${escapeHtml(k.status || "active")}</span></div>`,
             )
             .join("")
         : '<p class="dapi-muted">No keys yet. Generate one below — only while signed in.</p>';
@@ -244,22 +278,40 @@
     renderKeys(ws.keys || []);
 
     const newKey = $("#api-newkey");
+    const newKeyTools = $("#api-newkey-tools");
     const keyStatus = $("#key-status");
-    $("#generate-key-btn")?.addEventListener("click", async () => {
+    const genBtn = $("#generate-key-btn");
+
+    $("#copy-key-btn")?.addEventListener("click", async () => {
+      const ok = await copyText(lastRawKey);
+      setStatus(keyStatus, ok ? "Key copied to clipboard." : "Could not copy — select the key manually.", ok ? "is-ok" : "is-error");
+    });
+
+    $("#copy-dropin-btn")?.addEventListener("click", async () => {
+      const code = ($("#drop-in-code")?.textContent || "").trim();
+      const ok = await copyText(code);
+      setStatus(status, ok ? "Snippet copied." : "Could not copy snippet.", ok ? "is-ok" : "is-error");
+    });
+
+    genBtn?.addEventListener("click", async () => {
+      genBtn.disabled = true;
       setStatus(keyStatus, "Generating API key…");
       const { res: kRes, data: kData } = await api("/v1/customer/keys", {
         method: "POST",
         body: "{}",
       });
+      genBtn.disabled = false;
       if (!kRes.ok || !kData.ok || !kData.api_key) {
         setStatus(keyStatus, errMsg(kData, "Could not generate API key"), "is-error");
         return;
       }
-      setStatus(keyStatus, "Key created — copy it now. It will not be shown again.");
+      lastRawKey = kData.api_key;
+      setStatus(keyStatus, "Key created — copy it now. It will not be shown again.", "is-ok");
       if (newKey) {
         newKey.hidden = false;
         newKey.textContent = `New API key (copy now):\n${kData.api_key}`;
       }
+      if (newKeyTools) newKeyTools.hidden = false;
       const { res: wRes, data: wData } = await api("/v1/customer/workspace");
       if (wRes.ok && wData.ok) renderKeys((wData.workspace || {}).keys || []);
     });
