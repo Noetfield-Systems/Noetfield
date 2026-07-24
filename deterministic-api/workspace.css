@@ -625,6 +625,24 @@ a:hover { color: var(--ink); }
   background: #f7fafb;
   font-size: 0.9rem;
 }
+.dapi-key-row--full {
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.dapi-key-secret {
+  flex: 1 1 14rem;
+  min-width: 0;
+  word-break: break-all;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+.dapi-key-row__actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  align-items: center;
+}
 .dapi-key-row code {
   font-family: var(--mono);
   font-size: 0.82rem;
