@@ -151,13 +151,6 @@
         return;
       }
       setSession(data.session_token);
-      if (data.api_key) {
-        try {
-          sessionStorage.setItem("nf_dapi_new_key", data.api_key);
-        } catch {
-          /* ignore */
-        }
-      }
       const next = new URLSearchParams(location.search).get("next") || "/deterministic-api/workspace/";
       location.href = next.startsWith("/") ? next : "/deterministic-api/workspace/";
     });
@@ -237,8 +230,8 @@
     const tenant = $("#api-tenant");
     if (tenant) tenant.textContent = ws.tenant_id ? `Tenant ${ws.tenant_id}` : "";
     const keysEl = $("#api-keys");
-    if (keysEl) {
-      const keys = ws.keys || [];
+    function renderKeys(keys) {
+      if (!keysEl) return;
       keysEl.innerHTML = keys.length
         ? keys
             .map(
@@ -246,22 +239,30 @@
                 `<div class="dapi-key-row"><code>${escapeHtml(k.key_hash_prefix)}…</code> <span class="dapi-muted">${escapeHtml(k.status)}</span></div>`,
             )
             .join("")
-        : '<p class="dapi-muted">No keys yet — a key is issued when your workspace is created.</p>';
+        : '<p class="dapi-muted">No keys yet. Generate one below — only while signed in.</p>';
     }
+    renderKeys(ws.keys || []);
+
     const newKey = $("#api-newkey");
-    if (newKey) {
-      let shown = ws.api_key || "";
-      try {
-        if (!shown) shown = sessionStorage.getItem("nf_dapi_new_key") || "";
-        if (shown) sessionStorage.removeItem("nf_dapi_new_key");
-      } catch {
-        /* ignore */
+    const keyStatus = $("#key-status");
+    $("#generate-key-btn")?.addEventListener("click", async () => {
+      setStatus(keyStatus, "Generating API key…");
+      const { res: kRes, data: kData } = await api("/v1/customer/keys", {
+        method: "POST",
+        body: "{}",
+      });
+      if (!kRes.ok || !kData.ok || !kData.api_key) {
+        setStatus(keyStatus, errMsg(kData, "Could not generate API key"), "is-error");
+        return;
       }
-      if (shown) {
+      setStatus(keyStatus, "Key created — copy it now. It will not be shown again.");
+      if (newKey) {
         newKey.hidden = false;
-        newKey.textContent = `New API key (copy now):\n${shown}`;
+        newKey.textContent = `New API key (copy now):\n${kData.api_key}`;
       }
-    }
+      const { res: wRes, data: wData } = await api("/v1/customer/workspace");
+      if (wRes.ok && wData.ok) renderKeys((wData.workspace || {}).keys || []);
+    });
 
     $("#topup-btn")?.addEventListener("click", async () => {
       setStatus(status, "Opening Stripe Checkout…");
