@@ -286,6 +286,28 @@
     const tenant = $("#api-tenant");
     if (tenant) tenant.textContent = ws.tenant_id || "";
 
+    function money(n) {
+      const v = typeof n === "number" && Number.isFinite(n) ? n : 0;
+      return `$${v.toFixed(2)}`;
+    }
+    function renderUsage(byLane) {
+      const std = byLane?.standard || {};
+      const pro = byLane?.coding_pro || {};
+      const stdUsd = $("#usage-standard-usd");
+      const proUsd = $("#usage-pro-usd");
+      const stdMeta = $("#usage-standard-meta");
+      const proMeta = $("#usage-pro-meta");
+      const stdModel = $("#usage-standard-model");
+      const proModel = $("#usage-pro-model");
+      if (stdUsd) stdUsd.textContent = money(std.charged_usd);
+      if (proUsd) proUsd.textContent = money(pro.charged_usd);
+      if (stdMeta) stdMeta.textContent = `${std.calls || 0} calls`;
+      if (proMeta) proMeta.textContent = `${pro.calls || 0} calls · ~4× rate`;
+      if (stdModel && std.model) stdModel.textContent = std.model;
+      if (proModel && pro.model) proModel.textContent = pro.model;
+    }
+    renderUsage(ws.usage_by_lane);
+
     const keysEl = $("#api-keys");
     const keyCount = $("#key-count");
     function renderKeys(keys) {
