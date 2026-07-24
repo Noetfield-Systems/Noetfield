@@ -664,7 +664,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/deterministic-api/signin/",
-      "description": "Explore Signin from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
+      "description": "Sign in to the Noetfield Deterministic API workspace.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "noindex",
       "noindex_reason": "source declares noindex",
@@ -680,7 +680,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/deterministic-api/workspace/",
-      "description": "Explore Workspace from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
+      "description": "Noetfield Deterministic API workspace \u2014 balance, keys, and Stripe top-up.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "noindex",
       "noindex_reason": "source declares noindex",
