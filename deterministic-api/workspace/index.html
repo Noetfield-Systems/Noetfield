@@ -68,40 +68,28 @@
         <div class="dapi-step__num" aria-hidden="true">1</div>
         <div class="dapi-step__body">
           <div class="dapi-step__title-row">
-            <h2>Your API key</h2>
+            <h2>API keys</h2>
             <span class="dapi-panel-kicker" id="key-count">No key</span>
           </div>
-          <p class="dapi-muted">Generate creates a real <code>sk-nf-…</code> secret (copy once). Delete removes a key you no longer want.</p>
+          <p class="dapi-muted">Generate adds a key. Copy any key here. Delete removes it.</p>
           <div id="api-keys" class="dapi-keys"></div>
           <div class="dapi-actions dapi-actions--inline">
             <button type="button" class="dapi-btn dapi-btn--primary" id="generate-key-btn">Generate</button>
           </div>
           <p class="dapi-status" id="key-status" role="status"></p>
-          <div class="dapi-secret" id="api-newkey-box" hidden>
-            <div class="dapi-secret__head">
-              <span>New API key — copy now</span>
-              <button type="button" class="dapi-btn dapi-btn--copy" id="copy-key-btn" data-copied-label="Copied">Copy key</button>
-            </div>
-            <code class="dapi-secret__value" id="api-newkey"></code>
-          </div>
         </div>
       </li>
 
       <li class="dapi-step">
         <div class="dapi-step__num" aria-hidden="true">2</div>
         <div class="dapi-step__body">
-          <h2>Copy credentials</h2>
-          <p class="dapi-muted">Paste these into your client. After you generate a key, it fills into the snippet automatically.</p>
+          <h2>Connect</h2>
+          <p class="dapi-muted">Base URL and model for your client. Use any API key from step 1.</p>
           <div class="dapi-creds">
             <div class="dapi-cred">
               <span class="dapi-cred__label">Base URL</span>
               <code class="dapi-cred__value" id="cred-base">https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1</code>
               <button type="button" class="dapi-btn dapi-btn--copy" data-copy-target="cred-base">Copy</button>
-            </div>
-            <div class="dapi-cred">
-              <span class="dapi-cred__label">API key</span>
-              <code class="dapi-cred__value" id="cred-key">Generate a key in step 1</code>
-              <button type="button" class="dapi-btn dapi-btn--copy" id="copy-cred-key-btn" data-copy-target="cred-key" disabled>Copy</button>
             </div>
             <div class="dapi-cred">
               <span class="dapi-cred__label">Model</span>

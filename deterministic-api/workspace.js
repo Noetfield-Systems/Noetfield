@@ -310,21 +310,49 @@
 
     const keysEl = $("#api-keys");
     const keyCount = $("#key-count");
+    let knownKeys = [];
+
+    function primaryKey() {
+      const withSecret = knownKeys.find((k) => k.api_key);
+      return withSecret?.api_key || lastRawKey || "";
+    }
+
     function renderKeys(keys) {
-      const list = (keys || []).filter((k) => (k.status || "active") === "active");
-      if (keyCount) keyCount.textContent = list.length ? `${list.length} key${list.length === 1 ? "" : "s"}` : "No key";
+      knownKeys = (keys || []).filter((k) => (k.status || "active") === "active");
+      if (keyCount) {
+        keyCount.textContent = knownKeys.length
+          ? `${knownKeys.length} key${knownKeys.length === 1 ? "" : "s"}`
+          : "No key";
+      }
       if (!keysEl) return;
-      keysEl.innerHTML = list.length
-        ? list
-            .map(
-              (k) =>
-                `<div class="dapi-key-row">` +
-                `<code>${escapeHtml(k.label || "sk-nf-…")}</code>` +
+      keysEl.innerHTML = knownKeys.length
+        ? knownKeys
+            .map((k) => {
+              const secret = k.api_key || "";
+              const shown = secret || k.label || "sk-nf-…";
+              const canCopy = Boolean(secret);
+              return (
+                `<div class="dapi-key-row dapi-key-row--full">` +
+                `<code class="dapi-key-secret">${escapeHtml(shown)}</code>` +
+                `<div class="dapi-key-row__actions">` +
+                (canCopy
+                  ? `<button type="button" class="dapi-btn dapi-btn--copy dapi-key-copy" data-copy="${escapeHtml(secret)}" data-copied-label="Copied">Copy</button>`
+                  : "") +
                 `<button type="button" class="dapi-btn dapi-btn--ghost dapi-key-delete" data-key-id="${escapeHtml(k.key_id || "")}">Delete</button>` +
-                `</div>`,
-            )
+                `</div></div>`
+              );
+            })
             .join("")
-        : '<p class="dapi-muted">No API keys yet.</p>';
+        : '<p class="dapi-muted">No API keys yet. Press Generate.</p>';
+
+      keysEl.querySelectorAll(".dapi-key-copy").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const text = btn.getAttribute("data-copy") || "";
+          const ok = await copyText(text);
+          if (ok) await flashCopied(btn);
+          setStatus(keyStatus, ok ? "Key copied." : "Could not copy.", ok ? "is-ok" : "is-error");
+        });
+      });
       keysEl.querySelectorAll(".dapi-key-delete").forEach((btn) => {
         btn.addEventListener("click", async () => {
           const keyId = btn.getAttribute("data-key-id") || "";
@@ -340,9 +368,13 @@
           }
           setStatus(keyStatus, "Key deleted.", "is-ok");
           const { res: wRes, data: wData } = await api("/v1/customer/workspace");
-          if (wRes.ok && wData.ok) renderKeys((wData.workspace || {}).keys || []);
+          if (wRes.ok && wData.ok) {
+            renderKeys((wData.workspace || {}).keys || []);
+            renderCredentials();
+          }
         });
       });
+      renderCredentials();
     }
     renderKeys(ws.keys || []);
 
@@ -351,9 +383,7 @@
     const dropIn = $("#drop-in-code");
     const curlEl = $("#curl-code");
     const credBase = $("#cred-base");
-    const credKey = $("#cred-key");
     const credModel = $("#cred-model");
-    const copyCredKeyBtn = $("#copy-cred-key-btn");
     let currentPlan = ws.product_plan || "standard";
 
     function modelForPlan(planId) {
@@ -361,18 +391,13 @@
     }
 
     function keyForSnippet() {
-      return lastRawKey || "sk-nf-…";
+      return primaryKey() || "sk-nf-…";
     }
 
     function renderCredentials() {
       const model = modelForPlan(currentPlan);
       if (credBase) credBase.textContent = BASE;
       if (credModel) credModel.textContent = model;
-      if (credKey) {
-        credKey.textContent = lastRawKey || "Generate a key in step 1";
-        credKey.classList.toggle("is-ready", Boolean(lastRawKey));
-      }
-      if (copyCredKeyBtn) copyCredKeyBtn.disabled = !lastRawKey;
       if (dropIn) {
         dropIn.textContent =
           `base_url = "${BASE}"\n` +
@@ -421,8 +446,6 @@
     $("#enable-coding-pro-btn")?.addEventListener("click", () => setPlan("coding_pro"));
     $("#use-standard-btn")?.addEventListener("click", () => setPlan("standard"));
 
-    const newKeyBox = $("#api-newkey-box");
-    const newKey = $("#api-newkey");
     const keyStatus = $("#key-status");
     const genBtn = $("#generate-key-btn");
 
@@ -431,20 +454,14 @@
         const id = btn.getAttribute("data-copy-target");
         const el = id ? document.getElementById(id) : null;
         const text = (el?.textContent || "").trim();
-        if (!text || text.startsWith("Generate a key")) {
-          setStatus(keyStatus, "Generate a key first.", "is-error");
+        if (!text) {
+          setStatus(keyStatus, "Nothing to copy.", "is-error");
           return;
         }
         const ok = await copyText(text);
         if (ok) await flashCopied(btn);
         setStatus(keyStatus, ok ? "Copied." : "Could not copy.", ok ? "is-ok" : "is-error");
       });
-    });
-
-    $("#copy-key-btn")?.addEventListener("click", async () => {
-      const ok = await copyText(lastRawKey);
-      if (ok) await flashCopied($("#copy-key-btn"));
-      setStatus(keyStatus, ok ? "Key copied." : "Could not copy — select the key manually.", ok ? "is-ok" : "is-error");
     });
 
     $("#copy-dropin-btn")?.addEventListener("click", async () => {
@@ -474,12 +491,13 @@
         return;
       }
       lastRawKey = String(kData.api_key);
-      renderCredentials();
-      if (newKey) newKey.textContent = lastRawKey;
-      if (newKeyBox) newKeyBox.hidden = false;
-      setStatus(keyStatus, "New API key ready below — copy it now.", "is-ok");
+      setStatus(keyStatus, "Key added — copy it from the list.", "is-ok");
       const { res: wRes, data: wData } = await api("/v1/customer/workspace");
-      if (wRes.ok && wData.ok) renderKeys((wData.workspace || {}).keys || []);
+      if (wRes.ok && wData.ok) {
+        renderKeys((wData.workspace || {}).keys || []);
+      } else {
+        renderCredentials();
+      }
     });
 
     $("#topup-btn")?.addEventListener("click", async () => {
