@@ -51,8 +51,8 @@
     }
   ],
   "indexable_route_count": 60,
-  "noindex_route_count": 86,
-  "route_count": 146,
+  "noindex_route_count": 88,
+  "route_count": 148,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -660,6 +660,38 @@
       "profile": "corporate",
       "route": "/deterministic-api/",
       "title": "Specialized lane \u2014 Deterministic API \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/deterministic-api/signin/",
+      "description": "Explore Signin from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/deterministic-api/signin/",
+      "title": "Sign in \u2014 Noetfield API",
+      "verdict": "NOINDEX_DOCUMENTED"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/deterministic-api/workspace/",
+      "description": "Explore Workspace from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/deterministic-api/workspace/",
+      "title": "Workspace \u2014 Noetfield API",
       "verdict": "NOINDEX_DOCUMENTED"
     },
     {

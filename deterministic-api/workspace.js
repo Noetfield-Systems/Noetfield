@@ -129,6 +129,39 @@
     if (err) setStatus(status, `Sign-in failed (${err})`, "is-error");
 
     const { data: cfg } = await api("/v1/customer-auth/public-config");
+
+    $("#register-form")?.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const fd = new FormData(ev.target);
+      setStatus(status, "Creating workspace…");
+      const { res, data } = await api("/v1/customer-auth/register", {
+        method: "POST",
+        body: JSON.stringify({
+          email: String(fd.get("email") || ""),
+          organization: String(fd.get("organization") || "") || undefined,
+          caller_site: "www.noetfield.com/deterministic-api/signin",
+        }),
+      });
+      if (!res.ok || !data.ok || !data.session_token) {
+        setStatus(
+          status,
+          errMsg(data, "Could not register. If this email exists, unlock with API key or OAuth."),
+          "is-error",
+        );
+        return;
+      }
+      setSession(data.session_token);
+      if (data.api_key) {
+        try {
+          sessionStorage.setItem("nf_dapi_new_key", data.api_key);
+        } catch {
+          /* ignore */
+        }
+      }
+      const next = new URLSearchParams(location.search).get("next") || "/deterministic-api/workspace/";
+      location.href = next.startsWith("/") ? next : "/deterministic-api/workspace/";
+    });
+
     $("#btn-google")?.addEventListener("click", async () => {
       try {
         await signInWithGoogle(cfg, status);
@@ -142,7 +175,8 @@
         return;
       }
       const next = encodeURIComponent(
-        new URLSearchParams(location.search).get("next") || "https://www.noetfield.com/deterministic-api/workspace/",
+        new URLSearchParams(location.search).get("next") ||
+          "https://www.noetfield.com/deterministic-api/workspace/",
       );
       location.href = `${API}/v1/customer-auth/github/start?next=${next}`;
     });
@@ -215,9 +249,18 @@
         : '<p class="dapi-muted">No keys yet — a key is issued when your workspace is created.</p>';
     }
     const newKey = $("#api-newkey");
-    if (newKey && ws.api_key) {
-      newKey.hidden = false;
-      newKey.textContent = `New API key (copy now):\n${ws.api_key}`;
+    if (newKey) {
+      let shown = ws.api_key || "";
+      try {
+        if (!shown) shown = sessionStorage.getItem("nf_dapi_new_key") || "";
+        if (shown) sessionStorage.removeItem("nf_dapi_new_key");
+      } catch {
+        /* ignore */
+      }
+      if (shown) {
+        newKey.hidden = false;
+        newKey.textContent = `New API key (copy now):\n${shown}`;
+      }
     }
 
     $("#topup-btn")?.addEventListener("click", async () => {

@@ -77,7 +77,7 @@
     <a href="/deterministic-api/" aria-current="page">API</a>
     <a href="/deterministic-api/workspace/">Workspace</a>
     <a href="#proof">Proof</a>
-    <a href="#top-up">Top up</a>
+    <a href="/deterministic-api/workspace/">Top up</a>
     <a href="#referral">Boundary</a>
     <a class="nf-corp-nav__cta" href="/deterministic-api/signin/?next=%2Fdeterministic-api%2Fworkspace%2F">Sign in</a>
    </nav>
@@ -93,8 +93,8 @@
      <p class="nf-dapi-promise">OpenAI-compatible engine · schema-valid JSON and tool calls · or fail closed</p>
      <p class="nf-dapi-lead">Keep your OpenAI SDK. Change one <code>base_url</code> line to the Noetfield API. Structured responses leave only when schema and tool calls validate—or the request fails closed.</p>
      <div class="nf-corp-actions">
-      <a class="nf-button nf-button--primary" href="#get-key">Get API key + starter credits</a>
-      <a class="nf-button nf-button--secondary" href="/motors/">See AI Motors</a>
+      <a class="nf-button nf-button--primary" href="#get-key">Start free trial · $10 credits</a>
+      <a class="nf-button nf-button--secondary" href="/deterministic-api/signin/?next=%2Fdeterministic-api%2Fworkspace%2F">Open workspace</a>
      </div>
     </div>
 
@@ -139,12 +139,12 @@
    <div class="nf-corp-wrap nf-dapi-key-grid">
     <div>
      <p class="nf-corp-eyebrow">Access</p>
-     <h2 id="key-title">Get a Noetfield API key + starter credits</h2>
-     <p class="nf-dapi-section-lead nf-dapi-section-lead--light">Self-serve signup issues a production Noetfield API key once and grants <strong>$10</strong> starter credit. Copy the key immediately — it is not shown again.</p>
+     <h2 id="key-title">Create your API workspace</h2>
+     <p class="nf-dapi-section-lead nf-dapi-section-lead--light">Enter your work email to register. You get a production API key and <strong>$10 free trial credits</strong>. Paid Stripe top-ups happen later — only after you are signed into the workspace, so every charge is tied to your account.</p>
      <ul class="nf-dapi-bullets">
-      <li>OpenAI-compatible <code>/v1/chat/completions</code> on the Noetfield API</li>
-      <li>$10 Noetfield API starter credits with your first key</li>
-      <li>Production base URL live for integration</li>
+      <li>Email creates your tracked tenant (no anonymous Stripe)</li>
+      <li>$10 starter credits on first register</li>
+      <li>Top up inside the workspace when you need more</li>
      </ul>
     </div>
     <form class="nf-dapi-form" id="nfDapiKeyForm" aria-label="Request API key">
@@ -160,8 +160,8 @@
      <label>Referral code (optional)
       <input type="text" name="referral_code" autocomplete="off" placeholder="ref_…" spellcheck="false" />
      </label>
-     <button type="submit" class="nf-button nf-button--primary">Get API key</button>
-     <p class="nf-dapi-form__hint">Key is shown once in this browser. We never email the raw key.</p>
+     <button type="submit" class="nf-button nf-button--primary">Create workspace · $10 trial</button>
+     <p class="nf-dapi-form__hint">Opens your workspace after register. API key is shown once — store it securely.</p>
      <p class="nf-dapi-form__status" id="nfDapiKeyStatus" hidden aria-live="polite"></p>
      <div class="nf-dapi-key-result" id="nfDapiKeyResult" hidden>
       <p class="nf-dapi-key-result__label">Your API key (copy now)</p>
@@ -179,30 +179,19 @@
    <div class="nf-corp-wrap nf-dapi-key-grid">
     <div>
      <p class="nf-corp-eyebrow">Billing</p>
-     <h2 id="topup-title">Top up Noetfield API credits</h2>
-     <p class="nf-dapi-section-lead">Paid top-ups go through Stripe Checkout. Credits land on your tenant after payment. Amounts: <strong>$10 / $25 / $50 / $100</strong>.</p>
+     <h2 id="topup-title">Top up inside your workspace</h2>
+     <p class="nf-dapi-section-lead">Stripe Checkout runs only after you have a registered workspace email. That keeps every payment on the right tenant — no anonymous Checkout, no lost orders.</p>
      <ul class="nf-dapi-bullets">
-      <li>Paste the API key you received at signup</li>
-      <li>Choose an amount and continue to Stripe</li>
-      <li>Webhook credits your balance automatically</li>
+      <li>Register or sign in first</li>
+      <li>See balance and keys in the workspace</li>
+      <li>Top up $10 / $25 / $50 / $100 from there</li>
      </ul>
-     <p class="nf-dapi-form__hint" id="nfDapiTopupBanner" hidden aria-live="polite"></p>
     </div>
-    <form class="nf-dapi-form" id="nfDapiTopupForm" aria-label="Top up API credits">
-     <label>API key
-      <input type="password" name="api_key" required autocomplete="off" spellcheck="false" placeholder="sk-nf-…" />
-     </label>
-     <label>Amount
-      <select name="amount_cents" required>
-       <option value="1000">$10 credits</option>
-       <option value="2500">$25 credits</option>
-       <option value="5000">$50 credits</option>
-       <option value="10000">$100 credits</option>
-      </select>
-     </label>
-     <button type="submit" class="nf-button nf-button--primary">Continue to Stripe</button>
-     <p class="nf-dapi-form__status" id="nfDapiTopupStatus" hidden aria-live="polite"></p>
-    </form>
+    <div class="nf-dapi-form" aria-label="Open workspace to top up">
+     <p class="nf-dapi-form__hint">Already registered? Open the workspace and use <strong>Top up</strong>.</p>
+     <a class="nf-button nf-button--primary" href="/deterministic-api/signin/?next=%2Fdeterministic-api%2Fworkspace%2F">Sign in to top up</a>
+     <a class="nf-button nf-button--secondary" href="#get-key" style="margin-top:0.75rem;display:inline-block">New here? Start free trial</a>
+    </div>
    </div>
   </section>
 
@@ -238,18 +227,14 @@
  <script>
   (function () {
     var API_BASE = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev";
-    var SIGNUP_URL = API_BASE + "/v1/signup";
-    var CHECKOUT_URL = API_BASE + "/v1/billing/create-checkout";
+    var REGISTER_URL = API_BASE + "/v1/customer-auth/register";
+    var SESSION_KEY = "nf_dapi_session";
     var form = document.getElementById("nfDapiKeyForm");
-    var topupForm = document.getElementById("nfDapiTopupForm");
     var statusEl = document.getElementById("nfDapiKeyStatus");
     var resultEl = document.getElementById("nfDapiKeyResult");
     var keyEl = document.getElementById("nfDapiKeyValue");
     var metaEl = document.getElementById("nfDapiKeyMeta");
     var copyBtn = document.getElementById("nfDapiKeyCopy");
-    var topupStatus = document.getElementById("nfDapiTopupStatus");
-    var topupBanner = document.getElementById("nfDapiTopupBanner");
-    var topupKeyInput = topupForm ? topupForm.api_key : null;
 
     function setStatus(msg, isError) {
       if (!statusEl) return;
@@ -258,20 +243,10 @@
       statusEl.classList.toggle("nf-dapi-form__status--error", !!isError);
     }
 
-    function setTopupStatus(msg, isError) {
-      if (!topupStatus) return;
-      topupStatus.hidden = false;
-      topupStatus.textContent = msg;
-      topupStatus.classList.toggle("nf-dapi-form__status--error", !!isError);
-    }
-
-    var params = new URLSearchParams(window.location.search);
-    if (topupBanner && params.get("topup") === "success") {
-      topupBanner.hidden = false;
-      topupBanner.textContent = "Payment received. Credits appear on your balance within a few seconds — refresh balance via GET /v1/balance.";
-    } else if (topupBanner && params.get("topup") === "cancel") {
-      topupBanner.hidden = false;
-      topupBanner.textContent = "Checkout canceled. No charge. You can top up again anytime.";
+    function setSession(token) {
+      try {
+        if (token) sessionStorage.setItem(SESSION_KEY, token);
+      } catch (e) {}
     }
 
     if (form) {
@@ -279,24 +254,22 @@
         event.preventDefault();
         var email = (form.email.value || "").trim();
         var company = (form.company.value || "").trim();
-        var referralEmail = (form.referral_email.value || "").trim();
         var referralCode = (form.referral_code.value || "").trim();
         if (!email) return;
 
         var submitBtn = form.querySelector('button[type="submit"]');
         if (submitBtn) submitBtn.disabled = true;
         if (resultEl) resultEl.hidden = true;
-        setStatus("Creating your key…", false);
+        setStatus("Creating your workspace…", false);
 
         var payload = {
           email: email,
-          caller_site: "www.noetfield.com"
+          caller_site: "www.noetfield.com/deterministic-api"
         };
         if (company) payload.organization = company;
-        if (referralEmail) payload.referral_email = referralEmail;
         if (referralCode) payload.referral_code = referralCode;
 
-        fetch(SIGNUP_URL, {
+        fetch(REGISTER_URL, {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(payload)
@@ -307,24 +280,71 @@
             });
           })
           .then(function (out) {
-            if (!out.ok || !out.data || !out.data.api_key) {
+            // Fallback while register endpoint rolls out: signup + api-key session.
+            if (out.status === 404) {
+              return fetch(API_BASE + "/v1/signup", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(payload)
+              })
+                .then(function (res) {
+                  return res.json().then(function (data) {
+                    return { ok: res.ok, status: res.status, data: data };
+                  });
+                })
+                .then(function (signed) {
+                  if (!signed.ok || !signed.data || !signed.data.api_key) {
+                    return signed;
+                  }
+                  return fetch(API_BASE + "/v1/customer-auth/api-key", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({ api_key: signed.data.api_key })
+                  }).then(function (res) {
+                    return res.json().then(function (data) {
+                      return {
+                        ok: res.ok,
+                        status: res.status,
+                        data: Object.assign({}, data, {
+                          api_key: signed.data.api_key,
+                          starter_credit_usd: signed.data.starter_credit_usd,
+                          referral_code: signed.data.referral_code
+                        })
+                      };
+                    });
+                  });
+                });
+            }
+            return out;
+          })
+          .then(function (out) {
+            if (!out.ok || !out.data || !out.data.session_token || !out.data.api_key) {
               var err =
                 (out.data && out.data.error && out.data.error.message) ||
-                "Signup failed. Try again or use a different email.";
+                "Could not register. If this email already has an account, sign in instead.";
               setStatus(err, true);
               return;
             }
+            setSession(out.data.session_token);
             if (keyEl) keyEl.textContent = out.data.api_key;
-            if (topupKeyInput) topupKeyInput.value = out.data.api_key;
             if (metaEl) {
-              var credit = out.data.starter_credit_usd != null ? out.data.starter_credit_usd : 10;
-              var ref = out.data.referral_code ? " · your referral code: " + out.data.referral_code : "";
+              var credit =
+                out.data.starter_credit_usd != null ? out.data.starter_credit_usd : 10;
+              var ref = out.data.referral_code
+                ? " · your referral code: " + out.data.referral_code
+                : "";
               metaEl.textContent =
-                "Noetfield API starter credit: $" + credit + ". Shown once — store it securely." + ref;
+                "$" +
+                credit +
+                " trial credits on your workspace. Copy the API key now — shown once." +
+                ref;
             }
             if (resultEl) resultEl.hidden = false;
-            setStatus("Key issued. Copy it now — it will not be shown again.", false);
+            setStatus("Workspace ready. Opening it…", false);
             form.reset();
+            setTimeout(function () {
+              location.href = "/deterministic-api/workspace/";
+            }, 1800);
           })
           .catch(function () {
             setStatus("Network error reaching the API. Check your connection and retry.", true);
@@ -342,63 +362,11 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(key).then(function () {
             copyBtn.textContent = "Copied";
-            setTimeout(function () { copyBtn.textContent = "Copy"; }, 1600);
+            setTimeout(function () {
+              copyBtn.textContent = "Copy";
+            }, 1600);
           });
-        } else {
-          var range = document.createRange();
-          range.selectNodeContents(keyEl);
-          var sel = window.getSelection();
-          sel.removeAllRanges();
-          sel.addRange(range);
-          try { document.execCommand("copy"); } catch (e) {}
-          copyBtn.textContent = "Copied";
-          setTimeout(function () { copyBtn.textContent = "Copy"; }, 1600);
         }
-      });
-    }
-
-    if (topupForm) {
-      topupForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        var apiKey = (topupForm.api_key.value || "").trim();
-        var amountCents = Number(topupForm.amount_cents.value);
-        if (!apiKey || !amountCents) return;
-        var submitBtn = topupForm.querySelector('button[type="submit"]');
-        if (submitBtn) submitBtn.disabled = true;
-        setTopupStatus("Opening Stripe Checkout…", false);
-        fetch(CHECKOUT_URL, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            authorization: "Bearer " + apiKey
-          },
-          body: JSON.stringify({
-            amount_cents: amountCents,
-            success_url: "https://www.noetfield.com/deterministic-api/?topup=success",
-            cancel_url: "https://www.noetfield.com/deterministic-api/?topup=cancel"
-          })
-        })
-          .then(function (res) {
-            return res.json().then(function (data) {
-              return { ok: res.ok, data: data };
-            });
-          })
-          .then(function (out) {
-            if (!out.ok || !out.data || !out.data.checkout_url) {
-              var err =
-                (out.data && out.data.error && out.data.error.message) ||
-                "Could not start Checkout. Check the API key and try again.";
-              setTopupStatus(err, true);
-              return;
-            }
-            window.location.href = out.data.checkout_url;
-          })
-          .catch(function () {
-            setTopupStatus("Network error reaching billing. Retry.", true);
-          })
-          .finally(function () {
-            if (submitBtn) submitBtn.disabled = false;
-          });
       });
     }
   })();
@@ -407,7 +375,9 @@
   (function () {
     var q = new URLSearchParams(location.search);
     if (q.get("topup") === "success" || q.get("topup") === "cancel") {
-      location.replace("/deterministic-api/workspace/?topup=" + encodeURIComponent(q.get("topup")));
+      location.replace(
+        "/deterministic-api/workspace/?topup=" + encodeURIComponent(q.get("topup"))
+      );
     }
   })();
  </script>
