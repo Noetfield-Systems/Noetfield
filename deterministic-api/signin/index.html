@@ -29,7 +29,7 @@
       <div class="dapi-gate__inner">
         <p class="dapi-eyebrow">Deterministic API</p>
         <h1 id="gate-title">Welcome</h1>
-        <p class="dapi-gate__lede">$10 trial. Keys stay in the workspace.</p>
+        <p class="dapi-gate__lede">Create a workspace. Generate API keys inside it.</p>
 
         <div class="dapi-tabs" role="tablist" aria-label="Access mode">
           <button type="button" class="dapi-tab is-active" role="tab" id="tab-start" aria-controls="panel-start" aria-selected="true" data-tab="start">Start</button>
@@ -50,15 +50,6 @@
             <button type="button" class="dapi-btn dapi-btn--github" id="btn-github">Continue with GitHub</button>
             <button type="button" class="dapi-btn dapi-btn--google" id="btn-google">Continue with Google</button>
           </div>
-          <details class="dapi-advanced">
-            <summary>Use an API key</summary>
-            <form id="key-form" class="dapi-form">
-              <label>API key
-                <input name="api_key" type="password" autocomplete="off" placeholder="sk-nf-…" required />
-              </label>
-              <button class="dapi-btn dapi-btn--primary" type="submit">Unlock</button>
-            </form>
-          </details>
         </section>
 
         <p class="dapi-status" id="status" role="status"></p>
