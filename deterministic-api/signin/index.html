@@ -5,44 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign in — Noetfield API</title>
   <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="Sign in to the Noetfield Deterministic API workspace." />
   <link rel="canonical" href="https://www.noetfield.com/deterministic-api/signin/" />
   <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/deterministic-api/workspace.css" />
 </head>
 <body class="dapi-auth">
   <header class="dapi-top">
     <a class="dapi-brand" href="/deterministic-api/">Noetfield <small>API</small></a>
+    <nav class="dapi-nav" aria-label="Product">
+      <a href="/deterministic-api/">Product</a>
+      <a href="/deterministic-api/workspace/">Workspace</a>
+    </nav>
   </header>
-  <main class="dapi-card">
-    <h1>Workspace access</h1>
-    <p class="dapi-lede">Register with email for a $10 trial, then generate your API key inside the signed-in workspace. Public pages never issue raw keys. Stripe top-up also stays inside the workspace.</p>
+  <div class="dapi-auth-stage">
+    <aside class="dapi-auth-rail" aria-hidden="false">
+      <p class="dapi-eyebrow" style="color:#7ddecb">Deterministic API</p>
+      <h1>Noetfield API</h1>
+      <p>Enterprise-grade credit workspace. Register once, generate keys only while signed in, top up with Stripe bound to your tenant.</p>
+      <ul class="dapi-auth-points">
+        <li>$10 trial credits on first workspace</li>
+        <li>Raw API keys never leave the signed-in control plane</li>
+        <li>Stripe top-ups mapped to your email tenant</li>
+      </ul>
+    </aside>
+    <main class="dapi-card">
+      <h1>Workspace access</h1>
+      <p class="dapi-lede">Register with email for a $10 trial, then generate your API key inside the signed-in workspace. Public pages never issue raw keys. Stripe top-up also stays inside the workspace.</p>
 
-    <form id="register-form" class="dapi-form">
-      <label>Work email
-        <input name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
-      </label>
-      <label>Company (optional)
-        <input name="organization" type="text" autocomplete="organization" />
-      </label>
-      <button class="dapi-btn dapi-btn--primary" type="submit">Create workspace · $10 trial</button>
-    </form>
+      <form id="register-form" class="dapi-form">
+        <label>Work email
+          <input name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+        </label>
+        <label>Company (optional)
+          <input name="organization" type="text" autocomplete="organization" placeholder="Company" />
+        </label>
+        <button class="dapi-btn dapi-btn--primary" type="submit">Create workspace · $10 trial</button>
+      </form>
 
-    <p class="dapi-div"><span>or sign in</span></p>
-    <button type="button" class="dapi-btn dapi-btn--github" id="btn-github">Continue with GitHub</button>
-    <button type="button" class="dapi-btn dapi-btn--google" id="btn-google">Continue with Google</button>
-    <p class="dapi-div"><span>or existing API key</span></p>
-    <form id="key-form" class="dapi-form">
-      <label>API key
-        <input name="api_key" type="password" autocomplete="off" placeholder="sk-nf-…" required />
-      </label>
-      <button class="dapi-btn dapi-btn--primary" type="submit">Unlock workspace</button>
-    </form>
-    <p class="dapi-status" id="status" role="status"></p>
-    <p class="dapi-switch">Product page: <a href="/deterministic-api/">Deterministic API</a></p>
-  </main>
+      <p class="dapi-div"><span>or sign in</span></p>
+      <button type="button" class="dapi-btn dapi-btn--github" id="btn-github">Continue with GitHub</button>
+      <button type="button" class="dapi-btn dapi-btn--google" id="btn-google">Continue with Google</button>
+      <p class="dapi-div"><span>or existing API key</span></p>
+      <form id="key-form" class="dapi-form">
+        <label>API key
+          <input name="api_key" type="password" autocomplete="off" placeholder="sk-nf-…" required />
+        </label>
+        <button class="dapi-btn dapi-btn--accent" type="submit">Unlock workspace</button>
+      </form>
+      <p class="dapi-status" id="status" role="status"></p>
+      <p class="dapi-switch">Product page: <a href="/deterministic-api/">Deterministic API</a></p>
+    </main>
+  </div>
   <script src="/deterministic-api/workspace.js" defer></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
