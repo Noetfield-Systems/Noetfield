@@ -375,89 +375,159 @@ a:hover { color: var(--ink); }
 }
 .dapi-auth-stage {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   min-height: calc(100vh - 3.5rem);
 }
 .dapi-auth-rail {
-  padding: clamp(2rem, 5vw, 4rem);
+  padding: clamp(2.5rem, 6vw, 5rem);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 1.25rem;
+  justify-content: flex-end;
+  gap: 0.65rem;
   color: #e8f2ef;
   background:
-    linear-gradient(155deg, rgba(7, 16, 24, 0.55), rgba(7, 16, 24, 0.2)),
-    radial-gradient(600px 400px at 20% 20%, rgba(14, 143, 122, 0.35), transparent 60%),
-    linear-gradient(160deg, #071018 0%, #132033 55%, #0a3d34 100%);
+    radial-gradient(700px 480px at 18% 12%, rgba(14, 143, 122, 0.42), transparent 58%),
+    linear-gradient(165deg, #050b12 0%, #0c1a28 48%, #0a322c 100%);
   position: relative;
   overflow: hidden;
 }
-.dapi-auth-rail::after {
+.dapi-auth-rail::before {
   content: "";
   position: absolute;
-  inset: auto -10% -20% 30%;
-  height: 55%;
-  background: radial-gradient(closest-side, rgba(14, 143, 122, 0.28), transparent 70%);
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 75%);
   pointer-events: none;
+}
+.dapi-auth-rail__mark {
+  margin: 0;
+  position: relative;
+  font-family: var(--display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7ddecb;
 }
 .dapi-auth-rail h1 {
   margin: 0;
+  position: relative;
   font-family: var(--display);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  letter-spacing: -0.04em;
-  line-height: 1.02;
-  max-width: 11ch;
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  max-width: 8ch;
+}
+.dapi-auth-rail__line {
+  margin: 0.35rem 0 0;
   position: relative;
-}
-.dapi-auth-rail p {
-  margin: 0;
-  max-width: 28rem;
-  color: rgba(232, 242, 239, 0.78);
-  line-height: 1.55;
-  position: relative;
-}
-.dapi-auth-points {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.55rem;
-  position: relative;
-}
-.dapi-auth-points li {
-  display: flex;
-  gap: 0.55rem;
-  align-items: flex-start;
-  font-size: 0.95rem;
-  color: rgba(232, 242, 239, 0.88);
-}
-.dapi-auth-points li::before {
-  content: "";
-  width: 0.45rem;
-  height: 0.45rem;
-  margin-top: 0.45rem;
-  border-radius: 50%;
-  background: var(--accent);
-  flex: none;
+  font-size: 1.05rem;
+  color: rgba(232, 242, 239, 0.62);
+  letter-spacing: 0.02em;
 }
 
-.dapi-card {
-  width: min(100% - 2rem, 420px);
-  margin: auto;
-  padding: 1.6rem 1.4rem 1.7rem;
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-  border-radius: calc(var(--radius) + 2px);
-  box-shadow: var(--shadow);
+.dapi-gate {
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 4vw, 3rem) 1.25rem;
+}
+.dapi-gate__inner {
+  width: min(100%, 380px);
   animation: dapi-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.dapi-card h1 {
-  margin: 0 0 0.45rem;
-  font-family: var(--display);
-  font-size: 1.65rem;
-  letter-spacing: -0.03em;
+.dapi-gate__inner > .dapi-eyebrow {
+  margin: 0 0 0.55rem;
 }
-.dapi-card .dapi-lede { font-size: 0.95rem; margin-bottom: 1.1rem; }
+.dapi-gate__inner > h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 2.45rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.dapi-gate__lede {
+  margin: 0.55rem 0 1.35rem;
+  color: var(--mute);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+.dapi-gate__foot {
+  margin: 1.35rem 0 0;
+  font-size: 0.88rem;
+}
+.dapi-gate__foot a {
+  color: var(--mute);
+  text-decoration: none;
+}
+.dapi-gate__foot a:hover { color: var(--ink); }
+
+.dapi-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  margin: 0 0 1.25rem;
+  border-radius: 12px;
+  background: rgba(7, 16, 24, 0.05);
+  border: 1px solid var(--line);
+}
+.dapi-tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--mute);
+  font: inherit;
+  font-weight: 650;
+  font-size: 0.92rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease, box-shadow 140ms ease;
+}
+.dapi-tab:hover { color: var(--ink); }
+.dapi-tab.is-active {
+  background: var(--surface-2);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(7, 16, 24, 0.08);
+}
+
+.dapi-panel-auth[hidden] { display: none !important; }
+.dapi-panel-auth {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.dapi-oauth {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.dapi-advanced {
+  margin-top: 0.35rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.85rem;
+}
+.dapi-advanced summary {
+  cursor: pointer;
+  list-style: none;
+  color: var(--mute);
+  font-size: 0.88rem;
+  font-weight: 600;
+  user-select: none;
+}
+.dapi-advanced summary::-webkit-details-marker { display: none; }
+.dapi-advanced summary::after {
+  content: " ›";
+  color: var(--accent);
+}
+.dapi-advanced[open] summary {
+  margin-bottom: 0.75rem;
+  color: var(--ink);
+}
+.dapi-advanced[open] summary::after { content: ""; }
 
 .dapi-form { display: grid; gap: 0.15rem; }
 .dapi-form label {
@@ -471,7 +541,7 @@ a:hover { color: var(--ink); }
 .dapi-form input {
   border: 1px solid var(--line-strong);
   border-radius: 10px;
-  padding: 0.72rem 0.8rem;
+  padding: 0.78rem 0.85rem;
   font: inherit;
   background: #fbfcfd;
   transition: border-color 140ms ease, box-shadow 140ms ease;
@@ -481,32 +551,40 @@ a:hover { color: var(--ink); }
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
-.dapi-card .dapi-btn { width: 100%; margin: 0.2rem 0; }
-.dapi-div {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 0.65rem;
-  color: var(--mute);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  margin: 1rem 0 0.75rem;
+.dapi-gate .dapi-btn { width: 100%; margin: 0; }
+.dapi-btn--github { background: #161b22; color: #fff; border-color: #161b22; }
+.dapi-btn--google {
+  background: #fff;
+  border-color: var(--line-strong);
 }
-.dapi-div::before,
-.dapi-div::after {
-  content: "";
-  height: 1px;
-  background: var(--line);
+
+/* legacy card (unused on polished gate; keep for safety) */
+.dapi-card {
+  width: min(100% - 2rem, 420px);
+  margin: auto;
+  padding: 1.6rem 1.4rem 1.7rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: var(--shadow);
 }
-.dapi-switch { margin: 1rem 0 0; font-size: 0.88rem; color: var(--mute); }
+.dapi-card h1 {
+  margin: 0 0 0.45rem;
+  font-family: var(--display);
+  font-size: 1.65rem;
+  letter-spacing: -0.03em;
+}
 
 @media (max-width: 960px) {
   .dapi-grid { grid-template-columns: 1fr; }
   .dapi-auth-stage { grid-template-columns: 1fr; }
-  .dapi-auth-rail { min-height: 220px; padding: 1.5rem 1.25rem; }
-  .dapi-auth-rail h1 { max-width: none; font-size: 2rem; }
+  .dapi-auth-rail {
+    min-height: 180px;
+    padding: 1.75rem 1.35rem 1.5rem;
+    justify-content: flex-end;
+  }
+  .dapi-auth-rail h1 { max-width: none; font-size: 2.2rem; }
+  .dapi-auth-rail::before { opacity: 0.45; }
 }
 
 @media (max-width: 640px) {

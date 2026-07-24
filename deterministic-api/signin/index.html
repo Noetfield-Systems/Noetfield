@@ -16,50 +16,57 @@
 <body class="dapi-auth">
   <header class="dapi-top">
     <a class="dapi-brand" href="/deterministic-api/">Noetfield <small>API</small></a>
-    <nav class="dapi-nav" aria-label="Product">
-      <a href="/deterministic-api/">Product</a>
-      <a href="/deterministic-api/workspace/">Workspace</a>
-    </nav>
   </header>
+
   <div class="dapi-auth-stage">
-    <aside class="dapi-auth-rail" aria-hidden="false">
-      <p class="dapi-eyebrow" style="color:#7ddecb">Deterministic API</p>
-      <h1>Noetfield API</h1>
-      <p>Enterprise-grade credit workspace. Register once, generate keys only while signed in, top up with Stripe bound to your tenant.</p>
-      <ul class="dapi-auth-points">
-        <li>$10 trial credits on first workspace</li>
-        <li>Raw API keys never leave the signed-in control plane</li>
-        <li>Stripe top-ups mapped to your email tenant</li>
-      </ul>
+    <aside class="dapi-auth-rail" aria-hidden="true">
+      <p class="dapi-auth-rail__mark">Noetfield</p>
+      <h1>API workspace</h1>
+      <p class="dapi-auth-rail__line">Credits. Keys. Top-up.</p>
     </aside>
-    <main class="dapi-card">
-      <h1>Workspace access</h1>
-      <p class="dapi-lede">Register with email for a $10 trial, then generate your API key inside the signed-in workspace. Public pages never issue raw keys. Stripe top-up also stays inside the workspace.</p>
 
-      <form id="register-form" class="dapi-form">
-        <label>Work email
-          <input name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
-        </label>
-        <label>Company (optional)
-          <input name="organization" type="text" autocomplete="organization" placeholder="Company" />
-        </label>
-        <button class="dapi-btn dapi-btn--primary" type="submit">Create workspace · $10 trial</button>
-      </form>
+    <main class="dapi-gate" aria-labelledby="gate-title">
+      <div class="dapi-gate__inner">
+        <p class="dapi-eyebrow">Deterministic API</p>
+        <h1 id="gate-title">Welcome</h1>
+        <p class="dapi-gate__lede">$10 trial. Keys stay in the workspace.</p>
 
-      <p class="dapi-div"><span>or sign in</span></p>
-      <button type="button" class="dapi-btn dapi-btn--github" id="btn-github">Continue with GitHub</button>
-      <button type="button" class="dapi-btn dapi-btn--google" id="btn-google">Continue with Google</button>
-      <p class="dapi-div"><span>or existing API key</span></p>
-      <form id="key-form" class="dapi-form">
-        <label>API key
-          <input name="api_key" type="password" autocomplete="off" placeholder="sk-nf-…" required />
-        </label>
-        <button class="dapi-btn dapi-btn--accent" type="submit">Unlock workspace</button>
-      </form>
-      <p class="dapi-status" id="status" role="status"></p>
-      <p class="dapi-switch">Product page: <a href="/deterministic-api/">Deterministic API</a></p>
+        <div class="dapi-tabs" role="tablist" aria-label="Access mode">
+          <button type="button" class="dapi-tab is-active" role="tab" id="tab-start" aria-controls="panel-start" aria-selected="true" data-tab="start">Start</button>
+          <button type="button" class="dapi-tab" role="tab" id="tab-signin" aria-controls="panel-signin" aria-selected="false" data-tab="signin">Sign in</button>
+        </div>
+
+        <section class="dapi-panel-auth is-active" role="tabpanel" id="panel-start" aria-labelledby="tab-start">
+          <form id="register-form" class="dapi-form">
+            <label>Work email
+              <input name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+            </label>
+            <button class="dapi-btn dapi-btn--primary" type="submit">Continue · $10 trial</button>
+          </form>
+        </section>
+
+        <section class="dapi-panel-auth" role="tabpanel" id="panel-signin" aria-labelledby="tab-signin" hidden>
+          <div class="dapi-oauth">
+            <button type="button" class="dapi-btn dapi-btn--github" id="btn-github">Continue with GitHub</button>
+            <button type="button" class="dapi-btn dapi-btn--google" id="btn-google">Continue with Google</button>
+          </div>
+          <details class="dapi-advanced">
+            <summary>Use an API key</summary>
+            <form id="key-form" class="dapi-form">
+              <label>API key
+                <input name="api_key" type="password" autocomplete="off" placeholder="sk-nf-…" required />
+              </label>
+              <button class="dapi-btn dapi-btn--primary" type="submit">Unlock</button>
+            </form>
+          </details>
+        </section>
+
+        <p class="dapi-status" id="status" role="status"></p>
+        <p class="dapi-gate__foot"><a href="/deterministic-api/">← Product</a></p>
+      </div>
     </main>
   </div>
+
   <script src="/deterministic-api/workspace.js" defer></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {

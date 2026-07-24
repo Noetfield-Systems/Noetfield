@@ -158,6 +158,35 @@
 
     const { data: cfg } = await api("/v1/customer-auth/public-config");
 
+    function setTab(name) {
+      document.querySelectorAll(".dapi-tab").forEach((tab) => {
+        const on = tab.getAttribute("data-tab") === name;
+        tab.classList.toggle("is-active", on);
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      document.querySelectorAll(".dapi-panel-auth").forEach((panel) => {
+        const on = panel.id === `panel-${name}`;
+        panel.classList.toggle("is-active", on);
+        panel.hidden = !on;
+      });
+      const title = $("#gate-title");
+      const lede = document.querySelector(".dapi-gate__lede");
+      if (title) title.textContent = name === "signin" ? "Sign in" : "Welcome";
+      if (lede) {
+        lede.textContent =
+          name === "signin"
+            ? "Continue with GitHub or Google."
+            : "$10 trial. Keys stay in the workspace.";
+      }
+    }
+
+    document.querySelectorAll(".dapi-tab").forEach((tab) => {
+      tab.addEventListener("click", () => setTab(tab.getAttribute("data-tab") || "start"));
+    });
+
+    // Deep-link: returning users land on Sign in
+    if (new URLSearchParams(location.search).get("mode") === "signin") setTab("signin");
+
     $("#register-form")?.addEventListener("submit", async (ev) => {
       ev.preventDefault();
       const fd = new FormData(ev.target);
@@ -166,14 +195,13 @@
         method: "POST",
         body: JSON.stringify({
           email: String(fd.get("email") || ""),
-          organization: String(fd.get("organization") || "") || undefined,
           caller_site: "www.noetfield.com/deterministic-api/signin",
         }),
       });
       if (!res.ok || !data.ok || !data.session_token) {
         setStatus(
           status,
-          errMsg(data, "Could not register. If this email exists, unlock with API key or OAuth."),
+          errMsg(data, "Could not start. If you already have an account, use Sign in."),
           "is-error",
         );
         return;
