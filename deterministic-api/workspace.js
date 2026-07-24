@@ -311,17 +311,17 @@
     const keysEl = $("#api-keys");
     const keyCount = $("#key-count");
     function renderKeys(keys) {
-      const list = keys || [];
-      if (keyCount) keyCount.textContent = `${list.length} active`;
+      const list = (keys || []).filter((k) => (k.status || "active") === "active");
+      if (keyCount) keyCount.textContent = list.length ? "1 live" : "No key";
       if (!keysEl) return;
       keysEl.innerHTML = list.length
         ? list
             .map(
               (k) =>
-                `<div class="dapi-key-row"><code>${escapeHtml(k.key_hash_prefix)}…</code> <span class="dapi-pill">${escapeHtml(k.status || "active")}</span></div>`,
+                `<div class="dapi-key-row"><span class="dapi-muted">Fingerprint</span> <code>${escapeHtml(k.key_hash_prefix)}…</code> <span class="dapi-pill">live</span></div>`,
             )
             .join("")
-        : '<p class="dapi-muted">No keys yet.</p>';
+        : '<p class="dapi-muted">No live key yet. Create one below.</p>';
     }
     renderKeys(ws.keys || []);
 
@@ -442,19 +442,26 @@
 
     genBtn?.addEventListener("click", async () => {
       genBtn.disabled = true;
-      setStatus(keyStatus, "Generating API key…");
+      setStatus(keyStatus, "Replacing API key…");
       const { res: kRes, data: kData } = await api("/v1/customer/keys", {
         method: "POST",
         body: "{}",
       });
       genBtn.disabled = false;
       if (!kRes.ok || !kData.ok || !kData.api_key) {
-        setStatus(keyStatus, errMsg(kData, "Could not generate API key"), "is-error");
+        setStatus(keyStatus, errMsg(kData, "Could not replace API key"), "is-error");
         return;
       }
       lastRawKey = kData.api_key;
       renderCredentials();
-      setStatus(keyStatus, "Key created — copy it now. It will not be shown again.", "is-ok");
+      const revoked = typeof kData.revoked_count === "number" ? kData.revoked_count : 0;
+      setStatus(
+        keyStatus,
+        revoked > 0
+          ? `New key live. ${revoked} old key${revoked === 1 ? "" : "s"} revoked — update your app.`
+          : "New key live — copy it now. It will not be shown again.",
+        "is-ok",
+      );
       if (newKey) newKey.textContent = kData.api_key;
       if (newKeyBox) newKeyBox.hidden = false;
       const { res: wRes, data: wData } = await api("/v1/customer/workspace");
