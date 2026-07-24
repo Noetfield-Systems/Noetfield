@@ -232,6 +232,67 @@ a:hover { color: var(--ink); }
 .dapi-balance-card .dapi-btn { width: 100%; }
 .dapi-balance-card .dapi-status { min-height: 0; font-size: 0.78rem; }
 
+.dapi-usage {
+  margin: 0 0 1.25rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 0.85rem;
+}
+.dapi-usage__head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+.dapi-usage__head .dapi-muted { margin: 0.25rem 0 0; }
+.dapi-usage__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+.dapi-usage-card {
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f7fafb;
+  display: grid;
+  gap: 0.2rem;
+}
+.dapi-usage-card__label {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.dapi-usage-card__model {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--mute);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dapi-usage-card__amount {
+  margin: 0.25rem 0 0;
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.dapi-usage-card__meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--mute);
+}
+
 .dapi-steps {
   list-style: none;
   margin: 0;
@@ -800,6 +861,7 @@ a:hover { color: var(--ink); }
   .dapi-grid { grid-template-columns: 1fr; }
   .dapi-flow-head { grid-template-columns: 1fr; }
   .dapi-balance-card { width: 100%; }
+  .dapi-usage__grid { grid-template-columns: 1fr; }
   .dapi-cred {
     grid-template-columns: 1fr auto;
     grid-template-areas:
