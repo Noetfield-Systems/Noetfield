@@ -68,18 +68,18 @@
         <div class="dapi-step__num" aria-hidden="true">1</div>
         <div class="dapi-step__body">
           <div class="dapi-step__title-row">
-            <h2>Get an API key</h2>
-            <span class="dapi-panel-kicker" id="key-count">0 active</span>
+            <h2>Your API key</h2>
+            <span class="dapi-panel-kicker" id="key-count">No key</span>
           </div>
-          <p class="dapi-muted">Keys are created here after you sign in. Shown once — copy and store them.</p>
+          <p class="dapi-muted">One live <code>sk-nf-…</code> secret. Create / replace revokes the old key so only the new one works. Fingerprints below are not the secret.</p>
           <div id="api-keys" class="dapi-keys"></div>
           <div class="dapi-actions dapi-actions--inline">
-            <button type="button" class="dapi-btn dapi-btn--primary" id="generate-key-btn">Generate API key</button>
+            <button type="button" class="dapi-btn dapi-btn--primary" id="generate-key-btn">Create / replace API key</button>
           </div>
           <p class="dapi-status" id="key-status" role="status"></p>
           <div class="dapi-secret" id="api-newkey-box" hidden>
             <div class="dapi-secret__head">
-              <span>New key — copy now</span>
+              <span>New secret — copy now (shown once)</span>
               <button type="button" class="dapi-btn dapi-btn--copy" id="copy-key-btn" data-copied-label="Copied">Copy key</button>
             </div>
             <code class="dapi-secret__value" id="api-newkey"></code>
