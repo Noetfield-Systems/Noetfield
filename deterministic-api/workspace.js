@@ -176,7 +176,7 @@
         lede.textContent =
           name === "signin"
             ? "Continue with GitHub or Google."
-            : "$10 trial. Keys stay in the workspace.";
+            : "Create a workspace. Generate API keys inside it.";
       }
     }
 
@@ -228,21 +228,6 @@
           "https://www.noetfield.com/deterministic-api/workspace/",
       );
       location.href = `${API}/v1/customer-auth/github/start?next=${next}`;
-    });
-    $("#key-form")?.addEventListener("submit", async (ev) => {
-      ev.preventDefault();
-      const fd = new FormData(ev.target);
-      setStatus(status, "Unlocking…");
-      const { res, data } = await api("/v1/customer-auth/api-key", {
-        method: "POST",
-        body: JSON.stringify({ api_key: String(fd.get("api_key") || "") }),
-      });
-      if (!res.ok || !data.ok || !data.session_token) {
-        setStatus(status, errMsg(data, "Unlock failed"), "is-error");
-        return;
-      }
-      setSession(data.session_token);
-      location.href = "/deterministic-api/workspace/";
     });
   }
 
