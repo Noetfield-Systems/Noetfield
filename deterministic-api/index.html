@@ -75,11 +75,11 @@
    </a>
    <nav class="nf-corp-nav" aria-label="Primary navigation">
     <a href="/deterministic-api/" aria-current="page">API</a>
-    <a href="https://app.noetfield.com/api/">Workspace</a>
+    <a href="/deterministic-api/workspace/">Workspace</a>
     <a href="#proof">Proof</a>
     <a href="#top-up">Top up</a>
     <a href="#referral">Boundary</a>
-    <a class="nf-corp-nav__cta" href="https://app.noetfield.com/signin/?next=%2Fapi%2F">Sign in</a>
+    <a class="nf-corp-nav__cta" href="/deterministic-api/signin/?next=%2Fdeterministic-api%2Fworkspace%2F">Sign in</a>
    </nav>
   </div>
  </header>
@@ -407,8 +407,7 @@
   (function () {
     var q = new URLSearchParams(location.search);
     if (q.get("topup") === "success" || q.get("topup") === "cancel") {
-      var dest = "https://app.noetfield.com/api/?topup=" + encodeURIComponent(q.get("topup"));
-      location.replace(dest);
+      location.replace("/deterministic-api/workspace/?topup=" + encodeURIComponent(q.get("topup")));
     }
   })();
  </script>
