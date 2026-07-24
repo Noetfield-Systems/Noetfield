@@ -107,8 +107,9 @@
 <span class="nf-dapi-code__key">base_url</span> = <span class="nf-dapi-code__str">"https://api.noetfield.com/v1"</span>
 
 <span class="nf-dapi-code__comment"># same SDK · POST /v1/chat/completions</span>
-<span class="nf-dapi-code__key">api_key</span>  = <span class="nf-dapi-code__str">"sk-nf-…"</span></code></pre>
-     <p class="nf-dapi-panel__note">Swap the base URL. Keep models, schemas, and tool-call shapes your app already expects.</p>
+<span class="nf-dapi-code__key">api_key</span>  = <span class="nf-dapi-code__str">"sk-nf-…"</span>
+<span class="nf-dapi-code__key">model</span>    = <span class="nf-dapi-code__str">"noetfield-deterministic"</span>  <span class="nf-dapi-code__comment"># or noetfield-coding-pro</span></code></pre>
+     <p class="nf-dapi-panel__note">Swap the base URL. Enable <strong>Coding Pro</strong> in the workspace for high-grade coding with a deterministic planner — same key, model <code>noetfield-coding-pro</code>.</p>
     </aside>
    </div>
   </section>
@@ -130,6 +131,10 @@
      <article role="listitem">
       <h3>Schema-valid or fail</h3>
       <p>JSON and tool calls must validate before the response leaves the API — repair or fail closed on failure.</p>
+     </article>
+     <article role="listitem">
+      <h3>Coding Pro lane</h3>
+      <p>Enable in workspace. Same key, model <code>noetfield-coding-pro</code> — deterministic planner + stronger coding matrix (~4× token rate).</p>
      </article>
     </div>
   </div>
