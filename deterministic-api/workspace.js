@@ -312,7 +312,7 @@
     const keyCount = $("#key-count");
     function renderKeys(keys) {
       const list = (keys || []).filter((k) => (k.status || "active") === "active");
-      if (keyCount) keyCount.textContent = list.length ? "1 live" : "No key";
+      if (keyCount) keyCount.textContent = list.length ? `${list.length} live` : "No key";
       if (!keysEl) return;
       keysEl.innerHTML = list.length
         ? list
@@ -321,7 +321,7 @@
                 `<div class="dapi-key-row"><span class="dapi-muted">Fingerprint</span> <code>${escapeHtml(k.key_hash_prefix)}…</code> <span class="dapi-pill">live</span></div>`,
             )
             .join("")
-        : '<p class="dapi-muted">No live key yet. Create one below.</p>';
+        : '<p class="dapi-muted">No live key yet. Generate one below.</p>';
     }
     renderKeys(ws.keys || []);
 
@@ -440,33 +440,42 @@
       setStatus(keyStatus, ok ? "cURL copied." : "Could not copy cURL.", ok ? "is-ok" : "is-error");
     });
 
-    genBtn?.addEventListener("click", async () => {
-      genBtn.disabled = true;
-      setStatus(keyStatus, "Replacing API key…");
+    const replaceBtn = $("#replace-key-btn");
+
+    async function issueKey(mode) {
+      const replace = mode === "replace";
+      const busyBtn = replace ? replaceBtn : genBtn;
+      if (genBtn) genBtn.disabled = true;
+      if (replaceBtn) replaceBtn.disabled = true;
+      setStatus(keyStatus, replace ? "Issuing new key, then revoking old…" : "Generating new API key…");
       const { res: kRes, data: kData } = await api("/v1/customer/keys", {
         method: "POST",
-        body: "{}",
+        body: JSON.stringify(replace ? { mode: "replace" } : { mode: "create" }),
       });
-      genBtn.disabled = false;
+      if (genBtn) genBtn.disabled = false;
+      if (replaceBtn) replaceBtn.disabled = false;
       if (!kRes.ok || !kData.ok || !kData.api_key) {
-        setStatus(keyStatus, errMsg(kData, "Could not replace API key"), "is-error");
+        setStatus(keyStatus, errMsg(kData, "Could not issue API key"), "is-error");
         return;
       }
-      lastRawKey = kData.api_key;
+      lastRawKey = String(kData.api_key);
       renderCredentials();
+      if (newKey) newKey.textContent = lastRawKey;
+      if (newKeyBox) newKeyBox.hidden = false;
       const revoked = typeof kData.revoked_count === "number" ? kData.revoked_count : 0;
       setStatus(
         keyStatus,
-        revoked > 0
-          ? `New key live. ${revoked} old key${revoked === 1 ? "" : "s"} revoked — update your app.`
-          : "New key live — copy it now. It will not be shown again.",
+        replace && revoked > 0
+          ? `New key ready below. ${revoked} old key${revoked === 1 ? "" : "s"} revoked.`
+          : "New key ready below — copy it now. It will not be shown again.",
         "is-ok",
       );
-      if (newKey) newKey.textContent = kData.api_key;
-      if (newKeyBox) newKeyBox.hidden = false;
       const { res: wRes, data: wData } = await api("/v1/customer/workspace");
       if (wRes.ok && wData.ok) renderKeys((wData.workspace || {}).keys || []);
-    });
+    }
+
+    genBtn?.addEventListener("click", () => issueKey("create"));
+    replaceBtn?.addEventListener("click", () => issueKey("replace"));
 
     $("#topup-btn")?.addEventListener("click", async () => {
       setStatus(status, "Opening Stripe Checkout…");

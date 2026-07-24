@@ -71,10 +71,11 @@
             <h2>Your API key</h2>
             <span class="dapi-panel-kicker" id="key-count">No key</span>
           </div>
-          <p class="dapi-muted">One live <code>sk-nf-…</code> secret. Create / replace revokes the old key so only the new one works. Fingerprints below are not the secret.</p>
+          <p class="dapi-muted">Generate issues a real <code>sk-nf-…</code> secret (shown once). Fingerprints are only IDs — not the secret. Replace is optional if you want old keys killed.</p>
           <div id="api-keys" class="dapi-keys"></div>
           <div class="dapi-actions dapi-actions--inline">
-            <button type="button" class="dapi-btn dapi-btn--primary" id="generate-key-btn">Create / replace API key</button>
+            <button type="button" class="dapi-btn dapi-btn--primary" id="generate-key-btn">Generate new API key</button>
+            <button type="button" class="dapi-btn" id="replace-key-btn">Replace (revoke old)</button>
           </div>
           <p class="dapi-status" id="key-status" role="status"></p>
           <div class="dapi-secret" id="api-newkey-box" hidden>
