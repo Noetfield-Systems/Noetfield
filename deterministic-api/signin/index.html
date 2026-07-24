@@ -17,11 +17,23 @@
     <a class="dapi-brand" href="/deterministic-api/">Noetfield <small>API</small></a>
   </header>
   <main class="dapi-card">
-    <h1>Sign in to workspace</h1>
-    <p class="dapi-lede">Same Google / GitHub pattern as the app — separate product surface for Deterministic API.</p>
+    <h1>Workspace access</h1>
+    <p class="dapi-lede">Register with email for a $10 trial, or sign in. Stripe top-up only works after your account exists — so charges never go to an anonymous Checkout.</p>
+
+    <form id="register-form" class="dapi-form">
+      <label>Work email
+        <input name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+      </label>
+      <label>Company (optional)
+        <input name="organization" type="text" autocomplete="organization" />
+      </label>
+      <button class="dapi-btn dapi-btn--primary" type="submit">Create workspace · $10 trial</button>
+    </form>
+
+    <p class="dapi-div"><span>or sign in</span></p>
     <button type="button" class="dapi-btn dapi-btn--github" id="btn-github">Continue with GitHub</button>
     <button type="button" class="dapi-btn dapi-btn--google" id="btn-google">Continue with Google</button>
-    <p class="dapi-div"><span>or API key</span></p>
+    <p class="dapi-div"><span>or existing API key</span></p>
     <form id="key-form" class="dapi-form">
       <label>API key
         <input name="api_key" type="password" autocomplete="off" placeholder="sk-nf-…" required />
@@ -29,7 +41,7 @@
       <button class="dapi-btn dapi-btn--primary" type="submit">Unlock workspace</button>
     </form>
     <p class="dapi-status" id="status" role="status"></p>
-    <p class="dapi-switch">New here? <a href="/deterministic-api/#get-key">Get API key</a></p>
+    <p class="dapi-switch">Product page: <a href="/deterministic-api/">Deterministic API</a></p>
   </main>
   <script src="/deterministic-api/workspace.js" defer></script>
   <script>
