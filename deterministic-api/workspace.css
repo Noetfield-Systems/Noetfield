@@ -152,6 +152,9 @@ a:hover { color: var(--ink); }
   padding: 2rem 0 4rem;
   animation: dapi-rise 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+.dapi-shell--flow {
+  width: min(100% - 2rem, 760px);
+}
 
 .dapi-hero {
   display: grid;
@@ -168,24 +171,25 @@ a:hover { color: var(--ink); }
   text-transform: uppercase;
   color: var(--accent);
 }
-.dapi-hero h1 {
+.dapi-hero h1,
+.dapi-flow-head h1 {
   margin: 0;
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(1.85rem, 3.6vw, 2.65rem);
+  font-size: clamp(1.85rem, 3.6vw, 2.45rem);
   letter-spacing: -0.045em;
   line-height: 1.05;
   color: var(--ink);
 }
 .dapi-lede {
-  margin: 0;
-  max-width: 40rem;
+  margin: 0.45rem 0 0;
+  max-width: 36rem;
   color: var(--mute);
   line-height: 1.55;
   font-size: 1.02rem;
 }
 .dapi-banner {
-  margin: 0;
+  margin: 0 0 1.25rem;
   padding: 0.7rem 0.9rem;
   border-left: 3px solid var(--accent);
   background: var(--accent-soft);
@@ -193,6 +197,247 @@ a:hover { color: var(--ink); }
   font-weight: 560;
   animation: dapi-flash 360ms ease both;
 }
+
+.dapi-flow-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.25rem 1.5rem;
+  align-items: start;
+  padding-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.dapi-balance-card {
+  min-width: 11.5rem;
+  padding: 1rem 1.1rem 1.05rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 0.45rem;
+  justify-items: start;
+}
+.dapi-balance-card__label {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.dapi-balance-card .dapi-balance {
+  font-size: 2rem;
+}
+.dapi-balance-card .dapi-btn { width: 100%; }
+.dapi-balance-card .dapi-status { min-height: 0; font-size: 0.78rem; }
+
+.dapi-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+.dapi-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem 1rem;
+  padding: 1.2rem 1.25rem 1.3rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.dapi-step__num {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border: 1px solid rgba(14, 143, 122, 0.22);
+}
+.dapi-step__body { display: grid; gap: 0.65rem; min-width: 0; }
+.dapi-step__body h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.dapi-step__title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dapi-actions--inline { margin-top: 0; padding-top: 0; }
+
+.dapi-secret {
+  border: 1px solid rgba(14, 143, 122, 0.35);
+  background: #f4fbf9;
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  display: grid;
+  gap: 0.45rem;
+  animation: dapi-flash 320ms ease both;
+}
+.dapi-secret__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: var(--accent-ink);
+}
+.dapi-secret__value {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  word-break: break-all;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.dapi-creds { display: grid; gap: 0.45rem; }
+.dapi-cred {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f7fafb;
+}
+.dapi-cred__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.dapi-cred__value {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.dapi-snippet {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--code-bg);
+}
+.dapi-snippet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(215, 239, 232, 0.72);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.dapi-snippet .dapi-code {
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+}
+.dapi-snippet .dapi-btn--copy {
+  color: #e8f2ef;
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.78rem;
+}
+.dapi-snippet .dapi-btn--copy:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: none;
+}
+.dapi-snippet .dapi-btn--copy.is-copied {
+  border-color: rgba(14, 143, 122, 0.55);
+  color: #7ddecb;
+}
+
+.dapi-btn--copy {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.dapi-btn--copy.is-copied {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+}
+
+.dapi-plan-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 12px;
+  background: rgba(7, 16, 24, 0.05);
+  border: 1px solid var(--line);
+  max-width: 22rem;
+}
+.dapi-plan-opt {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--mute);
+  font: inherit;
+  font-weight: 650;
+  font-size: 0.92rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease, box-shadow 140ms ease;
+}
+.dapi-plan-opt:hover { color: var(--ink); }
+.dapi-plan-opt.is-active {
+  background: var(--surface-2);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(7, 16, 24, 0.08);
+}
+
+.dapi-flow-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.1rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+}
+.dapi-flow-foot > a {
+  color: var(--mute);
+  text-decoration: none;
+}
+.dapi-flow-foot > a:hover { color: var(--accent); }
+.dapi-tenant-details {
+  margin-left: auto;
+  color: var(--mute);
+  font-size: 0.82rem;
+}
+.dapi-tenant-details summary { cursor: pointer; list-style: none; }
+.dapi-tenant-details summary::-webkit-details-marker { display: none; }
+.dapi-tenant-details[open] .dapi-tenant { margin-top: 0.35rem; }
 
 .dapi-grid {
   display: grid;
@@ -553,6 +798,17 @@ a:hover { color: var(--ink); }
 
 @media (max-width: 960px) {
   .dapi-grid { grid-template-columns: 1fr; }
+  .dapi-flow-head { grid-template-columns: 1fr; }
+  .dapi-balance-card { width: 100%; }
+  .dapi-cred {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "label copy"
+      "value value";
+  }
+  .dapi-cred__label { grid-area: label; }
+  .dapi-cred__value { grid-area: value; white-space: normal; }
+  .dapi-cred .dapi-btn--copy { grid-area: copy; }
   .dapi-auth-stage { grid-template-columns: 1fr; }
   .dapi-auth-rail {
     min-height: 180px;
@@ -566,6 +822,8 @@ a:hover { color: var(--ink); }
 @media (max-width: 640px) {
   .dapi-top { flex-direction: column; align-items: flex-start; }
   .dapi-email { max-width: 100%; }
+  .dapi-step { grid-template-columns: 1fr; }
+  .dapi-tenant-details { margin-left: 0; width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
