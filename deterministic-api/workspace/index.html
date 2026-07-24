@@ -3,15 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API workspace — Noetfield</title>
+  <title>Workspace — Noetfield API</title>
   <meta name="robots" content="noindex,nofollow" />
-  <link rel="canonical" href="https://app.noetfield.com/api/" />
-  <meta http-equiv="refresh" content="0;url=https://app.noetfield.com/api/" />
-  <script>
-    location.replace("https://app.noetfield.com/api/" + location.search + location.hash);
-  </script>
+  <link rel="canonical" href="https://www.noetfield.com/deterministic-api/workspace/" />
+  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/deterministic-api/workspace.css" />
 </head>
-<body>
-  <p>Opening <a href="https://app.noetfield.com/api/">API workspace</a>…</p>
+<body class="dapi-workspace" data-page="workspace">
+  <header class="dapi-top">
+    <a class="dapi-brand" href="/deterministic-api/">Noetfield <small>API</small></a>
+    <nav class="dapi-nav">
+      <a href="/deterministic-api/">Product</a>
+      <a href="/deterministic-api/workspace/" aria-current="page">Workspace</a>
+      <span id="user-email" class="dapi-email"></span>
+      <button type="button" class="dapi-btn dapi-btn--ghost" id="signout-btn">Sign out</button>
+    </nav>
+  </header>
+  <main class="dapi-shell">
+    <section class="dapi-hero">
+      <p class="dapi-eyebrow">Deterministic API</p>
+      <h1>Your API workspace</h1>
+      <p class="dapi-lede" id="topup-banner" hidden>Top-up received. Balance updates when Stripe confirms.</p>
+      <p class="dapi-lede">Balance, keys, and top-up — not Company New.</p>
+    </section>
+    <section class="dapi-grid" aria-live="polite">
+      <article class="dapi-panel">
+        <h2>Balance</h2>
+        <p class="dapi-balance" id="api-balance">—</p>
+        <p class="dapi-muted" id="api-tenant"></p>
+        <button type="button" class="dapi-btn dapi-btn--primary" id="topup-btn">Top up $10</button>
+        <p class="dapi-status" id="topup-status" role="status"></p>
+      </article>
+      <article class="dapi-panel">
+        <h2>API keys</h2>
+        <div id="api-keys" class="dapi-keys"></div>
+        <p class="dapi-muted">Raw keys are shown once at creation. Store them offline.</p>
+        <pre class="dapi-newkey" id="api-newkey" hidden></pre>
+      </article>
+      <article class="dapi-panel">
+        <h2>Drop-in</h2>
+        <pre class="dapi-code">base_url = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1"
+api_key  = "sk-nf-…"</pre>
+        <p class="dapi-muted"><a href="/deterministic-api/">Product page</a> · <a href="/deterministic-api/catalog.json">Catalog</a></p>
+      </article>
+    </section>
+  </main>
+  <script src="/deterministic-api/workspace.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.NFDapi && window.NFDapi.bootWorkspace) window.NFDapi.bootWorkspace();
+    });
+  </script>
 </body>
 </html>

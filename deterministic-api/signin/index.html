@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in — Noetfield API</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="canonical" href="https://www.noetfield.com/deterministic-api/signin/" />
+  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/deterministic-api/workspace.css" />
+</head>
+<body class="dapi-auth">
+  <header class="dapi-top">
+    <a class="dapi-brand" href="/deterministic-api/">Noetfield <small>API</small></a>
+  </header>
+  <main class="dapi-card">
+    <h1>Sign in to workspace</h1>
+    <p class="dapi-lede">Same Google / GitHub pattern as the app — separate product surface for Deterministic API.</p>
+    <button type="button" class="dapi-btn dapi-btn--github" id="btn-github">Continue with GitHub</button>
+    <button type="button" class="dapi-btn dapi-btn--google" id="btn-google">Continue with Google</button>
+    <p class="dapi-div"><span>or API key</span></p>
+    <form id="key-form" class="dapi-form">
+      <label>API key
+        <input name="api_key" type="password" autocomplete="off" placeholder="sk-nf-…" required />
+      </label>
+      <button class="dapi-btn dapi-btn--primary" type="submit">Unlock workspace</button>
+    </form>
+    <p class="dapi-status" id="status" role="status"></p>
+    <p class="dapi-switch">New here? <a href="/deterministic-api/#get-key">Get API key</a></p>
+  </main>
+  <script src="/deterministic-api/workspace.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.NFDapi && window.NFDapi.bootSignin) window.NFDapi.bootSignin();
+    });
+  </script>
+</body>
+</html>
