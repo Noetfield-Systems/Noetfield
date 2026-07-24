@@ -1,11 +1,11 @@
 {
-  "schema": "noetfield.deterministic-api-catalog.v1.2",
+  "schema": "noetfield.deterministic-api-catalog.v1.3",
   "product_id": "nf-deterministic-api",
   "product_name": "Noetfield API",
   "brand": "Noetfield",
   "independent_commercial_plane": false,
   "lock_doc": "NF_DETERMINISTIC_API_PRODUCT_AND_GTM_LOCKED_v1",
-  "one_liner": "OpenAI-compatible engine endpoint. Schema-valid JSON and tool calls — or fail closed.",
+  "one_liner": "OpenAI-compatible engine endpoint + deterministic tasks. Schema-valid JSON and tool calls — or fail closed.",
   "not_sold": [
     "Motor",
     "Runways",
@@ -20,24 +20,36 @@
     "promise": "JSON schemas and tool calls must validate; auto-repair or fail closed before response leaves the API",
     "status": "flagship_live_signup"
   },
+  "tasks": {
+    "id": "deterministic-tasks",
+    "list": "GET /v1/task-types",
+    "create": "POST /v1/tasks",
+    "live_types": ["webpage_repair"],
+    "capacity_declared": ["webpage_change", "email_draft"],
+    "promise": "Bounded deterministic outcomes with max fanout 0; fail closed on policy breach",
+    "auth": "Bearer sk-nf-… (same API key as chat)",
+    "example": {
+      "task_type": "webpage_repair",
+      "target_url": "https://example.com/page"
+    }
+  },
   "live": {
     "landing": "https://www.noetfield.com/deterministic-api/",
     "catalog": "https://www.noetfield.com/deterministic-api/catalog.json",
     "api_base": "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev",
     "signup": "POST /v1/signup",
     "chat": "POST /v1/chat/completions",
+    "tasks": "POST /v1/tasks",
+    "task_types": "GET /v1/task-types",
     "balance": "GET /v1/balance",
     "models": "GET /v1/models",
-    "create_checkout": "POST /v1/billing/create-checkout",
-    "stripe_webhook": "POST /v1/billing/stripe-webhook",
     "starter_credit_usd": 10,
-    "referral_credit_usd": 10,
-    "topup_amounts_usd": [10, 25, 50, 100]
+    "referral_credit_usd": 10
   },
   "drop_in": {
     "before": "https://api.openai.com/v1",
     "after": "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1",
-    "sdk_note": "Keep OpenAI SDK. Change only base_url and API key."
+    "sdk_note": "Keep OpenAI SDK for chat. Use POST /v1/tasks for deterministic webpage repair."
   },
   "referral": {
     "credit_usd": 10,
