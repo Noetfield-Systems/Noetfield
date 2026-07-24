@@ -40,7 +40,9 @@
       <article class="dapi-panel">
         <h2>API keys</h2>
         <div id="api-keys" class="dapi-keys"></div>
-        <p class="dapi-muted">Raw keys are shown once at creation. Store them offline.</p>
+        <button type="button" class="dapi-btn dapi-btn--primary" id="generate-key-btn">Generate API key</button>
+        <p class="dapi-status" id="key-status" role="status"></p>
+        <p class="dapi-muted">Raw keys are shown once when you generate them here. Public pages never issue keys.</p>
         <pre class="dapi-newkey" id="api-newkey" hidden></pre>
       </article>
       <article class="dapi-panel">

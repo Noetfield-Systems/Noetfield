@@ -140,14 +140,14 @@
     <div>
      <p class="nf-corp-eyebrow">Access</p>
      <h2 id="key-title">Create your API workspace</h2>
-     <p class="nf-dapi-section-lead nf-dapi-section-lead--light">Enter your work email to register. You get a production API key and <strong>$10 free trial credits</strong>. Paid Stripe top-ups happen later — only after you are signed into the workspace, so every charge is tied to your account.</p>
+     <p class="nf-dapi-section-lead nf-dapi-section-lead--light">Enter your work email to register. You get <strong>$10 free trial credits</strong>. Generate your API key only after you are signed into the workspace — never on this public page. Paid Stripe top-ups also happen only inside the workspace.</p>
      <ul class="nf-dapi-bullets">
       <li>Email creates your tracked tenant (no anonymous Stripe)</li>
       <li>$10 starter credits on first register</li>
-      <li>Top up inside the workspace when you need more</li>
+      <li>Generate API keys inside the signed-in workspace</li>
      </ul>
     </div>
-    <form class="nf-dapi-form" id="nfDapiKeyForm" aria-label="Request API key">
+    <form class="nf-dapi-form" id="nfDapiKeyForm" aria-label="Create API workspace">
      <label>Work email
       <input type="email" name="email" required autocomplete="email" placeholder="you@company.com" />
      </label>
@@ -161,16 +161,8 @@
       <input type="text" name="referral_code" autocomplete="off" placeholder="ref_…" spellcheck="false" />
      </label>
      <button type="submit" class="nf-button nf-button--primary">Create workspace · $10 trial</button>
-     <p class="nf-dapi-form__hint">Opens your workspace after register. API key is shown once — store it securely.</p>
+     <p class="nf-dapi-form__hint">Opens your signed-in workspace. Generate the API key there.</p>
      <p class="nf-dapi-form__status" id="nfDapiKeyStatus" hidden aria-live="polite"></p>
-     <div class="nf-dapi-key-result" id="nfDapiKeyResult" hidden>
-      <p class="nf-dapi-key-result__label">Your API key (copy now)</p>
-      <div class="nf-dapi-key-result__row">
-       <code id="nfDapiKeyValue" class="nf-dapi-key-result__value"></code>
-       <button type="button" class="nf-button nf-button--secondary" id="nfDapiKeyCopy">Copy</button>
-      </div>
-      <p class="nf-dapi-key-result__meta" id="nfDapiKeyMeta"></p>
-     </div>
     </form>
    </div>
   </section>
@@ -231,10 +223,6 @@
     var SESSION_KEY = "nf_dapi_session";
     var form = document.getElementById("nfDapiKeyForm");
     var statusEl = document.getElementById("nfDapiKeyStatus");
-    var resultEl = document.getElementById("nfDapiKeyResult");
-    var keyEl = document.getElementById("nfDapiKeyValue");
-    var metaEl = document.getElementById("nfDapiKeyMeta");
-    var copyBtn = document.getElementById("nfDapiKeyCopy");
 
     function setStatus(msg, isError) {
       if (!statusEl) return;
@@ -259,7 +247,6 @@
 
         var submitBtn = form.querySelector('button[type="submit"]');
         if (submitBtn) submitBtn.disabled = true;
-        if (resultEl) resultEl.hidden = true;
         setStatus("Creating your workspace…", false);
 
         var payload = {
@@ -280,45 +267,7 @@
             });
           })
           .then(function (out) {
-            // Fallback while register endpoint rolls out: signup + api-key session.
-            if (out.status === 404) {
-              return fetch(API_BASE + "/v1/signup", {
-                method: "POST",
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify(payload)
-              })
-                .then(function (res) {
-                  return res.json().then(function (data) {
-                    return { ok: res.ok, status: res.status, data: data };
-                  });
-                })
-                .then(function (signed) {
-                  if (!signed.ok || !signed.data || !signed.data.api_key) {
-                    return signed;
-                  }
-                  return fetch(API_BASE + "/v1/customer-auth/api-key", {
-                    method: "POST",
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify({ api_key: signed.data.api_key })
-                  }).then(function (res) {
-                    return res.json().then(function (data) {
-                      return {
-                        ok: res.ok,
-                        status: res.status,
-                        data: Object.assign({}, data, {
-                          api_key: signed.data.api_key,
-                          starter_credit_usd: signed.data.starter_credit_usd,
-                          referral_code: signed.data.referral_code
-                        })
-                      };
-                    });
-                  });
-                });
-            }
-            return out;
-          })
-          .then(function (out) {
-            if (!out.ok || !out.data || !out.data.session_token || !out.data.api_key) {
+            if (!out.ok || !out.data || !out.data.session_token) {
               var err =
                 (out.data && out.data.error && out.data.error.message) ||
                 "Could not register. If this email already has an account, sign in instead.";
@@ -326,25 +275,11 @@
               return;
             }
             setSession(out.data.session_token);
-            if (keyEl) keyEl.textContent = out.data.api_key;
-            if (metaEl) {
-              var credit =
-                out.data.starter_credit_usd != null ? out.data.starter_credit_usd : 10;
-              var ref = out.data.referral_code
-                ? " · your referral code: " + out.data.referral_code
-                : "";
-              metaEl.textContent =
-                "$" +
-                credit +
-                " trial credits on your workspace. Copy the API key now — shown once." +
-                ref;
-            }
-            if (resultEl) resultEl.hidden = false;
-            setStatus("Workspace ready. Opening it…", false);
+            setStatus("Workspace ready. Opening it to generate your API key…", false);
             form.reset();
             setTimeout(function () {
               location.href = "/deterministic-api/workspace/";
-            }, 1800);
+            }, 600);
           })
           .catch(function () {
             setStatus("Network error reaching the API. Check your connection and retry.", true);
@@ -352,21 +287,6 @@
           .finally(function () {
             if (submitBtn) submitBtn.disabled = false;
           });
-      });
-    }
-
-    if (copyBtn && keyEl) {
-      copyBtn.addEventListener("click", function () {
-        var key = keyEl.textContent || "";
-        if (!key) return;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(key).then(function () {
-            copyBtn.textContent = "Copied";
-            setTimeout(function () {
-              copyBtn.textContent = "Copy";
-            }, 1600);
-          });
-        }
       });
     }
   })();
