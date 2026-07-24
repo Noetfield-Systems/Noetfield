@@ -55,6 +55,19 @@
         </div>
       </article>
       <article class="dapi-panel">
+        <h2>Coding Pro <span class="dapi-panel-kicker" id="plan-kicker">standard</span></h2>
+        <p class="dapi-muted" id="plan-copy">
+          Same base_url + key. Enable Coding Pro, then set <code>model=noetfield-coding-pro</code>.
+          Deterministic planner splits work across cheap workers; stronger coding models fill the steps (~4× token rate).
+        </p>
+        <div class="dapi-actions">
+          <button type="button" class="dapi-btn dapi-btn--accent" id="enable-coding-pro-btn">Enable Coding Pro</button>
+          <button type="button" class="dapi-btn dapi-btn--ghost" id="use-standard-btn">Use Standard</button>
+        </div>
+        <p class="dapi-status" id="plan-status" role="status"></p>
+        <pre class="dapi-code" id="coding-pro-snippet" hidden>model = "noetfield-coding-pro"</pre>
+      </article>
+      <article class="dapi-panel">
         <h2>Drop-in <span class="dapi-panel-kicker">SDK</span></h2>
         <pre class="dapi-code" id="drop-in-code">base_url = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1"
 api_key  = "sk-nf-…"</pre>
