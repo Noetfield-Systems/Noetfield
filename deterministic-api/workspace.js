@@ -231,7 +231,20 @@
     });
   }
 
+  async function flashCopied(btn) {
+    if (!btn) return;
+    const label = btn.getAttribute("data-copied-label") || "Copied";
+    const prev = btn.textContent;
+    btn.classList.add("is-copied");
+    btn.textContent = label;
+    window.setTimeout(() => {
+      btn.classList.remove("is-copied");
+      btn.textContent = prev;
+    }, 1400);
+  }
+
   async function bootWorkspace() {
+    const BASE = `${API}/v1`;
     absorbHashSession();
     if (!getSession()) {
       const q = location.search || "";
@@ -271,7 +284,7 @@
     const bal = $("#api-balance");
     if (bal) bal.textContent = `$${(typeof ws.balance_usd === "number" ? ws.balance_usd : 0).toFixed(2)}`;
     const tenant = $("#api-tenant");
-    if (tenant) tenant.textContent = ws.tenant_id ? `tenant ${ws.tenant_id}` : "";
+    if (tenant) tenant.textContent = ws.tenant_id || "";
 
     const keysEl = $("#api-keys");
     const keyCount = $("#key-count");
@@ -286,28 +299,61 @@
                 `<div class="dapi-key-row"><code>${escapeHtml(k.key_hash_prefix)}…</code> <span class="dapi-pill">${escapeHtml(k.status || "active")}</span></div>`,
             )
             .join("")
-        : '<p class="dapi-muted">No keys yet. Generate one below — only while signed in.</p>';
+        : '<p class="dapi-muted">No keys yet.</p>';
     }
     renderKeys(ws.keys || []);
 
     const planKicker = $("#plan-kicker");
     const planStatus = $("#plan-status");
-    const codingSnippet = $("#coding-pro-snippet");
     const dropIn = $("#drop-in-code");
+    const curlEl = $("#curl-code");
+    const credBase = $("#cred-base");
+    const credKey = $("#cred-key");
+    const credModel = $("#cred-model");
+    const copyCredKeyBtn = $("#copy-cred-key-btn");
+    let currentPlan = ws.product_plan || "standard";
 
-    function renderPlan(planId, workspace) {
-      const id = planId || (workspace && workspace.product_plan) || "standard";
-      if (planKicker) planKicker.textContent = id === "coding_pro" ? "coding_pro" : "standard";
-      if (codingSnippet) codingSnippet.hidden = id !== "coding_pro";
+    function modelForPlan(planId) {
+      return planId === "coding_pro" ? "noetfield-coding-pro" : "noetfield-deterministic";
+    }
+
+    function keyForSnippet() {
+      return lastRawKey || "sk-nf-…";
+    }
+
+    function renderCredentials() {
+      const model = modelForPlan(currentPlan);
+      if (credBase) credBase.textContent = BASE;
+      if (credModel) credModel.textContent = model;
+      if (credKey) {
+        credKey.textContent = lastRawKey || "Generate a key in step 1";
+        credKey.classList.toggle("is-ready", Boolean(lastRawKey));
+      }
+      if (copyCredKeyBtn) copyCredKeyBtn.disabled = !lastRawKey;
       if (dropIn) {
-        const model = id === "coding_pro" ? "noetfield-coding-pro" : "noetfield-deterministic";
         dropIn.textContent =
-          'base_url = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1"\n' +
-          'api_key  = "sk-nf-…"\n' +
+          `base_url = "${BASE}"\n` +
+          `api_key  = "${keyForSnippet()}"\n` +
           `model    = "${model}"`;
       }
+      if (curlEl) {
+        curlEl.textContent =
+          `curl ${BASE}/chat/completions \\\n` +
+          `  -H "Authorization: Bearer ${keyForSnippet()}" \\\n` +
+          `  -H "Content-Type: application/json" \\\n` +
+          `  -d '{"model":"${model}","messages":[{"role":"user","content":"ping"}]}'`;
+      }
     }
-    renderPlan(ws.product_plan, ws);
+
+    function renderPlan(planId) {
+      currentPlan = planId || "standard";
+      if (planKicker) planKicker.textContent = currentPlan === "coding_pro" ? "Coding Pro" : "Standard";
+      document.querySelectorAll(".dapi-plan-opt").forEach((btn) => {
+        btn.classList.toggle("is-active", btn.getAttribute("data-plan") === currentPlan);
+      });
+      renderCredentials();
+    }
+    renderPlan(ws.product_plan);
 
     async function setPlan(product_plan) {
       setStatus(planStatus, product_plan === "coding_pro" ? "Enabling Coding Pro…" : "Switching to Standard…");
@@ -319,12 +365,12 @@
         setStatus(planStatus, errMsg(pData, "Could not update plan"), "is-error");
         return;
       }
-      renderPlan(pData.product_plan, null);
+      renderPlan(pData.product_plan);
       setStatus(
         planStatus,
         pData.product_plan === "coding_pro"
-          ? "Coding Pro on — use model noetfield-coding-pro (~4× token rate)."
-          : "Standard lane active — model noetfield-deterministic.",
+          ? "Coding Pro on — model updated in your snippet."
+          : "Standard lane on — model updated in your snippet.",
         "is-ok",
       );
     }
@@ -332,20 +378,44 @@
     $("#enable-coding-pro-btn")?.addEventListener("click", () => setPlan("coding_pro"));
     $("#use-standard-btn")?.addEventListener("click", () => setPlan("standard"));
 
+    const newKeyBox = $("#api-newkey-box");
     const newKey = $("#api-newkey");
-    const newKeyTools = $("#api-newkey-tools");
     const keyStatus = $("#key-status");
     const genBtn = $("#generate-key-btn");
 
+    document.querySelectorAll("[data-copy-target]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.getAttribute("data-copy-target");
+        const el = id ? document.getElementById(id) : null;
+        const text = (el?.textContent || "").trim();
+        if (!text || text.startsWith("Generate a key")) {
+          setStatus(keyStatus, "Generate a key first.", "is-error");
+          return;
+        }
+        const ok = await copyText(text);
+        if (ok) await flashCopied(btn);
+        setStatus(keyStatus, ok ? "Copied." : "Could not copy.", ok ? "is-ok" : "is-error");
+      });
+    });
+
     $("#copy-key-btn")?.addEventListener("click", async () => {
       const ok = await copyText(lastRawKey);
-      setStatus(keyStatus, ok ? "Key copied to clipboard." : "Could not copy — select the key manually.", ok ? "is-ok" : "is-error");
+      if (ok) await flashCopied($("#copy-key-btn"));
+      setStatus(keyStatus, ok ? "Key copied." : "Could not copy — select the key manually.", ok ? "is-ok" : "is-error");
     });
 
     $("#copy-dropin-btn")?.addEventListener("click", async () => {
-      const code = ($("#drop-in-code")?.textContent || "").trim();
+      const code = (dropIn?.textContent || "").trim();
       const ok = await copyText(code);
-      setStatus(status, ok ? "Snippet copied." : "Could not copy snippet.", ok ? "is-ok" : "is-error");
+      if (ok) await flashCopied($("#copy-dropin-btn"));
+      setStatus(keyStatus, ok ? "Snippet copied." : "Could not copy snippet.", ok ? "is-ok" : "is-error");
+    });
+
+    $("#copy-curl-btn")?.addEventListener("click", async () => {
+      const code = (curlEl?.textContent || "").trim();
+      const ok = await copyText(code);
+      if (ok) await flashCopied($("#copy-curl-btn"));
+      setStatus(keyStatus, ok ? "cURL copied." : "Could not copy cURL.", ok ? "is-ok" : "is-error");
     });
 
     genBtn?.addEventListener("click", async () => {
@@ -361,12 +431,10 @@
         return;
       }
       lastRawKey = kData.api_key;
+      renderCredentials();
       setStatus(keyStatus, "Key created — copy it now. It will not be shown again.", "is-ok");
-      if (newKey) {
-        newKey.hidden = false;
-        newKey.textContent = `New API key (copy now):\n${kData.api_key}`;
-      }
-      if (newKeyTools) newKeyTools.hidden = false;
+      if (newKey) newKey.textContent = kData.api_key;
+      if (newKeyBox) newKeyBox.hidden = false;
       const { res: wRes, data: wData } = await api("/v1/customer/workspace");
       if (wRes.ok && wData.ok) renderKeys((wData.workspace || {}).keys || []);
     });

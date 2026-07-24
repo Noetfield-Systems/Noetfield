@@ -24,63 +24,116 @@
       <button type="button" class="dapi-btn dapi-btn--ghost" id="signout-btn">Sign out</button>
     </nav>
   </header>
-  <main class="dapi-shell">
-    <section class="dapi-hero">
-      <p class="dapi-eyebrow">Deterministic API · Control plane</p>
-      <h1>Your API workspace</h1>
-      <p class="dapi-banner" id="topup-banner" hidden>Top-up received. Balance updates when Stripe confirms.</p>
-      <p class="dapi-lede">Credits, keys, and billing for your tenant. Generate API keys only here — public pages never issue raw secrets.</p>
-    </section>
-    <section class="dapi-grid" aria-live="polite">
-      <article class="dapi-panel">
-        <h2>Balance <span class="dapi-panel-kicker">USD</span></h2>
+
+  <main class="dapi-shell dapi-shell--flow">
+    <p class="dapi-banner" id="topup-banner" hidden>Top-up received. Balance updates when Stripe confirms.</p>
+
+    <header class="dapi-flow-head">
+      <div>
+        <p class="dapi-eyebrow">Workspace</p>
+        <h1>Connect your app</h1>
+        <p class="dapi-lede">Three steps: get a key, copy the snippet, call the API. Credits bill from your balance.</p>
+      </div>
+      <aside class="dapi-balance-card" aria-label="Account balance">
+        <p class="dapi-balance-card__label">Balance</p>
         <p class="dapi-balance" id="api-balance">—</p>
-        <p class="dapi-tenant" id="api-tenant"></p>
-        <div class="dapi-actions">
-          <button type="button" class="dapi-btn dapi-btn--accent" id="topup-btn">Top up $10</button>
-        </div>
+        <button type="button" class="dapi-btn dapi-btn--accent" id="topup-btn">Top up $10</button>
         <p class="dapi-status" id="topup-status" role="status"></p>
-      </article>
-      <article class="dapi-panel">
-        <h2>API keys <span class="dapi-panel-kicker" id="key-count">0 active</span></h2>
-        <div id="api-keys" class="dapi-keys"></div>
-        <div class="dapi-actions">
-          <button type="button" class="dapi-btn dapi-btn--primary" id="generate-key-btn">Generate API key</button>
+      </aside>
+    </header>
+
+    <ol class="dapi-steps">
+      <li class="dapi-step">
+        <div class="dapi-step__num" aria-hidden="true">1</div>
+        <div class="dapi-step__body">
+          <div class="dapi-step__title-row">
+            <h2>Get an API key</h2>
+            <span class="dapi-panel-kicker" id="key-count">0 active</span>
+          </div>
+          <p class="dapi-muted">Keys are created here after you sign in. Shown once — copy and store them.</p>
+          <div id="api-keys" class="dapi-keys"></div>
+          <div class="dapi-actions dapi-actions--inline">
+            <button type="button" class="dapi-btn dapi-btn--primary" id="generate-key-btn">Generate API key</button>
+          </div>
+          <p class="dapi-status" id="key-status" role="status"></p>
+          <div class="dapi-secret" id="api-newkey-box" hidden>
+            <div class="dapi-secret__head">
+              <span>New key — copy now</span>
+              <button type="button" class="dapi-btn dapi-btn--copy" id="copy-key-btn" data-copied-label="Copied">Copy key</button>
+            </div>
+            <code class="dapi-secret__value" id="api-newkey"></code>
+          </div>
         </div>
-        <p class="dapi-status" id="key-status" role="status"></p>
-        <p class="dapi-muted">Raw keys appear once when generated. Store them offline — they cannot be retrieved later.</p>
-        <pre class="dapi-newkey" id="api-newkey" hidden></pre>
-        <div class="dapi-newkey-tools" id="api-newkey-tools" hidden>
-          <button type="button" class="dapi-btn" id="copy-key-btn">Copy key</button>
+      </li>
+
+      <li class="dapi-step">
+        <div class="dapi-step__num" aria-hidden="true">2</div>
+        <div class="dapi-step__body">
+          <h2>Copy credentials</h2>
+          <p class="dapi-muted">Paste these into your client. After you generate a key, it fills into the snippet automatically.</p>
+          <div class="dapi-creds">
+            <div class="dapi-cred">
+              <span class="dapi-cred__label">Base URL</span>
+              <code class="dapi-cred__value" id="cred-base">https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1</code>
+              <button type="button" class="dapi-btn dapi-btn--copy" data-copy-target="cred-base">Copy</button>
+            </div>
+            <div class="dapi-cred">
+              <span class="dapi-cred__label">API key</span>
+              <code class="dapi-cred__value" id="cred-key">Generate a key in step 1</code>
+              <button type="button" class="dapi-btn dapi-btn--copy" id="copy-cred-key-btn" data-copy-target="cred-key" disabled>Copy</button>
+            </div>
+            <div class="dapi-cred">
+              <span class="dapi-cred__label">Model</span>
+              <code class="dapi-cred__value" id="cred-model">noetfield-deterministic</code>
+              <button type="button" class="dapi-btn dapi-btn--copy" data-copy-target="cred-model">Copy</button>
+            </div>
+          </div>
+          <div class="dapi-snippet">
+            <div class="dapi-snippet__head">
+              <span>Drop-in snippet</span>
+              <button type="button" class="dapi-btn dapi-btn--copy" id="copy-dropin-btn" data-copied-label="Copied">Copy all</button>
+            </div>
+            <pre class="dapi-code" id="drop-in-code"></pre>
+          </div>
+          <div class="dapi-snippet">
+            <div class="dapi-snippet__head">
+              <span>cURL</span>
+              <button type="button" class="dapi-btn dapi-btn--copy" id="copy-curl-btn" data-copied-label="Copied">Copy</button>
+            </div>
+            <pre class="dapi-code" id="curl-code"></pre>
+          </div>
         </div>
-      </article>
-      <article class="dapi-panel">
-        <h2>Coding Pro <span class="dapi-panel-kicker" id="plan-kicker">standard</span></h2>
-        <p class="dapi-muted" id="plan-copy">
-          Same base_url + key. Enable Coding Pro, then set <code>model=noetfield-coding-pro</code>.
-          Deterministic planner splits work across cheap workers; stronger coding models fill the steps (~4× token rate).
-        </p>
-        <div class="dapi-actions">
-          <button type="button" class="dapi-btn dapi-btn--accent" id="enable-coding-pro-btn">Enable Coding Pro</button>
-          <button type="button" class="dapi-btn dapi-btn--ghost" id="use-standard-btn">Use Standard</button>
+      </li>
+
+      <li class="dapi-step">
+        <div class="dapi-step__num" aria-hidden="true">3</div>
+        <div class="dapi-step__body">
+          <div class="dapi-step__title-row">
+            <h2>Choose a lane</h2>
+            <span class="dapi-panel-kicker" id="plan-kicker">Standard</span>
+          </div>
+          <p class="dapi-muted" id="plan-copy">
+            Standard is the default chat model. Coding Pro uses the same URL and key with a stronger coding model (higher token rate).
+          </p>
+          <div class="dapi-plan-toggle" role="group" aria-label="Product lane">
+            <button type="button" class="dapi-plan-opt is-active" id="use-standard-btn" data-plan="standard">Standard</button>
+            <button type="button" class="dapi-plan-opt" id="enable-coding-pro-btn" data-plan="coding_pro">Coding Pro</button>
+          </div>
+          <p class="dapi-status" id="plan-status" role="status"></p>
         </div>
-        <p class="dapi-status" id="plan-status" role="status"></p>
-        <pre class="dapi-code" id="coding-pro-snippet" hidden>model = "noetfield-coding-pro"</pre>
-      </article>
-      <article class="dapi-panel">
-        <h2>Drop-in <span class="dapi-panel-kicker">SDK</span></h2>
-        <pre class="dapi-code" id="drop-in-code">base_url = "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1"
-api_key  = "sk-nf-…"</pre>
-        <div class="dapi-actions">
-          <button type="button" class="dapi-btn" id="copy-dropin-btn">Copy snippet</button>
-        </div>
-        <p class="dapi-foot-links">
-          <a href="/deterministic-api/">Product page</a>
-          <a href="/deterministic-api/catalog.json">Catalog</a>
-        </p>
-      </article>
-    </section>
+      </li>
+    </ol>
+
+    <footer class="dapi-flow-foot">
+      <a href="/deterministic-api/">Product</a>
+      <a href="/deterministic-api/catalog.json">Catalog</a>
+      <details class="dapi-tenant-details">
+        <summary>Account id</summary>
+        <p class="dapi-tenant" id="api-tenant"></p>
+      </details>
+    </footer>
   </main>
+
   <script src="/deterministic-api/workspace.js" defer></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
