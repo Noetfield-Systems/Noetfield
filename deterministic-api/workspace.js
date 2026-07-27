@@ -293,18 +293,32 @@
     function renderUsage(byLane) {
       const std = byLane?.standard || {};
       const pro = byLane?.coding_pro || {};
+      const claude = byLane?.claude_compat || {};
+      const gemini = byLane?.gemini_compat || {};
       const stdUsd = $("#usage-standard-usd");
       const proUsd = $("#usage-pro-usd");
+      const claudeUsd = $("#usage-claude-usd");
+      const geminiUsd = $("#usage-gemini-usd");
       const stdMeta = $("#usage-standard-meta");
       const proMeta = $("#usage-pro-meta");
+      const claudeMeta = $("#usage-claude-meta");
+      const geminiMeta = $("#usage-gemini-meta");
       const stdModel = $("#usage-standard-model");
       const proModel = $("#usage-pro-model");
+      const claudeModel = $("#usage-claude-model");
+      const geminiModel = $("#usage-gemini-model");
       if (stdUsd) stdUsd.textContent = money(std.charged_usd);
       if (proUsd) proUsd.textContent = money(pro.charged_usd);
+      if (claudeUsd) claudeUsd.textContent = money(claude.charged_usd);
+      if (geminiUsd) geminiUsd.textContent = money(gemini.charged_usd);
       if (stdMeta) stdMeta.textContent = `${std.calls || 0} calls`;
       if (proMeta) proMeta.textContent = `${pro.calls || 0} calls · ~4× rate`;
+      if (claudeMeta) claudeMeta.textContent = `${claude.calls || 0} calls · ~4× rate`;
+      if (geminiMeta) geminiMeta.textContent = `${gemini.calls || 0} calls · ~4× rate`;
       if (stdModel && std.model) stdModel.textContent = std.model;
       if (proModel && pro.model) proModel.textContent = pro.model;
+      if (claudeModel && claude.model) claudeModel.textContent = claude.model;
+      if (geminiModel && gemini.model) geminiModel.textContent = gemini.model;
     }
     renderUsage(ws.usage_by_lane);
 
@@ -380,43 +394,135 @@
 
     const planKicker = $("#plan-kicker");
     const planStatus = $("#plan-status");
+    const planCopy = $("#plan-copy");
     const dropIn = $("#drop-in-code");
     const curlEl = $("#curl-code");
+    const protocolWrap = $("#protocol-snippet-wrap");
+    const protocolCode = $("#protocol-code");
+    const protocolLabel = $("#protocol-snippet-label");
     const credBase = $("#cred-base");
     const credModel = $("#cred-model");
     let currentPlan = ws.product_plan || "standard";
 
+    const PLAN_LABELS = {
+      standard: "Standard",
+      coding_pro: "Coding Pro",
+      claude_compat: "Claude Compat",
+      gemini_compat: "Gemini Compat",
+    };
+
     function modelForPlan(planId) {
-      return planId === "coding_pro" ? "noetfield-coding-pro" : "noetfield-deterministic";
+      if (planId === "coding_pro") return "noetfield-coding-pro";
+      if (planId === "claude_compat") return "noetfield-claude-compat";
+      if (planId === "gemini_compat") return "noetfield-gemini-compat";
+      return "noetfield-deterministic";
     }
 
     function keyForSnippet() {
       return primaryKey() || "sk-nf-…";
     }
 
+    function hostRoot() {
+      return BASE.replace(/\/v1\/?$/, "");
+    }
+
     function renderCredentials() {
       const model = modelForPlan(currentPlan);
-      if (credBase) credBase.textContent = BASE;
-      if (credModel) credModel.textContent = model;
-      if (dropIn) {
-        dropIn.textContent =
-          `base_url = "${BASE}"\n` +
-          `api_key  = "${keyForSnippet()}"\n` +
-          `model    = "${model}"`;
+      const key = keyForSnippet();
+      if (credBase) {
+        credBase.textContent =
+          currentPlan === "gemini_compat" ? `${hostRoot()}/v1beta` : BASE;
       }
-      if (curlEl) {
-        curlEl.textContent =
-          `curl ${BASE}/chat/completions \\\n` +
-          `  -H "Authorization: Bearer ${keyForSnippet()}" \\\n` +
-          `  -H "Content-Type: application/json" \\\n` +
-          `  -H "x-noetfield-surface: my-app" \\\n` +
-          `  -d '{"model":"${model}","messages":[{"role":"user","content":"ping"}]}'`;
+      if (credModel) credModel.textContent = model;
+
+      if (currentPlan === "claude_compat") {
+        if (dropIn) {
+          dropIn.textContent =
+            `# Continue / Claude provider (Anthropic-shaped)\n` +
+            `provider: anthropic\n` +
+            `apiBase: "${BASE}"\n` +
+            `apiKey: "${key}"\n` +
+            `model: "${model}"`;
+        }
+        if (curlEl) {
+          curlEl.textContent =
+            `curl ${BASE}/messages \\\n` +
+            `  -H "x-api-key: ${key}" \\\n` +
+            `  -H "anthropic-version: 2023-06-01" \\\n` +
+            `  -H "Content-Type: application/json" \\\n` +
+            `  -d '{"model":"${model}","max_tokens":256,"messages":[{"role":"user","content":"ping"}]}'`;
+        }
+        if (protocolWrap) protocolWrap.hidden = false;
+        if (protocolLabel) protocolLabel.textContent = "Continue yaml (Claude provider)";
+        if (protocolCode) {
+          protocolCode.textContent =
+            `name: Noetfield Claude Compat\n` +
+            `provider: anthropic\n` +
+            `model: ${model}\n` +
+            `apiBase: ${BASE}\n` +
+            `apiKey: ${key}`;
+        }
+      } else if (currentPlan === "gemini_compat") {
+        if (dropIn) {
+          dropIn.textContent =
+            `# Gemini generateContent\n` +
+            `endpoint = "${hostRoot()}/v1beta/models/${model}:generateContent"\n` +
+            `api_key  = "${key}"\n` +
+            `header   = "x-goog-api-key"`;
+        }
+        if (curlEl) {
+          curlEl.textContent =
+            `curl "${hostRoot()}/v1beta/models/${model}:generateContent" \\\n` +
+            `  -H "x-goog-api-key: ${key}" \\\n` +
+            `  -H "Content-Type: application/json" \\\n` +
+            `  -d '{"contents":[{"role":"user","parts":[{"text":"ping"}]}]}'`;
+        }
+        if (protocolWrap) protocolWrap.hidden = false;
+        if (protocolLabel) protocolLabel.textContent = "Gemini client notes";
+        if (protocolCode) {
+          protocolCode.textContent =
+            `# Point Gemini / OpenAI-compatible Gemini clients at:\n` +
+            `# ${hostRoot()}/v1beta/models/${model}:generateContent\n` +
+            `# Auth: x-goog-api-key: ${key}  (or Authorization: Bearer ${key})`;
+        }
+      } else {
+        if (dropIn) {
+          dropIn.textContent =
+            `# OpenAI-compatible (Continue provider: openai)\n` +
+            `base_url = "${BASE}"\n` +
+            `api_key  = "${key}"\n` +
+            `model    = "${model}"`;
+        }
+        if (curlEl) {
+          curlEl.textContent =
+            `curl ${BASE}/chat/completions \\\n` +
+            `  -H "Authorization: Bearer ${key}" \\\n` +
+            `  -H "Content-Type: application/json" \\\n` +
+            `  -H "x-noetfield-surface: my-app" \\\n` +
+            `  -d '{"model":"${model}","messages":[{"role":"user","content":"ping"}]}'`;
+        }
+        if (protocolWrap) protocolWrap.hidden = true;
       }
     }
 
     function renderPlan(planId) {
       currentPlan = planId || "standard";
-      if (planKicker) planKicker.textContent = currentPlan === "coding_pro" ? "Coding Pro" : "Standard";
+      if (planKicker) planKicker.textContent = PLAN_LABELS[currentPlan] || "Standard";
+      if (planCopy) {
+        if (currentPlan === "claude_compat") {
+          planCopy.textContent =
+            "Claude Compat is on. Use Anthropic-shaped POST /v1/messages with x-api-key or Bearer. Model noetfield-claude-compat (~4× rate).";
+        } else if (currentPlan === "gemini_compat") {
+          planCopy.textContent =
+            "Gemini Compat is on. Call generateContent with x-goog-api-key or Bearer. Model noetfield-gemini-compat (~4× rate).";
+        } else if (currentPlan === "coding_pro") {
+          planCopy.textContent =
+            "Coding Pro is on. Same OpenAI chat URL and key; set model to noetfield-coding-pro (~4× rate).";
+        } else {
+          planCopy.textContent =
+            "Standard is the default OpenAI chat model. Switch lanes below for Coding Pro, Claude Compat, or Gemini Compat.";
+        }
+      }
       document.querySelectorAll(".dapi-plan-opt").forEach((btn) => {
         btn.classList.toggle("is-active", btn.getAttribute("data-plan") === currentPlan);
       });
@@ -425,7 +531,8 @@
     renderPlan(ws.product_plan);
 
     async function setPlan(product_plan) {
-      setStatus(planStatus, product_plan === "coding_pro" ? "Enabling Coding Pro…" : "Switching to Standard…");
+      const label = PLAN_LABELS[product_plan] || product_plan;
+      setStatus(planStatus, `Switching to ${label}…`);
       const { res: pRes, data: pData } = await api("/v1/customer/plan", {
         method: "POST",
         body: JSON.stringify({ product_plan }),
@@ -437,16 +544,23 @@
       renderPlan(pData.product_plan);
       setStatus(
         planStatus,
-        pData.product_plan === "coding_pro"
-          ? "Coding Pro on — model updated in your snippet."
-          : "Standard lane on — model updated in your snippet.",
+        `${PLAN_LABELS[pData.product_plan] || pData.product_plan} on — snippets updated.`,
         "is-ok",
       );
     }
 
     $("#enable-coding-pro-btn")?.addEventListener("click", () => setPlan("coding_pro"));
     $("#use-standard-btn")?.addEventListener("click", () => setPlan("standard"));
+    $("#enable-claude-btn")?.addEventListener("click", () => setPlan("claude_compat"));
+    $("#enable-gemini-btn")?.addEventListener("click", () => setPlan("gemini_compat"));
 
+    $("#copy-protocol-btn")?.addEventListener("click", async () => {
+      const code = (protocolCode?.textContent || "").trim();
+      const ok = await copyText(code);
+      const btn = $("#copy-protocol-btn");
+      if (ok && btn) await flashCopied(btn);
+      setStatus(planStatus, ok ? "Protocol snippet copied." : "Could not copy.", ok ? "is-ok" : "is-error");
+    });
     const keyStatus = $("#key-status");
     const genBtn = $("#generate-key-btn");
 

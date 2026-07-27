@@ -60,6 +60,18 @@
           <p class="dapi-usage-card__amount" id="usage-pro-usd">$0.00</p>
           <p class="dapi-usage-card__meta" id="usage-pro-meta">0 calls · ~4× rate</p>
         </article>
+        <article class="dapi-usage-card">
+          <p class="dapi-usage-card__label">Claude Compat</p>
+          <p class="dapi-usage-card__model" id="usage-claude-model">noetfield-claude-compat</p>
+          <p class="dapi-usage-card__amount" id="usage-claude-usd">$0.00</p>
+          <p class="dapi-usage-card__meta" id="usage-claude-meta">0 calls · ~4× rate</p>
+        </article>
+        <article class="dapi-usage-card">
+          <p class="dapi-usage-card__label">Gemini Compat</p>
+          <p class="dapi-usage-card__model" id="usage-gemini-model">noetfield-gemini-compat</p>
+          <p class="dapi-usage-card__amount" id="usage-gemini-usd">$0.00</p>
+          <p class="dapi-usage-card__meta" id="usage-gemini-meta">0 calls · ~4× rate</p>
+        </article>
       </div>
     </section>
 
@@ -122,13 +134,22 @@
             <span class="dapi-panel-kicker" id="plan-kicker">Standard</span>
           </div>
           <p class="dapi-muted" id="plan-copy">
-            Standard is the default chat model. Coding Pro uses the same URL and key with a stronger coding model (higher token rate).
+            One active lane per workspace. Same <code>sk-nf</code> key. Standard and Coding Pro use OpenAI chat; Claude Compat uses Anthropic Messages; Gemini Compat uses generateContent.
           </p>
           <div class="dapi-plan-toggle" role="group" aria-label="Product lane">
             <button type="button" class="dapi-plan-opt is-active" id="use-standard-btn" data-plan="standard">Standard</button>
             <button type="button" class="dapi-plan-opt" id="enable-coding-pro-btn" data-plan="coding_pro">Coding Pro</button>
+            <button type="button" class="dapi-plan-opt" id="enable-claude-btn" data-plan="claude_compat">Claude Compat</button>
+            <button type="button" class="dapi-plan-opt" id="enable-gemini-btn" data-plan="gemini_compat">Gemini Compat</button>
           </div>
           <p class="dapi-status" id="plan-status" role="status"></p>
+          <div class="dapi-snippet" id="protocol-snippet-wrap" hidden>
+            <div class="dapi-snippet__head">
+              <span id="protocol-snippet-label">Protocol example</span>
+              <button type="button" class="dapi-btn dapi-btn--copy" id="copy-protocol-btn" data-copied-label="Copied">Copy</button>
+            </div>
+            <pre class="dapi-code" id="protocol-code"></pre>
+          </div>
         </div>
       </li>
     </ol>

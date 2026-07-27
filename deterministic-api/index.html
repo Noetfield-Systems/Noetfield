@@ -109,7 +109,7 @@
 <span class="nf-dapi-code__comment"># same SDK · POST /v1/chat/completions</span>
 <span class="nf-dapi-code__key">api_key</span>  = <span class="nf-dapi-code__str">"sk-nf-…"</span>
 <span class="nf-dapi-code__key">model</span>    = <span class="nf-dapi-code__str">"noetfield-deterministic"</span>  <span class="nf-dapi-code__comment"># or noetfield-coding-pro</span></code></pre>
-     <p class="nf-dapi-panel__note">Swap the base URL. Enable <strong>Coding Pro</strong> in the workspace for high-grade coding with a deterministic planner — same key, model <code>noetfield-coding-pro</code>.</p>
+     <p class="nf-dapi-panel__note">One key, three protocol families: OpenAI chat, Anthropic Messages, Gemini generateContent. Enable the lane in the workspace, then point your client at this host.</p>
     </aside>
    </div>
   </section>
@@ -135,6 +135,10 @@
      <article role="listitem">
       <h3>Coding Pro lane</h3>
       <p>Enable in workspace. Same key, model <code>noetfield-coding-pro</code> — deterministic planner + stronger coding matrix (~4× token rate).</p>
+     </article>
+     <article role="listitem">
+      <h3>Claude + Gemini compat</h3>
+      <p>Same Worker and key. Enable Claude Compat for <code>POST /v1/messages</code>, or Gemini Compat for <code>generateContent</code>. Models <code>noetfield-claude-compat</code> / <code>noetfield-gemini-compat</code>.</p>
      </article>
     </div>
   </div>
