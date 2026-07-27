@@ -23,15 +23,13 @@
  <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
  <meta name="twitter:image:alt" content="Noetfield Systems Inc. | governed AI execution, products, custom AI Motors and institutional workflows." />
 
-<meta name="theme-color" content="#f4f1ea" />
+<meta name="theme-color" content="#f3f0e9" />
 <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
- <!-- Serif was in the design export's font request but never used on the page;
-      dropping it removes a render-blocking family for nothing lost. -->
- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=2" />
- <link rel="stylesheet" href="/assets/noetfield-home-v2.css?v=2" />
+ <link rel="stylesheet" href="/assets/noetfield-home-v2.css?v=3" />
  <script type="application/ld+json">
  {
    "@context": "https://schema.org",
@@ -75,15 +73,15 @@
  <main id="main">
 
   <!-- 00 · HERO -->
-  <section class="hero" id="top" aria-labelledby="hero-title">
-   <div class="wrap hero__grid">
+  <section class="hero nf-corp-hero" id="top" aria-labelledby="hero-title">
+   <div class="wrap nf-corp-wrap hero__grid">
     <div>
-     <p class="hero__eyebrow"><span class="dot" aria-hidden="true"></span>Vancouver, Canada · Governed execution systems</p>
+     <p class="hero__eyebrow nf-corp-eyebrow"><span class="dot" aria-hidden="true"></span>Vancouver, Canada · Governed execution systems</p>
      <h1 id="hero-title">AI systems that can act, and show why the action was allowed.</h1>
      <p class="hero__lead">Noetfield builds <strong>AI Motors</strong>: governed execution runtimes that coordinate models, engines, agents, tools, policy, and human authority. Probabilistic workers operate inside deterministic controls, bounded recovery, explicit acceptance criteria, and inspectable receipts.</p>
-     <div class="actions">
-      <a class="btn btn--ghost" href="/proof/">INSPECT CURRENT PROOF →</a>
-      <a class="btn btn--solid" href="/contact/?topic=pilot-client">DISCUSS ONE WORKFLOW</a>
+     <div class="actions nf-corp-actions">
+      <a class="nf-button nf-button--secondary" href="/proof/">Inspect current proof</a>
+      <a class="nf-button nf-button--primary" href="/contact/?topic=pilot-client">Discuss one workflow</a>
      </div>
      <div class="pillars">
       <div class="pillar"><div class="pillar__num">01</div><div class="pillar__label">Probabilistic workers</div></div>
@@ -92,10 +90,10 @@
       <div class="pillar"><div class="pillar__num">04</div><div class="pillar__label">Inspectable receipts</div></div>
      </div>
     </div>
-    <aside class="hero__aside" aria-label="Current commissioning focus">
-     <div class="aside__head">
+    <aside class="hero__aside nf-system-card" aria-label="Current commissioning focus">
+     <div class="aside__head nf-system-card__head">
       <span>CURRENT FOCUS</span>
-      <span>CLIENT-ZERO · P05</span>
+      <span class="nf-status">CLIENT-ZERO · P05</span>
      </div>
      <div class="aside__block">
       <div class="aside__title">COMMISSIONING POSTURE</div>
@@ -115,9 +113,9 @@
   </section>
 
   <!-- 01 · THE PROBLEM -->
-  <section class="sec" aria-labelledby="problem-title">
-   <div class="wrap split">
-    <p class="kicker">01 · The problem</p>
+  <section class="sec nf-corp-section" aria-labelledby="problem-title">
+   <div class="wrap nf-corp-wrap split">
+    <p class="kicker nf-corp-eyebrow">01 · The problem</p>
     <div>
      <h2 id="problem-title">AI capability is abundant. Governed execution is not.</h2>
      <p class="lede" style="margin-top:22px">Models and agents can generate and act. Institutions still need to know whether an action was allowed, which authority applied, what failed safely, and what evidence remains afterward.</p>
@@ -127,11 +125,11 @@
   </section>
 
   <!-- 02 · WHAT CHANGES -->
-  <section class="sec sec--tint" aria-labelledby="changes-title">
-   <div class="wrap">
+  <section class="sec sec--tint nf-corp-section" aria-labelledby="changes-title">
+   <div class="wrap nf-corp-wrap">
     <div class="cmp__head">
      <div>
-      <p class="kicker">02 · What changes</p>
+      <p class="kicker nf-corp-eyebrow">02 · What changes</p>
       <h2 id="changes-title" style="margin-top:12px">Spreadsheet operations, or governed execution.</h2>
      </div>
      <!-- Both columns are always present; these buttons only shift emphasis.
@@ -170,9 +168,9 @@
   </section>
 
   <!-- 03 · ARCHITECTURE -->
-  <section class="sec" id="architecture" aria-labelledby="arch-title">
-   <div class="wrap">
-    <p class="kicker">03 · Architecture</p>
+  <section class="sec nf-corp-section" id="architecture" aria-labelledby="arch-title">
+   <div class="wrap nf-corp-wrap">
+    <p class="kicker nf-corp-eyebrow">03 · Architecture</p>
     <h2 id="arch-title" style="margin-top:12px">Engines, agents, runways, and motors.</h2>
     <p class="lede" style="margin-top:20px">Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution. An AI Motor turns authorized intent into controlled outcomes verified against defined acceptance criteria.</p>
 
@@ -227,10 +225,10 @@ Workflow class assignment</div>
   </section>
 
   <!-- 04 · EVIDENCE -->
-  <section class="sec sec--dark" id="receipt" aria-labelledby="ev-title">
-   <div class="wrap ev">
+  <section class="sec sec--dark nf-corp-section" id="receipt" aria-labelledby="ev-title">
+   <div class="wrap nf-corp-wrap ev">
     <div>
-     <p class="kicker">04 · Evidence</p>
+     <p class="kicker nf-corp-eyebrow">04 · Evidence</p>
      <h2 id="ev-title">Evidence, not slides.</h2>
      <p class="ev__lede">The valuable moment is not a successful demo. It is the moment the system catches a defect, repairs safely, verifies independently, and preserves why promotion was accepted.</p>
      <div class="cases">
@@ -279,9 +277,9 @@ BOUNDARY      a receipt is not certification</pre>
   </section>
 
   <!-- 05 · RUNWAYS -->
-  <section class="sec" id="runways" aria-labelledby="runways-title">
-   <div class="wrap">
-    <p class="kicker">05 · Runways</p>
+  <section class="sec nf-corp-section" id="runways" aria-labelledby="runways-title">
+   <div class="wrap nf-corp-wrap">
+    <p class="kicker nf-corp-eyebrow">05 · Runways</p>
     <h2 id="runways-title" style="margin-top:12px">Three paths for consequential outcomes.</h2>
     <p class="lede" style="margin-top:20px">Runways define how a result qualifies. Start with one workflow class, not a catalog of equal products.</p>
     <div class="runways">
@@ -305,9 +303,9 @@ BOUNDARY      a receipt is not certification</pre>
   </section>
 
   <!-- 06 · COMMISSIONING PATH -->
-  <section class="sec sec--tint" id="commission" aria-labelledby="commission-title">
-   <div class="wrap">
-    <p class="kicker">06 · Commissioning path</p>
+  <section class="sec sec--tint nf-corp-section" id="commission" aria-labelledby="commission-title">
+   <div class="wrap nf-corp-wrap">
+    <p class="kicker nf-corp-eyebrow">06 · Commissioning path</p>
     <h2 id="commission-title" style="margin-top:12px">Six weeks, one consequential workflow.</h2>
     <div class="weeks" role="tablist" aria-label="Commissioning weeks">
      <button class="week" type="button" role="tab" id="week-tab-0" data-week="0" aria-selected="true" tabindex="0" aria-controls="week-pane">
@@ -343,10 +341,10 @@ BOUNDARY      a receipt is not certification</pre>
   </section>
 
   <!-- 07 · READINESS -->
-  <section class="sec" id="readiness" aria-labelledby="readiness-title">
-   <div class="wrap readiness">
+  <section class="sec nf-corp-section" id="readiness" aria-labelledby="readiness-title">
+   <div class="wrap nf-corp-wrap readiness">
     <div>
-     <p class="kicker">07 · Readiness</p>
+     <p class="kicker nf-corp-eyebrow">07 · Readiness</p>
      <h2 id="readiness-title" style="margin-top:12px">Where does your workflow sit today?</h2>
      <p class="lede" style="margin-top:20px">Four questions about one workflow you would actually put under controls. The result routes you to an entry point. It does not estimate savings we cannot evidence.</p>
      <div class="questions" id="questions">
@@ -421,9 +419,9 @@ Evidence has to exist before controls can be trusted.</div>
   </section>
 
   <!-- 08 · ECOSYSTEM -->
-  <section class="sec sec--tint" id="trustfield" aria-labelledby="eco-title">
-   <div class="wrap">
-    <p class="kicker">08 · Ecosystem</p>
+  <section class="sec sec--tint nf-corp-section" id="trustfield" aria-labelledby="eco-title">
+   <div class="wrap nf-corp-wrap">
+    <p class="kicker nf-corp-eyebrow">08 · Ecosystem</p>
     <h2 id="eco-title" style="margin-top:12px">One governance practice. Several surfaces.</h2>
     <p class="lede" style="margin-top:20px">Noetfield Systems Inc. holds the runtime and the governance discipline. Product surfaces apply it to a specific institutional workflow. What is live is named live; what is planned stays named planned.</p>
     <div class="surfaces">
@@ -446,9 +444,9 @@ Evidence has to exist before controls can be trusted.</div>
   </section>
 
   <!-- 09 · EVIDENCE BOUNDARY -->
-  <section class="sec" aria-labelledby="boundary-title">
-   <div class="wrap split">
-    <p class="kicker">09 · Evidence boundary</p>
+  <section class="sec nf-corp-section" aria-labelledby="boundary-title">
+   <div class="wrap nf-corp-wrap split">
+    <p class="kicker nf-corp-eyebrow">09 · Evidence boundary</p>
     <div>
      <h2 id="boundary-title" style="font-size:34px">A receipt is not certification.</h2>
      <p class="lede" style="margin-top:22px">Inspectable receipts record what happened under stated controls. They are not certification, regulatory approval, or a claim of universal correctness.</p>
@@ -458,9 +456,9 @@ Evidence has to exist before controls can be trusted.</div>
   </section>
 
   <!-- 10 · ENGAGEMENT -->
-  <section class="sec sec--dark engage" id="engage" aria-labelledby="engage-title">
-   <div class="wrap">
-    <p class="kicker">10 · Engagement</p>
+  <section class="sec sec--dark engage nf-corp-section" id="engage" aria-labelledby="engage-title">
+   <div class="wrap nf-corp-wrap">
+    <p class="kicker nf-corp-eyebrow">10 · Engagement</p>
     <h2 id="engage-title" style="margin-top:12px">Start with one consequential workflow.</h2>
     <p class="lede" style="margin-top:20px">Choose the conversation that matches your role. The near-term ask is a bounded workflow with clear authority and inspectable evidence, not a broad platform rollout.</p>
     <div class="paths">

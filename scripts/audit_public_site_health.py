@@ -42,7 +42,7 @@ CORPORATE_HOME_REQUIRED = (
     "/investors/",
     "/proof/",
     "AI systems that can act, and show why the action was allowed.",
-    "INSPECT CURRENT PROOF",
+    "Inspect current proof",
     "TrustField",
     "A receipt is not certification.",
 )

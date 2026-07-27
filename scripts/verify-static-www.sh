@@ -63,7 +63,10 @@ check_file "protected corporate homepage" index.html \
   'No customers, revenue, or external traction are claimed' \
   'A receipt is not certification.' \
   'not certification, regulatory approval, or a claim of universal correctness' \
-  'INSPECT CURRENT PROOF' 'DISCUSS ONE WORKFLOW' \
+  'Inspect current proof' 'Discuss one workflow' \
+  'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
+  'nf-corp-section' 'nf-corp-hero' 'nf-system-card' \
+  'family=Newsreader' 'family=DM+Mono' \
   'INCUBATOR / ECOSYSTEM' 'OPERATING PARTNER' 'PILOT / CLIENT' \
   'href="/motors/"' 'href="/runways/"' 'href="/about/"' 'href="/proof/"' \
   'href="/investors/"' 'href="/trust/"' 'href="/privacy/"' \

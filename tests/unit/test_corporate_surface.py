@@ -32,7 +32,7 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
         css_version = expected_css_versions[path]
         assert f"/assets/noetfield-corporate-v1.css?{css_version}" in text, path
         if path == ROOT / "index.html":
-            assert "/assets/noetfield-home-v2.css?v=2" in text, path
+            assert "/assets/noetfield-home-v2.css?v=3" in text, path
             assert 'class="nf-corp nf-home"' in text, path
         assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text, path
         assert 'class="nf-corp-footer"' in text, path
@@ -72,8 +72,14 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
         "TrustField",
         "trustfield.ca",
         "A receipt is not certification.",
-        "INSPECT CURRENT PROOF",
-        "DISCUSS ONE WORKFLOW",
+        "Inspect current proof",
+        "Discuss one workflow",
+        "nf-button nf-button--primary",
+        "nf-button nf-button--secondary",
+        "nf-corp-section",
+        "nf-corp-hero",
+        "nf-system-card",
+        "family=Newsreader",
         "INCUBATOR / ECOSYSTEM",
         "OPERATING PARTNER",
         "PILOT / CLIENT",
