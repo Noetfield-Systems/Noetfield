@@ -109,7 +109,7 @@
 <span class="nf-dapi-code__comment"># same SDK · POST /v1/chat/completions</span>
 <span class="nf-dapi-code__key">api_key</span>  = <span class="nf-dapi-code__str">"sk-nf-…"</span>
 <span class="nf-dapi-code__key">model</span>    = <span class="nf-dapi-code__str">"noetfield-deterministic"</span>  <span class="nf-dapi-code__comment"># or noetfield-coding-pro</span></code></pre>
-     <p class="nf-dapi-panel__note">One key, three protocol families: OpenAI chat, Anthropic Messages, Gemini generateContent. Enable the lane in the workspace, then point your client at this host.</p>
+     <p class="nf-dapi-panel__note">One key, three protocol families (OpenAI / Anthropic / Gemini), stream and non-stream. Enable the lane in the workspace, then point Continue or your SDK at this host. In plugins, <code>provider</code> means the wire format — not the company billing the tokens.</p>
     </aside>
    </div>
   </section>
@@ -138,7 +138,11 @@
      </article>
      <article role="listitem">
       <h3>Claude + Gemini compat</h3>
-      <p>Same Worker and key. Enable Claude Compat for <code>POST /v1/messages</code>, or Gemini Compat for <code>generateContent</code>. Models <code>noetfield-claude-compat</code> / <code>noetfield-gemini-compat</code>.</p>
+      <p>Same Worker and key. Enable Claude Compat for <code>POST /v1/messages</code> (SSE stream supported), or Gemini Compat for <code>generateContent</code> / <code>streamGenerateContent</code>.</p>
+     </article>
+     <article role="listitem">
+      <h3>VS Code / Continue</h3>
+      <p>OpenAI tools: <code>provider: openai</code>, <code>apiBase: …/v1</code>. Claude-shaped: <code>provider: anthropic</code>, same host, model <code>noetfield-claude-compat</code>. Gemini: point at our <code>v1beta</code> generateContent path.</p>
      </article>
     </div>
   </div>
