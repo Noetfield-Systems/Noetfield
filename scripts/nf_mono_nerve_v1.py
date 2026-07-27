@@ -124,7 +124,11 @@ def refresh_email_defer(*, write: bool = True) -> dict:
 
 def pulse_trustfield_fleet_wire() -> dict:
     """Sync TrustField tf-live-surfaces from fresh defer receipt (read-only on TF repo)."""
-    tf_script = Path.home() / "Desktop/TrustField Technologies/scripts/tf_fleet_live_wire_v1.py"
+    # ONE path only — no legacy stubs, no Desktop/TrustField Technologies duplicates.
+    tf_script = (
+        Path.home()
+        / "Desktop/Noetfield-Systems/TrustField-Technologies/scripts/tf_fleet_live_wire_v1.py"
+    )
     if not tf_script.is_file():
         return {"ok": False, "error": f"missing {tf_script}"}
     try:
@@ -141,6 +145,7 @@ def pulse_trustfield_fleet_wire() -> dict:
             "defer_active": row.get("defer_active"),
             "commercial_send_allowed": row.get("commercial_send_allowed"),
             "synced_at": row.get("synced_at"),
+            "tf_script": str(tf_script),
         }
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired, json.JSONDecodeError, OSError) as exc:
         return {"ok": False, "error": str(exc)[:200]}

@@ -1,0 +1,27 @@
+{
+  "schema": "www-home-golden-visual-manifest-v1",
+  "version": "1.0.0",
+  "authority": "NF_UI_UX_GRADE_LAW_LOCKED_v1",
+  "updated_at": "2026-07-27T09:45:00Z",
+  "baseline_commit_class": "pr-186-codex-corporate",
+  "fixtures": [
+    {
+      "id": "home-first-viewport",
+      "file": "home-first-viewport.png",
+      "required": false,
+      "note": "Capture with NF_WWW_VISUAL=1 bash scripts/capture-www-home-golden.sh when Playwright is available."
+    },
+    {
+      "id": "home-mobile",
+      "file": "home-mobile.png",
+      "required": false,
+      "note": "Optional mobile first-viewport baseline."
+    }
+  ],
+  "structural_css_probes": [
+    {"file": "assets/noetfield-corporate-v1.css", "contains": "--nf-gold: #a77b2f"},
+    {"file": "assets/noetfield-corporate-v1.css", "contains": "font-family: \"Inter\""},
+    {"file": "assets/noetfield-corporate-v1.css", "contains": "font-family: \"Newsreader\""},
+    {"file": "assets/noetfield-home-v2.css", "contains": "body.nf-corp.nf-home"}
+  ]
+}

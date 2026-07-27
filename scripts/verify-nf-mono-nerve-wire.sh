@@ -36,11 +36,13 @@ assert eco["planes"]["noetfield"]["ok"], "noetfield plane not ok"
 print("OK   ecosystem-live-nerve:", eco.get("email_send_defer_line"))
 PY
 
-if [[ -f "$HOME/Desktop/TrustField Technologies/scripts/tf_fleet_live_wire_v1.py" ]]; then
-  python3 "$HOME/Desktop/TrustField Technologies/scripts/tf_fleet_live_wire_v1.py" --json --no-refresh >/dev/null || fail=1
-  echo "OK   trustfield fleet wire"
+TF_WIRE="$HOME/Desktop/Noetfield-Systems/TrustField-Technologies/scripts/tf_fleet_live_wire_v1.py"
+if [[ -f "$TF_WIRE" ]]; then
+  python3 "$TF_WIRE" --json --no-refresh >/dev/null || fail=1
+  echo "OK   trustfield fleet wire ($TF_WIRE)"
 else
-  echo "WARN trustfield fleet script missing (skip cross-plane)"
+  echo "FAIL trustfield fleet script missing at single SSOT path: $TF_WIRE" >&2
+  fail=1
 fi
 
 if [[ "$fail" -eq 0 ]]; then

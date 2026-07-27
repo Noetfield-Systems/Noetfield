@@ -156,6 +156,9 @@ jobs:
       - name: Exact public artifact verification
         run: make verify-static-www
 
+      - name: UI/UX grade vs golden homepage
+        run: bash scripts/verify-www-ui-grade.sh
+
       - name: Protected-surface anti-stale gate
         run: |
           SHA="$(git rev-parse HEAD)"

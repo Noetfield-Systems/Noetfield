@@ -19,11 +19,13 @@ alwaysApply: true
 1. Read `docs/www/NF_UI_BUILD_CHECKLIST_LOCKED_v1.md`
 2. Read `docs/www/NF_WWW_LANGUAGE_LAYERS_LOCKED_v1.md`
 3. Read `docs/DESIGN_REFERENCE_GOALS_LOCKED_v1.md` (R1–R8 minimum)
+4. Read `docs/www/NF_UI_UX_GRADE_LAW_LOCKED_v1.md` + `data/www-home-golden-baseline-v1.json`
 
 **After edits — fail-closed:**
 
 ```bash
 bash scripts/verify-ui-build-checklist.sh
+bash scripts/verify-www-ui-grade.sh
 ```
 
 ## Language law (client-facing)

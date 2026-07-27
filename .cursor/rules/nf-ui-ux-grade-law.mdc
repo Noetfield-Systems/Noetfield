@@ -1,0 +1,52 @@
+---
+description: UI/UX grade law — compliance is not class; golden homepage + fail-closed grade gate
+globs:
+  - "index.html"
+  - "assets/noetfield-home-v2.css"
+  - "assets/noetfield-corporate-v1.css"
+  - "assets/**/*.css"
+  - "**/*.html"
+  - "docs/www/**"
+  - "scripts/rebuild-www-v6.py"
+alwaysApply: true
+---
+
+# NF UI/UX Grade Law (LOCKED)
+
+**SSOT:** `docs/www/NF_UI_UX_GRADE_LAW_LOCKED_v1.md`  
+**Machine:** `data/www-home-golden-baseline-v1.json` · `bash scripts/verify-www-ui-grade.sh`
+
+## Law
+
+Passing language / SKU / stamp checks is not high grade. Do not ship raw typography, careless ALL-CAPS CTAs, or font swaps off the golden baseline.
+
+## Customer UIUX library (do not duplicate here)
+
+ONE file only:  
+`~/Desktop/Noetfield-Systems/NOETFIELD-RUNWAY/sites/company-new/functions/_lib/nf-uiux-library-2026-v1.json`  
+Never copy into this repo.
+
+## Golden homepage
+
+PR **#186 / #191 class only:** Claude v2 content/IA + Codex corporate restyle (`nf-corp-*`, Inter + Newsreader + DM Mono, navy/gold).
+
+Forbidden without founder order:
+
+- IBM Plex or other font-family swaps on corporate home
+- “Calm / simplify / eye comfort” hierarchy shrinks
+- Bare P1 thin restore
+- Full-page rewrite when a scoped delta would do
+
+## Before UI/www edit
+
+1. Read grade law + UI build checklist  
+2. Read golden baseline JSON  
+3. After edit: `bash scripts/verify-www-ui-grade.sh` must PASS  
+
+## Homepage / primary marketing
+
+Founder visual accept required before merge. Machine grade is necessary; it is not sufficient alone for taste on `/`.
+
+## Customer landings (company-new)
+
+Brief → deterministic template → grade → revise brief fields. Never ask cheap models for full HTML.
