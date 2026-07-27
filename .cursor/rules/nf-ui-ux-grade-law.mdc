@@ -20,6 +20,12 @@ alwaysApply: true
 
 Passing language / SKU / stamp checks is not high grade. Do not ship raw typography, careless ALL-CAPS CTAs, or font swaps off the golden baseline.
 
+## Customer UIUX library (do not duplicate here)
+
+ONE file only:  
+`~/Desktop/Noetfield-Systems/NOETFIELD-RUNWAY/sites/company-new/functions/_lib/nf-uiux-library-2026-v1.json`  
+Never copy into this repo.
+
 ## Golden homepage
 
 PR **#186 / #191 class only:** Claude v2 content/IA + Codex corporate restyle (`nf-corp-*`, Inter + Newsreader + DM Mono, navy/gold).

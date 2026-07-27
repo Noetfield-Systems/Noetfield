@@ -89,11 +89,6 @@ chmod +x scripts/verify-www-ui-grade.sh
 ./scripts/verify-www-ui-grade.sh || fail=1
 ok "www UI/UX grade (golden baseline)"
 
-# 7d — UI/UX Library 2026 SSOT (agents + app mirror)
-chmod +x scripts/verify-uiux-library-2026.sh
-./scripts/verify-uiux-library-2026.sh || fail=1
-ok "uiux library 2026"
-
 # 8 — Commercial agentic unit tests
 python3 -m pytest tests/unit/test_commercial_agentic.py -q || fail=1
 ok "commercial agentic unit tests"

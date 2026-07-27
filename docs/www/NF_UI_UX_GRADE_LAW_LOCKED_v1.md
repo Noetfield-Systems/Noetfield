@@ -86,10 +86,11 @@ Separate surface. Law:
 4. Model revises failing brief fields only — never freeform HTML  
 5. Publish fail-closed until grade PASS  
 
-**Internal library (agents + app):** `nf-uiux-library-2026-v1` — categories, style packs, craft, composition laws, font allow/deny.  
-App module: `sites/company-new/functions/_lib/uiux-library-2026.ts` · Skill: `SKILL-012-uiux-library-2026`.
+**Internal library (ONE place only — do not copy into this repo):**  
+`~/Desktop/Noetfield-Systems/NOETFIELD-RUNWAY/sites/company-new/functions/_lib/nf-uiux-library-2026-v1.json`  
+Module: `…/uiux-library-2026.ts` · Skill: `NOETFIELD-RUNWAY/.cursor/skills/SKILL-012-uiux-library-2026.md`
 
-Sector style packs are template variants from that library, not model-invented design systems.
+Noetfield www agents read that path. Never duplicate the JSON, skill, or packs under `Noetfield/data/` or `.cursor/`.
 
 ## Related
 
