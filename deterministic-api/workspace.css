@@ -643,6 +643,11 @@ a:hover { color: var(--ink); }
   flex-shrink: 0;
   align-items: center;
 }
+.dapi-key-restore {
+  font-size: 0.72rem;
+  max-width: 11rem;
+  line-height: 1.3;
+}
 .dapi-key-row code {
   font-family: var(--mono);
   font-size: 0.82rem;
