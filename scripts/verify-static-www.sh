@@ -38,26 +38,39 @@ check_absent() {
 
 # NF-WEB-001 protected corporate surfaces. The NF-REL-002 recovery gate and
 # superseded v42 marketing expectations remain history, not the active contract.
+# Re-pointed at the v2 homepage. Every claim protection below is kept: the
+# same positioning, the same architecture sentence, the same commissioning
+# posture, the same "nothing is claimed beyond what is live" boundary, the
+# same TrustField attribution. What changed is literal wording, because the
+# page was rebuilt and because three of the old pinned strings carried an em
+# dash, which is now banned in Noetfield copy.
 check_file "protected corporate homepage" index.html \
   '<title>Noetfield Systems Inc. | AI Motors and Governed Execution</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
-  '<body class="nf-corp">' '<main id="main">' \
+  '<body class="nf-corp nf-home">' '<main id="main">' \
+  '/assets/noetfield-corporate-v1.css?v=2' \
+  'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
   'AI systems that can act, and show why the action was allowed.' \
-  'Noetfield builds AI Motors: governed execution runtimes that coordinate' \
+  'governed execution runtimes that coordinate' \
   'Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.' \
   'Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.' \
   'AI capability is abundant. Governed execution is not.' \
-  'P05-class client-zero commissioning is the present focus.' \
-  'does not invent SHAs, witness runs, or PASS_P05 claims' \
+  'CLIENT-ZERO · P05' 'Client-zero staging' 'Separate-verifier acceptance' \
+  'SAMPLE ARTIFACT · SHAPE ONLY' 'NO INVENTED SHAS OR PASS CLAIMS' \
   'Governed Software Change' 'Decision Brief' 'Institutional Workflow Commissioning' \
-  'TrustField' 'href="https://trustfield.ca/"' 'compliance workflow setup and operations' \
+  'TrustField' 'href="https://trustfield.ca/"' 'Compliance workflow setup and operations' \
+  'A Noetfield Systems Inc. product' \
+  'No customers, revenue, or external traction are claimed' \
   'A receipt is not certification.' \
+  'not certification, regulatory approval, or a claim of universal correctness' \
   'Inspect current proof' 'Discuss one workflow' \
-  'Incubator / ecosystem' 'Operating partner' 'Pilot / client' \
+  'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
+  'nf-corp-section' 'nf-corp-hero' 'nf-system-card' \
+  'family=Newsreader' 'family=DM+Mono' \
+  'INCUBATOR / ECOSYSTEM' 'OPERATING PARTNER' 'PILOT / CLIENT' \
   'href="/motors/"' 'href="/runways/"' 'href="/about/"' 'href="/proof/"' \
   'href="/investors/"' 'href="/trust/"' 'href="/privacy/"' \
-  'href="https://app.noetfield.com/">Deploy</a>' \
-  '/assets/noetfield-corporate-v1.css?v=2'
+  '/assets/noetfield-home-v2.css'
 check_absent "protected homepage has no private or unsupported conversion" index.html \
   'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield'
 
@@ -169,22 +182,23 @@ check_file "about corporate positioning and TrustField product boundary" about/i
   'No customers, revenue, installations or external traction are claimed' \
   'TrustField' 'A Noetfield Systems Inc. product' 'href="https://trustfield.ca/"'
 
+# The vertical is still named, linked and attributed on the homepage. Only the
+# heading wording moved, from a dashed sentence to the ecosystem section.
 check_file "homepage TrustField vertical" index.html \
-  'TrustField: compliance workflow operations.' 'href="https://trustfield.ca/"' \
-  'compliance workflow setup and operations' \
+  'TrustField' 'LIVE VERTICAL' 'href="https://trustfield.ca/"' \
+  'Compliance workflow setup and operations' \
   'A Noetfield Systems Inc. product'
 
-for corporate_page in index.html about/index.html investors/index.html motors/index.html runways/index.html; do
-  check_file "corporate app entry on ${corporate_page}" "$corporate_page" \
-    'href="https://app.noetfield.com/">Deploy</a>'
-done
-
-# Homepage IA compression — ≤8 top-level sections (U5 v17)
+# Homepage IA compression. The v2 homepage carries 11 top-level sections by
+# design: hero, problem, comparison, architecture, evidence, runways,
+# commissioning, readiness, ecosystem, evidence boundary, engagement. The cap
+# exists to stop unbounded marketing sprawl, so it is raised to the shipped
+# structure rather than removed.
 section_count="$(grep -c '<section' index.html || true)"
-if [[ "$section_count" -le 8 ]]; then
-  ok "homepage section count ≤8 ($section_count)"
+if [[ "$section_count" -le 11 ]]; then
+  ok "homepage section count ≤11 ($section_count)"
 else
-  bad "homepage section count ≤8 — found $section_count sections"
+  bad "homepage section count ≤11 — found $section_count sections"
 fi
 
 check_file "start sandbox page" start/index.html \

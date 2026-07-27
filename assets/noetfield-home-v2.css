@@ -100,8 +100,8 @@ body.nf-corp.nf-home .engage h2 {
   letter-spacing: -0.035em;
 }
 body.nf-corp.nf-home .sec h2 {
-  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
-  line-height: 1.18;
+  font-size: clamp(2.25rem, 4.2vw, 3.4rem);
+  line-height: 1.02;
 }
 body.nf-corp.nf-home .sec h3 {
   margin: 0;
@@ -133,23 +133,29 @@ body.nf-corp.nf-home .hero.nf-corp-hero,
 body.nf-corp.nf-home .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem);
+  padding: clamp(5rem, 10vw, 7.5rem) 0 clamp(4rem, 8vw, 5.5rem);
   border-bottom: 1px solid var(--line);
-  /* Quiet paper — no grid texture, no gold bloom (eye fatigue). */
-  background: var(--paper);
+  background:
+    radial-gradient(circle at 88% 14%, rgba(167, 123, 47, 0.16), transparent 25%),
+    linear-gradient(135deg, var(--paper-2), var(--paper));
 }
-body.nf-corp.nf-home .hero.nf-corp-hero::before,
-body.nf-corp.nf-home .nf-corp-hero::before {
-  content: none !important;
-  background: none !important;
+body.nf-corp.nf-home .hero.nf-corp-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(17, 27, 42, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 27, 42, 0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to right, transparent, black 60%);
 }
-/* eye-comfort: kill inherited corp grid */
 
 body.nf-corp.nf-home .hero__grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.75fr);
-  gap: clamp(2.5rem, 5vw, 3.5rem);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  gap: clamp(3rem, 6vw, 4.5rem);
   align-items: start;
 }
 body.nf-corp.nf-home .hero__eyebrow {
@@ -165,18 +171,17 @@ body.nf-corp.nf-home .dot {
   flex: none;
 }
 body.nf-corp.nf-home .hero h1 {
-  margin: 1.1rem 0 0;
-  max-width: 22ch;
-  font-size: clamp(2rem, 3.6vw, 2.85rem);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
+  margin: 1.55rem 0 0;
+  max-width: 18ch;
+  font-size: clamp(3rem, 6vw, 4.6rem);
+  line-height: 0.96;
 }
 body.nf-corp.nf-home .hero__lead {
-  margin: 1.25rem 0 0;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--nf-ink-soft);
-  max-width: 54ch;
+  margin: 1.55rem 0 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.15rem);
+  line-height: 1.62;
+  color: #344458;
+  max-width: 60ch;
 }
 body.nf-corp.nf-home .hero__lead strong { font-weight: 600; color: var(--ink); }
 
@@ -184,14 +189,7 @@ body.nf-corp.nf-home .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.72rem;
-  margin-top: 1.6rem;
-}
-body.nf-corp.nf-home .hero__clarifier {
-  margin: 1.5rem 0 0;
-  max-width: 52ch;
-  color: var(--nf-ink-soft);
-  font-size: 0.98rem;
-  line-height: 1.55;
+  margin-top: 2rem;
 }
 
 /* Match .nf-button when legacy .btn remains; hero prefers nf-button classes */
@@ -240,15 +238,35 @@ body.nf-corp.nf-home .sec--dark .btn--ghost:hover {
 
 body.nf-corp.nf-home .hero .nf-button { min-height: 48px; }
 
-body.nf-corp.nf-home .pillars { display: none; }
+body.nf-corp.nf-home .pillars {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 2.6rem;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+body.nf-corp.nf-home .pillar { background: var(--paper); padding: 16px 14px; }
+body.nf-corp.nf-home .pillar__num {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--nf-gold-dark);
+  letter-spacing: 0.08em;
+}
+body.nf-corp.nf-home .pillar__label {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
 
 body.nf-corp.nf-home .hero__aside.nf-system-card,
 body.nf-corp.nf-home .hero__aside {
   position: relative;
-  border: 1px solid var(--nf-line);
-  border-radius: 12px;
-  background: var(--paper-2);
-  box-shadow: none;
+  border: 1px solid rgba(17, 27, 42, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 26px 70px rgba(17, 27, 42, 0.1);
   overflow: hidden;
 }
 body.nf-corp.nf-home .aside__head {
@@ -256,30 +274,29 @@ body.nf-corp.nf-home .aside__head {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0.9rem 1.1rem;
+  padding: 1rem 1.15rem;
   border-bottom: 1px solid var(--line);
-  font-family: var(--sans);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--nf-ink-soft);
-}
-body.nf-corp.nf-home .aside__head .nf-status {
   font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: #526073;
 }
-body.nf-corp.nf-home .aside__block { padding: 1rem 1.1rem; border-bottom: 1px solid var(--line); }
+body.nf-corp.nf-home .aside__head span:last-child {
+  color: var(--nf-gold-dark);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.25rem 0.48rem;
+  font-size: 0.57rem;
+}
+body.nf-corp.nf-home .aside__block { padding: 1.1rem 1.15rem; border-bottom: 1px solid var(--line); }
 body.nf-corp.nf-home .aside__block:last-child { border-bottom: 0; }
 body.nf-corp.nf-home .aside__title {
-  font-family: var(--sans);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--nf-ink);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--nf-gold-dark);
+  text-transform: uppercase;
 }
 body.nf-corp.nf-home .posture {
   list-style: none;
@@ -980,26 +997,4 @@ body.nf-corp.nf-home .path__label {
   body.nf-corp.nf-home .weeks,
   body.nf-corp.nf-home .chain__steps { grid-template-columns: 1fr; }
   body.nf-corp.nf-home .receipt__body { font-size: 0.68rem; }
-}
-
-
-/* eye-comfort responsive */
-@media (max-width: 960px) {
-  body.nf-corp.nf-home .hero__grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-  }
-  body.nf-corp.nf-home .hero h1 {
-    max-width: none;
-    font-size: clamp(1.85rem, 7vw, 2.4rem);
-  }
-}
-
-/* eye-comfort: flatten inherited system-card chrome on homepage */
-body.nf-corp.nf-home .nf-system-card {
-  box-shadow: none !important;
-  transform: none !important;
-}
-body.nf-corp.nf-home .nf-corp-hero {
-  background-image: none !important;
 }
