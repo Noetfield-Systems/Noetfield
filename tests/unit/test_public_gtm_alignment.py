@@ -111,7 +111,7 @@ def test_homepage_corporate_structure_locked() -> None:
         "Institutional Workflow Commissioning",
         "TrustField",
         "A receipt is not certification.",
-        "INSPECT CURRENT PROOF",
+        "Inspect current proof",
         "/assets/noetfield-home-v2.css",
     ):
         assert label in text

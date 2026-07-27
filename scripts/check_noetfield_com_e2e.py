@@ -29,7 +29,7 @@ HOME_NEEDLES = (
     "P05-class client-zero commissioning",
     "TrustField",
     "trustfield.ca",
-    "INSPECT CURRENT PROOF",
+    "Inspect current proof",
     "noetfield-home-v2.css",
     "/motors/",
     "/runways/",
