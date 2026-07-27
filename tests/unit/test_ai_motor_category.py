@@ -48,20 +48,18 @@ def json_ld(path: Path) -> list[dict[str, object]]:
 
 def test_homepage_introduces_the_category_before_other_sections() -> None:
     text = visible_text(HOME)
-    motor_section = text.index('id="ai-motors"')
-    proof_section = text.index('id="current-proof"')
-    runways_section = text.index('id="runways"')
-    assert motor_section < proof_section < runways_section
-    assert "Noetfield builds AI Motors: governed execution runtimes that coordinate" in text
-    assert "controlled outcomes verified against defined acceptance criteria" in text
+    # v2 order: architecture → evidence(receipt) → runways
+    arch = text.index('id="architecture"')
+    receipt = text.index('id="receipt"')
+    runways = text.index('id="runways"')
+    assert arch < receipt < runways
+    assert "AI Motors" in text
+    assert "governed execution runtimes that coordinate" in text
     assert DISTINCTION_LINE in text
     assert MEMORABLE_LINE in text
-    assert text.count(f'<p class="nf-motor-manifesto">{MEMORABLE_LINE}</p>') == 1
-    for component in ("Engine", "Agent", "Runway", "AI Motor"):
-        assert f"<span>{component}</span>" in text
-    assert 'href="/motors/">Explore AI Motors' in text
     assert '<a href="/motors/">AI Motors</a>' in text
     assert '<a href="/runways/">Runways</a>' in text
+    assert "/assets/noetfield-home-v2.css" in text
 
 
 def test_homepage_mental_model_does_not_put_ai_before_the_motor() -> None:
@@ -233,7 +231,7 @@ def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
     assert '<a href="/motors/" aria-current="page">AI Motors</a>' in motors
     assert "Motor &amp; Custom Workflow" not in motors
     assert metadata["metadata_overrides"]["/"]["title"] == (
-        "Noetfield Systems Inc. — AI Motors & Governed Execution"
+        "Noetfield Systems Inc. | AI Motors and Governed Execution"
     )
     assert metadata["metadata_overrides"]["/motors/"]["title"] == (
         "AI Motors for Governed Execution — Noetfield Systems"

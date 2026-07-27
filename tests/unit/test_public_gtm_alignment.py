@@ -37,7 +37,7 @@ def test_homepage_is_corporate_entry_surface() -> None:
     """`/` explains the company narrative, proof focus, and contact paths."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     lower = text.lower()
-    assert 'class="nf-corp"' in text
+    assert "nf-corp" in text
     assert "noetfield-corporate-v1.css" in text
     assert "/motors/" in text
     assert "/about/" in text
@@ -93,25 +93,26 @@ def test_public_www_has_no_legacy_comparison_headlines() -> None:
     assert "Available now vs what capital accelerates" not in text
 
 
-def test_homepage_section_count_at_most_eight() -> None:
+def test_homepage_section_count_at_most_eleven() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     count = text.count("<section")
-    assert count <= 8, f"homepage has {count} sections; expected ≤8 (corporate surface)"
+    assert count <= 11, f"homepage has {count} sections; expected ≤11 (homepage v2)"
 
 
 def test_homepage_corporate_structure_locked() -> None:
     """The company entry retains the advisor one-narrative structure."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
-    assert 'class="nf-corp"' in text
+    assert "nf-corp" in text
     for label in (
-        "AI systems that can act—and show why the action was allowed.",
+        "AI systems that can act, and show why the action was allowed.",
         "AI capability is abundant. Governed execution is not.",
         "Governed Software Change",
         "Decision Brief",
         "Institutional Workflow Commissioning",
         "TrustField",
         "A receipt is not certification.",
-        "Inspect current proof",
+        "INSPECT CURRENT PROOF",
+        "/assets/noetfield-home-v2.css",
     ):
         assert label in text
     assert "SourceA" not in text

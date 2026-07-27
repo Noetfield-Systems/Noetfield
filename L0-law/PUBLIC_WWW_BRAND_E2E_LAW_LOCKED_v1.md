@@ -39,7 +39,7 @@ Diagnostic Sprint from $2,500 and Copilot pilot $2k–10k remain **legacy/produc
 **Required homepage concepts (disk + live E2E):**
 
 - Vancouver, Canada · Governed execution systems
-- AI systems that can act—and show why the action was allowed
+- AI systems that can act, and show why the action was allowed
 - AI capability is abundant. Governed execution is not.
 - Option A Motor vocabulary + distinction/memorable lines above
 - P05-class client-zero commissioning focus → `/proof/` (honest evidence boundary)
