@@ -78,6 +78,38 @@ try {
   if (response.headers.has("age")) {
     throw new Error("stale origin age leaked through HTML response");
   }
+  if (response.headers.has("x-robots-tag")) {
+    throw new Error("public HTML must not inherit provider X-Robots-Tag noindex");
+  }
+} finally {
+  globalThis.fetch = originalFetch;
+}
+
+globalThis.fetch = async (request) => {
+  fetchedUrl = String(request);
+  return new Response("<!doctype html><title>Workspace</title>", {
+    status: 200,
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "X-Robots-Tag": "noindex",
+    },
+  });
+};
+try {
+  const privatePage = await worker.fetch(
+    new Request("https://www.noetfield.com/deterministic-api/workspace/"),
+    { ORIGIN: immutableOrigin, RELEASE_SHA: releaseSha },
+  );
+  if (privatePage.headers.get("x-robots-tag") !== "noindex, nofollow") {
+    throw new Error(`workspace must force noindex, got ${privatePage.headers.get("x-robots-tag")}`);
+  }
+  const publicApi = await worker.fetch(
+    new Request("https://www.noetfield.com/deterministic-api/"),
+    { ORIGIN: immutableOrigin, RELEASE_SHA: releaseSha },
+  );
+  if (publicApi.headers.has("x-robots-tag")) {
+    throw new Error("product API landing must not send X-Robots-Tag");
+  }
 } finally {
   globalThis.fetch = originalFetch;
 }
