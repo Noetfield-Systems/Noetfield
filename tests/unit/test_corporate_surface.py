@@ -32,7 +32,7 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
         css_version = expected_css_versions[path]
         assert f"/assets/noetfield-corporate-v1.css?{css_version}" in text, path
         if path == ROOT / "index.html":
-            assert "/assets/noetfield-home-v2.css?v=3" in text, path
+            assert "/assets/noetfield-home-v2.css?v=4" in text, path
             assert 'class="nf-corp nf-home"' in text, path
         assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text, path
         assert 'class="nf-corp-footer"' in text, path
