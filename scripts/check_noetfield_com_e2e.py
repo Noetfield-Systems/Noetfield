@@ -30,6 +30,7 @@ HOME_NEEDLES = (
     "TrustField",
     "trustfield.ca",
     "Inspect current proof",
+    "noetfield-home-v2.css",
     "/motors/",
     "/runways/",
     "/proof/",
