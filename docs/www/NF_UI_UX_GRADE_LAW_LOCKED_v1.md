@@ -86,7 +86,10 @@ Separate surface. Law:
 4. Model revises failing brief fields only — never freeform HTML  
 5. Publish fail-closed until grade PASS  
 
-Sector style packs are template variants, not model-invented design systems.
+**Internal library (agents + app):** `nf-uiux-library-2026-v1` — categories, style packs, craft, composition laws, font allow/deny.  
+App module: `sites/company-new/functions/_lib/uiux-library-2026.ts` · Skill: `SKILL-012-uiux-library-2026`.
+
+Sector style packs are template variants from that library, not model-invented design systems.
 
 ## Related
 

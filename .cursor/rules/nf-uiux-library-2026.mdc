@@ -1,0 +1,26 @@
+---
+description: Always load UI/UX Library 2026 before UI or landing generation
+globs:
+  - "**/*.html"
+  - "**/*.css"
+  - "**/landing-html.ts"
+  - "**/uiux-library-2026.ts"
+  - "**/nf-uiux-library-2026-v1.json"
+alwaysApply: false
+---
+
+# NF UI/UX Library 2026
+
+Before any UI or landing work, load:
+
+- `data/nf-uiux-library-2026-v1.json` (this repo mirror)
+- App SSOT when editing company-new: `sites/company-new/functions/_lib/nf-uiux-library-2026-v1.json`
+- Skill: `.cursor/skills/SKILL-012-uiux-library-2026.md`
+- Grade law: `docs/www/NF_UI_UX_GRADE_LAW_LOCKED_v1.md`
+
+## Rules
+
+- Pick `style_pack` from library only
+- Brief → template → grade → revise fields
+- Corporate homepage = golden baseline, not customer packs
+- Never invent fonts outside `font_allowlist`

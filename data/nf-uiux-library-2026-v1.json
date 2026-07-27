@@ -1,0 +1,393 @@
+{
+  "schema": "nf-uiux-library-2026-v1",
+  "version": "1.0.0",
+  "updated_at": "2026-07-27T09:55:00Z",
+  "title": "Noetfield UI/UX Library 2026",
+  "purpose": "Single internal library for agents, LLMs, and the app to produce precise, high-grade UI/UX without inventing a design system per request.",
+  "law": [
+    "Model writes brief JSON only — never freeform full-page HTML for production landings.",
+    "Template + style_pack own typography, spacing, radius, and section chrome.",
+    "Publish fail-closed on contrast, font allowlist, H1 craft, and structure.",
+    "Compliance gates are not grade. Grade is fail-closed.",
+    "One order → one surface. Do not restyle unrelated surfaces for consistency."
+  ],
+  "links": {
+    "grade_law": "docs/www/NF_UI_UX_GRADE_LAW_LOCKED_v1.md",
+    "ui_checklist": "docs/www/NF_UI_BUILD_CHECKLIST_LOCKED_v1.md",
+    "design_reference": "docs/DESIGN_REFERENCE_GOALS_LOCKED_v1.md",
+    "golden_home_baseline": "data/www-home-golden-baseline-v1.json",
+    "corporate_css": "assets/noetfield-corporate-v1.css",
+    "home_css": "assets/noetfield-home-v2.css",
+    "app_landing_renderer": "sites/company-new/functions/_lib/landing-html.ts",
+    "app_library_module": "sites/company-new/functions/_lib/uiux-library-2026.ts",
+    "skill": ".cursor/skills/SKILL-012-uiux-library-2026.md"
+  },
+  "composition_laws": [
+    {
+      "id": "one_composition",
+      "rule": "First viewport reads as one composition, not a dashboard."
+    },
+    {
+      "id": "brand_first",
+      "rule": "Brand or product name is a hero-level signal, not only nav text."
+    },
+    {
+      "id": "hero_budget",
+      "rule": "First viewport: brand, one headline, one short support line, one CTA group, one dominant visual plane."
+    },
+    {
+      "id": "no_hero_overlays",
+      "rule": "No floating badges, promo stickers, or detached chips on hero media."
+    },
+    {
+      "id": "cards_for_interaction",
+      "rule": "Cards only when they contain user interaction; otherwise prefer open sections."
+    },
+    {
+      "id": "one_job_per_section",
+      "rule": "Each section: one purpose, one headline, usually one short support sentence."
+    },
+    {
+      "id": "atmosphere",
+      "rule": "Prefer gradients or subtle depth over flat single-color slabs; keep text contrast WCAG-AA."
+    },
+    {
+      "id": "motion_intent",
+      "rule": "Ship 2–3 intentional motions max; never motion noise."
+    },
+    {
+      "id": "anti_slop",
+      "rule": "Avoid purple-indigo AI defaults, cream+terracotta serif cliché, and dense broadsheet hairline layouts unless the sector pack explicitly calls for them."
+    }
+  ],
+  "craft": {
+    "h1_min_chars": 12,
+    "h1_max_chars": 90,
+    "tagline_preferred_min": 24,
+    "tagline_preferred_max": 90,
+    "summary_max_chars": 420,
+    "cta_max_chars": 60,
+    "cta_case": "sentence",
+    "forbid_all_caps_cta": true,
+    "min_text_contrast": 4.5,
+    "min_muted_contrast": 3.5,
+    "forbidden_filler_openers": [
+      "we help companies",
+      "we help businesses",
+      "welcome to our website",
+      "your one-stop shop"
+    ],
+    "forbidden_claim_classes": [
+      "fake testimonials",
+      "fake ratings",
+      "fake certifications",
+      "invented phone numbers",
+      "invented emails"
+    ],
+    "institutional_verbs": [
+      "govern",
+      "commission",
+      "inspect",
+      "bound",
+      "receipt",
+      "verify",
+      "deliver",
+      "clarify"
+    ]
+  },
+  "font_allowlist": [
+    "Inter",
+    "Newsreader",
+    "DM Mono",
+    "ui-sans-serif",
+    "ui-serif",
+    "system-ui",
+    "Segoe UI",
+    "Georgia",
+    "Times New Roman",
+    "Helvetica",
+    "Arial",
+    "Roboto",
+    "-apple-system",
+    "sans-serif",
+    "serif"
+  ],
+  "font_denylist": [
+    "Comic Sans",
+    "Papyrus",
+    "Impact",
+    "Curlz",
+    "Bradley Hand"
+  ],
+  "tokens": {
+    "type_scale": {
+      "display": "clamp(2.4rem, 5vw, 4.2rem)",
+      "h2": "clamp(1.6rem, 3vw, 2.2rem)",
+      "body": "1.05rem",
+      "small": "0.92rem",
+      "eyebrow": "0.8rem"
+    },
+    "spacing": {
+      "section_y": "3.2rem",
+      "hero_y": "4.5rem",
+      "wrap_max": "1120px",
+      "gap": "1rem"
+    },
+    "radius_bands": {
+      "sharp": "12px",
+      "soft": "18px",
+      "round": "22px",
+      "pill": "26px"
+    }
+  },
+  "style_packs": {
+    "advisory": {
+      "id": "advisory",
+      "label": "Advisory / institutional",
+      "font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "\"Newsreader\", Georgia, \"Times New Roman\", serif",
+      "radius": "18px",
+      "mood": "calm authority, serif display, navy-gold friendly",
+      "palette_bias": "paper or deep navy; gold or teal accent — never purple default"
+    },
+    "bakery": {
+      "id": "bakery",
+      "label": "Bakery / cafe / food",
+      "font": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "Georgia, \"Times New Roman\", serif",
+      "radius": "26px",
+      "mood": "warm, round, inviting",
+      "palette_bias": "warm cream/wheat grounds; cocoa or berry accent; high contrast body"
+    },
+    "freight": {
+      "id": "freight",
+      "label": "Freight / logistics",
+      "font": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "ui-sans-serif, system-ui, sans-serif",
+      "radius": "12px",
+      "mood": "utilitarian, sharp, operational",
+      "palette_bias": "slate/steel; high-vis accent (amber or signal blue)"
+    },
+    "clinic": {
+      "id": "clinic",
+      "label": "Clinic / health",
+      "font": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "Georgia, \"Times New Roman\", serif",
+      "radius": "16px",
+      "mood": "clean, trustworthy, quiet",
+      "palette_bias": "white/soft blue-gray; teal or leaf accent"
+    },
+    "saas": {
+      "id": "saas",
+      "label": "SaaS / software",
+      "font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "\"Inter\", ui-sans-serif, system-ui, sans-serif",
+      "radius": "18px",
+      "mood": "product-led, crisp, modern",
+      "palette_bias": "near-white or charcoal; single vivid accent — avoid purple-indigo cliché"
+    },
+    "legal": {
+      "id": "legal",
+      "label": "Legal / compliance",
+      "font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "\"Newsreader\", Georgia, \"Times New Roman\", serif",
+      "radius": "12px",
+      "mood": "precise, conservative, readable",
+      "palette_bias": "ink on paper; burgundy or navy accent only"
+    },
+    "realestate": {
+      "id": "realestate",
+      "label": "Real estate",
+      "font": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "Georgia, \"Times New Roman\", serif",
+      "radius": "16px",
+      "mood": "editorial, spacious, photographic",
+      "palette_bias": "warm neutrals; deep forest or brass accent"
+    },
+    "fitness": {
+      "id": "fitness",
+      "label": "Fitness / performance",
+      "font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "\"Inter\", ui-sans-serif, system-ui, sans-serif",
+      "radius": "14px",
+      "mood": "energetic, bold, athletic",
+      "palette_bias": "dark ground; neon or electric accent with AA contrast"
+    },
+    "education": {
+      "id": "education",
+      "label": "Education / training",
+      "font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "Georgia, \"Times New Roman\", serif",
+      "radius": "18px",
+      "mood": "clear, encouraging, structured",
+      "palette_bias": "soft light ground; blue or green accent"
+    },
+    "nonprofit": {
+      "id": "nonprofit",
+      "label": "Nonprofit / civic",
+      "font": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "Georgia, \"Times New Roman\", serif",
+      "radius": "18px",
+      "mood": "human, sincere, calm",
+      "palette_bias": "warm light; earth or ocean accent — no salesy neon"
+    },
+    "beauty": {
+      "id": "beauty",
+      "label": "Beauty / wellness",
+      "font": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "Georgia, \"Times New Roman\", serif",
+      "radius": "26px",
+      "mood": "soft, refined, airy",
+      "palette_bias": "blush/stone; muted rose or sage accent; strong text contrast"
+    },
+    "trades": {
+      "id": "trades",
+      "label": "Trades / local services",
+      "font": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "ui-sans-serif, system-ui, sans-serif",
+      "radius": "12px",
+      "mood": "straightforward, credible, local",
+      "palette_bias": "white/gray; strong orange or blue CTA"
+    },
+    "finance": {
+      "id": "finance",
+      "label": "Finance / fintech",
+      "font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "\"Newsreader\", Georgia, \"Times New Roman\", serif",
+      "radius": "14px",
+      "mood": "trust, density control, institutional",
+      "palette_bias": "navy/ink; gold or emerald accent sparingly"
+    },
+    "creative": {
+      "id": "creative",
+      "label": "Creative / studio",
+      "font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "\"Newsreader\", Georgia, \"Times New Roman\", serif",
+      "radius": "22px",
+      "mood": "expressive but disciplined",
+      "palette_bias": "bold accent on quiet ground; never cluttered hero"
+    },
+    "retail": {
+      "id": "retail",
+      "label": "Retail / ecommerce",
+      "font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "\"Inter\", ui-sans-serif, system-ui, sans-serif",
+      "radius": "18px",
+      "mood": "merchandising clarity, product-first",
+      "palette_bias": "clean white; brand accent for CTA only"
+    },
+    "default": {
+      "id": "default",
+      "label": "General business",
+      "font": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+      "display": "ui-serif, Georgia, \"Times New Roman\", serif",
+      "radius": "22px",
+      "mood": "balanced, readable, sector-neutral",
+      "palette_bias": "readable contrast first; accent secondary"
+    }
+  },
+  "categories": [
+    {
+      "id": "advisory",
+      "pack": "advisory",
+      "aliases": ["consult", "consulting", "advisory", "agency strategy", "governance", "enterprise ai"]
+    },
+    {
+      "id": "bakery",
+      "pack": "bakery",
+      "aliases": ["baker", "bakery", "cafe", "pastry", "coffee", "restaurant", "food", "kitchen"]
+    },
+    {
+      "id": "freight",
+      "pack": "freight",
+      "aliases": ["freight", "logistics", "truck", "shipping", "cargo", "warehouse", "fleet"]
+    },
+    {
+      "id": "clinic",
+      "pack": "clinic",
+      "aliases": ["clinic", "patient", "dental", "health", "medical", "therapy", "physio"]
+    },
+    {
+      "id": "saas",
+      "pack": "saas",
+      "aliases": ["saas", "software", "platform", "app", "b2b product", "api product"]
+    },
+    {
+      "id": "legal",
+      "pack": "legal",
+      "aliases": ["law", "legal", "attorney", "compliance", "counsel"]
+    },
+    {
+      "id": "realestate",
+      "pack": "realestate",
+      "aliases": ["real estate", "realtor", "property", "housing", "brokerage"]
+    },
+    {
+      "id": "fitness",
+      "pack": "fitness",
+      "aliases": ["fitness", "gym", "training", "athletic", "coach", "wellness studio"]
+    },
+    {
+      "id": "education",
+      "pack": "education",
+      "aliases": ["school", "course", "training", "education", "tutor", "academy"]
+    },
+    {
+      "id": "nonprofit",
+      "pack": "nonprofit",
+      "aliases": ["nonprofit", "charity", "civic", "foundation", "community"]
+    },
+    {
+      "id": "beauty",
+      "pack": "beauty",
+      "aliases": ["beauty", "salon", "spa", "skincare", "aesthetic"]
+    },
+    {
+      "id": "trades",
+      "pack": "trades",
+      "aliases": ["plumber", "electrician", "hvac", "contractor", "roofing", "trades"]
+    },
+    {
+      "id": "finance",
+      "pack": "finance",
+      "aliases": ["finance", "fintech", "accounting", "bookkeeping", "wealth", "banking"]
+    },
+    {
+      "id": "creative",
+      "pack": "creative",
+      "aliases": ["studio", "design", "creative", "brand", "photography"]
+    },
+    {
+      "id": "retail",
+      "pack": "retail",
+      "aliases": ["shop", "store", "retail", "ecommerce", "boutique"]
+    }
+  ],
+  "section_recipes": {
+    "default": ["hero", "features", "services", "steps", "contact", "footer"],
+    "advisory": ["hero", "problem", "features", "services", "steps", "contact", "footer"],
+    "retail": ["hero", "features", "services", "steps", "contact", "footer"],
+    "trades": ["hero", "services", "steps", "features", "contact", "footer"]
+  },
+  "agent_prompt_blocks": {
+    "always_load": [
+      "Load nf-uiux-library-2026-v1 before any UI or landing generation.",
+      "Pick style_pack from library enum only.",
+      "Apply composition_laws and craft rules.",
+      "Do not invent fonts outside font_allowlist.",
+      "Revise brief fields on grade failure — never emit freeform HTML as the fix."
+    ],
+    "brief_system_addon": [
+      "You are constrained by nf-uiux-library-2026-v1.",
+      "style_pack must be one of the library style_packs ids.",
+      "Follow composition_laws and craft.cta_case=sentence.",
+      "Palette must fit the pack palette_bias and remain high-contrast."
+    ]
+  },
+  "corporate_surface": {
+    "note": "Noetfield.com homepage uses a frozen golden class — not customer style packs.",
+    "golden_class": "claude-v2-content-codex-corporate-restyle",
+    "required_fonts": ["Inter", "Newsreader", "DM Mono"],
+    "baseline": "data/www-home-golden-baseline-v1.json"
+  }
+}
