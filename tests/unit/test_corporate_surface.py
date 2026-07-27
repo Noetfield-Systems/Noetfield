@@ -221,6 +221,7 @@ def test_corporate_primary_nav_is_advisor_consistent() -> None:
     expected = (
         'href="/motors/"',
         'href="/runways/"',
+        'href="/deterministic-api/"',
         'href="/proof/"',
         'href="/about/"',
         'href="https://app.noetfield.com/">Deploy</a>',
@@ -244,7 +245,7 @@ def test_corporate_primary_nav_is_advisor_consistent() -> None:
         positions = [nav.index(item) for item in expected]
         assert positions == sorted(positions), path
         assert 'href="/#capabilities"' not in nav, path
-        assert 'href="/deterministic-api/"' not in nav, path
+        assert 'href="/deterministic-api/"' in nav, path
         assert ">Ecosystem</a>" not in nav, path
         assert ">Capabilities</a>" not in nav, path
 
@@ -304,6 +305,7 @@ def test_runways_primary_nav_matches_homepage() -> None:
     expected = (
         'href="/motors/"',
         'href="/runways/"',
+        'href="/deterministic-api/"',
         'href="/proof/"',
         'href="/about/"',
         'href="https://app.noetfield.com/">Deploy</a>',
@@ -318,7 +320,6 @@ def test_legacy_identity_pages_are_demoted() -> None:
         "enterprise",
         "pricing",
         "intelligence",
-        "deterministic-api",
         "research-packs",
         "investor-workflows",
         "gel",
@@ -333,6 +334,19 @@ def test_legacy_identity_pages_are_demoted() -> None:
         assert "index,follow" not in text or "noindex,nofollow" in text, slug
 
 
+def test_deterministic_api_product_is_indexable_and_linked() -> None:
+    text = read(ROOT / "deterministic-api" / "index.html")
+    assert '<meta name="robots" content="index,follow" />' in text
+    assert "noindex" not in text.split("</head>", 1)[0]
+    assert 'href="/motors/"' in text
+    home = read(ROOT / "index.html")
+    assert 'href="/deterministic-api/"' in home
+    workspace = read(ROOT / "deterministic-api" / "workspace" / "index.html")
+    assert '<meta name="robots" content="noindex,nofollow" />' in workspace
+    signin = read(ROOT / "deterministic-api" / "signin" / "index.html")
+    assert '<meta name="robots" content="noindex,nofollow" />' in signin
+
+
 def test_homepage_footer_links_to_runways_and_trust() -> None:
     text = read(ROOT / "index.html")
     assert 'href="/runways/"' in text
@@ -340,7 +354,7 @@ def test_homepage_footer_links_to_runways_and_trust() -> None:
     assert 'href="/privacy/"' in text
     assert 'href="/investors/">Investors</a>' in text
     assert "AI systems that can act, and show why the action was allowed." in text
-    assert 'href="/deterministic-api/"' not in text
+    assert 'href="/deterministic-api/"' in text
     assert 'href="/enterprise/"' not in text
     assert 'href="/investor-workflows/"' not in text
 
@@ -357,7 +371,7 @@ def test_corporate_footers_do_not_promote_legacy_systems() -> None:
         footer = footer_match.group(1)
         assert 'href="/enterprise/"' not in footer, rel
         assert 'href="/investor-workflows/"' not in footer, rel
-        assert 'href="/deterministic-api/"' not in footer, rel
+        assert 'href="/deterministic-api/"' in footer, rel
         assert 'href="/research-packs/"' not in footer, rel
         assert 'href="/motors/"' in footer, rel
         assert 'href="/runways/"' in footer, rel

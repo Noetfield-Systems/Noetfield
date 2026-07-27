@@ -23,6 +23,25 @@ function isImmutablePagesOrigin(value) {
   }
 }
 
+/** App / auth / private routes must stay out of Google/Bing/GEO. */
+const FORCE_NOINDEX_PREFIXES = [
+  "/deterministic-api/workspace",
+  "/deterministic-api/signin",
+  "/auth/",
+  "/admin/",
+  "/invest/",
+  "/gate/",
+  "/banner/",
+  "/factory/",
+];
+
+function forceNoindex(pathname) {
+  const path = pathname.endsWith("/") && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
+  return FORCE_NOINDEX_PREFIXES.some(
+    (prefix) => path === prefix.replace(/\/$/, "") || path.startsWith(prefix),
+  );
+}
+
 function edgeHeaders(releaseSha) {
   const headers = new Headers({
     "Cache-Control": "no-store, max-age=0, must-revalidate",
@@ -91,6 +110,13 @@ export default {
     const out = new Response(res.body, res);
     out.headers.set("X-Noetfield-Proxy", "cf-www-proxy");
     out.headers.set("X-Noetfield-Release", releaseSha);
+    // Strip provider-side preview noindex so public marketing pages can rank.
+    // Keep explicit noindex only on private/app routes.
+    if (forceNoindex(url.pathname)) {
+      out.headers.set("X-Robots-Tag", "noindex, nofollow");
+    } else {
+      out.headers.delete("X-Robots-Tag");
+    }
     if ((out.headers.get("Content-Type") || "").toLowerCase().includes("text/html")) {
       out.headers.set("Cache-Control", "no-store, max-age=0, must-revalidate");
       out.headers.set("CDN-Cache-Control", "no-store");
