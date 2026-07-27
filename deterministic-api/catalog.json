@@ -39,6 +39,8 @@
     "api_base": "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev",
     "signup": "POST /v1/signup",
     "chat": "POST /v1/chat/completions",
+    "messages": "POST /v1/messages",
+    "generate_content": "POST /v1beta/models/{model}:generateContent",
     "tasks": "POST /v1/tasks",
     "task_types": "GET /v1/task-types",
     "balance": "GET /v1/balance",
@@ -49,21 +51,41 @@
   "drop_in": {
     "before": "https://api.openai.com/v1",
     "after": "https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1",
-    "sdk_note": "Keep OpenAI SDK for chat. Use POST /v1/tasks for deterministic webpage repair."
+    "sdk_note": "Keep OpenAI SDK for chat. Use POST /v1/messages for Claude-shaped clients and generateContent for Gemini-shaped clients. Use POST /v1/tasks for deterministic webpage repair."
   },
   "models": {
     "standard": {
       "id": "noetfield-deterministic",
       "lane": "standard",
+      "protocol": "openai_chat_completions",
       "note": "Cheap flash matrix. Default for general chat."
     },
     "coding_pro": {
       "id": "noetfield-coding-pro",
       "lane": "coding_pro",
+      "protocol": "openai_chat_completions",
       "enable": "Workspace → Enable Coding Pro, then set model=noetfield-coding-pro",
       "stack": "Deterministic planner + parallel cheap workers → DeepSeek chat → GLM → Kimi code → HF coder",
       "client_markup": 4,
       "note": "Same base_url + key. Higher per-token rate for coding quality."
+    },
+    "claude_compat": {
+      "id": "noetfield-claude-compat",
+      "lane": "claude_compat",
+      "protocol": "anthropic_messages",
+      "endpoint": "POST /v1/messages",
+      "enable": "Workspace → Claude Compat, then x-api-key or Bearer sk-nf-…",
+      "client_markup": 4,
+      "note": "Anthropic Messages-shaped facade over Noetfield matrix (not Anthropic billing)."
+    },
+    "gemini_compat": {
+      "id": "noetfield-gemini-compat",
+      "lane": "gemini_compat",
+      "protocol": "gemini_generate_content",
+      "endpoint": "POST /v1beta/models/noetfield-gemini-compat:generateContent",
+      "enable": "Workspace → Gemini Compat, then x-goog-api-key or Bearer sk-nf-…",
+      "client_markup": 4,
+      "note": "Gemini generateContent-shaped facade over Noetfield matrix (not Google billing)."
     }
   },
   "referral": {
