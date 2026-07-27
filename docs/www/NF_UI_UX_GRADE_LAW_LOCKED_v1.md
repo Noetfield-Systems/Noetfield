@@ -87,10 +87,10 @@ Separate surface. Law:
 5. Publish fail-closed until grade PASS  
 
 **Internal library (ONE place only — do not copy into this repo):**  
-`~/Desktop/Noetfield-Systems/NOETFIELD-RUNWAY/sites/company-new/functions/_lib/nf-uiux-library-2026-v1.json`  
-Module: `…/uiux-library-2026.ts` · Skill: `NOETFIELD-RUNWAY/.cursor/skills/SKILL-012-uiux-library-2026.md`
+`~/Desktop/Noetfield-Systems/NOETFIELD-RUNWAY/sites/company-new/functions/_lib/uiux-library-2026.ts`  
+Skill: `NOETFIELD-RUNWAY/.cursor/skills/SKILL-012-uiux-library-2026.md`
 
-Noetfield www agents read that path. Never duplicate the JSON, skill, or packs under `Noetfield/data/` or `.cursor/`.
+Noetfield www agents read that path. Never duplicate the library under `Noetfield/data/` or `.cursor/`.
 
 ## Related
 
