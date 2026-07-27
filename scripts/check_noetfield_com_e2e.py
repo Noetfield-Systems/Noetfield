@@ -21,7 +21,7 @@ API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 # Corporate entry homepage — product CTAs remain on their scoped field pages.
 HOME_NEEDLES = (
     "nf-corp",
-    "AI systems that can act—and show why the action was allowed.",
+    "AI systems that can act, and show why the action was allowed.",
     "governed execution runtimes that coordinate",
     "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.",
     "Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.",
@@ -29,7 +29,8 @@ HOME_NEEDLES = (
     "P05-class client-zero commissioning",
     "TrustField",
     "trustfield.ca",
-    "Inspect current proof",
+    "INSPECT CURRENT PROOF",
+    "noetfield-home-v2.css",
     "/motors/",
     "/runways/",
     "/proof/",

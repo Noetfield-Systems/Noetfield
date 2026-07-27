@@ -31,6 +31,9 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
         text = read(path)
         css_version = expected_css_versions[path]
         assert f"/assets/noetfield-corporate-v1.css?{css_version}" in text, path
+        if path == ROOT / "index.html":
+            assert "/assets/noetfield-home-v2.css?v=2" in text, path
+            assert 'class="nf-corp nf-home"' in text, path
         assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text, path
         assert 'class="nf-corp-footer"' in text, path
         assert "Evidence before claims." in text, path
@@ -47,30 +50,40 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
 
 
 def test_homepage_explains_company_narrative_proof_and_asks() -> None:
+    """NF-WEB-001 homepage v2: shared corp shell + home-v2 body; no dashed headline."""
     text = read(ROOT / "index.html")
     required = (
         "Vancouver, Canada · Governed execution systems",
-        "AI systems that can act—and show why the action was allowed.",
-        "Noetfield builds AI Motors: governed execution runtimes that coordinate",
+        "AI systems that can act, and show why the action was allowed.",
+        "Noetfield builds",
+        "AI Motors",
+        "governed execution runtimes that coordinate",
         "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.",
         "AI capability is abundant. Governed execution is not.",
         "Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.",
+        "Client-zero · P05",
         "P05-class client-zero commissioning is the present focus.",
         "does not invent SHAs, witness runs, or PASS_P05 claims",
+        "NO INVENTED SHAS OR PASS CLAIMS",
+        "SAMPLE ARTIFACT · SHAPE ONLY",
         "Governed Software Change",
         "Decision Brief",
         "Institutional Workflow Commissioning",
         "TrustField",
         "trustfield.ca",
         "A receipt is not certification.",
-        "Inspect current proof",
-        "Discuss one workflow",
-        "Incubator / ecosystem",
-        "Operating partner",
-        "Pilot / client",
+        "INSPECT CURRENT PROOF",
+        "DISCUSS ONE WORKFLOW",
+        "INCUBATOR / ECOSYSTEM",
+        "OPERATING PARTNER",
+        "PILOT / CLIENT",
+        "/assets/noetfield-home-v2.css",
+        'class="nf-corp nf-home"',
     )
     for phrase in required:
-        assert phrase in text
+        assert phrase in text, phrase
+    assert "—" not in text
+    assert "–" not in text
     assert "Tesla" not in text
     assert "Tesla-class" not in text
     assert "SourceA" not in text
@@ -81,23 +94,28 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
     assert "PASS_P05" not in text or "does not invent SHAs, witness runs, or PASS_P05 claims" in text
     assert "governed execution systems that coordinate" not in text
     assert "records the operational system" not in text
-    assert text.count("<section") == 8
+    assert text.count("<section") == 11
 
 
 def test_homepage_statuses_preserve_claim_boundaries() -> None:
     text = read(ROOT / "index.html")
     for status in (
         "Client-zero · P05",
-        "Runway",
-        "Commissioning",
+        "CLIENT-ZERO · P05",
+        "RUNWAY",
+        "COMMISSIONING",
     ):
-        assert status in text
+        assert status in text, status
     assert "A receipt is not certification." in text
     assert "not a certifier, regulated institution, payment operator, or custodian" in text
     assert "does not invent SHAs, witness runs, or PASS_P05 claims" in text
-    assert not re.search(
-        r"trusted by|fortune.?500|\d+[+]? (?:clients|customers|enterprises)", text, re.I
-    )
+    assert "NO INVENTED SHAS OR PASS CLAIMS" in text
+    assert not re.search(r"trusted by", text, re.I)
+    assert not re.search(r"\d+[+]? (?:clients|customers|enterprises)", text, re.I)
+    # Fortune-500 may appear only inside an explicit denial.
+    for m in re.finditer(r"fortune.?500", text, re.I):
+        window = text[max(0, m.start() - 40) : m.end() + 40].lower()
+        assert "not a" in window or "not an" in window, window
     assert "$" not in text
     assert re.search(r"\b[0-9a-f]{7,40}\b", text, re.I) is None
 
@@ -315,7 +333,7 @@ def test_homepage_footer_links_to_runways_and_trust() -> None:
     assert 'href="/trust/"' in text
     assert 'href="/privacy/"' in text
     assert 'href="/investors/">Investors</a>' in text
-    assert "AI systems that can act—and show why the action was allowed." in text
+    assert "AI systems that can act, and show why the action was allowed." in text
     assert 'href="/deterministic-api/"' not in text
     assert 'href="/enterprise/"' not in text
     assert 'href="/investor-workflows/"' not in text

@@ -10,16 +10,16 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 - canon_version: (string)
 - sandbox_evidence: link(s) to sandbox receipt(s)
 
-# Homepage IA Section Guard (≤8)
+# Homepage IA Section Guard (≤11)
 
 **Version:** 1.0.0 · **Plan:** pf-0067 · **SKU:** — (platform) · **Phase:** 6  
-**Law:** U5 v17 IA compression — homepage keeps ≤8 top-level `<section>` elements
+**Law:** U5 v17 IA compression — homepage keeps ≤11 top-level `<section>` elements
 
 ---
 
 ## One line
 
-`index.html` must contain **≤8** `<section>` tags — enforced by `scripts/verify-static-www.sh`.
+`index.html` must contain **≤11** `<section>` tags — enforced by `scripts/verify-static-www.sh`.
 
 ---
 

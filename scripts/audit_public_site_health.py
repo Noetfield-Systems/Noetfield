@@ -41,8 +41,8 @@ CORPORATE_HOME_REQUIRED = (
     "/runways/",
     "/investors/",
     "/proof/",
-    "AI systems that can act—and show why the action was allowed.",
-    "Inspect current proof",
+    "AI systems that can act, and show why the action was allowed.",
+    "INSPECT CURRENT PROOF",
     "TrustField",
     "A receipt is not certification.",
 )

@@ -27,14 +27,15 @@ def test_homepage_has_modern_shell_and_spine() -> None:
     text = HOME.read_text(encoding="utf-8")
     # NF-WEB-001 corporate entry — one company narrative (advisor P1).
     required = (
-        "<title>Noetfield Systems Inc. — AI Motors &amp; Governed Execution</title>",
+        "<title>Noetfield Systems Inc. | AI Motors and Governed Execution</title>",
         '<link rel="canonical" href="https://www.noetfield.com/" />',
-        '<body class="nf-corp">',
+        'nf-corp',
         '<main id="main">',
-        "AI systems that can act—and show why the action was allowed.",
-        'id="ai-motors"',
-        'id="current-proof"',
+        "AI systems that can act, and show why the action was allowed.",
+        'id="architecture"',
+        'id="receipt"',
         'id="runways"',
+        "/assets/noetfield-home-v2.css",
         "TrustField",
         'href="/motors/"',
         'href="/about/"',
