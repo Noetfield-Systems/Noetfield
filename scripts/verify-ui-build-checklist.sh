@@ -14,7 +14,8 @@ echo "=== verify-ui-build-checklist ==="
 for f in \
   docs/www/NF_UI_BUILD_CHECKLIST_LOCKED_v1.md \
   docs/www/NF_WWW_LANGUAGE_LAYERS_LOCKED_v1.md \
-  docs/DESIGN_REFERENCE_GOALS_LOCKED_v1.md; do
+  docs/DESIGN_REFERENCE_GOALS_LOCKED_v1.md \
+  docs/www/NF_UI_UX_GRADE_LAW_LOCKED_v1.md; do
   [[ -f "$f" ]] && ok "lock doc $f" || bad "missing $f"
 done
 
@@ -24,6 +25,12 @@ if [[ -f .cursor/rules/nf-ui-checklist-mandatory.mdc ]] \
   ok "cursor rule nf-ui-checklist-mandatory.mdc"
 else
   bad "missing or inactive nf-ui-checklist-mandatory.mdc"
+fi
+if [[ -f .cursor/rules/nf-ui-ux-grade-law.mdc ]] \
+  && grep -q 'alwaysApply: true' .cursor/rules/nf-ui-ux-grade-law.mdc; then
+  ok "cursor rule nf-ui-ux-grade-law.mdc"
+else
+  bad "missing or inactive nf-ui-ux-grade-law.mdc"
 fi
 
 # 2 — No founder ops partial on disk
@@ -76,6 +83,11 @@ ok "commercial agentic surfaces"
 chmod +x scripts/verify-www-interactive-fidelity.sh
 ./scripts/verify-www-interactive-fidelity.sh || fail=1
 ok "www interactive fidelity (no downgrade)"
+
+# 7c — UI/UX grade vs golden homepage (CRITICAL — grade law)
+chmod +x scripts/verify-www-ui-grade.sh
+./scripts/verify-www-ui-grade.sh || fail=1
+ok "www UI/UX grade (golden baseline)"
 
 # 8 — Commercial agentic unit tests
 python3 -m pytest tests/unit/test_commercial_agentic.py -q || fail=1

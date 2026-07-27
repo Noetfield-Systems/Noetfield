@@ -23,10 +23,12 @@ Advisor / Architect Minimal Checklist (AUTO-STUB)
 1. This checklist (`docs/www/NF_UI_BUILD_CHECKLIST_LOCKED_v1.md`)
 2. Language layers (`docs/www/NF_WWW_LANGUAGE_LAYERS_LOCKED_v1.md`)
 3. Design reference (`docs/DESIGN_REFERENCE_GOALS_LOCKED_v1.md`) — patterns R1–R8 minimum for www
-4. Commercial SSOT (`docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.md`) — three SKUs only
+4. UI/UX grade law (`docs/www/NF_UI_UX_GRADE_LAW_LOCKED_v1.md`) — golden homepage + fail-closed grade
+5. Commercial SSOT (`docs/strategy/NOETFIELD_COMMERCIAL_SSOT_LOCKED_v1.md`) — three SKUs only
 
 ```bash
 make nf-ui-checklist   # must PASS before ship
+bash scripts/verify-www-ui-grade.sh  # grade ≠ compliance
 make verify-site-audit # disk site-audit P0 (see NF_SITE_AUDIT_MACHINE_LOCKED_v1.md)
 ```
 
