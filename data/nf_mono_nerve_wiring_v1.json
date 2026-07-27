@@ -14,7 +14,7 @@
     {"id": "operations_inbox", "sina": "noetfield-operations-inbox-active-v1.json", "sync_from": "docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md"},
     {"id": "founder_cascade", "sina": "founder-input-cascade-events.jsonl", "staleness_probe": true},
     {"id": "nf_inbox", "path": "~/.sina/agent-workspaces/noetfield_cloud/INBOX.md", "required": true},
-    {"id": "trustfield_fleet_wire", "command": "python3 ~/Desktop/TrustField Technologies/scripts/tf_fleet_live_wire_v1.py --json --no-refresh", "required": true},
+    {"id": "trustfield_fleet_wire", "command": "python3 ~/Desktop/Noetfield-Systems/TrustField-Technologies/scripts/tf_fleet_live_wire_v1.py --json --no-refresh", "required": true},
     {"id": "ecosystem_nerve", "sina": "ecosystem-live-nerve-v1.json", "required": true},
     {"id": "commercial_inbox_doc", "repo": "docs/ops/COMMERCIAL_INBOX_PACKAGING_LOCKED_v1.md", "required": true}
   ],
