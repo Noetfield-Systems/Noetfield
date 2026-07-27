@@ -1,0 +1,19 @@
+# Noetfield Systems Inc.
+> Governed AI execution: AI Motors, Runways, and the Deterministic API.
+
+## Primary
+- [Home](https://www.noetfield.com/): Company home
+- [AI Motors](https://www.noetfield.com/motors/): Governed execution runtime
+- [Runways](https://www.noetfield.com/runways/): Qualification paths to accepted output
+- [Deterministic API](https://www.noetfield.com/deterministic-api/): OpenAI-compatible schema-valid API
+- [Proof](https://www.noetfield.com/proof/): Evidence before claims
+- [Contact](https://www.noetfield.com/contact/?topic=pilot-client): Talk to Noetfield
+
+## Product API
+- Base URL: https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1
+- Docs / signup: https://www.noetfield.com/deterministic-api/
+- Workspace (authenticated): https://www.noetfield.com/deterministic-api/workspace/
+
+## Optional
+- [About](https://www.noetfield.com/about/)
+- [Sitemap](https://www.noetfield.com/sitemap.xml)
