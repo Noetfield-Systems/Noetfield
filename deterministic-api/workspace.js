@@ -337,7 +337,7 @@
                 `<div class="dapi-key-row__actions">` +
                 (canCopy
                   ? `<button type="button" class="dapi-btn dapi-btn--copy dapi-key-copy" data-copy="${escapeHtml(secret)}" data-copied-label="Copied">Copy</button>`
-                  : "") +
+                  : `<span class="dapi-muted dapi-key-restore">Use once to restore Copy</span>`) +
                 `<button type="button" class="dapi-btn dapi-btn--ghost dapi-key-delete" data-key-id="${escapeHtml(k.key_id || "")}">Delete</button>` +
                 `</div></div>`
               );
@@ -409,6 +409,7 @@
           `curl ${BASE}/chat/completions \\\n` +
           `  -H "Authorization: Bearer ${keyForSnippet()}" \\\n` +
           `  -H "Content-Type: application/json" \\\n` +
+          `  -H "x-noetfield-surface: my-app" \\\n` +
           `  -d '{"model":"${model}","messages":[{"role":"user","content":"ping"}]}'`;
       }
     }
