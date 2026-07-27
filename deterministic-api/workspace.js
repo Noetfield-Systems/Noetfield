@@ -439,6 +439,7 @@
         if (dropIn) {
           dropIn.textContent =
             `# Continue / Claude provider (Anthropic-shaped)\n` +
+            `# provider = protocol adapter only — traffic goes to apiBase\n` +
             `provider: anthropic\n` +
             `apiBase: "${BASE}"\n` +
             `apiKey: "${key}"\n` +
@@ -446,11 +447,18 @@
         }
         if (curlEl) {
           curlEl.textContent =
+            `# Non-stream\n` +
             `curl ${BASE}/messages \\\n` +
             `  -H "x-api-key: ${key}" \\\n` +
             `  -H "anthropic-version: 2023-06-01" \\\n` +
             `  -H "Content-Type: application/json" \\\n` +
-            `  -d '{"model":"${model}","max_tokens":256,"messages":[{"role":"user","content":"ping"}]}'`;
+            `  -d '{"model":"${model}","max_tokens":256,"messages":[{"role":"user","content":"ping"}]}'\n\n` +
+            `# Stream (SSE)\n` +
+            `curl -N ${BASE}/messages \\\n` +
+            `  -H "x-api-key: ${key}" \\\n` +
+            `  -H "anthropic-version: 2023-06-01" \\\n` +
+            `  -H "Content-Type: application/json" \\\n` +
+            `  -d '{"model":"${model}","max_tokens":256,"stream":true,"messages":[{"role":"user","content":"ping"}]}'`;
         }
         if (protocolWrap) protocolWrap.hidden = false;
         if (protocolLabel) protocolLabel.textContent = "Continue yaml (Claude provider)";
@@ -465,14 +473,21 @@
       } else if (currentPlan === "gemini_compat") {
         if (dropIn) {
           dropIn.textContent =
-            `# Gemini generateContent\n` +
+            `# Gemini generateContent (+ streamGenerateContent)\n` +
             `endpoint = "${hostRoot()}/v1beta/models/${model}:generateContent"\n` +
+            `stream   = "${hostRoot()}/v1beta/models/${model}:streamGenerateContent"\n` +
             `api_key  = "${key}"\n` +
             `header   = "x-goog-api-key"`;
         }
         if (curlEl) {
           curlEl.textContent =
+            `# Non-stream\n` +
             `curl "${hostRoot()}/v1beta/models/${model}:generateContent" \\\n` +
+            `  -H "x-goog-api-key: ${key}" \\\n` +
+            `  -H "Content-Type: application/json" \\\n` +
+            `  -d '{"contents":[{"role":"user","parts":[{"text":"ping"}]}]}'\n\n` +
+            `# Stream\n` +
+            `curl -N "${hostRoot()}/v1beta/models/${model}:streamGenerateContent" \\\n` +
             `  -H "x-goog-api-key: ${key}" \\\n` +
             `  -H "Content-Type: application/json" \\\n` +
             `  -d '{"contents":[{"role":"user","parts":[{"text":"ping"}]}]}'`;
@@ -481,27 +496,43 @@
         if (protocolLabel) protocolLabel.textContent = "Gemini client notes";
         if (protocolCode) {
           protocolCode.textContent =
-            `# Point Gemini / OpenAI-compatible Gemini clients at:\n` +
+            `# Point Gemini clients at:\n` +
             `# ${hostRoot()}/v1beta/models/${model}:generateContent\n` +
+            `# Stream: …:streamGenerateContent\n` +
             `# Auth: x-goog-api-key: ${key}  (or Authorization: Bearer ${key})`;
         }
       } else {
         if (dropIn) {
           dropIn.textContent =
-            `# OpenAI-compatible (Continue provider: openai)\n` +
+            `# OpenAI-compatible (Continue provider: openai = protocol adapter)\n` +
             `base_url = "${BASE}"\n` +
             `api_key  = "${key}"\n` +
             `model    = "${model}"`;
         }
         if (curlEl) {
           curlEl.textContent =
+            `# Non-stream\n` +
             `curl ${BASE}/chat/completions \\\n` +
             `  -H "Authorization: Bearer ${key}" \\\n` +
             `  -H "Content-Type: application/json" \\\n` +
             `  -H "x-noetfield-surface: my-app" \\\n` +
-            `  -d '{"model":"${model}","messages":[{"role":"user","content":"ping"}]}'`;
+            `  -d '{"model":"${model}","messages":[{"role":"user","content":"ping"}]}'\n\n` +
+            `# Stream (SSE)\n` +
+            `curl -N ${BASE}/chat/completions \\\n` +
+            `  -H "Authorization: Bearer ${key}" \\\n` +
+            `  -H "Content-Type: application/json" \\\n` +
+            `  -d '{"model":"${model}","stream":true,"messages":[{"role":"user","content":"ping"}]}'`;
         }
-        if (protocolWrap) protocolWrap.hidden = true;
+        if (protocolWrap) protocolWrap.hidden = false;
+        if (protocolLabel) protocolLabel.textContent = "Continue yaml (OpenAI provider)";
+        if (protocolCode) {
+          protocolCode.textContent =
+            `name: Noetfield OpenAI Compat\n` +
+            `provider: openai\n` +
+            `model: ${model}\n` +
+            `apiBase: ${BASE}\n` +
+            `apiKey: ${key}`;
+        }
       }
     }
 
@@ -511,16 +542,16 @@
       if (planCopy) {
         if (currentPlan === "claude_compat") {
           planCopy.textContent =
-            "Claude Compat is on. Use Anthropic-shaped POST /v1/messages with x-api-key or Bearer. Model noetfield-claude-compat (~4× rate).";
+            "Claude Compat is on. POST /v1/messages (stream supported). x-api-key or Bearer. Model noetfield-claude-compat (~4× rate).";
         } else if (currentPlan === "gemini_compat") {
           planCopy.textContent =
-            "Gemini Compat is on. Call generateContent with x-goog-api-key or Bearer. Model noetfield-gemini-compat (~4× rate).";
+            "Gemini Compat is on. generateContent + streamGenerateContent. x-goog-api-key or Bearer. Model noetfield-gemini-compat (~4× rate).";
         } else if (currentPlan === "coding_pro") {
           planCopy.textContent =
-            "Coding Pro is on. Same OpenAI chat URL and key; set model to noetfield-coding-pro (~4× rate).";
+            "Coding Pro is on. Same OpenAI chat URL and key (stream supported); set model to noetfield-coding-pro (~4× rate).";
         } else {
           planCopy.textContent =
-            "Standard is the default OpenAI chat model. Switch lanes below for Coding Pro, Claude Compat, or Gemini Compat.";
+            "Standard OpenAI chat (stream supported). Switch lanes for Coding Pro, Claude Compat, or Gemini Compat.";
         }
       }
       document.querySelectorAll(".dapi-plan-opt").forEach((btn) => {

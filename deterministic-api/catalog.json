@@ -41,6 +41,7 @@
     "chat": "POST /v1/chat/completions",
     "messages": "POST /v1/messages",
     "generate_content": "POST /v1beta/models/{model}:generateContent",
+    "stream_generate_content": "POST /v1beta/models/{model}:streamGenerateContent",
     "tasks": "POST /v1/tasks",
     "task_types": "GET /v1/task-types",
     "balance": "GET /v1/balance",
