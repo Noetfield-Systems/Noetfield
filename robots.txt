@@ -11,3 +11,7 @@ Disallow: /reports/
 Disallow: /os/
 
 Sitemap: https://www.noetfield.com/sitemap.xml
+
+# AI / GEO discovery
+Allow: /llms.txt
+Allow: /deterministic-api/
