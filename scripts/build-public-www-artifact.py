@@ -119,6 +119,23 @@ def source_git_sha() -> str:
     return candidate
 
 
+def deployed_at_iso() -> str:
+    explicit = os.environ.get("NF_WWW_DEPLOYED_AT", "").strip()
+    if explicit:
+        if not explicit.endswith("Z"):
+            raise ValueError("NF_WWW_DEPLOYED_AT must be an ISO-8601 UTC timestamp ending with Z")
+        return explicit
+    commit_time = subprocess.check_output(
+        ["git", "show", "-s", "--format=%cI", "HEAD"], cwd=ROOT, text=True
+    ).strip()
+    dt = datetime.fromisoformat(commit_time)
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace(
+        "+00:00", "Z"
+    )
+
+
 def build_generated_static_files(data: dict[str, object]) -> list[str]:
     raw = data.get("build_generated_static_files", [])
     if raw is None:
@@ -133,9 +150,7 @@ def build_generated_static_files(data: dict[str, object]) -> list[str]:
 def write_version_json() -> None:
     payload = {
         "source_sha": source_git_sha(),
-        "deployed_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace(
-            "+00:00", "Z"
-        ),
+        "deployed_at": deployed_at_iso(),
         "surface": "www.noetfield.com",
     }
     (DIST / "version.json").write_text(
