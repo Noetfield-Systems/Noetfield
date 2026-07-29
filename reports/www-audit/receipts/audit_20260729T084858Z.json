@@ -1,0 +1,330 @@
+{
+  "receipt_type": "SITE_AUDIT_CYCLE",
+  "schema": "nf-site-audit-receipt-v2",
+  "lane": "noetfield",
+  "loop": "site-audit",
+  "run_at": "2026-07-29T08:48:58Z",
+  "crawl_root": "disk://noetfield-repo",
+  "crawl_mode": "disk",
+  "pages_audited": 18,
+  "pages_crawled": 18,
+  "lenses_version": "2.0.0",
+  "state": "COMPLETE",
+  "findings_total": 30,
+  "by_severity": {
+    "P1": 28,
+    "P2": 2
+  },
+  "findings": [
+    {
+      "page": "disk:///start/",
+      "www_path": "/start/",
+      "check": "BF-3",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "5 CTAs above fold (max 3)",
+      "evidence": "hero region CTA count=5",
+      "snapshot_sha": "4323226aac44956376a976affdf11b9e10929d38a44a59cf86c2a3e43a47dad0"
+    },
+    {
+      "page": "disk:///start/",
+      "www_path": "/start/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "4323226aac44956376a976affdf11b9e10929d38a44a59cf86c2a3e43a47dad0"
+    },
+    {
+      "page": "disk:///start/",
+      "www_path": "/start/",
+      "check": "BF-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "price figure not in canonical pricing table",
+      "evidence": "$0",
+      "snapshot_sha": "4323226aac44956376a976affdf11b9e10929d38a44a59cf86c2a3e43a47dad0"
+    },
+    {
+      "page": "disk:///pricing/",
+      "www_path": "/pricing/",
+      "check": "BF-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "price figure not in canonical pricing table",
+      "evidence": "$5,000",
+      "snapshot_sha": "0b1eaf8453051e83d1afd48317b1706c9b6999c7948ba0d4c7360dfee30a377d"
+    },
+    {
+      "page": "disk:///copilot/",
+      "www_path": "/copilot/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "15d1623d57c10a3e101e1cbc83e19847f8c8a44b6c676372fa748c35975131af"
+    },
+    {
+      "page": "disk:///copilot/pilot/",
+      "www_path": "/copilot/pilot/",
+      "check": "BF-3",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "5 CTAs above fold (max 3)",
+      "evidence": "hero region CTA count=5",
+      "snapshot_sha": "c47ddd42bac9b937b312eac24e78dbbe7f1443851b9c7e3e3f8180e66fa78d05"
+    },
+    {
+      "page": "disk:///copilot/pilot/",
+      "www_path": "/copilot/pilot/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "c47ddd42bac9b937b312eac24e78dbbe7f1443851b9c7e3e3f8180e66fa78d05"
+    },
+    {
+      "page": "disk:///copilot/pilot/",
+      "www_path": "/copilot/pilot/",
+      "check": "BF-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "price figure not in canonical pricing table",
+      "evidence": "$3",
+      "snapshot_sha": "c47ddd42bac9b937b312eac24e78dbbe7f1443851b9c7e3e3f8180e66fa78d05"
+    },
+    {
+      "page": "disk:///copilot/demo/",
+      "www_path": "/copilot/demo/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "meta description missing or outside 50-160ch",
+      "evidence": "Interactive walkthrough: evaluate Copilot intent, confidence score, human approver gate, and Trust Ledger export \u2014 ADK-style event trace for institutional buyers.",
+      "snapshot_sha": "cb07c236a5b2cf0f00d83d63e3f039a6068123585aa400dcf717e13e5a72ccde"
+    },
+    {
+      "page": "disk:///copilot/demo/",
+      "www_path": "/copilot/demo/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "cb07c236a5b2cf0f00d83d63e3f039a6068123585aa400dcf717e13e5a72ccde"
+    },
+    {
+      "page": "disk:///copilot/proof-case/",
+      "www_path": "/copilot/proof-case/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "title 62ch > 60",
+      "evidence": "Copilot Proof Case \u2014 Evaluate \u2192 TLE \u2192 Board Export | Noetfield",
+      "snapshot_sha": "6c987684ae2a387e8051594abb792a2b650b4069dec8e474bb10f7d831a23ac4"
+    },
+    {
+      "page": "disk:///copilot/proof-case/",
+      "www_path": "/copilot/proof-case/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "6c987684ae2a387e8051594abb792a2b650b4069dec8e474bb10f7d831a23ac4"
+    },
+    {
+      "page": "disk:///trust-brief/intake/",
+      "www_path": "/trust-brief/intake/",
+      "check": "SM-1",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "3 <h1> tags (must be 1)",
+      "evidence": "count=3",
+      "snapshot_sha": "fc24f82db294a6d95f44ad89cb43de2a72b612399db99ce75f0318f0eb0b7c19"
+    },
+    {
+      "page": "disk:///trust-brief/intake/",
+      "www_path": "/trust-brief/intake/",
+      "check": "BF-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "price figure not in canonical pricing table",
+      "evidence": "$3",
+      "snapshot_sha": "fc24f82db294a6d95f44ad89cb43de2a72b612399db99ce75f0318f0eb0b7c19"
+    },
+    {
+      "page": "disk:///trust-ledger/sample-report/",
+      "www_path": "/trust-ledger/sample-report/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "meta description missing or outside 50-160ch",
+      "evidence": "Sample Trust Ledger Entry YAML reports.",
+      "snapshot_sha": "8ca24957a5976a170a85dd26f71180bdc75ec14b39a8583b1bcec28939903159"
+    },
+    {
+      "page": "disk:///trust-ledger/sample-report/",
+      "www_path": "/trust-ledger/sample-report/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "8ca24957a5976a170a85dd26f71180bdc75ec14b39a8583b1bcec28939903159"
+    },
+    {
+      "page": "disk:///work-with-us/",
+      "www_path": "/work-with-us/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "title 68ch > 60",
+      "evidence": "Work with Noetfield \u2014 Connectors, Facilitators, Partners & Investors",
+      "snapshot_sha": "ce2ed15e6db957b26d47d40e1f39161f17482b92e8479a8a5691095eade6f495"
+    },
+    {
+      "page": "disk:///work-with-us/",
+      "www_path": "/work-with-us/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "ce2ed15e6db957b26d47d40e1f39161f17482b92e8479a8a5691095eade6f495"
+    },
+    {
+      "page": "disk:///governance/",
+      "www_path": "/governance/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "title 64ch > 60",
+      "evidence": "Noetfield \u2014 Enterprise AI Governance &amp; Trust Ledger Evidence",
+      "snapshot_sha": "401713ce553d6eb5ec93d79f2ea2aac3a23d2169d9d533a69b8d9fa29ff42b38"
+    },
+    {
+      "page": "disk:///governance/",
+      "www_path": "/governance/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "meta description missing or outside 50-160ch",
+      "evidence": "Board-grade Copilot governance for EU and US regulated institutions \u2014 tamper-evident decision records, signed TLE receipts, fail-closed export. Copilot Governance Pack $2k\u201310k.",
+      "snapshot_sha": "401713ce553d6eb5ec93d79f2ea2aac3a23d2169d9d533a69b8d9fa29ff42b38"
+    },
+    {
+      "page": "disk:///governance/",
+      "www_path": "/governance/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "401713ce553d6eb5ec93d79f2ea2aac3a23d2169d9d533a69b8d9fa29ff42b38"
+    },
+    {
+      "page": "disk:///governance/",
+      "www_path": "/governance/",
+      "check": "BF-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "price figure not in canonical pricing table",
+      "evidence": "$0",
+      "snapshot_sha": "401713ce553d6eb5ec93d79f2ea2aac3a23d2169d9d533a69b8d9fa29ff42b38"
+    },
+    {
+      "page": "disk:///ai-value-governance-os/",
+      "www_path": "/ai-value-governance-os/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "meta description missing or outside 50-160ch",
+      "evidence": "AI Value Governance OS \u2014 enterprise control layer for AI spend, usage, value, risk, and execution. Measure, forecast, govern, and optimize AI usage across models, agents, teams, workflows, and busines",
+      "snapshot_sha": "dc03b0c8a3607c6295d51a0cc12570ee421c54328801d6f2b9d904dfb8ee9931"
+    },
+    {
+      "page": "disk:///ai-value-governance-os/",
+      "www_path": "/ai-value-governance-os/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "dc03b0c8a3607c6295d51a0cc12570ee421c54328801d6f2b9d904dfb8ee9931"
+    },
+    {
+      "page": "disk:///ai-factories/",
+      "www_path": "/ai-factories/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "ebb19a5daf9f1a7021fdcd82d61ac3b4d6989f1ee1ec0aa831108ec509ddec35"
+    },
+    {
+      "page": "disk:///ai-factories/spec/",
+      "www_path": "/ai-factories/spec/",
+      "check": "SM-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "og:image absent",
+      "evidence": "no og:image property in head",
+      "snapshot_sha": "ee5ea227ed8059fb51c9de407bf2a2f870172b2f79e7f16148d7b46a98183bfb"
+    },
+    {
+      "page": "disk:///intelligence/",
+      "www_path": "/intelligence/",
+      "check": "BF-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "price figure not in canonical pricing table",
+      "evidence": "$8k",
+      "snapshot_sha": "39d28893755f79365433ee4b3bf76695a9bcde6baa177e8eb23579efdc5f0d28"
+    },
+    {
+      "page": "SITE-WIDE",
+      "check": "SM-5",
+      "severity": "P2",
+      "decision": "FAIL",
+      "reason": "orphan page: 0 inbound internal links",
+      "evidence": "/intelligence/"
+    },
+    {
+      "page": "SITE-WIDE",
+      "check": "SM-5",
+      "severity": "P2",
+      "decision": "FAIL",
+      "reason": "orphan page: 0 inbound internal links",
+      "evidence": "/copilot/proof-case/"
+    },
+    {
+      "page": "SITE-WIDE",
+      "check": "NC-2",
+      "severity": "P1",
+      "decision": "FAIL",
+      "reason": "header partial drift vs pricing-table golden sha",
+      "evidence": "expected 8cb0400f5e22\u2026 got ff3c75febbed\u2026"
+    }
+  ],
+  "llm_proposals_pending": [
+    {
+      "check": "IV-3",
+      "prompt": "Can a stranger state what Noetfield sells in one sentence after the hero? Score 0-5.",
+      "status": "PROPOSAL_NEEDS_LLM"
+    }
+  ],
+  "cost": {
+    "provider": "local",
+    "model": "deterministic",
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "usd": 0.0
+  },
+  "value_class": "risk_reduction",
+  "verifier_note": "L4: PASS claims about fixes require crawl from a runner the fixing agent does not control; re-run >=60s after deploy."
+}

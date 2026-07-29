@@ -13,8 +13,8 @@
       "dist_path": "index.html",
       "route": "/",
       "required_text": [
-        "AI systems that can act, and show why the action was allowed.",
-        "Noetfield builds AI Motors",
+        "Harness frontier models into systems that can operate.",
+        "deterministic Motor",
         "Evidence before claims."
       ],
       "required_links": [
@@ -64,7 +64,7 @@
       "dist_path": "proof/index.html",
       "route": "/proof/",
       "required_text": [
-        "Evidence, not slides"
+        "Public evidence and explicit boundaries."
       ],
       "required_links": [
         "/proof/noetfield/",
@@ -79,7 +79,7 @@
       "dist_path": "about/index.html",
       "route": "/about/",
       "required_text": [
-        "An operating company for governed AI systems."
+        "An AI-native operating company building governed agent infrastructure."
       ],
       "required_links": [
         "/proof/"

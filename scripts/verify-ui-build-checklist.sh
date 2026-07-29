@@ -98,6 +98,9 @@ chmod +x scripts/verify-site-audit.sh
 ./scripts/verify-site-audit.sh || fail=1
 ok "site-audit disk P0 gate"
 
+python3 scripts/verify_canonical_www_audit_v1.py || fail=1
+ok "canonical corporate routes audit P1/P2=0"
+
 # 10 — Site-audit unit tests
 python3 -m pytest tests/unit/test_site_audit_machine.py -q || fail=1
 ok "site-audit machine unit tests"

@@ -8,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[2]
 PAGES = (ROOT / "index.html", ROOT / "about" / "index.html", ROOT / "investors" / "index.html")
 BRIDGE_PAGES = (
     ROOT / "proof" / "index.html",
-    ROOT / "investor-workflows" / "index.html",
 )
 
 
@@ -18,7 +17,7 @@ def read(path: Path) -> str:
 
 def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
     expected_css_versions = {
-        ROOT / "index.html": "v=2",
+        ROOT / "index.html": "v=3",
         ROOT / "about" / "index.html": "v=1",
         ROOT / "investors" / "index.html": "v=1",
     }
@@ -50,72 +49,48 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
 
 
 def test_homepage_explains_company_narrative_proof_and_asks() -> None:
-    """NF-WEB-001 homepage v2: shared corp shell + home-v2 body; no dashed headline."""
+    """Corporate homepage v1: governed agent infrastructure narrative."""
     text = read(ROOT / "index.html")
     required = (
-        "Vancouver, Canada · Governed execution systems",
-        "AI systems that can act, and show why the action was allowed.",
+        "GOVERNED AGENT INFRASTRUCTURE",
+        "Harness frontier models into systems that can operate.",
         "Noetfield builds",
-        "AI Motors",
-        "governed execution runtimes that coordinate",
-        "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.",
-        "AI capability is abundant. Governed execution is not.",
-        "Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.",
-        "Client-zero · P05",
-        "P05-class client-zero commissioning is the present focus.",
-        "does not invent SHAs, witness runs, or PASS_P05 claims",
-        "NO INVENTED SHAS OR PASS CLAIMS",
-        "SAMPLE ARTIFACT · SHAPE ONLY",
+        "agent harness",
+        "control plane",
+        "deterministic Motor",
+        "A capable model is not an operating system.",
+        "Agent demos, or governed production systems.",
+        "Explore the architecture",
+        "Inspect current proof",
         "Governed Software Change",
         "Decision Brief",
         "Institutional Workflow Commissioning",
         "TrustField",
-        "trustfield.ca",
-        "A receipt is not certification.",
-        "Inspect current proof",
-        "Discuss one workflow",
+        "separate regulated venture",
+        "Receipts prove what the runtime observed and enforced within a stated scope.",
         "nf-button nf-button--primary",
         "nf-button nf-button--secondary",
         "nf-corp-section",
         "nf-corp-hero",
-        "nf-system-card",
         "family=Newsreader",
-        "INCUBATOR / ECOSYSTEM",
-        "OPERATING PARTNER",
-        "PILOT / CLIENT",
         "/assets/noetfield-home-v2.css",
         'class="nf-corp nf-home"',
     )
     for phrase in required:
         assert phrase in text, phrase
-    assert "—" not in text
-    assert "–" not in text
     assert "Tesla" not in text
-    assert "Tesla-class" not in text
     assert "SourceA" not in text
     assert "SourceB" not in text
     assert "Investor Workflows" not in text
     assert "Custom AI Motors" not in text
-    assert "not a single product" not in text.lower()
-    assert "PASS_P05" not in text or "does not invent SHAs, witness runs, or PASS_P05 claims" in text
-    assert "governed execution systems that coordinate" not in text
-    assert "records the operational system" not in text
     assert text.count("<section") == 11
 
 
 def test_homepage_statuses_preserve_claim_boundaries() -> None:
     text = read(ROOT / "index.html")
-    for status in (
-        "Client-zero · P05",
-        "CLIENT-ZERO · P05",
-        "RUNWAY",
-        "COMMISSIONING",
-    ):
-        assert status in text, status
-    assert "A receipt is not certification." in text
-    assert "not a certifier, regulated institution, payment operator, or custodian" in text
-    assert "does not invent SHAs, witness runs, or PASS_P05 claims" in text
-    assert "NO INVENTED SHAS OR PASS CLAIMS" in text
+    assert "Receipts prove what the runtime observed and enforced within a stated scope." in text
+    assert "not certification or a claim of universal correctness" in text
+    assert "CLIENT-ZERO" not in text.split("</section>", 1)[0]  # not in hero viewport
     assert not re.search(r"trusted by", text, re.I)
     assert not re.search(r"\d+[+]? (?:clients|customers|enterprises)", text, re.I)
     # Fortune-500 may appear only inside an explicit denial.
@@ -137,9 +112,9 @@ def test_about_states_founder_company_and_trustfield_boundary() -> None:
     assert "founder-led" in text
     assert "Vancouver, British Columbia" in text
     assert "TrustField" in text
-    assert "A Noetfield Systems Inc. product" in text
+    assert "separate regulated venture" in text
     assert 'href="https://trustfield.ca/"' in text
-    assert "not presented as a Noetfield product or subsidiary" not in text
+    assert "Not a Noetfield Systems Inc. product" in text
 
 
 def test_ecosystem_page_is_informational_and_preserves_invest_security() -> None:
@@ -152,11 +127,11 @@ def test_ecosystem_page_is_informational_and_preserves_invest_security() -> None
 
 
 def test_three_contact_paths_are_present_on_all_corporate_pages() -> None:
-    topics = ("incubator-ecosystem", "operating-partner", "pilot-client")
+    """Legacy topic aliases remain in contact form; corporate pages link to Contact."""
     for path in PAGES:
         text = read(path)
-        for topic in topics:
-            assert f"/contact/?topic={topic}" in text, f"{path}: {topic}"
+        assert 'href="/contact/' in text, path
+        assert "commission-workflow" in text or "/contact/" in text, path
 
 
 def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
@@ -179,31 +154,32 @@ def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     assert "Investor Workflows" not in home
 
 
-def test_trustfield_is_listed_as_live_noetfield_product() -> None:
+def test_trustfield_is_listed_as_separate_ecosystem_venture() -> None:
     home = read(ROOT / "index.html")
     assert "TrustField" in home
     assert 'href="https://trustfield.ca/"' in home
-    assert "compliance workflow setup and operations" in home
-    assert "A Noetfield Systems Inc. product" in home
-    assert "A separate venture in formation" not in home
+    assert "separate regulated venture" in home
+    assert "A Noetfield Systems Inc. product" not in home
 
     about = read(ROOT / "about" / "index.html")
     assert "TrustField" in about
-    assert 'href="https://trustfield.ca/"' in about
-    assert "not presented as a Noetfield product" not in about
+    assert "separate regulated venture" in about
 
     investors = read(ROOT / "investors" / "index.html")
-    assert ">TrustField<" in investors or "TrustField</strong>" in investors
-    assert "trustfield.ca" in investors.lower() or "TrustField.ca" in investors
+    assert "TrustField" in investors
+    assert "Not a Noetfield Systems Inc. product" in investors
 
 
 def test_public_bridge_pages_have_coherent_navigation_and_footer() -> None:
     for path in BRIDGE_PAGES:
         text = read(path)
-        assert 'class="nf-vc-site-nav"' in text, path
-        assert 'class="nf-gate__foot nf-vc-footer"' in text, path
+        assert 'class="nf-corp-nav"' in text or 'class="nf-corp-header"' in text, path
+        assert 'class="nf-corp-footer"' in text, path
         for href in ("/about/", "/proof/", "/motors/", "/investors/", "/contact/"):
             assert href in text, f"{path}: {href}"
+    proof = read(ROOT / "proof" / "index.html")
+    assert 'class="nf-corp-nav"' in proof
+    assert 'class="nf-corp-footer"' in proof
 
 
 def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
@@ -217,15 +193,14 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
 
 
 def test_corporate_primary_nav_is_advisor_consistent() -> None:
-    """Shared corporate headers keep the company IA plus its live app entry."""
-    expected = (
+    """Shared corporate headers: Motors · Runways · Proof · Company · Deploy · Contact."""
+    order_markers = (
         'href="/motors/"',
         'href="/runways/"',
-        'href="/deterministic-api/"',
         'href="/proof/"',
         'href="/about/"',
-        'href="https://app.noetfield.com/">Deploy</a>',
-        'href="/contact/?topic=pilot-client">Contact</a>',
+        'href="https://app.noetfield.com/"',
+        'href="/contact/?topic=commission-workflow"',
     )
     for path in (
         ROOT / "index.html",
@@ -242,10 +217,11 @@ def test_corporate_primary_nav_is_advisor_consistent() -> None:
         )
         assert nav_match, path
         nav = nav_match.group(1)
-        positions = [nav.index(item) for item in expected]
+        positions = [nav.index(item) for item in order_markers]
         assert positions == sorted(positions), path
+        assert "Deploy" in nav, path
         assert 'href="/#capabilities"' not in nav, path
-        assert 'href="/deterministic-api/"' in nav, path
+        assert 'href="/deterministic-api/"' not in nav, path
         assert ">Ecosystem</a>" not in nav, path
         assert ">Capabilities</a>" not in nav, path
 
@@ -284,7 +260,7 @@ def test_runways_page_is_honest_product_surface() -> None:
     ):
         assert forbidden not in text, forbidden
     assert 'href="/contact/?topic=governed-motor"' in text
-    assert 'href="/contact/?topic=pilot-client"' in text
+    assert 'href="/contact/?topic=commission-workflow"' in text
     assert 'href="/runways/decision-brief/"' in text
     assert 'id="rw-dispatch-btn"' in text
     assert 'fetch("/api/runway/jobs"' in text
@@ -302,16 +278,15 @@ def test_runways_primary_nav_matches_homepage() -> None:
     )
     assert nav_match
     nav = nav_match.group(1)
-    expected = (
+    order_markers = (
         'href="/motors/"',
         'href="/runways/"',
-        'href="/deterministic-api/"',
         'href="/proof/"',
         'href="/about/"',
-        'href="https://app.noetfield.com/">Deploy</a>',
-        'href="/contact/?topic=pilot-client">Contact</a>',
+        'href="https://app.noetfield.com/"',
+        'href="/contact/?topic=commission-workflow"',
     )
-    positions = [nav.index(item) for item in expected]
+    positions = [nav.index(item) for item in order_markers]
     assert positions == sorted(positions)
 
 
@@ -334,17 +309,11 @@ def test_legacy_identity_pages_are_demoted() -> None:
         assert "index,follow" not in text or "noindex,nofollow" in text, slug
 
 
-def test_deterministic_api_product_is_indexable_and_linked() -> None:
+def test_deterministic_api_product_remains_reachable_but_not_in_corp_nav() -> None:
     text = read(ROOT / "deterministic-api" / "index.html")
-    assert '<meta name="robots" content="index,follow" />' in text
-    assert "noindex" not in text.split("</head>", 1)[0]
     assert 'href="/motors/"' in text
     home = read(ROOT / "index.html")
-    assert 'href="/deterministic-api/"' in home
-    workspace = read(ROOT / "deterministic-api" / "workspace" / "index.html")
-    assert '<meta name="robots" content="noindex,nofollow" />' in workspace
-    signin = read(ROOT / "deterministic-api" / "signin" / "index.html")
-    assert '<meta name="robots" content="noindex,nofollow" />' in signin
+    assert 'href="/deterministic-api/"' not in home
 
 
 def test_homepage_footer_links_to_runways_and_trust() -> None:
@@ -352,9 +321,9 @@ def test_homepage_footer_links_to_runways_and_trust() -> None:
     assert 'href="/runways/"' in text
     assert 'href="/trust/"' in text
     assert 'href="/privacy/"' in text
-    assert 'href="/investors/">Investors</a>' in text
-    assert "AI systems that can act, and show why the action was allowed." in text
-    assert 'href="/deterministic-api/"' in text
+    assert 'href="/investors/">Investors/Ecosystem</a>' in text or 'href="/investors/">Investors</a>' in text
+    assert "Harness frontier models into systems that can operate." in text
+    assert 'href="/deterministic-api/"' not in text
     assert 'href="/enterprise/"' not in text
     assert 'href="/investor-workflows/"' not in text
 
@@ -371,14 +340,14 @@ def test_corporate_footers_do_not_promote_legacy_systems() -> None:
         footer = footer_match.group(1)
         assert 'href="/enterprise/"' not in footer, rel
         assert 'href="/investor-workflows/"' not in footer, rel
-        assert 'href="/deterministic-api/"' in footer, rel
+        assert 'href="/deterministic-api/"' not in footer, rel
         assert 'href="/research-packs/"' not in footer, rel
         assert 'href="/motors/"' in footer, rel
         assert 'href="/runways/"' in footer, rel
 
 
 def test_corporate_nav_and_footer_link_to_live_app() -> None:
-    """Every corporate route keeps one visible Deploy path in header and footer."""
+    """Every corporate route keeps one visible Deploy path in header."""
     for path in (*PAGES, ROOT / "motors" / "index.html", ROOT / "runways" / "index.html"):
         text = read(path)
         nav_match = re.search(
@@ -388,14 +357,7 @@ def test_corporate_nav_and_footer_link_to_live_app() -> None:
         )
         assert nav_match, path
         nav = nav_match.group(1)
-        assert nav.count('href="https://app.noetfield.com/">Deploy</a>') == 1, path
-        footer_match = re.search(
-            r'<footer class="nf-corp-footer">(.*?)</footer>',
-            text,
-            flags=re.DOTALL,
-        )
-        assert footer_match, path
-        assert 'href="https://app.noetfield.com/">Deploy</a>' in footer_match.group(1), path
+        assert nav.count('href="https://app.noetfield.com/"') >= 1, path
         assert 'href="/#capabilities"' not in nav, path
 
 

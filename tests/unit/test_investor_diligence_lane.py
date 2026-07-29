@@ -27,11 +27,11 @@ def test_homepage_has_modern_shell_and_spine() -> None:
     text = HOME.read_text(encoding="utf-8")
     # NF-WEB-001 corporate entry — one company narrative (advisor P1).
     required = (
-        "<title>Noetfield Systems Inc. | AI Motors and Governed Execution</title>",
+        "<title>Noetfield Systems Inc. | Governed Agent Infrastructure</title>",
         '<link rel="canonical" href="https://www.noetfield.com/" />',
         'nf-corp',
         '<main id="main">',
-        "AI systems that can act, and show why the action was allowed.",
+        "Harness frontier models into systems that can operate.",
         'id="architecture"',
         'id="receipt"',
         'id="runways"',
@@ -41,7 +41,7 @@ def test_homepage_has_modern_shell_and_spine() -> None:
         'href="/about/"',
         'href="/proof/"',
         'href="/investors/"',
-        "/assets/noetfield-corporate-v1.css?v=2",
+        "/assets/noetfield-corporate-v1.css?v=3",
     )
     for contract in required:
         assert contract in text

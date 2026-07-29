@@ -100,18 +100,19 @@ def test_homepage_section_count_at_most_eleven() -> None:
 
 
 def test_homepage_corporate_structure_locked() -> None:
-    """The company entry retains the advisor one-narrative structure."""
+    """The company entry retains governed agent infrastructure structure."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "nf-corp" in text
     for label in (
-        "AI systems that can act, and show why the action was allowed.",
-        "AI capability is abundant. Governed execution is not.",
+        "Harness frontier models into systems that can operate.",
+        "A capable model is not an operating system.",
         "Governed Software Change",
         "Decision Brief",
         "Institutional Workflow Commissioning",
         "TrustField",
-        "A receipt is not certification.",
+        "Explore the architecture",
         "Inspect current proof",
+        "Receipts prove what the runtime observed and enforced within a stated scope.",
         "/assets/noetfield-home-v2.css",
     ):
         assert label in text

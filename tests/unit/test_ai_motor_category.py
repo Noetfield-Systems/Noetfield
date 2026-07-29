@@ -11,22 +11,20 @@ MOTORS = ROOT / "motors" / "index.html"
 CSS = ROOT / "assets" / "noetfield-corporate-v1.css"
 METADATA = ROOT / "data" / "noetfield-social-preview-v2.json"
 
-CANONICAL_DEFINITION = (
-    "An AI Motor is a governed execution runtime that turns authenticated events "
-    "and human intent into controlled outcomes verified against defined acceptance "
-    "criteria. It coordinates models, specialized engines, agents, tools, policies, "
-    "organizational knowledge, versioned runways, workflows, and human authority."
+MOTORS_DEFINITION = (
+    "A Noetfield Motor executes authorized Action Contracts inside a durable governed runtime. "
+    "The Brain and agent harness reason, assemble context, and propose work. The Kernel control plane "
+    "resolves policy, authority, budget, and state. Motor applies the permitted effect and records "
+    "evidence. A separate Verifier judges the result. Promotion authority remains outside Motor."
 )
-MEMORABLE_LINE = "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts."
-DISTINCTION_LINE = (
-    "Engines provide capability. Agents perform bounded work. Runways define how "
-    "results qualify. Motors govern execution."
+MOTORS_JSON_LD_SNIPPET = (
+    "A Noetfield Motor deterministically executes authorized Action Contracts inside a durable "
+    "governed runtime."
+)
+MOTORS_DISTINCTION_LINE = (
+    "Motor executes within a surrounding stack."
 )
 MOTORS_MEMORABLE_LINE = "Models generate. Agents participate. Motors operate."
-MOTORS_DISTINCTION_LINE = (
-    "Engines provide capability. Agents perform bounded tasks. Runways qualify "
-    "outcomes. Motors operate."
-)
 
 
 def read(path: Path) -> str:
@@ -48,15 +46,13 @@ def json_ld(path: Path) -> list[dict[str, object]]:
 
 def test_homepage_introduces_the_category_before_other_sections() -> None:
     text = visible_text(HOME)
-    # v2 order: architecture → evidence(receipt) → runways
     arch = text.index('id="architecture"')
     receipt = text.index('id="receipt"')
     runways = text.index('id="runways"')
     assert arch < receipt < runways
-    assert "AI Motors" in text
-    assert "governed execution runtimes that coordinate" in text
-    assert DISTINCTION_LINE in text
-    assert MEMORABLE_LINE in text
+    assert "deterministic Motor" in text
+    assert "agent harness" in text
+    assert "control plane" in text
     assert '<a href="/motors/">AI Motors</a>' in text
     assert '<a href="/runways/">Runways</a>' in text
     assert "/assets/noetfield-home-v2.css" in text
@@ -66,27 +62,24 @@ def test_homepage_mental_model_does_not_put_ai_before_the_motor() -> None:
     text = visible_text(HOME)
     assert "Authorized event" in text
     assert "Accepted outcome + receipt" in text
-    assert "Motors govern execution" in text
+    assert "does not reason or verify" in text
     for forbidden in (
         "AI decides",
-        "Motor executes",
+        "Motor verifies its own",
         'AI capability</span><i aria-hidden="true">→</i><strong>Governed execution',
         "Verified operational outcome",
+        "Motors govern execution",
     ):
         assert forbidden not in text
 
 
 def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
     text = visible_text(MOTORS)
-    assert CANONICAL_DEFINITION in text
-    assert text.count(CANONICAL_DEFINITION) >= 2  # visible definition and JSON-LD
+    assert MOTORS_DEFINITION in text
     assert MOTORS_DISTINCTION_LINE in text
     assert MOTORS_MEMORABLE_LINE in text
     assert text.count(MOTORS_MEMORABLE_LINE) == 1
-    assert (
-        "A Motor may coordinate models, engines, agents, runways and workflows "
-        "under one execution contract."
-    ) in text
+    assert "independent verifier judges the result" in text
     assert (
         "Provides a specialized intelligence or decision capability—such as "
         "inference, retrieval, rules, scoring, planning, classification, or generation."
@@ -102,11 +95,8 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
         "Tesla",
         "Tesla-class",
         "governs and executes the whole system",
-        "governs the environment",
-        "whole operational system",
-        "many models, engines, agents, runways and workflows inside one Motor",
-        "many engines inside",
-        "like a Tesla",
+        "Motor verifies, escalates",
+        "decides what can continue",
     ):
         assert forbidden not in text
     assert text.count("<h1") == 1
@@ -124,24 +114,22 @@ def test_motors_architecture_preserves_governance_around_execution() -> None:
     required_in_order = (
         "Events and human intent",
         "Gateway",
-        "Policy",
-        "Knowledge",
+        "Kernel · Policy",
         "Authority",
         "Budget",
         "Execution orchestration",
         "Models · Agents · Tools · Workflows",
         "Bounded execution environment",
-        "Build · Act",
-        "Verify · Repair",
-        "Approve · Escalate",
+        "Motor · Execute",
+        "Verifier · Judge",
         "Recover · Safe stop",
-        "Promote and record evidence",
-        "Controlled outcome verified against acceptance criteria",
+        "Verifier judgment and evidence record",
+        "Recorded effect with stated evidence boundary",
     )
     positions = [text.index(item) for item in required_in_order]
     assert positions == sorted(positions)
     assert 'id="architecture-description"' in text
-    assert "Text equivalent:" in text
+    assert "Promotion authority remains outside Motor" in text
 
 
 def test_motors_components_cover_control_execution_and_recovery() -> None:
@@ -149,16 +137,16 @@ def test_motors_components_cover_control_execution_and_recovery() -> None:
     for heading in (
         "Event intake",
         "Normalization & deduplication",
-        "Policy & authority",
+        "Kernel · policy & authority",
         "Knowledge & context",
-        "Model & agent orchestration",
+        "Harness · model & agent routing",
         "Tool execution",
         "Cost & execution controls",
         "Bounded sandbox",
-        "Verification & repair",
+        "Verifier · judgment",
         "Escalation & human authority",
         "Recovery",
-        "Promotion & evidence",
+        "Evidence record",
     ):
         assert f"<h3>{heading}</h3>" in text
 
@@ -169,13 +157,13 @@ def test_reference_lifecycle_and_failure_responses_are_complete() -> None:
         "Event",
         "Authenticate",
         "Normalize",
-        "Resolve policy & authority",
+        "Kernel resolves policy & authority",
         "Assemble knowledge & context",
         "Plan bounded execution",
         "Execute",
-        "Verify",
+        "Verifier judges",
         "Repair or escalate",
-        "Approve & promote",
+        "Authority promotes",
         "Produce evidence receipt",
     )
     positions = [text.index(f"<strong>{step}</strong>") for step in lifecycle]
@@ -201,7 +189,7 @@ def test_evidence_and_client_zero_copy_preserve_claim_boundaries() -> None:
         "Policy",
         "Workers",
         "Authority",
-        "Verification",
+        "Verifier",
         "Outcome",
         "Evidence boundary",
     ):
@@ -226,16 +214,9 @@ def test_evidence_and_client_zero_copy_preserve_claim_boundaries() -> None:
 def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
     home = read(HOME)
     motors = read(MOTORS)
-    metadata = json.loads(read(METADATA))
     assert '<a href="/motors/">AI Motors</a>' in home
     assert '<a href="/motors/" aria-current="page">AI Motors</a>' in motors
     assert "Motor &amp; Custom Workflow" not in motors
-    assert metadata["metadata_overrides"]["/"]["title"] == (
-        "Noetfield Systems Inc. | AI Motors and Governed Execution"
-    )
-    assert metadata["metadata_overrides"]["/motors/"]["title"] == (
-        "AI Motors for Governed Execution — Noetfield Systems"
-    )
     assert (
         'property="og:image" content="https://www.noetfield.com/assets/social/noetfield-motors-v2.png"'
         in motors
@@ -244,7 +225,7 @@ def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
         block["about"] for block in json_ld(MOTORS) if isinstance(block.get("about"), dict)
     ]
     assert any(term.get("name") == "AI Motor" for term in defined_terms)
-    assert any(term.get("description") == CANONICAL_DEFINITION for term in defined_terms)
+    assert any(MOTORS_JSON_LD_SNIPPET in str(term.get("description", "")) for term in defined_terms)
 
 
 def test_motor_layout_has_narrow_width_and_reduced_motion_contracts() -> None:

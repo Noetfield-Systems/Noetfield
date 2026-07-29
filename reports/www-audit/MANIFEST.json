@@ -2,6 +2,39 @@
   "schema": "nf-www-audit-manifest-v1",
   "receipts": [
     {
+      "path": "reports/www-audit/receipts/audit_20260729T084955Z.json",
+      "run_at": "2026-07-29T08:49:55Z",
+      "mode": "disk",
+      "findings_total": 30,
+      "by_severity": {
+        "P1": 28,
+        "P2": 2
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260729T084858Z.json",
+      "run_at": "2026-07-29T08:48:58Z",
+      "mode": "disk",
+      "findings_total": 30,
+      "by_severity": {
+        "P1": 28,
+        "P2": 2
+      },
+      "state": "COMPLETE"
+    },
+    {
+      "path": "reports/www-audit/receipts/audit_20260729T075037Z.json",
+      "run_at": "2026-07-29T07:50:37Z",
+      "mode": "disk",
+      "findings_total": 32,
+      "by_severity": {
+        "P2": 3,
+        "P1": 29
+      },
+      "state": "COMPLETE"
+    },
+    {
       "path": "reports/www-audit/receipts/audit_20260706T132545Z.json",
       "run_at": "2026-07-06T13:25:45Z",
       "mode": "disk",
