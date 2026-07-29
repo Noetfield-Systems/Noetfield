@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import subprocess
+from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 from urllib.parse import urlsplit
 
@@ -118,6 +119,52 @@ def source_git_sha() -> str:
     return candidate
 
 
+def build_generated_static_files(data: dict[str, object]) -> list[str]:
+    raw = data.get("build_generated_static_files", [])
+    if raw is None:
+        return []
+    if not isinstance(raw, list) or not all(isinstance(item, str) for item in raw):
+        raise ValueError("build_generated_static_files must be a list of paths")
+    if raw != sorted(set(raw)):
+        raise ValueError("build_generated_static_files must be unique and byte-sorted")
+    return raw
+
+
+def write_version_json() -> None:
+    payload = {
+        "source_sha": source_git_sha(),
+        "deployed_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace(
+            "+00:00", "Z"
+        ),
+        "surface": "www.noetfield.com",
+    }
+    (DIST / "version.json").write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
+
+def verify_version_json() -> list[str]:
+    path = DIST / "version.json"
+    if not path.is_file():
+        return ["missing generated version.json"]
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return ["version.json is not valid JSON"]
+    errors: list[str] = []
+    for key in ("source_sha", "deployed_at", "surface"):
+        if key not in payload:
+            errors.append(f"version.json missing required field: {key}")
+    if payload.get("source_sha") != source_git_sha():
+        errors.append("version.json source_sha does not match build SHA")
+    if payload.get("surface") != "www.noetfield.com":
+        errors.append("version.json surface must be www.noetfield.com")
+    deployed_at = payload.get("deployed_at")
+    if not isinstance(deployed_at, str) or not deployed_at.endswith("Z"):
+        errors.append("version.json deployed_at must be an ISO-8601 UTC timestamp")
+    return errors
+
+
 def load_allowlist() -> dict[str, object]:
     data = json.loads(ALLOWLIST_PATH.read_text(encoding="utf-8"))
     if data.get("schema") != "noetfield-www-public-artifact-allowlist-v1":
@@ -161,15 +208,20 @@ def validate_relative_path(rel: str, *, function: bool = False) -> None:
 def validate_source_files(data: dict[str, object]) -> tuple[list[str], list[str]]:
     static_files = exact_list(data, "static_files")
     function_files = exact_list(data, "pages_function_files")
+    generated_files = build_generated_static_files(data)
     public_json = exact_list(data, "public_json_files")
     json_in_static = sorted(rel for rel in static_files if rel.endswith(".json"))
     if json_in_static != public_json:
         raise ValueError(
             "every deployed JSON file must be explicitly named in public_json_files"
         )
+    if generated_files != sorted(rel for rel in generated_files if rel in static_files):
+        raise ValueError("build_generated_static_files must be a subset of static_files")
 
     for rel in static_files:
         validate_relative_path(rel)
+        if rel in generated_files:
+            continue
         source = ROOT / rel
         if not source.is_file() or source.is_symlink():
             raise ValueError(f"missing or non-regular public source: {rel}")
@@ -373,6 +425,7 @@ def verify_exact(
     if errors:
         return {}, errors
 
+    errors.extend(verify_version_json())
     errors.extend(verify_versioned_asset_references(static_files))
     if errors:
         return {}, errors
@@ -405,7 +458,10 @@ def main() -> int:
         if actual_files(DIST):
             print("FAIL public artifact build: www-pages-dist must start empty")
             return 1
+        generated_files = build_generated_static_files(data)
         for rel in static_files:
+            if rel in generated_files:
+                continue
             destination = DIST / rel
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / rel, destination)
@@ -415,6 +471,8 @@ def main() -> int:
             ])
             rewrite_css_imports(static_files)
             rewrite_html_asset_references(static_files)
+            if "version.json" in generated_files:
+                write_version_json()
         except (OSError, UnicodeError, ValueError) as exc:
             print(f"FAIL public artifact asset versioning: {exc}")
             return 1

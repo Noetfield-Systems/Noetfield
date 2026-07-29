@@ -441,13 +441,20 @@ check_file "legal pages terms" terms/index.html \
   'No custody or payment execution' 'operations@noetfield.com'
 
 # Pilot-first on tier hubs — no Trust Brief as sole primary without pilot
-for f in faq/index.html contact/index.html enterprise/index.html pricing/index.html; do
+for f in faq/index.html enterprise/index.html pricing/index.html; do
   if [[ -f "$f" ]] && grep -qF 'Apply for pilot' "$f"; then
     ok "pilot CTA on $f"
   else
     bad "pilot CTA on $f"
   fi
 done
+
+check_file "contact hero intake CTAs" contact/index.html \
+  'Start workflow intake' '#contact-form' 'Review public proof' '/proof/'
+
+if [[ -f version.json ]]; then
+  bad "version.json must be build-generated only (not committed at repo root)"
+fi
 
 [[ -f governance/www-pages-routes.json ]] && grep -qF 'docs/ops' governance/www-pages-routes.json && ok "www-pages-routes blocks docs/ops" || bad "www-pages-routes missing docs/ops block"
 [[ -f governance/www-pages-routes.json ]] && grep -qF 'docs/platform' governance/www-pages-routes.json && ok "www-pages-routes blocks docs/platform" || bad "www-pages-routes missing docs/platform block"

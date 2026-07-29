@@ -53,9 +53,8 @@ def contact_page() -> str:
     <div>
      <p class="nf-corp-lead">Describe the event, current system, decision boundary, consequence of failure, and outcome that must be proven. Noetfield will determine whether it fits a Motor, a Runway or a bounded commissioning path.</p>
      <div class="nf-corp-actions">
-      <a class="nf-button nf-button--primary" href="/trust-brief/intake/?interest=pilot&amp;vector=copilot-governance">Apply for pilot</a>
-      <a class="nf-button nf-button--secondary" href="/start/">Start sandbox</a>
-      <a class="nf-button nf-button--ghost" href="/trust-brief/intake/">Request Trust Brief</a>
+      <a class="nf-button nf-button--primary" href="#contact-form">Start workflow intake</a>
+      <a class="nf-button nf-button--secondary" href="/proof/">Review public proof</a>
      </div>
     </div>
    </div>
