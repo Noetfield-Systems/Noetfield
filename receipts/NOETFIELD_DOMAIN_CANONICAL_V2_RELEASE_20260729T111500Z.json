@@ -1,0 +1,53 @@
+{
+  "schema": "noetfield-domain-canonical-v2-release-receipt-v1",
+  "release": "NOETFIELD_DOMAIN_CANONICAL_V2",
+  "generated_at": "2026-07-29T11:15:00Z",
+  "branch": "www/domain-canonical-v2",
+  "canonical_host": "https://www.noetfield.com",
+  "canonical_routes": [
+    "/",
+    "/system/",
+    "/applications/",
+    "/applications/trustfield/",
+    "/public-interest/",
+    "/proof/",
+    "/about/",
+    "/investors/",
+    "/contact/",
+    "/trust/",
+    "/privacy/",
+    "/motors/",
+    "/runways/"
+  ],
+  "redirect_manifest": [
+    { "from": "/enterprise/*", "to": "/system/", "status": 301 },
+    { "from": "/investor-workflows/*", "to": "/investors/", "status": 301 },
+    { "from": "/pricing/*", "to": "/contact/", "status": 301 }
+  ],
+  "legacy_noindex": [
+    "/deterministic-api/",
+    "/faq/",
+    "/enterprise/",
+    "/pricing/",
+    "/investor-workflows/",
+    "/intelligence/",
+    "/research-packs/",
+    "/gel/",
+    "/next/"
+  ],
+  "claim_audit": {
+    "script": "scripts/verify_canonical_claim_audit_v1.py",
+    "status": "PASS",
+    "canonical_pages": 13
+  },
+  "verification": {
+    "verify_static_www": "PASS",
+    "verify_ui_build_checklist": "PASS",
+    "verify_www_ui_grade": "PASS",
+    "verify_canonical_www_audit": "PASS"
+  },
+  "rollback_reference": {
+    "prior_production_sha": "53328256184f136a0fccde7312220e581bf059c2",
+    "note": "Redeploy prior main SHA via deploy-www-cloudflare.sh if rollback required"
+  }
+}

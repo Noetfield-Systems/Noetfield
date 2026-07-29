@@ -30,20 +30,24 @@ LEGACY_PREFIXES = (
     "investor-workflows/",
     "ai-factories/",
     "console/",
+    "deterministic-api/",
+    "faq/",
 )
 
 CANONICAL_SITEMAP = {
     "https://www.noetfield.com/",
     "https://www.noetfield.com/about/",
+    "https://www.noetfield.com/applications/",
+    "https://www.noetfield.com/applications/trustfield/",
     "https://www.noetfield.com/contact/",
     "https://www.noetfield.com/motors/",
-    "https://www.noetfield.com/runways/",
+    "https://www.noetfield.com/public-interest/",
     "https://www.noetfield.com/proof/",
-    "https://www.noetfield.com/trust/",
     "https://www.noetfield.com/privacy/",
+    "https://www.noetfield.com/runways/",
+    "https://www.noetfield.com/system/",
+    "https://www.noetfield.com/trust/",
     "https://www.noetfield.com/investors/",
-    "https://www.noetfield.com/faq/",
-    "https://www.noetfield.com/deterministic-api/",
 }
 
 ROBOTS_NOINDEX = '<meta name="robots" content="noindex,nofollow" />'

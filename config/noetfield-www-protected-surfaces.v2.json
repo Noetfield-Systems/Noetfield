@@ -13,44 +13,50 @@
       "dist_path": "index.html",
       "route": "/",
       "required_text": [
-        "Harness frontier models into systems that can operate.",
-        "deterministic Motor",
+        "AI systems should not decide when their own work is safe to ship.",
+        "client-zero commissioning",
         "Evidence before claims."
       ],
       "required_links": [
-        "/motors/",
-        "/runways/",
+        "/system/",
+        "/applications/",
         "/proof/",
+        "/public-interest/",
         "/about/",
-        "/investors/",
         "/trust/",
         "/privacy/"
       ],
       "forbidden_text": [
         "Invest in Noetfield",
-        "Private Investor Materials"
+        "Private Investor Materials",
+        "SourceB"
       ],
       "forbidden_link_prefixes": [
         "/invest/",
         "/workspace/"
       ]
     },
-    "enterprise": {
-      "dist_path": "enterprise/index.html",
-      "route": "/enterprise/",
+    "system": {
+      "dist_path": "system/index.html",
+      "route": "/system/",
       "required_text": [
-        "Governed AI operations—from sandbox receipt to board-ready proof."
+        "Governed AI execution infrastructure"
+      ],
+      "required_links": [
+        "/motors/",
+        "/runways/"
       ],
       "forbidden_link_prefixes": [
         "/invest/",
-        "/workspace/"
+        "/workspace/",
+        "/enterprise/"
       ]
     },
     "motors": {
       "dist_path": "motors/index.html",
       "route": "/motors/",
       "required_text": [
-        "AI Motors for governed execution"
+        "Promotion authority remains outside Motor"
       ],
       "required_links": [
         "/proof/"
@@ -64,11 +70,12 @@
       "dist_path": "proof/index.html",
       "route": "/proof/",
       "required_text": [
-        "Public evidence and explicit boundaries."
+        "Evidence register",
+        "Claims-boundary correction"
       ],
       "required_links": [
-        "/proof/noetfield/",
-        "/proof/noetfield.json"
+        "/proof/governed-replacement/",
+        "/proof/governed-replacement.json"
       ],
       "forbidden_link_prefixes": [
         "/invest/",
@@ -79,10 +86,14 @@
       "dist_path": "about/index.html",
       "route": "/about/",
       "required_text": [
-        "An AI-native operating company building governed agent infrastructure."
+        "separate venture",
+        "not a Noetfield Systems Inc. product"
       ],
       "required_links": [
         "/proof/"
+      ],
+      "forbidden_text": [
+        "SourceB"
       ],
       "forbidden_link_prefixes": [
         "/invest/",

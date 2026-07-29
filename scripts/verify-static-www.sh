@@ -36,67 +36,50 @@ check_absent() {
   [[ "$present" -eq 0 ]] && ok "$label" || bad "$label"
 }
 
-# NF-WEB-001 protected corporate surfaces. The NF-REL-002 recovery gate and
-# superseded v42 marketing expectations remain history, not the active contract.
-# Re-pointed at the v2 homepage. Every claim protection below is kept: the
-# same positioning, the same architecture sentence, the same commissioning
-# posture, the same "nothing is claimed beyond what is live" boundary, the
-# same TrustField attribution. What changed is literal wording, because the
-# page was rebuilt and because three of the old pinned strings carried an em
-# dash, which is now banned in Noetfield copy.
+# NOETFIELD_DOMAIN_CANONICAL_V2 protected corporate surfaces.
 check_file "protected corporate homepage" index.html \
-  '<title>Noetfield Systems Inc. | Governed Agent Infrastructure</title>' \
+  '<title>Noetfield Systems | Governed AI Execution</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp nf-home">' '<main id="main">' \
-  '/assets/noetfield-corporate-v1.css?v=3' \
+  '/assets/noetfield-corporate-v1.css?v=4' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
-  'Harness frontier models into systems that can operate.' \
-  'agent harness for grounded reasoning' 'deterministic Motor executes permitted contracts' \
-  'Replaceable models' 'Durable agent state' 'Policy-gated execution' 'Replayable evidence' \
-  'Models reason. Harnesses orchestrate.' 'Motor executes. Verifiers judge.' \
-  'A capable model is not an operating system.' \
-  'Agent demos, or governed production systems.' \
-  'UNCONTROLLED AGENT STACK' 'NOETFIELD OPERATING STACK' \
-  'SAMPLE ARTIFACT · SHAPE ONLY' 'NO INVENTED SHAS OR PASS CLAIMS' \
-  'Governed Software Change' 'Decision Brief' 'Institutional Workflow Commissioning' \
-  'TrustField' 'href="https://trustfield.ca/"' \
-  'Receipts prove what the runtime observed and enforced within a stated scope.' \
-  'Explore the architecture' 'Inspect current proof' \
+  'GOVERNED AI EXECUTION · CLIENT-ZERO' \
+  'AI systems should not decide when their own work is safe to ship.' \
+  'client-zero commissioning' \
+  'nf-status-rail' 'NOT YET ESTABLISHED' \
+  'Capable AI is not the same as accountable execution.' \
+  'Governed replacement' 'Claims-boundary correction' \
+  'TrustField' 'href="https://trustfield.ca/"' 'separate venture' \
+  'See what is live' 'Inspect the evidence' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
-  'nf-corp-section' 'nf-corp-hero' 'nf-system-card' \
+  'nf-corp-section' 'nf-corp-hero' \
   'family=Newsreader' 'family=DM+Mono' \
-  'INCUBATOR / ECOSYSTEM' 'OPERATING PARTNER' 'PILOT / CLIENT' \
-  'href="/motors/"' 'href="/runways/"' 'href="/about/"' 'href="/proof/"' \
-  'href="/investors/"' 'href="/trust/"' 'href="/privacy/"' \
+  'href="/system/"' 'href="/applications/"' 'href="/about/"' 'href="/proof/"' \
+  'href="/public-interest/"' \
   '/assets/noetfield-home-v2.css'
 check_absent "protected homepage has no private or unsupported conversion" index.html \
   'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield' \
-  'CLIENT-ZERO · P05' 'Discuss one workflow'
+  'SourceB' 'Trust Brief' 'Copilot Governance Pack'
 
 check_file "protected ecosystem and investor surface" investors/index.html \
-  '<title>Ecosystem &amp; Investors — Noetfield Systems</title>' \
+  '<title>Investors / Ecosystem — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
-  'The operating layer around increasingly capable models.' \
-  'not a public securities offering or solicitation' \
-  'What exists—and what does not yet.' 'These labels describe evidence state, not commercial traction.' \
-  'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
-  'SourceB' 'Live commercial service · case study planned' 'SourceB.ca is a live multilingual service with an operating lead path' \
-  'TrustField' 'Live product surface · case study planned' \
-  'No customers, revenue, installations or external traction are claimed' \
-  'href="/proof/noetfield/"' 'href="/roadmap/"' 'href="/invest/"' \
-  'Private materials remain access-controlled.' 'Verified parties only · sign-in required'
+  'Company thesis and current state' \
+  'external customers and revenue are not established' \
+  'TrustField' 'separate venture' 'not a Noetfield Systems Inc. product' \
+  'href="/contact/?topic=program-funding"' 'href="/proof/"'
 check_absent "protected investors hub has no embedded intake" investors/index.html \
-  'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'href="/workspace/'
+  'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'href="/workspace/' \
+  'SourceB'
 
 check_file "protected proof truth boundaries" proof/index.html \
-  '<title>Proof &amp; Public Evidence — Noetfield Systems</title>' \
+  '<title>Evidence register — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/proof/" />' \
-  '<h1 id="proof-title">Public evidence and explicit boundaries.</h1>' \
-  'Parent-company self-audit' 'CLIENT-ZERO / INTERNAL' \
+  '<h1 id="proof-title">Evidence register</h1>' \
   'Governed replacement demonstration' \
-  'Does not prove' 'Fortune-500 production deployment' \
-  'nf-corp-header' 'nf-corp-footer' \
-  'Sensed state → Brain proposal → authority/permit → Motor effect'
+  'Claims-boundary correction' \
+  'Does not prove' 'Parent-company self-audit' \
+  'nf-corp-header' 'nf-corp-footer' 'nf-evidence-register'
 
 check_file "protected enterprise commercial surface" enterprise/index.html \
   '<title>Legacy commercial lane — Enterprise — Noetfield</title>' \
@@ -122,7 +105,7 @@ check_file "AI Motor category definition and engagement stay public" motors/inde
   'Motor does not reason, create goals, or grant itself authority' \
   'A Motor is defined by what it does when execution should not continue.' \
   'Harness · model &amp; agent routing' 'Verifier · judgment' 'Recovery' 'Evidence record' \
-  'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=2'
+  'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=4'
 check_absent "public Motor page has no private workspace or obsolete category framing" motors/index.html \
   'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
   'href="/workspace/workspace"' 'Motor &amp; Custom Workflow' 'Custom GPT motor setup' \
@@ -171,18 +154,17 @@ check_absent "recovered frontier page has no workspace conversion" frontier-syst
   'href="/workspace/'
 
 check_file "about corporate positioning and TrustField product boundary" about/index.html \
-  'An AI-native operating company building governed agent infrastructure.' 'Founder &amp; company' \
-  'SourceA — Live product surface · case study planned.' 'No external-client proof is claimed yet' \
-  'SourceB — Live commercial service · case study planned.' 'SourceB.ca is a live multilingual service with an operating lead path' \
-  'No customers, revenue, installations or external traction are claimed' \
-  'TrustField' 'separate regulated venture' 'href="https://trustfield.ca/"' \
-  'Not a Noetfield Systems Inc. product'
+  'Noetfield Systems Inc.' 'Founder' 'Corporate boundaries' \
+  'SourceA' 'professional/internal execution surface' \
+  'TrustField' 'separate venture' 'href="https://trustfield.ca/"' \
+  'not a Noetfield Systems Inc. product or subsidiary'
+check_absent "about has no SourceB catalogue" about/index.html 'SourceB'
 
 # TrustField is a separate venture — named on homepage ecosystem, not as NSI product.
 check_file "homepage TrustField vertical" index.html \
   'TrustField' 'href="https://trustfield.ca/"' \
-  'separate regulated venture' \
-  'Compliance workflow setup and operations'
+  'separate venture' \
+  'not a Noetfield Systems Inc. product'
 
 # Homepage IA compression. The v2 homepage carries 11 top-level sections by
 # design: hero, problem, comparison, architecture, evidence, runways,
@@ -451,6 +433,8 @@ done
 
 check_file "contact hero intake CTAs" contact/index.html \
   'Start workflow intake' '#contact-form' 'Review public proof' '/proof/'
+
+python3 scripts/verify_canonical_claim_audit_v1.py || fail=1
 
 if [[ -f version.json ]]; then
   bad "version.json must be build-generated only (not committed at repo root)"

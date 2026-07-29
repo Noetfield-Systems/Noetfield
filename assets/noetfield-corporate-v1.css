@@ -694,6 +694,19 @@ body.nf-corp {
 .nf-pilot-apply-form input, .nf-pilot-apply-form select, .nf-pilot-apply-form textarea { width: 100%; margin-top: 0.35rem; padding: 0.55rem 0.65rem; border: 1px solid rgba(9,20,33,0.15); border-radius: 4px; font: inherit; }
 .nf-pilot-apply-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 
+/* Canonical domain v2 */
+.nf-status--commissioning { background: rgba(180,120,20,0.12); color: #8a5a10; }
+.nf-status--blocked { background: rgba(160,40,40,0.12); color: #8a2020; }
+.nf-status-rail { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+.nf-loop-chain { display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; list-style: none; padding: 0; font-family: "DM Mono", monospace; font-size: 0.72rem; color: #3d4a5c; }
+.nf-loop-chain li:not(:last-child)::after { content: "→"; margin-left: 0.5rem; color: #9aa5b5; }
+.nf-evidence-register { border: 1px solid rgba(9,20,33,0.1); border-radius: 6px; padding: 1.25rem; margin-bottom: 1.25rem; background: #fff; }
+.nf-evidence-dl { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: 0.35rem 1rem; font-size: 0.85rem; }
+.nf-evidence-dl dt { font-weight: 600; color: #2a3544; }
+.nf-evidence-dl dd { margin: 0; color: #3d4a5c; }
+.nf-corp-nav__alpha { text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.68rem; }
+.nf-section-head--full { grid-column: 1 / -1; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
