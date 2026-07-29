@@ -16,7 +16,7 @@ def test_golden_baseline_json_valid() -> None:
     assert "Inter" in data["required_font_families"]
     assert "Newsreader" in data["required_font_families"]
     assert "IBM+Plex" in data["forbidden_font_families"]
-    assert data["min_nf_corp_section"] >= 8
+    assert data["min_nf_corp_section"] >= 6
 
 
 def test_verify_www_ui_grade_script_pass() -> None:

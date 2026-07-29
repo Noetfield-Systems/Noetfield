@@ -25,23 +25,21 @@ def test_homepage_has_no_gcip_bleed() -> None:
 
 def test_homepage_has_modern_shell_and_spine() -> None:
     text = HOME.read_text(encoding="utf-8")
-    # NF-WEB-001 corporate entry — one company narrative (advisor P1).
     required = (
-        "<title>Noetfield Systems Inc. | Governed Agent Infrastructure</title>",
+        "Noetfield Systems Inc.",
         '<link rel="canonical" href="https://www.noetfield.com/" />',
         'nf-corp',
         '<main id="main">',
-        "Harness frontier models into systems that can operate.",
-        'id="architecture"',
-        'id="receipt"',
-        'id="runways"',
+        "AI systems should not decide when their own work is safe to ship.",
+        'id="what-exists"',
+        'id="hero-title"',
         "/assets/noetfield-home-v2.css",
         "TrustField",
-        'href="/motors/"',
+        'href="/system/"',
+        'href="/applications/"',
         'href="/about/"',
         'href="/proof/"',
-        'href="/investors/"',
-        "/assets/noetfield-corporate-v1.css?v=3",
+        "/assets/noetfield-corporate-v1.css?v=4",
     )
     for contract in required:
         assert contract in text
@@ -51,7 +49,6 @@ def test_homepage_has_modern_shell_and_spine() -> None:
         "nf26-hero",
         "nfInvestorForm",
         'id="capabilities"',
-        "SourceA",
         "SourceB",
         "Investor Workflows",
     ):

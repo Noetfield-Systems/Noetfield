@@ -4,3 +4,12 @@
 # Governance workspace proxy: functions/_middleware.js (nf-www-gov-proxy-v1 enabled)
 /health /api/health 200
 /evaluate /api/demo/evaluate 200
+/enterprise /system/ 301
+/enterprise/ /system/ 301
+/enterprise/:path* /system/ 301
+/investor-workflows /investors/ 301
+/investor-workflows/ /investors/ 301
+/investor-workflows/:path* /investors/ 301
+/pricing /contact/ 301
+/pricing/ /contact/ 301
+/pricing/:path* /contact/ 301

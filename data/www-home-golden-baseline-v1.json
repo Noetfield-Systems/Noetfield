@@ -12,7 +12,7 @@
   "files": {
     "index.html": {
       "path": "index.html",
-      "min_bytes": 40000,
+      "min_bytes": 10000,
       "sha256_pin": null,
       "sha256_pin_mode": "optional_soft",
       "note": "Hard pin optional — markers + fonts are authoritative while nav links may grow."
@@ -25,7 +25,7 @@
     "corporate_css": {
       "path": "assets/noetfield-corporate-v1.css",
       "min_bytes": 30000,
-      "sha256": "b174be1b749566ae62b8ca4f0aaa6f872b9b4977bb9af25a15643e82c56338ee",
+      "sha256": "37b26e61868aefe4c433dcb5710ea479b8eb960924c39804913739968afcd09f",
       "sha256_pin_mode": "founder_visual_acceptance_2026-07-29"
     }
   },
@@ -42,21 +42,19 @@
     "nf-corp-hero",
     "nf-corp-section",
     "nf-corp-footer",
-    "id=\"architecture\"",
-    "id=\"receipt\"",
-    "id=\"runways\"",
-    "id=\"commission\"",
-    "id=\"readiness\"",
-    "/motors/",
-    "/runways/",
+    "id=\"what-exists\"",
+    "id=\"hero-title\"",
+    "/system/",
+    "/applications/",
     "/proof/",
+    "/public-interest/",
     "--nf-gold",
     "--nf-navy",
     "font-family: \"Inter\"",
     "font-family: \"Newsreader\""
   ],
-  "min_nf_corp_section": 8,
-  "min_main_sections": 9,
+  "min_nf_corp_section": 6,
+  "min_main_sections": 7,
   "copy_grade": {
     "h1_id": "hero-title",
     "h1_min_chars": 40,

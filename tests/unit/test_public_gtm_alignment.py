@@ -39,18 +39,14 @@ def test_homepage_is_corporate_entry_surface() -> None:
     lower = text.lower()
     assert "nf-corp" in text
     assert "noetfield-corporate-v1.css" in text
-    assert "/motors/" in text
+    assert "/system/" in text
+    assert "/applications/" in text
     assert "/about/" in text
     assert "/proof/" in text
-    assert "/investors/" in text
-    assert "/runways/" in text
+    assert "/public-interest/" in text
     assert "/invest/" not in text
     assert "trustfield" in lower
     assert "invest in noetfield" not in lower
-    assert "pilot / client" in lower
-    assert "incubator / ecosystem" in lower
-    assert "operating partner" in lower
-    assert "sourcea" not in lower
     assert "sourceb" not in lower
 
 
@@ -100,26 +96,25 @@ def test_homepage_section_count_at_most_eleven() -> None:
 
 
 def test_homepage_corporate_structure_locked() -> None:
-    """The company entry retains governed agent infrastructure structure."""
+    """Canonical v2 company entry — governed execution + client-zero commissioning."""
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "nf-corp" in text
     for label in (
-        "Harness frontier models into systems that can operate.",
-        "A capable model is not an operating system.",
-        "Governed Software Change",
-        "Decision Brief",
-        "Institutional Workflow Commissioning",
+        "GOVERNED AI EXECUTION",
+        "AI systems should not decide when their own work is safe to ship.",
+        "client-zero commissioning",
+        "Governed replacement",
+        "Claims-boundary correction",
         "TrustField",
-        "Explore the architecture",
-        "Inspect current proof",
-        "Receipts prove what the runtime observed and enforced within a stated scope.",
+        "See what is live",
+        "Inspect the evidence",
         "/assets/noetfield-home-v2.css",
+        "/system/",
+        "/applications/",
     ):
         assert label in text
-    assert "SourceA" not in text
     assert "SourceB" not in text
     assert "Investor Workflows" not in text
-    assert "/investors/" in text
     assert "/invest/" not in text
     assert "nfLiveProofHero" not in text
     assert "nfScenarioDeck" not in text
@@ -354,8 +349,8 @@ def test_tier_pages_have_shell_and_cta() -> None:
         assert 'name="viewport"' in text, rel
         if rel == "index.html":
             assert "nf-corp" in text, rel
-            assert "/motors/" in text, rel
-            assert "/investors/" in text, rel
+            assert "/system/" in text, rel
+            assert "/applications/" in text, rel
             assert "/proof/" in text, rel
             continue
         # Institutional pages: shell OR nf-gate migration.

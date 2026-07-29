@@ -39,6 +39,7 @@ LEGACY_TOPIC_OPTIONS = """
  <option value="pilot-client" hidden>Pilot or client workflow</option>
  <option value="governed-motor" hidden>Custom AI Motor or Runway</option>
  <option value="operating-partner" hidden>Operating partner</option>
+ <option value="other" hidden>Other / legacy routing</option>
 """
 
 
@@ -326,10 +327,8 @@ def proof_page() -> str:
 
 def main() -> None:
     pages = {
-        "contact/index.html": contact_page(),
         "trust/index.html": trust_page(),
         "privacy/index.html": privacy_page(),
-        "proof/index.html": proof_page(),
     }
     for rel, html in pages.items():
         path = ROOT / rel

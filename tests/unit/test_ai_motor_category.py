@@ -46,29 +46,28 @@ def json_ld(path: Path) -> list[dict[str, object]]:
 
 def test_homepage_introduces_the_category_before_other_sections() -> None:
     text = visible_text(HOME)
-    arch = text.index('id="architecture"')
-    receipt = text.index('id="receipt"')
-    runways = text.index('id="runways"')
-    assert arch < receipt < runways
-    assert "deterministic Motor" in text
-    assert "agent harness" in text
-    assert "control plane" in text
-    assert '<a href="/motors/">AI Motors</a>' in text
-    assert '<a href="/runways/">Runways</a>' in text
+    what_exists = text.index('id="what-exists"')
+    loop = text.index('id="loop-title"')
+    evidence = text.index('id="evidence-title"')
+    assert what_exists < loop < evidence
+    assert "Noetfield runtime" in text
+    assert "SourceA" in text
+    assert '<a href="/system/">' in text
+    assert '<a href="/applications/">' in text
     assert "/assets/noetfield-home-v2.css" in text
 
 
 def test_homepage_mental_model_does_not_put_ai_before_the_motor() -> None:
     text = visible_text(HOME)
-    assert "Authorized event" in text
-    assert "Accepted outcome + receipt" in text
-    assert "does not reason or verify" in text
+    assert "Capable AI is not the same as accountable execution." in text
+    assert "Authorized goal" in text
+    assert "Bounded execution" in text
     for forbidden in (
         "AI decides",
         "Motor verifies its own",
-        'AI capability</span><i aria-hidden="true">→</i><strong>Governed execution',
         "Verified operational outcome",
         "Motors govern execution",
+        "SourceB",
     ):
         assert forbidden not in text
 
@@ -214,8 +213,8 @@ def test_evidence_and_client_zero_copy_preserve_claim_boundaries() -> None:
 def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
     home = read(HOME)
     motors = read(MOTORS)
-    assert '<a href="/motors/">AI Motors</a>' in home
-    assert '<a href="/motors/" aria-current="page">AI Motors</a>' in motors
+    assert '<a href="/system/">' in home
+    assert '<a href="/system/" aria-current="page">' in motors
     assert "Motor &amp; Custom Workflow" not in motors
     assert (
         'property="og:image" content="https://www.noetfield.com/assets/social/noetfield-motors-v2.png"'
