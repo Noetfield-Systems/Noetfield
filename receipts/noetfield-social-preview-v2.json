@@ -50,8 +50,8 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 61,
-  "noindex_route_count": 87,
+  "indexable_route_count": 33,
+  "noindex_route_count": 115,
   "route_count": 148,
   "routes": [
     {
@@ -106,8 +106,8 @@
       "canonical_url": "https://www.noetfield.com/ai-automation/",
       "description": "Governance-first operating reference for SMB AI adoption \u2014 evaluate, RID, TLE, audit-ready export before automation runs.",
       "image_sha256": "d8348d2f73a32e0140a4c7ba27778e54fbf3879f6b787bd63d32d34179107200",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-motors-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -116,14 +116,14 @@
       "profile": "motors",
       "route": "/ai-automation/",
       "title": "Noetfield \u2014 Governance for SMB AI Adoption",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/ai-factories/",
       "description": "Noetfield AI Factory Layer designs governed multi-agent workflows with request IDs, policy checks, evidence trails, and Trust Ledger-ready audit.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -132,14 +132,14 @@
       "profile": "enterprise",
       "route": "/ai-factories/",
       "title": "Noetfield \u2014 AI Factory Layer",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/ai-factories/spec/",
       "description": "Copyable YAML Factory Spec for Noetfield AI Factory Design.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -148,14 +148,14 @@
       "profile": "enterprise",
       "route": "/ai-factories/spec/",
       "title": "Noetfield \u2014 AI Factory Spec",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/ai-value-governance-os/",
       "description": "AI Value Governance OS \u2014 enterprise control layer for AI spend, usage, value, risk, and execution. Measure, forecast, govern, and optimize AI usage across models, agents, teams, workflows, and business outcomes.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -164,7 +164,7 @@
       "profile": "enterprise",
       "route": "/ai-value-governance-os/",
       "title": "Noetfield \u2014 AI Value Governance OS",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/app/",
@@ -250,8 +250,8 @@
       "canonical_url": "https://www.noetfield.com/bank-pilot/",
       "description": "Read-only Bank Pilot: policy evaluation in shadow mode for OSFI E-23 readiness.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -260,7 +260,7 @@
       "profile": "enterprise",
       "route": "/bank-pilot/",
       "title": "Noetfield \u2014 Bank Pilot (Shadow Governance)",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/banner/",
@@ -282,8 +282,8 @@
       "canonical_url": "https://www.noetfield.com/console/",
       "description": "Governance Evaluation Interface \u2014 submit intent, view decision and compliance log.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -292,11 +292,11 @@
       "profile": "corporate",
       "route": "/console/",
       "title": "Noetfield \u2014 Governance Console",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/contact/",
-      "description": "Explore Contact from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
+      "description": "Bring one consequential workflow \u2014 async intake for governed agent infrastructure.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -307,7 +307,7 @@
       },
       "profile": "corporate",
       "route": "/contact/",
-      "title": "Noetfield \u2014 Contact",
+      "title": "Contact \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
@@ -330,8 +330,8 @@
       "canonical_url": "https://www.noetfield.com/copilot/demo/",
       "description": "Interactive walkthrough: evaluate Copilot intent, confidence score, human approver gate, and Trust Ledger export \u2014 ADK-style event trace for institutional buyers.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -340,14 +340,14 @@
       "profile": "enterprise",
       "route": "/copilot/demo/",
       "title": "Noetfield \u2014 5-Minute Copilot Governance Demo",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/copilot/governance-audit-trail/",
       "description": "Copilot governance audit trail for regulated institutions: pre-execution evaluate, Trust Ledger Entries, board PDF, and procurement ZIP. Metadata-only M365 evidence. OSFI E-23 orientation.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -356,14 +356,14 @@
       "profile": "enterprise",
       "route": "/copilot/governance-audit-trail/",
       "title": "Copilot Governance Audit Trail \u2014 Pre-Execution Evaluate & TLE | Noetfield",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/copilot/governance/",
       "description": "Explore Governance from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -378,8 +378,8 @@
       "canonical_url": "https://www.noetfield.com/copilot/",
       "description": "AI Governance & Evidence layer for Microsoft 365 Copilot \u2014 signed TLE v1 and board-ready export.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -388,14 +388,14 @@
       "profile": "enterprise",
       "route": "/copilot/",
       "title": "Noetfield \u2014 Copilot Governance Pack",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/copilot/pilot/",
       "description": "90-day Copilot governance pilot for EU and US regulated institutions \u2014 $2k\u201310k, board PDF, procurement ZIP.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -404,14 +404,14 @@
       "profile": "enterprise",
       "route": "/copilot/pilot/",
       "title": "Copilot Governance Pack \u2014 90-day pilot | Noetfield",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/copilot/procurement/",
       "description": "Buyer diligence ZIP, NIST AI RMF citations, buyer export bundle.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -420,14 +420,14 @@
       "profile": "enterprise",
       "route": "/copilot/procurement/",
       "title": "Noetfield \u2014 Copilot Procurement Pack",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/copilot/proof-case/",
       "description": "Redacted proof case: Copilot policy SSOT change, pre-execution evaluate, Trust Ledger receipt, and board digest excerpt for procurement review.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -436,14 +436,14 @@
       "profile": "enterprise",
       "route": "/copilot/proof-case/",
       "title": "Copilot Proof Case \u2014 Evaluate \u2192 TLE \u2192 Board Export | Noetfield",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/copilot/quickscan/connectors/",
       "description": "Explore Connectors from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -459,7 +459,7 @@
       "description": "Explore Deliverables from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -475,7 +475,7 @@
       "description": "Explore Evidence from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -491,7 +491,7 @@
       "description": "Explore Quickscan from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -507,7 +507,7 @@
       "description": "Explore Intake from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -523,7 +523,7 @@
       "description": "Explore Oversharing from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -539,7 +539,7 @@
       "description": "Explore Procurement from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -555,7 +555,7 @@
       "description": "Explore Thanks from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -571,7 +571,7 @@
       "description": "Explore What We Scan from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -587,7 +587,7 @@
       "description": "Explore Readiness from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -603,7 +603,7 @@
       "description": "Explore Intake from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -618,8 +618,8 @@
       "canonical_url": "https://www.noetfield.com/copilot/sme/",
       "description": "SME Copilot governance pack for CISO, GRC, and procurement.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -628,14 +628,14 @@
       "profile": "enterprise",
       "route": "/copilot/sme/",
       "title": "Noetfield \u2014 SME Governance Pack",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/copilot/trial/",
       "description": "Free developer sandbox for Copilot governance evaluate \u2014 mock M365, capped evaluates, Request ID continuity. Canada institutional \u00b7 upgrade to Copilot Readiness when ready. No custody rails.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -644,7 +644,7 @@
       "profile": "enterprise",
       "route": "/copilot/trial/",
       "title": "Noetfield \u2014 Copilot Governance Trial Sandbox",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/deterministic-api/",
@@ -714,8 +714,8 @@
       "canonical_url": "https://www.noetfield.com/enterprise/agent-transformation/",
       "description": "Enterprises do not need more agents. They need a system for operating agentic work \u2014 suitability, authority, memory, evaluation, promotion and value receipts.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -724,14 +724,14 @@
       "profile": "enterprise",
       "route": "/enterprise/agent-transformation/",
       "title": "Governed Agent Transformation \u2014 Noetfield Enterprise",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/enterprise/application-factory/",
       "description": "Build, replace and promote institutional software through governed production, separate verification and evidence.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -740,14 +740,14 @@
       "profile": "enterprise",
       "route": "/enterprise/application-factory/",
       "title": "Governed Application Factory \u2014 Noetfield Enterprise",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/enterprise/copilot-governance/",
       "description": "Prove and Assure \u2014 Copilot governance, Trust Brief, Trust Ledger and decision-grade evidence for boards, legal, procurement and audit.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -756,7 +756,7 @@
       "profile": "enterprise",
       "route": "/enterprise/copilot-governance/",
       "title": "Copilot Governance & Trust Ledger \u2014 Noetfield Enterprise",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/enterprise/",
@@ -826,8 +826,8 @@
       "canonical_url": "https://www.noetfield.com/federal/",
       "description": "Government of Canada: Copilot governance evidence for ADM, AIA, and Copilot PIN. Unclassified scope.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -836,7 +836,7 @@
       "profile": "enterprise",
       "route": "/federal/",
       "title": "Federal Governance Pack \u2014 GC Copilot & ADM | Noetfield",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/feedback/",
@@ -1418,8 +1418,8 @@
       "canonical_url": "https://www.noetfield.com/governance/",
       "description": "Board-grade Copilot governance for EU and US regulated institutions \u2014 tamper-evident decision records, signed TLE receipts, fail-closed export. Copilot Governance Pack $2k\u201310k.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1428,7 +1428,7 @@
       "profile": "enterprise",
       "route": "/governance/",
       "title": "Noetfield \u2014 Enterprise AI Governance & Trust Ledger Evidence",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/",
@@ -1466,8 +1466,8 @@
       "canonical_url": "https://www.noetfield.com/intelligence/intake/",
       "description": "Book your AI Diagnostic Sprint \u2014 map your top 3 automations in one week. Fixed fee from $2,500 CAD for Canadian SMEs, RCIC firms, diaspora businesses, and trades.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1476,7 +1476,7 @@
       "profile": "enterprise",
       "route": "/intelligence/intake/",
       "title": "Noetfield Intelligence \u2014 Book AI Diagnostic Sprint",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/invest/",
@@ -1594,8 +1594,8 @@
       "canonical_url": "https://www.noetfield.com/msp/",
       "description": "Microsoft 365 MSP: Phase 1 Purview readiness \u00b7 Phase 2 TLE governance receipts.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1604,7 +1604,7 @@
       "profile": "enterprise",
       "route": "/msp/",
       "title": "MSP Partner Program \u2014 Readiness to Record | Noetfield",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/next/",
@@ -1864,7 +1864,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/privacy/",
-      "description": "Explore Privacy from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
+      "description": "Privacy notice for Noetfield corporate and product surfaces.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1875,7 +1875,7 @@
       },
       "profile": "corporate",
       "route": "/privacy/",
-      "title": "Noetfield \u2014 Privacy",
+      "title": "Privacy \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
@@ -2154,8 +2154,8 @@
       "canonical_url": "https://www.noetfield.com/start/",
       "description": "Developer sandbox: sign up, try Governance API and workspace without a sales call. 14-day trial, 50 evaluate calls.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2164,7 +2164,7 @@
       "profile": "enterprise",
       "route": "/start/",
       "title": "Noetfield \u2014 Start Free Sandbox",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/status/",
@@ -2186,8 +2186,8 @@
       "canonical_url": "https://www.noetfield.com/templates/",
       "description": "Deploy Copilot Governance and Bank Pilot templates \u2014 policy pack, workflow, and intake wired. Not factories \u2014 governed templates.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2196,7 +2196,7 @@
       "profile": "corporate",
       "route": "/templates/",
       "title": "Governance Templates \u2014 Deploy in one click | Noetfield",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/terms/",
@@ -2234,8 +2234,8 @@
       "canonical_url": "https://www.noetfield.com/trust-brief/",
       "description": "Six-week Trust Brief: governance audit, AI policy mapping, risk exposure analysis. $10,000.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2244,14 +2244,14 @@
       "profile": "enterprise",
       "route": "/trust-brief/",
       "title": "Noetfield \u2014 Trust Brief ($10,000)",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/trust-brief/intake/",
       "description": "Start a non-confidential intake for a governed AI pilot, Trust Brief or institutional workflow assessment.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2260,14 +2260,14 @@
       "profile": "enterprise",
       "route": "/trust-brief/intake/",
       "title": "Enterprise Intake \u2014 Noetfield Systems",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/trust-ledger/",
       "description": "Trust Ledger workspace and TLE v1 lifecycle.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2276,14 +2276,14 @@
       "profile": "enterprise",
       "route": "/trust-ledger/",
       "title": "Noetfield \u2014 Trust Ledger",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/trust-ledger/intake/",
       "description": "Explore Intake from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2299,7 +2299,7 @@
       "description": "Explore Online Report from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2315,7 +2315,7 @@
       "description": "Explore Output Pro from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2331,7 +2331,7 @@
       "description": "Explore Output from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2346,8 +2346,8 @@
       "canonical_url": "https://www.noetfield.com/trust-ledger/sample-report/",
       "description": "Sample Trust Ledger Entry YAML reports.",
       "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2356,14 +2356,14 @@
       "profile": "proof",
       "route": "/trust-ledger/sample-report/",
       "title": "Noetfield \u2014 TLE v1 Sample Report",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/trust-ledger/sample-report/online/",
       "description": "Explore Online from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
       "indexability": "noindex",
-      "noindex_reason": "redirect or placeholder route",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2378,8 +2378,8 @@
       "canonical_url": "https://www.noetfield.com/trust-ledger/verify/",
       "description": "Offline walkthrough: export integrity verification, fail closed on tamper.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-enterprise-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -2388,11 +2388,11 @@
       "profile": "enterprise",
       "route": "/trust-ledger/verify/",
       "title": "Noetfield \u2014 Verify Export Integrity",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/trust/",
-      "description": "Trust center: metadata-only M365, export integrity, honest certification posture.",
+      "description": "Trust begins with explicit boundaries \u2014 security scope, data handling, authority, execution containment, and evidence.",
       "image_sha256": "7cf2ee23a382c5a11cfd0a217d6ef75435082faf0109a72676df640006b5928c",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -2403,7 +2403,7 @@
       },
       "profile": "enterprise",
       "route": "/trust/",
-      "title": "Noetfield \u2014 Trust & Security",
+      "title": "Trust & Security \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
