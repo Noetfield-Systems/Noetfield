@@ -394,6 +394,7 @@ if [[ -z "$CF_PROVIDER_TOKEN" ]]; then
 fi
 
 assert_clean_release_source "before build"
+export NF_WWW_DEPLOYED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 bash scripts/build-www-pages-dist.sh
 python3 scripts/verify-public-output-allowlist.py
 python3 scripts/build-public-www-artifact.py --mode verify
