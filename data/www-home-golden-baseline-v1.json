@@ -25,7 +25,9 @@
     "corporate_css": {
       "path": "assets/noetfield-corporate-v1.css",
       "min_bytes": 30000,
-      "sha256": "b174be1b749566ae62b8ca4f0aaa6f872b9b4977bb9af25a15643e82c56338ee"
+      "sha256": null,
+      "sha256_pin_mode": "deferred_pending_founder_visual_acceptance",
+      "note": "SHA pin withheld until founder accepts 1440x900 and 390x844 homepage preview."
     }
   },
   "required_font_families": ["Inter", "Newsreader", "DM+Mono"],

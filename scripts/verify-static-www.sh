@@ -119,9 +119,9 @@ check_file "AI Motor category definition and engagement stay public" motors/inde
   'The deterministic execution layer for agentic systems.' \
   'A Noetfield Motor executes authorized Action Contracts inside a durable governed runtime' \
   'independent verifier judges the result' \
-  'Motor does not reason, create goals, self-authorize, or verify its own work' \
+  'Motor does not reason, create goals, or grant itself authority' \
   'A Motor is defined by what it does when execution should not continue.' \
-  'Model &amp; agent orchestration' 'Verification &amp; repair' 'Recovery' 'Promotion &amp; evidence' \
+  'Harness · model &amp; agent routing' 'Verifier · judgment' 'Recovery' 'Evidence record' \
   'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=2'
 check_absent "public Motor page has no private workspace or obsolete category framing" motors/index.html \
   'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
@@ -175,14 +175,14 @@ check_file "about corporate positioning and TrustField product boundary" about/i
   'SourceA — Live product surface · case study planned.' 'No external-client proof is claimed yet' \
   'SourceB — Live commercial service · case study planned.' 'SourceB.ca is a live multilingual service with an operating lead path' \
   'No customers, revenue, installations or external traction are claimed' \
-  'TrustField' 'A Noetfield Systems Inc. product' 'href="https://trustfield.ca/"'
+  'TrustField' 'separate regulated venture' 'href="https://trustfield.ca/"' \
+  'Not a Noetfield Systems Inc. product'
 
-# The vertical is still named, linked and attributed on the homepage. Only the
-# heading wording moved, from a dashed sentence to the ecosystem section.
+# TrustField is a separate venture — named on homepage ecosystem, not as NSI product.
 check_file "homepage TrustField vertical" index.html \
-  'TrustField' 'LIVE VERTICAL' 'href="https://trustfield.ca/"' \
-  'Compliance workflow setup and operations' \
-  'A Noetfield Systems Inc. product'
+  'TrustField' 'href="https://trustfield.ca/"' \
+  'separate regulated venture' \
+  'Compliance workflow setup and operations'
 
 # Homepage IA compression. The v2 homepage carries 11 top-level sections by
 # design: hero, problem, comparison, architecture, evidence, runways,
@@ -279,6 +279,8 @@ check_file "www pages routes" governance/www-pages-routes.json \
 
 check_file "www chat handler" api/public/chat/index.js \
   'www-local' 'operations@noetfield.com'
+
+python3 scripts/verify_motor_boundary_v1.py || exit 1
 
 chmod +x scripts/verify-public-chat-truth.sh
 scripts/verify-public-chat-truth.sh

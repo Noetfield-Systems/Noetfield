@@ -170,12 +170,14 @@ def trust_page() -> str:
    <div class="nf-corp-wrap">
     <div class="nf-section-head"><div><p class="nf-corp-eyebrow">07</p><h2 id="certs-title">Certifications and non-certifications</h2></div></div>
     <table class="nf-corp-table">
-     <thead><tr><th scope="col">Item</th><th scope="col">Status</th></tr></thead>
+     <thead><tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead>
      <tbody>
-      <tr><td>Export / evidence integrity checks (product)</td><td><span class="nf-status nf-status--live">LIVE</span></td></tr>
-      <tr><td>SOC 2 Type II (Noetfield as company)</td><td><span class="nf-status nf-status--planned">PLANNED</span></td></tr>
-      <tr><td>ISO 27001 / 42001 certification (Noetfield as certifier)</td><td><span class="nf-status nf-status--legacy">NOT CLAIMED</span></td></tr>
-      <tr><td>Regulatory approval or universal correctness</td><td><span class="nf-status nf-status--legacy">NOT CLAIMED</span></td></tr>
+      <tr><td>Export / evidence integrity checks (product)</td><td><span class="nf-status nf-status--demo">DEMONSTRATED</span></td><td><a href="/proof/">Public proof index</a> · client-zero scope</td></tr>
+      <tr><td>SOC 2 Type II (Noetfield as company)</td><td><span class="nf-status nf-status--legacy">NOT CERTIFIED</span></td><td>No audit report published</td></tr>
+      <tr><td>ISO 27001 (Noetfield as company)</td><td><span class="nf-status nf-status--legacy">NOT CERTIFIED</span></td><td>No certificate published</td></tr>
+      <tr><td>ISO 42001 (Noetfield as company)</td><td><span class="nf-status nf-status--legacy">NOT CERTIFIED</span></td><td>No certificate published</td></tr>
+      <tr><td>Noetfield as customer certifier</td><td><span class="nf-status nf-status--legacy">NOT A CERTIFICATION BODY</span></td><td>Corporate boundary — <a href="/about/">About</a></td></tr>
+      <tr><td>Regulatory approval or universal correctness</td><td><span class="nf-status nf-status--legacy">NOT CLAIMED</span></td><td>Evidence scoped per <a href="/proof/">Proof</a> item</td></tr>
      </tbody>
     </table>
    </div>
@@ -212,34 +214,35 @@ def privacy_page() -> str:
 
   <section class="nf-corp-section">
    <div class="nf-corp-wrap nf-corp-prose">
+    <p><strong>Effective date:</strong> 29 July 2026</p>
+
     <h2>Who we are</h2>
-    <p>Noetfield Systems Inc., Vancouver, British Columbia, Canada. Corporate site: www.noetfield.com · Product: app.noetfield.com.</p>
+    <p>Noetfield Systems Inc., Vancouver, British Columbia, Canada. <strong>Corporate site:</strong> www.noetfield.com (marketing, proof, intake). <strong>Product:</strong> app.noetfield.com (authenticated sessions, projects, execution).</p>
+    <p><strong>Privacy contact:</strong> operations@noetfield.com · <a href="/contact/?topic=privacy#contact-form">Privacy intake form</a></p>
 
     <h2>What we collect</h2>
-    <p><strong>Contact and intake forms</strong> — work email, organization name, optional name, topic selection, and message text you submit via <a href="/contact/">Contact</a>.</p>
-    <p><strong>Request IDs (RID)</strong> — generated in your browser to thread async intake; stored locally and echoed in form submissions.</p>
-    <p><strong>Product accounts</strong> — when you use app.noetfield.com, we process account identifiers, session tokens, project metadata, and execution records required to operate governed workflows.</p>
+    <p><strong>Contact and intake forms (www)</strong> — work email, organization name, optional name, topic selection, and message text submitted via <a href="/contact/">Contact</a>. Submissions post to Noetfield platform intake APIs.</p>
+    <p><strong>Request IDs (RID)</strong> — generated in your browser by <code>noetfield-shell.js</code> and stored in <code>localStorage</code> under key <code>nf_rid</code>. RIDs thread async intake and are echoed in form payloads. We do not use RID as a first-party HTTP cookie on canonical corporate pages.</p>
+    <p><strong>Cookie consent preference (www)</strong> — if shown, stored in <code>localStorage</code> as <code>noetfield_cookie_consent_v1</code> by <code>noetfield-cookie-consent.js</code>.</p>
+    <p><strong>Product accounts (app)</strong> — when you use app.noetfield.com, we process account identifiers, session tokens, project metadata, and execution records required to operate governed workflows.</p>
 
-    <h2>Analytics and cookies</h2>
-    <p>The corporate site uses first-party cookies for session and intake threading where enabled. We do not use third-party advertising trackers on canonical corporate pages. Infrastructure providers may log standard HTTP metadata (IP, user agent, timestamps) for security and operations.</p>
+    <h2>Analytics and tracking</h2>
+    <p>Canonical corporate pages do not load third-party advertising trackers. Infrastructure providers (Cloudflare for www delivery; Railway for platform APIs) may log standard HTTP metadata — IP address, user agent, timestamps — for security and operations.</p>
 
     <h2>How we use information</h2>
     <p>To respond to intake, operate authenticated product sessions, run governed execution, produce evidence artifacts, secure surfaces, and improve reliability. We do not sell personal information.</p>
 
-    <h2>Storage and infrastructure</h2>
-    <p>Data is processed on infrastructure operated by Noetfield and contracted providers (including Cloudflare and Railway) in configurations defined in deployment manifests. Exact subprocessors and regions should be confirmed against current infrastructure configuration during legal review.</p>
+    <h2>Storage and subprocessors</h2>
+    <p>Intake and product data are processed on infrastructure operated by Noetfield and contracted providers used in current deployment manifests, including Cloudflare (static site and edge) and Railway (platform API and runtime). Data may be processed in Canada and the United States depending on provider region configuration.</p>
 
     <h2>Retention</h2>
-    <p>Intake records are retained for operational response and engagement history. Product execution records are retained for workflow continuity and evidence replay. Retention periods follow active deployment configuration — contact us for a current export or deletion request.</p>
+    <p>Contact intake records are retained for operational response and engagement history while the inquiry remains active and as required for audit trails. Product execution records are retained for workflow continuity, evidence replay, and governed recovery within active deployment configuration. Deletion requests are handled case-by-case when operational or legal retention does not require continued storage.</p>
 
     <h2>Your requests</h2>
-    <p>Access, correction, or deletion requests: <a href="/contact/?topic=privacy#contact-form">Contact operations</a> with your Request ID when available. We will respond within a reasonable period.</p>
+    <p>Access, correction, or deletion requests: <a href="/contact/?topic=privacy#contact-form">Contact operations</a> with your Request ID when available. We respond within a reasonable period.</p>
 
     <h2>Changes</h2>
-    <p>We may update this notice when collection or infrastructure changes. The canonical URL is https://www.noetfield.com/privacy/</p>
-
-    <h2>Contact</h2>
-    <p>operations@noetfield.com · <a href="/contact/?topic=privacy#contact-form">Privacy intake form</a></p>
+    <p>We update this notice when collection, infrastructure, or retention practices change. Canonical URL: https://www.noetfield.com/privacy/</p>
    </div>
   </section>
 """
@@ -310,6 +313,7 @@ def proof_page() -> str:
             "Inspect current Noetfield systems, verified states, evidence boundaries and public execution receipts.",
             "https://www.noetfield.com/proof/",
             "proof",
+            og_image="https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
         )
         + body
         + corp_page_close()

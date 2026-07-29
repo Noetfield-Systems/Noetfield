@@ -6,9 +6,8 @@
   "expected_entity": "Noetfield Systems Inc.",
   "header_partial_sha256": "8cb0400f5e22c4e10fb2af5c6c27f3436b2b66590b2468688acd65399164e11a",
   "required_cta_phrases": [
-    "Apply for pilot",
-    "Request Trust Brief",
-    "Start sandbox"
+    "Explore the architecture",
+    "Inspect current proof"
   ],
   "allowed_phrases": [
     "$2,500",

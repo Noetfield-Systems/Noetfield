@@ -21,7 +21,15 @@ NAV_ITEMS = (
 )
 
 
-def corp_head(title: str, desc: str, canonical: str, *, theme: str = "#f3f0e9", extra_css: str = "") -> str:
+def corp_head(
+    title: str,
+    desc: str,
+    canonical: str,
+    *,
+    theme: str = "#f3f0e9",
+    extra_css: str = "",
+    og_image: str = "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+) -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +40,18 @@ def corp_head(title: str, desc: str, canonical: str, *, theme: str = "#f3f0e9", 
  <meta name="robots" content="index,follow" />
  <meta name="theme-color" content="{theme}" />
  <link rel="canonical" href="{canonical}" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:title" content="{title}" />
+ <meta property="og:description" content="{desc}" />
+ <meta property="og:url" content="{canonical}" />
+ <meta property="og:type" content="website" />
+ <meta property="og:image" content="{og_image}" />
+ <meta property="og:image:width" content="1200" />
+ <meta property="og:image:height" content="630" />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="{title}" />
+ <meta name="twitter:description" content="{desc}" />
+ <meta name="twitter:image" content="{og_image}" />
  <meta name="nf-chat-api-base" content="https://platform.noetfield.com" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
 {CORP_FONT}
@@ -73,7 +93,8 @@ def corp_footer() -> str:
    </div>
    <nav aria-label="Systems"><strong>Systems</strong><a href="/motors/">AI Motors</a><a href="/runways/">Runways</a><a href="/proof/">Proof</a></nav>
    <nav aria-label="Company"><strong>Company</strong><a href="/about/">Company</a><a href="/investors/">Investors/Ecosystem</a><a href="/contact/">Contact</a></nav>
-   <nav aria-label="Legal"><strong>Legal</strong><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a><a href="https://trustfield.ca/" rel="noopener noreferrer">TrustField ↗</a></nav>
+   <nav aria-label="Legal"><strong>Legal</strong><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a></nav>
+   <nav aria-label="Separate ventures"><strong>Separate ventures</strong><a href="https://trustfield.ca/" rel="noopener noreferrer">TrustField ↗</a></nav>
   </div>
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
  </footer>
@@ -81,9 +102,17 @@ def corp_footer() -> str:
 </html>"""
 
 
-def corp_page_open(title: str, desc: str, canonical: str, active: str, *, body_class: str = "nf-corp nf-corp--inner") -> str:
+def corp_page_open(
+    title: str,
+    desc: str,
+    canonical: str,
+    active: str,
+    *,
+    body_class: str = "nf-corp nf-corp--inner",
+    og_image: str = "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+) -> str:
     return (
-        corp_head(title, desc, canonical)
+        corp_head(title, desc, canonical, og_image=og_image)
         + f'\n<body class="{body_class}">\n <a class="nf-skip" href="#main">Skip to main content</a>\n'
         + corp_header(active)
         + '\n <main id="main">\n'

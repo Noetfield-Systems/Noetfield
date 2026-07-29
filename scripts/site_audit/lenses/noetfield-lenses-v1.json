@@ -69,8 +69,8 @@
           "id": "BF-5",
           "severity": "P2",
           "name": "stable_cta_triad_homepage",
-          "structural": "homepage must contain Apply for pilot, Request Trust Brief, Start sandbox",
-          "why": "NF UI build law — three stable entry paths; P2 until founder copy verdict (UPG-NF-PUB)."
+          "structural": "homepage must contain Explore the architecture and Inspect current proof",
+          "why": "NF corporate homepage law — approved primary/secondary CTAs (grade restore v1)."
         }
       ]
     },
