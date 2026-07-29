@@ -327,7 +327,7 @@ def investors_page() -> str:
     <article><h3>Current state</h3><p>Live client-zero application · demonstrated SourceA/Runway paths · commissioning provider-attempt ledger and semantic acceptance.</p></article>
     <article><h3>Funding and support</h3><p><a href="/contact/?topic=program-funding">Program / funding</a> · <a href="/contact/?topic=technical-collaboration">Technical collaboration</a></p></article>
    </div>
-   <p class="nf-corp-prose">No stale product inventory. TrustField is a separate venture — not a Noetfield Systems Inc. product or subsidiary. <a href="/proof/">Evidence register →</a></p>
+   <p class="nf-corp-prose">No stale product inventory. TrustField is a separate venture — not a Noetfield Systems Inc. product or subsidiary. <a href="/proof/">Evidence register</a> · <a href="/proof/noetfield/">Claims boundary summary</a></p>
   </section>
 """
     return corp_page_open(
@@ -335,6 +335,8 @@ def investors_page() -> str:
         "Company thesis, current state, and funding routes — evidence-first.",
         "https://www.noetfield.com/investors/",
         "company",
+        og_image="https://www.noetfield.com/assets/social/noetfield-investors-v2.png",
+        include_intake=False,
     ) + body + corp_page_close()
 
 HOME_CSS = f' <link rel="stylesheet" href="/assets/noetfield-home-v2.css?v={CORP_CSS_VER}" />\n'

@@ -32,20 +32,21 @@ REQUIRED_TIER_BY_PAGE = {
     "governance/index.html": ("Apply for pilot", "governance"),
 }
 
-# Corporate homepage requirements (governed agent infrastructure v1).
+# Corporate homepage requirements (NOETFIELD_DOMAIN_CANONICAL_V2).
 CORPORATE_HOME_REQUIRED = (
     "nf-corp",
     "noetfield-corporate-v1.css",
     'name="viewport"',
-    "/motors/",
-    "/runways/",
-    "/investors/",
+    "/system/",
+    "/applications/",
     "/proof/",
-    "Harness frontier models into systems that can operate.",
-    "Explore the architecture",
-    "Inspect current proof",
+    "/public-interest/",
+    "AI systems should not decide when their own work is safe to ship.",
+    "client-zero commissioning",
+    "See what is live",
+    "Inspect the evidence",
     "TrustField",
-    "Receipts prove what the runtime observed and enforced within a stated scope.",
+    "separate venture",
 )
 
 REQUIRED_SHELL_PARTIALS = (

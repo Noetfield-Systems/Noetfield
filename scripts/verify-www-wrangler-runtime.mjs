@@ -172,12 +172,13 @@ async function runProbes() {
     "/about/",
     "/investors/",
     "/proof/",
-    "/enterprise/",
+    "/system/",
     "/motors/",
     "/noetfield-favicon-512.png",
   ]) {
     rows.push(await probe(pathname, 200, "REQUIRED_PUBLIC_ARTIFACT"));
   }
+  rows.push(await probe("/enterprise/", 301, "LEGACY_ENTERPRISE_REDIRECT"));
   rows.push(await probe("/invest/", 302, "INVEST_ACCESS_CONTROL"));
   rows.push(await probe("/api/auth/invest-config", 200, "INVEST_RUNTIME_CONFIG"));
 }

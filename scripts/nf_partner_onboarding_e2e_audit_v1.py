@@ -79,12 +79,12 @@ ROUTE_SWEEP = (
     "/gate/partners/apply-integration/",
 )
 
-INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/noetfield/", "/roadmap/", "/invest/")
-INVESTOR_CONTACT_TOPICS = ("incubator-ecosystem", "operating-partner", "commission-workflow")
+INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/noetfield/")
+INVESTOR_CONTACT_TOPICS = ("program-funding", "technical-collaboration")
 INVESTOR_DISCLOSURES = (
-    "not a public securities offering or solicitation",
-    "private materials remain access-controlled",
-    "nothing on this page bypasses authentication",
+    "external customers",
+    "revenue are not established",
+    "not a noetfield systems inc. product",
 )
 
 

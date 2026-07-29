@@ -24,7 +24,7 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
     expected_images = {
         ROOT / "index.html": "noetfield-corporate-v2.png",
         ROOT / "about" / "index.html": "noetfield-corporate-v2.png",
-        ROOT / "investors" / "index.html": "noetfield-corporate-v2.png",
+        ROOT / "investors" / "index.html": "noetfield-investors-v2.png",
     }
     for path in PAGES:
         text = read(path)

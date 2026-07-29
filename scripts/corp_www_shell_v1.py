@@ -35,7 +35,9 @@ def corp_head(
     theme: str = "#f3f0e9",
     extra_css: str = "",
     og_image: str = "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+    include_intake: bool = True,
 ) -> str:
+    intake_block = INTAKE_SCRIPTS if include_intake else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +65,7 @@ def corp_head(
 {CORP_FONT}
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v={CORP_CSS_VER}" />
 {extra_css}
-{INTAKE_SCRIPTS}
+{intake_block}
 </head>"""
 
 
@@ -113,9 +115,17 @@ def corp_page_open(
     body_class: str = "nf-corp nf-corp--inner",
     og_image: str = "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
     extra_css: str = "",
+    include_intake: bool = True,
 ) -> str:
     return (
-        corp_head(title, desc, canonical, og_image=og_image, extra_css=extra_css)
+        corp_head(
+            title,
+            desc,
+            canonical,
+            og_image=og_image,
+            extra_css=extra_css,
+            include_intake=include_intake,
+        )
         + f'\n<body class="{body_class}">\n <a class="nf-skip" href="#main">Skip to main content</a>\n'
         + corp_header(active)
         + '\n <main id="main">\n'

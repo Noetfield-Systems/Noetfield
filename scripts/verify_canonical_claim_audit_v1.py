@@ -55,9 +55,9 @@ ALLOWLIST_FILE_SNIPPETS = (
 
 
 def visible_text(html: str) -> str:
-    html = re.sub(r"<option\b[^>]*\bhidden\b[^>]*>[\s\S]*?</option>", " ", html, flags=re.I)
-    text = re.sub(r"<script[\s\S]*?</script>", " ", html, flags=re.I)
-    text = re.sub(r"<style[\s\S]*?</style>", " ", text, flags=re.I)
+    html = re.sub(r"<option\b[^>]*\bhidden\b[^>]*>[\s\S]*?</option\s*>", " ", html, flags=re.I)
+    text = re.sub(r"<script\b[^>]*>[\s\S]*?</script\s*>", " ", html, flags=re.I)
+    text = re.sub(r"<style\b[^>]*>[\s\S]*?</style\s*>", " ", text, flags=re.I)
     text = re.sub(r"<[^>]+>", " ", text)
     return re.sub(r"\s+", " ", text)
 
