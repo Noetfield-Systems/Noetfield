@@ -45,25 +45,23 @@ check_absent() {
 # page was rebuilt and because three of the old pinned strings carried an em
 # dash, which is now banned in Noetfield copy.
 check_file "protected corporate homepage" index.html \
-  '<title>Noetfield Systems Inc. | AI Motors and Governed Execution</title>' \
+  '<title>Noetfield Systems Inc. | Governed Agent Infrastructure</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp nf-home">' '<main id="main">' \
-  '/assets/noetfield-corporate-v1.css?v=2' \
+  '/assets/noetfield-corporate-v1.css?v=3' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
-  'AI systems that can act, and show why the action was allowed.' \
-  'governed execution runtimes that coordinate' \
-  'Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.' \
-  'Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.' \
-  'AI capability is abundant. Governed execution is not.' \
-  'CLIENT-ZERO · P05' 'Client-zero staging' 'Separate-verifier acceptance' \
+  'Harness frontier models into systems that can operate.' \
+  'agent harness for grounded reasoning' 'deterministic Motor executes permitted contracts' \
+  'Replaceable models' 'Durable agent state' 'Policy-gated execution' 'Replayable evidence' \
+  'Models reason. Harnesses orchestrate.' 'Motor executes. Verifiers judge.' \
+  'A capable model is not an operating system.' \
+  'Agent demos, or governed production systems.' \
+  'UNCONTROLLED AGENT STACK' 'NOETFIELD OPERATING STACK' \
   'SAMPLE ARTIFACT · SHAPE ONLY' 'NO INVENTED SHAS OR PASS CLAIMS' \
   'Governed Software Change' 'Decision Brief' 'Institutional Workflow Commissioning' \
-  'TrustField' 'href="https://trustfield.ca/"' 'Compliance workflow setup and operations' \
-  'A Noetfield Systems Inc. product' \
-  'No customers, revenue, or external traction are claimed' \
-  'A receipt is not certification.' \
-  'not certification, regulatory approval, or a claim of universal correctness' \
-  'Inspect current proof' 'Discuss one workflow' \
+  'TrustField' 'href="https://trustfield.ca/"' \
+  'Receipts prove what the runtime observed and enforced within a stated scope.' \
+  'Explore the architecture' 'Inspect current proof' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
   'nf-corp-section' 'nf-corp-hero' 'nf-system-card' \
   'family=Newsreader' 'family=DM+Mono' \
@@ -72,12 +70,13 @@ check_file "protected corporate homepage" index.html \
   'href="/investors/"' 'href="/trust/"' 'href="/privacy/"' \
   '/assets/noetfield-home-v2.css'
 check_absent "protected homepage has no private or unsupported conversion" index.html \
-  'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield'
+  'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield' \
+  'CLIENT-ZERO · P05' 'Discuss one workflow'
 
 check_file "protected ecosystem and investor surface" investors/index.html \
   '<title>Ecosystem &amp; Investors — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
-  'Proof, boundaries and the next field opportunity.' \
+  'The operating layer around increasingly capable models.' \
   'not a public securities offering or solicitation' \
   'What exists—and what does not yet.' 'These labels describe evidence state, not commercial traction.' \
   'SourceA' 'Live product surface · case study planned' 'No external-client proof is claimed yet' \
@@ -92,12 +91,12 @@ check_absent "protected investors hub has no embedded intake" investors/index.ht
 check_file "protected proof truth boundaries" proof/index.html \
   '<title>Proof &amp; Public Evidence — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/proof/" />' \
-  '<h1>Evidence, not slides</h1>' \
-  'What is proven, what is planned, and what must still be demonstrated before broad claims.' \
-  'Case Study #1 — Noetfield' 'Parent company self-audit. Live now.' \
-  'Case Study #2 — Governed replacement' \
-  'Client-Zero / Internal Demonstration · WRAP of /workspace · live.' \
-  'not a Fortune-500 deployment claim' 'Coming next.'
+  '<h1 id="proof-title">Public evidence and explicit boundaries.</h1>' \
+  'Parent-company self-audit' 'CLIENT-ZERO / INTERNAL' \
+  'Governed replacement demonstration' \
+  'Does not prove' 'Fortune-500 production deployment' \
+  'nf-corp-header' 'nf-corp-footer' \
+  'Sensed state → Brain proposal → authority/permit → Motor effect'
 
 check_file "protected enterprise commercial surface" enterprise/index.html \
   '<title>Legacy commercial lane — Enterprise — Noetfield</title>' \
@@ -117,16 +116,12 @@ check_file "historical v42 expectations archived" \
 check_file "AI Motor category definition and engagement stay public" motors/index.html \
   '<title>AI Motors for Governed Execution — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/motors/" />' \
-  'An AI Motor is a governed execution runtime that turns authenticated events and human intent into controlled outcomes verified against defined acceptance criteria' \
-  'Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.' \
-  'Provides a specialized intelligence or decision capability' \
-  'A versioned execution path for a defined class of outcome' \
-  'Models generate. Agents participate. Motors operate.' \
+  'The deterministic execution layer for agentic systems.' \
+  'A Noetfield Motor executes authorized Action Contracts inside a durable governed runtime' \
+  'independent verifier judges the result' \
+  'Motor does not reason, create goals, self-authorize, or verify its own work' \
   'A Motor is defined by what it does when execution should not continue.' \
-  'Governance surrounds execution from intake to evidence.' \
   'Model &amp; agent orchestration' 'Verification &amp; repair' 'Recovery' 'Promotion &amp; evidence' \
-  'A bounded software change—not just a coding agent.' \
-  'No external customer adoption, broad production proof or independent validation is claimed.' \
   'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=2'
 check_absent "public Motor page has no private workspace or obsolete category framing" motors/index.html \
   'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
@@ -176,7 +171,7 @@ check_absent "recovered frontier page has no workspace conversion" frontier-syst
   'href="/workspace/'
 
 check_file "about corporate positioning and TrustField product boundary" about/index.html \
-  'An operating company for governed AI systems.' 'Founder &amp; company' \
+  'An AI-native operating company building governed agent infrastructure.' 'Founder &amp; company' \
   'SourceA — Live product surface · case study planned.' 'No external-client proof is claimed yet' \
   'SourceB — Live commercial service · case study planned.' 'SourceB.ca is a live multilingual service with an operating lead path' \
   'No customers, revenue, installations or external traction are claimed' \
@@ -302,7 +297,8 @@ check_file "footer pilot-first" assets/partials/footer.html \
   'Apply for pilot ($2k–10k)' 'Copilot Governance Pack' 'tamper-evident'
 
 check_file "trust center diligence theme" trust/index.html \
-  'nf-trust-diligence' 'nf-trust-doc-layout' 'fail closed' 'Metadata-only' 'Shipped'
+  'nf-corp' 'Trust begins with explicit boundaries.' 'Execution containment' \
+  'Certifications and non-certifications' 'Security contact' 'nf-corp-header'
 
 check_file "copilot dual artifact" copilot/index.html \
   'nf-hero-artifacts' 'Apply for pilot' 'board-grade governance'

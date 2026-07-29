@@ -674,6 +674,26 @@ body.nf-corp {
   .nf-corp-footer__base { align-items: flex-start; flex-direction: column; gap: 0.45rem; }
 }
 
+/* Coherence pass — status, proof cards, trust tables, runways disclosure */
+.nf-status { display: inline-block; padding: 0.15rem 0.45rem; border-radius: 3px; font-family: "DM Mono", monospace; font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid rgba(9,20,33,0.15); }
+.nf-status--live { background: rgba(34,120,72,0.12); color: #1a6b42; }
+.nf-status--demo { background: rgba(138,107,31,0.12); color: #6b5318; }
+.nf-status--planned { background: rgba(9,20,33,0.06); color: #4a5568; }
+.nf-status--legacy { background: rgba(9,20,33,0.04); color: #6b7280; }
+.nf-corp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.nf-corp-table th, .nf-corp-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid rgba(9,20,33,0.08); text-align: left; }
+.nf-proof-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.nf-proof-card { padding: 1.25rem; border: 1px solid rgba(9,20,33,0.1); border-radius: 6px; background: #fff; }
+.nf-proof-card h3 { margin: 0.5rem 0; font-family: "Newsreader", serif; }
+.nf-proof-card p { margin: 0.35rem 0; font-size: 0.82rem; color: #3d4a5c; }
+.nf-rw-details { border: 1px solid rgba(9,20,33,0.08); border-radius: 6px; margin: 2rem 0; }
+.nf-rw-details__summary { cursor: pointer; list-style: none; padding: 1.5rem 0 0.5rem; }
+.nf-rw-details__summary::-webkit-details-marker { display: none; }
+.nf-rw-details[open] .nf-rw-details__summary { border-bottom: 1px solid rgba(9,20,33,0.08); margin-bottom: 1rem; }
+.nf-pilot-apply-form label { display: block; margin-bottom: 1rem; font-size: 0.82rem; }
+.nf-pilot-apply-form input, .nf-pilot-apply-form select, .nf-pilot-apply-form textarea { width: 100%; margin-top: 0.35rem; padding: 0.55rem 0.65rem; border: 1px solid rgba(9,20,33,0.15); border-radius: 4px; font: inherit; }
+.nf-pilot-apply-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }

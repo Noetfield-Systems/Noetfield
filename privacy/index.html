@@ -3,76 +3,90 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Noetfield — Privacy</title>
- <meta name="description" content="Privacy policy." />
+ <title>Privacy — Noetfield Systems</title>
+ <meta name="description" content="Privacy notice for Noetfield corporate and product surfaces." />
  <meta name="robots" content="index,follow" />
- <meta name="theme-color" content="#f4f5f8" />
+ <meta name="theme-color" content="#f3f0e9" />
  <link rel="canonical" href="https://www.noetfield.com/privacy/" />
  <meta name="nf-chat-api-base" content="https://platform.noetfield.com" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" />
- <link rel="stylesheet" href="/assets/noetfield-tokens.css" />
- <link rel="stylesheet" href="/assets/noetfield-shell.css" />
- <link rel="stylesheet" href="/assets/noetfield-www.css?v=42" />
- <link rel="stylesheet" href="/assets/noetfield-print.css?v=42" media="print" />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=3" />
 
- <script src="/assets/noetfield-shell.js?v=42" defer></script>
  <script src="/assets/noetfield-intake-core.js?v=42" defer></script>
  <script src="/assets/noetfield-forms.js?v=42" defer></script>
 </head>
-<body class="nf-www nf-site-v14">
- <div class="bg" aria-hidden="true"></div>
- <a class="skip" href="#main">Skip to content</a>
- <header id="nfHeader"></header>
- <main id="main" class="nf-main nf-page">
-
- <header class="nf-hero-cinematic">
- <div>
- 
- 
- <h1>Privacy</h1>
- <p class="nf-lead">How Noetfield handles intake and operational metadata.</p>
- <div class="nf-hero-badges"></div>
- <div class="nf-cta-actions"><a class="btn btn-secondary" href="/contact/">Contact</a></div>
- <ul class="nf-marquee" aria-label="Framework alignment"></ul>
- </div>
- 
- <div class="nf-artifact-panel">
- <div class="nf-artifact-panel-chrome">
- <span class="nf-artifact-panel-dots" aria-hidden="true"><i></i><i></i><i></i></span>
- <span class="nf-artifact-panel-file">tle-receipt.yaml</span>
- <span class="nf-artifact-panel-badge">Verified</span>
- </div>
- <aside class="nf-receipt-mock" aria-label="Trust Ledger Entry receipt">
- <dl class="nf-receipt-mock-body">
- <div class="nf-receipt-row"><dt>tle_id</dt><dd>TLE-015DCFB8B953</dd></div>
- <div class="nf-receipt-row"><dt>decision</dt><dd>allow</dd></div>
- <div class="nf-receipt-row"><dt>confidence_score</dt><dd>0.82</dd></div>
- <div class="nf-receipt-row"><dt>rid</dt><dd>RID-STATUS</dd></div>
- <div class="nf-receipt-row"><dt>evidence_index</dt><dd>purview · entra · audit</dd></div>
- <div class="nf-receipt-row"><dt>export_integrity</dt><dd class="nf-receipt-ok">PASS · fail closed on tamper</dd></div>
- </dl>
- <p class="nf-receipt-mock-footer">Operational metadata only.</p>
- </aside>
- </div>
+<body class="nf-corp nf-corp--inner">
+ <a class="nf-skip" href="#main">Skip to main content</a>
+ <header class="nf-corp-header">
+  <div class="nf-corp-wrap nf-corp-navrow">
+   <a class="nf-corp-brand" href="/" aria-label="Noetfield Systems home">
+    <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
+    <span>Noetfield Systems <small>Inc.</small></span>
+   </a>
+   <nav class="nf-corp-nav" aria-label="Primary navigation">
+    <a href="/motors/">AI Motors</a><a href="/runways/">Runways</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a class="nf-corp-nav__deploy" href="https://app.noetfield.com/" rel="noopener noreferrer">Deploy ↗</a>
+    <a class="nf-corp-nav__cta" href="/contact/?topic=commission-workflow">Contact</a>
+   </nav>
+  </div>
  </header>
- <div class="nf-prose">
- <section><h2>Overview</h2><p>Noetfield processes operational and intake metadata to deliver governance evaluation, Trust Ledger records, and export bundles. We do not take custody of Microsoft 365 mailbox content.</p></section>
- <section><h2>What we collect</h2><p>Trust Brief and sandbox intake: contact details, organization name, and non-confidential scope notes you provide. M365 connectors use metadata-only indices (Purview labels, Entra ID configuration, audit log references).</p></section>
- <section><h2>Your Request ID</h2><p>We assign a Request ID (RID) to thread intake, evaluate, and export on your engagement. You may copy it from the site footer.</p></section>
- <section><h2>Contact</h2><p>Privacy questions: <a href="/contact/?topic=privacy#contact-form">Contact operations</a> · async intake · operations@noetfield.com</p></section>
- </div>
- <section class="nf-cta-mega" aria-labelledby="cta-h">
- <h2 id="cta-h">Board PDF in your next governance meeting</h2>
- <p>Non-confidential intake · include your Request ID · Copilot Governance Pack ($2k–10k · 90 days · board PDF), Trust Brief ($10k), federal or MSP lane · operations@noetfield.com</p>
- <div class="nf-cta-actions">
- <a class="btn btn-primary" href="/trust-brief/intake/?interest=pilot&vector=copilot-governance">Apply for pilot ($2k–10k)</a>
- <a class="btn btn-secondary" href="/trust-brief/intake/">Request Trust Brief ($10k)</a>
- </div>
- </section>
+ <main id="main">
+
+  <section class="nf-inner-hero" aria-labelledby="privacy-title">
+   <div class="nf-corp-wrap nf-inner-hero__grid">
+    <div><p class="nf-corp-kicker">Privacy</p><h1 id="privacy-title">How we handle information.</h1></div>
+    <div><p class="nf-corp-lead">This notice describes what the Noetfield corporate site and product surfaces collect, why, and how to reach us — without marketing offers or product SKUs.</p></div>
+   </div>
+  </section>
+
+  <section class="nf-corp-section">
+   <div class="nf-corp-wrap nf-corp-prose">
+    <h2>Who we are</h2>
+    <p>Noetfield Systems Inc., Vancouver, British Columbia, Canada. Corporate site: www.noetfield.com · Product: app.noetfield.com.</p>
+
+    <h2>What we collect</h2>
+    <p><strong>Contact and intake forms</strong> — work email, organization name, optional name, topic selection, and message text you submit via <a href="/contact/">Contact</a>.</p>
+    <p><strong>Request IDs (RID)</strong> — generated in your browser to thread async intake; stored locally and echoed in form submissions.</p>
+    <p><strong>Product accounts</strong> — when you use app.noetfield.com, we process account identifiers, session tokens, project metadata, and execution records required to operate governed workflows.</p>
+
+    <h2>Analytics and cookies</h2>
+    <p>The corporate site uses first-party cookies for session and intake threading where enabled. We do not use third-party advertising trackers on canonical corporate pages. Infrastructure providers may log standard HTTP metadata (IP, user agent, timestamps) for security and operations.</p>
+
+    <h2>How we use information</h2>
+    <p>To respond to intake, operate authenticated product sessions, run governed execution, produce evidence artifacts, secure surfaces, and improve reliability. We do not sell personal information.</p>
+
+    <h2>Storage and infrastructure</h2>
+    <p>Data is processed on infrastructure operated by Noetfield and contracted providers (including Cloudflare and Railway) in configurations defined in deployment manifests. Exact subprocessors and regions should be confirmed against current infrastructure configuration during legal review.</p>
+
+    <h2>Retention</h2>
+    <p>Intake records are retained for operational response and engagement history. Product execution records are retained for workflow continuity and evidence replay. Retention periods follow active deployment configuration — contact us for a current export or deletion request.</p>
+
+    <h2>Your requests</h2>
+    <p>Access, correction, or deletion requests: <a href="/contact/?topic=privacy#contact-form">Contact operations</a> with your Request ID when available. We will respond within a reasonable period.</p>
+
+    <h2>Changes</h2>
+    <p>We may update this notice when collection or infrastructure changes. The canonical URL is https://www.noetfield.com/privacy/</p>
+
+    <h2>Contact</h2>
+    <p>operations@noetfield.com · <a href="/contact/?topic=privacy#contact-form">Privacy intake form</a></p>
+   </div>
+  </section>
+
  </main>
- <footer id="nfFooter"></footer>
+ <footer class="nf-corp-footer">
+  <div class="nf-corp-wrap nf-corp-footer__grid">
+   <div>
+    <a class="nf-corp-brand nf-corp-brand--footer" href="/"><span class="nf-corp-brand__mark" aria-hidden="true">N</span><span>Noetfield Systems <small>Inc.</small></span></a>
+    <p>Vancouver, British Columbia, Canada</p>
+   </div>
+   <nav aria-label="Systems"><strong>Systems</strong><a href="/motors/">AI Motors</a><a href="/runways/">Runways</a><a href="/proof/">Proof</a></nav>
+   <nav aria-label="Company"><strong>Company</strong><a href="/about/">Company</a><a href="/investors/">Investors/Ecosystem</a><a href="/contact/">Contact</a></nav>
+   <nav aria-label="Legal"><strong>Legal</strong><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a><a href="https://trustfield.ca/" rel="noopener noreferrer">TrustField ↗</a></nav>
+  </div>
+  <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
+ </footer>
 </body>
 </html>
