@@ -108,40 +108,28 @@
 <span class="nf-dapi-code__comment"># same SDK · POST /v1/chat/completions</span>
 <span class="nf-dapi-code__key">api_key</span>  = <span class="nf-dapi-code__str">"sk-nf-…"</span>
 <span class="nf-dapi-code__key">model</span>    = <span class="nf-dapi-code__str">"noetfield-deterministic"</span>  <span class="nf-dapi-code__comment"># or noetfield-coding-pro</span></code></pre>
-     <p class="nf-dapi-panel__note">One key, three protocol families (OpenAI / Anthropic / Gemini), stream and non-stream. Enable the lane in the workspace, then point Continue or your SDK at this host. In plugins, <code>provider</code> means the wire format — not the company billing the tokens.</p>
+     <p class="nf-dapi-panel__note">OpenAI-shaped <code>base_url</code> for commissioning evaluation. Provider-family compatibility is tested per lane in the signed-in workspace — not claimed as universal production readiness across all SDK paths.</p>
     </aside>
    </div>
   </section>
 
   <section class="nf-dapi-section" aria-labelledby="why-title">
    <div class="nf-corp-wrap">
-    <p class="nf-corp-eyebrow">What you buy</p>
-    <h2 id="why-title">Usable outcomes over model lottery.</h2>
-    <p class="nf-dapi-section-lead">You are not buying a model catalog. You are buying an OpenAI-compatible endpoint that returns structured results you can ship.</p>
+    <p class="nf-corp-eyebrow">Commissioning preview scope</p>
+    <h2 id="why-title">Structured completions under deterministic controls.</h2>
+    <p class="nf-dapi-section-lead">Developer preview lane for evaluating schema-valid JSON and tool-call behavior — not a production corporate product surface.</p>
     <div class="nf-dapi-grid" role="list">
-     <article role="listitem">
-      <h3>Drop-in compatible</h3>
-      <p><code>POST /v1/chat/completions</code> with the client you already use. One <code>base_url</code> change.</p>
-     </article>
-     <article role="listitem">
-      <h3>Engine posture</h3>
-      <p>Infrastructure endpoint under deterministic controls. You keep the OpenAI-shaped interface on top.</p>
-     </article>
      <article role="listitem">
       <h3>Schema-valid or fail</h3>
       <p>JSON and tool calls must validate before the response leaves the API — repair or fail closed on failure.</p>
      </article>
      <article role="listitem">
-      <h3>Coding Pro lane</h3>
-      <p>Enable in workspace. Same key, model <code>noetfield-coding-pro</code> — deterministic planner + stronger coding matrix (~4× token rate).</p>
+      <h3>Coding Pro lane (commissioning)</h3>
+      <p>Evaluated in workspace when enabled. Model <code>noetfield-coding-pro</code> — planner + stronger coding matrix under commissioning controls.</p>
      </article>
      <article role="listitem">
-      <h3>Claude + Gemini compat</h3>
-      <p>Same Worker and key. Enable Claude Compat for <code>POST /v1/messages</code> (SSE stream supported), or Gemini Compat for <code>generateContent</code> / <code>streamGenerateContent</code>.</p>
-     </article>
-     <article role="listitem">
-      <h3>VS Code / Continue</h3>
-      <p>OpenAI tools: <code>provider: openai</code>, <code>apiBase: …/v1</code>. Claude-shaped: <code>provider: anthropic</code>, same host, model <code>noetfield-claude-compat</code>. Gemini: point at our <code>v1beta</code> generateContent path.</p>
+      <h3>Provider families (commissioning)</h3>
+      <p>Additional wire formats may be enabled per tenant during commissioning evaluation — each tested within stated scope, not as a universal three-protocol guarantee.</p>
      </article>
     </div>
   </div>
@@ -156,7 +144,7 @@
      <ul class="nf-dapi-bullets">
       <li>Email creates your tracked tenant for commissioning evaluation</li>
       <li>Generate API keys inside the signed-in workspace</li>
-      <li>Billing and top-ups remain inside the workspace when enabled</li>
+      <li>Billing and balance features appear only when the commissioning lane is enabled for your tenant</li>
      </ul>
     </div>
     <form class="nf-dapi-form" id="nfDapiKeyForm" aria-label="Create API workspace">
@@ -182,13 +170,12 @@
   <section class="nf-dapi-section" id="top-up" aria-labelledby="topup-title">
    <div class="nf-corp-wrap nf-dapi-key-grid">
     <div>
-     <p class="nf-corp-eyebrow">Billing</p>
-     <h2 id="topup-title">Billing inside your workspace</h2>
-     <p class="nf-dapi-section-lead">Stripe checkout and balance management run only after workspace registration — keeping every payment on the right tenant.</p>
+     <p class="nf-corp-eyebrow">Commissioning note</p>
+     <h2 id="topup-title">Billing is workspace-scoped during evaluation</h2>
+     <p class="nf-dapi-section-lead">This public page does not advertise production pricing, trial promotions, or paid top-ups. Signed-in workspace tenants see billing controls only when the lane is enabled for commissioning.</p>
      <ul class="nf-dapi-bullets">
-      <li>Register or sign in first</li>
-      <li>See balance and keys in the workspace</li>
-      <li>Top-up options appear when the lane is enabled for your tenant</li>
+      <li>Register or sign in for workspace access</li>
+      <li>Keys and lane status appear inside the signed-in workspace</li>
      </ul>
     </div>
     <div class="nf-dapi-form" aria-label="Open workspace for billing">

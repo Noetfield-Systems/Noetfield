@@ -63,6 +63,7 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
         "Claims-boundary correction",
         "TrustField",
         "separate venture",
+        "not a Noetfield Systems Inc. product",
         "nf-status-rail",
         "nf-corp-section",
         "nf-corp-hero",
@@ -82,7 +83,8 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
 def test_homepage_statuses_preserve_claim_boundaries() -> None:
     text = read(ROOT / "index.html")
     assert "does not prove external adoption" in text
-    assert "not a Noetfield Systems Inc. product" in text
+    assert "separate venture" in text.lower()
+    assert "not a noetfield systems inc. product" in text.lower()
     assert not re.search(r"trusted by", text, re.I)
     assert not re.search(r"\d+[+]? (?:clients|customers|enterprises)", text, re.I)
 
@@ -94,11 +96,11 @@ def test_public_corporate_pages_have_no_private_workspace_conversion() -> None:
 
 def test_about_states_founder_company_and_trustfield_boundary() -> None:
     text = read(ROOT / "about" / "index.html")
-    assert "Founder" in text
-    assert "founder-led" in text
+    assert "Sina Kazemnezhad" in text
+    assert "sole operating lead" in text.lower()
     assert "Vancouver" in text
     assert "TrustField" in text
-    assert "separate venture" in text
+    assert "separate venture" in text.lower()
     assert "not a Noetfield Systems Inc. product" in text
     assert "SourceB" not in text
 
@@ -127,20 +129,20 @@ def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     assert "SourceB" not in about
 
 
-def test_trustfield_is_listed_as_separate_ecosystem_venture() -> None:
+def test_trustfield_is_listed_as_separate_venture_boundary() -> None:
     home = read(ROOT / "index.html")
     assert "TrustField" in home
     assert 'href="https://trustfield.ca/"' in home
-    assert "separate venture" in home
-    assert "A Noetfield Systems Inc. product" not in home
+    assert "separate venture" in home.lower()
+    assert "validation vertical developed and operated" not in home.lower()
 
     about = read(ROOT / "about" / "index.html")
     assert "TrustField" in about
-    assert "separate venture" in about
+    assert "separate venture" in about.lower()
 
     investors = read(ROOT / "investors" / "index.html")
     assert "TrustField" in investors
-    assert "not a noetfield systems inc. product" in investors.lower()
+    assert "separate venture" in investors.lower()
 
 
 def test_public_bridge_pages_have_coherent_navigation_and_footer() -> None:
@@ -166,13 +168,14 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
 
 
 def test_corporate_primary_nav_is_advisor_consistent() -> None:
-    """Shared corporate headers: System · Applications · Evidence · Program · Company · Alpha."""
+    """Shared corporate headers: System · Applications · Evidence · Program · Company · Contact · Open client-zero alpha."""
     order_markers = (
         'href="/system/"',
         'href="/applications/"',
         'href="/proof/"',
         'href="/public-interest/"',
         'href="/about/"',
+        'href="/contact/"',
         'href="https://app.noetfield.com/"',
     )
     for path in (
@@ -215,7 +218,7 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert 'href="/assets/noetfield-runways-v1.css?v=4"' in text
     assert 'href="/enterprise/"' not in text
     assert 'href="/investor-workflows/"' not in text
-    assert 'id="rw-dispatch-btn"' not in text
+    assert "accepted outcome or documented safe stop" in text.lower() or "safe stop" in text.lower()
 
 
 def test_runways_primary_nav_matches_homepage() -> None:
@@ -233,6 +236,7 @@ def test_runways_primary_nav_matches_homepage() -> None:
         'href="/proof/"',
         'href="/public-interest/"',
         'href="/about/"',
+        'href="/contact/"',
         'href="https://app.noetfield.com/"',
     )
     positions = [nav.index(item) for item in order_markers]

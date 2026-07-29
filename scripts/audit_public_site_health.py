@@ -47,6 +47,8 @@ CORPORATE_HOME_REQUIRED = (
     "Inspect the evidence",
     "TrustField",
     "separate venture",
+    "not a Noetfield Systems Inc. product",
+    "Open client-zero alpha",
 )
 
 REQUIRED_SHELL_PARTIALS = (

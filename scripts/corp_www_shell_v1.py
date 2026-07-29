@@ -20,11 +20,19 @@ NAV_ITEMS = (
     ("evidence", "/proof/", "Evidence"),
     ("program", "/public-interest/", "Program"),
     ("company", "/about/", "Company"),
+    ("contact", "/contact/", "Contact"),
 )
 
 CLIENT_ZERO_URL = "https://app.noetfield.com/"
+CLIENT_ZERO_LABEL = "Open client-zero alpha"
 GITHUB_URL = "https://github.com/Noetfield-Systems/Noetfield"
 TRUSTFIELD_URL = "https://trustfield.ca/"
+TRUSTFIELD_BOUNDARY_LINE = (
+    "TrustField is a separate venture whose synthetic regulated-workflow "
+    "demonstrations provide a bounded validation context; it is not a "
+    "Noetfield Systems Inc. product or subsidiary."
+)
+TRUSTFIELD_SHORT = "separate venture"
 
 
 def corp_head(
@@ -84,7 +92,7 @@ def corp_header(active: str | None = None) -> str:
    </a>
    <nav class="nf-corp-nav" aria-label="Primary navigation">
     {links}
-    <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha</a>
+    <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">{CLIENT_ZERO_LABEL}</a>
    </nav>
   </div>
  </header>"""
@@ -98,7 +106,7 @@ def corp_footer() -> str:
     <p>Governed AI execution infrastructure.<br />Vancouver, British Columbia, Canada.</p>
    </div>
    <nav aria-label="Footer"><strong>Company</strong><a href="/investors/">Investors / Ecosystem</a><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="{GITHUB_URL}" rel="noopener noreferrer">GitHub ↗</a></nav>
-   <nav aria-label="Separate ventures"><strong>Separate ventures</strong><a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">TrustField — separate venture ↗</a></nav>
+   <nav aria-label="Separate ventures"><strong>Separate ventures</strong><a href="/applications/trustfield/">TrustField boundary</a><a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></nav>
   </div>
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
  </footer>

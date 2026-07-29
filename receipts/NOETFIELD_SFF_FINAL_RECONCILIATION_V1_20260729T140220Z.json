@@ -1,0 +1,26 @@
+{
+  "release": "NOETFIELD_SFF_FINAL_RECONCILIATION_V1",
+  "generated_at": "2026-07-29T14:02:20.308135+00:00",
+  "trustfield_boundary": "TrustField is a separate venture whose synthetic regulated-workflow demonstrations provide a bounded validation context; it is not a Noetfield Systems Inc. product or subsidiary.",
+  "budget_amounts_preserved": {
+    "base_usd": 180000,
+    "minimum_usd": 25000,
+    "ambitious_usd": 450000,
+    "maximum_usd": 750000
+  },
+  "route_audit": {
+    "routes_checked": 13,
+    "findings": [],
+    "pass": true
+  },
+  "artifacts": {
+    "SFF_Noetfield_Long_Form_For_Profit_RECONCILIATION_V1.pdf": {
+      "sha256": "c4fa6814493a19f7b2256e63b4f03972fa7a3ffba4d51073f3193e96df4824cb",
+      "path": "public-interest/artifacts/SFF_Noetfield_Long_Form_For_Profit_RECONCILIATION_V1.pdf"
+    },
+    "SFF_Noetfield_Long_Form_For_Profit_RECONCILIATION_V1.docx": {
+      "sha256": "5096f6eafcfe93ece48076e6ae36877227e7d175f13b6968f35406f59c3c6da4",
+      "path": "public-interest/artifacts/SFF_Noetfield_Long_Form_For_Profit_RECONCILIATION_V1.docx"
+    }
+  }
+}
