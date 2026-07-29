@@ -1,66 +1,38 @@
 ---
 agent_tag: nf-local-repo-agent
 agent_display: "[NF-LOCAL-REPO-AGENT]"
-authored_at: "2026-07-06"
-doc_id: gov-sandbox-ship-closeout-92
+authored_at: "2026-07-29"
+doc_id: sff-final-reconciliation-v1-closeout
 ---
 
-> **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-07-06
+> **Authored by:** [NF-LOCAL-REPO-AGENT] — 2026-07-29
 
-## What shipped (plain English)
+SFF final reconciliation is built and verified on disk in worktree `www/sff-canonical-patch-v1`. The corporate site now matches the SFF TrustField boundary: TrustField is a separate venture, not a Noetfield product. Homepage no longer carries a SourceA Ops Health ad in the generated artifact (live still had that injection until the next promote).
 
-Governance sandbox is live end-to-end: Railway hosts the Trust Ledger workspace, and www.noetfield.com/workspace proxies to it through Cloudflare Pages middleware. PR #91 added the proxy scaffold (fail-closed when off). PR #92 fixed Railway so /workspace serves the workspace UI instead of redirecting away, and turned the proxy on in config.
+**What changed**
+- Homepage ends at evidence boundary + footer; TrustField card is SEPARATE VENTURE; nav CTA is Open client-zero alpha.
+- `/about/` rebuilt: Sina Kazemnezhad as founder/sole operating lead; SourceA/Runway as execution infrastructure; no SourceB.
+- `/deterministic-api/` aligned to COMMISSIONING preview (no production/$10/top-up marketing; qualified protocol copy); still noindex.
+- `/proof/noetfield/` + JSON: SUPERSEDED · HISTORICAL ARTIFACT · NOT CURRENT COMPANY DOCUMENTATION · noindex; forward link to claims-boundary correction.
+- SFF long-form PDF/DOCX regenerated with budgets unchanged ($180k / $25k min / $450k / $750k max).
 
-Live checks passed: Railway API /health 200, Railway /workspace 200, www /workspace shows Trust Ledger Workspace + _next assets, verify-www-live-sandbox.sh PASS.
+**Verification (disk)**
+- `python3 scripts/nf_sff_final_reconciliation_v1.py` → PASS
+- `verify_canonical_claim_audit_v1.py` → PASS (13 pages)
+- `verify-static-www.sh` → PASS
+- Route audit: 13 canonical routes, 0 findings
 
-## PRs merged
+**Artifacts**
+- PDF: `public-interest/artifacts/SFF_Noetfield_Long_Form_For_Profit_RECONCILIATION_V1.pdf` sha256=c4fa6814493a19f7b2256e63b4f03972fa7a3ffba4d51073f3193e96df4824cb
+- DOCX: `public-interest/artifacts/SFF_Noetfield_Long_Form_For_Profit_RECONCILIATION_V1.docx` sha256=5096f6eafcfe93ece48076e6ae36877227e7d175f13b6968f35406f59c3c6da4
+- Receipt: `receipts/NOETFIELD_SFF_FINAL_RECONCILIATION_V1_20260729T140220Z.json`
 
-| PR | Branch | Summary |
-|----|--------|---------|
-| #90 | fix/www-tech-only | www tech lane, playground v50 restore, audit machine |
-| #91 | fix/www-gov-proxy-middleware | Pages middleware gov proxy (fail-closed off) |
-| #92 | fix/gov-sandbox-workspace | Railway /workspace fix + proxy enabled |
+**Deploy**
+- Verdict: `CANDIDATE_PENDING_FOUNDER_PROMOTION`
+- Blocker: gatekeeper SESSION_GATE_FAIL (implement gate denied despite NF_FOUNDER_IMPLEMENT=1)
+- Production SHA still: `0192bb41b0f1c2f010539447ceb19c0569742977`
+- Candidate is uncommitted on branch `www/sff-canonical-patch-v1` — commit + merge + Cloudflare promote needed for live SHA.
 
-## Follow-up PR (open next)
-
-**Branch:** `fix/gov-deploy-hardening` (from main after #92)
-
-**Why:** Deploy scripts failed on timing/URL resolution even though production was fine.
-
-**Changes:**
-- `scripts/deploy-gov-sandbox-railway.sh` — resolve URLs via `railway domain list --json` (status JSON has no URL field), retry loop, fallback to cached `data/nf-www-gov-proxy-v1.json`
-- `scripts/deploy-www-cloudflare.sh` — wait for preview `/api/health` 200 before post-deploy verify (fixes false FAIL on cold preview)
-
-**Verify after merge:**
-```bash
-bash scripts/verify-www-live-sandbox.sh
-# optional full redeploy smoke:
-bash scripts/deploy-gov-sandbox-railway.sh   # should print API + WEB URLs, no exit 2
-```
-
-## Next move options (pick one)
-
-1. **Merge deploy-hardening PR** — closes the script gaps from this batch; no user-facing change.
-2. **N-P8 sticky CTA** — portfolio pf-0074 pilot apply CTA on gate + trust-brief (plan.json done marker; ship if not live).
-3. **Apex DNS** — `noetfield.com` (non-www) still 404; separate Cloudflare redirect/DNS pass.
-4. **Factory round 16** — portfolio 260/300; status pages + registry sync already marked done — pick next pf-* from `make pick-wise`.
-
-## Live surfaces (disk)
-
+**Live surfaces (machine)**
 - product_now_line: no pending next_tasks
 - email_send_defer_line: email-defer · ON · main=5/5 · sites=RED · email=AFTER_MAIN · lift=YES
-
-## Commands for next agent
-
-```bash
-make nf-onboard
-git checkout main && git pull
-git checkout -b fix/gov-deploy-hardening   # or merge PR if already open
-bash scripts/verify-www-live-sandbox.sh
-```
-
----
-agent_tag: nf-local-repo-agent
-agent_display: "[NF-LOCAL-REPO-AGENT]"
-reporter: cursor
-reported_at: "2026-07-06T14:55:00Z"

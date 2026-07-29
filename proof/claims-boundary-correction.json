@@ -1,0 +1,41 @@
+{
+  "artifacts": {
+    "html": "/proof/claims-boundary-correction/",
+    "json": "/proof/claims-boundary-correction.json"
+  },
+  "does_not_prove": [
+    "External customer adoption",
+    "Revenue or ARR",
+    "Universal correctness",
+    "Third-party certification"
+  ],
+  "entity": "Noetfield Systems Inc.",
+  "entity_type": "claims_boundary_correction",
+  "generated_at": "2026-07-29T13:30:00Z",
+  "illustrative_receipt_schema": {
+    "fields": [
+      "receipt_id",
+      "runway",
+      "authority",
+      "verification_attempts",
+      "promotion_decision",
+      "boundary_note"
+    ],
+    "label": "SAMPLE ONLY \u2014 not a live receipt"
+  },
+  "proves": [
+    "Current claim boundaries on www.noetfield.com",
+    "Retirement of stale enterprise and three-product-line narratives",
+    "TrustField stated as a separate venture \u2014 not a Noetfield Systems Inc. product or subsidiary"
+  ],
+  "release": "NOETFIELD_SFF_FINAL_RECONCILIATION_V1",
+  "schema": "noetfield_public_evidence_bundle_v1",
+  "schema_note": "Illustrative receipt fields are labeled sample-only; not live execution receipts.",
+  "scope": "Corporate www and public narrative under Noetfield Systems Inc. control",
+  "status": "LIVE",
+  "supersedes": {
+    "label": "Parent-company self-audit (2026 Q1 narrative)",
+    "route": "/proof/noetfield/"
+  },
+  "title": "Claims-boundary correction"
+}

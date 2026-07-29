@@ -51,8 +51,8 @@
     }
   ],
   "indexable_route_count": 35,
-  "noindex_route_count": 117,
-  "route_count": 152,
+  "noindex_route_count": 118,
+  "route_count": 153,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -72,7 +72,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/about/",
-      "description": "Meet the Vancouver company building governed AI products, custom AI Motors and specialized institutional workflows.",
+      "description": "Noetfield Systems Inc., founder Sina Kazemnezhad, client-zero runtime, SourceA/Runway infrastructure, and TrustField separate-venture boundary.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -83,7 +83,7 @@
       },
       "profile": "corporate",
       "route": "/about/",
-      "title": "About Noetfield Systems Inc.",
+      "title": "About \u2014 Noetfield Systems Inc.",
       "verdict": "PASS"
     },
     {
@@ -184,7 +184,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/applications/",
-      "description": "Client-zero application, SourceA execution, TrustField boundary, and developer preview lanes.",
+      "description": "Client-zero application, SourceA execution, TrustField separate-venture boundary, and developer preview lanes.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -200,7 +200,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/applications/trustfield/",
-      "description": "TrustField corporate boundary: separate venture, not a Noetfield Systems Inc. product.",
+      "description": "TrustField is a separate venture whose synthetic regulated-workflow demonstrations provide a bounded validation context; it is not a Noetfield Systems Inc. product or subsidiary.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -211,7 +211,7 @@
       },
       "profile": "corporate",
       "route": "/applications/trustfield/",
-      "title": "TrustField \u2014 separate venture boundary \u2014 Noetfield",
+      "title": "TrustField boundary \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
@@ -1464,7 +1464,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/",
-      "description": "Noetfield builds governed execution systems for consequential AI work. Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.",
+      "description": "Noetfield Systems builds governed AI execution infrastructure. Client-zero commissioning is live; evidence is scoped and inspectable.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1475,7 +1475,7 @@
       },
       "profile": "corporate",
       "route": "/",
-      "title": "Noetfield Systems Inc. | AI Motors and Governed Execution",
+      "title": "Noetfield Systems | Governed AI Execution",
       "verdict": "PASS"
     },
     {
@@ -1560,7 +1560,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/investors/",
-      "description": "Review Noetfield products, infrastructure, current evidence boundaries and the next commissioning stage.",
+      "description": "Company thesis, current state, and funding routes \u2014 evidence-first, with explicit TrustField separate-venture boundary.",
       "image_sha256": "6a6fce45cfbec7cc22c286e7073ab95af8143826022125541831888e6c93216c",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1571,7 +1571,7 @@
       },
       "profile": "investors",
       "route": "/investors/",
-      "title": "Ecosystem & Investors \u2014 Noetfield Systems",
+      "title": "Investors / Ecosystem \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
@@ -1608,7 +1608,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/motors/",
-      "description": "What an AI Motor is, how it coordinates models, agents, tools, policy and human authority, and how it verifies, escalates, recovers and records outcomes.",
+      "description": "What an AI Motor is, how it executes authorized Action Contracts, and how an independent verifier judges outcomes outside Motor.",
       "image_sha256": "d8348d2f73a32e0140a4c7ba27778e54fbf3879f6b787bd63d32d34179107200",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1911,6 +1911,22 @@
       "verdict": "PASS"
     },
     {
+      "canonical_url": "https://www.noetfield.com/proof/claims-boundary-correction/",
+      "description": "Public correction of prior over-broad corporate claims under Noetfield Systems Inc. control.",
+      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "proof",
+      "route": "/proof/claims-boundary-correction/",
+      "title": "Claims-boundary correction \u2014 Noetfield Systems",
+      "verdict": "PASS"
+    },
+    {
       "canonical_url": "https://www.noetfield.com/proof/governed-replacement/",
       "description": "Client-Zero / Internal Demonstration: Noetfield wrapped the public Trust Ledger workspace path after failed verification, repair, independent re-check, and founder promotion.",
       "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
@@ -1928,7 +1944,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/proof/",
-      "description": "Inspect current Noetfield systems, verified states, evidence boundaries and public execution receipts.",
+      "description": "Current public evidence with scope, artifacts, and explicit boundaries.",
       "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1939,15 +1955,15 @@
       },
       "profile": "proof",
       "route": "/proof/",
-      "title": "Proof & Public Evidence \u2014 Noetfield Systems",
+      "title": "Evidence register \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
       "canonical_url": "https://www.noetfield.com/proof/noetfield/",
-      "description": "Noetfield Systems Inc. public self-audit \u2014 Case Study #1.",
+      "description": "Superseded evidence item. See claims-boundary correction.",
       "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -1955,8 +1971,8 @@
       },
       "profile": "proof",
       "route": "/proof/noetfield/",
-      "title": "Case Study #1 \u2014 Noetfield Systems Inc.",
-      "verdict": "PASS"
+      "title": "SUPERSEDED \u2014 Parent-company self-audit \u2014 Noetfield",
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/public-interest/",

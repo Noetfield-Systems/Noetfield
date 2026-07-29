@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 from corp_www_shell_v1 import (  # noqa: E402
     CLIENT_ZERO_URL,
     CORP_CSS_VER,
+    TRUSTFIELD_BOUNDARY_LINE,
     TRUSTFIELD_URL,
     corp_footer,
     corp_head,
@@ -60,7 +61,7 @@ def homepage() -> str:
     <div class="nf-principle-grid">
      <article><span class="nf-status nf-status--live">LIVE</span><h3>Noetfield runtime</h3><p>Client-zero execution application with bounded worker and project flow, build checks, revisioned artifacts, and authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></p></article>
      <article><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span><h3>SourceA / Runway</h3><p>Professional internal execution and evidence paths for governed software change and workflow commissioning.</p><p><a href="/applications/#sourcea">Applications overview</a></p></article>
-     <article><span class="nf-status nf-status--separate">SEPARATE VENTURE</span><h3>TrustField</h3><p>Synthetic validation workflows in a separate regulated venture — not a Noetfield Systems Inc. product.</p><p><a href="/applications/trustfield/">Boundary page</a> · <a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">TrustField ↗</a></p></article>
+     <article><span class="nf-status nf-status--demonstrated">SEPARATE VENTURE</span><h3>TrustField</h3><p>Synthetic regulated-workflow demonstrations within TrustField&apos;s own scope — a separate venture, not a Noetfield product or subsidiary.</p><p><a href="/applications/trustfield/">Boundary page</a> · <a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></p></article>
     </div>
    </div>
   </section>
@@ -91,15 +92,16 @@ def homepage() -> str:
     <div class="nf-section-head"><div><p class="nf-corp-eyebrow">Current evidence</p><h2 id="evidence-title">Named proof within stated scope</h2></div><p><a href="/proof/">Full evidence register →</a></p></div>
     <div class="nf-proof-grid">
      <article class="nf-proof-card"><p class="nf-proof-card__status"><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span></p><h3>Governed replacement</h3><p>Internal client-zero workflow with failure capture, bounded repair, and verifier judgment.</p><p><a href="/proof/governed-replacement/">Case study</a></p></article>
-     <article class="nf-proof-card"><p class="nf-proof-card__status"><span class="nf-status nf-status--live">LIVE</span></p><h3>Claims-boundary correction</h3><p>Public correction of prior over-broad corporate claims; current boundaries on this site.</p><p><a href="/proof/">Evidence register</a></p></article>
+     <article class="nf-proof-card"><p class="nf-proof-card__status"><span class="nf-status nf-status--live">LIVE</span></p><h3>Claims-boundary correction</h3><p>Public correction of prior over-broad corporate claims; current boundaries on this site.</p><p><a href="/proof/claims-boundary-correction/">Case study</a> · <a href="/proof/claims-boundary-correction.json">JSON</a></p></article>
     </div>
+    <p class="nf-corp-prose nf-illustrative-receipt-note"><strong>Illustrative receipt schemas</strong> on this site label sample fields only. They are not live execution receipts and do not assert PASS status, SHAs, or certification.</p>
    </div>
   </section>
 
   <section class="nf-corp-section nf-inner-band" aria-labelledby="program-title">
    <div class="nf-corp-wrap nf-corp-split">
     <div><p class="nf-corp-eyebrow">Twelve-month public-interest program</p><h2 id="program-title">Attempt evidence, acceptance safety, explicit authority</h2></div>
-    <div class="nf-corp-prose"><p>Provider-attempt ledger (commissioning) · acceptance safety · explicit authority · TrustField validation · independent review · selected public goods.</p><p>No grant-award implication. <a href="/public-interest/">Program page →</a></p></div>
+    <div class="nf-corp-prose"><p>Provider-attempt ledger (commissioning) · acceptance safety · explicit authority · separate-venture TrustField validation context · independent review · selected public goods.</p><p>No grant-award implication. <a href="/public-interest/">Program page →</a></p></div>
    </div>
   </section>
 
@@ -108,7 +110,7 @@ def homepage() -> str:
     <p class="nf-corp-eyebrow">Explicit evidence boundary</p>
     <h2 id="boundary-title">What this site does not claim</h2>
     <p>Existing evidence proves bounded infrastructure and execution properties within named scopes. It does not prove external adoption, revenue, universal correctness, certification, or complete semantic acceptance.</p>
-    <p>TrustField is a separate venture in the ecosystem — not a Noetfield Systems Inc. product or subsidiary.</p>
+    <p>{TRUSTFIELD_BOUNDARY_LINE}</p>
    </div>
   </section>
 """
@@ -161,14 +163,14 @@ def applications_page() -> str:
   <section class="nf-inner-hero" aria-labelledby="apps-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Applications</p><h1 id="apps-title">Where the infrastructure meets work</h1></div>
-    <div><p class="nf-corp-lead">Client-zero commissioning, internal execution surfaces, separate ventures, and developer preview lanes — each with explicit status and boundary.</p></div>
+    <div><p class="nf-corp-lead">Client-zero commissioning, internal execution surfaces, validation products, and developer preview lanes — each with explicit status and boundary.</p></div>
    </div>
   </section>
   <section class="nf-corp-section" aria-labelledby="apps-grid-title">
    <div class="nf-corp-wrap nf-principle-grid">
     <article id="client-zero"><span class="nf-status nf-status--live">LIVE</span><h3>Noetfield client-zero application</h3><p>Bounded worker and project flow, build/integrity checks, revisioned artifacts, authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></p></article>
     <article id="sourcea"><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span><h3>SourceA / Runway execution surface</h3><p>Professional internal execution and evidence paths for governed software change.</p><p><a href="/runways/">Runways</a></p></article>
-    <article><span class="nf-status nf-status--separate">SEPARATE VENTURE</span><h3>TrustField</h3><p>Separate regulated venture — not a Noetfield Systems Inc. product.</p><p><a href="/applications/trustfield/">Boundary page →</a></p></article>
+    <article><span class="nf-status nf-status--demonstrated">SEPARATE VENTURE</span><h3>TrustField boundary</h3><p>Synthetic regulated-workflow demonstrations — separate venture, not a Noetfield Systems Inc. product.</p><p><a href="/applications/trustfield/">Boundary page →</a></p></article>
     <article><span class="nf-status nf-status--commissioning">COMMISSIONING</span><h3>Developer API</h3><p>Developer preview / commissioning lane — not a production corporate product surface.</p><p><a href="/deterministic-api/">Developer preview</a></p></article>
    </div>
   </section>
@@ -185,23 +187,23 @@ def trustfield_app_page() -> str:
     body = f"""
   <section class="nf-inner-hero" aria-labelledby="tf-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
-    <div><p class="nf-corp-kicker">Separate venture</p><h1 id="tf-title">TrustField — corporate boundary</h1></div>
-    <div><p class="nf-corp-lead">TrustField is a separate venture in the Noetfield ecosystem. It is not a Noetfield Systems Inc. product, subsidiary, or regulated offering of the parent company.</p></div>
+    <div><p class="nf-corp-kicker">Separate venture</p><h1 id="tf-title">TrustField boundary</h1></div>
+    <div><p class="nf-corp-lead">{TRUSTFIELD_BOUNDARY_LINE}</p></div>
    </div>
   </section>
   <section class="nf-corp-section nf-corp-prose nf-corp-wrap">
    <h2>What it is</h2>
-   <p>Synthetic validation workflows for regulated operations contexts — demonstrated as a separate venture with its own site and boundary.</p>
+   <p>TrustField is a separate venture operating synthetic regulated-workflow demonstrations for case intake, analyst review, human decision gates, and evidence closure within TrustField&apos;s own scope.</p>
    <h2>What it demonstrates</h2>
-   <p>Workflow setup, operational checks, and evidence boundaries within TrustField's own scope.</p>
+   <p>Human decision preservation, evidence completeness, and exception routing under TrustField&apos;s stated boundary — not under Noetfield Systems Inc. product ownership.</p>
    <h2>What it does not demonstrate</h2>
-   <p>Noetfield Systems Inc. certification, MSB licensing, external customer adoption, or parent-company revenue.</p>
+   <p>Noetfield adoption, MSB licensing, external customer scale, parent-company certification, custody, settlement, or auto-filing.</p>
    <p><a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">Open TrustField interactive workflow ↗</a></p>
   </section>
 """
     return corp_page_open(
-        "TrustField — separate venture boundary",
-        "TrustField corporate boundary: separate venture, not a Noetfield Systems Inc. product.",
+        "TrustField boundary — Noetfield Systems",
+        TRUSTFIELD_BOUNDARY_LINE,
         "https://www.noetfield.com/applications/trustfield/",
         "applications",
     ) + body + corp_page_close()
@@ -224,7 +226,7 @@ def public_interest_page() -> str:
    <ul>
     <li>Complete provider-attempt ledger (commissioning)</li>
     <li>Acceptance safety and semantic acceptance improvements</li>
-    <li>TrustField validation within its separate venture scope</li>
+    <li>Evaluate authority and evidence patterns against synthetic TrustField workflows within the separate venture&apos;s stated boundary</li>
     <li>Independent review and selected public goods outputs</li>
    </ul>
    <h2>Evidence boundaries</h2>
@@ -268,8 +270,8 @@ def proof_page() -> str:
       <dt>Source</dt><dd>Domain canonicalization release NOETFIELD_DOMAIN_CANONICAL_V2</dd>
       <dt>Proves</dt><dd>Current claim boundaries, retirement of stale enterprise and pricing narratives, and honest status labeling.</dd>
       <dt>Does not prove</dt><dd>External adoption, ARR, SOC 2, or production deployments at third parties.</dd>
-      <dt>Artifacts</dt><dd><a href="/proof/noetfield/">Summary</a> · <a href="/proof/noetfield.json">JSON</a></dd>
-      <dt>Supersedes</dt><dd>Parent-company self-audit (2026 Q1 narrative)</dd>
+      <dt>Artifacts</dt><dd><a href="/proof/claims-boundary-correction/">Case study</a> · <a href="/proof/claims-boundary-correction.json">JSON</a></dd>
+      <dt>Supersedes</dt><dd><a href="/proof/noetfield/">Parent-company self-audit (superseded)</a></dd>
       <dt>Superseded by</dt><dd>—</dd>
      </dl>
     </article>
@@ -286,7 +288,7 @@ def proof_page() -> str:
 
 
 def about_page() -> str:
-    body = """
+    body = f"""
   <section class="nf-inner-hero" aria-labelledby="about-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Company</p><h1 id="about-title">Noetfield Systems Inc.</h1></div>
@@ -294,15 +296,21 @@ def about_page() -> str:
    </div>
   </section>
   <section class="nf-corp-section nf-corp-wrap nf-corp-prose">
-   <h2>Founder</h2><p>Founder-led company built from the operating problem outward — product strategy, systems engineering, governance design, and applied AI in one team.</p>
-   <h2>Current team</h2><p>Small founder-led team in Vancouver, British Columbia. Not a generic agency or certifier.</p>
+   <h2>Founder and operating lead</h2>
+   <p><strong>Sina Kazemnezhad</strong> is the founder and current sole operating lead of Noetfield Systems Inc., accountable for product strategy, systems engineering, governance design, and applied AI execution.</p>
+   <h2>Current operating surfaces</h2>
+   <ul>
+    <li><strong>Noetfield client-zero runtime</strong> — live bounded execution application. <a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></li>
+    <li><strong>SourceA / Runway</strong> — Noetfield execution and evidence infrastructure for governed software change and workflow commissioning (demonstrated).</li>
+   </ul>
    <h2>Corporate boundaries</h2>
    <ul>
     <li><strong>Noetfield Systems Inc.</strong> owns Noetfield infrastructure and this corporate site.</li>
-    <li><strong>SourceA</strong> is a Noetfield professional/internal execution surface (demonstrated).</li>
-    <li><strong>TrustField</strong> is a separate venture — not a Noetfield Systems Inc. product or subsidiary.</li>
+    <li><strong>TrustField</strong> — {TRUSTFIELD_BOUNDARY_LINE}</li>
    </ul>
-   <p><a href="/applications/trustfield/">TrustField boundary</a> · <a href="/investors/">Investors / ecosystem</a> (footer route)</p>
+   <h2>Current evidence boundary</h2>
+   <p>Named proof on this site is scoped and inspectable. It does not prove external adoption, revenue, universal correctness, or certification.</p>
+   <p><a href="/proof/">Evidence register</a> · <a href="/proof/claims-boundary-correction/">Claims-boundary correction</a> · <a href="/applications/trustfield/">TrustField boundary</a> · <a href="/investors/">Investors / ecosystem</a></p>
   </section>
 """
     return corp_page_open(
@@ -314,7 +322,7 @@ def about_page() -> str:
 
 
 def investors_page() -> str:
-    body = """
+    body = f"""
   <section class="nf-inner-hero" aria-labelledby="inv-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Investors / ecosystem</p><h1 id="inv-title">Company thesis and current state</h1></div>
@@ -327,7 +335,7 @@ def investors_page() -> str:
     <article><h3>Current state</h3><p>Live client-zero application · demonstrated SourceA/Runway paths · commissioning provider-attempt ledger and semantic acceptance.</p></article>
     <article><h3>Funding and support</h3><p><a href="/contact/?topic=program-funding">Program / funding</a> · <a href="/contact/?topic=technical-collaboration">Technical collaboration</a></p></article>
    </div>
-   <p class="nf-corp-prose">No stale product inventory. TrustField is a separate venture — not a Noetfield Systems Inc. product or subsidiary. <a href="/proof/">Evidence register</a> · <a href="/proof/noetfield/">Claims boundary summary</a></p>
+   <p class="nf-corp-prose">No stale product inventory. {TRUSTFIELD_BOUNDARY_LINE} <a href="/proof/">Evidence register</a> · <a href="/proof/claims-boundary-correction/">Claims-boundary correction</a></p>
   </section>
 """
     return corp_page_open(
@@ -390,14 +398,14 @@ def runways_page() -> str:
   <section class="nf-inner-hero" aria-labelledby="rw-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Runways</p><h1 id="rw-title">Governed qualification paths</h1></div>
-    <div><p class="nf-corp-lead">Three public runways carry a human goal to an accepted output — or a documented safe stop — with evidence you can reopen.</p></div>
+    <div><p class="nf-corp-lead">Three public runways carry a human goal to an <strong>accepted outcome or documented safe stop</strong>. Deterministic checks apply where specified in the runway recipe. Metering remains in commissioning — production billing totals are not claimed on this page.</p></div>
    </div>
   </section>
   <section class="nf-corp-section" aria-labelledby="featured-title">
    <div class="nf-corp-wrap nf-principle-grid">
     <div class="nf-section-head nf-section-head--full"><h2 id="featured-title">Public runways</h2></div>
-    <article><h3>Governed Software Change</h3><p>Versioned path for software change with authority, checks, and evidence.</p><p><a href="/runways/">Overview</a></p></article>
-    <article><h3>Decision Brief</h3><p>Structured decision workflow with stated acceptance criteria.</p><p><a href="/runways/decision-brief/">Decision Brief runway</a></p></article>
+    <article><h3>Governed Software Change</h3><p>Versioned path for software change with authority, deterministic checks where specified, and evidence.</p><p><a href="/proof/governed-replacement/">Governed replacement proof</a></p></article>
+    <article><h3>Decision Brief</h3><p>Structured decision workflow with stated acceptance criteria — accepted outcome or safe stop.</p><p><a href="/runways/decision-brief/">Decision Brief runway</a></p></article>
     <article><h3>Institutional Workflow Commissioning</h3><p>Bounded commissioning for consequential institutional workflows.</p><p><a href="/contact/?topic=technical-collaboration">Contact operations</a></p></article>
    </div>
    <p class="nf-corp-prose"><a href="/system/">System overview</a> · <a href="/motors/">AI Motors technical page</a></p>

@@ -29,7 +29,11 @@
       "forbidden_text": [
         "Invest in Noetfield",
         "Private Investor Materials",
-        "SourceB"
+        "SourceB",
+        "validation vertical developed and operated",
+        "three product lines",
+        "Ops Health Audit",
+        "nf-sourcea-xlink"
       ],
       "forbidden_link_prefixes": [
         "/invest/",
@@ -75,7 +79,8 @@
       ],
       "required_links": [
         "/proof/governed-replacement/",
-        "/proof/governed-replacement.json"
+        "/proof/governed-replacement.json",
+        "/proof/claims-boundary-correction/"
       ],
       "forbidden_link_prefixes": [
         "/invest/",
@@ -87,13 +92,15 @@
       "route": "/about/",
       "required_text": [
         "separate venture",
-        "not a Noetfield Systems Inc. product"
+        "Sina Kazemnezhad",
+        "Noetfield Systems Inc."
       ],
       "required_links": [
         "/proof/"
       ],
       "forbidden_text": [
-        "SourceB"
+        "SourceB",
+        "validation vertical developed and operated"
       ],
       "forbidden_link_prefixes": [
         "/invest/",

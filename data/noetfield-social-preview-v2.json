@@ -24,9 +24,9 @@
       "filename": "noetfield-motors-v2.png",
       "eyebrow": "NOETFIELD \u00b7 CUSTOM SYSTEMS",
       "headline": "Custom AI Motors",
-      "supporting": "Systems that turn intent, policy, tools and authority into coordinated execution.",
+      "supporting": "Deterministic execution layer for authorized Action Contracts under explicit control-plane authority.",
       "footer": "Act \u00b7 Verify \u00b7 Escalate \u00b7 Recover",
-      "alt": "Noetfield Custom AI Motors \u2014 systems that turn intent, policy, tools and authority into coordinated execution."
+      "alt": "Noetfield Custom AI Motors \u2014 deterministic execution layer with independent verifier judgment."
     },
     "investors": {
       "filename": "noetfield-investors-v2.png",
@@ -56,6 +56,11 @@
   "route_profiles": {
     "/": "corporate",
     "/about/": "corporate",
+    "/system/": "corporate",
+    "/applications/": "corporate",
+    "/applications/trustfield/": "corporate",
+    "/public-interest/": "corporate",
+    "/contact/": "corporate",
     "/enterprise/": "enterprise",
     "/enterprise/application-factory/": "enterprise",
     "/frontier-systems/": "frontier",
@@ -123,12 +128,12 @@
   ],
   "metadata_overrides": {
     "/": {
-      "title": "Noetfield Systems Inc. | AI Motors and Governed Execution",
-      "description": "Noetfield builds governed execution systems for consequential AI work. Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts."
+      "title": "Noetfield Systems | Governed AI Execution",
+      "description": "Noetfield Systems builds governed AI execution infrastructure. Client-zero commissioning is live; evidence is scoped and inspectable."
     },
     "/about/": {
-      "title": "About Noetfield Systems Inc.",
-      "description": "Meet the Vancouver company building governed AI products, custom AI Motors and specialized institutional workflows."
+      "title": "About — Noetfield Systems Inc.",
+      "description": "Noetfield Systems Inc., founder Sina Kazemnezhad, client-zero runtime, SourceA/Runway infrastructure, and TrustField separate-venture boundary."
     },
     "/enterprise/": {
       "title": "Legacy commercial lane \u2014 Enterprise \u2014 Noetfield",
@@ -139,20 +144,20 @@
       "description": "Build, replace and promote institutional software through governed production, separate verification and evidence."
     },
     "/motors/": {
-      "title": "AI Motors for Governed Execution \u2014 Noetfield Systems",
-      "description": "What an AI Motor is, how it coordinates models, agents, tools, policy and human authority, and how it verifies, escalates, recovers and records outcomes."
+      "title": "AI Motors for Governed Execution — Noetfield Systems",
+      "description": "What an AI Motor is, how it executes authorized Action Contracts, and how an independent verifier judges outcomes outside Motor."
     },
     "/investors/": {
-      "title": "Ecosystem & Investors \u2014 Noetfield Systems",
-      "description": "Review Noetfield products, infrastructure, current evidence boundaries and the next commissioning stage."
+      "title": "Investors / Ecosystem \u2014 Noetfield Systems",
+      "description": "Company thesis, current state, and funding routes \u2014 evidence-first, with explicit TrustField separate-venture boundary."
     },
     "/invest/": {
       "title": "Private Investor Materials \u2014 Noetfield Systems Inc.",
       "description": "Access-controlled investor materials for verified parties. This route is not a public securities offering or solicitation."
     },
     "/proof/": {
-      "title": "Proof & Public Evidence \u2014 Noetfield Systems",
-      "description": "Inspect current Noetfield systems, verified states, evidence boundaries and public execution receipts."
+      "title": "Evidence register \u2014 Noetfield Systems",
+      "description": "Current public evidence with scope, artifacts, and explicit boundaries."
     },
     "/frontier-systems/": {
       "title": "Frontier Systems \u2014 Noetfield Systems",
@@ -197,11 +202,36 @@
     "/investor-workflows/": {
       "title": "Specialized lane \u2014 Investor Workflows \u2014 Noetfield",
       "description": "Specialized investor-workflow product lane \u2014 evidence-based diligence workflows. Not the primary company definition. See AI Motors \u00b7 Runways \u00b7 Proof."
+    },
+    "/system/": {
+      "title": "System \u2014 Noetfield Systems",
+      "description": "Architecture overview for governed AI execution: harness, control plane, Motors, Runways, and evidence."
+    },
+    "/applications/": {
+      "title": "Applications \u2014 Noetfield Systems",
+      "description": "Client-zero application, SourceA execution, TrustField separate-venture boundary, and developer preview lanes."
+    },
+    "/applications/trustfield/": {
+      "title": "TrustField boundary \u2014 Noetfield Systems",
+      "description": "TrustField is a separate venture whose synthetic regulated-workflow demonstrations provide a bounded validation context; it is not a Noetfield Systems Inc. product or subsidiary."
+    },
+    "/public-interest/": {
+      "title": "Public-interest program \u2014 Noetfield Systems",
+      "description": "Twelve-month program for attempt evidence, acceptance safety, and explicit authority."
+    },
+    "/contact/": {
+      "title": "Contact \u2014 Noetfield Systems",
+      "description": "Program funding, technical collaboration, and security/privacy contact."
     }
   },
   "source_sync_routes": [
     "/",
     "/about/",
+    "/system/",
+    "/applications/",
+    "/applications/trustfield/",
+    "/public-interest/",
+    "/contact/",
     "/enterprise/",
     "/enterprise/application-factory/",
     "/frontier-systems/",

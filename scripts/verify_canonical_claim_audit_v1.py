@@ -36,22 +36,33 @@ FORBIDDEN_PATTERNS = [
     (r"complete retry count", "complete retry count"),
     (r"self-repair across all jobs", "self-repair across all jobs"),
     (r"all outputs verified", "all outputs verified"),
-    (r"TrustField.{0,40}(?:product|subsidiary) of Noetfield Systems", "TrustField as Noetfield product/subsidiary"),
-    (r"SourceB.{0,20}canonical", "SourceB canonical line"),
     (r"SourceB\.ca", "SourceB catalogue reference"),
     (r"site rebuild in progress", "stale rebuild copy"),
     (r"Copilot Governance Pack", "legacy Copilot offer"),
     (r"Trust Brief", "legacy Trust Brief offer"),
+    (r"three product lines", "stale three product lines narrative"),
+    (r"validation vertical developed and operated by Noetfield", "stale TrustField product framing"),
+    (r"not a separate legal entity", "stale TrustField legal-entity product copy"),
+    (r"LIVE PRODUCT", "stale LIVE PRODUCT TrustField label"),
+    (r"Ops Health Audit", "SourceA Ops Health Audit promotion"),
+    (r"nf-sourcea-xlink", "SourceA Ops Health Audit homepage injection"),
+    (r"Deterministically verified", "unscoped deterministic verification claim"),
+    (r"Metered end to end", "unscoped metering claim"),
+    (r"fully metered", "unscoped fully metered claim"),
 ]
 
 ALLOWLIST_FILE_SNIPPETS = (
     "does not prove",
     "does not demonstrate",
     "not established",
-    "not a Noetfield Systems Inc. product",
-    "separate venture",
     "commissioning",
     "NOT YET ESTABLISHED",
+    "SUPERSEDED",
+    "sample-only",
+    "SAMPLE ONLY",
+    "Separate ventures",
+    "separate venture",
+    "not a Noetfield Systems Inc. product",
 )
 
 
@@ -94,15 +105,11 @@ def audit_file(path: Path) -> list[str]:
     errors: list[str] = []
     for pattern, label in FORBIDDEN_PATTERNS:
         if re.search(pattern, text, flags=re.I):
-            if label.startswith("TrustField") and "separate venture" in lower:
-                continue
             if label == "certified" and "not claim" in lower:
                 continue
             errors.append(f"{path.relative_to(ROOT)}: forbidden phrase [{label}]")
-    if "sourceb" in lower and "sourcea" not in lower[:200]:
-        if "sourceb" in lower and not any(x in lower for x in ("removed", "not in the")):
-            if re.search(r"sourceb", lower):
-                errors.append(f"{path.relative_to(ROOT)}: SourceB reference in canonical narrative")
+    if "sourceb" in lower:
+        errors.append(f"{path.relative_to(ROOT)}: SourceB reference in canonical narrative")
     return errors
 
 

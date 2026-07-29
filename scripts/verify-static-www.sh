@@ -50,6 +50,8 @@ check_file "protected corporate homepage" index.html \
   'Capable AI is not the same as accountable execution.' \
   'Governed replacement' 'Claims-boundary correction' \
   'TrustField' 'href="https://trustfield.ca/"' 'separate venture' \
+  'not a Noetfield Systems Inc. product' \
+  'href="/contact/"' 'Open client-zero alpha' \
   'See what is live' 'Inspect the evidence' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
   'nf-corp-section' 'nf-corp-hero' \
@@ -57,9 +59,12 @@ check_file "protected corporate homepage" index.html \
   'href="/system/"' 'href="/applications/"' 'href="/about/"' 'href="/proof/"' \
   'href="/public-interest/"' \
   '/assets/noetfield-home-v2.css'
+check_absent "protected homepage has no stale TrustField product framing" index.html \
+  'validation vertical' 'developed and operated by Noetfield Systems Inc.' 'LIVE PRODUCT' 'SourceB' \
+  'nf-sourcea-xlink' 'Ops Health Audit' 'Also from Noetfield Systems'
 check_absent "protected homepage has no private or unsupported conversion" index.html \
   'nfLiveProofHero' 'nfInvestorForm' 'href="/workspace/' 'href="/invest/"' 'Invest in Noetfield' \
-  'SourceB' 'Trust Brief' 'Copilot Governance Pack'
+  'Trust Brief' 'Copilot Governance Pack'
 
 check_file "protected ecosystem and investor surface" investors/index.html \
   '<title>Investors / Ecosystem — Noetfield Systems</title>' \
@@ -67,10 +72,11 @@ check_file "protected ecosystem and investor surface" investors/index.html \
   'Company thesis and current state' \
   'external customers and revenue are not established' \
   'TrustField' 'separate venture' 'not a Noetfield Systems Inc. product' \
-  'href="/contact/?topic=program-funding"' 'href="/proof/"'
+  'href="/contact/?topic=program-funding"' 'href="/proof/"' \
+  'href="/proof/claims-boundary-correction/"'
 check_absent "protected investors hub has no embedded intake" investors/index.html \
   'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'href="/workspace/' \
-  'SourceB'
+  'SourceB' 'validation vertical developed and operated'
 
 check_file "protected proof truth boundaries" proof/index.html \
   '<title>Evidence register — Noetfield Systems</title>' \
@@ -78,7 +84,8 @@ check_file "protected proof truth boundaries" proof/index.html \
   '<h1 id="proof-title">Evidence register</h1>' \
   'Governed replacement demonstration' \
   'Claims-boundary correction' \
-  'Does not prove' 'Parent-company self-audit' \
+  'href="/proof/claims-boundary-correction/"' \
+  'Does not prove' 'Supersedes' \
   'nf-corp-header' 'nf-corp-footer' 'nf-evidence-register'
 
 check_file "protected enterprise commercial surface" enterprise/index.html \
@@ -153,18 +160,21 @@ check_file "frontier prototype uses scoped enquiry" frontier-systems/index.html 
 check_absent "recovered frontier page has no workspace conversion" frontier-systems/index.html \
   'href="/workspace/'
 
-check_file "about corporate positioning and TrustField product boundary" about/index.html \
-  'Noetfield Systems Inc.' 'Founder' 'Corporate boundaries' \
-  'SourceA' 'professional/internal execution surface' \
+check_file "about corporate positioning and TrustField boundary" about/index.html \
+  'Noetfield Systems Inc.' 'Sina Kazemnezhad' 'Corporate boundaries' \
+  'SourceA' 'client-zero' \
   'TrustField' 'separate venture' 'href="https://trustfield.ca/"' \
-  'not a Noetfield Systems Inc. product or subsidiary'
-check_absent "about has no SourceB catalogue" about/index.html 'SourceB'
-
-# TrustField is a separate venture — named on homepage ecosystem, not as NSI product.
-check_file "homepage TrustField vertical" index.html \
-  'TrustField' 'href="https://trustfield.ca/"' \
-  'separate venture' \
   'not a Noetfield Systems Inc. product'
+check_absent "about has no SourceB catalogue" about/index.html 'SourceB'
+check_absent "about has no stale product TrustField copy" about/index.html \
+  'validation vertical developed and operated' 'LIVE PRODUCT'
+
+# TrustField is a separate venture on canonical pages.
+check_file "homepage TrustField boundary" index.html \
+  'TrustField' 'href="https://trustfield.ca/"' \
+  'separate venture'
+check_absent "homepage has no TrustField product copy" index.html \
+  'validation vertical developed and operated' 'LIVE PRODUCT'
 
 # Homepage IA compression. The v2 homepage carries 11 top-level sections by
 # design: hero, problem, comparison, architecture, evidence, runways,
