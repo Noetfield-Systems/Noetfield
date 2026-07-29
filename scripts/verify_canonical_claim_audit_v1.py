@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,12 +55,36 @@ ALLOWLIST_FILE_SNIPPETS = (
 )
 
 
+class _VisibleTextParser(HTMLParser):
+    """Extract visible text while skipping script/style and hidden options."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._pieces: list[str] = []
+        self._skip_depth = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        lowered = tag.lower()
+        if lowered in {"script", "style"}:
+            self._skip_depth += 1
+            return
+        if lowered == "option" and any((name or "").lower() == "hidden" for name, _ in attrs):
+            self._skip_depth += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if self._skip_depth and tag.lower() in {"script", "style", "option"}:
+            self._skip_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self._skip_depth == 0 and data.strip():
+            self._pieces.append(data)
+
+
 def visible_text(html: str) -> str:
-    html = re.sub(r"<option\b[^>]*\bhidden\b[^>]*>[\s\S]*?</option\s*>", " ", html, flags=re.I)
-    text = re.sub(r"<script\b[^>]*>[\s\S]*?</script\s*>", " ", html, flags=re.I)
-    text = re.sub(r"<style\b[^>]*>[\s\S]*?</style\s*>", " ", text, flags=re.I)
-    text = re.sub(r"<[^>]+>", " ", text)
-    return re.sub(r"\s+", " ", text)
+    parser = _VisibleTextParser()
+    parser.feed(html)
+    parser.close()
+    return re.sub(r"\s+", " ", " ".join(parser._pieces))
 
 
 def audit_file(path: Path) -> list[str]:
