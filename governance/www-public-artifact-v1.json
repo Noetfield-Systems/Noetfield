@@ -8,7 +8,11 @@
     "openapi.json",
     "proof/governed-replacement.json",
     "proof/noetfield.json",
-    "research-packs/catalog.json"
+    "research-packs/catalog.json",
+    "version.json"
+  ],
+  "build_generated_static_files": [
+    "version.json"
   ],
   "static_files": [
     "404.html",
@@ -250,6 +254,7 @@
     "trust-ledger/sample-report/samples/tle-rejected.yaml",
     "trust-ledger/verify/index.html",
     "trust/index.html",
+    "version.json",
     "work-with-us/index.html"
   ],
   "pages_function_files": [

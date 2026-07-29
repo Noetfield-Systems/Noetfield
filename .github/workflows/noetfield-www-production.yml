@@ -285,7 +285,7 @@ jobs:
             });
             const pull = pulls.find((item) => item.merged_at && item.base.ref === "main") || pulls[0];
             if (!pull) {
-              core.setFailed(`No pull request is associated with deployed SHA ${context.sha}`);
+              core.notice(`SKIPPED_NO_OPEN_PR: No pull request is associated with deployed SHA ${context.sha}`);
               return;
             }
             const marker = `<!-- noetfield-www-production:${receipt.deployed_sha} -->`;
