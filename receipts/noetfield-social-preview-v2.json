@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 33,
-  "noindex_route_count": 115,
-  "route_count": 148,
+  "indexable_route_count": 35,
+  "noindex_route_count": 117,
+  "route_count": 152,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -183,6 +183,38 @@
       "verdict": "NOINDEX_DOCUMENTED"
     },
     {
+      "canonical_url": "https://www.noetfield.com/applications/",
+      "description": "Client-zero application, SourceA execution, TrustField boundary, and developer preview lanes.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/applications/",
+      "title": "Applications \u2014 Noetfield Systems",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/applications/trustfield/",
+      "description": "TrustField corporate boundary: separate venture, not a Noetfield Systems Inc. product.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/applications/trustfield/",
+      "title": "TrustField \u2014 separate venture boundary \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
       "canonical_url": "https://www.noetfield.com/auth/callback/",
       "description": "Explore Callback from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
@@ -296,7 +328,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/contact/",
-      "description": "Bring one consequential workflow \u2014 async intake for governed agent infrastructure.",
+      "description": "Program funding, technical collaboration, and security/privacy contact.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -650,8 +682,8 @@
       "canonical_url": "https://www.noetfield.com/deterministic-api/",
       "description": "Specialized engine-endpoint lane. Schema-valid API surface \u2014 not the primary company definition. See AI Motors for the company narrative.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -660,7 +692,7 @@
       "profile": "corporate",
       "route": "/deterministic-api/",
       "title": "Specialized lane \u2014 Deterministic API \u2014 Noetfield",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/deterministic-api/signin/",
@@ -810,8 +842,8 @@
       "canonical_url": "https://www.noetfield.com/faq/",
       "description": "Frequently asked questions about Noetfield AI Governance & Evidence for Microsoft 365 Copilot.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "indexable",
-      "noindex_reason": null,
+      "indexability": "noindex",
+      "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -820,7 +852,7 @@
       "profile": "corporate",
       "route": "/faq/",
       "title": "Noetfield \u2014 FAQ",
-      "verdict": "PASS"
+      "verdict": "NOINDEX_DOCUMENTED"
     },
     {
       "canonical_url": "https://www.noetfield.com/federal/",
@@ -1927,6 +1959,22 @@
       "verdict": "PASS"
     },
     {
+      "canonical_url": "https://www.noetfield.com/public-interest/",
+      "description": "Twelve-month program for attempt evidence, acceptance safety, and explicit authority.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/public-interest/",
+      "title": "Public-interest program \u2014 Noetfield Systems",
+      "verdict": "PASS"
+    },
+    {
       "canonical_url": "https://www.noetfield.com/research-packs/404.html",
       "description": "Explore 404.html from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
@@ -2180,6 +2228,22 @@
       "profile": "proof",
       "route": "/status/",
       "title": "Noetfield \u2014 Status",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/system/",
+      "description": "Architecture overview for governed AI execution: harness, control plane, Motors, Runways, and evidence.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/system/",
+      "title": "System \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
