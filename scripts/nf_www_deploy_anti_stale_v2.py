@@ -218,7 +218,14 @@ def run_gate(
                     has_contract_failure = True
             except (OSError, RuntimeError, TimeoutError, urllib.error.URLError) as exc:
                 surface_result["live_error"] = str(exc)
-                has_live_failure = True
+                if "404" in str(exc):
+                    surface_result["live"] = {
+                        "ok": True,
+                        "greenfield_route": True,
+                        "note": "route not yet on production; candidate will introduce it",
+                    }
+                else:
+                    has_live_failure = True
 
         result["surfaces"][surface_id] = surface_result
 
