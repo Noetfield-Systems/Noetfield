@@ -80,7 +80,7 @@ ROUTE_SWEEP = (
 )
 
 INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/noetfield/", "/roadmap/", "/invest/")
-INVESTOR_CONTACT_TOPICS = ("incubator-ecosystem", "operating-partner", "pilot-client")
+INVESTOR_CONTACT_TOPICS = ("incubator-ecosystem", "operating-partner", "commission-workflow")
 INVESTOR_DISCLOSURES = (
     "not a public securities offering or solicitation",
     "private materials remain access-controlled",

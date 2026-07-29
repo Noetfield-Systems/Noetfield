@@ -10,7 +10,8 @@ CORP_FONT = (
 )
 INTAKE_SCRIPTS = (
     ' <script src="/assets/noetfield-intake-core.js?v=42" defer></script>\n'
-    ' <script src="/assets/noetfield-forms.js?v=42" defer></script>'
+    ' <script src="/assets/noetfield-forms.js?v=42" defer></script>\n'
+    ' <script src="/assets/noetfield-shell.js?v=42" defer></script>'
 )
 
 NAV_ITEMS = (
