@@ -48,14 +48,14 @@ CLAIMS_HTML = """<!DOCTYPE html>
     <h2>What changed</h2>
     <ul>
      <li>Retired stale three-product-line and /enterprise-as-current narratives from the public index.</li>
-     <li>TrustField is stated as a separate venture — not a Noetfield Systems Inc. product or subsidiary.</li>
+     <li>TrustField is stated as a Noetfield Systems Inc. product with a bounded validation scope.</li>
      <li>SourceB removed from canonical corporate pages; portfolio references narrowed to stated scopes.</li>
      <li>Prior <code>/proof/noetfield/</code> self-audit marked SUPERSEDED + NOINDEX.</li>
     </ul>
    </section>
    <section class="nf-vc-section">
     <h2>What this proves</h2>
-    <p>Honest status labeling, explicit evidence boundaries, and alignment between homepage, About, Investors, Applications, and TrustField separate-venture boundary copy.</p>
+    <p>Honest status labeling, explicit evidence boundaries, and alignment between homepage, About, Investors, Applications, and TrustField product boundary copy.</p>
    </section>
    <section class="nf-vc-section">
     <h2>What this does not prove</h2>
@@ -128,7 +128,7 @@ CLAIMS_JSON = {
     "proves": [
         "Current claim boundaries on www.noetfield.com",
         "Retirement of stale enterprise and three-product-line narratives",
-        "TrustField stated as a separate venture — not a Noetfield Systems Inc. product or subsidiary",
+        "TrustField stated as a Noetfield Systems Inc. product with a bounded validation scope",
     ],
     "does_not_prove": [
         "External customer adoption",

@@ -24,13 +24,13 @@ OUT_DOCX = OUT_DIR / "SFF_Noetfield_Long_Form_For_Profit_RECONCILIATION_V1.docx"
 GENERAL_ACTIVITIES_REPLACEMENT = (
     "Noetfield's current work includes the live client-zero execution application "
     "and SourceA / Runway execution and evidence infrastructure. TrustField is a "
-    "separate venture whose synthetic regulated-workflow demonstrations provide a "
-    "bounded validation context; it is not a Noetfield Systems Inc. product or subsidiary."
+    "Noetfield Systems Inc. product whose synthetic regulated-workflow demonstrations "
+    "provide a bounded validation context."
 )
 
 FUNDED_ACTIVITIES_REPLACEMENT = (
     "Evaluate selected authority and evidence patterns against synthetic TrustField "
-    "workflows within the separate venture's stated boundary."
+    "workflows within the product's stated boundary."
 )
 
 
@@ -62,7 +62,7 @@ def apply_replacements(text: str) -> str:
 
     out = out.replace(
         "TrustField regulated-operations workflows.",
-        "TrustField separate-venture validation context.",
+        "TrustField product validation context.",
     )
     out = re.sub(
         r"TrustField provides live, synthetic workflow demonstrations for case intake, analyst\s+review, human FILE / NO-FILE / ESCALATE decisions, submission tracking, and evidence closure\.\s+The product explicitly states that it",
@@ -78,7 +78,7 @@ def apply_replacements(text: str) -> str:
     out = out.replace(
         "Validate through TrustField: use regulated-operations workflows to test human decision preservation, evidence completeness,  exception routing, and bounded automation without custody, settlement, auto-filing, or certification claims.",
         FUNDED_ACTIVITIES_REPLACEMENT
-        + " Testing stays within the separate venture's boundary — without custody, settlement, auto-filing, or certification claims.",
+        + " Testing stays within the product's boundary — without custody, settlement, auto-filing, or certification claims.",
     )
 
     out = out.replace(
@@ -93,15 +93,15 @@ def apply_replacements(text: str) -> str:
 
     out = out.replace(
         "TrustField, a live compliance-workflow platform.",
-        "TrustField, a separate venture whose synthetic workflows demonstrate human decision gates and evidence boundaries within TrustField's own scope.",
+        "TrustField, a Noetfield Systems Inc. product whose synthetic workflows demonstrate human decision gates and evidence boundaries within TrustField's own scope.",
     )
     out = out.replace(
         "validate those  controls through TrustField's regulated-operations workflows",
-        "evaluate selected patterns against synthetic TrustField workflows within the separate venture's stated boundary",
+        "evaluate selected patterns against synthetic TrustField workflows within the product's stated boundary",
     )
     out = out.replace(
         "TrustField as a high- consequence vertical",
-        "TrustField, within the separate venture's own scope, as a high-consequence validation context",
+        "TrustField, within the product's own scope, as a high-consequence validation context",
     )
     out = out.replace("28 July 2026", "29 July 2026")
     out = out.replace("www.noetfield.com/proof/noetfield/", "www.noetfield.com/proof/claims-boundary-correction/")

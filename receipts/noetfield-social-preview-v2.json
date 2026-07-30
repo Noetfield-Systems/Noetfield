@@ -72,7 +72,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/about/",
-      "description": "Noetfield Systems Inc., founder Sina Kazemnezhad, client-zero runtime, SourceA/Runway infrastructure, and TrustField separate-venture boundary.",
+      "description": "Noetfield Systems Inc., founder Sina Kazemnezhad, client-zero runtime, SourceA/Runway infrastructure, and the TrustField product boundary.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -184,7 +184,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/applications/",
-      "description": "Client-zero application, SourceA execution, TrustField separate-venture boundary, and developer preview lanes.",
+      "description": "Client-zero application, SourceA execution, TrustField product boundary, and developer preview lanes.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -200,7 +200,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/applications/trustfield/",
-      "description": "TrustField is a separate venture whose synthetic regulated-workflow demonstrations provide a bounded validation context; it is not a Noetfield Systems Inc. product or subsidiary.",
+      "description": "TrustField is a Noetfield Systems Inc. product whose synthetic regulated-workflow demonstrations provide a bounded validation context.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1560,7 +1560,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/investors/",
-      "description": "Company thesis, current state, and funding routes \u2014 evidence-first, with explicit TrustField separate-venture boundary.",
+      "description": "Company thesis, current state, and funding routes \u2014 evidence-first, with explicit TrustField product boundary.",
       "image_sha256": "6a6fce45cfbec7cc22c286e7073ab95af8143826022125541831888e6c93216c",
       "indexability": "indexable",
       "noindex_reason": null,

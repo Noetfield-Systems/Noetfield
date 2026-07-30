@@ -49,8 +49,8 @@ check_file "protected corporate homepage" index.html \
   'nf-status-rail' 'NOT YET ESTABLISHED' \
   'Capable AI is not the same as accountable execution.' \
   'Governed replacement' 'Claims-boundary correction' \
-  'TrustField' 'href="https://trustfield.ca/"' 'separate venture' \
-  'not a Noetfield Systems Inc. product' \
+  'TrustField' 'href="https://trustfield.ca/"' 'a Noetfield Systems Inc. product' \
+  'bounded validation context' \
   'href="/contact/"' 'Open client-zero alpha' \
   'See what is live' 'Inspect the evidence' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
@@ -71,7 +71,7 @@ check_file "protected ecosystem and investor surface" investors/index.html \
   '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
   'Company thesis and current state' \
   'external customers and revenue are not established' \
-  'TrustField' 'separate venture' 'not a Noetfield Systems Inc. product' \
+  'TrustField' 'a Noetfield Systems Inc. product' 'bounded validation context' \
   'href="/contact/?topic=program-funding"' 'href="/proof/"' \
   'href="/proof/claims-boundary-correction/"'
 check_absent "protected investors hub has no embedded intake" investors/index.html \
@@ -163,18 +163,18 @@ check_absent "recovered frontier page has no workspace conversion" frontier-syst
 check_file "about corporate positioning and TrustField boundary" about/index.html \
   'Noetfield Systems Inc.' 'Sina Kazemnezhad' 'Corporate boundaries' \
   'SourceA' 'client-zero' \
-  'TrustField' 'separate venture' 'href="https://trustfield.ca/"' \
-  'not a Noetfield Systems Inc. product'
+  'TrustField' 'a Noetfield Systems Inc. product' 'href="https://trustfield.ca/"' \
+  'bounded validation context'
 check_absent "about has no SourceB catalogue" about/index.html 'SourceB'
 check_absent "about has no stale product TrustField copy" about/index.html \
-  'validation vertical developed and operated' 'LIVE PRODUCT'
+  'validation vertical developed and operated' 'LIVE PRODUCT' 'separate venture'
 
-# TrustField is a separate venture on canonical pages.
+# TrustField is a Noetfield Systems Inc. product on canonical pages.
 check_file "homepage TrustField boundary" index.html \
   'TrustField' 'href="https://trustfield.ca/"' \
-  'separate venture'
-check_absent "homepage has no TrustField product copy" index.html \
-  'validation vertical developed and operated' 'LIVE PRODUCT'
+  'a Noetfield Systems Inc. product'
+check_absent "homepage has no stale TrustField boundary copy" index.html \
+  'validation vertical developed and operated' 'LIVE PRODUCT' 'separate venture'
 
 # Homepage IA compression. The v2 homepage carries 11 top-level sections by
 # design: hero, problem, comparison, architecture, evidence, runways,
