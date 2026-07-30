@@ -33,7 +33,10 @@ jobs:
           TOKEN = os.environ["CLOUDFLARE_API_TOKEN"]
           ZONE = os.environ["NF_ZONE_ID"]
           BASE = f"https://api.cloudflare.com/client/v4/zones/{ZONE}/workers/routes"
-          ROGUE_SCRIPT = "nf-sourcea-xlink"
+          # Observed live: the exact-root patterns 'noetfield.com/' and
+          # 'www.noetfield.com/' are owned by this script, which outranks the
+          # canonical wildcard routes on the homepage only.
+          ROGUE_SCRIPT = "sourcea-crosslink-v1"
 
           def call(url, method="GET", body=None):
               req = urllib.request.Request(url, method=method)
