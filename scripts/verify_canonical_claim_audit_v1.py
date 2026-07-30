@@ -60,9 +60,9 @@ ALLOWLIST_FILE_SNIPPETS = (
     "SUPERSEDED",
     "sample-only",
     "SAMPLE ONLY",
-    "Separate ventures",
-    "separate venture",
-    "not a Noetfield Systems Inc. product",
+    "Products",
+    "a Noetfield Systems Inc. product",
+    "bounded validation context",
 )
 
 

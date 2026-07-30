@@ -135,7 +135,7 @@ def main() -> int:
         "release": "NOETFIELD_SFF_FINAL_RECONCILIATION_V1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "trustfield_boundary": (
-            "TrustField is a separate venture whose synthetic regulated-workflow "
+            "TrustField is a Noetfield Systems Inc. product whose synthetic "
             "demonstrations provide a bounded validation context; it is not a "
             "Noetfield Systems Inc. product or subsidiary."
         ),

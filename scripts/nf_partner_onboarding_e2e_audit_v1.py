@@ -84,7 +84,7 @@ INVESTOR_CONTACT_TOPICS = ("program-funding", "technical-collaboration")
 INVESTOR_DISCLOSURES = (
     "external customers",
     "revenue are not established",
-    "not a noetfield systems inc. product",
+    "a noetfield systems inc. product",
 )
 
 

@@ -133,7 +133,7 @@
     },
     "/about/": {
       "title": "About — Noetfield Systems Inc.",
-      "description": "Noetfield Systems Inc., founder Sina Kazemnezhad, client-zero runtime, SourceA/Runway infrastructure, and TrustField separate-venture boundary."
+      "description": "Noetfield Systems Inc., founder Sina Kazemnezhad, client-zero runtime, SourceA/Runway infrastructure, and the TrustField product boundary."
     },
     "/enterprise/": {
       "title": "Legacy commercial lane \u2014 Enterprise \u2014 Noetfield",
@@ -149,7 +149,7 @@
     },
     "/investors/": {
       "title": "Investors / Ecosystem \u2014 Noetfield Systems",
-      "description": "Company thesis, current state, and funding routes \u2014 evidence-first, with explicit TrustField separate-venture boundary."
+      "description": "Company thesis, current state, and funding routes \u2014 evidence-first, with explicit TrustField product boundary."
     },
     "/invest/": {
       "title": "Private Investor Materials \u2014 Noetfield Systems Inc.",
@@ -209,11 +209,11 @@
     },
     "/applications/": {
       "title": "Applications \u2014 Noetfield Systems",
-      "description": "Client-zero application, SourceA execution, TrustField separate-venture boundary, and developer preview lanes."
+      "description": "Client-zero application, SourceA execution, TrustField product boundary, and developer preview lanes."
     },
     "/applications/trustfield/": {
       "title": "TrustField boundary \u2014 Noetfield Systems",
-      "description": "TrustField is a separate venture whose synthetic regulated-workflow demonstrations provide a bounded validation context; it is not a Noetfield Systems Inc. product or subsidiary."
+      "description": "TrustField is a Noetfield Systems Inc. product whose synthetic regulated-workflow demonstrations provide a bounded validation context."
     },
     "/public-interest/": {
       "title": "Public-interest program \u2014 Noetfield Systems",

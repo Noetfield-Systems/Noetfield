@@ -28,11 +28,10 @@ CLIENT_ZERO_LABEL = "Open client-zero alpha"
 GITHUB_URL = "https://github.com/Noetfield-Systems/Noetfield"
 TRUSTFIELD_URL = "https://trustfield.ca/"
 TRUSTFIELD_BOUNDARY_LINE = (
-    "TrustField is a separate venture whose synthetic regulated-workflow "
-    "demonstrations provide a bounded validation context; it is not a "
-    "Noetfield Systems Inc. product or subsidiary."
+    "TrustField is a Noetfield Systems Inc. product whose synthetic "
+    "regulated-workflow demonstrations provide a bounded validation context."
 )
-TRUSTFIELD_SHORT = "separate venture"
+TRUSTFIELD_SHORT = "Noetfield product"
 
 
 def corp_head(
@@ -106,7 +105,7 @@ def corp_footer() -> str:
     <p>Governed AI execution infrastructure.<br />Vancouver, British Columbia, Canada.</p>
    </div>
    <nav aria-label="Footer"><strong>Company</strong><a href="/investors/">Investors / Ecosystem</a><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="{GITHUB_URL}" rel="noopener noreferrer">GitHub ↗</a></nav>
-   <nav aria-label="Separate ventures"><strong>Separate ventures</strong><a href="/applications/trustfield/">TrustField boundary</a><a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></nav>
+   <nav aria-label="Products"><strong>Products</strong><a href="/applications/trustfield/">TrustField</a><a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></nav>
   </div>
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
  </footer>
