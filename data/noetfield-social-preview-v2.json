@@ -213,7 +213,7 @@
     },
     "/applications/trustfield/": {
       "title": "TrustField boundary \u2014 Noetfield Systems",
-      "description": "TrustField is a Noetfield Systems Inc. product whose synthetic regulated-workflow demonstrations provide a bounded validation context."
+      "description": "TrustField is the regulated-operations and compliance product vertical of Noetfield Systems Inc. Public demonstrations use synthetic data and do not provide custody, settlement, payment initiation, automatic regulatory filing, certification, or final regulatory decisions."
     },
     "/public-interest/": {
       "title": "Public-interest program \u2014 Noetfield Systems",

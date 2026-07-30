@@ -200,7 +200,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/applications/trustfield/",
-      "description": "TrustField is a Noetfield Systems Inc. product whose synthetic regulated-workflow demonstrations provide a bounded validation context.",
+      "description": "TrustField is the regulated-operations and compliance product vertical of Noetfield Systems Inc. Public demonstrations use synthetic data and do not provide custody, settlement, payment initiation, automatic regulatory filing, certification, or final regulatory decisions.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,

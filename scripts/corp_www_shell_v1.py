@@ -28,8 +28,12 @@ CLIENT_ZERO_LABEL = "Open client-zero alpha"
 GITHUB_URL = "https://github.com/Noetfield-Systems/Noetfield"
 TRUSTFIELD_URL = "https://trustfield.ca/"
 TRUSTFIELD_BOUNDARY_LINE = (
-    "TrustField is a Noetfield Systems Inc. product whose synthetic "
-    "regulated-workflow demonstrations provide a bounded validation context."
+    "TrustField is Noetfield Systems Inc.'s regulated-operations and compliance "
+    "product vertical. It applies Noetfield's governed execution infrastructure to "
+    "consequential financial and compliance workflows while preserving human "
+    "decision authority. Current public demonstrations use synthetic data and do "
+    "not provide custody, settlement, payment initiation, automatic regulatory "
+    "filing, certification, or final regulatory decisions."
 )
 TRUSTFIELD_SHORT = "Noetfield product"
 
