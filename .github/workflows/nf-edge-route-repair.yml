@@ -1,0 +1,76 @@
+name: NF Edge Route Repair
+
+# One-shot, dispatch-only repair job for the noetfield.com zone.
+# Removes Workers routes owned by the unauthorized nf-sourcea-xlink script
+# (which shadow-owns the exact-root patterns and appends a SourceA promo to
+# the homepage after the canonical footer), then purges the homepage cache.
+# The canonical noetfield-www-proxy wildcard routes are never touched.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  repair-edge-routes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Remove nf-sourcea-xlink routes and purge homepage cache
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          NF_ZONE_ID: "456aeba6b1a37d1fadbf6443cb929468"
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          python3 - <<'PY'
+          import json
+          import os
+          import urllib.request
+
+          TOKEN = os.environ["CLOUDFLARE_API_TOKEN"]
+          ZONE = os.environ["NF_ZONE_ID"]
+          BASE = f"https://api.cloudflare.com/client/v4/zones/{ZONE}/workers/routes"
+          ROGUE_SCRIPT = "nf-sourcea-xlink"
+
+          def call(url, method="GET", body=None):
+              req = urllib.request.Request(url, method=method)
+              req.add_header("Authorization", f"Bearer {TOKEN}")
+              if body is not None:
+                  req.add_header("Content-Type", "application/json")
+                  req.data = json.dumps(body).encode()
+              with urllib.request.urlopen(req) as res:
+                  payload = json.load(res)
+              if not payload.get("success"):
+                  raise SystemExit(f"API failure {method} {url}: {payload.get('errors')}")
+              return payload["result"]
+
+          routes = call(BASE)
+          print("routes before repair:")
+          for route in routes:
+              print(f"  {route['pattern']!r} -> {route.get('script')}")
+
+          removed = 0
+          for route in routes:
+              if route.get("script") == ROGUE_SCRIPT:
+                  call(f"{BASE}/{route['id']}", method="DELETE")
+                  print(f"deleted route {route['pattern']!r} ({ROGUE_SCRIPT})")
+                  removed += 1
+          print(f"removed {removed} rogue route(s)")
+
+          print("routes after repair:")
+          for route in call(BASE):
+              print(f"  {route['pattern']!r} -> {route.get('script')}")
+
+          purge = call(
+              f"https://api.cloudflare.com/client/v4/zones/{ZONE}/purge_cache",
+              method="POST",
+              body={"files": [
+                  "https://noetfield.com/",
+                  "https://www.noetfield.com/",
+              ]},
+          )
+          print(f"scoped homepage cache purge accepted: {purge.get('id', 'ok')}")
+          PY
