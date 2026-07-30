@@ -61,8 +61,8 @@ ALLOWLIST_FILE_SNIPPETS = (
     "sample-only",
     "SAMPLE ONLY",
     "Products",
-    "a Noetfield Systems Inc. product",
-    "bounded validation context",
+    "regulated-operations and compliance product vertical",
+    "preserving human decision authority",
 )
 
 

@@ -62,8 +62,8 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
         "Governed replacement",
         "Claims-boundary correction",
         "TrustField",
-        "a Noetfield Systems Inc. product",
-        "bounded validation context",
+        "regulated-operations and compliance product vertical",
+        "preserving human decision authority",
         "nf-status-rail",
         "nf-corp-section",
         "nf-corp-hero",
@@ -83,7 +83,7 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
 def test_homepage_statuses_preserve_claim_boundaries() -> None:
     text = read(ROOT / "index.html")
     assert "does not prove external adoption" in text
-    assert "a noetfield systems inc. product" in text.lower()
+    assert "regulated-operations and compliance product vertical" in text.lower()
     assert "separate venture" not in text.lower()
     assert not re.search(r"trusted by", text, re.I)
     assert not re.search(r"\d+[+]? (?:clients|customers|enterprises)", text, re.I)
@@ -100,7 +100,7 @@ def test_about_states_founder_company_and_trustfield_boundary() -> None:
     assert "sole operating lead" in text.lower()
     assert "Vancouver" in text
     assert "TrustField" in text
-    assert "a Noetfield Systems Inc. product" in text
+    assert "regulated-operations and compliance product vertical" in text
     assert "separate venture" not in text.lower()
     assert "SourceB" not in text
 
@@ -133,17 +133,17 @@ def test_trustfield_is_listed_as_noetfield_product() -> None:
     home = read(ROOT / "index.html")
     assert "TrustField" in home
     assert 'href="https://trustfield.ca/"' in home
-    assert "a noetfield systems inc. product" in home.lower()
+    assert "regulated-operations and compliance product vertical" in home.lower()
     assert "separate venture" not in home.lower()
     assert "validation vertical developed and operated" not in home.lower()
 
     about = read(ROOT / "about" / "index.html")
     assert "TrustField" in about
-    assert "a noetfield systems inc. product" in about.lower()
+    assert "regulated-operations and compliance product vertical" in about.lower()
 
     investors = read(ROOT / "investors" / "index.html")
     assert "TrustField" in investors
-    assert "a noetfield systems inc. product" in investors.lower()
+    assert "regulated-operations and compliance product vertical" in investors.lower()
 
 
 def test_public_bridge_pages_have_coherent_navigation_and_footer() -> None:

@@ -46,8 +46,8 @@ CORPORATE_HOME_REQUIRED = (
     "See what is live",
     "Inspect the evidence",
     "TrustField",
-    "a Noetfield Systems Inc. product",
-    "bounded validation context",
+    "regulated-operations and compliance product vertical",
+    "preserving human decision authority",
     "Open client-zero alpha",
 )
 
