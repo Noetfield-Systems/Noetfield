@@ -226,7 +226,7 @@ def public_interest_page() -> str:
    <ul>
     <li>Complete provider-attempt ledger (commissioning)</li>
     <li>Acceptance safety and semantic acceptance improvements</li>
-    <li>Evaluate authority and evidence patterns against synthetic TrustField workflows within the product&apos;s stated boundary</li>
+    <li>Evaluate authority and evidence patterns against synthetic workflows from TrustField, Noetfield&apos;s regulated-operations and compliance product vertical, within the product&apos;s stated boundary</li>
     <li>Independent review and selected public goods outputs</li>
    </ul>
    <h2>Evidence boundaries</h2>
