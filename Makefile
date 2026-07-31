@@ -127,6 +127,7 @@ verify-static-www:
 	python3 scripts/verify-public-output-allowlist.py
 	./scripts/verify-www-pages-dist.sh
 	./scripts/verify-static-www.sh
+	python3 scripts/verify-product-surface-manifest.py
 	./scripts/verify-www-artifact-determinism.sh
 
 generate-social-previews:

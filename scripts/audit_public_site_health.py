@@ -41,14 +41,14 @@ CORPORATE_HOME_REQUIRED = (
     "/applications/",
     "/proof/",
     "/public-interest/",
-    "AI systems should not decide when their own work is safe to ship.",
+    "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.",
     "client-zero commissioning",
-    "See what is live",
-    "Inspect the evidence",
+    "OPEN NOETFIELD APP",
+    "SEE A COMPLETED PROJECT",
     "TrustField",
     "regulated-operations and compliance product vertical",
     "preserving human decision authority",
-    "Open client-zero alpha",
+    "Open Noetfield App",
 )
 
 REQUIRED_SHELL_PARTIALS = (
