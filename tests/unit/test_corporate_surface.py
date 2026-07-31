@@ -151,7 +151,7 @@ def test_public_bridge_pages_have_coherent_navigation_and_footer() -> None:
         text = read(path)
         assert 'class="nf-corp-nav"' in text or 'class="nf-corp-header"' in text, path
         assert 'class="nf-corp-footer"' in text, path
-        for href in ("/system/", "/applications/", "/proof/", "/public-interest/", "/about/"):
+        for href in ("/#product", "/applications/", "/proof/", "/public-interest/", "/about/"):
             assert href in text, f"{path}: {href}"
     proof = read(ROOT / "proof" / "index.html")
     assert 'class="nf-corp-nav"' in proof
@@ -162,16 +162,16 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
     text = read(ROOT / "motors" / "index.html")
     assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text
     assert 'class="nf-corp-footer"' in text
-    assert 'href="/system/"' in text
+    assert 'href="/#product"' in text
     assert 'href="/motors/"' in text or "Motors" in text
-    for href in ("/system/", "/applications/", "/proof/", "/about/"):
+    for href in ("/#product", "/applications/", "/proof/", "/about/"):
         assert href in text
 
 
 def test_corporate_primary_nav_is_advisor_consistent() -> None:
     """Product-first headers: Product · App · Workflows · Assurance · Developers · TrustField · Proof · Company · Open Noetfield App."""
     order_markers = (
-        'href="/system/"',
+        'href="/#product"',
         'href="/workflows/"',
         'href="/assurance/"',
         'href="/developers/"',
@@ -233,7 +233,7 @@ def test_runways_primary_nav_matches_homepage() -> None:
     assert nav_match
     nav = nav_match.group(1)
     order_markers = (
-        'href="/system/"',
+        'href="/#product"',
         'href="/workflows/"',
         'href="/assurance/"',
         'href="/developers/"',
