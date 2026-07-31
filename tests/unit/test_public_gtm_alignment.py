@@ -100,14 +100,14 @@ def test_homepage_corporate_structure_locked() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "nf-corp" in text
     for label in (
-        "GOVERNED AI EXECUTION",
-        "AI systems should not decide when their own work is safe to ship.",
+        "AGENTIC SOFTWARE DELIVERY AND GOVERNED EXECUTION",
+        "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.",
         "client-zero commissioning",
         "Governed replacement",
         "Claims-boundary correction",
         "TrustField",
-        "See what is live",
-        "Inspect the evidence",
+        "OPEN NOETFIELD APP",
+        "SEE A COMPLETED PROJECT",
         "/assets/noetfield-home-v2.css",
         "/system/",
         "/applications/",
