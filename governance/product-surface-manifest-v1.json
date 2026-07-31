@@ -40,6 +40,17 @@
       "needle": "/assets/product/noetfield-app-live.jpg"
     },
     {
+      "capability_id": "home-app-teaching-walkthrough",
+      "route": "/",
+      "surface": "index.html",
+      "maturity": "live",
+      "state": "active",
+      "backend_binding": "static assets assets/product/app-teach/ (7 real product captures: public flow steps 1-4, workspace steps 5-7)",
+      "evidence_link": "/demo/complete-run/",
+      "founder_approved_visibility": "public",
+      "needle": "/assets/product/app-teach/teach-step-5-command-deck.jpg"
+    },
+    {
       "capability_id": "home-product-walkthrough",
       "route": "/",
       "surface": "index.html",
