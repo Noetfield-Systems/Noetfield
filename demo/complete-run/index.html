@@ -14,6 +14,11 @@
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
  <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=5" />
+<style>
+ /* long commit digests must wrap on narrow viewports instead of widening the grid track */
+ body.nf-gate.nf-gate--vc .nf-gate__main{min-width:0}
+ body.nf-gate.nf-gate--vc .nf-vc-section code{overflow-wrap:anywhere}
+</style>
 </head>
 <body class="nf-gate nf-gate--vc">
  <div class="nf-gate__bg" aria-hidden="true"></div>
