@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Developers — Noetfield Systems</title>
+ <meta name="description" content="The Noetfield developer surface: API status, AI Motors, architecture, Action Contracts, acceptance and receipt schema direction, integration status, and current limitations." />
+ <meta name="robots" content="index,follow" />
+ <meta name="theme-color" content="#f3f0e9" />
+ <link rel="canonical" href="https://www.noetfield.com/developers/" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=4" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:title" content="Developers — Noetfield Systems" />
+ <meta property="og:description" content="The Noetfield developer surface: API status, AI Motors, architecture, Action Contracts, acceptance and receipt schema direction, integration status, and current limitations." />
+ <meta property="og:url" content="https://www.noetfield.com/developers/" />
+ <meta property="og:type" content="website" />
+ <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta property="og:image:width" content="1200" />
+ <meta property="og:image:height" content="630" />
+ <meta property="og:image:alt" content="Noetfield Systems Inc. | governed AI execution, products, custom AI Motors and institutional workflows." />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Developers — Noetfield Systems" />
+ <meta name="twitter:description" content="The Noetfield developer surface: API status, AI Motors, architecture, Action Contracts, acceptance and receipt schema direction, integration status, and current limitations." />
+ <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta name="twitter:image:alt" content="Noetfield Systems Inc. | governed AI execution, products, custom AI Motors and institutional workflows." />
+ <script src="/assets/noetfield-intake-core.js?v=42" defer></script>
+ <script src="/assets/noetfield-forms.js?v=42" defer></script>
+ <script src="/assets/noetfield-shell.js?v=42" defer></script>
+</head>
+<body class="nf-corp nf-corp--inner">
+ <a class="nf-skip" href="#main">Skip to main content</a>
+ <header class="nf-corp-header">
+  <div class="nf-corp-wrap nf-corp-navrow">
+   <a class="nf-corp-brand" href="/" aria-label="Noetfield Systems home">
+    <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
+    <span>Noetfield Systems <small>Inc.</small></span>
+   </a>
+   <nav class="nf-corp-nav" aria-label="Primary navigation">
+    <a href="/system/">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/" aria-current="page">Assurance</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
+   </nav>
+  </div>
+ </header>
+ <header class="nf-corp-header">
+  <div class="nf-corp-wrap nf-corp-navrow">
+   <a class="nf-corp-brand" href="/" aria-label="Noetfield Systems home">
+    <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
+    <span>Noetfield Systems <small>Inc.</small></span>
+   </a>
+   <nav class="nf-corp-nav" aria-label="Primary navigation">
+    <a href="/system/">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/developers/" aria-current="page">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
+   </nav>
+  </div>
+ </header>
+  <main id="main">
+
+  <section class="nf-inner-hero" aria-labelledby="dev-title">
+   <div class="nf-corp-wrap nf-inner-hero__grid">
+    <div><p class="nf-corp-kicker">Developers</p><h1 id="dev-title">Build against governed execution</h1></div>
+    <div><p class="nf-corp-lead">Everything technical in one place, labeled by what it is today. No invented SDK, no invented endpoint, no production-compatibility claim beyond what is tested.</p></div>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="dev-map">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="dev-map">The developer surface</h2></div>
+    <div class="nf-principle-grid">
+     <article><p><i class="nf-status">DEVELOPER PREVIEW</i></p><h3>API</h3><p>Schema-valid-or-fail structured completions under deterministic controls; workspace-scoped keys; endpoint activation per tenant during commissioning.</p><p><a href="/deterministic-api/">API status, reference shapes, and workspace access</a></p></article>
+     <article><p><i class="nf-status nf-status--live">RUNTIME</i></p><h3>AI Motors</h3><p>The governed execution runtimes: explicit authority before action, bounded workers, separate verification, bounded repair, documented safe stops.</p><p><a href="/motors/">AI Motors technical page</a></p></article>
+     <article><p><i class="nf-status nf-status--live">PUBLISHED</i></p><h3>Architecture</h3><p>How models, harnesses, the kernel, Motors, and verifiers divide authority, and why promotion sits outside the executing worker.</p><p><a href="/system/">System overview</a> · <a href="/motors/">Deep dive</a></p></article>
+     <article><p><i class="nf-status nf-status--live">IN USE FIRST-PARTY</i></p><h3>Action Contracts</h3><p>Execution starts from an authorized event resolved into a deterministic envelope: policy, delegated authority limits, budget, and permitted context. Motors execute authorized Action Contracts and record effects.</p><p><a href="/motors/">Contract role in the architecture</a></p></article>
+     <article><p><i class="nf-status">DIRECTION</i></p><h3>Acceptance and verdict schema</h3><p>The chartered direction for portable acceptance: contract in, one of six decisions out (accept, repair, escalate, stop, reject, not evaluable), digest-bound verdicts, signed receipts. In design, not shipped.</p><p><a href="/assurance/">Assurance layer status</a></p></article>
+     <article><p><i class="nf-status nf-status--live">PUBLISHED</i></p><h3>Receipt structure</h3><p>What an accepted outcome preserves today, shown on a real run with real digests, plus the boundary that a receipt is not certification.</p><p><a href="/demo/complete-run/">A complete run</a> · <a href="/proof/governed-replacement.json">Machine-readable bundle</a></p></article>
+     <article><p><i class="nf-status">STATUS BOARD</i></p><h3>Integration status</h3><p>What is live alpha, in commissioning, in design, or planned across every surface.</p><p><a href="/assurance/">Assurance status</a> · <a href="/applications/">Application inventory</a></p></article>
+     <article><p><i class="nf-status nf-status--live">OPEN</i></p><h3>Technical contact</h3><p>Early technical collaboration, evaluation workspaces, and integration questions.</p><p><a href="/contact/?topic=technical-collaboration">Start a technical conversation</a></p></article>
+    </div>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="dev-limits">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="dev-limits">Current limitations</h2></div>
+    <p class="nf-corp-prose">The API lane is a developer preview under commissioning: activation, billing, and keys are workspace-scoped, and compatibility is tested per provider family within stated scope. The portable Acceptance Gateway and cross-platform adapters are chartered, not built. No uptime commitments are published for preview lanes. No external customers or revenue yet.</p>
+   </div>
+  </section>
+
+ </main>
+<footer class="nf-corp-footer">
+  <div class="nf-corp-wrap nf-corp-footer__grid">
+   <div>
+    <a class="nf-corp-brand nf-corp-brand--footer" href="/"><span class="nf-corp-brand__mark" aria-hidden="true">N</span><span>Noetfield Systems <small>Inc.</small></span></a>
+    <p>Governed AI execution infrastructure.<br />Vancouver, British Columbia, Canada.</p>
+   </div>
+   <nav aria-label="Footer"><strong>Company</strong><a href="/investors/">Investors / Ecosystem</a><a href="/public-interest/">Public-Interest Program</a><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="https://github.com/Noetfield-Systems/Noetfield" rel="noopener noreferrer">GitHub ↗</a></nav>
+   <nav aria-label="Products"><strong>Products</strong><a href="/applications/trustfield/">TrustField</a><a href="https://trustfield.ca/" rel="noopener noreferrer">trustfield.ca ↗</a></nav>
+  </div>
+  <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
+ </footer>
+</body>
+</html>

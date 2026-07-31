@@ -38,13 +38,13 @@ check_absent() {
 
 # NOETFIELD_DOMAIN_CANONICAL_V2 protected corporate surfaces.
 check_file "protected corporate homepage" index.html \
-  '<title>Noetfield Systems Inc. | Agentic Software Delivery and Governed Execution</title>' \
+  '<title>Noetfield Systems Inc. | AI Workflow and App Platform</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp nf-home">' '<main id="main">' \
   '/assets/noetfield-corporate-v1.css?v=4' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
-  'NOETFIELD · AGENTIC SOFTWARE DELIVERY AND GOVERNED EXECUTION' \
-  'Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.' \
+  'AI WORKFLOWS + AGENT EXECUTION ASSURANCE' \
+  'It runs the work, verifies the exact result, and lets you decide what gets accepted.' \
   'founder-operated alpha' \
   'No external customers or revenue yet' \
   '/assets/product/noetfield-app-live.jpg' \
@@ -56,13 +56,13 @@ check_file "protected corporate homepage" index.html \
   'TrustField' 'href="https://trustfield.ca/"' 'regulated-operations and compliance product vertical' \
   'preserving human decision authority' \
   'href="/contact/"' 'Open Noetfield App' \
-  'OPEN NOETFIELD APP' 'SEE A COMPLETED PROJECT' 'EXPLORE WORKFLOWS' \
+  'OPEN NOETFIELD APP' 'WATCH A COMPLETE RUN' 'EXPLORE ASSURANCE' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
   'nf-corp-section' 'nf-corp-hero' \
   'family=Newsreader' 'family=DM+Mono' \
   'href="/system/"' 'href="/applications/"' 'href="/about/"' 'href="/proof/"' \
-  'href="/public-interest/"' 'href="/runways/"' 'href="/deterministic-api/"' \
-  'href="/motors/"' 'href="/applications/trustfield/"' \
+  'href="/public-interest/"' 'href="/workflows/"' 'href="/developers/"' \
+  'href="/motors/"' 'href="/assurance/"' 'href="/applications/trustfield/"' \
   'https://app.noetfield.com/' \
   '/assets/noetfield-home-v2.css'
 check_absent "protected homepage has no stale TrustField product framing" index.html \

@@ -13,3 +13,7 @@
 /pricing /contact/ 301
 /pricing/ /contact/ 301
 /pricing/:path* /contact/ 301
+/workspace/trust-ledger /demo/complete-run/ 301
+/workspace/trust-ledger/:path* /demo/complete-run/ 301
+/workspace /system/ 301
+/workspace/:path* /system/ 301

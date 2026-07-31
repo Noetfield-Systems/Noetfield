@@ -52,13 +52,13 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
     """Canonical v2 homepage: governed execution, live founder-operated alpha."""
     text = read(ROOT / "index.html")
     required = (
-        "AGENTIC SOFTWARE DELIVERY AND GOVERNED EXECUTION",
+        "AGENT EXECUTION ASSURANCE",
         "LIVE ALPHA",
-        "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.",
+        "It runs the work, verifies the exact result, and lets you decide what gets accepted.",
         "founder-operated alpha",
         "OPEN NOETFIELD APP",
-        "SEE A COMPLETED PROJECT",
-        "EXPLORE WORKFLOWS",
+        "WATCH A COMPLETE RUN",
+        "EXPLORE ASSURANCE",
         "AI Motors provide the governed execution layer behind the product.",
         "Governed replacement",
         "Claims-boundary correction",
@@ -169,13 +169,12 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
 
 
 def test_corporate_primary_nav_is_advisor_consistent() -> None:
-    """Product-first headers: Product · App · Workflows · API · AI Motors · TrustField · Proof · Company · Open Noetfield App."""
+    """Product-first headers: Product · App · Workflows · Assurance · Developers · TrustField · Proof · Company · Open Noetfield App."""
     order_markers = (
         'href="/system/"',
-        'href="https://app.noetfield.com/"',
-        'href="/runways/"',
-        'href="/deterministic-api/"',
-        'href="/motors/"',
+        'href="/workflows/"',
+        'href="/assurance/"',
+        'href="/developers/"',
         'href="/applications/trustfield/"',
         'href="/proof/"',
         'href="/about/"',
@@ -235,10 +234,9 @@ def test_runways_primary_nav_matches_homepage() -> None:
     nav = nav_match.group(1)
     order_markers = (
         'href="/system/"',
-        'href="https://app.noetfield.com/"',
-        'href="/runways/"',
-        'href="/deterministic-api/"',
-        'href="/motors/"',
+        'href="/workflows/"',
+        'href="/assurance/"',
+        'href="/developers/"',
         'href="/applications/trustfield/"',
         'href="/proof/"',
         'href="/about/"',
