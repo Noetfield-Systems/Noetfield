@@ -59,7 +59,7 @@ def homepage() -> str:
    <div class="nf-corp-wrap">
     <div class="nf-section-head"><div><p class="nf-corp-eyebrow">What exists today</p><h2 id="exists-title">Current surfaces and boundaries</h2></div></div>
     <div class="nf-principle-grid">
-     <article><span class="nf-status nf-status--live">LIVE</span><h3>Noetfield runtime</h3><p>First-party execution application with bounded worker and project flow, build checks, revisioned artifacts, and authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></p></article>
+     <article><span class="nf-status nf-status--live">LIVE</span><h3>Noetfield runtime</h3><p>First-party execution application with bounded worker and project flow, build checks, revisioned artifacts, and authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open the live alpha ↗</a></p></article>
      <article><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span><h3>SourceA / Runway</h3><p>Professional internal execution and evidence paths for governed software change and workflow commissioning.</p><p><a href="/applications/#sourcea">Applications overview</a></p></article>
      <article><span class="nf-status nf-status--demonstrated">NOETFIELD PRODUCT</span><h3>TrustField</h3><p>Noetfield Systems Inc.&apos;s regulated-operations and compliance product vertical. Public demonstrations use synthetic data.</p><p><a href="/applications/trustfield/">Boundary page</a> · <a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></p></article>
     </div>
@@ -168,7 +168,7 @@ def applications_page() -> str:
   </section>
   <section class="nf-corp-section" aria-labelledby="apps-grid-title">
    <div class="nf-corp-wrap nf-principle-grid">
-    <article id="client-zero"><span class="nf-status nf-status--live">LIVE ALPHA</span><h3>Noetfield application</h3><p>Bounded worker and project flow, build/integrity checks, revisioned artifacts, authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></p></article>
+    <article id="client-zero"><span class="nf-status nf-status--live">LIVE ALPHA</span><h3>Noetfield application</h3><p>Bounded worker and project flow, build/integrity checks, revisioned artifacts, authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open the live alpha ↗</a></p></article>
     <article id="sourcea"><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span><h3>SourceA / Runway execution surface</h3><p>Professional internal execution and evidence paths for governed software change.</p><p><a href="/runways/">Runways</a></p></article>
     <article><span class="nf-status nf-status--demonstrated">NOETFIELD PRODUCT</span><h3>TrustField boundary</h3><p>Noetfield Systems Inc.&apos;s regulated-operations and compliance product vertical. Public demonstrations use synthetic data.</p><p><a href="/applications/trustfield/">Boundary page →</a></p></article>
     <article><span class="nf-status nf-status--commissioning">COMMISSIONING</span><h3>Developer API</h3><p>Developer preview / commissioning lane — not a production corporate product surface.</p><p><a href="/deterministic-api/">Developer preview</a></p></article>
@@ -300,7 +300,7 @@ def about_page() -> str:
    <p><strong>Sina Kazemnezhad</strong> is the founder and current sole operating lead of Noetfield Systems Inc., accountable for product strategy, systems engineering, governance design, and applied AI execution.</p>
    <h2>Current operating surfaces</h2>
    <ul>
-    <li><strong>Noetfield runtime</strong> — live bounded execution application, founder-operated alpha. <a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></li>
+    <li><strong>Noetfield runtime</strong> — live bounded execution application, founder-operated alpha. <a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open the live alpha ↗</a></li>
     <li><strong>SourceA / Runway</strong> — Noetfield execution and evidence infrastructure for governed software change and workflow commissioning (demonstrated).</li>
    </ul>
    <h2>Corporate boundaries</h2>
