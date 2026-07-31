@@ -1464,7 +1464,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/",
-      "description": "Noetfield Systems builds governed AI execution infrastructure. Client-zero commissioning is live; evidence is scoped and inspectable.",
+      "description": "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence. AI Motors provide the governed execution layer behind the product.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1475,7 +1475,7 @@
       },
       "profile": "corporate",
       "route": "/",
-      "title": "Noetfield Systems | Governed AI Execution",
+      "title": "Noetfield Systems Inc. | Agentic Software Delivery and Governed Execution",
       "verdict": "PASS"
     },
     {
