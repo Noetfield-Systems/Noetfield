@@ -30,7 +30,7 @@ def test_homepage_has_modern_shell_and_spine() -> None:
         '<link rel="canonical" href="https://www.noetfield.com/" />',
         'nf-corp',
         '<main id="main">',
-        "Build and run AI workflows that can prove what happened.",
+        "It runs the work, verifies the exact result, and lets you decide what gets accepted.",
         'id="now"',
         'id="hero-title"',
         "/assets/noetfield-home-v2.css",

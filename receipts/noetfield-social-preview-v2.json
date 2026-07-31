@@ -1480,7 +1480,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/",
-      "description": "Noetfield turns operational goals into apps and workflows, coordinates the work across models and agents, and adds explicit authority, separate acceptance, bounded repair, and replayable evidence before results are promoted.",
+      "description": "Build and run AI workflows across models, agents, and tools with separate verification, bounded repair, human-controlled promotion, and replayable evidence.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,

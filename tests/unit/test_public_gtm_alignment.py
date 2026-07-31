@@ -101,7 +101,7 @@ def test_homepage_corporate_structure_locked() -> None:
     assert "nf-corp" in text
     for label in (
         "AI WORKFLOW AND APP PLATFORM",
-        "Build and run AI workflows that can prove what happened.",
+        "It runs the work, verifies the exact result, and lets you decide what gets accepted.",
         "founder-operated alpha",
         "Governed replacement",
         "Claims-boundary correction",

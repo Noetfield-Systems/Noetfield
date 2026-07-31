@@ -15,7 +15,7 @@
       "backend_binding": "static",
       "evidence_link": "/proof/",
       "founder_approved_visibility": "public",
-      "needle": "Build and run AI workflows that can prove what happened."
+      "needle": "It runs the work, verifies the exact result, and lets you decide what gets accepted."
     },
     {
       "capability_id": "home-open-app-cta",

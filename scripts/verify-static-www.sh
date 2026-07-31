@@ -44,7 +44,7 @@ check_file "protected corporate homepage" index.html \
   '/assets/noetfield-corporate-v1.css?v=4' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
   'NOETFIELD · AI WORKFLOW AND APP PLATFORM' \
-  'Build and run AI workflows that can prove what happened.' \
+  'It runs the work, verifies the exact result, and lets you decide what gets accepted.' \
   'founder-operated alpha' \
   'No external customers or revenue yet' \
   '/assets/product/noetfield-app-live.jpg' \

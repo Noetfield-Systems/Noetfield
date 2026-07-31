@@ -54,7 +54,7 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
     required = (
         "AI WORKFLOW AND APP PLATFORM",
         "LIVE ALPHA",
-        "Build and run AI workflows that can prove what happened.",
+        "It runs the work, verifies the exact result, and lets you decide what gets accepted.",
         "founder-operated alpha",
         "OPEN NOETFIELD APP",
         "SEE A COMPLETE RUN",
