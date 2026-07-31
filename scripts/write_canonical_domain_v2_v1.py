@@ -36,9 +36,9 @@ def homepage() -> str:
   <section class="hero nf-corp-hero" id="top" aria-labelledby="hero-title">
    <div class="nf-corp-wrap hero__grid">
     <div>
-     <p class="hero__eyebrow nf-corp-eyebrow"><span class="dot" aria-hidden="true"></span>GOVERNED AI EXECUTION · CLIENT-ZERO</p>
+     <p class="hero__eyebrow nf-corp-eyebrow"><span class="dot" aria-hidden="true"></span>GOVERNED AI EXECUTION · LIVE ALPHA</p>
      <h1 id="hero-title">AI systems should not decide when their own work is safe to ship.</h1>
-     <p class="hero__lead">Noetfield is building the operating layer around capable AI models: explicit authority before action, bounded execution, separate acceptance, and evidence that can be reopened. The current system is live in client-zero commissioning.</p>
+     <p class="hero__lead">Noetfield is building the operating layer around capable AI models: explicit authority before action, bounded execution, separate acceptance, and evidence that can be reopened. The current system is live as a founder-operated alpha.</p>
      <div class="actions nf-corp-actions">
       <a class="nf-button nf-button--primary" href="#what-exists">See what is live</a>
       <a class="nf-button nf-button--secondary" href="/proof/">Inspect the evidence</a>
@@ -59,7 +59,7 @@ def homepage() -> str:
    <div class="nf-corp-wrap">
     <div class="nf-section-head"><div><p class="nf-corp-eyebrow">What exists today</p><h2 id="exists-title">Current surfaces and boundaries</h2></div></div>
     <div class="nf-principle-grid">
-     <article><span class="nf-status nf-status--live">LIVE</span><h3>Noetfield runtime</h3><p>Client-zero execution application with bounded worker and project flow, build checks, revisioned artifacts, and authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></p></article>
+     <article><span class="nf-status nf-status--live">LIVE</span><h3>Noetfield runtime</h3><p>First-party execution application with bounded worker and project flow, build checks, revisioned artifacts, and authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></p></article>
      <article><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span><h3>SourceA / Runway</h3><p>Professional internal execution and evidence paths for governed software change and workflow commissioning.</p><p><a href="/applications/#sourcea">Applications overview</a></p></article>
      <article><span class="nf-status nf-status--demonstrated">NOETFIELD PRODUCT</span><h3>TrustField</h3><p>Noetfield Systems Inc.&apos;s regulated-operations and compliance product vertical. Public demonstrations use synthetic data.</p><p><a href="/applications/trustfield/">Boundary page</a> · <a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></p></article>
     </div>
@@ -91,7 +91,7 @@ def homepage() -> str:
    <div class="nf-corp-wrap">
     <div class="nf-section-head"><div><p class="nf-corp-eyebrow">Current evidence</p><h2 id="evidence-title">Named proof within stated scope</h2></div><p><a href="/proof/">Full evidence register →</a></p></div>
     <div class="nf-proof-grid">
-     <article class="nf-proof-card"><p class="nf-proof-card__status"><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span></p><h3>Governed replacement</h3><p>Internal client-zero workflow with failure capture, bounded repair, and verifier judgment.</p><p><a href="/proof/governed-replacement/">Case study</a></p></article>
+     <article class="nf-proof-card"><p class="nf-proof-card__status"><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span></p><h3>Governed replacement</h3><p>Internal first-party workflow with failure capture, bounded repair, and verifier judgment.</p><p><a href="/proof/governed-replacement/">Case study</a></p></article>
      <article class="nf-proof-card"><p class="nf-proof-card__status"><span class="nf-status nf-status--live">LIVE</span></p><h3>Claims-boundary correction</h3><p>Public correction of prior over-broad corporate claims; current boundaries on this site.</p><p><a href="/proof/claims-boundary-correction/">Case study</a> · <a href="/proof/claims-boundary-correction.json">JSON</a></p></article>
     </div>
     <p class="nf-corp-prose nf-illustrative-receipt-note"><strong>Illustrative receipt schemas</strong> on this site label sample fields only. They are not live execution receipts and do not assert PASS status, SHAs, or certification.</p>
@@ -117,7 +117,7 @@ def homepage() -> str:
     return (
         corp_head(
             "Noetfield Systems | Governed AI Execution",
-            "Noetfield Systems builds governed AI execution infrastructure. Client-zero commissioning is live; evidence is scoped and inspectable.",
+            "Noetfield Systems builds governed AI execution infrastructure. The founder-operated alpha is live; evidence is scoped and inspectable.",
             "https://www.noetfield.com/",
             extra_css=HOME_CSS,
         )
@@ -163,12 +163,12 @@ def applications_page() -> str:
   <section class="nf-inner-hero" aria-labelledby="apps-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Applications</p><h1 id="apps-title">Where the infrastructure meets work</h1></div>
-    <div><p class="nf-corp-lead">Client-zero commissioning, internal execution surfaces, validation products, and developer preview lanes — each with explicit status and boundary.</p></div>
+    <div><p class="nf-corp-lead">The founder-operated alpha, internal execution surfaces, validation products, and developer preview lanes — each with explicit status and boundary.</p></div>
    </div>
   </section>
   <section class="nf-corp-section" aria-labelledby="apps-grid-title">
    <div class="nf-corp-wrap nf-principle-grid">
-    <article id="client-zero"><span class="nf-status nf-status--live">LIVE</span><h3>Noetfield client-zero application</h3><p>Bounded worker and project flow, build/integrity checks, revisioned artifacts, authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></p></article>
+    <article id="client-zero"><span class="nf-status nf-status--live">LIVE ALPHA</span><h3>Noetfield application</h3><p>Bounded worker and project flow, build/integrity checks, revisioned artifacts, authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></p></article>
     <article id="sourcea"><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span><h3>SourceA / Runway execution surface</h3><p>Professional internal execution and evidence paths for governed software change.</p><p><a href="/runways/">Runways</a></p></article>
     <article><span class="nf-status nf-status--demonstrated">NOETFIELD PRODUCT</span><h3>TrustField boundary</h3><p>Noetfield Systems Inc.&apos;s regulated-operations and compliance product vertical. Public demonstrations use synthetic data.</p><p><a href="/applications/trustfield/">Boundary page →</a></p></article>
     <article><span class="nf-status nf-status--commissioning">COMMISSIONING</span><h3>Developer API</h3><p>Developer preview / commissioning lane — not a production corporate product surface.</p><p><a href="/deterministic-api/">Developer preview</a></p></article>
@@ -177,7 +177,7 @@ def applications_page() -> str:
 """
     return corp_page_open(
         "Applications — Noetfield Systems",
-        "Client-zero application, SourceA execution, TrustField boundary, and developer preview lanes.",
+        "The live alpha application, SourceA execution, TrustField boundary, and developer preview lanes.",
         "https://www.noetfield.com/applications/",
         "applications",
     ) + body + corp_page_close()
@@ -221,7 +221,7 @@ def public_interest_page() -> str:
    <h2>Freedom and fairness rationale</h2>
    <p>People and institutions need to see what ran, under what authority, and what was accepted — not only what a model proposed.</p>
    <h2>Current company state</h2>
-   <p>Client-zero commissioning is live. SourceA / Runway paths are demonstrated internally. External customers, revenue, and certification are not established.</p>
+   <p>The runtime is live as a founder-operated alpha. SourceA / Runway paths are demonstrated internally. External customers, revenue, and certification are not established.</p>
    <h2>Twelve-month milestones</h2>
    <ul>
     <li>Complete provider-attempt ledger (commissioning)</li>
@@ -254,8 +254,8 @@ def proof_page() -> str:
     <article class="nf-evidence-register">
      <header><h2>Governed replacement demonstration</h2><p><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span> · 2026-03</p></header>
      <dl class="nf-evidence-dl">
-      <dt>Scope</dt><dd>Internal client-zero workflow — retain/wrap/replace with verification and bounded repair.</dd>
-      <dt>Source</dt><dd>Client-zero commissioning bundle</dd>
+      <dt>Scope</dt><dd>Internal first-party workflow — retain/wrap/replace with verification and bounded repair.</dd>
+      <dt>Source</dt><dd>First-party commissioning bundle</dd>
       <dt>Proves</dt><dd>Failure capture, bounded repair, independent verification within infrastructure scope, receipt promotion.</dd>
       <dt>Does not prove</dt><dd>External customer deployment, revenue, universal correctness, or certification.</dd>
       <dt>Artifacts</dt><dd><a href="/proof/governed-replacement/">Case study</a> · <a href="/proof/governed-replacement.json">JSON</a></dd>
@@ -292,7 +292,7 @@ def about_page() -> str:
   <section class="nf-inner-hero" aria-labelledby="about-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Company</p><h1 id="about-title">Noetfield Systems Inc.</h1></div>
-    <div><p class="nf-corp-lead">Vancouver-based company building governed AI execution infrastructure. Client-zero commissioning is live; broader external adoption is not yet established.</p></div>
+    <div><p class="nf-corp-lead">Vancouver-based company building governed AI execution infrastructure. The runtime is live as a founder-operated alpha; no external customers or revenue yet.</p></div>
    </div>
   </section>
   <section class="nf-corp-section nf-corp-wrap nf-corp-prose">
@@ -300,7 +300,7 @@ def about_page() -> str:
    <p><strong>Sina Kazemnezhad</strong> is the founder and current sole operating lead of Noetfield Systems Inc., accountable for product strategy, systems engineering, governance design, and applied AI execution.</p>
    <h2>Current operating surfaces</h2>
    <ul>
-    <li><strong>Noetfield client-zero runtime</strong> — live bounded execution application. <a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></li>
+    <li><strong>Noetfield runtime</strong> — live bounded execution application, founder-operated alpha. <a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open client-zero alpha ↗</a></li>
     <li><strong>SourceA / Runway</strong> — Noetfield execution and evidence infrastructure for governed software change and workflow commissioning (demonstrated).</li>
    </ul>
    <h2>Corporate boundaries</h2>
@@ -326,13 +326,13 @@ def investors_page() -> str:
   <section class="nf-inner-hero" aria-labelledby="inv-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Investors / ecosystem</p><h1 id="inv-title">Company thesis and current state</h1></div>
-    <div><p class="nf-corp-lead">Governed AI execution infrastructure with client-zero commissioning live. Evidence is scoped; external customers and revenue are not established.</p></div>
+    <div><p class="nf-corp-lead">Governed AI execution infrastructure live as a founder-operated alpha. Evidence is scoped; external customers and revenue are not established.</p></div>
    </div>
   </section>
   <section class="nf-corp-section nf-corp-wrap">
    <div class="nf-principle-grid">
     <article><h3>Thesis</h3><p>Explicit authority, bounded execution, separate acceptance, and reopenable evidence for consequential AI work.</p></article>
-    <article><h3>Current state</h3><p>Live client-zero application · demonstrated SourceA/Runway paths · commissioning provider-attempt ledger and semantic acceptance.</p></article>
+    <article><h3>Current state</h3><p>Live alpha application · demonstrated SourceA/Runway paths · commissioning provider-attempt ledger and semantic acceptance.</p></article>
     <article><h3>Funding and support</h3><p><a href="/contact/?topic=program-funding">Program / funding</a> · <a href="/contact/?topic=technical-collaboration">Technical collaboration</a></p></article>
    </div>
    <p class="nf-corp-prose">No stale product inventory. {TRUSTFIELD_BOUNDARY_LINE} <a href="/proof/">Evidence register</a> · <a href="/proof/claims-boundary-correction/">Claims-boundary correction</a></p>

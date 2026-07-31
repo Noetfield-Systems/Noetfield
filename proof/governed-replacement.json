@@ -4,14 +4,14 @@
   "entity_type": "client_zero_demonstration",
   "generated_at": "2026-07-14T00:56:43Z",
   "audit_version": "0.1",
-  "audit_label": "PUBLIC CLIENT-ZERO PROOF v0.1 \u2014 Case Study #2 \u00b7 Governed replacement / wrap. Internal demonstration only. Not a Fortune-500 deployment claim.",
+  "audit_label": "PUBLIC FIRST-PARTY PROOF v0.1 \u2014 Case Study #2 \u00b7 Governed replacement / wrap. Internal demonstration only. Not a Fortune-500 deployment claim.",
   "disclosure_level": "public",
   "verdict_target": "PUBLIC_CLIENT_ZERO_PROOF_READY",
   "case_study": {
     "number": 2,
-    "title": "Governed Application Replacement \u2014 Client-Zero / Internal Demonstration",
+    "title": "Governed Application Replacement \u2014 First-Party Internal Demonstration",
     "slug": "governed-replacement",
-    "label": "Client-Zero / Internal Demonstration",
+    "label": "First-Party Internal Demonstration",
     "story": "Noetfield's buyer-facing Trust Ledger workspace at /workspace/ was served as a static mock that misrepresented the real governance console. This case study records the retain/wrap/replace decision, failed verification, repair, independent re-verification, promotion, and live re-proof \u2014 without claiming external enterprise production maturity.",
     "commercial_field": "Enterprise \u00b7 Governed Application Factory (Lane 1)",
     "workflow_under_change": {
@@ -182,7 +182,7 @@
     {
       "stage": "final_receipt",
       "status": "PROVEN",
-      "summary": "This public bundle plus live capture receipt and gate stdout constitute the final public receipt for Client-Zero Case Study #2 v0.1.",
+      "summary": "This public bundle plus live capture receipt and gate stdout constitute the final public receipt for First-Party Case Study #2 v0.1.",
       "receipt": {
         "run_id": "CS2-GISF-2026-07-14T005554Z",
         "public_page": "/proof/governed-replacement/",
@@ -302,7 +302,7 @@
     }
   },
   "limitations": [
-    "Internal client-zero demonstration \u2014 not an external customer engagement.",
+    "Internal first-party demonstration \u2014 not an external customer engagement.",
     "Does not claim Fortune-500 or regulated production maturity.",
     "Cost/time dollar metrics are not measured in this version.",
     "Does not implement the full Motor software-factory product.",

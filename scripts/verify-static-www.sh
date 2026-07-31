@@ -45,8 +45,8 @@ check_file "protected corporate homepage" index.html \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
   'NOETFIELD · AGENTIC SOFTWARE DELIVERY AND GOVERNED EXECUTION' \
   'Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.' \
-  'client-zero commissioning' \
-  'not established and are not claimed' \
+  'founder-operated alpha' \
+  'No external customers or revenue yet' \
   '/assets/product/noetfield-app-live.jpg' \
   'REAL PRODUCT VIEW · NOT A MOCKUP' \
   'DELIVERY PATH · STEP THROUGH' \
@@ -168,7 +168,7 @@ check_absent "recovered frontier page has no workspace conversion" frontier-syst
 
 check_file "about corporate positioning and TrustField boundary" about/index.html \
   'Noetfield Systems Inc.' 'Sina Kazemnezhad' 'Corporate boundaries' \
-  'SourceA' 'client-zero' \
+  'SourceA' 'founder-operated alpha' \
   'TrustField' 'regulated-operations and compliance product vertical' 'href="https://trustfield.ca/"' \
   'preserving human decision authority'
 check_absent "about has no SourceB catalogue" about/index.html 'SourceB'

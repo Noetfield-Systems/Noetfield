@@ -177,7 +177,7 @@ def trust_page() -> str:
     <table class="nf-corp-table">
      <thead><tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead>
      <tbody>
-      <tr><td>Export / evidence integrity checks (product)</td><td><span class="nf-status nf-status--demo">DEMONSTRATED</span></td><td><a href="/proof/">Public proof index</a> · client-zero scope</td></tr>
+      <tr><td>Export / evidence integrity checks (product)</td><td><span class="nf-status nf-status--demo">DEMONSTRATED</span></td><td><a href="/proof/">Public proof index</a> · first-party scope</td></tr>
       <tr><td>SOC 2 Type II (Noetfield as company)</td><td><span class="nf-status nf-status--legacy">NOT CERTIFIED</span></td><td>No audit report published</td></tr>
       <tr><td>ISO 27001 (Noetfield as company)</td><td><span class="nf-status nf-status--legacy">NOT CERTIFIED</span></td><td>No certificate published</td></tr>
       <tr><td>ISO 42001 (Noetfield as company)</td><td><span class="nf-status nf-status--legacy">NOT CERTIFIED</span></td><td>No certificate published</td></tr>
@@ -285,9 +285,9 @@ def proof_page() -> str:
       <p><strong>Source:</strong> Internal audit bundle · <a href="/proof/noetfield/">Case study</a> · <a href="/proof/noetfield.json">JSON</a></p>
      </article>
      <article class="nf-proof-card">
-      <p class="nf-proof-card__status"><span class="nf-status nf-status--demo">CLIENT-ZERO / INTERNAL</span> · 2026</p>
+      <p class="nf-proof-card__status"><span class="nf-status nf-status--demo">FIRST-PARTY / INTERNAL</span> · 2026</p>
       <h3>Governed replacement demonstration</h3>
-      <p><strong>Scope:</strong> Internal client-zero workflow — retain/wrap/replace with verification and repair.</p>
+      <p><strong>Scope:</strong> Internal first-party workflow — retain/wrap/replace with verification and repair.</p>
       <p><strong>Proves:</strong> Failure capture, bounded repair, independent verification, and receipt promotion.</p>
       <p><strong>Does not prove:</strong> Fortune-500 production deployment or universal correctness.</p>
       <p><strong>Source:</strong> <a href="/proof/governed-replacement/">Case study</a> · <a href="/proof/governed-replacement.json">JSON bundle</a></p>

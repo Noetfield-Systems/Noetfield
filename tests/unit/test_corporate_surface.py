@@ -49,13 +49,13 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
 
 
 def test_homepage_explains_company_narrative_proof_and_asks() -> None:
-    """Canonical v2 homepage: governed execution + client-zero commissioning."""
+    """Canonical v2 homepage: governed execution, live founder-operated alpha."""
     text = read(ROOT / "index.html")
     required = (
         "AGENTIC SOFTWARE DELIVERY AND GOVERNED EXECUTION",
-        "CLIENT-ZERO",
+        "LIVE ALPHA",
         "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.",
-        "client-zero commissioning",
+        "founder-operated alpha",
         "OPEN NOETFIELD APP",
         "SEE A COMPLETED PROJECT",
         "EXPLORE WORKFLOWS",
@@ -303,7 +303,7 @@ def test_corporate_footers_do_not_promote_legacy_systems() -> None:
 
 
 def test_corporate_nav_and_footer_link_to_live_app() -> None:
-    """Every corporate route keeps one visible client-zero alpha path in header."""
+    """Every corporate route keeps one visible live-alpha app path in header."""
     for path in (*PAGES, ROOT / "motors" / "index.html", ROOT / "runways" / "index.html"):
         text = read(path)
         nav_match = re.search(

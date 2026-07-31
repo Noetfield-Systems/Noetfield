@@ -24,7 +24,7 @@ NAV_ITEMS = (
 )
 
 CLIENT_ZERO_URL = "https://app.noetfield.com/"
-CLIENT_ZERO_LABEL = "Open client-zero alpha"
+CLIENT_ZERO_LABEL = "Open the live alpha"
 GITHUB_URL = "https://github.com/Noetfield-Systems/Noetfield"
 TRUSTFIELD_URL = "https://trustfield.ca/"
 TRUSTFIELD_BOUNDARY_LINE = (

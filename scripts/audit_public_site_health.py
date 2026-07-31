@@ -42,7 +42,7 @@ CORPORATE_HOME_REQUIRED = (
     "/proof/",
     "/public-interest/",
     "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.",
-    "client-zero commissioning",
+    "founder-operated alpha",
     "OPEN NOETFIELD APP",
     "SEE A COMPLETED PROJECT",
     "TrustField",

@@ -26,7 +26,7 @@ HOME_NEEDLES = (
     "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.",
     "Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.",
     "AI capability is abundant. Governed execution is not.",
-    "P05-class client-zero commissioning",
+    "founder-operated alpha",
     "TrustField",
     "trustfield.ca",
     "Inspect current proof",

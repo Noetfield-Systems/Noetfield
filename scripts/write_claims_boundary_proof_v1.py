@@ -70,7 +70,7 @@ CLAIMS_HTML = """<!DOCTYPE html>
     <a class="nf-vc-tile" href="/proof/governed-replacement/">
      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
      <span class="nf-vc-tile__label">Governed replacement proof</span>
-     <span class="nf-vc-tile__desc">Client-zero execution demonstration — separate scope.</span>
+     <span class="nf-vc-tile__desc">First-party execution demonstration — separate scope.</span>
     </a>
    </nav>
    <p class="nf-vc-note">Release: NOETFIELD_SFF_CANONICAL_PATCH_V1 · Supersedes parent-company self-audit at /proof/noetfield/.</p>
