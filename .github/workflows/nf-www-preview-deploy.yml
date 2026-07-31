@@ -1,0 +1,75 @@
+name: NF WWW Preview Deploy
+
+# Dispatch-only: builds the exact public artifact from any ref and pushes it
+# as a Cloudflare Pages PREVIEW deployment (non-production branch). The
+# production release pin (noetfield-www-proxy ORIGIN/RELEASE_SHA) is never
+# touched, so www.noetfield.com cannot be affected by this workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to build and preview"
+        required: true
+        default: "recovery/noetfield-product-surface-v1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nf-www-preview-deploy
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Build public artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+          npm ci
+          ./scripts/build-www-pages-dist.sh
+
+      - name: Deploy Pages preview
+        shell: bash
+        env:
+          CLOUDFLARE_ACCOUNT_ID: "0d0b967b77e2e5535455d39ff3dae72c"
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          SAFE_BRANCH="$(printf '%s' "${{ inputs.ref }}" | tr '/_.' '---' | cut -c1-40)"
+          npx --yes wrangler@4.103.0 pages deploy www-pages-dist \
+            --project-name noetfield-www \
+            --branch "preview-${SAFE_BRANCH}" \
+            --commit-dirty=true 2>&1 | tee preview-deploy.log
+          URL="$(grep -oE 'https://[a-z0-9-]+\.noetfield-www\.pages\.dev' preview-deploy.log | head -1)"
+          test -n "$URL"
+          {
+            echo "## NF WWW preview deployment"
+            echo ""
+            echo "- Ref: \`${{ inputs.ref }}\` @ \`$(git rev-parse HEAD)\`"
+            echo "- Immutable preview URL: $URL"
+            echo "- Production pin: untouched"
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "IMMUTABLE_PREVIEW_URL=$URL"
