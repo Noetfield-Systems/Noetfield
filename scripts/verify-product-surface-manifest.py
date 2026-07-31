@@ -35,7 +35,6 @@ REQUIRED_REMOVAL_FIELDS = (
 )
 PRIMARY_NAV_LABELS = (
     ">Product<",
-    ">App<",
     ">Workflows<",
     ">Assurance<",
     ">Developers<",

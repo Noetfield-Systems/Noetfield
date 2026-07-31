@@ -44,7 +44,7 @@ CORPORATE_HOME_REQUIRED = (
     "It runs the work, verifies the exact result, and lets you decide what gets accepted.",
     "founder-operated alpha",
     "OPEN NOETFIELD APP",
-    "SEE A COMPLETE RUN",
+    "WATCH A COMPLETE RUN",
     "TrustField",
     "regulated-operations and compliance product vertical",
     "preserving human decision authority",

@@ -92,7 +92,7 @@
       "backend_binding": "static",
       "evidence_link": "/proof/governed-replacement/",
       "founder_approved_visibility": "public",
-      "needle": "The workflow catalogue"
+      "needle": "Runways: the technical objects"
     },
     {
       "capability_id": "workflows-wedge-trustfield",
@@ -345,7 +345,40 @@
       "backend_binding": "static",
       "evidence_link": "/proof/governed-replacement/",
       "founder_approved_visibility": "public",
-      "needle": "The acceptance layer"
+      "needle": "The agent should not be the final judge of its own work."
+    },
+    {
+      "capability_id": "workflows-public-catalogue",
+      "route": "/workflows/",
+      "surface": "workflows/index.html",
+      "maturity": "live",
+      "state": "active",
+      "backend_binding": "static",
+      "evidence_link": "/demo/complete-run/",
+      "founder_approved_visibility": "public",
+      "needle": "Workflows"
+    },
+    {
+      "capability_id": "developers-hub",
+      "route": "/developers/",
+      "surface": "developers/index.html",
+      "maturity": "live",
+      "state": "active",
+      "backend_binding": "static",
+      "evidence_link": "/demo/complete-run/",
+      "founder_approved_visibility": "public",
+      "needle": "Build against governed execution"
+    },
+    {
+      "capability_id": "demo-complete-run",
+      "route": "/demo/complete-run/",
+      "surface": "demo/complete-run/index.html",
+      "maturity": "live",
+      "state": "active",
+      "backend_binding": "static",
+      "evidence_link": "/proof/governed-replacement.json",
+      "founder_approved_visibility": "public",
+      "needle": "A complete run, end to end"
     }
   ],
   "removals": []

@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 38,
+  "indexable_route_count": 41,
   "noindex_route_count": 117,
-  "route_count": 155,
+  "route_count": 158,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -695,6 +695,22 @@
       "verdict": "NOINDEX_DOCUMENTED"
     },
     {
+      "canonical_url": "https://www.noetfield.com/demo/complete-run/",
+      "description": "One real governed run on Noetfield's own system, end to end: authorized goal, exact candidate digest, failed verification, bounded repair, independent pass, human promotion, receipt.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/demo/complete-run/",
+      "title": "A Complete Run \u2014 Noetfield Systems",
+      "verdict": "PASS"
+    },
+    {
       "canonical_url": "https://www.noetfield.com/deterministic-api/",
       "description": "Specialized engine-endpoint lane. Schema-valid API surface \u2014 not the primary company definition. See AI Motors for the company narrative.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
@@ -741,6 +757,22 @@
       "route": "/deterministic-api/workspace/",
       "title": "Workspace \u2014 Noetfield API",
       "verdict": "NOINDEX_DOCUMENTED"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/developers/",
+      "description": "The Noetfield developer surface: API status, AI Motors, architecture, Action Contracts, acceptance and receipt schema direction, integration status, and current limitations.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/developers/",
+      "title": "Developers \u2014 Noetfield Systems",
+      "verdict": "PASS"
     },
     {
       "canonical_url": "https://www.noetfield.com/directory/",
@@ -2532,6 +2564,22 @@
       "profile": "corporate",
       "route": "/work-with-us/",
       "title": "Work with Noetfield \u2014 Connectors, Facilitators, Partners & Investors",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/workflows/",
+      "description": "Governed qualification paths from goal to accepted output\u2014or a documented safe stop. Three public runways: Governed Software Change, Decision Brief, and Institutional Workflow Commissioning.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/workflows/",
+      "title": "Workflows \u2014 Noetfield Systems",
       "verdict": "PASS"
     }
   ],

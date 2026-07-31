@@ -70,6 +70,8 @@ PRIORITY = {
     "/motors/": 0.9,
     "/deterministic-api/": 0.9,
     "/assurance/": 0.9,
+    "/workflows/": 0.9,
+    "/developers/": 0.9,
 }
 
 # Top-level marketing paths (index.html at depth 1) included if indexable
@@ -96,6 +98,8 @@ MARKETING_TOP = {
     "privacy",
     "resources",
     "runways",
+    "workflows",
+    "developers",
     "assurance",
     "motors",
     "deterministic-api",
@@ -110,6 +114,7 @@ MARKETING_NESTED = {
     ("copilot", "demo"),
     ("copilot", "procurement"),
     ("runways", "decision-brief"),
+    ("demo", "complete-run"),
 }
 
 

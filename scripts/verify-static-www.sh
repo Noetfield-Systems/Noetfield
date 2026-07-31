@@ -43,7 +43,7 @@ check_file "protected corporate homepage" index.html \
   '<body class="nf-corp nf-home">' '<main id="main">' \
   '/assets/noetfield-corporate-v1.css?v=4' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
-  'NOETFIELD · AI WORKFLOW AND APP PLATFORM' \
+  'AI WORKFLOWS + AGENT EXECUTION ASSURANCE' \
   'It runs the work, verifies the exact result, and lets you decide what gets accepted.' \
   'founder-operated alpha' \
   'No external customers or revenue yet' \
@@ -56,12 +56,12 @@ check_file "protected corporate homepage" index.html \
   'TrustField' 'href="https://trustfield.ca/"' 'regulated-operations and compliance product vertical' \
   'preserving human decision authority' \
   'href="/contact/"' 'Open Noetfield App' \
-  'OPEN NOETFIELD APP' 'SEE A COMPLETE RUN' 'EXPLORE THE ACCEPTANCE LAYER' \
+  'OPEN NOETFIELD APP' 'WATCH A COMPLETE RUN' 'EXPLORE ASSURANCE' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
   'nf-corp-section' 'nf-corp-hero' \
   'family=Newsreader' 'family=DM+Mono' \
   'href="/system/"' 'href="/applications/"' 'href="/about/"' 'href="/proof/"' \
-  'href="/public-interest/"' 'href="/runways/"' 'href="/deterministic-api/"' \
+  'href="/public-interest/"' 'href="/workflows/"' 'href="/developers/"' \
   'href="/motors/"' 'href="/assurance/"' 'href="/applications/trustfield/"' \
   'https://app.noetfield.com/' \
   '/assets/noetfield-home-v2.css'

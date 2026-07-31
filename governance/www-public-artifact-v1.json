@@ -121,12 +121,14 @@
     "copilot/readiness/intake/index.html",
     "copilot/sme/index.html",
     "copilot/trial/index.html",
+    "demo/complete-run/index.html",
     "deterministic-api/catalog.json",
     "deterministic-api/index.html",
     "deterministic-api/signin/index.html",
     "deterministic-api/workspace.css",
     "deterministic-api/workspace.js",
     "deterministic-api/workspace/index.html",
+    "developers/index.html",
     "directory/index.html",
     "enterprise/agent-transformation/index.html",
     "enterprise/application-factory/index.html",
@@ -265,7 +267,8 @@
     "trust-ledger/verify/index.html",
     "trust/index.html",
     "version.json",
-    "work-with-us/index.html"
+    "work-with-us/index.html",
+    "workflows/index.html"
   ],
   "pages_function_files": [
     "functions/_lib/pages-node-handler-adapter.js",
