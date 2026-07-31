@@ -215,6 +215,7 @@
     "privacy/index.html",
     "proof/claims-boundary-correction.json",
     "proof/claims-boundary-correction/index.html",
+    "proof/customer-zero/index.html",
     "proof/governed-replacement.json",
     "proof/governed-replacement/index.html",
     "proof/index.html",
