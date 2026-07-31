@@ -1,14 +1,46 @@
 # Product brief (external)
 
-> **Positioning lock (v1.2):** [docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md](docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md)  
-> *We produce the audit trail your Copilot deployment will be asked for later.*
+> Canonical promotional language lives in [docs/promo/ANSWER_BANK_v1.md](docs/promo/ANSWER_BANK_v1.md).
+> Positioning lock (v1.2, Trust Ledger lane): [docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md](docs/strategy/NOETFIELD_TRUST_LEDGER_POSITIONING_LOCKED_v1.2.md)
 
 ## Definition
 
-Noetfield is an **AI Governance & Evidence layer for Copilot adoption**. We produce the audit trail a regulated Copilot rollout will be asked for later: policy-bound go/no-go decisions, signed **Trust Ledger Entries (TLEs)**, metadata-only M365 evidence index, board PDF, and procurement ZIP before production scope opens.
+Noetfield Systems Inc. builds **governed AI execution**. Give Noetfield a goal and
+it structures the work, runs the team, checks the result, and keeps the evidence.
+The Noetfield app is an agentic workspace for turning a scoped request into planned,
+executed, checked, revisioned, and deployable work; **AI Motors** are the governed
+execution runtimes behind it: explicit authority before action, bounded workers,
+separate verification, bounded repair with documented safe stops, and a receipt for
+every accepted outcome. The verifier, not the model, decides what passes.
+
+**TrustField** is Noetfield Systems Inc.'s regulated-operations and compliance
+product vertical: FINTRAC case operations for Canadian MSBs, fintechs, PSPs, and
+digital-asset operators, with public synthetic demonstrations at trustfield.ca.
+
+**Status**: live alpha, founder-operated. First-party evidence is published at
+noetfield.com/proof/. No external customers or revenue yet.
 
 ## Value
 
-Regulated organizations adopt copilots faster than policy can keep pace. Noetfield gives CCO, CRO, CISO, CTO, procurement, and board teams a defensible decision package: who approved the use case, what evidence was inspected, what policy applied, what changed, and whether the export still verifies.
+For teams that need software and workflows delivered accountably: a workspace where
+work arrives planned, checked, and evidenced instead of pasted from a chat window.
 
-The lead paid path is the **Copilot Governance Pack ($2k-10k · 90 days)**. The buyer success signal is simple: one real organization uses a Noetfield board PDF in a governance meeting.
+For platform companies and their enterprise customers: an independent verification
+and governance harness for agentic systems. Platforms supply model capability;
+Noetfield supplies the authority, acceptance, and receipt layer consequential
+deployments are later audited against.
+
+For regulated operators: governed execution applied to real compliance work through
+TrustField, with the human FILE / NO-FILE / ESCALATE decision preserved.
+
+## Lanes
+
+- **Agentic delivery (lead)** — the Noetfield app, Runways workflow classes, and the
+  Deterministic API (developer preview). Entry: open the app, run the public
+  Decision Brief sample, or commission one consequential workflow.
+- **Copilot governance evidence** — the Trust Ledger lane for regulated Copilot
+  adoption: policy-bound go/no-go decisions, signed Trust Ledger Entries (TLEs),
+  metadata-only M365 evidence index, board PDF, and procurement ZIP. We produce the
+  audit trail a regulated Copilot rollout will be asked for later. Offer: **Copilot
+  Governance Pack ($2k-10k · 90 days)**; success signal: one real organization uses
+  a Noetfield board PDF in a governance meeting.

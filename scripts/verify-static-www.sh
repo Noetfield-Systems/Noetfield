@@ -482,6 +482,32 @@ python3 scripts/verify-public-output-allowlist.py || fail=1
 bash scripts/verify-public-chat-truth.sh || fail=1
 
 # Truth mockups — ban invented product copy on public www
+check_file "customer zero evidence page (single sanctioned context)" proof/customer-zero/index.html \
+  '<title>Noetfield as Customer Zero — Noetfield Systems</title>' \
+  '<link rel="canonical" href="https://www.noetfield.com/proof/customer-zero/" />' \
+  'FIRST-PARTY' 'internal users do not replace actual customers' \
+  'Does not prove' 'A receipt is not certification.'
+cz_containment=$(python3 - <<'PYCZ'
+import pathlib, re, sys
+allowed = pathlib.Path("proof/customer-zero/index.html").resolve()
+bad = []
+for p in pathlib.Path(".").glob("**/index.html"):
+    s = str(p)
+    if any(x in s for x in ("www-pages-dist", ".claude", "node_modules", "sites/", ".venv", "os/")):
+        continue
+    text = p.read_text(encoding="utf-8", errors="replace")
+    visible = re.sub(r'(id|class|aria-labelledby|href|data-[a-z-]+)="[^"]*"', "", text)
+    if re.search(r"(customer|client)[ -]zero", visible, re.I) and p.resolve() != allowed:
+        bad.append(s)
+print(",".join(sorted(bad)))
+PYCZ
+)
+if [[ -z "$cz_containment" ]]; then
+  ok "customer-zero term contained to its single evidence page"
+else
+  bad "customer-zero term leaked outside its page: $cz_containment"
+fi
+
 FAKE_PATTERN='HIPAA policy pack|Factory catalog|Most deployed|\$48,?000|\$48k transfer|18 nodes|24 nodes|Governed Exchange|Audit Factory'
 fake_fail=0
 for f in index.html templates/index.html runtime/index.html banner/index.html copilot/index.html pricing/index.html start/index.html; do
