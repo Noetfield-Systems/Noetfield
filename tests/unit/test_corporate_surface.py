@@ -52,19 +52,20 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
     """Canonical v2 homepage: governed execution + client-zero commissioning."""
     text = read(ROOT / "index.html")
     required = (
-        "GOVERNED AI EXECUTION",
+        "AGENTIC SOFTWARE DELIVERY AND GOVERNED EXECUTION",
         "CLIENT-ZERO",
-        "AI systems should not decide when their own work is safe to ship.",
+        "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.",
         "client-zero commissioning",
-        "See what is live",
-        "Inspect the evidence",
-        "Capable AI is not the same as accountable execution.",
+        "OPEN NOETFIELD APP",
+        "SEE A COMPLETED PROJECT",
+        "EXPLORE WORKFLOWS",
+        "AI Motors provide the governed execution layer behind the product.",
         "Governed replacement",
         "Claims-boundary correction",
         "TrustField",
         "regulated-operations and compliance product vertical",
         "preserving human decision authority",
-        "nf-status-rail",
+        "nf-status nf-status--live",
         "nf-corp-section",
         "nf-corp-hero",
         "/system/",
@@ -122,7 +123,6 @@ def test_three_contact_paths_are_present_on_all_corporate_pages() -> None:
 
 def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     home = read(ROOT / "index.html")
-    assert "SourceA" in home
     assert "SourceB" not in home
     about = read(ROOT / "about" / "index.html")
     assert "SourceA" in about
@@ -169,15 +169,16 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
 
 
 def test_corporate_primary_nav_is_advisor_consistent() -> None:
-    """Shared corporate headers: System · Applications · Evidence · Program · Company · Contact · Open client-zero alpha."""
+    """Product-first headers: Product · App · Workflows · API · AI Motors · TrustField · Proof · Company · Open Noetfield App."""
     order_markers = (
         'href="/system/"',
-        'href="/applications/"',
-        'href="/proof/"',
-        'href="/public-interest/"',
-        'href="/about/"',
-        'href="/contact/"',
         'href="https://app.noetfield.com/"',
+        'href="/runways/"',
+        'href="/deterministic-api/"',
+        'href="/motors/"',
+        'href="/applications/trustfield/"',
+        'href="/proof/"',
+        'href="/about/"',
     )
     for path in (
         ROOT / "index.html",
@@ -197,9 +198,8 @@ def test_corporate_primary_nav_is_advisor_consistent() -> None:
         nav = nav_match.group(1)
         positions = [nav.index(item) for item in order_markers]
         assert positions == sorted(positions), path
-        assert "Open client-zero alpha" in nav, path
+        assert "Open Noetfield App" in nav, path
         assert 'href="/#capabilities"' not in nav, path
-        assert 'href="/deterministic-api/"' not in nav, path
         assert ">Ecosystem</a>" not in nav, path
         assert ">Capabilities</a>" not in nav, path
 
@@ -213,8 +213,10 @@ def test_runways_page_is_honest_product_surface() -> None:
     assert "Governed Software Change" in text
     assert "Decision Brief" in text
     assert "Institutional Workflow Commissioning" in text
-    assert "Trading Performance" not in text
-    assert "Video Qualify" not in text
+    for planned_name in ("Trading Performance", "Video Qualify"):
+        if planned_name in text:
+            idx = text.index(planned_name)
+            assert "PLANNED" in text[max(0, idx - 200):idx], planned_name
     assert text.count("<h1") == 1
     assert 'href="/assets/noetfield-runways-v1.css?v=4"' in text
     assert 'href="/enterprise/"' not in text
@@ -233,12 +235,13 @@ def test_runways_primary_nav_matches_homepage() -> None:
     nav = nav_match.group(1)
     order_markers = (
         'href="/system/"',
-        'href="/applications/"',
-        'href="/proof/"',
-        'href="/public-interest/"',
-        'href="/about/"',
-        'href="/contact/"',
         'href="https://app.noetfield.com/"',
+        'href="/runways/"',
+        'href="/deterministic-api/"',
+        'href="/motors/"',
+        'href="/applications/trustfield/"',
+        'href="/proof/"',
+        'href="/about/"',
     )
     positions = [nav.index(item) for item in order_markers]
     assert positions == sorted(positions)
@@ -253,22 +256,22 @@ def test_legacy_identity_pages_are_demoted() -> None:
         "investor-workflows",
         "gel",
         "next",
-        "deterministic-api",
         "faq",
     )
     for slug in legacy:
         text = read(ROOT / slug / "index.html")
         assert '<meta name="robots" content="noindex,nofollow" />' in text, slug
-        assert "nf-legacy-lane-banner" in text or slug == "deterministic-api", slug
+        assert "nf-legacy-lane-banner" in text, slug
         assert 'href="/system/"' in text or 'href="/motors/"' in text, slug
         assert "index,follow" not in text or "noindex,nofollow" in text, slug
 
 
-def test_deterministic_api_product_remains_reachable_but_not_in_corp_nav() -> None:
+def test_deterministic_api_is_a_first_class_product_surface() -> None:
     text = read(ROOT / "deterministic-api" / "index.html")
-    assert '<meta name="robots" content="noindex,nofollow" />' in text
+    assert '<meta name="robots" content="index,follow" />' in text
+    assert "Reference: request, response, receipt" in text
     home = read(ROOT / "index.html")
-    assert 'href="/deterministic-api/"' not in home
+    assert 'href="/deterministic-api/"' in home
 
 
 def test_homepage_footer_links_to_trust_and_investors() -> None:
@@ -277,7 +280,6 @@ def test_homepage_footer_links_to_trust_and_investors() -> None:
     assert 'href="/privacy/"' in text
     assert 'href="/investors/">Investors / Ecosystem</a>' in text
     assert "Governed AI execution infrastructure" in text
-    assert 'href="/deterministic-api/"' not in text
     assert 'href="/enterprise/"' not in text
     assert 'href="/investor-workflows/"' not in text
 

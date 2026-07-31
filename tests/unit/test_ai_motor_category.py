@@ -46,12 +46,11 @@ def json_ld(path: Path) -> list[dict[str, object]]:
 
 def test_homepage_introduces_the_category_before_other_sections() -> None:
     text = visible_text(HOME)
-    what_exists = text.index('id="what-exists"')
-    loop = text.index('id="loop-title"')
-    evidence = text.index('id="evidence-title"')
-    assert what_exists < loop < evidence
-    assert "Noetfield runtime" in text
-    assert "SourceA" in text
+    hero = text.index('id="hero-title"')
+    walkthrough = text.index('id="walk-title"')
+    evidence = text.index('id="ev-title"')
+    assert hero < walkthrough < evidence
+    assert "AI Motors provide the governed execution layer behind the product." in text
     assert '<a href="/system/">' in text
     assert '<a href="/applications/">' in text
     assert "/assets/noetfield-home-v2.css" in text
@@ -214,7 +213,7 @@ def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
     home = read(HOME)
     motors = read(MOTORS)
     assert '<a href="/system/">' in home
-    assert '<a href="/system/" aria-current="page">' in motors
+    assert '<a href="/motors/" aria-current="page">' in motors
     assert "Motor &amp; Custom Workflow" not in motors
     assert (
         'property="og:image" content="https://www.noetfield.com/assets/social/noetfield-motors-v2.png"'

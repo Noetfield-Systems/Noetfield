@@ -50,8 +50,8 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 35,
-  "noindex_route_count": 118,
+  "indexable_route_count": 36,
+  "noindex_route_count": 117,
   "route_count": 153,
   "routes": [
     {
@@ -682,8 +682,8 @@
       "canonical_url": "https://www.noetfield.com/deterministic-api/",
       "description": "Specialized engine-endpoint lane. Schema-valid API surface \u2014 not the primary company definition. See AI Motors for the company narrative.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
-      "indexability": "noindex",
-      "noindex_reason": "source declares noindex",
+      "indexability": "indexable",
+      "noindex_reason": null,
       "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
       "png_dimensions": {
         "height": 630,
@@ -692,7 +692,7 @@
       "profile": "corporate",
       "route": "/deterministic-api/",
       "title": "Specialized lane \u2014 Deterministic API \u2014 Noetfield",
-      "verdict": "NOINDEX_DOCUMENTED"
+      "verdict": "PASS"
     },
     {
       "canonical_url": "https://www.noetfield.com/deterministic-api/signin/",

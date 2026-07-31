@@ -6,7 +6,7 @@
  <!-- Noetfield social preview v2: generated from data/noetfield-social-preview-v2.json -->
  <title>Specialized lane — Deterministic API — Noetfield</title>
  <meta name="description" content="Specialized engine-endpoint lane. Schema-valid API surface — not the primary company definition. See AI Motors for the company narrative." />
- <meta name="robots" content="noindex,nofollow" />
+ <meta name="robots" content="index,follow" />
  <link rel="canonical" href="https://www.noetfield.com/deterministic-api/" />
  <meta property="og:site_name" content="Noetfield" />
  <meta property="og:title" content="Specialized lane — Deterministic API — Noetfield" />
@@ -74,11 +74,8 @@
     <span>Noetfield <small>API</small></span>
    </a>
    <nav class="nf-corp-nav" aria-label="Primary navigation">
-    <a href="/deterministic-api/" aria-current="page">API preview</a>
-    <a href="/deterministic-api/workspace/">Workspace</a>
-    <a href="#proof">Proof</a>
-    <a href="#referral">Boundary</a>
-    <a class="nf-corp-nav__cta" href="/deterministic-api/signin/?next=%2Fdeterministic-api%2Fworkspace%2F">Sign in</a>
+    <a href="/system/">Product</a><a href="https://app.noetfield.com/" rel="noopener noreferrer">App</a><a href="/runways/">Workflows</a><a href="/deterministic-api/" aria-current="page">API</a><a href="/motors/">AI Motors</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a class="nf-corp-nav__cta" href="https://app.noetfield.com/">Open Noetfield App</a>
    </nav>
   </div>
  </header>
@@ -201,6 +198,67 @@
     </aside>
    </div>
   </section>
+ 
+  <section class="nf-corp-section" aria-labelledby="apiref-title">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="apiref-title">Reference: request, response, receipt</h2></div>
+    <p class="nf-corp-prose">The shapes below are documentation samples. They show the contract shape; they are not recorded runtime output. Endpoint activation is per workspace tenant during commissioning, so the public path answers only for enabled tenants.</p>
+    <div class="nf-principle-grid">
+     <article>
+      <h3>Sample request · shape only</h3>
+      <pre style="overflow-x:auto;font-size:13px;line-height:1.55">POST /v1/chat/completions
+Authorization: Bearer sk-nf-&lt;workspace key&gt;
+Content-Type: application/json
+
+{
+  "model": "noetfield-deterministic",
+  "messages": [{ "role": "user", "content": "&lt;task&gt;" }],
+  "response_format": {
+    "type": "json_schema",
+    "json_schema": { "name": "&lt;name&gt;", "schema": { "…": "…" } }
+  }
+}</pre>
+     </article>
+     <article>
+      <h3>Sample response · shape only</h3>
+      <pre style="overflow-x:auto;font-size:13px;line-height:1.55">{
+  "choices": [{
+    "message": { "role": "assistant", "content": "&lt;schema-valid JSON&gt;" },
+    "finish_reason": "stop"
+  }],
+  "nf": {
+    "schema_valid": true,
+    "repair_attempts": 0,
+    "receipt_id": "rcpt_&lt;id&gt;"
+  }
+}</pre>
+     </article>
+     <article>
+      <h3>Receipt schema · shape only</h3>
+      <pre style="overflow-x:auto;font-size:13px;line-height:1.55">{
+  "receipt_id": "rcpt_&lt;id&gt;",
+  "lane": "deterministic-api",
+  "schema": { "name": "&lt;name&gt;", "validated": true },
+  "verification": {
+    "attempts": [{ "n": 1, "result": "pass" }],
+    "repair_attempts": 0,
+    "repair_bound_reached": false
+  },
+  "boundary": "a receipt is not certification"
+}</pre>
+     </article>
+     <article>
+      <h3>Errors and safe stop</h3>
+      <p>The lane fails closed. If output cannot validate against the declared schema within the bounded repair budget, the request returns an error identifying the failed criterion instead of partial or unvalidated output. Provider routing stays behind the endpoint: your integration binds to the schema contract, not to any single upstream model, and provider families are enabled per tenant within tested scope.</p>
+     </article>
+     <article>
+      <h3>Current limitations</h3>
+      <p>Developer preview under commissioning. Endpoint activation, billing, and keys are workspace-scoped. Compatibility is tested per provider family within stated scope; universal SDK compatibility and production readiness are not claimed. No uptime commitments are published for the preview lane.</p>
+     </article>
+    </div>
+   </div>
+  </section>
+
  </main>
 
  <footer class="nf-corp-footer">

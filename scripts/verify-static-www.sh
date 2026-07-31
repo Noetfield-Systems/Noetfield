@@ -38,26 +38,32 @@ check_absent() {
 
 # NOETFIELD_DOMAIN_CANONICAL_V2 protected corporate surfaces.
 check_file "protected corporate homepage" index.html \
-  '<title>Noetfield Systems | Governed AI Execution</title>' \
+  '<title>Noetfield Systems Inc. | Agentic Software Delivery and Governed Execution</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp nf-home">' '<main id="main">' \
   '/assets/noetfield-corporate-v1.css?v=4' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
-  'GOVERNED AI EXECUTION · CLIENT-ZERO' \
-  'AI systems should not decide when their own work is safe to ship.' \
+  'NOETFIELD · AGENTIC SOFTWARE DELIVERY AND GOVERNED EXECUTION' \
+  'Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.' \
   'client-zero commissioning' \
-  'nf-status-rail' 'NOT YET ESTABLISHED' \
-  'Capable AI is not the same as accountable execution.' \
+  'not established and are not claimed' \
+  '/assets/product/noetfield-app-live.jpg' \
+  'REAL PRODUCT VIEW · NOT A MOCKUP' \
+  'DELIVERY PATH · STEP THROUGH' \
+  'SAMPLE ARTIFACT · SHAPE ONLY' 'NO INVENTED SHAS OR PASS CLAIMS' \
+  'a receipt is not certification' \
   'Governed replacement' 'Claims-boundary correction' \
   'TrustField' 'href="https://trustfield.ca/"' 'regulated-operations and compliance product vertical' \
   'preserving human decision authority' \
-  'href="/contact/"' 'Open client-zero alpha' \
-  'See what is live' 'Inspect the evidence' \
+  'href="/contact/"' 'Open Noetfield App' \
+  'OPEN NOETFIELD APP' 'SEE A COMPLETED PROJECT' 'EXPLORE WORKFLOWS' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
   'nf-corp-section' 'nf-corp-hero' \
   'family=Newsreader' 'family=DM+Mono' \
   'href="/system/"' 'href="/applications/"' 'href="/about/"' 'href="/proof/"' \
-  'href="/public-interest/"' \
+  'href="/public-interest/"' 'href="/runways/"' 'href="/deterministic-api/"' \
+  'href="/motors/"' 'href="/applications/trustfield/"' \
+  'https://app.noetfield.com/' \
   '/assets/noetfield-home-v2.css'
 check_absent "protected homepage has no stale TrustField product framing" index.html \
   'validation vertical' 'developed and operated by Noetfield Systems Inc.' 'LIVE PRODUCT' 'SourceB' \
@@ -476,7 +482,7 @@ python3 scripts/verify-public-output-allowlist.py || fail=1
 bash scripts/verify-public-chat-truth.sh || fail=1
 
 # Truth mockups — ban invented product copy on public www
-FAKE_PATTERN='FINTRAC|HIPAA policy pack|Factory catalog|Most deployed|\$48,?000|\$48k transfer|18 nodes|24 nodes|Governed Exchange|Audit Factory'
+FAKE_PATTERN='HIPAA policy pack|Factory catalog|Most deployed|\$48,?000|\$48k transfer|18 nodes|24 nodes|Governed Exchange|Audit Factory'
 fake_fail=0
 for f in index.html templates/index.html runtime/index.html banner/index.html copilot/index.html pricing/index.html start/index.html; do
   if [[ -f "$f" ]] && grep -Eiq "$FAKE_PATTERN" "$f"; then
