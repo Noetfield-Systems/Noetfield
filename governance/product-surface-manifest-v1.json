@@ -45,10 +45,10 @@
       "surface": "index.html",
       "maturity": "live",
       "state": "active",
-      "backend_binding": "static assets assets/product/app-teach/ (7 real product captures: public flow steps 1-4, workspace steps 5-7)",
+      "backend_binding": "static assets assets/product/app-teach/ (3 real product captures: public goal-to-plan flow, signed-in workspace overview, workspace checks panel)",
       "evidence_link": "/demo/complete-run/",
       "founder_approved_visibility": "public",
-      "needle": "/assets/product/app-teach/teach-step-5-command-deck.jpg"
+      "needle": "/assets/product/app-teach/teach-workspace-overview.jpg"
     },
     {
       "capability_id": "home-product-walkthrough",
