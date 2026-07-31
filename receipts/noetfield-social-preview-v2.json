@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 37,
+  "indexable_route_count": 38,
   "noindex_route_count": 117,
-  "route_count": 154,
+  "route_count": 155,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -212,6 +212,22 @@
       "profile": "corporate",
       "route": "/applications/trustfield/",
       "title": "TrustField boundary \u2014 Noetfield Systems",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/assurance/",
+      "description": "The acceptance, evidence, and improvement layer for agentic execution: explicit authority, separate acceptance, bounded repair, and replayable evidence before results are promoted.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/assurance/",
+      "title": "Assurance \u2014 The Acceptance Layer \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
@@ -1464,7 +1480,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/",
-      "description": "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence. AI Motors provide the governed execution layer behind the product.",
+      "description": "Noetfield turns operational goals into apps and workflows, coordinates the work across models and agents, and adds explicit authority, separate acceptance, bounded repair, and replayable evidence before results are promoted.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1475,7 +1491,7 @@
       },
       "profile": "corporate",
       "route": "/",
-      "title": "Noetfield Systems Inc. | Agentic Software Delivery and Governed Execution",
+      "title": "Noetfield Systems Inc. | AI Workflow and App Platform",
       "verdict": "PASS"
     },
     {

@@ -213,7 +213,7 @@ def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
     home = read(HOME)
     motors = read(MOTORS)
     assert '<a href="/system/">' in home
-    assert '<a href="/motors/" aria-current="page">' in motors
+    assert '<a href="/assurance/" aria-current="page">' in motors
     assert "Motor &amp; Custom Workflow" not in motors
     assert (
         'property="og:image" content="https://www.noetfield.com/assets/social/noetfield-motors-v2.png"'

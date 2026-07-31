@@ -15,7 +15,7 @@
       "backend_binding": "static",
       "evidence_link": "/proof/",
       "founder_approved_visibility": "public",
-      "needle": "Give Noetfield a goal."
+      "needle": "Build and run AI workflows that can prove what happened."
     },
     {
       "capability_id": "home-open-app-cta",
@@ -335,6 +335,17 @@
       "evidence_link": "/proof/",
       "founder_approved_visibility": "public",
       "needle": "independent verification layer"
+    },
+    {
+      "capability_id": "assurance-layer-page",
+      "route": "/assurance/",
+      "surface": "assurance/index.html",
+      "maturity": "live",
+      "state": "active",
+      "backend_binding": "static",
+      "evidence_link": "/proof/governed-replacement/",
+      "founder_approved_visibility": "public",
+      "needle": "The acceptance layer"
     }
   ],
   "removals": []

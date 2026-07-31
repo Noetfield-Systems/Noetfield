@@ -52,13 +52,13 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
     """Canonical v2 homepage: governed execution, live founder-operated alpha."""
     text = read(ROOT / "index.html")
     required = (
-        "AGENTIC SOFTWARE DELIVERY AND GOVERNED EXECUTION",
+        "AI WORKFLOW AND APP PLATFORM",
         "LIVE ALPHA",
-        "Give Noetfield a goal. It structures the work, runs the team, checks the result, and keeps the evidence.",
+        "Build and run AI workflows that can prove what happened.",
         "founder-operated alpha",
         "OPEN NOETFIELD APP",
-        "SEE A COMPLETED PROJECT",
-        "EXPLORE WORKFLOWS",
+        "SEE A COMPLETE RUN",
+        "EXPLORE THE ACCEPTANCE LAYER",
         "AI Motors provide the governed execution layer behind the product.",
         "Governed replacement",
         "Claims-boundary correction",
@@ -169,13 +169,13 @@ def test_motors_page_uses_the_corporate_navigation_and_footer() -> None:
 
 
 def test_corporate_primary_nav_is_advisor_consistent() -> None:
-    """Product-first headers: Product · App · Workflows · API · AI Motors · TrustField · Proof · Company · Open Noetfield App."""
+    """Product-first headers: Product · App · Workflows · Assurance · Developers · TrustField · Proof · Company · Open Noetfield App."""
     order_markers = (
         'href="/system/"',
         'href="https://app.noetfield.com/"',
         'href="/runways/"',
+        'href="/assurance/"',
         'href="/deterministic-api/"',
-        'href="/motors/"',
         'href="/applications/trustfield/"',
         'href="/proof/"',
         'href="/about/"',
@@ -237,8 +237,8 @@ def test_runways_primary_nav_matches_homepage() -> None:
         'href="/system/"',
         'href="https://app.noetfield.com/"',
         'href="/runways/"',
+        'href="/assurance/"',
         'href="/deterministic-api/"',
-        'href="/motors/"',
         'href="/applications/trustfield/"',
         'href="/proof/"',
         'href="/about/"',

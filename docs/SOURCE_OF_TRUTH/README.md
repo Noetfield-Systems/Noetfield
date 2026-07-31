@@ -52,6 +52,8 @@ These artifacts are canonical and hash-bound; changes require new versions.
 - [`strategy/noetfield-acquisition-readiness-scorecard-v1.json`](../../strategy/noetfield-acquisition-readiness-scorecard-v1.json) · sha256 `b3551e3451e510c073f2abf16b53eefd2822dd94da9ab0e49fb62a25e74a706e`
 - [`strategy/noetfield-existing-asset-inventory-v1.json`](../../strategy/noetfield-existing-asset-inventory-v1.json) · sha256 `862b742227c22aa36bfd1a06d8bd254935cfd274a1af654bac48d6530a105ba5`
 
+- [`strategy/NOETFIELD_POSITIONING_DECISION_v1.md`](../../strategy/NOETFIELD_POSITIONING_DECISION_v1.md) · sha256 `3cc1e598690665b701def27176948a9c60968dc16296f7fb664f308bdab769e7`
+
 Deep Research run status: NOT_STARTED (founder-launched externally); the
 run id is appended here when launched. Frozen prompt and attachment
 manifest hashes are recorded inside the thesis artifact.

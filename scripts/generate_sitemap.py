@@ -69,6 +69,7 @@ PRIORITY = {
     "/runways/decision-brief/": 0.85,
     "/motors/": 0.9,
     "/deterministic-api/": 0.9,
+    "/assurance/": 0.9,
 }
 
 # Top-level marketing paths (index.html at depth 1) included if indexable
@@ -95,6 +96,7 @@ MARKETING_TOP = {
     "privacy",
     "resources",
     "runways",
+    "assurance",
     "motors",
     "deterministic-api",
     "terms",
