@@ -1,0 +1,102 @@
+{
+  "schema": "noetfield-acquisition-readiness-scorecard-v1",
+  "version": 1,
+  "statuses": [
+    "STRONG",
+    "PARTIAL",
+    "MISSING"
+  ],
+  "assessed_at": "2026-07-31",
+  "dimensions": [
+    {
+      "dimension": "standalone_product",
+      "status": "PARTIAL",
+      "evidence": "Live alpha app + www surface; acceptance pipeline embedded, not extracted as standalone Gateway",
+      "smallest_next_proof": "Charter v0.2 API surface + one standalone evaluation run against a non-Noetfield workload"
+    },
+    {
+      "dimension": "defensible_ip",
+      "status": "PARTIAL",
+      "evidence": "Founder-built architecture and doctrine documents in repo; no filings",
+      "smallest_next_proof": "IP ownership statement + architecture provenance record in canon"
+    },
+    {
+      "dimension": "clean_ownership",
+      "status": "STRONG",
+      "evidence": "Single-founder company; repo history under company org",
+      "smallest_next_proof": "Written confirmation no third-party IP claims exist"
+    },
+    {
+      "dimension": "technical_team",
+      "status": "MISSING",
+      "evidence": "Founder-operated; no additional engineers",
+      "smallest_next_proof": "First contract/founding engineer or named technical collaborator"
+    },
+    {
+      "dimension": "external_customers",
+      "status": "MISSING",
+      "evidence": "None claimed; disclosed everywhere",
+      "smallest_next_proof": "One paid pilot with receipts (Decision Brief or commissioning)"
+    },
+    {
+      "dimension": "revenue",
+      "status": "MISSING",
+      "evidence": "None claimed",
+      "smallest_next_proof": "First paid receipt from an external party"
+    },
+    {
+      "dimension": "integrations",
+      "status": "MISSING",
+      "evidence": "Model-agnostic by design; no shipped vendor adapters",
+      "smallest_next_proof": "One working adapter (order set by Deep Research)"
+    },
+    {
+      "dimension": "developer_adoption",
+      "status": "MISSING",
+      "evidence": "Deterministic API is tenant-gated preview",
+      "smallest_next_proof": "Published schema/spec + first external developer workspace"
+    },
+    {
+      "dimension": "benchmarks",
+      "status": "MISSING",
+      "evidence": "No reproducible external benchmark",
+      "smallest_next_proof": "One reproducible acceptance benchmark on a public workload"
+    },
+    {
+      "dimension": "proprietary_data",
+      "status": "PARTIAL",
+      "evidence": "First-party receipts, failure records, audit receipts exist unorganized",
+      "smallest_next_proof": "Curated failure/evaluation corpus with schema (corpus v1)"
+    },
+    {
+      "dimension": "documentation",
+      "status": "PARTIAL",
+      "evidence": "Public architecture pages + proof register; no standalone product docs",
+      "smallest_next_proof": "Gateway charter v0.2 + public spec page when authorized"
+    },
+    {
+      "dimension": "security_posture",
+      "status": "PARTIAL",
+      "evidence": "Claim gates, edge pinning, evidence discipline; no external audit",
+      "smallest_next_proof": "Documented security overview; external review later"
+    },
+    {
+      "dimension": "diligence_readiness",
+      "status": "PARTIAL",
+      "evidence": "Investor diligence vault live; strategy canon now hash-bound",
+      "smallest_next_proof": "Data-room index mapping every claim to evidence"
+    },
+    {
+      "dimension": "category_recognition",
+      "status": "MISSING",
+      "evidence": "Category 'agent execution assurance' not yet publicly established",
+      "smallest_next_proof": "Deep Research verdict + one authoritative published explainer"
+    },
+    {
+      "dimension": "founder_dependency",
+      "status": "MISSING",
+      "evidence": "All execution knowledge concentrated in founder + machine",
+      "smallest_next_proof": "Runbook coverage for the acceptance pipeline; second operator"
+    }
+  ]
+}

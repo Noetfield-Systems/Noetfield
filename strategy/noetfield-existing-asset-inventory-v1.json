@@ -1,0 +1,165 @@
+{
+  "schema": "noetfield-existing-asset-inventory-v1",
+  "version": 1,
+  "classifications": [
+    "PROVEN_EXISTING",
+    "PARTIAL_EXISTING",
+    "DESIGNED_NOT_PROVEN",
+    "MISSING"
+  ],
+  "assessed_at": "2026-07-31",
+  "requirements": [
+    {
+      "requirement": "authorized_event (scoped goal, never open prompt)",
+      "classification": "PARTIAL_EXISTING",
+      "evidence": [
+        "api/_lib/runway-public-dispatch.js (HMAC allowlist, budget-capped)",
+        "app goal intake (live alpha)"
+      ],
+      "note": "Public dispatch proves the pattern narrowly; general event contract not extracted"
+    },
+    {
+      "requirement": "authority_envelope / policy_ref / budget_and_scope",
+      "classification": "PARTIAL_EXISTING",
+      "evidence": [
+        "PUBLIC_BUDGET_USD cap in dispatch",
+        "governed-replacement receipt fields (authority, delegated limit, budget)"
+      ],
+      "note": "Envelope resolution exists in-pipeline; no standalone policy contract format"
+    },
+    {
+      "requirement": "bounded executor with fencing",
+      "classification": "PROVEN_EXISTING",
+      "evidence": [
+        "www release pipeline exact-SHA pinning + anti-stale guard (scripts/nf_www_deploy_anti_stale_v2.py)",
+        "proof/governed-replacement/"
+      ],
+      "note": "First-party proven"
+    },
+    {
+      "requirement": "exact candidate binding (artifact digest)",
+      "classification": "PROVEN_EXISTING",
+      "evidence": [
+        "exact-artifact baseline SHAs across release receipts",
+        "verify-www-artifact-determinism manifest hashes"
+      ],
+      "note": "Artifact binding proven first-party; exact-EFFECT binding beyond artifacts is DESIGNED_NOT_PROVEN"
+    },
+    {
+      "requirement": "separate verifier distinct from producer",
+      "classification": "PROVEN_EXISTING",
+      "evidence": [
+        "proof/governed-replacement/ (verifier distinct from producing worker, fail->repair->pass)"
+      ],
+      "note": "First-party proven"
+    },
+    {
+      "requirement": "bounded repair with documented safe stop",
+      "classification": "PROVEN_EXISTING",
+      "evidence": [
+        "governed-replacement verification history (attempt FAIL, bounded repair, attempt PASS)"
+      ],
+      "note": "First-party proven"
+    },
+    {
+      "requirement": "escalation path",
+      "classification": "PARTIAL_EXISTING",
+      "evidence": [
+        "doctrine in motors/runways pages; escalation recorded in ops receipts"
+      ],
+      "note": "Not uniformly machine-enforced"
+    },
+    {
+      "requirement": "external human promotion gate",
+      "classification": "PROVEN_EXISTING",
+      "evidence": [
+        "founder promotion decisions recorded in release receipts and case study"
+      ],
+      "note": "First-party proven"
+    },
+    {
+      "requirement": "machine-readable receipt",
+      "classification": "PARTIAL_EXISTING",
+      "evidence": [
+        "proof/governed-replacement.json bundle",
+        "release receipts (noetfield-www-production.json schema)"
+      ],
+      "note": "Real receipts exist; unified receipt schema not standardized"
+    },
+    {
+      "requirement": "signed_receipt / verdict_digest signing",
+      "classification": "DESIGNED_NOT_PROVEN",
+      "evidence": [
+        "Trust Ledger Entries described as signed (trust-ledger lane)",
+        "site receipt sample is SHAPE ONLY"
+      ],
+      "note": "Signing exists in one lane; not generalized"
+    },
+    {
+      "requirement": "verifier_identity separation (attestable identity)",
+      "classification": "DESIGNED_NOT_PROVEN",
+      "evidence": [
+        "verifier separation is procedural today"
+      ],
+      "note": "Cryptographic verifier identity not implemented"
+    },
+    {
+      "requirement": "NOT_EVALUABLE fail-closed decision class",
+      "classification": "MISSING",
+      "evidence": [],
+      "note": "New in charter v0.1; current systems fail closed but without this decision taxonomy"
+    },
+    {
+      "requirement": "provider/model neutrality",
+      "classification": "PARTIAL_EXISTING",
+      "evidence": [
+        "deterministic-api provider families per tenant",
+        "model-agnostic routing design"
+      ],
+      "note": "Neutrality is designed and partially exercised; not conformance-tested"
+    },
+    {
+      "requirement": "standalone Gateway API/SDK",
+      "classification": "MISSING",
+      "evidence": [],
+      "note": "Extraction not started; charter only"
+    },
+    {
+      "requirement": "vendor adapters (IBM/NVIDIA/MCP/A2A)",
+      "classification": "MISSING",
+      "evidence": [],
+      "note": "Deliberately deferred to post-Deep-Research order"
+    },
+    {
+      "requirement": "cross-platform conformance testing",
+      "classification": "MISSING",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "requirement": "proprietary failure/evaluation corpus",
+      "classification": "PARTIAL_EXISTING",
+      "evidence": [
+        "receipts/, reports/www-audit/receipts/, agent-auto events"
+      ],
+      "note": "Raw material exists; not curated into a corpus"
+    },
+    {
+      "requirement": "inspectable failed/indeterminate attempts",
+      "classification": "PROVEN_EXISTING",
+      "evidence": [
+        "governed-replacement preserves failed attempt history",
+        "audit receipts retained"
+      ],
+      "note": "First-party proven"
+    },
+    {
+      "requirement": "receipt-is-not-certification boundary",
+      "classification": "PROVEN_EXISTING",
+      "evidence": [
+        "stated on every relevant public surface and receipt"
+      ],
+      "note": "Doctrine enforced by claim gates"
+    }
+  ]
+}

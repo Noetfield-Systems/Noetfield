@@ -1,0 +1,356 @@
+{
+  "schema": "noetfield-strategic-buyer-registry-v1",
+  "version": 1,
+  "authority": "NOETFIELD_STRATEGIC_CONTROL_POINT_THESIS_v1.md",
+  "classification_note": "Acquired-company founders inside buyers are classified as high-context validators and possible internal sponsors, not as universally preferred entry points.",
+  "buyers": [
+    {
+      "buyer": "IBM",
+      "category": "platform",
+      "stack_note": "Assembling enterprise-agent operating substrate (HashiCorp, DataStax, Confluent, watsonx, Red Hat). Missing question: independent acceptance/promotion of multi-agent results.",
+      "treat_as": [
+        "integration_partner",
+        "channel",
+        "strategic_investor",
+        "platform_customer",
+        "potential_acquirer"
+      ],
+      "roles": {
+        "technical_validator": [
+          {
+            "name": null,
+            "title": "watsonx ecosystem / DevRel leads",
+            "org_unit": "watsonx",
+            "source": "to research (week 1)",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ],
+        "product_platform_sponsor": [
+          {
+            "name": "Joanne Wright",
+            "title": "SVP Transformation & Operations (Client Zero)",
+            "org_unit": "Transformation & Operations",
+            "source": "ibm.com/case-studies/ibm-client-zero",
+            "status": "RESEARCHED",
+            "context_note": "Owns the operating model Noetfield practices; /proof/customer-zero/ cites IBM's program"
+          }
+        ],
+        "partner_engineering_owner": [
+          {
+            "name": null,
+            "title": "Build-motion partner manager",
+            "org_unit": "Partner Plus",
+            "source": "assigned on acceptance",
+            "status": "AFTER_APPLY",
+            "context_note": ""
+          }
+        ],
+        "strategic_investor": [
+          {
+            "name": null,
+            "title": "IBM Ventures scout",
+            "org_unit": "IBM Ventures",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ],
+        "corp_dev_contact": [
+          {
+            "name": null,
+            "title": "Corporate development, AI infrastructure",
+            "org_unit": "Corp Dev",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ]
+      }
+    },
+    {
+      "buyer": "NVIDIA",
+      "category": "platform",
+      "stack_note": "Owns compute, NIM, AI Enterprise, Run:ai orchestration. Gap: policy-to-receipt assurance for open-model and enterprise-agent runtimes. Ladder: Inception -> integration -> validation -> investment -> OEM -> acquisition.",
+      "treat_as": [
+        "integration_partner",
+        "channel",
+        "strategic_investor",
+        "platform_customer",
+        "potential_acquirer"
+      ],
+      "roles": {
+        "technical_validator": [],
+        "product_platform_sponsor": [
+          {
+            "name": "Howard Wright",
+            "title": "VP, Startup Ecosystem (Inception)",
+            "org_unit": "Inception",
+            "source": "linkedin.com/in/howard-wright-10b81584",
+            "status": "RESEARCHED",
+            "context_note": ""
+          }
+        ],
+        "partner_engineering_owner": [
+          {
+            "name": "Vanessa Ching",
+            "title": "Inception Global Partnerships / GTM",
+            "org_unit": "Inception",
+            "source": "linkedin.com/in/vching",
+            "status": "RESEARCHED",
+            "context_note": ""
+          },
+          {
+            "name": null,
+            "title": "Inception partner manager",
+            "org_unit": "Inception",
+            "source": "assigned on acceptance",
+            "status": "AFTER_APPLY",
+            "context_note": ""
+          }
+        ],
+        "strategic_investor": [],
+        "corp_dev_contact": [
+          {
+            "name": null,
+            "title": "Corp dev / NVentures",
+            "org_unit": "NVentures",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ]
+      }
+    },
+    {
+      "buyer": "Palo Alto Networks",
+      "category": "security",
+      "stack_note": "Acquired Portkey (AI gateway control plane), Protect AI, Koi. Extension: from interaction security to authorized-execution acceptance.",
+      "treat_as": [
+        "integration_partner",
+        "channel",
+        "strategic_investor",
+        "platform_customer",
+        "potential_acquirer"
+      ],
+      "roles": {
+        "technical_validator": [
+          {
+            "name": null,
+            "title": "Ex-Portkey founders/leads inside PANW",
+            "org_unit": "AI agent security product",
+            "source": "PANW investor release; to name (week 1)",
+            "status": "TO_RESEARCH",
+            "context_note": "High-context validators and possible internal sponsors"
+          }
+        ],
+        "product_platform_sponsor": [
+          {
+            "name": null,
+            "title": "AI security product leadership",
+            "org_unit": "Prisma AIRS / AI products",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ],
+        "partner_engineering_owner": [],
+        "strategic_investor": [],
+        "corp_dev_contact": [
+          {
+            "name": null,
+            "title": "Corporate development",
+            "org_unit": "Corp Dev",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ]
+      }
+    },
+    {
+      "buyer": "F5",
+      "category": "security",
+      "stack_note": "Acquired CalypsoAI ($180M): guardrails, runtime policy, audit logs. Adjacent missing piece: acceptance receipts for the work itself.",
+      "treat_as": [
+        "integration_partner",
+        "channel",
+        "strategic_investor",
+        "platform_customer",
+        "potential_acquirer"
+      ],
+      "roles": {
+        "technical_validator": [
+          {
+            "name": null,
+            "title": "Ex-CalypsoAI leads inside F5",
+            "org_unit": "AI guardrails product",
+            "source": "F5 investor release; to name (week 1)",
+            "status": "TO_RESEARCH",
+            "context_note": "High-context validators / possible internal sponsors"
+          }
+        ],
+        "product_platform_sponsor": [],
+        "partner_engineering_owner": [],
+        "strategic_investor": [],
+        "corp_dev_contact": [
+          {
+            "name": null,
+            "title": "Corporate development",
+            "org_unit": "Corp Dev",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ]
+      }
+    },
+    {
+      "buyer": "Cisco",
+      "category": "security",
+      "stack_note": "Robust Intelligence at core of AI Defense. Extension from 'was it malicious' to 'was it authorized, correctly executed, separately accepted'.",
+      "treat_as": [
+        "integration_partner",
+        "channel",
+        "strategic_investor",
+        "platform_customer",
+        "potential_acquirer"
+      ],
+      "roles": {
+        "technical_validator": [
+          {
+            "name": null,
+            "title": "Ex-Robust Intelligence leads",
+            "org_unit": "Cisco AI Defense",
+            "source": "cisco.com AI Defense; to name (week 1)",
+            "status": "TO_RESEARCH",
+            "context_note": "High-context validators / possible internal sponsors"
+          }
+        ],
+        "product_platform_sponsor": [],
+        "partner_engineering_owner": [],
+        "strategic_investor": [],
+        "corp_dev_contact": [
+          {
+            "name": null,
+            "title": "Corporate development",
+            "org_unit": "Corp Dev",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ]
+      }
+    },
+    {
+      "buyer": "ServiceNow",
+      "category": "workflow",
+      "stack_note": "Paid $2.85B for Moveworks (agent front door). Unowned: acceptance/evidence boundary between autonomous execution and organizational effect.",
+      "treat_as": [
+        "integration_partner",
+        "channel",
+        "strategic_investor",
+        "platform_customer",
+        "potential_acquirer"
+      ],
+      "roles": {
+        "technical_validator": [],
+        "product_platform_sponsor": [
+          {
+            "name": null,
+            "title": "Agentic platform / AI Control Tower leadership",
+            "org_unit": "Platform",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ],
+        "partner_engineering_owner": [],
+        "strategic_investor": [],
+        "corp_dev_contact": [
+          {
+            "name": null,
+            "title": "Corporate development",
+            "org_unit": "Corp Dev",
+            "source": "to research",
+            "status": "TO_RESEARCH",
+            "context_note": ""
+          }
+        ]
+      }
+    },
+    {
+      "buyer": "Palantir",
+      "category": "platform",
+      "stack_note": "Operating-model reference and potential partner; acquires only what it cannot reproduce: cross-platform provider-neutral acceptance outside Palantir.",
+      "treat_as": [
+        "integration_partner",
+        "channel",
+        "strategic_investor",
+        "platform_customer",
+        "potential_acquirer"
+      ],
+      "roles": {
+        "technical_validator": [
+          {
+            "name": "Shyam Sankar",
+            "title": "CTO",
+            "org_unit": "Office of the CTO",
+            "source": "TBPN interview (tbpndigest.com); officechai.com AI-FDE piece",
+            "status": "RESEARCHED",
+            "context_note": "Publicly argues value accrues to tooling that deploys agents safely at scale; deploying AI FDEs internally"
+          }
+        ],
+        "product_platform_sponsor": [],
+        "partner_engineering_owner": [],
+        "strategic_investor": [],
+        "corp_dev_contact": []
+      }
+    },
+    {
+      "buyer": "Microsoft",
+      "category": "platform",
+      "stack_note": "Copilot ecosystem; agent governance is the enterprise blocker for Copilot Studio customers.",
+      "treat_as": [
+        "integration_partner",
+        "channel",
+        "strategic_investor",
+        "platform_customer",
+        "potential_acquirer"
+      ],
+      "roles": {
+        "technical_validator": [
+          {
+            "name": "Jacob Andreou",
+            "title": "EVP, Copilot",
+            "org_unit": "Copilot",
+            "source": "blogs.microsoft.com 2026-03-17",
+            "status": "RESEARCHED",
+            "context_note": ""
+          }
+        ],
+        "product_platform_sponsor": [
+          {
+            "name": "Nitasha Chopra",
+            "title": "VP & COO, Copilot Studio",
+            "org_unit": "Copilot Studio",
+            "source": "microsoft.com Copilot Studio blog 2026",
+            "status": "RESEARCHED",
+            "context_note": ""
+          },
+          {
+            "name": "Charles Lamanna",
+            "title": "Copilot leadership (Business & Industry)",
+            "org_unit": "Copilot",
+            "source": "blogs.microsoft.com 2026-03-17",
+            "status": "RESEARCHED",
+            "context_note": ""
+          }
+        ],
+        "partner_engineering_owner": [],
+        "strategic_investor": [],
+        "corp_dev_contact": []
+      }
+    }
+  ]
+}
