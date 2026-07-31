@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 36,
+  "indexable_route_count": 37,
   "noindex_route_count": 117,
-  "route_count": 153,
+  "route_count": 154,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -1667,7 +1667,7 @@
       },
       "profile": "corporate",
       "route": "/partners/",
-      "title": "Noetfield \u2014 Partner Governance Infrastructure",
+      "title": "Noetfield \u2014 Partner Programs",
       "verdict": "PASS"
     },
     {
@@ -1924,6 +1924,22 @@
       "profile": "proof",
       "route": "/proof/claims-boundary-correction/",
       "title": "Claims-boundary correction \u2014 Noetfield Systems",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/proof/customer-zero/",
+      "description": "Noetfield operates its own technology on its own workflows, the practice IBM calls Client Zero and Microsoft calls Customer Zero. First-party evidence, stated limits.",
+      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "proof",
+      "route": "/proof/customer-zero/",
+      "title": "Noetfield as Customer Zero \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
