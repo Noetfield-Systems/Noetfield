@@ -1,97 +1,194 @@
 {
-  "schema": "noetfield_public_evidence_bundle_v1",
+  "schema": "noetfield_public_claim_evidence_bundle_v2",
+  "case_id": "CASE-001",
+  "proof_register_sequence": 3,
+  "title": "Green Tests, No Page",
+  "subtitle": "A repository-scoped study of agent-assisted delivery and customer-effect verification",
   "entity": "Noetfield Systems Inc.",
-  "entity_type": "agentic_coding_reliability_case_study",
-  "generated_at": "2026-08-01T08:00:00Z",
-  "audit_version": "0.1",
-  "audit_label": "Agentic Coding Reliability Case 001 — Green Tests, No Page. Repository-scoped incident evidence. Not a universal tool benchmark.",
   "disclosure_level": "public",
-  "verdict_target": "INCIDENT_EVIDENCE_LAB_PUBLISHED",
-  "case_study": {
-    "number": 3,
-    "slug": "agentic-coding-reliability-case-001",
-    "title": "Green Tests, No Page — An Evidence-Based Study of Agent-Assisted Software Delivery",
-    "public_url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
-    "repository": "Noetfield-Systems/NOETFIELD-RUNWAY",
-    "product_surface": "https://app.noetfield.com/",
-    "customer_goal": "Sign in, sentence to front person, public landing page ~1 min, plain copy, no false green UI",
-    "detailed_postmortem": "https://app.noetfield.com/postmortem/2026-07-app-incident/"
+  "canonical_url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
+  "publication_repository": "Noetfield-Systems/Noetfield",
+  "evidence_repository": "Noetfield-Systems/NOETFIELD-RUNWAY",
+  "product_surface": "https://app.noetfield.com/",
+  "evidence_snapshot_as_of": "2026-08-01T08:49:31.273Z",
+  "customer_outcome_contract": {
+    "request": "A signed-in customer gives the front person a normal sentence for a named business or service.",
+    "accepted_effect": "The app returns plain customer-facing status and an unauthenticated public page that matches the request.",
+    "rejected_substitutes": [
+      "health endpoint alone",
+      "unit tests alone",
+      "builder or verifier success without a public page",
+      "a done message whose link returns NOT_GENERATED",
+      "pipeline jargon shown as customer copy"
+    ]
   },
-  "evidence_classification": {
-    "PROVEN": "Hash-bound receipt, CI run, or independent live fetch cited in bundle",
-    "SUPPORTED": "Repository merge metadata without fresh live re-proof in this bundle",
-    "OWNER_OBSERVED": "Founder reproduction; IDs redacted from public record",
-    "UNKNOWN": "Not measured in this publication"
+  "classifications": {
+    "VERIFIED_RECEIPT": "A committed receipt binds a dated run, tested release and observed public effect or failure. It proves only that bounded run.",
+    "REPOSITORY_SUPPORTED": "Immutable repository metadata or source supports the statement, but does not independently prove a customer outcome.",
+    "OWNER_OBSERVED": "The account owner reports the production behavior. It is material testimony, not independent measurement.",
+    "UNKNOWN": "The current state or quantity has not been re-proved under the stated customer contract."
   },
-  "change_sets": [
+  "claims": [
     {
-      "phase": "pre_rewrite_baseline",
-      "attribution": "Cursor-attributed",
-      "classification": "SUPPORTED",
-      "result": "Golden-path era public HTTP 200 ~15-32s (PR #316 era)"
+      "claim_id": "CASE001-C01",
+      "statement": "A named-business production run returned a public HTTP 200 page headed Meridian Tax Group in 13,684 ms.",
+      "classification": "VERIFIED_RECEIPT",
+      "as_of": "2026-08-01T07:22:54.433Z",
+      "evidence_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
+      "evidence_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
+      "tested_app_release_sha": "2b818e415a2841d7e9eb390ba9f464722f92e8c7",
+      "scope": "One named-business prompt on one dated app release.",
+      "limitation": "The receipt does not identify a runtime implementation SHA and does not prove other prompt classes.",
+      "superseded_by": null,
+      "current_status": "HISTORICAL_BOUNDED_PASS"
     },
     {
-      "phase": "gate_rewrite",
-      "attribution": "Claude co-authored",
-      "classification": "SUPPORTED",
-      "result": "PR #322: 130 commits, 182 files; title-as-brand defect"
+      "claim_id": "CASE001-C02",
+      "statement": "On the same dated app release, a generic trade-description run failed to publish before timing out at 302,662 ms.",
+      "classification": "VERIFIED_RECEIPT",
+      "as_of": "2026-08-01T07:27:57.096Z",
+      "evidence_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json",
+      "evidence_sha256": "900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28",
+      "tested_app_release_sha": "2b818e415a2841d7e9eb390ba9f464722f92e8c7",
+      "scope": "One generic trade-description prompt.",
+      "limitation": "A later repair may change the result; no fresh production receipt is cited here.",
+      "superseded_by": null,
+      "current_status": "HISTORICAL_BOUNDED_FAILURE"
     },
     {
-      "phase": "initial_recovery",
-      "attribution": "Claude Code-assisted",
+      "claim_id": "CASE001-C03",
+      "statement": "The 07:28 incident matrix recorded three component rows verified and one optional generic-trade row open.",
+      "classification": "REPOSITORY_SUPPORTED",
+      "as_of": "2026-08-01T07:28:40.373Z",
+      "evidence_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/status.json",
+      "evidence_sha256": null,
+      "tested_app_release_sha": "2b818e415a2841d7e9eb390ba9f464722f92e8c7",
+      "scope": "Legacy four-row incident matrix.",
+      "limitation": "Only the named-entity row traversed the complete customer path. Workspace isolation and runtime readiness were component checks, so this is not a 3/3 customer-outcome pass.",
+      "superseded_by": "CASE001-C06",
+      "current_status": "SUPERSEDED_AS_CURRENT_CLOSURE"
+    },
+    {
+      "claim_id": "CASE001-C04",
+      "statement": "PR #322 spans 130 commits and 182 files.",
+      "classification": "REPOSITORY_SUPPORTED",
+      "as_of": "2026-07-26",
+      "evidence_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/322",
+      "evidence_sha256": null,
+      "tested_app_release_sha": null,
+      "scope": "Change-set size only.",
+      "limitation": "Size and co-author metadata do not prove sole authorship, causation, or a universal tool ranking.",
+      "superseded_by": null,
+      "current_status": "SUPPORTED_SCOPE_FACT"
+    },
+    {
+      "claim_id": "CASE001-C05",
+      "statement": "A later ten-scenario compile/router suite produced valid planned routes for all ten scenarios.",
+      "classification": "REPOSITORY_SUPPORTED",
+      "as_of": "2026-08-01T08:22:16.743Z",
+      "evidence_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/CANDIDATE_READY_FOR_FULL_SCENARIO_E2E.json",
+      "evidence_sha256": null,
+      "tested_app_release_sha": null,
+      "scope": "Local contract compilation and routing simulation.",
+      "limitation": "It did not build, publish, or fetch customer pages.",
+      "superseded_by": "CASE001-C06",
+      "current_status": "BUILD_EVIDENCE_NOT_DELIVERY_EVIDENCE"
+    },
+    {
+      "claim_id": "CASE001-C06",
+      "statement": "The subsequent ten-scenario live run recorded ten timeouts and zero delivered scenarios.",
+      "classification": "REPOSITORY_SUPPORTED",
+      "as_of": "2026-08-01T08:49:31.273Z",
+      "evidence_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
+      "evidence_sha256": null,
+      "tested_app_release_sha": null,
+      "scope": "One expanded live run targeting the production baseline.",
+      "limitation": "The candidate branch was not deployed to the target host, so this proves missing end-to-end delivery on that target, not candidate quality.",
+      "superseded_by": null,
+      "current_status": "FAIL_STAGING_LIVE_E2E"
+    },
+    {
+      "claim_id": "CASE001-C07",
+      "statement": "The account owner reports a multi-day customer-impact incident, repeated premature fixed declarations, paid attempts without deliverables, and client-facing internal jargon.",
       "classification": "OWNER_OBSERVED",
-      "result": "Merges landed; premature fixed conclusions from health/tests"
+      "as_of": "2026-08-01",
+      "evidence_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/",
+      "evidence_sha256": null,
+      "tested_app_release_sha": null,
+      "scope": "Owner experience and production reproductions during this incident.",
+      "limitation": "Duration, spend and attribution are not independently quantified in this bundle.",
+      "superseded_by": null,
+      "current_status": "OWNER_TESTIMONY"
     },
     {
-      "phase": "meridian_recovery",
-      "attribution": "Cursor-attributed",
-      "classification": "PROVEN",
-      "result": "Named-entity production E2E sealed 2026-08-01"
+      "claim_id": "CASE001-C08",
+      "statement": "Current full customer-outcome closure is unknown pending a fresh same-release run across named, generic, complex and repair scenarios.",
+      "classification": "UNKNOWN",
+      "as_of": "2026-08-01T08:49:31.273Z",
+      "evidence_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/docs/CUSTOMER_OUTCOME_MISSION_v1.md",
+      "evidence_sha256": null,
+      "tested_app_release_sha": null,
+      "scope": "Current production closure.",
+      "limitation": "No later complete same-release production receipt is cited.",
+      "superseded_by": null,
+      "current_status": "PENDING_FRESH_E2E"
     },
     {
-      "phase": "current_state",
-      "attribution": "Mixed",
-      "classification": "PROVEN",
-      "result": "Required matrix 3/3 verified; generic trade open"
+      "claim_id": "CASE001-C09",
+      "statement": "No controlled evidence in this case supports a universal ranking of Cursor, Claude Code, Codex, or any model.",
+      "classification": "UNKNOWN",
+      "as_of": "2026-08-01",
+      "evidence_url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
+      "evidence_sha256": null,
+      "tested_app_release_sha": null,
+      "scope": "Cross-tool generalization.",
+      "limitation": "A valid ranking requires frozen tasks, equal budgets and permissions, repeated runs, independent scoring and customer-effect acceptance.",
+      "superseded_by": null,
+      "current_status": "NOT_MEASURED"
     }
   ],
-  "measurements": {
-    "time_to_public_artifact_named_entity_ms": 13684,
-    "time_to_public_artifact_generic_trade": "timeout_gt_300s",
-    "required_matrix_pass_rate": "3/3",
-    "full_matrix_pass_rate": "3/4",
-    "pr_322_commits": 130,
-    "pr_322_changed_files": 182,
-    "production_deploy_gap_days": 6,
-    "last_known_good_sha": "6e192c34",
-    "sealed_verify_release_sha": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
-  },
-  "sealed_receipts": [
+  "corrections": [
     {
-      "matrix_id": "named_entity_sentence",
-      "url": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
-      "content_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
-      "classification": "PROVEN"
-    }
-  ],
-  "matrix_status_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/status.json",
-  "open_repairs": [
+      "correction_id": "CASE001-R01",
+      "prior_claim": "25 July was the last demonstrated working run.",
+      "disposition": "SUPERSEDED",
+      "replacement": "The record contains later bounded receipts. No single last-known-good claim is used without a complete same-release evidence chain.",
+      "reason": "The prior wording collapsed different API, UI, runtime and publication proofs into one date."
+    },
     {
-      "pr": 506,
-      "title": "Service category is not a business name",
-      "classification": "SUPPORTED"
-    }
-  ],
-  "limitations": [
-    "Not a controlled multi-tool benchmark",
-    "Public IDs redacted; project_ref_sha256 only",
-    "Unsourced aggregate commit totals omitted",
-    "Dollar cost of failed retries not measured in this bundle"
-  ],
-  "changelog": [
+      "correction_id": "CASE001-R02",
+      "prior_claim": "The required customer path passed 3/3 and therefore represented current closure.",
+      "disposition": "SUPERSEDED",
+      "replacement": "The legacy matrix recorded 3/4 component rows, while full customer-path prompt outcomes were one bounded pass and one bounded failure.",
+      "reason": "The rows tested different layers and were later superseded by an expanded customer-URL gate."
+    },
     {
-      "date": "2026-08-01",
-      "note": "Initial publication; corrected unsourced motor commit claim; sealed Meridian receipt"
+      "correction_id": "CASE001-R03",
+      "prior_claim": "2b818e... was a sealed verifier release.",
+      "disposition": "CORRECTED",
+      "replacement": "2b818e... is the tested app/static release bound to the dated receipts; runtime_source_sha was not established.",
+      "reason": "A receipt-bound app release is not proof of the runtime implementation identity."
+    },
+    {
+      "correction_id": "CASE001-R04",
+      "prior_claim": "Case 001 belonged to one repository.",
+      "disposition": "CORRECTED",
+      "replacement": "Publication source is Noetfield-Systems/Noetfield; incident implementation evidence is in Noetfield-Systems/NOETFIELD-RUNWAY.",
+      "reason": "Separating publication and product repositories prevents provenance confusion."
     }
-  ]
+  ],
+  "attribution_boundary": "Tool names on this page come from commit, pull-request or session metadata. Metadata can support co-authorship or assistance, but not sole authorship, intent, causation, or general tool quality.",
+  "privacy_boundary": "Raw session and project identifiers are not repeated here. Stable hashes are pseudonymous and may remain linkable across disclosures; they are not anonymous.",
+  "controlled_benchmark_required_for_tool_ranking": {
+    "status": "NOT_RUN",
+    "minimum_protocol": [
+      "same frozen repository SHA",
+      "same written task and acceptance contract",
+      "equal permissions, compute and time budget",
+      "isolated worktrees",
+      "at least three repeated runs per tool",
+      "independent browser-to-public-effect scorer",
+      "hash-bound raw outputs and correction log"
+    ]
+  }
 }

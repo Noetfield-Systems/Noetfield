@@ -4,12 +4,24 @@
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>Green Tests, No Page — Agentic Coding Reliability Case 001</title>
- <meta name="description" content="Evidence-based study: one repository, one customer goal, multiple AI-assisted change sets. What each session changed, what internal tests reported, and what the customer actually received." />
+ <meta name="description" content="A claim-level, repository-scoped study of internal green signals, customer-visible delivery failures, and evidence-bound repair." />
+ <meta name="robots" content="index,follow" />
  <meta name="theme-color" content="#07080a" />
  <link rel="canonical" href="https://www.noetfield.com/proof/agentic-coding-reliability-case-001/" />
+ <meta property="og:site_name" content="Noetfield" />
  <meta property="og:title" content="Green Tests, No Page — Agentic Coding Reliability Case 001" />
- <meta property="og:description" content="One repo. One customer goal. Multiple AI-assisted change sets. Internal green signals versus customer deliverables." />
+ <meta property="og:description" content="Internal green signals versus the customer effect, with dated receipts, limitations, and corrections." />
  <meta property="og:url" content="https://www.noetfield.com/proof/agentic-coding-reliability-case-001/" />
+ <meta property="og:type" content="website" />
+ <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-proof-v2.png" />
+ <meta property="og:image:width" content="1200" />
+ <meta property="og:image:height" content="630" />
+ <meta property="og:image:alt" content="Noetfield proof — evidence before claims." />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Green Tests, No Page — Agentic Coding Reliability Case 001" />
+ <meta name="twitter:description" content="Internal green signals versus the customer effect, with dated receipts, limitations, and corrections." />
+ <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-proof-v2.png" />
+ <meta name="twitter:image:alt" content="Noetfield proof — evidence before claims." />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,11 +29,16 @@
  <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
  <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=5" />
  <style>
-  .nf-ev-pill--proven { border-color: #3d8b6e; color: #3d8b6e; }
+  .nf-ev-pill--verified { border-color: #3d8b6e; color: #3d8b6e; }
   .nf-ev-pill--supported { border-color: #6b8cae; color: #6b8cae; }
   .nf-ev-pill--observed { border-color: #a08b5c; color: #a08b5c; }
   .nf-ev-pill--unknown { border-color: #888; color: #888; }
-  .nf-ev-measure td:last-child { font-family: ui-monospace, monospace; font-size: .88em; }
+  .nf-ev-scroll { overflow-x: auto; margin: 1rem 0; }
+  .nf-ev-scroll table { min-width: 760px; margin: 0; }
+  .nf-ev-callout { border-left: 3px solid currentColor; padding: .25rem 0 .25rem 1rem; }
+  .nf-ev-claim { scroll-margin-top: 2rem; }
+  .nf-ev-claim code, .nf-vc-section code { overflow-wrap: anywhere; }
+  .nf-ev-meta { font-family: ui-monospace, monospace; font-size: .82rem; opacity: .78; }
  </style>
 </head>
 <body class="nf-gate nf-gate--vc">
@@ -32,200 +49,177 @@
    <span class="nf-gate__locale">Evidence lab</span>
   </header>
   <main id="main" class="nf-gate__main">
-   <a class="nf-vc-back" href="/proof/">← Proof</a>
+   <a class="nf-vc-back" href="/proof/">← Proof register</a>
    <header class="nf-vc-hero">
     <p class="nf-vc-kicker">Case 001 · Agentic coding reliability</p>
     <h1>Green Tests, No Page</h1>
-    <p class="nf-vc-lead">An evidence-based study of agent-assisted software delivery. One repository. One customer goal. Multiple AI-assisted change sets. We compared what each session changed, what internal tests reported, and what the customer actually received.</p>
+    <p class="nf-vc-lead">A customer asked for one thing: type a normal request into the app and receive a working public page. This record compares component-level success with the customer effect, and shows exactly where the evidence stops.</p>
    </header>
    <div class="nf-vc-strip">
-    <span class="nf-vc-pill nf-ev-pill--observed">Classification: OWNER-OBSERVED + PROVEN mix</span>
-    <span class="nf-vc-pill">Repo: NOETFIELD-RUNWAY</span>
-    <span class="nf-vc-pill">Product: Company New / app.noetfield.com</span>
+    <span class="nf-vc-pill nf-ev-pill--verified">Claim-level evidence</span>
+    <span class="nf-vc-pill">Published from: Noetfield</span>
+    <span class="nf-vc-pill">Incident evidence: NOETFIELD-RUNWAY</span>
     <span class="nf-vc-pill">Not a universal tool scorecard</span>
    </div>
 
    <section class="nf-vc-section">
-    <h2>1 — Same customer goal</h2>
-    <p>Sign in to <a href="https://app.noetfield.com/">app.noetfield.com</a>, type a normal sentence to the front person (named business or trade description), receive a public landing page in about a minute with plain client copy — no pipeline jargon, no false “passed quality check” while publish failed.</p>
-    <p><strong>Acceptance contract (customer path):</strong> signed-in E2E → agent reply without gate codes → build completes → unauthenticated HTTP 200 on public preview URL → correct entity or trade on page.</p>
+    <h2>1 — The acceptance contract</h2>
+    <p><strong>Request:</strong> a signed-in customer gives the front person a normal sentence for a named business or service.</p>
+    <p><strong>Accepted effect:</strong> the app returns plain customer-facing status and an unauthenticated public page that matches the request.</p>
+    <p class="nf-ev-callout"><strong>Not accepted as substitutes:</strong> a health endpoint, unit tests, a builder verdict, a verifier verdict, or a “done” message whose public link returns <code>NOT_GENERATED</code>.</p>
    </section>
 
    <section class="nf-vc-section">
-    <h2>2 — Evidence classification</h2>
-    <table class="nf-vc-table">
-     <thead><tr><th>Label</th><th>Meaning</th></tr></thead>
-     <tbody>
-      <tr><td><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span></td><td>Hash-bound receipt, CI run, or independent live fetch in this publication</td></tr>
-      <tr><td><span class="nf-vc-pill nf-ev-pill--supported">SUPPORTED</span></td><td>Repository record (merge SHA, PR metadata) without fresh live re-proof here</td></tr>
-      <tr><td><span class="nf-vc-pill nf-ev-pill--observed">OWNER-OBSERVED</span></td><td>Founder reproduction on production; redacted from public IDs</td></tr>
-      <tr><td><span class="nf-vc-pill nf-ev-pill--unknown">UNKNOWN</span></td><td>Not measured or not sealed in this bundle</td></tr>
-     </tbody>
-    </table>
+    <h2>2 — What the record shows</h2>
+    <div class="nf-ev-scroll">
+     <table class="nf-vc-table">
+      <thead><tr><th>Bounded finding</th><th>Result</th><th>Evidence boundary</th></tr></thead>
+      <tbody>
+       <tr><td>Named-business run</td><td>HTTP 200 · “Meridian Tax Group” · 13,684 ms</td><td><span class="nf-vc-pill nf-ev-pill--verified">VERIFIED RECEIPT</span> one dated run</td></tr>
+       <tr><td>Generic trade-description run</td><td>No public page before 302,662 ms timeout</td><td><span class="nf-vc-pill nf-ev-pill--verified">VERIFIED RECEIPT</span> one dated failure</td></tr>
+       <tr><td>Legacy incident matrix</td><td>3 component rows verified · 1 row open</td><td><span class="nf-vc-pill nf-ev-pill--supported">REPOSITORY-SUPPORTED</span> not a 3/3 customer-path pass</td></tr>
+       <tr><td>Expanded ten-scenario router suite</td><td>10 plans compiled</td><td><span class="nf-vc-pill nf-ev-pill--supported">BUILD EVIDENCE</span> no public delivery</td></tr>
+       <tr><td>Expanded live run</td><td>10 timeouts · 0 delivered</td><td><span class="nf-vc-pill nf-ev-pill--supported">REPOSITORY-SUPPORTED</span> candidate branch not on target</td></tr>
+       <tr><td>Current production closure</td><td>Pending a fresh same-release E2E</td><td><span class="nf-vc-pill nf-ev-pill--unknown">UNKNOWN</span></td></tr>
+      </tbody>
+     </table>
+    </div>
    </section>
 
    <section class="nf-vc-section">
-    <h2>3 — Last-known-good baseline</h2>
-    <p><span class="nf-vc-pill nf-ev-pill--supported">SUPPORTED</span> Last successful Company New production deploy before the freeze: commit <code>6e192c34</code> (25 Jul 2026), including PR #316 golden-path work (Cursor co-authored). Sentence-to-site path worked; promotion gate stack from PR #322 was not yet on that bundle.</p>
+    <h2>3 — Why “green” was not “delivered”</h2>
+    <div class="nf-ev-scroll">
+     <table class="nf-vc-table">
+      <thead><tr><th>Green signal</th><th>What it actually established</th><th>Missing customer proof</th></tr></thead>
+      <tbody>
+       <tr><td>Health endpoint</td><td>A service answered a health request.</td><td>The signed-in job route, publish step and public URL could still fail.</td></tr>
+       <tr><td>Unit and content-gate tests</td><td>Selected code paths matched their fixtures.</td><td>Fixtures did not represent every natural-language request or the final public effect.</td></tr>
+       <tr><td>Motor or builder success</td><td>An internal artifact passed internal checks.</td><td>The app had not proved durable storage and an unauthenticated customer URL.</td></tr>
+       <tr><td>Local ten-scenario router PASS</td><td>Contracts and routes could be planned.</td><td>The corresponding live run later delivered zero of ten on its target.</td></tr>
+       <tr><td>Chat “done” message</td><td>A status path believed work was complete.</td><td>No independent public GET was bound to the announcement.</td></tr>
+      </tbody>
+     </table>
+    </div>
+    <p><strong>Root lesson:</strong> acceptance must bind the full effect: request → route → build → durable publish → independent public fetch → plain customer message.</p>
    </section>
 
    <section class="nf-vc-section">
-    <h2>4 — Change-set comparison (not global tool ranking)</h2>
-    <table class="nf-vc-table">
-     <thead>
-      <tr><th>Observed phase</th><th>Attribution</th><th>Evidence class</th><th>Evidenced result</th></tr>
-     </thead>
-     <tbody>
-      <tr>
-       <td>Pre-rewrite baseline</td>
-       <td>Cursor-attributed</td>
-       <td><span class="nf-vc-pill nf-ev-pill--supported">SUPPORTED</span></td>
-       <td>Public HTTP 200 pages in ~15–32s on golden-path era (PR #316 era)</td>
-      </tr>
-      <tr>
-       <td>Gate rewrite</td>
-       <td>Claude co-authored</td>
-       <td><span class="nf-vc-pill nf-ev-pill--supported">SUPPORTED</span></td>
-       <td>PR #322: 130 commits, 182 files — title-as-brand defect introduced; deterministic fallback removed</td>
-      </tr>
-      <tr>
-       <td>Initial recovery</td>
-       <td>Claude Code-assisted</td>
-       <td><span class="nf-vc-pill nf-ev-pill--observed">OWNER-OBSERVED</span></td>
-       <td>Real component fixes merged; repeated premature “fixed” conclusions from health/tests</td>
-      </tr>
-      <tr>
-       <td>Meridian recovery</td>
-       <td>Cursor-attributed</td>
-       <td><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span></td>
-       <td>Named-business path repaired; production E2E sealed 1 Aug 2026 (receipt below)</td>
-      </tr>
-      <tr>
-       <td>Current state</td>
-       <td>Mixed</td>
-       <td><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span> + open row</td>
-       <td>Required matrix 3/3 verified; generic trade path still open (optional matrix row timeout)</td>
-      </tr>
-     </tbody>
-    </table>
-    <p class="nf-vc-note">This table supports: “In this repository and incident, these specific change sets produced these outcomes.” It does <em>not</em> support: “Cursor is universally better than Claude.”</p>
+    <h2>4 — Change-set comparison, with attribution limits</h2>
+    <div class="nf-ev-scroll">
+     <table class="nf-vc-table">
+      <thead><tr><th>Phase</th><th>Metadata attribution</th><th>Supported statement</th><th>Not supported</th></tr></thead>
+      <tbody>
+       <tr><td>Earlier golden-path work</td><td>Cursor co-author metadata appears in related changes.</td><td>Earlier bounded runs produced public artifacts.</td><td>That every prompt class or current release worked.</td></tr>
+       <tr><td>Gate expansion, PR #322</td><td>Claude co-author metadata appears in the change set.</td><td>The PR spans 130 commits and 182 files.</td><td>That one tool solely authored or caused every later defect.</td></tr>
+       <tr><td>31 July recovery session</td><td>Claude Code session record plus owner testimony.</td><td>Multiple component repairs landed; the owner reports repeated premature “fixed” conclusions.</td><td>A controlled measurement of vendor quality or exact total harm.</td></tr>
+       <tr><td>Later routing and delivery candidates</td><td>Mixed Cursor/agent metadata.</td><td>The repository added outcome contracts, routing and delivery-state work.</td><td>Customer closure until the same release passes a live public-effect suite.</td></tr>
+      </tbody>
+     </table>
+    </div>
+    <p class="nf-vc-note">Commit and PR metadata can support co-authorship or assistance. It cannot establish sole authorship, intent, causation, or universal tool quality.</p>
    </section>
 
    <section class="nf-vc-section">
-    <h2>5 — Causal chain (condensed)</h2>
-    <pre class="nf-vc-flow">25 Jul  Last good app deploy (6e192c34)
-26 Jul  Title passed as brand (f8701f62) + PR #322 gate stack merged
-26–31 Jul  Zero successful Company New production deploys
-29–30 Jul  Motor staging deploys while app shell frozen
-31 Jul  PR #476 → Cloudflare 1101 on job routes; /healthz still green
-31 Jul  Repair cascade #478–#496; false-ready UI; jargon in chat
-1 Aug  Recovery #498–#504; named-entity E2E sealed; generic trade still open</pre>
+    <h2>5 — Claim ledger</h2>
+    <article id="CASE001-C01" class="nf-ev-claim">
+     <h3>C01 · Named-business bounded pass</h3>
+     <p><span class="nf-vc-pill nf-ev-pill--verified">VERIFIED RECEIPT</span> On 1 August, one named-business run returned HTTP 200 with H1 “Meridian Tax Group” in 13,684 ms.</p>
+     <p class="nf-ev-meta">tested app release 2b818e415a2841d7e9eb390ba9f464722f92e8c7 · receipt sha256 3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba</p>
+     <p><a href="https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json">Open the public receipt</a>. It proves this run, not all request classes.</p>
+    </article>
+    <article id="CASE001-C02" class="nf-ev-claim">
+     <h3>C02 · Generic trade bounded failure</h3>
+     <p><span class="nf-vc-pill nf-ev-pill--verified">VERIFIED RECEIPT</span> A generic trade-description run on the same tested app release failed to publish before 302,662 ms.</p>
+     <p class="nf-ev-meta">receipt sha256 900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28</p>
+     <p><a href="https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json">Open the public receipt</a>. No later production rerun is claimed here.</p>
+    </article>
+    <article id="CASE001-C03" class="nf-ev-claim">
+     <h3>C03 · Historical matrix, not current closure</h3>
+     <p><span class="nf-vc-pill nf-ev-pill--supported">REPOSITORY-SUPPORTED</span> The 07:28 snapshot recorded three component rows verified and one generic-trade row open. Only the named-entity row traversed the complete customer path.</p>
+     <p><a href="https://app.noetfield.com/postmortem/2026-07-app-incident/status.json">Open the historical matrix snapshot</a>.</p>
+    </article>
+    <article id="CASE001-C06" class="nf-ev-claim">
+     <h3>C06 · Expanded live run</h3>
+     <p><span class="nf-vc-pill nf-ev-pill--supported">REPOSITORY-SUPPORTED</span> A subsequent expanded run recorded ten timeouts and zero delivered scenarios. Its candidate branch was not deployed to the target host, so the result proves missing end-to-end delivery on that target—not candidate quality.</p>
+     <p><a href="https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json">Open the immutable repository receipt</a>.</p>
+    </article>
+    <article id="CASE001-C08" class="nf-ev-claim">
+     <h3>C08 · Current closure</h3>
+     <p><span class="nf-vc-pill nf-ev-pill--unknown">UNKNOWN</span> Current full customer-outcome closure requires a fresh same-release production run across named, generic, complex and repair scenarios. This page does not convert a branch candidate or historical matrix into current success.</p>
+    </article>
    </section>
 
    <section class="nf-vc-section">
-    <h2>6 — Customer outcome versus internal green signals</h2>
-    <table class="nf-vc-table">
-     <thead><tr><th>Internal signal</th><th>Customer received</th><th>Gap</th></tr></thead>
-     <tbody>
-      <tr><td><code>/healthz</code> OK</td><td>1101 on all job routes (#476)</td><td>Health ≠ customer path</td></tr>
-      <tr><td>Unit / verifier PASS</td><td>Gate compared truncated title to page (#322, f8701f62)</td><td>Wrong identity contract</td></tr>
-      <tr><td>“Passed quality check” in chat</td><td>CONTENT_GATES_FAILED in same thread</td><td>Stale preview vs publish error</td></tr>
-      <tr><td>Motor staging deploy green</td><td>App shell unchanged six days</td><td>Split-brain deploy</td></tr>
-      <tr><td>Named-entity E2E green (1 Aug)</td><td>HTTP 200, Meridian H1, 13.7s</td><td>Aligned — sealed receipt</td></tr>
-     </tbody>
-    </table>
+    <h2>6 — Owner-observed impact</h2>
+    <p><span class="nf-vc-pill nf-ev-pill--observed">OWNER-OBSERVED</span> The account owner reports that the product had produced pages before the gate changes, then suffered a multi-day customer-impact period involving repeated failed builds, internal jargon shown to the client, paid attempts without deliverables, and repeated premature “fixed” reports.</p>
+    <p>This testimony matters, but this bundle does not independently calculate total hours, model spend, lost opportunity, or causal share by vendor. Those quantities remain unsealed.</p>
    </section>
 
    <section class="nf-vc-section">
-    <h2>7 — Measurements (this publication)</h2>
-    <table class="nf-vc-table nf-ev-measure">
-     <thead><tr><th>Metric</th><th>Value</th><th>Class</th></tr></thead>
-     <tbody>
-      <tr><td>Time to first valid public artifact (named entity)</td><td>13,684 ms</td><td><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span></td></tr>
-      <tr><td>Time to artifact (generic trade)</td><td>Timeout &gt; 300s</td><td><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span> (failed)</td></tr>
-      <tr><td>Required customer-path pass rate (matrix)</td><td>3 / 3 verified</td><td><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span></td></tr>
-      <tr><td>Full matrix pass rate (incl. optional)</td><td>3 / 4 rows</td><td><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span></td></tr>
-      <tr><td>Gate rewrite scope (PR #322)</td><td>130 commits · 182 files</td><td><span class="nf-vc-pill nf-ev-pill--supported">SUPPORTED</span></td></tr>
-      <tr><td>Production deploy gap</td><td>6 days zero Company New prod deploys</td><td><span class="nf-vc-pill nf-ev-pill--supported">SUPPORTED</span></td></tr>
-      <tr><td>False “done/fixed” declarations</td><td>Multiple on 31 Jul session</td><td><span class="nf-vc-pill nf-ev-pill--observed">OWNER-OBSERVED</span></td></tr>
-      <tr><td>Founder interventions required</td><td>Reproduction + deploy unblock</td><td><span class="nf-vc-pill nf-ev-pill--observed">OWNER-OBSERVED</span></td></tr>
-      <tr><td>Paid attempts, no deliverable</td><td>Not dollar-metered here</td><td><span class="nf-vc-pill nf-ev-pill--unknown">UNKNOWN</span></td></tr>
-      <tr><td>Recovery window (freeze → sealed named E2E)</td><td>~7 calendar days</td><td><span class="nf-vc-pill nf-ev-pill--supported">SUPPORTED</span></td></tr>
-      <tr><td>Remaining unresolved defects</td><td>Generic trade publish; PR #506 open</td><td><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span></td></tr>
-     </tbody>
-    </table>
+    <h2>7 — Corrections preserved, not erased</h2>
+    <div class="nf-ev-scroll">
+     <table class="nf-vc-table">
+      <thead><tr><th>Prior claim</th><th>Disposition</th><th>Replacement</th></tr></thead>
+      <tbody>
+       <tr><td>25 July was the last demonstrated working run.</td><td>SUPERSEDED</td><td>Later bounded receipts exist; no single “last known good” is asserted without a complete same-release evidence chain.</td></tr>
+       <tr><td>The customer path passed 3/3 and represented current closure.</td><td>SUPERSEDED</td><td>The legacy matrix mixed component checks with one full path; prompt-level public outcomes were one pass and one failure.</td></tr>
+       <tr><td>2b818e… was a sealed verifier release.</td><td>CORRECTED</td><td>It is the tested app/static release bound to the dated receipts; runtime implementation identity was not established.</td></tr>
+       <tr><td>Publication and incident evidence came from one repository.</td><td>CORRECTED</td><td>The public page is in Noetfield; implementation evidence is in NOETFIELD-RUNWAY.</td></tr>
+      </tbody>
+     </table>
+    </div>
    </section>
 
    <section class="nf-vc-section">
-    <h2>8 — Sealed Meridian-class verification</h2>
-    <p><span class="nf-vc-pill nf-ev-pill--proven">PROVEN</span> Production E2E 1 Aug 2026 · release SHA <code>2b818e415a2841d7e9eb390ba9f464722f92e8c7</code></p>
+    <h2>8 — What would support a real tool comparison</h2>
+    <p>A controlled comparison has not been run. It needs the same frozen repository SHA, same written task, equal permissions and budget, isolated worktrees, repeated runs, an independent browser-to-public-effect scorer, and hash-bound raw outputs.</p>
+    <p><span class="nf-vc-pill nf-ev-pill--unknown">NOT MEASURED</span> Therefore this case supports a change-set and acceptance-boundary analysis—not “Cursor is always better” or “Claude is always worse.”</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>9 — Method and privacy boundaries</h2>
     <ul>
-     <li>Receipt: <a href="https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json">named_entity_sentence.json</a></li>
-     <li>content_sha256: <code>3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba</code></li>
-     <li>Result: HTTP 200 · H1 <em>Meridian Tax Group</em> · no jargon in first reply · project ref hashed (no raw IDs in public receipts)</li>
+     <li>Claims are separated into verified receipt, repository-supported, owner-observed and unknown.</li>
+     <li>Every numerical claim is tied to a dated run or immutable repository record.</li>
+     <li>Raw project and session identifiers are not repeated here.</li>
+     <li>Stable hashes are pseudonymous and may remain linkable; they are not anonymous.</li>
+     <li>Private repository links may require authorization. Public receipts are linked separately.</li>
+     <li>Dollar cost and total token spend remain unknown in this bundle.</li>
     </ul>
    </section>
 
    <section class="nf-vc-section">
-    <h2>9 — Methodology and limitations</h2>
-    <ul>
-     <li>Live E2E against production <code>app.noetfield.com</code> with fresh test accounts; receipts filed under the app postmortem path.</li>
-     <li>Attribution from GitHub co-author metadata and session labels — not a controlled multi-tool benchmark.</li>
-     <li>Public record redacts project and session IDs; uses <code>project_ref_sha256</code> only.</li>
-     <li>Unsourced aggregate commit counts (e.g. unsourced “motor moved N commits”) are omitted.</li>
-     <li>Dollar cost and token spend for failed retries: <span class="nf-vc-pill nf-ev-pill--unknown">UNKNOWN</span> in this bundle.</li>
-    </ul>
-   </section>
-
-   <section class="nf-vc-section">
-    <h2>10 — Vendor right of reply</h2>
-    <p>Anthropic, Cursor, and other vendors cited by co-authorship metadata may request corrections with verifiable citations. Contact: <a href="/contact/?topic=evidence-correction">evidence correction</a>. This page will publish a corrections log for substantiated updates.</p>
-   </section>
-
-   <section class="nf-vc-section">
-    <h2>11 — Corrections and changelog</h2>
-    <table class="nf-vc-table">
-     <thead><tr><th>Date</th><th>Correction</th></tr></thead>
-     <tbody>
-      <tr><td>2026-08-01</td><td>Initial publication. Removed unsourced “171 commits” motor drift claim; sealed Meridian receipt; redacted project/session IDs from public postmortem.</td></tr>
-     </tbody>
-    </table>
-   </section>
-
-   <section class="nf-vc-section">
-    <h2>12 — Links</h2>
+    <h2>10 — Sources and machine-readable record</h2>
     <nav class="nf-vc-grid nf-vc-grid--2" aria-label="Evidence links">
      <a class="nf-vc-tile" href="https://app.noetfield.com/postmortem/2026-07-app-incident/">
       <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
-      <span class="nf-vc-tile__label">Detailed postmortem (app)</span>
-      <span class="nf-vc-tile__desc">Multi-defect timeline, repair map, live matrix.</span>
+      <span class="nf-vc-tile__label">Detailed app postmortem</span>
+      <span class="nf-vc-tile__desc">Incident narrative, status snapshot and public receipts.</span>
      </a>
      <a class="nf-vc-tile" href="/proof/agentic-coding-reliability-case-001.json">
       <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
-      <span class="nf-vc-tile__label">Evidence bundle (JSON)</span>
-      <span class="nf-vc-tile__desc">Machine-readable case record.</span>
+      <span class="nf-vc-tile__label">Claim-level JSON bundle</span>
+      <span class="nf-vc-tile__desc">Nine claims, limitations, supersession and correction history.</span>
      </a>
-     <a class="nf-vc-tile" href="https://app.noetfield.com/postmortem/2026-07-app-incident/status.json">
+     <a class="nf-vc-tile" href="https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/322">
       <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
-      <span class="nf-vc-tile__label">Verification matrix status</span>
-      <span class="nf-vc-tile__desc">Live row status + closure bit.</span>
+      <span class="nf-vc-tile__label">Gate change set — PR #322</span>
+      <span class="nf-vc-tile__desc">Repository metadata; not a sole-causation claim.</span>
      </a>
-     <a class="nf-vc-tile" href="https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/actions/workflows/deploy-company-new-goals-preview.yml">
+     <a class="nf-vc-tile" href="https://github.com/Noetfield-Systems/Noetfield/pull/207">
       <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
-      <span class="nf-vc-tile__label">Deploy workflow (CI)</span>
-      <span class="nf-vc-tile__desc">Production promotion evidence.</span>
+      <span class="nf-vc-tile__label">Publication change — PR #207</span>
+      <span class="nf-vc-tile__desc">Source, CI and production-release trail for this page.</span>
      </a>
     </nav>
    </section>
 
    <section class="nf-vc-section">
-    <h2>Later — Agentic Coding Reliability Benchmark (planned)</h2>
-    <p>Frozen SHA · same written task · equal budget and permissions · isolated worktrees · 3–5 runs per tool · browser → build → public URL · independent scorer · hash-bound receipts. That becomes a provider-neutral benchmark supporting artifact/effect acceptance — not this incident case study.</p>
+    <h2>11 — Right of reply and correction policy</h2>
+    <p>Anthropic, Cursor, OpenAI, contributors, and affected operators may request a correction with verifiable citations through <a href="/contact/?topic=evidence-correction">the evidence-correction contact</a>. Substantiated corrections are appended with the prior claim preserved as superseded.</p>
    </section>
 
-   <p class="nf-vc-note">
-    Strategic category: provider-neutral <strong>artifact/effect acceptance</strong> — agents can produce green tests while the customer receives nothing; the acceptance layer must detect that gap.
-   </p>
+   <p class="nf-vc-note">Strategic category: provider-neutral <strong>artifact/effect acceptance</strong>. A system is not done when an internal agent says done. It is done when the intended customer effect is independently observed.</p>
   </main>
   <footer class="nf-gate__foot"><span>© 2026 Noetfield Systems Inc.</span></footer>
  </div>
