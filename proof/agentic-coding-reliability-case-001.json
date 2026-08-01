@@ -1,0 +1,211 @@
+{
+  "schema": "noetfield_public_claim_evidence_bundle_v2",
+  "case_id": "CASE-001",
+  "proof_register_sequence": 3,
+  "title": "Green Tests, No Page",
+  "subtitle": "A repository-scoped study of agent-assisted delivery and customer-effect verification",
+  "entity": "Noetfield Systems Inc.",
+  "disclosure_level": "public",
+  "canonical_url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
+  "publication_repository": "Noetfield-Systems/Noetfield",
+  "evidence_repository": "Noetfield-Systems/NOETFIELD-RUNWAY",
+  "product_surface": "https://app.noetfield.com/",
+  "evidence_snapshot_as_of": "2026-08-01T08:49:31.273Z",
+  "customer_outcome_contract": {
+    "request": "A signed-in customer gives the front person a normal sentence for a named business or service.",
+    "accepted_effect": "The app returns plain customer-facing status and an unauthenticated public page that matches the request.",
+    "rejected_substitutes": [
+      "health endpoint alone",
+      "unit tests alone",
+      "builder or verifier success without a public page",
+      "a done message whose link returns NOT_GENERATED",
+      "pipeline jargon shown as customer copy"
+    ]
+  },
+  "classifications": {
+    "VERIFIED_RECEIPT": "A committed receipt binds a dated run, tested release and observed public effect or failure. It proves only that bounded run.",
+    "REPOSITORY_SUPPORTED": "Immutable repository metadata or source supports the statement, but does not independently prove a customer outcome.",
+    "OWNER_OBSERVED": "The account owner reports the production behavior. It is material testimony, not independent measurement.",
+    "UNKNOWN": "The current state or quantity has not been re-proved under the stated customer contract."
+  },
+  "claims": [
+    {
+      "claim_id": "CASE001-C01",
+      "statement": "A named-business production run returned a public HTTP 200 page headed Meridian Tax Group in 13,684 ms.",
+      "classification": "VERIFIED_RECEIPT",
+      "as_of": "2026-08-01T07:22:54.433Z",
+      "evidence_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
+      "tested_app_release_sha": "2b818e415a2841d7e9eb390ba9f464722f92e8c7",
+      "scope": "One named-business prompt on one dated app release.",
+      "limitation": "The receipt does not identify a runtime implementation SHA and does not prove other prompt classes.",
+      "superseded_by": null,
+      "current_status": "HISTORICAL_BOUNDED_PASS",
+      "receipt_payload_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
+      "receipt_hash_scope": "SHA-256 of the receipt payload canonicalized by the incident runner; not a digital signature or literal file-byte hash."
+    },
+    {
+      "claim_id": "CASE001-C02",
+      "statement": "On the same dated app release, a generic trade-description run failed to publish before timing out at 302,662 ms.",
+      "classification": "VERIFIED_RECEIPT",
+      "as_of": "2026-08-01T07:27:57.096Z",
+      "evidence_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json",
+      "tested_app_release_sha": "2b818e415a2841d7e9eb390ba9f464722f92e8c7",
+      "scope": "One generic trade-description prompt.",
+      "limitation": "A later repair may change the result; no fresh production receipt is cited here.",
+      "superseded_by": null,
+      "current_status": "HISTORICAL_BOUNDED_FAILURE",
+      "receipt_payload_sha256": "900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28",
+      "receipt_hash_scope": "SHA-256 of the receipt payload canonicalized by the incident runner; not a digital signature or literal file-byte hash."
+    },
+    {
+      "claim_id": "CASE001-C03",
+      "statement": "The 07:28 incident matrix recorded three component rows verified and one optional generic-trade row open.",
+      "classification": "REPOSITORY_SUPPORTED",
+      "as_of": "2026-08-01T07:28:40.373Z",
+      "evidence_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/status.json",
+      "tested_app_release_sha": "2b818e415a2841d7e9eb390ba9f464722f92e8c7",
+      "scope": "Legacy four-row incident matrix.",
+      "limitation": "Only the named-entity row traversed the complete customer path. Workspace isolation and runtime readiness were component checks, so this is not a 3/3 customer-outcome pass.",
+      "superseded_by": "CASE001-C06",
+      "current_status": "SUPERSEDED_AS_CURRENT_CLOSURE"
+    },
+    {
+      "claim_id": "CASE001-C04",
+      "statement": "PR #322 spans 130 commits and 182 files.",
+      "classification": "REPOSITORY_SUPPORTED",
+      "as_of": "2026-07-26",
+      "evidence_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/pull/322",
+      "tested_app_release_sha": null,
+      "scope": "Change-set size only.",
+      "limitation": "Size and co-author metadata do not prove sole authorship, causation, or a universal tool ranking.",
+      "superseded_by": null,
+      "current_status": "SUPPORTED_SCOPE_FACT"
+    },
+    {
+      "claim_id": "CASE001-C05",
+      "statement": "A later ten-scenario compile/router suite produced valid planned routes for all ten scenarios.",
+      "classification": "REPOSITORY_SUPPORTED",
+      "as_of": "2026-08-01T08:22:16.743Z",
+      "evidence_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/CANDIDATE_READY_FOR_FULL_SCENARIO_E2E.json",
+      "tested_app_release_sha": null,
+      "scope": "Local contract compilation and routing simulation.",
+      "limitation": "It did not build, publish, or fetch customer pages.",
+      "superseded_by": "CASE001-C06",
+      "current_status": "BUILD_EVIDENCE_NOT_DELIVERY_EVIDENCE"
+    },
+    {
+      "claim_id": "CASE001-C06",
+      "statement": "The subsequent ten-scenario live run recorded ten timeouts and zero delivered scenarios.",
+      "classification": "REPOSITORY_SUPPORTED",
+      "as_of": "2026-08-01T08:49:31.273Z",
+      "evidence_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
+      "tested_app_release_sha": null,
+      "scope": "One expanded live run targeting the production baseline.",
+      "limitation": "The candidate branch was not deployed to the target host, so this proves missing end-to-end delivery on that target, not candidate quality.",
+      "superseded_by": null,
+      "current_status": "FAIL_STAGING_LIVE_E2E"
+    },
+    {
+      "claim_id": "CASE001-C07",
+      "statement": "The account owner reports a multi-day customer-impact incident, repeated premature fixed declarations, paid attempts without deliverables, and client-facing internal jargon.",
+      "classification": "OWNER_OBSERVED",
+      "as_of": "2026-08-01",
+      "evidence_url": "https://app.noetfield.com/postmortem/2026-07-app-incident/",
+      "tested_app_release_sha": null,
+      "scope": "Owner experience and production reproductions during this incident.",
+      "limitation": "Duration, spend and attribution are not independently quantified in this bundle.",
+      "superseded_by": null,
+      "current_status": "OWNER_TESTIMONY"
+    },
+    {
+      "claim_id": "CASE001-C08",
+      "statement": "Current full customer-outcome closure is unknown pending a fresh same-release run across named, generic, complex and repair scenarios.",
+      "classification": "UNKNOWN",
+      "as_of": "2026-08-01T08:49:31.273Z",
+      "evidence_url": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/docs/CUSTOMER_OUTCOME_MISSION_v1.md",
+      "tested_app_release_sha": null,
+      "scope": "Current production closure.",
+      "limitation": "No later complete same-release production receipt is cited.",
+      "superseded_by": null,
+      "current_status": "PENDING_FRESH_E2E"
+    },
+    {
+      "claim_id": "CASE001-C09",
+      "statement": "No controlled evidence in this case supports a universal ranking of Cursor, Claude Code, Codex, or any model.",
+      "classification": "UNKNOWN",
+      "as_of": "2026-08-01",
+      "evidence_url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
+      "tested_app_release_sha": null,
+      "scope": "Cross-tool generalization.",
+      "limitation": "A valid ranking requires frozen tasks, equal budgets and permissions, repeated runs, independent scoring and customer-effect acceptance.",
+      "superseded_by": null,
+      "current_status": "NOT_MEASURED"
+    }
+  ],
+  "corrections": [
+    {
+      "correction_id": "CASE001-R01",
+      "prior_claim": "25 July was the last demonstrated working run.",
+      "disposition": "SUPERSEDED",
+      "replacement": "The record contains later bounded receipts. No single last-known-good claim is used without a complete same-release evidence chain.",
+      "reason": "The prior wording collapsed different API, UI, runtime and publication proofs into one date."
+    },
+    {
+      "correction_id": "CASE001-R02",
+      "prior_claim": "The required customer path passed 3/3 and therefore represented current closure.",
+      "disposition": "SUPERSEDED",
+      "replacement": "The legacy matrix recorded 3/4 component rows, while full customer-path prompt outcomes were one bounded pass and one bounded failure.",
+      "reason": "The rows tested different layers and were later superseded by an expanded customer-URL gate."
+    },
+    {
+      "correction_id": "CASE001-R03",
+      "prior_claim": "2b818e... was a sealed verifier release.",
+      "disposition": "CORRECTED",
+      "replacement": "2b818e... is the tested app/static release bound to the dated receipts; runtime_source_sha was not established.",
+      "reason": "A receipt-bound app release is not proof of the runtime implementation identity."
+    },
+    {
+      "correction_id": "CASE001-R04",
+      "prior_claim": "Case 001 belonged to one repository.",
+      "disposition": "CORRECTED",
+      "replacement": "Publication source is Noetfield-Systems/Noetfield; incident implementation evidence is in Noetfield-Systems/NOETFIELD-RUNWAY.",
+      "reason": "Separating publication and product repositories prevents provenance confusion."
+    }
+  ],
+  "attribution_boundary": "Tool names on this page come from commit, pull-request or session metadata. Metadata can support co-authorship or assistance, but not sole authorship, intent, causation, or general tool quality.",
+  "privacy_boundary": "Raw session and project identifiers are not repeated here. Stable hashes are pseudonymous and may remain linkable across disclosures; they are not anonymous.",
+  "controlled_benchmark_required_for_tool_ranking": {
+    "status": "NOT_RUN",
+    "minimum_protocol": [
+      "same frozen repository SHA",
+      "same written task and acceptance contract",
+      "equal permissions, compute and time budget",
+      "isolated worktrees",
+      "at least three repeated runs per tool",
+      "independent browser-to-public-effect scorer",
+      "hash-bound raw outputs and correction log"
+    ]
+  },
+  "status": "EVIDENCE_SNAPSHOT",
+  "scope": "One repository-scoped, multi-day Company New incident and its dated repair evidence.",
+  "proves": [
+    "One named-business customer path produced a public page on a dated app release.",
+    "One generic trade-description customer path timed out on that same dated app release.",
+    "Component-level green signals did not establish the complete customer effect.",
+    "The later expanded live run did not deliver on its target."
+  ],
+  "does_not_prove": [
+    "A universal ranking of Cursor, Claude Code, Codex, or any model.",
+    "Sole authorship, intent, or tool causation.",
+    "Current production recovery or generic-trade delivery.",
+    "A matched app/runtime deployment identity.",
+    "External customer adoption, revenue, or certification."
+  ],
+  "artifacts": {
+    "evidence_page": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
+    "claim_bundle": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001.json",
+    "public_postmortem": "https://app.noetfield.com/postmortem/2026-07-app-incident/",
+    "historical_status_snapshot": "https://app.noetfield.com/postmortem/2026-07-app-incident/status.json",
+    "publication_pr": "https://github.com/Noetfield-Systems/Noetfield/pull/207"
+  }
+}
