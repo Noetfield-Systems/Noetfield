@@ -302,6 +302,26 @@
     "/contact/": {
       "title": "Contact \u2014 Noetfield Systems",
       "description": "Program funding, technical collaboration, and security/privacy contact."
+    },
+    "/workflows/": {
+      "title": "Workflows \u2014 Noetfield Systems",
+      "description": "Governed qualification paths from goal to accepted output\u2014or a documented safe stop. Three public runways: Governed Software Change, Decision Brief, and Institutional Workflow Commissioning."
+    },
+    "/developers/": {
+      "title": "Developers \u2014 Noetfield Systems",
+      "description": "The Noetfield developer surface: API status, AI Motors, architecture, Action Contracts, acceptance and receipt schema direction, integration status, and current limitations."
+    },
+    "/assurance/": {
+      "title": "Assurance \u2014 The Acceptance Layer \u2014 Noetfield Systems",
+      "description": "The acceptance, evidence, and improvement layer for agentic execution: explicit authority, separate acceptance, bounded repair, and replayable evidence before results are promoted."
+    },
+    "/gate/intake/": {
+      "title": "Noetfield \u2014 Engagement Intake Gateway",
+      "description": "Unified engagement intake for Trust Brief, Copilot, and Bank Pilot."
+    },
+    "/start/": {
+      "title": "Noetfield \u2014 Start Free Sandbox",
+      "description": "Developer sandbox: sign up, try Governance API and workspace without a sales call. 14-day trial, 50 evaluate calls."
     }
   },
   "source_sync_routes": [
@@ -312,6 +332,11 @@
     "/applications/trustfield/",
     "/public-interest/",
     "/contact/",
+    "/workflows/",
+    "/developers/",
+    "/assurance/",
+    "/gate/intake/",
+    "/start/",
     "/enterprise/",
     "/enterprise/application-factory/",
     "/frontier-systems/",

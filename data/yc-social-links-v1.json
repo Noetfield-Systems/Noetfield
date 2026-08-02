@@ -137,6 +137,69 @@
       "require_json_ld": true,
       "image_must_be_same_host": true,
       "image_filename": "agentic-coding-incident-2026-07.png"
+    },
+    {
+      "id": "workflows",
+      "url": "https://www.noetfield.com/workflows/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "runways-hub",
+      "url": "https://www.noetfield.com/runways/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "research-packs",
+      "url": "https://www.noetfield.com/research-packs/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "deterministic-api",
+      "url": "https://www.noetfield.com/deterministic-api/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "developers",
+      "url": "https://www.noetfield.com/developers/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "assurance",
+      "url": "https://www.noetfield.com/assurance/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "gate-intake",
+      "url": "https://www.noetfield.com/gate/intake/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
     }
   ]
 }
