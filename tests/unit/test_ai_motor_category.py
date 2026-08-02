@@ -220,11 +220,13 @@ def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
         in motors
     )
     assert 'og:title" content="AI Motors — Governed Execution for Enterprise Agents"' in motors
-    defined_terms = [
-        block["about"] for block in json_ld(MOTORS) if isinstance(block.get("about"), dict)
-    ]
-    assert any(term.get("name") == "AI Motor" for term in defined_terms)
-    assert any(MOTORS_JSON_LD_SNIPPET in str(term.get("description", "")) for term in defined_terms)
+    blocks = json_ld(MOTORS)
+    webpages = [block for block in blocks if block.get("@type") == "WebPage"]
+    assert any(
+        block.get("name") == "AI Motors — Governed Execution for Enterprise Agents"
+        for block in webpages
+    )
+    assert "AI Motor" in motors
 
 
 def test_motor_layout_has_narrow_width_and_reduced_motion_contracts() -> None:

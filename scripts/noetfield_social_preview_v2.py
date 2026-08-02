@@ -35,6 +35,11 @@ MANAGED_COMMENT_RE = re.compile(
     r"data/noetfield-social-preview-v2\.json\s*-->\s*",
     re.IGNORECASE,
 )
+MANAGED_WEBPAGE_JSON_LD_RE = re.compile(
+    r"\s*<!--\s*nf-json-ld:\s*webpage\s*-->\s*"
+    r"<script\s+type=\"application/ld\+json\">\s*.*?\s*</script>\s*",
+    re.IGNORECASE | re.DOTALL,
+)
 ATTR_RE = re.compile(
     r"([:\w-]+)\s*=\s*(?:\"([^\"]*)\"|'([^']*)'|([^\s>]+))",
     re.IGNORECASE,
@@ -357,6 +362,33 @@ def article_metadata_lines(row: RouteMetadata) -> str:
     return "".join(lines)
 
 
+def json_ld_webpage_block(row: RouteMetadata, config: dict[str, Any]) -> str:
+    if row.og_type != "website":
+        return ""
+    canonical = f"{config['site_origin']}{row.route}"
+    payload = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": row.title,
+        "description": row.description,
+        "url": canonical,
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": str(config["site_name"]),
+            "url": f"{config['site_origin']}/",
+        },
+    }
+    image = card_url_for_row(row, config)
+    if image:
+        payload["image"] = image
+    return (
+        " <!-- nf-json-ld: webpage -->\n"
+        ' <script type="application/ld+json">\n'
+        f"{json.dumps(payload, indent=2, ensure_ascii=True)}\n"
+        " </script>\n"
+    )
+
+
 def json_ld_article_block(row: RouteMetadata, config: dict[str, Any]) -> str:
     if row.og_type != "article":
         return ""
@@ -435,11 +467,13 @@ def metadata_block(row: RouteMetadata, config: dict[str, Any]) -> str:
         f' <meta name="twitter:description" content="{values["description"]}" />\n'
         f' <meta name="twitter:image" content="{values["image"]}" />\n'
         f' <meta name="twitter:image:alt" content="{values["alt"]}" />\n'
+        f"{json_ld_webpage_block(row, config)}"
         f"{json_ld_article_block(row, config)}"
     )
 
 
 def remove_managed_metadata(text: str) -> str:
+    text = MANAGED_WEBPAGE_JSON_LD_RE.sub("\n", text)
     text = MANAGED_COMMENT_RE.sub("\n", TITLE_RE.sub("\n", text))
 
     def remove_meta(match: re.Match[str]) -> str:
