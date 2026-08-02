@@ -3,26 +3,68 @@
   "linkedin_user_agent": "LinkedInBot/1.0 (compatible; Mozilla/5.0; +http://www.linkedin.com)",
   "links": [
     {
+      "id": "complete-run",
+      "url": "https://www.noetfield.com/demo/complete-run/",
+      "host": "www",
+      "og_type": "website",
+      "expected_title": "See a Governed AI Workflow Complete End to End",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "featured-complete-run-v1.png",
+      "featured": true
+    },
+    {
       "id": "app-product",
       "url": "https://app.noetfield.com/",
       "host": "app",
       "og_type": "website",
+      "expected_title": "Noetfield — Live Governed AI Workflow Alpha",
       "require_author": false,
       "require_json_ld": true,
-      "image_must_be_same_host": true
-    },
-    {
-      "id": "www-home",
-      "url": "https://www.noetfield.com/",
-      "host": "www",
-      "og_type": "website",
-      "require_author": false,
-      "require_json_ld": true,
-      "image_must_be_same_host": true
+      "image_must_be_same_host": true,
+      "image_filename": "featured-app-live-alpha-v1.png",
+      "featured": true
     },
     {
       "id": "motors",
       "url": "https://www.noetfield.com/motors/",
+      "host": "www",
+      "og_type": "website",
+      "expected_title": "AI Motors — Governed Execution for Enterprise Agents",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "featured-motors-enterprise-v1.png",
+      "featured": true
+    },
+    {
+      "id": "case-001",
+      "url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
+      "host": "www",
+      "og_type": "article",
+      "expected_title": "When AI Changes the Controls That Govern AI",
+      "require_author": true,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "agentic-coding-reliability-case-001.png",
+      "featured": true
+    },
+    {
+      "id": "decision-brief",
+      "url": "https://www.noetfield.com/runways/decision-brief/",
+      "host": "www",
+      "og_type": "website",
+      "expected_title": "Decision Brief — From Evidence to an Accepted Business Decision",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "featured-decision-brief-v1.png",
+      "featured": true
+    },
+    {
+      "id": "www-home",
+      "url": "https://www.noetfield.com/",
       "host": "www",
       "og_type": "website",
       "require_author": false,
@@ -55,16 +97,6 @@
       "require_author": false,
       "require_json_ld": true,
       "image_must_be_same_host": true
-    },
-    {
-      "id": "case-001",
-      "url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
-      "host": "www",
-      "og_type": "article",
-      "require_author": true,
-      "require_json_ld": true,
-      "image_must_be_same_host": true,
-      "image_filename": "agentic-coding-reliability-case-001.png"
     },
     {
       "id": "governed-replacement",

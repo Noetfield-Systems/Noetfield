@@ -267,7 +267,7 @@ def resolve_route_metadata(
         title = collapse(str(override.get("title") or source.title))
         if not title or title.lower().startswith(("redirect", "loading", "please wait")):
             title = route_label(route)
-        if "noetfield" not in title.lower():
+        if not override.get("preserve_title") and "noetfield" not in title.lower():
             title = f"{title} — Noetfield"
         candidate = title
         if candidate.casefold() in used_titles:

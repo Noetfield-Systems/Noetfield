@@ -1,0 +1,44 @@
+{
+  "schema": "linkedin-featured-links-v1",
+  "order": [
+    "complete-run",
+    "app-product",
+    "motors",
+    "case-001",
+    "decision-brief"
+  ],
+  "links": {
+    "complete-run": {
+      "url": "https://www.noetfield.com/demo/complete-run/",
+      "expected_title": "See a Governed AI Workflow Complete End to End",
+      "image_filename": "featured-complete-run-v1.png",
+      "host": "www"
+    },
+    "app-product": {
+      "url": "https://app.noetfield.com/",
+      "expected_title": "Noetfield — Live Governed AI Workflow Alpha",
+      "image_filename": "featured-app-live-alpha-v1.png",
+      "host": "app"
+    },
+    "motors": {
+      "url": "https://www.noetfield.com/motors/",
+      "expected_title": "AI Motors — Governed Execution for Enterprise Agents",
+      "image_filename": "featured-motors-enterprise-v1.png",
+      "host": "www"
+    },
+    "case-001": {
+      "url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
+      "expected_title": "When AI Changes the Controls That Govern AI",
+      "image_filename": "agentic-coding-reliability-case-001.png",
+      "host": "www",
+      "og_type": "article",
+      "require_author": true
+    },
+    "decision-brief": {
+      "url": "https://www.noetfield.com/runways/decision-brief/",
+      "expected_title": "Decision Brief — From Evidence to an Accepted Business Decision",
+      "image_filename": "featured-decision-brief-v1.png",
+      "host": "www"
+    }
+  }
+}

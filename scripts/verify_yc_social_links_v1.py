@@ -106,6 +106,12 @@ def verify_link(
     if props.get("og:type") != expected_type:
         errors.append(f"{link_id}: og:type={props.get('og:type')!r} expected {expected_type!r}")
 
+    expected_title = link.get("expected_title")
+    if expected_title and props.get("og:title") != expected_title:
+        errors.append(
+            f"{link_id}: og:title={props.get('og:title')!r} expected {expected_title!r}"
+        )
+
     if link.get("require_json_ld") and "application/ld+json" not in html:
         errors.append(f"{link_id}: missing JSON-LD block")
 
@@ -139,12 +145,14 @@ def verify(
     artifact: Path | None,
     live: bool,
     user_agent: str | None,
+    links: list[dict] | None = None,
 ) -> tuple[list[dict], list[str]]:
     config = load_config()
     rows: list[dict] = []
     errors: list[str] = []
+    link_list = links if links is not None else config["links"]
 
-    for link in config["links"]:
+    for link in link_list:
         link_id = str(link["id"])
         url = str(link["url"])
         html = ""
@@ -209,6 +217,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--artifact", type=Path, default=DEFAULT_ARTIFACT)
     parser.add_argument("--live", action="store_true")
+    parser.add_argument("--featured", action="store_true", help="Verify only LinkedIn Featured five")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
@@ -219,10 +228,14 @@ def main() -> int:
 
     config = load_config()
     ua = str(config.get("linkedin_user_agent") or "")
+    links = config["links"]
+    if args.featured:
+        links = [link for link in links if link.get("featured")]
     rows, errors = verify(
         artifact=None if args.live else args.artifact,
         live=args.live,
         user_agent=ua if args.live else None,
+        links=links,
     )
 
     receipt = {
