@@ -165,7 +165,13 @@
       "image_filename": "agentic-coding-reliability-case-001.png",
       "image_alt": "When AI Changes the Controls That Govern AI \u2014 Noetfield Case 001",
       "image_width": 1200,
-      "image_height": 630
+      "image_height": 630,
+      "og_type": "article",
+      "author_name": "Noetfield Systems Inc.",
+      "author_url": "https://www.noetfield.com/about/",
+      "published_time": "2026-08-02T02:00:00-07:00",
+      "modified_time": "2026-08-02T02:19:00-07:00",
+      "article_section": "Reliability"
     },
     "/frontier-systems/": {
       "title": "Frontier Systems \u2014 Noetfield Systems",
