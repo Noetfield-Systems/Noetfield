@@ -697,17 +697,17 @@
     {
       "canonical_url": "https://www.noetfield.com/demo/complete-run/",
       "description": "One real governed run on Noetfield's own system, end to end: authorized goal, exact candidate digest, failed verification, bounded repair, independent pass, human promotion, receipt.",
-      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "image_sha256": "7adf53ad8d35133f84c3e69da02b4c103d15d2dcb55dc5bae4e0d5a01015a9c7",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/featured-complete-run-v1.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
       "profile": "corporate",
       "route": "/demo/complete-run/",
-      "title": "A Complete Run \u2014 Noetfield Systems",
+      "title": "See a Governed AI Workflow Complete End to End",
       "verdict": "PASS"
     },
     {
@@ -1657,17 +1657,17 @@
     {
       "canonical_url": "https://www.noetfield.com/motors/",
       "description": "What an AI Motor is, how it executes authorized Action Contracts, and how an independent verifier judges outcomes outside Motor.",
-      "image_sha256": "d8348d2f73a32e0140a4c7ba27778e54fbf3879f6b787bd63d32d34179107200",
+      "image_sha256": "37a6ecd35ae20f848e63ce6af39adee8f812b50a89c1ae75da67db506182b01d",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-motors-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/featured-motors-enterprise-v1.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
       "profile": "motors",
       "route": "/motors/",
-      "title": "AI Motors for Governed Execution \u2014 Noetfield Systems",
+      "title": "AI Motors \u2014 Governed Execution for Enterprise Agents",
       "verdict": "PASS"
     },
     {
@@ -1971,7 +1971,7 @@
       },
       "profile": "proof",
       "route": "/proof/agentic-coding-reliability-case-001/",
-      "title": "When AI Changes the Controls That Govern AI \u2014 Noetfield",
+      "title": "When AI Changes the Controls That Govern AI",
       "verdict": "PASS"
     },
     {
@@ -2217,17 +2217,17 @@
     {
       "canonical_url": "https://www.noetfield.com/runways/decision-brief/",
       "description": "Compare vendors with a verified Decision Brief: clear criteria, evidence, and a reopenable written recommendation.",
-      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "image_sha256": "ebd14f7664212be91e45c11f85a74666f2cf053f6ec8f6b85780981252292f5a",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/featured-decision-brief-v1.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
       "profile": "corporate",
       "route": "/runways/decision-brief/",
-      "title": "Vendor Decision Brief \u2014 Noetfield",
+      "title": "Decision Brief \u2014 From Evidence to an Accepted Business Decision",
       "verdict": "PASS"
     },
     {
