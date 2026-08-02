@@ -159,6 +159,14 @@
       "title": "Evidence register \u2014 Noetfield Systems",
       "description": "Current public evidence with scope, artifacts, and explicit boundaries."
     },
+    "/proof/agentic-coding-reliability-case-001/": {
+      "title": "When AI Changes the Controls That Govern AI",
+      "description": "A first-party reliability case on deterministic control-plane integrity, false internal success, cost-aware recovery, and independent customer-outcome verification.",
+      "image_filename": "agentic-coding-reliability-case-001.png",
+      "image_alt": "When AI Changes the Controls That Govern AI \u2014 Noetfield Case 001",
+      "image_width": 1200,
+      "image_height": 630
+    },
     "/frontier-systems/": {
       "title": "Frontier Systems \u2014 Noetfield Systems",
       "description": "A founding-counterpart path for governed execution and institutional AI infrastructure, beginning with bounded shared work."

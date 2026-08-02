@@ -1960,18 +1960,18 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
-      "description": "A claim-level, repository-scoped study of internal green signals, customer-visible delivery failures, and evidence-bound repair.",
-      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
+      "description": "A first-party reliability case on deterministic control-plane integrity, false internal success, cost-aware recovery, and independent customer-outcome verification.",
+      "image_sha256": "abeab7c518db94ae003a611ebf329f88449b4b02eb29eb3b314ea5f093eaa93d",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/agentic-coding-reliability-case-001.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
       "profile": "proof",
       "route": "/proof/agentic-coding-reliability-case-001/",
-      "title": "Green Tests, No Page \u2014 Agentic Coding Reliability Case 001 \u2014 Noetfield",
+      "title": "When AI Changes the Controls That Govern AI \u2014 Noetfield",
       "verdict": "PASS"
     },
     {

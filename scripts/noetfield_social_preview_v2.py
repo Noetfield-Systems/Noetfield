@@ -55,6 +55,7 @@ TARGET_META_PROPERTIES = {
     "og:type",
     "og:site_name",
     "og:image",
+    "og:image:secure_url",
     "og:image:width",
     "og:image:height",
     "og:image:alt",
@@ -231,6 +232,10 @@ class RouteMetadata:
     description: str
     profile: str
     noindex_reason: str | None
+    image_filename: str | None = None
+    image_alt: str | None = None
+    image_width: int = CARD_WIDTH
+    image_height: int = CARD_HEIGHT
 
     @property
     def indexable(self) -> bool:
@@ -269,6 +274,10 @@ def resolve_route_metadata(
                 f"Explore {route_label(route)} from Noetfield Systems Inc.—governed AI "
                 "products, custom AI Motors and institutional workflows."
             )
+        image_filename = override.get("image_filename")
+        image_alt = override.get("image_alt")
+        image_width = int(override.get("image_width") or CARD_WIDTH)
+        image_height = int(override.get("image_height") or CARD_HEIGHT)
         rows.append(
             RouteMetadata(
                 relative_path=relative_path,
@@ -277,9 +286,19 @@ def resolve_route_metadata(
                 description=description,
                 profile=profile_for_route(route, config),
                 noindex_reason=noindex_reason(source, route),
+                image_filename=str(image_filename) if image_filename else None,
+                image_alt=str(image_alt) if image_alt else None,
+                image_width=image_width,
+                image_height=image_height,
             )
         )
     return rows
+
+
+def card_url_for_row(row: RouteMetadata, config: dict[str, Any]) -> str:
+    if row.image_filename:
+        return f"{config['site_origin']}{SOCIAL_PATH}{row.image_filename}"
+    return f"{config['site_origin']}{SOCIAL_PATH}{config['cards'][row.profile]['filename']}"
 
 
 def card_url(profile: str, config: dict[str, Any]) -> str:
@@ -288,17 +307,20 @@ def card_url(profile: str, config: dict[str, Any]) -> str:
 
 def metadata_block(row: RouteMetadata, config: dict[str, Any]) -> str:
     canonical = f"{config['site_origin']}{row.route}"
-    image = card_url(row.profile, config)
+    image = card_url_for_row(row, config)
     card = config["cards"][row.profile]
+    alt = row.image_alt or str(card["alt"])
     robots = "index,follow" if row.indexable else "noindex,nofollow"
     values = {
         "title": escape(row.title),
         "description": escape(row.description, quote=True),
         "canonical": escape(canonical, quote=True),
         "image": escape(image, quote=True),
-        "alt": escape(str(card["alt"]), quote=True),
+        "alt": escape(alt, quote=True),
         "site_name": escape(str(config["site_name"]), quote=True),
         "robots": robots,
+        "width": str(row.image_width),
+        "height": str(row.image_height),
     }
     return (
         "\n <!-- Noetfield social preview v2: generated from "
@@ -313,8 +335,9 @@ def metadata_block(row: RouteMetadata, config: dict[str, Any]) -> str:
         f' <meta property="og:url" content="{values["canonical"]}" />\n'
         ' <meta property="og:type" content="website" />\n'
         f' <meta property="og:image" content="{values["image"]}" />\n'
-        ' <meta property="og:image:width" content="1200" />\n'
-        ' <meta property="og:image:height" content="630" />\n'
+        f' <meta property="og:image:secure_url" content="{values["image"]}" />\n'
+        f' <meta property="og:image:width" content="{values["width"]}" />\n'
+        f' <meta property="og:image:height" content="{values["height"]}" />\n'
         f' <meta property="og:image:alt" content="{values["alt"]}" />\n'
         ' <meta name="twitter:card" content="summary_large_image" />\n'
         f' <meta name="twitter:title" content="{values["title"]}" />\n'
@@ -589,7 +612,7 @@ def verify_package(artifact: Path, receipt_path: Path) -> tuple[dict[str, Any], 
         text = path.read_text(encoding="utf-8")
         document = parse_document(text)
         canonical = f"{config['site_origin']}{route}"
-        expected_image = card_url(expected.profile, config)
+        expected_image = card_url_for_row(expected, config)
         required_names = {
             "description": expected.description,
             "robots": "index,follow" if expected.indexable else "noindex,nofollow",
@@ -604,8 +627,9 @@ def verify_package(artifact: Path, receipt_path: Path) -> tuple[dict[str, Any], 
             "og:url": canonical,
             "og:type": "website",
             "og:image": expected_image,
-            "og:image:width": "1200",
-            "og:image:height": "630",
+            "og:image:secure_url": expected_image,
+            "og:image:width": str(expected.image_width),
+            "og:image:height": str(expected.image_height),
         }
         if document.title != expected.title:
             errors.append(f"{route}: title mismatch")
@@ -657,12 +681,23 @@ def verify_package(artifact: Path, receipt_path: Path) -> tuple[dict[str, Any], 
                     with Image.open(image_path) as source:
                         width, height = source.size
                         image_format = source.format
-                    if (width, height) != (CARD_WIDTH, CARD_HEIGHT):
-                        errors.append(f"{route}: preview image is not 1200x630")
-                    if image_format != "PNG":
-                        errors.append(f"{route}: preview image format is not PNG")
-                    if mimetypes.guess_type(image_path.name)[0] != "image/png":
-                        errors.append(f"{route}: preview image MIME type is not image/png")
+                    if (width, height) != (expected.image_width, expected.image_height):
+                        errors.append(
+                            f"{route}: preview image is not "
+                            f"{expected.image_width}x{expected.image_height}"
+                        )
+                    expected_format = "JPEG" if image_path.suffix.lower() in {".jpg", ".jpeg"} else "PNG"
+                    expected_mime = (
+                        "image/jpeg" if expected_format == "JPEG" else "image/png"
+                    )
+                    if image_format != expected_format:
+                        errors.append(
+                            f"{route}: preview image format is not {expected_format}"
+                        )
+                    if mimetypes.guess_type(image_path.name)[0] != expected_mime:
+                        errors.append(
+                            f"{route}: preview image MIME type is not {expected_mime}"
+                        )
                     image_info = {
                         "width": width,
                         "height": height,
