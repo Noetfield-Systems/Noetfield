@@ -1,0 +1,110 @@
+{
+  "schema": "yc-social-links-v1",
+  "linkedin_user_agent": "LinkedInBot/1.0 (compatible; Mozilla/5.0; +http://www.linkedin.com)",
+  "links": [
+    {
+      "id": "app-product",
+      "url": "https://app.noetfield.com/",
+      "host": "app",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "www-home",
+      "url": "https://www.noetfield.com/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "motors",
+      "url": "https://www.noetfield.com/motors/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "trustfield",
+      "url": "https://www.noetfield.com/applications/trustfield/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "investors",
+      "url": "https://www.noetfield.com/investors/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "proof-hub",
+      "url": "https://www.noetfield.com/proof/",
+      "host": "www",
+      "og_type": "website",
+      "require_author": false,
+      "require_json_ld": true,
+      "image_must_be_same_host": true
+    },
+    {
+      "id": "case-001",
+      "url": "https://www.noetfield.com/proof/agentic-coding-reliability-case-001/",
+      "host": "www",
+      "og_type": "article",
+      "require_author": true,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "agentic-coding-reliability-case-001.png"
+    },
+    {
+      "id": "governed-replacement",
+      "url": "https://www.noetfield.com/proof/governed-replacement/",
+      "host": "www",
+      "og_type": "article",
+      "require_author": true,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "proof-governed-replacement.png"
+    },
+    {
+      "id": "claims-boundary",
+      "url": "https://www.noetfield.com/proof/claims-boundary-correction/",
+      "host": "www",
+      "og_type": "article",
+      "require_author": true,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "proof-claims-boundary-correction.png"
+    },
+    {
+      "id": "customer-zero",
+      "url": "https://www.noetfield.com/proof/customer-zero/",
+      "host": "www",
+      "og_type": "article",
+      "require_author": true,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "proof-customer-zero.png"
+    },
+    {
+      "id": "postmortem",
+      "url": "https://app.noetfield.com/postmortem/2026-07-app-incident/",
+      "host": "app",
+      "og_type": "article",
+      "require_author": true,
+      "require_json_ld": true,
+      "image_must_be_same_host": true,
+      "image_filename": "agentic-coding-incident-2026-07.png"
+    }
+  ]
+}
