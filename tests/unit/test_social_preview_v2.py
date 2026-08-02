@@ -53,12 +53,14 @@ def test_required_routes_map_to_the_intended_cards() -> None:
 
 def test_key_route_sources_have_complete_current_metadata() -> None:
     config = MODULE.load_config()
+    relative_paths = [MODULE.path_for_route(route) for route in config["source_sync_routes"]]
+    rows = {row.route: row for row in MODULE.resolve_route_metadata(ROOT, relative_paths, config)}
     for route in config["source_sync_routes"]:
         path = ROOT / MODULE.path_for_route(route)
         text = path.read_text(encoding="utf-8")
         parsed = MODULE.parse_document(text)
-        profile = MODULE.profile_for_route(route, config)
-        image = MODULE.card_url(profile, config)
+        row = rows[route]
+        image = MODULE.card_url_for_row(row, config)
         assert parsed.canonical == f"https://www.noetfield.com{route}"
         assert parsed.meta_properties["og:type"] == "website"
         assert parsed.meta_properties["og:image"] == image

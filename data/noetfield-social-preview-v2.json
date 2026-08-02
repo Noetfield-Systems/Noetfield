@@ -144,8 +144,13 @@
       "description": "Build, replace and promote institutional software through governed production, separate verification and evidence."
     },
     "/motors/": {
-      "title": "AI Motors for Governed Execution — Noetfield Systems",
-      "description": "What an AI Motor is, how it executes authorized Action Contracts, and how an independent verifier judges outcomes outside Motor."
+      "title": "AI Motors — Governed Execution for Enterprise Agents",
+      "preserve_title": true,
+      "description": "What an AI Motor is, how it executes authorized Action Contracts, and how an independent verifier judges outcomes outside Motor.",
+      "image_filename": "featured-motors-enterprise-v1.png",
+      "image_alt": "AI Motors — Governed Execution for Enterprise Agents",
+      "image_width": 1200,
+      "image_height": 630
     },
     "/investors/": {
       "title": "Investors / Ecosystem \u2014 Noetfield Systems",
@@ -161,6 +166,7 @@
     },
     "/proof/agentic-coding-reliability-case-001/": {
       "title": "When AI Changes the Controls That Govern AI",
+      "preserve_title": true,
       "description": "A first-party reliability case on deterministic control-plane integrity, false internal success, cost-aware recovery, and independent customer-outcome verification.",
       "image_filename": "agentic-coding-reliability-case-001.png",
       "image_alt": "When AI Changes the Controls That Govern AI \u2014 Noetfield Case 001",
@@ -214,6 +220,24 @@
       "published_time": "2026-07-25T09:00:00-07:00",
       "modified_time": "2026-08-02T02:30:00-07:00",
       "article_section": "Evidence"
+    },
+    "/demo/complete-run/": {
+      "title": "See a Governed AI Workflow Complete End to End",
+      "preserve_title": true,
+      "description": "One real governed run on Noetfield's own system, end to end: authorized goal, exact candidate digest, failed verification, bounded repair, independent pass, human promotion, receipt.",
+      "image_filename": "featured-complete-run-v1.png",
+      "image_alt": "See a Governed AI Workflow Complete End to End — Noetfield",
+      "image_width": 1200,
+      "image_height": 630
+    },
+    "/runways/decision-brief/": {
+      "title": "Decision Brief — From Evidence to an Accepted Business Decision",
+      "preserve_title": true,
+      "description": "Compare vendors with a verified Decision Brief: clear criteria, evidence, and a reopenable written recommendation.",
+      "image_filename": "featured-decision-brief-v1.png",
+      "image_alt": "Decision Brief — From Evidence to an Accepted Business Decision",
+      "image_width": 1200,
+      "image_height": 630
     },
     "/frontier-systems/": {
       "title": "Frontier Systems \u2014 Noetfield Systems",
