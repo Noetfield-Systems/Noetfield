@@ -717,7 +717,7 @@ def verify_package(artifact: Path, receipt_path: Path) -> tuple[dict[str, Any], 
             "og:title": expected.title,
             "og:description": expected.description,
             "og:url": canonical,
-            "og:type": "website",
+            "og:type": expected.og_type,
             "og:image": expected_image,
             "og:image:secure_url": expected_image,
             "og:image:width": str(expected.image_width),
@@ -738,6 +738,20 @@ def verify_package(artifact: Path, receipt_path: Path) -> tuple[dict[str, Any], 
             errors.append(f"{route}: og:image:alt is not meaningful")
         if document.meta_names.get("twitter:image:alt") != alt:
             errors.append(f"{route}: twitter:image:alt mismatch or absent")
+        if expected.og_type == "article":
+            if expected.author_name and document.meta_names.get("author") != expected.author_name:
+                errors.append(f"{route}: meta name=author mismatch or absent")
+            author_prop = expected.author_url or expected.author_name
+            if author_prop and document.meta_properties.get("article:author") != author_prop:
+                errors.append(f"{route}: meta property=article:author mismatch or absent")
+            if expected.published_time and document.meta_properties.get(
+                "article:published_time"
+            ) != expected.published_time:
+                errors.append(f"{route}: meta property=article:published_time mismatch or absent")
+            if expected.modified_time and document.meta_properties.get(
+                "article:modified_time"
+            ) != expected.modified_time:
+                errors.append(f"{route}: meta property=article:modified_time mismatch or absent")
         for label, url in (
             ("canonical", document.canonical),
             ("og:url", document.meta_properties.get("og:url", "")),
