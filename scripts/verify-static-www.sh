@@ -110,7 +110,7 @@ check_file "historical v42 expectations archived" \
   'noetfield-www.css?v=42' 'nfInvestorForm' 'Shipped today'
 
 check_file "AI Motor category definition and engagement stay public" motors/index.html \
-  '<title>AI Motors for Governed Execution — Noetfield Systems</title>' \
+  '<title>AI Motors — Governed Execution for Enterprise Agents</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/motors/" />' \
   'The deterministic execution layer for agentic systems.' \
   'A Noetfield Motor executes authorized Action Contracts inside a durable governed runtime' \
