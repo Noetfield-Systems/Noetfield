@@ -1976,50 +1976,50 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/proof/claims-boundary-correction/",
-      "description": "Public correction of prior over-broad corporate claims under Noetfield Systems Inc. control.",
-      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
+      "description": "Public correction of prior over-broad corporate claims under Noetfield Systems Inc. control, with explicit current boundaries.",
+      "image_sha256": "428658d3d695664bb7a22d16dcf860b288c9ba18f7da0814257ebc17e7241388",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/proof-claims-boundary-correction.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
       "profile": "proof",
       "route": "/proof/claims-boundary-correction/",
-      "title": "Claims-boundary correction \u2014 Noetfield Systems",
+      "title": "Claims-Boundary Correction \u2014 Noetfield",
       "verdict": "PASS"
     },
     {
       "canonical_url": "https://www.noetfield.com/proof/customer-zero/",
-      "description": "Noetfield operates its own technology on its own workflows, the practice IBM calls Client Zero and Microsoft calls Customer Zero. First-party evidence, stated limits.",
-      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
+      "description": "Noetfield operates its own technology on its own workflows before asking anyone else to \u2014 first-party evidence with stated limits.",
+      "image_sha256": "17c272ba1a309df0cb86df66758b52e7bb54c188443454f5bffa19474fcd13e4",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/proof-customer-zero.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
       "profile": "proof",
       "route": "/proof/customer-zero/",
-      "title": "Noetfield as Customer Zero \u2014 Noetfield Systems",
+      "title": "Noetfield as Customer Zero",
       "verdict": "PASS"
     },
     {
       "canonical_url": "https://www.noetfield.com/proof/governed-replacement/",
-      "description": "First-Party Internal Demonstration: Noetfield wrapped the public Trust Ledger workspace path after failed verification, repair, independent re-check, and founder promotion.",
-      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
+      "description": "First-party internal demonstration: Noetfield wrapped the public Trust Ledger workspace path after failed verification, repair, independent re-check, and founder promotion.",
+      "image_sha256": "88b0e87f89962535a8d16ff529b5ad47ebad6abccc3d37e4c7253bbb2c412c38",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/proof-governed-replacement.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
       "profile": "proof",
       "route": "/proof/governed-replacement/",
-      "title": "Case Study #2 \u2014 Governed Replacement (First-Party) \u2014 Noetfield",
+      "title": "Governed Replacement \u2014 First-Party Case Study \u2014 Noetfield",
       "verdict": "PASS"
     },
     {
