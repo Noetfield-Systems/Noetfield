@@ -155,7 +155,11 @@
       "image_filename": "featured-motors-enterprise-v1.png",
       "image_alt": "AI Motors — Governed Execution for Enterprise Agents",
       "image_width": 1200,
-      "image_height": 630
+      "image_height": 630,
+      "author_name": "Noetfield Systems Inc.",
+      "author_url": "https://www.noetfield.com/about/",
+      "published_time": "2026-08-01T00:00:00-07:00",
+      "modified_time": "2026-08-02T02:00:00-07:00"
     },
     "/investors/": {
       "title": "Investors / Ecosystem \u2014 Noetfield Systems",
@@ -233,7 +237,12 @@
       "image_filename": "featured-complete-run-v1.png",
       "image_alt": "See a Governed AI Workflow Complete End to End — Noetfield",
       "image_width": 1200,
-      "image_height": 630
+      "image_height": 630,
+      "author_name": "Noetfield Systems Inc.",
+      "author_url": "https://www.noetfield.com/about/",
+      "published_time": "2026-08-01T00:00:00-07:00",
+      "modified_time": "2026-08-02T02:00:00-07:00",
+      "skip_webpage_json_ld": true
     },
     "/runways/decision-brief/": {
       "title": "Decision Brief — From Evidence to an Accepted Business Decision",
@@ -242,7 +251,12 @@
       "image_filename": "featured-decision-brief-v1.png",
       "image_alt": "Decision Brief — From Evidence to an Accepted Business Decision",
       "image_width": 1200,
-      "image_height": 630
+      "image_height": 630,
+      "author_name": "Noetfield Systems Inc.",
+      "author_url": "https://www.noetfield.com/about/",
+      "published_time": "2026-08-01T00:00:00-07:00",
+      "modified_time": "2026-08-02T02:00:00-07:00",
+      "skip_webpage_json_ld": true
     },
     "/frontier-systems/": {
       "title": "Frontier Systems \u2014 Noetfield Systems",
@@ -350,6 +364,8 @@
     "/investors/",
     "/motors/",
     "/proof/",
+    "/demo/complete-run/",
+    "/runways/decision-brief/",
     "/trust-brief/intake/",
     "/runways/",
     "/pricing/",

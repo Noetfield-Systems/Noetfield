@@ -1,6 +1,7 @@
 {
   "schema": "yc-social-links-v1",
   "linkedin_user_agent": "LinkedInBot/1.0 (compatible; Mozilla/5.0; +http://www.linkedin.com)",
+  "linkedin_require_author": true,
   "links": [
     {
       "id": "complete-run",
@@ -8,7 +9,7 @@
       "host": "www",
       "og_type": "website",
       "expected_title": "See a Governed AI Workflow Complete End to End",
-      "require_author": false,
+      "require_author": true,
       "require_json_ld": true,
       "image_must_be_same_host": true,
       "image_filename": "featured-complete-run-v1.png",
@@ -20,7 +21,7 @@
       "host": "app",
       "og_type": "website",
       "expected_title": "Noetfield — Live Governed AI Workflow Alpha",
-      "require_author": false,
+      "require_author": true,
       "require_json_ld": true,
       "image_must_be_same_host": true,
       "image_filename": "featured-app-live-alpha-v1.png",
@@ -32,7 +33,7 @@
       "host": "www",
       "og_type": "website",
       "expected_title": "AI Motors — Governed Execution for Enterprise Agents",
-      "require_author": false,
+      "require_author": true,
       "require_json_ld": true,
       "image_must_be_same_host": true,
       "image_filename": "featured-motors-enterprise-v1.png",
@@ -56,7 +57,7 @@
       "host": "www",
       "og_type": "website",
       "expected_title": "Decision Brief — From Evidence to an Accepted Business Decision",
-      "require_author": false,
+      "require_author": true,
       "require_json_ld": true,
       "image_must_be_same_host": true,
       "image_filename": "featured-decision-brief-v1.png",
@@ -67,7 +68,7 @@
       "url": "https://www.noetfield.com/",
       "host": "www",
       "og_type": "website",
-      "require_author": false,
+      "require_author": true,
       "require_json_ld": true,
       "image_must_be_same_host": true
     },

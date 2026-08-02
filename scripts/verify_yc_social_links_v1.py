@@ -115,7 +115,7 @@ def verify_link(
     if link.get("require_json_ld") and "application/ld+json" not in html:
         errors.append(f"{link_id}: missing JSON-LD block")
 
-    if link.get("require_author"):
+    if link.get("require_author") or link.get("featured"):
         for key in ("author", "article:author", "article:published_time", "article:modified_time"):
             if key == "author":
                 if not names.get("author"):
