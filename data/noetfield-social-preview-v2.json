@@ -173,6 +173,48 @@
       "modified_time": "2026-08-02T02:19:00-07:00",
       "article_section": "Reliability"
     },
+    "/proof/governed-replacement/": {
+      "title": "Governed Replacement — First-Party Case Study",
+      "description": "First-party internal demonstration: Noetfield wrapped the public Trust Ledger workspace path after failed verification, repair, independent re-check, and founder promotion.",
+      "image_filename": "proof-governed-replacement.png",
+      "image_alt": "Governed Replacement — Noetfield first-party case study",
+      "image_width": 1200,
+      "image_height": 630,
+      "og_type": "article",
+      "author_name": "Noetfield Systems Inc.",
+      "author_url": "https://www.noetfield.com/about/",
+      "published_time": "2026-06-18T09:00:00-07:00",
+      "modified_time": "2026-08-02T02:30:00-07:00",
+      "article_section": "Evidence"
+    },
+    "/proof/claims-boundary-correction/": {
+      "title": "Claims-Boundary Correction",
+      "description": "Public correction of prior over-broad corporate claims under Noetfield Systems Inc. control, with explicit current boundaries.",
+      "image_filename": "proof-claims-boundary-correction.png",
+      "image_alt": "Claims-boundary correction — Noetfield Systems",
+      "image_width": 1200,
+      "image_height": 630,
+      "og_type": "article",
+      "author_name": "Noetfield Systems Inc.",
+      "author_url": "https://www.noetfield.com/about/",
+      "published_time": "2026-07-20T09:00:00-07:00",
+      "modified_time": "2026-08-02T02:30:00-07:00",
+      "article_section": "Evidence"
+    },
+    "/proof/customer-zero/": {
+      "title": "Noetfield as Customer Zero",
+      "description": "Noetfield operates its own technology on its own workflows before asking anyone else to — first-party evidence with stated limits.",
+      "image_filename": "proof-customer-zero.png",
+      "image_alt": "Noetfield as Customer Zero — first-party evidence",
+      "image_width": 1200,
+      "image_height": 630,
+      "og_type": "article",
+      "author_name": "Noetfield Systems Inc.",
+      "author_url": "https://www.noetfield.com/about/",
+      "published_time": "2026-07-25T09:00:00-07:00",
+      "modified_time": "2026-08-02T02:30:00-07:00",
+      "article_section": "Evidence"
+    },
     "/frontier-systems/": {
       "title": "Frontier Systems \u2014 Noetfield Systems",
       "description": "A founding-counterpart path for governed execution and institutional AI infrastructure, beginning with bounded shared work."
