@@ -216,9 +216,10 @@ def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
     assert '<a href="/assurance/" aria-current="page">' in motors
     assert "Motor &amp; Custom Workflow" not in motors
     assert (
-        'property="og:image" content="https://www.noetfield.com/assets/social/noetfield-motors-v2.png"'
+        'property="og:image" content="https://www.noetfield.com/assets/social/featured-motors-enterprise-v1.png"'
         in motors
     )
+    assert 'og:title" content="AI Motors — Governed Execution for Enterprise Agents"' in motors
     defined_terms = [
         block["about"] for block in json_ld(MOTORS) if isinstance(block.get("about"), dict)
     ]
