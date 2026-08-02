@@ -40,6 +40,7 @@ ATTR_RE = re.compile(
     re.IGNORECASE,
 )
 TARGET_META_NAMES = {
+    "author",
     "description",
     "robots",
     "twitter:card",
@@ -59,6 +60,10 @@ TARGET_META_PROPERTIES = {
     "og:image:width",
     "og:image:height",
     "og:image:alt",
+    "article:author",
+    "article:published_time",
+    "article:modified_time",
+    "article:section",
 }
 FORBIDDEN_STALE_STRINGS = (
     "AI Governance " + "& Digital Trust",
@@ -236,6 +241,12 @@ class RouteMetadata:
     image_alt: str | None = None
     image_width: int = CARD_WIDTH
     image_height: int = CARD_HEIGHT
+    og_type: str = "website"
+    author_name: str | None = None
+    author_url: str | None = None
+    published_time: str | None = None
+    modified_time: str | None = None
+    article_section: str | None = None
 
     @property
     def indexable(self) -> bool:
@@ -278,6 +289,12 @@ def resolve_route_metadata(
         image_alt = override.get("image_alt")
         image_width = int(override.get("image_width") or CARD_WIDTH)
         image_height = int(override.get("image_height") or CARD_HEIGHT)
+        og_type = str(override.get("og_type") or "website")
+        author_name = override.get("author_name")
+        author_url = override.get("author_url")
+        published_time = override.get("published_time")
+        modified_time = override.get("modified_time")
+        article_section = override.get("article_section")
         rows.append(
             RouteMetadata(
                 relative_path=relative_path,
@@ -290,6 +307,12 @@ def resolve_route_metadata(
                 image_alt=str(image_alt) if image_alt else None,
                 image_width=image_width,
                 image_height=image_height,
+                og_type=og_type,
+                author_name=str(author_name) if author_name else None,
+                author_url=str(author_url) if author_url else None,
+                published_time=str(published_time) if published_time else None,
+                modified_time=str(modified_time) if modified_time else None,
+                article_section=str(article_section) if article_section else None,
             )
         )
     return rows
@@ -303,6 +326,73 @@ def card_url_for_row(row: RouteMetadata, config: dict[str, Any]) -> str:
 
 def card_url(profile: str, config: dict[str, Any]) -> str:
     return f"{config['site_origin']}{SOCIAL_PATH}{config['cards'][profile]['filename']}"
+
+
+def article_metadata_lines(row: RouteMetadata) -> str:
+    if row.og_type != "article":
+        return ""
+    lines: list[str] = []
+    if row.author_name:
+        lines.append(
+            f' <meta name="author" content="{escape(row.author_name, quote=True)}" />\n'
+        )
+        author_value = row.author_url or row.author_name
+        lines.append(
+            f' <meta property="article:author" content="{escape(author_value, quote=True)}" />\n'
+        )
+    if row.published_time:
+        lines.append(
+            " <meta property=\"article:published_time\" "
+            f'content="{escape(row.published_time, quote=True)}" />\n'
+        )
+    if row.modified_time:
+        lines.append(
+            " <meta property=\"article:modified_time\" "
+            f'content="{escape(row.modified_time, quote=True)}" />\n'
+        )
+    if row.article_section:
+        lines.append(
+            f' <meta property="article:section" content="{escape(row.article_section, quote=True)}" />\n'
+        )
+    return "".join(lines)
+
+
+def json_ld_article_block(row: RouteMetadata, config: dict[str, Any]) -> str:
+    if row.og_type != "article":
+        return ""
+    canonical = f"{config['site_origin']}{row.route}"
+    image = card_url_for_row(row, config)
+    author_name = row.author_name or str(config["site_name"])
+    author_url = row.author_url or f"{config['site_origin']}/about/"
+    published = (row.published_time or "")[:10] or None
+    modified = (row.modified_time or row.published_time or "")[:10] or published
+    payload = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": row.title,
+        "description": row.description,
+        "author": {
+            "@type": "Organization",
+            "name": author_name,
+            "url": author_url,
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": str(config["site_name"]),
+            "url": f"{config['site_origin']}/",
+        },
+        "image": image,
+        "mainEntityOfPage": canonical,
+    }
+    if published:
+        payload["datePublished"] = published
+    if modified:
+        payload["dateModified"] = modified
+    return (
+        ' <script type="application/ld+json">\n'
+        f"{json.dumps(payload, indent=2, ensure_ascii=True)}\n"
+        " </script>\n"
+    )
 
 
 def metadata_block(row: RouteMetadata, config: dict[str, Any]) -> str:
@@ -333,7 +423,8 @@ def metadata_block(row: RouteMetadata, config: dict[str, Any]) -> str:
         f' <meta property="og:title" content="{values["title"]}" />\n'
         f' <meta property="og:description" content="{values["description"]}" />\n'
         f' <meta property="og:url" content="{values["canonical"]}" />\n'
-        ' <meta property="og:type" content="website" />\n'
+        f' <meta property="og:type" content="{escape(row.og_type, quote=True)}" />\n'
+        f"{article_metadata_lines(row)}"
         f' <meta property="og:image" content="{values["image"]}" />\n'
         f' <meta property="og:image:secure_url" content="{values["image"]}" />\n'
         f' <meta property="og:image:width" content="{values["width"]}" />\n'
@@ -344,6 +435,7 @@ def metadata_block(row: RouteMetadata, config: dict[str, Any]) -> str:
         f' <meta name="twitter:description" content="{values["description"]}" />\n'
         f' <meta name="twitter:image" content="{values["image"]}" />\n'
         f' <meta name="twitter:image:alt" content="{values["alt"]}" />\n'
+        f"{json_ld_article_block(row, config)}"
     )
 
 
