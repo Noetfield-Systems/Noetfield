@@ -252,6 +252,7 @@ class RouteMetadata:
     published_time: str | None = None
     modified_time: str | None = None
     article_section: str | None = None
+    skip_webpage_json_ld: bool = False
 
     @property
     def indexable(self) -> bool:
@@ -300,6 +301,7 @@ def resolve_route_metadata(
         published_time = override.get("published_time")
         modified_time = override.get("modified_time")
         article_section = override.get("article_section")
+        skip_webpage_json_ld = bool(override.get("skip_webpage_json_ld"))
         rows.append(
             RouteMetadata(
                 relative_path=relative_path,
@@ -318,6 +320,7 @@ def resolve_route_metadata(
                 published_time=str(published_time) if published_time else None,
                 modified_time=str(modified_time) if modified_time else None,
                 article_section=str(article_section) if article_section else None,
+                skip_webpage_json_ld=skip_webpage_json_ld,
             )
         )
     return rows
@@ -333,9 +336,7 @@ def card_url(profile: str, config: dict[str, Any]) -> str:
     return f"{config['site_origin']}{SOCIAL_PATH}{config['cards'][profile]['filename']}"
 
 
-def article_metadata_lines(row: RouteMetadata) -> str:
-    if row.og_type != "article":
-        return ""
+def publisher_metadata_lines(row: RouteMetadata) -> str:
     lines: list[str] = []
     if row.author_name:
         lines.append(
@@ -355,6 +356,8 @@ def article_metadata_lines(row: RouteMetadata) -> str:
             " <meta property=\"article:modified_time\" "
             f'content="{escape(row.modified_time, quote=True)}" />\n'
         )
+    if row.og_type != "article":
+        return "".join(lines)
     if row.article_section:
         lines.append(
             f' <meta property="article:section" content="{escape(row.article_section, quote=True)}" />\n'
@@ -362,8 +365,12 @@ def article_metadata_lines(row: RouteMetadata) -> str:
     return "".join(lines)
 
 
+def article_metadata_lines(row: RouteMetadata) -> str:
+    return publisher_metadata_lines(row)
+
+
 def json_ld_webpage_block(row: RouteMetadata, config: dict[str, Any]) -> str:
-    if row.og_type != "website":
+    if row.og_type != "website" or row.skip_webpage_json_ld:
         return ""
     canonical = f"{config['site_origin']}{row.route}"
     payload = {

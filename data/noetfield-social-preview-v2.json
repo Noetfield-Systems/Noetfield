@@ -129,7 +129,12 @@
   "metadata_overrides": {
     "/": {
       "title": "Noetfield Systems Inc. | AI Workflow and App Platform",
-      "description": "Build and run AI workflows across models, agents, and tools with separate verification, bounded repair, human-controlled promotion, and replayable evidence."
+      "description": "Build and run AI workflows across models, agents, and tools with separate verification, bounded repair, human-controlled promotion, and replayable evidence.",
+      "skip_webpage_json_ld": true,
+      "author_name": "Noetfield Systems Inc.",
+      "author_url": "https://www.noetfield.com/about/",
+      "published_time": "2025-01-15T00:00:00-08:00",
+      "modified_time": "2026-08-02T00:00:00-07:00"
     },
     "/about/": {
       "title": "About — Noetfield Systems Inc.",
