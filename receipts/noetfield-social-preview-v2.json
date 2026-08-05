@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 44,
+  "indexable_route_count": 45,
   "noindex_route_count": 117,
-  "route_count": 161,
+  "route_count": 162,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -2612,6 +2612,22 @@
       "profile": "corporate",
       "route": "/work-with-us/",
       "title": "Work with Noetfield \u2014 Connectors, Facilitators, Partners & Investors",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/workflows/how-to-ask/",
+      "description": "Type it in plain language, name the apps, get a workflow.json you can import.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/workflows/how-to-ask/",
+      "title": "Asking for a workflow \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
