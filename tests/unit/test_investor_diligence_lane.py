@@ -39,7 +39,7 @@ def test_homepage_has_modern_shell_and_spine() -> None:
         'href="/applications/"',
         'href="/about/"',
         'href="/proof/"',
-        "/assets/noetfield-corporate-v1.css?v=4",
+        "/assets/noetfield-corporate-v1.css?v=5",
     )
     for contract in required:
         assert contract in text
