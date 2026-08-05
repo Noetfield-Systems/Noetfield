@@ -17,9 +17,9 @@ def read(path: Path) -> str:
 
 def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
     expected_css_versions = {
-        ROOT / "index.html": "v=4",
-        ROOT / "about" / "index.html": "v=4",
-        ROOT / "investors" / "index.html": "v=4",
+        ROOT / "index.html": "v=5",
+        ROOT / "about" / "index.html": "v=5",
+        ROOT / "investors" / "index.html": "v=5",
     }
     expected_images = {
         ROOT / "index.html": "noetfield-corporate-v2.png",

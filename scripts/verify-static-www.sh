@@ -41,7 +41,7 @@ check_file "protected corporate homepage" index.html \
   '<title>Noetfield Systems Inc. | AI Workflow and App Platform</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp nf-home">' '<main id="main">' \
-  '/assets/noetfield-corporate-v1.css?v=4' \
+  '/assets/noetfield-corporate-v1.css?v=5' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
   'AI WORKFLOWS + AGENT EXECUTION ASSURANCE' \
   'It runs the work, verifies the exact result, and lets you decide what gets accepted.' \
@@ -118,7 +118,7 @@ check_file "AI Motor category definition and engagement stay public" motors/inde
   'Motor does not reason, create goals, or grant itself authority' \
   'A Motor is defined by what it does when execution should not continue.' \
   'Harness · model &amp; agent routing' 'Verifier · judgment' 'Recovery' 'Evidence record' \
-  'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=4'
+  'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=5'
 check_absent "public Motor page has no private workspace or obsolete category framing" motors/index.html \
   'href="/workspace/onboarding"' 'href="/workspace/cognitive-dashboard"' \
   'href="/workspace/workspace"' 'Motor &amp; Custom Workflow' 'Custom GPT motor setup' \
