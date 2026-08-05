@@ -115,6 +115,7 @@ MARKETING_NESTED = {
     ("copilot", "procurement"),
     ("runways", "decision-brief"),
     ("demo", "complete-run"),
+    ("assurance", "control-testing"),
 }
 
 

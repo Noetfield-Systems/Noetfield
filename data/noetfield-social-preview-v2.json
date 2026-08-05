@@ -334,6 +334,11 @@
       "title": "Assurance \u2014 The Acceptance Layer \u2014 Noetfield Systems",
       "description": "The acceptance, evidence, and improvement layer for agentic execution: explicit authority, separate acceptance, bounded repair, and replayable evidence before results are promoted."
     },
+    "/assurance/control-testing/": {
+      "title": "Control Testing \u2014 Noetfield Systems",
+      "description": "We build cases designed to defeat your controls, run them, and report how many got through.",
+      "image_alt": "Noetfield Systems Inc."
+    },
     "/gate/intake/": {
       "title": "Noetfield \u2014 Engagement Intake Gateway",
       "description": "Unified engagement intake for Trust Brief, Copilot, and Bank Pilot."
