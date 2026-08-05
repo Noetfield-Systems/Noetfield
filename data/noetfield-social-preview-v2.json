@@ -339,11 +339,6 @@
       "description": "We build cases designed to defeat your controls, run them, and report how many got through.",
       "image_alt": "Noetfield Systems Inc."
     },
-    "/workflows/how-to-ask/": {
-      "title": "Asking for a workflow \u2014 Noetfield Systems",
-      "description": "Type it in plain language, name the apps, get a workflow.json you can import.",
-      "image_alt": "Noetfield Systems Inc."
-    },
     "/gate/intake/": {
       "title": "Noetfield \u2014 Engagement Intake Gateway",
       "description": "Unified engagement intake for Trust Brief, Copilot, and Bank Pilot."
