@@ -1,0 +1,32 @@
+{
+  "schema": "noetfield.proof.clean-check-incident.v1",
+  "title": "Two clean checks, one present condition",
+  "published_at": "2026-08-04",
+  "case_study": "https://www.noetfield.com/proof/clean-check-incident/",
+  "summary": "A release check meant to keep retired language off the site reported clean in two consecutive releases while the condition it screened for was present, for two unrelated reasons.",
+  "first_release": {
+    "date": "2026-08-04",
+    "source_commit": "d9a462c9",
+    "production_merge": "9dba32fb",
+    "cause": "check scoped to changed lines only; the shared page footer was not changed in that release and carried a retired term throughout",
+    "result_reported": "clean",
+    "condition_present": true
+  },
+  "second_release": {
+    "date": "2026-08-04",
+    "source_commit": "372d9ba3",
+    "production_merge": "f642e893",
+    "cause": "check redefined to search rendered pages; a scripting mistake left the file list unread, so no file was searched",
+    "result_reported": "clean",
+    "condition_present": true
+  },
+  "detection": "a person judged the zero implausible for pages known to carry this vocabulary and re-ran the search by hand",
+  "corrected_run": {
+    "finding_count": 174,
+    "pages_with_findings": 20,
+    "disposition": "findings are pre-existing page copy, left in place; removal is a separate decision that had not been made"
+  },
+  "proves": "a check can pass for reasons unrelated to the thing it checks, twice in a row, in different ways",
+  "does_not_prove": "that the current check is complete, or that other checks on this site do not share the weakness",
+  "footnote": "the release publishing this record was itself rejected by a release check for a missing receipt entry, then corrected and re-run"
+}

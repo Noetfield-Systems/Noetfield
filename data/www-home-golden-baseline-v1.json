@@ -25,8 +25,8 @@
   "corporate_css": {
    "path": "assets/noetfield-corporate-v1.css",
    "min_bytes": 30000,
-   "sha256": "37b26e61868aefe4c433dcb5710ea479b8eb960924c39804913739968afcd09f",
-   "sha256_pin_mode": "founder_visual_acceptance_2026-07-29"
+   "sha256": "65ac40f4fa01667de48a57081db7e2943bc4a4c4f5b9ae241e43fc091ebbedd0",
+   "sha256_pin_mode": "founder_approved_tier3_craft_fixes_2026-08-04"
   }
  },
  "required_font_families": [

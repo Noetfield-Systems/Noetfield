@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 42,
+  "indexable_route_count": 44,
   "noindex_route_count": 117,
-  "route_count": 159,
+  "route_count": 161,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -212,6 +212,22 @@
       "profile": "corporate",
       "route": "/applications/trustfield/",
       "title": "TrustField boundary \u2014 Noetfield Systems",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/assurance/control-testing/",
+      "description": "We build cases designed to defeat your controls, run them, and report how many got through.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/assurance/control-testing/",
+      "title": "Control Testing \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
@@ -1988,6 +2004,22 @@
       "profile": "proof",
       "route": "/proof/claims-boundary-correction/",
       "title": "Claims-Boundary Correction \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/proof/clean-check-incident/",
+      "description": "A release check reported clean twice while the condition it screened for was present, for two unrelated reasons. The record, both causes, and what caught it.",
+      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "proof",
+      "route": "/proof/clean-check-incident/",
+      "title": "Two clean checks, one present condition \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {

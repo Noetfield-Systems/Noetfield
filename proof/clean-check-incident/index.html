@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Two clean checks, one present condition — Noetfield Systems</title>
+ <meta name="description" content="A release check reported clean twice while the condition it screened for was present, for two unrelated reasons. The record, both causes, and what caught it." />
+ <meta name="robots" content="index,follow" />
+ <meta name="theme-color" content="#07080a" />
+ <link rel="canonical" href="https://www.noetfield.com/proof/clean-check-incident/" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:type" content="article" />
+ <meta name="author" content="Noetfield Systems Inc." />
+ <meta property="article:author" content="https://www.noetfield.com/about/" />
+ <meta property="article:published_time" content="2026-08-04T12:00:00-07:00" />
+ <meta property="article:section" content="Evidence" />
+ <meta property="og:title" content="Two clean checks, one present condition" />
+ <meta property="og:description" content="A release check reported clean twice while the condition it screened for was present, for two unrelated reasons. The record, both causes, and what caught it." />
+ <meta property="og:url" content="https://www.noetfield.com/proof/clean-check-incident/" />
+ <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta property="og:image:secure_url" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta property="og:image:width" content="1200" />
+ <meta property="og:image:height" content="630" />
+ <meta property="og:image:alt" content="Noetfield Systems Inc." />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Two clean checks, one present condition" />
+ <meta name="twitter:description" content="A release check reported clean twice while the condition it screened for was present, for two unrelated reasons." />
+ <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta name="twitter:image:alt" content="Noetfield Systems Inc." />
+ <script type="application/ld+json">
+ {
+   "@context": "https://schema.org",
+   "@type": "Article",
+   "headline": "Two clean checks, one present condition",
+   "description": "A release check reported clean twice while the condition it screened for was present, for two unrelated reasons. The record, both causes, and what caught it.",
+   "author": {"@type": "Organization", "name": "Noetfield Systems Inc.", "url": "https://www.noetfield.com/about/"},
+   "publisher": {"@type": "Organization", "name": "Noetfield", "url": "https://www.noetfield.com/"},
+   "datePublished": "2026-08-04",
+   "mainEntityOfPage": "https://www.noetfield.com/proof/clean-check-incident/"
+ }
+ </script>
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=5" />
+</head>
+<body class="nf-gate nf-gate--vc">
+ <div class="nf-gate__frame">
+  <main class="nf-gate__main" id="main">
+   <a class="nf-vc-back" href="/proof/">← Evidence register</a>
+   <header class="nf-vc-hero">
+    <p class="nf-vc-kicker">Check-scope incident · 2026-08-04</p>
+    <h1>Two clean checks, one present condition</h1>
+    <p class="nf-vc-lead">In two consecutive releases in August 2026, a check meant to keep retired language off this site reported clean while the condition it screened for was present. The two failures were unrelated.</p>
+   </header>
+
+   <section class="nf-vc-section">
+    <h2>First release</h2>
+    <p>The check searched only the lines changed in that release. The page footer, which is shared by every page and was not changed, carried a retired term the whole time. The check passed. The term shipped.</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>Second release</h2>
+    <p>The check was rewritten to search the pages as they actually render, for exactly this reason. Its first run reported zero findings. The zero was false: a scripting mistake meant the list of pages to search was never read, so the check searched nothing and reported clean.</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>What caught it</h2>
+    <p>Not a control. A person looked at the zero, judged it implausible for pages known to carry this vocabulary, and ran the search again by hand. The real number was 174 lines across 20 pages.</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>What we changed</h2>
+    <p>The corrected check was run before release and its full results were reported, including the number above. The 174 findings are pre-existing page copy and were left in place; removing them is a separate decision that had not been made.</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>What this proves</h2>
+    <p>A check can pass for reasons that have nothing to do with the thing it checks, twice in a row, in different ways. A zero from a check that has never returned a nonzero deserves suspicion.</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>What this does not prove</h2>
+    <p>That the current check is complete, or that other checks on this site do not have the same weakness.</p>
+   </section>
+
+   <section class="nf-vc-section">
+    <h2>Footnote</h2>
+    <p>The release that published this record was itself rejected by a release check, for incomplete evidence: a generated receipt was missing one entry. It was corrected and the release re-run. The gates this page describes failing are the same gates that caught that.</p>
+   </section>
+
+   <p class="nf-vc-note">
+    Evidence bundle: <a href="/proof/clean-check-incident.json">machine-readable record (JSON)</a>.
+    <a href="/assurance/control-testing/">How we test controls now →</a>
+   </p>
+  </main>
+ </div>
+</body>
+</html>

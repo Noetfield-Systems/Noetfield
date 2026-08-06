@@ -17,9 +17,9 @@ def read(path: Path) -> str:
 
 def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
     expected_css_versions = {
-        ROOT / "index.html": "v=4",
-        ROOT / "about" / "index.html": "v=4",
-        ROOT / "investors" / "index.html": "v=4",
+        ROOT / "index.html": "v=5",
+        ROOT / "about" / "index.html": "v=5",
+        ROOT / "investors" / "index.html": "v=5",
     }
     expected_images = {
         ROOT / "index.html": "noetfield-corporate-v2.png",
@@ -277,7 +277,7 @@ def test_homepage_footer_links_to_trust_and_investors() -> None:
     assert 'href="/trust/"' in text
     assert 'href="/privacy/"' in text
     assert 'href="/investors/">Investors / Ecosystem</a>' in text
-    assert "Governed AI execution infrastructure" in text
+    assert "AI agent governance and security" in text
     assert 'href="/enterprise/"' not in text
     assert 'href="/investor-workflows/"' not in text
 
