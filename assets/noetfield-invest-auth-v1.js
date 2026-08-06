@@ -226,13 +226,30 @@
     }
   }
 
+  function providerEnabled(cfg, provider) {
+    const list = cfg && Array.isArray(cfg.oauth_providers) ? cfg.oauth_providers : ["google"];
+    return list.indexOf(provider) !== -1;
+  }
+
+  function wireOAuthButton(button, provider, label, status) {
+    if (!button) return;
+    button.addEventListener("click", function () {
+      showStatus(status, "Redirecting to " + label + "…", "ok");
+      signInWithOAuth(provider).catch(function (e) {
+        showStatus(status, friendlyAuthError(e), "error");
+      });
+    });
+  }
+
   async function bootSignInPage() {
     const status = $("nf-auth-status");
     const form = $("nf-auth-signin-form");
     const google = $("nf-auth-google");
+    const discord = $("nf-auth-discord");
 
     try {
-      await loadConfig();
+      const cfg = await loadConfig();
+      if (discord && providerEnabled(cfg, "discord")) discord.hidden = false;
       const urlErr = new URLSearchParams(global.location.search).get("error_description");
       if (urlErr) showStatus(status, friendlyAuthError(urlErr), "error");
 
@@ -246,17 +263,12 @@
     } catch (e) {
       showStatus(status, friendlyAuthError(e), "error");
       if (google) google.disabled = true;
+      if (discord) discord.disabled = true;
       return;
     }
 
-    if (google) {
-      google.addEventListener("click", function () {
-        showStatus(status, "Redirecting to Google…", "ok");
-        signInWithOAuth("google").catch(function (e) {
-          showStatus(status, friendlyAuthError(e), "error");
-        });
-      });
-    }
+    wireOAuthButton(google, "google", "Google", status);
+    wireOAuthButton(discord, "discord", "Discord", status);
 
     if (form) {
       form.addEventListener("submit", function (ev) {
