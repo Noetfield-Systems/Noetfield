@@ -71,6 +71,43 @@
       ],
       "title": "Proof Case 002 \u2014 The Front Door",
       "version": "v1"
+    },
+    {
+      "boundary": "Films the delivered result, not the build. A different run from Case 002 \u2014 it does not continue it. The work between the request and the page is not shown.",
+      "id": "case-004-delivered-page",
+      "media": {
+        "captions": "/proof/lab/case-004.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "run": {
+        "delivery_confirmed_by": "double fetch of the live public URL with matching body hashes",
+        "elapsed_s": 17,
+        "project_id": "prj_6757fd37dcc143e997bbde4b",
+        "recorded": "2026-08-06"
+      },
+      "sha256": {
+        "captions": "0657aa58cbffcb4b375a3cabf034260a2af75611c494fac0157552d52eaa34ce",
+        "mp4": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
+        "poster": "335fed01c09997a8240adf7c5ee8050ea2b1318cfe0ac64f4bcb87ae56d8d991"
+      },
+      "subtitle": "The finished result: a page built from one plain request and published to a public address, read top to bottom.",
+      "takes": [
+        {
+          "duration_s": 13.0,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-004-v1",
+          "sha256": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 004 \u2014 A Delivered Page",
+      "version": "v1"
     }
   ],
   "controls": [
