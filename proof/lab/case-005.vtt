@@ -1,0 +1,68 @@
+WEBVTT
+
+NOTE
+Captions describe only what is on screen. Recorded on production,
+proof.noetfield.com, 2026-08-06. One continuous take, no cuts, no
+re-creation. The run in this recording is the run that happened.
+
+1
+00:00:00.000 --> 00:00:03.400
+The Evidence Lab. The engine runs in the
+viewer's own request — nothing pre-recorded.
+
+2
+00:00:03.400 --> 00:00:07.600
+Five acts: two blocked deployments, one issued
+token, a hundred runs, and a refusal.
+
+3
+00:00:07.600 --> 00:00:09.800
+Act 1. An AI export writes straight to the
+production database.
+
+4
+00:00:09.800 --> 00:00:12.400
+Eight gates run. G4 fails.
+EXIT 20 — the deploy token is withheld.
+
+5
+00:00:12.400 --> 00:00:15.600
+Act 2. The database call is fixed, but an AWS
+key ships in the config. EXIT 40 — escalated.
+
+6
+00:00:15.600 --> 00:00:17.800
+Act 3. A clean artifact clears all eight gates.
+A short-lived token is minted.
+
+7
+00:00:17.800 --> 00:00:19.600
+The token is bound to that artifact's exact hash.
+
+8
+00:00:19.600 --> 00:00:21.400
+Act 4. One hundred runs, with paths, timestamps,
+file order, locale and timezone perturbed.
+
+9
+00:00:21.400 --> 00:00:22.600
+One distinct verdict hash across all one hundred.
+
+10
+00:00:22.600 --> 00:00:23.800
+Then six negative controls. Every one moves the
+hash — proving it is sensitive, not constant.
+
+11
+00:00:23.800 --> 00:00:25.400
+Act 5. One byte is added, and the same
+still-valid token is presented again.
+
+12
+00:00:25.400 --> 00:00:26.600
+REFUSED. The artifact changed, so it deploys nothing.
+
+13
+00:00:26.600 --> 00:00:31.300
+Intake replaces the pull request. Verification
+replaces CI. Execution replaces the merge button.
