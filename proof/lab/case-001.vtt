@@ -1,25 +1,28 @@
 WEBVTT
 
-00:00.000 --> 00:05.500
-One plain request: a landing page for Harbourline Dental — and an automation that emails every booking.
+00:00.000 --> 00:05.000
+The real front door, on camera. A test account is prepared by the harness — nothing else is assisted.
 
-00:05.500 --> 00:13.500
-The machine plans and builds the website first.
+00:05.000 --> 00:08.500
+A business owner who wants more customers finding them.
 
-00:13.500 --> 00:18.000
-Website built, checked, and published — eight seconds in.
+00:08.500 --> 00:14.500
+The request, typed in plain words: a landing page — and an automation that emails every booking.
 
-00:18.000 --> 00:24.000
-The same request now fires the automation build. No second ask.
+00:14.500 --> 00:21.500
+The machine reads it back before spending anything: sections, the automation, and the checks it must pass.
 
-00:24.000 --> 00:58.000
-The automation is generated, then independently checked before anything is delivered.
+00:21.500 --> 00:26.500
+The build starts. Real execution on production — this is not a mock-up.
 
-00:58.000 --> 01:04.000
-A working workflow file, delivered beside the live site.
+00:26.500 --> 00:34.500
+Eight seconds later: the website is built, checked, and published.
 
-01:04.000 --> 01:11.000
-The published page — live on the public internet.
+00:34.500 --> 00:50.500
+The page itself — written from the owner's words. Services, dentists, hours, and a working booking form.
 
-01:11.000 --> 01:13.000
-Every step left a receipt.
+00:50.500 --> 01:18.000
+Meanwhile the automation half is generated and independently verified before delivery.
+
+01:18.000 --> 01:24.000
+Delivered: a working automation beside the live site. Every step left a receipt.

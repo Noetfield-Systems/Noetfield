@@ -10,8 +10,8 @@
       "media": {
         "captions": "/proof/lab/case-001.vtt",
         "embed": null,
-        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/poster.png",
-        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001.mp4"
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/poster-v2.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4"
       },
       "media_state": "PUBLISHED",
       "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
@@ -85,12 +85,12 @@
   ],
   "receipts": [
     {
-      "artifact": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001-run-receipt.json",
-      "boundary": "One bounded recorded run on production; the recording and receipt describe the same timestamps.",
+      "artifact": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json",
+      "boundary": "One bounded recorded run on production; account creation is harness-assisted and disclosed on camera.",
       "grade": "VERIFIED_RECEIPT",
-      "payload_sha256": "376498350a76ee666e7c030bc6d217d8a8e053f14cd3d3624aeb388bfb3fd5da",
-      "result": "Website published in 8 s \u00b7 automation delivered \u00b7 filmed end to end, no cuts",
-      "run": "Combined-request recording run, 6 August"
+      "payload_sha256": "1d659d267690ce96324d83849a1c691616691f02c2d7845b29c8bec81ea80c2d",
+      "result": "Prompt typed on camera \u00b7 website published 8 s after creation \u00b7 automation delivered \u00b7 1:24, no cuts",
+      "run": "Combined-request recording run, take two, 6 August"
     },
     {
       "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
