@@ -212,8 +212,16 @@
     <h2 id="lab-cases">Recorded demonstrations</h2>
     <p>Each case is one bounded run, recorded end to end. Cases are added here as they are filmed; a case appears only once its receipt exists.</p>
 
-    <article class="nf-lab-case" id="case-001-refusal-cycle">
-     <h3>Proof Case 001 — The Refusal Cycle</h3>
+    <!-- Every case carries its take number in a class AND a data attribute. A
+         reshoot replaces the media but never the identity: v1 stays named, with
+         its own digest, so two takes of the same case can be told apart and
+         compared later instead of one quietly becoming "the" recording. -->
+    <article class="nf-lab-case nf-lab-case--v2" id="case-001-refusal-cycle"
+             data-case-id="case-001-refusal-cycle"
+             data-case-version="v2"
+             data-case-sha256="828997ad328f5d41d5867f25b20eed702ae6cbcfec8c1f08a5c6ad7f3046ea31"
+             data-case-supersedes="v1">
+     <h3>Proof Case 001 — The Refusal Cycle <span class="nf-vc-pill">TAKE v2</span></h3>
      <p class="nf-lab-case__sub">The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.</p>
      <!-- To publish this recording, set exactly one source below and nothing else on this page:
           data-video-embed — full Cloudflare Stream iframe URL, or
@@ -233,8 +241,12 @@
      <p class="nf-lab-caption"><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> One bounded run, recorded end to end by the machine on production, no cuts: a single plain request produced a published website in eight seconds and a delivered automation beside it. The refusal beat — a stop with a stated reason instead of a plausible invention — is evidenced separately on the receipt wall below. The recording ships with <a href="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json">its run receipt</a>.</p>
     </article>
 
-    <article class="nf-lab-case" id="case-002-front-door">
-     <h3>Proof Case 002 — The Front Door</h3>
+    <article class="nf-lab-case nf-lab-case--v1" id="case-002-front-door"
+             data-case-id="case-002-front-door"
+             data-case-version="v1"
+             data-case-sha256="0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c"
+             data-case-supersedes="">
+     <h3>Proof Case 002 — The Front Door <span class="nf-vc-pill">TAKE v1</span></h3>
      <p class="nf-lab-case__sub">One sentence asks for a website and the automation behind it. The plan answers both halves — before an account exists.</p>
      <div class="nf-lab-player nf-lab-player--empty"
           role="img"
