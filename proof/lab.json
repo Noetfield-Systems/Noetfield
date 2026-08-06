@@ -108,6 +108,38 @@
       ],
       "title": "Proof Case 004 \u2014 A Delivered Page",
       "version": "v1"
+    },
+    {
+      "boundary": "Shows the engine's own properties only \u2014 determinism, sensitivity and token binding. This is not a customer-outcome run: nothing is built for a customer and nothing is delivered in this recording. The artifacts under test are fixtures carried by the lab, not a customer's code.",
+      "id": "case-005-determinism-binding",
+      "media": {
+        "captions": "/proof/lab/case-005.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": true,
+      "sha256": {
+        "captions": "0d93fc1177738e1d1dcf92de836be59f5ac922d18cd66ef3e42e8b81a1e1a4fa",
+        "mp4": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
+        "poster": "09915c51690a1536d6c1da6fd54f33e2bbcb4f3b58496207c169024767022e44"
+      },
+      "subtitle": "A hundred runs collapse to one verdict hash, six controls move it, and a still-valid deploy token refuses an artifact that changed by one byte.",
+      "takes": [
+        {
+          "duration_s": 31.3,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-005-v1",
+          "sha256": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 005 \u2014 Determinism & Binding",
+      "version": "v1"
     }
   ],
   "controls": [
