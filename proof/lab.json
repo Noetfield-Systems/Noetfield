@@ -15,7 +15,23 @@
       },
       "media_state": "PUBLISHED",
       "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
-      "title": "Proof Case 001 \u2014 The Refusal Cycle"
+      "title": "Proof Case 001 — The Refusal Cycle",
+      "type": "recorded_demonstration"
+    },
+    {
+      "boundary": "A depiction of the intended product. Not a recording, not evidence, and not a claim of present availability.",
+      "grade": "CONCEPT",
+      "id": "vision-001-full-production",
+      "media": {
+        "captions": null,
+        "embed": null,
+        "poster": null,
+        "src": null
+      },
+      "media_state": "CONCEPT_FILM_PENDING",
+      "subtitle": "The intended product: work arriving planned, executed, verified and evidenced at scale, with the operator supervising rather than assembling.",
+      "title": "Noetfield in full production",
+      "type": "product_vision"
     }
   ],
   "controls": [
@@ -43,14 +59,15 @@
     "NOT_MEASURED": "Not yet instrumented. Stated as unknown rather than estimated.",
     "OWNER_OBSERVED": "Reported by the operator; not independently measured here.",
     "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
-    "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact."
+    "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact.",
+    "CONCEPT": "A depiction of the intended product. Not a recording, not evidence, and never counted as a demonstration."
   },
   "generated_at": "2026-08-06T00:00:00Z",
   "maintenance": {
     "hosting": {
       "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
       "never": "Do not commit video files to git. They bloat the repository and fight the per-file deploy limit.",
-      "preferred": "Cloudflare Stream \u2014 the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player."
+      "preferred": "Cloudflare Stream — the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player."
     },
     "publish_a_recording": [
       "Confirm the run shown in the recording produced a receipt. No recording is published before its evidence exists.",
@@ -59,7 +76,13 @@
       "Mirror the same URL into this file under the case's media object, and set media_state to PUBLISHED.",
       "Add the backing receipt to the receipts array and swap the case caption's NOT YET PUBLISHED pill for the receipt grade."
     ],
-    "rule": "A case slot stays empty until its run has produced a receipt. Never publish a demonstration ahead of its evidence."
+    "rule": "A recorded-demonstration slot stays empty until its run has produced a receipt. A product-vision slot is always marked CONCEPT and is never counted as evidence.",
+    "publish_a_concept_film": [
+      "A concept film is never graded as evidence and never appears in the recorded-demonstrations section.",
+      "Keep the vision modifier on the player so the CONCEPT marker stays over the frame, including in screenshots and crops.",
+      "Set the source exactly as for a recording, then set media_state to PUBLISHED on the product_vision case.",
+      "Do not add a receipt for it. A concept film has no run behind it, and inventing one would defeat the page."
+    ]
   },
   "measurement": {
     "cost_per_accepted_outcome": {
@@ -89,7 +112,7 @@
       "boundary": "One bounded recorded run on production; account creation is harness-assisted and disclosed on camera.",
       "grade": "VERIFIED_RECEIPT",
       "payload_sha256": "1d659d267690ce96324d83849a1c691616691f02c2d7845b29c8bec81ea80c2d",
-      "result": "Prompt typed on camera \u00b7 website published 8 s after creation \u00b7 automation delivered \u00b7 1:24, no cuts",
+      "result": "Prompt typed on camera · website published 8 s after creation · automation delivered · 1:24, no cuts",
       "run": "Combined-request recording run, take two, 6 August"
     },
     {
@@ -97,7 +120,7 @@
       "boundary": "One dated run, not all request classes.",
       "grade": "VERIFIED_RECEIPT",
       "payload_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
-      "result": "HTTP 200 \u00b7 public page headed \"Meridian Tax Group\" \u00b7 13684 ms",
+      "result": "HTTP 200 · public page headed \"Meridian Tax Group\" · 13684 ms",
       "run": "Named-business request, 1 August",
       "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
     },
@@ -114,14 +137,14 @@
       "artifact": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
       "boundary": "Candidate branch was not deployed to the target host, so this shows missing delivery on that target, not candidate quality.",
       "grade": "REPOSITORY_SUPPORTED",
-      "result": "10 timeouts \u00b7 0 delivered",
+      "result": "10 timeouts · 0 delivered",
       "run": "Expanded ten-scenario live run"
     },
     {
       "artifact": "/proof/governed-replacement.json",
       "boundary": "First-party run, not external deployment.",
       "grade": "VERIFIED_RECEIPT",
-      "result": "Verification failed \u00b7 bounded repair applied \u00b7 independent re-check passed \u00b7 human promotion",
+      "result": "Verification failed · bounded repair applied · independent re-check passed · human promotion",
       "run": "Governed replacement, run CS2-GISF-2026-07-14T005554Z"
     },
     {

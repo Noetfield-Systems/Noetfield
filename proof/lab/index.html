@@ -128,6 +128,27 @@
   .nf-lab-player__note { margin: 0; max-width: 42ch; font-size: .88rem; opacity: .72; }
   .nf-lab-caption { margin: .85rem 0 0; font-size: .9rem; opacity: .82; }
 
+  /* Concept films — depictions of the intended product, never evidence.
+     The marker sits over the frame so it survives a screenshot or a crop. */
+  .nf-lab-pill--concept { border-color: #a07a5c; color: #c79a72; }
+  .nf-lab-case--vision { border-style: dashed; }
+  .nf-lab-player--vision::after {
+   content: "Concept — not a recording";
+   position: absolute;
+   top: .6rem;
+   right: .6rem;
+   z-index: 2;
+   padding: .3rem .6rem;
+   border: 1px solid rgba(199,154,114,.55);
+   border-radius: 2px;
+   background: rgba(10,8,6,.82);
+   color: #c79a72;
+   font-size: .62rem;
+   letter-spacing: .12em;
+   text-transform: uppercase;
+   pointer-events: none;
+  }
+
   /* Measurement tiles */
   .nf-lab-metrics {
    display: grid;
@@ -193,7 +214,7 @@
 
    <section class="nf-vc-section" aria-labelledby="lab-read">
     <h2 id="lab-read">How to read this page</h2>
-    <p>Noetfield sells acceptance, so this page holds itself to the standard it sells. Every factual line below carries one of four grades, and nothing is stated without one.</p>
+    <p>Noetfield sells acceptance, so this page holds itself to the standard it sells. Every factual line below carries one of five grades, and nothing is stated without one.</p>
     <div class="nf-lab-scroll">
      <table class="nf-vc-table">
       <thead><tr><th>Grade</th><th>What it means</th></tr></thead>
@@ -202,6 +223,7 @@
        <tr><td><span class="nf-vc-pill nf-lab-pill--supported">REPOSITORY-SUPPORTED</span></td><td>Recorded in an immutable repository or CI record, but not a full customer-path pass.</td></tr>
        <tr><td><span class="nf-vc-pill nf-lab-pill--observed">OWNER-OBSERVED</span></td><td>Reported by the operator. Real, but not independently measured here.</td></tr>
        <tr><td><span class="nf-vc-pill nf-lab-pill--unknown">NOT MEASURED</span></td><td>Not yet instrumented. Stated as unknown rather than estimated.</td></tr>
+       <tr><td><span class="nf-vc-pill nf-lab-pill--concept">CONCEPT</span></td><td>A depiction of the intended product. Not a recording, not evidence, and never counted as a demonstration.</td></tr>
       </tbody>
      </table>
     </div>
@@ -231,6 +253,31 @@
       <p class="nf-lab-player__note">This slot is reserved and intentionally empty. Noetfield does not publish a demonstration before the run behind it has produced a receipt.</p>
      </div>
      <p class="nf-lab-caption"><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> One bounded run, recorded end to end by the machine on production, no cuts: a single plain request produced a published website in eight seconds and a delivered automation beside it. The refusal beat — a stop with a stated reason instead of a plausible invention — is evidenced separately on the receipt wall below. The recording ships with <a href="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json">its run receipt</a>.</p>
+    </article>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-vision">
+    <h2 id="lab-vision">Product vision</h2>
+    <p>These films show the product as it is intended to work at full scale. They are made, not recorded — nothing in them is a capture of a live run, none of it is evidence, and none of it is claimed as available today. What exists now is above and on the receipt wall; what is intended is here. The roadmap states which is which.</p>
+
+    <article class="nf-lab-case nf-lab-case--vision" id="vision-001-full-production">
+     <h3>Noetfield in full production</h3>
+     <p class="nf-lab-case__sub">The intended product: work arriving planned, executed, verified and evidenced at scale, with the operator supervising rather than assembling.</p>
+     <!-- Same source contract as a recording: set data-video-embed or data-video-src.
+          Vision slots must keep the --vision modifier so the CONCEPT marker stays
+          burned into the frame, including in screenshots. -->
+     <div class="nf-lab-player nf-lab-player--empty nf-lab-player--vision"
+          role="img"
+          aria-label="Concept film pending for Noetfield in full production"
+          data-video-title="Noetfield in full production — concept film"
+          data-video-embed=""
+          data-video-src=""
+          data-video-poster=""
+          data-video-captions="">
+      <span class="nf-lab-player__mark">Concept film pending</span>
+      <p class="nf-lab-player__note">This slot is reserved for a depiction of the intended product. It is labelled a concept wherever it appears, so it can never be mistaken for a recorded run.</p>
+     </div>
+     <p class="nf-lab-caption"><span class="nf-vc-pill nf-lab-pill--concept">CONCEPT</span> A depiction of the intended product, not a recording and not evidence. Read it as direction, and hold the company to the graded claims elsewhere on this page.</p>
     </article>
    </section>
 
