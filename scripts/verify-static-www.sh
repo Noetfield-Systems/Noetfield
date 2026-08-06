@@ -136,7 +136,7 @@ check_file "private invest route contract" invest/index.html \
   '<meta name="robots" content="noindex,nofollow" />' \
   'For verified investors only. Not a public offer.' \
   'Investor workflow product' 'Public information about evidence-based diligence workflows.' \
-  '/assets/noetfield-invest-auth-v1.js?v=2'
+  '/assets/noetfield-invest-auth-v1.js?v=3'
 check_file "private invest Pages access control" 'functions/invest/[[path]].js' \
   'nf_invest_token' 'verifyAccessToken(token, env)' 'return redirectSignIn(request);' \
   'headers.set("Cache-Control", "private, no-store")'
