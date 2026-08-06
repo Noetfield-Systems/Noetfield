@@ -1,0 +1,62 @@
+WEBVTT
+
+NOTE
+Captions describe only what is on screen. This is not a product recording:
+it is the open verification engine run from a terminal, 2026-08-06, one
+continuous take, no cuts. Every hash, verdict and exit code in frame is
+produced by the run you are watching. The tape that reproduces this exact
+film is published with the engine.
+
+1
+00:00:00.000 --> 00:00:03.250
+One command. No network, no model,
+no dependencies.
+
+2
+00:00:03.250 --> 00:00:06.230
+Act one — a raw Bolt.new export
+reaches the gates.
+
+3
+00:00:06.230 --> 00:00:08.850
+DENY. It builds a production database
+connection in shipped code.
+
+4
+00:00:08.850 --> 00:00:11.950
+Act two — credential material found
+in the artifact.
+
+5
+00:00:11.950 --> 00:00:14.580
+Not blocked. Escalated to a named human,
+and the approval binds to this exact hash.
+
+6
+00:00:14.580 --> 00:00:17.500
+Act three — the remediated artifact.
+
+7
+00:00:17.500 --> 00:00:20.140
+Every gate passes. A deploy token is issued,
+bound to this bundle and no other.
+
+8
+00:00:20.140 --> 00:00:23.450
+Act four — the same artifact verified
+one hundred times.
+
+9
+00:00:23.450 --> 00:00:25.200
+Paths, timestamps, permissions, locale,
+time zone, process identity: all varied.
+
+10
+00:00:25.200 --> 00:00:28.200
+Then the negative controls — a changed byte,
+a rename, an edited policy must move the hash.
+
+11
+00:00:28.200 --> 00:00:31.200
+They do. Determinism holds across one hundred
+adversarially perturbed runs.
