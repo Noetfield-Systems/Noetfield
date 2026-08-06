@@ -16,6 +16,25 @@
       "media_state": "PUBLISHED",
       "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
       "title": "Proof Case 001 \u2014 The Refusal Cycle"
+    },
+    {
+      "boundary": "Shows the front door only. The build, the published page and the automation begin after sign-up and are not in this recording.",
+      "id": "case-002-front-door",
+      "media": {
+        "captions": "/proof/lab/case-002.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": true,
+      "sha256": {
+        "captions": "37438490ff7b8aff802f18a0b64aa2b1427f5bb4778825aec301018d07ee7eb4",
+        "mp4": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
+        "poster": "d34b9cdbe13ac2140abb988c8fc1171b561e7ad74cc7b3be01a6b29fa9b6444a"
+      },
+      "subtitle": "One sentence asks for a website and the automation behind it. The plan answers both halves \u2014 before an account exists.",
+      "title": "Proof Case 002 \u2014 The Front Door"
     }
   ],
   "controls": [
