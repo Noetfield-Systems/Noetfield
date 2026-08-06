@@ -7,7 +7,12 @@
     {
       "boundary": "The recording is published only together with the run receipt that backs it.",
       "id": "case-001-refusal-cycle",
-      "media": null,
+      "media": {
+        "captions": null,
+        "embed": null,
+        "poster": null,
+        "src": null
+      },
       "media_state": "RECORDING_PENDING",
       "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
       "title": "Proof Case 001 — The Refusal Cycle"
@@ -42,12 +47,17 @@
   },
   "generated_at": "2026-08-06T00:00:00Z",
   "maintenance": {
+    "hosting": {
+      "preferred": "Cloudflare Stream — the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player.",
+      "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
+      "never": "Do not commit video files to git. They bloat the repository and fight the per-file deploy limit."
+    },
     "publish_a_recording": [
-      "Record the run and capture its receipt before filming is treated as complete.",
-      "Host the file and set the case object's media.src to its URL, or set media.embed for a hosted player.",
-      "Set media_state to PUBLISHED and add the backing receipt to the receipts array.",
-      "Replace the matching nf-lab-player--empty block in /proof/lab/index.html with a video element using the same source.",
-      "Register any newly tracked static file in governance/www-public-artifact-v1.json before deploying."
+      "Confirm the run shown in the recording produced a receipt. No recording is published before its evidence exists.",
+      "Upload the file to Cloudflare Stream and copy the iframe URL it returns.",
+      "On the case slot in /proof/lab/index.html, set data-video-embed to that URL (or data-video-src for a hosted MP4). Set nothing else.",
+      "Mirror the same URL into this file under the case's media object, and set media_state to PUBLISHED.",
+      "Add the backing receipt to the receipts array and swap the case caption's NOT YET PUBLISHED pill for the receipt grade."
     ],
     "rule": "A case slot stays empty until its run has produced a receipt. Never publish a demonstration ahead of its evidence."
   },
