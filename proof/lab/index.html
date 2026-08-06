@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <!-- Noetfield social preview v2: generated from data/noetfield-social-preview-v2.json -->
+ <title>Evidence Lab — Agent Execution Assurance — Noetfield</title>
+ <meta name="description" content="The single source of truth for what the Noetfield runtime does today: recorded demonstrations, hash-bound receipts, governance gates, cost measurement, and a stated roadmap with honest status labels." />
+ <meta name="robots" content="index,follow" />
+ <link rel="canonical" href="https://www.noetfield.com/proof/lab/" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:title" content="Evidence Lab — Agent Execution Assurance — Noetfield" />
+ <meta property="og:description" content="The single source of truth for what the Noetfield runtime does today: recorded demonstrations, hash-bound receipts, governance gates, cost measurement, and a stated roadmap with honest status labels." />
+ <meta property="og:url" content="https://www.noetfield.com/proof/lab/" />
+ <meta property="og:type" content="website" />
+ <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-proof-v2.png" />
+ <meta property="og:image:secure_url" content="https://www.noetfield.com/assets/social/noetfield-proof-v2.png" />
+ <meta property="og:image:width" content="1200" />
+ <meta property="og:image:height" content="630" />
+ <meta property="og:image:alt" content="Noetfield proof — current systems, verified states and public execution receipts." />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Evidence Lab — Agent Execution Assurance — Noetfield" />
+ <meta name="twitter:description" content="The single source of truth for what the Noetfield runtime does today: recorded demonstrations, hash-bound receipts, governance gates, cost measurement, and a stated roadmap with honest status labels." />
+ <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-proof-v2.png" />
+ <meta name="twitter:image:alt" content="Noetfield proof — current systems, verified states and public execution receipts." />
+ <!-- nf-json-ld: webpage -->
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Evidence Lab \u2014 Agent Execution Assurance \u2014 Noetfield",
+  "description": "The single source of truth for what the Noetfield runtime does today: recorded demonstrations, hash-bound receipts, governance gates, cost measurement, and a stated roadmap with honest status labels.",
+  "url": "https://www.noetfield.com/proof/lab/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Noetfield",
+    "url": "https://www.noetfield.com/"
+  },
+  "image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png"
+}
+ </script>
+
+<meta name="theme-color" content="#07080a" />
+<script type="application/ld+json">
+ {
+   "@context": "https://schema.org",
+   "@type": "CollectionPage",
+   "name": "Evidence Lab — Agent Execution Assurance",
+   "description": "The single source of truth for what the Noetfield runtime does today: recorded demonstrations, hash-bound receipts, governance gates, cost measurement, and a stated roadmap with honest status labels.",
+   "url": "https://www.noetfield.com/proof/lab/",
+   "author": {
+     "@type": "Organization",
+     "name": "Noetfield Systems Inc.",
+     "url": "https://www.noetfield.com/about/"
+   },
+   "publisher": {
+     "@type": "Organization",
+     "name": "Noetfield",
+     "url": "https://www.noetfield.com/"
+   },
+   "datePublished": "2026-08-06",
+   "dateModified": "2026-08-06",
+   "image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
+   "isPartOf": {
+     "@type": "WebSite",
+     "name": "Noetfield",
+     "url": "https://www.noetfield.com/"
+   }
+ }
+ </script>
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=5a9c0944566a4788" />
+ <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=db4c94718036df35" />
+ <style>
+  .nf-lab-pill--verified { border-color: #3d8b6e; color: #3d8b6e; }
+  .nf-lab-pill--supported { border-color: #6b8cae; color: #6b8cae; }
+  .nf-lab-pill--observed { border-color: #a08b5c; color: #a08b5c; }
+  .nf-lab-pill--unknown { border-color: #888; color: #888; }
+  .nf-lab-scroll { overflow-x: auto; margin: 1rem 0; }
+  .nf-lab-scroll table { min-width: 720px; margin: 0; }
+  .nf-lab-meta { font-family: ui-monospace, monospace; font-size: .8rem; opacity: .72; overflow-wrap: anywhere; }
+  .nf-vc-section code { overflow-wrap: anywhere; }
+
+  /* Recorded demonstration player */
+  .nf-lab-case {
+   margin: 1.75rem 0;
+   padding: 1.25rem;
+   border: 1px solid rgba(255,255,255,.12);
+   border-radius: 4px;
+   background: rgba(255,255,255,.03);
+  }
+  .nf-lab-case > h3 { margin: 0 0 .35rem; font-size: 1.05rem; }
+  .nf-lab-case__sub { margin: 0 0 1rem; opacity: .78; font-size: .92rem; }
+  .nf-lab-player {
+   position: relative;
+   aspect-ratio: 16 / 9;
+   width: 100%;
+   border: 1px solid rgba(255,255,255,.14);
+   border-radius: 3px;
+   background: rgba(0,0,0,.35);
+   overflow: hidden;
+  }
+  .nf-lab-player video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+  .nf-lab-player--empty {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: .55rem;
+   text-align: center;
+   padding: 1.25rem;
+   background-image:
+     repeating-linear-gradient(45deg,
+       rgba(255,255,255,.022) 0 10px,
+       transparent 10px 20px);
+  }
+  .nf-lab-player__mark {
+   font-size: .68rem;
+   letter-spacing: .16em;
+   text-transform: uppercase;
+   opacity: .6;
+  }
+  .nf-lab-player__note { margin: 0; max-width: 42ch; font-size: .88rem; opacity: .72; }
+  .nf-lab-caption { margin: .85rem 0 0; font-size: .9rem; opacity: .82; }
+
+  /* Measurement tiles */
+  .nf-lab-metrics {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+   gap: .75rem;
+   margin: 1.1rem 0;
+  }
+  .nf-lab-metric {
+   padding: .9rem 1rem;
+   border: 1px solid rgba(255,255,255,.12);
+   border-radius: 3px;
+   background: rgba(255,255,255,.025);
+  }
+  .nf-lab-metric__label {
+   display: block;
+   font-size: .68rem;
+   letter-spacing: .1em;
+   text-transform: uppercase;
+   opacity: .62;
+   margin-bottom: .35rem;
+  }
+  .nf-lab-metric__value {
+   display: block;
+   font-family: ui-monospace, monospace;
+   font-size: 1.15rem;
+   line-height: 1.25;
+  }
+  .nf-lab-metric__note { display: block; margin-top: .35rem; font-size: .8rem; opacity: .68; }
+
+  /* Roadmap */
+  .nf-lab-phase {
+   display: grid;
+   gap: .4rem;
+   padding: 1rem 0;
+   border-top: 1px solid rgba(255,255,255,.1);
+  }
+  .nf-lab-phase:first-of-type { border-top: 0; }
+  .nf-lab-phase__head { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+  .nf-lab-phase__head h3 { margin: 0; font-size: 1rem; }
+  .nf-lab-phase p { margin: 0; }
+ </style>
+</head>
+<body class="nf-gate nf-gate--vc">
+ <div class="nf-gate__bg" aria-hidden="true"></div>
+ <div class="nf-gate__frame">
+  <header class="nf-gate__top">
+   <a class="nf-gate__mark" href="/">Noetfield Systems Inc.</a>
+   <span class="nf-gate__locale">Evidence lab</span>
+  </header>
+  <main id="main" class="nf-gate__main">
+   <a class="nf-vc-back" href="/proof/">← Evidence register</a>
+   <header class="nf-vc-hero">
+    <p class="nf-vc-kicker">Evidence Lab · Single source of truth</p>
+    <h1>Agent Execution Assurance</h1>
+    <p class="nf-vc-lead">Autonomous AI execution, bounded by explicit authority and judged by a verifier that is separate from the worker that produced the result. This page is the one place where the demonstrations, the receipts, the measured cost, and the honest gaps are kept together — so that what you are told matches what you can open.</p>
+   </header>
+   <div class="nf-vc-strip">
+    <span class="nf-vc-pill nf-vc-pill--live">LIVE ALPHA · FOUNDER-OPERATED</span>
+    <span class="nf-vc-pill">First-party evidence</span>
+    <span class="nf-vc-pill">No external customers or revenue yet</span>
+    <span class="nf-vc-pill">Not a certification</span>
+   </div>
+
+   <section class="nf-vc-section" aria-labelledby="lab-read">
+    <h2 id="lab-read">How to read this page</h2>
+    <p>Noetfield sells acceptance, so this page holds itself to the standard it sells. Every factual line below carries one of four grades, and nothing is stated without one.</p>
+    <div class="nf-lab-scroll">
+     <table class="nf-vc-table">
+      <thead><tr><th>Grade</th><th>What it means</th></tr></thead>
+      <tbody>
+       <tr><td><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span></td><td>Bound to a dated run with a published, hash-identified artifact you can fetch yourself.</td></tr>
+       <tr><td><span class="nf-vc-pill nf-lab-pill--supported">REPOSITORY-SUPPORTED</span></td><td>Recorded in an immutable repository or CI record, but not a full customer-path pass.</td></tr>
+       <tr><td><span class="nf-vc-pill nf-lab-pill--observed">OWNER-OBSERVED</span></td><td>Reported by the operator. Real, but not independently measured here.</td></tr>
+       <tr><td><span class="nf-vc-pill nf-lab-pill--unknown">NOT MEASURED</span></td><td>Not yet instrumented. Stated as unknown rather than estimated.</td></tr>
+      </tbody>
+     </table>
+    </div>
+    <p class="nf-vc-note">A claim with no grade is not a claim. If you find one on this page, it is a defect — <a href="/contact/">report it</a> and it will be corrected with the prior version preserved.</p>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-cases">
+    <h2 id="lab-cases">Recorded demonstrations</h2>
+    <p>Each case is one bounded run, recorded end to end. Cases are added here as they are filmed; a case appears only once its receipt exists.</p>
+
+    <article class="nf-lab-case" id="case-001-refusal-cycle">
+     <h3>Proof Case 001 — The Refusal Cycle</h3>
+     <p class="nf-lab-case__sub">The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.</p>
+     <div class="nf-lab-player nf-lab-player--empty" role="img" aria-label="Recording pending for Proof Case 001, The Refusal Cycle">
+      <span class="nf-lab-player__mark">Recording pending</span>
+      <p class="nf-lab-player__note">This slot is reserved and intentionally empty. Noetfield does not publish a demonstration before the run behind it has produced a receipt.</p>
+     </div>
+     <p class="nf-lab-caption"><span class="nf-vc-pill nf-lab-pill--unknown">NOT YET PUBLISHED</span> The refusal beat is the point of the case: when a required fact is missing, the correct behaviour is a stop with a stated reason, not a plausible invention. The recording will be published together with the run receipt that backs it.</p>
+    </article>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-receipts">
+    <h2 id="lab-receipts">The receipt wall</h2>
+    <p>These are published, dated runs. Each links to an artifact hosted outside this page so the claim can be checked without trusting the page.</p>
+    <div class="nf-lab-scroll">
+     <table class="nf-vc-table">
+      <thead><tr><th>Run</th><th>Recorded result</th><th>Grade and boundary</th></tr></thead>
+      <tbody>
+       <tr>
+        <td>Named-business request, 1 August</td>
+        <td>HTTP 200 · public page headed “Meridian Tax Group” · 13,684 ms</td>
+        <td><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> one dated run, not all request classes</td>
+       </tr>
+       <tr>
+        <td>Generic trade-description request</td>
+        <td>No public page before a 302,662 ms timeout</td>
+        <td><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> one dated failure, preserved deliberately</td>
+       </tr>
+       <tr>
+        <td>Expanded ten-scenario live run</td>
+        <td>10 timeouts · 0 delivered on that target</td>
+        <td><span class="nf-vc-pill nf-lab-pill--supported">REPOSITORY-SUPPORTED</span> candidate branch was not deployed to the target host</td>
+       </tr>
+       <tr>
+        <td>Governed replacement, run CS2-GISF-2026-07-14T005554Z</td>
+        <td>Verification failed · bounded repair applied · independent re-check passed · human promotion</td>
+        <td><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> first-party run, not external deployment</td>
+       </tr>
+       <tr>
+        <td>Current production closure</td>
+        <td>Pending a fresh same-release end-to-end run</td>
+        <td><span class="nf-vc-pill nf-lab-pill--unknown">NOT MEASURED</span> historical receipts are not a claim about today</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <p class="nf-lab-meta">Named-business receipt payload sha256 3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba · generic-trade receipt payload sha256 900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28 · tested app release 2b818e415a2841d7e9eb390ba9f464722f92e8c7</p>
+    <nav class="nf-vc-grid nf-vc-grid--2" aria-label="Receipt artifacts">
+     <a class="nf-vc-tile" href="https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">Named-business receipt</span>
+      <span class="nf-vc-tile__desc">The passing run, as raw JSON.</span>
+     </a>
+     <a class="nf-vc-tile" href="https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">Failure receipt</span>
+      <span class="nf-vc-tile__desc">The failing run, published rather than deleted.</span>
+     </a>
+     <a class="nf-vc-tile" href="/proof/governed-replacement.json">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">Governed replacement bundle</span>
+      <span class="nf-vc-tile__desc">Run id, exact commit digests, lifecycle, recorded checks.</span>
+     </a>
+     <a class="nf-vc-tile" href="https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">Immutable repository receipt</span>
+      <span class="nf-vc-tile__desc">The ten-scenario run, pinned to a commit.</span>
+     </a>
+    </nav>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-cost">
+    <h2 id="lab-cost">Cost economics</h2>
+    <p>Cost is measured per <em>accepted outcome</em>, not per successful model call. A run that produced no customer effect still consumed spend, and counting only the successful calls is the most common way agent economics are misreported.</p>
+    <div class="nf-lab-metrics">
+     <div class="nf-lab-metric">
+      <span class="nf-lab-metric__label">Cost per accepted outcome</span>
+      <span class="nf-lab-metric__value">Not measured</span>
+      <span class="nf-lab-metric__note">No per-run dollar figure is published because none is yet instrumented end to end.</span>
+     </div>
+     <div class="nf-lab-metric">
+      <span class="nf-lab-metric__label">Per-run spend ceiling</span>
+      <span class="nf-lab-metric__value">Not published</span>
+      <span class="nf-lab-metric__note">A ceiling will be stated here once it is enforced in the runtime and provable from a receipt.</span>
+     </div>
+     <div class="nf-lab-metric">
+      <span class="nf-lab-metric__label">Total token spend</span>
+      <span class="nf-lab-metric__value">Not measured</span>
+      <span class="nf-lab-metric__note">Explicitly unknown in the current evidence bundles.</span>
+     </div>
+    </div>
+    <p><span class="nf-vc-pill nf-lab-pill--unknown">NOT MEASURED</span> Publishing an unsourced cost number on an evidence page would defeat the page. These tiles are live slots: each is filled the moment a run emits a cost receipt, and the receipt is linked beside it.</p>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-gates">
+    <h2 id="lab-gates">What actually stands between a model and a customer</h2>
+    <p>The controls below are the ones the acceptance argument rests on. They are described as design commitments; the receipts above are what show whether they held on a given run.</p>
+    <div class="nf-lab-scroll">
+     <table class="nf-vc-table">
+      <thead><tr><th>Control</th><th>What it enforces</th></tr></thead>
+      <tbody>
+       <tr><td>Explicit authority before action</td><td>A run executes inside a stated authority envelope with recorded alternatives and a decision, not on an implied instruction.</td></tr>
+       <tr><td>Exact-candidate binding</td><td>The thing being judged is pinned to exact commit digests, so a later tree cannot be substituted for the one that passed.</td></tr>
+       <tr><td>Separate verification</td><td>The verifier is distinct from the worker that produced the change. A model does not judge and promote its own work.</td></tr>
+       <tr><td>Bounded repair with safe stops</td><td>Repair is scoped and terminates. A failure that cannot be repaired inside the bound stops and is recorded as a failure.</td></tr>
+       <tr><td>Human promotion</td><td>A passing verification produces a candidate, not a release. Promotion is a human act.</td></tr>
+       <tr><td>Receipt for every accepted outcome</td><td>Acceptance binds request → execution → durable result → independent fetch, and preserves the record.</td></tr>
+      </tbody>
+     </table>
+    </div>
+    <p class="nf-vc-note"><span class="nf-vc-pill nf-lab-pill--supported">REPOSITORY-SUPPORTED</span> These controls are implemented and exercised first-party. Case 001 in the register records a period in which internal signals reported success while the customer effect was absent — that case is kept public precisely because it is the failure mode these controls exist to catch.</p>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-roadmap">
+    <h2 id="lab-roadmap">Roadmap, with status</h2>
+    <p>Stated so that a reader can tell today's capability from the intended one without asking.</p>
+
+    <div class="nf-lab-phase">
+     <div class="nf-lab-phase__head">
+      <h3>Phase 1 — Prompt to production</h3>
+      <span class="nf-vc-pill nf-vc-pill--live">LIVE ALPHA</span>
+     </div>
+     <p>One plain request produces a planned, executed, verified and deployable result: a published site and an accompanying automation definition, with the evidence preserved. Founder-operated, in the open alpha at <a href="https://app.noetfield.com/" rel="noopener noreferrer">app.noetfield.com</a>. Delivery is demonstrated on named requests and has recorded failures on others; both are on the receipt wall above.</p>
+    </div>
+
+    <div class="nf-lab-phase">
+     <div class="nf-lab-phase__head">
+      <h3>Phase 2 — Hosted execution</h3>
+      <span class="nf-vc-pill nf-vc-pill--soon">PLANNED</span>
+     </div>
+     <p>The automation runs where it is provisioned, rather than being handed over as a file to import. Provisioned endpoints, managed credentials, and the same acceptance and receipt layer applied to a running workflow instead of a generated one.</p>
+    </div>
+
+    <div class="nf-lab-phase">
+     <div class="nf-lab-phase__head">
+      <h3>Phase 3 — TrustField</h3>
+      <span class="nf-vc-pill nf-vc-pill--soon">PRODUCT VERTICAL · SYNTHETIC DEMONSTRATIONS</span>
+     </div>
+     <p>Governed execution applied to regulated case operations: FINTRAC workflows for Canadian MSBs, fintechs, PSPs and digital-asset operators, with the human FILE / NO-FILE / ESCALATE decision preserved rather than automated away. TrustField is a product vertical of Noetfield Systems Inc., not a separate venture. Public synthetic demonstrations at <a href="https://trustfield.ca/" rel="noopener noreferrer">trustfield.ca</a> and the <a href="/applications/trustfield/">product page</a>.</p>
+    </div>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-boundary">
+    <h2 id="lab-boundary">What this page does not claim</h2>
+    <ul>
+     <li>No external customers, revenue, or third-party production deployments.</li>
+     <li>No certification. A receipt is a record, not an accreditation, and this page is not SOC 2 or any equivalent.</li>
+     <li>No claim that current end-to-end delivery is closed. That requires a fresh same-release run and is marked NOT MEASURED until it exists.</li>
+     <li>No universal comparison of any AI coding tool or model vendor. No controlled comparison has been run.</li>
+     <li>No dollar cost or token spend figures, because none are yet instrumented.</li>
+    </ul>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-sources">
+    <h2 id="lab-sources">Machine-readable record and sources</h2>
+    <nav class="nf-vc-grid nf-vc-grid--2" aria-label="Sources">
+     <a class="nf-vc-tile" href="/proof/lab.json">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">This page as JSON</span>
+      <span class="nf-vc-tile__desc">Case slots, receipt index, measurement state and roadmap status.</span>
+     </a>
+     <a class="nf-vc-tile" href="/proof/">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">Evidence register</span>
+      <span class="nf-vc-tile__desc">Every current proof item with scope and stated limits.</span>
+     </a>
+     <a class="nf-vc-tile" href="/proof/agentic-coding-reliability-case-001/">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">Reliability Case 001</span>
+      <span class="nf-vc-tile__desc">The full claim ledger behind the failure record.</span>
+     </a>
+     <a class="nf-vc-tile" href="/demo/complete-run/">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">A complete run, end to end</span>
+      <span class="nf-vc-tile__desc">Authorized goal to receipt, written out in full.</span>
+     </a>
+     <a class="nf-vc-tile" href="/assurance/">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">How acceptance works</span>
+      <span class="nf-vc-tile__desc">The assurance layer these runs are judged by.</span>
+     </a>
+     <a class="nf-vc-tile" href="https://app.noetfield.com/" rel="noopener noreferrer">
+      <span class="nf-vc-tile__arrow" aria-hidden="true">↗</span>
+      <span class="nf-vc-tile__label">Open the live alpha</span>
+      <span class="nf-vc-tile__desc">The same runtime, at its public entry.</span>
+     </a>
+    </nav>
+   </section>
+
+   <section class="nf-vc-section" aria-labelledby="lab-correction">
+    <h2 id="lab-correction">Correction policy</h2>
+    <p>Any reader — investor, customer, vendor or contributor — may request a correction with verifiable citations through <a href="/contact/">the evidence-correction contact</a>. Substantiated corrections are appended, and the prior claim is preserved as superseded rather than quietly removed.</p>
+   </section>
+
+   <p class="nf-vc-note">A system is not done when an agent says done. It is done when the intended effect is independently observed, and the record of both the pass and the failure survives.</p>
+  </main>
+  <footer class="nf-gate__foot"><span>© 2026 Noetfield Systems Inc.</span></footer>
+ </div>
+</body>
+</html>

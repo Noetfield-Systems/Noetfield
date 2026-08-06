@@ -10,6 +10,7 @@
     "proof/claims-boundary-correction.json",
     "proof/clean-check-incident.json",
     "proof/governed-replacement.json",
+    "proof/lab.json",
     "proof/noetfield.json",
     "research-packs/catalog.json",
     "version.json"
@@ -240,6 +241,8 @@
     "proof/governed-replacement.json",
     "proof/governed-replacement/index.html",
     "proof/index.html",
+    "proof/lab.json",
+    "proof/lab/index.html",
     "proof/noetfield.json",
     "proof/noetfield/index.html",
     "public-interest/index.html",

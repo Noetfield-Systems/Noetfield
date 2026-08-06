@@ -72,6 +72,9 @@ PRIORITY = {
     "/assurance/": 0.9,
     "/workflows/": 0.9,
     "/developers/": 0.9,
+    "/proof/": 0.9,
+    "/proof/lab/": 0.9,
+    "/proof/agentic-coding-reliability-case-001/": 0.7,
 }
 
 # Top-level marketing paths (index.html at depth 1) included if indexable
@@ -96,6 +99,7 @@ MARKETING_TOP = {
     "faq",
     "for-whom",
     "privacy",
+    "proof",
     "resources",
     "runways",
     "workflows",
@@ -116,6 +120,8 @@ MARKETING_NESTED = {
     ("runways", "decision-brief"),
     ("demo", "complete-run"),
     ("assurance", "control-testing"),
+    ("proof", "lab"),
+    ("proof", "agentic-coding-reliability-case-001"),
 }
 
 
@@ -155,7 +161,7 @@ def url_path(index_path: Path) -> str:
 
 
 def changefreq(url: str) -> str:
-    if url in ("/", "/trust-brief/", "/enterprise/", "/deterministic-api/"):
+    if url in ("/", "/trust-brief/", "/enterprise/", "/deterministic-api/", "/proof/lab/"):
         return "weekly"
     return "monthly"
 
