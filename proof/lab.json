@@ -8,14 +8,14 @@
       "boundary": "The recording is published only together with the run receipt that backs it.",
       "id": "case-001-refusal-cycle",
       "media": {
-        "captions": null,
+        "captions": "/proof/lab/case-001.vtt",
         "embed": null,
-        "poster": null,
-        "src": null
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001.mp4"
       },
-      "media_state": "RECORDING_PENDING",
+      "media_state": "PUBLISHED",
       "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
-      "title": "Proof Case 001 — The Refusal Cycle"
+      "title": "Proof Case 001 \u2014 The Refusal Cycle"
     }
   ],
   "controls": [
@@ -48,9 +48,9 @@
   "generated_at": "2026-08-06T00:00:00Z",
   "maintenance": {
     "hosting": {
-      "preferred": "Cloudflare Stream — the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player.",
       "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
-      "never": "Do not commit video files to git. They bloat the repository and fight the per-file deploy limit."
+      "never": "Do not commit video files to git. They bloat the repository and fight the per-file deploy limit.",
+      "preferred": "Cloudflare Stream \u2014 the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player."
     },
     "publish_a_recording": [
       "Confirm the run shown in the recording produced a receipt. No recording is published before its evidence exists.",
@@ -85,11 +85,19 @@
   ],
   "receipts": [
     {
+      "artifact": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001-run-receipt.json",
+      "boundary": "One bounded recorded run on production; the recording and receipt describe the same timestamps.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "376498350a76ee666e7c030bc6d217d8a8e053f14cd3d3624aeb388bfb3fd5da",
+      "result": "Website published in 8 s \u00b7 automation delivered \u00b7 filmed end to end, no cuts",
+      "run": "Combined-request recording run, 6 August"
+    },
+    {
       "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
       "boundary": "One dated run, not all request classes.",
       "grade": "VERIFIED_RECEIPT",
       "payload_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
-      "result": "HTTP 200 · public page headed \"Meridian Tax Group\" · 13684 ms",
+      "result": "HTTP 200 \u00b7 public page headed \"Meridian Tax Group\" \u00b7 13684 ms",
       "run": "Named-business request, 1 August",
       "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
     },
@@ -106,14 +114,14 @@
       "artifact": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
       "boundary": "Candidate branch was not deployed to the target host, so this shows missing delivery on that target, not candidate quality.",
       "grade": "REPOSITORY_SUPPORTED",
-      "result": "10 timeouts · 0 delivered",
+      "result": "10 timeouts \u00b7 0 delivered",
       "run": "Expanded ten-scenario live run"
     },
     {
       "artifact": "/proof/governed-replacement.json",
       "boundary": "First-party run, not external deployment.",
       "grade": "VERIFIED_RECEIPT",
-      "result": "Verification failed · bounded repair applied · independent re-check passed · human promotion",
+      "result": "Verification failed \u00b7 bounded repair applied \u00b7 independent re-check passed \u00b7 human promotion",
       "run": "Governed replacement, run CS2-GISF-2026-07-14T005554Z"
     },
     {
