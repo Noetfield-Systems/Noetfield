@@ -103,7 +103,9 @@
    background: rgba(0,0,0,.35);
    overflow: hidden;
   }
-  .nf-lab-player video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+  .nf-lab-player video,
+  .nf-lab-player iframe { width: 100%; height: 100%; display: block; border: 0; background: #000; }
+  .nf-lab-player video { object-fit: contain; }
   .nf-lab-player--empty {
    display: flex;
    flex-direction: column;
@@ -213,7 +215,18 @@
     <article class="nf-lab-case" id="case-001-refusal-cycle">
      <h3>Proof Case 001 — The Refusal Cycle</h3>
      <p class="nf-lab-case__sub">The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.</p>
-     <div class="nf-lab-player nf-lab-player--empty" role="img" aria-label="Recording pending for Proof Case 001, The Refusal Cycle">
+     <!-- To publish this recording, set exactly one source below and nothing else on this page:
+          data-video-embed — full Cloudflare Stream iframe URL, or
+          data-video-src   — full URL of a hosted MP4.
+          Leave both empty and the reserved-slot state below stays. -->
+     <div class="nf-lab-player nf-lab-player--empty"
+          role="img"
+          aria-label="Recording pending for Proof Case 001, The Refusal Cycle"
+          data-video-title="Proof Case 001 — The Refusal Cycle"
+          data-video-embed=""
+          data-video-src=""
+          data-video-poster=""
+          data-video-captions="">
       <span class="nf-lab-player__mark">Recording pending</span>
       <p class="nf-lab-player__note">This slot is reserved and intentionally empty. Noetfield does not publish a demonstration before the run behind it has produced a receipt.</p>
      </div>
@@ -408,5 +421,55 @@
   </main>
   <footer class="nf-gate__foot"><span>© 2026 Noetfield Systems Inc.</span></footer>
  </div>
+ <script>
+ /* Upgrades a reserved slot into a player once a source is set on it.
+    No source means the markup above is left exactly as authored, so the
+    reserved-slot state is the default rather than a scripted fallback. */
+ (function () {
+   var slots = document.querySelectorAll(".nf-lab-player[data-video-embed], .nf-lab-player[data-video-src]");
+   Array.prototype.forEach.call(slots, function (slot) {
+     var embed = (slot.getAttribute("data-video-embed") || "").trim();
+     var src = (slot.getAttribute("data-video-src") || "").trim();
+     if (!embed && !src) return;
+
+     var title = (slot.getAttribute("data-video-title") || "Recorded demonstration").trim();
+     var poster = (slot.getAttribute("data-video-poster") || "").trim();
+     var captions = (slot.getAttribute("data-video-captions") || "").trim();
+     var node;
+
+     if (embed) {
+       node = document.createElement("iframe");
+       node.src = embed;
+       node.title = title;
+       node.loading = "lazy";
+       node.allow = "accelerometer; gyroscope; encrypted-media; picture-in-picture;";
+       node.setAttribute("allowfullscreen", "");
+     } else {
+       node = document.createElement("video");
+       node.src = src;
+       node.controls = true;
+       node.preload = "metadata";
+       node.setAttribute("playsinline", "");
+       node.setAttribute("aria-label", title);
+       if (poster) node.poster = poster;
+       if (captions) {
+         var track = document.createElement("track");
+         track.kind = "captions";
+         track.src = captions;
+         track.srclang = "en";
+         track.label = "English";
+         track.default = true;
+         node.appendChild(track);
+       }
+     }
+
+     slot.classList.remove("nf-lab-player--empty");
+     slot.removeAttribute("role");
+     slot.removeAttribute("aria-label");
+     slot.textContent = "";
+     slot.appendChild(node);
+   });
+ })();
+ </script>
 </body>
 </html>
