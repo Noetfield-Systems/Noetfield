@@ -71,6 +71,38 @@
       ],
       "title": "Proof Case 002 \u2014 The Front Door",
       "version": "v1"
+    },
+    {
+      "boundary": "Shows the open verification engine run from a terminal on a developer machine. It is not a recording of the product at app.noetfield.com. The deploy token in act three is issued, not redeemed \u2014 no deployment occurs on camera. The dollar figure on the COST gate is arithmetic over the fixture's declared token counts against a static price table; it is not a measured spend of any real run, and no spend figure is claimed.",
+      "id": "case-003-deterministic-verification",
+      "media": {
+        "captions": "/proof/lab/case-003.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-003-v1/case-003-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-003-v1/case-003.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": true,
+      "sha256": {
+        "captions": "e312796e67180c6512eb80fa80063cd00fd734f969547443becc8ef25495c81e",
+        "mp4": "bd98e7333b1de060387e21580738af9adb442fd6d0a02b35bbbdeeb4b0a8d0a3",
+        "poster": "fae231ec979ec859a13b01b9e1ca29c92c34f878fdb71cd78a1c19448968477e"
+      },
+      "subtitle": "The same AI-generated artifact is verified one hundred times under deliberately hostile conditions and returns one identical hash \u2014 and the same test still fails when something real changes.",
+      "takes": [
+        {
+          "duration_s": 31.2,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-003-v1",
+          "sha256": "bd98e7333b1de060387e21580738af9adb442fd6d0a02b35bbbdeeb4b0a8d0a3",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-003-v1/case-003.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 003 \u2014 The Deterministic Verdict",
+      "version": "v1"
     }
   ],
   "controls": [
