@@ -15,7 +15,99 @@
       },
       "media_state": "PUBLISHED",
       "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
-      "title": "Proof Case 001 \u2014 The Refusal Cycle"
+      "takes": [
+        {
+          "duration_s": 74.4,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-001-v1",
+          "sha256": "8979f0066f84dfaa788ca710076f5f767fbcf03c9987a4cac118e595c76b6799",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001.mp4",
+          "status": "SUPERSEDED",
+          "superseded_reason": "Reviewed and rejected: the take followed a status page rather than showing the request being typed, the execution, or the page being built.",
+          "version": "v1"
+        },
+        {
+          "duration_s": 84.3,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-001-v2",
+          "sha256": "828997ad328f5d41d5867f25b20eed702ae6cbcfec8c1f08a5c6ad7f3046ea31",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v2"
+        }
+      ],
+      "title": "Proof Case 001 \u2014 The Refusal Cycle",
+      "version": "v2"
+    },
+    {
+      "boundary": "Shows the front door only. The build, the published page and the automation begin after sign-up and are not in this recording.",
+      "id": "case-002-front-door",
+      "media": {
+        "captions": "/proof/lab/case-002.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": true,
+      "sha256": {
+        "captions": "37438490ff7b8aff802f18a0b64aa2b1427f5bb4778825aec301018d07ee7eb4",
+        "mp4": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
+        "poster": "d34b9cdbe13ac2140abb988c8fc1171b561e7ad74cc7b3be01a6b29fa9b6444a"
+      },
+      "subtitle": "One sentence asks for a website and the automation behind it. The plan answers both halves \u2014 before an account exists.",
+      "takes": [
+        {
+          "duration_s": 17.7,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-002-v1",
+          "sha256": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 002 \u2014 The Front Door",
+      "version": "v1"
+    },
+    {
+      "boundary": "Films the delivered result, not the build. A different run from Case 002 \u2014 it does not continue it. The work between the request and the page is not shown.",
+      "id": "case-004-delivered-page",
+      "media": {
+        "captions": "/proof/lab/case-004.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "run": {
+        "delivery_confirmed_by": "double fetch of the live public URL with matching body hashes",
+        "elapsed_s": 17,
+        "project_id": "prj_6757fd37dcc143e997bbde4b",
+        "recorded": "2026-08-06"
+      },
+      "sha256": {
+        "captions": "0657aa58cbffcb4b375a3cabf034260a2af75611c494fac0157552d52eaa34ce",
+        "mp4": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
+        "poster": "335fed01c09997a8240adf7c5ee8050ea2b1318cfe0ac64f4bcb87ae56d8d991"
+      },
+      "subtitle": "The finished result: a page built from one plain request and published to a public address, read top to bottom.",
+      "takes": [
+        {
+          "duration_s": 13.0,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-004-v1",
+          "sha256": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 004 \u2014 A Delivered Page",
+      "version": "v1"
     }
   ],
   "controls": [
@@ -159,5 +251,6 @@
   ],
   "schema": "noetfield_public_evidence_bundle_v1",
   "scope": "Public index of recorded demonstrations, published run receipts, measurement state, and roadmap status for the Noetfield runtime.",
-  "status": "LIVE"
+  "status": "LIVE",
+  "take_policy": "A reshoot replaces a case's media, never its identity. Each take keeps its own version, release tag and sha256 so two recordings of the same case can be compared later. A superseded take stays listed with the reason it was replaced; it is never deleted, and the current take is the one marked CURRENT."
 }
