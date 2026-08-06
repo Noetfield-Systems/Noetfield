@@ -1,0 +1,145 @@
+{
+  "artifacts": {
+    "html": "/proof/lab/",
+    "json": "/proof/lab.json"
+  },
+  "cases": [
+    {
+      "boundary": "The recording is published only together with the run receipt that backs it.",
+      "id": "case-001-refusal-cycle",
+      "media": null,
+      "media_state": "RECORDING_PENDING",
+      "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
+      "title": "Proof Case 001 — The Refusal Cycle"
+    }
+  ],
+  "controls": [
+    "Explicit authority before action",
+    "Exact-candidate binding to commit digests",
+    "Separate verification, distinct from the worker",
+    "Bounded repair with documented safe stops",
+    "Human promotion of a passing candidate",
+    "Receipt for every accepted outcome"
+  ],
+  "correction_policy": {
+    "contact": "/contact/",
+    "rule": "Substantiated corrections are appended and the prior claim is preserved as superseded, not removed."
+  },
+  "does_not_prove": [
+    "External customer adoption, revenue, or third-party production deployments",
+    "Certification of any kind, including SOC 2",
+    "Current end-to-end delivery closure",
+    "Any universal comparison of AI coding tools or model vendors",
+    "Any dollar cost or token spend figure"
+  ],
+  "entity": "Noetfield Systems Inc.",
+  "entity_type": "evidence_lab_index",
+  "evidence_grades": {
+    "NOT_MEASURED": "Not yet instrumented. Stated as unknown rather than estimated.",
+    "OWNER_OBSERVED": "Reported by the operator; not independently measured here.",
+    "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
+    "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact."
+  },
+  "generated_at": "2026-08-06T00:00:00Z",
+  "maintenance": {
+    "publish_a_recording": [
+      "Record the run and capture its receipt before filming is treated as complete.",
+      "Host the file and set the case object's media.src to its URL, or set media.embed for a hosted player.",
+      "Set media_state to PUBLISHED and add the backing receipt to the receipts array.",
+      "Replace the matching nf-lab-player--empty block in /proof/lab/index.html with a video element using the same source.",
+      "Register any newly tracked static file in governance/www-public-artifact-v1.json before deploying."
+    ],
+    "rule": "A case slot stays empty until its run has produced a receipt. Never publish a demonstration ahead of its evidence."
+  },
+  "measurement": {
+    "cost_per_accepted_outcome": {
+      "note": "Measured per accepted outcome, not per successful model call.",
+      "state": "NOT_MEASURED",
+      "value": null
+    },
+    "per_run_spend_ceiling": {
+      "note": "Will be stated once enforced in the runtime and provable from a receipt.",
+      "state": "NOT_PUBLISHED",
+      "value": null
+    },
+    "total_token_spend": {
+      "note": "Explicitly unknown in the current evidence bundles.",
+      "state": "NOT_MEASURED",
+      "value": null
+    }
+  },
+  "proves": [
+    "A single indexed location where demonstrations, receipts, measurement state and roadmap status are kept together",
+    "That published failures are preserved alongside published passes",
+    "That unmeasured quantities are labelled rather than estimated"
+  ],
+  "receipts": [
+    {
+      "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
+      "boundary": "One dated run, not all request classes.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
+      "result": "HTTP 200 · public page headed \"Meridian Tax Group\" · 13684 ms",
+      "run": "Named-business request, 1 August",
+      "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
+    },
+    {
+      "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json",
+      "boundary": "One dated failure, preserved deliberately.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28",
+      "result": "No public page before a 302662 ms timeout",
+      "run": "Generic trade-description request",
+      "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
+    },
+    {
+      "artifact": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
+      "boundary": "Candidate branch was not deployed to the target host, so this shows missing delivery on that target, not candidate quality.",
+      "grade": "REPOSITORY_SUPPORTED",
+      "result": "10 timeouts · 0 delivered",
+      "run": "Expanded ten-scenario live run"
+    },
+    {
+      "artifact": "/proof/governed-replacement.json",
+      "boundary": "First-party run, not external deployment.",
+      "grade": "VERIFIED_RECEIPT",
+      "result": "Verification failed · bounded repair applied · independent re-check passed · human promotion",
+      "run": "Governed replacement, run CS2-GISF-2026-07-14T005554Z"
+    },
+    {
+      "boundary": "Historical receipts are not a claim about today.",
+      "grade": "NOT_MEASURED",
+      "result": "Pending a fresh same-release end-to-end run",
+      "run": "Current production closure"
+    }
+  ],
+  "related": [
+    "/proof/",
+    "/proof/agentic-coding-reliability-case-001/",
+    "/demo/complete-run/",
+    "/assurance/"
+  ],
+  "roadmap": [
+    {
+      "phase": 1,
+      "status": "LIVE_ALPHA",
+      "summary": "One plain request produces a planned, executed, verified and deployable result: a published site and an accompanying automation definition, with evidence preserved.",
+      "title": "Prompt to production"
+    },
+    {
+      "phase": 2,
+      "status": "PLANNED",
+      "summary": "The automation runs where it is provisioned rather than handed over as a file to import, with the same acceptance and receipt layer applied to a running workflow.",
+      "title": "Hosted execution"
+    },
+    {
+      "phase": 3,
+      "status": "PRODUCT_VERTICAL_SYNTHETIC_DEMONSTRATIONS",
+      "summary": "Governed execution applied to FINTRAC case operations for Canadian MSBs, fintechs, PSPs and digital-asset operators, with the human FILE / NO-FILE / ESCALATE decision preserved. A product vertical of Noetfield Systems Inc., not a separate venture.",
+      "title": "TrustField"
+    }
+  ],
+  "schema": "noetfield_public_evidence_bundle_v1",
+  "scope": "Public index of recorded demonstrations, published run receipts, measurement state, and roadmap status for the Noetfield runtime.",
+  "status": "LIVE"
+}

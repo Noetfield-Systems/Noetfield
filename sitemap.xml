@@ -85,6 +85,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.noetfield.com/proof/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.noetfield.com/proof/lab/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.noetfield.com/proof/agentic-coding-reliability-case-001/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.noetfield.com/runways/</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
