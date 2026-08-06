@@ -7,6 +7,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "verify_yc_social_links_v1.py"
 SPEC = importlib.util.spec_from_file_location("verify_yc_social_links_v1", SCRIPT)
@@ -27,7 +29,10 @@ def test_config_lists_all_yc_links() -> None:
 
 def test_artifact_mode_passes_after_build() -> None:
     artifact = ROOT / "www-pages-dist"
-    assert artifact.is_dir(), "run build-www-pages-dist before this test"
+    if not artifact.is_dir():
+        # www-pages-dist is gitignored and only exists after build-www-pages-dist.
+        # Jobs that do not build it (e.g. the backend runtime suite) must not fail here.
+        pytest.skip("www-pages-dist not built — run build-www-pages-dist to exercise artifact mode")
     rows, errors = MODULE.verify(artifact=artifact, live=False, user_agent=None)
     www_rows = [row for row in rows if row["id"] != "app-product" and row["id"] != "postmortem"]
     assert errors == [], errors

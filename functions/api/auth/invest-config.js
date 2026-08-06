@@ -27,8 +27,17 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 // api/auth/invest-config.js
 var require_invest_config = __commonJS({
   "api/auth/invest-config.js"(exports, module) {
+    var DEFAULT_OAUTH_PROVIDERS = "google";
+    var KNOWN_OAUTH_PROVIDERS = /* @__PURE__ */ new Set(["google", "discord"]);
     var DEFAULT_SUPABASE_URL = "https://ldfruywifqnfpwsfgmdl.supabase.co";
     var DEFAULT_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnJ1eXdpZnFuZnB3c2ZnbWRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwMzY3OTIsImV4cCI6MjA5NTYxMjc5Mn0.ETJQMWEO0eIgwDh9YSmtZ5C-jHGT31oXC1PdsUWR5RQ";
+    function oauthProviders() {
+      return String(process.env.AUTH_OAUTH_PROVIDERS || DEFAULT_OAUTH_PROVIDERS).split(",").map(function(name) {
+        return name.trim().toLowerCase();
+      }).filter(function(name) {
+        return KNOWN_OAUTH_PROVIDERS.has(name);
+      });
+    }
     module.exports = async function handler2(req, res) {
       res.setHeader("Cache-Control", "private, no-store");
       res.setHeader("X-Robots-Tag", "noindex, nofollow");
@@ -39,7 +48,8 @@ var require_invest_config = __commonJS({
         schema: "noetfield-invest-browser-auth-config-v1",
         configured: true,
         supabase_url: process.env.SUPABASE_URL || DEFAULT_SUPABASE_URL,
-        supabase_anon_key: process.env.SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY
+        supabase_anon_key: process.env.SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY,
+        oauth_providers: oauthProviders()
       });
     };
   }
