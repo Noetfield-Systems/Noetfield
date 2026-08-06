@@ -1,8 +1,26 @@
 /** GET /api/auth/invest-config — browser-safe Supabase auth configuration. */
 
+const DEFAULT_OAUTH_PROVIDERS = "google";
+const KNOWN_OAUTH_PROVIDERS = new Set(["google", "discord"]);
+
 const DEFAULT_SUPABASE_URL = "https://ldfruywifqnfpwsfgmdl.supabase.co";
 const DEFAULT_SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkZnJ1eXdpZnFuZnB3c2ZnbWRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwMzY3OTIsImV4cCI6MjA5NTYxMjc5Mn0.ETJQMWEO0eIgwDh9YSmtZ5C-jHGT31oXC1PdsUWR5RQ";
+
+/**
+ * Which OAuth buttons the sign-in page may show. A provider is only listed once it
+ * is actually enabled in Supabase, so the page never renders a button that dead-ends.
+ */
+function oauthProviders() {
+  return String(process.env.AUTH_OAUTH_PROVIDERS || DEFAULT_OAUTH_PROVIDERS)
+    .split(",")
+    .map(function (name) {
+      return name.trim().toLowerCase();
+    })
+    .filter(function (name) {
+      return KNOWN_OAUTH_PROVIDERS.has(name);
+    });
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "private, no-store");
@@ -16,5 +34,6 @@ module.exports = async function handler(req, res) {
     configured: true,
     supabase_url: process.env.SUPABASE_URL || DEFAULT_SUPABASE_URL,
     supabase_anon_key: process.env.SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY,
+    oauth_providers: oauthProviders(),
   });
 };
