@@ -81,7 +81,7 @@
         "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-003-v1/case-003-poster.png",
         "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-003-v1/case-003.mp4"
       },
-      "media_state": "RECORDING_PENDING",
+      "media_state": "PUBLISHED",
       "reproducible_without_account": true,
       "sha256": {
         "captions": "e312796e67180c6512eb80fa80063cd00fd734f969547443becc8ef25495c81e",
