@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Proof Case 007 — Summit Ridge full customer path film (rebuild v2)."""
+"""Proof Case 008 — full customer path film (front door → workspace → delivery)."""
 
 from __future__ import annotations
 
@@ -27,19 +27,18 @@ if str(SOURCEA_SCRIPTS) not in sys.path:
 
 from film_elevenlabs_wire_v1 import synthesize_narration  # noqa: E402
 from proof_film_cockpit_waits import (  # noqa: E402
-    wait_cockpit_connected,
     wait_cockpit_delivered,
     wait_cockpit_working,
 )
 
-WORK = Path.home() / ".sina/proof-case-007-fullpath-v2-work"
+WORK = Path.home() / ".sina/proof-case-008-film-work-v1"
 OUT_DIR = WORK / "out"
 CAPTURE = WORK / "capture"
 BASE = os.environ.get("COMPANY_NEW_BASE_URL", "https://app.noetfield.com").rstrip("/")
-BRAND = os.environ.get("PROOF_CASE_007_BRAND", "Summit Ridge Physical Therapy")
-CITY = os.environ.get("PROOF_CASE_007_CITY", "Vancouver")
+BRAND = os.environ.get("PROOF_CASE_008_BRAND", "Summit Ridge Physical Therapy")
+CITY = os.environ.get("PROOF_CASE_008_CITY", "Vancouver")
 PROMPT = os.environ.get(
-    "PROOF_CASE_007_PROMPT",
+    "PROOF_CASE_008_PROMPT",
     f"I need a professional landing page for {BRAND}, a boutique physiotherapy studio in {CITY} "
     f"— services, team, and an online intake form. And automate it: when someone submits the intake form, "
     f"email me the details and add each lead to a Google Sheet.",
@@ -47,21 +46,21 @@ PROMPT = os.environ.get(
 BUSINESS_VOICE = os.environ.get("ELEVENLABS_VOICE_ID", "onwK4e9ZLuTAKqWW03F9")
 
 NARRATION = f"""
-Proof Case 007. Summit Ridge Physical Therapy — the full customer path on production.
+Proof Case 008. The full customer path on production.
 
 We start at the front door. No account yet.
 
-Business owner. More customers finding you. You type the combined ask in your own words —
+Who you are. What you need. One sentence that asks for two things at once —
 a landing page for {BRAND}, and the automation behind its intake form.
 
-The wizard drafts the plan before you sign up.
+The plan answers both halves before anything is built.
 
 Create an account. The workspace opens.
 
 Inside the cockpit: your front person, the team roster, tasks, documents, and the live ticker.
 You talk to the front person the way a client actually would — typing the full combined ask in chat.
 
-One send. The team hires in the open. The ticker runs. The work runs in view.
+One send. The team hires in the open. The work runs in view.
 
 After about three minutes.
 
@@ -127,7 +126,7 @@ def _cookies_from_jar(jar: dict[str, str]) -> str:
     return "; ".join(f"{k}={v}" for k, v in jar.items())
 
 
-def _poll_delivery_playwright(browser, storage: dict, project_id: str, *, max_s: int = 420) -> dict[str, Any]:
+def _poll_delivery_playwright(browser, storage: dict, project_id: str, *, max_s: int = 360) -> dict[str, Any]:
     context = browser.new_context(storage_state=storage)
     t0 = time.time()
     last: dict[str, Any] = {}
@@ -216,15 +215,14 @@ def record_segment(browser, storage: dict | None, url: str, out: Path, seconds: 
     return state
 
 
-def make_card(title: str, subtitle: str, out: Path, seconds: float = 3.0) -> None:
+def make_card(title: str, subtitle: str, out: Path, seconds: float = 2.5) -> None:
     safe_t = title.replace("'", "\\'").replace(":", "\\:")
     safe_s = subtitle.replace("'", "\\'").replace(":", "\\:")
     vf = (
-        f"color=c=0x06080c:s=1920x1080:d={seconds},"
-        f"drawtext=text='Proof Case 007':fontsize=28:fontcolor=0x64748b:x=(w-text_w)/2:y=h*0.28,"
-        f"drawtext=text='{safe_t}':fontsize=72:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2-20:"
-        f"box=1:boxcolor=0x0f172a@0.9:boxborderw=28,"
-        f"drawtext=text='{safe_s}':fontsize=36:fontcolor=0x94a3b8:x=(w-text_w)/2:y=(h-text_h)/2+56"
+        f"color=c=0x0a0f14:s=1920x1080:d={seconds},"
+        f"drawtext=text='{safe_t}':fontsize=64:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2-40:"
+        f"box=1:boxcolor=0x111827@0.85:boxborderw=24,"
+        f"drawtext=text='{safe_s}':fontsize=34:fontcolor=0xcbd5e1:x=(w-text_w)/2:y=(h-text_h)/2+48"
     )
     _run(
         [
@@ -254,32 +252,32 @@ def type_slow(page, selector: str, text: str, *, delay_ms: int = 28) -> None:
 
 
 def run_front_door(browser) -> dict:
-    email = f"proof.case007.fullpath.{int(time.time())}.{os.urandom(3).hex()}@example.test"
+    email = f"proof.case008.{int(time.time())}.{os.urandom(3).hex()}@example.test"
     password = "E2eTestPass9!"
     project_id_holder: dict[str, str] = {"id": ""}
 
     def wizard_action(page):
         page.locator("button.wz__opt").filter(has_text="Business owner").first.click()
-        page.wait_for_timeout(600)
-        page.locator("button.wz__opt").filter(has_text="More customers").first.click()
-        page.wait_for_timeout(600)
-        type_slow(page, "textarea.wz__input", PROMPT, delay_ms=20)
         page.wait_for_timeout(500)
+        page.locator("button.wz__opt").filter(has_text="More customers").first.click()
+        page.wait_for_timeout(500)
+        type_slow(page, "textarea.wz__input", PROMPT, delay_ms=22)
+        page.wait_for_timeout(400)
         page.locator("button.wz__go").click()
-        page.wait_for_timeout(1400)
+        page.wait_for_timeout(1200)
 
-    state = record_segment(browser, None, f"{BASE}/", CAPTURE / "01-front-door.mp4", 22.0, action=wizard_action)
+    state = record_segment(browser, None, f"{BASE}/", CAPTURE / "01-front-door.mp4", 18.0, action=wizard_action)
 
     def signup_action(page):
-        page.fill('input[name="name"]', "Proof Case 007")
+        page.fill('input[name="name"]', "Proof Case 008")
         page.fill('input[name="email"]', email)
         page.fill('input[name="password"]', password)
-        page.wait_for_timeout(500)
+        page.wait_for_timeout(400)
         with page.expect_navigation(timeout=60000):
             page.locator("#signup-form button[type='submit']").click()
-        page.wait_for_timeout(1800)
+        page.wait_for_timeout(1500)
 
-    state = record_segment(browser, state, f"{BASE}/signup/", CAPTURE / "02-signup.mp4", 13.0, action=signup_action)
+    state = record_segment(browser, state, f"{BASE}/signup/", CAPTURE / "02-signup.mp4", 12.0, action=signup_action)
 
     def workspace_send_action(page):
         page.wait_for_selector("#chat-start-input", timeout=60000)
@@ -299,7 +297,7 @@ def run_front_door(browser) -> dict:
         page.wait_for_timeout(1000)
 
     state = record_segment(
-        browser, state, f"{BASE}/app/new/", CAPTURE / "03-workspace-send.mp4", 42.0, action=workspace_send_action
+        browser, state, f"{BASE}/app/new/", CAPTURE / "03-workspace-send.mp4", 38.0, action=workspace_send_action
     )
 
     jar = {c["name"]: c["value"] for c in state.get("cookies", []) if "noetfield" in c.get("domain", "")}
@@ -323,7 +321,7 @@ def capture_in_flight(browser, storage: dict, project_id: str) -> None:
         page.mouse.wheel(0, 180)
         page.wait_for_timeout(1200)
         page.mouse.wheel(0, -120)
-        page.wait_for_timeout(10000)
+        page.wait_for_timeout(8000)
 
     record_segment(browser, storage, cockpit, CAPTURE / "04-team-in-flight.mp4", 16.0, action=in_flight_action)
 
@@ -338,15 +336,15 @@ def capture_delivered(browser, storage: dict, project_id: str, slug: str) -> Non
         page.mouse.wheel(0, 300)
         page.wait_for_timeout(800)
 
-    record_segment(browser, storage, cockpit, CAPTURE / "07-cockpit-delivered.mp4", 14.0, action=cockpit_action)
+    record_segment(browser, storage, cockpit, CAPTURE / "06-cockpit-delivered.mp4", 12.0, action=cockpit_action)
+    record_segment(browser, storage, f"{BASE}/v1/site/{slug}", CAPTURE / "07-site-live.mp4", 10.0)
 
     def files_action(page):
         wait_cockpit_delivered(page)
         page.locator("#documents-panel").scroll_into_view_if_needed()
         page.wait_for_timeout(800)
 
-    record_segment(browser, storage, f"{BASE}/v1/site/{slug}", CAPTURE / "08-site-live.mp4", 12.0)
-    record_segment(browser, storage, cockpit, CAPTURE / "10-files-workflow.mp4", 11.0, action=files_action)
+    record_segment(browser, storage, cockpit, CAPTURE / "08-files-workflow.mp4", 10.0, action=files_action)
 
 
 def concat_to_duration(parts: list[Path], out: Path, target_s: float) -> None:
@@ -383,7 +381,7 @@ def concat_to_duration(parts: list[Path], out: Path, target_s: float) -> None:
 def main() -> None:
     from playwright.sync_api import sync_playwright  # noqa: WPS433
 
-    if WORK.exists() and os.environ.get("CASE007_REUSE_CAPTURE") == "1":
+    if WORK.exists() and os.environ.get("CASE008_REUSE_CAPTURE") == "1":
         print("reusing capture dir")
     elif WORK.exists():
         shutil.rmtree(WORK)
@@ -399,21 +397,18 @@ def main() -> None:
     vo_dur = _probe_duration(vo)
     print(f"VO {engine} {vo_dur:.1f}s")
 
-    reuse = os.environ.get("CASE007_REUSE_CAPTURE") == "1"
-    have_intake = all(
-        (CAPTURE / name).exists()
-        for name in ("01-front-door.mp4", "02-signup.mp4", "03-workspace-send.mp4", "04-team-in-flight.mp4")
-    )
+    reuse = os.environ.get("CASE008_REUSE_CAPTURE") == "1"
+    have_intake = all((CAPTURE / name).exists() for name in ("01-front-door.mp4", "02-signup.mp4", "03-workspace-send.mp4"))
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True)
         if reuse and have_intake:
-            project_id = os.environ.get("CASE007_PROJECT_ID", "")
+            project_id = os.environ.get("CASE008_PROJECT_ID", "prj_c3e9e30a3916488ab42a7fe9")
             storage_path = WORK / "storage-state.json"
             if storage_path.exists():
                 storage = json.loads(storage_path.read_text(encoding="utf-8"))
             else:
-                raise SystemExit("CASE007_REUSE_CAPTURE requires storage-state.json from prior run")
+                raise SystemExit("CASE008_REUSE_CAPTURE requires storage-state.json from prior run")
             jar = {c["name"]: c["value"] for c in storage.get("cookies", []) if "noetfield" in c.get("domain", "")}
             cookie = _cookies_from_jar(jar)
             print(f"reusing intake captures project_id={project_id}")
@@ -431,7 +426,7 @@ def main() -> None:
             raise SystemExit(f"delivery poll failed for {project_id}: {delivery}")
 
         slug = delivery["last"].get("slug") or project_id
-        make_card("After ~3 minutes", "Summit Ridge · page sealed", CAPTURE / "06-card-page.mp4")
+        make_card("After ~3 minutes", "Page seals · automation continues", CAPTURE / "05-card-page.mp4")
         make_card("Same session", "No second ask", CAPTURE / "09-card-automation.mp4")
         capture_delivered(browser, storage, project_id, slug)
         browser.close()
@@ -441,26 +436,22 @@ def main() -> None:
         CAPTURE / "02-signup.mp4",
         CAPTURE / "03-workspace-send.mp4",
         CAPTURE / "04-team-in-flight.mp4",
-        CAPTURE / "06-card-page.mp4",
-        CAPTURE / "07-cockpit-delivered.mp4",
-        CAPTURE / "08-site-live.mp4",
+        CAPTURE / "05-card-page.mp4",
+        CAPTURE / "06-cockpit-delivered.mp4",
+        CAPTURE / "07-site-live.mp4",
         CAPTURE / "09-card-automation.mp4",
-        CAPTURE / "10-files-workflow.mp4",
+        CAPTURE / "08-files-workflow.mp4",
     ]
     video = OUT_DIR / "video.mp4"
     concat_to_duration(order, video, vo_dur)
-    final = OUT_DIR / "case-007.mp4"
+    final = OUT_DIR / "case-008.mp4"
     _run([_ffmpeg(), "-y", "-i", str(video), "-i", str(vo), "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", str(final)])
-    poster = OUT_DIR / "case-007-poster.png"
-    _run([_ffmpeg(), "-y", "-i", str(final), "-ss", "00:00:08", "-vframes", "1", str(poster)])
+    poster = OUT_DIR / "case-008-poster.png"
+    _run([_ffmpeg(), "-y", "-i", str(final), "-ss", "00:00:06", "-vframes", "1", str(poster)])
 
     receipt = {
-        "schema": "noetfield.proof-case-007-film-receipt-v2",
-        "case_id": "proof-case-007",
-        "brand": BRAND,
-        "city": CITY,
-        "prompt": PROMPT,
-        "wizard_path": ["business_owner", "more_customers"],
+        "schema": "noetfield.proof-case-008-film-receipt-v1",
+        "case_id": "proof-case-008",
         "verdict": "PASS_FILM_FULL_PATH",
         "recorded_at": datetime.now(timezone.utc).isoformat(),
         "project_id": project_id,
@@ -469,7 +460,7 @@ def main() -> None:
         "sha256": {"mp4": _sha256(final), "poster": _sha256(poster)},
         "duration_s": round(_probe_duration(final), 2),
     }
-    (OUT_DIR / "case-007-film-receipt-v2.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+    (OUT_DIR / "case-008-film-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, indent=2))
     print(f"DONE {final}")
 
