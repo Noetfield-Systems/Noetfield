@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <!-- Noetfield social preview v2: generated from data/noetfield-social-preview-v2.json -->
+ <title>Research Trader — Noetfield Systems</title>
+ <meta name="description" content="A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model's output." />
+ <meta name="robots" content="index,follow" />
+ <link rel="canonical" href="https://www.noetfield.com/research-trader/" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:title" content="Research Trader — Noetfield Systems" />
+ <meta property="og:description" content="A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model's output." />
+ <meta property="og:url" content="https://www.noetfield.com/research-trader/" />
+ <meta property="og:type" content="website" />
+ <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta property="og:image:secure_url" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta property="og:image:width" content="1200" />
+ <meta property="og:image:height" content="630" />
+ <meta property="og:image:alt" content="Noetfield Systems Inc." />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Research Trader — Noetfield Systems" />
+ <meta name="twitter:description" content="A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders." />
+ <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta name="twitter:image:alt" content="Noetfield Systems Inc." />
+ <!-- nf-json-ld: webpage -->
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Research Trader — Noetfield Systems",
+  "description": "A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model's output.",
+  "url": "https://www.noetfield.com/research-trader/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Noetfield",
+    "url": "https://www.noetfield.com/"
+  },
+  "image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png"
+}
+ </script>
+
+<meta name="theme-color" content="#f3f0e9" />
+<link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=5" />
+
+<script src="/assets/noetfield-intake-core.js?v=42" defer></script>
+ <script src="/assets/noetfield-forms.js?v=42" defer></script>
+ <script src="/assets/noetfield-shell.js?v=42" defer></script>
+</head>
+<body class="nf-corp nf-corp--inner">
+ <a class="nf-skip" href="#main">Skip to main content</a>
+ <header class="nf-corp-header">
+  <div class="nf-corp-wrap nf-corp-navrow">
+   <a class="nf-corp-brand" href="/">
+    <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
+    <span>Noetfield Systems <small>Inc.</small></span>
+   </a>
+   <nav class="nf-corp-nav" aria-label="Primary navigation">
+    <a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
+   </nav>
+  </div>
+ </header>
+ <main id="main">
+  <section class="nf-inner-hero" aria-labelledby="rt-title">
+   <div class="nf-corp-wrap nf-inner-hero__grid">
+    <div><p class="nf-corp-kicker"><a href="/proof/">Proof</a> · Research Trader</p><h1 id="rt-title">An agent that mostly says no</h1></div>
+    <div><p class="nf-corp-lead">Every morning at seven, a Noetfield agent screens a crypto watchlist, drafts a trade plan for anything that survives, and then checks its own plan with arithmetic. Almost every plan fails that check and is thrown away in public. That refusal is the product being demonstrated, not a malfunction.</p></div>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-label="The premise">
+   <div class="nf-corp-wrap">
+    <p class="nf-corp-prose">A language model asked for a trade will produce one. It will produce one when the setup is good, and it will produce one when there is nothing there at all. The output looks identical in both cases: confident, fluent, specific. That is the failure mode behind most agent products, and it is not fixed by a better model or a stricter prompt.</p>
+    <p class="nf-corp-prose">It is fixed by refusing to let the model be the last word.</p>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="rt-what">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="rt-what">What it does</h2></div>
+    <p class="nf-corp-prose">One run per day, at 07:00 Vancouver time. It pulls public market data for a watchlist, discards most candidates using plain arithmetic before any model is called, and asks a model to write a plan only for the few that survive.</p>
+    <p class="nf-corp-prose">Each plan is then put through a risk gate that does not ask the model anything. The gate checks that the entry, stop, and target are real finite numbers, that the reward justifies the risk, that the position size is valid. A plan that fails any check is rejected, and the specific reasons are published alongside it.</p>
+    <p class="nf-corp-prose">The result is a short daily brief listing what was screened, what was analyzed, what was rejected, and why.</p>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="rt-not">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="rt-not">What it does not do</h2></div>
+    <p class="nf-corp-prose">It places no orders. It holds no positions and no money. It is not connected to an exchange, a broker, or any account, and there is no path in the code by which it could place a trade.</p>
+    <p class="nf-corp-prose">It is not investment advice and it is not a recommendation service. Nothing on this page or in the daily brief is tailored to any person's circumstances, and no one should treat a published brief as a reason to buy or sell anything.</p>
+    <p class="nf-corp-prose">No performance is claimed. There is no track record, no return figure, and no backtest presented as one. The agent has never taken a position, so it has never been right or wrong about one.</p>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="rt-why">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="rt-why">Why we run it</h2></div>
+    <p class="nf-corp-prose">Noetfield sells deterministic controls around model output: structure that is checked rather than hoped for, with the failure caught before the answer leaves the system. That claim is easy to make and hard to show, because the interesting case is the one where the model is wrong and something stops it.</p>
+    <p class="nf-corp-prose">Markets supply that case every day, on material where a wrong answer is obviously expensive. So we pointed the same machinery at a domain that punishes false confidence, put it on a fixed schedule, and published the result whether or not it flatters us.</p>
+    <p class="nf-corp-prose">The same controls are available directly. <a href="/deterministic-api/">See the deterministic API →</a></p>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="rt-record">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="rt-record">The record so far</h2></div>
+    <p class="nf-corp-prose">As of 7 August 2026, across eight daily cycles: 96 symbols screened, seven plans drafted by the model, and none of the seven cleared the risk gate. Total model spend for all eight runs was about three cents.</p>
+    <p class="nf-corp-prose">A gate that has passed nothing yet is not proof that the gate is well calibrated. It is consistent with a correctly cautious system and also with one that is too strict to ever act, and eight cycles is not enough to tell those apart. The live brief is published so that this stays checkable rather than asserted.</p>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="rt-live">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="rt-live">Read today's brief</h2></div>
+    <p class="nf-corp-prose">The current run, its rejections, and the reasons behind them are published in full.</p>
+    <p class="nf-corp-prose"><a href="https://noetfield-ai-trader.sina-kazemnezhad-ca.workers.dev/" rel="noopener noreferrer">Open the live brief ↗</a></p>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="rt-limits">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full"><h2 id="rt-limits">Stated plainly</h2></div>
+    <p class="nf-corp-prose">The daily brief is published free and can be read without an account. The live page also lists a paid delivery tier; it is not active, no payment is taken, and no subscription can be started today.</p>
+    <p class="nf-corp-prose">The market data comes from public sources and is not independently audited. The gate enforces the rules it was given; it does not know whether those rules are the right ones. A published rejection proves the gate ran and what it decided. It does not prove the decision was correct.</p>
+    <p class="nf-corp-prose"><a href="/proof/">The evidence register states what is proven →</a></p>
+   </div>
+  </section>
+ </main>
+ <footer class="nf-corp-footer">
+  <div class="nf-corp-wrap nf-corp-footer__grid">
+   <div>
+    <a class="nf-corp-brand nf-corp-brand--footer" href="/"><span class="nf-corp-brand__mark" aria-hidden="true">N</span><span>Noetfield Systems <small>Inc.</small></span></a>
+    <p>AI agent governance and security.<br />Vancouver, British Columbia, Canada.</p>
+   </div>
+   <nav aria-label="Footer"><strong>Company</strong><a href="/investors/">Investors / Ecosystem</a><a href="/public-interest/">Public-Interest Program</a><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="https://github.com/Noetfield-Systems/Noetfield" rel="noopener noreferrer">GitHub ↗</a></nav>
+   <nav aria-label="Products"><strong>Products</strong><a href="/deterministic-api/">Deterministic API</a><a href="/applications/trustfield/">TrustField</a><a href="https://trustfield.ca/" rel="noopener noreferrer">trustfield.ca ↗</a></nav>
+  </div>
+  <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
+ </footer>
+</body>
+</html>

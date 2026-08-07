@@ -75,6 +75,7 @@ PRIORITY = {
     "/proof/": 0.9,
     "/proof/lab/": 0.9,
     "/proof/agentic-coding-reliability-case-001/": 0.7,
+    "/research-trader/": 0.8,
 }
 
 # Top-level marketing paths (index.html at depth 1) included if indexable
@@ -107,6 +108,7 @@ MARKETING_TOP = {
     "assurance",
     "motors",
     "deterministic-api",
+    "research-trader",
     "terms",
     "trust-brief",
 }
