@@ -231,6 +231,53 @@
    "version": "v1"
   },
   {
+   "boundary": "Full founder-path customer journey on production: startup founder wizard, signup, workspace prompt for a dental clinic, cockpit with team in flight, then edited cuts to delivered page and appointment-booking workflow. Waiting is not shown in real time. Workflow is for import; not shown executing in client n8n.",
+   "id": "case-009-northwind-dental-founder-path",
+   "media": {
+    "captions": "/proof/lab/case-009.vtt",
+    "embed": null,
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009-poster.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009.mp4"
+   },
+   "media_state": "PUBLISHED",
+   "reproducible_without_account": false,
+   "run": {
+    "automation_elapsed_s": 346,
+    "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_e12d16d6d7474da9bded0417",
+    "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
+    "elapsed_s": 346,
+    "film_elapsed_s": 84.24,
+    "project_id": "prj_e12d16d6d7474da9bded0417",
+    "production_sha": "2e234657ba16dea74ef81ef63bbf0e658fab2a65",
+    "public_site_url": "https://app.noetfield.com/v1/site/i-m-launching-northwind-dental-studio-in-calgary-a-modern",
+    "recorded": "2026-08-07",
+    "site_elapsed_s": 271,
+    "site_sha256": "57d570fb44d8c9cc88a530485a1b59774169ca40a470969227bde14a69ccb3e2",
+    "wizard_path": "startup_founder → page_to_test_demand"
+   },
+   "sha256": {
+    "captions": "f26cc48ec3f8d9ea95c4c6a3f069065e5c70ded77a436922cf7f28f6eb84f691",
+    "mp4": "1ddd8b8ad81bd29baa61da6e811a424e0340085c69586396f15522a65753b71b",
+    "poster": "25f1ebc8fc08bfb70adf819721e5c868ee6b373ee3869e2313db8d6c89199d59"
+   },
+   "subtitle": "Northwind Dental Studio — startup founder path from front door through workspace to delivered page plus appointment automation.",
+   "takes": [
+    {
+     "duration_s": 84.24,
+     "recorded": "2026-08-07",
+     "release_tag": "proof-case-009-v1",
+     "sha256": "1ddd8b8ad81bd29baa61da6e811a424e0340085c69586396f15522a65753b71b",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v1"
+    }
+   ],
+   "title": "Proof Case 009 — Northwind Dental Founder Path",
+   "type": "recorded_demonstration",
+   "version": "v1"
+  },
+  {
    "boundary": "A depiction of the intended product. Not a recording, not evidence, and not a claim of present availability.",
    "grade": "CONCEPT",
    "id": "vision-001-full-production",
@@ -274,7 +321,7 @@
   "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
   "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact."
  },
- "generated_at": "2026-08-07T13:55:00Z",
+ "generated_at": "2026-08-07T15:22:00Z",
  "maintenance": {
   "hosting": {
    "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
@@ -320,6 +367,15 @@
   "That unmeasured quantities are labelled rather than estimated"
  ],
  "receipts": [
+  {
+   "artifact": "/proof/lab/case-009-run-receipt.json",
+   "boundary": "One live production founder-path film: dental vertical, new wizard UX, full customer journey with team-in-flight beat. Harness-assisted signup disclosed.",
+   "grade": "VERIFIED_RECEIPT",
+   "payload_sha256": "5fdd9789fdf4227a5d3b36652807c74a49f67f4e13fa6bf32b21851f2cd1154a",
+   "result": "HTTP 200 · Northwind Dental Studio · 16,109 bytes · verified workflow · 271 s page · 346 s total",
+   "run": "Northwind Dental founder path, 7 August",
+   "tested_app_release": "2e234657ba16dea74ef81ef63bbf0e658fab2a65"
+  },
   {
    "artifact": "/proof/lab/case-007-run-receipt.json",
    "boundary": "One live production combined-ask run; harness-assisted signup disclosed in receipt. Screen recording not yet published.",
