@@ -185,10 +185,10 @@
    "version": "v1"
   },
   {
-   "boundary": "One live production session on app.noetfield.com: the page seals while Motor is still running, pending automation fires without a second ask, and a verified workflow file appears in Files. The screen recording is not yet published. The workflow is delivered for import; this receipt does not show it executing inside the client's n8n.",
+   "boundary": "One live production session on app.noetfield.com: the page seals while Motor is still running, pending automation fires without a second ask, and a verified workflow file appears in Files. Filmed as an edited live session with labeled time cuts — waiting is not shown in real time. The workflow is delivered for import; this receipt does not show it executing inside the client's n8n.",
    "id": "case-007-summit-ridge-combined-live",
    "media": {
-    "captions": null,
+    "captions": "/proof/lab/case-007.vtt",
     "embed": null,
     "poster": null,
     "src": null
