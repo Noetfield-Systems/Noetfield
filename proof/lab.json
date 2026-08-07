@@ -185,50 +185,60 @@
    "version": "v1"
   },
   {
-   "boundary": "One live production session on app.noetfield.com: the page seals while Motor is still running, pending automation fires without a second ask, and a verified workflow file appears in Files. Filmed as an edited live session with labeled time cuts — waiting is not shown in real time. The workflow is delivered for import; this receipt does not show it executing inside the client's n8n.",
+   "boundary": "Full customer path on production: front door wizard (business owner), signup, workspace prompt typed to Front Person, cockpit with team in flight, then edited cuts to delivered page and workflow. Waiting is not shown in real time. Workflow delivered for import; not shown executing in client n8n.",
    "id": "case-007-summit-ridge-combined-live",
    "media": {
     "captions": "/proof/lab/case-007.vtt",
     "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v1/case-007-poster.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v1/case-007.mp4"
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007-poster.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007.mp4"
    },
    "media_state": "PUBLISHED",
    "reproducible_without_account": false,
    "run": {
-    "automation_elapsed_s": 204,
-    "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_e86138a98476452fbe51628c",
-    "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json artifact",
-    "elapsed_s": 204,
-    "film_elapsed_s": 75.65,
-    "project_id": "prj_e86138a98476452fbe51628c",
-    "production_sha": "3d76917ef88f718faf1c83bf8e30efdc5d6c80b3",
-    "public_site_url": "https://app.noetfield.com/v1/site/summit-ridge-physical-therapy",
+    "automation_elapsed_s": 40,
+    "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_790a9eed34df44e099982867",
+    "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
+    "elapsed_s": 40,
+    "film_elapsed_s": 82.29,
+    "project_id": "prj_790a9eed34df44e099982867",
+    "production_sha": "6b92288d55a789f2085fda90b5ab1b9e9d3aec49",
+    "public_site_url": "https://app.noetfield.com/v1/site/i-need-a-professional-landing-page-for-summit-ridge-physical-4",
     "recorded": "2026-08-07",
-    "site_elapsed_s": 174,
-    "site_sha256": "affd530074f7c5b8d47e7dcbcdae3b6b1929023670d55c8252240627c0c2eb74"
+    "site_elapsed_s": 5,
+    "site_sha256": "d8f12a7d1e6dbd5bb5729b41a91b25cd0fcacfd95f6f3a64e34686a9278ea55a"
    },
    "sha256": {
-    "captions": "5d7d0ad12e2258096243d6178aeddd661a8c849eb1815724fb0ee40c89b2f879",
-    "mp4": "45a007557ff5e29a3e5fd02cbb288d36098bcde71b3fa55d9459f02002b63885",
-    "poster": "609c2f4b90367467d97aa74644adaff2c0127f3b43913eaf404d9d7a2b928ef0"
+    "captions": "a8e7a492d7cb58e42dc56029a9439f3162077c6c9082f7bd60d79642ec77b096",
+    "mp4": "ee38c698af9f8bc544e9b2448b6b78b39d89e79553ff43409696f58ffcc99853",
+    "poster": "6a4a1242c5465d7eab50686020ba94e6895b643e67448c5f898a1e573814781b"
    },
-   "subtitle": "Summit Ridge Physical Therapy — one combined sentence delivers a published landing page and a booking-intake automation in a single cockpit session on production.",
+   "subtitle": "Summit Ridge Physical Therapy — full customer journey from front door through signup, workspace chat, and cockpit to delivered page plus automation.",
    "takes": [
+    {
+     "duration_s": 82.29,
+     "recorded": "2026-08-07",
+     "release_tag": "proof-case-007-v2",
+     "sha256": "ee38c698af9f8bc544e9b2448b6b78b39d89e79553ff43409696f58ffcc99853",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v2"
+    },
     {
      "duration_s": 75.65,
      "recorded": "2026-08-07",
      "release_tag": "proof-case-007-v1",
      "sha256": "45a007557ff5e29a3e5fd02cbb288d36098bcde71b3fa55d9459f02002b63885",
      "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v1/case-007.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
+     "status": "SUPERSEDED",
+     "superseded_reason": "Output-only recap; replaced by v2 full customer path film",
      "version": "v1"
     }
    ],
    "title": "Proof Case 007 — Summit Ridge Combined Live",
    "type": "recorded_demonstration",
-   "version": "v1"
+   "version": "v2"
   },
   {
    "boundary": "Full customer path on production: front door wizard, signup, workspace prompt, cockpit with Front Person and team roster, then edited cuts to delivered page and workflow file. Waiting is not shown in real time. The workflow is delivered for import; this film does not show it executing inside the client's n8n.",
