@@ -231,6 +231,52 @@
    "version": "v1"
   },
   {
+   "boundary": "Full customer path on production: front door wizard, signup, workspace prompt, cockpit with Front Person and team roster, then edited cuts to delivered page and workflow file. Waiting is not shown in real time. The workflow is delivered for import; this film does not show it executing inside the client's n8n.",
+   "id": "case-008-summit-ridge-full-path",
+   "media": {
+    "captions": "/proof/lab/case-008.vtt",
+    "embed": null,
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008-poster.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008.mp4"
+   },
+   "media_state": "PUBLISHED",
+   "reproducible_without_account": false,
+   "run": {
+    "automation_elapsed_s": 79,
+    "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_0dd1534f5ff14d14b98c957b",
+    "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
+    "elapsed_s": 79,
+    "film_elapsed_s": 82.9,
+    "project_id": "prj_0dd1534f5ff14d14b98c957b",
+    "production_sha": "53ba660aaac576bacc29434c791676239bb2767a",
+    "public_site_url": "https://app.noetfield.com/v1/site/i-need-a-professional-landing-page-for-summit-ridge-physical-3",
+    "recorded": "2026-08-07",
+    "site_elapsed_s": 4,
+    "site_sha256": "01ab4a0f740b4864da3915cdad1eb95e932af8d17ec8ba67b0928f35bf623478"
+   },
+   "sha256": {
+    "captions": "04445e9bdf3b2d46ee6538998789ceba3e634e998cb23992d619c1d67b7457ae",
+    "mp4": "c63d05c62869434f11c2f84ed88f333a4adcb40b4eef456cd8faabbc6d29f9d9",
+    "poster": "d40ee0e3b88b0c5b2ce94b62c0beef5914f40bbc3d00708bcdcec843949c0fbf"
+   },
+   "subtitle": "Summit Ridge Physical Therapy — the complete customer journey from front door through signup, workspace chat, and cockpit to delivered page plus automation.",
+   "takes": [
+    {
+     "duration_s": 82.9,
+     "recorded": "2026-08-07",
+     "release_tag": "proof-case-008-v1",
+     "sha256": "c63d05c62869434f11c2f84ed88f333a4adcb40b4eef456cd8faabbc6d29f9d9",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v1"
+    }
+   ],
+   "title": "Proof Case 008 — Summit Ridge Full Customer Path",
+   "type": "recorded_demonstration",
+   "version": "v1"
+  },
+  {
    "boundary": "A depiction of the intended product. Not a recording, not evidence, and not a claim of present availability.",
    "grade": "CONCEPT",
    "id": "vision-001-full-production",
@@ -274,7 +320,7 @@
   "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
   "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact."
  },
- "generated_at": "2026-08-07T13:55:00Z",
+ "generated_at": "2026-08-07T15:10:00Z",
  "maintenance": {
   "hosting": {
    "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
@@ -320,6 +366,15 @@
   "That unmeasured quantities are labelled rather than estimated"
  ],
  "receipts": [
+  {
+   "artifact": "/proof/lab/case-008-run-receipt.json",
+   "boundary": "One live production full-path film run: front door, signup, workspace prompt, cockpit, then delivered page and workflow. Harness-assisted signup disclosed in receipt.",
+   "grade": "VERIFIED_RECEIPT",
+   "payload_sha256": "1aadc2ef62e9cd5f27829e9507b65a8397dd445e1c7bcff9e0ce3fab58f15fc5",
+   "result": "HTTP 200 · Summit Ridge page · 22,030 bytes · verified workflow · ~79 s delivery poll",
+   "run": "Summit Ridge full customer path, 7 August",
+   "tested_app_release": "53ba660aaac576bacc29434c791676239bb2767a"
+  },
   {
    "artifact": "/proof/lab/case-007-run-receipt.json",
    "boundary": "One live production combined-ask run; harness-assisted signup disclosed in receipt. Screen recording not yet published.",
