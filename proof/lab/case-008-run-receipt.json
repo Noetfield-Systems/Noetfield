@@ -1,0 +1,42 @@
+{
+  "schema": "noetfield.proof-case-008-live.v1",
+  "case_id": "proof-case-008",
+  "title": "Summit Ridge — Full Customer Path",
+  "brand": "Summit Ridge Physical Therapy",
+  "prompt": "I need a professional landing page for Summit Ridge Physical Therapy, a boutique physiotherapy studio in Vancouver — services, team, and an online intake form. And automate it: when someone submits the intake form, email me the details and add each lead to a Google Sheet.",
+  "production_sha": "53ba660aaac576bacc29434c791676239bb2767a",
+  "recorded_at": "2026-08-07T15:07:18.244413+00:00",
+  "film_duration_s": 82.9,
+  "project_id": "prj_0dd1534f5ff14d14b98c957b",
+  "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_0dd1534f5ff14d14b98c957b",
+  "path_shown": [
+    "front door wizard (role, outcome, goal)",
+    "signup",
+    "workspace /app/new/ prompt typed and sent",
+    "cockpit with Front Person, team roster, ticker, tasks/documents/website",
+    "delivered page and workflow file in Files"
+  ],
+  "site": {
+    "url": "https://app.noetfield.com/v1/site/i-need-a-professional-landing-page-for-summit-ridge-physical-3",
+    "status": 200,
+    "bytes": 22030,
+    "sha256": "01ab4a0f740b4864da3915cdad1eb95e932af8d17ec8ba67b0928f35bf623478"
+  },
+  "delivery": {
+    "site_sealed_s": 4,
+    "automation_sealed_s": 79,
+    "elapsed_s": 79,
+    "preview_ready": true,
+    "customer_delivered": true,
+    "workflow_href": "/v1/projects/prj_0dd1534f5ff14d14b98c957b/artifacts/n8n-workflow-json",
+    "workflow_verified": true
+  },
+  "film": {
+    "verdict": "PASS_FILM_FULL_PATH",
+    "voice": "elevenlabs:onwK4e9ZLuTAKqWW03F9",
+    "sha256_mp4": "c63d05c62869434f11c2f84ed88f333a4adcb40b4eef456cd8faabbc6d29f9d9",
+    "sha256_poster": "d40ee0e3b88b0c5b2ce94b62c0beef5914f40bbc3d00708bcdcec843949c0fbf",
+    "release_tag": "proof-case-008-v1"
+  },
+  "verdict": "PASS_FULL_PATH_FILM"
+}
