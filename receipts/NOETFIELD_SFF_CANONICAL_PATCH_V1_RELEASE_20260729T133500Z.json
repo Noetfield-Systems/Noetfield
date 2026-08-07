@@ -1,0 +1,25 @@
+{
+  "release": "NOETFIELD_SFF_CANONICAL_PATCH_V1",
+  "generated_at": "2026-07-29T13:35:00Z",
+  "branch": "www/sff-canonical-patch-v1",
+  "verdict": "CANDIDATE_PENDING_FOUNDER_PROMOTION",
+  "p0": {
+    "trustfield_canonical_truth": "TrustField is a product and validation vertical developed and operated by Noetfield Systems Inc.; not a separate legal entity.",
+    "proof_noetfield": "SUPERSEDED + NOINDEX at /proof/noetfield/ and proof/noetfield.json",
+    "claims_boundary_correction": "/proof/claims-boundary-correction/ + .json on evidence register",
+    "sourceb_removed": "canonical pages (home, about, investors, applications, runways generator)",
+    "runways_narrowed": "accepted outcome or safe stop; deterministic checks where specified; metering commissioning only"
+  },
+  "p1": {
+    "public_interest": "/public-interest/ (retained)",
+    "navigation": "System · Applications · Evidence · Program · Company · Contact · Open app",
+    "illustrative_receipt_labeling": "homepage + claims-boundary JSON schema_note",
+    "runways_catalog": "generator emits three public runways only; internal catalog removed from canonical /runways/"
+  },
+  "verification": {
+    "verify_canonical_claim_audit_v1": "PASS (13 pages)",
+    "verify_static_www": "PASS",
+    "pytest_corporate_surface_and_related": "71 passed"
+  },
+  "rollback_base": "0192bb41b0f1c2f010539447ceb19c0569742977"
+}

@@ -79,7 +79,7 @@ ROUTE_SWEEP = (
     "/gate/partners/apply-integration/",
 )
 
-INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/noetfield/")
+INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/claims-boundary-correction/")
 INVESTOR_CONTACT_TOPICS = ("program-funding", "technical-collaboration")
 INVESTOR_DISCLOSURES = (
     "external customers",
