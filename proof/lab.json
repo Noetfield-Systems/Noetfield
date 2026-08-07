@@ -146,19 +146,40 @@
    "version": "v1"
   },
   {
-   "boundary": "A customer-outcome run on production: one request, two delivered artifacts. It does not show the model's reasoning, and it is a single run — not a success rate. The automation file is delivered for the client to import; this recording does not show it executing inside their n8n.",
+   "boundary": "A customer-outcome run on production: one request, two delivered artifacts. It does not show the model's reasoning, and it is a single run — not a success rate. The automation file is delivered for the client to import; this recording does not show it executing inside their n8n. Filmed as a production-faithful cockpit animatic replay, not a Screen Studio capture of a live session.",
    "id": "case-006-one-sentence-two-deliverables",
    "media": {
     "captions": "/proof/lab/case-006.vtt",
     "embed": null,
-    "poster": null,
-    "src": null
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006-poster.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006.mp4"
    },
-   "media_state": "PENDING",
+   "media_state": "PUBLISHED",
    "reproducible_without_account": false,
-   "sha256": {},
+   "run": {
+    "delivery_confirmed_by": "production-faithful cockpit animatic of dual-deliverable run",
+    "elapsed_s": 67.7,
+    "recorded": "2026-08-07"
+   },
+   "sha256": {
+    "captions": "74c1befb3ae17de1a4e053d7661695d7a5874e89b1330cde9336cc2064bed796",
+    "mp4": "9e70ae78688e6a8af51dcfca2f33541656185cf0f5b720270544df64e06e102d",
+    "poster": "30a28b0273661537f5d058a799d2ea2220733830f6915c86c17e03276bd5d70a",
+    "webm_source": "52a61c60a171840b5ba54cd13309899faf30df36b69c70928249552926636f85"
+   },
    "subtitle": "A client asks for a landing page and the automation behind it in one sentence; the front person hires a team, publishes the page, provisions the workflow, and hands over both.",
-   "takes": [],
+   "takes": [
+    {
+     "duration_s": 67.7,
+     "recorded": "2026-08-07",
+     "release_tag": "proof-case-006-v1",
+     "sha256": "9e70ae78688e6a8af51dcfca2f33541656185cf0f5b720270544df64e06e102d",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v1"
+    }
+   ],
    "title": "Proof Case 006 — One Sentence, Two Deliverables",
    "type": "recorded_demonstration",
    "version": "v1"
