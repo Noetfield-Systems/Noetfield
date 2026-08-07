@@ -185,6 +185,34 @@
    "version": "v1"
   },
   {
+   "boundary": "One live production session on app.noetfield.com: the page seals while Motor is still running, pending automation fires without a second ask, and a verified workflow file appears in Files. The screen recording is not yet published. The workflow is delivered for import; this receipt does not show it executing inside the client's n8n.",
+   "id": "case-007-summit-ridge-combined-live",
+   "media": {
+    "captions": null,
+    "embed": null,
+    "poster": null,
+    "src": null
+   },
+   "media_state": "RECORDING_PENDING",
+   "reproducible_without_account": false,
+   "run": {
+    "automation_elapsed_s": 204,
+    "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_e86138a98476452fbe51628c",
+    "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json artifact",
+    "elapsed_s": 204,
+    "project_id": "prj_e86138a98476452fbe51628c",
+    "production_sha": "3d76917ef88f718faf1c83bf8e30efdc5d6c80b3",
+    "public_site_url": "https://app.noetfield.com/v1/site/summit-ridge-physical-therapy",
+    "recorded": "2026-08-07",
+    "site_elapsed_s": 174,
+    "site_sha256": "affd530074f7c5b8d47e7dcbcdae3b6b1929023670d55c8252240627c0c2eb74"
+   },
+   "subtitle": "Summit Ridge Physical Therapy — one combined sentence delivers a published landing page and a booking-intake automation in a single cockpit session on production.",
+   "title": "Proof Case 007 — Summit Ridge Combined Live",
+   "type": "recorded_demonstration",
+   "version": "v1"
+  },
+  {
    "boundary": "A depiction of the intended product. Not a recording, not evidence, and not a claim of present availability.",
    "grade": "CONCEPT",
    "id": "vision-001-full-production",
@@ -228,7 +256,7 @@
   "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
   "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact."
  },
- "generated_at": "2026-08-06T00:00:00Z",
+ "generated_at": "2026-08-07T13:55:00Z",
  "maintenance": {
   "hosting": {
    "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
@@ -274,6 +302,15 @@
   "That unmeasured quantities are labelled rather than estimated"
  ],
  "receipts": [
+  {
+   "artifact": "/proof/lab/case-007-run-receipt.json",
+   "boundary": "One live production combined-ask run; harness-assisted signup disclosed in receipt. Screen recording not yet published.",
+   "grade": "VERIFIED_RECEIPT",
+   "payload_sha256": "4046eb7cbce5ed5e2dc8bc947aa7e2ae5ebe00edf78d78a542d5e662f2ef9cde",
+   "result": "HTTP 200 · Summit Ridge Physical Therapy · 21,961 bytes · verified workflow · 174 s page · 204 s total",
+   "run": "Summit Ridge combined live, 7 August",
+   "tested_app_release": "3d76917ef88f718faf1c83bf8e30efdc5d6c80b3"
+  },
   {
    "artifact": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json",
    "boundary": "One bounded recorded run on production; account creation is harness-assisted and disclosed on camera.",
