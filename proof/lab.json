@@ -190,16 +190,17 @@
    "media": {
     "captions": "/proof/lab/case-007.vtt",
     "embed": null,
-    "poster": null,
-    "src": null
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v1/case-007-poster.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v1/case-007.mp4"
    },
-   "media_state": "RECORDING_PENDING",
+   "media_state": "PUBLISHED",
    "reproducible_without_account": false,
    "run": {
     "automation_elapsed_s": 204,
     "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_e86138a98476452fbe51628c",
     "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json artifact",
     "elapsed_s": 204,
+    "film_elapsed_s": 75.65,
     "project_id": "prj_e86138a98476452fbe51628c",
     "production_sha": "3d76917ef88f718faf1c83bf8e30efdc5d6c80b3",
     "public_site_url": "https://app.noetfield.com/v1/site/summit-ridge-physical-therapy",
@@ -207,7 +208,24 @@
     "site_elapsed_s": 174,
     "site_sha256": "affd530074f7c5b8d47e7dcbcdae3b6b1929023670d55c8252240627c0c2eb74"
    },
+   "sha256": {
+    "captions": "5d7d0ad12e2258096243d6178aeddd661a8c849eb1815724fb0ee40c89b2f879",
+    "mp4": "45a007557ff5e29a3e5fd02cbb288d36098bcde71b3fa55d9459f02002b63885",
+    "poster": "609c2f4b90367467d97aa74644adaff2c0127f3b43913eaf404d9d7a2b928ef0"
+   },
    "subtitle": "Summit Ridge Physical Therapy — one combined sentence delivers a published landing page and a booking-intake automation in a single cockpit session on production.",
+   "takes": [
+    {
+     "duration_s": 75.65,
+     "recorded": "2026-08-07",
+     "release_tag": "proof-case-007-v1",
+     "sha256": "45a007557ff5e29a3e5fd02cbb288d36098bcde71b3fa55d9459f02002b63885",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v1/case-007.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v1"
+    }
+   ],
    "title": "Proof Case 007 — Summit Ridge Combined Live",
    "type": "recorded_demonstration",
    "version": "v1"
