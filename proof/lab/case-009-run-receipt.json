@@ -1,0 +1,48 @@
+{
+  "schema": "noetfield.proof-case-009-live.v1",
+  "case_id": "proof-case-009",
+  "title": "Northwind Dental Studio — Founder Path, Full Customer Journey",
+  "brand": "Northwind Dental Studio",
+  "city": "Calgary",
+  "prompt": "I'm launching Northwind Dental Studio in Calgary — a modern dental practice. I need a landing page with our services, team, and an online appointment request form. When someone books through the form, email me the details and add each appointment request to a Google Sheet.",
+  "wizard_path": {
+    "role": "Startup founder",
+    "outcome": "A page to test demand"
+  },
+  "production_sha": "2e234657ba16dea74ef81ef63bbf0e658fab2a65",
+  "recorded_at": "2026-08-07T15:20:24.502479+00:00",
+  "film_duration_s": 84.24,
+  "project_id": "prj_e12d16d6d7474da9bded0417",
+  "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_e12d16d6d7474da9bded0417",
+  "path_shown": [
+    "front door wizard — startup founder → page to test demand",
+    "signup",
+    "workspace /app/new/ — combined dental prompt typed and sent",
+    "cockpit in flight — team roster, ticker, Front Person",
+    "delivered page and verified workflow in Files"
+  ],
+  "site": {
+    "url": "https://app.noetfield.com/v1/site/i-m-launching-northwind-dental-studio-in-calgary-a-modern",
+    "status": 200,
+    "bytes": 16109,
+    "h1": "Northwind Dental Studio",
+    "sha256": "57d570fb44d8c9cc88a530485a1b59774169ca40a470969227bde14a69ccb3e2"
+  },
+  "delivery": {
+    "site_sealed_s": 271,
+    "automation_sealed_s": 346,
+    "elapsed_s": 346,
+    "preview_ready": true,
+    "customer_delivered": true,
+    "workflow_href": "/v1/projects/prj_e12d16d6d7474da9bded0417/artifacts/n8n-workflow-json",
+    "workflow_verified": true
+  },
+  "film": {
+    "verdict": "PASS_FILM_FULL_PATH_PRO",
+    "voice": "elevenlabs:onwK4e9ZLuTAKqWW03F9",
+    "sha256_mp4": "1ddd8b8ad81bd29baa61da6e811a424e0340085c69586396f15522a65753b71b",
+    "sha256_poster": "25f1ebc8fc08bfb70adf819721e5c868ee6b373ee3869e2313db8d6c89199d59",
+    "release_tag": "proof-case-009-v1"
+  },
+  "verdict": "PASS_FULL_PATH_FILM_PRO"
+}
