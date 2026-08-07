@@ -1,8 +1,9 @@
-/** POST /api/intake — platform DB (source of truth) + Telegram ops + Resend archive. */
+/** POST /api/intake — platform DB (source of truth) + Telegram ops + Discord ops + Resend archive. */
 
 const { CANONICAL, emailConfigured, sendIntakeEmails, opsBodyText } = require("./_lib/intake-email");
 const { isTestIntake, ensureTestMetadata } = require("./_lib/intake-test");
 const { sendIntakeTelegram, telegramConfigured, telegramPathOk } = require("./_lib/intake-telegram");
+const { sendIntakeDiscord, discordConfigured, discordPathOk } = require("./_lib/notify-discord");
 
 function randomIntakeId() {
   const hex = Array.from({ length: 12 }, function () {
@@ -56,11 +57,21 @@ module.exports = async function handler(req, res) {
     console.error("intake_telegram_failed", err && err.message ? err.message : err);
   }
 
+  // Additive ops channel: Discord never gates the response — Telegram stays the delivery decider.
+  let discordResult = { ok: false, configured: discordConfigured() };
+  try {
+    discordResult = await sendIntakeDiscord(body, intakeId, { deduped: deduped });
+  } catch (err) {
+    console.error("intake_discord_failed", err && err.message ? err.message : err);
+  }
+
   const telegramDelivered = telegramPathOk(telegramResult);
   const intakeKind = isTestIntake(body) ? "test" : "lead";
   const notifyExtras = {
     telegram_delivered: telegramDelivered,
     telegram_mode: telegramResult.telegram_mode || (telegramResult.ok ? "sent" : "none"),
+    discord_delivered: discordPathOk(discordResult),
+    discord_mode: discordResult.discord_mode || (discordResult.configured ? "failed" : "none"),
     intake_kind: intakeKind,
     deduped: deduped,
   };
@@ -125,5 +136,6 @@ module.exports = async function handler(req, res) {
     mailto: "mailto:" + CANONICAL + "?subject=" + encodeURIComponent(mailSubject) + "&body=" + encodeURIComponent(mailBody),
     www_email_configured: emailResult.configured,
     www_telegram_configured: telegramResult.configured,
+    www_discord_configured: discordResult.configured,
   });
 };

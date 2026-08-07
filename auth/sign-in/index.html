@@ -12,7 +12,7 @@
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-gate-v1.css?v=1" />
  <link rel="stylesheet" href="/assets/noetfield-gate-pages-v1.css?v=4" />
- <link rel="stylesheet" href="/assets/noetfield-invest-auth-v1.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-invest-auth-v1.css?v=2" />
 </head>
 <body class="nf-gate nf-gate--auth">
  <div class="nf-gate__bg" aria-hidden="true"></div>
@@ -27,6 +27,7 @@
     <h1>Investor sign in</h1>
     <p class="nf-vc-lead">Private investor materials — verified access only.</p>
     <button type="button" class="nf-auth-google" id="nf-auth-google">Sign in with Google</button>
+    <button type="button" class="nf-auth-google" id="nf-auth-discord" hidden>Sign in with Discord</button>
     <p class="nf-auth-divider">or email</p>
     <form id="nf-auth-signin-form">
      <label class="nf-auth-field">Email
@@ -44,7 +45,7 @@
   </main>
   <footer class="nf-gate__foot"><span>© 2026 Noetfield Systems Inc.</span></footer>
  </div>
- <script src="/assets/noetfield-invest-auth-v1.js?v=2"></script>
+ <script src="/assets/noetfield-invest-auth-v1.js?v=3"></script>
  <script>document.addEventListener("DOMContentLoaded", function () { window.NoetfieldInvestAuth.bootSignInPage(); });</script>
 </body>
 </html>
