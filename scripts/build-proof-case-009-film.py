@@ -18,11 +18,19 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS = Path(__file__).resolve().parent
 SOURCEA_SCRIPTS = Path.home() / "Desktop/Noetfield-Systems/SourceA/scripts"
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
 if str(SOURCEA_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SOURCEA_SCRIPTS))
 
 from film_elevenlabs_wire_v1 import synthesize_narration  # noqa: E402
+from proof_film_cockpit_waits import (  # noqa: E402
+    wait_cockpit_connected,
+    wait_cockpit_delivered,
+    wait_cockpit_working,
+)
 
 WORK = Path.home() / ".sina/proof-case-009-film-work-v1"
 OUT_DIR = WORK / "out"
@@ -283,6 +291,7 @@ def run_front_door(browser) -> dict:
         if "/app/workspace/" in page.url:
             page.goto(f"{BASE}/app/project/?id={project_id_holder['id']}", wait_until="networkidle")
         page.wait_for_selector(".cockpit-grid, .team-roster, #team-roster", timeout=60000)
+        wait_cockpit_working(page)
         page.wait_for_timeout(2000)
         page.mouse.wheel(0, 250)
         page.wait_for_timeout(1000)
@@ -307,6 +316,7 @@ def capture_in_flight(browser, storage: dict, project_id: str) -> None:
 
     def in_flight_action(page):
         page.wait_for_selector(".live-activity--terminal, .cockpit-grid", timeout=60000)
+        wait_cockpit_working(page)
         page.wait_for_timeout(1200)
         page.mouse.wheel(0, 180)
         page.wait_for_timeout(1200)
@@ -321,13 +331,20 @@ def capture_delivered(browser, storage: dict, project_id: str, slug: str) -> Non
 
     def cockpit_action(page):
         page.wait_for_selector(".cockpit-grid", timeout=60000)
+        wait_cockpit_delivered(page)
         page.wait_for_timeout(1000)
         page.mouse.wheel(0, 300)
         page.wait_for_timeout(800)
 
     record_segment(browser, storage, cockpit, CAPTURE / "07-cockpit-delivered.mp4", 14.0, action=cockpit_action)
+
+    def files_action(page):
+        wait_cockpit_delivered(page)
+        page.locator("#documents-panel").scroll_into_view_if_needed()
+        page.wait_for_timeout(800)
+
     record_segment(browser, storage, f"{BASE}/v1/site/{slug}", CAPTURE / "08-site-live.mp4", 12.0)
-    record_segment(browser, storage, cockpit, CAPTURE / "10-files-workflow.mp4", 11.0)
+    record_segment(browser, storage, cockpit, CAPTURE / "10-files-workflow.mp4", 11.0, action=files_action)
 
 
 def concat_to_duration(parts: list[Path], out: Path, target_s: float) -> None:
