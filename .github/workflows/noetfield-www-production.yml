@@ -18,6 +18,7 @@ on:
       - "governance/PUBLIC_OUTPUT_DENYLIST.json"
       - "governance/www-pages-routes.json"
       - "governance/www-public-artifact-v1.json"
+      - "governance/www-public-artifact-v1.json"
       - "infra/cf-www-proxy/**"
       - "Makefile"
       - "noetfield-*.png"
