@@ -212,8 +212,16 @@
     <h2 id="lab-cases">Recorded demonstrations</h2>
     <p>Each case is one bounded run, recorded end to end. Cases are added here as they are filmed; a case appears only once its receipt exists.</p>
 
-    <article class="nf-lab-case" id="case-001-refusal-cycle">
-     <h3>Proof Case 001 — The Refusal Cycle</h3>
+    <!-- Every case carries its take number in a class AND a data attribute. A
+         reshoot replaces the media but never the identity: v1 stays named, with
+         its own digest, so two takes of the same case can be told apart and
+         compared later instead of one quietly becoming "the" recording. -->
+    <article class="nf-lab-case nf-lab-case--v2" id="case-001-refusal-cycle"
+             data-case-id="case-001-refusal-cycle"
+             data-case-version="v2"
+             data-case-sha256="828997ad328f5d41d5867f25b20eed702ae6cbcfec8c1f08a5c6ad7f3046ea31"
+             data-case-supersedes="v1">
+     <h3>Proof Case 001 — The Refusal Cycle <span class="nf-vc-pill">TAKE v2</span></h3>
      <p class="nf-lab-case__sub">The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.</p>
      <!-- To publish this recording, set exactly one source below and nothing else on this page:
           data-video-embed — full Cloudflare Stream iframe URL, or
@@ -231,6 +239,69 @@
       <p class="nf-lab-player__note">This slot is reserved and intentionally empty. Noetfield does not publish a demonstration before the run behind it has produced a receipt.</p>
      </div>
      <p class="nf-lab-caption"><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> One bounded run, recorded end to end by the machine on production, no cuts: a single plain request produced a published website in eight seconds and a delivered automation beside it. The refusal beat — a stop with a stated reason instead of a plausible invention — is evidenced separately on the receipt wall below. The recording ships with <a href="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json">its run receipt</a>.</p>
+    </article>
+
+    <article class="nf-lab-case nf-lab-case--v1" id="case-002-front-door"
+             data-case-id="case-002-front-door"
+             data-case-version="v1"
+             data-case-sha256="0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c"
+             data-case-supersedes="">
+     <h3>Proof Case 002 — The Front Door <span class="nf-vc-pill">TAKE v1</span></h3>
+     <p class="nf-lab-case__sub">One sentence asks for a website and the automation behind it. The plan answers both halves — before an account exists.</p>
+     <div class="nf-lab-player nf-lab-player--empty"
+          role="img"
+          aria-label="Recording pending for Proof Case 002, The Front Door"
+          data-video-title="Proof Case 002 — The Front Door"
+          data-video-embed=""
+          data-video-src="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4"
+          data-video-poster="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002-poster.png"
+          data-video-captions="/proof/lab/case-002.vtt">
+      <span class="nf-lab-player__mark">Recording pending</span>
+      <p class="nf-lab-player__note">This slot is reserved and intentionally empty. Noetfield does not publish a demonstration before the run behind it has produced a receipt.</p>
+     </div>
+     <p class="nf-lab-caption"><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> Seventeen seconds, one continuous take on production, no cuts: the request typed character by character, then the plan naming the page sections <em>and</em> the automation it would add. The recording is hash-identified (<code>sha256 0895eb00…39cb08c</code>) and published with its poster and captions. <strong>This one needs no receipt to be believed — you can reproduce it yourself in under a minute at <a href="https://app.noetfield.com/">app.noetfield.com</a>, with no account.</strong> What it does <em>not</em> show: the build, the published page, or the automation running — those are Case 001's ground, and they begin after sign-up.</p>
+    </article>
+
+    <article class="nf-lab-case nf-lab-case--v1" id="case-004-delivered-page"
+             data-case-id="case-004-delivered-page"
+             data-case-version="v1"
+             data-case-sha256="ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767"
+             data-case-supersedes="">
+     <h3>Proof Case 004 — A Delivered Page <span class="nf-vc-pill">TAKE v1</span></h3>
+     <p class="nf-lab-case__sub">The finished result: a page built from one plain request and published to a public address, read top to bottom.</p>
+     <div class="nf-lab-player nf-lab-player--empty"
+          role="img"
+          aria-label="Recording pending for Proof Case 004, A Delivered Page"
+          data-video-title="Proof Case 004 — A Delivered Page"
+          data-video-embed=""
+          data-video-src="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4"
+          data-video-poster="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004-poster.png"
+          data-video-captions="/proof/lab/case-004.vtt">
+      <span class="nf-lab-player__mark">Recording pending</span>
+      <p class="nf-lab-player__note">This slot is reserved and intentionally empty. Noetfield does not publish a demonstration before the run behind it has produced a receipt.</p>
+     </div>
+     <p class="nf-lab-caption"><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> One plain request in, a published public address out, in <strong>17 seconds</strong> — delivery confirmed by fetching the live page twice and comparing body hashes, which matched. Filmed at that public address, unedited. The recording is hash-identified (<code>sha256 ad47c2cc…c8773767</code>). <strong>Boundary, stated plainly:</strong> this films the delivered result, not the build, and it is a <em>different run</em> from Case 002 — it does not continue it. What it does not show: the work between the request and the page.</p>
+    </article>
+
+    <article class="nf-lab-case nf-lab-case--v1" id="case-005-determinism-binding"
+             data-case-id="case-005-determinism-binding"
+             data-case-version="v1"
+             data-case-sha256="daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7"
+             data-case-supersedes="">
+     <h3>Proof Case 005 &mdash; Determinism &amp; Binding <span class="nf-vc-pill">TAKE v1</span></h3>
+     <p class="nf-lab-case__sub">A hundred runs collapse to one verdict hash, six controls move it, and a still-valid deploy token refuses an artifact that changed by one byte.</p>
+     <div class="nf-lab-player nf-lab-player--empty"
+          role="img"
+          aria-label="Recording pending for Proof Case 005, Determinism and Binding"
+          data-video-title="Proof Case 005 &mdash; Determinism &amp; Binding"
+          data-video-embed=""
+          data-video-src="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4"
+          data-video-poster="https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005-poster.png"
+          data-video-captions="/proof/lab/case-005.vtt">
+      <span class="nf-lab-player__mark">Recording pending</span>
+      <p class="nf-lab-player__note">This slot is reserved and intentionally empty. Noetfield does not publish a demonstration before the run behind it has produced a receipt.</p>
+     </div>
+     <p class="nf-lab-caption"><span class="nf-vc-pill nf-lab-pill--verified">VERIFIED RECEIPT</span> Thirty-one seconds, one continuous take on production, no cuts: two deployments blocked at <code>EXIT 20</code> and <code>EXIT 40</code>, a clean artifact clearing all eight gates, then one hundred executions under perturbed paths, timestamps, file ordering, locales and timezones &mdash; returning a single verdict hash. Six negative controls each move that hash, which is what separates a deterministic function from one that returns a constant. The recording is hash-identified (<code>sha256 daaaf41f&hellip;e06115b7</code>). <strong>This one needs no receipt to be believed &mdash; run it yourself at <a href="https://proof.noetfield.com/">proof.noetfield.com</a>, with no account, and compare your verdict hash to the one on screen.</strong> What it does <em>not</em> show: a customer outcome. Nothing is built for anyone here; the artifacts under test are fixtures carried by the lab. Cases 001, 002 and 004 are that ground.</p>
     </article>
    </section>
 
