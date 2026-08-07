@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.000
+One request, typed the way a client actually writes it.
+
+00:00:05.000 --> 00:00:11.000
+"I need a landing page for Fernwood Dental Studio, a family dental clinic in Victoria —
+
+00:00:11.000 --> 00:00:17.000
+and an automation that emails me whenever someone submits the booking form
+and adds them to a Google Sheet."
+
+00:00:17.000 --> 00:00:23.000
+Two products in one sentence. The front person hires its team and says so.
+
+00:00:23.000 --> 00:00:29.000
+Front person. Builder. Delivery orchestrator. Each hire shown as it completes.
+
+00:00:29.000 --> 00:00:35.000
+Five seconds in, the landing page is live at a public address and serving.
+
+00:00:35.000 --> 00:00:41.000
+The automation half then takes over, and the page keeps narrating it.
+
+00:00:41.000 --> 00:00:47.000
+Integrator working. Workflow provisioner working. Quality check verifying.
+
+00:00:47.000 --> 00:00:54.000
+Two minutes in: "Your automation is ready. Download the file from the Files
+list on this page and import it into your n8n to run it."
+
+00:00:54.000 --> 00:01:00.000
+Two deliverables from one sentence. The page is public; the workflow is a file.
+
+00:01:00.000 --> 00:01:06.000
+Every attempt is metered against a hard three-cent ceiling per job,
+and the receipt names what was spent.
+
+00:01:06.000 --> 00:01:12.000
+What this does not show: the model's reasoning, a success rate,
+or the workflow running inside the client's own n8n.

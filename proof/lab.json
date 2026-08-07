@@ -1,315 +1,333 @@
 {
-  "artifacts": {
-    "html": "/proof/lab/",
-    "json": "/proof/lab.json"
-  },
-  "cases": [
+ "artifacts": {
+  "html": "/proof/lab/",
+  "json": "/proof/lab.json"
+ },
+ "cases": [
+  {
+   "boundary": "The recording is published only together with the run receipt that backs it.",
+   "id": "case-001-refusal-cycle",
+   "media": {
+    "captions": "/proof/lab/case-001.vtt",
+    "embed": null,
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/poster-v2.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4"
+   },
+   "media_state": "PUBLISHED",
+   "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
+   "takes": [
     {
-      "boundary": "The recording is published only together with the run receipt that backs it.",
-      "id": "case-001-refusal-cycle",
-      "media": {
-        "captions": "/proof/lab/case-001.vtt",
-        "embed": null,
-        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/poster-v2.png",
-        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4"
-      },
-      "media_state": "PUBLISHED",
-      "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
-      "takes": [
-        {
-          "duration_s": 74.4,
-          "recorded": "2026-08-06",
-          "release_tag": "proof-case-001-v1",
-          "sha256": "8979f0066f84dfaa788ca710076f5f767fbcf03c9987a4cac118e595c76b6799",
-          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001.mp4",
-          "status": "SUPERSEDED",
-          "superseded_reason": "Reviewed and rejected: the take followed a status page rather than showing the request being typed, the execution, or the page being built.",
-          "version": "v1"
-        },
-        {
-          "duration_s": 84.3,
-          "recorded": "2026-08-06",
-          "release_tag": "proof-case-001-v2",
-          "sha256": "828997ad328f5d41d5867f25b20eed702ae6cbcfec8c1f08a5c6ad7f3046ea31",
-          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4",
-          "status": "CURRENT",
-          "superseded_reason": null,
-          "version": "v2"
-        }
-      ],
-      "title": "Proof Case 001 — The Refusal Cycle",
-      "version": "v2",
-      "type": "recorded_demonstration"
+     "duration_s": 74.4,
+     "recorded": "2026-08-06",
+     "release_tag": "proof-case-001-v1",
+     "sha256": "8979f0066f84dfaa788ca710076f5f767fbcf03c9987a4cac118e595c76b6799",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001.mp4",
+     "status": "SUPERSEDED",
+     "superseded_reason": "Reviewed and rejected: the take followed a status page rather than showing the request being typed, the execution, or the page being built.",
+     "version": "v1"
     },
     {
-      "boundary": "Shows the front door only. The build, the published page and the automation begin after sign-up and are not in this recording.",
-      "id": "case-002-front-door",
-      "media": {
-        "captions": "/proof/lab/case-002.vtt",
-        "embed": null,
-        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002-poster.png",
-        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4"
-      },
-      "media_state": "PUBLISHED",
-      "reproducible_without_account": true,
-      "sha256": {
-        "captions": "37438490ff7b8aff802f18a0b64aa2b1427f5bb4778825aec301018d07ee7eb4",
-        "mp4": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
-        "poster": "d34b9cdbe13ac2140abb988c8fc1171b561e7ad74cc7b3be01a6b29fa9b6444a"
-      },
-      "subtitle": "One sentence asks for a website and the automation behind it. The plan answers both halves — before an account exists.",
-      "takes": [
-        {
-          "duration_s": 17.7,
-          "recorded": "2026-08-06",
-          "release_tag": "proof-case-002-v1",
-          "sha256": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
-          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4",
-          "status": "CURRENT",
-          "superseded_reason": null,
-          "version": "v1"
-        }
-      ],
-      "title": "Proof Case 002 — The Front Door",
-      "version": "v1",
-      "type": "recorded_demonstration"
-    },
-    {
-      "boundary": "Films the delivered result, not the build. A different run from Case 002 — it does not continue it. The work between the request and the page is not shown.",
-      "id": "case-004-delivered-page",
-      "media": {
-        "captions": "/proof/lab/case-004.vtt",
-        "embed": null,
-        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004-poster.png",
-        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4"
-      },
-      "media_state": "PUBLISHED",
-      "run": {
-        "delivery_confirmed_by": "double fetch of the live public URL with matching body hashes",
-        "elapsed_s": 17,
-        "project_id": "prj_6757fd37dcc143e997bbde4b",
-        "recorded": "2026-08-06"
-      },
-      "sha256": {
-        "captions": "0657aa58cbffcb4b375a3cabf034260a2af75611c494fac0157552d52eaa34ce",
-        "mp4": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
-        "poster": "335fed01c09997a8240adf7c5ee8050ea2b1318cfe0ac64f4bcb87ae56d8d991"
-      },
-      "subtitle": "The finished result: a page built from one plain request and published to a public address, read top to bottom.",
-      "takes": [
-        {
-          "duration_s": 13.0,
-          "recorded": "2026-08-06",
-          "release_tag": "proof-case-004-v1",
-          "sha256": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
-          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4",
-          "status": "CURRENT",
-          "superseded_reason": null,
-          "version": "v1"
-        }
-      ],
-      "title": "Proof Case 004 — A Delivered Page",
-      "version": "v1",
-      "type": "recorded_demonstration"
-    },
-    {
-      "boundary": "Shows the engine's own properties only — determinism, sensitivity and token binding. This is not a customer-outcome run: nothing is built for a customer and nothing is delivered in this recording. The artifacts under test are fixtures carried by the lab, not a customer's code.",
-      "id": "case-005-determinism-binding",
-      "media": {
-        "captions": "/proof/lab/case-005.vtt",
-        "embed": null,
-        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005-poster.png",
-        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4"
-      },
-      "media_state": "PUBLISHED",
-      "reproducible_without_account": true,
-      "sha256": {
-        "captions": "0d93fc1177738e1d1dcf92de836be59f5ac922d18cd66ef3e42e8b81a1e1a4fa",
-        "mp4": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
-        "poster": "09915c51690a1536d6c1da6fd54f33e2bbcb4f3b58496207c169024767022e44"
-      },
-      "subtitle": "A hundred runs collapse to one verdict hash, six controls move it, and a still-valid deploy token refuses an artifact that changed by one byte.",
-      "takes": [
-        {
-          "duration_s": 31.3,
-          "recorded": "2026-08-06",
-          "release_tag": "proof-case-005-v1",
-          "sha256": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
-          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4",
-          "status": "CURRENT",
-          "superseded_reason": null,
-          "version": "v1"
-        }
-      ],
-      "title": "Proof Case 005 — Determinism & Binding",
-      "version": "v1",
-      "type": "recorded_demonstration"
-    },
-    {
-      "boundary": "A depiction of the intended product. Not a recording, not evidence, and not a claim of present availability.",
-      "grade": "CONCEPT",
-      "id": "vision-001-full-production",
-      "media": {
-        "captions": null,
-        "embed": null,
-        "poster": null,
-        "src": null
-      },
-      "media_state": "CONCEPT_FILM_PENDING",
-      "subtitle": "The intended product: work arriving planned, executed, verified and evidenced at scale, with the operator supervising rather than assembling.",
-      "title": "Noetfield in full production",
-      "type": "product_vision"
+     "duration_s": 84.3,
+     "recorded": "2026-08-06",
+     "release_tag": "proof-case-001-v2",
+     "sha256": "828997ad328f5d41d5867f25b20eed702ae6cbcfec8c1f08a5c6ad7f3046ea31",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v2"
     }
-  ],
-  "controls": [
-    "Explicit authority before action",
-    "Exact-candidate binding to commit digests",
-    "Separate verification, distinct from the worker",
-    "Bounded repair with documented safe stops",
-    "Human promotion of a passing candidate",
-    "Receipt for every accepted outcome"
-  ],
-  "correction_policy": {
-    "contact": "/contact/",
-    "rule": "Substantiated corrections are appended and the prior claim is preserved as superseded, not removed."
+   ],
+   "title": "Proof Case 001 — The Refusal Cycle",
+   "type": "recorded_demonstration",
+   "version": "v2"
   },
-  "does_not_prove": [
-    "External customer adoption, revenue, or third-party production deployments",
-    "Certification of any kind, including SOC 2",
-    "Current end-to-end delivery closure",
-    "Any universal comparison of AI coding tools or model vendors",
-    "Any dollar cost or token spend figure"
-  ],
-  "entity": "Noetfield Systems Inc.",
-  "entity_type": "evidence_lab_index",
-  "evidence_grades": {
-    "NOT_MEASURED": "Not yet instrumented. Stated as unknown rather than estimated.",
-    "OWNER_OBSERVED": "Reported by the operator; not independently measured here.",
-    "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
-    "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact.",
-    "CONCEPT": "A depiction of the intended product. Not a recording, not evidence, and never counted as a demonstration."
-  },
-  "generated_at": "2026-08-06T00:00:00Z",
-  "maintenance": {
-    "hosting": {
-      "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
-      "never": "Do not commit video files to git. They bloat the repository and fight the per-file deploy limit.",
-      "preferred": "Cloudflare Stream — the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player."
-    },
-    "publish_a_recording": [
-      "Confirm the run shown in the recording produced a receipt. No recording is published before its evidence exists.",
-      "Upload the file to Cloudflare Stream and copy the iframe URL it returns.",
-      "On the case slot in /proof/lab/index.html, set data-video-embed to that URL (or data-video-src for a hosted MP4). Set nothing else.",
-      "Mirror the same URL into this file under the case's media object, and set media_state to PUBLISHED.",
-      "Add the backing receipt to the receipts array and swap the case caption's NOT YET PUBLISHED pill for the receipt grade."
-    ],
-    "rule": "A recorded-demonstration slot stays empty until its run has produced a receipt. A product-vision slot is always marked CONCEPT and is never counted as evidence.",
-    "publish_a_concept_film": [
-      "A concept film is never graded as evidence and never appears in the recorded-demonstrations section.",
-      "Keep the vision modifier on the player so the CONCEPT marker stays over the frame, including in screenshots and crops.",
-      "Set the source exactly as for a recording, then set media_state to PUBLISHED on the product_vision case.",
-      "Do not add a receipt for it. A concept film has no run behind it, and inventing one would defeat the page.",
-      "The shooting script and its boundaries are in docs/demo-video/VISION-SCRIPT.md."
-    ]
-  },
-  "measurement": {
-    "cost_per_accepted_outcome": {
-      "note": "Measured per accepted outcome, not per successful model call.",
-      "state": "NOT_MEASURED",
-      "value": null
-    },
-    "per_run_spend_ceiling": {
-      "note": "Will be stated once enforced in the runtime and provable from a receipt.",
-      "state": "NOT_PUBLISHED",
-      "value": null
-    },
-    "total_token_spend": {
-      "note": "Explicitly unknown in the current evidence bundles.",
-      "state": "NOT_MEASURED",
-      "value": null
+  {
+   "boundary": "Shows the front door only. The build, the published page and the automation begin after sign-up and are not in this recording.",
+   "id": "case-002-front-door",
+   "media": {
+    "captions": "/proof/lab/case-002.vtt",
+    "embed": null,
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002-poster.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4"
+   },
+   "media_state": "PUBLISHED",
+   "reproducible_without_account": true,
+   "sha256": {
+    "captions": "37438490ff7b8aff802f18a0b64aa2b1427f5bb4778825aec301018d07ee7eb4",
+    "mp4": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
+    "poster": "d34b9cdbe13ac2140abb988c8fc1171b561e7ad74cc7b3be01a6b29fa9b6444a"
+   },
+   "subtitle": "One sentence asks for a website and the automation behind it. The plan answers both halves — before an account exists.",
+   "takes": [
+    {
+     "duration_s": 17.7,
+     "recorded": "2026-08-06",
+     "release_tag": "proof-case-002-v1",
+     "sha256": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v1"
     }
+   ],
+   "title": "Proof Case 002 — The Front Door",
+   "type": "recorded_demonstration",
+   "version": "v1"
   },
-  "proves": [
-    "A single indexed location where demonstrations, receipts, measurement state and roadmap status are kept together",
-    "That published failures are preserved alongside published passes",
-    "That unmeasured quantities are labelled rather than estimated"
-  ],
-  "receipts": [
+  {
+   "boundary": "Films the delivered result, not the build. A different run from Case 002 — it does not continue it. The work between the request and the page is not shown.",
+   "id": "case-004-delivered-page",
+   "media": {
+    "captions": "/proof/lab/case-004.vtt",
+    "embed": null,
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004-poster.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4"
+   },
+   "media_state": "PUBLISHED",
+   "run": {
+    "delivery_confirmed_by": "double fetch of the live public URL with matching body hashes",
+    "elapsed_s": 17,
+    "project_id": "prj_6757fd37dcc143e997bbde4b",
+    "recorded": "2026-08-06"
+   },
+   "sha256": {
+    "captions": "0657aa58cbffcb4b375a3cabf034260a2af75611c494fac0157552d52eaa34ce",
+    "mp4": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
+    "poster": "335fed01c09997a8240adf7c5ee8050ea2b1318cfe0ac64f4bcb87ae56d8d991"
+   },
+   "subtitle": "The finished result: a page built from one plain request and published to a public address, read top to bottom.",
+   "takes": [
     {
-      "artifact": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json",
-      "boundary": "One bounded recorded run on production; account creation is harness-assisted and disclosed on camera.",
-      "grade": "VERIFIED_RECEIPT",
-      "payload_sha256": "1d659d267690ce96324d83849a1c691616691f02c2d7845b29c8bec81ea80c2d",
-      "result": "Prompt typed on camera · website published 8 s after creation · automation delivered · 1:24, no cuts",
-      "run": "Combined-request recording run, take two, 6 August"
-    },
-    {
-      "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
-      "boundary": "One dated run, not all request classes.",
-      "grade": "VERIFIED_RECEIPT",
-      "payload_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
-      "result": "HTTP 200 · public page headed \"Meridian Tax Group\" · 13684 ms",
-      "run": "Named-business request, 1 August",
-      "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
-    },
-    {
-      "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json",
-      "boundary": "One dated failure, preserved deliberately.",
-      "grade": "VERIFIED_RECEIPT",
-      "payload_sha256": "900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28",
-      "result": "No public page before a 302662 ms timeout",
-      "run": "Generic trade-description request",
-      "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
-    },
-    {
-      "artifact": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
-      "boundary": "Candidate branch was not deployed to the target host, so this shows missing delivery on that target, not candidate quality.",
-      "grade": "REPOSITORY_SUPPORTED",
-      "result": "10 timeouts · 0 delivered",
-      "run": "Expanded ten-scenario live run"
-    },
-    {
-      "artifact": "/proof/governed-replacement.json",
-      "boundary": "First-party run, not external deployment.",
-      "grade": "VERIFIED_RECEIPT",
-      "result": "Verification failed · bounded repair applied · independent re-check passed · human promotion",
-      "run": "Governed replacement, run CS2-GISF-2026-07-14T005554Z"
-    },
-    {
-      "boundary": "Historical receipts are not a claim about today.",
-      "grade": "NOT_MEASURED",
-      "result": "Pending a fresh same-release end-to-end run",
-      "run": "Current production closure"
+     "duration_s": 13.0,
+     "recorded": "2026-08-06",
+     "release_tag": "proof-case-004-v1",
+     "sha256": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v1"
     }
-  ],
-  "related": [
-    "/proof/",
-    "/proof/agentic-coding-reliability-case-001/",
-    "/demo/complete-run/",
-    "/assurance/"
-  ],
-  "roadmap": [
+   ],
+   "title": "Proof Case 004 — A Delivered Page",
+   "type": "recorded_demonstration",
+   "version": "v1"
+  },
+  {
+   "boundary": "Shows the engine's own properties only — determinism, sensitivity and token binding. This is not a customer-outcome run: nothing is built for a customer and nothing is delivered in this recording. The artifacts under test are fixtures carried by the lab, not a customer's code.",
+   "id": "case-005-determinism-binding",
+   "media": {
+    "captions": "/proof/lab/case-005.vtt",
+    "embed": null,
+    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005-poster.png",
+    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4"
+   },
+   "media_state": "PUBLISHED",
+   "reproducible_without_account": true,
+   "sha256": {
+    "captions": "0d93fc1177738e1d1dcf92de836be59f5ac922d18cd66ef3e42e8b81a1e1a4fa",
+    "mp4": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
+    "poster": "09915c51690a1536d6c1da6fd54f33e2bbcb4f3b58496207c169024767022e44"
+   },
+   "subtitle": "A hundred runs collapse to one verdict hash, six controls move it, and a still-valid deploy token refuses an artifact that changed by one byte.",
+   "takes": [
     {
-      "phase": 1,
-      "status": "LIVE_ALPHA",
-      "summary": "One plain request produces a planned, executed, verified and deployable result: a published site and an accompanying automation definition, with evidence preserved.",
-      "title": "Prompt to production"
-    },
-    {
-      "phase": 2,
-      "status": "PLANNED",
-      "summary": "The automation runs where it is provisioned rather than handed over as a file to import, with the same acceptance and receipt layer applied to a running workflow.",
-      "title": "Hosted execution"
-    },
-    {
-      "phase": 3,
-      "status": "PRODUCT_VERTICAL_SYNTHETIC_DEMONSTRATIONS",
-      "summary": "Governed execution applied to FINTRAC case operations for Canadian MSBs, fintechs, PSPs and digital-asset operators, with the human FILE / NO-FILE / ESCALATE decision preserved. A product vertical of Noetfield Systems Inc., not a separate venture.",
-      "title": "TrustField"
+     "duration_s": 31.3,
+     "recorded": "2026-08-06",
+     "release_tag": "proof-case-005-v1",
+     "sha256": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
+     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4",
+     "status": "CURRENT",
+     "superseded_reason": null,
+     "version": "v1"
     }
+   ],
+   "title": "Proof Case 005 — Determinism & Binding",
+   "type": "recorded_demonstration",
+   "version": "v1"
+  },
+  {
+   "boundary": "A customer-outcome run on production: one request, two delivered artifacts. It does not show the model's reasoning, and it is a single run — not a success rate. The automation file is delivered for the client to import; this recording does not show it executing inside their n8n.",
+   "id": "case-006-one-sentence-two-deliverables",
+   "media": {
+    "captions": "/proof/lab/case-006.vtt",
+    "embed": null,
+    "poster": null,
+    "src": null
+   },
+   "media_state": "PENDING",
+   "reproducible_without_account": false,
+   "sha256": {},
+   "subtitle": "A client asks for a landing page and the automation behind it in one sentence; the front person hires a team, publishes the page, provisions the workflow, and hands over both.",
+   "takes": [],
+   "title": "Proof Case 006 — One Sentence, Two Deliverables",
+   "type": "recorded_demonstration",
+   "version": "v1"
+  },
+  {
+   "boundary": "A depiction of the intended product. Not a recording, not evidence, and not a claim of present availability.",
+   "grade": "CONCEPT",
+   "id": "vision-001-full-production",
+   "media": {
+    "captions": null,
+    "embed": null,
+    "poster": null,
+    "src": null
+   },
+   "media_state": "CONCEPT_FILM_PENDING",
+   "subtitle": "The intended product: work arriving planned, executed, verified and evidenced at scale, with the operator supervising rather than assembling.",
+   "title": "Noetfield in full production",
+   "type": "product_vision"
+  }
+ ],
+ "controls": [
+  "Explicit authority before action",
+  "Exact-candidate binding to commit digests",
+  "Separate verification, distinct from the worker",
+  "Bounded repair with documented safe stops",
+  "Human promotion of a passing candidate",
+  "Receipt for every accepted outcome"
+ ],
+ "correction_policy": {
+  "contact": "/contact/",
+  "rule": "Substantiated corrections are appended and the prior claim is preserved as superseded, not removed."
+ },
+ "does_not_prove": [
+  "External customer adoption, revenue, or third-party production deployments",
+  "Certification of any kind, including SOC 2",
+  "Current end-to-end delivery closure",
+  "Any universal comparison of AI coding tools or model vendors",
+  "Any dollar cost or token spend figure"
+ ],
+ "entity": "Noetfield Systems Inc.",
+ "entity_type": "evidence_lab_index",
+ "evidence_grades": {
+  "CONCEPT": "A depiction of the intended product. Not a recording, not evidence, and never counted as a demonstration.",
+  "NOT_MEASURED": "Not yet instrumented. Stated as unknown rather than estimated.",
+  "OWNER_OBSERVED": "Reported by the operator; not independently measured here.",
+  "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
+  "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact."
+ },
+ "generated_at": "2026-08-06T00:00:00Z",
+ "maintenance": {
+  "hosting": {
+   "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
+   "never": "Do not commit video files to git. They bloat the repository and fight the per-file deploy limit.",
+   "preferred": "Cloudflare Stream — the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player."
+  },
+  "publish_a_concept_film": [
+   "A concept film is never graded as evidence and never appears in the recorded-demonstrations section.",
+   "Keep the vision modifier on the player so the CONCEPT marker stays over the frame, including in screenshots and crops.",
+   "Set the source exactly as for a recording, then set media_state to PUBLISHED on the product_vision case.",
+   "Do not add a receipt for it. A concept film has no run behind it, and inventing one would defeat the page.",
+   "The shooting script and its boundaries are in docs/demo-video/VISION-SCRIPT.md."
   ],
-  "schema": "noetfield_public_evidence_bundle_v1",
-  "scope": "Public index of recorded demonstrations, published run receipts, measurement state, and roadmap status for the Noetfield runtime.",
-  "status": "LIVE",
-  "take_policy": "A reshoot replaces a case's media, never its identity. Each take keeps its own version, release tag and sha256 so two recordings of the same case can be compared later. A superseded take stays listed with the reason it was replaced; it is never deleted, and the current take is the one marked CURRENT."
+  "publish_a_recording": [
+   "Confirm the run shown in the recording produced a receipt. No recording is published before its evidence exists.",
+   "Upload the file to Cloudflare Stream and copy the iframe URL it returns.",
+   "On the case slot in /proof/lab/index.html, set data-video-embed to that URL (or data-video-src for a hosted MP4). Set nothing else.",
+   "Mirror the same URL into this file under the case's media object, and set media_state to PUBLISHED.",
+   "Add the backing receipt to the receipts array and swap the case caption's NOT YET PUBLISHED pill for the receipt grade."
+  ],
+  "rule": "A recorded-demonstration slot stays empty until its run has produced a receipt. A product-vision slot is always marked CONCEPT and is never counted as evidence."
+ },
+ "measurement": {
+  "cost_per_accepted_outcome": {
+   "note": "Measured per accepted outcome, not per successful model call.",
+   "state": "NOT_MEASURED",
+   "value": null
+  },
+  "per_run_spend_ceiling": {
+   "note": "Will be stated once enforced in the runtime and provable from a receipt.",
+   "state": "NOT_PUBLISHED",
+   "value": null
+  },
+  "total_token_spend": {
+   "note": "Explicitly unknown in the current evidence bundles.",
+   "state": "NOT_MEASURED",
+   "value": null
+  }
+ },
+ "proves": [
+  "A single indexed location where demonstrations, receipts, measurement state and roadmap status are kept together",
+  "That published failures are preserved alongside published passes",
+  "That unmeasured quantities are labelled rather than estimated"
+ ],
+ "receipts": [
+  {
+   "artifact": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json",
+   "boundary": "One bounded recorded run on production; account creation is harness-assisted and disclosed on camera.",
+   "grade": "VERIFIED_RECEIPT",
+   "payload_sha256": "1d659d267690ce96324d83849a1c691616691f02c2d7845b29c8bec81ea80c2d",
+   "result": "Prompt typed on camera · website published 8 s after creation · automation delivered · 1:24, no cuts",
+   "run": "Combined-request recording run, take two, 6 August"
+  },
+  {
+   "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
+   "boundary": "One dated run, not all request classes.",
+   "grade": "VERIFIED_RECEIPT",
+   "payload_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
+   "result": "HTTP 200 · public page headed \"Meridian Tax Group\" · 13684 ms",
+   "run": "Named-business request, 1 August",
+   "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
+  },
+  {
+   "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json",
+   "boundary": "One dated failure, preserved deliberately.",
+   "grade": "VERIFIED_RECEIPT",
+   "payload_sha256": "900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28",
+   "result": "No public page before a 302662 ms timeout",
+   "run": "Generic trade-description request",
+   "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
+  },
+  {
+   "artifact": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
+   "boundary": "Candidate branch was not deployed to the target host, so this shows missing delivery on that target, not candidate quality.",
+   "grade": "REPOSITORY_SUPPORTED",
+   "result": "10 timeouts · 0 delivered",
+   "run": "Expanded ten-scenario live run"
+  },
+  {
+   "artifact": "/proof/governed-replacement.json",
+   "boundary": "First-party run, not external deployment.",
+   "grade": "VERIFIED_RECEIPT",
+   "result": "Verification failed · bounded repair applied · independent re-check passed · human promotion",
+   "run": "Governed replacement, run CS2-GISF-2026-07-14T005554Z"
+  },
+  {
+   "boundary": "Historical receipts are not a claim about today.",
+   "grade": "NOT_MEASURED",
+   "result": "Pending a fresh same-release end-to-end run",
+   "run": "Current production closure"
+  }
+ ],
+ "related": [
+  "/proof/",
+  "/proof/agentic-coding-reliability-case-001/",
+  "/demo/complete-run/",
+  "/assurance/"
+ ],
+ "roadmap": [
+  {
+   "phase": 1,
+   "status": "LIVE_ALPHA",
+   "summary": "One plain request produces a planned, executed, verified and deployable result: a published site and an accompanying automation definition, with evidence preserved.",
+   "title": "Prompt to production"
+  },
+  {
+   "phase": 2,
+   "status": "PLANNED",
+   "summary": "The automation runs where it is provisioned rather than handed over as a file to import, with the same acceptance and receipt layer applied to a running workflow.",
+   "title": "Hosted execution"
+  },
+  {
+   "phase": 3,
+   "status": "PRODUCT_VERTICAL_SYNTHETIC_DEMONSTRATIONS",
+   "summary": "Governed execution applied to FINTRAC case operations for Canadian MSBs, fintechs, PSPs and digital-asset operators, with the human FILE / NO-FILE / ESCALATE decision preserved. A product vertical of Noetfield Systems Inc., not a separate venture.",
+   "title": "TrustField"
+  }
+ ],
+ "schema": "noetfield_public_evidence_bundle_v1",
+ "scope": "Public index of recorded demonstrations, published run receipts, measurement state, and roadmap status for the Noetfield runtime.",
+ "status": "LIVE",
+ "take_policy": "A reshoot replaces a case's media, never its identity. Each take keeps its own version, release tag and sha256 so two recordings of the same case can be compared later. A superseded take stays listed with the reason it was replaced; it is never deleted, and the current take is the one marked CURRENT."
 }
