@@ -542,22 +542,28 @@
     <p>Cost is measured per <em>accepted outcome</em>, not per successful model call. A run that produced no customer effect still consumed spend, and counting only the successful calls is the most common way agent economics are misreported.</p>
     <div class="nf-lab-metrics">
      <div class="nf-lab-metric">
-      <span class="nf-lab-metric__label">Cost per accepted outcome</span>
-      <span class="nf-lab-metric__value">Not measured</span>
-      <span class="nf-lab-metric__note">No per-run dollar figure is published because none is yet instrumented end to end.</span>
+      <span class="nf-lab-metric__label">Per-job spend ceiling</span>
+      <span class="nf-lab-metric__value">$0.03</span>
+      <span class="nf-lab-metric__note">Enforced in the customer model policy and asserted by a test, so it cannot drift quietly.</span>
      </div>
      <div class="nf-lab-metric">
-      <span class="nf-lab-metric__label">Per-run spend ceiling</span>
-      <span class="nf-lab-metric__value">Not published</span>
-      <span class="nf-lab-metric__note">A ceiling will be stated here once it is enforced in the runtime and provable from a receipt.</span>
+      <span class="nf-lab-metric__label">Per-project ceiling</span>
+      <span class="nf-lab-metric__value">$0.25</span>
+      <span class="nf-lab-metric__note">The bound a whole project is held under, including its repair rounds.</span>
+     </div>
+     <div class="nf-lab-metric">
+      <span class="nf-lab-metric__label">Cost per accepted outcome</span>
+      <span class="nf-lab-metric__value">Measured, not published</span>
+      <span class="nf-lab-metric__note">Recorded per terminal job since 6 August. No public receipt carries it yet, so no figure is claimed here.</span>
      </div>
      <div class="nf-lab-metric">
       <span class="nf-lab-metric__label">Total token spend</span>
       <span class="nf-lab-metric__value">Not measured</span>
-      <span class="nf-lab-metric__note">Explicitly unknown in the current evidence bundles.</span>
+      <span class="nf-lab-metric__note">Still unknown in the published evidence bundles.</span>
      </div>
     </div>
-    <p><span class="nf-vc-pill nf-lab-pill--unknown">NOT MEASURED</span> Publishing an unsourced cost number on an evidence page would defeat the page. These tiles are live slots: each is filled the moment a run emits a cost receipt, and the receipt is linked beside it.</p>
+    <p><span class="nf-vc-pill nf-lab-pill--supported">REPOSITORY-SUPPORTED</span> The ceilings are constants in the customer model policy with a test pinning them, so they are checkable without trusting this page: <a href="https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/main/sites/company-new/functions/_lib/customer-model-policy-v1.ts">the policy</a> and <a href="https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/main/sites/company-new/tests/permanent-delivery-authority.test.mjs">the test that asserts them</a>.</p>
+    <p><span class="nf-vc-pill nf-lab-pill--unknown">NOT PUBLISHED</span> Spend per job is now written down at the end of every terminal job. It is deliberately not quoted here: until a public receipt carries the figure, a number on this page would rest on nothing a reader could open — which is the failure this page exists to avoid. What changed on 6 August is worth stating plainly, because it was worse than a gap: the ledger had always had a column for cost and nothing filled it, so 45 model-backed jobs read exactly $0.000000. That is not a low price. It is an absent measurement, and it is the kind of zero that flatters a company until someone asks.</p>
    </section>
 
    <section class="nf-vc-section" aria-labelledby="lab-gates">
