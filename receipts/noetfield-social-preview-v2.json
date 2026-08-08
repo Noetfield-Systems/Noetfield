@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 45,
+  "indexable_route_count": 46,
   "noindex_route_count": 117,
-  "route_count": 162,
+  "route_count": 163,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -2212,6 +2212,22 @@
       "profile": "corporate",
       "route": "/research-packs/terms.html",
       "title": "Research packs \u2014 Terms of Service \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/research-trader/",
+      "description": "A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model's output.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/research-trader/",
+      "title": "Research Trader \u2014 Noetfield Systems",
       "verdict": "PASS"
     },
     {
