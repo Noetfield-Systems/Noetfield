@@ -328,6 +328,7 @@
     "functions/api/research-packs/events.js",
     "functions/api/research-packs/health.js",
     "functions/api/research-packs/leads.js",
+    "functions/api/research-trader/state.js",
     "functions/api/runway/job-status.js",
     "functions/api/runway/jobs.js",
     "functions/api/status/ai-factory.js",

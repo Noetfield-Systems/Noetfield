@@ -339,3 +339,60 @@ def test_every_public_contact_topic_has_a_select_option() -> None:
         )
     assert referenced <= configured, f"missing contact topics: {sorted(referenced - configured)}"
     assert "YOUR_FORMSPREE_ID" not in contact
+
+
+RESEARCH_TRADER = ROOT / "research-trader" / "index.html"
+
+
+def test_research_trader_never_bakes_a_running_total_into_the_markup() -> None:
+    """The page's argument is that its figures are checkable.
+
+    A running total written into the markup is true on the day it ships and
+    false the next morning, with nothing on the page to say which. So the live
+    figures must arrive from the feed at runtime and the authored slots must be
+    empty, while the one historical sentence that does carry numbers is dated
+    and marked as fixed.
+    """
+    page = read(RESEARCH_TRADER)
+
+    # Every live figure has an empty slot in the source and names its feed key.
+    for key in ("cyclesRun", "screenings", "modelVerdicts", "clearedGate", "spendUsd"):
+        assert re.search(rf'<span data-rt="{key}"></span>', page), f"{key} slot is not empty"
+
+    # The no-JavaScript state says plainly that it is not asserting current
+    # numbers, rather than showing a figure it cannot date.
+    assert "This copy of the page does not state them" in page
+    assert 'href="/api/research-trader/state"' in page
+
+    # The single numeric sentence that is allowed is past tense and dated.
+    assert '<time datetime="2026-08-07">' in page
+    assert "is fixed at its date and is not revised" in page
+
+    # The exact sentences that used to go stale must not come back.
+    for stale in (
+        "As of 7 August 2026, across eight daily cycles",
+        "none of the seven cleared the risk gate",
+        "A gate that has passed nothing yet",
+    ):
+        assert stale not in page, f"frozen running total returned: {stale}"
+
+
+def test_research_trader_states_the_schedule_and_brief_link_correctly() -> None:
+    """Two defects that shipped in the first version of this page.
+
+    The cron is fixed at 15:00 UTC, which is 07:00 in Vancouver only during
+    Pacific Standard Time; for most of the year it is 08:00. And the "brief"
+    link pointed at the agent's commercial landing page rather than its
+    evidence view, sending a reader of a Proof page to pricing.
+    """
+    page = read(RESEARCH_TRADER)
+
+    assert "Every morning at seven" not in page
+    assert "at 07:00 Vancouver time" not in page
+    assert "15:00 UTC" in page
+
+    assert "workers.dev/brief" in page
+    assert not re.search(r'workers\.dev/"\s+rel="noopener noreferrer">Open the live brief', page)
+
+    # Inner pages are pinned to the current stylesheet build.
+    assert "noetfield-corporate-v1.css?v=5" in page

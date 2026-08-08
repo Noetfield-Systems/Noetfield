@@ -84,6 +84,30 @@ check_absent "protected investors hub has no embedded intake" investors/index.ht
   'nfInvestorForm' 'data-nf-intake-form' 'noetfield-intake-core.js' 'href="/workspace/' \
   'SourceB' 'validation vertical developed and operated'
 
+check_file "research trader reads its totals rather than asserting them" research-trader/index.html \
+  '<link rel="canonical" href="https://www.noetfield.com/research-trader/" />' \
+  '<h1 id="rt-title">An agent that mostly says no</h1>' \
+  '/api/research-trader/state' \
+  'data-rt="cyclesRun"' 'data-rt="spendUsd"' \
+  'rt-live__fallback' \
+  'This copy of the page does not state them' \
+  'nf-motor-architecture' 'nf-corp-table' 'nf-motor-receipt' \
+  'NON_POSITIVE_OR_NON_FINITE_LEVEL' 'LOW_REWARD_RISK' 'MODE_NOT_ALLOWED' \
+  'RESEARCH_ONLY' \
+  'nf-corp-header' 'nf-corp-footer'
+
+# The page argues that its numbers are checkable. A running total baked into the
+# markup is the exact failure that argument forbids: it is true on the day it
+# ships and false the next morning, with nothing on the page to say so. These
+# were the literal sentences that did it, and the schedule that was an hour out.
+check_absent "research trader states no frozen running total" research-trader/index.html \
+  'As of 7 August 2026, across eight daily cycles' \
+  'none of the seven cleared the risk gate' \
+  'A gate that has passed nothing yet' \
+  'Every morning at seven' \
+  'at 07:00 Vancouver time' \
+  'workers.dev/" rel="noopener noreferrer">Open the live brief'
+
 check_file "protected proof truth boundaries" proof/index.html \
   '<title>Evidence register — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/proof/" />' \

@@ -2216,7 +2216,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/research-trader/",
-      "description": "A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model's output.",
+      "description": "A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides.",
       "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
       "indexability": "indexable",
       "noindex_reason": null,
