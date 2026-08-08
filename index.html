@@ -61,6 +61,18 @@
    ]
  }
  </script>
+<style>
+/* Three columns divide eight cards as 3+3+2, leaving one cell of bare page
+   showing through the grid's own background — visible as a grey block, and the
+   reason the row looked unfinished at seven cards too. The last card takes the
+   spare column when it is the only gap. Conditional by construction: it matches
+   only when the count leaves exactly one cell over, so adding a ninth card
+   silently turns it off. Scoped above 860px because the two- and one-column
+   breakpoints below tile evenly on their own. */
+@media (min-width: 861px) {
+ body.nf-corp.nf-home .runways > .runway:last-child:nth-child(3n + 2) { grid-column: span 2; }
+}
+</style>
 </head>
 <body class="nf-corp nf-home">
  <a class="nf-skip" href="#main">Skip to main content</a>
