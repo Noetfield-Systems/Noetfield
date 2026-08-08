@@ -347,6 +347,10 @@
     "/start/": {
       "title": "Noetfield \u2014 Start Free Sandbox",
       "description": "Developer sandbox: sign up, try Governance API and workspace without a sales call. 14-day trial, 50 evaluate calls."
+    },
+    "/research-trader/": {
+      "title": "Research Trader \u2014 Noetfield Systems",
+      "description": "A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides."
     }
   },
   "source_sync_routes": [
@@ -370,6 +374,7 @@
     "/investors/",
     "/motors/",
     "/proof/",
+    "/research-trader/",
     "/demo/complete-run/",
     "/runways/decision-brief/",
     "/trust-brief/intake/",

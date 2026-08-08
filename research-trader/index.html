@@ -5,12 +5,12 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <!-- Noetfield social preview v2: generated from data/noetfield-social-preview-v2.json -->
  <title>Research Trader — Noetfield Systems</title>
- <meta name="description" content="A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model&#x27;s output." />
+ <meta name="description" content="A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides." />
  <meta name="robots" content="index,follow" />
  <link rel="canonical" href="https://www.noetfield.com/research-trader/" />
  <meta property="og:site_name" content="Noetfield" />
  <meta property="og:title" content="Research Trader — Noetfield Systems" />
- <meta property="og:description" content="A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model&#x27;s output." />
+ <meta property="og:description" content="A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides." />
  <meta property="og:url" content="https://www.noetfield.com/research-trader/" />
  <meta property="og:type" content="website" />
  <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-proof-v2.png" />
@@ -20,7 +20,7 @@
  <meta property="og:image:alt" content="Noetfield proof — current systems, verified states and public execution receipts." />
  <meta name="twitter:card" content="summary_large_image" />
  <meta name="twitter:title" content="Research Trader — Noetfield Systems" />
- <meta name="twitter:description" content="A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model&#x27;s output." />
+ <meta name="twitter:description" content="A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides." />
  <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-proof-v2.png" />
  <meta name="twitter:image:alt" content="Noetfield proof — current systems, verified states and public execution receipts." />
  <!-- nf-json-ld: webpage -->
@@ -29,7 +29,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Research Trader \u2014 Noetfield Systems",
-  "description": "A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model's output.",
+  "description": "A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides.",
   "url": "https://www.noetfield.com/research-trader/",
   "isPartOf": {
     "@type": "WebSite",
@@ -46,6 +46,78 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=5" />
+ <!-- Hand-authored and deliberately NOT marked "nf-json-ld: webpage", so the
+      social-preview sync leaves it in place. Dataset is accurate here: the daily
+      brief is a published dataset with a distribution and a stated method. -->
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Dataset",
+      "@id": "https://www.noetfield.com/research-trader/#cycle-receipts",
+      "name": "Noetfield Research Trader — daily cycle receipts",
+      "description": "One receipt per daily research cycle: every symbol screened, every verdict the model returned, the deterministic risk decision, its literal reason codes, and the model spend for the cycle. No orders are placed and no positions are held.",
+      "url": "https://www.noetfield.com/research-trader/",
+      "mainEntityOfPage": "https://www.noetfield.com/research-trader/",
+      "isAccessibleForFree": true,
+      "creator": {
+        "@type": "Organization",
+        "name": "Noetfield Systems Inc.",
+        "url": "https://www.noetfield.com/about/"
+      },
+      "measurementTechnique": "A deterministic risk gate applied to model-written trade plans. The gate is a pure function of the plan, the market features and a fixed configuration; it makes no model call.",
+      "keywords": ["agent governance", "deterministic gate", "model refusal", "research only"],
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "name": "Live agent state",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://www.noetfield.com/api/research-trader/state"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.noetfield.com/research-trader/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Proof", "item": "https://www.noetfield.com/proof/" },
+        { "@type": "ListItem", "position": 2, "name": "Research Trader", "item": "https://www.noetfield.com/research-trader/" }
+      ]
+    }
+  ]
+}
+ </script>
+ <style>
+/* Page-local only. assets/noetfield-corporate-v1.css is hash-pinned by the
+   grade law and must not be edited, so the handful of rules this page needs
+   that the shared sheet does not carry live here. */
+
+/* .nf-corp-table is styled but has no responsive rules, so a wide table would
+   push the page sideways on a phone. Scroll the table, never the document. */
+.rt-scroll { overflow-x: auto; margin: 1.75rem 0 0.75rem; }
+.rt-scroll table { min-width: 640px; margin: 0; }
+.rt-scroll:focus-visible { outline: 3px solid #d7a84f; outline-offset: 3px; }
+.nf-corp-table caption { caption-side: top; padding: 0 0 0.7rem; color: #6b7685; font-size: 0.78rem; text-align: left; }
+/* Match the mono/uppercase column labels used by .nf-state-table__head. */
+.nf-corp-table thead th { font-family: "DM Mono", monospace; font-size: 0.59rem; letter-spacing: 0.06em; text-transform: uppercase; color: #6b7685; }
+.nf-corp-table tbody th { font-weight: 600; }
+.nf-corp-table code { font-family: "DM Mono", monospace; font-size: 0.78em; }
+
+/* The receipt head's right slot is green in the shared sheet, which reads as
+   success. This card records a rejection. */
+.rt-receipt--refused .nf-motor-receipt__head span:last-child { color: #e79a92; }
+
+/* Field provenance: every live figure names the feed key it came from. */
+code.rt-field { display: block; margin-top: 0.2rem; font-family: "DM Mono", monospace; font-size: 0.62rem; letter-spacing: 0.04em; color: #6b7685; }
+
+/* Reserve height so the authored block and the figures do not shift the page.
+   `hidden` must beat the grid display or both would render at once. */
+.rt-live { min-height: 20rem; }
+.rt-figs { display: grid; gap: 1.25rem; }
+.rt-figs[hidden], .rt-live__fallback[hidden], #rt-live-meta[hidden] { display: none; }
+.rt-live[data-state="stale"] .nf-motor-receipt dd { color: #6b7685; }
+ </style>
 </head>
 <body class="nf-corp nf-corp--inner">
  <a class="nf-skip" href="#main">Skip to main content</a>
@@ -64,8 +136,22 @@
  <main id="main">
   <section class="nf-inner-hero" aria-labelledby="rt-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
-    <div><p class="nf-corp-kicker"><a href="/proof/">Proof</a> · Research Trader</p><h1 id="rt-title">An agent that mostly says no</h1></div>
-    <div><p class="nf-corp-lead">Every morning at seven, a Noetfield agent screens a crypto watchlist, drafts a trade plan for anything that survives, and then checks its own plan with arithmetic. Almost every plan fails that check and is thrown away in public. That refusal is the product being demonstrated, not a malfunction.</p></div>
+    <div>
+     <p class="nf-corp-kicker"><a href="/proof/">Proof</a> · Research Trader</p>
+     <h1 id="rt-title">An agent that mostly says no</h1>
+    </div>
+    <div>
+     <p class="nf-corp-lead">Once a day, a Noetfield agent screens a crypto watchlist, asks a model for a plan only on the few candidates that survive plain arithmetic, and then puts whatever comes back through a gate that asks the model nothing. Almost nothing gets through, and every rejection is published with its reasons.</p>
+     <div class="nf-status-rail">
+      <i class="nf-status nf-status--live">One cycle a day · 15:00 UTC</i>
+      <i class="nf-status nf-status--planned">Research only · places no orders</i>
+      <i class="nf-status nf-status--demo">No performance claimed</i>
+     </div>
+     <div class="nf-corp-actions">
+      <a class="nf-button nf-button--primary" href="https://noetfield-ai-trader.sina-kazemnezhad-ca.workers.dev/brief" rel="noopener noreferrer">Read today's brief ↗</a>
+      <a class="nf-button nf-button--secondary" href="#rt-gate">See what the gate requires</a>
+     </div>
+    </div>
    </div>
   </section>
 
@@ -76,21 +162,216 @@
    </div>
   </section>
 
-  <section class="nf-corp-section" aria-labelledby="rt-what">
+  <section class="nf-corp-section nf-motor-architecture-section" id="rt-cycle" aria-labelledby="rt-cycle-title">
    <div class="nf-corp-wrap">
-    <div class="nf-section-head nf-section-head--full"><h2 id="rt-what">What it does</h2></div>
-    <p class="nf-corp-prose">One run per day, at 07:00 Vancouver time. It pulls public market data for a watchlist, discards most candidates using plain arithmetic before any model is called, and asks a model to write a plan only for the few that survive.</p>
-    <p class="nf-corp-prose">Each plan is then put through a risk gate that does not ask the model anything. The gate checks that the entry, stop, and target are real finite numbers, that the reward justifies the risk, that the position size is valid. A plan that fails any check is rejected, and the specific reasons are published alongside it.</p>
-    <p class="nf-corp-prose">The result is a short daily brief listing what was screened, what was analyzed, what was rejected, and why.</p>
+    <div class="nf-section-head">
+     <div>
+      <p class="nf-corp-eyebrow">01 · Cycle</p>
+      <h2 id="rt-cycle-title">One cycle, five stages.</h2>
+     </div>
+     <p>Deterministic work first, the model once, the gate last. The order is the control — the model appears at exactly one stage, and it is never the stage that decides.</p>
+    </div>
+
+    <figure class="nf-motor-architecture" aria-labelledby="rt-cycle-title" aria-describedby="rt-cycle-text">
+     <div class="nf-motor-architecture__stage nf-motor-architecture__input">
+      <strong>Scan</strong><span>12 symbols · 200 hourly bars each · public market data</span>
+     </div>
+     <span class="nf-motor-architecture__arrow" aria-hidden="true">↓</span>
+
+     <div class="nf-motor-architecture__stage">
+      <strong>Screen</strong><span>Plain arithmetic · no model call · most candidates end here</span>
+     </div>
+     <span class="nf-motor-architecture__arrow" aria-hidden="true">↓</span>
+
+     <div class="nf-motor-architecture__runtime">
+      <div class="nf-motor-architecture__guardrails">
+       <span>At most 3 candidates</span><span>US$0.50 per cycle</span><span>Refusal permitted</span><span>Cost recorded</span>
+      </div>
+      <div class="nf-motor-architecture__execution">
+       <small>Analyze · the only model call in the cycle</small>
+       <strong>The model returns a verdict</strong>
+       <span>Direction, entry, stop, target, setup score, confidence, thesis — or no setup at all</span>
+      </div>
+      <div class="nf-motor-architecture__controls">
+       <span>Output is a proposal</span><span>Never a decision</span><span>Unparseable output is discarded</span><span>Ceiling enforced</span>
+      </div>
+     </div>
+     <span class="nf-motor-architecture__arrow" aria-hidden="true">↓</span>
+
+     <div class="nf-motor-architecture__stage">
+      <strong>Risk</strong><span>Deterministic gate · a pure function · asks the model nothing</span>
+     </div>
+     <span class="nf-motor-architecture__arrow" aria-hidden="true">↓</span>
+
+     <div class="nf-motor-architecture__stage nf-motor-architecture__output">
+      <strong>Receipt</strong><span>Every symbol screened, every verdict, every decision and its literal reason codes</span>
+     </div>
+
+     <figcaption id="rt-cycle-text">Text equivalent: a cycle runs five stages in a fixed order. Scan pulls 200 hourly bars for each of twelve symbols from public market data. Screen applies plain arithmetic — data freshness, volume, volatility, complete indicators and a directional read — and discards most candidates before any model is called. Analyze is the only stage that calls a model; it is capped at three candidates and fifty US cents for the whole cycle, and it returns either a plan with direction, entry, stop, target, setup score, confidence and thesis, or a statement that there is no setup. Output that cannot be parsed is discarded rather than repaired. Risk is a deterministic gate that receives the verdict and asks the model nothing; it is a pure function of the verdict, the market features and a fixed configuration. Receipt publishes what was screened, what was analyzed, what was decided, and the exact reason codes behind each decision. The model appears at one stage only, and it is never the stage that decides.</figcaption>
+    </figure>
+
+    <div class="rt-scroll" role="region" aria-labelledby="rt-params-cap" tabindex="0">
+     <table class="nf-corp-table">
+      <caption id="rt-params-cap">Standing configuration. Fixed for every cycle, not chosen per run.</caption>
+      <thead><tr><th scope="col">Parameter</th><th scope="col">Value</th><th scope="col">Stage it binds</th></tr></thead>
+      <tbody>
+       <tr><th scope="row">Watchlist</th><td>12 USDT pairs — BTC, ETH, SOL, BNB, XRP, ADA, AVAX, LINK, DOT, POL, LTC, ATOM</td><td>Scan</td></tr>
+       <tr><th scope="row">Bars per symbol</th><td>200 candles at one hour</td><td>Scan</td></tr>
+       <tr><th scope="row">Candidates sent to a model</th><td>At most 3 per cycle</td><td>Screen → Analyze</td></tr>
+       <tr><th scope="row">Model spend ceiling</th><td>US$0.50 per cycle. The cycle stops calling the model at that line.</td><td>Analyze</td></tr>
+       <tr><th scope="row">Schedule</th><td>One cycle per day at 15:00 UTC — 07:00 in Vancouver during Pacific Standard Time, 08:00 during daylight saving</td><td>Whole cycle</td></tr>
+       <tr><th scope="row">Mode</th><td><code>RESEARCH_ONLY</code>. The mode is not read from the environment: changing it requires a code change and a review, not a variable on a runner.</td><td>Risk, first and unconditional</td></tr>
+      </tbody>
+     </table>
+    </div>
+    <p class="nf-corp-disclaimer">Mirrored from the agent's configuration at commit <code>69a7427</code>, 30 July 2026. If that configuration changes, this table is wrong until it is re-pinned.</p>
    </div>
   </section>
 
-  <section class="nf-corp-section" aria-labelledby="rt-not">
+  <section class="nf-corp-section" id="rt-gate" aria-labelledby="rt-gate-title">
    <div class="nf-corp-wrap">
-    <div class="nf-section-head nf-section-head--full"><h2 id="rt-not">What it does not do</h2></div>
-    <p class="nf-corp-prose">It places no orders. It holds no positions and no money. It is not connected to an exchange, a broker, or any account, and there is no path in the code by which it could place a trade.</p>
-    <p class="nf-corp-prose">It is not investment advice and it is not a recommendation service. Nothing on this page or in the daily brief is tailored to any person's circumstances, and no one should treat a published brief as a reason to buy or sell anything.</p>
-    <p class="nf-corp-prose">No performance is claimed. There is no track record, no return figure, and no backtest presented as one. The agent has never taken a position, so it has never been right or wrong about one.</p>
+    <div class="nf-section-head">
+     <div>
+      <p class="nf-corp-eyebrow">02 · The gate</p>
+      <h2 id="rt-gate-title">Every check, and the exact word it says when it fails.</h2>
+     </div>
+     <p>The gate is a pure function — no model, no network, no clock. Every published rejection names the checks it failed using these strings, so a code in the brief can be traced back to a row here.</p>
+    </div>
+
+    <div class="rt-scroll" role="region" aria-labelledby="rt-gate-cap" tabindex="0">
+     <table class="nf-corp-table">
+      <caption id="rt-gate-cap">Any single failure rejects the verdict. Reason codes are published verbatim in the daily brief.</caption>
+      <thead><tr><th scope="col">Check</th><th scope="col">Requirement</th><th scope="col">Reason code emitted</th></tr></thead>
+      <tbody>
+       <tr><th scope="row">Mode</th><td>Must be <code>RESEARCH_ONLY</code>. Checked first and unconditionally.</td><td><code>MODE_NOT_ALLOWED</code></td></tr>
+       <tr><th scope="row">Data freshness</th><td>Newest bar under 75 minutes old</td><td><code>STALE_DATA</code></td></tr>
+       <tr><th scope="row">Level validity</th><td>Entry, stop and target all finite and above zero</td><td><code>NON_POSITIVE_OR_NON_FINITE_LEVEL</code></td></tr>
+       <tr><th scope="row">Long coherence</th><td>Stop below entry, target above entry</td><td><code>LONG_STOP_NOT_BELOW_ENTRY</code><br /><code>LONG_TARGET_NOT_ABOVE_ENTRY</code></td></tr>
+       <tr><th scope="row">Short coherence</th><td>Stop above entry, target below entry</td><td><code>SHORT_STOP_NOT_ABOVE_ENTRY</code><br /><code>SHORT_TARGET_NOT_BELOW_ENTRY</code></td></tr>
+       <tr><th scope="row">Direction</th><td>Long or short. Neutral is not actionable.</td><td><code>NEUTRAL_DIRECTION_IS_NOT_ACTIONABLE</code></td></tr>
+       <tr><th scope="row">Setup present</th><td>The model must not have reported that there is no setup</td><td><code>NO_SETUP</code></td></tr>
+       <tr><th scope="row">Setup score</th><td>At least 70 out of 100</td><td><code>LOW_SCORE</code></td></tr>
+       <tr><th scope="row">Reward to risk</th><td>At least 2.0, recomputed by the gate from the model's own levels rather than accepting the model's figure</td><td><code>LOW_REWARD_RISK</code></td></tr>
+       <tr><th scope="row">Volatility</th><td>Average true range at most 5% of price</td><td><code>HIGH_VOLATILITY</code></td></tr>
+       <tr><th scope="row">Position size</th><td>Derived size finite and above zero</td><td><code>INVALID_SIZE</code></td></tr>
+       <tr><th scope="row">Notional</th><td>Derived notional finite and above zero</td><td><code>INVALID_NOTIONAL</code></td></tr>
+      </tbody>
+     </table>
+    </div>
+
+    <p class="nf-corp-prose">One threshold does not reject. A verdict that clears every check above but carries confidence below 0.70 is recorded as <code>WATCHLIST</code> rather than <code>APPROVED</code>. And <code>APPROVED</code> does not mean take the trade — it means every machine check passed and a human should now look at it.</p>
+
+    <details class="nf-rw-details">
+     <summary class="nf-rw-details__summary">Three rules that have never fired</summary>
+     <div class="nf-corp-wrap">
+      <p class="nf-corp-prose">The gate also enforces total exposure, daily loss and drawdown limits, emitting <code>EXPOSURE_LIMIT</code>, <code>DAILY_LOSS_LIMIT</code> and <code>DRAWDOWN_LIMIT</code>. The agent holds no account, so the position and loss state those three read is supplied as zero on every published cycle and none of them has ever fired. They are listed because they are in the code, not because they are doing work here.</p>
+     </div>
+    </details>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" id="rt-refusal" aria-labelledby="rt-refusal-title">
+   <div class="nf-corp-wrap nf-motor-evidence-grid">
+    <div>
+     <p class="nf-corp-eyebrow">03 · A refusal</p>
+     <h2 id="rt-refusal-title">What a cycle actually looks like.</h2>
+     <div class="nf-corp-prose">
+      <p>One decision, quoted from a recorded receipt exactly as it was stored. It is worth reading closely, because it is not the tidy story. The model was asked about three candidates. Two of its three answers came back unparseable and were discarded. The third said there was no setup — and the gate then rejected that non-plan on six separate counts, because a verdict with no direction and no levels fails almost every check there is.</p>
+     </div>
+    </div>
+
+    <div class="nf-motor-receipt rt-receipt--refused" aria-labelledby="rt-refusal-card">
+     <div class="nf-motor-receipt__head">
+      <span id="rt-refusal-card">Recorded decision · run <code>gha-31190377658-1</code></span>
+      <span>Rejected</span>
+     </div>
+     <dl>
+      <div><dt>Cycle completed</dt><dd>7 August 2026, 15:02 UTC</dd></div>
+      <div><dt>Symbols screened</dt><dd>12</dd></div>
+      <div><dt>Sent to the model</dt><dd>3</dd></div>
+      <div><dt>Discarded before a verdict</dt><dd>2 — <code>ANALYST_REFUSED:UNPARSEABLE_OUTPUT</code></dd></div>
+      <div><dt>Symbol decided</dt><dd>ADAUSDT</dd></div>
+      <div><dt>Model verdict</dt><dd><code>NO_SETUP</code> · direction <code>NEUTRAL</code></dd></div>
+      <div><dt>Levels proposed</dt><dd>Entry 0 · stop 0 · target 0</dd></div>
+      <div><dt>Model setup score</dt><dd>30 of 100</dd></div>
+      <div><dt>Model confidence</dt><dd>0.20</dd></div>
+      <div><dt>Gate decision</dt><dd>REJECTED</dd></div>
+      <div><dt>Reasons</dt><dd><code>NON_POSITIVE_OR_NON_FINITE_LEVEL</code> · <code>NO_SETUP</code> · <code>LOW_SCORE</code> · <code>LOW_REWARD_RISK</code> · <code>INVALID_SIZE</code> · <code>INVALID_NOTIONAL</code></dd></div>
+      <div><dt>Model spend, this cycle</dt><dd>US$0.006 of a US$0.50 ceiling</dd></div>
+     </dl>
+    </div>
+   </div>
+
+   <div class="nf-corp-wrap">
+    <p class="nf-corp-prose">This is the honest boundary of what has been shown so far. The published record demonstrates that the gate runs, that it recomputes rather than trusts, and that everything it refuses is recorded with reasons. It does not yet contain the more interesting case — a confident, well-formed plan that the gate overrules on the arithmetic. That case has not occurred in the published cycles, and this page will not claim it until it does.</p>
+    <p class="nf-corp-disclaimer">A published rejection proves the gate ran and what it decided. It does not prove the decision was correct.</p>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="rt-record-title">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head">
+     <div>
+      <p class="nf-corp-eyebrow">04 · The record</p>
+      <h2 id="rt-record-title">The totals, read from the feed as this page loads.</h2>
+     </div>
+     <p>Every figure below names the field it came from, so it can be checked against the source rather than taken on trust.</p>
+    </div>
+
+    <div class="rt-live" id="rt-live" data-state="authored">
+     <div class="rt-live__fallback">
+      <p class="nf-corp-prose">The running totals are read from the live feed when this page loads. This copy of the page does not state them: a number printed here would be the number that was true when the page was published, not the number that is true now.</p>
+      <p class="nf-corp-prose"><a href="/api/research-trader/state">Read the feed this page uses →</a></p>
+     </div>
+
+     <div class="rt-figs" hidden>
+      <div class="nf-motor-receipt" aria-labelledby="rt-record-card">
+       <div class="nf-motor-receipt__head">
+        <span id="rt-record-card">Aggregate across recorded cycles</span>
+        <span>Research only</span>
+       </div>
+       <dl>
+        <div><dt>Cycles recorded</dt><dd><span data-rt="cyclesRun"></span><code class="rt-field">stats.cyclesRun</code></dd></div>
+        <div><dt>Screenings performed</dt><dd><span data-rt="screenings"></span><code class="rt-field">stats.symbolsScreened</code></dd></div>
+        <div><dt>Verdicts the model returned</dt><dd><span data-rt="modelVerdicts"></span><code class="rt-field">stats.plansWritten</code></dd></div>
+        <div><dt>Verdicts the gate approved</dt><dd><span data-rt="clearedGate"></span><code class="rt-field">stats.plansPassed</code></dd></div>
+        <div><dt>Total model spend</dt><dd><span data-rt="spendUsd"></span><code class="rt-field">totalSpendUsd</code></dd></div>
+        <div><dt>Observation window</dt><dd>The 25 most recent receipts, not all time</dd></div>
+        <div><dt>Source</dt><dd><a href="/api/research-trader/state">/api/research-trader/state</a></dd></div>
+       </dl>
+      </div>
+     </div>
+
+     <p class="nf-corp-disclaimer" id="rt-live-meta" role="status" aria-live="polite" hidden></p>
+    </div>
+
+    <p class="nf-corp-prose">The first published record, dated <time datetime="2026-08-07">7 August 2026</time>, covered eight cycles: a twelve-symbol watchlist screened eight times, seven verdicts returned by the model, none of them approved by the gate, and roughly three US cents of model spend in total. That sentence is fixed at its date and is not revised.</p>
+    <p class="nf-corp-prose">A verdict is not the same thing as a trade plan. The count above includes cycles where the model declined outright, so it should not be read as a tally of confident proposals the gate struck down. A pass rate in either direction is not by itself evidence that the thresholds are right: it is consistent with a correctly cautious system and also with one too strict to ever act. The feed is published so that this stays checkable rather than asserted.</p>
+   </div>
+  </section>
+
+  <section class="nf-corp-section" aria-labelledby="rt-check-title">
+   <div class="nf-corp-wrap">
+    <div class="nf-section-head nf-section-head--full">
+     <h2 id="rt-check-title">Check it yourself.</h2>
+    </div>
+    <div class="nf-proof-grid">
+     <article class="nf-proof-card">
+      <h3>Today's brief</h3>
+      <p>The current run in full: what was screened, what was analyzed, what was decided, and the reasons behind each decision.</p>
+      <p><a href="https://noetfield-ai-trader.sina-kazemnezhad-ca.workers.dev/brief" rel="noopener noreferrer">Open the brief ↗</a></p>
+     </article>
+     <article class="nf-proof-card">
+      <h3>The raw feed</h3>
+      <p>The machine-readable state this page reads. It answers from this domain, so it still responds — and says why — when the agent itself is unreachable.</p>
+      <p><a href="/api/research-trader/state">Open the feed →</a></p>
+     </article>
+     <article class="nf-proof-card">
+      <h3>The evidence register</h3>
+      <p>What Noetfield claims is proven, what is demonstrated internally, and what is not established at all.</p>
+      <p><a href="/proof/">Open the register →</a></p>
+     </article>
+    </div>
    </div>
   </section>
 
@@ -98,95 +379,41 @@
    <div class="nf-corp-wrap">
     <div class="nf-section-head nf-section-head--full"><h2 id="rt-why">Why we run it</h2></div>
     <p class="nf-corp-prose">Noetfield sells deterministic controls around model output: structure that is checked rather than hoped for, with the failure caught before the answer leaves the system. That claim is easy to make and hard to show, because the interesting case is the one where the model is wrong and something stops it.</p>
-    <p class="nf-corp-prose">Markets supply that case every day, on material where a wrong answer is obviously expensive. So we pointed the same machinery at a domain that punishes false confidence, put it on a fixed schedule, and published the result whether or not it flatters us.</p>
+    <p class="nf-corp-prose">Markets supply that case every day, in a domain that punishes false confidence. So we pointed the same machinery at it, put it on a fixed schedule, and published the result whether or not it flatters us.</p>
     <p class="nf-corp-prose">The same controls are available directly. <a href="/deterministic-api/">See the deterministic API →</a></p>
-   </div>
-  </section>
-
-  <section class="nf-corp-section" aria-labelledby="rt-record">
-   <div class="nf-corp-wrap">
-    <div class="nf-section-head nf-section-head--full"><h2 id="rt-record">The record so far</h2></div>
-    <p class="nf-corp-prose" id="rt-counts" data-rt-counts>As of 7 August 2026, across eight daily cycles: 96 symbols screened, seven plans drafted by the model, and none of the seven cleared the risk gate. Total model spend for all eight runs was about three cents.</p>
-    <p class="nf-corp-prose">A gate that has passed nothing yet is not proof that the gate is well calibrated. It is consistent with a correctly cautious system and also with one that is too strict to ever act, and eight cycles is not enough to tell those apart. The live brief is published so that this stays checkable rather than asserted.</p>
-   </div>
-  </section>
-
-  <section class="nf-corp-section" aria-labelledby="rt-live">
-   <div class="nf-corp-wrap">
-    <div class="nf-section-head nf-section-head--full"><h2 id="rt-live">Read today's brief</h2></div>
-    <p class="nf-corp-prose">The current run, its rejections, and the reasons behind them are published in full.</p>
-    <p class="nf-corp-prose"><a href="https://noetfield-ai-trader.sina-kazemnezhad-ca.workers.dev/" rel="noopener noreferrer">Open the live brief ↗</a></p>
    </div>
   </section>
 
   <section class="nf-corp-section" aria-labelledby="rt-limits">
    <div class="nf-corp-wrap">
-    <div class="nf-section-head nf-section-head--full"><h2 id="rt-limits">Stated plainly</h2></div>
-    <p class="nf-corp-prose">The daily brief is published free and can be read without an account. The live page also lists a paid delivery tier; it is not active, no payment is taken, and no subscription can be started today.</p>
-    <p class="nf-corp-prose">The market data comes from public sources and is not independently audited. The gate enforces the rules it was given; it does not know whether those rules are the right ones. A published rejection proves the gate ran and what it decided. It does not prove the decision was correct.</p>
+    <div class="nf-section-head nf-section-head--full"><h2 id="rt-limits">What this is not</h2></div>
+    <div class="nf-principle-grid">
+     <article>
+      <i class="nf-status nf-status--planned">No orders</i>
+      <h3>It does not trade</h3>
+      <p>It holds no positions and no money, and is not connected to an exchange, a broker or any account. The mode that would be required to approve anything for execution is not settable from the environment.</p>
+     </article>
+     <article>
+      <i class="nf-status nf-status--planned">Not advice</i>
+      <h3>It does not recommend</h3>
+      <p>It is not investment advice and it is not a recommendation service. Nothing on this page or in the daily brief is tailored to any person's circumstances, and no one should treat a published brief as a reason to buy or sell anything.</p>
+     </article>
+     <article>
+      <i class="nf-status nf-status--planned">No record</i>
+      <h3>It claims no performance</h3>
+      <p>No performance is claimed. There is no track record, no return figure, and no backtest presented as one. The agent has never taken a position, so it has never been right or wrong about one.</p>
+     </article>
+     <article>
+      <i class="nf-status nf-status--planned">Not audited</i>
+      <h3>It is not independently verified</h3>
+      <p>The market data comes from public sources and is not independently audited. The gate enforces the rules it was given; it does not know whether those rules are the right ones.</p>
+     </article>
+    </div>
+    <p class="nf-corp-prose">The brief is published free and can be read without an account. The agent's own site also carries a landing page with a paid tier: it is not active, no payment is taken, and no subscription can be started today.</p>
     <p class="nf-corp-prose"><a href="/proof/">The evidence register states what is proven →</a></p>
    </div>
   </section>
  </main>
-<script>
-// The counts above are written into the HTML with a date on them, so the page
-// is honest and indexable with no JavaScript at all — a crawler and a reader
-// with scripts off both get a true sentence, just an ageing one.
-//
-// This replaces that sentence with today's numbers when the agent's own
-// endpoint can be reached. Every failure path leaves the served prose alone,
-// because a page about evidence must not degrade into an empty slot or a zero
-// it cannot vouch for.
-(function () {
- var el = document.getElementById("rt-counts");
- if (!el || !window.fetch) return;
- var ctl = typeof AbortController === "function" ? new AbortController() : null;
- // A slow feed must not leave the reader watching a paragraph that never
- // settles; the dated sentence is a perfectly good answer.
- var timer = ctl ? setTimeout(function () { ctl.abort(); }, 4000) : null;
-
- function plural(n, one, many) { return n === 1 ? one : many; }
-
- fetch("https://noetfield-ai-trader.sina-kazemnezhad-ca.workers.dev/api/state.json", {
-  signal: ctl ? ctl.signal : undefined,
-  referrerPolicy: "no-referrer"
- })
-  .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error(String(r.status))); })
-  .then(function (d) {
-   var s = d && d.stats;
-   if (!s) throw new Error("no stats");
-   var cycles = s.cyclesRun, screened = s.symbolsScreened;
-   var written = s.plansWritten, passed = s.plansPassed;
-   // Zero cycles is a real state, not a fresher version of the sentence below.
-   if (!(cycles > 0)) throw new Error("no cycles");
-   [cycles, screened, written, passed].forEach(function (v) {
-    if (typeof v !== "number" || !isFinite(v) || v < 0) throw new Error("bad count");
-   });
-   var spend = typeof d.totalSpendUsd === "number" && isFinite(d.totalSpendUsd)
-    ? d.totalSpendUsd : null;
-   // en-GB, not en-CA: this has to read "7 August 2026" like the sentence it
-   // replaces, and en-CA renders that date American.
-   var today = new Date().toLocaleDateString("en-GB", {
-    timeZone: "America/Vancouver", day: "numeric", month: "long", year: "numeric"
-   });
-   var gate = passed === 0
-    ? "none of the " + written + " cleared the risk gate"
-    : passed + " of the " + written + " cleared the risk gate";
-   var text = "As of " + today + ", across " + cycles + " daily " +
-    plural(cycles, "cycle", "cycles") + ": " + screened + " symbols screened, " +
-    written + " " + plural(written, "plan", "plans") + " drafted by the model, and " +
-    gate + ".";
-   if (spend !== null) {
-    text += " Total model spend for all " + cycles + " " + plural(cycles, "run", "runs") +
-     " was " + (spend < 0.10 ? "about " + Math.round(spend * 100) + " cents"
-                             : "about $" + spend.toFixed(2)) + ".";
-   }
-   el.textContent = text;
-  })
-  .catch(function () { /* keep the served sentence */ })
-  .then(function () { if (timer) clearTimeout(timer); });
-})();
-</script>
  <footer class="nf-corp-footer">
   <div class="nf-corp-wrap nf-corp-footer__grid">
    <div>
@@ -229,5 +456,94 @@
   </div>
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
  </footer>
+ <script>
+/* Live totals for /research-trader/.
+   The markup above is the authored state. With no JavaScript, no network, or a
+   feed that does not validate, it is left exactly as written — which is why it
+   contains no numbers to go stale. Nothing below ever supplies a figure the
+   page did not receive, with a timestamp, on this pageload. */
+(function () {
+  "use strict";
+  var CURRENT_S = 26 * 3600;   /* a day, plus cron jitter and a DST shift */
+  var LATE_S = 72 * 3600;
+  var SKEW_MS = 10 * 60 * 1000;
+
+  var root = document.getElementById("rt-live");
+  if (!root || !window.fetch) return;
+
+  var figs = root.querySelector(".rt-figs");
+  var fallback = root.querySelector(".rt-live__fallback");
+  var meta = document.getElementById("rt-live-meta");
+  if (!figs || !fallback || !meta) return;
+
+  function vancouver(iso) {
+    try {
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Vancouver", dateStyle: "medium", timeStyle: "short"
+      }).format(new Date(iso)) + " Vancouver time";
+    } catch (e) { return iso; }
+  }
+  function count(n) {
+    try { return n.toLocaleString("en-CA"); } catch (e) { return String(n); }
+  }
+  /* Never raw (false precision) and never $0.00 (implies free). */
+  function usd(n) { return "US$" + (n < 1 ? n.toFixed(3) : n.toFixed(2)); }
+  function put(key, text) {
+    var el = root.querySelector('[data-rt="' + key + '"]');
+    if (el) el.textContent = text;
+  }
+  function whole(n) { return typeof n === "number" && isFinite(n); }
+
+  fetch("/api/research-trader/state", { headers: { Accept: "application/json" } })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (!d || d.schema !== "noetfield.research-trader-state.v1" || d.available !== true) return;
+      if (!d.cycle || !d.cycle.completedAtIso || !d.totals) return;
+
+      var t = d.totals;
+      if (!whole(t.cyclesRun) || !whole(t.screenings) || !whole(t.modelVerdicts) ||
+          !whole(t.clearedGate) || !whole(t.spendUsd)) return;
+
+      var now = Date.now();
+      var completed = Date.parse(d.cycle.completedAtIso);
+      if (!isFinite(completed)) return;
+
+      /* If the device clock disagrees with the server, trust the server's
+         verdict and drop relative phrasing rather than print a wrong age. */
+      var trustLocalClock = Math.abs(now - Date.parse(d.observedAtIso)) <= SKEW_MS;
+      var ageS = (now - completed) / 1000;
+      var cls = trustLocalClock
+        ? (ageS <= CURRENT_S ? "current" : ageS <= LATE_S ? "late" : "stale")
+        : ((d.freshness && d.freshness.class) || "unknown");
+
+      put("cyclesRun", count(t.cyclesRun));
+      put("screenings", count(t.screenings));
+      put("modelVerdicts", count(t.modelVerdicts));
+      put("clearedGate", count(t.clearedGate));
+      put("spendUsd", usd(t.spendUsd));
+
+      var when = vancouver(d.cycle.completedAtIso);
+      var days = Math.max(0, Math.floor(ageS / 86400));
+      var line;
+      if (cls === "late") {
+        line = "Last cycle completed " + when + ", " + days + " day" + (days === 1 ? "" : "s") +
+               " ago. At least one daily run was missed.";
+      } else if (cls === "stale") {
+        line = "These totals are as of " + when + ", " + days + " days ago. The daily schedule has not held.";
+      } else {
+        line = "Last cycle completed " + when + ".";
+      }
+      if (d.source === "edge-cache") line += " Served from a cached reading.";
+      if (d.note) line += " Feed note: " + d.note;
+      meta.textContent = line;
+
+      root.setAttribute("data-state", cls);
+      fallback.hidden = true;
+      figs.hidden = false;
+      meta.hidden = false;
+    })
+    .catch(function () { /* the authored state stands */ });
+})();
+ </script>
 </body>
 </html>
