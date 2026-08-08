@@ -79,7 +79,10 @@ ROUTE_SWEEP = (
     "/gate/partners/apply-integration/",
 )
 
-INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/noetfield/")
+# /proof/noetfield/ is SUPERSEDED and robots noindex,nofollow; its own bundle
+# names the correction as its replacement. Requiring the retired page here is
+# what kept it linked from /investors/ as current diligence material.
+INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/claims-boundary-correction/")
 INVESTOR_CONTACT_TOPICS = ("program-funding", "technical-collaboration")
 INVESTOR_DISCLOSURES = (
     "external customers",
