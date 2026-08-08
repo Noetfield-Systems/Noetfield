@@ -68,7 +68,8 @@
     "/invest/": "investors",
     "/investors/": "investors",
     "/motors/": "motors",
-    "/proof/": "proof"
+    "/proof/": "proof",
+    "/research-trader/": "proof"
   },
   "profile_prefixes": [
     {
@@ -379,6 +380,7 @@
     "/investor-workflows/",
     "/research-packs/",
     "/gel/",
-    "/deterministic-api/"
+    "/deterministic-api/",
+    "/research-trader/"
   ]
 }
