@@ -1,125 +1,145 @@
 {
- "schema": "www-home-golden-baseline-v1",
- "version": "1.1.0",
- "authority": "NF_UI_UX_GRADE_LAW_LOCKED_v1 \u00b7 PR #186 / restore #191",
- "updated_at": "2026-07-30T21:30:00Z",
- "golden_class": "product-surface-recovery-v1",
- "reference_commits": {
-  "pr_186_merge": "ed17241f229be6f7e63d25cfa0c5b51f2f2e25d7",
-  "pr_191_restore": "49a40faa4c2469f83b5d51bceb77e3574cac59c2",
-  "note": "Baseline re-pointed at the NOETFIELD_PRODUCT_SURFACE_RECOVERY_V1 homepage; fonts and CSS pins unchanged; founder visual acceptance pending on preview."
- },
- "files": {
-  "index.html": {
-   "path": "index.html",
-   "min_bytes": 10000,
-   "sha256_pin": null,
-   "sha256_pin_mode": "optional_soft",
-   "note": "Hard pin optional \u2014 markers + fonts are authoritative while nav links may grow."
+  "schema": "www-home-golden-baseline-v1",
+  "version": "1.1.0",
+  "authority": "NF_UI_UX_GRADE_LAW_LOCKED_v1 · PR #186 / restore #191",
+  "updated_at": "2026-07-30T21:30:00Z",
+  "golden_class": "product-surface-recovery-v1",
+  "reference_commits": {
+    "pr_186_merge": "ed17241f229be6f7e63d25cfa0c5b51f2f2e25d7",
+    "pr_191_restore": "49a40faa4c2469f83b5d51bceb77e3574cac59c2",
+    "note": "Baseline re-pointed at the NOETFIELD_PRODUCT_SURFACE_RECOVERY_V1 homepage; fonts and CSS pins unchanged; founder visual acceptance pending on preview."
   },
-  "home_css": {
-   "path": "assets/noetfield-home-v2.css",
-   "min_bytes": 18000,
-   "sha256": "9e7bc25fdb2e890d7c89d076b9e653a3baa97bd39072d9eac72170773d416112"
+  "files": {
+    "index.html": {
+      "path": "index.html",
+      "min_bytes": 10000,
+      "sha256_pin": null,
+      "sha256_pin_mode": "optional_soft",
+      "note": "Hard pin optional — markers + fonts are authoritative while nav links may grow."
+    },
+    "home_css": {
+      "path": "assets/noetfield-home-v2.css",
+      "min_bytes": 18000,
+      "sha256": "9e7bc25fdb2e890d7c89d076b9e653a3baa97bd39072d9eac72170773d416112"
+    },
+    "corporate_css": {
+      "path": "assets/noetfield-corporate-v1.css",
+      "min_bytes": 30000,
+      "sha256": "65ac40f4fa01667de48a57081db7e2943bc4a4c4f5b9ae241e43fc091ebbedd0",
+      "sha256_pin_mode": "founder_approved_tier3_craft_fixes_2026-08-04"
+    }
   },
-  "corporate_css": {
-   "path": "assets/noetfield-corporate-v1.css",
-   "min_bytes": 30000,
-   "sha256": "65ac40f4fa01667de48a57081db7e2943bc4a4c4f5b9ae241e43fc091ebbedd0",
-   "sha256_pin_mode": "founder_approved_tier3_craft_fixes_2026-08-04"
-  }
- },
- "required_font_families": [
-  "Inter",
-  "Newsreader",
-  "DM+Mono"
- ],
- "forbidden_font_families": [
-  "IBM+Plex",
-  "IBM Plex",
-  "Roboto",
-  "Arial",
-  "Comic+Sans"
- ],
- "required_stylesheet_hrefs": [
-  "/assets/noetfield-corporate-v1.css",
-  "/assets/noetfield-home-v2.css"
- ],
- "required_markers": [
-  "nf-corp",
-  "nf-home",
-  "nf-corp-header",
-  "nf-corp-hero",
-  "nf-corp-section",
-  "nf-corp-footer",
-  "id=\"now\"",
-  "id=\"hero-title\"",
-  "/system/",
-  "/applications/",
-  "/proof/",
-  "/public-interest/",
-  "--nf-gold",
-  "--nf-navy",
-  "font-family: \"Inter\"",
-  "font-family: \"Newsreader\""
- ],
- "min_nf_corp_section": 6,
- "min_main_sections": 7,
- "copy_grade": {
-  "h1_id": "hero-title",
-  "h1_min_chars": 40,
-  "h1_max_chars": 120,
-  "hero_lead_max_chars": 420,
-  "max_em_dashes_in_index": 12,
-  "forbid_all_caps_cta": true,
-  "forbidden_cta_substrings": [
-   "INSPECT CURRENT PROOF",
-   "DISCUSS ONE WORKFLOW"
+  "required_font_families": [
+    "Inter",
+    "Newsreader",
+    "DM+Mono"
   ],
-  "forbidden_filler_openers": [
-   "we help companies",
-   "we help businesses",
-   "we help organizations build better"
+  "forbidden_font_families": [
+    "IBM+Plex",
+    "IBM Plex",
+    "Roboto",
+    "Arial",
+    "Comic+Sans"
   ],
-  "required_institutional_verbs_any": [
-   "govern",
-   "commission",
-   "inspect",
-   "bound",
-   "receipt",
-   "deterministic",
-   "authority"
-  ]
- },
- "visual": {
-  "fixture_dir": "tests/www/visual/home-golden",
-  "manifest": "tests/www/visual/home-golden/manifest.json",
-  "playwright_opt_in_env": "NF_WWW_VISUAL",
-  "viewports": [
-   {
-    "id": "home-first-viewport",
-    "width": 1440,
-    "height": 900
-   },
-   {
-    "id": "home-mobile",
-    "width": 390,
-    "height": 844
-   }
-  ]
- },
- "forbidden_regressions": [
-  {
-   "id": "ibm-plex-font-swap",
-   "description": "Do not replace Inter/Newsreader/DM Mono with IBM Plex on corporate home"
+  "required_stylesheet_hrefs": [
+    "/assets/noetfield-corporate-v1.css",
+    "/assets/noetfield-home-v2.css"
+  ],
+  "required_markers": [
+    "nf-corp",
+    "nf-home",
+    "nf-corp-header",
+    "nf-corp-hero",
+    "nf-corp-section",
+    "nf-corp-footer",
+    "id=\"now\"",
+    "id=\"hero-title\"",
+    "/system/",
+    "/applications/",
+    "/proof/",
+    "/public-interest/",
+    "--nf-gold",
+    "--nf-navy",
+    "font-family: \"Inter\"",
+    "font-family: \"Newsreader\""
+  ],
+  "min_nf_corp_section": 6,
+  "min_main_sections": 7,
+  "copy_grade": {
+    "h1_id": "hero-title",
+    "h1_min_chars": 40,
+    "h1_max_chars": 120,
+    "hero_lead_max_chars": 420,
+    "max_em_dashes_in_index": 12,
+    "forbid_all_caps_cta": true,
+    "forbidden_cta_substrings": [
+      "INSPECT CURRENT PROOF",
+      "DISCUSS ONE WORKFLOW"
+    ],
+    "forbidden_filler_openers": [
+      "we help companies",
+      "we help businesses",
+      "we help organizations build better"
+    ],
+    "required_institutional_verbs_any": [
+      "govern",
+      "commission",
+      "inspect",
+      "bound",
+      "receipt",
+      "deterministic",
+      "authority"
+    ]
   },
-  {
-   "id": "drop-nf-corp-hero",
-   "description": "Hero must keep nf-corp-hero class"
+  "visual": {
+    "fixture_dir": "tests/www/visual/home-golden",
+    "manifest": "tests/www/visual/home-golden/manifest.json",
+    "playwright_opt_in_env": "NF_WWW_VISUAL",
+    "viewports": [
+      {
+        "id": "home-first-viewport",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "id": "home-mobile",
+        "width": 390,
+        "height": 844
+      }
+    ]
   },
-  {
-   "id": "thin-section-collapse",
-   "description": "Do not collapse below min_main_sections / min_nf_corp_section"
+  "forbidden_regressions": [
+    {
+      "id": "ibm-plex-font-swap",
+      "description": "Do not replace Inter/Newsreader/DM Mono with IBM Plex on corporate home"
+    },
+    {
+      "id": "drop-nf-corp-hero",
+      "description": "Hero must keep nf-corp-hero class"
+    },
+    {
+      "id": "thin-section-collapse",
+      "description": "Do not collapse below min_main_sections / min_nf_corp_section"
+    }
+  ],
+  "additional_pages": {
+    "/research-trader/": {
+      "path": "research-trader/index.html",
+      "min_bytes": 9000,
+      "required_markers": [
+        "nf-corp-section",
+        "nf-corp-footer",
+        "/assets/noetfield-corporate-v1.css?v=5",
+        "<meta name=\"robots\" content=\"index,follow\" />",
+        "rel=\"canonical\" href=\"https://www.noetfield.com/research-trader/\"",
+        "places no orders",
+        "not investment advice",
+        "No performance is claimed",
+        "no one should treat a published brief as a reason to buy or sell anything"
+      ],
+      "forbidden_markers": [
+        "noindex"
+      ]
+    }
   }
- ]
 }
