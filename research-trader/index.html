@@ -106,7 +106,7 @@
   <section class="nf-corp-section" aria-labelledby="rt-record">
    <div class="nf-corp-wrap">
     <div class="nf-section-head nf-section-head--full"><h2 id="rt-record">The record so far</h2></div>
-    <p class="nf-corp-prose">As of 7 August 2026, across eight daily cycles: 96 symbols screened, seven plans drafted by the model, and none of the seven cleared the risk gate. Total model spend for all eight runs was about three cents.</p>
+    <p class="nf-corp-prose" id="rt-counts" data-rt-counts>As of 7 August 2026, across eight daily cycles: 96 symbols screened, seven plans drafted by the model, and none of the seven cleared the risk gate. Total model spend for all eight runs was about three cents.</p>
     <p class="nf-corp-prose">A gate that has passed nothing yet is not proof that the gate is well calibrated. It is consistent with a correctly cautious system and also with one that is too strict to ever act, and eight cycles is not enough to tell those apart. The live brief is published so that this stays checkable rather than asserted.</p>
    </div>
   </section>
@@ -128,6 +128,65 @@
    </div>
   </section>
  </main>
+<script>
+// The counts above are written into the HTML with a date on them, so the page
+// is honest and indexable with no JavaScript at all — a crawler and a reader
+// with scripts off both get a true sentence, just an ageing one.
+//
+// This replaces that sentence with today's numbers when the agent's own
+// endpoint can be reached. Every failure path leaves the served prose alone,
+// because a page about evidence must not degrade into an empty slot or a zero
+// it cannot vouch for.
+(function () {
+ var el = document.getElementById("rt-counts");
+ if (!el || !window.fetch) return;
+ var ctl = typeof AbortController === "function" ? new AbortController() : null;
+ // A slow feed must not leave the reader watching a paragraph that never
+ // settles; the dated sentence is a perfectly good answer.
+ var timer = ctl ? setTimeout(function () { ctl.abort(); }, 4000) : null;
+
+ function plural(n, one, many) { return n === 1 ? one : many; }
+
+ fetch("https://noetfield-ai-trader.sina-kazemnezhad-ca.workers.dev/api/state.json", {
+  signal: ctl ? ctl.signal : undefined,
+  referrerPolicy: "no-referrer"
+ })
+  .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error(String(r.status))); })
+  .then(function (d) {
+   var s = d && d.stats;
+   if (!s) throw new Error("no stats");
+   var cycles = s.cyclesRun, screened = s.symbolsScreened;
+   var written = s.plansWritten, passed = s.plansPassed;
+   // Zero cycles is a real state, not a fresher version of the sentence below.
+   if (!(cycles > 0)) throw new Error("no cycles");
+   [cycles, screened, written, passed].forEach(function (v) {
+    if (typeof v !== "number" || !isFinite(v) || v < 0) throw new Error("bad count");
+   });
+   var spend = typeof d.totalSpendUsd === "number" && isFinite(d.totalSpendUsd)
+    ? d.totalSpendUsd : null;
+   // en-GB, not en-CA: this has to read "7 August 2026" like the sentence it
+   // replaces, and en-CA renders that date American.
+   var today = new Date().toLocaleDateString("en-GB", {
+    timeZone: "America/Vancouver", day: "numeric", month: "long", year: "numeric"
+   });
+   var gate = passed === 0
+    ? "none of the " + written + " cleared the risk gate"
+    : passed + " of the " + written + " cleared the risk gate";
+   var text = "As of " + today + ", across " + cycles + " daily " +
+    plural(cycles, "cycle", "cycles") + ": " + screened + " symbols screened, " +
+    written + " " + plural(written, "plan", "plans") + " drafted by the model, and " +
+    gate + ".";
+   if (spend !== null) {
+    text += " Total model spend for all " + cycles + " " + plural(cycles, "run", "runs") +
+     " was " + (spend < 0.10 ? "about " + Math.round(spend * 100) + " cents"
+                             : "about $" + spend.toFixed(2)) + ".";
+   }
+   el.textContent = text;
+  })
+  .catch(function () { /* keep the served sentence */ })
+  .then(function () { if (timer) clearTimeout(timer); });
+})();
+</script>
  <footer class="nf-corp-footer">
   <div class="nf-corp-wrap nf-corp-footer__grid">
    <div>
