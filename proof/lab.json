@@ -1,530 +1,535 @@
 {
- "artifacts": {
-  "html": "/proof/lab/",
-  "json": "/proof/lab.json"
- },
- "cases": [
-  {
-   "boundary": "The recording is published only together with the run receipt that backs it.",
-   "id": "case-001-refusal-cycle",
-   "media": {
-    "captions": "/proof/lab/case-001.vtt",
-    "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/poster-v2.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4"
-   },
-   "media_state": "PUBLISHED",
-   "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
-   "takes": [
+  "artifacts": {
+    "html": "/proof/lab/",
+    "json": "/proof/lab.json"
+  },
+  "cases": [
     {
-     "duration_s": 74.4,
-     "recorded": "2026-08-06",
-     "release_tag": "proof-case-001-v1",
-     "sha256": "8979f0066f84dfaa788ca710076f5f767fbcf03c9987a4cac118e595c76b6799",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001.mp4",
-     "status": "SUPERSEDED",
-     "superseded_reason": "Reviewed and rejected: the take followed a status page rather than showing the request being typed, the execution, or the page being built.",
-     "version": "v1"
+      "boundary": "The recording is published only together with the run receipt that backs it.",
+      "id": "case-001-refusal-cycle",
+      "media": {
+        "captions": "/proof/lab/case-001.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/poster-v2.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "subtitle": "The system builds a website and an automation from one plain request, and refuses to invent a fact it was never given.",
+      "takes": [
+        {
+          "duration_s": 74.4,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-001-v1",
+          "sha256": "8979f0066f84dfaa788ca710076f5f767fbcf03c9987a4cac118e595c76b6799",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v1/case-001.mp4",
+          "status": "SUPERSEDED",
+          "superseded_reason": "Reviewed and rejected: the take followed a status page rather than showing the request being typed, the execution, or the page being built.",
+          "version": "v1"
+        },
+        {
+          "duration_s": 84.3,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-001-v2",
+          "sha256": "828997ad328f5d41d5867f25b20eed702ae6cbcfec8c1f08a5c6ad7f3046ea31",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v2"
+        }
+      ],
+      "title": "Proof Case 001 — The Refusal Cycle",
+      "type": "recorded_demonstration",
+      "version": "v2"
     },
     {
-     "duration_s": 84.3,
-     "recorded": "2026-08-06",
-     "release_tag": "proof-case-001-v2",
-     "sha256": "828997ad328f5d41d5867f25b20eed702ae6cbcfec8c1f08a5c6ad7f3046ea31",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
-     "version": "v2"
-    }
-   ],
-   "title": "Proof Case 001 — The Refusal Cycle",
-   "type": "recorded_demonstration",
-   "version": "v2"
-  },
-  {
-   "boundary": "Shows the front door only. The build, the published page and the automation begin after sign-up and are not in this recording.",
-   "id": "case-002-front-door",
-   "media": {
-    "captions": "/proof/lab/case-002.vtt",
-    "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002-poster.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4"
-   },
-   "media_state": "PUBLISHED",
-   "reproducible_without_account": true,
-   "sha256": {
-    "captions": "37438490ff7b8aff802f18a0b64aa2b1427f5bb4778825aec301018d07ee7eb4",
-    "mp4": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
-    "poster": "d34b9cdbe13ac2140abb988c8fc1171b561e7ad74cc7b3be01a6b29fa9b6444a"
-   },
-   "subtitle": "One sentence asks for a website and the automation behind it. The plan answers both halves — before an account exists.",
-   "takes": [
-    {
-     "duration_s": 17.7,
-     "recorded": "2026-08-06",
-     "release_tag": "proof-case-002-v1",
-     "sha256": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
-     "version": "v1"
-    }
-   ],
-   "title": "Proof Case 002 — The Front Door",
-   "type": "recorded_demonstration",
-   "version": "v1"
-  },
-  {
-   "boundary": "Films the delivered result, not the build. A different run from Case 002 — it does not continue it. The work between the request and the page is not shown.",
-   "id": "case-004-delivered-page",
-   "media": {
-    "captions": "/proof/lab/case-004.vtt",
-    "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004-poster.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4"
-   },
-   "media_state": "PUBLISHED",
-   "run": {
-    "delivery_confirmed_by": "double fetch of the live public URL with matching body hashes",
-    "elapsed_s": 17,
-    "project_id": "prj_6757fd37dcc143e997bbde4b",
-    "recorded": "2026-08-06"
-   },
-   "sha256": {
-    "captions": "0657aa58cbffcb4b375a3cabf034260a2af75611c494fac0157552d52eaa34ce",
-    "mp4": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
-    "poster": "335fed01c09997a8240adf7c5ee8050ea2b1318cfe0ac64f4bcb87ae56d8d991"
-   },
-   "subtitle": "The finished result: a page built from one plain request and published to a public address, read top to bottom.",
-   "takes": [
-    {
-     "duration_s": 13.0,
-     "recorded": "2026-08-06",
-     "release_tag": "proof-case-004-v1",
-     "sha256": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
-     "version": "v1"
-    }
-   ],
-   "title": "Proof Case 004 — A Delivered Page",
-   "type": "recorded_demonstration",
-   "version": "v1"
-  },
-  {
-   "boundary": "Shows the engine's own properties only — determinism, sensitivity and token binding. This is not a customer-outcome run: nothing is built for a customer and nothing is delivered in this recording. The artifacts under test are fixtures carried by the lab, not a customer's code.",
-   "id": "case-005-determinism-binding",
-   "media": {
-    "captions": "/proof/lab/case-005.vtt",
-    "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005-poster.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4"
-   },
-   "media_state": "PUBLISHED",
-   "reproducible_without_account": true,
-   "sha256": {
-    "captions": "0d93fc1177738e1d1dcf92de836be59f5ac922d18cd66ef3e42e8b81a1e1a4fa",
-    "mp4": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
-    "poster": "09915c51690a1536d6c1da6fd54f33e2bbcb4f3b58496207c169024767022e44"
-   },
-   "subtitle": "A hundred runs collapse to one verdict hash, six controls move it, and a still-valid deploy token refuses an artifact that changed by one byte.",
-   "takes": [
-    {
-     "duration_s": 31.3,
-     "recorded": "2026-08-06",
-     "release_tag": "proof-case-005-v1",
-     "sha256": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
-     "version": "v1"
-    }
-   ],
-   "title": "Proof Case 005 — Determinism & Binding",
-   "type": "recorded_demonstration",
-   "version": "v1"
-  },
-  {
-   "boundary": "A customer-outcome run on production: one request, two delivered artifacts. It does not show the model's reasoning, and it is a single run — not a success rate. The automation file is delivered for the client to import; this recording does not show it executing inside their n8n. Filmed as a production-faithful cockpit animatic replay, not a Screen Studio capture of a live session.",
-   "id": "case-006-one-sentence-two-deliverables",
-   "media": {
-    "captions": "/proof/lab/case-006.vtt",
-    "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006-poster.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006.mp4"
-   },
-   "media_state": "PUBLISHED",
-   "reproducible_without_account": false,
-   "run": {
-    "delivery_confirmed_by": "production-faithful cockpit animatic of dual-deliverable run",
-    "elapsed_s": 67.7,
-    "recorded": "2026-08-07"
-   },
-   "sha256": {
-    "captions": "74c1befb3ae17de1a4e053d7661695d7a5874e89b1330cde9336cc2064bed796",
-    "mp4": "9e70ae78688e6a8af51dcfca2f33541656185cf0f5b720270544df64e06e102d",
-    "poster": "30a28b0273661537f5d058a799d2ea2220733830f6915c86c17e03276bd5d70a",
-    "webm_source": "52a61c60a171840b5ba54cd13309899faf30df36b69c70928249552926636f85"
-   },
-   "subtitle": "A client asks for a landing page and the automation behind it in one sentence; the front person hires a team, publishes the page, provisions the workflow, and hands over both.",
-   "takes": [
-    {
-     "duration_s": 67.7,
-     "recorded": "2026-08-07",
-     "release_tag": "proof-case-006-v1",
-     "sha256": "9e70ae78688e6a8af51dcfca2f33541656185cf0f5b720270544df64e06e102d",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
-     "version": "v1"
-    }
-   ],
-   "title": "Proof Case 006 — One Sentence, Two Deliverables",
-   "type": "recorded_demonstration",
-   "version": "v1"
-  },
-  {
-   "boundary": "Full customer path on production: front door wizard (business owner), signup, workspace prompt typed to Front Person, cockpit with team in flight, then edited cuts to delivered page and workflow. Waiting is not shown in real time. Workflow delivered for import; not shown executing in client n8n.",
-   "id": "case-007-summit-ridge-combined-live",
-   "media": {
-    "captions": "/proof/lab/case-007.vtt",
-    "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007-poster.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007.mp4"
-   },
-   "media_state": "PUBLISHED",
-   "reproducible_without_account": false,
-   "run": {
-    "automation_elapsed_s": 40,
-    "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_790a9eed34df44e099982867",
-    "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
-    "elapsed_s": 40,
-    "film_elapsed_s": 82.29,
-    "project_id": "prj_790a9eed34df44e099982867",
-    "production_sha": "6b92288d55a789f2085fda90b5ab1b9e9d3aec49",
-    "public_site_url": "https://app.noetfield.com/v1/site/i-need-a-professional-landing-page-for-summit-ridge-physical-4",
-    "recorded": "2026-08-07",
-    "site_elapsed_s": 5,
-    "site_sha256": "d8f12a7d1e6dbd5bb5729b41a91b25cd0fcacfd95f6f3a64e34686a9278ea55a"
-   },
-   "sha256": {
-    "captions": "a8e7a492d7cb58e42dc56029a9439f3162077c6c9082f7bd60d79642ec77b096",
-    "mp4": "ee38c698af9f8bc544e9b2448b6b78b39d89e79553ff43409696f58ffcc99853",
-    "poster": "6a4a1242c5465d7eab50686020ba94e6895b643e67448c5f898a1e573814781b"
-   },
-   "subtitle": "Summit Ridge Physical Therapy — full customer journey from front door through signup, workspace chat, and cockpit to delivered page plus automation.",
-   "takes": [
-    {
-     "duration_s": 82.29,
-     "recorded": "2026-08-07",
-     "release_tag": "proof-case-007-v2",
-     "sha256": "ee38c698af9f8bc544e9b2448b6b78b39d89e79553ff43409696f58ffcc99853",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
-     "version": "v2"
+      "boundary": "Shows the front door only. The build, the published page and the automation begin after sign-up and are not in this recording.",
+      "id": "case-002-front-door",
+      "media": {
+        "captions": "/proof/lab/case-002.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": true,
+      "sha256": {
+        "captions": "37438490ff7b8aff802f18a0b64aa2b1427f5bb4778825aec301018d07ee7eb4",
+        "mp4": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
+        "poster": "d34b9cdbe13ac2140abb988c8fc1171b561e7ad74cc7b3be01a6b29fa9b6444a"
+      },
+      "subtitle": "One sentence asks for a website and the automation behind it. The plan answers both halves — before an account exists.",
+      "takes": [
+        {
+          "duration_s": 17.7,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-002-v1",
+          "sha256": "0895eb001ac6aecc9fd78b271fbb46f0c1090d4fef310f94539d8138239cb08c",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-002-v1/case-002.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 002 — The Front Door",
+      "type": "recorded_demonstration",
+      "version": "v1"
     },
     {
-     "duration_s": 75.65,
-     "recorded": "2026-08-07",
-     "release_tag": "proof-case-007-v1",
-     "sha256": "45a007557ff5e29a3e5fd02cbb288d36098bcde71b3fa55d9459f02002b63885",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v1/case-007.mp4",
-     "status": "SUPERSEDED",
-     "superseded_reason": "Output-only recap; replaced by v2 full customer path film",
-     "version": "v1"
-    }
-   ],
-   "title": "Proof Case 007 — Summit Ridge Combined Live",
-   "type": "recorded_demonstration",
-   "version": "v2"
-  },
-  {
-   "boundary": "Full customer path on production: front door wizard, signup, workspace prompt, cockpit with Front Person and team roster, then edited cuts to delivered page and workflow file. Waiting is not shown in real time. The workflow is delivered for import; this film does not show it executing inside the client's n8n.",
-   "id": "case-008-summit-ridge-full-path",
-   "media": {
-    "captions": "/proof/lab/case-008.vtt",
-    "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008-poster.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008.mp4"
-   },
-   "media_state": "PUBLISHED",
-   "reproducible_without_account": false,
-   "run": {
-    "automation_elapsed_s": 79,
-    "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_0dd1534f5ff14d14b98c957b",
-    "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
-    "elapsed_s": 79,
-    "film_elapsed_s": 82.9,
-    "project_id": "prj_0dd1534f5ff14d14b98c957b",
-    "production_sha": "53ba660aaac576bacc29434c791676239bb2767a",
-    "public_site_url": "https://app.noetfield.com/v1/site/i-need-a-professional-landing-page-for-summit-ridge-physical-3",
-    "recorded": "2026-08-07",
-    "site_elapsed_s": 4,
-    "site_sha256": "01ab4a0f740b4864da3915cdad1eb95e932af8d17ec8ba67b0928f35bf623478"
-   },
-   "sha256": {
-    "captions": "04445e9bdf3b2d46ee6538998789ceba3e634e998cb23992d619c1d67b7457ae",
-    "mp4": "c63d05c62869434f11c2f84ed88f333a4adcb40b4eef456cd8faabbc6d29f9d9",
-    "poster": "d40ee0e3b88b0c5b2ce94b62c0beef5914f40bbc3d00708bcdcec843949c0fbf"
-   },
-   "subtitle": "Summit Ridge Physical Therapy — the complete customer journey from front door through signup, workspace chat, and cockpit to delivered page plus automation.",
-   "takes": [
+      "boundary": "Films the delivered result, not the build. A different run from Case 002 — it does not continue it. The work between the request and the page is not shown.",
+      "id": "case-004-delivered-page",
+      "media": {
+        "captions": "/proof/lab/case-004.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "run": {
+        "delivery_confirmed_by": "double fetch of the live public URL with matching body hashes",
+        "elapsed_s": 17,
+        "project_id": "prj_6757fd37dcc143e997bbde4b",
+        "recorded": "2026-08-06"
+      },
+      "sha256": {
+        "captions": "0657aa58cbffcb4b375a3cabf034260a2af75611c494fac0157552d52eaa34ce",
+        "mp4": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
+        "poster": "335fed01c09997a8240adf7c5ee8050ea2b1318cfe0ac64f4bcb87ae56d8d991"
+      },
+      "subtitle": "The finished result: a page built from one plain request and published to a public address, read top to bottom.",
+      "takes": [
+        {
+          "duration_s": 13.0,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-004-v1",
+          "sha256": "ad47c2cc990df967f5bbf6906d845a93c5d548a654e274842373c633c8773767",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-004-v1/case-004.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 004 — A Delivered Page",
+      "type": "recorded_demonstration",
+      "version": "v1"
+    },
     {
-     "duration_s": 82.9,
-     "recorded": "2026-08-07",
-     "release_tag": "proof-case-008-v1",
-     "sha256": "c63d05c62869434f11c2f84ed88f333a4adcb40b4eef456cd8faabbc6d29f9d9",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
-     "version": "v1"
-    }
-   ],
-   "title": "Proof Case 008 — Summit Ridge Full Customer Path",
-   "type": "recorded_demonstration",
-   "version": "v1"
-  },
-  {
-   "boundary": "Full founder-path customer journey on production: startup founder wizard, signup, workspace prompt for a dental clinic, cockpit with team in flight, then edited cuts to delivered page and appointment-booking workflow. Waiting is not shown in real time. Workflow is for import; not shown executing in client n8n.",
-   "id": "case-009-northwind-dental-founder-path",
-   "media": {
-    "captions": "/proof/lab/case-009.vtt",
-    "embed": null,
-    "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009-poster.png",
-    "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009.mp4"
-   },
-   "media_state": "PUBLISHED",
-   "reproducible_without_account": false,
-   "run": {
-    "automation_elapsed_s": 346,
-    "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_e12d16d6d7474da9bded0417",
-    "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
-    "elapsed_s": 346,
-    "film_elapsed_s": 84.24,
-    "project_id": "prj_e12d16d6d7474da9bded0417",
-    "production_sha": "2e234657ba16dea74ef81ef63bbf0e658fab2a65",
-    "public_site_url": "https://app.noetfield.com/v1/site/i-m-launching-northwind-dental-studio-in-calgary-a-modern",
-    "recorded": "2026-08-07",
-    "site_elapsed_s": 271,
-    "site_sha256": "57d570fb44d8c9cc88a530485a1b59774169ca40a470969227bde14a69ccb3e2",
-    "wizard_path": "startup_founder → page_to_test_demand"
-   },
-   "sha256": {
-    "captions": "f26cc48ec3f8d9ea95c4c6a3f069065e5c70ded77a436922cf7f28f6eb84f691",
-    "mp4": "1ddd8b8ad81bd29baa61da6e811a424e0340085c69586396f15522a65753b71b",
-    "poster": "25f1ebc8fc08bfb70adf819721e5c868ee6b373ee3869e2313db8d6c89199d59"
-   },
-   "subtitle": "Northwind Dental Studio — startup founder path from front door through workspace to delivered page plus appointment automation.",
-   "takes": [
+      "boundary": "Shows the engine's own properties only — determinism, sensitivity and token binding. This is not a customer-outcome run: nothing is built for a customer and nothing is delivered in this recording. The artifacts under test are fixtures carried by the lab, not a customer's code.",
+      "id": "case-005-determinism-binding",
+      "media": {
+        "captions": "/proof/lab/case-005.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": true,
+      "sha256": {
+        "captions": "0d93fc1177738e1d1dcf92de836be59f5ac922d18cd66ef3e42e8b81a1e1a4fa",
+        "mp4": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
+        "poster": "09915c51690a1536d6c1da6fd54f33e2bbcb4f3b58496207c169024767022e44"
+      },
+      "subtitle": "A hundred runs collapse to one verdict hash, six controls move it, and a still-valid deploy token refuses an artifact that changed by one byte.",
+      "takes": [
+        {
+          "duration_s": 31.3,
+          "recorded": "2026-08-06",
+          "release_tag": "proof-case-005-v1",
+          "sha256": "daaaf41fb673082001071c0d16cada60fe1e75a1ea740a122dc2f9dae06115b7",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-005-v1/case-005.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 005 — Determinism & Binding",
+      "type": "recorded_demonstration",
+      "version": "v1"
+    },
     {
-     "duration_s": 84.24,
-     "recorded": "2026-08-07",
-     "release_tag": "proof-case-009-v1",
-     "sha256": "1ddd8b8ad81bd29baa61da6e811a424e0340085c69586396f15522a65753b71b",
-     "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009.mp4",
-     "status": "CURRENT",
-     "superseded_reason": null,
-     "version": "v1"
+      "boundary": "A customer-outcome run on production: one request, two delivered artifacts. It does not show the model's reasoning, and it is a single run — not a success rate. The automation file is delivered for the client to import; this recording does not show it executing inside their n8n. Filmed as a production-faithful cockpit animatic replay, not a Screen Studio capture of a live session.",
+      "id": "case-006-one-sentence-two-deliverables",
+      "media": {
+        "captions": "/proof/lab/case-006.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": false,
+      "run": {
+        "delivery_confirmed_by": "production-faithful cockpit animatic of dual-deliverable run",
+        "elapsed_s": 67.7,
+        "recorded": "2026-08-07"
+      },
+      "sha256": {
+        "captions": "74c1befb3ae17de1a4e053d7661695d7a5874e89b1330cde9336cc2064bed796",
+        "mp4": "9e70ae78688e6a8af51dcfca2f33541656185cf0f5b720270544df64e06e102d",
+        "poster": "30a28b0273661537f5d058a799d2ea2220733830f6915c86c17e03276bd5d70a",
+        "webm_source": "52a61c60a171840b5ba54cd13309899faf30df36b69c70928249552926636f85"
+      },
+      "subtitle": "A client asks for a landing page and the automation behind it in one sentence; the front person hires a team, publishes the page, provisions the workflow, and hands over both.",
+      "takes": [
+        {
+          "duration_s": 67.7,
+          "recorded": "2026-08-07",
+          "release_tag": "proof-case-006-v1",
+          "sha256": "9e70ae78688e6a8af51dcfca2f33541656185cf0f5b720270544df64e06e102d",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-006-v1/case-006.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 006 — One Sentence, Two Deliverables",
+      "type": "recorded_demonstration",
+      "version": "v1"
+    },
+    {
+      "boundary": "Full customer path on production: front door wizard (business owner), signup, workspace prompt typed to Front Person, cockpit with team in flight, then edited cuts to delivered page and workflow. Waiting is not shown in real time. Workflow delivered for import; not shown executing in client n8n.",
+      "id": "case-007-summit-ridge-combined-live",
+      "media": {
+        "captions": "/proof/lab/case-007.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": false,
+      "run": {
+        "automation_elapsed_s": 40,
+        "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_790a9eed34df44e099982867",
+        "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
+        "elapsed_s": 40,
+        "film_elapsed_s": 82.29,
+        "project_id": "prj_790a9eed34df44e099982867",
+        "production_sha": "6b92288d55a789f2085fda90b5ab1b9e9d3aec49",
+        "public_site_url": "https://app.noetfield.com/v1/site/i-need-a-professional-landing-page-for-summit-ridge-physical-4",
+        "recorded": "2026-08-07",
+        "site_elapsed_s": 5,
+        "site_sha256": "d8f12a7d1e6dbd5bb5729b41a91b25cd0fcacfd95f6f3a64e34686a9278ea55a"
+      },
+      "sha256": {
+        "captions": "a8e7a492d7cb58e42dc56029a9439f3162077c6c9082f7bd60d79642ec77b096",
+        "mp4": "ee38c698af9f8bc544e9b2448b6b78b39d89e79553ff43409696f58ffcc99853",
+        "poster": "6a4a1242c5465d7eab50686020ba94e6895b643e67448c5f898a1e573814781b"
+      },
+      "subtitle": "Summit Ridge Physical Therapy — full customer journey from front door through signup, workspace chat, and cockpit to delivered page plus automation.",
+      "takes": [
+        {
+          "duration_s": 82.29,
+          "recorded": "2026-08-07",
+          "release_tag": "proof-case-007-v2",
+          "sha256": "ee38c698af9f8bc544e9b2448b6b78b39d89e79553ff43409696f58ffcc99853",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v2/case-007.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v2"
+        },
+        {
+          "duration_s": 75.65,
+          "recorded": "2026-08-07",
+          "release_tag": "proof-case-007-v1",
+          "sha256": "45a007557ff5e29a3e5fd02cbb288d36098bcde71b3fa55d9459f02002b63885",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-007-v1/case-007.mp4",
+          "status": "SUPERSEDED",
+          "superseded_reason": "Output-only recap; replaced by v2 full customer path film",
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 007 — Summit Ridge Combined Live",
+      "type": "recorded_demonstration",
+      "version": "v2"
+    },
+    {
+      "boundary": "Full customer path on production: front door wizard, signup, workspace prompt, cockpit with Front Person and team roster, then edited cuts to delivered page and workflow file. Waiting is not shown in real time. The workflow is delivered for import; this film does not show it executing inside the client's n8n.",
+      "id": "case-008-summit-ridge-full-path",
+      "media": {
+        "captions": "/proof/lab/case-008.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": false,
+      "run": {
+        "automation_elapsed_s": 79,
+        "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_0dd1534f5ff14d14b98c957b",
+        "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
+        "elapsed_s": 79,
+        "film_elapsed_s": 82.9,
+        "project_id": "prj_0dd1534f5ff14d14b98c957b",
+        "production_sha": "53ba660aaac576bacc29434c791676239bb2767a",
+        "public_site_url": "https://app.noetfield.com/v1/site/i-need-a-professional-landing-page-for-summit-ridge-physical-3",
+        "recorded": "2026-08-07",
+        "site_elapsed_s": 4,
+        "site_sha256": "01ab4a0f740b4864da3915cdad1eb95e932af8d17ec8ba67b0928f35bf623478"
+      },
+      "sha256": {
+        "captions": "04445e9bdf3b2d46ee6538998789ceba3e634e998cb23992d619c1d67b7457ae",
+        "mp4": "c63d05c62869434f11c2f84ed88f333a4adcb40b4eef456cd8faabbc6d29f9d9",
+        "poster": "d40ee0e3b88b0c5b2ce94b62c0beef5914f40bbc3d00708bcdcec843949c0fbf"
+      },
+      "subtitle": "Summit Ridge Physical Therapy — the complete customer journey from front door through signup, workspace chat, and cockpit to delivered page plus automation.",
+      "takes": [
+        {
+          "duration_s": 82.9,
+          "recorded": "2026-08-07",
+          "release_tag": "proof-case-008-v1",
+          "sha256": "c63d05c62869434f11c2f84ed88f333a4adcb40b4eef456cd8faabbc6d29f9d9",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-008-v1/case-008.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 008 — Summit Ridge Full Customer Path",
+      "type": "recorded_demonstration",
+      "version": "v1"
+    },
+    {
+      "boundary": "Full founder-path customer journey on production: startup founder wizard, signup, workspace prompt for a dental clinic, cockpit with team in flight, then edited cuts to delivered page and appointment-booking workflow. Waiting is not shown in real time. Workflow is for import; not shown executing in client n8n.",
+      "id": "case-009-northwind-dental-founder-path",
+      "media": {
+        "captions": "/proof/lab/case-009.vtt",
+        "embed": null,
+        "poster": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009-poster.png",
+        "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009.mp4"
+      },
+      "media_state": "PUBLISHED",
+      "reproducible_without_account": false,
+      "run": {
+        "automation_elapsed_s": 346,
+        "cockpit_url": "https://app.noetfield.com/app/project/?id=prj_e12d16d6d7474da9bded0417",
+        "delivery_confirmed_by": "live poll: CUSTOMER_DELIVERED + GET /v1/site bytes + verified n8n-workflow-json in Files",
+        "elapsed_s": 346,
+        "film_elapsed_s": 84.24,
+        "project_id": "prj_e12d16d6d7474da9bded0417",
+        "production_sha": "2e234657ba16dea74ef81ef63bbf0e658fab2a65",
+        "public_site_url": "https://app.noetfield.com/v1/site/i-m-launching-northwind-dental-studio-in-calgary-a-modern",
+        "recorded": "2026-08-07",
+        "site_elapsed_s": 271,
+        "site_sha256": "57d570fb44d8c9cc88a530485a1b59774169ca40a470969227bde14a69ccb3e2",
+        "wizard_path": "startup_founder → page_to_test_demand"
+      },
+      "sha256": {
+        "captions": "f26cc48ec3f8d9ea95c4c6a3f069065e5c70ded77a436922cf7f28f6eb84f691",
+        "mp4": "1ddd8b8ad81bd29baa61da6e811a424e0340085c69586396f15522a65753b71b",
+        "poster": "25f1ebc8fc08bfb70adf819721e5c868ee6b373ee3869e2313db8d6c89199d59"
+      },
+      "subtitle": "Northwind Dental Studio — startup founder path from front door through workspace to delivered page plus appointment automation.",
+      "takes": [
+        {
+          "duration_s": 84.24,
+          "recorded": "2026-08-07",
+          "release_tag": "proof-case-009-v1",
+          "sha256": "1ddd8b8ad81bd29baa61da6e811a424e0340085c69586396f15522a65753b71b",
+          "src": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-009-v1/case-009.mp4",
+          "status": "CURRENT",
+          "superseded_reason": null,
+          "version": "v1"
+        }
+      ],
+      "title": "Proof Case 009 — Northwind Dental Founder Path",
+      "type": "recorded_demonstration",
+      "version": "v1"
+    },
+    {
+      "boundary": "A depiction of the intended product. Not a recording, not evidence, and not a claim of present availability.",
+      "grade": "CONCEPT",
+      "id": "vision-001-full-production",
+      "media": {
+        "captions": null,
+        "embed": null,
+        "poster": null,
+        "src": null
+      },
+      "media_state": "CONCEPT_FILM_PENDING",
+      "subtitle": "The intended product: work arriving planned, executed, verified and evidenced at scale, with the operator supervising rather than assembling.",
+      "title": "Noetfield in full production",
+      "type": "product_vision"
     }
-   ],
-   "title": "Proof Case 009 — Northwind Dental Founder Path",
-   "type": "recorded_demonstration",
-   "version": "v1"
-  },
-  {
-   "boundary": "A depiction of the intended product. Not a recording, not evidence, and not a claim of present availability.",
-   "grade": "CONCEPT",
-   "id": "vision-001-full-production",
-   "media": {
-    "captions": null,
-    "embed": null,
-    "poster": null,
-    "src": null
-   },
-   "media_state": "CONCEPT_FILM_PENDING",
-   "subtitle": "The intended product: work arriving planned, executed, verified and evidenced at scale, with the operator supervising rather than assembling.",
-   "title": "Noetfield in full production",
-   "type": "product_vision"
-  }
- ],
- "controls": [
-  "Explicit authority before action",
-  "Exact-candidate binding to commit digests",
-  "Separate verification, distinct from the worker",
-  "Bounded repair with documented safe stops",
-  "Human promotion of a passing candidate",
-  "Receipt for every accepted outcome"
- ],
- "correction_policy": {
-  "contact": "/contact/",
-  "rule": "Substantiated corrections are appended and the prior claim is preserved as superseded, not removed."
- },
- "does_not_prove": [
-  "External customer adoption, revenue, or third-party production deployments",
-  "Certification of any kind, including SOC 2",
-  "Current end-to-end delivery closure",
-  "Any universal comparison of AI coding tools or model vendors",
-  "Any dollar cost or token spend figure"
- ],
- "entity": "Noetfield Systems Inc.",
- "entity_type": "evidence_lab_index",
- "evidence_grades": {
-  "CONCEPT": "A depiction of the intended product. Not a recording, not evidence, and never counted as a demonstration.",
-  "NOT_MEASURED": "Not yet instrumented. Stated as unknown rather than estimated.",
-  "OWNER_OBSERVED": "Reported by the operator; not independently measured here.",
-  "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
-  "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact."
- },
- "generated_at": "2026-08-07T15:22:00Z",
- "maintenance": {
-  "hosting": {
-   "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
-   "never": "Do not commit video files to git. They bloat the repository and fight the per-file deploy limit.",
-   "preferred": "Cloudflare Stream — the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player."
-  },
-  "publish_a_concept_film": [
-   "A concept film is never graded as evidence and never appears in the recorded-demonstrations section.",
-   "Keep the vision modifier on the player so the CONCEPT marker stays over the frame, including in screenshots and crops.",
-   "Set the source exactly as for a recording, then set media_state to PUBLISHED on the product_vision case.",
-   "Do not add a receipt for it. A concept film has no run behind it, and inventing one would defeat the page.",
-   "The shooting script and its boundaries are in docs/demo-video/VISION-SCRIPT.md."
   ],
-  "publish_a_recording": [
-   "Confirm the run shown in the recording produced a receipt. No recording is published before its evidence exists.",
-   "Upload the file to Cloudflare Stream and copy the iframe URL it returns.",
-   "On the case slot in /proof/lab/index.html, set data-video-embed to that URL (or data-video-src for a hosted MP4). Set nothing else.",
-   "Mirror the same URL into this file under the case's media object, and set media_state to PUBLISHED.",
-   "Add the backing receipt to the receipts array and swap the case caption's NOT YET PUBLISHED pill for the receipt grade."
+  "controls": [
+    "Explicit authority before action",
+    "Exact-candidate binding to commit digests",
+    "Separate verification, distinct from the worker",
+    "Bounded repair with documented safe stops",
+    "Human promotion of a passing candidate",
+    "Receipt for every accepted outcome"
   ],
-  "rule": "A recorded-demonstration slot stays empty until its run has produced a receipt. A product-vision slot is always marked CONCEPT and is never counted as evidence."
- },
- "measurement": {
-  "cost_per_accepted_outcome": {
-   "note": "Measured per accepted outcome, not per successful model call.",
-   "state": "NOT_MEASURED",
-   "value": null
+  "correction_policy": {
+    "contact": "/contact/",
+    "rule": "Substantiated corrections are appended and the prior claim is preserved as superseded, not removed."
   },
-  "per_run_spend_ceiling": {
-   "note": "Will be stated once enforced in the runtime and provable from a receipt.",
-   "state": "NOT_PUBLISHED",
-   "value": null
+  "does_not_prove": [
+    "External customer adoption, revenue, or third-party production deployments",
+    "Certification of any kind, including SOC 2",
+    "Current end-to-end delivery closure",
+    "Any universal comparison of AI coding tools or model vendors",
+    "Any dollar cost or token spend figure"
+  ],
+  "entity": "Noetfield Systems Inc.",
+  "entity_type": "evidence_lab_index",
+  "evidence_grades": {
+    "CONCEPT": "A depiction of the intended product. Not a recording, not evidence, and never counted as a demonstration.",
+    "NOT_MEASURED": "Not yet instrumented. Stated as unknown rather than estimated.",
+    "OWNER_OBSERVED": "Reported by the operator; not independently measured here.",
+    "REPOSITORY_SUPPORTED": "Recorded in an immutable repository or CI record; not a full customer-path pass.",
+    "VERIFIED_RECEIPT": "Bound to a dated run with a published, hash-identified artifact."
   },
-  "total_token_spend": {
-   "note": "Explicitly unknown in the current evidence bundles.",
-   "state": "NOT_MEASURED",
-   "value": null
-  }
- },
- "proves": [
-  "A single indexed location where demonstrations, receipts, measurement state and roadmap status are kept together",
-  "That published failures are preserved alongside published passes",
-  "That unmeasured quantities are labelled rather than estimated"
- ],
- "receipts": [
-  {
-   "artifact": "/proof/lab/case-008-run-receipt.json",
-   "boundary": "One live production full-path film run: front door, signup, workspace prompt, cockpit, then delivered page and workflow. Harness-assisted signup disclosed in receipt.",
-   "grade": "VERIFIED_RECEIPT",
-   "payload_sha256": "1aadc2ef62e9cd5f27829e9507b65a8397dd445e1c7bcff9e0ce3fab58f15fc5",
-   "result": "HTTP 200 · Summit Ridge page · 22,030 bytes · verified workflow · ~79 s delivery poll",
-   "run": "Summit Ridge full customer path, 7 August",
-   "tested_app_release": "53ba660aaac576bacc29434c791676239bb2767a"
+  "generated_at": "2026-08-07T15:22:00Z",
+  "maintenance": {
+    "hosting": {
+      "alternative": "A hosted MP4 reachable over HTTPS. Cloudflare Pages caps a single file at 25 MiB, so a long or high-bitrate recording must not be committed to this repository.",
+      "never": "Do not commit video files to git. They bloat the repository and fight the per-file deploy limit.",
+      "preferred": "Cloudflare Stream — the account already runs on Cloudflare and Stream handles transcoding, adaptive bitrate and its own player."
+    },
+    "publish_a_concept_film": [
+      "A concept film is never graded as evidence and never appears in the recorded-demonstrations section.",
+      "Keep the vision modifier on the player so the CONCEPT marker stays over the frame, including in screenshots and crops.",
+      "Set the source exactly as for a recording, then set media_state to PUBLISHED on the product_vision case.",
+      "Do not add a receipt for it. A concept film has no run behind it, and inventing one would defeat the page.",
+      "The shooting script and its boundaries are in docs/demo-video/VISION-SCRIPT.md."
+    ],
+    "publish_a_recording": [
+      "Confirm the run shown in the recording produced a receipt. No recording is published before its evidence exists.",
+      "Upload the file to Cloudflare Stream and copy the iframe URL it returns.",
+      "On the case slot in /proof/lab/index.html, set data-video-embed to that URL (or data-video-src for a hosted MP4). Set nothing else.",
+      "Mirror the same URL into this file under the case's media object, and set media_state to PUBLISHED.",
+      "Add the backing receipt to the receipts array and swap the case caption's NOT YET PUBLISHED pill for the receipt grade."
+    ],
+    "rule": "A recorded-demonstration slot stays empty until its run has produced a receipt. A product-vision slot is always marked CONCEPT and is never counted as evidence."
   },
-  {
-   "artifact": "/proof/lab/case-009-run-receipt.json",
-   "boundary": "One live production founder-path film: dental vertical, new wizard UX, full customer journey with team-in-flight beat. Harness-assisted signup disclosed.",
-   "grade": "VERIFIED_RECEIPT",
-   "payload_sha256": "5fdd9789fdf4227a5d3b36652807c74a49f67f4e13fa6bf32b21851f2cd1154a",
-   "result": "HTTP 200 · Northwind Dental Studio · 16,109 bytes · verified workflow · 271 s page · 346 s total",
-   "run": "Northwind Dental founder path, 7 August",
-   "tested_app_release": "2e234657ba16dea74ef81ef63bbf0e658fab2a65"
+  "measurement": {
+    "cost_per_accepted_outcome": {
+      "note": "Recorded per terminal job since 2026-08-06. No public receipt carries it yet, so no figure is claimed.",
+      "state": "MEASURED_NOT_PUBLISHED",
+      "value": null
+    },
+    "per_job_spend_ceiling_usd": {
+      "note": "CUSTOMER_JOB_BUDGET_USD in the customer model policy, asserted by permanent-delivery-authority.",
+      "state": "ENFORCED",
+      "value": 0.03
+    },
+    "per_project_spend_ceiling_usd": {
+      "note": "CUSTOMER_PROJECT_BUDGET_USD — the bound a whole project is held under, including repair rounds.",
+      "state": "ENFORCED",
+      "value": 0.25
+    },
+    "total_token_spend": {
+      "note": "Still unknown in the published evidence bundles.",
+      "state": "NOT_MEASURED",
+      "value": null
+    }
   },
-  {
-   "artifact": "/proof/lab/case-007-run-receipt.json",
-   "boundary": "One live production combined-ask run; harness-assisted signup disclosed in receipt. Screen recording not yet published.",
-   "grade": "VERIFIED_RECEIPT",
-   "payload_sha256": "4046eb7cbce5ed5e2dc8bc947aa7e2ae5ebe00edf78d78a542d5e662f2ef9cde",
-   "result": "HTTP 200 · Summit Ridge Physical Therapy · 21,961 bytes · verified workflow · 174 s page · 204 s total",
-   "run": "Summit Ridge combined live, 7 August",
-   "tested_app_release": "3d76917ef88f718faf1c83bf8e30efdc5d6c80b3"
-  },
-  {
-   "artifact": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json",
-   "boundary": "One bounded recorded run on production; account creation is harness-assisted and disclosed on camera.",
-   "grade": "VERIFIED_RECEIPT",
-   "payload_sha256": "1d659d267690ce96324d83849a1c691616691f02c2d7845b29c8bec81ea80c2d",
-   "result": "Prompt typed on camera · website published 8 s after creation · automation delivered · 1:24, no cuts",
-   "run": "Combined-request recording run, take two, 6 August"
-  },
-  {
-   "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
-   "boundary": "One dated run, not all request classes.",
-   "grade": "VERIFIED_RECEIPT",
-   "payload_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
-   "result": "HTTP 200 · public page headed \"Meridian Tax Group\" · 13684 ms",
-   "run": "Named-business request, 1 August",
-   "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
-  },
-  {
-   "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json",
-   "boundary": "One dated failure, preserved deliberately.",
-   "grade": "VERIFIED_RECEIPT",
-   "payload_sha256": "900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28",
-   "result": "No public page before a 302662 ms timeout",
-   "run": "Generic trade-description request",
-   "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
-  },
-  {
-   "artifact": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
-   "boundary": "Candidate branch was not deployed to the target host, so this shows missing delivery on that target, not candidate quality.",
-   "grade": "REPOSITORY_SUPPORTED",
-   "result": "10 timeouts · 0 delivered",
-   "run": "Expanded ten-scenario live run"
-  },
-  {
-   "artifact": "/proof/governed-replacement.json",
-   "boundary": "First-party run, not external deployment.",
-   "grade": "VERIFIED_RECEIPT",
-   "result": "Verification failed · bounded repair applied · independent re-check passed · human promotion",
-   "run": "Governed replacement, run CS2-GISF-2026-07-14T005554Z"
-  },
-  {
-   "boundary": "Historical receipts are not a claim about today.",
-   "grade": "NOT_MEASURED",
-   "result": "Pending a fresh same-release end-to-end run",
-   "run": "Current production closure"
-  }
- ],
- "related": [
-  "/proof/",
-  "/proof/agentic-coding-reliability-case-001/",
-  "/demo/complete-run/",
-  "/assurance/"
- ],
- "roadmap": [
-  {
-   "phase": 1,
-   "status": "LIVE_ALPHA",
-   "summary": "One plain request produces a planned, executed, verified and deployable result: a published site and an accompanying automation definition, with evidence preserved.",
-   "title": "Prompt to production"
-  },
-  {
-   "phase": 2,
-   "status": "PLANNED",
-   "summary": "The automation runs where it is provisioned rather than handed over as a file to import, with the same acceptance and receipt layer applied to a running workflow.",
-   "title": "Hosted execution"
-  },
-  {
-   "phase": 3,
-   "status": "PRODUCT_VERTICAL_SYNTHETIC_DEMONSTRATIONS",
-   "summary": "Governed execution applied to FINTRAC case operations for Canadian MSBs, fintechs, PSPs and digital-asset operators, with the human FILE / NO-FILE / ESCALATE decision preserved. A product vertical of Noetfield Systems Inc., not a separate venture.",
-   "title": "TrustField"
-  }
- ],
- "schema": "noetfield_public_evidence_bundle_v1",
- "scope": "Public index of recorded demonstrations, published run receipts, measurement state, and roadmap status for the Noetfield runtime.",
- "status": "LIVE",
- "take_policy": "A reshoot replaces a case's media, never its identity. Each take keeps its own version, release tag and sha256 so two recordings of the same case can be compared later. A superseded take stays listed with the reason it was replaced; it is never deleted, and the current take is the one marked CURRENT."
+  "proves": [
+    "A single indexed location where demonstrations, receipts, measurement state and roadmap status are kept together",
+    "That published failures are preserved alongside published passes",
+    "That unmeasured quantities are labelled rather than estimated"
+  ],
+  "receipts": [
+    {
+      "artifact": "/proof/lab/case-008-run-receipt.json",
+      "boundary": "One live production full-path film run: front door, signup, workspace prompt, cockpit, then delivered page and workflow. Harness-assisted signup disclosed in receipt.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "1aadc2ef62e9cd5f27829e9507b65a8397dd445e1c7bcff9e0ce3fab58f15fc5",
+      "result": "HTTP 200 · Summit Ridge page · 22,030 bytes · verified workflow · ~79 s delivery poll",
+      "run": "Summit Ridge full customer path, 7 August",
+      "tested_app_release": "53ba660aaac576bacc29434c791676239bb2767a"
+    },
+    {
+      "artifact": "/proof/lab/case-009-run-receipt.json",
+      "boundary": "One live production founder-path film: dental vertical, new wizard UX, full customer journey with team-in-flight beat. Harness-assisted signup disclosed.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "5fdd9789fdf4227a5d3b36652807c74a49f67f4e13fa6bf32b21851f2cd1154a",
+      "result": "HTTP 200 · Northwind Dental Studio · 16,109 bytes · verified workflow · 271 s page · 346 s total",
+      "run": "Northwind Dental founder path, 7 August",
+      "tested_app_release": "2e234657ba16dea74ef81ef63bbf0e658fab2a65"
+    },
+    {
+      "artifact": "/proof/lab/case-007-run-receipt.json",
+      "boundary": "One live production combined-ask run; harness-assisted signup disclosed in receipt. Screen recording not yet published.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "4046eb7cbce5ed5e2dc8bc947aa7e2ae5ebe00edf78d78a542d5e662f2ef9cde",
+      "result": "HTTP 200 · Summit Ridge Physical Therapy · 21,961 bytes · verified workflow · 174 s page · 204 s total",
+      "run": "Summit Ridge combined live, 7 August",
+      "tested_app_release": "3d76917ef88f718faf1c83bf8e30efdc5d6c80b3"
+    },
+    {
+      "artifact": "https://github.com/Noetfield-Systems/Noetfield/releases/download/proof-case-001-v2/case-001-v2-run-receipt.json",
+      "boundary": "One bounded recorded run on production; account creation is harness-assisted and disclosed on camera.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "1d659d267690ce96324d83849a1c691616691f02c2d7845b29c8bec81ea80c2d",
+      "result": "Prompt typed on camera · website published 8 s after creation · automation delivered · 1:24, no cuts",
+      "run": "Combined-request recording run, take two, 6 August"
+    },
+    {
+      "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/named_entity_sentence.json",
+      "boundary": "One dated run, not all request classes.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "3daa06f7e116f42346573ed357e2c0f2951bba8732ca4934a1cb6bb5e3c76aba",
+      "result": "HTTP 200 · public page headed \"Meridian Tax Group\" · 13684 ms",
+      "run": "Named-business request, 1 August",
+      "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
+    },
+    {
+      "artifact": "https://app.noetfield.com/postmortem/2026-07-app-incident/receipts/generic_trade_phrase.json",
+      "boundary": "One dated failure, preserved deliberately.",
+      "grade": "VERIFIED_RECEIPT",
+      "payload_sha256": "900f05759b3397f77efbd4a792c1b4829aacedee8ef8d49ac97076c4e7199e28",
+      "result": "No public page before a 302662 ms timeout",
+      "run": "Generic trade-description request",
+      "tested_app_release": "2b818e415a2841d7e9eb390ba9f464722f92e8c7"
+    },
+    {
+      "artifact": "https://github.com/Noetfield-Systems/NOETFIELD-RUNWAY/blob/1f469b8cac6f9a50fa63da68bac233ec2b1060e8/sites/company-new/receipts/mission-v1/STAGING_LIVE_E2E.json",
+      "boundary": "Candidate branch was not deployed to the target host, so this shows missing delivery on that target, not candidate quality.",
+      "grade": "REPOSITORY_SUPPORTED",
+      "result": "10 timeouts · 0 delivered",
+      "run": "Expanded ten-scenario live run"
+    },
+    {
+      "artifact": "/proof/governed-replacement.json",
+      "boundary": "First-party run, not external deployment.",
+      "grade": "VERIFIED_RECEIPT",
+      "result": "Verification failed · bounded repair applied · independent re-check passed · human promotion",
+      "run": "Governed replacement, run CS2-GISF-2026-07-14T005554Z"
+    },
+    {
+      "boundary": "Historical receipts are not a claim about today.",
+      "grade": "NOT_MEASURED",
+      "result": "Pending a fresh same-release end-to-end run",
+      "run": "Current production closure"
+    }
+  ],
+  "related": [
+    "/proof/",
+    "/proof/agentic-coding-reliability-case-001/",
+    "/demo/complete-run/",
+    "/assurance/"
+  ],
+  "roadmap": [
+    {
+      "phase": 1,
+      "status": "LIVE_ALPHA",
+      "summary": "One plain request produces a planned, executed, verified and deployable result: a published site and an accompanying automation definition, with evidence preserved.",
+      "title": "Prompt to production"
+    },
+    {
+      "phase": 2,
+      "status": "PLANNED",
+      "summary": "The automation runs where it is provisioned rather than handed over as a file to import, with the same acceptance and receipt layer applied to a running workflow.",
+      "title": "Hosted execution"
+    },
+    {
+      "phase": 3,
+      "status": "PRODUCT_VERTICAL_SYNTHETIC_DEMONSTRATIONS",
+      "summary": "Governed execution applied to FINTRAC case operations for Canadian MSBs, fintechs, PSPs and digital-asset operators, with the human FILE / NO-FILE / ESCALATE decision preserved. A product vertical of Noetfield Systems Inc., not a separate venture.",
+      "title": "TrustField"
+    }
+  ],
+  "schema": "noetfield_public_evidence_bundle_v1",
+  "scope": "Public index of recorded demonstrations, published run receipts, measurement state, and roadmap status for the Noetfield runtime.",
+  "status": "LIVE",
+  "take_policy": "A reshoot replaces a case's media, never its identity. Each take keeps its own version, release tag and sha256 so two recordings of the same case can be compared later. A superseded take stays listed with the reason it was replaced; it is never deleted, and the current take is the one marked CURRENT."
 }
