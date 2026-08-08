@@ -22,9 +22,12 @@ Passing language / SKU / stamp checks is not high grade. Do not ship raw typogra
 
 ## Customer UIUX library (do not duplicate here)
 
-ONE file only:  
-`~/Desktop/Noetfield-Systems/NOETFIELD-RUNWAY/sites/company-new/functions/_lib/nf-uiux-library-2026-v1.json`  
+ONE file only:
+`~/Desktop/Noetfield-Systems/NOETFIELD-RUNWAY/sites/company-new/functions/_lib/uiux-library-2026.ts`
 Never copy into this repo.
+
+Scope: customer landings under `sites/company-new/`. It does not govern unrelated
+worker surfaces, which carry their own considered designs.
 
 ## Golden homepage
 
