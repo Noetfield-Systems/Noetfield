@@ -282,7 +282,7 @@ def proof_page() -> str:
       <p><strong>Scope:</strong> Noetfield corporate and product surfaces under Noetfield control.</p>
       <p><strong>Proves:</strong> Governed execution posture, public evidence boundaries, and honest status labeling.</p>
       <p><strong>Does not prove:</strong> External customer deployments or revenue traction.</p>
-      <p><strong>Source:</strong> Internal audit bundle · <a href="/proof/noetfield/">Case study</a> · <a href="/proof/noetfield.json">JSON</a></p>
+      <p><strong>Source:</strong> Internal audit bundle · <a href="/proof/claims-boundary-correction/">Case study</a> · <a href="/proof/noetfield.json">JSON</a></p>
      </article>
      <article class="nf-proof-card">
       <p class="nf-proof-card__status"><span class="nf-status nf-status--demo">FIRST-PARTY / INTERNAL</span> · 2026</p>
