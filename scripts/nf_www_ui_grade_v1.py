@@ -147,6 +147,32 @@ def main() -> int:
                 if not p.is_file() or needle not in p.read_text(encoding="utf-8"):
                     fails.append(f"CSS probe fail: {probe['file']} needs {needle!r}")
 
+    # Pages beyond the homepage, each with the markers that must survive an edit.
+    # Optional and additive: a baseline without this block behaves as before.
+    #
+    # For the trader page the markers worth pinning are not typographic. They are
+    # the sentences that keep a page about a trading agent honest — that it places
+    # no orders, that it is not advice, that no performance is claimed — plus the
+    # indexing directives. Those are exactly what a well-meaning copy edit drops,
+    # and nothing else in the repo would notice.
+    extra_pages = baseline.get("additional_pages") or {}
+    for route, spec in extra_pages.items():
+        rel = spec.get("path") or ""
+        page = ROOT / rel
+        if not page.is_file():
+            fails.append(f"missing page for {route}: {rel}")
+            continue
+        text = page.read_text(encoding="utf-8")
+        min_b = int(spec.get("min_bytes") or 0)
+        if len(text.encode("utf-8")) < min_b:
+            fails.append(f"{rel} too small ({len(text.encode('utf-8'))} < {min_b})")
+        for needle in spec.get("required_markers") or []:
+            if needle not in text:
+                fails.append(f"{route} lost required marker: {needle!r}")
+        for needle in spec.get("forbidden_markers") or []:
+            if needle in text:
+                fails.append(f"{route} has forbidden marker: {needle!r}")
+
     if fails:
         print("=== verify-www-ui-grade FAIL ===", file=sys.stderr)
         for f in fails:
@@ -157,6 +183,8 @@ def main() -> int:
     print(f"OK   baseline {baseline.get('schema')} v{baseline.get('version')}")
     print(f"OK   fonts {baseline.get('required_font_families')}")
     print(f"OK   nf-corp-section={got_sec} sections={got_main} h1_len={len(h1)}")
+    if extra_pages:
+        print(f"OK   additional pages {sorted(extra_pages)}")
     print("verify-www-ui-grade PASS")
     return 0
 
