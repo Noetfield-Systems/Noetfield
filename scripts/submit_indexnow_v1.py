@@ -17,6 +17,7 @@ DEFAULT_URLS = [
     f"https://{HOST}/motors/",
     f"https://{HOST}/runways/",
     f"https://{HOST}/proof/",
+    f"https://{HOST}/research-trader/",
     f"https://{HOST}/about/",
     f"https://{HOST}/llms.txt",
     f"https://{HOST}/sitemap.xml",
