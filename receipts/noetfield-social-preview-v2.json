@@ -18,11 +18,11 @@
       "width": 1200
     },
     {
-      "bytes": 28281,
+      "bytes": 30273,
       "height": 630,
       "path": "/assets/social/noetfield-motors-v2.png",
       "profile": "motors",
-      "sha256": "d8348d2f73a32e0140a4c7ba27778e54fbf3879f6b787bd63d32d34179107200",
+      "sha256": "91f0e1bc334bed601b847153115e73e4f7a1192d84cba1645d0eac50dc7c44cb",
       "width": 1200
     },
     {
@@ -105,7 +105,7 @@
     {
       "canonical_url": "https://www.noetfield.com/ai-automation/",
       "description": "Governance-first operating reference for SMB AI adoption \u2014 evaluate, RID, TLE, audit-ready export before automation runs.",
-      "image_sha256": "d8348d2f73a32e0140a4c7ba27778e54fbf3879f6b787bd63d32d34179107200",
+      "image_sha256": "91f0e1bc334bed601b847153115e73e4f7a1192d84cba1645d0eac50dc7c44cb",
       "indexability": "noindex",
       "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-motors-v2.png",
@@ -889,7 +889,7 @@
     {
       "canonical_url": "https://www.noetfield.com/factory/",
       "description": "Explore Factory from Noetfield Systems Inc.\u2014governed AI products, custom AI Motors and institutional workflows.",
-      "image_sha256": "d8348d2f73a32e0140a4c7ba27778e54fbf3879f6b787bd63d32d34179107200",
+      "image_sha256": "91f0e1bc334bed601b847153115e73e4f7a1192d84cba1645d0eac50dc7c44cb",
       "indexability": "noindex",
       "noindex_reason": "source declares noindex",
       "og_image": "https://www.noetfield.com/assets/social/noetfield-motors-v2.png",
@@ -2217,15 +2217,15 @@
     {
       "canonical_url": "https://www.noetfield.com/research-trader/",
       "description": "A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model's output.",
-      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
-      "profile": "corporate",
+      "profile": "proof",
       "route": "/research-trader/",
       "title": "Research Trader \u2014 Noetfield Systems",
       "verdict": "PASS"
@@ -2329,7 +2329,7 @@
     {
       "canonical_url": "https://www.noetfield.com/services/never-miss-a-call/",
       "description": "Your AI receptionist answers every call 24/7, books the job, and texts you the details. $497 setup, $297/mo, 500 minutes included. Get your free missed-call audit.",
-      "image_sha256": "d8348d2f73a32e0140a4c7ba27778e54fbf3879f6b787bd63d32d34179107200",
+      "image_sha256": "91f0e1bc334bed601b847153115e73e4f7a1192d84cba1645d0eac50dc7c44cb",
       "indexability": "indexable",
       "noindex_reason": null,
       "og_image": "https://www.noetfield.com/assets/social/noetfield-motors-v2.png",
