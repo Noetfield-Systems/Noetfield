@@ -2216,16 +2216,16 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/research-trader/",
-      "description": "A public agent that screens the crypto market every morning and almost always declines. Research only; it places no orders. Built to show a deterministic gate refusing its own model's output.",
-      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "description": "A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides.",
+      "image_sha256": "c4a4f2315354181d1e015efa6f1b803e9ef188b78eec7d7ec402fde40fc65840",
       "indexability": "indexable",
       "noindex_reason": null,
-      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-proof-v2.png",
       "png_dimensions": {
         "height": 630,
         "width": 1200
       },
-      "profile": "corporate",
+      "profile": "proof",
       "route": "/research-trader/",
       "title": "Research Trader \u2014 Noetfield Systems",
       "verdict": "PASS"

@@ -63,6 +63,20 @@
         "sandbox",
         "evaluate"
       ]
+    },
+    {
+      "id": "research-trader-live-record",
+      "path": "research-trader/index.html",
+      "min_bytes": 22000,
+      "required_markers": [
+        "/api/research-trader/state",
+        "nf-motor-architecture",
+        "nf-corp-table",
+        "NON_POSITIVE_OR_NON_FINITE_LEVEL",
+        "data-rt=",
+        "rt-live__fallback",
+        "RESEARCH_ONLY"
+      ]
     }
   ],
   "forbidden_patterns": [
