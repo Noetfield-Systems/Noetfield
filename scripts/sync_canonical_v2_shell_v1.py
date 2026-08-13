@@ -24,13 +24,11 @@ def sync_file(rel: str) -> bool:
         count=1,
     )
     orig = text
-    text = re.sub(
-        r"<header class=\"nf-corp-header\">.*?</header>",
-        corp_header("system").strip(),
-        text,
-        count=1,
-        flags=re.S,
-    )
+    header_re = re.compile(r"<header class=\"nf-corp-header\">.*?</header>", re.S)
+    matches = list(header_re.finditer(text))
+    for match in reversed(matches[1:]):
+        text = text[: match.start()] + text[match.end() :]
+    text = header_re.sub(corp_header("system").strip(), text, count=1)
     text = re.sub(
         r"<footer class=\"nf-corp-footer\">.*</footer>\s*(?:</body>\s*)?</html>\s*$",
         corp_footer().strip(),
