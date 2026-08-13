@@ -63,7 +63,7 @@ def chrome(title: str, desc: str, url: str, tool: str, extra_ld: str = "") -> tu
     <span>Noetfield Systems <small>Inc.</small></span>
    </a>
    <nav class="nf-corp-nav" aria-label="Primary navigation">
-    <a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/tools/">Tools</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
     <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
    </nav>
   </div>
@@ -96,14 +96,34 @@ RELATED = """
     <p class="nf-corp-kicker" id="more-tools">More free checks</p>
     <div class="nf-tools-grid">
      <a href="/tools/quiet-leak/"><span>01</span><h3>Quiet leak</h3><p>Price one manual process. Honest hobby line at $3,000 a year.</p></a>
-     <a href="/tools/ai-spend/"><span>02</span><h3>AI spend you cannot explain</h3><p>What share of the invoice maps to a named workflow.</p></a>
-     <a href="/tools/who-accepted/"><span>03</span><h3>Who accepted this</h3><p>Chat log versus a named person and a replayable why.</p></a>
-     <a href="/tools/copilot-seats/"><span>04</span><h3>Copilot seats</h3><p>Unused licenses and ungoverned use, shown as two numbers.</p></a>
-     <a href="/tools/board-five/"><span>05</span><h3>Five board questions</h3><p>Yes or no. The tool will tell you not to buy.</p></a>
-     <a href="/tools/embed/"><span>06</span><h3>Embed for advisors</h3><p>One iframe. No tracking of your visitors.</p></a>
+     <a href="/tools/meeting-tax/"><span>02</span><h3>Standing meeting tax</h3><p>What that recurring meeting costs in payroll every year.</p></a>
+     <a href="/tools/handoff/"><span>03</span><h3>Handoff tax</h3><p>Times the same work gets explained again.</p></a>
+     <a href="/tools/ai-spend/"><span>04</span><h3>AI spend you cannot explain</h3><p>What share of the invoice maps to a named workflow.</p></a>
+     <a href="/tools/shadow-ai/"><span>05</span><h3>Shadow AI</h3><p>Personal ChatGPT next to the licensed invoice.</p></a>
+     <a href="/tools/who-accepted/"><span>06</span><h3>Who accepted this</h3><p>Chat log versus a named person and a replayable why.</p></a>
+     <a href="/tools/copilot-seats/"><span>07</span><h3>Copilot seats</h3><p>Unused licenses and ungoverned use, shown as two numbers.</p></a>
+     <a href="/tools/board-five/"><span>08</span><h3>Five board questions</h3><p>Yes or no. The tool will tell you not to buy.</p></a>
+     <a href="/tools/embed/"><span>09</span><h3>Embed for advisors</h3><p>One iframe. No tracking of your visitors.</p></a>
     </div>
    </div>
   </section>
+"""
+
+PAY_FIELDS = """
+       <label>How do you know the pay?
+        <select name="pay">
+         <option value="hourly" selected>Hourly rate</option>
+         <option value="salary">Annual salary</option>
+        </select>
+       </label>
+       <label data-pay-field="hourly">Hourly rate before overhead (CAD)
+        <input type="number" name="rate" min="0" step="1" value="45" inputmode="decimal" />
+       </label>
+       <label data-pay-field="salary" hidden>Annual salary before overhead (CAD)
+        <span class="hint">Converted as salary ÷ 48 weeks ÷ 40 hours.</span>
+        <input type="number" name="salary" min="0" step="1000" value="90000" inputmode="decimal" />
+        <span class="hint" data-derived-hourly></span>
+       </label>
 """
 
 
@@ -119,15 +139,15 @@ def result_panel(kicker: str, show_amount: bool = True) -> str:
       {amount}
       <h2 data-result-headline>Fill the four numbers.</h2>
       <p data-result-body>The honest answer updates as you type. Under the hobby line, it will tell you to leave it alone.</p>
-      <p class="nf-tools-worked" data-result-math hidden></p>
-      <p class="nf-tools-next" data-result-action hidden></p>
       <p data-result-extra hidden></p>
-      <label class="nf-tools-memo-label" for="nf-tools-memo">Pasteable memo</label>
-      <textarea id="nf-tools-memo" class="nf-tools-memo" data-result-memo readonly rows="7"></textarea>
+      <p class="nf-tools-formula" data-result-formula hidden></p>
+      <p class="nf-tools-warn" data-result-warn hidden></p>
+      <textarea class="nf-tools-blurb" data-result-blurb readonly tabindex="-1" aria-hidden="true"></textarea>
       <div class="nf-tools-actions">
        <a class="nf-button nf-button--primary" data-result-cta href="/tools/">See the other checks</a>
-       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy memo</button>
        <button type="button" class="nf-button nf-button--secondary" id="nf-tools-share">Copy share link</button>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy for Slack</button>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-print">Print</button>
       </div>
      </aside>"""
 
@@ -154,9 +174,10 @@ def hub() -> None:
      <h1 id="tools-title">Most operators can name the process that annoys them. Almost none can name what it costs.</h1>
     </div>
     <div>
-     <p class="nf-corp-lead">Five one-minute checks. Conservative math. An honest leave-it-alone line. If the number is a hobby, the page says so instead of selling you a fix.</p>
+     <p class="nf-corp-lead">Eight one-minute checks. Type hourly pay or annual salary. Copy a Slack paragraph or print the page. Conservative math. If the number is a hobby, the page says so instead of selling you a fix.</p>
      <div class="nf-corp-actions">
       <a class="nf-button nf-button--primary" href="/tools/quiet-leak/">Price one leak</a>
+      <a class="nf-button nf-button--secondary" href="/tools/meeting-tax/">Price a meeting</a>
       <a class="nf-button nf-button--secondary" href="/tools/embed/">Embed on your site</a>
      </div>
     </div>
@@ -166,8 +187,11 @@ def hub() -> None:
    <div class="nf-corp-wrap">
     <h2 id="tool-list" class="nf-corp-kicker">The checks</h2>
     <div class="nf-tools-grid" style="margin-top:1.2rem">
-     <a href="/tools/quiet-leak/"><span>Quiet leak</span><h3>What is this process costing you?</h3><p>Four inputs. Rate × 1.3 × 48 weeks. Under $3,000 a year, leave it alone.</p></a>
+     <a href="/tools/quiet-leak/"><span>Quiet leak</span><h3>What is this process costing you?</h3><p>Hourly or salary. Rate × 1.3 × 48 weeks. Under $3,000 a year, leave it alone.</p></a>
+     <a href="/tools/meeting-tax/"><span>Meetings</span><h3>What is this standing meeting costing?</h3><p>Room size × minutes × 48 weeks. Cancel it if there is no decision.</p></a>
+     <a href="/tools/handoff/"><span>Handoffs</span><h3>How many times is the same work explained again?</h3><p>The re-explain tax. Same honest hobby line.</p></a>
      <a href="/tools/ai-spend/"><span>AI invoice</span><h3>Spend you cannot explain</h3><p>The board question is not the model bill. It is which workflow created it.</p></a>
+     <a href="/tools/shadow-ai/"><span>Shadow AI</span><h3>Personal tools off the invoice</h3><p>Count ChatGPT next to Copilot before you add seats.</p></a>
      <a href="/tools/who-accepted/"><span>Acceptance</span><h3>Who accepted the last output?</h3><p>If you cannot name them, you have a chat log, not a process.</p></a>
      <a href="/tools/copilot-seats/"><span>Copilot</span><h3>Seats versus a decision trail</h3><p>Unused licenses and ungoverned use, counted separately on purpose.</p></a>
      <a href="/tools/board-five/"><span>Board</span><h3>Five yes/no questions</h3><p>Score 0 or 1: do not buy. The tool will say that out loud.</p></a>
@@ -189,7 +213,7 @@ def hub() -> None:
      </article>
      <article>
       <h3>3. Read the leave-alone line out loud</h3>
-      <p>If it says stop, stop. Copy the memo into Slack or email. Nothing is stored here.</p>
+      <p>If it says stop, stop. Copy the Slack paragraph or print the page. Nothing is stored here.</p>
      </article>
     </div>
    </div>
@@ -270,7 +294,10 @@ def embed() -> None:
     )
     items = [
         ("Quiet leak", "https://www.noetfield.com/tools/quiet-leak/?embed=1"),
+        ("Standing meeting tax", "https://www.noetfield.com/tools/meeting-tax/?embed=1"),
+        ("Handoff tax", "https://www.noetfield.com/tools/handoff/?embed=1"),
         ("AI spend", "https://www.noetfield.com/tools/ai-spend/?embed=1"),
+        ("Shadow AI", "https://www.noetfield.com/tools/shadow-ai/?embed=1"),
         ("Who accepted", "https://www.noetfield.com/tools/who-accepted/?embed=1"),
         ("Copilot seats", "https://www.noetfield.com/tools/copilot-seats/?embed=1"),
         ("Five board questions", "https://www.noetfield.com/tools/board-five/?embed=1"),
@@ -337,18 +364,19 @@ def main() -> None:
         <span class="hint">Include the context switch.</span>
         <input type="number" name="minutes" min="0" step="0.5" value="12" inputmode="decimal" required />
        </label>
-       <label>Hourly rate before overhead (CAD)
-        <input type="number" name="rate" min="0" step="1" value="45" inputmode="decimal" required />
-       </label>
+"""
+        + PAY_FIELDS
+        + """
        <label>How many people do this
         <input type="number" name="people" min="0" step="1" value="3" inputmode="decimal" required />
        </label>
         """,
         """
     <div class="nf-tools-presets" aria-label="Example leaks">
-     <button type="button" data-preset='{"touches":10,"minutes":8,"rate":45,"people":3}'>Double data entry</button>
-     <button type="button" data-preset='{"touches":6,"minutes":15,"rate":40,"people":2}'>Invoice chase</button>
-     <button type="button" data-preset='{"touches":12,"minutes":5,"rate":38,"people":4}'>CRM copy-paste</button>
+     <button type="button" data-preset='{"touches":10,"minutes":8,"pay":"hourly","rate":45,"people":3}'>Double data entry</button>
+     <button type="button" data-preset='{"touches":6,"minutes":15,"pay":"hourly","rate":40,"people":2}'>Invoice chase</button>
+     <button type="button" data-preset='{"touches":12,"minutes":5,"pay":"hourly","rate":38,"people":4}'>CRM copy-paste</button>
+     <button type="button" data-halve="touches">Halve the touches</button>
     </div>
         """,
         """
@@ -410,9 +438,9 @@ def main() -> None:
        <label>Minutes of redo on an unsigned item
         <input type="number" name="minutes" min="0" step="1" value="18" inputmode="decimal" required />
        </label>
-       <label>Hourly rate before overhead (CAD)
-        <input type="number" name="rate" min="0" step="1" value="55" inputmode="decimal" required />
-       </label>
+"""
+        + PAY_FIELDS.replace('value="45"', 'value="55"')
+        + """
        <label>Can you replay why the last one passed?
         <select name="replay" required>
          <option value="no" selected>No</option>
@@ -449,9 +477,9 @@ def main() -> None:
        <label>Hours per used seat per week
         <input type="number" name="hours" min="0" step="0.5" value="4" inputmode="decimal" required />
        </label>
-       <label>Hourly rate before overhead (CAD)
-        <input type="number" name="rate" min="0" step="1" value="55" inputmode="decimal" required />
-       </label>
+"""
+        + PAY_FIELDS.replace('value="45"', 'value="55"')
+        + """
        <label>Annual cost per seat (CAD)
         <span class="hint">Default 360 for Copilot-class licensing. Change it if you know the real number.</span>
         <input type="number" name="seat" min="0" step="10" value="360" inputmode="decimal" required />
@@ -468,6 +496,112 @@ def main() -> None:
     <article><h3>Used seats with no named accepter</h3><p>That is the expensive line. Hours are being spent and nobody can replay why an output left the building.</p></article>
         """,
         "Unused waste = unused seats × annual seat cost. Ungoverned use = used seats × hours × loaded rate × 48 weeks.",
+    )
+    tool_page(
+        "meeting-tax",
+        "Standing meeting tax — Noetfield",
+        "What one recurring meeting costs in payroll each year, and whether to cancel it.",
+        "Calendar versus payroll",
+        "What is this standing meeting costing you?",
+        "A meeting with no decision and no named owner is a payroll line. Four inputs. Under $3,000 a year, leave the calendar alone.",
+        """
+       <label>Times this meeting happens a week
+        <input type="number" name="meetings" min="0" step="0.5" value="2" inputmode="decimal" required />
+       </label>
+       <label>Minutes on the calendar
+        <input type="number" name="minutes" min="0" step="5" value="45" inputmode="decimal" required />
+       </label>
+       <label>People in the room
+        <input type="number" name="people" min="0" step="1" value="8" inputmode="decimal" required />
+       </label>
+"""
+        + PAY_FIELDS
+        + """
+        """,
+        """
+    <div class="nf-tools-presets">
+     <button type="button" data-preset='{"meetings":1,"minutes":30,"people":4,"pay":"hourly","rate":45}'>Small standup</button>
+     <button type="button" data-preset='{"meetings":3,"minutes":60,"people":12,"pay":"hourly","rate":70}'>Leadership stack</button>
+     <button type="button" data-halve="people">Halve the room</button>
+    </div>
+        """,
+        """
+    <article><h3>No decision, no meeting</h3><p>If nobody can name what changed because the meeting happened, cancel it for two weeks and see if the work still ships.</p></article>
+    <article><h3>The invite list is the leak</h3><p>People accept because it is cheaper than arguing. Price the room. Then cut it.</p></article>
+        """,
+        "Annual cost = meetings × (minutes ÷ 60) × people × rate × 1.3 × 48. Under $3,000, leave it.",
+    )
+    tool_page(
+        "handoff",
+        "Handoff tax — Noetfield",
+        "Price how often the same work gets explained again between roles.",
+        "Re-explain tax",
+        "How many times is the same work explained again?",
+        "A ticket that needs a walkthrough every time it changes hands is not a process. It is a leak with a calendar.",
+        """
+       <label>Handoffs a week
+        <span class="hint">Times the same item is re-explained.</span>
+        <input type="number" name="touches" min="0" step="0.5" value="10" inputmode="decimal" required />
+       </label>
+       <label>Minutes per handoff
+        <input type="number" name="minutes" min="0" step="0.5" value="15" inputmode="decimal" required />
+       </label>
+"""
+        + PAY_FIELDS
+        + """
+       <label>People in the chain
+        <input type="number" name="people" min="0" step="1" value="3" inputmode="decimal" required />
+       </label>
+        """,
+        """
+    <div class="nf-tools-presets">
+     <button type="button" data-preset='{"touches":6,"minutes":10,"pay":"hourly","rate":40,"people":2}'>Two-desk pass</button>
+     <button type="button" data-preset='{"touches":20,"minutes":18,"pay":"hourly","rate":55,"people":4}'>Ticket ping-pong</button>
+     <button type="button" data-halve="touches">Halve the handoffs</button>
+    </div>
+        """,
+        """
+    <article><h3>Write it down once</h3><p>If the walkthrough is the same every time, the leak is missing a receipt, not missing a meeting.</p></article>
+    <article><h3>Count the ping-pong</h3><p>People remember the angry handoff and forget the quiet ones. Count a real week.</p></article>
+        """,
+        "Annual cost = handoffs × (minutes ÷ 60) × rate × 1.3 × people × 48. Under $3,000, leave it alone.",
+    )
+    tool_page(
+        "shadow-ai",
+        "Shadow AI — Noetfield",
+        "Count personal ChatGPT and Claude next to the licensed invoice.",
+        "Off the invoice",
+        "Finance is looking at the licensed bill. The unofficial line is often larger.",
+        "Personal tools do not show up in the Copilot meeting. Four inputs. If two people are on a $20 plan, leave it alone.",
+        """
+       <label>People on personal AI plans
+        <input type="number" name="people" min="0" step="1" value="12" inputmode="decimal" required />
+       </label>
+       <label>Estimated personal spend each, per month (CAD)
+        <span class="hint">ChatGPT Plus or Claude Pro is about $20 to $30.</span>
+        <input type="number" name="personal" min="0" step="1" value="22" inputmode="decimal" required />
+       </label>
+       <label>Licensed AI / Copilot spend per month (CAD)
+        <input type="number" name="licensed" min="0" step="50" value="4000" inputmode="decimal" required />
+       </label>
+       <label>Does anyone own the unofficial line?
+        <select name="owner" required>
+         <option value="no" selected>No</option>
+         <option value="yes">Yes</option>
+        </select>
+       </label>
+        """,
+        """
+    <div class="nf-tools-presets">
+     <button type="button" data-preset='{"people":2,"personal":20,"licensed":400,"owner":"yes"}'>Two people, owned</button>
+     <button type="button" data-preset='{"people":40,"personal":25,"licensed":3000,"owner":"no"}'>Wide unofficial use</button>
+    </div>
+        """,
+        """
+    <article><h3>The invoice meeting is incomplete</h3><p>Licensed Copilot is what procurement sees. Personal ChatGPT is what people actually use after 5pm.</p></article>
+    <article><h3>Name one owner</h3><p>If nobody owns the unofficial line, it will still be there next quarter. This page does not store names.</p></article>
+        """,
+        "Shadow annual = people × personal monthly × 12. Leave it alone at two people on a cheap plan.",
     )
     tool_page(
         "board-five",

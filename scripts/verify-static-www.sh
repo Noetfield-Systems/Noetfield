@@ -453,8 +453,8 @@ done
 
 check_file "tools hub meeting use" tools/index.html \
   'Use it in a meeting' 'Fill four numbers' 'leave-alone'
-check_file "quiet leak pasteable memo" tools/quiet-leak/index.html \
-  'data-result-memo' 'Copy memo' 'data-result-math'
+check_file "quiet leak practical result" tools/quiet-leak/index.html \
+  'data-result-blurb' 'Copy for Slack' 'nf-tools-print' 'name="pay"'
 
 check_file "tools hub honest leave-alone" tools/index.html \
   '<title>Free operator tools' \
@@ -462,7 +462,10 @@ check_file "tools hub honest leave-alone" tools/index.html \
   'No signup' \
   'Nothing stored' \
   'href="/tools/quiet-leak/"' \
+  'href="/tools/meeting-tax/"' \
+  'href="/tools/handoff/"' \
   'href="/tools/ai-spend/"' \
+  'href="/tools/shadow-ai/"' \
   'href="/tools/who-accepted/"' \
   'href="/tools/copilot-seats/"' \
   'href="/tools/board-five/"' \
