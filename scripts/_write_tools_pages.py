@@ -6,8 +6,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSET_CSS = "/assets/noetfield-corporate-v1.css?v=5"
-TOOLS_CSS = "/assets/noetfield-tools.css?v=1"
-TOOLS_JS = "/assets/noetfield-tools.js?v=1"
+TOOLS_CSS = "/assets/noetfield-tools.css?v=2"
+TOOLS_JS = "/assets/noetfield-tools.js?v=2"
 OG = "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png"
 
 
@@ -83,7 +83,7 @@ def chrome(title: str, desc: str, url: str, tool: str, extra_ld: str = "") -> tu
   </div>
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Free. No signup. Nothing stored.</span></div>
  </footer>
- <script src="/assets/noetfield-tools.js?v=1" defer></script>
+ <script src="/assets/noetfield-tools.js?v=2" defer></script>
 </body>
 </html>
 """
@@ -119,11 +119,15 @@ def result_panel(kicker: str, show_amount: bool = True) -> str:
       {amount}
       <h2 data-result-headline>Fill the four numbers.</h2>
       <p data-result-body>The honest answer updates as you type. Under the hobby line, it will tell you to leave it alone.</p>
+      <p class="nf-tools-worked" data-result-math hidden></p>
+      <p class="nf-tools-next" data-result-action hidden></p>
       <p data-result-extra hidden></p>
+      <label class="nf-tools-memo-label" for="nf-tools-memo">Pasteable memo</label>
+      <textarea id="nf-tools-memo" class="nf-tools-memo" data-result-memo readonly rows="7"></textarea>
       <div class="nf-tools-actions">
        <a class="nf-button nf-button--primary" data-result-cta href="/tools/">See the other checks</a>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy memo</button>
        <button type="button" class="nf-button nf-button--secondary" id="nf-tools-share">Copy share link</button>
-       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy result</button>
       </div>
      </aside>"""
 
@@ -168,6 +172,25 @@ def hub() -> None:
      <a href="/tools/copilot-seats/"><span>Copilot</span><h3>Seats versus a decision trail</h3><p>Unused licenses and ungoverned use, counted separately on purpose.</p></a>
      <a href="/tools/board-five/"><span>Board</span><h3>Five yes/no questions</h3><p>Score 0 or 1: do not buy. The tool will say that out loud.</p></a>
      <a href="/tools/embed/"><span>Advisors</span><h3>Put this on your own page</h3><p>One iframe. We do not track your visitors.</p></a>
+    </div>
+   </div>
+  </section>
+  <section class="nf-corp-section" aria-labelledby="use-title">
+   <div class="nf-corp-wrap">
+    <h2 id="use-title" class="nf-corp-kicker">Use it in a meeting</h2>
+    <div class="nf-tools-notes" style="margin-top:1rem">
+     <article>
+      <h3>1. Pick the quiet one</h3>
+      <p>Not the loud complaint. The copy between two systems. The draft a human rewrote after the model said it was done.</p>
+     </article>
+     <article>
+      <h3>2. Fill four numbers</h3>
+      <p>About a minute. Conservative on purpose: 1.3 loaded rate, 48 weeks. The page shows the worked math, not a black box.</p>
+     </article>
+     <article>
+      <h3>3. Read the leave-alone line out loud</h3>
+      <p>If it says stop, stop. Copy the memo into Slack or email. Nothing is stored here.</p>
+     </article>
     </div>
    </div>
   </section>
@@ -270,12 +293,24 @@ def embed() -> None:
      <h1 id="embed-title">Put the check on your own page.</h1>
     </div>
     <div>
-     <p class="nf-corp-lead">One iframe. No signup. We do not set cookies on your visitors and we do not store their numbers. Keep the Noetfield link under the frame so people can open the full page.</p>
+     <p class="nf-corp-lead">Send the link in a call first. Embed only if they want it on their site. One iframe. No signup. We do not set cookies on your visitors and we do not store their numbers.</p>
     </div>
    </div>
   </section>
   <section class="nf-corp-section">
    <div class="nf-corp-wrap">
+    <div class="nf-tools-notes" style="margin-bottom:1.6rem">
+     <article>
+      <h3>With a client</h3>
+      <p>Open Quiet leak. Fill their numbers live. Read the leave-alone line out loud. Copy the memo into the follow-up email.</p>
+     </article>
+     <article>
+      <h3>On your site</h3>
+      <p>Paste one iframe. Keep a Noetfield link under the frame. We do not track your visitors.</p>
+     </article>
+    </div>
+    <p class="nf-corp-kicker">Live preview</p>
+    <iframe class="nf-tools-preview" src="https://www.noetfield.com/tools/quiet-leak/?embed=1" title="Quiet leak embed preview" loading="lazy"></iframe>
     {''.join(blocks)}
     <p class="nf-corp-lead">If you advise operators, send them a check that is willing to say leave it alone. That is the whole point.</p>
    </div>

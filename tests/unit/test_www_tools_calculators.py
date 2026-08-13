@@ -56,7 +56,7 @@ def test_live_ctas_are_real_noetfield_urls() -> None:
     assert "/copilot/pilot/" in JS
     assert "/trust-brief/" in JS
     assert "/copilot/readiness/" not in JS
-    assert "cta: \"app\"" in JS
+    assert "Open the app" in JS
     assert JS.count("noetfield.com") >= 1
 
 
@@ -91,3 +91,19 @@ def test_embed_kit_lists_iframe_sources() -> None:
     html = (TOOLS / "embed" / "index.html").read_text(encoding="utf-8")
     for slug in ("quiet-leak", "ai-spend", "who-accepted", "copilot-seats", "board-five"):
         assert f"/tools/{slug}/?embed=1" in html
+
+
+def test_practical_field_output_is_wired() -> None:
+    js = JS
+    assert "Pasteable memo" not in js
+    assert "memo:" in js or "memo =" in js
+    assert 'action: action' in js or "action: action" in js
+    quiet = (TOOLS / "quiet-leak" / "index.html").read_text(encoding="utf-8")
+    assert "data-result-math" in quiet
+    assert "data-result-action" in quiet
+    assert "data-result-memo" in quiet
+    assert "Copy memo" in quiet
+    hub = (TOOLS / "index.html").read_text(encoding="utf-8")
+    assert "Use it in a meeting" in hub
+    embed = (TOOLS / "embed" / "index.html").read_text(encoding="utf-8")
+    assert "With a client" in embed

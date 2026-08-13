@@ -25,7 +25,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=5" />
- <link rel="stylesheet" href="/assets/noetfield-tools.css?v=1" />
+ <link rel="stylesheet" href="/assets/noetfield-tools.css?v=2" />
  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -111,11 +111,15 @@
       <p class="nf-tools-amount" data-result-amount>$0</p>
       <h2 data-result-headline>Fill the four numbers.</h2>
       <p data-result-body>The honest answer updates as you type. Under the hobby line, it will tell you to leave it alone.</p>
+      <p class="nf-tools-worked" data-result-math hidden></p>
+      <p class="nf-tools-next" data-result-action hidden></p>
       <p data-result-extra hidden></p>
+      <label class="nf-tools-memo-label" for="nf-tools-memo">Pasteable memo</label>
+      <textarea id="nf-tools-memo" class="nf-tools-memo" data-result-memo readonly rows="7"></textarea>
       <div class="nf-tools-actions">
        <a class="nf-button nf-button--primary" data-result-cta href="/tools/">See the other checks</a>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy memo</button>
        <button type="button" class="nf-button nf-button--secondary" id="nf-tools-share">Copy share link</button>
-       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy result</button>
       </div>
      </aside>
     </div>
@@ -154,6 +158,6 @@
   </div>
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Free. No signup. Nothing stored.</span></div>
  </footer>
- <script src="/assets/noetfield-tools.js?v=1" defer></script>
+ <script src="/assets/noetfield-tools.js?v=2" defer></script>
 </body>
 </html>
