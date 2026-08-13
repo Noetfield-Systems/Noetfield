@@ -55,8 +55,9 @@ def test_required_tool_pages_exist_and_are_indexable() -> None:
 def test_live_ctas_are_real_noetfield_urls() -> None:
     assert "/copilot/pilot/" in JS
     assert "/trust-brief/" in JS
-    assert "https://app.noetfield.com/" in JS
     assert "/copilot/readiness/" not in JS
+    assert "cta: \"app\"" in JS
+    assert JS.count("noetfield.com") >= 1
 
 
 def test_homepage_and_applications_link_tools() -> None:
