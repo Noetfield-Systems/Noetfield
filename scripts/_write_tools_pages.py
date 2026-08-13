@@ -399,7 +399,7 @@ def main() -> None:
     )
     tool_page(
         "copilot-seats",
-        "Copilot seats versus governed use ·Noetfield",
+        "Copilot seats versus governed use — Noetfield",
         "Unused Copilot licenses and ungoverned use, shown as two separate yearly costs.",
         "Two numbers, not one",
         "You are paying for seats. You are not paying for a decision trail.",

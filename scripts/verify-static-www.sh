@@ -451,6 +451,24 @@ for f in index.html start/index.html pricing/index.html copilot/pilot/index.html
 done
 [[ "$lang_fail" -eq 0 ]] && ok "client-view language on public www" || fail=1
 
+check_file "tools hub honest leave-alone" tools/index.html \
+  '<title>Free operator tools' \
+  '<link rel="canonical" href="https://www.noetfield.com/tools/" />' \
+  'No signup' \
+  'Nothing stored' \
+  'href="/tools/quiet-leak/"' \
+  'href="/tools/ai-spend/"' \
+  'href="/tools/who-accepted/"' \
+  'href="/tools/copilot-seats/"' \
+  'href="/tools/board-five/"' \
+  'href="/tools/embed/"'
+check_absent "tools hub does not invent a Noetfield audit SKU" tools/index.html \
+  '$750' 'create an account' 'Sign up'
+check_file "quiet leak hobby line" tools/quiet-leak/index.html \
+  'Under $3,000' 'leave it alone' '1.3' '48'
+check_file "tools embed kit" tools/embed/index.html \
+  'quiet-leak/?embed=1' 'We do not track your visitors'
+
 check_file "pilot automation copy" copilot/pilot/index.html \
   'Policy-bound workflows' 'Automated governance' 'nf-signal-badge--available'
 

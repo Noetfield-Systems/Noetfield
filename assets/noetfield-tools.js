@@ -375,7 +375,7 @@
         var headline = document.querySelector("[data-result-headline]");
         var body = document.querySelector("[data-result-body]");
         var amount = document.querySelector("[data-result-amount]");
-        var text = [amount && amount.textContent, headline && headline.textContent, body && body.textContent, window.location.href]
+        var text = [amount && amount.textContent, headline && headline.textContent, body && body.textContent, NOTICE, window.location.href]
           .filter(Boolean)
           .join("\n");
         navigator.clipboard.writeText(text).then(function () {
