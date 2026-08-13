@@ -240,6 +240,54 @@
       };
     }
 
+    if (tool === "crm-followup") {
+      var openLeads = Math.max(0, num(form, "open"));
+      var owned = Math.min(100, Math.max(0, num(form, "owned"))) / 100;
+      var minutes = Math.max(0, num(form, "minutes"));
+      var orphans = openLeads * (1 - owned);
+      var cost = orphans * (minutes / 60) * hourly(form) * LOAD * WEEKS;
+      var replay = sel(form, "replay") === "yes";
+      var amount = Math.round(orphans) + " orphans · " + money(cost) + " / year to work them weekly";
+      if (openLeads <= 40 && owned >= 0.8 && replay) {
+        return {
+          kind: "leave",
+          amount: amount,
+          headline: "Leave the CRM alone.",
+          body: "A named owner, a next date, and a replayable last action. Spreadsheet or HubSpot as-is is enough. Do not buy another CRM.",
+          extra: "People count CRM records and forget the inbox. If the real pipeline is WhatsApp, name that before you migrate.",
+          cta: "tools",
+        };
+      }
+      if (cost < HOBBY) {
+        return {
+          kind: "leave",
+          amount: amount,
+          headline: "Leave it alone.",
+          body: "Under $3,000 a year, working those orphans is a hobby, not a CRM project. Put a next date on the open ones. Stop shopping.",
+          extra: "",
+          cta: "tools",
+        };
+      }
+      if (owned < 0.5 || !replay) {
+        return {
+          kind: "act",
+          amount: amount,
+          headline: "That is a graveyard, not a pipeline.",
+          body: "Name an owner and a next date on the open pile before you buy a migration. Moving a card is not a follow-up.",
+          extra: "A follow-up is a message a human sent, with a date you can open later.",
+          cta: "app",
+        };
+      }
+      return {
+        kind: "look",
+        amount: amount,
+        headline: "Close the orphan pile before you migrate.",
+        body: "You already have owners on most records. The leak is the rest. Put a next date on those before you change systems.",
+        extra: "",
+        cta: "app",
+      };
+    }
+
     if (tool === "copilot-seats") {
       var licensed = Math.max(0, num(form, "licensed"));
       var used = Math.min(licensed, Math.max(0, num(form, "used")));
@@ -331,6 +379,9 @@
     if ((tool === "quiet-leak" || tool === "handoff") && num(form, "touches") > 80) {
       return "More than 80 touches a week is possible. Count one real day before you trust this.";
     }
+    if (tool === "crm-followup" && num(form, "open") > 5000) {
+      return "That looks like the whole contact list. Count open leads only, not every record in the CRM.";
+    }
     if (tool === "meeting-tax" && num(form, "people") > 20) {
       return "A room that large is usually two meetings stacked. Split the invite list and price each one.";
     }
@@ -376,6 +427,18 @@
         " / week × " +
         num(form, "minutes") +
         " min × " +
+        money(rate) +
+        "/hr × 1.3 × 48"
+      );
+    }
+    if (tool === "crm-followup") {
+      var ownedShare = Math.min(100, Math.max(0, num(form, "owned"))) / 100;
+      var orphanCount = Math.max(0, num(form, "open")) * (1 - ownedShare);
+      return (
+        Math.round(orphanCount) +
+        " orphans × (" +
+        num(form, "minutes") +
+        " ÷ 60) × " +
         money(rate) +
         "/hr × 1.3 × 48"
       );

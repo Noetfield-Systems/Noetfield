@@ -3,21 +3,21 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Quiet leak calculator — Noetfield</title>
- <meta name="description" content="Four numbers. What one manual process costs a year, and whether it is worth fixing." />
+ <title>CRM follow-up graveyard — Noetfield</title>
+ <meta name="description" content="Price the open leads that have no owner and no next date. The page will tell you not to buy another CRM." />
  <meta name="robots" content="index,follow" />
- <link rel="canonical" href="https://www.noetfield.com/tools/quiet-leak/" />
+ <link rel="canonical" href="https://www.noetfield.com/tools/crm-followup/" />
  <meta property="og:site_name" content="Noetfield" />
- <meta property="og:title" content="Quiet leak calculator — Noetfield" />
- <meta property="og:description" content="Four numbers. What one manual process costs a year, and whether it is worth fixing." />
- <meta property="og:url" content="https://www.noetfield.com/tools/quiet-leak/" />
+ <meta property="og:title" content="CRM follow-up graveyard — Noetfield" />
+ <meta property="og:description" content="Price the open leads that have no owner and no next date. The page will tell you not to buy another CRM." />
+ <meta property="og:url" content="https://www.noetfield.com/tools/crm-followup/" />
  <meta property="og:type" content="website" />
  <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
  <meta property="og:image:width" content="1200" />
  <meta property="og:image:height" content="630" />
  <meta name="twitter:card" content="summary_large_image" />
- <meta name="twitter:title" content="Quiet leak calculator — Noetfield" />
- <meta name="twitter:description" content="Four numbers. What one manual process costs a year, and whether it is worth fixing." />
+ <meta name="twitter:title" content="CRM follow-up graveyard — Noetfield" />
+ <meta name="twitter:description" content="Price the open leads that have no owner and no next date. The page will tell you not to buy another CRM." />
  <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
  <meta name="theme-color" content="#f3f0e9" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
@@ -30,17 +30,17 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Quiet leak calculator — Noetfield",
-  "url": "https://www.noetfield.com/tools/quiet-leak/",
+  "name": "CRM follow-up graveyard — Noetfield",
+  "url": "https://www.noetfield.com/tools/crm-followup/",
   "applicationCategory": "BusinessApplication",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
-  "description": "Four numbers. What one manual process costs a year, and whether it is worth fixing.",
+  "description": "Price the open leads that have no owner and no next date. The page will tell you not to buy another CRM.",
   "isAccessibleForFree": true,
   "provider": { "@type": "Organization", "name": "Noetfield Systems Inc.", "url": "https://www.noetfield.com/" }
 }
  </script>
 </head>
-<body class="nf-corp nf-corp--inner nf-tools" data-tool="quiet-leak">
+<body class="nf-corp nf-corp--inner nf-tools" data-tool="crm-followup">
  <a class="nf-skip" href="#main">Skip to main content</a>
  <header class="nf-corp-header">
   <div class="nf-corp-wrap nf-corp-navrow">
@@ -59,11 +59,11 @@
   <section class="nf-inner-hero" aria-labelledby="tool-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div>
-     <p class="nf-corp-kicker">Same math as the operator post</p>
-     <h1 id="tool-title">What is this process costing you?</h1>
+     <p class="nf-corp-kicker">Pipeline versus graveyard</p>
+     <h1 id="tool-title">Most teams can name their CRM. Almost none can name the last human action on an open lead.</h1>
     </div>
     <div>
-     <p class="nf-corp-lead">Pick the quiet one. Double entry. Status copied into a tracker. A draft rewritten after the model said it was done. Four inputs, 48 working weeks, 1.3 loaded rate.</p>
+     <p class="nf-corp-lead">A pipeline has a named owner, a next date, and a message you can open later. Moving a card is not a follow-up. Four inputs. Under $3,000 a year, do not buy another CRM.</p>
      <div class="nf-corp-actions">
       <a class="nf-button nf-button--secondary" href="/tools/">All tools</a>
       <a class="nf-button nf-button--secondary" href="/tools/embed/">Embed this</a>
@@ -75,22 +75,24 @@
    <div class="nf-corp-wrap">
     <h2 id="calc-title" class="nf-corp-kicker">One minute</h2>
     
-    <div class="nf-tools-presets" aria-label="Example leaks">
-     <button type="button" data-preset='{"touches":10,"minutes":8,"pay":"hourly","rate":45,"people":3}'>Double data entry</button>
-     <button type="button" data-preset='{"touches":6,"minutes":15,"pay":"hourly","rate":40,"people":2}'>Invoice chase</button>
-     <button type="button" data-preset='{"touches":12,"minutes":5,"pay":"hourly","rate":38,"people":4}'>CRM copy-paste</button>
-     <button type="button" data-halve="touches">Halve the touches</button>
+    <div class="nf-tools-presets">
+     <button type="button" data-preset='{"open":30,"owned":90,"minutes":8,"pay":"hourly","rate":45,"replay":"yes"}'>Tight list, owned</button>
+     <button type="button" data-preset='{"open":400,"owned":15,"minutes":12,"pay":"hourly","rate":55,"replay":"no"}'>Graveyard</button>
     </div>
         
     <div class="nf-tools-layout" style="margin-top:1rem">
      <div class="nf-tools-card">
       <form id="nf-tools-form" class="nf-tools-form" action="#" method="get">
        
-       <label>Times a week someone touches it
-        <input type="number" name="touches" min="0" step="0.5" value="8" inputmode="decimal" required />
+       <label>Open leads in the CRM
+        <span class="hint">Records that are not closed. Not the whole contact list.</span>
+        <input type="number" name="open" min="0" step="1" value="180" inputmode="decimal" required />
        </label>
-       <label>Minutes per touch
-        <span class="hint">Include the context switch.</span>
+       <label>Share with a named owner and a next date (%)
+        <input type="number" name="owned" min="0" max="100" step="1" value="20" inputmode="decimal" required />
+       </label>
+       <label>Minutes for one real follow-up
+        <span class="hint">A message a human sent, not a status update.</span>
         <input type="number" name="minutes" min="0" step="0.5" value="12" inputmode="decimal" required />
        </label>
 
@@ -109,8 +111,11 @@
         <span class="hint" data-derived-hourly></span>
        </label>
 
-       <label>How many people do this
-        <input type="number" name="people" min="0" step="1" value="3" inputmode="decimal" required />
+       <label>Can you replay the last human action on a typical open lead?
+        <select name="replay" required>
+         <option value="no" selected>No</option>
+         <option value="yes">Yes</option>
+        </select>
        </label>
         
       </form>
@@ -133,10 +138,10 @@
       </div>
      </aside>
     </div>
-    <p class="nf-corp-lead nf-tools-math">Annual cost = touches × (minutes ÷ 60) × rate × 1.3 × people × 48. Under $3,000, leave it alone.</p>
+    <p class="nf-corp-lead nf-tools-math">Orphans = open × (1 − owned share). Annual cost = orphans × (minutes ÷ 60) × rate × 1.3 × 48. Under $3,000, leave the CRM alone.</p>
     <div class="nf-tools-notes">
-    <article><h3>People undercount touches by about half</h3><p>Count one real day before you estimate. The number you type from memory is usually the complaint, not the work.</p></article>
-    <article><h3>The expensive leaks are the quiet ones</h3><p>Nobody files a ticket for the copy between two systems. Everyone accepted it years ago. That is why it survives.</p></article>
+    <article><h3>People count CRM leads and forget the inbox</h3><p>WhatsApp, the personal inbox, and the spreadsheet on someone&rsquo;s desktop are often the real pipeline. Count those before you buy a migration.</p></article>
+    <article><h3>Moving a card is not a follow-up</h3><p>A follow-up is a message a human sent, with a date you can open later. If you cannot replay that, you have a graveyard.</p></article>
         </div>
    </div>
   </section>

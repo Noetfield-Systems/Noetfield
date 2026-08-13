@@ -36,6 +36,7 @@ def test_required_tool_pages_exist_and_are_indexable() -> None:
     routes = [
         "index.html",
         "quiet-leak/index.html",
+        "crm-followup/index.html",
         "meeting-tax/index.html",
         "handoff/index.html",
         "ai-spend/index.html",
@@ -78,6 +79,7 @@ def test_public_artifact_allowlist_includes_tools() -> None:
     for path in (
         "tools/index.html",
         "tools/quiet-leak/index.html",
+        "tools/crm-followup/index.html",
         "tools/meeting-tax/index.html",
         "tools/handoff/index.html",
         "tools/ai-spend/index.html",
@@ -97,6 +99,7 @@ def test_embed_kit_lists_iframe_sources() -> None:
     html = (TOOLS / "embed" / "index.html").read_text(encoding="utf-8")
     for slug in (
         "quiet-leak",
+        "crm-followup",
         "meeting-tax",
         "handoff",
         "ai-spend",
@@ -121,6 +124,18 @@ def test_salary_and_practical_controls_exist() -> None:
     assert "standing meeting" in meeting.lower() or "Standing meeting" in meeting
     shadow = (TOOLS / "shadow-ai" / "index.html").read_text(encoding="utf-8")
     assert "personal" in shadow.lower()
+
+
+def test_crm_followup_hobby_and_graveyard() -> None:
+    small = 20 * (1 - 0.9) * (8 / 60) * 45 * LOAD * WEEKS
+    grave = 400 * (1 - 0.15) * (12 / 60) * 55 * LOAD * WEEKS
+    assert small < HOBBY
+    assert grave > HOBBY
+    assert "crm-followup" in JS
+    assert "graveyard" in JS.lower()
+    html = (TOOLS / "crm-followup" / "index.html").read_text(encoding="utf-8")
+    assert "do not buy another CRM" in html
+    assert "$750" not in html
 
 
 def test_meeting_tax_hobby_line() -> None:
