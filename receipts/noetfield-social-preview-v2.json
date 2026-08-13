@@ -776,7 +776,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/developers/",
-      "description": "The Noetfield developer surface: API status, AI Motors, architecture, Action Contracts, acceptance and receipt schema direction, integration status, and current limitations.",
+      "description": "What engineers can use today: a preview API, a real run you can inspect, and an honest list of what is not built yet.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,
