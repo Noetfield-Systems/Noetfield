@@ -71,6 +71,23 @@ def test_homepage_and_applications_link_tools() -> None:
     assert 'href="/tools/"' in apps
 
 
+def test_route_inventory_includes_tools() -> None:
+    import json
+
+    data = json.loads((ROOT / "governance" / "ROUTE_INVENTORY.json").read_text(encoding="utf-8"))
+    paths = {row["path"] for row in data["routes"]}
+    for path in (
+        "/tools/",
+        "/tools/quiet-leak/",
+        "/tools/crm-followup/",
+        "/tools/meeting-tax/",
+        "/tools/handoff/",
+        "/tools/shadow-ai/",
+        "/tools/embed/",
+    ):
+        assert path in paths
+
+
 def test_public_artifact_allowlist_includes_tools() -> None:
     import json
 

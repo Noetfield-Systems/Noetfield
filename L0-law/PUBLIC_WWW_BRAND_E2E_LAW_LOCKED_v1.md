@@ -88,7 +88,7 @@ Optional base override: `NOETFIELD_E2E_BASE=https://www.noetfield.com`
 
 ### HTTP 200 required
 
-`/`, `/start/`, `/pricing/`, `/copilot/`, `/copilot/pilot/`, `/copilot/demo/`, `/copilot/proof-case/`, `/trust/`, `/trust-brief/intake/`, `/trust-ledger/sample-report/`, `/investors/`, `/work-with-us/`, `/health` (or `/api/health`), `/governance/`, `/ai-factories/`, `/ai-factories/spec/`, `/openapi.json`, `/config/gate-ai-factory-design.json`, `/config/status-ai-factory.json`, `/noetfield-ai-factory-lanes.json`
+`/`, `/start/`, `/pricing/`, `/copilot/`, `/copilot/pilot/`, `/copilot/demo/`, `/copilot/proof-case/`, `/trust/`, `/trust-brief/intake/`, `/trust-ledger/sample-report/`, `/investors/`, `/work-with-us/`, `/health` (or `/api/health`), `/governance/`, `/ai-factories/`, `/ai-factories/spec/`, `/openapi.json`, `/config/gate-ai-factory-design.json`, `/config/status-ai-factory.json`, `/noetfield-ai-factory-lanes.json`, `/tools/`, `/tools/meeting-tax/`, `/tools/handoff/`, `/tools/crm-followup/`, `/tools/shadow-ai/`
 
 ### HTTP 404 required (internal leak regression)
 

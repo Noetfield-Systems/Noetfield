@@ -42,7 +42,6 @@ FORBIDDEN_PREFIXES = {
     "_archive/",
     "api/",
     "apps/",
-    "config/",
     "data/",
     "docs/",
     "governance-console/",
