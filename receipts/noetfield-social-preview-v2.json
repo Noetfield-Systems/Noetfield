@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 53,
+  "indexable_route_count": 56,
   "noindex_route_count": 117,
-  "route_count": 170,
+  "route_count": 173,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -2519,6 +2519,22 @@
       "verdict": "PASS"
     },
     {
+      "canonical_url": "https://www.noetfield.com/tools/handoff/",
+      "description": "Price how often the same work gets explained again between roles.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/handoff/",
+      "title": "Handoff tax \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
       "canonical_url": "https://www.noetfield.com/tools/",
       "description": "One-minute checks that will tell you to leave a process alone. No signup. Nothing stored.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
@@ -2535,6 +2551,22 @@
       "verdict": "PASS"
     },
     {
+      "canonical_url": "https://www.noetfield.com/tools/meeting-tax/",
+      "description": "What one recurring meeting costs in payroll each year, and whether to cancel it.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/meeting-tax/",
+      "title": "Standing meeting tax \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
       "canonical_url": "https://www.noetfield.com/tools/quiet-leak/",
       "description": "Four numbers. What one manual process costs a year, and whether it is worth fixing.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
@@ -2548,6 +2580,22 @@
       "profile": "corporate",
       "route": "/tools/quiet-leak/",
       "title": "Quiet leak calculator \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/tools/shadow-ai/",
+      "description": "Count personal ChatGPT and Claude next to the licensed invoice.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/shadow-ai/",
+      "title": "Shadow AI \u2014 Noetfield",
       "verdict": "PASS"
     },
     {
