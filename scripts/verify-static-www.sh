@@ -479,6 +479,12 @@ check_file "tools embed kit" tools/embed/index.html \
   'quiet-leak/?embed=1' 'crm-followup/?embed=1' 'We do not track your visitors'
 check_file "crm follow-up leave-alone" tools/crm-followup/index.html \
   'do not buy another CRM' 'graveyard' 'Nothing stored'
+check_file "meeting tax practical result" tools/meeting-tax/index.html \
+  'data-result-blurb' 'Copy for Slack' 'nf-tools-print' 'noetfield-tools.js'
+check_file "handoff practical result" tools/handoff/index.html \
+  'data-result-blurb' 'Copy for Slack' 'nf-tools-print' 'noetfield-tools.js'
+check_file "shadow AI practical result" tools/shadow-ai/index.html \
+  'data-result-blurb' 'Copy for Slack' 'nf-tools-print' 'noetfield-tools.js'
 
 check_file "pilot automation copy" copilot/pilot/index.html \
   'Policy-bound workflows' 'Automated governance' 'nf-signal-badge--available'

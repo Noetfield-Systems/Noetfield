@@ -129,7 +129,7 @@ const mandatoryAbsenceProbes = [
   "/tests/unit/test_investor_diligence_lane.py",
   "/reports/recovery/NF-REL-002.md",
   "/packages/schemas/tle-v1.schema.json",
-  "/config/gate-ai-factory-design.json",
+  "/config/internal-not-public.json",
   "/assets/noetfield-platform-auth-config-v1.json",
   "/api/auth/invest-session.js",
   "/functions/invest/[[path]].js",

@@ -21,15 +21,12 @@ API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 # Corporate entry homepage — product CTAs remain on their scoped field pages.
 HOME_NEEDLES = (
     "nf-corp",
-    "AI systems that can act, and show why the action was allowed.",
-    "governed execution runtimes that coordinate",
+    "Give Noetfield a goal.",
     "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.",
-    "Engines provide capability. Agents perform bounded work. Runways define how results qualify. Motors govern execution.",
-    "AI capability is abundant. Governed execution is not.",
     "founder-operated alpha",
     "TrustField",
     "trustfield.ca",
-    "Inspect current proof",
+    "Open Noetfield App",
     "noetfield-home-v2.css",
     "/motors/",
     "/runways/",
@@ -37,7 +34,37 @@ HOME_NEEDLES = (
     "/investors/",
     "/trust/",
     "/privacy/",
-    'href="https://app.noetfield.com/">Deploy</a>',
+    "/tools/",
+)
+
+MOTORS_NEEDLES = (
+    "Governed execution runtime",
+    "authorized Action Contracts",
+    "Motor does not reason",
+    "Models generate. Agents participate. Motors operate.",
+)
+
+TOOL_ROUTES = (
+    "/tools/",
+    "/tools/quiet-leak/",
+    "/tools/crm-followup/",
+    "/tools/meeting-tax/",
+    "/tools/handoff/",
+    "/tools/ai-spend/",
+    "/tools/shadow-ai/",
+    "/tools/who-accepted/",
+    "/tools/copilot-seats/",
+    "/tools/board-five/",
+    "/tools/embed/",
+)
+
+TOOL_HUB_NEEDLES = (
+    "No signup",
+    "Nothing stored",
+    "/tools/meeting-tax/",
+    "/tools/handoff/",
+    "/tools/crm-followup/",
+    "/tools/shadow-ai/",
 )
 
 # Explicitly forbidden on the public corporate homepage.
@@ -183,12 +210,6 @@ def main() -> int:
         else:
             print(f"OK   homepage free of {bad!r}")
 
-    motors_needles = (
-        "governed execution runtime",
-        "controlled outcomes verified against defined acceptance criteria",
-        "Engines provide capability. Agents perform bounded tasks. Runways qualify outcomes. Motors operate.",
-        "A Motor may coordinate models, engines, agents, runways and workflows under one execution contract.",
-    )
     motors_forbidden = (
         "Tesla",
         "Tesla-class",
@@ -197,7 +218,7 @@ def main() -> int:
         "governs and executes the whole system",
     )
     _, motors = fetch(f"{BASE}/motors/")
-    for needle in motors_needles:
+    for needle in MOTORS_NEEDLES:
         if needle in motors:
             print(f"OK   motors: {needle}")
         else:
@@ -218,12 +239,33 @@ def main() -> int:
         else:
             print(f"OK   runways free of {bad!r}")
 
-    _, enterprise = fetch(f"{BASE}/enterprise/")
+    _, start = fetch(f"{BASE}/start/")
+    _, brief = fetch(f"{BASE}/trust-brief/")
+    intake_pages = start + brief
     for needle in ENTERPRISE_NEEDLES:
-        if needle in enterprise:
-            print(f"OK   enterprise: {needle}")
+        if needle in intake_pages:
+            print(f"OK   start/trust-brief: {needle}")
         else:
-            print(f"FAIL enterprise missing: {needle}", file=sys.stderr)
+            print(f"FAIL start/trust-brief missing: {needle}", file=sys.stderr)
+            fail += 1
+
+    for path in TOOL_ROUTES:
+        code, body = fetch(f"{BASE}{path}")
+        if 200 <= code < 300:
+            print(f"OK   tools {path} ({code})")
+        else:
+            print(f"FAIL tools {path} ({code})", file=sys.stderr)
+            fail += 1
+            continue
+        if "noetfield-tools.js" not in body and path != "/tools/" and path != "/tools/embed/":
+            print(f"FAIL tools {path} missing calculator script", file=sys.stderr)
+            fail += 1
+    _, tools_hub = fetch(f"{BASE}/tools/")
+    for needle in TOOL_HUB_NEEDLES:
+        if needle in tools_hub:
+            print(f"OK   tools hub: {needle}")
+        else:
+            print(f"FAIL tools hub missing: {needle}", file=sys.stderr)
             fail += 1
 
     _, pilot = fetch(f"{BASE}/copilot/pilot/")

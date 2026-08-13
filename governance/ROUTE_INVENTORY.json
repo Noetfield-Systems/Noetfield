@@ -159,6 +159,83 @@
       "source": "about/index.html"
     },
     {
+      "path": "/tools/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Public operator tools hub",
+      "source": "tools/index.html"
+    },
+    {
+      "path": "/tools/quiet-leak/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Quiet leak calculator",
+      "source": "tools/quiet-leak/index.html"
+    },
+    {
+      "path": "/tools/crm-followup/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "CRM follow-up graveyard check",
+      "source": "tools/crm-followup/index.html"
+    },
+    {
+      "path": "/tools/meeting-tax/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Standing meeting tax calculator",
+      "source": "tools/meeting-tax/index.html"
+    },
+    {
+      "path": "/tools/handoff/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Handoff tax calculator",
+      "source": "tools/handoff/index.html"
+    },
+    {
+      "path": "/tools/ai-spend/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "AI spend you cannot explain",
+      "source": "tools/ai-spend/index.html"
+    },
+    {
+      "path": "/tools/shadow-ai/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Shadow AI calculator",
+      "source": "tools/shadow-ai/index.html"
+    },
+    {
+      "path": "/tools/who-accepted/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Who accepted this output",
+      "source": "tools/who-accepted/index.html"
+    },
+    {
+      "path": "/tools/copilot-seats/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Copilot seats versus governed use",
+      "source": "tools/copilot-seats/index.html"
+    },
+    {
+      "path": "/tools/board-five/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Five board questions",
+      "source": "tools/board-five/index.html"
+    },
+    {
+      "path": "/tools/embed/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Advisor embed kit",
+      "source": "tools/embed/index.html"
+    },
+    {
       "path": "/health",
       "expected_status": 200,
       "owner": "website-platform",
