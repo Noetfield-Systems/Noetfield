@@ -1,0 +1,45 @@
+name: WWW PR GitHub auto-merge
+
+# Queue GitHub auto-merge when Noetfield PR checks go green.
+# This workflow is the merger. Agents must not squash-merge after the fact.
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - validate
+      - Noetfield WWW CI
+      - Phase 3 Runtime Verification
+      - Platform CI (deploy-ready)
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+concurrency:
+  group: www-pr-automerge
+  cancel-in-progress: false
+
+jobs:
+  queue:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/www_pr_automerge_v1.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Queue GitHub auto-merge on green PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TRIGGER_BRANCH: ${{ github.event.workflow_run.head_branch || '' }}
+          TRIGGER_NAME: ${{ github.event.workflow_run.name || 'workflow_dispatch' }}
+          TRIGGER_CONCLUSION: ${{ github.event.workflow_run.conclusion || 'success' }}
+        run: node scripts/www_pr_automerge_v1.mjs
