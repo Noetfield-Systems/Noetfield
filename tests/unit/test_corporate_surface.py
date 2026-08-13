@@ -146,6 +146,24 @@ def test_trustfield_is_listed_as_noetfield_product() -> None:
     assert "regulated-operations and compliance product vertical" in investors.lower()
 
 
+def test_public_html_has_at_most_one_corp_header() -> None:
+    allowlist = json.loads((ROOT / "governance" / "www-public-artifact-v1.json").read_text())
+    for rel in allowlist["static_files"]:
+        if not rel.endswith(".html"):
+            continue
+        path = ROOT / rel
+        text = path.read_text(encoding="utf-8")
+        count = text.count('<header class="nf-corp-header">')
+        assert count <= 1, f"{rel} has {count} corporate headers"
+
+
+def test_developers_marks_developers_current_once() -> None:
+    text = read(ROOT / "developers" / "index.html")
+    assert text.count('<header class="nf-corp-header">') == 1
+    assert 'href="/developers/" aria-current="page"' in text
+    assert 'href="/assurance/" aria-current="page"' not in text
+
+
 def test_public_bridge_pages_have_coherent_navigation_and_footer() -> None:
     for path in BRIDGE_PAGES:
         text = read(path)

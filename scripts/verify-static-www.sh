@@ -451,6 +451,15 @@ for f in index.html start/index.html pricing/index.html copilot/pilot/index.html
 done
 [[ "$lang_fail" -eq 0 ]] && ok "client-view language on public www" || fail=1
 
+check_file "developers one header current on Developers" developers/index.html \
+  '<header class="nf-corp-header">' \
+  'href="/developers/" aria-current="page"'
+if [[ "$(grep -c '<header class="nf-corp-header">' developers/index.html)" -eq 1 ]]; then
+  ok "developers has exactly one corporate header"
+else
+  bad "developers has exactly one corporate header"
+fi
+
 check_file "tools hub meeting use" tools/index.html \
   'Use it in a meeting' 'Fill four numbers' 'leave-alone'
 check_file "quiet leak practical result" tools/quiet-leak/index.html \
