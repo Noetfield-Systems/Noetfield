@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ASSET_CSS = "/assets/noetfield-corporate-v1.css?v=5"
 TOOLS_CSS = "/assets/noetfield-tools.css?v=2"
-TOOLS_JS = "/assets/noetfield-tools.js?v=2"
+TOOLS_JS = "/assets/noetfield-tools.js?v=3"
 OG = "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png"
 
 
@@ -96,14 +96,15 @@ RELATED = """
     <p class="nf-corp-kicker" id="more-tools">More free checks</p>
     <div class="nf-tools-grid">
      <a href="/tools/quiet-leak/"><span>01</span><h3>Quiet leak</h3><p>Price one manual process. Honest hobby line at $3,000 a year.</p></a>
-     <a href="/tools/meeting-tax/"><span>02</span><h3>Standing meeting tax</h3><p>What that recurring meeting costs in payroll every year.</p></a>
-     <a href="/tools/handoff/"><span>03</span><h3>Handoff tax</h3><p>Times the same work gets explained again.</p></a>
-     <a href="/tools/ai-spend/"><span>04</span><h3>AI spend you cannot explain</h3><p>What share of the invoice maps to a named workflow.</p></a>
-     <a href="/tools/shadow-ai/"><span>05</span><h3>Shadow AI</h3><p>Personal ChatGPT next to the licensed invoice.</p></a>
-     <a href="/tools/who-accepted/"><span>06</span><h3>Who accepted this</h3><p>Chat log versus a named person and a replayable why.</p></a>
-     <a href="/tools/copilot-seats/"><span>07</span><h3>Copilot seats</h3><p>Unused licenses and ungoverned use, shown as two numbers.</p></a>
-     <a href="/tools/board-five/"><span>08</span><h3>Five board questions</h3><p>Yes or no. The tool will tell you not to buy.</p></a>
-     <a href="/tools/embed/"><span>09</span><h3>Embed for advisors</h3><p>One iframe. No tracking of your visitors.</p></a>
+     <a href="/tools/crm-followup/"><span>02</span><h3>CRM follow-up</h3><p>Open leads with no owner and no next date. That is a graveyard, not a pipeline.</p></a>
+     <a href="/tools/meeting-tax/"><span>03</span><h3>Standing meeting tax</h3><p>What that recurring meeting costs in payroll every year.</p></a>
+     <a href="/tools/handoff/"><span>04</span><h3>Handoff tax</h3><p>Times the same work gets explained again.</p></a>
+     <a href="/tools/ai-spend/"><span>05</span><h3>AI spend you cannot explain</h3><p>What share of the invoice maps to a named workflow.</p></a>
+     <a href="/tools/shadow-ai/"><span>06</span><h3>Shadow AI</h3><p>Personal ChatGPT next to the licensed invoice.</p></a>
+     <a href="/tools/who-accepted/"><span>07</span><h3>Who accepted this</h3><p>Chat log versus a named person and a replayable why.</p></a>
+     <a href="/tools/copilot-seats/"><span>08</span><h3>Copilot seats</h3><p>Unused licenses and ungoverned use, shown as two numbers.</p></a>
+     <a href="/tools/board-five/"><span>09</span><h3>Five board questions</h3><p>Yes or no. The tool will tell you not to buy.</p></a>
+     <a href="/tools/embed/"><span>10</span><h3>Embed for advisors</h3><p>One iframe. No tracking of your visitors.</p></a>
     </div>
    </div>
   </section>
@@ -174,7 +175,7 @@ def hub() -> None:
      <h1 id="tools-title">Most operators can name the process that annoys them. Almost none can name what it costs.</h1>
     </div>
     <div>
-     <p class="nf-corp-lead">Eight one-minute checks. Type hourly pay or annual salary. Copy a Slack paragraph or print the page. Conservative math. If the number is a hobby, the page says so instead of selling you a fix.</p>
+     <p class="nf-corp-lead">Nine one-minute checks. Type hourly pay or annual salary. Copy a Slack paragraph or print the page. Conservative math. If the number is a hobby, the page says so instead of selling you a fix.</p>
      <div class="nf-corp-actions">
       <a class="nf-button nf-button--primary" href="/tools/quiet-leak/">Price one leak</a>
       <a class="nf-button nf-button--secondary" href="/tools/meeting-tax/">Price a meeting</a>
@@ -188,6 +189,7 @@ def hub() -> None:
     <h2 id="tool-list" class="nf-corp-kicker">The checks</h2>
     <div class="nf-tools-grid" style="margin-top:1.2rem">
      <a href="/tools/quiet-leak/"><span>Quiet leak</span><h3>What is this process costing you?</h3><p>Hourly or salary. Rate × 1.3 × 48 weeks. Under $3,000 a year, leave it alone.</p></a>
+     <a href="/tools/crm-followup/"><span>CRM</span><h3>Who owns the next action?</h3><p>Open leads with no owner and no next date. Under $3,000 a year, do not buy another CRM.</p></a>
      <a href="/tools/meeting-tax/"><span>Meetings</span><h3>What is this standing meeting costing?</h3><p>Room size × minutes × 48 weeks. Cancel it if there is no decision.</p></a>
      <a href="/tools/handoff/"><span>Handoffs</span><h3>How many times is the same work explained again?</h3><p>The re-explain tax. Same honest hobby line.</p></a>
      <a href="/tools/ai-spend/"><span>AI invoice</span><h3>Spend you cannot explain</h3><p>The board question is not the model bill. It is which workflow created it.</p></a>
@@ -294,6 +296,7 @@ def embed() -> None:
     )
     items = [
         ("Quiet leak", "https://www.noetfield.com/tools/quiet-leak/?embed=1"),
+        ("CRM follow-up", "https://www.noetfield.com/tools/crm-followup/?embed=1"),
         ("Standing meeting tax", "https://www.noetfield.com/tools/meeting-tax/?embed=1"),
         ("Handoff tax", "https://www.noetfield.com/tools/handoff/?embed=1"),
         ("AI spend", "https://www.noetfield.com/tools/ai-spend/?embed=1"),
@@ -384,6 +387,47 @@ def main() -> None:
     <article><h3>The expensive leaks are the quiet ones</h3><p>Nobody files a ticket for the copy between two systems. Everyone accepted it years ago. That is why it survives.</p></article>
         """,
         "Annual cost = touches × (minutes ÷ 60) × rate × 1.3 × people × 48. Under $3,000, leave it alone.",
+    )
+    tool_page(
+        "crm-followup",
+        "CRM follow-up graveyard — Noetfield",
+        "Price the open leads that have no owner and no next date. The page will tell you not to buy another CRM.",
+        "Pipeline versus graveyard",
+        "Most teams can name their CRM. Almost none can name the last human action on an open lead.",
+        "A pipeline has a named owner, a next date, and a message you can open later. Moving a card is not a follow-up. Four inputs. Under $3,000 a year, do not buy another CRM.",
+        """
+       <label>Open leads in the CRM
+        <span class="hint">Records that are not closed. Not the whole contact list.</span>
+        <input type="number" name="open" min="0" step="1" value="180" inputmode="decimal" required />
+       </label>
+       <label>Share with a named owner and a next date (%)
+        <input type="number" name="owned" min="0" max="100" step="1" value="20" inputmode="decimal" required />
+       </label>
+       <label>Minutes for one real follow-up
+        <span class="hint">A message a human sent, not a status update.</span>
+        <input type="number" name="minutes" min="0" step="0.5" value="12" inputmode="decimal" required />
+       </label>
+"""
+        + PAY_FIELDS
+        + """
+       <label>Can you replay the last human action on a typical open lead?
+        <select name="replay" required>
+         <option value="no" selected>No</option>
+         <option value="yes">Yes</option>
+        </select>
+       </label>
+        """,
+        """
+    <div class="nf-tools-presets">
+     <button type="button" data-preset='{"open":30,"owned":90,"minutes":8,"pay":"hourly","rate":45,"replay":"yes"}'>Tight list, owned</button>
+     <button type="button" data-preset='{"open":400,"owned":15,"minutes":12,"pay":"hourly","rate":55,"replay":"no"}'>Graveyard</button>
+    </div>
+        """,
+        """
+    <article><h3>People count CRM leads and forget the inbox</h3><p>WhatsApp, the personal inbox, and the spreadsheet on someone&rsquo;s desktop are often the real pipeline. Count those before you buy a migration.</p></article>
+    <article><h3>Moving a card is not a follow-up</h3><p>A follow-up is a message a human sent, with a date you can open later. If you cannot replay that, you have a graveyard.</p></article>
+        """,
+        "Orphans = open × (1 − owned share). Annual cost = orphans × (minutes ÷ 60) × rate × 1.3 × 48. Under $3,000, leave the CRM alone.",
     )
     tool_page(
         "ai-spend",

@@ -462,6 +462,7 @@ check_file "tools hub honest leave-alone" tools/index.html \
   'No signup' \
   'Nothing stored' \
   'href="/tools/quiet-leak/"' \
+  'href="/tools/crm-followup/"' \
   'href="/tools/meeting-tax/"' \
   'href="/tools/handoff/"' \
   'href="/tools/ai-spend/"' \
@@ -475,7 +476,9 @@ check_absent "tools hub does not invent a Noetfield audit SKU" tools/index.html 
 check_file "quiet leak hobby line" tools/quiet-leak/index.html \
   'Under $3,000' 'leave it alone' '1.3' '48'
 check_file "tools embed kit" tools/embed/index.html \
-  'quiet-leak/?embed=1' 'We do not track your visitors'
+  'quiet-leak/?embed=1' 'crm-followup/?embed=1' 'We do not track your visitors'
+check_file "crm follow-up leave-alone" tools/crm-followup/index.html \
+  'do not buy another CRM' 'graveyard' 'Nothing stored'
 
 check_file "pilot automation copy" copilot/pilot/index.html \
   'Policy-bound workflows' 'Automated governance' 'nf-signal-badge--available'
