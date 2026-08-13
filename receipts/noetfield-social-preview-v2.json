@@ -2392,7 +2392,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/system/",
-      "description": "Architecture overview for governed AI execution: harness, control plane, Motors, Runways, and evidence.",
+      "description": "How the pieces fit: propose, allow, run, judge, and name the path. The runner does not mark its own homework.",
       "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
       "indexability": "indexable",
       "noindex_reason": null,

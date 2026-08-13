@@ -133,26 +133,27 @@ def system_page() -> str:
     body = """
   <section class="nf-inner-hero" aria-labelledby="system-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
-    <div><p class="nf-corp-kicker">System</p><h1 id="system-title">Governed AI execution infrastructure</h1></div>
-    <div><p class="nf-corp-lead">An understandable architecture overview: harness and control plane around capable models, deterministic Motors for permitted effects, Runways for qualification, and evidence that can be reopened.</p></div>
+    <div><p class="nf-corp-kicker">System</p><h1 id="system-title">How the pieces fit</h1></div>
+    <div><p class="nf-corp-lead">Five jobs. Propose the work, allow it, run it, judge it, and name the path. The thing that runs the work does not decide if the work is good.</p></div>
    </div>
   </section>
   <section class="nf-corp-section" aria-labelledby="layers-title">
    <div class="nf-corp-wrap nf-corp-prose">
-    <h2 id="layers-title">Layers</h2>
+    <h2 id="layers-title">Who does what</h2>
     <ul>
-     <li><strong>Brain / harness</strong> — proposes bounded work; no execution authority.</li>
-     <li><strong>Kernel / control plane</strong> — policy, identity, budget, authority resolution.</li>
-     <li><strong>Motor</strong> — executes authorized Action Contracts; records effects. <a href="/motors/">Technical detail →</a></li>
-     <li><strong>Verifier</strong> — judges evidence; promotion stays outside Motor.</li>
-     <li><strong>Runway</strong> — versioned qualification path from goal to accepted output. <a href="/runways/">Public runways →</a></li>
+     <li><strong>Propose.</strong> A model or helper can suggest the next step. It cannot run that step.</li>
+     <li><strong>Allow.</strong> Identity, policy, and budget decide whether the step is permitted.</li>
+     <li><strong>Run.</strong> Only the permitted step happens, and what happened is written down. <a href="/motors/">How a run is allowed</a></li>
+     <li><strong>Judge.</strong> A separate check looks at the record. It can accept, reject, repair, or stop. The runner does not mark its own homework.</li>
+     <li><strong>Path.</strong> A named way of doing one kind of job, with a stop if it cannot finish honestly. <a href="/runways/">Public paths</a></li>
     </ul>
+    <p>This page is a map. It is not an SDK, not a status page, and not a claim that outside customers are live.</p>
    </div>
   </section>
 """
     return corp_page_open(
         "System — Noetfield Systems",
-        "Architecture overview for governed AI execution: harness, control plane, Motors, Runways, and evidence.",
+        "How the pieces fit: propose, allow, run, judge, and name the path. The runner does not mark its own homework.",
         "https://www.noetfield.com/system/",
         "system",
     ) + body + corp_page_close()

@@ -44,7 +44,7 @@
       "dist_path": "system/index.html",
       "route": "/system/",
       "required_text": [
-        "Governed AI execution infrastructure"
+        "How the pieces fit"
       ],
       "required_links": [
         "/motors/",

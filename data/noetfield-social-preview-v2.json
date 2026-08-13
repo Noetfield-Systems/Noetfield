@@ -305,7 +305,7 @@
     },
     "/system/": {
       "title": "System \u2014 Noetfield Systems",
-      "description": "Architecture overview for governed AI execution: harness, control plane, Motors, Runways, and evidence."
+      "description": "How the pieces fit: propose, allow, run, judge, and name the path. The runner does not mark its own homework."
     },
     "/applications/": {
       "title": "Applications \u2014 Noetfield Systems",
