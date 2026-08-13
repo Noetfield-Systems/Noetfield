@@ -70,6 +70,13 @@ PRIORITY = {
     "/motors/": 0.9,
     "/deterministic-api/": 0.9,
     "/assurance/": 0.9,
+    "/tools/": 0.9,
+    "/tools/quiet-leak/": 0.85,
+    "/tools/ai-spend/": 0.85,
+    "/tools/who-accepted/": 0.85,
+    "/tools/copilot-seats/": 0.85,
+    "/tools/board-five/": 0.85,
+    "/tools/embed/": 0.8,
     "/workflows/": 0.9,
     "/developers/": 0.9,
     "/proof/": 0.9,
@@ -110,6 +117,7 @@ MARKETING_TOP = {
     "deterministic-api",
     "research-trader",
     "terms",
+    "tools",
     "trust-brief",
 }
 
@@ -124,6 +132,12 @@ MARKETING_NESTED = {
     ("assurance", "control-testing"),
     ("proof", "lab"),
     ("proof", "agentic-coding-reliability-case-001"),
+    ("tools", "quiet-leak"),
+    ("tools", "ai-spend"),
+    ("tools", "who-accepted"),
+    ("tools", "copilot-seats"),
+    ("tools", "board-five"),
+    ("tools", "embed"),
 }
 
 
