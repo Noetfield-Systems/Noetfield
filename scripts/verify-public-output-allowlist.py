@@ -57,7 +57,7 @@ FORBIDDEN_PREFIXES = {
     "scripts/",
     "tests/",
     "tmp/",
-    "tools/",
+    "tools/pr-conflict-resolver-report/",
     "var/",
 }
 FORBIDDEN_SUFFIXES = (

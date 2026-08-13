@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Copilot seats versus governed use — Noetfield</title>
+ <meta name="description" content="Unused Copilot licenses and ungoverned use, shown as two separate yearly costs." />
+ <meta name="robots" content="index,follow" />
+ <link rel="canonical" href="https://www.noetfield.com/tools/copilot-seats/" />
+ <meta property="og:site_name" content="Noetfield" />
+ <meta property="og:title" content="Copilot seats versus governed use — Noetfield" />
+ <meta property="og:description" content="Unused Copilot licenses and ungoverned use, shown as two separate yearly costs." />
+ <meta property="og:url" content="https://www.noetfield.com/tools/copilot-seats/" />
+ <meta property="og:type" content="website" />
+ <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta property="og:image:width" content="1200" />
+ <meta property="og:image:height" content="630" />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content="Copilot seats versus governed use — Noetfield" />
+ <meta name="twitter:description" content="Unused Copilot licenses and ungoverned use, shown as two separate yearly costs." />
+ <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+ <meta name="theme-color" content="#f3f0e9" />
+ <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
+ <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=5" />
+ <link rel="stylesheet" href="/assets/noetfield-tools.css?v=1" />
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Copilot seats versus governed use — Noetfield",
+  "url": "https://www.noetfield.com/tools/copilot-seats/",
+  "applicationCategory": "BusinessApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
+  "description": "Unused Copilot licenses and ungoverned use, shown as two separate yearly costs.",
+  "isAccessibleForFree": true,
+  "provider": { "@type": "Organization", "name": "Noetfield Systems Inc.", "url": "https://www.noetfield.com/" }
+}
+ </script>
+</head>
+<body class="nf-corp nf-corp--inner nf-tools" data-tool="copilot-seats">
+ <a class="nf-skip" href="#main">Skip to main content</a>
+ <header class="nf-corp-header">
+  <div class="nf-corp-wrap nf-corp-navrow">
+   <a class="nf-corp-brand" href="/">
+    <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
+    <span>Noetfield Systems <small>Inc.</small></span>
+   </a>
+   <nav class="nf-corp-nav" aria-label="Primary navigation">
+    <a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
+   </nav>
+  </div>
+ </header>
+ <main id="main">
+
+  <section class="nf-inner-hero" aria-labelledby="tool-title">
+   <div class="nf-corp-wrap nf-inner-hero__grid">
+    <div>
+     <p class="nf-corp-kicker">Two numbers, not one</p>
+     <h1 id="tool-title">You are paying for seats. You are not paying for a decision trail.</h1>
+    </div>
+    <div>
+     <p class="nf-corp-lead">Unused licenses are an adoption problem. Ungoverned use is an explanation problem. Showing only one of those numbers is how a page stays dishonest.</p>
+     <div class="nf-corp-actions">
+      <a class="nf-button nf-button--secondary" href="/tools/">All tools</a>
+      <a class="nf-button nf-button--secondary" href="/tools/embed/">Embed this</a>
+     </div>
+    </div>
+   </div>
+  </section>
+  <section class="nf-corp-section" aria-labelledby="calc-title">
+   <div class="nf-corp-wrap">
+    <h2 id="calc-title" class="nf-corp-kicker">One minute</h2>
+    
+    <div class="nf-tools-presets">
+     <button type="button" data-preset='{"licensed":12,"used":11,"hours":2,"rate":45,"seat":360}'>Small team, used</button>
+     <button type="button" data-preset='{"licensed":200,"used":40,"hours":6,"rate":70,"seat":360}'>Wide rollout, thin use</button>
+    </div>
+        
+    <div class="nf-tools-layout" style="margin-top:1rem">
+     <div class="nf-tools-card">
+      <form id="nf-tools-form" class="nf-tools-form" action="#" method="get">
+       
+       <label>Licensed seats
+        <input type="number" name="licensed" min="0" step="1" value="80" inputmode="decimal" required />
+       </label>
+       <label>Seats used last week
+        <input type="number" name="used" min="0" step="1" value="35" inputmode="decimal" required />
+       </label>
+       <label>Hours per used seat per week
+        <input type="number" name="hours" min="0" step="0.5" value="4" inputmode="decimal" required />
+       </label>
+       <label>Hourly rate before overhead (CAD)
+        <input type="number" name="rate" min="0" step="1" value="55" inputmode="decimal" required />
+       </label>
+       <label>Annual cost per seat (CAD)
+        <span class="hint">Default 360 for Copilot-class licensing. Change it if you know the real number.</span>
+        <input type="number" name="seat" min="0" step="10" value="360" inputmode="decimal" required />
+       </label>
+        
+      </form>
+     </div>
+     
+     <aside class="nf-tools-result" id="nf-tools-result" aria-live="polite">
+      <p class="nf-tools-kicker">Honest answer</p>
+      <p class="nf-tools-amount" data-result-amount>$0</p>
+      <h2 data-result-headline>Fill the four numbers.</h2>
+      <p data-result-body>The honest answer updates as you type. Under the hobby line, it will tell you to leave it alone.</p>
+      <p data-result-extra hidden></p>
+      <div class="nf-tools-actions">
+       <a class="nf-button nf-button--primary" data-result-cta href="/tools/">See the other checks</a>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-share">Copy share link</button>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy result</button>
+      </div>
+     </aside>
+    </div>
+    <p class="nf-corp-lead nf-tools-math">Unused waste = unused seats × annual seat cost. Ungoverned use = used seats × hours × loaded rate × 48 weeks.</p>
+    <div class="nf-tools-notes">
+    <article><h3>Unused seats under about 10</h3><p>That is adoption. Do not buy a control plane to fix a habit. Ask why people are not in the tool.</p></article>
+    <article><h3>Used seats with no named accepter</h3><p>That is the expensive line. Hours are being spent and nobody can replay why an output left the building.</p></article>
+        </div>
+   </div>
+  </section>
+
+  <section class="nf-corp-section nf-tools-related" aria-labelledby="more-tools">
+   <div class="nf-corp-wrap">
+    <p class="nf-corp-kicker" id="more-tools">More free checks</p>
+    <div class="nf-tools-grid">
+     <a href="/tools/quiet-leak/"><span>01</span><h3>Quiet leak</h3><p>Price one manual process. Honest hobby line at $3,000 a year.</p></a>
+     <a href="/tools/ai-spend/"><span>02</span><h3>AI spend you cannot explain</h3><p>What share of the invoice maps to a named workflow.</p></a>
+     <a href="/tools/who-accepted/"><span>03</span><h3>Who accepted this</h3><p>Chat log versus a named person and a replayable why.</p></a>
+     <a href="/tools/copilot-seats/"><span>04</span><h3>Copilot seats</h3><p>Unused licenses and ungoverned use, shown as two numbers.</p></a>
+     <a href="/tools/board-five/"><span>05</span><h3>Five board questions</h3><p>Yes or no. The tool will tell you not to buy.</p></a>
+     <a href="/tools/embed/"><span>06</span><h3>Embed for advisors</h3><p>One iframe. No tracking of your visitors.</p></a>
+    </div>
+   </div>
+  </section>
+
+
+ </main>
+ <footer class="nf-corp-footer">
+  <div class="nf-corp-wrap nf-corp-footer__grid">
+   <div>
+    <a class="nf-corp-brand nf-corp-brand--footer" href="/"><span class="nf-corp-brand__mark" aria-hidden="true">N</span><span>Noetfield Systems <small>Inc.</small></span></a>
+    <p>AI agent governance and security.<br />Vancouver, British Columbia, Canada.</p>
+   </div>
+   <nav aria-label="Product"><strong>Product</strong><a href="https://app.noetfield.com/" rel="noopener noreferrer">App ↗</a><a href="/tools/">Tools</a><a href="/workflows/">Workflows</a><a href="/applications/">Applications</a></nav>
+   <nav aria-label="Company"><strong>Company</strong><a href="/proof/">Proof</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="/tools/embed/">Embed these tools</a></nav>
+  </div>
+  <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Free. No signup. Nothing stored.</span></div>
+ </footer>
+ <script src="/assets/noetfield-tools.js?v=1" defer></script>
+</body>
+</html>

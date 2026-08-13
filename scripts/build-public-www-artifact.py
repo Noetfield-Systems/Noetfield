@@ -79,7 +79,6 @@ FORBIDDEN_PREFIXES = {
     "scripts",
     "tests",
     "tmp",
-    "tools",
     "var",
 }
 FORBIDDEN_SUFFIXES = {
