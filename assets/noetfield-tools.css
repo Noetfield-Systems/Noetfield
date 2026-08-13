@@ -206,6 +206,57 @@
 
 .nf-tools-related { padding-top: 0; }
 
+.nf-tools-formula,
+.nf-tools-warn {
+  margin: 0 0 0.55rem;
+  font-size: 0.82rem;
+}
+.nf-tools-formula {
+  color: #697587;
+  font-family: "DM Mono", ui-monospace, monospace;
+}
+.nf-tools-warn {
+  color: #8a4b16;
+  background: rgba(167, 123, 47, 0.12);
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+}
+.nf-tools-blurb {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.nf-tools-preview {
+  width: 100%;
+  min-height: 820px;
+  margin: 0.6rem 0 1.4rem;
+  border: 1px solid rgba(17, 27, 42, 0.14);
+  border-radius: 12px;
+  background: #fff;
+}
+
+@media print {
+  .nf-corp-header,
+  .nf-corp-footer,
+  .nf-skip,
+  .nf-tools-related,
+  .nf-corp-actions,
+  .nf-tools-presets,
+  .nf-tools-actions {
+    display: none !important;
+  }
+  .nf-tools-card,
+  .nf-tools-result {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+  body {
+    background: #fff;
+  }
+}
+
 .nf-tools-worked,
 .nf-tools-next {
   margin: 0.7rem 0 0;

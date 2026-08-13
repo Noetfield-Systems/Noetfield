@@ -3,21 +3,21 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Who accepted this output — Noetfield</title>
- <meta name="description" content="Price the unsigned AI drafts your team still rewrites by hand." />
+ <title>Shadow AI — Noetfield</title>
+ <meta name="description" content="Count personal ChatGPT and Claude next to the licensed invoice." />
  <meta name="robots" content="index,follow" />
- <link rel="canonical" href="https://www.noetfield.com/tools/who-accepted/" />
+ <link rel="canonical" href="https://www.noetfield.com/tools/shadow-ai/" />
  <meta property="og:site_name" content="Noetfield" />
- <meta property="og:title" content="Who accepted this output — Noetfield" />
- <meta property="og:description" content="Price the unsigned AI drafts your team still rewrites by hand." />
- <meta property="og:url" content="https://www.noetfield.com/tools/who-accepted/" />
+ <meta property="og:title" content="Shadow AI — Noetfield" />
+ <meta property="og:description" content="Count personal ChatGPT and Claude next to the licensed invoice." />
+ <meta property="og:url" content="https://www.noetfield.com/tools/shadow-ai/" />
  <meta property="og:type" content="website" />
  <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
  <meta property="og:image:width" content="1200" />
  <meta property="og:image:height" content="630" />
  <meta name="twitter:card" content="summary_large_image" />
- <meta name="twitter:title" content="Who accepted this output — Noetfield" />
- <meta name="twitter:description" content="Price the unsigned AI drafts your team still rewrites by hand." />
+ <meta name="twitter:title" content="Shadow AI — Noetfield" />
+ <meta name="twitter:description" content="Count personal ChatGPT and Claude next to the licensed invoice." />
  <meta name="twitter:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
  <meta name="theme-color" content="#f3f0e9" />
  <link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
@@ -30,17 +30,17 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Who accepted this output — Noetfield",
-  "url": "https://www.noetfield.com/tools/who-accepted/",
+  "name": "Shadow AI — Noetfield",
+  "url": "https://www.noetfield.com/tools/shadow-ai/",
   "applicationCategory": "BusinessApplication",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
-  "description": "Price the unsigned AI drafts your team still rewrites by hand.",
+  "description": "Count personal ChatGPT and Claude next to the licensed invoice.",
   "isAccessibleForFree": true,
   "provider": { "@type": "Organization", "name": "Noetfield Systems Inc.", "url": "https://www.noetfield.com/" }
 }
  </script>
 </head>
-<body class="nf-corp nf-corp--inner nf-tools" data-tool="who-accepted">
+<body class="nf-corp nf-corp--inner nf-tools" data-tool="shadow-ai">
  <a class="nf-skip" href="#main">Skip to main content</a>
  <header class="nf-corp-header">
   <div class="nf-corp-wrap nf-corp-navrow">
@@ -59,11 +59,11 @@
   <section class="nf-inner-hero" aria-labelledby="tool-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div>
-     <p class="nf-corp-kicker">Chat log versus process</p>
-     <h1 id="tool-title">If you cannot name who accepted the last AI output, you do not have a process.</h1>
+     <p class="nf-corp-kicker">Off the invoice</p>
+     <h1 id="tool-title">Finance is looking at the licensed bill. The unofficial line is often larger.</h1>
     </div>
     <div>
-     <p class="nf-corp-lead">A process has a named person, a pass/fail check, and a reason you can open later. Four inputs. The page will tell you to stop shopping if you already have that.</p>
+     <p class="nf-corp-lead">Personal tools do not show up in the Copilot meeting. Four inputs. If two people are on a $20 plan, leave it alone.</p>
      <div class="nf-corp-actions">
       <a class="nf-button nf-button--secondary" href="/tools/">All tools</a>
       <a class="nf-button nf-button--secondary" href="/tools/embed/">Embed this</a>
@@ -76,41 +76,26 @@
     <h2 id="calc-title" class="nf-corp-kicker">One minute</h2>
     
     <div class="nf-tools-presets">
-     <button type="button" data-preset='{"deliverables":8,"signed":95,"minutes":5,"rate":55,"replay":"yes"}'>Already signed</button>
-     <button type="button" data-preset='{"deliverables":30,"signed":10,"minutes":25,"rate":65,"replay":"no"}'>Chat drafts, heavy rewrite</button>
+     <button type="button" data-preset='{"people":2,"personal":20,"licensed":400,"owner":"yes"}'>Two people, owned</button>
+     <button type="button" data-preset='{"people":40,"personal":25,"licensed":3000,"owner":"no"}'>Wide unofficial use</button>
     </div>
         
     <div class="nf-tools-layout" style="margin-top:1rem">
      <div class="nf-tools-card">
       <form id="nf-tools-form" class="nf-tools-form" action="#" method="get">
        
-       <label>AI-assisted deliverables per week
-        <input type="number" name="deliverables" min="0" step="1" value="20" inputmode="decimal" required />
+       <label>People on personal AI plans
+        <input type="number" name="people" min="0" step="1" value="12" inputmode="decimal" required />
        </label>
-       <label>Share a named person signs (%)
-        <input type="number" name="signed" min="0" max="100" step="1" value="25" inputmode="decimal" required />
+       <label>Estimated personal spend each, per month (CAD)
+        <span class="hint">ChatGPT Plus or Claude Pro is about $20 to $30.</span>
+        <input type="number" name="personal" min="0" step="1" value="22" inputmode="decimal" required />
        </label>
-       <label>Minutes of redo on an unsigned item
-        <input type="number" name="minutes" min="0" step="1" value="18" inputmode="decimal" required />
+       <label>Licensed AI / Copilot spend per month (CAD)
+        <input type="number" name="licensed" min="0" step="50" value="4000" inputmode="decimal" required />
        </label>
-
-       <label>How do you know the pay?
-        <select name="pay">
-         <option value="hourly" selected>Hourly rate</option>
-         <option value="salary">Annual salary</option>
-        </select>
-       </label>
-       <label data-pay-field="hourly">Hourly rate before overhead (CAD)
-        <input type="number" name="rate" min="0" step="1" value="55" inputmode="decimal" />
-       </label>
-       <label data-pay-field="salary" hidden>Annual salary before overhead (CAD)
-        <span class="hint">Converted as salary ÷ 48 weeks ÷ 40 hours.</span>
-        <input type="number" name="salary" min="0" step="1000" value="90000" inputmode="decimal" />
-        <span class="hint" data-derived-hourly></span>
-       </label>
-
-       <label>Can you replay why the last one passed?
-        <select name="replay" required>
+       <label>Does anyone own the unofficial line?
+        <select name="owner" required>
          <option value="no" selected>No</option>
          <option value="yes">Yes</option>
         </select>
@@ -136,10 +121,10 @@
       </div>
      </aside>
     </div>
-    <p class="nf-corp-lead nf-tools-math">Unsigned volume × redo minutes × loaded rate × 48 weeks. Leave it alone at 90% signed with a replayable why.</p>
+    <p class="nf-corp-lead nf-tools-math">Shadow annual = people × personal monthly × 12. Leave it alone at two people on a cheap plan.</p>
     <div class="nf-tools-notes">
-    <article><h3>The builder must not grade itself</h3><p>If the same person or model that produced the draft also marks it done, you do not have a check. You have a hope.</p></article>
-    <article><h3>Redo is the bill you already pay</h3><p>Minutes spent rewriting “finished” drafts is the real cost. The tool prices that, not a fantasy saving.</p></article>
+    <article><h3>The invoice meeting is incomplete</h3><p>Licensed Copilot is what procurement sees. Personal ChatGPT is what people actually use after 5pm.</p></article>
+    <article><h3>Name one owner</h3><p>If nobody owns the unofficial line, it will still be there next quarter. This page does not store names.</p></article>
         </div>
    </div>
   </section>

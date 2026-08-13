@@ -1,6 +1,7 @@
 (function () {
   var LOAD = 1.3;
   var WEEKS = 48;
+  var HOURS = 40;
   var HOBBY = 3000;
   var NOTICE = "Nothing is posted. Nothing is stored.";
 
@@ -11,11 +12,6 @@
       currency: "CAD",
       maximumFractionDigits: 0,
     }).format(Math.round(v));
-  }
-
-  function hours(n) {
-    var v = Number.isFinite(n) && n > 0 ? n : 0;
-    return (Math.round(v * 10) / 10).toString();
   }
 
   function num(form, name) {
@@ -32,32 +28,17 @@
     return !!(el && el.checked);
   }
 
-  function processCost(touches, minutes, rate, people) {
-    return Number(touches) * (Number(minutes) / 60) * Number(rate) * LOAD * Number(people) * WEEKS;
+  function hourly(form) {
+    if (sel(form, "pay") === "salary") {
+      var salary = num(form, "salary");
+      if (!(salary > 0)) return 0;
+      return salary / (WEEKS * HOURS);
+    }
+    return num(form, "rate");
   }
 
-  function pack(kind, amount, headline, body, extra, cta, math, action) {
-    var memo = [
-      amount,
-      headline,
-      body,
-      math ? "Math: " + math : "",
-      action ? "Next: " + action : "",
-      NOTICE,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    return {
-      kind: kind,
-      amount: amount,
-      headline: headline,
-      body: body,
-      extra: extra || "",
-      cta: cta,
-      math: math || "",
-      action: action || "",
-      memo: memo,
-    };
+  function processCost(touches, minutes, rate, people) {
+    return Number(touches) * (Number(minutes) / 60) * Number(rate) * LOAD * Number(people) * WEEKS;
   }
 
   var CTAS = {
@@ -70,308 +51,336 @@
   };
 
   function compute(tool, form) {
-    if (tool === "quiet-leak") {
-      var touches = num(form, "touches");
-      var minutes = num(form, "minutes");
-      var rate = num(form, "rate");
-      var people = num(form, "people");
-      var cost = processCost(touches, minutes, rate, people);
-      var weekHours = touches * (minutes / 60) * people;
-      var math =
-        touches +
-        " touches/week × " +
-        minutes +
-        " min × " +
-        money(rate) +
-        "/hr × 1.3 load × " +
-        people +
-        " people × 48 weeks = " +
-        money(cost) +
-        " (" +
-        hours(weekHours) +
-        " hours/week)";
+    if (tool === "quiet-leak" || tool === "handoff") {
+      var cost = processCost(num(form, "touches"), num(form, "minutes"), hourly(form), num(form, "people"));
+      var verb = tool === "handoff" ? "re-explaining this" : "this process";
       if (cost < HOBBY) {
-        return pack(
-          "leave",
-          money(cost) + " / year",
-          "Leave it alone.",
-          "Under $3,000 a year, automating this is a hobby, not an investment. The page says that out loud instead of selling you a fix.",
-          "Count one real day before you trust the estimate. People undercount touches by about half.",
-          "calculator",
-          math,
-          "Count one real day. If it stays under $3,000, stop."
-        );
+        return {
+          kind: "leave",
+          amount: money(cost) + " / year",
+          headline: "Leave it alone.",
+          body: "Under $3,000 a year, automating " + verb + " is a hobby, not an investment. The page says that out loud instead of selling you a fix.",
+          extra: "Count one real day before you trust the estimate. People undercount touches by about half.",
+          cta: tool === "handoff" ? "tools" : "calculator",
+        };
       }
       if (cost < 15000) {
-        return pack(
-          "look",
-          money(cost) + " / year",
-          "Real money. Still not a platform.",
-          "Price one leak first. If the number is real, start with one named goal and a check that can fail.",
-          hours(weekHours) + " hours a week across the people who do this.",
-          "app",
-          math,
-          "Write the two system names and the owner on one line. That is the goal."
-        );
+        return {
+          kind: "look",
+          amount: money(cost) + " / year",
+          headline: "Real money. Still not a platform.",
+          body: "Price one leak first. If the number is real, start with one named goal and a check that can fail.",
+          extra: "",
+          cta: "app",
+        };
       }
-      return pack(
-        "act",
-        money(cost) + " / year",
-        "This leak is large enough to name.",
-        "Give this process as a goal in the open alpha. Plan, run, check, stop for your decision. Founder-operated. No fake customer logos.",
-        hours(weekHours) + " hours a week. That is labor, not a software feature request.",
-        "app",
-        math,
-        "Name the leak as one goal. Do not start a suite."
-      );
+      return {
+        kind: "act",
+        amount: money(cost) + " / year",
+        headline: "This leak is large enough to name.",
+        body: "Give this as a goal in the open alpha. Plan, run, check, stop for your decision. Founder-operated. No fake customer logos.",
+        extra: "",
+        cta: "app",
+      };
+    }
+
+    if (tool === "meeting-tax") {
+      var meetings = num(form, "meetings");
+      var minutes = num(form, "minutes");
+      var people = num(form, "people");
+      var cost = meetings * (minutes / 60) * hourly(form) * LOAD * people * WEEKS;
+      if (cost < HOBBY) {
+        return {
+          kind: "leave",
+          amount: money(cost) + " / year",
+          headline: "Leave the meeting.",
+          body: "Under $3,000 a year this standing meeting is cheaper than the politics of cancelling it. Do not buy software to fix a calendar.",
+          extra: "If it has no decision and no named owner, cancel it. That is free.",
+          cta: "tools",
+        };
+      }
+      if (meetings >= 2 && people >= 6 && minutes >= 30) {
+        return {
+          kind: "act",
+          amount: money(cost) + " / year",
+          headline: "This is a payroll line, not a ritual.",
+          body: "A named owner, a decision, or it comes off the calendar. Software will not save a meeting that produces no receipt.",
+          extra: "",
+          cta: "app",
+        };
+      }
+      return {
+        kind: "look",
+        amount: money(cost) + " / year",
+        headline: "Cut the room or cut the minutes first.",
+        body: "Halve the invite list for two weeks and keep this page open. If the work still happens, the extra people were the leak.",
+        extra: "",
+        cta: "app",
+      };
     }
 
     if (tool === "ai-spend") {
       var monthly = Math.max(0, num(form, "monthly"));
-      var attributedPct = Math.min(100, Math.max(0, num(form, "attributed")));
-      var share = attributedPct / 100;
+      var share = Math.min(100, Math.max(0, num(form, "attributed"))) / 100;
       var teams = Math.max(1, num(form, "teams") || 1);
       var named = sel(form, "named") === "yes";
-      var unexplainedMonthly = monthly * (1 - share);
-      var annual = unexplainedMonthly * 12;
+      var annual = monthly * (1 - share) * 12;
       var amount = money(annual) + " / year unattributed";
-      var math =
-        money(monthly) +
-        "/mo × " +
-        (100 - attributedPct) +
-        "% unexplained × 12 = " +
-        money(annual) +
-        ". Teams: " +
-        teams +
-        ". Named accepter: " +
-        (named ? "yes" : "no") +
-        ".";
       if (monthly < 1500 && teams <= 1) {
-        return pack(
-          "leave",
-          amount,
-          "Leave it alone.",
-          "Under about $1,500 a month and one team, a spreadsheet is enough. Do not buy a governance stack for a hobby.",
-          "",
-          "tools",
-          math,
-          "Keep a one-line sheet: invoice, owner, workflow. Stop shopping."
-        );
+        return {
+          kind: "leave",
+          amount: amount,
+          headline: "Leave it alone.",
+          body: "Under about $1,500 a month and one team, a spreadsheet is enough. Do not buy a governance stack for a hobby.",
+          extra: "",
+          cta: "tools",
+        };
       }
       if (named && share >= 0.2) {
-        return pack(
-          "leave",
-          amount,
-          "You already have the bones.",
-          "Named workflow and named accepter. Do not buy a platform tour. Tighten the receipt, then stop shopping.",
-          "",
-          "app",
-          math,
-          "Write the workflow name and the accepter next to last month’s invoice. Done."
-        );
+        return {
+          kind: "leave",
+          amount: amount,
+          headline: "You already have the bones.",
+          body: "Named workflow and named accepter. Do not buy a platform tour. Tighten the receipt, then stop shopping.",
+          extra: "",
+          cta: "app",
+        };
       }
       if (share < 0.2) {
-        return pack(
-          "act",
-          amount,
-          "The leak is explanation, not tokens.",
-          "Under 20% attributed, nobody can defend the bill. Name one workflow, one owner, and who accepts output before it leaves.",
-          "People count licensed Copilot and forget personal ChatGPT. That unofficial line is often larger.",
-          "readiness",
-          math,
-          "Pick one workflow. Attribute its share of the invoice. Name who accepts output."
-        );
+        return {
+          kind: "act",
+          amount: amount,
+          headline: "The leak is explanation, not tokens.",
+          body: "Under 20% attributed, nobody can defend the bill. Name one workflow, one owner, and who accepts output before it leaves.",
+          extra: "People count licensed Copilot and forget personal ChatGPT. That unofficial line is often larger.",
+          cta: "readiness",
+        };
       }
-      return pack(
-        "look",
-        amount,
-        "Attribute more before you buy more.",
-        "Spend is large enough to care. The next honest step is a named workflow and a named accepter, not another seat.",
-        "",
-        "app",
-        math,
-        "Do not add seats until a named workflow owns 20% of the bill."
-      );
+      return {
+        kind: "look",
+        amount: amount,
+        headline: "Attribute more before you buy more.",
+        body: "Spend is large enough to care. The next honest step is a named workflow and a named accepter, not another seat.",
+        extra: "",
+        cta: "app",
+      };
+    }
+
+    if (tool === "shadow-ai") {
+      var people = Math.max(0, num(form, "people"));
+      var personal = Math.max(0, num(form, "personal"));
+      var licensed = Math.max(0, num(form, "licensed"));
+      var owner = sel(form, "owner") === "yes";
+      var shadow = people * personal * 12;
+      var amount = money(shadow) + " / year off the invoice";
+      if (people <= 2 && personal <= 25) {
+        return {
+          kind: "leave",
+          amount: amount,
+          headline: "Leave it alone.",
+          body: "Two people on a personal plan is not a shadow-IT program. Ask them which workflow they are using it for. Stop there.",
+          extra: "",
+          cta: "tools",
+        };
+      }
+      if (!owner && shadow >= Math.max(licensed * 12 * 0.25, 3000)) {
+        return {
+          kind: "act",
+          amount: amount,
+          headline: "Finance is looking at the wrong bill.",
+          body: "The unofficial line is large enough to name, and nobody owns it. Count personal tools next to the licensed invoice before you add seats.",
+          extra: "This page does not store names. Write the owner down in your own notes.",
+          cta: "readiness",
+        };
+      }
+      return {
+        kind: "look",
+        amount: amount,
+        headline: "Put one owner on the unofficial line.",
+        body: "Licensed spend is " + money(licensed * 12) + " a year. Personal spend is the number above. Show both in the same meeting.",
+        extra: "",
+        cta: "app",
+      };
     }
 
     if (tool === "who-accepted") {
       var deliverables = Math.max(0, num(form, "deliverables"));
-      var signedPct = Math.min(100, Math.max(0, num(form, "signed")));
-      var signed = signedPct / 100;
+      var signed = Math.min(100, Math.max(0, num(form, "signed"))) / 100;
       var minutes = Math.max(0, num(form, "minutes"));
-      var rate = Math.max(0, num(form, "rate"));
-      var replay = sel(form, "replay") === "yes";
-      var unsignedWeek = deliverables * (1 - signed);
-      var redo = unsignedWeek * (minutes / 60) * rate * LOAD * WEEKS;
-      var unsignedYear = unsignedWeek * WEEKS;
+      var redo = deliverables * (1 - signed) * (minutes / 60) * hourly(form) * LOAD * WEEKS;
       var amount = money(redo) + " / year of unsigned redo";
-      var math =
-        hours(unsignedWeek) +
-        " unsigned items/week × " +
-        minutes +
-        " min redo × " +
-        money(rate) +
-        "/hr × 1.3 × 48 weeks = " +
-        money(redo) +
-        ". Named signer: " +
-        signedPct +
-        "%. Replayable why: " +
-        (replay ? "yes" : "no") +
-        ".";
+      var replay = sel(form, "replay") === "yes";
       if (signed >= 0.9 && replay) {
-        return pack(
-          "leave",
-          amount,
-          "Leave it alone.",
-          "A named signer and a replayable why. You do not need another copilot. Keep the receipt. Stop shopping.",
-          "",
-          "tools",
-          math,
-          "Keep the reason next to the signature. Do not buy another tool."
-        );
+        return {
+          kind: "leave",
+          amount: amount,
+          headline: "Leave it alone.",
+          body: "A named signer and a replayable why. You do not need another copilot. Keep the receipt. Stop shopping.",
+          extra: "",
+          cta: "tools",
+        };
       }
       if (signed < 0.5 || !replay) {
-        return pack(
-          "act",
-          amount,
-          "That is a chat log, not a process.",
-          "Name who accepts, keep the reason, and let a check fail. One real goal in the open alpha is enough to try that.",
-          Math.round(unsignedYear) + " unsigned outputs a year. The builder must not grade itself.",
-          "app",
-          math,
-          "Name the accepter for last week’s last draft. If you cannot, start one goal in the app."
-        );
+        return {
+          kind: "act",
+          amount: amount,
+          headline: "That is a chat log, not a process.",
+          body: "Name who accepts, keep the reason, and let a check fail. One real goal in the open alpha is enough to try that.",
+          extra: "The builder must not grade itself. If the model that wrote the draft also marks it done, you have a hope, not a check.",
+          cta: "app",
+        };
       }
-      return pack(
-        "look",
-        amount,
-        "Close the replay gap.",
-        "Signing without a why still fails a board question. Record the pass/fail reason before you buy more seats.",
-        "",
-        "app",
-        math,
-        "Add one sentence of why to the next signed output. That is the receipt."
-      );
+      return {
+        kind: "look",
+        amount: amount,
+        headline: "Close the replay gap.",
+        body: "Signing without a why still fails a board question. Record the pass/fail reason before you buy more seats.",
+        extra: "",
+        cta: "app",
+      };
     }
 
     if (tool === "copilot-seats") {
       var licensed = Math.max(0, num(form, "licensed"));
-      var usedRaw = Math.max(0, num(form, "used"));
-      var used = Math.min(licensed, usedRaw);
-      var clipped = usedRaw > licensed;
-      var hoursPer = Math.max(0, num(form, "hours"));
-      var wage = Math.max(0, num(form, "rate"));
+      var used = Math.min(licensed, Math.max(0, num(form, "used")));
+      var hours = Math.max(0, num(form, "hours"));
+      var wage = hourly(form);
       var seat = Math.max(0, num(form, "seat"));
       var unused = Math.max(0, licensed - used);
       var waste = unused * seat;
-      var ungoverned = used * hoursPer * wage * LOAD * WEEKS;
+      var ungoverned = used * hours * wage * LOAD * WEEKS;
       var amount = money(waste) + " unused licenses · " + money(ungoverned) + " ungoverned use / year";
-      var math =
-        unused +
-        " unused × " +
-        money(seat) +
-        "/seat = " +
-        money(waste) +
-        ". " +
-        used +
-        " used × " +
-        hoursPer +
-        " hrs/week × " +
-        money(wage) +
-        "/hr × 1.3 × 48 = " +
-        money(ungoverned) +
-        ".";
-      var clipNote = clipped ? " Used seats were capped at licensed seats." : "";
       if (unused < 10 && licensed <= 20) {
-        return pack(
-          "leave",
-          amount,
-          "Fix adoption. Do not buy policy.",
-          "Unused seats under about 10 is not a governance purchase. Turn unused licenses off, or train the people who have them.",
-          "Showing only the unused-license number is how a post stays dishonest. The used-seat line is usually larger." + clipNote,
-          "tools",
-          math,
-          "Turn off unused seats this week, or train the people who have them. Do not buy a control plane."
-        );
+        return {
+          kind: "leave",
+          amount: amount,
+          headline: "Fix adoption. Do not buy policy.",
+          body: "Unused seats under about 10 is not a governance purchase. Turn unused licenses off, or train the people who have them.",
+          extra: "Showing only the unused-license number is how a post stays dishonest. The used-seat line is usually larger.",
+          cta: "tools",
+        };
       }
-      if (used >= 10 && hoursPer >= 2) {
-        return pack(
-          "act",
-          amount,
-          "You are paying for labor with no trail.",
-          "The used-seat line is the one that matters. Name the workflow, the owner, and who accepts output.",
-          clipNote.trim(),
-          "brief",
-          math,
-          "Take both numbers to finance. Ask who accepted last week’s Copilot output."
-        );
+      if (used >= 10 && hours >= 2) {
+        return {
+          kind: "act",
+          amount: amount,
+          headline: "You are paying for labor with no trail.",
+          body: "The used-seat line is the one that matters. Name the workflow, the owner, and who accepts output.",
+          extra: "",
+          cta: "brief",
+        };
       }
-      return pack(
-        "look",
-        amount,
-        "Show both numbers to finance.",
-        "License waste is visible. Ungoverned use is usually larger and quieter. Do not let a seat-optimization slide hide the second number.",
-        clipNote.trim(),
-        "readiness",
-        math,
-        "Put unused-license waste and ungoverned-use cost on the same slide."
-      );
+      return {
+        kind: "look",
+        amount: amount,
+        headline: "Show both numbers to finance.",
+        body: "License waste is visible. Ungoverned use is usually larger and quieter. Do not let a seat-optimization slide hide the second number.",
+        extra: "",
+        cta: "readiness",
+      };
     }
 
     if (tool === "board-five") {
-      var qs = [
-        ["workflow", "name the workflow"],
-        ["owner", "name the owner"],
-        ["spend", "name last month’s spend"],
-        ["failed", "name the last failure"],
-        ["accepted", "name who accepted the last output"],
-      ];
-      var yes = [];
-      var no = [];
-      qs.forEach(function (row) {
-        if (checked(form, row[0])) yes.push(row[1]);
-        else no.push(row[1]);
-      });
-      var n = yes.length;
-      var missing = no.length ? "Still no: " + no.join("; ") + "." : "All five named.";
-      var math = n + " yes / 5. " + missing;
+      var n =
+        (checked(form, "workflow") ? 1 : 0) +
+        (checked(form, "owner") ? 1 : 0) +
+        (checked(form, "spend") ? 1 : 0) +
+        (checked(form, "failed") ? 1 : 0) +
+        (checked(form, "accepted") ? 1 : 0);
       if (n <= 1) {
-        return pack(
-          "leave",
-          n + " / 5",
-          "Do not buy.",
-          "You are not ready for a diagnostic. Name the workflow and the owner first. Open the app if you want one real goal with a check that can fail.",
-          missing,
-          "app",
-          math,
-          "Answer the first two out loud in the next standup. Then stop shopping."
-        );
+        return {
+          kind: "leave",
+          amount: n + " / 5",
+          headline: "Do not buy.",
+          body: "You are not ready for a diagnostic. Name the workflow and the owner first. Open the app if you want one real goal with a check that can fail.",
+          extra: "",
+          cta: "app",
+        };
       }
       if (n <= 3) {
-        return pack(
-          "look",
-          n + " / 5",
-          "Procurement may need a file. You do not need a tour.",
-          "Copilot Readiness is the pack that can be filed. The missing yeses are still the work.",
-          missing,
-          "readiness",
-          math,
-          "Close the missing yeses before you buy a memo."
-        );
+        return {
+          kind: "look",
+          amount: n + " / 5",
+          headline: "Procurement may need a file. You do not need a tour.",
+          body: "Copilot Readiness is the pack that can be filed. The missing yeses are still the work: spend, last failure, or who accepted.",
+          extra: "",
+          cta: "readiness",
+        };
       }
-      return pack(
-        "act",
-        n + " / 5",
-        "Trust Brief only if you need a board memo.",
-        "You can already answer the room. Buy a memo if the board needs paper. Do not buy another copilot to feel busy.",
-        missing,
-        "intake",
-        math,
-        "If the board needs paper, use Trust Brief. If they need a process, open the app."
-      );
+      return {
+        kind: "act",
+        amount: n + " / 5",
+        headline: "Trust Brief only if you need a board memo.",
+        body: "You can already answer the room. Buy a memo if the board needs paper. Do not buy another copilot to feel busy.",
+        extra: "",
+        cta: "intake",
+      };
     }
 
     return null;
+  }
+
+  function warn(tool, form) {
+    var rate = hourly(form);
+    if (sel(form, "pay") !== "salary" && num(form, "rate") >= 250) {
+      return "That hourly rate looks like an annual salary pasted into the wrong box. Switch to annual salary, or check the number.";
+    }
+    if (sel(form, "pay") === "salary" && num(form, "salary") > 0 && num(form, "salary") < 20000) {
+      return "That annual salary is unusually low. If you meant an hourly rate, switch the pay box.";
+    }
+    if ((tool === "quiet-leak" || tool === "handoff") && num(form, "touches") > 80) {
+      return "More than 80 touches a week is possible. Count one real day before you trust this.";
+    }
+    if (tool === "meeting-tax" && num(form, "people") > 20) {
+      return "A room that large is usually two meetings stacked. Split the invite list and price each one.";
+    }
+    if (rate > 0 && rate < 15) {
+      return "Loaded cost uses 1.3× this rate. If contractors invoice higher, type the invoice rate.";
+    }
+    return "";
+  }
+
+  function formula(tool, form) {
+    var rate = hourly(form);
+    if (tool === "quiet-leak" || tool === "handoff") {
+      return (
+        num(form, "touches") +
+        " × (" +
+        num(form, "minutes") +
+        " ÷ 60) × " +
+        money(rate) +
+        "/hr × 1.3 × " +
+        num(form, "people") +
+        " × 48 weeks"
+      );
+    }
+    if (tool === "meeting-tax") {
+      return (
+        num(form, "meetings") +
+        " meetings × (" +
+        num(form, "minutes") +
+        " ÷ 60) × " +
+        num(form, "people") +
+        " people × " +
+        money(rate) +
+        "/hr × 1.3 × 48"
+      );
+    }
+    if (tool === "shadow-ai") {
+      return num(form, "people") + " people × " + money(num(form, "personal")) + "/mo × 12";
+    }
+    if (tool === "who-accepted") {
+      return (
+        "unsigned share × " +
+        num(form, "deliverables") +
+        " / week × " +
+        num(form, "minutes") +
+        " min × " +
+        money(rate) +
+        "/hr × 1.3 × 48"
+      );
+    }
+    return "";
   }
 
   function applyPreset(form, raw) {
@@ -423,11 +432,16 @@
     }, 1600);
   }
 
-  function setText(sel, value, hideIfEmpty) {
-    var el = document.querySelector(sel);
-    if (!el) return;
-    el.textContent = value || "";
-    if (hideIfEmpty) el.hidden = !value;
+  function syncPay(form) {
+    var mode = sel(form, "pay") || "hourly";
+    form.querySelectorAll("[data-pay-field]").forEach(function (el) {
+      el.hidden = el.getAttribute("data-pay-field") !== mode;
+    });
+    var derived = form.querySelector("[data-derived-hourly]");
+    if (derived && mode === "salary") {
+      var h = hourly(form);
+      derived.textContent = h > 0 ? "That is " + money(h) + " / hour before the 1.3 load." : "";
+    }
   }
 
   function render(tool, form) {
@@ -435,24 +449,62 @@
     if (!result) return;
     var box = document.getElementById("nf-tools-result");
     var amount = document.querySelector("[data-result-amount]");
+    var headline = document.querySelector("[data-result-headline]");
+    var body = document.querySelector("[data-result-body]");
+    var extra = document.querySelector("[data-result-extra]");
     var cta = document.querySelector("[data-result-cta]");
+    var formulaEl = document.querySelector("[data-result-formula]");
+    var warnEl = document.querySelector("[data-result-warn]");
+    var blurbEl = document.querySelector("[data-result-blurb]");
     if (box) box.setAttribute("data-kind", result.kind);
     if (amount) {
       amount.hidden = false;
       amount.textContent = result.amount;
     }
-    setText("[data-result-headline]", result.headline);
-    setText("[data-result-body]", result.body);
-    setText("[data-result-extra]", result.extra, true);
-    setText("[data-result-math]", result.math, true);
-    setText("[data-result-action]", result.action, true);
+    if (headline) headline.textContent = result.headline;
+    if (body) body.textContent = result.body;
+    if (extra) {
+      extra.textContent = result.extra || "";
+      extra.hidden = !result.extra;
+    }
     var dest = CTAS[result.cta] || CTAS.tools;
     if (cta) {
       cta.setAttribute("href", dest.href);
       cta.textContent = dest.label;
     }
-    var memoEl = document.querySelector("[data-result-memo]");
-    if (memoEl) memoEl.value = result.memo + "\n" + shareUrl(form);
+    var liveFormula = formula(tool, form);
+    if (formulaEl) {
+      formulaEl.textContent = liveFormula;
+      formulaEl.hidden = !liveFormula;
+    }
+    var warning = warn(tool, form);
+    if (warnEl) {
+      warnEl.textContent = warning;
+      warnEl.hidden = !warning;
+    }
+    var blurb =
+      result.amount +
+      " · " +
+      result.headline +
+      " " +
+      result.body +
+      " (" +
+      NOTICE +
+      ") " +
+      shareUrl(form);
+    if (blurbEl) blurbEl.value = blurb;
+    if (window.parent !== window) {
+      window.parent.postMessage(
+        {
+          schema: "nf-tools-embed-v1",
+          tool: tool,
+          kind: result.kind,
+          amount: result.amount,
+          headline: result.headline,
+        },
+        "*"
+      );
+    }
   }
 
   function bootEmbedBlocks() {
@@ -485,11 +537,14 @@
     var form = document.getElementById("nf-tools-form");
     if (!form) return;
     applyParams(form);
+    syncPay(form);
     render(tool, form);
     form.addEventListener("input", function () {
+      syncPay(form);
       render(tool, form);
     });
     form.addEventListener("change", function () {
+      syncPay(form);
       render(tool, form);
     });
     form.addEventListener("submit", function (event) {
@@ -498,6 +553,16 @@
     document.querySelectorAll("[data-preset]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         applyPreset(form, btn.getAttribute("data-preset") || "{}");
+        syncPay(form);
+        render(tool, form);
+      });
+    });
+    document.querySelectorAll("[data-halve]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var field = btn.getAttribute("data-halve");
+        var el = form.elements[field];
+        if (!el) return;
+        el.value = String(Math.max(0, Number(el.value || 0) / 2));
         render(tool, form);
       });
     });
@@ -515,16 +580,30 @@
     var copy = document.getElementById("nf-tools-copy");
     if (copy) {
       copy.addEventListener("click", function () {
-        var memoEl = document.querySelector("[data-result-memo]");
-        var text = (memoEl && memoEl.value) || NOTICE;
+        var blurb = document.querySelector("[data-result-blurb]");
+        var text = (blurb && blurb.value) || "";
         navigator.clipboard.writeText(text).then(function () {
-          flash(copy, "Memo copied");
+          flash(copy, "Copied");
         });
+      });
+    }
+    var printBtn = document.getElementById("nf-tools-print");
+    if (printBtn) {
+      printBtn.addEventListener("click", function () {
+        window.print();
       });
     }
   }
 
-  window.NF_TOOLS_MATH = { LOAD: LOAD, WEEKS: WEEKS, money: money, processCost: processCost, compute: compute };
+  window.NF_TOOLS_MATH = {
+    LOAD: LOAD,
+    WEEKS: WEEKS,
+    HOURS: HOURS,
+    money: money,
+    processCost: processCost,
+    compute: compute,
+    hourly: hourly,
+  };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();

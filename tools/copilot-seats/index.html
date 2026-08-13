@@ -49,7 +49,7 @@
     <span>Noetfield Systems <small>Inc.</small></span>
    </a>
    <nav class="nf-corp-nav" aria-label="Primary navigation">
-    <a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/tools/">Tools</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
     <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
    </nav>
   </div>
@@ -93,9 +93,22 @@
        <label>Hours per used seat per week
         <input type="number" name="hours" min="0" step="0.5" value="4" inputmode="decimal" required />
        </label>
-       <label>Hourly rate before overhead (CAD)
-        <input type="number" name="rate" min="0" step="1" value="55" inputmode="decimal" required />
+
+       <label>How do you know the pay?
+        <select name="pay">
+         <option value="hourly" selected>Hourly rate</option>
+         <option value="salary">Annual salary</option>
+        </select>
        </label>
+       <label data-pay-field="hourly">Hourly rate before overhead (CAD)
+        <input type="number" name="rate" min="0" step="1" value="55" inputmode="decimal" />
+       </label>
+       <label data-pay-field="salary" hidden>Annual salary before overhead (CAD)
+        <span class="hint">Converted as salary ÷ 48 weeks ÷ 40 hours.</span>
+        <input type="number" name="salary" min="0" step="1000" value="90000" inputmode="decimal" />
+        <span class="hint" data-derived-hourly></span>
+       </label>
+
        <label>Annual cost per seat (CAD)
         <span class="hint">Default 360 for Copilot-class licensing. Change it if you know the real number.</span>
         <input type="number" name="seat" min="0" step="10" value="360" inputmode="decimal" required />
@@ -109,15 +122,15 @@
       <p class="nf-tools-amount" data-result-amount>$0</p>
       <h2 data-result-headline>Fill the four numbers.</h2>
       <p data-result-body>The honest answer updates as you type. Under the hobby line, it will tell you to leave it alone.</p>
-      <p class="nf-tools-worked" data-result-math hidden></p>
-      <p class="nf-tools-next" data-result-action hidden></p>
       <p data-result-extra hidden></p>
-      <label class="nf-tools-memo-label" for="nf-tools-memo">Pasteable memo</label>
-      <textarea id="nf-tools-memo" class="nf-tools-memo" data-result-memo readonly rows="7"></textarea>
+      <p class="nf-tools-formula" data-result-formula hidden></p>
+      <p class="nf-tools-warn" data-result-warn hidden></p>
+      <textarea class="nf-tools-blurb" data-result-blurb readonly tabindex="-1" aria-hidden="true"></textarea>
       <div class="nf-tools-actions">
        <a class="nf-button nf-button--primary" data-result-cta href="/tools/">See the other checks</a>
-       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy memo</button>
        <button type="button" class="nf-button nf-button--secondary" id="nf-tools-share">Copy share link</button>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy for Slack</button>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-print">Print</button>
       </div>
      </aside>
     </div>
@@ -134,11 +147,14 @@
     <p class="nf-corp-kicker" id="more-tools">More free checks</p>
     <div class="nf-tools-grid">
      <a href="/tools/quiet-leak/"><span>01</span><h3>Quiet leak</h3><p>Price one manual process. Honest hobby line at $3,000 a year.</p></a>
-     <a href="/tools/ai-spend/"><span>02</span><h3>AI spend you cannot explain</h3><p>What share of the invoice maps to a named workflow.</p></a>
-     <a href="/tools/who-accepted/"><span>03</span><h3>Who accepted this</h3><p>Chat log versus a named person and a replayable why.</p></a>
-     <a href="/tools/copilot-seats/"><span>04</span><h3>Copilot seats</h3><p>Unused licenses and ungoverned use, shown as two numbers.</p></a>
-     <a href="/tools/board-five/"><span>05</span><h3>Five board questions</h3><p>Yes or no. The tool will tell you not to buy.</p></a>
-     <a href="/tools/embed/"><span>06</span><h3>Embed for advisors</h3><p>One iframe. No tracking of your visitors.</p></a>
+     <a href="/tools/meeting-tax/"><span>02</span><h3>Standing meeting tax</h3><p>What that recurring meeting costs in payroll every year.</p></a>
+     <a href="/tools/handoff/"><span>03</span><h3>Handoff tax</h3><p>Times the same work gets explained again.</p></a>
+     <a href="/tools/ai-spend/"><span>04</span><h3>AI spend you cannot explain</h3><p>What share of the invoice maps to a named workflow.</p></a>
+     <a href="/tools/shadow-ai/"><span>05</span><h3>Shadow AI</h3><p>Personal ChatGPT next to the licensed invoice.</p></a>
+     <a href="/tools/who-accepted/"><span>06</span><h3>Who accepted this</h3><p>Chat log versus a named person and a replayable why.</p></a>
+     <a href="/tools/copilot-seats/"><span>07</span><h3>Copilot seats</h3><p>Unused licenses and ungoverned use, shown as two numbers.</p></a>
+     <a href="/tools/board-five/"><span>08</span><h3>Five board questions</h3><p>Yes or no. The tool will tell you not to buy.</p></a>
+     <a href="/tools/embed/"><span>09</span><h3>Embed for advisors</h3><p>One iframe. No tracking of your visitors.</p></a>
     </div>
    </div>
   </section>

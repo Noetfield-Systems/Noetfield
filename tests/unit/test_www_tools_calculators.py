@@ -36,7 +36,10 @@ def test_required_tool_pages_exist_and_are_indexable() -> None:
     routes = [
         "index.html",
         "quiet-leak/index.html",
+        "meeting-tax/index.html",
+        "handoff/index.html",
         "ai-spend/index.html",
+        "shadow-ai/index.html",
         "who-accepted/index.html",
         "copilot-seats/index.html",
         "board-five/index.html",
@@ -75,7 +78,10 @@ def test_public_artifact_allowlist_includes_tools() -> None:
     for path in (
         "tools/index.html",
         "tools/quiet-leak/index.html",
+        "tools/meeting-tax/index.html",
+        "tools/handoff/index.html",
         "tools/ai-spend/index.html",
+        "tools/shadow-ai/index.html",
         "tools/who-accepted/index.html",
         "tools/copilot-seats/index.html",
         "tools/board-five/index.html",
@@ -89,21 +95,48 @@ def test_public_artifact_allowlist_includes_tools() -> None:
 
 def test_embed_kit_lists_iframe_sources() -> None:
     html = (TOOLS / "embed" / "index.html").read_text(encoding="utf-8")
-    for slug in ("quiet-leak", "ai-spend", "who-accepted", "copilot-seats", "board-five"):
+    for slug in (
+        "quiet-leak",
+        "meeting-tax",
+        "handoff",
+        "ai-spend",
+        "shadow-ai",
+        "who-accepted",
+        "copilot-seats",
+        "board-five",
+    ):
         assert f"/tools/{slug}/?embed=1" in html
 
 
-def test_practical_field_output_is_wired() -> None:
+def test_salary_and_practical_controls_exist() -> None:
     js = JS
-    assert "Pasteable memo" not in js
-    assert "memo:" in js or "memo =" in js
-    assert 'action: action' in js or "action: action" in js
+    assert "var HOURS = 40;" in js
+    assert "pay" in (TOOLS / "quiet-leak" / "index.html").read_text(encoding="utf-8")
+    html = (TOOLS / "quiet-leak" / "index.html").read_text(encoding="utf-8")
+    assert "nf-tools-print" in html
+    assert "Copy for Slack" in html
+    assert 'name="pay"' in html
+    assert "Halve the touches" in html
+    meeting = (TOOLS / "meeting-tax" / "index.html").read_text(encoding="utf-8")
+    assert "standing meeting" in meeting.lower() or "Standing meeting" in meeting
+    shadow = (TOOLS / "shadow-ai" / "index.html").read_text(encoding="utf-8")
+    assert "personal" in shadow.lower()
+
+
+def test_meeting_tax_hobby_line() -> None:
+    small = 1 * (15 / 60) * 30 * LOAD * 3 * WEEKS
+    big = 3 * (60 / 60) * 70 * LOAD * 12 * WEEKS
+    assert small < HOBBY
+    assert big > HOBBY
+
+
+def test_practical_field_output_is_wired() -> None:
     quiet = (TOOLS / "quiet-leak" / "index.html").read_text(encoding="utf-8")
-    assert "data-result-math" in quiet
-    assert "data-result-action" in quiet
-    assert "data-result-memo" in quiet
-    assert "Copy memo" in quiet
-    hub = (TOOLS / "index.html").read_text(encoding="utf-8")
-    assert "Use it in a meeting" in hub
+    assert "data-result-formula" in quiet
+    assert "data-result-warn" in quiet
+    assert "data-result-blurb" in quiet
+    assert "Copy for Slack" in quiet
+    assert "nf-tools-print" in quiet
+    assert "nf-tools-embed-v1" in JS
     embed = (TOOLS / "embed" / "index.html").read_text(encoding="utf-8")
     assert "With a client" in embed
