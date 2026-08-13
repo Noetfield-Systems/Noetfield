@@ -451,6 +451,11 @@ for f in index.html start/index.html pricing/index.html copilot/pilot/index.html
 done
 [[ "$lang_fail" -eq 0 ]] && ok "client-view language on public www" || fail=1
 
+check_file "tools hub meeting use" tools/index.html \
+  'Use it in a meeting' 'Fill four numbers' 'leave-alone'
+check_file "quiet leak pasteable memo" tools/quiet-leak/index.html \
+  'data-result-memo' 'Copy memo' 'data-result-math'
+
 check_file "tools hub honest leave-alone" tools/index.html \
   '<title>Free operator tools' \
   '<link rel="canonical" href="https://www.noetfield.com/tools/" />' \

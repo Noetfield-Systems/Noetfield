@@ -205,3 +205,68 @@
 .nf-tools--embed .nf-tools-layout { grid-template-columns: 1fr; }
 
 .nf-tools-related { padding-top: 0; }
+
+.nf-tools-worked,
+.nf-tools-next {
+  margin: 0.7rem 0 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+.nf-tools-worked {
+  color: #3d4a5c;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+.nf-tools-next {
+  color: #111b2a;
+  font-weight: 600;
+}
+.nf-tools-memo-label {
+  display: block;
+  margin: 0.9rem 0 0.35rem;
+  color: #697587;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.nf-tools-memo {
+  width: 100%;
+  min-height: 7.5rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(17, 27, 42, 0.16);
+  border-radius: 8px;
+  background: #fff;
+  color: #243044;
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  resize: vertical;
+}
+.nf-tools-preview {
+  display: block;
+  width: 100%;
+  height: 820px;
+  margin: 0.7rem 0 1.6rem;
+  border: 0;
+  border-radius: 12px;
+  background: #f7f4ee;
+}
+@media (min-width: 900px) {
+  .nf-tools-result { position: sticky; top: 1rem; }
+}
+
+@media print {
+  .nf-corp-header,
+  .nf-corp-footer,
+  .nf-tools-related,
+  .nf-tools-presets,
+  .nf-tools-actions,
+  .nf-skip {
+    display: none !important;
+  }
+  .nf-tools-result {
+    box-shadow: none;
+    border: 1px solid #111;
+  }
+}
