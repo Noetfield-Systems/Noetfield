@@ -50,9 +50,9 @@
       "width": 1200
     }
   ],
-  "indexable_route_count": 46,
+  "indexable_route_count": 53,
   "noindex_route_count": 117,
-  "route_count": 163,
+  "route_count": 170,
   "routes": [
     {
       "canonical_url": "https://www.noetfield.com/404.html",
@@ -2453,6 +2453,118 @@
       "route": "/thanks/",
       "title": "Noetfield \u00b7 /thanks/",
       "verdict": "NOINDEX_DOCUMENTED"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/tools/ai-spend/",
+      "description": "See how much of the AI invoice has no named workflow behind it.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/ai-spend/",
+      "title": "AI spend you cannot explain \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/tools/board-five/",
+      "description": "Five yes or no questions. Score 0 or 1 means do not buy a diagnostic.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/board-five/",
+      "title": "Five board questions \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/tools/copilot-seats/",
+      "description": "Unused Copilot licenses and ungoverned use, shown as two separate yearly costs.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/copilot-seats/",
+      "title": "Copilot seats versus governed use \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/tools/embed/",
+      "description": "Put the one-minute checks on your own page. One iframe. No signup. We do not track your visitors.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/embed/",
+      "title": "Embed Noetfield tools \u2014 free for advisors",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/tools/",
+      "description": "One-minute checks that will tell you to leave a process alone. No signup. Nothing stored.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/",
+      "title": "Free operator tools \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/tools/quiet-leak/",
+      "description": "Four numbers. What one manual process costs a year, and whether it is worth fixing.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/quiet-leak/",
+      "title": "Quiet leak calculator \u2014 Noetfield",
+      "verdict": "PASS"
+    },
+    {
+      "canonical_url": "https://www.noetfield.com/tools/who-accepted/",
+      "description": "Price the unsigned AI drafts your team still rewrites by hand.",
+      "image_sha256": "a84d6895927eacb45f5e7451a62aa79595ac88a268e601f0eda862e450d0cebf",
+      "indexability": "indexable",
+      "noindex_reason": null,
+      "og_image": "https://www.noetfield.com/assets/social/noetfield-corporate-v2.png",
+      "png_dimensions": {
+        "height": 630,
+        "width": 1200
+      },
+      "profile": "corporate",
+      "route": "/tools/who-accepted/",
+      "title": "Who accepted this output \u2014 Noetfield",
+      "verdict": "PASS"
     },
     {
       "canonical_url": "https://www.noetfield.com/trust-brief/",
