@@ -134,12 +134,12 @@ check_file "historical v42 expectations archived" \
   'noetfield-www.css?v=42' 'nfInvestorForm' 'Shipped today'
 
 check_file "AI Motor category definition and engagement stay public" motors/index.html \
-  '<title>AI Motors — Governed Execution for Enterprise Agents</title>' \
+  '<title>AI Motors — How a run is allowed</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/motors/" />' \
-  'The deterministic execution layer for agentic systems.' \
-  'A Noetfield Motor executes authorized Action Contracts inside a durable governed runtime' \
-  'independent verifier judges the result' \
-  'Motor does not reason, create goals, or grant itself authority' \
+  'How a run is allowed' \
+  'A Noetfield Motor runs only the work that was already allowed' \
+  'A separate check judges the result' \
+  'The Motor does not invent goals. It does not mark its own homework.' \
   'A Motor is defined by what it does when execution should not continue.' \
   'Harness · model &amp; agent routing' 'Verifier · judgment' 'Recovery' 'Evidence record' \
   'href="/contact/?topic=governed-motor"' '/assets/noetfield-corporate-v1.css?v=5'
