@@ -1,175 +1,103 @@
 #!/usr/bin/env python3
-"""Regenerate sitemap.xml from public index.html routes (NF-WWW-04)."""
+"""Regenerate sitemap.xml from every public indexable HTML route (NF-WWW-SEO).
+
+SSOT: governance/www-public-artifact-v1.json static HTML files that are
+index,follow (not noindex), not private prefixes, and not thin redirect stubs.
+"""
 
 from __future__ import annotations
 
+import json
 import re
 import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from xml.dom import minidom
 from xml.etree import ElementTree as ET
 from xml.etree.ElementTree import Element, SubElement, tostring
 
 ROOT = Path(__file__).resolve().parents[1]
+ALLOWLIST = ROOT / "governance" / "www-public-artifact-v1.json"
 BASE = "https://www.noetfield.com"
-SKIP_DIRS = {
-    "_archive",
-    "apps",
-    "packages",
-    "services",
-    "infrastructure",
-    "tests",
-    "scripts",
-    "docs",
-    "Noetfield-All-Documents",
-    "L0-law",
-    "L1-operational",
-    "L2-knowledge",
-    "L3-external",
-    "governance",
-    "node_modules",
-    ".git",
-    ".github",
-    ".pytest_cache",
-    "demos",
-    "portal",
-    "ex",
-    "auth",
-    "login",
-    "signup",
-}
 
 NOINDEX_RE = re.compile(
     r'<meta\s+name=["\']robots["\']\s+content=["\'][^"\']*noindex',
     re.IGNORECASE,
 )
 
+# Never list these even if a page forgets noindex.
+EXCLUDE_PREFIXES = (
+    "/admin/",
+    "/assets/partials/",
+    "/auth/",
+    "/banner/",
+    "/console/",
+    "/deterministic-api/signin/",
+    "/deterministic-api/workspace/",
+    "/enterprise/",
+    "/ex/",
+    "/invest/",
+    "/login/",
+    "/portal/",
+    "/signup/",
+)
+EXCLUDE_EXACT = {
+    "/404.html",
+    "/gate/sales/thanks/",
+    "/copilot/quickscan/thanks/",
+}
+
 PRIORITY = {
     "/": 1.0,
-    "/trust-brief/": 0.9,
-    "/enterprise/": 0.9,
-    "/copilot/": 0.9,
-    "/trust-brief/intake/": 0.9,
-    "/gate/intake/": 0.85,
-    "/bank-pilot/": 0.88,
-    "/partners/": 0.88,
-    "/trust-ledger/": 0.82,
-    "/status/": 0.75,
-    "/next/": 0.85,
-    "/investors/": 0.85,
-    "/investors/diligence/": 0.84,
-    "/contact/": 0.82,
-    "/work-with-us/": 0.82,
-    "/faq/": 0.8,
-    "/for-whom/": 0.8,
-    "/trust-ledger/": 0.8,
-    "/about/": 0.7,
-    "/runways/": 0.9,
-    "/runways/decision-brief/": 0.85,
-    "/motors/": 0.9,
-    "/deterministic-api/": 0.9,
+    "/motors/": 0.95,
+    "/runways/": 0.95,
+    "/workflows/": 0.95,
+    "/developers/": 0.95,
+    "/system/": 0.95,
     "/assurance/": 0.9,
     "/tools/": 0.9,
-    "/tools/quiet-leak/": 0.85,
-    "/tools/crm-followup/": 0.85,
-    "/tools/meeting-tax/": 0.85,
-    "/tools/handoff/": 0.85,
-    "/tools/ai-spend/": 0.85,
-    "/tools/shadow-ai/": 0.85,
-    "/tools/who-accepted/": 0.85,
-    "/tools/copilot-seats/": 0.85,
-    "/tools/board-five/": 0.85,
-    "/tools/embed/": 0.8,
-    "/workflows/": 0.9,
-    "/developers/": 0.9,
     "/proof/": 0.9,
-    "/proof/lab/": 0.9,
-    "/proof/agentic-coding-reliability-case-001/": 0.7,
-    "/research-trader/": 0.8,
-}
-
-# Top-level marketing paths (index.html at depth 1) included if indexable
-MARKETING_TOP = {
-    "about",
-    "ai-automation",
-    "bank-pilot",
-    "partners",
-    "trust-ledger",
-    "copilot",
-    "enterprise",
-    "status",
-    "next",
-    "investors",
-    "contact",
-    "work-with-us",
-    "federal",
-    "msp",
-    "pricing",
-    "start",
-    "trust",
-    "faq",
-    "for-whom",
-    "privacy",
-    "proof",
-    "resources",
-    "runways",
-    "workflows",
-    "developers",
-    "assurance",
-    "motors",
-    "deterministic-api",
-    "research-trader",
-    "terms",
-    "tools",
-    "trust-brief",
-}
-
-# Nested marketing routes (depth 2)
-MARKETING_NESTED = {
-    ("investors", "diligence"),
-    ("copilot", "pilot"),
-    ("copilot", "demo"),
-    ("copilot", "procurement"),
-    ("runways", "decision-brief"),
-    ("demo", "complete-run"),
-    ("assurance", "control-testing"),
-    ("proof", "lab"),
-    ("proof", "agentic-coding-reliability-case-001"),
-    ("tools", "quiet-leak"),
-    ("tools", "crm-followup"),
-    ("tools", "meeting-tax"),
-    ("tools", "handoff"),
-    ("tools", "ai-spend"),
-    ("tools", "shadow-ai"),
-    ("tools", "who-accepted"),
-    ("tools", "copilot-seats"),
-    ("tools", "board-five"),
-    ("tools", "embed"),
+    "/deterministic-api/": 0.9,
+    "/applications/": 0.9,
+    "/applications/trustfield/": 0.9,
+    "/start/": 0.9,
+    "/pricing/": 0.85,
+    "/contact/": 0.85,
+    "/investors/": 0.85,
+    "/about/": 0.8,
+    "/trust/": 0.8,
+    "/trust-brief/": 0.85,
+    "/public-interest/": 0.8,
 }
 
 
-def is_public_route(path: Path) -> bool:
-    rel = path.relative_to(ROOT)
-    if any(part in SKIP_DIRS for part in rel.parts):
+def route_for_rel(rel: str) -> str:
+    if rel == "index.html":
+        return "/"
+    if rel.endswith("/index.html"):
+        return f"/{rel[:-10]}"
+    # Standalone public HTML (privacy/terms companions), not error/thanks docs.
+    name = Path(rel).name.lower()
+    if name in {"404.html", "success.html"}:
+        return ""
+    if rel.endswith(".html") and "/" in rel:
+        return f"/{rel}"
+    return ""
+
+
+def is_sitemap_route(route: str, text: str) -> bool:
+    if not route:
         return False
-    if path.name != "index.html":
+    # Directory routes end with /; standalone pages end with .html
+    if not (route.endswith("/") or route.endswith(".html")):
         return False
-    # Only root + one-level marketing dirs (avoid gate/* stubs except gate/intake)
-    depth = len(rel.parts) - 1
-    if depth == 0:
-        pass
-    elif depth == 1 and rel.parts[0] in MARKETING_TOP:
-        pass
-    elif depth == 2 and tuple(rel.parts[:2]) in MARKETING_NESTED:
-        pass
-    elif rel.parts[:2] == ("gate", "intake"):
-        pass
-    elif rel.parts[:2] == ("trust-brief", "intake"):
-        pass
-    else:
+    if route in EXCLUDE_EXACT:
         return False
-    text = path.read_text(encoding="utf-8", errors="replace")
+    if any(route.startswith(prefix) for prefix in EXCLUDE_PREFIXES):
+        return False
+    if route.endswith("/thanks/") or route.endswith("/thanks"):
+        return False
     if NOINDEX_RE.search(text):
         return False
     if "http-equiv" in text.lower() and "refresh" in text.lower() and len(text) < 1200:
@@ -177,25 +105,29 @@ def is_public_route(path: Path) -> bool:
     return True
 
 
-def url_path(index_path: Path) -> str:
-    rel = index_path.parent.relative_to(ROOT)
-    if str(rel) == ".":
-        return "/"
-    return "/" + "/".join(rel.parts) + "/"
+def path_for_route(route: str) -> Path:
+    if route == "/":
+        return ROOT / "index.html"
+    if route.endswith(".html"):
+        return ROOT / route.lstrip("/")
+    return ROOT / route.lstrip("/") / "index.html"
 
 
 def changefreq(url: str) -> str:
-    if url in ("/", "/trust-brief/", "/enterprise/", "/deterministic-api/", "/proof/lab/"):
+    if url in ("/", "/motors/", "/tools/", "/developers/", "/system/", "/deterministic-api/"):
         return "weekly"
     return "monthly"
 
 
 def priority(url: str) -> str:
+    if url.startswith("/tools/") and url != "/tools/":
+        return "0.85"
+    if url.startswith("/proof/") and url != "/proof/":
+        return "0.75"
     return f"{PRIORITY.get(url, 0.7):.1f}"
 
 
 def load_committed_lastmods() -> dict[str, str]:
-    """Preserve lastmod from sitemap.xml when git history is shallow (CI checkout)."""
     path = ROOT / "sitemap.xml"
     if not path.exists():
         return {}
@@ -223,8 +155,7 @@ def load_committed_lastmods() -> dict[str, str]:
     return out
 
 
-def lastmod_for(index_path: Path, preserved: dict[str, str]) -> str:
-    """Git commit date when available; else keep committed sitemap; never checkout mtime."""
+def lastmod_for(index_path: Path, route: str, preserved: dict[str, str]) -> str:
     rel = index_path.relative_to(ROOT).as_posix()
     try:
         proc = subprocess.run(
@@ -239,43 +170,48 @@ def lastmod_for(index_path: Path, preserved: dict[str, str]) -> str:
             return proc.stdout.strip()[:10]
     except (OSError, subprocess.TimeoutExpired):
         pass
-    route = url_path(index_path)
     if route in preserved:
         return preserved[route]
     mtime = index_path.stat().st_mtime
     return datetime.fromtimestamp(mtime, tz=timezone.utc).date().isoformat()
 
 
+def collect_routes() -> dict[str, Path]:
+    allow = json.loads(ALLOWLIST.read_text(encoding="utf-8"))
+    files = allow.get("static_files", [])
+    found: dict[str, Path] = {}
+    for rel in files:
+        if not isinstance(rel, str) or not rel.endswith(".html"):
+            continue
+        route = route_for_rel(rel)
+        path = ROOT / rel
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if not is_sitemap_route(route, text):
+            continue
+        found[route] = path
+    return found
+
+
 def main() -> int:
     preserved_lastmods = load_committed_lastmods()
-    urls: list[str] = []
-    for index in sorted(ROOT.rglob("index.html")):
-        if is_public_route(index):
-            urls.append(url_path(index))
-
+    routes = collect_routes()
     urlset = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
-    index_by_url = {}
-    for index in sorted(ROOT.rglob("index.html")):
-        if is_public_route(index):
-            index_by_url[url_path(index)] = index
-
-    for loc_path in sorted(set(urls), key=lambda u: (u != "/", u)):
+    for loc_path in sorted(routes, key=lambda u: (u != "/", u)):
         url_el = SubElement(urlset, "url")
         SubElement(url_el, "loc").text = BASE + loc_path
         SubElement(url_el, "lastmod").text = lastmod_for(
-            index_by_url[loc_path], preserved_lastmods
+            routes[loc_path], loc_path, preserved_lastmods
         )
         SubElement(url_el, "changefreq").text = changefreq(loc_path)
         SubElement(url_el, "priority").text = priority(loc_path)
 
-    from xml.dom import minidom
-
     raw = tostring(urlset, encoding="utf-8")
     pretty = minidom.parseString(raw).toprettyxml(indent="  ", encoding="utf-8")
-    xml = pretty
     out = ROOT / "sitemap.xml"
-    out.write_bytes(xml)
-    print(f"wrote {len(urls)} urls to {out.relative_to(ROOT)}")
+    out.write_bytes(pretty)
+    print(f"wrote {len(routes)} urls to {out.relative_to(ROOT)}")
     return 0
 
 

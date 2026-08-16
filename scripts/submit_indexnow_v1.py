@@ -4,24 +4,44 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HOST = "www.noetfield.com"
 KEY_FILE = ROOT / "indexnow-key.txt"
-DEFAULT_URLS = [
-    f"https://{HOST}/",
-    f"https://{HOST}/deterministic-api/",
-    f"https://{HOST}/motors/",
-    f"https://{HOST}/runways/",
-    f"https://{HOST}/proof/",
-    f"https://{HOST}/research-trader/",
-    f"https://{HOST}/about/",
-    f"https://{HOST}/llms.txt",
-    f"https://{HOST}/sitemap.xml",
-]
+SITEMAP = ROOT / "sitemap.xml"
+# IndexNow accepts at most 10,000 URLs per request; keep a hard ceiling.
+MAX_URLS = 1000
+
+
+def load_urls() -> list[str]:
+    urls: list[str] = []
+    if SITEMAP.exists():
+        text = SITEMAP.read_text(encoding="utf-8", errors="replace")
+        for match in re.finditer(r"<loc>(https://www\.noetfield\.com[^<]+)</loc>", text):
+            urls.append(match.group(1).strip())
+    if not urls:
+        urls = [
+            f"https://{HOST}/",
+            f"https://{HOST}/motors/",
+            f"https://{HOST}/developers/",
+            f"https://{HOST}/system/",
+            f"https://{HOST}/tools/",
+            f"https://{HOST}/about/",
+        ]
+    urls.append(f"https://{HOST}/llms.txt")
+    urls.append(f"https://{HOST}/sitemap.xml")
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for url in urls:
+        if url not in seen:
+            seen.add(url)
+            ordered.append(url)
+    return ordered[:MAX_URLS]
 
 
 def main() -> int:
@@ -31,11 +51,12 @@ def main() -> int:
     if not key:
         print("FAIL missing IndexNow key", file=sys.stderr)
         return 2
+    url_list = load_urls()
     payload = {
         "host": HOST,
         "key": key,
         "keyLocation": f"https://{HOST}/{key}.txt",
-        "urlList": DEFAULT_URLS,
+        "urlList": url_list,
     }
     req = urllib.request.Request(
         "https://api.indexnow.org/indexnow",
@@ -56,7 +77,7 @@ def main() -> int:
     except Exception as err:  # noqa: BLE001
         print(f"FAIL indexnow {err}", file=sys.stderr)
         return 2
-    print(json.dumps({"ok": True, "http": code, "urls": len(DEFAULT_URLS), "host": HOST}))
+    print(json.dumps({"ok": True, "http": code, "urls": len(url_list), "host": HOST}))
     print("INDEXNOW_SUBMIT_PASS")
     return 0
 

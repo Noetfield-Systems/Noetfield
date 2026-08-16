@@ -264,8 +264,14 @@ def test_runways_primary_nav_matches_homepage() -> None:
 
 
 def test_legacy_identity_pages_are_demoted() -> None:
-    legacy = (
-        "enterprise",
+    # Enterprise stays noindex (redirect / legacy commercial lane).
+    enterprise = read(ROOT / "enterprise" / "index.html")
+    assert '<meta name="robots" content="noindex,nofollow" />' in enterprise
+    assert "nf-legacy-lane-banner" in enterprise
+    assert 'href="/system/"' in enterprise or 'href="/motors/"' in enterprise
+
+    # Other specialized lanes stay labeled, but are indexable for search.
+    indexed_legacy = (
         "pricing",
         "intelligence",
         "research-packs",
@@ -274,12 +280,29 @@ def test_legacy_identity_pages_are_demoted() -> None:
         "next",
         "faq",
     )
-    for slug in legacy:
+    for slug in indexed_legacy:
         text = read(ROOT / slug / "index.html")
-        assert '<meta name="robots" content="noindex,nofollow" />' in text, slug
+        assert '<meta name="robots" content="index,follow" />' in text, slug
         assert "nf-legacy-lane-banner" in text, slug
         assert 'href="/system/"' in text or 'href="/motors/"' in text, slug
-        assert "index,follow" not in text or "noindex,nofollow" in text, slug
+        assert "noindex,nofollow" not in text, slug
+
+
+def test_public_marketing_pages_are_indexable() -> None:
+    must_index = (
+        "start",
+        "system",
+        "developers",
+        "tools",
+        "applications",
+        "governance",
+        "federal",
+        "msp",
+        "bank-pilot",
+    )
+    for slug in must_index:
+        text = read(ROOT / slug / "index.html")
+        assert '<meta name="robots" content="index,follow" />' in text, slug
 
 
 def test_deterministic_api_is_a_first_class_product_surface() -> None:
