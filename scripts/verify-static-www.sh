@@ -225,7 +225,7 @@ check_file "start sandbox page" start/index.html \
 
 check_file "pricing packaging page" pricing/index.html \
   '<title>Specialized lane — Pricing &amp; packaging — Noetfield</title>' \
-  '<meta name="robots" content="noindex,nofollow" />' \
+  '<meta name="robots" content="index,follow" />' \
   'nf-legacy-lane-banner' 'Published tiers' 'Apply for pilot' 'Milestone pricing' \
   'Developer access · free' 'noetfield-www.css?v=42' 'What regulated buyers receive from Noetfield'
 

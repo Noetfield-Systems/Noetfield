@@ -1,19 +1,25 @@
 # Noetfield Systems Inc.
-> Governed AI execution: AI Motors, Runways, and the Deterministic API.
+> AI workflows with separate verification, bounded repair, and inspectable receipts.
 
 ## Primary
 - [Home](https://www.noetfield.com/): Company home
-- [AI Motors](https://www.noetfield.com/motors/): Governed execution runtime
+- [Developers](https://www.noetfield.com/developers/): What engineers can use today
+- [System](https://www.noetfield.com/system/): How the pieces fit
+- [AI Motors](https://www.noetfield.com/motors/): How a run is allowed
+- [Tools](https://www.noetfield.com/tools/): Operator cost checks (no signup)
 - [Runways](https://www.noetfield.com/runways/): Qualification paths to accepted output
-- [Deterministic API](https://www.noetfield.com/deterministic-api/): OpenAI-compatible schema-valid API
+- [Deterministic API](https://www.noetfield.com/deterministic-api/): OpenAI-shaped schema-valid API preview
 - [Proof](https://www.noetfield.com/proof/): Evidence before claims
+- [Applications](https://www.noetfield.com/applications/): What ships as product
 - [Contact](https://www.noetfield.com/contact/?topic=pilot-client): Talk to Noetfield
 
 ## Product API
-- Base URL: https://nf-deterministic-api-v1.sina-kazemnezhad-ca.workers.dev/v1
 - Docs / signup: https://www.noetfield.com/deterministic-api/
-- Workspace (authenticated): https://www.noetfield.com/deterministic-api/workspace/
+- Workspace (authenticated, not for indexing): https://www.noetfield.com/deterministic-api/workspace/
 
 ## Optional
 - [About](https://www.noetfield.com/about/)
+- [Assurance](https://www.noetfield.com/assurance/)
+- [TrustField](https://www.noetfield.com/applications/trustfield/)
 - [Sitemap](https://www.noetfield.com/sitemap.xml)
+- [robots.txt](https://www.noetfield.com/robots.txt)

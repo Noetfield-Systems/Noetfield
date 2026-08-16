@@ -6,12 +6,22 @@ Disallow: /docs/references/
 Disallow: /docs/spec/
 Disallow: /docs/SOURCE_OF_TRUTH/
 Disallow: /scripts/
-Disallow: /services/
 Disallow: /reports/
 Disallow: /os/
+Disallow: /admin/
+Disallow: /auth/
+Disallow: /invest/
+Disallow: /console/
+Disallow: /banner/
+Disallow: /deterministic-api/signin/
+Disallow: /deterministic-api/workspace/
 
 Sitemap: https://www.noetfield.com/sitemap.xml
 
 # AI / GEO discovery
 Allow: /llms.txt
 Allow: /deterministic-api/
+Allow: /tools/
+Allow: /developers/
+Allow: /system/
+Allow: /services/
