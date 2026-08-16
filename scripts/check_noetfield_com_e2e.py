@@ -38,10 +38,10 @@ HOME_NEEDLES = (
 )
 
 MOTORS_NEEDLES = (
-    "Governed execution runtime",
-    "authorized Action Contracts",
-    "Motor does not reason",
+    "How a run is allowed",
+    "does not mark its own homework",
     "Models generate. Agents participate. Motors operate.",
+    "Someone else decides what gets accepted",
 )
 
 TOOL_ROUTES = (

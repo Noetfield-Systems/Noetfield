@@ -22,7 +22,7 @@
     },
     "motors": {
       "url": "https://www.noetfield.com/motors/",
-      "expected_title": "AI Motors — Governed Execution for Enterprise Agents",
+      "expected_title": "AI Motors — How a run is allowed",
       "image_filename": "featured-motors-enterprise-v1.png",
       "host": "www"
     },

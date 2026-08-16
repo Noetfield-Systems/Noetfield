@@ -9,48 +9,48 @@
       "eyebrow": "NOETFIELD SYSTEMS INC.",
       "headline": "Governed AI execution.",
       "supporting": "Products, custom AI Motors and institutional workflows built on shared governed infrastructure.",
-      "footer": "Vancouver, Canada \u00b7 noetfield.com",
+      "footer": "Vancouver, Canada · noetfield.com",
       "alt": "Noetfield Systems Inc."
     },
     "enterprise": {
       "filename": "noetfield-enterprise-v2.png",
-      "eyebrow": "NOETFIELD \u00b7 ENTERPRISE",
+      "eyebrow": "NOETFIELD · ENTERPRISE",
       "headline": "Governed Application Factory",
       "supporting": "Code generation is becoming abundant. Governed software production is not.",
-      "footer": "Execution \u00b7 Verification \u00b7 Evidence",
-      "alt": "Noetfield Enterprise \u2014 Governed Application Factory with execution, verification and evidence."
+      "footer": "Execution · Verification · Evidence",
+      "alt": "Noetfield Enterprise — Governed Application Factory with execution, verification and evidence."
     },
     "motors": {
       "filename": "noetfield-motors-v2.png",
-      "eyebrow": "NOETFIELD \u00b7 CUSTOM SYSTEMS",
+      "eyebrow": "NOETFIELD · CUSTOM SYSTEMS",
       "headline": "Custom AI Motors",
-      "supporting": "Deterministic execution layer for authorized Action Contracts under explicit control-plane authority.",
-      "footer": "Act \u00b7 Verify \u00b7 Escalate \u00b7 Recover",
-      "alt": "Noetfield Custom AI Motors \u2014 deterministic execution layer with independent verifier judgment."
+      "supporting": "Models can suggest work. Something else has to allow it. The Motor only runs what was allowed.",
+      "footer": "Act · Verify · Escalate · Recover",
+      "alt": "Noetfield AI Motors — how a run is allowed, with a separate check on the result."
     },
     "investors": {
       "filename": "noetfield-investors-v2.png",
-      "eyebrow": "NOETFIELD \u00b7 ECOSYSTEM & INVESTORS",
+      "eyebrow": "NOETFIELD · ECOSYSTEM & INVESTORS",
       "headline": "Built to be examined.",
       "supporting": "Products, infrastructure, current evidence and the next commissioning stage.",
-      "footer": "Noetfield Systems Inc. \u00b7 Vancouver",
-      "alt": "Noetfield ecosystem and investors \u2014 products, infrastructure, current evidence and the next commissioning stage."
+      "footer": "Noetfield Systems Inc. · Vancouver",
+      "alt": "Noetfield ecosystem and investors — products, infrastructure, current evidence and the next commissioning stage."
     },
     "proof": {
       "filename": "noetfield-proof-v2.png",
-      "eyebrow": "NOETFIELD \u00b7 PROOF",
+      "eyebrow": "NOETFIELD · PROOF",
       "headline": "Evidence before claims.",
       "supporting": "Current systems, verified states and public execution receipts.",
-      "footer": "Build \u00b7 Verify \u00b7 Record",
-      "alt": "Noetfield proof \u2014 current systems, verified states and public execution receipts."
+      "footer": "Build · Verify · Record",
+      "alt": "Noetfield proof — current systems, verified states and public execution receipts."
     },
     "frontier": {
       "filename": "noetfield-frontier-v2.png",
-      "eyebrow": "NOETFIELD \u00b7 FRONTIER SYSTEMS",
+      "eyebrow": "NOETFIELD · FRONTIER SYSTEMS",
       "headline": "Shared work before title.",
       "supporting": "A founding-counterpart path for governed execution and institutional AI infrastructure.",
-      "footer": "Mutual discovery \u00b7 Bounded work \u00b7 Long-term alignment",
-      "alt": "Noetfield Frontier Systems \u2014 shared work before title and a founding-counterpart path for governed execution."
+      "footer": "Mutual discovery · Bounded work · Long-term alignment",
+      "alt": "Noetfield Frontier Systems — shared work before title and a founding-counterpart path for governed execution."
     }
   },
   "route_profiles": {
@@ -142,36 +142,36 @@
       "description": "Noetfield Systems Inc., founder Sina Kazemnezhad, the live alpha runtime, SourceA/Runway infrastructure, and the TrustField product boundary."
     },
     "/enterprise/": {
-      "title": "Legacy commercial lane \u2014 Enterprise \u2014 Noetfield",
-      "description": "Specialized enterprise commercial lane \u2014 see AI Motors for the company narrative. Copilot Governance Pack, Trust Brief, and sandbox paths remain available here."
+      "title": "Legacy commercial lane — Enterprise — Noetfield",
+      "description": "Specialized enterprise commercial lane — see AI Motors for the company narrative. Copilot Governance Pack, Trust Brief, and sandbox paths remain available here."
     },
     "/enterprise/application-factory/": {
-      "title": "Governed Application Factory \u2014 Noetfield Enterprise",
+      "title": "Governed Application Factory — Noetfield Enterprise",
       "description": "Build, replace and promote institutional software through governed production, separate verification and evidence."
     },
     "/motors/": {
-      "title": "AI Motors — Governed Execution for Enterprise Agents",
+      "title": "AI Motors — How a run is allowed",
       "preserve_title": true,
-      "description": "What an AI Motor is, how it executes authorized Action Contracts, and how an independent verifier judges outcomes outside Motor.",
+      "description": "Models can suggest work. Something else has to allow it. The Motor only runs what was allowed, writes down what happened, and does not mark its own homework.",
       "image_filename": "featured-motors-enterprise-v1.png",
-      "image_alt": "AI Motors — Governed Execution for Enterprise Agents",
+      "image_alt": "AI Motors — How a run is allowed",
       "image_width": 1200,
       "image_height": 630,
       "author_name": "Noetfield Systems Inc.",
       "author_url": "https://www.noetfield.com/about/",
       "published_time": "2026-08-01T00:00:00-07:00",
-      "modified_time": "2026-08-02T02:00:00-07:00"
+      "modified_time": "2026-08-16T00:00:00-07:00"
     },
     "/investors/": {
-      "title": "Investors / Ecosystem \u2014 Noetfield Systems",
-      "description": "Company thesis, current state, and funding routes \u2014 evidence-first, with explicit TrustField product boundary."
+      "title": "Investors / Ecosystem — Noetfield Systems",
+      "description": "Company thesis, current state, and funding routes — evidence-first, with explicit TrustField product boundary."
     },
     "/invest/": {
-      "title": "Private Investor Materials \u2014 Noetfield Systems Inc.",
+      "title": "Private Investor Materials — Noetfield Systems Inc.",
       "description": "Access-controlled investor materials for verified parties. This route is not a public securities offering or solicitation."
     },
     "/proof/": {
-      "title": "Evidence register \u2014 Noetfield Systems",
+      "title": "Evidence register — Noetfield Systems",
       "description": "Current public evidence with scope, artifacts, and explicit boundaries."
     },
     "/proof/agentic-coding-reliability-case-001/": {
@@ -179,7 +179,7 @@
       "preserve_title": true,
       "description": "A first-party reliability case on deterministic control-plane integrity, false internal success, cost-aware recovery, and independent customer-outcome verification.",
       "image_filename": "agentic-coding-reliability-case-001.png",
-      "image_alt": "When AI Changes the Controls That Govern AI \u2014 Noetfield Case 001",
+      "image_alt": "When AI Changes the Controls That Govern AI — Noetfield Case 001",
       "image_width": 1200,
       "image_height": 630,
       "og_type": "article",
@@ -260,96 +260,96 @@
       "skip_webpage_json_ld": true
     },
     "/frontier-systems/": {
-      "title": "Frontier Systems \u2014 Noetfield Systems",
+      "title": "Frontier Systems — Noetfield Systems",
       "description": "A founding-counterpart path for governed execution and institutional AI infrastructure, beginning with bounded shared work."
     },
     "/frontier-systems/memo/": {
-      "title": "Frontier Systems Collaboration Memo \u2014 Noetfield",
+      "title": "Frontier Systems Collaboration Memo — Noetfield",
       "description": "Mutual discovery, bounded technical work and long-term alignment before role, title or ownership discussions."
     },
     "/trust-brief/intake/": {
-      "title": "Enterprise Intake \u2014 Noetfield Systems",
+      "title": "Enterprise Intake — Noetfield Systems",
       "description": "Start a non-confidential intake for a governed AI pilot, Trust Brief or institutional workflow assessment."
     },
     "/runways/": {
-      "title": "Noetfield Runways \u2014 Governed qualification paths",
-      "description": "Governed qualification paths from goal to accepted output\u2014or a documented safe stop. Three public runways: Governed Software Change, Decision Brief, and Institutional Workflow Commissioning."
+      "title": "Noetfield Runways — Governed qualification paths",
+      "description": "Governed qualification paths from goal to accepted output—or a documented safe stop. Three public runways: Governed Software Change, Decision Brief, and Institutional Workflow Commissioning."
     },
     "/gel/": {
-      "title": "Specialized lane \u2014 GEL \u2014 Noetfield",
-      "description": "Specialized Governance Execution Layer lane inside Motors. Canonical company narrative: AI Motors \u00b7 Runways \u00b7 Proof \u00b7 Company \u00b7 Contact."
+      "title": "Specialized lane — GEL — Noetfield",
+      "description": "Specialized Governance Execution Layer lane inside Motors. Canonical company narrative: AI Motors · Runways · Proof · Company · Contact."
     },
     "/deterministic-api/": {
-      "title": "Specialized lane \u2014 Deterministic API \u2014 Noetfield",
-      "description": "Specialized engine-endpoint lane. Schema-valid API surface \u2014 not the primary company definition. See AI Motors for the company narrative."
+      "title": "Specialized lane — Deterministic API — Noetfield",
+      "description": "Specialized engine-endpoint lane. Schema-valid API surface — not the primary company definition. See AI Motors for the company narrative."
     },
     "/research-packs/": {
-      "title": "Specialized lane \u2014 Research packs \u2014 Noetfield",
+      "title": "Specialized lane — Research packs — Noetfield",
       "description": "Specialized commercial research packs lane. See Runways and AI Motors for the company narrative."
     },
     "/pricing/": {
-      "title": "Specialized lane \u2014 Pricing & packaging \u2014 Noetfield",
-      "description": "Legacy pricing & packaging lane for published SKUs. Canonical company narrative: AI Motors \u00b7 Runways \u00b7 Proof \u00b7 Company \u00b7 Contact."
+      "title": "Specialized lane — Pricing & packaging — Noetfield",
+      "description": "Legacy pricing & packaging lane for published SKUs. Canonical company narrative: AI Motors · Runways · Proof · Company · Contact."
     },
     "/intelligence/": {
-      "title": "Specialized lane \u2014 Intelligence \u2014 Noetfield",
+      "title": "Specialized lane — Intelligence — Noetfield",
       "description": "Legacy SME consulting lane (Diagnostic Sprint and related offers). See AI Motors for the company narrative."
     },
     "/next/": {
-      "title": "Specialized lane \u2014 Next steps hub \u2014 Noetfield",
-      "description": "Legacy buyer-paths hub. Canonical company narrative: AI Motors \u00b7 Runways \u00b7 Proof \u00b7 Company \u00b7 Contact."
+      "title": "Specialized lane — Next steps hub — Noetfield",
+      "description": "Legacy buyer-paths hub. Canonical company narrative: AI Motors · Runways · Proof · Company · Contact."
     },
     "/investor-workflows/": {
-      "title": "Specialized lane \u2014 Investor Workflows \u2014 Noetfield",
-      "description": "Specialized investor-workflow product lane \u2014 evidence-based diligence workflows. Not the primary company definition. See AI Motors \u00b7 Runways \u00b7 Proof."
+      "title": "Specialized lane — Investor Workflows — Noetfield",
+      "description": "Specialized investor-workflow product lane — evidence-based diligence workflows. Not the primary company definition. See AI Motors · Runways · Proof."
     },
     "/system/": {
-      "title": "System \u2014 Noetfield Systems",
+      "title": "System — Noetfield Systems",
       "description": "How the pieces fit: propose, allow, run, judge, and name the path. The runner does not mark its own homework."
     },
     "/applications/": {
-      "title": "Applications \u2014 Noetfield Systems",
+      "title": "Applications — Noetfield Systems",
       "description": "The live alpha application, SourceA execution, TrustField product boundary, and developer preview lanes."
     },
     "/applications/trustfield/": {
-      "title": "TrustField boundary \u2014 Noetfield Systems",
+      "title": "TrustField boundary — Noetfield Systems",
       "description": "TrustField is the regulated-operations and compliance product vertical of Noetfield Systems Inc. Public demonstrations use synthetic data and do not provide custody, settlement, payment initiation, automatic regulatory filing, certification, or final regulatory decisions."
     },
     "/public-interest/": {
-      "title": "Public-interest program \u2014 Noetfield Systems",
+      "title": "Public-interest program — Noetfield Systems",
       "description": "Twelve-month program for attempt evidence, acceptance safety, and explicit authority."
     },
     "/contact/": {
-      "title": "Contact \u2014 Noetfield Systems",
+      "title": "Contact — Noetfield Systems",
       "description": "Program funding, technical collaboration, and security/privacy contact."
     },
     "/workflows/": {
-      "title": "Workflows \u2014 Noetfield Systems",
-      "description": "Governed qualification paths from goal to accepted output\u2014or a documented safe stop. Three public runways: Governed Software Change, Decision Brief, and Institutional Workflow Commissioning."
+      "title": "Workflows — Noetfield Systems",
+      "description": "Governed qualification paths from goal to accepted output—or a documented safe stop. Three public runways: Governed Software Change, Decision Brief, and Institutional Workflow Commissioning."
     },
     "/developers/": {
-      "title": "Developers \u2014 Noetfield Systems",
+      "title": "Developers — Noetfield Systems",
       "description": "What engineers can use today: a preview API, a real run you can inspect, and an honest list of what is not built yet."
     },
     "/assurance/": {
-      "title": "Assurance \u2014 The Acceptance Layer \u2014 Noetfield Systems",
+      "title": "Assurance — The Acceptance Layer — Noetfield Systems",
       "description": "The acceptance, evidence, and improvement layer for agentic execution: explicit authority, separate acceptance, bounded repair, and replayable evidence before results are promoted."
     },
     "/assurance/control-testing/": {
-      "title": "Control Testing \u2014 Noetfield Systems",
+      "title": "Control Testing — Noetfield Systems",
       "description": "We build cases designed to defeat your controls, run them, and report how many got through.",
       "image_alt": "Noetfield Systems Inc."
     },
     "/gate/intake/": {
-      "title": "Noetfield \u2014 Engagement Intake Gateway",
+      "title": "Noetfield — Engagement Intake Gateway",
       "description": "Unified engagement intake for Trust Brief, Copilot, and Bank Pilot."
     },
     "/start/": {
-      "title": "Noetfield \u2014 Start Free Sandbox",
+      "title": "Noetfield — Start Free Sandbox",
       "description": "Developer sandbox: sign up, try Governance API and workspace without a sales call. 14-day trial, 50 evaluate calls."
     },
     "/research-trader/": {
-      "title": "Research Trader \u2014 Noetfield Systems",
+      "title": "Research Trader — Noetfield Systems",
       "description": "A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides."
     }
   },

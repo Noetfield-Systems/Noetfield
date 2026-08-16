@@ -60,7 +60,7 @@
       "dist_path": "motors/index.html",
       "route": "/motors/",
       "required_text": [
-        "Promotion authority remains outside Motor"
+        "Someone else decides what gets accepted"
       ],
       "required_links": [
         "/proof/"

@@ -1672,7 +1672,7 @@
     },
     {
       "canonical_url": "https://www.noetfield.com/motors/",
-      "description": "What an AI Motor is, how it executes authorized Action Contracts, and how an independent verifier judges outcomes outside Motor.",
+      "description": "Models can suggest work. Something else has to allow it. The Motor only runs what was allowed, writes down what happened, and does not mark its own homework.",
       "image_sha256": "37a6ecd35ae20f848e63ce6af39adee8f812b50a89c1ae75da67db506182b01d",
       "indexability": "indexable",
       "noindex_reason": null,
@@ -1683,7 +1683,7 @@
       },
       "profile": "motors",
       "route": "/motors/",
-      "title": "AI Motors \u2014 Governed Execution for Enterprise Agents",
+      "title": "AI Motors \u2014 How a run is allowed",
       "verdict": "PASS"
     },
     {

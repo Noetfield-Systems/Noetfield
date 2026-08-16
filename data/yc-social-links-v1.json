@@ -32,7 +32,7 @@
       "url": "https://www.noetfield.com/motors/",
       "host": "www",
       "og_type": "website",
-      "expected_title": "AI Motors — Governed Execution for Enterprise Agents",
+      "expected_title": "AI Motors — How a run is allowed",
       "require_author": true,
       "require_json_ld": true,
       "image_must_be_same_host": true,

@@ -31,12 +31,11 @@ PROHIBITED = [
 ]
 
 REQUIRED = [
-    "deterministic execution layer",
-    "independent verifier",
-    "control plane decides",
-    "Action Contract",
-    "does not reason",
-    "does not verify its own work",
+    "How a run is allowed",
+    "Someone else decides what gets accepted",
+    "does not mark its own homework",
+    "A separate check judges the result",
+    "Models generate. Agents participate. Motors operate.",
 ]
 
 

@@ -12,17 +12,17 @@ CSS = ROOT / "assets" / "noetfield-corporate-v1.css"
 METADATA = ROOT / "data" / "noetfield-social-preview-v2.json"
 
 MOTORS_DEFINITION = (
-    "A Noetfield Motor executes authorized Action Contracts inside a durable governed runtime. "
-    "The Brain and agent harness reason, assemble context, and propose work. The Kernel control plane "
-    "resolves policy, authority, budget, and state. Motor applies the permitted effect and records "
-    "evidence. A separate Verifier judges the result. Promotion authority remains outside Motor."
+    "A Noetfield Motor runs only the work that was already allowed, and writes down what happened. "
+    "Models and helpers can suggest the next step. Policy, identity, and budget decide whether that "
+    "step is permitted. The Motor applies the permitted step. A separate check judges the result. "
+    "Someone else decides what gets accepted."
 )
 MOTORS_JSON_LD_SNIPPET = (
-    "A Noetfield Motor deterministically executes authorized Action Contracts inside a durable "
-    "governed runtime."
+    "Models can suggest work. Something else has to allow it. The Motor only runs what was allowed, "
+    "writes down what happened, and does not mark its own homework."
 )
 MOTORS_DISTINCTION_LINE = (
-    "Motor executes within a surrounding stack."
+    "The Motor runs inside a surrounding stack."
 )
 MOTORS_MEMORABLE_LINE = "Models generate. Agents participate. Motors operate."
 
@@ -77,15 +77,12 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
     assert MOTORS_DISTINCTION_LINE in text
     assert MOTORS_MEMORABLE_LINE in text
     assert text.count(MOTORS_MEMORABLE_LINE) == 1
-    assert "independent verifier judges the result" in text
+    assert "A separate check judges the result" in text
     assert (
-        "Provides a specialized intelligence or decision capability—such as "
-        "inference, retrieval, rules, scoring, planning, classification, or generation."
+        "A specialized skill such as search, scoring, planning, classification, or generation."
     ) in text
     assert (
-        "A versioned execution path for a defined class of outcome, including its "
-        "input contract, authority requirements, acceptance criteria, verification, "
-        "repair limits, stop conditions, and receipt."
+        "A named way to do one kind of job, with rules for when to stop."
     ) in text
     for component in ("Model", "AI Engine", "Agent", "Workflow", "Tool", "Policy", "Human", "Runway", "AI Motor"):
         assert f"<span>{component}</span>" in text
@@ -95,6 +92,7 @@ def test_motors_page_uses_the_canonical_definition_and_role_hierarchy() -> None:
         "governs and executes the whole system",
         "Motor verifies, escalates",
         "decides what can continue",
+        "Action Contracts",
     ):
         assert forbidden not in text
     assert text.count("<h1") == 1
@@ -127,7 +125,7 @@ def test_motors_architecture_preserves_governance_around_execution() -> None:
     positions = [text.index(item) for item in required_in_order]
     assert positions == sorted(positions)
     assert 'id="architecture-description"' in text
-    assert "Promotion authority remains outside Motor" in text
+    assert "Someone else decides what gets accepted" in text
 
 
 def test_motors_components_cover_control_execution_and_recovery() -> None:
@@ -219,14 +217,15 @@ def test_navigation_metadata_and_structured_data_name_ai_motors() -> None:
         'property="og:image" content="https://www.noetfield.com/assets/social/featured-motors-enterprise-v1.png"'
         in motors
     )
-    assert 'og:title" content="AI Motors — Governed Execution for Enterprise Agents"' in motors
+    assert 'og:title" content="AI Motors — How a run is allowed"' in motors
     blocks = json_ld(MOTORS)
     webpages = [block for block in blocks if block.get("@type") == "WebPage"]
     assert any(
-        block.get("name") == "AI Motors — Governed Execution for Enterprise Agents"
+        block.get("name") == "AI Motors — How a run is allowed"
         for block in webpages
     )
     assert "AI Motor" in motors
+    assert MOTORS_JSON_LD_SNIPPET in motors
 
 
 def test_motor_layout_has_narrow_width_and_reduced_motion_contracts() -> None:
