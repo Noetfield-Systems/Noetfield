@@ -42,6 +42,30 @@ function forceNoindex(pathname) {
   );
 }
 
+const PUBLIC_SECURITY_HEADERS = {
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
+};
+
+const WWW_HTML_CSP =
+  "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self' https://www.noetfield.com https://noetfield.com https://platform.noetfield.com https://api.noetfield.com https://scan.noetfield.com; upgrade-insecure-requests";
+
+function applyPublicSecurityHeaders(headers, { html = false } = {}) {
+  for (const [key, value] of Object.entries(PUBLIC_SECURITY_HEADERS)) {
+    headers.set(key, value);
+  }
+  if (html) {
+    headers.set("Content-Security-Policy", WWW_HTML_CSP);
+    headers.delete("Access-Control-Allow-Origin");
+    headers.delete("Access-Control-Allow-Credentials");
+    headers.delete("Access-Control-Allow-Methods");
+    headers.delete("Access-Control-Allow-Headers");
+  }
+}
+
 function edgeHeaders(releaseSha) {
   const headers = new Headers({
     "Cache-Control": "no-store, max-age=0, must-revalidate",
@@ -52,6 +76,7 @@ function edgeHeaders(releaseSha) {
   if (SHA_PATTERN.test(releaseSha)) {
     headers.set("X-Noetfield-Release", releaseSha);
   }
+  applyPublicSecurityHeaders(headers);
   return headers;
 }
 
@@ -122,6 +147,7 @@ export default {
       out.headers.set("CDN-Cache-Control", "no-store");
       out.headers.set("Cloudflare-CDN-Cache-Control", "no-store");
       out.headers.delete("Age");
+      applyPublicSecurityHeaders(out.headers, { html: true });
     }
     return out;
   },

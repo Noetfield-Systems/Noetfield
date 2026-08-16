@@ -22,6 +22,9 @@ if (apex.headers.get("location") !== "https://www.noetfield.com/about/?nf_rel_00
 if (apex.headers.get("cache-control") !== "no-store, max-age=0, must-revalidate") {
   throw new Error(`apex cache policy ${apex.headers.get("cache-control")}`);
 }
+if (!apex.headers.get("strict-transport-security")?.includes("max-age=31536000")) {
+  throw new Error(`apex missing HSTS: ${apex.headers.get("strict-transport-security")}`);
+}
 
 if (!wrangler.includes('pattern = "status.noetfield.com/*"')) {
   throw new Error("missing status worker route");
@@ -48,6 +51,7 @@ globalThis.fetch = async (request) => {
       "Content-Type": "text/html; charset=utf-8",
       "Cache-Control": "public, max-age=604800",
       Age: "300",
+      "Access-Control-Allow-Origin": "*",
     },
   });
 };
@@ -80,6 +84,21 @@ try {
   }
   if (response.headers.has("x-robots-tag")) {
     throw new Error("public HTML must not inherit provider X-Robots-Tag noindex");
+  }
+  if (response.headers.has("access-control-allow-origin")) {
+    throw new Error("public HTML must not expose wildcard CORS");
+  }
+  if (!response.headers.get("content-security-policy")?.includes("default-src 'self'")) {
+    throw new Error(`missing CSP: ${response.headers.get("content-security-policy")}`);
+  }
+  if (response.headers.get("x-frame-options") !== "DENY") {
+    throw new Error(`missing X-Frame-Options: ${response.headers.get("x-frame-options")}`);
+  }
+  if (!response.headers.get("strict-transport-security")?.includes("max-age=31536000")) {
+    throw new Error(`missing HSTS: ${response.headers.get("strict-transport-security")}`);
+  }
+  if (!response.headers.get("permissions-policy")?.includes("camera=()")) {
+    throw new Error(`missing Permissions-Policy: ${response.headers.get("permissions-policy")}`);
   }
 } finally {
   globalThis.fetch = originalFetch;
