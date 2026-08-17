@@ -17,3 +17,15 @@
 /workspace/trust-ledger/:path* /demo/complete-run/ 301
 /workspace /system/ 301
 /workspace/:path* /system/ 301
+/ai-value-governance /ai-value-governance-os/ 301
+/ai-value-governance/ /ai-value-governance-os/ 301
+/ai-value-governance/:path* /ai-value-governance-os/ 301
+/demo /demo/complete-run/ 301
+/demo/ /demo/complete-run/ 301
+/gel/intake /gel/ 301
+/gel/intake/ /gel/ 301
+/signin https://app.noetfield.com/signin/ 302
+/signin/ https://app.noetfield.com/signin/ 302
+/signup https://app.noetfield.com/signup/ 302
+/signup/ https://app.noetfield.com/signup/ 302
+/apple-touch-icon.png /noetfield-favicon-512.png 301

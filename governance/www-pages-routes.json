@@ -669,6 +669,66 @@
       "source": "/workspace/:path*",
       "destination": "/system/",
       "statusCode": 301
+    },
+    {
+      "source": "/ai-value-governance",
+      "destination": "/ai-value-governance-os/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ai-value-governance/",
+      "destination": "/ai-value-governance-os/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ai-value-governance/:path*",
+      "destination": "/ai-value-governance-os/",
+      "statusCode": 301
+    },
+    {
+      "source": "/demo",
+      "destination": "/demo/complete-run/",
+      "statusCode": 301
+    },
+    {
+      "source": "/demo/",
+      "destination": "/demo/complete-run/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gel/intake",
+      "destination": "/gel/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gel/intake/",
+      "destination": "/gel/",
+      "statusCode": 301
+    },
+    {
+      "source": "/signin",
+      "destination": "https://app.noetfield.com/signin/",
+      "statusCode": 302
+    },
+    {
+      "source": "/signin/",
+      "destination": "https://app.noetfield.com/signin/",
+      "statusCode": 302
+    },
+    {
+      "source": "/signup",
+      "destination": "https://app.noetfield.com/signup/",
+      "statusCode": 302
+    },
+    {
+      "source": "/signup/",
+      "destination": "https://app.noetfield.com/signup/",
+      "statusCode": 302
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "destination": "/noetfield-favicon-512.png",
+      "statusCode": 301
     }
   ]
 }
