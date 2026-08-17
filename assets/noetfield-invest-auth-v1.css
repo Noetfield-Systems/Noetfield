@@ -28,14 +28,14 @@ body.nf-gate.nf-gate--auth .nf-gate__main {
   font-size: 0.92rem;
 }
 
-.nf-auth-google {
+.nf-auth-oauth {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
   min-height: 2.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.06);
@@ -46,13 +46,21 @@ body.nf-gate.nf-gate--auth .nf-gate__main {
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
+.nf-auth-hint {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(236, 234, 228, 0.45);
+  text-align: center;
+}
+
 /* display:flex would otherwise beat the [hidden] attribute on providers that are not enabled. */
-.nf-auth-google[hidden] {
+.nf-auth-oauth[hidden] {
   display: none;
 }
 
-.nf-auth-google:hover,
-.nf-auth-google:focus-visible {
+.nf-auth-oauth:hover,
+.nf-auth-oauth:focus-visible {
   border-color: rgba(201, 169, 98, 0.45);
   background: rgba(201, 169, 98, 0.1);
   outline: none;

@@ -13,6 +13,7 @@ Disallow: /auth/
 Disallow: /invest/
 Disallow: /console/
 Disallow: /banner/
+Disallow: /gate/
 Disallow: /deterministic-api/signin/
 Disallow: /deterministic-api/workspace/
 
