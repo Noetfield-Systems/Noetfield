@@ -24,4 +24,5 @@ mkdir -p "$DIST"
 
 log "copy exact tracked public allowlist and generate deterministic receipt…"
 python3 scripts/build-public-www-artifact.py --mode build
+python3 scripts/generate-www-security-headers.py
 log "done — exact artifact receipt reports $(find "$DIST" -type f | wc -l | tr -d ' ') static files"

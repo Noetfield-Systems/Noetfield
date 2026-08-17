@@ -25,6 +25,35 @@ function matchGovProxy(pathname) {
   return null;
 }
 
+const PUBLIC_SECURITY_HEADERS = {
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
+  "Content-Security-Policy":
+    "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self' https://www.noetfield.com https://noetfield.com https://platform.noetfield.com https://api.noetfield.com https://scan.noetfield.com; upgrade-insecure-requests",
+};
+
+function applyPublicSecurityHeaders(response) {
+  const headers = new Headers(response.headers);
+  for (const [key, value] of Object.entries(PUBLIC_SECURITY_HEADERS)) {
+    headers.set(key, value);
+  }
+  const contentType = (headers.get("content-type") || "").toLowerCase();
+  if (contentType.includes("text/html")) {
+    headers.delete("Access-Control-Allow-Origin");
+    headers.delete("Access-Control-Allow-Credentials");
+    headers.delete("Access-Control-Allow-Methods");
+    headers.delete("Access-Control-Allow-Headers");
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 async function proxyGovRequest(context, match) {
   const req = context.request;
   const url = new URL(req.url);
@@ -35,7 +64,7 @@ async function proxyGovRequest(context, match) {
   if (req.method !== "GET" && req.method !== "HEAD") {
     init.body = req.body;
   }
-  return fetch(target.toString(), init);
+  return applyPublicSecurityHeaders(await fetch(target.toString(), init));
 }
 
 export async function onRequest(context) {
@@ -46,25 +75,29 @@ export async function onRequest(context) {
   }
 
   if (!isDenied(pathname)) {
-    return context.next();
+    return applyPublicSecurityHeaders(await context.next());
   }
 
   const notFoundUrl = new URL("/404.html", context.request.url);
   if (context.env?.ASSETS?.fetch) {
     const asset = await context.env.ASSETS.fetch(notFoundUrl);
     if (asset && asset.ok) {
-      return new Response(asset.body, {
-        status: 404,
-        headers: {
-          "content-type": asset.headers.get("content-type") || "text/html; charset=utf-8",
-          "cache-control": "no-store",
-        },
-      });
+      return applyPublicSecurityHeaders(
+        new Response(asset.body, {
+          status: 404,
+          headers: {
+            "content-type": asset.headers.get("content-type") || "text/html; charset=utf-8",
+            "cache-control": "no-store",
+          },
+        }),
+      );
     }
   }
 
-  return new Response("Not found", {
-    status: 404,
-    headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
-  });
+  return applyPublicSecurityHeaders(
+    new Response("Not found", {
+      status: 404,
+      headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
+    }),
+  );
 }

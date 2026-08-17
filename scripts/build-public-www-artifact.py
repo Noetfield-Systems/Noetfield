@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 from urllib.parse import urlsplit
@@ -154,6 +155,20 @@ def write_version_json() -> None:
     (DIST / "version.json").write_text(
         json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
+
+
+def write_security_headers_file() -> None:
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "generate-www-security-headers.py")],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            result.stderr.strip() or result.stdout.strip() or "generate-www-security-headers failed"
+        )
 
 
 def verify_version_json() -> list[str]:
@@ -486,6 +501,8 @@ def main() -> int:
             rewrite_html_asset_references(static_files)
             if "version.json" in generated_files:
                 write_version_json()
+            if "_headers" in generated_files:
+                write_security_headers_file()
         except (OSError, UnicodeError, ValueError) as exc:
             print(f"FAIL public artifact asset versioning: {exc}")
             return 1

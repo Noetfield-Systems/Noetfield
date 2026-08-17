@@ -53,12 +53,14 @@ const PUBLIC_SECURITY_HEADERS = {
 const WWW_HTML_CSP =
   "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self' https://www.noetfield.com https://noetfield.com https://platform.noetfield.com https://api.noetfield.com https://scan.noetfield.com; upgrade-insecure-requests";
 
-function applyPublicSecurityHeaders(headers, { html = false } = {}) {
+function applyPublicSecurityHeaders(headers, { html = false, all = false } = {}) {
   for (const [key, value] of Object.entries(PUBLIC_SECURITY_HEADERS)) {
     headers.set(key, value);
   }
-  if (html) {
+  if (html || all) {
     headers.set("Content-Security-Policy", WWW_HTML_CSP);
+  }
+  if (html) {
     headers.delete("Access-Control-Allow-Origin");
     headers.delete("Access-Control-Allow-Credentials");
     headers.delete("Access-Control-Allow-Methods");
@@ -82,6 +84,7 @@ function edgeHeaders(releaseSha) {
 
 function permanentRedirect(url, releaseSha) {
   const headers = edgeHeaders(releaseSha);
+  applyPublicSecurityHeaders(headers, { all: true });
   headers.set("Location", url.toString());
   return new Response(null, { status: 308, headers });
 }

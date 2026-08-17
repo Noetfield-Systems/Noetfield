@@ -22,12 +22,14 @@
     "version.json"
   ],
   "build_generated_static_files": [
+    "_headers",
     "version.json"
   ],
   "static_files": [
     "404.html",
     "BingSiteAuth.xml",
     "_redirects",
+    "_headers",
     "about/index.html",
     "accessibility/index.html",
     "ai-automation/index.html",
