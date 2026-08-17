@@ -37,6 +37,7 @@ EXCLUDE_PREFIXES = (
     "/deterministic-api/workspace/",
     "/enterprise/",
     "/ex/",
+    "/gate/",
     "/invest/",
     "/login/",
     "/portal/",
