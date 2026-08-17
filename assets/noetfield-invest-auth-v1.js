@@ -274,28 +274,14 @@
       form.addEventListener("submit", function (ev) {
         ev.preventDefault();
         const email = ($("nf-auth-email") || {}).value.trim();
-        const password = ($("nf-auth-password") || {}).value || "";
-        if (!email || !password) return;
-        showStatus(status, "Signing in…", "ok");
-        signInWithPassword(email, password).catch(function (e) {
-          showStatus(status, friendlyAuthError(e), "error");
-        });
-      });
-    }
-
-    const magic = $("nf-auth-magic");
-    if (magic) {
-      magic.addEventListener("click", function (ev) {
-        ev.preventDefault();
-        const email = ($("nf-auth-email") || {}).value.trim();
         if (!email) {
-          showStatus(status, "Enter your email first.", "error");
+          showStatus(status, "Enter your work email.", "error");
           return;
         }
-        showStatus(status, "Sending magic link…", "ok");
+        showStatus(status, "Sending sign-in link…", "ok");
         signInWithMagicLink(email)
           .then(function () {
-            showStatus(status, "Check your email for the sign-in link.", "ok");
+            showStatus(status, "Check your email for the one-time sign-in link.", "ok");
           })
           .catch(function (e) {
             showStatus(status, friendlyAuthError(e), "error");
