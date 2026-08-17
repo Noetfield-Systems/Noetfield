@@ -669,6 +669,131 @@
       "source": "/workspace/:path*",
       "destination": "/system/",
       "statusCode": 301
+    },
+    {
+      "source": "/ai-value-governance",
+      "destination": "/ai-value-governance-os/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ai-value-governance/",
+      "destination": "/ai-value-governance-os/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ai-value-governance/:path*",
+      "destination": "/ai-value-governance-os/",
+      "statusCode": 301
+    },
+    {
+      "source": "/demo",
+      "destination": "/demo/complete-run/",
+      "statusCode": 301
+    },
+    {
+      "source": "/demo/",
+      "destination": "/demo/complete-run/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gel/intake",
+      "destination": "/gel/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gel/intake/",
+      "destination": "/gel/",
+      "statusCode": 301
+    },
+    {
+      "source": "/signin",
+      "destination": "https://app.noetfield.com/signin/",
+      "statusCode": 302
+    },
+    {
+      "source": "/signin/",
+      "destination": "https://app.noetfield.com/signin/",
+      "statusCode": 302
+    },
+    {
+      "source": "/signup",
+      "destination": "https://app.noetfield.com/signup/",
+      "statusCode": 302
+    },
+    {
+      "source": "/signup/",
+      "destination": "https://app.noetfield.com/signup/",
+      "statusCode": 302
+    },
+    {
+      "source": "/result",
+      "destination": "/demo/complete-run/",
+      "statusCode": 301
+    },
+    {
+      "source": "/result/:path*",
+      "destination": "/demo/complete-run/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copilot-cost-governance",
+      "destination": "/services/agentic-cost-governance/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copilot-cost-governance/",
+      "destination": "/services/agentic-cost-governance/",
+      "statusCode": 301
+    },
+    {
+      "source": "/copilot-cost-governance/:path*",
+      "destination": "/services/agentic-cost-governance/",
+      "statusCode": 301
+    },
+    {
+      "source": "/cognitive-dashboard",
+      "destination": "/system/",
+      "statusCode": 301
+    },
+    {
+      "source": "/cognitive-dashboard/",
+      "destination": "/system/",
+      "statusCode": 301
+    },
+    {
+      "source": "/cognitive-dashboard/:path*",
+      "destination": "/system/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gate/readiness/intake",
+      "destination": "/copilot/readiness/intake/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gate/readiness/intake/",
+      "destination": "/copilot/readiness/intake/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gate/readiness/intake/:path*",
+      "destination": "/copilot/readiness/intake/",
+      "statusCode": 301
+    },
+    {
+      "source": "/trust-ledger",
+      "destination": "/demo/complete-run/",
+      "statusCode": 301
+    },
+    {
+      "source": "/trust-ledger/:path*",
+      "destination": "/demo/complete-run/",
+      "statusCode": 301
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "destination": "/noetfield-favicon-512.png",
+      "statusCode": 301
     }
   ]
 }
