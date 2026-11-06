@@ -1,0 +1,94 @@
+{
+  "schema": "noetfield.stripe-live-readiness.v1",
+  "checked_at": "2026-11-06",
+  "account": {
+    "id": "acct_1UYgbML4BR0lqapB",
+    "name": "Noetfield Systems Inc.",
+    "country": "CA",
+    "default_currency": "cad",
+    "business_type": "company",
+    "details_submitted": true,
+    "charges_enabled": true,
+    "payouts_enabled": false,
+    "disabled_reason": "requirements.pending_verification",
+    "pending_verification": [
+      "company.verification.document",
+      "documents.proof_of_registration.files"
+    ],
+    "external_bank_account_status": "new"
+  },
+  "commercial_catalog": {
+    "active_products": 2,
+    "active_one_time_prices": 2,
+    "active_live_payment_links": 2,
+    "currency": "usd",
+    "offerings": [
+      {
+        "sku": "Trust_Brief",
+        "product_id": "prod_VZqeLTdK8y16zX",
+        "price_id": "price_1UYheSL4BR0lqapBa8kQZzSc",
+        "payment_link_id": "plink_1UYheSL4BR0lqapB7tejJ6TQ",
+        "amount_minor": 1000000
+      },
+      {
+        "sku": "Copilot_Readiness_Pack",
+        "product_id": "prod_VZqefON9mrKu3w",
+        "price_id": "price_1UYheSL4BR0lqapBrf35LdOh",
+        "payment_link_id": "plink_1UYheSL4BR0lqapBbfTzgwuL",
+        "amount_minor": 200000
+      }
+    ],
+    "tax_automatic": false,
+    "invoice_creation_on_payment_links": false
+  },
+  "activity": {
+    "customers": 0,
+    "subscriptions": 0,
+    "charges": 0,
+    "payment_intents": 0,
+    "invoices": 0,
+    "refunds": 0,
+    "balance_available_minor": 0,
+    "balance_pending_minor": 0,
+    "balance_currency": "cad",
+    "webhook_endpoints": 0
+  },
+  "tax": {
+    "status": "pending",
+    "missing_fields": [
+      "head_office"
+    ],
+    "active_registrations": 0,
+    "automatic_tax_enabled_on_offers": false,
+    "threshold_monitor_computed_at": null,
+    "threshold_monitor_locations": 0
+  },
+  "customer_facing_setup": {
+    "legal_business_name_present": true,
+    "support_email_present": false,
+    "support_address_present": false,
+    "support_url_present": false,
+    "logo_present": false,
+    "checkout_brand_color": "#8a6b1f",
+    "checkout_font": "Inter"
+  },
+  "release": {
+    "webhook_code_pr": 289,
+    "production_webhook_endpoint_created": false,
+    "webhook_secret_configured": false,
+    "durable_event_store_configured": false,
+    "production_webhook_deployed": false
+  },
+  "founder_actions_required": [
+    "Upload/resolve the pending company verification document and proof of registration in Stripe Dashboard before payouts can be enabled.",
+    "Confirm the official head-office address to complete Stripe Tax Settings.",
+    "Confirm actual GST/HST and BC PST registration numbers only for jurisdictions where Noetfield is legally registered or obligated to collect.",
+    "Confirm the customer-facing support address before making it visible on receipts/invoices."
+  ],
+  "safety_notes": [
+    "No live charge, refund, subscription, customer, or invoice was created during this audit.",
+    "Existing live prices and links were not repriced; only metadata, redirects, and post-checkout copy were updated.",
+    "Do not enable automatic tax while Tax Settings is pending and no tax registrations are active.",
+    "Do not send significant customer traffic to checkout until Stripe enables payouts and the webhook is deployed."
+  ]
+}
