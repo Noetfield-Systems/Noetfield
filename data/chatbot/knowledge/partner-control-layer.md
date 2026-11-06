@@ -1,23 +1,21 @@
-# Partner control layer
+# Partner Integration Program
 
-## What is the Partner Integration Program?
+## What it is
 
-A **program**, not a fourth product. Licensed banks, VASPs, exchanges, and PSPs embed Noetfield's **pre-execution evaluate API** and **Trust Ledger** audit export.
+The Partner Integration Program is a channel and technical integration program, not a fourth retail product. Banks, regulated institutions, MSPs, SIs, and technology partners can evaluate a governed workflow and integrate Noetfield's pre-execution evaluation API and Trust Ledger export within an agreed scope.
 
-## How do exchanges integrate?
+## How integrations work
 
-Partners call `POST /api/v1/governance/evaluate` before their own licensed APIs act. Optional **read-only** operational signals (balances, order status, risk flags) may be ingested — Noetfield never places orders.
+A partner's own authorized application may call the Noetfield evaluate API before the partner's separately licensed downstream system acts. Optional read-only operational metadata may be ingested when approved and in scope.
 
 ## Trust Ledger
 
-Immutable governance compliance log: decisions, policy references, and Request ID (RID) lineage. Export via `/api/v1/governance/audit-export` for vendor due diligence.
-
-## Canada regulation (adjacency)
-
-- **OSFI E-23** (May 2027): third-party AI governance evidence
-- **Consumer-Driven Banking**: policy before partner execution — not open-banking write inside Noetfield
-- **Stablecoin Act**: governance evidence for issuers/PSPs — Noetfield does not issue stablecoins
+The Trust Ledger records decisions, policy references, and Request ID lineage. Exports support vendor due diligence, procurement, and board review.
 
 ## Engagement
 
-Partner intake: `/partners/` or `/gate/intake/?vector=partner-gateway`. Email: operations@noetfield.com with your RID if you have one.
+Partner intake: /partners/ or /gate/intake/?vector=partner-gateway. Email: operations@noetfield.com.
+
+## Boundary
+
+Noetfield does not place orders, initiate payments, custody customer assets, route funds, or replace a partner's regulated permissions. Any legal and regulatory applicability is assessed by the partner and its advisers.
