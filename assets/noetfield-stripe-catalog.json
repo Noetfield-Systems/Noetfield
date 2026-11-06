@@ -10,7 +10,7 @@
       "gtm_sku": "Trust_Brief",
       "title": "Trust Brief",
       "price_label": "$10,000 USD",
-      "description": "6-week governance diagnostic — board-ready baseline and evidence expectations.",
+      "description": "Six-week governance diagnostic to establish a policy baseline, review priority risks, and define evidence required for a defensible go/no-go decision. Scope and deliverables are confirmed in the signed statement of work.",
       "payment_link_url": "https://buy.stripe.com/dRm00kbb6aLc6MX7iLak001",
       "intake_url": "/trust-brief/intake/"
     },
@@ -19,7 +19,7 @@
       "gtm_sku": "Copilot_Readiness_Pack",
       "title": "Copilot Readiness Pack",
       "price_label": "$2,000 USD",
-      "description": "90-day governed readiness — policy evaluation, board PDF, procurement ZIP.",
+      "description": "90-day governed readiness for Microsoft 365 Copilot and agentic workflows. Review use cases against policy and assemble decision evidence, a board PDF, and procurement ZIP as defined in the signed scope.",
       "payment_link_url": "https://buy.stripe.com/bJe7sM7YU2eGgnx46zak000",
       "intake_url": "/trust-brief/intake/?interest=pilot&vector=copilot-governance"
     },
