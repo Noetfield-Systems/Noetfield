@@ -31,4 +31,4 @@ No current public self-serve recurring subscription price is published for GEL r
 
 ## Boundary
 
-GEL evaluates and records policy decisions. It does not itself execute payments, custody assets, move money, or operate customer trading systems.
+GEL evaluates and records policy decisions. It does not itself execute payments, custody assets, handle transfers, or operate customer trading systems.
