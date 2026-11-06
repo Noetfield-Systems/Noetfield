@@ -1,0 +1,30 @@
+{
+  "schema": "noetfield.stripe.sandbox-catalog.v1",
+  "account_id": "acct_1UXtG7Pzg8bUp343",
+  "livemode": false,
+  "created_for": "Noetfield Systems Inc. — isolated Stripe sandbox",
+  "source_catalog": "governance/STRIPE_CATALOG.json",
+  "note": "Test-mode mirror only. Never publish these URLs or IDs in the production catalog. Automatic tax is disabled pending head-office and registration setup.",
+  "offerings": [
+    {
+      "gtm_sku": "Trust_Brief",
+      "name": "Trust Brief — Governance Diagnostic (6 weeks)",
+      "currency": "usd",
+      "unit_amount": 1000000,
+      "product_id": "prod_VZqeLTdK8y16zX",
+      "price_id": "price_1UYgwlPzg8bUp3434uBSILrO",
+      "payment_link_id": "plink_1UYgwvPzg8bUp343POMzC1Ln",
+      "payment_link_url": "https://buy.stripe.com/test_9B6fZj9WKgul97Z6l36kg00"
+    },
+    {
+      "gtm_sku": "Copilot_Readiness_Pack",
+      "name": "Copilot Readiness Pack — Starter (90 days)",
+      "currency": "usd",
+      "unit_amount": 200000,
+      "product_id": "prod_VZqefON9mrKu3w",
+      "price_id": "price_1UYgwmPzg8bUp343JxIQYwB4",
+      "payment_link_id": "plink_1UYgwxPzg8bUp343dHbEYpDL",
+      "payment_link_url": "https://buy.stripe.com/test_14A00l1qe3Hzdof9xf6kg01"
+    }
+  ]
+}
