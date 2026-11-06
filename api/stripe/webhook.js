@@ -215,7 +215,7 @@ async function markEvent(eventId, status, requestEnv) {
 
 function notificationText(details) {
   const lines = [
-    "NOETF I ELD · STRIPE " + (details.kind === "checkout" ? "PAYMENT" : "INVOICE"),
+    "NOETFIELD · STRIPE " + (details.kind === "checkout" ? "PAYMENT" : "INVOICE"),
     "",
     "event: " + details.eventType,
     "event_id: " + details.eventId,
@@ -358,3 +358,4 @@ module.exports.stripeSignatureMatches = stripeSignatureMatches;
 module.exports.verifyStripeSignature = verifyStripeSignature;
 module.exports.parseRelevantEvent = parseRelevantEvent;
 module.exports.claimLocalEvent = claimLocalEvent;
+module.exports.markLocalEvent = markLocalEvent;
