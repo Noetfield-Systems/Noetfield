@@ -95,6 +95,7 @@ def live_hashes(_platform_base: str, www_base: str) -> tuple[str | None, str | N
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--live", action="store_true")
+    parser.add_argument("--verify-platform", action="store_true", help="Also compare Platform API greeting SSOT when validating a Platform release.")
     parser.add_argument(
         "--platform-base",
         default="https://platform.noetfield.com",
@@ -124,6 +125,20 @@ def main() -> int:
             failures.append("live www asset nf-chat-greeting-ssot.js not found or unreadable")
         elif www_hash != expected:
             failures.append(f"live www asset hash {www_hash[:12]} != disk ssot {expected[:12]}")
+
+    if args.live and args.verify_platform:
+        try:
+            health = fetch_json(f"{args.platform_base.rstrip('/')}/api/public/chat/health")
+            greeting = health.get("greeting_ssot") or {}
+            platform_hash = str(greeting.get("content_hash") or "") if isinstance(greeting, dict) else ""
+            if not platform_hash:
+                failures.append("live Platform greeting SSOT missing or unreadable")
+            elif platform_hash != expected:
+                failures.append(
+                    f"live Platform greeting hash {platform_hash[:12]} != disk ssot {expected[:12]}"
+                )
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            failures.append("live Platform greeting health unavailable")
 
     if failures:
         for item in failures:
