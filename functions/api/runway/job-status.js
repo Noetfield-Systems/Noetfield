@@ -408,22 +408,22 @@ function createRes() {
 }
 async function readBody(request) {
   if (request.method === "GET" || request.method === "HEAD" || request.method === "OPTIONS") {
-    return {};
+    return { body: {}, rawBody: "" };
   }
+  const rawBody = await request.text();
+  if (!rawBody) return { body: {}, rawBody };
   const contentType = request.headers.get("content-type") || "";
   if (contentType.includes("application/json")) {
     try {
-      return await request.json();
+      return { body: JSON.parse(rawBody), rawBody };
     } catch (_) {
-      return {};
+      return { body: {}, rawBody };
     }
   }
-  const text = await request.text();
-  if (!text) return {};
   try {
-    return JSON.parse(text);
+    return { body: JSON.parse(rawBody), rawBody };
   } catch (_) {
-    return { raw: text };
+    return { body: { raw: rawBody }, rawBody };
   }
 }
 function bindEnv(env) {
@@ -447,12 +447,15 @@ async function runNodeHandler(handler2, context) {
   const { request, env } = context;
   bindEnv(env);
   const url = new URL(request.url);
+  const parsedBody = await readBody(request);
   const req = {
     method: request.method,
     url: url.pathname + url.search,
     query: queryToObject(url),
     headers: headersToObject(request),
-    body: await readBody(request)
+    body: parsedBody.body,
+    rawBody: parsedBody.rawBody,
+    env: env || {}
   };
   const res = createRes();
   const result = await handler2(req, res);
