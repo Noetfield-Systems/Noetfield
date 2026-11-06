@@ -228,3 +228,33 @@ test("risk notification includes the event type and dispute evidence deadline", 
   assert.match(text, /charge\.dispute\.created/);
   assert.match(text, /evidence_due_by: 1800000000/);
 });
+
+test("does not accept the legacy mode-agnostic webhook secret", async () => {
+  const secret = "whsec_legacy";
+  const payload = JSON.stringify({ id: "evt_legacy", livemode: true });
+  const timestamp = 1_800_000_000;
+  const header = signatureHeader(secret, payload, timestamp);
+  const mode = await webhook.verifyStripeSignature(
+    payload,
+    header,
+    { STRIPE_WEBHOOK_SECRET: secret },
+    true,
+    timestamp * 1000
+  );
+  assert.equal(mode, null);
+});
+
+test("rejects events that omit livemode instead of trying both secrets", async () => {
+  const secret = "whsec_test_secret";
+  const payload = JSON.stringify({ id: "evt_no_mode" });
+  const timestamp = 1_800_000_000;
+  const header = signatureHeader(secret, payload, timestamp);
+  const mode = await webhook.verifyStripeSignature(
+    payload,
+    header,
+    { STRIPE_WEBHOOK_SECRET_TEST: secret, STRIPE_WEBHOOK_SECRET_LIVE: "whsec_live_secret" },
+    undefined,
+    timestamp * 1000
+  );
+  assert.equal(mode, null);
+});
