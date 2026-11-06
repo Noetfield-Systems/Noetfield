@@ -2,6 +2,8 @@
   "catalog_version": "2026.11.06",
   "stripe_account_id": "acct_1UYgbML4BR0lqapB",
   "livemode": true,
+  "checkout_enabled": false,
+  "release_gate_reason": "Payout verification and signed webhook delivery must be verified before public checkout is enabled.",
   "disclaimer_class": "nf-stripe-disclaimer",
   "positioning": "Software and professional services license only. Noetfield does not execute payments, custody, settlement, or financial governance flow.",
   "offerings": [
