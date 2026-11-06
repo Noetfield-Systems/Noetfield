@@ -242,7 +242,7 @@ main() {
 
   if smoke_platform "https://${PLATFORM_DOMAIN}"; then
     log "UPG-WWW-001 PASS — platform spine live at https://${PLATFORM_DOMAIN}"
-    python3 "$ROOT/scripts/verify_chat_greeting_coupling.py" --live \
+    python3 "$ROOT/scripts/verify_chat_greeting_coupling.py" --live --verify-platform \
       --platform-base "https://${PLATFORM_DOMAIN}" || \
       log "WARN: live greeting coupling not yet green on platform"
     python3 "$ROOT/scripts/nf_post_deploy_verify.py" --surface platform || true
