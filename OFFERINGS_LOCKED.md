@@ -1,6 +1,6 @@
-# Offerings — locked commercial catalogue
+# Three contract offerings — locked commercial catalogue
 
-Noetfield maintains three contract offerings. The free developer sandbox is product access and is not a fourth contract SKU.
+Three contract offerings only. No other contract SKUs. The free developer sandbox is product access and is not a fourth contract SKU.
 
 ## 0. Developer sandbox — free
 
