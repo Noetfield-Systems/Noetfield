@@ -12,8 +12,10 @@ const PROCESSING_LEASE_MS = 5 * 60 * 1000;
 const processedEvents = new Map();
 
 const PAYMENT_LINK_SKUS = {
-  plink_1TjyvtJ03eJkL57J1vb6kOU8: "Trust_Brief",
-  plink_1Tjyw8J03eJkL57JJmJGB4du: "Copilot_Readiness_Pack",
+  plink_1UYgwvPzg8bUp343POMzC1Ln: "Trust_Brief",
+  plink_1UYgwxPzg8bUp343dHbEYpDL: "Copilot_Readiness_Pack",
+  plink_1UYheSL4BR0lqapB7tejJ6TQ: "Trust_Brief",
+  plink_1UYheSL4BR0lqapBbfTzgwuL: "Copilot_Readiness_Pack",
 };
 
 const SUPPORTED_EVENTS = new Set([
