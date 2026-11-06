@@ -1,43 +1,32 @@
-# Developer tools — chain tools and PyPI
+# Developer tools — GEL and noetfield-gate
 
-## noetfield-gate (PyPI)
+## Public developer entry point
 
-Public Python package: **`noetfield-gate`**
+- GEL product page: https://www.noetfield.com/gel/
+- Public API documentation: https://www.noetfield.com/openapi.json
+- Hosted API base: https://api.noetfield.com
+- Free developer sandbox: https://www.noetfield.com/start/
+
+## noetfield-gate
+
+The public Python package is named `noetfield-gate`.
 
 ```bash
 pip install noetfield-gate
-noetfield gate          # local PASS/BLOCK → ~/.noetfield/gate-report-v1.json
-noetfield decide --sample   # POST to api.noetfield.com (needs API key)
+noetfield gate
+noetfield decide --sample
 ```
 
-Docs landing: **https://www.noetfield.com/gel/**
+The local gate command produces a local decision report. Hosted API calls require a provisioned API key; never place API keys in browser code or commit them to source control.
 
-Default hosted API: **`https://api.noetfield.com`**
-
-Environment variables:
+## Environment
 
 | Variable | Purpose |
-|----------|---------|
-| `NOETFIELD_API_URL` | GEL base URL (default `https://api.noetfield.com`) |
-| `NOETFIELD_API_KEY` | `X-API-Key` for `/v1/decision` |
-| `NOETFIELD_ROOT` | Full repo root when running from `noetfeld-os` checkout |
+|---|---|
+| `NOETFIELD_API_URL` | GEL API base URL; defaults to `https://api.noetfield.com` |
+| `NOETFIELD_API_KEY` | Server-side API key for hosted decision requests |
+| `NOETFIELD_ROOT` | Optional repository root override |
 
-## PyPI Organization application (public guidance)
+## Keep the product boundary clear
 
-When registering a **PyPI Organization** for Noetfield packages:
-
-**Organization description (example):**  
-Noetfield Systems builds governable agent infrastructure — pre-execution policy gates, decision receipts, and audit exports. We publish Python CLI tools such as `noetfield-gate` for CI/CD and agent pipelines.
-
-**Anticipated usage (example):**  
-Publish Noetfield Python packages under one org account, use GitHub trusted publishing for releases, and add maintainers via org roles as we ship CLI and SDK updates.
-
-This is **operational guidance for founders/developers** — not a contract SKU or pricing commitment.
-
-## npm (planned)
-
-JavaScript wrapper `@noetfield/gate` is on the roadmap; not yet published. Check `/gel/` for current status.
-
-## Studio IDE
-
-Internal/agent workbench (Noetfield Studio IDE) — not a public buyer SKU. Direct enterprise buyers to Copilot Governance Pack or sandbox at `/start/`.
+GEL is the Governance Execution Layer behind governed workflows. It is not a payment gateway, custody service, generic chatbot catalog, or an exchange.
