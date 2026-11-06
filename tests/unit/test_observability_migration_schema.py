@@ -59,4 +59,5 @@ def test_observability_migration_lexical_order() -> None:
         "0017_partner_onboarding_audit_runs.sql",
         "0018_public_intake_qualification.sql",
         "0019_pilot_api_keys.sql",
+        "0020_stripe_webhook_event_ledger.sql",
     ]
