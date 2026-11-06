@@ -13,6 +13,9 @@ Noetfield maintains three contract offerings. The free developer sandbox is prod
 
 ## 1. Copilot Governance Pack — lead pilot
 
+**Primary CTA:** Apply for pilot (CAD $2k–$10k scoped band) → `/trust-brief/intake/?interest=pilot&vector=copilot-governance`  
+**Secondary CTA:** Request Trust Brief → `/trust-brief/intake/`
+
 - 90-day governed readiness engagement.
 - Current self-serve Starter checkout: US$2,000 one-time.
 - Larger Readiness Pilot scopes are priced and contracted by SOW; public page planning band is CAD $2,000–$10,000.
