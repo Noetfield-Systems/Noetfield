@@ -1,28 +1,28 @@
----
-lane: buyer
-public: true
-source_path: faq/index.html
-source_url: https://www.noetfield.com/faq/
-updated: 2026-06-27T06:04:06Z
-content_hash: ffd5585f5723799f
----
-
-# Noetfield public context (live www distill)
+# Noetfield public context — buyer entry points
 
 ## What is Noetfield?
-AI Governance & Evidence for Microsoft 365 Copilot — board-grade, tamper-evident decision records. Evaluate operational intent before execution, with signed Trust Ledger Entries and fail-closed export.
 
-## What do you offer?
-Enterprise lane: Copilot Governance Pack ($2k–10k · 90 days · board PDF). Land SKU: Trust Brief ($10k · 6 weeks). Custom: Bank Pilot shadow simulation. Three contract SKUs only.
+Noetfield produces the audit trail a regulated Copilot rollout will be asked for later. It helps teams evaluate high-risk AI and Microsoft 365 Copilot use cases before production scope opens, then retain decision evidence.
 
-## What does Noetfield add to Microsoft Purview?
-Signed Copilot governance receipts — metadata-only evidence index plus board PDF and procurement ZIP on every go/no-go decision.
+## What can a buyer purchase?
 
-## Are you a certifier?
-No. We produce governance records and export bundles — honest Available · Planned · Out of scope posture, not ISO/SOC certification claims.
+- **Copilot Governance Pack:** 90-day governed readiness. The current self-serve Starter checkout is US$2,000. Larger Readiness Pilot scopes are quoted under a statement of work; the public pilot page describes a CAD $2,000–$10,000 scoping band.
+- **Trust Brief:** six-week governance diagnostic. The current Stripe checkout is US$10,000. Expanded scope is confirmed in a signed statement of work.
+- **Bank Pilot:** custom, read-only shadow governance simulation; scoping is intake-only.
 
-## I'm an investor or VC — where do I start?
-Investor Diligence Vault — evidence artifacts, 18-item checklist, Shadow Governance Brief. Or investor brief for Land · Expand · Channel model.
+The public purchase hub is https://www.noetfield.com/gate/sales/. The live checkout offers software and professional services only.
 
-## I'm on /msp/ but I'm not a partner
-MSP page is partner-facing. End clients: Apply for Copilot Governance Pack or contact operations .
+## What does a client receive?
+
+Depending on the signed scope: policy mapping, decision records, Trust Ledger Entries, a metadata-only M365 evidence index, a board PDF, and a procurement ZIP.
+
+## What Noetfield does not do
+
+No custody, payment execution, fund routing, money transmission, exchange operation, or legal/regulatory certification.
+
+## Start here
+
+- Copilot pilot: https://www.noetfield.com/copilot/pilot/
+- Trust Brief intake: https://www.noetfield.com/trust-brief/intake/
+- Free developer sandbox: https://www.noetfield.com/start/
+- Operations: operations@noetfield.com
