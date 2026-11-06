@@ -1,6 +1,6 @@
 {
-  "catalog_version": "2026.06.03",
-  "account_id": "acct_1SfSseJ03eJkL57J",
+  "catalog_version": "2026.11.06",
+  "account_id": "acct_1UYgbML4BR0lqapB",
   "display_name": "NOETFIELD SYSTEMS INC.",
   "mode": "live",
   "rule": "final-lock-stripe-commercial-licensing-only",
@@ -15,10 +15,10 @@
       "gtm_sku": "Trust_Brief",
       "name": "Trust Brief — Governance Diagnostic (6 weeks)",
       "price_usd_cents": 1000000,
-      "stripe_product_id": "prod_UjRo1dABHWfU3H",
-      "stripe_price_id": "price_1TjyvAJ03eJkL57JSpeoWsjz",
-      "payment_link_id": "plink_1TjyvtJ03eJkL57J1vb6kOU8",
-      "payment_link_url": "https://buy.stripe.com/cNi4gA3iUaa0g0W0UA1Nu0b",
+      "stripe_product_id": "prod_VZqeLTdK8y16zX",
+      "stripe_price_id": "price_1UYheSL4BR0lqapBa8kQZzSc",
+      "payment_link_id": "plink_1UYheSL4BR0lqapB7tejJ6TQ",
+      "payment_link_url": "https://buy.stripe.com/dRm00kbb6aLc6MX7iLak001",
       "factory_id": "trust_brief_diligence_v1",
       "checkout_type": "payment_link",
       "intake_fallback": "/trust-brief/intake/"
@@ -27,10 +27,10 @@
       "gtm_sku": "Copilot_Readiness_Pack",
       "name": "Copilot Readiness Pack — Starter (90 days)",
       "price_usd_cents": 200000,
-      "stripe_product_id": "prod_UjRpZlYGEnRbSe",
-      "stripe_price_id": "price_1TjyvWJ03eJkL57JKNgPp5Gp",
-      "payment_link_id": "plink_1Tjyw8J03eJkL57JJmJGB4du",
-      "payment_link_url": "https://buy.stripe.com/eVq7sM9Hi3LCbKGgTy1Nu0c",
+      "stripe_product_id": "prod_VZqefON9mrKu3w",
+      "stripe_price_id": "price_1UYheSL4BR0lqapBrf35LdOh",
+      "payment_link_id": "plink_1UYheSL4BR0lqapBbfTzgwuL",
+      "payment_link_url": "https://buy.stripe.com/bJe7sM7YU2eGgnx46zak000",
       "factory_id": "copilot_governance_readiness_v1",
       "checkout_type": "payment_link",
       "intake_fallback": "/trust-brief/intake/?interest=pilot&vector=copilot-governance"
@@ -50,7 +50,19 @@
   ],
   "webhook_events": [
     "checkout.session.completed",
-    "checkout.session.async_payment_succeeded"
+    "checkout.session.async_payment_succeeded",
+    "checkout.session.async_payment_failed",
+    "invoice.finalized",
+    "invoice.paid",
+    "invoice.payment_failed",
+    "invoice.voided",
+    "invoice.marked_uncollectible",
+    "charge.refunded",
+    "charge.dispute.created",
+    "charge.dispute.closed",
+    "charge.dispute.funds_withdrawn",
+    "charge.dispute.funds_reinstated",
+    "radar.early_fraud_warning.created"
   ],
   "success_url_template": "https://www.noetfield.com/gate/sales/thanks/?session_id={CHECKOUT_SESSION_ID}&sku={sku}"
 }

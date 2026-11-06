@@ -153,6 +153,9 @@ jobs:
           python -m pip install -e ".[dev]"
           npm ci
 
+      - name: Stripe webhook tests
+        run: node --test tests/unit/test_stripe_webhook.cjs
+
       - name: Exact public artifact verification
         run: make verify-static-www
 

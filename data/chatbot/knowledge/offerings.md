@@ -1,26 +1,29 @@
-# Offerings (locked)
+# Offerings — canonical contract SKUs
 
-Three contract offerings only.
+Noetfield maintains three contract offerings. The free developer sandbox is product access, not a fourth contract SKU.
 
-## Copilot Governance Pack — LEAD WEDGE
+## 1. Copilot Governance Pack — lead pilot
 
-$2k–10k · 90 days · success signal: board PDF in a real governance meeting.
+- 90-day governed readiness engagement.
+- Current self-serve Starter checkout: US$2,000 one-time.
+- Larger Readiness Pilot bands are scoped by SOW; the public pilot page shows CAD $2,000–$10,000 planning bands.
+- Success signal: one organization uses a Noetfield board PDF in a real governance meeting.
+- Intake: /trust-brief/intake/?interest=pilot&vector=copilot-governance
 
-Intake: `/trust-brief/intake/?interest=pilot&vector=copilot-governance`  
-Page: `/copilot/pilot/`
+## 2. Trust Brief — land diagnostic
 
-## Trust Brief — $10,000 (land SKU)
+- Six-week governance diagnostic.
+- Current Stripe checkout: US$10,000 one-time.
+- Scope variations are confirmed in a signed SOW.
+- Intake: /trust-brief/intake/
 
-Six-week engagement: governance audit, AI policy mapping, risk exposure analysis.
+## 3. Bank Pilot — custom
 
-Intake: `/trust-brief/intake/`
+- Read-only governance simulation for regulated institutions.
+- Custom scope and statement of work.
+- No direct checkout; intake only.
+- Intake: /bank-pilot/
 
-## Bank Pilot
+## Commercial boundary
 
-Read-only governance simulation only. No execution rights. Audit and compliance evaluation in shadow mode.
-
-Primary CTA: Apply for pilot ($2k–10k) → `/trust-brief/intake/?interest=pilot&vector=copilot-governance`
-
-Secondary CTA: Request Trust Brief → `/trust-brief/intake/`
-
-Operational intake: operations@noetfield.com
+Live Stripe checkout is for Noetfield's own software and professional services only. No custody, payment execution, settlement, fund routing, or MSB activity.

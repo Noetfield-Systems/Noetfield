@@ -1,0 +1,117 @@
+{
+  "schema": "noetfield.stripe-live-readiness.v1",
+  "checked_at": "2026-11-06",
+  "account": {
+    "id": "acct_1UYgbML4BR0lqapB",
+    "name": "Noetfield Systems Inc.",
+    "country": "CA",
+    "default_currency": "cad",
+    "business_type": "company",
+    "details_submitted": true,
+    "charges_enabled": true,
+    "payouts_enabled": false,
+    "disabled_reason": "requirements.past_due",
+    "pending_verification": [
+      "company.verification.document",
+      "documents.proof_of_registration.files"
+    ],
+    "external_bank_account_status": "new",
+    "currently_due": [
+      "person_1UYhK5L4BR0lqapBijPxcEF8.verification.document_live_capture"
+    ],
+    "past_due": [
+      "person_1UYhK5L4BR0lqapBijPxcEF8.verification.document_live_capture"
+    ],
+    "payout_schedule": "manual"
+  },
+  "commercial_catalog": {
+    "active_products": 2,
+    "active_one_time_prices": 2,
+    "active_live_payment_links": 2,
+    "currency": "usd",
+    "offerings": [
+      {
+        "sku": "Trust_Brief",
+        "product_id": "prod_VZqeLTdK8y16zX",
+        "price_id": "price_1UYheSL4BR0lqapBa8kQZzSc",
+        "payment_link_id": "plink_1UYheSL4BR0lqapB7tejJ6TQ",
+        "amount_minor": 1000000,
+        "post_payment_invoice_enabled": true
+      },
+      {
+        "sku": "Copilot_Readiness_Pack",
+        "product_id": "prod_VZqefON9mrKu3w",
+        "price_id": "price_1UYheSL4BR0lqapBrf35LdOh",
+        "payment_link_id": "plink_1UYheSL4BR0lqapBbfTzgwuL",
+        "amount_minor": 200000,
+        "post_payment_invoice_enabled": true
+      }
+    ],
+    "tax_automatic": false,
+    "invoice_creation_on_payment_links": false,
+    "invoice_creation_enabled": true,
+    "post_payment_invoice_fee": "0.4% of one-time payment, capped at US$2 per paid invoice"
+  },
+  "activity": {
+    "customers": 0,
+    "subscriptions": 0,
+    "charges": 0,
+    "payment_intents": 0,
+    "invoices": 0,
+    "refunds": 0,
+    "balance_available_minor": 0,
+    "balance_pending_minor": 0,
+    "balance_currency": "cad",
+    "webhook_endpoints": 0
+  },
+  "tax": {
+    "status": "pending",
+    "missing_fields": [
+      "head_office"
+    ],
+    "active_registrations": 0,
+    "automatic_tax_enabled_on_offers": false,
+    "threshold_monitor_computed_at": null,
+    "threshold_monitor_locations": 0
+  },
+  "customer_facing_setup": {
+    "legal_business_name_present": true,
+    "support_email_present": false,
+    "support_address_present": false,
+    "support_url_present": false,
+    "logo_present": false,
+    "checkout_brand_color": "#8a6b1f",
+    "checkout_font": "Inter",
+    "support_phone_present": true,
+    "paid_invoice_pdf_enabled": true
+  },
+  "release": {
+    "webhook_code_pr": 289,
+    "production_webhook_endpoint_created": false,
+    "webhook_secret_configured": false,
+    "durable_event_store_configured": false,
+    "production_webhook_deployed": false,
+    "live_account_authorized": true,
+    "live_webhook_endpoint_created": false,
+    "live_webhook_secret_configured": false,
+    "live_durable_event_store_configured": false,
+    "live_webhook_deployed": false
+  },
+  "founder_actions_required": [
+    "Complete the representative identity live-capture verification requested by Stripe.",
+    "Upload the company verification document and proof of registration in Stripe Dashboard.",
+    "Confirm the official head-office address for Stripe Tax Settings.",
+    "Confirm actual GST/HST and BC PST registration status and provide only registrations that exist or are legally required.",
+    "Set a customer-support email, privacy/support URL, and a customer-support address appropriate for public receipts.",
+    "Confirm the intake price/currency distinction: standard Trust Brief Checkout is US$10,000; the intake scope calculator is CAD planning; Copilot Starter Checkout is US$2,000 while the larger readiness engagement is SOW-scoped."
+  ],
+  "safety_notes": [
+    "No live charge, refund, subscription, customer, or invoice was created during this audit.",
+    "Payouts are disabled and a representative identity verification item is past due; do not actively promote checkout until Stripe clears verification and enables payouts.",
+    "Existing live product amounts remain unchanged. Current live self-serve checkout amounts are US$10,000 for Trust Brief and US$2,000 for Copilot Governance Pack Starter.",
+    "Automatic Tax remains disabled: Tax Settings is pending because head_office is missing and there are no active registrations.",
+    "Live webhook remains undeployed until production GitHub/Cloudflare secrets and a durable STRIPE_WEBHOOK_EVENTS KV binding are provisioned.",
+    "The public intake page still has a currency mismatch requiring correction/approval before the checkout CTA is promoted.",
+    "Post-payment paid invoice PDFs are enabled on both live one-time Payment Links; Stripe charges 0.4% of transaction value, capped at US$2 per invoice."
+  ]
+}

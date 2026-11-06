@@ -1,35 +1,39 @@
-# Site map and public surfaces
+# Noetfield public site map
 
 ## Primary hosts
 
 | Host | Role |
-|------|------|
-| `www.noetfield.com` | Marketing, intake, FAQ, pricing, `/gel/` product page |
-| `platform.noetfield.com` | Pilot runtime, Governance Console, public chat API backend |
-| `api.noetfield.com` | GEL decision API (hosted) |
-| `status.noetfield.com` | Redirects to www status page |
+|---|---|
+| www.noetfield.com | Marketing, product pages, intake, purchase hub, FAQ, pricing |
+| platform.noetfield.com | Authorized pilot runtime, Governance Console, chat API backend |
+| api.noetfield.com | GEL hosted decision API |
+| status.noetfield.com | Public service status route |
 
-## Key buyer paths
+## Buyer routes
 
-- **Start free sandbox:** `/start/` — 14 days, 50 evaluate calls, observe mode
-- **Pricing:** `/pricing/`
-- **FAQ:** `/faq/`
-- **Copilot Governance Pack:** `/copilot/pilot/` — apply via `/trust-brief/intake/?interest=pilot&vector=copilot-governance`
-- **Trust Brief ($10k):** `/trust-brief/intake/`
-- **Bank Pilot (shadow):** `/copilot/` and `/bank-pilot/`
-- **5-minute demo:** `/copilot/demo/`
-- **GEL / developers:** `/gel/`
-- **Runtime tiers:** `/runtime/`
+- Purchase hub: /gate/sales/
+- Copilot Governance Pack: /copilot/pilot/
+- Trust Brief intake: /trust-brief/intake/
+- Bank Pilot: /bank-pilot/
+- SME diagnostic intake: /intelligence/intake/
+- Contact: /contact/
+- Pricing: /pricing/
+- Five-minute demo: /copilot/demo/
+- Free developer sandbox: /start/
 
-## Investor and diligence (public)
+## Developer routes
 
-- **Investor brief:** `/investors/`
-- **Diligence vault:** `/investors/diligence/` — checklist, Shadow Governance Brief, evidence artifacts
-- **Not** a substitute for signed NDA materials — public vault only
+- GEL: /gel/
+- OpenAPI: /openapi.json
+- Runtime overview: /runtime/
+- Sandbox: /start/
 
-## Contact
+## Investor routes
 
-**Operational intake (all SKUs):** operations@noetfield.com  
-Include site **Request ID** (`RID-…` in footer) in email subject.
+- Investor overview: /investors/
+- Public diligence: /investors/diligence/
+- Proof register: /proof/
 
-Public intake forms are non-confidential only; secure protocols after kickoff.
+## Operational contact
+
+Non-confidential intake only. Email operations@noetfield.com and include the site Request ID (RID) in the subject. Confidential material is shared only after kickoff through an agreed secure process.

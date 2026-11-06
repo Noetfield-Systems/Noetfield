@@ -351,6 +351,7 @@
     "functions/api/runway/job-status.js",
     "functions/api/runway/jobs.js",
     "functions/api/status/ai-factory.js",
+    "functions/api/stripe/webhook.js",
     "functions/evaluate.js",
     "functions/health.js",
     "functions/invest/[[path]].js"

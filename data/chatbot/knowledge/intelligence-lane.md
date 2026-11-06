@@ -1,28 +1,26 @@
 # Noetfield Intelligence — SME and services lane
 
-## Homepage positioning
+## Public SME entry
 
-**Noetfield Intelligence** — governed AI consulting for Canadian SMEs and diaspora businesses (immigration firms, mortgage brokers, trades, professional services).
+The pricing page presents a separate Noetfield Intelligence lane for Canadian SMEs. Public planning prices currently shown include:
 
-Homepage hero: automate spreadsheet-heavy work with **board-grade trust artifacts**.
+- **Diagnostic Sprint:** CAD $2,500–$5,000; one-week operations audit, top-three automation map, and roadmap PDF.
+- **Automation Build:** from CAD $8,000; scoped production workflows and handoff.
+- **AI Ops Partner:** CAD $3,000/month public planning price for monitoring, tuning, deployment, and guidance.
+- **Vertical SaaS:** CAD $99–$499/month as a future/vertical package after repeat delivery validation.
 
-## Diagnostic Sprint (lead services SKU)
+These are public pricing references, not Stripe Payment Links or a substitute for a signed scope. Use /contact/ or /intelligence/intake/ for qualification.
 
-- **From $2,500 CAD** — one-week engagement
-- Map top 3 automations; governed automation design
-- Intake: `/intelligence/intake/`
+## Regulated institutional contract path
 
-## Related service lanes (not separate from Copilot Pack contract logic)
+- **Copilot Governance Pack:** self-serve Starter checkout at US$2,000; larger readiness pilots are scoped by SOW.
+- **Trust Brief:** current Stripe checkout at US$10,000; expanded scope confirmed by SOW.
+- **Bank Pilot:** custom read-only shadow simulation, intake-only.
 
-- **Trust Brief** — $10,000 · six weeks · governance audit
-- **Copilot Governance Pack** — $2k–10k · 90 days · board PDF success signal
-- **Bank Pilot** — read-only shadow simulation
+## Route by audience
 
-## Who should use Intelligence vs GEL page
+- SME owner or professional-services operator → /intelligence/intake/ or /pricing/.
+- Enterprise risk, compliance, procurement, or CTO → /copilot/pilot/ or /trust-brief/intake/.
+- Developer integrating the governance API → /gel/ and /start/.
 
-- **Mortgage broker, immigration firm, SME owner** → homepage, Diagnostic Sprint, `/pricing/`, `/intelligence/intake/`
-- **Enterprise CTO, bank CCO, developer integrating gate API** → Copilot Pack, Bank Pilot, or `/gel/`
-
-## Anti-ICP (polite redirect)
-
-We are **not** a generic chatbot catalog or consumer AI app store. Three **contract** SKUs plus free developer sandbox — see the public offerings lock.
+The same governance evidence spine underpins delivery, but these are different commercial engagements.
