@@ -1529,7 +1529,7 @@ async def stripe_commercial_webhook(request: Request) -> dict[str, object]:
         err = str(result.get("error") or "webhook_error")
         if err == "invalid_signature":
             raise HTTPException(status_code=400, detail=err)
-        if err == "stripe_webhook_not_configured":
+        if err in {"stripe_webhook_not_configured", "store_unavailable", "notification_failed"}:
             raise HTTPException(status_code=503, detail=err)
         raise HTTPException(status_code=400, detail=err)
     return result
