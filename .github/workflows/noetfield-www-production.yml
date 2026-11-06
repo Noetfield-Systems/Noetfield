@@ -171,7 +171,6 @@ jobs:
           RUNWAY_RUNTIME_API_SECRET: ${{ secrets.RUNWAY_RUNTIME_API_SECRET }}
           RUNWAY_RUNTIME_BASE_URL: https://noetfield-runway-runtime-api-staging.sina-kazemnezhad-ca.workers.dev
           RUNWAY_RUNTIME_KEY_ID: staging-proof
-          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
           STRIPE_WEBHOOK_SECRET_TEST: ${{ secrets.STRIPE_WEBHOOK_SECRET_TEST }}
           STRIPE_WEBHOOK_SECRET_LIVE: ${{ secrets.STRIPE_WEBHOOK_SECRET_LIVE }}
         run: |
