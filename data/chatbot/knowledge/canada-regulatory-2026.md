@@ -1,21 +1,20 @@
-# Canada regulatory context (2026–2027) — Noetfield lens
+# Canada regulatory context — Noetfield scope
 
-## OSFI E-23
+Noetfield is a software and professional-services vendor. It provides governance evaluation, evidence capture, and audit-oriented exports. It does not act as a bank, payment service provider, money services business, securities dealer, custodian, stablecoin issuer, payment initiator, or settlement service.
 
-Model risk guidance including third-party AI becomes enforceable **May 1, 2027**. Banks need model inventories, shadow testing, and audit evidence. Noetfield provides **pre-execution evaluate**, Trust Ledger export, and vendor-evidence API metadata — not model hosting.
+## Regulatory context
 
-## Consumer-Driven Banking (CDB)
+Canadian financial-sector requirements can depend on the institution, activity, legal entity, customer location, and the actual deployment. OSFI guidance, the Retail Payment Activities Act (RPAA), consumer-driven banking rules, privacy law, and any stablecoin or digital-asset framework must be evaluated against the customer's facts and the current primary-source rules.
 
-Phase 1 (read) in **2026**; Phase 2 (write) expected **mid-2027**. Noetfield supports **policy and consent governance adjacency** — evaluate before accredited partners execute payments. Noetfield does not offer open-banking write APIs or screen-scraping.
+Noetfield materials are not legal opinions, regulatory approvals, certifications, or a statement that a customer is compliant. Buyers should obtain current advice from their legal and compliance teams and the relevant regulator.
 
-## Stablecoin Act (federal)
+## What Noetfield provides
 
-Royal Assent March 2026; Bank of Canada supervision and issuer registration expected as framework comes into force around **2027**. Issuers and PSPs need reserves, redemption, and auditability. Noetfield sells **governance software and evidence** — not stablecoin issuance.
+- Pre-execution policy evaluation and approve/review/decline evidence.
+- Trust Ledger Entries (TLEs), Request ID lineage, and tamper-evident exports.
+- Read-only or metadata-only evidence integrations where contracted.
+- Board and procurement artifacts for human review.
 
-## RPAA
+## Boundary
 
-Retail Payment Activities Act supervises payment service providers. Noetfield is a **software vendor** outside the payment execution perimeter; licensed PSPs and banks execute value movement.
-
-## What Noetfield never does
-
-No custody, no payment initiation, no MSB/PSP registration claims, no exchange operation, no routing comparison between venues.
+Noetfield does not execute payments, initiate transactions, route funds, custody assets, operate an exchange, or perform regulated activity on behalf of customers.
