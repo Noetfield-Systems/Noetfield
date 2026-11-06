@@ -23,6 +23,7 @@ dependencies = [
   "uvicorn",
   "pyyaml",
   "requests",
+  "stripe>=12.0.0,<16.0.0",
 ]
 
 [build-system]
