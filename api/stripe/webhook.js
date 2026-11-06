@@ -19,11 +19,21 @@ const PAYMENT_LINK_SKUS = {
 const SUPPORTED_EVENTS = new Set([
   "checkout.session.completed",
   "checkout.session.async_payment_succeeded",
+  "checkout.session.async_payment_failed",
   "invoice.finalized",
   "invoice.paid",
   "invoice.payment_failed",
+  "invoice.payment_action_required",
   "invoice.voided",
   "invoice.marked_uncollectible",
+  "charge.refunded",
+  "charge.dispute.created",
+  "charge.dispute.closed",
+  "charge.dispute.funds_withdrawn",
+  "charge.dispute.funds_reinstated",
+  "refund.created",
+  "refund.failed",
+  "radar.early_fraud_warning.created",
 ]);
 
 function hex(bytes) {
@@ -115,7 +125,8 @@ function parseRelevantEvent(event) {
 
   if (event.type.indexOf("checkout.session.") === 0) {
     const paymentStatus = String(object.payment_status || "");
-    if (paymentStatus !== "paid" && paymentStatus !== "no_payment_required") {
+    const isAsyncFailure = event.type === "checkout.session.async_payment_failed";
+    if (!isAsyncFailure && paymentStatus !== "paid" && paymentStatus !== "no_payment_required") {
       return null;
     }
     const paymentLink = String(object.payment_link || "");
@@ -125,7 +136,7 @@ function parseRelevantEvent(event) {
       ? object.customer_details
       : {};
     return {
-      kind: "checkout",
+      kind: isAsyncFailure ? "payment_failure" : "checkout",
       eventType: event.type,
       eventId: String(event.id || ""),
       livemode: Boolean(event.livemode),
@@ -135,29 +146,60 @@ function parseRelevantEvent(event) {
       customerEmail: String(customerDetails.email || object.customer_email || ""),
       amount: money(object.amount_total, object.currency),
       paymentLink,
-      paymentStatus,
+      paymentStatus: isAsyncFailure ? "failed" : paymentStatus,
+      failureMessage: String(object.last_payment_error?.message || object.status || ""),
     };
   }
 
-  const customerDetails = object.customer_details && typeof object.customer_details === "object"
-    ? object.customer_details
-    : {};
+  if (event.type.indexOf("invoice.") === 0) {
+    const customerDetails = object.customer_details && typeof object.customer_details === "object"
+      ? object.customer_details
+      : {};
+    const metadata = object.metadata && typeof object.metadata === "object" ? object.metadata : {};
+    const isPaid = event.type === "invoice.paid";
+    const amount = isPaid ? object.amount_paid : object.amount_due;
+    return {
+      kind: "invoice",
+      eventType: event.type,
+      eventId: String(event.id || ""),
+      livemode: Boolean(event.livemode),
+      objectId: String(object.id || ""),
+      invoiceNumber: String(object.number || ""),
+      status: String(object.status || ""),
+      sku: String(metadata.gtm_sku || metadata.sku || ""),
+      customerId: String(object.customer || ""),
+      customerEmail: String(customerDetails.email || object.customer_email || ""),
+      amount: money(amount, object.currency),
+      hostedInvoiceUrl: String(object.hosted_invoice_url || ""),
+    };
+  }
+
   const metadata = object.metadata && typeof object.metadata === "object" ? object.metadata : {};
-  const isPaid = event.type === "invoice.paid";
-  const amount = isPaid ? object.amount_paid : object.amount_due;
+  const customer = String(object.customer || "");
+  const paymentIntent = String(object.payment_intent || object.payment_intent_id || "");
+  const amount = object.amount_refunded ?? object.amount ?? object.amount_disputed ?? object.amount;
+  const currency = String(object.currency || "usd").toUpperCase();
+  const isDispute = event.type.indexOf("charge.dispute.") === 0;
+  const isFraudWarning = event.type === "radar.early_fraud_warning.created";
+  const isChargeRefunded = event.type === "charge.refunded";
+  const riskType = isFraudWarning ? "early_fraud_warning" : (isDispute ? "dispute" : "refund");
   return {
-    kind: "invoice",
+    kind: "risk",
+    riskType,
     eventType: event.type,
     eventId: String(event.id || ""),
     livemode: Boolean(event.livemode),
     objectId: String(object.id || ""),
-    invoiceNumber: String(object.number || ""),
-    status: String(object.status || ""),
+    customerId: customer,
+    customerEmail: "",
     sku: String(metadata.gtm_sku || metadata.sku || ""),
-    customerId: String(object.customer || ""),
-    customerEmail: String(customerDetails.email || object.customer_email || ""),
-    amount: money(amount, object.currency),
-    hostedInvoiceUrl: String(object.hosted_invoice_url || ""),
+    amount: money(amount, currency),
+    status: String(object.status || (isChargeRefunded ? "refunded" : "")),
+    paymentIntent,
+    chargeId: String(object.charge || (isChargeRefunded ? object.id : "")),
+    reason: String(object.reason || object.fraud_type || object.failure_reason || ""),
+    actionable: object.actionable === undefined ? "" : String(Boolean(object.actionable)),
+    evidenceDueBy: object.evidence_details?.due_by ? String(object.evidence_details.due_by) : "",
   };
 }
 
@@ -198,6 +240,10 @@ async function claimEvent(eventId, requestEnv) {
     });
     return "reserved-kv";
   }
+  const liveMode = requestEnv && requestEnv.STRIPE_LIVEMODE === "true";
+  if (liveMode) {
+    throw new Error("durable STRIPE_WEBHOOK_EVENTS binding is required for live events");
+  }
   return claimLocalEvent(eventId);
 }
 
@@ -214,8 +260,11 @@ async function markEvent(eventId, status, requestEnv) {
 }
 
 function notificationText(details) {
+  const eventKind = details.kind === "checkout"
+    ? "PAYMENT"
+    : (details.kind === "payment_failure" ? "PAYMENT FAILURE" : (details.kind === "invoice" ? "INVOICE" : "RISK"));
   const lines = [
-    "NOETFIELD · STRIPE " + (details.kind === "checkout" ? "PAYMENT" : "INVOICE"),
+    "NOETFIELD · STRIPE " + eventKind,
     "",
     "event: " + details.eventType,
     "event_id: " + details.eventId,
@@ -225,13 +274,22 @@ function notificationText(details) {
     "customer: " + (details.customerEmail || details.customerId || "not supplied"),
     "amount: " + details.amount,
   ];
-  if (details.kind === "checkout") {
+  if (details.kind === "checkout" || details.kind === "payment_failure") {
     lines.push("payment_status: " + details.paymentStatus);
     if (details.paymentLink) lines.push("payment_link_id: " + details.paymentLink);
-  } else {
+    if (details.failureMessage) lines.push("failure: " + details.failureMessage);
+  } else if (details.kind === "invoice") {
     lines.push("invoice_number: " + (details.invoiceNumber || "not assigned"));
     lines.push("invoice_status: " + (details.status || "unknown"));
     if (details.hostedInvoiceUrl) lines.push("hosted_invoice_url: " + details.hostedInvoiceUrl);
+  } else if (details.kind === "risk") {
+    lines.push("risk_type: " + details.riskType);
+    lines.push("status: " + (details.status || "not supplied"));
+    if (details.paymentIntent) lines.push("payment_intent: " + details.paymentIntent);
+    if (details.chargeId) lines.push("charge: " + details.chargeId);
+    if (details.reason) lines.push("reason: " + details.reason);
+    if (details.actionable) lines.push("actionable: " + details.actionable);
+    if (details.evidenceDueBy) lines.push("evidence_due_by: " + details.evidenceDueBy);
   }
   lines.push("", "Internal operations notice only. Reconcile against Stripe Dashboard before changing customer access or accounting records.");
   return lines.join("\n");
