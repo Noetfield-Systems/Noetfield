@@ -2,33 +2,33 @@
 
 ## What GEL means
 
-**GEL** stands for **Governance Execution Layer**. It is Noetfield's deterministic control plane for agent and automation workflows — **not** a generic acronym we avoid. Public page: **https://www.noetfield.com/gel/**
+GEL stands for Governance Execution Layer. It is Noetfield's deterministic control layer for agent and automation workflows.
 
 Tagline: **Policy before execution. Receipt after.**
 
 ## What GEL does
 
-- Evaluates operational intent against your **policy pack** before any downstream system runs
-- Returns **APPROVE / REVIEW / DECLINE** (or allow/deny in compliance language)
-- Emits **Trust Ledger Entries (TLEs)** — tamper-evident decision records for audit and board use
+- Evaluates operational intent against a policy pack before a downstream system runs.
+- Returns an approve, review, or decline outcome.
+- Emits Trust Ledger Entries (TLEs) with policy references and Request ID lineage.
+- Supports board and procurement exports.
 
-## GEL vs www homepage
+## Public surfaces
 
 | Surface | URL | Audience | Purpose |
-|---------|-----|----------|---------|
-| **Homepage / Intelligence** | `www.noetfield.com` | Buyers, SMEs, pilots | Consulting, Diagnostic Sprint, Copilot Pack, Trust Brief, intake |
-| **GEL product page** | `www.noetfield.com/gel/` | Developers, integrators | Runtime, CLI, hosted API, chain tools |
-| **Governance Console** | `platform.noetfield.com/console` | Authorized pilot users | Submit intent, view decisions and compliance log |
+|---|---|---|---|
+| Company website | https://www.noetfield.com/ | Buyers and partners | Programs, examples, and intake |
+| GEL | https://www.noetfield.com/gel/ | Developers and integrators | Runtime, CLI, and API orientation |
+| Developer sandbox | https://www.noetfield.com/start/ | Developers and evaluators | 14-day trial, 50 evaluate calls, mock M365 |
+| Governance Console | https://platform.noetfield.com/console | Authorized pilot users | Submit intent and inspect decisions |
+| Hosted API | https://api.noetfield.com | Authorized developers | Contracted API access |
 
-The homepage sells **programs and engagements**. GEL is the **execution engine** behind pre-execution governance.
+## Sandbox and production
 
-## What ships today (GEL lane)
+The free sandbox is limited to 14 days and 50 evaluate calls in observe mode with mock M365 connectors. Production tenant scope, keys, connector access, support, and export cadence are contracted through a Copilot Governance Pack or enterprise SOW.
 
-- **Hosted API:** `https://api.noetfield.com` — health at `/health`, readiness at `/readiness`, decisions at `POST /v1/decision`
-- **Chain tools:** `noetfield gate` (local PASS/BLOCK) and `noetfield decide` (remote receipt)
-- **PyPI package:** `noetfield-gate` — install with `pip install noetfield-gate`
-- **Local dev:** FastAPI + SQLite prototype in `noetfeld-os` repo (port 8001)
+No current public self-serve recurring subscription price is published for GEL runtime tiers. Do not invent tier prices; route commercial questions to operations@noetfield.com.
 
-## GEL tier ladder (runtime commercial — separate from consulting SKUs)
+## Boundary
 
-Documented on `/runtime/` — Starter (~$10K sandbox tier), Standard (~$50K multi-tenant), Trust Ledger tier (~$120K quarterly export). These are **runtime product tiers**, not the same as Trust Brief consulting SKU.
+GEL evaluates and records policy decisions. It does not itself execute payments, custody assets, move money, or operate customer trading systems.
