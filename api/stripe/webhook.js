@@ -90,24 +90,13 @@ async function stripeSignatureMatches(rawBody, header, secret, nowMs) {
 
 async function verifyStripeSignature(rawBody, header, requestEnv, eventLivemode, nowMs) {
   const env = requestEnv || {};
-  const candidates = [
-    { secret: env.STRIPE_WEBHOOK_SECRET_TEST, livemode: false },
-    { secret: env.STRIPE_WEBHOOK_SECRET_LIVE, livemode: true },
-  ].filter((item) => typeof item.secret === "string" && item.secret.trim());
-
-  const fallback = String(env.STRIPE_WEBHOOK_SECRET || "").trim();
-  if (candidates.length === 0 && fallback) {
-    candidates.push({ secret: fallback, livemode: null });
-  }
-
-  for (const candidate of candidates) {
-    if (candidate.livemode !== null && typeof eventLivemode === "boolean" &&
-        candidate.livemode !== eventLivemode) {
-      continue;
-    }
-    if (await stripeSignatureMatches(rawBody, header, candidate.secret, nowMs)) {
-      return candidate.livemode === null ? "unspecified" : (candidate.livemode ? "live" : "test");
-    }
+  if (typeof eventLivemode !== "boolean") return null;
+  const candidate = eventLivemode
+    ? String(env.STRIPE_WEBHOOK_SECRET_LIVE || "").trim()
+    : String(env.STRIPE_WEBHOOK_SECRET_TEST || "").trim();
+  if (!candidate) return null;
+  if (await stripeSignatureMatches(rawBody, header, candidate, nowMs)) {
+    return eventLivemode ? "live" : "test";
   }
   return null;
 }
