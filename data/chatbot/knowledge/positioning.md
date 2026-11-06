@@ -1,13 +1,19 @@
 # Market positioning
 
-Noetfield produces the audit trail a regulated Microsoft 365 Copilot rollout will be asked for later. Public narrative: Copilot governance evidence, board-ready decision records, procurement diligence, and buyer-safe risk intelligence.
+Noetfield produces the audit trail a regulated Copilot rollout will be asked for later.
 
 ## Product definition
 
-Noetfield is an AI Governance & Evidence layer for Copilot adoption. It turns each high-risk Copilot or AI go/no-go into signed evidence: policy check, confidence score, named approvers, metadata-only M365 evidence index, Trust Ledger Entry, board PDF, and procurement ZIP.
+Noetfield is a governed AI execution and evidence layer for Microsoft 365 Copilot and agentic workflows. It helps teams assess high-risk intent before production scope opens and retain the evidence: policy references, confidence signals, named approvers, metadata-only M365 evidence index, Trust Ledger Entry, board PDF, and procurement ZIP.
 
 ## Value
 
-Regulated organizations adopt copilots and automation faster than policy can keep pace. Noetfield gives CCO, CRO, CISO, CTO, procurement, and board teams a defensible decision package before production scope opens: who approved the use case, what evidence was inspected, what policy applied, what changed, and whether the export still verifies.
+Regulated organizations adopt copilots and automation faster than policy and approval processes can keep pace. Noetfield provides a defensible decision package that risk, compliance, procurement, and board teams can inspect.
 
-Lead paid path: Copilot Governance Pack ($2k-10k, 90 days). Buyer success signal: one real organization uses a Noetfield board PDF in a governance meeting.
+## Lead paid path
+
+The Copilot Governance Pack is the lead institutional pilot. Its current self-serve Starter checkout is US$2,000; larger 90-day readiness scopes are contracted by SOW. Trust Brief is the six-week diagnostic, with a current US$10,000 Stripe checkout. Bank Pilot is custom and intake-only.
+
+## Boundary
+
+Noetfield is a software and professional-services vendor, not a bank, PSP, custodian, exchange, money transmitter, or certification body.
