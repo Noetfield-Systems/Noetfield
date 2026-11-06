@@ -14,7 +14,7 @@
     }
     grid.innerHTML = (catalog.offerings || [])
       .map(function (o) {
-        var buy = o.payment_link_url
+        var buy = catalog.checkout_enabled === true && o.payment_link_url
           ? '<a class="btn btn-primary" href="' +
             o.payment_link_url +
             '" rel="noopener">Pay with Stripe</a>'
