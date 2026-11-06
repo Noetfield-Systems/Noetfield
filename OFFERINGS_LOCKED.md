@@ -35,3 +35,6 @@ Noetfield maintains three contract offerings. The free developer sandbox is prod
 ## Payment boundary
 
 Stripe is used only to sell Noetfield's own software and professional services. No payment execution, custody, settlement, fund routing, or MSB services are offered through this account.
+
+
+Operational intake (all SKUs): `operations@noetfield.com` — include the site Request ID (`RID-…`) in the subject.
