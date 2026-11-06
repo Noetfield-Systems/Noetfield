@@ -10,12 +10,19 @@
     "details_submitted": true,
     "charges_enabled": true,
     "payouts_enabled": false,
-    "disabled_reason": "requirements.pending_verification",
+    "disabled_reason": "requirements.past_due",
     "pending_verification": [
       "company.verification.document",
       "documents.proof_of_registration.files"
     ],
-    "external_bank_account_status": "new"
+    "external_bank_account_status": "new",
+    "currently_due": [
+      "person_1UYhK5L4BR0lqapBijPxcEF8.verification.document_live_capture"
+    ],
+    "past_due": [
+      "person_1UYhK5L4BR0lqapBijPxcEF8.verification.document_live_capture"
+    ],
+    "payout_schedule": "manual"
   },
   "commercial_catalog": {
     "active_products": 2,
@@ -70,25 +77,35 @@
     "support_url_present": false,
     "logo_present": false,
     "checkout_brand_color": "#8a6b1f",
-    "checkout_font": "Inter"
+    "checkout_font": "Inter",
+    "support_phone_present": true
   },
   "release": {
     "webhook_code_pr": 289,
     "production_webhook_endpoint_created": false,
     "webhook_secret_configured": false,
     "durable_event_store_configured": false,
-    "production_webhook_deployed": false
+    "production_webhook_deployed": false,
+    "live_account_authorized": true,
+    "live_webhook_endpoint_created": false,
+    "live_webhook_secret_configured": false,
+    "live_durable_event_store_configured": false,
+    "live_webhook_deployed": false
   },
   "founder_actions_required": [
-    "Upload/resolve the pending company verification document and proof of registration in Stripe Dashboard before payouts can be enabled.",
-    "Confirm the official head-office address to complete Stripe Tax Settings.",
-    "Confirm actual GST/HST and BC PST registration numbers only for jurisdictions where Noetfield is legally registered or obligated to collect.",
-    "Confirm the customer-facing support address before making it visible on receipts/invoices."
+    "Complete the representative identity live-capture verification requested by Stripe.",
+    "Upload the company verification document and proof of registration in Stripe Dashboard.",
+    "Confirm the official head-office address for Stripe Tax Settings.",
+    "Confirm actual GST/HST and BC PST registration status and provide only registrations that exist or are legally required.",
+    "Set a customer-support email, privacy/support URL, and a customer-support address appropriate for public receipts.",
+    "Confirm the intake price/currency distinction: standard Trust Brief Checkout is US$10,000; the intake scope calculator is CAD planning; Copilot Starter Checkout is US$2,000 while the larger readiness engagement is SOW-scoped."
   ],
   "safety_notes": [
     "No live charge, refund, subscription, customer, or invoice was created during this audit.",
-    "Existing live prices and links were not repriced; only metadata, redirects, and post-checkout copy were updated.",
-    "Do not enable automatic tax while Tax Settings is pending and no tax registrations are active.",
-    "Do not send significant customer traffic to checkout until Stripe enables payouts and the webhook is deployed."
+    "Payouts are disabled and a representative identity verification item is past due; do not actively promote checkout until Stripe clears verification and enables payouts.",
+    "Existing live product amounts remain unchanged. Current live self-serve checkout amounts are US$10,000 for Trust Brief and US$2,000 for Copilot Governance Pack Starter.",
+    "Automatic Tax remains disabled: Tax Settings is pending because head_office is missing and there are no active registrations.",
+    "Live webhook remains undeployed until production GitHub/Cloudflare secrets and a durable STRIPE_WEBHOOK_EVENTS KV binding are provisioned.",
+    "The public intake page still has a currency mismatch requiring correction/approval before the checkout CTA is promoted."
   ]
 }
