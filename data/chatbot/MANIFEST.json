@@ -88,7 +88,7 @@
       "source_url": "/faq/",
       "updated_at": "2026-11-06T00:00:00Z",
       "valid_until": "2026-12-06T00:00:00Z",
-      "content_hash": "169204ddd185b372ca5d93fb957d1f06211aeb4e43144415522939dfea17a436",
+      "content_hash": "e1b6ed245854164cdfef8449fe2c4d9926b2ae3747d810684ed4b4afe674b82c",
       "superseded": false
     },
     {
@@ -188,7 +188,7 @@
       "source_url": "/",
       "updated_at": "2026-11-06T00:00:00Z",
       "valid_until": "2026-12-06T00:00:00Z",
-      "content_hash": "b4ce877e8703b4b2bee9a02a40b1a2a5ba488405df6deeafd17204241e4d8871",
+      "content_hash": "38eb56a033e3e52c51911c2249c8baa1aa3fd200a0055e068afda9bfeffd0581",
       "superseded": false
     }
   ],
