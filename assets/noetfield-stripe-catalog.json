@@ -3,7 +3,7 @@
   "stripe_account_id": "acct_1UYgbML4BR0lqapB",
   "livemode": true,
   "checkout_enabled": false,
-  "release_gate_reason": "Payout verification and signed webhook delivery must be verified before public checkout is enabled.",
+  "release_gate_reason": "Stripe Live payout verification is still pending; request a scope and invoice proposal instead of starting checkout.",
   "disclaimer_class": "nf-stripe-disclaimer",
   "positioning": "Software and professional services license only. Noetfield does not execute payments, custody, settlement, or financial governance flow.",
   "offerings": [
@@ -13,7 +13,7 @@
       "title": "Trust Brief",
       "price_label": "$10,000 USD",
       "description": "Six-week governance diagnostic to establish a policy baseline, review priority risks, and define evidence required for a defensible go/no-go decision. Scope and deliverables are confirmed in the signed statement of work.",
-      "payment_link_url": "https://buy.stripe.com/dRm00kbb6aLc6MX7iLak001",
+      "payment_link_url": null,
       "intake_url": "/trust-brief/intake/"
     },
     {
@@ -22,7 +22,7 @@
       "title": "Copilot Readiness Pack",
       "price_label": "$2,000 USD",
       "description": "90-day governed readiness for Microsoft 365 Copilot and agentic workflows. Review use cases against policy and assemble decision evidence, a board PDF, and procurement ZIP as defined in the signed scope.",
-      "payment_link_url": "https://buy.stripe.com/bJe7sM7YU2eGgnx46zak000",
+      "payment_link_url": null,
       "intake_url": "/trust-brief/intake/?interest=pilot&vector=copilot-governance"
     },
     {
