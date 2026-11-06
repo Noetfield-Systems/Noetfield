@@ -58,5 +58,5 @@ def test_public_chat_greeting_is_owned_by_www_ssot() -> None:
 
     assert 'return serveGreeting(res);' in route
     assert 'platformBase + "/api/public/chat/greeting"' not in route
-    assert 'www_base.rstrip("/")}/api/public/chat' in verifier
+    assert "www_base.rstrip('/')}/api/public/chat" in verifier
     assert 'platform_base.rstrip("/")}/api/public/chat/health' not in verifier
