@@ -221,7 +221,7 @@ function markLocalEvent(eventId, status) {
   processedEvents.set(eventId, { status, updatedAt: Date.now() });
 }
 
-async function claimEvent(eventId, requestEnv) {
+async function claimEvent(eventId, requestEnv, livemode) {
   const kv = requestEnv && requestEnv.STRIPE_WEBHOOK_EVENTS;
   if (kv && typeof kv.get === "function" && typeof kv.put === "function") {
     const key = "stripe-event:" + eventId;
@@ -240,8 +240,7 @@ async function claimEvent(eventId, requestEnv) {
     });
     return "reserved-kv";
   }
-  const liveMode = requestEnv && requestEnv.STRIPE_LIVEMODE === "true";
-  if (liveMode) {
+  if (livemode === true) {
     throw new Error("durable STRIPE_WEBHOOK_EVENTS binding is required for live events");
   }
   return claimLocalEvent(eventId);
@@ -372,7 +371,7 @@ async function handleStripeWebhook(req, res) {
 
   let claim;
   try {
-    claim = await claimEvent(eventId, req.env || {});
+    claim = await claimEvent(eventId, req.env || {}, Boolean(event.livemode));
   } catch (error) {
     console.error("stripe_event_store_unavailable type=" + (error && error.name ? error.name : "Error"));
     return res.status(503).json({ error: "EVENT_STORE_UNAVAILABLE" });
@@ -417,3 +416,5 @@ module.exports.verifyStripeSignature = verifyStripeSignature;
 module.exports.parseRelevantEvent = parseRelevantEvent;
 module.exports.claimLocalEvent = claimLocalEvent;
 module.exports.markLocalEvent = markLocalEvent;
+module.exports.claimEvent = claimEvent;
+module.exports.notificationText = notificationText;
