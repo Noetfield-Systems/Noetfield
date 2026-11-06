@@ -4,60 +4,41 @@
 
 Noetfield produces the audit trail a regulated Copilot rollout will be asked for later.
 
-For CCO, CRO, CISO, CTO, procurement, and board teams, Noetfield turns each high-risk AI or Microsoft 365 Copilot go/no-go into signed evidence: policy check, confidence score, named approvers, metadata-only M365 evidence index, Trust Ledger Entry, board PDF, and procurement ZIP. The value is not "a chatbot" or "an API" by itself. The value is a defensible record before Copilot or agentic automation touches production scope.
+For CCO, CRO, CISO, CTO, procurement, and board teams, Noetfield turns a high-risk AI or Microsoft 365 Copilot go/no-go into signed evidence: policy checks, confidence signals, named approvers, a metadata-only M365 evidence index, a Trust Ledger Entry, a board PDF, and a procurement ZIP. The value is a defensible record before Copilot or agentic automation touches production scope.
 
-Plain English: we make AI execution impossible to bypass governance.
+## What are the three contract offerings?
 
-## What are the three offerings?
+1. **Copilot Governance Pack** — 90-day governed readiness. The current self-serve Starter checkout is US$2,000. Larger Readiness Pilot engagements are scoped in a signed SOW; the public pilot page describes a CAD $2,000–$10,000 band.
+2. **Trust Brief** — six-week governance diagnostic. The current Stripe checkout is US$10,000. Scope variations are confirmed in a signed SOW.
+3. **Bank Pilot** — custom, read-only shadow governance simulation for regulated institutions. Intake and SOW only; no direct checkout.
 
-1. **Copilot Governance Pack — $2k–10k · 90 days** — lead paid pilot for Microsoft 365 Copilot rollouts. Buyer receives live TLE records, board PDF for a governance meeting, and procurement ZIP.
-2. **Trust Brief — $10,000 · 6 weeks** — governance diagnostic before enterprise scale: policy map, AI risk exposure, executive summary, and recommended rollout scope.
-3. **Bank Pilot — custom** — read-only shadow governance simulation for FRFI and regulated institutions. No execution rights, custody, or payment rails.
+The free developer sandbox is product access, not a fourth contract SKU.
 
 ## What buyer problem do we solve?
 
-Copilot and agentic workflows move faster than policy sign-off. Buyers need proof that production use was reviewed, approved, denied, or escalated under their rules. Noetfield gives them the evidence package they can put in front of a board, auditor, procurement team, MSP partner, or regulator-facing risk committee.
+Copilot and agentic workflows can move faster than policy sign-off. Buyers need a record of who reviewed a use case, what policy applied, what evidence was inspected, and whether production scope was approved, declined, or escalated.
 
 ## What does a client receive?
 
 - Signed go/no-go receipts with Request ID lineage.
-- Trust Ledger Entry (TLE v1) with confidence score and approval chain.
-- Metadata-only M365 evidence index: Purview, Entra, SharePoint/audit references when connected.
-- Board PDF for governance and budget meetings.
-- Procurement ZIP for legal, vendor risk, and diligence review.
-- Fail-closed export integrity: tampered exports do not verify.
-
-## Why would a real client pay now?
-
-Because their internal team is already being asked to approve Copilot, AI automation, or agent workflows without a clean decision record. Noetfield sells a concrete paid path: start with a 5-minute demo or sandbox, run a $2k–10k Copilot Governance Pack pilot, and produce a board PDF/procurement ZIP the buyer can actually use.
+- Trust Ledger Entries (TLEs) with decision and policy references.
+- Metadata-only M365 evidence index where connectors are in scope.
+- A board PDF for governance and budget meetings.
+- A procurement ZIP for legal, vendor risk, and diligence review.
+- Fail-closed export integrity checks.
 
 ## How do I engage?
 
-Request a Governance Brief at `/trust-brief/intake/`. All operational intake routes to **operations@noetfield.com**. Include your site **Request ID** (`RID-…` in the footer) in email subjects.
+Use the five-minute demo, start a free sandbox, or submit a non-confidential intake. Operations routes requests through operations@noetfield.com. Include your Request ID (RID) in email subjects.
 
-## Web assistant
+## GEL
 
-- The website assistant should use the platform chat path when configured.
-- The local website fallback is routing-only. It must not pretend to answer from static local rules.
-- If the model path is unavailable, route to `/start/`, `/pricing/`, `/trust-brief/intake/`, or **operations@noetfield.com**.
+GEL means Governance Execution Layer. It evaluates operational intent against a policy pack before downstream execution and emits Trust Ledger evidence. Public page: https://www.noetfield.com/gel/. Hosted API: https://api.noetfield.com.
 
-## What is GEL?
+## Governance Console and data
 
-**GEL** = **Governance Execution Layer** — Noetfield's pre-execution control plane for agent workflows. Public page: `/gel/`. Hosted API: `api.noetfield.com`. Chain tools: `noetfield gate`, `noetfield decide`, PyPI package `noetfield-gate`.
+The Governance Console is for authorized pilot users. Public intake forms are for non-confidential information only. Secure sharing protocols are confirmed after kickoff.
 
-## What is the Governance Console?
+## Scope boundary
 
-The Governance Evaluation Interface lets authorized pilot users submit operational intent and view allow/deny decisions plus the compliance log. Marketing entry: `/console/` on www; product UI on the authorized platform host (`/console` on platform.noetfield.com).
-
-## Who is this for?
-
-Chief compliance officers, chief risk officers, enterprise CTOs, and regulatory-facing technology leaders in banks and regulated enterprises.
-
-## Where is the product hosted?
-
-- **www.noetfield.com** — Institutional marketing and intake.
-- **platform.noetfield.com** — Authorized pilot runtime and Governance Evaluation Interface.
-
-## Data and confidentiality
-
-Public intake forms are for non-confidential information only. Secure sharing protocols are confirmed after kickoff.
+Noetfield does not execute payments, custody assets, initiate transactions, route funds, operate an exchange, or provide legal or regulatory certification.
