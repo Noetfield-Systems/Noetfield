@@ -228,24 +228,14 @@ def notify_stripe_checkout(settings: object, details: dict[str, str]) -> bool:
     inbox = str(inbox).strip() or CANONICAL_INTAKE_EMAIL
     subject = f"Noetfield — Stripe checkout · {details.get('sku', 'license')}"
     body = (
-        "Stripe commercial license checkout completed.
-
-"
-        f"session_id: {details.get('session_id', '')}
-"
-        f"sku: {details.get('sku', '')}
-"
-        f"customer_id: {details.get('customer_id', '')}
-"
-        f"customer_email: {details.get('customer_email', '')}
-"
-        f"amount_total: {details.get('amount_total', '')} {details.get('currency', '')}
-
-"
-        "Reply to customer from operations@ with onboarding and intake link.
-"
-        "Commercial licensing only — no custody or payment execution.
-"
+        "Stripe commercial license checkout completed.\n\n"
+        f"session_id: {details.get('session_id', '')}\n"
+        f"sku: {details.get('sku', '')}\n"
+        f"customer_id: {details.get('customer_id', '')}\n"
+        f"customer_email: {details.get('customer_email', '')}\n"
+        f"amount_total: {details.get('amount_total', '')} {details.get('currency', '')}\n\n"
+        "Reply to customer from operations@ with onboarding and intake link.\n"
+        "Commercial licensing only — no custody or payment execution.\n"
     )
     customer = details.get("customer_email", "").strip()
     return send_intake_email(
