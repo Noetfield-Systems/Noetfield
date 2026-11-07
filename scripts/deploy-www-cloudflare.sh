@@ -62,7 +62,11 @@ cloudflare_api_get() {
 assert_clean_release_source() {
   local phase="$1"
   local tracked
-  tracked="$(git status --porcelain --untracked-files=no)"
+  # The Pages build regenerates these tracked release artifacts from source.
+  # Keep all other tracked paths fail-closed; never require generated bundles to be committed.
+  tracked="$(git status --porcelain --untracked-files=no -- . \
+    ':(exclude)functions/api/**' \
+    ':(exclude)receipts/noetfield-social-preview-v2.json')"
   if [[ -n "$tracked" ]]; then
     log "FAIL: tracked worktree changes detected ${phase}; commit the exact release first"
     printf '%s\n' "$tracked" >&2
