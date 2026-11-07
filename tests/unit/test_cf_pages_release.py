@@ -283,3 +283,61 @@ test "$(cat "$counter")" -eq 12
     )
     assert result.returncode == 0, result.stderr
     assert "FAIL: release content mismatch path=/" in result.stdout
+
+def test_release_cleanliness_allows_only_regenerated_pages_artifacts(
+    tmp_path: Path,
+) -> None:
+    function = _shell_function("assert_clean_release_source", "sync_pages_secrets")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    subprocess.run(["git", "init", "-q"], cwd=repo, check=True)
+    subprocess.run(["git", "config", "user.name", "Release Guard Test"], cwd=repo, check=True)
+    subprocess.run(
+        ["git", "config", "user.email", "release-guard-test@example.invalid"],
+        cwd=repo,
+        check=True,
+    )
+
+    generated_paths = (
+        "functions/api/intake.js",
+        "functions/api/intake/health.js",
+        "receipts/noetfield-social-preview-v2.json",
+    )
+    source_path = "api/intake.js"
+    all_paths = (*generated_paths, source_path)
+    for path in all_paths:
+        target = repo / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("committed baseline\\n", encoding="utf-8")
+    subprocess.run(["git", "add", "."], cwd=repo, check=True)
+    subprocess.run(["git", "commit", "-qm", "baseline"], cwd=repo, check=True)
+
+    for path in generated_paths:
+        (repo / path).write_text("regenerated build output\\n", encoding="utf-8")
+
+    guard_script = f"""
+set -euo pipefail
+log() {{ printf '%s\\n' "$*"; }}
+{function}
+assert_clean_release_source "after build"
+"""
+    allowed = subprocess.run(
+        ["bash", "-c", guard_script],
+        cwd=repo,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert allowed.returncode == 0, allowed.stderr + allowed.stdout
+
+    (repo / source_path).write_text("unexpected source edit\\n", encoding="utf-8")
+    blocked = subprocess.run(
+        ["bash", "-c", guard_script],
+        cwd=repo,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert blocked.returncode != 0
+    assert "tracked worktree changes detected after build" in blocked.stdout
+    assert source_path in blocked.stderr
