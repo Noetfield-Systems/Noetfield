@@ -194,3 +194,62 @@
 @media (prefers-reduced-motion:reduce) {
  .coi-page * { scroll-behavior:auto !important;transition:none !important; }
 }
+
+
+.coi-commercial-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;align-items:stretch; }
+.coi-commercial-card { display:flex;flex-direction:column;min-height:100%;padding:26px;border:1px solid var(--coi-line);border-radius:13px;background:#fffdf8; }
+.coi-commercial-card--featured { border-color:rgba(164,122,52,.62);box-shadow:0 16px 40px rgba(69,55,27,.09); }
+.coi-commercial-label { margin:0 0 17px;color:#946d2f;font:500 .59rem "DM Mono",monospace;letter-spacing:.09em;text-transform:uppercase; }
+.coi-commercial-card h3 { margin:0 0 8px;font:500 1.55rem "Newsreader",serif; }
+.coi-commercial-price { margin:0 0 13px;color:#162a40;font:500 clamp(1.65rem,2.4vw,2.25rem)/1.1 "Newsreader",serif;letter-spacing:-.025em; }
+.coi-commercial-price span { color:#758193;font:500 .64rem "DM Mono",monospace;letter-spacing:0; }
+.coi-commercial-summary { min-height:68px;margin:0 0 17px;color:#637286;font-size:.77rem;line-height:1.65; }
+.coi-commercial-card ul { flex:1;margin:0 0 23px;padding:0;list-style:none; }
+.coi-commercial-card li { position:relative;padding:10px 0 10px 18px;border-top:1px solid var(--coi-line);color:#415268;font-size:.72rem;line-height:1.45; }
+.coi-commercial-card li:before { content:"";position:absolute;left:1px;top:16px;width:6px;height:6px;border-radius:50%;background:#9c7a42; }
+.coi-commercial-card .coi-btn { width:100%; }
+.coi-commercial-link { align-self:flex-start;color:#26445f;font-size:.76rem;font-weight:650;text-decoration-thickness:1px;text-underline-offset:4px; }
+.coi-pricing-note { max-width:930px;margin:18px 0 0;color:#647386;font-size:.72rem;line-height:1.7; }
+.coi-intake-layout { display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,5vw,66px);align-items:start; }
+.coi-intake-intro { position:sticky;top:110px; }
+.coi-intake-intro h2 { margin:0 0 16px;font:400 clamp(2.35rem,4.1vw,3.8rem)/1.02 "Newsreader",Georgia,serif;letter-spacing:-.045em; }
+.coi-intake-facts { display:grid;gap:0;margin-top:26px;border-top:1px solid var(--coi-line); }
+.coi-intake-facts div { display:grid;gap:4px;padding:13px 0;border-bottom:1px solid var(--coi-line); }
+.coi-intake-facts b { font:500 1.02rem "Newsreader",serif; }
+.coi-intake-facts span { color:#68778a;font-size:.72rem; }
+.coi-intake-form { padding:clamp(19px,3vw,30px);border:1px solid var(--coi-line);border-radius:15px;background:#fffdf8;box-shadow:0 18px 50px rgba(21,38,58,.07); }
+.coi-form-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px; }
+.coi-intake-form label { display:grid;gap:7px;margin:0 0 15px;color:#34465b;font-size:.73rem;font-weight:650; }
+.coi-form-wide { grid-column:1/-1; }
+.coi-intake-form input,.coi-intake-form select,.coi-intake-form textarea {
+  width:100%;min-width:0;padding:12px 13px;border:1px solid rgba(16,32,51,.2);border-radius:7px;
+  background:#fff;color:#172a3d;font:400 .83rem/1.4 "Inter",system-ui,sans-serif;
+  box-shadow:none;transition:border-color .15s ease,box-shadow .15s ease;
+}
+.coi-intake-form textarea { min-height:132px;resize:vertical; }
+.coi-intake-form input:focus,.coi-intake-form select:focus,.coi-intake-form textarea:focus {
+  outline:0;border-color:#9b773e;box-shadow:0 0 0 3px rgba(187,145,72,.15);
+}
+.coi-intake-form ::placeholder { color:#9aa4b0; }
+.coi-form-submit { display:grid;gap:12px;justify-items:start;margin-top:7px; }
+.coi-form-submit .coi-btn { cursor:pointer;font-family:"Inter",system-ui,sans-serif; }
+.coi-form-submit p { margin:0;color:#738092;font-size:.66rem;line-height:1.6; }
+.coi-form-fallback { margin:14px 0 0;color:#657386;font-size:.7rem; }
+.coi-form-fallback a { color:#24415f;font-weight:650;text-underline-offset:3px; }
+.coi-form-status { margin-top:15px; }
+.coi-intake-form [type="hidden"] { display:none; }
+@media (max-width:1050px) {
+  .coi-commercial-grid { grid-template-columns:1fr 1fr; }
+  .coi-commercial-card--featured { grid-row:span 2; }
+  .coi-intake-layout { grid-template-columns:1fr; }
+  .coi-intake-intro { position:static;max-width:820px; }
+}
+@media (max-width:700px) {
+  .coi-commercial-grid { grid-template-columns:1fr; }
+  .coi-commercial-card--featured { grid-row:auto; }
+  .coi-commercial-summary { min-height:0; }
+  .coi-form-grid { grid-template-columns:1fr;gap:0; }
+  .coi-form-wide { grid-column:auto; }
+  .coi-intake-form { padding:17px; }
+  .coi-form-submit .coi-btn { width:100%; }
+}
