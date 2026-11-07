@@ -36,6 +36,9 @@ function intakeLabel(body) {
   if (vector.indexOf("bank") >= 0 || sku === "bank_pilot" || topic === "bank-pilot") {
     return "Bank Pilot inquiry";
   }
+  if (vector.indexOf("continuous-optimization") >= 0 || topic === "continuous-optimization-intelligence") {
+    return "Continuous Optimization Intelligence enquiry";
+  }
   if (topic === "federal") return "Federal Brief";
   if (topic === "feedback") return "Site feedback";
   if (topic === "partner") return "Partner program";
