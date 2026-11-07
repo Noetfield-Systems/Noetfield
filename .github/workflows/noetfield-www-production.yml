@@ -171,7 +171,9 @@ jobs:
           CF_PURGE_AFTER_DEPLOY: "1"
           CF_WRANGLER_VERSION: "4.103.0"
           CF_WWW_PROXY_FORCE_TOKEN: "1"
-          NF_SKIP_INTAKE_E2E: "1"
+          # Run a synthetic, explicitly test-classified intake probe after the canonical release is pinned.
+          # The intake backend persists/deduplicates the probe but suppresses customer-facing email acknowledgements.
+          NF_SKIP_INTAKE_E2E: "0"
           NF_AUTHORIZED_PROMOTE_SHA: ${{ github.sha }}
           NF_WWW_ANTI_STALE_RECEIPT: release-receipts/noetfield-www-anti-stale-v2.json
           RUNWAY_RUNTIME_API_SECRET: ${{ secrets.RUNWAY_RUNTIME_API_SECRET }}
