@@ -59,7 +59,7 @@ def test_commercial_offer_is_explicit_and_truthful() -> None:
         "not an online checkout",
     ):
         assert phrase.lower() in html.lower()
-    assert "no payment has been taken" in html.lower()
+    assert "no charge is taken by this form" in html.lower()
     assert "No automatic production changes are included by default" in html
 
 
@@ -70,7 +70,7 @@ def test_conversion_form_uses_the_established_intake_contract() -> None:
     assert len(parser.forms) == 1
     form = parser.forms[0]
     assert form.get("id") == "coiIntakeForm"
-    assert form.get("data-nf-intake-form") is not None
+    assert "data-nf-intake-form" in form
     assert form.get("data-intake-vector") == "intelligence-diagnostic"
     assert form.get("data-intake-sku") == "intelligence-diagnostic"
     for field in ("email", "org", "name", "engagement", "target_context", "notes", "topic"):
