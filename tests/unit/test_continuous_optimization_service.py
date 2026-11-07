@@ -39,7 +39,7 @@ class PageStructure(HTMLParser):
 def test_optimization_page_is_indexable_and_canonical() -> None:
     html = PAGE.read_text(encoding="utf-8")
     assert '<title>Continuous Optimization Intelligence | Noetfield</title>' in html
-    assert 'content="https://www.noetfield.com/intelligence/continuous-optimization/"' in html
+    assert 'href="https://www.noetfield.com/intelligence/continuous-optimization/"' in html
     description = html.split('<meta name="description" content="', 1)[1].split('"', 1)[0]
     assert 50 <= len(description) <= 160
     assert 'name="robots" content="index,follow"' in html
@@ -76,7 +76,7 @@ def test_conversion_form_uses_the_established_intake_contract() -> None:
     for field in ("email", "org", "name", "engagement", "target_context", "notes", "topic"):
         assert any(item.get("name") == field for item in parser.inputs), field
     for field in ("email", "org", "name", "engagement", "target_context", "notes"):
-        assert any(item.get("name") == field and item.get("required") is not None for item in parser.inputs), field
+        assert any(item.get("name") == field and "required" in item for item in parser.inputs), field
     assert "operations@noetfield.com" in html
     assert "within one business day" in html
 
