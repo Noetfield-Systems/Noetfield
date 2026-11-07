@@ -39,6 +39,9 @@ function intakeLabel(body) {
   if (vector.indexOf("continuous-optimization") >= 0 || topic === "continuous-optimization-intelligence") {
     return "Continuous Optimization Intelligence enquiry";
   }
+  if (vector.indexOf("continuous-optimization") >= 0 || topic === "continuous-optimization-intelligence") {
+    return "Continuous Optimization Intelligence enquiry";
+  }
   if (topic === "federal") return "Federal Brief";
   if (topic === "feedback") return "Site feedback";
   if (topic === "partner") return "Partner program";
@@ -56,6 +59,8 @@ function metaLine(body) {
   if (topic && topic !== lane) parts.push("topic: " + topic);
   if (m.pilot_band) parts.push("pilot_band: " + m.pilot_band);
   if (m.engagement) parts.push("engagement: " + m.engagement);
+  if (m.target_context) parts.push("system area: " + m.target_context);
+  if (m.deal_stage) parts.push("deal stage: " + m.deal_stage);
   if (m.page) parts.push("page: " + m.page);
   if (m.form_id) parts.push("form: " + m.form_id);
   if (m.async) parts.push("async web submit");
@@ -94,11 +99,16 @@ function opsBodyText(body, intakeId) {
 function ackBody(body, intakeId) {
   const name = body.contact_name ? " " + body.contact_name : "";
   const rid = body.request_id || intakeId;
+  const isOptimization = meta(body).topic === "continuous-optimization-intelligence";
+  const opening = isOptimization
+    ? "Your Continuous Optimization Intelligence enquiry has been recorded. Operations will review fit and follow up within one business day to confirm scope and commercial next steps. This is an enquiry only; no payment has been taken and no work is scheduled yet."
+    : "Your message was saved instantly. Operations at Noetfield will follow up within one business day.";
   return (
     "Hi" +
     name +
     ",\n\n" +
-    "Your message was saved instantly. Operations at Noetfield will follow up within one business day.\n\n" +
+    opening +
+    "\n\n" +
     "Reference: " +
     rid +
     "\n" +
