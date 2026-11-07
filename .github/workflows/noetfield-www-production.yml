@@ -1,4 +1,5 @@
 name: Noetfield WWW Production
+# Release trigger note: comment-only commit can safely re-emit the main-branch production workflow.
 
 on:
   workflow_dispatch:
