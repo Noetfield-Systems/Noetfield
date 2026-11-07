@@ -57,6 +57,8 @@ on:
       - "tests/unit/test_cf_pages_release.py"
       - "tests/unit/test_nf_www_deploy_anti_stale_v2.py"
       - "tests/unit/test_social_preview_v2.py"
+      - "tests/unit/test_continuous_optimization_service.py"
+      - "tests/unit/test_intake_optimization_routing.cjs"
       - "config/noetfield-www-protected-surfaces.v2.json"
       - "receipts/noetfield-social-preview-v2.json"
       - "trust-ledger/**/*.pdf"
@@ -118,6 +120,8 @@ on:
       - "tests/unit/test_cf_pages_release.py"
       - "tests/unit/test_nf_www_deploy_anti_stale_v2.py"
       - "tests/unit/test_social_preview_v2.py"
+      - "tests/unit/test_continuous_optimization_service.py"
+      - "tests/unit/test_intake_optimization_routing.cjs"
       - "config/noetfield-www-protected-surfaces.v2.json"
       - "receipts/noetfield-social-preview-v2.json"
       - "tests/unit/test_investor_diligence_lane.py"
@@ -156,6 +160,9 @@ jobs:
       - name: Stripe webhook tests
         run: node --test tests/unit/test_stripe_webhook.cjs
 
+      - name: Optimization intake routing tests
+        run: node --test tests/unit/test_intake_optimization_routing.cjs
+
       - name: Exact public artifact verification
         run: make verify-static-www
 
@@ -172,7 +179,7 @@ jobs:
             --authorized-sha "$SHA"
 
       - name: Delivery release contracts
-        run: python3 -m pytest -q tests/unit/test_corporate_surface.py tests/unit/test_ai_motor_category.py tests/unit/test_cf_pages_release.py tests/unit/test_nf_www_deploy_anti_stale_v2.py tests/unit/test_social_preview_v2.py
+        run: python3 -m pytest -q tests/unit/test_corporate_surface.py tests/unit/test_ai_motor_category.py tests/unit/test_cf_pages_release.py tests/unit/test_nf_www_deploy_anti_stale_v2.py tests/unit/test_social_preview_v2.py tests/unit/test_continuous_optimization_service.py
 
       - name: Public site health
         run: python3 scripts/report_slo_health_v1.py --scope public-site-ci --budget-seconds 180 -- make site-health
