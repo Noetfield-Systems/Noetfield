@@ -100,27 +100,7 @@ function localGreetingPayload() {
   }
 }
 
-async function serveGreeting(res, platformBase) {
-  try {
-    const r = await fetch(platformBase + "/api/public/chat/greeting", {
-      headers: { Accept: "application/json" },
-    });
-    if (r.ok) {
-      const body = await r.json().catch(function () {
-        return {};
-      });
-      if (body && body.greeting) {
-        return res.status(200).json({
-          ok: true,
-          mode: "platform-proxy",
-          platform_base: platformBase,
-          ...body,
-        });
-      }
-    }
-  } catch (_) {
-    /* www-local spine */
-  }
+async function serveGreeting(res) {
   return res.status(200).json({
     ok: true,
     mode: "www-disk-ssot",
@@ -140,7 +120,7 @@ module.exports = async function handler(req, res) {
   const platformBase = (process.env.PLATFORM_API_BASE || "https://platform.noetfield.com").replace(/\/$/, "");
 
   if (req.method === "GET") {
-    return serveGreeting(res, platformBase);
+    return serveGreeting(res);
   }
 
   if (req.method !== "POST") {
