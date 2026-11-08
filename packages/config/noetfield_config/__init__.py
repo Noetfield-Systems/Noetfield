@@ -206,6 +206,10 @@ class Settings(BaseSettings):
         default=None,
         description="Internal admin dashboard secret for X-Admin-Secret protected operations views.",
     )
+    business_os_intake_sync_token: SecretStr | None = Field(
+        default=None,
+        description="Dedicated least-privilege token for the Business OS PII-free public-intake feed.",
+    )
     telegram_webhook_base_url: str | None = Field(
         default=None,
         description="Public HTTPS base for webhook registration, e.g. https://platform.noetfield.com",

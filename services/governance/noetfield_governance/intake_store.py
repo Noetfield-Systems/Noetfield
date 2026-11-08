@@ -72,6 +72,28 @@ def list_recent(*, limit: int = 50) -> list[dict[str, Any]]:
         return list(_records)[:cap]
 
 
+def list_after(
+    *,
+    created_after: str | None = None,
+    intake_after: str = "",
+    limit: int = 50,
+) -> list[dict[str, Any]]:
+    """Return a stable ascending cursor page for the internal, PII-free feed."""
+    cap = max(1, min(limit, 100))
+    with _lock:
+        records = sorted(
+            list(_records),
+            key=lambda item: (str(item.get("created_at") or ""), str(item.get("intake_id") or "")),
+        )
+    if created_after:
+        cursor = (created_after, intake_after or "")
+        records = [
+            item for item in records
+            if (str(item.get("created_at") or ""), str(item.get("intake_id") or "")) > cursor
+        ]
+    return records[:cap]
+
+
 def get_by_request_id(request_id: str) -> dict[str, Any] | None:
     rid = (request_id or "").strip().upper()
     if not rid:
