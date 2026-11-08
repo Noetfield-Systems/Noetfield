@@ -1,8 +1,10 @@
 """FastAPI entrypoint for the Noetfield backend runtime core."""
 
 import asyncio
+import hmac
 import logging
 import os
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Literal
@@ -1105,6 +1107,115 @@ async def public_chat(body: PublicChatRequest, request: Request) -> PublicChatRe
     )
     return PublicChatResponse(reply=reply, provider=provider, citations=citations)
 
+
+
+
+@app.get("/api/internal/business-os/intake-feed", tags=["internal"], include_in_schema=False)
+async def business_os_intake_feed(
+    request: Request,
+    created_after: str | None = None,
+    intake_after: str = "",
+    limit: int = 50,
+) -> dict[str, object]:
+    """Least-privilege, PII-free projection for the existing Business OS worker."""
+    expected = _secret(settings.business_os_intake_sync_token)
+    if not expected:
+        raise HTTPException(status_code=503, detail="Business OS intake feed is not configured")
+    presented = request.headers.get("X-Business-OS-Token", "")
+    if not presented or not hmac.compare_digest(presented, expected):
+        raise HTTPException(status_code=401, detail="Business OS service authentication required")
+    if created_after:
+        try:
+            datetime.fromisoformat(created_after.replace("Z", "+00:00"))
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail="created_after must be ISO-8601") from exc
+    cap = max(1, min(int(limit), 100))
+    records = await intake_repository.list_after(
+        created_after=created_after,
+        intake_after=intake_after,
+        limit=cap,
+    )
+    allowed_vectors = {
+        "ai-value-governance-os", "enterprise", "copilot-governance",
+        "copilot", "bank-pilot", "partner-msb", "work-with-us", "web-intake",
+        "general", "trust-brief",
+    }
+    allowed_skus = {"trust_brief", "copilot", "bank_pilot", "general"}
+    allowed_tiers = {"A", "B", "C", "defer"}
+    allowed_urgencies = {"immediate", "standard", "low"}
+    allowed_next_steps = {
+        "schedule_briefing", "founder_review", "async_nurture",
+        "clarify_scope", "polite_decline",
+    }
+    allowed_blockers = {
+        "payment_rails", "certification_claim", "mailbox_surveillance",
+        "generic_chatbot", "consumer_email_domain", "missing_organization",
+    }
+    items: list[dict[str, object]] = []
+    for record in records:
+        metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}
+        if is_test_intake(
+            metadata=metadata,
+            request_id=record.get("request_id"),
+            contact_email=str(record.get("contact_email") or ""),
+        ):
+            continue
+        raw_sku = str(record.get("sku") or "general")
+        raw_vector = str(record.get("vector") or "web-intake").strip().lower()
+        sku = raw_sku if raw_sku in allowed_skus else "general"
+        vector = raw_vector if raw_vector in allowed_vectors else "general"
+        qualification = record.get("qualification_json")
+        safe_qualification: dict[str, object] | None = None
+        if isinstance(qualification, dict):
+            tier = qualification.get("tier")
+            urgency = qualification.get("urgency")
+            next_step = qualification.get("next_step")
+            fit_score = qualification.get("fit_score")
+            sla = qualification.get("owner_sla_hours")
+            if tier in allowed_tiers and urgency in allowed_urgencies and next_step in allowed_next_steps:
+                safe_qualification = {
+                    "tier": tier,
+                    "fit_score": max(0, min(100, int(fit_score))) if isinstance(fit_score, (int, float)) else None,
+                    "urgency": urgency,
+                    "next_step": next_step,
+                    "owner_sla_hours": max(1, min(720, int(sla))) if isinstance(sla, (int, float)) else None,
+                    "blockers": [
+                        blocker for blocker in (qualification.get("blockers") or [])
+                        if isinstance(blocker, str) and blocker in allowed_blockers
+                    ][:8],
+                    "qualifier_version": "enterprise-intake-qualifier-v1",
+                }
+        request_id = record.get("request_id")
+        if request_id and not re.fullmatch(r"RID-[A-Z0-9-]{6,64}", str(request_id), flags=re.IGNORECASE):
+            request_id = None
+        created = record.get("created_at")
+        if hasattr(created, "isoformat"):
+            created = created.isoformat()
+        items.append({
+            "intake_id": str(record.get("intake_id") or ""),
+            "request_id": request_id,
+            "created_at": str(created or ""),
+            "sku": sku,
+            "vector": vector,
+            "qualification": safe_qualification,
+        })
+    last_record = records[-1] if records else None
+    next_cursor = {
+        "created_at": (
+            last_record["created_at"].isoformat()
+            if hasattr(last_record.get("created_at"), "isoformat")
+            else str(last_record.get("created_at") or "")
+        ),
+        "intake_id": str(last_record.get("intake_id") or ""),
+    } if last_record else {"created_at": created_after, "intake_id": intake_after}
+    return {
+        "schema": "noetfield.business-os-intake-feed.v1",
+        "items": items,
+        "next_cursor": next_cursor,
+        "has_more": len(records) == cap,
+        "page_size": len(records),
+        "data_scope": "intake_id/request_id, timestamp, product vector and deterministic qualification only; no customer names, contact details, organization names, message text or free-form metadata",
+    }
 
 @app.get("/api/intake/health", tags=["intake"])
 async def intake_health() -> dict[str, object]:

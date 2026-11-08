@@ -9,6 +9,7 @@ from noetfield_config import Settings
 from noetfield_governance.intake_store import IntakeRecord
 from noetfield_governance.intake_store import get_by_request_id as memory_get_by_request_id
 from noetfield_governance.intake_store import list_recent as memory_list_recent
+from noetfield_governance.intake_store import list_after as memory_list_after
 from noetfield_governance.intake_store import record_intake as memory_record_intake
 from noetfield_governance.intake_store import update_email_archive_status as memory_update_email_archive_status
 from noetfield_governance.postgres_intake_store import PostgresIntakeStore
@@ -36,6 +37,14 @@ class IntakeStoreBackend(Protocol):
 
     async def list_recent(self, *, limit: int = 50) -> list[dict[str, Any]]: ...
 
+    async def list_after(
+        self,
+        *,
+        created_after: str | None = None,
+        intake_after: str = "",
+        limit: int = 50,
+    ) -> list[dict[str, Any]]: ...
+
     async def get_by_request_id(self, request_id: str) -> IntakeRecord | None: ...
 
     async def update_email_archive_status(
@@ -55,6 +64,19 @@ class _MemoryIntakeBackend:
 
     async def list_recent(self, *, limit: int = 50) -> list[dict[str, Any]]:
         return memory_list_recent(limit=limit)
+
+    async def list_after(
+        self,
+        *,
+        created_after: str | None = None,
+        intake_after: str = "",
+        limit: int = 50,
+    ) -> list[dict[str, Any]]:
+        return memory_list_after(
+            created_after=created_after,
+            intake_after=intake_after,
+            limit=limit,
+        )
 
     async def get_by_request_id(self, request_id: str) -> IntakeRecord | None:
         row = memory_get_by_request_id(request_id)
@@ -134,6 +156,26 @@ async def list_recent(*, limit: int = 50) -> list[dict[str, Any]]:
     if _backend is None:
         return memory_list_recent(limit=limit)
     return await _backend.list_recent(limit=limit)
+
+
+async def list_after(
+    *,
+    created_after: str | None = None,
+    intake_after: str = "",
+    limit: int = 50,
+) -> list[dict[str, Any]]:
+    if _backend is None:
+        return memory_list_after(
+            created_after=created_after,
+            intake_after=intake_after,
+            limit=limit,
+        )
+    assert _backend is not None
+    return await _backend.list_after(
+        created_after=created_after,
+        intake_after=intake_after,
+        limit=limit,
+    )
 
 
 async def get_by_request_id(request_id: str) -> IntakeRecord | None:

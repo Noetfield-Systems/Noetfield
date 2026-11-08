@@ -159,6 +159,47 @@ class PostgresIntakeStore:
             )
         return [_row_to_dict(row) for row in rows]
 
+    async def list_after(
+        self,
+        *,
+        created_after: str | None = None,
+        intake_after: str = "",
+        limit: int = 50,
+    ) -> list[dict[str, Any]]:
+        """Return a stable ascending cursor page for internal operational projections."""
+        await self.connect()
+        assert self._pool is not None
+        cap = max(1, min(limit, 100))
+        columns = """
+            select intake_id, created_at, request_id, organization, contact_name,
+                   contact_email, sku, vector, source, message, metadata,
+                   qualification_json, email_archive_status, email_archive_updated_at,
+                   email_archive_detail
+            from noetfield.public_intakes
+        """
+        async with self._pool.acquire() as connection:
+            if created_after:
+                cursor_time = datetime.fromisoformat(created_after.replace("Z", "+00:00"))
+                rows = await connection.fetch(
+                    columns + """
+                    where (created_at, intake_id) > ($1::timestamptz, $2)
+                    order by created_at asc, intake_id asc
+                    limit $3
+                    """,
+                    cursor_time,
+                    intake_after or "",
+                    cap,
+                )
+            else:
+                rows = await connection.fetch(
+                    columns + """
+                    order by created_at asc, intake_id asc
+                    limit $1
+                    """,
+                    cap,
+                )
+        return [_row_to_dict(row) for row in rows]
+
     async def count(self) -> int:
         await self.connect()
         assert self._pool is not None
