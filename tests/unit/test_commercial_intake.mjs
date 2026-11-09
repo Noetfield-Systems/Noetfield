@@ -46,7 +46,7 @@ test("missing server-only identity fails closed without success or external requ
  const old=globalThis.fetch;let count=0;
  globalThis.fetch=()=>{count++;throw Error("should not run")};
  t.after(()=>{globalThis.fetch=old});
- const r=await onRequestPost({request:request(),env:{}});
+ const r=await handler({...request(),env:{}});
  assert.equal(r.status,503);
  assert.equal((await r.json()).accepted,false);
  assert.equal(count,0);
