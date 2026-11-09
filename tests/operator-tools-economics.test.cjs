@@ -25,6 +25,11 @@ assert.equal(attributableButMostlyUnexplained.kind, "act");
 assert.match(attributableButMostlyUnexplained.headline, /20%/);
 assert.match(attributableButMostlyUnexplained.body, /not proven waste/);
 
+const boundaryAtTwentyPercent = compute("ai-spend", form({
+  monthly: 4000, attributed: 80, teams: 3, named: "yes",
+}));
+assert.equal(boundaryAtTwentyPercent.kind, "act");
+
 const mostlyAttributed = compute("ai-spend", form({
   monthly: 4000, attributed: 95, teams: 3, named: "yes",
 }));
@@ -58,4 +63,4 @@ assert.match(acceptance.amount, /modeled unsigned-item rework/);
 assert.match(acceptance.extra, /assumes every unsigned item/);
 
 assert.doesNotMatch(source, /window\.parent\.postMessage/);
-console.log("PASS operator-tools-economics: 7 trust/attribution assertions");
+console.log("PASS operator-tools-economics: 8 trust/attribution assertions");
