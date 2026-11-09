@@ -67,6 +67,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.noetfield.com/commercial/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.noetfield.com/contact/</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
