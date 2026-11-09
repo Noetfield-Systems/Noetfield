@@ -1,0 +1,66 @@
+name: Noetfield Commercial Page Preview
+on:
+  push:
+    branches: [feat/commercial-intake-agent-onboarding-20261109]
+    paths:
+      - "commercial/**"
+      - "assets/noetfield-commercial*"
+      - "api/company-os-intake.js"
+      - "functions/api/company-os-intake.js"
+      - "governance/www-public-artifact-v1.json"
+      - "tests/unit/test_commercial_intake.mjs"
+      - ".github/workflows/commercial-www-preview.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: noetfield-commercial-pages-preview
+  cancel-in-progress: false
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Build exact public artifact
+        run: |
+          set -euo pipefail
+          python -m pip install -e ".[dev]"
+          npm ci
+          ./scripts/build-www-pages-dist.sh
+          test -s www-pages-dist/commercial/index.html
+          test -s www-pages-dist/assets/noetfield-commercial-v1.css
+          test -s functions/api/company-os-intake.js
+      - name: Publish non-production Cloudflare Pages preview
+        env:
+          CLOUDFLARE_ACCOUNT_ID: "0d0b967b77e2e5535455d39ff3dae72c"
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          npx --yes wrangler@4.103.0 pages deploy www-pages-dist \
+            --project-name noetfield-www \
+            --branch "preview-commercial-company-os" \
+            --commit-dirty=true 2>&1 | tee preview-deploy.log
+          URL="$(grep -oE 'https://[a-z0-9-]+\.noetfield-www\.pages\.dev' preview-deploy.log | head -1)"
+          test -n "$URL"
+          {
+            echo "## Commercial Company OS page"
+            echo ""
+            echo "- Preview: $URL/commercial/"
+            echo "- Immutable Git commit: $(git rev-parse HEAD)"
+            echo "- Public www.noetfield.com production pin: untouched"
+            echo "- Internal intake requires COMPANY_OS_INTAKE_URL and COMPANY_OS_PROXY_TOKEN bindings before real submissions."
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "COMMERCIAL_PREVIEW_URL=$URL/commercial/"
