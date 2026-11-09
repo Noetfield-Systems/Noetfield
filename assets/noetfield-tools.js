@@ -49,6 +49,7 @@
     calculator: { href: "https://sourcea.app/calculator", label: "Full process-cost calculator" },
     tools: { href: "/tools/", label: "See the other checks" },
     acceptance: { href: "/tools/who-accepted/", label: "Check output acceptance" },
+    review: { href: "/tools/workflow-review/", label: "Discuss one consequential workflow" },
   };
 
   function compute(tool, form) {
@@ -79,9 +80,9 @@
         kind: "act",
         amount: money(cost) + " / year",
         headline: "This leak is large enough to name.",
-        body: "Give this as a goal in the open alpha. Plan, run, check, stop for your decision. Founder-operated. No fake customer logos.",
-        extra: "",
-        cta: "app",
+        body: "The time-cost estimate is material enough to validate. Check which steps are avoidable, who owns the workflow, and what a defensible acceptance test would be before commissioning a change.",
+        extra: "This is cost of time, not a forecast of savings.",
+        cta: "review",
       };
     }
 
@@ -154,7 +155,7 @@
           headline: "At least 20% of the bill is unattributed.",
           body: "Map the unexplained portion to named workflows and owners before expanding spend. This is attribution exposure, not proven waste or recoverable savings.",
           extra: "This model does not include purchases outside the entered invoice; never present unattributed spend as money that can be saved.",
-          cta: "readiness",
+          cta: "review",
         };
       }
       return {
@@ -228,7 +229,7 @@
           headline: "That is a chat log, not a process.",
           body: "Name who accepts, keep the reason, and let a check fail. One real goal in the open alpha is enough to try that.",
           extra: "Illustrative only: assumes every unsigned item requires the entered redo minutes. Measure actual rework before treating this as a cost.",
-          cta: "app",
+          cta: "review",
         };
       }
       return {
