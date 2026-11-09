@@ -1,0 +1,30 @@
+name: Operator tools economics and claims
+on:
+  pull_request:
+    paths:
+      - 'assets/noetfield-tools.js'
+      - 'tools/**'
+      - 'scripts/_write_tools_pages.py'
+      - 'tests/operator-tools-economics.test.cjs'
+      - '.github/workflows/operator-tools-economics.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/noetfield-tools.js'
+      - 'tools/**'
+      - 'tests/operator-tools-economics.test.cjs'
+jobs:
+  economics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check calculator JS syntax
+        run: node --check assets/noetfield-tools.js
+      - name: Run scenario regression tests
+        run: node tests/operator-tools-economics.test.cjs
+      - name: Check generator syntax
+        run: python3 -m py_compile scripts/_write_tools_pages.py
