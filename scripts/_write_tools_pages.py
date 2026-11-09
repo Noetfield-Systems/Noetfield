@@ -181,6 +181,7 @@ def hub() -> None:
       <a class="nf-button nf-button--secondary" href="/tools/meeting-tax/">Price a meeting</a>
       <a class="nf-button nf-button--secondary" href="/tools/embed/">Embed on your site</a>
       <a class="nf-button nf-button--secondary" href="/tools/workflow-review/">Discuss one workflow</a>
+      <a class="nf-button nf-button--secondary" href="/company-os/">Company OS · Commercial roles</a>
      </div>
     </div>
    </div>
