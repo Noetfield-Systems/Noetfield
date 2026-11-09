@@ -21,7 +21,7 @@ def test_engine_constants_match_the_operator_post() -> None:
     assert "var LOAD = 1.3;" in JS
     assert "var WEEKS = 48;" in JS
     assert "var HOBBY = 3000;" in JS
-    assert "Nothing is posted" in JS
+    assert "Illustrative inputs" in JS
 
 
 def test_quiet_leak_hobby_line() -> None:
@@ -169,6 +169,6 @@ def test_practical_field_output_is_wired() -> None:
     assert "data-result-blurb" in quiet
     assert "Copy for Slack" in quiet
     assert "nf-tools-print" in quiet
-    assert "nf-tools-embed-v1" in JS
+    assert "window.parent.postMessage" not in JS
     embed = (TOOLS / "embed" / "index.html").read_text(encoding="utf-8")
     assert "With a client" in embed
