@@ -1300,7 +1300,7 @@ async def intake_resend_webhook(request: Request) -> dict[str, object]:
 def _require_admin_secret(request: Request) -> None:
     admin_secret = _admin_dashboard_secret()
     if not admin_secret:
-        return
+        raise HTTPException(status_code=503, detail="Administrative authentication is not configured")
     auth = request.headers.get("X-Admin-Secret", "")
     if auth != admin_secret:
         raise HTTPException(status_code=403, detail="Invalid admin secret")
@@ -1433,12 +1433,8 @@ async def public_intake(
 
 @app.get("/api/intake/recent", tags=["intake"], include_in_schema=False)
 async def intake_recent(request: Request, limit: int = 20) -> dict[str, object]:
-    """Operations view — requires TELEGRAM_WEBHOOK_SECRET as X-Admin-Secret when configured."""
-    admin_secret = _secret(settings.telegram_webhook_secret)
-    if admin_secret:
-        auth = request.headers.get("X-Admin-Secret", "")
-        if auth != admin_secret:
-            raise HTTPException(status_code=403, detail="Invalid admin secret")
+    """Private customer-intake operations view — always requires the admin secret."""
+    _require_admin_secret(request)
     if not settings.public_intake_enabled:
         raise HTTPException(status_code=503, detail="Public intake API is disabled")
 
