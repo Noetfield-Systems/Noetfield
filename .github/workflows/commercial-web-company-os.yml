@@ -1,0 +1,43 @@
+name: Commercial entry website + Company OS proxy contracts
+on:
+  push:
+    branches: [feat/commercial-intake-agent-onboarding-20261109]
+    paths:
+      - "commercial/**"
+      - "assets/noetfield-commercial*"
+      - "functions/api/company-os-intake.js"
+      - "tests/unit/test_commercial_intake.mjs"
+      - ".github/workflows/commercial-web-company-os.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: JS syntax
+        run: |
+          node --check functions/api/company-os-intake.js
+          node --check assets/noetfield-commercial-intake-v1.js
+      - name: Intakes must fail closed / cannot create synthetic buyers
+        run: node --test tests/unit/test_commercial_intake.mjs
+      - name: Commercial site consistency
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text=Path("commercial/index.html").read_text()
+          assert 'id="nfCommercialForm"' in text
+          assert 'name="consent" required' in text
+          assert 'name="ai_consent"' in text
+          assert 'data-status' in text
+          assert 'No automatic purchase or commitment' in text
+          assert Path("assets/noetfield-commercial-v1.css").exists()
+          assert '/commercial/' in Path("index.html").read_text()
+          assert 'SINA_GITHUB' not in text
+          print("Public conversion and truthfulness contracts passed")
+          PY
