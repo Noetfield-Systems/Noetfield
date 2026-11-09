@@ -138,7 +138,7 @@
           cta: "tools",
         };
       }
-      if (named && share >= 0.8) {
+      if (named && share > 0.8) {
         return {
           kind: "leave",
           amount: amount,
@@ -148,7 +148,7 @@
           cta: "app",
         };
       }
-      if (1 - share >= 0.2) {
+      if (share <= 0.8) {
         return {
           kind: "act",
           amount: amount,
