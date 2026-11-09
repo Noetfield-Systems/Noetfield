@@ -5,6 +5,7 @@ on:
     paths:
       - "commercial/**"
       - "assets/noetfield-commercial*"
+      - "api/company-os-intake.js"
       - "functions/api/company-os-intake.js"
       - "governance/www-public-artifact-v1.json"
       - ".github/workflows/commercial-www-preview.yml"
