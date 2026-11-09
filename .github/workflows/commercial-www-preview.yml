@@ -41,7 +41,7 @@ jobs:
           ./scripts/build-www-pages-dist.sh
           test -s www-pages-dist/commercial/index.html
           test -s www-pages-dist/assets/noetfield-commercial-v1.css
-          test -s www-pages-dist/functions/api/company-os-intake.js
+          test -s functions/api/company-os-intake.js
       - name: Publish non-production Cloudflare Pages preview
         env:
           CLOUDFLARE_ACCOUNT_ID: "0d0b967b77e2e5535455d39ff3dae72c"
