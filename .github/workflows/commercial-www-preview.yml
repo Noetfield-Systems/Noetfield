@@ -8,6 +8,7 @@ on:
       - "api/company-os-intake.js"
       - "functions/api/company-os-intake.js"
       - "governance/www-public-artifact-v1.json"
+      - "tests/unit/test_commercial_intake.mjs"
       - ".github/workflows/commercial-www-preview.yml"
   workflow_dispatch:
 permissions:
