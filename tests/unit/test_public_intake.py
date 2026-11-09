@@ -30,6 +30,48 @@ def test_intake_health() -> None:
     asyncio.run(run())
 
 
+def test_private_intake_recent_fails_closed_and_requires_admin_secret() -> None:
+    async def run() -> None:
+        from unittest.mock import AsyncMock
+        from noetfield_governance import intake_repository
+
+        old_admin = governance_api.settings.admin_dashboard_secret
+        old_telegram = governance_api.settings.telegram_webhook_secret
+        old_recent = intake_repository.list_recent
+        intake_repository.list_recent = AsyncMock(return_value=[{
+            "intake_id":"INT-ABCDEF123456",
+            "contact_email":"private@example.test",
+            "message":"Sensitive customer enquiry",
+        }])
+        try:
+            transport = ASGITransport(app=app)
+            async with AsyncClient(transport=transport, base_url="http://test") as client:
+                governance_api.settings.admin_dashboard_secret = SecretStr("")
+                governance_api.settings.telegram_webhook_secret = SecretStr("")
+                unconfigured = await client.get("/api/intake/recent")
+                assert unconfigured.status_code == 503
+                governance_api.settings.admin_dashboard_secret = SecretStr("operations-test-secret")
+                unauthorized = await client.get("/api/intake/recent")
+                incorrect = await client.get(
+                    "/api/intake/recent", headers={"X-Admin-Secret":"wrong"}
+                )
+                authorized = await client.get(
+                    "/api/intake/recent",
+                    headers={"X-Admin-Secret":"operations-test-secret"},
+                )
+            assert unauthorized.status_code == 403
+            assert incorrect.status_code == 403
+            assert authorized.status_code == 200
+            assert authorized.json()["records"][0]["intake_id"] == "INT-ABCDEF123456"
+            intake_repository.list_recent.assert_awaited_once()
+        finally:
+            governance_api.settings.admin_dashboard_secret = old_admin
+            governance_api.settings.telegram_webhook_secret = old_telegram
+            intake_repository.list_recent = old_recent
+
+    asyncio.run(run())
+
+
 def test_intake_submit() -> None:
     async def run() -> None:
         from noetfield_governance import intake_repository
