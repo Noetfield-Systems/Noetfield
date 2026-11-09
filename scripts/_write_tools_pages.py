@@ -197,7 +197,7 @@ def hub() -> None:
      <a href="/tools/who-accepted/"><span>Acceptance</span><h3>Who accepted the last output?</h3><p>If you cannot name them, you have a chat log, not a process.</p></a>
      <a href="/tools/copilot-seats/"><span>Copilot</span><h3>Seats versus a decision trail</h3><p>Unused licenses and ungoverned use, counted separately on purpose.</p></a>
      <a href="/tools/board-five/"><span>Board</span><h3>Five yes/no questions</h3><p>Score 0 or 1: do not buy. The tool will say that out loud.</p></a>
-     <a href="/tools/embed/"><span>Advisors</span><h3>Put this on your own page</h3><p>One iframe. We do not track your visitors.</p></a>
+     <a href="/tools/embed/"><span>Advisors</span><h3>Put this on your own page</h3><p>One iframe. We do not require accounts or collect calculator inputs. Your own site may have separate analytics.</p></a>
     </div>
    </div>
   </section>
@@ -215,7 +215,7 @@ def hub() -> None:
      </article>
      <article>
       <h3>3. Read the leave-alone line out loud</h3>
-      <p>If it says stop, stop. Copy the Slack paragraph or print the page. Nothing is stored here.</p>
+      <p>If it says stop, stop. Copy the Slack paragraph or print the page. No account needed. Shared URLs include entered numbers; do not use confidential inputs.</p>
      </article>
     </div>
    </div>
@@ -224,7 +224,7 @@ def hub() -> None:
    <div class="nf-corp-wrap nf-tools-notes">
     <article>
      <h3 id="rules-title">How the math stays honest</h3>
-     <p>Loaded employer cost is 1.3× the hourly rate. Year is 48 working weeks. Errors, rework, and lateness are ignored on purpose. That keeps the number conservative, not theatrical.</p>
+     <p>Loaded employer cost is 1.3× the hourly rate. Year is 48 working weeks. Errors, rework, and lateness are excluded. Figures estimate time at cost, not cash savings, and the 1.3× and 48-week inputs are assumptions to validate for your team.</p>
     </article>
     <article>
      <h3>What this is not</h3>
@@ -290,7 +290,7 @@ def tool_page(
 def embed() -> None:
     head, foot = chrome(
         "Embed Noetfield tools — free for advisors",
-        "Put the one-minute checks on your own page. One iframe. No signup. We do not track your visitors.",
+        "Put the one-minute checks on your own page. One iframe. No signup. We do not require accounts or collect calculator inputs. Your own site may have separate analytics.",
         "https://www.noetfield.com/tools/embed/",
         "embed",
     )
@@ -336,7 +336,7 @@ def embed() -> None:
      </article>
      <article>
       <h3>On your site</h3>
-      <p>Paste one iframe. Keep a Noetfield link under the frame. We do not track your visitors.</p>
+      <p>Paste one iframe. Keep a Noetfield link under the frame. We do not require accounts or collect calculator inputs. Your own site may have separate analytics.</p>
      </article>
     </div>
     <p class="nf-corp-kicker">Live preview</p>
