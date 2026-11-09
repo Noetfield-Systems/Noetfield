@@ -102,7 +102,7 @@ RELATED = """
      <a href="/tools/ai-spend/"><span>05</span><h3>AI spend you cannot explain</h3><p>What share of the invoice maps to a named workflow.</p></a>
      <a href="/tools/shadow-ai/"><span>06</span><h3>Shadow AI</h3><p>Personal ChatGPT next to the licensed invoice.</p></a>
      <a href="/tools/who-accepted/"><span>07</span><h3>Who accepted this</h3><p>Chat log versus a named person and a replayable why.</p></a>
-     <a href="/tools/copilot-seats/"><span>08</span><h3>Copilot seats</h3><p>Unused licenses and ungoverned use, shown as two numbers.</p></a>
+     <a href="/tools/copilot-seats/"><span>08</span><h3>Copilot seats</h3><p>Unused seats and estimated time in the tool, kept distinct from acceptance.</p></a>
      <a href="/tools/board-five/"><span>09</span><h3>Five board questions</h3><p>Yes or no. The tool will tell you not to buy.</p></a>
      <a href="/tools/embed/"><span>10</span><h3>Embed for advisors</h3><p>One iframe. No tracking of your visitors.</p></a>
     </div>
@@ -138,15 +138,15 @@ def result_panel(kicker: str, show_amount: bool = True) -> str:
      <aside class="nf-tools-result" id="nf-tools-result" aria-live="polite">
       <p class="nf-tools-kicker">{kicker}</p>
       {amount}
-      <h2 data-result-headline>Fill the four numbers.</h2>
-      <p data-result-body>The honest answer updates as you type. Under the hobby line, it will tell you to leave it alone.</p>
+      <h2 data-result-headline>Review the result.</h2>
+      <p data-result-body>Illustrative estimate only. Update the inputs and validate assumptions before acting.</p>
       <p data-result-extra hidden></p>
       <p class="nf-tools-formula" data-result-formula hidden></p>
       <p class="nf-tools-warn" data-result-warn hidden></p>
       <textarea class="nf-tools-blurb" data-result-blurb readonly tabindex="-1" aria-hidden="true"></textarea>
       <div class="nf-tools-actions">
        <a class="nf-button nf-button--primary" data-result-cta href="/tools/">See the other checks</a>
-       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-share">Copy share link</button>
+       <button type="button" class="nf-button nf-button--secondary" id="nf-tools-share">Copy link (includes inputs)</button>
        <button type="button" class="nf-button nf-button--secondary" id="nf-tools-copy">Copy for Slack</button>
        <button type="button" class="nf-button nf-button--secondary" id="nf-tools-print">Print</button>
       </div>
@@ -175,11 +175,13 @@ def hub() -> None:
      <h1 id="tools-title">Most operators can name the process that annoys them. Almost none can name what it costs.</h1>
     </div>
     <div>
-     <p class="nf-corp-lead">Nine one-minute checks. Type hourly pay or annual salary. Copy a Slack paragraph or print the page. Conservative math. If the number is a hobby, the page says so instead of selling you a fix.</p>
+     <p class="nf-corp-lead">Nine one-minute checks. Type hourly pay or annual salary. Copy a Slack paragraph or print the page. Illustrative assumptions, not guaranteed savings. If the number is a hobby, the page says so instead of selling you a fix.</p>
      <div class="nf-corp-actions">
       <a class="nf-button nf-button--primary" href="/tools/quiet-leak/">Price one leak</a>
       <a class="nf-button nf-button--secondary" href="/tools/meeting-tax/">Price a meeting</a>
       <a class="nf-button nf-button--secondary" href="/tools/embed/">Embed on your site</a>
+      <a class="nf-button nf-button--secondary" href="/tools/workflow-review/">Discuss one workflow</a>
+      <a class="nf-button nf-button--secondary" href="/company-os/">Company OS · Commercial roles</a>
      </div>
     </div>
    </div>
@@ -197,7 +199,7 @@ def hub() -> None:
      <a href="/tools/who-accepted/"><span>Acceptance</span><h3>Who accepted the last output?</h3><p>If you cannot name them, you have a chat log, not a process.</p></a>
      <a href="/tools/copilot-seats/"><span>Copilot</span><h3>Seats versus a decision trail</h3><p>Unused licenses and ungoverned use, counted separately on purpose.</p></a>
      <a href="/tools/board-five/"><span>Board</span><h3>Five yes/no questions</h3><p>Score 0 or 1: do not buy. The tool will say that out loud.</p></a>
-     <a href="/tools/embed/"><span>Advisors</span><h3>Put this on your own page</h3><p>One iframe. We do not track your visitors.</p></a>
+     <a href="/tools/embed/"><span>Advisors</span><h3>Put this on your own page</h3><p>One iframe. We do not require accounts or collect calculator inputs. Your own site may have separate analytics.</p></a>
     </div>
    </div>
   </section>
@@ -215,7 +217,7 @@ def hub() -> None:
      </article>
      <article>
       <h3>3. Read the leave-alone line out loud</h3>
-      <p>If it says stop, stop. Copy the Slack paragraph or print the page. Nothing is stored here.</p>
+      <p>If it says stop, stop. Copy the Slack paragraph or print the page. No account needed. Shared URLs include entered numbers; do not use confidential inputs.</p>
      </article>
     </div>
    </div>
@@ -224,11 +226,11 @@ def hub() -> None:
    <div class="nf-corp-wrap nf-tools-notes">
     <article>
      <h3 id="rules-title">How the math stays honest</h3>
-     <p>Loaded employer cost is 1.3× the hourly rate. Year is 48 working weeks. Errors, rework, and lateness are ignored on purpose. That keeps the number conservative, not theatrical.</p>
+     <p>Loaded employer cost is 1.3× the hourly rate. Year is 48 working weeks. Errors, rework, and lateness are excluded. Figures estimate time at cost, not cash savings, and the 1.3× and 48-week inputs are assumptions to validate for your team.</p>
     </article>
     <article>
      <h3>What this is not</h3>
-     <p>Not a quote. Not certification. Not a claim of customers or revenue. The Noetfield app is a founder-operated alpha. A receipt is not certification.</p>
+     <p>Not a quote. Not certification. Not a claim of customers or revenue. The Noetfield app is a founder-operated alpha. A receipt is not certification. For a consequential workflow that merits scoped work, <a href="/tools/workflow-review/">start with an accountable owner and acceptance criteria</a>.</p>
     </article>
    </div>
   </section>
@@ -290,7 +292,7 @@ def tool_page(
 def embed() -> None:
     head, foot = chrome(
         "Embed Noetfield tools — free for advisors",
-        "Put the one-minute checks on your own page. One iframe. No signup. We do not track your visitors.",
+        "Put the one-minute checks on your own page. One iframe. No signup. We do not require accounts or collect calculator inputs. Your own site may have separate analytics.",
         "https://www.noetfield.com/tools/embed/",
         "embed",
     )
@@ -336,7 +338,7 @@ def embed() -> None:
      </article>
      <article>
       <h3>On your site</h3>
-      <p>Paste one iframe. Keep a Noetfield link under the frame. We do not track your visitors.</p>
+      <p>Paste one iframe. Keep a Noetfield link under the frame. We do not require accounts or collect calculator inputs. Your own site may have separate analytics.</p>
      </article>
     </div>
     <p class="nf-corp-kicker">Live preview</p>
@@ -383,7 +385,7 @@ def main() -> None:
     </div>
         """,
         """
-    <article><h3>People undercount touches by about half</h3><p>Count one real day before you estimate. The number you type from memory is usually the complaint, not the work.</p></article>
+    <article><h3>Measure touches instead of guessing</h3><p>Count one real day before you estimate. The number recalled from memory may not equal observed workflow volume.</p></article>
     <article><h3>The expensive leaks are the quiet ones</h3><p>Nobody files a ticket for the copy between two systems. Everyone accepted it years ago. That is why it survives.</p></article>
         """,
         "Annual cost = touches × (minutes ÷ 60) × rate × 1.3 × people × 48. Under $3,000, leave it alone.",
@@ -435,7 +437,7 @@ def main() -> None:
         "See how much of the AI invoice has no named workflow behind it.",
         "Invoice versus workflow",
         "Most teams can name the AI invoice. Almost none can name which workflow created it.",
-        "If spend is small and one team owns it, a spreadsheet is enough. If several teams are in it and you cannot attribute 20% of the bill, the leak is explanation, not tokens.",
+        "If spend is small and one team owns it, a spreadsheet is enough. If at least 20% of a material bill is unattributed to named workflows, establish ownership before increasing spend.",
         """
        <label>Monthly AI / Copilot spend (CAD)
         <input type="number" name="monthly" min="0" step="50" value="4000" inputmode="decimal" required />
@@ -463,7 +465,7 @@ def main() -> None:
     <article><h3>Licensed Copilot is not the whole bill</h3><p>People count seats and forget personal ChatGPT. That unofficial line is often larger, and it never shows up in the invoice meeting.</p></article>
     <article><h3>The draft that shipped with no name on it</h3><p>Nobody files a ticket for that. So it survives. That is the expensive leak.</p></article>
         """,
-        "Unattributed annual = monthly × (1 − attributed share) × 12. Leave it alone under $1,500 a month with one team.",
+        "Unattributed annual = monthly × (1 − attributed share) × 12. This is visibility exposure, not proven waste. Under $1,500/month with one team, try a spreadsheet first.",
     )
     tool_page(
         "who-accepted",
@@ -500,17 +502,17 @@ def main() -> None:
         """,
         """
     <article><h3>The builder must not grade itself</h3><p>If the same person or model that produced the draft also marks it done, you do not have a check. You have a hope.</p></article>
-    <article><h3>Redo is the bill you already pay</h3><p>Minutes spent rewriting “finished” drafts is the real cost. The tool prices that, not a fantasy saving.</p></article>
+    <article><h3>Unsigned-item rework is a scenario</h3><p>The estimate assumes each unsigned item receives the specified rewrite. Replace this assumption with observed rework before claiming savings.</p></article>
         """,
         "Unsigned volume × redo minutes × loaded rate × 48 weeks. Leave it alone at 90% signed with a replayable why.",
     )
     tool_page(
         "copilot-seats",
         "Copilot seats versus governed use — Noetfield",
-        "Unused Copilot licenses and ungoverned use, shown as two separate yearly costs.",
+        "Separate unused-seat license exposure from estimated labor time spent using Copilot. Neither proves a governance gap.",
         "Two numbers, not one",
         "You are paying for seats. You are not paying for a decision trail.",
-        "Unused licenses are an adoption problem. Ungoverned use is an explanation problem. Showing only one of those numbers is how a page stays dishonest.",
+        "Unused seats are a license-adoption question. Time spent using Copilot is not evidence of missing controls. Check output acceptance separately.",
         """
        <label>Licensed seats
         <input type="number" name="licensed" min="0" step="1" value="80" inputmode="decimal" required />
@@ -537,9 +539,9 @@ def main() -> None:
         """,
         """
     <article><h3>Unused seats under about 10</h3><p>That is adoption. Do not buy a control plane to fix a habit. Ask why people are not in the tool.</p></article>
-    <article><h3>Used seats with no named accepter</h3><p>That is the expensive line. Hours are being spent and nobody can replay why an output left the building.</p></article>
+    <article><h3>Used seats: verify acceptance separately</h3><p>Hours alone cannot prove a missing review trail. Check who accepted one consequential output and whether the decision reason is retrievable.</p></article>
         """,
-        "Unused waste = unused seats × annual seat cost. Ungoverned use = used seats × hours × loaded rate × 48 weeks.",
+        "Potential unused-seat exposure = unused seats × annual license cost. In-tool labor estimate = active seats × hours × loaded rate × 48 weeks. Neither figure proves waste or absent approval.",
     )
     tool_page(
         "meeting-tax",

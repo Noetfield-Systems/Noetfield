@@ -241,6 +241,20 @@
       "owner": "website-platform",
       "purpose": "Public health rewrite",
       "source": "api/health.js"
+    },
+    {
+      "path": "/company-os/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Commercial Company OS sales support and marketing",
+      "source": "company-os/index.html"
+    },
+    {
+      "path": "/tools/workflow-review/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Bounded one-workflow commercial review landing",
+      "source": "tools/workflow-review/index.html"
     }
   ],
   "known_missing_decisions": []

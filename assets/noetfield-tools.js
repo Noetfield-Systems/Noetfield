@@ -3,7 +3,7 @@
   var WEEKS = 48;
   var HOURS = 40;
   var HOBBY = 3000;
-  var NOTICE = "Nothing is posted. Nothing is stored.";
+  var NOTICE = "Illustrative inputs. A copied share link includes entered values; avoid confidential figures.";
 
   function money(n) {
     var v = Number.isFinite(n) && n > 0 ? n : 0;
@@ -48,6 +48,8 @@
     intake: { href: "https://www.noetfield.com/trust-brief/intake/", label: "Trust Brief intake" },
     calculator: { href: "https://sourcea.app/calculator", label: "Full process-cost calculator" },
     tools: { href: "/tools/", label: "See the other checks" },
+    acceptance: { href: "/tools/who-accepted/", label: "Check output acceptance" },
+    review: { href: "/tools/workflow-review/", label: "Discuss one consequential workflow" },
   };
 
   function compute(tool, form) {
@@ -60,7 +62,7 @@
           amount: money(cost) + " / year",
           headline: "Leave it alone.",
           body: "Under $3,000 a year, automating " + verb + " is a hobby, not an investment. The page says that out loud instead of selling you a fix.",
-          extra: "Count one real day before you trust the estimate. People undercount touches by about half.",
+          extra: "Count one real day before you trust the estimate. Validate the count with one observed working day.",
           cta: tool === "handoff" ? "tools" : "calculator",
         };
       }
@@ -78,9 +80,9 @@
         kind: "act",
         amount: money(cost) + " / year",
         headline: "This leak is large enough to name.",
-        body: "Give this as a goal in the open alpha. Plan, run, check, stop for your decision. Founder-operated. No fake customer logos.",
-        extra: "",
-        cta: "app",
+        body: "The time-cost estimate is material enough to validate. Check which steps are avoidable, who owns the workflow, and what a defensible acceptance test would be before commissioning a change.",
+        extra: "This is cost of time, not a forecast of savings.",
+        cta: "review",
       };
     }
 
@@ -136,24 +138,24 @@
           cta: "tools",
         };
       }
-      if (named && share >= 0.2) {
+      if (named && share > 0.8) {
         return {
           kind: "leave",
           amount: amount,
           headline: "You already have the bones.",
-          body: "Named workflow and named accepter. Do not buy a platform tour. Tighten the receipt, then stop shopping.",
+          body: "At least 80% of spend has named-workflow attribution and there is a named accepter. Improve the remaining mapping in your current process before considering new software.",
           extra: "",
           cta: "app",
         };
       }
-      if (share < 0.2) {
+      if (share <= 0.8) {
         return {
           kind: "act",
           amount: amount,
-          headline: "The leak is explanation, not tokens.",
-          body: "Under 20% attributed, nobody can defend the bill. Name one workflow, one owner, and who accepts output before it leaves.",
-          extra: "People count licensed Copilot and forget personal ChatGPT. That unofficial line is often larger.",
-          cta: "readiness",
+          headline: "At least 20% of the bill is unattributed.",
+          body: "Map the unexplained portion to named workflows and owners before expanding spend. This is attribution exposure, not proven waste or recoverable savings.",
+          extra: "This model does not include purchases outside the entered invoice; never present unattributed spend as money that can be saved.",
+          cta: "review",
         };
       }
       return {
@@ -208,7 +210,7 @@
       var signed = Math.min(100, Math.max(0, num(form, "signed"))) / 100;
       var minutes = Math.max(0, num(form, "minutes"));
       var redo = deliverables * (1 - signed) * (minutes / 60) * hourly(form) * LOAD * WEEKS;
-      var amount = money(redo) + " / year of unsigned redo";
+      var amount = money(redo) + " / year modeled unsigned-item rework";
       var replay = sel(form, "replay") === "yes";
       if (signed >= 0.9 && replay) {
         return {
@@ -226,8 +228,8 @@
           amount: amount,
           headline: "That is a chat log, not a process.",
           body: "Name who accepts, keep the reason, and let a check fail. One real goal in the open alpha is enough to try that.",
-          extra: "The builder must not grade itself. If the model that wrote the draft also marks it done, you have a hope, not a check.",
-          cta: "app",
+          extra: "Illustrative only: assumes every unsigned item requires the entered redo minutes. Measure actual rework before treating this as a cost.",
+          cta: "review",
         };
       }
       return {
@@ -295,36 +297,37 @@
       var wage = hourly(form);
       var seat = Math.max(0, num(form, "seat"));
       var unused = Math.max(0, licensed - used);
-      var waste = unused * seat;
-      var ungoverned = used * hours * wage * LOAD * WEEKS;
-      var amount = money(waste) + " unused licenses · " + money(ungoverned) + " ungoverned use / year";
+      var licenseExposure = unused * seat;
+      var usageTimeCost = used * hours * wage * LOAD * WEEKS;
+      var amount = money(licenseExposure) + " unused-seat license exposure · " +
+        money(usageTimeCost) + " estimated in-tool labor / year";
       if (unused < 10 && licensed <= 20) {
         return {
           kind: "leave",
           amount: amount,
-          headline: "Fix adoption. Do not buy policy.",
-          body: "Unused seats under about 10 is not a governance purchase. Turn unused licenses off, or train the people who have them.",
-          extra: "Showing only the unused-license number is how a post stays dishonest. The used-seat line is usually larger.",
-          cta: "tools",
+          headline: "Start with seat adoption, not a control plane.",
+          body: "Review license renewals and enablement first. Usage hours do not establish waste, policy failure, or a missing decision trail.",
+          extra: "The second figure estimates payroll time while using the tool, not additional spend or savings.",
+          cta: "acceptance",
         };
       }
       if (used >= 10 && hours >= 2) {
         return {
-          kind: "act",
+          kind: "look",
           amount: amount,
-          headline: "You are paying for labor with no trail.",
-          body: "The used-seat line is the one that matters. Name the workflow, the owner, and who accepts output.",
-          extra: "",
-          cta: "brief",
+          headline: "You have usage. Now check acceptance separately.",
+          body: "A seat count cannot tell whether outputs were reviewed. Check who accepted the last consequential result and whether the reason can be replayed.",
+          extra: "Unused-seat exposure is only potentially avoidable if license terms permit cancellation or reassignment.",
+          cta: "acceptance",
         };
       }
       return {
         kind: "look",
         amount: amount,
-        headline: "Show both numbers to finance.",
-        body: "License waste is visible. Ungoverned use is usually larger and quieter. Do not let a seat-optimization slide hide the second number.",
-        extra: "",
-        cta: "readiness",
+        headline: "Separate license adoption from output assurance.",
+        body: "Validate last-week usage and license terms. To assess governance, inspect named sign-off and the decision evidence—not time in a sidebar.",
+        extra: "The estimated in-tool labor figure is neither ungoverned cost nor proven waste.",
+        cta: "acceptance",
       };
     }
 
@@ -556,18 +559,8 @@
       ") " +
       shareUrl(form);
     if (blurbEl) blurbEl.value = blurb;
-    if (window.parent !== window) {
-      window.parent.postMessage(
-        {
-          schema: "nf-tools-embed-v1",
-          tool: tool,
-          kind: result.kind,
-          amount: result.amount,
-          headline: result.headline,
-        },
-        "*"
-      );
-    }
+    // Do not post calculation amounts to third-party embedding pages.
+
   }
 
   function bootEmbedBlocks() {
