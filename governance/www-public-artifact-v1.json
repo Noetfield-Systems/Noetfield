@@ -19,7 +19,8 @@
     "proof/lab/case-009-run-receipt.json",
     "proof/noetfield.json",
     "research-packs/catalog.json",
-    "version.json"
+    "version.json",
+    "work-with-us/contribute/agent-intake.json"
   ],
   "build_generated_static_files": [
     "version.json"
@@ -45,6 +46,7 @@
     "assets/noetfield-chat.js",
     "assets/noetfield-console.css",
     "assets/noetfield-continuous-optimization-intelligence.css",
+    "assets/noetfield-contributor-apply.js",
     "assets/noetfield-cookie-consent.js",
     "assets/noetfield-corporate-v1.css",
     "assets/noetfield-deterministic-api-v1.css",
@@ -326,6 +328,8 @@
     "trust-ledger/verify/index.html",
     "trust/index.html",
     "version.json",
+    "work-with-us/contribute/agent-intake.json",
+    "work-with-us/contribute/index.html",
     "work-with-us/index.html",
     "workflows/index.html"
   ],
