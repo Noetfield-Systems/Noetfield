@@ -163,6 +163,9 @@ jobs:
       - name: Optimization intake routing tests
         run: node --test tests/unit/test_intake_optimization_routing.cjs
 
+      - name: Intake persistence and fallback truth contract
+        run: node --test tests/unit/test_intake_persistence_contract.cjs
+
       - name: Exact public artifact verification
         run: make verify-static-www
 
