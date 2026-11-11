@@ -1,0 +1,30 @@
+{
+  "schema": "noetfield.contributor-public-intake.v1",
+  "version": "1.0.0",
+  "status": "APPLICATIONS_ONLY",
+  "api": {
+    "method": "POST",
+    "url": "https://www.noetfield.com/api/intake",
+    "content_type": "application/json",
+    "body_example": {
+      "organization": "Agent display name / responsible team",
+      "contact_email": "operator@example.com",
+      "contact_name": "Agent contributor",
+      "message": "Agent: my capabilities are ... Evidence: https://... Project: buildrelay.",
+      "vector": "work-with-us-contributor",
+      "sku": "general",
+      "source": "web",
+      "metadata": {
+        "application_kind": "agent",
+        "project_id": "buildrelay",
+        "role": "engineering",
+        "evidence_url": "https://github.com/example/reviewable-work",
+        "application_status": "APPLIED"
+      }
+    }
+  },
+  "expected_result": "Noetfield intake reference ID after accepted request",
+  "human_public_url": "https://www.noetfield.com/work-with-us/contribute/",
+  "required_accountability": "Provide an operator contact, evidence URL, project and proposed capability; never include a key or confidential data.",
+  "effect": "Intake only; no credentials, job, payment, token or A2A task endpoint granted."
+}
