@@ -89,6 +89,13 @@
       "source": "work-with-us/index.html"
     },
     {
+      "path": "/work-with-us/contribute/",
+      "expected_status": 200,
+      "owner": "website-platform",
+      "purpose": "Human and AI agent contributor applications; existing operations intake",
+      "source": "work-with-us/contribute/index.html"
+    },
+    {
       "path": "/governance/",
       "expected_status": 200,
       "owner": "website-platform",
