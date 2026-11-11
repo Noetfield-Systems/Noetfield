@@ -47,9 +47,15 @@ module.exports = async function handler(req, res) {
     console.error("platform_intake_forward_failed", err && err.message ? err.message : err);
   }
 
-  const intakeId = (platformData && platformData.intake_id) || randomIntakeId();
-
-  const deduped = Boolean(platformData && platformData.deduped);
+  // Only a Platform-acknowledged stored record is a durable intake.
+  // Telegram/email fallback is operational notification, NOT a Company OS
+  // workstream or a persisted record. In particular never mint a fake intake_id.
+  const platformPersisted = Boolean(
+    platformOk && platformData && typeof platformData.intake_id === "string" &&
+    /^INT-[A-Za-z0-9-]{6,80}$/.test(platformData.intake_id)
+  );
+  const intakeId = platformPersisted ? platformData.intake_id : randomIntakeId();
+  const deduped = Boolean(platformPersisted && platformData.deduped);
   let telegramResult = { ok: false, configured: telegramConfigured() };
   try {
     telegramResult = await sendIntakeTelegram(body, intakeId, { deduped: deduped });
@@ -88,35 +94,39 @@ module.exports = async function handler(req, res) {
     console.error("intake_email_archive_failed", err && err.message ? err.message : err);
   }
 
-  if (platformOk && platformData) {
+  if (platformPersisted) {
     return res.status(200).json({
       ...platformData,
       ...notifyExtras,
+      intake_persisted: true,
+      record_provenance: "platform-api-persisted",
+      submission_state: "PERSISTED",
       email_delivered: emailResult.ops,
       email_ack: emailResult.ack,
     });
   }
 
   if (telegramDelivered) {
-    return res.status(200).json({
-      intake_id: intakeId,
+    return res.status(202).json({
+      notification_reference: intakeId,
       request_id: body.request_id || null,
-      message:
-        intakeKind === "test"
-          ? "Test intake recorded — health receipt only"
-          : "Intake recorded — operations notified on Telegram",
+      message: "Operations notified on Telegram; database persistence not confirmed",
       ...notifyExtras,
+      intake_persisted: false,
+      submission_state: "NOTIFIED_NOT_PERSISTED",
       email_delivered: emailResult.ops,
       email_ack: emailResult.ack,
     });
   }
 
   if (emailResult.ops) {
-    return res.status(200).json({
-      intake_id: intakeId,
+    return res.status(202).json({
+      notification_reference: intakeId,
       request_id: body.request_id || null,
-      message: "Intake recorded — operations archive email sent",
+      message: "Operations notified by email; database persistence not confirmed",
       ...notifyExtras,
+      intake_persisted: false,
+      submission_state: "NOTIFIED_NOT_PERSISTED",
       telegram_delivered: false,
       email_delivered: true,
       email_ack: emailResult.ack,
@@ -130,7 +140,9 @@ module.exports = async function handler(req, res) {
   return res.status(502).json({
     detail:
       "Intake unavailable — platform record failed and ops notify did not deliver. Use /contact/ or email operations@noetfield.com with your Request ID.",
-    intake_id: intakeId,
+    notification_reference: intakeId,
+    intake_persisted: false,
+    submission_state: "NOT_DELIVERED",
     telegram_delivered: false,
     email_delivered: false,
     mailto: "mailto:" + CANONICAL + "?subject=" + encodeURIComponent(mailSubject) + "&body=" + encodeURIComponent(mailBody),
