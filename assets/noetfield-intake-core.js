@@ -138,6 +138,18 @@
       ((opts && opts.extraHtml) || "");
   }
 
+  function renderNotificationPending(container, data) {
+    if (!container) return;
+    var reference = data && data.notification_reference ? String(data.notification_reference) : "—";
+    container.hidden = false;
+    container.className = "nf-intake-async-status nf-intake-async-status--pending";
+    // Do not render any untrusted API field as HTML.
+    container.textContent =
+      "Operations was notified, but database registration is not yet confirmed. " +
+      "This is a notification reference, not an accepted application ID: " + reference +
+      ". Operations can reconcile the submission; no work or entitlement has been granted.";
+  }
+
   function renderError(container, err, opts) {
     if (!container) return;
     var subject = (opts && opts.mailSubject) || "Noetfield — Intake (API fallback)";
@@ -201,6 +213,12 @@
     return postIntake(payload)
       .then(function (data) {
         setButtonState(btn, "done", options.labels);
+        if (data && data.intake_persisted === false) {
+          renderNotificationPending(options.statusEl, data);
+          if (typeof options.onPending === "function") options.onPending(data);
+          // A notification is never an accepted application; do not fire onSuccess.
+          return data;
+        }
         renderSuccess(options.statusEl, data, options.successCopy);
         if (typeof options.onSuccess === "function") options.onSuccess(data);
         checkHealth().then(function (h) {
@@ -227,6 +245,7 @@
     checkHealth: checkHealth,
     submitAsync: submitAsync,
     renderSuccess: renderSuccess,
+    renderNotificationPending: renderNotificationPending,
     renderError: renderError,
     INTAKE_EMAIL: INTAKE_EMAIL,
   };
