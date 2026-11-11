@@ -1138,7 +1138,16 @@ async def business_os_intake_feed(
     allowed_vectors = {
         "ai-value-governance-os", "enterprise", "copilot-governance",
         "copilot", "bank-pilot", "partner-msb", "work-with-us", "web-intake",
-        "general", "trust-brief",
+        "general", "trust-brief", "work-with-us-contributor",
+    }
+    contributor_kinds = {"human", "agent", "organization"}
+    contributor_roles = {
+        "engineering", "qa", "design", "growth", "research",
+        "operations", "community", "partner",
+    }
+    contributor_projects = {
+        "noetfield", "venture-formation-lab", "buildworkflow", "misenorth",
+        "outboundos", "earnloop", "signalforge", "buildrelay", "localgift", "other",
     }
     allowed_skus = {"trust_brief", "copilot", "bank_pilot", "general"}
     allowed_tiers = {"A", "B", "C", "defer"}
@@ -1164,6 +1173,27 @@ async def business_os_intake_feed(
         raw_vector = str(record.get("vector") or "web-intake").strip().lower()
         sku = raw_sku if raw_sku in allowed_skus else "general"
         vector = raw_vector if raw_vector in allowed_vectors else "general"
+        # The public application fields are self-declared, not worker authority.
+        # Project, role and kind are allowlisted enums only: no PII or free text.
+        contributor: dict[str, str] | None = None
+        if vector == "work-with-us-contributor":
+            kind = metadata.get("application_kind")
+            project = metadata.get("project_id")
+            role = metadata.get("role")
+            if (
+                kind in contributor_kinds
+                and project in contributor_projects
+                and role in contributor_roles
+            ):
+                contributor = {
+                    "application_kind": kind,
+                    "project_id": project,
+                    "role": role,
+                }
+            else:
+                # Preserve the intake as a general enquiry; do not poison the
+                # synced consumer cursor with malformed contributor metadata.
+                vector = "general"
         qualification = record.get("qualification_json")
         safe_qualification: dict[str, object] | None = None
         if isinstance(qualification, dict):
@@ -1198,6 +1228,7 @@ async def business_os_intake_feed(
             "sku": sku,
             "vector": vector,
             "qualification": safe_qualification,
+            **({"contributor": contributor} if contributor is not None else {}),
         })
     last_record = records[-1] if records else None
     next_cursor = {
