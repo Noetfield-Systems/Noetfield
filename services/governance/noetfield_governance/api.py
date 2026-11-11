@@ -1181,9 +1181,9 @@ async def business_os_intake_feed(
             project = metadata.get("project_id")
             role = metadata.get("role")
             if (
-                kind in contributor_kinds
-                and project in contributor_projects
-                and role in contributor_roles
+                isinstance(kind, str) and kind in contributor_kinds
+                and isinstance(project, str) and project in contributor_projects
+                and isinstance(role, str) and role in contributor_roles
             ):
                 contributor = {
                     "application_kind": kind,
