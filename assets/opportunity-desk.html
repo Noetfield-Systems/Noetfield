@@ -41,6 +41,7 @@ button:disabled{opacity:.55;cursor:wait}.primary{background:#133c39;color:white}
 footer{font-size:12px;color:#76838b;margin-top:25px}
 @media(max-width:890px){.columns{grid-template-columns:1fr}.results{max-height:390px}.metrics{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:530px){.layout{padding:15px 12px 50px}.panel{padding:15px}.metrics{gap:7px}.metric{padding:12px}.detail-grid,.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{grid-template-columns:1fr}.headline{margin:26px 0 18px}header{padding-bottom:12px}}
+.remember-choice{display:flex;flex-direction:row;align-items:center;gap:10px;margin-top:17px;font-weight:550}.remember-choice input{width:18px;height:18px;flex:0 0 18px;accent-color:#236652}.auth-card p.small{margin-top:16px;font-size:11px}
 </style>
 </head>
 <body>
@@ -48,8 +49,8 @@ footer{font-size:12px;color:#76838b;margin-top:25px}
 <header><div class="brand"><span class="brand-mark">N</span><span>Noetfield <span style="color:#547b6c">Connect</span></span></div><a href="https://www.noetfield.com/connect/" target="_blank" rel="noopener noreferrer">Public opportunity portal ↗</a></header>
 <section class="headline"><div><div class="eyebrow">PRIVATE OPERATOR WORKSPACE</div><h1>Opportunity Desk.</h1><p class="sub">From inbound relationships to a clear owner and next action. Real source records. No automatic outreach, bookings or fictional conversions.</p></div><div class="top-actions"><button id="refresh" class="secondary" hidden>Refresh</button><button id="lock" class="ghost" hidden>Lock desk</button></div></section>
 <section id="unlock" class="auth-card card">
-<h2>Unlock your operations workspace</h2><p>Enter the existing Noetfield Platform administrator secret. The key is used only for authenticated requests in this browser tab; it is not saved in browser storage.</p>
-<form id="unlock-form"><label>Operator access key <input id="key" type="password" minlength="8" required autocomplete="off" placeholder="Platform admin secret"></label><button class="primary" type="submit">Open opportunity desk</button></form><p id="unlock-status" role="alert" class="notice"></p>
+<h2>Welcome back to Opportunity Desk.</h2><p>Use your existing Noetfield operator key once. Choose <strong>Remember this device</strong> to stay signed in for up to 7 days. The key is never saved in the browser.</p>
+<form id="unlock-form"><label>Operator access key <input id="key" name="operator_key" type="password" minlength="8" required autocomplete="off" placeholder="Platform admin secret"></label><label class="remember-choice"><input id="remember-device" type="checkbox" checked><span>Remember this device for 7 days</span></label><button class="primary" type="submit">Open opportunity desk</button></form><p id="unlock-status" role="alert" class="notice"></p><p class="small">Your secure session is saved as an HttpOnly cookie. Google sign-in is not connected; this option does not upload your administrator secret to Google Password Manager.</p>
 </section>
 <main id="workspace" hidden>
 <div class="metrics"><div class="metric"><strong id="count">—</strong><span>Recent Connect opportunities</span></div><div class="metric"><strong id="open-count">—</strong><span>Open / in progress</span></div><div class="metric"><strong id="needs-owner">—</strong><span>Needs actual owner</span></div><div class="metric"><strong id="due-count">—</strong><span>Due / overdue</span></div></div>
@@ -78,18 +79,37 @@ footer{font-size:12px;color:#76838b;margin-top:25px}
 </div>
 <script>
 (()=>{"use strict";
-const $=id=>document.getElementById(id), state={key:"",rows:[],selected:null,busy:false,offset:0,total:0,graph:null};
+const $=id=>document.getElementById(id), state={csrf:"",rows:[],selected:null,busy:false,offset:0,total:0,graph:null};
 function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function text(id,value){$(id).textContent=String(value)}
 function date(v){if(!v)return"—";const d=new Date(v);return isNaN(+d)?String(v):d.toLocaleString("en-CA",{dateStyle:"medium",timeStyle:"short"})}
 function goodUrl(raw){try{const u=new URL(raw);return u.protocol==="https:"?u.href:""}catch{return""}}
 async function call(path,method="GET",payload=null){
-const response=await fetch(path,{method,cache:"no-store",credentials:"same-origin",headers:{"Accept":"application/json","X-Admin-Secret":state.key,...(payload?{"Content-Type":"application/json"}:{})},body:payload?JSON.stringify(payload):undefined});
+const response=await fetch(path,{method,cache:"no-store",credentials:"same-origin",headers:{"Accept":"application/json",...(method!=="GET"&&state.csrf?{"X-Desk-CSRF":state.csrf}:{}),...(payload?{"Content-Type":"application/json"}:{})},body:payload?JSON.stringify(payload):undefined});
 let result={};try{result=await response.json()}catch{}
 if(!response.ok)throw Error(result.detail||"HTTP "+response.status);return result
 }
-function lock(){state.key="";state.rows=[];state.selected=null;$("unlock").hidden=false;$("workspace").hidden=true;$("refresh").hidden=true;$("lock").hidden=true;$("key").value="";text("unlock-status","");$("key").focus()}
-async function load(){if(!state.key)return;const data=await call("/api/opportunities/desk/page?limit=100&offset="+state.offset);state.rows=data.items||[];state.total=Number(data.total||0);text("page-count",String(state.offset+1)+"–"+String(Math.min(state.offset+state.rows.length,state.total))+" of "+state.total);$("previous-page").disabled=state.offset===0;$("next-page").disabled=state.offset+100>=state.total;text("count",state.total);text("open-count",state.rows.filter(x=>!["WON","LOST","ARCHIVED"].includes(x.stage)).length);text("needs-owner",state.rows.filter(x=>!x.owner).length);text("due-count",state.rows.filter(x=>x.next_action_due&&x.next_action_due<=new Date().toISOString().slice(0,10)&&!["WON","LOST","ARCHIVED"].includes(x.stage)).length);draw()}
+function showWorkspace(){
+$("unlock").hidden=true;$("workspace").hidden=false;$("refresh").hidden=false;$("lock").hidden=false;
+$("key").value="";text("unlock-status","");
+}
+function lock(){
+state.csrf="";state.rows=[];state.selected=null;
+$("unlock").hidden=false;$("workspace").hidden=true;$("refresh").hidden=true;$("lock").hidden=true;
+$("key").value="";text("unlock-status","");$("key").focus();
+}
+async function signOut(){
+try{await call("/api/opportunities/desk/session","DELETE");lock()}
+catch(err){text("unlock-status","Sign out failed: "+err.message);alert("Could not end session. Please try again.")}
+}
+async function restoreSession(){
+try{
+const session=await call("/api/opportunities/desk/session");
+if(!session.authenticated)return;
+state.csrf=session.csrf;await load();showWorkspace();
+}catch(err){state.csrf="";text("unlock-status","Session expired or temporarily unavailable. Sign in again.")}
+}
+async function load(){if(!state.csrf)return;const data=await call("/api/opportunities/desk/page?limit=100&offset="+state.offset);state.rows=data.items||[];state.total=Number(data.total||0);text("page-count",String(state.offset+1)+"–"+String(Math.min(state.offset+state.rows.length,state.total))+" of "+state.total);$("previous-page").disabled=state.offset===0;$("next-page").disabled=state.offset+100>=state.total;text("count",state.total);text("open-count",state.rows.filter(x=>!["WON","LOST","ARCHIVED"].includes(x.stage)).length);text("needs-owner",state.rows.filter(x=>!x.owner).length);text("due-count",state.rows.filter(x=>x.next_action_due&&x.next_action_due<=new Date().toISOString().slice(0,10)&&!["WON","LOST","ARCHIVED"].includes(x.stage)).length);draw()}
 function draw(){const term=$("search").value.trim().toLowerCase(),stage=$("filter").value,venture=$("venture").value,due=$("due-filter").value,now=new Date().toISOString().slice(0,10);const matches=state.rows.filter(x=>(!stage||x.stage===stage)&&(!venture||x.initiative===venture)&&(!due||(due==="due"?Boolean(x.next_action_due&&x.next_action_due<=now):!x.next_action_due))&&(!term||[x.title,x.person,x.organization,x.email,x.initiative,x.opportunity_type].some(v=>String(v||"").toLowerCase().includes(term))));$("results").innerHTML=matches.length?matches.map(x=>'<button type="button" class="item '+(x.intake_id===state.selected?"active":"")+'" data-id="'+safe(x.intake_id)+'"><span class="item-head"><strong>'+safe(x.title||x.organization||"Untitled proposal")+'</strong><span class="pill">'+safe(x.stage)+'</span></span><p>'+safe(x.person||"Unknown contact")+' · '+safe(x.organization||"")+'</p><span class="item-head"><span class="small">'+safe(x.opportunity_label)+' · '+safe(x.initiative)+'</span><span class="pill '+(x.priority_score>=70?"warn":"")+'">Priority '+safe(x.priority_score)+'</span></span></button>').join(""):'<div class="empty">No matching real intake cases.</div>';
 $("results").querySelectorAll("[data-id]").forEach(el=>el.addEventListener("click",()=>{state.selected=el.dataset.id;draw();loadGraph(state.selected)}));
 const selected=state.rows.find(x=>x.intake_id===state.selected);
@@ -174,8 +194,19 @@ async function prepareInvitation(ev,x){
     text("invitation-status","Source record updated. The URL has not been sent.");
   }catch(err){text("invitation-status",err.message+"; refresh case revision.")}finally{state.busy=false}
 }
-$("unlock-form").addEventListener("submit",async e=>{e.preventDefault();state.key=$("key").value;try{await load();$("unlock").hidden=true;$("workspace").hidden=false;$("refresh").hidden=false;$("lock").hidden=false;$("key").value=""}catch(err){state.key="";text("unlock-status",err.message)}});
-$("lock").addEventListener("click",lock);$("refresh").addEventListener("click",()=>load().catch(err=>alert("Refresh failed: "+err.message)));
+$("unlock-form").addEventListener("submit",async e=>{
+e.preventDefault();const button=e.currentTarget.querySelector("button[type=submit]");button.disabled=true;
+text("unlock-status","Signing in securely…");
+try{
+const session=await call("/api/opportunities/desk/session","POST",{
+secret:$("key").value,remember:$("remember-device").checked
+});
+$("key").value="";state.csrf=session.csrf;
+await load();showWorkspace();
+}catch(err){state.csrf="";text("unlock-status",err.message)}
+finally{button.disabled=false}
+});
+$("lock").addEventListener("click",signOut);restoreSession();$("refresh").addEventListener("click",()=>load().catch(err=>alert("Refresh failed: "+err.message)));
 $("search").addEventListener("input",draw);$("filter").addEventListener("change",draw);$("venture").addEventListener("change",draw);$("due-filter").addEventListener("change",draw);
 $("previous-page").addEventListener("click",()=>{state.offset=Math.max(0,state.offset-100);state.selected=null;load().catch(err=>alert(err.message))});
 $("next-page").addEventListener("click",()=>{state.offset+=100;state.selected=null;load().catch(err=>alert(err.message))});

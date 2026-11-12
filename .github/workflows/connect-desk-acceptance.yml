@@ -10,6 +10,8 @@ on:
       - 'assets/opportunity-desk.html'
       - 'tests/unit/test_connect_opportunity_desk.py'
       - 'tests/unit/test_connect_postgres_acceptance.py'
+      - 'tests/unit/test_connect_desk_session.py'
+      - 'services/governance/noetfield_governance/connect_desk_auth.py'
       - 'tests/unit/test_connect_relationship.py'
       - 'services/governance/noetfield_governance/connect_relationship.py'
       - 'connect/index.html'
@@ -26,6 +28,8 @@ on:
       - 'assets/opportunity-desk.html'
       - 'tests/unit/test_connect_opportunity_desk.py'
       - 'tests/unit/test_connect_postgres_acceptance.py'
+      - 'tests/unit/test_connect_desk_session.py'
+      - 'services/governance/noetfield_governance/connect_desk_auth.py'
       - 'tests/unit/test_connect_relationship.py'
       - 'services/governance/noetfield_governance/connect_relationship.py'
       - 'connect/index.html'
@@ -68,6 +72,8 @@ jobs:
         run: python -m pytest -q tests/unit/test_connect_opportunity_desk.py tests/unit/test_connect_relationship.py
       - name: Real PostgreSQL persistence and tenant-bound operator state
         run: python -m pytest -q tests/unit/test_connect_postgres_acceptance.py
+      - name: Verify browser sessions and scoped CSRF access
+        run: python -m pytest -q tests/unit/test_connect_desk_session.py
       - name: Check static operator shell for unsafe storage
         run: |
           python - <<'PY'
@@ -75,7 +81,8 @@ jobs:
           s=Path('assets/opportunity-desk.html').read_text()
           assert 'localStorage' not in s
           assert 'sessionStorage' not in s
-          assert 'X-Admin-Secret' in s
+          assert 'X-Desk-CSRF' in s
+          assert 'X-Admin-Secret' not in s
           assert 'setInterval' not in s
           assert 'relationship-graph' in s
           assert 'invitation-form' in s
