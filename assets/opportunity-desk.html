@@ -27,7 +27,7 @@ button:disabled{opacity:.55;cursor:wait}.primary{background:#133c39;color:white}
 .metric{background:#fff;border:1px solid #e0e8e8;border-radius:14px;padding:17px}
 .metric strong{font-size:27px;display:block;font-weight:650;letter-spacing:-1px}.metric span{color:#61727b;font-size:12px}
 .columns{display:grid;grid-template-columns:minmax(330px,.95fr) minmax(420px,1.28fr);gap:18px;align-items:start}
-.panel{padding:20px}.toolbar{display:grid;grid-template-columns:1fr minmax(128px,.45fr);gap:9px;margin:16px 0}
+.panel{padding:20px}.toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:16px 0}
 .results{max-height:72vh;overflow:auto;display:grid;gap:7px;align-content:start}
 .item{padding:15px;border:1px solid #e0e7e8;border-radius:12px;text-align:left;background:#fff;width:100%;display:grid;gap:6px}
 .item:hover,.item.active{border-color:#79a394;background:#f3faf6}
@@ -55,8 +55,21 @@ footer{font-size:12px;color:#76838b;margin-top:25px}
 <div class="metrics"><div class="metric"><strong id="count">—</strong><span>Recent Connect opportunities</span></div><div class="metric"><strong id="open-count">—</strong><span>Open / in progress</span></div><div class="metric"><strong id="needs-owner">—</strong><span>Needs actual owner</span></div><div class="metric"><strong id="due-count">—</strong><span>Due / overdue</span></div></div>
 <div class="columns">
 <section class="panel"><div class="eyebrow">INBOX · SOURCE LINKED</div><h2>Prioritize & qualify</h2><p class="small">Priority is a transparent suggestion, not an endorsement or qualified lead.</p>
-<div class="toolbar"><label>Search people, organizations, opportunities<input id="search" type="search" placeholder="Search real records"></label><label>Stage<select id="filter"><option value="">All stages</option><option value="NEW">New</option><option value="QUALIFYING">Qualifying</option><option value="ROUTED">Routed</option><option value="ENGAGED">Engaged</option><option value="NEGOTIATING">Negotiating</option><option value="PILOT">Pilot</option><option value="WON">Won</option><option value="LOST">Lost</option><option value="ARCHIVED">Archived</option></select></label></div>
-<div id="results" class="results" aria-live="polite"></div><p class="small">Shows the latest 100 canonical intake records, filtered to Connect. Older records may require source-side pagination.</p>
+<div class="toolbar"><label>Search people, organizations, opportunities<input id="search" type="search" placeholder="Search real records"></label><label>Stage<select id="filter"><option value="">All stages</option><option value="NEW">New</option><option value="QUALIFYING">Qualifying</option><option value="ROUTED">Routed</option><option value="ENGAGED">Engaged</option><option value="NEGOTIATING">Negotiating</option><option value="PILOT">Pilot</option><option value="WON">Won</option><option value="LOST">Lost</option><option value="ARCHIVED">Archived</option></select></label>
+<label>Venture<select id="venture"><option value="">All authorized initiatives</option>
+<option value="noetfield">Noetfield</option><option value="workforce">WorkforceOS</option>
+<option value="buildrelay">BuildRelay (independent)</option><option value="trustfield">TrustField (independent)</option>
+<option value="earnloop">Earnloop</option><option value="signalforge">SignalForge</option>
+<option value="buildworkflow">BuildWorkflow</option><option value="outboundos">OutboundOS</option>
+<option value="misenorth">MiseNorth</option><option value="interiormatch">InteriorMatch</option>
+<option value="other">Other</option></select></label>
+<label>Follow-up<select id="due-filter"><option value="">All next actions</option><option value="due">Due or overdue</option><option value="unscheduled">Missing next action date</option></select></label></div>
+<div id="results" class="results" aria-live="polite"></div>
+  <div class="top-actions" style="justify-content:space-between;margin-top:14px">
+  <button id="previous-page" class="ghost" type="button">← Newer</button>
+  <span id="page-count" class="small" aria-live="polite">Source-backed records</span>
+  <button id="next-page" class="ghost" type="button">Older →</button></div>
+  <p class="small">Each page is read directly from the canonical Platform PostgreSQL intake. Empty states are not simulated.</p>
 </section>
 <section class="panel"><div class="eyebrow">SOURCE-OWNED CASE</div><div id="detail" class="empty">Select a case to review its original proposal and record an actual next action.</div></section>
 </div>
@@ -65,24 +78,24 @@ footer{font-size:12px;color:#76838b;margin-top:25px}
 </div>
 <script>
 (()=>{"use strict";
-const $=id=>document.getElementById(id), state={key:"",rows:[],selected:null,busy:false};
+const $=id=>document.getElementById(id), state={key:"",rows:[],selected:null,busy:false,offset:0,total:0,graph:null};
 function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function text(id,value){$(id).textContent=String(value)}
 function date(v){if(!v)return"—";const d=new Date(v);return isNaN(+d)?String(v):d.toLocaleString("en-CA",{dateStyle:"medium",timeStyle:"short"})}
-function goodUrl(raw){try{const u=new URL(raw);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return""}}
+function goodUrl(raw){try{const u=new URL(raw);return u.protocol==="https:"?u.href:""}catch{return""}}
 async function call(path,method="GET",payload=null){
 const response=await fetch(path,{method,cache:"no-store",credentials:"same-origin",headers:{"Accept":"application/json","X-Admin-Secret":state.key,...(payload?{"Content-Type":"application/json"}:{})},body:payload?JSON.stringify(payload):undefined});
 let result={};try{result=await response.json()}catch{}
 if(!response.ok)throw Error(result.detail||"HTTP "+response.status);return result
 }
 function lock(){state.key="";state.rows=[];state.selected=null;$("unlock").hidden=false;$("workspace").hidden=true;$("refresh").hidden=true;$("lock").hidden=true;$("key").value="";text("unlock-status","");$("key").focus()}
-async function load(){if(!state.key)return;const data=await call("/api/opportunities/desk?limit=100");state.rows=data.opportunities||[];text("count",state.rows.length);text("open-count",state.rows.filter(x=>!["WON","LOST","ARCHIVED"].includes(x.stage)).length);text("needs-owner",state.rows.filter(x=>!x.owner).length);text("due-count",state.rows.filter(x=>x.next_action_due&&x.next_action_due<=new Date().toISOString().slice(0,10)&&!["WON","LOST","ARCHIVED"].includes(x.stage)).length);draw()}
-function draw(){const term=$("search").value.trim().toLowerCase(),stage=$("filter").value;const matches=state.rows.filter(x=>(!stage||x.stage===stage)&&(!term||[x.title,x.person,x.organization,x.email,x.initiative,x.opportunity_type].some(v=>String(v||"").toLowerCase().includes(term))));$("results").innerHTML=matches.length?matches.map(x=>'<button type="button" class="item '+(x.intake_id===state.selected?"active":"")+'" data-id="'+safe(x.intake_id)+'"><span class="item-head"><strong>'+safe(x.title||x.organization||"Untitled proposal")+'</strong><span class="pill">'+safe(x.stage)+'</span></span><p>'+safe(x.person||"Unknown contact")+' · '+safe(x.organization||"")+'</p><span class="item-head"><span class="small">'+safe(x.opportunity_label)+' · '+safe(x.initiative)+'</span><span class="pill '+(x.priority_score>=70?"warn":"")+'">Priority '+safe(x.priority_score)+'</span></span></button>').join(""):'<div class="empty">No matching real intake cases.</div>';
-$("results").querySelectorAll("[data-id]").forEach(el=>el.addEventListener("click",()=>{state.selected=el.dataset.id;draw()}));
+async function load(){if(!state.key)return;const data=await call("/api/opportunities/desk/page?limit=100&offset="+state.offset);state.rows=data.items||[];state.total=Number(data.total||0);text("page-count",String(state.offset+1)+"–"+String(Math.min(state.offset+state.rows.length,state.total))+" of "+state.total);$("previous-page").disabled=state.offset===0;$("next-page").disabled=state.offset+100>=state.total;text("count",state.total);text("open-count",state.rows.filter(x=>!["WON","LOST","ARCHIVED"].includes(x.stage)).length);text("needs-owner",state.rows.filter(x=>!x.owner).length);text("due-count",state.rows.filter(x=>x.next_action_due&&x.next_action_due<=new Date().toISOString().slice(0,10)&&!["WON","LOST","ARCHIVED"].includes(x.stage)).length);draw()}
+function draw(){const term=$("search").value.trim().toLowerCase(),stage=$("filter").value,venture=$("venture").value,due=$("due-filter").value,now=new Date().toISOString().slice(0,10);const matches=state.rows.filter(x=>(!stage||x.stage===stage)&&(!venture||x.initiative===venture)&&(!due||(due==="due"?Boolean(x.next_action_due&&x.next_action_due<=now):!x.next_action_due))&&(!term||[x.title,x.person,x.organization,x.email,x.initiative,x.opportunity_type].some(v=>String(v||"").toLowerCase().includes(term))));$("results").innerHTML=matches.length?matches.map(x=>'<button type="button" class="item '+(x.intake_id===state.selected?"active":"")+'" data-id="'+safe(x.intake_id)+'"><span class="item-head"><strong>'+safe(x.title||x.organization||"Untitled proposal")+'</strong><span class="pill">'+safe(x.stage)+'</span></span><p>'+safe(x.person||"Unknown contact")+' · '+safe(x.organization||"")+'</p><span class="item-head"><span class="small">'+safe(x.opportunity_label)+' · '+safe(x.initiative)+'</span><span class="pill '+(x.priority_score>=70?"warn":"")+'">Priority '+safe(x.priority_score)+'</span></span></button>').join(""):'<div class="empty">No matching real intake cases.</div>';
+$("results").querySelectorAll("[data-id]").forEach(el=>el.addEventListener("click",()=>{state.selected=el.dataset.id;draw();loadGraph(state.selected)}));
 const selected=state.rows.find(x=>x.intake_id===state.selected);
 $("detail").className=selected?"":"empty";
 $("detail").innerHTML=selected?renderDetail(selected):"Select a case to inspect and record your next action.";
-if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));}}
+if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));}}
 function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class="item-head"><h2>'+safe(x.title||"Opportunity")+'</h2><span class="pill">'+safe(x.stage)+'</span></div><p class="small">'+safe(x.intake_id)+' · Received '+safe(date(x.received_at))+' · Revision '+safe(x.revision)+'</p>'+
 '<div class="detail-grid">'+[['Contact',x.person],['Email',x.email],['Organization',x.organization],['Source',x.source],['Initiative',x.initiative],['Opportunity type',x.opportunity_label],['Deadline',x.deadline],['Priority',x.priority_score+" / 100"]].map(([a,b])=>'<div class="detail-value"><b>'+safe(a.toUpperCase())+'</b>'+safe(b||"—")+'</div>').join("")+'</div>'+
 '<div class="section-label">ORIGINAL SUBMISSION</div><div class="proposal">'+safe(x.proposal||"No original message in source record")+'</div>'+
@@ -95,14 +108,77 @@ function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class=
 '<label>Due date<input name="due_date" type="date" value="'+safe(x.next_action_due||"")+'"></label>'+
 '<label>Operator note / outcome evidence<textarea name="note" maxlength="800" rows="3" placeholder="Specific evidence, unanswered questions, or reason for closure">'+safe(x.operator_note||"")+'</textarea></label>'+
 '<button id="save-button" class="primary" type="submit">Save source-backed case</button><span id="save-status" role="status" class="small"></span></form>'+
+
+'<div class="section-label">RECIPROCAL VALUE · SELF-REPORTED</div>'+
+'<div class="detail-grid"><div class="detail-value"><b>WHAT THEY OFFER</b>'+safe(x.offer||"Not supplied")+'</div><div class="detail-value"><b>WHAT THEY ASK</b>'+safe(x.ask||"Not supplied")+'</div>'+
+'<div class="detail-value"><b>ROLE</b>'+safe(x.participant_role||"Not stated")+'</div><div class="detail-value"><b>CONTACT CONSENT</b>'+(x.consent_contact?"Submitted yes":"No explicit v2 consent on this record")+'</div></div>'+
+'<div class="section-label">RELATIONSHIP GRAPH · SAME SUBMITTED EMAIL</div>'+
+'<div id="relationship-graph" class="proposal" style="max-height:none">Select this record to read its source-backed relationship history.</div>'+
+'<div class="section-label">OPERATOR ACTIVITY / HUMAN FOLLOW-UP</div>'+
+'<form id="activity-form" class="form-grid">'+
+'<label>Observed activity<select name="action">'+["qualification","research_note","interaction_observed","draft_prepared","followup_planned","intro_proposed","matching_proposed","human_feedback","external_source_reference","workpacket_proposed"].map(a=>'<option value="'+a+'">'+a.replaceAll("_"," ")+'</option>').join("")+'</select></label>'+
+'<label>Evidence URL (optional)<input type="url" name="evidence_url" placeholder="https://source.example/receipt"></label>'+
+'<label class="full">Actual observation or proposed next step<textarea name="body" required minlength="3" maxlength="2200" rows="3" placeholder="Describe what happened, or label your draft as proposed. No fake send, booking or collected cash."></textarea></label>'+
+'<button class="primary" type="submit">Record actual activity</button><span class="small" id="activity-status" role="status"></span></form>'+
+'<div class="section-label">SCOPED INVITATION · PREPARED, NOT SENT</div>'+
+'<form id="invitation-form" class="form-grid"><label>Scope<select name="scope">'+
+["introduction","collaboration","trial","specialist_review","partner"].map(a=>'<option value="'+a+'">'+a.replaceAll("_"," ")+'</option>').join("")+'</select></label>'+
+'<label class="full">Private invitation text<textarea name="message" required minlength="15" maxlength="1500" rows="3" placeholder="Precise scope, value for each party and next action."></textarea></label>'+
+'<button class="primary" type="submit">Prepare opt-in invitation</button><span class="small" id="invitation-status" role="status"></span></form>'+
+'<div id="invitation-link" class="small"></div>'+
+'<div class="section-label">ACTUAL ACTIVITY / INVITATION RESPONSES</div>'+
+'<div class="history">'+(x.interactions||[]).slice().reverse().map(a=>'<p><b>'+safe(a.kind)+'</b> · '+safe(date(a.created_at))+' · '+safe(a.state)+'<br>'+safe(a.body)+'</p>').join("")+
+(x.invitations||[]).slice().reverse().map(i=>'<p><b>'+safe(i.scope)+'</b> · '+safe(i.state)+' · '+safe(date(i.created_at))+' · '+safe(i.id)+'</p>').join("")+'</div>'+
 '<div class="section-label">CHANGE HISTORY</div>'+
 ((x.activity||[]).length?'<ol class="history">'+x.activity.slice().reverse().map(h=>'<li>'+safe(date(h.at))+' · '+safe(h.stage)+' · '+safe(h.owner||"Unassigned")+(h.note?" — "+safe(h.note):"")+'</li>').join("")+'</ol>':'<p class="small">No operator updates recorded yet.</p>')+
 '<hr class="sep"><p class="small">Recommended role: '+safe(x.suggested_owner_role)+'. No external outreach, calendar booking, Company OS dispatch, verification or money movement occurs by saving this case.</p>'}
 async function save(ev,x){ev.preventDefault();if(state.busy)return;state.busy=true;const button=$("save-button"),form=ev.currentTarget;button.disabled=true;text("save-status","Saving…");const fd=new FormData(form);const payload={expected_revision:Number(x.revision||0),stage:fd.get("stage"),owner:String(fd.get("owner")||"").trim(),next_action:String(fd.get("next_action")||"").trim(),due_date:fd.get("due_date")||null,note:String(fd.get("note")||"").trim()};
 try{await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id),"PATCH",payload);await load();text("save-status","")}catch(err){text("save-status",err.message+" · Refresh if this record was updated elsewhere.")}finally{state.busy=false;button.disabled=false}}
+
+async function loadGraph(intakeId){
+  const box=$("relationship-graph");if(!box)return;
+  box.textContent="Reading canonical relationship history…";
+  try{
+    const graph=await call("/api/opportunities/desk/"+encodeURIComponent(intakeId)+"/relationship");
+    if(state.selected!==intakeId||!$("relationship-graph"))return;
+    const opportunities=graph.nodes.filter(n=>n.type==="opportunity");
+    $("relationship-graph").innerHTML='<b>'+safe(graph.opportunity_count)+' source-recorded opportunities · '+safe(graph.ventures.join(", "))+'</b><p class="small">Exact voluntarily submitted email matches only. This is not a verified CRM identity merge or consent to share independent venture data.</p>'+
+      '<ol class="history">'+opportunities.map(n=>'<li>'+safe(n.venture)+' · '+safe(n.kind)+' · '+safe(n.label)+' · '+safe(n.stage)+'</li>').join("")+'</ol>'+
+      '<div class="section-label">RELATIONSHIP TIMELINE</div><ol class="history">'+graph.timeline.slice(0,35).map(e=>'<li>'+safe(date(e.at))+' · '+safe(e.kind)+' · '+safe(e.detail)+'</li>').join("")+'</ol>';
+  }catch(err){if($("relationship-graph"))$("relationship-graph").textContent="Relationship history unavailable: "+err.message}
+}
+async function submitActivity(ev,x){
+  ev.preventDefault();if(state.busy)return;state.busy=true;
+  const fd=new FormData(ev.currentTarget);
+  const payload={expected_revision:Number(x.revision||0),action:String(fd.get("action")),body:String(fd.get("body")||"").trim(),evidence_url:String(fd.get("evidence_url")||"").trim()};
+  text("activity-status","Recording…");
+  try{
+    await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/activity","POST",payload);
+    await load();if(state.selected===x.intake_id){draw();loadGraph(x.intake_id)}
+  }catch(err){text("activity-status",err.message+"; refresh case revision.")}finally{state.busy=false}
+}
+async function prepareInvitation(ev,x){
+  ev.preventDefault();if(state.busy)return;state.busy=true;
+  const fd=new FormData(ev.currentTarget);
+  const rand=crypto&&crypto.randomUUID?crypto.randomUUID().replaceAll("-",""):"req_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+  const payload={expected_revision:Number(x.revision||0),scope:String(fd.get("scope")),message:String(fd.get("message")||"").trim(),request_id:rand};
+  text("invitation-status","Preparing opt-in link…");
+  try{
+    const result=await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/invitations","POST",payload);
+    if(!result.created||!result.share_token)throw Error("No new token issued; do not claim invitation delivered.");
+    const url="https://www.noetfield.com/connect/respond/?case="+encodeURIComponent(x.intake_id)+"&inv="+encodeURIComponent(result.invitation_id)+"&token="+encodeURIComponent(result.share_token);
+    const el=$("invitation-link");el.textContent="Prepared link; NOT SENT. Copy and share only with the intended contact after appropriate consent: ";
+    const input=document.createElement("input");input.value=url;input.readOnly=true;input.setAttribute("aria-label","Private opt-in link");input.style.width="100%";el.appendChild(input);
+    const copy=document.createElement("button");copy.type="button";copy.className="secondary";copy.textContent="Copy private invitation link";copy.addEventListener("click",async()=>{await navigator.clipboard.writeText(url);copy.textContent="Copied. Not sent."});el.appendChild(copy);
+    text("invitation-status","Source record updated. The URL has not been sent.");
+    await load();if(state.selected===x.intake_id){draw();loadGraph(x.intake_id)}
+  }catch(err){text("invitation-status",err.message+"; refresh case revision.")}finally{state.busy=false}
+}
 $("unlock-form").addEventListener("submit",async e=>{e.preventDefault();state.key=$("key").value;try{await load();$("unlock").hidden=true;$("workspace").hidden=false;$("refresh").hidden=false;$("lock").hidden=false;$("key").value=""}catch(err){state.key="";text("unlock-status",err.message)}});
 $("lock").addEventListener("click",lock);$("refresh").addEventListener("click",()=>load().catch(err=>alert("Refresh failed: "+err.message)));
-$("search").addEventListener("input",draw);$("filter").addEventListener("change",draw);
+$("search").addEventListener("input",draw);$("filter").addEventListener("change",draw);$("venture").addEventListener("change",draw);$("due-filter").addEventListener("change",draw);
+$("previous-page").addEventListener("click",()=>{state.offset=Math.max(0,state.offset-100);state.selected=null;load().catch(err=>alert(err.message))});
+$("next-page").addEventListener("click",()=>{state.offset+=100;state.selected=null;load().catch(err=>alert(err.message))});
 })();
 </script>
 </body>
