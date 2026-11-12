@@ -20,6 +20,22 @@ async function request(url,opts={}){
   const shell=await desk.text();
   console.log(JSON.stringify({step:"private desk shell",http:desk.status,hasUI:shell.includes("Opportunity Desk.")}));
   requireTrue(desk.status===200&&shell.includes("Opportunity Desk."),"Production operator desk is not deployed");
+  requireTrue(shell.includes("Remember this device for 7 days"),
+    "New remember-device login is not visible in deployed HTML");
+  requireTrue(shell.includes("restoreSession()") && !shell.includes('"X-Admin-Secret":state.key'),
+    "Browser login still sends master secret on every request");
+  const existingSession=await request(platform+"/api/opportunities/desk/session");
+  const sessionBody=await existingSession.json().catch(()=>({}));
+  console.log(JSON.stringify({step:"browser session readback",http:existingSession.status,authenticated:sessionBody.authenticated}));
+  requireTrue(existingSession.status===200&&sessionBody.authenticated===false,
+    "New unauthenticated session endpoint is not live or incorrectly authenticates guests");
+  const invalidLogin=await request(platform+"/api/opportunities/desk/session",{
+    method:"POST",headers:{"Origin":platform,"Content-Type":"application/json"},
+    body:JSON.stringify({secret:"synthetic-incorrect-operator-key",remember:true})});
+  console.log(JSON.stringify({step:"invalid session login",http:invalidLogin.status,
+    hasCookie:invalidLogin.headers.has("set-cookie")}));
+  requireTrue(invalidLogin.status===403&&!invalidLogin.headers.has("set-cookie"),
+    "Wrong operator key created an authenticated session");
   const guard=await request(platform+"/api/opportunities/desk");
   console.log(JSON.stringify({step:"private desk access control",http:guard.status}));
   requireTrue([403,503].includes(guard.status),"Private opportunity data accessible without authorization");
