@@ -21,7 +21,7 @@ for (const field of ['intent','initiative','title','description','name','email',
 for (const category of ['partnership','growth','capital','people','events','business','other']) {
   assert.ok(page.includes('value="'+category+'"'), 'missing type '+category);
 }
-for (const initiative of ['portfolio','noetfield','workforce','buildrelay','sourcea','trustfield','other']) {
+for (const initiative of ['portfolio','noetfield','workforce','buildrelay','sourcea','trustfield','other','buildworkflow','outboundos','signalforge','earnloop','misenorth','interiormatch']) {
   assert.ok(page.includes('value="'+initiative+'"'), 'missing initiative '+initiative);
 }
 assert.match(page,/TrustField \/ independent venture/);
