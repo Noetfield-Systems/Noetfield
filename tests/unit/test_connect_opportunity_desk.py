@@ -43,6 +43,9 @@ def test_connect_projection_routes_and_no_fake_outcomes():
     assert result["cash_collected"] is None
     assert triage_connect_record({"metadata": {"form_id": "other"}}) is None
     assert triage_connect_record(sample("events"))["suggested_owner_role"] == "Partnerships owner"
+    synthetic = sample("business")
+    synthetic["metadata"]["intake_kind"] = "test"
+    assert triage_connect_record(synthetic) is None
 
 
 def test_connect_desk_requires_admin_and_filters_nonconnect():
