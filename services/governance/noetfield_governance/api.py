@@ -1143,7 +1143,7 @@ async def business_os_intake_feed(
     }
     # Public user metadata is self-declared; only small closed enums reach Company OS.
     connect_categories = {"partnership", "growth", "capital", "people", "events", "business", "other"}
-    connect_initiatives = {"portfolio", "noetfield", "workforce", "buildrelay", "sourcea", "trustfield", "other"}
+    connect_initiatives = {"portfolio", "noetfield", "workforce", "buildrelay", "sourcea", "trustfield", "other", "buildworkflow", "outboundos", "signalforge", "earnloop", "misenorth", "interiormatch"}
     connect_next_steps = {"async", "meeting", "intro", "collaborate"}
     connect_sources = {"linkedin", "email", "referral", "website", "event", "direct", "other"}
     contributor_kinds = {"human", "agent", "organization"}
