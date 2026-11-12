@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#132c2c">
+<title>Respond to a Noetfield collaboration invitation</title>
+<style>
+:root{font:16px/1.7 Inter,system-ui,-apple-system,Arial,sans-serif;color:#162d31;background:#eef3ee}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px}
+main{width:min(560px,100%);background:#fff;border:1px solid #d6e5d9;border-radius:22px;padding:clamp(20px,5vw,42px);box-shadow:0 22px 70px #193c2b10}
+a{color:#285c53}nav{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.brand{font-weight:800;font-size:22px}.brand span{color:#749980}
+.eyebrow{font-size:11px;letter-spacing:.14em;color:#638274;font-weight:750;margin:30px 0 5px}
+h1{font:500 clamp(30px,6vw,44px)/1.15 Georgia,serif;letter-spacing:-.03em;margin:10px 0 18px}
+p{color:#617574;font-size:14px}
+label{display:grid;font-size:13px;font-weight:650;margin:20px 0 14px;gap:8px}
+input{width:100%;min-height:48px;background:#fff;border:1px solid #b9cdc3;border-radius:9px;padding:12px;font:inherit}
+button{border:0;background:#1f4941;color:white;padding:13px 19px;border-radius:10px;font:650 14px inherit;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.decline{background:#e8f0ea;color:#385c51}
+.notice{padding:12px 15px;background:#edf6ed;border:1px solid #c8e0c8;border-radius:10px}
+.error{background:#fff2ee;border-color:#e0b7b0}
+small{color:#7b8d86;display:block;margin-top:20px}
+</style></head><body><main>
+<nav><a class="brand" href="/connect/">N<span>.</span> Noetfield Connect</a><a href="/privacy/">Privacy</a></nav>
+<div class="eyebrow">SCOPED COLLABORATION / PARTICIPANT RESPONSE</div>
+<h1>Respond to an opportunity.</h1>
+<p>This link represents a prepared invitation to consider a specific collaboration. It is not employment, an executed contract, a meeting booking, or permission for cross-venture disclosure.</p>
+<form id="respond-form">
+<label>Email used in your original submission
+<input type="email" name="email" autocomplete="email" required maxlength="254" placeholder="you@organization.com"></label>
+<div class="actions"><button type="submit" name="decision" value="accept">I'm interested</button><button class="decline" type="submit" name="decision" value="decline">Decline invitation</button></div>
+</form>
+<p id="status" role="status" aria-live="polite"></p>
+<small>Responses are stored against the original Noetfield Connect case. Possession of this private link does not independently verify mailbox ownership. A responsible human will confirm any actual assignment, introduction, scope, contract or scheduling.</small>
+</main><script>
+(()=>{"use strict";const params=new URLSearchParams(location.search);
+const values={intake_id:params.get("case")||"",invitation_id:params.get("inv")||"",token:params.get("token")||""};
+if(history.replaceState)history.replaceState(null,"","/connect/respond/");
+const form=document.getElementById("respond-form"),status=document.getElementById("status");
+let busy=false;form.addEventListener("submit",async e=>{
+e.preventDefault();if(busy)return;
+const submit=e.submitter;const decision=submit&&submit.value;
+if(!/^INT-[A-Za-z0-9-]{6,80}$/.test(values.intake_id)||!/^inv_[0-9a-f]{16}$/.test(values.invitation_id)||values.token.length<32){
+status.textContent="Invitation details are incomplete or invalid. Request a new invitation from the Noetfield team.";status.className="notice error";return}
+busy=true;form.querySelectorAll("button").forEach(b=>b.disabled=true);status.className="";status.textContent="Recording your response…";
+try{
+const response=await fetch("/api/connect/respond",{method:"POST",cache:"no-store",credentials:"omit",headers:{"Content-Type":"application/json"},body:JSON.stringify({...values,email:form.elements.email.value.trim(),decision})});
+const result=await response.json().catch(()=>({}));
+if(!response.ok||!result.received)throw Error(result.detail||"Response not confirmed");
+status.className="notice";status.textContent=decision==="accept"?"Your interest was recorded in the original case. A human owner must confirm any next step.":"Your decline was recorded. No collaboration has been assigned.";form.hidden=true;
+}catch(err){status.className="notice error";status.textContent="Response not recorded: "+err.message;form.querySelectorAll("button").forEach(b=>b.disabled=false)}finally{busy=false}
+});
+})();
+</script></body></html>
