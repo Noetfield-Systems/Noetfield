@@ -46,6 +46,9 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
         reasons.append("Deadline within 7 days or overdue")
     if days_left is not None and days_left < 0:
         reasons.append("Deadline has passed")
+    ops = meta.get("connect_ops") or {}
+    if not isinstance(ops, dict):
+        ops = {}
     return {
         "intake_id": record.get("intake_id"),
         "request_id": record.get("request_id"),
@@ -65,8 +68,15 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
         "suggested_next_action": action,
         "priority_score": min(100, score),
         "priority_reasons": reasons,
-        "stage": "NEW",
-        "assignment_status": "ADVISORY_ONLY",
+        "stage": ops.get("stage") or "NEW",
+        "owner": ops.get("owner") or None,
+        "next_action": ops.get("next_action") or None,
+        "next_action_due": ops.get("due_date") or None,
+        "operator_note": ops.get("note") or None,
+        "revision": ops.get("revision", 0),
+        "updated_at": ops.get("updated_at"),
+        "activity": ops.get("history") or [],
+        "assignment_status": "HUMAN_ASSIGNED" if ops.get("owner") else "ADVISORY_ONLY",
         "execution_status": "NOT_DISPATCHED",
         "verification_status": "NOT_VERIFIED",
         "outcome": None,
