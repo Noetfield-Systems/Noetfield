@@ -1,0 +1,28 @@
+name: Noetfield Connect production E2E
+
+on:
+  pull_request:
+    paths:
+      - "scripts/verify-connect-live.mjs"
+      - ".github/workflows/nf-connect-production-e2e.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/verify-connect-live.mjs"
+      - ".github/workflows/nf-connect-production-e2e.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-real-public-intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify public pages and live test-only Postgres round trip
+        run: node scripts/verify-connect-live.mjs
