@@ -144,7 +144,9 @@ def test_public_ui_shell_contains_no_private_records_or_keys():
             response = await client.get("/api/opportunities/desk/app")
         assert response.status_code == 200
         assert "Opportunity Desk." in response.text
-        assert "X-Admin-Secret" in response.text
+        assert "X-Desk-CSRF" in response.text
+        assert "X-Admin-Secret" not in response.text
+        assert "Remember this device for 7 days" in response.text
         assert "private@example.test" not in response.text
         assert "localStorage" not in response.text
     asyncio.run(run())
