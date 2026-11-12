@@ -238,6 +238,7 @@ class PostgresIntakeStore:
                     "note": note,
                 })
                 updated = {
+                    **existing,
                     "revision": version + 1, "updated_at": changed,
                     "stage": stage, "owner": owner,
                     "next_action": next_action,
@@ -253,6 +254,229 @@ class PostgresIntakeStore:
                     intake_id, json.dumps(updated),
                 )
                 return updated
+
+
+    async def list_connect_page(self, *, limit: int = 50, offset: int = 0) -> dict[str, Any]:
+        """Page source-owned Connect records, never copying them into a second CRM."""
+        await self.connect()
+        assert self._pool is not None
+        cap = max(1, min(int(limit), 100))
+        skip = max(0, min(int(offset), 10000))
+        predicate = """metadata->>'form_id'='nfConnectWizard'
+                       AND COALESCE(metadata->>'intake_kind','lead') <> 'test'"""
+        columns = """intake_id,created_at,request_id,organization,contact_name,
+                     contact_email,sku,vector,source,message,metadata,qualification_json,
+                     email_archive_status,email_archive_updated_at,email_archive_detail"""
+        async with self._pool.acquire() as connection:
+            total = await connection.fetchval(
+                "SELECT COUNT(*)::int FROM noetfield.public_intakes WHERE " + predicate
+            )
+            rows = await connection.fetch(
+                "SELECT " + columns + " FROM noetfield.public_intakes WHERE " +
+                predicate + " ORDER BY created_at DESC,intake_id DESC LIMIT $1 OFFSET $2",
+                cap, skip,
+            )
+        return {"records": [_row_to_dict(row) for row in rows],
+                "total": int(total or 0), "limit": cap, "offset": skip}
+
+    async def list_connect_by_intake(self, *, intake_id: str, limit: int = 50) -> list[dict[str, Any]]:
+        """Email-exact case clusters; no name-only identity merge or cross-company export.
+
+        The email is counterparty-reported, NOT proof of mailbox ownership. All
+        graph edges retain the actual intake source and venture-specific scope.
+        """
+        await self.connect()
+        assert self._pool is not None
+        columns = """p.intake_id,p.created_at,p.request_id,p.organization,p.contact_name,
+                     p.contact_email,p.sku,p.vector,p.source,p.message,p.metadata,
+                     p.qualification_json,p.email_archive_status,
+                     p.email_archive_updated_at,p.email_archive_detail"""
+        async with self._pool.acquire() as connection:
+            rows = await connection.fetch(
+                "SELECT " + columns + """ FROM noetfield.public_intakes p
+                JOIN noetfield.public_intakes target
+                  ON lower(p.contact_email)=lower(target.contact_email)
+                WHERE target.intake_id=$1
+                  AND target.metadata->>'form_id'='nfConnectWizard'
+                  AND p.metadata->>'form_id'='nfConnectWizard'
+                  AND COALESCE(p.metadata->>'intake_kind','lead')<>'test'
+                ORDER BY p.created_at DESC,p.intake_id DESC LIMIT $2""",
+                intake_id, max(1,min(int(limit),100)),
+            )
+        return [_row_to_dict(row) for row in rows]
+
+    async def append_connect_activity(
+        self, *, intake_id: str, expected_revision: int, action: str,
+        body: str, evidence_url: str = "", actor: str = "operator",
+    ) -> dict[str, Any] | None:
+        """Bounded, revision-protected evidence timeline in the canonical intake JSON.
+
+        This is an operator observation, not an email send, signed contract,
+        external meeting booking, workpacket execution, or verified money.
+        """
+        if action not in {
+            "qualification","research_note","interaction_observed","draft_prepared",
+            "followup_planned","intro_proposed","matching_proposed",
+            "human_feedback","external_source_reference","workpacket_proposed",
+        }:
+            raise ValueError("CONNECT_ACTIVITY_TYPE_INVALID")
+        if not isinstance(body,str) or not 3 <= len(body.strip()) <= 2200:
+            raise ValueError("CONNECT_ACTIVITY_BODY_INVALID")
+        if evidence_url and (not isinstance(evidence_url,str)
+                             or len(evidence_url)>700
+                             or not evidence_url.startswith("https://")
+                             or any(c.isspace() for c in evidence_url)):
+            raise ValueError("CONNECT_ACTIVITY_EVIDENCE_INVALID")
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as connection:
+            async with connection.transaction():
+                row=await connection.fetchrow(
+                    """SELECT qualification_json FROM noetfield.public_intakes
+                       WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
+                       FOR UPDATE""", intake_id)
+                if row is None:
+                    return None
+                base=row["qualification_json"] or {}
+                if isinstance(base,str):
+                    base=json.loads(base)
+                ops=dict(base.get("connect_ops") or {})
+                if int(ops.get("revision") or 0)!=expected_revision:
+                    raise ValueError("OPPORTUNITY_VERSION_CONFLICT")
+                event={
+                    "id":"act_"+uuid.uuid4().hex[:16],
+                    "kind":action,"body":body.strip(),
+                    "evidence_url":evidence_url,
+                    "actor":actor,"state":"SOURCE_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+                    "created_at":datetime.now(UTC).isoformat(),
+                }
+                ops["interactions"]=list(ops.get("interactions") or [])[-99:]+[event]
+                ops["revision"]=expected_revision+1
+                ops["updated_at"]=event["created_at"]
+                await connection.execute(
+                    """UPDATE noetfield.public_intakes SET qualification_json=jsonb_set(
+                        COALESCE(qualification_json,'{}'::jsonb),
+                        '{connect_ops}', $2::jsonb,true)
+                       WHERE intake_id=$1""",intake_id,json.dumps(ops),
+                )
+                return {"revision":ops["revision"],"interaction":event,
+                        "interactions_count":len(ops["interactions"])}
+
+    async def create_connect_invitation(
+        self, *, intake_id: str, expected_revision: int,
+        scope: str, message: str, request_id: str,
+    ) -> dict[str, Any] | None:
+        """Create a tokenized opt-in proposal; no outbound message is sent."""
+        if scope not in {"introduction","collaboration","trial","specialist_review","partner"}:
+            raise ValueError("INVITATION_SCOPE_INVALID")
+        if not isinstance(message,str) or not 15<=len(message.strip())<=1500:
+            raise ValueError("INVITATION_MESSAGE_INVALID")
+        if not isinstance(request_id,str) or not 16<=len(request_id)<=100 or not all(
+            c.isascii() and (c.isalnum() or c in "-_") for c in request_id
+        ):
+            raise ValueError("INVITATION_REQUEST_ID_INVALID")
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as connection:
+            async with connection.transaction():
+                row=await connection.fetchrow(
+                    """SELECT qualification_json,metadata FROM noetfield.public_intakes
+                       WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
+                       FOR UPDATE""",intake_id)
+                if row is None:
+                    return None
+                base=row["qualification_json"] or {}
+                if isinstance(base,str):base=json.loads(base)
+                ops=dict(base.get("connect_ops") or {})
+                old=list(ops.get("invitations") or [])
+                for invited in old:
+                    if invited.get("request_id")==request_id:
+                        return {"invitation_id":invited["id"],"state":invited["state"],
+                                "created":False,"share_token":None,
+                                "reason":"REPLAY_EXISTING_NO_TOKEN"}
+                if int(ops.get("revision") or 0)!=expected_revision:
+                    raise ValueError("OPPORTUNITY_VERSION_CONFLICT")
+                if len(old)>=12:
+                    raise ValueError("INVITATION_LIMIT_REACHED")
+                token=__import__("secrets").token_urlsafe(32)
+                invitation_id="inv_"+uuid.uuid4().hex[:16]
+                issued=datetime.now(UTC)
+                item={
+                    "id":invitation_id,"request_id":request_id,
+                    "scope":scope,"message":message.strip(),
+                    "token_hash":__import__("hashlib").sha256(token.encode()).hexdigest(),
+                    "state":"PREPARED_NOT_SENT",
+                    "created_at":issued.isoformat(),
+                    "expires_at":(issued+__import__("datetime").timedelta(days=14)).isoformat(),
+                    "responded_at":None,
+                }
+                ops["invitations"]=old+[item]
+                ops["revision"]=expected_revision+1
+                ops["updated_at"]=issued.isoformat()
+                await connection.execute(
+                    """UPDATE noetfield.public_intakes SET qualification_json=jsonb_set(
+                        COALESCE(qualification_json,'{}'::jsonb),
+                        '{connect_ops}', $2::jsonb,true)
+                       WHERE intake_id=$1""",intake_id,json.dumps(ops),
+                )
+                return {"invitation_id":invitation_id,"scope":scope,
+                        "state":"PREPARED_NOT_SENT","created":True,
+                        "share_token":token,"expires_at":item["expires_at"],
+                        "external_action_executed":False}
+
+    async def respond_connect_invitation(
+        self, *, intake_id: str, invitation_id: str,
+        token: str, email: str, decision: str,
+    ) -> dict[str, Any] | None:
+        """Bearer response from consenting person; not verified mailbox ownership."""
+        import hashlib
+        import hmac
+        if decision not in {"accept","decline"} or len(token)>200 or len(token)<32:
+            raise ValueError("INVITATION_RESPONSE_INVALID")
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as connection:
+            async with connection.transaction():
+                row=await connection.fetchrow(
+                    """SELECT contact_email,qualification_json FROM noetfield.public_intakes
+                       WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
+                       FOR UPDATE""",intake_id)
+                if row is None:return None
+                if not hmac.compare_digest((email or "").strip().casefold(),
+                                           row["contact_email"].strip().casefold()):
+                    raise ValueError("INVITATION_RECIPIENT_MISMATCH")
+                base=row["qualification_json"] or {}
+                if isinstance(base,str):base=json.loads(base)
+                ops=dict(base.get("connect_ops") or {})
+                invitations=list(ops.get("invitations") or [])
+                found=next((i for i in invitations if i.get("id")==invitation_id),None)
+                if found is None or not hmac.compare_digest(
+                    str(found.get("token_hash") or ""),
+                    hashlib.sha256(token.encode()).hexdigest()
+                ):
+                    raise ValueError("INVITATION_TOKEN_INVALID")
+                if datetime.fromisoformat(found["expires_at"])<=datetime.now(UTC):
+                    raise ValueError("INVITATION_EXPIRED")
+                target="ACCEPTED_BY_TOKEN_HOLDER" if decision=="accept" else "DECLINED_BY_TOKEN_HOLDER"
+                if found["state"] in {"ACCEPTED_BY_TOKEN_HOLDER","DECLINED_BY_TOKEN_HOLDER"}:
+                    if found["state"]!=target:raise ValueError("INVITATION_DECISION_CONFLICT")
+                    return {"state":target,"created":False,"identity_verified":False}
+                found["state"]=target
+                found["responded_at"]=datetime.now(UTC).isoformat()
+                ops["invitations"]=invitations
+                ops["revision"]=int(ops.get("revision") or 0)+1
+                ops["updated_at"]=found["responded_at"]
+                await connection.execute(
+                    """UPDATE noetfield.public_intakes SET qualification_json=jsonb_set(
+                        COALESCE(qualification_json,'{}'::jsonb),
+                        '{connect_ops}', $2::jsonb,true)
+                       WHERE intake_id=$1""",intake_id,json.dumps(ops),
+                )
+                return {"state":target,"created":True,
+                        "identity_verified":False,
+                        "external_action_executed":False,
+                        "confirmed_meeting":False,
+                        "scoped_authority_granted":False}
 
     async def count(self) -> int:
         await self.connect()

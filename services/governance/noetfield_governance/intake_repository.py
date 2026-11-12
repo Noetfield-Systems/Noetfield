@@ -217,6 +217,37 @@ async def update_connect_opportunity(
     )
 
 
+
+async def _connect_postgres() -> PostgresIntakeStore:
+    if _backend is None:
+        await init_intake_repository()
+    if not isinstance(_backend, PostgresIntakeStore):
+        raise RuntimeError("OPPORTUNITY_PERSISTENCE_UNAVAILABLE")
+    return _backend
+
+
+async def list_connect_page(*, limit: int = 50, offset: int = 0) -> dict[str, Any]:
+    return await (await _connect_postgres()).list_connect_page(limit=limit, offset=offset)
+
+
+async def list_connect_by_intake(*, intake_id: str, limit: int = 50) -> list[dict[str, Any]]:
+    return await (await _connect_postgres()).list_connect_by_intake(
+        intake_id=intake_id, limit=limit,
+    )
+
+
+async def append_connect_activity(**kwargs: Any) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).append_connect_activity(**kwargs)
+
+
+async def create_connect_invitation(**kwargs: Any) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).create_connect_invitation(**kwargs)
+
+
+async def respond_connect_invitation(**kwargs: Any) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).respond_connect_invitation(**kwargs)
+
+
 def intake_status_payload(record: IntakeRecord | dict[str, Any]) -> dict[str, object]:
     if isinstance(record, IntakeRecord):
         data = {
