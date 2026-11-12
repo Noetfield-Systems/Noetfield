@@ -46,7 +46,10 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
         reasons.append("Deadline within 7 days or overdue")
     if days_left is not None and days_left < 0:
         reasons.append("Deadline has passed")
-    ops = meta.get("connect_ops") or {}
+    # Operator state is stored in server-generated qualification_json, never in
+    # public visitor-controlled metadata. A visitor cannot pre-assign an owner.
+    qualification = record.get("qualification_json") or {}
+    ops = qualification.get("connect_ops") if isinstance(qualification, dict) else {}
     if not isinstance(ops, dict):
         ops = {}
     return {
