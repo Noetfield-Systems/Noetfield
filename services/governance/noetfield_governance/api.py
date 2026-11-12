@@ -1138,8 +1138,13 @@ async def business_os_intake_feed(
     allowed_vectors = {
         "ai-value-governance-os", "enterprise", "copilot-governance",
         "copilot", "bank-pilot", "partner-msb", "work-with-us", "web-intake",
-        "general", "trust-brief", "work-with-us-contributor",
+        "general", "trust-brief", "work-with-us-contributor", "external-opportunities",
     }
+    # Public user metadata is self-declared; only small closed enums reach Company OS.
+    connect_categories = {"partnership", "growth", "capital", "people", "events", "business", "other"}
+    connect_initiatives = {"portfolio", "noetfield", "workforce", "buildrelay", "sourcea", "trustfield", "other"}
+    connect_next_steps = {"async", "meeting", "intro", "collaborate"}
+    connect_sources = {"linkedin", "email", "referral", "website", "event", "direct", "other"}
     contributor_kinds = {"human", "agent", "organization"}
     contributor_roles = {
         "engineering", "qa", "design", "growth", "research",
@@ -1194,6 +1199,33 @@ async def business_os_intake_feed(
                 # Preserve the intake as a general enquiry; do not poison the
                 # synced consumer cursor with malformed contributor metadata.
                 vector = "general"
+        # Distinct from an enterprise sales intake: no implied buyer intent or assignment.
+        opportunity: dict[str, str] | None = None
+        if vector == "external-opportunities":
+            category = metadata.get("category")
+            initiative = metadata.get("initiative")
+            raw_next_step = metadata.get("next_step")
+            raw_source = metadata.get("lead_source")
+            if (
+                isinstance(category, str) and category in connect_categories
+                and isinstance(initiative, str) and initiative in connect_initiatives
+            ):
+                opportunity = {
+                    "category": category,
+                    "initiative": initiative,
+                    "requested_next_step": (
+                        raw_next_step if isinstance(raw_next_step, str)
+                        and raw_next_step in connect_next_steps else "async"
+                    ),
+                    "source_channel": (
+                        raw_source if isinstance(raw_source, str)
+                        and raw_source in connect_sources else "other"
+                    ),
+                }
+            else:
+                # Keep the canonical record, but do not create an agent-routing
+                # instruction based on unrecognized untrusted metadata.
+                vector = "general"
         qualification = record.get("qualification_json")
         safe_qualification: dict[str, object] | None = None
         if isinstance(qualification, dict):
@@ -1229,6 +1261,7 @@ async def business_os_intake_feed(
             "vector": vector,
             "qualification": safe_qualification,
             **({"contributor": contributor} if contributor is not None else {}),
+            **({"opportunity": opportunity} if opportunity is not None else {}),
         })
     last_record = records[-1] if records else None
     next_cursor = {
@@ -1245,7 +1278,7 @@ async def business_os_intake_feed(
         "next_cursor": next_cursor,
         "has_more": len(records) == cap,
         "page_size": len(records),
-        "data_scope": "intake_id/request_id, timestamp, product vector and deterministic qualification only; no customer names, contact details, organization names, message text or free-form metadata",
+        "data_scope": "intake_id/request_id, timestamp, product vector and bounded non-PII routing enums only; no names, contact details, organization names, message text or free-form metadata",
     }
 
 @app.get("/api/intake/health", tags=["intake"])
