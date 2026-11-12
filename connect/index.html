@@ -221,14 +221,14 @@ var route="Noetfield Connect — opportunity submission\n"+
 var btn=document.getElementById("submitBtn");
 submitting=true;btn.disabled=true;btn.textContent="Submitting…";status.hidden=false;status.className="status";status.textContent="Submitting your proposal securely…";
 core.postIntake({organization:val("org"),contact_email:val("email"),contact_name:val("name"),message:route,request_id:submissionId,sku:"general",vector:"external-opportunities",source:"web",metadata:{
-page:"/connect/",category:val("intent"),initiative:val("initiative"),proposal_title:val("title"),
+page:"/connect/",form_id:"nfConnectWizard",topic:val("intent"),category:val("intent"),initiative:val("initiative"),proposal_title:val("title"),
 proposal_url:val("url"),deadline:val("deadline"),next_step:val("nextStep"),lead_source:source,
 utm_campaign:safeTag(u.get("utm_campaign")||"unspecified"),intake_flow:"connect-wizard-v1"
 }}).then(function(r){
 if(r&&r.intake_persisted===false){
 status.className="status error";status.textContent="We received a notification, but have not yet confirmed that the request was saved. Please email operations@noetfield.com with your proposal for follow-up.";
 btn.textContent="Submit again";btn.disabled=false;return;}
-if(!r||(!r.intake_id&&!r.request_id)){
+if(!r||r.intake_persisted!==true||!r.intake_id){
 status.className="status error";status.textContent="The service returned no submission reference. Please contact operations@noetfield.com to confirm receipt.";
 btn.textContent="Submit again";btn.disabled=false;return;}
 status.className="status success";
