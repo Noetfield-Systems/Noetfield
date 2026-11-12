@@ -206,7 +206,7 @@ class PostgresIntakeStore:
     ) -> dict[str, Any] | None:
         """Update existing canonical intake metadata with a locked revision check.
 
-        No new CRM, database or table. Source records remain in public_intakes.
+        No new CRM, database or table. Operator state is stored in the\n        server-owned qualification_json column, never visitor metadata.
         Returns None for unknown/non-Connect IDs; raises ValueError for conflicts.
         """
         await self.connect()
@@ -214,16 +214,16 @@ class PostgresIntakeStore:
         async with self._pool.acquire() as connection:
             async with connection.transaction():
                 row = await connection.fetchrow(
-                    """SELECT intake_id, metadata FROM noetfield.public_intakes
+                    """SELECT intake_id, qualification_json FROM noetfield.public_intakes
                        WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
                        FOR UPDATE""", intake_id)
                 if row is None:
                     return None
-                meta = row["metadata"]
-                if isinstance(meta, str):
-                    meta = json.loads(meta)
-                meta = dict(meta or {})
-                existing = meta.get("connect_ops") or {}
+                qualification = row["qualification_json"]
+                if isinstance(qualification, str):
+                    qualification = json.loads(qualification)
+                qualification = dict(qualification or {})
+                existing = qualification.get("connect_ops") or {}
                 if not isinstance(existing, dict):
                     existing = {}
                 version = int(existing.get("revision") or 0)
@@ -246,7 +246,9 @@ class PostgresIntakeStore:
                 }
                 await connection.execute(
                     """UPDATE noetfield.public_intakes
-                       SET metadata=jsonb_set(metadata, '{connect_ops}', $2::jsonb, true)
+                       SET qualification_json=jsonb_set(
+                           coalesce(qualification_json, '{}'::jsonb),
+                           '{connect_ops}', $2::jsonb, true)
                        WHERE intake_id=$1""",
                     intake_id, json.dumps(updated),
                 )
