@@ -159,7 +159,19 @@ body.connect {margin:0;color:#232522;background:#f4f1eb;font-family:Inter,system
 <option value="other">Different initiative / not sure</option>
 </optgroup>
 </select></label>
-<p class="hint">Independent initiatives remain legally and operationally distinct. Selecting one helps us direct your proposal.</p>
+<label class="field">Your role in this opportunity
+<select name="participantRole" required>
+<option value="founder">Founder / cofounder</option>
+<option value="customer">Customer / buyer</option>
+<option value="partner">Strategic / channel partner</option>
+<option value="investor">Investor / connector</option>
+<option value="advisor">Advisor / specialist</option>
+<option value="human_contributor">Human collaborator</option>
+<option value="ai_operator">AI tool or agent operator</option>
+<option value="organizer">Event / program organizer</option>
+<option value="other">Other / multiple roles</option>
+</select></label>
+<p class="hint">A person may submit several distinct opportunities. Independent ventures remain separate; your submission does not authorize sharing your information between them.</p>
 <div class="actions"><span></span><button class="primary" type="button" data-next>Continue</button></div>
 </fieldset>
 <fieldset data-step="1" hidden>
@@ -167,6 +179,12 @@ body.connect {margin:0;color:#232522;background:#f4f1eb;font-family:Inter,system
 <label class="field">Proposal title<input name="title" maxlength="160" required placeholder="A clear one-line description"></label>
 <label class="field">Description & what you propose
 <textarea name="description" minlength="30" maxlength="3500" required placeholder="What is the opportunity, why does it fit, and what exactly are you asking us to do?"></textarea></label>
+<div class="cols">
+<label class="field">What can you offer? (optional)
+<textarea name="offering" maxlength="1200" style="min-height:82px" placeholder="Distribution, customers, funding, capabilities, time, introductions, products, or expertise"></textarea></label>
+<label class="field">What do you need from us? (optional)
+<textarea name="requesting" maxlength="1200" style="min-height:82px" placeholder="A referral, pilot, cofounder, investment conversation, paid project, or scoped AI execution"></textarea></label>
+</div>
 <div class="cols">
 <label class="field">Website / event / proposal link<input name="url" type="url" maxlength="700" placeholder="https://"></label>
 <label class="field">Relevant deadline, if any<input name="deadline" type="date"></label>
@@ -190,6 +208,7 @@ body.connect {margin:0;color:#232522;background:#f4f1eb;font-family:Inter,system
 <option value="collaborate">Explore collaboration / joining the team</option>
 </select></label>
 <div class="confirm">This is an opportunity submission, not an accepted agreement, guaranteed meeting, or confirmation of an award or commercial commitment. We will follow up where relevant.</div>
+<label class="field" style="font-size:12px;line-height:1.65;display:flex;align-items:start;gap:9px"><input name="contactConsent" type="checkbox" required style="width:17px;min-height:17px;flex:0 0 17px;margin:2px 0 0"> I agree that Noetfield may contact me about this submission. My information will not be shared with an independent venture or introduced to a third party without separate permission. <a href="/privacy/" target="_blank" rel="noopener noreferrer">Privacy</a></label>
 <div class="actions"><button class="back" type="button" data-back>Back</button><button class="primary" type="submit" id="submitBtn">Submit opportunity</button></div>
 </fieldset>
 <div id="status" class="status" role="status" aria-live="polite" hidden></div>
@@ -224,6 +243,9 @@ if(!core){status.hidden=false;status.className="status error";status.textContent
 var source=safeTag(u.get("source")||u.get("utm_source")||"direct");
 var route="Noetfield Connect — opportunity submission\n"+
 "Category: "+val("intent")+"\nInitiative: "+val("initiative")+
+"\nParticipant role (self-reported): "+val("participantRole")+
+"\nOffered value (self-reported): "+(val("offering")||"Not supplied")+
+"\nRequested value (self-reported): "+(val("requesting")||"Not supplied")+
 "\nProposal: "+val("title")+"\nDescription: "+val("description")+
 "\nLink: "+(val("url")||"Not supplied")+
 "\nDeadline: "+(val("deadline")||"Not specified")+
@@ -235,7 +257,9 @@ submitting=true;btn.disabled=true;btn.textContent="Submitting…";status.hidden=
 core.postIntake({organization:val("org"),contact_email:val("email"),contact_name:val("name"),message:route,request_id:submissionId,sku:"general",vector:"external-opportunities",source:"web",metadata:{
 page:"/connect/",form_id:"nfConnectWizard",topic:val("intent"),category:val("intent"),initiative:val("initiative"),proposal_title:val("title"),
 proposal_url:val("url"),deadline:val("deadline"),next_step:val("nextStep"),lead_source:source,
-utm_campaign:safeTag(u.get("utm_campaign")||"unspecified"),intake_flow:"connect-wizard-v1"
+participant_role:val("participantRole"),offering:val("offering"),requesting:val("requesting"),
+consent_contact:form.elements.namedItem("contactConsent").checked,
+utm_campaign:safeTag(u.get("utm_campaign")||"unspecified"),intake_flow:"connect-wizard-v2"
 }}).then(function(r){
 if(r&&r.intake_persisted===false){
 status.className="status error";status.textContent="We received a notification, but have not yet confirmed that the request was saved. Please email operations@noetfield.com with your proposal for follow-up.";
