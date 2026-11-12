@@ -85,6 +85,15 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
         "revision": ops.get("revision", 0),
         "updated_at": ops.get("updated_at"),
         "activity": ops.get("history") or [],
+        "interactions": ops.get("interactions") or [],
+        "invitations": [
+            {key: value for key, value in inv.items() if key != "token_hash"}
+            for inv in list(ops.get("invitations") or []) if isinstance(inv, dict)
+        ],
+        "offer": str(meta.get("offering") or "")[:1200],
+        "ask": str(meta.get("requesting") or "")[:1200],
+        "participant_role": str(meta.get("participant_role") or "")[:80],
+        "consent_contact": meta.get("consent_contact") is True,
         "assignment_status": "HUMAN_ASSIGNED" if ops.get("owner") else "ADVISORY_ONLY",
         "execution_status": "NOT_DISPATCHED",
         "verification_status": "NOT_VERIFIED",
