@@ -38,6 +38,7 @@ from noetfield_governance.public_chat_telemetry import (
 )
 from noetfield_governance import intake_repository, redis_runtime
 from noetfield_governance.opportunity_desk import triage_connect_record
+from noetfield_governance.connect_relationship import project_relationship
 from noetfield_governance.intake_notify import (
     intake_email_configured,
     notify_ops_inbox,
@@ -1564,6 +1565,180 @@ async def update_connect_opportunity(
         raise HTTPException(status_code=404, detail="OPPORTUNITY_NOT_FOUND")
     return {"intake_id": intake_id, "persisted": True, "state": updated,
             "independent_verification": False, "external_action_executed": False}
+
+
+
+# Connect extension uses canonical public_intakes, not a new relationship database.
+# Operator authorization is the existing Platform administrator guard.
+
+@app.get("/api/opportunities/desk/page", tags=["operations"], include_in_schema=False)
+async def connect_opportunity_page(
+    request: Request, limit: int = 50, offset: int = 0,
+) -> dict[str, object]:
+    _require_admin_secret(request)
+    if not settings.public_intake_enabled:
+        raise HTTPException(status_code=503, detail="Public intake API is disabled")
+    if not 0 <= offset <= 10000 or not 1 <= limit <= 100:
+        raise HTTPException(status_code=422, detail="INVALID_PAGE")
+    try:
+        page = await intake_repository.list_connect_page(limit=limit, offset=offset)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    items = [item for record in page["records"]
+             if (item := triage_connect_record(record)) is not None]
+    return {
+        "source": "canonical_platform_public_intakes",
+        "items": items, "total": page["total"],
+        "offset": page["offset"], "limit": page["limit"],
+        "independently_verified_cash": None,
+        "execution_dispatch_from_desk": False,
+    }
+
+
+@app.get("/api/opportunities/desk/{intake_id}/relationship",
+         tags=["operations"], include_in_schema=False)
+async def connect_relationship_graph(intake_id: str, request: Request) -> dict[str, object]:
+    _require_admin_secret(request)
+    if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
+        raise HTTPException(status_code=422, detail="INVALID_INTAKE_ID")
+    try:
+        records = await intake_repository.list_connect_by_intake(
+            intake_id=intake_id, limit=100,
+        )
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    result = project_relationship(records, intake_id)
+    if not result:
+        raise HTTPException(status_code=404, detail="RELATIONSHIP_SOURCE_NOT_FOUND")
+    return result
+
+
+class ConnectActivityRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    expected_revision: int = Field(ge=0, le=1000000)
+    action: Literal[
+        "qualification", "research_note", "interaction_observed",
+        "draft_prepared", "followup_planned", "intro_proposed",
+        "matching_proposed", "human_feedback",
+        "external_source_reference", "workpacket_proposed",
+    ]
+    body: str = Field(min_length=3, max_length=2200)
+    evidence_url: str = Field(default="", max_length=700)
+
+
+def _connect_change_error(exc: ValueError) -> HTTPException:
+    detail = str(exc)
+    return HTTPException(
+        status_code=409 if detail in {
+            "OPPORTUNITY_VERSION_CONFLICT", "INVITATION_DECISION_CONFLICT"
+        } else 422,
+        detail=detail,
+    )
+
+
+@app.post("/api/opportunities/desk/{intake_id}/activity",
+          tags=["operations"], include_in_schema=False)
+async def connect_record_activity(
+    intake_id: str, body: ConnectActivityRequest, request: Request,
+) -> dict[str, object]:
+    _require_admin_secret(request)
+    if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
+        raise HTTPException(status_code=422, detail="INVALID_INTAKE_ID")
+    try:
+        result = await intake_repository.append_connect_activity(
+            intake_id=intake_id, expected_revision=body.expected_revision,
+            action=body.action, body=body.body, evidence_url=body.evidence_url,
+        )
+    except ValueError as exc:
+        raise _connect_change_error(exc) from exc
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    if result is None:
+        raise HTTPException(status_code=404, detail="OPPORTUNITY_NOT_FOUND")
+    return {
+        "persisted": True, "source_intake_id": intake_id,
+        "state": result, "actual_external_action": False,
+        "independently_verified": False,
+    }
+
+
+class ConnectInvitationRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    expected_revision: int = Field(ge=0, le=1000000)
+    scope: Literal["introduction", "collaboration", "trial",
+                   "specialist_review", "partner"]
+    message: str = Field(min_length=15, max_length=1500)
+    request_id: str = Field(min_length=16, max_length=100)
+
+
+@app.post("/api/opportunities/desk/{intake_id}/invitations",
+          tags=["operations"], include_in_schema=False)
+async def connect_create_invitation(
+    intake_id: str, body: ConnectInvitationRequest, request: Request,
+) -> dict[str, object]:
+    """Prepare a one-time opt-in URL for a specific applicant; not sent."""
+    _require_admin_secret(request)
+    if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
+        raise HTTPException(status_code=422, detail="INVALID_INTAKE_ID")
+    try:
+        result = await intake_repository.create_connect_invitation(
+            intake_id=intake_id, expected_revision=body.expected_revision,
+            scope=body.scope, message=body.message,
+            request_id=body.request_id,
+        )
+    except ValueError as exc:
+        raise _connect_change_error(exc) from exc
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    if result is None:
+        raise HTTPException(status_code=404, detail="OPPORTUNITY_NOT_FOUND")
+    return {
+        "persisted": True, "source_intake_id": intake_id,
+        **result,
+        "sent": False, "accepted": False, "scoped_assignment": False,
+    }
+
+
+class ConnectInvitationResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    intake_id: str = Field(min_length=10, max_length=90)
+    invitation_id: str = Field(min_length=10, max_length=70)
+    token: str = Field(min_length=32, max_length=200)
+    email: str = Field(min_length=5, max_length=254)
+    decision: Literal["accept", "decline"]
+
+
+@app.post("/api/opportunities/invitations/respond",
+          tags=["opportunities"], include_in_schema=False)
+async def connect_respond_invitation(
+    body: ConnectInvitationResponse, request: Request,
+) -> dict[str, object]:
+    """Explicit token-holder response; never treats bearer proof as identity verification."""
+    if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", body.intake_id):
+        raise HTTPException(status_code=422, detail="INVALID_INTAKE_ID")
+    if not re.fullmatch(r"inv_[0-9a-f]{16}", body.invitation_id):
+        raise HTTPException(status_code=422, detail="INVALID_INVITATION_ID")
+    try:
+        result = await intake_repository.respond_connect_invitation(
+            intake_id=body.intake_id, invitation_id=body.invitation_id,
+            token=body.token, email=body.email, decision=body.decision,
+        )
+    except ValueError as exc:
+        # Do not expose the recipient address or token-match reason publicly.
+        if str(exc) == "INVITATION_DECISION_CONFLICT":
+            raise HTTPException(status_code=409, detail="RESPONSE_ALREADY_RECORDED") from exc
+        if str(exc) == "INVITATION_EXPIRED":
+            raise HTTPException(status_code=410, detail="INVITATION_EXPIRED") from exc
+        raise HTTPException(status_code=403, detail="INVITATION_INVALID") from exc
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail="RESPONSE_STORAGE_UNAVAILABLE") from exc
+    if result is None:
+        raise HTTPException(status_code=404, detail="INVITATION_NOT_FOUND")
+    return {
+        "received": True, **result,
+        "receipt_type": "SOURCE_STORED_TOKEN_HOLDER_RESPONSE",
+        "mailbox_ownership_verified": False,
+    }
 
 
 @app.get("/api/intake/recent", tags=["intake"], include_in_schema=False)
