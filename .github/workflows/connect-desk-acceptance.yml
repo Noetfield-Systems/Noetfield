@@ -10,7 +10,6 @@ on:
       - 'assets/opportunity-desk.html'
       - 'tests/unit/test_connect_opportunity_desk.py'
       - 'tests/unit/test_connect_postgres_acceptance.py'
-      - 'tests/unit/test_connect_postgres_acceptance.py'
       - '.github/workflows/connect-desk-acceptance.yml'
   push:
     branches: [main]
@@ -21,6 +20,7 @@ on:
       - 'services/governance/noetfield_governance/api.py'
       - 'assets/opportunity-desk.html'
       - 'tests/unit/test_connect_opportunity_desk.py'
+      - 'tests/unit/test_connect_postgres_acceptance.py'
       - '.github/workflows/connect-desk-acceptance.yml'
 
 permissions:
