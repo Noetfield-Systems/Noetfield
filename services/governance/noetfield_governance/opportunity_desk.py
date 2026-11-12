@@ -17,6 +17,9 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
     meta = record.get("metadata") or {}
     if not isinstance(meta, dict) or meta.get("form_id") != "nfConnectWizard":
         return None
+    # Synthetic smoke requests must never inflate real relationship pipeline metrics.
+    if meta.get("intake_kind") == "test":
+        return None
     kind = str(meta.get("topic") or meta.get("category") or "other").lower()
     if kind not in ROUTES:
         kind = "other"
