@@ -7,6 +7,7 @@ browser JavaScript or a second database. Browser 'remember' is opt-in.
 from __future__ import annotations
 
 import base64
+import binascii
 import hashlib
 import hmac
 import json
@@ -68,7 +69,7 @@ def validate_session(secret: str, token: str | None, *, now: int | None = None) 
             and isinstance(payload.get("nonce"), str)
             and len(payload["nonce"]) >= 30
         )
-    except (ValueError, TypeError, KeyError, AttributeError, UnicodeError):
+    except (ValueError, TypeError, KeyError, AttributeError, UnicodeError, binascii.Error):
         return False
 
 
