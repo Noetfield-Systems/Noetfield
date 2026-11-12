@@ -37,6 +37,16 @@ from noetfield_governance.public_chat_telemetry import (
     telemetry_stats,
 )
 from noetfield_governance import intake_repository, redis_runtime
+from noetfield_governance.connect_desk_auth import (
+    COOKIE_NAME as CONNECT_DESK_COOKIE,
+    LONG_SESSION_SECONDS as CONNECT_DESK_LONG_TTL,
+    check_origin as check_connect_desk_origin,
+    csrf_token as connect_desk_csrf,
+    issue_session as issue_connect_desk_session,
+    require_session as require_connect_desk_session,
+    validate_session as validate_connect_desk_session,
+)
+
 from noetfield_governance.opportunity_desk import triage_connect_record
 from noetfield_governance.connect_relationship import project_relationship
 from noetfield_governance.intake_notify import (
@@ -1497,10 +1507,80 @@ async def public_intake(
     )
 
 
+def _require_connect_desk_operator(request: Request) -> None:
+    """Authorize existing key-based operators OR scoped, CSRF-protected browser sessions."""
+    secret = _admin_dashboard_secret()
+    if not secret:
+        raise HTTPException(status_code=503, detail="Administrative authentication is not configured")
+    presented = request.headers.get("X-Admin-Secret", "")
+    if presented and hmac.compare_digest(presented, secret):
+        return
+    if not require_connect_desk_session(request, secret):
+        raise HTTPException(status_code=403, detail="Connect Desk operator session required")
+
+
+class ConnectDeskLoginRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    secret: str = Field(min_length=1, max_length=2048)
+    remember: bool = False
+
+
+@app.get("/api/opportunities/desk/session", tags=["operations"], include_in_schema=False)
+async def get_connect_desk_session(request: Request, response: Response) -> dict[str, object]:
+    response.headers["Cache-Control"] = "no-store"
+    secret = _admin_dashboard_secret()
+    token = request.cookies.get(CONNECT_DESK_COOKIE)
+    if not validate_connect_desk_session(secret, token):
+        return {"authenticated": False, "remember_available": True}
+    return {
+        "authenticated": True,
+        "csrf": connect_desk_csrf(secret, token),
+        "remember_available": True,
+    }
+
+
+@app.post("/api/opportunities/desk/session", tags=["operations"], include_in_schema=False)
+async def login_connect_desk_session(
+    request: Request, response: Response, body: ConnectDeskLoginRequest,
+) -> dict[str, object]:
+    check_connect_desk_origin(request)
+    secret = _admin_dashboard_secret()
+    if not secret:
+        raise HTTPException(status_code=503, detail="Administrative authentication is not configured")
+    # Reuse the existing Redis rate limit when configured; no new server or DB.
+    if redis_runtime.is_enabled():
+        try:
+            await redis_runtime.check_rate_limit(
+                "connect-desk-login:" + (request.client.host if request.client else "unknown"),
+                max_calls=8, window_sec=900,
+            )
+        except PermissionError as exc:
+            raise HTTPException(status_code=429, detail="LOGIN_RATE_LIMITED") from exc
+    if not hmac.compare_digest(body.secret, secret):
+        raise HTTPException(status_code=403, detail="Invalid operator access key")
+    token, csrf, expires_at = issue_connect_desk_session(secret, remember=body.remember)
+    response.set_cookie(
+        key=CONNECT_DESK_COOKIE, value=token,
+        secure=True, httponly=True, samesite="strict", path="/",
+        max_age=CONNECT_DESK_LONG_TTL if body.remember else None,
+    )
+    response.headers["Cache-Control"] = "no-store"
+    return {"authenticated": True, "csrf": csrf, "remembered": body.remember,
+            "expires_at": expires_at}
+
+
+@app.delete("/api/opportunities/desk/session", tags=["operations"], include_in_schema=False)
+async def logout_connect_desk_session(request: Request, response: Response) -> dict[str, bool]:
+    _require_connect_desk_operator(request)
+    response.delete_cookie(key=CONNECT_DESK_COOKIE, path="/", secure=True, httponly=True, samesite="strict")
+    response.headers["Cache-Control"] = "no-store"
+    return {"signed_out": True}
+
+
 @app.get("/api/opportunities/desk", tags=["operations"], include_in_schema=False)
 async def connect_opportunity_desk(request: Request, limit: int = 100) -> dict[str, object]:
     """Authenticated advisory triage of existing Connect intake; no duplicate CRM or dispatch."""
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     if not settings.public_intake_enabled:
         raise HTTPException(status_code=503, detail="Public intake API is disabled")
     records = await intake_repository.list_recent(limit=max(1, min(limit, 100)))
@@ -1538,7 +1618,7 @@ async def connect_opportunity_app() -> Response:
 async def update_connect_opportunity(
     intake_id: str, body: OpportunityUpdateRequest, request: Request,
 ) -> dict[str, object]:
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
         raise HTTPException(status_code=400, detail="INVALID_INTAKE_ID")
     if not settings.public_intake_enabled:
@@ -1575,7 +1655,7 @@ async def update_connect_opportunity(
 async def connect_opportunity_page(
     request: Request, limit: int = 50, offset: int = 0,
 ) -> dict[str, object]:
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     if not settings.public_intake_enabled:
         raise HTTPException(status_code=503, detail="Public intake API is disabled")
     if not 0 <= offset <= 10000 or not 1 <= limit <= 100:
@@ -1598,7 +1678,7 @@ async def connect_opportunity_page(
 @app.get("/api/opportunities/desk/{intake_id}/relationship",
          tags=["operations"], include_in_schema=False)
 async def connect_relationship_graph(intake_id: str, request: Request) -> dict[str, object]:
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
         raise HTTPException(status_code=422, detail="INVALID_INTAKE_ID")
     try:
@@ -1641,7 +1721,7 @@ def _connect_change_error(exc: ValueError) -> HTTPException:
 async def connect_record_activity(
     intake_id: str, body: ConnectActivityRequest, request: Request,
 ) -> dict[str, object]:
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
         raise HTTPException(status_code=422, detail="INVALID_INTAKE_ID")
     try:
@@ -1677,7 +1757,7 @@ async def connect_create_invitation(
     intake_id: str, body: ConnectInvitationRequest, request: Request,
 ) -> dict[str, object]:
     """Prepare a one-time opt-in URL for a specific applicant; not sent."""
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
         raise HTTPException(status_code=422, detail="INVALID_INTAKE_ID")
     try:
