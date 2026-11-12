@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Opportunities & Partnerships — Noetfield Systems</title>
+<meta name="description" content="Submit a partnership, startup ecosystem introduction, investment, distribution, event, award, speaking, or commercial proposal to Noetfield Systems." />
+<meta name="robots" content="index,follow" />
+<meta name="theme-color" content="#f3f0e9" />
+<link rel="canonical" href="https://www.noetfield.com/opportunities/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Noetfield" />
+<meta property="og:title" content="Explore an opportunity with Noetfield" />
+<meta property="og:description" content="Partnerships, investment, founder introductions, GTM distribution, events, and commercial proposals — one direct route to our team." />
+<meta property="og:url" content="https://www.noetfield.com/opportunities/" />
+<meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="nf-chat-api-base" content="https://platform.noetfield.com" />
+<link rel="icon" href="/noetfield-favicon-512.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
+<link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=5" />
+<script src="/assets/noetfield-intake-core.js?v=42" defer></script>
+<script src="/assets/noetfield-forms.js?v=42" defer></script>
+<script src="/assets/noetfield-shell.js?v=42" defer></script>
+<style>
+.nf-opp { --opp-ink:#252521; --opp-muted:#615f57; --opp-stroke:#dcd8cf; color:var(--opp-ink); }
+.nf-opp-inner { width:min(1120px,calc(100% - 40px)); margin:0 auto; }
+.nf-opp-hero { padding:clamp(50px,8vw,104px) 0 60px; border-bottom:1px solid var(--opp-stroke); background:radial-gradient(ellipse at 88% 12%,rgba(214,178,130,.24),transparent 45%); }
+.nf-opp-eyebrow { text-transform:uppercase; letter-spacing:.15em; font:500 12px/1.5 "DM Mono",monospace; color:#946b43; }
+.nf-opp-hero h1 { max-width:940px; font:400 clamp(42px,6.8vw,82px)/1.02 "Newsreader",serif; letter-spacing:-.035em; margin:20px 0; }
+.nf-opp-sub { max-width:700px; font:400 clamp(17px,2vw,21px)/1.6 "Inter",sans-serif; color:var(--opp-muted); }
+.nf-opp-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:29px; align-items:center; }
+.nf-opp-note { color:var(--opp-muted); font:400 13px/1.6 "Inter",sans-serif; }
+.nf-opp-section { padding:clamp(45px,6vw,76px) 0; }
+.nf-opp-section h2 { font:400 clamp(30px,4.5vw,48px)/1.12 "Newsreader",serif; margin:12px 0; }
+.nf-opp-section p { color:var(--opp-muted); }
+.nf-opp-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; margin-top:28px; }
+.nf-opp-card { border:1px solid var(--opp-stroke); border-radius:17px; padding:23px; background:rgba(255,255,255,.5); display:flex; flex-direction:column; gap:9px; color:inherit; text-decoration:none; transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease; }
+.nf-opp-card:hover,.nf-opp-card:focus-visible { transform:translateY(-2px); border-color:#ab9274; box-shadow:0 10px 32px rgba(60,46,29,.07); }
+.nf-opp-card__num { font:500 11px/1.5 "DM Mono",monospace; letter-spacing:.08em; color:#9a7750; }
+.nf-opp-card h3 { font:600 17px/1.35 "Inter",sans-serif; margin:0; }
+.nf-opp-card p { font:400 14px/1.6 "Inter",sans-serif; margin:0; }
+.nf-opp-flow { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-top:26px; }
+.nf-opp-flow div { border-top:1px solid var(--opp-stroke); padding-top:15px; }
+.nf-opp-flow strong { display:block; margin:0 0 6px; font:600 14px/1.45 "Inter",sans-serif; }
+.nf-opp-flow p { font:400 13px/1.6 "Inter",sans-serif; }
+.nf-opp-form-wrap { background:#ece8df; border-top:1px solid var(--opp-stroke); padding:clamp(45px,6vw,76px) 0; }
+.nf-opp-layout { display:grid; grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr); gap:clamp(24px,4vw,70px); align-items:start; }
+.nf-opp-side p { max-width:360px; font:400 15px/1.7 "Inter",sans-serif; }
+.nf-opp-form { background:#faf9f6; border:1px solid var(--opp-stroke); padding:clamp(18px,3.2vw,34px); border-radius:19px; box-shadow:0 16px 60px rgba(71,61,45,.06); }
+.nf-opp-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:17px; }
+.nf-opp-form label { display:flex; flex-direction:column; gap:8px; font:600 13px/1.4 "Inter",sans-serif; color:#34332e; margin:0 0 17px; }
+.nf-opp-form input,.nf-opp-form select,.nf-opp-form textarea { width:100%; box-sizing:border-box; background:#fff; border:1px solid #ccc8be; border-radius:9px; padding:13px 14px; color:#252521; font:400 14px/1.5 "Inter",sans-serif; min-height:47px; }
+.nf-opp-form textarea { min-height:130px; resize:vertical; }
+.nf-opp-form input:focus-visible,.nf-opp-form select:focus-visible,.nf-opp-form textarea:focus-visible { outline:2px solid #ad7950; outline-offset:2px; }
+.nf-opp-form small { font:400 12px/1.6 "Inter",sans-serif; color:var(--opp-muted); }
+.nf-opp-form button { margin-top:12px; }
+.nf-opp-footer { border-top:1px solid var(--opp-stroke); padding:26px 0; }
+.nf-opp-footer a { color:inherit; }
+@media(max-width:800px){.nf-opp-grid {grid-template-columns:repeat(2,minmax(0,1fr))}.nf-opp-layout {grid-template-columns:1fr}.nf-opp-form-grid {grid-template-columns:1fr}.nf-opp-flow {grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.nf-opp-grid,.nf-opp-flow {grid-template-columns:1fr}.nf-opp-hero {padding-top:48px}.nf-opp-inner {width:min(100% - 28px,1120px)}}
+@media(prefers-reduced-motion:reduce){.nf-opp-card {transition:none}}
+</style>
+</head>
+<body class="nf-corp nf-corp--inner nf-opp">
+<a class="nf-skip" href="#main">Skip to content</a>
+<header class="nf-corp-header">
+<div class="nf-corp-wrap nf-corp-navrow">
+<a class="nf-corp-brand" href="/"><span class="nf-corp-brand__mark" aria-hidden="true">N</span><span>Noetfield Systems <small>Inc.</small></span></a>
+<nav class="nf-corp-nav" aria-label="Primary navigation">
+<a href="/">Home</a><a href="/workflows/">Workflows</a><a href="/proof/">Proof</a><a href="/investors/">Investors</a><a href="/contact/">Contact</a>
+<a class="nf-corp-nav__cta" href="#submit">Submit an opportunity</a>
+</nav></div></header>
+<main id="main">
+<section class="nf-opp-hero"><div class="nf-opp-inner">
+<p class="nf-opp-eyebrow">Noetfield · Partnerships & opportunities</p>
+<h1>Good opportunities deserve a clear path in.</h1>
+<p class="nf-opp-sub">Building, investing, collaborating, introducing a potential customer, or proposing an event? Share the details directly with Noetfield. Our team reviews relevant proposals through one structured intake — no introductory calendar booking required.</p>
+<div class="nf-opp-actions"><a class="nf-button nf-button--primary" href="#submit">Submit an opportunity</a><a class="nf-button nf-button--secondary" href="/investors/">Explore Noetfield</a></div>
+</div></section>
+<section class="nf-opp-section" aria-labelledby="lanes-title"><div class="nf-opp-inner">
+<p class="nf-opp-eyebrow">Choose your opportunity</p><h2 id="lanes-title">Where could we work together?</h2>
+<p>We welcome focused, non-confidential proposals with a clear outcome and a responsible point of contact.</p>
+<div class="nf-opp-grid">
+<a class="nf-opp-card" href="#submit" data-opp-topic="strategic-partnership"><span class="nf-opp-card__num">01 / PARTNERSHIP</span><h3>Strategic partnerships</h3><p>Joint ventures, technical integrations, ecosystem relationships, and co-building opportunities.</p></a>
+<a class="nf-opp-card" href="#submit" data-opp-topic="sales-distribution"><span class="nf-opp-card__num">02 / GROWTH</span><h3>Sales & distribution</h3><p>Referrals, channel partnerships, affiliates, co-selling, customer introductions, and GTM proposals.</p></a>
+<a class="nf-opp-card" href="#submit" data-opp-topic="fundraising-investment"><span class="nf-opp-card__num">03 / CAPITAL</span><h3>Investment & capital</h3><p>Investor introductions, early-stage financing, capital partnerships, and relevant funding programs.</p></a>
+<a class="nf-opp-card" href="#submit" data-opp-topic="talent-advisors"><span class="nf-opp-card__num">04 / PEOPLE</span><h3>Founding team & advisors</h3><p>Co-founder conversations, specialist talent, strategic advisors, and human–AI workforce collaboration.</p></a>
+<a class="nf-opp-card" href="#submit" data-opp-topic="events-awards"><span class="nf-opp-card__num">05 / ECOSYSTEM</span><h3>Events, awards & media</h3><p>Conferences, speaking invitations, recognition programs, interviews, sponsorships, and community initiatives.</p></a>
+<a class="nf-opp-card" href="#submit" data-opp-topic="customer-pilot"><span class="nf-opp-card__num">06 / BUSINESS</span><h3>Customer & pilot proposals</h3><p>AI execution workflows, product pilots, implementation opportunities, and commercial customer requests.</p></a>
+</div>
+<div class="nf-opp-flow"><div><strong>01. Share the proposal</strong><p>Choose a category and explain the opportunity, relevant dates, links, and commercial terms.</p></div><div><strong>02. We assess fit</strong><p>Our operations intake captures your submission and routes it for review.</p></div><div><strong>03. Relevant next steps</strong><p>We follow up when there is a clear potential fit. No meeting is required to submit.</p></div></div>
+</div></section>
+<section class="nf-opp-form-wrap" id="submit" aria-labelledby="submit-title"><div class="nf-opp-inner nf-opp-layout">
+<div class="nf-opp-side"><p class="nf-opp-eyebrow">Direct intake</p><h2 id="submit-title">Tell us what you're proposing.</h2>
+<p>Please include what you offer, why Noetfield is a fit, the decision or action requested, any deadlines, and applicable fees or commitments. For awards and conferences, include organizers, selection criteria, participation terms, and total costs.</p>
+<p><strong>Non-confidential information only.</strong> For sensitive diligence, request an appropriate private channel after initial review.</p>
+</div>
+<form class="nf-opp-form" id="nfOpportunityForm" data-nf-intake-form data-intake-vector="external-opportunities" data-intake-sku="general" data-submit-label="Submit proposal" data-intake-headline="Opportunity received" data-intake-detail="Your proposal has been recorded. We'll review fit and follow up if there is a relevant next step." aria-label="Submit an opportunity">
+<div class="nf-opp-form-grid">
+<label>Your name<input type="text" name="name" required autocomplete="name" maxlength="140" placeholder="Full name" /></label>
+<label>Work email<input type="email" name="email" required autocomplete="email" maxlength="254" placeholder="you@organization.com" /></label>
+</div>
+<div class="nf-opp-form-grid">
+<label>Organization<input type="text" name="org" required autocomplete="organization" maxlength="180" placeholder="Company, fund, or event organizer" /></label>
+<label>Type of opportunity<select id="nfOpportunityTopic" name="topic" required>
+<option value="">Select a category</option>
+<option value="strategic-partnership">Strategic partnership / integration</option>
+<option value="sales-distribution">Sales / referral / affiliate / GTM</option>
+<option value="fundraising-investment">Investment / funding / investor introduction</option>
+<option value="talent-advisors">Co-founder / talent / advisory</option>
+<option value="events-awards">Conference / award / sponsorship / media</option>
+<option value="customer-pilot">Customer / pilot / implementation</option>
+<option value="other">Other opportunity</option>
+</select></label>
+</div>
+<label>Proposal or company link (optional)<input type="url" name="target_context" placeholder="https://" maxlength="600" /></label>
+<label>Opportunity details<textarea name="notes" required minlength="30" maxlength="4500" rows="7" placeholder="Describe the proposed collaboration, business value, what you need from us, expected terms or costs, and any relevant dates."></textarea></label>
+<p><small>Submitting does not create a partnership, endorsement, award acceptance, or spending commitment. We evaluate proposals independently.</small></p>
+<button type="submit" class="nf-button nf-button--primary">Submit proposal</button>
+<div data-nf-intake-status class="nf-intake-async-status" hidden aria-live="polite"></div>
+</form></div></section>
+</main>
+<footer class="nf-opp-footer"><div class="nf-opp-inner">
+<p><strong>Noetfield Systems Inc.</strong> · Vancouver, Canada · <a href="/privacy/">Privacy</a> · <a href="/contact/">General contact</a> · <a href="/">Company</a></p>
+</div></footer>
+<script>
+(function(){
+var select=document.getElementById("nfOpportunityTopic");
+var valid=["strategic-partnership","sales-distribution","fundraising-investment","talent-advisors","events-awards","customer-pilot","other"];
+try{var p=new URLSearchParams(location.search);var topic=p.get("type")||p.get("topic");if(valid.indexOf(topic)>=0)select.value=topic;}catch(e){}
+document.querySelectorAll("[data-opp-topic]").forEach(function(card){
+card.addEventListener("click",function(){var topic=card.getAttribute("data-opp-topic");if(valid.indexOf(topic)>=0)select.value=topic;});
+});
+})();
+</script>
+</body>
+</html>
