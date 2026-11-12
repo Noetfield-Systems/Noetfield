@@ -84,6 +84,7 @@ body.connect {margin:0;color:#232522;background:#f4f1eb;font-family:Inter,system
 @media(max-width:850px){.connect .wizard-grid{grid-template-columns:1fr}.connect .grid{grid-template-columns:repeat(2,1fr)}.connect .process{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.connect .wrap{width:calc(100% - 28px)}.connect .grid,.connect .cols,.connect .process{grid-template-columns:1fr}.connect .navlinks{gap:10px}.connect .navlinks a:first-child{display:none}.connect .steps span{font-size:10px}.connect .hero{padding:55px 0 40px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.connect .tile{transition:none}}
+html[lang="fa"] body.connect{font-family:Tahoma,"Segoe UI",Arial,sans-serif;direction:rtl}html[lang="fa"] .connect h1,html[lang="fa"] .connect h2,html[lang="fa"] .connect legend{font-family:Tahoma,"Segoe UI",Arial,sans-serif;letter-spacing:0;line-height:1.5}html[lang="fa"] .connect input[type="email"],html[lang="fa"] .connect input[type="url"]{direction:ltr;text-align:left}html[lang="fa"] .connect .eyebrow{text-transform:none;letter-spacing:0}html[lang="fa"] .connect .pillrow,html[lang="fa"] .connect .heroactions{direction:rtl}
 </style>
 </head>
 <body class="connect">
@@ -98,7 +99,7 @@ body.connect {margin:0;color:#232522;background:#f4f1eb;font-family:Inter,system
 <h1>Let's build what's next.</h1>
 <p class="lede">We're building AI-native business systems and ventures across execution, startup networks, GTM, market intelligence, and digital products. Bring a customer problem, partnership, introduction, investment opportunity, or expertise worth combining. One clear path in.</p>
 <div class="pillrow"><span class="pill">Strategic partnerships</span><span class="pill">Founders & advisors</span><span class="pill">GTM & sales</span><span class="pill">Investors</span><span class="pill">Events & awards</span></div>
-<div class="heroactions"><a class="primary" href="#apply">Share your opportunity</a><a class="secondary" href="/proof/">Explore our work</a><a class="secondary" href="https://workforce-web-production-2d15bf32.up.railway.app/opportunity-os/" lang="fa" hreflang="fa" rel="noopener noreferrer">پرتال فارسی فرصت‌ها ↗</a></div>
+<div class="heroactions"><a class="primary" href="#apply">Share your opportunity</a><a class="secondary" href="/proof/">Explore our work</a><a class="secondary" href="/connect/?lang=fa" lang="fa" hreflang="fa">نسخه فارسی ←</a></div>
 </div></section>
 <section class="examples"><div class="wrap">
 <p class="eyebrow">One door · different paths</p><h2>Whatever brings us together.</h2>
@@ -235,6 +236,80 @@ form.querySelectorAll("[data-back]").forEach(function(b){b.addEventListener("cli
 form.elements.namedItem("intent").addEventListener("change",function(){document.getElementById("eventHint").hidden=val("intent")!=="events"});
 document.querySelectorAll("[data-choose]").forEach(function(tile){tile.addEventListener("click",function(){form.elements.namedItem("intent").value=tile.getAttribute("data-choose");show(0)})});
 var u=new URLSearchParams(location.search);var pre=u.get("type")||u.get("intent");if(choices.indexOf(pre)>=0)form.elements.namedItem("intent").value=pre;
+
+var isFa=(u.get("lang")||"").toLowerCase()==="fa";
+function faText(selector,value){var el=document.querySelector(selector);if(el)el.textContent=value}
+function translateFa(){
+document.documentElement.lang="fa";document.documentElement.dir="rtl";
+document.title="ارتباط‌ها و فرصت‌های استارتاپی | Noetfield Connect";
+faText(".navlinks a:nth-child(1)","چه چیزی می‌سازیم");
+faText(".navlinks a:nth-child(2)","سرمایه‌گذاران");
+faText(".navlinks a:nth-child(3)","ثبت فرصت");
+faText(".hero .eyebrow","افراد · فرصت‌ها · اجرای واقعی");
+faText(".hero h1","از یک ارتباط، فرصت واقعی بسازیم.");
+faText(".hero .lede","Noetfield و کسب‌وکارهای مستقل مرتبط، سیستم‌های هوشمند و محصولات واقعی می‌سازند. نیاز مشتری، معرفی، همکاری، پیشنهاد سرمایه‌گذاری یا مهارت خود را از یک درگاه واحد ثبت کنید.");
+var badges=["شراکت راهبردی","هم‌بنیان‌گذار و مشاور","رشد و فروش","سرمایه‌گذاران","رویدادها و برنامه‌ها"];
+document.querySelectorAll(".pillrow .pill").forEach(function(el,i){if(badges[i])el.textContent=badges[i]});
+faText(".heroactions a.primary","فرصت خود را ثبت کنید");
+faText(".heroactions a[href='/proof/']","نمونه کارها و شواهد");
+var language=document.querySelector('.heroactions a[lang="fa"]');
+if(language){language.textContent="English version →";language.lang="en";language.hreflang="en";language.href="/connect/?lang=en"}
+faText(".examples .eyebrow","یک درگاه · مسیرهای متفاوت");
+faText(".examples h2","برای هر نوع همکاری، یک مسیر مشخص.");
+faText(".examples > .wrap > p:not(.eyebrow)","به‌جای گم شدن میان پیام‌ها و تقویم‌ها، پیشنهاد خود را یک‌بار ثبت کنید. درخواست در پایگاه داده اصلی ذخیره و برای بررسی مسئول مربوطه مسیر‌یابی می‌شود.");
+var tiles=[
+ ["همکاری فنی و تجاری","شراکت، ادغام فناوری و ساخت مشترک"],
+ ["فروش، معرفی و رشد","توزیع، مشتری، ارجاع و فرصت درآمدی"],
+ ["سرمایه و سرمایه‌گذاری","سرمایه‌گذار، معرفی و تأمین مالی"],
+ ["استعداد و مشاوران","هم‌بنیان‌گذار، متخصص و تیم انسانی یا AI"],
+ ["اکوسیستم و رویدادها","برنامه‌ها، گرنت، رسانه، همایش و جایزه"],
+ ["مشتری و پایلوت","مسئله واقعی، اجرای پروژه و فرصت تجاری"]
+];
+document.querySelectorAll(".tile").forEach(function(el,i){if(tiles[i]){el.querySelector("b").textContent=tiles[i][0];el.querySelector("p").textContent=tiles[i][1]}});
+faText(".wizard-side .eyebrow","Noetfield Connect / ثبت فرصت");
+faText(".wizard-side h2","یک معرفی می‌تواند به همکاری بزرگی تبدیل شود.");
+faText(".wizard-side > p:not(.eyebrow)","جزئیات را یک‌بار وارد کنید؛ ما آن را بررسی می‌کنیم و در صورت وجود تناسب، اقدام بعدی مشخص خواهد شد.");
+var steps=[["۱ — نوع فرصت","هدف و زمینه ارتباط را مشخص کنید."],
+["۲ — پیشنهاد و ارزش","مدارک، شرایط، تعهدات و اقدام پیشنهادی را شرح دهید."],
+["۳ — راه ارتباطی","درخواست ثبت و برای بررسی مسئول مربوطه آماده می‌شود."]];
+document.querySelectorAll(".process div").forEach(function(el,i){if(steps[i]){el.querySelector("b").textContent=steps[i][0];el.querySelector("small").textContent=steps[i][1]}});
+faText(".wizard-side p[style]","برای ثبت درخواست به حساب کاربری یا رزرو جلسه نیاز نیست. تنها اطلاعات غیرمحرمانه ارسال کنید.");
+["۱ / نوع فرصت","۲ / پیشنهاد","۳ / ارتباط"].forEach(function(label,i){faText("#s"+i,label)});
+document.querySelectorAll("fieldset legend").forEach(function(el,i){el.textContent=["چه نوع فرصتی دارید؟","جزئیات فرصت چیست؟","چگونه با شما ارتباط بگیریم؟"][i]});
+var labelTexts={
+ intent:"نوع فرصت",initiative:"پروژه یا حوزه مرتبط",participantRole:"نقش شما در این فرصت",
+ title:"عنوان کوتاه پیشنهاد",description:"موضوع و شرح دقیق",offering:"چه چیزی ارائه می‌دهید؟ (اختیاری)",
+ requesting:"از ما چه می‌خواهید؟ (اختیاری)",url:"لینک وب‌سایت یا پیشنهاد",
+ deadline:"ضرب‌الاجل (در صورت وجود)",terms:"شرایط مالی، کمیسیون یا تعهدات (اختیاری)",
+ name:"نام و نام خانوادگی",email:"ایمیل",org:"شرکت یا مجموعه",nextStep:"اقدام بعدی مورد انتظار"
+};
+form.querySelectorAll("label.field").forEach(function(label){
+var el=label.querySelector("input,select,textarea");if(!el)return;
+var key=el.name;if(!labelTexts[key])return;
+if(key==="contactConsent")return;
+var old=label.firstChild;if(old&&old.nodeType===3)old.textContent=labelTexts[key]+"\n";
+});
+var selectText={
+intent:{partnership:"شراکت راهبردی / ادغام فناوری",growth:"فروش، توزیع، کمیسیون یا معرفی",capital:"سرمایه‌گذاری و تأمین مالی",people:"هم‌بنیان‌گذار، متخصص یا مشاور",events:"رویداد، گرنت، رسانه یا جایزه",business:"مشتری، پایلوت یا اجرا",other:"سایر فرصت‌ها"},
+initiative:{portfolio:"چند پروژه یا فرصت مشترک",noetfield:"Noetfield / سیستم‌های هوشمند",workforce:"WorkforceOS / تیم انسانی و AI",sourcea:"SourceA / اجرای تحت کنترل",outboundos:"OutboundOS / عملیات فروش",buildworkflow:"BuildWorkflow / ساخت‌وساز",buildrelay:"BuildRelay / شبکه مستقل استارتاپی",signalforge:"SignalForge / تحلیل بازار",earnloop:"Earnloop / پاداش دیجیتال",misenorth:"MiseNorth / رستوران",interiormatch:"InteriorMatch / طراحی داخلی",trustfield:"TrustField / فعالیت مستقل در مرحله تأسیس",other:"پروژه دیگر / هنوز مشخص نیست"},
+participantRole:{founder:"بنیان‌گذار یا هم‌بنیان‌گذار",customer:"مشتری",partner:"شریک تجاری",investor:"سرمایه‌گذار یا معرفی‌کننده",advisor:"مشاور یا متخصص",human_contributor:"همکار انسانی",ai_operator:"عامل AI یا ارائه‌دهنده ابزار",organizer:"برگزارکننده رویداد یا برنامه",other:"سایر یا چند نقش"},
+nextStep:{async:"بررسی غیرهمزمان پیشنهاد",meeting:"بررسی امکان جلسه پس از ارزیابی",intro:"بررسی معرفی مناسب",collaborate:"بررسی همکاری یا عضویت در تیم"}
+};
+Object.keys(selectText).forEach(function(name){var sel=form.elements.namedItem(name);if(!sel)return;Array.from(sel.options).forEach(function(o){if(selectText[name][o.value])o.textContent=selectText[name][o.value]})});
+var optgroups=form.querySelectorAll('select[name="initiative"] optgroup');
+["سیستم‌های هوشمند و کسب‌وکار","رشد، بازار و محصولات دیجیتال","سایر و پروژه‌های مستقل"].forEach(function(v,i){if(optgroups[i])optgroups[i].label=v});
+faText(".wizard-section .hint","پروژه‌های مستقل از نظر مالکیت، داده و اجرا جدا می‌مانند؛ ثبت درخواست مجوز انتقال خودکار اطلاعات نیست.");
+faText("#eventHint","برای برنامه‌ها و جوایز، برگزارکننده، معیارهای انتخاب، هزینه و تاریخ‌ها را شرح دهید.");
+faText(".confirm","این فرم به معنی پذیرش شراکت، قرارداد، سرمایه‌گذاری، رزرو جلسه یا استخدام نیست. نتیجه و تعهد فقط با تأیید معتبر ثبت می‌شود.");
+var consent=form.elements.namedItem("contactConsent");if(consent&&consent.parentNode){
+var link=consent.parentNode.querySelector("a");consent.parentNode.childNodes.forEach(function(n){if(n.nodeType===3)n.textContent=" موافقم Noetfield فقط درباره همین پیشنهاد با من تماس بگیرد؛ انتقال به پروژه مستقل یا معرفی به شخص ثالث نیازمند اجازه جداگانه است. "});if(link)link.textContent="حریم خصوصی";
+}
+form.querySelectorAll("[data-next]").forEach(function(el){el.textContent="ادامه"});
+form.querySelectorAll("[data-back]").forEach(function(el){el.textContent="بازگشت"});
+faText("#submitBtn","ثبت پرونده فرصت");
+}
+if(isFa)translateFa();
+
 function safeTag(v){return /^[a-z0-9_.-]{1,50}$/i.test(v||"")?v:"unspecified";}
 form.addEventListener("submit",function(ev){
 ev.preventDefault();if(submitting||!validCurrent())return;

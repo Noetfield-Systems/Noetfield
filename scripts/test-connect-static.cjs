@@ -25,6 +25,9 @@ for (const initiative of ['portfolio','noetfield','workforce','buildrelay','sour
   assert.ok(page.includes('value="'+initiative+'"'), 'missing initiative '+initiative);
 }
 assert.match(page,/TrustField \/ independent venture/);
+assert.match(page,/href="\/connect\/\?lang=fa"/);
+assert.match(page,/var isFa=/);
+assert.match(page,/consent_contact:form\.elements\.namedItem\("contactConsent"\)\.checked/);
 assert.match(page,/No account or introductory meeting required/);
 assert.match(page,/not an accepted agreement, guaranteed meeting/);
 assert.match(contact,/href="\/connect\/">Partnerships/);
