@@ -166,7 +166,7 @@ async function prepareInvitation(ev,x){
   try{
     const result=await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/invitations","POST",payload);
     if(!result.created||!result.share_token)throw Error("No new token issued; do not claim invitation delivered.");
-    const url="https://www.noetfield.com/connect/respond/?case="+encodeURIComponent(x.intake_id)+"&inv="+encodeURIComponent(result.invitation_id)+"&token="+encodeURIComponent(result.share_token);
+    const url="https://www.noetfield.com/connect/respond/#case="+encodeURIComponent(x.intake_id)+"&inv="+encodeURIComponent(result.invitation_id)+"&token="+encodeURIComponent(result.share_token);
     await load();if(state.selected===x.intake_id){draw();loadGraph(x.intake_id)}
     const el=$("invitation-link");el.textContent="Prepared link; NOT SENT. Copy and share only with the intended contact after appropriate consent: ";
     const input=document.createElement("input");input.value=url;input.readOnly=true;input.setAttribute("aria-label","Private opt-in link");input.style.width="100%";el.appendChild(input);
