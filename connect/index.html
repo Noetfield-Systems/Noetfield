@@ -191,6 +191,7 @@ body.connect {margin:0;color:#232522;background:#f4f1eb;font-family:Inter,system
 var form=document.getElementById("connectWizard"),status=document.getElementById("status");
 var panels=Array.prototype.slice.call(form.querySelectorAll("[data-step]"));
 var choices=["partnership","growth","capital","people","events","business","other"], step=0, submitting=false;
+var submissionId="RID-CNX-"+(window.crypto&&window.crypto.randomUUID?window.crypto.randomUUID().replace(/-/g,"").slice(0,20):String(Date.now())+Math.random().toString(36).slice(2,10)).toUpperCase();
 function val(n){var el=form.elements.namedItem(n);return el ? String(el.value||"").trim():"";}
 function show(n){step=Math.min(2,Math.max(0,n));panels.forEach(function(p,i){p.hidden=i!==step;});
 for(var i=0;i<3;i++){var el=document.getElementById("s"+i);el.className=i===step?"current":i<step?"done":""}
@@ -219,7 +220,7 @@ var route="Noetfield Connect — opportunity submission\n"+
 "\nSource: "+source;
 var btn=document.getElementById("submitBtn");
 submitting=true;btn.disabled=true;btn.textContent="Submitting…";status.hidden=false;status.className="status";status.textContent="Submitting your proposal securely…";
-core.postIntake({organization:val("org"),contact_email:val("email"),contact_name:val("name"),message:route,request_id:core.getRid()||null,sku:"general",vector:"external-opportunities",source:"web",metadata:{
+core.postIntake({organization:val("org"),contact_email:val("email"),contact_name:val("name"),message:route,request_id:submissionId,sku:"general",vector:"external-opportunities",source:"web",metadata:{
 page:"/connect/",category:val("intent"),initiative:val("initiative"),proposal_title:val("title"),
 proposal_url:val("url"),deadline:val("deadline"),next_step:val("nextStep"),lead_source:source,
 utm_campaign:safeTag(u.get("utm_campaign")||"unspecified"),intake_flow:"connect-wizard-v1"
