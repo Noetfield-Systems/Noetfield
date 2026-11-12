@@ -37,6 +37,7 @@ from noetfield_governance.public_chat_telemetry import (
     telemetry_stats,
 )
 from noetfield_governance import intake_repository, redis_runtime
+from noetfield_governance.opportunity_desk import triage_connect_record
 from noetfield_governance.intake_notify import (
     intake_email_configured,
     notify_ops_inbox,
@@ -1493,6 +1494,25 @@ async def public_intake(
         ),
         **probe_fields,
     )
+
+
+@app.get("/api/opportunities/desk", tags=["operations"], include_in_schema=False)
+async def connect_opportunity_desk(request: Request, limit: int = 100) -> dict[str, object]:
+    """Authenticated advisory triage of existing Connect intake; no duplicate CRM or dispatch."""
+    _require_admin_secret(request)
+    if not settings.public_intake_enabled:
+        raise HTTPException(status_code=503, detail="Public intake API is disabled")
+    records = await intake_repository.list_recent(limit=max(1, min(limit, 100)))
+    opportunities = [project for record in records
+                     if (project := triage_connect_record(record)) is not None]
+    opportunities.sort(key=lambda row: (-row["priority_score"], str(row["received_at"] or "")))
+    return {
+        "source": "canonical_intake",
+        "mode": "ADVISORY_ONLY",
+        "count": len(opportunities),
+        "opportunities": opportunities,
+        "pagination": "recent_intake_window_only",
+    }
 
 
 @app.get("/api/intake/recent", tags=["intake"], include_in_schema=False)
