@@ -437,3 +437,19 @@ def test_research_trader_states_the_schedule_and_brief_link_correctly() -> None:
 
     # Inner pages are pinned to the current stylesheet build.
     assert "noetfield-corporate-v1.css?v=5" in page
+
+
+def test_company_os_ai_sales_pilot_has_real_intake_and_bounded_scope() -> None:
+    """Commercial experiment reuses the real contact route and exactly three SKUs."""
+    company_os = read(ROOT / "company-os" / "index.html")
+    contact = read(ROOT / "contact" / "index.html")
+    forms = read(ROOT / "assets" / "noetfield-forms.js")
+    assert "CAD $750 pilot setup" in company_os
+    assert "one existing lead source" in company_os
+    assert "Human approval" in company_os
+    assert 'href="/contact/?topic=ai-sales-os-pilot"' in company_os
+    assert company_os.count('class="offer"') == 3
+    assert '<option value="ai-sales-os-pilot">' in contact
+    assert 'new URLSearchParams(location.search)' in forms
+    assert 'data-nf-intake-form' in contact
+    assert "written scope before payment" in company_os
