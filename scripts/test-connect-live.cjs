@@ -1,4 +1,4 @@
-/** Production HTTP acceptance for Noetfield Connect; synthetic requests are test-labeled. */
+/** Production HTTP acceptance for Noetfield Connect; synthetic requests are test-labeled. QA run 2026-11-12. */
 "use strict";
 const crypto=require("node:crypto");
 const base="https://www.noetfield.com";
