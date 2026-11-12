@@ -10,6 +10,11 @@ on:
       - 'assets/opportunity-desk.html'
       - 'tests/unit/test_connect_opportunity_desk.py'
       - 'tests/unit/test_connect_postgres_acceptance.py'
+      - 'tests/unit/test_connect_relationship.py'
+      - 'services/governance/noetfield_governance/connect_relationship.py'
+      - 'connect/index.html'
+      - 'connect/respond/index.html'
+      - 'api/connect/respond.js'
       - '.github/workflows/connect-desk-acceptance.yml'
   push:
     branches: [main]
@@ -21,6 +26,11 @@ on:
       - 'assets/opportunity-desk.html'
       - 'tests/unit/test_connect_opportunity_desk.py'
       - 'tests/unit/test_connect_postgres_acceptance.py'
+      - 'tests/unit/test_connect_relationship.py'
+      - 'services/governance/noetfield_governance/connect_relationship.py'
+      - 'connect/index.html'
+      - 'connect/respond/index.html'
+      - 'api/connect/respond.js'
       - '.github/workflows/connect-desk-acceptance.yml'
 
 permissions:
@@ -55,7 +65,7 @@ jobs:
       - name: Compile changed Python modules
         run: python -m compileall -q services/governance/noetfield_governance
       - name: Run concrete Connect operator API regression suite
-        run: python -m pytest -q tests/unit/test_connect_opportunity_desk.py
+        run: python -m pytest -q tests/unit/test_connect_opportunity_desk.py tests/unit/test_connect_relationship.py
       - name: Real PostgreSQL persistence and tenant-bound operator state
         run: python -m pytest -q tests/unit/test_connect_postgres_acceptance.py
       - name: Check static operator shell for unsafe storage
@@ -67,4 +77,23 @@ jobs:
           assert 'sessionStorage' not in s
           assert 'X-Admin-Secret' in s
           assert 'setInterval' not in s
+          assert 'relationship-graph' in s
+          assert 'invitation-form' in s
+          assert 'localStorage' not in Path('connect/respond/index.html').read_text()
+          PY
+
+      - name: Check public Connect entry, invitation page and Cloudflare proxy syntax
+        run: |
+          node scripts/test-connect-static.cjs
+          node --check api/connect/respond.js
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,subprocess,tempfile
+          content=Path('connect/respond/index.html').read_text()
+          assert 'referrer" content="no-referrer"' in content
+          script=re.findall(r'<script>([\s\S]*?)</script>',content)
+          assert len(script)==1
+          with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as out:
+              out.write(script[0]);out.flush()
+              subprocess.run(['node','--check',out.name],check=True)
           PY
