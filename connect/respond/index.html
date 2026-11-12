@@ -34,7 +34,7 @@ small{color:#7b8d86;display:block;margin-top:20px}
 <p id="status" role="status" aria-live="polite"></p>
 <small>Responses are stored against the original Noetfield Connect case. Possession of this private link does not independently verify mailbox ownership. A responsible human will confirm any actual assignment, introduction, scope, contract or scheduling.</small>
 </main><script>
-(()=>{"use strict";const params=new URLSearchParams(location.search);
+(()=>{"use strict";const params=new URLSearchParams(location.hash.startsWith("#")?location.hash.slice(1):location.search);
 const values={intake_id:params.get("case")||"",invitation_id:params.get("inv")||"",token:params.get("token")||""};
 if(history.replaceState)history.replaceState(null,"","/connect/respond/");
 const form=document.getElementById("respond-form"),status=document.getElementById("status");
