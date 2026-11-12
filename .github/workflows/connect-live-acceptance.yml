@@ -1,0 +1,21 @@
+name: Noetfield Connect Live Production Acceptance
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [qa/connect-live-20261112]
+
+permissions:
+  contents: read
+
+jobs:
+  live-connect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run real public-to-persisted Connect smoke
+        run: node scripts/test-connect-live.cjs
