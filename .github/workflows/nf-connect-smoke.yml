@@ -1,0 +1,35 @@
+name: Noetfield Connect Intake Smoke
+
+on:
+  pull_request:
+    paths:
+      - 'connect/**'
+      - 'opportunities/**'
+      - 'contact/**'
+      - 'governance/www-public-artifact-v1.json'
+      - 'scripts/test-connect-static.cjs'
+      - '.github/workflows/nf-connect-smoke.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'connect/**'
+      - 'opportunities/**'
+      - 'contact/**'
+      - 'governance/www-public-artifact-v1.json'
+      - 'scripts/test-connect-static.cjs'
+      - '.github/workflows/nf-connect-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  static-connect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Noetfield Connect route and submission wiring
+        run: node scripts/test-connect-static.cjs

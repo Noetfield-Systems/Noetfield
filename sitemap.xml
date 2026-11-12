@@ -73,6 +73,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.noetfield.com/connect/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.noetfield.com/contact/</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -193,14 +199,14 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.noetfield.com/intelligence/continuous-optimization/</loc>
-    <lastmod>2026-11-07</lastmod>
+    <loc>https://www.noetfield.com/intelligence/</loc>
+    <lastmod>2026-08-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.noetfield.com/intelligence/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <loc>https://www.noetfield.com/intelligence/continuous-optimization/</loc>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -243,6 +249,12 @@
   <url>
     <loc>https://www.noetfield.com/next/</loc>
     <lastmod>2026-08-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.noetfield.com/opportunities/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -475,14 +487,14 @@
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.noetfield.com/tools/workflow-review/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <loc>https://www.noetfield.com/tools/who-accepted/</loc>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.noetfield.com/tools/who-accepted/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <loc>https://www.noetfield.com/tools/workflow-review/</loc>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
