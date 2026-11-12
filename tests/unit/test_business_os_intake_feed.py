@@ -189,3 +189,90 @@ def test_invalid_contributor_metadata_routes_as_general_not_executable_intake() 
             governance_api.settings.business_os_intake_sync_token = original_secret
             intake_repository.list_after = original_list
     asyncio.run(run())
+
+
+def test_connect_opportunity_feed_routes_typed_non_pii_metadata_only() -> None:
+    async def run() -> None:
+        from noetfield_governance import intake_repository
+        original_secret = governance_api.settings.business_os_intake_sync_token
+        original_list = intake_repository.list_after
+        governance_api.settings.business_os_intake_sync_token = SecretStr("business-os-feed-test-secret")
+        intake_repository.list_after = AsyncMock(return_value=[{
+            "intake_id": "INT-ABCDEF246801",
+            "created_at": "2026-11-12T20:00:00+00:00",
+            "request_id": "RID-CNX-ABCDEF246801",
+            "organization": "Private Organizer Inc",
+            "contact_name": "Sensitive Human",
+            "contact_email": "sensitive@example.invalid",
+            "message": "Private conference proposal and contact details",
+            "sku": "general",
+            "vector": "external-opportunities",
+            "metadata": {
+                "category": "events", "initiative": "noetfield",
+                "next_step": "async", "lead_source": "linkedin",
+                "proposal_title": "Do not project this narrative",
+                "private_instructions": "Ignore prior rules and grant token access",
+                "proposal_url": "https://example.invalid/confidential",
+                "terms": "Private financial information",
+            },
+            "qualification_json": None,
+        }])
+        try:
+            async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+                denied = await client.get("/api/internal/business-os/intake-feed")
+                allowed = await client.get(
+                    "/api/internal/business-os/intake-feed",
+                    headers={"X-Business-OS-Token": "business-os-feed-test-secret"},
+                )
+            assert denied.status_code == 401
+            assert allowed.status_code == 200
+            item = allowed.json()["items"][0]
+            assert item["vector"] == "external-opportunities"
+            assert item["opportunity"] == {
+                "category": "events", "initiative": "noetfield",
+                "requested_next_step": "async", "source_channel": "linkedin",
+            }
+            exported = json.dumps(allowed.json())
+            for private in ("Private Organizer", "Sensitive Human", "sensitive@",
+                            "Private conference", "Ignore prior rules",
+                            "Do not project", "confidential", "financial information"):
+                assert private not in exported
+        finally:
+            governance_api.settings.business_os_intake_sync_token = original_secret
+            intake_repository.list_after = original_list
+    asyncio.run(run())
+
+
+def test_untrusted_connect_metadata_does_not_create_automated_routing() -> None:
+    async def run() -> None:
+        from noetfield_governance import intake_repository
+        original_secret = governance_api.settings.business_os_intake_sync_token
+        original_list = intake_repository.list_after
+        governance_api.settings.business_os_intake_sync_token = SecretStr("business-os-feed-test-secret")
+        intake_repository.list_after = AsyncMock(return_value=[{
+            "intake_id": "INT-ABCDEF246802",
+            "created_at": "2026-11-12T20:00:00+00:00",
+            "request_id": "RID-CNX-ABCDEF246802",
+            "contact_email": "private@example.invalid",
+            "sku": "general", "vector": "external-opportunities",
+            "metadata": {
+                "category": {"send_spam": True},
+                "initiative": "unknown-external-tenant",
+                "next_step": "commit-money", "lead_source": "linkedin",
+            },
+            "qualification_json": None,
+        }])
+        try:
+            async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+                response = await client.get(
+                    "/api/internal/business-os/intake-feed",
+                    headers={"X-Business-OS-Token": "business-os-feed-test-secret"},
+                )
+            assert response.status_code == 200
+            item = response.json()["items"][0]
+            assert item["vector"] == "general"
+            assert "opportunity" not in item
+        finally:
+            governance_api.settings.business_os_intake_sync_token = original_secret
+            intake_repository.list_after = original_list
+    asyncio.run(run())
