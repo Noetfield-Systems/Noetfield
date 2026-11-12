@@ -12,6 +12,8 @@ assert.match(page,/href="#apply"/);
 assert.match(page,/window\.NFIntakeCore/);
 assert.match(page,/core\.postIntake\(/);
 assert.match(page,/r\.intake_persisted===false/);
+assert.match(page,/r\.intake_persisted!==true/);
+assert.match(page,/form_id:"nfConnectWizard",topic:val\("intent"\)/);
 assert.match(page,/var submissionId="RID-CNX-"/);
 for (const field of ['intent','initiative','title','description','name','email','org','nextStep']) {
   assert.ok(page.includes('name="'+field+'"'), 'required field missing '+field);
