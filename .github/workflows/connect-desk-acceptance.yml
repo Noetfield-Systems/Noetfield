@@ -9,6 +9,7 @@ on:
       - 'services/governance/noetfield_governance/api.py'
       - 'assets/opportunity-desk.html'
       - 'tests/unit/test_connect_opportunity_desk.py'
+      - 'tests/unit/test_connect_postgres_acceptance.py'
       - '.github/workflows/connect-desk-acceptance.yml'
   push:
     branches: [main]
@@ -19,6 +20,7 @@ on:
       - 'services/governance/noetfield_governance/api.py'
       - 'assets/opportunity-desk.html'
       - 'tests/unit/test_connect_opportunity_desk.py'
+      - 'tests/unit/test_connect_postgres_acceptance.py'
       - '.github/workflows/connect-desk-acceptance.yml'
 
 permissions:
@@ -28,7 +30,19 @@ jobs:
   desk-acceptance:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: connect
+          POSTGRES_PASSWORD: connect_test
+          POSTGRES_DB: connect_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready --health-interval 2s --health-timeout 5s --health-retries 10
     env:
+      CONNECT_TEST_POSTGRES_URL: postgresql://connect:connect_test@localhost:5432/connect_test
       RUNTIME_EVENT_STORE: memory
       PYTHONPATH: .:packages/types:packages/config:services/events:services/ledger:services/graph:services/governance:services/signals:services/workflow:services/ai-runtime:services/inspectors:services/identity:services/copilot-governance:services/factories:services/trust-brief:services/legal-review:services/aml-trace
     steps:
@@ -42,6 +56,8 @@ jobs:
         run: python -m compileall -q services/governance/noetfield_governance
       - name: Run concrete Connect operator API regression suite
         run: python -m pytest -q tests/unit/test_connect_opportunity_desk.py
+      - name: Real PostgreSQL persistence and tenant-bound operator state
+        run: python -m pytest -q tests/unit/test_connect_postgres_acceptance.py
       - name: Check static operator shell for unsafe storage
         run: |
           python - <<'PY'
