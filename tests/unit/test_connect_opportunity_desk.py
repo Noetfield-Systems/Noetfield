@@ -65,9 +65,83 @@ def test_connect_desk_requires_admin_and_filters_nonconnect():
                 assert response.status_code == 200
                 body = response.json()
                 assert body["count"] == 1
-                assert body["mode"] == "ADVISORY_ONLY"
+                assert body["mode"] == "HUMAN_TRACKING_NO_AUTO_EXECUTION"
                 assert body["opportunities"][0]["source"] == "linkedin"
                 recent.assert_awaited_once()
         finally:
             governance_api.settings.admin_dashboard_secret = old
+    asyncio.run(run())
+
+
+def test_operator_state_survives_projection_and_public_metadata_cannot_spoof_it():
+    user_record = sample("capital")
+    user_record["metadata"]["connect_ops"] = {"stage": "WON", "owner": "Fraudulent public owner"}
+    projected = triage_connect_record(user_record, today=date(2026, 11, 12))
+    assert projected["stage"] == "NEW"
+    assert projected["owner"] is None
+    user_record["qualification_json"] = {"tier": "review", "connect_ops": {
+        "stage": "QUALIFYING", "owner": "Founder", "next_action": "Verify terms",
+        "due_date": "2026-11-17", "note": "Requested supporting material",
+        "revision": 2, "history": [{"revision": 1}, {"revision": 2}],
+        "updated_at": "2026-11-12T21:00:00+00:00",
+    }}
+    updated = triage_connect_record(user_record, today=date(2026, 11, 12))
+    assert updated["stage"] == "QUALIFYING"
+    assert updated["owner"] == "Founder"
+    assert updated["revision"] == 2
+    assert len(updated["activity"]) == 2
+    assert updated["assignment_status"] == "HUMAN_ASSIGNED"
+    assert updated["cash_collected"] is None
+
+
+def test_authenticated_edit_updates_existing_intake_not_a_new_crm():
+    async def run():
+        old = governance_api.settings.admin_dashboard_secret
+        try:
+            governance_api.settings.admin_dashboard_secret = SecretStr("edit-test-secret")
+            with patch("noetfield_governance.intake_repository.update_connect_opportunity",
+                       new_callable=AsyncMock) as save:
+                save.return_value = {"revision": 1, "stage": "QUALIFYING",
+                                     "owner": "Founder", "next_action": "Request deck"}
+                body = {"expected_revision": 0, "stage": "QUALIFYING",
+                        "owner": "Founder", "next_action": "Request deck",
+                        "due_date": "2026-11-20", "note": ""}
+                async with AsyncClient(transport=ASGITransport(app=app),
+                                       base_url="http://test") as client:
+                    unauthorized = await client.patch("/api/opportunities/desk/INT-ABCDEF123456", json=body)
+                    assert unauthorized.status_code == 403
+                    good = await client.patch("/api/opportunities/desk/INT-ABCDEF123456",
+                        json=body, headers={"X-Admin-Secret": "edit-test-secret"})
+                    assert good.status_code == 200, good.text
+                    assert good.json()["persisted"] is True
+                    assert good.json()["external_action_executed"] is False
+                    assert save.await_args.kwargs["expected_revision"] == 0
+                    assert save.await_args.kwargs["due_date"] == "2026-11-20"
+                    won = {**body, "stage": "WON"}
+                    assert (await client.patch("/api/opportunities/desk/INT-ABCDEF123456",
+                         json=won, headers={"X-Admin-Secret": "edit-test-secret"})).status_code == 422
+                    save.side_effect = ValueError("OPPORTUNITY_VERSION_CONFLICT")
+                    conflict = await client.patch("/api/opportunities/desk/INT-ABCDEF123456",
+                         json=body, headers={"X-Admin-Secret": "edit-test-secret"})
+                    assert conflict.status_code == 409
+                    save.side_effect = None
+                    save.return_value = None
+                    missing = await client.patch("/api/opportunities/desk/INT-ABCDEF123456",
+                         json=body, headers={"X-Admin-Secret": "edit-test-secret"})
+                    assert missing.status_code == 404
+        finally:
+            governance_api.settings.admin_dashboard_secret = old
+    asyncio.run(run())
+
+
+def test_public_ui_shell_contains_no_private_records_or_keys():
+    async def run():
+        async with AsyncClient(transport=ASGITransport(app=app),
+                               base_url="http://test") as client:
+            response = await client.get("/api/opportunities/desk/app")
+        assert response.status_code == 200
+        assert "Opportunity Desk." in response.text
+        assert "X-Admin-Secret" in response.text
+        assert "private@example.test" not in response.text
+        assert "localStorage" not in response.text
     asyncio.run(run())

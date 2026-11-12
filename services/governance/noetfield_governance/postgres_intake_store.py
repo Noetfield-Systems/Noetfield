@@ -200,6 +200,60 @@ class PostgresIntakeStore:
                 )
         return [_row_to_dict(row) for row in rows]
 
+    async def update_connect_state(
+        self, *, intake_id: str, expected_revision: int, stage: str,
+        owner: str, next_action: str, due_date: str | None, note: str,
+    ) -> dict[str, Any] | None:
+        """Update existing canonical intake metadata with a locked revision check.
+
+        No new CRM, database or table. Operator state is stored in the\n        server-owned qualification_json column, never visitor metadata.
+        Returns None for unknown/non-Connect IDs; raises ValueError for conflicts.
+        """
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as connection:
+            async with connection.transaction():
+                row = await connection.fetchrow(
+                    """SELECT intake_id, qualification_json FROM noetfield.public_intakes
+                       WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
+                       FOR UPDATE""", intake_id)
+                if row is None:
+                    return None
+                qualification = row["qualification_json"]
+                if isinstance(qualification, str):
+                    qualification = json.loads(qualification)
+                qualification = dict(qualification or {})
+                existing = qualification.get("connect_ops") or {}
+                if not isinstance(existing, dict):
+                    existing = {}
+                version = int(existing.get("revision") or 0)
+                if version != expected_revision:
+                    raise ValueError("OPPORTUNITY_VERSION_CONFLICT")
+                changed = datetime.now(UTC).isoformat()
+                history = list(existing.get("history") or [])[-19:]
+                history.append({
+                    "revision": version + 1, "at": changed,
+                    "stage": stage, "owner": owner,
+                    "next_action": next_action, "due_date": due_date,
+                    "note": note,
+                })
+                updated = {
+                    "revision": version + 1, "updated_at": changed,
+                    "stage": stage, "owner": owner,
+                    "next_action": next_action,
+                    "due_date": due_date, "note": note,
+                    "history": history,
+                }
+                await connection.execute(
+                    """UPDATE noetfield.public_intakes
+                       SET qualification_json=jsonb_set(
+                           coalesce(qualification_json, '{}'::jsonb),
+                           '{connect_ops}', $2::jsonb, true)
+                       WHERE intake_id=$1""",
+                    intake_id, json.dumps(updated),
+                )
+                return updated
+
     async def count(self) -> int:
         await self.connect()
         assert self._pool is not None

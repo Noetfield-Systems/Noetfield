@@ -5,7 +5,7 @@ import hmac
 import logging
 import os
 import re
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any, Literal
 from uuid import UUID
@@ -1508,11 +1508,62 @@ async def connect_opportunity_desk(request: Request, limit: int = 100) -> dict[s
     opportunities.sort(key=lambda row: (-row["priority_score"], str(row["received_at"] or "")))
     return {
         "source": "canonical_intake",
-        "mode": "ADVISORY_ONLY",
+        "mode": "HUMAN_TRACKING_NO_AUTO_EXECUTION",
         "count": len(opportunities),
         "opportunities": opportunities,
         "pagination": "recent_intake_window_only",
     }
+
+
+class OpportunityUpdateRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    expected_revision: int = Field(ge=0, le=1000000)
+    stage: Literal["NEW", "QUALIFYING", "ROUTED", "ENGAGED", "NEGOTIATING", "PILOT", "WON", "LOST", "ARCHIVED"]
+    owner: str = Field(default="", max_length=100)
+    next_action: str = Field(default="", max_length=500)
+    due_date: date | None = None
+    note: str = Field(default="", max_length=800)
+
+
+@app.get("/api/opportunities/desk/app", tags=["operations"], include_in_schema=False)
+async def connect_opportunity_app() -> Response:
+    """Public UI shell only; all private records require server-side operator authentication."""
+    return FileResponse(_ASSETS_DIR / "opportunity-desk.html", media_type="text/html",
+                        headers={"Cache-Control": "no-store"})
+
+
+@app.patch("/api/opportunities/desk/{intake_id}", tags=["operations"], include_in_schema=False)
+async def update_connect_opportunity(
+    intake_id: str, body: OpportunityUpdateRequest, request: Request,
+) -> dict[str, object]:
+    _require_admin_secret(request)
+    if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
+        raise HTTPException(status_code=400, detail="INVALID_INTAKE_ID")
+    if not settings.public_intake_enabled:
+        raise HTTPException(status_code=503, detail="Public intake API is disabled")
+    if body.stage in ("WON", "LOST") and not body.note.strip():
+        raise HTTPException(status_code=422, detail="OUTCOME_NOTE_REQUIRED")
+    try:
+        updated = await intake_repository.update_connect_opportunity(
+            intake_id=intake_id,
+            expected_revision=body.expected_revision, stage=body.stage,
+            owner=body.owner.strip(), next_action=body.next_action.strip(),
+            due_date=str(body.due_date) if body.due_date else None,
+            note=body.note.strip(),
+        )
+    except ValueError as exc:
+        if str(exc) == "OPPORTUNITY_VERSION_CONFLICT":
+            raise HTTPException(status_code=409, detail="OPPORTUNITY_VERSION_CONFLICT") from exc
+        raise
+    except RuntimeError as exc:
+        if str(exc) == "OPPORTUNITY_PERSISTENCE_UNAVAILABLE":
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        raise
+    if updated is None:
+        raise HTTPException(status_code=404, detail="OPPORTUNITY_NOT_FOUND")
+    return {"intake_id": intake_id, "persisted": True, "state": updated,
+            "independent_verification": False, "external_action_executed": False}
 
 
 @app.get("/api/intake/recent", tags=["intake"], include_in_schema=False)

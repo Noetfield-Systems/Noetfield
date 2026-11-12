@@ -201,6 +201,22 @@ async def update_email_archive_status(
     )
 
 
+async def update_connect_opportunity(
+    *, intake_id: str, expected_revision: int, stage: str,
+    owner: str, next_action: str, due_date: str | None, note: str,
+) -> dict[str, Any] | None:
+    """Persist operator decisions on the existing source row, not another CRM."""
+    if _backend is None:
+        await init_intake_repository()
+    if not isinstance(_backend, PostgresIntakeStore):
+        raise RuntimeError("OPPORTUNITY_PERSISTENCE_UNAVAILABLE")
+    return await _backend.update_connect_state(
+        intake_id=intake_id, expected_revision=expected_revision,
+        stage=stage, owner=owner, next_action=next_action,
+        due_date=due_date, note=note,
+    )
+
+
 def intake_status_payload(record: IntakeRecord | dict[str, Any]) -> dict[str, object]:
     if isinstance(record, IntakeRecord):
         data = {
