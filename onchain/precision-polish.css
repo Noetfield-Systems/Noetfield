@@ -1,0 +1,214 @@
+/* NOETFIELD OS — Precision polish / responsive typography system
+   Intent: faithfully preserve the supplied desktop architectural reference,
+   while designing the phone as an independent premium product interface.
+   Real DOM, working intake, wallet, demos and controls are preserved. */
+:root{
+ --nf-ink:#f0f8f1;
+ --nf-secondary:#bad3c3;
+ --nf-hairline:rgba(181,241,194,.23);
+ --nf-primary:#a4f7ac;
+ --nf-deep:#041813;
+}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font-family:"Instrument Sans",Inter,system-ui,sans-serif;font-synthesis:none}
+button,input,textarea,select{font-family:inherit}
+.v5-hero h1{font-family:"Instrument Sans",Inter,system-ui,sans-serif;font-weight:670;letter-spacing:-.058em;text-wrap:balance}
+.v5-hero h1 em{font-family:"Instrument Sans",Inter,system-ui,sans-serif;font-weight:590;letter-spacing:-.063em}
+.v5-brand{font-family:"Instrument Sans",Inter,system-ui,sans-serif;font-weight:690}
+.v5-nav nav a,.nf-nav-solutions summary,.v5-nav-actions a,.v5-button{font-family:"Instrument Sans",Inter,system-ui,sans-serif}
+.v5-solutions-summary a,.v5-journey-grid>a,.v5-hero-services{
+ transition:border-color .2s ease,background .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.v5-solutions-summary a:hover,.v5-journey-grid>a:hover{box-shadow:0 14px 34px rgba(0,0,0,.16),inset 0 1px rgba(204,255,211,.09)}
+.v5-button:focus-visible,.v5-hero-services a:focus-visible,.v8-network-entry:focus-visible,.v5-solutions-summary a:focus-visible,.v5-journey-grid>a:focus-visible{
+ outline:2px solid #d5ffbe;outline-offset:3px;
+}
+/* An accessible responsive stage of the same existing architectural source.
+   This is layout, not a screenshot pasted over the product. */
+.nf-mobile-art-stage{display:none}
+.nf-mobile-cta-label{display:none}
+.v5-hero-services{isolation:isolate}
+.v5-hero-services a strong{letter-spacing:-.018em}
+.v5-section-label,.v5-eyebrow{font-family:"DM Mono",monospace}
+.v5-campus{will-change:auto}
+/* Laptop: more refined text, restrained illumination. */
+@media(min-width:901px){
+ .v5-hero-features small{font-size:9px}
+ .v5-platform-copy>p:not(.v5-section-label){font-size:12px;line-height:1.53}
+ .v5-layer strong{font-family:"Instrument Sans",Inter,sans-serif;font-size:11px}
+ .v5-solutions-summary strong{font-family:"Instrument Sans",Inter,sans-serif;font-weight:660}
+ .v5-journey-grid>a strong{font-family:"Instrument Sans",Inter,sans-serif}
+}
+/* Tablet: retain an actual, not scaled-down, two-column product grid. */
+@media(max-width:900px){
+ .v5-hero{background:#041711;isolation:isolate}
+ .v5-campus,.v5-hero-overlay,.v7-hero-aura,.v7-math-matrix,.v6-hero-grid{display:none}
+ .v5-hero-content{display:block;min-height:0;padding-block:35px 33px}
+ .v5-hero-copy{width:100%;max-width:760px;position:relative}
+ .v5-eyebrow{display:flex;align-items:center;gap:10px;font-size:9.5px;letter-spacing:.12em;line-height:1.35;margin:0 0 17px;color:#c2eac5}
+ .v5-luminous-line{width:28px;height:2px;flex:none}
+ .v5-hero h1{font:620 clamp(38px,6.7vw,52px)/1.08 "Instrument Sans",Inter,system-ui,sans-serif;letter-spacing:-.052em;max-width:680px;margin:0 0 16px;text-wrap:pretty}
+ .v5-hero h1 em{font-family:"Instrument Sans",Inter,system-ui,sans-serif;font-weight:560;letter-spacing:-.053em}
+ .nf-desktop-br{display:none}
+ .v5-lead{font:450 14.5px/1.58 "Instrument Sans",Inter,sans-serif;max-width:570px;letter-spacing:-.005em;color:#c8ded0;margin-bottom:21px;text-shadow:none}
+ .v5-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;width:100%;max-width:500px}
+ .v5-actions .v5-button{min-width:0;min-height:46px;padding:10px 12px;font-size:12.5px;letter-spacing:-.018em;font-weight:660;border-radius:8px;white-space:nowrap;gap:7px}
+ .v5-play{width:23px;height:23px;flex:none}
+ .nf-desktop-cta-label{display:none}
+ .nf-mobile-cta-label{display:inline}
+ .nf-mobile-art-stage{display:block;position:relative;overflow:hidden;margin:24px 0 18px;width:100%;height:clamp(230px,43vw,330px);border-radius:12px;border:1px solid rgba(194,254,195,.32);background-image:linear-gradient(0deg,rgba(3,23,20,.80),transparent 38%),url('/onchain/hero-architecture-hd.webp');background-size:cover;background-position:center 51%;box-shadow:0 12px 36px rgba(0,0,0,.17),inset 0 1px rgba(219,255,218,.13)}
+ .nf-mobile-art-stage:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,rgba(2,22,18,.05),transparent 58%)}
+ .nf-art-label{display:flex;flex-direction:column;position:absolute;bottom:16px;left:17px;gap:1px;color:#e4ffe0;text-shadow:0 1px 6px #021810}
+ .nf-art-label strong{font:700 12px/1.1 "Instrument Sans",Inter,sans-serif;letter-spacing:.09em}
+ .nf-art-label small{font:500 8px/1.4 "DM Mono",monospace;letter-spacing:.13em;color:#bde9c8}
+ .nf-art-live{position:absolute;top:12px;right:13px;padding:5px 8px;border:1px solid rgba(176,254,192,.49);background:rgba(3,36,28,.55);border-radius:4px;color:#dcffdd;font:600 8px "DM Mono",monospace;letter-spacing:.065em}
+ .v5-hero-features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:5px 0 0;padding:5px 0;border-top:1px solid var(--nf-hairline);border-bottom:1px solid var(--nf-hairline)}
+ .v5-hero-features>span{min-width:0;display:flex;gap:10px;align-items:flex-start;padding:13px 8px 12px 0;margin:0;border:0}
+ .v5-hero-features>span:nth-child(2n){padding-left:8px}
+ .v5-hero-features b{flex:none;font-size:21px;line-height:1.1;color:#b5f6b2}
+ .v5-hero-features strong{font:650 11.8px/1.2 "Instrument Sans",Inter,sans-serif;letter-spacing:-.018em;color:#edf9ee}
+ .v5-hero-features small{display:block;font:450 10.7px/1.4 "Instrument Sans",Inter,sans-serif;color:#a9c8b7;margin-top:4px}
+ .v8-network-entry{display:flex;align-items:center;gap:9px;margin:0;padding:14px 0 2px;font:550 11.8px/1.4 "Instrument Sans",Inter,sans-serif;max-width:100%;color:#c2dfc7}
+ .v8-network-entry strong{flex:none;font:700 9px "DM Mono",monospace;letter-spacing:.05em;padding:5px 7px;background:rgba(21,94,55,.35);color:#b7f9b9;border-color:rgba(182,247,183,.45)}
+ .v5-hero-services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px;width:100%;max-width:none;margin:19px 0 0;padding:12px 17px;border-radius:12px;background:linear-gradient(145deg,rgba(11,49,38,.98),rgba(4,27,24,.97));border:1px solid rgba(189,247,197,.36);box-shadow:inset 0 1px rgba(220,255,216,.10),0 12px 32px rgba(0,0,0,.16);transform:none;backdrop-filter:none}
+ .v7-service-top{grid-column:1/-1;padding:7px 0 13px;margin-bottom:0;font:650 10.6px "DM Mono",monospace;letter-spacing:.095em;color:#d8f7d2}
+ .v5-hero-services a{display:grid;grid-template-columns:26px minmax(0,1fr) 13px;gap:8px;align-items:center;min-height:73px;padding:13px 2px;background:transparent;border:0;border-top:1px solid rgba(189,246,186,.22);border-radius:0}
+ .v5-hero-services a span{font-size:23px;min-width:0;line-height:1}
+ .v5-hero-services a strong{font:650 12px/1.26 "Instrument Sans",Inter,sans-serif;letter-spacing:-.014em;overflow-wrap:normal}
+ .v5-hero-services a i{display:block;font-size:13px;color:#bbf5b3}
+ .v5-hero-caption{position:relative;bottom:auto;right:auto;padding:0 24px 14px;text-align:left;font:500 8px/1.4 "DM Mono",monospace;letter-spacing:.04em;opacity:.68;color:#bed5c7}
+ .v5-network{background:#08261e}
+ .v5-network-inner{display:flex;flex-wrap:wrap;gap:12px 14px;padding-block:16px}
+ .v5-network-label{flex:1 1 100%;padding:0 0 8px 12px;border-right:0;border-bottom:1px solid rgba(184,242,193,.25)}
+ .v5-network-label strong{font-size:9.5px;letter-spacing:.075em}
+ .v5-network-label small{font-size:10px}
+ .v5-network-names{display:flex;gap:7px;flex:1 1 100%;justify-content:flex-start;flex-wrap:wrap}
+ .v5-network-names button{padding:7px 10px;border:1px solid rgba(179,246,187,.28);border-radius:6px;background:rgba(17,66,44,.38);font:550 11.5px "Instrument Sans",sans-serif;min-height:38px;gap:6px}
+ .v5-network-names button b{font-size:18px}
+ .v5-network-link{font-size:11px}
+ .v5-platform{padding:45px 0 36px;background:#041c16}
+ .v5-platform-layout{display:grid;grid-template-columns:1fr;gap:25px;min-height:0}
+ .v5-platform-copy,.v5-layer-diagram,.v5-solutions-summary{grid-column:1;grid-row:auto}
+ .v5-platform-copy h2,.v5-journey-heading h2,.v7-community-text h2,.audience-intro h2,.section-head h2{font-family:"Instrument Sans",Inter,sans-serif;font-weight:620;font-size:clamp(27px,4.7vw,37px);line-height:1.15;letter-spacing:-.045em;text-wrap:balance}
+ .v5-platform-copy h2 em,.v7-community-text h2 em{font:inherit;color:#b8efb7}
+ .v5-section-label{font-size:9.5px;letter-spacing:.12em}
+ .v5-platform-copy>p:not(.v5-section-label){font-size:13.4px;line-height:1.6;max-width:580px;color:#aecabb}
+ .v5-platform-facts{gap:8px 13px}
+ .v5-platform-facts span{font-size:10.8px;color:#d2e3d2}
+ .v5-text-link{display:inline-flex;align-items:center;min-height:34px;font-size:12.2px}
+ .v5-layer-diagram{height:255px;min-height:255px;overflow:visible}
+ .v5-layer{max-width:420px;height:47px;min-height:47px}
+ .v5-layer strong{font-size:12.5px;line-height:1.25}
+ .v5-layer small{font-size:10px;line-height:1.2}
+ .v6-layer-detail{z-index:11}
+ .v5-solutions-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .v5-solutions-summary .v5-section-label{grid-column:1/-1}
+ .v5-solutions-summary a{min-height:102px;padding:14px;grid-template-columns:30px minmax(0,1fr) 12px;gap:5px 10px;background:linear-gradient(140deg,#123e2f,#06271f)}
+ .v5-solutions-summary .v5-solution-icon{font-size:25px}
+ .v5-solutions-summary strong{font:650 13px/1.22 "Instrument Sans",Inter,sans-serif}
+ .v5-solutions-summary small{font:450 11px/1.38 "Instrument Sans",Inter,sans-serif;color:#bad2c1}
+ .v5-solutions-summary i{display:block;font-size:13px}
+ .v5-journeys{padding:34px 0}
+ .v5-journey-inner{display:grid;grid-template-columns:1fr;gap:20px}
+ .v5-journey-heading h2{font-size:clamp(26px,4.6vw,34px)}
+ .v5-journey-heading p:not(.v5-section-label){display:block;font-size:12.5px;line-height:1.5;color:#a9c4b3}
+ .v5-journey-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .v5-journey-grid>a{min-height:124px;padding:9px;grid-template-columns:1fr;grid-template-rows:78px min-content 1fr min-content;gap:7px}
+ .v5-journey-art{grid-column:1;grid-row:1;height:78px;min-height:78px;background-size:cover}
+ .v5-journey-grid>a strong{font-size:13px;line-height:1.25}
+ .v5-journey-grid>a small{font-size:11px;line-height:1.4}
+ .v5-journey-grid .v5-case-status{font-size:9px}
+ .nf-reference-join{padding:18px 18px 15px;min-height:125px;border:1px solid rgba(167,232,176,.25);border-radius:9px;background:linear-gradient(110deg,#0c3c29,#06261f)}
+ .nf-reference-join p{font-size:11px;line-height:1.45;max-width:70%}
+ .nf-reference-orb{right:14px;top:8px;width:96px;height:96px}
+ .nf-reference-join a{min-height:39px;padding:8px 15px;font-size:11px;border-radius:7px}
+ .v7-community-band-inner{gap:17px}
+ .v7-community-text h2{font-size:clamp(27px,4.6vw,36px)}
+ .v7-community-text>p:not(.v5-section-label),.v7-community-actions span{font-size:12.5px;line-height:1.55;color:#bdd4c2}
+ .v7-community-core{font-size:46px}
+ /* The public assistant remains reachable but is no longer a gold disc covering UI. */
+ .nfChatFab{right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));width:43px;min-width:43px;height:43px;min-height:43px;padding:0;justify-content:center;border-radius:13px;background:rgba(9,51,39,.94);color:#bff6c2;border:1px solid rgba(187,252,197,.55);box-shadow:0 8px 25px rgba(0,0,0,.3),inset 0 1px rgba(224,255,209,.13);font-size:15px}
+ .nfChatFab:hover,.nfChatFab[aria-expanded="true"]{background:#154e39;color:#ebffe6;box-shadow:0 12px 27px rgba(0,0,0,.34)}
+ .nfChatPanel{right:12px;bottom:calc(68px + env(safe-area-inset-bottom,0px));width:min(400px,calc(100vw - 24px));max-height:calc(100dvh - 88px);border-color:rgba(177,218,190,.7)}
+}
+@media(max-width:540px){
+ .v5-header{background:rgba(2,19,16,.97)}
+ .v5-nav{min-height:61px;gap:8px}
+ .v5-brand{font:700 14.5px/1 "Instrument Sans",Inter,sans-serif;letter-spacing:.055em;gap:8px;flex:0 1 auto;white-space:nowrap}
+ .v5-brand-mark,.v5-brand-mark svg{width:32px;height:33px}
+ .v5-brand small{display:none}
+ .v5-nav-actions{margin-left:auto;gap:7px}
+ .v5-nav-actions .v5-nav-primary{min-height:35px;padding:8px 10px!important;font-size:10.2px!important;letter-spacing:-.015em;font-weight:650}
+ .v6-menu-toggle{width:36px;height:36px;flex:0 0 36px;min-width:0;padding:9px;margin:0;border-color:rgba(189,249,194,.38);border-radius:8px}
+ .v5-hero-content{padding-top:27px;padding-bottom:25px}
+ .v5-eyebrow{font-size:8.6px;letter-spacing:.093em;margin-bottom:14px}
+ .v5-hero h1{font:620 clamp(34px,9.05vw,39px)/1.072 "Instrument Sans",Inter,sans-serif;letter-spacing:-.058em;text-wrap:pretty;max-width:100%;margin:0 0 13px}
+ .v5-hero h1 em{font-weight:565;letter-spacing:-.06em}
+ .v5-lead{font-size:13.5px;line-height:1.49;margin-bottom:18px;color:#c8d9cd}
+ .v5-actions{max-width:none;gap:9px}
+ .v5-actions .v5-button{min-height:43px;padding:8px 9px;font-size:11.5px;font-weight:660}
+ .v5-actions .v5-play{width:20px;height:20px}
+ .nf-mobile-art-stage{height:clamp(198px,57vw,250px);margin:21px 0 13px;background-position:57% 53%;border-radius:10px}
+ .v5-hero-features{margin-top:0}
+ .v5-hero-features>span{padding-block:12px;gap:8px}
+ .v5-hero-features>span:nth-child(2n){padding-left:7px}
+ .v5-hero-features b{font-size:19px}
+ .v5-hero-features strong{font-size:11.2px}
+ .v5-hero-features small{font-size:10.5px;margin-top:3px}
+ .v8-network-entry{margin:0;min-height:54px;gap:8px;padding:12px 0 0;flex-wrap:wrap;font-size:11.2px}
+ .v8-network-entry strong{font-size:8.5px}
+ .v5-hero-services{display:block;margin-top:16px;padding:12px 16px 5px;border-radius:10px}
+ .v7-service-top{font-size:10.8px;padding:7px 0 12px}
+ .v5-hero-services a{min-height:53px;padding:10px 1px;grid-template-columns:29px minmax(0,1fr) 14px;gap:10px}
+ .v5-hero-services a span{font-size:23px}
+ .v5-hero-services a strong{font-size:13.2px;line-height:1.22;font-weight:625}
+ .v5-hero-services a i{font-size:15px}
+ .v5-hero-caption{padding:0 22px 14px;font-size:7.5px;letter-spacing:.02em}
+ .v5-network-inner{padding-block:14px}
+ .v5-network-names{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .v5-network-names button{font-size:10.6px;min-height:36px;padding:7px 6px;justify-content:center;gap:5px}
+ .v5-network-names button b{font-size:16px}
+ .v5-network-link{font-size:10.5px;min-height:36px;display:inline-flex;align-items:center}
+ .v5-platform{padding:39px 0 34px}
+ .v5-platform-layout{gap:21px}
+ .v5-platform-copy h2,.v5-journey-heading h2,.v7-community-text h2,.audience-intro h2,.section-head h2{font-size:clamp(26px,7.4vw,32px);line-height:1.15;letter-spacing:-.046em}
+ .v5-platform-copy>p:not(.v5-section-label){font-size:13px;line-height:1.56}
+ .v5-platform-facts span{font-size:10.6px}
+ .v5-layer-diagram{height:245px;min-height:245px;margin-block:4px}
+ .v5-layer{height:47px;min-height:47px;padding:7px 13px}
+ .v5-layer strong{font-size:11.7px}
+ .v5-layer small{font-size:9.6px}
+ .v5-solutions-summary{grid-template-columns:1fr;gap:9px}
+ .v5-solutions-summary a{min-height:77px;padding:12px 15px;gap:3px 10px;grid-template-columns:29px minmax(0,1fr) 14px}
+ .v5-solutions-summary .v5-solution-icon{font-size:25px}
+ .v5-solutions-summary strong{font-size:13.7px}
+ .v5-solutions-summary small{font-size:11.2px}
+ .v5-journeys{padding:34px 0}
+ .v5-journey-grid{grid-template-columns:1fr;gap:9px}
+ .v5-journey-grid>a{min-height:105px;padding:9px;display:grid;grid-template-columns:34% minmax(0,1fr);grid-template-rows:min-content 1fr min-content;gap:3px 11px}
+ .v5-journey-art{grid-column:1;grid-row:1/4;height:100%;min-height:86px}
+ .v5-journey-grid>a strong{font-size:13px;grid-column:2}
+ .v5-journey-grid>a small{font-size:10.7px;grid-column:2}
+ .v5-journey-grid .v5-case-status{grid-column:2;font-size:9px}
+ .nf-reference-join p{max-width:64%}
+ .v7-community-band-inner{padding-block:32px;grid-template-columns:1fr}
+ .v7-community-text{grid-column:1}
+ .v7-community-orbit{grid-column:1;min-height:140px}
+ .v7-community-actions{grid-column:1}
+ .v5-agent-actions,.v5-actions{min-width:0}
+ .v5-ecosystem-grid,.v5-journey-grid,.v5-solutions-summary{min-width:0}
+ /* Forms must remain usable with touch without iOS auto-zoom. */
+ form input,form textarea,form select{font-size:16px;min-height:44px}
+ form button{min-height:44px}
+}
+@media(max-width:370px){
+ .v5-brand{font-size:13px;gap:6px}
+ .v5-nav-actions .v5-nav-primary{font-size:9px!important;padding:8px 7px!important}
+ .v5-hero h1{font-size:33px;letter-spacing:-.061em}
+ .v5-actions .v5-button{font-size:10.5px;gap:4px;padding-inline:6px}
+ .v5-hero-features small{font-size:10px}
+ .v5-network-names button{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ .nf-mobile-art-stage,.v5-hero-services,.v5-hero-services a,.v5-solutions-summary a,.v5-journey-grid>a{transition:none!important;animation:none!important}
+}
