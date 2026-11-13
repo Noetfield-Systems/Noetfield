@@ -44,16 +44,13 @@ CLIENT_VIEW_PAGES = (
 
 PRIMARY_NAV = (
     "/",
-    "/intelligence/",
-    "/governance/",
-    "/ai-value-governance-os/",
-    "/copilot/",
-    "/templates/",
-    "/trust/",
-    "/federal/",
-    "/msp/",
-    "/partners/",
-    "/copilot/demo/",
+    "/work-with-us/",
+    "/company-os/",
+    "/onchain/",
+    "/proof/",
+    "/about/",
+    "/developers/",
+
 )
 
 
@@ -89,7 +86,7 @@ def test_header_primary_nav_items() -> None:
     primary = header.split('class="menuPrimary"', 1)[1].split("</div>", 1)[0]
     for href in PRIMARY_NAV:
         assert href in primary, href
-    assert primary.count("<a ") == 11
+    assert primary.count("<a ") == 7
     assert "/directory/" not in header
     assert 'href="/gate/' not in header
     assert "Work with us" not in primary
