@@ -260,6 +260,18 @@ async def record_connect_outcome(**kwargs: Any) -> dict[str, Any] | None:
     return await (await _connect_postgres()).record_connect_outcome(**kwargs)
 
 
+async def get_connect_delivery_source(*, intake_id: str) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).get_connect_delivery_source(intake_id=intake_id)
+
+
+async def claim_connect_invitation_send(**kwargs: Any) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).claim_connect_invitation_send(**kwargs)
+
+
+async def finish_connect_invitation_send(**kwargs: Any) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).finish_connect_invitation_send(**kwargs)
+
+
 def intake_status_payload(record: IntakeRecord | dict[str, Any]) -> dict[str, object]:
     if isinstance(record, IntakeRecord):
         data = {

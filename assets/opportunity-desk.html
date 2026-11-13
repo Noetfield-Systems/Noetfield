@@ -249,15 +249,15 @@ function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class=
 '<label>HTTPS evidence source<input type="url" name="evidence_url" required placeholder="https://..."></label>'+
 '<label class="full">Operator report<textarea name="note" required minlength="10" maxlength="1200" rows="3" placeholder="What actually happened? Include the source and relevant date."></textarea></label>'+
 '<button class="primary" type="submit">Record reported outcome</button><span class="small" id="outcome-status" role="status"></span></form>'+
-'<div class="section-label">SCOPED INVITATION · PREPARED, NOT SENT</div>'+
+'<div class="section-label">SCOPED INVITATION · PREPARE OR SEND</div>'+
 '<form id="invitation-form" class="form-grid"><label>Scope<select name="scope">'+
 ["introduction","collaboration","trial","specialist_review","partner"].map(a=>'<option value="'+a+'">'+a.replaceAll("_"," ")+'</option>').join("")+'</select></label>'+
 '<label class="full">Private invitation text<textarea name="message" required minlength="15" maxlength="1500" rows="3" placeholder="Precise scope, value for each party and next action."></textarea></label>'+
-'<button class="primary" type="submit">Prepare opt-in invitation</button><span class="small" id="invitation-status" role="status"></span></form>'+
+'<button class="primary" type="submit" name="delivery" value="prepare">Prepare opt-in invitation</button>'+ (x.consent_contact?'<button class="secondary" type="submit" name="delivery" value="send">Email invitation via Resend / ارسال واقعی</button>':'<p class="small">No contact consent recorded; sending is unavailable.</p>')+'<span class="small" id="invitation-status" role="status"></span></form>'+
 '<div id="invitation-link" class="small"></div>'+
 '<div class="section-label">ACTUAL ACTIVITY / INVITATION RESPONSES</div>'+
 '<div class="history">'+(x.interactions||[]).slice().reverse().map(a=>'<p><b>'+safe(a.kind)+'</b> · '+safe(date(a.created_at))+' · '+safe(a.state)+'<br>'+safe(a.body)+'</p>').join("")+
-(x.invitations||[]).slice().reverse().map(i=>'<p><b>'+safe(i.scope)+'</b> · '+safe(i.state)+' · '+safe(date(i.created_at))+' · '+safe(i.id)+'</p>').join("")+'</div>'+
+(x.invitations||[]).slice().reverse().map(i=>'<p><b>'+safe(i.scope)+'</b> · '+safe(i.state)+' · '+safe(date(i.created_at))+' · '+safe(i.id)+(i.provider_message_id?' · Provider ID '+safe(i.provider_message_id):'')+'</p>').join("")+'</div>'+
 '<div class="section-label">CHANGE HISTORY</div>'+
 ((x.activity||[]).length?'<ol class="history">'+x.activity.slice().reverse().map(h=>'<li>'+safe(date(h.at))+' · '+safe(h.stage)+' · '+safe(h.owner||"Unassigned")+(h.note?" — "+safe(h.note):"")+'</li>').join("")+'</ol>':'<p class="small">No operator updates recorded yet.</p>')+
 '<hr class="sep"><p class="small">Recommended role: '+safe(x.suggested_owner_role)+'. No external outreach, calendar booking, Company OS dispatch, verification or money movement occurs by saving this case.</p>'}
@@ -349,12 +349,18 @@ async function submitActivity(ev,x){
 }
 async function prepareInvitation(ev,x){
   ev.preventDefault();if(state.busy)return;state.busy=true;
-  const fd=new FormData(ev.currentTarget);
+  const fd=new FormData(ev.currentTarget),sendNow=ev.submitter?.value==="send";
   const rand=window.crypto&&window.crypto.randomUUID?window.crypto.randomUUID().replaceAll("-",""):"req_"+Date.now()+"_"+Math.random().toString(36).slice(2);
   const payload={expected_revision:Number(x.revision||0),scope:String(fd.get("scope")),message:String(fd.get("message")||"").trim(),request_id:rand};
-  text("invitation-status","Preparing opt-in link…");
+  text("invitation-status",sendNow?"Sending to the original consented source email…":"Preparing opt-in link…");
   try{
-    const result=await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/invitations","POST",payload);
+    const endpoint="/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/invitations"+(sendNow?"/send":"");
+    const result=await call(endpoint,"POST",payload);
+    if(sendNow){
+      await load();
+      if($("invitation-status"))text("invitation-status","Resend accepted invitation "+result.invitation_id+" · provider message "+result.provider_message_id+". Recipient delivery is not verified.");
+      return;
+    }
     if(!result.created||!result.share_token)throw Error("No new token issued; do not claim invitation delivered.");
     const url="https://www.noetfield.com/connect/respond/#case="+encodeURIComponent(x.intake_id)+"&inv="+encodeURIComponent(result.invitation_id)+"&token="+encodeURIComponent(result.share_token);
     await load();if(state.selected===x.intake_id){draw();loadGraph(x.intake_id)}

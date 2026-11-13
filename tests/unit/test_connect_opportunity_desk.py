@@ -281,3 +281,118 @@ def test_public_ui_shell_contains_no_private_records_or_keys():
         assert "private@example.test" not in response.text
         assert "localStorage" not in response.text
     asyncio.run(run())
+
+
+def test_authenticated_resend_invitation_uses_original_consented_contact_and_real_ack_only():
+    async def run():
+        original_admin=governance_api.settings.admin_dashboard_secret
+        original_resend=governance_api.settings.resend_api_key
+        original_enabled=governance_api.settings.intake_email_notify_enabled
+        governance_api.settings.admin_dashboard_secret=SecretStr("test-resend-invitation-secret")
+        governance_api.settings.resend_api_key=SecretStr("re_disposable_fixture_not_real")
+        governance_api.settings.intake_email_notify_enabled=True
+        iid="INT-ABCDEF123456"
+        rid="invite_req_canonical_test_0001"
+        payload={"expected_revision":0,"scope":"trial",
+                 "message":"Propose a mutually agreed scoped trial with a defined output.",
+                 "request_id":rid}
+        source={"intake_id":iid,"contact_consent":True,
+                "contact_name":"Original Contact","contact_email":"original@example.invalid"}
+        try:
+            with patch("noetfield_governance.intake_repository.get_connect_delivery_source",
+                       new_callable=AsyncMock) as read_source, \
+                 patch("noetfield_governance.intake_repository.create_connect_invitation",
+                       new_callable=AsyncMock) as prepare, \
+                 patch("noetfield_governance.intake_repository.claim_connect_invitation_send",
+                       new_callable=AsyncMock) as claim, \
+                 patch("noetfield_governance.intake_repository.finish_connect_invitation_send",
+                       new_callable=AsyncMock) as finish, \
+                 patch.object(governance_api,"send_connect_invitation") as delivery:
+                read_source.return_value=source
+                prepare.return_value={"created":True,
+                  "invitation_id":"inv_abcdef0123456789","share_token":"temporarysecret"*4}
+                claim.return_value={"claimed":True}
+                delivery.return_value={"provider_accepted":True,
+                                       "provider_message_id":"resend_test_ack_12345"}
+                finish.return_value={"state":"SENT_PROVIDER_ACCEPTED",
+                                      "provider_message_id":"resend_test_ack_12345",
+                                      "provider_accepted":True}
+                path="/api/opportunities/desk/"+iid+"/invitations/send"
+                async with AsyncClient(transport=ASGITransport(app=app),
+                                       base_url="http://test") as client:
+                    unauthorized=await client.post(path,json=payload)
+                    assert unauthorized.status_code==403
+                    wrong_origin=await client.post(path,json=payload,
+                                headers={"X-Admin-Secret":"test-resend-invitation-secret"})
+                    assert wrong_origin.status_code==403
+                    headers={"X-Admin-Secret":"test-resend-invitation-secret",
+                             "Origin":"http://test"}
+                    accepted=await client.post(path,json=payload,headers=headers)
+                    assert accepted.status_code==200,accepted.text
+                    assert accepted.json()["provider_message_id"]=="resend_test_ack_12345"
+                    assert accepted.json()["sent"] is True
+                    assert accepted.json()["recipient_delivery_verified"] is False
+                    assert "share_token" not in accepted.json()
+                    assert delivery.call_args.kwargs["recipient"]=="original@example.invalid"
+                    assert "temporarysecret" in delivery.call_args.kwargs["response_url"]
+                    assert finish.call_count==1
+                    prepare.return_value={"created":False,
+                      "invitation_id":"inv_abcdef0123456789","share_token":None}
+                    repeat=await client.post(path,json=payload,headers=headers)
+                    assert repeat.status_code==409
+                    assert delivery.call_count==1
+                    source["contact_consent"]=False
+                    blocked=await client.post(path,json={**payload,
+                        "request_id":"invite_req_canonical_test_0002"},headers=headers)
+                    assert blocked.status_code==422
+                    assert delivery.call_count==1
+        finally:
+            governance_api.settings.admin_dashboard_secret=original_admin
+            governance_api.settings.resend_api_key=original_resend
+            governance_api.settings.intake_email_notify_enabled=original_enabled
+    asyncio.run(run())
+
+
+def test_resend_transport_requires_provider_id_and_uses_idempotency_header():
+    from types import SimpleNamespace
+    import json
+    from unittest.mock import patch
+    from noetfield_governance.intake_notify import send_connect_invitation
+    settings=SimpleNamespace(
+        resend_api_key=SecretStr("re_synthetic_fixture"),
+        intake_email_notify_enabled=True,
+        intake_email_from="Noetfield <notifications@noetfield.com>",
+        casl_mailing_address="Vancouver BC Canada",
+    )
+    requests=[]
+    class ProviderResponse:
+        status=200
+        def __enter__(self):return self
+        def __exit__(self,*args):return False
+        def read(self,limit):return b'{"id":"resend_provider_test_12345"}'
+    def capture(req,timeout):
+        requests.append(req)
+        return ProviderResponse()
+    with patch("urllib.request.urlopen",side_effect=capture):
+        receipt=send_connect_invitation(
+            settings,recipient="verified-source@example.invalid",
+            contact_name="Original Applicant",scope="trial",
+            message="Please review this bounded and explicitly voluntary trial invitation.",
+            response_url="https://www.noetfield.com/connect/respond/#case=INT-ABCDEF123456&inv=inv_abcdef0123456789&token="+("x"*44),
+            invitation_id="inv_abcdef0123456789")
+    assert receipt["provider_accepted"] is True
+    assert receipt["provider_message_id"]=="resend_provider_test_12345"
+    assert receipt["recipient_delivery_verified"] is False
+    request=requests[0]
+    payload=json.loads(request.data)
+    assert payload["to"]==["verified-source@example.invalid"]
+    assert "Original Applicant" in payload["text"]
+    assert "Vancouver BC Canada" in payload["text"]
+    assert request.get_header("Idempotency-key")=="connect-invitation-inv_abcdef0123456789"
+    settings.resend_api_key=None
+    unconfigured=send_connect_invitation(
+        settings,recipient="verified-source@example.invalid",
+        contact_name="Applicant",scope="trial",message="Proposed real trial",
+        response_url="https://www.noetfield.com/connect/respond/#placeholder",
+        invitation_id="inv_abcdef0123456789")
+    assert unconfigured["provider_accepted"] is False
