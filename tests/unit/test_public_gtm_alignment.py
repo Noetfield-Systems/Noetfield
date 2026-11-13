@@ -98,13 +98,13 @@ def test_homepage_corporate_structure_locked() -> None:
     assert "nf-corp" in text
     for label in (
         "AGENT EXECUTION ASSURANCE",
-        "It runs the work, verifies the exact result, and lets you decide what gets accepted.",
+        "From ambitious ideas to real, editable software.",
         "founder-operated alpha",
         "Governed replacement",
         "Claims-boundary correction",
         "TrustField",
-        "OPEN NOETFIELD APP",
-        "WATCH A COMPLETE RUN",
+        "TRY THE CURRENT APP",
+        "EXAMINE A VERIFIED RUN",
         "/assets/noetfield-home-v2.css",
         "/system/",
         "/applications/",
