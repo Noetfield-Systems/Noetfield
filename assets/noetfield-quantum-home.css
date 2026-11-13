@@ -142,3 +142,16 @@ body.nf-corp.nf-home .nf-q-hero a:focus-visible{outline:3px solid #ffe2a5;outlin
  body.nf-corp.nf-home .nf-q-btn,body.nf-corp.nf-home .nf-q-signal,body.nf-corp.nf-home .nf-q-cap{transition:none}
  body.nf-corp.nf-home .nf-q-btn:hover,body.nf-corp.nf-home .nf-q-signal:hover,body.nf-corp.nf-home .nf-q-cap:hover{transform:none}
 }
+/* Keep inline icon dimensions bounded so browser intrinsic SVG sizing never shifts layout. */
+body.nf-corp.nf-home .nf-q-btn svg,body.nf-corp.nf-home .nf-q-cred svg{width:17px;height:17px;display:block}
+body.nf-corp.nf-home .nf-q-btn svg{transition:transform .2s ease}
+body.nf-corp.nf-home .nf-q-btn:hover svg{transform:translateX(3px)}
+/* The existing alpha app remains a substantive product chapter below the new corporate hero. */
+body.nf-corp.nf-home .nf-q-product-proof{padding:clamp(45px,7vw,85px) 0;background:linear-gradient(135deg,#faf9f5,#eeece7);border-top:1px solid rgba(24,28,40,.08)}
+body.nf-corp.nf-home .nf-q-product-proof .hero__grid{align-items:center}
+body.nf-corp.nf-home .nf-q-product-proof h2{font:500 clamp(1.8rem,3vw,3.05rem)/1.09 "Newsreader",Georgia,serif;letter-spacing:-.035em;color:#111927;max-width:22ch;margin:15px 0}
+body.nf-corp.nf-home .nf-q-product-proof .hero__lead{font-size:.98rem}
+body.nf-corp.nf-home .nf-q-product-proof .actions{gap:9px}
+body.nf-corp.nf-home .nf-q-product-proof .nf-button{min-height:42px;font-size:.65rem;padding:9px 13px}
+@media(max-width:760px){body.nf-corp.nf-home .nf-q-product-proof{padding:40px 0}body.nf-corp.nf-home .nf-q-product-proof .hero__grid{display:flex;flex-direction:column}body.nf-corp.nf-home .nf-q-product-proof h2{max-width:none}}
+@media(prefers-reduced-motion:reduce){body.nf-corp.nf-home .nf-q-btn:hover svg{transform:none}}
