@@ -32,7 +32,7 @@ def main() -> None:
     assert data.get("database_ready") is True, "Production PostgreSQL participation tables unavailable"
     assert data.get("daily_quest", {}).get("status") == "active", "Daily XP not active"
     assert data.get("token", {}).get("issued") is False, "Do not treat token as minted without verified contract"
-    assert cors.get("Access-Control-Allow-Origin") == ORIGIN, "Official website CORS missing"
+    assert {k.lower(): v for k, v in cors.items()}.get("access-control-allow-origin") == ORIGIN, "Official website CORS missing"
     wallet = "0x" + secrets.token_hex(20)
     code, challenge, headers = call("/challenge", "POST", {"wallet": wallet})
     assert code == 200, (code, challenge)
@@ -40,7 +40,7 @@ def main() -> None:
     assert "www.noetfield.com wants you to sign in" in challenge.get("message", "")
     assert "Chain ID: 8453" in challenge.get("message", "")
     assert "does not transfer funds" in challenge.get("message", "")
-    assert headers.get("Access-Control-Allow-Origin") == ORIGIN
+    assert {k.lower(): v for k, v in headers.items()}.get("access-control-allow-origin") == ORIGIN
     invalid_sig = "0x" + "00" * 65
     rejected, response, _ = call("/verify", "POST", {
         "wallet": wallet, "nonce": challenge["nonce"], "signature": invalid_sig
