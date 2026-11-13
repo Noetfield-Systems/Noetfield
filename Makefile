@@ -126,6 +126,7 @@ verify-static-www:
 	python3 scripts/noetfield_social_preview_v2.py verify
 	python3 scripts/verify_yc_social_links_v1.py
 	python3 scripts/verify-public-output-allowlist.py
+	python3 -m pytest -q tests/unit/test_noetfield_public_language_boundary.py
 	./scripts/verify-www-pages-dist.sh
 	./scripts/verify-static-www.sh
 	python3 scripts/verify-product-surface-manifest.py
