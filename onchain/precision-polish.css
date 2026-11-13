@@ -286,3 +286,61 @@ button,input,textarea,select{font-family:inherit}
  .nf-hero-right{padding:15px}
  .nf-section h2,.nf-faq-grid h2,.nf-close h2{font-size:29px}
 }
+
+/* Optical corrections verified against actual 390px and 1672px Chromium captures.
+   Earlier negative tracking visually collapsed word gaps in Instrument Sans. */
+.v5-hero h1{
+ letter-spacing:-.033em;
+ word-spacing:.105em;
+ font-kerning:normal;
+}
+.v5-hero h1 em{letter-spacing:-.028em;word-spacing:inherit}
+.v5-lead{letter-spacing:0;word-spacing:.032em}
+.v5-hero-services strong,.v5-hero-features strong,.v5-solutions-summary strong,.v5-journey-grid>a strong{
+ letter-spacing:-.006em;
+ word-spacing:.06em;
+}
+.v5-platform-copy h2,.v5-journey-heading h2,.v7-community-text h2,
+.audience-intro h2,.section-head h2{
+ letter-spacing:-.025em;
+ word-spacing:.085em;
+}
+.v5-platform-copy h2 em,.v7-community-text h2 em{letter-spacing:inherit;word-spacing:inherit}
+/* The chat script dynamically appends its v8 stylesheet after page CSS.
+   ID specificity deliberately wins that late injection on this page ONLY.
+   First-party chat remains functional, accessible, and reachable. */
+body[data-onchain-design="v6"] #nfChatFab{
+ width:45px;min-width:45px;height:45px;min-height:45px;
+ padding:0;display:flex;align-items:center;justify-content:center;gap:0;
+ border:1px solid rgba(174,240,183,.59);border-radius:12px;
+ color:#c4ffd0;background:#0b382b;
+ box-shadow:0 7px 24px rgba(0,0,0,.29),inset 0 1px rgba(228,255,228,.11);
+ font:500 17px "Instrument Sans",Inter,sans-serif;
+}
+body[data-onchain-design="v6"] #nfChatFab:hover,
+body[data-onchain-design="v6"] #nfChatFab[aria-expanded="true"]{
+ color:#eaffdf;background:#15543a;border-color:#cbffcb;
+}
+@media(max-width:900px){
+ .v5-hero h1{letter-spacing:-.032em;word-spacing:.085em}
+ .v5-hero h1 em{letter-spacing:-.028em}
+ .v5-platform-copy h2,.v5-journey-heading h2,.v7-community-text h2,
+ .audience-intro h2,.section-head h2{letter-spacing:-.026em;word-spacing:.08em}
+ body[data-onchain-design="v6"] #nfChatFab{
+  width:42px;min-width:42px;height:42px;min-height:42px;
+  right:14px;bottom:calc(13px + env(safe-area-inset-bottom,0px));
+  border-radius:12px;font-size:16px;
+ }
+}
+@media(max-width:420px){
+ .v5-hero h1{letter-spacing:-.030em;word-spacing:.075em;font-size:clamp(34px,8.8vw,38px)}
+ .v5-actions .v5-button{word-spacing:.04em}
+}
+/* Make narrower 320/360px phones first-class rather than overflowing the nav. */
+@media(max-width:370px){
+ .v5-nav-actions .v5-nav-primary{font-size:0!important;min-width:73px;justify-content:center}
+ .v5-nav-actions .v5-nav-primary::after{
+  content:"Launch ↗";font:700 10px "Instrument Sans",Inter,sans-serif;letter-spacing:-.01em;
+ }
+ .v5-brand{font-size:12.3px;letter-spacing:.045em}
+}
