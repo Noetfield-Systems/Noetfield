@@ -344,3 +344,88 @@ body[data-onchain-design="v6"] #nfChatFab[aria-expanded="true"]{
  }
  .v5-brand{font-size:12.3px;letter-spacing:.045em}
 }
+
+/* Deep-page cohesion: same typographic voice for proof, FAQ, pilot and roadmap,
+   not only the photogenic first fold. */
+@media(max-width:760px){
+ main :is(.audience-intro h2,.section-head h2,.v5-ecosystem-heading h2,.v5-community-copy h2,
+   .v5-token-copy h2,.v5-agent-copy h2,.v5-roadmap-top h2,.v5-paper-panel h2,
+   .v5-platform-copy h2,.v5-journey-heading h2,.v7-community-text h2,
+   #paid-sprint h2,#project h2){
+  font-family:"Instrument Sans",Inter,system-ui,sans-serif;
+  font-size:clamp(26px,6.8vw,34px);
+  line-height:1.17;
+  font-weight:610;
+  letter-spacing:-.025em;
+  word-spacing:.078em;
+  text-wrap:balance;
+ }
+ main :is(.v5-community-copy h2,.v5-token-copy h2,.v5-agent-copy h2,.v5-paper-panel h2,
+   .v5-roadmap-top h2,.section-head h2,#paid-sprint h2) em{
+  font-family:"Instrument Sans",Inter,system-ui,sans-serif!important;
+  font-style:italic;
+  font-weight:540;
+  color:#bcecb9;
+  letter-spacing:-.02em;
+  word-spacing:.08em;
+ }
+ main :is(.audience-item strong,.tile h3,.proof h3,.case h3,
+   .v5-ecosystem-grid article h3,.v5-roadmap-grid article h3,.process article h3,
+   .v5-community h3,.v5-paper h3){
+  font-family:"Instrument Sans",Inter,system-ui,sans-serif;
+  font-size:clamp(17px,4.9vw,21px);
+  font-weight:610;
+  line-height:1.22;
+  letter-spacing:-.014em;
+  word-spacing:.065em;
+  text-wrap:pretty;
+ }
+ main :is(.tile p,.proof p,.case p,.process p,.v5-ecosystem-grid article p,
+   .v5-community-copy>p:not(.v5-section-label),.v5-token-copy>p:not(.v5-section-label),
+   .v5-agent-copy>p:not(.v5-section-label),.v5-roadmap article p,
+   .section-head .intro,.v5-paper-panel p){
+  font-family:"Instrument Sans",Inter,system-ui,sans-serif;
+  font-size:13.2px;
+  font-weight:450;
+  line-height:1.61;
+  letter-spacing:0;
+  word-spacing:.025em;
+  color:#b7d0c0;
+ }
+ main :is(.tile,.proof,.case,.v5-ecosystem-grid article,.v5-roadmap article,.process article){
+  border-radius:10px;
+ }
+ main .tile{min-height:0;padding:24px 22px;background:linear-gradient(140deg,#0b3429,#06231d)}
+ main .tile h3{margin:18px 0 12px;font-size:19.5px}
+ main .tile .number{font-size:9.8px;letter-spacing:.045em}
+ main .tile .micro{font-size:9.5px;letter-spacing:.025em;line-height:1.35}
+ main .v5-audiences{padding-block:35px}
+ main .audience-grid{gap:0}
+ main .audience-intro{margin-bottom:12px}
+ main .audience-item{padding:17px 12px}
+ main .audience-item strong{font-size:14px;line-height:1.3}
+ main .audience-item small{font-size:11.2px;line-height:1.46}
+ main .audience-symbol{font-size:24px}
+ main .audience-arrow{font-size:13px}
+ main .section-head{margin-bottom:24px}
+ main .block{padding-block:47px}
+ main .highlight{padding-block:49px}
+ main .kicker{font-size:9.5px;letter-spacing:.11em}
+ main .proof{padding:17px}
+ main .proof h3{font-size:20px}
+ main .v5-ecosystem-vision,.v5-community,.v5-token,.v5-agent,.v5-roadmap,.v5-paper{padding-block:45px}
+ main .v5-ecosystem-grid{gap:12px}
+ main .v5-ecosystem-grid article{padding:22px}
+ main .v5-ecosystem-grid article h3{font-size:18px}
+ main .v5-roadmap article h3{font-size:18.5px}
+ main .v5-paper-panel{border-radius:11px;padding:22px}
+ main .v5-paper-panel h2{font-size:28px}
+ main .v5-roadmap-top{margin-bottom:24px}
+ main .sprint-offer{border-radius:11px;padding:22px}
+ main .case{padding:22px}
+ main .process article{padding:21px}
+ main .v5-agent-intents button,.v5-paper-panel>a,.audience-item,
+ main .v5-community-actions a{min-height:44px}
+ main #project input,main #project textarea,main #project select,
+ main .v5-community input,main .v5-community select{font-size:16px}
+}
