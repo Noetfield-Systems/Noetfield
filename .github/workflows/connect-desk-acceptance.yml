@@ -8,6 +8,7 @@ on:
       - 'services/governance/noetfield_governance/postgres_intake_store.py'
       - 'services/governance/noetfield_governance/api.py'
       - 'services/governance/noetfield_governance/workforce_connect_bridge.py'
+      - 'services/governance/noetfield_governance/connect_due_worker.py'
       - 'tests/unit/test_workforce_connect_bridge.py'
       - 'assets/noetfield-contributor-apply.js'
       - 'work-with-us/contribute/index.html'
