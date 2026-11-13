@@ -69,7 +69,7 @@ def main() -> int:
                         art = page.locator(".v5-campus")
                         assert art.evaluate("(el)=>el.complete && el.naturalWidth >= 600")
                         if width >= 1440:
-                            assert art.evaluate("(el)=>el.naturalWidth >= 1200"), "desktop hero source is low resolution"
+                            assert art.evaluate("(el)=>el.currentSrc.endsWith(\"/onchain/hero-architecture-hd.webp\")"), "desktop is not using high-definition hero source"
                         assert page.locator(".nf-nav-solutions a").count() == 4
                         assert page.locator(".v5-hero-services a").count() == 4
                         assert page.locator("form#nfOnchainIntake[data-nf-intake-form]").count() == 1
