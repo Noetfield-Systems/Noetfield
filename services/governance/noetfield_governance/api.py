@@ -2275,3 +2275,49 @@ async def runtime_console() -> dict[str, object]:
             "registered": sorted(inspector_runtime.inspectors.keys()),
         },
     }
+
+
+# Internal, credential-isolated recipient proof for the existing Runway mailbox
+# verifier. No mailbox password is copied into the Runway Railway project.
+from noetfield_governance.mailbox_receipt import observe_mailbox_token
+
+
+class MailboxObserveRequest(BaseModel):
+    expected_verification_token: str = Field(
+        min_length=8, max_length=128, pattern=r"^[A-Za-z0-9_.:-]+$"
+    )
+    expected_recipient: str = Field(min_length=5, max_length=254)
+    max_age_minutes: int = Field(default=30, ge=1, le=120)
+
+
+@app.post("/api/internal/mailbox-verifier/observe", tags=["internal"], include_in_schema=False)
+async def independent_mailbox_observe(
+    payload: MailboxObserveRequest, request: Request
+) -> dict[str, object]:
+    bridge_secret = os.getenv("NOETFIELD_MAILBOX_BRIDGE_TOKEN", "").strip()
+    if len(bridge_secret) < 32:
+        raise HTTPException(status_code=503, detail="MAILBOX_BRIDGE_NOT_CONFIGURED")
+    if not hmac.compare_digest(
+        request.headers.get("authorization", ""),
+        "Bearer " + bridge_secret,
+    ):
+        raise HTTPException(status_code=401, detail="AUTH_REQUIRED")
+    mailbox = str(settings.gmail_mailbox or "").strip()
+    password = _secret(settings.gmail_app_password)
+    if not mailbox or not password:
+        raise HTTPException(status_code=503, detail="MAILBOX_CREDENTIALS_NOT_CONFIGURED")
+    try:
+        evidence = await asyncio.to_thread(
+            observe_mailbox_token,
+            mailbox=mailbox,
+            password=password,
+            token=payload.expected_verification_token,
+            expected_recipient=payload.expected_recipient,
+            max_age_minutes=payload.max_age_minutes,
+        )
+    except Exception:
+        logger.warning("mailbox_verifier_bridge_credential_or_transport_error")
+        raise HTTPException(status_code=503, detail="MAILBOX_OBSERVER_UNAVAILABLE")
+    if evidence is None:
+        raise HTTPException(status_code=404, detail="EXTERNAL_EFFECT_NOT_OBSERVED")
+    return evidence
