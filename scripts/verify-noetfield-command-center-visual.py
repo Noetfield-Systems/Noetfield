@@ -64,3 +64,20 @@ try:
     print("COMMAND_CENTER_SITE_AUDIT_P0="+json.dumps(p0,ensure_ascii=False),flush=True)
 except json.JSONDecodeError:
     print("COMMAND_CENTER_SITE_AUDIT_ERROR="+(audit.stderr or audit.stdout)[-1000:],flush=True)
+
+# Only the route-group fingerprints are printed; never expose private build paths.
+try:
+    import sys
+    sys.path.insert(0,str(ROOT/"scripts"))
+    from site_audit import audit as nav_audit, crawl as nav_crawl
+    nav_dir=OUT/"nav-snapshots"
+    idx=nav_crawl.crawl_disk(ROOT,nav_dir,max_pages=120)
+    groups={}
+    for row in idx["index"]:
+        if row.get("row_class")!="HTML":continue
+        blob=(nav_dir/row["snapshot"]).read_text(encoding="utf-8")
+        mark=tuple(sorted(nav_audit.nav_fingerprint(blob)))
+        groups.setdefault(mark,[]).append(row["www_path"])
+    print("COMMAND_CENTER_NAV_GROUPS="+json.dumps([{"pages":v,"links":k} for k,v in groups.items()]),flush=True)
+except Exception as exc:
+    print("COMMAND_CENTER_NAV_DIAGNOSTIC_ERROR="+str(exc),flush=True)
