@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><meta name="theme-color" content="#071512">
+<title>Noetfield Network | Wallet · Daily Quest · Ecosystem</title>
+<meta name="description" content="Join the Noetfield Onchain ecosystem with your EVM wallet. Earn verified in-app XP from daily participation, unlock a referral link, explore AI agent and RWA utility, and follow the NFIELD token design.">
+<meta name="robots" content="index,follow"><link rel="canonical" href="https://www.noetfield.com/onchain/hub/">
+<meta property="og:type" content="website"><meta property="og:title" content="Noetfield Network — The programmable value community">
+<meta property="og:description" content="Wallet identity, real daily XP, community quests and verifiable RWA and AI agent infrastructure.">
+<meta property="og:url" content="https://www.noetfield.com/onchain/hub/">
+<link rel="icon" href="/noetfield-favicon-512.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/onchain/hub/hub.css?v=1"><script src="/onchain/hub/hub.js?v=1" defer></script></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell head-layout">
+<a class="brand" href="/onchain/" aria-label="Return to Noetfield Onchain"><span class="brand-logo">N</span><span>NOETFIELD <small>ONCHAIN NETWORK</small></span></a>
+<nav aria-label="Network sections"><a href="#utility">Utility</a><a href="#quests">Season 0</a><a href="#token">Token</a><a href="#roadmap">Roadmap</a><a href="/onchain/whitepaper/">Whitepaper ↗</a></nav>
+<button class="btn btn-outline head-connect" type="button" id="connectNav">Connect wallet <span>↗</span></button>
+</div></header>
+<main id="main">
+<section class="hero"><div class="hero-grid"></div><div class="shell hero-layout">
+<div class="hero-copy"><div class="eyebrow"><span class="indicator"></span> NOETFIELD / THE FOUNDING NETWORK <span class="hero-label">SEASON 0</span></div>
+<h1>Real-world value.<br><em>Onchain participation.</em></h1>
+<p class="hero-lead">Join a network building the infrastructure for RWA, AI agents, and policy-powered onchain operations. Your participation starts with a real wallet identity, verifiable actions, and a lasting contribution record.</p>
+<div class="hero-actions"><button id="connectHero" class="btn btn-primary" type="button">Connect wallet &amp; join <span>↗</span></button>
+<a class="btn btn-glass" href="/onchain/whitepaper/">Read the ecosystem paper <span>↗</span></a></div>
+<div class="hero-foot"><span><b>01</b> WALLET SIGN-IN</span><span><b>02</b> DAILY PARTICIPATION</span><span><b>03</b> VERIFIED REFERRALS</span></div>
+</div>
+<div class="network-art" aria-label="Conceptual architecture: real world assets, policy and agent execution">
+<div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+<div class="node-core"><div class="node-monogram">N</div><strong>NOETFIELD</strong><small>POLICY · PROOF · EXECUTION</small></div>
+<div class="art-node node-a"><span>▧</span><b>REAL-WORLD ASSETS</b><small>Rights / issuance / servicing</small></div>
+<div class="art-node node-b"><span>◇</span><b>POLICY ENGINE</b><small>Authority / eligible actions</small></div>
+<div class="art-node node-c"><span>⌘</span><b>AI AGENTS</b><small>Automate / verify / deliver</small></div>
+<div class="art-node node-d"><span>⬡</span><b>ONCHAIN SYSTEMS</b><small>Integrate / reconcile / prove</small></div>
+</div></div></section>
+<section class="network-strip"><div class="shell strip-layout"><span>OUR INFRASTRUCTURE THESIS</span><strong>Real assets</strong><i>→</i><strong>Executable policy</strong><i>→</i><strong>Autonomous operations</strong><i>→</i><strong>Verifiable value</strong></div></section>
+
+<section class="workspace shell" id="quests">
+<div class="section-heading"><div><div class="kicker">01 / PARTICIPATION ENGINE</div><h2>Your network, <em>in motion.</em></h2><p>Wallet-based membership and server-verified daily XP. Designed to recognize activity, not inflate follower or wallet counts.</p></div>
+<div class="backend-state" id="backendState" role="status" aria-live="polite"><span class="pulse"></span> Checking community network</div></div>
+<div class="dashboard-grid">
+<div class="app-card wallet-card" id="wallet">
+<div class="card-top"><span>01 / COMMUNITY PASSPORT</span><span id="walletState" class="chip">NOT CONNECTED</span></div>
+<div class="wallet-identity"><div class="wallet-orb">◈</div><div><small>YOUR IDENTITY</small><strong id="walletAddress">Connect an EVM wallet</strong><p id="walletSubline">Sign once. No funds leave your wallet.</p></div></div>
+<div class="stats"><div><span>SEASON XP</span><strong id="xp">—</strong><small>Non-transferable</small></div><div><span>DAILY STREAK</span><strong id="streak">—</strong><small>UTC calendar days</small></div><div><span>CLAIM STATUS</span><strong id="claimStatus">—</strong><small id="claimHint">After sign-in</small></div></div>
+<button class="btn btn-primary full" type="button" id="connectWallet">Connect &amp; sign your passport ↗</button>
+<p class="disclaimer">Wallet sign-in is cryptographically verified. No gas fee for signing. XP is not a token balance, cash, purchase right or guaranteed future allocation.</p>
+</div>
+<div class="app-card quest-card">
+<div class="card-top"><span>02 / TODAY'S QUEST</span><span class="chip chip-green">SERVER VERIFIED</span></div>
+<div class="quest-emblem">◉<div class="quest-ray"></div></div>
+<div class="quest-meta">DAILY PRESENCE · UTC DAY</div>
+<h3>Claim your daily<br><em>participation XP.</em></h3>
+<p>Come back each UTC day, confirm your wallet identity, and grow a streak. Each claim is recorded once in Noetfield's database with a verifiable ledger event.</p>
+<div class="claim-detail"><span>STARTS AT</span><b>+10 XP</b><span>STREAK CAP</span><b>+24 XP / day</b></div>
+<button id="dailyClaim" type="button" class="btn btn-primary full" disabled>Connect wallet to claim</button>
+<p id="dailyStatus" class="inline-status" role="status" aria-live="polite"></p>
+</div>
+<div class="app-card invite-card">
+<div class="card-top"><span>03 / GROW THE NETWORK</span><span class="chip">QUALIFIED INVITES</span></div>
+<div class="invite-illustration"><div>YOU</div><span>●──────●──────●</span><div>BUILDERS</div></div>
+<h3>Bring people<br>who <em>participate.</em></h3>
+<p>Share a unique invitation. Referral XP is recorded only when the invited wallet completes its first verified daily quest.</p>
+<label for="inviteLink" class="field-name">YOUR PERSONAL REFERRAL LINK</label>
+<div class="copy-line"><input id="inviteLink" readonly aria-label="Personal referral link" placeholder="Connect to generate a link"><button id="copyInvite" type="button" disabled>Copy</button></div>
+<button id="shareInvite" type="button" class="text-btn" disabled>Share your invite ↗</button>
+<p class="disclaimer">No rewards for fake accounts, wallet creation alone or raw follower counts.</p>
+</div>
+</div>
+</section>
+
+<section class="utility-section" id="utility"><div class="shell">
+<div class="section-heading"><div><div class="kicker">02 / UTILITY, NOT JUST ATTENTION</div><h2>Why this network <em>exists.</em></h2><p>Noetfield's real business is infrastructure and engineering. Community participation helps discover builders, customers, integrations and useful work across these systems.</p></div><a href="/onchain/#project" class="outline-link">Scope a project ↗</a></div>
+<div class="utility-grid">
+<a class="utility-card" href="https://scan.noetfield.com/rwa-clinic/" target="_blank" rel="noopener"><span class="utility-number">01 / RWA &amp; PRIVATE CREDIT</span><span class="utility-icon">▣</span><h3>Make real assets<br>operationally ready.</h3><p>Asset rights, legal/operational requirements, credit workflows and issuer integrations.</p><span class="utility-link">Inspect RWA Clinic ↗</span></a>
+<a class="utility-card" href="https://control.noetfield.com/sandbox" target="_blank" rel="noopener"><span class="utility-number">02 / AGENT AUTHORITY</span><span class="utility-icon">⬡</span><h3>Agents that act<br>within boundaries.</h3><p>Authorization, executable policy, human confirmations, kill switches and verifiable receipts.</p><span class="utility-link">Test Agent Control ↗</span></a>
+<a class="utility-card" href="/onchain/#project"><span class="utility-number">03 / ONCHAIN ENGINEERING</span><span class="utility-icon">⌘</span><h3>From policy<br>to working code.</h3><p>APIs, wallets, smart-contract integrations, settlement workflows, reporting and verification.</p><span class="utility-link">Discuss a build ↗</span></a>
+</div></div></section>
+
+<section class="token-section" id="token"><div class="shell token-layout">
+<div class="token-symbol-wrap"><div class="token-orbit"></div><div class="token-emblem">N<span>◈</span></div><div class="token-caption">PROPOSED ECOSYSTEM UTILITY · BASE</div></div>
+<div class="token-copy"><div class="kicker">03 / TOKEN &amp; ONCHAIN ECONOMY</div><h2>Participation now.<br><em>Programmable utility next.</em></h2><p><strong>NFIELD</strong> is the proposed ecosystem token for future participation-driven access and agent/service coordination. The design connects infrastructure usage, builder contributions and community utility. A token must never be confused with ownership of an underlying real-world asset.</p>
+<div class="token-facts"><div><span>NETWORK</span><strong>Base / EVM</strong></div><div><span>SYMBOL</span><strong>NFIELD <small>Proposed</small></strong></div><div><span>SMART CONTRACT</span><strong id="tokenContract">Not deployed</strong></div></div>
+<div class="token-actions"><button class="btn btn-primary" type="button" id="tokenJoin">Join token updates ↗</button><a class="btn btn-glass" href="/onchain/whitepaper/#token-design">Token design &amp; whitepaper ↗</a></div>
+<p class="disclaimer">No NFIELD issuance, sale, liquidity pool, redemption, claimable airdrop or price is live. Daily XP is server-recorded participation, not a claimable cryptocurrency.</p>
+</div></div></section>
+
+<section class="founding shell" id="founding"><div class="section-heading"><div><div class="kicker">04 / FOUNDING ACCESS</div><h2>Get closer to the <em>launch.</em></h2><p>Join the wallet-linked community registry and choose the product area you want to follow. Your participation stays separate from any future token eligibility rules.</p></div></div>
+<div class="founding-layout">
+<div class="waitlist-card"><div class="card-top"><span>FOUNDING INTEREST REGISTRY</span><span class="chip chip-green">OPEN</span></div>
+<h3>Your wallet. Your interests.</h3>
+<p>Connect a wallet to join. Email updates are optional and only activated when you opt in.</p>
+<form id="foundingForm">
+<label class="field-name" for="interest">I'M HERE FOR</label>
+<select id="interest" name="interest"><option value="ecosystem">The wider Noetfield ecosystem</option><option value="token-updates">Token design and launch updates</option><option value="airdrop-design">Airdrop and contribution program updates</option><option value="rwa">RWA / private credit integrations</option><option value="ai-agent">AI Agent and policy infrastructure</option><option value="builder">Builder and engineering opportunities</option></select>
+<label class="field-name" for="email">EMAIL (OPTIONAL)</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@domain.com" maxlength="254">
+<label class="consent"><input type="checkbox" id="emailOptIn"> Send me updates about the selected program (requires email)</label>
+<button id="joinRegistry" type="submit" class="btn btn-primary full" disabled>Connect wallet to join</button>
+<div id="waitlistStatus" class="inline-status" role="status" aria-live="polite"></div>
+</form>
+</div>
+<div class="community-board">
+<div class="card-top"><span>COMMUNITY / VERIFIED ONLY</span><span class="chip">OPT-IN RANKING</span></div>
+<h3>Early participation</h3><p>Only members who explicitly opt in to the leaderboard appear here. No seeded avatars, accounts or imaginary community counts.</p>
+<div class="board-list" id="leaderboard"><div class="board-empty">No public data loaded yet.</div></div>
+<label class="consent"><input type="checkbox" id="leaderboardOptIn" disabled> Show my abbreviated wallet on the public XP leaderboard</label>
+<div class="board-links"><a href="/onchain/whitepaper/">Ecosystem whitepaper ↗</a><a href="/onchain/#evidence">First-party technical proof ↗</a></div>
+</div>
+</div>
+</section>
+
+<section class="roadmap-section" id="roadmap"><div class="shell">
+<div class="section-heading"><div><div class="kicker">05 / EXECUTION ROADMAP</div><h2>From working systems<br>to a <em>working economy.</em></h2></div></div>
+<div class="roadmap-grid">
+<div><span class="step-label step-live">AVAILABLE / PHASE 01</span><b>Proof &amp; participation</b><p>RWA/agent demos, first-party project intake, wallet signatures, database-recorded XP and founding registry.</p></div>
+<div><span class="step-label step-live">AVAILABLE / PHASE 02</span><b>Verified community loop</b><p>Daily quests, streaks, unique invites and qualified XP referrals. Actual usage will determine additional quests.</p></div>
+<div><span class="step-label">PROPOSED / PHASE 03</span><b>NFIELD smart contract</b><p>ERC-20 utility implementation, published allocations, distribution conditions and a verified contract address.</p></div>
+<div><span class="step-label">FUTURE / PHASE 04</span><b>Token access &amp; markets</b><p>Eligible claims, funded liquidity and swaps through established onchain providers once contracts and settlement are live.</p></div>
+</div></div></section>
+<section class="closing"><div class="shell closing-layout"><div><span class="kicker">THE NETWORK STARTS WITH USEFUL WORK</span><h2>Join the builders moving<br><em>real value forward.</em></h2></div><button class="btn btn-primary" type="button" id="connectBottom">Connect wallet &amp; join ↗</button></div></section>
+</main>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<footer><div class="shell footer-layout"><a class="brand" href="/onchain/"><span class="brand-logo">N</span><span>NOETFIELD <small>SYSTEMS INC.</small></span></a><p>Vancouver, Canada · Real-to-Onchain engineering<br>Wallet identity and XP are not financial services or token custody.</p><div><a href="/onchain/">Platform</a><a href="/onchain/whitepaper/">Whitepaper</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></div></div></footer>
+</body></html>
