@@ -429,3 +429,16 @@ body[data-onchain-design="v6"] #nfChatFab[aria-expanded="true"]{
  main #project input,main #project textarea,main #project select,
  main .v5-community input,main .v5-community select{font-size:16px}
 }
+
+/* Narrow phone correction from actual 320/360px browser captures:
+   never let the two capability labels crowd into one another. */
+@media(max-width:375px){
+ .v5-hero-features{grid-template-columns:1fr;gap:0;padding-block:4px}
+ .v5-hero-features>span,.v5-hero-features>span:nth-child(2n){
+  padding:9px 0;gap:11px;min-height:43px;align-items:center;
+ }
+ .v5-hero-features b{width:22px;text-align:center;font-size:19px}
+ .v5-hero-features strong{font-size:11.8px}
+ .v5-hero-features small{font-size:10.5px;margin-top:2px}
+ .v8-network-entry>span:last-child{display:none}
+}
