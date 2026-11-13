@@ -55,3 +55,12 @@ finally:
 (OUT/"report.json").write_text(json.dumps(results,indent=2)+"\n",encoding="utf-8")
 print(json.dumps(results,indent=2))
 print("noetfield_command_center_visual: PASS")
+
+# Expose P0 site-audit evidence in the visual CI log for exact, actionable correction.
+audit=subprocess.run(["python3","scripts/nf_site_audit_v1.py","--mode","disk","--fail-on","P0","--json"],cwd=ROOT,capture_output=True,text=True)
+try:
+    audit_data=json.loads(audit.stdout)
+    p0=[{"check":f.get("check"),"reason":f.get("reason"),"page":f.get("page"),"evidence":f.get("evidence")} for f in audit_data.get("findings",[]) if f.get("severity")=="P0"]
+    print("COMMAND_CENTER_SITE_AUDIT_P0="+json.dumps(p0,ensure_ascii=False),flush=True)
+except json.JSONDecodeError:
+    print("COMMAND_CENTER_SITE_AUDIT_ERROR="+(audit.stderr or audit.stdout)[-1000:],flush=True)
