@@ -31,7 +31,7 @@ def main() -> int:
             assert page.locator("h1").count() == 1
             assert "From real-world value" in page.locator("h1").inner_text()
             hero_font = page.locator("h1").evaluate("(el)=>getComputedStyle(el).fontFamily")
-            assert "Instrument Sans" in hero_font, (width, hero_font)
+            assert ("Newsreader" if width >= 1141 else "Instrument Sans") in hero_font, (width, hero_font)
             assert page.locator(".v5-hero-services a").count() == 4
             if width <= 900:
                 stage = page.locator(".nf-mobile-art-stage")
@@ -53,6 +53,11 @@ def main() -> int:
                     assert spacing > 2, (width, "collapsed heading word spaces", spacing)
                 result["mobile_title_px"] = title_size
             assert page.locator(".v5-solutions-summary a").count() == 4
+            assert page.locator(".v5-solutions-summary .nf-sol-art").count() == 4
+            assert page.locator(".nf-reference-quicklinks a").count() == 7
+            assert page.locator('[data-network="base"]').count() == 1
+            assert page.locator('[data-network="bnb"]').count() == 1
+            assert page.locator('#onchainNav details').count() == 3
             assert page.locator(".v5-journey-grid > a").count() == 3
             assert page.locator(".nf-reference-join a[href='/onchain/hub/']").count() == 1
             assert page.locator(".v7-community-band a[href='/onchain/hub/']").count() == 1
@@ -105,6 +110,15 @@ def main() -> int:
                 result["reference_outcomes_top"] = round(outcomes["y"])
                 assert page.locator(".v5-hero-services").is_visible()
                 assert page.locator(".v5-journey-grid > a").first.is_visible()
+                quick = page.locator(".nf-reference-quicklinks").bounding_box()
+                assert quick is not None and quick["y"] < 960, ("Quick demos strip does not appear within reference fold",quick)
+                result["quick_links_top"] = round(quick["y"])
+                cards = page.locator(".v5-solutions-summary a").all()
+                assert all(card.is_visible() for card in cards)
+                art = page.locator(".nf-card-rwa .nf-sol-art").evaluate("(el)=>getComputedStyle(el).backgroundImage")
+                assert "case-rwa-v7.svg" in art, "RWA image-backed card is missing"
+                platform_h = page.locator(".v5-platform").bounding_box()["height"]
+                assert platform_h < 290, ("Platform too tall versus reference",platform_h)
             page.screenshot(path=str(OUT / f"onchain-v7-{width}-fold.png"), animations="disabled")
             if width in (360, 390, 768):
                 page.screenshot(path=str(OUT / f"onchain-v7-{width}-full.png"), full_page=True, animations="disabled")
@@ -165,7 +179,7 @@ def main() -> int:
     (OUT / "report.json").write_text(json.dumps(rows, indent=2) + "\n")
     for row in rows:
         print("PASS", row)
-    print("PASS onchain v7: real local browser renders, 4 visual viewports, art, all CTA surfaces, dynamic layers/networks, use case intake and responsive mobile menu")
+    print("PASS onchain reference v10: 8 real browser widths, editorial desktop hero, 7 functional quicklinks, 6 network explorers, 4 interactive cards, no mobile overflow, intake preserved")
     return 0
 
 
