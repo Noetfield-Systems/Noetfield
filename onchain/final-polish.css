@@ -34,3 +34,7 @@
 @media(max-width:900px){.v5-campus{object-position:center top;mask-image:linear-gradient(180deg,transparent,rgba(0,0,0,.52) 12%,#000 43%,rgba(0,0,0,.16) 100%)}.v5-hero-overlay{background:linear-gradient(180deg,rgba(2,17,14,.93) 0%,rgba(1,12,12,.86) 31%,rgba(2,12,12,.22) 69%,rgba(1,15,14,.76) 100%)}.v5-hero-services a strong{font-size:11px}.v5-hero h1{font-size:clamp(45px,8.8vw,67px)}}
 @media(max-width:460px){.v5-brand{font-size:15px;letter-spacing:.04em}.v5-hero h1{font-size:clamp(43px,11.1vw,52px)}.v5-hero-services a strong{font-size:10px}.v5-hero-features small{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.v5-journey-grid>a,.v5-solutions-summary a,.v5-hero-services a{transition:none!important}}
+
+/* Expanded service footer must wrap instead of stretching 390px mobile layout. */
+.footerrow{min-width:0}.footlinks{flex-wrap:wrap;max-width:100%;row-gap:9px;min-width:0}
+@media(max-width:600px){.footlinks{gap:9px 17px;justify-content:flex-start}.footerrow>div{min-width:0}}
