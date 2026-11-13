@@ -1,5 +1,23 @@
 # Noetfield Systems Inc.
-> AI workflows, RWA readiness and real-to-onchain engineering with explicit authority, verifiable controls and evidence boundaries.
+> Building the next generation of intelligent businesses.
+
+Noetfield Systems Inc. is a Canadian technology and venture infrastructure company connecting real businesses and people, intelligent engineering and operations, and real-world assets to the digital economy. TrustField is an independent venture in formation, supported on technical setup. BuildRelay and Cairn are independent projects.
+
+## Corporate and commercial discovery
+- [Canonical corporate manifest](https://www.noetfield.com/corporate.json): Legal operating identity, ownership boundaries, availability, action semantics and status claims
+- [Build a Business / Work With Us](https://www.noetfield.com/work-with-us/): Founder, human expert, AI-agent operator, commercial client and investor participation. Real persisted intake only when confirmed by API
+- [Connect](https://www.noetfield.com/connect/): Commercial scoping and opportunity wizard
+- [Company OS](https://www.noetfield.com/company-os/): Evolving agent-assisted business operations
+- [Investor and Diligence Gateway](https://www.noetfield.com/investors/): First-party evidence and corporate investment information, not an offer to invest
+- [Proof and Assurance](https://www.noetfield.com/proof/): First-party records and limitations
+- [API description](https://www.noetfield.com/openapi.json): Public read resources and the existing commercial intake endpoint
+
+## Human and authorized-agent interaction
+1. Read corporate.json to determine the applicable service, organization and status.
+2. Inspect the linked public evidence; a demonstration is not a contract or certified outcome.
+3. With the relevant human's authorization and explicit contact consent, POST a scoped non-confidential enquiry to /api/intake as described in openapi.json.
+4. The response counts as persisted only with intake_persisted=true and a durable intake_id. A notification_reference is not an accepted application.
+5. An operator reviews the request; no automatic access to private agents, financial controls or Founder OS is offered.
 
 ## Primary
 - [RWA & Onchain Infrastructure](https://www.noetfield.com/onchain/): Client-facing engineering, demonstrations, delivery model and project intake
