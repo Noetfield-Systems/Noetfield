@@ -66,19 +66,20 @@ def main() -> int:
                 assert page.locator(".v5-hero-services").is_visible()
                 assert page.locator(".v5-journey-grid > a").first.is_visible()
             page.screenshot(path=str(OUT / f"onchain-v7-{width}-fold.png"), animations="disabled")
-            if os.environ.get("ONCHAIN_EMIT_PREVIEW") == "1" and width == 1440:
+            if os.environ.get("ONCHAIN_EMIT_PREVIEW") == "1" and width in (1440, 390):
                 # Public screenshot thumbnail in QA logs for independent visual evaluation.
                 # Chunks avoid GitHub runner's individual log-line length limits.
                 from io import BytesIO
                 from PIL import Image
                 import base64
                 preview = Image.open(OUT / f"onchain-v7-{width}-fold.png").convert("RGB")
-                preview.thumbnail((760, 490))
+                preview.thumbnail((760, 650))
                 buf = BytesIO()
                 preview.save(buf, format="JPEG", quality=45, optimize=True)
                 b64 = base64.b64encode(buf.getvalue()).decode("ascii")
                 for index, offset in enumerate(range(0, len(b64), 5000)):
-                    print("V7_PREVIEW_PART_%03d:" % index + b64[offset:offset + 5000], flush=True)
+                    label = "DESKTOP" if width == 1440 else "MOBILE"
+                    print("V7_PREVIEW_" + label + "_PART_%03d:" % index + b64[offset:offset + 5000], flush=True)
             policy = page.locator('[data-layer="policy"]')
             policy.scroll_into_view_if_needed()
             policy.click(timeout=10000)
