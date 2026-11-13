@@ -90,3 +90,19 @@ def observe_mailbox_token(
             client.logout()
         except Exception:
             pass
+
+
+def probe_mailbox_read_access(*, mailbox: str, password: str) -> bool:
+    """One bounded credential-only IMAP proof; no messages are read or changed."""
+    if not mailbox or not password:
+        return False
+    client = imaplib.IMAP4_SSL("imap.gmail.com", 993, timeout=15)
+    try:
+        client.login(mailbox, password)
+        status, _ = client.select("INBOX", readonly=True)
+        return status == "OK"
+    finally:
+        try:
+            client.logout()
+        except Exception:
+            pass
