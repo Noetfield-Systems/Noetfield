@@ -54,8 +54,9 @@ contract NFIELDTest is Test {
 
     function testDuplicateClaimRejected() public {
         uint256 amount = 50 ether;
+        bytes32 root = distributor.leaf(builder, amount, 7);
         vm.prank(treasury);
-        distributor.publishEpoch(7, distributor.leaf(builder, amount, 7));
+        distributor.publishEpoch(7, root);
         vm.prank(treasury);
         token.transfer(address(distributor), amount * 2);
         vm.prank(builder);
@@ -67,8 +68,9 @@ contract NFIELDTest is Test {
     }
 
     function testWrongAmountOrWalletRejected() public {
+        bytes32 root = distributor.leaf(builder, 10 ether, 1);
         vm.prank(treasury);
-        distributor.publishEpoch(1, distributor.leaf(builder, 10 ether, 1));
+        distributor.publishEpoch(1, root);
         vm.expectRevert(NFIELDDistributor.InvalidClaim.selector);
         vm.prank(builder);
         distributor.claim(1, 11 ether, new bytes32[](0));
@@ -88,14 +90,16 @@ contract NFIELDTest is Test {
     }
 
     function testOnlyTreasuryCanPublish() public {
+        bytes32 root = distributor.leaf(builder, 20 ether, 3);
         vm.expectRevert();
         vm.prank(builder);
-        distributor.publishEpoch(3, distributor.leaf(builder, 20 ether, 3));
+        distributor.publishEpoch(3, root);
     }
 
     function testUnfundedClaimCannotAwardTokens() public {
+        bytes32 root = distributor.leaf(builder, 10 ether, 9);
         vm.prank(treasury);
-        distributor.publishEpoch(9, distributor.leaf(builder, 10 ether, 9));
+        distributor.publishEpoch(9, root);
         vm.expectRevert();
         vm.prank(builder);
         distributor.claim(9, 10 ether, new bytes32[](0));
