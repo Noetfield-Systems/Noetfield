@@ -1,0 +1,42 @@
+name: Noetfield Onchain v6 — Live Visual QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "onchain/**"
+      - ".github/workflows/noetfield-onchain-v6-visual-qa.yml"
+      - "scripts/verify-onchain-v6-visual.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: noetfield-onchain-live-visual-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  live-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install headless browser
+        run: |
+          python -m pip install playwright==1.65.1
+          python -m playwright install --with-deps chromium
+      - name: Browser proof at four viewports
+        env:
+          ONCHAIN_URL: https://www.noetfield.com/onchain/
+        run: python scripts/verify-onchain-v6-visual.py
+      - name: Publish browser screenshots and geometry report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: onchain-v6-live-visual-proof
+          path: tmp/onchain-v6-visual-qa/
+          retention-days: 7
