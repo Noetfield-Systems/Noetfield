@@ -14,6 +14,7 @@
     "docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md",
     "docs/ops/NOETFIELD_LIVE_NERVE_HANDOFF_LOCKED_v1.md",
     "docs/ops/NOETFIELD_CANONICAL_SHIP_REPO_LOCKED_v1.md",
+    "docs/ops/NOETFIELD_PUBLIC_LANGUAGE_BOUNDARY_LOCKED_v1.md",
     "docs/ops/AGENT_DOC_TAGGING_LOCKED_v1.md",
     ".cursor/rules/nf-authority-stack.mdc",
     ".cursor/rules/nf-anti-staleness-max.mdc",
@@ -34,6 +35,7 @@
       "required_authority": [
         "ROUTING_CARD.md",
         "docs/ops/NOETFIELD_OWNERSHIP_SYNC_CHARTER_LOCKED_v1.md",
+        "docs/ops/NOETFIELD_PUBLIC_LANGUAGE_BOUNDARY_LOCKED_v1.md",
         "governance/NOETFIELD_LIVE_NERVE_RECEIPT.json"
       ],
       "verify": [
