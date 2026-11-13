@@ -159,3 +159,10 @@ body[data-onchain-design="v6"] .wrap{max-width:1760px;padding-inline:clamp(22px,
   .v5-network-names{min-width:0;width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
   .v5-network-link{min-width:0}
 }
+
+/* Mobile visual QA correction: the perspective-transformed decorative layer
+   projected 968px wide at 390px viewport, causing document-level overflow. */
+@media(max-width:760px){
+  .v5-layer-diagram{overflow:clip}
+  .v6-layer-lines{inset:0;transform:none;opacity:.7}
+}
