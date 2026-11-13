@@ -1,0 +1,23 @@
+/* NOETFIELD OS • Premium long-form reading experience */
+:root{--bg:#041610;--panel:#0c3426;--ink:#f4f8eb;--muted:#b9d4c0;--green:#baf6b1;--gold:#e5d3a7}
+body{background:linear-gradient(180deg,#061a14,#041610 33%);font-size:15px;line-height:1.77}
+header{background:rgba(3,20,17,.96);border-bottom-color:rgba(183,247,187,.27)}
+header .wrap{min-height:73px;gap:12px}.brand{font-size:16px;letter-spacing:.1em;color:#f3f9ea}.brand small{font-size:8px;letter-spacing:.04em}
+header nav a{font-size:12px;font-weight:650}header nav a:last-child{background:linear-gradient(115deg,#eeffc0,#93eeb0);color:#09291b;padding:10px 15px}
+.hero{padding:85px 0 82px;background:linear-gradient(90deg,rgba(2,21,17,.97),rgba(3,26,19,.78)),url('/onchain/hero-architecture-v7.webp') center / cover}
+.hero .wrap{position:relative}.hero h1{font:480 clamp(60px,6.4vw,102px)/.99 Newsreader,Georgia,serif;letter-spacing:-.05em;max-width:930px;margin:27px 0}
+.hero h1 em{font:italic 450 1em Newsreader,serif;color:#c3fbbc}.hero p{color:#d5e7d6;font-size:17px;max-width:680px}
+.hero .cta{background:linear-gradient(110deg,#e8ffc0,#8cf2ab);border-radius:8px;box-shadow:0 0 22px rgba(143,252,164,.18)}
+.status span{background:rgba(6,55,37,.5);border-color:rgba(177,243,188,.46);color:#def9d5}
+.nf-paper-explore{border-top:1px solid rgba(184,248,189,.32);border-bottom:1px solid rgba(184,248,189,.22);display:flex;align-items:center;gap:15px;flex-wrap:wrap;padding-top:17px;padding-bottom:17px;background:rgba(12,52,33,.26)}
+.nf-paper-explore span{font:700 10px "DM Mono",monospace;letter-spacing:.11em;color:#aceba3;margin-right:4px}
+.nf-paper-explore a{font-size:11px;color:#ddf6de;border:1px solid rgba(176,241,186,.4);padding:7px 11px;border-radius:6px}
+.nf-paper-explore a:hover{background:rgba(116,254,152,.1);border-color:#bafbb2}
+.layout{grid-template-columns:225px minmax(0,1fr);gap:65px;padding-top:69px}.toc{top:107px;gap:15px}.toc a{font-size:12px}.toc a:hover{color:#c7ffba}
+.paper{max-width:920px}.paper section{padding-bottom:48px;margin-bottom:51px}.paper h2{font:500 clamp(35px,3vw,46px)/1.16 Newsreader,Georgia,serif;letter-spacing:-.027em}
+.paper p{color:#c1d6c5;line-height:1.86}.paper ul{color:#c2d9c6}.layers article,.roadmap article{background:linear-gradient(140deg,rgba(18,71,47,.82),rgba(6,42,31,.94));border-color:rgba(191,249,194,.32);border-radius:10px}
+.table th{color:#d2f9b9}.table td{color:#bcd9c3}.note{background:rgba(94,157,103,.11)}
+.closing{background:linear-gradient(135deg,#14563c,#052d27);border-color:rgba(194,255,198,.39);padding:45px}
+footer{background:#031510;border-top-color:rgba(195,252,193,.22)}
+@media(max-width:850px){header nav{gap:11px}.brand{font-size:13px}.layout{gap:26px}.nf-paper-explore a{font-size:10px}}
+@media(max-width:750px){header nav a:not(:last-child){display:none}header nav a:last-child{display:inline-block}.hero{padding:63px 0}.hero h1{font-size:clamp(48px,10vw,67px)}.hero p{font-size:15px}.layout{padding-top:35px}.toc{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.nf-paper-explore{gap:8px}.nf-paper-explore span{width:100%}.closing{padding:25px}}
