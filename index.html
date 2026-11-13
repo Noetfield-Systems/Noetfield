@@ -36,6 +36,7 @@
  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" />
  <link rel="stylesheet" href="/assets/noetfield-corporate-v1.css?v=5" />
  <link rel="stylesheet" href="/assets/noetfield-home-v2.css?v=4" />
+ <link rel="stylesheet" href="/assets/noetfield-quantum-home.css?v=1" />
 
  <script src="/assets/noetfield-intake-core.js?v=42" defer></script>
  <script src="/assets/noetfield-forms.js?v=42" defer></script>
@@ -98,25 +99,87 @@
 
  <header class="nf-corp-header">
   <div class="nf-corp-wrap nf-corp-navrow">
-   <a class="nf-corp-brand" href="/">
-    <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
-    <span>Noetfield Systems <small>Inc.</small></span>
-   </a>
+   <a class="nf-corp-brand" href="/" aria-label="Noetfield Systems home"><span class="nf-corp-brand__mark" aria-hidden="true">N</span><span>Noetfield <small>Systems</small></span></a>
+   <button class="nf-q-menu" type="button" aria-expanded="false" aria-controls="nf-primary-nav">Menu ☰</button>
    <nav class="nf-corp-nav" aria-label="Primary navigation">
-    <a href="/onchain/">RWA &amp; Onchain</a><a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/tools/">Tools</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a href="/onchain/">Onchain &amp; RWA</a><a href="/#product">Platform</a><a href="/workflows/">Workflows</a><a href="/assurance/">Verification</a><a href="/tools/">Tools</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a href="/work-with-us/">Ventures &amp; People</a><a class="nf-q-nav-invest" href="/investors/">For Investors</a>
     <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
    </nav>
   </div>
  </header>
 
- <main id="main">
-
-  <!-- 00 · HERO -->
-  <section class="hero nf-corp-hero" id="top" aria-labelledby="hero-title">
+<main id="main">
+  <!-- Premium corporate identity: one infrastructure company spanning people, businesses and AI. No fabricated live counts. -->
+  <section class="hero nf-corp-hero nf-q-hero" id="top" aria-labelledby="hero-title">
+   <div class="nf-q-inner">
+    <div class="nf-q-above">
+     <div class="nf-q-copy">
+      <p class="nf-q-overline">Noetfield Systems · Canada</p>
+      <h1 id="hero-title">The operating infrastructure for the <em>next economy.</em></h1>
+      <p class="nf-q-lead hero__lead">We connect real businesses, human expertise, agentic execution and independent verification. From building products and operating companies to bringing real-world assets into onchain systems.</p>
+      <div class="nf-q-actions">
+       <a class="nf-q-btn nf-q-btn--gold" href="/connect/">Start a project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></a>
+       <a class="nf-q-btn nf-q-btn--ghost" href="/company-os/">Explore Company OS <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="nf-q-cred">
+       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="10" width="8" height="11" rx="1"/><rect x="11" y="3" width="10" height="18" rx="1"/><path d="M6 13h2m-2 4h2m8-10h2m-2 4h2m-2 4h2M2 22h20"/></svg> Canadian corporation</span>
+       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m8 12 3 3 5-6"/></svg> Evidence-led engineering</span>
+       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M2 21v-2a6 6 0 0 1 12 0v2M15 15a5 5 0 0 1 7 5v1"/></svg> People + AI teams</span>
+      </div>
+     </div>
+     <div class="nf-q-visual">
+      <img class="nf-q-orbit" src="/assets/noetfield-quantum-orbit.svg" width="1200" height="850" alt="Illustrated business city and quantum execution core linking people, technology and real-world assets" fetchpriority="high" decoding="async"/>
+      <a class="nf-q-signal nf-q-signal--a" href="/company-os/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="7" cy="19" r="2"/><circle cx="19" cy="18" r="2"/><path d="m7 6 10 0M6 7l1 10m3 2 7-1m1-10v8M8 17l9-9"/></svg><span><strong>Agentic OS</strong><small>People + AI operations</small></span></a>
+      <a class="nf-q-signal nf-q-signal--b" href="/onchain/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 5v10l9 5 9-5V7M12 12v10"/></svg><span><strong>Onchain &amp; RWA</strong><small>Real assets, new rails</small></span></a>
+      <a class="nf-q-signal nf-q-signal--c" href="/runways/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 10 9 5 9-5M3 17l9 5 9-5"/></svg><span><strong>Execution Runway</strong><small>Build · ship · operate</small></span></a>
+      <a class="nf-q-signal nf-q-signal--d" href="/work-with-us/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="10" width="8" height="11" rx="1"/><rect x="11" y="3" width="10" height="18" rx="1"/><path d="M6 13h2m-2 4h2m8-10h2m-2 4h2m-2 4h2M2 22h20"/></svg><span><strong>Real Business</strong><small>Teams, operations, value</small></span></a>
+      <a class="nf-q-signal nf-q-signal--e" href="/assurance/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m8 12 3 3 5-6"/></svg><span><strong>Verification Layer</strong><small>Independent proof</small></span></a>
+      <a class="nf-q-signal nf-q-signal--f" href="/connect/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-45 12 12)"/></svg><span><strong>Ventures &amp; Growth</strong><small>Products and opportunity</small></span></a>
+     </div>
+    </div>
+    <div class="nf-q-flowstrip" aria-label="Business development workflow">
+     <b>From opportunity to operating business</b>
+     <a href="/connect/">Discover</a><i aria-hidden="true">→</i>
+     <a href="/work-with-us/">Assemble</a><i aria-hidden="true">→</i>
+     <a href="/runways/">Build</a><i aria-hidden="true">→</i>
+     <a href="/assurance/">Verify</a><i aria-hidden="true">→</i>
+     <a href="/onchain/">Connect value</a><i aria-hidden="true">→</i>
+     <a href="/company-os/">Operate &amp; grow</a>
+    </div>
+    <div class="nf-q-caps" aria-label="Noetfield core capabilities">
+     <a class="nf-q-cap" href="/company-os/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 10 9 5 9-5M3 17l9 5 9-5"/></svg><span aria-hidden="true">↗</span><strong>Agentic Company OS</strong><p>Coordinate teams, responsibilities and business work with a controlled operating layer.</p></a>
+     <a class="nf-q-cap" href="/runways/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2L12 2Z"/></svg><span aria-hidden="true">↗</span><strong>Execution Runway</strong><p>Turn approved plans into software and verifiable execution outcomes.</p></a>
+     <a class="nf-q-cap" href="/assurance/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m8 12 3 3 5-6"/></svg><span aria-hidden="true">↗</span><strong>Verification Layer</strong><p>Independent checks, explicit acceptance criteria and traceable evidence.</p></a>
+     <a class="nf-q-cap" href="/motors/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="7" cy="19" r="2"/><circle cx="19" cy="18" r="2"/><path d="m7 6 10 0M6 7l1 10m3 2 7-1m1-10v8M8 17l9-9"/></svg><span aria-hidden="true">↗</span><strong>AI &amp; Agent Fabric</strong><p>Connect models, harnesses and specialized workers with human oversight.</p></a>
+     <a class="nf-q-cap" href="/work-with-us/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="10" width="8" height="11" rx="1"/><rect x="11" y="3" width="10" height="18" rx="1"/><path d="M6 13h2m-2 4h2m8-10h2m-2 4h2m-2 4h2M2 22h20"/></svg><span aria-hidden="true">↗</span><strong>Real Business Infrastructure</strong><p>Workflows, human collaborators, operating systems and commercial execution.</p></a>
+     <a class="nf-q-cap" href="/onchain/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 5v10l9 5 9-5V7M12 12v10"/></svg><span aria-hidden="true">↗</span><strong>Onchain &amp; RWA</strong><p>Bridge private-credit readiness, real-world rights and onchain infrastructure.</p></a>
+    </div>
+    <div class="nf-q-bridge">
+     <div>
+      <p class="nf-q-overline">Real people · Real businesses · Real outcomes</p>
+      <h2>Technology is the engine.<br/>Business is the destination.</h2>
+      <p>Not an agent-only network. We work across founders, operators, developers and institutional teams, combining people, software and execution discipline to bring real business opportunities to life.</p>
+     </div>
+     <div class="nf-q-bridge-lanes">
+      <a href="/connect/"><span>Start or develop a venture</span><span aria-hidden="true">↗</span></a>
+      <a href="/work-with-us/"><span>Build with human collaborators</span><span aria-hidden="true">↗</span></a>
+      <a href="/onchain/"><span>Bring real assets onchain</span><span aria-hidden="true">↗</span></a>
+      <a href="/investors/"><span>Explore investor opportunities</span><span aria-hidden="true">↗</span></a>
+     </div>
+    </div>
+    <div class="nf-q-legacy-proof">
+     <p>Inspect actual systems and their limits at <a href="/proof/">Proof</a>. This visualization represents the platform architecture and future direction, not live operating metrics, customer adoption, or a fully autonomous production company.</p>
+     <p>Execution authority and verification are separate. Noetfield does not claim to hold or move customer assets.</p>
+    </div>
+   </div>
+  </section>
+  <!-- Product-specific working alpha, preserved below new corporate identity -->
+  <div class="hero nf-q-product-proof" id="product-live" aria-labelledby="product-live-title">
    <div class="wrap nf-corp-wrap hero__grid">
     <div>
      <p class="hero__eyebrow nf-corp-eyebrow"><span class="dot" aria-hidden="true"></span>AI WORKFLOWS + AGENT EXECUTION ASSURANCE</p>
-     <h1 id="hero-title">Give Noetfield a goal.<br />It runs the work, verifies the exact result, and lets you decide what gets accepted.</h1>
+     <h2 id="product-live-title">Give Noetfield a goal.<br />It runs the work, verifies the exact result, and lets you decide what gets accepted.</h2>
      <p class="hero__lead">Build and run AI workflows across models, agents, and tools with separate verification, bounded repair, human-controlled promotion, and replayable evidence.</p>
      <div class="actions nf-corp-actions">
       <a class="nf-button nf-button--primary" href="https://app.noetfield.com/" rel="noopener noreferrer">OPEN NOETFIELD APP</a>
@@ -146,7 +209,8 @@
      </div>
     </aside>
    </div>
-  </section>
+  </div>
+
 
 
   <!-- Real-to-onchain buyer entry: scoped, evidence-led, not a replacement for core product. Production release marker: PR 317, 2026-11-12. -->
@@ -650,5 +714,6 @@ BOUNDARY      a receipt is not certification</pre>
    selectChain(0, false);
  })();
  </script>
+<script>(function(){var b=document.querySelector(".nf-q-menu"),n=document.querySelector(".nf-corp-header .nf-corp-nav");if(!b||!n)return;n.id="nf-primary-nav";b.addEventListener("click",function(){var x=b.getAttribute("aria-expanded")==="true";b.setAttribute("aria-expanded",String(!x));n.dataset.open=String(!x)});n.addEventListener("click",function(e){if(e.target.closest("a")){b.setAttribute("aria-expanded","false");n.dataset.open="false"}});document.addEventListener("keydown",function(e){if(e.key==="Escape"){b.setAttribute("aria-expanded","false");n.dataset.open="false"}})})();</script>
 </body>
 </html>
