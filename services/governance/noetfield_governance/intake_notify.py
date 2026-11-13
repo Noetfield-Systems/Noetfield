@@ -342,6 +342,73 @@ def intake_email_configured(settings: IntakeEmailSettings) -> bool:
     return bool((settings.intake_smtp_host or "").strip())
 
 
+def send_connect_invitation(
+    settings: IntakeEmailSettings, *, recipient: str, contact_name: str,
+    message: str, scope: str, response_url: str, invitation_id: str,
+) -> dict[str, object]:
+    """Email one operator-approved, consented invitation via existing Resend.
+
+    The provider's returned ID establishes acceptance, not recipient delivery.
+    The existing Resend idempotency key prevents duplicate delivery on retries.
+    """
+    api_key = _secret(settings.resend_api_key)
+    if not settings.intake_email_notify_enabled or not api_key:
+        return {"provider_accepted": False, "error": "RESEND_NOT_CONFIGURED"}
+    if not response_url.startswith("https://www.noetfield.com/connect/respond/#"):
+        return {"provider_accepted": False, "error": "INVALID_RESPONSE_LINK"}
+    from_addr = (settings.intake_email_from or "").strip()
+    if not from_addr:
+        return {"provider_accepted": False, "error": "SENDER_NOT_CONFIGURED"}
+    greeting = "Hello" + ((" " + contact_name[:100]) if contact_name else "") + ","
+    text = append_casl_footer(
+        greeting + "\n\n"
+        "You submitted an opportunity through Noetfield Connect and agreed "
+        "to receive correspondence about that submission.\n\n"
+        "A Noetfield operator has prepared a specific invitation.\n"
+        "Proposed scope: " + scope.replace("_", " ") + "\n\n"
+        + message + "\n\n"
+        "Accept or decline using your private invitation link:\n"
+        + response_url + "\n\n"
+        "This invitation is not a contract, job offer, investment commitment "
+        "or confirmed meeting. If it was unexpected, you can ignore it or "
+        "reply to ask that we stop contacting you.\n\n"
+        "Noetfield Operations\n" + CANONICAL_INTAKE_EMAIL,
+        settings,
+    )
+    body = json.dumps({
+        "from": from_addr,
+        "to": [recipient],
+        "subject": "Noetfield Connect — your collaboration invitation",
+        "text": text,
+        "reply_to": CANONICAL_INTAKE_EMAIL,
+    }, ensure_ascii=False).encode("utf-8")
+    request = urllib.request.Request(
+        "https://api.resend.com/emails", method="POST", data=body,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + api_key,
+            "Idempotency-Key": "connect-invitation-" + invitation_id,
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            if response.status < 200 or response.status >= 300:
+                return {"provider_accepted": False, "error": "PROVIDER_HTTP_FAILED"}
+            data = json.loads(response.read(4096))
+        provider_id = data.get("id") if isinstance(data, dict) else None
+        if not isinstance(provider_id, str) or not 8 <= len(provider_id) <= 120:
+            return {"provider_accepted": False, "error": "PROVIDER_ACK_MISSING"}
+        return {"provider_accepted": True, "provider_message_id": provider_id,
+                "recipient_delivery_verified": False}
+    except urllib.error.HTTPError as exc:
+        logger.warning("connect_invitation_provider_rejected status=%s", exc.code)
+        return {"provider_accepted": False, "error": "PROVIDER_HTTP_REJECTED"}
+    except (urllib.error.URLError, OSError, ValueError, TimeoutError) as exc:
+        logger.warning("connect_invitation_provider_unconfirmed error=%s",
+                       type(exc).__name__)
+        return {"provider_accepted": False, "error": "PROVIDER_DELIVERY_UNCONFIRMED"}
+
+
 def notify_ops_webhook(webhook_url: str, record: IntakeRecord) -> bool:
     if is_test_intake(
         metadata=record.metadata,
