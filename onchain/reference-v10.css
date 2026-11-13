@@ -188,3 +188,12 @@
  .nf-tower-signage{display:none}
  .v5-solutions-summary .v5-solution-icon svg{width:27px;height:27px}
 }
+
+/* Match the reference's decisive, comfortably sized CTAs, not shrunken micro-buttons. */
+@media(min-width:1141px){
+ .v5-actions .v5-button-bright{min-width:202px;justify-content:center}
+ .v5-actions .v5-button-outline{min-width:221px;justify-content:center}
+ .v5-actions .v5-button{font-size:13px;min-height:44px;letter-spacing:-.012em}
+ .v5-platform-copy>p:not(.v5-section-label){font-size:12px;line-height:1.43}
+ .v5-hero-features b{font-size:26px}
+}
