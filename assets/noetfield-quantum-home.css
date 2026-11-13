@@ -1,0 +1,157 @@
+/* Noetfield November 2026 corporate quantum homepage.
+   Institutional frontier meets real-economy venture execution.
+   Isolated to the homepage. Keeps existing product/proof sections intact. */
+body.nf-corp.nf-home{--q-ink:#f8f6fc;--q-muted:#abb4cd;--q-gold:#f5d093;--q-violet:#ac93ff;--q-line:rgba(211,202,245,.18)}
+body.nf-corp.nf-home .nf-corp-header{background:rgba(5,9,22,.96);border-bottom:1px solid rgba(225,212,255,.15);box-shadow:0 12px 55px rgba(2,5,14,.27)}
+body.nf-corp.nf-home .nf-corp-header .nf-corp-wrap{width:min(calc(100% - 72px),1500px)}
+body.nf-corp.nf-home .nf-corp-navrow{gap:24px;min-height:80px}
+body.nf-corp.nf-home .nf-corp-brand{color:#f6f5ff;font-size:1.13rem;font-weight:600;letter-spacing:-.045em;line-height:1.12}
+body.nf-corp.nf-home .nf-corp-brand small{display:block;font-family:"DM Mono",monospace;color:#d1c8e5;letter-spacing:.25em;font-weight:400;font-size:.49rem;margin-top:5px;text-transform:uppercase}
+body.nf-corp.nf-home .nf-corp-brand__mark{border:none;border-radius:0;display:grid;place-items:center;width:46px;height:42px;font:700 2.35rem/1 "Inter",sans-serif;background:linear-gradient(126deg,#fdf8ff 14%,#aa8dfd 48%,#f4d9a6 78%);color:transparent;background-clip:text;-webkit-background-clip:text;text-shadow:0 0 31px rgba(157,122,255,.31);transform:skew(-11deg)}
+body.nf-corp.nf-home .nf-corp-nav{margin-left:auto;gap:clamp(12px,1.45vw,25px);font-size:.75rem}
+body.nf-corp.nf-home .nf-corp-nav>a:nth-child(3),body.nf-corp.nf-home .nf-corp-nav>a:nth-child(5),body.nf-corp.nf-home .nf-corp-nav>a:nth-child(6),body.nf-corp.nf-home .nf-corp-nav>a:nth-child(7){display:none}
+body.nf-corp.nf-home .nf-corp-nav a:not(.nf-corp-nav__cta){color:#d5d6e6;transition:color .18s ease}
+body.nf-corp.nf-home .nf-corp-nav a:not(.nf-corp-nav__cta):hover{color:#ffe0a6}
+body.nf-corp.nf-home .nf-corp-nav__cta{background:linear-gradient(105deg,#f8e3bb,#dcad63);border:1px solid #f4d395;border-radius:10px;color:#11101a;font-weight:700;padding:13px 19px;box-shadow:0 0 25px rgba(217,166,91,.2)}
+body.nf-corp.nf-home .nf-q-nav-invest{padding:11px 14px!important;border:1px solid rgba(231,224,251,.42);border-radius:10px;color:#fff!important}
+body.nf-corp.nf-home .nf-q-menu{display:none;padding:8px 11px;border:1px solid rgba(226,218,255,.28);border-radius:8px;background:transparent;color:white;font:600 12px "Inter",sans-serif;cursor:pointer}
+body.nf-corp.nf-home .hero.nf-corp-hero.nf-q-hero{padding:0;background:radial-gradient(ellipse 54% 58% at 72% 30%,rgba(72,52,145,.33),transparent 78%),radial-gradient(ellipse 45% 35% at 77% 76%,rgba(130,85,160,.17),transparent 87%),linear-gradient(145deg,#060b1a 5%,#080e21 52%,#040714 100%);border:0;color:#f7f4ff}
+body.nf-corp.nf-home .hero.nf-corp-hero.nf-q-hero::before{inset:0;mask-image:none;background:linear-gradient(90deg,rgba(4,7,15,.95),transparent 52%),repeating-linear-gradient(90deg,transparent 0 99px,rgba(165,159,220,.035) 100px),repeating-linear-gradient(0deg,transparent 0 99px,rgba(165,159,220,.024) 100px);opacity:.6}
+body.nf-corp.nf-home .nf-q-hero::after{content:"";position:absolute;left:-12%;right:-12%;top:570px;height:310px;border-top:2px solid rgba(135,143,230,.24);border-radius:50% 50% 0 0;pointer-events:none;transform:rotate(-5deg);box-shadow:0 -12px 55px rgba(75,71,160,.12)}
+body.nf-corp.nf-home .nf-q-inner{position:relative;z-index:2;width:min(calc(100% - 100px),1500px);margin-inline:auto}
+body.nf-corp.nf-home .nf-q-above{padding-top:65px;min-height:570px;display:grid;grid-template-columns:minmax(0,.89fr) minmax(0,1.11fr);align-items:center;gap:10px}
+body.nf-corp.nf-home .nf-q-copy{position:relative;z-index:5;padding:22px 0 72px}
+body.nf-corp.nf-home .nf-q-overline{display:inline-flex;align-items:center;gap:14px;color:#e8c58f;font:500 .7rem/1.6 "DM Mono",monospace;letter-spacing:.24em;text-transform:uppercase}
+body.nf-corp.nf-home .nf-q-overline::after{content:"";height:1px;width:110px;background:linear-gradient(90deg,#e5c183,transparent)}
+body.nf-corp.nf-home .nf-q-hero h1{color:#f7f4ff;max-width:13.5ch;font:500 clamp(3.25rem,5.1vw,6.15rem)/.99 "Newsreader",Georgia,serif;letter-spacing:-.052em;margin:31px 0 16px;text-wrap:balance}
+body.nf-corp.nf-home .nf-q-hero h1 em{font-weight:400;font-style:italic;background:linear-gradient(90deg,#ded0fe 5%,#f5d79a 62%,#f7be71);color:transparent;-webkit-background-clip:text;background-clip:text}
+body.nf-corp.nf-home .nf-q-lead{font-size:clamp(.98rem,1.2vw,1.12rem);font-weight:400;line-height:1.74;color:#c2c7db;max-width:55ch;letter-spacing:-.008em;margin:15px 0 0}
+body.nf-corp.nf-home .nf-q-actions{display:flex;gap:13px;align-items:center;flex-wrap:wrap;margin:30px 0 28px}
+body.nf-corp.nf-home .nf-q-btn{display:inline-flex;align-items:center;justify-content:center;gap:13px;min-height:50px;padding:0 24px;border-radius:11px;font-size:.84rem;font-weight:650;text-decoration:none;transition:transform .2s ease,background .2s ease,border-color .2s ease}
+body.nf-corp.nf-home .nf-q-btn:hover{transform:translateY(-2px)}
+body.nf-corp.nf-home .nf-q-btn--gold{background:linear-gradient(112deg,#ffefc6,#e0b36e 73%,#f8d59c);border:1px solid #f9d9a6;color:#15111c;box-shadow:0 4px 40px rgba(209,161,93,.21)}
+body.nf-corp.nf-home .nf-q-btn--ghost{background:rgba(11,15,36,.46);border:1px solid rgba(228,216,255,.36);color:#f1ecff}
+body.nf-corp.nf-home .nf-q-btn--ghost:hover{border-color:#e2c99b}
+body.nf-corp.nf-home .nf-q-cred{display:flex;align-items:center;flex-wrap:wrap;column-gap:12px;row-gap:8px;color:#acb3cb;font-size:.72rem;line-height:1.4}
+body.nf-corp.nf-home .nf-q-cred span{display:inline-flex;align-items:center;gap:8px}
+body.nf-corp.nf-home .nf-q-cred span+span::before{content:"";width:1px;height:15px;background:rgba(214,204,243,.29);margin-right:5px}
+body.nf-corp.nf-home .nf-q-cred svg{color:#e5c58d;flex:none}
+body.nf-corp.nf-home .nf-q-visual{position:relative;min-height:570px;align-self:stretch;isolation:isolate}
+body.nf-corp.nf-home .nf-q-orbit{position:absolute;z-index:1;inset:-47px -90px -15px -40px;width:calc(100% + 130px);height:calc(100% + 62px);object-fit:contain;filter:drop-shadow(0 0 36px rgba(82,67,162,.24))}
+body.nf-corp.nf-home .nf-q-visual::before{content:"";position:absolute;z-index:0;inset:10% -13%;background:radial-gradient(ellipse,rgba(92,75,174,.21),transparent 67%);filter:blur(35px)}
+body.nf-corp.nf-home .nf-q-signal{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;min-width:167px;padding:13px 14px;border-radius:12px;border:1px solid rgba(200,190,240,.26);background:linear-gradient(123deg,rgba(23,28,59,.86),rgba(8,11,31,.62));box-shadow:0 14px 38px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.1);backdrop-filter:blur(12px);color:#fff;text-decoration:none;transition:transform .2s ease,border-color .2s ease}
+body.nf-corp.nf-home .nf-q-signal:hover{transform:translateY(-3px);border-color:#d7b88d}
+body.nf-corp.nf-home .nf-q-signal svg{width:25px;height:25px;color:#e8c18d;flex:none}
+body.nf-corp.nf-home .nf-q-signal strong{display:block;font-size:.78rem;line-height:1.3}
+body.nf-corp.nf-home .nf-q-signal small{display:block;color:#b1b5d1;font-size:.63rem;line-height:1.4;margin-top:3px}
+body.nf-corp.nf-home .nf-q-signal--a{top:14%;left:7%}
+body.nf-corp.nf-home .nf-q-signal--b{top:16%;right:-1%}
+body.nf-corp.nf-home .nf-q-signal--c{top:52%;left:-2%}
+body.nf-corp.nf-home .nf-q-signal--d{top:53%;right:-4%}
+body.nf-corp.nf-home .nf-q-signal--e{bottom:8%;left:15%}
+body.nf-corp.nf-home .nf-q-signal--f{bottom:8%;right:8%}
+body.nf-corp.nf-home .nf-q-flowstrip{position:relative;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:21px 25px;background:rgba(10,15,34,.87);border:1px solid rgba(191,191,235,.17);border-radius:15px;box-shadow:0 12px 46px rgba(0,0,0,.19);margin:0 0 23px}
+body.nf-corp.nf-home .nf-q-flowstrip b{color:#ebd2aa;font-size:.71rem;letter-spacing:.08em;text-transform:uppercase;font-family:"DM Mono",monospace}
+body.nf-corp.nf-home .nf-q-flowstrip a{color:#e1dfec;font-size:.74rem;text-decoration:none}
+body.nf-corp.nf-home .nf-q-flowstrip a:hover{color:#f8d197}
+body.nf-corp.nf-home .nf-q-flowstrip i{color:#a78dcc;font-style:normal;opacity:.7}
+body.nf-corp.nf-home .nf-q-caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;padding-bottom:26px}
+body.nf-corp.nf-home .nf-q-cap{position:relative;display:block;min-height:153px;padding:21px 21px 20px;background:linear-gradient(145deg,rgba(29,36,66,.72),rgba(9,13,32,.95));border:1px solid rgba(194,188,240,.2);border-radius:15px;text-decoration:none;overflow:hidden;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+body.nf-corp.nf-home .nf-q-cap:hover{transform:translateY(-4px);border-color:rgba(240,199,132,.8);box-shadow:0 18px 42px rgba(4,8,22,.42)}
+body.nf-corp.nf-home .nf-q-cap::before{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,transparent,#a68af8,#eac187,transparent);opacity:.5}
+body.nf-corp.nf-home .nf-q-cap svg{width:27px;height:27px;color:#d9b7f7}
+body.nf-corp.nf-home .nf-q-cap strong{display:block;margin-top:15px;color:#fff;font-size:.91rem;letter-spacing:-.01em}
+body.nf-corp.nf-home .nf-q-cap p{color:#aeb8cc;font-size:.75rem;line-height:1.6;margin:7px 0 0;max-width:33ch}
+body.nf-corp.nf-home .nf-q-cap span{position:absolute;right:19px;top:20px;color:#eac48c;font-size:1.15rem}
+body.nf-corp.nf-home .nf-q-bridge{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;padding:32px 35px;margin:0 0 28px;border:1px solid rgba(234,199,150,.29);border-radius:16px;background:radial-gradient(ellipse at 80% 50%,rgba(89,70,157,.24),transparent 65%),linear-gradient(120deg,#171e36,#0b122a)}
+body.nf-corp.nf-home .nf-q-bridge .nf-q-overline{font-size:.61rem}
+body.nf-corp.nf-home .nf-q-bridge h2{font:500 clamp(1.8rem,2.6vw,2.9rem)/1.06 "Newsreader",serif;letter-spacing:-.035em;color:#fff;margin:15px 0 9px}
+body.nf-corp.nf-home .nf-q-bridge p{color:#aeb6cb;font-size:.82rem;line-height:1.7;margin:0}
+body.nf-corp.nf-home .nf-q-bridge-lanes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+body.nf-corp.nf-home .nf-q-bridge-lanes a{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:76px;color:#f6f0ff;background:rgba(255,255,255,.045);border:1px solid rgba(207,203,238,.19);border-radius:10px;padding:15px;text-decoration:none;font-size:.79rem;line-height:1.35}
+body.nf-corp.nf-home .nf-q-bridge-lanes a:hover{border-color:#e6c48d;background:rgba(237,206,152,.06)}
+body.nf-corp.nf-home .nf-q-bridge-lanes a span:last-child{color:#e6c48d}
+body.nf-corp.nf-home .nf-q-legacy-proof{margin:0 auto 30px;max-width:1150px;color:#9ba7c3;text-align:center;font-size:.71rem;line-height:1.75}
+body.nf-corp.nf-home .nf-q-legacy-proof a{color:#e5c58e;text-decoration:underline;text-underline-offset:3px}
+body.nf-corp.nf-home .nf-q-legacy-proof p{margin:7px auto;max-width:850px}
+body.nf-corp.nf-home .nf-q-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+body.nf-corp.nf-home .nf-onchain-spotlight{background:#0b1024}
+body.nf-corp.nf-home .nf-q-hero a:focus-visible{outline:3px solid #ffe2a5;outline-offset:4px}
+@media (max-width:1300px){
+ body.nf-corp.nf-home .nf-corp-header .nf-corp-wrap{width:min(calc(100% - 42px),1500px)}
+ body.nf-corp.nf-home .nf-q-inner{width:min(calc(100% - 64px),1500px)}
+ body.nf-corp.nf-home .nf-q-above{grid-template-columns:minmax(0,.93fr) minmax(0,1.07fr)}
+ body.nf-corp.nf-home .nf-q-signal{padding:10px;min-width:145px}
+ body.nf-corp.nf-home .nf-q-signal small{font-size:.59rem}
+}
+@media (max-width:1060px){
+ body.nf-corp.nf-home .nf-q-menu{display:block;margin-left:auto}
+ body.nf-corp.nf-home .nf-corp-nav{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;background:#0a1024;border-bottom:1px solid rgba(224,215,248,.2);padding:15px 30px 25px;flex-direction:column;align-items:stretch;gap:0;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+ body.nf-corp.nf-home .nf-corp-nav[data-open="true"]{display:flex}
+ body.nf-corp.nf-home .nf-corp-nav>a{padding:12px 8px;border-bottom:1px solid rgba(255,255,255,.07)}
+ body.nf-corp.nf-home .nf-corp-nav>a:nth-child(3),body.nf-corp.nf-home .nf-corp-nav>a:nth-child(5),body.nf-corp.nf-home .nf-corp-nav>a:nth-child(6),body.nf-corp.nf-home .nf-corp-nav>a:nth-child(7){display:block}
+ body.nf-corp.nf-home .nf-q-hero h1{font-size:clamp(2.9rem,5.8vw,5rem)}
+ body.nf-corp.nf-home .nf-q-visual{min-height:480px}
+ body.nf-corp.nf-home .nf-q-orbit{inset:-18px -45px -5px -50px;width:calc(100% + 100px);height:calc(100% + 25px)}
+ body.nf-corp.nf-home .nf-q-signal--a{left:1%}
+ body.nf-corp.nf-home .nf-q-signal--c{left:-1%}
+ body.nf-corp.nf-home .nf-q-signal--d{right:-1%}
+}
+@media (max-width:760px){
+ body.nf-corp.nf-home .nf-corp-header .nf-corp-wrap{width:calc(100% - 30px)}
+ body.nf-corp.nf-home .nf-corp-navrow{min-height:70px}
+ body.nf-corp.nf-home .nf-q-inner{width:calc(100% - 36px)}
+ body.nf-corp.nf-home .nf-q-above{display:flex;flex-direction:column;align-items:stretch;gap:0;padding-top:42px;min-height:0}
+ body.nf-corp.nf-home .nf-q-copy{padding:0}
+ body.nf-corp.nf-home .nf-q-hero h1{font-size:clamp(2.92rem,10.4vw,4.35rem);max-width:14ch;margin:20px 0 12px}
+ body.nf-corp.nf-home .nf-q-lead{font-size:.97rem;line-height:1.68}
+ body.nf-corp.nf-home .nf-q-actions{margin-top:22px}
+ body.nf-corp.nf-home .nf-q-btn{min-height:49px;padding:0 16px;font-size:.78rem}
+ body.nf-corp.nf-home .nf-q-visual{height:340px;min-height:340px;margin:12px -14px -22px}
+ body.nf-corp.nf-home .nf-q-orbit{inset:-60px -18px -16px;width:calc(100% + 36px);height:calc(100% + 65px)}
+ body.nf-corp.nf-home .nf-q-signal{min-width:0;padding:9px;border-radius:9px}
+ body.nf-corp.nf-home .nf-q-signal strong{font-size:.66rem}
+ body.nf-corp.nf-home .nf-q-signal small{display:none}
+ body.nf-corp.nf-home .nf-q-signal svg{width:18px;height:18px}
+ body.nf-corp.nf-home .nf-q-signal--a{top:4%;left:2%}
+ body.nf-corp.nf-home .nf-q-signal--b{top:9%;right:0}
+ body.nf-corp.nf-home .nf-q-signal--c{top:53%;left:0}
+ body.nf-corp.nf-home .nf-q-signal--d{top:48%;right:0}
+ body.nf-corp.nf-home .nf-q-signal--e{bottom:8%;left:6%}
+ body.nf-corp.nf-home .nf-q-signal--f{bottom:7%;right:0}
+ body.nf-corp.nf-home .nf-q-flowstrip{padding:17px 15px;flex-wrap:wrap;justify-content:center;gap:10px;margin:10px 0 16px}
+ body.nf-corp.nf-home .nf-q-flowstrip b{width:100%;text-align:center}
+ body.nf-corp.nf-home .nf-q-flowstrip a{font-size:.68rem}
+ body.nf-corp.nf-home .nf-q-caps{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ body.nf-corp.nf-home .nf-q-cap{padding:16px;min-height:145px}
+ body.nf-corp.nf-home .nf-q-cap p{font-size:.69rem}
+ body.nf-corp.nf-home .nf-q-cap strong{font-size:.82rem}
+ body.nf-corp.nf-home .nf-q-bridge{grid-template-columns:1fr;padding:22px 18px;gap:20px}
+ body.nf-corp.nf-home .nf-q-bridge-lanes a{font-size:.73rem;min-height:63px}
+ body.nf-corp.nf-home .nf-q-overline{font-size:.59rem;letter-spacing:.15em}
+ body.nf-corp.nf-home .nf-q-overline::after{width:36px}
+}
+@media (max-width:400px){
+ body.nf-corp.nf-home .nf-q-caps{grid-template-columns:1fr}
+ body.nf-corp.nf-home .nf-q-cap{min-height:110px}
+ body.nf-corp.nf-home .nf-q-cred{font-size:.65rem}
+ body.nf-corp.nf-home .nf-q-signal--e,body.nf-corp.nf-home .nf-q-signal--f{display:none}
+ body.nf-corp.nf-home .nf-q-bridge-lanes{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+ body.nf-corp.nf-home .nf-q-btn,body.nf-corp.nf-home .nf-q-signal,body.nf-corp.nf-home .nf-q-cap{transition:none}
+ body.nf-corp.nf-home .nf-q-btn:hover,body.nf-corp.nf-home .nf-q-signal:hover,body.nf-corp.nf-home .nf-q-cap:hover{transform:none}
+}
+/* Keep inline icon dimensions bounded so browser intrinsic SVG sizing never shifts layout. */
+body.nf-corp.nf-home .nf-q-btn svg,body.nf-corp.nf-home .nf-q-cred svg{width:17px;height:17px;display:block}
+body.nf-corp.nf-home .nf-q-btn svg{transition:transform .2s ease}
+body.nf-corp.nf-home .nf-q-btn:hover svg{transform:translateX(3px)}
+/* The existing alpha app remains a substantive product chapter below the new corporate hero. */
+body.nf-corp.nf-home .nf-q-product-proof{padding:clamp(45px,7vw,85px) 0;background:linear-gradient(135deg,#faf9f5,#eeece7);border-top:1px solid rgba(24,28,40,.08)}
+body.nf-corp.nf-home .nf-q-product-proof .hero__grid{align-items:center}
+body.nf-corp.nf-home .nf-q-product-proof h2{font:500 clamp(1.8rem,3vw,3.05rem)/1.09 "Newsreader",Georgia,serif;letter-spacing:-.035em;color:#111927;max-width:22ch;margin:15px 0}
+body.nf-corp.nf-home .nf-q-product-proof .hero__lead{font-size:.98rem}
+body.nf-corp.nf-home .nf-q-product-proof .actions{gap:9px}
+body.nf-corp.nf-home .nf-q-product-proof .nf-button{min-height:42px;font-size:.65rem;padding:9px 13px}
+@media(max-width:760px){body.nf-corp.nf-home .nf-q-product-proof{padding:40px 0}body.nf-corp.nf-home .nf-q-product-proof .hero__grid{display:flex;flex-direction:column}body.nf-corp.nf-home .nf-q-product-proof h2{max-width:none}}
+@media(prefers-reduced-motion:reduce){body.nf-corp.nf-home .nf-q-btn:hover svg{transform:none}}
