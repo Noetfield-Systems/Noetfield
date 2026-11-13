@@ -137,6 +137,61 @@ def test_authenticated_edit_updates_existing_intake_not_a_new_crm():
     asyncio.run(run())
 
 
+
+
+def test_workforce_handoff_requires_saved_operator_decision_and_verified_remote_ack():
+    async def run():
+        original = governance_api.settings.admin_dashboard_secret
+        governance_api.settings.admin_dashboard_secret = SecretStr("operator-bridge-test")
+        record = sample("people")
+        record["metadata"]["consent_contact"] = True
+        record["qualification_json"] = {"connect_ops": {
+            "owner": "Named operator", "next_action": "Review and propose a scoped trial",
+            "due_date": "2026-11-19", "revision": 1,
+        }}
+        proof = {"connected": True, "found": True,
+                 "case": {"source_intake_id": record["intake_id"],
+                          "case_id": "opp_nf_" + "a" * 24,
+                          "owner": "Named operator", "stage": "qualifying"}}
+        with patch.object(governance_api, "_require_workforce_source",
+                          new_callable=AsyncMock) as source_check, \
+             patch("noetfield_governance.intake_repository.list_connect_by_intake",
+                   new_callable=AsyncMock) as source_rows, \
+             patch.object(governance_api, "readback_connect_workforce",
+                          return_value=proof), \
+             patch.object(governance_api, "handoff_connect_workforce",
+                          return_value={**proof, "accepted": True, "deduped": False}) as dispatch:
+            source_rows.return_value = [record]
+            request = {"request_id": "canonical_operator_case_0001",
+                       "owner": "Named operator",
+                       "next_action": "Review and propose a scoped trial",
+                       "due_date": "2026-11-19",
+                       "match_quality": "medium"}
+            async with AsyncClient(transport=ASGITransport(app=app),
+                                   base_url="http://test") as client:
+                path = "/api/opportunities/desk/" + record["intake_id"] + "/workforce/handoff"
+                unauth = await client.post(path, json=request)
+                assert unauth.status_code == 403
+                wrong_owner = await client.post(path, json={**request, "owner": "Unknown"},
+                       headers={"X-Admin-Secret": "operator-bridge-test", "Origin": "http://test"})
+                assert wrong_owner.status_code == 409
+                actual = await client.post(path, json=request,
+                          headers={"X-Admin-Secret": "operator-bridge-test", "Origin": "http://test"})
+                assert actual.status_code == 200, actual.text
+                assert actual.json()["operator_owner_recorded"] is True
+                assert actual.json()["agent_executed"] is False
+                assert actual.json()["independently_verified_by_platform"] is False
+                status = await client.get(
+                    "/api/opportunities/desk/" + record["intake_id"] + "/workforce/status",
+                    headers={"X-Admin-Secret": "operator-bridge-test", "Origin": "http://test"})
+                assert status.status_code == 200, status.text
+                assert status.json()["case"]["case_id"] == proof["case"]["case_id"]
+                assert dispatch.call_count == 1
+                assert dispatch.call_args.kwargs["next_action"] == request["next_action"]
+            source_check.assert_awaited()
+        governance_api.settings.admin_dashboard_secret = original
+    asyncio.run(run())
+
 def test_public_ui_shell_contains_no_private_records_or_keys():
     async def run():
         async with AsyncClient(transport=ASGITransport(app=app),

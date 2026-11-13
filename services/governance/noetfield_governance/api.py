@@ -77,6 +77,9 @@ from noetfield_governance.signal_triage_worker import (
 from noetfield_governance.workforce_connect_bridge import (
     deliver as deliver_connect_to_workforce,
     probe as probe_connect_workforce,
+    eligible as eligible_connect_for_workforce,
+    readback_case as readback_connect_workforce,
+    handoff_case as handoff_connect_workforce,
 )
 from noetfield_governance.intake_test import is_test_intake
 from noetfield_governance.public_intake import emit_enterprise_intake_motor_receipt, submit_intake
@@ -1732,6 +1735,100 @@ async def retry_connect_workforce_sync(request: Request, body: WorkforceConnectR
     return {"source": "canonical_noetfield_intake", **result,
             "assigned": False, "independently_verified": False}
 
+
+
+
+class WorkforceConnectHandoffRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    request_id: str = Field(min_length=16, max_length=100, pattern=r"^[A-Za-z0-9_-]{16,100}$")
+    owner: str = Field(min_length=2, max_length=100)
+    next_action: str = Field(min_length=5, max_length=500)
+    due_date: date | None = None
+    match_quality: Literal["not_assessed", "low", "medium", "high"] = "not_assessed"
+    assignment_reference: str = Field(default="", max_length=1500)
+
+
+async def _require_workforce_source(intake_id: str):
+    if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
+        raise HTTPException(422, "INVALID_INTAKE_ID")
+    rows = await intake_repository.list_connect_by_intake(intake_id=intake_id, limit=100)
+    source = next((row for row in rows if row.get("intake_id") == intake_id), None)
+    if not source:
+        raise HTTPException(404, "SOURCE_INTAKE_NOT_FOUND")
+    request_id = source.get("request_id")
+    record = await intake_repository.get_by_request_id(request_id) if request_id else None
+    if (record is None or record.intake_id != intake_id
+            or not eligible_connect_for_workforce(record)
+            or is_test_intake(metadata=record.metadata,
+                              request_id=record.request_id,
+                              contact_email=record.contact_email)):
+        raise HTTPException(422, "INELIGIBLE_OR_UNCONSENTED_WORKFORCE_SOURCE")
+    return record
+
+
+@app.get("/api/opportunities/desk/{intake_id}/workforce/status",
+         tags=["operations"], include_in_schema=False)
+async def connect_workforce_status(intake_id: str, request: Request) -> dict[str, object]:
+    _require_connect_desk_operator(request)
+    await _require_workforce_source(intake_id)
+    result = await asyncio.to_thread(readback_connect_workforce, intake_id)
+    if not result.get("connected"):
+        raise HTTPException(502, result.get("error") or "WORKFORCE_READBACK_UNAVAILABLE")
+    return {"source": "existing_workforce_os", **result,
+            "agent_executed": False, "independently_verified_by_platform": False}
+
+
+@app.post("/api/opportunities/desk/{intake_id}/workforce/handoff",
+          tags=["operations"], include_in_schema=False)
+async def connect_workforce_operator_handoff(
+    intake_id: str, body: WorkforceConnectHandoffRequest, request: Request,
+) -> dict[str, object]:
+    """Copy an operator-approved source decision into WorkforceOS, exactly once."""
+    _require_connect_desk_operator(request)
+    check_connect_desk_origin(request)
+    record = await _require_workforce_source(intake_id)
+    rows = await intake_repository.list_connect_by_intake(intake_id=intake_id, limit=100)
+    source = next(row for row in rows if row.get("intake_id") == intake_id)
+    qual = source.get("qualification_json") or {}
+    ops = qual.get("connect_ops") or {} if isinstance(qual, dict) else {}
+    if not isinstance(ops, dict):
+        ops = {}
+    owner = body.owner.strip()
+    next_action = body.next_action.strip()
+    if (not owner or owner.lower() in {"unassigned", "intake_queue"}
+            or ops.get("owner") != owner or ops.get("next_action") != next_action):
+        raise HTTPException(409, "SAVE_CANONICAL_CASE_OWNER_AND_NEXT_ACTION_FIRST")
+    due = str(body.due_date) if body.due_date else None
+    if due != (ops.get("due_date") or None):
+        raise HTTPException(409, "SOURCE_DUE_DATE_MISMATCH")
+    if body.assignment_reference:
+        from urllib.parse import urlsplit
+        parsed = urlsplit(body.assignment_reference)
+        if (parsed.scheme != "https" or not parsed.hostname
+                or parsed.username or parsed.password
+                or any(ch.isspace() for ch in body.assignment_reference)):
+            raise HTTPException(422, "HTTPS_ASSIGNMENT_REFERENCE_REQUIRED")
+    state = await asyncio.to_thread(readback_connect_workforce, intake_id)
+    if not state.get("connected") and state.get("http_status") == 404:
+        # An imported applicant is a genuine target, never a fabricated workpacket.
+        imported = await asyncio.to_thread(deliver_connect_to_workforce, record)
+        if not imported.get("delivered"):
+            raise HTTPException(502, imported.get("error") or "WORKFORCE_SOURCE_IMPORT_FAILED")
+    elif not state.get("connected"):
+        raise HTTPException(502, state.get("error") or "WORKFORCE_UNAVAILABLE")
+    result = await asyncio.to_thread(
+        handoff_connect_workforce,
+        source_intake_id=intake_id,
+        request_id=body.request_id,
+        owner=owner, next_action=next_action, due_date=due,
+        match_quality=body.match_quality,
+        assignment_reference=body.assignment_reference,
+    )
+    if not result.get("connected") or not result.get("accepted"):
+        raise HTTPException(502, result.get("error") or "WORKFORCE_HANDOFF_NOT_CONFIRMED")
+    return {"source": "existing_workforce_os", **result,
+            "operator_owner_recorded": True,
+            "agent_executed": False, "independently_verified_by_platform": False}
 
 @app.get("/api/opportunities/desk/app", tags=["operations"], include_in_schema=False)
 async def connect_opportunity_app() -> Response:
