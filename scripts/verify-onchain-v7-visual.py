@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 
 URL = os.environ.get("ONCHAIN_URL", "http://127.0.0.1:8765/onchain/")
 OUT = Path("tmp/onchain-v7-visual-qa")
-WIDTHS = (1920, 1672, 1440, 768, 390)
+WIDTHS = (1920, 1672, 1440, 768, 430, 390, 360, 320)
 
 
 def main() -> int:
@@ -31,8 +31,27 @@ def main() -> int:
             assert page.locator("h1").count() == 1
             assert "From real-world value" in page.locator("h1").inner_text()
             hero_font = page.locator("h1").evaluate("(el)=>getComputedStyle(el).fontFamily")
-            assert "Inter" in hero_font, (width, hero_font)
+            assert "Instrument Sans" in hero_font, (width, hero_font)
             assert page.locator(".v5-hero-services a").count() == 4
+            if width <= 900:
+                stage = page.locator(".nf-mobile-art-stage")
+                assert stage.is_visible(), (width, "mobile architectural stage missing")
+                assert "hero-architecture-hd.webp" in stage.evaluate("(el)=>getComputedStyle(el).backgroundImage")
+                assert not page.locator(".v5-campus").is_visible(), (width, "desktop overlay still covers mobile")
+                assert page.locator(".nf-mobile-cta-label").is_visible(), width
+                title_size = page.locator("#v5-headline").evaluate("(el)=>parseFloat(getComputedStyle(el).fontSize)")
+                if width <= 540:
+                    assert 32 <= title_size <= 40, (width, title_size)
+                    assert page.locator(".v5-hero-services").evaluate("(el)=>getComputedStyle(el).display") == "block"
+                    assert page.locator(".v5-solutions-summary").evaluate("(el)=>getComputedStyle(el).gridTemplateColumns.split(' ').length") == 1
+                    if page.locator(".nfChatFab").count():
+                        chat_color=page.locator(".nfChatFab").evaluate("(el)=>getComputedStyle(el).backgroundColor")
+                        assert "201, 163, 73" not in chat_color, (width, chat_color)
+                        assert page.locator("#nfChatFab").evaluate("(el)=>getComputedStyle(el).backgroundImage") == "none", "late-injected gold chat gradient still wins"
+                        assert page.locator("#nfChatFab").evaluate("(el)=>getComputedStyle(el).backgroundColor") == "rgb(11, 56, 43)", "enterprise chat color was not applied"
+                    spacing = page.locator("#v5-headline").evaluate("(el)=>parseFloat(getComputedStyle(el).wordSpacing)")
+                    assert spacing > 2, (width, "collapsed heading word spaces", spacing)
+                result["mobile_title_px"] = title_size
             assert page.locator(".v5-solutions-summary a").count() == 4
             assert page.locator(".v5-journey-grid > a").count() == 3
             assert page.locator(".nf-reference-join a[href='/onchain/hub/']").count() == 1
@@ -87,6 +106,8 @@ def main() -> int:
                 assert page.locator(".v5-hero-services").is_visible()
                 assert page.locator(".v5-journey-grid > a").first.is_visible()
             page.screenshot(path=str(OUT / f"onchain-v7-{width}-fold.png"), animations="disabled")
+            if width in (360, 390, 768):
+                page.screenshot(path=str(OUT / f"onchain-v7-{width}-full.png"), full_page=True, animations="disabled")
             if os.environ.get("ONCHAIN_EMIT_PREVIEW") == "1" and width in (1440, 390):
                 # Public screenshot thumbnail in QA logs for independent visual evaluation.
                 # Chunks avoid GitHub runner's individual log-line length limits.
