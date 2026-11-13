@@ -101,3 +101,71 @@ def test_actual_database_state_and_revision_locking():
         finally:
             await con.close()
     asyncio.run(run())
+
+
+@pytest.mark.skipif(not os.getenv("CONNECT_TEST_POSTGRES_URL"), reason="Disposable PostgreSQL URL required")
+def test_source_backed_due_digest_is_acknowledged_once_without_contact_data():
+    import uuid
+    from unittest.mock import patch
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    from noetfield_governance.connect_due_worker import ConnectDueWorker, format_digest
+
+    async def run():
+        url = os.environ["CONNECT_TEST_POSTGRES_URL"]
+        con = await asyncpg.connect(url)
+        due_case = "INT-" + uuid.uuid4().hex[:12].upper()
+        test_case = "INT-" + uuid.uuid4().hex[:12].upper()
+        try:
+            await con.execute("CREATE SCHEMA IF NOT EXISTS noetfield")
+            await con.execute("""CREATE TABLE IF NOT EXISTS noetfield.public_intakes (
+                intake_id text PRIMARY KEY,
+                metadata jsonb NOT NULL DEFAULT '{}'::jsonb,
+                qualification_json jsonb
+            )""")
+            await con.execute(
+                "ALTER TABLE noetfield.public_intakes ADD COLUMN IF NOT EXISTS created_at timestamptz DEFAULT now()")
+            for iid, test in ((due_case, False), (test_case, True)):
+                await con.execute("""INSERT INTO noetfield.public_intakes
+                    (intake_id,metadata,qualification_json,created_at)
+                    VALUES ($1,$2::jsonb,$3::jsonb,now()-interval '2 days')""",
+                    iid, json.dumps({"form_id":"nfConnectWizard",
+                                     "intake_kind":"test" if test else "lead",
+                                     "email":"private@example.invalid"}),
+                    json.dumps({"connect_ops":{
+                        "stage":"QUALIFYING","owner":"Named owner",
+                        "next_action":"Review evidence",
+                        "due_date":"2020-01-01"}}))
+        finally:
+            await con.close()
+        worker = ConnectDueWorker(database_url=url,telegram_token="synthetic-test-token",
+                                   telegram_chat_id="synthetic-ops-chat")
+        try:
+            await worker.connect()
+            day = datetime.now(ZoneInfo("America/Vancouver")).date().isoformat()
+            rows,total = await worker.due(day)
+            assert any(x["intake_id"]==due_case for x in rows)
+            assert not any(x["intake_id"]==test_case for x in rows)
+            digest=format_digest(day,rows,total)
+            assert "private@example.invalid" not in digest
+            with patch("noetfield_governance.connect_due_worker.send_message",
+                       return_value={"ok":True,"result":{"message_id":12345}}) as send:
+                one=await worker.run_once()
+                assert one["state"]=="SENT_ACKNOWLEDGED"
+                assert one["sent"] is True
+                two=await worker.run_once()
+                assert two["state"]=="ALREADY_ATTEMPTED_TODAY"
+                assert two["sent"] is False
+                assert send.call_count==1
+            latest=await worker.status()
+            assert latest["latest"]["telegram_provider_acknowledged"] is True
+        finally:
+            await worker.close()
+            con=await asyncpg.connect(url)
+            try:
+                await con.execute("DELETE FROM noetfield.public_intakes WHERE intake_id = ANY($1::text[])",
+                                  [due_case,test_case])
+                await con.execute("DELETE FROM noetfield.connect_followup_digest")
+            finally:
+                await con.close()
+    asyncio.run(run())
