@@ -154,7 +154,7 @@ section.block{background:#071e19;border-color:rgba(177,240,182,.17)}
 .v5-platform{padding:34px 0}.v5-journey-inner{grid-template-columns:1fr}.v5-journey-heading h2 br{display:none}.v5-journey-grid>a{min-height:115px}
 .v7-community-band-inner{grid-template-columns:1.1fr .65fr 1fr}
 }
-@media(max-width:760px){
+@media(max-width:900px){
 .v5-nav{min-height:63px}.v5-brand{font-size:15px}.v5-brand small{font-size:7px}.v5-brand-mark{width:35px;height:36px}
 .v5-hero,.v5-hero-content{min-height:0}.v5-hero-content{display:block;padding-top:57px;padding-bottom:26px}
 .v5-campus{left:5%;width:95%;height:62%;inset:38% 0 auto 5%;object-position:center top;opacity:.8;mask-image:linear-gradient(180deg,transparent,rgba(0,0,0,.54) 12%,#000 42%,rgba(0,0,0,.2) 100%)}
