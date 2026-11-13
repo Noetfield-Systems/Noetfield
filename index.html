@@ -73,6 +73,25 @@
  body.nf-corp.nf-home .runways > .runway:last-child:nth-child(3n + 2) { grid-column: span 2; }
 }
 </style>
+
+<style>
+/* 2026-11 onchain commercial spotlight; additive to locked corporate baseline */
+.nf-onchain-spotlight{background:#101e29;color:#f6f4ed;border-top:1px solid rgba(231,198,145,.45);border-bottom:1px solid rgba(231,198,145,.3);padding:64px 0;position:relative;overflow:hidden}
+.nf-onchain-spotlight:before{content:"";position:absolute;pointer-events:none;inset:0;background:radial-gradient(ellipse 60% 130% at 100% 50%,rgba(59,155,144,.13),transparent 80%)}
+.nf-onchain-spotlight .nf-corp-wrap{position:relative}
+.nf-onchain-top{display:flex;justify-content:space-between;gap:24px;align-items:flex-end}
+.nf-onchain-top h2{max-width:650px;font:500 clamp(32px,4.2vw,55px)/1.1 "Newsreader",serif;letter-spacing:-.035em;color:#fff;margin:15px 0}
+.nf-onchain-top p{max-width:670px;color:#aebfc4;font-size:15px;margin:0 0 20px}
+.nf-onchain-kicker{color:#eac68f;font:500 11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em}
+.nf-onchain-top .nf-onchain-link{display:inline-flex;align-items:center;justify-content:center;background:#e9c792;color:#162633;font-size:13px;font-weight:700;border-radius:8px;padding:14px 20px;text-decoration:none;white-space:nowrap;margin-bottom:20px}
+.nf-onchain-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.nf-onchain-cards a{border:1px solid rgba(213,226,225,.18);border-radius:11px;padding:24px;color:#f6f4ed;text-decoration:none;background:rgba(255,255,255,.03);display:block;min-height:140px}
+.nf-onchain-cards a:hover{border-color:rgba(234,198,143,.75);background:rgba(255,255,255,.055)}
+.nf-onchain-cards span{display:block;color:#a0e4d8;font:500 10px "DM Mono",monospace;letter-spacing:.09em;margin-bottom:9px}
+.nf-onchain-cards strong{display:block;font-size:18px;letter-spacing:-.025em}
+.nf-onchain-cards small{display:block;color:#aabcc2;margin-top:8px;font-size:12px;line-height:1.65}
+@media(max-width:760px){.nf-onchain-top{display:block}.nf-onchain-cards{grid-template-columns:1fr}.nf-onchain-spotlight{padding:46px 0}.nf-onchain-cards a{min-height:0}}
+</style>
 </head>
 <body class="nf-corp nf-home">
  <a class="nf-skip" href="#main">Skip to main content</a>
@@ -84,7 +103,7 @@
     <span>Noetfield Systems <small>Inc.</small></span>
    </a>
    <nav class="nf-corp-nav" aria-label="Primary navigation">
-    <a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/tools/">Tools</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
+    <a href="/onchain/">RWA &amp; Onchain</a><a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/tools/">Tools</a><a href="/developers/">Developers</a><a href="/applications/trustfield/">TrustField</a><a href="/proof/">Proof</a><a href="/about/">Company</a>
     <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
    </nav>
   </div>
@@ -102,6 +121,7 @@
      <div class="actions nf-corp-actions">
       <a class="nf-button nf-button--primary" href="https://app.noetfield.com/" rel="noopener noreferrer">OPEN NOETFIELD APP</a>
       <a class="nf-button nf-button--secondary" href="/demo/complete-run/">WATCH A COMPLETE RUN</a>
+      <a class="nf-button nf-button--secondary" href="/onchain/">RWA &amp; ONCHAIN SYSTEMS</a>
       <a class="nf-button nf-button--secondary" href="/assurance/">EXPLORE ASSURANCE</a>
       <a class="nf-button nf-button--secondary" href="/company-os/">EXPLORE COMPANY OS</a>
      </div>
@@ -125,6 +145,25 @@
       <a class="aside__link" href="https://app.noetfield.com/" rel="noopener noreferrer">Open the live app →</a>
      </div>
     </aside>
+   </div>
+  </section>
+
+
+  <!-- Real-to-onchain buyer entry: scoped, evidence-led, not a replacement for core product -->
+  <section class="nf-onchain-spotlight" id="onchain-spotlight" aria-labelledby="nf-onchain-title">
+   <div class="nf-corp-wrap">
+    <div class="nf-onchain-top">
+     <div><span class="nf-onchain-kicker">New commercial capability · RWA / Web3 / financial operations</span>
+      <h2 id="nf-onchain-title">Take real business rights into working onchain systems.</h2>
+      <p>RWA readiness, approved policy-to-code, stablecoin workflow integration and controlled AI agents. Inspect first-party technical demonstrations before discussing a scoped implementation.</p>
+     </div>
+     <a class="nf-onchain-link" href="/onchain/">Explore Onchain Infrastructure ↗</a>
+    </div>
+    <div class="nf-onchain-cards">
+     <a href="https://scan.noetfield.com/rwa-clinic/" rel="noopener noreferrer"><span>01 / LIVE FIRST-PARTY DEMO</span><strong>RWA Readiness Clinic ↗</strong><small>Private-credit case assessment, evidence requirements and decision gates.</small></a>
+     <a href="https://control.noetfield.com/sandbox" rel="noopener noreferrer"><span>02 / LIVE SYNTHETIC SANDBOX</span><strong>Agent Authority &amp; Signed Proof ↗</strong><small>Step through authorized actions, blocked mutations and technical receipts. No money moved.</small></a>
+     <a href="/onchain/#project"><span>03 / SCOPED COMMERCIAL SERVICE</span><strong>Discuss an Implementation ↗</strong><small>Issuer workflows, integrations and policy controls. One intake, clear acceptance and written scope.</small></a>
+    </div>
    </div>
   </section>
 

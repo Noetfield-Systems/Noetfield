@@ -1,7 +1,9 @@
 # Noetfield Systems Inc.
-> AI workflows with separate verification, bounded repair, and inspectable receipts.
+> AI workflows, RWA readiness and real-to-onchain engineering with explicit authority, verifiable controls and evidence boundaries.
 
 ## Primary
+- [RWA & Onchain Infrastructure](https://www.noetfield.com/onchain/): Client-facing engineering, demonstrations, delivery model and project intake
+- [Onchain Capability Manifest](https://www.noetfield.com/onchain/capabilities.json): Machine-readable offerings, evidence, limitations, owners and contact method
 - [Home](https://www.noetfield.com/): Company home
 - [Developers](https://www.noetfield.com/developers/): What engineers can use today
 - [System](https://www.noetfield.com/system/): How the pieces fit
@@ -12,6 +14,12 @@
 - [Proof](https://www.noetfield.com/proof/): Evidence before claims
 - [Applications](https://www.noetfield.com/applications/): What ships as product
 - [Contact](https://www.noetfield.com/contact/?topic=pilot-client): Talk to Noetfield
+
+## First-party RWA & agent evidence
+- [RWA Readiness Clinic](https://scan.noetfield.com/rwa-clinic/): Live technical assessment using first-party examples, not regulatory approval
+- [Agent Control Plane](https://control.noetfield.com/sandbox): Live synthetic authorization demo; no funds moved
+- [Company OS](https://www.noetfield.com/company-os/): Scoped operating model and component maturity
+- [Studio](https://studio.noetfield.com/): Public examples of custom engineering
 
 ## Product API
 - Docs / signup: https://www.noetfield.com/deterministic-api/
