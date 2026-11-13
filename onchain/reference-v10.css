@@ -154,3 +154,46 @@
 }
 @media(max-width:350px){.v5-platform-facts>span{margin-right:7px;padding-right:7px}.v5-platform-facts b{font-size:19px}.v5-platform-facts small{font-size:7.8px}}
 @media(prefers-reduced-motion:reduce){.v5-solutions-summary a,.v5-button{transition:none}}
+
+/* Optical QA refinement from actual 1672px browser screenshot, not the static concept.
+   More readable microcopy without expanding the reference's first-fold section heights. */
+.v5-layer .nf-layer-icon{display:grid;place-items:center;grid-row:1/3;transform:skewX(13deg);color:#e6ffca}
+.v5-layer .nf-layer-icon svg{width:22px;height:22px;stroke-width:1.75;filter:drop-shadow(0 0 4px rgba(161,255,183,.18))}
+.v5-solutions-summary .v5-solution-icon{display:grid;place-items:center;line-height:1}
+.v5-solutions-summary .v5-solution-icon svg{width:28px;height:28px;stroke:#d5ffc0;stroke-width:1.65;filter:drop-shadow(0 0 5px rgba(147,255,171,.2))}
+.nf-tower-signage{left:69%;top:21.5%;width:120px;transform:perspective(260px) rotateY(-6deg)}
+.nf-tower-signage strong{font-size:10px;letter-spacing:.14em}
+.nf-tower-signage small{font-size:9px;letter-spacing:.23em}
+.v5-solutions-summary .nf-card-rwa .nf-sol-art{
+ background-image:linear-gradient(90deg,rgba(1,35,24,.12),rgba(10,79,43,.14)),url("/onchain/hero-architecture-hd.webp");
+ background-size:cover,360px auto;background-position:right center,78% 46%;opacity:.86;
+}
+.v5-solutions-summary .nf-card-stablecoin .nf-sol-art{opacity:.98}
+.v5-solutions-summary .nf-card-agents .nf-sol-art{opacity:.92}
+@media(min-width:1141px){
+ .v5-nav nav a,.nf-nav-solutions>summary{font-size:12.3px}
+ .v5-hero-features strong{font-size:10.8px}
+ .v5-hero-features small{font-size:9.2px}
+ .v5-solutions-summary a>strong{font-size:12.5px}
+ .v5-solutions-summary a>small{font-size:9.7px;line-height:1.24}
+ .v5-journey-grid>a strong{font-size:11.7px}
+ .v5-journey-grid>a small{font-size:9.2px}
+ .v5-hero h1{font-size:clamp(48px,3.68vw,60px)}
+ .v5-lead{font-size:clamp(13.6px,1.0vw,15.7px)}
+ .v5-layer strong{font-size:11px}
+ .v5-layer small{font-size:8.8px}
+}
+@media(max-width:1140px){
+ .v5-layer .nf-layer-icon{transform:skewX(13deg)}
+ .nf-tower-signage{display:none}
+ .v5-solutions-summary .v5-solution-icon svg{width:27px;height:27px}
+}
+
+/* Match the reference's decisive, comfortably sized CTAs, not shrunken micro-buttons. */
+@media(min-width:1141px){
+ .v5-actions .v5-button-bright{min-width:202px;justify-content:center}
+ .v5-actions .v5-button-outline{min-width:221px;justify-content:center}
+ .v5-actions .v5-button{font-size:13px;min-height:44px;letter-spacing:-.012em}
+ .v5-platform-copy>p:not(.v5-section-label){font-size:12px;line-height:1.43}
+ .v5-hero-features b{font-size:26px}
+}

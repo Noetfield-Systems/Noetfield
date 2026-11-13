@@ -116,7 +116,9 @@ def main() -> int:
                 cards = page.locator(".v5-solutions-summary a").all()
                 assert all(card.is_visible() for card in cards)
                 art = page.locator(".nf-card-rwa .nf-sol-art").evaluate("(el)=>getComputedStyle(el).backgroundImage")
-                assert "case-rwa-v7.svg" in art, "RWA image-backed card is missing"
+                assert ("hero-architecture-hd.webp" in art or "case-rwa-v7.svg" in art), "RWA first-party artwork is missing"
+                assert page.locator(".v5-layer .nf-layer-icon svg").count() == 4, "Platform SVG line icons missing"
+                assert page.locator(".v5-solutions-summary .v5-solution-icon svg").count() == 4, "Core solution SVG icons missing"
                 platform_h = page.locator(".v5-platform").bounding_box()["height"]
                 assert platform_h < 290, ("Platform too tall versus reference",platform_h)
             page.screenshot(path=str(OUT / f"onchain-v7-{width}-fold.png"), animations="disabled")
