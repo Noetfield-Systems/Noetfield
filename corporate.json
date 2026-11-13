@@ -1,0 +1,133 @@
+{
+  "schema": "https://www.noetfield.com/corporate.json",
+  "schema_version": "1.0.0",
+  "published": "2026-11-13",
+  "operator": {
+    "legal_name": "Noetfield Systems Inc.",
+    "jurisdiction": "Canada",
+    "location": "Vancouver, British Columbia, Canada",
+    "website": "https://www.noetfield.com",
+    "contact": "https://www.noetfield.com/connect/"
+  },
+  "positioning": {
+    "primary": "Building the next generation of intelligent businesses.",
+    "description": "We combine human expertise, software engineering, agentic operations, and verifiable infrastructure to build companies, modernize real businesses, and connect real-world value to the digital economy.",
+    "economic_worlds": [
+      "Real Business & People",
+      "Intelligent Engineering & Operations",
+      "Real-World Assets & Digital Economy"
+    ]
+  },
+  "offerings": [
+    {
+      "id": "build-business",
+      "title": "Build a Business",
+      "availability": "scoped_enquiry",
+      "first_deliverable": "Project or collaboration scope",
+      "public_url": "https://www.noetfield.com/work-with-us/",
+      "intake_url": "https://www.noetfield.com/connect/?intent=business"
+    },
+    {
+      "id": "transform-operations",
+      "title": "Transform Operations",
+      "availability": "scoped_pilot_enquiry",
+      "first_deliverable": "Workflow and implementation assessment",
+      "public_url": "https://www.noetfield.com/company-os/",
+      "intake_url": "https://www.noetfield.com/connect/?intent=business"
+    },
+    {
+      "id": "onchain",
+      "title": "Bring Value Onchain",
+      "availability": "assessment_and_scoped_engineering",
+      "first_deliverable": "RWA readiness or engineering scope",
+      "public_url": "https://www.noetfield.com/onchain/",
+      "intake_url": "https://www.noetfield.com/connect/?intent=business"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "Company OS",
+      "url": "https://www.noetfield.com/company-os/",
+      "status": "evolving_pilot",
+      "claim_scope": "First-party architecture and bounded workflow demonstrations, not universal independent autonomous execution"
+    },
+    {
+      "name": "Runways",
+      "url": "https://www.noetfield.com/runways/",
+      "status": "demonstrated",
+      "claim_scope": "Scoped qualification, bounded execution and evidence paths"
+    },
+    {
+      "name": "Independent verification",
+      "url": "https://www.noetfield.com/assurance/",
+      "status": "demonstrated",
+      "proof_url": "https://www.noetfield.com/proof/",
+      "claim_scope": "Evidence is per-record and does not establish universal safety"
+    },
+    {
+      "name": "RWA readiness clinic",
+      "url": "https://scan.noetfield.com/rwa-clinic/",
+      "status": "public_demo",
+      "claim_scope": "Technical readiness only, no asset issuance or regulatory approval"
+    }
+  ],
+  "relationships": [
+    {
+      "name": "Noetfield Systems Inc.",
+      "relationship": "operating_corporation"
+    },
+    {
+      "name": "TrustField",
+      "relationship": "independent_venture_in_formation_technically_supported",
+      "url": "https://trustfield.ca/",
+      "owned_by_noetfield": false
+    },
+    {
+      "name": "BuildRelay",
+      "relationship": "independent_project",
+      "owned_by_noetfield": false
+    },
+    {
+      "name": "Cairn",
+      "relationship": "independent_project",
+      "owned_by_noetfield": false
+    }
+  ],
+  "agent_discovery": {
+    "llms": "https://www.noetfield.com/llms.txt",
+    "openapi": "https://www.noetfield.com/openapi.json",
+    "proof": "https://www.noetfield.com/proof/",
+    "onchain_capabilities": "https://www.noetfield.com/onchain/capabilities.json",
+    "onchain_ecosystem": "https://www.noetfield.com/onchain/ecosystem.json"
+  },
+  "agent_actions": [
+    {
+      "id": "submit-commercial-enquiry",
+      "method": "POST",
+      "endpoint": "https://www.noetfield.com/api/intake",
+      "user_authorization_required": true,
+      "human_contact_consent_required": true,
+      "publicly_documented": true,
+      "request_fields": [
+        "organization",
+        "contact_name",
+        "contact_email",
+        "message",
+        "vector",
+        "sku",
+        "request_id",
+        "metadata"
+      ],
+      "success_condition": "HTTP 200 with intake_persisted=true and intake_id",
+      "nonpersisted_condition": "HTTP 202 with intake_persisted=false; notification is not a stored request",
+      "retry": "Retain request_id; do not treat notification_reference as intake_id",
+      "next_step": "Operator review and follow-up, no automatic acceptance, access or payment"
+    }
+  ],
+  "boundaries": [
+    "Public read endpoints do not grant permission to use private tools.",
+    "No unauthenticated access to Company OS or private Founder OS.",
+    "No guaranteed partner fees, employment, fundraising, token issuance or settlement.",
+    "Recorded enquiry is not a signed engagement or sale."
+  ]
+}
