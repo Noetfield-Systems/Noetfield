@@ -6,6 +6,14 @@ on:
       - 'connect/**'
       - 'opportunities/**'
       - 'contact/**'
+      - 'index.html'
+      - 'terms/**'
+      - 'privacy/**'
+      - 'trust/**'
+      - 'proof/**'
+      - 'work-with-us/**'
+      - 'assets/noetfield-collaboration-entry.js'
+      - 'scripts/test-corporate-trust-polish.cjs'
       - 'governance/www-public-artifact-v1.json'
       - 'scripts/test-connect-static.cjs'
       - 'scripts/test-connect-v3.cjs'
@@ -39,3 +47,4 @@ jobs:
           node --check assets/noetfield-connect-v3.js
           node scripts/test-connect-static.cjs
           node scripts/test-connect-v3.cjs
+          node scripts/test-corporate-trust-polish.cjs
