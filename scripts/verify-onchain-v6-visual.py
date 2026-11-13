@@ -44,7 +44,9 @@ def main() -> int:
                 assert page.locator(".v5-actions a[href='#project']").count() == 1, "missing sales CTA"
                 assert page.locator("a[href='/onchain/hub/']").count() >= 1, "missing first-party wallet Hub"
                 assert page.locator("[data-layer]").count() == 4, "four operating layers required"
-                assert page.locator("[data-network]").count() == 5, "five network explorations required"
+                assert page.locator("[data-network]").count() == 6, "six actual network research explorers required"
+                assert page.locator(".nf-reference-quicklinks a").count() == 7, "seven live evidence shortcuts required"
+                assert page.locator(".v5-layer .nf-layer-icon svg").count() == 4, "four SVG operating layers required"
                 # Capture the actual first fold before interacting.
                 page.screenshot(path=str(OUTPUT / f"onchain-{width}-first-fold.png"), animations="disabled")
                 policy = page.locator('[data-layer="policy"]')
@@ -65,7 +67,7 @@ def main() -> int:
                     trigger.click()
                     assert trigger.get_attribute("aria-expanded") == "true"
                     assert page.locator("#onchainNav").is_visible()
-                    page.locator('#onchainNav a[href="#solutions"]').click()
+                    page.locator('#onchainNav a[href="#use-cases"]').click()
                     assert trigger.get_attribute("aria-expanded") == "false"
                     result["mobile_navigation"] = "PASS"
                 if width in (1440, 390):
