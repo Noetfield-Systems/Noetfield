@@ -37,12 +37,14 @@ CREATE TABLE IF NOT EXISTS nf_onchain_members (
  referred_by TEXT REFERENCES nf_onchain_members(wallet),
  email TEXT,
  email_opt_in BOOLEAN NOT NULL DEFAULT FALSE,
+ interest TEXT NOT NULL DEFAULT 'ecosystem',
  first_joined_at TIMESTAMPTZ NOT NULL DEFAULT now(),
  last_seen_at TIMESTAMPTZ NOT NULL DEFAULT now(),
  last_checkin DATE,
  checkin_streak INTEGER NOT NULL DEFAULT 0,
  leaderboard_opt_in BOOLEAN NOT NULL DEFAULT FALSE
 );
+ALTER TABLE nf_onchain_members ADD COLUMN IF NOT EXISTS interest TEXT NOT NULL DEFAULT 'ecosystem';
 CREATE TABLE IF NOT EXISTS nf_onchain_nonces (
  nonce TEXT PRIMARY KEY,
  wallet TEXT NOT NULL,
@@ -185,7 +187,7 @@ async def current_wallet(authorization: Annotated[str | None, Header()] = None) 
 
 async def member_state(conn: asyncpg.Connection, wallet: str) -> dict:
     row = await conn.fetchrow(
-        """SELECT m.wallet,m.referral_code,m.email_opt_in,m.last_checkin,m.checkin_streak,
+        """SELECT m.wallet,m.referral_code,m.email_opt_in,m.interest,m.last_checkin,m.checkin_streak,
             m.leaderboard_opt_in,COALESCE(SUM(l.xp),0)::int AS xp
             FROM nf_onchain_members m LEFT JOIN nf_onchain_xp_ledger l ON l.wallet=m.wallet
             WHERE m.wallet=$1
@@ -203,7 +205,7 @@ async def member_state(conn: asyncpg.Connection, wallet: str) -> dict:
         "referral_code": row["referral_code"],
         "referral_url": "https://www.noetfield.com/onchain/hub/?ref=" + row["referral_code"],
         "leaderboard_opt_in": row["leaderboard_opt_in"],
-        "email_opt_in": row["email_opt_in"],
+        "email_opt_in": row["email_opt_in"], "interest": row["interest"],
         "program": _PROGRAM_ID,
         "xp_is_token": False, "token_claim_open": False,
     }
@@ -389,8 +391,8 @@ async def join_waitlist(
     async with (await pool()).acquire() as conn:
         await conn.execute(
             """UPDATE nf_onchain_members SET email=$2,email_opt_in=$3,
-               last_seen_at=now() WHERE wallet=$1""",
-            wallet, email or None, bool(req.email_opt_in),
+               interest=$4,last_seen_at=now() WHERE wallet=$1""",
+            wallet, email or None, bool(req.email_opt_in), req.interest,
         )
         # No point award for joining a token list, no token allocation reserved.
     return {"joined": True, "interest": req.interest,
