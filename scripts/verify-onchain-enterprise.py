@@ -73,6 +73,11 @@ def main() -> int:
                         assert page.locator(".nf-nav-solutions a").count() == 4
                         assert page.locator(".v5-hero-services a").count() == 4
                         assert page.locator("form#nfOnchainIntake[data-nf-intake-form]").count() == 1
+                        if width <= 1050:
+                            toggle = page.locator("#onchainMenuToggle")
+                            assert toggle.is_visible()
+                            toggle.click()
+                            assert toggle.get_attribute("aria-expanded") == "true"
                         page.locator(".nf-nav-solutions summary").click()
                         assert page.locator('.nf-nav-submenu a[href="/onchain/agents/"]').is_visible()
                     if route == "/onchain/hub/":
