@@ -138,6 +138,123 @@ html[dir="rtl"] input,html[dir="rtl"] select,html[dir="rtl"] textarea{text-align
 <script>
 (()=>{"use strict";
 const $=id=>document.getElementById(id), state={csrf:"",rows:[],selected:null,busy:false,offset:0,total:0,graph:null,view:"all"};
+const usePersian=new URLSearchParams(location.search).get("lang")==="fa";
+const privateLabels={
+"Public gateway ↗":"درگاه عمومی ↗",
+"PRIVATE / RELATIONSHIP OPERATIONS":"فضای خصوصی / مدیریت فرصت‌ها",
+"Welcome back to Opportunity Desk.":"به میز مدیریت ارتباطات خوش آمدید",
+"Operator access key":"کلید دسترسی اپراتور",
+"Remember this device for 7 days":"ورود در این دستگاه تا ۷ روز",
+"Open opportunity desk":"ورود به میز فرصت‌ها",
+"Total source-backed cases":"کل پرونده‌های ثبت‌شده",
+"Open on current page":"پرونده‌های باز این صفحه",
+"Unassigned on current page":"بدون مسئول در این صفحه",
+"Due on current page":"نیازمند پیگیری در این صفحه",
+"All relationships":"همه ارتباطات",
+"Needs an owner":"نیازمند مسئول",
+"Due / overdue":"پیگیری امروز و معوق",
+"Match proposals":"پیشنهادهای تطبیق",
+"Invitations & collaboration":"دعوت‌نامه‌ها و همکاری",
+"Verified outcomes":"نتایج مستقل تأییدشده",
+"Evidence before claims.":"شواهد مقدم بر ادعاست.",
+"REAL SOURCE / RELATIONSHIP INBOX":"صندوق ورودی پرونده‌های واقعی",
+"Decide the next move":"اقدام بعدی را مشخص کنید",
+"Search people, organizations, opportunities":"جستجوی افراد، سازمان‌ها و فرصت‌ها",
+"Stage":"مرحله","All stages":"تمام مراحل","New":"جدید",
+"Qualifying":"در حال ارزیابی","Routed":"ارجاع‌شده","Engaged":"در حال مذاکره",
+"Negotiating":"مذاکره تجاری","Pilot":"پایلوت","Won":"موفق","Lost":"ناموفق","Archived":"بایگانی",
+"Venture":"پروژه","All authorized initiatives":"تمام پروژه‌های مجاز",
+"Follow-up":"پیگیری","All next actions":"همه اقدامات بعدی",
+"Due or overdue":"موعدرسیده یا معوق",
+"Missing next action date":"بدون تاریخ اقدام بعدی",
+"Owner":"مسئول","All owners":"همه مسئولان",
+"Source":"منبع","All sources":"تمام منابع",
+"Opportunity type":"نوع فرصت","All types":"تمام انواع",
+"Match quality":"وضعیت تطبیق","All match states":"تمام وضعیت‌ها",
+"Not proposed":"پیشنهادی ثبت نشده","Proposed, not confirmed":"پیشنهادی، هنوز تأییدنشده",
+"Collaboration":"همکاری","All collaboration states":"همه وضعیت‌های همکاری",
+"No invitation recorded":"بدون دعوت‌نامه","Invitation prepared":"دعوت‌نامه آماده شده",
+"Interest recorded":"علاقه‌مندی ثبت‌شده","Declined":"ردشده",
+"Outcome verification":"تأیید نتیجه","All verification states":"همه وضعیت‌های تأیید",
+"Independently verified":"مستقل تأییدشده","Not independently verified":"بدون تأیید مستقل",
+"← Newer":"← جدیدتر","Older →":"قدیمی‌تر →",
+"CASE INTELLIGENCE / EVIDENCE TRAIL":"اطلاعات پرونده / زنجیره شواهد",
+"Refresh":"بازخوانی","Lock desk":"قفل میز مدیریت",
+"ROUTING & PROOF STATUS":"مسئولیت و وضعیت شواهد",
+"MATCH":"تطبیق","COLLABORATION":"همکاری","HUMAN OWNER":"مسئول انسانی",
+"AGENT EXECUTION":"اجرای عامل هوشمند","OUTCOME VERIFICATION":"تأیید نتیجه",
+"CANONICAL CRM ID":"شناسه CRM مرکزی","COMMERCIAL SOURCE":"منبع تجاری",
+"COLLECTED CASH":"وجه وصول‌شده","ORIGINAL SUBMISSION":"درخواست اصلی",
+"QUALIFICATION READINESS · SELF-REPORTED":"آمادگی ارزیابی · اطلاعات اظهارشده",
+"OPERATOR DECISION & NEXT ACTION":"تصمیم اپراتور و اقدام بعدی",
+"Actual owner (person)":"مسئول واقعی (شخص)",
+"Next action":"اقدام بعدی","Due date":"موعد اقدام",
+"Operator note / outcome evidence":"یادداشت و شواهد نتیجه",
+"Save source-backed case":"ثبت تصمیم روی پرونده اصلی",
+"WORKFORCEOS · CANONICAL CASE HANDOFF":"WorkforceOS · واگذاری پرونده",
+"Sync / repair WorkforceOS case":"اتصال / بازآزمایی پرونده WorkforceOS",
+"Check real WorkforceOS status / مشاهده وضعیت واقعی":"مشاهده وضعیت واقعی WorkforceOS",
+"Match assessment":"ارزیابی تطبیق","External workpacket evidence (optional)":"لینک مأموریت واقعی (اختیاری)",
+"Record accountable handoff / ثبت واگذاری":"ثبت واگذاری مسئولانه",
+"RECIPROCAL VALUE · SELF-REPORTED":"ارزش متقابل · اظهارشده",
+"WHAT THEY OFFER":"پیشنهاد طرف مقابل","WHAT THEY ASK":"درخواست طرف مقابل",
+"ROLE":"نقش","CONTACT CONSENT":"رضایت تماس",
+"RELATIONSHIP GRAPH · SAME SUBMITTED EMAIL":"شبکه ارتباطات با ایمیل اظهارشده یکسان",
+"OPERATOR ACTIVITY / HUMAN FOLLOW-UP":"فعالیت اپراتور / پیگیری انسانی",
+"Observed activity":"فعالیت ثبت‌شده",
+"Evidence URL (optional)":"لینک شواهد (اختیاری)",
+"Actual observation or proposed next step":"مشاهده واقعی یا اقدام پیشنهادی",
+"Record actual activity":"ثبت فعالیت واقعی",
+"ACTUAL OUTCOME · EVIDENCE REQUIRED":"نتیجه واقعی · نیازمند سند",
+"Outcome":"نتیجه","HTTPS evidence source":"منبع شواهد HTTPS",
+"Operator report":"گزارش اپراتور","Record reported outcome":"ثبت نتیجه گزارش‌شده",
+"SCOPED INVITATION · PREPARE OR SEND":"دعوت‌نامه محدود · تهیه یا ارسال",
+"Scope":"دامنه همکاری","Private invitation text":"متن دعوت خصوصی",
+"Prepare opt-in invitation":"ساخت لینک دعوت خصوصی",
+"Email invitation via Resend / ارسال واقعی":"ارسال ایمیل واقعی با Resend",
+"ACTUAL ACTIVITY / INVITATION RESPONSES":"فعالیت‌های واقعی / پاسخ دعوت‌ها",
+"CHANGE HISTORY":"تاریخچه تغییرات","No operator updates recorded yet.":"هنوز تغییری ثبت نشده است.",
+"CONTACT":"شخص","EMAIL":"ایمیل","ORGANIZATION":"سازمان",
+"INITIATIVE":"پروژه","OPPORTUNITY TYPE":"نوع فرصت",
+"DEADLINE":"مهلت","PRIORITY":"اولویت",
+"No verified dispatch":"اجرای تأییدشده‌ای وجود ندارد",
+"No payment receipt":"رسید وصول وجه ثبت نشده",
+"No verified CRM ID attached":"شناسه CRM تأییدشده متصل نیست",
+"No invitation":"بدون دعوت‌نامه",
+"Prepared; not confirmed sent":"آماده، ارسال تأیید نشده",
+"Interest; not assigned":"علاقه‌مند، هنوز تخصیص داده نشده",
+"Unassigned; advisory only":"بدون مسئول؛ فقط پیشنهاد",
+"Not assessed":"ارزیابی نشده","Medium":"متوسط","High":"بالا","Low":"پایین",
+"Not supplied":"ثبت نشده","Not scheduled":"زمان‌بندی نشده",
+"View real WorkforceOS status":"مشاهده وضعیت واقعی WorkforceOS",
+"Source-backed records":"پرونده‌های واقعی",
+};
+function applyPrivateLocale(root=document.body){
+ if(!usePersian||!root)return;
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ let node;
+ while((node=walker.nextNode())){
+  const parent=node.parentElement;
+  if(!parent||parent.tagName==="SCRIPT"||parent.tagName==="STYLE")continue;
+  const raw=node.nodeValue||"",key=raw.trim();
+  if(Object.prototype.hasOwnProperty.call(privateLabels,key))
+   node.nodeValue=raw.replace(key,privateLabels[key]);
+ }
+ root.querySelectorAll?.("[placeholder]").forEach(el=>{
+  const raw=el.getAttribute("placeholder");
+  if(Object.prototype.hasOwnProperty.call(privateLabels,raw))
+   el.setAttribute("placeholder",privateLabels[raw]);
+ });
+}
+if(usePersian){
+ document.documentElement.lang="fa";document.documentElement.dir="rtl";
+ const link=document.getElementById("desk-language");
+ if(link){link.href="?lang=en";link.textContent="English";link.lang="en";}
+ const heading=document.querySelector(".headline h1");
+ if(heading)heading.innerHTML='از ارتباط <em>تا نتیجه واقعی.</em><span class="sr-only">میز مدیریت فرصت‌ها</span>';
+ applyPrivateLocale();
+}
+
 function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function text(id,value){$(id).textContent=String(value)}
 function date(v){if(!v)return"—";const d=new Date(v);return isNaN(+d)?String(v):d.toLocaleString("en-CA",{dateStyle:"medium",timeStyle:"short"})}
