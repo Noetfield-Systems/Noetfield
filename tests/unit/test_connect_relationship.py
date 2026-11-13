@@ -308,8 +308,20 @@ def test_consent_scoped_provider_invitation_delivery_ledger_is_real_and_replay_s
                 await store.finish_connect_invitation_send(
                     intake_id=iid,invitation_id=prepared["invitation_id"],
                     provider_accepted=True,provider_message_id="second_id")
-            rows=await store.list_connect_by_intake(intake_id=iid)
-            projected=triage_connect_record(next(x for x in rows if x["intake_id"]==iid))
+            probe=await __import__("asyncpg").connect(url)
+            try:
+                row=await probe.fetchrow(
+                    "SELECT metadata, qualification_json FROM noetfield.public_intakes WHERE intake_id=$1",
+                    iid)
+                metadata=row["metadata"]
+                qual=row["qualification_json"]
+                if isinstance(metadata,str): metadata=json.loads(metadata)
+                if isinstance(qual,str): qual=json.loads(qual)
+                projected=triage_connect_record({
+                    "intake_id":iid,"metadata":metadata,"qualification_json":qual,
+                })
+            finally:
+                await probe.close()
             assert projected["invitations"][0]["state"]=="SENT_PROVIDER_ACCEPTED"
             assert projected["invitations"][0]["provider_message_id"]=="resend_fixture_012345"
             assert "token_hash" not in projected["invitations"][0]
