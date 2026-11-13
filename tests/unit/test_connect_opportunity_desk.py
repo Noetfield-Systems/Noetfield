@@ -173,17 +173,17 @@ def test_workforce_handoff_requires_saved_operator_decision_and_verified_remote_
                 unauth = await client.post(path, json=request)
                 assert unauth.status_code == 403
                 wrong_owner = await client.post(path, json={**request, "owner": "Unknown"},
-                       headers={"X-Admin-Secret": "operator-bridge-test"})
+                       headers={"X-Admin-Secret": "operator-bridge-test", "Origin": "http://test"})
                 assert wrong_owner.status_code == 409
                 actual = await client.post(path, json=request,
-                          headers={"X-Admin-Secret": "operator-bridge-test"})
+                          headers={"X-Admin-Secret": "operator-bridge-test", "Origin": "http://test"})
                 assert actual.status_code == 200, actual.text
                 assert actual.json()["operator_owner_recorded"] is True
                 assert actual.json()["agent_executed"] is False
                 assert actual.json()["independently_verified_by_platform"] is False
                 status = await client.get(
                     "/api/opportunities/desk/" + record["intake_id"] + "/workforce/status",
-                    headers={"X-Admin-Secret": "operator-bridge-test"})
+                    headers={"X-Admin-Secret": "operator-bridge-test", "Origin": "http://test"})
                 assert status.status_code == 200, status.text
                 assert status.json()["case"]["case_id"] == proof["case"]["case_id"]
                 assert dispatch.call_count == 1
