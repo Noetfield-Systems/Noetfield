@@ -171,3 +171,35 @@ body.nf-corp.nf-home .cc-node:focus-visible,body.nf-corp.nf-home .cc-card:focus-
 }
 body.nf-corp.nf-home .cc-header .nf-corp-nav .cc-app-nav{display:none}
 @media(max-width:1070px){body.nf-corp.nf-home .cc-header .nf-corp-nav .cc-app-nav{display:block}}
+
+/* Browser-verified refinement: protect copy from overlay and keep mobile art below CTAs. */
+@media(min-width:1071px){
+ body.nf-corp.nf-home .cc-universe{grid-template-columns:minmax(0,38%) minmax(0,62%)}
+ body.nf-corp.nf-home .cc-copy{max-width:535px}
+ body.nf-corp.nf-home .nf-cc-hero h1{max-width:580px;font-size:clamp(3rem,3.62vw,4.25rem);letter-spacing:-.052em}
+ body.nf-corp.nf-home .cc-lead{max-width:47ch}
+ body.nf-corp.nf-home .cc-node:nth-of-type(1){left:40%}
+ body.nf-corp.nf-home .cc-node:nth-of-type(2){left:37%}
+ body.nf-corp.nf-home .cc-node:nth-of-type(3){left:35%}
+}
+@media(max-width:1070px){
+ body.nf-corp.nf-home .cc-copy{position:relative;z-index:5;max-width:540px}
+ body.nf-corp.nf-home .cc-scene{z-index:1}
+}
+@media(max-width:700px){
+ body.nf-corp.nf-home .cc-header .nf-corp-navrow{display:flex;flex-direction:row;align-items:center;flex-wrap:nowrap;justify-content:space-between;gap:8px;min-height:66px}
+ body.nf-corp.nf-home .cc-header .nf-corp-brand{display:inline-flex;flex:none;width:auto}
+ body.nf-corp.nf-home .cc-header .nf-q-menu{display:block;flex:none;width:auto;margin:0 0 0 auto}
+ body.nf-corp.nf-home .cc-universe{display:flex;flex-direction:column;align-items:stretch;min-height:0}
+ body.nf-corp.nf-home .cc-copy{padding:29px 0 14px}
+ body.nf-corp.nf-home .nf-cc-hero h1{max-width:12ch;font-size:clamp(2.75rem,11.1vw,4rem);line-height:.98}
+ body.nf-corp.nf-home .nf-cc-hero h1 br{display:none}
+ body.nf-corp.nf-home .cc-lead{max-width:47ch;font-size:.87rem;line-height:1.55}
+ body.nf-corp.nf-home .cc-scene{position:relative;inset:auto;right:auto;top:auto;z-index:1;width:calc(100% + 44px);height:290px;flex:none;margin:-2px -22px 0;pointer-events:none}
+ body.nf-corp.nf-home .cc-node{display:none}
+ body.nf-corp.nf-home .cc-audience{margin-top:0}
+}
+@media(max-width:380px){
+ body.nf-corp.nf-home .cc-universe{min-height:0}
+ body.nf-corp.nf-home .cc-scene{height:265px}
+}
