@@ -98,5 +98,7 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
         "execution_status": "NOT_DISPATCHED",
         "verification_status": "NOT_VERIFIED",
         "outcome": None,
+        "reported_outcome": ops.get("reported_outcome") if isinstance(ops.get("reported_outcome"), dict) else None,
+        "reported_outcomes_count": len(ops.get("reported_outcomes") or []),
         "cash_collected": None,
     }
