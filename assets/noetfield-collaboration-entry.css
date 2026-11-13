@@ -1,0 +1,63 @@
+/* Corporate participation: midnight navy, restrained champagne, no game styling. */
+.nf-www.nf-ecosystem{background:#071522;color:#e8edf4}
+.nf-ecosystem .nf-main{width:100%;max-width:none;padding:0;margin:0}
+.nf-ecosystem .nf-main a{color:inherit}
+.nf-ecosystem .nf-ecosystem-hero{background:radial-gradient(ellipse at 85% 0%,rgba(66,103,129,.27),transparent 53%),linear-gradient(125deg,#081420,#102437 80%,#091722);padding:clamp(70px,8vw,126px) max(22px,calc((100vw - 1260px)/2)) clamp(55px,7vw,100px);border-bottom:1px solid #ffffff1c}
+.nf-ecosystem-hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:clamp(30px,5vw,90px);align-items:center}
+.nf-ecosystem-kicker,.nf-ecosystem-overline{font:600 11px/1.5 'Inter',sans-serif;letter-spacing:.17em;text-transform:uppercase;color:#d8b98b}
+.nf-ecosystem-kicker span{margin:0 8px;color:#7f97a9}
+.nf-ecosystem h1,.nf-ecosystem h2,.nf-ecosystem h3{color:#f5f6fa}
+.nf-ecosystem h1{font:400 clamp(3rem,5.6vw,6.1rem)/1.01 'Newsreader',Georgia,serif;letter-spacing:-.044em;max-width:900px;margin:18px 0 27px}
+.nf-ecosystem h1 em{color:#e6c18c;font-style:normal}
+.nf-ecosystem .nf-ecosystem-lead{font-size:clamp(1rem,1.5vw,1.23rem);line-height:1.75;max-width:690px;color:#c1d0db}
+.nf-ecosystem-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;align-items:center}
+.nf-ecosystem-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:8px;text-decoration:none;font:600 14px/1.2 'Inter',sans-serif;min-height:48px;padding:14px 21px;border:1px solid #c9a875;cursor:pointer;transition:background .18s,transform .18s;color:#0b1a26!important}
+.nf-ecosystem-btn-primary{background:#dfbd8d}
+.nf-ecosystem-btn-primary:hover{background:#f3d7ae;transform:translateY(-1px)}
+.nf-ecosystem-btn-secondary{background:transparent;color:#e9dfd0!important;border-color:#627589}
+.nf-ecosystem-btn-secondary:hover{background:#ffffff12}
+.nf-ecosystem-hero-panel{background:linear-gradient(130deg,#172c3caf,#0a1724db);border:1px solid #a8bfd139;box-shadow:0 30px 90px #0007;border-radius:17px;padding:clamp(24px,3vw,40px)}
+.nf-ecosystem-panel-header{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #ffffff25;padding-bottom:15px;color:#dfbd8d;font:600 10px 'Inter',sans-serif;letter-spacing:.15em}
+.nf-ecosystem-hero-panel ol{padding:0;margin:12px 0 6px;list-style:none}
+.nf-ecosystem-hero-panel li{display:grid;grid-template-columns:38px 1fr;column-gap:14px;align-items:baseline;padding:17px 0;border-bottom:1px solid #ffffff13}
+.nf-ecosystem-hero-panel li>span{grid-row:span 2;font:500 12px 'Inter',sans-serif;color:#d5b17b}
+.nf-ecosystem-hero-panel li strong{color:#f2f5f7;font-size:15px}
+.nf-ecosystem-hero-panel li small{color:#9cb0c1;font-size:12px;margin-top:5px}
+.nf-ecosystem-hero-panel>p{font-size:12px;color:#94acbc;line-height:1.6;margin-top:22px}
+.nf-ecosystem-section{padding:clamp(60px,7vw,100px) max(22px,calc((100vw - 1260px)/2));border-bottom:1px solid #ffffff19}
+.nf-ecosystem-section h2{font:400 clamp(2.3rem,3.5vw,3.65rem)/1.09 'Newsreader',Georgia,serif;letter-spacing:-.036em;margin:12px 0}
+.nf-ecosystem-section>p:not(.nf-ecosystem-overline),.nf-ecosystem-apply-intro>p:not(.nf-ecosystem-overline){max-width:700px;color:#b5c6d5;line-height:1.7}
+.nf-ecosystem-role-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:36px}
+.nf-ecosystem-role-grid button{min-height:194px;text-align:left;padding:26px 21px;background:linear-gradient(145deg,#172c3b,#0d2030);border:1px solid #67809955;border-radius:12px;cursor:pointer;color:#e8eff6;display:flex;flex-direction:column;gap:14px;transition:border-color .18s,background .18s}
+.nf-ecosystem-role-grid button>span,.nf-ecosystem-worlds article>span{font:600 10px 'Inter',sans-serif;letter-spacing:.14em;color:#d3ae79}
+.nf-ecosystem-role-grid button strong{font-size:17px;font-weight:600;line-height:1.35;color:#f4f5f8}
+.nf-ecosystem-role-grid button small{font:400 13px/1.55 'Inter',sans-serif;color:#a9bcc9}
+.nf-ecosystem-role-grid button:hover,.nf-ecosystem-role-grid button[aria-pressed="true"]{border-color:#dfbd8d;background:#1c3545}
+.nf-ecosystem-worlds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:34px}
+.nf-ecosystem-worlds article{padding:31px;border:1px solid #a5b7c83b;border-radius:13px;background:#101f2e}
+.nf-ecosystem-worlds h3{font:400 31px/1.1 'Newsreader',Georgia,serif;margin:17px 0}
+.nf-ecosystem-worlds p{font-size:14px;line-height:1.7;min-height:94px;color:#b8cbd5}
+.nf-ecosystem-worlds a,.nf-ecosystem-bottom a{color:#e4bf84!important;text-underline-offset:5px;font-size:13px}
+.nf-ecosystem-apply{display:grid;grid-template-columns:minmax(250px,.7fr) minmax(0,1.3fr);gap:clamp(28px,6vw,100px);background:#0a1a28}
+.nf-ecosystem-small{font-size:12px}
+.nf-ecosystem-form{display:grid;gap:19px;padding:clamp(20px,4vw,40px);background:#142839;border:1px solid #91afc13e;border-radius:14px;box-shadow:0 22px 70px #0003}
+.nf-ecosystem-form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.nf-ecosystem-form label{display:grid;gap:9px;color:#d9e4ec;font:600 12px/1.45 'Inter',sans-serif}
+.nf-ecosystem-form input:not([type=checkbox]),.nf-ecosystem-form select,.nf-ecosystem-form textarea{width:100%;font:400 14px/1.45 'Inter',sans-serif;min-height:46px;background:#081a2a;color:#f0f3f6;border:1px solid #67849877;border-radius:7px;padding:12px;box-sizing:border-box}
+.nf-ecosystem-form textarea{resize:vertical;min-height:118px}
+.nf-ecosystem-form input::placeholder,.nf-ecosystem-form textarea::placeholder{color:#9aabba}
+.nf-ecosystem-form select option{color:#fff;background:#122a3c}
+.nf-ecosystem-form .nf-ecosystem-consent{display:flex;align-items:start;gap:11px;font-weight:400;font-size:12px;line-height:1.6}
+.nf-ecosystem-consent input{margin:4px 0 0;width:17px;height:17px;accent-color:#e6c18c;flex-shrink:0}
+.nf-ecosystem-consent a{color:#dfbd8d!important}
+.nf-ecosystem-submit-row{display:flex;gap:15px;flex-wrap:wrap;align-items:center}
+.nf-ecosystem-submit-row span{color:#9fb2c0;font-size:11px;max-width:260px;line-height:1.5}
+.nf-ecosystem .nf-intake-async-status{border-radius:8px;padding:15px;color:#f8f8f8;background:#234057;border:1px solid #b7c9d044;overflow-wrap:anywhere}
+.nf-ecosystem .nf-intake-async-status--err{border-color:#d99983}
+.nf-ecosystem .nf-intake-async-status[hidden]{display:none}
+.nf-ecosystem .nf-ecosystem-bottom{background:#0c1e2d}
+.nf-ecosystem :is(button,a,input,textarea,select):focus-visible{outline:3px solid #e6c18c;outline-offset:3px}
+@media(max-width:1080px){.nf-ecosystem-role-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nf-ecosystem-hero-grid{grid-template-columns:1fr}.nf-ecosystem-hero-panel{max-width:730px}}
+@media(max-width:780px){.nf-ecosystem-apply,.nf-ecosystem-worlds{grid-template-columns:1fr}.nf-ecosystem-apply-intro{max-width:630px}}
+@media(max-width:540px){.nf-ecosystem-role-grid,.nf-ecosystem-form-row{grid-template-columns:1fr}.nf-ecosystem-role-grid button{min-height:auto}.nf-ecosystem-hero{padding-top:49px!important}.nf-ecosystem h1{font-size:clamp(2.7rem,12vw,4rem)}.nf-ecosystem-section{padding-top:55px;padding-bottom:60px}.nf-ecosystem-form{padding:22px}.nf-ecosystem-btn{width:100%}}
+@media(prefers-reduced-motion:reduce){.nf-ecosystem *{scroll-behavior:auto!important;transition:none!important}}
