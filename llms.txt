@@ -3,6 +3,9 @@
 
 ## Primary
 - [RWA & Onchain Infrastructure](https://www.noetfield.com/onchain/): Client-facing engineering, demonstrations, delivery model and project intake
+- [Ecosystem and Founding Registry](https://www.noetfield.com/onchain/#community): Segmented community and protocol-interest intake, not token allocation
+- [Onchain Ecosystem Research Paper](https://www.noetfield.com/onchain/whitepaper/): Architecture, use cases, phased roadmap and token research status
+- [Machine-readable Ecosystem Program Status](https://www.noetfield.com/onchain/ecosystem.json): Status of token, airdrop, stablecoin research and network exploration
 - [Onchain Capability Manifest](https://www.noetfield.com/onchain/capabilities.json): Machine-readable offerings, evidence, limitations, owners and contact method
 - [Home](https://www.noetfield.com/): Company home
 - [Developers](https://www.noetfield.com/developers/): What engineers can use today
