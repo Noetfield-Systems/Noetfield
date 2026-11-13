@@ -70,7 +70,7 @@
 .nf-quick-grid small{display:block;font:450 8.6px/1.35 "Instrument Sans",Inter,sans-serif;color:#a9cbbc;margin-top:2px}
 .nf-quick-grid .nf-quick-ico{color:#c2ffb1;font:600 23px/1 "Instrument Sans",Inter,sans-serif;text-shadow:0 0 9px rgba(161,251,162,.3)}
 .nf-quick-grid>a>span:last-child{align-self:start;color:#d4ffc3;font-size:10px}
-.v5-journeys:before{pointer-events:none;content:"";position:absolute;left:-6%;bottom:-7px;width:112%;height:45px;background:repeating-linear-gradient(8deg,rgba(89,250,163,.26) 0 1px,transparent 1px 13px),repeating-linear-gradient(175deg,rgba(102,255,184,.15) 0 1px,transparent 1px 17px);mask-image:linear-gradient(to top,rgba(0,0,0,.6),transparent);opacity:.4}
+.v5-journeys:before{pointer-events:none;content:"";position:absolute;left:0;bottom:0;width:100%;height:45px;background:repeating-linear-gradient(8deg,rgba(89,250,163,.26) 0 1px,transparent 1px 13px),repeating-linear-gradient(175deg,rgba(102,255,184,.15) 0 1px,transparent 1px 17px);mask-image:linear-gradient(to top,rgba(0,0,0,.6),transparent);opacity:.4}
 @media(min-width:1141px){
  .v5-nav{min-height:58px}
  .v5-brand{font-size:19px}.v5-nav nav{gap:clamp(10px,1.23vw,23px)}
