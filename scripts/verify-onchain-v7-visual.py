@@ -53,7 +53,13 @@ def main() -> int:
             result["art_natural_width"] = image["naturalWidth"]
             overflow = page.evaluate("Math.max(0,document.documentElement.scrollWidth-window.innerWidth)")
             result["horizontal_overflow_px"] = overflow
-            assert overflow <= 3, f"{width}px layout overflow {overflow}px"
+            if overflow > 3:
+                culprits = page.evaluate("""() => [...document.querySelectorAll('body *')]
+                  .map(e => {const b=e.getBoundingClientRect();return {tag:e.tagName, cls:typeof e.className==='string'?e.className.slice(0,90):'',left:Math.round(b.left),right:Math.round(b.right),width:Math.round(b.width)}})
+                  .filter(e=>e.right>window.innerWidth+3||e.left < -3)
+                  .sort((a,b)=>b.right-a.right).slice(0,15)""")
+                raise AssertionError(f"{width}px layout overflow {overflow}px; culprits={culprits}")
+
             hero = page.locator(".v5-hero").bounding_box()
             nav = page.locator(".v5-header").bounding_box()
             assert hero and nav and hero["height"] > 320, (width, hero, nav)
