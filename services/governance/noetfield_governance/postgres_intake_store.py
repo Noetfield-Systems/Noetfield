@@ -660,6 +660,131 @@ class PostgresIntakeStore:
                 return {"created": True, "revision": ops["revision"],
                         "reported_outcome": event}
 
+
+    async def get_connect_delivery_source(self, *, intake_id: str) -> dict[str, Any] | None:
+        """Exact source contact and consent; never an arbitrary browser recipient."""
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as db:
+            row = await db.fetchrow(
+                """SELECT intake_id,request_id,contact_name,contact_email,metadata
+                   FROM noetfield.public_intakes
+                   WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
+                     AND COALESCE(metadata->>'intake_kind','lead')<>'test'""",
+                intake_id)
+        if row is None:
+            return None
+        metadata = row["metadata"] or {}
+        if isinstance(metadata, str):
+            metadata = json.loads(metadata)
+        return {
+            "intake_id": row["intake_id"], "request_id": row["request_id"],
+            "contact_name": row["contact_name"] or "",
+            "contact_email": row["contact_email"],
+            "contact_consent": metadata.get("consent_contact") is True,
+        }
+
+    async def claim_connect_invitation_send(
+        self, *, intake_id: str, invitation_id: str, token: str,
+    ) -> dict[str, Any] | None:
+        """Durably claim a single provider attempt before any external send.
+
+        A crash or network timeout leaves DELIVERY_UNCONFIRMED; no blind replay
+        may send a second copy. The bearer token is not written to PostgreSQL.
+        """
+        import hashlib
+        import hmac
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as db:
+            async with db.transaction():
+                row = await db.fetchrow(
+                    """SELECT qualification_json,metadata FROM noetfield.public_intakes
+                       WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
+                         AND COALESCE(metadata->>'intake_kind','lead')<>'test'
+                       FOR UPDATE""", intake_id)
+                if row is None:
+                    return None
+                metadata = row["metadata"] or {}
+                if isinstance(metadata, str):
+                    metadata = json.loads(metadata)
+                if metadata.get("consent_contact") is not True:
+                    raise ValueError("CONTACT_CONSENT_REQUIRED")
+                qual = row["qualification_json"] or {}
+                if isinstance(qual, str):
+                    qual = json.loads(qual)
+                ops = dict(qual.get("connect_ops") or {})
+                invited = list(ops.get("invitations") or [])
+                item = next((i for i in invited if i.get("id") == invitation_id), None)
+                if item is None or not hmac.compare_digest(
+                    str(item.get("token_hash") or ""),
+                    hashlib.sha256(token.encode()).hexdigest()
+                ):
+                    raise ValueError("INVITATION_TOKEN_INVALID")
+                if item.get("state") != "PREPARED_NOT_SENT":
+                    raise ValueError("INVITATION_ALREADY_ATTEMPTED")
+                item["state"] = "SEND_ATTEMPTED_UNCONFIRMED"
+                item["delivery_attempted_at"] = datetime.now(UTC).isoformat()
+                ops["invitations"] = invited
+                ops["revision"] = int(ops.get("revision") or 0) + 1
+                ops["updated_at"] = item["delivery_attempted_at"]
+                await db.execute(
+                    """UPDATE noetfield.public_intakes
+                       SET qualification_json=jsonb_set(
+                           COALESCE(qualification_json,'{}'::jsonb),
+                           '{connect_ops}',$2::jsonb,true)
+                       WHERE intake_id=$1""", intake_id, json.dumps(ops))
+                return {"claimed": True, "invitation_id": invitation_id,
+                        "state": item["state"], "revision": ops["revision"]}
+
+    async def finish_connect_invitation_send(
+        self, *, intake_id: str, invitation_id: str,
+        provider_accepted: bool, provider_message_id: str = "",
+        detail: str = "",
+    ) -> dict[str, Any] | None:
+        """Persist provider acceptance, not mailbox delivery or human consent."""
+        if provider_accepted and not provider_message_id:
+            raise ValueError("PROVIDER_MESSAGE_ID_REQUIRED")
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as db:
+            async with db.transaction():
+                row = await db.fetchrow(
+                    """SELECT qualification_json FROM noetfield.public_intakes
+                       WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
+                       FOR UPDATE""", intake_id)
+                if row is None:
+                    return None
+                qual = row["qualification_json"] or {}
+                if isinstance(qual, str):
+                    qual = json.loads(qual)
+                ops = dict(qual.get("connect_ops") or {})
+                invited = list(ops.get("invitations") or [])
+                item = next((i for i in invited if i.get("id") == invitation_id), None)
+                if item is None:
+                    return None
+                if item.get("state") != "SEND_ATTEMPTED_UNCONFIRMED":
+                    raise ValueError("INVITATION_SEND_STATE_CONFLICT")
+                item["state"] = ("SENT_PROVIDER_ACCEPTED" if provider_accepted
+                                 else "DELIVERY_UNCONFIRMED")
+                item["provider_message_id"] = provider_message_id[:120] if provider_accepted else None
+                item["delivery_error"] = detail[:120] if not provider_accepted else None
+                item["delivery_completed_at"] = datetime.now(UTC).isoformat()
+                ops["invitations"] = invited
+                ops["revision"] = int(ops.get("revision") or 0) + 1
+                ops["updated_at"] = item["delivery_completed_at"]
+                await db.execute(
+                    """UPDATE noetfield.public_intakes
+                       SET qualification_json=jsonb_set(
+                           COALESCE(qualification_json,'{}'::jsonb),
+                           '{connect_ops}',$2::jsonb,true)
+                       WHERE intake_id=$1""", intake_id, json.dumps(ops))
+                return {"invitation_id": invitation_id, "state": item["state"],
+                        "provider_message_id": item["provider_message_id"],
+                        "revision": ops["revision"],
+                        "provider_accepted": provider_accepted,
+                        "recipient_delivery_verified": False}
+
     async def count(self) -> int:
         await self.connect()
         assert self._pool is not None
