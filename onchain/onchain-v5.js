@@ -110,6 +110,8 @@
       ethereum:{title:"Ethereum",copy:"Exploring EVM-compatible contract and policy-controlled execution architecture."},
       solana:{title:"Solana",copy:"Evaluating high-throughput network primitives and suitable integration requirements."},
       polygon:{title:"Polygon",copy:"Assessing EVM scaling environments for business workflows and verifiable receipts."},
+      base:{title:"Base",copy:"Exploring the Base EVM environment for cost-aware operational applications and policy-controlled transactions."},
+      bnb:{title:"BNB Chain",copy:"Evaluating BNB Smart Chain integration patterns; no production partnership or launch is implied."},
       icp:{title:"Internet Computer",copy:"Studying onchain application and hosting patterns for programmable workflows."},
       berachain:{title:"Berachain",copy:"Monitoring EVM ecosystem design and potential technical interoperability."}
     };
