@@ -5,6 +5,9 @@
  var areaForRole={founder:"build-business",specialist:"workforce",agent:"workforce",startup:"build-business",client:"transform-operations",technology:"transform-operations",strategic:"portfolio",investor:"portfolio"};
  function qs(name){try{return new URLSearchParams(location.search).get(name)||""}catch(_){return ""}}
  function event(name,props){
+   // First-party analytics are opt-in. Do not emit page views or role events before consent.
+   var consent=document.querySelector('#nfCorporateCollaborationForm [name="consent"]');
+   if(!consent||!consent.checked)return;
    try{fetch("/api/analytics/event",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({event:name,source:"www-corporate-collaboration",page:location.pathname,properties:props||{}}),keepalive:true,credentials:"omit"}).catch(function(){})}catch(_){}
  }
  function init(){
