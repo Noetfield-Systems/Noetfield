@@ -129,13 +129,13 @@
   ],
   "metadata_overrides": {
     "/": {
-      "title": "Noetfield Systems Inc. | AI Workflow and App Platform",
-      "description": "Build and run AI workflows across models, agents, and tools with separate verification, bounded repair, human-controlled promotion, and replayable evidence.",
+      "title": "Noetfield Systems | Agentic Business Infrastructure & RWA",
+      "description": "Noetfield builds AI-native infrastructure for real businesses: Company OS, intelligent execution, independent verification, and real-world asset workflows.",
       "skip_webpage_json_ld": true,
       "author_name": "Noetfield Systems Inc.",
       "author_url": "https://www.noetfield.com/about/",
       "published_time": "2025-01-15T00:00:00-08:00",
-      "modified_time": "2026-08-02T00:00:00-07:00"
+      "modified_time": "2026-11-12T22:25:00-08:00"
     },
     "/about/": {
       "title": "About — Noetfield Systems Inc.",
