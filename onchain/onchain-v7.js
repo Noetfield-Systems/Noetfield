@@ -39,7 +39,10 @@
         const topic = form.querySelector('[name="topic"]');
         if (topic && topic.querySelector('option[value="' + spec.topic + '"]')) topic.value = spec.topic;
         const notes = form.querySelector('[name="notes"]');
-        if (notes && !notes.value.trim()) notes.value = spec.note;
+        if (notes && (!notes.value.trim() || notes.value === notes.dataset.onchainAutofill)) {
+          notes.value = spec.note;
+          notes.dataset.onchainAutofill = spec.note;
+        }
       });
     });
     const nav = document.getElementById("onchainNav");
