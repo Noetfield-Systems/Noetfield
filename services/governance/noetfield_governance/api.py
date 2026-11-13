@@ -48,6 +48,11 @@ from noetfield_governance.connect_desk_auth import (
 )
 
 from noetfield_governance.opportunity_desk import triage_connect_record
+from noetfield_governance.connect_due_worker import (
+    start_scheduler as start_connect_due_scheduler,
+    stop_scheduler as stop_connect_due_scheduler,
+    get_worker as get_connect_due_worker,
+)
 from noetfield_governance.connect_relationship import project_relationship
 from noetfield_governance.intake_notify import (
     intake_email_configured,
@@ -440,6 +445,7 @@ async def startup_platform() -> None:
         database_url=settings.database_url,
     )
     await start_signal_triage_scheduler(settings)
+    await start_connect_due_scheduler(settings)
     # Always wire a store (Postgres in prod; in-memory for staging/tests).
     app.state.pilot_key_store = pilot_key_store
     connect = getattr(pilot_key_store, "connect", None)
@@ -451,6 +457,7 @@ async def startup_platform() -> None:
 async def shutdown_runtime() -> None:
     await stop_gmail_sweep_scheduler()
     await stop_signal_triage_scheduler()
+    await stop_connect_due_scheduler()
     await intake_repository.close_intake_repository()
     await close_community_pool()
     await redis_runtime.close()
@@ -1829,6 +1836,18 @@ async def connect_workforce_operator_handoff(
     return {"source": "existing_workforce_os", **result,
             "operator_owner_recorded": True,
             "agent_executed": False, "independently_verified_by_platform": False}
+
+
+
+@app.get("/api/opportunities/desk/followup/health",
+         tags=["operations"], include_in_schema=False)
+async def connect_followup_status(request: Request) -> dict[str, object]:
+    _require_connect_desk_operator(request)
+    worker = get_connect_due_worker()
+    if worker is None:
+        return {"configured": False, "state": "NOT_CONFIGURED", "sent": False}
+    return await worker.status()
+
 
 @app.get("/api/opportunities/desk/app", tags=["operations"], include_in_schema=False)
 async def connect_opportunity_app() -> Response:
