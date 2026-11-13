@@ -128,10 +128,19 @@ input,select,textarea{border-radius:7px;border-color:#cbd7d8}
 </div>
 <script>
 (()=>{"use strict";
-const $=id=>document.getElementById(id), state={csrf:"",rows:[],selected:null,busy:false,offset:0,total:0,graph:null};
+const $=id=>document.getElementById(id), state={csrf:"",rows:[],selected:null,busy:false,offset:0,total:0,graph:null,view:"all"};
 function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function text(id,value){$(id).textContent=String(value)}
 function date(v){if(!v)return"—";const d=new Date(v);return isNaN(+d)?String(v):d.toLocaleString("en-CA",{dateStyle:"medium",timeStyle:"short"})}
+const stageLabels={NEW:"New",QUALIFYING:"Qualifying",ROUTED:"Routed",ENGAGED:"Engaged",NEGOTIATING:"Negotiating",PILOT:"Pilot",WON:"Won (requires proof)",LOST:"Lost",ARCHIVED:"Archived"};
+const todayLocal=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"America/Vancouver",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+const matchState=x=>(x.interactions||[]).some(a=>a.kind==="matching_proposed")?"suggested":"none";
+function collabState(x){const inv=x.invitations||[];if(inv.some(i=>/declin|reject/i.test(String(i.state||""))))return"declined";if(inv.some(i=>/accept|interest/i.test(String(i.state||""))))return"interested";return inv.length?"prepared":"none"}
+const conversionVerified=x=>x.verification_status==="VERIFIED"&&Boolean(x.outcome);
+const matchLabel={none:"No proposed match",suggested:"Proposed; not confirmed"};
+const collabLabel={none:"No invitation",prepared:"Prepared; not confirmed sent",interested:"Interest; not assigned",declined:"Declined"};
+function fillOption(id,values,label){const el=$(id),previous=el.value;el.replaceChildren(new Option(label,""));for(const v of [...new Set(values.filter(Boolean))].sort())el.add(new Option(v,v));el.value=[...el.options].some(o=>o.value===previous)?previous:""}
+function fillFilters(){fillOption("owner-filter",state.rows.map(x=>x.owner),"All owners");fillOption("source-filter",state.rows.map(x=>x.source),"All sources");fillOption("type-filter",state.rows.map(x=>x.opportunity_type),"All types")}
 function goodUrl(raw){try{const u=new URL(raw);return u.protocol==="https:"?u.href:""}catch{return""}}
 async function call(path,method="GET",payload=null){
 const response=await fetch(path,{method,cache:"no-store",credentials:"same-origin",headers:{"Accept":"application/json",...(method!=="GET"&&state.csrf?{"X-Desk-CSRF":state.csrf}:{}),...(payload?{"Content-Type":"application/json"}:{})},body:payload?JSON.stringify(payload):undefined});
@@ -158,15 +167,45 @@ if(!session.authenticated)return;
 state.csrf=session.csrf;await load();showWorkspace();
 }catch(err){state.csrf="";text("unlock-status","Session expired or temporarily unavailable. Sign in again.")}
 }
-async function load(){if(!state.csrf)return;const data=await call("/api/opportunities/desk/page?limit=100&offset="+state.offset);state.rows=data.items||[];state.total=Number(data.total||0);text("page-count",String(state.offset+1)+"–"+String(Math.min(state.offset+state.rows.length,state.total))+" of "+state.total);$("previous-page").disabled=state.offset===0;$("next-page").disabled=state.offset+100>=state.total;text("count",state.total);text("open-count",state.rows.filter(x=>!["WON","LOST","ARCHIVED"].includes(x.stage)).length);text("needs-owner",state.rows.filter(x=>!x.owner).length);text("due-count",state.rows.filter(x=>x.next_action_due&&x.next_action_due<=new Date().toISOString().slice(0,10)&&!["WON","LOST","ARCHIVED"].includes(x.stage)).length);draw()}
-function draw(){const term=$("search").value.trim().toLowerCase(),stage=$("filter").value,venture=$("venture").value,due=$("due-filter").value,now=new Date().toISOString().slice(0,10);const matches=state.rows.filter(x=>(!stage||x.stage===stage)&&(!venture||x.initiative===venture)&&(!due||(due==="due"?Boolean(x.next_action_due&&x.next_action_due<=now):!x.next_action_due))&&(!term||[x.title,x.person,x.organization,x.email,x.initiative,x.opportunity_type].some(v=>String(v||"").toLowerCase().includes(term))));$("results").innerHTML=matches.length?matches.map(x=>'<button type="button" class="item '+(x.intake_id===state.selected?"active":"")+'" data-id="'+safe(x.intake_id)+'"><span class="item-head"><strong>'+safe(x.title||x.organization||"Untitled proposal")+'</strong><span class="pill">'+safe(x.stage)+'</span></span><p>'+safe(x.person||"Unknown contact")+' · '+safe(x.organization||"")+'</p><span class="item-head"><span class="small">'+safe(x.opportunity_label)+' · '+safe(x.initiative)+'</span><span class="pill '+(x.priority_score>=70?"warn":"")+'">Priority '+safe(x.priority_score)+'</span></span></button>').join(""):'<div class="empty">No matching real intake cases.</div>';
+async function load(){if(!state.csrf)return;const data=await call("/api/opportunities/desk/page?limit=100&offset="+state.offset);state.rows=data.items||[];state.total=Number(data.total||0);text("page-count",String(state.offset+1)+"–"+String(Math.min(state.offset+state.rows.length,state.total))+" of "+state.total);$("previous-page").disabled=state.offset===0;$("next-page").disabled=state.offset+100>=state.total;text("count",state.total);text("open-count",state.rows.filter(x=>!["WON","LOST","ARCHIVED"].includes(x.stage)).length);text("needs-owner",state.rows.filter(x=>!x.owner).length);text("due-count",state.rows.filter(x=>x.next_action_due&&x.next_action_due<=todayLocal()&&!["WON","LOST","ARCHIVED"].includes(x.stage)).length);fillFilters();draw()}
+function draw(){
+const term=$("search").value.trim().toLowerCase(),stage=$("filter").value,venture=$("venture").value,
+due=$("due-filter").value,owner=$("owner-filter").value,source=$("source-filter").value,
+type=$("type-filter").value,match=$("match-filter").value,collab=$("collab-filter").value,
+conversion=$("conversion-filter").value,now=todayLocal();
+const matches=state.rows.filter(x=>(!stage||x.stage===stage)&&(!venture||x.initiative===venture)&&
+(!owner||x.owner===owner)&&(!source||x.source===source)&&(!type||x.opportunity_type===type)&&
+(!due||(due==="due"?Boolean(x.next_action_due&&x.next_action_due<=now):!x.next_action_due))&&
+(!match||matchState(x)===match)&&(!collab||collabState(x)===collab)&&
+(!conversion||(conversion==="verified"?conversionVerified(x):!conversionVerified(x)))&&
+(state.view==="all"||(state.view==="unowned"&&!x.owner)||
+(state.view==="due"&&x.next_action_due&&x.next_action_due<=now&&!["WON","LOST","ARCHIVED"].includes(x.stage))||
+(state.view==="matching"&&matchState(x)!=="none")||(state.view==="collaboration"&&collabState(x)!=="none")||
+(state.view==="conversion"&&conversionVerified(x)))&&
+(!term||[x.title,x.person,x.organization,x.email,x.initiative,x.opportunity_type,x.source,x.owner].some(v=>String(v||"").toLowerCase().includes(term))));
+$("results").innerHTML=matches.length?matches.map(x=>'<button type="button" class="item '+(x.intake_id===state.selected?"active":"")+'" data-id="'+safe(x.intake_id)+'">'+
+'<span class="item-head"><strong>'+safe(x.title||x.organization||"Untitled proposal")+'</strong><span class="pill">'+safe(stageLabels[x.stage]||x.stage)+'</span></span>'+
+'<p>'+safe(x.person||"Unknown contact")+' · '+safe(x.organization||"")+'</p>'+
+'<span class="item-head"><span class="small">'+safe(x.opportunity_label)+' · '+safe(x.source||"Unknown source")+'</span><span class="pill '+(x.priority_score>=70?"warn":"")+'">Advisory '+safe(x.priority_score)+'</span></span>'+
+'<span class="small">Owner: '+safe(x.owner||"Unassigned")+' · '+safe(matchLabel[matchState(x)])+' · '+safe(collabLabel[collabState(x)])+'</span>'+
+'<span class="small">Next: '+safe(x.next_action||"Not scheduled")+' · '+safe(x.next_action_due||"No due date")+'</span></button>').join(""):'<div class="empty">No matching real cases on this page. Adjust filters or navigate to another page.</div>';
 $("results").querySelectorAll("[data-id]").forEach(el=>el.addEventListener("click",()=>{state.selected=el.dataset.id;draw();loadGraph(state.selected)}));
 const selected=state.rows.find(x=>x.intake_id===state.selected);
 $("detail").className=selected?"":"empty";
-$("detail").innerHTML=selected?renderDetail(selected):"Select a case to inspect and record your next action.";
-if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));}}
-function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class="item-head"><h2>'+safe(x.title||"Opportunity")+'</h2><span class="pill">'+safe(x.stage)+'</span></div><p class="small">'+safe(x.intake_id)+' · Received '+safe(date(x.received_at))+' · Revision '+safe(x.revision)+'</p>'+
+$("detail").innerHTML=selected?renderDetail(selected):"Select a case to inspect evidence and record a next action.";
+if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));}
+}
+function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class="item-head"><h2>'+safe(x.title||"Opportunity")+'</h2><span class="pill">'+safe(stageLabels[x.stage]||x.stage)+'</span></div><p class="small">'+safe(x.intake_id)+' · Received '+safe(date(x.received_at))+' · Revision '+safe(x.revision)+'</p>'+
 '<div class="detail-grid">'+[['Contact',x.person],['Email',x.email],['Organization',x.organization],['Source',x.source],['Initiative',x.initiative],['Opportunity type',x.opportunity_label],['Deadline',x.deadline],['Priority',x.priority_score+" / 100"]].map(([a,b])=>'<div class="detail-value"><b>'+safe(a.toUpperCase())+'</b>'+safe(b||"—")+'</div>').join("")+'</div>'+
+'<div class="section-label">ROUTING & PROOF STATUS</div><div class="detail-grid">'+[
+['Match',matchLabel[matchState(x)]],['Collaboration',collabLabel[collabState(x)]],
+['Human owner',x.owner||'Unassigned; advisory only'],
+['Agent execution',x.execution_status==='NOT_DISPATCHED'?'No verified dispatch':x.execution_status],
+['Outcome verification',conversionVerified(x)?'Independently verified':'Not independently verified'],
+['Canonical CRM ID',x.canonical_crm_id||'No verified CRM ID attached'],
+['Commercial source',x.source||'Not recorded'],['Collected cash',x.cash_collected==null?'No payment receipt':'Check external payment proof']
+].map(([k,v])=>'<div class="detail-value"><b>'+safe(k.toUpperCase())+'</b>'+safe(v)+'</div>').join('')+'</div>'+
+'<p class="small">A proposed match is not acceptance, a human owner is not AI dispatch, and a call request is not a confirmed booking. Only source-backed independent receipts qualify as verified outcomes.</p>'+
 '<div class="section-label">ORIGINAL SUBMISSION</div><div class="proposal">'+safe(x.proposal||"No original message in source record")+'</div>'+
 (link?'<p><a href="'+safe(link)+'" target="_blank" rel="noopener noreferrer">Open submitted reference ↗</a></p>':"")+
 '<p class="small">Scoring: '+safe((x.priority_reasons||[]).join(" · "))+'</p>'+
@@ -256,6 +295,8 @@ await load();showWorkspace();
 finally{button.disabled=false}
 });
 $("lock").addEventListener("click",signOut);restoreSession();$("refresh").addEventListener("click",()=>load().catch(err=>alert("Refresh failed: "+err.message)));
+document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>{state.view=b.dataset.view;document.querySelectorAll("[data-view]").forEach(n=>n.setAttribute("aria-pressed",String(n===b)));draw()}));
+["owner-filter","source-filter","type-filter","match-filter","collab-filter","conversion-filter"].forEach(id=>$(id).addEventListener("change",draw));
 $("search").addEventListener("input",draw);$("filter").addEventListener("change",draw);$("venture").addEventListener("change",draw);$("due-filter").addEventListener("change",draw);
 $("previous-page").addEventListener("click",()=>{state.offset=Math.max(0,state.offset-100);state.selected=null;load().catch(err=>alert(err.message))});
 $("next-page").addEventListener("click",()=>{state.offset+=100;state.selected=null;load().catch(err=>alert(err.message))});
