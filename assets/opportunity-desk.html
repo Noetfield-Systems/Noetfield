@@ -98,6 +98,10 @@ html[dir="rtl"] input,html[dir="rtl"] select,html[dir="rtl"] textarea{text-align
 <form id="unlock-form"><label>Operator access key <input id="key" name="operator_key" type="password" minlength="8" required autocomplete="off" placeholder="Platform admin secret"></label><label class="remember-choice"><input id="remember-device" type="checkbox" checked><span>Remember this device for 7 days</span></label><button class="primary" type="submit">Open opportunity desk</button></form><p id="unlock-status" role="alert" class="notice"></p><p class="small">Your secure session is saved as an HttpOnly cookie. Google sign-in is not connected; this option does not upload your administrator secret to Google Password Manager.</p>
 </section>
 <main id="workspace" hidden>
+<div class="card" style="margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+  <button type="button" id="bridge-health" class="secondary">Check pipeline delivery health / سلامت انتقال</button>
+  <p id="bridge-health-status" class="small" style="flex:1;min-width:260px" role="status">Delivery metrics are read from real Platform PostgreSQL after authentication.</p>
+</div>
 <div class="metrics"><div class="metric"><strong id="count">—</strong><span>Total source-backed cases</span></div><div class="metric"><strong id="open-count">—</strong><span>Open on current page</span></div><div class="metric"><strong id="needs-owner">—</strong><span>Unassigned on current page</span></div><div class="metric"><strong id="due-count">—</strong><span>Due on current page</span></div></div>
 <div class="desk-views" role="group" aria-label="Operational queues">
 <button type="button" data-view="all" aria-pressed="true">All relationships</button>
@@ -388,6 +392,23 @@ function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class=
 '<div class="section-label">CHANGE HISTORY</div>'+
 ((x.activity||[]).length?'<ol class="history">'+x.activity.slice().reverse().map(h=>'<li>'+safe(date(h.at))+' · '+safe(h.stage)+' · '+safe(h.owner||"Unassigned")+(h.note?" — "+safe(h.note):"")+'</li>').join("")+'</ol>':'<p class="small">No operator updates recorded yet.</p>')+
 '<hr class="sep"><p class="small">Recommended role: '+safe(x.suggested_owner_role)+'. No external outreach, calendar booking, Company OS dispatch, verification or money movement occurs by saving this case.</p>'}
+async function checkBridgeHealth(){
+ const button=$("bridge-health"), message=$("bridge-health-status");
+ if(!button||!state.csrf||state.busy)return;
+ button.disabled=true;message.textContent="Reading persisted delivery ledger…";
+ try{
+   const res=await call("/api/opportunities/desk/workforce/delivery-health");
+   if(!res.configured){message.textContent="Automated recovery is not configured on this environment.";return;}
+   const d=res.delivery_states||{};
+   message.textContent="Confirmed transfers: "+(d.ACKED||0)+
+      " · Scheduled retry: "+(d.RETRY||0)+
+      " · Needs source review: "+(d.SOURCE_NEEDS_REVIEW||0)+
+      " · Excluded test/ineligible: "+(d.SKIPPED_TEST_OR_INELIGIBLE||0)+
+      " · Last attempt: "+(res.last_attempt?.at||"none")+
+      ". Counts refer to the delivery ledger, not all incoming leads.";
+ }catch(err){message.textContent="Delivery health unavailable: "+err.message;}
+ finally{button.disabled=false;}
+}
 async function syncWorkforce(x){
  const button=$("sync-workforce"), status=$("sync-workforce-status");
  if(!button || state.busy || !x.request_id)return;
@@ -510,7 +531,8 @@ await load();showWorkspace();
 }catch(err){state.csrf="";text("unlock-status",err.message)}
 finally{button.disabled=false}
 });
-$("lock").addEventListener("click",signOut);restoreSession();$("refresh").addEventListener("click",()=>load().catch(err=>alert("Refresh failed: "+err.message)));
+$("lock").addEventListener("click",signOut);restoreSession();$("bridge-health").addEventListener("click",checkBridgeHealth);
+$("refresh").addEventListener("click",()=>load().catch(err=>alert("Refresh failed: "+err.message)));
 document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>{state.view=b.dataset.view;document.querySelectorAll("[data-view]").forEach(n=>n.setAttribute("aria-pressed",String(n===b)));draw()}));
 ["owner-filter","source-filter","type-filter","match-filter","collab-filter","conversion-filter"].forEach(id=>$(id).addEventListener("change",draw));
 $("search").addEventListener("input",draw);$("filter").addEventListener("change",draw);$("venture").addEventListener("change",draw);$("due-filter").addEventListener("change",draw);
