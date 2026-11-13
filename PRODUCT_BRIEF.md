@@ -1,39 +1,40 @@
 # Product brief — Noetfield Systems Inc.
 
-## Definition
+**Current corporate direction:** [Corporate thesis and execution strategy (2026-11-13)](docs/strategy/NOETFIELD_CORPORATE_THESIS_EXECUTION_2026-11-13.md)  
+**App product SSOT:** `Noetfield-Systems/NOETFIELD-RUNWAY/docs/NOETFIELD_FOUNDER_PRODUCT_SSOT_V4_2026-11-13.md`  
+**Status rule:** Strategic intent and source code do not prove production, real users or collected revenue.
 
-Noetfield Systems Inc. builds governed AI execution systems. A scoped request is planned, executed within explicit authority, checked by a separate verifier, and recorded with evidence. AI Motors are bounded execution runtimes; the verifier, not the proposing model, decides whether an outcome passes.
+## Corporate definition
+Noetfield Systems Inc. is a technology operating company developing intelligent digital business infrastructure. It brings together real software engineering, human talent, agentic execution, independent verification and practical pathways between conventional business operations, RWA and onchain systems. The corporation is **not exclusively Web3, solely governance/audit, a CRM-first platform, or a collection of unrelated SaaS landing pages**. Its public site must explain concrete outcomes and route customers, developers, investors, collaborators and asset operators into working pathways.
 
-## Product family and canonical Noetfield App mission (Founder update 2026-11-13)
+## Main company products and capabilities
+- **Noetfield App** at `https://app.noetfield.com/`: universal AI software builder in active development. Intended flow: describe -> editable source -> isolated run/test -> preview -> revise -> publish -> operate. The latest App V4 SSOT and manifest define completion tests, NOT proof of parity with competing platforms.
+- **Noetfield Runtime:** current customer-facing name for the code/tool/workflow execution engine. `Runway` remains the compatible legacy code/service namespace until verified migration.
+- **Company OS / NOOS:** reusable AI and human team coordination per company/project, with Noetfield's internal NOOS separate from each customer scope. **Sina Founder OS is private and never public site navigation.**
+- **Verification Layer / PLLM / harness / Governor:** model/tool orchestration, bounded authority, independently tested execution and evidence receipts. Verification is a distinct potential developer/enterprise commercial line; any product claim requires a run-backed proof.
+- **Noetfield Onchain & RWA:** connect real-business needs and real-world assets to compliant chosen provider/onchain workflows as appropriate. This is a focused growth and engineering lane, not the whole parent company.
+- **Connect / WorkforceOS:** structured commercial, partner, developer and human contributor intake, qualification, real assignment and evidence-based outcomes; one canonical relationship/opportunity identity.
 
-Noetfield's execution, evidence and authority technology is the underlying infrastructure. **Noetfield App** at `https://app.noetfield.com/` is the universal customer-facing AI software creation product being developed: describe software → produce editable real code → execute in a project sandbox → test → preview → change → publish → maintain and, optionally, operate it with specialist Company OS agents. It is not a CRM-first product, landing-page-only tool or documentation dashboard.
+## Distinct venture identities
+TrustField is an **independent venture in formation**, not a Noetfield subsidiary. BuildRelay and Cairn remain independent and retain their own user-data, token/economic and ownership boundaries. Ventures/projects may be listed as portfolio or collaborations only with truthful status and actual legal relationship; Company OS technical use is not a transfer of ownership or assets.
 
-The **current canonical product specification** is maintained in `Noetfield-Systems/NOETFIELD-RUNWAY`: `docs/NOETFIELD_FOUNDER_PRODUCT_SSOT_V4_2026-11-13.md`, its JSON launch manifest and the fast-launch playbook. Product scope and aspiration do not constitute live feature proof. The last inspected paired runtime release on 2026-11-13 had a staging Supabase migration failure despite successful Pages deployment. **Do not claim universal full-stack IDE, general sandbox, Replit/Wix/Polsia parity, external active users or cash collection without real external receipts.**
+## Revenue-first execution priority
+Parallel P0: (1) complete a verifiable NOOS coding continuation, (2) recover existing App V4 matched release and ship a first working full-stack builder path, (3) qualify and sell scoped RWA, verification or custom software build/repair work through existing checkout/contracts, and (4) acquire real users and evidence via Connect. Service revenue may begin before self-serve builder parity; it cannot replace the builder's authorized long-term scope. Evidence of payment must come from provider settlement, not a marketing CTA.
 
-The corporate governed-execution/commercial offering family and the App builder are related but distinct product surfaces; do not mislabel older Copilot Governance Pack SKUs as software builder subscriptions. Pricing hypotheses for the builder are not yet published prices.
+## Existing corporate governed-execution offers (retain as separate product family)
+- Copilot Governance Pack: existing self-serve Starter checkout US$2,000; larger scopes by SOW.
+- Trust Brief: six-week engagement; existing published checkout US$10,000.
+- Bank Pilot: read-only shadow-governance scope; custom intake.
+- Developer sandbox: limited product evaluation, not a generic contract SKU.
+Amounts are **historical/published offer descriptions**, not claims of purchase or present contractual availability. Verify the live product and quote before agreeing to delivery. Do not mislabel them as universal software-builder subscriptions.
 
-## TrustField
+## Truth and delivery rule
+Past release evidence includes a successful Pages deploy with failed matched Runtime staging migration (Supabase project/pooler binding). Online Railway services are **not** proof of completed general-purpose sandbox, end-to-end customer builder, generated revenue, customer adoption or bank approvals. Require exact SHA, external URL behavior, signed or independent verification, and actual cash reconciliation before stronger claims.
 
-**TrustField is an independent venture in formation, not a Noetfield subsidiary or in-house product vertical.** Noetfield may support its setup under appropriately separate arrangements. Noetfield's Stripe commercial licensing account is not used for money transmission, custody, transaction execution or settlement.
-
-## Public commercial offerings
-
-- Copilot Governance Pack: current self-serve Starter checkout US$2,000; larger readiness scopes by SOW.
-- Trust Brief: six-week engagement; current self-serve Stripe checkout US$10,000.
-- Bank Pilot: custom read-only shadow governance simulation, intake-only.
-- Free developer sandbox: 14 days, 50 evaluate calls, observe mode; product access, not a contract SKU.
-
-## Evidence and delivery
-
-Publicly described outcomes include pre-execution evaluation, policy references, Trust Ledger Entries, a metadata-only M365 evidence index where connected, board PDF, and procurement ZIP. The exact deliverables, deployment permissions, schedule, and acceptance criteria are set in each SOW.
-
-## Claims discipline
-
-Do not invent customer references, revenue, partner commitments, regulatory approvals, certifications, features, or SLAs. Use the public proof register and current signed agreements for claims.
-
-## Public entry points
-
-- https://www.noetfield.com/
-- https://www.noetfield.com/gate/sales/
-- https://www.noetfield.com/proof/
-- operations@noetfield.com
+## Useful public destinations
+- Corporate: https://www.noetfield.com/
+- Specialized RWA/onchain: https://www.noetfield.com/onchain/
+- App: https://app.noetfield.com/
+- Proof: https://proof.noetfield.com/
+- Corporate relationships: https://www.noetfield.com/connect/
+- Contact: operations@noetfield.com
