@@ -86,3 +86,27 @@ body.nf-corp.nf-home .nf-institutional-hero a:focus-visible{outline:3px solid #f
 @media(max-width:1070px){
  body.nf-corp.nf-home .nf-ins-header .nf-corp-nav>a{display:block!important}
 }
+
+/* P0 screenshot QA: old corporate .hero.nf-corp-hero selector was more specific
+   than the new theme and painted cream behind the white text. */
+body.nf-corp.nf-home .hero.nf-corp-hero.nf-institutional-hero{
+ background:radial-gradient(ellipse 67% 44% at 82% 21%,rgba(52,94,117,.26),transparent 78%),linear-gradient(137deg,#061722 3%,#0a1c2a 52%,#06131e 100%)!important;
+ color:#f7faff!important;
+}
+body.nf-corp.nf-home .hero.nf-corp-hero.nf-institutional-hero::before{
+ background:radial-gradient(ellipse 74% 45% at 65% 60%,rgba(64,100,121,.13),transparent 80%)!important;
+ opacity:1;mask-image:none!important;pointer-events:none;
+}
+body.nf-corp.nf-home .hero.nf-corp-hero.nf-institutional-hero h1{
+ color:#f7faff!important;
+}
+body.nf-corp.nf-home .nf-institutional-hero .nf-ins-lead{color:#d6e0e9!important}
+body.nf-corp.nf-home .nf-institutional-hero .nf-ins-paths-title h2,
+body.nf-corp.nf-home .nf-institutional-hero .nf-ins-platform-heading h2{color:#f7fbff!important}
+body.nf-corp.nf-home .nf-ins-path-card img{opacity:.94;filter:saturate(.9) brightness(1.05)}
+@media(max-width:700px){
+ body.nf-corp.nf-home .nf-ins-header .nf-corp-navrow{display:flex;flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:8px;min-height:65px}
+ body.nf-corp.nf-home .nf-ins-header .nf-ins-header-actions{display:none}
+ body.nf-corp.nf-home .nf-ins-header .nf-q-menu{margin-left:auto;flex:none}
+ body.nf-corp.nf-home .nf-ins-header .nf-corp-brand{flex:none}
+}
