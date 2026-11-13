@@ -6,6 +6,7 @@ requires-python = ">=3.11"
 dependencies = [
   "anthropic",
   "asyncpg",
+  "eth-account>=0.13,<1",
   "fastapi",
   "langchain-core",
   "langgraph",
