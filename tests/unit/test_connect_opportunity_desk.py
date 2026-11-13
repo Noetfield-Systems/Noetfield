@@ -351,3 +351,48 @@ def test_authenticated_resend_invitation_uses_original_consented_contact_and_rea
             governance_api.settings.resend_api_key=original_resend
             governance_api.settings.intake_email_notify_enabled=original_enabled
     asyncio.run(run())
+
+
+def test_resend_transport_requires_provider_id_and_uses_idempotency_header():
+    from types import SimpleNamespace
+    import json
+    from unittest.mock import patch
+    from noetfield_governance.intake_notify import send_connect_invitation
+    settings=SimpleNamespace(
+        resend_api_key=SecretStr("re_synthetic_fixture"),
+        intake_email_notify_enabled=True,
+        intake_email_from="Noetfield <notifications@noetfield.com>",
+        casl_mailing_address="Vancouver BC Canada",
+    )
+    requests=[]
+    class ProviderResponse:
+        status=200
+        def __enter__(self):return self
+        def __exit__(self,*args):return False
+        def read(self,limit):return b'{"id":"resend_provider_test_12345"}'
+    def capture(req,timeout):
+        requests.append(req)
+        return ProviderResponse()
+    with patch("urllib.request.urlopen",side_effect=capture):
+        receipt=send_connect_invitation(
+            settings,recipient="verified-source@example.invalid",
+            contact_name="Original Applicant",scope="trial",
+            message="Please review this bounded and explicitly voluntary trial invitation.",
+            response_url="https://www.noetfield.com/connect/respond/#case=INT-ABCDEF123456&inv=inv_abcdef0123456789&token="+("x"*44),
+            invitation_id="inv_abcdef0123456789")
+    assert receipt["provider_accepted"] is True
+    assert receipt["provider_message_id"]=="resend_provider_test_12345"
+    assert receipt["recipient_delivery_verified"] is False
+    request=requests[0]
+    payload=json.loads(request.data)
+    assert payload["to"]==["verified-source@example.invalid"]
+    assert "Original Applicant" in payload["text"]
+    assert "Vancouver BC Canada" in payload["text"]
+    assert request.get_header("Idempotency-key")=="connect-invitation-inv_abcdef0123456789"
+    settings.resend_api_key=None
+    unconfigured=send_connect_invitation(
+        settings,recipient="verified-source@example.invalid",
+        contact_name="Applicant",scope="trial",message="Proposed real trial",
+        response_url="https://www.noetfield.com/connect/respond/#placeholder",
+        invitation_id="inv_abcdef0123456789")
+    assert unconfigured["provider_accepted"] is False
