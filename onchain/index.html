@@ -313,9 +313,10 @@ footer{background:#f0eae0;border-color:rgba(22,60,42,.18)}footer .brand{font-wei
 <span class="sprint-kicker">PILOT PRICE · USD</span>
 <div class="sprint-price">$950 <small>one-time</small></div>
 <p>Defined first engagement, written scope and deliverables. Proposed <strong>$475 deposit</strong> after scope acceptance, remainder on the agreed milestone.</p>
-<a class="btn btn-primary" href="#project">Request this paid sprint ↗</a>
-<a class="btn btn-ghost" href="#project">Request direct implementation</a>
-<p class="sprint-terms">The enquiry form does not charge a card. A payment request is sent from the authorized Noetfield account after the written scope is accepted. No work or purchase is implied by sending the form.</p>
+<a class="btn btn-primary" href="#project" data-select-project-topic="rwa-paid-sprint">Request scope — no charge ↗</a>
+<a class="btn btn-ghost" href="https://buy.stripe.com/7sY6oI3iUaa06qmcDi1Nu0h" target="_blank" rel="noopener noreferrer" data-offer-payment="rwa-paid-sprint-deposit">Pay approved deposit · $475 ↗</a>
+<a class="btn btn-ghost" href="#project" data-select-project-topic="onchain-engineering">Request direct implementation</a>
+<p class="sprint-terms">Secure live checkout by Stripe for the scope-approved deposit only. The project enquiry form is free and does not charge a card. The $475 deposit counts toward the quoted $950 pilot; remaining $475 is due at the agreed milestone. Please approve the written scope with Noetfield before paying.</p>
 </aside>
 </div>
 </div></section>
@@ -367,5 +368,20 @@ footer{background:#f0eae0;border-color:rgba(22,60,42,.18)}footer .brand{font-wei
 </div></section>
 </main>
 <footer><div class="wrap footerrow"><div><a class="brand" href="/"><span class="brandmark">N</span>Noetfield Systems Inc.</a><br><small>Vancouver, British Columbia, Canada · Technical services &amp; first-party products</small></div><div class="footlinks"><a href="/">Home</a><a href="/onchain/hub/">Network Hub</a><a href="/proof/">Evidence</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="/onchain/capabilities.json">Agent-readable scope</a></div></div></footer>
+<script>
+/* Route visitors into the EXISTING first-party intake; no duplicate lead store. */
+document.addEventListener('click', function (event) {
+  const link = event.target.closest('[data-select-project-topic]');
+  if (!link) return;
+  const form = document.getElementById('nfOnchainIntake');
+  const topic = form && form.querySelector('select[name="topic"]');
+  if (!topic) return;
+  const selected = link.getAttribute('data-select-project-topic');
+  if (Array.from(topic.options).some(option => option.value === selected)) {
+    topic.value = selected;
+    topic.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+});
+</script>
 </body>
 </html>
