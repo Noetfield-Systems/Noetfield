@@ -1,0 +1,107 @@
+{
+  "schema": "noetfield-onchain-ecosystem-v0.1",
+  "version": "0.1.0",
+  "updated_at": "2026-11-12",
+  "operator": "Noetfield Systems Inc.",
+  "homepage": "https://www.noetfield.com/onchain/",
+  "whitepaper": "https://www.noetfield.com/onchain/whitepaper/",
+  "status_legend": {
+    "available": "Deployed or linked to first-party available functionality; check specific caveats",
+    "registry_open": "Intake is available; not membership approval",
+    "research": "Concept being evaluated; no launch",
+    "scoped": "Engineering requires accepted project scope",
+    "not_launched": "Not issued, not deployed, no transaction support"
+  },
+  "programs": [
+    {
+      "id": "engineering",
+      "name": "RWA and Onchain Engineering",
+      "status": "available",
+      "proof": [
+        "https://scan.noetfield.com/rwa-clinic/",
+        "https://control.noetfield.com/sandbox"
+      ],
+      "booking": "https://www.noetfield.com/onchain/#project",
+      "notes": "Public demos and request intake available; external production delivery separately commissioned"
+    },
+    {
+      "id": "community",
+      "name": "Founding Ecosystem Interest Registry",
+      "status": "registry_open",
+      "entry": "https://www.noetfield.com/onchain/#community",
+      "backend": "Existing Noetfield public intake service",
+      "interests": [
+        "founding-community",
+        "builder-opportunities",
+        "protocol-token-research",
+        "airdrop-program-research",
+        "stablecoin-operations-research",
+        "ecosystem-business-partner"
+      ],
+      "notes": "Collects interested participants; no paid membership or rewards granted automatically"
+    },
+    {
+      "id": "agent",
+      "name": "Noetfield AI Assistant and Guided Project Scoping",
+      "status": "available",
+      "entry": "https://www.noetfield.com/onchain/#agent",
+      "notes": "Existing public chat backend if available; guided scoping helper is deterministic client-side and submits only via existing intake"
+    },
+    {
+      "id": "token",
+      "name": "Potential Ecosystem Token",
+      "status": "research",
+      "issued": false,
+      "contract_address": null,
+      "ticker": null,
+      "supply": null,
+      "chain": null,
+      "allocation": null,
+      "sale_open": false,
+      "payments_accepted": false,
+      "investment_returns_promised": false,
+      "notes": "Interest collection and design exploration only; no token allocation or claim generated"
+    },
+    {
+      "id": "airdrop",
+      "name": "Potential Contribution-Based Program",
+      "status": "not_launched",
+      "eligibility_criteria_finalized": false,
+      "claim_open": false,
+      "distribution_contract": null,
+      "notes": "No current airdrop; subscribing to updates does not create entitlement"
+    },
+    {
+      "id": "stablecoin",
+      "name": "Stablecoin-enabled Operations and Potential Dedicated Asset",
+      "status": "research",
+      "stablecoin_issued": false,
+      "reserve_claims": false,
+      "redeemability_claims": false,
+      "notes": "Payment workflow integrations may be scoped with existing suitable providers; proprietary issuance is a distinct unlaunched concept"
+    }
+  ],
+  "technical_landscape": {
+    "name": "Technology ecosystems being evaluated",
+    "status": "research",
+    "networks": [
+      "Ethereum",
+      "Solana",
+      "Polygon",
+      "Internet Computer Protocol",
+      "Berachain"
+    ],
+    "no_partnerships_claimed": true,
+    "no_network_certification_claimed": true
+  },
+  "independence": {
+    "BuildRelay": "Independent venture with separate tokenomics and brand. No identity, wallet or reward sharing implied.",
+    "Cairn": "Independent venture. No relation implied to Noetfield token or finances.",
+    "TrustField": "Independent venture in formation, not a Noetfield subsidiary."
+  },
+  "contact": {
+    "project": "https://www.noetfield.com/onchain/#project",
+    "community": "https://www.noetfield.com/onchain/#community",
+    "email": "operations@noetfield.com"
+  }
+}
