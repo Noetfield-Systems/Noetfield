@@ -59,6 +59,7 @@ from noetfield_governance.intake_notify import (
     notify_ops_inbox,
     notify_ops_webhook,
     notify_submitter_ack,
+    send_connect_invitation,
 )
 from noetfield_governance.analytics_store import (
     InMemoryAnalyticsStore,
@@ -2057,6 +2058,87 @@ async def connect_create_invitation(
         "persisted": True, "source_intake_id": intake_id,
         **result,
         "sent": False, "accepted": False, "scoped_assignment": False,
+    }
+
+
+@app.post("/api/opportunities/desk/{intake_id}/invitations/send",
+          tags=["operations"], include_in_schema=False)
+async def connect_send_invitation(
+    intake_id: str, body: ConnectInvitationRequest, request: Request,
+) -> dict[str, object]:
+    """Operator-authorized email to the original consented case contact only.
+
+    A Resend ID proves provider acceptance, not recipient delivery, identity,
+    acceptance of work, a booked meeting, or a commercial conversion.
+    """
+    from urllib.parse import quote
+    _require_connect_desk_operator(request)
+    check_connect_desk_origin(request)
+    if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
+        raise HTTPException(422, "INVALID_INTAKE_ID")
+    source = await intake_repository.get_connect_delivery_source(intake_id=intake_id)
+    if source is None:
+        raise HTTPException(404, "OPPORTUNITY_NOT_FOUND")
+    if source.get("contact_consent") is not True:
+        raise HTTPException(422, "CONTACT_CONSENT_REQUIRED")
+    recipient = _validate_connect_participant_email(str(source.get("contact_email") or ""))
+    key = settings.resend_api_key
+    if not settings.intake_email_notify_enabled or not key or not key.get_secret_value():
+        raise HTTPException(503, "INVITATION_EMAIL_PROVIDER_NOT_CONFIGURED")
+    # Existing source record provides the recipient; the client cannot choose it.
+    try:
+        prepared = await intake_repository.create_connect_invitation(
+            intake_id=intake_id, expected_revision=body.expected_revision,
+            scope=body.scope, message=body.message, request_id=body.request_id,
+        )
+        if prepared is None:
+            raise HTTPException(404, "OPPORTUNITY_NOT_FOUND")
+        if not prepared.get("created") or not prepared.get("share_token"):
+            # A replay never sends a second message, even after a timeout.
+            raise HTTPException(409, "INVITATION_REQUEST_ALREADY_EXISTS_CHECK_CASE_STATUS")
+        invitation_id = str(prepared["invitation_id"])
+        token = str(prepared["share_token"])
+        claimed = await intake_repository.claim_connect_invitation_send(
+            intake_id=intake_id, invitation_id=invitation_id, token=token)
+        if not claimed or not claimed.get("claimed"):
+            raise HTTPException(409, "INVITATION_SEND_NOT_CLAIMED")
+    except ValueError as exc:
+        raise _connect_change_error(exc) from exc
+    except RuntimeError as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+    response_url = (
+        "https://www.noetfield.com/connect/respond/#case=" + quote(intake_id, safe="")
+        + "&inv=" + quote(invitation_id, safe="")
+        + "&token=" + quote(token, safe="")
+    )
+    provider = await asyncio.to_thread(
+        send_connect_invitation, settings,
+        recipient=recipient,
+        contact_name=str(source.get("contact_name") or ""),
+        message=body.message, scope=body.scope,
+        response_url=response_url, invitation_id=invitation_id)
+    accepted = provider.get("provider_accepted") is True
+    provider_id = str(provider.get("provider_message_id") or "")
+    try:
+        receipt = await intake_repository.finish_connect_invitation_send(
+            intake_id=intake_id, invitation_id=invitation_id,
+            provider_accepted=accepted, provider_message_id=provider_id,
+            detail=str(provider.get("error") or ""),
+        )
+    except (RuntimeError, ValueError) as exc:
+        # Never retry the email blindly: the provider may already have accepted.
+        logger.exception("connect_invitation_delivery_ledger_unconfirmed source_id=%s", intake_id)
+        raise HTTPException(502, "PROVIDER_ACTION_LEDGER_UNCONFIRMED_NO_BLIND_RETRY") from exc
+    if not receipt:
+        raise HTTPException(502, "DELIVERY_SOURCE_UPDATE_UNCONFIRMED_NO_BLIND_RETRY")
+    if not accepted:
+        raise HTTPException(502, "INVITATION_DELIVERY_UNCONFIRMED_CHECK_CASE_STATUS")
+    return {
+        "persisted": True, "source_intake_id": intake_id,
+        **receipt, "sent": True, "recipient_delivery_verified": False,
+        "accepted_by_recipient": False, "mailbox_identity_verified": False,
+        "work_assigned": False, "independently_verified": False,
     }
 
 
