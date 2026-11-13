@@ -105,10 +105,10 @@ def corp_footer() -> str:
   <div class="nf-corp-wrap nf-corp-footer__grid">
    <div>
     <a class="nf-corp-brand nf-corp-brand--footer" href="/"><span class="nf-corp-brand__mark" aria-hidden="true">N</span><span>Noetfield Systems <small>Inc.</small></span></a>
-    <p>AI agent governance and security.<br />Vancouver, British Columbia, Canada.</p>
+    <p>Building the next generation of intelligent businesses.<br />Vancouver, British Columbia, Canada.</p>
    </div>
-   <nav aria-label="Footer"><strong>Company</strong><a href="/investors/">Investors / Ecosystem</a><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="{GITHUB_URL}" rel="noopener noreferrer">GitHub ↗</a></nav>
-   <nav aria-label="Products"><strong>Products</strong><a href="/applications/trustfield/">TrustField</a><a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></nav>
+   <nav aria-label="Footer"><strong>Company</strong><a href="/work-with-us/">Build a Business / Collaborate</a><a href="/company-os/">Transform Operations</a><a href="/onchain/">Bring Value Onchain</a><a href="/investors/">Investors / Ecosystem</a><a href="/trust/">Trust &amp; Security</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="{GITHUB_URL}" rel="noopener noreferrer">GitHub ↗</a></nav>
+   <nav aria-label="Independent ventures"><strong>Independent ventures</strong><a href="/applications/trustfield/">TrustField · independent</a><a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></nav>
   </div>
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
  </footer>

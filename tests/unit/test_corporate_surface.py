@@ -318,7 +318,7 @@ def test_homepage_footer_links_to_trust_and_investors() -> None:
     assert 'href="/trust/"' in text
     assert 'href="/privacy/"' in text
     assert 'href="/investors/">Investors / Ecosystem</a>' in text
-    assert "AI agent governance and security" in text
+    assert "Building the next generation of intelligent businesses." in text
     assert 'href="/enterprise/"' not in text
     assert 'href="/investor-workflows/"' not in text
 
