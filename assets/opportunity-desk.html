@@ -315,6 +315,24 @@ async function loadGraph(intakeId){
       '<div class="section-label">RELATIONSHIP TIMELINE</div><ol class="history">'+graph.timeline.slice(0,35).map(e=>'<li>'+safe(date(e.at))+' · '+safe(e.kind)+' · '+safe(e.detail)+'</li>').join("")+'</ol>';
   }catch(err){if($("relationship-graph"))$("relationship-graph").textContent="Relationship history unavailable: "+err.message}
 }
+async function reportOutcome(ev,x){
+ ev.preventDefault();if(state.busy)return;state.busy=true;
+ const fd=new FormData(ev.currentTarget);
+ const payload={expected_revision:Number(x.revision||0),
+   request_id:"outcome_"+crypto.randomUUID().replaceAll("-",""),
+   outcome_type:String(fd.get("outcome_type")),
+   evidence_url:String(fd.get("evidence_url")||"").trim(),
+   note:String(fd.get("note")||"").trim()};
+ text("outcome-status","Saving operator-reported evidence…");
+ try{
+   const result=await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/outcomes","POST",payload);
+   await load();
+   if(state.selected===x.intake_id&&$("outcome-status")){
+     text("outcome-status",result.persisted?"Recorded in canonical source. Not independently verified.":"Not confirmed.");
+   }
+ }catch(err){text("outcome-status",err.message+"; refresh source revision.");}
+ finally{state.busy=false;}
+}
 async function submitActivity(ev,x){
   ev.preventDefault();if(state.busy)return;state.busy=true;
   const fd=new FormData(ev.currentTarget);
