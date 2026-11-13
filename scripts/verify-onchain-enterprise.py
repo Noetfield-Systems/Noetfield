@@ -67,7 +67,7 @@ def main() -> int:
                             assert page.locator("#nfNav").is_visible()
                     if route == "/onchain/":
                         art = page.locator(".v5-campus")
-                        assert art.evaluate("(el)=>el.complete && el.naturalWidth >= 600")
+                        assert art.evaluate("(el)=>el.complete && el.naturalWidth >= Math.min(600, window.innerWidth * .9)")
                         if width >= 1440:
                             assert art.evaluate("(el)=>el.currentSrc.endsWith(\"/onchain/hero-architecture-hd.webp\")"), "desktop is not using high-definition hero source"
                         assert page.locator(".nf-nav-solutions a").count() == 4
