@@ -1,8 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Noetfield AI Factory Layer API",
-    "version": "1.0.0"
+    "title": "Noetfield Public Discovery and Intake API",
+    "version": "1.1.0",
+    "description": "Read-only public corporate resources plus the existing Noetfield intake contract. Posting a request does not create a contract, agent assignment, payment, investment or completed work."
   },
   "paths": {
     "/noetfield-ai-factory-lanes.json": {
@@ -19,6 +20,128 @@
       "get": {
         "summary": "Return AI Factory status preview"
       }
+    },
+    "/corporate.json": {
+      "get": {
+        "operationId": "getCorporateManifest",
+        "summary": "Public corporate identity, venture relationships, available commercial paths and documented agent actions",
+        "responses": {
+          "200": {
+            "description": "Published corporate manifest"
+          }
+        }
+      }
+    },
+    "/api/intake": {
+      "post": {
+        "operationId": "submitCommercialIntake",
+        "summary": "Record authorized and consented human or agent-operated commercial enquiry",
+        "description": "Submit with explicit contact consent. A record is durable only when the response contains intake_persisted=true and intake_id. Not a checkout, employment contract or Company OS assignment. Client-side consent collection is required; this endpoint itself does not establish authority to act for a third party.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "organization",
+                  "contact_email",
+                  "message"
+                ],
+                "properties": {
+                  "organization": {
+                    "type": "string",
+                    "maxLength": 150
+                  },
+                  "contact_name": {
+                    "type": "string"
+                  },
+                  "contact_email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "description": "Durable client-generated identifier, retain on retry for safe reconciliation."
+                  },
+                  "sku": {
+                    "type": "string",
+                    "description": "Use general for corporate enquiries."
+                  },
+                  "vector": {
+                    "type": "string",
+                    "description": "e.g. work-with-us"
+                  },
+                  "source": {
+                    "type": "string",
+                    "description": "web"
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "description": "Proposed role, area, attribution and recorded contact consent."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Platform confirmed persisted intake, includes intake_persisted=true and intake_id."
+          },
+          "202": {
+            "description": "Only notification confirmed, includes intake_persisted=false and notification_reference; not an accepted application."
+          },
+          "400": {
+            "description": "Invalid request."
+          },
+          "502": {
+            "description": "Record and notifications could not be delivered."
+          }
+        }
+      }
+    },
+    "/api/intake/health": {
+      "get": {
+        "operationId": "getIntakeHealth",
+        "summary": "Intake availability metadata (not proof of successful persistence)",
+        "responses": {
+          "200": {
+            "description": "Intake health response"
+          }
+        }
+      }
+    },
+    "/onchain/capabilities.json": {
+      "get": {
+        "operationId": "getOnchainCapabilities",
+        "summary": "Static Onchain capability manifest; status must be interpreted per capability",
+        "responses": {
+          "200": {
+            "description": "Capabilities and limitations"
+          }
+        }
+      }
+    },
+    "/onchain/ecosystem.json": {
+      "get": {
+        "operationId": "getOnchainEcosystem",
+        "summary": "Static Onchain ecosystem state and program boundaries",
+        "responses": {
+          "200": {
+            "description": "Ecosystem state"
+          }
+        }
+      }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://www.noetfield.com"
+    }
+  ]
 }

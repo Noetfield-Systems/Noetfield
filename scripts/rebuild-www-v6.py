@@ -1370,45 +1370,64 @@ def partner_apply_form() -> str:
 
 
 def work_with_us_page_body() -> str:
-    return hero(
-        "Work with Noetfield · Ecosystem",
-        "Connectors · facilitators · co-partners · partners · investors",
-        "Help regulated institutions get board-grade Copilot governance receipts",
-        "Noetfield is the <strong>governance execution layer</strong> for Microsoft 365 Copilot rollouts — signed Trust Ledger Entries, board PDF, procurement ZIP. "
-        "We partner with people and firms who <strong>connect buyers</strong>, <strong>facilitate rollout</strong>, <strong>co-deliver pilots</strong>, <strong>attach after Purview readiness</strong>, or <strong>back the Land · Expand · Channel path</strong> — same evaluate → TLE → export spine.",
-        [("Copilot Governance Pack attach", True), ("Async apply · instant record", True), ("EU + US regulated lane", True)],
-        [(WORK_WITH_US_INTAKE, "Apply to work with us", True), ("#partner-apply", "Quick apply", False), ("/investors/", "Investor brief", False)],
-        ["Connector", "Facilitator", "Co-partner", "Partner", "Investor"],
-        work_with_us_hero_panel(),
-    ) + work_with_us_ecosystem_stat_bar() + work_with_us_roles_grid() + f"""
- <section class="nf-section-block nf-wwu-model-section" aria-labelledby="wwu-model">
- <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">02</span><div>
- <p class="nf-eyebrow" id="wwu-model">How the program works</p>
- <h2>Apply → enable → earn on proof</h2>
- <p class="nf-section-lead">Channel economics and investor diligence follow the same milestone spine — Governance Pack attach, board PDF success, expand on receipts.</p>
- </div></div>
- <div class="nf-loop nf-wwu-loop">
- <article class="nf-loop-step"><p class="nf-loop-step-num">1</p><h3>Apply</h3><p>Pick your lane — connector, facilitator, co-partner, partner, or investor. Async intake · non-confidential only.</p></article>
- <article class="nf-loop-step"><p class="nf-loop-step-num">2</p><h3>Enable</h3><p>Sandbox demo · delivery or investor brief · playbook orientation for your lane (per agreement).</p></article>
- <article class="nf-loop-step nf-loop-step--highlight"><p class="nf-loop-step-num">3</p><h3>Earn · underwrite</h3><p><strong>Channel:</strong> attach Governance Pack pilots · referral or delivery fee per SOW. <strong>Investor:</strong> Land · Expand · Channel aligned to board PDF proof in market.</p></article>
+    """Corporate-wide collaboration, one existing persisted intake for all roles."""
+    return '''
+<section class="nf-ecosystem-hero" aria-labelledby="collab-title">
+ <p class="nf-ecosystem-kicker">Noetfield Systems Inc. <span> / </span> Real people. Intelligent businesses.</p>
+ <div class="nf-ecosystem-hero-grid">
+  <div><p class="nf-ecosystem-overline">COLLABORATE WITH NOETFIELD</p><h1 id="collab-title">Build the next generation of <em>intelligent businesses.</em></h1>
+  <p class="nf-ecosystem-lead">Founders, businesses, engineers, operators, AI-agent teams and strategic partners belong in the same working economy. Tell us what you want to build, transform or contribute. We route the request into existing Noetfield intake, not a decorative directory.</p>
+  <div class="nf-ecosystem-actions"><a class="nf-ecosystem-btn nf-ecosystem-btn-primary" href="#collab-apply">Start a collaboration</a><a class="nf-ecosystem-btn nf-ecosystem-btn-secondary" href="/proof/">Inspect first-party evidence</a></div>
+  </div>
+  <aside class="nf-ecosystem-hero-panel" aria-label="Collaboration process">
+   <div class="nf-ecosystem-panel-header"><span>WORKFLOW</span><span>OWNER-REVIEWED</span></div>
+   <ol><li><span>01</span><strong>Define an opportunity</strong><small>Role, objective and context</small></li><li><span>02</span><strong>Send an accountable request</strong><small>Persisted record or explicit failure</small></li><li><span>03</span><strong>Scope and match</strong><small>Operator review, not automatic acceptance</small></li><li><span>04</span><strong>Deliver and verify</strong><small>When an engagement is actually agreed</small></li></ol>
+   <p>Applications do not confer employment, funding, privileged agent access or a signed contract.</p>
+  </aside>
  </div>
- </section>
- {partner_apply_form()}
- <section class="nf-section-block nf-section--elevated nf-wwu-fit-section" aria-labelledby="wwu-fit">
- <div class="nf-section-block-head"><span class="nf-section-num" aria-hidden="true">✓</span><div>
- <p class="nf-eyebrow" id="wwu-fit">Fit</p>
- <h2>Built for ecosystem players and aligned capital</h2>
- </div></div>
- {work_with_us_fit_body()}
- </section>
- <script src="/assets/noetfield-partner-apply.js?v={WWW_VER}" defer></script>
- <script src="/assets/noetfield-work-with-us.js?v={WWW_VER}" defer></script>
-""" + mega_cta(
-        "Ready to connect buyers — or back the governance receipt layer?",
-        "Async apply · include Request ID · operations@noetfield.com",
-        (WORK_WITH_US_INTAKE, "Apply to work with us"),
-        ("/investors/", "Investor brief"),
-    )
+</section>
+<section class="nf-ecosystem-section nf-ecosystem-routes" aria-labelledby="collab-paths-title">
+ <p class="nf-ecosystem-overline">ONE ENTRY / MULTIPLE PARTICIPATION PATHS</p>
+ <h2 id="collab-paths-title">What brings you here?</h2>
+ <p>Choose your role. The selection pre-fills the same durable application form below.</p>
+ <div class="nf-ecosystem-role-grid">
+  <button type="button" data-collab-role="founder"><span>01 / FOUND</span><strong>Founder or cofounder</strong><small>Turn an opportunity into a scoped venture, product or founding team.</small></button>
+  <button type="button" data-collab-role="specialist"><span>02 / CONTRIBUTE</span><strong>Human specialist</strong><small>Engineering, product, design, sales, research or operations.</small></button>
+  <button type="button" data-collab-role="agent"><span>03 / EXTEND</span><strong>AI agent and operator</strong><small>Offer documented agent capabilities under a responsible human operator.</small></button>
+  <button type="button" data-collab-role="startup"><span>04 / CO-BUILD</span><strong>Startup team</strong><small>Shared delivery, team assembly, integrations or venture collaboration.</small></button>
+  <button type="button" data-collab-role="client"><span>05 / BUY</span><strong>Business client</strong><small>Transform operating workflows or commission real software.</small></button>
+  <button type="button" data-collab-role="technology"><span>06 / INTEGRATE</span><strong>Technology partner</strong><small>Interoperability, distribution and co-delivery.</small></button>
+  <button type="button" data-collab-role="strategic"><span>07 / PARTNER</span><strong>Strategic or commercial partner</strong><small>Bring market access, customer problems or commercial opportunities.</small></button>
+  <button type="button" data-collab-role="investor"><span>08 / EXPLORE</span><strong>Investor or ecosystem contributor</strong><small>Request evidence and a direct introduction. No investment terms are offered here.</small></button>
+ </div>
+</section>
+<section class="nf-ecosystem-section" aria-labelledby="collab-capabilities">
+ <p class="nf-ecosystem-overline">THREE ECONOMIC WORLDS / ONE EXECUTION BRIDGE</p>
+ <h2 id="collab-capabilities">Where collaboration becomes work</h2>
+ <div class="nf-ecosystem-worlds">
+  <article><span>A / PEOPLE &amp; BUSINESS</span><h3>Build a business</h3><p>Opportunity discovery, cofounder matching and commercial product execution. First deliverable: a scoped project or collaboration response.</p><a href="/connect/?intent=business">Start a business request</a></article>
+  <article><span>B / INTELLIGENT OPERATIONS</span><h3>Transform operations</h3><p>Company OS, human and AI teams, workflow design and engineering. First deliverable: an implementation scope or pilot discussion.</p><a href="/company-os/">Explore Company OS</a></article>
+  <article><span>C / VALUE &amp; DIGITAL ECONOMY</span><h3>Bring value onchain</h3><p>Private-credit readiness, RWA and approved technical workflows. First deliverable: a readiness assessment or scoped integration.</p><a href="/onchain/">Explore Onchain</a></article>
+ </div>
+</section>
+<section class="nf-ecosystem-section nf-ecosystem-apply" id="collab-apply" aria-labelledby="collab-apply-title">
+ <div class="nf-ecosystem-apply-intro"><p class="nf-ecosystem-overline">DIRECT APPLICATION / NO ACCOUNT REQUIRED</p><h2 id="collab-apply-title">Submit a concrete proposal.</h2><p>Use non-confidential information. We return an intake reference only when the existing API confirms persistence. If persistence fails, the status explains what happened.</p><p class="nf-ecosystem-small">Review and commercial terms are separate steps. No automatic assignment, hiring, agent credential or payment is implied.</p></div>
+ <form id="nfCorporateCollaborationForm" class="nf-ecosystem-form" aria-label="Corporate collaboration application">
+  <div class="nf-ecosystem-form-row">
+   <label>Participation route <select name="role" required><option value="">Select your role</option><option value="founder">Founder or cofounder</option><option value="specialist">Human specialist</option><option value="agent">AI agent with responsible operator</option><option value="startup">Startup team</option><option value="client">Commercial client</option><option value="technology">Technology partner</option><option value="strategic">Strategic or commercial partner</option><option value="investor">Investor or ecosystem contributor</option></select></label>
+   <label>Relevant area <select name="area" required><option value="">Choose a focus</option><option value="build-business">Build a business</option><option value="transform-operations">Transform operations</option><option value="onchain">Real-world value and onchain</option><option value="workforce">Workforce / human and AI collaborators</option><option value="portfolio">Cross-venture or exploratory</option></select></label>
+  </div>
+  <div class="nf-ecosystem-form-row"><label>Your name / responsible operator <input type="text" name="name" maxlength="120" autocomplete="name" required placeholder="Full name or accountable operator"></label><label>Work email <input type="email" name="email" maxlength="254" autocomplete="email" required placeholder="you@company.com"></label></div>
+  <label>Organization, team or agent name <input type="text" name="organization" maxlength="150" required placeholder="Company, team, or agent with operator"></label>
+  <label>What do you offer or need? <textarea name="proposal" rows="5" minlength="24" maxlength="4000" required placeholder="Describe a specific problem, contribution or proposal, desired result and what a first step would look like."></textarea></label>
+  <label>Public evidence / portfolio URL (optional) <input name="evidence" type="url" maxlength="600" placeholder="https://..."></label>
+  <label class="nf-ecosystem-consent"><input type="checkbox" name="consent" required><span>I authorize Noetfield Systems Inc. to use these details to review and respond to this request. I will not provide credentials, regulated personal records or confidential third-party data. <a href="/privacy/">Privacy notice</a>.</span></label>
+  <div class="nf-ecosystem-submit-row"><button class="nf-ecosystem-btn nf-ecosystem-btn-primary" type="submit">Send proposal</button><span>No payment is taken here. A persisted intake ID is not an accepted engagement.</span></div>
+  <div id="nfCorporateCollaborationStatus" class="nf-intake-async-status" hidden aria-live="polite" role="status"></div>
+ </form>
+</section>
+<section class="nf-ecosystem-section nf-ecosystem-bottom" aria-labelledby="collab-evidence-title"><h2 id="collab-evidence-title">Inspect the system before you collaborate.</h2><p>Review scoped Company OS capabilities, independent verification evidence and the existing contributor journey. Specialized Copilot partners can still access the original program through the governance route.</p><div class="nf-ecosystem-actions"><a href="/company-os/">Company OS</a><a href="/proof/">Public proof</a><a href="/work-with-us/contribute/">Contributor details</a><a href="/copilot/">Copilot Governance</a><a href="/investors/">Investor gateway</a></div></section>
+'''
 
 
 def pilot_hero_wedge() -> str:
@@ -3302,9 +3321,10 @@ def main() -> None:
  <a class="nf-card nf-card--link" href="/msp/"><p class="nf-card__tag">MSP</p><h3>MSP partners</h3><p>Readiness → Record.</p></a>
  </div></section>"""))
 
-    write("work-with-us/index.html", "Work with Noetfield — Connectors, Facilitators, Partners & Investors",
-          "Apply to work with Noetfield as a connector, facilitator, co-partner, MSP/SI partner, or investor on Copilot Governance Pack programs.",
-          "/work-with-us/", work_with_us_page_body(), body_class="nf-www nf-site-v14 nf-page-work-with-us")
+    write("work-with-us/index.html", "Work With Noetfield | Founders, People, AI Agents and Partners",
+          "Build intelligent businesses with Noetfield. Founders, specialists, AI operators, teams, clients and partners can submit a real scoped proposal.",
+          "/work-with-us/", work_with_us_page_body(), body_class="nf-www nf-site-v14 nf-page-work-with-us nf-ecosystem",
+          head_extra=' <link rel="stylesheet" href="/assets/noetfield-collaboration-entry.css?v=1" />\n <script src="/assets/noetfield-collaboration-entry.js?v=1" defer></script>')
 
     # FAQ
     write("faq/index.html", "Noetfield — FAQ",

@@ -130,7 +130,7 @@
   "metadata_overrides": {
     "/": {
       "title": "Noetfield Systems | Agentic Business Infrastructure & RWA",
-      "description": "Noetfield builds AI-native infrastructure for real businesses: Company OS, intelligent execution, independent verification, and real-world asset workflows.",
+      "description": "Noetfield builds the next generation of intelligent businesses: real people and commercial operations, agentic engineering, independent verification and real-world value infrastructure.",
       "skip_webpage_json_ld": true,
       "author_name": "Noetfield Systems Inc.",
       "author_url": "https://www.noetfield.com/about/",
@@ -139,7 +139,7 @@
     },
     "/about/": {
       "title": "About — Noetfield Systems Inc.",
-      "description": "Noetfield Systems Inc., founder Sina Kazemnezhad, the live alpha runtime, SourceA/Runway infrastructure, and the TrustField product boundary."
+      "description": "Noetfield Systems Inc. is a Canadian technology and venture infrastructure company connecting people, intelligent operations and the digital economy. TrustField is independent."
     },
     "/enterprise/": {
       "title": "Legacy commercial lane — Enterprise — Noetfield",
@@ -164,7 +164,7 @@
     },
     "/investors/": {
       "title": "Investors / Ecosystem — Noetfield Systems",
-      "description": "Company thesis, current state, and funding routes — evidence-first, with explicit TrustField product boundary."
+      "description": "Explore Noetfield's three-world corporate thesis, Company OS, first-party verification, RWA readiness and separate venture boundaries. Request evidence directly."
     },
     "/invest/": {
       "title": "Private Investor Materials — Noetfield Systems Inc.",
@@ -309,11 +309,11 @@
     },
     "/applications/": {
       "title": "Applications — Noetfield Systems",
-      "description": "The live alpha application, SourceA execution, TrustField product boundary, and developer preview lanes."
+      "description": "Noetfield live alpha, execution infrastructure and independent venture relationships with explicit maturity and evidence boundaries."
     },
     "/applications/trustfield/": {
       "title": "TrustField boundary — Noetfield Systems",
-      "description": "TrustField is the regulated-operations and compliance product vertical of Noetfield Systems Inc. Public demonstrations use synthetic data and do not provide custody, settlement, payment initiation, automatic regulatory filing, certification, or final regulatory decisions."
+      "description": "TrustField is an independent venture in formation, supported by Noetfield on technical setup. Its synthetic workflow demonstration is not a Noetfield subsidiary or licensing claim."
     },
     "/public-interest/": {
       "title": "Public-interest program — Noetfield Systems",

@@ -53,8 +53,8 @@ check_file "protected corporate homepage" index.html \
   'SAMPLE ARTIFACT · SHAPE ONLY' 'NO INVENTED SHAS OR PASS CLAIMS' \
   'a receipt is not certification' \
   'Governed replacement' 'Claims-boundary correction' \
-  'TrustField' 'href="https://trustfield.ca/"' 'regulated-operations and compliance product vertical' \
-  'preserving human decision authority' \
+  'TrustField' 'href="https://trustfield.ca/"' 'independent venture in formation' \
+  'human decision authority' \
   'href="/contact/"' 'Open Noetfield App' \
   'OPEN NOETFIELD APP' 'WATCH A COMPLETE RUN' 'EXPLORE ASSURANCE' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
@@ -77,7 +77,7 @@ check_file "protected ecosystem and investor surface" investors/index.html \
   '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
   'Company thesis and current state' \
   'external customers and revenue are not established' \
-  'TrustField' 'regulated-operations and compliance product vertical' 'preserving human decision authority' \
+  'TrustField' 'independent venture in formation' 'human decision authority' \
   'href="/contact/?topic=program-funding"' 'href="/proof/"' \
   'href="/proof/claims-boundary-correction/"'
 check_absent "protected investors hub has no embedded intake" investors/index.html \
@@ -193,8 +193,8 @@ check_absent "recovered frontier page has no workspace conversion" frontier-syst
 check_file "about corporate positioning and TrustField boundary" about/index.html \
   'Noetfield Systems Inc.' 'Sina Kazemnezhad' 'Corporate boundaries' \
   'SourceA' 'founder-operated alpha' \
-  'TrustField' 'regulated-operations and compliance product vertical' 'href="https://trustfield.ca/"' \
-  'preserving human decision authority'
+  'TrustField' 'independent venture in formation' 'href="https://trustfield.ca/"' \
+  'human decision authority'
 check_absent "about has no SourceB catalogue" about/index.html 'SourceB'
 check_absent "about has no stale product TrustField copy" about/index.html \
   'validation vertical developed and operated' 'LIVE PRODUCT' 'separate venture'
@@ -202,7 +202,7 @@ check_absent "about has no stale product TrustField copy" about/index.html \
 # TrustField is a Noetfield Systems Inc. product on canonical pages.
 check_file "homepage TrustField boundary" index.html \
   'TrustField' 'href="https://trustfield.ca/"' \
-  'regulated-operations and compliance product vertical'
+  'independent venture in formation'
 check_absent "homepage has no stale TrustField boundary copy" index.html \
   'validation vertical developed and operated' 'LIVE PRODUCT' 'separate venture'
 
@@ -237,11 +237,12 @@ check_file "pilot landing page" copilot/pilot/index.html \
   'Digital trust lane' 'Governance gaps' 'Buyer voices' 'Policy-bound workflows' \
   'noetfield-intake-core.js' 'nfPilotApplyStatus'
 
-check_file "work with us program" work-with-us/index.html \
-  'noetfield-www.css?v=42' 'Work with Noetfield' 'Connector' 'Facilitator' \
-  'Co-partner' 'Apply to work with us' 'nfPartnerApplyForm' 'Apply → enable → earn' \
-  'noetfield-intake-core.js' 'nfPartnerApplyStatus' 'Investor' '/investors/' \
-  'nf-wwu-investor-spotlight' 'nf-wwu-lane-pill' 'noetfield-work-with-us.js'
+check_file "corporate collaboration with real shared intake" work-with-us/index.html \
+  'noetfield-www.css?v=42' 'Work With Noetfield' 'nfCorporateCollaborationForm' \
+  'Founder or cofounder' 'Human specialist' 'AI agent with responsible operator' \
+  'Commercial client' 'Investor or ecosystem contributor' 'nfCorporateCollaborationStatus' \
+  'noetfield-intake-core.js' 'noetfield-collaboration-entry.js' '/company-os/' \
+  'name="consent"' 'Send proposal'
 
 check_file "pilot intake page" trust-brief/intake/index.html \
   'noetfield-intake-pilot-mode.js' 'intakeHeroPilot' 'Copilot Governance Pack' \
@@ -267,11 +268,13 @@ check_file "msp end-client buyer block" msp/index.html \
 check_file "status intake health" status/index.html \
   'data-intake-health-host' 'noetfield-intake-status.js' 'Intake delivery' '/next/'
 
-check_file "header institutional nav" assets/partials/header.html \
-  'href="/"' '/copilot/' '/templates/' '/trust/' '/federal/' '/msp/' '/copilot/demo/' 'Apply for pilot'
+check_file "header corporate three-world nav" assets/partials/header.html \
+  'href="/"' '/work-with-us/' '/company-os/' '/onchain/' '/proof/' '/developers/' \
+  '/investors/' '/governance/' 'Start a Request'
 
-check_file "footer enterprise nav" assets/partials/footer.html \
-  '/investors/' '/next/' 'Diligence vault' 'Copilot Governance Pack'
+check_file "footer three-world nav" assets/partials/footer.html \
+  '/investors/' '/corporate.json' 'Build a Business' 'Transform Operations' \
+  'Bring Value Onchain' 'TrustField · independent venture'
 
 check_file "templates catalog page" templates/index.html \
   'copilot-governance-v1' 'bank-pilot-v1' 'Trust Brief' \
@@ -289,8 +292,8 @@ check_file "federal lane page" federal/index.html \
 check_file "partner banner embed" banner/index.html \
   'noindex,nofollow' 'REQUIRE_HUMAN_REVIEW' 'Illustrative — no fabricated hash' 'copilot-governance-v1'
 
-check_file "header pilot CTA" assets/partials/header.html \
-  'Apply for pilot' '/trust-brief/intake/?interest=pilot'
+check_file "header commercial CTA" assets/partials/header.html \
+  'Start a Request' 'href="/connect/"'
 
 check_file "next steps hub" next/index.html \
   'next-buyer' 'next-investor' 'next-partner' 'next-ops' \
@@ -317,8 +320,8 @@ check_file "www intake serverless" api/intake.js \
 check_file "global form wiring asset" assets/noetfield-forms.js \
   'data-nf-intake-form' 'nfSandboxForm' 'NFIntakeCore'
 
-check_file "footer pilot-first" assets/partials/footer.html \
-  'Apply for pilot ($2k–10k)' 'Copilot Governance Pack' 'tamper-evident'
+check_file "footer evidence-first" assets/partials/footer.html \
+  'Start a Request' 'Inspect Proof' 'Corporate manifest'
 
 check_file "trust center diligence theme" trust/index.html \
   'nf-corp' 'Trust begins with explicit boundaries.' 'Execution containment' \
