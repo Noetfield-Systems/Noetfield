@@ -53,8 +53,8 @@ check_file "protected corporate homepage" index.html \
   'SAMPLE ARTIFACT · SHAPE ONLY' 'NO INVENTED SHAS OR PASS CLAIMS' \
   'a receipt is not certification' \
   'Governed replacement' 'Claims-boundary correction' \
-  'TrustField' 'href="https://trustfield.ca/"' 'regulated-operations and compliance product vertical' \
-  'preserving human decision authority' \
+  'TrustField' 'href="https://trustfield.ca/"' 'independent venture in formation' \
+  'human decision authority' \
   'href="/contact/"' 'Open Noetfield App' \
   'OPEN NOETFIELD APP' 'WATCH A COMPLETE RUN' 'EXPLORE ASSURANCE' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
@@ -77,7 +77,7 @@ check_file "protected ecosystem and investor surface" investors/index.html \
   '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
   'Company thesis and current state' \
   'external customers and revenue are not established' \
-  'TrustField' 'regulated-operations and compliance product vertical' 'preserving human decision authority' \
+  'TrustField' 'independent venture in formation' 'human decision authority' \
   'href="/contact/?topic=program-funding"' 'href="/proof/"' \
   'href="/proof/claims-boundary-correction/"'
 check_absent "protected investors hub has no embedded intake" investors/index.html \
@@ -193,8 +193,8 @@ check_absent "recovered frontier page has no workspace conversion" frontier-syst
 check_file "about corporate positioning and TrustField boundary" about/index.html \
   'Noetfield Systems Inc.' 'Sina Kazemnezhad' 'Corporate boundaries' \
   'SourceA' 'founder-operated alpha' \
-  'TrustField' 'regulated-operations and compliance product vertical' 'href="https://trustfield.ca/"' \
-  'preserving human decision authority'
+  'TrustField' 'independent venture in formation' 'href="https://trustfield.ca/"' \
+  'human decision authority'
 check_absent "about has no SourceB catalogue" about/index.html 'SourceB'
 check_absent "about has no stale product TrustField copy" about/index.html \
   'validation vertical developed and operated' 'LIVE PRODUCT' 'separate venture'
@@ -202,7 +202,7 @@ check_absent "about has no stale product TrustField copy" about/index.html \
 # TrustField is a Noetfield Systems Inc. product on canonical pages.
 check_file "homepage TrustField boundary" index.html \
   'TrustField' 'href="https://trustfield.ca/"' \
-  'regulated-operations and compliance product vertical'
+  'independent venture in formation'
 check_absent "homepage has no stale TrustField boundary copy" index.html \
   'validation vertical developed and operated' 'LIVE PRODUCT' 'separate venture'
 
