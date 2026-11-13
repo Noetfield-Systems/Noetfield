@@ -24,6 +24,14 @@ cache (gitignored, ~4MB); if it is missing or stale, rebuild first with
 `python3 scripts/build_repo_graph_v1.py` (~2s, zero-token) rather than a blind
 read. Verify wiring: `bash scripts/verify_l0_repo_graph_memory_v1.sh`.
 
+## NOETFIELD PUBLIC LANGUAGE BOUNDARY — NON-NEGOTIABLE
+
+- **Public corporate surface:** `www.noetfield.com`, `noetfield.com`, and the Cloudflare Pages `www-pages-dist` public website are **English-only**. Never render Persian, Arabic, French or another-language interface, language switcher, translation CTA, `hreflang` alternate, or outbound link to a non-English version of Noetfield or Noetfield Connect from the main public site.
+- **Founder-only/internal surfaces are separate:** a private authenticated Founder Desk is **not** governed by the public English-only brand rule. Its UI may be English, Persian, or bilingual at the Founder's discretion. Do not remove or prohibit internal localization merely because the public website is English-only.
+- **Independent Persian satellite is allowed:** a standalone Persian Connect landing or outreach page **outside the corporate public website** can link **one way to** `https://www.noetfield.com/connect/`. The reverse link, language switcher, or discovery CTA from the corporate public site to the Persian satellite is **forbidden**. If such a satellite is launched, keep its hostname separate and register its domain in the public outbound-language deny policy before release.
+- **Deploy proof:** the production public artifact must pass the language-boundary check in `scripts/verify-public-output-allowlist.py`. This is a product-brand boundary, not an authorization to change or block private operator languages, external venture brands, or customer-submitted data.
+- Source of truth: `docs/ops/NOETFIELD_PUBLIC_LANGUAGE_BOUNDARY_LOCKED_v1.md`.
+
 ## Repo-Policy Lane
 
 - Use one lane per pass. Pick exactly one of the policy lanes in `repo-policy.json` before editing.
