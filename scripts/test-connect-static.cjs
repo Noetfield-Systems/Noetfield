@@ -67,6 +67,14 @@ assert.doesNotMatch(opportunities,/[\u0600-\u06FF]/);
 assert.match(page,/CONNECTION TO OUTCOME/);
 assert.match(page,/id="routeGuidance"/);
 assert.match(desk,/todayLocal/);
+assert.match(desk,/id="desk-language" href="\?lang=fa"/);
+assert.match(desk,/document\.documentElement\.dir="rtl"/);
+assert.match(desk,/applyPrivateLocale/);
+assert.match(desk,/DateTimeFormat\("sv-SE"/);
+assert.match(desk,/Email invitation via Resend/);
+assert.match(desk,/فارسی/);
+// The corporate page remains English. Only the private operator shell is localized.
+assert.doesNotMatch(page,/[\u0600-\u06FF]/);
 
 const deskScripts=[...desk.matchAll(/<script>([\s\S]*?)<\/script>/g)];
 assert.equal(deskScripts.length,1,'expected one private operator JS bundle');
