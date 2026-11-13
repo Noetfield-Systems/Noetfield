@@ -1,0 +1,38 @@
+name: NFIELD Solidity Contracts
+
+on:
+  pull_request:
+    paths:
+      - "contracts/noetfield-nfield/**"
+      - ".github/workflows/nfield-contracts.yml"
+  push:
+    branches: [main]
+    paths:
+      - "contracts/noetfield-nfield/**"
+      - ".github/workflows/nfield-contracts.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  forge-contract-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: contracts/noetfield-nfield
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - name: Fetch pinned OpenZeppelin and Foundry test helpers
+        run: |
+          mkdir -p lib
+          git clone -q --depth 1 --branch v5.4.0 https://github.com/OpenZeppelin/openzeppelin-contracts.git lib/openzeppelin-contracts
+          git clone -q --depth 1 --branch v1.9.7 https://github.com/foundry-rs/forge-std.git lib/forge-std
+      - name: Compile contracts
+        run: forge build --sizes
+      - name: Run fixed-supply and Merkle distribution tests
+        run: forge test -vvv
