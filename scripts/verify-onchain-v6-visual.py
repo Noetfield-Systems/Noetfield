@@ -35,7 +35,11 @@ def main() -> int:
                 result["viewport_inner_width"] = page.evaluate("window.innerWidth")
                 result["horizontal_overflow_px"] = max(0, int(result["document_width"]) - int(result["viewport_inner_width"]))
                 if result["horizontal_overflow_px"] > 3:
-                    raise AssertionError(f"horizontal overflow {result['horizontal_overflow_px']} px")
+                    result["overflowing_elements"] = page.evaluate("""() => Array.from(document.querySelectorAll('body *'))
+                        .map(el => { const r = el.getBoundingClientRect(); return {tag:el.tagName.toLowerCase(),className:typeof el.className==='string'?el.className.slice(0,100):'',left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width)}; })
+                        .filter(e => e.right > window.innerWidth + 4 && e.width > 0)
+                        .sort((a,b) => b.right - a.right).slice(0,18)""")
+                    raise AssertionError(f"horizontal overflow {result['horizontal_overflow_px']} px: {result['overflowing_elements'][:5]}")
                 assert page.locator("h1").count() == 1, "expected one H1"
                 assert page.locator(".v5-actions a[href='#project']").count() == 1, "missing sales CTA"
                 assert page.locator("a[href='/onchain/hub/']").count() >= 1, "missing first-party wallet Hub"
