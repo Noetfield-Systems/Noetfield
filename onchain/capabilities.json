@@ -40,7 +40,12 @@
         "RWA Clinic",
         "Agent Control Plane"
       ],
-      "legal_boundary": "No legal opinion, investment solicitation, token issuance or custody"
+      "legal_boundary": "No legal opinion, investment solicitation, token issuance or custody",
+      "payment_status": "STRIPE_LIVE_PAYMENT_LINK_READY_FOR_ACCEPTED_SCOPE",
+      "deposit_checkout_url": "https://buy.stripe.com/7sY6oI3iUaa06qmcDi1Nu0h",
+      "live_checkout_requires_accepted_scope": true,
+      "payment_processor": "Stripe — NOETFIELD SYSTEMS INC.",
+      "income_verified": false
     }
   },
   "first_party_evidence": [
