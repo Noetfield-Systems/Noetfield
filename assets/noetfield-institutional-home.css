@@ -110,3 +110,16 @@ body.nf-corp.nf-home .nf-ins-path-card img{opacity:.94;filter:saturate(.9) brigh
  body.nf-corp.nf-home .nf-ins-header .nf-q-menu{margin-left:auto;flex:none}
  body.nf-corp.nf-home .nf-ins-header .nf-corp-brand{flex:none}
 }
+
+/* Distinct desktop corporate lane; canonical cross-site navigation preserved for
+   mobile and the public nav-fingerprint contract. These links are not a second nav. */
+body.nf-corp.nf-home .nf-ins-header .nf-ins-top-links{display:flex;align-items:center;gap:clamp(12px,1.25vw,22px);margin-left:auto}
+body.nf-corp.nf-home .nf-ins-header .nf-ins-top-links>a{white-space:nowrap;text-decoration:none;color:#e6ebef;font-weight:500;font-size:.77rem}
+body.nf-corp.nf-home .nf-ins-header .nf-ins-top-links>a:hover{color:#f9d9a5}
+@media(min-width:1071px){
+ body.nf-corp.nf-home .nf-ins-header .nf-corp-nav{display:none!important}
+}
+@media(max-width:1070px){
+ body.nf-corp.nf-home .nf-ins-header .nf-ins-top-links{display:none!important}
+ body.nf-corp.nf-home .nf-ins-header .nf-corp-nav[data-open="true"]{display:flex!important}
+}
