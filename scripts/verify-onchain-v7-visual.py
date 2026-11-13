@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 
 URL = os.environ.get("ONCHAIN_URL", "http://127.0.0.1:8765/onchain/")
 OUT = Path("tmp/onchain-v7-visual-qa")
-WIDTHS = (1920, 1440, 768, 390)
+WIDTHS = (1920, 1672, 1440, 768, 390)
 
 
 def main() -> int:
@@ -31,10 +31,11 @@ def main() -> int:
             assert page.locator("h1").count() == 1
             assert "From real-world value" in page.locator("h1").inner_text()
             hero_font = page.locator("h1").evaluate("(el)=>getComputedStyle(el).fontFamily")
-            assert "Newsreader" in hero_font, (width, hero_font)
+            assert "Inter" in hero_font, (width, hero_font)
             assert page.locator(".v5-hero-services a").count() == 4
             assert page.locator(".v5-solutions-summary a").count() == 4
             assert page.locator(".v5-journey-grid > a").count() == 3
+            assert page.locator(".nf-reference-join a[href='/onchain/hub/']").count() == 1
             assert page.locator(".v7-community-band a[href='/onchain/hub/']").count() == 1
             assert page.locator(".v8-network-entry[href='/onchain/hub/']").count() == 1
             assert page.locator("form#nfOnchainIntake[data-nf-intake-form]").count() == 1
@@ -67,7 +68,16 @@ def main() -> int:
             result["nav_height"] = round(nav["height"])
             assert nav["height"] < 100, (width, nav)
             if width >= 1440:
-                assert hero["height"] < 560, (width, hero)
+                assert hero["height"] < 490, (width, hero)
+                assert page.locator(".nf-tower-signage").is_visible()
+                assert nav["height"] <= 75, (width, nav)
+            if width == 1672:
+                platform = page.locator(".v5-platform").bounding_box()
+                outcomes = page.locator(".v5-journeys").bounding_box()
+                assert platform and outcomes
+                assert outcomes["y"] < 870, ("Reference first-fold no longer shows outcomes", outcomes)
+                assert platform["height"] < 320, ("Platform lost compact reference geometry", platform)
+                result["reference_outcomes_top"] = round(outcomes["y"])
                 assert page.locator(".v5-hero-services").is_visible()
                 assert page.locator(".v5-journey-grid > a").first.is_visible()
             page.screenshot(path=str(OUT / f"onchain-v7-{width}-fold.png"), animations="disabled")
