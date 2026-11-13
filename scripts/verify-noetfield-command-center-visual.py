@@ -43,10 +43,15 @@ try:
             assert all(z["loaded"] for z in image_results),image_results
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
             assert dimensions["doc"]<=width+2,dimensions
+            hero_background=page.locator(".nf-institutional-hero").evaluate("el => getComputedStyle(el).backgroundImage")
+            assert "rgb(6, 23, 34)" in hero_background or "rgb(10, 28, 42)" in hero_background, f"Premium dark background overridden: {hero_background}"
             hero_box=page.locator(".nf-ins-hero-media img").bounding_box()
             assert hero_box and hero_box["width"]>=200 and hero_box["height"]>=180,hero_box
             if width<=700:
                 assert hero_box["y"]<height-70, f"Photo falls below first screen: {hero_box}"
+                brand_box=page.locator(".nf-ins-header .nf-corp-brand").bounding_box()
+                menu_box=page.locator(".nf-q-menu").bounding_box()
+                assert brand_box and menu_box and abs(brand_box["y"]-menu_box["y"]) < 20, f"Mobile header wraps: {brand_box}, {menu_box}"
                 page.locator(".nf-q-menu").click()
                 assert page.locator(".nf-corp-nav").get_attribute("data-open")=="true"
                 assert page.locator(".nf-corp-nav a[href='/workflows/']").is_visible()
