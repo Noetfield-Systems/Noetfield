@@ -151,3 +151,11 @@ body[data-onchain-design="v6"] .wrap{max-width:1760px;padding-inline:clamp(22px,
  .v5-actions{flex-direction:column}.v5-actions .v5-button{width:100%}.v6-layer-detail{padding:12px}
 }
 @media(prefers-reduced-motion:reduce){.v5-campus,.v5-hero-services a,.v5-layer,.v5-network-names button,.v5-nav nav a:after{transition:none!important;transform:none!important}}
+
+/* Mobile grid sizing: allow long ecosystem-name row to scroll within the viewport.
+   CSS Grid auto-min-content otherwise expands the page to ~709px on 390px phones. */
+@media(max-width:760px){
+  .v5-network-inner{grid-template-columns:minmax(0,1fr) max-content;min-width:0}
+  .v5-network-names{min-width:0;width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+  .v5-network-link{min-width:0}
+}
