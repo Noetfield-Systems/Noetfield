@@ -63,8 +63,8 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
         "Governed replacement",
         "Claims-boundary correction",
         "TrustField",
-        "regulated-operations and compliance product vertical",
-        "preserving human decision authority",
+        "independent venture in formation",
+        "human decision authority",
         "nf-status nf-status--live",
         "nf-corp-section",
         "nf-corp-hero",
@@ -84,8 +84,8 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
 def test_homepage_statuses_preserve_claim_boundaries() -> None:
     text = read(ROOT / "index.html")
     assert "does not prove external adoption" in text
-    assert "regulated-operations and compliance product vertical" in text.lower()
-    assert "separate venture" not in text.lower()
+    assert "independent venture in formation" in text.lower()
+    assert "independent venture" in text.lower()
     assert not re.search(r"trusted by", text, re.I)
     assert not re.search(r"\d+[+]? (?:clients|customers|enterprises)", text, re.I)
 
@@ -101,8 +101,8 @@ def test_about_states_founder_company_and_trustfield_boundary() -> None:
     assert "sole operating lead" in text.lower()
     assert "Vancouver" in text
     assert "TrustField" in text
-    assert "regulated-operations and compliance product vertical" in text
-    assert "separate venture" not in text.lower()
+    assert "independent venture in formation" in text
+    assert "independent venture" in text.lower()
     assert "SourceB" not in text
 
 
@@ -129,21 +129,21 @@ def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     assert "SourceB" not in about
 
 
-def test_trustfield_is_listed_as_noetfield_product() -> None:
+def test_trustfield_is_scoped_as_independent_venture() -> None:
     home = read(ROOT / "index.html")
     assert "TrustField" in home
     assert 'href="https://trustfield.ca/"' in home
-    assert "regulated-operations and compliance product vertical" in home.lower()
-    assert "separate venture" not in home.lower()
+    assert "independent venture in formation" in home.lower()
+    assert "independent venture" in home.lower()
     assert "validation vertical developed and operated" not in home.lower()
 
     about = read(ROOT / "about" / "index.html")
     assert "TrustField" in about
-    assert "regulated-operations and compliance product vertical" in about.lower()
+    assert "independent venture in formation" in about.lower()
 
     investors = read(ROOT / "investors" / "index.html")
     assert "TrustField" in investors
-    assert "regulated-operations and compliance product vertical" in investors.lower()
+    assert "independent venture in formation" in investors.lower()
 
 
 def test_public_html_has_at_most_one_corp_header() -> None:
