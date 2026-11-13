@@ -13,6 +13,55 @@ ROUTES = {
 }
 
 
+# A completeness rubric is not an AI or recruiter decision, a verified skill,
+# an accepted match, or permission to share a profile with a different venture.
+PROFILE_FIELDS: dict[str, tuple[tuple[str, str], ...]] = {
+    "people": (("skills", "Demonstrable skills"), ("availability", "Availability"),
+               ("work_model", "Collaboration model"), ("portfolio_url", "Portfolio evidence")),
+    "business": (("proposal_title", "Customer problem / project"),
+                 ("proposal_url", "Reference to buyer / scope")),
+    "growth": (("proposal_title", "Distribution opportunity"),
+               ("proposal_url", "Distribution evidence")),
+    "capital": (("proposal_title", "Investor mandate / proposal"),
+                ("proposal_url", "Mandate evidence")),
+    "partnership": (("proposal_title", "Partnership proposal"),
+                    ("proposal_url", "Partnership reference")),
+    "events": (("deadline", "Application deadline"),
+               ("proposal_url", "Event or organizer reference")),
+    "other": (("proposal_title", "Proposed collaboration"),
+              ("proposal_url", "Reference / evidence")),
+}
+
+
+def qualification_readiness(meta: dict[str, Any], kind: str) -> dict[str, Any]:
+    """Transparent self-report completeness, not a talent/project match score."""
+    fields = (
+        ("consent_contact", "Permission to contact"),
+        ("offering", "What the applicant offers"),
+        ("requesting", "What the applicant needs"),
+        *PROFILE_FIELDS.get(kind, PROFILE_FIELDS["other"]),
+    )
+    present: list[str] = []
+    missing: list[str] = []
+    for name, label in fields:
+        value = meta.get(name)
+        answered = (value is True if name == "consent_contact"
+                    else isinstance(value, str) and bool(value.strip()))
+        (present if answered else missing).append(label)
+    return {
+        "score": round(100 * len(present) / len(fields)),
+        "answered_count": len(present),
+        "required_count": len(fields),
+        "missing_fields": missing,
+        "provided_fields": present,
+        "basis": "SELF_REPORTED_FIELD_COMPLETENESS_ONLY",
+        "qualification_status": "READY_FOR_HUMAN_REVIEW" if not missing else "NEEDS_INFORMATION",
+        "match_decision": "NOT_ASSESSED",
+        "identity_verified": False,
+        "external_evidence_verified": False,
+    }
+
+
 def triage_connect_record(record: dict[str, Any], *, today: date | None = None) -> dict[str, Any] | None:
     meta = record.get("metadata") or {}
     if not isinstance(meta, dict) or meta.get("form_id") != "nfConnectWizard":
@@ -24,6 +73,7 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
     if kind not in ROUTES:
         kind = "other"
     label, owner, action = ROUTES[kind]
+    readiness = qualification_readiness(meta, kind)
     deadline = str(meta.get("deadline") or "").strip()[:32]
     today = today or datetime.now(timezone.utc).date()
     days_left = None
@@ -74,6 +124,7 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
         "deadline": deadline or None,
         "days_remaining": days_left,
         "suggested_owner_role": owner,
+        "qualification_readiness": readiness,
         "suggested_next_action": action,
         "priority_score": min(100, score),
         "priority_reasons": reasons,
