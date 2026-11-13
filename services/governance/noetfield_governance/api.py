@@ -230,6 +230,7 @@ _cors_origins = [
     for o in settings.public_chat_cors_origins.split(",")
     if o.strip()
 ]
+_cors_origins = sorted(set(_cors_origins) | {"https://www.noetfield.com", "https://noetfield.com"})
 if _cors_origins:
     app.add_middleware(
         CORSMiddleware,
