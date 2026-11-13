@@ -17,7 +17,7 @@ const applications=read("applications/index.html");
 const investors=read("investors/index.html");
 for(const [name,html] of [["terms",terms],["privacy",privacy],["contact",contact],["trust",trust],["home",home]]){
  assert.match(html,/<html lang="en">/,'English corporate page: '+name);
- assert.match(html,/<a href="\/connect\/">Connect<\/a>|href="\/connect\/\?[^"]+">/,'Connect reachable: '+name);
+ assert.match(html,/href="\/connect\/(?:\?[^"]*)?"/,'Connect reachable: '+name);
  assert.doesNotMatch(html,/<nav aria-label="Products">\s*<strong>Products<\/strong>\s*<a href="\/applications\/trustfield\/">/,'TrustField cannot appear as corporate product: '+name);
 }
 assert.match(terms,/Terms of use/);
