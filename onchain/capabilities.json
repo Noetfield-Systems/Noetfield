@@ -1,6 +1,6 @@
 {
   "schema": "noetfield-onchain-public-capabilities-v1",
-  "updated_at": "2026-11-12",
+  "updated_at": "2026-11-13",
   "operator": {
     "legal_name": "Noetfield Systems Inc.",
     "website": "https://www.noetfield.com/",
@@ -46,7 +46,14 @@
       "live_checkout_requires_accepted_scope": true,
       "payment_processor": "Stripe — NOETFIELD SYSTEMS INC.",
       "income_verified": false
-    }
+    },
+    "service_pages": {
+      "rwa_private_credit": "https://www.noetfield.com/onchain/rwa/",
+      "policy_to_code": "https://www.noetfield.com/onchain/policy/",
+      "stablecoin_operations": "https://www.noetfield.com/onchain/stablecoin/",
+      "agent_infrastructure": "https://www.noetfield.com/onchain/agents/"
+    },
+    "operator_identity": "NOETFIELD OS — website and technical engineering brand operated by Noetfield Systems Inc."
   },
   "first_party_evidence": [
     {
