@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""Visual acceptance of founder-approved corporate command center on the exact static build.
-No fabricated business metrics; visual geometry, click-through, canvas and mobile checks."""
+"""Real-source corporate homepage visual acceptance; desktop, tablet and phone.
+
+Checks that the approved architectural photo and commercial cards render as
+real web images and that actions, navigation, and layouts are functional.
+No fabricated business activity or dynamic numbers are asserted.
+"""
 from __future__ import annotations
 import os, pathlib, subprocess, time, json
 from playwright.sync_api import sync_playwright
@@ -18,43 +22,48 @@ try:
             page=browser.new_page(viewport={"width":width,"height":height},device_scale_factor=1)
             errors=[]
             page.on("pageerror",lambda e:errors.append(str(e)))
-            response=page.goto("http://127.0.0.1:8979/",wait_until="networkidle",timeout=30000)
-            page.locator("[data-cc-scene]").wait_for()
-            page.wait_for_timeout(500)
+            response=page.goto("http://127.0.0.1:8979/",wait_until="networkidle",timeout=35000)
+            assert response.status==200,response.status
+            page.locator(".nf-ins-hero-media img").wait_for()
             title=page.locator("h1#hero-title").inner_text()
-            cards=page.locator("#command-capabilities a.cc-card").count()
-            nodes=page.locator(".cc-node").count()
-            canvas=page.locator("[data-cc-scene]").evaluate("""el => {
-               const ctx=el.getContext('2d'),im=ctx.getImageData(0,0,el.width,el.height).data;
-               let active=0;for(let i=3;i<im.length;i+=4)if(im[i]>10)active++;
-               return {width:el.width,height:el.height,active};
-            }""")
+            assert "intelligent businesses" in title.lower(),title
+            assert page.locator("h1").count()==1
+            paths=page.locator("#choose-your-path a.nf-ins-path-card")
+            capabilities=page.locator("#command-capabilities a.nf-ins-platform-item")
+            assert paths.count()==3,paths.count()
+            assert capabilities.count()==4,capabilities.count()
+            allimgs=page.locator(".nf-institutional-hero img")
+            image_results=allimgs.evaluate_all("""els=>els.map(el=>({
+              src:el.getAttribute('src'),
+              loaded:el.complete&&el.naturalWidth>300,
+              naturalWidth:el.naturalWidth,
+              naturalHeight:el.naturalHeight
+            }))""")
+            assert len(image_results)==4,image_results
+            assert all(z["loaded"] for z in image_results),image_results
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
-            scene_box=page.locator(".cc-scene canvas").bounding_box()
-            assert scene_box, "Visual scene is not laid out"
+            assert dimensions["doc"]<=width+2,dimensions
+            hero_background=page.locator(".nf-institutional-hero").evaluate("el => getComputedStyle(el).backgroundImage")
+            assert "rgb(6, 23, 34)" in hero_background or "rgb(10, 28, 42)" in hero_background, f"Premium dark background overridden: {hero_background}"
+            hero_box=page.locator(".nf-ins-hero-media img").bounding_box()
+            assert hero_box and hero_box["width"]>=200 and hero_box["height"]>=180,hero_box
             if width<=700:
-                assert scene_box["y"] < height - 80, f"Mobile scene below first screen: {scene_box}"
-                assert scene_box["y"]+scene_box["height"] > 250, f"Mobile scene collapsed: {scene_box}"
-            if width<1070:
+                assert hero_box["y"]<height-70, f"Photo falls below first screen: {hero_box}"
+                brand_box=page.locator(".nf-ins-header .nf-corp-brand").bounding_box()
+                menu_box=page.locator(".nf-q-menu").bounding_box()
+                assert brand_box and menu_box and abs(brand_box["y"]-menu_box["y"]) < 20, f"Mobile header wraps: {brand_box}, {menu_box}"
                 page.locator(".nf-q-menu").click()
                 assert page.locator(".nf-corp-nav").get_attribute("data-open")=="true"
-                assert page.locator(".cc-hero-ctas a[href='/connect/']").count()>0
+                assert page.locator(".nf-corp-nav a[href='/workflows/']").is_visible()
                 page.keyboard.press("Escape")
-            hrefs=page.locator("#command-capabilities a.cc-card").evaluate_all("xs => xs.map(x=>x.getAttribute('href'))")
-            assert response.status==200,response.status
-            assert "intelligent businesses" in title.lower(),title
-            assert cards==6,cards
-            assert nodes==3,nodes
-            paths=page.locator("#choose-your-path a.cc-path")
-            assert paths.count()==3,paths.count()
-            assert page.locator(".cc-evidence-image img").evaluate("img => img.complete && img.naturalWidth > 0"),"First-party product screenshot missing"
-            assert "Real Business" in page.locator(".cc-world-people").inner_text()
-            assert canvas["active"]>8000,canvas
-            assert dimensions["doc"]<=width+2,dimensions
+                assert page.locator(".nf-corp-nav").get_attribute("data-open")=="false"
+            links=paths.evaluate_all("els=>els.map(a=>a.getAttribute('href'))")
+            assert links==["/connect/","/company-os/","/onchain/"],links
+            assert page.locator(".nf-ins-button--primary").get_attribute("href")=="/connect/"
+            assert page.locator("a[href='/demo/complete-run/']").count()>0
             assert not errors,errors
-            assert all(h.startswith("/") for h in hrefs),hrefs
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
-            results.append(dict(viewport=name,canvas=canvas,document=dimensions,sceneBox=scene_box,cards=cards,nodes=nodes,paths=paths.count(),jsErrors=errors,ok=True))
+            results.append(dict(viewport=name,document=dimensions,hero=hero_box,images=image_results,paths=paths.count(),capabilities=capabilities.count(),jsErrors=errors,ok=True))
             page.close()
         browser.close()
 finally:
