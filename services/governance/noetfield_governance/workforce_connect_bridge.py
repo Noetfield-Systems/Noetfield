@@ -91,3 +91,29 @@ def deliver(record: IntakeRecord) -> dict[str, object]:
             time.sleep(.35 * (attempt + 1))
     logger.warning("workforce_connect_import_pending source_id=%s reason=%s", record.intake_id, error)
     return {"eligible": True, "delivered": False, "error": error}
+
+
+def probe() -> dict[str, object]:
+    """Read-only live authentication/DB handshake. No contact data or writes."""
+    secret = os.getenv("WORKFORCE_CONNECT_BRIDGE_KEY", "")
+    base = os.getenv("WORKFORCE_CONNECT_BRIDGE_URL", "").rstrip("/")
+    parsed = urlsplit(base)
+    if len(secret) < 32 or parsed.scheme != "https" or not parsed.hostname:
+        return {"connected": False, "reason": "NOT_CONFIGURED"}
+    try:
+        request = Request(base + "/api/integrations/noetfield-connect/health",
+                          method="GET", headers={
+                              "X-Noetfield-Bridge-Key": secret,
+                              "Accept": "application/json",
+                              "User-Agent": "Noetfield-Connect-Bridge-Probe/1"})
+        with urlopen(request, timeout=6) as response:
+            result = json.loads(response.read(4096))
+        if (result.get("authenticated") is True and
+                result.get("database") == "connected" and
+                result.get("read_only") is True):
+            return {"connected": True, "mode": "SIGNED_READ_ONLY_NO_CASE"}
+        return {"connected": False, "reason": "INVALID_BRIDGE_ACK"}
+    except HTTPError as exc:
+        return {"connected": False, "reason": "UPSTREAM_HTTP", "http_status": exc.code}
+    except (URLError, TimeoutError, OSError, ValueError, RuntimeError) as exc:
+        return {"connected": False, "reason": type(exc).__name__}
