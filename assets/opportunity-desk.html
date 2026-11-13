@@ -323,11 +323,14 @@ $("results").querySelectorAll("[data-id]").forEach(el=>el.addEventListener("clic
 const selected=state.rows.find(x=>x.intake_id===state.selected);
 $("detail").className=selected?"":"empty";
 $("detail").innerHTML=selected?renderDetail(selected):"Select a case to inspect evidence and record a next action.";
-if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));$("outcome-form").addEventListener("submit",e=>reportOutcome(e,selected));if($("sync-workforce")){$("sync-workforce").addEventListener("click",()=>syncWorkforce(selected));$("read-workforce").addEventListener("click",()=>readWorkforce(selected));$("handoff-workforce").addEventListener("submit",e=>submitWorkforceHandoff(e,selected));}}
+if(selected){$("read-company-os").addEventListener("click",()=>readCompanyOS(selected));$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));$("outcome-form").addEventListener("submit",e=>reportOutcome(e,selected));if($("sync-workforce")){$("sync-workforce").addEventListener("click",()=>syncWorkforce(selected));$("read-workforce").addEventListener("click",()=>readWorkforce(selected));$("handoff-workforce").addEventListener("submit",e=>submitWorkforceHandoff(e,selected));}}
 applyPrivateLocale($("workspace"));
 }
 function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class="item-head"><h2>'+safe(x.title||"Opportunity")+'</h2><span class="pill">'+safe(stageLabels[x.stage]||x.stage)+'</span></div><p class="small">'+safe(x.intake_id)+' · Received '+safe(date(x.received_at))+' · Revision '+safe(x.revision)+'</p>'+
 '<div class="detail-grid">'+[['Contact',x.person],['Email',x.email],['Organization',x.organization],['Source',x.source],['Initiative',x.initiative],['Opportunity type',x.opportunity_label],['Deadline',x.deadline],['Priority',x.priority_score+" / 100"]].map(([a,b])=>'<div class="detail-value"><b>'+safe(a.toUpperCase())+'</b>'+safe(b||"—")+'</div>').join("")+'</div>'+
+'<div class="section-label">COMPANY OS · ACTUAL TASK QUEUE</div>'+
+ '<button id="read-company-os" type="button" class="secondary">Check Company OS tasks and runs / بررسی اجرای واقعی</button>'+
+ '<div id="company-os-readback" class="proposal" role="status">Not checked. A source record is not proof of dispatch.</div>'+
 '<div class="section-label">ROUTING & PROOF STATUS</div><div class="detail-grid">'+[
 ['Match',matchLabel[matchState(x)]],['Collaboration',collabLabel[collabState(x)]],
 ['Human owner',x.owner||'Unassigned; advisory only'],
@@ -420,6 +423,34 @@ async function syncWorkforce(x){
     ". No assignment or verification is claimed.";
  }catch(error){status.textContent="Sync not confirmed: "+error.message;}
  finally{state.busy=false;button.disabled=false;}
+}
+async function readCompanyOS(x){
+  const box=$("company-os-readback"),button=$("read-company-os");
+  if(!box || !button)return;
+  button.disabled=true;box.textContent="Reading existing Company OS source ledger and runtime…";
+  try{
+   const data=await call("/api/opportunities/desk/"+
+                          encodeURIComponent(x.intake_id)+"/company-os/status");
+   if(state.selected!==x.intake_id||!$("company-os-readback"))return;
+   if(!data.found){
+     box.textContent="Source-backed case has not yet been confirmed in Company OS. "+
+       "No task, run or external effect is asserted.";
+     return;
+   }
+   const tasks=data.tasks||[],runs=data.runs||[];
+   box.innerHTML='<p><strong>Company OS source:</strong> '+safe(data.source_intake_id)+
+     ' · '+safe(data.signal_state)+' · case stage '+safe(data.case_stage)+'</p>'+
+     '<p><b>Real persisted task records: '+tasks.length+
+     '</b> · Runtime run records: '+runs.length+
+     ' · Independent external verification: NOT ESTABLISHED</p>'+
+     (tasks.length?'<ol class="history">'+tasks.map(t=>
+       '<li>'+safe(t.task_id)+' · '+safe(t.role)+' · '+safe(t.status)+'</li>').join("")+
+       '</ol>':'<p>No tasks recorded for this source ID.</p>')+
+     (runs.length?'<p><b>Runtime run states:</b> '+runs.map(r=>
+       safe(r.run_id)+' '+safe(r.status)).join(' · ')+'</p>':'');
+  }catch(err){if($("company-os-readback"))$("company-os-readback").textContent=
+    "Company OS readback unavailable: "+String(err.message||err);}
+  finally{button.disabled=false;}
 }
 async function readWorkforce(x){
  const el=$("workforce-live");if(!el)return;
