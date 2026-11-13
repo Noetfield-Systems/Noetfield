@@ -46,8 +46,8 @@ CORPORATE_HOME_REQUIRED = (
     "OPEN NOETFIELD APP",
     "WATCH A COMPLETE RUN",
     "TrustField",
-    "regulated-operations and compliance product vertical",
-    "preserving human decision authority",
+    "independent venture in formation",
+    "human decision authority",
     "Open Noetfield App",
 )
 
