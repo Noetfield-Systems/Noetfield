@@ -36,6 +36,16 @@ const scripts=[...page.matchAll(/<script>([\s\S]*?)<\/script>/g)];
 assert.equal(scripts.length,1,'expected one inline JS bundle');
 for(const m of scripts) new vm.Script(m[1],{filename:'connect-inline.js'});
 
+// The public progressive Connect bundle is corporate marketing, not a private desk.
+// Check source as well as the exact Pages artifact language boundary on build.
+const progressive=fs.readFileSync(path.join(root,'assets','noetfield-connect-v3.js'),'utf8');
+assert.doesNotMatch(progressive,/[\u0600-\u06FF]/);
+assert.doesNotMatch(progressive,/translateExtras|params\.get\("lang"\)|fa\?/);
+for(const feature of ['participant/status','participant/feedback','nf-connect-saved','chooseFromLink']) {
+ assert.ok(progressive.includes(feature),'regressed English progressive intake feature: '+feature);
+}
+new vm.Script(progressive,{filename:'noetfield-connect-v3.js'});
+
 const desk=fs.readFileSync(path.join(root,'assets','opportunity-desk.html'),'utf8');
 // Founder Desk is an authenticated operator tool and may be localized.
 // The English-only rule applies to the corporate PUBLIC output, not this source.
