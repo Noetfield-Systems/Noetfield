@@ -219,7 +219,12 @@ function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class=
 (x.opportunity_type==="people" && x.consent_contact && x.request_id ?
 '<div class="section-label">WORKFORCEOS · CANONICAL CASE HANDOFF</div>'+
 '<p class="small">Consen­ted people applications automatically sync after source persistence. If a network delivery failed, replay the same RID without creating another application. Sync is not an assignment.</p>'+
-'<button type="button" id="sync-workforce" class="secondary">Sync / repair WorkforceOS case</button> <span id="sync-workforce-status" role="status" class="small"></span>' : '')+
+'<button type="button" id="sync-workforce" class="secondary">Sync / repair WorkforceOS case</button> <span id="sync-workforce-status" role="status" class="small"></span>'+
+'<p><button id="read-workforce" type="button" class="ghost">Check real WorkforceOS status / مشاهده وضعیت واقعی</button></p><div id="workforce-live" class="proposal" role="status">Not yet checked against WorkforceOS database.</div>'+
+'<p class="small">Save the actual owner, next action and date above before recording an accountable handoff. An external workpacket reference is optional and does not execute an agent.</p>'+
+'<form id="handoff-workforce" class="form-grid"><label>Match assessment<select name="match_quality"><option value="not_assessed">Not assessed</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></label>'+
+'<label>External workpacket evidence (optional)<input name="assignment_reference" type="url" placeholder="https://..."></label>'+
+'<button class="primary" type="submit">Record accountable handoff / ثبت واگذاری</button><span id="handoff-workforce-status" class="small" role="status"></span></form>' : '')+
 
 
 '<div class="section-label">RECIPROCAL VALUE · SELF-REPORTED</div>'+
