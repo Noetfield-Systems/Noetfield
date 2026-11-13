@@ -77,7 +77,9 @@ def main() -> int:
                         assert art.evaluate("(el)=>el.complete && el.naturalWidth >= Math.min(600, window.innerWidth * .9)")
                         if width >= 1440:
                             assert art.evaluate("(el)=>el.currentSrc.endsWith(\"/onchain/hero-architecture-hd.webp\")"), "desktop is not using high-definition hero source"
-                        assert page.locator(".nf-nav-solutions a").count() == 4
+                        assert page.locator(".nf-nav-solutions").count() == 3
+                        assert page.locator(".nf-nav-solutions").first.locator("a").count() == 4
+                        assert page.locator(".nf-reference-quicklinks a").count() == 7
                         assert page.locator(".v5-hero-services a").count() == 4
                         assert page.locator("form#nfOnchainIntake[data-nf-intake-form]").count() == 1
                         if width <= 1050:
@@ -85,7 +87,7 @@ def main() -> int:
                             assert toggle.is_visible()
                             toggle.click()
                             assert toggle.get_attribute("aria-expanded") == "true"
-                        page.locator(".nf-nav-solutions summary").click()
+                        page.locator(".nf-nav-solutions").first.locator("summary").click()
                         assert page.locator('.nf-nav-submenu a[href="/onchain/agents/"]').is_visible()
                     if route == "/onchain/hub/":
                         assert page.locator(".nf-hub-solution-links a").count() == 4
