@@ -17,7 +17,7 @@
    window.NFIntakeCore.submitAsync({
     organization:name,contact_name:kind==="agent"?"AI Agent — "+name:name,contact_email:email,message:message,
     vector:"work-with-us-contributor",sku:"general",
-    metadata:{page:location.pathname,application_kind:kind,project_id:projectId,role:role,evidence_url:evidence,application_status:"APPLIED"},
+    metadata:{page:location.pathname,application_kind:kind,project_id:projectId,role:role,evidence_url:evidence,application_status:"APPLIED",consent_contact:form.elements.namedItem("consent").checked},
     submitBtn:form.querySelector('button[type="submit"]'),statusEl:status,
     labels:{idle:"Submit collaboration application",loading:"Submitting…",done:"Application recorded"},
     successCopy:{headline:"Application received",detail:"Your request ID is recorded in the existing Noetfield intake system. The relevant product operator can assess a scoped contribution; application alone does not grant tool access."},
