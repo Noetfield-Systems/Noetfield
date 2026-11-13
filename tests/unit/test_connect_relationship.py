@@ -248,3 +248,78 @@ def test_api_access_and_source_readback_contracts():
         finally:
             gov.settings.admin_dashboard_secret = old
     asyncio.run(run())
+
+
+@pytest.mark.skipif(not os.getenv("CONNECT_TEST_POSTGRES_URL"), reason="Disposable PostgreSQL required")
+def test_consent_scoped_provider_invitation_delivery_ledger_is_real_and_replay_safe():
+    import uuid
+    async def run():
+        url=os.environ["CONNECT_TEST_POSTGRES_URL"]
+        iid="INT-"+uuid.uuid4().hex[:12].upper()
+        rid="RID-CNX-"+uuid.uuid4().hex[:16].upper()
+        db=await __import__("asyncpg").connect(url)
+        try:
+            await db.execute("CREATE SCHEMA IF NOT EXISTS noetfield")
+            await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.public_intakes (
+                intake_id text PRIMARY KEY,
+                metadata jsonb NOT NULL DEFAULT '{}'::jsonb,
+                qualification_json jsonb
+            )""")
+            for statement in (
+                "ALTER TABLE noetfield.public_intakes ADD COLUMN IF NOT EXISTS request_id text",
+                "ALTER TABLE noetfield.public_intakes ADD COLUMN IF NOT EXISTS contact_name text",
+                "ALTER TABLE noetfield.public_intakes ADD COLUMN IF NOT EXISTS contact_email text",
+            ):
+                await db.execute(statement)
+            await db.execute("""INSERT INTO noetfield.public_intakes
+                (intake_id,request_id,contact_name,contact_email,metadata,qualification_json)
+                VALUES($1,$2,$3,$4,$5::jsonb,$6::jsonb)""",
+                iid,rid,"Applicant","applicant@example.invalid",
+                json.dumps({"form_id":"nfConnectWizard","intake_kind":"lead",
+                            "consent_contact":True}),
+                json.dumps({"tier":"human_review"}))
+        finally:
+            await db.close()
+        store=PostgresIntakeStore(url)
+        try:
+            source=await store.get_connect_delivery_source(intake_id=iid)
+            assert source["contact_consent"] is True
+            assert source["contact_email"]=="applicant@example.invalid"
+            prepared=await store.create_connect_invitation(
+                intake_id=iid,expected_revision=0,scope="trial",
+                message="A proposed bounded trial with a specific engineering deliverable",
+                request_id="send_req_"+uuid.uuid4().hex)
+            assert prepared["created"] is True
+            token=prepared["share_token"]
+            claim=await store.claim_connect_invitation_send(
+                intake_id=iid,invitation_id=prepared["invitation_id"],token=token)
+            assert claim["claimed"] is True
+            assert claim["state"]=="SEND_ATTEMPTED_UNCONFIRMED"
+            with pytest.raises(ValueError,match="INVITATION_ALREADY_ATTEMPTED"):
+                await store.claim_connect_invitation_send(
+                    intake_id=iid,invitation_id=prepared["invitation_id"],token=token)
+            ack=await store.finish_connect_invitation_send(
+                intake_id=iid,invitation_id=prepared["invitation_id"],
+                provider_accepted=True,provider_message_id="resend_fixture_012345")
+            assert ack["provider_accepted"] is True
+            assert ack["state"]=="SENT_PROVIDER_ACCEPTED"
+            assert ack["recipient_delivery_verified"] is False
+            with pytest.raises(ValueError,match="INVITATION_SEND_STATE_CONFLICT"):
+                await store.finish_connect_invitation_send(
+                    intake_id=iid,invitation_id=prepared["invitation_id"],
+                    provider_accepted=True,provider_message_id="second_id")
+            rows=await store.list_connect_by_intake(intake_id=iid)
+            projected=triage_connect_record(next(x for x in rows if x["intake_id"]==iid))
+            assert projected["invitations"][0]["state"]=="SENT_PROVIDER_ACCEPTED"
+            assert projected["invitations"][0]["provider_message_id"]=="resend_fixture_012345"
+            assert "token_hash" not in projected["invitations"][0]
+            assert projected["execution_status"]=="NOT_DISPATCHED"
+            assert projected["cash_collected"] is None
+        finally:
+            await store.close()
+            db=await __import__("asyncpg").connect(url)
+            try:
+                await db.execute("DELETE FROM noetfield.public_intakes WHERE intake_id=$1",iid)
+            finally:
+                await db.close()
+    asyncio.run(run())
