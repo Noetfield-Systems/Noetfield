@@ -117,3 +117,70 @@ def probe() -> dict[str, object]:
         return {"connected": False, "reason": "UPSTREAM_HTTP", "http_status": exc.code}
     except (URLError, TimeoutError, OSError, ValueError, RuntimeError) as exc:
         return {"connected": False, "reason": type(exc).__name__}
+
+
+def _signed_bridge_request(path: str, *, payload: dict[str, object] | None = None) -> dict[str, object]:
+    """Use the existing scoped bridge secret, never a WorkforceOS admin credential."""
+    secret = os.getenv("WORKFORCE_CONNECT_BRIDGE_KEY", "")
+    base = os.getenv("WORKFORCE_CONNECT_BRIDGE_URL", "").rstrip("/")
+    parsed = urlsplit(base)
+    if (len(secret) < 32 or parsed.scheme != "https" or not parsed.hostname
+            or parsed.username or parsed.password or parsed.path not in ("", "/")):
+        return {"connected": False, "error": "BRIDGE_NOT_CONFIGURED"}
+    encoded = (json.dumps(payload, separators=(",", ":")).encode("utf-8")
+               if payload is not None else None)
+    if encoded is not None and len(encoded) > 4096:
+        return {"connected": False, "error": "BRIDGE_REQUEST_TOO_LARGE"}
+    try:
+        request = Request(base + path, data=encoded,
+                          method="POST" if encoded is not None else "GET",
+                          headers={"X-Noetfield-Bridge-Key": secret,
+                                   "Accept": "application/json",
+                                   "User-Agent": "Noetfield-Connect-Operator-Bridge/1",
+                                   **({"Content-Type": "application/json"} if encoded is not None else {})})
+        with urlopen(request, timeout=8) as response:
+            data = json.loads(response.read(8192))
+        if not isinstance(data, dict):
+            return {"connected": False, "error": "BRIDGE_RESPONSE_INVALID"}
+        return {"connected": True, **data}
+    except HTTPError as exc:
+        return {"connected": False, "error": "BRIDGE_UPSTREAM_HTTP",
+                "http_status": exc.code}
+    except (URLError, TimeoutError, OSError, ValueError, RuntimeError) as exc:
+        return {"connected": False, "error": type(exc).__name__}
+
+
+def readback_case(source_intake_id: str) -> dict[str, object]:
+    """Authenticated source-key readback, no PII and no optimistic status."""
+    if not __import__("re").fullmatch(r"INT-[A-Za-z0-9-]{6,80}", source_intake_id):
+        return {"connected": False, "error": "SOURCE_ID_INVALID"}
+    result = _signed_bridge_request(
+        "/api/integrations/noetfield-connect/cases/" + source_intake_id)
+    state = result.get("case")
+    if result.get("connected") and (not isinstance(state, dict)
+                                    or state.get("source_intake_id") != source_intake_id
+                                    or not str(state.get("case_id", "")).startswith("opp_nf_")):
+        return {"connected": False, "error": "BRIDGE_INVALID_CASE_ACK"}
+    return result
+
+
+def handoff_case(*, source_intake_id: str, request_id: str, owner: str,
+                 next_action: str, due_date: str | None,
+                 match_quality: str = "not_assessed",
+                 assignment_reference: str = "") -> dict[str, object]:
+    """Operator-approved owner handoff; no external runtime or email send."""
+    payload: dict[str, object] = {
+        "source_intake_id": source_intake_id, "request_id": request_id,
+        "owner": owner, "next_action": next_action,
+        "due_date": due_date, "match_quality": match_quality,
+        "assignment_reference": assignment_reference,
+    }
+    result = _signed_bridge_request(
+        "/api/integrations/noetfield-connect/handoff", payload=payload)
+    state = result.get("case")
+    if result.get("connected") and (result.get("accepted") is not True
+                                    or not isinstance(state, dict)
+                                    or state.get("source_intake_id") != source_intake_id
+                                    or not str(state.get("case_id", "")).startswith("opp_nf_")):
+        return {"connected": False, "error": "BRIDGE_INVALID_HANDOFF_ACK"}
+    return result
