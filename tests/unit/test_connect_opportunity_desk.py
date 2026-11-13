@@ -76,6 +76,39 @@ def test_connect_desk_requires_admin_and_filters_nonconnect():
     asyncio.run(run())
 
 
+
+
+def test_self_reported_qualification_readiness_never_claims_a_real_match():
+    from noetfield_governance.opportunity_desk import qualification_readiness
+    incomplete = qualification_readiness({"consent_contact": True,
+        "skills": "Python", "offering": "Code"}, "people")
+    assert incomplete["qualification_status"] == "NEEDS_INFORMATION"
+    assert incomplete["match_decision"] == "NOT_ASSESSED"
+    assert incomplete["identity_verified"] is False
+    assert "Availability" in incomplete["missing_fields"]
+    complete = qualification_readiness({
+        "consent_contact": True, "skills": "Python",
+        "availability": "now", "work_model": "project",
+        "portfolio_url": "https://example.invalid/repo",
+        "offering": "Engineering", "requesting": "Scoped paid trial",
+    }, "people")
+    assert complete["score"] == 100
+    assert complete["qualification_status"] == "READY_FOR_HUMAN_REVIEW"
+    assert complete["match_decision"] == "NOT_ASSESSED"
+    assert complete["external_evidence_verified"] is False
+    applicant = sample("people")
+    applicant["metadata"].update({
+        "consent_contact": True, "skills": "Python",
+        "availability": "now", "work_model": "project",
+        "portfolio_url": "https://example.invalid/repo",
+        "offering": "Engineering", "requesting": "Scoped paid trial",
+    })
+    observed = triage_connect_record(applicant)
+    assert observed["qualification_readiness"]["score"] == 100
+    assert observed["execution_status"] == "NOT_DISPATCHED"
+    assert observed["outcome"] is None
+
+
 def test_operator_state_survives_projection_and_public_metadata_cannot_spoof_it():
     user_record = sample("capital")
     user_record["metadata"]["connect_ops"] = {"stage": "WON", "owner": "Fraudulent public owner"}
