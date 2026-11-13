@@ -39,6 +39,17 @@ jobs:
           ONCHAIN_URL: http://127.0.0.1:8765/onchain/
           ONCHAIN_EMIT_PREVIEW: "1"
         run: python scripts/verify-onchain-v7-visual.py
+      - name: Verify complete Noetfield OS site, solution routes and scoped intake
+        env:
+          ONCHAIN_BASE_URL: http://127.0.0.1:8765
+        run: python scripts/verify-onchain-enterprise.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: onchain-enterprise-full-site-screenshots
+          path: tmp/onchain-enterprise-qa/
+          retention-days: 14
+          if-no-files-found: warn
       - uses: actions/upload-artifact@v4
         if: always()
         with:
