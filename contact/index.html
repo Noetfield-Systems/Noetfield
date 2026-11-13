@@ -86,10 +86,11 @@
    <div class="nf-corp-wrap">
     <h2 id="contact-form-title">Contact operations</h2>
     <p>Send a non-confidential message. For an opportunity with skill matching, progress tracking or structured review, <a href="/connect/?source=contact">use Noetfield Connect</a> instead.</p>
-    <form id="nfContactForm" class="nf-pilot-apply-form" data-nf-intake-form data-intake-vector="contact" data-intake-sku="general" data-submit-label="Send message" data-intake-headline="Message recorded — async ops notify" aria-label="Contact operations">
+    <form id="nfContactForm" class="nf-pilot-apply-form" data-nf-intake-form data-intake-vector="contact" data-intake-sku="general" data-submit-label="Send message" data-intake-headline="Message recorded" data-intake-detail="Your message was recorded. Operations will review it and respond when an appropriate next step is available." aria-label="Contact operations">
      <div class="nf-pilot-apply-grid">
-      <label>Work email<input type="email" name="email" required autocomplete="email" /></label>
-      <label>Organization<input type="text" name="org" required autocomplete="organization" /></label>
+      <label>Email address<input type="email" name="email" maxlength="254" required autocomplete="email" /></label>
+      <label>Your name (optional)<input type="text" name="name" maxlength="120" autocomplete="name" /></label>
+      <label>Organization (optional)<input type="text" name="org" maxlength="150" autocomplete="organization" /></label>
       <label>Topic<select name="topic" required>
         <option value="">Select topic</option>
         <option value="program-funding">Program / funding</option>
@@ -132,6 +133,7 @@
       </select></label>
      </div>
      <label>Message<textarea name="notes" rows="5" required></textarea></label>
+     <p>Use non-confidential information. Read the <a href="/privacy/">Privacy notice</a> for how submissions are handled.</p>
      <button type="submit" class="nf-button nf-button--primary">Send message</button>
      <div id="nfContactStatus" class="nf-intake-async-status" data-nf-intake-status hidden aria-live="polite"></div>
     </form>
