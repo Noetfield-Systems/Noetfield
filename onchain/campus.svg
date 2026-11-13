@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Conceptual emerald glass infrastructure campus and network globe">
+<defs>
+<linearGradient id="sky" x1="0" x2=".9" y1="0" y2="1"><stop stop-color="#041516"/><stop offset=".52" stop-color="#07332e"/><stop offset="1" stop-color="#061a1b"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#65ce91" stop-opacity=".32"/><stop offset=".38" stop-color="#36b68c" stop-opacity=".14"/><stop offset="1" stop-color="#0c3a30" stop-opacity="0"/></radialGradient>
+<radialGradient id="globe"><stop stop-color="#c0dbb8" stop-opacity=".16"/><stop offset=".77" stop-color="#69bc8e" stop-opacity=".09"/><stop offset="1" stop-color="#e7cc86" stop-opacity=".42"/></radialGradient>
+<linearGradient id="gold" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#634d2a"/><stop offset=".28" stop-color="#ebd99b"/><stop offset=".58" stop-color="#ab8151"/><stop offset=".84" stop-color="#ffe8a5"/><stop offset="1" stop-color="#776043"/></linearGradient>
+<linearGradient id="towerfront" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#78d7b5" stop-opacity=".42"/><stop offset=".45" stop-color="#143a38" stop-opacity=".82"/><stop offset="1" stop-color="#082b29" stop-opacity=".93"/></linearGradient>
+<linearGradient id="towerleft" x1="0" x2="1"><stop stop-color="#b1eee2" stop-opacity=".57"/><stop offset="1" stop-color="#256e62" stop-opacity=".35"/></linearGradient>
+<linearGradient id="towerroof" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f8ecd7" stop-opacity=".75"/><stop offset=".4" stop-color="#89dec0" stop-opacity=".54"/><stop offset="1" stop-color="#0b3934" stop-opacity=".82"/></linearGradient>
+<linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#0b3636"/><stop offset="1" stop-color="#031113"/></linearGradient>
+<linearGradient id="water" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#0e423b" stop-opacity=".83"/><stop offset="1" stop-color="#020b10"/></linearGradient>
+<pattern id="windows" patternUnits="userSpaceOnUse" width="30" height="38"><path d="M1 0V38 M0 1H30" fill="none" stroke="#b6ffdb" stroke-opacity=".19" stroke-width="1.2"/><rect x="4" y="8" width="12" height="7" fill="#9dffd0" opacity=".075"/><rect x="19" y="19" width="8" height="5" fill="#ffe4a3" opacity=".16"/></pattern>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+<filter id="smallglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#000d12" flood-opacity=".8"/></filter>
+<clipPath id="horizon"><path d="M0 0H1600V900H0Z"/></clipPath>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<ellipse cx="1075" cy="393" rx="680" ry="550" fill="url(#halo)"/>
+<path d="M0 650 150 540 255 602 420 465 505 530 615 405 745 536 852 434 930 509 1135 403 1255 505 1390 430 1600 600V900H0Z" fill="url(#mountain)" opacity=".65"/>
+<path d="M0 718 240 640 401 699 555 605 764 660 870 587 1050 645 1200 555 1400 646 1600 580V900H0Z" fill="#031a1c" opacity=".84"/>
+<circle cx="1010" cy="322" r="234" fill="url(#globe)" stroke="#e0c68a" stroke-opacity=".44" stroke-width="1.7"/>
+<circle cx="1010" cy="322" r="228" fill="none" stroke="#9debd0" stroke-opacity=".16" stroke-width="2" stroke-dasharray="3 16"/>
+<ellipse cx="1010" cy="322" rx="110" ry="230" fill="none" stroke="#bceeb6" stroke-width="1" stroke-opacity=".21"/>
+<ellipse cx="1010" cy="322" rx="197" ry="230" fill="none" stroke="#bceeb6" stroke-width="1" stroke-opacity=".15"/>
+<ellipse cx="1010" cy="322" rx="228" ry="76" fill="none" stroke="#c6d9aa" stroke-width="1" stroke-opacity=".18"/>
+<ellipse cx="1010" cy="322" rx="228" ry="155" fill="none" stroke="#c6d9aa" stroke-width="1" stroke-opacity=".16"/>
+<path d="M826 222 867 198 913 202 936 232 982 238 1001 266 1045 258 1079 291 1061 328 1019 338 1003 378 969 388 934 369 919 342 877 329 853 289ZM1098 218 1128 199 1175 217 1195 260 1166 278 1153 322 1111 309 1094 275ZM907 412 955 419 987 456 969 500 944 520 921 489 901 465Z" fill="#a9d5a5" fill-opacity=".16" stroke="#eedc91" stroke-opacity=".24" stroke-width="2"/>
+<g fill="#e9d18d"><circle cx="828" cy="287" r="3"/><circle cx="884" cy="180" r="2.5"/><circle cx="946" cy="102" r="2"/><circle cx="1100" cy="174" r="2.4"/><circle cx="1238" cy="285" r="2.8"/></g>
+<ellipse cx="1010" cy="357" rx="430" ry="144" transform="rotate(-18 1010 357)" fill="none" stroke="url(#gold)" stroke-opacity=".73" stroke-width="8"/>
+<ellipse cx="1010" cy="357" rx="440" ry="153" transform="rotate(-18 1010 357)" fill="none" stroke="#ffe6a8" stroke-opacity=".24" stroke-width="18" filter="url(#glow)"/>
+<path d="M0 732Q600 705 1600 706V900H0Z" fill="url(#water)"/>
+<g opacity=".18" stroke="#c3ffe3"><path d="M0 770H1600M0 795H1600M0 827H1600M0 869H1600"/></g>
+<ellipse cx="1050" cy="748" rx="430" ry="59" fill="#53a886" opacity=".18" filter="url(#glow)"/>
+<g filter="url(#shadow)">
+<!-- main tower -->
+<polygon points="988,285 1093,243 1325,312 1211,358" fill="url(#towerroof)" stroke="#c9f3d9" stroke-opacity=".9" stroke-width="3"/>
+<polygon points="988,285 1211,358 1211,670 988,589" fill="url(#towerleft)" stroke="#a6eecd" stroke-opacity=".69" stroke-width="2"/>
+<polygon points="1211,358 1325,312 1325,617 1211,670" fill="url(#towerfront)" stroke="#d5ffe3" stroke-opacity=".75" stroke-width="2"/>
+<polygon points="988,285 1211,358 1211,670 988,589" fill="url(#windows)"/>
+<polygon points="1211,358 1325,312 1325,617 1211,670" fill="url(#windows)" opacity=".6"/>
+<path d="M988 356 1211 426 1325 386M988 430 1211 497 1325 465M988 515 1211 587 1325 545" fill="none" stroke="#cbffdb" stroke-opacity=".39" stroke-width="2.4"/>
+<path d="M1023 301V597M1090 318V625M1145 341V640M1267 337V637" fill="none" stroke="#b8ffe3" stroke-opacity=".25" stroke-width="3"/>
+<polygon points="1097,568 1196,538 1319,584 1210,635" fill="#7ecaaa" fill-opacity=".12"/>
+<!-- tower 2 -->
+<polygon points="737,437 835,390 990,442 876,486" fill="url(#towerroof)" stroke="#d2ffe9" stroke-opacity=".75" stroke-width="3"/>
+<polygon points="737,437 876,486 876,670 737,618" fill="url(#towerleft)" stroke="#a5ffe4" stroke-opacity=".58" stroke-width="2"/>
+<polygon points="876,486 990,442 990,618 876,670" fill="url(#towerfront)" stroke="#a5ffe4" stroke-opacity=".76" stroke-width="2"/>
+<polygon points="737,437 876,486 876,670 737,618" fill="url(#windows)" opacity=".9"/>
+<path d="M737 505 876 552 990 511M737 570 876 617 990 579" stroke="#a1f4c9" stroke-opacity=".53" stroke-width="2" fill="none"/>
+<!-- tower 3 -->
+<polygon points="1301,421 1399,388 1523,439 1420,474" fill="url(#towerroof)" stroke="#c5e9d1" stroke-opacity=".84" stroke-width="2"/>
+<polygon points="1301,421 1420,474 1420,650 1301,607" fill="url(#towerleft)" stroke="#b9ffe1" stroke-opacity=".59" stroke-width="2"/>
+<polygon points="1420,474 1523,439 1523,605 1420,650" fill="url(#towerfront)" stroke="#b2ffe4" stroke-opacity=".6" stroke-width="2"/>
+<polygon points="1301,421 1420,474 1420,650 1301,607" fill="url(#windows)" opacity=".8"/>
+<path d="M1301 502 1420 545 1523 515M1301 560 1420 605 1523 570" fill="none" stroke="#c6f8cb" stroke-opacity=".5" stroke-width="2"/>
+<!-- podium base -->
+<polygon points="676,642 903,559 1513,642 1281,735" fill="#286954" fill-opacity=".84" stroke="#a2ffd5" stroke-opacity=".5" stroke-width="2"/>
+<polygon points="676,642 1281,735 1281,766 676,675" fill="#0a322c" stroke="#8af2c8" stroke-opacity=".33"/>
+<polygon points="1281,735 1513,642 1513,672 1281,766" fill="#0d4338" stroke="#8af2c8" stroke-opacity=".4"/>
+<path d="M727 654 1280 741M845 615 1391 690M938 586 1490 654" fill="none" stroke="#c2ffd5" stroke-opacity=".25" stroke-width="2"/>
+</g>
+<g stroke="#f0d699" stroke-opacity=".55" fill="none"><path d="M790 749Q1030 781 1470 720"/><path d="M970 787Q1120 812 1430 778"/></g>
+<g fill="#d6ffbd"><circle cx="792" cy="742" r="3"/><circle cx="1137" cy="728" r="4"/><circle cx="1473" cy="717" r="3"/></g>
+<g opacity=".6"><path d="M450 720Q685 698 900 735" fill="none" stroke="#c8ffa5" stroke-width="1.5"/><path d="M430 760Q690 732 950 778" fill="none" stroke="#9ccfb9" stroke-width="1"/></g>
+</svg>
