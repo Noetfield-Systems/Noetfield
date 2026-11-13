@@ -117,7 +117,7 @@ def main() -> int:
                 toggle.click()
                 assert toggle.get_attribute("aria-expanded") == "true"
                 assert page.locator("#onchainNav").is_visible()
-                page.locator('#onchainNav a[href="#solutions"]').click()
+                page.locator('#onchainNav a[href="#use-cases"]').click()
                 assert toggle.get_attribute("aria-expanded") == "false"
             assert not errors, {"viewport": width, "js_errors": errors}
             result["interactions"] = "PASS"
