@@ -179,3 +179,15 @@
    opening a layer uses keyboard/pointer focus, not an inaccessible hidden tooltip. */
 .v5-layer:focus-visible{outline:2px solid #bbffb0;outline-offset:3px}
 .v5-layer{cursor:pointer}
+
+/* 390px: ensure the brand + paid-project CTA + menu fit within the real viewport.
+   Browser QA identified the menu button at x=375..411 on a 390px screen. */
+@media(max-width:500px){
+ .v5-nav{display:flex;gap:7px;min-width:0}
+ .v5-brand{flex:0 1 auto;min-width:0;font-size:12px;letter-spacing:.055em;gap:7px;white-space:nowrap}
+ .v5-brand-mark,.v5-brand-mark svg{flex:none;width:29px;height:31px}
+ .v5-brand small{display:none}
+ .v5-nav-actions{flex:0 0 auto;margin-left:auto}
+ .v5-nav-actions .v5-nav-primary{font-size:9px!important;padding:7px 8px!important;min-height:34px}
+ .v6-menu-toggle{flex:0 0 34px;width:34px;height:34px;padding:8px;margin:0;order:2}
+}
