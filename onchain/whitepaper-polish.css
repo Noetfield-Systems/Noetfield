@@ -4,7 +4,7 @@ body{background:linear-gradient(180deg,#061a14,#041610 33%);font-size:15px;line-
 header{background:rgba(3,20,17,.96);border-bottom-color:rgba(183,247,187,.27)}
 header .wrap{min-height:73px;gap:12px}.brand{font-size:16px;letter-spacing:.1em;color:#f3f9ea}.brand small{font-size:8px;letter-spacing:.04em}
 header nav a{font-size:12px;font-weight:650}header nav a:last-child{background:linear-gradient(115deg,#eeffc0,#93eeb0);color:#09291b;padding:10px 15px}
-.hero{padding:85px 0 82px;background:linear-gradient(90deg,rgba(2,21,17,.97),rgba(3,26,19,.78)),url('/onchain/hero-architecture-v7.webp') center / cover}
+.hero{padding:85px 0 82px;background:linear-gradient(90deg,rgba(2,21,17,.97),rgba(3,26,19,.78)),url('/onchain/hero-architecture-hd.webp') center / cover}
 .hero .wrap{position:relative}.hero h1{font:480 clamp(60px,6.4vw,102px)/.99 Newsreader,Georgia,serif;letter-spacing:-.05em;max-width:930px;margin:27px 0}
 .hero h1 em{font:italic 450 1em Newsreader,serif;color:#c3fbbc}.hero p{color:#d5e7d6;font-size:17px;max-width:680px}
 .hero .cta{background:linear-gradient(110deg,#e8ffc0,#8cf2ab);border-radius:8px;box-shadow:0 0 22px rgba(143,252,164,.18)}
