@@ -262,6 +262,37 @@ async function syncWorkforce(x){
  }catch(error){status.textContent="Sync not confirmed: "+error.message;}
  finally{state.busy=false;button.disabled=false;}
 }
+async function readWorkforce(x){
+ const el=$("workforce-live");if(!el)return;
+ el.textContent="Reading WorkforceOS database…";
+ try{
+  const result=await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/workforce/status");
+  if(state.selected!==x.intake_id||!$("workforce-live"))return;
+  const c=result.case;
+  el.textContent="Case "+c.case_id+" | Owner: "+c.owner+" | Stage: "+c.stage+
+   " | Next: "+c.next_action+" | Due: "+(c.next_date||"unscheduled")+
+   " | Match: "+c.match_quality+" | Collaboration: "+c.collaboration+
+   " | Outcome: "+c.outcome+" | Verification: "+c.verification_state+
+   (c.assignment_reference?" | External ref: "+c.assignment_reference:"")+
+   ". This is a source readback, not a claim of agent execution or revenue.";
+ }catch(err){if($("workforce-live"))$("workforce-live").textContent="Unconfirmed: "+err.message;}
+}
+async function submitWorkforceHandoff(ev,x){
+ ev.preventDefault();if(state.busy)return;
+ const status=$("handoff-workforce-status"),fields=new FormData(ev.currentTarget);
+ if(!x.owner||!x.next_action){status.textContent="First save owner and next action on source case.";return;}
+ const requestId="handoff_"+crypto.randomUUID().replaceAll("-","");
+ const payload={request_id:requestId,owner:x.owner,next_action:x.next_action,
+  due_date:x.next_action_due||null,match_quality:String(fields.get("match_quality")),
+  assignment_reference:String(fields.get("assignment_reference")||"").trim()};
+ status.textContent="Writing scoped handoff…";state.busy=true;
+ try{
+  const result=await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/workforce/handoff","POST",payload);
+  status.textContent="Case "+result.case.case_id+" updated. Agent execution is not implied.";
+  await readWorkforce(x);
+ }catch(err){status.textContent="Handoff unconfirmed: "+err.message;}
+ finally{state.busy=false;}
+}
 async function save(ev,x){ev.preventDefault();if(state.busy)return;state.busy=true;const button=$("save-button"),form=ev.currentTarget;button.disabled=true;text("save-status","Saving…");const fd=new FormData(form);const payload={expected_revision:Number(x.revision||0),stage:fd.get("stage"),owner:String(fd.get("owner")||"").trim(),next_action:String(fd.get("next_action")||"").trim(),due_date:fd.get("due_date")||null,note:String(fd.get("note")||"").trim()};
 try{await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id),"PATCH",payload);await load();text("save-status","")}catch(err){text("save-status",err.message+" · Refresh if this record was updated elsewhere.")}finally{state.busy=false;button.disabled=false}}
 
