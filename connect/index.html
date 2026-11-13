@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Noetfield Connect — Opportunities, People & Partnerships</title>
-<meta name="description" content="One direct path to Noetfield for partnerships, commercial opportunities, investors, talent, collaborations, events, and introductions.">
+<title>Noetfield Connect | Relationships to Real Outcomes</title>
+<meta name="description" content="A direct, evidence-led path for customers, collaborators, investors, engineers, channel partners and new ventures to work with Noetfield.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#f2eee7">
 <link rel="canonical" href="https://www.noetfield.com/connect/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Noetfield Systems">
-<meta property="og:title" content="Noetfield Connect — Let's build what's next">
-<meta property="og:description" content="Bring an opportunity, a relationship, or a project. Tell us what you have in mind and our team will evaluate the next step.">
+<meta property="og:title" content="Noetfield Connect — Make your next connection count">
+<meta property="og:description" content="From an introduction to real work: share a clear opportunity, route it to the right team, and follow its next steps.">
 <meta property="og:url" content="https://www.noetfield.com/connect/">
 <meta property="og:image" content="https://www.noetfield.com/assets/social/noetfield-corporate-v2.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -84,7 +84,82 @@ body.connect {margin:0;color:#232522;background:#f4f1eb;font-family:Inter,system
 @media(max-width:850px){.connect .wizard-grid{grid-template-columns:1fr}.connect .grid{grid-template-columns:repeat(2,1fr)}.connect .process{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.connect .wrap{width:calc(100% - 28px)}.connect .grid,.connect .cols,.connect .process{grid-template-columns:1fr}.connect .navlinks{gap:10px}.connect .navlinks a:first-child{display:none}.connect .steps span{font-size:10px}.connect .hero{padding:55px 0 40px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.connect .tile{transition:none}}
-html[lang="fa"] body.connect{font-family:Tahoma,"Segoe UI",Arial,sans-serif;direction:rtl}html[lang="fa"] .connect h1,html[lang="fa"] .connect h2,html[lang="fa"] .connect legend{font-family:Tahoma,"Segoe UI",Arial,sans-serif;letter-spacing:0;line-height:1.5}html[lang="fa"] .connect input[type="email"],html[lang="fa"] .connect input[type="url"]{direction:ltr;text-align:left}html[lang="fa"] .connect .eyebrow{text-transform:none;letter-spacing:0}html[lang="fa"] .connect .pillrow,html[lang="fa"] .connect .heroactions{direction:rtl}
+
+
+/* Noetfield international design system: midnight navy, ivory and restrained champagne gold. */
+:root{color-scheme:light}
+body.connect{background:#f2f1ec;color:#142431}
+.connect .wrap{width:min(1240px,calc(100% - 64px))}
+.connect .bar{background:#071521;border-color:rgba(237,216,175,.15);padding:22px 0}
+.connect .brand{color:#edf0ef;font-size:16px;letter-spacing:-.025em}
+.connect .brand .mark{background:linear-gradient(145deg,#d7b989,#aa7b4f);color:#101b26;border-radius:8px;width:39px;height:39px}
+.connect .brand span span{color:#bcb5a8!important}
+.connect .navlinks a{color:#d8dfdf;transition:color .2s}
+.connect .navlinks a:hover{color:#e2c79c}
+.connect .navlinks .primary{border:1px solid rgba(236,210,171,.35)!important;background:#c6a57a!important;color:#101820!important}
+.connect .eyebrow{color:#b9966d;letter-spacing:.17em}
+.connect .eyebrow-rule{display:inline-block;vertical-align:middle;width:30px;height:1px;background:#c9a77f;margin-right:12px}
+.connect .hero{min-height:620px;padding:clamp(66px,7.8vw,125px) 0 90px;border-bottom:1px solid #223442;background:
+ radial-gradient(ellipse at 94% 6%,rgba(139,113,78,.17),transparent 35%),
+ radial-gradient(ellipse at 25% 95%,rgba(39,65,84,.48),transparent 55%),#071521;color:#f4f1e9}
+.connect .hero-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(315px,.79fr);align-items:center;gap:clamp(50px,7vw,115px)}
+.connect .hero-copy{min-width:0}
+.connect .hero h1{font:400 clamp(60px,6.7vw,103px)/.97 Newsreader,Georgia,serif;max-width:850px;letter-spacing:-.055em;margin:24px 0}
+.connect .hero h1 em{font-weight:400;color:#d2b38c;font-style:italic;white-space:normal}
+.connect .hero .lede{font:400 clamp(15px,1.55vw,18px)/1.85 Inter,sans-serif;color:#b8c4c9;max-width:670px}
+.connect .hero .pill{border:1px solid rgba(216,195,161,.25);background:rgba(255,255,255,.025);color:#cfd4d5;padding:9px 13px}
+.connect .hero .primary{background:#d4b38c;color:#142432;padding:16px 23px;gap:13px;border-radius:7px}
+.connect .hero .secondary{color:#e9edf0;text-decoration-color:#bd9c79}
+.connect .hero .hero-caveat{font-size:12px;color:#8da0a9;letter-spacing:.01em;margin-top:27px}
+.connect .journey-map{border:1px solid rgba(212,186,144,.28);border-radius:16px;overflow:hidden;background:linear-gradient(155deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 40px 90px #02080c4a;backdrop-filter:blur(8px)}
+.connect .map-head,.connect .map-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:17px 22px;font:500 10px/1.5 "DM Mono",monospace;letter-spacing:.11em;color:#c6aa88;background:rgba(0,0,0,.13);border-bottom:1px solid rgba(212,186,144,.18)}
+.connect .map-cross{font:400 20px Inter,sans-serif}
+.connect .map-route{padding:26px 24px}
+.connect .map-node{border:1px solid rgba(202,217,216,.18);padding:18px 20px;border-radius:10px;background:rgba(10,28,40,.75)}
+.connect .map-node-last{border-color:rgba(222,187,139,.5);background:rgba(214,166,95,.07)}
+.connect .map-code{display:block;font:500 10px/1.4 "DM Mono",monospace;color:#bf9a6b;letter-spacing:.1em;margin-bottom:7px}
+.connect .map-node strong{font-weight:600;font-size:16px;display:block;margin-bottom:4px}
+.connect .map-node small{font-size:11px;color:#acbcc3;line-height:1.7}
+.connect .map-line{height:27px;margin-left:29px;border-left:1px dashed rgba(217,183,139,.5);position:relative}
+.connect .map-line span{display:block;width:5px;height:5px;background:#bd986d;position:absolute;bottom:1px;left:-3px;transform:rotate(45deg)}
+.connect .map-foot{border-top:1px solid rgba(212,186,144,.18);border-bottom:0;color:#9bb0b7;text-transform:none;letter-spacing:0}
+.connect .map-foot span:last-child{color:#d6ba92}
+.connect .examples{padding:88px 0 96px;background:#f3f1eb;border-top:0}
+.connect .examples h2{font-size:clamp(42px,5vw,66px);max-width:850px;color:#102634}
+.connect .examples > .wrap > p:not(.eyebrow){color:#617078!important;font-size:16px}
+.connect .grid{gap:13px;margin-top:34px}
+.connect .tile{position:relative;overflow:hidden;min-height:220px;padding:28px;background:#fffefa;border:1px solid #d9ddd9;border-radius:10px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.connect .tile::before{content:"";position:absolute;left:28px;right:28px;top:0;height:2px;background:linear-gradient(90deg,#ad8352,transparent);opacity:.55}
+.connect .tile:hover{transform:translateY(-4px);border-color:#b29a78;box-shadow:0 24px 44px rgba(21,38,48,.08)}
+.connect .tile .eyebrow{font-size:10px;color:#9b795a}
+.connect .tile b{font-size:21px;font-weight:600;letter-spacing:-.025em;margin:25px 0 11px;color:#142431}
+.connect .tile p{font-size:13px;color:#5b6770;line-height:1.8}
+.connect .tile-link{display:block;font:500 11px Inter,sans-serif;color:#8a6c4e;margin-top:18px}
+.connect .section-footer{margin-top:33px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid #d7dbd8;padding-top:18px;font-size:12px;color:#60717a}
+.connect .section-footer a{color:#6e583d;text-decoration:underline;text-underline-offset:4px}
+.connect .wizard-section{background:#0b1a27;padding:clamp(66px,7vw,104px) 0;border-top:1px solid #20313d}
+.connect .wizard-side{color:#edf0e9;position:sticky;top:35px}
+.connect .wizard-side h2{color:#f5f1e8;font-size:clamp(39px,4.4vw,65px)}
+.connect .wizard-side p{color:#aec0c6;font-size:15px}
+.connect .wizard-side .process div{border-top-color:rgba(220,200,163,.22)}
+.connect .wizard-side .process b{color:#e9e6dd;font-size:14px}
+.connect .wizard-side .process small{color:#90a5af;font-size:12px}
+.connect .panel{border-radius:12px;border-color:#d9d9ce;background:#fcfbf8;box-shadow:0 30px 65px #0002;padding:clamp(24px,3.6vw,42px)}
+.connect .steps span{border-bottom-width:2px}
+.connect .steps span.current{border-color:#b58b58}
+.connect legend{font-size:clamp(29px,3.1vw,39px);color:#162c38}
+.connect label.field{color:#203441}
+.connect input,.connect select,.connect textarea{border-radius:7px;border-color:#cfd7d8;background:#fff}
+.connect input:focus-visible,.connect select:focus-visible,.connect textarea:focus-visible{outline-color:#b39a72}
+.connect .panel .primary{background:#17384b;color:white;border-radius:7px;padding:13px 20px}
+.connect .category-guidance{background:#f2efe8;border-left:3px solid #b58b58;padding:14px 16px;margin:3px 0 18px;border-radius:0 7px 7px 0;color:#394e58}
+.connect .foot{background:#071521;color:#b2bfc5;padding:30px 0}
+.connect .foot a{color:#d6bea0}
+.connect [hidden]{display:none!important}
+@media(max-width:1040px){.connect .hero-layout{grid-template-columns:1fr;gap:36px}.connect .journey-map{width:min(100%,650px)}.connect .hero h1{max-width:850px}.connect .wizard-side{position:static}}
+@media(max-width:850px){.connect .process{grid-template-columns:1fr}.connect .grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.connect .wrap{width:calc(100% - 34px)}.connect .bar{padding:16px 0}.connect .navlinks{gap:13px}.connect .navlinks a:nth-child(2){display:none}.connect .navlinks .primary{font-size:11px;padding:10px 11px!important}.connect .hero{padding:55px 0 60px}.connect .hero h1{font-size:clamp(54px,13vw,74px)}.connect .hero .lede{font-size:15px}.connect .heroactions{gap:10px}.connect .heroactions .secondary{padding:10px 8px}.connect .grid,.connect .cols{grid-template-columns:1fr}.connect .tile{min-height:0}.connect .section-footer{flex-direction:column}.connect .journey-map{border-radius:11px}.connect .map-route{padding:18px}.connect .map-node{padding:15px}.connect .wizard-section{padding:55px 0}}
+@media(prefers-reduced-motion:reduce){.connect .tile{transition:none}}
 </style>
 </head>
 <body class="connect">
@@ -94,28 +169,42 @@ html[lang="fa"] body.connect{font-family:Tahoma,"Segoe UI",Arial,sans-serif;dire
 <div class="navlinks"><a href="/workflows/">What we build</a><a href="/investors/">For investors</a><a href="#apply" class="primary" style="padding:10px 14px;color:#fff">Share an opportunity</a></div>
 </nav></header>
 <main id="main">
-<section class="hero"><div class="wrap">
-<p class="eyebrow">People · opportunities · execution</p>
-<h1>Let's build what's next.</h1>
-<p class="lede">We're building AI-native business systems and ventures across execution, startup networks, GTM, market intelligence, and digital products. Bring a customer problem, partnership, introduction, investment opportunity, or expertise worth combining. One clear path in.</p>
-<div class="pillrow"><span class="pill">Strategic partnerships</span><span class="pill">Founders & advisors</span><span class="pill">GTM & sales</span><span class="pill">Investors</span><span class="pill">Events & awards</span></div>
-<div class="heroactions"><a class="primary" href="#apply">Share your opportunity</a><a class="secondary" href="/proof/">Explore our work</a><a class="secondary" href="/connect/?lang=fa" lang="fa" hreflang="fa">نسخه فارسی ←</a></div>
-</div></section>
+<section class="hero"><div class="wrap hero-layout"><div class="hero-copy">
+<p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span> NOETFIELD CONNECT / RELATIONSHIP INTELLIGENCE</p>
+<h1>Make the right<br><em>connection count.</em></h1>
+<p class="lede">Ideas meet infrastructure. People meet opportunity. We build intelligent business systems and ambitious ventures across AI, real-world assets and the digital economy. Share a meaningful connection, customer need or collaboration and give it a clear path forward.</p>
+<div class="pillrow"><span class="pill">Builders & specialists</span><span class="pill">Business opportunities</span><span class="pill">Investors & introductions</span><span class="pill">Ecosystem partnerships</span></div>
+<div class="heroactions"><a class="primary" href="#apply">Start a conversation <span aria-hidden="true">↗</span></a><a class="secondary" href="/proof/">Explore the work</a><a class="secondary" href="/work-with-us/">Join the network</a></div>
+<p class="hero-caveat">One entry point. A documented review path. No account or introductory booking required.</p>
+</div>
+<aside class="journey-map" aria-label="How an opportunity becomes a real outcome">
+<div class="map-head"><span>CONNECTION TO OUTCOME</span><span class="map-cross" aria-hidden="true">+</span></div>
+<div class="map-route">
+<div class="map-node"><span class="map-code">01 / INBOUND</span><strong>A meaningful signal</strong><small>LinkedIn · Referral · Customer · Community</small></div>
+<div class="map-line" aria-hidden="true"><span></span></div>
+<div class="map-node"><span class="map-code">02 / INTELLIGENCE</span><strong>Understand the opportunity</strong><small>Context · Mutual fit · Evidence · Next action</small></div>
+<div class="map-line" aria-hidden="true"><span></span></div>
+<div class="map-node"><span class="map-code">03 / EXECUTION</span><strong>Real people. Real work.</strong><small>Qualified handoff · Approved human / AI work</small></div>
+<div class="map-line" aria-hidden="true"><span></span></div>
+<div class="map-node map-node-last"><span class="map-code">04 / OUTCOME</span><strong>Evidence over activity</strong><small>Introduction · Engagement · Delivered work</small></div>
+</div>
+<div class="map-foot"><span>WORKFLOW PRINCIPLE</span><span>Proposed ≠ assigned ≠ verified</span></div>
+</aside></div></section>
 <section class="examples"><div class="wrap">
-<p class="eyebrow">One door · different paths</p><h2>Whatever brings us together.</h2>
-<p style="color:#62645d;line-height:1.7;max-width:730px">Submit directly instead of exchanging calendars and disconnected messages. Tell us what you are proposing; the right path starts from there.</p>
+<p class="eyebrow">THE RIGHT RELATIONSHIP, THE RIGHT PATH</p><h2>Opportunity is not one-size-fits-all.</h2>
+<p style="color:#62645d;line-height:1.7;max-width:730px">A customer conversation, specialist application, investor introduction and strategic partnership deserve different questions and different next steps. Choose what fits. Your details stay attached to the original submission.</p>
 <div class="grid">
-<a class="tile" href="#apply" data-choose="partnership"><span class="eyebrow">01 / Build together</span><b>Partner & integrate</b><p>Strategic alliances, technology integrations, joint projects, and venture collaboration.</p></a>
-<a class="tile" href="#apply" data-choose="growth"><span class="eyebrow">02 / Grow together</span><b>Sales, referrals & GTM</b><p>Distribution, channels, customer introductions, and revenue opportunities.</p></a>
-<a class="tile" href="#apply" data-choose="capital"><span class="eyebrow">03 / Back what's next</span><b>Investors & capital</b><p>Funding conversations, investor introductions, and startup ecosystem support.</p></a>
-<a class="tile" href="#apply" data-choose="people"><span class="eyebrow">04 / Join the mission</span><b>Founders, talent & advisors</b><p>Human collaborators, founding partners, specialists, and advisors.</p></a>
-<a class="tile" href="#apply" data-choose="events"><span class="eyebrow">05 / The ecosystem</span><b>Events, awards & media</b><p>Invitations, conferences, speaking, awards, sponsorships, and programs.</p></a>
-<a class="tile" href="#apply" data-choose="business"><span class="eyebrow">06 / Solve a problem</span><b>Customers & pilot projects</b><p>Real business problems, implementations, and initial customer opportunities.</p></a>
-</div></div></section>
+<a class="tile" href="#apply" data-choose="partnership"><span class="eyebrow">01 / SYSTEMS & VENTURES</span><b>Co-build & integrate</b><p>AI infrastructure, onchain systems, technical partnerships and jointly developed ventures.</p><span class="tile-link">Explore collaboration ↗</span></a>
+<a class="tile" href="#apply" data-choose="growth"><span class="eyebrow">02 / GO-TO-MARKET</span><b>Distribution & referrals</b><p>Real buyer introductions, sales channels, affiliate partnerships and market access.</p><span class="tile-link">Explore distribution ↗</span></a>
+<a class="tile" href="#apply" data-choose="capital"><span class="eyebrow">03 / CAPITAL & NETWORKS</span><b>Investors & connectors</b><p>Relevant capital relationships, early-stage introductions, programs and strategic access.</p><span class="tile-link">Explore capital ↗</span></a>
+<a class="tile" href="#apply" data-choose="people"><span class="eyebrow">04 / PEOPLE & AI TEAMS</span><b>Founders & contributors</b><p>Engineers, co-builders, operators, specialist agents, researchers and advisors.</p><span class="tile-link">Explore a role ↗</span></a>
+<a class="tile" href="#apply" data-choose="events"><span class="eyebrow">05 / ECOSYSTEM & RESEARCH</span><b>Programs & communities</b><p>Events, accelerators, grants, universities, research, speaking and media.</p><span class="tile-link">Explore the ecosystem ↗</span></a>
+<a class="tile" href="#apply" data-choose="business"><span class="eyebrow">06 / COMMERCIAL DELIVERY</span><b>Customers & pilots</b><p>Automation, agent-powered operations, RWA readiness and scoped implementation work.</p><span class="tile-link">Explore a pilot ↗</span></a>
+</div><div class="section-footer"><span>Human-first. AI-capable. Verified where evidence exists.</span><a href="/proof/">View technical proof ↗</a></div></div></section>
 <section class="wizard-section" id="apply"><div class="wrap wizard-grid">
 <div class="wizard-side">
-<p class="eyebrow">Noetfield Connect / Opportunity intake</p><h2>One introduction can open a much bigger door.</h2>
-<p>Share the relevant details once. We'll review the proposal and, where there's a fit, suggest a concrete next step.</p>
+<p class="eyebrow">DIRECT / STRUCTURED INTAKE</p><h2>One clear introduction. A concrete next step.</h2>
+<p>Tell us who you are, what you can offer and what you need. We retain source context and review proposals against the relevant team or venture. No speculative meeting promises.</p>
 <div class="process">
 <div><b>01 — Tell us the intent</b><small>What kind of opportunity is this, and which initiative is relevant?</small></div>
 <div><b>02 — Describe the value</b><small>Share links, economics, commitments, and the action you propose.</small></div>
@@ -193,6 +282,7 @@ html[lang="fa"] body.connect{font-family:Tahoma,"Segoe UI",Arial,sans-serif;dire
 </div>
 <label class="field" id="termsLabel">Commercial terms, fees or commitments, if any
 <textarea name="terms" maxlength="1200" style="min-height:79px" placeholder="Costs, commissions, referral terms, funding size, selection criteria, or none"></textarea></label>
+<p class="hint category-guidance" id="routeGuidance" aria-live="polite">Explain the intended value, scope, next milestone and what evidence is available.</p>
 <p class="hint" id="eventHint" hidden>For conference or award offers, include the organizer, selection process, speaking or award terms, and total participation cost.</p>
 <div class="actions"><button class="back" type="button" data-back>Back</button><button class="primary" type="button" data-next>Continue</button></div>
 </fieldset>
@@ -228,7 +318,7 @@ var submissionId="RID-CNX-"+(window.crypto&&window.crypto.randomUUID?window.cryp
 function val(n){var el=form.elements.namedItem(n);return el ? String(el.value||"").trim():"";}
 function show(n){step=Math.min(2,Math.max(0,n));panels.forEach(function(p,i){p.hidden=i!==step;});
 for(var i=0;i<3;i++){var el=document.getElementById("s"+i);el.className=i===step?"current":i<step?"done":""}
-status.hidden=true; if(step===1){document.getElementById("eventHint").hidden=val("intent")!=="events";}}
+status.hidden=true; if(step===1)updateGuidance();}
 function validCurrent(){var elements=Array.prototype.slice.call(panels[step].querySelectorAll("input,select,textarea"));
 for(var i=0;i<elements.length;i++){if(!elements[i].checkValidity()){elements[i].reportValidity();return false}}return true;}
 form.querySelectorAll("[data-next]").forEach(function(b){b.addEventListener("click",function(){if(validCurrent())show(step+1)})});
@@ -236,79 +326,24 @@ form.querySelectorAll("[data-back]").forEach(function(b){b.addEventListener("cli
 form.elements.namedItem("intent").addEventListener("change",function(){document.getElementById("eventHint").hidden=val("intent")!=="events"});
 document.querySelectorAll("[data-choose]").forEach(function(tile){tile.addEventListener("click",function(){form.elements.namedItem("intent").value=tile.getAttribute("data-choose");show(0)})});
 var u=new URLSearchParams(location.search);var pre=u.get("type")||u.get("intent");if(choices.indexOf(pre)>=0)form.elements.namedItem("intent").value=pre;
+var guidance={
+partnership:"Describe the technical or commercial integration, decision makers, what each side contributes, and the first scoped deliverable.",
+growth:"Include actual distribution channels, relevant buyer access, referral economics and a measurable first milestone.",
+capital:"Explain your investment role, stage or mandate, target size, terms and what introduction or diligence step you propose.",
+people:"Share your demonstrable skills, portfolio or agent capability, availability, preferred role and the kind of work you want to own.",
+events:"Identify the organizer, selection criteria, participation fees, deadlines, attendees and the concrete value to both sides.",
+business:"Describe the customer problem, current workflow, decision maker, budget range (if known) and a realistic paid pilot scope.",
+other:"Explain the relationship context, potential mutual value, evidence and proposed first step."
+};
+function updateGuidance(){
+var category=val("intent"),hint=document.getElementById("routeGuidance");
+if(hint)hint.textContent=guidance[category]||"Explain the intended value, scope, next milestone and what evidence is available.";
+document.getElementById("eventHint").hidden=category!=="events";
+}
+updateGuidance();
+form.elements.namedItem("intent").addEventListener("change",updateGuidance);
 
-var isFa=(u.get("lang")||"").toLowerCase()==="fa";
-function faText(selector,value){var el=document.querySelector(selector);if(el)el.textContent=value}
-function translateFa(){
-document.documentElement.lang="fa";document.documentElement.dir="rtl";
-document.title="ارتباط‌ها و فرصت‌های استارتاپی | Noetfield Connect";
-faText(".navlinks a:nth-child(1)","چه چیزی می‌سازیم");
-faText(".navlinks a:nth-child(2)","سرمایه‌گذاران");
-faText(".navlinks a:nth-child(3)","ثبت فرصت");
-faText(".hero .eyebrow","افراد · فرصت‌ها · اجرای واقعی");
-faText(".hero h1","از یک ارتباط، فرصت واقعی بسازیم.");
-faText(".hero .lede","Noetfield و کسب‌وکارهای مستقل مرتبط، سیستم‌های هوشمند و محصولات واقعی می‌سازند. نیاز مشتری، معرفی، همکاری، پیشنهاد سرمایه‌گذاری یا مهارت خود را از یک درگاه واحد ثبت کنید.");
-var badges=["شراکت راهبردی","هم‌بنیان‌گذار و مشاور","رشد و فروش","سرمایه‌گذاران","رویدادها و برنامه‌ها"];
-document.querySelectorAll(".pillrow .pill").forEach(function(el,i){if(badges[i])el.textContent=badges[i]});
-faText(".heroactions a.primary","فرصت خود را ثبت کنید");
-faText(".heroactions a[href='/proof/']","نمونه کارها و شواهد");
-var language=document.querySelector('.heroactions a[lang="fa"]');
-if(language){language.textContent="English version →";language.lang="en";language.hreflang="en";language.href="/connect/?lang=en"}
-faText(".examples .eyebrow","یک درگاه · مسیرهای متفاوت");
-faText(".examples h2","برای هر نوع همکاری، یک مسیر مشخص.");
-faText(".examples > .wrap > p:not(.eyebrow)","به‌جای گم شدن میان پیام‌ها و تقویم‌ها، پیشنهاد خود را یک‌بار ثبت کنید. درخواست در پایگاه داده اصلی ذخیره و برای بررسی مسئول مربوطه مسیر‌یابی می‌شود.");
-var tiles=[
- ["همکاری فنی و تجاری","شراکت، ادغام فناوری و ساخت مشترک"],
- ["فروش، معرفی و رشد","توزیع، مشتری، ارجاع و فرصت درآمدی"],
- ["سرمایه و سرمایه‌گذاری","سرمایه‌گذار، معرفی و تأمین مالی"],
- ["استعداد و مشاوران","هم‌بنیان‌گذار، متخصص و تیم انسانی یا AI"],
- ["اکوسیستم و رویدادها","برنامه‌ها، گرنت، رسانه، همایش و جایزه"],
- ["مشتری و پایلوت","مسئله واقعی، اجرای پروژه و فرصت تجاری"]
-];
-document.querySelectorAll(".tile").forEach(function(el,i){if(tiles[i]){el.querySelector("b").textContent=tiles[i][0];el.querySelector("p").textContent=tiles[i][1]}});
-faText(".wizard-side .eyebrow","Noetfield Connect / ثبت فرصت");
-faText(".wizard-side h2","یک معرفی می‌تواند به همکاری بزرگی تبدیل شود.");
-faText(".wizard-side > p:not(.eyebrow)","جزئیات را یک‌بار وارد کنید؛ ما آن را بررسی می‌کنیم و در صورت وجود تناسب، اقدام بعدی مشخص خواهد شد.");
-var steps=[["۱ — نوع فرصت","هدف و زمینه ارتباط را مشخص کنید."],
-["۲ — پیشنهاد و ارزش","مدارک، شرایط، تعهدات و اقدام پیشنهادی را شرح دهید."],
-["۳ — راه ارتباطی","درخواست ثبت و برای بررسی مسئول مربوطه آماده می‌شود."]];
-document.querySelectorAll(".process div").forEach(function(el,i){if(steps[i]){el.querySelector("b").textContent=steps[i][0];el.querySelector("small").textContent=steps[i][1]}});
-faText(".wizard-side p[style]","برای ثبت درخواست به حساب کاربری یا رزرو جلسه نیاز نیست. تنها اطلاعات غیرمحرمانه ارسال کنید.");
-["۱ / نوع فرصت","۲ / پیشنهاد","۳ / ارتباط"].forEach(function(label,i){faText("#s"+i,label)});
-document.querySelectorAll("fieldset legend").forEach(function(el,i){el.textContent=["چه نوع فرصتی دارید؟","جزئیات فرصت چیست؟","چگونه با شما ارتباط بگیریم؟"][i]});
-var labelTexts={
- intent:"نوع فرصت",initiative:"پروژه یا حوزه مرتبط",participantRole:"نقش شما در این فرصت",
- title:"عنوان کوتاه پیشنهاد",description:"موضوع و شرح دقیق",offering:"چه چیزی ارائه می‌دهید؟ (اختیاری)",
- requesting:"از ما چه می‌خواهید؟ (اختیاری)",url:"لینک وب‌سایت یا پیشنهاد",
- deadline:"ضرب‌الاجل (در صورت وجود)",terms:"شرایط مالی، کمیسیون یا تعهدات (اختیاری)",
- name:"نام و نام خانوادگی",email:"ایمیل",org:"شرکت یا مجموعه",nextStep:"اقدام بعدی مورد انتظار"
-};
-form.querySelectorAll("label.field").forEach(function(label){
-var el=label.querySelector("input,select,textarea");if(!el)return;
-var key=el.name;if(!labelTexts[key])return;
-if(key==="contactConsent")return;
-var old=label.firstChild;if(old&&old.nodeType===3)old.textContent=labelTexts[key]+"\n";
-});
-var selectText={
-intent:{partnership:"شراکت راهبردی / ادغام فناوری",growth:"فروش، توزیع، کمیسیون یا معرفی",capital:"سرمایه‌گذاری و تأمین مالی",people:"هم‌بنیان‌گذار، متخصص یا مشاور",events:"رویداد، گرنت، رسانه یا جایزه",business:"مشتری، پایلوت یا اجرا",other:"سایر فرصت‌ها"},
-initiative:{portfolio:"چند پروژه یا فرصت مشترک",noetfield:"Noetfield / سیستم‌های هوشمند",workforce:"WorkforceOS / تیم انسانی و AI",sourcea:"SourceA / اجرای تحت کنترل",outboundos:"OutboundOS / عملیات فروش",buildworkflow:"BuildWorkflow / ساخت‌وساز",buildrelay:"BuildRelay / شبکه مستقل استارتاپی",signalforge:"SignalForge / تحلیل بازار",earnloop:"Earnloop / پاداش دیجیتال",misenorth:"MiseNorth / رستوران",interiormatch:"InteriorMatch / طراحی داخلی",trustfield:"TrustField / فعالیت مستقل در مرحله تأسیس",other:"پروژه دیگر / هنوز مشخص نیست"},
-participantRole:{founder:"بنیان‌گذار یا هم‌بنیان‌گذار",customer:"مشتری",partner:"شریک تجاری",investor:"سرمایه‌گذار یا معرفی‌کننده",advisor:"مشاور یا متخصص",human_contributor:"همکار انسانی",ai_operator:"عامل AI یا ارائه‌دهنده ابزار",organizer:"برگزارکننده رویداد یا برنامه",other:"سایر یا چند نقش"},
-nextStep:{async:"بررسی غیرهمزمان پیشنهاد",meeting:"بررسی امکان جلسه پس از ارزیابی",intro:"بررسی معرفی مناسب",collaborate:"بررسی همکاری یا عضویت در تیم"}
-};
-Object.keys(selectText).forEach(function(name){var sel=form.elements.namedItem(name);if(!sel)return;Array.from(sel.options).forEach(function(o){if(selectText[name][o.value])o.textContent=selectText[name][o.value]})});
-var optgroups=form.querySelectorAll('select[name="initiative"] optgroup');
-["سیستم‌های هوشمند و کسب‌وکار","رشد، بازار و محصولات دیجیتال","سایر و پروژه‌های مستقل"].forEach(function(v,i){if(optgroups[i])optgroups[i].label=v});
-faText(".wizard-section .hint","پروژه‌های مستقل از نظر مالکیت، داده و اجرا جدا می‌مانند؛ ثبت درخواست مجوز انتقال خودکار اطلاعات نیست.");
-faText("#eventHint","برای برنامه‌ها و جوایز، برگزارکننده، معیارهای انتخاب، هزینه و تاریخ‌ها را شرح دهید.");
-faText(".confirm","این فرم به معنی پذیرش شراکت، قرارداد، سرمایه‌گذاری، رزرو جلسه یا استخدام نیست. نتیجه و تعهد فقط با تأیید معتبر ثبت می‌شود.");
-var consent=form.elements.namedItem("contactConsent");if(consent&&consent.parentNode){
-var link=consent.parentNode.querySelector("a");consent.parentNode.childNodes.forEach(function(n){if(n.nodeType===3)n.textContent=" موافقم Noetfield فقط درباره همین پیشنهاد با من تماس بگیرد؛ انتقال به پروژه مستقل یا معرفی به شخص ثالث نیازمند اجازه جداگانه است. "});if(link)link.textContent="حریم خصوصی";
-}
-form.querySelectorAll("[data-next]").forEach(function(el){el.textContent="ادامه"});
-form.querySelectorAll("[data-back]").forEach(function(el){el.textContent="بازگشت"});
-faText("#submitBtn","ثبت پرونده فرصت");
-}
-if(isFa)translateFa();
+
 
 function safeTag(v){return /^[a-z0-9_.-]{1,50}$/i.test(v||"")?v:"unspecified";}
 form.addEventListener("submit",function(ev){
