@@ -53,6 +53,11 @@ from noetfield_governance.connect_due_worker import (
     stop_scheduler as stop_connect_due_scheduler,
     get_worker as get_connect_due_worker,
 )
+from noetfield_governance.connect_bridge_reconciler import (
+    start_scheduler as start_connect_bridge_reconciler,
+    stop_scheduler as stop_connect_bridge_reconciler,
+    get_worker as get_connect_bridge_reconciler,
+)
 from noetfield_governance.connect_relationship import project_relationship
 from noetfield_governance.intake_notify import (
     intake_email_configured,
@@ -447,6 +452,7 @@ async def startup_platform() -> None:
     )
     await start_signal_triage_scheduler(settings)
     await start_connect_due_scheduler(settings)
+    await start_connect_bridge_reconciler(settings)
     # Always wire a store (Postgres in prod; in-memory for staging/tests).
     app.state.pilot_key_store = pilot_key_store
     connect = getattr(pilot_key_store, "connect", None)
@@ -459,6 +465,7 @@ async def shutdown_runtime() -> None:
     await stop_gmail_sweep_scheduler()
     await stop_signal_triage_scheduler()
     await stop_connect_due_scheduler()
+    await stop_connect_bridge_reconciler()
     await intake_repository.close_intake_repository()
     await close_community_pool()
     await redis_runtime.close()
@@ -1838,6 +1845,18 @@ async def connect_workforce_operator_handoff(
             "operator_owner_recorded": True,
             "agent_executed": False, "independently_verified_by_platform": False}
 
+
+
+@app.get("/api/opportunities/desk/workforce/delivery-health",
+         tags=["operations"],include_in_schema=False)
+async def workforce_delivery_health(request: Request) -> dict[str, object]:
+    """Operator-only durable delivery status, without applicant PII."""
+    _require_connect_desk_operator(request)
+    worker = get_connect_bridge_reconciler()
+    if worker is None:
+        return {"configured": False, "state": "NOT_CONFIGURED",
+                "acknowledged": 0, "retrying": 0}
+    return await worker.status()
 
 
 @app.get("/api/opportunities/desk/followup/health",
