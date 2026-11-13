@@ -33,7 +33,7 @@ try:
             if width<1070:
                 page.locator(".nf-q-menu").click()
                 assert page.locator(".nf-corp-nav").get_attribute("data-open")=="true"
-                assert page.locator(".nf-corp-nav a[href='/connect/']").count()>0
+                assert page.locator(".cc-hero-ctas a[href='/connect/']").count()>0
                 page.keyboard.press("Escape")
             hrefs=page.locator("#command-capabilities a.cc-card").evaluate_all("xs => xs.map(x=>x.getAttribute('href'))")
             assert response.status==200,response.status
