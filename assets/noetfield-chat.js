@@ -2,13 +2,22 @@
 (function () {
   "use strict";
 
-  var QUICK_PROMPTS = [
-    "What does Noetfield do for my business?",
-    "I want a Diagnostic Sprint — what's involved?",
-    "We're evaluating vendors",
-    "Investor diligence materials",
-    "Is this channel confidential?",
-  ];
+  var IS_ONCHAIN = /^\/onchain(?:\/|$)/.test(window.location.pathname || "");
+  var QUICK_PROMPTS = IS_ONCHAIN
+    ? [
+        "How can Noetfield help scope an RWA private-credit project?",
+        "What can you build for stablecoin business operations?",
+        "Show me the policy-to-code and agent control demos.",
+        "How do I join the founding community and token research updates?",
+        "I have a technical integration project to scope."
+      ]
+    : [
+        "What does Noetfield do for my business?",
+        "I want a Diagnostic Sprint — what's involved?",
+        "We're evaluating vendors",
+        "Investor diligence materials",
+        "Is this channel confidential?"
+      ];
 
   function apiBase() {
     var host = window.location.hostname;
@@ -62,6 +71,9 @@
 
   var CITATION_LABELS = {
     "/pricing/": "Pricing",
+    "/onchain/": "Onchain infrastructure",
+    "/onchain/whitepaper/": "Onchain ecosystem paper",
+    "/onchain/capabilities.json": "Onchain capability manifest",
     "/intelligence/intake/": "Diagnostic Sprint",
     "/gel/": "GEL overview",
     "/copilot/pilot/": "Copilot Governance Pack",
@@ -73,6 +85,12 @@
   };
 
   function widgetGreetingPayload() {
+    if (IS_ONCHAIN) {
+      return {
+        greeting: "Welcome to Noetfield Onchain. Ask about RWA readiness, policy engineering, stablecoin workflows, or technical delivery. Our project intake is available whenever you're ready.",
+        citations: ["/onchain/", "/onchain/whitepaper/"]
+      };
+    }
     var ssot = window.NF_CHAT_GREETING_SSOT || {};
     var greeting = String(ssot.greeting || "").trim();
     var citations = Array.isArray(ssot.citations) ? ssot.citations : [];
@@ -272,7 +290,9 @@
 
     var note = el("div", "nfChatNote");
     note.textContent =
-      "Institutional Q&A from public product sources. Not legal advice. Engagements: operations@noetfield.com";
+      IS_ONCHAIN
+        ? "Onchain Q&A from first-party public information. Technical scoping is a separate engagement. Contact: operations@noetfield.com"
+        : "Institutional Q&A from public product sources. Not legal advice. Engagements: operations@noetfield.com";
 
     var form = el("form", "nfChatForm");
     var input = document.createElement("input");
