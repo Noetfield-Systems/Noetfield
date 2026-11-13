@@ -167,3 +167,19 @@ body.nf-corp.nf-home .cc-path:focus-visible,body.nf-corp.nf-home .cc-evidence-im
   body.nf-corp.nf-home .cc-path{transition:none}
   body.nf-corp.nf-home .cc-path:hover{transform:none}
 }
+
+
+/* Mobile regression correction: preserve the Command Center's in-flow canvas.
+   The original scene is position:relative on phones, so an added top offset
+   pushes it beyond the first viewport. Use natural flow, not a faux min-height. */
+@media(max-width:700px){
+ body.nf-corp.nf-home .nf-cc-hero .cc-universe{min-height:0;display:flex;flex-direction:column;align-items:stretch}
+ body.nf-corp.nf-home .cc-scene{
+   position:relative;inset:auto;top:auto;right:auto;
+   width:calc(100% + 44px);height:300px;flex:none;margin:0 -22px 0;
+ }
+}
+@media(max-width:420px){
+ body.nf-corp.nf-home .nf-cc-hero .cc-universe{min-height:0}
+ body.nf-corp.nf-home .cc-scene{top:auto;position:relative;height:270px}
+}
