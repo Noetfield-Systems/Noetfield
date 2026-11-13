@@ -1313,6 +1313,68 @@ async def intake_health() -> dict[str, object]:
     }
 
 
+class ConnectParticipantStatusRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    request_id: str = Field(min_length=20,max_length=64,pattern=r"^RID-CNX-[A-Za-z0-9_-]{12,}$")
+    email: str = Field(min_length=5,max_length=254)
+
+
+class ConnectParticipantFeedbackRequest(ConnectParticipantStatusRequest):
+    rating: int = Field(ge=1,le=5)
+    message: str = Field(min_length=5,max_length=1200)
+    feedback_id: str = Field(min_length=16,max_length=64,pattern=r"^[A-Za-z0-9_-]{16,64}$")
+
+
+def _validate_connect_participant_email(email: str) -> str:
+    candidate = email.strip().lower()
+    if not re.fullmatch(r"[^@\s]{1,64}@[^@\s]{1,190}\.[^@\s]{2,}",candidate):
+        raise HTTPException(status_code=422,detail="INVALID_EMAIL")
+    return candidate
+
+
+async def _connect_participant_limit(request: Request, action: str) -> None:
+    if redis_runtime.is_enabled():
+        host = request.client.host if request.client else "unknown"
+        try:
+            await redis_runtime.check_rate_limit(
+                "connect-participant:" + action + ":" + host,
+                max_calls=25 if action == "status" else 10,window_sec=3600,
+            )
+        except PermissionError as exc:
+            raise HTTPException(status_code=429,detail="RATE_LIMITED") from exc
+
+
+@app.post("/api/connect/participant/status", tags=["opportunities"],include_in_schema=False)
+async def connect_participant_status(
+    body: ConnectParticipantStatusRequest,request: Request,
+) -> dict[str, object]:
+    await _connect_participant_limit(request,"status")
+    row = await intake_repository.public_connect_participant_status(
+        request_id=body.request_id,email=_validate_connect_participant_email(body.email)
+    )
+    if row is None:
+        raise HTTPException(status_code=404,detail="CASE_NOT_FOUND")
+    return row
+
+
+@app.post("/api/connect/participant/feedback", tags=["opportunities"],include_in_schema=False)
+async def connect_participant_feedback(
+    body: ConnectParticipantFeedbackRequest,request: Request,
+) -> dict[str, object]:
+    await _connect_participant_limit(request,"feedback")
+    try:
+        row = await intake_repository.append_public_connect_feedback(
+            request_id=body.request_id,email=_validate_connect_participant_email(body.email),
+            rating=body.rating,message=body.message,feedback_id=body.feedback_id,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+    if row is None:
+        raise HTTPException(status_code=404,detail="CASE_NOT_FOUND")
+    return row
+
+
 @app.get("/api/intake/status", tags=["intake"])
 async def intake_status(request_id: str) -> dict[str, object]:
     if not settings.public_intake_enabled:

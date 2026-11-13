@@ -8,6 +8,9 @@ on:
       - 'contact/**'
       - 'governance/www-public-artifact-v1.json'
       - 'scripts/test-connect-static.cjs'
+      - 'scripts/test-connect-v3.cjs'
+      - 'assets/noetfield-connect-v3.*'
+      - 'api/connect/participant/**'
       - '.github/workflows/nf-connect-smoke.yml'
   push:
     branches: [main]
@@ -32,4 +35,7 @@ jobs:
         with:
           node-version: '22'
       - name: Verify Noetfield Connect route and submission wiring
-        run: node scripts/test-connect-static.cjs
+        run: |
+          node --check assets/noetfield-connect-v3.js
+          node scripts/test-connect-static.cjs
+          node scripts/test-connect-v3.cjs

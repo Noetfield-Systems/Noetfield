@@ -1,0 +1,35 @@
+/* Additive Connect v3, retains the canonical midnight navy / champagne design */
+.connect .tile.is-featured{border-color:#bd9b73;background:#fcf8ef}
+.connect .tile.is-featured:before{background:linear-gradient(90deg,#c2a47b,#f5eddb)}
+.connect .route-qualifiers{background:#f8f5ed!important;border-color:#dcd1bf!important}
+.connect .route-qualifiers h3{color:#83613c!important}
+.connect .result-panel{background:#f5f0e4!important;border-color:#cbb996!important}
+.connect .track-box{grid-column:1/-1;width:100%;max-width:850px;margin-left:auto;margin-right:0;background:#f9f8f3!important;border-color:#d6cdbc!important}
+.connect .track-box .primary,.connect .feedback-box .primary{background:#14364b!important;color:#fff}
+.connect .route-qualifiers{border:1px solid #d8e5d9;background:#f7faf6;padding:21px 20px 10px;border-radius:9px;margin:0 0 23px}
+.connect .route-qualifiers h3{margin:0 0 16px;font-size:14px;letter-spacing:-.015em;font-weight:660;color:#315c40}
+.connect .route-qualifiers .field{margin-bottom:15px}
+.connect .route-qualifiers .micro{font-size:11px;color:#657e6b;line-height:1.6}
+.connect .result-panel{margin-top:20px;padding:24px;background:#edf6ed;border:1px solid #a8c6ac;border-radius:10px}
+.connect .result-panel h3{font-size:18px;letter-spacing:-.035em;margin:7px 0 10px}
+.connect .result-panel p{font-size:12px;color:#506f5a;line-height:1.7}
+.connect .result-row{display:flex;justify-content:space-between;align-items:start;gap:20px;font-size:12px;padding:12px 0;border-top:1px solid #c6d9c9;overflow-wrap:anywhere}
+.connect .result-row b{font-weight:650;max-width:65%;text-align:end}
+.connect .result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+.connect .result-actions button{border:1px solid #80ad8b;border-radius:7px;padding:11px 14px;background:#fff;color:#335b3d;font-size:12px;font-weight:600;cursor:pointer}
+.connect .track-box{background:#f9faf7;border:1px solid #d8e4d8;border-radius:12px;margin-top:27px;padding:23px}
+.connect .track-box h3{font-size:18px;margin:6px 0 8px;letter-spacing:-.03em;font-weight:600}
+.connect .track-box p{font-size:12px;line-height:1.65;color:#63746a}
+.connect .track-box .field{font-size:12px}
+.connect .track-box .primary{font-size:12px;min-height:44px}
+.connect .track-output{font-size:12px;line-height:1.7;color:#345d40;white-space:pre-wrap;margin-top:13px;overflow-wrap:anywhere}
+.connect .feedback-box{border-top:1px solid #cbdaca;margin-top:24px;padding-top:21px}
+.connect .feedback-box textarea{min-height:80px}
+.connect .feedback-box .primary{min-height:43px;font-size:12px}
+.connect .journey-consent{display:flex;align-items:start;gap:11px;color:#657a68;font-size:12px;line-height:1.6;margin:15px 0}
+.connect .journey-consent input{flex:0 0 17px;width:17px;min-height:17px;height:17px;margin-top:3px;accent-color:#739d78}
+.connect .case-steps{display:grid;gap:8px;margin:17px 0}
+.connect .case-step{border-left:2px solid #9eb6a4;padding:8px 0 8px 17px;font-size:12px;color:#627b67}
+.connect .case-step strong{font-weight:650;color:#263f30;display:block}
+
+@media(max-width:620px){.connect .track-box{max-width:100%;margin:0}.connect .route-qualifiers{padding:16px}.connect .result-panel{padding:17px}}
