@@ -259,7 +259,7 @@ function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&
 function text(id,value){$(id).textContent=String(value)}
 function date(v){if(!v)return"—";const d=new Date(v);return isNaN(+d)?String(v):d.toLocaleString("en-CA",{dateStyle:"medium",timeStyle:"short"})}
 const stageLabels={NEW:"New",QUALIFYING:"Qualifying",ROUTED:"Routed",ENGAGED:"Engaged",NEGOTIATING:"Negotiating",PILOT:"Pilot",WON:"Won (requires proof)",LOST:"Lost",ARCHIVED:"Archived"};
-const todayLocal=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"America/Vancouver",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+const todayLocal=()=>new Intl.DateTimeFormat("sv-SE",{timeZone:"America/Vancouver",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 const matchState=x=>(x.interactions||[]).some(a=>a.kind==="matching_proposed")?"suggested":"none";
 function collabState(x){const inv=x.invitations||[];if(inv.some(i=>/declin|reject/i.test(String(i.state||""))))return"declined";if(inv.some(i=>/accept|interest/i.test(String(i.state||""))))return"interested";return inv.length?"prepared":"none"}
 const conversionVerified=x=>x.verification_status==="VERIFIED"&&Boolean(x.outcome);
@@ -320,6 +320,7 @@ const selected=state.rows.find(x=>x.intake_id===state.selected);
 $("detail").className=selected?"":"empty";
 $("detail").innerHTML=selected?renderDetail(selected):"Select a case to inspect evidence and record a next action.";
 if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));$("outcome-form").addEventListener("submit",e=>reportOutcome(e,selected));if($("sync-workforce")){$("sync-workforce").addEventListener("click",()=>syncWorkforce(selected));$("read-workforce").addEventListener("click",()=>readWorkforce(selected));$("handoff-workforce").addEventListener("submit",e=>submitWorkforceHandoff(e,selected));}}
+applyPrivateLocale($("workspace"));
 }
 function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class="item-head"><h2>'+safe(x.title||"Opportunity")+'</h2><span class="pill">'+safe(stageLabels[x.stage]||x.stage)+'</span></div><p class="small">'+safe(x.intake_id)+' · Received '+safe(date(x.received_at))+' · Revision '+safe(x.revision)+'</p>'+
 '<div class="detail-grid">'+[['Contact',x.person],['Email',x.email],['Organization',x.organization],['Source',x.source],['Initiative',x.initiative],['Opportunity type',x.opportunity_label],['Deadline',x.deadline],['Priority',x.priority_score+" / 100"]].map(([a,b])=>'<div class="detail-value"><b>'+safe(a.toUpperCase())+'</b>'+safe(b||"—")+'</div>').join("")+'</div>'+
