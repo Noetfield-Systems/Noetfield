@@ -2395,6 +2395,6 @@ async def _mailbox_bridge_boot_probe() -> None:
         bound = await asyncio.to_thread(
             probe_mailbox_read_access, mailbox=mailbox, password=password
         )
-        logger.info("mailbox_bridge_imap_probe=%s", "CONNECTED" if bound else "NOT_CONNECTED")
+        logging.getLogger("uvicorn.error").info("mailbox_bridge_imap_probe=%s", "CONNECTED" if bound else "NOT_CONNECTED")
     except Exception:
         logger.warning("mailbox_bridge_imap_probe=ERROR")
