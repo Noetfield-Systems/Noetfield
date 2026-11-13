@@ -16,7 +16,7 @@ Do not reclassify a private operator interface as a public corporate marketing p
 
 ## 3. Independent non-English outreach satellites are permitted
 
-A separately hosted Persian-language Noetfield Connect outreach/landing site is permitted and can link **to the canonical English site** (`https://www.noetfield.com/connect/`). Its language and audience may differ from the public corporate site.
+A **separately registered and hosted domain** for the Persian-speaking community is optional. It may serve Persian-only **or bilingual Persian/English** experiences (including Connect or community outreach) and may link **to the canonical English site** (`https://www.noetfield.com/connect/`). It is an independent audience-specific satellite, not a localized version or alternate-language entry point of the authoritative Noetfield corporate website. Its existence must not alter the primary international brand, English-only corporate release, or the site's language controls. Build and promote this satellite only when it serves a concrete Persian-speaking audience need; **no launch requirement, default promotion, extra infrastructure, or pressure to market it** is implied.
 
 **One-way relationship:**
 
@@ -38,7 +38,7 @@ No new scheduler, governance service or language-switching framework is needed. 
 | --- | --- | --- | --- |
 | `www.noetfield.com` public pages | **Never** | Native page | **Never** to any non-English Noetfield version |
 | Private authenticated Founder Desk | **Allowed** | Allowed | Not a public language-switch target |
-| Independent Persian Connect satellite | **Allowed** | **Allowed** | **Forbidden** |
+| Independently hosted Persian community satellite (Persian-only or bilingual) | **Allowed** | **Allowed** | **Forbidden** |
 | Independent, separately owned ventures | Venture-specific | Case-by-case | No implied subsidiary or data ownership |
 
 **Conflict rule:** The stricter English-only public rule applies to the corporate website. The private/satellite exceptions must not be deleted or overridden by a blanket company-wide English-only interpretation.
