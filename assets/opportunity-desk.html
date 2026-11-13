@@ -444,6 +444,7 @@ async function loadGraph(intakeId){
     $("relationship-graph").innerHTML='<b>'+safe(graph.opportunity_count)+' source-recorded opportunities · '+safe(graph.ventures.join(", "))+'</b><p class="small">Exact voluntarily submitted email matches only. This is not a verified CRM identity merge or consent to share independent venture data.</p>'+
       '<ol class="history">'+opportunities.map(n=>'<li>'+safe(n.venture)+' · '+safe(n.kind)+' · '+safe(n.label)+' · '+safe(n.stage)+'</li>').join("")+'</ol>'+
       '<div class="section-label">RELATIONSHIP TIMELINE</div><ol class="history">'+graph.timeline.slice(0,35).map(e=>'<li>'+safe(date(e.at))+' · '+safe(e.kind)+' · '+safe(e.detail)+'</li>').join("")+'</ol>';
+    applyPrivateLocale($("relationship-graph"));
   }catch(err){if($("relationship-graph"))$("relationship-graph").textContent="Relationship history unavailable: "+err.message}
 }
 async function reportOutcome(ev,x){
