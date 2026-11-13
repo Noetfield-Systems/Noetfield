@@ -1,0 +1,21 @@
+name: Noetfield reference art transfer check
+on:
+  push:
+    branches: [fix/noetfield-image-fidelity-v2]
+    paths: [".github/workflows/nf-art-transfer-check.yml"]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe asset CDN full resolution
+        env:
+          SRC: 'https://media.canva.com/v2/image-resize/format:PNG/height:112/quality:100/uri:ifs%3A%2F%2FM%2Ff348df0e-ce63-4647-b55e-c5bd810a6080/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAABIhtkSV56Bf6-qvDoJ0diHFBRiXmixGYRR3MnKiP6EH&exp=1794569228&osig=AAAAAAAAAAAAAAAAAAAAALEQ6LLhYreZ8ARQNlh3Y5jzda5NbpiR-FAu_fOIBwBb&signer=media-rpc&token=AAIAAU0AJGYzNDhkZjBlLWNlNjMtNDY0Ny1iNTVlLWM1YmQ4MTBhNjA4MAAAAAABodSpTuAMnSAzYNf1DRJbmwcRo48LFkc-U887ExbyAHgRqs3-5A&x-canva-quality=thumbnail'
+        shell: bash
+        run: |
+          set -u
+          echo "Reference image transfer: original thumb"
+          curl -LfsS --max-time 25 "$SRC" -o /tmp/thumb.png && file /tmp/thumb.png || echo "thumbnail unavailable"
+          URL="${SRC/height:112/height:941}"
+          URL="${URL/width:200/width:1672}"
+          echo "Reference image transfer: full resolution"
+          curl -LfsS --max-time 25 "$URL" -o /tmp/full.png && file /tmp/full.png || echo "full-size unavailable"
