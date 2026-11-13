@@ -193,7 +193,7 @@ $("results").querySelectorAll("[data-id]").forEach(el=>el.addEventListener("clic
 const selected=state.rows.find(x=>x.intake_id===state.selected);
 $("detail").className=selected?"":"empty";
 $("detail").innerHTML=selected?renderDetail(selected):"Select a case to inspect evidence and record a next action.";
-if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));if($("sync-workforce")){$("sync-workforce").addEventListener("click",()=>syncWorkforce(selected));$("read-workforce").addEventListener("click",()=>readWorkforce(selected));$("handoff-workforce").addEventListener("submit",e=>submitWorkforceHandoff(e,selected));}}
+if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));$("outcome-form").addEventListener("submit",e=>reportOutcome(e,selected));if($("sync-workforce")){$("sync-workforce").addEventListener("click",()=>syncWorkforce(selected));$("read-workforce").addEventListener("click",()=>readWorkforce(selected));$("handoff-workforce").addEventListener("submit",e=>submitWorkforceHandoff(e,selected));}}
 }
 function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class="item-head"><h2>'+safe(x.title||"Opportunity")+'</h2><span class="pill">'+safe(stageLabels[x.stage]||x.stage)+'</span></div><p class="small">'+safe(x.intake_id)+' · Received '+safe(date(x.received_at))+' · Revision '+safe(x.revision)+'</p>'+
 '<div class="detail-grid">'+[['Contact',x.person],['Email',x.email],['Organization',x.organization],['Source',x.source],['Initiative',x.initiative],['Opportunity type',x.opportunity_label],['Deadline',x.deadline],['Priority',x.priority_score+" / 100"]].map(([a,b])=>'<div class="detail-value"><b>'+safe(a.toUpperCase())+'</b>'+safe(b||"—")+'</div>').join("")+'</div>'+
@@ -238,6 +238,13 @@ function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class=
 '<label>Evidence URL (optional)<input type="url" name="evidence_url" placeholder="https://source.example/receipt"></label>'+
 '<label class="full">Actual observation or proposed next step<textarea name="body" required minlength="3" maxlength="2200" rows="3" placeholder="Describe what happened, or label your draft as proposed. No fake send, booking or collected cash."></textarea></label>'+
 '<button class="primary" type="submit">Record actual activity</button><span class="small" id="activity-status" role="status"></span></form>'+
+'<div class="section-label">ACTUAL OUTCOME · EVIDENCE REQUIRED</div>'+
+'<p class="small">Record a real outcome with a source URL. This is operator-reported, NOT independently verified, and never counts as cash collected.</p>'+
+(x.reported_outcome?'<div class="proposal">Latest reported result: '+safe(x.reported_outcome.type)+' · '+safe(x.reported_outcome.evidence_level)+' · '+safe(date(x.reported_outcome.reported_at))+' · '+safe(x.reported_outcome.note)+'</div>':'')+
+'<form id="outcome-form" class="form-grid"><label>Outcome<select name="outcome_type">'+["meeting","introduction","trial","pilot","contract","work_delivered","declined","other"].map(a=>'<option value="'+a+'">'+a.replaceAll("_"," ")+'</option>').join("")+'</select></label>'+
+'<label>HTTPS evidence source<input type="url" name="evidence_url" required placeholder="https://..."></label>'+
+'<label class="full">Operator report<textarea name="note" required minlength="10" maxlength="1200" rows="3" placeholder="What actually happened? Include the source and relevant date."></textarea></label>'+
+'<button class="primary" type="submit">Record reported outcome</button><span class="small" id="outcome-status" role="status"></span></form>'+
 '<div class="section-label">SCOPED INVITATION · PREPARED, NOT SENT</div>'+
 '<form id="invitation-form" class="form-grid"><label>Scope<select name="scope">'+
 ["introduction","collaboration","trial","specialist_review","partner"].map(a=>'<option value="'+a+'">'+a.replaceAll("_"," ")+'</option>').join("")+'</select></label>'+
@@ -307,6 +314,24 @@ async function loadGraph(intakeId){
       '<ol class="history">'+opportunities.map(n=>'<li>'+safe(n.venture)+' · '+safe(n.kind)+' · '+safe(n.label)+' · '+safe(n.stage)+'</li>').join("")+'</ol>'+
       '<div class="section-label">RELATIONSHIP TIMELINE</div><ol class="history">'+graph.timeline.slice(0,35).map(e=>'<li>'+safe(date(e.at))+' · '+safe(e.kind)+' · '+safe(e.detail)+'</li>').join("")+'</ol>';
   }catch(err){if($("relationship-graph"))$("relationship-graph").textContent="Relationship history unavailable: "+err.message}
+}
+async function reportOutcome(ev,x){
+ ev.preventDefault();if(state.busy)return;state.busy=true;
+ const fd=new FormData(ev.currentTarget);
+ const payload={expected_revision:Number(x.revision||0),
+   request_id:"outcome_"+crypto.randomUUID().replaceAll("-",""),
+   outcome_type:String(fd.get("outcome_type")),
+   evidence_url:String(fd.get("evidence_url")||"").trim(),
+   note:String(fd.get("note")||"").trim()};
+ text("outcome-status","Saving operator-reported evidence…");
+ try{
+   const result=await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id)+"/outcomes","POST",payload);
+   await load();
+   if(state.selected===x.intake_id&&$("outcome-status")){
+     text("outcome-status",result.persisted?"Recorded in canonical source. Not independently verified.":"Not confirmed.");
+   }
+ }catch(err){text("outcome-status",err.message+"; refresh source revision.");}
+ finally{state.busy=false;}
 }
 async function submitActivity(ev,x){
   ev.preventDefault();if(state.busy)return;state.busy=true;

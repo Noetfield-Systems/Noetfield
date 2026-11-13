@@ -165,6 +165,42 @@ def test_real_postgres_invitation_acceptance_and_revision_conflicts():
             assert len(state["invitations"])==1
             assert len(state["interactions"])==1
             assert "token_hash" in state["invitations"][0]  # server-side only; projection redacts
+            # Real Postgres outcome report is evidence-backed and replay-safe,
+            # but deliberately cannot create an independent verification receipt.
+            outcome_rid="outcome_ci_" + uuid.uuid4().hex
+            with pytest.raises(ValueError,match="CONNECT_OUTCOME_EVIDENCE_REQUIRED"):
+                await store.record_connect_outcome(
+                    intake_id=case,expected_revision=4,request_id=outcome_rid,
+                    outcome_type="trial",evidence_url="http://not-secure.invalid",
+                    note="A documented trial began with an assigned operator",
+                )
+            reported=await store.record_connect_outcome(
+                intake_id=case,expected_revision=4,request_id=outcome_rid,
+                outcome_type="trial",
+                evidence_url="https://example.invalid/trial/receipt",
+                note="A trial was reported from the referenced evidence",
+            )
+            assert reported["created"] is True
+            assert reported["revision"] == 5
+            assert reported["reported_outcome"]["independently_verified"] is False
+            assert reported["reported_outcome"]["cash_collected"] is None
+            replay=await store.record_connect_outcome(
+                intake_id=case,expected_revision=4,request_id=outcome_rid,
+                outcome_type="trial",
+                evidence_url="https://example.invalid/trial/receipt",
+                note="A trial was reported from the referenced evidence",
+            )
+            assert replay["created"] is False
+            assert replay["revision"] == 5
+            with pytest.raises(ValueError,match="OPPORTUNITY_VERSION_CONFLICT"):
+                await store.record_connect_outcome(
+                    intake_id=case,expected_revision=4,
+                    request_id="outcome_retry_"+uuid.uuid4().hex,
+                    outcome_type="meeting",
+                    evidence_url="https://example.invalid/another-receipt",
+                    note="A meeting took place according to the operator",
+                )
+
         finally:
             await store.close()
     asyncio.run(run())

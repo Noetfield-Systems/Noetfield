@@ -256,6 +256,10 @@ async def append_public_connect_feedback(**kwargs: Any) -> dict[str, Any] | None
     return await (await _connect_postgres()).append_public_connect_feedback(**kwargs)
 
 
+async def record_connect_outcome(**kwargs: Any) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).record_connect_outcome(**kwargs)
+
+
 def intake_status_payload(record: IntakeRecord | dict[str, Any]) -> dict[str, object]:
     if isinstance(record, IntakeRecord):
         data = {

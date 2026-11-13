@@ -192,6 +192,49 @@ def test_workforce_handoff_requires_saved_operator_decision_and_verified_remote_
         governance_api.settings.admin_dashboard_secret = original
     asyncio.run(run())
 
+
+
+def test_operator_outcome_requires_auth_origin_and_never_verifies_cash():
+    async def run():
+        previous = governance_api.settings.admin_dashboard_secret
+        governance_api.settings.admin_dashboard_secret = SecretStr("report-outcome-test")
+        try:
+            with patch("noetfield_governance.intake_repository.record_connect_outcome",
+                       new_callable=AsyncMock) as saved:
+                saved.return_value = {
+                    "created": True, "revision": 3,
+                    "reported_outcome": {
+                        "type": "trial",
+                        "evidence_url": "https://example.invalid/receipt",
+                        "independently_verified": False, "cash_collected": None,
+                    },
+                }
+                payload = {
+                    "expected_revision": 2, "request_id": "outcome_api_test_0000001",
+                    "outcome_type": "trial", "evidence_url": "https://example.invalid/receipt",
+                    "note": "A limited test trial was reported by the owner.",
+                }
+                path = "/api/opportunities/desk/INT-ABCDEF123456/outcomes"
+                async with AsyncClient(transport=ASGITransport(app=app),
+                                       base_url="http://test") as client:
+                    unauth = await client.post(path, json=payload)
+                    assert unauth.status_code == 403
+                    no_origin = await client.post(path, json=payload,
+                                                  headers={"X-Admin-Secret": "report-outcome-test"})
+                    assert no_origin.status_code == 403
+                    actual = await client.post(path, json=payload,
+                        headers={"X-Admin-Secret": "report-outcome-test",
+                                 "Origin": "http://test"})
+                    assert actual.status_code == 200, actual.text
+                    assert actual.json()["persisted"] is True
+                    assert actual.json()["independently_verified"] is False
+                    assert actual.json()["collected_cash_verified"] is False
+                    saved.assert_awaited_once()
+        finally:
+            governance_api.settings.admin_dashboard_secret = previous
+    asyncio.run(run())
+
+
 def test_public_ui_shell_contains_no_private_records_or_keys():
     async def run():
         async with AsyncClient(transport=ASGITransport(app=app),

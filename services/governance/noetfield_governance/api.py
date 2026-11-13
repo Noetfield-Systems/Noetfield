@@ -1965,6 +1965,45 @@ async def connect_record_activity(
     }
 
 
+class ConnectOutcomeReport(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    expected_revision: int = Field(ge=0, le=1000000)
+    request_id: str = Field(min_length=16, max_length=100,
+                            pattern=r"^[A-Za-z0-9_-]{16,100}$")
+    outcome_type: Literal["meeting", "introduction", "trial", "pilot",
+                          "contract", "work_delivered", "declined", "other"]
+    evidence_url: str = Field(min_length=12, max_length=700)
+    note: str = Field(min_length=10, max_length=1200)
+
+
+@app.post("/api/opportunities/desk/{intake_id}/outcomes",
+          tags=["operations"], include_in_schema=False)
+async def connect_report_outcome(
+    intake_id: str, body: ConnectOutcomeReport, request: Request,
+) -> dict[str, object]:
+    """A recorded observation with source evidence, never a verified receipt."""
+    _require_connect_desk_operator(request)
+    check_connect_desk_origin(request)
+    if not re.fullmatch(r"INT-[A-Za-z0-9-]{6,80}", intake_id):
+        raise HTTPException(422, "INVALID_INTAKE_ID")
+    try:
+        result = await intake_repository.record_connect_outcome(
+            intake_id=intake_id, expected_revision=body.expected_revision,
+            request_id=body.request_id, outcome_type=body.outcome_type,
+            evidence_url=body.evidence_url, note=body.note,
+        )
+    except ValueError as exc:
+        raise _connect_change_error(exc) from exc
+    except RuntimeError as exc:
+        raise HTTPException(503, str(exc)) from exc
+    if result is None:
+        raise HTTPException(404, "OPPORTUNITY_NOT_FOUND")
+    return {"persisted": True, "source_intake_id": intake_id, **result,
+            "independently_verified": False,
+            "collected_cash_verified": False,
+            "company_os_execution_verified": False}
+
+
 class ConnectInvitationRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     expected_revision: int = Field(ge=0, le=1000000)
