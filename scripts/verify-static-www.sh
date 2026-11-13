@@ -38,7 +38,7 @@ check_absent() {
 
 # NOETFIELD_DOMAIN_CANONICAL_V2 protected corporate surfaces.
 check_file "protected corporate homepage" index.html \
-  '<title>Noetfield Systems Inc. | AI Workflow and App Platform</title>' \
+  '<title>Noetfield Systems | Agentic Business Infrastructure & RWA</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp nf-home">' '<main id="main">' \
   '/assets/noetfield-corporate-v1.css?v=5' \
