@@ -87,7 +87,7 @@ INVESTOR_CONTACT_TOPICS = ("program-funding", "technical-collaboration")
 INVESTOR_DISCLOSURES = (
     "external customers",
     "revenue are not established",
-    "regulated-operations and compliance product vertical",
+    "independent venture in formation",
 )
 
 
