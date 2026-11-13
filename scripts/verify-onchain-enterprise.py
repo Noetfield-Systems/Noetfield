@@ -45,6 +45,13 @@ def main() -> int:
                           .filter(x=>x.right>innerWidth+5).sort((a,b)=>b.right-a.right).slice(0,6)""")
                         raise AssertionError(f"Horizontal overflow {overflow}px: {culprits}")
                     assert page.locator("h1").count() == 1, "exactly one H1 required"
+                    # Capture the actual visitor's first fold before opening menus
+                    # or scrolling to FAQs, proofs and interactive controls.
+                    if width in (390, 1440):
+                        page.wait_for_load_state("load", timeout=12000)
+                        label = route.strip("/").replace("/", "-") or "home"
+                        page.screenshot(path=str(OUT / f"{label}-{width}.png"),
+                                        animations="disabled", timeout=15000)
                     if route in ("/onchain/rwa/", "/onchain/policy/",
                                  "/onchain/stablecoin/", "/onchain/agents/"):
                         key = route.split("/")[-2]
@@ -90,10 +97,6 @@ def main() -> int:
                         assert page.locator(".toc a").count() >= 10
                     if page_errors:
                         raise AssertionError(f"JS page errors: {page_errors[:3]}")
-                    if width in (390, 1440):
-                        label = route.strip("/").replace("/", "-") or "home"
-                        page.screenshot(path=str(OUT / f"{label}-{width}.png"),
-                                        animations="disabled", timeout=15000)
                     result["result"] = "PASS"
                 except Exception as exc:
                     result["result"] = "FAIL"
