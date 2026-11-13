@@ -237,11 +237,12 @@ check_file "pilot landing page" copilot/pilot/index.html \
   'Digital trust lane' 'Governance gaps' 'Buyer voices' 'Policy-bound workflows' \
   'noetfield-intake-core.js' 'nfPilotApplyStatus'
 
-check_file "work with us program" work-with-us/index.html \
-  'noetfield-www.css?v=42' 'Work with Noetfield' 'Connector' 'Facilitator' \
-  'Co-partner' 'Apply to work with us' 'nfPartnerApplyForm' 'Apply → enable → earn' \
-  'noetfield-intake-core.js' 'nfPartnerApplyStatus' 'Investor' '/investors/' \
-  'nf-wwu-investor-spotlight' 'nf-wwu-lane-pill' 'noetfield-work-with-us.js'
+check_file "corporate collaboration with real shared intake" work-with-us/index.html \
+  'noetfield-www.css?v=42' 'Work With Noetfield' 'nfCorporateCollaborationForm' \
+  'Founder or cofounder' 'Human specialist' 'AI agent with responsible operator' \
+  'Commercial client' 'Investor or ecosystem contributor' 'nfCorporateCollaborationStatus' \
+  'noetfield-intake-core.js' 'noetfield-collaboration-entry.js' '/company-os/' \
+  'name="consent"' 'Send proposal'
 
 check_file "pilot intake page" trust-brief/intake/index.html \
   'noetfield-intake-pilot-mode.js' 'intakeHeroPilot' 'Copilot Governance Pack' \
@@ -267,11 +268,13 @@ check_file "msp end-client buyer block" msp/index.html \
 check_file "status intake health" status/index.html \
   'data-intake-health-host' 'noetfield-intake-status.js' 'Intake delivery' '/next/'
 
-check_file "header institutional nav" assets/partials/header.html \
-  'href="/"' '/copilot/' '/templates/' '/trust/' '/federal/' '/msp/' '/copilot/demo/' 'Apply for pilot'
+check_file "header corporate three-world nav" assets/partials/header.html \
+  'href="/"' '/work-with-us/' '/company-os/' '/onchain/' '/proof/' '/developers/' \
+  '/investors/' '/governance/' 'Start a Request'
 
-check_file "footer enterprise nav" assets/partials/footer.html \
-  '/investors/' '/next/' 'Diligence vault' 'Copilot Governance Pack'
+check_file "footer three-world nav" assets/partials/footer.html \
+  '/investors/' '/corporate.json' 'Build a Business' 'Transform Operations' \
+  'Bring Value Onchain' 'TrustField · independent venture'
 
 check_file "templates catalog page" templates/index.html \
   'copilot-governance-v1' 'bank-pilot-v1' 'Trust Brief' \
@@ -289,8 +292,8 @@ check_file "federal lane page" federal/index.html \
 check_file "partner banner embed" banner/index.html \
   'noindex,nofollow' 'REQUIRE_HUMAN_REVIEW' 'Illustrative — no fabricated hash' 'copilot-governance-v1'
 
-check_file "header pilot CTA" assets/partials/header.html \
-  'Apply for pilot' '/trust-brief/intake/?interest=pilot'
+check_file "header commercial CTA" assets/partials/header.html \
+  'Start a Request' 'href="/connect/"'
 
 check_file "next steps hub" next/index.html \
   'next-buyer' 'next-investor' 'next-partner' 'next-ops' \
@@ -317,8 +320,8 @@ check_file "www intake serverless" api/intake.js \
 check_file "global form wiring asset" assets/noetfield-forms.js \
   'data-nf-intake-form' 'nfSandboxForm' 'NFIntakeCore'
 
-check_file "footer pilot-first" assets/partials/footer.html \
-  'Apply for pilot ($2k–10k)' 'Copilot Governance Pack' 'tamper-evident'
+check_file "footer evidence-first" assets/partials/footer.html \
+  'Start a Request' 'Inspect Proof' 'Corporate manifest'
 
 check_file "trust center diligence theme" trust/index.html \
   'nf-corp' 'Trust begins with explicit boundaries.' 'Execution containment' \
