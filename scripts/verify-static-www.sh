@@ -67,7 +67,7 @@ check_file "protected corporate homepage" index.html \
   '/assets/noetfield-home-v2.css'
 check_file "verification commercial intake is real and scoped" assurance/index.html \
   'Request a Verification Pilot' '/connect/?type=business&amp;initiative=noetfield&amp;offer=verification-pilot&amp;source=assurance' \
-  'portable, third-party Acceptance Gateway API/SDK' 'No external interoperability or independent security certification is claimed'
+  'portable, third-party Acceptance Gateway API/SDK' 'no external interoperability or independent security certification is claimed'
 check_file "customer offer links are safely routed" assets/noetfield-connect-v3.js \
   '"verification-pilot"' '"software-build"' '"rwa-sprint"' 'sourceContext.value="Offered service: "'
 check_file "corporate software-project conversion" index.html \
