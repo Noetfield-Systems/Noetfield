@@ -1,0 +1,40 @@
+/* Noetfield OS — final institutional visual layer; additive to v7, preserves existing forms. */
+.v5-brand{letter-spacing:.11em}.nf-brand-os{font-style:normal;font-weight:600;color:#c2fdb7;letter-spacing:.02em}
+.v5-brand small{font-family:"DM Mono",monospace;font-size:8px;font-weight:500;letter-spacing:.02em;color:#afd2b7}
+.v5-header{border-bottom:1px solid rgba(181,238,190,.35);background:rgba(2,17,15,.94)}
+.v5-nav{min-height:70px}.v5-nav nav{gap:clamp(12px,1.4vw,25px)}.v5-nav nav a{font-size:12px;font-weight:600}
+.nf-nav-solutions{position:relative;z-index:15}.nf-nav-solutions summary{font-size:12px;font-weight:600;cursor:pointer;color:#e9f4eb;list-style:none;display:inline-flex;gap:6px;align-items:center;min-height:42px}.nf-nav-solutions summary::-webkit-details-marker{display:none}
+.nf-nav-solutions summary span{color:#c5f7c6;font-size:14px}.nf-nav-solutions summary:hover,.nf-nav-solutions[open] summary{color:#baf8b1}
+.nf-nav-submenu{position:absolute;top:calc(100% + 8px);left:-23px;width:263px;padding:10px;background:linear-gradient(145deg,rgba(12,55,43,.99),rgba(3,24,23,.99));box-shadow:0 17px 50px rgba(0,0,0,.45),0 0 30px rgba(89,242,144,.1);border:1px solid rgba(183,247,190,.48);border-radius:11px;backdrop-filter:blur(22px);display:grid;gap:3px}
+.v5-nav nav .nf-nav-submenu a{font-size:12px;padding:12px 11px;border-radius:6px;color:#dcf1df}
+.v5-nav nav .nf-nav-submenu a:hover{background:rgba(143,238,163,.13);color:#bfffba}
+.v5-campus{filter:brightness(1.14) contrast(1.11) saturate(1.13);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.92) 12%,black 24%,black 100%);object-position:52% 49%}
+.v5-hero-overlay{background:linear-gradient(90deg,#02100e 0%,rgba(2,16,15,.97) 21%,rgba(2,16,15,.71) 38%,rgba(1,15,14,.04) 58%,rgba(1,10,10,.09) 79%,rgba(1,10,10,.24) 100%),linear-gradient(180deg,rgba(2,14,13,.03),transparent 78%,rgba(1,15,15,.52))}
+.v5-hero{background:radial-gradient(ellipse at 58% 25%,rgba(35,128,70,.16),transparent 60%),#02120f}
+.v5-hero h1{letter-spacing:-.06em;text-shadow:0 4px 36px rgba(0,0,0,.6)}
+.v5-hero h1 em{color:#bffdbf}
+.v5-lead{color:#e6f0e5;text-shadow:0 2px 22px #00110c}
+.v5-hero-services{background:linear-gradient(145deg,rgba(12,57,44,.91),rgba(2,25,23,.9));border:1px solid rgba(196,249,198,.52);border-radius:14px;box-shadow:0 22px 58px rgba(0,10,9,.44),inset 0 0 27px rgba(125,255,160,.07);backdrop-filter:blur(18px)}
+.v5-hero-services .v7-service-top{font-size:10px;letter-spacing:.12em;padding-bottom:13px;color:#e2f9dc}
+.v5-hero-services a{min-height:55px;transition:background .2s,border-color .2s}.v5-hero-services a:hover{background:rgba(133,253,173,.08);border-color:#c0fbbf}
+.v5-hero-services a strong{font-size:12px;font-weight:650;letter-spacing:0}.v5-hero-services a span{color:#c5ffbc}
+.v5-hero-features strong{font-size:11px}.v5-hero-features small{font-size:10px;color:#d2e5d2}
+.v5-network{background:linear-gradient(95deg,#05221e,#0e382b 52%,#051e19);border-color:rgba(178,247,191,.35)}
+.v5-platform{background:radial-gradient(ellipse at 48% 72%,rgba(19,115,69,.23),transparent 60%),#051e19}
+.v5-platform-copy h2{font-size:clamp(37px,2.7vw,49px)}
+.v5-solutions-summary a{background:linear-gradient(120deg,rgba(23,76,53,.79),rgba(3,28,24,.91));border-color:rgba(171,245,187,.37);box-shadow:0 10px 20px rgba(0,0,0,.12),inset 0 0 21px rgba(52,176,97,.09)}
+.v5-solutions-summary a:hover{background:linear-gradient(120deg,rgba(33,113,67,.88),rgba(7,52,38,.93))}
+.v5-solutions-summary a strong{font-size:13px}.v5-solutions-summary a small{color:#bad5c0;font-size:10px}
+.v5-journey-grid>a{border-color:rgba(174,239,191,.43);background:linear-gradient(145deg,rgba(10,59,41,.76),rgba(3,25,24,.9));box-shadow:0 11px 35px rgba(0,0,0,.21)}
+.v5-journey-grid>a:hover{border-color:#b8fbb3;box-shadow:0 12px 35px rgba(96,230,133,.15)}
+.v7-community-band{border-block:1px solid rgba(174,247,185,.24)}
+.v5-ecosystem-vision,.v5-community,.v5-token,.v5-agent,.v5-roadmap,.v5-paper{scroll-margin-top:84px}
+.v5-hero-caption{font-size:9px;letter-spacing:.075em;color:#dcf2d4;text-shadow:0 2px 13px #02100d}
+@media(max-width:1140px){.v5-nav nav{gap:0}.nf-nav-solutions{width:100%}.nf-nav-solutions summary{width:100%;font-size:14px;padding:9px 5px}.nf-nav-submenu{position:static;width:auto;left:auto;top:auto;box-shadow:none;backdrop-filter:none;margin-top:3px}.v5-nav nav .nf-nav-submenu a{font-size:13px}.v5-campus{filter:brightness(1.1) contrast(1.07) saturate(1.09)}}
+@media(max-width:900px){.v5-campus{object-position:center top;mask-image:linear-gradient(180deg,transparent,rgba(0,0,0,.52) 12%,#000 43%,rgba(0,0,0,.16) 100%)}.v5-hero-overlay{background:linear-gradient(180deg,rgba(2,17,14,.93) 0%,rgba(1,12,12,.86) 31%,rgba(2,12,12,.22) 69%,rgba(1,15,14,.76) 100%)}.v5-hero-services a strong{font-size:11px}.v5-hero h1{font-size:clamp(45px,8.8vw,67px)}}
+@media(max-width:460px){.v5-brand{font-size:15px;letter-spacing:.04em}.v5-hero h1{font-size:clamp(43px,11.1vw,52px)}.v5-hero-services a strong{font-size:10px}.v5-hero-features small{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.v5-journey-grid>a,.v5-solutions-summary a,.v5-hero-services a{transition:none!important}}
+
+/* Expanded service footer must wrap instead of stretching 390px mobile layout. */
+.footerrow{min-width:0}.footlinks{flex-wrap:wrap;max-width:100%;row-gap:9px;min-width:0}
+@media(max-width:600px){.footlinks{gap:9px 17px;justify-content:flex-start}.footerrow>div{min-width:0}}

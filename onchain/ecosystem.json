@@ -1,7 +1,7 @@
 {
   "schema": "noetfield-onchain-ecosystem-v0.1",
   "version": "0.2.0",
-  "updated_at": "2026-11-12",
+  "updated_at": "2026-11-13",
   "operator": "Noetfield Systems Inc.",
   "homepage": "https://www.noetfield.com/onchain/",
   "whitepaper": "https://www.noetfield.com/onchain/whitepaper/",
@@ -140,5 +140,35 @@
     "swap": "Disabled until independently deployed contract and funded liquidity on Base",
     "treasury": "Not configured",
     "liquidity_pool": "Not configured"
-  }
+  },
+  "service_pages": [
+    {
+      "id": "rwa",
+      "name": "RWA & Private Credit",
+      "url": "https://www.noetfield.com/onchain/rwa/",
+      "status": "scoped",
+      "entry": "https://www.noetfield.com/onchain/?solution=rwa#project"
+    },
+    {
+      "id": "policy",
+      "name": "Policy-to-Code",
+      "url": "https://www.noetfield.com/onchain/policy/",
+      "status": "scoped",
+      "entry": "https://www.noetfield.com/onchain/?solution=policy#project"
+    },
+    {
+      "id": "stablecoin",
+      "name": "Stablecoin Operations",
+      "url": "https://www.noetfield.com/onchain/stablecoin/",
+      "status": "scoped",
+      "entry": "https://www.noetfield.com/onchain/?solution=stablecoin#project"
+    },
+    {
+      "id": "agents",
+      "name": "Agent Infrastructure",
+      "url": "https://www.noetfield.com/onchain/agents/",
+      "status": "scoped",
+      "entry": "https://www.noetfield.com/onchain/?solution=agents#project"
+    }
+  ]
 }

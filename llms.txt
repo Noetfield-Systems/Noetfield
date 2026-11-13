@@ -35,3 +35,12 @@
 - [TrustField](https://www.noetfield.com/applications/trustfield/)
 - [Sitemap](https://www.noetfield.com/sitemap.xml)
 - [robots.txt](https://www.noetfield.com/robots.txt)
+
+## Noetfield OS — real-to-onchain engineering pages
+- [Noetfield OS Onchain](https://www.noetfield.com/onchain/): primary service and sales entrance.
+- [RWA & Private Credit](https://www.noetfield.com/onchain/rwa/): readiness, rights and servicing workflows.
+- [Policy-to-Code](https://www.noetfield.com/onchain/policy/): executable rules and agent authority.
+- [Stablecoin Operations](https://www.noetfield.com/onchain/stablecoin/): provider-integrated approvals and reconciliation.
+- [Agent Infrastructure](https://www.noetfield.com/onchain/agents/): bounded AI execution and verification.
+- [Noetfield Network Hub](https://www.noetfield.com/onchain/hub/): signed-wallet Season 0 and server-recorded XP.
+- [Onchain Ecosystem Paper](https://www.noetfield.com/onchain/whitepaper/): v0.2 research, token boundaries and technical architecture.

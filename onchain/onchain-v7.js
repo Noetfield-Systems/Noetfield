@@ -24,6 +24,24 @@
       }, { passive: true });
       page.addEventListener("pointerleave", () => { art.style.translate = "0 0"; }, { passive: true });
     }
+    // Deep-linked engineering service enquiries reuse the canonical real intake.
+    const solutionKey = new URLSearchParams(window.location.search).get("solution");
+    const servicePresets = {
+      rwa: { topic: "rwa-private-credit", note: "I would like to scope a real-world asset or private-credit workflow, including readiness gates and integration acceptance." },
+      policy: { topic: "policy-to-code", note: "I would like a policy-to-code implementation with explicit authority, review gates and verification receipts." },
+      stablecoin: { topic: "stablecoin-operations", note: "I would like to scope approval, provider integration and settlement reconciliation for a real treasury workflow." },
+      agents: { topic: "agent-authorization", note: "I would like bounded AI agent execution with policy authorization, human confirmations and independent verification." }
+    };
+    if (solutionKey && Object.prototype.hasOwnProperty.call(servicePresets, solutionKey)) {
+      const preset = servicePresets[solutionKey];
+      const form = document.getElementById("nfOnchainIntake");
+      if (form) {
+        const topic = form.querySelector('[name="topic"]');
+        const notes = form.querySelector('[name="notes"]');
+        if (topic && topic.querySelector('option[value="' + preset.topic + '"]')) topic.value = preset.topic;
+        if (notes && !notes.value.trim()) { notes.value = preset.note; notes.dataset.onchainAutofill = preset.note; }
+      }
+    }
     // Real commercial conversion: prefill existing project-intake from use cases.
     const caseSpecs = [
       { topic: "rwa-private-credit", note: "I'd like to scope a real-world asset tokenization/readiness workflow with an issuer operating model and integration plan." },

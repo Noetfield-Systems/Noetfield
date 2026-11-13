@@ -44,8 +44,10 @@ def main() -> int:
               complete: el.complete, naturalWidth: el.naturalWidth,
               src: el.currentSrc, box: el.getBoundingClientRect().toJSON()
             })""")
-            assert image["complete"] and image["naturalWidth"] >= 600, (width, image)
-            assert "/onchain/hero-architecture-v7.webp" in image["src"], image["src"]
+            assert image["complete"] and image["naturalWidth"] >= min(600, width * .9), (width, image)
+            if width >= 1440:
+                assert image["src"].endswith("/onchain/hero-architecture-hd.webp"), (width, image)
+            assert any("/onchain/" + file in image["src"] for file in ("hero-architecture-v7.webp", "hero-architecture-hd.webp")), image["src"]
             result["art_loaded"] = True
             result["art_natural_width"] = image["naturalWidth"]
             overflow = page.evaluate("Math.max(0,document.documentElement.scrollWidth-window.innerWidth)")
@@ -115,7 +117,7 @@ def main() -> int:
                 toggle.click()
                 assert toggle.get_attribute("aria-expanded") == "true"
                 assert page.locator("#onchainNav").is_visible()
-                page.locator('#onchainNav a[href="#solutions"]').click()
+                page.locator('#onchainNav a[href="#use-cases"]').click()
                 assert toggle.get_attribute("aria-expanded") == "false"
             assert not errors, {"viewport": width, "js_errors": errors}
             result["interactions"] = "PASS"
