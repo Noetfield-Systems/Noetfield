@@ -59,14 +59,11 @@ def test_governance_page_states_copilot_positioning() -> None:
     assert "tamper-evident" in text
 
 
-def test_product_lane_header_retains_intelligence_navigation() -> None:
-    # This shared header remains a product-lane contract; corporate nf-corp
-    # pages use their standalone shell and are not defined by this ordering.
+def test_corporate_header_uses_three_worlds_and_preserves_specializations() -> None:
     text = (ROOT / "assets" / "partials" / "header.html").read_text(encoding="utf-8")
-    assert 'href="/intelligence/">Intelligence</a>' in text
-    assert text.index("Intelligence") < text.index("Copilot Pack")
-    assert "/intelligence/intake/" in text
-    assert "Book Diagnostic" in text
+    for route in ("/work-with-us/", "/company-os/", "/onchain/", "/governance/", "/investors/"):
+        assert route in text
+    assert "Start a Request" in text
 
 
 def test_public_www_has_no_design_partner_language() -> None:
@@ -215,20 +212,14 @@ def test_next_steps_hub_page() -> None:
 
 def test_work_with_us_program_page() -> None:
     text = (ROOT / "work-with-us" / "index.html").read_text(encoding="utf-8")
-    assert "Work with Noetfield" in text
-    assert "Connector" in text
-    assert "Facilitator" in text
-    assert "Co-partner" in text
-    assert "Investor" in text
-    assert "nfPartnerApplyForm" in text
-    assert "interest=partner" in text
-    assert "vector=work-with-us" in text
-    assert "role=investor" in text
-    assert "/investors/" in text
-    assert "nf-page-work-with-us" in text
-    assert "nf-wwu-investor-spotlight" in text
-    assert "nf-wwu-lane-pill" in text
-    assert "noetfield-work-with-us.js" in text
+    for marker in (
+        "Work With Noetfield", "Founder or cofounder", "Human specialist",
+        "AI agent with responsible operator", "Commercial client",
+        "Investor or ecosystem contributor", "nfCorporateCollaborationForm",
+        "nfCorporateCollaborationStatus", 'name="consent"',
+        "/investors/", "noetfield-collaboration-entry.js", "noetfield-intake-core.js",
+    ):
+        assert marker in text
 
 
 def test_async_intake_core_wired_on_apply_forms() -> None:
@@ -237,11 +228,11 @@ def test_async_intake_core_wired_on_apply_forms() -> None:
     assert "work-with-us" in core
     pilot = (ROOT / "copilot" / "pilot" / "index.html").read_text(encoding="utf-8")
     partner = (ROOT / "work-with-us" / "index.html").read_text(encoding="utf-8")
-    for text, status_id in ((pilot, "nfPilotApplyStatus"), (partner, "nfPartnerApplyStatus")):
+    for text, status_id in ((pilot, "nfPilotApplyStatus"), (partner, "nfCorporateCollaborationStatus")):
         assert "noetfield-intake-core.js" in text
         assert status_id in text
     pilot_js = (ROOT / "assets" / "noetfield-pilot-intake.js").read_text(encoding="utf-8")
-    partner_js = (ROOT / "assets" / "noetfield-partner-apply.js").read_text(encoding="utf-8")
+    partner_js = (ROOT / "assets" / "noetfield-collaboration-entry.js").read_text(encoding="utf-8")
     assert "NFIntakeCore.submitAsync" in pilot_js
     assert "NFIntakeCore.submitAsync" in partner_js
     assert "location.href" not in pilot_js
@@ -327,12 +318,11 @@ def test_offerings_strip_partial_exists() -> None:
     assert "Copilot" in text
 
 
-def test_footer_partial_intelligence_primary() -> None:
+def test_footer_partial_corporate_navigation() -> None:
     text = (ROOT / "assets" / "partials" / "footer.html").read_text(encoding="utf-8")
-    assert "Book Diagnostic" in text
-    assert "/intelligence/intake/" in text
-    assert "Governance hub" in text
-    assert "Copilot Governance Pack" in text
+    for marker in ("Build a Business", "Transform Operations", "Bring Value Onchain",
+                   "Corporate manifest", "Independent", "/proof/", "/investors/"):
+        assert marker in text
 
 
 def test_intelligence_diagnostic_intake_page() -> None:
