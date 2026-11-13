@@ -28,14 +28,13 @@ CLIENT_ZERO_LABEL = "Open the live alpha"
 GITHUB_URL = "https://github.com/Noetfield-Systems/Noetfield"
 TRUSTFIELD_URL = "https://trustfield.ca/"
 TRUSTFIELD_BOUNDARY_LINE = (
-    "TrustField is Noetfield Systems Inc.'s regulated-operations and compliance "
-    "product vertical. It applies Noetfield's governed execution infrastructure to "
-    "consequential financial and compliance workflows while preserving human "
-    "decision authority. Current public demonstrations use synthetic data and do "
-    "not provide custody, settlement, payment initiation, automatic regulatory "
-    "filing, certification, or final regulatory decisions."
+    "TrustField is an independent venture in formation, supported by "
+    "Noetfield Systems Inc. on technical setup; it is not a Noetfield "
+    "subsidiary or internal product. Its demonstration uses synthetic "
+    "regulated-workflow data and does not establish custody, settlement, "
+    "licensing, regulatory filings or external customer adoption."
 )
-TRUSTFIELD_SHORT = "Noetfield product"
+TRUSTFIELD_SHORT = "Independent venture"
 
 
 def corp_head(
