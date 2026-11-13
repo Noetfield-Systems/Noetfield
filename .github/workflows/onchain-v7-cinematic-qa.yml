@@ -22,7 +22,7 @@ jobs:
           python-version: "3.12"
       - name: Install real Chromium for responsive visual checks
         run: |
-          python -m pip install --disable-pip-version-check "playwright==1.65.1"
+          python -m pip install --disable-pip-version-check "playwright==1.65.1" "pillow>=11,<13"
           python -m playwright install --with-deps chromium
       - name: Start preview server for checked out source
         run: |
@@ -37,6 +37,7 @@ jobs:
       - name: Evaluate real visual render and E2E first-fold interactions at 4 viewports
         env:
           ONCHAIN_URL: http://127.0.0.1:8765/onchain/
+          ONCHAIN_EMIT_PREVIEW: "1"
         run: python scripts/verify-onchain-v7-visual.py
       - uses: actions/upload-artifact@v4
         if: always()
