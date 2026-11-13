@@ -30,10 +30,13 @@ def main() -> int:
             page.wait_for_timeout(250)
             assert page.locator("h1").count() == 1
             assert "From real-world value" in page.locator("h1").inner_text()
+            hero_font = page.locator("h1").evaluate("(el)=>getComputedStyle(el).fontFamily")
+            assert "Newsreader" in hero_font, (width, hero_font)
             assert page.locator(".v5-hero-services a").count() == 4
             assert page.locator(".v5-solutions-summary a").count() == 4
             assert page.locator(".v5-journey-grid > a").count() == 3
             assert page.locator(".v7-community-band a[href='/onchain/hub/']").count() == 1
+            assert page.locator(".v8-network-entry[href='/onchain/hub/']").count() == 1
             assert page.locator("form#nfOnchainIntake[data-nf-intake-form]").count() == 1
             assert page.locator("form#nfOnchainCommunity[data-nf-intake-form]").count() == 1
             art = page.locator(".v5-campus")
@@ -93,6 +96,19 @@ def main() -> int:
             case.click(timeout=10000)
             assert page.locator('#nfOnchainIntake select[name="topic"]').input_value() == "rwa-private-credit"
             assert "asset tokenization" in page.locator('#nfOnchainIntake textarea[name="notes"]').input_value()
+            # Switching example scopes should replace only earlier automatic text.
+            second = page.locator(".v5-journey-grid > a").nth(1)
+            second.click(timeout=10000)
+            notes = page.locator('#nfOnchainIntake textarea[name="notes"]')
+            assert "private-credit servicing" in notes.input_value()
+            notes.fill("My own scoped workflow notes")
+            page.locator(".v5-journey-grid > a").nth(2).click(timeout=10000)
+            assert notes.input_value() == "My own scoped workflow notes"
+            # The selected infrastructure layer must reveal substantive context,
+            # not just highlight the card.
+            policy.click(timeout=10000)
+            assert page.locator("#v6LayerCopy").is_visible()
+            assert len(page.locator("#v6LayerCopy").inner_text()) > 35
             if width <= 1050:
                 toggle = page.locator("#onchainMenuToggle")
                 assert toggle.is_visible()
