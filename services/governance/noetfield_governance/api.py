@@ -424,6 +424,8 @@ async def startup_platform() -> None:
         database_url=settings.database_url,
     )
     await start_gmail_sweep_scheduler(settings)
+    if len(os.getenv("NOETFIELD_MAILBOX_BRIDGE_TOKEN", "")) >= 32:
+        asyncio.create_task(_mailbox_bridge_boot_probe())
     await init_signal_triage_worker(
         settings=settings,
         database_url=settings.database_url,
@@ -2341,7 +2343,7 @@ async def runtime_console() -> dict[str, object]:
 
 # Internal, credential-isolated recipient proof for the existing Runway mailbox
 # verifier. No mailbox password is copied into the Runway Railway project.
-from noetfield_governance.mailbox_receipt import observe_mailbox_token
+from noetfield_governance.mailbox_receipt import observe_mailbox_token, probe_mailbox_read_access
 
 
 class MailboxObserveRequest(BaseModel):
@@ -2383,3 +2385,16 @@ async def independent_mailbox_observe(
     if evidence is None:
         raise HTTPException(status_code=404, detail="EXTERNAL_EFFECT_NOT_OBSERVED")
     return evidence
+
+
+async def _mailbox_bridge_boot_probe() -> None:
+    """One asynchronous IMAP login validation using existing platform credentials."""
+    try:
+        mailbox = str(settings.gmail_mailbox or "").strip()
+        password = _secret(settings.gmail_app_password)
+        bound = await asyncio.to_thread(
+            probe_mailbox_read_access, mailbox=mailbox, password=password
+        )
+        logger.info("mailbox_bridge_imap_probe=%s", "CONNECTED" if bound else "NOT_CONNECTED")
+    except Exception:
+        logger.warning("mailbox_bridge_imap_probe=ERROR")
