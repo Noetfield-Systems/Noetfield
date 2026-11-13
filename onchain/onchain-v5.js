@@ -68,3 +68,60 @@
     /* No fake waitlist counts or local-only confirmations; success is rendered only by NFIntakeCore. */
   });
 })();
+/* V6 interaction system: controlled client UI only; no wallet, XP or financial state manufactured. */
+(function () {
+  "use strict";
+  function onReady(fn) { if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn, {once:true}); else fn(); }
+  onReady(function() {
+    var menu = document.getElementById("onchainMenuToggle");
+    var nav = document.getElementById("onchainNav");
+    var header = menu && menu.closest(".v5-header");
+    if (menu && nav && header) {
+      function closeMenu() { header.classList.remove("v6-menu-open"); menu.setAttribute("aria-expanded","false"); menu.setAttribute("aria-label","Open navigation"); }
+      menu.addEventListener("click", function() {
+        var open = menu.getAttribute("aria-expanded") !== "true";
+        header.classList.toggle("v6-menu-open",open);
+        menu.setAttribute("aria-expanded",open?"true":"false");
+        menu.setAttribute("aria-label",open?"Close navigation":"Open navigation");
+      });
+      nav.querySelectorAll("a").forEach(function(link){link.addEventListener("click",closeMenu);});
+      document.addEventListener("keydown",function(event){if(event.key==="Escape")closeMenu();});
+      document.addEventListener("click",function(event){if(!header.contains(event.target))closeMenu();});
+      window.matchMedia("(min-width: 1051px)").addEventListener("change",closeMenu);
+    }
+    var layerInfo = {
+      asset:{title:"Business & Asset Layer",copy:"Start with an actual asset, enforceable rights, accountable entities and the data required to execute a commercial workflow.",href:"https://scan.noetfield.com/rwa-clinic/",label:"Inspect RWA readiness demo ↗"},
+      policy:{title:"Policy & Control Layer",copy:"Convert rules into auditable decisions: authority checks, eligibility gates, confirmation requirements and controlled rejection.",href:"https://control.noetfield.com/sandbox",label:"Explore authorization sandbox ↗"},
+      execution:{title:"Execution & Integration",copy:"Scope the smallest working integration: existing apps, APIs, wallet providers, agents and contracts with acceptance tests.",href:"#project",label:"Scope your implementation ↗"},
+      verification:{title:"Verification & Operations",copy:"Confirm outcomes using receipts, reconciliation records and independently checkable evidence instead of assumed success.",href:"https://www.noetfield.com/proof/",label:"View verification examples ↗"}
+    };
+    var layerButtons = [].slice.call(document.querySelectorAll("[data-layer]"));
+    var title = document.getElementById("v6LayerTitle"), copy = document.getElementById("v6LayerCopy"), link = document.getElementById("v6LayerLink");
+    layerButtons.forEach(function(button){
+      button.addEventListener("click",function(){
+        var info = layerInfo[button.dataset.layer]; if (!info) return;
+        layerButtons.forEach(function(b){var current=b===button;b.classList.toggle("is-active",current);b.setAttribute("aria-pressed",current?"true":"false");});
+        if(title) title.textContent=info.title;
+        if(copy) copy.textContent=info.copy;
+        if(link){link.textContent=info.label;link.href=info.href;if(info.href.indexOf("https:")===0){link.target="_blank";link.rel="noopener noreferrer";}else{link.removeAttribute("target");link.removeAttribute("rel");}}
+      });
+    });
+    var networks={
+      ethereum:{title:"Ethereum",copy:"Exploring EVM-compatible contract and policy-controlled execution architecture."},
+      solana:{title:"Solana",copy:"Evaluating high-throughput network primitives and suitable integration requirements."},
+      polygon:{title:"Polygon",copy:"Assessing EVM scaling environments for business workflows and verifiable receipts."},
+      icp:{title:"Internet Computer",copy:"Studying onchain application and hosting patterns for programmable workflows."},
+      berachain:{title:"Berachain",copy:"Monitoring EVM ecosystem design and potential technical interoperability."}
+    };
+    var buttons = [].slice.call(document.querySelectorAll("[data-network]"));
+    var detail = document.getElementById("v6NetworkDetail");
+    var networkTitle = document.getElementById("v6NetworkName"), networkCopy = document.getElementById("v6NetworkCopy");
+    buttons.forEach(function(button){button.addEventListener("click",function(){
+      var selected = networks[button.dataset.network]; if(!selected)return;
+      buttons.forEach(function(b){b.setAttribute("aria-pressed",b===button?"true":"false");});
+      if(networkTitle)networkTitle.textContent=selected.title;
+      if(networkCopy)networkCopy.textContent=selected.copy;
+      if(detail)detail.classList.add("v6-detail-shown");
+    });});
+  });
+})();
