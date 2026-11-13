@@ -48,14 +48,16 @@ def test_trial_page_links_start_sandbox() -> None:
 
 def test_header_links_demo_and_trial() -> None:
     text = HEADER.read_text(encoding="utf-8")
-    assert "/copilot/demo/" in text
-    assert "/copilot/trial/" in text
+    assert "/work-with-us/" in text
+    assert "/company-os/" in text
+    assert "/governance/" in text
 
 
 def test_footer_links_demo_and_trial() -> None:
     text = (ROOT / "assets" / "partials" / "footer.html").read_text(encoding="utf-8")
-    assert "/copilot/demo/" in text
-    assert "/copilot/trial/" in text
+    assert "/work-with-us/" in text
+    assert "/company-os/" in text
+    assert "/governance/" in text
 
 
 def test_homepage_is_corporate_entry_not_demo_host() -> None:
@@ -65,7 +67,7 @@ def test_homepage_is_corporate_entry_not_demo_host() -> None:
     assert "/investors/" in text
     assert "/proof/" in text
     assert "nfLiveProofForm" not in text
-    # Demo/trial remain linked from product shell partials, not required on the corporate homepage.
+    # Specialized Copilot demo/trial remain at dedicated product routes, not the universal corporate nav.
     header = HEADER.read_text(encoding="utf-8")
-    assert "/copilot/demo/" in header
-    assert "/copilot/trial/" in header
+    assert "/work-with-us/" in header
+    assert "/company-os/" in header
