@@ -714,3 +714,27 @@ body.nf-corp {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
 }
+
+/* Corporate credibility pass — accessible, stable small-screen interaction. */
+.nf-corp a:focus-visible,
+.nf-corp button:focus-visible,
+.nf-corp input:focus-visible,
+.nf-corp textarea:focus-visible,
+.nf-corp select:focus-visible {
+  outline: 2px solid #a6794a;
+  outline-offset: 3px;
+}
+.nf-corp .nf-proof-card, .nf-corp .nf-evidence-register { min-width: 0; overflow-wrap: break-word; }
+.nf-corp .nf-pilot-apply-form :is(input, select, textarea) { min-height: 44px; }
+@media (max-width:760px) {
+  .nf-corp .nf-corp-nav { font-size: 0.8rem; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scroll-snap-type: x proximity; }
+  .nf-corp .nf-corp-nav a { min-height: 44px; display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap; scroll-snap-align: start; }
+  .nf-corp .nf-pilot-apply-grid { grid-template-columns: minmax(0, 1fr); }
+  .nf-corp .nf-pilot-apply-form :is(input, select, textarea) { font-size: 16px; }
+  .nf-corp .nf-proof-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width:480px) {
+  .nf-corp .nf-corp-actions { align-items: stretch; }
+  .nf-corp .nf-corp-actions .nf-button { max-width: 100%; justify-content: center; text-align: center; }
+  .nf-corp .nf-inner-hero h1 { overflow-wrap: break-word; }
+}
