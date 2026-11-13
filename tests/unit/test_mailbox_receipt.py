@@ -4,7 +4,7 @@ from email.message import EmailMessage
 from email.utils import format_datetime
 from unittest.mock import patch
 
-from noetfield_governance.mailbox_receipt import observe_mailbox_token
+from noetfield_governance.mailbox_receipt import observe_mailbox_token, probe_mailbox_read_access
 
 
 class FakeImap:
@@ -62,3 +62,16 @@ def test_foreign_recipient_does_not_verify():
 
 def test_wrong_token_does_not_verify():
     assert observe("incorrect_1234567890", "operations@noetfield.com", make_message()) is None
+
+
+def test_imap_probe_is_read_only():
+    fake = FakeImap(make_message())
+    with patch("noetfield_governance.mailbox_receipt.imaplib.IMAP4_SSL", return_value=fake):
+        assert probe_mailbox_read_access(
+            mailbox="operations@noetfield.com", password="test-token"
+        )
+    assert fake.closed
+
+
+def test_imap_probe_missing_password_is_disabled():
+    assert probe_mailbox_read_access(mailbox="operations@noetfield.com", password="") is False
