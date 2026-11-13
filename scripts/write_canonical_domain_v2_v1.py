@@ -61,7 +61,7 @@ def homepage() -> str:
     <div class="nf-principle-grid">
      <article><span class="nf-status nf-status--live">LIVE</span><h3>Noetfield runtime</h3><p>First-party execution application with bounded worker and project flow, build checks, revisioned artifacts, and authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open the live alpha ↗</a></p></article>
      <article><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span><h3>SourceA / Runway</h3><p>Professional internal execution and evidence paths for governed software change and workflow commissioning.</p><p><a href="/applications/#sourcea">Applications overview</a></p></article>
-     <article><span class="nf-status nf-status--demonstrated">NOETFIELD PRODUCT</span><h3>TrustField</h3><p>Noetfield Systems Inc.&apos;s regulated-operations and compliance product vertical. Public demonstrations use synthetic data.</p><p><a href="/applications/trustfield/">Boundary page</a> · <a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></p></article>
+     <article><span class="nf-status nf-status--demonstrated">INDEPENDENT VENTURE</span><h3>TrustField</h3><p>an independent venture in formation, supported by Noetfield Systems Inc. on technical setup. Public demonstrations use synthetic data.</p><p><a href="/applications/trustfield/">Boundary page</a> · <a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">trustfield.ca ↗</a></p></article>
     </div>
    </div>
   </section>
@@ -171,7 +171,7 @@ def applications_page() -> str:
    <div class="nf-corp-wrap nf-principle-grid">
     <article id="client-zero"><span class="nf-status nf-status--live">LIVE ALPHA</span><h3>Noetfield application</h3><p>Bounded worker and project flow, build/integrity checks, revisioned artifacts, authority modes.</p><p><a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open the live alpha ↗</a></p></article>
     <article id="sourcea"><span class="nf-status nf-status--demonstrated">DEMONSTRATED</span><h3>SourceA / Runway execution surface</h3><p>Professional internal execution and evidence paths for governed software change.</p><p><a href="/runways/">Runways</a></p></article>
-    <article><span class="nf-status nf-status--demonstrated">NOETFIELD PRODUCT</span><h3>TrustField boundary</h3><p>Noetfield Systems Inc.&apos;s regulated-operations and compliance product vertical. Public demonstrations use synthetic data.</p><p><a href="/applications/trustfield/">Boundary page →</a></p></article>
+    <article><span class="nf-status nf-status--demonstrated">INDEPENDENT VENTURE</span><h3>TrustField boundary</h3><p>an independent venture in formation, supported by Noetfield Systems Inc. on technical setup. Public demonstrations use synthetic data.</p><p><a href="/applications/trustfield/">Boundary page →</a></p></article>
     <article><span class="nf-status nf-status--commissioning">COMMISSIONING</span><h3>Developer API</h3><p>Developer preview / commissioning lane — not a production corporate product surface.</p><p><a href="/deterministic-api/">Developer preview</a></p></article>
    </div>
   </section>
@@ -188,15 +188,15 @@ def trustfield_app_page() -> str:
     body = f"""
   <section class="nf-inner-hero" aria-labelledby="tf-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
-    <div><p class="nf-corp-kicker">Noetfield product</p><h1 id="tf-title">TrustField boundary</h1></div>
+    <div><p class="nf-corp-kicker">Independent venture</p><h1 id="tf-title">TrustField boundary</h1></div>
     <div><p class="nf-corp-lead">{TRUSTFIELD_BOUNDARY_LINE}</p></div>
    </div>
   </section>
   <section class="nf-corp-section nf-corp-prose nf-corp-wrap">
    <h2>What it is</h2>
-   <p>As Noetfield Systems Inc.&apos;s regulated-operations vertical, TrustField operates synthetic regulated-workflow demonstrations for case intake, analyst review, human decision gates, and evidence closure within TrustField&apos;s own scope.</p>
+   <p>As an independently formed venture, TrustField demonstrates synthetic regulated-workflow demonstrations for case intake, analyst review, human decision gates, and evidence closure within TrustField&apos;s own scope.</p>
    <h2>What it demonstrates</h2>
-   <p>Human decision preservation, evidence completeness, and exception routing under TrustField&apos;s stated boundary, operated as part of Noetfield Systems Inc.&apos;s product portfolio.</p>
+   <p>Human decision preservation, evidence completeness, and exception routing under TrustField&apos;s stated boundary, not as a Noetfield-owned or operated product.</p>
    <h2>What it does not demonstrate</h2>
    <p>Noetfield adoption, MSB licensing, external customer scale, parent-company certification, custody, settlement, or auto-filing.</p>
    <p><a href="{TRUSTFIELD_URL}" rel="noopener noreferrer">Open TrustField interactive workflow ↗</a></p>
@@ -227,7 +227,7 @@ def public_interest_page() -> str:
    <ul>
     <li>Complete provider-attempt ledger (commissioning)</li>
     <li>Acceptance safety and semantic acceptance improvements</li>
-    <li>Evaluate authority and evidence patterns against synthetic workflows from TrustField, Noetfield&apos;s regulated-operations and compliance product vertical, within the product&apos;s stated boundary</li>
+    <li>Evaluate authority and evidence patterns against synthetic workflows from TrustField, an independent venture in formation supported by Noetfield, within the product&apos;s stated boundary</li>
     <li>Independent review and selected public goods outputs</li>
    </ul>
    <h2>Evidence boundaries</h2>
