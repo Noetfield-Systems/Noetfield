@@ -1,5 +1,9 @@
 # Noetfield North Star
 
+> **CURRENT FOUNDER CORPORATE SCOPE NOTICE — 2026-11-13**  
+> This file preserves the legacy **governance/AI policy enforcement product lane** and its applicable authority and financial-effect boundaries. It is **not** the current exclusive product definition or commercial strategy of **Noetfield Systems Inc.** The active parent-company identity and strategy are documented in [Corporate Thesis & Execution Strategy](docs/strategy/NOETFIELD_CORPORATE_THESIS_EXECUTION_2026-11-13.md) and [PRODUCT_BRIEF.md](PRODUCT_BRIEF.md). The separate **Noetfield App** universal software-builder product scope and release acceptance are controlled by `NOETFIELD-RUNWAY/docs/NOETFIELD_FOUNDER_PRODUCT_SSOT_V4_2026-11-13.md` and its launch manifest. Governance-layer no-custody, no-money-movement and legitimate authorization safeguards remain binding for the relevant effect. Do not use this historical narrow product framing to block authorized software engineering, RWA integration through appropriate providers, real client acquisition or lawful paid delivery. No new settlement or asset custody authority is granted by this notice.  
+>
+
 **Status:** Production alignment constitution · **Supremacy:** GCIP v4 (L0) overrides all documents, code comments, marketing copy, and partner decks on conflict.
 
 **Public product sentence (locked):** see [PRODUCT_TRUTH.md](PRODUCT_TRUTH.md). **Revenue tiers:** [OFFERINGS_LOCKED.md](OFFERINGS_LOCKED.md). **Strategic boundaries:** [STRATEGIC_LOCK.md](STRATEGIC_LOCK.md).
