@@ -108,5 +108,16 @@
     "method": "existing Noetfield async web intake",
     "url": "https://www.noetfield.com/onchain/#project",
     "fallback_email": "operations@noetfield.com"
+  },
+  "ecosystem": {
+    "landing_page": "https://www.noetfield.com/onchain/#ecosystem-vision",
+    "whitepaper": "https://www.noetfield.com/onchain/whitepaper/",
+    "machine_readable_registry": "https://www.noetfield.com/onchain/ecosystem.json",
+    "community_interest": "https://www.noetfield.com/onchain/#community",
+    "ai_assistant": "https://www.noetfield.com/onchain/#agent",
+    "roadmap": "https://www.noetfield.com/onchain/#roadmap",
+    "status": "Public interest registry and technical research; no issued token, open sale or live airdrop",
+    "network_names": "Explored technology landscapes, not verified partnerships",
+    "separate_ventures": "BuildRelay, Cairn and TrustField retain independent ownership and financial boundaries"
   }
 }
