@@ -30,6 +30,11 @@ try:
                return {width:el.width,height:el.height,active};
             }""")
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
+            scene_box=page.locator(".cc-scene canvas").bounding_box()
+            assert scene_box, "Visual scene is not laid out"
+            if width<=700:
+                assert scene_box["y"] < height - 80, f"Mobile scene below first screen: {scene_box}"
+                assert scene_box["y"]+scene_box["height"] > 250, f"Mobile scene collapsed: {scene_box}"
             if width<1070:
                 page.locator(".nf-q-menu").click()
                 assert page.locator(".nf-corp-nav").get_attribute("data-open")=="true"
@@ -49,7 +54,7 @@ try:
             assert not errors,errors
             assert all(h.startswith("/") for h in hrefs),hrefs
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
-            results.append(dict(viewport=name,canvas=canvas,document=dimensions,cards=cards,nodes=nodes,paths=paths.count(),jsErrors=errors,ok=True))
+            results.append(dict(viewport=name,canvas=canvas,document=dimensions,sceneBox=scene_box,cards=cards,nodes=nodes,paths=paths.count(),jsErrors=errors,ok=True))
             page.close()
         browser.close()
 finally:
