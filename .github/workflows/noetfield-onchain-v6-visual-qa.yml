@@ -31,11 +31,15 @@ jobs:
       - name: Browser proof at four viewports
         env:
           ONCHAIN_URL: https://www.noetfield.com/onchain/
-        run: python scripts/verify-onchain-v6-visual.py
+        run: |
+          python scripts/verify-onchain-v6-visual.py
+          python scripts/verify-onchain-v7-visual.py
       - name: Publish browser screenshots and geometry report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: onchain-v6-live-visual-proof
-          path: tmp/onchain-v6-visual-qa/
+          name: onchain-v7-live-visual-proof
+          path: |
+            tmp/onchain-v6-visual-qa/
+            tmp/onchain-v7-visual-qa/
           retention-days: 7
