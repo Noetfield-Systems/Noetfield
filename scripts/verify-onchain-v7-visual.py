@@ -51,6 +51,13 @@ def main() -> int:
             hero = page.locator(".v5-hero").bounding_box()
             nav = page.locator(".v5-header").bounding_box()
             assert hero and nav and hero["height"] > 320, (width, hero, nav)
+            if width <= 900:
+                copy_box = page.locator(".v5-hero-copy").bounding_box()
+                services_box = page.locator(".v5-hero-services").bounding_box()
+                assert copy_box and services_box
+                assert services_box["y"] >= copy_box["y"] + copy_box["height"] - 4, (
+                    "tablet/mobile hero content collides with floating services", width, copy_box, services_box
+                )
             result["hero_height"] = round(hero["height"])
             result["nav_height"] = round(nav["height"])
             assert nav["height"] < 100, (width, nav)
