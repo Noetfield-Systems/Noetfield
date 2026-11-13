@@ -57,7 +57,7 @@ contract NFIELDDistributor is Ownable2Step, ReentrancyGuard {
             revert InvalidClaim();
         }
         claimed[epoch][msg.sender] = true;
-        token.safeTransfer(msg.sender, amount);
         emit Claimed(epoch, msg.sender, amount);
+        token.safeTransfer(msg.sender, amount);
     }
 }
