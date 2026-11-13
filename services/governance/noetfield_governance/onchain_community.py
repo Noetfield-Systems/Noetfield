@@ -201,7 +201,7 @@ async def member_state(conn: asyncpg.Connection, wallet: str) -> dict:
         "last_checkin": last.isoformat() if last else None,
         "claim_available": last != today,
         "referral_code": row["referral_code"],
-        "referral_url": "https://www.noetfield.com/onchain/?ref=" + row["referral_code"] + "#community-hub",
+        "referral_url": "https://www.noetfield.com/onchain/hub/?ref=" + row["referral_code"],
         "leaderboard_opt_in": row["leaderboard_opt_in"],
         "email_opt_in": row["email_opt_in"],
         "program": _PROGRAM_ID,
