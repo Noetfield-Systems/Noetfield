@@ -34,7 +34,7 @@ contract NFIELDTest is Test {
         vm.prank(treasury);
         token.transfer(builder, 42 ether);
         assertEq(token.balanceOf(builder), 42 ether);
-        assertEq(token.totalSupply(), NFIELD.MAX_SUPPLY());
+        assertEq(token.totalSupply(), token.MAX_SUPPLY());
     }
 
     function testFundedEpochClaim() public {
