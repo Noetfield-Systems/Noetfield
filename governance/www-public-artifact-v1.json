@@ -6,6 +6,7 @@
     "assets/noetfield-stripe-catalog.json",
     "config/gate-ai-factory-design.json",
     "config/status-ai-factory.json",
+    "corporate.json",
     "deterministic-api/catalog.json",
     "noetfield-ai-factory-lanes.json",
     "onchain/capabilities.json",
