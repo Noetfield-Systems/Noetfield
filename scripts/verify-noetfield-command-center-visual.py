@@ -37,15 +37,19 @@ try:
                 page.keyboard.press("Escape")
             hrefs=page.locator("#command-capabilities a.cc-card").evaluate_all("xs => xs.map(x=>x.getAttribute('href'))")
             assert response.status==200,response.status
-            assert "Next Economy" in title,title
+            assert "intelligent businesses" in title.lower(),title
             assert cards==6,cards
-            assert nodes==6,nodes
+            assert nodes==3,nodes
+            paths=page.locator("#choose-your-path a.cc-path")
+            assert paths.count()==3,paths.count()
+            assert page.locator(".cc-evidence-image img").evaluate("img => img.complete && img.naturalWidth > 0"),"First-party product screenshot missing"
+            assert "Real Business" in page.locator(".cc-world-people").inner_text()
             assert canvas["active"]>8000,canvas
             assert dimensions["doc"]<=width+2,dimensions
             assert not errors,errors
             assert all(h.startswith("/") for h in hrefs),hrefs
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
-            results.append(dict(viewport=name,canvas=canvas,document=dimensions,cards=cards,nodes=nodes,jsErrors=errors,ok=True))
+            results.append(dict(viewport=name,canvas=canvas,document=dimensions,cards=cards,nodes=nodes,paths=paths.count(),jsErrors=errors,ok=True))
             page.close()
         browser.close()
 finally:
