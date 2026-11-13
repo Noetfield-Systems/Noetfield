@@ -169,3 +169,5 @@ body.nf-corp.nf-home .cc-node:focus-visible,body.nf-corp.nf-home .cc-card:focus-
 @media(prefers-reduced-motion:reduce){
  body.nf-corp.nf-home .cc-card,body.nf-corp.nf-home .cc-node,body.nf-corp.nf-home .cc-btn{transition:none}
 }
+body.nf-corp.nf-home .cc-header .nf-corp-nav .cc-app-nav{display:none}
+@media(max-width:1070px){body.nf-corp.nf-home .cc-header .nf-corp-nav .cc-app-nav{display:block}}
