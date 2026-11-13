@@ -66,6 +66,10 @@ def main() -> int:
                         else:
                             assert page.locator("#nfNav").is_visible()
                     if route == "/onchain/":
+                        art = page.locator(".v5-campus")
+                        assert art.evaluate("(el)=>el.complete && el.naturalWidth >= 600")
+                        if width >= 1440:
+                            assert art.evaluate("(el)=>el.naturalWidth >= 1200"), "desktop hero source is low resolution"
                         assert page.locator(".nf-nav-solutions a").count() == 4
                         assert page.locator(".v5-hero-services a").count() == 4
                         assert page.locator("form#nfOnchainIntake[data-nf-intake-form]").count() == 1
