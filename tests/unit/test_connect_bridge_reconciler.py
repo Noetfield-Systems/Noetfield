@@ -113,7 +113,11 @@ def test_retry_not_lost_and_synthetic_intake_excluded():
             worker = ConnectBridgeReconciler("postgresql://localhost/test")
             worker.pool = FakePool(db)
             with patch("noetfield_governance.connect_bridge_reconciler.intake_repository.get_by_request_id",
-                       new_callable=AsyncMock, return_value=source(email=test_email)):
+                       new_callable=AsyncMock, return_value=source(
+                           email=test_email,
+                           metadata={"category": "people", "consent_contact": True,
+                                     "initiative": "workforce",
+                                     **({"intake_kind": "test"} if test_email.endswith(".invalid") else {})})):
                 with patch("noetfield_governance.connect_bridge_reconciler.deliver",
                            return_value={"delivered": False, "error": "UPSTREAM_HTTP_FAILURE"}) as sent:
                     await worker.run_once()
