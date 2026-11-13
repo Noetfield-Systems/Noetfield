@@ -300,13 +300,13 @@ def test_authenticated_resend_invitation_uses_original_consented_contact_and_rea
                 "contact_name":"Original Contact","contact_email":"original@example.invalid"}
         try:
             with patch("noetfield_governance.intake_repository.get_connect_delivery_source",
-                       new_callable=AsyncMock) as read_source, \\
+                       new_callable=AsyncMock) as read_source, \
                  patch("noetfield_governance.intake_repository.create_connect_invitation",
-                       new_callable=AsyncMock) as prepare, \\
+                       new_callable=AsyncMock) as prepare, \
                  patch("noetfield_governance.intake_repository.claim_connect_invitation_send",
-                       new_callable=AsyncMock) as claim, \\
+                       new_callable=AsyncMock) as claim, \
                  patch("noetfield_governance.intake_repository.finish_connect_invitation_send",
-                       new_callable=AsyncMock) as finish, \\
+                       new_callable=AsyncMock) as finish, \
                  patch.object(governance_api,"send_connect_invitation") as delivery:
                 read_source.return_value=source
                 prepare.return_value={"created":True,
