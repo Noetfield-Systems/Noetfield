@@ -207,3 +207,31 @@ body.nf-corp.nf-home .cc-header .nf-corp-nav .cc-app-nav{display:none}
 body.nf-corp.nf-home .cc-header .cc-head-cta{flex:none;white-space:nowrap}
 @media(max-width:1070px){body.nf-corp.nf-home .cc-header .cc-head-cta{display:none}}
 @media(min-width:1071px){body.nf-corp.nf-home .nf-cc-hero h1{font-size:clamp(2.8rem,3.13vw,3.65rem)}body.nf-corp.nf-home .cc-copy{max-width:570px}}
+
+/* Institutional cross-page navigation: one canonical nav, separate contextual
+   commerce rail. Public pathways remain clickable without third nav fingerprint. */
+body.nf-corp.nf-home .cc-header .cc-extras{order:1;display:flex;align-items:center;gap:clamp(9px,1.1vw,17px);margin-left:auto}
+body.nf-corp.nf-home .cc-header .cc-extras a{font-size:.74rem;color:#e7e0ee;text-decoration:none;white-space:nowrap}
+body.nf-corp.nf-home .cc-header .cc-extras a:hover{color:#ffe2a9}
+body.nf-corp.nf-home .cc-header .cc-extras .nf-q-nav-invest{color:#fff!important;padding:9px 12px!important}
+body.nf-corp.nf-home .cc-header .nf-corp-nav{order:2;margin-left:0;gap:clamp(9px,1.2vw,18px)}
+body.nf-corp.nf-home .cc-header .cc-head-cta{order:3}
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a:nth-child(3),
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a:nth-child(5),
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a:nth-child(6),
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a:nth-child(7){display:block}
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a[href="/workflows/"],
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a[href="/tools/"],
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a[href="/developers/"],
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a[href="/applications/trustfield/"]{display:none}
+@media(max-width:1280px){
+body.nf-corp.nf-home .cc-header .cc-extras{gap:9px}
+body.nf-corp.nf-home .cc-header .cc-extras a{font-size:.67rem}
+}
+@media(max-width:1070px){
+body.nf-corp.nf-home .cc-header .cc-extras{display:none}
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a[href="/workflows/"],
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a[href="/tools/"],
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a[href="/developers/"],
+body.nf-corp.nf-home .cc-header .nf-corp-nav>a[href="/applications/trustfield/"]{display:block}
+}
