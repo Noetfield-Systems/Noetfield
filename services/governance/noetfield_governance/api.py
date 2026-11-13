@@ -74,7 +74,10 @@ from noetfield_governance.signal_triage_worker import (
     start_signal_triage_scheduler,
     stop_signal_triage_scheduler,
 )
-from noetfield_governance.workforce_connect_bridge import deliver as deliver_connect_to_workforce
+from noetfield_governance.workforce_connect_bridge import (
+    deliver as deliver_connect_to_workforce,
+    probe as probe_connect_workforce,
+)
 from noetfield_governance.intake_test import is_test_intake
 from noetfield_governance.public_intake import emit_enterprise_intake_motor_receipt, submit_intake
 from noetfield_governance.sandbox_service import (
@@ -427,6 +430,8 @@ async def startup_platform() -> None:
     await start_gmail_sweep_scheduler(settings)
     if len(os.getenv("NOETFIELD_MAILBOX_BRIDGE_TOKEN", "")) >= 32:
         asyncio.create_task(_mailbox_bridge_boot_probe())
+    if len(os.getenv("WORKFORCE_CONNECT_BRIDGE_KEY", "")) >= 32:
+        asyncio.create_task(_workforce_connect_bridge_boot_probe())
     await init_signal_triage_worker(
         settings=settings,
         database_url=settings.database_url,
@@ -1391,6 +1396,18 @@ async def intake_status(request_id: str) -> dict[str, object]:
     payload = intake_repository.intake_status_payload(record)
     payload["found"] = True
     return payload
+
+
+async def _workforce_connect_bridge_boot_probe() -> None:
+    # Connected means authenticated network + Postgres readback, not an
+    # applicant import, agent execution or independently verified outcome.
+    try:
+        result = await asyncio.to_thread(probe_connect_workforce)
+        logger.info("WORKFORCE_CONNECT_BRIDGE_BOOT state=%s mode=%s reason=%s",
+                    "CONNECTED" if result.get("connected") else "UNAVAILABLE",
+                    result.get("mode", "none"), result.get("reason", "none"))
+    except Exception:
+        logger.exception("WORKFORCE_CONNECT_BRIDGE_BOOT state=UNAVAILABLE")
 
 
 async def _notify_intake_background(record: object) -> None:
