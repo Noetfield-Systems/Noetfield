@@ -116,7 +116,8 @@ class ConnectDueWorker:
         async with self._lock:
             await self.connect()
             assert self.pool is not None
-            day = datetime.now(_VANCOUVER).date().isoformat()
+            day_date = datetime.now(_VANCOUVER).date()
+            day = day_date.isoformat()
             items, total = await self.due(day)
             if total == 0:
                 return {"state": "NO_DUE_CASES", "due_count": 0, "sent": False}
@@ -126,7 +127,7 @@ class ConnectDueWorker:
                     """INSERT INTO noetfield.connect_followup_digest
                         (digest_day,claim_id,due_count) VALUES ($1::date,$2,$3)
                        ON CONFLICT DO NOTHING RETURNING digest_day""",
-                    day, claim_id, total)
+                    day_date, claim_id, total)
             if not claimed:
                 return {"state": "ALREADY_ATTEMPTED_TODAY",
                         "due_count": total, "sent": False}
@@ -148,7 +149,7 @@ class ConnectDueWorker:
                     """UPDATE noetfield.connect_followup_digest
                        SET state=$3,provider_message_id=$4,finished_at=now()
                        WHERE digest_day=$1::date AND claim_id=$2""",
-                    day, claim_id, state, message_id or None)
+                    day_date, claim_id, state, message_id or None)
             logger.info("connect_followup_digest day=%s state=%s count=%s",
                         day, state, total)
             return {"state": state, "due_count": total,
