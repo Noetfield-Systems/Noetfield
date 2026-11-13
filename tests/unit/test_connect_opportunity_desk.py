@@ -154,11 +154,11 @@ def test_workforce_handoff_requires_saved_operator_decision_and_verified_remote_
                           "case_id": "opp_nf_" + "a" * 24,
                           "owner": "Named operator", "stage": "qualifying"}}
         with patch.object(governance_api, "_require_workforce_source",
-                          new_callable=AsyncMock) as source_check, \\
+                          new_callable=AsyncMock) as source_check, \
              patch("noetfield_governance.intake_repository.list_connect_by_intake",
-                   new_callable=AsyncMock) as source_rows, \\
+                   new_callable=AsyncMock) as source_rows, \
              patch.object(governance_api, "readback_connect_workforce",
-                          return_value=proof), \\
+                          return_value=proof), \
              patch.object(governance_api, "handoff_connect_workforce",
                           return_value={**proof, "accepted": True, "deduped": False}) as dispatch:
             source_rows.return_value = [record]
