@@ -97,7 +97,7 @@ def test_homepage_corporate_structure_locked() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "nf-corp" in text
     for label in (
-        "AGENT EXECUTION ASSURANCE",
+        "SOFTWARE CREATION · REAL SOURCE · INDEPENDENT EVIDENCE",
         "From ambitious ideas to real, editable software.",
         "founder-operated alpha",
         "Governed replacement",
