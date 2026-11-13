@@ -58,6 +58,7 @@ from noetfield_governance.connect_bridge_reconciler import (
     stop_scheduler as stop_connect_bridge_reconciler,
     get_worker as get_connect_bridge_reconciler,
 )
+from noetfield_governance.company_os_connect_readback import readback as readback_connect_company_os
 from noetfield_governance.connect_relationship import project_relationship
 from noetfield_governance.intake_notify import (
     intake_email_configured,
@@ -1779,6 +1780,24 @@ async def _require_workforce_source(intake_id: str):
                               contact_email=record.contact_email)):
         raise HTTPException(422, "INELIGIBLE_OR_UNCONSENTED_WORKFORCE_SOURCE")
     return record
+
+
+@app.get("/api/opportunities/desk/{intake_id}/company-os/status",
+         tags=["operations"],include_in_schema=False)
+async def connect_company_os_source_status(intake_id: str, request: Request) -> dict[str, object]:
+    """Founder-scoped Company OS readback; no dispatch, payment or outcome claim."""
+    _require_connect_desk_operator(request)
+    if not re.fullmatch(r"INT-[A-Z0-9]{12}", intake_id):
+        raise HTTPException(422, "INVALID_SOURCE_INTAKE_ID")
+    rows = await intake_repository.list_connect_by_intake(intake_id=intake_id, limit=100)
+    if not any(r.get("intake_id") == intake_id for r in rows):
+        raise HTTPException(404, "CANONICAL_SOURCE_NOT_FOUND")
+    result = await asyncio.to_thread(readback_connect_company_os, intake_id)
+    if not result.get("connected"):
+        raise HTTPException(502, str(result.get("error") or "COMPANY_OS_READBACK_FAILED"))
+    return {"source": "existing_company_os_core", **result,
+            "independently_verified_by_platform": False,
+            "automatic_assignment_claimed": False}
 
 
 @app.get("/api/opportunities/desk/{intake_id}/workforce/status",
