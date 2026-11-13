@@ -138,6 +138,7 @@ from noetfield_governance.golden_edge_v3 import (
 )
 from noetfield_governance.governance_rid import generate_rid, normalize_rid
 from noetfield_governance.governance_v1 import GovernanceV1Deps, router as governance_v1_router
+from noetfield_governance.onchain_community import router as onchain_community_router, close_community_pool
 from noetfield_governance.pilot_key_store import InMemoryPilotKeyStore, PostgresPilotKeyStore
 from noetfield_governance.pilot_keys_admin import router as pilot_keys_admin_router
 from noetfield_governance.trust_ledger import (
@@ -220,6 +221,7 @@ app = FastAPI(
 
 install_public_openapi(app)
 app.include_router(governance_v1_router)
+app.include_router(onchain_community_router)
 app.include_router(trust_ledger_router)
 app.include_router(pilot_keys_admin_router)
 
@@ -438,6 +440,7 @@ async def shutdown_runtime() -> None:
     await stop_gmail_sweep_scheduler()
     await stop_signal_triage_scheduler()
     await intake_repository.close_intake_repository()
+    await close_community_pool()
     await redis_runtime.close()
     stores = [
         event_store,
