@@ -208,6 +208,10 @@ function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class=
 '<p class="small">A proposed match is not acceptance, a human owner is not AI dispatch, and a call request is not a confirmed booking. Only source-backed independent receipts qualify as verified outcomes.</p>'+
 '<div class="section-label">ORIGINAL SUBMISSION</div><div class="proposal">'+safe(x.proposal||"No original message in source record")+'</div>'+
 (link?'<p><a href="'+safe(link)+'" target="_blank" rel="noopener noreferrer">Open submitted reference ↗</a></p>':"")+
+'<div class="section-label">QUALIFICATION READINESS · SELF-REPORTED</div>'+
+'<div class="proposal"><b>Profile completeness: '+safe(x.qualification_readiness?.score??0)+'% · '+safe(x.qualification_readiness?.qualification_status||"NOT_ASSESSED")+'</b>'+
+'<p class="small">Only presence of supplied fields is measured. No external references, skills, identity, match or agent activity have been verified.</p>'+
+'<p class="small">Missing: '+safe((x.qualification_readiness?.missing_fields||[]).join(" · ")||"No required fields missing")+'</p></div>'+
 '<p class="small">Scoring: '+safe((x.priority_reasons||[]).join(" · "))+'</p>'+
 '<div class="section-label">OPERATOR DECISION & NEXT ACTION</div>'+
 '<form id="save-case" class="form-grid"><label>Stage<select name="stage">'+["NEW","QUALIFYING","ROUTED","ENGAGED","NEGOTIATING","PILOT","WON","LOST","ARCHIVED"].map(v=>'<option value="'+v+'" '+(x.stage===v?"selected":"")+'>'+v+'</option>').join("")+'</select></label>'+
