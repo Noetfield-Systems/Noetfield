@@ -587,6 +587,79 @@ class PostgresIntakeStore:
                         "confirmed_meeting":False,
                         "scoped_authority_granted":False}
 
+    async def record_connect_outcome(
+        self, *, intake_id: str, expected_revision: int,
+        request_id: str, outcome_type: str, evidence_url: str, note: str,
+    ) -> dict[str, Any] | None:
+        """Store an operator-reported result, never a verified conversion or cash."""
+        import re
+        from urllib.parse import urlsplit
+        permitted = {"meeting", "introduction", "trial", "pilot", "contract",
+                     "work_delivered", "declined", "other"}
+        if outcome_type not in permitted:
+            raise ValueError("CONNECT_OUTCOME_TYPE_INVALID")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{16,100}", request_id):
+            raise ValueError("CONNECT_OUTCOME_REQUEST_ID_INVALID")
+        try:
+            url = urlsplit(evidence_url)
+            valid = (url.scheme == "https" and bool(url.hostname)
+                     and not url.username and not url.password
+                     and not any(c.isspace() for c in evidence_url)
+                     and len(evidence_url) <= 700)
+        except ValueError:
+            valid = False
+        if not valid:
+            raise ValueError("CONNECT_OUTCOME_EVIDENCE_REQUIRED")
+        if not isinstance(note, str) or not 10 <= len(note.strip()) <= 1200:
+            raise ValueError("CONNECT_OUTCOME_NOTE_REQUIRED")
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as connection:
+            async with connection.transaction():
+                row = await connection.fetchrow(
+                    """SELECT qualification_json FROM noetfield.public_intakes
+                       WHERE intake_id=$1 AND metadata->>'form_id'='nfConnectWizard'
+                         AND COALESCE(metadata->>'intake_kind','lead')<>'test'
+                       FOR UPDATE""", intake_id)
+                if row is None:
+                    return None
+                qualification = row["qualification_json"] or {}
+                if isinstance(qualification, str):
+                    qualification = json.loads(qualification)
+                ops = dict(qualification.get("connect_ops") or {})
+                outcomes = list(ops.get("reported_outcomes") or [])
+                for previous in outcomes:
+                    if previous.get("request_id") == request_id:
+                        return {"created": False, "revision": int(ops.get("revision") or 0),
+                                "reported_outcome": previous}
+                version = int(ops.get("revision") or 0)
+                if version != expected_revision:
+                    raise ValueError("OPPORTUNITY_VERSION_CONFLICT")
+                if len(outcomes) >= 25:
+                    raise ValueError("CONNECT_OUTCOME_LIMIT_REACHED")
+                event = {
+                    "id": "out_" + uuid.uuid4().hex[:16],
+                    "request_id": request_id,
+                    "type": outcome_type,
+                    "evidence_url": evidence_url.strip(),
+                    "note": note.strip(),
+                    "reported_at": datetime.now(UTC).isoformat(),
+                    "evidence_level": "OPERATOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+                    "independently_verified": False,
+                    "cash_collected": None,
+                }
+                ops["reported_outcomes"] = outcomes + [event]
+                ops["reported_outcome"] = event
+                ops["revision"] = version + 1
+                ops["updated_at"] = event["reported_at"]
+                await connection.execute(
+                    """UPDATE noetfield.public_intakes SET qualification_json=jsonb_set(
+                        COALESCE(qualification_json,'{}'::jsonb),
+                        '{connect_ops}', $2::jsonb, true)
+                       WHERE intake_id=$1""", intake_id, json.dumps(ops))
+                return {"created": True, "revision": ops["revision"],
+                        "reported_outcome": event}
+
     async def count(self) -> int:
         await self.connect()
         assert self._pool is not None
