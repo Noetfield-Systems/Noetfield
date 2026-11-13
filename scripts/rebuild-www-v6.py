@@ -3324,7 +3324,7 @@ def main() -> None:
     write("work-with-us/index.html", "Work With Noetfield | Founders, People, AI Agents and Partners",
           "Build intelligent businesses with Noetfield. Founders, specialists, AI operators, teams, clients and partners can submit a real scoped proposal.",
           "/work-with-us/", work_with_us_page_body(), body_class="nf-www nf-site-v14 nf-page-work-with-us nf-ecosystem",
-          head_extra=' <link rel="stylesheet" href="/assets/noetfield-collaboration-entry.css?v=1" />\\n <script src="/assets/noetfield-collaboration-entry.js?v=1" defer></script>')
+          head_extra=' <link rel="stylesheet" href="/assets/noetfield-collaboration-entry.css?v=1" />\n <script src="/assets/noetfield-collaboration-entry.js?v=1" defer></script>')
 
     # FAQ
     write("faq/index.html", "Noetfield — FAQ",
