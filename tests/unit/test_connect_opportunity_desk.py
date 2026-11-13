@@ -281,3 +281,73 @@ def test_public_ui_shell_contains_no_private_records_or_keys():
         assert "private@example.test" not in response.text
         assert "localStorage" not in response.text
     asyncio.run(run())
+
+
+def test_authenticated_resend_invitation_uses_original_consented_contact_and_real_ack_only():
+    async def run():
+        original_admin=governance_api.settings.admin_dashboard_secret
+        original_resend=governance_api.settings.resend_api_key
+        original_enabled=governance_api.settings.intake_email_notify_enabled
+        governance_api.settings.admin_dashboard_secret=SecretStr("test-resend-invitation-secret")
+        governance_api.settings.resend_api_key=SecretStr("re_disposable_fixture_not_real")
+        governance_api.settings.intake_email_notify_enabled=True
+        iid="INT-ABCDEF123456"
+        rid="invite_req_canonical_test_0001"
+        payload={"expected_revision":0,"scope":"trial",
+                 "message":"Propose a mutually agreed scoped trial with a defined output.",
+                 "request_id":rid}
+        source={"intake_id":iid,"contact_consent":True,
+                "contact_name":"Original Contact","contact_email":"original@example.invalid"}
+        try:
+            with patch("noetfield_governance.intake_repository.get_connect_delivery_source",
+                       new_callable=AsyncMock) as read_source, \\
+                 patch("noetfield_governance.intake_repository.create_connect_invitation",
+                       new_callable=AsyncMock) as prepare, \\
+                 patch("noetfield_governance.intake_repository.claim_connect_invitation_send",
+                       new_callable=AsyncMock) as claim, \\
+                 patch("noetfield_governance.intake_repository.finish_connect_invitation_send",
+                       new_callable=AsyncMock) as finish, \\
+                 patch.object(governance_api,"send_connect_invitation") as delivery:
+                read_source.return_value=source
+                prepare.return_value={"created":True,
+                  "invitation_id":"inv_abcdef0123456789","share_token":"temporarysecret"*4}
+                claim.return_value={"claimed":True}
+                delivery.return_value={"provider_accepted":True,
+                                       "provider_message_id":"resend_test_ack_12345"}
+                finish.return_value={"state":"SENT_PROVIDER_ACCEPTED",
+                                      "provider_message_id":"resend_test_ack_12345",
+                                      "provider_accepted":True}
+                path="/api/opportunities/desk/"+iid+"/invitations/send"
+                async with AsyncClient(transport=ASGITransport(app=app),
+                                       base_url="http://test") as client:
+                    unauthorized=await client.post(path,json=payload)
+                    assert unauthorized.status_code==403
+                    wrong_origin=await client.post(path,json=payload,
+                                headers={"X-Admin-Secret":"test-resend-invitation-secret"})
+                    assert wrong_origin.status_code==403
+                    headers={"X-Admin-Secret":"test-resend-invitation-secret",
+                             "Origin":"http://test"}
+                    accepted=await client.post(path,json=payload,headers=headers)
+                    assert accepted.status_code==200,accepted.text
+                    assert accepted.json()["provider_message_id"]=="resend_test_ack_12345"
+                    assert accepted.json()["sent"] is True
+                    assert accepted.json()["recipient_delivery_verified"] is False
+                    assert "share_token" not in accepted.json()
+                    assert delivery.call_args.kwargs["recipient"]=="original@example.invalid"
+                    assert "temporarysecret" in delivery.call_args.kwargs["response_url"]
+                    assert finish.call_count==1
+                    prepare.return_value={"created":False,
+                      "invitation_id":"inv_abcdef0123456789","share_token":None}
+                    repeat=await client.post(path,json=payload,headers=headers)
+                    assert repeat.status_code==409
+                    assert delivery.call_count==1
+                    source["contact_consent"]=False
+                    blocked=await client.post(path,json={**payload,
+                        "request_id":"invite_req_canonical_test_0002"},headers=headers)
+                    assert blocked.status_code==422
+                    assert delivery.call_count==1
+        finally:
+            governance_api.settings.admin_dashboard_secret=original_admin
+            governance_api.settings.resend_api_key=original_resend
+            governance_api.settings.intake_email_notify_enabled=original_enabled
+    asyncio.run(run())
