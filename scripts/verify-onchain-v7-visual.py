@@ -44,7 +44,9 @@ def main() -> int:
               complete: el.complete, naturalWidth: el.naturalWidth,
               src: el.currentSrc, box: el.getBoundingClientRect().toJSON()
             })""")
-            assert image["complete"] and image["naturalWidth"] >= (1200 if width >= 1440 else 600), (width, image)
+            assert image["complete"] and image["naturalWidth"] >= 600, (width, image)
+            if width >= 1440:
+                assert image["src"].endswith("/onchain/hero-architecture-hd.webp"), (width, image)
             assert any("/onchain/" + file in image["src"] for file in ("hero-architecture-v7.webp", "hero-architecture-hd.webp")), image["src"]
             result["art_loaded"] = True
             result["art_natural_width"] = image["naturalWidth"]
