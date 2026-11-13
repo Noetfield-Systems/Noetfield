@@ -22,7 +22,7 @@ try:
             page.locator("[data-cc-scene]").wait_for()
             page.wait_for_timeout(500)
             title=page.locator("h1#hero-title").inner_text()
-            cards=page.locator("#capabilities a.cc-card").count()
+            cards=page.locator("#command-capabilities a.cc-card").count()
             nodes=page.locator(".cc-node").count()
             canvas=page.locator("[data-cc-scene]").evaluate("""el => {
                const ctx=el.getContext('2d'),im=ctx.getImageData(0,0,el.width,el.height).data;
@@ -35,7 +35,7 @@ try:
                 assert page.locator(".nf-corp-nav").get_attribute("data-open")=="true"
                 assert page.locator(".nf-corp-nav a[href='/connect/']").count()>0
                 page.keyboard.press("Escape")
-            hrefs=page.locator("#capabilities a.cc-card").evaluate_all("xs => xs.map(x=>x.getAttribute('href'))")
+            hrefs=page.locator("#command-capabilities a.cc-card").evaluate_all("xs => xs.map(x=>x.getAttribute('href'))")
             assert response.status==200,response.status
             assert "Next Economy" in title,title
             assert cards==6,cards
