@@ -161,6 +161,8 @@ body.connect{background:#f2f1ec;color:#142431}
 @media(max-width:620px){.connect .wrap{width:calc(100% - 34px)}.connect .bar{padding:16px 0}.connect .navlinks{gap:13px}.connect .navlinks a:nth-child(2){display:none}.connect .navlinks .primary{font-size:11px;padding:10px 11px!important}.connect .hero{padding:55px 0 60px}.connect .hero h1{font-size:clamp(54px,13vw,74px)}.connect .hero .lede{font-size:15px}.connect .heroactions{gap:10px}.connect .heroactions .secondary{padding:10px 8px}.connect .grid,.connect .cols{grid-template-columns:1fr}.connect .tile{min-height:0}.connect .section-footer{flex-direction:column}.connect .journey-map{border-radius:11px}.connect .map-route{padding:18px}.connect .map-node{padding:15px}.connect .wizard-section{padding:55px 0}}
 @media(prefers-reduced-motion:reduce){.connect .tile{transition:none}}
 </style>
+<link rel="stylesheet" href="/assets/noetfield-connect-v3.css?v=1">
+<script src="/assets/noetfield-connect-v3.js?v=1" defer></script>
 </head>
 <body class="connect">
 <a href="#main" style="position:absolute;top:-999px;left:10px" onfocus="this.style.top='10px'" onblur="this.style.top='-999px'">Skip to content</a>
@@ -197,7 +199,7 @@ body.connect{background:#f2f1ec;color:#142431}
 <a class="tile" href="#apply" data-choose="partnership"><span class="eyebrow">01 / SYSTEMS & VENTURES</span><b>Co-build & integrate</b><p>AI infrastructure, onchain systems, technical partnerships and jointly developed ventures.</p><span class="tile-link">Explore collaboration ↗</span></a>
 <a class="tile" href="#apply" data-choose="growth"><span class="eyebrow">02 / GO-TO-MARKET</span><b>Distribution & referrals</b><p>Real buyer introductions, sales channels, affiliate partnerships and market access.</p><span class="tile-link">Explore distribution ↗</span></a>
 <a class="tile" href="#apply" data-choose="capital"><span class="eyebrow">03 / CAPITAL & NETWORKS</span><b>Investors & connectors</b><p>Relevant capital relationships, early-stage introductions, programs and strategic access.</p><span class="tile-link">Explore capital ↗</span></a>
-<a class="tile" href="#apply" data-choose="people"><span class="eyebrow">04 / PEOPLE & AI TEAMS</span><b>Founders & contributors</b><p>Engineers, co-builders, operators, specialist agents, researchers and advisors.</p><span class="tile-link">Explore a role ↗</span></a>
+<a class="tile is-featured" href="#apply" data-choose="people"><span class="eyebrow">04 / PEOPLE & AI TEAMS</span><b>Founders & contributors</b><p>Engineers, co-builders, operators, specialist agents, researchers and advisors.</p><span class="tile-link">Explore a role ↗</span></a>
 <a class="tile" href="#apply" data-choose="events"><span class="eyebrow">05 / ECOSYSTEM & RESEARCH</span><b>Programs & communities</b><p>Events, accelerators, grants, universities, research, speaking and media.</p><span class="tile-link">Explore the ecosystem ↗</span></a>
 <a class="tile" href="#apply" data-choose="business"><span class="eyebrow">06 / COMMERCIAL DELIVERY</span><b>Customers & pilots</b><p>Automation, agent-powered operations, RWA readiness and scoped implementation work.</p><span class="tile-link">Explore a pilot ↗</span></a>
 </div><div class="section-footer"><span>Human-first. AI-capable. Verified where evidence exists.</span><a href="/proof/">View technical proof ↗</a></div></div></section>
@@ -270,6 +272,32 @@ body.connect{background:#f2f1ec;color:#142431}
 <label class="field">Proposal title<input name="title" maxlength="160" required placeholder="A clear one-line description"></label>
 <label class="field">Description & what you propose
 <textarea name="description" minlength="30" maxlength="3500" required placeholder="What is the opportunity, why does it fit, and what exactly are you asking us to do?"></textarea></label>
+<section class="route-qualifiers" id="peopleQualifiers" hidden>
+<h3>What can you build, and when?</h3>
+<label class="field">Core skills / technology stack *<input name="skillStack" maxlength="500" placeholder="Python, AI agents, TypeScript, design, sales, Web3…"></label>
+<div class="cols">
+<label class="field">Availability<select name="availability"><option value="">Choose availability</option><option value="now">Available now</option><option value="soon">Within 2 weeks</option><option value="parttime">Part-time / flexible</option><option value="project">Project-based</option><option value="exploring">Exploring opportunities</option></select></label>
+<label class="field">Preferred way to contribute<select name="workModel"><option value="project">Scoped paid project</option><option value="trial">Short collaboration trial</option><option value="cofounder">Co-founder / long-term partner</option><option value="open_source">Open source / contribution</option><option value="other">Other / discuss</option></select></label>
+</div>
+<label class="field">Proof of your work (GitHub / portfolio)<input name="portfolioUrl" type="url" maxlength="700" placeholder="https://github.com/your-work"></label>
+<p class="micro">A specific contribution and relevant proof are more useful than a generic résumé. This is not a published job vacancy.</p>
+</section>
+<section class="route-qualifiers" id="growthQualifiers" hidden>
+<h3>Who could we reach together?</h3>
+<label class="field">Audience, customer relationships or distribution reach<input name="audience" maxlength="500" placeholder="Your target audience, communities, buyer relationships or referral channel"></label>
+<label class="field">Commercial model<select name="growthModel"><option value="discuss">Open to discussion</option><option value="referral">Referral / commission</option><option value="fixed">Fixed scope / project fee</option><option value="partnership">Ongoing distribution partnership</option></select></label>
+</section>
+<section class="route-qualifiers" id="capitalQualifiers" hidden>
+<h3>Let's understand the investment connection.</h3>
+<label class="field">Investor / funding context<input name="capitalContext" maxlength="600" placeholder="Investor, funding source, thesis, stage and proposed terms"></label>
+</section>
+<section class="route-qualifiers" id="businessQualifiers" hidden>
+<h3>What would a useful pilot achieve?</h3>
+<label class="field">Budget / timeframe or constraints<input name="businessConstraints" maxlength="500" placeholder="Business problem, success measure, timeline, budget range"></label>
+</section>
+<label class="field" id="sourceContextLabel">Context of our conversation (optional)
+<textarea name="sourceContext" maxlength="900" style="min-height:70px" placeholder="What did we discuss on LinkedIn? Paste a short summary, not private conversation history."></textarea></label>
+
 <div class="cols">
 <label class="field">What can you offer? (optional)
 <textarea name="offering" maxlength="1200" style="min-height:82px" placeholder="Distribution, customers, funding, capabilities, time, introductions, products, or expertise"></textarea></label>
@@ -292,7 +320,8 @@ body.connect{background:#f2f1ec;color:#142431}
 <label class="field">Full name<input name="name" autocomplete="name" required maxlength="130" placeholder="Your name"></label>
 <label class="field">Email<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@company.com"></label>
 </div>
-<label class="field">Organization / community<input name="org" autocomplete="organization" required maxlength="180" placeholder="Company, fund, or organization"></label>
+<label class="field">Organization / community (optional)<input name="org" autocomplete="organization" maxlength="180" placeholder="Independent / freelancer, or company"></label>
+<label class="field">Your LinkedIn or professional profile (optional)<input type="url" name="linkedinURL" maxlength="700" placeholder="https://www.linkedin.com/in/..."></label>
 <label class="field">Preferred next step<select name="nextStep" required>
 <option value="async">Review the proposal asynchronously</option>
 <option value="meeting">Consider a call after review</option>
@@ -300,11 +329,41 @@ body.connect{background:#f2f1ec;color:#142431}
 <option value="collaborate">Explore collaboration / joining the team</option>
 </select></label>
 <div class="confirm">This is an opportunity submission, not an accepted agreement, guaranteed meeting, or confirmation of an award or commercial commitment. We will follow up where relevant.</div>
+<label class="journey-consent"><input name="analyticsConsent" type="checkbox"><span>Optional: allow first-party journey analytics (step completion and conversion) to improve Connect. No third-party advertising pixels.</span></label>
 <label class="field" style="font-size:12px;line-height:1.65;display:flex;align-items:start;gap:9px"><input name="contactConsent" type="checkbox" required style="width:17px;min-height:17px;flex:0 0 17px;margin:2px 0 0"> I agree that Noetfield may contact me about this submission. My information will not be shared with an independent venture or introduced to a third party without separate permission. <a href="/privacy/" target="_blank" rel="noopener noreferrer">Privacy</a></label>
 <div class="actions"><button class="back" type="button" data-back>Back</button><button class="primary" type="submit" id="submitBtn">Submit opportunity</button></div>
 </fieldset>
 <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+<div class="result-panel" id="connectResult" hidden aria-live="polite">
+<span class="eyebrow">SAVED / CANONICAL CONNECT CASE</span>
+<h3>Your introduction is recorded.</h3>
+<p>This is a review request. We have not yet offered a role, booked a meeting, assigned a project, or confirmed commercial terms.</p>
+<div class="result-row"><span>Case</span><b id="resultCase">—</b></div>
+<div class="result-row"><span>Private reference</span><b id="resultReference">—</b></div>
+<div class="result-row"><span>Next step</span><b id="resultNext">Awaiting internal review</b></div>
+<div class="result-actions"><button type="button" id="copyConnectReference">Copy tracking details</button><button type="button" id="showConnectStatus">Check my case</button></div>
+</div>
 </form>
+<section class="track-box" id="connectTracking">
+<p class="eyebrow">YOUR INTRODUCTION / YOUR STATUS</p>
+<h3>Already introduced yourself?</h3>
+<p>Use the private reference issued after your submission and the same email to check the recorded review stage or send feedback. A stage is not proof of hiring or execution.</p>
+<form id="participantTrack" novalidate>
+<label class="field">Private request reference<input name="request_id" required minlength="20" maxlength="64" placeholder="RID-CNX-..."></label>
+<label class="field">Your email<input name="email" type="email" required maxlength="254" placeholder="you@example.com"></label>
+<button class="primary" type="submit">Check saved status ↗</button>
+<p id="participantTrackOutput" class="track-output" role="status" aria-live="polite"></p>
+</form>
+<div class="feedback-box" id="connectFeedback" hidden>
+<h3>Help improve this collaboration journey</h3>
+<form id="participantFeedback" novalidate>
+<label class="field">How useful was this process?
+<select name="rating" required><option value="5">5 — Excellent</option><option value="4">4 — Good</option><option value="3">3 — Neutral</option><option value="2">2 — Difficult</option><option value="1">1 — Poor</option></select></label>
+<label class="field">Your feedback<textarea name="message" minlength="5" maxlength="1200" required placeholder="What should we improve or clarify?"></textarea></label>
+<button class="primary" type="submit">Send feedback ↗</button>
+<p class="track-output" id="participantFeedbackOutput" role="status"></p>
+</form></div>
+</section>
 </div></section>
 </main>
 <footer class="foot"><div class="wrap"><span>© 2026 Noetfield Systems Inc. · Vancouver, Canada</span><span><a href="/privacy/">Privacy</a> · <a href="/contact/">General contact</a> · <a href="/">Company</a></span></div></footer>
@@ -361,16 +420,23 @@ var route="Noetfield Connect — opportunity submission\n"+
 "\nLink: "+(val("url")||"Not supplied")+
 "\nDeadline: "+(val("deadline")||"Not specified")+
 "\nCommercial terms: "+(val("terms")||"Not supplied")+
-"\nPreferred next step: "+val("nextStep")+
+"\nExpertise: "+(val("skillStack")||"Not supplied")+"\nAvailability: "+(val("availability")||"Not supplied")+"\nWork preference: "+(val("workModel")||"Not supplied")+"\nWork samples: "+(val("portfolioUrl")||"Not supplied")+"\nLinkedIn: "+(val("linkedinURL")||"Not supplied")+"\nConversation context: "+(val("sourceContext")||"Not supplied")+"\nAudience/reach: "+(val("audience")||"Not supplied")+"\nPreferred next step: "+val("nextStep")+
 "\nSource: "+source;
 var btn=document.getElementById("submitBtn");
 submitting=true;btn.disabled=true;btn.textContent="Submitting…";status.hidden=false;status.className="status";status.textContent="Submitting your proposal securely…";
-core.postIntake({organization:val("org"),contact_email:val("email"),contact_name:val("name"),message:route,request_id:submissionId,sku:"general",vector:"external-opportunities",source:"web",metadata:{
+core.postIntake({organization:val("org")||"Independent professional",contact_email:val("email"),contact_name:val("name"),message:route,request_id:submissionId,sku:"general",vector:"external-opportunities",source:"web",metadata:{
 page:"/connect/",form_id:"nfConnectWizard",topic:val("intent"),category:val("intent"),initiative:val("initiative"),proposal_title:val("title"),
 proposal_url:val("url"),deadline:val("deadline"),next_step:val("nextStep"),lead_source:source,
 participant_role:val("participantRole"),offering:val("offering"),requesting:val("requesting"),
 consent_contact:form.elements.namedItem("contactConsent").checked,
-utm_campaign:safeTag(u.get("utm_campaign")||"unspecified"),intake_flow:"connect-wizard-v2"
+utm_campaign:safeTag(u.get("utm_campaign")||"unspecified"),
+referral_code:safeTag(u.get("ref")||"unspecified"),
+linkedin_url:val("linkedinURL"),skills:val("skillStack"),availability:val("availability"),
+work_model:val("workModel"),portfolio_url:val("portfolioUrl"),
+audience:val("audience"),growth_model:val("growthModel"),
+capital_context:val("capitalContext"),business_constraints:val("businessConstraints"),
+conversation_context:val("sourceContext"),analytics_consent:!!form.elements.namedItem("analyticsConsent").checked,
+intake_flow:"connect-wizard-v3"
 }}).then(function(r){
 if(r&&r.intake_persisted===false){
 status.className="status error";status.textContent="We received a notification, but have not yet confirmed that the request was saved. Please email operations@noetfield.com with your proposal for follow-up.";
@@ -381,6 +447,9 @@ btn.textContent="Submit again";btn.disabled=false;return;}
 status.className="status success";
 status.textContent="Opportunity received and recorded. Reference: "+String(r.request_id||r.intake_id)+".\nOur team will review the proposal and follow up if there is a relevant next step.";
 btn.textContent="Submitted";btn.disabled=true;
+window.dispatchEvent(new CustomEvent("nf-connect-saved",{detail:{
+intake_id:r.intake_id,request_id:submissionId,email:val("email"),intent:val("intent"),source:source
+}}));
 }).catch(function(){
 status.className="status error";status.textContent="We could not confirm your submission. No meeting or commitment has been created. Please retry, or send your proposal to operations@noetfield.com.";
 btn.disabled=false;btn.textContent="Retry submission";

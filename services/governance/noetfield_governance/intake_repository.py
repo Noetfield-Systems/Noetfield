@@ -248,6 +248,14 @@ async def respond_connect_invitation(**kwargs: Any) -> dict[str, Any] | None:
     return await (await _connect_postgres()).respond_connect_invitation(**kwargs)
 
 
+async def public_connect_participant_status(**kwargs: Any) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).public_connect_participant_status(**kwargs)
+
+
+async def append_public_connect_feedback(**kwargs: Any) -> dict[str, Any] | None:
+    return await (await _connect_postgres()).append_public_connect_feedback(**kwargs)
+
+
 def intake_status_payload(record: IntakeRecord | dict[str, Any]) -> dict[str, object]:
     if isinstance(record, IntakeRecord):
         data = {

@@ -109,6 +109,115 @@ class PostgresIntakeStore:
             return None
         return _row_to_record(row)
 
+    async def public_connect_participant_status(
+        self, *, request_id: str, email: str,
+    ) -> dict[str, Any] | None:
+        """Read only participant-safe source-backed status. No CRM notes or owner data."""
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as connection:
+            row = await connection.fetchrow(
+                """SELECT intake_id,created_at,contact_email,metadata,qualification_json
+                   FROM noetfield.public_intakes WHERE request_id=$1""",
+                request_id.strip().upper(),
+            )
+        if row is None or row["contact_email"].lower() != email.strip().lower():
+            return None
+        metadata = row["metadata"] or {}
+        if isinstance(metadata, str):
+            metadata = json.loads(metadata)
+        if metadata.get("form_id") != "nfConnectWizard" or metadata.get("intake_kind") == "test":
+            return None
+        qualification = row["qualification_json"] or {}
+        if isinstance(qualification, str):
+            qualification = json.loads(qualification)
+        ops = qualification.get("connect_ops") or {}
+        stage = str(ops.get("stage") or "NEW").upper()
+        allowed = {"NEW","QUALIFYING","ROUTED","ENGAGED","NEGOTIATING","PILOT",
+                   "WON","LOST","ARCHIVED"}
+        if stage not in allowed:
+            stage = "NEW"
+        descriptions = {
+            "NEW": "Received in Noetfield Connect. Review pending.",
+            "QUALIFYING": "Your proposal is being reviewed for relevance and fit.",
+            "ROUTED": "The opportunity has entered an internal review route.",
+            "ENGAGED": "A collaboration conversation is recorded as active.",
+            "NEGOTIATING": "Terms are under review; no agreement is implied.",
+            "PILOT": "Pilot-stage activity is recorded; delivery is not independently verified.",
+            "WON": "The internal record is marked won; confirm any agreement directly.",
+            "LOST": "This opportunity is marked closed without conversion.",
+            "ARCHIVED": "The opportunity has been archived.",
+        }
+        return {
+            "found": True, "intake_id": row["intake_id"],
+            "stage": stage, "detail": descriptions[stage],
+            "created_at": row["created_at"].isoformat() if hasattr(row["created_at"],"isoformat") else str(row["created_at"]),
+            "updated_at": ops.get("updated_at"),
+            "independently_verified": False,
+            "receipt_type": "SOURCE_BACKED_PARTICIPANT_STATUS",
+        }
+
+    async def append_public_connect_feedback(
+        self, *, request_id: str, email: str, rating: int,
+        message: str, feedback_id: str,
+    ) -> dict[str, Any] | None:
+        """Append feedback to the SAME Connect record; never mint a new lead."""
+        if not 1 <= rating <= 5 or not 5 <= len(message.strip()) <= 1200:
+            raise ValueError("FEEDBACK_INVALID")
+        await self.connect()
+        assert self._pool is not None
+        async with self._pool.acquire() as connection:
+            async with connection.transaction():
+                row = await connection.fetchrow(
+                    """SELECT intake_id,contact_email,metadata,qualification_json
+                       FROM noetfield.public_intakes
+                       WHERE request_id=$1 FOR UPDATE""",
+                    request_id.strip().upper(),
+                )
+                if row is None or row["contact_email"].lower() != email.strip().lower():
+                    return None
+                metadata = row["metadata"] or {}
+                if isinstance(metadata, str):
+                    metadata = json.loads(metadata)
+                if metadata.get("form_id") != "nfConnectWizard" or metadata.get("intake_kind") == "test":
+                    return None
+                qualification = row["qualification_json"] or {}
+                if isinstance(qualification, str):
+                    qualification = json.loads(qualification)
+                ops = dict(qualification.get("connect_ops") or {})
+                interactions = list(ops.get("interactions") or [])
+                for item in interactions:
+                    if item.get("feedback_id") == feedback_id:
+                        return {"recorded": True,"deduped": True,
+                                "intake_id": row["intake_id"], "feedback_id":feedback_id}
+                public_feedback = [item for item in interactions
+                                   if item.get("actor") == "submitter_token_holder"
+                                   and item.get("kind") == "human_feedback"]
+                if len(public_feedback) >= 5:
+                    raise ValueError("FEEDBACK_LIMIT_REACHED")
+                event = {
+                    "id": "act_" + uuid.uuid4().hex[:16],
+                    "feedback_id": feedback_id,
+                    "kind": "human_feedback",
+                    "body": "Applicant feedback (" + str(rating) + "/5): " + message.strip(),
+                    "actor": "submitter_token_holder",
+                    "state": "SOURCE_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+                    "evidence_url": "",
+                    "created_at": datetime.now(UTC).isoformat(),
+                }
+                ops["interactions"] = interactions[-99:] + [event]
+                ops["revision"] = int(ops.get("revision") or 0) + 1
+                ops["updated_at"] = event["created_at"]
+                await connection.execute(
+                    """UPDATE noetfield.public_intakes SET qualification_json=jsonb_set(
+                        COALESCE(qualification_json,'{}'::jsonb),
+                        '{connect_ops}', $2::jsonb,true)
+                       WHERE intake_id=$1""",
+                    row["intake_id"], json.dumps(ops),
+                )
+                return {"recorded": True,"deduped":False,
+                        "intake_id": row["intake_id"],"feedback_id":feedback_id}
+
     async def update_email_archive_status(
         self,
         *,
