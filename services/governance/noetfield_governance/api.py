@@ -74,6 +74,7 @@ from noetfield_governance.signal_triage_worker import (
     start_signal_triage_scheduler,
     stop_signal_triage_scheduler,
 )
+from noetfield_governance.workforce_connect_bridge import deliver as deliver_connect_to_workforce
 from noetfield_governance.intake_test import is_test_intake
 from noetfield_governance.public_intake import emit_enterprise_intake_motor_receipt, submit_intake
 from noetfield_governance.sandbox_service import (
@@ -1404,6 +1405,17 @@ async def _notify_intake_background(record: object) -> None:
     ):
         logger.info("intake_ops_notify_skipped test intake intake_id=%s", record.intake_id)
         return
+    # The canonical Platform record is already persisted. Mirror consented
+    # people/contributors into the *existing* WorkforceOS case ledger.
+    # Failure is logged and recoverable via the authenticated retry endpoint;
+    # it never changes source persistence or manufactures an assignment.
+    try:
+        bridge = await asyncio.to_thread(deliver_connect_to_workforce, record)
+        if bridge.get("eligible") and not bridge.get("delivered"):
+            logger.warning("workforce_connect_source_pending source_id=%s reason=%s",
+                           record.intake_id, bridge.get("error", "not_delivered"))
+    except Exception:
+        logger.exception("workforce_connect_source_sync_failed source_id=%s", record.intake_id)
     url = (settings.intake_ops_webhook_url or "").strip()
     if url:
         await asyncio.to_thread(notify_ops_webhook, url, record)
@@ -1673,6 +1685,35 @@ class OpportunityUpdateRequest(BaseModel):
     next_action: str = Field(default="", max_length=500)
     due_date: date | None = None
     note: str = Field(default="", max_length=800)
+
+
+class WorkforceConnectRetryRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    request_id: str = Field(min_length=12, max_length=80)
+
+
+@app.post("/api/opportunities/desk/workforce/retry",
+          tags=["operations"], include_in_schema=False)
+async def retry_connect_workforce_sync(request: Request, body: WorkforceConnectRetryRequest) -> dict[str, object]:
+    """Operator-requested replay of the original persisted RID, never a new lead."""
+    _require_connect_desk_operator(request)
+    check_connect_desk_origin(request)
+    if not re.fullmatch(r"RID-[A-Za-z0-9-]{6,76}", body.request_id):
+        raise HTTPException(422, "INVALID_SOURCE_REQUEST_ID")
+    record = await intake_repository.get_by_request_id(body.request_id)
+    if record is None:
+        raise HTTPException(404, "SOURCE_INTAKE_NOT_FOUND")
+    if is_test_intake(metadata=record.metadata,
+                      request_id=record.request_id,
+                      contact_email=record.contact_email):
+        raise HTTPException(422, "TEST_INTAKE_NOT_ELIGIBLE")
+    result = await asyncio.to_thread(deliver_connect_to_workforce, record)
+    if not result.get("eligible"):
+        raise HTTPException(422, "INTAKE_NOT_ELIGIBLE_FOR_WORKFORCE")
+    if not result.get("delivered"):
+        raise HTTPException(502, str(result.get("error") or "WORKFORCE_SYNC_PENDING"))
+    return {"source": "canonical_noetfield_intake", **result,
+            "assigned": False, "independently_verified": False}
 
 
 @app.get("/api/opportunities/desk/app", tags=["operations"], include_in_schema=False)
