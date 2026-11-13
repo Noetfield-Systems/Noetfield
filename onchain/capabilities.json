@@ -1,0 +1,97 @@
+{
+  "schema": "noetfield-onchain-public-capabilities-v1",
+  "updated_at": "2026-11-12",
+  "operator": {
+    "legal_name": "Noetfield Systems Inc.",
+    "website": "https://www.noetfield.com/",
+    "location": "Vancouver, British Columbia, Canada",
+    "email": "operations@noetfield.com"
+  },
+  "commercial_offering": {
+    "title": "Real-to-Onchain Infrastructure Engineering",
+    "page": "https://www.noetfield.com/onchain/",
+    "intake": "https://www.noetfield.com/onchain/#project",
+    "services": [
+      "RWA private-credit readiness and technical gap assessment",
+      "Policy-to-code specifications and testing of approved business rules",
+      "Issuer, smart contract and API integration engineering",
+      "Stablecoin payment operations and reconciliation around approved providers",
+      "AI agent authorization, bounded execution and signed technical evidence"
+    ],
+    "deliverables": [
+      "scoped assessment",
+      "rights and requirements map",
+      "versioned policy specification",
+      "testable integration artifact",
+      "acceptance and evidence report"
+    ],
+    "availability": "Scoping and first-party demonstrations available; external commissioned deployment depends on written scope and partner/system access",
+    "pricing": "By written scope; no binding online price or instant checkout claimed"
+  },
+  "first_party_evidence": [
+    {
+      "title": "RWA Readiness Clinic",
+      "url": "https://scan.noetfield.com/rwa-clinic/",
+      "status": "live_first_party_demo",
+      "proves": "Technical private-credit case assessment with explicit gates and evidence fields",
+      "does_not_prove": "Regulatory approval, customer issuance, live token trades"
+    },
+    {
+      "title": "Agent Control Plane Sandbox",
+      "url": "https://control.noetfield.com/sandbox",
+      "status": "live_first_party_sandbox",
+      "proves": "Simulated authorization, confirmation, mutation block and signed receipts",
+      "does_not_prove": "Live money movement, production banking authorization"
+    },
+    {
+      "title": "Company OS",
+      "url": "https://www.noetfield.com/company-os/",
+      "status": "scoped_offering_mixed_component_maturity",
+      "proves": "Published workflow and responsibility model with existing first-party technical components",
+      "does_not_prove": "All roles fully autonomous in customer production"
+    },
+    {
+      "title": "Noetfield Studio",
+      "url": "https://studio.noetfield.com/",
+      "status": "live_first_party_product_examples",
+      "proves": "Public product demonstrations and custom engineering approach",
+      "does_not_prove": "External project revenue or generalized client delivery"
+    }
+  ],
+  "related_products": [
+    {
+      "name": "WorkforceOS",
+      "url": "https://workforce-web-production-2d15bf32.up.railway.app/",
+      "relationship": "standalone product",
+      "status": "published product; integrations and billing require separate evidence"
+    },
+    {
+      "name": "SignalForge",
+      "url": "https://signalforge-web-production.up.railway.app/",
+      "relationship": "separate Noetfield-owned product",
+      "status": "research/community product; not trade execution"
+    },
+    {
+      "name": "Earnloop",
+      "url": "https://earnloop-web-production.up.railway.app/",
+      "relationship": "separate Noetfield-owned product",
+      "status": "noncash community mechanics; real reward payouts depend on contracts and settlement"
+    },
+    {
+      "name": "BuildRelay",
+      "relationship": "independent venture",
+      "status": "Web3 guild/game and token economy design; not a shared financial wallet"
+    }
+  ],
+  "boundaries": [
+    "Noetfield does not itself provide legal opinions or issue securities through this page",
+    "No custody, banking or payment-transmission representation",
+    "No client, revenue, investor or token-issuance figures are implied by sample cases or first-party demos",
+    "No silent user, financial or identity data sharing between separate ventures"
+  ],
+  "contact": {
+    "method": "existing Noetfield async web intake",
+    "url": "https://www.noetfield.com/onchain/#project",
+    "fallback_email": "operations@noetfield.com"
+  }
+}
