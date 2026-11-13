@@ -1,0 +1,45 @@
+name: Onchain Community Live Smoke
+
+on:
+  pull_request:
+    paths:
+      - "onchain/**"
+      - "services/governance/noetfield_governance/onchain_community.py"
+      - "scripts/verify-onchain-community-live.py"
+      - ".github/workflows/onchain-community-live.yml"
+  push:
+    branches: [main]
+    paths:
+      - "onchain/**"
+      - "services/governance/noetfield_governance/onchain_community.py"
+      - "scripts/verify-onchain-community-live.py"
+      - ".github/workflows/onchain-community-live.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify live wallet login and daily XP service
+        run: python3 scripts/verify-onchain-community-live.py
+      - name: Check exact public release inputs
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          j = json.loads(Path('governance/www-public-artifact-v1.json').read_text())
+          names = ['onchain/hub/index.html','onchain/hub/hub.css','onchain/hub/hub.js']
+          assert all(n in j['static_files'] for n in names)
+          html = Path('onchain/hub/index.html').read_text()
+          assert 'onchain/hub/hub.js' in html
+          assert 'onchain/hub/hub.css' in html
+          print('PASS wallet app assets are publishable')
+          PY
