@@ -49,16 +49,16 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
 
 
 def test_homepage_explains_company_narrative_proof_and_asks() -> None:
-    """Canonical v2 homepage: governed execution, live founder-operated alpha."""
+    """Corporate homepage: real software entry, bounded alpha and proof."""
     text = read(ROOT / "index.html")
     required = (
-        "AGENT EXECUTION ASSURANCE",
+        "SOFTWARE CREATION · REAL SOURCE · INDEPENDENT EVIDENCE",
         "LIVE ALPHA",
-        "It runs the work, verifies the exact result, and lets you decide what gets accepted.",
+        "From ambitious ideas to real, editable software.",
         "founder-operated alpha",
-        "OPEN NOETFIELD APP",
-        "WATCH A COMPLETE RUN",
-        "EXPLORE ASSURANCE",
+        "TRY THE CURRENT APP",
+        "EXAMINE A VERIFIED RUN",
+        "REQUEST A SOFTWARE BUILD",
         "AI Motors provide the governed execution layer behind the product.",
         "Governed replacement",
         "Claims-boundary correction",

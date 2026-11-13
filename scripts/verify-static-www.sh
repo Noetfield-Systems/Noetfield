@@ -43,8 +43,8 @@ check_file "protected corporate homepage" index.html \
   '<body class="nf-corp nf-home">' '<main id="main">' \
   '/assets/noetfield-corporate-v1.css?v=5' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
-  'AI WORKFLOWS + AGENT EXECUTION ASSURANCE' \
-  'It runs the work, verifies the exact result, and lets you decide what gets accepted.' \
+  'SOFTWARE CREATION · REAL SOURCE · INDEPENDENT EVIDENCE' \
+  'Build, inspect, improve and publish with Noetfield.' \
   'founder-operated alpha' \
   'No external customers or revenue yet' \
   '/assets/product/noetfield-app-live.jpg' \
@@ -56,7 +56,7 @@ check_file "protected corporate homepage" index.html \
   'TrustField' 'href="https://trustfield.ca/"' 'independent venture in formation' \
   'human decision authority' \
   'href="/contact/"' 'Open Noetfield App' \
-  'OPEN NOETFIELD APP' 'WATCH A COMPLETE RUN' 'EXPLORE ASSURANCE' \
+  'TRY THE CURRENT APP' 'REQUEST A SOFTWARE BUILD' 'EXAMINE A VERIFIED RUN' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
   'nf-corp-section' 'nf-corp-hero' \
   'family=Newsreader' 'family=DM+Mono' \
@@ -65,6 +65,14 @@ check_file "protected corporate homepage" index.html \
   'href="/motors/"' 'href="/assurance/"' 'href="/applications/trustfield/"' \
   'https://app.noetfield.com/' \
   '/assets/noetfield-home-v2.css'
+check_file "verification commercial intake is real and scoped" assurance/index.html \
+  'Request a Verification Pilot' '/connect/?type=business&amp;initiative=noetfield&amp;offer=verification-pilot&amp;source=assurance' \
+  'portable, third-party Acceptance Gateway API/SDK' 'no external interoperability or independent security certification is claimed'
+check_file "customer offer links are safely routed" assets/noetfield-connect-v3.js \
+  '"verification-pilot"' '"software-build"' '"rwa-sprint"' 'sourceContext.value="Offered service: "'
+check_file "corporate software-project conversion" index.html \
+  'REQUEST A SOFTWARE BUILD' 'offer=software-build' 'Noetfield Runtime'
+
 check_absent "protected homepage has no stale TrustField product framing" index.html \
   'validation vertical' 'developed and operated by Noetfield Systems Inc.' 'LIVE PRODUCT' 'SourceB' \
   'nf-sourcea-xlink' 'Ops Health Audit' 'Also from Noetfield Systems'

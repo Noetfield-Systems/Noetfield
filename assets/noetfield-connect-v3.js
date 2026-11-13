@@ -54,6 +54,37 @@ function chooseFromLink(){
  }else if(["people","growth","partnership","capital","events","business","other"].includes(fromLink)){
    intent.value=fromLink;
  }
+ // Safe, allowlisted offer attribution. Query strings never inject HTML or
+ // bypass intake: customers must still review/edit and submit the real form.
+ var offerKey=(params.get("offer")||"").toLowerCase();
+ var preset={
+   "verification-pilot":{
+     title:"Independent AI execution verification pilot",
+     description:"I want an independent review of a real agent run, code change or API workflow with scoped acceptance criteria and evidence.",
+     initiative:"noetfield"
+   },
+   "software-build":{
+     title:"Real software build / repair project",
+     description:"I want to build, repair or publish a working software product with real source, testing and accountable delivery.",
+     initiative:"noetfield"
+   },
+   "rwa-sprint":{
+     title:"RWA policy-to-execution engineering sprint",
+     description:"I want to scope a real-world asset readiness, policy-to-code or onchain integration engineering engagement.",
+     initiative:"noetfield"
+   }
+ }[offerKey];
+ if(preset){
+   intent.value="business";
+   var init=form.elements.namedItem("initiative");
+   if(init&&[...init.options].some(function(option){return option.value===preset.initiative;}))init.value=preset.initiative;
+   ["title","description"].forEach(function(name){
+     var field=form.elements.namedItem(name);
+     if(field&&!field.value)field.value=preset[name];
+   });
+   var sourceContext=form.elements.namedItem("sourceContext");
+   if(sourceContext&&!sourceContext.value)sourceContext.value="Offered service: "+offerKey;
+ }
  var isPeople=intent.value==="people";
  if(isPeople){
     var init=form.elements.namedItem("initiative");
