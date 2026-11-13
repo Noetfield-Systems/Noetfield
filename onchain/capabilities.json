@@ -26,7 +26,22 @@
       "acceptance and evidence report"
     ],
     "availability": "Scoping and first-party demonstrations available; external commissioned deployment depends on written scope and partner/system access",
-    "pricing": "By written scope; no binding online price or instant checkout claimed"
+    "pricing": "By written scope; no binding online price or instant checkout claimed",
+    "pilot_sprint": {
+      "title": "RWA Readiness + Policy-to-Execution Sprint",
+      "status": "PILOT_OFFER_ACCEPTING_ENQUIRIES_NOT_AUTOMATIC_CHECKOUT",
+      "price_usd": 950,
+      "proposed_deposit_usd": 475,
+      "scope": "Fixed-scope assessment, executable policy spec, acceptance tests, integration plan and next-phase technical quote",
+      "estimated_turnaround": "3 business days after accepted written scope and complete materials",
+      "intake_topic": "rwa-paid-sprint",
+      "payment": "Correct-account payment request only after written scope acceptance; intake does not charge cards",
+      "first_party_components": [
+        "RWA Clinic",
+        "Agent Control Plane"
+      ],
+      "legal_boundary": "No legal opinion, investment solicitation, token issuance or custody"
+    }
   },
   "first_party_evidence": [
     {
