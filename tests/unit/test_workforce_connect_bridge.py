@@ -7,7 +7,7 @@ import json
 from unittest.mock import patch
 
 from noetfield_governance.intake_store import IntakeRecord
-from noetfield_governance.workforce_connect_bridge import eligible, deliver
+from noetfield_governance.workforce_connect_bridge import eligible, deliver, probe
 
 
 def record(vector="external-opportunities", metadata=None):
@@ -100,3 +100,30 @@ def test_unconfigured_bridge_does_not_attempt_a_network_call():
     assert outcome["eligible"] is True
     assert outcome["delivered"] is False
     assert outcome["error"] == "BRIDGE_NOT_CONFIGURED"
+
+
+def test_read_only_signed_production_handshake_requires_authenticated_database_ack():
+    accepted = AcceptedResponse({"authenticated": True, "database": "connected",
+                                 "read_only": True, "mode": "consent_scoped_idempotent_source_projection"})
+    with patch.dict("os.environ", {
+        "WORKFORCE_CONNECT_BRIDGE_URL": "https://workforce.example.org",
+        "WORKFORCE_CONNECT_BRIDGE_KEY": "x" * 48,
+    }):
+        with patch("noetfield_governance.workforce_connect_bridge.urlopen",
+                   return_value=accepted) as fetch:
+            result = probe()
+    assert result == {"connected": True, "mode": "SIGNED_READ_ONLY_NO_CASE"}
+    request = fetch.call_args.args[0]
+    assert request.get_method() == "GET"
+    assert request.full_url.endswith("/api/integrations/noetfield-connect/health")
+    assert request.data is None
+
+    denied = AcceptedResponse({"authenticated": False, "database": "connected",
+                               "read_only": True})
+    with patch.dict("os.environ", {
+        "WORKFORCE_CONNECT_BRIDGE_URL": "https://workforce.example.org",
+        "WORKFORCE_CONNECT_BRIDGE_KEY": "x" * 48,
+    }):
+        with patch("noetfield_governance.workforce_connect_bridge.urlopen",
+                   return_value=denied):
+            assert probe()["connected"] is False
