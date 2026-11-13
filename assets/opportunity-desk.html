@@ -193,7 +193,7 @@ $("results").querySelectorAll("[data-id]").forEach(el=>el.addEventListener("clic
 const selected=state.rows.find(x=>x.intake_id===state.selected);
 $("detail").className=selected?"":"empty";
 $("detail").innerHTML=selected?renderDetail(selected):"Select a case to inspect evidence and record a next action.";
-if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));}
+if(selected){$("save-case").addEventListener("submit",e=>save(e,selected));$("activity-form").addEventListener("submit",e=>submitActivity(e,selected));$("invitation-form").addEventListener("submit",e=>prepareInvitation(e,selected));if($("sync-workforce"))$("sync-workforce").addEventListener("click",()=>syncWorkforce(selected));}
 }
 function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class="item-head"><h2>'+safe(x.title||"Opportunity")+'</h2><span class="pill">'+safe(stageLabels[x.stage]||x.stage)+'</span></div><p class="small">'+safe(x.intake_id)+' · Received '+safe(date(x.received_at))+' · Revision '+safe(x.revision)+'</p>'+
 '<div class="detail-grid">'+[['Contact',x.person],['Email',x.email],['Organization',x.organization],['Source',x.source],['Initiative',x.initiative],['Opportunity type',x.opportunity_label],['Deadline',x.deadline],['Priority',x.priority_score+" / 100"]].map(([a,b])=>'<div class="detail-value"><b>'+safe(a.toUpperCase())+'</b>'+safe(b||"—")+'</div>').join("")+'</div>'+
@@ -216,6 +216,11 @@ function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class=
 '<label>Due date<input name="due_date" type="date" value="'+safe(x.next_action_due||"")+'"></label>'+
 '<label>Operator note / outcome evidence<textarea name="note" maxlength="800" rows="3" placeholder="Specific evidence, unanswered questions, or reason for closure">'+safe(x.operator_note||"")+'</textarea></label>'+
 '<button id="save-button" class="primary" type="submit">Save source-backed case</button><span id="save-status" role="status" class="small"></span></form>'+
+(x.opportunity_type==="people" && x.consent_contact && x.request_id ?
+'<div class="section-label">WORKFORCEOS · CANONICAL CASE HANDOFF</div>'+
+'<p class="small">Consen­ted people applications automatically sync after source persistence. If a network delivery failed, replay the same RID without creating another application. Sync is not an assignment.</p>'+
+'<button type="button" id="sync-workforce" class="secondary">Sync / repair WorkforceOS case</button> <span id="sync-workforce-status" role="status" class="small"></span>' : '')+
+
 
 '<div class="section-label">RECIPROCAL VALUE · SELF-REPORTED</div>'+
 '<div class="detail-grid"><div class="detail-value"><b>WHAT THEY OFFER</b>'+safe(x.offer||"Not supplied")+'</div><div class="detail-value"><b>WHAT THEY ASK</b>'+safe(x.ask||"Not supplied")+'</div>'+
@@ -240,6 +245,18 @@ function renderDetail(x){const link=goodUrl(x.reference_url);return '<div class=
 '<div class="section-label">CHANGE HISTORY</div>'+
 ((x.activity||[]).length?'<ol class="history">'+x.activity.slice().reverse().map(h=>'<li>'+safe(date(h.at))+' · '+safe(h.stage)+' · '+safe(h.owner||"Unassigned")+(h.note?" — "+safe(h.note):"")+'</li>').join("")+'</ol>':'<p class="small">No operator updates recorded yet.</p>')+
 '<hr class="sep"><p class="small">Recommended role: '+safe(x.suggested_owner_role)+'. No external outreach, calendar booking, Company OS dispatch, verification or money movement occurs by saving this case.</p>'}
+async function syncWorkforce(x){
+ const button=$("sync-workforce"), status=$("sync-workforce-status");
+ if(!button || state.busy || !x.request_id)return;
+ state.busy=true;button.disabled=true;status.textContent="Checking original source and WorkforceOS…";
+ try{
+  const result=await call("/api/opportunities/desk/workforce/retry","POST",{request_id:x.request_id});
+  status.textContent="Confirmed WorkforceOS case: "+result.case_id+
+    (result.deduped?" · existing case reused":" · first confirmed import")+
+    ". No assignment or verification is claimed.";
+ }catch(error){status.textContent="Sync not confirmed: "+error.message;}
+ finally{state.busy=false;button.disabled=false;}
+}
 async function save(ev,x){ev.preventDefault();if(state.busy)return;state.busy=true;const button=$("save-button"),form=ev.currentTarget;button.disabled=true;text("save-status","Saving…");const fd=new FormData(form);const payload={expected_revision:Number(x.revision||0),stage:fd.get("stage"),owner:String(fd.get("owner")||"").trim(),next_action:String(fd.get("next_action")||"").trim(),due_date:fd.get("due_date")||null,note:String(fd.get("note")||"").trim()};
 try{await call("/api/opportunities/desk/"+encodeURIComponent(x.intake_id),"PATCH",payload);await load();text("save-status","")}catch(err){text("save-status",err.message+" · Refresh if this record was updated elsewhere.")}finally{state.busy=false;button.disabled=false}}
 
