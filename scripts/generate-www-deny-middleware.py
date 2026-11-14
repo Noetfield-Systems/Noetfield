@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DENYLIST = ROOT / "governance" / "PUBLIC_OUTPUT_DENYLIST.json"
 PROXY_CFG = ROOT / "data" / "nf-www-gov-proxy-v1.json"
+ONCHAIN_PROXY_CFG = ROOT / "data" / "nf-www-onchain-proxy-v1.json"
 OUT = ROOT / "functions" / "_middleware.js"
 
 # Prefixes proxied to Railway when nf-www-gov-proxy-v1.enabled=true (middleware, not _redirects).
@@ -47,12 +48,44 @@ def _gov_proxy_block() -> tuple[bool, dict[str, str]]:
     return True, origins
 
 
+# Only these new app routes may migrate. Never forward legacy RWA/Hub/Whitepaper
+# or unrelated corporate/Stripe webhook paths to the Onchain OS service.
+ONCHAIN_ALLOWED = frozenset((
+    "/onchain/", "/onchain/architect", "/onchain/network",
+    "/onchain/economy", "/onchain/proof",
+    "/onchain/styles.css", "/onchain/app.js",
+    "/api/architect", "/api/public/config", "/api/public/network",
+    "/api/public/opportunities", "/api/public/providers", "/api/providers/apply",
+))
+
+
+def _onchain_proxy_block() -> dict[str, str]:
+    if not ONCHAIN_PROXY_CFG.is_file():
+        return {}
+    config = json.loads(ONCHAIN_PROXY_CFG.read_text(encoding="utf-8"))
+    if not config.get("enabled"):
+        return {}
+    origin = str(config.get("origin") or "").rstrip("/")
+    # A safe, deliberate upstream: not an attacker-controlled request hostname.
+    if not origin.startswith("https://") or ".up.railway.app" not in origin:
+        raise ValueError("onchain upstream requires an approved HTTPS Railway host")
+    paths = config.get("paths", [])
+    if not isinstance(paths, list) or len(paths) != len(set(paths)):
+        raise ValueError("onchain route list must be unique")
+    if not set(paths).issubset(ONCHAIN_ALLOWED):
+        raise ValueError("onchain bridge attempted to hijack an unapproved route")
+    return {path: origin for path in paths}
+
+
 def main() -> int:
     data = json.loads(DENYLIST.read_text(encoding="utf-8"))
     exact, prefixes = _deny_sets(data)
     exact_json = json.dumps(exact, separators=(",", ":"))
     prefix_json = json.dumps(prefixes, separators=(",", ":"))
     proxy_enabled, proxy_origins = _gov_proxy_block()
+    onchain_origins = _onchain_proxy_block()
+    proxy_origins.update(onchain_origins)
+    proxy_enabled = proxy_enabled or bool(onchain_origins)
     proxy_json = json.dumps(
         {"enabled": proxy_enabled, "origins": proxy_origins},
         separators=(",", ":"),
