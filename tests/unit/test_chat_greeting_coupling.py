@@ -50,3 +50,13 @@ def test_verify_chat_greeting_coupling_disk_passes() -> None:
         check=False,
     )
     assert result.returncode == 0, result.stderr or result.stdout
+
+
+def test_public_chat_greeting_is_owned_by_www_ssot() -> None:
+    route = (ROOT / "api" / "public" / "chat" / "index.js").read_text(encoding="utf-8")
+    verifier = VERIFY.read_text(encoding="utf-8")
+
+    assert 'return serveGreeting(res);' in route
+    assert 'platformBase + "/api/public/chat/greeting"' not in route
+    assert "www_base.rstrip('/')}/api/public/chat" in verifier
+    assert 'platform_base.rstrip("/")}/api/public/chat/health' not in verifier
