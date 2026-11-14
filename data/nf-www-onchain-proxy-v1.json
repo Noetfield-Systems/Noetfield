@@ -1,0 +1,21 @@
+{
+  "schema": "nf-www-onchain-route-bridge-v1",
+  "enabled": true,
+  "origin": "https://onchain-os-staging.up.railway.app",
+  "note": "Only new standalone app routes and the dedicated architect/public-provider APIs are proxied; old RWA, Hub, Policy, Agents, Stablecoin, Whitepaper and site APIs stay on Cloudflare Pages.",
+  "paths": [
+    "/onchain/",
+    "/onchain/architect",
+    "/onchain/network",
+    "/onchain/economy",
+    "/onchain/proof",
+    "/onchain/styles.css",
+    "/onchain/app.js",
+    "/api/architect",
+    "/api/public/config",
+    "/api/public/network",
+    "/api/public/opportunities",
+    "/api/public/providers",
+    "/api/providers/apply"
+  ]
+}

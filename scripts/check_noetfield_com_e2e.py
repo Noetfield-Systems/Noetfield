@@ -21,7 +21,7 @@ API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 # Corporate entry homepage — product CTAs remain on their scoped field pages.
 HOME_NEEDLES = (
     "nf-corp",
-    "Give Noetfield a goal.",
+    "Building the next generation of ",
     "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.",
     "founder-operated alpha",
     "TrustField",
