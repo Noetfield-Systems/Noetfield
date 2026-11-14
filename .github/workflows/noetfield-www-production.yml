@@ -41,6 +41,8 @@ on:
       - "scripts/deploy-www-cloudflare.sh"
       - "scripts/generate-cf-redirects.py"
       - "scripts/generate-www-deny-middleware.py"
+      - "data/nf-www-onchain-proxy-v1.json"
+      - "scripts/test-onchain-route-bridge.mjs"
       - "scripts/generate_sitemap.py"
       - "scripts/nf_post_deploy_verify.py"
       - "scripts/nf_www_deploy_anti_stale_v2.py"
@@ -148,6 +150,7 @@ jobs:
             tests/unit/test_nf_www_deploy_anti_stale_v2.py \
             tests/unit/test_social_preview_v2.py
           node scripts/test-cf-www-proxy.mjs
+          node scripts/test-onchain-route-bridge.mjs
           bash -n scripts/deploy-www-cloudflare.sh scripts/deploy-cf-www-proxy.sh
           python3 -m py_compile \
             scripts/nf_www_deploy_anti_stale_v2.py \
