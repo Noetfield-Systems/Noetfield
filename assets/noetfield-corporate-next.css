@@ -327,3 +327,15 @@ body.nf-corp.nf-home.nf-lane-intelligence section.hero.nf-corp-hero.nf-instituti
  body.nf-corp.nf-corp--inner .nf-corp-header .nf-corp-brand__mark{margin:0!important;flex-shrink:0}
  body.nf-corp.nf-corp--inner .nf-corp-header .nx-inner-menu{flex:0 0 auto!important;margin:0 0 0 auto!important;min-width:72px}
 }
+
+/* Full-page QA found the inherited walkthrough body was white on the dark
+   canvas while the redesigned text was pale. Restore a genuine dark console. */
+body.nf-corp.nf-home #walkthrough .chain .chain__body{background:#0c2535!important;color:#e8f5f4!important}
+body.nf-corp.nf-home #walkthrough .chain .chain__pane{background:#0e2a3b!important;border-color:rgba(149,207,210,.2)!important;color:#edf7f5!important}
+body.nf-corp.nf-home #walkthrough .chain .chain__meta{background:#122f40!important;border-color:rgba(149,207,210,.2)!important;color:#d2e6e6!important}
+body.nf-corp.nf-home #walkthrough .chain .chain__pane h3{color:#f4faf9!important;font-size:23px!important}
+body.nf-corp.nf-home #walkthrough .chain .chain__pane p{color:#b8d0d7!important;font-size:14px!important;line-height:1.8!important}
+body.nf-corp.nf-home #walkthrough .chain .chain__meta-label{color:#e4c38c!important;font-size:10px!important;letter-spacing:.1em}
+body.nf-corp.nf-home #walkthrough .chain .chain__meta-value{color:#c7e2e0!important;font-size:13px!important}
+body.nf-corp.nf-home #walkthrough .chain .chain__nav button{background:#1d4659!important;border:1px solid rgba(157,215,215,.32)!important;color:#e6f2f1!important;border-radius:6px!important;padding:10px 15px!important}
+body.nf-corp.nf-home #walkthrough .chain .chain__nav button:hover{background:#286378!important}
