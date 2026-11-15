@@ -43,6 +43,8 @@ try:
             assert all(z["loaded"] for z in image_results),image_results
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
             assert dimensions["doc"]<=width+2,dimensions
+            design_diagnostics=page.evaluate("""() => ({sheet:[...document.styleSheets].filter(s=>s.href&&s.href.includes('corporate-next')).map(s=>({url:s.href,rules:(()=>{try{return s.cssRules.length}catch(e){return 'error'}})()})), bodyClass:document.body.className,heroClass:document.querySelector('.nf-institutional-hero')?.className,coreWidth:getComputedStyle(document.querySelector('.nx-core')).width,heroBackground:getComputedStyle(document.querySelector('.nf-institutional-hero')).background})""")
+            print("CORPORATE_DESIGN_DIAGNOSTICS="+json.dumps(design_diagnostics),flush=True)
             hero_background=page.locator(".nf-institutional-hero").evaluate("el => getComputedStyle(el).backgroundColor")
             assert hero_background=="rgb(7, 18, 29)", f"Corporate navy background overridden: {hero_background}"
             assert page.locator(".nx-orb-label").count()==4
