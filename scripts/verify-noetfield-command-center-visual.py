@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Real-source corporate homepage visual acceptance; desktop, tablet and phone.
 
-Checks that the approved architectural photo and commercial cards render as
-real web images and that actions, navigation, and layouts are functional.
+Checks the redesigned custom systems artwork and existing commercial cards
+render correctly at real browser viewport sizes with live links and controls.
 No fabricated business activity or dynamic numbers are asserted.
 """
 from __future__ import annotations
@@ -24,7 +24,7 @@ try:
             page.on("pageerror",lambda e:errors.append(str(e)))
             response=page.goto("http://127.0.0.1:8979/",wait_until="networkidle",timeout=35000)
             assert response.status==200,response.status
-            page.locator(".nf-ins-hero-media img").wait_for()
+            page.locator(".nx-visual .nx-core").wait_for()
             title=page.locator("h1#hero-title").inner_text()
             assert "intelligent businesses" in title.lower(),title
             assert page.locator("h1").count()==1
@@ -43,12 +43,15 @@ try:
             assert all(z["loaded"] for z in image_results),image_results
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
             assert dimensions["doc"]<=width+2,dimensions
-            hero_background=page.locator(".nf-institutional-hero").evaluate("el => getComputedStyle(el).backgroundImage")
-            assert "rgb(6, 23, 34)" in hero_background or "rgb(10, 28, 42)" in hero_background, f"Premium dark background overridden: {hero_background}"
-            hero_box=page.locator(".nf-ins-hero-media img").bounding_box()
-            assert hero_box and hero_box["width"]>=200 and hero_box["height"]>=180,hero_box
+            hero_background=page.locator(".nf-institutional-hero").evaluate("el => getComputedStyle(el).backgroundColor")
+            assert hero_background=="rgb(7, 18, 29)", f"Corporate navy background overridden: {hero_background}"
+            assert page.locator(".nx-orb-label").count()==4
+            assert page.locator(".nx-visual svg").is_visible()
+            assert page.locator(".nx-core").is_visible()
+            hero_box=page.locator(".nx-visual").bounding_box()
+            assert hero_box and hero_box["width"]>=280 and hero_box["height"]>=300,hero_box
             if width<=700:
-                assert hero_box["y"]<height-70, f"Photo falls below first screen: {hero_box}"
+                assert hero_box["y"]<height-70, f"Artwork falls below first screen: {hero_box}"
                 brand_box=page.locator(".nf-ins-header .nf-corp-brand").bounding_box()
                 menu_box=page.locator(".nf-q-menu").bounding_box()
                 assert brand_box and menu_box and abs(brand_box["y"]-menu_box["y"]) < 20, f"Mobile header wraps: {brand_box}, {menu_box}"
