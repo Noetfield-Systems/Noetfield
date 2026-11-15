@@ -70,6 +70,24 @@ try:
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
             results.append(dict(viewport=name,document=dimensions,hero=hero_box,images=image_results,paths=paths.count(),capabilities=capabilities.count(),jsErrors=errors,ok=True))
             page.close()
+        # New corporate inner pages must work as pages, not decorative screenshots:
+        # mobile menu can open/close without stealing the App CTA or breaking navigation.
+        for route,slug in [("/about/","about"),("/investors/","investors")]:
+            page=browser.new_page(viewport={"width":390,"height":844},device_scale_factor=1)
+            response=page.goto("http://127.0.0.1:8979"+route,wait_until="networkidle",timeout=35000)
+            assert response.status==200,(route,response.status)
+            toggle=page.locator(".nx-inner-menu")
+            assert toggle.is_visible(),route
+            toggle.click()
+            assert toggle.get_attribute("aria-expanded")=="true",route
+            nav=page.locator(".nf-corp-header .nf-corp-nav")
+            assert nav.is_visible(),route
+            assert nav.locator('a[href="https://app.noetfield.com/"]').count()==1,route
+            page.screenshot(path=str(OUT/f"{slug}-mobile.png"),full_page=False,animations="disabled")
+            page.keyboard.press("Escape")
+            assert toggle.get_attribute("aria-expanded")=="false",route
+            assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+2"),route
+            page.close()
         browser.close()
 finally:
     server.terminate()
