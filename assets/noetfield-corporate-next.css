@@ -316,3 +316,6 @@ body.nf-corp.nf-corp--inner .nf-corp-brand__mark{background:linear-gradient(145d
  body.nf-corp.nf-corp--inner .nf-corp-brand{font-size:15px!important}
  body.nf-corp.nf-corp--inner .nf-corp-brand__mark{font-size:33px!important;width:36px}
 }
+
+/* Override legacy lane-specific hero gradients that otherwise win via specificity. */
+body.nf-corp.nf-home.nf-lane-intelligence section.hero.nf-corp-hero.nf-institutional-hero{background:#07121d!important}
