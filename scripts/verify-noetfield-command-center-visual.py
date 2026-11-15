@@ -78,12 +78,13 @@ try:
             assert response.status==200,(route,response.status)
             toggle=page.locator(".nx-inner-menu")
             assert toggle.is_visible(),route
+            page.screenshot(path=str(OUT/f"{slug}-mobile.png"),full_page=False,animations="disabled")
             toggle.click()
             assert toggle.get_attribute("aria-expanded")=="true",route
             nav=page.locator(".nf-corp-header .nf-corp-nav")
             assert nav.is_visible(),route
             assert nav.locator('a[href="https://app.noetfield.com/"]').count()==1,route
-            page.screenshot(path=str(OUT/f"{slug}-mobile.png"),full_page=False,animations="disabled")
+            page.screenshot(path=str(OUT/f"{slug}-menu.png"),full_page=False,animations="disabled")
             page.keyboard.press("Escape")
             assert toggle.get_attribute("aria-expanded")=="false",route
             assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+2"),route
