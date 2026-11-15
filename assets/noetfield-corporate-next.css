@@ -298,3 +298,21 @@ body.nf-corp.nf-corp--inner .nf-corp-footer a:hover{color:#e9c78f}
  body.nf-corp.nf-corp--inner .nf-principle-grid article{min-height:0}
 }
 body.nf-corp.nf-home #now .runways>.runway:last-child:nth-child(3n + 2){grid-column:auto!important}
+
+
+/* Accessible two-state inner navigation: mobile is a real menu, not clipped text. */
+body.nf-corp.nf-corp--inner .nx-inner-menu{display:none}
+body.nf-corp.nf-corp--inner .nf-corp-navrow{position:relative;display:flex;align-items:center;gap:20px;min-height:82px}
+body.nf-corp.nf-corp--inner .nf-corp-brand{font:700 18px/1.2 Inter,sans-serif!important;letter-spacing:-.045em!important}
+body.nf-corp.nf-corp--inner .nf-corp-brand__mark{background:linear-gradient(145deg,#fff6e2,#c9a06a)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important}
+@media(max-width:1050px){
+ body.nf-corp.nf-corp--inner .nf-corp-header .nf-corp-nav{display:none}
+ body.nf-corp.nf-corp--inner .nx-inner-menu{display:inline-flex;align-items:center;justify-content:center;margin-left:auto;background:transparent;color:#f0f5f5;border:1px solid #688491;border-radius:7px;padding:12px 15px;font:600 12px Inter,sans-serif;cursor:pointer}
+ body.nf-corp.nf-corp--inner .nf-corp-header .nf-corp-nav[data-open="true"]{display:flex;position:absolute;z-index:100;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#0b2231;border:1px solid rgba(152,200,202,.2);padding:10px 15px;box-shadow:0 25px 60px rgba(0,0,0,.3)}
+ body.nf-corp.nf-corp--inner .nf-corp-header .nf-corp-nav[data-open="true"] a{display:block;padding:12px;color:#edf6f5!important;border-bottom:1px solid rgba(152,200,202,.13)}
+ body.nf-corp.nf-corp--inner .nf-corp-header .nf-corp-nav[data-open="true"] .nf-corp-nav__cta{background:#ebc78b!important;color:#091823!important;margin:10px 0 0;text-align:center}
+}
+@media(max-width:620px){
+ body.nf-corp.nf-corp--inner .nf-corp-brand{font-size:15px!important}
+ body.nf-corp.nf-corp--inner .nf-corp-brand__mark{font-size:33px!important;width:36px}
+}
