@@ -319,3 +319,11 @@ body.nf-corp.nf-corp--inner .nf-corp-brand__mark{background:linear-gradient(145d
 
 /* Override legacy lane-specific hero gradients that otherwise win via specificity. */
 body.nf-corp.nf-home.nf-lane-intelligence section.hero.nf-corp-hero.nf-institutional-hero{background:#07121d!important}
+
+/* Mobile corporate subpage header must stay in one horizontal row. */
+@media(max-width:620px){
+ body.nf-corp.nf-corp--inner .nf-corp-header .nf-corp-navrow{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;min-height:76px!important}
+ body.nf-corp.nf-corp--inner .nf-corp-header .nf-corp-brand{margin:0!important;min-width:0!important;flex:0 1 auto!important;display:inline-flex!important;align-items:center!important;gap:9px!important;white-space:nowrap!important}
+ body.nf-corp.nf-corp--inner .nf-corp-header .nf-corp-brand__mark{margin:0!important;flex-shrink:0}
+ body.nf-corp.nf-corp--inner .nf-corp-header .nx-inner-menu{flex:0 0 auto!important;margin:0 0 0 auto!important;min-width:72px}
+}
