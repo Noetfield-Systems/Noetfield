@@ -68,6 +68,8 @@ try:
             assert page.locator("a[href='/demo/complete-run/']").count()>0
             assert not errors,errors
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
+            if name=="desktop-1440":
+                page.screenshot(path=str(OUT/"desktop-full-page.png"),full_page=True,animations="disabled")
             results.append(dict(viewport=name,document=dimensions,hero=hero_box,images=image_results,paths=paths.count(),capabilities=capabilities.count(),jsErrors=errors,ok=True))
             page.close()
         # New corporate inner pages must work as pages, not decorative screenshots:
