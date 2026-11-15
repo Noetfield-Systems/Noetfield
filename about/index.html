@@ -61,7 +61,8 @@
     <span class="nf-corp-brand__mark" aria-hidden="true">N</span>
     <span>Noetfield Systems <small>Inc.</small></span>
    </a>
-   <nav class="nf-corp-nav" aria-label="Primary navigation">
+   <button class="nx-inner-menu" type="button" aria-controls="nx-inner-nav" aria-expanded="false">Menu ☰</button>
+   <nav id="nx-inner-nav" class="nf-corp-nav" aria-label="Primary navigation">
     <a href="/#product">Product</a><a href="/workflows/">Workflows</a><a href="/assurance/">Assurance</a><a href="/tools/">Tools</a><a href="/developers/">Developers</a><a href="/applications/trustfield/" aria-label="TrustField — independent venture">TrustField</a><a href="/proof/">Proof</a><a href="/about/" aria-current="page">Company</a>
     <a class="nf-corp-nav__cta nf-corp-nav__alpha" href="https://app.noetfield.com/" rel="noopener noreferrer">Open Noetfield App</a>
    </nav>
@@ -111,5 +112,6 @@
   <div class="nf-corp-wrap nf-corp-footer__base"><span>© 2026 Noetfield Systems Inc.</span><span>Evidence before claims.</span></div>
  </footer>
  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+<script>(function(){var b=document.querySelector(".nx-inner-menu"),n=document.getElementById("nx-inner-nav");if(!b||!n)return;b.addEventListener("click",function(){var open=b.getAttribute("aria-expanded")==="true";b.setAttribute("aria-expanded",String(!open));n.dataset.open=String(!open)});n.addEventListener("click",function(e){if(e.target.closest("a")){b.setAttribute("aria-expanded","false");n.dataset.open="false"}});document.addEventListener("keydown",function(e){if(e.key==="Escape"){b.setAttribute("aria-expanded","false");n.dataset.open="false"}})})();</script>
 </body>
 </html>
