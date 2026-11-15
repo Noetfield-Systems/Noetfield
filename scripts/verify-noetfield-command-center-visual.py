@@ -69,6 +69,10 @@ try:
             assert not errors,errors
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
             if name=="desktop-1440":
+                # Browser full-page capture does not trigger offscreen lazy images.
+                # Force the three real app screenshots to load, assert natural pixels.
+                page.locator("#app .teach img").evaluate_all("els=>els.forEach(el=>el.loading='eager')")
+                page.wait_for_function("""() => Array.from(document.querySelectorAll('#app .teach img')).every(im=>im.complete && im.naturalWidth>200)""",timeout=20000)
                 page.screenshot(path=str(OUT/"desktop-full-page.png"),full_page=True,animations="disabled")
             results.append(dict(viewport=name,document=dimensions,hero=hero_box,images=image_results,paths=paths.count(),capabilities=capabilities.count(),jsErrors=errors,ok=True))
             page.close()
