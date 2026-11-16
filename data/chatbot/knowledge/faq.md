@@ -2,43 +2,28 @@
 
 ## What is Noetfield?
 
-Noetfield produces the audit trail a regulated Copilot rollout will be asked for later.
+Noetfield Systems builds intelligent infrastructure for real businesses. We help founders create software, businesses automate operations with AI, and asset owners prepare economic rights and workflows for digital capital. Company OS and Real-World Capital are the two commercial platforms; Noetfield's App, Runtime and verification technology support delivery.
 
-For CCO, CRO, CISO, CTO, procurement, and board teams, Noetfield turns a high-risk AI or Microsoft 365 Copilot go/no-go into signed evidence: policy checks, confidence signals, named approvers, a metadata-only M365 evidence index, a Trust Ledger Entry, a board PDF, and a procurement ZIP. The value is a defensible record before Copilot or agentic automation touches production scope.
+## What should I explore?
 
-## What are the three contract offerings?
+- **Software with AI:** open https://app.noetfield.com/ or request a scoped software project through /connect/.
+- **Company OS:** business automation for sales, support and operations at /company-os/. The published AI Sales OS pilot is CAD $750 after written acceptance of scope for one lead-to-follow-up workflow.
+- **Real-World Capital:** readiness and technical delivery for assets, private credit and acquisitions at /real-world-capital/. The published RWA technical sprint is US$950; the US$475 deposit is for a previously accepted written scope.
+- **Collaboration:** founders, developers, specialists and partners can propose work at /work-with-us/ or /opportunities/.
+- **Community:** free, consent-based interests and early product updates at /community/. This is an interest list, not an automatic user account or token right.
 
-1. **Copilot Governance Pack** — 90-day governed readiness. The current self-serve Starter checkout is US$2,000. Larger Readiness Pilot engagements are scoped in a signed SOW; the public pilot page describes a CAD $2,000–$10,000 band.
-2. **Trust Brief** — six-week governance diagnostic. The current Stripe checkout is US$10,000. Scope variations are confirmed in a signed SOW.
-3. **Bank Pilot** — custom, read-only shadow governance simulation for regulated institutions. Intake and SOW only; no direct checkout.
+## Do specialized AI-governance offerings exist?
 
-The free developer sandbox is product access, not a fourth contract SKU.
+Yes. The **Copilot Governance Pack** is a 90-day readiness program; the published self-serve Starter reference is US$2,000. Larger Readiness Pilot scopes are quoted separately. **Trust Brief** is a six-week governance diagnostic with a published US$10,000 checkout reference, and **Bank Pilot** is custom, read-only shadow governance with written scope. Confirm current availability and price with the relevant offer page. These are specialized programs, not the entire corporate identity.
 
-## What buyer problem do we solve?
+## What does governance work deliver when scoped?
 
-Copilot and agentic workflows can move faster than policy sign-off. Buyers need a record of who reviewed a use case, what policy applied, what evidence was inspected, and whether production scope was approved, declined, or escalated.
-
-## What does a client receive?
-
-- Signed go/no-go receipts with Request ID lineage.
-- Trust Ledger Entries (TLEs) with decision and policy references.
-- Metadata-only M365 evidence index where connectors are in scope.
-- A board PDF for governance and budget meetings.
-- A procurement ZIP for legal, vendor risk, and diligence review.
-- Fail-closed export integrity checks.
+Depending on the engagement: named approvers, policy mapping, signed go/no-go records, a Trust Ledger Entry, metadata-only M365 evidence index, board PDF, procurement ZIP, and reviewable failure/acceptance evidence.
 
 ## How do I engage?
 
-Use the five-minute demo, start a free sandbox, or submit a non-confidential intake. Operations routes requests through operations@noetfield.com. Include your Request ID (RID) in email subjects.
+Use /connect/ for a real project, /company-os/ for an automation pilot, /real-world-capital/ for an asset assessment, /work-with-us/ to contribute, /community/ for product updates, /proof/ for technical evidence, or operations@noetfield.com for direct business enquiries.
 
-## GEL
+## GEL, technical execution and limitations
 
-GEL means Governance Execution Layer. It evaluates operational intent against a policy pack before downstream execution and emits Trust Ledger evidence. Public page: https://www.noetfield.com/gel/. Hosted API: https://api.noetfield.com.
-
-## Governance Console and data
-
-The Governance Console is for authorized pilot users. Public intake forms are for non-confidential information only. Secure sharing protocols are confirmed after kickoff.
-
-## Scope boundary
-
-Noetfield does not execute payments, custody assets, initiate transactions, route funds, operate an exchange, or provide legal or regulatory certification.
+GEL means Governance Execution Layer; see /gel/ and api.noetfield.com for technical scope. Public demos are labeled according to their actual first-party or synthetic evidence. Noetfield provides technology and professional services, not asset custody, money transmission, securities brokerage, legal certification or guaranteed business returns. Keep technical, investment and community/venture boundaries accurate.

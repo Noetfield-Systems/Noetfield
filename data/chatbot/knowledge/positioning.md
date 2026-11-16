@@ -1,19 +1,23 @@
-# Market positioning
+# Market positioning — Noetfield Systems
 
-Noetfield produces the audit trail a regulated Copilot rollout will be asked for later.
+**Intelligence for the Real Economy.** Noetfield builds intelligent infrastructure for real businesses: software creation, AI business operations and real-world asset technology services. The company connects engineering, human teams and AI execution to scoped business outcomes.
 
-## Product definition
+## Primary commercial platforms
 
-Noetfield is a governed AI execution and evidence layer for Microsoft 365 Copilot and agentic workflows. It helps teams assess high-risk intent before production scope opens and retain the evidence: policy references, confidence signals, named approvers, metadata-only M365 evidence index, Trust Ledger Entry, board PDF, and procurement ZIP.
+1. **Company OS / AI Business Operations:** help operators connect sales, support and other repeatable processes to bounded AI workflows. Published AI Sales OS pilot: CAD $750 for one lead-to-follow-up workflow after scope acceptance. Entry: /company-os/.
+2. **Real-World Capital / Digital Asset Services:** technical readiness, rights mapping, integration and acquisition preparation for real-world assets and digital capital. Published RWA/Policy-to-Execution sprint: US$950 (US$475 deposit only after written scope). Entry: /real-world-capital/.
 
-## Value
+## Other entry points
 
-Regulated organizations adopt copilots and automation faster than policy and approval processes can keep pace. Noetfield provides a defensible decision package that risk, compliance, procurement, and board teams can inspect.
+- AI Software Builder: app.noetfield.com; scope-specific software builds via /connect/.
+- Builders, cofounders, agencies and channel partners: /work-with-us/ or /opportunities/.
+- Product updates, feedback and founding community: /community/, free email-based interest intake, not an automatic account.
+- Technical proof: /proof/; technical names such as Runway, AI Motors and Verifier are subordinate to commercial value in sales copy.
 
-## Lead paid path
+## Specialized governance and technical infrastructure
 
-The Copilot Governance Pack is the lead institutional pilot. Its current self-serve Starter checkout is US$2,000; larger 90-day readiness scopes are contracted by SOW. Trust Brief is the six-week diagnostic, with a current US$10,000 Stripe checkout. Bank Pilot is custom and intake-only.
+Noetfield also develops explicit authority, independent checks and execution evidence. For a buyer asking specifically about Microsoft 365 Copilot or governance, explain specialized offerings: Copilot Governance Pack, Trust Brief and Bank Pilot, with their applicable contracts, a board PDF, procurement ZIP or metadata-only M365 evidence where scoped.
 
-## Boundary
+## Boundaries
 
-Noetfield is a software and professional-services vendor, not a bank, PSP, custodian, exchange, money transmitter, or certification body.
+TrustField and other ventures are independent; Noetfield technical collaboration does not make their tokens, community, finances or traction corporate assets. Do not fabricate clients, transactions, regulatory rights or delivered project outcomes. Disclose specific product maturity where material and answer diligence questions accurately; do not lead general marketing with internal revenue or status reports.

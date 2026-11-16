@@ -2,17 +2,19 @@
 
 const CANONICAL_INTAKE = "operations@noetfield.com";
 const EXECUTIVE_OVERVIEW_REPLY =
-  "Noetfield produces the audit trail a regulated Copilot rollout will be asked for later. " +
-  "For CCO, CRO, CISO, CTO, procurement, and board teams, Noetfield turns each high-risk Microsoft 365 Copilot or AI go/no-go into signed evidence: policy check, confidence score, named approvers, metadata-only M365 evidence index, Trust Ledger Entry, board PDF, and procurement ZIP. " +
-  "The lead paid path is the Copilot Governance Pack ($2k-10k, 90 days): live TLE records, board PDF for a governance meeting, and procurement ZIP for diligence. " +
-  "Trust Brief is the $10k diagnostic when policy mapping comes first. Bank Pilot is read-only shadow governance for regulated institutions. " +
-  "Plain English: we make AI execution impossible to bypass governance.";
+  "Noetfield Systems builds intelligent infrastructure for real businesses. " +
+  "Founders can explore the AI Software Builder to shape software projects. Businesses can commission AI workflow automation through Company OS, including a scoped lead-to-follow-up pilot. " +
+  "Asset owners and capital professionals can explore Real-World Capital: readiness assessment, rights and workflow mapping, and scoped digital-asset technology services. " +
+  "Builders and commercial partners can propose collaborations, while anyone interested in the products can join the free founding community. " +
+  "Start with a product, tell us the business problem, or share a concrete opportunity; technical evidence is available separately.";
 
 const EXECUTIVE_OVERVIEW_CITATIONS = [
-  "/enterprise/",
-  "/copilot/pilot/",
-  "/copilot/demo/",
-  "/trust-brief/intake/?interest=pilot&vector=copilot-governance",
+  "/",
+  "/company-os/",
+  "/real-world-capital/",
+  "/work-with-us/",
+  "/community/",
+  "/connect/",
 ];
 
 function executiveOverviewReply(provider) {
@@ -37,6 +39,7 @@ function isExecutiveOverview(message) {
 function isStaleInfrastructureReply(reply) {
   const text = String(reply || "").toLowerCase();
   return (
+    text.includes("noetfield produces the audit trail a regulated copilot rollout") ||
     text.includes("noetfield provides governance execution infrastructure") ||
     (text.includes("record a compliance log") && text.includes("allow or deny decisions")) ||
     (text.includes("our offerings include the trust brief") && text.includes("support compliance and risk management"))
@@ -60,11 +63,11 @@ function isInternalSourceLeakReply(reply) {
 function publicGuidanceReply(provider) {
   return {
     reply:
-      "Before applying, read the public pilot and pricing pages, then choose the intake path that matches your stage. " +
-      "For most teams, start with the Copilot Governance Pack if you need a board-ready governance receipt, or Trust Brief if you need policy mapping first. " +
-      "Next step: use /copilot/pilot/ or /trust-brief/intake/ and include your Request ID if you already have one.",
+      "Tell us your goal and we can point you to the right place: software projects through the AI Software Builder, AI Business Operations through Company OS, or Real-World Capital for asset and digital-capital workflows. " +
+      "For a business project use /connect/; for collaboration use /work-with-us/; for free product and community updates use /community/. " +
+      "Specialized Copilot governance services have their own scope and intake pages.",
     provider,
-    citations: ["/copilot/pilot/", "/pricing/", "/trust-brief/intake/"],
+    citations: ["/", "/company-os/", "/real-world-capital/", "/connect/", "/work-with-us/", "/community/"],
     intake_email: CANONICAL_INTAKE,
   };
 }
@@ -73,10 +76,10 @@ function routeOnlyFallback() {
   return {
     reply:
       "I’m having trouble reaching the live assistant right now. " +
-      "If you’re exploring, start with /start/ or /pricing/. If you want to share context, use /trust-brief/intake/ or email " +
+      "Explore the AI Software Builder, business automation at /company-os/, or asset services at /real-world-capital/. For a project or partnership, use /connect/ or email " +
       CANONICAL_INTAKE +
       ".",
-    citations: ["/start/", "/pricing/", "/trust-brief/intake/"],
+    citations: ["/", "/company-os/", "/real-world-capital/", "/connect/"],
   };
 }
 

@@ -54,11 +54,12 @@ _LANE_PATTERNS: dict[str, re.Pattern[str]] = {
 }
 
 _BUILTIN_CORE = """## Source: Public site context (core)
-Noetfield produces the audit trail a regulated Copilot rollout will be asked for later: signed go/no-go receipts, Trust Ledger Entries, board PDF, procurement ZIP, and metadata-only M365 evidence before production scope opens.
-Lead paid path: Copilot Governance Pack ($2k-10k, 90 days). Contract SKUs: Copilot Governance Pack, Trust Brief, Bank Pilot.
-GEL = Governance Execution Layer — see /gel/ and gel-runtime.md.
+Noetfield Systems builds intelligent infrastructure for real businesses: software creation, business automation through Company OS, and real-world asset workflows through Real-World Capital.
+Start with /company-os/, /real-world-capital/, app.noetfield.com, /community/ or /work-with-us/. Commercial projects use /connect/.
+Technical execution and verification are supporting capabilities; do not introduce the company as only a Copilot governance vendor.
+Specialized governance offerings include the Copilot Governance Pack, Trust Brief and Bank Pilot; see their own scope pages.
 Developer tools: pip install noetfield-gate · api.noetfield.com
-Intake: operations@noetfield.com with RID in subject.
+Intake: operations@noetfield.com.
 """
 
 _ENTITY_ALIASES: dict[str, tuple[str, ...]] = {

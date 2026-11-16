@@ -47,11 +47,10 @@ for file in "${CHAT_TRUTH_FILES[@]}"; do
 done
 
 for required in \
-  "audit trail a regulated Copilot rollout will be asked for later" \
-  "Copilot Governance Pack" \
-  "board PDF" \
-  "procurement ZIP" \
-  "metadata-only M365"; do
+  "intelligent infrastructure for real businesses" \
+  "Company OS" \
+  "Real-World Capital" \
+  "Copilot Governance Pack"; do
   if grep -qF "$required" "$combined"; then
     ok "required phrase present: $required"
   else
@@ -71,11 +70,10 @@ const res = {
     const reply = String(payload && payload.reply || '');
     const stale = /governance execution infrastructure|record a compliance log|allow or deny decisions|support compliance and risk management in AI adoption/i.test(reply);
     const required = [
-      'audit trail a regulated Copilot rollout will be asked for later',
-      'Copilot Governance Pack',
-      'board PDF',
-      'procurement ZIP',
-      'metadata-only M365',
+      'intelligent infrastructure for real businesses',
+      'Company OS',
+      'Real-World Capital',
+      'AI Software Builder',
     ];
     const missing = required.filter((phrase) => !reply.includes(phrase));
     if (this.statusCode !== 200 || stale || missing.length) {

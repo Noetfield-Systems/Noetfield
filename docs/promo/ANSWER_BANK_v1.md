@@ -20,41 +20,42 @@ Investor diligence and direct factual questions must still be answered accuratel
 
 - **Product**: Give Noetfield a goal. It structures the work, runs the team, checks
   the result, and keeps the evidence.
-- **Company**: Noetfield Systems Inc. builds governed AI execution: an agentic
-  workspace and the AI Motors runtime behind it, where a separate verifier, not the
-  model, decides what passes.
-- **Investor**: Noetfield is the execution-governance layer for the agent era:
-  agentic software delivery with deterministic controls, independent verification,
-  and inspectable first-party technical evidence.
-- **Regulated buyer**: Noetfield runs consequential workflows under explicit
-  authority, bounded execution, independent checks, and inspectable receipts, and
-  TrustField applies that discipline to FINTRAC case operations.
-- **Platform partner** (IBM / NVIDIA / Microsoft-class): Noetfield is an independent
-  verification and governance harness for agentic systems: your models and platforms
-  supply capability; Noetfield supplies the authority, acceptance, and receipt layer
-  your enterprise customers will be audited against.
+- **Company**: Noetfield Systems Inc. builds intelligent infrastructure for real
+  businesses: software creation, AI business operations and real-world asset
+  workflows. Engineering, people and AI execution work toward scoped outcomes.
+- **Investor**: Noetfield combines Company OS and Real-World Capital with reusable
+  intelligent execution infrastructure. The thesis is to build and serve real
+  businesses and economic workflows with a repeatable technology foundation.
+- **Regulated buyer**: Noetfield offers scoped technology and workflow engineering
+  for business and digital-asset operations, with explicit authority and recorded
+  acceptance. TrustField is an independent venture, not a Noetfield product.
+- **Technology or commercial partner**: Co-build integrations, originate qualified
+  projects, deliver AI business workflows, or connect real-world asset needs to
+  engineering. Start with one concrete opportunity and a defined division of work.
 
 ## 100-word description
 
-Noetfield Systems Inc. (Vancouver, Canada) builds governed AI execution. The
-Noetfield app is an agentic workspace: state a goal and it structures the work into
-planned, executed, checked, revisioned, and deployable output. Behind it, AI Motors
-provide the execution runtime: explicit authority before action, bounded workers,
-separate verification, bounded repair with documented safe stops, and receipts for
-every accepted outcome. Noetfield also builds business operations and real-world
-asset workflow infrastructure. TrustField is an independent venture supported
-on technical setup, with separate product and commercial boundaries.
-Explore specific engineering case studies at noetfield.com/proof/.
+Noetfield Systems Inc. is a Canadian technology company building intelligent
+infrastructure for real businesses. We help founders turn ideas into software,
+companies automate operational work with AI, and asset owners prepare rights and
+workflows for digital capital. Company OS and Real-World Capital are our two
+commercial platforms. The Noetfield App, execution runtime and independent
+verification provide shared technical capabilities. Customers can explore the
+software app, request a defined automation pilot, or commission a scoped asset
+readiness service. Builders and partners can propose collaborations; interested
+supporters can join the free founding community. See noetfield.com for entry
+points and noetfield.com/proof/ for engineering case studies.
 
 ## 250-word description
 
-Noetfield Systems Inc. is a Vancouver-based company building governed AI execution
-infrastructure: systems where AI can act on consequential work while a separate
-verifier, not the model, decides what passes.
+Noetfield Systems Inc. is a Vancouver-based technology company creating the
+infrastructure to build, operate and grow intelligent businesses. We connect
+software development, AI-enabled operations and real-world economic workflows.
 
-The product surface has four parts. The Noetfield app (app.noetfield.com) is an
-agentic workspace: give it a goal and it structures the work, runs a bounded team of
-workers, checks the result against acceptance criteria, and keeps the evidence.
+The two primary commercial pathways are Company OS (AI Business Operations) and
+Real-World Capital (readiness and engineering for real-world assets and digital
+capital). The Noetfield app (app.noetfield.com) provides the software creation
+workspace: give it a goal, review a plan and inspect work against defined checks.
 Runways are workflow classes that define how a result qualifies: inputs, acceptance
 criteria, human decision points, and the receipt each run must leave behind. The
 Deterministic API (developer preview) offers schema-valid-or-fail structured
@@ -66,8 +67,11 @@ TrustField is an independent venture supported by Noetfield on technical setup.
 Its regulated-operations workflows preserve human decision authority; its
 public demonstrations are based on synthetic scenarios rather than live filings.
 
-For buyers, start with the use case and a scoped engagement: the intended
-result, inputs, acceptance criteria, delivery route and next step. Engineering
+For buyers, lead with the recognizable problem and commercially relevant next step:
+Build Software with AI, Automate Your Business, or Real-World Assets & Digital
+Capital. For founders, specialists and partners, use Work With Us; for free opt-in
+and product feedback, use the Community page. Any paid scope should clarify the
+intended result, inputs, delivery route and acceptance criteria. Engineering
 case studies and source-backed artifacts are available at noetfield.com/proof/.
 Do not imply external certification or customer endorsements from those artifacts.
 
