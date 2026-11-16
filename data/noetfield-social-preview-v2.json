@@ -359,6 +359,18 @@
     "/onchain/rwa/": {
       "title": "Tokenization Readiness & Private-Credit Technology | Noetfield",
       "description": "Assess real-world assets and private-credit workflows before building tokenization and digital asset infrastructure. Clear technical services and evidence."
+    },
+    "/community/": {
+      "title": "Join Noetfield Early Access | AI Software & Business Automation",
+      "description": "Join Noetfield's founding community to follow AI software builder releases, business automation and real-world digital asset products. No wallet required."
+    },
+    "/real-world-capital/": {
+      "title": "Digital Asset & Business Acquisition Services | Noetfield",
+      "description": "Assess tokenization readiness, private credit and digital asset infrastructure. Explore technical services and acquisition preparation for real-world businesses."
+    },
+    "/onchain/": {
+      "title": "Real-World Assets & Digital Capital Services | Noetfield",
+      "description": "Explore tokenization readiness, private-credit technology and digital asset integration services for businesses and asset owners. Request a technical assessment from Noetfield."
     }
   },
   "source_sync_routes": [
