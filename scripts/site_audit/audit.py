@@ -154,11 +154,6 @@ def structural_checks(page: dict, html: str, pricing: dict) -> list[tuple[str, s
 
 
 def nav_fingerprint(html: str) -> frozenset[str]:
-    # Audit the rendered Renaissance navigation, not the superseded hidden
-    # headers still present in old technical templates.
-    primary = re.search(r'<nav[^>]*class="[^"]*nr-navigation[^"]*"[^>]*>(.*?)</nav>', html, re.I | re.S)
-    if primary:
-        return frozenset(NAV_HREF_RE.findall(primary.group(1)))
     links: set[str] = set()
     for block in NAV_BLOCK_RE.findall(html):
         links.update(NAV_HREF_RE.findall(block))
@@ -171,17 +166,13 @@ def nav_fingerprint(html: str) -> frozenset[str]:
 def cross_page_checks(auditable: list[dict], snap: Path, idx: dict, pricing: dict) -> list[tuple[str, str, str, str]]:
     out: list[tuple[str, str, str, str]] = []
     navs: dict[str, frozenset[str]] = {}
-    renaissance_paths: set[str] = set()
     entities: set[str] = set()
     inbound = Counter()
     urls = {p.get("www_path", p["url"]) for p in auditable}
 
     for page in auditable:
         html = (snap / page["snapshot"]).read_text(encoding="utf-8", errors="replace")
-        path = page.get("www_path", page["url"])
-        navs[path] = nav_fingerprint(html)
-        if re.search(r'<nav[^>]*class="[^"]*nr-navigation[^"]*"', html, re.I):
-            renaissance_paths.add(path)
+        navs[page.get("www_path", page["url"])] = nav_fingerprint(html)
         for entity in re.findall(r"(Noetfield Systems Inc\.|\{ENTITY\})", html):
             entities.add(entity)
         for link in page.get("internal_links", []):
@@ -189,21 +180,15 @@ def cross_page_checks(auditable: list[dict], snap: Path, idx: dict, pricing: dic
             if path in urls:
                 inbound[path] += 1
 
-    # A phased brand rollout can have a new canonical navigation and older
-    # specialist navigation. Enforce consistency *within* each visible navigation
-    # family, instead of counting a deliberately migrated third fingerprint as
-    # accidental drift. The baseline budget for legacy routes is unchanged.
-    renaissance = Counter(nav for path, nav in navs.items() if path in renaissance_paths)
-    legacy = Counter(nav for path, nav in navs.items() if path not in renaissance_paths)
+    fingerprints = Counter(navs.values())
     max_nav = pricing.get("max_nav_fingerprints", 2)
-    if len(renaissance) > 1 or len(legacy) > max_nav:
+    if len(fingerprints) > max_nav:
         out.append(
             (
                 "NC-1",
                 "P0",
-                "visible navigation drift across distinct brand families",
-                f"Renaissance variants={len(renaissance)} (limit 1), legacy variants={len(legacy)} "
-                f"(limit {max_nav}); header partial SSOT={HEADER_PARTIAL.is_file()}",
+                f"{len(fingerprints)} distinct nav fingerprints across {len(navs)} pages",
+                f"expected <= {max_nav}; header partial SSOT={HEADER_PARTIAL.is_file()}",
             )
         )
 

@@ -22,7 +22,7 @@ API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 HOME_NEEDLES = (
     "nf-corp",
     "Building the next generation of ",
-    "What would you like to do?",
+    "Start with a real project:",
     "Make your next move operational.",
     "TrustField",
     "trustfield.ca",

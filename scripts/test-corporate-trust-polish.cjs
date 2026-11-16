@@ -38,7 +38,7 @@ assert.match(work,/Propose a Collaboration/);
 assert.match(work,/id="nfCorporateCollaborationForm"/);
 assert.match(work,/existing Noetfield collaboration intake/);
 assert.match(js,/if\(!consent\|\|!consent.checked\)return/);
-assert.match(home,/Two business platforms. One intelligent execution foundation./);
+assert.match(home,/Software, business automation and digital capital./);
 assert.match(home,/TrustField is an <strong>independent venture<\/strong>/);
 assert.doesNotMatch(home,/Four product surfaces/);
 assert.match(home,/Reliability Case 001/);
@@ -48,7 +48,7 @@ assert.match(proof,/First-party engineering demonstration/);
 assert.doesNotMatch(home,/No external customers or revenue yet/i);
 assert.doesNotMatch(proof,/No claim of external customer adoption/);
 // Audience-first journey contract: genuine destinations and consent-based entry.
-assert.match(home,/Build With Noetfield/);
+assert.match(home,/Discuss a Project/);
 assert.match(home,/href="\/work-with-us\/"/);
 assert.match(home,/href="\/community\/"/);
 assert.match(about,/Our two commercial platforms/);

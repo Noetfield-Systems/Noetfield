@@ -34,11 +34,13 @@ REQUIRED_REMOVAL_FIELDS = (
     "removed_at",
 )
 PRIMARY_NAV_LABELS = (
-    ">Solutions<",
-    ">Company OS<",
-    ">Real-World Capital<",
-    ">Opportunities<",
-    ">Community<",
+    ">Build Software<",
+    ">AI Workflows<",
+    ">Results &amp; Verification<",
+    ">Free Business Tools<",
+    ">Developers<",
+    ">TrustField<",
+    ">Evidence<",
     ">Company<",
 )
 
@@ -70,12 +72,8 @@ def main() -> int:
             failures.append(f"{cap_id}: needle not found in {surface}: {needle!r}")
 
     home = (ROOT / "index.html").read_text(encoding="utf-8")
-    # Check the actual visible Renaissance navigation, not obsolete labels in
-    # hidden technical templates. Developer, workflow and proof routes remain
-    # separately protected by active capability entries in this manifest.
-    visible = home.split('id="nr-primary-nav"', 1)[1].split("</nav>", 1)[0] if 'id="nr-primary-nav"' in home else ""
     for label in PRIMARY_NAV_LABELS:
-        if label not in visible:
+        if label not in home:
             failures.append(f"primary nav label missing from homepage: {label}")
 
     for removal in data.get("removals", []):

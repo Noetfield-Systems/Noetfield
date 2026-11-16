@@ -48,7 +48,7 @@ def test_premium_editorial_headline_is_backed_by_buyer_clarity() -> None:
     assert 18 <= copy["h1_min_chars"] < 40
     assert copy["require_explicit_buyer_lead"] is True
     assert copy["h1_max_chars"] >= 120
-    match = re.search(r'<p[^>]*class="[^"]*(?:nf-ins-lead|nr-hero-lead)[^"]*"[^>]*>(.*?)</p>', html, re.I | re.S)
+    match = re.search(r'<p[^>]*class="[^"]*nf-ins-lead[^"]*"[^>]*>(.*?)</p>', html, re.I | re.S)
     assert match is not None, "A beautiful hero without buyer clarity is insufficient"
     lead = re.sub(r"<[^>]+>", "", match.group(1)).lower()
     for category in copy["required_buyer_lead_substrings"]:

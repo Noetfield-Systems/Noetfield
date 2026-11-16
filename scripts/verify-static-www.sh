@@ -40,7 +40,7 @@ check_absent() {
 check_file "protected corporate homepage" index.html \
   '<title>Noetfield | AI Software & Business Automation</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
-  '<body class="nf-corp nf-home nr-skin">' '<main id="main">' \
+  '<body class="nf-corp nf-home">' '<main id="main">' \
   '/assets/noetfield-corporate-v1.css?v=5' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
   'SOFTWARE CREATION · REAL SOURCE · INDEPENDENT EVIDENCE' \
@@ -55,7 +55,7 @@ check_file "protected corporate homepage" index.html \
   'Governed replacement' 'Claims-boundary correction' \
   'TrustField' 'href="https://trustfield.ca/"' 'independent venture in formation' \
   'human decision authority' \
-  'href="/contact/"' 'Open Noetfield App' 'nr-home-header' 'nr-hero-stage' \
+  'href="/contact/"' 'Open Noetfield App' \
   'TRY THE CURRENT APP' 'REQUEST A SOFTWARE BUILD' 'EXAMINE A VERIFIED RUN' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
   'nf-corp-section' 'nf-corp-hero' \
@@ -65,14 +65,13 @@ check_file "protected corporate homepage" index.html \
   'href="/motors/"' 'href="/assurance/"' 'href="/applications/trustfield/"' \
   'https://app.noetfield.com/' \
   '/assets/noetfield-home-v2.css'
-# P0 buyer-first Renaissance: real entry, three product lanes and community participation.
+# P0 customer-facing language: three buying paths and wallet-free community intake.
 check_file "market-language homepage and primary navigation" index.html \
-  'Build software.' 'Automate your work.' 'With AI.' \
-  'Make ambitious' 'Technology for the things' \
-  'href="/company-os/"' 'href="/real-world-capital/"' \
-  'href="/community/"' 'href="/opportunities/"' \
-  'Open the AI Software Builder' 'Explore Our Solutions' \
-  'Opportunity Exchange' 'Join the Founding Community'
+  'Build software.' 'Automate your work.' 'Build with AI.' \
+  'Build Software with AI' 'Automate Your Business' \
+  'Real-World Assets &amp; Digital Capital' \
+  'href="/community/"' 'Open the AI Software Builder' \
+  'Join Early Access' 'AI Business Operations' 'Digital Asset Services'
 check_file "market-language early access: real intake" community/index.html \
   'href="https://app.noetfield.com/"' \
   'href="/company-os/"' 'href="/real-world-capital/"' \
@@ -260,16 +259,14 @@ check_file "homepage TrustField boundary" index.html \
 check_absent "homepage has no stale TrustField boundary copy" index.html \
   'validation vertical developed and operated' 'LIVE PRODUCT' 'separate venture'
 
-# Homepage IA compression. The v2 homepage carries 11 top-level sections by
-# design: hero, problem, comparison, architecture, evidence, runways,
-# commissioning, readiness, ecosystem, evidence boundary, engagement. The cap
-# exists to stop unbounded marketing sprawl, so it is raised to the shipped
-# structure rather than removed.
+# Homepage bounded editorial narrative. V5 adds two meaningful, full-bleed
+# photographic chapters (engineering / final CTA) to the 11-section baseline.
+# Maintain a strict cap of 13: no uncontrolled section proliferation.
 section_count="$(grep -c '<section' index.html || true)"
-if [[ "$section_count" -le 11 ]]; then
-  ok "homepage section count ≤11 ($section_count)"
+if [[ "$section_count" -le 13 ]]; then
+  ok "homepage section count ≤13 ($section_count)"
 else
-  bad "homepage section count ≤11 — found $section_count sections"
+  bad "homepage section count ≤13 — found $section_count sections"
 fi
 
 check_file "start sandbox page" start/index.html \
