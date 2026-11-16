@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real-source corporate homepage visual acceptance; desktop, tablet and phone.
 
-Checks the Founder-approved cinematic campus artwork, accessible live links,
+Checks the real-product corporate editorial hero, accessible live links,
 and layout at four viewport sizes. No screenshot-as-a-page approximation.
 No fabricated business activity or dynamic numbers are asserted.
 """
@@ -24,32 +24,33 @@ try:
             page.on("pageerror",lambda e:errors.append(str(e)))
             response=page.goto("http://127.0.0.1:8979/",wait_until="networkidle",timeout=35000)
             assert response.status==200,response.status
-            page.locator(".nf-cinema-image").wait_for()
+            page.locator(".nf-v3-live-image").wait_for()
             title=page.locator("h1#hero-title").inner_text()
-            assert "agentic" in title.lower() and "real economy" in title.lower(),title
+            assert "engineering" in title.lower() and "business" in title.lower(),title
             assert page.locator("h1").count()==1
             paths=page.locator("#choose-your-path a.nf-ins-path-card")
             capabilities=page.locator("#command-capabilities a.nf-ins-platform-item")
             assert paths.count()==3,paths.count()
             assert capabilities.count()==4,capabilities.count()
-            allimgs=page.locator(".nf-institutional-hero img")
+            allimgs=page.locator(".nf-v3-product-stage img")
             image_results=allimgs.evaluate_all("""els=>els.map(el=>({
               src:el.getAttribute('src'),
               loaded:el.complete&&el.naturalWidth>300,
               naturalWidth:el.naturalWidth,
               naturalHeight:el.naturalHeight
             }))""")
-            assert len(image_results)==4,image_results
+            assert len(image_results)==1,image_results
             assert all(z["loaded"] for z in image_results),image_results
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
             assert dimensions["doc"]<=width+2,dimensions
-            design_diagnostics=page.evaluate("""() => ({sheet:[...document.styleSheets].filter(s=>s.href&&s.href.includes('approved-hero')).map(s=>({url:s.href,rules:(()=>{try{return s.cssRules.length}catch(e){return 'error'}})()})), bodyClass:document.body.className,heroClass:document.querySelector('.nf-institutional-hero')?.className,heroBackground:getComputedStyle(document.querySelector('.nf-institutional-hero')).background})""")
+            design_diagnostics=page.evaluate("""() => ({sheet:[...document.styleSheets].filter(s=>s.href&&s.href.includes('institutional-v3')).map(s=>({url:s.href,rules:(()=>{try{return s.cssRules.length}catch(e){return 'error'}})()})), bodyClass:document.body.className,heroClass:document.querySelector('.nf-institutional-hero')?.className,heroBackground:getComputedStyle(document.querySelector('.nf-institutional-hero')).background})""")
             print("CORPORATE_DESIGN_DIAGNOSTICS="+json.dumps(design_diagnostics),flush=True)
             assert design_diagnostics["sheet"] and design_diagnostics["sheet"][0]["rules"]>10,design_diagnostics
-            assert page.locator(".nf-cinema-image").is_visible()
+            assert page.locator(".nf-v3-live-image").is_visible()
             assert page.locator(".nf-cinema-capabilities > a").count()==5
-            assert page.locator(".nf-cinema-image").get_attribute("src")=="/assets/noetfield-approved-campus-hero.webp"
-            hero_box=page.locator(".nf-cinema-image").bounding_box()
+            assert page.locator(".nf-v3-art-note").is_visible()
+            assert page.locator(".nf-v3-live-image").get_attribute("src")=="/assets/product/app-teach/teach-workspace-overview.jpg"
+            hero_box=page.locator(".nf-v3-system-frame").bounding_box()
             assert hero_box and hero_box["width"]>=280 and hero_box["height"]>=300,hero_box
             if width<=700:
                 assert hero_box["y"]<height-70, f"Artwork falls below first screen: {hero_box}"
@@ -63,7 +64,7 @@ try:
                 assert page.locator(".nf-corp-nav").get_attribute("data-open")=="false"
             links=paths.evaluate_all("els=>els.map(a=>a.getAttribute('href'))")
             assert links==["/connect/","/company-os/","/onchain/"],links
-            assert page.locator(".nf-ins-button--primary").get_attribute("href")=="/company-os/"
+            assert page.locator(".nf-ins-button--primary").get_attribute("href")=="/connect/"
             assert page.locator("a[href='/demo/complete-run/']").count()>0
             assert not errors,errors
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
