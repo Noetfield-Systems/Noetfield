@@ -26,7 +26,7 @@ try:
             assert response.status==200,response.status
             page.locator(".nf-v3-live-image").wait_for()
             title=page.locator("h1#hero-title").inner_text()
-            assert "engineering" in title.lower() and "business" in title.lower(),title
+            assert "engineering" in title.lower() and "economy" in title.lower(),title
             assert page.locator("h1").count()==1
             paths=page.locator("#choose-your-path a.nf-ins-path-card")
             capabilities=page.locator("#command-capabilities a.nf-ins-platform-item")
@@ -69,8 +69,8 @@ try:
                 page.keyboard.press("Escape")
                 assert page.locator(".nf-corp-nav").get_attribute("data-open")=="false"
             links=paths.evaluate_all("els=>els.map(a=>a.getAttribute('href'))")
-            assert links==["/connect/","/company-os/","/onchain/"],links
-            assert page.locator(".nf-ins-button--primary").get_attribute("href")=="/connect/"
+            assert links==["/connect/","/company-os/","/real-world-capital/"],links
+            assert page.locator(".nf-ins-button--primary").get_attribute("href")=="/real-world-capital/"
             assert page.locator("a[href='/demo/complete-run/']").count()>0
             assert not errors,errors
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
@@ -101,6 +101,52 @@ try:
             assert toggle.get_attribute("aria-expanded")=="false",route
             assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+2"),route
             page.close()
+        # The flagship commercial path reuses the already approved public intake
+        # and its live link, without generating any real Stripe charge in CI.
+        for width,height in [(1440,900),(390,844)]:
+            pcap=browser.new_page(viewport={"width":width,"height":height},device_scale_factor=1)
+            pcap.route("**/api/intake",lambda route:route.fulfill(
+                status=200,content_type="application/json",
+                body='{"intake_id":"qa-fixture-only","request_id":"qa-rid","intake_persisted":true}'
+            ))
+            pcap.route("**/api/intake/health",lambda route:route.fulfill(
+                status=200,content_type="application/json",body='{"enabled":true}'
+            ))
+            errs=[]
+            pcap.on("pageerror",lambda e:errs.append(str(e)))
+            response=pcap.goto("http://127.0.0.1:8979/real-world-capital/",wait_until="networkidle",timeout=35000)
+            assert response.status==200,("capital",response.status)
+            assert pcap.locator("h1").count()==1
+            assert "real assets" in pcap.locator("h1").inner_text().lower()
+            assert pcap.locator("#paths .lane").count()==2
+            assert pcap.locator("a[data-offer-payment='rwa-paid-sprint-deposit']").get_attribute("href")=="https://buy.stripe.com/7sY6oI3iUaa06qmcDi1Nu0h"
+            assert pcap.locator("#nfCapitalIntake[data-nf-intake-form]").count()==1
+            assert pcap.locator("#nfCapitalIntake").get_attribute("data-intake-vector")=="onchain-project"
+            assert pcap.evaluate("document.documentElement.scrollWidth<=innerWidth+2"),width
+            if width<=600:
+                menu=pcap.locator("#capital-menu")
+                assert menu.is_visible()
+                menu.click()
+                assert menu.get_attribute("aria-expanded")=="true"
+                assert pcap.locator("#capital-nav").is_visible()
+                pcap.keyboard.press("Escape")
+                assert menu.get_attribute("aria-expanded")=="false"
+            pcap.screenshot(path=str(OUT/f"capital-{width}.png"),full_page=(width==1440),animations="disabled")
+            pcap.locator("a[data-select-capital-track='business-acquisition']").click()
+            assert pcap.locator('#nfCapitalIntake select[name="topic"]').input_value()=="business-acquisition"
+            pcap.locator('#nfCapitalIntake input[name="email"]').fill("qa@example.org")
+            pcap.locator('#nfCapitalIntake input[name="org"]').fill("QA Fixture Organization")
+            pcap.locator('#nfCapitalIntake textarea[name="notes"]').fill("Non-confidential test: acquisition preparation, qualified project owner, scope requested.")
+            with pcap.expect_request("**/api/intake") as req:
+                pcap.locator("#nfCapitalIntake button[type='submit']").click()
+            payload=req.value.post_data_json
+            assert payload["organization"]=="QA Fixture Organization",payload
+            assert payload["contact_email"]=="qa@example.org",payload
+            assert payload["vector"]=="onchain-project",payload
+            assert "business-acquisition" in str(payload),payload
+            pcap.locator(".nf-intake-async-status--ok").wait_for(timeout=10000)
+            assert not errs,errs
+            pcap.close()
         browser.close()
 finally:
     server.terminate()

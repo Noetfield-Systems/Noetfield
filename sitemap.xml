@@ -331,6 +331,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.noetfield.com/real-world-capital/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.noetfield.com/research-packs/</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>monthly</changefreq>

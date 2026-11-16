@@ -65,6 +65,24 @@ check_file "protected corporate homepage" index.html \
   'href="/motors/"' 'href="/assurance/"' 'href="/applications/trustfield/"' \
   'https://app.noetfield.com/' \
   '/assets/noetfield-home-v2.css'
+# Wave 1: Real-World Capital must be a usable buyer entry, not another deck.
+# Deposit is scope-approved only; the free enquiry must persist via the shared intake.
+check_file "Real-World Capital customer journey" real-world-capital/index.html \
+  '<link rel="canonical" href="https://www.noetfield.com/real-world-capital/">' \
+  '<h1 id="capital-title">Real assets.' \
+  'FOR OWNERS & ORIGINATORS' 'FOR BUYERS & CAPITAL PROVIDERS' \
+  'data-select-capital-track="rwa-private-credit"' \
+  'data-select-capital-track="business-acquisition"' \
+  'data-nf-intake-form' 'data-intake-vector="onchain-project"' \
+  '/assets/noetfield-intake-core.js?v=42' '/assets/noetfield-forms.js?v=42' \
+  'https://scan.noetfield.com/rwa-clinic/' \
+  'https://buy.stripe.com/7sY6oI3iUaa06qmcDi1Nu0h' \
+  'Only pay after Noetfield and the buyer agree on a written scope' \
+  '/privacy/' 'technical assessment' 'not securities approval'
+check_absent "capital landing has no unsupported commercial promises" real-world-capital/index.html \
+  'Guaranteed returns' 'regulator approved' 'licensed exchange' '100% tokenized ownership' \
+  'real customers served' 'million in assets managed'
+
 check_file "verification commercial intake is real and scoped" assurance/index.html \
   'Request a Verification Pilot' '/connect/?type=business&amp;initiative=noetfield&amp;offer=verification-pilot&amp;source=assurance' \
   'portable, third-party Acceptance Gateway API/SDK' 'no external interoperability or independent security certification is claimed'
