@@ -221,6 +221,13 @@
           engagement: engagement || "",
           deal_stage: dealStage || "",
           target_context: targetContext || "",
+          // Only the founding-community vector carries update-specific opt-in.
+          // Preserve the existing intake record and record exact consent scope;
+          // an ordinary commercial enquiry never implies newsletter consent.
+          ...(vector === "founding-community" ? {
+            consent_updates: Boolean(form.querySelector('input[name="consent"]:checked')),
+            consent_scope: "noetfield-product-and-community-updates-v1",
+          } : {}),
           async: true,
         },
         submitBtn: form.querySelector('button[type="submit"]'),
