@@ -43,7 +43,6 @@ def homepage() -> str:
       <a class="nf-button nf-button--primary" href="/connect/">Discuss a project</a>
       <a class="nf-button nf-button--secondary" href="/company-os/">Explore Company OS</a>
      </div>
-     {status_rail()}
     </div>
    </div>
   </section>
