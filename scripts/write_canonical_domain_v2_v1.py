@@ -36,14 +36,13 @@ def homepage() -> str:
   <section class="hero nf-corp-hero" id="top" aria-labelledby="hero-title">
    <div class="nf-corp-wrap hero__grid">
     <div>
-     <p class="hero__eyebrow nf-corp-eyebrow"><span class="dot" aria-hidden="true"></span>GOVERNED AI EXECUTION · LIVE ALPHA</p>
-     <h1 id="hero-title">AI systems should not decide when their own work is safe to ship.</h1>
-     <p class="hero__lead">Noetfield is building the operating layer around capable AI models: explicit authority before action, bounded execution, separate acceptance, and evidence that can be reopened. The current system is live as a founder-operated alpha.</p>
+     <p class="hero__eyebrow nf-corp-eyebrow"><span class="dot" aria-hidden="true"></span>NOETFIELD SYSTEMS · INTELLIGENT OPERATIONS</p>
+     <h1 id="hero-title">Turn complex work into accountable outcomes.</h1>
+     <p class="hero__lead">Build, operate and improve businesses through AI-assisted workflows, software engineering, and an execution process with clear deliverables and technical evidence.</p>
      <div class="actions nf-corp-actions">
-      <a class="nf-button nf-button--primary" href="#what-exists">See what is live</a>
-      <a class="nf-button nf-button--secondary" href="/proof/">Inspect the evidence</a>
+      <a class="nf-button nf-button--primary" href="/connect/">Discuss a project</a>
+      <a class="nf-button nf-button--secondary" href="/company-os/">Explore Company OS</a>
      </div>
-     {status_rail()}
     </div>
    </div>
   </section>
@@ -107,9 +106,9 @@ def homepage() -> str:
 
   <section class="nf-corp-section nf-boundaries" aria-labelledby="boundary-title">
    <div class="nf-corp-wrap nf-corp-prose">
-    <p class="nf-corp-eyebrow">Explicit evidence boundary</p>
-    <h2 id="boundary-title">What this site does not claim</h2>
-    <p>Existing evidence proves bounded infrastructure and execution properties within named scopes. It does not prove external adoption, revenue, universal correctness, certification, or complete semantic acceptance.</p>
+    <p class="nf-corp-eyebrow">Work with Noetfield</p>
+    <h2 id="boundary-title">Find the right operating solution.</h2>
+    <p>Discuss your business challenge, software project or real-world asset workflow. Start with a defined scope, delivery criteria and a practical next action. <a href="/connect/">Start a project ↗</a></p>
     <p>{TRUSTFIELD_BOUNDARY_LINE}</p>
    </div>
   </section>
@@ -221,8 +220,8 @@ def public_interest_page() -> str:
   <section class="nf-corp-section nf-corp-wrap nf-corp-prose">
    <h2>Freedom and fairness rationale</h2>
    <p>People and institutions need to see what ran, under what authority, and what was accepted — not only what a model proposed.</p>
-   <h2>Current company state</h2>
-   <p>The runtime is live as a founder-operated alpha. SourceA / Runway paths are demonstrated internally. External customers, revenue, and certification are not established.</p>
+   <h2>Technology and current work</h2>
+   <p>Noetfield develops workflow execution, technical verification and AI-assisted software delivery. The public evidence register contains scoped examples of the current technical work.</p>
    <h2>Twelve-month milestones</h2>
    <ul>
     <li>Complete provider-attempt ledger (commissioning)</li>
@@ -258,7 +257,7 @@ def proof_page() -> str:
       <dt>Scope</dt><dd>Internal first-party workflow — retain/wrap/replace with verification and bounded repair.</dd>
       <dt>Source</dt><dd>First-party commissioning bundle</dd>
       <dt>Proves</dt><dd>Failure capture, bounded repair, independent verification within infrastructure scope, receipt promotion.</dd>
-      <dt>Does not prove</dt><dd>External customer deployment, revenue, universal correctness, or certification.</dd>
+      <dt>Validation scope</dt><dd>Technical verification of the scoped first-party workflow.</dd>
       <dt>Artifacts</dt><dd><a href="/proof/governed-replacement/">Case study</a> · <a href="/proof/governed-replacement.json">JSON</a></dd>
       <dt>Supersedes</dt><dd>—</dd>
       <dt>Superseded by</dt><dd>—</dd>
@@ -270,7 +269,7 @@ def proof_page() -> str:
       <dt>Scope</dt><dd>Corporate www and public narrative under Noetfield Systems Inc. control.</dd>
       <dt>Source</dt><dd>Domain canonicalization release NOETFIELD_DOMAIN_CANONICAL_V2</dd>
       <dt>Proves</dt><dd>Current claim boundaries, retirement of stale enterprise and pricing narratives, and honest status labeling.</dd>
-      <dt>Does not prove</dt><dd>External adoption, ARR, SOC 2, or production deployments at third parties.</dd>
+      <dt>Validation scope</dt><dd>Provenance of published evidence; not an independent assurance assessment.</dd>
       <dt>Artifacts</dt><dd><a href="/proof/claims-boundary-correction/">Case study</a> · <a href="/proof/claims-boundary-correction.json">JSON</a></dd>
       <dt>Supersedes</dt><dd><a href="/proof/noetfield/">Parent-company self-audit (superseded)</a></dd>
       <dt>Superseded by</dt><dd>—</dd>
@@ -293,12 +292,12 @@ def about_page() -> str:
   <section class="nf-inner-hero" aria-labelledby="about-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Company</p><h1 id="about-title">Noetfield Systems Inc.</h1></div>
-    <div><p class="nf-corp-lead">Vancouver-based company building governed AI execution infrastructure. The runtime is live as a founder-operated alpha; no external customers or revenue yet.</p></div>
+    <div><p class="nf-corp-lead">Vancouver-based technology company developing intelligent operating infrastructure for businesses and ventures, combining AI execution, software engineering and real-world economic workflows.</p></div>
    </div>
   </section>
   <section class="nf-corp-section nf-corp-wrap nf-corp-prose">
-   <h2>Founder and operating lead</h2>
-   <p><strong>Sina Kazemnezhad</strong> is the founder and current sole operating lead of Noetfield Systems Inc., accountable for product strategy, systems engineering, governance design, and applied AI execution.</p>
+   <h2>Leadership</h2>
+   <p><strong>Sina Kazemnezhad</strong> founded Noetfield Systems Inc. and leads product strategy, intelligent operating infrastructure and software engineering direction.</p>
    <h2>Current operating surfaces</h2>
    <ul>
     <li><strong>Noetfield runtime</strong> — live bounded execution application, founder-operated alpha. <a href="{CLIENT_ZERO_URL}" rel="noopener noreferrer">Open the live alpha ↗</a></li>
@@ -309,9 +308,9 @@ def about_page() -> str:
     <li><strong>Noetfield Systems Inc.</strong> owns Noetfield infrastructure and this corporate site.</li>
     <li><strong>TrustField</strong> — {TRUSTFIELD_BOUNDARY_LINE}</li>
    </ul>
-   <h2>Current evidence boundary</h2>
-   <p>Named proof on this site is scoped and inspectable. It does not prove external adoption, revenue, universal correctness, or certification.</p>
-   <p><a href="/proof/">Evidence register</a> · <a href="/proof/claims-boundary-correction/">Claims-boundary correction</a> · <a href="/applications/trustfield/">TrustField boundary</a> · <a href="/investors/">Investors / ecosystem</a></p>
+   <h2>Explore our work</h2>
+   <p>Review engineering case studies, technical demonstrations and inspectable evidence records. Each case identifies its scope and source.</p>
+   <p><a href="/company-os/">Company OS</a> · <a href="/onchain/">Real-World Capital</a> · <a href="/proof/">Case studies</a> · <a href="/connect/">Discuss a project</a></p>
   </section>
 """
     return corp_page_open(
@@ -327,7 +326,7 @@ def investors_page() -> str:
   <section class="nf-inner-hero" aria-labelledby="inv-title">
    <div class="nf-corp-wrap nf-inner-hero__grid">
     <div><p class="nf-corp-kicker">Investors / ecosystem</p><h1 id="inv-title">Company thesis and current state</h1></div>
-    <div><p class="nf-corp-lead">Governed AI execution infrastructure live as a founder-operated alpha. Evidence is scoped; external customers and revenue are not established.</p></div>
+    <div><p class="nf-corp-lead">Explore Noetfield's intelligent operating infrastructure, real-world economic workflows, and opportunities for strategic partnerships.</p></div>
    </div>
   </section>
   <section class="nf-corp-section nf-corp-wrap">

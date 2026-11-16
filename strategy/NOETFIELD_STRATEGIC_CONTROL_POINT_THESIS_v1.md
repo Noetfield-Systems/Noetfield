@@ -160,19 +160,21 @@ CANONICAL FACTS TO VERIFY BEFORE RELYING ON THEM
 
 1. Noetfield Systems Inc. (Vancouver, Canada) is the operating company;
    founder-operated by Sina Kazemnezhad (LLB).
-2. TrustField is a product and regulated-operations vertical of Noetfield
-   Systems Inc. (FINTRAC case operations), not a separate venture.
-3. The live public status vocabulary is: LIVE ALPHA (status),
-   founder-operated alpha (stage), first-party internal demonstration
-   (evidence class), "no external customers or revenue yet" (disclosure).
+2. TrustField is an independent venture supported by Noetfield on technical
+   setup; it has separate product, ownership and commercial boundaries.
+3. Buyer-facing public language should focus on customer problems, available
+   capabilities, scoped deliverables, and next steps. Clearly identify technical
+   alpha/preview or first-party evidence when material; keep internal business-stage
+   reporting off default sales pages. Answer direct diligence questions accurately.
 4. "Client-zero" was deliberately retired from public branding; the sole
    sanctioned public use is one evidence page (/proof/customer-zero/) that
    uses the term in the IBM/Microsoft sense with explicit limits.
 5. The public site now runs product-first navigation
    (Product / App / Workflows / API / AI Motors / TrustField / Proof /
    Company) with a real app screenshot above the fold.
-6. Public evidence is first-party; external customers and revenue are not
-   established and must never be implied.
+6. Public engineering evidence must retain first-party provenance. Do not imply
+   customer outcomes, revenue, endorsements or certifications without current records;
+   do not volunteer unrequested internal performance disclosures in buyer copy.
 7. Uploaded HTML files are product and design references, not proof that
    every depicted function is wired in production. The signed-out app and
    signed-in product may expose different functionality.

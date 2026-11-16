@@ -99,7 +99,7 @@ def test_homepage_corporate_structure_locked() -> None:
     for label in (
         "SOFTWARE CREATION · REAL SOURCE · INDEPENDENT EVIDENCE",
         "From ambitious ideas to real, editable software.",
-        "founder-operated alpha",
+        "Make your next move operational.",
         "Governed replacement",
         "Claims-boundary correction",
         "TrustField",

@@ -190,11 +190,11 @@ def test_evidence_and_client_zero_copy_preserve_claim_boundaries() -> None:
         "Evidence boundary",
     ):
         assert f"<dt>{receipt_field}</dt>" in text
-    assert "internal operating model" in text
-    assert "not an external customer case study" in text
+    assert "first-party example" in text.lower()
+    assert "recorded acceptance" in text
     assert (
-        "No external customer adoption, broad production proof or independent "
-        "validation is claimed."
+        "First-party workflow demonstrating defined authority, bounded execution, "
+        "and independently checked acceptance."
     ) in text
     for unsupported in (
         "fully autonomous enterprise",

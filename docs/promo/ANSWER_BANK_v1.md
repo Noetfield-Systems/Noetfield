@@ -1,16 +1,18 @@
 # Noetfield Answer Bank v1
 
-Single source of approved promotional language. Every outbound email, application,
-one-pager, and post quotes this file. Claims here are derived from the live site at
-release 4599b3a1 and pass the public claim gates. If a claim is not in this file,
-it is not approved for external use.
+Buyer-first promotional language for Noetfield. External copy should explain the buyer's
+problem, deliverable, process and next action. Use verifiable claims only; do not
+turn internal company-stage, revenue, CI, or risk-reporting notes into public sales copy.
+Technical demonstration scope should be disclosed where relevant to that demonstration.
+Investor diligence and direct factual questions must still be answered accurately.
 
-## Status vocabulary (locked 2026-07-31)
+## Audience-specific status and evidence
 
-- Public status: **LIVE ALPHA**
-- Detailed stage: **founder-operated alpha**
-- Evidence class: **first-party internal demonstration**
-- Funding disclosure: **No external customers or revenue yet.**
+- Buyer-facing copy: lead with the business outcome, offer, deliverables and CTA.
+- Individual features: identify alpha/preview status when material to the purchase or use.
+- Evidence: label first-party demonstrations and synthetic examples accurately.
+- Do not proactively advertise internal revenue or customer-acquisition status.
+- Investor or procurement diligence: answer direct commercial and maturity questions factually using current records.
 - Never use "client-zero" in outbound or public copy. The only sanctioned public use
   is the single evidence page /proof/customer-zero/ (IBM/Microsoft "Customer Zero" sense).
 
@@ -23,7 +25,7 @@ it is not approved for external use.
   model, decides what passes.
 - **Investor**: Noetfield is the execution-governance layer for the agent era:
   agentic software delivery with deterministic controls, independent verification,
-  and receipts, live as a founder-operated alpha with first-party evidence published.
+  and inspectable first-party technical evidence.
 - **Regulated buyer**: Noetfield runs consequential workflows under explicit
   authority, bounded execution, independent checks, and inspectable receipts, and
   TrustField applies that discipline to FINTRAC case operations.
@@ -39,10 +41,10 @@ Noetfield app is an agentic workspace: state a goal and it structures the work i
 planned, executed, checked, revisioned, and deployable output. Behind it, AI Motors
 provide the execution runtime: explicit authority before action, bounded workers,
 separate verification, bounded repair with documented safe stops, and receipts for
-every accepted outcome. TrustField is Noetfield's regulated-operations and
-compliance product vertical for FINTRAC case operations. Status: live alpha,
-founder-operated. Public evidence is first-party and published at
-noetfield.com/proof/. No external customers or revenue yet.
+every accepted outcome. Noetfield also builds business operations and real-world
+asset workflow infrastructure. TrustField is an independent venture supported
+on technical setup, with separate product and commercial boundaries.
+Explore specific engineering case studies at noetfield.com/proof/.
 
 ## 250-word description
 
@@ -60,17 +62,14 @@ completions under the same controls. AI Motors are the execution runtimes
 underneath: explicit authority before action, policy and budget fencing, separate
 verification, bounded repair, and a documented safe stop instead of a silent pass.
 
-TrustField is Noetfield's regulated-operations and compliance product vertical. It
-applies the governed execution infrastructure to consequential financial and
-compliance workflows while preserving human decision authority; public
-demonstrations use synthetic data and the human FILE / NO-FILE / ESCALATE decision
-stays with the reporting entity.
+TrustField is an independent venture supported by Noetfield on technical setup.
+Its regulated-operations workflows preserve human decision authority; its
+public demonstrations are based on synthetic scenarios rather than live filings.
 
-Stage, stated plainly: the system is live as a founder-operated alpha. Evidence is
-first-party and published in a public register (noetfield.com/proof/), including a
-completed governed software change with verification, bounded repair, and the
-receipt preserved. No external customers or revenue yet, and nothing beyond the
-published evidence is claimed. A receipt is not certification.
+For buyers, start with the use case and a scoped engagement: the intended
+result, inputs, acceptance criteria, delivery route and next step. Engineering
+case studies and source-backed artifacts are available at noetfield.com/proof/.
+Do not imply external certification or customer endorsements from those artifacts.
 
 ## 500-word description
 
@@ -103,16 +102,17 @@ Company: founded and operated by Sina Kazemnezhad (LLB) in Vancouver, British
 Columbia. The founder's legal background shapes the design principle that governance
 belongs inside execution, not only in policy documents or after-the-fact reviews.
 
-## Stage disclosure block (paste verbatim into applications)
+## Technical stage and provenance (use only when material or requested)
 
-Noetfield is live as a founder-operated alpha. The application, workflows, runtime,
-and evidence register are operational and publicly inspectable. Public evidence is
-first-party (Noetfield operating its own technology on real internal workflows, the
-practice IBM calls Client Zero and Microsoft calls Customer Zero). External
-customers and revenue are not yet established and are not claimed. Public
-demonstrations use synthetic or sample data. A receipt is not certification.
+The Noetfield application and public engineering demonstrations have individually
+identified operating scopes. Technical examples may be first-party or synthetic
+and are labeled accordingly. Review the current product journey and technical
+evidence before agreeing a project scope. Never present engineering receipts as
+third-party certification. For investor or procurement questions about customers,
+revenue, staffing or deployment, use current internal records and answer directly;
+never infer commercial performance from an engineering demonstration.
 
-## Approved traction statements (nothing stronger)
+## Approved capability and evidence statements
 
 - The system is live and publicly reachable (app.noetfield.com, noetfield.com).
 - A completed governed software change with verification, bounded repair, and a
@@ -123,11 +123,12 @@ demonstrations use synthetic or sample data. A receipt is not certification.
 
 ## Forbidden (never write)
 
-Customers/clients counts or logos; revenue; "trusted by"; "production-ready";
+Unverified customer counts or logos; unsupported revenue figures; "trusted by"; "production-ready";
 "certified"; "proven at scale"; "industry-leading"; guaranteed outcomes; uptime
 promises; endorsement or partnership implications with IBM, NVIDIA, Microsoft,
 Palantir, RBC, TD, or any named company; "client-zero" in any outbound; separate
-venture framing for TrustField.
+parent-company or subsidiary framing for TrustField. Do not add unrequested
+negative customer/revenue or internal-operations disclosures to public marketing.
 
 ## Standard links
 

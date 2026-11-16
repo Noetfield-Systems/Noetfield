@@ -45,10 +45,10 @@ check_file "protected corporate homepage" index.html \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
   'SOFTWARE CREATION · REAL SOURCE · INDEPENDENT EVIDENCE' \
   'Build, inspect, improve and publish with Noetfield.' \
-  'founder-operated alpha' \
-  'No external customers or revenue yet' \
+  'APP ACCESS · ALPHA' \
+  'Make your next move operational.' \
   '/assets/product/noetfield-app-live.jpg' \
-  'REAL PRODUCT VIEW · NOT A MOCKUP' \
+  'EXPLORE THE PRODUCT WORKSPACE' \
   'DELIVERY PATH · STEP THROUGH' \
   'SAMPLE ARTIFACT · SHAPE ONLY' 'NO INVENTED SHAS OR PASS CLAIMS' \
   'a receipt is not certification' \
@@ -101,9 +101,9 @@ check_absent "protected homepage has no private or unsupported conversion" index
 check_file "protected ecosystem and investor surface" investors/index.html \
   '<title>Investors / Ecosystem — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
-  'Company thesis and current state' \
-  'external customers and revenue are not established' \
-  'TrustField' 'independent venture in formation' 'human decision authority' \
+  'Company thesis and partnerships' \
+  'opportunities for partners across software' \
+  'TrustField' 'independent venture in formation' 'technical evidence' \
   'href="/contact/?topic=program-funding"' 'href="/proof/"' \
   'href="/proof/claims-boundary-correction/"'
 check_absent "protected investors hub has no embedded intake" investors/index.html \
@@ -218,14 +218,14 @@ check_absent "recovered frontier page has no workspace conversion" frontier-syst
 
 check_file "about corporate positioning and TrustField boundary" about/index.html \
   'Noetfield Systems Inc.' 'Sina Kazemnezhad' 'Corporate boundaries' \
-  'SourceA' 'founder-operated alpha' \
-  'TrustField' 'independent venture in formation' 'href="https://trustfield.ca/"' \
-  'human decision authority'
+  'software engineering, AI execution' \
+  'TrustField' 'independent venture supported' 'href="https://trustfield.ca/"' \
+  'Explore our work'
 check_absent "about has no SourceB catalogue" about/index.html 'SourceB'
 check_absent "about has no stale product TrustField copy" about/index.html \
   'validation vertical developed and operated' 'LIVE PRODUCT' 'separate venture'
 
-# TrustField is a Noetfield Systems Inc. product on canonical pages.
+# TrustField is an independent venture; retain accurate public product boundaries.
 check_file "homepage TrustField boundary" index.html \
   'TrustField' 'href="https://trustfield.ca/"' \
   'independent venture in formation'
@@ -582,8 +582,8 @@ bash scripts/verify-public-chat-truth.sh || fail=1
 check_file "customer zero evidence page (single sanctioned context)" proof/customer-zero/index.html \
   '<title>Noetfield as Customer Zero — Noetfield Systems</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/proof/customer-zero/" />' \
-  'FIRST-PARTY' 'internal users do not replace actual customers' \
-  'Does not prove' 'A receipt is not certification.'
+  'FIRST-PARTY' 'This case documents first-party operation' \
+  'Validation scope' 'technical evidence'
 cz_containment=$(python3 - <<'PYCZ'
 import pathlib, re, sys
 allowed = pathlib.Path("proof/customer-zero/index.html").resolve()
