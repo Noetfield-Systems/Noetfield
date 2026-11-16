@@ -42,7 +42,7 @@ CORPORATE_HOME_REQUIRED = (
     "/proof/",
     "/public-interest/",
     "From ambitious ideas to real, editable software.",
-    "Build with Noetfield",
+    "/connect/",
     "TRY THE CURRENT APP",
     "EXAMINE A VERIFIED RUN",
     "TrustField",
