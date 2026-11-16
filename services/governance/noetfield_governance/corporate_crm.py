@@ -15,7 +15,7 @@ from urllib.parse import urlsplit
 
 import asyncpg
 
-from noetfield_governance.commercial_pipeline import _database_url
+from noetfield_governance.commercial_pipeline import _database_url, _prepare as prepare_payment_evidence
 from noetfield_governance.intake_test import is_test_intake
 
 KIND = frozenset({"buyer", "asset_originator", "referral_partner", "delivery_partner",
@@ -364,6 +364,7 @@ async def dashboard(settings: object, *, search: str = "", stage: str = "",
     db=await asyncpg.connect(_database_url(settings))
     try:
         await schema(db)
+        await prepare_payment_evidence(db)
         accounts=await db.fetch("""SELECT * FROM noetfield.corp_crm_accounts
                                      ORDER BY updated_at DESC LIMIT 120""")
         contacts=await db.fetch("""SELECT * FROM noetfield.corp_crm_people
