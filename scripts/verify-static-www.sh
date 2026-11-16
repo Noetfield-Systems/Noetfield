@@ -4,6 +4,10 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
+# Founder PR #388 approved V5 photo-led design is a protected public artifact.
+# Prevent another AI-agent theme rewrite from passing ordinary static CI.
+python3 scripts/verify-founder-v5-visual-lock.py
+
 fail=0
 ok() { echo "OK   verify-static-www: $1"; }
 bad() { echo "FAIL verify-static-www: $1" >&2; fail=1; }
