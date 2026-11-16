@@ -631,14 +631,14 @@ body.nf-corp.nf-home .nf-v5-film-band>img{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center;
   filter:saturate(.72) brightness(.58) contrast(1.18);
-  z-index:-2;
+  z-index:0!important;
 }
 body.nf-corp.nf-home .nf-v5-film-band::before{
-  content:"";position:absolute;inset:0;z-index:-1;
+  content:"";position:absolute;inset:0;z-index:1!important;
   background:linear-gradient(90deg,rgba(7,16,24,.95),rgba(7,16,24,.68) 54%,rgba(7,16,24,.15));
 }
 body.nf-corp.nf-home .nf-v5-film-content{
-  position:relative;padding:95px max(6vw,calc((100vw - 1440px)/2));
+  position:relative;z-index:2!important;padding:95px max(6vw,calc((100vw - 1440px)/2));
   max-width:1080px;
 }
 body.nf-corp.nf-home .nf-v5-film-index{
@@ -659,7 +659,7 @@ body.nf-corp.nf-home .nf-v5-film-content a{
   border-radius:2px;
 }
 body.nf-corp.nf-home .nf-v5-film-credit{
-  position:absolute;right:28px;bottom:18px;
+  position:absolute;z-index:3!important;right:28px;bottom:18px;
   color:#c6cfd0;font:500 9px "DM Mono",monospace;
   letter-spacing:.1em;
 }
