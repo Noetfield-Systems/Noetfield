@@ -179,6 +179,8 @@ try:
             assert submitted["contact_email"]=="fixture@example.org",submitted
             assert submitted["vector"]=="founding-community",submitted
             assert submitted["metadata"]["topic"]=="early-access-ai-software",submitted
+            assert submitted["metadata"]["consent_updates"] is True,submitted
+            assert submitted["metadata"]["consent_scope"]=="noetfield-product-and-community-updates-v1",submitted
             comm.locator(".nf-intake-async-status--ok").wait_for(timeout=10000)
             assert not comm_errors,comm_errors
             comm.close()
