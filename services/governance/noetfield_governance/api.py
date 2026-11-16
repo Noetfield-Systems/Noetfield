@@ -1441,6 +1441,18 @@ async def _notify_intake_background(record: object) -> None:
     ):
         logger.info("intake_ops_notify_skipped test intake intake_id=%s", record.intake_id)
         return
+    # Corporate prospects enter Noetfield's own CRM automatically only when the
+    # source form explicitly targets Noetfield business or RWA. Web3 Fieldwork,
+    # other ventures and test probes are excluded. The ingestion is replay-safe
+    # by canonical intake ID and never sends outbound messages.
+    try:
+        from noetfield_governance.corporate_crm import auto_import_inbound
+        crm_result = await auto_import_inbound(settings, record)
+        if crm_result.get("imported"):
+            logger.info("noetfield_corporate_crm_ingested intake_id=%s deal_id=%s",
+                        record.intake_id,crm_result.get("deal_id"))
+    except Exception:
+        logger.exception("noetfield_corporate_crm_import_pending intake_id=%s",record.intake_id)
     # The canonical Platform record is already persisted. Mirror consented
     # people/contributors into the *existing* WorkforceOS case ledger.
     # Failure is logged and recoverable via the authenticated retry endpoint;
