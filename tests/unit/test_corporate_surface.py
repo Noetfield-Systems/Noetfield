@@ -32,8 +32,8 @@ def test_corporate_pages_share_navigation_footer_and_metadata() -> None:
         assert f"/assets/noetfield-corporate-v1.css?{css_version}" in text, path
         if path == ROOT / "index.html":
             assert "/assets/noetfield-home-v2.css?v=4" in text, path
-            assert 'class="nf-corp nf-home"' in text, path
-        assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text, path
+            assert 'class="nf-corp nf-home nr-skin"' in text, path
+        assert ('<nav class="nf-corp-nav" aria-label="Primary navigation">' in text or 'class="nr-navigation nf-corp-nav"' in text), path
         assert 'class="nf-corp-footer"' in text, path
         assert "Evidence before claims." in text, path
         assert 'property="og:title"' in text, path
@@ -72,7 +72,7 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
         "/applications/",
         "/public-interest/",
         "/assets/noetfield-home-v2.css",
-        'class="nf-corp nf-home"',
+        'class="nf-corp nf-home nr-skin"',
     )
     for phrase in required:
         assert phrase in text, phrase
@@ -207,6 +207,12 @@ def test_corporate_primary_nav_is_advisor_consistent() -> None:
         ROOT / "system" / "index.html",
     ):
         text = read(path)
+        if path == ROOT / 'index.html':
+            assert 'class="nr-navigation nf-corp-nav"' in text
+            for link in ('href="/company-os/"', 'href="/real-world-capital/"', 'href="/opportunities/"', 'href="/community/"'):
+                assert link in text
+            assert 'href="https://app.noetfield.com/"' in text
+            continue
         nav_match = re.search(
             r'<nav class="nf-corp-nav" aria-label="Primary navigation">(.*?)</nav>',
             text,
@@ -347,6 +353,10 @@ def test_corporate_nav_and_footer_link_to_live_app() -> None:
     """Every corporate route keeps one visible live-alpha app path in header."""
     for path in (*PAGES, ROOT / "motors" / "index.html", ROOT / "runways" / "index.html"):
         text = read(path)
+        if path == ROOT / 'index.html':
+            assert 'class="nr-nav-app" href="https://app.noetfield.com/"' in text
+            assert 'href="/connect/"' in text
+            continue
         nav_match = re.search(
             r'<nav class="nf-corp-nav" aria-label="Primary navigation">(.*?)</nav>',
             text,
