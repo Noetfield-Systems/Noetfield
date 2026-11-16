@@ -83,6 +83,32 @@ try:
             assert not nav.is_visible(),route
             assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+2"),route
             page.close()
+        # Verify the newly commissioned growth interactions really respond:
+        # Opportunity Exchange filtering and form-category handoff.
+        exchange=browser.new_page(viewport={"width":1280,"height":900},device_scale_factor=1)
+        response=exchange.goto("http://127.0.0.1:8979/opportunities/",wait_until="networkidle",timeout=35000)
+        assert response.status==200
+        assert exchange.locator(".nr-opportunity-card").count()==6
+        exchange.locator('[data-nr-filter="partners"]').click()
+        assert exchange.locator('.nr-opportunity-card[data-hidden="false"]').count()==2
+        exchange.locator('[data-nr-filter="all"]').click()
+        assert exchange.locator('.nr-opportunity-card[data-hidden="false"]').count()==6
+        exchange.locator('.nr-opportunity-card a[data-nr-proposal="sales-distribution"]').click()
+        assert exchange.locator("#nfOpportunityTopic").input_value()=="sales-distribution"
+        exchange.close()
+        # The calculator measures a user's *current* task load only; it cannot
+        # be presented as guaranteed AI savings.
+        challenge=browser.new_page(viewport={"width":1280,"height":900},device_scale_factor=1)
+        response=challenge.goto("http://127.0.0.1:8979/company-os/",wait_until="networkidle",timeout=35000)
+        assert response.status==200
+        challenge.locator("#nr-workflow-volume").fill("60")
+        challenge.locator("#nr-workflow-minutes").fill("10")
+        challenge.locator("#nr-workflow-rate").fill("40")
+        assert challenge.locator("#nr-workflow-week").inner_text()=="10"
+        assert challenge.locator("#nr-workflow-year").inner_text()=="520"
+        assert "20,800" in challenge.locator("#nr-workflow-value").inner_text()
+        assert challenge.locator("#workflow-challenge").get_by_text("not a forecast of savings",exact=False).count()==1
+        challenge.close()
         # The flagship commercial path reuses the already approved public intake
         # and its live link, without generating any real Stripe charge in CI.
         for width,height in [(1440,900),(390,844)]:
