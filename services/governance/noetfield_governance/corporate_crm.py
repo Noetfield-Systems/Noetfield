@@ -501,15 +501,105 @@ async def detail(settings: object, *, deal_id: str) -> dict[str, Any]:
     try:
         await schema(db)
         row=await db.fetchrow("""SELECT d.*,a.name AS account_name,p.full_name AS contact_name,
-              p.email AS contact_email FROM noetfield.corp_crm_deals d
+              p.email AS contact_email,
+              i.qualification_json->'commercial_ops' AS commercial_case
+              FROM noetfield.corp_crm_deals d
               JOIN noetfield.corp_crm_accounts a ON a.id=d.account_id
               LEFT JOIN noetfield.corp_crm_people p ON p.id=d.person_id
+              LEFT JOIN noetfield.public_intakes i ON i.intake_id=d.source_intake_id
               WHERE d.id=$1""",identifier)
         if not row:
             raise CorporateCRMError("DEAL_NOT_FOUND")
         events=await db.fetch("""SELECT * FROM noetfield.corp_crm_activities
                     WHERE deal_id=$1 ORDER BY created_at DESC LIMIT 100""",identifier)
-        return {"deal":as_row(row),"activity":[as_row(x) for x in events],
+        output=as_row(row)
+        case=json_obj(output.pop("commercial_case"))
+        public_case={
+            "stage":case.get("stage","NOT_OPEN"),
+            "revision":int(case.get("revision") or 0),
+            "scope_ref":case.get("scope_ref"),
+            "acceptance_evidence":case.get("acceptance_evidence"),
+            "payment_session_id":case.get("payment_session_id"),
+            "delivery_evidence":case.get("delivery_evidence"),
+            "customer_acceptance":case.get("customer_acceptance"),
+        }
+        # Offer-specific payment link is visible to the authorized operator
+        # *only after* a real SOW acceptance has been recorded.
+        if case.get("stage")=="SCOPE_ACCEPTED" and case.get("acceptance_evidence"):
+            from noetfield_governance.commercial_pipeline import OFFER_TERMS
+            terms=OFFER_TERMS.get(str(output.get("offer")))
+            if terms:
+                public_case["approved_checkout_url"]=terms["checkout_url"]
+                public_case["amount_minor"]=terms["payment_minor"]
+                public_case["currency"]=terms["currency"]
+        return {"deal":output,"activity":[as_row(x) for x in events],
+                "commercial_case":public_case,
                 "source":"NOETFIELD_CORPORATE_CRM_ONLY"}
     finally:
         await db.close()
+
+
+async def commercial_step(settings: object, *, deal_id: str, action: str,
+                          expected_revision: int | None = None,
+                          scope_ref: str = "", acceptance_evidence: str = "",
+                          session_id: str = "", payer_authorization_url: str = "",
+                          delivery_evidence: str = "", acceptance_url: str = "",
+                          next_action: str = "") -> dict[str, Any]:
+    """Operator action on a *real sourced corporate deal* via existing paid ledger.
+
+    No payments, customer messages, invitations or RWA Clinic tasks are generated.
+    The existing commercial_pipeline validates SOW, live signed Stripe evidence
+    and delivery acceptance independently.
+    """
+    from noetfield_governance.commercial_pipeline import (
+        CommercialError, OFFER_TERMS, operate,
+    )
+    identifier=uuid.UUID(uuid_text(deal_id,"DEAL_ID"))
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await schema(db)
+        deal=await db.fetchrow("""SELECT source_intake_id,offer,owner,next_action,next_date
+            FROM noetfield.corp_crm_deals WHERE id=$1""",identifier)
+        if not deal:
+            raise CorporateCRMError("DEAL_NOT_FOUND")
+        if not deal["source_intake_id"]:
+            raise CorporateCRMError("CANONICAL_INTAKE_REQUIRED_FOR_PAYMENT")
+        if deal["offer"] not in OFFER_TERMS:
+            raise CorporateCRMError("NO_FIXED_CHECKOUT_FOR_THIS_OFFER")
+        original=await db.fetchrow("""SELECT request_id,contact_email,organization,metadata,vector
+            FROM noetfield.public_intakes WHERE intake_id=$1""",deal["source_intake_id"])
+        validate_intake(original)
+        values={
+            "intake_id":deal["source_intake_id"],
+            "action":action,
+            "expected_revision":expected_revision,
+            "offer":deal["offer"],
+            "owner":deal["owner"],
+            "next_action":next_action or deal["next_action"],
+            "due_date":deal["next_date"].isoformat() if deal["next_date"] else "",
+            "scope_ref":scope_ref,
+            "acceptance_evidence":acceptance_evidence,
+            "session_id":session_id,
+            "payer_authorization_url":payer_authorization_url,
+            "delivery_evidence":delivery_evidence,
+            "acceptance_url":acceptance_url,
+        }
+    finally:
+        await db.close()
+    try:
+        result=await operate(settings, **values)
+    except CommercialError as exc:
+        raise CorporateCRMError(str(exc)) from exc
+    safe={
+        "intake_id":deal["source_intake_id"],
+        "stage":result.get("stage"),
+        "revision":result.get("revision"),
+        "scope_ref":result.get("scope_ref"),
+        "payment_event_id":result.get("payment_event_id"),
+        "delivery_evidence":result.get("delivery_evidence"),
+        "customer_acceptance":result.get("customer_acceptance"),
+        "idempotent":bool(result.get("idempotent")),
+    }
+    if result.get("stage")=="SCOPE_ACCEPTED" and result.get("acceptance_evidence"):
+        safe["approved_checkout_url"]=OFFER_TERMS[deal["offer"]]["checkout_url"]
+    return safe
