@@ -29,7 +29,7 @@ try:
             assert "build with ai" in title.lower() and "move business forward" in title.lower(),title
             lead=page.locator(".nf-v3-hero .nf-ins-lead").inner_text()
             assert "build software." in lead.lower() and "automate your work." in lead.lower(),lead
-            assert page.locator("#choose-your-path .nf-ins-path-card > img").count()==3
+            assert page.locator("#choose-your-path .nf-ins-path-card > .nf-v5-card-photo").count()==3
             assert page.locator("h1").count()==1
             paths=page.locator("#choose-your-path a.nf-ins-path-card")
             capabilities=page.locator("#command-capabilities a.nf-ins-platform-item")
@@ -47,7 +47,7 @@ try:
             # Each buying route must have a meaningful photo or real app screenshot,
             # not a decorative 3D shape. External photo failures surface as failures.
             if name=="desktop-1440":
-                path_img=paths.locator("> img")
+                path_img=paths.locator(".nf-v5-card-photo img")
                 route_images=path_img.evaluate_all("""els=>els.map(el=>({
                   src:el.getAttribute("src"), loaded:el.complete&&el.naturalWidth>250
                 }))""")
@@ -106,20 +106,23 @@ try:
                 # A full-page screenshot can miss off-screen deferred image painting.
                 # Explicitly scroll the real product cards into view and photograph
                 # their actual paint outcome, not only img.complete/naturalWidth.
-                photo_cards=page.locator("#choose-your-path a.nf-ins-path-card > img")
-                photo_cards.evaluate_all("""els=>els.forEach(im=>{im.loading='eager';im.decoding='sync'})""")
+                photo_cards=page.locator("#choose-your-path a.nf-ins-path-card > .nf-v5-card-photo")
+                photo_cards.evaluate_all("""els=>els.forEach(el=>{const im=el.querySelector("img");if(im){im.loading="eager";im.decoding="sync"}})""")
                 page.locator("#choose-your-path").scroll_into_view_if_needed()
-                page.wait_for_function("""() => Array.from(document.querySelectorAll('#choose-your-path a.nf-ins-path-card > img')).every(im=>im.complete && im.naturalWidth>250)""",timeout=20000)
+                page.wait_for_function("""() => Array.from(document.querySelectorAll('#choose-your-path a.nf-ins-path-card > .nf-v5-card-photo img')).every(im=>im.complete && im.naturalWidth>250)""",timeout=20000)
                 media_styles=photo_cards.evaluate_all("""els=>els.map(el=>({
-                  src:el.getAttribute('src'),naturalWidth:el.naturalWidth,
-                  display:getComputedStyle(el).display,opacity:getComputedStyle(el).opacity,
+                  src:el.querySelector('img')?.getAttribute('src'),
+                  naturalWidth:el.querySelector('img')?.naturalWidth,
+                  backgroundImage:getComputedStyle(el).backgroundImage,
+                  display:getComputedStyle(el).display,
+                  opacity:getComputedStyle(el).opacity,
                   visibility:getComputedStyle(el).visibility,
-                  mixBlendMode:getComputedStyle(el).mixBlendMode,
                   zIndex:getComputedStyle(el).zIndex,
+                  topElement:document.elementFromPoint(el.getBoundingClientRect().left+Math.min(30,el.offsetWidth/2),el.getBoundingClientRect().top+Math.min(30,el.offsetHeight/2))?.className,
                   bounding:el.getBoundingClientRect().toJSON()
                 }))""")
                 print("CORPORATE_DOCUMENTARY_IMAGE_PAINT="+json.dumps(media_styles),flush=True)
-                assert all(z["display"]!="none" and z["opacity"]=="1" and z["visibility"]=="visible" for z in media_styles),media_styles
+                assert all(z["display"]!="none" and z["opacity"]=="1" and z["visibility"]=="visible" and z["backgroundImage"]!="none" and z["naturalWidth"]>250 for z in media_styles),media_styles
                 page.screenshot(path=str(OUT/"product-paths-1440.png"),full_page=False,animations="disabled")
                 # Also bring the photographed middle chapter into the viewport.
                 page.locator(".nf-v5-film-band").scroll_into_view_if_needed()
