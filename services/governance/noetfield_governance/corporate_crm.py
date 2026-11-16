@@ -65,7 +65,8 @@ def source_url(url: str) -> str:
         return ""
     parsed = urlsplit(url)
     if (len(url) > 1000 or parsed.scheme != "https" or not parsed.hostname
-            or parsed.username or parsed.password or any(x.isspace() for x in url)):
+            or parsed.username or parsed.password or any(x.isspace() for x in url)
+            or parsed.hostname.lower() in {"localhost","127.0.0.1","example.com"}):
         raise CorporateCRMError("HTTPS_SOURCE_REQUIRED")
     return url
 
@@ -230,15 +231,27 @@ async def deal_create(settings: object, *, account_id: str, offer: str,
     db = await asyncpg.connect(_database_url(settings))
     try:
         await schema(db)
-        if not await db.fetchval("SELECT 1 FROM noetfield.corp_crm_accounts WHERE id=$1",account):
+        existing_account = await db.fetchrow(
+            "SELECT id,normalized_name FROM noetfield.corp_crm_accounts WHERE id=$1", account
+        )
+        if not existing_account:
             raise CorporateCRMError("ACCOUNT_NOT_FOUND")
         if person and not await db.fetchval("""SELECT 1 FROM noetfield.corp_crm_people
                 WHERE id=$1 AND account_id=$2""",person,account):
             raise CorporateCRMError("PERSON_ACCOUNT_MISMATCH")
         if source_id:
-            original = await db.fetchrow("""SELECT request_id,contact_email,metadata,vector
+            original = await db.fetchrow("""SELECT request_id,contact_email,organization,metadata,vector
                 FROM noetfield.public_intakes WHERE intake_id=$1""",source_id)
             validate_intake(original)
+            if normalize_account(original["organization"]) != existing_account["normalized_name"]:
+                raise CorporateCRMError("SOURCE_ACCOUNT_MISMATCH")
+            if person:
+                source_email = str(original["contact_email"] or "").strip().lower()
+                linked_email = await db.fetchval(
+                    "SELECT lower(email) FROM noetfield.corp_crm_people WHERE id=$1", person
+                )
+                if source_email and linked_email != source_email:
+                    raise CorporateCRMError("SOURCE_CONTACT_MISMATCH")
         row=await db.fetchrow("""INSERT INTO noetfield.corp_crm_deals(
             id,account_id,person_id,source_intake_id,referrer_account_id,
             offer,stage,estimated_minor,currency,owner,next_action,next_date,
@@ -426,7 +439,8 @@ async def dashboard(settings: object, *, search: str = "", stage: str = "",
             commercial=json_obj(item.pop("commercial_case"))
             receipt=None
             session=str(commercial.get("payment_session_id") or "")
-            if (session and item["source_intake_id"]
+            if (session and item["source_intake_id"] and commercial.get("acceptance_evidence")
+                    and commercial.get("stage") in {"PAYMENT_CONFIRMED","IN_DELIVERY","DELIVERED","CLOSED"}
                     and commercial.get("offer")==item["offer"]):
                 proof=await db.fetchrow("""SELECT e.event_id,e.amount_minor,e.currency,
                       e.reversed,e.livemode,e.source_intake_id
@@ -442,20 +456,37 @@ async def dashboard(settings: object, *, search: str = "", stage: str = "",
             item["next_due"]=bool(item["next_date"] and item["next_date"]<=date.today().isoformat()
                                  and item["stage"] not in {"LOST","DELIVERED","RETAINED"})
             items.append(item)
-        amounts={}
-        for item in items:
-            receipt=item["payment"]
-            if receipt and receipt["status"]=="PAID_LIVE":
-                currency=receipt["currency"].upper()
-                amounts[currency]=amounts.get(currency,0)+int(receipt["amount_minor"])
-        total=await db.fetchval("SELECT count(*) FROM noetfield.corp_crm_deals")
+        # KPI totals must not change just because the operator filters or pages
+        # through opportunities. Only source-matched signed live Stripe evidence
+        # tied to the same accepted commercial scope counts as a paid checkout.
+        totals=await db.fetchrow("""SELECT
+                count(*)::int AS deals,
+                count(*) FILTER (WHERE stage NOT IN ('LOST','RETAINED','DELIVERED'))::int AS open,
+                count(*) FILTER (WHERE next_date<=CURRENT_DATE
+                    AND stage NOT IN ('LOST','RETAINED','DELIVERED'))::int AS due,
+                count(*) FILTER (WHERE owner='')::int AS without_owner
+                FROM noetfield.corp_crm_deals""")
+        total_accounts=await db.fetchval("SELECT count(*)::int FROM noetfield.corp_crm_accounts")
+        money_rows=await db.fetch("""SELECT e.currency, sum(e.amount_minor)::bigint AS total_minor
+                FROM noetfield.commercial_payment_evidence e
+                JOIN noetfield.corp_crm_deals d ON d.source_intake_id=e.source_intake_id
+                JOIN noetfield.public_intakes i ON i.intake_id=d.source_intake_id
+                WHERE e.livemode=true AND e.reversed=false AND e.source_intake_id IS NOT NULL
+                  AND i.qualification_json->'commercial_ops'->>'offer'=d.offer
+                  AND i.qualification_json->'commercial_ops'->>'payment_session_id'=e.session_id
+                  AND i.qualification_json->'commercial_ops'->>'stage'
+                       IN ('PAYMENT_CONFIRMED','IN_DELIVERY','DELIVERED','CLOSED')
+                  AND nullif(i.qualification_json->'commercial_ops'->>'acceptance_evidence','') IS NOT NULL
+                GROUP BY e.currency""")
+        amounts={str(r["currency"]).upper():int(r["total_minor"]) for r in money_rows}
         return {"schema":"noetfield.corporate-crm.v1","scope":"NOETFIELD_CORPORATE_ONLY",
                 "accounts":[as_row(a) for a in accounts],
                 "people":[as_row(p) for p in contacts],
-                "deals":items,"total_deals":int(total),
-                "metrics":{"open":sum(1 for d in items if d["stage"] not in {"LOST","RETAINED","DELIVERED"}),
-                           "due":sum(bool(d["next_due"]) for d in items),
-                           "without_owner":sum(not bool(d["owner"]) for d in items),
+                "deals":items,"total_deals":int(totals["deals"]),
+                "metrics":{"open":int(totals["open"]),
+                           "due":int(totals["due"]),
+                           "without_owner":int(totals["without_owner"]),
+                           "total_accounts":int(total_accounts),
                            "paid_verified_by_currency_minor":amounts},
                 "cash_source":"signed Stripe webhook ledger, matched to canonical scope and intake",
                 "operator_activity_claims":"OPERATOR_REPORTED_NOT_PROVIDER_ATTESTED",
