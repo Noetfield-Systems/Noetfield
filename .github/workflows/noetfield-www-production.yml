@@ -1,5 +1,5 @@
 name: Noetfield WWW Production
-# Release trigger note: re-emit production after the generated-artifact cleanliness repair.
+# Release trigger note: 2026-11-16 market-native Noetfield & consented Early Access after exact-main static-verifier mode repair.
 
 on:
   workflow_dispatch:
