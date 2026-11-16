@@ -70,7 +70,7 @@ check_file "market-language homepage and primary navigation" index.html \
   'Build software.' 'Automate your work.' 'With AI.' \
   'Build Software with AI' 'Automate Your Business' \
   'Real-World Assets &amp; Digital Capital' \
-  'href="/community/"' 'Explore AI Software Builder' \
+  'href="/community/"' 'Open the AI Software Builder' \
   'Join Early Access' 'AI Business Operations' 'Digital Asset Services'
 check_file "market-language early access: real intake" community/index.html \
   'href="https://app.noetfield.com/"' \
