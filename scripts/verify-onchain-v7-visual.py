@@ -29,7 +29,7 @@ def main() -> int:
             page.evaluate("document.fonts.ready")
             page.wait_for_timeout(250)
             assert page.locator("h1").count() == 1
-            assert "From real-world value" in page.locator("h1").inner_text()
+            assert "Make real-world assets" in page.locator("h1").inner_text(), page.locator("h1").inner_text()
             hero_font = page.locator("h1").evaluate("(el)=>getComputedStyle(el).fontFamily")
             assert ("Newsreader" if width >= 1141 else "Instrument Sans") in hero_font, (width, hero_font)
             assert page.locator(".v5-hero-services a").count() == 4
