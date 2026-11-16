@@ -171,3 +171,51 @@ def test_auto_import_uses_canonical_intake_and_produces_no_outreach():
             assert worker.await_args.kwargs["intake_id"]=="INT-ABCDEF123456"
             assert worker.await_args.kwargs["offer"]=="rwa_technical_sprint"
     asyncio.run(run())
+
+
+def test_commercial_step_private_and_cookie_session_guarded():
+    async def run():
+        deal_id=str(uuid4())
+        payload={"action":"scope","expected_revision":1,
+                 "scope_ref":"SOW-RWA-2026-001",
+                 "acceptance_evidence":"https://docs.noetfield.com/signed/sow-001"}
+        async with AsyncClient(transport=ASGITransport(app=app),base_url="http://test") as client:
+            denied=await client.post("/api/corporate-crm/deals/"+deal_id+"/commercial",json=payload)
+        assert denied.status_code in (403,503)
+        with patch("noetfield_governance.api._require_connect_desk_operator",return_value=None),patch(
+            "noetfield_governance.corporate_crm.commercial_step",
+            new_callable=AsyncMock,return_value={
+                "intake_id":"INT-ABCDEF123456","stage":"SCOPE_ACCEPTED",
+                "revision":2,"approved_checkout_url":"https://buy.stripe.com/approved",
+            }
+        ) as operation:
+            async with AsyncClient(transport=ASGITransport(app=app),base_url="http://test") as client:
+                authorized=await client.post("/api/corporate-crm/deals/"+deal_id+"/commercial",json=payload)
+            assert authorized.status_code==200
+            assert authorized.json()["stage"]=="SCOPE_ACCEPTED"
+            assert operation.await_args.kwargs["deal_id"]==deal_id
+            assert operation.await_args.kwargs["expected_revision"]==1
+    asyncio.run(run())
+
+
+def test_crm_source_guard_rejects_placeholder_website_and_has_identity_validation():
+    for address in ("https://localhost/admin","https://127.0.0.1/internal","https://example.com/stub"):
+        with pytest.raises(CorporateCRMError):
+            source_url(address)
+    from inspect import getsource
+    from noetfield_governance.corporate_crm import deal_create
+    source=getsource(deal_create)
+    assert "SOURCE_ACCOUNT_MISMATCH" in source
+    assert "SOURCE_CONTACT_MISMATCH" in source
+
+
+def test_corporate_crm_console_has_source_based_paid_flow_not_fake_cash():
+    from pathlib import Path
+    path=Path(__file__).resolve().parents[2]/"services/governance/noetfield_governance/private_corporate_crm.html"
+    html=path.read_text(encoding="utf-8")
+    assert 'id="commercial-step"' in html
+    assert "/api/corporate-crm/deals/" in html
+    assert "Record verified commercial step" in html
+    assert "Approved-scope Stripe payment link" in html
+    assert "No automatic outreach or billing" in html
+    assert 'id="remember">' in html and 'id="remember" checked' not in html
