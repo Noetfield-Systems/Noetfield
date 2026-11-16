@@ -1,29 +1,37 @@
-# Offerings — canonical contract SKUs
+# Noetfield — public commercial offerings
 
-Noetfield maintains three contract offerings. The free developer sandbox is product access, not a fourth contract SKU.
+Noetfield has multiple commercial service categories. Do not describe specialized historic governance packages as the only three contract offerings of the parent company. Verify the live offer and written scope before quoting or presenting checkout terms.
 
-## 1. Copilot Governance Pack — lead pilot
+## Company OS — AI Business Operations
 
-- 90-day governed readiness engagement.
-- Current self-serve Starter checkout: US$2,000 one-time.
-- Larger Readiness Pilot bands are scoped by SOW; the public pilot page shows CAD $2,000–$10,000 planning bands.
-- Success signal: one organization uses a Noetfield board PDF in a real governance meeting.
-- Intake: /trust-brief/intake/?interest=pilot&vector=copilot-governance
+- AI workflow automation for sales, support and operations.
+- Published bounded AI Sales OS pilot: CAD $750 setup for one lead-to-follow-up workflow after written scope acceptance. Other integrations and managed service are quoted separately.
+- Entry: /company-os/ and /connect/?intent=business.
 
-## 2. Trust Brief — land diagnostic
+## Real-World Capital — Digital Asset Services
 
-- Six-week governance diagnostic.
-- Current Stripe checkout: US$10,000 one-time.
-- Scope variations are confirmed in a signed SOW.
-- Intake: /trust-brief/intake/
+- Tokenization readiness, private-credit workflows, asset/economic rights mapping, acquisition technical preparation.
+- Published RWA / Policy-to-Execution Technical Sprint: US$950 pilot scope; US$475 deposit only after agreed written scope, with the remaining US$475 at the agreed milestone.
+- Entry: /real-world-capital/. Stripe-hosted checkout is for an approved deposit, not an unsolicited purchase.
 
-## 3. Bank Pilot — custom
+## AI Software Builder and scoped software engineering
 
-- Read-only governance simulation for regulated institutions.
-- Custom scope and statement of work.
-- No direct checkout; intake only.
-- Intake: /bank-pilot/
+- The Noetfield App is available at https://app.noetfield.com/.
+- Scoped software builds are commissioned through /connect/. Do not invent a monthly SaaS price or promise full-stack features beyond current capability.
+
+## Specialized governance offerings
+
+1. **Copilot Governance Pack:** 90-day governed readiness; published Starter US$2,000 one-time self-serve checkout; larger scopes by SOW.
+2. **Trust Brief:** six-week diagnostic; published reference US$10,000, subject to agreed scope.
+3. **Bank Pilot:** custom, read-only shadow governance; inquiry and statement of work, no direct checkout.
+
+These are specialized offer references. Their deliverables can include a board PDF, procurement ZIP and metadata-only M365 evidence index. Check the relevant service page before a price promise.
+
+## Collaboration and community
+
+- Commercial or technical partnerships: /work-with-us/ and /opportunities/.
+- Founding product/community interest list: /community/; joining is free and consent-based, not a contract, account, token or ownership interest.
 
 ## Commercial boundary
 
-Live Stripe checkout is for Noetfield's own software and professional services only. No custody, payment execution, settlement, fund routing, or MSB activity.
+Noetfield sells its own software and professional services. It does not hold customer assets, execute payments for clients, broker securities, operate an exchange or promise financing approvals. TrustField and portfolio ventures remain independent.
