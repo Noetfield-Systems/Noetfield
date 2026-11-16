@@ -126,3 +126,48 @@ def test_corporate_workspace_is_private_noindex_shell_only():
         assert "SYNTHETIC LEAD" not in body
         assert "PRIVATE_CONTACTS" not in body
     asyncio.run(run())
+
+
+def test_auto_import_only_noetfield_inbound_not_portfolio_web3():
+    from noetfield_governance.corporate_crm import inbound_offer
+    def record(vector,meta,**kwargs):
+        return SimpleNamespace(vector=vector,metadata=meta,
+                    request_id=kwargs.get("rid","RID-CUSTOMER-123456"),
+                    contact_email=kwargs.get("email","real@buyer.example.org"))
+    rwa=record("onchain-project",{"form_id":"nfCapitalIntake"})
+    assert inbound_offer(rwa)==("rwa_technical_sprint","usd",95000)
+    crm=record("external-opportunities",{"form_id":"nfConnectWizard",
+                          "initiative":"noetfield","category":"business"})
+    assert inbound_offer(crm)==("business_automation","cad",0)
+    partner=record("external-opportunities",{"form_id":"nfConnectWizard",
+                          "initiative":"noetfield","category":"partnership"})
+    assert inbound_offer(partner)==("strategic_partnership","cad",0)
+    for invalid in (
+        record("external-opportunities",{"form_id":"nfConnectWizard",
+                       "initiative":"buildrelay","category":"business"}),
+        record("external-opportunities",{"form_id":"nfConnectWizard",
+                       "initiative":"portfolio","category":"business"}),
+        record("onchain-project",{"form_id":"nfCapitalIntake","intake_kind":"test"}),
+        record("web-intake",{"form_id":"nfCapitalIntake"}),
+        record("external-opportunities",{"form_id":"nfConnectWizard",
+                       "initiative":"noetfield","category":"people"}),
+        record("onchain-project",{"form_id":"nfCapitalIntake"},email="e2e@noetfield.com"),
+    ):
+        assert inbound_offer(invalid) is None
+
+
+def test_auto_import_uses_canonical_intake_and_produces_no_outreach():
+    from noetfield_governance.corporate_crm import auto_import_inbound
+    record=SimpleNamespace(intake_id="INT-ABCDEF123456",vector="onchain-project",
+            metadata={"form_id":"nfCapitalIntake"},request_id="RID-REAL-123456",
+            contact_email="buyer@realcompany.org")
+    imported={"imported_from":"INT-ABCDEF123456","deal":{"id":str(uuid4())}}
+    async def run():
+        with patch("noetfield_governance.corporate_crm.import_intake",
+                   new_callable=AsyncMock,return_value=imported) as worker:
+            result=await auto_import_inbound(object(),record)
+            assert result["imported"] and result["outreach_sent"] is False
+            assert result["payment_verified"] is False
+            assert worker.await_args.kwargs["intake_id"]=="INT-ABCDEF123456"
+            assert worker.await_args.kwargs["offer"]=="rwa_technical_sprint"
+    asyncio.run(run())
