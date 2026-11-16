@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real-source corporate homepage visual acceptance; desktop, tablet and phone.
 
-Checks the bespoke corporate editorial sculpture, accessible live links,
+Checks the documentary corporate homepage, authentic product imagery, accessible live links,
 and layout at four viewport sizes. No screenshot-as-a-page approximation.
 No fabricated business activity or dynamic numbers are asserted.
 """
@@ -26,10 +26,10 @@ try:
             assert response.status==200,response.status
             page.locator(".nf-v3-live-image").wait_for()
             title=page.locator("h1#hero-title").inner_text()
-            assert "intelligence" in title.lower() and "made real" in title.lower(),title
+            assert "build with ai" in title.lower() and "move business forward" in title.lower(),title
             lead=page.locator(".nf-v3-hero .nf-ins-lead").inner_text()
             assert "build software." in lead.lower() and "automate your work." in lead.lower(),lead
-            assert page.locator("#choose-your-path .nf-next-card-art").count()==3
+            assert page.locator("#choose-your-path .nf-ins-path-card > .nf-v5-card-photo").count()==3
             assert page.locator("h1").count()==1
             paths=page.locator("#choose-your-path a.nf-ins-path-card")
             capabilities=page.locator("#command-capabilities a.nf-ins-platform-item")
@@ -44,6 +44,18 @@ try:
             }))""")
             assert len(image_results)==1,image_results
             assert all(z["loaded"] for z in image_results),image_results
+            # Each buying route must have a meaningful photo or real app screenshot,
+            # not a decorative 3D shape. External photo failures surface as failures.
+            if name=="desktop-1440":
+                path_img=paths.locator(".nf-v5-card-photo img")
+                route_images=path_img.evaluate_all("""els=>els.map(el=>({
+                  src:el.getAttribute("src"), loaded:el.complete&&el.naturalWidth>250
+                }))""")
+                assert len(route_images)==3,route_images
+                assert all(img["loaded"] for img in route_images),route_images
+            assert page.locator(".nf-next-card-art").count()==0
+            assert page.locator(".nf-v5-film-band img").count()==1
+            assert page.locator(".nf-v5-final-statement").count()==1
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
             assert dimensions["doc"]<=width+2,dimensions
             if width>=1100:
@@ -65,17 +77,17 @@ try:
                 headline:getComputedStyle(el.querySelector("strong")).webkitTextFillColor
               }))
             })""")
-            assert paint["hero"]=="rgb(244, 244, 240)",paint
+            assert paint["hero"]=="rgb(255, 255, 255)",paint
             assert len(paint["cards"])==3,paint
             assert all(c["labelOverlay"]=="none" for c in paint["cards"]),paint
-            assert all(c["headline"]=="rgb(246, 246, 241)" for c in paint["cards"]),paint
+            assert all(c["headline"]=="rgb(17, 30, 38)" for c in paint["cards"]),paint
             assert page.locator(".nf-cinema-capabilities > a").count()==5
             assert page.locator(".nf-v3-art-note").is_visible()
-            assert page.locator(".nf-v3-live-image").get_attribute("src")=="/assets/noetfield-execution-sculpture-v3.svg"
+            assert "images.unsplash.com/photo-1782757832710" in page.locator(".nf-v3-live-image").get_attribute("src")
             hero_box=page.locator(".nf-v3-system-frame").bounding_box()
             assert hero_box and hero_box["width"]>=280 and hero_box["height"]>=300,hero_box
             if width<=700:
-                assert hero_box["y"]<height-70, f"Artwork falls below first screen: {hero_box}"
+                assert hero_box["y"]<height-70, f"Photographic hero falls below first screen: {hero_box}"
                 brand_box=page.locator(".nf-ins-header .nf-corp-brand").bounding_box()
                 menu_box=page.locator(".nf-q-menu").bounding_box()
                 assert brand_box and menu_box and abs(brand_box["y"]-menu_box["y"]) < 20, f"Mobile header wraps: {brand_box}, {menu_box}"
@@ -91,9 +103,33 @@ try:
             assert not errors,errors
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
             if name=="desktop-1440":
-                # Browser full-page capture does not trigger offscreen lazy images.
-                # Force the three real app screenshots to load, assert natural pixels.
-                page.locator("#app .teach img").evaluate_all("els=>els.forEach(el=>el.loading='eager')")
+                # A full-page screenshot can miss off-screen deferred image painting.
+                # Explicitly scroll the real product cards into view and photograph
+                # their actual paint outcome, not only img.complete/naturalWidth.
+                photo_cards=page.locator("#choose-your-path a.nf-ins-path-card > .nf-v5-card-photo")
+                photo_cards.evaluate_all("""els=>els.forEach(el=>{const im=el.querySelector("img");if(im){im.loading="eager";im.decoding="sync"}})""")
+                page.locator("#choose-your-path").scroll_into_view_if_needed()
+                page.wait_for_function("""() => Array.from(document.querySelectorAll('#choose-your-path a.nf-ins-path-card > .nf-v5-card-photo img')).every(im=>im.complete && im.naturalWidth>250)""",timeout=20000)
+                media_styles=photo_cards.evaluate_all("""els=>els.map(el=>({
+                  src:el.querySelector('img')?.getAttribute('src'),
+                  naturalWidth:el.querySelector('img')?.naturalWidth,
+                  backgroundImage:getComputedStyle(el).backgroundImage,
+                  display:getComputedStyle(el).display,
+                  opacity:getComputedStyle(el).opacity,
+                  visibility:getComputedStyle(el).visibility,
+                  zIndex:getComputedStyle(el).zIndex,
+                  topElement:document.elementFromPoint(el.getBoundingClientRect().left+Math.min(30,el.offsetWidth/2),el.getBoundingClientRect().top+Math.min(30,el.offsetHeight/2))?.className,
+                  bounding:el.getBoundingClientRect().toJSON()
+                }))""")
+                print("CORPORATE_DOCUMENTARY_IMAGE_PAINT="+json.dumps(media_styles),flush=True)
+                assert all(z["display"]!="none" and z["opacity"]=="1" and z["visibility"]=="visible" and z["backgroundImage"]!="none" and z["naturalWidth"]>250 for z in media_styles),media_styles
+                page.screenshot(path=str(OUT/"product-paths-1440.png"),full_page=False,animations="disabled")
+                # Also bring the photographed middle chapter into the viewport.
+                page.locator(".nf-v5-film-band").scroll_into_view_if_needed()
+                page.locator(".nf-v5-film-band img").evaluate("im=>im.loading='eager'")
+                page.screenshot(path=str(OUT/"engineering-panorama-1440.png"),full_page=False,animations="disabled")
+                # Force all authentic app screenshots, then capture the entire page.
+                page.locator("#app .teach img").evaluate_all("els=>els.forEach(im=>im.loading='eager')")
                 page.wait_for_function("""() => Array.from(document.querySelectorAll('#app .teach img')).every(im=>im.complete && im.naturalWidth>200)""",timeout=20000)
                 page.screenshot(path=str(OUT/"desktop-full-page.png"),full_page=True,animations="disabled")
             results.append(dict(viewport=name,document=dimensions,hero=hero_box,images=image_results,paths=paths.count(),capabilities=capabilities.count(),jsErrors=errors,ok=True))
