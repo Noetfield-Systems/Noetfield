@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="arttitle artdesc">
+<title id="arttitle">Noetfield execution architecture sculpture</title>
+<desc id="artdesc">Original visual study of an engineered metal and glass monolith marked N, surrounded by precise architectural lines representing authority, agent execution, verification and evidence. This is a conceptual graphic, not an operating dashboard or photograph.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#141e24"/><stop offset=".48" stop-color="#0b151d"/><stop offset="1" stop-color="#1b2a2f"/></linearGradient>
+<linearGradient id="top" x1=".1" y1="0" x2=".9" y2="1"><stop stop-color="#a8b1ad"/><stop offset=".2" stop-color="#4b5d60"/><stop offset=".62" stop-color="#263e44"/><stop offset="1" stop-color="#192b30"/></linearGradient>
+<linearGradient id="side" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#344b50"/><stop offset=".4" stop-color="#14232a"/><stop offset="1" stop-color="#080f17"/></linearGradient>
+<linearGradient id="front" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1d333b"/><stop offset=".36" stop-color="#314a50"/><stop offset=".72" stop-color="#13242b"/><stop offset="1" stop-color="#08141a"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe8bb"/><stop offset=".25" stop-color="#bc9872"/><stop offset=".45" stop-color="#ffe6b9"/><stop offset=".72" stop-color="#9d714c"/><stop offset="1" stop-color="#dbb68a"/></linearGradient>
+<linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#bdc8c3" stop-opacity="0"/><stop offset=".48" stop-color="#bdc8c3" stop-opacity=".34"/><stop offset="1" stop-color="#bdc8c3" stop-opacity="0"/></linearGradient>
+<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2e4850" stop-opacity=".34"/><stop offset="1" stop-color="#02090e" stop-opacity="0"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#e6b982" stop-opacity=".28"/><stop offset=".4" stop-color="#bf9a6d" stop-opacity=".08"/><stop offset="1" stop-color="#e6b982" stop-opacity="0"/></radialGradient>
+<filter id="shadow" x="-35%" y="-35%" width="170%" height="180%"><feGaussianBlur stdDeviation="27"/></filter>
+<filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".48" numOctaves="2" seed="8" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".12"/></feComponentTransfer></filter>
+<clipPath id="face"><path d="M465 263 L872 190 L872 618 L465 705 Z"/></clipPath>
+</defs>
+<rect width="1200" height="820" fill="url(#bg)"/>
+<rect width="1200" height="820" fill="#bbc9c0" filter="url(#grain)" opacity=".24"/>
+<rect x="0" y="540" width="1200" height="280" fill="url(#floor)"/>
+<ellipse cx="620" cy="680" rx="380" ry="130" fill="#000" opacity=".55" filter="url(#shadow)"/>
+<ellipse cx="740" cy="280" rx="300" ry="310" fill="url(#glow)"/>
+<g stroke="#91aaa6" stroke-opacity=".095" stroke-width="1">
+<path d="M0 80H1200M0 220H1200M0 360H1200M0 500H1200M0 640H1200M0 780H1200"/>
+<path d="M155 0V820M305 0V820M455 0V820M605 0V820M755 0V820M905 0V820M1055 0V820"/>
+</g>
+<g opacity=".5" stroke="url(#line)" fill="none">
+<path d="M110 125H440M950 130H1100M105 691H333M900 690H1110"/>
+<path d="M110 125V180M1100 130V204M105 691V624M1110 690V622"/>
+</g>
+<text x="110" y="106" font-family="monospace" font-size="16" letter-spacing="4" fill="#c5d0cb" opacity=".66">NOETFIELD / 01</text>
+<text x="950" y="115" font-family="monospace" font-size="14" letter-spacing="2" fill="#c5d0cb" opacity=".55">SYSTEM / MODEL</text>
+<text x="105" y="727" font-family="monospace" font-size="14" letter-spacing="2.2" fill="#91a7a5" opacity=".68">INTENT → AUTHORITY</text>
+<text x="905" y="727" font-family="monospace" font-size="14" letter-spacing="2.2" fill="#caa577" opacity=".8">EVIDENCE → RECEIPT</text>
+<!-- Precision stage / industrial plinth -->
+<path d="M290 630 L779 540 L1009 650 L490 761 Z" fill="#02090e" opacity=".58"/>
+<path d="M324 625 L785 544 L978 643 L498 741 Z" fill="#293d41" fill-opacity=".42" stroke="#7c9691" stroke-opacity=".24"/>
+<path d="M351 633 L784 554 L954 643 L501 731 Z" fill="none" stroke="#d6b17e" stroke-opacity=".3" stroke-width="1"/>
+<path d="M355 644 L498 731" stroke="#d2b17d" stroke-opacity=".36"/>
+<!-- Sculptural monolith -->
+<path d="M320 194 L465 263 L465 705 L320 608 Z" fill="url(#side)" stroke="#819694" stroke-opacity=".54" stroke-width="1.5"/>
+<path d="M320 194 L739 114 L872 190 L465 263 Z" fill="url(#top)" stroke="#e1ded0" stroke-opacity=".53" stroke-width="1.4"/>
+<path d="M465 263 L872 190 L872 618 L465 705 Z" fill="url(#front)" stroke="#c6d1ca" stroke-opacity=".35" stroke-width="1.5"/>
+<path d="M324 197 L460 268 L460 699" stroke="#b6c4bd" stroke-opacity=".22" stroke-width="2"/>
+<path d="M469 266L869 195L869 617L469 702Z" fill="none" stroke="#93b4b1" stroke-opacity=".11" stroke-width="18"/>
+<!-- Precision machined face / bevel -->
+<g clip-path="url(#face)">
+<path d="M480 287L856 219M479 674L856 597" stroke="#b7c6c2" stroke-opacity=".22" stroke-width="2"/>
+<path d="M485 300L856 232M485 659L856 584" stroke="#f1cea0" stroke-opacity=".22" stroke-width="1"/>
+<g stroke="#d5d9ce" stroke-opacity=".11" stroke-width="1"><path d="M510 255V700M562 240V700M614 230V700M666 220V700M718 210V700M770 200V700M822 190V700"/></g>
+<g stroke="#e4d7bd" stroke-opacity=".12"><path d="M465 360H872M465 450H872M465 540H872M465 630H872"/></g>
+<path d="M535 493L742 449" stroke="#ffc786" stroke-opacity=".26" stroke-width="95" filter="url(#soft)"/>
+<!-- The N identity, hand-drawn as planar machined material -->
+<path d="M510 352 L579 338 L688 514 L688 316 L764 300 L764 567 L692 581 L581 413 L581 604 L510 618 Z" fill="#060c10" stroke="#6a4c37" stroke-width="14" opacity=".85" transform="translate(10 12)"/>
+<path d="M510 352 L579 338 L688 514 L688 316 L764 300 L764 567 L692 581 L581 413 L581 604 L510 618 Z" fill="url(#gold)" stroke="#ffe6bf" stroke-opacity=".68" stroke-width="2.6"/>
+<path d="M518 356L571 346L694 537L694 323L754 310" fill="none" stroke="#fff6dc" stroke-opacity=".58" stroke-width="2"/>
+<path d="M519 613L569 600M702 572L756 560" fill="none" stroke="#24170e" stroke-opacity=".32" stroke-width="4"/>
+</g>
+<!-- Metallic etch / engraved side tracks -->
+<path d="M344 265L446 315M344 298L446 348M344 331L446 381M344 364L446 414M344 397L446 447M344 430L446 480M344 463L446 513" stroke="#b6c2b9" stroke-opacity=".22" stroke-width="1.5"/>
+<path d="M345 580L437 645" stroke="#e6b981" stroke-opacity=".49" stroke-width="2"/>
+<path d="M355 612L437 665" stroke="#a1b5b0" stroke-opacity=".42" stroke-width="1"/>
+<path d="M334 200L737 126L862 197" fill="none" stroke="#ffe0a8" stroke-opacity=".35" stroke-width="2"/>
+<!-- Thin authority channels: nodes show architecture, not live metrics -->
+<path d="M215 300H330M215 500H330M874 335H1023M874 510H1023" stroke="#bdc8c2" stroke-opacity=".45" stroke-width="1.4"/>
+<circle cx="215" cy="300" r="5" fill="#d5ad7c"/><circle cx="215" cy="500" r="5" fill="#d5ad7c"/><circle cx="1023" cy="335" r="5" fill="#d5ad7c"/><circle cx="1023" cy="510" r="5" fill="#d5ad7c"/>
+<g fill="#c3d2cc" font-family="monospace" font-size="14" letter-spacing="2.3">
+<text x="113" y="283">AUTHORITY</text><text x="126" y="483">EXECUTION</text>
+<text x="919" y="318">VERIFICATION</text><text x="943" y="493">EVIDENCE</text>
+</g>
+<g fill="#a1b5b0" font-family="monospace" font-size="12" letter-spacing="2" opacity=".76"><text x="110" y="310">01</text><text x="113" y="510">02</text><text x="1110" y="344">03</text><text x="1110" y="519">04</text></g>
+<rect x="0" y="0" width="1200" height="820" fill="none" stroke="#9cb0a9" stroke-opacity=".15" stroke-width="2"/>
+</svg>
