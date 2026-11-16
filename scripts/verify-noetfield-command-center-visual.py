@@ -43,6 +43,12 @@ try:
             assert all(z["loaded"] for z in image_results),image_results
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
             assert dimensions["doc"]<=width+2,dimensions
+            if width>=1100:
+                action_grid=page.locator("#now .runways").bounding_box()
+                final_action=page.locator("#now .runways > .runway:last-child").bounding_box()
+                assert action_grid and final_action and final_action["width"]>=action_grid["width"]*.36, (
+                    "No narrow orphan card in enterprise action grid",action_grid,final_action
+                )
             design_diagnostics=page.evaluate("""() => ({sheet:[...document.styleSheets].filter(s=>s.href&&s.href.includes('institutional-v3')).map(s=>({url:s.href,rules:(()=>{try{return s.cssRules.length}catch(e){return 'error'}})()})), bodyClass:document.body.className,heroClass:document.querySelector('.nf-institutional-hero')?.className,heroBackground:getComputedStyle(document.querySelector('.nf-institutional-hero')).background})""")
             print("CORPORATE_DESIGN_DIAGNOSTICS="+json.dumps(design_diagnostics),flush=True)
             assert design_diagnostics["sheet"] and design_diagnostics["sheet"][0]["rules"]>10,design_diagnostics
