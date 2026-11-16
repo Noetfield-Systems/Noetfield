@@ -294,6 +294,8 @@ def main(argv: list[str] | None = None) -> int:
         if not result.get("ok", False):
             for surface_id, surface in result.get("surfaces", {}).items():
                 candidate = surface.get("candidate", {})
+                if candidate.get("missing_file"):
+                    print(f"  - {surface_id}.missing_file: {candidate['missing_file']}")
                 for key in ("missing_required_text", "present_forbidden_text",
                             "missing_required_links", "present_forbidden_links"):
                     if candidate.get(key):
