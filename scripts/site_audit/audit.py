@@ -154,6 +154,11 @@ def structural_checks(page: dict, html: str, pricing: dict) -> list[tuple[str, s
 
 
 def nav_fingerprint(html: str) -> frozenset[str]:
+    # Audit the rendered Renaissance navigation, not the superseded hidden
+    # headers still present in old technical templates.
+    primary = re.search(r'<nav[^>]*class="[^"]*nr-navigation[^"]*"[^>]*>(.*?)</nav>', html, re.I | re.S)
+    if primary:
+        return frozenset(NAV_HREF_RE.findall(primary.group(1)))
     links: set[str] = set()
     for block in NAV_BLOCK_RE.findall(html):
         links.update(NAV_HREF_RE.findall(block))
