@@ -226,3 +226,12 @@ body.nf-corp.nf-home #engage .path{border-radius:3px!important}
  body.nf-corp.nf-home #app .teach figure:first-child{grid-row:auto!important}
  body.nf-corp.nf-home #app .teach figure:first-child img{height:230px!important}
 }
+
+/* Correct a legacy last-card auto-span rule inherited from the V2 grid.
+   Verified against full-page Playwright capture: no narrow orphan card. */
+@media(min-width:1100px){
+ body.nf-corp.nf-home #now .runways > .runway:last-child:nth-child(3n + 2){grid-column:span 6!important;min-width:0!important}
+}
+@media(min-width:621px) and (max-width:1099px){
+ body.nf-corp.nf-home #now .runways > .runway:last-child:nth-child(3n + 2){grid-column:auto!important}
+}
