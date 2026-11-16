@@ -32,7 +32,7 @@ TRUSTFIELD_BOUNDARY_LINE = (
     "Noetfield Systems Inc. on technical setup; it is not a Noetfield "
     "subsidiary or internal product. Its demonstration uses synthetic "
     "regulated-workflow data and does not establish custody, settlement, "
-    "licensing, regulatory filings or external customer adoption."
+    "licensing or regulatory filings in this technical demo."
 )
 TRUSTFIELD_SHORT = "Independent venture"
 
