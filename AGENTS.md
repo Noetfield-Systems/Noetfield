@@ -24,6 +24,10 @@ cache (gitignored, ~4MB); if it is missing or stale, rebuild first with
 `python3 scripts/build_repo_graph_v1.py` (~2s, zero-token) rather than a blind
 read. Verify wiring: `bash scripts/verify_l0_repo_graph_memory_v1.sh`.
 
+## P0 — MARKET LANGUAGE STANDARD (ALL PUBLIC AGENTS)
+
+Read `docs/brand/MARKET_LANGUAGE_STANDARD_v1.md` before changing public product copy, navigation, SEO, onboarding, invitations, or sales pages. Lead with the buyer-recognized category and the user's job, then explain value, experience, community and conversion; proprietary product names follow. The public website uses English only. Keep Noetfield App / AI Software Builder first-class beside AI Business Operations and Real-World Capital. Preserve the existing internal implementation names, stable API routes, receipts, permissions and evidence truth boundaries; do not rename them to suit marketing. Every visible signup, demo and checkout CTA must resolve to the real permitted experience, never a fabricated outcome. Fix failed customer-journey tests instead of weakening technical contracts.
+
 ## NOETFIELD PUBLIC LANGUAGE BOUNDARY — NON-NEGOTIABLE
 
 - **Public corporate surface:** `www.noetfield.com`, `noetfield.com`, and the Cloudflare Pages `www-pages-dist` public website are **English-only**. Never render Persian, Arabic, French or another-language interface, language switcher, translation CTA, `hreflang` alternate, or outbound link to a non-English version of Noetfield or Noetfield Connect from the main public site.
