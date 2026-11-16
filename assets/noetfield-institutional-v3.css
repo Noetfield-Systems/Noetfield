@@ -503,6 +503,27 @@ body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>img{
  z-index:2!important;
 }
 body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card:hover>img{transform:scale(1.025)!important}
+
+/* Independent photographic media: legacy img stacking rules cannot obscure
+   real documentary photographs or the actual Noetfield App workspace. */
+body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>.nf-v5-card-photo{
+ display:block!important;position:relative!important;
+ width:100%!important;height:318px!important;flex:0 0 318px!important;
+ min-height:0!important;margin:0!important;padding:0!important;
+ opacity:1!important;visibility:visible!important;
+ background-color:#1a2731!important;
+ background-size:cover!important;background-position:center!important;
+ background-repeat:no-repeat!important;
+ transform:none!important;filter:none!important;
+ isolation:isolate!important;z-index:2!important;overflow:hidden!important;
+}
+body.nf-corp.nf-home .nf-v3-hero #path-build>.nf-v5-card-photo{
+ background-size:contain!important;background-color:#15242d!important;
+}
+body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>.nf-v5-card-photo>img{
+ display:none!important;
+}
+
 body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card .nf-v5-media-label{
   display:block!important;position:relative!important;z-index:3!important;
   margin:24px 26px 13px!important;
@@ -673,7 +694,7 @@ body.nf-corp.nf-home :focus-visible{outline:3px solid #e6c493!important;outline-
 @media(max-width:1200px){
  body.nf-corp.nf-home .nf-v3-hero .nf-ins-hero-copy h1{font-size:clamp(61px,8.2vw,98px)!important}
  body.nf-corp.nf-home .nf-v3-hero .nf-ins-paths{gap:13px!important}
- body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>img{height:255px!important;flex-basis:255px!important}
+ body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>.nf-v5-card-photo{height:255px!important;flex-basis:255px!important}
  body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card{min-height:515px!important}
 }
 @media(max-width:1000px){
@@ -694,7 +715,7 @@ body.nf-corp.nf-home :focus-visible{outline:3px solid #e6c493!important;outline-
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
  }
  body.nf-corp.nf-home .nf-v3-hero #path-onchain{grid-column:1/-1!important;min-height:500px!important}
- body.nf-corp.nf-home .nf-v3-hero #path-onchain>img{height:315px!important;flex-basis:315px!important}
+ body.nf-corp.nf-home .nf-v3-hero #path-onchain>.nf-v5-card-photo{height:315px!important;flex-basis:315px!important}
 }
 @media(max-width:700px){
  body.nf-corp.nf-home .nf-ins-header .nf-corp-navrow{min-height:66px!important}
@@ -742,8 +763,8 @@ body.nf-corp.nf-home :focus-visible{outline:3px solid #e6c493!important;outline-
  body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card{
    min-height:495px!important;
  }
- body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>img,
- body.nf-corp.nf-home .nf-v3-hero #path-onchain>img{
+ body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>.nf-v5-card-photo,
+ body.nf-corp.nf-home .nf-v3-hero #path-onchain>.nf-v5-card-photo{
    height:275px!important;flex-basis:275px!important;
  }
  body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>strong{font-size:24px!important}
