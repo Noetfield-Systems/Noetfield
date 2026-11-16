@@ -493,7 +493,15 @@ body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>img{
   filter:saturate(.87) contrast(1.04)!important;max-width:100%!important;
   transition:transform .5s ease!important;
 }
-body.nf-corp.nf-home .nf-v3-hero #path-build>img{object-position:center top!important}
+body.nf-corp.nf-home .nf-v3-hero #path-build>img{
+ object-fit:contain!important;object-position:center!important;
+ background:#15222a!important;
+}
+body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>img{
+ opacity:1!important;visibility:visible!important;mix-blend-mode:normal!important;
+ clip-path:none!important;mask:none!important;-webkit-mask:none!important;
+ z-index:2!important;
+}
 body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card:hover>img{transform:scale(1.025)!important}
 body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card .nf-v5-media-label{
   display:block!important;position:relative!important;z-index:3!important;
