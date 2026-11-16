@@ -2629,7 +2629,7 @@ async def commercial_case_command(body: CommercialCaseCommand, request: Request)
     """Existing operator secret + canonical intake -> offer -> money -> delivery."""
     from noetfield_governance.commercial_pipeline import CommercialError, operate
 
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     try:
         return await operate(settings, intake_id=body.intake_id, action=body.action,
             expected_revision=body.expected_revision, offer=body.offer,
@@ -2647,7 +2647,7 @@ async def commercial_case_funnel(request: Request, limit: int = 50) -> dict[str,
     """PII-free owner, next action, paid evidence and delivery readback."""
     from noetfield_governance.commercial_pipeline import CommercialError, readback
 
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     try:
         return await readback(settings, limit=limit)
     except CommercialError as exc:
