@@ -429,9 +429,46 @@ class ManualIngestionRequest(BaseModel):
     submitted_by: str
 
 
+async def _bootstrap_corporate_crm() -> None:
+    """Initialize and independently read back real corporate CRM tables on Railway.
+
+    CRM initialization must not take unrelated Platform API routes offline if its
+    database migration fails; the failure is visible in private readiness and
+    production logs instead of pretending that leads or accounts exist.
+    """
+    app.state.corporate_crm_ready = False
+    if os.getenv("NOETFIELD_CORPORATE_CRM_BOOTSTRAP_ENABLED", "") != "1":
+        return
+    import asyncpg
+    from noetfield_governance.commercial_pipeline import _database_url
+    from noetfield_governance.corporate_crm import schema
+
+    db = None
+    try:
+        db = await asyncpg.connect(_database_url(settings), timeout=15)
+        await schema(db)
+        summary = await db.fetchrow(
+            """SELECT
+              (SELECT count(*)::int FROM noetfield.corp_crm_accounts) AS accounts,
+              (SELECT count(*)::int FROM noetfield.corp_crm_deals) AS deals,
+              (SELECT count(*)::int FROM noetfield.corp_crm_activities) AS activities"""
+        )
+        app.state.corporate_crm_ready = True
+        logger.info(
+            "noetfield_corporate_crm_schema=READY accounts=%s deals=%s activities=%s",
+            summary["accounts"], summary["deals"], summary["activities"],
+        )
+    except Exception:
+        logger.exception("noetfield_corporate_crm_schema=FAILED")
+    finally:
+        if db is not None:
+            await db.close()
+
+
 @app.on_event("startup")
 async def startup_platform() -> None:
     await intake_repository.init_intake_repository(settings)
+    await _bootstrap_corporate_crm()
     await redis_runtime.connect(
         settings.redis_url,
         enabled=settings.redis_sessions_enabled,
@@ -2504,6 +2541,17 @@ class CorporateActivityRequest(BaseModel):
     actor: str = Field(min_length=1,max_length=120)
     note: str = Field(min_length=1,max_length=2000)
     evidence_url: str = Field(default="",max_length=1000)
+
+
+@app.get("/api/corporate-crm/health", tags=["operations"], include_in_schema=False)
+async def corporate_crm_private_health(request: Request) -> dict[str, object]:
+    _require_connect_desk_operator(request)
+    return {
+        "workspace": "NOETFIELD_CORPORATE_ONLY",
+        "database_ready": bool(getattr(app.state, "corporate_crm_ready", False)),
+        "fieldwork_data_shared": False,
+        "source": "postgres_table_bootstrap_readback",
+    }
 
 
 @app.get("/api/corporate-crm/app", tags=["operations"], include_in_schema=False)
