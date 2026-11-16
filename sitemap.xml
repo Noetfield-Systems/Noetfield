@@ -73,6 +73,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.noetfield.com/community/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.noetfield.com/connect/</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
