@@ -89,6 +89,9 @@ def main() -> int:
     else:
         fail = sev.get("P0", 0)
     if fail:
+        for item in findings:
+            if item.get("severity") == "P0":
+                print(f"P0 {item.get('check')} {item.get('page')}: {item.get('reason')} — {item.get('evidence')}", file=sys.stderr)
         print(f"nf_site_audit_v1: FAIL ({fail} finding(s) at {args.fail_on} threshold)", file=sys.stderr)
         return 1
     print("nf_site_audit_v1: PASS")
