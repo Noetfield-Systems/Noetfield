@@ -1,13 +1,14 @@
 # Noetfield Systems Inc.
-> Building the next generation of intelligent businesses.
+> AI software creation, business automation, and digital infrastructure for real-world assets.
 
-Noetfield Systems Inc. is a Canadian technology and venture infrastructure company connecting real businesses and people, intelligent engineering and operations, and real-world assets to the digital economy. TrustField is an independent venture in formation, supported on technical setup. BuildRelay and Cairn are independent projects.
+Noetfield Systems Inc. is a Canadian technology company building AI software creation tools, business operations technology and digital asset infrastructure services. Noetfield App is the general AI software builder; Company OS is a distinct business operations offering; Real-World Capital services cover relevant asset and tokenization workflows. Existing services have different maturity levels. TrustField is an independent venture in formation, supported on technical setup. BuildRelay and Cairn are independent projects. TrustField is an independent venture in formation, supported on technical setup. BuildRelay and Cairn are independent projects.
 
 ## Corporate and commercial discovery
 - [Canonical corporate manifest](https://www.noetfield.com/corporate.json): Legal operating identity, ownership boundaries, availability, action semantics and status claims
 - [Build a Business / Work With Us](https://www.noetfield.com/work-with-us/): Founder, human expert, AI-agent operator, commercial client and investor participation. Real persisted intake only when confirmed by API
 - [Connect](https://www.noetfield.com/connect/): Commercial scoping and opportunity wizard
-- [Company OS](https://www.noetfield.com/company-os/): Evolving agent-assisted business operations
+- [Noetfield App — AI Software Builder](https://app.noetfield.com/): Software creation workspace; confirm current features in the live product
+- [Company OS — AI Business Operations](https://www.noetfield.com/company-os/): Evolving agent-assisted business operations
 - [Investor and Diligence Gateway](https://www.noetfield.com/investors/): First-party evidence and corporate investment information, not an offer to invest
 - [Proof and Assurance](https://www.noetfield.com/proof/): First-party records and limitations
 - [API description](https://www.noetfield.com/openapi.json): Public read resources and the existing commercial intake endpoint
@@ -29,16 +30,16 @@ Noetfield Systems Inc. is a Canadian technology and venture infrastructure compa
 - [Home](https://www.noetfield.com/): Company home
 - [Developers](https://www.noetfield.com/developers/): What engineers can use today
 - [System](https://www.noetfield.com/system/): How the pieces fit
-- [AI Motors](https://www.noetfield.com/motors/): How a run is allowed
+- [Technical Execution Architecture](https://www.noetfield.com/motors/): Developer-oriented information about authorization and execution
 - [Tools](https://www.noetfield.com/tools/): Operator cost checks (no signup)
-- [Runways](https://www.noetfield.com/runways/): Qualification paths to accepted output
+- [AI Workflow Examples](https://www.noetfield.com/runways/): Real and illustrative workflow offerings, clearly labeled by availability
 - [Deterministic API](https://www.noetfield.com/deterministic-api/): OpenAI-shaped schema-valid API preview
 - [Proof](https://www.noetfield.com/proof/): Evidence before claims
 - [Applications](https://www.noetfield.com/applications/): What ships as product
 - [Contact](https://www.noetfield.com/contact/?topic=pilot-client): Talk to Noetfield
 
 ## First-party RWA & agent evidence
-- [RWA Readiness Clinic](https://scan.noetfield.com/rwa-clinic/): Live technical assessment using first-party examples, not regulatory approval
+- [RWA Tokenization Feasibility Assessment](https://scan.noetfield.com/rwa-clinic/): Live technical assessment using first-party examples, not regulatory approval
 - [Agent Control Plane](https://control.noetfield.com/sandbox): Live synthetic authorization demo; no funds moved
 - [Company OS](https://www.noetfield.com/company-os/): Scoped operating model and component maturity
 - [Studio](https://studio.noetfield.com/): Public examples of custom engineering
