@@ -85,7 +85,7 @@ check_file "protected ecosystem and investor surface" investors/index.html \
   '<link rel="canonical" href="https://www.noetfield.com/investors/" />' \
   'Company thesis and partnerships' \
   'opportunities for partners across software' \
-  'TrustField' 'independent venture in formation' 'human decision authority' \
+  'TrustField' 'independent venture in formation' 'technical evidence' \
   'href="/contact/?topic=program-funding"' 'href="/proof/"' \
   'href="/proof/claims-boundary-correction/"'
 check_absent "protected investors hub has no embedded intake" investors/index.html \
