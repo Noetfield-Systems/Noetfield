@@ -56,6 +56,19 @@ try:
             print("CORPORATE_DESIGN_DIAGNOSTICS="+json.dumps(design_diagnostics),flush=True)
             assert design_diagnostics["sheet"] and design_diagnostics["sheet"][0]["rules"]>10,design_diagnostics
             assert page.locator(".nf-v3-live-image").is_visible()
+            # The screenshot must remain legible. Old CSS made the first H1
+            # line dark-on-dark and painted gradient bars over product titles.
+            paint=page.evaluate("""() => ({
+              hero:getComputedStyle(document.querySelector("#hero-title")).webkitTextFillColor,
+              cards:[...document.querySelectorAll("#choose-your-path a.nf-ins-path-card")].map(el=>({
+                labelOverlay:getComputedStyle(el,"::before").backgroundImage,
+                headline:getComputedStyle(el.querySelector("strong")).webkitTextFillColor
+              }))
+            })""")
+            assert paint["hero"]=="rgb(244, 244, 240)",paint
+            assert len(paint["cards"])==3,paint
+            assert all(c["labelOverlay"]=="none" for c in paint["cards"]),paint
+            assert all(c["headline"]=="rgb(246, 246, 241)" for c in paint["cards"]),paint
             assert page.locator(".nf-cinema-capabilities > a").count()==5
             assert page.locator(".nf-v3-art-note").is_visible()
             assert page.locator(".nf-v3-live-image").get_attribute("src")=="/assets/noetfield-execution-sculpture-v3.svg"
