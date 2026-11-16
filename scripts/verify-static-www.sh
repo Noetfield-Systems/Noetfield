@@ -101,7 +101,7 @@ check_file "Real-World Capital customer journey" real-world-capital/index.html \
   '/assets/noetfield-intake-core.js?v=42' '/assets/noetfield-forms.js?v=42' \
   'https://scan.noetfield.com/rwa-clinic/' \
   'https://buy.stripe.com/7sY6oI3iUaa06qmcDi1Nu0h' \
-  'Only pay after Noetfield and the buyer agree on a written scope' \
+  'Pay the deposit after both parties confirm the written scope and deliverables.' \
   '/privacy/' 'technical assessment' 'not securities approval'
 check_absent "capital landing has no unsupported commercial promises" real-world-capital/index.html \
   'Guaranteed returns' 'regulator approved' 'licensed exchange' '100% tokenized ownership' \
