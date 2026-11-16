@@ -216,3 +216,14 @@ body.nr-skin .nr-home-header .nr-brand{color:#f5f3ed}
 body.nr-skin .nr-home-header .nr-navigation{margin-left:auto}
 body.nr-skin .nr-home-header .nr-navigation a{color:#ccd8cb;font:570 12px Inter,Arial,sans-serif}
 @media(max-width:660px){body.nr-skin .nr-home-header .nr-navrow{width:calc(100% - 36px)}}
+
+/* Documentary reality, composed with the connected-systems visual. */
+.nr-stage-photograph{position:absolute;z-index:1;left:0;top:8%;width:100%;height:84%;object-fit:cover;object-position:center;filter:saturate(.72) contrast(1.07) brightness(.6);border:1px solid rgba(241,240,226,.18)}
+.nr-hero-stage::after{content:"";position:absolute;z-index:1;inset:8% 0%;pointer-events:none;background:linear-gradient(90deg,rgba(11,22,20,.44),rgba(13,28,25,.1) 55%,rgba(13,28,25,.4)),linear-gradient(0deg,rgba(11,22,20,.55),transparent 42%)}
+.nr-stage-orbit{z-index:2;opacity:.68}
+.nr-stage-center{z-index:3;background:radial-gradient(circle at 20% 18%,#4d6b5ee8,#172a27f3 64%,#0c1717fa)}
+.nr-stage-node{z-index:4}
+.nr-product-visual .nr-product-editorial{display:block;object-fit:cover;object-position:center;width:100%;height:155px;border:1px solid rgba(26,55,37,.16);filter:saturate(.7) contrast(1.03)}
+.nr-product:nth-child(2) .nr-product-editorial{object-position:center 55%}
+.nr-product:nth-child(3) .nr-product-editorial{object-position:center}
+@media(max-width:660px){.nr-stage-photograph{object-position:50% 40%}.nr-stage-orbit{opacity:.4}}
