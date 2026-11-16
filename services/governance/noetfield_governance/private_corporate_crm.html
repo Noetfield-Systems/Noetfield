@@ -89,6 +89,11 @@ a{color:#215f54}.inline-link{font-size:11px}
 @media(max-width:1140px){.workspace{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:800px){.app{grid-template-columns:1fr}.side{min-height:auto;padding:14px;gap:14px;position:relative}.side-note{display:none}.nav{display:flex;overflow:auto;gap:4px}.nav button{white-space:nowrap;padding:10px 12px}.rail-label{display:none}.main{padding:0 17px 50px}.topbar{height:58px}.heading{margin:31px 0 20px}}
 @media(max-width:600px){.metrics{gap:8px}.metric{min-height:100px;padding:15px}.metric strong{font-size:29px}.panel-head{padding:15px}.filters{padding:13px}.fields,.kv{grid-template-columns:1fr}.detail{padding:18px}table{min-width:600px}.table-scroll{overflow:auto}h1{font-size:41px}.heading .primary{font-size:11px}}
+.commercial-box{padding:20px;margin:20px 0;border:1px solid #c4d7c8;background:#f2f7f1}
+.commercial-box h4{font-size:17px;color:#254433;margin:0 0 10px}
+.commercial-box p{line-height:1.7}
+.commercial-box .fields{margin-top:18px}
+.commercial-box .inline-link{color:#286746;font-weight:700;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -287,9 +292,41 @@ function drawDetail(payload){
  const payment=proof?.status==="PAID_LIVE"?"Verified Stripe receipt · "+money(proof.amount_minor,proof.currency):
                proof?.status==="REVERSED"?"Refund/dispute flagged":"No linked paid Checkout receipt";
  const timeline=payload.activity||[];
+ const caseInfo=payload.commercial_case||{};
+ const commercialEligible=!!d.source_intake_id&&["rwa_technical_sprint","ai_sales_os_pilot"].includes(d.offer);
+ const nextStep={
+   NOT_OPEN:"open",QUALIFY:"scope",SCOPE_ACCEPTED:"reconcile_payment",
+   PAYMENT_CONFIRMED:"start_delivery",IN_DELIVERY:"deliver",DELIVERED:"close",CLOSED:"close"
+ }[caseInfo.stage||"NOT_OPEN"]||"open";
+ const flowOptions=[
+   ["open","01 / Qualify the real source intake"],["scope","02 / Record signed scope"],
+   ["reconcile_payment","03 / Verify Stripe paid checkout"],["start_delivery","04 / Begin delivery"],
+   ["deliver","05 / Record delivered and accepted work"],["close","06 / Close completed engagement"]
+ ];
+ const checkout=safeURL(caseInfo.approved_checkout_url);
+ const commercialBlock=commercialEligible?
+   '<section class="commercial-box"><h4>Customer-to-revenue · signed scope and live cash</h4>'+
+   '<p class="small">Separate from the CRM forecast. Only source-matched live Stripe evidence counts as payment. No automatic outreach or billing.</p>'+
+   '<p><span class="tag">'+esc(caseInfo.stage||"NOT_OPEN")+'</span>'+
+   ' <span class="small">Scope: '+esc(caseInfo.scope_ref||"Not recorded")+' · Revision '+esc(caseInfo.revision||0)+'</span></p>'+
+   (checkout?'<p><a class="inline-link" target="_blank" rel="noopener noreferrer" href="'+esc(checkout)+'">Approved-scope Stripe payment link ↗</a><span class="muted">Share only with the customer who accepted this scope.</span></p>':"")+
+   (caseInfo.stage==="CLOSED"?'<p class="small">Commercial engagement closed after accepted delivery.</p>':
+    '<form id="commercial-step" class="fields">'+
+    '<label class="wide">Verified commercial action<select name="action">'+flowOptions.map(([key,label])=>'<option value="'+key+'" '+(key===nextStep?"selected":"")+'>'+esc(label)+'</option>').join("")+'</select></label>'+
+    '<label class="wide" data-flow="scope">Accepted scope reference<input name="scope_ref" placeholder="SOW-RWA-0001"></label>'+
+    '<label class="wide" data-flow="scope">Customer-approved signed scope evidence<input name="acceptance_evidence" type="url" placeholder="https://"></label>'+
+    '<label class="wide" data-flow="reconcile_payment">Paid Checkout session ID<input name="session_id" placeholder="cs_live_..."></label>'+
+    '<label class="wide" data-flow="reconcile_payment">Different payer authorization (only if necessary)<input name="payer_authorization_url" type="url" placeholder="https://"></label>'+
+    '<label class="wide" data-flow="start_delivery">Delivery owner next action<input name="next_action" maxlength="350" value="'+esc(d.next_action)+'"></label>'+
+    '<label class="wide" data-flow="deliver">Actual delivered work (evidence URL)<input name="delivery_evidence" type="url" placeholder="https://"></label>'+
+    '<label class="wide" data-flow="deliver">Customer acceptance of delivery (evidence URL)<input name="acceptance_url" type="url" placeholder="https://"></label>'+
+    '<button class="primary" type="submit">Record verified commercial step</button></form>')+
+   '</section>':
+   '<p class="small">Payments and accepted scope actions become available for a genuine Noetfield source intake with the RWA or AI Sales OS pilot offer. No synthetic or partner-only deals can claim Stripe conversion.</p>';
  els.panel.innerHTML='<div class="panel-head"><h2>'+esc(d.account_name)+'</h2><span class="tag">'+esc(d.stage.replaceAll("_"," "))+'</span></div>'+
  '<div class="detail"><div><div class="eyebrow">'+esc(offerName[d.offer]||d.offer)+'</div><h3>'+esc(d.contact_name||d.account_name)+'</h3><p>'+esc(d.summary||"No project summary yet.")+'</p></div>'+
  '<div class="kv"><div><small>Account owner</small>'+esc(d.owner)+'</div><div><small>Next follow-up</small>'+esc(due(d.next_date))+'</div><div><small>Source case</small>'+esc(d.source_intake_id||"Manual / unlinked")+'</div><div><small>Cash status</small>'+esc(payment)+'</div></div>'+
+ commercialBlock+
  '<form id="update-deal" class="fields"><label>Stage<select name="stage">'+
  ["NEW","QUALIFYING","DISCOVERY","SCOPE_SENT","NEGOTIATING","SIGNED","IN_DELIVERY","DELIVERED","RETAINED","LOST"].map(s=>'<option '+(d.stage===s?"selected":"")+'>'+s+'</option>').join("")+
  '</select></label><label>Account owner<input name="owner" value="'+esc(d.owner)+'" required></label>'+
@@ -306,6 +343,28 @@ function drawDetail(payload){
  '<label>Evidence URL (if external action)<input name="evidence_url" type="url" placeholder="https://"></label>'+
  '<label class="wide">What happened?<textarea name="note" required maxlength="2000"></textarea></label>'+
  '<button type="submit" class="ghost">Add activity record</button></form></div>';
+ const commercialForm=$("#commercial-step");
+ if(commercialForm){
+   const flowSelect=commercialForm.querySelector('[name="action"]');
+   const syncFields=()=>commercialForm.querySelectorAll("[data-flow]").forEach(el=>{
+     el.style.display=el.dataset.flow===flowSelect.value?"flex":"none";
+   });
+   flowSelect.addEventListener("change",syncFields);syncFields();
+   commercialForm.addEventListener("submit",async e=>{
+     e.preventDefault();
+     const values=Object.fromEntries(new FormData(commercialForm));
+     const action=values.action;
+     const data={action,expected_revision:Number(caseInfo.revision)||0};
+     if(action==="scope"){data.scope_ref=values.scope_ref;data.acceptance_evidence=values.acceptance_evidence}
+     if(action==="reconcile_payment"){data.session_id=values.session_id;
+       if(values.payer_authorization_url)data.payer_authorization_url=values.payer_authorization_url}
+     if(action==="start_delivery")data.next_action=values.next_action;
+     if(action==="deliver"){data.delivery_evidence=values.delivery_evidence;data.acceptance_url=values.acceptance_url}
+     try{const result=await api("/api/corporate-crm/deals/"+encodeURIComponent(d.id)+"/commercial",{method:"POST",data});
+       message("Commercial state saved: "+result.stage+".",true);await reload();await selectDeal(d.id)}
+     catch(err){message("Commercial step rejected: "+err.message)}
+   });
+ }
  $("#update-deal").addEventListener("submit",async e=>{
   e.preventDefault();const form=e.currentTarget,v=Object.fromEntries(new FormData(form));
   try{await api("/api/corporate-crm/deals/"+encodeURIComponent(d.id),{method:"PATCH",data:{
