@@ -1,8 +1,8 @@
 {
   "schema": "www-home-golden-baseline-v1",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "authority": "NF_UI_UX_GRADE_LAW_LOCKED_v1 · PR #186 / restore #191",
-  "updated_at": "2026-07-30T21:30:00Z",
+  "updated_at": "2026-11-16",
   "golden_class": "product-surface-recovery-v1",
   "reference_commits": {
     "pr_186_merge": "ed17241f229be6f7e63d25cfa0c5b51f2f2e25d7",
@@ -67,7 +67,7 @@
   "min_main_sections": 7,
   "copy_grade": {
     "h1_id": "hero-title",
-    "h1_min_chars": 40,
+    "h1_min_chars": 18,
     "h1_max_chars": 120,
     "hero_lead_max_chars": 420,
     "max_em_dashes_in_index": 12,
@@ -89,7 +89,18 @@
       "receipt",
       "deterministic",
       "authority"
-    ]
+    ],
+    "require_explicit_buyer_lead": true,
+    "required_buyer_lead_substrings": [
+      "software",
+      "automat",
+      "real-world"
+    ],
+    "required_hero_cta_destinations": [
+      "https://app.noetfield.com/",
+      "/community/"
+    ],
+    "h1_editorial_floor_explanation": "A short premium editorial headline is accepted only alongside a buyer-readable hero lead and working product/community CTAs; other layout, font, and proof protections remain unchanged."
   },
   "visual": {
     "fixture_dir": "tests/www/visual/home-golden",

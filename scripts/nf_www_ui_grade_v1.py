@@ -93,16 +93,34 @@ def main() -> int:
     if len(h1) < h1_min or len(h1) > h1_max:
         fails.append(f"H1 length {len(h1)} outside [{h1_min},{h1_max}]")
 
+    # Short editorial H1 is deliberate branding, not a license for vague copy.
+    # Validate the actual live hero lead (nf-ins-lead) as well as legacy leads.
     lead_m = re.search(
-        r'class="hero__lead"[^>]*>(.*?)</p>',
+        r'<p[^>]*class="[^"]*(?:hero__lead|nf-ins-lead)[^"]*"[^>]*>(.*?)</p>',
         html,
         flags=re.I | re.S,
     )
+    if copy.get("require_explicit_buyer_lead") and not lead_m:
+        fails.append("missing buyer-facing hero lead")
     if lead_m:
         lead = strip_tags(lead_m.group(1)).strip()
         lead_max = int(copy.get("hero_lead_max_chars") or 10_000)
         if len(lead) > lead_max:
             fails.append(f"hero lead length {len(lead)} > {lead_max}")
+        for term in copy.get("required_buyer_lead_substrings") or []:
+            if term.lower() not in lead.lower():
+                fails.append(f"hero lead must describe customer category {term!r}")
+    hero_section = re.search(
+        r'<section[^>]*class="[^"]*nf-v3-hero[^"]*"[^>]*>(.*?)</section>',
+        html,
+        flags=re.I | re.S,
+    )
+    if copy.get("required_hero_cta_destinations") and not hero_section:
+        fails.append("missing premium hero section for CTA inspection")
+    if hero_section:
+        for destination in copy.get("required_hero_cta_destinations") or []:
+            if f'href="{destination}"' not in hero_section.group(1):
+                fails.append(f"premium hero CTA missing {destination}")
 
     em_max = int(copy.get("max_em_dashes_in_index") or 10_000)
     em_count = html.count("—") + html.count("–")
