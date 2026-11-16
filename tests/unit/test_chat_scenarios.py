@@ -126,19 +126,18 @@ def test_public_chat_corpus_rejects_stale_positioning() -> None:
     for phrase in forbidden:
         assert phrase not in ctx
     for phrase in (
-        "audit trail a regulated copilot rollout will be asked for later",
+        "intelligent infrastructure for real businesses",
+        "company os",
+        "real-world capital",
         "copilot governance pack",
-        "board pdf",
-        "procurement zip",
-        "metadata-only m365",
     ):
         assert phrase in ctx
 
 
 def test_model_context_uses_public_source_labels() -> None:
     ctx = select_relevant_excerpt("What should I read before applying?")
-    assert "## Source: Public product brief" in ctx
     assert "## Source: Public offerings" in ctx
+    assert "Company OS" in ctx or "AI Business" in ctx
     assert "PRODUCT_BRIEF.md" not in ctx
     assert "OFFERINGS_LOCKED.md" not in ctx
 
