@@ -1,0 +1,48 @@
+{
+  "schema": "noetfield-founder-approved-v5-visual-lock-v1",
+  "status": "LOCKED",
+  "approved_visual_source": {
+    "repository": "Noetfield-Systems/Noetfield",
+    "pull_request": 388,
+    "commit_sha": "340fe2dec55819a997e8aeec60d52f33317a1894",
+    "description": "Documentary panoramic photographic corporate V5 — live founder-approved reference"
+  },
+  "incident": ".cursor/incidents/INCIDENT-2026-11-16-001-v5-visual-overwrite-and-growth-work-loss.md",
+  "protected_file_blobs": [
+    {
+      "path": "index.html",
+      "git_blob_sha1": "21bbba4b11a046f4e247c4b6b13c17d507ff9d41",
+      "why": "Entire approved image-led homepage structure, urban panorama, product photos, editorial story and restrained copy"
+    },
+    {
+      "path": "assets/noetfield-institutional-v3.css",
+      "git_blob_sha1": "7cef1eef1d85dc6bb65fae6238fee74be05e90bc",
+      "why": "Founder-approved V5 layout, responsive photography/typography and cinematic sections"
+    }
+  ],
+  "design_constraints": {
+    "preserve": [
+      "large photographic panoramic hero",
+      "actual product screenshots",
+      "documentary industry and real-asset photography",
+      "cinematic editorial middle chapter",
+      "coherent photographic full-page presentation",
+      "limited layered text and copy",
+      "existing product/checkout/intake paths"
+    ],
+    "exclude": [
+      "decorative orbital diagrams",
+      "3D rings, pyramids and cubes as core visual",
+      "floating data/text boxes over the photographic hero",
+      "generic SaaS template cards used as replacement for image-led narrative",
+      "unapproved homepage reskin or navigation replacement"
+    ]
+  },
+  "unlock_rule": "Change protected hashes only for a specific Founder-authorized visual change; record that instruction and the new independently checked reference. A broad command to improve marketing or revenue never authorizes replacing the existing visual baseline.",
+  "feature_rule": "Commercial/collaboration/community development on inner pages is allowed and should not be blocked by this visual lock.",
+  "evidence": {
+    "rollback_git_tree": "b41f397cc9a8645b64ab7a4ef9f2cc2536a31604",
+    "rollback_commit": "b5d38b8cbced40bcf6157e4902265436335ba1c8",
+    "rollback_production_run": 43894663600
+  }
+}
