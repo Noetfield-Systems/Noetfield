@@ -1,0 +1,326 @@
+/* NOETFIELD — APPROVED CINEMATIC CORPORATE HERO
+   Artwork: cropped solely from the Founder-approved image (Nov 15 2026).
+   All headline, navigation, CTA, and platform links remain real HTML.
+   Concept imagery never represents actual Noetfield company premises.
+*/
+body.nf-corp.nf-home .nf-ins-header{
+  position:relative!important;
+  background:linear-gradient(105deg,#091726 0%,#102139 58%,#101d32 100%)!important;
+  border-bottom:1px solid rgba(242,216,164,.13)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+body.nf-corp.nf-home .nf-ins-header .nf-corp-navrow{
+  min-height:83px!important;gap:23px!important;
+}
+body.nf-corp.nf-home .nf-ins-header .nf-corp-brand{
+  font-size:1.4rem!important;min-width:185px!important;color:#f8fafc!important;letter-spacing:-.05em;
+}
+body.nf-corp.nf-home .nf-ins-header .nf-corp-brand__mark{
+  font-size:2.64rem!important;
+  background:linear-gradient(132deg,#fff3d5 10%,#d7a96e 85%)!important;
+  background-clip:text!important;-webkit-background-clip:text!important;
+  color:transparent!important;
+}
+body.nf-corp.nf-home .nf-ins-header .nf-ins-top-links{
+  gap:clamp(14px,1.55vw,28px)!important;
+}
+body.nf-corp.nf-home .nf-ins-header .nf-ins-top-links a{
+  color:#f3f5f8!important;font-size:12px!important;letter-spacing:-.012em;
+}
+body.nf-corp.nf-home .nf-ins-header .nf-ins-invest{
+  border-radius:11px!important;min-height:46px!important;
+  border-color:rgba(235,202,147,.62)!important;
+  color:#faf7f0!important;background:rgba(5,15,30,.16)!important;
+}
+body.nf-corp.nf-home .nf-ins-header .nf-ins-start{
+  border-radius:11px!important;min-height:47px!important;
+  background:linear-gradient(110deg,#f7ddaa,#e9b66f)!important;
+  color:#101824!important;border-color:#f0c584!important;padding-inline:20px!important;
+}
+
+/* Art direction: true cinematic composition, not another interface card. */
+body.nf-corp.nf-home .nf-cinema-hero,
+body.nf-corp.nf-home.nf-lane-intelligence section.hero.nf-corp-hero.nf-institutional-hero.nf-cinema-hero{
+  overflow:hidden!important;
+  position:relative!important;
+  color:#fafbfa!important;
+  background:
+    radial-gradient(ellipse 82% 70% at 70% 46%,rgba(105,122,167,.2),transparent 77%),
+    linear-gradient(117deg,#0a1626 0%,#1a2943 43%,#142943 70%,#101e2d 100%)!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero:before{
+  content:""!important;position:absolute!important;z-index:0!important;inset:0!important;pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(8,19,34,.25) 0%,transparent 70%)!important;
+  opacity:1!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-wrap{
+  width:min(100% - 8vw,1440px)!important;
+  max-width:1440px!important;
+  position:relative!important;
+  z-index:1!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-grid{
+  position:relative!important;
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;
+  min-height:660px!important;padding:66px 0 55px!important;
+  gap:0!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy{
+  position:relative!important;z-index:4!important;
+  width:min(58%,785px)!important;max-width:785px!important;
+  padding:0 0 8px!important;flex:0 0 auto!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-eyebrow{
+  color:#f4cd8e!important;font:600 13px/1.3 Inter,sans-serif!important;
+  letter-spacing:.19em!important;text-transform:uppercase!important;margin:0 0 25px!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-eyebrow:before{
+  width:0!important;height:0!important;margin:0!important;content:""!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-eyebrow:after{
+  content:""!important;display:inline-block!important;width:91px!important;height:1px!important;
+  background:linear-gradient(90deg,rgba(245,209,153,.85),rgba(245,209,153,0))!important;
+  margin:0 0 4px 24px!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy h1{
+  color:#f6f8fc!important;font-family:Inter,Arial,sans-serif!important;
+  font-weight:650!important;font-size:clamp(53px,4.45vw,76px)!important;
+  line-height:1.05!important;letter-spacing:-.057em!important;
+  max-width:none!important;margin:0!important;
+  text-wrap:balance!important;
+  text-shadow:0 3px 16px rgba(0,0,0,.12)!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-line{
+  display:block!important;color:#f5f8fc!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy h1 em{
+  display:block!important;font-style:normal!important;
+  color:#f2c987!important;
+  background:none!important;background-clip:initial!important;
+  -webkit-background-clip:initial!important;
+  -webkit-text-fill-color:#f2c987!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-lead{
+  color:#d7e0e9!important;max-width:550px!important;
+  font-size:16px!important;line-height:1.75!important;
+  margin:28px 0 30px!important;
+  text-shadow:0 2px 9px rgba(0,0,0,.12);
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-actions{
+  display:flex!important;gap:17px!important;margin-top:30px!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-button{
+  min-height:56px!important;padding:0 25px!important;
+  border-radius:11px!important;font-size:13px!important;letter-spacing:-.01em!important;
+  box-shadow:0 9px 25px rgba(2,13,26,.12)!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-button--primary{
+  background:linear-gradient(115deg,#f9dfa9,#edbd79)!important;
+  color:#0d1b2a!important;border-color:#f5d296!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-button--secondary{
+  background:rgba(9,22,38,.46)!important;color:#f3f7fa!important;
+  border-color:rgba(238,203,148,.62)!important;
+  backdrop-filter:blur(8px);
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-button--secondary span{
+  font-size:12px!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-principle{
+  display:none!important;
+}
+
+/* Imported, approved artwork. The generated mockup's baked text and UI
+   are intentionally cropped away; the glass building is the real asset. */
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-media{
+  position:absolute!important;z-index:1!important;pointer-events:none!important;
+  right:calc((min(100vw - 8vw,1440px) - 100vw)/2)!important;
+  top:0!important;bottom:0!important;left:auto!important;
+  width:min(67vw,1100px)!important;height:100%!important;min-height:0!important;
+  margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+  overflow:hidden!important;box-shadow:none!important;
+  background:transparent!important;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.4) 15%,#000 32%)!important;
+  mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.4) 15%,#000 32%)!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-media > img.nf-cinema-image{
+  display:block!important;position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;
+  max-width:none!important;min-height:0!important;
+  object-fit:cover!important;object-position:center center!important;
+  opacity:1!important;filter:saturate(1.03) contrast(1.02)!important;
+  border:0!important;border-radius:0!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-grid:after{
+  content:""!important;position:absolute!important;z-index:2!important;
+  inset:0 -6vw 0 15%!important;pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(8,21,35,.46) 5%,rgba(8,21,35,.12) 41%,transparent 64%)!important;
+}
+
+/* Five capability pillars exactly in the approved direction. */
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-credibility.nf-cinema-capabilities{
+  position:relative!important;z-index:7!important;
+  display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  width:100%!important;max-width:none!important;
+  margin:0 0 20px!important;padding:18px 10px!important;
+  border:1px solid rgba(203,211,224,.18)!important;
+  border-radius:4px!important;
+  background:linear-gradient(90deg,rgba(9,25,42,.93),rgba(11,30,48,.9))!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.17)!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a{
+  display:flex!important;align-items:center!important;gap:17px!important;
+  min-height:78px!important;padding:12px 22px!important;
+  text-decoration:none!important;color:#f5f8f9!important;
+  border-right:1px solid rgba(207,218,232,.22)!important;
+  border-bottom:0!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a:last-child{
+  border-right:0!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a:hover{
+  background:rgba(239,191,120,.055)!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities svg{
+  flex:0 0 38px!important;width:38px!important;height:38px!important;
+  color:#f0c584!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities strong{
+  display:block!important;font:600 14px/1.25 Inter,sans-serif!important;
+  letter-spacing:-.025em!important;color:#f9f9fb!important;
+  white-space:nowrap!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities small{
+  display:block!important;margin-top:7px!important;
+  font:400 12px/1.4 Inter,sans-serif!important;
+  color:#afbdce!important;white-space:nowrap!important;
+}
+/* Below the first fold: preserve existing cards, product routes, and first-party proof. */
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-paths{
+  margin-top:46px!important;
+}
+body.nf-corp.nf-home .nf-cinema-hero .nf-ins-proof-note{
+  margin-top:24px!important;
+}
+@media(max-width:1250px){
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy{width:59%!important}
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy h1{font-size:clamp(46px,4.5vw,65px)!important}
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a{gap:12px!important;padding-inline:12px!important}
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities svg{width:30px!important;height:30px!important;flex-basis:30px!important}
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities strong{font-size:12px!important}
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities small{font-size:10px!important}
+}
+@media(max-width:900px){
+  body.nf-corp.nf-home .nf-ins-header .nf-corp-navrow{min-height:70px!important}
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-grid{
+    min-height:715px!important;display:flex!important;align-items:flex-end!important;
+    padding:270px 0 55px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy{
+    width:100%!important;max-width:720px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy h1{
+    font-size:clamp(46px,7vw,76px)!important;max-width:720px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-media{
+    top:0!important;bottom:auto!important;right:-5vw!important;
+    width:100vw!important;height:530px!important;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.88) 38%,transparent 97%)!important;
+    mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.88) 38%,transparent 97%)!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-media > img.nf-cinema-image{
+    object-position:58% 39%!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-grid:after{
+    inset:0 -6vw!important;
+    background:linear-gradient(to bottom,rgba(8,21,35,.04) 0%,rgba(8,21,35,.42) 36%,#0b1a2b 68%,transparent 100%)!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a:nth-child(3){
+    border-right:0!important;
+  }
+}
+@media(max-width:620px){
+  body.nf-corp.nf-home .nf-ins-header .nf-corp-brand{
+    font-size:1.1rem!important;min-width:0!important;
+  }
+  body.nf-corp.nf-home .nf-ins-header .nf-corp-brand__mark{
+    font-size:2.05rem!important;
+  }
+  body.nf-corp.nf-home .nf-ins-header .nf-ins-start{
+    font-size:10px!important;min-height:40px!important;padding:0 12px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-wrap{
+    width:calc(100% - 38px)!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-grid{
+    min-height:705px!important;padding:272px 0 42px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-media{
+    top:0!important;height:390px!important;right:-19px!important;width:calc(100% + 38px)!important;
+    opacity:.94!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-media > img.nf-cinema-image{
+    object-position:58% 36%!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy h1{
+    font-size:clamp(43px,10vw,54px)!important;
+    line-height:1.06!important;letter-spacing:-.06em!important;
+    text-wrap:initial!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-line{
+    display:inline!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-hero-copy h1 em{
+    display:block!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-eyebrow{
+    font-size:10px!important;letter-spacing:.13em!important;margin-bottom:17px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-eyebrow:after{
+    width:39px!important;margin-left:12px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-lead{
+    font-size:13px!important;line-height:1.66!important;
+    margin-top:19px!important;margin-bottom:18px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-actions{
+    gap:9px!important;flex-wrap:wrap!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-button{
+    font-size:11px!important;padding:0 14px!important;min-height:47px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-credibility.nf-cinema-capabilities{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    padding:8px!important;gap:0!important;margin-bottom:0!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a{
+    min-height:76px!important;gap:9px!important;padding:9px!important;
+    border-bottom:1px solid rgba(207,218,232,.18)!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a:nth-child(even){
+    border-right:0!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a:nth-child(3){
+    border-right:1px solid rgba(207,218,232,.22)!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities > a:last-child{
+    border-bottom:0!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities svg{
+    flex:0 0 23px!important;width:23px!important;height:23px!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities strong{
+    font-size:11px!important;white-space:normal!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-cinema-capabilities small{
+    font-size:9px!important;white-space:normal!important;
+  }
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-paths{margin-top:58px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.nf-corp.nf-home .nf-cinema-hero .nf-ins-button{transition:none!important}
+}
