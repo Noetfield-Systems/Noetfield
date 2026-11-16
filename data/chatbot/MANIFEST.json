@@ -37,7 +37,7 @@
   "plans_open": 58,
   "full_register": "docs/ops/CHATBOT_KNOWLEDGE_UPGRADE_LOCKED_v1.md#10-phases--100-plans-full-register",
   "deploy_required": "platform.noetfield.com governance service",
-  "distilled_at": "2026-11-06T00:00:00Z",
+  "distilled_at": "2026-11-16T00:00:00Z",
   "schema_version": "noetfield-chatbot-manifest-v2",
   "runtime_contract": "manifest_allowlist_fresh_public_sources_only",
   "public_sources": [
@@ -66,9 +66,9 @@
       "visibility": "public",
       "source_label": "Public site context",
       "source_url": "/faq/",
-      "updated_at": "2026-11-06T00:00:00Z",
-      "valid_until": "2026-12-06T00:00:00Z",
-      "content_hash": "4cd9a9dbeb8bdc7f95b6cf3c89efb7588d43cdcc0dbd32d00969300e00381a06",
+      "updated_at": "2026-11-16T00:00:00Z",
+      "valid_until": "2026-12-16T00:00:00Z",
+      "content_hash": "15abb5157a6790c2f7231c53d941f7d0d2aecb486740c5fe964e07b2322dd40c",
       "superseded": false
     },
     {
@@ -76,9 +76,9 @@
       "visibility": "public",
       "source_label": "Public site context",
       "source_url": "/faq/",
-      "updated_at": "2026-11-06T00:00:00Z",
-      "valid_until": "2026-12-06T00:00:00Z",
-      "content_hash": "cbff4eb5fc91490cbbe029df998f4cde150547a6cec04db79d0c41299490635c",
+      "updated_at": "2026-11-16T00:00:00Z",
+      "valid_until": "2026-12-16T00:00:00Z",
+      "content_hash": "fd7eb57819cf8cb6510adda974f1b312fd7c4f8d787220335acf363993f08fe6",
       "superseded": false
     },
     {
@@ -116,9 +116,9 @@
       "visibility": "public",
       "source_label": "Public offerings context",
       "source_url": "/faq/",
-      "updated_at": "2026-11-06T00:00:00Z",
-      "valid_until": "2026-12-06T00:00:00Z",
-      "content_hash": "678d43a693904befb4e7513858cc00c4b0e3a0810804fac0e296f78799e026b7",
+      "updated_at": "2026-11-16T00:00:00Z",
+      "valid_until": "2026-12-16T00:00:00Z",
+      "content_hash": "31580e35ad5d2637fc8564681303f22cb8e5f4406b15b5481a1e99b342f97dc9",
       "superseded": false
     },
     {
@@ -136,9 +136,9 @@
       "visibility": "public",
       "source_label": "Public positioning context",
       "source_url": "/faq/",
-      "updated_at": "2026-11-06T00:00:00Z",
-      "valid_until": "2026-12-06T00:00:00Z",
-      "content_hash": "d3846b2f1d16b4302c11b873681b62c50111a9945c8cb1df95ba51f763f0f9e5",
+      "updated_at": "2026-11-16T00:00:00Z",
+      "valid_until": "2026-12-16T00:00:00Z",
+      "content_hash": "81da50f6dc760b95449fba08cb8975b500ab91df1de8d92781ecfbe6f3611f7a",
       "superseded": false
     },
     {
@@ -146,9 +146,9 @@
       "visibility": "public",
       "source_label": "Pricing public context",
       "source_url": "/faq/",
-      "updated_at": "2026-11-06T00:00:00Z",
-      "valid_until": "2026-12-06T00:00:00Z",
-      "content_hash": "d0f619f37c4defc4fa4b7e0d4fe6481e786d2606aff76458d8d0a9f8d66140b8",
+      "updated_at": "2026-11-16T00:00:00Z",
+      "valid_until": "2026-12-16T00:00:00Z",
+      "content_hash": "a4fce4af5df0192d00b2f11e2c3045e52252fb0f573f63109cba3c81ba08d079",
       "superseded": false
     },
     {
@@ -156,9 +156,9 @@
       "visibility": "public",
       "source_label": "Public site map",
       "source_url": "/faq/",
-      "updated_at": "2026-11-06T00:00:00Z",
-      "valid_until": "2026-12-06T00:00:00Z",
-      "content_hash": "f24be5a99e3fc48b6789ca51f4132aeada8e9f5194c89ed202c0d82ebb6b47e1",
+      "updated_at": "2026-11-16T00:00:00Z",
+      "valid_until": "2026-12-16T00:00:00Z",
+      "content_hash": "d2e49b9d32a96172fcc5becf1f538897d92a14e338a5d5a00c265569ad3f186f",
       "superseded": false
     },
     {
@@ -192,5 +192,5 @@
       "superseded": false
     }
   ],
-  "reviewed_at": "2026-11-06T00:00:00Z"
+  "reviewed_at": "2026-11-16T00:00:00Z"
 }
