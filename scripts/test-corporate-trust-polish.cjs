@@ -38,7 +38,7 @@ assert.match(work,/Propose a Collaboration/);
 assert.match(work,/id="nfCorporateCollaborationForm"/);
 assert.match(work,/existing Noetfield collaboration intake/);
 assert.match(js,/if\(!consent\|\|!consent.checked\)return/);
-assert.match(home,/Two business platforms. One intelligent execution foundation./);
+assert.match(home,/Software, business automation and digital capital./);
 assert.match(home,/TrustField is an <strong>independent venture<\/strong>/);
 assert.doesNotMatch(home,/Four product surfaces/);
 assert.match(home,/Reliability Case 001/);
