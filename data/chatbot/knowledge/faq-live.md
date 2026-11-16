@@ -2,27 +2,24 @@
 
 ## What is Noetfield?
 
-Noetfield produces the audit trail a regulated Copilot rollout will be asked for later. It helps teams evaluate high-risk AI and Microsoft 365 Copilot use cases before production scope opens, then retain decision evidence.
+Noetfield Systems is a Canadian technology company building intelligent infrastructure for real businesses. It helps founders build software, companies automate operations and asset owners explore technology for real-world capital. Company OS and Real-World Capital are the two primary commercial platforms; software creation and independently checked execution support them.
 
-## What can a buyer purchase?
+## Where should I start?
 
-- **Copilot Governance Pack:** 90-day governed readiness. The current self-serve Starter checkout is US$2,000. Larger Readiness Pilot scopes are quoted under a statement of work; the public pilot page describes a CAD $2,000–$10,000 scoping band.
-- **Trust Brief:** six-week governance diagnostic. The current Stripe checkout is US$10,000. Expanded scope is confirmed in a signed statement of work.
-- **Bank Pilot:** custom, read-only shadow governance simulation; scoping is intake-only.
+- **Build Software with AI:** explore the actual software workspace at https://app.noetfield.com/ or request a scoped build at https://www.noetfield.com/connect/.
+- **Automate Your Business:** AI Business Operations / Company OS, including a published CAD $750 bounded lead-to-follow-up pilot after a written scope. https://www.noetfield.com/company-os/
+- **Real-World Assets & Digital Capital:** assessment and engineering for private-credit, rights and acquisition workflows. Published RWA technical sprint: US$950 with US$475 deposit only after accepted written scope. https://www.noetfield.com/real-world-capital/
+- **Partner or contribute:** introduce a real opportunity or offer expertise. https://www.noetfield.com/work-with-us/ and https://www.noetfield.com/opportunities/
+- **Founding community:** choose interests and receive product or participation updates through a free, consent-based early-access request. https://www.noetfield.com/community/
 
-The public purchase hub is https://www.noetfield.com/gate/sales/. The live checkout offers software and professional services only.
+## Specialized governance services
 
-## What does a client receive?
+Copilot Governance Pack, Trust Brief and Bank Pilot are specialized governance offerings. Current published references include the Copilot Governance Pack Starter (US$2,000 self-serve), Trust Brief (US$10,000 scoped diagnostic) and custom Bank Pilot. Confirm current offer, checkout and signed scope on their service pages before quoting. Do not present these as all that Noetfield does. Relevant artifacts can include a board PDF, procurement ZIP and metadata-only M365 evidence index.
 
-Depending on the signed scope: policy mapping, decision records, Trust Ledger Entries, a metadata-only M365 evidence index, a board PDF, and a procurement ZIP.
+## What does a buyer receive?
 
-## What Noetfield does not do
+Delivery depends on the agreed project: software artifacts, a working automation or technical scope, a rights-and-workflow assessment, an implementation brief, or specialist governance evidence. Explain the concrete deliverable and what the relevant demonstration establishes. Noetfield is not a bank, exchange, securities broker or custodian.
 
-No custody, payment execution, fund routing, money transmission, exchange operation, or legal/regulatory certification.
+## How do I get involved?
 
-## Start here
-
-- Copilot pilot: https://www.noetfield.com/copilot/pilot/
-- Trust Brief intake: https://www.noetfield.com/trust-brief/intake/
-- Free developer sandbox: https://www.noetfield.com/start/
-- Operations: operations@noetfield.com
+Start a project at /connect/, explore collaboration at /work-with-us/, propose an opportunity at /opportunities/, or join the early-interest community at /community/. No wallet required for corporate entry. No customer numbers, token rights, returns or guaranteed project matches are implied. Operations: operations@noetfield.com.
