@@ -85,3 +85,38 @@ def test_acceptance_evidence_cannot_be_local_or_placeholder(url):
 
 def test_scope_links_are_required_for_recording_real_acceptance():
     assert evidence_url("https://docs.noetfield.com/sow/signed/123") == "https://docs.noetfield.com/sow/signed/123"
+
+
+def test_stripe_api_accepts_both_account_signatures_without_old_key_regression(monkeypatch):
+    """A separate Noetfield Stripe account must not replace Primary's active webhook."""
+    import asyncio
+    import hmac
+    import hashlib
+    import json
+    import time
+    from types import SimpleNamespace
+    from unittest.mock import AsyncMock, patch
+    from noetfield_governance.stripe_webhook import handle_stripe_webhook
+
+    monkeypatch.setenv("STRIPE_NOETFIELD_WEBHOOK_SECRET", "whsec_secondary_account")
+    settings = SimpleNamespace(stripe_webhook_secret="whsec_primary_account",
+                               database_url="postgresql://unused.example/db")
+    event = checkout()
+    payload = json.dumps(event).encode()
+    timestamp = int(time.time())
+    for secret in ("whsec_primary_account", "whsec_secondary_account"):
+        signature = hmac.new(secret.encode(),f"{timestamp}.".encode()+payload,
+                             hashlib.sha256).hexdigest()
+        with (patch("noetfield_governance.stripe_webhook._claim_event",
+                    new_callable=AsyncMock,return_value=(True,event["id"])),
+              patch("noetfield_governance.stripe_webhook._finish_event",
+                    new_callable=AsyncMock),
+              patch("noetfield_governance.commercial_pipeline.capture_stripe_payment",
+                    new_callable=AsyncMock,return_value={"captured":True}),
+              patch("noetfield_governance.stripe_webhook.notify_stripe_event",
+                    return_value=True)):
+            result = asyncio.run(handle_stripe_webhook(settings,payload,
+                                      f"t={timestamp},v1={signature}"))
+            assert result["ok"] is True and result["handled"] is True
+    assert asyncio.run(handle_stripe_webhook(settings,payload,
+                    f"t={timestamp},v1=bad"))["error"] == "invalid_signature"
