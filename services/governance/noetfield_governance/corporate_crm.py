@@ -304,6 +304,43 @@ async def import_intake(settings: object, *, intake_id: str, offer: str, owner: 
         await db.close()
 
 
+def inbound_offer(record: object) -> tuple[str, str, int] | None:
+    """Only genuine inbound to Noetfield itself; never Web3 or synthetic."""
+    meta = getattr(record, "metadata", None) or {}
+    rid = getattr(record, "request_id", None)
+    email = getattr(record, "contact_email", "")
+    if not isinstance(meta, dict) or is_test_intake(metadata=meta, request_id=rid, contact_email=email):
+        return None
+    vector = str(getattr(record, "vector", "") or "")
+    if vector == "onchain-project" and meta.get("form_id") == "nfCapitalIntake":
+        return ("rwa_technical_sprint", "usd", 95000)
+    if (vector == "external-opportunities" and meta.get("form_id") == "nfConnectWizard"
+            and meta.get("initiative") == "noetfield"):
+        category = meta.get("category")
+        if category == "business":
+            # General corporate business enquiry. Never assume AI Sales OS
+            # until the actual buyer scope identifies that product.
+            return ("business_automation", "cad", 0)
+        if category == "partnership":
+            return ("strategic_partnership", "cad", 0)
+    return None
+
+
+async def auto_import_inbound(settings: object, record: object) -> dict[str, object]:
+    """Post-persistence best effort, source-ID idempotent. Never sends outreach."""
+    target = inbound_offer(record)
+    if target is None:
+        return {"eligible":False,"imported":False}
+    offer,currency,estimate = target
+    result = await import_intake(settings, intake_id=str(getattr(record, "intake_id")),
+                offer=offer, owner="Noetfield Revenue",
+                next_action="Review and personally qualify this sourced corporate enquiry",
+                currency=currency, estimated_minor=estimate)
+    return {"eligible":True,"imported":True,
+            "intake_id":result["imported_from"],"deal_id":result["deal"]["id"],
+            "payment_verified":False,"outreach_sent":False}
+
+
 async def deal_update(settings: object, *, deal_id: str, expected_revision: int,
                       stage: str, owner: str, next_action: str,
                       next_date: str = "", estimated_minor: int = 0,
@@ -389,7 +426,8 @@ async def dashboard(settings: object, *, search: str = "", stage: str = "",
             commercial=json_obj(item.pop("commercial_case"))
             receipt=None
             session=str(commercial.get("payment_session_id") or "")
-            if session and item["source_intake_id"]:
+            if (session and item["source_intake_id"]
+                    and commercial.get("offer")==item["offer"]):
                 proof=await db.fetchrow("""SELECT e.event_id,e.amount_minor,e.currency,
                       e.reversed,e.livemode,e.source_intake_id
                       FROM noetfield.commercial_payment_evidence e
