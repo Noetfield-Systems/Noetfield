@@ -1,0 +1,30 @@
+---
+description: Noetfield Founder-approved V5 site visual is LOCKED (PR #388); protect photographic human UX and preserve commercial improvements separately
+alwaysApply: true
+---
+
+# Noetfield V5 Founder Visual & Economic-Value Preservation — 2026-11-16 P0
+
+**Read before any work on `noetfield.com`, the corporate brand, website or product conversions.** This is a narrow, founder-directed design preservation law, not a generic permission gate.
+
+## Protected human visual
+
+- **Founder-approved source:** [PR #388](https://github.com/Noetfield-Systems/Noetfield/pull/388) / commit `340fe2dec55819a997e8aeec60d52f33317a1894`.
+- Protected files: `index.html` and `assets/noetfield-institutional-v3.css`; exact Git blobs pinned by `config/noetfield-founder-v5-visual-lock.json` and verified by `python3 scripts/verify-founder-v5-visual-lock.py`.
+- Keep the large real-world photographic panorama, genuine Noetfield App image, documentary industrial/architectural images, human-first editorial composition, short copy, restrained typography and cinematic full page.
+- **Never** replace that composition with new generic card grids, text-heavy Hero, circles/orbits, abstract cubes/pyramids, agent-status dashboards, or floating explanatory labels. A fresh screenshot of such an agent invention is not a design approval.
+- A broad request to improve branding, conversion, marketing, growth or revenue **does not** authorize touching the approved Homepage visual. Only an explicit Founder instruction targeting that visual may authorize updating the golden reference.
+
+## Preserve the economically valuable instructions too
+
+- Brand: **Intelligence for the Real Economy**; build, run and grow intelligent businesses; connect real business, people and the digital economy.
+- The flagship App, Company OS, Real-World Capital, human partner/collaborator network, source-backed proof and independent ventures have distinct roles.
+- Preserve the commercial decisions in `docs/promo/NOETFIELD_AUDIENCE_FIRST_BRAND_AND_GROWTH_2026-11-16.md` and the incident recovery matrix `docs/promo/NOETFIELD_GROWTH_RECOVERY_QUEUE_2026-11-16.md`.
+- For real customer or community workflows, work **only on the matching existing inner page, app or service** and reuse the existing intake, consent, source attribution, approved checkout and CRM. Do not bundle into a homepage restyle. Do not invent customers, revenue or finished capabilities.
+- Keep the public website English-only; distinct venture assets and legal boundaries stay separate.
+
+## Why this rule exists
+
+**P0 incident:** `.cursor/incidents/INCIDENT-2026-11-16-001-v5-visual-overwrite-and-growth-work-loss.md`. PR #390 overwrote an approved design; a later whole-tree revert restored the design but discarded unrelated functional conversion changes. Agent tests accepted a self-invented design instead of the founder-approved baseline.
+
+**Implement practical commercial improvements without reopening this incident.** Preserve unrelated work during merges and rollbacks. Do not add artificial review gates to ordinary authorized non-visual work.
