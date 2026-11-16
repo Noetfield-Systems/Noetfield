@@ -40,7 +40,7 @@ check_absent() {
 check_file "protected corporate homepage" index.html \
   '<title>Noetfield | AI Software & Business Automation</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
-  '<body class="nf-corp nf-home">' '<main id="main">' \
+  '<body class="nf-corp nf-home nr-skin">' '<main id="main">' \
   '/assets/noetfield-corporate-v1.css?v=5' \
   'nf-corp-header' 'nf-corp-footer' 'nf-corp-nav' \
   'SOFTWARE CREATION · REAL SOURCE · INDEPENDENT EVIDENCE' \
@@ -55,7 +55,7 @@ check_file "protected corporate homepage" index.html \
   'Governed replacement' 'Claims-boundary correction' \
   'TrustField' 'href="https://trustfield.ca/"' 'independent venture in formation' \
   'human decision authority' \
-  'href="/contact/"' 'Open Noetfield App' \
+  'href="/contact/"' 'Open Noetfield App' 'nr-home-header' 'nr-hero-stage' \
   'TRY THE CURRENT APP' 'REQUEST A SOFTWARE BUILD' 'EXAMINE A VERIFIED RUN' \
   'nf-button nf-button--primary' 'nf-button nf-button--secondary' \
   'nf-corp-section' 'nf-corp-hero' \
@@ -65,13 +65,14 @@ check_file "protected corporate homepage" index.html \
   'href="/motors/"' 'href="/assurance/"' 'href="/applications/trustfield/"' \
   'https://app.noetfield.com/' \
   '/assets/noetfield-home-v2.css'
-# P0 customer-facing language: three buying paths and wallet-free community intake.
+# P0 buyer-first Renaissance: real entry, three product lanes and community participation.
 check_file "market-language homepage and primary navigation" index.html \
   'Build software.' 'Automate your work.' 'With AI.' \
-  'Build Software with AI' 'Automate Your Business' \
-  'Real-World Assets &amp; Digital Capital' \
-  'href="/community/"' 'Explore AI Software Builder' \
-  'Join Early Access' 'AI Business Operations' 'Digital Asset Services'
+  'Make ambitious' 'Technology for the things' \
+  'href="/company-os/"' 'href="/real-world-capital/"' \
+  'href="/community/"' 'href="/opportunities/"' \
+  'Open the AI Software Builder' 'Explore Our Solutions' \
+  'Opportunity Exchange' 'Join the Founding Community'
 check_file "market-language early access: real intake" community/index.html \
   'href="https://app.noetfield.com/"' \
   'href="/company-os/"' 'href="/real-world-capital/"' \
