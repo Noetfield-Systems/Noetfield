@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real-source corporate homepage visual acceptance; desktop, tablet and phone.
 
-Checks the real-product corporate editorial hero, accessible live links,
+Checks the bespoke corporate editorial sculpture, accessible live links,
 and layout at four viewport sizes. No screenshot-as-a-page approximation.
 No fabricated business activity or dynamic numbers are asserted.
 """
@@ -49,7 +49,7 @@ try:
             assert page.locator(".nf-v3-live-image").is_visible()
             assert page.locator(".nf-cinema-capabilities > a").count()==5
             assert page.locator(".nf-v3-art-note").is_visible()
-            assert page.locator(".nf-v3-live-image").get_attribute("src")=="/assets/product/app-teach/teach-workspace-overview.jpg"
+            assert page.locator(".nf-v3-live-image").get_attribute("src")=="/assets/noetfield-execution-sculpture-v3.svg"
             hero_box=page.locator(".nf-v3-system-frame").bounding_box()
             assert hero_box and hero_box["width"]>=280 and hero_box["height"]>=300,hero_box
             if width<=700:
