@@ -7,6 +7,7 @@ import hashlib
 import hmac
 import json
 import logging
+import os
 import time
 from datetime import UTC, datetime
 from typing import Any
@@ -360,10 +361,17 @@ async def handle_stripe_webhook(
     payload: bytes,
     sig_header: str,
 ) -> dict[str, object]:
-    secret = _secret(getattr(settings, "stripe_webhook_secret", None))
-    if not secret:
+    # Existing Primary account signs with STRIPE_WEBHOOK_SECRET. RWA and Company
+    # OS Payment Links belong to Noetfield's *separate* live Stripe account.
+    # Preserve Primary events while also accepting its isolated webhook key.
+    secrets = [
+        _secret(getattr(settings, "stripe_webhook_secret", None)),
+        os.getenv("STRIPE_NOETFIELD_WEBHOOK_SECRET", "").strip(),
+    ]
+    if not any(secrets):
         return {"ok": False, "error": "stripe_webhook_not_configured"}
-    if not verify_stripe_signature(payload, sig_header, secret):
+    if not any(verify_stripe_signature(payload, sig_header, secret)
+               for secret in secrets if secret):
         return {"ok": False, "error": "invalid_signature"}
     try:
         event = json.loads(payload.decode("utf-8"))
