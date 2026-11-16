@@ -14,8 +14,8 @@
       "route": "/",
       "required_text": [
         "From ambitious ideas to real, editable software.",
-        "founder-operated alpha",
-        "Evidence before claims."
+        "Make your next move operational.",
+        "The Noetfield Execution Platform"
       ],
       "required_links": [
         "/system/",
@@ -24,7 +24,8 @@
         "/public-interest/",
         "/about/",
         "/trust/",
-        "/privacy/"
+        "/privacy/",
+        "/connect/"
       ],
       "forbidden_text": [
         "Invest in Noetfield",
@@ -33,7 +34,10 @@
         "validation vertical developed and operated",
         "three product lines",
         "Ops Health Audit",
-        "nf-sourcea-xlink"
+        "nf-sourcea-xlink",
+        "No external customers or revenue yet",
+        "REAL PRODUCT VIEW · NOT A MOCKUP",
+        "no external customer adoption"
       ],
       "forbidden_link_prefixes": [
         "/invest/",
@@ -91,21 +95,26 @@
       "dist_path": "about/index.html",
       "route": "/about/",
       "required_text": [
-        "independent venture in formation",
+        "independent venture supported",
         "Sina Kazemnezhad",
-        "Noetfield Systems Inc."
+        "Noetfield Systems Inc.",
+        "software engineering, AI execution"
       ],
       "required_links": [
-        "/proof/"
+        "/proof/",
+        "/connect/"
       ],
       "forbidden_text": [
         "SourceB",
-        "validation vertical developed and operated"
+        "validation vertical developed and operated",
+        "no external customers or revenue yet",
+        "It does not prove external adoption"
       ],
       "forbidden_link_prefixes": [
         "/invest/",
         "/workspace/"
       ]
     }
-  }
+  },
+  "contract_revision": "2026-11-16-buyer-first-public-copy"
 }

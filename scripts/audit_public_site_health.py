@@ -42,7 +42,7 @@ CORPORATE_HOME_REQUIRED = (
     "/proof/",
     "/public-interest/",
     "From ambitious ideas to real, editable software.",
-    "founder-operated alpha",
+    "/connect/",
     "TRY THE CURRENT APP",
     "EXAMINE A VERIFIED RUN",
     "TrustField",
@@ -55,6 +55,18 @@ REQUIRED_SHELL_PARTIALS = (
     ROOT / "assets" / "partials" / "header.html",
     ROOT / "assets" / "partials" / "footer.html",
     ROOT / "assets" / "partials" / "offerings-strip.html",
+)
+
+BUYER_PAGES = (
+    ROOT / "index.html",
+    ROOT / "about" / "index.html",
+)
+
+FORBIDDEN_BUYER_COPY = (
+    "no external customers or revenue",
+    "external adoption, revenue",
+    "not a mockup",
+    "no simulated activity numbers",
 )
 
 FORBIDDEN_HOME = (
@@ -93,6 +105,15 @@ def main() -> int:
                 errors.append(f"index.html contains internal term: {bad}")
         if "nf-gate__directions" in ht:
             errors.append("index.html: stale recovery direction-gate structure")
+
+    # Keep operational/evidence disclaimers in their appropriate contexts, not the
+    # corporate buyer journey. This is a copy-placement check, not a truth override.
+    for path in BUYER_PAGES:
+        if path.is_file():
+            body = path.read_text(encoding="utf-8", errors="replace").lower()
+            for phrase in FORBIDDEN_BUYER_COPY:
+                if phrase in body:
+                    errors.append(f"{path.relative_to(ROOT)} contains internal-status sales copy: {phrase}")
 
     for path in TIER_PAGES:
         if not path.is_file():

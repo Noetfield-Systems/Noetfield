@@ -55,7 +55,7 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
         "SOFTWARE CREATION · REAL SOURCE · INDEPENDENT EVIDENCE",
         "LIVE ALPHA",
         "From ambitious ideas to real, editable software.",
-        "founder-operated alpha",
+        "Make your next move operational.",
         "TRY THE CURRENT APP",
         "EXAMINE A VERIFIED RUN",
         "REQUEST A SOFTWARE BUILD",
@@ -83,7 +83,8 @@ def test_homepage_explains_company_narrative_proof_and_asks() -> None:
 
 def test_homepage_statuses_preserve_claim_boundaries() -> None:
     text = read(ROOT / "index.html")
-    assert "does not prove external adoption" in text
+    assert "No external customers or revenue yet" not in text
+    assert "FIRST-PARTY DEMONSTRATION" in text
     assert "independent venture in formation" in text.lower()
     assert "independent venture" in text.lower()
     assert not re.search(r"trusted by", text, re.I)
@@ -98,10 +99,10 @@ def test_public_corporate_pages_have_no_private_workspace_conversion() -> None:
 def test_about_states_founder_company_and_trustfield_boundary() -> None:
     text = read(ROOT / "about" / "index.html")
     assert "Sina Kazemnezhad" in text
-    assert "sole operating lead" in text.lower()
+    assert "leads its product strategy" in text
     assert "Vancouver" in text
     assert "TrustField" in text
-    assert "independent venture in formation" in text
+    assert "independent venture supported" in text
     assert "independent venture" in text.lower()
     assert "SourceB" not in text
 
@@ -109,7 +110,7 @@ def test_about_states_founder_company_and_trustfield_boundary() -> None:
 def test_ecosystem_page_is_informational_and_preserves_invest_security() -> None:
     text = read(ROOT / "investors" / "index.html")
     assert "Company thesis" in text or "thesis" in text.lower()
-    assert "external customers" in text.lower() or "not established" in text.lower()
+    assert "opportunities for partners across software" in text.lower()
     assert 'href="/contact/?topic=program-funding"' in text
 
 
@@ -125,7 +126,7 @@ def test_sourcea_and_sourceb_statuses_are_truthfully_scoped() -> None:
     home = read(ROOT / "index.html")
     assert "SourceB" not in home
     about = read(ROOT / "about" / "index.html")
-    assert "SourceA" in about
+    assert "Company OS &amp; Noetfield Runtime" in about
     assert "SourceB" not in about
 
 
@@ -139,7 +140,7 @@ def test_trustfield_is_scoped_as_independent_venture() -> None:
 
     about = read(ROOT / "about" / "index.html")
     assert "TrustField" in about
-    assert "independent venture in formation" in about.lower()
+    assert "independent venture supported" in about.lower()
 
     investors = read(ROOT / "investors" / "index.html")
     assert "TrustField" in investors

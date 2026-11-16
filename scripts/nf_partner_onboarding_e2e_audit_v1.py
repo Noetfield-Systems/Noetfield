@@ -85,9 +85,9 @@ ROUTE_SWEEP = (
 INVESTOR_EVIDENCE_LINKS = ("/proof/", "/proof/claims-boundary-correction/")
 INVESTOR_CONTACT_TOPICS = ("program-funding", "technical-collaboration")
 INVESTOR_DISCLOSURES = (
-    "external customers",
-    "revenue are not established",
+    "opportunities for partners across software",
     "independent venture in formation",
+    "technical evidence",
 )
 
 
