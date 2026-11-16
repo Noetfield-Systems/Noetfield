@@ -454,12 +454,12 @@ async def _bootstrap_corporate_crm() -> None:
               (SELECT count(*)::int FROM noetfield.corp_crm_activities) AS activities"""
         )
         app.state.corporate_crm_ready = True
-        logger.info(
+        logging.getLogger("uvicorn.error").info(
             "noetfield_corporate_crm_schema=READY accounts=%s deals=%s activities=%s",
             summary["accounts"], summary["deals"], summary["activities"],
         )
     except Exception:
-        logger.exception("noetfield_corporate_crm_schema=FAILED")
+        logging.getLogger("uvicorn.error").exception("noetfield_corporate_crm_schema=FAILED")
     finally:
         if db is not None:
             await db.close()
