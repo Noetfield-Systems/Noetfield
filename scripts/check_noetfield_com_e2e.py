@@ -22,8 +22,8 @@ API_PATHS = ("/api/intake/health", "/api/public/chat/health")
 HOME_NEEDLES = (
     "nf-corp",
     "Building the next generation of ",
-    "Probabilistic workers. Deterministic controls. Explicit authority. Inspectable receipts.",
-    "founder-operated alpha",
+    "From a business goal to accountable execution:",
+    "Make your next move operational.",
     "TrustField",
     "trustfield.ca",
     "Open Noetfield App",
