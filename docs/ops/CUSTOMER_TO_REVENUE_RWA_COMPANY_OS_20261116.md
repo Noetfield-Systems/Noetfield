@@ -13,6 +13,8 @@ Two published offers have live payment links in **Noetfield Systems Inc.** Strip
 | RWA / Policy-to-Execution Technical Sprint | USD 950 | USD 475 deposit | `plink_1UbG9CJ03eJkL57JNNK0P3cY` |
 | Company OS — AI Sales OS pilot | CAD 750 | CAD 750 one-time | `plink_1UcS8RJ03eJkL57J4IMvmFuD` |
 
+Stripe production integration was checked against the real linked **Noetfield Systems Inc.** account (`acct_1SfSseJ03eJkL57J`): both links are active and their exact products and amounts are confirmed. Separate webhook endpoint `we_1UcSGHJ03eJkL57JGpSL87hA` targets `https://platform.noetfield.com/api/stripe/webhook`, while the pre-existing Primary account webhook remains unchanged. Its signing key is stored privately in Railway as `STRIPE_NOETFIELD_WEBHOOK_SECRET` alongside the existing `STRIPE_WEBHOOK_SECRET`; neither value belongs in the repository.
+
 The Stripe links exist and are **not** the authority for a contract. A buyer receives a relevant link only after scope acceptance; no wallet gate, forced account creation, new tax/fee or automatic billing.
 
 ### Commercial state transitions
