@@ -156,3 +156,19 @@ body.nf-corp.nf-home #app .teach figure img{filter:saturate(.86)}
 @media(prefers-reduced-motion:reduce){
  body.nf-corp.nf-home .nf-v3-system-frame{transition:none!important;transform:none!important}
 }
+
+/* Hero art / revised editorial typography: strong contrast, no white-on-white title. */
+body.nf-corp.nf-home .nf-v3-hero .nf-ins-hero-copy h1{-webkit-text-fill-color:#142029!important}
+body.nf-corp.nf-home .nf-v3-hero .nf-ins-hero-copy h1 .nf-v3-headline-mid{font-size:.78em!important;letter-spacing:-.075em!important;-webkit-text-fill-color:#142029!important}
+body.nf-corp.nf-home .nf-v3-hero .nf-ins-hero-copy h1 em{font-size:.82em!important;-webkit-text-fill-color:#a16e46!important}
+body.nf-corp.nf-home .nf-v3-hero .nf-v3-product-image-wrap{aspect-ratio:1.46;background:#0b141b!important}
+body.nf-corp.nf-home .nf-v3-hero .nf-v3-product-image-wrap:after{background:linear-gradient(180deg,rgba(6,14,19,.02),rgba(6,14,19,.09))!important}
+body.nf-corp.nf-home .nf-v3-hero .nf-ins-hero-media img.nf-v3-live-image{filter:none!important;object-fit:cover!important;object-position:center!important}
+body.nf-corp.nf-home .nf-v3-hero #path-transform:before{content:"02 / AGENTIC OPERATIONS"!important}
+body.nf-corp.nf-home .nf-v3-hero #path-onchain:before{content:"03 / DIGITAL INFRASTRUCTURE"!important}
+body.nf-corp.nf-home .nf-v3-hero .nf-v3-system-frame{transform:translateY(1px) rotate(-.65deg)!important}
+@media(max-width:620px){
+ body.nf-corp.nf-home .nf-v3-hero .nf-ins-hero-copy h1 .nf-v3-headline-mid{font-size:.77em!important;letter-spacing:-.09em!important}
+ body.nf-corp.nf-home .nf-v3-hero .nf-ins-hero-copy h1 em{font-size:.84em!important}
+ body.nf-corp.nf-home .nf-v3-hero .nf-v3-system-frame{transform:none!important}
+}
