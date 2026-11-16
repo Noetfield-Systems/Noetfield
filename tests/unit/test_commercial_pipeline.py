@@ -19,7 +19,7 @@ def checkout(*, paid=True, live=True, amount=47500, currency="usd", session="cs_
             "amount_total":amount,"currency":currency,
             "customer_details":{"email":email},
             "payment_intent":"pi_live_12345678",
-            "payment_link":"plink_rwa_sprint",
+            "payment_link":OFFER_TERMS["rwa_technical_sprint"]["payment_link_id"],
         }},
     }
 
@@ -28,7 +28,7 @@ def accepted_rwa():
         "offer":"rwa_technical_sprint",
         "stage":"SCOPE_ACCEPTED",
         "acceptance_evidence":"https://evidence.noetfield.com/scopes/SOW-001",
-        "payment_link_id":"plink_rwa_sprint",
+        "payment_link_id":OFFER_TERMS["rwa_technical_sprint"]["payment_link_id"],
     }
 
 def test_accepts_real_paid_checkout_with_exact_amount():
