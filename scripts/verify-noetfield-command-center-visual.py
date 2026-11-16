@@ -18,103 +18,69 @@ try:
     time.sleep(1)
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
+        # The Renaissance website is tested as rendered browser UI, not as static image.
         for name,width,height in [("desktop-1440",1440,900),("desktop-1680",1680,1000),("tablet",820,1040),("mobile",390,844)]:
             page=browser.new_page(viewport={"width":width,"height":height},device_scale_factor=1)
             errors=[]
             page.on("pageerror",lambda e:errors.append(str(e)))
             response=page.goto("http://127.0.0.1:8979/",wait_until="networkidle",timeout=35000)
             assert response.status==200,response.status
-            page.locator(".nf-v3-live-image").wait_for()
             title=page.locator("h1#hero-title").inner_text()
-            assert "intelligence" in title.lower() and "made real" in title.lower(),title
-            lead=page.locator(".nf-v3-hero .nf-ins-lead").inner_text()
-            assert "build software." in lead.lower() and "automate your work." in lead.lower(),lead
-            assert page.locator("#choose-your-path .nf-next-card-art").count()==3
+            assert "make ambitious" in title.lower() and "work real" in title.lower(),title
+            assert page.locator(".nr-hero-stage svg.nr-stage-orbit").is_visible()
+            assert page.locator("#solutions .nr-product").count()==3
+            assert page.locator(".nr-opportunity").count()==3
+            assert page.locator(".nr-proof-card").count()==2
             assert page.locator("h1").count()==1
-            paths=page.locator("#choose-your-path a.nf-ins-path-card")
-            capabilities=page.locator("#command-capabilities a.nf-ins-platform-item")
-            assert paths.count()==3,paths.count()
-            assert capabilities.count()==4,capabilities.count()
-            allimgs=page.locator(".nf-v3-product-stage img")
-            image_results=allimgs.evaluate_all("""els=>els.map(el=>({
-              src:el.getAttribute('src'),
-              loaded:el.complete&&el.naturalWidth>300,
-              naturalWidth:el.naturalWidth,
-              naturalHeight:el.naturalHeight
-            }))""")
-            assert len(image_results)==1,image_results
-            assert all(z["loaded"] for z in image_results),image_results
+            assert page.locator(".nr-global, .nr-home-header").count()==1
+            assert page.locator('a[href="/community/"]').count()>0
+            assert page.locator('a[href="/opportunities/"]').count()>0
+            assert page.locator('a[href^="/connect/"]').count()>0
+            sheets=page.evaluate("""() => [...document.styleSheets].filter(s=>s.href?.includes('noetfield-renaissance')).map(s=>({rules:(()=>{try{return s.cssRules.length}catch(e){return -1}})()}))""")
+            assert sheets and sheets[0]["rules"]>25,sheets
+            title_style=page.locator("#hero-title").evaluate("""e=>({font:getComputedStyle(e).fontFamily,color:getComputedStyle(e).color})""")
+            assert "Newsreader" in title_style["font"],title_style
             dimensions=page.evaluate("""() => ({doc:document.documentElement.scrollWidth,viewport:window.innerWidth})""")
             assert dimensions["doc"]<=width+2,dimensions
-            if width>=1100:
-                action_grid=page.locator("#now .runways").bounding_box()
-                final_action=page.locator("#now .runways > .runway:last-child").bounding_box()
-                assert action_grid and final_action and final_action["width"]>=action_grid["width"]*.36, (
-                    "No narrow orphan card in enterprise action grid",action_grid,final_action
-                )
-            design_diagnostics=page.evaluate("""() => ({sheet:[...document.styleSheets].filter(s=>s.href&&s.href.includes('institutional-v3')).map(s=>({url:s.href,rules:(()=>{try{return s.cssRules.length}catch(e){return 'error'}})()})), bodyClass:document.body.className,heroClass:document.querySelector('.nf-institutional-hero')?.className,heroBackground:getComputedStyle(document.querySelector('.nf-institutional-hero')).background})""")
-            print("CORPORATE_DESIGN_DIAGNOSTICS="+json.dumps(design_diagnostics),flush=True)
-            assert design_diagnostics["sheet"] and design_diagnostics["sheet"][0]["rules"]>10,design_diagnostics
-            assert page.locator(".nf-v3-live-image").is_visible()
-            # The screenshot must remain legible. Old CSS made the first H1
-            # line dark-on-dark and painted gradient bars over product titles.
-            paint=page.evaluate("""() => ({
-              hero:getComputedStyle(document.querySelector("#hero-title")).webkitTextFillColor,
-              cards:[...document.querySelectorAll("#choose-your-path a.nf-ins-path-card")].map(el=>({
-                labelOverlay:getComputedStyle(el,"::before").backgroundImage,
-                headline:getComputedStyle(el.querySelector("strong")).webkitTextFillColor
-              }))
-            })""")
-            assert paint["hero"]=="rgb(244, 244, 240)",paint
-            assert len(paint["cards"])==3,paint
-            assert all(c["labelOverlay"]=="none" for c in paint["cards"]),paint
-            assert all(c["headline"]=="rgb(246, 246, 241)" for c in paint["cards"]),paint
-            assert page.locator(".nf-cinema-capabilities > a").count()==5
-            assert page.locator(".nf-v3-art-note").is_visible()
-            assert page.locator(".nf-v3-live-image").get_attribute("src")=="/assets/noetfield-execution-sculpture-v3.svg"
-            hero_box=page.locator(".nf-v3-system-frame").bounding_box()
-            assert hero_box and hero_box["width"]>=280 and hero_box["height"]>=300,hero_box
-            if width<=700:
-                assert hero_box["y"]<height-70, f"Artwork falls below first screen: {hero_box}"
-                brand_box=page.locator(".nf-ins-header .nf-corp-brand").bounding_box()
-                menu_box=page.locator(".nf-q-menu").bounding_box()
-                assert brand_box and menu_box and abs(brand_box["y"]-menu_box["y"]) < 20, f"Mobile header wraps: {brand_box}, {menu_box}"
-                page.locator(".nf-q-menu").click()
-                assert page.locator(".nf-corp-nav").get_attribute("data-open")=="true"
-                assert page.locator(".nf-corp-nav a[href='/workflows/']").is_visible()
+            if width<=980:
+                menu=page.locator(".nr-home-header [data-nr-menu]")
+                assert menu.is_visible()
+                menu.click()
+                nav=page.locator(".nr-home-header [data-nr-nav]")
+                assert menu.get_attribute("aria-expanded")=="true"
+                assert nav.is_visible()
                 page.keyboard.press("Escape")
-                assert page.locator(".nf-corp-nav").get_attribute("data-open")=="false"
-            links=paths.evaluate_all("els=>els.map(a=>a.getAttribute('href'))")
-            assert links==["https://app.noetfield.com/","/company-os/","/real-world-capital/"],links
-            assert page.locator(".nf-ins-button--primary").get_attribute("href")=="https://app.noetfield.com/"
-            assert page.locator("a[href='/demo/complete-run/']").count()>0
+                assert menu.get_attribute("aria-expanded")=="false"
+                assert not nav.is_visible()
+            else:
+                assert page.locator(".nr-home-header [data-nr-nav]").is_visible()
             assert not errors,errors
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
             if name=="desktop-1440":
-                # Browser full-page capture does not trigger offscreen lazy images.
-                # Force the three real app screenshots to load, assert natural pixels.
-                page.locator("#app .teach img").evaluate_all("els=>els.forEach(el=>el.loading='eager')")
-                page.wait_for_function("""() => Array.from(document.querySelectorAll('#app .teach img')).every(im=>im.complete && im.naturalWidth>200)""",timeout=20000)
                 page.screenshot(path=str(OUT/"desktop-full-page.png"),full_page=True,animations="disabled")
-            results.append(dict(viewport=name,document=dimensions,hero=hero_box,images=image_results,paths=paths.count(),capabilities=capabilities.count(),jsErrors=errors,ok=True))
+                tech=page.locator("details#technical-depth")
+                assert tech.count()==1 and not tech.evaluate("(e)=>e.open")
+                tech.locator("summary").click()
+                assert tech.evaluate("(e)=>e.open")
+                assert page.locator("#product-live").is_visible()
+            results.append(dict(viewport=name,document=dimensions,styles=sheets,jsErrors=errors,ok=True))
             page.close()
-        # New corporate inner pages must work as pages, not decorative screenshots:
-        # mobile menu can open/close without stealing the App CTA or breaking navigation.
-        for route,slug in [("/about/","about"),("/investors/","investors")]:
+        # Shared brand header must work on real corporate pages at mobile width.
+        for route,slug in [("/about/","about"),("/investors/","investors"),("/work-with-us/","work-with-us"),("/opportunities/","opportunities")]:
             page=browser.new_page(viewport={"width":390,"height":844},device_scale_factor=1)
             response=page.goto("http://127.0.0.1:8979"+route,wait_until="networkidle",timeout=35000)
             assert response.status==200,(route,response.status)
-            toggle=page.locator(".nx-inner-menu")
+            toggle=page.locator(".nr-global [data-nr-menu]")
             assert toggle.is_visible(),route
             page.screenshot(path=str(OUT/f"{slug}-mobile.png"),full_page=False,animations="disabled")
             toggle.click()
             assert toggle.get_attribute("aria-expanded")=="true",route
-            nav=page.locator(".nf-corp-header .nf-corp-nav")
+            nav=page.locator(".nr-global [data-nr-nav]")
             assert nav.is_visible(),route
-            assert nav.locator('a[href="https://app.noetfield.com/"]').count()==1,route
-            page.screenshot(path=str(OUT/f"{slug}-menu.png"),full_page=False,animations="disabled")
+            assert nav.locator('a[href="/opportunities/"]').count()==1,route
             page.keyboard.press("Escape")
             assert toggle.get_attribute("aria-expanded")=="false",route
+            assert not nav.is_visible(),route
             assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+2"),route
             page.close()
         # The flagship commercial path reuses the already approved public intake
@@ -140,15 +106,15 @@ try:
             assert pcap.locator("#nfCapitalIntake").get_attribute("data-intake-vector")=="onchain-project"
             assert pcap.evaluate("document.documentElement.scrollWidth<=innerWidth+2"),width
             if width<=600:
-                menu=pcap.locator("#capital-menu")
+                menu=pcap.locator(".nr-global [data-nr-menu]")
                 assert menu.is_visible()
                 menu.click()
                 assert menu.get_attribute("aria-expanded")=="true"
-                assert pcap.locator("#capital-nav").is_visible()
+                assert pcap.locator(".nr-global [data-nr-nav]").is_visible()
                 pcap.keyboard.press("Escape")
                 assert menu.get_attribute("aria-expanded")=="false"
             pcap.screenshot(path=str(OUT/f"capital-{width}.png"),full_page=(width==1440),animations="disabled")
-            pcap.locator("a[data-select-capital-track='business-acquisition']").click()
+            pcap.locator("#paths a[data-select-capital-track='business-acquisition']").click()
             assert pcap.locator('#nfCapitalIntake select[name="topic"]').input_value()=="business-acquisition"
             pcap.locator('#nfCapitalIntake input[name="email"]').fill("qa@example.org")
             pcap.locator('#nfCapitalIntake input[name="org"]').fill("QA Fixture Organization")
