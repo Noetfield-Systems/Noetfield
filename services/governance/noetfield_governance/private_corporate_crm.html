@@ -326,9 +326,12 @@ function openForm(which){
  $("#data-view").classList.add("hidden");$("#form-view").classList.remove("hidden");
  for(const id of ["account","person","deal","import"])$("#"+id+"-panel").hidden=id!==which;
  $("#create-toggle").textContent="Back to CRM";
- $("#create-toggle").onclick=()=>{$("#data-view").classList.remove("hidden");$("#form-view").classList.add("hidden");$("#create-toggle").onclick=null;setView(state.view)};
+
 }
-$("#create-toggle").addEventListener("click",()=>{if($("#form-view").classList.contains("hidden"))openForm(state.view==="people"?"person":state.view==="pipeline"?"deal":"account")});
+$("#create-toggle").addEventListener("click",()=>{
+   if(!$("#form-view").classList.contains("hidden")){setView(state.view);return}
+   openForm(state.view==="people"?"person":state.view==="pipeline"?"deal":"account")
+ });
 for(const name of ["account","person","deal","import"]){
  $("#"+name+"-form").addEventListener("submit",async e=>{
    e.preventDefault();const values=Object.fromEntries(new FormData(e.currentTarget));
@@ -337,7 +340,7 @@ for(const name of ["account","person","deal","import"]){
    const route={account:"/api/corporate-crm/accounts",person:"/api/corporate-crm/people",
                 deal:"/api/corporate-crm/deals",import:"/api/corporate-crm/import-intake"}[name];
    try{const result=await api(route,{method:"POST",data:values});message("Corporate record persisted.",true);
-    $("#form-view").classList.add("hidden");$("#data-view").classList.remove("hidden");await reload();
+    $("#form-view").classList.add("hidden");$("#data-view").classList.remove("hidden");setView(name==="import"||name==="deal"?"pipeline":state.view);await reload();
     if(name==="deal")await selectDeal(result.id);
     if(name==="import")await selectDeal(result.deal.id);
    }catch(error){message(error.message)}
