@@ -9,7 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from datetime import date
+from datetime import UTC, date, datetime
 from typing import Any
 from urllib.parse import urlsplit
 
@@ -168,7 +168,7 @@ async def capture_stripe_payment(settings: object, event: dict[str, Any]) -> dic
              event_id,session_id,payment_intent,payment_link_id,
              customer_email_hash,amount_minor,currency,livemode
            ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-           ON CONFLICT (event_id) DO NOTHING""",
+           ON CONFLICT DO NOTHING""",
            receipt["event_id"], receipt["session_id"], receipt["payment_intent"],
            receipt["payment_link_id"], receipt["customer_email_hash"],
            receipt["amount_minor"], receipt["currency"], True)
@@ -198,13 +198,15 @@ async def operate(settings: object, *, intake_id: str, action: str,
     try:
         await _prepare(db)
         async with db.transaction():
-            row = await db.fetchrow("""SELECT intake_id,contact_email,vector,metadata,
+            row = await db.fetchrow("""SELECT intake_id,request_id,contact_email,vector,metadata,
                   qualification_json FROM noetfield.public_intakes
                   WHERE intake_id=$1 FOR UPDATE""", intake_id)
             if row is None:
                 raise CommercialError("SOURCE_INTAKE_NOT_FOUND")
             metadata = _as_dict(row["metadata"])
-            if (metadata.get("intake_kind") == "test" or
+            from noetfield_governance.intake_test import is_test_intake
+            if (is_test_intake(metadata=metadata,request_id=row["request_id"],
+                               contact_email=str(row["contact_email"] or "")) or
                 str(row["vector"] or "") not in ALLOWED_SOURCE_VECTORS):
                 raise CommercialError("UNSUPPORTED_OR_SYNTHETIC_INTAKE")
             qual = _as_dict(row["qualification_json"])
@@ -248,7 +250,8 @@ async def operate(settings: object, *, intake_id: str, action: str,
                     raise CommercialError("PAYMENT_REFUNDED_OR_DISPUTED")
                 if evidence["source_intake_id"] not in (None, intake_id):
                     raise CommercialError("STRIPE_SESSION_BOUND_TO_ANOTHER_CASE")
-                if case.get("stage") == "PAYMENT_CONFIRMED" and case.get("payment_session_id") == session_id:
+                if (case.get("stage") in {"PAYMENT_CONFIRMED","IN_DELIVERY","DELIVERED","CLOSED"}
+                        and case.get("payment_session_id") == session_id):
                     return {"intake_id": intake_id, **case, "idempotent": True}
                 check_payment_match(case, evidence, intake_email=str(row["contact_email"]),
                                     payer_authorization_url=payer_authorization_url)
@@ -261,6 +264,11 @@ async def operate(settings: object, *, intake_id: str, action: str,
             elif action == "start_delivery":
                 if case.get("stage") != "PAYMENT_CONFIRMED":
                     raise CommercialError("CONFIRMED_PAYMENT_REQUIRED_FOR_DELIVERY")
+                receipt = await db.fetchrow("""SELECT reversed,livemode,source_intake_id
+                    FROM noetfield.commercial_payment_evidence
+                    WHERE session_id=$1""",case.get("payment_session_id"))
+                if not receipt or receipt["reversed"] or not receipt["livemode"] or receipt["source_intake_id"]!=intake_id:
+                    raise CommercialError("PAYMENT_NO_LONGER_CLEAR_FOR_DELIVERY")
                 case.update(stage="IN_DELIVERY",next_action=next_action.strip()[:350] or
                             "Produce and independently check the scoped deliverable")
             elif action == "deliver":
@@ -275,7 +283,7 @@ async def operate(settings: object, *, intake_id: str, action: str,
                 case["stage"] = "CLOSED"
             case["revision"] = revision + 1
             case["terms"] = OFFER_TERMS[case["offer"]]
-            case["updated_at"] = str(__import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat())
+            case["updated_at"] = datetime.now(UTC).isoformat()
             qual["commercial_ops"] = case
             await db.execute("""UPDATE noetfield.public_intakes SET qualification_json=$2::jsonb
                 WHERE intake_id=$1""", intake_id, json.dumps(qual))
