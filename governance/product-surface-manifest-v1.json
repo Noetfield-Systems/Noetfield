@@ -103,7 +103,7 @@
       "backend_binding": "static",
       "evidence_link": "/proof/governed-replacement/",
       "founder_approved_visibility": "public",
-      "needle": "Runways: the technical objects"
+      "needle": "AI workflows for real business tasks"
     },
     {
       "capability_id": "workflows-wedge-trustfield",
@@ -125,7 +125,7 @@
       "backend_binding": "static",
       "evidence_link": "/proof/governed-replacement/",
       "founder_approved_visibility": "public",
-      "needle": "Governed Software Change"
+      "needle": "AI-Assisted Software Changes"
     },
     {
       "capability_id": "workflow-decision-brief-demo",
@@ -147,7 +147,7 @@
       "backend_binding": "contact intake",
       "evidence_link": "",
       "founder_approved_visibility": "public",
-      "needle": "Institutional Workflow Commissioning"
+      "needle": "Business Workflow Automation"
     },
     {
       "capability_id": "developer-api-surface",
@@ -390,6 +390,28 @@
       "evidence_link": "/proof/governed-replacement.json",
       "founder_approved_visibility": "public",
       "needle": "A complete run, end to end"
+    },
+    {
+      "capability_id": "home-market-native-triad",
+      "route": "/",
+      "surface": "index.html",
+      "maturity": "live",
+      "state": "active",
+      "backend_binding": "existing app + /company-os/ + /real-world-capital/",
+      "evidence_link": "/proof/",
+      "founder_approved_visibility": "public",
+      "needle": "Build Software with AI"
+    },
+    {
+      "capability_id": "community-wallet-free-intake",
+      "route": "/community/",
+      "surface": "community/index.html",
+      "maturity": "live",
+      "state": "active",
+      "backend_binding": "existing /api/intake",
+      "evidence_link": "",
+      "founder_approved_visibility": "public",
+      "needle": "data-intake-vector=\"founding-community\""
     }
   ],
   "removals": []
