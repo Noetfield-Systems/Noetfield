@@ -291,6 +291,15 @@ def main(argv: list[str] | None = None) -> int:
         )
         for error in result.get("errors", []):
             print(f"  - {error}")
+        if not result.get("ok", False):
+            for surface_id, surface in result.get("surfaces", {}).items():
+                candidate = surface.get("candidate", {})
+                for key in ("missing_required_text", "present_forbidden_text",
+                            "missing_required_links", "present_forbidden_links"):
+                    if candidate.get(key):
+                        print(f"  - {surface_id}.{key}: {candidate[key]}")
+                if surface.get("live_regressions"):
+                    print(f"  - {surface_id}.live_regressions: {surface['live_regressions']}")
     return 0 if result["ok"] else 1
 
 
