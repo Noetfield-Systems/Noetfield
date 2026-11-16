@@ -96,7 +96,7 @@ def main() -> int:
     # Short editorial H1 is deliberate branding, not a license for vague copy.
     # Validate the actual live hero lead (nf-ins-lead) as well as legacy leads.
     lead_m = re.search(
-        r'<p[^>]*class="[^"]*(?:hero__lead|nf-ins-lead)[^"]*"[^>]*>(.*?)</p>',
+        r'<p[^>]*class="[^"]*(?:hero__lead|nf-ins-lead|nr-hero-lead)[^"]*"[^>]*>(.*?)</p>',
         html,
         flags=re.I | re.S,
     )
@@ -111,7 +111,7 @@ def main() -> int:
             if term.lower() not in lead.lower():
                 fails.append(f"hero lead must describe customer category {term!r}")
     hero_section = re.search(
-        r'<section[^>]*class="[^"]*nf-v3-hero[^"]*"[^>]*>(.*?)</section>',
+        r'<section[^>]*class="[^"]*(?:nf-v3-hero|nr-hero)[^"]*"[^>]*>(.*?)</section>',
         html,
         flags=re.I | re.S,
     )
