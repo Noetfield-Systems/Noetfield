@@ -16,8 +16,16 @@ from urllib.parse import urlsplit
 import asyncpg
 
 OFFER_TERMS = {
-    "rwa_technical_sprint": {"amount_minor": 95000, "payment_minor": 47500, "currency": "usd", "kind": "deposit"},
-    "ai_sales_os_pilot": {"amount_minor": 75000, "payment_minor": 75000, "currency": "cad", "kind": "full"},
+    "rwa_technical_sprint": {
+        "amount_minor": 95000, "payment_minor": 47500, "currency": "usd",
+        "kind": "deposit", "payment_link_id": "plink_1UbG9CJ03eJkL57JNNK0P3cY",
+        "checkout_url": "https://buy.stripe.com/7sY6oI3iUaa06qmcDi1Nu0h",
+    },
+    "ai_sales_os_pilot": {
+        "amount_minor": 75000, "payment_minor": 75000, "currency": "cad",
+        "kind": "full", "payment_link_id": "plink_1UcS8RJ03eJkL57J4IMvmFuD",
+        "checkout_url": "https://buy.stripe.com/14AbJ2f1C5TK6qm32I1Nu0i",
+    },
 }
 VALID_INTAKE = re.compile(r"^INT-[A-Z0-9]{12}$")
 VALID_SESSION = re.compile(r"^cs_(?:live|test)_[A-Za-z0-9]{8,}$")
@@ -83,8 +91,11 @@ def check_payment_match(case: dict[str, Any], evidence: dict[str, Any], *,
     if (evidence.get("amount_minor") != terms["payment_minor"]
             or evidence.get("currency") != terms["currency"]):
         raise CommercialError("PAYMENT_AMOUNT_OR_CURRENCY_MISMATCH")
-    expected_link = str(case.get("payment_link_id") or "")
-    if expected_link and expected_link != str(evidence.get("payment_link_id") or ""):
+    # Pin to a product-specific *live Stripe account* Payment Link, not merely
+    # a matching amount from some unrelated checkout or service.
+    expected_link = str(terms["payment_link_id"])
+    if (str(case.get("payment_link_id") or "") != expected_link
+            or str(evidence.get("payment_link_id") or "") != expected_link):
         raise CommercialError("WRONG_APPROVED_PAYMENT_LINK")
     if evidence.get("customer_email_hash") != email_hash(intake_email):
         if not payer_authorization_url:
@@ -217,8 +228,11 @@ async def operate(settings: object, *, intake_id: str, action: str,
                     raise CommercialError("SCOPE_STAGE_CONFLICT")
                 if not VALID_SCOPE.fullmatch(scope_ref):
                     raise CommercialError("SIGNED_SCOPE_REFERENCE_REQUIRED")
+                expected_link = OFFER_TERMS[case["offer"]]["payment_link_id"]
+                if payment_link_id and payment_link_id != expected_link:
+                    raise CommercialError("WRONG_APPROVED_PAYMENT_LINK")
                 case.update(scope_ref=scope_ref, acceptance_evidence=evidence_url(acceptance_evidence),
-                            payment_link_id=payment_link_id[:140], stage="SCOPE_ACCEPTED",
+                            payment_link_id=expected_link, stage="SCOPE_ACCEPTED",
                             next_action="Reconcile the approved Stripe payment using a signed paid Checkout event")
             elif action == "reconcile_payment":
                 if not VALID_SESSION.fullmatch(session_id):
