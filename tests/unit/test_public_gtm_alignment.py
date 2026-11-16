@@ -86,10 +86,10 @@ def test_public_www_has_no_legacy_comparison_headlines() -> None:
     assert "Available now vs what capital accelerates" not in text
 
 
-def test_homepage_section_count_at_most_eleven() -> None:
+def test_homepage_section_count_bounded_for_documentary_corporate_story() -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     count = text.count("<section")
-    assert count <= 11, f"homepage has {count} sections; expected ≤11 (homepage v2)"
+    assert count <= 13, f"homepage has {count} sections; expected ≤13 (homepage v5 including 2 cinematic editorial chapters)"
 
 
 def test_homepage_corporate_structure_locked() -> None:
