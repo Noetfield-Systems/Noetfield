@@ -480,7 +480,10 @@ body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card:hover{
   border-color:#798891!important;box-shadow:0 20px 45px rgba(24,34,40,.08)!important;
 }
 body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card::before,
-body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card::after{display:none!important}
+body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card::after{
+ display:none!important;content:none!important;background:none!important;
+ background-image:none!important;opacity:0!important;box-shadow:none!important;
+}
 body.nf-corp.nf-home .nf-v3-hero .nf-ins-path-card>img{
   display:block!important;position:relative!important;
   inset:auto!important;width:100%!important;height:318px!important;
