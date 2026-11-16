@@ -555,6 +555,8 @@ async def commercial_step(settings: object, *, deal_id: str, action: str,
         CommercialError, OFFER_TERMS, operate,
     )
     identifier=uuid.UUID(uuid_text(deal_id,"DEAL_ID"))
+    if action!="open" and expected_revision is None:
+        raise CorporateCRMError("COMMERCIAL_REVISION_REQUIRED")
     db=await asyncpg.connect(_database_url(settings))
     try:
         await schema(db)
