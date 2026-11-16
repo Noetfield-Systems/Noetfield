@@ -172,3 +172,57 @@ body.nf-corp.nf-home .nf-v3-hero .nf-v3-system-frame{transform:translateY(1px) r
  body.nf-corp.nf-home .nf-v3-hero .nf-ins-hero-copy h1 em{font-size:.84em!important}
  body.nf-corp.nf-home .nf-v3-hero .nf-v3-system-frame{transform:none!important}
 }
+
+
+/* SECONDARY PAGE RHYTHM — visual storytelling rather than a catalogue of identical boxes. */
+@media(min-width:1100px){
+ body.nf-corp.nf-home #now .runways{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:12px!important}
+ body.nf-corp.nf-home #now .runways>.runway{grid-column:span 4!important;min-height:220px!important}
+ body.nf-corp.nf-home #now .runways>.runway:nth-child(1){grid-column:span 5!important}
+ body.nf-corp.nf-home #now .runways>.runway:nth-child(2){grid-column:span 3!important}
+ body.nf-corp.nf-home #now .runways>.runway:nth-child(3){grid-column:span 4!important}
+ body.nf-corp.nf-home #now .runways>.runway:nth-child(4),body.nf-corp.nf-home #now .runways>.runway:nth-child(5),body.nf-corp.nf-home #now .runways>.runway:nth-child(6){grid-column:span 4!important}
+ body.nf-corp.nf-home #now .runways>.runway:nth-child(7),body.nf-corp.nf-home #now .runways>.runway:nth-child(8){grid-column:span 6!important}
+ body.nf-corp.nf-home #examples .runways{grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:12px!important}
+ body.nf-corp.nf-home #examples .runways>.runway:nth-child(1){grid-column:span 6!important}
+ body.nf-corp.nf-home #examples .runways>.runway:nth-child(2),body.nf-corp.nf-home #examples .runways>.runway:nth-child(3){grid-column:span 3!important}
+ body.nf-corp.nf-home #examples .runways>.runway:nth-child(4),body.nf-corp.nf-home #examples .runways>.runway:nth-child(5){grid-column:span 6!important}
+ body.nf-corp.nf-home #app .teach{grid-template-columns:minmax(0,1.37fr) minmax(0,1fr)!important;gap:18px!important}
+ body.nf-corp.nf-home #app .teach figure:first-child{grid-row:span 2!important}
+ body.nf-corp.nf-home #app .teach figure:first-child img{height:495px!important}
+ body.nf-corp.nf-home #app .teach figure:not(:first-child) img{height:180px!important}
+}
+body.nf-corp.nf-home #now .runway{position:relative!important;overflow:hidden!important;background:#fff!important;border:1px solid #d1d6d0!important;border-radius:2px!important;padding:28px!important}
+body.nf-corp.nf-home #now .runway:first-child{background:linear-gradient(145deg,#1b2e35,#0b1b24)!important;border-color:#21343b!important}
+body.nf-corp.nf-home #now .runway:first-child:before{content:"N";position:absolute;right:22px;bottom:-72px;color:#c59e72;opacity:.09;font:italic 800 290px/.8 Inter,sans-serif;letter-spacing:-.16em;pointer-events:none}
+body.nf-corp.nf-home #now .runway:first-child .runway__head{color:#c7a37a!important}
+body.nf-corp.nf-home #now .runway:first-child h3{color:#f4f4f0!important;position:relative;z-index:1}
+body.nf-corp.nf-home #now .runway:first-child p{color:#bdcbcc!important;position:relative;z-index:1}
+body.nf-corp.nf-home #now .runway:nth-child(3){background:#e4e8e3!important}
+body.nf-corp.nf-home #now .runway:nth-child(8){background:#e9e8e0!important}
+body.nf-corp.nf-home #runways .runway:first-child{background:linear-gradient(145deg,#17333b,#0b212b)!important;border-color:#213c43!important}
+body.nf-corp.nf-home #runways .runway:first-child .runway__head{color:#d0a477!important}
+body.nf-corp.nf-home #runways .runway:first-child h3{color:#f2f5f3!important}
+body.nf-corp.nf-home #runways .runway:first-child p{color:#becdcf!important}
+body.nf-corp.nf-home #examples .runway:first-child{background:linear-gradient(148deg,#203940,#11232c)!important;border-color:#2d4549!important}
+body.nf-corp.nf-home #examples .runway:first-child .runway__head{color:#d5ad82!important}
+body.nf-corp.nf-home #examples .runway:first-child h3{color:#fff!important}
+body.nf-corp.nf-home #examples .runway:first-child p{color:#c0d2d1!important}
+body.nf-corp.nf-home #product .surface{border-radius:3px!important;position:relative;overflow:hidden}
+body.nf-corp.nf-home #product .surface:before{display:block;content:"01";font:600 11px "DM Mono",monospace;letter-spacing:.12em;color:#d2aa7b;margin-bottom:46px}
+body.nf-corp.nf-home #product .surface:nth-child(2):before{content:"02"}
+body.nf-corp.nf-home #product .surface:nth-child(3):before{content:"03"}
+body.nf-corp.nf-home #product .surface:nth-child(4):before{content:"04"}
+body.nf-corp.nf-home #receipt .receipt{border-radius:3px!important;box-shadow:0 20px 70px rgba(0,0,0,.2)}
+body.nf-corp.nf-home #walkthrough .chain{border-radius:3px!important}
+body.nf-corp.nf-home #engage .path{border-radius:3px!important}
+@media(max-width:1099px){
+ body.nf-corp.nf-home #now .runways,body.nf-corp.nf-home #examples .runways{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.nf-corp.nf-home #now .runway,body.nf-corp.nf-home #examples .runway{grid-column:auto!important}
+}
+@media(max-width:620px){
+ body.nf-corp.nf-home #now .runways,body.nf-corp.nf-home #examples .runways,body.nf-corp.nf-home #app .teach{grid-template-columns:1fr!important}
+ body.nf-corp.nf-home #now .runway,body.nf-corp.nf-home #examples .runway{grid-column:auto!important}
+ body.nf-corp.nf-home #app .teach figure:first-child{grid-row:auto!important}
+ body.nf-corp.nf-home #app .teach figure:first-child img{height:230px!important}
+}
