@@ -129,8 +129,8 @@
   ],
   "metadata_overrides": {
     "/": {
-      "title": "Noetfield Systems | Agentic Business Infrastructure & RWA",
-      "description": "Noetfield builds the next generation of intelligent businesses: real people and commercial operations, agentic engineering, independent verification and real-world value infrastructure.",
+      "title": "Noetfield | AI Software & Business Automation",
+      "description": "Build software with AI, automate business workflows, and explore digital asset technology and real-world capital services with Noetfield Systems.",
       "skip_webpage_json_ld": true,
       "author_name": "Noetfield Systems Inc.",
       "author_url": "https://www.noetfield.com/about/",
@@ -272,8 +272,8 @@
       "description": "Start a non-confidential intake for a governed AI pilot, Trust Brief or institutional workflow assessment."
     },
     "/runways/": {
-      "title": "Noetfield Runways — Governed qualification paths",
-      "description": "Governed qualification paths from goal to accepted output—or a documented safe stop. Three public runways: Governed Software Change, Decision Brief, and Institutional Workflow Commissioning."
+      "title": "AI Workflows & Automation — Noetfield",
+      "description": "Explore AI-assisted workflows for software changes, research briefs, and business tasks with clear inputs, results and execution evidence."
     },
     "/gel/": {
       "title": "Specialized lane — GEL — Noetfield",
@@ -351,6 +351,14 @@
     "/research-trader/": {
       "title": "Research Trader — Noetfield Systems",
       "description": "A public agent that screens a crypto watchlist once a day and publishes every rejection with its reasons. Research only; it places no orders and holds no money. The model is consulted rarely, capped, and is never the component that decides."
+    },
+    "/company-os/": {
+      "title": "AI Business Operations & Automation | Noetfield",
+      "description": "Connect AI agents, customer support, sales and business workflows to existing software. Explore scoped Company OS services from Noetfield."
+    },
+    "/onchain/rwa/": {
+      "title": "Tokenization Readiness & Private-Credit Technology | Noetfield",
+      "description": "Assess real-world assets and private-credit workflows before building tokenization and digital asset infrastructure. Clear technical services and evidence."
     }
   },
   "source_sync_routes": [
