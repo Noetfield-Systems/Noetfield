@@ -1,40 +1,39 @@
 ---
 lane: buyer
 public: true
-source_path: pricing/index.html
-source_url: https://www.noetfield.com/pricing/
-updated: 2026-11-06T00:00:00Z
+source_path: real-world-capital/index.html
+source_url: https://www.noetfield.com/real-world-capital/
+updated: 2026-11-16T00:00:00Z
 ---
 
 # Noetfield public pricing and checkout matrix
 
-## Regulated institution contract path
+## Current specific commercial entry points
 
-| Offer | Current public price reference | Purchase route |
+| Offer | Published reference | Engagement route |
 |---|---|---|
-| Copilot Governance Pack Starter | US$2,000 one-time Stripe checkout | /gate/sales/ |
-| Copilot Governance Pack Readiness Pilot | CAD $2,000–$10,000 planning band; final scope/price by SOW | /copilot/pilot/ and intake |
-| Trust Brief | US$10,000 one-time Stripe checkout | /gate/sales/ |
-| Bank Pilot | Custom | /bank-pilot/ and intake |
+| Company OS — AI Sales OS pilot | CAD $750 setup for one scoped lead-to-follow-up workflow after written scope | /company-os/ |
+| Real-World Capital — RWA technical sprint | US$950 pilot scope, US$475 deposit after accepted written scope | /real-world-capital/ |
+| AI Software Builder | Current app access; no universal subscription price confirmed here | app.noetfield.com |
+| Custom automation or asset engineering | Scope-based proposal | /connect/ |
 
-The public site contains a CAD planning estimator for broader scope. It is not the same object as the USD self-serve Payment Links. Confirm final scope and currency in the signed SOW.
+The RWA Stripe deposit link is only for a written, approved project scope. Do not imply a direct subscription or automatic order from a simple inquiry.
 
-## Noetfield Intelligence — SME planning prices
+## Specialized governance price references
 
-The public pricing page also displays the following planning prices for service inquiries:
+| Offer | Published specialized reference | Route |
+|---|---|---|
+| Copilot Governance Pack Starter | US$2,000 one-time reference | /gate/sales/ |
+| Copilot Governance Pack Readiness Pilot | CAD $2,000–$10,000 scope band by SOW | /copilot/pilot/ |
+| Trust Brief | US$10,000 one-time reference | /gate/sales/ |
+| Bank Pilot | Custom | /bank-pilot/ |
 
-- Diagnostic Sprint: CAD $2,500–$5,000.
-- Automation Build: from CAD $8,000.
-- AI Ops Partner: CAD $3,000/month.
-- Vertical SaaS: CAD $99–$499/month only after repeat same-vertical delivery validation.
+These are specialized service references; verify the active checkout, final taxes and agreed scope before quoting. Do not present their pricing as a universal software subscription.
 
-These are public pricing references, not Stripe self-serve checkout products.
+## Other historical planning prices (not current checkout guarantees)
 
-## Developer access
+Past SME planning examples include Diagnostic Sprint CAD $2,500–$5,000, Automation Build from CAD $8,000, AI Ops Partner CAD $3,000/month, and hypothetical future vertical SaaS CAD $99–$499/month. These are estimates, not contracted service commitments.
 
-- Free sandbox: 14 days, 50 evaluate calls, mock M365 connectors, observe mode.
-- Free sandbox is product access, not a fourth contract SKU.
+## Rules
 
-## Sales rule
-
-Do not invent discounts, taxes, currency conversion, subscription entitlements, or custom scope. Use intake and a written SOW for anything outside the two published Stripe checkouts.
+No invented discounts, pricing, currency conversion, subscription entitlements, deposits, customer revenue or project completion. Corporate and community entry are wallet-free; individual product access and paid offers retain their own terms.
