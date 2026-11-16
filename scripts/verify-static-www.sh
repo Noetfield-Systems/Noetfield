@@ -109,7 +109,7 @@ check_file "verification commercial intake is real and scoped" assurance/index.h
 check_file "customer offer links are safely routed" assets/noetfield-connect-v3.js \
   '"verification-pilot"' '"software-build"' '"rwa-sprint"' 'sourceContext.value="Offered service: "'
 check_file "corporate software-project conversion" index.html \
-  'REQUEST A SOFTWARE BUILD' 'offer=software-build' 'Noetfield Runtime'
+  'REQUEST A SOFTWARE BUILD' 'offer=software-build' 'AI Workflow Automation'
 
 check_absent "protected homepage has no stale TrustField product framing" index.html \
   'validation vertical' 'developed and operated by Noetfield Systems Inc.' 'LIVE PRODUCT' 'SourceB' \
