@@ -97,7 +97,7 @@ a{color:#215f54}.inline-link{font-size:11px}
   <div class="eyebrow">Noetfield Systems / Private Operations</div>
   <h1>Corporate relationships. Real outcomes.</h1>
   <p>Your private workspace for enterprise buyers, asset originators, commercial partners and retained clients. This is separate from Fieldwork's Web3 network.</p>
-  <form id="login"><label>Existing Noetfield operator key<input id="operator" type="password" autocomplete="off" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember" checked>Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
+  <form id="login"><label>Existing Noetfield operator key<input id="operator" type="password" autocomplete="off" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember">Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
   <p class="notice" id="login-error" role="alert"></p>
  </div>
 </div>
@@ -119,7 +119,7 @@ a{color:#215f54}.inline-link{font-size:11px}
    <div class="metric"><small>Active opportunities</small><strong id="metric-open">—</strong></div>
    <div class="metric"><small>Follow-ups due</small><strong class="copper" id="metric-due">—</strong></div>
    <div class="metric"><small>Companies in network</small><strong id="metric-accounts">—</strong></div>
-   <div class="metric"><small>Verified paid · CAD / USD</small><strong class="sage" style="font-size:23px" id="metric-cash">—</strong></div>
+   <div class="metric"><small>Matched paid checkouts · CAD / USD</small><strong class="sage" style="font-size:23px" id="metric-cash">—</strong></div>
   </section>
   <section id="data-view" class="workspace">
    <div class="panel">
@@ -235,7 +235,7 @@ function metrics(){
  const m=state.board.metrics||{};
  $("#metric-open").textContent=m.open??0;
  $("#metric-due").textContent=m.due??0;
- $("#metric-accounts").textContent=state.board.accounts.length;
+ $("#metric-accounts").textContent=m.total_accounts??state.board.accounts.length;
  const paid=m.paid_verified_by_currency_minor||{};
  const labels=Object.entries(paid).map(([c,n])=>money(n,c));
  $("#metric-cash").textContent=labels.length?labels.join(" / "):"$0 verified";
@@ -257,7 +257,7 @@ function drawList(){
  if(state.view==="people")rows=state.board.people.map(p=>({title:p.full_name,subtitle:p.role,small:p.email,extra:p.account_id}));
  else rows=state.board.accounts.filter(a=>state.view!=="partners"||["referral_partner","delivery_partner","capital_partner","advisor"].includes(a.kind)).map(a=>({title:a.name,subtitle:a.kind.replaceAll("_"," "),small:a.sector.replaceAll("_"," "),extra:a.owner}));
  const term=$("#search").value.trim().toLowerCase();rows=rows.filter(r=>(r.title+" "+r.subtitle+" "+r.small).toLowerCase().includes(term));
- $("#records-label").textContent=rows.length+" verified source records / operator-provided";
+ $("#records-label").textContent=rows.length+" corporate records · source evidence varies";
  html='<div class="records">'+(rows.length?rows.map(r=>'<article class="record"><strong>'+esc(r.title)+'</strong><small>'+esc(r.subtitle)+' · '+esc(r.small)+'</small><p>'+esc(r.extra)+'</p></article>').join(""):'<p class="empty">No records found.</p>')+'</div>';
  }
  els.list.innerHTML=html;
