@@ -2603,6 +2603,36 @@ async def corporate_crm_add_activity(
         raise HTTPException(status_code=422,detail=str(exc)) from exc
 
 
+# Connect a Corporate CRM opportunity to the existing live Stripe / accepted
+# scope lifecycle, not a new billing engine. Same scoped desk session and CSRF.
+class CorporateCommercialStep(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    action: Literal["open","scope","reconcile_payment","start_delivery","deliver","close"]
+    expected_revision: int | None = Field(default=None,ge=0)
+    scope_ref: str = Field(default="",max_length=101)
+    acceptance_evidence: str = Field(default="",max_length=1200)
+    session_id: str = Field(default="",max_length=140)
+    payer_authorization_url: str = Field(default="",max_length=1200)
+    delivery_evidence: str = Field(default="",max_length=1200)
+    acceptance_url: str = Field(default="",max_length=1200)
+    next_action: str = Field(default="",max_length=350)
+
+
+@app.post("/api/corporate-crm/deals/{deal_id}/commercial",
+          tags=["operations"], include_in_schema=False)
+async def corporate_crm_commercial_step(
+    deal_id: str, body: CorporateCommercialStep, request: Request,
+) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import (
+        CorporateCRMError, commercial_step,
+    )
+    _require_connect_desk_operator(request)
+    try:
+        return await commercial_step(settings, deal_id=deal_id, **body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+
+
 # Internal commercial revenue operations: source-linked state, not a second
 # CRM, checkout implementation, or auto-fulfillment process.
 class CommercialCaseCommand(BaseModel):
