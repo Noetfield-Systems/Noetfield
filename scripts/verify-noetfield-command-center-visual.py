@@ -26,7 +26,10 @@ try:
             assert response.status==200,response.status
             page.locator(".nf-v3-live-image").wait_for()
             title=page.locator("h1#hero-title").inner_text()
-            assert "build software" in title.lower() and "automate your work" in title.lower(),title
+            assert "intelligence" in title.lower() and "made real" in title.lower(),title
+            lead=page.locator(".nf-v3-hero .nf-ins-lead").inner_text()
+            assert "build software." in lead.lower() and "automate your work." in lead.lower(),lead
+            assert page.locator("#choose-your-path .nf-next-card-art").count()==3
             assert page.locator("h1").count()==1
             paths=page.locator("#choose-your-path a.nf-ins-path-card")
             capabilities=page.locator("#command-capabilities a.nf-ins-platform-item")
