@@ -34,12 +34,13 @@ REQUIRED_REMOVAL_FIELDS = (
     "removed_at",
 )
 PRIMARY_NAV_LABELS = (
-    ">Product<",
-    ">Workflows<",
-    ">Assurance<",
+    ">Build Software<",
+    ">AI Workflows<",
+    ">Results &amp; Verification<",
+    ">Free Business Tools<",
     ">Developers<",
     ">TrustField<",
-    ">Proof<",
+    ">Evidence<",
     ">Company<",
 )
 
