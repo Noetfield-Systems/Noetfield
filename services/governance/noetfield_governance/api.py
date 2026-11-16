@@ -2415,6 +2415,57 @@ async def sandbox_export_board_pdf(request: Request) -> Response:
     )
 
 
+# Internal commercial revenue operations: source-linked state, not a second
+# CRM, checkout implementation, or auto-fulfillment process.
+class CommercialCaseCommand(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    intake_id: str = Field(pattern=r"^INT-[A-Z0-9]{12}$")
+    action: Literal["open", "scope", "reconcile_payment", "start_delivery", "deliver", "close"]
+    expected_revision: int | None = Field(default=None, ge=0)
+    offer: str = Field(default="", max_length=64)
+    owner: str = Field(default="", max_length=120)
+    next_action: str = Field(default="", max_length=350)
+    due_date: str = Field(default="", max_length=10)
+    scope_ref: str = Field(default="", max_length=101)
+    acceptance_evidence: str = Field(default="", max_length=1200)
+    payment_link_id: str = Field(default="", max_length=140)
+    session_id: str = Field(default="", max_length=140)
+    payer_authorization_url: str = Field(default="", max_length=1200)
+    delivery_evidence: str = Field(default="", max_length=1200)
+    acceptance_url: str = Field(default="", max_length=1200)
+
+
+@app.post("/api/operations/commercial/cases", tags=["operations"], include_in_schema=False)
+async def commercial_case_command(body: CommercialCaseCommand, request: Request) -> dict[str, object]:
+    """Existing operator secret + canonical intake -> offer -> money -> delivery."""
+    from noetfield_governance.commercial_pipeline import CommercialError, operate
+
+    _require_admin_secret(request)
+    try:
+        return await operate(settings, intake_id=body.intake_id, action=body.action,
+            expected_revision=body.expected_revision, offer=body.offer,
+            owner=body.owner, next_action=body.next_action, due_date=body.due_date,
+            scope_ref=body.scope_ref, acceptance_evidence=body.acceptance_evidence,
+            payment_link_id=body.payment_link_id, session_id=body.session_id,
+            payer_authorization_url=body.payer_authorization_url,
+            delivery_evidence=body.delivery_evidence, acceptance_url=body.acceptance_url)
+    except CommercialError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+
+
+@app.get("/api/operations/commercial/funnel", tags=["operations"], include_in_schema=False)
+async def commercial_case_funnel(request: Request, limit: int = 50) -> dict[str, object]:
+    """PII-free owner, next action, paid evidence and delivery readback."""
+    from noetfield_governance.commercial_pipeline import CommercialError, readback
+
+    _require_admin_secret(request)
+    try:
+        return await readback(settings, limit=limit)
+    except CommercialError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+
 @app.post("/api/stripe/webhook", tags=["stripe"], include_in_schema=False)
 async def stripe_commercial_webhook(request: Request) -> dict[str, object]:
     """Stripe checkout.session.completed — notify operations@ (commercial licensing only)."""
