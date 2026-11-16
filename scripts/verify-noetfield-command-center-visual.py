@@ -103,9 +103,30 @@ try:
             assert not errors,errors
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
             if name=="desktop-1440":
-                # Browser full-page capture does not trigger offscreen lazy images.
-                # Force the three real app screenshots to load, assert natural pixels.
-                page.locator("#app .teach img").evaluate_all("els=>els.forEach(el=>el.loading='eager')")
+                # A full-page screenshot can miss off-screen deferred image painting.
+                # Explicitly scroll the real product cards into view and photograph
+                # their actual paint outcome, not only img.complete/naturalWidth.
+                photo_cards=page.locator("#choose-your-path a.nf-ins-path-card > img")
+                photo_cards.evaluate_all("""els=>els.forEach(im=>{im.loading='eager';im.decoding='sync'})""")
+                page.locator("#choose-your-path").scroll_into_view_if_needed()
+                page.wait_for_function("""() => Array.from(document.querySelectorAll('#choose-your-path a.nf-ins-path-card > img')).every(im=>im.complete && im.naturalWidth>250)""",timeout=20000)
+                media_styles=photo_cards.evaluate_all("""els=>els.map(el=>({
+                  src:el.getAttribute('src'),naturalWidth:el.naturalWidth,
+                  display:getComputedStyle(el).display,opacity:getComputedStyle(el).opacity,
+                  visibility:getComputedStyle(el).visibility,
+                  mixBlendMode:getComputedStyle(el).mixBlendMode,
+                  zIndex:getComputedStyle(el).zIndex,
+                  bounding:el.getBoundingClientRect().toJSON()
+                }))""")
+                print("CORPORATE_DOCUMENTARY_IMAGE_PAINT="+json.dumps(media_styles),flush=True)
+                assert all(z["display"]!="none" and z["opacity"]=="1" and z["visibility"]=="visible" for z in media_styles),media_styles
+                page.screenshot(path=str(OUT/"product-paths-1440.png"),full_page=False,animations="disabled")
+                # Also bring the photographed middle chapter into the viewport.
+                page.locator(".nf-v5-film-band").scroll_into_view_if_needed()
+                page.locator(".nf-v5-film-band img").evaluate("im=>im.loading='eager'")
+                page.screenshot(path=str(OUT/"engineering-panorama-1440.png"),full_page=False,animations="disabled")
+                # Force all authentic app screenshots, then capture the entire page.
+                page.locator("#app .teach img").evaluate_all("els=>els.forEach(im=>im.loading='eager')")
                 page.wait_for_function("""() => Array.from(document.querySelectorAll('#app .teach img')).every(im=>im.complete && im.naturalWidth>200)""",timeout=20000)
                 page.screenshot(path=str(OUT/"desktop-full-page.png"),full_page=True,animations="disabled")
             results.append(dict(viewport=name,document=dimensions,hero=hero_box,images=image_results,paths=paths.count(),capabilities=capabilities.count(),jsErrors=errors,ok=True))
