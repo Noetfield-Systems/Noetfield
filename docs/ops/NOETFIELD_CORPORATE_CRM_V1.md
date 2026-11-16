@@ -71,6 +71,13 @@ Other venture `initiative` values and synthetic/E2E records are excluded from in
 - New partner introductions must be sourced, recorded and legally agreed before compensation.
 - A failed read of the database produces an error, not fake empty successes.
 
+
+## Production database bootstrap
+
+The connected Railway Platform API service sets `NOETFIELD_CORPORATE_CRM_BOOTSTRAP_ENABLED=1` with `skipDeploys` until this code is merged. On application startup, the server initializes the dedicated `corp_crm_*` tables in the existing Postgres namespace and reads back counts. Only non-identifying totals are logged as `noetfield_corporate_crm_schema=READY`. Errors emit `schema=FAILED`, while other Platform APIs remain available.
+
+The separate private `GET /api/corporate-crm/health` endpoint reports `database_ready` and `fieldwork_data_shared=false` to an authenticated operator. A public `/health` 200 is **not** by itself evidence of CRM database readiness.
+
 ## Measurable business experiment
 
 Use the existing two bounded commercial offers concurrently:

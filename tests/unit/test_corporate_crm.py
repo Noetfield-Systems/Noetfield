@@ -219,3 +219,28 @@ def test_corporate_crm_console_has_source_based_paid_flow_not_fake_cash():
     assert "Approved-scope Stripe payment link" in html
     assert "No automatic outreach or billing" in html
     assert 'id="remember">' in html and 'id="remember" checked' not in html
+
+
+def test_corporate_readiness_is_operator_only_and_never_claims_fake_data():
+    async def run():
+        async with AsyncClient(transport=ASGITransport(app=app),base_url="http://test") as client:
+            denied=await client.get("/api/corporate-crm/health")
+        assert denied.status_code in (403,503)
+        with patch("noetfield_governance.api._require_connect_desk_operator",return_value=None):
+            async with AsyncClient(transport=ASGITransport(app=app),base_url="http://test") as client:
+                response=await client.get("/api/corporate-crm/health")
+        assert response.status_code==200
+        assert response.json()["workspace"]=="NOETFIELD_CORPORATE_ONLY"
+        assert response.json()["fieldwork_data_shared"] is False
+        assert isinstance(response.json()["database_ready"],bool)
+        assert "accounts" not in response.text and "email" not in response.text
+    asyncio.run(run())
+
+
+def test_corporate_bootstrap_disabled_in_tests_never_connects_to_database(monkeypatch):
+    from noetfield_governance.api import _bootstrap_corporate_crm
+    monkeypatch.delenv("NOETFIELD_CORPORATE_CRM_BOOTSTRAP_ENABLED",raising=False)
+    with patch("asyncpg.connect",new_callable=AsyncMock) as connection:
+        asyncio.run(_bootstrap_corporate_crm())
+        assert not connection.await_count
+        assert app.state.corporate_crm_ready is False
