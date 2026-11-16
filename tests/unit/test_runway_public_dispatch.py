@@ -34,8 +34,9 @@ def test_runways_page_exposes_dual_cta_paths() -> None:
     text = (ROOT / "runways" / "index.html").read_text(encoding="utf-8")
     assert 'href="/contact/?topic=technical-collaboration"' in text
     assert 'href="/runways/decision-brief/"' in text
-    assert "Governed Software Change" in text
-    assert "Institutional Workflow Commissioning" in text
+    assert "AI-Assisted Software Changes" in text
+    assert "Business Workflow Automation" in text
+    assert "Governed Software Change" in text  # Existing evidence link remains
     assert 'href="/contact/?topic=enterprise-governance"' not in text
     assert 'id="rw-dispatch-btn"' not in text
 

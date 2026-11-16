@@ -38,7 +38,7 @@ check_absent() {
 
 # NOETFIELD_DOMAIN_CANONICAL_V2 protected corporate surfaces.
 check_file "protected corporate homepage" index.html \
-  '<title>Noetfield Systems | Agentic Business Infrastructure & RWA</title>' \
+  '<title>Noetfield | AI Software & Business Automation</title>' \
   '<link rel="canonical" href="https://www.noetfield.com/" />' \
   '<body class="nf-corp nf-home">' '<main id="main">' \
   '/assets/noetfield-corporate-v1.css?v=5' \
@@ -65,6 +65,30 @@ check_file "protected corporate homepage" index.html \
   'href="/motors/"' 'href="/assurance/"' 'href="/applications/trustfield/"' \
   'https://app.noetfield.com/' \
   '/assets/noetfield-home-v2.css'
+# P0 customer-facing language: three buying paths and wallet-free community intake.
+check_file "market-language homepage and primary navigation" index.html \
+  'Build software.' 'Automate your work.' 'With AI.' \
+  'Build Software with AI' 'Automate Your Business' \
+  'Real-World Assets &amp; Digital Capital' \
+  'href="/community/"' 'Explore AI Software Builder' \
+  'Join Early Access' 'AI Business Operations' 'Digital Asset Services'
+check_file "market-language early access: real intake" community/index.html \
+  'href="https://app.noetfield.com/"' \
+  'href="/company-os/"' 'href="/real-world-capital/"' \
+  'name="consent" type="checkbox" required' \
+  'data-nf-intake-form' 'data-intake-vector="founding-community"' \
+  '/assets/noetfield-intake-core.js?v=42' \
+  '/assets/noetfield-forms.js?v=42' \
+  'Free to join' 'Sign up with email' 'Choose your interests' \
+  'Share your interests with Noetfield' \
+  'href="/privacy/"'
+check_absent "no fictional community conversions" community/index.html \
+  'free guaranteed airdrop' 'guaranteed token allocation' \
+  'already joined thousands' 'instant account creation'
+check_absent "early access does not foreground negative claims" community/index.html \
+  'No guaranteed invitation or token' 'No external customers' \
+  'No wallet connection, payment or token allocation.'
+
 # Wave 1: Real-World Capital must be a usable buyer entry, not another deck.
 # Deposit is scope-approved only; the free enquiry must persist via the shared intake.
 check_file "Real-World Capital customer journey" real-world-capital/index.html \
@@ -89,7 +113,7 @@ check_file "verification commercial intake is real and scoped" assurance/index.h
 check_file "customer offer links are safely routed" assets/noetfield-connect-v3.js \
   '"verification-pilot"' '"software-build"' '"rwa-sprint"' 'sourceContext.value="Offered service: "'
 check_file "corporate software-project conversion" index.html \
-  'REQUEST A SOFTWARE BUILD' 'offer=software-build' 'Noetfield Runtime'
+  'REQUEST A SOFTWARE BUILD' 'offer=software-build' 'AI Workflow Automation'
 
 check_absent "protected homepage has no stale TrustField product framing" index.html \
   'validation vertical' 'developed and operated by Noetfield Systems Inc.' 'LIVE PRODUCT' 'SourceB' \

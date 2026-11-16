@@ -15,7 +15,9 @@
       "required_text": [
         "From ambitious ideas to real, editable software.",
         "Make your next move operational.",
-        "The Noetfield Execution Platform"
+        "Build software.",
+        "Automate your work.",
+        "What would you like to do?"
       ],
       "required_links": [
         "/system/",
@@ -25,7 +27,9 @@
         "/about/",
         "/trust/",
         "/privacy/",
-        "/connect/"
+        "/connect/",
+        "/real-world-capital/",
+        "/community/"
       ],
       "forbidden_text": [
         "Invest in Noetfield",
@@ -116,5 +120,5 @@
       ]
     }
   },
-  "contract_revision": "2026-11-16-buyer-first-public-copy"
+  "contract_revision": "2026-11-16-buyer-first-market-language"
 }

@@ -226,11 +226,12 @@ def test_runways_page_is_honest_product_surface() -> None:
     text = read(ROOT / "runways" / "index.html")
     assert '<nav class="nf-corp-nav" aria-label="Primary navigation">' in text
     assert 'class="nf-corp-footer"' in text
-    assert "Governed qualification paths" in text
-    assert "Three public runways" in text or "Public runways" in text
-    assert "Governed Software Change" in text
-    assert "Decision Brief" in text
-    assert "Institutional Workflow Commissioning" in text
+    assert "AI Workflows & Automation" in text
+    assert "Available workflow examples" in text
+    assert "AI-Assisted Software Changes" in text
+    assert "AI Research &amp; Decision Briefs" in text
+    assert "Business Workflow Automation" in text
+    assert "Governed Software Change" in text  # Technical evidence example remains traceable
     for planned_name in ("Trading Performance", "Video Qualify"):
         if planned_name in text:
             idx = text.index(planned_name)

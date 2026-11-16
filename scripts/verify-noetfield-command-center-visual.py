@@ -26,7 +26,7 @@ try:
             assert response.status==200,response.status
             page.locator(".nf-v3-live-image").wait_for()
             title=page.locator("h1#hero-title").inner_text()
-            assert "engineering" in title.lower() and "economy" in title.lower(),title
+            assert "build software" in title.lower() and "automate your work" in title.lower(),title
             assert page.locator("h1").count()==1
             paths=page.locator("#choose-your-path a.nf-ins-path-card")
             capabilities=page.locator("#command-capabilities a.nf-ins-platform-item")
@@ -69,8 +69,8 @@ try:
                 page.keyboard.press("Escape")
                 assert page.locator(".nf-corp-nav").get_attribute("data-open")=="false"
             links=paths.evaluate_all("els=>els.map(a=>a.getAttribute('href'))")
-            assert links==["/connect/","/company-os/","/real-world-capital/"],links
-            assert page.locator(".nf-ins-button--primary").get_attribute("href")=="/real-world-capital/"
+            assert links==["https://app.noetfield.com/","/company-os/","/real-world-capital/"],links
+            assert page.locator(".nf-ins-button--primary").get_attribute("href")=="https://app.noetfield.com/"
             assert page.locator("a[href='/demo/complete-run/']").count()>0
             assert not errors,errors
             page.screenshot(path=str(OUT/f"{name}.png"),full_page=False,animations="disabled")
@@ -147,6 +147,41 @@ try:
             pcap.locator(".nf-intake-async-status--ok").wait_for(timeout=10000)
             assert not errs,errs
             pcap.close()
+        # Founding community: practical no-wallet product entry. QA uses
+        # synthetic fixture responses; it never records or emails a real lead.
+        for width,height in [(1440,900),(390,844)]:
+            comm=browser.new_page(viewport={"width":width,"height":height},device_scale_factor=1)
+            comm.route("**/api/intake",lambda route:route.fulfill(
+                status=200,content_type="application/json",
+                body='{"intake_id":"fixture-community-only","request_id":"qa-community","intake_persisted":true}'
+            ))
+            comm.route("**/api/intake/health",lambda route:route.fulfill(
+                status=200,content_type="application/json",body='{"enabled":true}'
+            ))
+            comm_errors=[]
+            comm.on("pageerror",lambda e:comm_errors.append(str(e)))
+            response=comm.goto("http://127.0.0.1:8979/community/",wait_until="networkidle",timeout=35000)
+            assert response.status==200,response.status
+            assert comm.locator("h1").count()==1
+            assert comm.locator("h1").inner_text().startswith("Get in early")
+            assert comm.locator(".cards .card").count()==3
+            assert comm.locator("a[href='https://app.noetfield.com/']").count()>0
+            assert comm.locator("#nfCommunityIntake").get_attribute("data-intake-vector")=="founding-community"
+            assert comm.locator("#nfCommunityIntake input[name='consent']").is_visible()
+            assert comm.evaluate("document.documentElement.scrollWidth<=innerWidth+2"),width
+            comm.screenshot(path=str(OUT/f"community-{width}.png"),full_page=(width==1440),animations="disabled")
+            comm.locator("#nfCommunityIntake input[name='email']").fill("fixture@example.org")
+            comm.locator("#nfCommunityIntake select[name='topic']").select_option("early-access-ai-software")
+            comm.locator("#nfCommunityIntake input[name='consent']").check()
+            with comm.expect_request("**/api/intake") as req:
+                comm.locator("#nfCommunityIntake button[type='submit']").click()
+            submitted=req.value.post_data_json
+            assert submitted["contact_email"]=="fixture@example.org",submitted
+            assert submitted["vector"]=="founding-community",submitted
+            assert submitted["metadata"]["topic"]=="early-access-ai-software",submitted
+            comm.locator(".nf-intake-async-status--ok").wait_for(timeout=10000)
+            assert not comm_errors,comm_errors
+            comm.close()
         browser.close()
 finally:
     server.terminate()
