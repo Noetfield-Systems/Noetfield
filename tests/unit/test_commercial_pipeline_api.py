@@ -25,7 +25,7 @@ def test_commercial_routes_not_public():
 
 def test_authorized_commercial_operator_updates_only_source_case():
     async def run():
-        with patch("noetfield_governance.api._require_admin_secret",return_value=None),patch(
+        with patch("noetfield_governance.api._require_connect_desk_operator",return_value=None),patch(
             "noetfield_governance.commercial_pipeline.operate",
             new_callable=AsyncMock,return_value={
                 "intake_id":"INT-ABCDEF123456","offer":"rwa_technical_sprint",
@@ -47,7 +47,7 @@ def test_authorized_commercial_operator_updates_only_source_case():
 
 def test_commercial_operator_funnel_no_contact_pii():
     async def run():
-        with patch("noetfield_governance.api._require_admin_secret",return_value=None),patch(
+        with patch("noetfield_governance.api._require_connect_desk_operator",return_value=None),patch(
             "noetfield_governance.commercial_pipeline.readback",
             new_callable=AsyncMock,return_value={
                 "schema":"noetfield.commercial-funnel.v1",

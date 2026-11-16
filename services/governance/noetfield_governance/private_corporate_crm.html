@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#102827">
+<title>Corporate CRM · Noetfield Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{font-family:"DM Sans",system-ui,sans-serif;color:#1c312f;background:#f3f3ed;font-size:13px;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #86a98a;outline-offset:3px}
+.app{display:grid;grid-template-columns:234px minmax(0,1fr);min-height:100vh}
+.side{background:#102c2b;color:#e9e6db;padding:28px 18px;display:flex;flex-direction:column;gap:33px;min-height:100vh}
+.wordmark{display:flex;align-items:center;gap:12px;padding:0 13px}
+.mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid #c2b590;color:#d2c39b;font-family:Georgia,serif;font-size:23px}
+.wordmark strong{font-size:14px;letter-spacing:-.4px;font-weight:600}
+.wordmark small{display:block;text-transform:uppercase;letter-spacing:.13em;font-size:9px;color:#9faea9;margin-top:4px}
+.rail-label{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#7fa09a;padding:0 13px;margin:0 0 10px}
+.nav{display:grid;gap:5px}
+.nav button{display:flex;justify-content:space-between;align-items:center;border:0;background:transparent;color:#b9c8c2;text-align:left;padding:13px 15px;border-radius:6px;font-weight:500}
+.nav button:hover,.nav button[aria-current="page"]{background:#294640;color:white}
+.nav button span{font-size:11px;color:#cbb889}
+.side-note{margin-top:auto;border-top:1px solid #35514a;padding:20px 14px 0;color:#a9bcb5;font-size:12px;line-height:1.65}
+.side-note a{color:#e3d4ad}.main{min-width:0;padding:0 clamp(22px,3.1vw,56px) 70px}
+.topbar{height:75px;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #d8ded5}
+.breadcrumb{color:#829087;font-size:11px;letter-spacing:.04em}.breadcrumb b{color:#2a4540;font-weight:600}
+.top-actions{display:flex;align-items:center;gap:12px}.status{font-size:11px;color:#527363}
+.dot{display:inline-block;width:7px;height:7px;background:#5f9b77;border-radius:50%;margin-right:7px}
+.ghost{background:transparent;border:1px solid #c6d0c4;color:#36554c;border-radius:5px;padding:10px 15px}
+.primary{background:#224d42;border:1px solid #224d42;color:white;border-radius:5px;padding:11px 17px;font-weight:600}
+.primary:hover{background:#16382f}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:#9c876a}
+.heading{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:45px 0 26px}
+h1{font-family:"Newsreader",Georgia,serif;font-size:clamp(37px,4.3vw,63px);font-weight:400;letter-spacing:-.048em;line-height:1.04;margin:10px 0 9px}
+.heading p{color:#77857b;margin:0;font-size:13px}.heading .primary{align-self:center}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px}
+.metric{background:#fffefb;border:1px solid #dce2d9;padding:24px 23px;min-height:124px}
+.metric small{display:block;color:#7a8980;letter-spacing:.02em;font-size:11px}
+.metric strong{display:block;margin:13px 0 0;font-size:34px;font-family:"Newsreader",Georgia,serif;font-weight:400;line-height:1}
+.metric .copper{color:#946a3c}.metric .sage{color:#3a7862}
+.workspace{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(350px,.93fr);gap:18px;align-items:start}
+.panel{background:#fffefb;border:1px solid #dce2d9;min-width:0}
+.panel-head{padding:20px 22px;border-bottom:1px solid #e8ebe4;display:flex;gap:12px;align-items:center;justify-content:space-between}
+.panel-head h2{margin:0;font:400 25px/1.1 "Newsreader",Georgia,serif}.small{color:#859087;font-size:11px;line-height:1.6}
+.filters{display:flex;flex-wrap:wrap;gap:9px;padding:15px 20px;border-bottom:1px solid #e9ebe6}
+input,select,textarea{background:#fff;border:1px solid #d0d9d0;border-radius:4px;padding:10px 11px;min-width:0;color:#244239}
+input[type="search"]{flex:1 1 180px}.filters select{flex:0 1 145px}
+table{border-collapse:collapse;width:100%;text-align:left}th{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8b978e;background:#f8f9f5}
+th,td{padding:15px 19px;border-bottom:1px solid #e9ece7}td{font-size:12px}
+td b{display:block;font-weight:600;color:#2b3d38}td .muted{display:block;color:#88958c;font-size:11px;margin-top:5px}
+.data-row{cursor:pointer}.data-row:hover,.data-row.selected{background:#f0f4ee}
+.tag{display:inline-block;font-size:10px;border-radius:3px;padding:6px 8px;background:#edf2ee;color:#385f50;letter-spacing:.02em}
+.tag.warm{background:#f6ede1;color:#956b3d}.tag.negative{background:#f7eae7;color:#96604f}
+.empty{padding:35px 24px;color:#718377;font-size:13px;line-height:1.6}
+.detail{padding:24px;display:grid;gap:17px}
+.detail h3{font-family:"Newsreader",Georgia,serif;font-size:29px;font-weight:400;margin:0}
+.detail h4{margin:12px 0 4px;font-size:11px;color:#8e7a5e;text-transform:uppercase;letter-spacing:.12em}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.kv>div{padding:13px;background:#f5f7f1;color:#31463e;min-width:0;overflow-wrap:anywhere}
+.kv small{display:block;color:#88948a;font-size:10px;margin-bottom:7px}
+.detail p{line-height:1.6;color:#61756a;margin:0}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}.fields label{font-size:11px;color:#64756c;display:grid;gap:6px}
+.fields .wide{grid-column:1/-1}
+.fields textarea{min-height:85px;resize:vertical}
+.timeline{padding:0;margin:0;list-style:none;display:grid;gap:10px}
+.timeline li{border-left:2px solid #d8e3d7;padding:4px 0 4px 13px;font-size:12px;color:#52695d}
+.timeline strong{display:block;color:#2a4d3d;margin-bottom:4px}
+a{color:#215f54}.inline-link{font-size:11px}
+.notice{font-size:12px;min-height:20px;color:#9a5e3a;margin:12px 0 0;line-height:1.6}
+.section-form{padding:23px;display:grid;gap:16px}.section-form h2{font:400 30px/1.1 "Newsreader",serif;margin:0}
+.section-form p{color:#77877a;margin:0;line-height:1.6}
+.hidden,[hidden]{display:none!important}
+.auth-stage{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 82% 10%,#244e42,transparent 48%),#102c2b;padding:25px}
+.auth-box{width:min(490px,100%);background:#fffdf6;padding:42px;border:1px solid #e2ded0}
+.auth-box h1{font-size:48px}.auth-box p{color:#61736c;line-height:1.7}
+.auth-box label{display:grid;gap:8px;color:#3f584d;font-size:12px;margin:22px 0 14px}
+.auth-box input{width:100%;padding:14px}
+.remember{display:flex;align-items:center;gap:10px;margin:0 0 20px;color:#567365}
+.remember input{width:17px;height:17px}.auth-box button{width:100%;padding:14px}
+.view-panels{display:grid;gap:18px}.records{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;padding:20px}
+.record{border:1px solid #e2e8de;padding:20px;background:#fff;min-height:120px}
+.record strong{display:block;font-size:16px;margin-bottom:8px}.record small{color:#819185;line-height:1.6}
+.record p{color:#5f7469;line-height:1.7;margin:9px 0 0}
+@media(max-width:1140px){.workspace{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.app{grid-template-columns:1fr}.side{min-height:auto;padding:14px;gap:14px;position:relative}.side-note{display:none}.nav{display:flex;overflow:auto;gap:4px}.nav button{white-space:nowrap;padding:10px 12px}.rail-label{display:none}.main{padding:0 17px 50px}.topbar{height:58px}.heading{margin:31px 0 20px}}
+@media(max-width:600px){.metrics{gap:8px}.metric{min-height:100px;padding:15px}.metric strong{font-size:29px}.panel-head{padding:15px}.filters{padding:13px}.fields,.kv{grid-template-columns:1fr}.detail{padding:18px}table{min-width:600px}.table-scroll{overflow:auto}h1{font-size:41px}.heading .primary{font-size:11px}}
+.commercial-box{padding:20px;margin:20px 0;border:1px solid #c4d7c8;background:#f2f7f1}
+.commercial-box h4{font-size:17px;color:#254433;margin:0 0 10px}
+.commercial-box p{line-height:1.7}
+.commercial-box .fields{margin-top:18px}
+.commercial-box .inline-link{color:#286746;font-weight:700;text-underline-offset:3px}
+</style>
+</head>
+<body>
+<div id="auth" class="auth-stage" hidden>
+ <div class="auth-box">
+  <div class="eyebrow">Noetfield Systems / Private Operations</div>
+  <h1>Corporate relationships. Real outcomes.</h1>
+  <p>Your private workspace for enterprise buyers, asset originators, commercial partners and retained clients. This is separate from Fieldwork's Web3 network.</p>
+  <form id="login"><label>Existing Noetfield operator key<input id="operator" type="password" autocomplete="off" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember">Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
+  <p class="notice" id="login-error" role="alert"></p>
+ </div>
+</div>
+<div id="app" class="app" hidden>
+ <aside class="side">
+  <div class="wordmark"><span class="mark">N</span><div><strong>NOETFIELD</strong><small>Corporate relationships</small></div></div>
+  <div><p class="rail-label">Workspace</p><nav class="nav" aria-label="CRM views">
+   <button type="button" data-view="pipeline" aria-current="page">Revenue pipeline <span>01</span></button>
+   <button type="button" data-view="accounts">Organizations <span>02</span></button>
+   <button type="button" data-view="people">Contacts <span>03</span></button>
+   <button type="button" data-view="partners">Partners <span>04</span></button>
+  </nav></div>
+  <div class="side-note">Noetfield Systems Inc.<br>Private corporate customers, not Web3 contact sourcing.<br><a href="https://www.noetfield.com/connect/" rel="noopener noreferrer" target="_blank">Public Connect</a> · <a href="/api/opportunities/desk/app">Opportunity Desk</a></div>
+ </aside>
+ <div class="main">
+  <div class="topbar"><div class="breadcrumb">Operations / <b id="crumb">Corporate CRM</b></div><div class="top-actions"><span class="status"><span class="dot"></span>Private session</span><button class="ghost" type="button" id="refresh">Refresh</button><button class="ghost" type="button" id="signout">Lock</button></div></div>
+  <div class="heading"><div><div class="eyebrow">Noetfield Corporate / Commercial Intelligence</div><h1 id="page-title">Relationships that build business.</h1><p id="page-subtitle">Enterprise customers, signed scopes, real delivery and long-term partnerships.</p></div><button class="primary" id="create-toggle" type="button">New account</button></div>
+  <section class="metrics" aria-label="Commercial performance">
+   <div class="metric"><small>Active opportunities</small><strong id="metric-open">—</strong></div>
+   <div class="metric"><small>Follow-ups due</small><strong class="copper" id="metric-due">—</strong></div>
+   <div class="metric"><small>Companies in network</small><strong id="metric-accounts">—</strong></div>
+   <div class="metric"><small>Matched paid checkouts · CAD / USD</small><strong class="sage" style="font-size:23px" id="metric-cash">—</strong></div>
+  </section>
+  <section id="data-view" class="workspace">
+   <div class="panel">
+    <div class="panel-head"><h2 id="list-title">Commercial opportunities</h2><span class="small" id="records-label">Source-backed and operator-owned</span></div>
+    <div class="filters"><input id="search" type="search" placeholder="Search companies or opportunities" aria-label="Search"><select id="stage-filter" aria-label="Deal stage"><option value="">All stages</option><option>NEW</option><option>QUALIFYING</option><option>DISCOVERY</option><option>SCOPE_SENT</option><option>NEGOTIATING</option><option>SIGNED</option><option>IN_DELIVERY</option><option>DELIVERED</option><option>RETAINED</option><option>LOST</option></select><select id="offer-filter" aria-label="Offer"><option value="">All offers</option><option value="rwa_technical_sprint">RWA Sprint</option><option value="ai_sales_os_pilot">AI Sales OS Pilot</option><option value="asset_administration">Asset Administration</option><option value="business_automation">Automation</option><option value="strategic_partnership">Partnership</option><option value="other">Other</option></select></div>
+    <div id="list-body" class="table-scroll" aria-live="polite"></div>
+   </div>
+   <div class="panel" id="side-panel"><div class="panel-head"><h2>Relationship details</h2></div><div class="empty">Select an opportunity to open its commercial record and activity history.</div></div>
+  </section>
+  <div id="form-view" class="view-panels hidden">
+   <div class="panel section-form" id="account-panel" hidden>
+    <h2>New corporate account</h2><p>Only organizations relevant to Noetfield's own services. Existing customers are de-duplicated by normalized organization name.</p>
+    <form id="account-form" class="fields">
+     <label class="wide">Organization name<input name="name" required maxlength="200" placeholder="Legal or trading name"></label>
+     <label>Relationship<select name="kind"><option value="buyer">Customer / prospect</option><option value="asset_originator">Asset originator</option><option value="referral_partner">Referral partner</option><option value="delivery_partner">Delivery partner</option><option value="capital_partner">Capital partner</option><option value="advisor">Advisor</option><option value="other">Other</option></select></label>
+     <label>Sector<select name="sector"><option value="other">Other</option><option value="private_credit">Private credit</option><option value="real_estate">Real estate</option><option value="business_acquisition">Business acquisitions</option><option value="financial_services">Financial services</option><option value="professional_services">Professional services</option><option value="technology">Technology</option><option value="industry">Industry</option></select></label>
+     <label>Account owner<input name="owner" required placeholder="Accountable operator"></label>
+     <label>Country<input name="country" placeholder="Canada"></label>
+     <label class="wide">Verified website (optional)<input name="website" type="url" placeholder="https://"></label>
+     <label class="wide">Internal account notes<textarea name="notes" maxlength="2000"></textarea></label>
+     <button class="primary" type="submit">Save account</button>
+    </form>
+   </div>
+   <div class="panel section-form" id="person-panel" hidden>
+    <h2>Add a company contact</h2><p>Contact details are available only to authorized operators. No automatic email or marketing consent is assumed.</p>
+    <form id="person-form" class="fields">
+     <label class="wide">Organization<select name="account_id" id="person-account" required></select></label>
+     <label>Name<input name="full_name" required maxlength="140"></label>
+     <label>Role<input name="role" maxlength="140"></label>
+     <label class="wide">Work email<input type="email" name="email" maxlength="254"></label>
+     <label class="wide">Source reference<input type="url" name="source_ref" placeholder="https://"></label>
+     <label class="wide"><span><input type="checkbox" name="consent_marketing" style="width:auto"> Explicit marketing consent recorded</span></label>
+     <button class="primary" type="submit">Save contact</button>
+    </form>
+   </div>
+   <div class="panel section-form" id="deal-panel" hidden>
+    <h2>Open a commercial opportunity</h2><p>Value is an estimate until a source-linked Stripe payment exists. Each opportunity has an owner and a next action.</p>
+    <form id="deal-form" class="fields">
+     <label class="wide">Customer organization<select name="account_id" id="deal-account" required></select></label>
+     <label>Service / mandate<select name="offer"><option value="rwa_technical_sprint">RWA Sprint · US$950</option><option value="ai_sales_os_pilot">AI Sales OS · C$750</option><option value="asset_administration">Asset administration</option><option value="business_automation">Other business automation</option><option value="strategic_partnership">Strategic partnership</option><option value="other">Other</option></select></label>
+     <label>Expected currency<select name="currency"><option value="usd">USD</option><option value="cad">CAD</option></select></label>
+     <label>Estimated value (major units)<input name="estimated" type="number" min="0" step="0.01" value="950"></label>
+     <label>Account owner<input name="owner" required></label>
+     <label class="wide">Next action<input name="next_action" required placeholder="Qualify scope and decision-maker"></label>
+     <label>Follow-up date<input name="next_date" type="date"></label>
+     <label>Source intake ID (optional)<input name="source_intake_id" placeholder="INT-..."></label>
+     <label class="wide">Opportunity summary<textarea name="summary" maxlength="2200"></textarea></label>
+     <button type="submit" class="primary">Create opportunity</button>
+    </form>
+   </div>
+   <div class="panel section-form" id="import-panel" hidden>
+    <h2>Import a genuine Noetfield enquiry</h2><p>One source ID links the existing public intake, buyer identity and commercial opportunity. Web3 project submissions and synthetic test records are excluded.</p>
+    <form id="import-form" class="fields">
+     <label class="wide">Canonical intake ID<input name="intake_id" required placeholder="INT-XXXXXXXXXXXX"></label>
+     <label>Offer<select name="offer"><option value="rwa_technical_sprint">RWA Sprint</option><option value="ai_sales_os_pilot">AI Sales OS Pilot</option><option value="asset_administration">Asset administration</option><option value="business_automation">Business automation</option><option value="strategic_partnership">Partnership</option></select></label>
+     <label>Currency<select name="currency"><option value="usd">USD</option><option value="cad">CAD</option></select></label>
+     <label>Owner<input name="owner" required></label>
+     <label>Follow-up date<input name="next_date" type="date"></label>
+     <label class="wide">Next action<input name="next_action" required value="Review buyer needs and prepare qualification call"></label>
+     <button type="submit" class="primary">Import source-backed case</button>
+    </form>
+   </div>
+  </div>
+  <div id="feedback" class="notice" role="status" aria-live="polite"></div>
+ </div>
+</div>
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const els={app:$("#app"),auth:$("#auth"),feedback:$("#feedback"),list:$("#list-body"),panel:$("#side-panel")};
+const state={csrf:"",view:"pipeline",board:{accounts:[],people:[],deals:[],metrics:{}},selected:"",detail:null};
+const esc=v=>String(v??"").replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x]));
+const text=v=>String(v??"");
+const safeURL=url=>{try{const u=new URL(url);return u.protocol==="https:"?u.href:""}catch{return ""}};
+const money=(n,c)=>new Intl.NumberFormat("en-CA",{style:"currency",currency:(c||"CAD").toUpperCase(),maximumFractionDigits:2}).format((Number(n)||0)/100);
+const due=iso=>iso?new Date(iso+"T12:00:00").toLocaleDateString("en-CA",{month:"short",day:"numeric",year:"numeric"}):"Not scheduled";
+function message(msg,good=false){els.feedback.textContent=msg;els.feedback.style.color=good?"#35745a":"#a05837"}
+async function api(path,{method="GET",data}={}){
+ const headers={"Accept":"application/json"};
+ if(data!==undefined){headers["Content-Type"]="application/json";headers["X-Desk-CSRF"]=state.csrf}
+ const res=await fetch(path,{method,headers,body:data!==undefined?JSON.stringify(data):undefined,credentials:"same-origin",cache:"no-store"});
+ let body={};try{body=await res.json()}catch{throw Error("Server returned an unreadable response")}
+ if(!res.ok)throw Error(typeof body.detail==="string"?body.detail:res.status+" request failed");
+ return body;
+}
+async function session(){
+ try{const result=await api("/api/opportunities/desk/session");
+  if(result.authenticated){state.csrf=result.csrf;els.auth.hidden=true;els.app.hidden=false;await reload()}
+  else{els.auth.hidden=false;els.app.hidden=true}
+ }catch(e){els.auth.hidden=false;els.app.hidden=true;$("#login-error").textContent=e.message}
+}
+$("#login").addEventListener("submit",async e=>{
+ e.preventDefault();$("#login-error").textContent="";
+ try{const result=await api("/api/opportunities/desk/session",{method:"POST",data:{secret:$("#operator").value,remember:$("#remember").checked}});
+ state.csrf=result.csrf;$("#operator").value="";els.auth.hidden=true;els.app.hidden=false;await reload()
+ }catch(err){$("#login-error").textContent=err.message}
+});
+$("#signout").addEventListener("click",async()=>{try{await api("/api/opportunities/desk/session",{method:"DELETE",data:{}})}catch{}state.csrf="";state.selected="";await session()});
+$("#refresh").addEventListener("click",()=>reload());
+const offerName={rwa_technical_sprint:"RWA Technical Sprint",ai_sales_os_pilot:"AI Sales OS Pilot",asset_administration:"Asset Administration",business_automation:"Business Automation",strategic_partnership:"Strategic Partnership",other:"Other"};
+function setView(view){
+ state.view=view;
+ document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===view?"page":"false"));
+ const names={pipeline:"Relationships that build business.",accounts:"Know the company. Build the relationship.",people:"The people behind every opportunity.",partners:"Commercial partners. Shared outcomes."};
+ $("#page-title").textContent=names[view]||names.pipeline;
+ $("#crumb").textContent=view[0].toUpperCase()+view.slice(1);
+ $("#list-title").textContent={pipeline:"Commercial opportunities",accounts:"Corporate accounts",people:"Professional contacts",partners:"Partners and introducers"}[view];
+ $("#create-toggle").textContent=view==="people"?"Add contact":view==="pipeline"?"New opportunity":"New account";
+ state.selected="";$("#form-view").classList.add("hidden");$("#data-view").classList.remove("hidden");drawList();
+}
+document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
+function metrics(){
+ const m=state.board.metrics||{};
+ $("#metric-open").textContent=m.open??0;
+ $("#metric-due").textContent=m.due??0;
+ $("#metric-accounts").textContent=m.total_accounts??state.board.accounts.length;
+ const paid=m.paid_verified_by_currency_minor||{};
+ const labels=Object.entries(paid).map(([c,n])=>money(n,c));
+ $("#metric-cash").textContent=labels.length?labels.join(" / "):"$0 verified";
+}
+function dealRows(){
+ const term=$("#search").value.trim().toLowerCase(),stage=$("#stage-filter").value,offer=$("#offer-filter").value;
+ return state.board.deals.filter(d=>(!stage||d.stage===stage)&&(!offer||d.offer===offer)&&
+ (!term||(d.account_name+" "+d.summary+" "+d.offer).toLowerCase().includes(term)));
+}
+function drawList(){
+ let html="";
+ if(state.view==="pipeline"){
+ const rows=dealRows();$("#records-label").textContent=rows.length+" opportunities · true cash only from Stripe";
+ html=rows.length?'<table><thead><tr><th>Company / mandate</th><th>Stage</th><th>Value</th><th>Next step</th></tr></thead><tbody>'+
+ rows.map(d=>'<tr class="data-row '+(d.id===state.selected?"selected":"")+'" data-deal="'+esc(d.id)+'" tabindex="0"><td><b>'+esc(d.account_name)+'</b><span class="muted">'+esc(offerName[d.offer]||d.offer)+'</span></td><td><span class="tag '+(d.stage==="LOST"?"negative":d.next_due?"warm":"")+'">'+esc(d.stage.replaceAll("_"," "))+'</span></td><td>'+money(d.estimated_minor,d.currency)+(d.payment?.status==="PAID_LIVE"?'<span class="muted">Stripe paid and linked</span>':'<span class="muted">Estimated only</span>')+'</td><td>'+esc(d.owner)+'<span class="muted">'+esc(due(d.next_date))+(d.next_due?" · Due":"")+'</span></td></tr>').join("")+'</tbody></table>':
+ '<div class="empty">No corporate opportunities match these filters. Import a real Noetfield enquiry or create a qualified opportunity.</div>';
+ }else{
+ let rows=[];
+ if(state.view==="people")rows=state.board.people.map(p=>({title:p.full_name,subtitle:p.role,small:p.email,extra:p.account_id}));
+ else rows=state.board.accounts.filter(a=>state.view!=="partners"||["referral_partner","delivery_partner","capital_partner","advisor"].includes(a.kind)).map(a=>({title:a.name,subtitle:a.kind.replaceAll("_"," "),small:a.sector.replaceAll("_"," "),extra:a.owner}));
+ const term=$("#search").value.trim().toLowerCase();rows=rows.filter(r=>(r.title+" "+r.subtitle+" "+r.small).toLowerCase().includes(term));
+ $("#records-label").textContent=rows.length+" corporate records · source evidence varies";
+ html='<div class="records">'+(rows.length?rows.map(r=>'<article class="record"><strong>'+esc(r.title)+'</strong><small>'+esc(r.subtitle)+' · '+esc(r.small)+'</small><p>'+esc(r.extra)+'</p></article>').join(""):'<p class="empty">No records found.</p>')+'</div>';
+ }
+ els.list.innerHTML=html;
+ els.list.querySelectorAll("[data-deal]").forEach(el=>{
+   const open=()=>selectDeal(el.dataset.deal);
+   el.addEventListener("click",open);el.addEventListener("keydown",e=>{if(e.key==="Enter")open()});
+ });
+ if(state.view!=="pipeline")els.panel.innerHTML='<div class="panel-head"><h2>Corporate context</h2></div><div class="detail"><p>Accounts, people and partner relationships stay in Noetfield’s private corporate workspace. Web3 research contacts remain in Fieldwork.</p></div>';
+ else if(!state.selected)els.panel.innerHTML='<div class="panel-head"><h2>Relationship details</h2></div><div class="empty">Select an opportunity to update its stage, owner, follow-up and activity.</div>';
+}
+async function reload(){
+ try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("")}
+ catch(e){message("Unable to read corporate workspace: "+e.message)}
+}
+function fillAccounts(){
+ const opts='<option value="">Choose organization</option>'+state.board.accounts.map(a=>'<option value="'+esc(a.id)+'">'+esc(a.name)+'</option>').join("");
+ $("#person-account").innerHTML=opts;$("#deal-account").innerHTML=opts;
+}
+async function selectDeal(id){
+ state.selected=id;drawList();
+ try{const d=await api("/api/corporate-crm/deals/"+encodeURIComponent(id));state.detail=d;drawDetail(d)}
+ catch(e){message(e.message)}
+}
+function drawDetail(payload){
+ const d=payload.deal,boardDeal=state.board.deals.find(x=>x.id===d.id)||{};
+ const proof=boardDeal.payment;
+ const payment=proof?.status==="PAID_LIVE"?"Verified Stripe receipt · "+money(proof.amount_minor,proof.currency):
+               proof?.status==="REVERSED"?"Refund/dispute flagged":"No linked paid Checkout receipt";
+ const timeline=payload.activity||[];
+ const caseInfo=payload.commercial_case||{};
+ const commercialEligible=!!d.source_intake_id&&["rwa_technical_sprint","ai_sales_os_pilot"].includes(d.offer);
+ const nextStep={
+   NOT_OPEN:"open",QUALIFY:"scope",SCOPE_ACCEPTED:"reconcile_payment",
+   PAYMENT_CONFIRMED:"start_delivery",IN_DELIVERY:"deliver",DELIVERED:"close",CLOSED:"close"
+ }[caseInfo.stage||"NOT_OPEN"]||"open";
+ const flowOptions=[
+   ["open","01 / Qualify the real source intake"],["scope","02 / Record signed scope"],
+   ["reconcile_payment","03 / Verify Stripe paid checkout"],["start_delivery","04 / Begin delivery"],
+   ["deliver","05 / Record delivered and accepted work"],["close","06 / Close completed engagement"]
+ ];
+ const checkout=safeURL(caseInfo.approved_checkout_url);
+ const commercialBlock=commercialEligible?
+   '<section class="commercial-box"><h4>Customer-to-revenue · signed scope and live cash</h4>'+
+   '<p class="small">Separate from the CRM forecast. Only source-matched live Stripe evidence counts as payment. No automatic outreach or billing.</p>'+
+   '<p><span class="tag">'+esc(caseInfo.stage||"NOT_OPEN")+'</span>'+
+   ' <span class="small">Scope: '+esc(caseInfo.scope_ref||"Not recorded")+' · Revision '+esc(caseInfo.revision||0)+'</span></p>'+
+   (checkout?'<p><a class="inline-link" target="_blank" rel="noopener noreferrer" href="'+esc(checkout)+'">Approved-scope Stripe payment link ↗</a><span class="muted">Share only with the customer who accepted this scope.</span></p>':"")+
+   (caseInfo.stage==="CLOSED"?'<p class="small">Commercial engagement closed after accepted delivery.</p>':
+    '<form id="commercial-step" class="fields">'+
+    '<label class="wide">Verified commercial action<select name="action">'+flowOptions.map(([key,label])=>'<option value="'+key+'" '+(key===nextStep?"selected":"")+'>'+esc(label)+'</option>').join("")+'</select></label>'+
+    '<label class="wide" data-flow="scope">Accepted scope reference<input name="scope_ref" placeholder="SOW-RWA-0001"></label>'+
+    '<label class="wide" data-flow="scope">Customer-approved signed scope evidence<input name="acceptance_evidence" type="url" placeholder="https://"></label>'+
+    '<label class="wide" data-flow="reconcile_payment">Paid Checkout session ID<input name="session_id" placeholder="cs_live_..."></label>'+
+    '<label class="wide" data-flow="reconcile_payment">Different payer authorization (only if necessary)<input name="payer_authorization_url" type="url" placeholder="https://"></label>'+
+    '<label class="wide" data-flow="start_delivery">Delivery owner next action<input name="next_action" maxlength="350" value="'+esc(d.next_action)+'"></label>'+
+    '<label class="wide" data-flow="deliver">Actual delivered work (evidence URL)<input name="delivery_evidence" type="url" placeholder="https://"></label>'+
+    '<label class="wide" data-flow="deliver">Customer acceptance of delivery (evidence URL)<input name="acceptance_url" type="url" placeholder="https://"></label>'+
+    '<button class="primary" type="submit">Record verified commercial step</button></form>')+
+   '</section>':
+   '<p class="small">Payments and accepted scope actions become available for a genuine Noetfield source intake with the RWA or AI Sales OS pilot offer. No synthetic or partner-only deals can claim Stripe conversion.</p>';
+ els.panel.innerHTML='<div class="panel-head"><h2>'+esc(d.account_name)+'</h2><span class="tag">'+esc(d.stage.replaceAll("_"," "))+'</span></div>'+
+ '<div class="detail"><div><div class="eyebrow">'+esc(offerName[d.offer]||d.offer)+'</div><h3>'+esc(d.contact_name||d.account_name)+'</h3><p>'+esc(d.summary||"No project summary yet.")+'</p></div>'+
+ '<div class="kv"><div><small>Account owner</small>'+esc(d.owner)+'</div><div><small>Next follow-up</small>'+esc(due(d.next_date))+'</div><div><small>Source case</small>'+esc(d.source_intake_id||"Manual / unlinked")+'</div><div><small>Cash status</small>'+esc(payment)+'</div></div>'+
+ commercialBlock+
+ '<form id="update-deal" class="fields"><label>Stage<select name="stage">'+
+ ["NEW","QUALIFYING","DISCOVERY","SCOPE_SENT","NEGOTIATING","SIGNED","IN_DELIVERY","DELIVERED","RETAINED","LOST"].map(s=>'<option '+(d.stage===s?"selected":"")+'>'+s+'</option>').join("")+
+ '</select></label><label>Account owner<input name="owner" value="'+esc(d.owner)+'" required></label>'+
+ '<label class="wide">Next action<input name="next_action" value="'+esc(d.next_action)+'" required></label>'+
+ '<label>Follow-up date<input type="date" name="next_date" value="'+esc(d.next_date||"")+'"></label>'+
+ '<label>Estimated value (major units)<input type="number" name="estimated" step="0.01" min="0" value="'+(Number(d.estimated_minor||0)/100).toFixed(2)+'"></label>'+
+ '<label class="wide">Accepted written scope URL (required when signed)<input type="url" name="accepted_scope_url" value="'+esc(d.accepted_scope_url||"")+'" placeholder="https://"></label>'+
+ '<label class="wide">Internal opportunity summary<textarea name="summary">'+esc(d.summary||"")+'</textarea></label>'+
+ '<button type="submit" class="primary">Save changes</button></form>'+
+ '<div><h4>Relationship activity</h4><ul class="timeline">'+(timeline.length?timeline.map(a=>'<li><strong>'+esc(a.kind.replaceAll("_"," "))+'</strong>'+esc(a.note)+'<br><span class="small">'+esc(a.actor)+' · '+esc(a.created_at)+'</span>'+(safeURL(a.evidence_url)?'<br><a class="inline-link" href="'+esc(safeURL(a.evidence_url))+'" rel="noopener noreferrer" target="_blank">View source evidence</a>':'')+'</li>').join(""):'<li>No activities recorded.</li>')+'</ul></div>'+
+ '<form id="add-activity" class="fields"><label class="wide">Log an action<select name="kind">'+
+ ["NOTE","CALL_ATTEMPT","EMAIL_SENT_REPORTED","REPLY_REPORTED","MEETING_BOOKED_REPORTED","MEETING_HELD","SCOPE_SENT","SCOPE_SIGNED","REFERRAL_PROPOSED","REFERRAL_ACCEPTED","DELIVERY_ACCEPTED","FOLLOWUP_COMPLETED"].map(x=>'<option>'+x+'</option>').join("")+
+ '</select></label><label>Recorded by<input name="actor" required placeholder="Operator"></label>'+
+ '<label>Evidence URL (if external action)<input name="evidence_url" type="url" placeholder="https://"></label>'+
+ '<label class="wide">What happened?<textarea name="note" required maxlength="2000"></textarea></label>'+
+ '<button type="submit" class="ghost">Add activity record</button></form></div>';
+ const commercialForm=$("#commercial-step");
+ if(commercialForm){
+   const flowSelect=commercialForm.querySelector('[name="action"]');
+   const syncFields=()=>commercialForm.querySelectorAll("[data-flow]").forEach(el=>{
+     el.style.display=el.dataset.flow===flowSelect.value?"flex":"none";
+   });
+   flowSelect.addEventListener("change",syncFields);syncFields();
+   commercialForm.addEventListener("submit",async e=>{
+     e.preventDefault();
+     const values=Object.fromEntries(new FormData(commercialForm));
+     const action=values.action;
+     const data={action,expected_revision:Number(caseInfo.revision)||0};
+     if(action==="scope"){data.scope_ref=values.scope_ref;data.acceptance_evidence=values.acceptance_evidence}
+     if(action==="reconcile_payment"){data.session_id=values.session_id;
+       if(values.payer_authorization_url)data.payer_authorization_url=values.payer_authorization_url}
+     if(action==="start_delivery")data.next_action=values.next_action;
+     if(action==="deliver"){data.delivery_evidence=values.delivery_evidence;data.acceptance_url=values.acceptance_url}
+     try{const result=await api("/api/corporate-crm/deals/"+encodeURIComponent(d.id)+"/commercial",{method:"POST",data});
+       message("Commercial state saved: "+result.stage+".",true);await reload();await selectDeal(d.id)}
+     catch(err){message("Commercial step rejected: "+err.message)}
+   });
+ }
+ $("#update-deal").addEventListener("submit",async e=>{
+  e.preventDefault();const form=e.currentTarget,v=Object.fromEntries(new FormData(form));
+  try{await api("/api/corporate-crm/deals/"+encodeURIComponent(d.id),{method:"PATCH",data:{
+   expected_revision:d.revision,stage:v.stage,owner:v.owner,next_action:v.next_action,
+   next_date:v.next_date,estimated_minor:Math.round(Number(v.estimated)*100),
+   summary:v.summary,accepted_scope_url:v.accepted_scope_url
+  }});message("Opportunity updated.",true);await reload();await selectDeal(d.id)}
+  catch(e){message(e.message)}
+ });
+ $("#add-activity").addEventListener("submit",async e=>{
+  e.preventDefault();const v=Object.fromEntries(new FormData(e.currentTarget));
+  try{await api("/api/corporate-crm/deals/"+encodeURIComponent(d.id)+"/activities",{method:"POST",data:v});
+   message("Source-linked activity recorded.",true);await selectDeal(d.id)}
+  catch(e){message(e.message)}
+ });
+}
+function openForm(which){
+ $("#data-view").classList.add("hidden");$("#form-view").classList.remove("hidden");
+ for(const id of ["account","person","deal","import"])$("#"+id+"-panel").hidden=id!==which;
+ $("#create-toggle").textContent="Back to CRM";
+
+}
+$("#create-toggle").addEventListener("click",()=>{
+   if(!$("#form-view").classList.contains("hidden")){setView(state.view);return}
+   openForm(state.view==="people"?"person":state.view==="pipeline"?"deal":"account")
+ });
+for(const name of ["account","person","deal","import"]){
+ $("#"+name+"-form").addEventListener("submit",async e=>{
+   e.preventDefault();const values=Object.fromEntries(new FormData(e.currentTarget));
+   if(name==="person")values.consent_marketing=e.currentTarget.querySelector("[name=consent_marketing]").checked;
+   if(name==="deal"){values.estimated_minor=Math.round(Number(values.estimated||0)*100);delete values.estimated}
+   const route={account:"/api/corporate-crm/accounts",person:"/api/corporate-crm/people",
+                deal:"/api/corporate-crm/deals",import:"/api/corporate-crm/import-intake"}[name];
+   try{const result=await api(route,{method:"POST",data:values});message("Corporate record persisted.",true);
+    $("#form-view").classList.add("hidden");$("#data-view").classList.remove("hidden");setView(name==="import"||name==="deal"?"pipeline":state.view);await reload();
+    if(name==="deal")await selectDeal(result.id);
+    if(name==="import")await selectDeal(result.deal.id);
+   }catch(error){message(error.message)}
+ });
+}
+$("#search").addEventListener("input",drawList);
+$("#stage-filter").addEventListener("change",drawList);
+$("#offer-filter").addEventListener("change",drawList);
+const initialURL=new URL(window.location.href);
+if(initialURL.searchParams.get("action")==="import"){session().then(()=>{if(!els.app.hidden)openForm("import")})}
+else session();
+</script>
+</body>
+</html>

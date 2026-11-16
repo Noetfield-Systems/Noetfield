@@ -1441,6 +1441,18 @@ async def _notify_intake_background(record: object) -> None:
     ):
         logger.info("intake_ops_notify_skipped test intake intake_id=%s", record.intake_id)
         return
+    # Corporate prospects enter Noetfield's own CRM automatically only when the
+    # source form explicitly targets Noetfield business or RWA. Web3 Fieldwork,
+    # other ventures and test probes are excluded. The ingestion is replay-safe
+    # by canonical intake ID and never sends outbound messages.
+    try:
+        from noetfield_governance.corporate_crm import auto_import_inbound
+        crm_result = await auto_import_inbound(settings, record)
+        if crm_result.get("imported"):
+            logger.info("noetfield_corporate_crm_ingested intake_id=%s deal_id=%s",
+                        record.intake_id,crm_result.get("deal_id"))
+    except Exception:
+        logger.exception("noetfield_corporate_crm_import_pending intake_id=%s",record.intake_id)
     # The canonical Platform record is already persisted. Mirror consented
     # people/contributors into the *existing* WorkforceOS case ledger.
     # Failure is logged and recoverable via the authenticated retry endpoint;
@@ -2415,6 +2427,212 @@ async def sandbox_export_board_pdf(request: Request) -> Response:
     )
 
 
+# Private corporate buyer / originator / partner CRM.
+# The Web3 Fieldwork contact database is never read or written by these routes.
+class CorporateAccountRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    name: str = Field(min_length=2,max_length=200)
+    kind: Literal["buyer","asset_originator","referral_partner","delivery_partner",
+                  "capital_partner","advisor","other"] = "buyer"
+    sector: Literal["private_credit","real_estate","business_acquisition",
+                    "financial_services","professional_services","technology",
+                    "industry","other"] = "other"
+    owner: str = Field(min_length=1,max_length=100)
+    website: str = Field(default="",max_length=1000)
+    country: str = Field(default="",max_length=80)
+    notes: str = Field(default="",max_length=2000)
+
+
+class CorporatePersonRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    account_id: str
+    full_name: str = Field(min_length=2,max_length=140)
+    email: str = Field(default="",max_length=254)
+    role: str = Field(default="",max_length=140)
+    source_ref: str = Field(default="",max_length=1000)
+    consent_marketing: bool = False
+
+
+class CorporateDealRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    account_id: str
+    offer: Literal["rwa_technical_sprint","ai_sales_os_pilot","asset_administration",
+                   "business_automation","strategic_partnership","other"]
+    owner: str = Field(min_length=1,max_length=120)
+    next_action: str = Field(min_length=1,max_length=400)
+    currency: Literal["usd","cad"] = "cad"
+    estimated_minor: int = Field(default=0,ge=0,le=1000000000000)
+    next_date: str = ""
+    person_id: str = ""
+    source_intake_id: str = ""
+    source_channel: str = Field(default="manual",max_length=80)
+    referrer_account_id: str = ""
+    summary: str = Field(default="",max_length=2200)
+
+
+class CorporateImportRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    intake_id: str
+    offer: Literal["rwa_technical_sprint","ai_sales_os_pilot","asset_administration",
+                   "business_automation","strategic_partnership","other"]
+    owner: str = Field(min_length=1,max_length=120)
+    next_action: str = Field(min_length=1,max_length=400)
+    currency: Literal["usd","cad"] = "cad"
+    estimated_minor: int = Field(default=0,ge=0,le=1000000000000)
+    next_date: str = ""
+
+
+class CorporateDealUpdateRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    expected_revision: int = Field(ge=0)
+    stage: Literal["NEW","QUALIFYING","DISCOVERY","SCOPE_SENT",
+                   "NEGOTIATING","SIGNED","IN_DELIVERY","DELIVERED","RETAINED","LOST"]
+    owner: str = Field(min_length=1,max_length=120)
+    next_action: str = Field(min_length=1,max_length=400)
+    next_date: str = ""
+    estimated_minor: int = Field(default=0,ge=0,le=1000000000000)
+    summary: str = Field(default="",max_length=2200)
+    accepted_scope_url: str = Field(default="",max_length=1000)
+
+
+class CorporateActivityRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    kind: Literal["NOTE","CALL_ATTEMPT","EMAIL_SENT_REPORTED","REPLY_REPORTED",
+                  "MEETING_BOOKED_REPORTED","MEETING_HELD","SCOPE_SENT",
+                  "SCOPE_SIGNED","REFERRAL_PROPOSED","REFERRAL_ACCEPTED",
+                  "DELIVERY_ACCEPTED","FOLLOWUP_COMPLETED"]
+    actor: str = Field(min_length=1,max_length=120)
+    note: str = Field(min_length=1,max_length=2000)
+    evidence_url: str = Field(default="",max_length=1000)
+
+
+@app.get("/api/corporate-crm/app", tags=["operations"], include_in_schema=False)
+async def corporate_crm_workspace() -> Response:
+    """The public shell contains no records; private API requires scoped cookie."""
+    return FileResponse(
+        _REPO_ROOT / "services/governance/noetfield_governance/private_corporate_crm.html",
+        media_type="text/html",
+        headers={"Cache-Control":"private, no-store","X-Robots-Tag":"noindex, nofollow"},
+    )
+
+
+@app.get("/api/corporate-crm/board", tags=["operations"], include_in_schema=False)
+async def corporate_crm_board(
+    request: Request, search: str = "", stage: str = "", offer: str = "", limit: int = 100,
+) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import CorporateCRMError, dashboard
+    _require_connect_desk_operator(request)
+    try:
+        return await dashboard(settings,search=search,stage=stage,offer=offer,limit=limit)
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
+@app.post("/api/corporate-crm/accounts", tags=["operations"], include_in_schema=False)
+async def corporate_crm_account(body: CorporateAccountRequest,request: Request) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import CorporateCRMError, account_create
+    _require_connect_desk_operator(request)
+    try:
+        return await account_create(settings,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
+@app.post("/api/corporate-crm/people", tags=["operations"], include_in_schema=False)
+async def corporate_crm_person(body: CorporatePersonRequest,request: Request) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import CorporateCRMError, person_create
+    _require_connect_desk_operator(request)
+    try:
+        return await person_create(settings,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
+@app.post("/api/corporate-crm/deals", tags=["operations"], include_in_schema=False)
+async def corporate_crm_deal(body: CorporateDealRequest,request: Request) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import CorporateCRMError, deal_create
+    _require_connect_desk_operator(request)
+    try:
+        return await deal_create(settings,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
+@app.post("/api/corporate-crm/import-intake", tags=["operations"], include_in_schema=False)
+async def corporate_crm_import(body: CorporateImportRequest,request: Request) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import CorporateCRMError, import_intake
+    _require_connect_desk_operator(request)
+    try:
+        return await import_intake(settings,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
+@app.patch("/api/corporate-crm/deals/{deal_id}", tags=["operations"], include_in_schema=False)
+async def corporate_crm_update_deal(
+    deal_id: str,body: CorporateDealUpdateRequest,request: Request,
+) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import CorporateCRMError, deal_update
+    _require_connect_desk_operator(request)
+    try:
+        return await deal_update(settings,deal_id=deal_id,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
+@app.get("/api/corporate-crm/deals/{deal_id}", tags=["operations"], include_in_schema=False)
+async def corporate_crm_deal_detail(deal_id: str,request: Request) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import CorporateCRMError, detail
+    _require_connect_desk_operator(request)
+    try:
+        return await detail(settings,deal_id=deal_id)
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=404,detail=str(exc)) from exc
+
+
+@app.post("/api/corporate-crm/deals/{deal_id}/activities", tags=["operations"],
+          include_in_schema=False)
+async def corporate_crm_add_activity(
+    deal_id: str,body: CorporateActivityRequest,request: Request,
+) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import CorporateCRMError, activity_create
+    _require_connect_desk_operator(request)
+    try:
+        return await activity_create(settings,deal_id=deal_id,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
+# Connect a Corporate CRM opportunity to the existing live Stripe / accepted
+# scope lifecycle, not a new billing engine. Same scoped desk session and CSRF.
+class CorporateCommercialStep(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    action: Literal["open","scope","reconcile_payment","start_delivery","deliver","close"]
+    expected_revision: int | None = Field(default=None,ge=0)
+    scope_ref: str = Field(default="",max_length=101)
+    acceptance_evidence: str = Field(default="",max_length=1200)
+    session_id: str = Field(default="",max_length=140)
+    payer_authorization_url: str = Field(default="",max_length=1200)
+    delivery_evidence: str = Field(default="",max_length=1200)
+    acceptance_url: str = Field(default="",max_length=1200)
+    next_action: str = Field(default="",max_length=350)
+
+
+@app.post("/api/corporate-crm/deals/{deal_id}/commercial",
+          tags=["operations"], include_in_schema=False)
+async def corporate_crm_commercial_step(
+    deal_id: str, body: CorporateCommercialStep, request: Request,
+) -> dict[str, object]:
+    from noetfield_governance.corporate_crm import (
+        CorporateCRMError, commercial_step,
+    )
+    _require_connect_desk_operator(request)
+    try:
+        return await commercial_step(settings, deal_id=deal_id, **body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+
+
 # Internal commercial revenue operations: source-linked state, not a second
 # CRM, checkout implementation, or auto-fulfillment process.
 class CommercialCaseCommand(BaseModel):
@@ -2441,7 +2659,7 @@ async def commercial_case_command(body: CommercialCaseCommand, request: Request)
     """Existing operator secret + canonical intake -> offer -> money -> delivery."""
     from noetfield_governance.commercial_pipeline import CommercialError, operate
 
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     try:
         return await operate(settings, intake_id=body.intake_id, action=body.action,
             expected_revision=body.expected_revision, offer=body.offer,
@@ -2459,7 +2677,7 @@ async def commercial_case_funnel(request: Request, limit: int = 50) -> dict[str,
     """PII-free owner, next action, paid evidence and delivery readback."""
     from noetfield_governance.commercial_pipeline import CommercialError, readback
 
-    _require_admin_secret(request)
+    _require_connect_desk_operator(request)
     try:
         return await readback(settings, limit=limit)
     except CommercialError as exc:
