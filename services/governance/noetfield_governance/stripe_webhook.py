@@ -383,6 +383,21 @@ async def handle_stripe_webhook(
     if not claimed:
         return {"ok": True, "handled": False, "duplicate": True, "event_id": event_id}
 
+    # Capture trusted payment evidence in the SAME PostgreSQL used by canonical
+    # intakes, before the event is acknowledged. No automatic customer matching,
+    # entitlement, or fulfillment is inferred from a Payment Link checkout.
+    try:
+        from noetfield_governance.commercial_pipeline import capture_stripe_payment
+        await capture_stripe_payment(settings, event)
+    except Exception:
+        logger.exception("stripe_commercial_evidence_capture_failed event_id=%s", event_id)
+        try:
+            await _finish_event(settings, event_id, status="failed",
+                                error="commercial_evidence_capture_failed")
+        except Exception:
+            logger.exception("stripe_commercial_capture_failure_state_unavailable event_id=%s", event_id)
+        return {"ok": False, "error": "store_unavailable", "event_id": event_id}
+
     emailed = await asyncio.to_thread(notify_stripe_event, settings, details)
     if not emailed:
         try:
