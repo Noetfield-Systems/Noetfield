@@ -79,11 +79,15 @@ check_file "market-language early access: real intake" community/index.html \
   'data-nf-intake-form' 'data-intake-vector="founding-community"' \
   '/assets/noetfield-intake-core.js?v=42' \
   '/assets/noetfield-forms.js?v=42' \
-  'No wallet connection, payment or token allocation.' \
+  'Free to join' 'Sign up with email' 'Choose your interests' \
+  'Share your interests with Noetfield' \
   'href="/privacy/"'
 check_absent "no fictional community conversions" community/index.html \
   'free guaranteed airdrop' 'guaranteed token allocation' \
   'already joined thousands' 'instant account creation'
+check_absent "early access does not foreground negative claims" community/index.html \
+  'No guaranteed invitation or token' 'No external customers' \
+  'No wallet connection, payment or token allocation.'
 
 # Wave 1: Real-World Capital must be a usable buyer entry, not another deck.
 # Deposit is scope-approved only; the free enquiry must persist via the shared intake.
