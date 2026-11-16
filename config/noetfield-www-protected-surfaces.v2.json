@@ -17,7 +17,8 @@
         "Make your next move operational.",
         "Build software.",
         "Automate your work.",
-        "What would you like to do?"
+        "Real products.",
+        "Real applications."
       ],
       "required_links": [
         "/system/",
@@ -41,7 +42,9 @@
         "nf-sourcea-xlink",
         "No external customers or revenue yet",
         "REAL PRODUCT VIEW · NOT A MOCKUP",
-        "no external customer adoption"
+        "no external customer adoption",
+        "ORIGINAL ORBITAL STUDY",
+        "ORBITAL STUDY / NO. 01"
       ],
       "forbidden_link_prefixes": [
         "/invest/",
@@ -120,5 +123,5 @@
       ]
     }
   },
-  "contract_revision": "2026-11-16-buyer-first-market-language"
+  "contract_revision": "2026-11-16-documentary-enterprise-v5"
 }
