@@ -121,7 +121,7 @@ try:
             assert pcap.locator("#paths .lane").count()==2
             assert pcap.locator("a[data-offer-payment='rwa-paid-sprint-deposit']").get_attribute("href")=="https://buy.stripe.com/7sY6oI3iUaa06qmcDi1Nu0h"
             assert pcap.locator("#nfCapitalIntake[data-nf-intake-form]").count()==1
-            assert pcap.locator("#nfCapitalIntake").get_attribute("data-nf-intake-vector")=="onchain-project"
+            assert pcap.locator("#nfCapitalIntake").get_attribute("data-intake-vector")=="onchain-project"
             assert pcap.evaluate("document.documentElement.scrollWidth<=innerWidth+2"),width
             if width<=600:
                 menu=pcap.locator("#capital-menu")
