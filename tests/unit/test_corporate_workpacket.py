@@ -205,13 +205,13 @@ def test_independent_verifier_only_accepts_real_paid_draft_callback(monkeypatch)
         with patch("noetfield_governance.corporate_workpacket._database_url",
                    return_value="postgresql://unused"),\
              patch("noetfield_governance.corporate_workpacket.asyncpg.connect",
-                   new_callable=AsyncMock,return_value=db),\\
+                   new_callable=AsyncMock,return_value=db),\
              patch("noetfield_governance.corporate_workpacket.prepare_workpackets",
-                   new_callable=AsyncMock),\\
+                   new_callable=AsyncMock),\
              patch("noetfield_governance.corporate_workpacket._paid_row",
-                   new_callable=AsyncMock,return_value={}),\\
+                   new_callable=AsyncMock,return_value={}),\
              patch("noetfield_governance.corporate_workpacket.validate_paid_case",
-                   return_value=paid),\\
+                   return_value=paid),\
              patch("noetfield_governance.corporate_workpacket.httpx.AsyncClient",
                    FakeClient):
             result=await verify_company_os_draft(object(),deal_id=str(deal_id))
