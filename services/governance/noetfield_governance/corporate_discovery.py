@@ -97,8 +97,15 @@ async def _schema(db: asyncpg.Connection) -> None:
        promoted_deal_id uuid REFERENCES noetfield.corp_crm_deals(id),
        contact_basis text NOT NULL DEFAULT '',
        contact_evidence text NOT NULL DEFAULT '',
+       outreach_role_relevance text NOT NULL DEFAULT '',
+       publication_no_solicitation_confirmed boolean NOT NULL DEFAULT false,
        promoted_at timestamptz
     )""")
+    await db.execute("""ALTER TABLE noetfield.corp_research_sources
+       ADD COLUMN IF NOT EXISTS outreach_role_relevance text NOT NULL DEFAULT ''""")
+    await db.execute("""ALTER TABLE noetfield.corp_research_sources
+       ADD COLUMN IF NOT EXISTS publication_no_solicitation_confirmed boolean
+       NOT NULL DEFAULT false""")
 
 
 async def sync_corporate_research(settings: object, *, limit: int = 100,
@@ -180,9 +187,13 @@ async def research_board(settings: object, *, limit: int=100) -> dict[str,Any]:
 
 async def promote_corporate_source(settings: object, *, source_key: str,
             contact_name: str, contact_email: str, contact_basis: str,
-            contact_evidence: str, owner: str, next_action: str) -> dict[str,Any]:
+            contact_evidence: str, owner: str, next_action: str,
+            role_relevance: str = "", publication_no_solicitation: bool = False) -> dict[str,Any]:
     if contact_basis not in _CONTACT_BASIS:
         raise CorporateCRMError("INVALID_OUTREACH_PERMISSION_BASIS")
+    if contact_basis == "PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL":
+        if publication_no_solicitation is not True or len(role_relevance.strip()) < 20:
+            raise CorporateCRMError("PUBLICATION_NO_SOLICITATION_AND_ROLE_RELEVANCE_REVIEW_REQUIRED")
     proof=source_url(contact_evidence)
     if not proof or not owner.strip() or not next_action.strip():
         raise CorporateCRMError("REVIEW_AND_NEXT_ACTION_REQUIRED")
@@ -216,8 +227,11 @@ async def promote_corporate_source(settings: object, *, source_key: str,
                   estimated_minor=0,source_channel="FIELDWORK_OPERATOR_QUALIFIED",
                   summary="Source: "+row["original_url"]+" · Contact basis: "+contact_basis)
             await db.execute("""UPDATE noetfield.corp_research_sources SET
-                 promoted_deal_id=$2,contact_basis=$3,contact_evidence=$4,promoted_at=now()
-                 WHERE source_key=$1""",source_key,uuid.UUID(deal["id"]),contact_basis,proof)
+                 promoted_deal_id=$2,contact_basis=$3,contact_evidence=$4,
+                 outreach_role_relevance=$5,publication_no_solicitation_confirmed=$6,
+                 promoted_at=now()
+                 WHERE source_key=$1""",source_key,uuid.UUID(deal["id"]),contact_basis,proof,
+                 role_relevance.strip()[:500],publication_no_solicitation is True)
             return {"promoted":True,"deal_id":deal["id"],"account_id":account["id"],
                     "source_key":source_key,"contact_basis":contact_basis,"outreach_sent":False,
                     "payment_verified":False}
