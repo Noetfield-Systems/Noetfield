@@ -142,3 +142,20 @@ def test_sales_crm_delivery_flow_calls_independent_evidence_gate():
     assert "independent verifier" in crm
     assert "Accept independently verified work" in portal
     assert "/api/corporate-crm/customer/accept" in portal
+
+
+def test_production_company_os_receiver_only_allowlisted_exact_route(monkeypatch):
+    secret="real-provider-route-private-secret-at-least-32-characters"
+    monkeypatch.setenv("CORPORATE_WORKPACKET_DISPATCH_TOKEN",secret)
+    production="https://business-os-core-production.up.railway.app/api/internal/commercial/workpackets"
+    monkeypatch.setenv("CORPORATE_COMPANY_OS_WORKPACKET_URL",production)
+    assert _dispatch_config("COMPANY_OS")== (production,secret)
+    for candidate in [
+        "https://company-os-staging-staging.up.railway.app/api/internal/commercial/workpackets",
+        production+"/evil",
+        "http://business-os-core-production.up.railway.app/api/internal/commercial/workpackets",
+        "https://business-os-core-production.up.railway.app/api/internal/commercial/workpackets?redirect=1",
+        "https://business-os-core-production.up.railway.app.evil.org/api/internal/commercial/workpackets",
+    ]:
+        monkeypatch.setenv("CORPORATE_COMPANY_OS_WORKPACKET_URL",candidate)
+        assert _dispatch_config("COMPANY_OS") is None
