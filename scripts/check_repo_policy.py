@@ -131,6 +131,46 @@ def validate_wiring(policy: dict[str, Any]) -> None:
         fail("validator.script must point to scripts/check_repo_policy.py")
 
 
+def validate_alternative_first_execution(policy: dict[str, Any]) -> None:
+    """Fail CI when a new coding agent would lose the mandatory recovery law."""
+    rule = policy.get("execution_first_alternatives")
+    if not isinstance(rule, dict):
+        fail("execution_first_alternatives machine contract missing")
+    required = {
+        "schema": "noetfield.alternative-first-law.v1",
+        "always_apply": True,
+        "on_provider_failure": "DISCOVER_SELECT_EXECUTE_VERIFY",
+        "on_provider_unavailability": "CONTINUE_WITH_EXISTING_AUTHORIZED_ROUTE",
+        "free_api_may_block_paid_model": False,
+        "report_only_failure_is_success": False,
+        "new_scheduler_required_for_recovery": False,
+        "real_approval_and_security_requirements_remain": True,
+    }
+    for key, expected in required.items():
+        if rule.get(key) != expected:
+            fail(f"execution_first_alternatives.{key} changed or missing")
+    steps = rule.get("default_priority", [])
+    if not isinstance(steps, list) or len(steps) < 3:
+        fail("alternative-first: missing distinct executable fallback routes")
+    for required_key in ("founder_goal", "tenant_identity", "budget",
+                         "permission", "idempotency_key", "receipt_truth"):
+        if required_key not in rule.get("preserve", []):
+            fail(f"alternative-first: cannot discard {required_key}")
+    for required_key in ("failed_route", "alternatives_considered",
+                         "chosen_route", "execution_status",
+                         "artifact_or_receipt", "unresolved_blocker"):
+        if required_key not in rule.get("record", []):
+            fail(f"alternative-first: missing required receipt {required_key}")
+    active = ".cursor/rules/010-execution-first-alternatives.mdc"
+    require_contains(active, "alwaysApply: true")
+    require_contains(active, "failure -> discover alternatives -> select authorized viable route -> execute -> verify receipt")
+    require_contains("AGENTS.md", active)
+    require_contains(".github/copilot-instructions.md", active)
+    if active not in policy.get("authority_sources", []):
+        fail("alternative-first: always-on rule not indexed in authority sources")
+    ok("alternative-first law wired, machine-enforced and loaded for agents")
+
+
 def validate_changed_file_count(policy: dict[str, Any], files: list[str]) -> None:
     max_files = int(policy["boundaries"]["max_files_per_pass"])
     if len(files) > max_files:
@@ -164,6 +204,7 @@ def main() -> int:
     ok("authority sources exist")
     validate_wiring(policy)
     ok("policy wiring")
+    validate_alternative_first_execution(policy)
     files = changed_files()
     validate_changed_file_count(policy, files)
     validate_diff_check()

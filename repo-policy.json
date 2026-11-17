@@ -22,7 +22,8 @@
     "package.json",
     "governance/www-pages-routes.json",
     "www-pages-deploy.exclude",
-    "Makefile"
+    "Makefile",
+    ".cursor/rules/010-execution-first-alternatives.mdc"
   ],
   "lanes": {
     "website": {
@@ -208,5 +209,38 @@
     "No claim that this repo owns GEL runtime implementation beyond website/platform integration.",
     "No claim that SourceA, TrustField, VIRLUX, Noetfield OS, or Studio IDE active work belongs in this repo.",
     "No claim that generated receipts are always commit-ready without manifest/snapshot policy."
-  ]
+  ],
+  "execution_first_alternatives": {
+    "schema": "noetfield.alternative-first-law.v1",
+    "always_apply": true,
+    "on_provider_failure": "DISCOVER_SELECT_EXECUTE_VERIFY",
+    "on_provider_unavailability": "CONTINUE_WITH_EXISTING_AUTHORIZED_ROUTE",
+    "default_priority": [
+      "DETERMINISTIC_OR_CACHED_VERIFIED_RESULT",
+      "CONFIGURED_RELIABLE_PAID_PROVIDER",
+      "OTHER_AUTHORIZED_CONFIGURED_MODEL_OR_TOOL",
+      "SMALLEST_EXISTING_CONTRACT_REPAIR"
+    ],
+    "free_api_may_block_paid_model": false,
+    "report_only_failure_is_success": false,
+    "new_scheduler_required_for_recovery": false,
+    "preserve": [
+      "founder_goal",
+      "tenant_identity",
+      "budget",
+      "permission",
+      "source_evidence",
+      "idempotency_key",
+      "receipt_truth"
+    ],
+    "record": [
+      "failed_route",
+      "alternatives_considered",
+      "chosen_route",
+      "execution_status",
+      "artifact_or_receipt",
+      "unresolved_blocker"
+    ],
+    "real_approval_and_security_requirements_remain": true
+  }
 }
