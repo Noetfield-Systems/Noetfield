@@ -306,7 +306,8 @@ async def record_signed_result(settings:object,event:dict[str,Any])->dict[str,An
                  SET state=$2,artifact_url=$3,verifier_receipt_url=$4,cost_minor=$5,
                    updated_at=now() WHERE id=$1""",
                  wid,target,str(event.get("artifact_url") or "") if target=="VERIFIED" else None,
-                 str(event.get("verifier_receipt_url") or "") if target=="VERIFIED" else None,
+                 evidence_url(str(event.get("verifier_receipt_url") or ""))
+                   if target in {"RUNNING","VERIFIED"} and event.get("verifier_receipt_url") else None,
                  int(event["cost_minor"]) if target=="VERIFIED" else None)
             return {"state":target,"idempotent":False,
                     "workpacket_id":str(wid),"independent_signed_result":True,
