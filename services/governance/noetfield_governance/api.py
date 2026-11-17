@@ -2624,6 +2624,19 @@ async def corporate_crm_workspace() -> Response:
     )
 
 
+@app.get("/api/corporate-crm/scenario-lab", tags=["operations"], include_in_schema=False)
+async def corporate_commercial_scenario_lab(request: Request) -> Response:
+    """Operator-only synthetic walkthrough; no production CRM, worker or payment mutations."""
+    _require_connect_desk_operator(request)
+    return FileResponse(
+        _REPO_ROOT / "services/governance/noetfield_governance/private_commercial_scenario_lab.html",
+        media_type="text/html",
+        headers={"Cache-Control":"private, no-store",
+                 "X-Robots-Tag":"noindex, nofollow",
+                 "Content-Security-Policy":"frame-ancestors 'none'"},
+    )
+
+
 @app.get("/api/corporate-crm/board", tags=["operations"], include_in_schema=False)
 async def corporate_crm_board(
     request: Request, search: str = "", stage: str = "", offer: str = "", limit: int = 100,

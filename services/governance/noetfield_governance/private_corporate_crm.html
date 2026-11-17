@@ -22,9 +22,9 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .wordmark small{display:block;text-transform:uppercase;letter-spacing:.13em;font-size:9px;color:#9faea9;margin-top:4px}
 .rail-label{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#7fa09a;padding:0 13px;margin:0 0 10px}
 .nav{display:grid;gap:5px}
-.nav button{display:flex;justify-content:space-between;align-items:center;border:0;background:transparent;color:#b9c8c2;text-align:left;padding:13px 15px;border-radius:6px;font-weight:500}
-.nav button:hover,.nav button[aria-current="page"]{background:#294640;color:white}
-.nav button span{font-size:11px;color:#cbb889}
+.nav button,.nav a{display:flex;justify-content:space-between;align-items:center;border:0;background:transparent;color:#b9c8c2;text-align:left;padding:13px 15px;border-radius:6px;font-weight:500;text-decoration:none}
+.nav button:hover,.nav a:hover,.nav button[aria-current="page"]{background:#294640;color:white}
+.nav button span,.nav a span{font-size:11px;color:#cbb889}
 .side-note{margin-top:auto;border-top:1px solid #35514a;padding:20px 14px 0;color:#a9bcb5;font-size:12px;line-height:1.65}
 .side-note a{color:#e3d4ad}.main{min-width:0;padding:0 clamp(22px,3.1vw,56px) 70px}
 .topbar{height:75px;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #d8ded5}
@@ -87,7 +87,7 @@ a{color:#215f54}.inline-link{font-size:11px}
 .record strong{display:block;font-size:16px;margin-bottom:8px}.record small{color:#819185;line-height:1.6}
 .record p{color:#5f7469;line-height:1.7;margin:9px 0 0}
 @media(max-width:1140px){.workspace{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:800px){.app{grid-template-columns:1fr}.side{min-height:auto;padding:14px;gap:14px;position:relative}.side-note{display:none}.nav{display:flex;overflow:auto;gap:4px}.nav button{white-space:nowrap;padding:10px 12px}.rail-label{display:none}.main{padding:0 17px 50px}.topbar{height:58px}.heading{margin:31px 0 20px}}
+@media(max-width:800px){.app{grid-template-columns:1fr}.side{min-height:auto;padding:14px;gap:14px;position:relative}.side-note{display:none}.nav{display:flex;overflow:auto;gap:4px}.nav button,.nav a{white-space:nowrap;padding:10px 12px}.rail-label{display:none}.main{padding:0 17px 50px}.topbar{height:58px}.heading{margin:31px 0 20px}}
 @media(max-width:600px){.metrics{gap:8px}.metric{min-height:100px;padding:15px}.metric strong{font-size:29px}.panel-head{padding:15px}.filters{padding:13px}.fields,.kv{grid-template-columns:1fr}.detail{padding:18px}table{min-width:600px}.table-scroll{overflow:auto}h1{font-size:41px}.heading .primary{font-size:11px}}
 .commercial-box{padding:20px;margin:20px 0;border:1px solid #c4d7c8;background:#f2f7f1}
 .commercial-box h4{font-size:17px;color:#254433;margin:0 0 10px}
@@ -144,6 +144,7 @@ a{color:#215f54}.inline-link{font-size:11px}
    <button type="button" data-view="accounts">Organizations <span>02</span></button>
    <button type="button" data-view="people">Contacts <span>03</span></button>
    <button type="button" data-view="partners">Partners <span>04</span></button>
+   <a href="/api/corporate-crm/scenario-lab">Scenario Lab <span>DEMO</span></a>
   </nav></div>
   <div class="side-note">Noetfield Systems Inc.<br>Private corporate customers, not Web3 contact sourcing.<br><a href="https://www.noetfield.com/connect/" rel="noopener noreferrer" target="_blank">Public Connect</a> · <a href="/api/opportunities/desk/app">Opportunity Desk</a></div>
  </aside>

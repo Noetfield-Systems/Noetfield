@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#102c2b">
+<title>Commercial Scenario Lab · Noetfield Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;font:13px/1.5 "DM Sans",system-ui,sans-serif;background:#f3f3ed;color:#213b33}
+*{box-sizing:border-box}body{margin:0;min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.43;cursor:default}
+a{color:#215947}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #b7af83;outline-offset:2px}
+.shell{display:grid;grid-template-columns:237px minmax(0,1fr);min-height:100vh}.sidebar{background:#102c2b;color:#e9e7dc;padding:28px 17px;display:flex;flex-direction:column;gap:30px}
+.brand{display:flex;align-items:center;gap:12px;padding:0 12px}.brand .n{display:grid;place-items:center;width:36px;height:36px;border:1px solid #bca878;color:#d7bd87;font:26px Georgia,serif}.brand strong{font-size:14px;letter-spacing:-.035em}.brand small{display:block;color:#91aaa0;font-size:9px;letter-spacing:.15em;text-transform:uppercase}
+.nav{display:grid;gap:8px}.nav a,.nav button{display:block;text-decoration:none;background:none;border:0;border-radius:6px;padding:13px 14px;color:#bdcbc3;text-align:left;width:100%}.nav .current{background:#28473e;color:white}.nav small{display:block;color:#90aaa0;letter-spacing:.08em;font-size:10px;margin-bottom:3px}
+.side-foot{margin-top:auto;padding:18px 12px;border-top:1px solid #3a5247;color:#a7bbb1;font-size:11px;line-height:1.8}
+.main{min-width:0;padding:0 clamp(19px,3.2vw,55px) 70px}.top{height:72px;display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid #dce1d7}.top small{color:#6d8177}.simulation{font-size:10px;letter-spacing:.1em;font-weight:700;background:#f7e9d2;border:1px solid #d9b781;color:#806038;padding:9px 11px;border-radius:3px}
+h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:400;letter-spacing:-.04em}h1{font-size:clamp(38px,4.6vw,67px);line-height:1.05;margin:10px 0 13px}h2{font-size:31px;margin:0;line-height:1.05}h3{font-size:24px;margin:0}.hero{padding:42px 0 24px;display:flex;justify-content:space-between;align-items:end;gap:20px}.kicker{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.17em;color:#9d8161}.hero p{max-width:740px;color:#73857b;margin:0;line-height:1.75}.hero-acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:#fff;border:1px solid #c7d5c8;border-radius:5px;color:#294939;padding:11px 14px;font-weight:600;font-size:12px}.btn.dark{background:#214d40;color:white;border-color:#214d40}.btn:hover{filter:brightness(.95)}.btn.wide{width:100%}
+.notice{padding:13px 17px;background:#fffdf4;border-left:3px solid #a79066;color:#695940;font-size:12px;line-height:1.7;margin-bottom:22px}
+.selector{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:18px}.scenario{padding:21px 24px;text-align:left;border:1px solid #dce4d9;background:#fffefa;border-radius:2px;color:#28483c;min-height:130px}.scenario.active{border:2px solid #375e4b;box-shadow:inset 0 0 0 2px #f0f4ec}.scenario strong{display:block;font:400 26px "Newsreader",serif;letter-spacing:-.025em}.scenario small{display:block;color:#829087;line-height:1.6;margin-top:6px}.scenario .label{font:700 10px "DM Sans",sans-serif;letter-spacing:.15em;color:#a58760;margin-bottom:7px}
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-bottom:18px}.stat{background:#fffefa;border:1px solid #e0e5dc;padding:17px 20px}.stat small{font-size:10px;color:#829088}.stat strong{display:block;font:400 27px/1.3 "Newsreader",serif;margin-top:8px;color:#244337}.stat .warn{color:#aa7950}
+.columns{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);align-items:start;gap:18px}.panel{background:#fffefa;border:1px solid #dce4db;min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:20px 22px;border-bottom:1px solid #e9ece5}.panel-head small{color:#7b8b7d}.body{padding:20px 22px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.fields label{font-size:10px;color:#627a6d;letter-spacing:.02em;display:grid;gap:6px}.fields label.full{grid-column:1/-1}.fields input,.fields textarea,.fields select{border:1px solid #cbd8cb;background:white;border-radius:4px;width:100%;padding:11px 12px;color:#20382e}.fields textarea{min-height:88px;resize:vertical}.fields input:focus,.fields textarea:focus{outline:2px solid #8faf91}
+.stages{display:grid;gap:7px;margin:0 0 15px}.stage{display:grid;grid-template-columns:26px 1fr auto;gap:11px;align-items:center;background:#f7f9f5;border:1px solid #e4e9e0;border-radius:4px;padding:10px 12px;cursor:pointer;text-align:left;color:#445e4e}.stage.active{background:#e8efe7;border-color:#779f85}.stage .num{width:23px;height:23px;border:1px solid #a7b7a9;border-radius:50%;display:grid;place-items:center;font-size:10px}.stage.done .num{background:#315e46;color:#fff;border-color:#315e46}.stage small{font-size:10px;color:#809180}
+.action-area{background:#ecf4eb;border:1px solid #cfdece;padding:17px;margin-bottom:13px}.action-area p{color:#62776a;margin:7px 0 12px;line-height:1.6}.action-area .hint{font-size:10px;color:#967449}.action-area .btn{margin:0 8px 8px 0}
+.doc-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.doc-bar button{font-size:11px}
+pre{font:11px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6f2;color:#2c4237;border:1px solid #e2e8e1;padding:19px;max-height:640px;overflow:auto;margin:0}
+.gates{margin-top:16px;border-top:1px solid #e0e6dc;padding-top:16px;display:grid;gap:7px}.gate{display:flex;align-items:flex-start;gap:10px;background:#f7f9f6;padding:9px;font-size:12px;color:#416150}.gate input{accent-color:#375d46}.gate-note{font-size:10px;line-height:1.7;color:#73887b}
+.technical{display:grid;gap:14px}.technical fieldset{border:1px solid #e0e7dd;margin:0;padding:14px;min-width:0}
+.technical legend{padding:0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:700;color:#967852}
+.technical label{display:grid;gap:5px;font-size:10px;color:#567063}
+.technical input,.technical select,.technical textarea{width:100%;min-width:0;border:1px solid #d2ded0;border-radius:3px;padding:10px;background:#fff;color:#254033}
+.technical .group-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(max-width:550px){.technical .group-grid{grid-template-columns:1fr}}.timeline{margin:0;padding:0;list-style:none;display:grid;gap:9px}.timeline li{border-left:2px solid #88a794;padding-left:13px;color:#516a5a;font-size:11px}.timeline small{color:#899a8c;display:block}.status-message{min-height:22px;font-size:12px;color:#8c693e;margin:8px 0}
+.footer{border-top:1px solid #dce5db;margin-top:22px;padding-top:17px;color:#799084;font-size:11px;line-height:1.7}
+@media(max-width:1150px){.columns{grid-template-columns:1fr}.stat-row{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.shell{grid-template-columns:1fr}.sidebar{padding:13px 17px;gap:13px}.side-foot{display:none}.nav{display:flex;overflow:auto}.nav a{min-width:130px;padding:8px}.main{padding:0 18px 46px}.hero{padding:27px 0 18px;display:block}.hero-acts{margin-top:16px}.selector{grid-template-columns:1fr}}
+@media(max-width:550px){.fields{grid-template-columns:1fr}.fields label.full{grid-column:1}.stat-row{gap:7px}.stat{padding:13px}.stat strong{font-size:22px}.body{padding:14px}.panel-head{padding:15px}.columns{gap:10px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="n">N</div><div><strong>NOETFIELD</strong><small>Private Operations</small></div></div>
+  <nav class="nav" aria-label="Navigation">
+    <a href="/api/corporate-crm/app"><small>01 / PRODUCTION</small>Corporate CRM</a>
+    <a class="current" aria-current="page" href="/api/corporate-crm/scenario-lab"><small>02 / SANDBOX</small>Scenario Lab</a>
+    <a href="/api/corporate-crm/customer/app"><small>03 / CUSTOMER</small>Customer Portal</a>
+    <a href="https://scan.noetfield.com/rwa-clinic/" target="_blank" rel="noopener noreferrer"><small>04 / REFERENCE</small>RWA Clinic</a>
+  </nav>
+  <div class="side-foot"><strong>NOETFIELD SYSTEMS INC.</strong><div>7816 Windsor Street<br>Vancouver, BC V5X 4A8<br>Canada</div><p>Case studies are fictional. Nothing here sends a message, creates a real charge, qualifies a customer, or writes to CRM.</p></div>
+</aside>
+<main class="main">
+ <header class="top"><div><small>Operations / Commercial systems / </small><strong>Scenario Lab</strong></div><span class="simulation">SYNTHETIC · TRAINING ONLY</span></header>
+ <div class="hero"><div><span class="kicker">Commercial Execution Studio · Version 1</span><h1>Practice the complete deal.</h1><p>Two fully pre-filled fictional engagements. Edit intake, qualify the opportunity, draft the SOW, simulate a payment, dispatch a fictional WorkPacket, review verification and customer acceptance, then prepare renewal.</p></div><div class="hero-acts"><button class="btn" id="reset" type="button">Reset scenario</button><button class="btn dark" id="copy-all" type="button">Copy complete case pack</button></div></div>
+ <p class="notice"><strong>Training boundary:</strong> The simulator runs only in this browser tab's memory. Its receipts use the <strong>DEMO-</strong> prefix; no Stripe API, SMTP, external Company OS, real RWA diagnosis, Verifier signing key, database or CRM KPI is touched. Use production CRM only after substituting an actual customer, genuine signed SOW and live signed provider receipts.</p>
+ <div class="selector">
+   <button class="scenario active" id="choose-rwa" type="button" aria-pressed="true"><div class="label">SCENARIO 01 · USD</div><strong>RWA Technical Sprint</strong><small>Fictional private-credit originator · 9-gate readiness walkthrough · US$950 scope / US$475 deposit.</small></button>
+   <button class="scenario" id="choose-company" type="button" aria-pressed="false"><div class="label">SCENARIO 02 · CAD</div><strong>Company OS — AI Sales</strong><small>Fictional Canadian service SME · inbound lead automation · C$750 fixed-scope pilot.</small></button>
+ </div>
+ <section class="stat-row" aria-label="Scenario simulation metrics">
+   <div class="stat"><small>Case classification</small><strong id="metric-class">DEMO</strong></div>
+   <div class="stat"><small>Scenario stage</small><strong id="metric-stage">Intake</strong></div>
+   <div class="stat"><small>Fictional price</small><strong id="metric-price">US$950</strong></div>
+   <div class="stat"><small>Verified live cash</small><strong class="warn">$0</strong></div>
+ </section>
+ <div class="columns">
+   <div>
+     <section class="panel" style="margin-bottom:18px"><header class="panel-head"><h2>Client &amp; commercial forms</h2><small>Editable demo fields</small></header>
+       <form class="body fields" id="case-fields" autocomplete="off">
+         <label class="full">Fictional organization<input data-field="organization" maxlength="140" required></label>
+         <label>Buyer persona<input data-field="buyer" maxlength="100" required></label>
+         <label>Buyer email (.invalid only)<input data-field="email" type="email" required></label>
+         <label>Source ID<input data-field="source" maxlength="90"></label>
+         <label>Owner<input data-field="owner" maxlength="100"></label>
+         <label>Jurisdiction<input data-field="jurisdiction" maxlength="100"></label>
+         <label class="full">Business need<textarea data-field="problem" maxlength="1400"></textarea></label>
+         <label class="full">Scope and explicit exclusions<textarea data-field="scope" maxlength="1600"></textarea></label>
+         <label class="full">Acceptance criteria<textarea data-field="acceptance" maxlength="1600"></textarea></label>
+         <label>Delivery timeline<input data-field="timeline" maxlength="100"></label>
+         <label>Next action<input data-field="next_action" maxlength="160"></label>
+         <label class="full">Document/asset evidence (fictional references)<textarea data-field="evidence" maxlength="1600"></textarea></label>
+       </form>
+     </section>
+     <section class="panel" id="diagnostic-panel"><header class="panel-head"><h2>RWA readiness assessment</h2><small>Illustrative nine-gate checklist</small></header>
+       <div class="body"><p class="gate-note">The gate labels below are an educational approximation—not a replacement for the RWA Clinic's canonical diagnostic instrument. Gate 10 is a computed completeness indicator; it is not regulatory or investment approval.</p><div id="rwa-gates" class="gates"></div><p class="status-message" id="gate-score"></p></div>
+     </section>
+     <section class="panel" style="margin-top:18px"><header class="panel-head"><h2 id="detail-title">Clinic v3 intake</h2><small>Illustrative fields · pre-filled</small></header>
+       <div class="body"><p class="gate-note" id="detail-note">Synthetic example of Clinic intake categories. No diagnosis is submitted to the real Clinic.</p><div class="technical" id="technical-fields"></div></div>
+     </section>
+   </div>
+   <div>
+      <section class="panel" style="margin-bottom:18px"><header class="panel-head"><h2>Deal execution</h2><small id="stage-count">0 of 8 simulated</small></header>
+        <div class="body"><div class="stages" id="stages"></div><div class="action-area" id="next-action"></div><p class="status-message" id="action-message" role="status"></p></div>
+      </section>
+      <section class="panel" style="margin-bottom:18px"><header class="panel-head"><h2>Document &amp; receipt generator</h2><small>Fictional examples</small></header>
+       <div class="body"><div class="doc-bar" id="doc-tabs"></div><pre id="doc-preview"></pre><div class="hero-acts" style="margin-top:13px"><button class="btn dark" id="copy-document" type="button">Copy current document</button><button class="btn" id="download-case" type="button">Export demo JSON</button></div></div>
+      </section>
+      <section class="panel"><header class="panel-head"><h2>Scenario event log</h2><small>Local simulation, not a ledger</small></header><div class="body"><ul class="timeline" id="timeline"></ul></div></section>
+   </div>
+ </div>
+ <div class="footer">Noetfield Systems Inc. · Private educational simulator. Documents are drafts, not legal advice or executed contracts. Real customer identification, accepted scope, live Stripe verification, external WorkPacket acknowledgment, independent Verifier and authenticated customer acceptance remain separate requirements.</div>
+</main>
+</div>
+<script>
+"use strict";
+(function(){
+const STAGES=[
+ ["SOURCE","Source & discovery","Public research is not an opportunity"],
+ ["QUALIFIED","Qualification","Confirm real buyer problem, authority and consent"],
+ ["SOW","Accepted SOW","Demonstrate written scope and signature"],
+ ["CHECKOUT","Checkout evidence","Simulate only; no live Stripe event"],
+ ["WORKPACKET","Runtime dispatch","Simulate a provider acknowledgment, not a real job"],
+ ["VERIFIER","Independent verification","Simulated test verdict, never a signed receipt"],
+ ["ACCEPTED","Customer acceptance","Fictional buyer approves fictional deliverable"],
+ ["RENEWAL","Retention & referral","Plan next engagement without auto-sending"]
+];
+const GATES=[
+ "Asset identity & beneficial ownership",
+ "Underlying legal rights and title",
+ "Transferability and contractual restrictions",
+ "Asset valuation evidence",
+ "Cash-flow & repayment assumptions",
+ "Custody, servicing and recordkeeping",
+ "Counterparty and mandate verification",
+ "Jurisdiction & regulatory mapping",
+ "Technical integration and controls"
+];
+const TECHNICAL_SEEDS={
+ RWA:{
+ "Clinic v3 case intake":{"Issuer":"HarborBridge Private Credit Ltd. (fictional)","Asset value":"CAD 2,400,000","Target investors":"Qualified investors (hypothetical)","Proposed structure":"SPV + secured notes (proposed only)","Yield target (bps)":"850","Payment frequency":"monthly","Ledger architecture":"offchain_controlled","Ledger rationale":"Review ownership and custody before tokenization"},
+ "Asset documentation":{"Loan agreement status":"submitted","Loan agreement hash":"DEMO-DIGEST-LOAN","Security agreement status":"under_review","Security agreement hash":"DEMO-DIGEST-SECURITY","Appraisal status":"not_submitted","Appraisal hash":"DEMO-NOT-AVAILABLE"},
+ "Ownership and SPV":{"Borrower entity ID":"DEMO-BORROWER-001","SPV lifecycle":"in_formation","SPV legal name":"HarborBridge Pilot SPV (fictional)","SPV registration":"DEMO-NOT-REGISTERED","Articles status":"not_submitted","Articles hash":"DEMO-NOT-AVAILABLE"},
+ "Economic rights and terms":{"Cash flow status":"submitted","Cash flow hash":"DEMO-DIGEST-CASHFLOW","Coverage months":"24","Terms status":"under_review","Terms hash":"DEMO-DIGEST-TERMS"},
+ "Regulatory review":{"Counsel status":"not_engaged","Counsel firm ID":"DEMO-NONE","Opinion expected":"2027-01-15","Instrument question":"Security vs payment right — legal review required"},
+ "Custody and servicing":{"Custody model":"law_firm_hold","Hold description":"Hypothetical document hold","Servicing status":"submitted","Servicing hash":"DEMO-DIGEST-SERVICING","Servicer entity ID":"DEMO-SERVICER-001","Custody contract status":"not_submitted","Custody contract hash":"DEMO-NOT-AVAILABLE"},
+ "Transfer and recovery":{"Transfer status":"under_review","Transfer hash":"DEMO-DIGEST-TRANSFER","Recovery status":"not_submitted","Recovery hash":"DEMO-NOT-AVAILABLE","Recovery servicer ID":"DEMO-SERVICER-001","Risk register status":"submitted","Risk register hash":"DEMO-DIGEST-RISKS"},
+ "External reviews":{"External reviews JSON":'{"training_only":true,"reviews":[]}'}
+ },
+ COMPANY:{
+ "Company intake":{"Primary lead channel":"web_form","Monthly inquiries":"75","Current CRM":"Google Sheets + team inbox (fictional)","Buyer permission basis":"Opt-in forms; no automatic outbound"},
+ "Pipeline and ownership":{"Stages":"NEW → QUALIFY → OWNER_ASSIGNED → FOLLOWUP → CLOSED","Owner roles":"Ops Director, Sales Lead","SLA":"Follow up within 24 business hours","Deduplication":"Original source ID + approved contact email"},
+ "Agent configuration":{"Model routing":"Deterministic first; cheaper model only when needed","Human approval":"Required for any customer-facing send","Integrations":"Intake + CRM + existing Company OS","Fallback":"Record provider error and retain draft; no fake success"},
+ "Pilot tests":{"Positive-path acceptance":"One inquiry → one owned follow-up","Negative-path tests":"Duplicate blocked; no send without permission; timeout visible","Success metric":"Every sample lead has owner and next action","Reporting":"Weekly evidence-only"}
+ }
+};
+const base={
+ RWA:{organization:"HarborBridge Private Credit Ltd. (fictional)",buyer:"Maya Bennett · Investment Operations Lead (fictional)",email:"maya@harborbridge.invalid",
+ source:"DEMO-FIELDWORK-RWA-001",owner:"Noetfield RWA Delivery Lead",jurisdiction:"British Columbia, Canada",
+ problem:"Asset manager is evaluating whether a fictional CAD 2.4m receivables pool can be technically prepared for a controlled digitization and reporting pilot. Needs rights, servicing, evidence quality and system boundaries assessed first.",
+ scope:"US$950 technical readiness sprint. Map asset records, rights evidence, off-chain ownership and reporting inputs; classify nine readiness gates; deliver a structured risk/gap assessment and technical action plan. Excludes issuing tokens, investment solicitation, legal opinions, securities filings, custody and asset guarantees.",
+ acceptance:"Client receives a technical readiness matrix, provenance/risk summary, prioritized remediation backlog and a final walkthrough. Client confirms the scoped deliverables match the signed schedule; financial/legal suitability is excluded.",
+ timeline:"10 business days from verified payment and approved intake",next_action:"Request source documents and verify actual authority",evidence:"DEMO-DOC-OWNERSHIP-001; DEMO-DOC-SERVICING-002; DEMO-DOC-RECEIVABLES-003",
+ offer:"rwa_technical_sprint",currency:"USD",total:950,upfront:475,engine:"RWA_CLINIC",
+ deliverables:["Readiness matrix with nine gates and computed completion","Evidence gap register and architecture recommendations","Technical implementation backlog + client handover"],gates:[true,true,false,true,false,true,false,false,true]},
+ COMPANY:{organization:"Northshore Service Operations Ltd. (fictional)",buyer:"Jordan Patel · Operations Director (fictional)",email:"jordan@northshore-service.invalid",
+ source:"DEMO-FIELDWORK-SME-001",owner:"Noetfield Company OS Operator",jurisdiction:"British Columbia, Canada",
+ problem:"Fictional 18-person service business handles inbound requests across email and spreadsheets. Leads lose ownership; follow-up is inconsistent; staff lack a verifiable pipeline and weekly reporting.",
+ scope:"C$750 fixed-scope AI Sales OS pilot. Configure intake classification, owner-assignment rules, follow-up queue, human-reviewed draft outreach, CRM source references, and a basic weekly operational report. Excludes unsolicited message sending, production customer data import without permission, ERP replacement, performance guarantees and ongoing subscription.",
+ acceptance:"Demonstrate one fictional lead→owner→follow-up workflow, duplicate handling, 3 negative-path tests and clear operator handoff. No real customer messages sent without explicit authorization.",
+ timeline:"7 business days from source approval and verified paid scope",next_action:"Confirm CRM access and sample lead schema",evidence:"DEMO-INTAKE-SPEC-001; DEMO-CRM-WORKFLOW-002; DEMO-OWNER-MATRIX-003",
+ offer:"ai_sales_os_pilot",currency:"CAD",total:750,upfront:750,engine:"COMPANY_OS",
+ deliverables:["Intake and qualification rule map","Owned follow-up queue and CRM prototype","Operator playbook and acceptance test receipts"],gates:[]}
+};
+base.RWA.technical=JSON.parse(JSON.stringify(TECHNICAL_SEEDS.RWA));
+base.COMPANY.technical=JSON.parse(JSON.stringify(TECHNICAL_SEEDS.COMPANY));
+const $=id=>document.getElementById(id);
+const clone=x=>JSON.parse(JSON.stringify(x));
+let scenario="RWA",cases={RWA:clone(base.RWA),COMPANY:clone(base.COMPANY)};
+let progress={RWA:0,COMPANY:0},events={RWA:[],COMPANY:[]},selectedDoc="sow";
+const docNames={sow:"Statement of Work",intake:"Intake profile",payment:"Checkout example",packet:"WorkPacket contract",verifier:"Verifier receipt",acceptance:"Customer acceptance",followup:"Follow-up / renewal",outreach:"Outreach draft"};
+function escapeHTML(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function price(value,currency){return (currency==="USD"?"US$":"C$")+Number(value).toLocaleString("en-CA")}
+function c(){return cases[scenario]}
+function stage(){return progress[scenario]}
+function docText(id){
+ const v=c(),payment=stage()>=4,dispatch=stage()>=5,verified=stage()>=6,accepted=stage()>=7;
+ const common="DEMO ONLY — FICTIONAL TRAINING RECORD\nNOT SIGNED · NOT SENT · NOT AUTHORIZED FOR PRODUCTION\n\n";
+ if(id==="intake")return common+"CLIENT INTAKE & QUALIFICATION\nSource: "+v.source+"\nOrganization: "+v.organization+"\nContact: "+v.buyer+"\nEmail: "+v.email+"\nJurisdiction: "+v.jurisdiction+"\nOwner: "+v.owner+"\n\nBusiness need:\n"+v.problem+"\n\nDocument references:\n"+v.evidence+"\n\nContact status: FICTIONAL PERSON / NO CONSENT ESTABLISHED\nOpportunity status: TRAINING ONLY\n\nProduct-specific sample intake:\n"+JSON.stringify(v.technical,null,2);
+ if(id==="sow")return common+"NOETFIELD SYSTEMS INC. — ILLUSTRATIVE STATEMENT OF WORK\nProvider: Noetfield Systems Inc.\n7816 Windsor Street, Vancouver, BC V5X 4A8, Canada\n\nClient: "+v.organization+"\nRepresentative: "+v.buyer+"\n\n1. PURPOSE\n"+v.problem+"\n\n2. SCOPE / EXCLUSIONS\n"+v.scope+"\n\n3. DELIVERABLES\n- "+v.deliverables.join("\n- ")+"\n\n4. TIMELINE\n"+v.timeline+"\n\n5. ACCEPTANCE CRITERIA\n"+v.acceptance+"\n\n6. FEES AND AUTHORIZATION\nScope fee: "+price(v.total,v.currency)+"\nInitial checkout: "+price(v.upfront,v.currency)+" (sample amount, not charged).\nNo work is authorized until a real accepted written scope and verified paid checkout.\n\n7. RECORDS AND CHANGE CONTROL\nAdditional scope, privacy processing, compliance, IP, warranties and termination are subject to a properly executed agreement. This mock text is not a signature.\n\nProvider signature: [NOT SIGNED]\nClient signature: [NOT SIGNED]\nDate: [NOT EXECUTED]";
+ if(id==="payment")return common+"STRIPE CHECKOUT TRAINING PROJECTION\nOffer: "+v.offer+"\nAmount: "+price(v.upfront,v.currency)+"\nExpected link: "+(scenario==="RWA"?"plink_1UbG9CJ03eJkL57JNNK0P3cY":"plink_1UcS8RJ03eJkL57J4IMvmFuD")+"\nLive payment event: NONE\nLive Checkout Session: NONE\nSimulated stage: "+(payment?"DEMO_CHECKOUT_ACCEPTED":"DEMO_NOT_PAID")+"\nFake receipt ID: DEMO-CHECKOUT-"+scenario+"-001\nCash verified: 0\nDo not paste this example into production payment reconciliation.";
+ if(id==="packet")return common+JSON.stringify({schema:"noetfield.commercial-workpacket.demo.v1",classification:"SIMULATION_ONLY",
+  workpacket_id:"DEMO-WP-"+scenario+"-001",source_intake_id:"DEMO-INTAKE-"+scenario+"-001",
+  source_research_id:v.source,organization:v.organization,offer:v.offer,engine:v.engine,
+  scope_ref:"DEMO-SOW-"+scenario+"-001",payment_event_id:"DEMO-NOT-A-STRIPE-EVENT",
+  dispatch_state:dispatch?"SIMULATED_ACKNOWLEDGMENT":"NOT_DISPATCHED",
+  source_authority:"DEMO_ONLY",cost_ceiling_minor:scenario==="RWA"?12000:8000,
+  requested_work:v.scope,acceptance_checks:v.acceptance,
+  deliverables:v.deliverables,clinical_or_agent_intake:v.technical,trace_id:"DEMO-TRACE-"+scenario+"-001",
+  provider_receipt_url:null,real_provider_acknowledged:false},null,2);
+ if(id==="verifier")return common+JSON.stringify({schema:"noetfield.verifier-training.v1",verified:verified?"DEMO_PASS":"NOT_RUN",
+  independent_verification_performed:false,provider_signature_present:false,
+  fake_workpacket_id:"DEMO-WP-"+scenario+"-001",sample_checks:
+  ["scope matched to fictional SOW","artifact reference present in sample pack","format and completeness reviewed"],
+  gate10:scenario==="RWA"?Math.round(v.gates.filter(Boolean).length/9*100)+"% illustrative completion":"not applicable",
+  result:"NOT AN INDEPENDENT VERIFIER RECEIPT",artifact_url:null,cost_minor:null},null,2);
+ if(id==="acceptance")return common+"CUSTOMER ACCEPTANCE WORKSHEET\nClient: "+v.organization+"\nProject: "+v.offer+"\nAcceptance criteria:\n"+v.acceptance+"\n\nSample deliverables:\n- "+v.deliverables.join("\n- ")+"\n\nStatus: "+(accepted?"FICTIONAL CUSTOMER ACCEPTANCE SIMULATED":"NOT ACCEPTED")+"\nVerified customer identity: FALSE\nReal signed verifier receipt: NONE\nReal paid event: NONE\n\nBuyer signature: [DEMO ONLY — NO SIGNATURE]\nAcceptance timestamp: [NOT A LIVE EVENT]";
+ if(id==="followup")return common+"CUSTOMER SUCCESS / RENEWAL PLAYBOOK\nCustomer: "+v.organization+"\nPrimary next action: "+v.next_action+"\n\nAfter verified handover (not yet achieved in reality):\n1. Schedule a 14-day value review.\n2. Document actual agreed outcomes, unresolved issues and next priority.\n3. Propose a separately scoped phase 2 only when the customer requests it.\n4. Ask for a referral only with permission and record the introduction.\n\nSimulated step: "+(stage()>=8?"RENEWAL_WORKFLOW_REHEARSED":"NOT_SIMULATED")+"\nNo follow-up was sent; no renewal booked.";
+ return common+"SAMPLE — DO NOT SEND\nTo: "+v.email+"\nSubject: Scoped "+(scenario==="RWA"?"RWA technical readiness":"AI Sales OS workflow")+" discussion\n\nHello "+v.buyer.split("·")[0].trim()+",\n\nWe are reviewing how "+v.organization+" might approach:\n"+v.problem+"\n\nA narrow paid pilot could cover:\n"+v.deliverables.join("; ")+".\n\nWould a short discovery call be relevant to your actual priorities?\n\nRegards,\nNoetfield Systems Inc.\n7816 Windsor Street, Vancouver, BC V5X 4A8, Canada\n\nTRAINING TEMPLATE ONLY; CONTACT IS FICTIONAL, NO RECIPIENT PERMISSION, NO SMTP ACTION.";
+}
+function snapshot(){return {schema:"noetfield.commercial-scenario-pack.demo.v1",synthetic:true,not_customer:true,not_verified_cash:true,not_external_execution:true,generated_at:new Date().toISOString(),scenario,stage_index:stage(),fields:clone(c()),events:clone(events[scenario]),documents:Object.fromEntries(Object.keys(docNames).map(id=>[id,docText(id)]))}}
+function download(data,name){const obj=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(obj);const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+async function copy(value){try{await navigator.clipboard.writeText(value);$("action-message").textContent="Copied fictional training content. Never submit as a live receipt."}catch(error){$("action-message").textContent="Clipboard unavailable. Select and copy the document preview."}}
+function setCase(which){scenario=which;selectedDoc="sow";$("choose-rwa").classList.toggle("active",which==="RWA");$("choose-company").classList.toggle("active",which==="COMPANY");
+ ["choose-rwa","choose-company"].forEach(id=>$(id).setAttribute("aria-pressed",String((which==="RWA"&&id==="choose-rwa")||(which==="COMPANY"&&id==="choose-company"))));render();}
+function render(){
+ const v=c();document.querySelectorAll("[data-field]").forEach(el=>el.value=v[el.dataset.field]||"");
+ $("metric-class").textContent=scenario==="RWA"?"RWA / DEMO":"AI OS / DEMO";
+ $("metric-stage").textContent=stage()?STAGES[Math.min(stage()-1,7)][0]:"SOURCE";
+ $("metric-price").textContent=price(v.total,v.currency);
+ $("stage-count").textContent=stage()+" of 8 simulated";
+ $("diagnostic-panel").hidden=scenario!=="RWA";
+ renderTechnical();
+ $("stages").innerHTML=STAGES.map(([id,label,explain],i)=>
+ '<button class="stage '+(i<stage()?"done ":"")+(i===stage()?"active":"")+'" type="button" data-stage="'+i+'">'+
+ '<span class="num">'+(i<stage()?"✓":i+1)+'</span><span><strong>'+escapeHTML(label)+'</strong><br><small>'+escapeHTML(explain)+'</small></span>'+
+ '<small>'+(i<stage()?"Simulated":"Not done")+'</small></button>').join("");
+ document.querySelectorAll("[data-stage]").forEach(btn=>btn.addEventListener("click",()=>{
+   $("action-message").textContent=STAGES[Number(btn.dataset.stage)][2]+" — this is guidance only.";
+ }));
+ const next=STAGES[stage()];
+ $("next-action").innerHTML=next?
+   '<strong>Next practice action: '+escapeHTML(next[1])+'</strong><p>'+escapeHTML(next[2])+'.</p>'+
+   '<button id="advance" class="btn dark" type="button">Simulate '+escapeHTML(next[1])+'</button>'+
+   '<p class="hint">No real provider, client account, CRM record, signature or payment is involved.</p>':
+   '<strong>Scenario walkthrough complete</strong><p>You have rehearsed the full fictional commercial flow. Production metrics remain unchanged.</p>'+
+   '<button id="rehearse-again" class="btn" type="button">Rehearse this case again</button>';
+ const advance=$("advance");if(advance)advance.addEventListener("click",()=>{
+   if(!validInput())return;
+   progress[scenario]++;
+   events[scenario].push({stage:STAGES[stage()-1][0],message:STAGES[stage()-1][1]+" — simulated only",status:"DEMO"});
+   render();$("action-message").textContent="Demo step recorded in this tab only. Live execution remains unchanged.";
+ });
+ const again=$("rehearse-again");if(again)again.addEventListener("click",()=>{progress[scenario]=0;events[scenario]=[];render()});
+ $("doc-tabs").innerHTML=Object.entries(docNames).map(([id,label])=>'<button type="button" class="btn '+(id===selectedDoc?"dark":"")+'" data-doc="'+id+'">'+escapeHTML(label)+'</button>').join("");
+ document.querySelectorAll("[data-doc]").forEach(btn=>btn.addEventListener("click",()=>{selectedDoc=btn.dataset.doc;showDocument()}));
+ showDocument();
+ $("timeline").innerHTML=events[scenario].length?events[scenario].map((item,i)=>'<li><strong>'+escapeHTML(item.stage)+'</strong><span>'+escapeHTML(item.message)+'</span><small>#'+(i+1)+' · local demo</small></li>').join(""):'<li><strong>Not started</strong><span>No simulated steps recorded.</span></li>';
+ if(scenario==="RWA"){
+    $("rwa-gates").innerHTML=GATES.map((name,i)=>'<label class="gate"><input type="checkbox" data-gate="'+i+'" '+(v.gates[i]?"checked":"")+'><span>'+escapeHTML(name)+'</span></label>').join("");
+    document.querySelectorAll("[data-gate]").forEach(cb=>cb.addEventListener("change",()=>{
+      v.gates[Number(cb.dataset.gate)]=cb.checked;renderGates();showDocument()
+    }));
+    renderGates();
+ }
+}
+function renderTechnical(){
+ const v=c();$("detail-title").textContent=scenario==="RWA"?"RWA Clinic v3-style full intake":"Company OS process and agent configuration";
+ $("detail-note").textContent=scenario==="RWA"?
+   "All public Clinic v3 intake categories are pre-filled for rehearsal; real evidence hashes and official gate evaluation require the actual Clinic service.":
+   "Pre-filled lead-routing, human authority, model fallback, deduplication and acceptance fields for the existing Company OS.";
+ $("technical-fields").innerHTML=Object.entries(v.technical).map(([group,values])=>
+ "<fieldset><legend>"+escapeHTML(group)+"</legend><div class='group-grid'>"+
+ Object.entries(values).map(([label,value])=>{
+  const options=label.toLowerCase().endsWith("status")?
+   ["not_submitted","submitted","under_review","verified"]:null;
+  const input=options?"<select data-group='"+escapeHTML(group)+"' data-key='"+escapeHTML(label)+"'>"+
+    options.map(x=>"<option value='"+x+"'"+(value===x?" selected":"")+">"+x.replace(/_/g," ")+"</option>").join("")+"</select>":
+    "<input type='text' data-group='"+escapeHTML(group)+"' data-key='"+escapeHTML(label)+"' value='"+escapeHTML(value)+"'>";
+  return "<label>"+escapeHTML(label)+input+"</label>"
+ }).join("")+"</div></fieldset>").join("");
+ $("technical-fields").querySelectorAll("[data-group]").forEach(el=>el.addEventListener("input",()=>{
+    v.technical[el.dataset.group][el.dataset.key]=el.value;showDocument();
+ }));
+}
+function renderGates(){if(scenario==="RWA")$("gate-score").textContent="Illustrative Gate 10 · "+c().gates.filter(Boolean).length+"/9 checks selected ("+Math.round(c().gates.filter(Boolean).length/9*100)+"% complete). Not an official clinic score or eligibility decision."}
+function showDocument(){$("doc-preview").textContent=docText(selectedDoc)}
+function validInput(){
+ const v=c();
+ if(!v.organization.trim()||!v.buyer.trim()||!v.scope.trim()||!v.acceptance.trim()||!v.problem.trim()||!v.email.trim().endsWith(".invalid")){
+   $("action-message").textContent="Complete the fictional business fields and keep the email on a reserved .invalid domain.";
+   return false;
+ }
+ return true;
+}
+document.querySelectorAll("[data-field]").forEach(el=>el.addEventListener("input",()=>{
+ const key=el.dataset.field, val=el.value;
+ if(key==="email"&&!val.trim().endsWith(".invalid")){
+   $("action-message").textContent="Training uses reserved .invalid emails only; no real recipients.";
+ }
+ c()[key]=val;showDocument();
+}));
+$("choose-rwa").addEventListener("click",()=>setCase("RWA"));
+$("choose-company").addEventListener("click",()=>setCase("COMPANY"));
+$("reset").addEventListener("click",()=>{cases[scenario]=clone(base[scenario]);progress[scenario]=0;events[scenario]=[];$("action-message").textContent="Training scenario reset.";render()});
+$("copy-all").addEventListener("click",()=>copy(JSON.stringify(snapshot(),null,2)));
+$("copy-document").addEventListener("click",()=>copy(docText(selectedDoc)));
+$("download-case").addEventListener("click",()=>download(snapshot(),"noetfield-"+scenario.toLowerCase()+"-scenario-DEMO.json"));
+setCase("RWA");
+})();
+</script>
+</body>
+</html>
