@@ -1,5 +1,6 @@
 name: Noetfield WWW Production
 # Release trigger note: 2026-11-16 market-native Noetfield & consented Early Access after exact-main static-verifier mode repair.
+# Canonical customer portal OAuth static assets release: 2026-11-17 exact-main delivery.
 
 on:
   workflow_dispatch:
