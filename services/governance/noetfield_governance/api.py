@@ -2912,7 +2912,7 @@ async def corporate_rwa_original_verifier_source(
          tags=["operations"],include_in_schema=False)
 async def corporate_rwa_authenticated_customer_report(
     deal_id:str,request:Request,
-)->dict[str,object]:
+)->Response:
     from noetfield_governance.customer_portal import authenticate_customer
     from noetfield_governance.corporate_rwa_execution import customer_rwa_report
     from noetfield_governance.corporate_workpacket import WorkPacketError
@@ -2920,7 +2920,25 @@ async def corporate_rwa_authenticated_customer_report(
     token=bearer[7:] if bearer.startswith("Bearer ") else ""
     identity=await authenticate_customer(token)
     try:
-        return await customer_rwa_report(settings,deal_id=deal_id,identity=identity)
+        report=await customer_rwa_report(settings,deal_id=deal_id,identity=identity)
+        return JSONResponse(report,headers={
+            "Cache-Control":"private, no-store",
+            "X-Robots-Tag":"noindex, nofollow",
+            "Referrer-Policy":"no-referrer"})
+    except WorkPacketError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
+@app.post("/api/corporate-crm/workpackets/rwa/verify",
+          tags=["operations"],include_in_schema=False)
+async def corporate_rwa_independent_verify(
+    body:CorporateWorkPacketRequest,request:Request,
+)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_rwa_execution import verify_paid_rwa_clinic
+    from noetfield_governance.corporate_workpacket import WorkPacketError
+    try:
+        return await verify_paid_rwa_clinic(settings,deal_id=body.deal_id)
     except WorkPacketError as exc:
         raise HTTPException(status_code=409,detail=str(exc)) from exc
 
