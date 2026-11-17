@@ -56,7 +56,9 @@ def test_smtp_outreach_is_never_called_without_documented_contact_permission():
         key=str(uuid4())
         fake=AsyncMock()
         fake.fetchrow.return_value=None
-        with patch("noetfield_governance.corporate_outbound._mailbox",
+        with patch("noetfield_governance.corporate_outbound._sender_footer",
+                   return_value="Noetfield Systems Inc. Verified Address"),\
+             patch("noetfield_governance.corporate_outbound._mailbox",
                    return_value=("operations@noetfield.com","private_app_password")),\
              patch("noetfield_governance.corporate_outbound.asyncpg.connect",
                    new_callable=AsyncMock,return_value=fake),\
@@ -81,7 +83,9 @@ def test_smtp_provider_ack_is_not_claimed_as_inbox_delivery_or_reply():
              "contact_evidence":"https://example.org/consent",
              "review_status":"CONTACT_CHANNEL_VERIFIED","stage":"QUALIFYING"}
         fake.fetchrow.side_effect=[row,{"id":uuid4()}]
-        with patch("noetfield_governance.corporate_outbound._mailbox",
+        with patch("noetfield_governance.corporate_outbound._sender_footer",
+                   return_value="Noetfield Systems Inc. Verified Address"),\
+             patch("noetfield_governance.corporate_outbound._mailbox",
                    return_value=("operations@noetfield.com","private_app_password")),\
              patch("noetfield_governance.corporate_outbound.asyncpg.connect",
                    new_callable=AsyncMock,return_value=fake),\
