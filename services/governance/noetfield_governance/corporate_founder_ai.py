@@ -63,6 +63,12 @@ Do not pretend to visit URLs or research beyond the supplied quoted public text.
 """
 
 
+def _explicitly_free_model(model:str)->bool:
+    """Avoid OpenRouter's rate-limited :free variants and openrouter/free router."""
+    normalized=model.strip().casefold()
+    return normalized.endswith(":free") or normalized=="openrouter/free"
+
+
 def _model_routes()->list[dict[str,str]]:
     """Paid models first, never let a free or expired OpenRouter block work.
 
@@ -75,7 +81,7 @@ def _model_routes()->list[dict[str,str]]:
     key=os.getenv("CORPORATE_AI_LLM_API_KEY","").strip()
     model=os.getenv("CORPORATE_AI_LLM_MODEL","").strip()
     if (base.startswith("https://") and len(key)>=8 and model
-            and not model.casefold().endswith(":free")
+            and not _explicitly_free_model(model)
             and not any(x in base for x in ("@","?","#"))):
         from urllib.parse import urlsplit
         u=urlsplit(base)
@@ -104,7 +110,7 @@ def _model_routes()->list[dict[str,str]]:
                 "route":"AGENT_FABRIC_SOURCE_SPECIALIST"})
     fallback_key=os.getenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY","").strip()
     fallback_model=os.getenv("CORPORATE_AI_COMPANY_FALLBACK_MODEL","").strip()
-    if len(fallback_key)>=8 and fallback_model and not fallback_model.casefold().endswith(":free"):
+    if len(fallback_key)>=8 and fallback_model and not _explicitly_free_model(fallback_model):
         routes.append({"url":_URL,"key":fallback_key,
             "model":fallback_model,"route":"COMPANY_OS_OPENROUTER_FALLBACK"})
     # In particular, an old expired platform OpenRouter key is NOT silently
@@ -113,7 +119,7 @@ def _model_routes()->list[dict[str,str]]:
     old_model=os.getenv("OPENROUTER_MODEL","").strip()
     if (os.getenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","").strip()=="1"
             and len(old_key)>=8 and old_model
-            and not old_model.casefold().endswith(":free")):
+            and not _explicitly_free_model(old_model)):
         routes.append({"url":_URL,"key":old_key,"model":old_model,
             "route":"PLATFORM_OPENROUTER"})
     return routes
