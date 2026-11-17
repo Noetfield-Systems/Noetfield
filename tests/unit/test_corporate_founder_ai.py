@@ -125,6 +125,43 @@ def test_existing_company_os_model_used_first_and_openrouter_401_not_required(mo
     assert responses[0][1]=="Bearer company-secret-not-exposed"
 
 
+def test_company_os_distinct_fallback_precedes_invalid_platform_key(monkeypatch):
+    from noetfield_governance.corporate_founder_ai import _model_routes
+    monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com/v1")
+    monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","bad-primary-key")
+    monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-chat")
+    monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY","distinct-company-fallback")
+    monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_MODEL","fallback-model")
+    monkeypatch.setenv("OPENROUTER_API_KEY","bad-platform-key")
+    monkeypatch.setenv("OPENROUTER_MODEL","platform-model")
+    routes=_model_routes()
+    assert [x["route"] for x in routes]==[
+       "COMPANY_OS_EXISTING_MODEL","COMPANY_OS_OPENROUTER_FALLBACK",
+       "PLATFORM_OPENROUTER"]
+    calls=[]
+    class Resp:
+        def __init__(self,code):self.status_code=code
+        def json(self):
+            return {"id":"real-fallback-model","model":"fallback-model",
+                "choices":[{"message":{"content":json.dumps(VALID)}}],
+                "usage":{"prompt_tokens":100,"completion_tokens":30}}
+    class Client:
+        def __init__(self,*args,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        async def post(self,url,**kwargs):
+            calls.append(kwargs["headers"]["Authorization"])
+            return Resp(401 if len(calls)==1 else 200)
+    async def exercise():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",Client):
+            return await analyze_public_company(SAMPLE)
+    res=asyncio.run(exercise())
+    assert res["model_route"]=="COMPANY_OS_OPENROUTER_FALLBACK"
+    assert res["generation_id"]=="real-fallback-model"
+    assert res["cost_usd"] is None
+    assert calls==["Bearer bad-primary-key","Bearer distinct-company-fallback"]
+
+
 def test_primary_provider_unauthorized_is_fallback_only_not_fake_model_receipt(monkeypatch):
     monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com/v1")
     monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","expired-model-key")

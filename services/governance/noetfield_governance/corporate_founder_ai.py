@@ -76,7 +76,14 @@ def _model_routes()->list[dict[str,str]]:
         if u.scheme=="https" and u.hostname and u.port in (None,443):
             routes.append({"url":base+"/chat/completions",
                 "key":key,"model":model,"route":"COMPANY_OS_EXISTING_MODEL"})
-    # Existing OpenRouter is an alternate, never a prerequisite.
+    # Company OS's independently configured fallback credential is separate
+    # from its primary model credential. This calls only public source analysis.
+    fallback_key=os.getenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY","").strip()
+    fallback_model=os.getenv("CORPORATE_AI_COMPANY_FALLBACK_MODEL","").strip()
+    if fallback_key and fallback_model:
+        routes.append({"url":_URL,"key":fallback_key,
+            "model":fallback_model,"route":"COMPANY_OS_OPENROUTER_FALLBACK"})
+    # Existing platform OpenRouter is the final alternate, never a prerequisite.
     old_key=os.getenv("OPENROUTER_API_KEY","").strip()
     old_model=os.getenv("OPENROUTER_MODEL","").strip()
     if old_key and old_model:
