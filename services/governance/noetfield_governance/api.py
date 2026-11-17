@@ -2740,6 +2740,41 @@ async def corporate_research_promote(
         raise HTTPException(status_code=422,detail=str(exc)) from exc
 
 
+class CorporateOutboundSendRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    deal_id: str
+    subject: str = Field(min_length=4,max_length=160)
+    body: str = Field(min_length=20,max_length=5000)
+    actor: str = Field(min_length=2,max_length=120)
+
+
+@app.post("/api/corporate-crm/outreach/send",tags=["operations"],include_in_schema=False)
+async def corporate_outreach_send(
+    body:CorporateOutboundSendRequest,request:Request,
+)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_outbound import send_sourced_outreach
+    from noetfield_governance.corporate_crm import CorporateCRMError
+    try:
+        return await send_sourced_outreach(settings,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
+@app.post("/api/corporate-crm/outreach/reconcile",tags=["operations"],include_in_schema=False)
+async def corporate_outreach_reconcile(request:Request)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_outbound import reconcile_real_replies
+    return await reconcile_real_replies(settings)
+
+
+@app.get("/api/corporate-crm/outreach/metrics",tags=["operations"],include_in_schema=False)
+async def corporate_outreach_metrics(request:Request)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_outbound import provider_outreach_metrics
+    return await provider_outreach_metrics(settings)
+
+
 @app.post("/api/corporate-crm/customers/access", tags=["operations"], include_in_schema=False)
 async def corporate_customer_membership(
     body: CorporateCustomerAccessRequest, request: Request,
