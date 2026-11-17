@@ -45,15 +45,18 @@ def test_paid_checkout_requires_canonical_bound_live_exact_receipt():
       "scope_ref":"SOW-RWA-0001",
       "acceptance_evidence":"https://docs.example.org/signed.pdf",
       "payment_session_id":"cs_live_123456789",
+      "payment_event_id":"evt_example",
     })
     good={"event_id":"evt_example","session_id":"cs_live_123456789",
        "amount_minor":47500,"currency":"usd","livemode":True,
        "payment_link_id":"plink_1UbG9CJ03eJkL57JNNK0P3cY",
-       "source_intake_id":"INT-ABCDEF123456","reversed":False}
+       "source_intake_id":"INT-ABCDEF123456","reversed":False,
+       "bound_at":"2026-11-17T01:00:00Z"}
     assert customer_case_projection({**case,"payment":good})["payment_status"]=="PAID_LIVE"
     for bad in [{**good,"source_intake_id":"INT-OTHER123456"},
                 {**good,"amount_minor":1},{**good,"livemode":False},
-                {**good,"payment_link_id":"plink_fake"}]:
+                {**good,"payment_link_id":"plink_fake"},
+                {**good,"bound_at":None},{**good,"event_id":"evt_incorrect"}]:
         assert customer_case_projection({**case,"payment":bad})["payment_status"]!="PAID_LIVE"
     assert customer_case_projection({**case,"payment":{**good,"reversed":True}})["payment_status"]=="REVERSED"
 
