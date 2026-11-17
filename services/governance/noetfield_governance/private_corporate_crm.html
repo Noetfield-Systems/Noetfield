@@ -738,6 +738,7 @@ function drawDetail(payload){
       '<label class="wide">Actual canonical v3 Clinic case JSON<textarea name="clinic_case" rows="8" required placeholder="Paste real v3 case JSON. No DEMO, synthetic or example records."></textarea></label>'+
       '<button type="submit" class="primary">Submit paid case to native Clinic</button></form>'+
       '<button type="button" id="clinic-refresh" class="ghost" style="margin-top:9px">Read clinical provider receipt</button>'+
+      '<button type="button" id="clinic-verify-native" class="primary" style="margin-top:9px">Independent RWA gate verification</button>'+
       '<p id="clinic-result" class="small" role="status"></p>';
    els.panel.querySelector(".detail").appendChild(clinic);
    const status=clinic.querySelector("#clinic-result");
@@ -747,13 +748,28 @@ function drawDetail(payload){
        status.textContent="Native Clinic: "+p.state+
          (p.clinic_case_id?" · case "+p.clinic_case_id:"")+
          (p.clinical_verdict?" · verdict "+JSON.stringify(p.clinical_verdict):"")+
-         " · final customer delivery: NOT VERIFIED";
+         " · independent report: "+(p.workpacket_state==="VERIFIED"?"VERIFIED":"NOT VERIFIED")+
+         " · customer acceptance: NOT AUTOMATIC";
+       clinic.querySelector("#clinic-verify-native").disabled=
+         p.state!=="PROVIDER_ACCEPTED"||!p.native_clinic_verdict||p.workpacket_state==="VERIFIED";
        if(p.state!=="NOT_SUBMITTED"){
           clinic.querySelector("#paid-clinic-run button").disabled=true;
        }
      }catch(err){status.textContent="Clinic case readback unavailable: "+err.message}
    }
    clinic.querySelector("#clinic-refresh").addEventListener("click",refreshClinic);
+   clinic.querySelector("#clinic-verify-native").addEventListener("click",async()=>{
+      const button=clinic.querySelector("#clinic-verify-native");button.disabled=true;
+      try{
+        const proof=await api("/api/corporate-crm/workpackets/rwa/verify",{
+          method:"POST",data:{deal_id:d.id}});
+        status.textContent="Independent Clinic proof: "+proof.state+
+          " · technical report verified: "+Boolean(proof.independently_verified_technical_report)+
+          " · customer accepted: false";
+        await refreshClinic();
+      }catch(err){status.textContent="Independent Clinic proof unavailable: "+err.message}
+      finally{button.disabled=false}
+   });
    clinic.querySelector("#paid-clinic-run").addEventListener("submit",async event=>{
      event.preventDefault();const button=event.currentTarget.querySelector("button");
      let parsed;
