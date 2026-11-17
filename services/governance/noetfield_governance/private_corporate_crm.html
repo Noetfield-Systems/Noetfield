@@ -661,6 +661,7 @@ function renderFounderMissions(report){
   Number(report.states?.DELIVERY_IN_PROGRESS||0)+" paid provider jobs in progress.";
  const stateNames={INTRO_REVIEW_READY:"Introduction draft ready",
   QUALIFIED_CRM_RECORD:"Real CRM opportunity",DELIVERY_IN_PROGRESS:"Paid work in progress",
+  DELIVERY_DISPATCH_ATTENTION:"Paid delivery needs attention",
   VERIFIED_DELIVERY:"Independent delivery verified",
   AGENT_RESEARCH_PENDING:"AI research next",PEOPLE_RESEARCH_PENDING:"Find a decision-maker",
   SOURCE_RESEARCH_PENDING:"Company source research",
@@ -676,7 +677,11 @@ function renderFounderMissions(report){
   (m.draft?'<button type="button" data-founder-copy="'+i+'">Copy prepared introduction</button>':'')+
   (safeURL(m.contact_evidence_url)?'<a class="inline-link" href="'+esc(safeURL(m.contact_evidence_url))+'" target="_blank" rel="noopener noreferrer">Contact evidence</a>':'')+
   (safeURL(m.source_url)?'<a class="inline-link" href="'+esc(safeURL(m.source_url))+'" target="_blank" rel="noopener noreferrer">Original source</a>':'')+
-  '</div><small>Priority '+Number(m.priority||0)+' · '+esc(m.offer)+' · '+esc(m.lane)+'</small></article>'
+  (safeURL(m.provider_receipt_url)?'<a class="inline-link" href="'+esc(safeURL(m.provider_receipt_url))+'" target="_blank" rel="noopener noreferrer">Provider job receipt</a>':'')+
+  (safeURL(m.verifier_receipt_url)?'<a class="inline-link" href="'+esc(safeURL(m.verifier_receipt_url))+'" target="_blank" rel="noopener noreferrer">Verifier evidence</a>':'')+
+  '</div>'+
+  (m.delivery_error_code?'<small>Delivery status: '+esc(m.delivery_error_code)+' · attempts '+Number(m.dispatch_attempts||0)+'</small>':'')+
+  '<small>Priority '+Number(m.priority||0)+' · '+esc(m.offer)+' · '+esc(m.lane)+'</small></article>'
  ).join(""):'<p class="empty">No current commercial missions. The system will check sources automatically.</p>';
  $("#founder-missions-list").querySelectorAll("[data-founder-copy]").forEach(b=>
   b.addEventListener("click",async()=>{
