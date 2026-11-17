@@ -440,13 +440,25 @@ async function loadFieldworkResearch(){
       '<label class="wide">Documented contact permission basis<select name="contact_basis">'+
       ["OPTED_IN","EXISTING_RELATIONSHIP","PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL","INTRODUCED_BY_MUTUAL_CONTACT","OTHER_DOCUMENTED_BASIS"].map(x=>'<option>'+x+'</option>').join("")+'</select></label>'+
       '<label class="wide">Original contact/basis evidence URL<input name="contact_evidence" type="url" required placeholder="https://"></label>'+
+      '<label class="wide" data-public-channel style="display:none">Why is this published address relevant to the recipient’s business role?<textarea name="role_relevance" maxlength="500" placeholder="Source page, current duties and relevance of this specific pilot"></textarea></label>'+
+      '<label class="wide" data-public-channel style="display:none"><input type="checkbox" name="publication_no_solicitation"> I reviewed the original published address: no accompanying no-solicitation statement and this message is directly relevant to their role</label>'+
       '<label>Account owner<input name="owner" value="Noetfield Revenue" required></label>'+
       '<label class="wide">Next action<input name="next_action" required value="Qualify the actual buyer problem and scope"></label>'+
       '<button class="primary" type="submit">Create qualified opportunity</button>';
      button.disabled=true;container.appendChild(form);
+     const permission=form.querySelector('[name="contact_basis"]');
+     const updateEvidence=()=>{
+       const publicBasis=permission.value==="PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL";
+       form.querySelectorAll("[data-public-channel]").forEach(element=>element.style.display=publicBasis?"flex":"none");
+       form.querySelector('[name="role_relevance"]').required=publicBasis;
+       form.querySelector('[name="publication_no_solicitation"]').required=publicBasis;
+     };
+     permission.addEventListener("change",updateEvidence);updateEvidence();
      form.addEventListener("submit",async event=>{
        event.preventDefault();
-       const data=Object.fromEntries(new FormData(form));data.source_key=item.source_key;
+       const data=Object.fromEntries(new FormData(form));
+       data.source_key=item.source_key;
+       data.publication_no_solicitation=form.querySelector('[name="publication_no_solicitation"]').checked;
        try{
          const promoted=await api("/api/corporate-crm/research/promote",{method:"POST",data});
          message("Source qualified into CRM; no outreach sent.",true);
@@ -472,13 +484,15 @@ async function refreshOutboundMetrics(){
  try{const r=await api("/api/corporate-crm/outreach/metrics");
    $("#outreach-status").textContent="SMTP accepted: "+(r.sending_status?.PROVIDER_ACCEPTED||0)+
     " · verified inbound replies: "+(r.provider_verified_replies||0)+
+    " · suppressed: "+(r.suppressed_recipients||0)+
     " · booked meetings: 0 until independently evidenced";
  }catch(err){$("#outreach-status").textContent="Outreach provider metrics unavailable: "+err.message}
 }
 $("#outreach-reconcile").addEventListener("click",async()=>{
  const button=$("#outreach-reconcile");button.disabled=true;
  try{const r=await api("/api/corporate-crm/outreach/reconcile",{method:"POST",data:{}});
-   message("IMAP header verification: "+r.new_verified_replies+" new replies. No meeting inferred.",true);
+   message("IMAP header verification: "+r.new_verified_replies+" new replies · "+
+     (r.new_suppressed_recipients||0)+" new opt-outs. No meeting inferred.",true);
    await refreshOutboundMetrics();
  }catch(err){message("Reply verification failed: "+err.message)}
  finally{button.disabled=false}
@@ -626,14 +640,30 @@ function drawDetail(payload){
      body:"Hello,\n\nNoetfield works with organizations on scoped AI and workflow operations. Would a brief discussion about your priorities be relevant?\n\nBest,\nNoetfield Systems"
    };
    approved.innerHTML='<h4>Send approved business outreach · live Google SMTP</h4>'+
-    '<p class="small">Real SMTP provider acknowledgement only. Send requires a promoted Fieldwork research source and documented opt-in, relationship or introduction evidence; it does not imply delivery, reply or a booked meeting.</p>'+
+    '<p class="small">Real SMTP acceptance only; permitted opt-in, relationship, introduction or published business channels require original evidence. The provider appends company identification, a configured mailing address and an email unsubscribe mechanism. No send, delivery or reply is implied.</p>'+
     '<form class="fields" id="provider-outreach">'+
     '<label class="wide">Subject<input name="subject" required maxlength="160" value="'+esc(messageDraft.subject)+'"></label>'+
     '<label class="wide">Message draft<textarea name="body" required maxlength="5000">'+esc(messageDraft.body)+'</textarea></label>'+
     '<label>Actor<input name="actor" required value="Noetfield Revenue"></label>'+
     '<button class="primary" type="submit">Send through verified provider</button></form>'+
+    '<button class="ghost" type="button" id="suppress-corporate-contact" style="margin:12px 0">Suppress further commercial email to this contact</button>'+
     '<p class="small" id="provider-outreach-result" role="status"></p>';
    els.panel.querySelector(".detail").appendChild(approved);
+   approved.querySelector("#suppress-corporate-contact").addEventListener("click",async event=>{
+     const button=event.currentTarget;button.disabled=true;
+     try{
+       await api("/api/corporate-crm/outreach/suppress",{
+         method:"POST",data:{deal_id:d.id,actor:"Noetfield Revenue"}});
+       approved.querySelector("#provider-outreach-result").textContent=
+         "Recipient globally suppressed. No further commercial email will be sent.";
+       approved.querySelector("#provider-outreach button[type=submit]").disabled=true;
+       await refreshOutboundMetrics();
+     }catch(err){
+       approved.querySelector("#provider-outreach-result").textContent=
+          "Opt-out recording failed: "+String(err.message||err);
+       button.disabled=false;
+     }
+   });
    approved.querySelector("#provider-outreach").addEventListener("submit",async event=>{
      event.preventDefault();
      const button=event.currentTarget.querySelector("button");button.disabled=true;
