@@ -24,6 +24,7 @@ from noetfield_governance.corporate_founder_ai import (
     _source_signature,_validate_model_analysis,prepare_ai,
 )
 from noetfield_governance.corporate_workpacket import prepare_workpackets
+from noetfield_governance.corporate_outbound import _schema as prepare_outreach
 
 SCHEMA="noetfield.founder-commercial-mission.v1"
 _MAX_WRITE=150
@@ -102,6 +103,15 @@ def _plain(row:dict[str,Any])->dict[str,Any]:
         action=("A paid WorkPacket exists but its provider admission or final proof "
                 "is not confirmed. Inspect the original WorkPacket receipt and "
                 "restore its original provider route; do not create a duplicate.")
+    elif promoted and bool(row.get("has_verified_reply")):
+        state="VERIFIED_CUSTOMER_REPLY"
+        action="Review the actual buyer reply in the existing CRM and qualify next steps; no meeting is inferred."
+    elif promoted and row.get("send_status")=="PROVIDER_ACCEPTED":
+        state="SMTP_PROVIDER_ACCEPTED"
+        action="The Noetfield mail provider accepted the introduction. Await a verified reply; inbox delivery is not proven."
+    elif promoted and row.get("send_status"):
+        state="OUTREACH_PROVIDER_UNCONFIRMED"
+        action="Review this exact attempted message receipt before any retry. Do not send a duplicate."
     elif promoted:
         state="QUALIFIED_CRM_RECORD"
         action="Use the existing CRM deal next action; confirm SOW and payment before dispatch."
@@ -150,6 +160,10 @@ def _plain(row:dict[str,Any])->dict[str,Any]:
         "draft":draft,
         "deal_id":str(row["promoted_deal_id"]) if promoted else None,
         "external_dispatch_state":workpacket_state or None,
+        "outreach_provider_status":str(row.get("send_status") or ""),
+        "outreach_smtp_accepted":str(row.get("send_status") or "")=="PROVIDER_ACCEPTED",
+        "outreach_verified_reply":bool(row.get("has_verified_reply")),
+        "outreach_message_id":str(row.get("provider_message_id") or "")[:250],
         "dispatch_attempts":int(row.get("dispatch_attempts") or 0),
         "delivery_error_code":str(row.get("delivery_error_code") or "")[:90],
         "provider_receipt_url":str(row.get("provider_receipt_url") or ""),
@@ -164,6 +178,7 @@ def _plain(row:dict[str,Any])->dict[str,Any]:
 async def prepare_missions(db:asyncpg.Connection)->None:
     await prepare_ai(db)
     await prepare_workpackets(db)
+    await prepare_outreach(db)
     await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.corp_founder_missions (
       source_key text PRIMARY KEY REFERENCES noetfield.corp_research_sources(source_key),
       state text NOT NULL,
@@ -201,12 +216,21 @@ async def materialize_missions(settings:object,*,limit:int=100)->dict[str,Any]:
           a.model_route,a.artifact_sha256,
           d.stage AS deal_stage,w.state AS workpacket_state,
           w.dispatch_attempts,w.last_error_code AS delivery_error_code,
-          w.provider_receipt_url,w.verifier_receipt_url
+          w.provider_receipt_url,w.verifier_receipt_url,
+          msg.status AS send_status,msg.provider_message_id,
+          msg.has_verified_reply
           FROM noetfield.corp_research_sources r
           LEFT JOIN noetfield.corp_founder_scout s ON s.source_key=r.source_key
           LEFT JOIN noetfield.corp_founder_ai a ON a.source_key=r.source_key
           LEFT JOIN noetfield.corp_crm_deals d ON d.id=r.promoted_deal_id
           LEFT JOIN noetfield.corp_workpackets w ON w.deal_id=d.id
+          LEFT JOIN LATERAL (
+            SELECT t.status,t.provider_message_id,
+             EXISTS(SELECT 1 FROM noetfield.corp_outreach_replies reply
+                    WHERE reply.send_id=t.id) AS has_verified_reply
+            FROM noetfield.corp_outreach_sends t WHERE t.deal_id=d.id
+            ORDER BY t.created_at DESC LIMIT 1
+          ) msg ON TRUE
           ORDER BY r.score DESC,r.imported_at ASC LIMIT $1""",limit)
         updated=0
         for row in rows:
@@ -249,7 +273,10 @@ async def founder_mission_board(settings:object,*,limit:int=12)->dict[str,Any]:
         rows=await db.fetch("""SELECT mission_json FROM noetfield.corp_founder_missions
           WHERE state NOT IN ('SUPPRESSED','OUT_OF_SCOPE')
           ORDER BY
-          CASE state WHEN 'INTRO_REVIEW_READY' THEN 1
+          CASE state WHEN 'VERIFIED_CUSTOMER_REPLY' THEN 1
+           WHEN 'OUTREACH_PROVIDER_UNCONFIRMED' THEN 1
+           WHEN 'INTRO_REVIEW_READY' THEN 2
+           WHEN 'SMTP_PROVIDER_ACCEPTED' THEN 3
            WHEN 'QUALIFIED_CRM_RECORD' THEN 2
            WHEN 'DELIVERY_DISPATCH_ATTENTION' THEN 1
            WHEN 'DELIVERY_IN_PROGRESS' THEN 3
