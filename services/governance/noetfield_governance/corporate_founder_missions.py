@@ -21,7 +21,7 @@ import asyncpg
 
 from noetfield_governance.commercial_pipeline import _database_url
 from noetfield_governance.corporate_founder_ai import (
-    _source_signature,prepare_ai,
+    _source_signature,_validate_model_analysis,prepare_ai,
 )
 from noetfield_governance.corporate_workpacket import prepare_workpackets
 
@@ -72,7 +72,14 @@ def _plain(row:dict[str,Any])->dict[str,Any]:
             analysis={}
     evidence_current=bool(analysis and row.get("ai_source_signature") and
         str(row.get("ai_source_signature"))==_source_signature(row))
-    if not evidence_current:
+    if evidence_current:
+        try:
+            analysis=_validate_model_analysis(analysis,{
+                "published_site_title":str(row.get("site_title") or ""),
+                "published_site_description":str(row.get("site_description") or "")})
+        except (ValueError,TypeError):
+            analysis={}
+    else:
         analysis={}
     contact=str(row.get("published_general_channel") or "")
     page=str(row.get("contact_page_url") or "")
