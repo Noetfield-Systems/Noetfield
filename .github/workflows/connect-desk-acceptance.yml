@@ -21,6 +21,11 @@ on:
       - 'tests/unit/test_connect_postgres_acceptance.py'
       - 'tests/unit/test_connect_desk_session.py'
       - 'tests/unit/test_operator_google_sso.py'
+      - 'services/governance/noetfield_governance/corporate_revenue_ops.py'
+      - 'tests/unit/test_corporate_revenue_ops.py'
+      - 'services/governance/noetfield_governance/corporate_revenue_loop.py'
+      - 'tests/unit/test_corporate_revenue_loop.py'
+      - 'services/governance/noetfield_governance/private_corporate_crm.html'
       - 'services/governance/noetfield_governance/operator_google_auth.py'
       - 'services/governance/noetfield_governance/connect_desk_auth.py'
       - 'tests/unit/test_connect_relationship.py'
@@ -41,6 +46,11 @@ on:
       - 'tests/unit/test_connect_postgres_acceptance.py'
       - 'tests/unit/test_connect_desk_session.py'
       - 'tests/unit/test_operator_google_sso.py'
+      - 'services/governance/noetfield_governance/corporate_revenue_ops.py'
+      - 'tests/unit/test_corporate_revenue_ops.py'
+      - 'services/governance/noetfield_governance/corporate_revenue_loop.py'
+      - 'tests/unit/test_corporate_revenue_loop.py'
+      - 'services/governance/noetfield_governance/private_corporate_crm.html'
       - 'services/governance/noetfield_governance/operator_google_auth.py'
       - 'services/governance/noetfield_governance/connect_desk_auth.py'
       - 'tests/unit/test_connect_relationship.py'
@@ -95,6 +105,10 @@ jobs:
         run: python -m pytest -q tests/unit/test_connect_desk_session.py
       - name: Verify Google operator SSO, allowlist and private CRM session
         run: python -m pytest -q tests/unit/test_operator_google_sso.py tests/unit/test_corporate_crm.py
+      - name: Verify historical corporate recovery, revenue truth and agent-ready priorities
+        run: python -m pytest -q tests/unit/test_corporate_revenue_ops.py
+      - name: Verify autonomous corporate daily cycle and operator-only receipt
+        run: python -m pytest -q tests/unit/test_corporate_revenue_loop.py
       - name: Check static operator shell for unsafe storage
         run: |
           python - <<'PY'
