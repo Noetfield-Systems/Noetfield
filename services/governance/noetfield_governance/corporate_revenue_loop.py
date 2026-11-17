@@ -178,12 +178,24 @@ async def start_scheduler(settings: object) -> None:
     if _task is not None and not _task.done():
         return
     _worker = CorporateRevenueLoop(settings)
+    logger.warning("corporate_revenue_scheduler=ENABLED")
 
     async def loop() -> None:
         while True:
             try:
                 assert _worker is not None
-                await _worker.run_once()
+                result = await _worker.run_once()
+                # Read the durable PostgreSQL receipt, not just a process-local claim.
+                receipt = (await _worker.status()).get("latest") or {}
+                logger.warning(
+                    "corporate_revenue_cycle_readback state=%s receipt_day=%s "
+                    "recovered=%s failed=%s due=%s prioritized=%s "
+                    "attempts=%s result=%s",
+                    receipt.get("state", "NONE"), receipt.get("day", "NONE"),
+                    receipt.get("recovered", 0), receipt.get("failed", 0),
+                    receipt.get("due", 0), receipt.get("prioritized", 0),
+                    receipt.get("attempts", 0), result.get("state", "UNKNOWN"),
+                )
             except Exception:
                 logger.exception("corporate_revenue_scheduler_tick_failed")
             await asyncio.sleep(3600)
