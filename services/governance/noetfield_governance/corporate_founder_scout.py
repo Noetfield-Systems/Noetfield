@@ -325,11 +325,18 @@ async def run_scout_batch(settings: object, *, limit: int = 3,
             s.scanned_at ASC NULLS FIRST, r.score DESC
           LIMIT $1""",count,source_key.strip())
         outcomes = []
-        for row in rows:
-            website = str(row["website"] or "")
-            # Only the explicit website from the original Fieldwork source.
-            # A GitHub source page is not treated as a company's verified website.
-            finding = await fetch_official_signals(website)
+        # Fetch independent sources concurrently; only persistence is serialized.
+        # A five-site button stays responsive even when one source is unavailable.
+        findings = await asyncio.gather(*(
+            asyncio.wait_for(fetch_official_signals(str(row["website"] or "")),timeout=12)
+            for row in rows
+        ),return_exceptions=True)
+        for row, observed in zip(rows, findings):
+            # Only an explicit website from original Fieldwork research.
+            finding = (observed if isinstance(observed, dict) else {
+                "scan_state": "SOURCE_UNAVAILABLE", "page_url": "",
+                "error": "PROVIDER_TIMEOUT_OR_FAILURE"
+            })
             await db.execute("""INSERT INTO noetfield.corp_founder_scout(
                source_key,page_url,site_title,site_description,
                published_general_channel,contact_page_url,team_page_url,
