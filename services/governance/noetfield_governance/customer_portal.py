@@ -171,6 +171,8 @@ async def customer_cases(settings: object, *, identity: dict[str,str]) -> dict[s
     db=await asyncpg.connect(_database_url(settings))
     try:
         await ensure_customer_access_schema(db)
+        from noetfield_governance.corporate_workpacket import prepare_workpackets
+        await prepare_workpackets(db)
         rows=await db.fetch("""SELECT d.id,d.source_intake_id,d.offer,a.name AS account_name,
                     i.contact_email,i.qualification_json->'commercial_ops' AS commercial
                  FROM noetfield.corp_customer_access ca
@@ -191,7 +193,29 @@ async def customer_cases(settings: object, *, identity: dict[str,str]) -> dict[s
                        WHERE e.session_id=$1""",case["payment_session_id"])
                 payment=dict(proof) if proof else None
             item["payment"]=payment
-            result.append(customer_case_projection(item))
+            projection=customer_case_projection(item)
+            work=await db.fetchrow("""SELECT w.id,w.state,w.artifact_url,
+                 w.verifier_receipt_url,w.external_workpacket_id,w.cost_minor,
+                 EXISTS(SELECT 1 FROM noetfield.corp_workpacket_acceptances ca
+                        WHERE ca.workpacket_id=w.id AND ca.customer_email_hash=$2)
+                 AS accepted_by_customer
+                 FROM noetfield.corp_workpackets w WHERE w.deal_id=$1""",
+                 item["id"],digest)
+            if work and projection["payment_status"]=="PAID_LIVE":
+                projection["workpacket"]={
+                    "workpacket_id":str(work["id"]),
+                    "state":work["state"],
+                    "verified_artifact_url":work["artifact_url"] if work["state"]=="VERIFIED" else None,
+                    "verifier_receipt_url":work["verifier_receipt_url"] if work["state"]=="VERIFIED" else None,
+                    "cost_minor":work["cost_minor"] if work["state"]=="VERIFIED" else None,
+                    "independently_verified":work["state"]=="VERIFIED",
+                    "customer_accepted":bool(work["accepted_by_customer"]),
+                }
+                if work["accepted_by_customer"] and work["state"]=="VERIFIED":
+                    projection["delivery_state"]="ACCEPTED_BY_CUSTOMER"
+            else:
+                projection["workpacket"]=None
+            result.append(projection)
         return {"schema":"noetfield.customer-portal.v1","cases":result,
                 "scope":"AUTHENTICATED_CUSTOMER_MEMBERSHIP_ONLY","cash_source":"signed_stripe_intake_bound",
                 "verified_customer_identity":True, "operator_session_used":False}
