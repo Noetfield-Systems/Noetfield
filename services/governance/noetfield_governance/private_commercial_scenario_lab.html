@@ -28,7 +28,13 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:400;letter-spacing:-
 .action-area{background:#ecf4eb;border:1px solid #cfdece;padding:17px;margin-bottom:13px}.action-area p{color:#62776a;margin:7px 0 12px;line-height:1.6}.action-area .hint{font-size:10px;color:#967449}.action-area .btn{margin:0 8px 8px 0}
 .doc-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.doc-bar button{font-size:11px}
 pre{font:11px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6f2;color:#2c4237;border:1px solid #e2e8e1;padding:19px;max-height:640px;overflow:auto;margin:0}
-.gates{margin-top:16px;border-top:1px solid #e0e6dc;padding-top:16px;display:grid;gap:7px}.gate{display:flex;align-items:flex-start;gap:10px;background:#f7f9f6;padding:9px;font-size:12px;color:#416150}.gate input{accent-color:#375d46}.gate-note{font-size:10px;line-height:1.7;color:#73887b}.timeline{margin:0;padding:0;list-style:none;display:grid;gap:9px}.timeline li{border-left:2px solid #88a794;padding-left:13px;color:#516a5a;font-size:11px}.timeline small{color:#899a8c;display:block}.status-message{min-height:22px;font-size:12px;color:#8c693e;margin:8px 0}
+.gates{margin-top:16px;border-top:1px solid #e0e6dc;padding-top:16px;display:grid;gap:7px}.gate{display:flex;align-items:flex-start;gap:10px;background:#f7f9f6;padding:9px;font-size:12px;color:#416150}.gate input{accent-color:#375d46}.gate-note{font-size:10px;line-height:1.7;color:#73887b}
+.technical{display:grid;gap:14px}.technical fieldset{border:1px solid #e0e7dd;margin:0;padding:14px;min-width:0}
+.technical legend{padding:0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:700;color:#967852}
+.technical label{display:grid;gap:5px;font-size:10px;color:#567063}
+.technical input,.technical select,.technical textarea{width:100%;min-width:0;border:1px solid #d2ded0;border-radius:3px;padding:10px;background:#fff;color:#254033}
+.technical .group-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(max-width:550px){.technical .group-grid{grid-template-columns:1fr}}.timeline{margin:0;padding:0;list-style:none;display:grid;gap:9px}.timeline li{border-left:2px solid #88a794;padding-left:13px;color:#516a5a;font-size:11px}.timeline small{color:#899a8c;display:block}.status-message{min-height:22px;font-size:12px;color:#8c693e;margin:8px 0}
 .footer{border-top:1px solid #dce5db;margin-top:22px;padding-top:17px;color:#799084;font-size:11px;line-height:1.7}
 @media(max-width:1150px){.columns{grid-template-columns:1fr}.stat-row{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.shell{grid-template-columns:1fr}.sidebar{padding:13px 17px;gap:13px}.side-foot{display:none}.nav{display:flex;overflow:auto}.nav a{min-width:130px;padding:8px}.main{padding:0 18px 46px}.hero{padding:27px 0 18px;display:block}.hero-acts{margin-top:16px}.selector{grid-template-columns:1fr}}
@@ -81,6 +87,9 @@ pre{font:11px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-w
      </section>
      <section class="panel" id="diagnostic-panel"><header class="panel-head"><h2>RWA readiness assessment</h2><small>Illustrative nine-gate checklist</small></header>
        <div class="body"><p class="gate-note">The gate labels below are an educational approximation—not a replacement for the RWA Clinic's canonical diagnostic instrument. Gate 10 is a computed completeness indicator; it is not regulatory or investment approval.</p><div id="rwa-gates" class="gates"></div><p class="status-message" id="gate-score"></p></div>
+     </section>
+     <section class="panel" style="margin-top:18px"><header class="panel-head"><h2 id="detail-title">Clinic v3 intake</h2><small>Illustrative fields · pre-filled</small></header>
+       <div class="body"><p class="gate-note" id="detail-note">Synthetic example of Clinic intake categories. No diagnosis is submitted to the real Clinic.</p><div class="technical" id="technical-fields"></div></div>
      </section>
    </div>
    <div>
