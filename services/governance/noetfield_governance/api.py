@@ -2678,6 +2678,51 @@ async def corporate_revenue_run_cycle(request: Request) -> dict[str, object]:
     return await worker.run_once()
 
 
+class CorporateCustomerAccessRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    deal_id: str
+    email: str = Field(min_length=3, max_length=254)
+    actor: str = Field(min_length=2, max_length=120)
+    evidence_url: str = Field(default="", max_length=1200)
+    revoke: bool = False
+
+
+@app.post("/api/corporate-crm/customers/access", tags=["operations"], include_in_schema=False)
+async def corporate_customer_membership(
+    body: CorporateCustomerAccessRequest, request: Request,
+) -> dict[str, object]:
+    """Explicit per-customer authorization; no contact/email is sent."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.customer_portal import grant_customer_access
+    from noetfield_governance.corporate_crm import CorporateCRMError
+    try:
+        return await grant_customer_access(settings, **body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
+@app.get("/api/corporate-crm/customer/app", tags=["operations"], include_in_schema=False)
+async def corporate_customer_portal() -> Response:
+    return FileResponse(
+        _REPO_ROOT / "services/governance/noetfield_governance/private_customer_portal.html",
+        media_type="text/html",
+        headers={"Cache-Control":"private, no-store",
+                 "X-Robots-Tag":"noindex, nofollow",
+                 "Referrer-Policy":"no-referrer"},
+    )
+
+
+@app.get("/api/corporate-crm/customer/me", tags=["operations"], include_in_schema=False)
+async def corporate_customer_cases(request: Request) -> Response:
+    from noetfield_governance.customer_portal import authenticate_customer, customer_cases
+    auth = request.headers.get("authorization") or ""
+    token = auth[7:] if auth.startswith("Bearer ") else ""
+    identity = await authenticate_customer(token)
+    result = await customer_cases(settings, identity=identity)
+    return JSONResponse(content=result,headers={"Cache-Control":"private, no-store",
+                "Referrer-Policy":"no-referrer","X-Content-Type-Options":"nosniff"})
+
+
 @app.post("/api/corporate-crm/accounts", tags=["operations"], include_in_schema=False)
 async def corporate_crm_account(body: CorporateAccountRequest,request: Request) -> dict[str, object]:
     from noetfield_governance.corporate_crm import CorporateCRMError, account_create
