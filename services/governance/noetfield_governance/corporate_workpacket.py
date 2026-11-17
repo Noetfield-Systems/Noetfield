@@ -303,7 +303,9 @@ async def auto_dispatch_paid_ready_work(settings:object,*,limit:int=3)->dict[str
             done=await dispatch_paid_workpacket(settings,deal_id=deal_id)
             if done.get("provider_acknowledged"):
                 accepted+=1
-            elif done.get("dispatch_state")!="PROVIDER_CONTRACT_NOT_CONFIGURED":
+            else:
+                # A missing RWA/Company OS route is a *blocked* paid job,
+                # never a completed deliverable or successful dispatch.
                 failed+=1
             results.append({"deal_id":deal_id,
                 "state":done.get("state","UNCONFIRMED"),
