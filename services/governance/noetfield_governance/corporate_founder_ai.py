@@ -225,7 +225,9 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
                         or payload.get("task_id")!=task_id
                         or payload.get("authority")!="UNVERIFIED_ADVISORY_MODEL_OUTPUT"
                         or payload.get("external_actions_executed") is not False
-                        or payload.get("provider") not in ("cloudflare_glm","deepseek_direct")
+                        or payload.get("provider") not in (
+                            "cloudflare_glm","deepseek_direct",
+                            "huggingface_inference","zai_glm_direct")
                         or payload.get("artifact_sha256")!=expected_hash):
                     raise ValueError("MODEL_FABRIC_RECEIPT_INVALID")
                 analysis=_validate_model_analysis(payload.get("analysis"),source)
