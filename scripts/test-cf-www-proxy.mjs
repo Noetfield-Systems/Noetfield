@@ -95,7 +95,7 @@ try {
   if (publicCsp.includes("cdn.jsdelivr.net") || publicCsp.includes("supabase.co")) {
     throw new Error("OAuth CSP privileges must not leak to public pages");
   }
-  for (const authPath of ["/auth/operator-bridge/", "/auth/callback/", "/auth/sign-in/"]) {
+  for (const authPath of ["/auth/operator-bridge/", "/auth/customer-bridge/", "/auth/callback/", "/auth/sign-in/"]) {
     const authResponse = await worker.fetch(
       new Request("https://www.noetfield.com" + authPath),
       { ORIGIN: immutableOrigin, RELEASE_SHA: releaseSha },
