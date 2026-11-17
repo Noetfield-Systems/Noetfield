@@ -94,8 +94,8 @@ html[dir="rtl"] input,html[dir="rtl"] select,html[dir="rtl"] textarea{text-align
 <header><div class="brand"><span class="brand-mark">N</span><span>Noetfield <span style="color:#547b6c">Connect</span></span></div><nav class="top-actions" aria-label="Private desk language"><a id="desk-language" href="?lang=fa" lang="fa">فارسی</a><a href="https://www.noetfield.com/connect/" target="_blank" rel="noopener noreferrer">Public gateway ↗</a></nav></header>
 <section class="headline"><div><div class="eyebrow">PRIVATE / RELATIONSHIP OPERATIONS</div><h1>From connection <em>to consequence.</em><span class="sr-only">Opportunity Desk.</span></h1><p class="sub">Review genuine relationships, qualify opportunities, assign accountable owners, prepare scoped invitations and trace every decision to source evidence. A proposal is not a completed action.</p></div><div class="top-actions"><button id="refresh" class="secondary" hidden>Refresh</button><button id="lock" class="ghost" hidden>Lock desk</button></div></section>
 <section id="unlock" class="auth-card card">
-<h2>Welcome back to Opportunity Desk.</h2><p>Use your existing Noetfield operator key once. Choose <strong>Remember this device</strong> to stay signed in for up to 7 days. The key is never saved in the browser.</p>
-<form id="unlock-form"><label>Operator access key <input id="key" name="operator_key" type="password" minlength="8" required autocomplete="off" placeholder="Platform admin secret"></label><label class="remember-choice"><input id="remember-device" type="checkbox" checked><span>Remember this device for 7 days</span></label><button class="primary" type="submit">Open opportunity desk</button></form><p id="unlock-status" role="alert" class="notice"></p><p class="small">Your secure session is saved as an HttpOnly cookie. Google sign-in is not connected; this option does not upload your administrator secret to Google Password Manager.</p>
+<h2>Welcome back to Opportunity Desk.</h2><p>Use your existing Noetfield operator key or an approved Google account. <strong>Remember this device</strong> keeps your secure session for up to seven days.</p>
+<form id="unlock-form"><label>Operator access key <input id="key" name="password" type="password" minlength="8" required autocomplete="current-password" placeholder="Platform admin secret"></label><label class="remember-choice"><input id="remember-device" type="checkbox" checked><span>Remember this device for 7 days</span></label><button class="primary" type="submit">Open opportunity desk</button></form><button id="google-login" type="button" class="secondary" hidden style="margin-top:12px">Continue with Google</button><p id="unlock-status" role="alert" class="notice"></p><p class="small">Your operator session uses a secure HttpOnly cookie. On your own device, Chrome may save the key. Google sign-in is available only for approved operators.</p>
 </section>
 <main id="workspace" hidden>
 <div class="card" style="margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
@@ -562,7 +562,31 @@ await load();showWorkspace();
 }catch(err){state.csrf="";text("unlock-status",err.message)}
 finally{button.disabled=false}
 });
-$("lock").addEventListener("click",signOut);restoreSession();$("bridge-health").addEventListener("click",checkBridgeHealth);
+async function enableGoogleLogin(){
+ try{
+  const cfg=await call("/api/opportunities/desk/google-config");if(!cfg.google_enabled)return;
+  const button=$("google-login");button.hidden=false;
+  button.addEventListener("click",()=>{
+   const pop=window.open(cfg.bridge_url,"nf-operator-google","popup=yes,width=520,height=700");
+   if(!pop){text("unlock-status","Allow the Google sign-in popup, or use the operator key.");return}
+   button.disabled=true;
+   const onMessage=async event=>{
+    if(event.origin!=="https://www.noetfield.com"||event.source!==pop||
+       !event.data||event.data.type!=="noetfield.operator.google.v1"||
+       typeof event.data.access_token!=="string")return;
+    window.removeEventListener("message",onMessage);button.disabled=false;
+    try{
+     const session=await call("/api/opportunities/desk/session/google","POST",
+       {access_token:event.data.access_token,remember:$("remember-device").checked});
+     state.csrf=session.csrf;await load();showWorkspace();
+    }catch(err){state.csrf="";text("unlock-status",err.message)}
+    try{pop.close()}catch(_){}
+   };
+   window.addEventListener("message",onMessage);
+  });
+ }catch(_){/* Operator key login stays available. */}
+}
+$("lock").addEventListener("click",signOut);restoreSession();enableGoogleLogin();$("bridge-health").addEventListener("click",checkBridgeHealth);
 $("refresh").addEventListener("click",()=>load().catch(err=>alert("Refresh failed: "+err.message)));
 document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>{state.view=b.dataset.view;document.querySelectorAll("[data-view]").forEach(n=>n.setAttribute("aria-pressed",String(n===b)));draw()}));
 ["owner-filter","source-filter","type-filter","match-filter","collab-filter","conversion-filter"].forEach(id=>$(id).addEventListener("change",draw));
