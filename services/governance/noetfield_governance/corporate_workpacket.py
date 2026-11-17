@@ -174,12 +174,12 @@ def _dispatch_config(engine:str)->tuple[str,str]|None:
     secret=os.getenv("CORPORATE_WORKPACKET_DISPATCH_TOKEN","").strip()
     u=urlsplit(route)
     allowed={
-      "COMPANY_OS":{"company-os-staging-staging.up.railway.app"},
+      "COMPANY_OS":{"business-os-core-production.up.railway.app"},
       "RWA_CLINIC":{"rwa-clinic-production.up.railway.app","rwa-clinic.up.railway.app"},
     }.get(engine,set())
     if (len(secret)<32 or u.scheme!="https" or u.hostname not in allowed
         or u.username or u.password or u.port not in (None,443)
-        or not u.path.startswith("/api/internal/commercial/workpackets")
+        or u.path!="/api/internal/commercial/workpackets"
         or u.query or u.fragment):
         return None
     return route,secret
