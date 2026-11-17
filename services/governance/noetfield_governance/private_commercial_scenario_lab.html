@@ -129,6 +129,24 @@ const GATES=[
  "Jurisdiction & regulatory mapping",
  "Technical integration and controls"
 ];
+const TECHNICAL_SEEDS={
+ RWA:{
+ "Clinic v3 case intake":{"Issuer":"HarborBridge Private Credit Ltd. (fictional)","Asset value":"CAD 2,400,000","Target investors":"Qualified investors (hypothetical)","Proposed structure":"SPV + secured notes (proposed only)","Yield target (bps)":"850","Payment frequency":"monthly","Ledger architecture":"offchain_controlled","Ledger rationale":"Review ownership and custody before tokenization"},
+ "Asset documentation":{"Loan agreement status":"submitted","Loan agreement hash":"DEMO-DIGEST-LOAN","Security agreement status":"under_review","Security agreement hash":"DEMO-DIGEST-SECURITY","Appraisal status":"not_submitted","Appraisal hash":"DEMO-NOT-AVAILABLE"},
+ "Ownership and SPV":{"Borrower entity ID":"DEMO-BORROWER-001","SPV lifecycle":"in_formation","SPV legal name":"HarborBridge Pilot SPV (fictional)","SPV registration":"DEMO-NOT-REGISTERED","Articles status":"not_submitted","Articles hash":"DEMO-NOT-AVAILABLE"},
+ "Economic rights and terms":{"Cash flow status":"submitted","Cash flow hash":"DEMO-DIGEST-CASHFLOW","Coverage months":"24","Terms status":"under_review","Terms hash":"DEMO-DIGEST-TERMS"},
+ "Regulatory review":{"Counsel status":"not_engaged","Counsel firm ID":"DEMO-NONE","Opinion expected":"2027-01-15","Instrument question":"Security vs payment right — legal review required"},
+ "Custody and servicing":{"Custody model":"law_firm_hold","Hold description":"Hypothetical document hold","Servicing status":"submitted","Servicing hash":"DEMO-DIGEST-SERVICING","Servicer entity ID":"DEMO-SERVICER-001","Custody contract status":"not_submitted","Custody contract hash":"DEMO-NOT-AVAILABLE"},
+ "Transfer and recovery":{"Transfer status":"under_review","Transfer hash":"DEMO-DIGEST-TRANSFER","Recovery status":"not_submitted","Recovery hash":"DEMO-NOT-AVAILABLE","Recovery servicer ID":"DEMO-SERVICER-001","Risk register status":"submitted","Risk register hash":"DEMO-DIGEST-RISKS"},
+ "External reviews":{"External reviews JSON":'{"training_only":true,"reviews":[]}'}
+ },
+ COMPANY:{
+ "Company intake":{"Primary lead channel":"web_form","Monthly inquiries":"75","Current CRM":"Google Sheets + team inbox (fictional)","Buyer permission basis":"Opt-in forms; no automatic outbound"},
+ "Pipeline and ownership":{"Stages":"NEW → QUALIFY → OWNER_ASSIGNED → FOLLOWUP → CLOSED","Owner roles":"Ops Director, Sales Lead","SLA":"Follow up within 24 business hours","Deduplication":"Original source ID + approved contact email"},
+ "Agent configuration":{"Model routing":"Deterministic first; cheaper model only when needed","Human approval":"Required for any customer-facing send","Integrations":"Intake + CRM + existing Company OS","Fallback":"Record provider error and retain draft; no fake success"},
+ "Pilot tests":{"Positive-path acceptance":"One inquiry → one owned follow-up","Negative-path tests":"Duplicate blocked; no send without permission; timeout visible","Success metric":"Every sample lead has owner and next action","Reporting":"Weekly evidence-only"}
+ }
+};
 const base={
  RWA:{organization:"HarborBridge Private Credit Ltd. (fictional)",buyer:"Maya Bennett · Investment Operations Lead (fictional)",email:"maya@harborbridge.invalid",
  source:"DEMO-FIELDWORK-RWA-001",owner:"Noetfield RWA Delivery Lead",jurisdiction:"British Columbia, Canada",
@@ -147,6 +165,8 @@ const base={
  offer:"ai_sales_os_pilot",currency:"CAD",total:750,upfront:750,engine:"COMPANY_OS",
  deliverables:["Intake and qualification rule map","Owned follow-up queue and CRM prototype","Operator playbook and acceptance test receipts"],gates:[]}
 };
+base.RWA.technical=JSON.parse(JSON.stringify(TECHNICAL_SEEDS.RWA));
+base.COMPANY.technical=JSON.parse(JSON.stringify(TECHNICAL_SEEDS.COMPANY));
 const $=id=>document.getElementById(id);
 const clone=x=>JSON.parse(JSON.stringify(x));
 let scenario="RWA",cases={RWA:clone(base.RWA),COMPANY:clone(base.COMPANY)};
@@ -159,7 +179,7 @@ function stage(){return progress[scenario]}
 function docText(id){
  const v=c(),payment=stage()>=4,dispatch=stage()>=5,verified=stage()>=6,accepted=stage()>=7;
  const common="DEMO ONLY — FICTIONAL TRAINING RECORD\nNOT SIGNED · NOT SENT · NOT AUTHORIZED FOR PRODUCTION\n\n";
- if(id==="intake")return common+"CLIENT INTAKE & QUALIFICATION\nSource: "+v.source+"\nOrganization: "+v.organization+"\nContact: "+v.buyer+"\nEmail: "+v.email+"\nJurisdiction: "+v.jurisdiction+"\nOwner: "+v.owner+"\n\nBusiness need:\n"+v.problem+"\n\nDocument references:\n"+v.evidence+"\n\nContact status: FICTIONAL PERSON / NO CONSENT ESTABLISHED\nOpportunity status: TRAINING ONLY";
+ if(id==="intake")return common+"CLIENT INTAKE & QUALIFICATION\nSource: "+v.source+"\nOrganization: "+v.organization+"\nContact: "+v.buyer+"\nEmail: "+v.email+"\nJurisdiction: "+v.jurisdiction+"\nOwner: "+v.owner+"\n\nBusiness need:\n"+v.problem+"\n\nDocument references:\n"+v.evidence+"\n\nContact status: FICTIONAL PERSON / NO CONSENT ESTABLISHED\nOpportunity status: TRAINING ONLY\n\nProduct-specific sample intake:\n"+JSON.stringify(v.technical,null,2);
  if(id==="sow")return common+"NOETFIELD SYSTEMS INC. — ILLUSTRATIVE STATEMENT OF WORK\nProvider: Noetfield Systems Inc.\n7816 Windsor Street, Vancouver, BC V5X 4A8, Canada\n\nClient: "+v.organization+"\nRepresentative: "+v.buyer+"\n\n1. PURPOSE\n"+v.problem+"\n\n2. SCOPE / EXCLUSIONS\n"+v.scope+"\n\n3. DELIVERABLES\n- "+v.deliverables.join("\n- ")+"\n\n4. TIMELINE\n"+v.timeline+"\n\n5. ACCEPTANCE CRITERIA\n"+v.acceptance+"\n\n6. FEES AND AUTHORIZATION\nScope fee: "+price(v.total,v.currency)+"\nInitial checkout: "+price(v.upfront,v.currency)+" (sample amount, not charged).\nNo work is authorized until a real accepted written scope and verified paid checkout.\n\n7. RECORDS AND CHANGE CONTROL\nAdditional scope, privacy processing, compliance, IP, warranties and termination are subject to a properly executed agreement. This mock text is not a signature.\n\nProvider signature: [NOT SIGNED]\nClient signature: [NOT SIGNED]\nDate: [NOT EXECUTED]";
  if(id==="payment")return common+"STRIPE CHECKOUT TRAINING PROJECTION\nOffer: "+v.offer+"\nAmount: "+price(v.upfront,v.currency)+"\nExpected link: "+(scenario==="RWA"?"plink_1UbG9CJ03eJkL57JNNK0P3cY":"plink_1UcS8RJ03eJkL57J4IMvmFuD")+"\nLive payment event: NONE\nLive Checkout Session: NONE\nSimulated stage: "+(payment?"DEMO_CHECKOUT_ACCEPTED":"DEMO_NOT_PAID")+"\nFake receipt ID: DEMO-CHECKOUT-"+scenario+"-001\nCash verified: 0\nDo not paste this example into production payment reconciliation.";
  if(id==="packet")return common+JSON.stringify({schema:"noetfield.commercial-workpacket.demo.v1",classification:"SIMULATION_ONLY",
@@ -169,7 +189,7 @@ function docText(id){
   dispatch_state:dispatch?"SIMULATED_ACKNOWLEDGMENT":"NOT_DISPATCHED",
   source_authority:"DEMO_ONLY",cost_ceiling_minor:scenario==="RWA"?12000:8000,
   requested_work:v.scope,acceptance_checks:v.acceptance,
-  deliverables:v.deliverables,trace_id:"DEMO-TRACE-"+scenario+"-001",
+  deliverables:v.deliverables,clinical_or_agent_intake:v.technical,trace_id:"DEMO-TRACE-"+scenario+"-001",
   provider_receipt_url:null,real_provider_acknowledged:false},null,2);
  if(id==="verifier")return common+JSON.stringify({schema:"noetfield.verifier-training.v1",verified:verified?"DEMO_PASS":"NOT_RUN",
   independent_verification_performed:false,provider_signature_present:false,
@@ -193,6 +213,7 @@ function render(){
  $("metric-price").textContent=price(v.total,v.currency);
  $("stage-count").textContent=stage()+" of 8 simulated";
  $("diagnostic-panel").hidden=scenario!=="RWA";
+ renderTechnical();
  $("stages").innerHTML=STAGES.map(([id,label,explain],i)=>
  '<button class="stage '+(i<stage()?"done ":"")+(i===stage()?"active":"")+'" type="button" data-stage="'+i+'">'+
  '<span class="num">'+(i<stage()?"✓":i+1)+'</span><span><strong>'+escapeHTML(label)+'</strong><br><small>'+escapeHTML(explain)+'</small></span>'+
@@ -225,6 +246,25 @@ function render(){
     }));
     renderGates();
  }
+}
+function renderTechnical(){
+ const v=c();$("detail-title").textContent=scenario==="RWA"?"RWA Clinic v3-style full intake":"Company OS process and agent configuration";
+ $("detail-note").textContent=scenario==="RWA"?
+   "All public Clinic v3 intake categories are pre-filled for rehearsal; real evidence hashes and official gate evaluation require the actual Clinic service.":
+   "Pre-filled lead-routing, human authority, model fallback, deduplication and acceptance fields for the existing Company OS.";
+ $("technical-fields").innerHTML=Object.entries(v.technical).map(([group,values])=>
+ "<fieldset><legend>"+escapeHTML(group)+"</legend><div class='group-grid'>"+
+ Object.entries(values).map(([label,value])=>{
+  const options=label.toLowerCase().endsWith("status")?
+   ["not_submitted","submitted","under_review","verified"]:null;
+  const input=options?"<select data-group='"+escapeHTML(group)+"' data-key='"+escapeHTML(label)+"'>"+
+    options.map(x=>"<option value='"+x+"'"+(value===x?" selected":"")+">"+x.replace(/_/g," ")+"</option>").join("")+"</select>":
+    "<input type='text' data-group='"+escapeHTML(group)+"' data-key='"+escapeHTML(label)+"' value='"+escapeHTML(value)+"'>";
+  return "<label>"+escapeHTML(label)+input+"</label>"
+ }).join("")+"</div></fieldset>").join("");
+ $("technical-fields").querySelectorAll("[data-group]").forEach(el=>el.addEventListener("input",()=>{
+    v.technical[el.dataset.group][el.dataset.key]=el.value;showDocument();
+ }));
 }
 function renderGates(){if(scenario==="RWA")$("gate-score").textContent="Illustrative Gate 10 · "+c().gates.filter(Boolean).length+"/9 checks selected ("+Math.round(c().gates.filter(Boolean).length/9*100)+"% complete). Not an official clinic score or eligibility decision."}
 function showDocument(){$("doc-preview").textContent=docText(selectedDoc)}
