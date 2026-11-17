@@ -509,6 +509,31 @@ function drawDetail(payload){
  '<label>Evidence URL (if external action)<input name="evidence_url" type="url" placeholder="https://"></label>'+
  '<label class="wide">What happened?<textarea name="note" required maxlength="2000"></textarea></label>'+
  '<button type="submit" class="ghost">Add activity record</button></form></div>';
+ // Explicit customer membership is separate from the operator session.
+ const clientAccess=document.createElement("section");
+ clientAccess.className="commercial-box";
+ clientAccess.innerHTML='<h4>Customer portal · approved access</h4>'+
+  '<p class="small">Membership is scoped to this real sourced deal. No invitation is sent automatically. Grant direct-source email access, or supply independently retained authorization evidence for another authorized buyer.</p>'+
+  '<a class="inline-link" href="/api/corporate-crm/customer/app" target="_blank" rel="noopener noreferrer">Open customer portal</a>'+
+  '<form id="client-access" class="fields" style="margin-top:14px">'+
+  '<label class="wide">Customer Google email<input type="email" name="email" required autocomplete="off" value="'+esc(d.contact_email||"")+'"></label>'+
+  '<label>Recorded by<input name="actor" value="Noetfield Revenue" required></label>'+
+  '<label>Action<select name="revoke"><option value="false">Grant access</option><option value="true">Revoke access</option></select></label>'+
+  '<label class="wide">Authorization evidence URL (required for alternate customer email)<input type="url" name="evidence_url" placeholder="https://"></label>'+
+  '<button type="submit" class="primary">Update customer access</button></form>'+
+  '<p class="small" id="client-access-status" role="status"></p>';
+ if(d.source_intake_id && commercialEligible){
+   els.panel.querySelector(".detail").appendChild(clientAccess);
+   clientAccess.querySelector("#client-access").addEventListener("submit",async event=>{
+     event.preventDefault();const f=event.currentTarget;
+     const payload=Object.fromEntries(new FormData(f));
+     payload.deal_id=d.id;payload.revoke=payload.revoke==="true";
+     try{const result=await api("/api/corporate-crm/customers/access",{method:"POST",data:payload});
+       clientAccess.querySelector("#client-access-status").textContent=result.active?
+         "Customer access recorded. No invitation has been sent.":"Customer access revoked.";
+     }catch(error){clientAccess.querySelector("#client-access-status").textContent=String(error.message||error)}
+   });
+ }
  const commercialForm=$("#commercial-step");
  if(commercialForm){
    const flowSelect=commercialForm.querySelector('[name="action"]');
