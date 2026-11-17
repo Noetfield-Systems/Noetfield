@@ -150,6 +150,12 @@
   }
 
   function routeAfterSignIn() {
+    const customerReturn = global.sessionStorage.getItem("nf-customer-sso-return");
+    if (customerReturn === "/auth/customer-bridge/") {
+      global.sessionStorage.removeItem("nf-customer-sso-return");
+      global.location.replace(customerReturn);
+      return;
+    }
     const savedReturn = global.sessionStorage.getItem("nf-operator-sso-return");
     if (savedReturn === "/auth/operator-bridge/") {
       global.sessionStorage.removeItem("nf-operator-sso-return");
@@ -303,7 +309,8 @@
       const session = await consumeOAuthCallback(sb) || (await getSession());
       if (!session) throw new Error("No session — try signing in again.");
       // An operator-only login must not create an unrelated investor cookie.
-      if (global.sessionStorage.getItem("nf-operator-sso-return") !== "/auth/operator-bridge/") {
+      if (global.sessionStorage.getItem("nf-operator-sso-return") !== "/auth/operator-bridge/" &&
+          global.sessionStorage.getItem("nf-customer-sso-return") !== "/auth/customer-bridge/") {
         await setInvestCookie(session);
       }
       if (status) status.textContent = "Signed in. Redirecting…";
