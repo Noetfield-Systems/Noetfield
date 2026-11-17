@@ -2886,6 +2886,45 @@ class PaidRwaClinicCaseRequest(BaseModel):
     clinic_case: dict[str,Any]
 
 
+@app.get("/api/internal/commercial/rwa-verifier-source/{workpacket_id}",
+         tags=["operations"],include_in_schema=False)
+async def corporate_rwa_original_verifier_source(
+    workpacket_id:str,request:Request,
+)->dict[str,object]:
+    """Separate independent verifier may replay original Clinic case; no client access."""
+    import hmac
+    import os
+    expected=os.environ.get("CORPORATE_RWA_VERIFIER_READ_TOKEN","").strip()
+    supplied=(request.headers.get("authorization") or "").removeprefix("Bearer ").strip()
+    if len(expected)<32:
+        raise HTTPException(status_code=503,detail="RWA_VERIFIER_READ_TOKEN_UNCONFIGURED")
+    if not supplied or not hmac.compare_digest(supplied,expected):
+        raise HTTPException(status_code=401,detail="RWA_VERIFIER_SOURCE_AUTH_REQUIRED")
+    from noetfield_governance.corporate_rwa_execution import native_clinic_verifier_source
+    from noetfield_governance.corporate_workpacket import WorkPacketError
+    try:
+        return await native_clinic_verifier_source(settings,workpacket_id=workpacket_id)
+    except WorkPacketError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
+@app.get("/api/corporate-crm/customer/rwa/report/{deal_id}",
+         tags=["operations"],include_in_schema=False)
+async def corporate_rwa_authenticated_customer_report(
+    deal_id:str,request:Request,
+)->dict[str,object]:
+    from noetfield_governance.customer_portal import authenticate_customer
+    from noetfield_governance.corporate_rwa_execution import customer_rwa_report
+    from noetfield_governance.corporate_workpacket import WorkPacketError
+    bearer=request.headers.get("authorization") or ""
+    token=bearer[7:] if bearer.startswith("Bearer ") else ""
+    identity=await authenticate_customer(token)
+    try:
+        return await customer_rwa_report(settings,deal_id=deal_id,identity=identity)
+    except WorkPacketError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
 @app.post("/api/corporate-crm/workpackets/rwa/submit-case",
           tags=["operations"],include_in_schema=False)
 async def corporate_rwa_clinic_submit(
