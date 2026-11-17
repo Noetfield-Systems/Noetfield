@@ -355,6 +355,8 @@ async def customer_accept_workpacket(settings:object,*,deal_id:str,
     db=await asyncpg.connect(_database_url(settings))
     try:
         await prepare_workpackets(db)
+        from noetfield_governance.customer_portal import ensure_customer_access_schema
+        await ensure_customer_access_schema(db)
         async with db.transaction():
             membership=await db.fetchrow("""SELECT ca.deal_id,w.id AS workpacket_id,
                w.state,w.artifact_url,w.verifier_receipt_url,w.payment_event_id
