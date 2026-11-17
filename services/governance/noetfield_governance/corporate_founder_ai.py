@@ -199,7 +199,7 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
                      "HTTP-Referer":"https://noetfield.com",
                      "X-Title":"Noetfield Founder Sales Analyst"}
         try:
-            async with httpx.AsyncClient(trust_env=False,timeout=36 if is_fabric else 18,
+            async with httpx.AsyncClient(trust_env=False,timeout=75 if is_fabric else 18,
                                         follow_redirects=False,verify=True) as client:
                 response=await client.post(route["url"],json=body,headers=headers)
         except httpx.RequestError:
@@ -346,7 +346,7 @@ async def run_ai_batch(settings:object,*,limit:int=2,
                    (id,source_key) VALUES($1,$2)""",attempt_id,row["source_key"])
                 reserved.append((row,signature,attempt_id))
         results=await asyncio.gather(*(
-            asyncio.wait_for(analyze_public_company(row),timeout=20)
+            asyncio.wait_for(analyze_public_company(row),timeout=80)
             for row,_,_ in reserved
         ),return_exceptions=True)
         completed=0
