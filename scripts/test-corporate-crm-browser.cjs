@@ -83,7 +83,12 @@ async function run(){
     "Qualify must show a visible form, never leave a disabled hidden button");
    assert.equal(await page.locator('[name="contact_name"]').evaluate(el=>el===document.activeElement),true);
    const over=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
-   assert.ok(over<=2,"Horizontal page overflow at "+width+"px: "+over);
+   const offenders=await page.evaluate(()=>[...document.querySelectorAll("body *")]
+     .map(el=>({tag:el.tagName,id:el.id,cls:String(el.className||"").slice(0,55),
+       left:Math.round(el.getBoundingClientRect().left),right:Math.round(el.getBoundingClientRect().right),
+       width:Math.round(el.getBoundingClientRect().width)}))
+     .filter(x=>x.right>innerWidth+3).sort((a,b)=>b.right-a.right).slice(0,16));
+   assert.ok(over<=2,"Horizontal page overflow at "+width+"px: "+over+" / "+JSON.stringify(offenders));
    assert.equal(await page.locator("#research-qualify-submit").isEnabled(),true);
    await page.keyboard.press("Escape");await dialog.waitFor({state:"hidden"});
    await page.getByRole("button",{name:"Qualify for Corporate CRM"}).last().click();
