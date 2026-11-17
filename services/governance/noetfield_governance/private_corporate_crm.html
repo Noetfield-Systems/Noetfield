@@ -234,12 +234,14 @@ async function showGoogleOperatorLogin(){
    const pop=window.open(config.bridge_url,"nf-operator-google","popup=yes,width=520,height=700");
    if(!pop){$("#login-error").textContent="Allow the Google sign-in popup, or use your operator key.";return}
    button.disabled=true;$("#login-error").textContent="Continue in the Google window; this page will open automatically after sign-in.";
-   const popupWatcher=setInterval(()=>{if(pop.closed){clearInterval(popupWatcher);button.disabled=false;}},500);
+   const onPopupFocus=()=>{if(pop.closed){button.disabled=false;window.removeEventListener("focus",onPopupFocus);}};
+   window.addEventListener("focus",onPopupFocus);
+   const popupWatcher=setTimeout(()=>{button.disabled=false;window.removeEventListener("focus",onPopupFocus);},120000);
    const handle=async event=>{
     if(!["https://www.noetfield.com","https://noetfield.com"].includes(event.origin)||event.source!==pop||
        !event.data||event.data.type!=="noetfield.operator.google.v1"||
        typeof event.data.access_token!=="string")return;
-    window.removeEventListener("message",handle);clearInterval(popupWatcher);button.disabled=false;
+    window.removeEventListener("message",handle);clearTimeout(popupWatcher);window.removeEventListener("focus",onPopupFocus);button.disabled=false;
     $("#login-error").textContent="";
     try{
      const result=await api("/api/opportunities/desk/session/google",{method:"POST",
