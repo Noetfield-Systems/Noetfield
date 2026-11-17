@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Connect Google — Noetfield Operator</title>
+<style>body{font:16px system-ui,sans-serif;background:#102c2b;color:#f6f3e9;min-height:100vh;display:grid;place-items:center;margin:0;padding:28px}
+main{max-width:480px}h1{font:normal 36px/1.2 Georgia,serif}p{line-height:1.6;color:#c5d2cd}a{color:#e4d3a8}</style></head>
+<body><main><small>NOETFIELD SYSTEMS · PRIVATE OPERATIONS</small><h1>Connecting your Google account</h1>
+<p id="operator-bridge-status" role="status">Checking your existing Google session…</p>
+<p><a href="https://platform.noetfield.com/api/corporate-crm/app">Back to Corporate CRM</a></p></main>
+<script src="/assets/noetfield-invest-auth-v1.js?v=5"></script>
+<script>
+"use strict";
+(async function(){
+ const status=document.getElementById("operator-bridge-status");
+ const targetOrigin="https://platform.noetfield.com";
+ if(!window.opener || window.opener.closed){status.textContent="Open Google sign-in from the Corporate CRM or Opportunity Desk window.";return}
+ try{
+  const auth=window.NoetfieldInvestAuth;
+  const sb=await auth.getClient();
+  const result=await sb.auth.getSession();
+  if(result.error)throw result.error;
+  const session=result.data && result.data.session;
+  if(session && session.access_token){
+   window.opener.postMessage({type:"noetfield.operator.google.v1",access_token:session.access_token},targetOrigin);
+   status.textContent="Identity returned to your Noetfield workspace. This window can be closed.";
+   window.close();
+   return;
+  }
+  // The existing Google OAuth redirect uses /auth/callback/ on www.noetfield.com.
+  // Store only a local relative return path, never a credential or an external URL.
+  sessionStorage.setItem("nf-operator-sso-return","/auth/operator-bridge/");
+  status.textContent="Opening Google Sign-In…";
+  const response=await sb.auth.signInWithOAuth({provider:"google",
+   options:{redirectTo:location.origin+"/auth/callback/"}});
+  if(response.error)throw response.error;
+ }catch(err){
+  status.textContent="Google sign-in could not complete. Return to CRM and use the operator key. "+String(err.message||err);
+ }
+})();
+</script></body></html>
