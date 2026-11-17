@@ -2816,6 +2816,36 @@ class CorporateWorkPacketRequest(BaseModel):
     deal_id: str
 
 
+class CorporateCustomerAcceptRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    deal_id: str
+
+
+@app.post("/api/corporate-crm/customer/accept",tags=["operations"],include_in_schema=False)
+async def corporate_customer_accept(
+    body:CorporateCustomerAcceptRequest,request:Request,
+)->dict[str,object]:
+    """Only a provider-verified scoped customer may accept their verified delivery."""
+    from noetfield_governance.customer_portal import authenticate_customer
+    from noetfield_governance.corporate_workpacket import customer_accept_workpacket,WorkPacketError
+    bearer=request.headers.get("authorization") or ""
+    token=bearer[7:] if bearer.startswith("Bearer ") else ""
+    identity=await authenticate_customer(token)
+    try:
+        return await customer_accept_workpacket(settings,deal_id=body.deal_id,identity=identity)
+    except WorkPacketError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
+@app.get("/api/corporate-crm/customer/acceptance/{receipt_id}",
+         tags=["operations"],include_in_schema=False)
+async def corporate_customer_acceptance_receipt(receipt_id:str,request:Request)->dict[str,object]:
+    """Admin-only receipt used as immutable delivery acceptance evidence."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_workpacket import acceptance_receipt
+    return await acceptance_receipt(settings,receipt_id=receipt_id)
+
+
 @app.post("/api/corporate-crm/workpackets/admit",tags=["operations"],include_in_schema=False)
 async def corporate_workpacket_admit(body:CorporateWorkPacketRequest,request:Request)->dict[str,object]:
     _require_connect_desk_operator(request)
