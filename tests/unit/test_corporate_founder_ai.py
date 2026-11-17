@@ -89,6 +89,83 @@ def test_real_openrouter_request_has_bounded_tokens_and_usage_receipt(monkeypatc
     asyncio.run(exercise())
 
 
+def test_real_fabric_source_job_uses_safely_scoped_credentials_and_receipt(monkeypatch):
+    from noetfield_governance.corporate_founder_ai import _source_signature
+    import hashlib
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BASE_URL",
+                       "https://noetfield-agent-fabric-staging-staging.up.railway.app")
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN","f"*64)
+    monkeypatch.delenv("CORPORATE_AI_LLM_API_KEY",raising=False)
+    monkeypatch.delenv("OPENROUTER_API_KEY",raising=False)
+    captured={}
+    class FakeReply:
+        status_code=200
+        def json(self):
+            sent=captured["payload"]
+            plain={"schema":"noetfield.agent-fabric.founder-crm-analysis.v1",
+               "state":"SUCCEEDED","task_id":sent["task_id"],
+               "source_key":sent["source_key"],
+               "source_signature":sent["source_signature"],
+               "analysis":VALID,"provider":"cloudflare_glm",
+               "model":"@cf/zai-org/glm-4.7-flash",
+               "generation_id":"real-upstream-provider-001",
+               "input_tokens":135,"output_tokens":76,"cost_usd":None,
+               "cost_from_provider":False,
+               "external_actions_executed":False,
+               "authority":"UNVERIFIED_ADVISORY_MODEL_OUTPUT"}
+            plain["artifact_sha256"]=hashlib.sha256(
+                json.dumps(plain,sort_keys=True,ensure_ascii=False).encode()
+            ).hexdigest()
+            return plain
+    class FakeClient:
+        def __init__(self,*a,**k): pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*a):return False
+        async def post(self,url,**kwargs):
+            captured.update(url=url,payload=kwargs["json"],
+                            headers=kwargs["headers"])
+            return FakeReply()
+    async def go():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",FakeClient):
+            return await analyze_public_company(SAMPLE)
+    result=asyncio.run(go())
+    assert result["analysis"]==VALID
+    assert result["model_route"]=="AGENT_FABRIC_CLOUDFLARE_GLM"
+    assert result["generation_id"]=="real-upstream-provider-001"
+    assert len(result["artifact_sha256"])==64
+    assert result["cost_usd"] is None and result["cost_from_provider"] is False
+    assert captured["url"].endswith("/api/internal/v1/founder-crm/analyze")
+    assert captured["headers"]["X-Founder-CRM-Bridge-Key"]=="f"*64
+    assert "Authorization" not in captured["headers"]
+    assert captured["payload"]["source_signature"]==_source_signature(SAMPLE)
+    assert captured["payload"]["source"]["published_site_description"]==SAMPLE["site_description"]
+    assert "contact_email" not in json.dumps(captured["payload"])
+    assert "person_name" not in json.dumps(captured["payload"])
+
+
+def test_fabric_receipt_tampering_is_not_treated_as_real_agent_success(monkeypatch):
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BASE_URL","https://fabric.example.org")
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN","f"*64)
+    monkeypatch.delenv("CORPORATE_AI_LLM_API_KEY",raising=False)
+    monkeypatch.delenv("OPENROUTER_API_KEY",raising=False)
+    class FakeReply:
+        status_code=200
+        def json(self):
+            return {"schema":"noetfield.agent-fabric.founder-crm-analysis.v1",
+              "state":"SUCCEEDED","analysis":VALID,
+              "provider":"cloudflare_glm","artifact_sha256":"0"*64}
+    class FakeClient:
+        def __init__(self,*a,**kw):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*a):return False
+        async def post(self,*a,**kw):return FakeReply()
+    async def go():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",FakeClient):
+            with pytest.raises(ValueError,match="MODEL_FABRIC_RECEIPT_INVALID"):
+                await analyze_public_company(SAMPLE)
+    asyncio.run(go())
+
+
 def test_existing_company_os_model_used_first_and_openrouter_401_not_required(monkeypatch):
     from noetfield_governance.corporate_founder_ai import _model_routes
     monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com/v1")
