@@ -45,8 +45,8 @@ def _case_bytes(payload:Any)->bytes:
     for key in ("jurisdiction","issuer","asset_value","target_investors","proposed_structure"):
         if not isinstance(ctx.get(key),str) or len(ctx[key].strip())<2:
             raise WorkPacketError("RWA_CASE_CONTEXT_INCOMPLETE_"+key.upper())
-    if not payload.get("evidence") and not payload.get("asset_existence"):
-        raise WorkPacketError("RWA_EVIDENCE_LIFECYCLE_REQUIRED")
+    # Native Clinic owns nested evidence validation and 9+1 gate policy.
+    # Do not invent a second local evidence schema that rejects genuine v3 cases.
     return raw
 
 
@@ -65,7 +65,7 @@ async def prepare_clinic_submissions(db:asyncpg.Connection)->None:
 
 
 def _response_case_id(data:dict[str,Any])->str|None:
-    for item in (data,data.get("case"),data.get("result")):
+    for item in (data,data.get("case"),data.get("result"),data.get("data"),data.get("created_case")):
         if not isinstance(item,dict):
             continue
         for key in ("case_id","id"):
