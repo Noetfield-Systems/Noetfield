@@ -483,3 +483,109 @@ async def check_accepted_delivery_for_intake(
     return await check_accepted_delivery(settings, deal_id=deal_id,
                                           delivery_evidence=delivery_evidence,
                                           acceptance_url=acceptance_url)
+
+
+INDEPENDENT_DRAFT_VERIFIER = "https://verify.noetfield.com/api/internal/commercial/verify-draft"
+
+
+async def verify_company_os_draft(settings:object,*,deal_id:str)->dict[str,Any]:
+    """Independent origin-pulled draft hash check; never marks client delivery."""
+    try:
+        deal_uuid=uuid.UUID(deal_id)
+    except (TypeError,ValueError) as exc:
+        raise WorkPacketError("INVALID_DEAL_ID") from exc
+    invoke_token=os.environ.get("CORPORATE_VERIFIER_INVOKE_TOKEN","").strip()
+    if len(invoke_token)<32:
+        return {"state":"VERIFIER_NOT_CONFIGURED","independently_verified_delivery":False}
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_workpackets(db)
+        row=await db.fetchrow("""SELECT id,deal_id,engine,state,source_intake_id,
+             external_workpacket_id,payment_event_id
+           FROM noetfield.corp_workpackets WHERE deal_id=$1""",deal_uuid)
+        if row is None:
+            raise WorkPacketError("PAID_WORKPACKET_NOT_ADMITTED")
+        if row["engine"]!="COMPANY_OS":
+            return {"state":"RWA_CLINIC_VERIFIER_NOT_CONNECTED","independently_verified_delivery":False}
+        if row["state"]=="VERIFIED":
+            return {"state":"ALREADY_INDEPENDENTLY_VERIFIED","independently_verified_delivery":True}
+        if row["state"]=="RUNNING":
+            return {"state":"DRAFT_REVIEW_ALREADY_RECORDED","independently_verified_delivery":False}
+        if row["state"]!="ACKNOWLEDGED" or not row["external_workpacket_id"]:
+            return {"state":"PROVIDER_DISPATCH_ACK_REQUIRED","independently_verified_delivery":False}
+        paid=validate_paid_case(await _paid_row(db,row["deal_id"]))
+        if (paid["source_intake_id"]!=row["source_intake_id"] or
+            paid["payment_event_id"]!=row["payment_event_id"]):
+            raise WorkPacketError("PAID_SCOPE_CHANGED_BEFORE_DRAFT_VERIFIER")
+        outgoing={
+          "platform_workpacket_id":str(row["id"]),
+          "external_workpacket_id":row["external_workpacket_id"],
+          "source_intake_id":row["source_intake_id"],
+          "payment_event_id":row["payment_event_id"],
+          "engine":"COMPANY_OS"
+        }
+    finally:
+        await db.close()
+    try:
+        async with httpx.AsyncClient(timeout=25,follow_redirects=False) as client:
+            response=await client.post(
+              INDEPENDENT_DRAFT_VERIFIER,
+              json=outgoing,
+              headers={"Authorization":"Bearer "+invoke_token,
+                       "Accept":"application/json"})
+    except httpx.RequestError:
+        return {"state":"VERIFIER_TRANSPORT_UNCONFIRMED",
+                "independently_verified_delivery":False}
+    if response.status_code==409:
+        return {"state":"ARTIFACT_NOT_YET_VERIFIABLE","independently_verified_delivery":False}
+    if response.status_code!=200:
+        return {"state":"VERIFIER_PROVIDER_UNAVAILABLE",
+                "provider_http_status":response.status_code,
+                "independently_verified_delivery":False}
+    try:
+        result=response.json()
+    except ValueError:
+        raise WorkPacketError("UNPARSABLE_VERIFIER_ACK") from None
+    if (not isinstance(result,dict) or
+         result.get("schema")!="noetfield.commercial-draft-verified.v1" or
+         result.get("state")!="RUNNING" or
+         result.get("source_workpacket_id")!=outgoing["external_workpacket_id"] or
+         result.get("callback_acknowledged") is not True or
+         result.get("draft_integrity_passed") is not True or
+         result.get("product_delivered") is not False or
+         result.get("customer_accepted") is not False):
+        raise WorkPacketError("INDEPENDENT_VERIFIER_CALLBACK_UNCONFIRMED")
+    return {"state":"DRAFT_INDEPENDENTLY_ATTESTED",
+            "external_workpacket_id":outgoing["external_workpacket_id"],
+            "verifier_receipt_url":evidence_url(str(result.get("verifier_receipt_url") or "")),
+            "independently_verified_draft":True,
+            "independently_verified_delivery":False,
+            "customer_acceptance":False,
+            "provider_acknowledged":True}
+
+
+async def reconcile_pending_company_os_drafts(settings:object,*,limit:int=3)->dict[str,Any]:
+    """Bounded background verification of actual ACKed Company OS jobs, never simulations."""
+    if not 1<=limit<=10:
+        raise WorkPacketError("INVALID_DRAFT_RECONCILIATION_LIMIT")
+    if len(os.environ.get("CORPORATE_VERIFIER_INVOKE_TOKEN",""))<32:
+        return {"state":"NOT_CONFIGURED","checked":0,"verified_drafts":0}
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_workpackets(db)
+        rows=await db.fetch("""SELECT deal_id FROM noetfield.corp_workpackets
+             WHERE engine='COMPANY_OS' AND state='ACKNOWLEDGED'
+             ORDER BY updated_at ASC LIMIT $1""",limit)
+    finally:
+        await db.close()
+    statuses=[]
+    for row in rows:
+        try:
+            result=await verify_company_os_draft(settings,deal_id=str(row["deal_id"]))
+            statuses.append(result["state"])
+        except (WorkPacketError,CommercialError):
+            statuses.append("SOURCE_OR_VERIFIER_REJECTED")
+    return {"state":"COMPLETE","checked":len(rows),
+            "verified_drafts":statuses.count("DRAFT_INDEPENDENTLY_ATTESTED"),
+            "pending":statuses.count("ARTIFACT_NOT_YET_VERIFIABLE"),
+            "no_customer_deliveries_claimed":True}
