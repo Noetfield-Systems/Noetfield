@@ -115,6 +115,15 @@ async def start_scheduler(settings:object)->None:
                     scout["state"], scout["scanned"], scout["found_public_business_channels"])
             except Exception:
                 logger.exception("corporate_founder_scout=FAILED_SOURCE_RESEARCH")
+            # Existing OpenRouter credentials, maximum two public-evidence
+            # analyses per sync; durable 12/day budget includes failed calls.
+            try:
+                from noetfield_governance.corporate_founder_ai import run_ai_batch
+                ai = await run_ai_batch(settings,limit=2)
+                logger.warning("corporate_founder_ai=%s attempts=%d completed=%d",
+                    ai["state"],ai["attempted"],ai["completed"])
+            except Exception:
+                logger.exception("corporate_founder_ai=FAILED")
             await asyncio.sleep(6*3600)
     _task=asyncio.create_task(loop())
 

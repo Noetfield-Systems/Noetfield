@@ -14,7 +14,7 @@ const research=Array.from({length:22},(_,index)=>({
  lane:index%5===0?"RWA":"CORPORATE",original_url:"https://example.org/sources/"+index,
  review_status:"PROFILE_REVIEWED",score:90-index,promoted_deal_id:null
 }));
-const events={qualify:[],outreach:0,scout:[]};
+const events={qualify:[],outreach:0,scout:[],ai:[]};
 let siteChecks=0;
 const dealId="99771110-1111-4111-8111-111111111111";
 let confirmed=null;
@@ -32,6 +32,26 @@ const server=http.createServer(async(req,res)=>{
   people:[],deals:confirmed?[{id:dealId,account_name:confirmed.organization,stage:"NEW",offer:"ai_sales_os_pilot",estimated_minor:0,currency:"cad",summary:"Source verified",owner:"Noetfield Revenue",next_date:"",next_action:"Qualify customer scope"}]:[],
   metrics:{open:confirmed?1:0,due:0,total_accounts:confirmed?1:0,paid_verified_by_currency_minor:{}}
  });return;}
+ if(key==="GET /api/corporate-crm/founder/ai"){
+   json(res,{model_analyses_completed:events.ai.length?2:0,
+    model_calls_attempted_today:events.ai.length*2,max_daily_model_calls:12,
+    provider_configured:true,analyses:events.ai.length?research.slice(0,2).map(row=>({
+      source_key:row.source_key,model:"test/real-model-mock",generation_id:"mock-receipt",
+      analysis:{fit_label:"POSSIBLE_FIT",evidence_phrase:"Business technology services",
+       reason:"Public company description mentions business technology services.",
+       buyer_role:"Operations Lead",
+       next_move:"Review the original published company service page for workflow relevance."},
+      type:"AI_HYPOTHESIS_UNVERIFIED",cost_usd:0.0001
+    })):[]});return;
+ }
+ if(key==="POST /api/corporate-crm/founder/ai/run"){
+   let raw="";for await(const chunk of req)raw+=chunk;
+   if(req.headers["x-desk-csrf"]!=="test-csrf"){json(res,{detail:"INVALID_SESSION"},403);return;}
+   const data=JSON.parse(raw);
+   events.ai.push(data);
+   json(res,{state:"COMPLETE",attempted:2,completed:2,models_called:2,
+    daily_limit:12,outreach_sent:0,paid_orders_created:0});return;
+ }
  if(key==="GET /api/corporate-crm/founder/scout"){
   json(res,{
    summary:{research_organizations:22,awaiting_contact_research:22,
@@ -124,6 +144,12 @@ async function run(){
      assert.ok(await page.locator("#founder-scout-list").getByText("Head of Partnerships",{exact:false}).count()>0);
      assert.ok(await page.locator("#founder-scout-list").getByText("Roles published on the company website",{exact:false}).count()>0);
      assert.equal(await page.locator("#operator-tools").evaluate(el=>el.open),false);
+     await page.locator("#founder-ai-next").click();
+     await page.waitForFunction(()=>document.querySelector("#founder-ai-status")?.textContent?.includes("completed grounded analyses"));
+     assert.equal(events.ai.length,1,"Only one bounded model-analysis request should run");
+     assert.equal(events.ai[0].limit,2);
+     assert.ok(await page.locator("#founder-scout-list").getByText("AI sales analyst",{exact:false}).count()>0);
+     assert.equal(events.outreach,0,"Model analysis cannot send customer email");
    }
    await page.locator("#operator-tools").evaluate(el=>el.open=true);
    await page.getByRole("button",{name:"Qualify for Corporate CRM"}).last().click();

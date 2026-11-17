@@ -258,9 +258,11 @@ a{color:#215f54}.inline-link{font-size:11px}
       </div>
       <div class="founder-row">
         <div><h3>Companies worth exploring</h3><p class="founder-copy">Prioritized research, not a list of verified customers.</p></div>
-        <button type="button" class="primary founder-scan" id="founder-scan-next">Research next 5 companies</button>
+        <div class="ops-actions"><button type="button" class="primary founder-scan" id="founder-scan-next">Research next 5 companies</button>
+        <button type="button" class="ghost founder-scan" id="founder-ai-next">AI: analyze next 2</button></div>
       </div>
       <div id="founder-scout-status" class="founder-status" role="status" aria-live="polite">Checking your company research…</div>
+      <p class="founder-copy" id="founder-ai-status" role="status" aria-live="polite">AI research: checking actual model receipts…</p>
       <div class="founder-list" id="founder-scout-list" aria-live="polite"><p class="empty">Loading source-backed recommendations…</p></div>
       <p class="founder-copy">A contact channel is not permission to email. No unverified names, customers, meetings or payments are counted.</p>
     </div>
@@ -629,12 +631,31 @@ function openResearchQualification(item){
 }
 
 let founderScanRunning=false;
-function renderFounderScout(report){
+let founderAiRunning=false;
+function aiSuggestionCard(candidate,notes){
+ const item=notes.get(candidate.source_key);
+ if(!item||!item.analysis)return "";
+ const a=item.analysis;
+ const fit={STRONG_FIT:"Stronger match to investigate",POSSIBLE_FIT:"Possible match",
+  INSUFFICIENT_EVIDENCE:"More evidence needed",OUT_OF_SCOPE:"Likely not a fit"}[a.fit_label]||"AI suggestion";
+ return '<div class="founder-channel"><strong>AI sales analyst · '+esc(fit)+'</strong>'+
+  '<p>'+esc(a.reason||"")+'</p>'+
+  (a.evidence_phrase?'<small>Reason grounded in published text: “'+esc(a.evidence_phrase)+'”</small>':'')+
+  '<p><b>Who to research:</b> '+esc(a.buyer_role||"")+'</p>'+
+  '<p><b>Next move:</b> '+esc(a.next_move||"")+'</p>'+
+  '<small>Model '+esc(item.model||"unknown")+' · AI hypothesis, not a verified customer or proven need</small></div>';
+}
+function renderFounderScout(report, aiReport={}){
  const m=report.summary||{};
  $("#founder-research-count").textContent=Number(m.research_organizations||0).toLocaleString("en-CA");
  $("#founder-scout-count").textContent=Number(m.websites_checked||0).toLocaleString("en-CA");
  $("#founder-contact-count").textContent=Number((m.public_business_emails||0)+(m.public_contact_pages||0)).toLocaleString("en-CA");
  const rows=report.prospects||[];
+ const aiNotes=new Map((aiReport.analyses||[]).map(x=>[x.source_key,x]));
+ $("#founder-ai-status").textContent=(aiReport.model_analyses_completed||0)+
+  " source-grounded AI suggestions · "+(aiReport.model_calls_attempted_today||0)+
+  " of "+(aiReport.max_daily_model_calls||12)+" daily model calls used"+
+  (aiReport.provider_configured===false?" · provider unavailable":"");
  const states={
   PUBLISHED_GENERAL_BUSINESS_EMAIL:"Published general business email found",
   PUBLIC_CONTACT_PAGE:"Company contact page found",
@@ -657,6 +678,7 @@ function renderFounderScout(report){
     '<p><strong>'+esc(person.name)+'</strong> · '+esc(person.role)+
     (safeURL(person.evidence_url)?' · <a class="inline-link" href="'+esc(safeURL(person.evidence_url))+'" target="_blank" rel="noopener noreferrer">Published listing</a>':'')+
     '</p>').join("")+'</div>':'')+
+  aiSuggestionCard(p,aiNotes)+
   '<div class="founder-links">'+
   (safeURL(p.original_source)?'<a class="inline-link" href="'+esc(safeURL(p.original_source))+'" target="_blank" rel="noopener noreferrer">Original source</a>':'')+
   (safeURL(p.contact_page_url)?'<a class="inline-link" href="'+esc(safeURL(p.contact_page_url))+'" target="_blank" rel="noopener noreferrer">Contact page</a>':'')+
@@ -675,12 +697,13 @@ function renderFounderScout(report){
 }
 async function loadFounderScout(){
  try{
-  const [report,conversion]=await Promise.all([
+  const [report,conversion,ai]=await Promise.all([
    api("/api/corporate-crm/founder/scout?limit=20"),
-   api("/api/corporate-crm/growth/funnel?limit=1")
+   api("/api/corporate-crm/growth/funnel?limit=1"),
+   api("/api/corporate-crm/founder/ai?limit=25").catch(()=>({provider_configured:false,analyses:[]}))
   ]);
   $("#founder-paid-count").textContent=Number(conversion.stages?.paid_live_checkouts||0).toLocaleString("en-CA");
-  renderFounderScout(report);
+  renderFounderScout(report,ai);
  }catch(error){
   $("#founder-scout-status").textContent="Research readback unavailable: "+String(error.message||error);
   $("#founder-scout-list").innerHTML='<p class="empty">Company records remain available below; no research outcome assumed.</p>';
@@ -703,6 +726,23 @@ async function runFounderScout(input={limit:5}){
  }finally{founderScanRunning=false;b.disabled=false;b.textContent=label}
 }
 $("#founder-scan-next").addEventListener("click",()=>runFounderScout({limit:5}));
+async function runFounderAi(){
+ if(founderAiRunning)return;
+ const b=$("#founder-ai-next"),status=$("#founder-ai-status"),label=b.textContent;
+ founderAiRunning=true;b.disabled=true;b.textContent="AI analyzing public sources…";
+ status.textContent="Running up to two actual model analyses on sourced company evidence.";
+ try{
+  const result=await api("/api/corporate-crm/founder/ai/run",{method:"POST",data:{limit:2}});
+  await loadFounderScout();
+  status.textContent="AI model attempts: "+(result.attempted||0)+
+   " · completed grounded analyses: "+(result.completed||0)+
+   (result.state==="NOT_CONFIGURED"?" · model not configured":"")+
+   " · no outreach or customer verification claimed.";
+ }catch(error){
+  status.textContent="AI analysis not confirmed: "+String(error.message||error);
+ }finally{founderAiRunning=false;b.disabled=false;b.textContent=label}
+}
+$("#founder-ai-next").addEventListener("click",runFounderAi);
 async function loadFieldworkResearch(){
  const box=$("#fieldwork-items");
  try{
