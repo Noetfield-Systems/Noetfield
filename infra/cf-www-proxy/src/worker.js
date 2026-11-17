@@ -53,12 +53,20 @@ const PUBLIC_SECURITY_HEADERS = {
 const WWW_HTML_CSP =
   "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self' https://www.noetfield.com https://noetfield.com https://platform.noetfield.com https://api.noetfield.com https://scan.noetfield.com; upgrade-insecure-requests";
 
-function applyPublicSecurityHeaders(headers, { html = false } = {}) {
+
+const AUTH_PATHS = new Set(["/auth/operator-bridge", "/auth/callback", "/auth/sign-in"]);
+// The operator / Google flows require the already-used Supabase client and OAuth API.
+// Keep marketing/other pages on the stricter default CSP; no inline JS anywhere.
+const WWW_AUTH_CSP = WWW_HTML_CSP
+  .replace("script-src 'self';", "script-src 'self' https://cdn.jsdelivr.net;")
+  .replace("connect-src 'self'", "connect-src 'self' https://ldfruywifqnfpwsfgmdl.supabase.co");
+
+function applyPublicSecurityHeaders(headers, { html = false, pathname = "" } = {}) {
   for (const [key, value] of Object.entries(PUBLIC_SECURITY_HEADERS)) {
     headers.set(key, value);
   }
   if (html) {
-    headers.set("Content-Security-Policy", WWW_HTML_CSP);
+    headers.set("Content-Security-Policy", AUTH_PATHS.has(pathname.replace(/\/$/, "")) ? WWW_AUTH_CSP : WWW_HTML_CSP);
     headers.delete("Access-Control-Allow-Origin");
     headers.delete("Access-Control-Allow-Credentials");
     headers.delete("Access-Control-Allow-Methods");
@@ -147,7 +155,7 @@ export default {
       out.headers.set("CDN-Cache-Control", "no-store");
       out.headers.set("Cloudflare-CDN-Cache-Control", "no-store");
       out.headers.delete("Age");
-      applyPublicSecurityHeaders(out.headers, { html: true });
+      applyPublicSecurityHeaders(out.headers, { html: true, pathname: url.pathname });
     }
     return out;
   },

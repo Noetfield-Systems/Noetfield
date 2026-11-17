@@ -218,7 +218,7 @@ def test_corporate_crm_console_has_source_based_paid_flow_not_fake_cash():
     assert "Record verified commercial step" in html
     assert "Approved-scope Stripe payment link" in html
     assert "No automatic outreach or billing" in html
-    assert 'id="remember">' in html and 'id="remember" checked' not in html
+    assert 'id="remember" checked>' in html
     assert 'id="operator" name="password" type="password" autocomplete="current-password"' in html
     assert 'autocomplete="off"' not in html
     assert 'id="password-manager-hint"' in html

@@ -302,7 +302,10 @@
       const sb = await getClient();
       const session = await consumeOAuthCallback(sb) || (await getSession());
       if (!session) throw new Error("No session — try signing in again.");
-      await setInvestCookie(session);
+      // An operator-only login must not create an unrelated investor cookie.
+      if (global.sessionStorage.getItem("nf-operator-sso-return") !== "/auth/operator-bridge/") {
+        await setInvestCookie(session);
+      }
       if (status) status.textContent = "Signed in. Redirecting…";
       routeAfterSignIn();
     } catch (e) {
