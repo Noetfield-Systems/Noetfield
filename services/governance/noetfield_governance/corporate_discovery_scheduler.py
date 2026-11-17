@@ -93,17 +93,47 @@ async def reconcile_paid_company_os_drafts(settings:object)->dict[str,Any]:
         return {"state":"FAILED","checked":0,"verified_drafts":0}
 
 
+async def auto_dispatch_verified_paid_work(settings:object)->dict[str,Any]:
+    """Run existing Company OS/RWA work ONLY for accepted SOW and live paid proof."""
+    from noetfield_governance.corporate_workpacket import auto_dispatch_paid_ready_work
+    try:
+        result=await auto_dispatch_paid_ready_work(settings,limit=3)
+        logger.warning("corporate_paid_autodispatch=%s eligible=%d provider_acks=%d",
+            result["state"],result["eligible_paid_cases"],result["dispatch_acknowledged"])
+        return result
+    except Exception:
+        logger.exception("corporate_paid_autodispatch=FAILED")
+        return {"state":"FAILED","eligible_paid_cases":0,"dispatch_acknowledged":0}
+
+
+async def reconcile_founder_missions(settings:object)->dict[str,Any]:
+    """Refresh durable state and next action on the SAME public-source ledger."""
+    from noetfield_governance.corporate_founder_missions import materialize_missions
+    try:
+        result=await materialize_missions(settings,limit=150)
+        logger.warning("corporate_founder_missions=%s scanned=%d changes=%d",
+            result["state"],result["scanned"],result["created_or_changed"])
+        return result
+    except Exception:
+        logger.exception("corporate_founder_missions=FAILED")
+        return {"state":"FAILED","scanned":0,"created_or_changed":0}
+
+
 async def start_scheduler(settings:object)->None:
     global _task
     if not configured():
-        logger.warning("corporate_fieldwork_sync=UNCONFIGURED")
-        return
+        # Even without the Fieldwork bridge, existing inbound buyers, signed
+        # Stripe payment and paid delivery still need their scheduled jobs.
+        logger.warning("corporate_fieldwork_sync=UNCONFIGURED_CONTINUING_PAID_WORK")
     if _task is not None and not _task.done():
         return
     async def loop()->None:
+        cycle=0
         while True:
-            await run_once(settings)
+            if cycle % 24 == 0:  # every 6 hours, not every short execution tick
+                await run_once(settings)
             await reconcile_proven_outreach(settings)
+            await auto_dispatch_verified_paid_work(settings)
             await reconcile_paid_company_os_drafts(settings)
             # Small, real public-source research batch; no founder data entry,
             # no unsolicited send, no guessed customer or AI model usage.
@@ -124,7 +154,9 @@ async def start_scheduler(settings:object)->None:
                     ai["state"],ai["attempted"],ai["completed"])
             except Exception:
                 logger.exception("corporate_founder_ai=FAILED")
-            await asyncio.sleep(6*3600)
+            await reconcile_founder_missions(settings)
+            cycle+=1
+            await asyncio.sleep(15*60)
     _task=asyncio.create_task(loop())
 
 
