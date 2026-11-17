@@ -59,9 +59,34 @@ Do not pretend to visit URLs or research beyond the supplied quoted public text.
 """
 
 
+def _model_routes()->list[dict[str,str]]:
+    """Company OS existing model credentials first, scoped to public research only.
+
+    Credential values stay in Railway secret references and backend memory.
+    Avoid using the invalid platform OpenRouter key when Company OS is ready.
+    """
+    routes=[]
+    base=os.getenv("CORPORATE_AI_LLM_BASE_URL","").strip().rstrip("/")
+    key=os.getenv("CORPORATE_AI_LLM_API_KEY","").strip()
+    model=os.getenv("CORPORATE_AI_LLM_MODEL","").strip()
+    if (base.startswith("https://") and key and model
+            and not any(x in base for x in ("@", "?","#"))):
+        from urllib.parse import urlsplit
+        u=urlsplit(base)
+        if u.scheme=="https" and u.hostname and u.port in (None,443):
+            routes.append({"url":base+"/chat/completions",
+                "key":key,"model":model,"route":"COMPANY_OS_EXISTING_MODEL"})
+    # Existing OpenRouter is an alternate, never a prerequisite.
+    old_key=os.getenv("OPENROUTER_API_KEY","").strip()
+    old_model=os.getenv("OPENROUTER_MODEL","").strip()
+    if old_key and old_model:
+        routes.append({"url":_URL,"key":old_key,"model":old_model,
+            "route":"PLATFORM_OPENROUTER"})
+    return routes
+
+
 def configured() -> bool:
-    return bool(os.getenv("OPENROUTER_API_KEY","").strip()
-                and os.getenv("OPENROUTER_MODEL","").strip())
+    return bool(_model_routes())
 
 
 def _model_input(row: dict[str,Any]) -> dict[str,str]:
@@ -116,54 +141,70 @@ def _parse_output(raw: str,source:dict[str,str])->dict[str,str]:
 
 
 async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
-    """One real OpenRouter model invocation, max 380 output tokens."""
-    key=os.getenv("OPENROUTER_API_KEY","").strip()
-    model=os.getenv("OPENROUTER_MODEL","").strip()
-    if not key or not model:
+    """One model analysis with existing Company OS provider-first failover.
+
+    Only explicit public site text is sent. A 401/403/429 is retried on
+    alternate configured provider without ever claiming first route success.
+    """
+    routes=_model_routes()
+    if not routes:
         raise ValueError("FOUNDER_AI_PROVIDER_UNCONFIGURED")
     source=_model_input(row)
     if len(source["published_site_title"]+" "+source["published_site_description"])<25:
         raise ValueError("INSUFFICIENT_PUBLIC_SITE_CONTEXT_FOR_MODEL")
     content=json.dumps(source,ensure_ascii=False,separators=(",",":"))
-    payload={"model":model,
-             "messages":[{"role":"system","content":_SYSTEM},
-                         {"role":"user","content":content}],
-             "temperature":0.1,"max_tokens":380,
-             "usage":{"include":True}}
-    try:
-        async with httpx.AsyncClient(trust_env=False,timeout=18,
-                                    follow_redirects=False,verify=True) as client:
-            response=await client.post(_URL,json=payload,headers={
-                "Authorization":"Bearer "+key,
-                "Content-Type":"application/json",
-                "HTTP-Referer":"https://noetfield.com",
-                "X-Title":"Noetfield Founder Sales Analyst"})
-    except httpx.RequestError as exc:
-        raise ValueError("OPENROUTER_PROVIDER_NETWORK_UNAVAILABLE") from exc
-    if response.status_code!=200:
-        raise ValueError("OPENROUTER_HTTP_"+str(response.status_code))
-    try:
-        body=response.json()
-        message=body["choices"][0]["message"]["content"]
-        if not isinstance(message,str):
-            raise ValueError("OPENROUTER_EMPTY_TEXT")
-        analysis=_parse_output(message,source)
-        usage=body.get("usage") or {}
-        prompt_tokens=max(0,int(usage.get("prompt_tokens") or 0))
-        output_tokens=max(0,int(usage.get("completion_tokens") or 0))
-        raw_cost=usage.get("cost")
-        cost=(float(raw_cost) if raw_cost is not None else None)
-        if cost is not None and (not math.isfinite(cost) or cost<0):
-            cost=None
-        return {"analysis":analysis,
-            "model":str(body.get("model") or model)[:150],
-            "generation_id":str(body.get("id") or "")[:150],
-            "prompt_tokens":prompt_tokens,"completion_tokens":output_tokens,
-            "cost_usd":cost,"cost_from_provider":cost is not None}
-    except (KeyError,IndexError,TypeError,ValueError) as exc:
-        if isinstance(exc,ValueError) and str(exc).startswith("MODEL_"):
-            raise
-        raise ValueError("OPENROUTER_RESPONSE_UNUSABLE") from exc
+    last_error="MODEL_PROVIDER_UNAVAILABLE"
+    for index,route in enumerate(routes):
+        body={"model":route["model"],
+              "messages":[{"role":"system","content":_SYSTEM},
+                          {"role":"user","content":content}],
+              "temperature":0.1,"max_tokens":380,
+              "usage":{"include":True}}
+        try:
+            async with httpx.AsyncClient(trust_env=False,timeout=18,
+                                        follow_redirects=False,verify=True) as client:
+                response=await client.post(route["url"],json=body,headers={
+                    "Authorization":"Bearer "+route["key"],
+                    "Content-Type":"application/json",
+                    "HTTP-Referer":"https://noetfield.com",
+                    "X-Title":"Noetfield Founder Sales Analyst"})
+        except httpx.RequestError:
+            last_error="MODEL_PROVIDER_NETWORK_UNAVAILABLE"
+            continue
+        if response.status_code!=200:
+            last_error="MODEL_HTTP_"+str(response.status_code)+"_"+route["route"]
+            if response.status_code in (401,403,429,500,502,503,504):
+                continue
+            raise ValueError(last_error)
+        try:
+            payload=response.json()
+            message=payload["choices"][0]["message"]["content"]
+            if not isinstance(message,str):
+                last_error="MODEL_EMPTY_TEXT_"+route["route"]
+                continue
+            analysis=_parse_output(message,source)
+            usage=payload.get("usage") or {}
+            prompt_tokens=max(0,int(usage.get("prompt_tokens") or 0))
+            output_tokens=max(0,int(usage.get("completion_tokens") or 0))
+            raw_cost=usage.get("cost")
+            cost=float(raw_cost) if raw_cost is not None else None
+            if cost is not None and (not math.isfinite(cost) or cost<0):
+                cost=None
+            return {"analysis":analysis,
+                "model":str(payload.get("model") or route["model"])[:150],
+                "model_route":route["route"],
+                "generation_id":str(payload.get("id") or "")[:150],
+                "prompt_tokens":prompt_tokens,"completion_tokens":output_tokens,
+                "cost_usd":cost,"cost_from_provider":cost is not None}
+        except (KeyError,IndexError,TypeError,ValueError) as exc:
+            if isinstance(exc,ValueError) and str(exc).startswith("MODEL_"):
+                last_error=str(exc)[:80]
+            else:
+                last_error="MODEL_RESPONSE_UNUSABLE_"+route["route"]
+            # One additional legitimate provider can recover malformed model
+            # output; never accept unsupported or invented evidence.
+            continue
+    raise ValueError(last_error)
 
 
 async def prepare_ai(db:asyncpg.Connection)->None:
