@@ -28,6 +28,7 @@ on:
       - 'services/governance/noetfield_governance/customer_portal.py'
       - 'services/governance/noetfield_governance/private_customer_portal.html'
       - 'tests/unit/test_customer_portal.py'
+      - 'tests/unit/test_corporate_paid_selfserve.py'
       - 'services/governance/noetfield_governance/corporate_discovery.py'
       - 'services/governance/noetfield_governance/corporate_discovery_scheduler.py'
       - 'services/governance/noetfield_governance/corporate_founder_scout.py'
@@ -78,6 +79,7 @@ on:
       - 'services/governance/noetfield_governance/customer_portal.py'
       - 'services/governance/noetfield_governance/private_customer_portal.html'
       - 'tests/unit/test_customer_portal.py'
+      - 'tests/unit/test_corporate_paid_selfserve.py'
       - 'services/governance/noetfield_governance/corporate_discovery.py'
       - 'services/governance/noetfield_governance/corporate_discovery_scheduler.py'
       - 'services/governance/noetfield_governance/corporate_outbound.py'
@@ -165,6 +167,8 @@ jobs:
         run: python -m pytest -q tests/unit/test_corporate_workpacket.py
       - name: Verify Founder source research, bounded network safety and real private endpoints
         run: python -m pytest -q tests/unit/test_corporate_founder_scout.py
+      - name: Verify automatic live-paid source customer membership and native client RWA Clinic intake
+        run: python -m pytest -q tests/unit/test_corporate_paid_selfserve.py tests/unit/test_customer_portal.py
       - name: Verify real source-qualified autonomous Gmail sending without cold-blast or fake provider receipts
         run: python -m pytest -q tests/unit/test_corporate_autonomous_outbound.py
       - name: Verify actual budgeted Founder model research, source grounding and PostgreSQL receipts

@@ -106,6 +106,21 @@ async def auto_outreach_verified_relationships(settings:object)->dict[str,Any]:
         return {"state":"FAILED","eligible":0,"provider_accepted":0}
 
 
+async def auto_enable_paid_customer_portal(settings:object)->dict[str,Any]:
+    """Admit original paid buyers to their own cases, never third parties."""
+    from noetfield_governance.customer_portal import auto_grant_paid_original_customers
+    try:
+        result=await auto_grant_paid_original_customers(settings,limit=10)
+        logger.warning("corporate_paid_customer_portal=%s paid_checked=%d memberships_added=%d",
+            result["state"],result["paid_cases_checked"],
+            result["new_source_original_customer_memberships"])
+        return result
+    except Exception:
+        logger.exception("corporate_paid_customer_portal=FAILED")
+        return {"state":"FAILED","paid_cases_checked":0,
+                "new_source_original_customer_memberships":0}
+
+
 async def auto_dispatch_verified_paid_work(settings:object)->dict[str,Any]:
     """Run existing Company OS/RWA work ONLY for accepted SOW and live paid proof."""
     from noetfield_governance.corporate_workpacket import auto_dispatch_paid_ready_work
@@ -147,6 +162,7 @@ async def start_scheduler(settings:object)->None:
                 await run_once(settings)
             await reconcile_proven_outreach(settings)
             await auto_outreach_verified_relationships(settings)
+            await auto_enable_paid_customer_portal(settings)
             await auto_dispatch_verified_paid_work(settings)
             await reconcile_paid_company_os_drafts(settings)
             # Small, real public-source research batch; no founder data entry,

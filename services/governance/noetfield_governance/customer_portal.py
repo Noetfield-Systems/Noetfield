@@ -124,14 +124,105 @@ async def grant_customer_access(settings: object, *, deal_id: str, email: str,
         await db.close()
 
 
+async def auto_grant_paid_original_customers(settings:object,*,limit:int=5)->dict[str,Any]:
+    """Grant a real paid original buyer self-service access without Founder typing.
+
+    No unchecked third party or model-inferred email is ever added. The buyer
+    must still authenticate using Supabase's verified email before seeing a
+    scoped engagement. Never re-enable a manually REVOKED membership; the
+    insert is ON CONFLICT DO NOTHING rather than an upsert.
+    """
+    if type(limit) is not int or not 1<=limit<=10:
+        raise CorporateCRMError("INVALID_PAID_CUSTOMER_ACCESS_BATCH_LIMIT")
+    from noetfield_governance.corporate_workpacket import (
+        _paid_row,validate_paid_case,WorkPacketError
+    )
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await ensure_customer_access_schema(db)
+        candidates=await db.fetch("""SELECT DISTINCT d.id
+            FROM noetfield.corp_crm_deals d
+            JOIN noetfield.public_intakes i ON i.intake_id=d.source_intake_id
+            JOIN noetfield.commercial_payment_evidence e
+              ON e.source_intake_id=d.source_intake_id
+            WHERE d.offer IN ('rwa_technical_sprint','ai_sales_os_pilot')
+              AND e.livemode IS TRUE AND e.reversed IS FALSE
+              AND e.bound_at IS NOT NULL
+              AND i.qualification_json->'commercial_ops'->>'offer'=d.offer
+              AND i.qualification_json->'commercial_ops'->>'payment_event_id'=e.event_id
+              AND i.qualification_json->'commercial_ops'->>'payment_session_id'=e.session_id
+              AND i.qualification_json->'commercial_ops'->>'stage'
+                IN ('PAYMENT_CONFIRMED','IN_DELIVERY','DELIVERED','CLOSED')
+              AND nullif(i.qualification_json->'commercial_ops'->>'acceptance_evidence','') IS NOT NULL
+            ORDER BY d.id ASC LIMIT $1""",limit)
+        granted=0
+        blocked=0
+        for item in candidates:
+            try:
+                original=await _paid_row(db,item["id"])
+                validate_paid_case(original)
+                email_hash=customer_email_hash(str(original.get("contact_email") or ""))
+                created=await db.fetchrow("""INSERT INTO noetfield.corp_customer_access(
+                      deal_id,email_hash,granted_by,evidence_url,active)
+                    VALUES($1,$2,'SOURCE_BOUND_PAID_CUSTOMER_AUTO_GRANT','',true)
+                    ON CONFLICT(deal_id,email_hash) DO NOTHING RETURNING deal_id""",
+                    item["id"],email_hash)
+                granted+=bool(created)
+            except (CorporateCRMError,WorkPacketError,ValueError):
+                blocked+=1
+        return {"schema":"noetfield.corporate-paid-customer-access.v1",
+           "state":"COMPLETE" if blocked==0 else "PARTIAL_OR_BLOCKED",
+           "paid_cases_checked":len(candidates),
+           "new_source_original_customer_memberships":int(granted),
+           "blocked":blocked,"emails_sent":0,
+           "no_third_party_grants":True,"revocations_restored":0,
+           "customer_identity_still_requires_verified_login":True}
+    finally:
+        await db.close()
+
+
+async def customer_submit_paid_native_rwa_case(
+    settings:object,*,deal_id:str,clinic_case:dict[str,Any],
+    identity:dict[str,str],
+)->dict[str,Any]:
+    """Buyer-originated RWA case to the existing nine-plus-one Clinic engine.
+
+    Verified customer identity + original source-bound active deal membership
+    are mandatory, then the canonical native Clinic adapter rechecks accepted
+    scope and real signed live payment. No seller copy-and-paste is required.
+    """
+    try:
+        identifier=uuid.UUID(str(deal_id))
+    except (TypeError,ValueError) as exc:
+        raise CorporateCRMError("INVALID_CLIENT_ENGAGEMENT_ID") from exc
+    digest=str(identity.get("email_hash") or "")
+    if not re.fullmatch(r"[0-9a-f]{64}",digest):
+        raise CorporateCRMError("VERIFIED_CUSTOMER_IDENTITY_REQUIRED")
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await ensure_customer_access_schema(db)
+        owned=await db.fetchval("""SELECT 1 FROM noetfield.corp_customer_access ca
+             JOIN noetfield.corp_crm_deals d ON d.id=ca.deal_id
+             WHERE ca.deal_id=$1 AND ca.email_hash=$2 AND ca.active IS TRUE
+               AND d.offer='rwa_technical_sprint'""",identifier,digest)
+        if not owned:
+            raise CorporateCRMError("RWA_CUSTOMER_ACCESS_NOT_AUTHORIZED")
+    finally:
+        await db.close()
+    from noetfield_governance.corporate_rwa_execution import submit_paid_native_clinic_case
+    return await submit_paid_native_clinic_case(
+        settings,deal_id=str(identifier),clinic_case=clinic_case)
+
+
 def customer_case_projection(row: dict[str, Any]) -> dict[str, Any]:
     case = _as_dict(row.get("commercial"))
     payment = row.get("payment")
     terms = OFFER_TERMS.get(str(row.get("offer")))
     paid = bool(payment and payment["livemode"] and
-                not payment["reversed"] and
+                not payment["reversed"] and payment.get("bound_at") and
                 payment["source_intake_id"] == row["source_intake_id"] and
                 case.get("payment_session_id") == payment["session_id"] and
+                case.get("payment_event_id") == payment["event_id"] and
                 terms and payment["payment_link_id"] == terms["payment_link_id"] and
                 payment["amount_minor"] == terms["payment_minor"] and
                 payment["currency"] == terms["currency"] and
@@ -172,7 +263,9 @@ async def customer_cases(settings: object, *, identity: dict[str,str]) -> dict[s
     try:
         await ensure_customer_access_schema(db)
         from noetfield_governance.corporate_workpacket import prepare_workpackets
+        from noetfield_governance.corporate_rwa_execution import prepare_clinic_submissions
         await prepare_workpackets(db)
+        await prepare_clinic_submissions(db)
         rows=await db.fetch("""SELECT d.id,d.source_intake_id,d.offer,a.name AS account_name,
                     i.contact_email,i.qualification_json->'commercial_ops' AS commercial
                  FROM noetfield.corp_customer_access ca
@@ -188,7 +281,8 @@ async def customer_cases(settings: object, *, identity: dict[str,str]) -> dict[s
             payment=None
             if case.get("payment_session_id"):
                 proof=await db.fetchrow("""SELECT e.event_id,e.session_id,e.payment_link_id,
-                       e.amount_minor,e.currency,e.livemode,e.reversed,e.source_intake_id
+                       e.amount_minor,e.currency,e.livemode,e.reversed,
+                       e.source_intake_id,e.bound_at
                        FROM noetfield.commercial_payment_evidence e
                        WHERE e.session_id=$1""",case["payment_session_id"])
                 payment=dict(proof) if proof else None
@@ -215,6 +309,22 @@ async def customer_cases(settings: object, *, identity: dict[str,str]) -> dict[s
                     projection["delivery_state"]="ACCEPTED_BY_CUSTOMER"
             else:
                 projection["workpacket"]=None
+            if item["offer"]=="rwa_technical_sprint" and projection["payment_status"]=="PAID_LIVE":
+                clinic=await db.fetchrow("""SELECT s.state,s.clinic_case_id,
+                         s.provider_status_code
+                     FROM noetfield.corp_workpackets w
+                     JOIN noetfield.corp_rwa_clinic_submissions s
+                       ON s.workpacket_id=w.id WHERE w.deal_id=$1""",item["id"])
+                projection["native_clinic_case"]=(
+                    {"state":clinic["state"],
+                     "case_id":clinic["clinic_case_id"] if
+                       clinic["state"]=="PROVIDER_ACCEPTED" else None,
+                     "provider_status_code":clinic["provider_status_code"],
+                     "independently_verified":False}
+                    if clinic else {"state":"NOT_SUBMITTED",
+                                   "independently_verified":False})
+            else:
+                projection["native_clinic_case"]=None
             result.append(projection)
         return {"schema":"noetfield.customer-portal.v1","cases":result,
                 "scope":"AUTHENTICATED_CUSTOMER_MEMBERSHIP_ONLY","cash_source":"signed_stripe_intake_bound",
