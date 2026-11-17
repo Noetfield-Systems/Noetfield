@@ -376,12 +376,13 @@ async def customer_accept_workpacket(settings:object,*,deal_id:str,
                    RETURNING id""",uuid.uuid4(),identifier,identity["email_hash"],
                    hashlib.sha256(identity["provider_subject"].encode()).hexdigest(),
                    membership["workpacket_id"],membership["artifact_url"])
-            if not ack:
+            created=bool(ack)
+            if not created:
                 ack=await db.fetchrow("""SELECT id FROM noetfield.corp_workpacket_acceptances
                         WHERE deal_id=$1 AND customer_email_hash=$2""",
                         identifier,identity["email_hash"])
             return {"accepted":True,"receipt_id":str(ack["id"]),
-                    "idempotent":not bool(ack.get("accepted_at") if isinstance(ack,dict) else False),
+                    "idempotent":not created,
                     "workpacket_id":str(membership["workpacket_id"]),
                     "verified_customer_identity":True,
                     "contract_signing_not_automated":True}
