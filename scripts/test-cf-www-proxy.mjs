@@ -91,6 +91,22 @@ try {
   if (!response.headers.get("content-security-policy")?.includes("default-src 'self'")) {
     throw new Error(`missing CSP: ${response.headers.get("content-security-policy")}`);
   }
+  const publicCsp = response.headers.get("content-security-policy") || "";
+  if (publicCsp.includes("cdn.jsdelivr.net") || publicCsp.includes("supabase.co")) {
+    throw new Error("OAuth CSP privileges must not leak to public pages");
+  }
+  for (const authPath of ["/auth/operator-bridge/", "/auth/callback/", "/auth/sign-in/"]) {
+    const authResponse = await worker.fetch(
+      new Request("https://www.noetfield.com" + authPath),
+      { ORIGIN: immutableOrigin, RELEASE_SHA: releaseSha },
+    );
+    const authCsp = authResponse.headers.get("content-security-policy") || "";
+    if (!authCsp.includes("https://cdn.jsdelivr.net") ||
+        !authCsp.includes("https://ldfruywifqnfpwsfgmdl.supabase.co") ||
+        authCsp.includes("script-src 'unsafe-inline'")) {
+      throw new Error("Auth route must allow only the needed external Google OAuth dependencies: " + authPath);
+    }
+  }
   if (response.headers.get("x-frame-options") !== "DENY") {
     throw new Error(`missing X-Frame-Options: ${response.headers.get("x-frame-options")}`);
   }
