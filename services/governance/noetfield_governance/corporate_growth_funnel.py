@@ -96,7 +96,13 @@ async def growth_funnel_snapshot(settings: object, *, limit: int = 12) -> dict[s
           (SELECT count(DISTINCT d.id)::int
             FROM noetfield.corp_crm_deals d
             JOIN noetfield.public_intakes i ON i.intake_id=d.source_intake_id
-            WHERE i.qualification_json->'commercial_ops'->>'stage'='CLOSED')
+            JOIN noetfield.corp_workpackets w ON w.deal_id=d.id
+            JOIN noetfield.corp_workpacket_acceptances a
+              ON a.deal_id=d.id AND a.workpacket_id=w.id
+            WHERE i.qualification_json->'commercial_ops'->>'stage'='CLOSED'
+              AND w.state='VERIFIED'
+              AND w.artifact_url=a.artifact_url
+              AND nullif(w.verifier_receipt_url,'') IS NOT NULL)
             AS closed_paid_engagements,
           (SELECT count(*)::int FROM noetfield.corp_crm_deals
             WHERE stage='RETAINED') AS retained_relationships_reported
@@ -144,6 +150,7 @@ async def growth_funnel_snapshot(settings: object, *, limit: int = 12) -> dict[s
              company["payment_link_id"], company["currency"], company["payment_minor"])
         result = {key: int(metrics[key] or 0) for key in STAGE_EVIDENCE
                   if key not in {"paid_live_checkouts"}}
+        result["research_pending_review"] = int(metrics["research_pending_review"] or 0)
         result["paid_live_checkouts"] = sum(int(row["engagements"]) for row in paid)
         amount_by_currency = {str(row["currency"]).upper(): int(row["checkout_amount_minor"])
                               for row in paid}
