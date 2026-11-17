@@ -6,6 +6,10 @@ This repo's agent boundary policy is machine-defined in `repo-policy.json` and v
 python3 scripts/check_repo_policy.py
 ```
 
+## P0 — ALTERNATIVE-FIRST EXECUTION (MANDATORY FOR ALL AGENTS)
+
+**Execution first. No report-only failure handling.** Read the always-on rule `.cursor/rules/010-execution-first-alternatives.mdc` before performing any task. On a provider, tool, or service failure, immediately use the best available, authorized alternative from the EXISTING systems and continue the original goal. Prefer a reliable configured paid provider over a throttled free API. Reuse existing runtimes and credentials instead of creating duplicate systems. Verify the outcome, harden the fallback so future agents inherit the fix, then report a short receipt. If no alternative exists, report the single real blocker and exact evidence; do not invent success or approvals. This rule is machine-checked by `scripts/check_repo_policy.py` and CI.
+
 ## L0 repo graph memory — broad-read gate
 
 **Read before broad reads:** `graph-out/GRAPH_REPORT.md` · query: `python3 scripts/query_repo_graph_v1.py <term>` · design: `docs/L0_REPO_GRAPH_MEMORY_v1.md`
