@@ -102,7 +102,8 @@ a{color:#215f54}.inline-link{font-size:11px}
   <div class="eyebrow">Noetfield Systems / Private Operations</div>
   <h1>Corporate relationships. Real outcomes.</h1>
   <p>Your private workspace for enterprise buyers, asset originators, commercial partners and retained clients. This is separate from Fieldwork's Web3 network.</p>
-  <form id="login"><label>Existing Noetfield operator key<input id="operator" type="password" autocomplete="off" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember">Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
+  <form id="login"><label>Existing Noetfield operator key<input id="operator" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember">Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
+  <p class="small" id="password-manager-hint">On your own device, your browser password manager may offer to save this key. Seven-day sign-in starts after successful authentication; this is not Google Sign-In.</p>
   <p class="notice" id="login-error" role="alert"></p>
  </div>
 </div>
