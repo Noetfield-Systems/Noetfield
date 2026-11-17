@@ -588,6 +588,21 @@ async def commercial_step(settings: object, *, deal_id: str, action: str,
         }
     finally:
         await db.close()
+    if action=="deliver":
+        # An operator-supplied link alone never establishes a delivered outcome.
+        # Require a signed independent WorkPacket verifier and actual customer
+        # acceptance on the still-live Stripe-paid canonical deal.
+        from noetfield_governance.corporate_workpacket import (
+            check_accepted_delivery, WorkPacketError,
+        )
+        try:
+            actual_artifact, acceptance_receipt_url = await check_accepted_delivery(
+                settings,deal_id=deal_id,
+                delivery_evidence=delivery_evidence,acceptance_url=acceptance_url)
+            values["delivery_evidence"]=actual_artifact
+            values["acceptance_url"]=acceptance_receipt_url
+        except WorkPacketError as exc:
+            raise CorporateCRMError(str(exc)) from exc
     try:
         result=await operate(settings, **values)
     except CommercialError as exc:
