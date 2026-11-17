@@ -2900,6 +2900,19 @@ async def corporate_workpacket_dispatch(body:CorporateWorkPacketRequest,request:
         raise HTTPException(status_code=409,detail=str(exc)) from exc
 
 
+@app.post("/api/corporate-crm/workpackets/verify-draft",tags=["operations"],include_in_schema=False)
+async def corporate_workpacket_verify_draft(
+    body:CorporateWorkPacketRequest,request:Request,
+)->dict[str,object]:
+    """Operator requests an independent original-artifact check, NOT customer delivery."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_workpacket import verify_company_os_draft,WorkPacketError
+    try:
+        return await verify_company_os_draft(settings,deal_id=body.deal_id)
+    except WorkPacketError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
 @app.post("/api/corporate-crm/workpackets/verifier-result",tags=["operations"],include_in_schema=False)
 async def corporate_workpacket_verifier_result(request:Request)->dict[str,object]:
     """Signed independent verifier only; operator cookies have no authority here."""

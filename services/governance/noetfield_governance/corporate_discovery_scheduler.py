@@ -78,6 +78,21 @@ async def reconcile_proven_outreach(settings:object)->dict[str,Any]:
         return {"state":"FAILED","new_verified_replies":0}
 
 
+async def reconcile_paid_company_os_drafts(settings:object)->dict[str,Any]:
+    """Actual paid jobs only. A hash-approved draft never equals customer delivery."""
+    from noetfield_governance.corporate_workpacket import reconcile_pending_company_os_drafts
+    try:
+        result=await reconcile_pending_company_os_drafts(settings,limit=3)
+        logger.warning(
+            "corporate_company_os_verifier_readback=%s checked=%d draft_proofs=%d",
+            result.get("state","UNKNOWN"),result.get("checked",0),
+            result.get("verified_drafts",0))
+        return result
+    except Exception:
+        logger.exception("corporate_company_os_verifier_readback=FAILED")
+        return {"state":"FAILED","checked":0,"verified_drafts":0}
+
+
 async def start_scheduler(settings:object)->None:
     global _task
     if not configured():
@@ -89,6 +104,7 @@ async def start_scheduler(settings:object)->None:
         while True:
             await run_once(settings)
             await reconcile_proven_outreach(settings)
+            await reconcile_paid_company_os_drafts(settings)
             await asyncio.sleep(6*3600)
     _task=asyncio.create_task(loop())
 
