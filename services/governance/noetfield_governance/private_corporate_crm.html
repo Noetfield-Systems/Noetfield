@@ -682,9 +682,9 @@ function renderFounderMissions(report){
   b.addEventListener("click",async()=>{
    const m=founderMissionRows[Number(b.dataset.founderCopy)];
    if(!m?.draft)return;
-   const text="To: "+m.draft.to_public_business_channel+"\\nSubject: "+m.draft.subject+"\\n\\n"+m.draft.body;
+   const text="To: "+m.draft.to_public_business_channel+"\nSubject: "+m.draft.subject+"\n\n"+m.draft.body;
    try{
-    await navigator.clipboard.writeText(text.replaceAll("\\\\n","\\n"));
+    await navigator.clipboard.writeText(text);
     $("#founder-missions-status").textContent="Draft copied. No message sent.";
    }catch{ $("#founder-missions-status").textContent="Copy unavailable in this browser. No message sent."; }
   }));
