@@ -19,6 +19,7 @@ import math
 import os
 import re
 import uuid
+from decimal import Decimal
 from typing import Any
 
 import asyncpg
@@ -256,7 +257,7 @@ async def run_ai_batch(settings:object,*,limit:int=2,
                   row["source_key"],signature,json.dumps(answer["analysis"]),
                   answer["model"],answer["generation_id"],
                   answer["prompt_tokens"],answer["completion_tokens"],
-                  str(answer["cost_usd"]) if answer["cost_from_provider"] else None)
+                  Decimal(str(answer["cost_usd"])) if answer["cost_from_provider"] else None)
                 await db.execute("""UPDATE noetfield.corp_founder_ai_attempts
                   SET state='PROVIDER_COMPLETED' WHERE id=$1""",attempt_id)
                 completed+=1
