@@ -730,6 +730,49 @@ function drawDetail(payload){
    }
    updatePacket();
  }
+ if(commercialEligible && d.offer==="rwa_technical_sprint"){
+   const clinic=document.createElement("section");clinic.className="commercial-box";
+   clinic.innerHTML='<h4>Execute paid RWA Clinic v3 diagnosis</h4>'+
+      '<p class="small">Calls the existing live <a href="https://scan.noetfield.com/rwa-clinic/" target="_blank" rel="noopener noreferrer">RWA Clinic</a> diagnostic engine — not a duplicate scorer. Requires the same real accepted SOW, signed paid Checkout and actual customer evidence. Only one case submission is made per paid WorkPacket. A clinical verdict is not an investment approval, token issuance or customer acceptance.</p>'+
+      '<form id="paid-clinic-run" class="fields">'+
+      '<label class="wide">Actual canonical v3 Clinic case JSON<textarea name="clinic_case" rows="8" required placeholder="Paste real v3 case JSON. No DEMO, synthetic or example records."></textarea></label>'+
+      '<button type="submit" class="primary">Submit paid case to native Clinic</button></form>'+
+      '<button type="button" id="clinic-refresh" class="ghost" style="margin-top:9px">Read clinical provider receipt</button>'+
+      '<p id="clinic-result" class="small" role="status"></p>';
+   els.panel.querySelector(".detail").appendChild(clinic);
+   const status=clinic.querySelector("#clinic-result");
+   async function refreshClinic(){
+     try{
+       const p=await api("/api/corporate-crm/workpackets/rwa/"+encodeURIComponent(d.id));
+       status.textContent="Native Clinic: "+p.state+
+         (p.clinic_case_id?" · case "+p.clinic_case_id:"")+
+         (p.clinical_verdict?" · verdict "+JSON.stringify(p.clinical_verdict):"")+
+         " · final customer delivery: NOT VERIFIED";
+       if(p.state!=="NOT_SUBMITTED"){
+          clinic.querySelector("#paid-clinic-run button").disabled=true;
+       }
+     }catch(err){status.textContent="Clinic case readback unavailable: "+err.message}
+   }
+   clinic.querySelector("#clinic-refresh").addEventListener("click",refreshClinic);
+   clinic.querySelector("#paid-clinic-run").addEventListener("submit",async event=>{
+     event.preventDefault();const button=event.currentTarget.querySelector("button");
+     let parsed;
+     try{parsed=JSON.parse(event.currentTarget.querySelector("textarea").value)}
+     catch{status.textContent="Paste valid canonical Clinic v3 JSON.";return}
+     button.disabled=true;
+     try{
+       const result=await api("/api/corporate-crm/workpackets/rwa/submit-case",{
+         method:"POST",data:{deal_id:d.id,clinic_case:parsed}});
+       status.textContent="Native case: "+result.state+
+           (result.clinic_case_id?" · ID "+result.clinic_case_id:"")+
+           " · provider accepted: "+Boolean(result.provider_acknowledged??result.real_native_clinic_case)+
+           " · independently verified delivery: false";
+       await refreshClinic();
+     }catch(err){status.textContent="Native Clinic submission rejected: "+err.message}
+     finally{button.disabled=false}
+   });
+   refreshClinic();
+ }
  const commercialForm=$("#commercial-step");
  if(commercialForm){
    const flowSelect=commercialForm.querySelector('[name="action"]');
