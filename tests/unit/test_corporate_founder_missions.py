@@ -83,6 +83,12 @@ def test_suppression_and_verified_delivery_are_separate_canonical_states():
                    workpacket_state="ACKNOWLEDGED"))
     assert paid["state"]=="DELIVERY_IN_PROGRESS"
     assert paid["customer_acceptance_inferred"] is False
+    blocked=_plain(source_row(promoted_deal_id=uuid.uuid4(),
+                   workpacket_state="DISPATCH_UNCONFIRMED",
+                   dispatch_attempts=3,delivery_error_code="UPSTREAM_ACK_UNCONFIRMED"))
+    assert blocked["state"]=="DELIVERY_DISPATCH_ATTENTION"
+    assert blocked["delivery_error_code"]=="UPSTREAM_ACK_UNCONFIRMED"
+    assert blocked["dispatch_attempts"]==3
     delivered=_plain(source_row(promoted_deal_id=uuid.uuid4(),
                    workpacket_state="VERIFIED"))
     assert delivered["state"]=="VERIFIED_DELIVERY"
