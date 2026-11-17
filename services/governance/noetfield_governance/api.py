@@ -2802,6 +2802,14 @@ async def corporate_outreach_reconcile(request:Request)->dict[str,object]:
     return await reconcile_real_replies(settings)
 
 
+@app.get("/api/corporate-crm/growth/funnel",tags=["operations"],include_in_schema=False)
+async def corporate_growth_funnel(request:Request,limit:int=12)->dict[str,object]:
+    """Private read-only evidence chain: original research → real revenue."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_growth_funnel import growth_funnel_snapshot
+    return await growth_funnel_snapshot(settings,limit=limit)
+
+
 @app.get("/api/corporate-crm/outreach/metrics",tags=["operations"],include_in_schema=False)
 async def corporate_outreach_metrics(request:Request)->dict[str,object]:
     _require_connect_desk_operator(request)

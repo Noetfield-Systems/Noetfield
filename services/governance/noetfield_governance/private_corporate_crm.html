@@ -117,6 +117,17 @@ a{color:#215f54}.inline-link{font-size:11px}
 #ops-recovery-status{min-height:20px;overflow-wrap:anywhere}
 @media(max-width:1100px){.operations{grid-template-columns:1fr}}
 @media(max-width:600px){.ops-kpis{grid-template-columns:1fr 1fr}.ops-inner{padding:15px}.operations{gap:10px}}
+.growth-stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:9px}
+.growth-stage{border:1px solid #e1e8de;background:#f8faf6;padding:13px;min-width:0}
+.growth-stage small{display:block;color:#657a6e;line-height:1.5;font-size:10px;min-height:30px}
+.growth-stage strong{display:block;font:400 27px/1.2 "Newsreader",Georgia,serif;margin:7px 0;color:#24493d}
+.growth-stage em{display:block;color:#89988d;font-size:10px;font-style:normal;line-height:1.4}
+.growth-queue-title{font:400 22px/1.2 "Newsreader",Georgia,serif;margin:14px 0 0;color:#254639}
+.growth-review-queue{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px}
+.growth-review{border:1px solid #dce5db;background:#fff;padding:13px;display:grid;gap:7px}
+.growth-review b{font-size:12px;color:#2a473b}
+.growth-review small{color:#71877a;font-size:10px}
+.growth-review a{font-size:11px}
 </style>
 </head>
 <body>
@@ -196,6 +207,15 @@ a{color:#215f54}.inline-link{font-size:11px}
     </div>
     <p class="ops-note" id="outreach-status" style="margin:0 20px 12px" role="status">Provider-backed email status unavailable until the authenticated workspace loads.</p>
     <div id="fieldwork-items" class="ops-queue"><p class="empty">Research loading…</p></div>
+  </section>
+  <section class="panel" id="growth-funnel" style="margin:0 0 23px" aria-label="Evidence-backed commercial growth funnel">
+    <header class="panel-head"><h2>Research → qualified contact → paid delivery</h2><span class="small" id="growth-funnel-status">Reading canonical evidence…</span></header>
+    <div class="ops-inner">
+      <p class="ops-note">Every milestone is independently counted. Original research is not a contact; provider-accepted email is not an inbox delivery; a draft artifact is not a delivered engagement; Stripe Checkout is not bank settlement.</p>
+      <div class="growth-stage-grid" id="growth-stage-grid" aria-live="polite"><p class="empty">Checking real source, outreach, payment and verifier records…</p></div>
+      <h3 class="growth-queue-title">Next source reviews · prioritized from real research</h3>
+      <div id="growth-review-queue" class="growth-review-queue" aria-live="polite"></div>
+    </div>
   </section>
   <section id="data-view" class="workspace">
    <div class="panel">
@@ -498,6 +518,46 @@ $("#outreach-reconcile").addEventListener("click",async()=>{
  }catch(err){message("Reply verification failed: "+err.message)}
  finally{button.disabled=false}
 });
+const growthStageLabels={
+ research:"Original organization research",
+ qualified_contacts:"Qualified, sourced contacts",
+ smtp_accepted:"SMTP provider-accepted deals",
+ verified_replies:"Identity-matched email replies",
+ meetings_booked_documented:"Booked meetings · documented",
+ meetings_held_documented:"Held meetings · documented",
+ accepted_scopes:"Accepted written scopes",
+ paid_live_checkouts:"Stripe live paid checkouts",
+ runtime_acknowledged:"Real runtime job admissions",
+ independently_verified_deliveries:"Independent verified deliverables",
+ customer_acceptances:"Authenticated buyer acceptances",
+ closed_paid_engagements:"Closed paid engagements",
+ retained_relationships_reported:"Retained CRM relationships"
+};
+async function refreshGrowthFunnel(){
+ try{
+  const snap=await api("/api/corporate-crm/growth/funnel?limit=12");
+  const stages=snap.stages||{},defs=snap.evidence_definitions||{};
+  $("#growth-stage-grid").innerHTML=Object.entries(growthStageLabels).map(([key,label])=>
+   '<div class="growth-stage"><small>'+esc(label)+'</small><strong>'+Number(stages[key]||0).toLocaleString("en-CA")+
+   '</strong><em title="'+esc(defs[key]||"")+'">'+esc((defs[key]||"").slice(0,95))+'</em></div>'
+  ).join("");
+  const q=snap.priority_source_review||[];
+  $("#growth-review-queue").innerHTML=q.length?q.map(x=>
+   '<div class="growth-review"><b>'+esc(x.organization)+'</b><small>'+esc(x.lane)+
+   ' · original research score '+Number(x.score||0)+
+   ' · '+esc(x.review_status)+'</small><a href="'+esc(safeURL(x.original_url))+
+   '" target="_blank" rel="noopener noreferrer">Review original organization source</a>'+
+   '<small>Validate contact details and permission before promoting in the existing Research panel.</small></div>'
+  ).join(""):'<p class="ops-note">No unscreened source records remain in the current review queue.</p>';
+  $("#growth-funnel-status").textContent=(stages.research||0)+" source records · "+
+   (stages.research_pending_review||0)+" awaiting contact qualification · "+
+   (stages.paid_live_checkouts||0)+" paid checkouts";
+ }catch(e){
+  $("#growth-funnel-status").textContent="Evidence readback unavailable";
+  $("#growth-stage-grid").textContent=e.message;
+  $("#growth-review-queue").textContent="No figures have been assumed.";
+ }
+}
 async function refreshRevenueOps(){
  try{const plan=await api("/api/corporate-crm/operations/plan");renderRevenueOps(plan)}
  catch(err){$("#ops-queue").innerHTML='<div class="empty">Revenue intelligence unavailable: '+esc(err.message)+'</div>'}
@@ -540,7 +600,7 @@ $("#ops-run-cycle").addEventListener("click",async()=>{
  finally{button.disabled=false}
 });
 async function reload(){
- try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await Promise.all([refreshRevenueOps(),loadFieldworkResearch(),refreshOutboundMetrics()])}
+ try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await Promise.all([refreshRevenueOps(),loadFieldworkResearch(),refreshOutboundMetrics(),refreshGrowthFunnel()])}
  catch(e){message("Unable to read corporate workspace: "+e.message)}
 }
 function fillAccounts(){

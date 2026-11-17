@@ -36,6 +36,8 @@ on:
       - 'services/governance/noetfield_governance/corporate_workpacket.py'
       - 'tests/unit/test_corporate_workpacket.py'
       - 'services/governance/noetfield_governance/corporate_rwa_execution.py'
+      - 'services/governance/noetfield_governance/corporate_growth_funnel.py'
+      - 'tests/unit/test_corporate_growth_funnel.py'
       - 'tests/unit/test_corporate_rwa_execution.py'
       - 'services/governance/noetfield_governance/private_commercial_scenario_lab.html'
       - 'tests/unit/test_commercial_scenario_lab.py'
@@ -76,6 +78,8 @@ on:
       - 'services/governance/noetfield_governance/corporate_workpacket.py'
       - 'tests/unit/test_corporate_workpacket.py'
       - 'services/governance/noetfield_governance/corporate_rwa_execution.py'
+      - 'services/governance/noetfield_governance/corporate_growth_funnel.py'
+      - 'tests/unit/test_corporate_growth_funnel.py'
       - 'tests/unit/test_corporate_rwa_execution.py'
       - 'services/governance/noetfield_governance/private_commercial_scenario_lab.html'
       - 'tests/unit/test_commercial_scenario_lab.py'
@@ -147,6 +151,21 @@ jobs:
         run: python -m pytest -q tests/unit/test_corporate_outbound_optout.py
       - name: Verify paid scope to real WorkPacket and independent customer receipt contract
         run: python -m pytest -q tests/unit/test_corporate_workpacket.py
+      - name: Verify source-to-revenue growth funnel and private access
+        run: python -m pytest -q tests/unit/test_corporate_growth_funnel.py
+      - name: Syntax check private Corporate CRM interactive scripts
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,subprocess,tempfile
+          html=Path('services/governance/noetfield_governance/private_corporate_crm.html').read_text()
+          blocks=re.findall(r'<script[^>]*>([\s\S]*?)</script>',html)
+          assert blocks, 'CRM scripts are missing'
+          with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
+              f.write('\n'.join(blocks))
+              f.flush()
+              subprocess.run(['node','--check',f.name],check=True)
+          PY
       - name: Verify native paid RWA Clinic case execution without synthetic evidence
         run: python -m pytest -q tests/unit/test_corporate_rwa_execution.py
       - name: Verify private fictional Company OS and RWA case lab without live side effects
