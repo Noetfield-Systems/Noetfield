@@ -569,12 +569,14 @@ async function enableGoogleLogin(){
   button.addEventListener("click",()=>{
    const pop=window.open(cfg.bridge_url,"nf-operator-google","popup=yes,width=520,height=700");
    if(!pop){text("unlock-status","Allow the Google sign-in popup, or use the operator key.");return}
-   button.disabled=true;
+   button.disabled=true;text("unlock-status","Continue in the Google window; your session will open here automatically.");
+   const popupWatcher=setInterval(()=>{if(pop.closed){clearInterval(popupWatcher);button.disabled=false;}},500);
    const onMessage=async event=>{
-    if(event.origin!=="https://www.noetfield.com"||event.source!==pop||
+    if(!["https://www.noetfield.com","https://noetfield.com"].includes(event.origin)||event.source!==pop||
        !event.data||event.data.type!=="noetfield.operator.google.v1"||
        typeof event.data.access_token!=="string")return;
-    window.removeEventListener("message",onMessage);button.disabled=false;
+    window.removeEventListener("message",onMessage);clearInterval(popupWatcher);button.disabled=false;
+    text("unlock-status","");
     try{
      const session=await call("/api/opportunities/desk/session/google","POST",
        {access_token:event.data.access_token,remember:$("remember-device").checked});
