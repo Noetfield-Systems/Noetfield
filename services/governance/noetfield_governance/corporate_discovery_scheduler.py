@@ -93,6 +93,19 @@ async def reconcile_paid_company_os_drafts(settings:object)->dict[str,Any]:
         return {"state":"FAILED","checked":0,"verified_drafts":0}
 
 
+async def auto_outreach_verified_relationships(settings:object)->dict[str,Any]:
+    """Use original source-verified CRM contacts, never research-only prospects."""
+    from noetfield_governance.corporate_outbound import send_prequalified_corporate_introductions
+    try:
+        result=await send_prequalified_corporate_introductions(settings,limit=2)
+        logger.warning("corporate_verified_outbound=%s eligible=%d provider_acks=%d",
+            result["state"],result["eligible"],result["provider_accepted"])
+        return result
+    except Exception:
+        logger.exception("corporate_verified_outbound=FAILED")
+        return {"state":"FAILED","eligible":0,"provider_accepted":0}
+
+
 async def auto_dispatch_verified_paid_work(settings:object)->dict[str,Any]:
     """Run existing Company OS/RWA work ONLY for accepted SOW and live paid proof."""
     from noetfield_governance.corporate_workpacket import auto_dispatch_paid_ready_work
@@ -133,6 +146,7 @@ async def start_scheduler(settings:object)->None:
             if cycle % 24 == 0:  # every 6 hours, not every short execution tick
                 await run_once(settings)
             await reconcile_proven_outreach(settings)
+            await auto_outreach_verified_relationships(settings)
             await auto_dispatch_verified_paid_work(settings)
             await reconcile_paid_company_os_drafts(settings)
             # Small, real public-source research batch; no founder data entry,
