@@ -1,0 +1,39 @@
+name: Corporate CRM Browser Acceptance
+
+on:
+  pull_request:
+    paths:
+      - 'services/governance/noetfield_governance/private_corporate_crm.html'
+      - 'scripts/test-corporate-crm-browser.cjs'
+      - '.github/workflows/corporate-crm-browser-acceptance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'services/governance/noetfield_governance/private_corporate_crm.html'
+      - 'scripts/test-corporate-crm-browser.cjs'
+      - '.github/workflows/corporate-crm-browser-acceptance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  crm-real-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated Chromium automation, no app dependency mutations
+        run: |
+          mkdir -p /tmp/noetfield-crm-browser
+          cd /tmp/noetfield-crm-browser
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          ./node_modules/.bin/playwright install --with-deps chromium
+      - name: Test actual CRM HTML in Chromium across 320, 390, 768 and 1440px
+        env:
+          NODE_PATH: /tmp/noetfield-crm-browser/node_modules
+        run: |
+          node --check scripts/test-corporate-crm-browser.cjs
+          node scripts/test-corporate-crm-browser.cjs
