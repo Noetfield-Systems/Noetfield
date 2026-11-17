@@ -80,6 +80,12 @@ def _model_routes()->list[dict[str,str]]:
         from urllib.parse import urlsplit
         u=urlsplit(base)
         if u.scheme=="https" and u.hostname and u.port in (None,443):
+            # DeepSeek discontinued the old chat/reasoner model aliases in
+            # July 2026. Upgrade only calls to its actual native endpoint,
+            # never silently rewrite a different vendor's requested model.
+            if u.hostname=="api.deepseek.com" and model.casefold() in {
+                "deepseek-chat","deepseek-reasoner","deepseek-v4-flash"}:
+                model="deepseek-flash"
             routes.append({"url":base+"/chat/completions",
                 "key":key,"model":model,"route":"COMPANY_OS_EXISTING_MODEL"})
     fabric_url=os.getenv("CORPORATE_FABRIC_CRM_BASE_URL","").strip().rstrip("/")
@@ -277,11 +283,20 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
             headers={"X-Founder-CRM-Bridge-Key":route["key"],
                      "Content-Type":"application/json"}
         else:
+            from urllib.parse import urlsplit
+            provider_host=urlsplit(route["url"]).hostname
             body={"model":route["model"],
                   "messages":[{"role":"system","content":_SYSTEM},
                               {"role":"user","content":content}],
-                  "temperature":0.1,"max_tokens":380,
-                  "usage":{"include":True}}
+                  "temperature":0.1,"max_tokens":380}
+            if provider_host=="api.deepseek.com":
+                # Default DeepSeek thinking consumes this short JSON output
+                # budget and can return blank/partial content. No paid vendor
+                # should receive OpenRouter-only request fields (usage.include).
+                body["thinking"]={"type":"disabled"}
+                body["response_format"]={"type":"json_object"}
+            elif provider_host=="openrouter.ai":
+                body["usage"]={"include":True}
             headers={"Authorization":"Bearer "+route["key"],
                      "Content-Type":"application/json",
                      "HTTP-Referer":"https://noetfield.com",
