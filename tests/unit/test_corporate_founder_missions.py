@@ -190,14 +190,15 @@ def test_real_postgres_one_evidence_one_idempotent_mission_and_no_fake_deal(monk
         try:
             await db.execute("CREATE SCHEMA IF NOT EXISTS noetfield")
             await prepare_missions(db)
-            row=source_row(source_key=key,score=100)
+            official="https://example.org/case/"+uuid.uuid4().hex
+            row=source_row(source_key=key,score=100,original_url=official)
             signature=_source_signature(row)
             await db.execute("""INSERT INTO noetfield.corp_research_sources(
               source_key,organization,lane,original_url,website,evidence_url,
               review_status,score)
               VALUES($1,'Example Business Systems','CORPORATE',$2,
                'https://example.org',$2,'PROFILE_REVIEWED',100)""",
-               key,"https://example.org/case/"+uuid.uuid4().hex)
+               key,official)
             await db.execute("""INSERT INTO noetfield.corp_founder_scout(
               source_key,page_url,site_title,site_description,
               published_general_channel,channel_evidence_url,
