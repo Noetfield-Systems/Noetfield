@@ -81,7 +81,7 @@ async function run(){
    await dialog.waitFor({state:"visible"});
    assert.equal(await page.locator("#research-qualify-form").isVisible(),true,
     "Qualify must show a visible form, never leave a disabled hidden button");
-   assert.equal(await page.locator('[name="contact_name"]').isFocused(),true);
+   assert.equal(await page.locator('[name="contact_name"]').evaluate(el=>el===document.activeElement),true);
    const over=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
    assert.ok(over<=2,"Horizontal page overflow at "+width+"px: "+over);
    assert.equal(await page.locator("#research-qualify-submit").isEnabled(),true);
