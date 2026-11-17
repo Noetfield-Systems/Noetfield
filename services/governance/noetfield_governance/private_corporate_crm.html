@@ -190,8 +190,10 @@ a{color:#215f54}.inline-link{font-size:11px}
       <div class="ops-actions">
         <button class="primary" type="button" id="fieldwork-sync">Sync original research</button>
         <button class="ghost" type="button" id="fieldwork-reload">Refresh research</button>
+        <button class="ghost" type="button" id="outreach-reconcile">Verify mailbox replies</button>
       </div>
     </div>
+    <p class="ops-note" id="outreach-status" style="margin:0 20px 12px" role="status">Provider-backed email status unavailable until the authenticated workspace loads.</p>
     <div id="fieldwork-items" class="ops-queue"><p class="empty">Research loading…</p></div>
   </section>
   <section id="data-view" class="workspace">
@@ -466,6 +468,21 @@ $("#fieldwork-sync").addEventListener("click",async()=>{
  finally{btn.disabled=false}
 });
 $("#fieldwork-reload").addEventListener("click",()=>loadFieldworkResearch());
+async function refreshOutboundMetrics(){
+ try{const r=await api("/api/corporate-crm/outreach/metrics");
+   $("#outreach-status").textContent="SMTP accepted: "+(r.sending_status?.PROVIDER_ACCEPTED||0)+
+    " · verified inbound replies: "+(r.provider_verified_replies||0)+
+    " · booked meetings: 0 until independently evidenced";
+ }catch(err){$("#outreach-status").textContent="Outreach provider metrics unavailable: "+err.message}
+}
+$("#outreach-reconcile").addEventListener("click",async()=>{
+ const button=$("#outreach-reconcile");button.disabled=true;
+ try{const r=await api("/api/corporate-crm/outreach/reconcile",{method:"POST",data:{}});
+   message("IMAP header verification: "+r.new_verified_replies+" new replies. No meeting inferred.",true);
+   await refreshOutboundMetrics();
+ }catch(err){message("Reply verification failed: "+err.message)}
+ finally{button.disabled=false}
+});
 async function refreshRevenueOps(){
  try{const plan=await api("/api/corporate-crm/operations/plan");renderRevenueOps(plan)}
  catch(err){$("#ops-queue").innerHTML='<div class="empty">Revenue intelligence unavailable: '+esc(err.message)+'</div>'}
@@ -508,7 +525,7 @@ $("#ops-run-cycle").addEventListener("click",async()=>{
  finally{button.disabled=false}
 });
 async function reload(){
- try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await Promise.all([refreshRevenueOps(),loadFieldworkResearch()])}
+ try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await Promise.all([refreshRevenueOps(),loadFieldworkResearch(),refreshOutboundMetrics()])}
  catch(e){message("Unable to read corporate workspace: "+e.message)}
 }
 function fillAccounts(){
@@ -600,6 +617,36 @@ function drawDetail(payload){
        clientAccess.querySelector("#client-access-status").textContent=result.active?
          "Customer access recorded. No invitation has been sent.":"Customer access revoked.";
      }catch(error){clientAccess.querySelector("#client-access-status").textContent=String(error.message||error)}
+   });
+ }
+ if(d.source_channel==="FIELDWORK_OPERATOR_QUALIFIED"){
+   const approved=document.createElement("section");approved.className="commercial-box";
+   const messageDraft=revenueOps?.actions?.find(x=>x.deal_id===d.id)?.draft || {
+     subject:"Operations workflow discussion",
+     body:"Hello,\n\nNoetfield works with organizations on scoped AI and workflow operations. Would a brief discussion about your priorities be relevant?\n\nBest,\nNoetfield Systems"
+   };
+   approved.innerHTML='<h4>Send approved business outreach · live Google SMTP</h4>'+
+    '<p class="small">Real SMTP provider acknowledgement only. Send requires a promoted Fieldwork research source and documented opt-in, relationship or introduction evidence; it does not imply delivery, reply or a booked meeting.</p>'+
+    '<form class="fields" id="provider-outreach">'+
+    '<label class="wide">Subject<input name="subject" required maxlength="160" value="'+esc(messageDraft.subject)+'"></label>'+
+    '<label class="wide">Message draft<textarea name="body" required maxlength="5000">'+esc(messageDraft.body)+'</textarea></label>'+
+    '<label>Actor<input name="actor" required value="Noetfield Revenue"></label>'+
+    '<button class="primary" type="submit">Send through verified provider</button></form>'+
+    '<p class="small" id="provider-outreach-result" role="status"></p>';
+   els.panel.querySelector(".detail").appendChild(approved);
+   approved.querySelector("#provider-outreach").addEventListener("submit",async event=>{
+     event.preventDefault();
+     const button=event.currentTarget.querySelector("button");button.disabled=true;
+     const data=Object.fromEntries(new FormData(event.currentTarget));data.deal_id=d.id;
+     try{const r=await api("/api/corporate-crm/outreach/send",{method:"POST",data});
+       approved.querySelector("#provider-outreach-result").textContent=
+         r.state==="PROVIDER_ACCEPTED"?
+         "SMTP provider accepted this message. Provider receipt: "+r.send_id+" · Not proof of recipient delivery.":
+         "Provider state: "+r.state+". No successful send inferred.";
+       await refreshOutboundMetrics();
+     }catch(err){approved.querySelector("#provider-outreach-result").textContent=
+        "Outreach not sent: "+String(err.message||err)}
+     finally{button.disabled=false}
    });
  }
  const commercialForm=$("#commercial-step");
