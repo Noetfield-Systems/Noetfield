@@ -56,6 +56,7 @@ def test_absent_model_provider_is_never_reported_as_success(monkeypatch):
 
 def test_real_openrouter_request_has_bounded_tokens_and_usage_receipt(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY","private-test-key")
+    monkeypatch.setenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","1")
     monkeypatch.setenv("OPENROUTER_MODEL","test/cost-efficient-model")
     captured={}
     class FakeResponse:
@@ -172,6 +173,7 @@ def test_existing_company_os_model_used_first_and_openrouter_401_not_required(mo
     monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","company-secret-not-exposed")
     monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-chat")
     monkeypatch.setenv("OPENROUTER_API_KEY","expired-platform-key")
+    monkeypatch.setenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","1")
     monkeypatch.setenv("OPENROUTER_MODEL","old-test-model")
     routes=_model_routes()
     assert routes[0]["url"]=="https://api.deepseek.com/v1/chat/completions"
@@ -210,6 +212,7 @@ def test_company_os_distinct_fallback_precedes_invalid_platform_key(monkeypatch)
     monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY","distinct-company-fallback")
     monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_MODEL","fallback-model")
     monkeypatch.setenv("OPENROUTER_API_KEY","bad-platform-key")
+    monkeypatch.setenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","1")
     monkeypatch.setenv("OPENROUTER_MODEL","platform-model")
     routes=_model_routes()
     assert [x["route"] for x in routes]==[
@@ -244,6 +247,7 @@ def test_primary_provider_unauthorized_is_fallback_only_not_fake_model_receipt(m
     monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","expired-model-key")
     monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-chat")
     monkeypatch.setenv("OPENROUTER_API_KEY","also-expired-key")
+    monkeypatch.setenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","1")
     monkeypatch.setenv("OPENROUTER_MODEL","openrouter/some-model")
     urls=[]
     class Response:
@@ -262,6 +266,138 @@ def test_primary_provider_unauthorized_is_fallback_only_not_fake_model_receipt(m
     asyncio.run(execute())
     assert urls==["https://api.deepseek.com/v1/chat/completions",
                  "https://openrouter.ai/api/v1/chat/completions"]
+
+
+def test_paid_primary_and_fabric_configured_free_legacy_never_runs(monkeypatch):
+    from noetfield_governance.corporate_founder_ai import _model_routes
+    monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com")
+    monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","paid-deepseek-credential")
+    monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-flash")
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BASE_URL","https://fabric.example.org")
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN","f"*64)
+    monkeypatch.setenv("OPENROUTER_API_KEY","expired-openrouter-free-key")
+    monkeypatch.setenv("OPENROUTER_MODEL","some-model:free")
+    monkeypatch.setenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","1")
+    routes=_model_routes()
+    assert [r["route"] for r in routes]==[
+        "COMPANY_OS_EXISTING_MODEL","AGENT_FABRIC_SOURCE_SPECIALIST"]
+    class Reply:
+        status_code=200
+        def json(self):
+            return {"id":"actual-deepseek-001","model":"deepseek-flash",
+                "choices":[{"message":{"content":json.dumps(VALID)}}],
+                "usage":{"prompt_tokens":50,"completion_tokens":80}}
+    seen=[]
+    class Client:
+        def __init__(self,*args,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        async def post(self,url,**kwargs):
+            seen.append(url);return Reply()
+    async def run():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",Client):
+            return await analyze_public_company(SAMPLE)
+    reply=asyncio.run(run())
+    assert reply["model_route"]=="COMPANY_OS_EXISTING_MODEL"
+    assert reply["generation_id"]=="actual-deepseek-001"
+    assert seen==["https://api.deepseek.com/chat/completions"]
+
+
+def test_direct_paid_failure_and_fabric_503_fall_through_to_separate_paid_route(monkeypatch):
+    from noetfield_governance.corporate_founder_ai import _model_routes
+    monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com")
+    monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","broken-paid-provider-key")
+    monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-flash")
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BASE_URL","https://fabric.example.org")
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN","f"*64)
+    monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY","paid-company-fallback-key")
+    monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_MODEL","paid/fallback-model")
+    monkeypatch.setenv("OPENROUTER_API_KEY","expired-legacy")
+    monkeypatch.setenv("OPENROUTER_MODEL","old:free")
+    monkeypatch.delenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER",raising=False)
+    assert [x["route"] for x in _model_routes()]==[
+        "COMPANY_OS_EXISTING_MODEL","AGENT_FABRIC_SOURCE_SPECIALIST",
+        "COMPANY_OS_OPENROUTER_FALLBACK"]
+    calls=[]
+    class Reply:
+        def __init__(self,status):self.status_code=status
+        def json(self):
+            return {"id":"accepted-paid-backup","model":"paid/fallback-model",
+                "choices":[{"message":{"content":json.dumps(VALID)}}],
+                "usage":{"prompt_tokens":45,"completion_tokens":45}}
+    class Client:
+        def __init__(self,*a,**k):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*a):return False
+        async def post(self,url,**kwargs):
+            calls.append(url)
+            return Reply(401 if len(calls)==1 else 503 if len(calls)==2 else 200)
+    async def go():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",Client):
+            return await analyze_public_company(SAMPLE)
+    answer=asyncio.run(go())
+    assert answer["model_route"]=="COMPANY_OS_OPENROUTER_FALLBACK"
+    assert answer["generation_id"]=="accepted-paid-backup"
+    assert calls==[
+       "https://api.deepseek.com/chat/completions",
+       "https://fabric.example.org/api/internal/v1/founder-crm/analyze",
+       "https://openrouter.ai/api/v1/chat/completions"]
+
+
+def test_fabric_cached_failed_receipt_is_skipped_for_other_paid_model(monkeypatch):
+    monkeypatch.delenv("CORPORATE_AI_LLM_API_KEY",raising=False)
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BASE_URL","https://fabric.example.org")
+    monkeypatch.setenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN","f"*64)
+    monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY","paid-company-fallback-key")
+    monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_MODEL","paid/fallback")
+    monkeypatch.delenv("OPENROUTER_API_KEY",raising=False)
+    visited=[]
+    class Reply:
+        def __init__(self,status):self.status_code=status
+        def json(self):
+            if self.status_code==200 and len(visited)==2:
+                return {"schema":"noetfield.agent-fabric.founder-task.v1",
+                    "state":"FAILED","task_id":visited[0][1]["task_id"],
+                    "source_key":SAMPLE["source_key"],
+                    "source_signature":visited[0][1]["source_signature"],
+                    "external_actions_executed":False}
+            return {"model":"paid/fallback","id":"paid-validated",
+                "choices":[{"message":{"content":json.dumps(VALID)}}]}
+    class Client:
+        def __init__(self,*args,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        async def post(self,url,**kwargs):
+            visited.append((url,kwargs["json"]))
+            return Reply(409 if len(visited)==1 else 200)
+        async def get(self,url,**kwargs):
+            visited.append((url,None))
+            return Reply(200)
+    async def go():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",Client):
+            return await analyze_public_company(SAMPLE)
+    out=asyncio.run(go())
+    assert out["model_route"]=="COMPANY_OS_OPENROUTER_FALLBACK"
+    assert len(visited)==3
+    assert "/tasks/" in visited[1][0]
+
+
+def test_free_and_unopted_legacy_openrouter_are_not_silent_model_dependencies(monkeypatch):
+    from noetfield_governance.corporate_founder_ai import _model_routes
+    monkeypatch.delenv("CORPORATE_AI_LLM_API_KEY",raising=False)
+    monkeypatch.delenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN",raising=False)
+    monkeypatch.delenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY",raising=False)
+    monkeypatch.setenv("OPENROUTER_API_KEY","expired-legacy-key")
+    monkeypatch.setenv("OPENROUTER_MODEL","openrouter/legacy-model")
+    monkeypatch.delenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER",raising=False)
+    assert _model_routes()==[]
+    monkeypatch.setenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","1")
+    monkeypatch.setenv("OPENROUTER_MODEL","free-model:free")
+    assert _model_routes()==[]
+    monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","paid-company-key")
+    monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com")
+    monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-flash:free")
+    assert _model_routes()==[]
 
 
 def test_founder_ai_endpoints_are_operator_only_and_bounded():
@@ -314,6 +450,7 @@ def test_postgres_ai_receipts_are_idempotent_capped_and_never_create_buyer(monke
         finally:
             await db.close()
         monkeypatch.setenv("OPENROUTER_API_KEY","test-key")
+        monkeypatch.setenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","1")
         monkeypatch.setenv("OPENROUTER_MODEL","test-model")
         model_result={"analysis":VALID,"model":"test/model",
           "generation_id":"gen-integration","prompt_tokens":100,
