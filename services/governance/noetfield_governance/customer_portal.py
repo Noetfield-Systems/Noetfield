@@ -262,7 +262,9 @@ async def customer_cases(settings: object, *, identity: dict[str,str]) -> dict[s
     try:
         await ensure_customer_access_schema(db)
         from noetfield_governance.corporate_workpacket import prepare_workpackets
+        from noetfield_governance.corporate_rwa_execution import prepare_clinic_submissions
         await prepare_workpackets(db)
+        await prepare_clinic_submissions(db)
         rows=await db.fetch("""SELECT d.id,d.source_intake_id,d.offer,a.name AS account_name,
                     i.contact_email,i.qualification_json->'commercial_ops' AS commercial
                  FROM noetfield.corp_customer_access ca
@@ -305,6 +307,22 @@ async def customer_cases(settings: object, *, identity: dict[str,str]) -> dict[s
                     projection["delivery_state"]="ACCEPTED_BY_CUSTOMER"
             else:
                 projection["workpacket"]=None
+            if item["offer"]=="rwa_technical_sprint" and projection["payment_status"]=="PAID_LIVE":
+                clinic=await db.fetchrow("""SELECT s.state,s.clinic_case_id,
+                         s.provider_status_code
+                     FROM noetfield.corp_workpackets w
+                     JOIN noetfield.corp_rwa_clinic_submissions s
+                       ON s.workpacket_id=w.id WHERE w.deal_id=$1""",item["id"])
+                projection["native_clinic_case"]=(
+                    {"state":clinic["state"],
+                     "case_id":clinic["clinic_case_id"] if
+                       clinic["state"]=="PROVIDER_ACCEPTED" else None,
+                     "provider_status_code":clinic["provider_status_code"],
+                     "independently_verified":False}
+                    if clinic else {"state":"NOT_SUBMITTED",
+                                   "independently_verified":False})
+            else:
+                projection["native_clinic_case"]=None
             result.append(projection)
         return {"schema":"noetfield.customer-portal.v1","cases":result,
                 "scope":"AUTHENTICATED_CUSTOMER_MEMBERSHIP_ONLY","cash_source":"signed_stripe_intake_bound",
