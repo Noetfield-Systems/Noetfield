@@ -14,7 +14,7 @@ const research=Array.from({length:22},(_,index)=>({
  lane:index%5===0?"RWA":"CORPORATE",original_url:"https://example.org/sources/"+index,
  review_status:"PROFILE_REVIEWED",score:90-index,promoted_deal_id:null
 }));
-const events={qualify:[],outreach:0,scout:[],ai:[]};
+const events={qualify:[],outreach:0,scout:[],ai:[],missionRefresh:0};
 let siteChecks=0;
 const dealId="99771110-1111-4111-8111-111111111111";
 let confirmed=null;
@@ -32,6 +32,37 @@ const server=http.createServer(async(req,res)=>{
   people:[],deals:confirmed?[{id:dealId,account_name:confirmed.organization,stage:"NEW",offer:"ai_sales_os_pilot",estimated_minor:0,currency:"cad",summary:"Source verified",owner:"Noetfield Revenue",next_date:"",next_action:"Qualify customer scope"}]:[],
   metrics:{open:confirmed?1:0,due:0,total_accounts:confirmed?1:0,paid_verified_by_currency_minor:{}}
  });return;}
+ if(key==="GET /api/corporate-crm/founder/missions"){
+  json(res,{schema:"noetfield.founder-mission-board.v1",
+    states:{INTRO_REVIEW_READY:events.ai.length?1:0,
+      AGENT_RESEARCH_PENDING:events.ai.length?0:20,SOURCE_RESEARCH_PENDING:2},
+    missions:[{
+      source_key:research[0].source_key,organization:research[0].organization,
+      lane:"CORPORATE",offer:"ai_sales_os_pilot",
+      state:events.ai.length?"INTRO_REVIEW_READY":"AGENT_RESEARCH_PENDING",
+      priority:91,next_action:events.ai.length?
+        "Review the public company channel and relevant introduction.":
+        "Run evidence-grounded sales specialist on the company source.",
+      source_url:research[0].original_url,
+      contact_evidence_url:events.ai.length?"https://example.org/contact":"",
+      published_business_channel:events.ai.length?"partnerships@example.org":"",
+      fit_hypothesis:events.ai.length?"POSSIBLE_FIT":"NOT_ANALYZED",
+      fit_reason:events.ai.length?"Observed business technology services.":"",
+      draft:events.ai.length?{
+        to_public_business_channel:"partnerships@example.org",
+        subject:"Sales workflow and AI operations — potential collaboration",
+        body:"Hello Example team,\\n\\nWe observed published business technology services.",
+        status:"DRAFT_ONLY_NOT_SENT",send_permission_verified:false}:null,
+      email_sent_by_mission:false,paid_checkout_inferred:false
+    }],external_actions_inferred:0});return;
+ }
+ if(key==="POST /api/corporate-crm/founder/missions/refresh"){
+  if(req.headers["x-desk-csrf"]!=="test-csrf"){json(res,{detail:"INVALID_SESSION"},403);return;}
+  events.missionRefresh++;
+  json(res,{schema:"noetfield.founder-mission-cycle.v1",
+   state:"COMPLETE",scanned:22,created_or_changed:1,emails_sent:0,
+   contacts_auto_qualified:0,payments_inferred:0});return;
+ }
  if(key==="GET /api/corporate-crm/founder/ai"){
    json(res,{model_analyses_completed:events.ai.length?2:0,
     model_calls_attempted_today:events.ai.length*2,max_daily_model_calls:12,
@@ -130,6 +161,8 @@ async function run(){
    await page.goto(base+"/api/corporate-crm/app",{waitUntil:"domcontentloaded"});
    await page.waitForFunction(()=>document.querySelector("#fieldwork-status")?.textContent?.includes("22 public organization sources"),{timeout:15000});
    await page.waitForFunction(()=>document.querySelector("#founder-scout-status")?.textContent?.includes("published contact routes found"));
+   await page.waitForFunction(()=>document.querySelector("#founder-missions-status")?.textContent?.includes("source-linked missions"));
+   assert.equal(await page.locator("#founder-missions-list .founder-mission").count(),1);
    assert.equal(await page.locator("#operator-tools").evaluate(el=>el.open),false,
     "Founder should not see technical or manual data entry by default");
    assert.equal(await page.locator("#founder-scout-list .founder-prospect").count(),10);
@@ -150,6 +183,11 @@ async function run(){
      assert.equal(events.ai[0].limit,2);
      assert.ok(await page.locator("#founder-scout-list").getByText("AI sales analyst",{exact:false}).count()>0);
      assert.equal(events.outreach,0,"Model analysis cannot send customer email");
+     assert.ok(await page.locator("#founder-missions-list").getByText("Introduction draft ready").count()>0);
+     assert.ok(await page.locator("#founder-missions-list").getByRole("button",{name:"Copy prepared introduction"}).count()>0);
+     await page.locator("#founder-missions-refresh").click();
+     assert.equal(events.missionRefresh,1);
+     assert.equal(events.outreach,0,"Mission refresh must never send customer email");
    }
    await page.locator("#operator-tools").evaluate(el=>el.open=true);
    await page.getByRole("button",{name:"Qualify for Corporate CRM"}).last().click();
