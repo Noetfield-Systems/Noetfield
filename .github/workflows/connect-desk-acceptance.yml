@@ -32,6 +32,8 @@ on:
       - 'services/governance/noetfield_governance/corporate_discovery_scheduler.py'
       - 'services/governance/noetfield_governance/corporate_founder_scout.py'
       - 'tests/unit/test_corporate_founder_scout.py'
+      - 'services/governance/noetfield_governance/corporate_founder_ai.py'
+      - 'tests/unit/test_corporate_founder_ai.py'
       - 'services/governance/noetfield_governance/corporate_outbound.py'
       - 'tests/unit/test_corporate_fieldwork_outbound.py'
       - 'tests/unit/test_corporate_qualification_db.py'
@@ -159,6 +161,8 @@ jobs:
         run: python -m pytest -q tests/unit/test_corporate_workpacket.py
       - name: Verify Founder source research, bounded network safety and real private endpoints
         run: python -m pytest -q tests/unit/test_corporate_founder_scout.py
+      - name: Verify actual budgeted Founder model research, source grounding and PostgreSQL receipts
+        run: python -m pytest -q tests/unit/test_corporate_founder_ai.py
       - name: Verify source-to-revenue growth funnel and private access
         run: python -m pytest -q tests/unit/test_corporate_growth_funnel.py
       - name: Syntax check private Corporate CRM interactive scripts
