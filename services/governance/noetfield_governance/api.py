@@ -64,6 +64,12 @@ from noetfield_governance.corporate_revenue_loop import (
     stop_scheduler as stop_corporate_revenue_scheduler,
     get_worker as get_corporate_revenue_worker,
 )
+from noetfield_governance.corporate_discovery_scheduler import (
+    start_scheduler as start_corporate_discovery_scheduler,
+    stop_scheduler as stop_corporate_discovery_scheduler,
+    latest as corporate_discovery_status,
+    run_once as run_corporate_discovery_once,
+)
 from noetfield_governance.company_os_connect_readback import readback as readback_connect_company_os
 from noetfield_governance.connect_relationship import project_relationship
 from noetfield_governance.intake_notify import (
@@ -498,6 +504,7 @@ async def startup_platform() -> None:
     await start_connect_due_scheduler(settings)
     await start_connect_bridge_reconciler(settings)
     await start_corporate_revenue_scheduler(settings)
+    await start_corporate_discovery_scheduler(settings)
     # Always wire a store (Postgres in prod; in-memory for staging/tests).
     app.state.pilot_key_store = pilot_key_store
     connect = getattr(pilot_key_store, "connect", None)
@@ -512,6 +519,7 @@ async def shutdown_runtime() -> None:
     await stop_connect_due_scheduler()
     await stop_connect_bridge_reconciler()
     await stop_corporate_revenue_scheduler()
+    await stop_corporate_discovery_scheduler()
     await intake_repository.close_intake_repository()
     await close_community_pool()
     await redis_runtime.close()
@@ -2685,6 +2693,51 @@ class CorporateCustomerAccessRequest(BaseModel):
     actor: str = Field(min_length=2, max_length=120)
     evidence_url: str = Field(default="", max_length=1200)
     revoke: bool = False
+
+
+class CorporateResearchPromoteRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    source_key: str = Field(min_length=5,max_length=200)
+    contact_name: str = Field(min_length=2,max_length=140)
+    contact_email: str = Field(min_length=5,max_length=254)
+    contact_basis: Literal["OPTED_IN","EXISTING_RELATIONSHIP",
+       "PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL","INTRODUCED_BY_MUTUAL_CONTACT",
+       "OTHER_DOCUMENTED_BASIS"]
+    contact_evidence: str = Field(min_length=10,max_length=1000)
+    owner: str = Field(min_length=2,max_length=120)
+    next_action: str = Field(min_length=4,max_length=400)
+
+
+@app.get("/api/corporate-crm/research/status",tags=["operations"],include_in_schema=False)
+async def corporate_research_status(request: Request) -> dict[str,object]:
+    _require_connect_desk_operator(request)
+    return corporate_discovery_status()
+
+
+@app.get("/api/corporate-crm/research",tags=["operations"],include_in_schema=False)
+async def corporate_research_list(request: Request,limit:int=100)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_discovery import research_board
+    return await research_board(settings,limit=limit)
+
+
+@app.post("/api/corporate-crm/research/sync",tags=["operations"],include_in_schema=False)
+async def corporate_research_sync(request: Request)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    return await run_corporate_discovery_once(settings)
+
+
+@app.post("/api/corporate-crm/research/promote",tags=["operations"],include_in_schema=False)
+async def corporate_research_promote(
+    body: CorporateResearchPromoteRequest,request: Request,
+)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_discovery import promote_corporate_source
+    from noetfield_governance.corporate_crm import CorporateCRMError
+    try:
+        return await promote_corporate_source(settings,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
 
 
 @app.post("/api/corporate-crm/customers/access", tags=["operations"], include_in_schema=False)
