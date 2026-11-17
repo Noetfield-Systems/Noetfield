@@ -154,6 +154,7 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
         raise ValueError("INSUFFICIENT_PUBLIC_SITE_CONTEXT_FOR_MODEL")
     content=json.dumps(source,ensure_ascii=False,separators=(",",":"))
     last_error="MODEL_PROVIDER_UNAVAILABLE"
+    logger.warning("corporate_founder_ai_routes=%s",",".join(route["route"] for route in routes))
     for index,route in enumerate(routes):
         body={"model":route["model"],
               "messages":[{"role":"system","content":_SYSTEM},
@@ -169,10 +170,12 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
                     "HTTP-Referer":"https://noetfield.com",
                     "X-Title":"Noetfield Founder Sales Analyst"})
         except httpx.RequestError:
-            last_error="MODEL_PROVIDER_NETWORK_UNAVAILABLE"
+            last_error="MODEL_PROVIDER_NETWORK_UNAVAILABLE_"+route["route"]
+            logger.warning("corporate_founder_ai_route_failure=%s",last_error)
             continue
         if response.status_code!=200:
             last_error="MODEL_HTTP_"+str(response.status_code)+"_"+route["route"]
+            logger.warning("corporate_founder_ai_route_failure=%s",last_error)
             if response.status_code in (401,403,429,500,502,503,504):
                 continue
             raise ValueError(last_error)
@@ -201,6 +204,7 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
                 last_error=str(exc)[:80]
             else:
                 last_error="MODEL_RESPONSE_UNUSABLE_"+route["route"]
+            logger.warning("corporate_founder_ai_route_failure=%s",last_error)
             # One additional legitimate provider can recover malformed model
             # output; never accept unsupported or invented evidence.
             continue
