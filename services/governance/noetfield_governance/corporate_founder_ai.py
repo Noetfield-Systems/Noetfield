@@ -30,7 +30,7 @@ from noetfield_governance.corporate_founder_scout import prepare_scout
 
 logger=logging.getLogger("noetfield.governance.corporate_founder_ai")
 _URL="https://openrouter.ai/api/v1/chat/completions"
-_MAX_DAILY_ATTEMPTS=12
+_MAX_DAILY_ATTEMPTS=20
 _MAX_BATCH=2
 _ALLOWED_FIT={"STRONG_FIT","POSSIBLE_FIT","INSUFFICIENT_EVIDENCE","OUT_OF_SCOPE"}
 _ALLOWED_ROLES={"Founder / CEO","Head of Sales","Revenue Operations",
@@ -66,6 +66,22 @@ def _model_routes()->list[dict[str,str]]:
     Avoid using the invalid platform OpenRouter key when Company OS is ready.
     """
     routes=[]
+    # Prefer the actual authenticated Agent Fabric runtime over three 401 keys.
+    # The Fabric owns provider selection (Cloudflare GLM/DeepSeek), but not CRM.
+    fabric_url=os.getenv("CORPORATE_FABRIC_CRM_BASE_URL","").strip().rstrip("/")
+    fabric_key=os.getenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN","").strip()
+    if fabric_url and len(fabric_key)>=48:
+        from urllib.parse import urlsplit
+        parsed=urlsplit(fabric_url)
+        if (parsed.scheme=="https" and parsed.hostname
+                and parsed.port in (None,443)
+                and not parsed.username and not parsed.password
+                and not parsed.query and not parsed.fragment):
+            routes.append({
+                "url":fabric_url+"/api/internal/v1/founder-crm/analyze",
+                "key":fabric_key,
+                "model":"fabric-multi-provider",
+                "route":"AGENT_FABRIC_SOURCE_SPECIALIST"})
     base=os.getenv("CORPORATE_AI_LLM_BASE_URL","").strip().rstrip("/")
     key=os.getenv("CORPORATE_AI_LLM_API_KEY","").strip()
     model=os.getenv("CORPORATE_AI_LLM_MODEL","").strip()
@@ -163,19 +179,29 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
     last_error="MODEL_PROVIDER_UNAVAILABLE"
     logger.warning("corporate_founder_ai_routes=%s",",".join(route["route"] for route in routes))
     for index,route in enumerate(routes):
-        body={"model":route["model"],
-              "messages":[{"role":"system","content":_SYSTEM},
-                          {"role":"user","content":content}],
-              "temperature":0.1,"max_tokens":380,
-              "usage":{"include":True}}
+        is_fabric=route["route"]=="AGENT_FABRIC_SOURCE_SPECIALIST"
+        if is_fabric:
+            signature=_source_signature(row)
+            source_key=str(row.get("source_key") or "")
+            task_id="fca_"+hashlib.sha256((source_key+"|"+signature).encode()).hexdigest()[:32]
+            body={"task_id":task_id,"source_key":source_key,
+                  "source_signature":signature,"source":source}
+            headers={"X-Founder-CRM-Bridge-Key":route["key"],
+                     "Content-Type":"application/json"}
+        else:
+            body={"model":route["model"],
+                  "messages":[{"role":"system","content":_SYSTEM},
+                              {"role":"user","content":content}],
+                  "temperature":0.1,"max_tokens":380,
+                  "usage":{"include":True}}
+            headers={"Authorization":"Bearer "+route["key"],
+                     "Content-Type":"application/json",
+                     "HTTP-Referer":"https://noetfield.com",
+                     "X-Title":"Noetfield Founder Sales Analyst"}
         try:
-            async with httpx.AsyncClient(trust_env=False,timeout=18,
+            async with httpx.AsyncClient(trust_env=False,timeout=36 if is_fabric else 18,
                                         follow_redirects=False,verify=True) as client:
-                response=await client.post(route["url"],json=body,headers={
-                    "Authorization":"Bearer "+route["key"],
-                    "Content-Type":"application/json",
-                    "HTTP-Referer":"https://noetfield.com",
-                    "X-Title":"Noetfield Founder Sales Analyst"})
+                response=await client.post(route["url"],json=body,headers=headers)
         except httpx.RequestError:
             last_error="MODEL_PROVIDER_NETWORK_UNAVAILABLE_"+route["route"]
             logger.warning("corporate_founder_ai_route_failure=%s",last_error)
@@ -188,6 +214,31 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
             raise ValueError(last_error)
         try:
             payload=response.json()
+            if is_fabric:
+                expected_hash=hashlib.sha256(json.dumps(
+                    {k:v for k,v in payload.items() if k!="artifact_sha256"},
+                    sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+                if (payload.get("schema")!="noetfield.agent-fabric.founder-crm-analysis.v1"
+                        or payload.get("state")!="SUCCEEDED"
+                        or payload.get("source_signature")!=signature
+                        or payload.get("source_key")!=source_key
+                        or payload.get("task_id")!=task_id
+                        or payload.get("authority")!="UNVERIFIED_ADVISORY_MODEL_OUTPUT"
+                        or payload.get("external_actions_executed") is not False
+                        or payload.get("provider") not in ("cloudflare_glm","deepseek_direct")
+                        or payload.get("artifact_sha256")!=expected_hash):
+                    raise ValueError("MODEL_FABRIC_RECEIPT_INVALID")
+                analysis=_validate_model_analysis(payload.get("analysis"),source)
+                if not isinstance(payload.get("model"),str) or not payload["model"]:
+                    raise ValueError("MODEL_FABRIC_MODEL_MISSING")
+                return {"analysis":analysis,
+                    "model":payload["model"][:150],
+                    "model_route":"AGENT_FABRIC_"+payload["provider"].upper(),
+                    "generation_id":str(payload.get("generation_id") or "")[:150],
+                    "prompt_tokens":int(payload.get("input_tokens") or 0),
+                    "completion_tokens":int(payload.get("output_tokens") or 0),
+                    "cost_usd":None,"cost_from_provider":False,
+                    "artifact_sha256":expected_hash}
             message=payload["choices"][0]["message"]["content"]
             if not isinstance(message,str):
                 last_error="MODEL_EMPTY_TEXT_"+route["route"]
@@ -205,7 +256,8 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
                 "model_route":route["route"],
                 "generation_id":str(payload.get("id") or "")[:150],
                 "prompt_tokens":prompt_tokens,"completion_tokens":output_tokens,
-                "cost_usd":cost,"cost_from_provider":cost is not None}
+                "cost_usd":cost,"cost_from_provider":cost is not None,
+                "artifact_sha256":None}
         except (KeyError,IndexError,TypeError,ValueError) as exc:
             if isinstance(exc,ValueError) and str(exc).startswith("MODEL_"):
                 last_error=str(exc)[:80]
