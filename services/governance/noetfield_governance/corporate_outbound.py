@@ -125,6 +125,11 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
     if not 4<=len(subject)<=160 or not 20<=len(body)<=_MAX_BODY or not actor.strip():
         raise CorporateCRMError("INVALID_OUTREACH_CONTENT_OR_ACTOR")
     sender,password=_mailbox()
+    # A missing legal sender mailing address is a deterministic configuration
+    # error: reject BEFORE claiming the idempotency fingerprint. Otherwise
+    # every later retry of the same legitimate message would remain stuck
+    # in FAILED_UNCONFIRMED even after the configuration is corrected.
+    _sender_footer(sender)
     db=await asyncpg.connect(_database_url(settings))
     try:
         await _schema(db)

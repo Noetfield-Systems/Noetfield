@@ -57,6 +57,27 @@ async def run_once(settings:object)->dict[str,Any]:
     return dict(_last)
 
 
+async def reconcile_proven_outreach(settings:object)->dict[str,Any]:
+    """Check Gmail headers only for existing provider-acknowledged CRM messages.
+
+    No emails are sent and no booked meeting is inferred. A provider outage
+    must not interrupt Fieldwork source discovery or the existing app server.
+    """
+    from noetfield_governance.corporate_outbound import reconcile_real_replies
+    try:
+        result=await reconcile_real_replies(settings,limit=120)
+        logger.warning("corporate_mailbox_readback=COMPLETE acknowledged=%d new_replies=%d optouts=%d",
+             result.get("provider_ack_sent",0),result.get("new_verified_replies",0),
+             result.get("new_suppressed_recipients",0))
+        return {"state":"COMPLETE",**result}
+    except CorporateCRMError as exc:
+        logger.warning("corporate_mailbox_readback=NOT_CONFIGURED_OR_NOT_AVAILABLE code=%s",str(exc))
+        return {"state":"NOT_CONFIGURED_OR_NOT_AVAILABLE","new_verified_replies":0}
+    except Exception:
+        logger.exception("corporate_mailbox_readback=FAILED")
+        return {"state":"FAILED","new_verified_replies":0}
+
+
 async def start_scheduler(settings:object)->None:
     global _task
     if not configured():
@@ -67,6 +88,7 @@ async def start_scheduler(settings:object)->None:
     async def loop()->None:
         while True:
             await run_once(settings)
+            await reconcile_proven_outreach(settings)
             await asyncio.sleep(6*3600)
     _task=asyncio.create_task(loop())
 
