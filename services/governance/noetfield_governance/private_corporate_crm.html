@@ -102,9 +102,14 @@ a{color:#215f54}.inline-link{font-size:11px}
   <div class="eyebrow">Noetfield Systems / Private Operations</div>
   <h1>Corporate relationships. Real outcomes.</h1>
   <p>Your private workspace for enterprise buyers, asset originators, commercial partners and retained clients. This is separate from Fieldwork's Web3 network.</p>
-  <form id="login"><label>Existing Noetfield operator key<input id="operator" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember" checked>Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
-  <button id="google-signin" type="button" class="ghost" hidden style="width:100%;margin-top:14px">Continue with Google</button>
-  <p class="small" id="password-manager-hint">On your own device, Chrome may offer to save your operator key. The seven-day session starts after a successful sign-in. Google access is restricted to authorized operators.</p>
+  <p class="small">Sign in with your approved Noetfield Google account. No operator key is required for Google sign-in.</p>
+  <label class="remember"><input type="checkbox" id="remember" checked>Keep this device signed in for seven days</label>
+  <button id="google-signin" type="button" class="primary" hidden style="width:100%;margin-top:12px">Continue with Google</button>
+  <details id="key-fallback" style="margin-top:22px">
+   <summary style="cursor:pointer;color:#426354;font-size:13px;font-weight:600;padding:9px 0">Use an operator key instead</summary>
+   <form id="login"><label>Existing Noetfield operator key<input id="operator" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Private platform administrator key"></label><button class="ghost" type="submit" style="width:100%">Open CRM with operator key</button></form>
+  </details>
+  <p class="small" id="password-manager-hint">Google is the recommended sign-in. If you use the backup operator key on your own device, Chrome may offer to save it.</p>
   <p class="notice" id="login-error" role="alert"></p>
  </div>
 </div>
@@ -228,7 +233,7 @@ async function showGoogleOperatorLogin(){
  const button=$("#google-signin");if(!button)return;
  try{
   const config=await api("/api/opportunities/desk/google-config");
-  if(!config.google_enabled)return;
+  if(!config.google_enabled){$("#key-fallback").open=true;return;}
   button.hidden=false;
   button.addEventListener("click",()=>{
    const pop=window.open(config.bridge_url,"nf-operator-google","popup=yes,width=520,height=700");
@@ -253,7 +258,7 @@ async function showGoogleOperatorLogin(){
    };
    window.addEventListener("message",handle);
   });
- }catch(_){/* Key login remains available if provider cannot be reached. */}
+ }catch(_){$("#key-fallback").open=true;/* The key fallback remains available. */}
 }
 showGoogleOperatorLogin();
 $("#signout").addEventListener("click",async()=>{
