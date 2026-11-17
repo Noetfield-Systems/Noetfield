@@ -2880,6 +2880,41 @@ async def corporate_customer_acceptance_receipt(receipt_id:str,request:Request)-
     return await acceptance_receipt(settings,receipt_id=receipt_id)
 
 
+class PaidRwaClinicCaseRequest(BaseModel):
+    model_config=ConfigDict(extra="forbid")
+    deal_id: str
+    clinic_case: dict[str,Any]
+
+
+@app.post("/api/corporate-crm/workpackets/rwa/submit-case",
+          tags=["operations"],include_in_schema=False)
+async def corporate_rwa_clinic_submit(
+    body:PaidRwaClinicCaseRequest,request:Request,
+)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_rwa_execution import submit_paid_native_clinic_case
+    from noetfield_governance.corporate_workpacket import WorkPacketError
+    try:
+        return await submit_paid_native_clinic_case(
+            settings,deal_id=body.deal_id,clinic_case=body.clinic_case)
+    except WorkPacketError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
+@app.get("/api/corporate-crm/workpackets/rwa/{deal_id}",
+         tags=["operations"],include_in_schema=False)
+async def corporate_rwa_clinic_case_readback(
+    deal_id:str,request:Request,
+)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_rwa_execution import native_clinic_case_readback
+    from noetfield_governance.corporate_workpacket import WorkPacketError
+    try:
+        return await native_clinic_case_readback(settings,deal_id=deal_id)
+    except WorkPacketError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
 @app.post("/api/corporate-crm/workpackets/admit",tags=["operations"],include_in_schema=False)
 async def corporate_workpacket_admit(body:CorporateWorkPacketRequest,request:Request)->dict[str,object]:
     _require_connect_desk_operator(request)
