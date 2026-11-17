@@ -299,12 +299,18 @@ async def prepare_scout(db: asyncpg.Connection) -> None:
        site_title text NOT NULL DEFAULT '',
        site_description text NOT NULL DEFAULT '',
        published_general_channel text NOT NULL DEFAULT '',
+       channel_evidence_url text NOT NULL DEFAULT '',
+       public_role_people_json text NOT NULL DEFAULT '[]',
        contact_page_url text NOT NULL DEFAULT '',
        team_page_url text NOT NULL DEFAULT '',
        scan_state text NOT NULL,
        error_code text NOT NULL DEFAULT '',
        scanned_at timestamptz NOT NULL DEFAULT now()
     )""")
+    await db.execute("""ALTER TABLE noetfield.corp_founder_scout
+       ADD COLUMN IF NOT EXISTS channel_evidence_url text NOT NULL DEFAULT ''""")
+    await db.execute("""ALTER TABLE noetfield.corp_founder_scout
+       ADD COLUMN IF NOT EXISTS public_role_people_json text NOT NULL DEFAULT '[]'""")
     await db.execute("""CREATE INDEX IF NOT EXISTS corp_founder_scout_scanned_idx
        ON noetfield.corp_founder_scout(scanned_at)""")
 
@@ -361,7 +367,8 @@ async def founder_scout_board(settings: object, *, limit: int = 12) -> dict[str,
           FROM noetfield.corp_founder_scout""")
         rows = await db.fetch("""SELECT r.source_key,r.organization,r.lane,r.score,
           r.website,r.original_url,s.page_url,s.site_title,s.site_description,
-          s.published_general_channel,s.contact_page_url,s.team_page_url,
+          s.published_general_channel,s.channel_evidence_url,s.public_role_people_json,
+          s.contact_page_url,s.team_page_url,
           s.scan_state,s.scanned_at
           FROM noetfield.corp_research_sources r
           LEFT JOIN noetfield.corp_founder_scout s ON s.source_key=r.source_key
@@ -413,7 +420,8 @@ async def run_scout_batch(settings: object, *, limit: int = 3,
             AND (s.scanned_at IS NULL OR s.scanned_at < now()-interval '7 days'
                  OR $2::text <> '')
           ORDER BY (s.scanned_at IS NULL) DESC,
-            s.scanned_at ASC NULLS FIRST, r.score DESC
+            s.scanned_at ASC NULLS FIRST,
+            (nullif(r.website,'') IS NULL),r.score DESC
           LIMIT $1""",count,source_key.strip())
         outcomes = []
         # Fetch independent sources concurrently; only persistence is serialized.
@@ -430,22 +438,25 @@ async def run_scout_batch(settings: object, *, limit: int = 3,
             })
             await db.execute("""INSERT INTO noetfield.corp_founder_scout(
                source_key,page_url,site_title,site_description,
-               published_general_channel,contact_page_url,team_page_url,
-               scan_state,error_code,scanned_at)
-               VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,now())
+               published_general_channel,channel_evidence_url,public_role_people_json,
+               contact_page_url,team_page_url,scan_state,error_code,scanned_at)
+               VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,now())
                ON CONFLICT(source_key) DO UPDATE SET
                page_url=excluded.page_url,site_title=excluded.site_title,
                site_description=excluded.site_description,
                published_general_channel=excluded.published_general_channel,
+               channel_evidence_url=excluded.channel_evidence_url,
+               public_role_people_json=excluded.public_role_people_json,
                contact_page_url=excluded.contact_page_url,
                team_page_url=excluded.team_page_url,
                scan_state=excluded.scan_state,error_code=excluded.error_code,
                scanned_at=now()""",
                row["source_key"],finding.get("page_url", ""),
                finding.get("title", ""),finding.get("description", ""),
-               finding.get("public_channel", ""),finding.get("contact_url", ""),
-               finding.get("team_url", ""),finding["scan_state"],
-               finding.get("error", ""))
+               finding.get("public_channel", ""),finding.get("channel_evidence_url", ""),
+               json.dumps(finding.get("public_people",[])[:5],ensure_ascii=False),
+               finding.get("contact_url", ""),finding.get("team_url", ""),
+               finding["scan_state"],finding.get("error", ""))
             outcomes.append({
                 "source_key":row["source_key"],"organization":row["organization"],
                 "scan_state":finding["scan_state"],
