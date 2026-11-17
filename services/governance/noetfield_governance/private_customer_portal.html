@@ -31,6 +31,14 @@ h2{font-size:34px}.sub{max-width:650px;line-height:1.8;color:#6e8076;font-size:1
 .details{background:#f5f8f2;padding:15px;margin:20px 0;color:#586f61;line-height:1.7;font-size:12px}
 .link{display:inline-block;color:#fff!important;text-decoration:none;background:#255143;padding:12px 15px;border-radius:4px;margin:12px 0 3px}
 .evidence{display:block;color:#2a6050;overflow-wrap:anywhere;margin:7px 0;font-size:12px}
+ .rwa-context{margin-top:18px;border:1px solid #d0dfd2;background:#f7faf5;padding:18px}
+.rwa-context summary{font-weight:650;color:#204737;font-size:15px;cursor:pointer;padding:5px 0}
+.rwa-context form{display:grid;gap:13px;margin-top:15px}
+.rwa-context label{display:grid;gap:6px;color:#395b4b;font-size:13px;font-weight:600}
+.rwa-context input,.rwa-context textarea{width:100%;border:1px solid #c4d2c8;border-radius:4px;background:#fff;padding:12px;font:inherit;color:#213e30;min-width:0}
+.rwa-context textarea{resize:vertical;min-height:72px}
+.rwa-context .primary{width:max-content;max-width:100%;min-height:45px}
+.rwa-status{font-size:13px;line-height:1.55;color:#315d46;overflow-wrap:anywhere}
 .waiting{padding:28px;border:1px solid #dce2d8;background:white;color:#647a6a;line-height:1.8}
 [hidden]{display:none!important}
 @media(max-width:820px){.shell{grid-template-columns:1fr}.side{padding:18px 22px;min-height:80px}.side-foot{display:none}.hero{margin:36px 0}.gate{padding:25px}.top{padding:19px 0}main{padding-bottom:50px}}
@@ -63,6 +71,7 @@ async function load(token){
  $("#case-list").innerHTML=items.length?items.map(x=>{
  const checkout=safe(x.approved_checkout_url),scope=safe(x.scope_evidence),delivery=safe(x.delivery_evidence),accept=safe(x.customer_acceptance);
  const packet=x.workpacket||{};
+ const rwa=x.native_clinic_case||{state:"NOT_SUBMITTED"};
  const artifact=packet.independently_verified?safe(packet.verified_artifact_url):null;
  const verifier=packet.independently_verified?safe(packet.verifier_receipt_url):null;
  return '<article class="case"><div class="kicker">PRIVATE CLIENT ENGAGEMENT / '+esc(x.commercial_stage)+'</div><h2>'+esc(x.account_name)+'</h2>'+
@@ -76,13 +85,52 @@ async function load(token){
  (verifier?'<a class="evidence" href="'+esc(verifier)+'" target="_blank" rel="noopener noreferrer">Review independent verifier receipt</a>':"")+
  (packet.independently_verified&&!packet.customer_accepted&&x.payment_status==="PAID_LIVE"?
    '<button class="primary" type="button" data-accept-delivery="'+esc(x.deal_id)+'">Accept independently verified work</button>':"")+
- (packet.customer_accepted?'<p class="note">Your acceptance is recorded. Commercial closure follows separately.</p>':"")+
+ (x.offer==="rwa_technical_sprint"&&x.payment_status==="PAID_LIVE"?
+  (rwa.state==="NOT_SUBMITTED"?
+  '<details class="rwa-context"><summary>Provide your asset details for the RWA technical review</summary>'+
+  '<p class="note">Your paid engagement is linked. Enter the actual asset information; Noetfield sends it to its RWA Clinic for analysis. A case submission is not approval or final verified delivery.</p>'+
+  '<form data-rwa-case="'+esc(x.deal_id)+'">'+
+  '<label>Jurisdiction<input name="jurisdiction" autocomplete="off" minlength="2" maxlength="180" required placeholder="e.g. British Columbia, Canada"></label>'+
+  '<label>Issuing entity<input name="issuer" autocomplete="organization" minlength="2" maxlength="240" required placeholder="Legal issuer or proposed entity"></label>'+
+  '<label>Asset value and currency<input name="asset_value" minlength="2" maxlength="180" required placeholder="Actual amount and currency"></label>'+
+  '<label>Target investors<textarea name="target_investors" minlength="2" maxlength="500" required placeholder="Who is eligible and in which jurisdictions?"></textarea></label>'+
+  '<label>Proposed structure<textarea name="proposed_structure" minlength="2" maxlength="650" required placeholder="Asset ownership, rights and intended structure"></textarea></label>'+
+  '<button type="submit" class="primary">Submit project to RWA Clinic</button>'+
+  '<p class="rwa-status" role="status" aria-live="polite">No case sent yet.</p></form></details>':
+  '<div class="details">Native RWA Clinic case: <strong>'+esc(rwa.state)+'</strong>'+
+  (rwa.case_id?' · Reference '+esc(rwa.case_id):'')+
+  '. This does not mean independently verified delivery.</div>'):"")+ (packet.customer_accepted?'<p class="note">Your acceptance is recorded. Commercial closure follows separately.</p>':"")+
  (scope?'<a class="evidence" href="'+esc(scope)+'" target="_blank" rel="noopener noreferrer">View approved scope evidence</a>':"")+
  (checkout?'<a class="link" href="'+esc(checkout)+'" target="_blank" rel="noopener noreferrer">Continue to approved Stripe checkout</a>':"")+
  (delivery?'<a class="evidence" href="'+esc(delivery)+'" target="_blank" rel="noopener noreferrer">View accepted deliverable</a>':"")+
  (accept?'<a class="evidence" href="'+esc(accept)+'" target="_blank" rel="noopener noreferrer">View acceptance record</a>':"")+
  '<p class="note">Recorded payment evidence is from signed Stripe events, not a bank balance.</p></article>'
  }).join(""):'<div class="waiting">No approved customer engagements are linked to this Google identity. Contact your Noetfield engagement manager for access.</div>';
+ $("#case-list").querySelectorAll("[data-rwa-case]").forEach(form=>form.addEventListener("submit",async(event)=>{
+  event.preventDefault();
+  if(!inMemoryToken||!form.reportValidity())return;
+  const button=form.querySelector('button[type="submit"]');
+  const message=form.querySelector(".rwa-status");
+  const fields=Object.fromEntries(new FormData(form));
+  button.disabled=true;button.textContent="Submitting original case…";
+  message.textContent="Sending actual project context to the native RWA Clinic.";
+  try{
+   const response=await fetch("/api/corporate-crm/customer/rwa/submit-case",{
+    method:"POST",headers:{"Authorization":"Bearer "+inMemoryToken,
+      "Content-Type":"application/json","Accept":"application/json"},
+    cache:"no-store",credentials:"omit",
+    body:JSON.stringify({deal_id:form.dataset.rwaCase,clinic_case:{case_context:fields}})});
+   const result=await response.json().catch(()=>({detail:"Case response unavailable"}));
+   if(!response.ok)throw Error(result.detail||"Clinic did not accept this case");
+   if(result.real_native_clinic_case||result.provider_acknowledged){
+    await load(inMemoryToken);
+   }else{
+    message.textContent="Submission not confirmed by the clinic. Contact your engagement manager before trying again.";
+   }
+  }catch(error){
+   message.textContent="No confirmed clinic case: "+String(error.message||error);
+  }finally{button.disabled=false;button.textContent="Submit project to RWA Clinic"}
+ }));
  $("#case-list").querySelectorAll("[data-accept-delivery]").forEach(button=>button.addEventListener("click",async()=>{
   if(!inMemoryToken)return;
   button.disabled=true;button.textContent="Recording authenticated acceptance…";
