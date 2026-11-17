@@ -429,6 +429,11 @@ def test_free_and_unopted_legacy_openrouter_are_not_silent_model_dependencies(mo
     monkeypatch.setenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","1")
     monkeypatch.setenv("OPENROUTER_MODEL","free-model:free")
     assert _model_routes()==[]
+    monkeypatch.setenv("OPENROUTER_MODEL","openrouter/free")
+    assert _model_routes()==[]
+    monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY","paid-backup-credential")
+    monkeypatch.setenv("CORPORATE_AI_COMPANY_FALLBACK_MODEL","openrouter/free")
+    assert _model_routes()==[]
     monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","paid-company-key")
     monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com")
     monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-flash:free")
