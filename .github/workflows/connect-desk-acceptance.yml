@@ -32,6 +32,8 @@ on:
       - 'services/governance/noetfield_governance/corporate_discovery_scheduler.py'
       - 'services/governance/noetfield_governance/corporate_outbound.py'
       - 'tests/unit/test_corporate_fieldwork_outbound.py'
+      - 'services/governance/noetfield_governance/corporate_workpacket.py'
+      - 'tests/unit/test_corporate_workpacket.py'
       - 'services/governance/noetfield_governance/private_corporate_crm.html'
       - 'services/governance/noetfield_governance/operator_google_auth.py'
       - 'services/governance/noetfield_governance/connect_desk_auth.py'
@@ -64,6 +66,8 @@ on:
       - 'services/governance/noetfield_governance/corporate_discovery_scheduler.py'
       - 'services/governance/noetfield_governance/corporate_outbound.py'
       - 'tests/unit/test_corporate_fieldwork_outbound.py'
+      - 'services/governance/noetfield_governance/corporate_workpacket.py'
+      - 'tests/unit/test_corporate_workpacket.py'
       - 'services/governance/noetfield_governance/private_corporate_crm.html'
       - 'services/governance/noetfield_governance/operator_google_auth.py'
       - 'services/governance/noetfield_governance/connect_desk_auth.py'
@@ -127,6 +131,8 @@ jobs:
         run: python -m pytest -q tests/unit/test_customer_portal.py
       - name: Verify Fieldwork CORPORATE source isolation and real provider-backed outreach
         run: python -m pytest -q tests/unit/test_corporate_fieldwork_outbound.py
+      - name: Verify paid scope to real WorkPacket and independent customer receipt contract
+        run: python -m pytest -q tests/unit/test_corporate_workpacket.py
       - name: Check static operator shell for unsafe storage
         run: |
           python - <<'PY'
