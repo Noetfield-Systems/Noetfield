@@ -209,8 +209,8 @@ async def run_ai_batch(settings:object,*,limit:int=2,
             AND s.scan_state IN ('PUBLISHED_GENERAL_BUSINESS_EMAIL',
               'PUBLIC_CONTACT_PAGE','PUBLIC_TEAM_PAGE','NO_CHANNEL_OBSERVED')
             AND length(s.site_title || s.site_description)>24
-            AND ($2::text='' OR r.source_key=$2)
-          ORDER BY r.score DESC,s.scanned_at DESC LIMIT 100""",count,source_key.strip())
+            AND ($1::text='' OR r.source_key=$1)
+          ORDER BY r.score DESC,s.scanned_at DESC LIMIT 100""",source_key.strip())
         candidates=[]
         for row in rows:
             record=dict(row)
@@ -271,5 +271,43 @@ async def run_ai_batch(settings:object,*,limit:int=2,
             "models_called":len(reserved),"failed":failures,
             "daily_limit":_MAX_DAILY_ATTEMPTS,"no_contact_auto_qualified":True,
             "outreach_sent":0,"paid_orders_created":0}
+    finally:
+        await db.close()
+
+
+async def founder_ai_board(settings:object,*,limit:int=25)->dict[str,Any]:
+    """Private model-receipt readback; generated suggestions are never facts."""
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_ai(db)
+        rows=await db.fetch("""SELECT a.source_key,a.analysis_json,a.model,
+           a.generation_id,a.prompt_tokens,a.completion_tokens,a.cost_usd,
+           a.analyzed_at
+           FROM noetfield.corp_founder_ai a
+           JOIN noetfield.corp_research_sources r ON r.source_key=a.source_key
+           WHERE r.promoted_deal_id IS NULL
+           ORDER BY a.analyzed_at DESC LIMIT $1""",max(1,min(limit,25)))
+        count=await db.fetchval("SELECT count(*)::int FROM noetfield.corp_founder_ai")
+        attempted=await db.fetchval("""SELECT count(*)::int
+           FROM noetfield.corp_founder_ai_attempts
+           WHERE attempted_at >= date_trunc('day',
+             now() at time zone 'America/Vancouver') AT TIME ZONE 'America/Vancouver'""")
+        return {"schema":"noetfield.founder-ai-research.v1",
+            "provider_configured":configured(),
+            "model_analyses_completed":int(count or 0),
+            "model_calls_attempted_today":int(attempted or 0),
+            "max_daily_model_calls":_MAX_DAILY_ATTEMPTS,
+            "analyses":[{
+                "source_key":row["source_key"],
+                "analysis":json.loads(row["analysis_json"]),
+                "model":row["model"],
+                "generation_id":row["generation_id"],
+                "input_tokens":int(row["prompt_tokens"]),
+                "output_tokens":int(row["completion_tokens"]),
+                "cost_usd":float(row["cost_usd"]) if row["cost_usd"] is not None else None,
+                "analyzed_at":row["analyzed_at"].isoformat(),
+                "type":"AI_HYPOTHESIS_UNVERIFIED"
+            } for row in rows],
+            "no_auto_verified_buyers":True,"no_outreach_sent":True}
     finally:
         await db.close()
