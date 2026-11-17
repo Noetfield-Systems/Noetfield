@@ -658,8 +658,13 @@ function renderFounderMissions(report){
  const count=Object.values(report.states||{}).reduce((s,v)=>s+Number(v||0),0);
  $("#founder-missions-status").textContent=count+" source-linked missions · "+
   Number(report.states?.INTRO_REVIEW_READY||0)+" introductions ready for relevance review · "+
-  Number(report.states?.DELIVERY_IN_PROGRESS||0)+" paid provider jobs in progress.";
+  Number(report.states?.DELIVERY_IN_PROGRESS||0)+" paid provider jobs in progress · "+
+  Number(report.states?.SMTP_PROVIDER_ACCEPTED||0)+" provider-accepted introductions · "+
+  Number(report.states?.VERIFIED_CUSTOMER_REPLY||0)+" verified replies.";
  const stateNames={INTRO_REVIEW_READY:"Introduction draft ready",
+  VERIFIED_CUSTOMER_REPLY:"Verified buyer reply — review now",
+  SMTP_PROVIDER_ACCEPTED:"Email provider accepted · waiting for reply",
+  OUTREACH_PROVIDER_UNCONFIRMED:"Check unconfirmed email attempt",
   QUALIFIED_CRM_RECORD:"Real CRM opportunity",DELIVERY_IN_PROGRESS:"Paid work in progress",
   DELIVERY_DISPATCH_ATTENTION:"Paid delivery needs attention",
   VERIFIED_DELIVERY:"Independent delivery verified",
@@ -680,6 +685,8 @@ function renderFounderMissions(report){
   (safeURL(m.provider_receipt_url)?'<a class="inline-link" href="'+esc(safeURL(m.provider_receipt_url))+'" target="_blank" rel="noopener noreferrer">Provider job receipt</a>':'')+
   (safeURL(m.verifier_receipt_url)?'<a class="inline-link" href="'+esc(safeURL(m.verifier_receipt_url))+'" target="_blank" rel="noopener noreferrer">Verifier evidence</a>':'')+
   '</div>'+
+  (m.outreach_provider_status?'<small>Outbound receipt: '+esc(m.outreach_provider_status)+
+    (m.outreach_verified_reply?' · verified reply linked':' · no verified reply')+'</small>':'')+
   (m.delivery_error_code?'<small>Delivery status: '+esc(m.delivery_error_code)+' · attempts '+Number(m.dispatch_attempts||0)+'</small>':'')+
   '<small>Priority '+Number(m.priority||0)+' · '+esc(m.offer)+' · '+esc(m.lane)+'</small></article>'
  ).join(""):'<p class="empty">No current commercial missions. The system will check sources automatically.</p>';
