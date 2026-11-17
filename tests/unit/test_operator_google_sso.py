@@ -88,8 +88,8 @@ def test_public_bridge_contains_no_credentials_and_crm_ui_offers_google():
     bridge=(root/"auth/operator-bridge/index.html").read_text()
     crm=(root/"services/governance/noetfield_governance/private_corporate_crm.html").read_text()
     desk=(root/"assets/opportunity-desk.html").read_text()
-    assert 'targetOrigin="https://platform.noetfield.com"' in bridge
-    assert '"/auth/operator-bridge/"' in bridge
+    assert 'targetOrigin = "https://platform.noetfield.com"' in bridge_js
+    assert '"/auth/operator-bridge/"' in bridge_js
     bridge_js=(root/"assets/noetfield-operator-bridge-v2.js").read_text()
     assert 'src="/assets/noetfield-operator-bridge-v2.js"' in bridge
     assert "<script>" not in bridge
