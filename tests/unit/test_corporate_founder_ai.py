@@ -177,7 +177,7 @@ def test_existing_company_os_model_used_first_and_openrouter_401_not_required(mo
     monkeypatch.setenv("OPENROUTER_MODEL","old-test-model")
     routes=_model_routes()
     assert routes[0]["url"]=="https://api.deepseek.com/v1/chat/completions"
-    assert routes[0]["model"]=="deepseek-chat"
+    assert routes[0]["model"]=="deepseek-flash"
     assert routes[0]["route"]=="COMPANY_OS_EXISTING_MODEL"
     assert routes[1]["route"]=="PLATFORM_OPENROUTER"
     responses=[]
@@ -301,6 +301,41 @@ def test_paid_primary_and_fabric_configured_free_legacy_never_runs(monkeypatch):
     assert reply["model_route"]=="COMPANY_OS_EXISTING_MODEL"
     assert reply["generation_id"]=="actual-deepseek-001"
     assert seen==["https://api.deepseek.com/chat/completions"]
+
+
+def test_native_paid_deepseek_request_is_supported_json_nonthinking_not_openrouter(monkeypatch):
+    monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com")
+    monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","paid-deepseek-native-key")
+    monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-chat")
+    monkeypatch.delenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN",raising=False)
+    monkeypatch.delenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY",raising=False)
+    monkeypatch.delenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER",raising=False)
+    observed=[]
+    class Reply:
+        status_code=200
+        def json(self):
+            return {"id":"paid-deepseek-v4-flash-verified","model":"deepseek-flash",
+              "choices":[{"message":{"content":json.dumps(VALID)}}],
+              "usage":{"prompt_tokens":54,"completion_tokens":78}}
+    class Client:
+        def __init__(self,*a,**kw):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*a):return False
+        async def post(self,url,**kwargs):
+            observed.append((url,kwargs["json"]))
+            return Reply()
+    async def go():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",Client):
+            return await analyze_public_company(SAMPLE)
+    out=asyncio.run(go())
+    assert out["model_route"]=="COMPANY_OS_EXISTING_MODEL"
+    assert len(observed)==1
+    assert observed[0][0]=="https://api.deepseek.com/chat/completions"
+    body=observed[0][1]
+    assert body["model"]=="deepseek-flash"
+    assert body["thinking"]=={"type":"disabled"}
+    assert body["response_format"]=={"type":"json_object"}
+    assert "usage" not in body
 
 
 def test_direct_paid_failure_and_fabric_503_fall_through_to_separate_paid_route(monkeypatch):
