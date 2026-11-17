@@ -41,16 +41,13 @@ def test_outbound_commercial_sender_requires_real_mailing_address(monkeypatch):
 def test_real_smtp_message_has_identification_and_unsubscribe_headers(monkeypatch):
     monkeypatch.setenv("CORPORATE_OUTREACH_MAILING_ADDRESS",
                        "123 Verified Business Street, Vancouver, BC, Canada")
-    smtp=type("SMTPContext",(),{})()
     sent=[]
-    def enter(self):return self
-    def exit(self,*args):return False
-    smtp.__enter__=enter.__get__(smtp)
-    smtp.__exit__=exit.__get__(smtp)
-    def send(m):sent.append(m);return {}
-    smtp.login=lambda *args:None
-    smtp.send_message=send
-    with patch("noetfield_governance.corporate_outbound.smtplib.SMTP_SSL",return_value=smtp):
+    class FakeSMTP:
+        def __enter__(self):return self
+        def __exit__(self,*args):return False
+        def login(self,*args):return None
+        def send_message(self,message):sent.append(message);return {}
+    with patch("noetfield_governance.corporate_outbound.smtplib.SMTP_SSL",return_value=FakeSMTP()):
         accepted=_send_provider("operations@noetfield.com","private-password",
             "buyer@example.org","Operations pilot","Relevant commercial question",
             "<receipt-id@noetfield.com>")
