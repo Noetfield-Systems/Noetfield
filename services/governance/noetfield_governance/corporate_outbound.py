@@ -129,7 +129,8 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
     try:
         await _schema(db)
         entry=await db.fetchrow("""SELECT p.email, r.contact_basis,r.contact_evidence,
-                     r.review_status, d.stage, d.account_id
+                     r.review_status,r.outreach_role_relevance,
+                     r.publication_no_solicitation_confirmed,d.stage, d.account_id
            FROM noetfield.corp_crm_deals d
            JOIN noetfield.corp_research_sources r ON r.promoted_deal_id=d.id
            JOIN noetfield.corp_crm_people p ON p.id=d.person_id
@@ -138,6 +139,11 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
             raise CorporateCRMError("VERIFIED_CONTACT_PERMISSION_REQUIRED")
         if entry["review_status"] in {"DO_NOT_CONTACT","DISQUALIFIED"} or entry["stage"]=="LOST":
             raise CorporateCRMError("OUTREACH_SUPPRESSED")
+        if entry["contact_basis"]=="PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL" and (
+            entry["publication_no_solicitation_confirmed"] is not True or
+            len(str(entry["outreach_role_relevance"] or "").strip()) < 20
+        ):
+            raise CorporateCRMError("PUBLIC_BUSINESS_CHANNEL_MUST_HAVE_DOCUMENTED_ROLE_RELEVANCE")
         recipient=str(entry["email"] or "").strip().lower()
         if not re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+",recipient):
             raise CorporateCRMError("VERIFIED_CONTACT_EMAIL_REQUIRED")
