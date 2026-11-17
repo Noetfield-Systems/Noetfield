@@ -221,7 +221,7 @@ async def _public_ip(host: str) -> str:
     return next((ip for ip in addresses if ":" not in ip), addresses[0])
 
 
-async def fetch_official_signals(website: str) -> dict[str, Any]:
+async def fetch_official_signals(website: str, *, _depth: int = 0) -> dict[str, Any]:
     """Fetch one first-party source with bounded bytes, no redirects, pinned TLS SNI.
 
     A published generic mailbox is a CONTACT CHANNEL, not a verified individual
@@ -257,6 +257,33 @@ async def fetch_official_signals(website: str) -> dict[str, Any]:
         if not buf:
             return {"scan_state": "SOURCE_UNAVAILABLE", "page_url": source, "error": "EMPTY_PAGE"}
         signals = _page_summary(source, buf.decode("utf-8", errors="replace"))
+        if _depth == 0:
+            # Only same-host links observed in the actual source are eligible.
+            urls = []
+            seen = {source}
+            for field in ("contact_url", "team_url"):
+                link = signals.get(field,"")
+                if link and link not in seen and urlsplit(link).hostname==host:
+                    urls.append(link)
+                    seen.add(link)
+            found = await asyncio.gather(*(
+                asyncio.wait_for(fetch_official_signals(link,_depth=1),timeout=8)
+                for link in urls[:2]
+            ),return_exceptions=True)
+            people=list(signals.get("public_people",[]))
+            for detail in found:
+                if not isinstance(detail,dict) or detail.get("scan_state")=="SOURCE_UNAVAILABLE":
+                    continue
+                if detail.get("public_channel") and not signals.get("public_channel"):
+                    signals["public_channel"]=detail["public_channel"]
+                    signals["channel_evidence_url"]=detail.get("page_url","")
+                    signals["scan_state"]="PUBLISHED_GENERAL_BUSINESS_EMAIL"
+                for person in detail.get("public_people",[]):
+                    if len(people)<5 and not any(
+                        p["name"].casefold()==person["name"].casefold() for p in people
+                    ):
+                        people.append(person)
+            signals["public_people"]=people
         return {"page_url": source, "error": "", **signals}
     except (ValueError, OSError, httpx.HTTPError, asyncio.TimeoutError) as exc:
         reason = ("DNS_OR_NETWORK_UNAVAILABLE" if not isinstance(exc, ValueError) else str(exc))
@@ -392,7 +419,7 @@ async def run_scout_batch(settings: object, *, limit: int = 3,
         # Fetch independent sources concurrently; only persistence is serialized.
         # A five-site button stays responsive even when one source is unavailable.
         findings = await asyncio.gather(*(
-            asyncio.wait_for(fetch_official_signals(str(row["website"] or "")),timeout=12)
+            asyncio.wait_for(fetch_official_signals(str(row["website"] or "")),timeout=22)
             for row in rows
         ),return_exceptions=True)
         for row, observed in zip(rows, findings):
