@@ -199,7 +199,11 @@ async def dispatch_paid_workpacket(settings:object,*,deal_id:str)->dict[str,Any]
         row=await db.fetchrow("""UPDATE noetfield.corp_workpackets
               SET state='DISPATCHING',dispatch_attempts=dispatch_attempts+1,
                   updated_at=now()
-              WHERE id=$1 AND state IN('READY','DISPATCH_UNCONFIRMED')
+              WHERE id=$1
+                AND dispatch_attempts < 3
+                AND (state IN('READY','DISPATCH_UNCONFIRMED')
+                  OR (state='DISPATCHING'
+                    AND updated_at < now()-interval '10 minutes'))
               RETURNING *""",wid)
         if not row:
             row=await db.fetchrow("SELECT * FROM noetfield.corp_workpackets WHERE id=$1",wid)
@@ -247,6 +251,79 @@ async def dispatch_paid_workpacket(settings:object,*,deal_id:str)->dict[str,Any]
             "engine":engine,"provider_acknowledged":status=="ACKNOWLEDGED",
             "external_workpacket_id":ext_id if status=="ACKNOWLEDGED" else None,
             "provider_receipt_url":receipt_url if status=="ACKNOWLEDGED" else None}
+
+
+async def auto_dispatch_paid_ready_work(settings:object,*,limit:int=3)->dict[str,Any]:
+    """Paid-only native production delivery dispatcher, no second job ledger.
+
+    The eligibility query selects only accepted scopes with SOURCE-BOUND,
+    NONREVERSED, LIVE Stripe proof. The canonical admit/dispatch functions
+    revalidate ALL payment, intake, amount and offer facts on every call.
+    A 202 provider ACK is NOT a verified deliverable or customer acceptance.
+    """
+    if type(limit) is not int or not 1<=limit<=5:
+        raise WorkPacketError("INVALID_PAID_AUTODISPATCH_LIMIT")
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_workpackets(db)
+        rows=await db.fetch("""SELECT DISTINCT d.id AS deal_id
+          FROM noetfield.corp_crm_deals d
+          JOIN noetfield.public_intakes i ON i.intake_id=d.source_intake_id
+          JOIN noetfield.commercial_payment_evidence e
+            ON e.session_id=i.qualification_json->'commercial_ops'->>'payment_session_id'
+          LEFT JOIN noetfield.corp_workpackets w ON w.deal_id=d.id
+          WHERE d.offer IN ('rwa_technical_sprint','ai_sales_os_pilot')
+            AND i.qualification_json->'commercial_ops'->>'offer'=d.offer
+            AND i.qualification_json->'commercial_ops'->>'stage'
+              IN ('PAYMENT_CONFIRMED','IN_DELIVERY','DELIVERED','CLOSED')
+            AND nullif(i.qualification_json->'commercial_ops'->>'scope_ref','') IS NOT NULL
+            AND nullif(i.qualification_json->'commercial_ops'->>'acceptance_evidence','') IS NOT NULL
+            AND i.qualification_json->'commercial_ops'->>'payment_event_id'=e.event_id
+            AND e.livemode IS TRUE AND e.reversed IS FALSE
+            AND e.bound_at IS NOT NULL AND e.source_intake_id=d.source_intake_id
+            AND (
+              w.id IS NULL
+              OR (w.dispatch_attempts < 3 AND (
+                w.state IN ('READY','DISPATCH_UNCONFIRMED') OR
+                (w.state='DISPATCHING'
+                  AND w.updated_at < now()-interval '10 minutes')
+              ))
+            )
+          ORDER BY d.id ASC LIMIT $1""",limit)
+    finally:
+        await db.close()
+    accepted=0
+    failed=0
+    results=[]
+    for row in rows:
+        deal_id=str(row["deal_id"])
+        try:
+            # Independent, canonical source-and-payment checks are performed
+            # again here, including payment link, amount and currency.
+            done=await dispatch_paid_workpacket(settings,deal_id=deal_id)
+            if done.get("provider_acknowledged"):
+                accepted+=1
+            elif done.get("dispatch_state")!="PROVIDER_CONTRACT_NOT_CONFIGURED":
+                failed+=1
+            results.append({"deal_id":deal_id,
+                "state":done.get("state","UNCONFIRMED"),
+                "provider_acknowledged":bool(done.get("provider_acknowledged")),
+                "verified_delivery":False,"customer_accepted":False})
+        except (WorkPacketError,CorporateCRMError,CommercialError) as exc:
+            failed+=1
+            results.append({"deal_id":deal_id,"state":"BLOCKED",
+                "error_code":str(exc)[:90],"provider_acknowledged":False})
+        except Exception:
+            failed+=1
+            results.append({"deal_id":deal_id,"state":"PROVIDER_OR_DB_FAILED",
+                "provider_acknowledged":False})
+    return {"schema":"noetfield.corporate-auto-paid-dispatch.v1",
+        "state":"COMPLETE" if failed==0 else "PARTIAL_OR_BLOCKED",
+        "eligible_paid_cases":len(rows),"dispatch_acknowledged":accepted,
+        "blocked_or_unconfirmed":failed,"receipts":results,
+        "only_source_bound_paid_work":True,
+        "unpaid_work_dispatched":0,"delivery_verified":0,
+        "customer_acceptance_inferred":0}
 
 
 def verify_signed_result(raw:bytes,signature:str)->dict[str,Any]:
