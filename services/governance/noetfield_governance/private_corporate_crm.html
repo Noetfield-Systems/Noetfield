@@ -170,8 +170,10 @@ a{color:#215f54}.inline-link{font-size:11px}
         <div class="ops-actions">
           <button class="ghost" type="button" id="ops-recover-preview">Preview missed enquiries</button>
           <button class="primary" type="button" id="ops-recover-apply">Recover eligible leads</button>
+          <button class="ghost" type="button" id="ops-run-cycle">Run safe operations cycle</button>
         </div>
         <p class="ops-note" id="ops-recovery-status" role="status" aria-live="polite">Only genuine Noetfield inbound requests are eligible; no customer message is sent by recovery.</p>
+        <p class="ops-note" id="ops-cycle-status" role="status">Autonomous operations cycle: checking service status…</p>
       </div>
     </article>
     <article class="panel">
@@ -399,6 +401,15 @@ function renderRevenueOps(plan){
 async function refreshRevenueOps(){
  try{const plan=await api("/api/corporate-crm/operations/plan");renderRevenueOps(plan)}
  catch(err){$("#ops-queue").innerHTML='<div class="empty">Revenue intelligence unavailable: '+esc(err.message)+'</div>'}
+ try{
+   const cycle=await api("/api/corporate-crm/operations/cycle-status");
+   $("#ops-cycle-status").textContent=cycle.configured?
+      ("Daily operations cycle enabled · "+(cycle.latest?
+       ("Last: "+cycle.latest.day+" / "+cycle.latest.state+" / "+cycle.latest.recovered+" recovered / "+cycle.latest.failed+" failed / "+cycle.latest.notification) :
+       "No completed cycle recorded yet")):
+      "Daily operations cycle not configured on this service.";
+   $("#ops-run-cycle").disabled=!cycle.configured;
+ }catch(err){$("#ops-cycle-status").textContent="Operations cycle status unavailable: "+err.message}
 }
 async function recoverMissingIntakes(execute){
  const preview=$("#ops-recover-preview"),apply=$("#ops-recover-apply");
@@ -417,6 +428,17 @@ async function recoverMissingIntakes(execute){
 }
 $("#ops-recover-preview").addEventListener("click",()=>recoverMissingIntakes(false));
 $("#ops-recover-apply").addEventListener("click",()=>recoverMissingIntakes(true));
+$("#ops-run-cycle").addEventListener("click",async()=>{
+ const button=$("#ops-run-cycle");button.disabled=true;
+ $("#ops-cycle-status").textContent="Running idempotent operator cycle and checking its receipt…";
+ try{
+   const result=await api("/api/corporate-crm/operations/run-cycle",{method:"POST",data:{}});
+   $("#ops-cycle-status").textContent="Cycle: "+result.state+
+     (result.recovered!==undefined?" · "+result.recovered+" recovered · "+result.failed+" failed":"");
+   await reload();
+ }catch(err){$("#ops-cycle-status").textContent="Cycle failed: "+err.message}
+ finally{button.disabled=false}
+});
 async function reload(){
  try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await refreshRevenueOps()}
  catch(e){message("Unable to read corporate workspace: "+e.message)}
