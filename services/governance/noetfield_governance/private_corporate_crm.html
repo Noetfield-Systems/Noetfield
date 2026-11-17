@@ -197,6 +197,19 @@ a{color:#215f54}.inline-link{font-size:11px}
 .founder-links a,.founder-links button{font-size:13px;padding:9px 10px;min-height:40px}
 .founder-links button{background:#fff;border:1px solid #cad9ca;border-radius:4px;color:#275544}
 .founder-channel{border-top:1px solid #e4ece3;padding-top:11px}
+.founder-mission-head{margin-top:20px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.founder-mission-head h3{margin:0;font:400 clamp(24px,3vw,30px)/1.25 "Newsreader",Georgia,serif;color:#204333}
+.founder-mission-summary{font-size:15px;line-height:1.5;color:#446252;max-width:680px;margin:4px 0}
+.founder-mission-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:12px}
+.founder-mission{background:white;border:1px solid #d7e2d5;padding:19px;min-width:0;display:grid;gap:10px}
+.founder-mission h4{font-size:18px;font-weight:650;margin:0;color:#204333;overflow-wrap:anywhere}
+.founder-mission p{font-size:15px;line-height:1.6;color:#3f5c4d;margin:0}
+.founder-mission small{font-size:13px;line-height:1.5;color:#6b806f}
+.founder-mission-tag{font-size:12px;color:#235640;background:#e7efe6;border-radius:3px;padding:5px 9px;width:max-content}
+.founder-mission-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.founder-mission-actions button{min-height:43px;padding:8px 14px;font-size:14px;border:1px solid #24513d;color:#24513d;background:#fff;border-radius:4px;cursor:pointer}
+.founder-mission-actions a{font-size:14px}
+@media(max-width:750px){.founder-mission-list{grid-template-columns:minmax(0,1fr)}}
 .advanced-tools{border:1px solid #d5ded4;background:#fafbf8;margin:0 0 25px;min-width:0}
 .advanced-tools>summary{cursor:pointer;padding:18px 22px;font-size:16px;font-weight:600;color:#214438;line-height:1.5}
 .advanced-tools>summary:focus-visible{outline:3px solid #86a98a}
@@ -264,6 +277,14 @@ a{color:#215f54}.inline-link{font-size:11px}
       <div id="founder-scout-status" class="founder-status" role="status" aria-live="polite">Checking your company research…</div>
       <p class="founder-copy" id="founder-ai-status" role="status" aria-live="polite">AI research: checking actual model receipts…</p>
       <div class="founder-list" id="founder-scout-list" aria-live="polite"><p class="empty">Loading source-backed recommendations…</p></div>
+      <div class="founder-mission-head">
+        <div><h3>What your AI team is doing next</h3>
+        <p class="founder-mission-summary">A living work queue from your research, AI receipts, real CRM records and paid delivery. You don't need to fill out a lead form.</p></div>
+        <button type="button" class="ghost founder-scan" id="founder-missions-refresh">Update next actions</button>
+      </div>
+      <p id="founder-missions-status" class="founder-status" role="status" aria-live="polite">Reading actual work and next actions…</p>
+      <div id="founder-missions-list" class="founder-mission-list" aria-live="polite"><p class="empty">Checking live mission evidence…</p></div>
+      <p class="founder-copy">Draft introductions are prepared, not sent. Actual outreach, paid delivery and customer acceptance are counted only from their own provider receipts.</p>
       <p class="founder-copy">A contact channel is not permission to email. No unverified names, customers, meetings or payments are counted.</p>
     </div>
   </section>
@@ -630,6 +651,64 @@ function openResearchQualification(item){
  form.querySelector('[name="contact_name"]').focus();
 }
 
+let founderMissionRows=[];
+function renderFounderMissions(report){
+ const rows=report.missions||[];
+ founderMissionRows=rows;
+ const count=Object.values(report.states||{}).reduce((s,v)=>s+Number(v||0),0);
+ $("#founder-missions-status").textContent=count+" source-linked missions · "+
+  Number(report.states?.INTRO_REVIEW_READY||0)+" introductions ready for relevance review · "+
+  Number(report.states?.DELIVERY_IN_PROGRESS||0)+" paid provider jobs in progress.";
+ const stateNames={INTRO_REVIEW_READY:"Introduction draft ready",
+  QUALIFIED_CRM_RECORD:"Real CRM opportunity",DELIVERY_IN_PROGRESS:"Paid work in progress",
+  VERIFIED_DELIVERY:"Independent delivery verified",
+  AGENT_RESEARCH_PENDING:"AI research next",PEOPLE_RESEARCH_PENDING:"Find a decision-maker",
+  SOURCE_RESEARCH_PENDING:"Company source research",
+  CONTACT_RESEARCH_PENDING:"Find a business contact",
+  OFFICIAL_SOURCE_NEEDED:"Find official website"};
+ $("#founder-missions-list").innerHTML=rows.length?rows.slice(0,12).map((m,i)=>
+  '<article class="founder-mission"><span class="founder-mission-tag">'+esc(stateNames[m.state]||m.state)+'</span>'+
+  '<h4>'+esc(m.organization)+'</h4>'+
+  '<p><strong>Next:</strong> '+esc(m.next_action)+'</p>'+
+  (m.fit_reason?'<p>'+esc(m.fit_reason)+'</p>':'')+
+  (m.published_business_channel?'<small>Public business channel: '+esc(m.published_business_channel)+'</small>':'')+
+  '<div class="founder-mission-actions">'+
+  (m.draft?'<button type="button" data-founder-copy="'+i+'">Copy prepared introduction</button>':'')+
+  (safeURL(m.contact_evidence_url)?'<a class="inline-link" href="'+esc(safeURL(m.contact_evidence_url))+'" target="_blank" rel="noopener noreferrer">Contact evidence</a>':'')+
+  (safeURL(m.source_url)?'<a class="inline-link" href="'+esc(safeURL(m.source_url))+'" target="_blank" rel="noopener noreferrer">Original source</a>':'')+
+  '</div><small>Priority '+Number(m.priority||0)+' · '+esc(m.offer)+' · '+esc(m.lane)+'</small></article>'
+ ).join(""):'<p class="empty">No current commercial missions. The system will check sources automatically.</p>';
+ $("#founder-missions-list").querySelectorAll("[data-founder-copy]").forEach(b=>
+  b.addEventListener("click",async()=>{
+   const m=founderMissionRows[Number(b.dataset.founderCopy)];
+   if(!m?.draft)return;
+   const text="To: "+m.draft.to_public_business_channel+"\\nSubject: "+m.draft.subject+"\\n\\n"+m.draft.body;
+   try{
+    await navigator.clipboard.writeText(text.replaceAll("\\\\n","\\n"));
+    $("#founder-missions-status").textContent="Draft copied. No message sent.";
+   }catch{ $("#founder-missions-status").textContent="Copy unavailable in this browser. No message sent."; }
+  }));
+}
+async function loadFounderMissions(){
+ try{
+  const missions=await api("/api/corporate-crm/founder/missions?limit=12");
+  renderFounderMissions(missions);
+ }catch(error){
+  $("#founder-missions-status").textContent="Mission readback not confirmed: "+String(error.message||error);
+  $("#founder-missions-list").innerHTML='<p class="empty">No mission claims available right now.</p>';
+ }
+}
+$("#founder-missions-refresh").addEventListener("click",async()=>{
+ const b=$("#founder-missions-refresh"),label=b.textContent;
+ if(b.disabled)return;
+ b.disabled=true;b.textContent="Updating…";
+ try{
+  await api("/api/corporate-crm/founder/missions/refresh",{method:"POST",data:{}});
+  await loadFounderMissions();
+ }catch(error){
+  $("#founder-missions-status").textContent="Mission refresh not confirmed: "+String(error.message||error);
+ }finally{b.disabled=false;b.textContent=label}
+});
 let founderScanRunning=false;
 let founderAiRunning=false;
 function aiSuggestionCard(candidate,notes){
@@ -704,6 +783,7 @@ async function loadFounderScout(){
   ]);
   $("#founder-paid-count").textContent=Number(conversion.stages?.paid_live_checkouts||0).toLocaleString("en-CA");
   renderFounderScout(report,ai);
+  await loadFounderMissions();
  }catch(error){
   $("#founder-scout-status").textContent="Research readback unavailable: "+String(error.message||error);
   $("#founder-scout-list").innerHTML='<p class="empty">Company records remain available below; no research outcome assumed.</p>';
