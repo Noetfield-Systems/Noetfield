@@ -169,6 +169,46 @@ a{color:#215f54}.inline-link{font-size:11px}
 }
 @media(max-width:360px){.growth-stage-grid{grid-template-columns:minmax(0,1fr)}
  .top-actions{width:100%;justify-content:space-between}.status{font-size:10px}}
+
+/* Founder-level human readable sales command; detailed operator controls are optional */
+.founder-command{margin:22px 0 25px;border:1px solid #cbd9cf;background:#fffefa;box-shadow:0 8px 28px #15362c0a}
+.founder-hero{padding:clamp(22px,3.5vw,38px);background:#17392f;color:#f6f4e9}
+.founder-hero .eyebrow{color:#c4b18e;font-size:12px}
+.founder-hero h2{font:400 clamp(29px,4vw,45px)/1.1 "Newsreader",Georgia,serif;margin:10px 0}
+.founder-hero p{max-width:800px;color:#d6e6d9;font-size:15px;line-height:1.7;margin:0}
+.founder-main{padding:clamp(17px,3vw,28px);display:grid;gap:20px}
+.founder-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.founder-stat{padding:15px;background:#f4f7f1;border:1px solid #e0e8dd;min-width:0}
+.founder-stat span{display:block;font-size:12px;color:#4a6658;line-height:1.5}
+.founder-stat strong{display:block;font:400 clamp(27px,3vw,34px)/1.3 "Newsreader",Georgia,serif;color:#1c4636;margin-top:3px}
+.founder-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:15px}
+.founder-row h3{font:400 29px/1.2 "Newsreader",Georgia,serif;margin:0;color:#204333}
+.founder-copy{font-size:14px;line-height:1.65;color:#446252;margin:5px 0 0}
+.founder-scan{min-height:46px;font-size:14px}
+.founder-status{padding:11px 13px;border-left:3px solid #669779;background:#f2f7f1;color:#3c5b4c;font-size:14px;line-height:1.5;min-height:42px}
+.founder-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.founder-prospect{border:1px solid #d9e3d7;padding:19px;display:grid;gap:12px;min-width:0;background:#fff}
+.founder-prospect header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.founder-prospect h4{font-size:18px;line-height:1.35;font-weight:650;color:#244238;margin:0;overflow-wrap:anywhere}
+.founder-prospect .fit{white-space:nowrap;font-size:12px;color:#3e6a54;background:#eaf1e7;padding:7px 9px;border-radius:3px}
+.founder-prospect p{font-size:13px;color:#4d6a59;line-height:1.6;margin:0}
+.founder-prospect small{font-size:12px;color:#708376;line-height:1.45}
+.founder-links{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.founder-links a,.founder-links button{font-size:13px;padding:9px 10px;min-height:40px}
+.founder-links button{background:#fff;border:1px solid #cad9ca;border-radius:4px;color:#275544}
+.founder-channel{border-top:1px solid #e4ece3;padding-top:11px}
+.advanced-tools{border:1px solid #d5ded4;background:#fafbf8;margin:0 0 25px;min-width:0}
+.advanced-tools>summary{cursor:pointer;padding:18px 22px;font-size:16px;font-weight:600;color:#214438;line-height:1.5}
+.advanced-tools>summary:focus-visible{outline:3px solid #86a98a}
+.advanced-body{padding:0 17px 17px;display:grid;gap:8px;min-width:0}
+.advanced-body .operations{margin-top:4px}
+.advanced-create{margin:8px 0 12px;display:flex;flex-wrap:wrap;align-items:center;gap:13px}
+.advanced-create p{font-size:13px;color:#536e60;margin:0}
+@media(max-width:1100px){.founder-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:750px){.founder-list{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:420px){.founder-stats{gap:7px}.founder-stat{padding:11px}.founder-main{padding:14px}
+ .founder-prospect{padding:14px}.founder-hero p{font-size:14px}.founder-prospect h4{font-size:16px}
+ .founder-row h3{font-size:25px}}
 </style>
 </head>
 <body>
@@ -202,13 +242,40 @@ a{color:#215f54}.inline-link{font-size:11px}
  </aside>
  <div class="main">
   <div class="topbar"><div class="breadcrumb">Operations / <b id="crumb">Corporate CRM</b></div><div class="top-actions"><span class="status"><span class="dot"></span>Private session</span><button class="ghost" type="button" id="refresh">Refresh</button><button class="ghost" type="button" id="signout">Lock</button></div></div>
-  <div class="heading"><div><div class="eyebrow">Noetfield Corporate / Commercial Intelligence</div><h1 id="page-title">Relationships that build business.</h1><p id="page-subtitle">Enterprise customers, signed scopes, real delivery and long-term partnerships.</p></div><button class="primary" id="create-toggle" type="button">New account</button></div>
+  <div class="heading"><div><div class="eyebrow">Noetfield Corporate / Commercial Intelligence</div><h1 id="page-title">Find the right customers. Win the right work.</h1><p id="page-subtitle">Your team's research, relationships, next moves and real sales — in one place.</p></div></div>
+  <section class="founder-command" aria-labelledby="founder-heading">
+    <header class="founder-hero">
+      <span class="eyebrow">Founder / Sales Command</span>
+      <h2 id="founder-heading">Your next customers, without the busywork.</h2>
+      <p>Fieldwork finds companies. The research worker checks their public websites. Your team follows up with real contacts. You see what moved toward a sale.</p>
+    </header>
+    <div class="founder-main">
+      <div class="founder-stats" aria-label="Actual sourcing progress">
+        <div class="founder-stat"><span>Companies found</span><strong id="founder-research-count">—</strong></div>
+        <div class="founder-stat"><span>Websites researched</span><strong id="founder-scout-count">—</strong></div>
+        <div class="founder-stat"><span>Public contact routes found</span><strong id="founder-contact-count">—</strong></div>
+        <div class="founder-stat"><span>Real paid clients</span><strong id="founder-paid-count">—</strong></div>
+      </div>
+      <div class="founder-row">
+        <div><h3>Companies worth exploring</h3><p class="founder-copy">Prioritized research, not a list of verified customers.</p></div>
+        <button type="button" class="primary founder-scan" id="founder-scan-next">Research next 5 companies</button>
+      </div>
+      <div id="founder-scout-status" class="founder-status" role="status" aria-live="polite">Checking your company research…</div>
+      <div class="founder-list" id="founder-scout-list" aria-live="polite"><p class="empty">Loading source-backed recommendations…</p></div>
+      <p class="founder-copy">A contact channel is not permission to email. No unverified names, customers, meetings or payments are counted.</p>
+    </div>
+  </section>
+
   <section class="metrics" aria-label="Commercial performance">
    <div class="metric"><small>Active opportunities</small><strong id="metric-open">—</strong></div>
    <div class="metric"><small>Follow-ups due</small><strong class="copper" id="metric-due">—</strong></div>
    <div class="metric"><small>Companies in network</small><strong id="metric-accounts">—</strong></div>
    <div class="metric"><small>Matched paid checkouts · CAD / USD</small><strong class="sage" style="font-size:23px" id="metric-cash">—</strong></div>
   </section>
+  <details class="advanced-tools" id="operator-tools">
+    <summary>Team workspace · detailed CRM, research and controls</summary>
+    <div class="advanced-body">
+      <div class="advanced-create"><button class="primary" id="create-toggle" type="button">Add a record manually</button><p>Optional operator tools. Founder does not need to fill in research forms.</p></div>
   <section class="operations" aria-label="Revenue operations">
     <article class="panel">
       <header class="panel-head"><h2>Revenue intelligence</h2><span class="small">Source-backed</span></header>
@@ -258,6 +325,8 @@ a{color:#215f54}.inline-link{font-size:11px}
       <div id="growth-review-queue" class="growth-review-queue" aria-live="polite"></div>
     </div>
   </section>
+    </div>
+  </details>
   <section id="data-view" class="workspace">
    <div class="panel">
     <div class="panel-head"><h2 id="list-title">Commercial opportunities</h2><span class="small" id="records-label">Source-backed and operator-owned</span></div>
@@ -409,7 +478,7 @@ const offerName={rwa_technical_sprint:"RWA Technical Sprint",ai_sales_os_pilot:"
 function setView(view){
  state.view=view;
  document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===view?"page":"false"));
- const names={pipeline:"Relationships that build business.",accounts:"Know the company. Build the relationship.",people:"The people behind every opportunity.",partners:"Commercial partners. Shared outcomes."};
+ const names={pipeline:"Find the right customers. Win the right work.",accounts:"Your company relationships.",people:"People you actually know.",partners:"Partnerships that produce results."};
  $("#page-title").textContent=names[view]||names.pipeline;
  $("#crumb").textContent=view[0].toUpperCase()+view.slice(1);
  $("#list-title").textContent={pipeline:"Commercial opportunities",accounts:"Corporate accounts",people:"Professional contacts",partners:"Partners and introducers"}[view];
@@ -558,6 +627,76 @@ function openResearchQualification(item){
  qualifyDialog.showModal();
  form.querySelector('[name="contact_name"]').focus();
 }
+
+let founderScanRunning=false;
+function renderFounderScout(report){
+ const m=report.summary||{};
+ $("#founder-research-count").textContent=Number(m.research_organizations||0).toLocaleString("en-CA");
+ $("#founder-scout-count").textContent=Number(m.websites_checked||0).toLocaleString("en-CA");
+ $("#founder-contact-count").textContent=Number((m.public_business_emails||0)+(m.public_contact_pages||0)).toLocaleString("en-CA");
+ const rows=report.prospects||[];
+ const states={
+  PUBLISHED_GENERAL_BUSINESS_EMAIL:"Published general business email found",
+  PUBLIC_CONTACT_PAGE:"Company contact page found",
+  PUBLIC_TEAM_PAGE:"Leadership page found",
+  NO_CHANNEL_OBSERVED:"No contact path on the home page",
+  SOURCE_UNAVAILABLE:"Company website unavailable",
+  NO_USABLE_WEBSITE:"No original official website",
+  NOT_RESEARCHED:"Not researched yet"
+ };
+ $("#founder-scout-list").innerHTML=rows.length?rows.slice(0,10).map((p,i)=>
+  '<article class="founder-prospect"><header><h4>'+esc(p.organization)+'</h4>'+
+  '<span class="fit" title="Research priority, not purchase intent">Research '+Number(p.fit_score||0)+'/100</span></header>'+
+  '<p>'+esc(p.offer_hypothesis)+' · '+esc(p.next_step)+'</p>'+
+  (p.site_description?'<p>'+esc(p.site_description)+'</p>':'')+
+  '<small>'+esc(states[p.scan_state]||p.scan_state)+'</small>'+
+  (p.general_business_channel?'<p class="founder-channel">Published general contact: <strong>'+esc(p.general_business_channel)+'</strong></p>':'')+
+  '<div class="founder-links">'+
+  (safeURL(p.original_source)?'<a class="inline-link" href="'+esc(safeURL(p.original_source))+'" target="_blank" rel="noopener noreferrer">Original source</a>':'')+
+  (safeURL(p.contact_page_url)?'<a class="inline-link" href="'+esc(safeURL(p.contact_page_url))+'" target="_blank" rel="noopener noreferrer">Contact page</a>':'')+
+  (safeURL(p.team_page_url)?'<a class="inline-link" href="'+esc(safeURL(p.team_page_url))+'" target="_blank" rel="noopener noreferrer">Leadership</a>':'')+
+  (safeURL(p.website)?'<a class="inline-link" href="'+esc(safeURL(p.website))+'" target="_blank" rel="noopener noreferrer">Website</a>':'')+
+  '<button type="button" data-founder-scan="'+i+'" '+(founderScanRunning?'disabled':'')+'>Research this company</button></div>'+
+  '<small>Not a verified buyer. The team handles any real outreach.</small></article>'
+ ).join(""):'<p class="empty">No original company research is currently available.</p>';
+ $("#founder-scout-list").querySelectorAll("[data-founder-scan]").forEach(b=>b.addEventListener("click",()=>{
+  const c=rows[Number(b.dataset.founderScan)];
+  if(c)runFounderScout({limit:1,source_key:c.source_key});
+ }));
+ $("#founder-scout-status").textContent=(m.websites_checked||0)+" websites checked · "+
+  ((m.public_business_emails||0)+(m.public_contact_pages||0))+
+  " published contact routes found · no customer or permission inferred.";
+}
+async function loadFounderScout(){
+ try{
+  const [report,conversion]=await Promise.all([
+   api("/api/corporate-crm/founder/scout?limit=20"),
+   api("/api/corporate-crm/growth/funnel?limit=1")
+  ]);
+  $("#founder-paid-count").textContent=Number(conversion.stages?.paid_live_checkouts||0).toLocaleString("en-CA");
+  renderFounderScout(report);
+ }catch(error){
+  $("#founder-scout-status").textContent="Research readback unavailable: "+String(error.message||error);
+  $("#founder-scout-list").innerHTML='<p class="empty">Company records remain available below; no research outcome assumed.</p>';
+ }
+}
+async function runFounderScout(input={limit:5}){
+ if(founderScanRunning)return;
+ const b=$("#founder-scan-next"),status=$("#founder-scout-status"),label=b.textContent;
+ founderScanRunning=true;b.disabled=true;b.textContent="Checking company websites…";
+ status.textContent="Checking original public company sources. No messages sent.";
+ try{
+  const result=await api("/api/corporate-crm/founder/scout/run",{method:"POST",data:input});
+  await loadFounderScout();
+  status.textContent=result.scanned+" websites inspected · "+
+   result.found_public_business_channels+" public business emails · "+
+   result.found_contact_pages+" contact pages. No email sent.";
+ }catch(error){
+  status.textContent="Research not confirmed: "+String(error.message||error);
+  await loadFounderScout();
+ }finally{founderScanRunning=false;b.disabled=false;b.textContent=label}
+}
+$("#founder-scan-next").addEventListener("click",()=>runFounderScout({limit:5}));
 async function loadFieldworkResearch(){
  const box=$("#fieldwork-items");
  try{
@@ -694,7 +833,7 @@ $("#ops-run-cycle").addEventListener("click",async()=>{
  finally{button.disabled=false}
 });
 async function reload(){
- try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await Promise.all([refreshRevenueOps(),loadFieldworkResearch(),refreshOutboundMetrics(),refreshGrowthFunnel()])}
+ try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await Promise.all([refreshRevenueOps(),loadFieldworkResearch(),refreshOutboundMetrics(),refreshGrowthFunnel(),loadFounderScout()])}
  catch(e){message("Unable to read corporate workspace: "+e.message)}
 }
 function fillAccounts(){

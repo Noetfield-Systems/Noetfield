@@ -2810,6 +2810,30 @@ async def corporate_growth_funnel(request:Request,limit:int=12)->dict[str,object
     return await growth_funnel_snapshot(settings,limit=limit)
 
 
+class FounderScoutRunRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    limit: int = Field(default=5, ge=1, le=5)
+    source_key: str = Field(default="", max_length=200)
+
+
+@app.get("/api/corporate-crm/founder/scout",tags=["operations"],include_in_schema=False)
+async def corporate_founder_scout(request: Request,limit: int = 12) -> dict[str,object]:
+    """Founder-ready source evidence, never a manually populated fake buyer list."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_founder_scout import founder_scout_board
+    return await founder_scout_board(settings,limit=limit)
+
+
+@app.post("/api/corporate-crm/founder/scout/run",tags=["operations"],include_in_schema=False)
+async def corporate_founder_scout_run(
+    body: FounderScoutRunRequest, request: Request,
+) -> dict[str,object]:
+    """One bounded public site research cycle; no outreach or CRM promotion."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_founder_scout import run_scout_batch
+    return await run_scout_batch(settings,limit=body.limit,source_key=body.source_key)
+
+
 @app.get("/api/corporate-crm/outreach/metrics",tags=["operations"],include_in_schema=False)
 async def corporate_outreach_metrics(request:Request)->dict[str,object]:
     _require_connect_desk_operator(request)
