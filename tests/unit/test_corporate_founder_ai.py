@@ -89,6 +89,67 @@ def test_real_openrouter_request_has_bounded_tokens_and_usage_receipt(monkeypatc
     asyncio.run(exercise())
 
 
+def test_existing_company_os_model_used_first_and_openrouter_401_not_required(monkeypatch):
+    from noetfield_governance.corporate_founder_ai import _model_routes
+    monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com/v1")
+    monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","company-secret-not-exposed")
+    monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-chat")
+    monkeypatch.setenv("OPENROUTER_API_KEY","expired-platform-key")
+    monkeypatch.setenv("OPENROUTER_MODEL","old-test-model")
+    routes=_model_routes()
+    assert routes[0]["url"]=="https://api.deepseek.com/v1/chat/completions"
+    assert routes[0]["model"]=="deepseek-chat"
+    assert routes[0]["route"]=="COMPANY_OS_EXISTING_MODEL"
+    assert routes[1]["route"]=="PLATFORM_OPENROUTER"
+    responses=[]
+    class Resp:
+        def __init__(self,status):self.status_code=status
+        def json(self):
+            return {"model":"deepseek-chat","id":"real-provider-request",
+                "choices":[{"message":{"content":json.dumps(VALID)}}],
+                "usage":{"prompt_tokens":20,"completion_tokens":30}}
+    class Client:
+        def __init__(self,*args,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        async def post(self,url,**kwargs):
+            responses.append((url,kwargs["headers"]["Authorization"]))
+            return Resp(200)
+    async def execute():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",Client):
+            return await analyze_public_company(SAMPLE)
+    result=asyncio.run(execute())
+    assert result["model_route"]=="COMPANY_OS_EXISTING_MODEL"
+    assert result["cost_usd"] is None and result["cost_from_provider"] is False
+    assert len(responses)==1 and responses[0][0].startswith("https://api.deepseek.com/")
+    assert responses[0][1]=="Bearer company-secret-not-exposed"
+
+
+def test_primary_provider_unauthorized_is_fallback_only_not_fake_model_receipt(monkeypatch):
+    monkeypatch.setenv("CORPORATE_AI_LLM_BASE_URL","https://api.deepseek.com/v1")
+    monkeypatch.setenv("CORPORATE_AI_LLM_API_KEY","expired-model-key")
+    monkeypatch.setenv("CORPORATE_AI_LLM_MODEL","deepseek-chat")
+    monkeypatch.setenv("OPENROUTER_API_KEY","also-expired-key")
+    monkeypatch.setenv("OPENROUTER_MODEL","openrouter/some-model")
+    urls=[]
+    class Response:
+        status_code=401
+    class Client:
+        def __init__(self,*args,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        async def post(self,url,**kwargs):
+            urls.append(url)
+            return Response()
+    async def execute():
+        with patch("noetfield_governance.corporate_founder_ai.httpx.AsyncClient",Client):
+            with pytest.raises(ValueError,match="MODEL_HTTP_401_PLATFORM_OPENROUTER"):
+                await analyze_public_company(SAMPLE)
+    asyncio.run(execute())
+    assert urls==["https://api.deepseek.com/v1/chat/completions",
+                 "https://openrouter.ai/api/v1/chat/completions"]
+
+
 def test_founder_ai_endpoints_are_operator_only_and_bounded():
     async def run():
         async with AsyncClient(transport=ASGITransport(app=app),base_url="http://test") as c:
