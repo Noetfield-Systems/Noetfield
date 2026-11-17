@@ -45,7 +45,11 @@ const server=http.createServer(async(req,res)=>{
     scan_state:siteChecks?"PUBLIC_CONTACT_PAGE":"NOT_RESEARCHED",
     contact_page_url:siteChecks?"https://example.org/contact":"",
     team_page_url:"",general_business_channel:siteChecks?"hello@example.org":"",
-    site_description:siteChecks?"Business technology services":""
+    site_description:siteChecks?"Business technology services":"",
+    general_business_channel_evidence_url:siteChecks?"https://example.org/contact":"",
+    public_role_people:siteChecks?[{name:"Jane Example",role:"Head of Partnerships",
+      evidence_url:"https://example.org/team",verification:"PUBLIC_SITE_LISTING_NOT_IDENTITY_VERIFIED"}]:[],
+    people_are_verified_contacts:false
    })),messages_sent:0,paid_sales_inferred:0
   });return;
  }
@@ -117,6 +121,9 @@ async function run(){
      assert.equal(events.scout[0].limit,5);
      assert.equal(events.outreach,0,"Company research may not send messages");
      assert.equal(await page.locator("#founder-scout-count").textContent(),"5");
+     assert.ok(await page.locator("#founder-scout-list").getByText("Head of Partnerships",{exact:false}).count()>0);
+     assert.ok(await page.locator("#founder-scout-list").getByText("Roles published on the company website",{exact:false}).count()>0);
+     assert.equal(await page.locator("#operator-tools").evaluate(el=>el.open),false);
    }
    await page.locator("#operator-tools").evaluate(el=>el.open=true);
    await page.getByRole("button",{name:"Qualify for Corporate CRM"}).last().click();
