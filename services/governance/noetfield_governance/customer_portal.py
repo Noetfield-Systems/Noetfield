@@ -181,6 +181,39 @@ async def auto_grant_paid_original_customers(settings:object,*,limit:int=5)->dic
         await db.close()
 
 
+async def customer_submit_paid_native_rwa_case(
+    settings:object,*,deal_id:str,clinic_case:dict[str,Any],
+    identity:dict[str,str],
+)->dict[str,Any]:
+    """Buyer-originated RWA case to the existing nine-plus-one Clinic engine.
+
+    Verified customer identity + original source-bound active deal membership
+    are mandatory, then the canonical native Clinic adapter rechecks accepted
+    scope and real signed live payment. No seller copy-and-paste is required.
+    """
+    try:
+        identifier=uuid.UUID(str(deal_id))
+    except (TypeError,ValueError) as exc:
+        raise CorporateCRMError("INVALID_CLIENT_ENGAGEMENT_ID") from exc
+    digest=str(identity.get("email_hash") or "")
+    if not re.fullmatch(r"[0-9a-f]{64}",digest):
+        raise CorporateCRMError("VERIFIED_CUSTOMER_IDENTITY_REQUIRED")
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await ensure_customer_access_schema(db)
+        owned=await db.fetchval("""SELECT 1 FROM noetfield.corp_customer_access ca
+             JOIN noetfield.corp_crm_deals d ON d.id=ca.deal_id
+             WHERE ca.deal_id=$1 AND ca.email_hash=$2 AND ca.active IS TRUE
+               AND d.offer='rwa_technical_sprint'""",identifier,digest)
+        if not owned:
+            raise CorporateCRMError("RWA_CUSTOMER_ACCESS_NOT_AUTHORIZED")
+    finally:
+        await db.close()
+    from noetfield_governance.corporate_rwa_execution import submit_paid_native_clinic_case
+    return await submit_paid_native_clinic_case(
+        settings,deal_id=str(identifier),clinic_case=clinic_case)
+
+
 def customer_case_projection(row: dict[str, Any]) -> dict[str, Any]:
     case = _as_dict(row.get("commercial"))
     payment = row.get("payment")
