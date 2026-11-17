@@ -2704,6 +2704,8 @@ class CorporateResearchPromoteRequest(BaseModel):
        "PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL","INTRODUCED_BY_MUTUAL_CONTACT",
        "OTHER_DOCUMENTED_BASIS"]
     contact_evidence: str = Field(min_length=10,max_length=1000)
+    role_relevance: str = Field(default="",max_length=500)
+    publication_no_solicitation: bool = False
     owner: str = Field(min_length=2,max_length=120)
     next_action: str = Field(min_length=4,max_length=400)
 
@@ -2746,6 +2748,25 @@ class CorporateOutboundSendRequest(BaseModel):
     subject: str = Field(min_length=4,max_length=160)
     body: str = Field(min_length=20,max_length=5000)
     actor: str = Field(min_length=2,max_length=120)
+
+
+class CorporateOutreachSuppressRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    deal_id: str
+    actor: str = Field(min_length=2,max_length=120)
+
+
+@app.post("/api/corporate-crm/outreach/suppress",tags=["operations"],include_in_schema=False)
+async def corporate_outreach_suppress(
+    body:CorporateOutreachSuppressRequest,request:Request,
+)->dict[str,object]:
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_outbound import suppress_sourced_recipient
+    from noetfield_governance.corporate_crm import CorporateCRMError
+    try:
+        return await suppress_sourced_recipient(settings,**body.model_dump())
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
 
 
 @app.post("/api/corporate-crm/outreach/send",tags=["operations"],include_in_schema=False)
