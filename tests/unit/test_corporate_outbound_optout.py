@@ -83,7 +83,9 @@ def test_suppressed_recipient_is_not_emailed_even_with_original_permission():
         db=AsyncMock()
         db.fetchrow.return_value=row
         db.fetchval.return_value=1
-        with patch("noetfield_governance.corporate_outbound._mailbox",
+        with patch("noetfield_governance.corporate_outbound._sender_footer",
+                   return_value="Noetfield Systems Inc. Verified Address"),\
+             patch("noetfield_governance.corporate_outbound._mailbox",
                    return_value=("operations@noetfield.com","private-password")),\
              patch("noetfield_governance.corporate_outbound._database_url",
                    return_value="postgresql://unused"),\
@@ -112,7 +114,9 @@ def test_imap_subject_unsubscribe_is_suppression_not_positive_buyer_reply():
         db=AsyncMock()
         db.fetch.side_effect=[[sent],[{"recipient_hash":digest}]]
         db.fetchrow.return_value={"recipient_hash":digest}
-        with patch("noetfield_governance.corporate_outbound._mailbox",
+        with patch("noetfield_governance.corporate_outbound._sender_footer",
+                   return_value="Noetfield Systems Inc. Verified Address"),\
+             patch("noetfield_governance.corporate_outbound._mailbox",
                    return_value=("operations@noetfield.com","private-password")),\
              patch("noetfield_governance.corporate_outbound._database_url",
                    return_value="postgresql://unused"),\
