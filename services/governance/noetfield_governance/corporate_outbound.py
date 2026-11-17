@@ -28,7 +28,10 @@ from noetfield_governance.corporate_crm import CorporateCRMError
 from noetfield_governance.commercial_pipeline import _database_url
 
 
-_ALLOWED_BASIS = {"OPTED_IN","EXISTING_RELATIONSHIP","INTRODUCED_BY_MUTUAL_CONTACT"}
+_ALLOWED_BASIS = {
+    "OPTED_IN","EXISTING_RELATIONSHIP","INTRODUCED_BY_MUTUAL_CONTACT",
+    "PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL",
+}
 _MAX_BODY=5000
 
 
@@ -43,6 +46,26 @@ def _mailbox() -> tuple[str,str]:
 
 def _digest(value:str)->str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def _sender_footer(mailbox:str)->str:
+    """A business CEM needs a real sender mailing address and easy opt-out."""
+    address=os.environ.get("CORPORATE_OUTREACH_MAILING_ADDRESS","").strip()
+    if not 15<=len(address)<=300:
+        raise CorporateCRMError("REAL_BUSINESS_POSTAL_ADDRESS_REQUIRED_FOR_OUTREACH")
+    return (
+      "\n\n—\nNoetfield Systems Inc.\n"+address+
+      "\nhttps://www.noetfield.com/contact/ | "+mailbox+
+      "\nStop commercial email: send a message to "+mailbox+
+      " with subject 'Unsubscribe'. Requests are respected without a fee.\n"
+    )
+
+
+def unsubscribe_subject(subject:str)->bool:
+    """Distinct opt-out signal: not a positive sales reply."""
+    return bool(re.match(
+       r"^(?:re:\s*)?(?:unsubscribe|remove\s+me|stop\s+(?:emails?|messages))\b",
+       str(subject or "").strip(),re.IGNORECASE))
 
 
 async def _schema(db:asyncpg.Connection)->None:
@@ -65,6 +88,12 @@ async def _schema(db:asyncpg.Connection)->None:
        response_message_id text NOT NULL DEFAULT '',
        received_at timestamptz NOT NULL DEFAULT now()
     )""")
+    await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.corp_outreach_suppression (
+       recipient_hash text PRIMARY KEY,
+       source text NOT NULL,
+       actor text NOT NULL DEFAULT '',
+       suppressed_at timestamptz NOT NULL DEFAULT now()
+    )""")
 
 
 def _send_provider(mailbox:str,password:str,recipient:str,subject:str,body:str,
@@ -76,7 +105,8 @@ def _send_provider(mailbox:str,password:str,recipient:str,subject:str,body:str,
     mail["Message-ID"]=message_id
     mail["Reply-To"]=mailbox
     mail["Auto-Submitted"]="no"
-    mail.set_content(body)
+    mail["List-Unsubscribe"]=f"<mailto:{mailbox}?subject=Unsubscribe>"
+    mail.set_content(body+_sender_footer(mailbox))
     with smtplib.SMTP_SSL("smtp.gmail.com",465,timeout=13) as smtp:
         smtp.login(mailbox,password)
         refused=smtp.send_message(mail)
@@ -111,6 +141,10 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
         recipient=str(entry["email"] or "").strip().lower()
         if not re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+",recipient):
             raise CorporateCRMError("VERIFIED_CONTACT_EMAIL_REQUIRED")
+        if (await db.fetchval(
+              "SELECT 1 FROM noetfield.corp_outreach_suppression WHERE recipient_hash=$1",
+              _digest(recipient))) == 1:
+            raise CorporateCRMError("OUTREACH_RECIPIENT_SUPPRESSED")
         fingerprint=_digest("|".join([str(key),recipient,subject,body]))
         msgid=make_msgid(domain="noetfield.com")
         receipt_id=uuid.uuid4()
@@ -160,7 +194,7 @@ def _imap_headers(mailbox:str,password:str,limit:int)->list[tuple[str,Any]]:
             return []
         for uid in ids[0].split()[-min(limit,120):]:
             status,parts=imap.uid("FETCH",uid,
-                     "(BODY.PEEK[HEADER.FIELDS (MESSAGE-ID IN-REPLY-TO REFERENCES FROM AUTO-SUBMITTED)])")
+                     "(BODY.PEEK[HEADER.FIELDS (MESSAGE-ID IN-REPLY-TO REFERENCES FROM AUTO-SUBMITTED SUBJECT)])")
             if status!="OK" or not parts:
                 continue
             for part in parts:
@@ -185,10 +219,15 @@ async def reconcile_real_replies(settings:object, *, limit:int=120)->dict[str,An
                    s.created_at > now() - interval '30 days'
              ORDER BY s.created_at DESC LIMIT 200""")
         known={str(row["provider_message_id"]).strip().lower():dict(row) for row in sends}
-        if not known:
-            return {"provider_ack_sent":0,"scanned_headers":0,"new_verified_replies":0}
+        all_sent=await db.fetch("""SELECT DISTINCT recipient_hash
+             FROM noetfield.corp_outreach_sends LIMIT 10000""")
+        known_recipients={str(x["recipient_hash"]) for x in all_sent}
+        if not known_recipients:
+            return {"provider_ack_sent":0,"scanned_headers":0,
+                    "new_verified_replies":0,"new_suppressed_recipients":0}
         headers=await asyncio.to_thread(_imap_headers,mailbox,password,limit)
         added=0
+        suppressed=0
         for uid,head in headers:
             auto=str(head.get("Auto-Submitted") or "").strip().lower()
             if auto and auto!="no":
@@ -198,6 +237,15 @@ async def reconcile_real_replies(settings:object, *, limit:int=120)->dict[str,An
             if not sender:
                 continue
             sender_hash=_digest(sender)
+            if unsubscribe_subject(str(head.get("Subject") or "")):
+                if sender_hash in known_recipients:
+                    created=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_suppression
+                        (recipient_hash,source,actor)
+                        VALUES($1,'IMAP_UNSUBSCRIBE_SUBJECT','CUSTOMER')
+                        ON CONFLICT(recipient_hash) DO NOTHING RETURNING recipient_hash""",
+                        sender_hash)
+                    suppressed+=int(bool(created))
+                continue
             for msg_id,original in known.items():
                 if msg_id not in references or original["recipient_hash"]!=sender_hash:
                     continue
@@ -211,6 +259,7 @@ async def reconcile_real_replies(settings:object, *, limit:int=120)->dict[str,An
                 break
         return {"provider_ack_sent":len(known),"scanned_headers":len(headers),
                 "new_verified_replies":added,
+                "new_suppressed_recipients":suppressed,
                 "human_qualification_not_inferred":True}
     finally:
         await db.close()
@@ -222,9 +271,40 @@ async def provider_outreach_metrics(settings:object)->dict[str,Any]:
         await _schema(db)
         rows=await db.fetch("SELECT status,count(*)::int n FROM noetfield.corp_outreach_sends GROUP BY status")
         replies=await db.fetchval("SELECT count(*)::int FROM noetfield.corp_outreach_replies")
+        suppressed=await db.fetchval("SELECT count(*)::int FROM noetfield.corp_outreach_suppression")
         return {"source":"SMTP_PROVIDER_ACK_AND_IMAP_HEADERS",
                 "sending_status":{r["status"]:int(r["n"]) for r in rows},
                 "provider_verified_replies":int(replies or 0),
+                "suppressed_recipients":int(suppressed or 0),
                 "meetings_confirmed":0,"unverified_email_events_included":False}
+    finally:
+        await db.close()
+
+
+async def suppress_sourced_recipient(settings:object,*,deal_id:str,actor:str)->dict[str,Any]:
+    """Immediate global opt-out across all related CRM deals; no personal email returned."""
+    try:
+        identifier=uuid.UUID(deal_id)
+    except (TypeError,ValueError) as exc:
+        raise CorporateCRMError("INVALID_DEAL_ID") from exc
+    if not actor.strip() or len(actor)>120:
+        raise CorporateCRMError("ACTOR_REQUIRED")
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await _schema(db)
+        person=await db.fetchrow("""SELECT p.email FROM noetfield.corp_crm_deals d
+          JOIN noetfield.corp_crm_people p ON p.id=d.person_id
+          WHERE d.id=$1""",identifier)
+        if not person or not person["email"]:
+            raise CorporateCRMError("SOURCE_CONTACT_EMAIL_NOT_FOUND")
+        digest=_digest(str(person["email"]).strip().lower())
+        row=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_suppression(
+             recipient_hash,source,actor)
+             VALUES($1,'OPERATOR_CONFIRMED_OPT_OUT',$2)
+             ON CONFLICT(recipient_hash) DO NOTHING RETURNING recipient_hash""",
+             digest,actor)
+        return {"suppressed":True,"created":bool(row),"deal_id":deal_id,
+                "scope":"ALL_FUTURE_CORPORATE_COMMERCIAL_EMAIL",
+                "customer_email_exposed":False}
     finally:
         await db.close()
