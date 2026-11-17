@@ -219,9 +219,10 @@ def customer_case_projection(row: dict[str, Any]) -> dict[str, Any]:
     payment = row.get("payment")
     terms = OFFER_TERMS.get(str(row.get("offer")))
     paid = bool(payment and payment["livemode"] and
-                not payment["reversed"] and
+                not payment["reversed"] and payment.get("bound_at") and
                 payment["source_intake_id"] == row["source_intake_id"] and
                 case.get("payment_session_id") == payment["session_id"] and
+                case.get("payment_event_id") == payment["event_id"] and
                 terms and payment["payment_link_id"] == terms["payment_link_id"] and
                 payment["amount_minor"] == terms["payment_minor"] and
                 payment["currency"] == terms["currency"] and
@@ -280,7 +281,8 @@ async def customer_cases(settings: object, *, identity: dict[str,str]) -> dict[s
             payment=None
             if case.get("payment_session_id"):
                 proof=await db.fetchrow("""SELECT e.event_id,e.session_id,e.payment_link_id,
-                       e.amount_minor,e.currency,e.livemode,e.reversed,e.source_intake_id
+                       e.amount_minor,e.currency,e.livemode,e.reversed,
+                       e.source_intake_id,e.bound_at
                        FROM noetfield.commercial_payment_evidence e
                        WHERE e.session_id=$1""",case["payment_session_id"])
                 payment=dict(proof) if proof else None
