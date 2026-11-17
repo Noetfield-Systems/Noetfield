@@ -2621,6 +2621,36 @@ async def corporate_crm_board(
         raise HTTPException(status_code=422,detail=str(exc)) from exc
 
 
+class CorporateRecoveryRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    execute: bool = False
+    limit: int = Field(default=80, ge=1, le=100)
+
+
+@app.get("/api/corporate-crm/operations/plan",
+         tags=["operations"], include_in_schema=False)
+async def corporate_revenue_plan(request: Request) -> dict[str, object]:
+    """P1/P2: explainable work queue, not proof that an agent contacted buyers."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_revenue_ops import revenue_plan
+    return await revenue_plan(settings)
+
+
+@app.post("/api/corporate-crm/operations/recover-intakes",
+          tags=["operations"], include_in_schema=False)
+async def corporate_recover_intakes(
+    body: CorporateRecoveryRequest, request: Request,
+) -> dict[str, object]:
+    """P0: scoped, idempotent historical Noetfield source projection."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_revenue_ops import recover_intakes
+    from noetfield_governance.corporate_crm import CorporateCRMError
+    try:
+        return await recover_intakes(settings, execute=body.execute, limit=body.limit)
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
 @app.post("/api/corporate-crm/accounts", tags=["operations"], include_in_schema=False)
 async def corporate_crm_account(body: CorporateAccountRequest,request: Request) -> dict[str, object]:
     from noetfield_governance.corporate_crm import CorporateCRMError, account_create
