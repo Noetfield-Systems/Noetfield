@@ -35,6 +35,8 @@ on:
       - 'tests/unit/test_corporate_outbound_optout.py'
       - 'services/governance/noetfield_governance/corporate_workpacket.py'
       - 'tests/unit/test_corporate_workpacket.py'
+      - 'services/governance/noetfield_governance/corporate_rwa_execution.py'
+      - 'tests/unit/test_corporate_rwa_execution.py'
       - 'services/governance/noetfield_governance/private_commercial_scenario_lab.html'
       - 'tests/unit/test_commercial_scenario_lab.py'
       - 'tests/unit/test_commercial_delivery_single_truth.py'
@@ -73,6 +75,8 @@ on:
       - 'tests/unit/test_corporate_outbound_optout.py'
       - 'services/governance/noetfield_governance/corporate_workpacket.py'
       - 'tests/unit/test_corporate_workpacket.py'
+      - 'services/governance/noetfield_governance/corporate_rwa_execution.py'
+      - 'tests/unit/test_corporate_rwa_execution.py'
       - 'services/governance/noetfield_governance/private_commercial_scenario_lab.html'
       - 'tests/unit/test_commercial_scenario_lab.py'
       - 'tests/unit/test_commercial_delivery_single_truth.py'
@@ -143,6 +147,8 @@ jobs:
         run: python -m pytest -q tests/unit/test_corporate_outbound_optout.py
       - name: Verify paid scope to real WorkPacket and independent customer receipt contract
         run: python -m pytest -q tests/unit/test_corporate_workpacket.py
+      - name: Verify native paid RWA Clinic case execution without synthetic evidence
+        run: python -m pytest -q tests/unit/test_corporate_rwa_execution.py
       - name: Verify private fictional Company OS and RWA case lab without live side effects
         run: python -m pytest -q tests/unit/test_commercial_scenario_lab.py
       - name: Regression legacy intake delivery and closure require genuine verifier and buyer
