@@ -90,8 +90,16 @@ def test_public_bridge_contains_no_credentials_and_crm_ui_offers_google():
     desk=(root/"assets/opportunity-desk.html").read_text()
     assert 'targetOrigin="https://platform.noetfield.com"' in bridge
     assert '"/auth/operator-bridge/"' in bridge
-    assert 'type:"noetfield.operator.google.v1"' in bridge
-    assert "access_token:session.access_token" in bridge
+    bridge_js=(root/"assets/noetfield-operator-bridge-v2.js").read_text()
+    assert 'src="/assets/noetfield-operator-bridge-v2.js"' in bridge
+    assert "<script>" not in bridge
+    assert 'type:"noetfield.operator.google.v1"' in bridge_js
+    assert "access_token:session.access_token" in bridge_js
+    assert 'https://www.noetfield.com' in crm and 'https://noetfield.com' in crm
+    assert 'https://www.noetfield.com' in desk and 'https://noetfield.com' in desk
+    assert 'id="remember" checked' in crm
+    assert "<script>" not in (root/"auth/callback/index.html").read_text()
+    assert "<script>" not in (root/"auth/sign-in/index.html").read_text()
     assert 'id="google-signin"' in crm and 'id="google-login"' in desk
     assert 'autocomplete="current-password"' in crm
     assert 'autocomplete="current-password"' in desk
