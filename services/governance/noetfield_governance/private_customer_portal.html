@@ -62,18 +62,41 @@ async function load(token){
  const items=data.cases||[];
  $("#case-list").innerHTML=items.length?items.map(x=>{
  const checkout=safe(x.approved_checkout_url),scope=safe(x.scope_evidence),delivery=safe(x.delivery_evidence),accept=safe(x.customer_acceptance);
+ const packet=x.workpacket||{};
+ const artifact=packet.independently_verified?safe(packet.verified_artifact_url):null;
+ const verifier=packet.independently_verified?safe(packet.verifier_receipt_url):null;
  return '<article class="case"><div class="kicker">PRIVATE CLIENT ENGAGEMENT / '+esc(x.commercial_stage)+'</div><h2>'+esc(x.account_name)+'</h2>'+
  '<div class="line"><small>Service</small><strong>'+esc(x.offer.replaceAll("_"," "))+'</strong></div>'+
  '<div class="line"><small>Scope</small><strong>'+(x.scope_accepted?"Accepted · "+esc(x.scope_ref||"Source verified"):"Pending agreement")+'</strong></div>'+
  '<div class="line"><small>Provider payment status</small><strong>'+esc(x.payment_status)+'</strong></div>'+
  '<div class="line"><small>Amount</small><strong>'+money(x.payment_amount_minor,x.payment_currency?.toUpperCase())+'</strong></div>'+
  '<div class="line"><small>Delivery</small><strong>'+esc(x.delivery_state)+'</strong></div>'+
+ '<div class="line"><small>Independent WorkPacket verification</small><strong>'+esc(packet.state||"NOT_CREATED")+'</strong></div>'+
+ (artifact?'<a class="evidence" href="'+esc(artifact)+'" target="_blank" rel="noopener noreferrer">Review verified artifact</a>':"")+
+ (verifier?'<a class="evidence" href="'+esc(verifier)+'" target="_blank" rel="noopener noreferrer">Review independent verifier receipt</a>':"")+
+ (packet.independently_verified&&!packet.customer_accepted&&x.payment_status==="PAID_LIVE"?
+   '<button class="primary" type="button" data-accept-delivery="'+esc(x.deal_id)+'">Accept independently verified work</button>':"")+
+ (packet.customer_accepted?'<p class="note">Your acceptance is recorded. Commercial closure follows separately.</p>':"")+
  (scope?'<a class="evidence" href="'+esc(scope)+'" target="_blank" rel="noopener noreferrer">View approved scope evidence</a>':"")+
  (checkout?'<a class="link" href="'+esc(checkout)+'" target="_blank" rel="noopener noreferrer">Continue to approved Stripe checkout</a>':"")+
  (delivery?'<a class="evidence" href="'+esc(delivery)+'" target="_blank" rel="noopener noreferrer">View accepted deliverable</a>':"")+
  (accept?'<a class="evidence" href="'+esc(accept)+'" target="_blank" rel="noopener noreferrer">View acceptance record</a>':"")+
  '<p class="note">Recorded payment evidence is from signed Stripe events, not a bank balance.</p></article>'
  }).join(""):'<div class="waiting">No approved customer engagements are linked to this Google identity. Contact your Noetfield engagement manager for access.</div>';
+ $("#case-list").querySelectorAll("[data-accept-delivery]").forEach(button=>button.addEventListener("click",async()=>{
+  if(!inMemoryToken)return;
+  button.disabled=true;button.textContent="Recording authenticated acceptance…";
+  try{
+   const res=await fetch("/api/corporate-crm/customer/accept",{
+    method:"POST",headers:{"Authorization":"Bearer "+inMemoryToken,"Content-Type":"application/json"},
+    body:JSON.stringify({deal_id:button.dataset.acceptDelivery}),
+    cache:"no-store",credentials:"omit"});
+   const data=await res.json();
+   if(!res.ok)throw Error(data.detail||"Customer acceptance failed");
+   await load(inMemoryToken);
+  }catch(err){button.textContent=String(err.message||err);button.disabled=false}
+ }));
+
 }
 $("#google").addEventListener("click",()=>{
  const button=$("#google");$("#status").textContent="Opening Google sign-in…";
