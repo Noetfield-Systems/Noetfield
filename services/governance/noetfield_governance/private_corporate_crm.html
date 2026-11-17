@@ -94,6 +94,29 @@ a{color:#215f54}.inline-link{font-size:11px}
 .commercial-box p{line-height:1.7}
 .commercial-box .fields{margin-top:18px}
 .commercial-box .inline-link{color:#286746;font-weight:700;text-underline-offset:3px}
+
+.operations{margin:2px 0 24px;display:grid;grid-template-columns:minmax(260px,.82fr) minmax(0,1.2fr);gap:16px;align-items:start}
+.operations .panel-head h2{font-size:23px}
+.ops-inner{padding:19px 21px;display:grid;gap:14px}
+.ops-kpis{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.ops-kpis>div{background:#f5f8f3;border:1px solid #e1e8de;padding:12px;min-width:0}
+.ops-kpis span{font-size:10px;display:block;color:#77857a;line-height:1.4}
+.ops-kpis strong{font:400 24px/1.25 "Newsreader",Georgia,serif;display:block;margin-top:6px;color:#294a3f}
+.ops-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ops-actions button{font-size:11px;padding:9px 11px}
+.ops-note{color:#6a7c6e;font-size:11px;line-height:1.65;margin:0}
+.ops-queue{max-height:385px;overflow:auto}
+.ops-queue .ops-item{padding:14px 18px;border-bottom:1px solid #e7ece6;display:grid;gap:6px}
+.ops-queue .ops-item strong{color:#2b4339;font-size:12px}
+.ops-queue .ops-item p{color:#75877b;font-size:11px;line-height:1.55;margin:0}
+.ops-item .ops-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:#79877a;font-size:10px}
+.ops-item .ops-tag{background:#f2ede4;color:#916c40;padding:4px 7px;border-radius:2px;font-size:9px;font-weight:700;letter-spacing:.04em}
+.ops-item .ops-tag.critical{background:#f9e8df;color:#9c4c3c}
+.ops-item .ops-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.ops-item button{border:1px solid #d2dbd1;background:#fff;padding:7px 9px;color:#36554a;font-size:10px;border-radius:4px}
+#ops-recovery-status{min-height:20px;overflow-wrap:anywhere}
+@media(max-width:1100px){.operations{grid-template-columns:1fr}}
+@media(max-width:600px){.ops-kpis{grid-template-columns:1fr 1fr}.ops-inner{padding:15px}.operations{gap:10px}}
 </style>
 </head>
 <body>
@@ -132,6 +155,30 @@ a{color:#215f54}.inline-link{font-size:11px}
    <div class="metric"><small>Follow-ups due</small><strong class="copper" id="metric-due">—</strong></div>
    <div class="metric"><small>Companies in network</small><strong id="metric-accounts">—</strong></div>
    <div class="metric"><small>Matched paid checkouts · CAD / USD</small><strong class="sage" style="font-size:23px" id="metric-cash">—</strong></div>
+  </section>
+  <section class="operations" aria-label="Revenue operations">
+    <article class="panel">
+      <header class="panel-head"><h2>Revenue intelligence</h2><span class="small">Source-backed</span></header>
+      <div class="ops-inner">
+        <div class="ops-kpis">
+          <div><span>Estimated open pipeline · USD</span><strong id="ops-forecast-usd">—</strong></div>
+          <div><span>Estimated open pipeline · CAD</span><strong id="ops-forecast-cad">—</strong></div>
+          <div><span>Stripe-matched paid · USD</span><strong id="ops-paid-usd">—</strong></div>
+          <div><span>Stripe-matched paid · CAD</span><strong id="ops-paid-cad">—</strong></div>
+        </div>
+        <p class="ops-note" id="ops-scope">Forecast is an estimate, not money received. Verified Checkout is not the same as bank settlement.</p>
+        <div class="ops-actions">
+          <button class="ghost" type="button" id="ops-recover-preview">Preview missed enquiries</button>
+          <button class="primary" type="button" id="ops-recover-apply">Recover eligible leads</button>
+        </div>
+        <p class="ops-note" id="ops-recovery-status" role="status" aria-live="polite">Only genuine Noetfield inbound requests are eligible; no customer message is sent by recovery.</p>
+      </div>
+    </article>
+    <article class="panel">
+      <header class="panel-head"><h2>Priority work queue</h2><span class="small" id="ops-task-count">Evidence-aware next actions</span></header>
+      <div id="ops-queue" class="ops-queue" aria-live="polite"><p class="empty">Checking current commercial priorities…</p></div>
+      <div class="ops-inner"><p class="ops-note">Agent-ready recommendations and copyable sales drafts. Drafts are not sent, meetings are not booked, and delivery is not dispatched by this panel.</p></div>
+    </article>
   </section>
   <section id="data-view" class="workspace">
    <div class="panel">
@@ -315,8 +362,63 @@ function drawList(){
  if(state.view!=="pipeline")els.panel.innerHTML='<div class="panel-head"><h2>Corporate context</h2></div><div class="detail"><p>Accounts, people and partner relationships stay in Noetfield’s private corporate workspace. Web3 research contacts remain in Fieldwork.</p></div>';
  else if(!state.selected)els.panel.innerHTML='<div class="panel-head"><h2>Relationship details</h2></div><div class="empty">Select an opportunity to update its stage, owner, follow-up and activity.</div>';
 }
+let revenueOps = null;
+function renderRevenueOps(plan){
+ revenueOps=plan;
+ const forecast=plan.forecast_estimated_minor_sample||{};
+ const paid=plan.matched_paid_checkouts_minor_all||{};
+ $("#ops-forecast-usd").textContent=money(forecast.USD||0,"USD");
+ $("#ops-forecast-cad").textContent=money(forecast.CAD||0,"CAD");
+ $("#ops-paid-usd").textContent=money(paid.USD||0,"USD");
+ $("#ops-paid-cad").textContent=money(paid.CAD||0,"CAD");
+ $("#ops-scope").textContent=(plan.sample_is_complete?"All CRM opportunities":"First "+plan.sampled_deals+" of "+plan.total_deals+" CRM opportunities")+
+   " · Forecast is estimated; Stripe Checkout evidence is signed, source-matched and distinct from bank settlement.";
+ const tasks=(plan.actions||[]);
+ $("#ops-task-count").textContent=tasks.length+" suggested · "+(plan.due_count_all||0)+" due overall";
+ const list=$("#ops-queue");
+ if(!tasks.length){list.innerHTML='<div class="empty">No actionable deals yet. Use historical intake recovery or create a sourced commercial opportunity.</div>';return}
+ list.innerHTML=tasks.slice(0,12).map((t,i)=>
+ '<div class="ops-item"><div class="ops-meta"><span class="ops-tag '+(t.priority==="CRITICAL"?"critical":"")+'">'+esc(t.priority)+'</span><span>'+esc(t.stage)+'</span><span>'+esc(t.owner)+'</span><span>'+esc(due(t.due))+'</span></div>'+
+ '<strong>'+esc(t.account||"Unassigned company")+' · '+esc(offerName[t.offer]||t.offer)+'</strong>'+
+ '<p>'+esc(t.next_action||"Qualification needed")+'</p>'+
+ '<p>'+esc((t.reasons||[]).join(" · "))+'</p>'+
+ '<div class="ops-buttons"><button type="button" data-open-priority="'+esc(t.deal_id)+'">Open deal</button>'+
+ '<button type="button" data-copy-priority="'+i+'">Copy outreach draft</button></div></div>'
+ ).join("");
+ list.querySelectorAll("[data-open-priority]").forEach(button=>button.addEventListener("click",()=>{
+   setView("pipeline");selectDeal(button.dataset.openPriority);
+ }));
+ list.querySelectorAll("[data-copy-priority]").forEach(button=>button.addEventListener("click",async()=>{
+   const draft=tasks[Number(button.dataset.copyPriority)]?.draft;
+   if(!draft)return;
+   try{await navigator.clipboard.writeText("Subject: "+draft.subject+"\n\n"+draft.body);
+     $("#ops-recovery-status").textContent="Draft copied. It has not been sent to any customer.";
+   }catch{ $("#ops-recovery-status").textContent="Clipboard unavailable. Select and copy the draft from the browser permissions dialog."; }
+ }));
+}
+async function refreshRevenueOps(){
+ try{const plan=await api("/api/corporate-crm/operations/plan");renderRevenueOps(plan)}
+ catch(err){$("#ops-queue").innerHTML='<div class="empty">Revenue intelligence unavailable: '+esc(err.message)+'</div>'}
+}
+async function recoverMissingIntakes(execute){
+ const preview=$("#ops-recover-preview"),apply=$("#ops-recover-apply");
+ preview.disabled=true;apply.disabled=true;
+ $("#ops-recovery-status").textContent=execute?"Recovering eligible, real-source enquiries…":"Checking historical Noetfield intakes…";
+ try{
+   const report=await api("/api/corporate-crm/operations/recover-intakes",{
+     method:"POST",data:{execute,limit:80}
+   });
+   $("#ops-recovery-status").textContent=execute?
+     ("Recovered "+report.imported+" verified inbound cases; "+report.failed+" rejected or failed. No outreach or payment claimed.") :
+     ("Found "+report.eligible+" eligible historical sources in "+report.scanned+" reviewed; "+report.excluded_or_invalid+" excluded. Nothing changed.");
+   if(execute){await reload()}
+ }catch(err){$("#ops-recovery-status").textContent="Recovery rejected: "+err.message}
+ finally{preview.disabled=false;apply.disabled=false}
+}
+$("#ops-recover-preview").addEventListener("click",()=>recoverMissingIntakes(false));
+$("#ops-recover-apply").addEventListener("click",()=>recoverMissingIntakes(true));
 async function reload(){
- try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("")}
+ try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await refreshRevenueOps()}
  catch(e){message("Unable to read corporate workspace: "+e.message)}
 }
 function fillAccounts(){
