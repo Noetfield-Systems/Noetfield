@@ -64,6 +64,16 @@ async def prepare_workpackets(db:asyncpg.Connection)->None:
        verifier_receipt_url text,
        created_at timestamptz NOT NULL DEFAULT now()
     )""")
+    await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.corp_workpacket_acceptances (
+       id uuid PRIMARY KEY,
+       deal_id uuid NOT NULL REFERENCES noetfield.corp_crm_deals(id),
+       customer_email_hash text NOT NULL,
+       customer_subject_hash text NOT NULL,
+       workpacket_id uuid NOT NULL REFERENCES noetfield.corp_workpackets(id),
+       artifact_url text NOT NULL,
+       accepted_at timestamptz NOT NULL DEFAULT now(),
+       UNIQUE(deal_id,customer_email_hash)
+    )""")
 
 
 def validate_paid_case(row:dict[str,Any])->dict[str,Any]:
@@ -331,5 +341,84 @@ async def workpacket_for_deal(settings:object,*,deal_id:str)->dict[str,Any]:
                 "provider_acknowledged":r["state"] in {"ACKNOWLEDGED","RUNNING","VERIFIED"},
                 "independently_verified":r["state"]=="VERIFIED",
                 "customer_acceptance_verified":False}
+    finally:
+        await db.close()
+
+
+async def customer_accept_workpacket(settings:object,*,deal_id:str,
+                                     identity:dict[str,str])->dict[str,Any]:
+    """Explicit verified buyer action; independently verified artifact first."""
+    try:
+        identifier=uuid.UUID(deal_id)
+    except (ValueError,TypeError) as exc:
+        raise WorkPacketError("INVALID_DEAL_ID") from exc
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_workpackets(db)
+        async with db.transaction():
+            membership=await db.fetchrow("""SELECT ca.deal_id,w.id AS workpacket_id,
+               w.state,w.artifact_url,w.verifier_receipt_url,w.payment_event_id
+               FROM noetfield.corp_customer_access ca
+               JOIN noetfield.corp_workpackets w ON w.deal_id=ca.deal_id
+               WHERE ca.deal_id=$1 AND ca.email_hash=$2 AND ca.active=true
+               FOR UPDATE OF w""",identifier,identity["email_hash"])
+            if not membership:
+                raise WorkPacketError("CUSTOMER_MEMBERSHIP_OR_WORKPACKET_NOT_FOUND")
+            if membership["state"]!="VERIFIED" or not membership["artifact_url"] or not membership["verifier_receipt_url"]:
+                raise WorkPacketError("INDEPENDENT_VERIFIED_DELIVERABLE_REQUIRED")
+            paid=validate_paid_case(await _paid_row(db,identifier))
+            if paid["payment_event_id"]!=membership["payment_event_id"]:
+                raise WorkPacketError("CURRENT_LIVE_PAYMENT_REQUIRED")
+            ack=await db.fetchrow("""INSERT INTO noetfield.corp_workpacket_acceptances(
+                   id,deal_id,customer_email_hash,customer_subject_hash,workpacket_id,artifact_url)
+                   VALUES($1,$2,$3,$4,$5,$6)
+                   ON CONFLICT(deal_id,customer_email_hash) DO NOTHING
+                   RETURNING id""",uuid.uuid4(),identifier,identity["email_hash"],
+                   hashlib.sha256(identity["provider_subject"].encode()).hexdigest(),
+                   membership["workpacket_id"],membership["artifact_url"])
+            if not ack:
+                ack=await db.fetchrow("""SELECT id FROM noetfield.corp_workpacket_acceptances
+                        WHERE deal_id=$1 AND customer_email_hash=$2""",
+                        identifier,identity["email_hash"])
+            return {"accepted":True,"receipt_id":str(ack["id"]),
+                    "idempotent":not bool(ack.get("accepted_at") if isinstance(ack,dict) else False),
+                    "workpacket_id":str(membership["workpacket_id"]),
+                    "verified_customer_identity":True,
+                    "contract_signing_not_automated":True}
+    finally:
+        await db.close()
+
+
+async def check_accepted_delivery(settings:object,*,deal_id:str,
+                                  delivery_evidence:str,acceptance_url:str)->tuple[str,str]:
+    """Operator delivery transition must match signed verifier + actual customer acceptance."""
+    try:
+        identifier=uuid.UUID(deal_id)
+    except (ValueError,TypeError) as exc:
+        raise WorkPacketError("INVALID_DEAL_ID") from exc
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_workpackets(db)
+        row=await db.fetchrow("""SELECT w.artifact_url,w.state,w.verifier_receipt_url,
+                       a.id AS receipt_id,a.artifact_url AS accepted_artifact
+                 FROM noetfield.corp_workpackets w
+                 JOIN noetfield.corp_workpacket_acceptances a ON a.workpacket_id=w.id
+                 JOIN noetfield.corp_customer_access ca ON ca.deal_id=a.deal_id
+                      AND ca.email_hash=a.customer_email_hash AND ca.active=true
+                 WHERE w.deal_id=$1 ORDER BY a.accepted_at ASC LIMIT 1""",identifier)
+        if not row or row["state"]!="VERIFIED" or not row["verifier_receipt_url"]:
+            raise WorkPacketError("INDEPENDENT_VERIFIER_AND_CUSTOMER_ACCEPTANCE_REQUIRED")
+        if row["accepted_artifact"]!=row["artifact_url"]:
+            raise WorkPacketError("ACCEPTED_ARTIFACT_MISMATCH")
+        artifact=evidence_url(row["artifact_url"])
+        supplied=evidence_url(delivery_evidence) if delivery_evidence else artifact
+        if supplied!=artifact:
+            raise WorkPacketError("DELIVERY_EVIDENCE_MUST_MATCH_INDEPENDENT_ARTIFACT")
+        canonical_acceptance=("https://platform.noetfield.com/api/corporate-crm/"
+                              "customer/acceptance/"+str(row["receipt_id"]))
+        if acceptance_url and acceptance_url!=canonical_acceptance:
+            raise WorkPacketError("CUSTOMER_ACCEPTANCE_RECEIPT_MISMATCH")
+        paid=validate_paid_case(await _paid_row(db,identifier))
+        return artifact,canonical_acceptance
     finally:
         await db.close()
