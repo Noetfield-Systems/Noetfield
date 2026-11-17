@@ -75,7 +75,7 @@ async function run(){
    await page.route("https://fonts.googleapis.com/**",route=>route.abort());
    await page.route("https://fonts.gstatic.com/**",route=>route.abort());
    await page.goto(base+"/api/corporate-crm/app",{waitUntil:"domcontentloaded"});
-   await page.locator("#fieldwork-status").getByText("22 public organization sources",{exact:false}).waitFor({timeout:15000});
+   await page.waitForFunction(()=>document.querySelector("#fieldwork-status")?.textContent?.includes("22 public organization sources"),{timeout:15000});
    await page.getByRole("button",{name:"Qualify for Corporate CRM"}).last().click();
    const dialog=page.locator("#research-qualify-dialog");
    await dialog.waitFor({state:"visible"});
@@ -103,13 +103,13 @@ async function run(){
     await form.locator('[name="role_relevance"]').fill("This is a published partnership contact for a current operations role.");
     await form.locator('[name="publication_no_solicitation"]').check();
     await form.locator("#research-qualify-submit").click();
-    await page.locator("#research-qualify-status").getByText("VERIFIED_CONTACT_REVIEW_REQUIRED",{exact:false}).waitFor();
+    await page.waitForFunction(()=>document.querySelector("#research-qualify-status")?.textContent?.includes("VERIFIED_CONTACT_REVIEW_REQUIRED"));
     assert.equal(await form.locator("#research-qualify-submit").isEnabled(),true,
      "Server validation failure must reenable the submit button");
     await form.locator('[name="contact_email"]').fill("jane@example.org");
     await form.locator("#research-qualify-submit").click();
     await dialog.waitFor({state:"hidden"});
-    await page.locator("#feedback").getByText("Qualified opportunity opened in CRM",{exact:false}).waitFor({timeout:15000});
+    await page.waitForFunction(()=>document.querySelector("#feedback")?.textContent?.includes("Qualified opportunity opened in CRM"),{timeout:15000});
     assert.equal(await page.locator("#side-panel").getByText("Business Source 22",{exact:false}).count()>0,true);
     assert.equal(events.qualify.length,2,"Only explicit form submit reaches promotion");
     assert.equal(events.qualify[1].csrf,"test-csrf");
