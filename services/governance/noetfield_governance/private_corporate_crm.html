@@ -128,6 +128,47 @@ a{color:#215f54}.inline-link{font-size:11px}
 .growth-review b{font-size:12px;color:#2a473b}
 .growth-review small{color:#71877a;font-size:10px}
 .growth-review a{font-size:11px}
+/* Operator-first: readable content and actionable controls at all viewport widths. */
+.table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.panel-head,.heading,.top-actions{min-width:0}
+.panel-head{flex-wrap:wrap}
+.ops-queue .ops-item{min-width:0;overflow-wrap:anywhere}
+.ops-item .ops-buttons button{min-height:40px;text-align:left}
+.fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fields label,.fields input,.fields select,.fields textarea{min-width:0;max-width:100%}
+#research-qualify-dialog{position:fixed;width:min(620px,calc(100vw - 28px));max-width:620px;
+ max-height:min(90dvh,900px);overflow-y:auto;overscroll-behavior:contain;
+ padding:0;border:1px solid #d4ded2;border-radius:9px;
+ color:#223f34;background:#fffefb;box-shadow:0 25px 80px #102c2b48}
+#research-qualify-dialog::backdrop{background:rgba(9,33,29,.67);backdrop-filter:blur(3px)}
+.qualify-content{padding:clamp(18px,3vw,30px);display:grid;gap:15px}
+.qualify-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.qualify-heading h2{font:400 clamp(27px,3vw,36px)/1.1 "Newsreader",Georgia,serif;margin:4px 0 0}
+.qualify-close{flex:none;min-width:44px;min-height:44px}
+.qualify-source{background:#f3f7f1;border:1px solid #dfe9dc;padding:13px;overflow-wrap:anywhere;display:grid;gap:6px}
+.qualify-source strong{font-size:15px}
+.qualify-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.qualify-actions button{min-height:44px}
+.qualify-result{min-height:18px;margin:0;font-size:12px;line-height:1.5;color:#a05837;overflow-wrap:anywhere}
+@media(max-width:800px){.app{grid-template-columns:minmax(0,1fr);width:100%;max-width:100vw}
+ .side{min-width:0;max-width:100%;overflow:hidden}.side>div{min-width:0;max-width:100%}
+ .nav{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ .topbar{height:auto;min-height:58px;padding:11px 0;flex-wrap:wrap}
+ .heading{align-items:flex-start;flex-wrap:wrap}.main{width:100%;max-width:100vw}}
+@media(max-width:600px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .metric{min-width:0;padding:13px}.metric strong{font-size:clamp(22px,6vw,29px);overflow-wrap:anywhere}
+ .panel-head h2{font-size:22px}.heading .primary{min-height:44px;font-size:12px}
+ .fields{grid-template-columns:minmax(0,1fr)}.ops-queue .ops-item{padding:15px}
+ .ops-queue .ops-item button,.ops-actions button,.top-actions button{min-height:44px}
+ .ops-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ops-kpis strong{font-size:22px;overflow-wrap:anywhere}
+ .records{grid-template-columns:minmax(0,1fr);padding:12px}
+ .growth-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .growth-review-queue{grid-template-columns:minmax(0,1fr)}
+ .qualify-actions{display:grid;grid-template-columns:1fr}.qualify-content{padding:17px}
+ .qualify-actions button{width:100%}.qualify-source{font-size:12px}
+}
+@media(max-width:360px){.growth-stage-grid{grid-template-columns:minmax(0,1fr)}
+ .top-actions{width:100%;justify-content:space-between}.status{font-size:10px}}
 </style>
 </head>
 <body>
@@ -282,6 +323,9 @@ a{color:#215f54}.inline-link{font-size:11px}
   <div id="feedback" class="notice" role="status" aria-live="polite"></div>
  </div>
 </div>
+<dialog id="research-qualify-dialog" aria-labelledby="research-qualify-title">
+ <div id="research-qualify-content" class="qualify-content"></div>
+</dialog>
 <script>
 "use strict";
 const $=s=>document.querySelector(s);
@@ -296,10 +340,21 @@ function message(msg,good=false){els.feedback.textContent=msg;els.feedback.style
 async function api(path,{method="GET",data}={}){
  const headers={"Accept":"application/json"};
  if(data!==undefined){headers["Content-Type"]="application/json";headers["X-Desk-CSRF"]=state.csrf}
- const res=await fetch(path,{method,headers,body:data!==undefined?JSON.stringify(data):undefined,credentials:"same-origin",cache:"no-store"});
- let body={};try{body=await res.json()}catch{throw Error("Server returned an unreadable response")}
- if(!res.ok)throw Error(typeof body.detail==="string"?body.detail:res.status+" request failed");
- return body;
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),method==="GET"?15000:30000);
+ try{
+  const res=await fetch(path,{method,headers,body:data!==undefined?JSON.stringify(data):undefined,
+   credentials:"same-origin",cache:"no-store",signal:controller.signal});
+  let body={};try{body=await res.json()}catch{throw Error("Server returned an unreadable response")}
+  if(!res.ok){
+   const detail=Array.isArray(body.detail)?body.detail.map(x=>x.msg||"Invalid field").join("; "):
+    typeof body.detail==="string"?body.detail:res.status+" request failed";
+   throw Error(detail);
+  }
+  return body;
+ }catch(error){
+  if(error?.name==="AbortError")throw Error("Request timed out. No successful change confirmed; refresh the record before retrying.");
+  throw error;
+ }finally{clearTimeout(timeout)}
 }
 async function session(){
  try{const result=await api("/api/opportunities/desk/session");
@@ -433,63 +488,102 @@ function renderRevenueOps(plan){
    }catch{ $("#ops-recovery-status").textContent="Clipboard unavailable. Select and copy the draft from the browser permissions dialog."; }
  }));
 }
+const qualifyDialog=$("#research-qualify-dialog");
+qualifyDialog.addEventListener("click",event=>{if(event.target===qualifyDialog)qualifyDialog.close()});
+function openResearchQualification(item){
+ if(!item||item.promoted_deal_id)return;
+ const content=$("#research-qualify-content");
+ content.innerHTML='<div class="qualify-heading"><div><span class="eyebrow">Corporate discovery / verified promotion</span>'+
+  '<h2 id="research-qualify-title">Qualify an actual contact</h2></div>'+
+  '<button type="button" class="ghost qualify-close" data-qualify-close aria-label="Close qualification form">✕</button></div>'+
+  '<div class="qualify-source"><strong>'+esc(item.organization)+'</strong>'+
+  '<span class="small">Research only · '+esc(item.lane)+' · not a verified customer</span>'+
+  '<a class="inline-link" target="_blank" rel="noopener noreferrer" href="'+esc(safeURL(item.original_url))+'">Review original public source</a></div>'+
+  '<p class="ops-note">Enter a real named contact and documented contact basis. If you have not verified a contact, close this form and keep the organization in Research. No email is sent by qualifying.</p>'+
+  '<form id="research-qualify-form" class="fields">'+
+  '<label class="wide">Verified contact full name<input name="contact_name" required minlength="2" maxlength="140" autocomplete="name" placeholder="Actual decision-maker or business contact"></label>'+
+  '<label class="wide">Business email (not inferred or scraped)<input type="email" name="contact_email" required maxlength="254" autocomplete="email" placeholder="person@company.com"></label>'+
+  '<label class="wide">Documented contact permission basis<select name="contact_basis">'+
+  [["OPTED_IN","Explicit opt-in"],["EXISTING_RELATIONSHIP","Existing business relationship"],
+   ["PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL","Published business/partnership channel"],
+   ["INTRODUCED_BY_MUTUAL_CONTACT","Introduction from mutual contact"],
+   ["OTHER_DOCUMENTED_BASIS","Other documented basis"]].map(([key,label])=>
+    '<option value="'+key+'">'+label+'</option>').join("")+'</select></label>'+
+  '<label class="wide">Original contact/basis evidence URL<input name="contact_evidence" type="url" required maxlength="1000" placeholder="https://"></label>'+
+  '<label class="wide" data-public-channel hidden>Relevance to the published business role<textarea name="role_relevance" maxlength="500" minlength="20" placeholder="Describe the original listing and how this service directly relates to the recipient\'s current business role"></textarea></label>'+
+  '<label class="wide qualify-check" data-public-channel hidden><span><input type="checkbox" name="publication_no_solicitation"> I reviewed the original publication: no accompanying no-solicitation statement; this message is directly relevant to their role</span></label>'+
+  '<label>Account owner<input name="owner" value="Noetfield Revenue" required maxlength="120"></label>'+
+  '<label class="wide">Next action<input name="next_action" required maxlength="400" value="Qualify the actual buyer problem and scope"></label>'+
+  '<p class="qualify-result wide" id="research-qualify-status" role="status" aria-live="polite"></p>'+
+  '<div class="qualify-actions wide"><button type="button" class="ghost" data-qualify-cancel>Keep as research</button>'+
+  '<button class="primary" type="submit" id="research-qualify-submit">Create qualified opportunity</button></div></form>';
+ const form=content.querySelector("#research-qualify-form");
+ const close=()=>qualifyDialog.close();
+ content.querySelector("[data-qualify-close]").addEventListener("click",close);
+ content.querySelector("[data-qualify-cancel]").addEventListener("click",close);
+ const permission=form.querySelector('[name="contact_basis"]');
+ const updateEvidence=()=>{
+  const publicBasis=permission.value==="PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL";
+  form.querySelectorAll("[data-public-channel]").forEach(el=>el.hidden=!publicBasis);
+  form.querySelector('[name="role_relevance"]').required=publicBasis;
+  form.querySelector('[name="publication_no_solicitation"]').required=publicBasis;
+ };
+ permission.addEventListener("change",updateEvidence);updateEvidence();
+ form.addEventListener("submit",async event=>{
+  event.preventDefault();
+  if(!form.reportValidity())return;
+  const button=form.querySelector("#research-qualify-submit");
+  const status=form.querySelector("#research-qualify-status");
+  const original=button.textContent;
+  const data=Object.fromEntries(new FormData(form));
+  data.source_key=item.source_key;
+  data.publication_no_solicitation=form.querySelector('[name="publication_no_solicitation"]').checked;
+  data.role_relevance=data.role_relevance||"";
+  button.disabled=true;button.textContent="Saving qualified contact…";
+  status.textContent="Checking the source and saving the real CRM record…";
+  try{
+   const promoted=await api("/api/corporate-crm/research/promote",{method:"POST",data});
+   qualifyDialog.close();
+   message("Qualified source saved in CRM. No outreach was sent.",true);
+   setView("pipeline");
+   await reload();
+   await selectDeal(promoted.deal_id);
+   $("#data-view").scrollIntoView({behavior:"smooth",block:"start"});
+   message("Qualified opportunity opened in CRM. No outreach was sent.",true);
+  }catch(error){
+   status.textContent="Qualification was not confirmed: "+String(error.message||error)+
+    ". Correct the information and retry, or refresh the research record.";
+  }finally{button.disabled=false;button.textContent=original}
+ });
+ qualifyDialog.showModal();
+ form.querySelector('[name="contact_name"]').focus();
+}
 async function loadFieldworkResearch(){
  const box=$("#fieldwork-items");
  try{
-   const [report,state]=await Promise.all([
-     api("/api/corporate-crm/research?limit=100"),
-     api("/api/corporate-crm/research/status")
-   ]);
-   const rows=report.items||[];
-   $("#fieldwork-status").textContent=report.total_staged+
-     " public organization sources · "+(state.last?.state||"NOT_RUN");
-   box.innerHTML=rows.length?rows.slice(0,45).map((a,i)=>
-     '<article class="ops-item"><div class="ops-meta"><span class="ops-tag">'+esc(a.lane)+'</span><span>'+esc(a.review_status)+'</span><span>Research score '+esc(a.score)+'</span></div>'+
-     '<strong>'+esc(a.organization)+'</strong>'+
-     '<p>Source: <a class="inline-link" rel="noopener noreferrer" target="_blank" href="'+esc(safeURL(a.original_url)||"#")+'">'+esc(a.original_url)+'</a></p>'+
-     '<div class="ops-buttons">'+(a.promoted_deal_id?
-      '<span class="small">Promoted to CRM · '+esc(a.promoted_deal_id)+'</span>':
-      '<button type="button" data-promote="'+i+'">Qualify for Corporate CRM</button>')+'</div></article>'
-    ).join(""):'<div class="empty">No sourced corporate organizations have been staged. Check the Fieldwork bridge status or sync the original research source.</div>';
-   box.querySelectorAll("[data-promote]").forEach(button=>button.addEventListener("click",()=>{
-     const item=rows[Number(button.dataset.promote)];
-     if(!item)return;
-     const container=button.closest(".ops-item"),form=document.createElement("form");
-     form.className="fields";form.style.marginTop="12px";
-     form.innerHTML='<label class="wide">Verified contact full name<input name="contact_name" required minlength="2"></label>'+
-      '<label class="wide">Business email (not inferred or scraped)<input type="email" name="contact_email" required></label>'+
-      '<label class="wide">Documented contact permission basis<select name="contact_basis">'+
-      ["OPTED_IN","EXISTING_RELATIONSHIP","PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL","INTRODUCED_BY_MUTUAL_CONTACT","OTHER_DOCUMENTED_BASIS"].map(x=>'<option>'+x+'</option>').join("")+'</select></label>'+
-      '<label class="wide">Original contact/basis evidence URL<input name="contact_evidence" type="url" required placeholder="https://"></label>'+
-      '<label class="wide" data-public-channel style="display:none">Why is this published address relevant to the recipient’s business role?<textarea name="role_relevance" maxlength="500" placeholder="Source page, current duties and relevance of this specific pilot"></textarea></label>'+
-      '<label class="wide" data-public-channel style="display:none"><input type="checkbox" name="publication_no_solicitation"> I reviewed the original published address: no accompanying no-solicitation statement and this message is directly relevant to their role</label>'+
-      '<label>Account owner<input name="owner" value="Noetfield Revenue" required></label>'+
-      '<label class="wide">Next action<input name="next_action" required value="Qualify the actual buyer problem and scope"></label>'+
-      '<button class="primary" type="submit">Create qualified opportunity</button>';
-     button.disabled=true;container.appendChild(form);
-     const permission=form.querySelector('[name="contact_basis"]');
-     const updateEvidence=()=>{
-       const publicBasis=permission.value==="PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL";
-       form.querySelectorAll("[data-public-channel]").forEach(element=>element.style.display=publicBasis?"flex":"none");
-       form.querySelector('[name="role_relevance"]').required=publicBasis;
-       form.querySelector('[name="publication_no_solicitation"]').required=publicBasis;
-     };
-     permission.addEventListener("change",updateEvidence);updateEvidence();
-     form.addEventListener("submit",async event=>{
-       event.preventDefault();
-       const data=Object.fromEntries(new FormData(form));
-       data.source_key=item.source_key;
-       data.publication_no_solicitation=form.querySelector('[name="publication_no_solicitation"]').checked;
-       try{
-         const promoted=await api("/api/corporate-crm/research/promote",{method:"POST",data});
-         message("Source qualified into CRM; no outreach sent.",true);
-         await reload(); await selectDeal(promoted.deal_id);
-       }catch(err){message("Could not qualify source: "+err.message)}
-     });
-   }));
- }catch(err){
-   $("#fieldwork-status").textContent="Fieldwork source bridge unavailable";
-   box.innerHTML='<div class="empty">'+esc(err.message)+'. Existing CRM records remain available.</div>';
+  const [report,researchStatus]=await Promise.all([
+   api("/api/corporate-crm/research?limit=100"),
+   api("/api/corporate-crm/research/status")
+  ]);
+  const rows=report.items||[];
+  $("#fieldwork-status").textContent=report.total_staged+
+   " public organization sources · "+(researchStatus.last?.state||"NOT_RUN");
+  box.innerHTML=rows.length?rows.map((item,i)=>
+   '<article class="ops-item"><div class="ops-meta"><span class="ops-tag">'+esc(item.lane)+'</span>'+
+   '<span>'+esc(item.review_status)+'</span><span>Research score '+esc(item.score)+'</span></div>'+
+   '<strong>'+esc(item.organization)+'</strong>'+
+   '<p>Source: <a class="inline-link" rel="noopener noreferrer" target="_blank" href="'+esc(safeURL(item.original_url)||"#")+'">'+esc(item.original_url)+'</a></p>'+
+   '<div class="ops-buttons">'+(item.promoted_deal_id?
+    '<span class="small">Promoted to CRM · '+esc(item.promoted_deal_id)+'</span>':
+    '<button type="button" data-promote="'+i+'" aria-haspopup="dialog">Qualify for Corporate CRM</button>')+
+   '</div></article>'
+  ).join(""):'<div class="empty">No sourced organizations are staged. Check the Fieldwork bridge or sync original research.</div>';
+  box.querySelectorAll("[data-promote]").forEach(button=>button.addEventListener("click",()=>{
+   openResearchQualification(rows[Number(button.dataset.promote)]);
+  }));
+ }catch(error){
+  $("#fieldwork-status").textContent="Fieldwork source bridge unavailable";
+  box.innerHTML='<div class="empty">'+esc(error.message)+'. Existing CRM records remain available.</div>';
  }
 }
 $("#fieldwork-sync").addEventListener("click",async()=>{
