@@ -6,8 +6,9 @@ facts, contact consent, customer messages or money. Bound model spend with a
 durable per-day reservation ledger (including failed attempts) and re-use
 unchanged source analysis instead of re-billing.
 
-Existing platform OPENROUTER_API_KEY and OPENROUTER_MODEL are used server-side;
-the key, raw provider response and private CRM identities never reach clients.
+Paid configured Company OS model and Agent Fabric are the default routes.
+Legacy platform OpenRouter is disabled unless explicitly opted in with a
+NON-FREE model. No provider key or private CRM identity reaches clients.
 """
 from __future__ import annotations
 
@@ -32,6 +33,9 @@ logger=logging.getLogger("noetfield.governance.corporate_founder_ai")
 _URL="https://openrouter.ai/api/v1/chat/completions"
 _MAX_DAILY_ATTEMPTS=20
 _MAX_BATCH=2
+# Shared with the Agent Fabric's verified source-task identity. Change the
+# revision when switching provider policy to avoid reusing exhausted tasks.
+_ROUTING_REVISION="paid-first-20261117-v2"
 _ALLOWED_FIT={"STRONG_FIT","POSSIBLE_FIT","INSUFFICIENT_EVIDENCE","OUT_OF_SCOPE"}
 _ALLOWED_ROLES={"Founder / CEO","Head of Sales","Revenue Operations",
                 "Operations Lead","Partnerships Lead","Asset Originator"}
@@ -60,14 +64,24 @@ Do not pretend to visit URLs or research beyond the supplied quoted public text.
 
 
 def _model_routes()->list[dict[str,str]]:
-    """Company OS existing model credentials first, scoped to public research only.
+    """Paid models first, never let a free or expired OpenRouter block work.
 
-    Credential values stay in Railway secret references and backend memory.
-    Avoid using the invalid platform OpenRouter key when Company OS is ready.
+    Company OS already has a configured primary model; Fabric has its own
+    keyed DeepSeek-first failover. The separately configured Company OS
+    fallback stays available, but known free-model IDs are skipped.
     """
     routes=[]
-    # Prefer the actual authenticated Agent Fabric runtime over three 401 keys.
-    # The Fabric owns provider selection (Cloudflare GLM/DeepSeek), but not CRM.
+    base=os.getenv("CORPORATE_AI_LLM_BASE_URL","").strip().rstrip("/")
+    key=os.getenv("CORPORATE_AI_LLM_API_KEY","").strip()
+    model=os.getenv("CORPORATE_AI_LLM_MODEL","").strip()
+    if (base.startswith("https://") and len(key)>=8 and model
+            and not model.casefold().endswith(":free")
+            and not any(x in base for x in ("@","?","#"))):
+        from urllib.parse import urlsplit
+        u=urlsplit(base)
+        if u.scheme=="https" and u.hostname and u.port in (None,443):
+            routes.append({"url":base+"/chat/completions",
+                "key":key,"model":model,"route":"COMPANY_OS_EXISTING_MODEL"})
     fabric_url=os.getenv("CORPORATE_FABRIC_CRM_BASE_URL","").strip().rstrip("/")
     fabric_key=os.getenv("CORPORATE_FABRIC_CRM_BRIDGE_TOKEN","").strip()
     if fabric_url and len(fabric_key)>=48:
@@ -80,33 +94,23 @@ def _model_routes()->list[dict[str,str]]:
             routes.append({
                 "url":fabric_url+"/api/internal/v1/founder-crm/analyze",
                 "key":fabric_key,
-                "model":"fabric-multi-provider",
+                "model":"fabric-paid-native-first",
                 "route":"AGENT_FABRIC_SOURCE_SPECIALIST"})
-    base=os.getenv("CORPORATE_AI_LLM_BASE_URL","").strip().rstrip("/")
-    key=os.getenv("CORPORATE_AI_LLM_API_KEY","").strip()
-    model=os.getenv("CORPORATE_AI_LLM_MODEL","").strip()
-    if (base.startswith("https://") and key and model
-            and not any(x in base for x in ("@", "?","#"))):
-        from urllib.parse import urlsplit
-        u=urlsplit(base)
-        if u.scheme=="https" and u.hostname and u.port in (None,443):
-            routes.append({"url":base+"/chat/completions",
-                "key":key,"model":model,"route":"COMPANY_OS_EXISTING_MODEL"})
-    # Company OS's independently configured fallback credential is separate
-    # from its primary model credential. This calls only public source analysis.
     fallback_key=os.getenv("CORPORATE_AI_COMPANY_FALLBACK_API_KEY","").strip()
     fallback_model=os.getenv("CORPORATE_AI_COMPANY_FALLBACK_MODEL","").strip()
-    if fallback_key and fallback_model:
+    if len(fallback_key)>=8 and fallback_model and not fallback_model.casefold().endswith(":free"):
         routes.append({"url":_URL,"key":fallback_key,
             "model":fallback_model,"route":"COMPANY_OS_OPENROUTER_FALLBACK"})
-    # Existing platform OpenRouter is the final alternate, never a prerequisite.
+    # In particular, an old expired platform OpenRouter key is NOT silently
+    # reused. A deliberate opt-in is required, and :free is never eligible.
     old_key=os.getenv("OPENROUTER_API_KEY","").strip()
     old_model=os.getenv("OPENROUTER_MODEL","").strip()
-    if old_key and old_model:
+    if (os.getenv("CORPORATE_AI_ENABLE_LEGACY_OPENROUTER","").strip()=="1"
+            and len(old_key)>=8 and old_model
+            and not old_model.casefold().endswith(":free")):
         routes.append({"url":_URL,"key":old_key,"model":old_model,
             "route":"PLATFORM_OPENROUTER"})
     return routes
-
 
 def configured() -> bool:
     return bool(_model_routes())
@@ -232,6 +236,20 @@ async def _recover_fabric_task(client:httpx.AsyncClient,route:dict[str,str],
     raise ValueError("MODEL_FABRIC_PENDING_READBACK")
 
 
+def _fabric_terminal_or_unavailable(error:ValueError)->bool:
+    """These errors mean the previous Fabric task cannot complete now.
+
+    A real ACTIVE task is not a provider failure: continue readback instead
+    of starting a duplicate Fabric inference. FAILED / disconnected fabric
+    must never block a separate paid provider.
+    """
+    code=str(error)
+    return (code in {"MODEL_FABRIC_TASK_FAILED","MODEL_FABRIC_TASK_NOT_FOUND",
+                     "MODEL_FABRIC_READBACK_UNAVAILABLE",
+                     "MODEL_FABRIC_READBACK_INVALID"}
+            or code.startswith("MODEL_FABRIC_READBACK_HTTP_"))
+
+
 async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
     """One model analysis with existing Company OS provider-first failover.
 
@@ -252,7 +270,8 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
         if is_fabric:
             signature=_source_signature(row)
             source_key=str(row.get("source_key") or "")
-            task_id="fca_"+hashlib.sha256((source_key+"|"+signature).encode()).hexdigest()[:32]
+            task_id="fca_"+hashlib.sha256(
+                (source_key+"|"+signature+"|"+_ROUTING_REVISION).encode()).hexdigest()[:32]
             body={"task_id":task_id,"source_key":source_key,
                   "source_signature":signature,"source":source}
             headers={"X-Founder-CRM-Bridge-Key":route["key"],
@@ -275,33 +294,46 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
             last_error="MODEL_PROVIDER_NETWORK_UNAVAILABLE_"+route["route"]
             logger.warning("corporate_founder_ai_route_failure=%s",last_error)
             if is_fabric:
-                async with httpx.AsyncClient(
-                        trust_env=False,timeout=12,follow_redirects=False) as reader:
-                    return await _recover_fabric_task(reader,route,
-                        task_id=task_id,source_key=source_key,
-                        signature=signature,source=source)
+                try:
+                    async with httpx.AsyncClient(
+                            trust_env=False,timeout=12,follow_redirects=False) as reader:
+                        return await _recover_fabric_task(reader,route,
+                            task_id=task_id,source_key=source_key,
+                            signature=signature,source=source)
+                except ValueError as exc:
+                    if not _fabric_terminal_or_unavailable(exc):
+                        raise
+                    last_error=str(exc)
+                    logger.warning("corporate_founder_ai_route_failure=%s",last_error)
             continue
         if is_fabric and response.status_code in (200,202,409):
             try:
                 content_reply=response.json()
                 if response.status_code==409 or content_reply.get("state") in (
                         "RUNNING","RETRY_COOLDOWN"):
-                    async with httpx.AsyncClient(
-                            trust_env=False,timeout=12,follow_redirects=False) as reader:
-                        return await _recover_fabric_task(reader,route,
-                            task_id=task_id,source_key=source_key,
-                            signature=signature,source=source)
+                    try:
+                        async with httpx.AsyncClient(
+                                trust_env=False,timeout=12,follow_redirects=False) as reader:
+                            return await _recover_fabric_task(reader,route,
+                                task_id=task_id,source_key=source_key,
+                                signature=signature,source=source)
+                    except ValueError as exc:
+                        if not _fabric_terminal_or_unavailable(exc):
+                            raise
+                        last_error=str(exc)
+                        logger.warning("corporate_founder_ai_route_failure=%s",last_error)
+                        continue
             except ValueError as exc:
-                # A pending/cached mission may not trigger another provider.
                 if str(exc).startswith("MODEL_FABRIC_"):
                     raise
                 raise ValueError("MODEL_FABRIC_RECEIPT_UNUSABLE") from exc
         if response.status_code!=200:
             last_error="MODEL_HTTP_"+str(response.status_code)+"_"+route["route"]
             logger.warning("corporate_founder_ai_route_failure=%s",last_error)
-            if is_fabric:
-                raise ValueError(last_error)
-            if response.status_code in (401,403,429,500,502,503,504):
+            # A failed Fabric attempt is not a global outage. Continue to
+            # other already-configured paid providers; do not reserve a new
+            # Fabric task or report a synthetic successful analysis.
+            if response.status_code in (401,403,404,409,429,500,502,503,504):
                 continue
             raise ValueError(last_error)
         try:
