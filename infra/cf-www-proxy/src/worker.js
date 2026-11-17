@@ -54,7 +54,7 @@ const WWW_HTML_CSP =
   "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self' https://www.noetfield.com https://noetfield.com https://platform.noetfield.com https://api.noetfield.com https://scan.noetfield.com; upgrade-insecure-requests";
 
 
-const AUTH_PATHS = new Set(["/auth/operator-bridge", "/auth/callback", "/auth/sign-in"]);
+const AUTH_PATHS = new Set(["/auth/operator-bridge", "/auth/customer-bridge", "/auth/callback", "/auth/sign-in"]);
 // The operator / Google flows require the already-used Supabase client and OAuth API.
 // Keep marketing/other pages on the stricter default CSP; no inline JS anywhere.
 const WWW_AUTH_CSP = WWW_HTML_CSP
