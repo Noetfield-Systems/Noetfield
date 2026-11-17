@@ -281,8 +281,14 @@ async def prepare_ai(db:asyncpg.Connection)->None:
        prompt_tokens int NOT NULL DEFAULT 0,
        completion_tokens int NOT NULL DEFAULT 0,
        cost_usd numeric,
+       model_route text NOT NULL DEFAULT 'LEGACY_PROVIDER',
+       artifact_sha256 text,
        analyzed_at timestamptz NOT NULL DEFAULT now()
     )""")
+    await db.execute("""ALTER TABLE noetfield.corp_founder_ai
+      ADD COLUMN IF NOT EXISTS model_route text NOT NULL DEFAULT 'LEGACY_PROVIDER'""")
+    await db.execute("""ALTER TABLE noetfield.corp_founder_ai
+      ADD COLUMN IF NOT EXISTS artifact_sha256 text""")
     await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.corp_founder_ai_attempts (
        id uuid PRIMARY KEY,
        source_key text NOT NULL REFERENCES noetfield.corp_research_sources(source_key),
@@ -349,19 +355,25 @@ async def run_ai_batch(settings:object,*,limit:int=2,
             if isinstance(answer,dict):
                 await db.execute("""INSERT INTO noetfield.corp_founder_ai(
                   source_key,source_signature,analysis_json,model,generation_id,
-                  prompt_tokens,completion_tokens,cost_usd,analyzed_at)
-                  VALUES($1,$2,$3,$4,$5,$6,$7,$8,now())
+                  prompt_tokens,completion_tokens,cost_usd,model_route,
+                  artifact_sha256,analyzed_at)
+                  VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,now())
                   ON CONFLICT(source_key) DO UPDATE SET
                   source_signature=excluded.source_signature,
                   analysis_json=excluded.analysis_json,model=excluded.model,
                   generation_id=excluded.generation_id,
                   prompt_tokens=excluded.prompt_tokens,
                   completion_tokens=excluded.completion_tokens,
-                  cost_usd=excluded.cost_usd,analyzed_at=now()""",
+                  cost_usd=excluded.cost_usd,
+                  model_route=excluded.model_route,
+                  artifact_sha256=excluded.artifact_sha256,
+                  analyzed_at=now()""",
                   row["source_key"],signature,json.dumps(answer["analysis"]),
                   answer["model"],answer["generation_id"],
                   answer["prompt_tokens"],answer["completion_tokens"],
-                  Decimal(str(answer["cost_usd"])) if answer["cost_from_provider"] else None)
+                  Decimal(str(answer["cost_usd"])) if answer["cost_from_provider"] else None,
+                  answer.get("model_route","LEGACY_PROVIDER"),
+                  answer.get("artifact_sha256"))
                 await db.execute("""UPDATE noetfield.corp_founder_ai_attempts
                   SET state='PROVIDER_COMPLETED' WHERE id=$1""",attempt_id)
                 completed+=1
@@ -389,7 +401,7 @@ async def founder_ai_board(settings:object,*,limit:int=25)->dict[str,Any]:
         await prepare_ai(db)
         rows=await db.fetch("""SELECT a.source_key,a.analysis_json,a.model,
            a.generation_id,a.prompt_tokens,a.completion_tokens,a.cost_usd,
-           a.analyzed_at
+           a.model_route,a.artifact_sha256,a.analyzed_at
            FROM noetfield.corp_founder_ai a
            JOIN noetfield.corp_research_sources r ON r.source_key=a.source_key
            WHERE r.promoted_deal_id IS NULL
@@ -408,6 +420,9 @@ async def founder_ai_board(settings:object,*,limit:int=25)->dict[str,Any]:
                 "source_key":row["source_key"],
                 "analysis":json.loads(row["analysis_json"]),
                 "model":row["model"],
+                "provider_route":row["model_route"],
+                "artifact_sha256":row["artifact_sha256"],
+                "independent_verification":False,
                 "generation_id":row["generation_id"],
                 "input_tokens":int(row["prompt_tokens"]),
                 "output_tokens":int(row["completion_tokens"]),
