@@ -425,3 +425,32 @@ async def check_accepted_delivery(settings:object,*,deal_id:str,
         return artifact,canonical_acceptance
     finally:
         await db.close()
+
+
+async def acceptance_receipt(settings:object,*,receipt_id:str)->dict[str,Any]:
+    """Private, immutable receipt readback used by the canonical commercial ledger."""
+    try:
+        ident=uuid.UUID(receipt_id)
+    except (ValueError,TypeError) as exc:
+        raise WorkPacketError("INVALID_CUSTOMER_ACCEPTANCE_ID") from exc
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_workpackets(db)
+        row=await db.fetchrow("""SELECT a.id,a.deal_id,a.workpacket_id,a.artifact_url,
+                a.accepted_at,w.state,w.verifier_receipt_url
+            FROM noetfield.corp_workpacket_acceptances a
+            JOIN noetfield.corp_workpackets w ON w.id=a.workpacket_id
+            WHERE a.id=$1""",ident)
+        if not row:
+            raise WorkPacketError("CUSTOMER_ACCEPTANCE_NOT_FOUND")
+        return {"schema":"noetfield.customer-delivery-acceptance.v1",
+                "receipt_id":str(row["id"]),"deal_id":str(row["deal_id"]),
+                "workpacket_id":str(row["workpacket_id"]),
+                "accepted_artifact":row["artifact_url"],
+                "accepted_at":row["accepted_at"].isoformat(),
+                "independent_verifier_receipt":row["verifier_receipt_url"],
+                "workpacket_state":row["state"],
+                "verified_customer_identity":True,
+                "private_customer_email_not_exposed":True}
+    finally:
+        await db.close()
