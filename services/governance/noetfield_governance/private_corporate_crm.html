@@ -182,6 +182,18 @@ a{color:#215f54}.inline-link{font-size:11px}
       <div class="ops-inner"><p class="ops-note">Agent-ready recommendations and copyable sales drafts. Drafts are not sent, meetings are not booked, and delivery is not dispatched by this panel.</p></div>
     </article>
   </section>
+
+  <section class="panel" id="fieldwork-research" style="margin-bottom:23px">
+    <header class="panel-head"><h2>Corporate discovery · original sources</h2><span class="small" id="fieldwork-status">Checking authenticated Fieldwork source bridge…</span></header>
+    <div class="ops-inner">
+      <p class="ops-note">Source-backed public organization research from Fieldwork CORPORATE / RWA. These are NOT verified buyers, contact permissions or sent outreach. No private Web3 contacts are imported.</p>
+      <div class="ops-actions">
+        <button class="primary" type="button" id="fieldwork-sync">Sync original research</button>
+        <button class="ghost" type="button" id="fieldwork-reload">Refresh research</button>
+      </div>
+    </div>
+    <div id="fieldwork-items" class="ops-queue"><p class="empty">Research loading…</p></div>
+  </section>
   <section id="data-view" class="workspace">
    <div class="panel">
     <div class="panel-head"><h2 id="list-title">Commercial opportunities</h2><span class="small" id="records-label">Source-backed and operator-owned</span></div>
@@ -398,6 +410,62 @@ function renderRevenueOps(plan){
    }catch{ $("#ops-recovery-status").textContent="Clipboard unavailable. Select and copy the draft from the browser permissions dialog."; }
  }));
 }
+async function loadFieldworkResearch(){
+ const box=$("#fieldwork-items");
+ try{
+   const [report,state]=await Promise.all([
+     api("/api/corporate-crm/research?limit=100"),
+     api("/api/corporate-crm/research/status")
+   ]);
+   const rows=report.items||[];
+   $("#fieldwork-status").textContent=report.total_staged+
+     " public organization sources · "+(state.last?.state||"NOT_RUN");
+   box.innerHTML=rows.length?rows.slice(0,45).map((a,i)=>
+     '<article class="ops-item"><div class="ops-meta"><span class="ops-tag">'+esc(a.lane)+'</span><span>'+esc(a.review_status)+'</span><span>Research score '+esc(a.score)+'</span></div>'+
+     '<strong>'+esc(a.organization)+'</strong>'+
+     '<p>Source: <a class="inline-link" rel="noopener noreferrer" target="_blank" href="'+esc(safeURL(a.original_url)||"#")+'">'+esc(a.original_url)+'</a></p>'+
+     '<div class="ops-buttons">'+(a.promoted_deal_id?
+      '<span class="small">Promoted to CRM · '+esc(a.promoted_deal_id)+'</span>':
+      '<button type="button" data-promote="'+i+'">Qualify for Corporate CRM</button>')+'</div></article>'
+    ).join(""):'<div class="empty">No sourced corporate organizations have been staged. Check the Fieldwork bridge status or sync the original research source.</div>';
+   box.querySelectorAll("[data-promote]").forEach(button=>button.addEventListener("click",()=>{
+     const item=rows[Number(button.dataset.promote)];
+     if(!item)return;
+     const container=button.closest(".ops-item"),form=document.createElement("form");
+     form.className="fields";form.style.marginTop="12px";
+     form.innerHTML='<label class="wide">Verified contact full name<input name="contact_name" required minlength="2"></label>'+
+      '<label class="wide">Business email (not inferred or scraped)<input type="email" name="contact_email" required></label>'+
+      '<label class="wide">Documented contact permission basis<select name="contact_basis">'+
+      ["OPTED_IN","EXISTING_RELATIONSHIP","PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL","INTRODUCED_BY_MUTUAL_CONTACT","OTHER_DOCUMENTED_BASIS"].map(x=>'<option>'+x+'</option>').join("")+'</select></label>'+
+      '<label class="wide">Original contact/basis evidence URL<input name="contact_evidence" type="url" required placeholder="https://"></label>'+
+      '<label>Account owner<input name="owner" value="Noetfield Revenue" required></label>'+
+      '<label class="wide">Next action<input name="next_action" required value="Qualify the actual buyer problem and scope"></label>'+
+      '<button class="primary" type="submit">Create qualified opportunity</button>';
+     button.disabled=true;container.appendChild(form);
+     form.addEventListener("submit",async event=>{
+       event.preventDefault();
+       const data=Object.fromEntries(new FormData(form));data.source_key=item.source_key;
+       try{
+         const promoted=await api("/api/corporate-crm/research/promote",{method:"POST",data});
+         message("Source qualified into CRM; no outreach sent.",true);
+         await reload(); await selectDeal(promoted.deal_id);
+       }catch(err){message("Could not qualify source: "+err.message)}
+     });
+   }));
+ }catch(err){
+   $("#fieldwork-status").textContent="Fieldwork source bridge unavailable";
+   box.innerHTML='<div class="empty">'+esc(err.message)+'. Existing CRM records remain available.</div>';
+ }
+}
+$("#fieldwork-sync").addEventListener("click",async()=>{
+ const btn=$("#fieldwork-sync");btn.disabled=true;$("#fieldwork-status").textContent="Checking original-source bridge…";
+ try{const report=await api("/api/corporate-crm/research/sync",{method:"POST",data:{}});
+   message("Original source research refreshed: "+(report.created||0)+" new rows; no emails sent.",true);
+   await loadFieldworkResearch();
+ }catch(err){message("Fieldwork research sync failed: "+err.message)}
+ finally{btn.disabled=false}
+});
+$("#fieldwork-reload").addEventListener("click",()=>loadFieldworkResearch());
 async function refreshRevenueOps(){
  try{const plan=await api("/api/corporate-crm/operations/plan");renderRevenueOps(plan)}
  catch(err){$("#ops-queue").innerHTML='<div class="empty">Revenue intelligence unavailable: '+esc(err.message)+'</div>'}
@@ -440,7 +508,7 @@ $("#ops-run-cycle").addEventListener("click",async()=>{
  finally{button.disabled=false}
 });
 async function reload(){
- try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await refreshRevenueOps()}
+ try{state.board=await api("/api/corporate-crm/board?limit=200");metrics();drawList();fillAccounts();message("");await Promise.all([refreshRevenueOps(),loadFieldworkResearch()])}
  catch(e){message("Unable to read corporate workspace: "+e.message)}
 }
 function fillAccounts(){
