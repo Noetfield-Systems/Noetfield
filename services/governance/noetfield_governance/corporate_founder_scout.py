@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import ipaddress
+import json
 import logging
 import re
 import socket
@@ -47,6 +48,9 @@ class _PageSignals(HTMLParser):
         self.links: list[tuple[str, str]] = []
         self._anchor: str | None = None
         self._anchor_text: list[str] = []
+        self._json_active = False
+        self._json_parts: list[str] = []
+        self.jsonld: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         fields = {key.lower(): (value or "") for key, value in attrs}
@@ -59,14 +63,24 @@ class _PageSignals(HTMLParser):
         elif tag == "a":
             self._anchor = fields.get("href", "")
             self._anchor_text = []
+        elif tag == "script" and fields.get("type","").lower()=="application/ld+json":
+            self._json_active = True
+            self._json_parts = []
 
     def handle_data(self, data: str) -> None:
+        if self._json_active and sum(map(len,self._json_parts)) < 40000:
+            self._json_parts.append(data[:40000])
         if self.in_title and len(self.title) < 220:
             self.title += data[:220]
         if self._anchor is not None and len(self._anchor_text) < 20:
             self._anchor_text.append(data[:100])
 
     def handle_endtag(self, tag: str) -> None:
+        if tag == "script" and self._json_active:
+            self._json_active = False
+            if self._json_parts and len(self.jsonld) < 6:
+                self.jsonld.append("".join(self._json_parts)[:40000])
+            self._json_parts = []
         if tag == "title":
             self.in_title = False
         elif tag == "a" and self._anchor is not None:
@@ -97,6 +111,48 @@ def _source_url(value: str) -> str:
         return urlunsplit(("https", host, u.path or "/", "", ""))
     except ValueError:
         return ""
+
+
+
+def _public_role_people(page_url: str, blocks: list[str]) -> list[dict[str,str]]:
+    """Business roles explicitly published as JSON-LD Person on official sites.
+
+    Observed page metadata is not verified identity, email or consent.
+    """
+    results: list[dict[str,str]] = []
+    seen: set[str] = set()
+    def visit(value: Any, depth: int = 0) -> None:
+        if depth > 6 or len(results) >= 5:
+            return
+        if isinstance(value, list):
+            for item in value[:40]:
+                visit(item, depth+1)
+        elif isinstance(value, dict):
+            kinds=value.get("@type",[])
+            kinds=kinds if isinstance(kinds,list) else [kinds]
+            if "Person" in kinds:
+                name=value.get("name","")
+                role=value.get("jobTitle","")
+                if isinstance(name,str) and isinstance(role,str):
+                    name=re.sub(r"\s+"," ",name).strip()[:120]
+                    role=re.sub(r"\s+"," ",role).strip()[:140]
+                    if (len(name.split())>=2 and len(name)>=5
+                            and re.search(r"\b(founder|ceo|chief|director|head of|partner|"
+                                          r"sales|growth|revenue|marketing|operations|"
+                                          r"business development)\b",role,re.I)
+                            and name.casefold() not in seen):
+                        seen.add(name.casefold())
+                        results.append({"name":name,"role":role,"evidence_url":page_url,
+                            "verification":"PUBLIC_SITE_LISTING_NOT_IDENTITY_VERIFIED"})
+            for key in ("@graph","employee","founder","member","person"):
+                if key in value:
+                    visit(value[key],depth+1)
+    for block in blocks[:6]:
+        try:
+            visit(json.loads(block))
+        except (ValueError,TypeError,RecursionError):
+            pass
+    return results
 
 
 def _page_summary(page_url: str, raw_html: str) -> dict[str, Any]:
@@ -137,6 +193,8 @@ def _page_summary(page_url: str, raw_html: str) -> dict[str, Any]:
         "public_channel": published_channel,
         "contact_url": contact_url,
         "team_url": team_url,
+        "public_people": _public_role_people(page_url, parsed.jsonld),
+        "channel_evidence_url": page_url if published_channel else "",
         "scan_state": ("PUBLISHED_GENERAL_BUSINESS_EMAIL" if published_channel
                        else "PUBLIC_CONTACT_PAGE" if contact_url
                        else "PUBLIC_TEAM_PAGE" if team_url else "NO_CHANNEL_OBSERVED"),
