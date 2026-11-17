@@ -265,9 +265,11 @@ async def run_ai_batch(settings:object,*,limit:int=2,
                 err_code=str(answer)[:80] if isinstance(answer,ValueError) else "PROVIDER_FAILED"
                 # No customer/user info in operational failure receipts.
                 failures.append({"source_key":row["source_key"],"error":err_code})
+                logger.warning("corporate_founder_ai_provider_failure=%s",err_code)
                 await db.execute("""UPDATE noetfield.corp_founder_ai_attempts
                   SET state='FAILED' WHERE id=$1""",attempt_id)
-        return {"state":"COMPLETE" if completed==len(reserved) else "PARTIAL_OR_FAILED",
+        return {"state":"NO_ELIGIBLE_EVIDENCE" if not reserved else
+                "COMPLETE" if completed==len(reserved) else "PARTIAL_OR_FAILED",
             "attempted":len(reserved),"completed":completed,
             "models_called":len(reserved),"failed":failures,
             "daily_limit":_MAX_DAILY_ATTEMPTS,"no_contact_auto_qualified":True,
