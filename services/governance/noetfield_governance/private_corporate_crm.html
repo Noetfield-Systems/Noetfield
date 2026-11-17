@@ -102,7 +102,7 @@ a{color:#215f54}.inline-link{font-size:11px}
   <div class="eyebrow">Noetfield Systems / Private Operations</div>
   <h1>Corporate relationships. Real outcomes.</h1>
   <p>Your private workspace for enterprise buyers, asset originators, commercial partners and retained clients. This is separate from Fieldwork's Web3 network.</p>
-  <form id="login"><label>Existing Noetfield operator key<input id="operator" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember">Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
+  <form id="login"><label>Existing Noetfield operator key<input id="operator" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember" checked>Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
   <button id="google-signin" type="button" class="ghost" hidden style="width:100%;margin-top:14px">Continue with Google</button>
   <p class="small" id="password-manager-hint">On your own device, Chrome may offer to save your operator key. The seven-day session starts after a successful sign-in. Google access is restricted to authorized operators.</p>
   <p class="notice" id="login-error" role="alert"></p>
@@ -233,12 +233,14 @@ async function showGoogleOperatorLogin(){
   button.addEventListener("click",()=>{
    const pop=window.open(config.bridge_url,"nf-operator-google","popup=yes,width=520,height=700");
    if(!pop){$("#login-error").textContent="Allow the Google sign-in popup, or use your operator key.";return}
-   button.disabled=true;
+   button.disabled=true;$("#login-error").textContent="Continue in the Google window; this page will open automatically after sign-in.";
+   const popupWatcher=setInterval(()=>{if(pop.closed){clearInterval(popupWatcher);button.disabled=false;}},500);
    const handle=async event=>{
-    if(event.origin!=="https://www.noetfield.com"||event.source!==pop||
+    if(!["https://www.noetfield.com","https://noetfield.com"].includes(event.origin)||event.source!==pop||
        !event.data||event.data.type!=="noetfield.operator.google.v1"||
        typeof event.data.access_token!=="string")return;
-    window.removeEventListener("message",handle);button.disabled=false;
+    window.removeEventListener("message",handle);clearInterval(popupWatcher);button.disabled=false;
+    $("#login-error").textContent="";
     try{
      const result=await api("/api/opportunities/desk/session/google",{method:"POST",
       data:{access_token:event.data.access_token,remember:$("#remember").checked}});
