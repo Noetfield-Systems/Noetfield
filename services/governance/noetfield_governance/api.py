@@ -2957,6 +2957,30 @@ class PaidRwaClinicCaseRequest(BaseModel):
     clinic_case: dict[str,Any]
 
 
+@app.post("/api/corporate-crm/customer/rwa/submit-case",
+          tags=["operations"],include_in_schema=False)
+async def corporate_customer_rwa_case_submit(
+    body:PaidRwaClinicCaseRequest,request:Request,
+)->dict[str,object]:
+    """Verified original paid buyer supplies real case context, not Founder."""
+    from noetfield_governance.customer_portal import (
+        authenticate_customer,customer_submit_paid_native_rwa_case
+    )
+    from noetfield_governance.corporate_workpacket import WorkPacketError
+    from noetfield_governance.corporate_crm import CorporateCRMError
+    auth=request.headers.get("authorization") or ""
+    bearer=auth[7:] if auth.startswith("Bearer ") else ""
+    identity=await authenticate_customer(bearer)
+    try:
+        return await customer_submit_paid_native_rwa_case(
+            settings,deal_id=body.deal_id,
+            clinic_case=body.clinic_case,identity=identity)
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=403,detail=str(exc)) from exc
+    except WorkPacketError as exc:
+        raise HTTPException(status_code=409,detail=str(exc)) from exc
+
+
 @app.post("/api/corporate-crm/workpackets/rwa/submit-case",
           tags=["operations"],include_in_schema=False)
 async def corporate_rwa_clinic_submit(
