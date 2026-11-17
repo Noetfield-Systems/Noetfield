@@ -242,5 +242,6 @@ def test_founder_cockpit_responsive_text_without_manual_primary_work():
     assert "What your AI team is doing next" in html
     assert "Copy prepared introduction" in html
     assert "No message sent." in html
-    assert ".founder-mission-list{grid-template-columns:repeat(2" in html
+    assert ".founder-mission-list{display:grid;grid-template-columns:repeat(2" in html
+    assert "@media(max-width:750px){.founder-mission-list{grid-template-columns:minmax(0,1fr)}" in html
     assert "/api/corporate-crm/founder/missions?limit=12" in html
