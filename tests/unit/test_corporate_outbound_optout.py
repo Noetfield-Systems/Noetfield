@@ -139,3 +139,36 @@ def test_manual_suppression_not_exposed_to_public():
               json={"deal_id":str(uuid4()),"actor":"Revenue"})
             assert resp.status_code in (403,503)
     asyncio.run(run())
+
+
+def test_missing_real_sender_postal_address_has_no_outbox_claim(monkeypatch):
+    monkeypatch.delenv("CORPORATE_OUTREACH_MAILING_ADDRESS",raising=False)
+    async def check():
+        with patch("noetfield_governance.corporate_outbound._mailbox",
+                   return_value=("operations@noetfield.com","private-password")),\
+             patch("noetfield_governance.corporate_outbound.asyncpg.connect",
+                   new_callable=AsyncMock) as connect,\
+             patch("noetfield_governance.corporate_outbound._send_provider") as send:
+            with pytest.raises(CorporateCRMError,match="REAL_BUSINESS_POSTAL_ADDRESS_REQUIRED"):
+                await send_sourced_outreach(object(),deal_id=str(uuid4()),
+                    subject="RWA scoped pilot opportunity",
+                    body="Relevant commercial outreach with a traceable scope.",
+                    actor="Noetfield Revenue")
+            connect.assert_not_awaited()
+            send.assert_not_called()
+    asyncio.run(check())
+
+
+def test_reconciliation_reuses_existing_six_hour_worker_and_distinguishes_reply_from_optout():
+    from noetfield_governance.corporate_discovery_scheduler import reconcile_proven_outreach
+    async def check():
+        with patch("noetfield_governance.corporate_outbound.reconcile_real_replies",
+                   new_callable=AsyncMock,
+                   return_value={"provider_ack_sent":2,"scanned_headers":3,
+                                 "new_verified_replies":1,"new_suppressed_recipients":1}) as impl:
+            result=await reconcile_proven_outreach(object())
+            assert result["state"]=="COMPLETE"
+            assert result["new_verified_replies"]==1
+            assert result["new_suppressed_recipients"]==1
+            assert impl.await_args.kwargs["limit"]==120
+    asyncio.run(check())
