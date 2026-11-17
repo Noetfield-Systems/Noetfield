@@ -2834,6 +2834,28 @@ async def corporate_founder_scout_run(
     return await run_scout_batch(settings,limit=body.limit,source_key=body.source_key)
 
 
+class FounderAIRunRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    limit: int = Field(default=2, ge=1, le=2)
+    source_key: str = Field(default="", max_length=200)
+
+
+@app.get("/api/corporate-crm/founder/ai",tags=["operations"],include_in_schema=False)
+async def corporate_founder_ai(request:Request,limit:int=25)->dict[str,object]:
+    """Source-grounded LLM suggestions + real provider receipts; private only."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_founder_ai import founder_ai_board
+    return await founder_ai_board(settings,limit=limit)
+
+
+@app.post("/api/corporate-crm/founder/ai/run",tags=["operations"],include_in_schema=False)
+async def corporate_founder_ai_run(body:FounderAIRunRequest,request:Request)->dict[str,object]:
+    """Limited real model reasoning; never perform outreach or customer billing."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_founder_ai import run_ai_batch
+    return await run_ai_batch(settings,limit=body.limit,source_key=body.source_key)
+
+
 @app.get("/api/corporate-crm/outreach/metrics",tags=["operations"],include_in_schema=False)
 async def corporate_outreach_metrics(request:Request)->dict[str,object]:
     _require_connect_desk_operator(request)
