@@ -376,6 +376,12 @@ async def run_ai_batch(settings:object,*,limit:int=2,
                   answer.get("artifact_sha256"))
                 await db.execute("""UPDATE noetfield.corp_founder_ai_attempts
                   SET state='PROVIDER_COMPLETED' WHERE id=$1""",attempt_id)
+                logger.warning(
+                    "corporate_founder_ai_model_output_persisted route=%s model=%s "
+                    "tokens_in=%d tokens_out=%d artifact_sha256=%s",
+                    answer.get("model_route","UNKNOWN"),answer["model"],
+                    answer["prompt_tokens"],answer["completion_tokens"],
+                    (answer.get("artifact_sha256") or "NO_INDEPENDENT_FABRIC_ARTIFACT"))
                 completed+=1
             else:
                 err_code=str(answer)[:80] if isinstance(answer,ValueError) else "PROVIDER_FAILED"
