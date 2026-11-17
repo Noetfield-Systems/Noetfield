@@ -191,6 +191,96 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
             "delivered_to_inbox":False,"reply_verified":False}
 
 
+async def send_prequalified_corporate_introductions(settings:object,*,limit:int=2)->dict[str,Any]:
+    """Small-volume actual sends ONLY after existing source/contact qualification.
+
+    Reuses canonical source records, SMTP sender, Message-ID ledger, global
+    opt-out and the existing send_sourced_outreach exact permission checks.
+    Fieldwork research / a model suggestion is NEVER permission to email.
+    No follow-up blast: ANY prior attempt for the deal permanently excludes
+    it from this initial introduction, including ambiguous sends.
+    """
+    if type(limit) is not int or not 1<=limit<=3:
+        raise CorporateCRMError("INVALID_AUTONOMOUS_OUTREACH_LIMIT")
+    daily_cap=6
+    try:
+        mailbox,_password=_mailbox()
+        _sender_footer(mailbox)
+    except CorporateCRMError:
+        return {"schema":"noetfield.prequalified-outreach.v1",
+            "state":"SENDER_NOT_CONFIGURED","eligible":0,"attempted":0,
+            "provider_accepted":0,"unverified_delivery_claims":0,
+            "verified_replies_inferred":0}
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await _schema(db)
+        # Original qualification is a human-reviewed persistent fact,
+        # not a model claim. Explicit reviewed basis and suppression checks.
+        daily=await db.fetchval("""SELECT count(*)::int
+          FROM noetfield.corp_outreach_sends
+          WHERE created_at >= date_trunc('day',
+            now() at time zone 'America/Vancouver') AT TIME ZONE 'America/Vancouver'""")
+        available=max(0,daily_cap-int(daily or 0))
+        if available==0:
+            return {"schema":"noetfield.prequalified-outreach.v1",
+                "state":"DAILY_SEND_CAP","eligible":0,"attempted":0,
+                "provider_accepted":0,"daily_cap":daily_cap,
+                "unverified_delivery_claims":0,"verified_replies_inferred":0}
+        rows=await db.fetch("""SELECT d.id AS deal_id,a.name AS account_name,
+                 d.offer,d.stage,d.owner,d.next_action
+           FROM noetfield.corp_research_sources r
+           JOIN noetfield.corp_crm_deals d ON d.id=r.promoted_deal_id
+           JOIN noetfield.corp_crm_people p ON p.id=d.person_id
+           JOIN noetfield.corp_crm_accounts a ON a.id=d.account_id
+           WHERE d.stage IN ('NEW','QUALIFYING','DISCOVERY','SCOPE_SENT','NEGOTIATING')
+             AND d.source_channel='FIELDWORK_OPERATOR_QUALIFIED'
+             AND d.offer IN ('rwa_technical_sprint','ai_sales_os_pilot',
+                             'strategic_partnership')
+             AND r.review_status NOT IN ('DO_NOT_CONTACT','DISQUALIFIED')
+             AND nullif(r.contact_evidence,'') IS NOT NULL
+             AND nullif(p.email,'') IS NOT NULL
+             AND r.contact_basis IN ('OPTED_IN','EXISTING_RELATIONSHIP',
+               'INTRODUCED_BY_MUTUAL_CONTACT','PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL')
+             AND (r.contact_basis <> 'PUBLIC_BUSINESS_PARTNERSHIP_CHANNEL'
+               OR (r.publication_no_solicitation_confirmed IS TRUE
+                 AND length(trim(r.outreach_role_relevance)) >= 20))
+             AND NOT EXISTS (
+                 SELECT 1 FROM noetfield.corp_outreach_sends past
+                 WHERE past.deal_id=d.id)
+           ORDER BY d.created_at ASC,d.id ASC
+           LIMIT $1""",min(limit,available))
+    finally:
+        await db.close()
+    # Canonical sender rechecks current global opt-out right before email;
+    # sender owns the fingerprint, SMTP event and ambiguous retry policy.
+    from noetfield_governance.corporate_revenue_ops import outreach_draft
+    accepted=0
+    failures=[]
+    for record in rows:
+        deal_id=str(record["deal_id"])
+        draft=outreach_draft(dict(record))
+        try:
+            result=await send_sourced_outreach(settings,
+                deal_id=deal_id,subject=draft["subject"],body=draft["body"],
+                actor="Noetfield Revenue Auto / verified CRM source")
+            if result.get("new_provider_send"):
+                accepted+=1
+            else:
+                failures.append({"deal_id":deal_id,
+                                 "state":str(result.get("state") or "UNCONFIRMED")})
+        except CorporateCRMError as exc:
+            failures.append({"deal_id":deal_id,"state":str(exc)[:95]})
+        except Exception:
+            failures.append({"deal_id":deal_id,"state":"SMTP_OR_DB_UNCONFIRMED"})
+    return {"schema":"noetfield.prequalified-outreach.v1",
+        "state":"COMPLETE" if not failures else "PARTIAL_OR_BLOCKED",
+        "eligible":len(rows),"attempted":len(rows),
+        "provider_accepted":accepted,"failures":failures,
+        "daily_cap":daily_cap,"unverified_delivery_claims":0,
+        "verified_replies_inferred":0,"customer_meetings_inferred":0,
+        "paid_customers_inferred":0,"research_only_recipients_contacted":0}
+
+
 def _imap_headers(mailbox:str,password:str,limit:int)->list[tuple[str,Any]]:
     """Headers-only IMAP; no email body or attachments leave the mailbox."""
     since=(datetime.now(UTC)-timedelta(days=30)).strftime("%d-%b-%Y")
