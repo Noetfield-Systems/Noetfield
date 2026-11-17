@@ -93,6 +93,21 @@ async def reconcile_paid_company_os_drafts(settings:object)->dict[str,Any]:
         return {"state":"FAILED","checked":0,"verified_drafts":0}
 
 
+async def reconcile_native_rwa_paid_reports(settings:object)->dict[str,Any]:
+    """Actual signed-paid RWA cases only: independent replay of native nine gates."""
+    from noetfield_governance.corporate_rwa_execution import reconcile_pending_native_rwa_cases
+    try:
+        result=await reconcile_pending_native_rwa_cases(settings,limit=2)
+        logger.warning(
+          "corporate_rwa_independent_verifier_readback=%s checked=%d reports=%d",
+          result.get("state","UNKNOWN"),result.get("checked",0),
+          result.get("independently_verified_technical_reports",0))
+        return result
+    except Exception:
+        logger.exception("corporate_rwa_independent_verifier_readback=FAILED")
+        return {"state":"FAILED","checked":0}
+
+
 async def start_scheduler(settings:object)->None:
     global _task
     if not configured():
@@ -105,6 +120,7 @@ async def start_scheduler(settings:object)->None:
             await run_once(settings)
             await reconcile_proven_outreach(settings)
             await reconcile_paid_company_os_drafts(settings)
+            await reconcile_native_rwa_paid_reports(settings)
             await asyncio.sleep(6*3600)
     _task=asyncio.create_task(loop())
 
