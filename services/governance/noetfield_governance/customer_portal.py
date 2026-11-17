@@ -124,6 +124,63 @@ async def grant_customer_access(settings: object, *, deal_id: str, email: str,
         await db.close()
 
 
+async def auto_grant_paid_original_customers(settings:object,*,limit:int=5)->dict[str,Any]:
+    """Grant a real paid original buyer self-service access without Founder typing.
+
+    No unchecked third party or model-inferred email is ever added. The buyer
+    must still authenticate using Supabase's verified email before seeing a
+    scoped engagement. Never re-enable a manually REVOKED membership; the
+    insert is ON CONFLICT DO NOTHING rather than an upsert.
+    """
+    if type(limit) is not int or not 1<=limit<=10:
+        raise CorporateCRMError("INVALID_PAID_CUSTOMER_ACCESS_BATCH_LIMIT")
+    from noetfield_governance.corporate_workpacket import (
+        _paid_row,validate_paid_case,WorkPacketError
+    )
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await ensure_customer_access_schema(db)
+        candidates=await db.fetch("""SELECT DISTINCT d.id
+            FROM noetfield.corp_crm_deals d
+            JOIN noetfield.public_intakes i ON i.intake_id=d.source_intake_id
+            JOIN noetfield.commercial_payment_evidence e
+              ON e.source_intake_id=d.source_intake_id
+            WHERE d.offer IN ('rwa_technical_sprint','ai_sales_os_pilot')
+              AND e.livemode IS TRUE AND e.reversed IS FALSE
+              AND e.bound_at IS NOT NULL
+              AND i.qualification_json->'commercial_ops'->>'offer'=d.offer
+              AND i.qualification_json->'commercial_ops'->>'payment_event_id'=e.event_id
+              AND i.qualification_json->'commercial_ops'->>'payment_session_id'=e.session_id
+              AND i.qualification_json->'commercial_ops'->>'stage'
+                IN ('PAYMENT_CONFIRMED','IN_DELIVERY','DELIVERED','CLOSED')
+              AND nullif(i.qualification_json->'commercial_ops'->>'acceptance_evidence','') IS NOT NULL
+            ORDER BY d.id ASC LIMIT $1""",limit)
+        granted=0
+        blocked=0
+        for item in candidates:
+            try:
+                original=await _paid_row(db,item["id"])
+                validate_paid_case(original)
+                email_hash=customer_email_hash(str(original.get("contact_email") or ""))
+                created=await db.fetchrow("""INSERT INTO noetfield.corp_customer_access(
+                      deal_id,email_hash,granted_by,evidence_url,active)
+                    VALUES($1,$2,'SOURCE_BOUND_PAID_CUSTOMER_AUTO_GRANT','',true)
+                    ON CONFLICT(deal_id,email_hash) DO NOTHING RETURNING deal_id""",
+                    item["id"],email_hash)
+                granted+=bool(created)
+            except (CorporateCRMError,WorkPacketError,ValueError):
+                blocked+=1
+        return {"schema":"noetfield.corporate-paid-customer-access.v1",
+           "state":"COMPLETE" if blocked==0 else "PARTIAL_OR_BLOCKED",
+           "paid_cases_checked":len(candidates),
+           "new_source_original_customer_memberships":int(granted),
+           "blocked":blocked,"emails_sent":0,
+           "no_third_party_grants":True,"revocations_restored":0,
+           "customer_identity_still_requires_verified_login":True}
+    finally:
+        await db.close()
+
+
 def customer_case_projection(row: dict[str, Any]) -> dict[str, Any]:
     case = _as_dict(row.get("commercial"))
     payment = row.get("payment")
