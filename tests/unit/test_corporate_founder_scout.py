@@ -59,6 +59,67 @@ def test_first_party_contact_page_is_research_not_a_verified_person():
     assert "AI Sales OS" in card["offer_hypothesis"]
 
 
+def test_real_first_party_contact_and_team_pages_are_followed_with_source_receipts():
+    """No guessed decision-maker: observed mailto + explicit company JSON-LD."""
+    import json
+    from urllib.parse import urlsplit
+
+    home='<a href="/contact">Business enquiries</a><a href="/team">Our team</a>'
+    contact='<a href="mailto:partnerships@example.org">Partnerships desk</a>'
+    team='<script type="application/ld+json">'+json.dumps({
+      "@graph":[{"@type":"Person","name":"Jane Example",
+                 "jobTitle":"Head of Partnerships"},
+                {"@type":"Person","name":"Alan Someone","jobTitle":"Janitor"}]
+    })+'</script>'
+    contents={"/":home,"/contact":contact,"/team":team}
+    requested=[]
+    class FakeResponse:
+        status_code=200
+        headers={"content-type":"text/html; charset=utf-8"}
+        def __init__(self,page):self.page=page
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        async def aiter_bytes(self):
+            yield contents[self.page].encode("utf-8")
+    class FakeClient:
+        def __init__(self,*args,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        def stream(self,method,dest,**kwargs):
+            assert method=="GET" and kwargs["headers"]["Host"]=="www.example.org"
+            assert kwargs["extensions"]["sni_hostname"]=="www.example.org"
+            page=urlsplit(dest).path
+            requested.append(page)
+            return FakeResponse(page)
+    async def execute():
+        with patch("noetfield_governance.corporate_founder_scout._public_ip",
+                   new_callable=AsyncMock,return_value="1.1.1.1"),patch(
+             "noetfield_governance.corporate_founder_scout.httpx.AsyncClient",
+             FakeClient):
+            result=await fetch_official_signals("https://www.example.org")
+        assert result["public_channel"]=="partnerships@example.org"
+        assert result["channel_evidence_url"]=="https://www.example.org/contact"
+        assert result["scan_state"]=="PUBLISHED_GENERAL_BUSINESS_EMAIL"
+        assert result["public_people"]==[{
+            "name":"Jane Example","role":"Head of Partnerships",
+            "evidence_url":"https://www.example.org/team",
+            "verification":"PUBLIC_SITE_LISTING_NOT_IDENTITY_VERIFIED"
+        }]
+        assert requested==["/","/contact","/team"] or (
+            requested[0]=="/" and set(requested[1:])=={"/contact","/team"})
+    asyncio.run(execute())
+
+
+def test_website_coverage_priority_reduces_scout_time_wasted_on_blank_urls():
+    from noetfield_governance.corporate_founder_scout import _priority
+    base={"source_key":"example:source:1","organization":"Company",
+          "lane":"CORPORATE","score":83,"original_url":"https://example.org/research"}
+    ranked=_priority({**base,"website":"https://example.org"})
+    empty=_priority({**base,"website":""})
+    assert ranked["fit_score"]>empty["fit_score"]
+    assert empty["customer_qualified"] is False and ranked["customer_qualified"] is False
+
+
 def test_no_website_does_not_fallback_to_arbitrary_github_source():
     async def case():
         r=await fetch_official_signals("")
