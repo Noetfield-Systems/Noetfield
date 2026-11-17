@@ -95,6 +95,35 @@ def test_suppression_and_verified_delivery_are_separate_canonical_states():
     assert delivered["customer_acceptance_inferred"] is False
 
 
+def test_real_smtp_and_imap_receipts_drive_next_mission_without_fake_meetings():
+    person=uuid.uuid4()
+    accepted=_plain(source_row(promoted_deal_id=person,
+                       send_status="PROVIDER_ACCEPTED",has_verified_reply=False,
+                       provider_message_id="<real-smtp-msg@noetfield.com>"))
+    assert accepted["state"]=="SMTP_PROVIDER_ACCEPTED"
+    assert accepted["outreach_smtp_accepted"] is True
+    assert accepted["outreach_verified_reply"] is False
+    assert accepted["email_sent_by_mission"] is False
+    assert accepted["paid_checkout_inferred"] is False
+    replied=_plain(source_row(promoted_deal_id=person,
+                      send_status="PROVIDER_ACCEPTED",has_verified_reply=True))
+    assert replied["state"]=="VERIFIED_CUSTOMER_REPLY"
+    assert "Review the actual buyer reply" in replied["next_action"]
+    assert replied["customer_acceptance_inferred"] is False
+    unknown=_plain(source_row(promoted_deal_id=person,
+                      send_status="FAILED_UNCONFIRMED",has_verified_reply=False))
+    assert unknown["state"]=="OUTREACH_PROVIDER_UNCONFIRMED"
+    assert "Do not send a duplicate" in unknown["next_action"]
+    paid=_plain(source_row(promoted_deal_id=person,
+                   send_status="PROVIDER_ACCEPTED",has_verified_reply=True,
+                   workpacket_state="ACKNOWLEDGED"))
+    assert paid["state"]=="DELIVERY_IN_PROGRESS"
+    suppressed=_plain(source_row(promoted_deal_id=person,
+                   review_status="DO_NOT_CONTACT",has_verified_reply=True,
+                   send_status="PROVIDER_ACCEPTED"))
+    assert suppressed["state"]=="SUPPRESSED"
+
+
 def test_research_without_contact_or_model_explains_specific_next_move():
     row=source_row(analysis_json="",published_general_channel="",
                    contact_page_url="",team_page_url="")
@@ -245,6 +274,9 @@ def test_founder_cockpit_responsive_text_without_manual_primary_work():
         "services/governance/noetfield_governance/private_corporate_crm.html").read_text()
     assert 'id="founder-missions-list"' in html
     assert 'id="founder-missions-status"' in html
+    assert "SMTP_PROVIDER_ACCEPTED" in html
+    assert "VERIFIED_CUSTOMER_REPLY" in html
+    assert "OUTREACH_PROVIDER_UNCONFIRMED" in html
     assert "What your AI team is doing next" in html
     assert "Copy prepared introduction" in html
     assert "No message sent." in html
