@@ -159,3 +159,82 @@ def test_production_company_os_receiver_only_allowlisted_exact_route(monkeypatch
     ]:
         monkeypatch.setenv("CORPORATE_COMPANY_OS_WORKPACKET_URL",candidate)
         assert _dispatch_config("COMPANY_OS") is None
+
+
+def test_independent_draft_verifier_is_noop_without_provider_configuration(monkeypatch):
+    from noetfield_governance.corporate_workpacket import verify_company_os_draft
+    monkeypatch.delenv("CORPORATE_VERIFIER_INVOKE_TOKEN",raising=False)
+    async def exercise():
+        with patch("noetfield_governance.corporate_workpacket.asyncpg.connect",
+                   new_callable=AsyncMock) as connect:
+            result=await verify_company_os_draft(object(),deal_id=str(uuid4()))
+            assert result["state"]=="VERIFIER_NOT_CONFIGURED"
+            assert not result["independently_verified_delivery"]
+            connect.assert_not_awaited()
+    asyncio.run(exercise())
+
+
+def test_independent_verifier_only_accepts_real_paid_draft_callback(monkeypatch):
+    from noetfield_governance.corporate_workpacket import verify_company_os_draft
+    from httpx import Response,Request
+    secret="private-verifier-invocation-token-with-40-characters"
+    monkeypatch.setenv("CORPORATE_VERIFIER_INVOKE_TOKEN",secret)
+    deal_id=uuid4();platform_id=uuid4()
+    raw={"id":platform_id,"deal_id":deal_id,"engine":"COMPANY_OS","state":"ACKNOWLEDGED",
+         "source_intake_id":"INT-ABCDEF123456","payment_event_id":"evt_live_123456789",
+         "external_workpacket_id":"cwp_0123456789abcdef0123456789abcdef"}
+    db=AsyncMock()
+    db.fetchrow.return_value=raw
+    paid={"source_intake_id":raw["source_intake_id"],"payment_event_id":raw["payment_event_id"]}
+    response={
+        "schema":"noetfield.commercial-draft-verified.v1",
+        "state":"RUNNING","source_workpacket_id":raw["external_workpacket_id"],
+        "callback_acknowledged":True,"draft_integrity_passed":True,
+        "product_delivered":False,"customer_accepted":False,
+        "verifier_receipt_url":"https://verify.noetfield.com/api/internal/commercial/receipts/"+raw["external_workpacket_id"]
+    }
+    sent=[]
+    class FakeClient:
+        def __init__(self,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):pass
+        async def post(self,url,*,json,headers):
+            sent.append((url,json,headers))
+            return Response(200,json=response,request=Request("POST",url))
+    async def exercise():
+        with patch("noetfield_governance.corporate_workpacket._database_url",
+                   return_value="postgresql://unused"),\
+             patch("noetfield_governance.corporate_workpacket.asyncpg.connect",
+                   new_callable=AsyncMock,return_value=db),\\
+             patch("noetfield_governance.corporate_workpacket.prepare_workpackets",
+                   new_callable=AsyncMock),\\
+             patch("noetfield_governance.corporate_workpacket._paid_row",
+                   new_callable=AsyncMock,return_value={}),\\
+             patch("noetfield_governance.corporate_workpacket.validate_paid_case",
+                   return_value=paid),\\
+             patch("noetfield_governance.corporate_workpacket.httpx.AsyncClient",
+                   FakeClient):
+            result=await verify_company_os_draft(object(),deal_id=str(deal_id))
+            assert result["state"]=="DRAFT_INDEPENDENTLY_ATTESTED"
+            assert result["independently_verified_draft"]
+            assert not result["independently_verified_delivery"]
+            assert not result["customer_acceptance"]
+    asyncio.run(exercise())
+    assert len(sent)==1
+    assert sent[0][1]["payment_event_id"]==raw["payment_event_id"]
+    assert sent[0][1]["platform_workpacket_id"]==str(platform_id)
+    assert sent[0][2]["Authorization"]=="Bearer "+secret
+
+
+def test_independent_verifier_ui_and_api_deny_guest():
+    async def exercise():
+        async with AsyncClient(transport=ASGITransport(app=app),base_url="http://test") as client:
+            r=await client.post("/api/corporate-crm/workpackets/verify-draft",
+                json={"deal_id":str(uuid4())})
+            assert r.status_code in (403,503)
+    asyncio.run(exercise())
+    from pathlib import Path
+    doc=(Path(__file__).resolve().parents[2]/
+        "services/governance/noetfield_governance/private_corporate_crm.html").read_text()
+    assert "Independent draft verification" in doc
+    assert "final customer delivery: NOT VERIFIED" in doc
