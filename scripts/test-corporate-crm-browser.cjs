@@ -14,7 +14,8 @@ const research=Array.from({length:22},(_,index)=>({
  lane:index%5===0?"RWA":"CORPORATE",original_url:"https://example.org/sources/"+index,
  review_status:"PROFILE_REVIEWED",score:90-index,promoted_deal_id:null
 }));
-const events={qualify:[],outreach:0};
+const events={qualify:[],outreach:0,scout:[]};
+let siteChecks=0;
 const dealId="99771110-1111-4111-8111-111111111111";
 let confirmed=null;
 function json(res,data,status=200){
@@ -31,6 +32,34 @@ const server=http.createServer(async(req,res)=>{
   people:[],deals:confirmed?[{id:dealId,account_name:confirmed.organization,stage:"NEW",offer:"ai_sales_os_pilot",estimated_minor:0,currency:"cad",summary:"Source verified",owner:"Noetfield Revenue",next_date:"",next_action:"Qualify customer scope"}]:[],
   metrics:{open:confirmed?1:0,due:0,total_accounts:confirmed?1:0,paid_verified_by_currency_minor:{}}
  });return;}
+ if(key==="GET /api/corporate-crm/founder/scout"){
+  json(res,{
+   summary:{research_organizations:22,awaiting_contact_research:22,
+    websites_checked:siteChecks,public_business_emails:siteChecks?1:0,
+    public_contact_pages:siteChecks?2:0,public_team_pages:0},
+   prospects:research.slice(0,12).map((row,i)=>({
+    source_key:row.source_key,organization:row.organization,lane:row.lane,
+    fit_score:75-i,original_source:row.original_url,website:"https://example.org",
+    offer_hypothesis:row.lane==="RWA"?"RWA technical readiness":"AI Sales OS discovery",
+    next_step:"Research a real business contact",
+    scan_state:siteChecks?"PUBLIC_CONTACT_PAGE":"NOT_RESEARCHED",
+    contact_page_url:siteChecks?"https://example.org/contact":"",
+    team_page_url:"",general_business_channel:siteChecks?"hello@example.org":"",
+    site_description:siteChecks?"Business technology services":""
+   })),messages_sent:0,paid_sales_inferred:0
+  });return;
+ }
+ if(key==="POST /api/corporate-crm/founder/scout/run"){
+  let raw="";for await(const x of req)raw+=x;
+  const payload=JSON.parse(raw);
+  events.scout.push(payload);
+  if(req.headers["x-desk-csrf"]!=="test-csrf"){json(res,{detail:"INVALID_SESSION"},403);return}
+  siteChecks+=payload.limit;
+  json(res,{state:"COMPLETE",scanned:payload.limit,
+   found_public_business_channels:1,found_contact_pages:2,results:[],
+   models_called:0,messages_sent:0,contacts_qualified:0});
+  return;
+ }
  if(key==="GET /api/corporate-crm/research"){json(res,{items:research,total_staged:research.length});return;}
  if(key==="GET /api/corporate-crm/research/status"){json(res,{last:{state:"COMPLETE"}});return;}
  if(key==="GET /api/corporate-crm/outreach/metrics"){json(res,{sending_status:{},provider_verified_replies:0,suppressed_recipients:0});return;}
@@ -76,6 +105,20 @@ async function run(){
    await page.route("https://fonts.gstatic.com/**",route=>route.abort());
    await page.goto(base+"/api/corporate-crm/app",{waitUntil:"domcontentloaded"});
    await page.waitForFunction(()=>document.querySelector("#fieldwork-status")?.textContent?.includes("22 public organization sources"),{timeout:15000});
+   await page.waitForFunction(()=>document.querySelector("#founder-scout-status")?.textContent?.includes("published contact routes found"));
+   assert.equal(await page.locator("#operator-tools").evaluate(el=>el.open),false,
+    "Founder should not see technical or manual data entry by default");
+   assert.equal(await page.locator("#founder-scout-list .founder-prospect").count(),10);
+   assert.equal(await page.locator("#founder-research-count").textContent(),"22");
+   if(width===390){
+     await page.locator("#founder-scan-next").click();
+     await page.waitForFunction(()=>document.querySelector("#founder-scout-status")?.textContent?.includes("websites inspected"));
+     assert.equal(events.scout.length,1);
+     assert.equal(events.scout[0].limit,5);
+     assert.equal(events.outreach,0,"Company research may not send messages");
+     assert.equal(await page.locator("#founder-scout-count").textContent(),"5");
+   }
+   await page.locator("#operator-tools").evaluate(el=>el.open=true);
    await page.getByRole("button",{name:"Qualify for Corporate CRM"}).last().click();
    const dialog=page.locator("#research-qualify-dialog");
    await dialog.waitFor({state:"visible"});
