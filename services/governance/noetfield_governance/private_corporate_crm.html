@@ -103,7 +103,8 @@ a{color:#215f54}.inline-link{font-size:11px}
   <h1>Corporate relationships. Real outcomes.</h1>
   <p>Your private workspace for enterprise buyers, asset originators, commercial partners and retained clients. This is separate from Fieldwork's Web3 network.</p>
   <form id="login"><label>Existing Noetfield operator key<input id="operator" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Enter once to open a secure session"></label><label class="remember"><input type="checkbox" id="remember">Keep this device signed in for seven days</label><button class="primary">Open Corporate CRM</button></form>
-  <p class="small" id="password-manager-hint">On your own device, your browser password manager may offer to save this key. Seven-day sign-in starts after successful authentication; this is not Google Sign-In.</p>
+  <button id="google-signin" type="button" class="ghost" hidden style="width:100%;margin-top:14px">Continue with Google</button>
+  <p class="small" id="password-manager-hint">On your own device, Chrome may offer to save your operator key. The seven-day session starts after a successful sign-in. Google access is restricted to authorized operators.</p>
   <p class="notice" id="login-error" role="alert"></p>
  </div>
 </div>
@@ -223,7 +224,38 @@ $("#login").addEventListener("submit",async e=>{
  state.csrf=result.csrf;$("#operator").value="";els.auth.hidden=true;els.app.hidden=false;await reload()
  }catch(err){$("#login-error").textContent=err.message}
 });
-$("#signout").addEventListener("click",async()=>{try{await api("/api/opportunities/desk/session",{method:"DELETE",data:{}})}catch{}state.csrf="";state.selected="";await session()});
+async function showGoogleOperatorLogin(){
+ const button=$("#google-signin");if(!button)return;
+ try{
+  const config=await api("/api/opportunities/desk/google-config");
+  if(!config.google_enabled)return;
+  button.hidden=false;
+  button.addEventListener("click",()=>{
+   const pop=window.open(config.bridge_url,"nf-operator-google","popup=yes,width=520,height=700");
+   if(!pop){$("#login-error").textContent="Allow the Google sign-in popup, or use your operator key.";return}
+   button.disabled=true;
+   const handle=async event=>{
+    if(event.origin!=="https://www.noetfield.com"||event.source!==pop||
+       !event.data||event.data.type!=="noetfield.operator.google.v1"||
+       typeof event.data.access_token!=="string")return;
+    window.removeEventListener("message",handle);button.disabled=false;
+    try{
+     const result=await api("/api/opportunities/desk/session/google",{method:"POST",
+      data:{access_token:event.data.access_token,remember:$("#remember").checked}});
+     state.csrf=result.csrf;$("#operator").value="";
+     els.auth.hidden=true;els.app.hidden=false;await reload();
+    }catch(err){$("#login-error").textContent=err.message}
+    try{pop.close()}catch(_){}
+   };
+   window.addEventListener("message",handle);
+  });
+ }catch(_){/* Key login remains available if provider cannot be reached. */}
+}
+showGoogleOperatorLogin();
+$("#signout").addEventListener("click",async()=>{
+ try{await api("/api/opportunities/desk/session",{method:"DELETE",data:{}});state.csrf="";state.selected="";await session()}
+ catch(err){message("Could not end the session: "+err.message)}
+});
 $("#refresh").addEventListener("click",()=>reload());
 const offerName={rwa_technical_sprint:"RWA Technical Sprint",ai_sales_os_pilot:"AI Sales OS Pilot",asset_administration:"Asset Administration",business_automation:"Business Automation",strategic_partnership:"Strategic Partnership",other:"Other"};
 function setView(view){
