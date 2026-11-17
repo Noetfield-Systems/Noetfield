@@ -2856,6 +2856,23 @@ async def corporate_founder_ai_run(body:FounderAIRunRequest,request:Request)->di
     return await run_ai_batch(settings,limit=body.limit,source_key=body.source_key)
 
 
+@app.get("/api/corporate-crm/founder/missions",tags=["operations"],include_in_schema=False)
+async def corporate_founder_missions(request:Request,limit:int=12)->dict[str,object]:
+    """Read live account research, agent tasks and paid delivery next actions."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_founder_missions import founder_mission_board
+    return await founder_mission_board(settings,limit=limit)
+
+
+@app.post("/api/corporate-crm/founder/missions/refresh",
+          tags=["operations"],include_in_schema=False)
+async def corporate_founder_missions_refresh(request:Request)->dict[str,object]:
+    """Refresh source-backed mission ledger only; does not send or charge."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_founder_missions import materialize_missions
+    return await materialize_missions(settings,limit=150)
+
+
 @app.get("/api/corporate-crm/outreach/metrics",tags=["operations"],include_in_schema=False)
 async def corporate_outreach_metrics(request:Request)->dict[str,object]:
     _require_connect_desk_operator(request)
