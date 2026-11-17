@@ -222,6 +222,7 @@ def test_corporate_crm_console_has_source_based_paid_flow_not_fake_cash():
     assert 'id="operator" name="password" type="password" autocomplete="current-password"' in html
     assert 'autocomplete="off"' not in html
     assert 'id="password-manager-hint"' in html
+    assert 'id="google-signin"' in html
 
 
 def test_corporate_readiness_is_operator_only_and_never_claims_fake_data():
