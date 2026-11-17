@@ -96,7 +96,12 @@ def _plain(row:dict[str,Any])->dict[str,Any]:
         action="Obtain the customer's authenticated acceptance and track retention."
     elif workpacket_state in ("ACKNOWLEDGED","RUNNING"):
         state="DELIVERY_IN_PROGRESS"
-        action="Monitor the accepted paid job and independent verifier receipt."
+        action="Monitor the provider-admitted paid job and independent verifier receipt."
+    elif workpacket_state in ("READY","DISPATCH_UNCONFIRMED","DISPATCHING","FAILED"):
+        state="DELIVERY_DISPATCH_ATTENTION"
+        action=("A paid WorkPacket exists but its provider admission or final proof "
+                "is not confirmed. Inspect the original WorkPacket receipt and "
+                "restore its original provider route; do not create a duplicate.")
     elif promoted:
         state="QUALIFIED_CRM_RECORD"
         action="Use the existing CRM deal next action; confirm SOW and payment before dispatch."
@@ -145,6 +150,10 @@ def _plain(row:dict[str,Any])->dict[str,Any]:
         "draft":draft,
         "deal_id":str(row["promoted_deal_id"]) if promoted else None,
         "external_dispatch_state":workpacket_state or None,
+        "dispatch_attempts":int(row.get("dispatch_attempts") or 0),
+        "delivery_error_code":str(row.get("delivery_error_code") or "")[:90],
+        "provider_receipt_url":str(row.get("provider_receipt_url") or ""),
+        "verifier_receipt_url":str(row.get("verifier_receipt_url") or ""),
         "source_verified_as_buyer":False,
         "permission_to_send_inferred":False,
         "email_sent_by_mission":False,
@@ -190,7 +199,9 @@ async def materialize_missions(settings:object,*,limit:int=100)->dict[str,Any]:
           s.contact_page_url,s.team_page_url,
           a.analysis_json,a.source_signature AS ai_source_signature,
           a.model_route,a.artifact_sha256,
-          d.stage AS deal_stage,w.state AS workpacket_state
+          d.stage AS deal_stage,w.state AS workpacket_state,
+          w.dispatch_attempts,w.last_error_code AS delivery_error_code,
+          w.provider_receipt_url,w.verifier_receipt_url
           FROM noetfield.corp_research_sources r
           LEFT JOIN noetfield.corp_founder_scout s ON s.source_key=r.source_key
           LEFT JOIN noetfield.corp_founder_ai a ON a.source_key=r.source_key
@@ -240,6 +251,7 @@ async def founder_mission_board(settings:object,*,limit:int=12)->dict[str,Any]:
           ORDER BY
           CASE state WHEN 'INTRO_REVIEW_READY' THEN 1
            WHEN 'QUALIFIED_CRM_RECORD' THEN 2
+           WHEN 'DELIVERY_DISPATCH_ATTENTION' THEN 1
            WHEN 'DELIVERY_IN_PROGRESS' THEN 3
            WHEN 'AGENT_RESEARCH_PENDING' THEN 4
            WHEN 'PEOPLE_RESEARCH_PENDING' THEN 5
