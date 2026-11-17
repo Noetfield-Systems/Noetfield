@@ -2,6 +2,7 @@
 
 import asyncio
 import hmac
+from noetfield_governance.operator_google_auth import google_operator_configured, verify_google_operator
 import logging
 import os
 import re
@@ -1702,6 +1703,50 @@ async def get_connect_desk_session(request: Request, response: Response) -> dict
         "csrf": connect_desk_csrf(secret, token),
         "remember_available": True,
     }
+
+
+@app.get("/api/opportunities/desk/google-config", tags=["operations"], include_in_schema=False)
+async def google_connect_desk_config(response: Response) -> dict[str, object]:
+    """Browser-readable capability flag; never returns an identity or any credential."""
+    response.headers["Cache-Control"] = "no-store"
+    return {"google_enabled": google_operator_configured(),
+            "bridge_url": "https://www.noetfield.com/auth/operator-bridge/"}
+
+
+class GoogleOperatorLoginRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    access_token: str = Field(min_length=8, max_length=8192)
+    remember: bool = False
+
+
+@app.post("/api/opportunities/desk/session/google", tags=["operations"], include_in_schema=False)
+async def login_google_connect_desk_session(
+    request: Request, response: Response, body: GoogleOperatorLoginRequest,
+) -> dict[str, object]:
+    check_connect_desk_origin(request)
+    secret = _admin_dashboard_secret()
+    if not secret:
+        raise HTTPException(503, detail="Administrative authentication is not configured")
+    if not google_operator_configured():
+        raise HTTPException(503, detail="Google operator sign-in is not configured")
+    if redis_runtime.is_enabled():
+        try:
+            await redis_runtime.check_rate_limit(
+                "connect-desk-google:" + (request.client.host if request.client else "unknown"),
+                max_calls=8, window_sec=900,
+            )
+        except PermissionError as exc:
+            raise HTTPException(429, detail="LOGIN_RATE_LIMITED") from exc
+    await verify_google_operator(body.access_token)
+    token, csrf, expires_at = issue_connect_desk_session(secret, remember=body.remember)
+    response.set_cookie(
+        key=CONNECT_DESK_COOKIE, value=token,
+        secure=True, httponly=True, samesite="strict", path="/",
+        max_age=CONNECT_DESK_LONG_TTL if body.remember else None,
+    )
+    response.headers["Cache-Control"] = "no-store"
+    return {"authenticated": True, "csrf": csrf, "remembered": body.remember,
+            "expires_at": expires_at}
 
 
 @app.post("/api/opportunities/desk/session", tags=["operations"], include_in_schema=False)
