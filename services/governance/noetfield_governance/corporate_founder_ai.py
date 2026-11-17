@@ -163,6 +163,75 @@ def _parse_output(raw: str,source:dict[str,str])->dict[str,str]:
         raise ValueError("MODEL_OUTPUT_NOT_JSON") from exc
 
 
+def _read_fabric_result(payload:dict[str,Any],source:dict[str,str],
+                        *,signature:str,source_key:str,task_id:str)->dict[str,Any]:
+    """Same validated Fabric receipt for POST, GET readback and after restarts."""
+    expected_hash=hashlib.sha256(json.dumps(
+        {k:v for k,v in payload.items() if k!="artifact_sha256"},
+        sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+    if (payload.get("schema")!="noetfield.agent-fabric.founder-crm-analysis.v1"
+            or payload.get("state")!="SUCCEEDED"
+            or payload.get("source_signature")!=signature
+            or payload.get("source_key")!=source_key
+            or payload.get("task_id")!=task_id
+            or payload.get("authority")!="UNVERIFIED_ADVISORY_MODEL_OUTPUT"
+            or payload.get("external_actions_executed") is not False
+            or payload.get("provider") not in (
+                "cloudflare_glm","deepseek_direct",
+                "huggingface_inference","zai_glm_direct")
+            or payload.get("artifact_sha256")!=expected_hash):
+        raise ValueError("MODEL_FABRIC_RECEIPT_INVALID")
+    analysis=_validate_model_analysis(payload.get("analysis"),source)
+    if not isinstance(payload.get("model"),str) or not payload["model"]:
+        raise ValueError("MODEL_FABRIC_MODEL_MISSING")
+    return {"analysis":analysis,
+        "model":payload["model"][:150],
+        "model_route":"AGENT_FABRIC_"+payload["provider"].upper(),
+        "generation_id":str(payload.get("generation_id") or "")[:150],
+        "prompt_tokens":int(payload.get("input_tokens") or 0),
+        "completion_tokens":int(payload.get("output_tokens") or 0),
+        "cost_usd":None,"cost_from_provider":False,
+        "artifact_sha256":expected_hash}
+
+
+async def _recover_fabric_task(client:httpx.AsyncClient,route:dict[str,str],
+                               *,task_id:str,source_key:str,
+                               signature:str,source:dict[str,str])->dict[str,Any]:
+    """Same task, no second billable inference while previous attempt is live."""
+    url=route["url"].removesuffix("/analyze")+"/tasks/"+task_id
+    for tick in range(4):
+        try:
+            response=await client.get(url,headers={
+                "X-Founder-CRM-Bridge-Key":route["key"],
+                "Accept":"application/json"})
+        except httpx.RequestError as exc:
+            raise ValueError("MODEL_FABRIC_READBACK_UNAVAILABLE") from exc
+        if response.status_code==404:
+            raise ValueError("MODEL_FABRIC_TASK_NOT_FOUND")
+        if response.status_code!=200:
+            raise ValueError("MODEL_FABRIC_READBACK_HTTP_"+str(response.status_code))
+        try:
+            receipt=response.json()
+        except ValueError as exc:
+            raise ValueError("MODEL_FABRIC_READBACK_INVALID") from exc
+        if (receipt.get("schema")!="noetfield.agent-fabric.founder-task.v1"
+                or receipt.get("task_id")!=task_id
+                or receipt.get("source_key")!=source_key
+                or receipt.get("source_signature")!=signature
+                or receipt.get("external_actions_executed") is not False):
+            raise ValueError("MODEL_FABRIC_TASK_MISMATCH")
+        if receipt.get("state")=="SUCCEEDED":
+            return _read_fabric_result(receipt.get("result") or {},source,
+                signature=signature,source_key=source_key,task_id=task_id)
+        if receipt.get("state") in ("FAILED",):
+            raise ValueError("MODEL_FABRIC_TASK_FAILED")
+        if receipt.get("state") not in ("RUNNING","RETRY_COOLDOWN"):
+            raise ValueError("MODEL_FABRIC_TASK_STATE_INVALID")
+        if tick<3:
+            await asyncio.sleep(2)
+    raise ValueError("MODEL_FABRIC_PENDING_READBACK")
+
+
 async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
     """One model analysis with existing Company OS provider-first failover.
 
@@ -205,42 +274,41 @@ async def analyze_public_company(row:dict[str,Any])->dict[str,Any]:
         except httpx.RequestError:
             last_error="MODEL_PROVIDER_NETWORK_UNAVAILABLE_"+route["route"]
             logger.warning("corporate_founder_ai_route_failure=%s",last_error)
+            if is_fabric:
+                async with httpx.AsyncClient(
+                        trust_env=False,timeout=12,follow_redirects=False) as reader:
+                    return await _recover_fabric_task(reader,route,
+                        task_id=task_id,source_key=source_key,
+                        signature=signature,source=source)
             continue
+        if is_fabric and response.status_code in (200,202,409):
+            try:
+                content_reply=response.json()
+                if response.status_code==409 or content_reply.get("state") in (
+                        "RUNNING","RETRY_COOLDOWN"):
+                    async with httpx.AsyncClient(
+                            trust_env=False,timeout=12,follow_redirects=False) as reader:
+                        return await _recover_fabric_task(reader,route,
+                            task_id=task_id,source_key=source_key,
+                            signature=signature,source=source)
+            except ValueError as exc:
+                # A pending/cached mission may not trigger another provider.
+                if str(exc).startswith("MODEL_FABRIC_"):
+                    raise
+                raise ValueError("MODEL_FABRIC_RECEIPT_UNUSABLE") from exc
         if response.status_code!=200:
             last_error="MODEL_HTTP_"+str(response.status_code)+"_"+route["route"]
             logger.warning("corporate_founder_ai_route_failure=%s",last_error)
+            if is_fabric:
+                raise ValueError(last_error)
             if response.status_code in (401,403,429,500,502,503,504):
                 continue
             raise ValueError(last_error)
         try:
             payload=response.json()
             if is_fabric:
-                expected_hash=hashlib.sha256(json.dumps(
-                    {k:v for k,v in payload.items() if k!="artifact_sha256"},
-                    sort_keys=True,ensure_ascii=False).encode()).hexdigest()
-                if (payload.get("schema")!="noetfield.agent-fabric.founder-crm-analysis.v1"
-                        or payload.get("state")!="SUCCEEDED"
-                        or payload.get("source_signature")!=signature
-                        or payload.get("source_key")!=source_key
-                        or payload.get("task_id")!=task_id
-                        or payload.get("authority")!="UNVERIFIED_ADVISORY_MODEL_OUTPUT"
-                        or payload.get("external_actions_executed") is not False
-                        or payload.get("provider") not in (
-                            "cloudflare_glm","deepseek_direct",
-                            "huggingface_inference","zai_glm_direct")
-                        or payload.get("artifact_sha256")!=expected_hash):
-                    raise ValueError("MODEL_FABRIC_RECEIPT_INVALID")
-                analysis=_validate_model_analysis(payload.get("analysis"),source)
-                if not isinstance(payload.get("model"),str) or not payload["model"]:
-                    raise ValueError("MODEL_FABRIC_MODEL_MISSING")
-                return {"analysis":analysis,
-                    "model":payload["model"][:150],
-                    "model_route":"AGENT_FABRIC_"+payload["provider"].upper(),
-                    "generation_id":str(payload.get("generation_id") or "")[:150],
-                    "prompt_tokens":int(payload.get("input_tokens") or 0),
-                    "completion_tokens":int(payload.get("output_tokens") or 0),
-                    "cost_usd":None,"cost_from_provider":False,
-                    "artifact_sha256":expected_hash}
+                return _read_fabric_result(payload,source,
+                    signature=signature,source_key=source_key,task_id=task_id)
             message=payload["choices"][0]["message"]["content"]
             if not isinstance(message,str):
                 last_error="MODEL_EMPTY_TEXT_"+route["route"]
