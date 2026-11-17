@@ -87,3 +87,11 @@ Use the existing two bounded commercial offers concurrently:
 - Track real sent actions, replies, booked meetings, qualified SOWs, paid Checkout evidence, accepted delivery and second-order work. Never fill these stages with projections or fixtures.
 
 **Release acceptance:** GitHub PR CI PASS; exact commit Railway Platform API deployment SUCCESS; authenticated CRM shell and API load; true DB schema initialization and first real-source import; homepage V5 SHA equal to PR #388 baseline. Live customers, paid orders and outbound messages must be independently evidenced before reporting them.
+
+## Operator login upgrade (November 2026)
+
+The existing Platform service now supports the existing Google/Supabase OAuth identity by opening a trusted www.noetfield.com operator bridge. After verified Google sign-in, the bridge sends a short-lived Supabase access token to its same-window opener at exactly https://platform.noetfield.com via postMessage. The Platform server re-verifies the user via the configured SUPABASE_URL /auth/v1/user endpoint, requires a confirmed email and Google provider identity, checks the explicit NOETFIELD_OPERATOR_GOOGLE_EMAILS allowlist, then issues the existing same-origin, scoped, CSRF-protected HttpOnly session. Neither operator key nor a service-role key is exposed. The Google button is hidden until provider settings and operator allowlist are configured. The original operator key remains available as fallback.
+
+The www callback returns to the operator bridge using a temporary same-tab sessionStorage sentinel (no credentials); the CRM and Opportunity Desk share the same secure operator cookie. Both login fields allow password-manager autofill with autocomplete=current-password. A seven-day session is a cookie issued only after successful authentication, not a permanently saved admin key.
+
+Set NOETFIELD_OPERATOR_GOOGLE_EMAILS to explicitly approved verified Google account emails in the existing Platform API production Railway service; preserve existing SUPABASE_URL, SUPABASE_ANON_KEY, and ADMIN_DASHBOARD_SECRET. Verify the Google identity provider in www deployment matches the Platform API SUPABASE_URL before relying on SSO. Google SSO is only production verified after a real approved Google login and private board readback.

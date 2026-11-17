@@ -20,6 +20,8 @@ on:
       - 'tests/unit/test_connect_opportunity_desk.py'
       - 'tests/unit/test_connect_postgres_acceptance.py'
       - 'tests/unit/test_connect_desk_session.py'
+      - 'tests/unit/test_operator_google_sso.py'
+      - 'services/governance/noetfield_governance/operator_google_auth.py'
       - 'services/governance/noetfield_governance/connect_desk_auth.py'
       - 'tests/unit/test_connect_relationship.py'
       - 'services/governance/noetfield_governance/connect_relationship.py'
@@ -38,6 +40,8 @@ on:
       - 'tests/unit/test_connect_opportunity_desk.py'
       - 'tests/unit/test_connect_postgres_acceptance.py'
       - 'tests/unit/test_connect_desk_session.py'
+      - 'tests/unit/test_operator_google_sso.py'
+      - 'services/governance/noetfield_governance/operator_google_auth.py'
       - 'services/governance/noetfield_governance/connect_desk_auth.py'
       - 'tests/unit/test_connect_relationship.py'
       - 'services/governance/noetfield_governance/connect_relationship.py'
@@ -89,6 +93,8 @@ jobs:
         run: python -m pytest -q tests/unit/test_connect_postgres_acceptance.py
       - name: Verify browser sessions and scoped CSRF access
         run: python -m pytest -q tests/unit/test_connect_desk_session.py
+      - name: Verify Google operator SSO, allowlist and private CRM session
+        run: python -m pytest -q tests/unit/test_operator_google_sso.py tests/unit/test_corporate_crm.py
       - name: Check static operator shell for unsafe storage
         run: |
           python - <<'PY'
