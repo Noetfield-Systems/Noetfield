@@ -105,6 +105,16 @@ async def start_scheduler(settings:object)->None:
             await run_once(settings)
             await reconcile_proven_outreach(settings)
             await reconcile_paid_company_os_drafts(settings)
+            # Small, real public-source research batch; no founder data entry,
+            # no unsolicited send, no guessed customer or AI model usage.
+            try:
+                from noetfield_governance.corporate_founder_scout import run_scout_batch
+                scout = await run_scout_batch(settings, limit=3)
+                logger.warning(
+                    "corporate_founder_scout=%s checked=%s public_channels=%s",
+                    scout["state"], scout["scanned"], scout["found_public_business_channels"])
+            except Exception:
+                logger.exception("corporate_founder_scout=FAILED_SOURCE_RESEARCH")
             await asyncio.sleep(6*3600)
     _task=asyncio.create_task(loop())
 
