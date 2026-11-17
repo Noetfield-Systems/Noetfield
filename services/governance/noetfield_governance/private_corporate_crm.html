@@ -688,6 +688,7 @@ function drawDetail(payload){
     '<div class="ops-actions">'+
     '<button id="admit-paid-workpacket" type="button" class="ghost">Admit paid WorkPacket</button>'+
     '<button id="dispatch-paid-workpacket" type="button" class="primary">Dispatch via configured Runway / Company OS</button>'+
+    '<button id="verify-paid-workpacket-draft" type="button" class="ghost">Independent draft verification</button>'+
     '</div><div id="workpacket-links" class="small"></div>';
    els.panel.querySelector(".detail").appendChild(wrapper);
    const status=wrapper.querySelector("#workpacket-state");
@@ -704,18 +705,24 @@ function drawDetail(payload){
        wrapper.querySelector("#dispatch-paid-workpacket").disabled=
          !["READY","DISPATCH_UNCONFIRMED"].includes(p.state);
        wrapper.querySelector("#admit-paid-workpacket").disabled=p.state!=="NOT_CREATED";
+       wrapper.querySelector("#verify-paid-workpacket-draft").disabled=
+         p.engine!=="COMPANY_OS" || p.state!=="ACKNOWLEDGED";
      }catch(error){status.textContent="Verified workpacket status unavailable: "+error.message}
    }
    for(const [id,path] of [
      ["#admit-paid-workpacket","/api/corporate-crm/workpackets/admit"],
-     ["#dispatch-paid-workpacket","/api/corporate-crm/workpackets/dispatch"]]){
+     ["#dispatch-paid-workpacket","/api/corporate-crm/workpackets/dispatch"],
+     ["#verify-paid-workpacket-draft","/api/corporate-crm/workpackets/verify-draft"]]){
      wrapper.querySelector(id).addEventListener("click",async()=>{
        const button=wrapper.querySelector(id);button.disabled=true;
        try{
          const result=await api(path,{method:"POST",data:{deal_id:d.id}});
          status.textContent="Result: "+result.state+
            (result.dispatch_state?" · "+result.dispatch_state:"")+
-           " · provider acknowledged: "+Boolean(result.provider_acknowledged??result.external_dispatch_confirmed);
+           (path.endsWith("/verify-draft")?
+             " · independent DRAFT integrity: "+Boolean(result.independently_verified_draft)+
+             " · final customer delivery: NOT VERIFIED":
+             " · provider acknowledged: "+Boolean(result.provider_acknowledged??result.external_dispatch_confirmed));
          await updatePacket();
        }catch(error){status.textContent="WorkPacket action rejected: "+error.message}
        finally{button.disabled=false}
