@@ -150,6 +150,12 @@
   }
 
   function routeAfterSignIn() {
+    const savedReturn = global.sessionStorage.getItem("nf-operator-sso-return");
+    if (savedReturn === "/auth/operator-bridge/") {
+      global.sessionStorage.removeItem("nf-operator-sso-return");
+      global.location.replace(savedReturn);
+      return;
+    }
     const params = new URLSearchParams(global.location.search || "");
     const next = params.get("next");
     if (next && next.startsWith("/") && next.indexOf("//") === -1) {
