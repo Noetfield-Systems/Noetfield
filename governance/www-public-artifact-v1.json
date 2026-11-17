@@ -85,6 +85,8 @@
     "assets/noetfield-intake.css",
     "assets/noetfield-invest-auth-v1.css",
     "assets/noetfield-invest-auth-v1.js",
+    "assets/noetfield-auth-boot-v1.js",
+    "assets/noetfield-operator-bridge-v2.js",
     "assets/noetfield-live-proof.js",
     "assets/noetfield-partner-apply.js",
     "assets/noetfield-pilot-intake.js",
