@@ -320,7 +320,9 @@ def _priority(row: dict[str, Any]) -> dict[str, Any]:
     base = max(0, min(int(row.get("score") or 0), 100))
     state = row.get("scan_state") or "NOT_RESEARCHED"
     has_channel = state in ("PUBLISHED_GENERAL_BUSINESS_EMAIL", "PUBLIC_CONTACT_PAGE")
-    score = min(100, round(base * .65) + (25 if has_channel else 10 if state == "PUBLIC_TEAM_PAGE" else 0))
+    has_website=bool(_source_url(str(row.get("website") or "")))
+    score=min(100,round(base*.55)+(18 if has_website else 0)+
+        (22 if has_channel else 8 if state=="PUBLIC_TEAM_PAGE" else 0))
     lane = row.get("lane")
     hypothesis = ("RWA technical readiness" if lane == "RWA"
                   else "AI Sales OS discovery")
@@ -331,6 +333,12 @@ def _priority(row: dict[str, Any]) -> dict[str, Any]:
         if state not in ("SOURCE_UNAVAILABLE", "NO_USABLE_WEBSITE") else
         "Find an alternative original company source before outreach"
     )
+    people_raw=row.get("public_role_people_json") or "[]"
+    try:
+        people=json.loads(people_raw) if isinstance(people_raw,str) else people_raw
+        people=people[:5] if isinstance(people,list) else []
+    except (ValueError,TypeError):
+        people=[]
     return {"source_key": str(row.get("source_key") or ""),
         "organization": str(row.get("organization") or ""),
         "lane": lane, "fit_score": score, "original_research_score": base,
@@ -339,6 +347,9 @@ def _priority(row: dict[str, Any]) -> dict[str, Any]:
         "scan_state": state, "contact_page_url": str(row.get("contact_page_url") or ""),
         "team_page_url": str(row.get("team_page_url") or ""),
         "general_business_channel": str(row.get("published_general_channel") or ""),
+        "general_business_channel_evidence_url":str(row.get("channel_evidence_url") or ""),
+        "public_role_people":people,
+        "people_are_verified_contacts":False,
         "site_description": str(row.get("site_description") or "")[:200],
         "site_title": str(row.get("site_title") or "")[:140],
         "last_scanned": row["scanned_at"].isoformat() if row.get("scanned_at") else None,
