@@ -454,3 +454,32 @@ async def acceptance_receipt(settings:object,*,receipt_id:str)->dict[str,Any]:
                 "private_customer_email_not_exposed":True}
     finally:
         await db.close()
+
+
+async def check_accepted_delivery_for_intake(
+    settings: object, *, intake_id: str, delivery_evidence: str = "", acceptance_url: str = ""
+) -> tuple[str, str]:
+    """Resolve the ONE canonical commercial deal; do not trust operator-provided URLs.
+
+    Both the legacy intake-level command and the Corporate CRM route must pass
+    through this same evidence gate before they can set DELIVERED or CLOSED.
+    """
+    if not re.fullmatch(r"INT-[A-Z0-9]{12}", intake_id):
+        raise WorkPacketError("INVALID_SOURCE_INTAKE")
+    db = await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_workpackets(db)
+        rows = await db.fetch("""SELECT d.id
+          FROM noetfield.corp_crm_deals d
+          JOIN noetfield.public_intakes i ON i.intake_id=d.source_intake_id
+          WHERE d.source_intake_id=$1
+            AND d.offer=(i.qualification_json->'commercial_ops'->>'offer')
+          ORDER BY d.created_at ASC LIMIT 2""", intake_id)
+        if len(rows) != 1:
+            raise WorkPacketError("UNIQUE_SOURCED_COMMERCIAL_DEAL_REQUIRED")
+        deal_id = str(rows[0]["id"])
+    finally:
+        await db.close()
+    return await check_accepted_delivery(settings, deal_id=deal_id,
+                                          delivery_evidence=delivery_evidence,
+                                          acceptance_url=acceptance_url)

@@ -194,6 +194,22 @@ async def operate(settings: object, *, intake_id: str, action: str,
             date.fromisoformat(due_date)
         except ValueError as exc:
             raise CommercialError("INVALID_DUE_DATE") from exc
+    accepted_delivery: tuple[str, str] | None = None
+    if action in {"deliver", "close"}:
+        # Centralize the only permitted DELIVERED/CLOSED evidence transition.
+        # The legacy intake-level route must not bypass the CRM's independent
+        # verifier, signed paid Checkout, or authenticated buyer acceptance.
+        from noetfield_governance.corporate_workpacket import (
+            check_accepted_delivery_for_intake, WorkPacketError,
+        )
+        try:
+            accepted_delivery = await check_accepted_delivery_for_intake(
+                settings, intake_id=intake_id,
+                delivery_evidence=delivery_evidence if action == "deliver" else "",
+                acceptance_url=acceptance_url if action == "deliver" else "",
+            )
+        except WorkPacketError as exc:
+            raise CommercialError(str(exc)) from exc
     db = await asyncpg.connect(_database_url(settings))
     try:
         await _prepare(db)
@@ -271,16 +287,33 @@ async def operate(settings: object, *, intake_id: str, action: str,
                     raise CommercialError("PAYMENT_NO_LONGER_CLEAR_FOR_DELIVERY")
                 case.update(stage="IN_DELIVERY",next_action=next_action.strip()[:350] or
                             "Produce and independently check the scoped deliverable")
-            elif action == "deliver":
-                if case.get("stage") != "IN_DELIVERY":
+            elif action in {"deliver", "close"}:
+                if (action == "deliver" and case.get("stage") != "IN_DELIVERY"):
                     raise CommercialError("DELIVERY_NOT_IN_PROGRESS")
-                case.update(stage="DELIVERED",delivery_evidence=evidence_url(delivery_evidence),
-                            customer_acceptance=evidence_url(acceptance_url),
-                            next_action="Invite a repeat engagement or a permitted customer referral")
-            elif action == "close":
-                if case.get("stage") != "DELIVERED":
+                if (action == "close" and case.get("stage") != "DELIVERED"):
                     raise CommercialError("ACCEPTED_DELIVERY_REQUIRED_TO_CLOSE")
-                case["stage"] = "CLOSED"
+                if accepted_delivery is None:
+                    raise CommercialError("INDEPENDENT_DELIVERY_EVIDENCE_REQUIRED")
+                actual_artifact, actual_acceptance = accepted_delivery
+                # Source-bound live payment is rechecked and row-locked inside
+                # the canonical intake transaction before state is persisted.
+                proof = await db.fetchrow("""SELECT reversed,livemode,source_intake_id,bound_at,
+                    event_id FROM noetfield.commercial_payment_evidence
+                    WHERE session_id=$1 FOR UPDATE""",case.get("payment_session_id"))
+                if (not proof or proof["reversed"] or not proof["livemode"]
+                        or proof["source_intake_id"] != intake_id
+                        or not proof["bound_at"]
+                        or proof["event_id"] != case.get("payment_event_id")):
+                    raise CommercialError("CURRENT_BOUND_LIVE_PAYMENT_REQUIRED")
+                if action == "deliver":
+                    case.update(stage="DELIVERED",delivery_evidence=actual_artifact,
+                                customer_acceptance=actual_acceptance,
+                                next_action="Invite a repeat engagement or a permitted customer referral")
+                else:
+                    if (case.get("delivery_evidence") != actual_artifact
+                            or case.get("customer_acceptance") != actual_acceptance):
+                        raise CommercialError("RECORDED_DELIVERY_EVIDENCE_MISMATCH")
+                    case["stage"] = "CLOSED"
             case["revision"] = revision + 1
             case["terms"] = OFFER_TERMS[case["offer"]]
             case["updated_at"] = datetime.now(UTC).isoformat()
