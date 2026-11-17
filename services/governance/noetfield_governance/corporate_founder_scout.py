@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import ipaddress
+import json
 import logging
 import re
 import socket
@@ -47,6 +48,9 @@ class _PageSignals(HTMLParser):
         self.links: list[tuple[str, str]] = []
         self._anchor: str | None = None
         self._anchor_text: list[str] = []
+        self._json_active = False
+        self._json_parts: list[str] = []
+        self.jsonld: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         fields = {key.lower(): (value or "") for key, value in attrs}
@@ -59,14 +63,24 @@ class _PageSignals(HTMLParser):
         elif tag == "a":
             self._anchor = fields.get("href", "")
             self._anchor_text = []
+        elif tag == "script" and fields.get("type","").lower()=="application/ld+json":
+            self._json_active = True
+            self._json_parts = []
 
     def handle_data(self, data: str) -> None:
+        if self._json_active and sum(map(len,self._json_parts)) < 40000:
+            self._json_parts.append(data[:40000])
         if self.in_title and len(self.title) < 220:
             self.title += data[:220]
         if self._anchor is not None and len(self._anchor_text) < 20:
             self._anchor_text.append(data[:100])
 
     def handle_endtag(self, tag: str) -> None:
+        if tag == "script" and self._json_active:
+            self._json_active = False
+            if self._json_parts and len(self.jsonld) < 6:
+                self.jsonld.append("".join(self._json_parts)[:40000])
+            self._json_parts = []
         if tag == "title":
             self.in_title = False
         elif tag == "a" and self._anchor is not None:
@@ -97,6 +111,48 @@ def _source_url(value: str) -> str:
         return urlunsplit(("https", host, u.path or "/", "", ""))
     except ValueError:
         return ""
+
+
+
+def _public_role_people(page_url: str, blocks: list[str]) -> list[dict[str,str]]:
+    """Business roles explicitly published as JSON-LD Person on official sites.
+
+    Observed page metadata is not verified identity, email or consent.
+    """
+    results: list[dict[str,str]] = []
+    seen: set[str] = set()
+    def visit(value: Any, depth: int = 0) -> None:
+        if depth > 6 or len(results) >= 5:
+            return
+        if isinstance(value, list):
+            for item in value[:40]:
+                visit(item, depth+1)
+        elif isinstance(value, dict):
+            kinds=value.get("@type",[])
+            kinds=kinds if isinstance(kinds,list) else [kinds]
+            if "Person" in kinds:
+                name=value.get("name","")
+                role=value.get("jobTitle","")
+                if isinstance(name,str) and isinstance(role,str):
+                    name=re.sub(r"\s+"," ",name).strip()[:120]
+                    role=re.sub(r"\s+"," ",role).strip()[:140]
+                    if (len(name.split())>=2 and len(name)>=5
+                            and re.search(r"\b(founder|ceo|chief|director|head of|partner|"
+                                          r"sales|growth|revenue|marketing|operations|"
+                                          r"business development)\b",role,re.I)
+                            and name.casefold() not in seen):
+                        seen.add(name.casefold())
+                        results.append({"name":name,"role":role,"evidence_url":page_url,
+                            "verification":"PUBLIC_SITE_LISTING_NOT_IDENTITY_VERIFIED"})
+            for key in ("@graph","employee","founder","member","person"):
+                if key in value:
+                    visit(value[key],depth+1)
+    for block in blocks[:6]:
+        try:
+            visit(json.loads(block))
+        except (ValueError,TypeError,RecursionError):
+            pass
+    return results
 
 
 def _page_summary(page_url: str, raw_html: str) -> dict[str, Any]:
@@ -137,6 +193,8 @@ def _page_summary(page_url: str, raw_html: str) -> dict[str, Any]:
         "public_channel": published_channel,
         "contact_url": contact_url,
         "team_url": team_url,
+        "public_people": _public_role_people(page_url, parsed.jsonld),
+        "channel_evidence_url": page_url if published_channel else "",
         "scan_state": ("PUBLISHED_GENERAL_BUSINESS_EMAIL" if published_channel
                        else "PUBLIC_CONTACT_PAGE" if contact_url
                        else "PUBLIC_TEAM_PAGE" if team_url else "NO_CHANNEL_OBSERVED"),
@@ -163,7 +221,7 @@ async def _public_ip(host: str) -> str:
     return next((ip for ip in addresses if ":" not in ip), addresses[0])
 
 
-async def fetch_official_signals(website: str) -> dict[str, Any]:
+async def fetch_official_signals(website: str, *, _depth: int = 0) -> dict[str, Any]:
     """Fetch one first-party source with bounded bytes, no redirects, pinned TLS SNI.
 
     A published generic mailbox is a CONTACT CHANNEL, not a verified individual
@@ -199,6 +257,33 @@ async def fetch_official_signals(website: str) -> dict[str, Any]:
         if not buf:
             return {"scan_state": "SOURCE_UNAVAILABLE", "page_url": source, "error": "EMPTY_PAGE"}
         signals = _page_summary(source, buf.decode("utf-8", errors="replace"))
+        if _depth == 0:
+            # Only same-host links observed in the actual source are eligible.
+            urls = []
+            seen = {source}
+            for field in ("contact_url", "team_url"):
+                link = signals.get(field,"")
+                if link and link not in seen and urlsplit(link).hostname==host:
+                    urls.append(link)
+                    seen.add(link)
+            found = await asyncio.gather(*(
+                asyncio.wait_for(fetch_official_signals(link,_depth=1),timeout=8)
+                for link in urls[:2]
+            ),return_exceptions=True)
+            people=list(signals.get("public_people",[]))
+            for detail in found:
+                if not isinstance(detail,dict) or detail.get("scan_state")=="SOURCE_UNAVAILABLE":
+                    continue
+                if detail.get("public_channel") and not signals.get("public_channel"):
+                    signals["public_channel"]=detail["public_channel"]
+                    signals["channel_evidence_url"]=detail.get("page_url","")
+                    signals["scan_state"]="PUBLISHED_GENERAL_BUSINESS_EMAIL"
+                for person in detail.get("public_people",[]):
+                    if len(people)<5 and not any(
+                        p["name"].casefold()==person["name"].casefold() for p in people
+                    ):
+                        people.append(person)
+            signals["public_people"]=people
         return {"page_url": source, "error": "", **signals}
     except (ValueError, OSError, httpx.HTTPError, asyncio.TimeoutError) as exc:
         reason = ("DNS_OR_NETWORK_UNAVAILABLE" if not isinstance(exc, ValueError) else str(exc))
@@ -214,12 +299,18 @@ async def prepare_scout(db: asyncpg.Connection) -> None:
        site_title text NOT NULL DEFAULT '',
        site_description text NOT NULL DEFAULT '',
        published_general_channel text NOT NULL DEFAULT '',
+       channel_evidence_url text NOT NULL DEFAULT '',
+       public_role_people_json text NOT NULL DEFAULT '[]',
        contact_page_url text NOT NULL DEFAULT '',
        team_page_url text NOT NULL DEFAULT '',
        scan_state text NOT NULL,
        error_code text NOT NULL DEFAULT '',
        scanned_at timestamptz NOT NULL DEFAULT now()
     )""")
+    await db.execute("""ALTER TABLE noetfield.corp_founder_scout
+       ADD COLUMN IF NOT EXISTS channel_evidence_url text NOT NULL DEFAULT ''""")
+    await db.execute("""ALTER TABLE noetfield.corp_founder_scout
+       ADD COLUMN IF NOT EXISTS public_role_people_json text NOT NULL DEFAULT '[]'""")
     await db.execute("""CREATE INDEX IF NOT EXISTS corp_founder_scout_scanned_idx
        ON noetfield.corp_founder_scout(scanned_at)""")
 
@@ -229,7 +320,9 @@ def _priority(row: dict[str, Any]) -> dict[str, Any]:
     base = max(0, min(int(row.get("score") or 0), 100))
     state = row.get("scan_state") or "NOT_RESEARCHED"
     has_channel = state in ("PUBLISHED_GENERAL_BUSINESS_EMAIL", "PUBLIC_CONTACT_PAGE")
-    score = min(100, round(base * .65) + (25 if has_channel else 10 if state == "PUBLIC_TEAM_PAGE" else 0))
+    has_website=bool(_source_url(str(row.get("website") or "")))
+    score=min(100,round(base*.55)+(18 if has_website else 0)+
+        (22 if has_channel else 8 if state=="PUBLIC_TEAM_PAGE" else 0))
     lane = row.get("lane")
     hypothesis = ("RWA technical readiness" if lane == "RWA"
                   else "AI Sales OS discovery")
@@ -240,6 +333,12 @@ def _priority(row: dict[str, Any]) -> dict[str, Any]:
         if state not in ("SOURCE_UNAVAILABLE", "NO_USABLE_WEBSITE") else
         "Find an alternative original company source before outreach"
     )
+    people_raw=row.get("public_role_people_json") or "[]"
+    try:
+        people=json.loads(people_raw) if isinstance(people_raw,str) else people_raw
+        people=people[:5] if isinstance(people,list) else []
+    except (ValueError,TypeError):
+        people=[]
     return {"source_key": str(row.get("source_key") or ""),
         "organization": str(row.get("organization") or ""),
         "lane": lane, "fit_score": score, "original_research_score": base,
@@ -248,6 +347,9 @@ def _priority(row: dict[str, Any]) -> dict[str, Any]:
         "scan_state": state, "contact_page_url": str(row.get("contact_page_url") or ""),
         "team_page_url": str(row.get("team_page_url") or ""),
         "general_business_channel": str(row.get("published_general_channel") or ""),
+        "general_business_channel_evidence_url":str(row.get("channel_evidence_url") or ""),
+        "public_role_people":people,
+        "people_are_verified_contacts":False,
         "site_description": str(row.get("site_description") or "")[:200],
         "site_title": str(row.get("site_title") or "")[:140],
         "last_scanned": row["scanned_at"].isoformat() if row.get("scanned_at") else None,
@@ -276,7 +378,8 @@ async def founder_scout_board(settings: object, *, limit: int = 12) -> dict[str,
           FROM noetfield.corp_founder_scout""")
         rows = await db.fetch("""SELECT r.source_key,r.organization,r.lane,r.score,
           r.website,r.original_url,s.page_url,s.site_title,s.site_description,
-          s.published_general_channel,s.contact_page_url,s.team_page_url,
+          s.published_general_channel,s.channel_evidence_url,s.public_role_people_json,
+          s.contact_page_url,s.team_page_url,
           s.scan_state,s.scanned_at
           FROM noetfield.corp_research_sources r
           LEFT JOIN noetfield.corp_founder_scout s ON s.source_key=r.source_key
@@ -328,13 +431,14 @@ async def run_scout_batch(settings: object, *, limit: int = 3,
             AND (s.scanned_at IS NULL OR s.scanned_at < now()-interval '7 days'
                  OR $2::text <> '')
           ORDER BY (s.scanned_at IS NULL) DESC,
-            s.scanned_at ASC NULLS FIRST, r.score DESC
+            s.scanned_at ASC NULLS FIRST,
+            (nullif(r.website,'') IS NULL),r.score DESC
           LIMIT $1""",count,source_key.strip())
         outcomes = []
         # Fetch independent sources concurrently; only persistence is serialized.
         # A five-site button stays responsive even when one source is unavailable.
         findings = await asyncio.gather(*(
-            asyncio.wait_for(fetch_official_signals(str(row["website"] or "")),timeout=12)
+            asyncio.wait_for(fetch_official_signals(str(row["website"] or "")),timeout=22)
             for row in rows
         ),return_exceptions=True)
         for row, observed in zip(rows, findings):
@@ -345,22 +449,25 @@ async def run_scout_batch(settings: object, *, limit: int = 3,
             })
             await db.execute("""INSERT INTO noetfield.corp_founder_scout(
                source_key,page_url,site_title,site_description,
-               published_general_channel,contact_page_url,team_page_url,
-               scan_state,error_code,scanned_at)
-               VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,now())
+               published_general_channel,channel_evidence_url,public_role_people_json,
+               contact_page_url,team_page_url,scan_state,error_code,scanned_at)
+               VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,now())
                ON CONFLICT(source_key) DO UPDATE SET
                page_url=excluded.page_url,site_title=excluded.site_title,
                site_description=excluded.site_description,
                published_general_channel=excluded.published_general_channel,
+               channel_evidence_url=excluded.channel_evidence_url,
+               public_role_people_json=excluded.public_role_people_json,
                contact_page_url=excluded.contact_page_url,
                team_page_url=excluded.team_page_url,
                scan_state=excluded.scan_state,error_code=excluded.error_code,
                scanned_at=now()""",
                row["source_key"],finding.get("page_url", ""),
                finding.get("title", ""),finding.get("description", ""),
-               finding.get("public_channel", ""),finding.get("contact_url", ""),
-               finding.get("team_url", ""),finding["scan_state"],
-               finding.get("error", ""))
+               finding.get("public_channel", ""),finding.get("channel_evidence_url", ""),
+               json.dumps(finding.get("public_people",[])[:5],ensure_ascii=False),
+               finding.get("contact_url", ""),finding.get("team_url", ""),
+               finding["scan_state"],finding.get("error", ""))
             outcomes.append({
                 "source_key":row["source_key"],"organization":row["organization"],
                 "scan_state":finding["scan_state"],

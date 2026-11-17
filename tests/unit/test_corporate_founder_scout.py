@@ -59,6 +59,67 @@ def test_first_party_contact_page_is_research_not_a_verified_person():
     assert "AI Sales OS" in card["offer_hypothesis"]
 
 
+def test_real_first_party_contact_and_team_pages_are_followed_with_source_receipts():
+    """No guessed decision-maker: observed mailto + explicit company JSON-LD."""
+    import json
+    from urllib.parse import urlsplit
+
+    home='<a href="/contact">Business enquiries</a><a href="/team">Our team</a>'
+    contact='<a href="mailto:partnerships@example.org">Partnerships desk</a>'
+    team='<script type="application/ld+json">'+json.dumps({
+      "@graph":[{"@type":"Person","name":"Jane Example",
+                 "jobTitle":"Head of Partnerships"},
+                {"@type":"Person","name":"Alan Someone","jobTitle":"Janitor"}]
+    })+'</script>'
+    contents={"/":home,"/contact":contact,"/team":team}
+    requested=[]
+    class FakeResponse:
+        status_code=200
+        headers={"content-type":"text/html; charset=utf-8"}
+        def __init__(self,page):self.page=page
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        async def aiter_bytes(self):
+            yield contents[self.page].encode("utf-8")
+    class FakeClient:
+        def __init__(self,*args,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):return False
+        def stream(self,method,dest,**kwargs):
+            assert method=="GET" and kwargs["headers"]["Host"]=="www.example.org"
+            assert kwargs["extensions"]["sni_hostname"]=="www.example.org"
+            page=urlsplit(dest).path
+            requested.append(page)
+            return FakeResponse(page)
+    async def execute():
+        with patch("noetfield_governance.corporate_founder_scout._public_ip",
+                   new_callable=AsyncMock,return_value="1.1.1.1"),patch(
+             "noetfield_governance.corporate_founder_scout.httpx.AsyncClient",
+             FakeClient):
+            result=await fetch_official_signals("https://www.example.org")
+        assert result["public_channel"]=="partnerships@example.org"
+        assert result["channel_evidence_url"]=="https://www.example.org/contact"
+        assert result["scan_state"]=="PUBLISHED_GENERAL_BUSINESS_EMAIL"
+        assert result["public_people"]==[{
+            "name":"Jane Example","role":"Head of Partnerships",
+            "evidence_url":"https://www.example.org/team",
+            "verification":"PUBLIC_SITE_LISTING_NOT_IDENTITY_VERIFIED"
+        }]
+        assert requested==["/","/contact","/team"] or (
+            requested[0]=="/" and set(requested[1:])=={"/contact","/team"})
+    asyncio.run(execute())
+
+
+def test_website_coverage_priority_reduces_scout_time_wasted_on_blank_urls():
+    from noetfield_governance.corporate_founder_scout import _priority
+    base={"source_key":"example:source:1","organization":"Company",
+          "lane":"CORPORATE","score":83,"original_url":"https://example.org/research"}
+    ranked=_priority({**base,"website":"https://example.org"})
+    empty=_priority({**base,"website":""})
+    assert ranked["fit_score"]>empty["fit_score"]
+    assert empty["customer_qualified"] is False and ranked["customer_qualified"] is False
+
+
 def test_no_website_does_not_fallback_to_arbitrary_github_source():
     async def case():
         r=await fetch_official_signals("")
@@ -125,6 +186,61 @@ def test_source_batch_saves_automatically_without_any_person_or_deal_creation():
             assert "corp_crm_people" not in writes[0] and "corp_crm_deals" not in writes[0]
     with patch("noetfield_governance.corporate_founder_scout._database_url",return_value="postgresql://test"):
         asyncio.run(case())
+
+
+@pytest.mark.skipif(not __import__("os").environ.get("CONNECT_TEST_POSTGRES_URL"),
+                    reason="Disposable PostgreSQL required")
+def test_real_postgres_preserves_exact_public_person_and_mailbox_source_without_crm_lead():
+    """Real migrations and source-key persistence; absolutely no network or email."""
+    import os
+    import json
+    from uuid import uuid4
+    import asyncpg
+    from noetfield_governance.corporate_founder_scout import prepare_scout
+    async def scenario():
+        url=os.environ["CONNECT_TEST_POSTGRES_URL"]
+        key="founder:scout:test:"+uuid4().hex
+        db=await asyncpg.connect(url)
+        try:
+            await db.execute("CREATE SCHEMA IF NOT EXISTS noetfield")
+            await prepare_scout(db)
+            await db.execute("""INSERT INTO noetfield.corp_research_sources(
+              source_key,organization,lane,original_url,website,evidence_url,
+              review_status,score)
+              VALUES($1,'Public Business Research','CORPORATE',$2,'https://example.org',
+                $2,'PROFILE_REVIEWED',91)""",key,"https://example.org/original/"+key)
+        finally:
+            await db.close()
+        observed={"scan_state":"PUBLISHED_GENERAL_BUSINESS_EMAIL",
+           "page_url":"https://example.org/","title":"Public Business Research",
+           "description":"Professional technology consultancy",
+           "public_channel":"partnerships@example.org",
+           "channel_evidence_url":"https://example.org/contact",
+           "public_people":[{"name":"Jane Example","role":"Head of Partnerships",
+              "evidence_url":"https://example.org/team",
+              "verification":"PUBLIC_SITE_LISTING_NOT_IDENTITY_VERIFIED"}],
+           "contact_url":"https://example.org/contact","team_url":"https://example.org/team",
+           "error":""}
+        with patch("noetfield_governance.corporate_founder_scout._database_url",
+                   return_value=url),patch(
+             "noetfield_governance.corporate_founder_scout.fetch_official_signals",
+             new_callable=AsyncMock,return_value=observed):
+            done=await run_scout_batch(object(),source_key=key,limit=1)
+        assert done["scanned"]==1 and done["contacts_qualified"]==0
+        assert done["messages_sent"]==0
+        db=await asyncpg.connect(url)
+        try:
+            saved=await db.fetchrow("""SELECT s.published_general_channel,
+              s.channel_evidence_url,s.public_role_people_json,s.scan_state
+              FROM noetfield.corp_founder_scout s WHERE s.source_key=$1""",key)
+            assert saved is not None
+            assert saved["channel_evidence_url"]=="https://example.org/contact"
+            assert json.loads(saved["public_role_people_json"])==observed["public_people"]
+            assert await db.fetchval("""SELECT count(*)::int
+              FROM noetfield.corp_crm_deals d WHERE d.summary LIKE $1""","%"+key+"%")==0
+        finally:
+            await db.close()
+    asyncio.run(scenario())
 
 
 def test_founder_cockpit_language_and_manual_ops_are_secondary():
