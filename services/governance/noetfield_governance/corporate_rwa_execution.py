@@ -325,3 +325,114 @@ async def customer_rwa_report(settings:object,*,deal_id:str,
         }
     finally:
         await db.close()
+
+
+INDEPENDENT_RWA_VERIFIER="https://verify.noetfield.com/api/internal/commercial/verify-rwa"
+
+
+async def verify_paid_rwa_clinic(settings:object,*,deal_id:str)->dict[str,Any]:
+    """Native nine-gate re-evaluation by separate Verifier, accepted delivery remains buyer-only."""
+    import os
+    token=os.environ.get("CORPORATE_VERIFIER_INVOKE_TOKEN","").strip()
+    if len(token)<32:
+        return {"state":"INDEPENDENT_VERIFIER_NOT_CONFIGURED",
+                "customer_accepted":False}
+    try:
+        deal_uuid=uuid.UUID(deal_id)
+    except (TypeError,ValueError) as exc:
+        raise WorkPacketError("INVALID_DEAL_ID") from exc
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_clinic_submissions(db)
+        row=await db.fetchrow("""SELECT w.id,w.deal_id,w.source_intake_id,
+            w.scope_ref,w.payment_event_id,w.state,w.external_workpacket_id,
+            s.state AS submission_state,s.clinic_case_id
+          FROM noetfield.corp_workpackets w
+          JOIN noetfield.corp_rwa_clinic_submissions s ON s.workpacket_id=w.id
+          WHERE w.deal_id=$1 AND w.engine='RWA_CLINIC'""",deal_uuid)
+        if not row:
+            raise WorkPacketError("PAID_RWA_CASE_NOT_SUBMITTED")
+        if row["state"]=="VERIFIED":
+            return {"state":"ALREADY_INDEPENDENTLY_VERIFIED",
+                    "workpacket_id":str(row["id"]),
+                    "independently_verified_technical_report":True,
+                    "customer_accepted":False}
+        if (row["state"]!="ACKNOWLEDGED"
+            or row["submission_state"]!="PROVIDER_ACCEPTED"
+            or row["external_workpacket_id"]!=row["clinic_case_id"]):
+            return {"state":"REAL_NATIVE_PROVIDER_RECEIPT_REQUIRED",
+                    "independently_verified_technical_report":False,
+                    "customer_accepted":False}
+        info=validate_paid_case(await _paid_row(db,row["deal_id"]))
+        if (info["source_intake_id"]!=row["source_intake_id"]
+             or info["scope_ref"]!=row["scope_ref"]
+             or info["payment_event_id"]!=row["payment_event_id"]):
+            raise WorkPacketError("SIGNED_PAID_RWA_SOURCE_RECHECK_FAILED")
+        request={
+          "platform_workpacket_id":str(row["id"]),
+          "source_intake_id":row["source_intake_id"],
+          "payment_event_id":row["payment_event_id"],
+          "engine":"RWA_CLINIC",
+        }
+    finally:
+        await db.close()
+    try:
+        async with httpx.AsyncClient(timeout=35,follow_redirects=False) as client:
+            response=await client.post(
+                INDEPENDENT_RWA_VERIFIER,json=request,
+                headers={"Authorization":"Bearer "+token,"Accept":"application/json"})
+    except httpx.RequestError:
+        return {"state":"INDEPENDENT_RWA_VERIFIER_TRANSPORT_UNCONFIRMED",
+                "customer_accepted":False}
+    if response.status_code!=200:
+        return {"state":"INDEPENDENT_RWA_VERIFIER_NOT_ACKNOWLEDGED",
+                "provider_status":response.status_code,
+                "independently_verified_technical_report":False,
+                "customer_accepted":False}
+    try:
+        result=response.json()
+    except ValueError as exc:
+        raise WorkPacketError("UNREADABLE_RWA_VERIFIER_ACK") from exc
+    if (not isinstance(result,dict)
+        or result.get("schema")!="noetfield.rwa-independent-verification-result.v1"
+        or result.get("state")!="VERIFIED"
+        or result.get("clinic_case_id")!=row["clinic_case_id"]
+        or result.get("callback_acknowledged") is not True
+        or result.get("independent_replay_passed") is not True
+        or result.get("customer_accepted") is not False
+        or result.get("no_investment_approval") is not True):
+        raise WorkPacketError("INDEPENDENT_CLINIC_VERIFIER_ACK_MISMATCH")
+    return {"state":"INDEPENDENT_TECHNICAL_REPORT_VERIFIED",
+            "clinic_case_id":row["clinic_case_id"],
+            "workpacket_id":str(row["id"]),
+            "verifier_receipt_url":result["verifier_receipt_url"],
+            "independently_verified_technical_report":True,
+            "customer_accepted":False,"investment_approval":False}
+
+
+async def reconcile_pending_native_rwa_cases(settings:object,*,limit:int=2)->dict[str,Any]:
+    """Only actual provider-accepted, paid RWA cases; zero synthetic jobs."""
+    import os
+    if len(os.environ.get("CORPORATE_RWA_VERIFIER_READ_TOKEN",""))<32:
+        return {"state":"NOT_CONFIGURED","checked":0}
+    db=await asyncpg.connect(_database_url(settings))
+    try:
+        await prepare_clinic_submissions(db)
+        rows=await db.fetch("""SELECT w.deal_id FROM noetfield.corp_workpackets w
+            JOIN noetfield.corp_rwa_clinic_submissions s ON s.workpacket_id=w.id
+            WHERE w.engine='RWA_CLINIC' AND w.state='ACKNOWLEDGED'
+                AND s.state='PROVIDER_ACCEPTED'
+            ORDER BY w.updated_at ASC LIMIT $1""",max(1,min(5,limit)))
+    finally:
+        await db.close()
+    states=[]
+    for row in rows:
+        try:
+            outcome=await verify_paid_rwa_clinic(settings,deal_id=str(row["deal_id"]))
+            states.append(outcome["state"])
+        except (WorkPacketError,ValueError):
+            states.append("REJECTED")
+    return {"state":"COMPLETE","checked":len(rows),
+            "independently_verified_technical_reports":
+                states.count("INDEPENDENT_TECHNICAL_REPORT_VERIFIED"),
+            "customer_acceptance_auto_granted":False}
