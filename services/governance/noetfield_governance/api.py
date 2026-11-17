@@ -59,6 +59,11 @@ from noetfield_governance.connect_bridge_reconciler import (
     stop_scheduler as stop_connect_bridge_reconciler,
     get_worker as get_connect_bridge_reconciler,
 )
+from noetfield_governance.corporate_revenue_loop import (
+    start_scheduler as start_corporate_revenue_scheduler,
+    stop_scheduler as stop_corporate_revenue_scheduler,
+    get_worker as get_corporate_revenue_worker,
+)
 from noetfield_governance.company_os_connect_readback import readback as readback_connect_company_os
 from noetfield_governance.connect_relationship import project_relationship
 from noetfield_governance.intake_notify import (
@@ -492,6 +497,7 @@ async def startup_platform() -> None:
     await start_signal_triage_scheduler(settings)
     await start_connect_due_scheduler(settings)
     await start_connect_bridge_reconciler(settings)
+    await start_corporate_revenue_scheduler(settings)
     # Always wire a store (Postgres in prod; in-memory for staging/tests).
     app.state.pilot_key_store = pilot_key_store
     connect = getattr(pilot_key_store, "connect", None)
@@ -505,6 +511,7 @@ async def shutdown_runtime() -> None:
     await stop_signal_triage_scheduler()
     await stop_connect_due_scheduler()
     await stop_connect_bridge_reconciler()
+    await stop_corporate_revenue_scheduler()
     await intake_repository.close_intake_repository()
     await close_community_pool()
     await redis_runtime.close()
@@ -2649,6 +2656,26 @@ async def corporate_recover_intakes(
         return await recover_intakes(settings, execute=body.execute, limit=body.limit)
     except CorporateCRMError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.get("/api/corporate-crm/operations/cycle-status",
+         tags=["operations"], include_in_schema=False)
+async def corporate_revenue_cycle_status(request: Request) -> dict[str, object]:
+    _require_connect_desk_operator(request)
+    worker = get_corporate_revenue_worker()
+    if worker is None:
+        return {"configured": False, "latest": None}
+    return await worker.status()
+
+
+@app.post("/api/corporate-crm/operations/run-cycle",
+          tags=["operations"], include_in_schema=False)
+async def corporate_revenue_run_cycle(request: Request) -> dict[str, object]:
+    _require_connect_desk_operator(request)
+    worker = get_corporate_revenue_worker()
+    if worker is None:
+        raise HTTPException(status_code=503, detail="CORPORATE_REVENUE_LOOP_DISABLED")
+    return await worker.run_once()
 
 
 @app.post("/api/corporate-crm/accounts", tags=["operations"], include_in_schema=False)
