@@ -135,7 +135,7 @@ jobs:
         run: python -m pytest -q tests/unit/test_corporate_fieldwork_outbound.py
       - name: Verify paid scope to real WorkPacket and independent customer receipt contract
         run: python -m pytest -q tests/unit/test_corporate_workpacket.py
-      - name: Regression test: legacy intake deliver/close require genuine verifier and buyer
+      - name: Regression legacy intake deliver and close require genuine verifier and buyer
         run: python -m pytest -q tests/unit/test_commercial_delivery_single_truth.py
       - name: Check static operator shell for unsafe storage
         run: |
