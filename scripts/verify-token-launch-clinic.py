@@ -70,7 +70,7 @@ for resource in ("token-launch/clinic-growth-v2.js", "token-launch/clinic-offers
 extra_js = (ROOT / "token-launch/clinic-growth-v2.js").read_text(encoding="utf-8")
 for marker in (
     "clinic-generate-brief", "clinic-use-brief", "clinic-copy-brief",
-    "requested_package=", "utm_medium=", "utm_content=", "launch",
+    "requested_package=", "utm_medium=", "utm_content=", "campaignPersona", "launch",
 ):
     assert marker in extra_js, f"Missing service attribution/first-value flow: {marker}"
 subprocess.run(["node","--check",str(ROOT / "token-launch/clinic-growth-v2.js")],check=True,capture_output=True)
