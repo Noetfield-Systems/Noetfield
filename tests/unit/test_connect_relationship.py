@@ -38,7 +38,7 @@ def row(intake_id, email, venture="noetfield", kind="people", name="A Person", *
     }
 
 
-def test_multiple_opportunities_one_claim_identity_without_cross_venture_export():
+def test_noetfield_corporate_graph_never_merges_same_email_across_ventures():
     rows = [
         row("INT-ABCDEF100001", "someone@example.invalid", title="Sales intro"),
         row("INT-ABCDEF100002", "SOMEONE@example.invalid", venture="buildrelay",
@@ -48,14 +48,14 @@ def test_multiple_opportunities_one_claim_identity_without_cross_venture_export(
             {"form_id": "nfConnectWizard", "intake_kind": "test"}},
     ]
     result = project_relationship(rows, "INT-ABCDEF100001")
-    assert result["opportunity_count"] == 2
-    assert result["ventures"] == ["buildrelay", "noetfield"]
+    assert result["opportunity_count"] == 1
+    assert result["ventures"] == ["noetfield"]
     assert len([n for n in result["nodes"] if n["type"] == "person_claim"]) == 1
-    assert len([n for n in result["nodes"] if n["type"] == "opportunity"]) == 2
+    assert len([n for n in result["nodes"] if n["type"] == "opportunity"]) == 1
     assert result["canonical_crm_sync"] == "NOT_CONNECTED"
     assert result["cross_venture_export"] is False
     assert result["verified_cash_collected"] is None
-    assert all(e["provenance"] in {"INT-ABCDEF100001", "INT-ABCDEF100002"}
+    assert all(e["provenance"] == "INT-ABCDEF100001"
                for e in result["edges"])
     assert not project_relationship(rows,"INT-MISSING")
 
