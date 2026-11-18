@@ -12,7 +12,8 @@ from typing import Any
 def project_relationship(rows: list[dict[str, Any]], intake_id: str) -> dict[str, Any]:
     valid = [r for r in rows if isinstance(r.get("metadata"), dict)
              and r["metadata"].get("form_id") == "nfConnectWizard"
-             and r["metadata"].get("intake_kind") != "test"]
+             and r["metadata"].get("intake_kind") != "test"
+             and r["metadata"].get("initiative") == "noetfield"]
     selected = next((r for r in valid if r.get("intake_id") == intake_id), None)
     if not selected:
         return {}
