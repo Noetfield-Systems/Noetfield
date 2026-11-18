@@ -21,10 +21,18 @@ for (const field of ['intent','initiative','title','description','name','email',
 for (const category of ['partnership','growth','capital','people','events','business','other']) {
   assert.ok(page.includes('value="'+category+'"'), 'missing type '+category);
 }
-for (const initiative of ['portfolio','noetfield','workforce','buildrelay','sourcea','trustfield','other','buildworkflow','outboundos','signalforge','earnloop','misenorth','interiormatch']) {
-  assert.ok(page.includes('value="'+initiative+'"'), 'missing initiative '+initiative);
+for (const initiative of ['noetfield','other']) {
+  assert.ok(page.includes('value="'+initiative+'"'), 'missing company initiative '+initiative);
 }
-assert.match(page,/TrustField \/ independent venture/);
+// Corporate public intake must never solicit unrelated founder ventures into Noetfield's CRM.
+for(const independent of ['portfolio','buildrelay','signalforge','earnloop','trustfield','misenorth','interiormatch','outboundos','localgift']){
+  assert.doesNotMatch(page,new RegExp('<option value="'+independent+'">'),'cross-venture initiative leaked into corporate intake: '+independent);
+}
+const contribute=fs.readFileSync(path.join(root,'work-with-us','contribute','index.html'),'utf8');
+assert.match(contribute,/Noetfield · Corporate collaboration/);
+for(const independent of ['buildrelay','signalforge','earnloop','misenorth','localgift']){
+  assert.doesNotMatch(contribute,new RegExp('<option value="'+independent+'">'),'cross-venture contributor intake leaked: '+independent);
+}
 assert.doesNotMatch(page,/translateFa|hreflang="fa"|lang="fa"/);
 assert.match(page,/var guidance=/);
 assert.match(page,/consent_contact:form\.elements\.namedItem\("contactConsent"\)\.checked/);
@@ -45,6 +53,8 @@ assert.doesNotMatch(progressive,/translateExtras|params\.get\("lang"\)|fa\?/);
 for(const feature of ['participant/status','participant/feedback','nf-connect-saved','chooseFromLink']) {
  assert.ok(progressive.includes(feature),'regressed English progressive intake feature: '+feature);
 }
+assert.doesNotMatch(progressive,/init\.value="portfolio"/);
+assert.match(progressive,/init\.value="noetfield"/);
 new vm.Script(progressive,{filename:'noetfield-connect-v3.js'});
 
 const desk=fs.readFileSync(path.join(root,'assets','opportunity-desk.html'),'utf8');
