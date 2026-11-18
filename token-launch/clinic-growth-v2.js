@@ -29,6 +29,13 @@ var planPaths={
   steps:["Identify the asset, controller, issuing party and jurisdiction.","Map title, economic rights, transfer terms and servicing records.","Classify issuer and authorization needs for the actual transaction.","Define permissioning, smart-contract controls and record reconciliation.","Scope the separate RWA readiness assessment and technical next steps."]
  }
 };
+// Match landing experience to the specific campaign persona without forcing a wallet or signup.
+var campaignPersona=(new URLSearchParams(window.location.search)).get("utm_content");
+if(["startup","community","business","rwa"].indexOf(campaignPersona)!==-1){
+ var typeSelect=document.getElementById("clinic-type");
+ var typeMap={startup:"startup-token-launch",community:"community-token-launch",business:"business-tokenization",rwa:"rwa-tokenization"};
+ if(typeSelect){typeSelect.value=typeMap[campaignPersona];typeSelect.dispatchEvent(new Event("change",{bubbles:true}));}
+}
 var selectedOffer="";
 var brief="";
 var form=document.getElementById("nfTokenLaunchIntake");
