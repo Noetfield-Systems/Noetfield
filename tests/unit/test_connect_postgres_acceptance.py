@@ -129,7 +129,7 @@ def test_source_backed_due_digest_is_acknowledged_once_without_contact_data():
                 await con.execute("""INSERT INTO noetfield.public_intakes
                     (intake_id,metadata,qualification_json,created_at)
                     VALUES ($1,$2::jsonb,$3::jsonb,now()-interval '2 days')""",
-                    iid, json.dumps({"form_id":"nfConnectWizard",
+                    iid, json.dumps({"form_id":"nfConnectWizard", "initiative":"noetfield",
                                      "intake_kind":"test" if test else "lead",
                                      "email":"private@example.invalid"}),
                     json.dumps({"connect_ops":{
