@@ -1,0 +1,25 @@
+name: Token Launch Clinic public customer journey
+on:
+  pull_request:
+    paths:
+      - 'token-launch/**'
+      - 'scripts/verify-token-launch-clinic.py'
+      - '.github/workflows/token-launch-clinic.yml'
+  push:
+    paths:
+      - 'token-launch/**'
+      - 'scripts/verify-token-launch-clinic.py'
+      - '.github/workflows/token-launch-clinic.yml'
+jobs:
+  clinic-acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Token Launch Clinic customer route and exact reused intake
+        run: python3 scripts/verify-token-launch-clinic.py
+      - name: Build public Cloudflare Pages artifact
+        run: bash scripts/build-www-pages-dist.sh
+      - name: Confirm included public route and static output boundaries
+        run: |
+          test -s www-pages-dist/token-launch/index.html
+          bash scripts/verify-www-pages-dist.sh
