@@ -23,6 +23,8 @@ jobs:
           cache: npm
       - name: Install existing website build dependencies
         run: npm ci
+      - name: Install pinned social-preview build dependency
+        run: python3 -m pip install pillow==12.2.0
       - name: Build public Cloudflare Pages artifact
         run: bash scripts/build-www-pages-dist.sh
       - name: Confirm included public route and static output boundaries
