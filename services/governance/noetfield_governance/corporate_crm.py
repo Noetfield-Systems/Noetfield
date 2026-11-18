@@ -23,7 +23,7 @@ KIND = frozenset({"buyer", "asset_originator", "referral_partner", "delivery_par
 SECTOR = frozenset({"private_credit", "real_estate", "business_acquisition",
                     "financial_services", "professional_services", "technology",
                     "industry", "other"})
-OFFER = frozenset({"rwa_technical_sprint", "ai_sales_os_pilot", "asset_administration",
+OFFER = frozenset({"rwa_technical_sprint", "token_launch_engineering", "ai_sales_os_pilot", "asset_administration",
                    "business_automation", "strategic_partnership", "other"})
 STAGE = frozenset({"NEW", "QUALIFYING", "DISCOVERY", "SCOPE_SENT", "NEGOTIATING",
                    "SIGNED", "IN_DELIVERY", "DELIVERED", "RETAINED", "LOST"})
@@ -325,6 +325,9 @@ def inbound_offer(record: object) -> tuple[str, str, int] | None:
     if not isinstance(meta, dict) or is_test_intake(metadata=meta, request_id=rid, contact_email=email):
         return None
     vector = str(getattr(record, "vector", "") or "")
+    if (vector == "onchain-project" and meta.get("form_id") == "nfTokenLaunchIntake"
+            and meta.get("page") == "/token-launch/" and meta.get("initiative", "noetfield") in ("", "noetfield")):
+        return ("token_launch_engineering", "usd", 0)
     if vector == "onchain-project" and meta.get("form_id") == "nfCapitalIntake":
         return ("rwa_technical_sprint", "usd", 95000)
     if (vector == "external-opportunities" and meta.get("form_id") == "nfConnectWizard"

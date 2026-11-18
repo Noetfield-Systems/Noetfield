@@ -136,6 +136,9 @@ def test_auto_import_only_noetfield_inbound_not_portfolio_web3():
                     contact_email=kwargs.get("email","real@buyer.example.org"))
     rwa=record("onchain-project",{"form_id":"nfCapitalIntake"})
     assert inbound_offer(rwa)==("rwa_technical_sprint","usd",95000)
+    token=record("onchain-project",{"form_id":"nfTokenLaunchIntake","page":"/token-launch/","initiative":"noetfield"})
+    assert inbound_offer(token)==("token_launch_engineering","usd",0)
+
     crm=record("external-opportunities",{"form_id":"nfConnectWizard",
                           "initiative":"noetfield","category":"business"})
     assert inbound_offer(crm)==("business_automation","cad",0)
@@ -149,11 +152,35 @@ def test_auto_import_only_noetfield_inbound_not_portfolio_web3():
                        "initiative":"portfolio","category":"business"}),
         record("onchain-project",{"form_id":"nfCapitalIntake","intake_kind":"test"}),
         record("web-intake",{"form_id":"nfCapitalIntake"}),
+        record("onchain-project",{"form_id":"nfTokenLaunchIntake","page":"/fake-token/"}),
+        record("onchain-project",{"form_id":"nfTokenLaunchIntake","page":"/token-launch/","initiative":"buildrelay"}),
+        record("onchain-project",{"form_id":"nfTokenLaunchIntake","page":"/token-launch/","intake_kind":"test"}),
+
         record("external-opportunities",{"form_id":"nfConnectWizard",
                        "initiative":"noetfield","category":"people"}),
         record("onchain-project",{"form_id":"nfCapitalIntake"},email="e2e@noetfield.com"),
     ):
         assert inbound_offer(invalid) is None
+
+
+def test_token_clinic_is_qualified_as_noetfield_commercial_intake_without_fictitious_price():
+    from noetfield_governance.corporate_crm import inbound_offer
+    from types import SimpleNamespace
+    accepted=SimpleNamespace(vector="onchain-project",
+        metadata={"form_id":"nfTokenLaunchIntake","page":"/token-launch/","initiative":"noetfield",
+                  "topic":"business-tokenization","target_context":"chain=undecided"},
+        request_id="RID-REAL-CLINIC123",contact_email="hello@legit-company.org")
+    assert inbound_offer(accepted)==("token_launch_engineering","usd",0)
+    assert "token_launch_engineering" in OFFER
+    for blocked in (
+        SimpleNamespace(vector="web-intake",metadata=accepted.metadata,
+            request_id=accepted.request_id,contact_email=accepted.contact_email),
+        SimpleNamespace(vector="onchain-project",metadata={**accepted.metadata,"initiative":"cairn"},
+            request_id=accepted.request_id,contact_email=accepted.contact_email),
+        SimpleNamespace(vector="onchain-project",metadata={**accepted.metadata,"intake_kind":"test"},
+            request_id=accepted.request_id,contact_email=accepted.contact_email),
+    ):
+        assert inbound_offer(blocked) is None
 
 
 def test_auto_import_uses_canonical_intake_and_produces_no_outreach():
