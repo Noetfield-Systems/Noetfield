@@ -22,7 +22,6 @@
     "proof/lab/case-009-run-receipt.json",
     "proof/noetfield.json",
     "research-packs/catalog.json",
-    "ventures/portfolio.json",
     "version.json",
     "work-with-us/contribute/agent-intake.json"
   ],
@@ -393,8 +392,6 @@
     "trust-ledger/sample-report/samples/tle-rejected.yaml",
     "trust-ledger/verify/index.html",
     "trust/index.html",
-    "ventures/index.html",
-    "ventures/portfolio.json",
     "version.json",
     "work-with-us/contribute/agent-intake.json",
     "work-with-us/contribute/index.html",
