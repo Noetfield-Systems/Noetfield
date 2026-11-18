@@ -46,7 +46,7 @@ scan = Scan()
 scan.feed(page)
 assert len(scan.forms) == 1, "Exactly one canonical service intake required"
 form = scan.forms[0]
-assert form.get("data-nf-intake-form") is not None
+assert "data-nf-intake-form" in form
 assert form.get("data-intake-vector") == "onchain-project"
 assert form.get("data-intake-sku") == "general"
 assert len(scan.ids) == len(set(scan.ids)), "Duplicate DOM IDs"
