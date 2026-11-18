@@ -66,6 +66,11 @@ def triage_connect_record(record: dict[str, Any], *, today: date | None = None) 
     meta = record.get("metadata") or {}
     if not isinstance(meta, dict) or meta.get("form_id") != "nfConnectWizard":
         return None
+    # Corporate desk must never expose or triage independent venture requests.
+    # Legacy mixed records remain archived in their original database for
+    # project-authorized reconciliation; no cross-venture CRM projection.
+    if meta.get("initiative") != "noetfield":
+        return None
     # Synthetic smoke requests must never inflate real relationship pipeline metrics.
     if meta.get("intake_kind") == "test":
         return None
