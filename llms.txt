@@ -4,8 +4,6 @@
 Noetfield Systems Inc. is a Canadian technology company developing an AI software builder, business operations services and digital asset technology for real-world organizations. The App, Company OS and Real-World Capital are distinct customer experiences. TrustField, BuildRelay and Cairn retain separate venture boundaries. Public demos and products have different maturity levels.
 
 ## Corporate and commercial discovery
-- [Structured Venture Opportunity Facts](https://www.noetfield.com/ventures/portfolio.json): Dated venture stages, contribution roles, source-bounded limitations, selected independent comparables and links. Treat benchmark capital figures as external, not Noetfield valuations
-- [Venture Opportunities](https://www.noetfield.com/ventures/): One concise outreach gateway with selected independent AI/Web3 opportunities (Kivora, SignalForge, RLUA); partner, investor connector and growth collaboration intake uses existing canonical API. Product maturity varies; no investment, equity or token offer is made here.
 - [Canonical corporate manifest](https://www.noetfield.com/corporate.json): Legal operating identity, ownership boundaries, availability, action semantics and status claims
 - [Build a Business / Work With Us](https://www.noetfield.com/work-with-us/): Founder, human expert, AI-agent operator, commercial client and investor participation. Real persisted intake only when confirmed by API
 - [Connect](https://www.noetfield.com/connect/): Commercial scoping and opportunity wizard
