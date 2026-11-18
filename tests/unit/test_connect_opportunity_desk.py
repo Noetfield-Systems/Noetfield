@@ -46,6 +46,11 @@ def test_connect_projection_routes_and_no_fake_outcomes():
     synthetic = sample("business")
     synthetic["metadata"]["intake_kind"] = "test"
     assert triage_connect_record(synthetic) is None
+    # Same person or email in another venture never becomes a Noetfield lead.
+    for venture in ("buildrelay","arqant","signalforge","trustfield","earnloop","portfolio"):
+        other=sample("partnership")
+        other["metadata"]["initiative"]=venture
+        assert triage_connect_record(other) is None
 
 
 def test_connect_desk_requires_admin_and_filters_nonconnect():
