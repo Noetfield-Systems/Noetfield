@@ -372,6 +372,7 @@ class PostgresIntakeStore:
         cap = max(1, min(int(limit), 100))
         skip = max(0, min(int(offset), 10000))
         predicate = """metadata->>'form_id'='nfConnectWizard'
+                       AND metadata->>'initiative'='noetfield'
                        AND COALESCE(metadata->>'intake_kind','lead') <> 'test'"""
         columns = """intake_id,created_at,request_id,organization,contact_name,
                      contact_email,sku,vector,source,message,metadata,qualification_json,
@@ -407,7 +408,9 @@ class PostgresIntakeStore:
                   ON lower(p.contact_email)=lower(target.contact_email)
                 WHERE target.intake_id=$1
                   AND target.metadata->>'form_id'='nfConnectWizard'
+                  AND target.metadata->>'initiative'='noetfield'
                   AND p.metadata->>'form_id'='nfConnectWizard'
+                  AND p.metadata->>'initiative'='noetfield'
                   AND COALESCE(p.metadata->>'intake_kind','lead')<>'test'
                 ORDER BY p.created_at DESC,p.intake_id DESC LIMIT $2""",
                 intake_id, max(1,min(int(limit),100)),
