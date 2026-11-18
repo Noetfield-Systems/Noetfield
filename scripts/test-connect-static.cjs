@@ -37,6 +37,11 @@ assert.doesNotMatch(page,/translateFa|hreflang="fa"|lang="fa"/);
 assert.match(page,/var guidance=/);
 assert.match(page,/consent_contact:form\.elements\.namedItem\("contactConsent"\)\.checked/);
 assert.match(page,/No account or introductory meeting required/);
+const corporateDesk=fs.readFileSync(path.join(root,'assets','opportunity-desk.html'),'utf8');
+assert.match(corporateDesk,/Company scope<select id="venture"/);
+for(const foreign of ['buildrelay','signalforge','earnloop','trustfield','portfolio']){
+ assert.doesNotMatch(corporateDesk,new RegExp('<option value="'+foreign+'">'));
+}
 assert.match(page,/not an accepted agreement, guaranteed meeting/);
 assert.match(contact,/href="\/connect\/\?intent=business&amp;source=contact">Start a project or partnership/);
 assert.match(contact,/href="\/connect\/\?type=people&amp;source=contact">Freelancers/);
