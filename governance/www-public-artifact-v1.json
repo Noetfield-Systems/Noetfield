@@ -360,6 +360,7 @@
     "templates/index.html",
     "terms/index.html",
     "thanks/index.html",
+    "token-launch/index.html",
     "tools/ai-spend/index.html",
     "tools/board-five/index.html",
     "tools/copilot-seats/index.html",
