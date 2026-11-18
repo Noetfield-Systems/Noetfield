@@ -1,0 +1,57 @@
+/* Noetfield Token Launch Clinic: benchmark-driven buyer packaging and Launch Fit Brief. */
+.offers{background:#f8f8f3;padding:95px 0 103px;border-top:1px solid #dcdfd7}
+.offers-header{display:grid;grid-template-columns:1fr .7fr;gap:75px;align-items:end;margin-bottom:36px}
+.offers-header .section-title{max-width:750px}
+.offers-header p:last-child{color:#60716a;font-size:14px;max-width:450px}
+.offer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.offer-card{background:#fff;border:1px solid #daddd6;border-radius:6px;padding:23px;display:flex;flex-direction:column;min-height:330px;transition:box-shadow .2s,border-color .2s,transform .2s}
+.offer-card:hover,.offer-card.is-selected{border-color:#a98859;box-shadow:0 15px 38px rgba(22,36,32,.09);transform:translateY(-2px)}
+.offer-card--rwa{background:#172626;color:#f6f1e5;border-color:#3a5050}
+.offer-card--rwa:hover,.offer-card--rwa.is-selected{border-color:#d6ae73}
+.offer-card .offer-kicker{font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a7a51}
+.offer-card--rwa .offer-kicker{color:#dab783}
+.offer-card h3{font-size:22px;line-height:1.2;margin:24px 0 9px;font-weight:600;letter-spacing:-.052em}
+.offer-card p{color:#60716b;font-size:12px;line-height:1.7}
+.offer-card--rwa p{color:#b5c9c2}
+.offer-card ul{padding:15px 0 0 16px;margin:0 0 24px;color:#596b64;font-size:11px;line-height:1.8}
+.offer-card--rwa ul{color:#becfc7}
+.offer-card li{margin-bottom:6px}
+.offer-price{margin-top:auto;display:flex;flex-direction:column;gap:7px;border-top:1px solid #dce0d8;padding-top:16px}
+.offer-card--rwa .offer-price{border-color:#405655}
+.offer-price strong{font-family:Manrope,sans-serif;font-size:24px;letter-spacing:-.06em}
+.offer-price small{color:#78867e;font-size:10px}
+.offer-card--rwa .offer-price small{color:#c7d4ce}
+.offer-choose{margin-top:15px;display:inline-flex;align-items:center;justify-content:space-between;width:100%;gap:10px;border:1px solid #223536;background:#213b3b;color:#fff;border-radius:4px;padding:12px 13px;font-weight:700;font-size:12px}
+.offer-choose:hover{background:#315750}
+.offer-card--rwa .offer-choose{background:#d3b88e;color:#162321;border-color:#d3b88e}
+.offer-card--rwa .offer-choose:hover{background:#e6cca3}
+.offer-footnote{color:#667771;font-size:12px;margin-top:19px;max-width:1100px}
+.offer-footnote a{color:#7a552e;text-decoration:underline}
+.fit-studio{background:#132025;color:#f3f2ec;padding:98px 0;overflow:hidden;position:relative}
+.fit-studio:before{content:"";position:absolute;right:-12%;top:-55%;width:720px;height:720px;border:1px solid rgba(230,210,170,.12);border-radius:50%;box-shadow:0 0 0 70px #acc9ba05,0 0 0 145px #acc9ba04;pointer-events:none}
+.fit-intro{max-width:780px;position:relative}
+.fit-intro .eyeline{color:#dab88f}
+.fit-intro p:last-child{color:#a8bbb5;font-size:14px;max-width:620px;margin-top:17px}
+.fit-layout{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1fr);gap:22px;margin-top:40px;position:relative}
+.fit-questions{background:#f8f7f2;border-radius:6px;padding:28px;color:#152726}
+.fit-questions label{display:block;font-size:12px;font-weight:700;margin-bottom:17px;color:#344f48}
+.fit-questions select{display:block;margin-top:8px;min-height:51px;width:100%;background:#fff;border:1px solid #bfcac2;border-radius:4px;color:#203733;padding:12px}
+.fit-questions .button{width:100%;background:#203936;color:#fff;border:0;margin-top:6px}
+.fit-result{background:#17292e;border:1px solid #425858;border-radius:6px;padding:30px;display:flex;flex-direction:column}
+.fit-result .mono{color:#d0b38c}
+.fit-result h3{font-size:30px;line-height:1.15;letter-spacing:-.06em;margin:21px 0 12px}
+.fit-result p{font-size:13px;color:#b3c8c0}
+.fit-result ol{padding:16px 0 6px 25px;margin:0;color:#d6e0d9;font-size:12px;line-height:2}
+.fit-result li{padding-left:6px}
+.fit-status{font-size:11px!important;color:#e5caa2!important;margin-top:auto;padding-top:15px;min-height:35px}
+.fit-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.fit-actions button{background:transparent;border:1px solid #687e79;color:#edf2ed;border-radius:4px;min-height:44px;padding:11px 13px;font-size:12px;font-weight:600}
+.fit-actions button:hover{border-color:#dac59e;background:#213a3a}
+.fit-actions button.fit-primary{background:#d7c19e;color:#182927;border-color:#d7c19e}
+.fit-notes{color:#849e95;font-size:11px;margin-top:20px}
+.selected-offer{background:#ebf3ed;color:#254b40;font-size:12px;border-radius:4px;padding:9px 12px;margin:-6px 0 16px;display:none}
+.selected-offer.is-visible{display:block}
+@media(max-width:1080px){.offer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.offers-header{grid-template-columns:1fr;gap:15px}.offer-card{min-height:305px}}
+@media(max-width:820px){.fit-layout{grid-template-columns:1fr}.fit-intro{max-width:650px}}
+@media(max-width:540px){.offers,.fit-studio{padding:74px 0}.offer-grid{grid-template-columns:1fr}.offer-card{min-height:280px}.offers-header .section-title{font-size:40px}.fit-result,.fit-questions{padding:22px}.fit-result h3{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.offer-card{transition:none}}

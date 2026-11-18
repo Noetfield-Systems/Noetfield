@@ -360,6 +360,8 @@
     "templates/index.html",
     "terms/index.html",
     "thanks/index.html",
+    "token-launch/clinic-growth-v2.js",
+    "token-launch/clinic-offers-v2.css",
     "token-launch/index.html",
     "tools/ai-spend/index.html",
     "tools/board-five/index.html",
