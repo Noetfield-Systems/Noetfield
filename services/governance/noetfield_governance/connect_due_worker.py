@@ -89,6 +89,7 @@ class ConnectDueWorker:
         # YYYY-MM-DD is lexically ordered; source operator due_date is a
         # validated ISO date. Unscheduled cases older than a day need a review.
         condition = """metadata->>'form_id'='nfConnectWizard'
+          AND metadata->>'initiative'='noetfield'
           AND COALESCE(metadata->>'intake_kind','lead')<>'test'
           AND COALESCE(qualification_json #>> '{connect_ops,stage}','NEW')
               NOT IN ('WON','LOST','ARCHIVED')
