@@ -32,7 +32,7 @@ def test_actual_database_state_and_revision_locking():
                 (intake_id, metadata, qualification_json)
                 VALUES ($1, $2::jsonb, $3::jsonb)""",
                 "INT-ABCDEF123456",
-                json.dumps({"form_id": "nfConnectWizard", "topic": "growth",
+                json.dumps({"form_id": "nfConnectWizard", "initiative": "noetfield", "topic": "growth",
                             "connect_ops": {"stage": "WON", "owner": "Forged browser"} }),
                 json.dumps({"tier": "existing-server-data"}),
             )
