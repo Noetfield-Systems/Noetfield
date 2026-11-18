@@ -88,7 +88,7 @@ function chooseFromLink(){
  var isPeople=intent.value==="people";
  if(isPeople){
     var init=form.elements.namedItem("initiative");
-    if(init&&!init.value)init.value="portfolio";
+    if(init&&!init.value)init.value="noetfield";
     var role=form.elements.namedItem("participantRole");
     if(role&&(!role.value||role.value==="founder"))role.value="human_contributor";
     form.elements.namedItem("nextStep").value="collaborate";
