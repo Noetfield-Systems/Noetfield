@@ -18,7 +18,7 @@ from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel, Field, field_validator
 
 router = APIRouter()
-EMAIL = re.compile(r"^[^\\s@<>]{1,64}@[^\\s@<>]{1,190}\\.[A-Za-z]{2,24}$")
+EMAIL = re.compile(r"^[^\s@<>]{1,64}@[^\s@<>]{1,190}\.[A-Za-z]{2,24}$")
 FROM = "Noetfield Digital <notifications@noetfield.com>"
 
 
