@@ -255,6 +255,9 @@ app.include_router(governance_v1_router)
 app.include_router(onchain_community_router)
 app.include_router(trust_ledger_router)
 app.include_router(pilot_keys_admin_router)
+# Separate internal business email transport; no public email-sending route.
+from noetfield_governance.company_os_email_relay import router as company_os_email_relay_router
+app.include_router(company_os_email_relay_router)
 
 _cors_origins = [
     o.strip()
