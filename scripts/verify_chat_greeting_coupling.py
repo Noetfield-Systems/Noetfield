@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Fail closed if www greeting asset, disk SSOT, and platform API diverge."""
+"""Fail closed unless the www-served greeting API, asset, and disk SSOT agree.
+
+The greeting shown in the website shell is owned by the www release. The
+Platform API remains the POST conversation provider, but its separate greeting
+copy is not authoritative for the www shell and must not block a www-only
+release.
+"""
 
 from __future__ import annotations
 
@@ -48,29 +54,28 @@ def fetch_json(url: str) -> dict[str, object]:
         return json.loads(resp.read().decode("utf-8"))
 
 
-def live_hashes(platform_base: str, www_base: str) -> tuple[str | None, str | None]:
-    platform_hash: str | None = None
+def live_hashes(_platform_base: str, www_base: str) -> tuple[str | None, str | None]:
+    """Return the greeting hash actually served by www and the live www asset hash."""
+    live_greeting_hash: str | None = None
     www_hash: str | None = None
-    try:
-        health = fetch_json(f"{platform_base.rstrip('/')}/api/public/chat/health")
-        greeting = health.get("greeting_ssot") or {}
-        if isinstance(greeting, dict):
-            platform_hash = str(greeting.get("content_hash") or "") or None
-    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError):
-        platform_hash = None
+
     try:
         body = fetch_json(f"{www_base.rstrip('/')}/api/public/chat")
-        platform_hash = platform_hash or str(body.get("content_hash") or "") or None
-        if not platform_hash and body.get("greeting"):
+        live_greeting_hash = str(body.get("content_hash") or "") or None
+        if not live_greeting_hash and body.get("greeting"):
             canonical = json.dumps(
-                {"greeting": body["greeting"], "citations": body.get("citations") or []},
+                {
+                    "greeting": body["greeting"],
+                    "citations": body.get("citations") or [],
+                },
                 ensure_ascii=True,
                 sort_keys=True,
                 separators=(",", ":"),
             )
-            platform_hash = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+            live_greeting_hash = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
-        pass
+        live_greeting_hash = None
+
     try:
         asset_url = f"{www_base.rstrip('/')}/assets/nf-chat-greeting-ssot.js"
         req = urllib.request.Request(
@@ -83,13 +88,19 @@ def live_hashes(platform_base: str, www_base: str) -> tuple[str | None, str | No
         www_hash = match.group(1) if match else None
     except (urllib.error.URLError, TimeoutError):
         www_hash = None
-    return platform_hash, www_hash
+
+    return live_greeting_hash, www_hash
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--live", action="store_true")
-    parser.add_argument("--platform-base", default="https://platform.noetfield.com")
+    parser.add_argument("--verify-platform", action="store_true", help="Also compare Platform API greeting SSOT when validating a Platform release.")
+    parser.add_argument(
+        "--platform-base",
+        default="https://platform.noetfield.com",
+        help="Retained for CLI compatibility; www release coupling is verified against www.",
+    )
     parser.add_argument("--www-base", default="https://www.noetfield.com")
     args = parser.parse_args()
 
@@ -103,13 +114,31 @@ def main() -> int:
             failures.append(f"asset hash {got[:12]} != disk ssot {expected[:12]}")
 
     if args.live:
-        platform_hash, www_hash = live_hashes(args.platform_base, args.www_base)
-        if platform_hash and platform_hash != expected:
-            failures.append(f"platform hash {platform_hash[:12]} != disk ssot {expected[:12]}")
-        if www_hash and www_hash != expected:
-            failures.append(f"live www asset hash {www_hash[:12]} != disk ssot {expected[:12]}")
+        live_greeting_hash, www_hash = live_hashes(args.platform_base, args.www_base)
+        if not live_greeting_hash:
+            failures.append("live www /api/public/chat greeting missing or unreadable")
+        elif live_greeting_hash != expected:
+            failures.append(
+                f"live www chat greeting hash {live_greeting_hash[:12]} != disk ssot {expected[:12]}"
+            )
         if not www_hash:
             failures.append("live www asset nf-chat-greeting-ssot.js not found or unreadable")
+        elif www_hash != expected:
+            failures.append(f"live www asset hash {www_hash[:12]} != disk ssot {expected[:12]}")
+
+    if args.live and args.verify_platform:
+        try:
+            health = fetch_json(f"{args.platform_base.rstrip('/')}/api/public/chat/health")
+            greeting = health.get("greeting_ssot") or {}
+            platform_hash = str(greeting.get("content_hash") or "") if isinstance(greeting, dict) else ""
+            if not platform_hash:
+                failures.append("live Platform greeting SSOT missing or unreadable")
+            elif platform_hash != expected:
+                failures.append(
+                    f"live Platform greeting hash {platform_hash[:12]} != disk ssot {expected[:12]}"
+                )
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            failures.append("live Platform greeting health unavailable")
 
     if failures:
         for item in failures:
