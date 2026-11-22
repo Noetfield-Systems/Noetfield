@@ -77,3 +77,12 @@ def test_authorized_route_uses_original_native_reader_only():
         assert r.json()["scope"]["crm"]=="NOETFIELD_CORPORATE_ONLY"
         assert original_reader.await_args.kwargs["deal_id"]==DEAL_ID
     asyncio.run(run())
+
+
+def test_original_corporate_crm_ui_contains_actionable_native_bijan_brief():
+    from pathlib import Path
+    file=Path(__file__).resolve().parents[2]/"services/governance/noetfield_governance/private_corporate_crm.html"
+    ui=file.read_text(encoding="utf-8")
+    assert "Prepare advisor brief" in ui
+    assert "/api/corporate-crm/bijan/brief/" in ui
+    assert "No inferred private preferences" in ui
