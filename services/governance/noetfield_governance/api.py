@@ -3122,6 +3122,18 @@ async def corporate_crm_update_deal(
         raise HTTPException(status_code=409,detail=str(exc)) from exc
 
 
+@app.get("/api/corporate-crm/bijan/brief/{deal_id}", tags=["operations"], include_in_schema=False)
+async def corporate_crm_bijan_brief(deal_id: str, request: Request) -> dict[str, object]:
+    """Read-only, original-CRM-specific advisor preparation; no customer outreach."""
+    _require_connect_desk_operator(request)
+    from noetfield_governance.corporate_bijan import native_corporate_bijan_brief
+    from noetfield_governance.corporate_crm import CorporateCRMError
+    try:
+        return await native_corporate_bijan_brief(settings,deal_id=deal_id)
+    except (CorporateCRMError, ValueError) as exc:
+        raise HTTPException(status_code=404,detail=str(exc)) from exc
+
+
 @app.get("/api/corporate-crm/deals/{deal_id}", tags=["operations"], include_in_schema=False)
 async def corporate_crm_deal_detail(deal_id: str,request: Request) -> dict[str, object]:
     from noetfield_governance.corporate_crm import CorporateCRMError, detail
