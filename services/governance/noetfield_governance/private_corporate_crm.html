@@ -1040,6 +1040,32 @@ function drawDetail(payload){
  '<label>Evidence URL (if external action)<input name="evidence_url" type="url" placeholder="https://"></label>'+
  '<label class="wide">What happened?<textarea name="note" required maxlength="2000"></textarea></label>'+
  '<button type="submit" class="ghost">Add activity record</button></form></div>';
+ // BIJAN is a supporting advisor layer ON the original CRM, not a new product.
+ const bijanBox=document.createElement("section");bijanBox.className="commercial-box";
+ bijanBox.innerHTML='<h4>BIJAN · Private Advisor Preparation</h4>'+
+   '<p class="small">Original CRM facts and evidence, prepared for one account. No inferred private preferences, cross-venture import or automatic messages.</p>'+
+   '<button id="bijan-read-brief" type="button" class="ghost">Prepare advisor brief</button>'+
+   '<div id="bijan-brief-status" class="small" role="status" aria-live="polite"></div>';
+ els.panel.querySelector(".detail").prepend(bijanBox);
+ bijanBox.querySelector("#bijan-read-brief").addEventListener("click",async event=>{
+   const button=event.currentTarget;button.disabled=true;
+   const destination=bijanBox.querySelector("#bijan-brief-status");
+   destination.textContent="Loading verified native CRM context...";
+   try{
+     const brief=await api("/api/corporate-crm/bijan/brief/"+encodeURIComponent(d.id));
+     if(state.selected!==d.id)return;
+     const steps=(brief.preparation_checklist||[]).filter(x=>x.required).map(x=>
+       '<li><strong>'+esc(x.task.replaceAll("_"," "))+'</strong> · '+esc(x.note)+'</li>').join("");
+     const facts=(brief.research_facts||[]).filter(x=>x.value).map(x=>
+       '<li>'+esc(x.field.replaceAll("_"," "))+' · '+esc(x.value)+' <small>('+esc(x.source)+')</small></li>').join("");
+     destination.innerHTML='<h4>Recommended preparation</h4><p><strong>'+esc(brief.next_best_action.replaceAll("_"," "))+'</strong></p>'+
+       '<p class="small">One original account · '+esc(brief.scope.crm)+' · human advisor review required</p>'+
+       '<h5>Known source facts</h5><ul class="timeline">'+(facts||'<li>None confirmed.</li>')+'</ul>'+
+       '<h5>Advisor checklist</h5><ul class="timeline">'+steps+'</ul>'+
+       '<p class="small">Personal preference profile: not recorded. Payment and customer contact are not authorized by this brief.</p>';
+   }catch(error){destination.textContent="Brief unavailable: "+String(error.message||error)}
+   finally{button.disabled=false}
+ });
  // Explicit customer membership is separate from the operator session.
  const clientAccess=document.createElement("section");
  clientAccess.className="commercial-box";
