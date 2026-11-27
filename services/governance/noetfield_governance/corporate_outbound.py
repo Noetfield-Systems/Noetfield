@@ -104,7 +104,10 @@ async def _schema(db:asyncpg.Connection)->None:
         ADD COLUMN IF NOT EXISTS relationship_owner text,
         ADD COLUMN IF NOT EXISTS next_action text,
         ADD COLUMN IF NOT EXISTS next_due date,
-        ADD COLUMN IF NOT EXISTS actual_sender text""")
+        ADD COLUMN IF NOT EXISTS actual_sender text,
+        ADD COLUMN IF NOT EXISTS action_id text""")
+    await db.execute("""CREATE UNIQUE INDEX IF NOT EXISTS corp_outreach_action_unique
+        ON noetfield.corp_outreach_sends(deal_id,action_id) WHERE action_id IS NOT NULL""")
     await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.corp_outreach_replies (
        id uuid PRIMARY KEY,
        send_id uuid NOT NULL REFERENCES noetfield.corp_outreach_sends(id),
@@ -146,11 +149,13 @@ def _send_provider(mailbox:str,password:str,recipient:str,subject:str,body:str,
 
 
 async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
-                                body:str, actor:str)->dict[str,Any]:
+                                body:str, actor:str, action_id:str|None=None)->dict[str,Any]:
     try:
         key=uuid.UUID(deal_id)
     except (ValueError,TypeError) as exc:
         raise CorporateCRMError("INVALID_DEAL_ID") from exc
+    if action_id is not None and not re.fullmatch(r"[A-Za-z0-9_.:-]{12,120}",action_id):
+        raise CorporateCRMError("INVALID_COMMUNICATION_ACTION_ID")
     subject=subject.strip();body=body.strip()
     if not 4<=len(subject)<=160 or not 20<=len(body)<=_MAX_BODY or not actor.strip():
         raise CorporateCRMError("INVALID_OUTREACH_CONTENT_OR_ACTOR")
@@ -206,14 +211,18 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
         receipt_id=uuid.uuid4()
         reserved=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_sends(
             id,deal_id,recipient_hash,fingerprint,provider_message_id,actor,
-            intended_sender,recipient_address,relationship_owner,next_action,next_due)
-            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
-            ON CONFLICT(fingerprint) DO NOTHING RETURNING id""",
+            intended_sender,recipient_address,relationship_owner,next_action,next_due,action_id)
+            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+            ON CONFLICT DO NOTHING RETURNING id""",
             receipt_id,key,_digest(recipient),fingerprint,msgid,actor[:120],
-            identity.address,recipient,relationship.owner,relationship.next_action,entry["next_date"])
+            identity.address,recipient,relationship.owner,relationship.next_action,entry["next_date"],action_id)
         if not reserved:
-            existing=await db.fetchrow("""SELECT id,status,provider_message_id
-                FROM noetfield.corp_outreach_sends WHERE fingerprint=$1""",fingerprint)
+            existing=await db.fetchrow("""SELECT id,status,provider_message_id,fingerprint,action_id
+                FROM noetfield.corp_outreach_sends WHERE fingerprint=$1 OR
+                    (deal_id=$2 AND action_id=$3) ORDER BY (action_id=$3) DESC NULLS LAST LIMIT 1""",
+                fingerprint,key,action_id)
+            if not existing or existing["fingerprint"]!=fingerprint:
+                raise CorporateCRMError("COMMUNICATION_ACTION_REPLAY_CONFLICT")
             return {"state":existing["status"],"idempotent":True,
                     "send_id":str(existing["id"]),"message_id":existing["provider_message_id"],
                     "new_provider_send":False}
