@@ -25,6 +25,7 @@ from typing import Any
 import asyncpg
 
 from noetfield_governance.corporate_crm import CorporateCRMError
+from noetfield_governance.communication_policy import CommunicationRejected, corporate_sender
 from noetfield_governance.commercial_pipeline import _database_url
 
 
@@ -41,6 +42,10 @@ def _mailbox() -> tuple[str,str]:
             or os.environ.get("NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD") or "").strip()
     if not re.fullmatch(r"[^\s@]+@noetfield\.com",sender) or len(secret)<12:
         raise CorporateCRMError("CORPORATE_SMTP_PROVIDER_NOT_CONFIGURED")
+    try:
+        corporate_sender(sender)
+    except CommunicationRejected as exc:
+        raise CorporateCRMError(str(exc)) from exc
     return sender,secret
 
 
@@ -98,6 +103,11 @@ async def _schema(db:asyncpg.Connection)->None:
 
 def _send_provider(mailbox:str,password:str,recipient:str,subject:str,body:str,
                    message_id:str)->bool:
+    # Also enforce at the actual transport boundary, not only in the caller.
+    try:
+        corporate_sender(mailbox)
+    except CommunicationRejected as exc:
+        raise CorporateCRMError(str(exc)) from exc
     mail=EmailMessage()
     mail["From"]=mailbox
     mail["To"]=recipient
