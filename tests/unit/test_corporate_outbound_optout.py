@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import asyncio
 from email.message import EmailMessage
-from unittest.mock import AsyncMock,patch
+from unittest.mock import AsyncMock,MagicMock,patch
 from uuid import uuid4
 
 import pytest
@@ -12,7 +12,7 @@ from noetfield_governance.api import app
 from noetfield_governance.corporate_crm import CorporateCRMError
 from noetfield_governance.corporate_outbound import (
  _sender_footer,_send_provider,_digest,unsubscribe_subject,_corporate_identity,
- send_sourced_outreach,reconcile_real_replies,
+ send_sourced_outreach,reconcile_real_replies,_imap_headers,
 )
 from noetfield_governance.corporate_discovery import promote_corporate_source
 from noetfield_governance.communication_policy import Relationship
@@ -108,7 +108,7 @@ def test_imap_subject_unsubscribe_is_suppression_not_positive_buyer_reply():
     async def run():
         digest=_digest("buyer@example.org")
         sent={"id":uuid4(),"provider_message_id":"<msg@noetfield.com>",
-              "recipient_hash":digest}
+              "recipient_hash":digest,"status":"PROVIDER_ACCEPTED"}
         msg=EmailMessage()
         msg["From"]="Buyer <buyer@example.org>"
         msg["Subject"]="Unsubscribe"
@@ -116,7 +116,8 @@ def test_imap_subject_unsubscribe_is_suppression_not_positive_buyer_reply():
         msg["In-Reply-To"]="<msg@noetfield.com>"
         db=AsyncMock()
         db.fetch.side_effect=[[sent],[{"recipient_hash":digest}]]
-        db.fetchrow.return_value={"recipient_hash":digest}
+        db.transaction=MagicMock()
+        db.fetchrow.side_effect=[{"uidvalidity":77,"last_uid":100},{"recipient_hash":digest}]
         with patch("noetfield_governance.corporate_outbound._sender_footer",
                    return_value="Noetfield Systems Inc. Verified Address"),\
              patch("noetfield_governance.corporate_outbound._mailbox",
@@ -127,7 +128,7 @@ def test_imap_subject_unsubscribe_is_suppression_not_positive_buyer_reply():
                    new_callable=AsyncMock,return_value=db),\
              patch("noetfield_governance.corporate_outbound._schema",new_callable=AsyncMock),\
              patch("noetfield_governance.corporate_outbound._imap_headers",
-                   return_value=[("155",msg)]):
+                   return_value=(77,[("155",msg)],False)):
             result=await reconcile_real_replies(object())
             assert result["new_suppressed_recipients"]==1
             assert result["new_verified_replies"]==0
@@ -175,3 +176,26 @@ def test_reconciliation_reuses_existing_six_hour_worker_and_distinguishes_reply_
             assert result["new_suppressed_recipients"]==1
             assert impl.await_args.kwargs["limit"]==120
     asyncio.run(check())
+
+
+def test_imap_pages_never_skip_oldest_or_failed_fetch():
+    class FakeIMAP:
+        def __enter__(self): return self
+        def __exit__(self,*args): return False
+        def login(self,*args): pass
+        def select(self,*args,**kwargs): return "OK",[]
+        def response(self,*args): return "UIDVALIDITY",[b"77"]
+        def uid(self,cmd,*args):
+            if cmd=="SEARCH":
+                return "OK",[b"5 6 7 8"]
+            if args[0]=="7":
+                return "NO",[]
+            return "OK",[(b"header",b"From: buyer@example.org\r\nMessage-ID: <reply@example.org>\r\n\r\n")]
+    with patch("noetfield_governance.corporate_outbound.imaplib.IMAP4_SSL",return_value=FakeIMAP()):
+        epoch,items,more=_imap_headers("operations@noetfield.com","fixture",2)
+        assert epoch==77 and [uid for uid,_ in items]==["5","6"] and more
+        epoch,items,more=_imap_headers("operations@noetfield.com","fixture",2,uidvalidity=77,last_uid=6)
+        assert items==[] and more
+        # UIDVALIDITY reset starts a fresh scan even if the previous UID was high.
+        epoch,items,more=_imap_headers("operations@noetfield.com","fixture",2,uidvalidity=12,last_uid=999)
+        assert [uid for uid,_ in items]==["5","6"]
