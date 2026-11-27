@@ -34,7 +34,7 @@ class CommunicationPolicyTests(unittest.TestCase):
             self.route(identities=(replace(self.native,authority_ref=""),))
     def test_duplicate(self):
         with self.assertRaises(CommunicationRejected):
-            self.route(replace(self.rel,prior_attempt=True))
+            self.route(replace(self.rel,action_attempted=True))
     def test_optout(self):
         with self.assertRaises(CommunicationRejected):
             self.route(replace(self.rel,suppressed=True))
@@ -53,6 +53,7 @@ class CommunicationPolicyTests(unittest.TestCase):
                 recipient=self.rel.recipient,reply_to=self.native.reply_to,relationship=self.rel)
     def test_corporate_transport_boundary(self):
         self.assertEqual(corporate_sender("operations@noetfield.com"),"operations@noetfield.com")
+        self.assertEqual(corporate_sender("sales@noetfield.com", ("sales@noetfield.com",)), "sales@noetfield.com")
         for address in ("","hello@trustfield.ca","unknown@noetfield.com"):
             with self.assertRaises(CommunicationRejected):
                 corporate_sender(address)
