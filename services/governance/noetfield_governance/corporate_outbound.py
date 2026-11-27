@@ -15,7 +15,6 @@ import os
 import re
 import smtplib
 import uuid
-from datetime import datetime, timedelta, UTC
 from email.message import EmailMessage
 from email.parser import BytesParser
 from email.policy import default as email_policy
@@ -25,6 +24,9 @@ from typing import Any
 import asyncpg
 
 from noetfield_governance.corporate_crm import CorporateCRMError
+from noetfield_governance.communication_policy import (
+    CommunicationRejected, Identity, Relationship, resolve, enforce_envelope, corporate_sender,
+)
 from noetfield_governance.commercial_pipeline import _database_url
 
 
@@ -41,7 +43,21 @@ def _mailbox() -> tuple[str,str]:
             or os.environ.get("NF_OPERATIONS_GOOGLE_WORKSPACE_APP_PASSWORD") or "").strip()
     if not re.fullmatch(r"[^\s@]+@noetfield\.com",sender) or len(secret)<12:
         raise CorporateCRMError("CORPORATE_SMTP_PROVIDER_NOT_CONFIGURED")
+    try:
+        corporate_sender(sender, (sender,))
+    except CommunicationRejected as exc:
+        raise CorporateCRMError(str(exc)) from exc
     return sender,secret
+
+
+def _corporate_identity(mailbox: str) -> Identity:
+    # The authenticated native mailbox configuration is the authority source,
+    # not any address or verification flag supplied by the caller. SMTP login
+    # still has to succeed; received From is independently unverified.
+    corporate_sender(mailbox, (mailbox,))
+    return Identity(mailbox, "Noetfield Systems Inc.", "noetfield-corporate",
+                    frozenset({"commercial"}), "native", mailbox, True, True,
+                    "native-config:GMAIL_MAILBOX")
 
 
 def _digest(value:str)->str:
@@ -81,6 +97,16 @@ async def _schema(db:asyncpg.Connection)->None:
       provider_ack_at timestamptz,
       created_at timestamptz NOT NULL DEFAULT now()
     )""")
+    await db.execute("""ALTER TABLE noetfield.corp_outreach_sends
+        ADD COLUMN IF NOT EXISTS intended_sender text,
+        ADD COLUMN IF NOT EXISTS recipient_address text,
+        ADD COLUMN IF NOT EXISTS relationship_owner text,
+        ADD COLUMN IF NOT EXISTS next_action text,
+        ADD COLUMN IF NOT EXISTS next_due date,
+        ADD COLUMN IF NOT EXISTS actual_sender text,
+        ADD COLUMN IF NOT EXISTS action_id text""")
+    await db.execute("""CREATE UNIQUE INDEX IF NOT EXISTS corp_outreach_action_unique
+        ON noetfield.corp_outreach_sends(deal_id,action_id) WHERE action_id IS NOT NULL""")
     await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.corp_outreach_replies (
        id uuid PRIMARY KEY,
        send_id uuid NOT NULL REFERENCES noetfield.corp_outreach_sends(id),
@@ -95,15 +121,34 @@ async def _schema(db:asyncpg.Connection)->None:
        suppressed_at timestamptz NOT NULL DEFAULT now()
     )""")
 
+    await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.corp_outreach_reply_cursor (
+       mailbox_hash text PRIMARY KEY,
+       uidvalidity bigint NOT NULL DEFAULT 0,
+       last_uid bigint NOT NULL DEFAULT 0,
+       updated_at timestamptz NOT NULL DEFAULT now()
+    )""")
+    await db.execute("""CREATE INDEX IF NOT EXISTS corp_outreach_provider_message_lookup
+        ON noetfield.corp_outreach_sends(lower(provider_message_id))""")
+    await db.execute("""CREATE INDEX IF NOT EXISTS corp_outreach_recipient_lookup
+        ON noetfield.corp_outreach_sends(recipient_hash)""")
+    await db.execute("""CREATE INDEX IF NOT EXISTS corp_outreach_reply_message_lookup
+        ON noetfield.corp_outreach_replies(response_message_id)""")
+
 
 def _send_provider(mailbox:str,password:str,recipient:str,subject:str,body:str,
-                   message_id:str)->bool:
+                   message_id:str, *, identity:Identity, relationship:Relationship)->bool:
+    # Mandatory envelope check at the actual SMTP boundary.
+    try:
+        enforce_envelope(identity=identity, sender=mailbox, recipient=recipient,
+                         reply_to=identity.reply_to, relationship=relationship)
+    except CommunicationRejected as exc:
+        raise CorporateCRMError(str(exc)) from exc
     mail=EmailMessage()
     mail["From"]=mailbox
     mail["To"]=recipient
     mail["Subject"]=subject
     mail["Message-ID"]=message_id
-    mail["Reply-To"]=mailbox
+    mail["Reply-To"]=identity.reply_to
     mail["Auto-Submitted"]="no"
     mail["List-Unsubscribe"]=f"<mailto:{mailbox}?subject=Unsubscribe>"
     mail.set_content(body+_sender_footer(mailbox))
@@ -116,11 +161,13 @@ def _send_provider(mailbox:str,password:str,recipient:str,subject:str,body:str,
 
 
 async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
-                                body:str, actor:str)->dict[str,Any]:
+                                body:str, actor:str, action_id:str|None=None)->dict[str,Any]:
     try:
         key=uuid.UUID(deal_id)
     except (ValueError,TypeError) as exc:
         raise CorporateCRMError("INVALID_DEAL_ID") from exc
+    if action_id is not None and not re.fullmatch(r"[A-Za-z0-9_.:-]{12,120}",action_id):
+        raise CorporateCRMError("INVALID_COMMUNICATION_ACTION_ID")
     subject=subject.strip();body=body.strip()
     if not 4<=len(subject)<=160 or not 20<=len(body)<=_MAX_BODY or not actor.strip():
         raise CorporateCRMError("INVALID_OUTREACH_CONTENT_OR_ACTOR")
@@ -135,7 +182,7 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
         await _schema(db)
         entry=await db.fetchrow("""SELECT p.email, r.contact_basis,r.contact_evidence,
                      r.review_status,r.outreach_role_relevance,
-                     r.publication_no_solicitation_confirmed,d.stage, d.account_id
+                     r.publication_no_solicitation_confirmed,d.stage, d.account_id, d.owner, d.next_action, d.next_date
            FROM noetfield.corp_crm_deals d
            JOIN noetfield.corp_research_sources r ON r.promoted_deal_id=d.id
            JOIN noetfield.corp_crm_people p ON p.id=d.person_id
@@ -156,17 +203,39 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
               "SELECT 1 FROM noetfield.corp_outreach_suppression WHERE recipient_hash=$1",
               _digest(recipient))) == 1:
             raise CorporateCRMError("OUTREACH_RECIPIENT_SUPPRESSED")
+        # Only this exact action is deduplicated by the native ledger; a new
+        # meaningful message to the same contact remains eligible.
+        relationship=Relationship("noetfield-corporate", "Noetfield Systems Inc.",
+            recipient, str(entry["contact_evidence"]), "NOETFIELD_CORPORATE",
+            str(entry["owner"] or "").strip(), str(entry["next_action"] or "").strip(),
+            context_checked=True)
+        try:
+            identity=resolve(venture=relationship.venture, entity=relationship.entity,
+                intent="commercial", relationship=relationship,
+                identities=(_corporate_identity(sender),),
+                authority_ref="native-crm:"+str(key)+":"+entry["contact_basis"])
+            enforce_envelope(identity=identity, sender=sender, recipient=recipient,
+                reply_to=identity.reply_to, relationship=relationship)
+        except CommunicationRejected as exc:
+            raise CorporateCRMError(str(exc)) from exc
         fingerprint=_digest("|".join([str(key),recipient,subject,body]))
         msgid=make_msgid(domain="noetfield.com")
         receipt_id=uuid.uuid4()
         reserved=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_sends(
-            id,deal_id,recipient_hash,fingerprint,provider_message_id,actor)
-            VALUES($1,$2,$3,$4,$5,$6)
-            ON CONFLICT(fingerprint) DO NOTHING RETURNING id""",
-            receipt_id,key,_digest(recipient),fingerprint,msgid,actor[:120])
+            id,deal_id,recipient_hash,fingerprint,provider_message_id,actor,
+            intended_sender,recipient_address,relationship_owner,next_action,next_due,action_id)
+            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+            ON CONFLICT DO NOTHING RETURNING id""",
+            receipt_id,key,_digest(recipient),fingerprint,msgid,actor[:120],
+            identity.address,recipient,relationship.owner,relationship.next_action,entry["next_date"],action_id)
         if not reserved:
-            existing=await db.fetchrow("""SELECT id,status,provider_message_id
-                FROM noetfield.corp_outreach_sends WHERE fingerprint=$1""",fingerprint)
+            existing=await db.fetchrow("""SELECT id,status,provider_message_id,fingerprint,action_id
+                FROM noetfield.corp_outreach_sends WHERE fingerprint=$1 OR
+                    (deal_id=$2 AND action_id=$3) ORDER BY (action_id=$3) DESC NULLS LAST LIMIT 1""",
+                fingerprint,key,action_id)
+            if (not existing or existing["fingerprint"]!=fingerprint or
+                (action_id is not None and existing["action_id"]!=action_id)):
+                raise CorporateCRMError("COMMUNICATION_ACTION_REPLAY_CONFLICT")
             return {"state":existing["status"],"idempotent":True,
                     "send_id":str(existing["id"]),"message_id":existing["provider_message_id"],
                     "new_provider_send":False}
@@ -174,7 +243,7 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
         await db.close()
     try:
         accepted=await asyncio.to_thread(_send_provider,
-                  sender,password,recipient,subject,body,msgid)
+                  sender,password,recipient,subject,body,msgid,identity=identity,relationship=relationship)
         status="PROVIDER_ACCEPTED" if accepted else "FAILED_UNCONFIRMED"
     except Exception:
         status="FAILED_UNCONFIRMED"
@@ -188,7 +257,10 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
     return {"state":status,"send_id":str(receipt_id),"idempotent":False,
             "provider":"GOOGLE_WORKSPACE_SMTP","message_id":msgid,
             "new_provider_send":status=="PROVIDER_ACCEPTED",
-            "delivered_to_inbox":False,"reply_verified":False}
+            "delivered_to_inbox":False,"reply_verified":False,
+            "intended_sender":identity.address,"actual_sender":None,
+            "native_crm":"NOETFIELD_CORPORATE","owner":relationship.owner,
+            "next_action":relationship.next_action}
 
 
 async def send_prequalified_corporate_introductions(settings:object,*,limit:int=2)->dict[str,Any]:
@@ -281,87 +353,126 @@ async def send_prequalified_corporate_introductions(settings:object,*,limit:int=
         "paid_customers_inferred":0,"research_only_recipients_contacted":0}
 
 
-def _imap_headers(mailbox:str,password:str,limit:int)->list[tuple[str,Any]]:
-    """Headers-only IMAP; no email body or attachments leave the mailbox."""
-    since=(datetime.now(UTC)-timedelta(days=30)).strftime("%d-%b-%Y")
+def _imap_headers(mailbox:str,password:str,limit:int, *,
+                  uidvalidity:int=0,last_uid:int=0)->tuple[int,list[tuple[str,Any]],bool]:
+    """Read bounded pages in UID order. Never move the checkpoint past a failed fetch."""
     items=[]
     with imaplib.IMAP4_SSL("imap.gmail.com",993) as imap:
         imap.login(mailbox,password)
         typ,_=imap.select("INBOX",readonly=True)
         if typ!="OK":
-            return []
-        typ,ids=imap.uid("SEARCH",None,"SINCE",since)
-        if typ!="OK" or not ids or not ids[0]:
-            return []
-        for uid in ids[0].split()[-min(limit,120):]:
-            status,parts=imap.uid("FETCH",uid,
+            raise CorporateCRMError("IMAP_INBOX_UNAVAILABLE")
+        _,epoch_data=imap.response("UIDVALIDITY")
+        try:
+            epoch=int(epoch_data[0])
+        except (TypeError,ValueError,IndexError) as exc:
+            raise CorporateCRMError("IMAP_UIDVALIDITY_UNAVAILABLE") from exc
+        if epoch<=0:
+            raise CorporateCRMError("IMAP_UIDVALIDITY_UNAVAILABLE")
+        cursor=last_uid if epoch==uidvalidity else 0
+        typ,ids=imap.uid("SEARCH",None,"UID",f"{cursor+1}:*")
+        if typ!="OK" or not ids:
+            raise CorporateCRMError("IMAP_SEARCH_FAILED")
+        pending=sorted({int(uid) for uid in (ids[0] or b"").split() if int(uid)>cursor})
+        for uid in pending[:limit]:
+            status,parts=imap.uid("FETCH",str(uid), 
                      "(BODY.PEEK[HEADER.FIELDS (MESSAGE-ID IN-REPLY-TO REFERENCES FROM AUTO-SUBMITTED SUBJECT)])")
             if status!="OK" or not parts:
-                continue
-            for part in parts:
-                if isinstance(part,tuple) and isinstance(part[1],bytes):
-                    head=BytesParser(policy=email_policy).parsebytes(part[1],headersonly=True)
-                    items.append((uid.decode("ascii","ignore"),head))
-                    break
-        imap.close()
-    return items
+                break
+            raw=next((part[1] for part in parts if isinstance(part,tuple)
+                      and isinstance(part[1],bytes)),None)
+            if raw is None:
+                break
+            head=BytesParser(policy=email_policy).parsebytes(raw,headersonly=True)
+            items.append((str(uid),head))
+        return epoch,items,len(pending)>len(items)
+
+
+def _reply_references(head:Any)->list[str]:
+    # Prefer direct parent; otherwise newest reference. Match complete Message-IDs.
+    result=[]
+    for field in ("In-Reply-To","References"):
+        values=re.findall(r"<[^<>\s]+>",str(head.get(field) or "").lower())
+        for value in reversed(values):
+            if value not in result:
+                result.append(value)
+    return result
 
 
 async def reconcile_real_replies(settings:object, *, limit:int=120)->dict[str,Any]:
     if type(limit) is not int or not 1<=limit<=120:
         raise CorporateCRMError("INVALID_RECONCILIATION_LIMIT")
     mailbox,password=_mailbox()
+    mailbox_key=_digest(mailbox.lower())
     db=await asyncpg.connect(_database_url(settings))
     try:
         await _schema(db)
-        sends=await db.fetch("""SELECT s.id,s.provider_message_id,s.recipient_hash
-             FROM noetfield.corp_outreach_sends s
-             WHERE s.status='PROVIDER_ACCEPTED' AND
-                   s.created_at > now() - interval '30 days'
-             ORDER BY s.created_at DESC LIMIT 200""")
-        known={str(row["provider_message_id"]).strip().lower():dict(row) for row in sends}
-        all_sent=await db.fetch("""SELECT DISTINCT recipient_hash
-             FROM noetfield.corp_outreach_sends LIMIT 10000""")
-        known_recipients={str(x["recipient_hash"]) for x in all_sent}
-        if not known_recipients:
-            return {"provider_ack_sent":0,"scanned_headers":0,
-                    "new_verified_replies":0,"new_suppressed_recipients":0}
-        headers=await asyncio.to_thread(_imap_headers,mailbox,password,limit)
-        added=0
-        suppressed=0
-        for uid,head in headers:
-            auto=str(head.get("Auto-Submitted") or "").strip().lower()
-            if auto and auto!="no":
-                continue
-            references=(str(head.get("In-Reply-To") or "")+" "+str(head.get("References") or "")).lower()
-            sender=parseaddr(str(head.get("From") or ""))[1].strip().lower()
-            if not sender:
-                continue
-            sender_hash=_digest(sender)
-            if unsubscribe_subject(str(head.get("Subject") or "")):
-                if sender_hash in known_recipients:
-                    created=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_suppression
-                        (recipient_hash,source,actor)
-                        VALUES($1,'IMAP_UNSUBSCRIBE_SUBJECT','CUSTOMER')
-                        ON CONFLICT(recipient_hash) DO NOTHING RETURNING recipient_hash""",
-                        sender_hash)
-                    suppressed+=int(bool(created))
-                continue
-            for msg_id,original in known.items():
-                if msg_id not in references or original["recipient_hash"]!=sender_hash:
+        # One durable cursor per mailbox. Lock and persist replies + checkpoint
+        # in the same transaction so retries cannot skip uncommitted replies.
+        async with db.transaction():
+            await db.execute("""INSERT INTO noetfield.corp_outreach_reply_cursor(mailbox_hash)
+                VALUES($1) ON CONFLICT(mailbox_hash) DO NOTHING""",mailbox_key)
+            cursor=await db.fetchrow("""SELECT uidvalidity,last_uid
+                FROM noetfield.corp_outreach_reply_cursor WHERE mailbox_hash=$1 FOR UPDATE""",mailbox_key)
+            epoch,headers,more=await asyncio.to_thread(_imap_headers,mailbox,password,limit,
+                uidvalidity=int(cursor["uidvalidity"]),last_uid=int(cursor["last_uid"]))
+            refs=sorted({ref for _,head in headers for ref in _reply_references(head)})
+            senders={parseaddr(str(head.get("From") or ""))[1].strip().lower()
+                     for _,head in headers}
+            sender_hashes=sorted({_digest(sender) for sender in senders if sender})
+            # Lookup the original sends referenced by this page, not just the
+            # newest 200 sends or 30 days. No full-history materialization.
+            sends=await db.fetch("""SELECT id,provider_message_id,recipient_hash,status
+                FROM noetfield.corp_outreach_sends
+                WHERE lower(provider_message_id)=ANY($1::text[])
+                  AND status IN ('PROVIDER_ACCEPTED','FAILED_UNCONFIRMED','CLAIMED')""",refs)
+            known={str(row["provider_message_id"]).strip().lower():dict(row) for row in sends}
+            all_sent=await db.fetch("""SELECT DISTINCT recipient_hash
+                FROM noetfield.corp_outreach_sends WHERE recipient_hash=ANY($1::text[])""",sender_hashes)
+            known_recipients={str(x["recipient_hash"]) for x in all_sent}
+            added=0
+            suppressed=0
+            checkpoint=int(cursor["last_uid"]) if epoch==int(cursor["uidvalidity"]) else 0
+            for uid,head in headers:
+                auto=str(head.get("Auto-Submitted") or "").strip().lower()
+                sender=parseaddr(str(head.get("From") or ""))[1].strip().lower()
+                checkpoint=int(uid)
+                if not sender or (auto and auto!="no"):
                     continue
-                response_id=str(head.get("Message-ID") or "")[:250]
-                row=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_replies
-                      (id,send_id,imap_uid,response_message_id)
-                      VALUES($1,$2,$3,$4)
-                      ON CONFLICT(imap_uid) DO NOTHING RETURNING id""",
-                      uuid.uuid4(),original["id"],uid,response_id)
-                added+=int(bool(row))
-                break
-        return {"provider_ack_sent":len(known),"scanned_headers":len(headers),
-                "new_verified_replies":added,
-                "new_suppressed_recipients":suppressed,
-                "human_qualification_not_inferred":True}
+                sender_hash=_digest(sender)
+                if unsubscribe_subject(str(head.get("Subject") or "")):
+                    if sender_hash in known_recipients:
+                        created=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_suppression
+                            (recipient_hash,source,actor)
+                            VALUES($1,'IMAP_UNSUBSCRIBE_SUBJECT','CUSTOMER')
+                            ON CONFLICT(recipient_hash) DO NOTHING RETURNING recipient_hash""",sender_hash)
+                        suppressed+=int(bool(created))
+                    continue
+                for msg_id in _reply_references(head):
+                    original=known.get(msg_id)
+                    if not original or original["recipient_hash"]!=sender_hash:
+                        continue
+                    response_id=str(head.get("Message-ID") or "").strip()[:250]
+                    # UID alone is not globally unique. The response Message-ID
+                    # also prevents double-counting legacy rows during replay.
+                    scoped_uid=f"{mailbox_key}:{epoch}:{uid}"
+                    row=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_replies
+                          (id,send_id,imap_uid,response_message_id)
+                          SELECT $1,$2,$3,$4 WHERE NOT EXISTS (
+                              SELECT 1 FROM noetfield.corp_outreach_replies
+                              WHERE response_message_id=$4 AND $4<>'')
+                          ON CONFLICT(imap_uid) DO NOTHING RETURNING id""",
+                          uuid.uuid4(),original["id"],scoped_uid,response_id)
+                    added+=int(bool(row))
+                    break
+            await db.execute("""UPDATE noetfield.corp_outreach_reply_cursor
+                SET uidvalidity=$2,last_uid=$3,updated_at=now() WHERE mailbox_hash=$1""",
+                mailbox_key,epoch,checkpoint)
+            return {"provider_ack_sent":sum(row["status"]=="PROVIDER_ACCEPTED" for row in sends),
+                    "scanned_headers":len(headers),"new_verified_replies":added,
+                    "new_suppressed_recipients":suppressed,
+                    "checkpoint_uid":checkpoint,"more_pending":more,
+                    "human_qualification_not_inferred":True}
     finally:
         await db.close()
 

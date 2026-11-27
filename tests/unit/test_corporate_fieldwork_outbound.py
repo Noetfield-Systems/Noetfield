@@ -81,7 +81,8 @@ def test_smtp_provider_ack_is_not_claimed_as_inbox_delivery_or_reply():
         fake=AsyncMock()
         row={"email":"buyer@example.org","contact_basis":"OPTED_IN",
              "contact_evidence":"https://example.org/consent",
-             "review_status":"CONTACT_CHANNEL_VERIFIED","stage":"QUALIFYING"}
+             "review_status":"CONTACT_CHANNEL_VERIFIED","stage":"QUALIFYING",
+             "owner":"Revenue","next_action":"Review response","next_date":None}
         fake.fetchrow.side_effect=[row,{"id":uuid4()}]
         with patch("noetfield_governance.corporate_outbound._sender_footer",
                    return_value="Noetfield Systems Inc. Verified Address"),\
@@ -134,3 +135,52 @@ def test_operator_ui_distinguishes_public_research_and_verified_send():
     assert "Send through verified provider" in html
     assert "Not proof of recipient delivery" in html
     assert "verified inbound replies" in html
+
+
+def test_native_communication_endpoint_rejects_unscoped_and_agent_asserted_routing(monkeypatch):
+    monkeypatch.setenv("NOETFIELD_NATIVE_COMMUNICATION_KEY","x"*40)
+    async def run():
+        payload={"deal_id":str(uuid4()),"purpose":"commercial","subject":"Operations pilot",
+                 "body":"A focused and relevant commercial discussion."}
+        async with AsyncClient(transport=ASGITransport(app=app),base_url="http://test") as client:
+            assert (await client.post("/api/communication/execute",json=payload)).status_code==403
+            headers={"Authorization":"Bearer "+"x"*40}
+            with patch("noetfield_governance.corporate_outbound.send_sourced_outreach",new_callable=AsyncMock,
+                       return_value={"state":"PROVIDER_ACCEPTED","delivered_to_inbox":False}) as send:
+                assert (await client.post("/api/communication/execute",headers=headers,
+                            json={**payload,"verified":True})).status_code==422
+                send.assert_not_awaited()
+                response=await client.post("/api/communication/execute",headers=headers,json=payload)
+                assert response.status_code==200
+                assert send.await_args.kwargs["deal_id"]==payload["deal_id"]
+                assert send.await_args.kwargs["actor"]=="Native corporate communication adapter"
+    asyncio.run(run())
+
+
+def test_same_action_replay_does_not_resend_or_accept_changed_content():
+    async def run():
+        key=str(uuid4())
+        recipient="buyer@example.org"
+        subject="Operations pilot"
+        body="A focused and relevant commercial discussion."
+        action="mission-send-00001"
+        entry={"email":recipient,"contact_basis":"OPTED_IN","contact_evidence":"native:consent",
+               "review_status":"CONTACT_CHANNEL_VERIFIED","stage":"QUALIFYING",
+               "owner":"Revenue","next_action":"Review response","next_date":None}
+        previous={"id":uuid4(),"status":"FAILED_UNCONFIRMED","provider_message_id":"<old@noetfield.com>",
+                  "fingerprint":_digest("|".join([key,recipient,subject,body])),"action_id":action}
+        db=AsyncMock()
+        db.fetchval.return_value=None
+        db.fetchrow.side_effect=[entry,None,previous,entry,None,previous]
+        with patch("noetfield_governance.corporate_outbound._sender_footer",return_value="Verified corporate footer"),\
+             patch("noetfield_governance.corporate_outbound._mailbox",return_value=("operations@noetfield.com","test-password")),\
+             patch("noetfield_governance.corporate_outbound._database_url",return_value="postgresql://unused"),\
+             patch("noetfield_governance.corporate_outbound.asyncpg.connect",new_callable=AsyncMock,return_value=db),\
+             patch("noetfield_governance.corporate_outbound._schema",new_callable=AsyncMock),\
+             patch("noetfield_governance.corporate_outbound._send_provider") as provider:
+            replay=await send_sourced_outreach(object(),deal_id=key,subject=subject,body=body,actor="Revenue",action_id=action)
+            assert replay["idempotent"] and not replay["new_provider_send"]
+            with pytest.raises(CorporateCRMError,match="COMMUNICATION_ACTION_REPLAY_CONFLICT"):
+                await send_sourced_outreach(object(),deal_id=key,subject=subject,body=body+" Changed.",actor="Revenue",action_id=action)
+            provider.assert_not_called()
+    asyncio.run(run())
