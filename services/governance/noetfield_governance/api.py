@@ -2802,6 +2802,7 @@ class NativeCommunicationRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     deal_id: UUID
     purpose: Literal["commercial"]
+    action_id: str | None = Field(default=None,min_length=12,max_length=120)
     subject: str = Field(min_length=4,max_length=160)
     body: str = Field(min_length=20,max_length=5000)
 
@@ -2818,7 +2819,7 @@ async def native_communication_execute(body:NativeCommunicationRequest,request:R
     from noetfield_governance.corporate_crm import CorporateCRMError
     try:
         return await send_sourced_outreach(settings,deal_id=str(body.deal_id),
-            subject=body.subject,body=body.body,actor="Native corporate communication adapter")
+            subject=body.subject,body=body.body,actor="Native corporate communication adapter",action_id=body.action_id)
     except CorporateCRMError as exc:
         raise HTTPException(status_code=422,detail=str(exc)) from exc
 
