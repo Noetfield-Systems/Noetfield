@@ -25,7 +25,9 @@ from typing import Any
 import asyncpg
 
 from noetfield_governance.corporate_crm import CorporateCRMError
-from noetfield_governance.communication_policy import CommunicationRejected, corporate_sender
+from noetfield_governance.communication_policy import (
+    CommunicationRejected, Identity, Relationship, resolve, enforce_envelope, corporate_sender,
+)
 from noetfield_governance.commercial_pipeline import _database_url
 
 
@@ -43,10 +45,20 @@ def _mailbox() -> tuple[str,str]:
     if not re.fullmatch(r"[^\s@]+@noetfield\.com",sender) or len(secret)<12:
         raise CorporateCRMError("CORPORATE_SMTP_PROVIDER_NOT_CONFIGURED")
     try:
-        corporate_sender(sender)
+        corporate_sender(sender, (sender,))
     except CommunicationRejected as exc:
         raise CorporateCRMError(str(exc)) from exc
     return sender,secret
+
+
+def _corporate_identity(mailbox: str) -> Identity:
+    # The authenticated native mailbox configuration is the authority source,
+    # not any address or verification flag supplied by the caller. SMTP login
+    # still has to succeed; received From is independently unverified.
+    corporate_sender(mailbox, (mailbox,))
+    return Identity(mailbox, "Noetfield Systems Inc.", "noetfield-corporate",
+                    frozenset({"commercial"}), "native", mailbox, True, True,
+                    "native-config:GMAIL_MAILBOX")
 
 
 def _digest(value:str)->str:
@@ -86,6 +98,13 @@ async def _schema(db:asyncpg.Connection)->None:
       provider_ack_at timestamptz,
       created_at timestamptz NOT NULL DEFAULT now()
     )""")
+    await db.execute("""ALTER TABLE noetfield.corp_outreach_sends
+        ADD COLUMN IF NOT EXISTS intended_sender text,
+        ADD COLUMN IF NOT EXISTS recipient_address text,
+        ADD COLUMN IF NOT EXISTS relationship_owner text,
+        ADD COLUMN IF NOT EXISTS next_action text,
+        ADD COLUMN IF NOT EXISTS next_due date,
+        ADD COLUMN IF NOT EXISTS actual_sender text""")
     await db.execute("""CREATE TABLE IF NOT EXISTS noetfield.corp_outreach_replies (
        id uuid PRIMARY KEY,
        send_id uuid NOT NULL REFERENCES noetfield.corp_outreach_sends(id),
@@ -102,10 +121,11 @@ async def _schema(db:asyncpg.Connection)->None:
 
 
 def _send_provider(mailbox:str,password:str,recipient:str,subject:str,body:str,
-                   message_id:str)->bool:
-    # Also enforce at the actual transport boundary, not only in the caller.
+                   message_id:str, *, identity:Identity, relationship:Relationship)->bool:
+    # Mandatory envelope check at the actual SMTP boundary.
     try:
-        corporate_sender(mailbox)
+        enforce_envelope(identity=identity, sender=mailbox, recipient=recipient,
+                         reply_to=identity.reply_to, relationship=relationship)
     except CommunicationRejected as exc:
         raise CorporateCRMError(str(exc)) from exc
     mail=EmailMessage()
@@ -113,7 +133,7 @@ def _send_provider(mailbox:str,password:str,recipient:str,subject:str,body:str,
     mail["To"]=recipient
     mail["Subject"]=subject
     mail["Message-ID"]=message_id
-    mail["Reply-To"]=mailbox
+    mail["Reply-To"]=identity.reply_to
     mail["Auto-Submitted"]="no"
     mail["List-Unsubscribe"]=f"<mailto:{mailbox}?subject=Unsubscribe>"
     mail.set_content(body+_sender_footer(mailbox))
@@ -145,7 +165,7 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
         await _schema(db)
         entry=await db.fetchrow("""SELECT p.email, r.contact_basis,r.contact_evidence,
                      r.review_status,r.outreach_role_relevance,
-                     r.publication_no_solicitation_confirmed,d.stage, d.account_id
+                     r.publication_no_solicitation_confirmed,d.stage, d.account_id, d.owner, d.next_action, d.next_date
            FROM noetfield.corp_crm_deals d
            JOIN noetfield.corp_research_sources r ON r.promoted_deal_id=d.id
            JOIN noetfield.corp_crm_people p ON p.id=d.person_id
@@ -166,14 +186,31 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
               "SELECT 1 FROM noetfield.corp_outreach_suppression WHERE recipient_hash=$1",
               _digest(recipient))) == 1:
             raise CorporateCRMError("OUTREACH_RECIPIENT_SUPPRESSED")
+        # Only this exact action is deduplicated by the native ledger; a new
+        # meaningful message to the same contact remains eligible.
+        relationship=Relationship("noetfield-corporate", "Noetfield Systems Inc.",
+            recipient, str(entry["contact_evidence"]), "NOETFIELD_CORPORATE",
+            str(entry["owner"] or "").strip(), str(entry["next_action"] or "").strip(),
+            context_checked=True)
+        try:
+            identity=resolve(venture=relationship.venture, entity=relationship.entity,
+                intent="commercial", relationship=relationship,
+                identities=(_corporate_identity(sender),),
+                authority_ref="native-crm:"+str(key)+":"+entry["contact_basis"])
+            enforce_envelope(identity=identity, sender=sender, recipient=recipient,
+                reply_to=identity.reply_to, relationship=relationship)
+        except CommunicationRejected as exc:
+            raise CorporateCRMError(str(exc)) from exc
         fingerprint=_digest("|".join([str(key),recipient,subject,body]))
         msgid=make_msgid(domain="noetfield.com")
         receipt_id=uuid.uuid4()
         reserved=await db.fetchrow("""INSERT INTO noetfield.corp_outreach_sends(
-            id,deal_id,recipient_hash,fingerprint,provider_message_id,actor)
-            VALUES($1,$2,$3,$4,$5,$6)
+            id,deal_id,recipient_hash,fingerprint,provider_message_id,actor,
+            intended_sender,recipient_address,relationship_owner,next_action,next_due)
+            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
             ON CONFLICT(fingerprint) DO NOTHING RETURNING id""",
-            receipt_id,key,_digest(recipient),fingerprint,msgid,actor[:120])
+            receipt_id,key,_digest(recipient),fingerprint,msgid,actor[:120],
+            identity.address,recipient,relationship.owner,relationship.next_action,entry["next_date"])
         if not reserved:
             existing=await db.fetchrow("""SELECT id,status,provider_message_id
                 FROM noetfield.corp_outreach_sends WHERE fingerprint=$1""",fingerprint)
@@ -184,7 +221,7 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
         await db.close()
     try:
         accepted=await asyncio.to_thread(_send_provider,
-                  sender,password,recipient,subject,body,msgid)
+                  sender,password,recipient,subject,body,msgid,identity=identity,relationship=relationship)
         status="PROVIDER_ACCEPTED" if accepted else "FAILED_UNCONFIRMED"
     except Exception:
         status="FAILED_UNCONFIRMED"
@@ -198,7 +235,10 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
     return {"state":status,"send_id":str(receipt_id),"idempotent":False,
             "provider":"GOOGLE_WORKSPACE_SMTP","message_id":msgid,
             "new_provider_send":status=="PROVIDER_ACCEPTED",
-            "delivered_to_inbox":False,"reply_verified":False}
+            "delivered_to_inbox":False,"reply_verified":False,
+            "intended_sender":identity.address,"actual_sender":None,
+            "native_crm":"NOETFIELD_CORPORATE","owner":relationship.owner,
+            "next_action":relationship.next_action}
 
 
 async def send_prequalified_corporate_introductions(settings:object,*,limit:int=2)->dict[str,Any]:
