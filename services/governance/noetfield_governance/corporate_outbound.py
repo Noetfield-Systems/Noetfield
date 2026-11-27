@@ -221,7 +221,8 @@ async def send_sourced_outreach(settings:object, *, deal_id:str, subject:str,
                 FROM noetfield.corp_outreach_sends WHERE fingerprint=$1 OR
                     (deal_id=$2 AND action_id=$3) ORDER BY (action_id=$3) DESC NULLS LAST LIMIT 1""",
                 fingerprint,key,action_id)
-            if not existing or existing["fingerprint"]!=fingerprint:
+            if (not existing or existing["fingerprint"]!=fingerprint or
+                (action_id is not None and existing["action_id"]!=action_id)):
                 raise CorporateCRMError("COMMUNICATION_ACTION_REPLAY_CONFLICT")
             return {"state":existing["status"],"idempotent":True,
                     "send_id":str(existing["id"]),"message_id":existing["provider_message_id"],
