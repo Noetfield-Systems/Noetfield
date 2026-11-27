@@ -81,7 +81,8 @@ def test_smtp_provider_ack_is_not_claimed_as_inbox_delivery_or_reply():
         fake=AsyncMock()
         row={"email":"buyer@example.org","contact_basis":"OPTED_IN",
              "contact_evidence":"https://example.org/consent",
-             "review_status":"CONTACT_CHANNEL_VERIFIED","stage":"QUALIFYING"}
+             "review_status":"CONTACT_CHANNEL_VERIFIED","stage":"QUALIFYING",
+             "owner":"Revenue","next_action":"Review response","next_date":None}
         fake.fetchrow.side_effect=[row,{"id":uuid4()}]
         with patch("noetfield_governance.corporate_outbound._sender_footer",
                    return_value="Noetfield Systems Inc. Verified Address"),\
