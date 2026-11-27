@@ -11,10 +11,11 @@ from httpx import ASGITransport,AsyncClient
 from noetfield_governance.api import app
 from noetfield_governance.corporate_crm import CorporateCRMError
 from noetfield_governance.corporate_outbound import (
- _sender_footer,_send_provider,_digest,unsubscribe_subject,
+ _sender_footer,_send_provider,_digest,unsubscribe_subject,_corporate_identity,
  send_sourced_outreach,reconcile_real_replies,
 )
 from noetfield_governance.corporate_discovery import promote_corporate_source
+from noetfield_governance.communication_policy import Relationship
 
 
 def test_only_explicit_unsubscribe_subjects_trigger_suppression():
@@ -50,7 +51,9 @@ def test_real_smtp_message_has_identification_and_unsubscribe_headers(monkeypatc
     with patch("noetfield_governance.corporate_outbound.smtplib.SMTP_SSL",return_value=FakeSMTP()):
         accepted=_send_provider("operations@noetfield.com","private-password",
             "buyer@example.org","Operations pilot","Relevant commercial question",
-            "<receipt-id@noetfield.com>")
+            "<receipt-id@noetfield.com>", identity=_corporate_identity("operations@noetfield.com"),
+            relationship=Relationship("noetfield-corporate","Noetfield Systems Inc.",
+                "buyer@example.org","fixture","NOETFIELD_CORPORATE","Revenue","Review response",context_checked=True))
     assert accepted and len(sent)==1
     msg=sent[0]
     assert "mailto:operations@noetfield.com?subject=Unsubscribe" in msg["List-Unsubscribe"]
