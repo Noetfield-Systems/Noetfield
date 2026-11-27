@@ -6,7 +6,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import re
 
-VERSION = "2.0"
+VERSION = "2.1"
 INTENTS = frozenset("commercial technical research partnership community customer_support investment corporate personal intellectual operational legal financial".split())
 EMAIL = re.compile(r"[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+")
 RANK = {"native": 1, "specialist": 2, "representative": 3, "fallback": 4}
@@ -37,7 +37,7 @@ class Relationship:
     next_action: str
     thread_sender: str = ""
     suppressed: bool = False
-    prior_attempt: bool = False
+    action_attempted: bool = False
     context_checked: bool = False
 
 def resolve(*, venture: str, entity: str, intent: str, relationship: Relationship,
@@ -51,7 +51,7 @@ def resolve(*, venture: str, entity: str, intent: str, relationship: Relationshi
         raise CommunicationRejected("RELATIONSHIP_CONTEXT_MISSING")
     if not EMAIL.fullmatch(relationship.recipient):
         raise CommunicationRejected("RECIPIENT_NOT_VERIFIED")
-    if relationship.suppressed or relationship.prior_attempt:
+    if relationship.suppressed or relationship.action_attempted:
         raise CommunicationRejected("SUPPRESSED_OR_DUPLICATE")
     eligible = [x for x in identities if x.venture == venture and x.entity == entity
                 and intent in x.intents and x.kind in RANK and x.verified
@@ -71,11 +71,11 @@ def enforce_envelope(*, identity: Identity, sender: str, recipient: str,
     if (sender, recipient, reply_to) != (identity.address, relationship.recipient, identity.reply_to):
         raise CommunicationRejected("ENVELOPE_MISMATCH")
 
-def corporate_sender(mailbox: str) -> str:
+def corporate_sender(mailbox: str, authorized_addresses: tuple[str, ...] = ("operations@noetfield.com",)) -> str:
     """Existing Noetfield corporate route: explicit canonical mailbox only.
     Alternative identities require a native authorized provider adapter, not
     an arbitrary GMAIL_MAILBOX override. SMTP acceptance is not delivery.
     """
-    if mailbox != "operations@noetfield.com":
+    if mailbox not in authorized_addresses or not EMAIL.fullmatch(mailbox) or not mailbox.endswith("@noetfield.com"):
         raise CommunicationRejected("CORPORATE_SENDER_IDENTITY_MISMATCH")
     return mailbox
