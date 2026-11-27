@@ -276,7 +276,7 @@ def test_consent_scoped_provider_invitation_delivery_ledger_is_real_and_replay_s
                 VALUES($1,$2,$3,$4,$5::jsonb,$6::jsonb)""",
                 iid,rid,"Applicant","applicant@example.invalid",
                 json.dumps({"form_id":"nfConnectWizard","intake_kind":"lead",
-                            "consent_contact":True}),
+                            "consent_contact":True,"initiative":"noetfield"}),
                 json.dumps({"tier":"human_review"}))
         finally:
             await db.close()
