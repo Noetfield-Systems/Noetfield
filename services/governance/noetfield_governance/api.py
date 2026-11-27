@@ -2798,6 +2798,31 @@ async def corporate_outreach_send(
         raise HTTPException(status_code=422,detail=str(exc)) from exc
 
 
+class NativeCommunicationRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    deal_id: UUID
+    purpose: Literal["commercial"]
+    subject: str = Field(min_length=4,max_length=160)
+    body: str = Field(min_length=20,max_length=5000)
+
+
+@app.post("/api/communication/execute",tags=["operations"],include_in_schema=False)
+async def native_communication_execute(body:NativeCommunicationRequest,request:Request)->dict[str,object]:
+    # Dedicated server credential, restricted to this native corporate route.
+    # Never accept sender, recipient, authority, CRM or verification flags.
+    secret=os.environ.get("NOETFIELD_NATIVE_COMMUNICATION_KEY","")
+    presented=request.headers.get("Authorization","")
+    if not secret or len(secret)<32 or not hmac.compare_digest(presented,"Bearer "+secret):
+        raise HTTPException(status_code=403,detail="Native corporate communication identity required")
+    from noetfield_governance.corporate_outbound import send_sourced_outreach
+    from noetfield_governance.corporate_crm import CorporateCRMError
+    try:
+        return await send_sourced_outreach(settings,deal_id=str(body.deal_id),
+            subject=body.subject,body=body.body,actor="Native corporate communication adapter")
+    except CorporateCRMError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
 @app.post("/api/corporate-crm/outreach/reconcile",tags=["operations"],include_in_schema=False)
 async def corporate_outreach_reconcile(request:Request)->dict[str,object]:
     _require_connect_desk_operator(request)
